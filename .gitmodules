@@ -5,3 +5,8 @@
 [submodule "RSI.NET"]
 	path = RSI.NET
 	url = https://github.com/space-wizards/RSI.NET.git
+[submodule "Secrets"]
+	path = Secrets
+	url = git@github.com:corvax-project/secrets.git
+	branch = master
+	update = none

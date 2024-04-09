@@ -1,7 +1,5 @@
 using Content.Shared.Humanoid;
-using Robust.Shared.Configuration;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Preferences
 {
@@ -16,11 +14,11 @@ namespace Content.Shared.Preferences
         /// <summary>
         ///     Makes this profile valid so there's no bad data like negative ages.
         /// </summary>
-        void EnsureValid(ICommonSession session, IDependencyCollection collection);
+        void EnsureValid(ICommonSession session, IDependencyCollection collection, string[] sponsorPrototypes); // Corvax-Sponsors: Integrated filtering for sponsor prototypes (markings/species/etc)
 
         /// <summary>
         /// Gets a copy of this profile that has <see cref="EnsureValid"/> applied, i.e. no invalid data.
         /// </summary>
-        ICharacterProfile Validated(ICommonSession session, IDependencyCollection collection);
+        ICharacterProfile Validated(ICommonSession session, IDependencyCollection collection, string[] sponsorPrototypes);
     }
 }
