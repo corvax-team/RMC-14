@@ -1,0 +1,10 @@
+ent-CMCrateSupplyInternals = ящик с кислородными внутренностями (x3 маски, x3 баллона)
+    .desc = { ent-CMCrateSupply.desc }
+ent-CMCrateSupplyEvacuation = аварийное оборудование (x2 ящик для инструментов, x2 жилет, x5 кислородных баллонов, x5 масок)
+    .desc = { ent-CMCrateSupply.desc }
+ent-CMCrateSuppliesBoxes = пустые коробки (x10)
+    .desc = { ent-CMCrateSupply.desc }
+ent-CMCrateSupplyJanitor = различные принадлежности для уборки
+    .desc = { ent-CMCrateSupply.desc }
+ent-CMCrateSuppliesCrayons = коробки мелков
+    .desc = { ent-CMCrateSupply.desc }

@@ -1,0 +1,11 @@
+ent-CMMop = швабра
+    .desc = Мир janitalia был бы неполным без швабры.
+ent-CMWetSign = знак мокрого пола
+    .desc = Осторожно! Мокрый пол!
+ent-CMWarningCone = предупреждающий конус
+    .desc = Этот конус пытается предупредить вас о чем-то!
+ent-CMLightReplacer = устройство для замены лампочек
+    .desc = Устройство для автоматической замены лампочек. Пополняется работающими лампочками.
+ent-CMLightReplacerEmpty = { ent-CMLightReplacer }
+    .suffix = Пустой
+    .desc = { ent-CMLightReplacer.desc }

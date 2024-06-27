@@ -1,0 +1,16 @@
+ent-CMMagazineRifleM41A = магазин M41A (10x24мм)
+    .desc = { ent-CMMagazineRifleBase.desc }
+ent-CMMagazineRifleM41AAP = магазин M41A ББ (10x24мм)
+    .suffix = ББ
+    .desc = { ent-CMMagazineRifleM41A.desc }
+ent-CMMagazineRifleM41AExt = магазин M41A расширенный (10x24мм)
+    .desc = { ent-CMMagazineRifleM41A.desc }
+ent-CMMagazineRifleM41AE2 = магазин M41AE2 (10x24мм)
+    .desc = { ent-CMMagazineRifleM41A.desc }
+ent-CMMagazineRifleM4RA = магазин M4RA (10x24мм)
+    .desc = Магазин стандартных патронов 10x24 мм для боевой винтовки M4RA.
+ent-CMMagazineRifleM4RAAP = магазин M4RA ББ (10x24мм)
+    .desc = Магазин с бронебойными патронами калибра 10х24 мм для боевой винтовки M4RA.
+    .suffix = ББ
+ent-CMMagazineRifleM4RAExt = магазин M4RA расширенный (10x24мм)
+    .desc = { ent-CMMagazineRifleM4RA.desc }

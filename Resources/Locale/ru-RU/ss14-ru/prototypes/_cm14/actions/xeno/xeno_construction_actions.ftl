@@ -1,0 +1,10 @@
+ent-CMGuidebookActionXenoBase = { "" }
+    .desc = { "" }
+ent-ActionXenoPlantWeeds = Посадить сорняки (75)
+    .desc = Посадите узел сорняков, который распространит еще больше сорняков.
+ent-ActionXenoChooseStructure = Выбрать структуру смолы
+    .desc = Выберите структуру для выделения с помощью действия 'Выделить смолу'.
+ent-ActionXenoSecreteStructure = Выделить смолу
+    .desc = Строит структуру, выбранную действием "Выбрать структуру смолы".
+ent-ActionXenoOrderConstruction = Заказать строительство
+    .desc = Начинает строительство важной структуры улья.

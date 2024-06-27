@@ -1,0 +1,11 @@
+ui-options-header-cm = Колониальные Морпехи 14
+
+ui-options-function-cm-activate-attachable-barrel = Активировать крепление ствола
+ui-options-function-cm-activate-attachable-rail = Активировать крепление рельса
+ui-options-function-cm-activate-attachable-stock = Активировать крепление приклада
+ui-options-function-cm-activate-attachable-underbarrel = Активировать крепление под стволом
+ui-options-function-cm-unique-action = Уникальное действие
+ui-options-function-cm-holster-primary = Снять с хранения
+ui-options-function-cm-holster-secondary = Снять с хранения вторичный
+ui-options-function-cm-holster-tertiary = Снять с хранения третичный
+ui-options-function-cm-holster-quaternary = Снять с хранения четвертичный

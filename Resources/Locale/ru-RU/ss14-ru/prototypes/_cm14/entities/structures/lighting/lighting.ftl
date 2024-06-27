@@ -1,0 +1,16 @@
+ent-CMLightFixtureAlwaysPowered = осветительный прибор
+    .desc = Светильник, оснащенный яркой флуоресцентной лампой. Если долго смотреть на нее, глаза слезятся.
+    .suffix = Всегда работает
+ent-CMLightFixtureEmpty = { ent-CMLightFixtureAlwaysPowered }
+    .suffix = Пустой
+    .desc = { ent-CMLightFixtureAlwaysPowered.desc }
+ent-CMLightFixture = { ent-CMLightFixtureEmpty }
+    .desc = { ent-CMLightFixtureEmpty.desc }
+ent-CMLightFixtureSmallAlwaysPowered = { ent-CMLightFixtureAlwaysPowered }
+    .desc = Небольшой светильник с яркой люминесцентной лампочкой. Если долго смотреть на него, глаза слезятся.
+    .suffix = Всегда работает
+ent-CMLightFixtureSmallEmpty = { ent-CMLightFixtureSmallAlwaysPowered }
+    .suffix = Пустой
+    .desc = { ent-CMLightFixtureSmallAlwaysPowered.desc }
+ent-CMLightFixtureSmall = { ent-CMLightFixtureSmallEmpty }
+    .desc = { ent-CMLightFixtureSmallEmpty.desc }

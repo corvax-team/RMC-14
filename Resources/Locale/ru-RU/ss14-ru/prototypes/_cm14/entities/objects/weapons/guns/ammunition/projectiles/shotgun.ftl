@@ -1,0 +1,14 @@
+ent-CMPelletShotgunBase = { ent-BaseBullet }
+    .desc = { ent-BaseBullet.desc }
+ent-CMPelletShotgunBuckshot = картечь
+    .desc = { ent-CMPelletShotgunBase.desc }
+ent-CMPelletShotgunSlug = пуля
+    .desc = { ent-CMPelletShotgunBase.desc }
+ent-CMPelletShotgunIncendiary = зажигательная пуля
+    .desc = { ent-CMPelletShotgunBase.desc }
+ent-CMPelletShotgunBeanbag = бобовая пуля
+    .desc = { ent-CMPelletShotgunBase.desc }
+ent-CMPelletShotgunFlechette = флешетный снаряд
+    .desc = { ent-CMPelletShotgunBase.desc }
+ent-CMPelletShotgunIncendiaryBuckshot = зажигательная картечь
+    .desc = { ent-CMPelletShotgunBuckshot.desc }

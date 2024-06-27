@@ -1,0 +1,12 @@
+ent-CMFlare = фаер
+    .desc = Красная сигнальная ракета, выпущенная USCM. На боковой стороне есть инструкция: "Вытяните шнур, зажгите".
+ent-CMBoxPackFlareBase = Коробка с фаерами M94
+    .desc = коробка с фаерами M94, чтобы скрасить ваш день.
+ent-CMBoxPackFlare = { ent-CMBoxPackFlareBase }
+    .suffix = Полный
+    .desc = { ent-CMBoxPackFlareBase.desc }
+ent-CMPackFlareBase = коробка с фаерами M94
+    .desc = Пакет с восемью сигнальными ракетами M94. Носится солдатами USCM для освещения темных участков, куда невозможно добраться с обычным наплечным фонарем TNR.
+ent-CMPackFlare = { ent-CMPackFlareBase }
+    .suffix = Полный
+    .desc = { ent-CMPackFlareBase.desc }

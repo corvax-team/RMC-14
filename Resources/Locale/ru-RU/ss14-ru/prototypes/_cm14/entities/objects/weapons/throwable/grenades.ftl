@@ -1,0 +1,14 @@
+ent-CMGrenadeBase = граната
+    .desc = Пригнуться и укрыться.
+ent-CMGrenadeHighExplosive = граната M40 HEDP
+    .desc = Взрывная граната двойного назначения. Небольшая, но обманчиво сильная фугасная граната, которая вытеснила гранаты M15 HE и заменила их на M40 HEFA. Может заряжаться в гранатомет M92 Launcher или метаться вручную.
+ent-CMGrenadeSmoke = дымовая граната M40
+    .desc = M40 HSDP - это небольшая, но мощная дымовая граната. Основана на той же платформе, что и M40 HEDP. Взрывается через 2 секунды.
+ent-CMGrenadeFrag = граната M40 HEFA
+    .desc = Высокоэксплозивная осколочно-фугасная противопехотная граната. Небольшая, но обманчиво сильная осколочная граната, которая вытесняет осколочные гранаты M15, а также M40 HEDP. Может заряжаться в гранатомет M92 Launcher или метаться вручную.
+ent-CMExplosionEffectGrenade = { "" }
+    .desc = { "" }
+ent-CMExplosionEffectShrapnel1 = { "" }
+    .desc = { "" }
+ent-CMExplosionEffectShrapnel2 = { ent-CMExplosionEffectShrapnel1 }
+    .desc = { ent-CMExplosionEffectShrapnel1.desc }

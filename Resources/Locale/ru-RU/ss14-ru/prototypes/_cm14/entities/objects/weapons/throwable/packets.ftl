@@ -1,0 +1,12 @@
+ent-CMPacketBase = коробка
+    .desc = { ent-BaseStorageItem.desc }
+ent-CMPacketGrenadeHighExplosive = коробка гранат HEDP
+    .desc = Содержит три фугасные гранаты HEDP.
+ent-CMPacketGrenadeHighExplosiveFilled = коробка гранат HEDP
+    .suffix = Заполненный
+    .desc = { ent-CMPacketGrenadeHighExplosive.desc }
+ent-CMPacketGrenadeFrag = коробка гранат HEFA
+    .desc = Содержит три гранаты HEFA. Не передавайте приказ HEFA.
+ent-CMPacketGrenadeFragFilled = коробка гранат HEFA
+    .suffix = Заполненный
+    .desc = { ent-CMPacketGrenadeFrag.desc }

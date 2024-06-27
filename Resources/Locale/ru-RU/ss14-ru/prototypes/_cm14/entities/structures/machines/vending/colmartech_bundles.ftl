@@ -1,0 +1,16 @@
+ent-CMVendorBundleRiflemanApparel = стандартная одежда
+    .desc = { "" }
+ent-CMVendorBundleFireteamLeaderApparel = стандартная морская одежда
+    .desc = { ent-CMVendorBundleRiflemanApparel.desc }
+ent-CMVendorBundleSquadMedicalApparel = стандартная морская одежда
+    .desc = { ent-CMVendorBundleRiflemanApparel.desc }
+ent-CMVendorBundleSquadMedicalEssentials = необходимый медицинский набор
+    .desc = { ent-CMVendorBundleRiflemanApparel.desc }
+ent-CMVendorBundleCombatTechnicianApparel = стандартная морская одежда
+    .desc = { ent-CMVendorBundleRiflemanApparel.desc }
+ent-CMVendorBundleCombatTechnicianEssentials = необходимый комплект инженера
+    .desc = { ent-CMVendorBundleRiflemanApparel.desc }
+ent-CMVendorBundleSquadLeaderApparel = стандартная морская одежда
+    .desc = { ent-CMVendorBundleRiflemanApparel.desc }
+ent-CMVendorBundleWeaponsSpecialistApparel = стандартная морская одежда
+    .desc = { ent-CMVendorBundleRiflemanApparel.desc }
