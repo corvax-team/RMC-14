@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text.RegularExpressions;
+using Content.Corvax.Interfaces.Shared;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
@@ -10,6 +11,7 @@ using Content.Shared.Traits;
 using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -466,6 +468,8 @@ namespace Content.Shared.Preferences
         {
             var configManager = collection.Resolve<IConfigurationManager>();
             var prototypeManager = collection.Resolve<IPrototypeManager>();
+            var netManager = collection.Resolve<INetManager>();
+            var sponsorsManager = collection.Resolve<ISharedSponsorsManager>(); // Corvax-Sponsor
 
             if (!prototypeManager.TryIndex(Species, out var speciesPrototype) || speciesPrototype.RoundStart == false)
             {
@@ -474,7 +478,17 @@ namespace Content.Shared.Preferences
             }
 
             // Corvax-Sponsors-Start: Reset to human if player not sponsor
-            if (speciesPrototype.SponsorOnly && !sponsorPrototypes.Contains(Species))
+            var sponsorPrototypes = new List<string>();
+            if (netManager.IsClient)
+            {
+                sponsorPrototypes = sponsorsManager.GetClientPrototypes();
+            }
+            else if (sponsorsManager.TryGetServerPrototypes(session.UserId, out var prototypes))
+            {
+                sponsorPrototypes = prototypes;
+            }
+
+            if (speciesPrototype.SponsorOnly && !sponsorPrototypes.Contains(Species.Id))
             {
                 Species = SharedHumanoidAppearanceSystem.DefaultSpecies;
                 speciesPrototype = prototypeManager.Index(Species);
@@ -546,7 +560,7 @@ namespace Content.Shared.Preferences
                 flavortext = FormattedMessage.RemoveMarkup(FlavorText);
             }
 
-            var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, Sex, sponsorPrototypes);
+            var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, Sex, sponsorPrototypes.ToArray());
 
             var prefsUnavailableMode = PreferenceUnavailable switch
             {
@@ -635,10 +649,10 @@ namespace Content.Shared.Preferences
             }
         }
 
-        public ICharacterProfile Validated(ICommonSession session, IDependencyCollection collection, string[] sponsorPrototypes)
+        public ICharacterProfile Validated(ICommonSession session, IDependencyCollection collection)
         {
             var profile = new HumanoidCharacterProfile(this);
-            profile.EnsureValid(session, collection, sponsorPrototypes); // Corvax-Sponsors
+            profile.EnsureValid(session, collection); // Corvax-Sponsors
             return profile;
         }
 

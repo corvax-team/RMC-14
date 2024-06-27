@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Corvax.Interfaces.Client;
+using Content.Corvax.Interfaces.Shared;
 using Content.Shared.Preferences;
 using Robust.Client;
 using Robust.Client.Player;
@@ -18,7 +19,7 @@ namespace Content.Client.Lobby
         [Dependency] private readonly IClientNetManager _netManager = default!;
         [Dependency] private readonly IBaseClient _baseClient = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
-        private IClientSponsorsManager? _sponsorsManager; // Corvax-Sponsors
+        private ISharedSponsorsManager? _sponsorsManager; // Corvax-Sponsors
 
         public event Action? OnServerDataLoaded;
 
@@ -63,10 +64,7 @@ namespace Content.Client.Lobby
         public void UpdateCharacter(ICharacterProfile profile, int slot)
         {
             var collection = IoCManager.Instance!;
-            // Corvax-Sponsors-Start
-            var sponsorPrototypes = _sponsorsManager?.Prototypes.ToArray() ?? [];
-            profile.EnsureValid(_playerManager.LocalSession!, collection, sponsorPrototypes);
-            // Corvax-Sponsors-End
+            profile.EnsureValid(_playerManager.LocalSession!, collection);
             var characters = new Dictionary<int, ICharacterProfile>(Preferences.Characters) {[slot] = profile};
             Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor);
             var msg = new MsgUpdateCharacter

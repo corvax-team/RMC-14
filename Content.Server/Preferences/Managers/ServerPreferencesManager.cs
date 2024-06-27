@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Corvax.Interfaces.Server;
+using Content.Corvax.Interfaces.Shared;
 using Content.Server.Database;
 using Content.Shared.CCVar;
 using Content.Shared.Preferences;
@@ -27,7 +28,7 @@ namespace Content.Server.Preferences.Managers
         [Dependency] private readonly IDependencyCollection _dependencies = default!;
         [Dependency] private readonly ILogManager _log = default!;
         [Dependency] private readonly UserDbDataManager _userDb = default!;
-        private IServerSponsorsManager? _sponsors; // Corvax-Sponsors
+        private ISharedSponsorsManager? _sponsors; // Corvax-Sponsors
 
         // Cache player prefs on the server so we don't need as much async hell related to them.
         private readonly Dictionary<NetUserId, PlayerPrefData> _cachedPlayerPrefs =
@@ -104,13 +105,8 @@ namespace Content.Server.Preferences.Managers
             var curPrefs = prefsData.Prefs!;
             var session = _playerManager.GetSessionById(userId);
 
-            // Corvax-Sponsors-Start: Ensure removing sponsor markings if client somehow bypassed client filtering
             // WARN! It's not removing markings from DB!
-            var sponsorPrototypes = _sponsors != null && _sponsors.TryGetPrototypes(message.MsgChannel.UserId, out var prototypes)
-                ? prototypes.ToArray()
-                : [];
-            profile.EnsureValid(session, _dependencies, sponsorPrototypes);
-            // Corvax-Sponsors-End
+            profile.EnsureValid(session, _dependencies);
             var profiles = new Dictionary<int, ICharacterProfile>(curPrefs.Characters)
             {
                 [slot] = profile
@@ -201,15 +197,10 @@ namespace Content.Server.Preferences.Managers
                 async Task LoadPrefs()
                 {
                     var prefs = await GetOrCreatePreferencesAsync(session.UserId, cancel);
-                    // Corvax-Sponsors-Start: Remove sponsor markings from expired sponsors
                     foreach (var (_, profile) in prefs.Characters)
                     {
-                        var sponsorPrototypes = _sponsors != null && _sponsors.TryGetPrototypes(session.UserId, out var prototypes)
-                            ? prototypes.ToArray()
-                            : [];
-                        profile.EnsureValid(session, _dependencies, sponsorPrototypes);
+                        profile.EnsureValid(session, _dependencies);
                     }
-                    // Corvax-Sponsors-End
                     prefsData.Prefs = prefs;
                 }
             }
@@ -222,10 +213,7 @@ namespace Content.Server.Preferences.Managers
             // And play time info is loaded concurrently from the DB with preferences.
             var prefsData = _cachedPlayerPrefs[session.UserId];
             DebugTools.Assert(prefsData.Prefs != null);
-            // Corvax-Sponsors-Start
-            var sponsorPrototypes = _sponsors != null && _sponsors.TryGetPrototypes(session.UserId, out var prototypes) ? prototypes.ToArray() : []; // Corvax-Sponsors
-            prefsData.Prefs = SanitizePreferences(session, prefsData.Prefs, _dependencies, sponsorPrototypes);
-            // Corvax-Sponsors-End
+            prefsData.Prefs = SanitizePreferences(session, prefsData.Prefs, _dependencies);
 
             prefsData.PrefsLoaded = true;
 
@@ -252,7 +240,7 @@ namespace Content.Server.Preferences.Managers
         private int GetMaxUserCharacterSlots(NetUserId userId)
         {
             var maxSlots = _cfg.GetCVar(CCVars.GameMaxCharacterSlots);
-            var extraSlots = _sponsors?.GetExtraCharSlots(userId) ?? 0;
+            var extraSlots = _sponsors?.GetServerExtraCharSlots(userId) ?? 0;
             return maxSlots + extraSlots;
         }
         // Corvax-Sponsors-End
@@ -316,14 +304,14 @@ namespace Content.Server.Preferences.Managers
             return prefs;
         }
 
-        private PlayerPreferences SanitizePreferences(ICommonSession session, PlayerPreferences prefs, IDependencyCollection collection, string[] sponsorPrototypes)
+        private PlayerPreferences SanitizePreferences(ICommonSession session, PlayerPreferences prefs, IDependencyCollection collection)
         {
             // Clean up preferences in case of changes to the game,
             // such as removed jobs still being selected.
 
             return new PlayerPreferences(prefs.Characters.Select(p =>
             {
-                return new KeyValuePair<int, ICharacterProfile>(p.Key, p.Value.Validated(session, collection, sponsorPrototypes));
+                return new KeyValuePair<int, ICharacterProfile>(p.Key, p.Value.Validated(session, collection));
             }), prefs.SelectedCharacterIndex, prefs.AdminOOCColor);
         }
 
