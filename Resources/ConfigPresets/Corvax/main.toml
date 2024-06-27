@@ -8,7 +8,6 @@ desc = "Corvax первый русскоязычный проект в Space Sta
 soft_max_players = 250
 map_rotation = true
 lobbyduration = 240
-role_timers = true
 round_end_pvs_overrides = false
 
 [ghost]
