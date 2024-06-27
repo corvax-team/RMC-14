@@ -39,9 +39,6 @@ enable_suicide = false
 [shuttle]
 auto_call_time = 0
 
-[server]
-rules_file = "CorvaxRuleset"
-
 [discord]
 rich_main_icon_id = "corvax"
 
