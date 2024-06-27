@@ -108,9 +108,6 @@
             "name": "Brigmedic"
         },
         {
-            "name": "Pilot"
-        },
-        {
             "name": "MedicalDoctor"
         },
         {
@@ -148,9 +145,6 @@
         },
         {
             "name": "SecurityCadet"
-        },
-        {
-            "name": "IAA"
         },
         {
             "name": "Zombie"
