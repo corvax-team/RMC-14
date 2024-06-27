@@ -28,9 +28,6 @@ see_own_notes = true
 server_ban_erase_player = true
 new_player_threshold = 600
 
-[adminlogs]
-server_name = "rouny"
-
 [atmos]
 space_wind = false
 monstermos_rip_tiles = false
