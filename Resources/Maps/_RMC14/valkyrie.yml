@@ -98,7 +98,7 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: savannah
+      name: valkyrie
     - type: Transform
     - type: Map
       mapPaused: True
@@ -1289,7 +1289,7 @@ entities:
             395: 148,11
             430: 9,-8
     - type: BecomesStation
-      id: Savannah
+      id: Valkyrie
     - type: GridAtmosphere
       version: 2
       data:
@@ -41456,14 +41456,14 @@ entities:
   - uid: 7137
     components:
     - type: MetaData
-      name: USS Savannah Dock II
+      name: USS Valkyrie Dock II
     - type: Transform
       pos: 85.5,0.5
       parent: 1
   - uid: 7138
     components:
     - type: MetaData
-      name: USS Savannah Dock I
+      name: USS Vavannah Dock I
     - type: Transform
       pos: 66.5,0.5
       parent: 1
