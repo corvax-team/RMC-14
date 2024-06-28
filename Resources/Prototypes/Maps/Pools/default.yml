@@ -1,7 +1,7 @@
 - type: gameMapPool
   id: DefaultMapPool
   maps:
-  - Savannah
+  - Valkyrie
 
 - type: gameMapPool
   id: DefaultMapPoolAlmayer

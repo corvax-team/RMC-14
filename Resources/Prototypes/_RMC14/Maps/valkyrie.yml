@@ -1,16 +1,16 @@
 - type: gameMap
-  id: Savannah
-  mapName: Savannah
-  mapPath: /Maps/_RMC14/savannah.yml
+  id: Valkyrie
+  mapName: Valkyrie
+  mapPath: /Maps/_RMC14/valkyrie.yml
   minPlayers: 0
   maxRandomOffset: 0
   randomRotation: false
   stations:
-    Savannah:
+    Valkyrie:
       stationProto: StandardNanotrasenStation
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'USS LCS-14 Savannah'
+          mapNameTemplate: 'USS LCS-14 Valkyrie'
         - type: StationJobs
           availableJobs:
             #Command
