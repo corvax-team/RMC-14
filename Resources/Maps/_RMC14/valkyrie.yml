@@ -322,14 +322,14 @@ entities:
             color: '#FFFFFFFF'
             id: CMDecalAlmayer0
           decals:
-            714: 75,13
-            716: 75,-13
+            712: 75,13
+            714: 75,-13
         - node:
             color: '#FFFFFFFF'
             id: CMDecalAlmayer1
           decals:
-            715: 76,13
-            717: 76,-13
+            713: 76,13
+            715: 76,-13
         - node:
             angle: -3.141592653589793 rad
             color: '#FFFFFFFF'
@@ -2426,6 +2426,7 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
+    - type: Shuttle
 - proto: AirCanister
   entities:
   - uid: 329
@@ -2718,6 +2719,46 @@ entities:
     components:
     - type: Transform
       pos: 109.5,-6.5
+      parent: 1
+  - uid: 4109
+    components:
+    - type: Transform
+      pos: 127.5,-7.5
+      parent: 1
+  - uid: 9415
+    components:
+    - type: Transform
+      pos: 128.5,-7.5
+      parent: 1
+  - uid: 9416
+    components:
+    - type: Transform
+      pos: 134.5,-7.5
+      parent: 1
+  - uid: 9417
+    components:
+    - type: Transform
+      pos: 135.5,-7.5
+      parent: 1
+  - uid: 9418
+    components:
+    - type: Transform
+      pos: 141.5,-7.5
+      parent: 1
+  - uid: 9419
+    components:
+    - type: Transform
+      pos: 142.5,-7.5
+      parent: 1
+  - uid: 9420
+    components:
+    - type: Transform
+      pos: 148.5,-7.5
+      parent: 1
+  - uid: 9421
+    components:
+    - type: Transform
+      pos: 149.5,-7.5
       parent: 1
 - proto: AtmosDeviceFanTiny
   entities:
@@ -16123,7 +16164,7 @@ entities:
       pos: 52.5,3.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -24893.645
+      secondsUntilStateChange: -25718.836
       state: Opening
   - uid: 3017
     components:
@@ -16188,7 +16229,7 @@ entities:
       pos: 123.5,18.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -73514.02
+      secondsUntilStateChange: -74339.22
       state: Opening
   - uid: 3025
     components:
@@ -16198,7 +16239,7 @@ entities:
       pos: 123.5,-17.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -81029.14
+      secondsUntilStateChange: -81854.336
       state: Opening
   - uid: 3026
     components:
@@ -16550,7 +16591,7 @@ entities:
       pos: 121.5,-8.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -80670.414
+      secondsUntilStateChange: -81495.61
       state: Opening
 - proto: CMAirlockMaint
   entities:
@@ -16891,7 +16932,7 @@ entities:
       pos: -4.5,1.5
       parent: 187
     - type: Door
-      secondsUntilStateChange: -10105.699
+      secondsUntilStateChange: -10930.892
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -16903,7 +16944,7 @@ entities:
       pos: -4.5,2.5
       parent: 187
     - type: Door
-      secondsUntilStateChange: -10105.25
+      secondsUntilStateChange: -10930.442
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -16915,7 +16956,7 @@ entities:
       pos: 3.5,1.5
       parent: 187
     - type: Door
-      secondsUntilStateChange: -10111.759
+      secondsUntilStateChange: -10936.951
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -16927,7 +16968,7 @@ entities:
       pos: 3.5,2.5
       parent: 187
     - type: Door
-      secondsUntilStateChange: -10106.783
+      secondsUntilStateChange: -10931.976
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -22920,6 +22961,13 @@ entities:
     - type: Transform
       pos: 86.5,0.5
       parent: 1
+  - uid: 9422
+    components:
+    - type: MetaData
+      name: Комната брифинга
+    - type: Transform
+      pos: 135.5,6.5
+      parent: 1
 - proto: CMDropshipHijackDestination
   entities:
   - uid: 4107
@@ -22936,15 +22984,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 76.5,0.5
-      parent: 1
-  - uid: 4109
-    components:
-    - type: MetaData
-      desc: Нужно что-б ксены могли прилететь на Валькирию
-      name: Казармы
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 136.5,2.5
       parent: 1
 - proto: CMEncryptionKeyCommand
   entities:
@@ -25714,7 +25753,7 @@ entities:
       pos: 3.5,1.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1241.639
+      secondsUntilStateChange: -2066.8313
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -25726,7 +25765,7 @@ entities:
       pos: 3.5,2.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1241.3923
+      secondsUntilStateChange: -2066.5845
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -25738,7 +25777,7 @@ entities:
       pos: -4.5,1.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1242.4556
+      secondsUntilStateChange: -2067.6477
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -25750,7 +25789,7 @@ entities:
       pos: -4.5,2.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -1242.0724
+      secondsUntilStateChange: -2067.2646
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -55004,6 +55043,8 @@ entities:
       color: '#0055CCFF'
   - uid: 8892
     components:
+    - type: MetaData
+      name: Комната брифинга
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 135.5,14.5
