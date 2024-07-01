@@ -300,6 +300,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 }
 
                 _mapLoader.TryLoad(dropshipMap, ships[shipIndex], out var shipGrids);
+                shipGrids = null;
                 shipIndex++;
 
                 if (shipIndex >= ships.Length)

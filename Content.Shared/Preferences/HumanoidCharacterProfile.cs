@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text.RegularExpressions;
+using Content.Shared._RMC14.NamedItems;
 using Content.Corvax.Interfaces.Shared;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
@@ -495,7 +496,7 @@ namespace Content.Shared.Preferences
             {
                 sponsorPrototypes = prototypes;
             }
-
+            
             if (speciesPrototype.SponsorOnly && !sponsorPrototypes.Contains(Species.Id))
             {
                 Species = SharedHumanoidAppearanceSystem.DefaultSpecies;

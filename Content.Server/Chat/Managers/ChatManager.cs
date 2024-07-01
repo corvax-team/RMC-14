@@ -254,11 +254,6 @@ namespace Content.Server.Chat.Managers
                 var prefs = _preferencesManager.GetPreferences(player.UserId);
                 colorOverride = prefs.AdminOOCColor;
             }
-            if (_netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) &&
-                _linkAccount.GetPatron(player)?.Tier != null)
-            {
-                wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", "#aa00ff"),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
-            }
 
             // Corvax-Sponsors-Start
             if (_sponsorsManager != null && _sponsorsManager.TryGetServerOocColor(player.UserId, out var oocColor))
