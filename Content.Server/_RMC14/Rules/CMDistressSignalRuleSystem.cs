@@ -67,6 +67,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
+    [Dependency] private readonly MapSystem _mapSystem = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTime = default!;
@@ -249,8 +250,19 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 var list = xenoCandidates[i];
                 while (list.Count > 0 && selected < totalXenos)
                 {
-                    if (SpawnXeno(list, comp.LarvaEnt) != null)
+                    if (queenSelected == null)
+                    {
+                        queenSelected = SpawnXeno(list, comp.QueenEnt);
+                        if (queenSelected != null)
+                        {
+                            totalXenos--;
+                            selected++;
+                        }
+                    }
+                    else if (SpawnXeno(list, comp.LarvaEnt) != null)
+                    {
                         selected++;
+                    }
                 }
             }
 
@@ -276,13 +288,16 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             // don't open shitcode inside
             spawnedDropships = true;
             var dropshipMap = _mapManager.CreateMap();
-            var dropshipPoints = EntityQueryEnumerator<DropshipDestinationComponent, MetaDataComponent>();
+            var dropshipPoints = EntityQueryEnumerator<DropshipDestinationComponent, MetaDataComponent, TransformComponent>();
             var ships = new[] { "/Maps/_RMC14/alamo.yml", "/Maps/_RMC14/normandy.yml" };
             var shipIndex = 0;
-            while (dropshipPoints.MoveNext(out var destinationId, out _, out var metaData))
+            while (dropshipPoints.MoveNext(out var destinationId, out _, out var metaData, out var destTransform))
             {
-                if (!metaData.EntityName.Contains("almayer", StringComparison.OrdinalIgnoreCase))
+                if (_mapSystem.TryGetMap(destTransform.MapID, out var destinationMapId) &&
+                    comp.XenoMap == destinationMapId)
+                {
                     continue;
+                }
 
                 _mapLoader.TryLoad(dropshipMap, ships[shipIndex], out var shipGrids);
                 shipIndex++;
@@ -463,10 +478,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (!GameTicker.IsGameRuleAdded(uid, gameRule))
                 continue;
 
-            var xenos = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
+            distress.NextCheck ??= Timing.CurTime + distress.CheckEvery;
+
             var xenosAlive = false;
+            var xenos = EntityQueryEnumerator<ActorComponent, XenoComponent, MobStateComponent, TransformComponent>();
             var xenosOnShip = false;
-            while (xenos.MoveNext(out var xenoId, out var xeno, out var mobState, out var xform))
+            while (xenos.MoveNext(out var xenoId, out _, out var xeno, out var mobState, out var xform))
             {
                 if (!xeno.ContributesToVictory)
                     continue;
@@ -481,10 +498,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     break;
             }
 
-            var marines = EntityQueryEnumerator<MarineComponent, MobStateComponent, TransformComponent>();
+            var marines = EntityQueryEnumerator<ActorComponent, MarineComponent, MobStateComponent, TransformComponent>();
             var marinesAlive = false;
             var marinesOnShip = false;
-            while (marines.MoveNext(out var marineId, out _, out var mobState, out var xform))
+            while (marines.MoveNext(out var marineId, out _, out _, out var mobState, out var xform))
             {
                 if (HasComp<VictimInfectedComponent>(marineId) || HasComp<VictimBurstComponent>(marineId))
                     continue;
@@ -759,27 +776,29 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             }
         }
 
-        var rules = QueryActiveRules();
-        while (rules.MoveNext(out _, out var distress, out _))
+        if (Timing.CurTime >= component.NextCheck)
         {
-            if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
-                distress.QueenDiedCheck = null;
+            component.NextCheck = Timing.CurTime + component.CheckEvery;
+            CheckRoundShouldEnd();
+        }
 
-            if (distress.QueenDiedCheck == null)
-                continue;
+        if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
+            component.QueenDiedCheck = null;
 
-            if (Timing.CurTime >= distress.QueenDiedCheck)
+        if (component.QueenDiedCheck == null)
+            return;
+
+        if (Timing.CurTime >= component.QueenDiedCheck)
+        {
+            if (_xenoEvolution.HasLiving<XenoComponent>(4))
             {
-                if (_xenoEvolution.HasLiving<XenoComponent>(4))
-                {
-                    distress.Result = DistressSignalRuleResult.MinorMarineVictory;
-                    _roundEnd.EndRound();
-                }
-                else
-                {
-                    distress.Result = DistressSignalRuleResult.MajorMarineVictory;
-                    _roundEnd.EndRound();
-                }
+                component.Result = DistressSignalRuleResult.MinorMarineVictory;
+                _roundEnd.EndRound();
+            }
+            else
+            {
+                component.Result = DistressSignalRuleResult.MajorMarineVictory;
+                _roundEnd.EndRound();
             }
         }
     }

@@ -236,7 +236,7 @@ namespace Content.Shared.CCVar
         /// If roles should be restricted based on time.
         /// </summary>
         public static readonly CVarDef<bool>
-            GameRoleTimers = CVarDef.Create("game.role_timers", false, CVar.SERVER | CVar.REPLICATED);
+            GameRoleTimers = CVarDef.Create("game.role_timers", true, CVar.SERVER | CVar.REPLICATED);
 
         /// <summary>
         /// Override default role requirements using a <see cref="JobRequirementOverridePrototype"/>
@@ -1345,7 +1345,7 @@ namespace Content.Shared.CCVar
         ///     Config for when the restart vote should be allowed to be called based on percentage of ghosts.
         ///
         public static readonly CVarDef<int> VoteRestartGhostPercentage =
-            CVarDef.Create("vote.restart_ghost_percentage", 55, CVar.SERVERONLY);
+            CVarDef.Create("vote.restart_ghost_percentage", 75, CVar.SERVERONLY);
 
         /// <summary>
         ///     See vote.enabled, but specific to preset votes
@@ -2159,7 +2159,7 @@ namespace Content.Shared.CCVar
          */
 
         public static readonly CVarDef<bool> GatewayGeneratorEnabled =
-            CVarDef.Create("gateway.generator_enabled", true);
+            CVarDef.Create("gateway.generator_enabled", false);
 
         // Clippy!
         public static readonly CVarDef<string> TippyEntity =
