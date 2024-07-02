@@ -1418,7 +1418,7 @@ namespace Content.Shared.CCVar
         /// Should we pre-load all of the procgen atlasses.
         /// </summary>
         public static readonly CVarDef<bool> ProcgenPreload =
-            CVarDef.Create("procgen.preload", true, CVar.SERVERONLY);
+            CVarDef.Create("procgen.preload", false, CVar.SERVERONLY);
 
         /*
          * Shuttles
@@ -1486,7 +1486,7 @@ namespace Content.Shared.CCVar
         /// Whether to automatically preloading grids by GridPreloaderSystem
         /// </summary>
         public static readonly CVarDef<bool> PreloadGrids =
-            CVarDef.Create("shuttle.preload_grids", true, CVar.SERVERONLY);
+            CVarDef.Create("shuttle.preload_grids", false, CVar.SERVERONLY);
 
         /// <summary>
         /// How long the warmup time before FTL start should be.
@@ -1498,7 +1498,7 @@ namespace Content.Shared.CCVar
         /// How long a shuttle spends in FTL.
         /// </summary>
         public static readonly CVarDef<float> FTLTravelTime =
-            CVarDef.Create("shuttle.travel_time", 100f, CVar.SERVERONLY);
+            CVarDef.Create("shuttle.travel_time", 70f, CVar.SERVERONLY); // TODO RMC14 100
 
         /// <summary>
         /// How long the final stage of FTL before arrival should be.
@@ -1510,7 +1510,7 @@ namespace Content.Shared.CCVar
         /// How much time needs to pass before a shuttle can FTL again.
         /// </summary>
         public static readonly CVarDef<float> FTLCooldown =
-            CVarDef.Create("shuttle.cooldown", 120f, CVar.SERVERONLY);
+            CVarDef.Create("shuttle.cooldown", 90f, CVar.SERVERONLY); // TODO RMC14 120f
 
         /// <summary>
         /// The maximum <see cref="PhysicsComponent.Mass"/> a grid can have before it becomes unable to FTL.
