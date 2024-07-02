@@ -76,7 +76,7 @@
   - type: NukeLabel
   - type: Nuke
     explosionType: Default
-    maxIntensity: 100
+    maxIntensity: 200 # CCM update to let XenoQueen die of nuke boom
     intensitySlope: 5
     totalIntensity: 5000000
     diskSlot:
