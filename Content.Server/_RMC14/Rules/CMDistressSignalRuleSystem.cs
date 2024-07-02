@@ -258,8 +258,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             for (var i = selected; i < totalXenos; i++)
             {
                 // TODO RMC14 xeno spawn points
-                var point = _random.Pick(xenoSpawnPoints);
-                var xenoEnt = SpawnAtPosition(comp.LarvaEnt, point.ToCoordinates());
+                var point = _random.Pick(xenoSpawnPoints); // CCM xeno spawn points
+                var xenoEnt = SpawnAtPosition(comp.LarvaEnt, point.ToCoordinates()); // CCM xeno spawn points
                 _xeno.MakeXeno(xenoEnt);
                 _xeno.SetHive(xenoEnt, comp.Hive);
             }
