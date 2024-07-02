@@ -568,7 +568,7 @@ namespace Content.Shared.Preferences
             {
                 flavortext = FormattedMessage.RemoveMarkup(FlavorText);
             }
-
+            //sponsorPrototypes.ToArray()
             var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, Sex, sponsorPrototypes.ToArray());
 
             var prefsUnavailableMode = PreferenceUnavailable switch
