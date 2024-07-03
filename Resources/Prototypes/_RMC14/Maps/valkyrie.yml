@@ -7,11 +7,11 @@
   maxRandomOffset: 0
   randomRotation: false
   stations:
-    Savannah:
+    Valkyrie:
       stationProto: StandardUNMCWarship
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'LCS-14 Savannah'
+          mapNameTemplate: 'LCS-14 Valkyrie'
         - type: StationJobs
           availableJobs:
             # Command
