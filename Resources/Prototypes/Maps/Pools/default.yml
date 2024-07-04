@@ -1,7 +1,7 @@
 - type: gameMapPool
   id: DefaultMapPool
   maps:
-  - David
+  - Valkyrie
 
 - type: gameMapPool
   id: DefaultMapPoolAlmayer

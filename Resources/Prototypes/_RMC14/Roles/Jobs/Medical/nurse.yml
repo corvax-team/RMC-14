@@ -21,8 +21,6 @@
       firearms: 0
       medical: 3
       surgery: 1
-    - type: MarineOrders
-    hidden: true
 
 - type: startingGear
   id: CMGearNurse

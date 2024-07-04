@@ -31,7 +31,6 @@
       research: 1
       surgery: 2
     - type: MarineOrders
-    hidden: false
 
 - type: startingGear
   id: CMGearCMO
