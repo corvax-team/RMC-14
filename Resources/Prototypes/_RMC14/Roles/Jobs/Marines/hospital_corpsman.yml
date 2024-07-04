@@ -27,8 +27,6 @@
       surgery: 1
     - type: CMVendorUser
       points: 45
-    - type: MarineOrders
-    hidden: false
 
 - type: startingGear
   id: CMGearHospitalCorpsman

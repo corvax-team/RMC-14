@@ -18,8 +18,6 @@
     - type: CMVendorUser
       points: 45
   hasIcon: false
-    - type: MarineOrders
-    hidden: false
 
 - type: startingGear
   id: CMGearRifleman
