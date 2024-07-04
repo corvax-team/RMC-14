@@ -24,6 +24,8 @@
       firearms: 1
       fireman: 2
       police: 2
+    - type: MarineOrders
+    hidden: true
 
 - type: startingGear
   id: CMGearMilitaryPolice
