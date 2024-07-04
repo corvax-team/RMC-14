@@ -3,7 +3,7 @@
   mapName: David
   mapPath: /Maps/_CCM14/david.yml
   minPlayers: 0
-  maxPlayers: 100
+  maxPlayers: 40
   maxRandomOffset: 0
   randomRotation: false
   stations:
@@ -18,7 +18,7 @@
             CMCommandingOfficer: [1, 1]
             CMExecutiveOfficer: [1, 1]
             CMStaffOfficer: [1, 1]
-#            CMSeniorEnlistedAdvisor: [1, 1]
+            CMSeniorEnlistedAdvisor: [1, 1]
 
             # Military Police
             CMChiefMP: [1, 1]
@@ -45,7 +45,8 @@
 
             # Requisition
             CMQuartermaster: [1, 1]
-            CMCargoTech: [1, 1]
+#            CMCargoTech: [3, 3]
+            CMMessTech: [1, 1]
 
             # Marines
             CMSquadLeader: [2, 2]
@@ -58,8 +59,6 @@
 
             # Civilians
             CMCorrespondent: [1, 1]
-            CMMessTech: [1, 1]
 
             # Other
 #            CMLiaison: [1, 1]
-
