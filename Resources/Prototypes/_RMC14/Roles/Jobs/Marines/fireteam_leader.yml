@@ -24,7 +24,6 @@
       jtac: 3
     - type: CMVendorUser
       points: 45
-    hidden: true
 
 - type: startingGear
   id: CMGearFireteamLeader
