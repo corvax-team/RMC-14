@@ -30,6 +30,7 @@
       police: 1
       powerLoader: 2
     - type: MarineOrders
+    hidden: false
 
 - type: startingGear
   id: CMGearQuartermaster

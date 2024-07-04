@@ -24,6 +24,8 @@
       jtac: 3
     - type: CMVendorUser
       points: 45
+    - type: MarineOrders
+    hidden: true
 
 - type: startingGear
   id: CMGearFireteamLeader

@@ -30,6 +30,8 @@
       points: 45
       extraPoints:
         Specialist: 120
+    - type: MarineOrders
+    hidden: false
 
 - type: startingGear
   id: CMGearWeaponsSpecialist
