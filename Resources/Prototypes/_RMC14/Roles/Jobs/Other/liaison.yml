@@ -20,6 +20,7 @@
     - type: Skills
       firearms: 0
       vehicles: 1
+    hidden: true
 
 - type: startingGear
   id: CMGearLiaison

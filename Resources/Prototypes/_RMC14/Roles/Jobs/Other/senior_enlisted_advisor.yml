@@ -51,6 +51,7 @@
       surgery: 2
       vehicles: 2
     - type: MarineOrders
+    hidden: true
 
 - type: startingGear
   id: CMGearSeniorEnlistedAdvisor

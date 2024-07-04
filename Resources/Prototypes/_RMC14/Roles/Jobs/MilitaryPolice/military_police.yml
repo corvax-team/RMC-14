@@ -24,6 +24,7 @@
       firearms: 1
       fireman: 2
       police: 2
+    hidden: true
 
 - type: startingGear
   id: CMGearMilitaryPolice
