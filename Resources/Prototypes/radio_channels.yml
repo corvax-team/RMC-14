@@ -1,7 +1,7 @@
 - type: radioChannel
   id: Common
   name: chat-radio-common
-  keycode: ";"
+  keycode: "o"
   frequency: 1459
   color: "#32cd32"
 
