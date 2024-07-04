@@ -45,6 +45,7 @@
       surgery: 1
       vehicles: 1
     - type: MarineOrders
+    hidden: true
 
 - type: startingGear
   id: CMGearASO
