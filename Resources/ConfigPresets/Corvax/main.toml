@@ -4,10 +4,11 @@ max_connections = 1024
 
 [game]
 hostname = "🛰️ Corvax — Colonial Marines 🌍"
-desc = "Corvax первый русскоязычный проект в Space Station 14.\nНа Колониальных Морпехах средние требования к RP."
-soft_max_players = 250
+desc = "Corvax первый русскоязычный проект в Space Station 14.\nПервый русскоязычный проект на тему колониальных морпехов.\nНа сервере средние требования к RP."
+soft_max_players = 100
 map_rotation = true
 lobbyduration = 240
+role_timers = false
 round_end_pvs_overrides = false
 
 [ghost]
