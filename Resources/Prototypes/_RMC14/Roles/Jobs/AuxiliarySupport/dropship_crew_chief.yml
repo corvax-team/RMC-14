@@ -30,7 +30,7 @@
       powerLoader: 2
       surgery: 1
     - type: MarineOrders
-  hidden: false
+  hidden: true
 
 - type: startingGear
   id: CMGearDCC
