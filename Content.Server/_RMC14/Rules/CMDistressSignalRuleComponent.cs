@@ -12,7 +12,7 @@ namespace Content.Server._RMC14.Rules;
 public sealed partial class CMDistressSignalRuleComponent : Component
 {
     [DataField]
-    public List<EntProtoId> SquadIds = ["SquadAlpha", "SquadBravo", "SquadCharlie", "SquadDelta"];
+    public List<EntProtoId> SquadIds = ["SquadAlpha", "SquadBravo"];
 
     [DataField]
     public Dictionary<EntProtoId, EntityUid> Squads = new();
