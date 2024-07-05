@@ -571,7 +571,7 @@
     - map: ["computerLayerKeys"]
       state: generic_keys
   - type: AccessReader
-    access: [[ "Command" ]]
+    access: [[ "CMAccessCommand" ]]
   - type: CommunicationsConsole
     title: comms-console-announcement-title-station
   - type: DeviceNetwork
