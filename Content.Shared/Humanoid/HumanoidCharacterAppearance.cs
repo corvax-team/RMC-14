@@ -180,8 +180,7 @@ public sealed partial class HumanoidCharacterAppearance : ICharacterAppearance, 
     }
 
     //string[] sponsorPrototypes - this just for ctrl+c, when i fix local server
-    public static HumanoidCharacterAppearance EnsureValid(HumanoidCharacterAppearance appearance, string species, Sex sex, string[] sponsorPrototypes
-        )
+    public static HumanoidCharacterAppearance EnsureValid(HumanoidCharacterAppearance appearance, string species, Sex sex, string[] sponsorPrototypes)
     {
         var hairStyleId = appearance.HairStyleId;
         var facialHairStyleId = appearance.FacialHairStyleId;
