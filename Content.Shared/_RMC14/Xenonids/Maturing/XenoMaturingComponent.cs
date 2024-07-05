@@ -10,7 +10,7 @@ namespace Content.Shared._RMC14.Xenonids.Maturing;
 public sealed partial class XenoMaturingComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public TimeSpan Delay = TimeSpan.FromMinutes(10);
+    public TimeSpan Delay = TimeSpan.FromMinutes(40); // CCM 10 -> 40
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan MatureAt;
