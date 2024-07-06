@@ -1,0 +1,37 @@
+- type: entity
+  parent: BaseComputer
+  id: CMMComputerComms
+  name: communications computer UEG
+  description: A computer used to announce announcements throughout the station using a keypad and set the appropriate directive.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: comm
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+  - type: AccessReader
+    access: [[ "CMAccessCommand" ]]
+  - type: CommunicationsConsole
+    title: comms-console-announcement-title-station
+  - type: DeviceNetwork
+    transmitFrequencyId: ShuttleTimer
+  - type: ActivatableUI
+    key: enum.CommunicationsConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.CommunicationsConsoleUiKey.Key:
+        type: CommunicationsConsoleBoundUserInterface
+  - type: Computer
+    board: CommsComputerCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#3c5eb5"
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: StrongMetallic

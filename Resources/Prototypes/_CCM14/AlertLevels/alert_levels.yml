@@ -1,0 +1,38 @@
+- type: alertLevels
+  id: CMMstationAlerts
+  defaultLevel: Crimson Sword
+  levels:
+    Crimson Sword:
+      announcement: alert-level-green-announcement
+      color: Green
+      emergencyLightColor: LawnGreen
+      shuttleTime: 99999
+    CCitadel:
+      announcement: alert-level-blue-announcement
+      sound: /Audio/_RMC14/Announcements/Marine/notice2.ogg # TODO CCM
+      color: DodgerBlue
+      forceEnableEmergencyLights: true
+      emergencyLightColor: DodgerBlue
+      shuttleTime: 99999
+    MayDay:
+      announcement: alert-level-violet-announcement
+      sound: /Audio/_RMC14/Announcements/Marine/notice2.ogg # TODO CCM
+      color: DarkViolet
+      emergencyLightColor: DarkViolet
+      forceEnableEmergencyLights: true
+      shuttleTime: 99999
+    Eye of Hope:
+      announcement: alert-level-yellow-announcement
+      sound: /Audio/_RMC14/Announcements/Marine/notice2.ogg # TODO CCM
+      color: Yellow
+      emergencyLightColor: Goldenrod
+      forceEnableEmergencyLights: true
+      shuttleTime: 99999
+    Shield:
+      announcement: alert-level-red-announcement
+      sound: /Audio/_RMC14/Announcements/Marine/notice2.ogg # TODO CCM
+      color: Red
+      emergencyLightColor: Red
+      forceEnableEmergencyLights: true
+      shuttleTime: 99999 #No reduction in time as we don't have swiping for red alert like in /tg/. Shuttle times are intended to create friction, so having a way to brainlessly bypass that would be dumb.
+
