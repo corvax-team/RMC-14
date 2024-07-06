@@ -180,7 +180,7 @@ public sealed partial class HumanoidCharacterAppearance : ICharacterAppearance, 
     }
 
     //string[] sponsorPrototypes - this just for ctrl+c, when i fix local server
-    public static HumanoidCharacterAppearance EnsureValid(HumanoidCharacterAppearance appearance, string species, Sex sex, string[] sponsorPrototypes)
+    public static HumanoidCharacterAppearance EnsureValid(HumanoidCharacterAppearance appearance, string species, Sex sex)
     {
         var hairStyleId = appearance.HairStyleId;
         var facialHairStyleId = appearance.FacialHairStyleId;
@@ -197,28 +197,28 @@ public sealed partial class HumanoidCharacterAppearance : ICharacterAppearance, 
             hairStyleId = HairStyles.DefaultHairStyle;
         }
 
-        // Corvax-Sponsors-Start
-        if (proto.TryIndex(hairStyleId, out MarkingPrototype? hairProto) &&
-            hairProto.SponsorOnly &&
-            !sponsorPrototypes.Contains(hairStyleId))
-        {
-            hairStyleId = HairStyles.DefaultHairStyle;
-        }
-        // Corvax-Sponsors-End
+        //// Corvax-Sponsors-Start
+        //if (proto.TryIndex(hairStyleId, out MarkingPrototype? hairProto) &&
+        //    hairProto.SponsorOnly &&
+        //    !sponsorPrototypes.Contains(hairStyleId))
+        //{
+        //    hairStyleId = HairStyles.DefaultHairStyle;
+        //}
+        //// Corvax-Sponsors-End
 
         if (!markingManager.MarkingsByCategory(MarkingCategories.FacialHair).ContainsKey(facialHairStyleId))
         {
             facialHairStyleId = HairStyles.DefaultFacialHairStyle;
         }
 
-        // Corvax-Sponsors-Start
-        if (proto.TryIndex(facialHairStyleId, out MarkingPrototype? facialHairProto) &&
-            facialHairProto.SponsorOnly &&
-            !sponsorPrototypes.Contains(facialHairStyleId))
-        {
-            facialHairStyleId = HairStyles.DefaultFacialHairStyle;
-        }
-        // Corvax-Sponsors-End
+        //// Corvax-Sponsors-Start
+        //if (proto.TryIndex(facialHairStyleId, out MarkingPrototype? facialHairProto) &&
+        //    facialHairProto.SponsorOnly &&
+        //    !sponsorPrototypes.Contains(facialHairStyleId))
+        //{
+        //    facialHairStyleId = HairStyles.DefaultFacialHairStyle;
+        //}
+        //// Corvax-Sponsors-End
 
         var markingSet = new MarkingSet();
         var skinColor = appearance.SkinColor;
@@ -234,7 +234,7 @@ public sealed partial class HumanoidCharacterAppearance : ICharacterAppearance, 
 
             markingSet.EnsureSpecies(species, skinColor, markingManager);
             markingSet.EnsureSexes(sex, markingManager);
-            markingSet.FilterSponsor(sponsorPrototypes, markingManager); // Corvax-Sponsors
+            //markingSet.FilterSponsor(sponsorPrototypes, markingManager); // Corvax-Sponsors
         }
 
         return new HumanoidCharacterAppearance(

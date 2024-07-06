@@ -478,7 +478,7 @@ namespace Content.Shared.Preferences
             var configManager = collection.Resolve<IConfigurationManager>();
             var prototypeManager = collection.Resolve<IPrototypeManager>();
             var netManager = collection.Resolve<INetManager>();
-            var sponsorsManager = collection.Resolve<ISharedSponsorsManager>(); // Corvax-Sponsor
+            //var sponsorsManager = collection.Resolve<ISharedSponsorsManager>(); // Corvax-Sponsor
 
             if (!prototypeManager.TryIndex(Species, out var speciesPrototype) || speciesPrototype.RoundStart == false)
             {
@@ -486,23 +486,23 @@ namespace Content.Shared.Preferences
                 speciesPrototype = prototypeManager.Index(Species);
             }
 
-            // Corvax-Sponsors-Start: Reset to human if player not sponsor
-            var sponsorPrototypes = new List<string>();
-            if (netManager.IsClient)
-            {
-                sponsorPrototypes = sponsorsManager.GetClientPrototypes();
-            }
-            else if (sponsorsManager.TryGetServerPrototypes(session.UserId, out var prototypes))
-            {
-                sponsorPrototypes = prototypes;
-            }
-            
-            if (speciesPrototype.SponsorOnly && !sponsorPrototypes.Contains(Species.Id))
-            {
-                Species = SharedHumanoidAppearanceSystem.DefaultSpecies;
-                speciesPrototype = prototypeManager.Index(Species);
-            }
-            // Corvax-Sponsors-End
+            //// Corvax-Sponsors-Start: Reset to human if player not sponsor
+            //var sponsorPrototypes = new List<string>();
+            //if (netManager.IsClient)
+            //{
+            //    sponsorPrototypes = sponsorsManager.GetClientPrototypes();
+            //}
+            //else if (sponsorsManager.TryGetServerPrototypes(session.UserId, out var prototypes))
+            //{
+            //    sponsorPrototypes = prototypes;
+            //}
+            //
+            //if (speciesPrototype.SponsorOnly && !sponsorPrototypes.Contains(Species.Id))
+            //{
+            //    Species = SharedHumanoidAppearanceSystem.DefaultSpecies;
+            //    speciesPrototype = prototypeManager.Index(Species);
+            //}
+            //// Corvax-Sponsors-End
 
             var sex = Sex switch
             {
@@ -569,7 +569,7 @@ namespace Content.Shared.Preferences
                 flavortext = FormattedMessage.RemoveMarkup(FlavorText);
             }
             //sponsorPrototypes.ToArray()
-            var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, Sex, sponsorPrototypes.ToArray());
+            var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, Sex);
 
             var prefsUnavailableMode = PreferenceUnavailable switch
             {
