@@ -10,7 +10,7 @@ using Robust.Client;
 using Robust.Client.Console;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
-//Corvar
+//Corvax
 using Content.Client.Ghost;
 using Content.Client.UserInterface.Systems.Ghost.Widgets;
 using Robust.Client.Console;
