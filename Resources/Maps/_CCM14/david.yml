@@ -21321,7 +21321,7 @@ entities:
           showEnts: False
           occludes: True
           ent: null
-- proto: CMM5Bayonet
+- proto: RMCM5Bayonet
   entities:
   - uid: 8103
     components:
