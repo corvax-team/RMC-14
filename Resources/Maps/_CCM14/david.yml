@@ -3593,7 +3593,7 @@ entities:
   - uid: 6528
     components:
     - type: MetaData
-      name: Нормандия
+      name: ���������
     - type: Transform
       parent: 1
     - type: MapGrid
@@ -4409,6 +4409,8 @@ entities:
   entities:
   - uid: 4864
     components:
+    - type: MetaData
+      name: toilet
     - type: Transform
       pos: 51.5,4.5
       parent: 1
@@ -5080,11 +5082,15 @@ entities:
       parent: 1
   - uid: 4058
     components:
+    - type: MetaData
+      name: kitchen
     - type: Transform
       pos: 42.5,9.5
       parent: 1
   - uid: 4059
     components:
+    - type: MetaData
+      name: kitchen
     - type: Transform
       pos: 43.5,9.5
       parent: 1
@@ -5220,11 +5226,15 @@ entities:
       parent: 1
   - uid: 4086
     components:
+    - type: MetaData
+      name: kitchen maintenance
     - type: Transform
       pos: 41.5,1.5
       parent: 1
   - uid: 4087
     components:
+    - type: MetaData
+      name: requisitions maintenance
     - type: Transform
       pos: 41.5,2.5
       parent: 1
@@ -14750,9 +14760,9 @@ entities:
         - ClothingSpeedModifier
         entries:
         - message: >-
-            Обеспечивает следующую защиту:
+            ������������ ��������� ������:
 
-            - [color=orange]Взрывной[/color] урон [color=white]к содержимому[/color] снижается на [color=lightblue]10%[/color].
+            - [color=orange]��������[/color] ���� [color=white]� �����������[/color] ��������� �� [color=lightblue]10%[/color].
           priority: 0
           component: Armor
         title: null
@@ -15579,9 +15589,9 @@ entities:
         - ClothingSpeedModifier
         entries:
         - message: >-
-            Обеспечивает следующую защиту:
+            ������������ ��������� ������:
 
-            - [color=orange]Взрывной[/color] урон [color=white]к содержимому[/color] снижается на [color=lightblue]10%[/color].
+            - [color=orange]��������[/color] ���� [color=white]� �����������[/color] ��������� �� [color=lightblue]10%[/color].
           priority: 0
           component: Armor
         title: null
@@ -18036,8 +18046,8 @@ entities:
   - uid: 5025
     components:
     - type: MetaData
-      desc: Ящик, содержащий топливные баки для двигателя антиматерии. В совокупности с двигателем это, возможно, пригодится вам.
-      name: Топливо антиматерии
+      desc: ����, ���������� ��������� ���� ��� ��������� �����������. � ������������ � ���������� ���, ��������, ���������� ���.
+      name: ������� �����������
     - type: Transform
       pos: 53.5,-15.5
       parent: 1
@@ -18057,8 +18067,8 @@ entities:
   - uid: 5029
     components:
     - type: MetaData
-      desc: Ящик, содержащий упакованные части двигателя антиматерии. Возможно, это пригодится вам.
-      name: Компоненты ДАМ
+      desc: ����, ���������� ����������� ����� ��������� �����������. ��������, ��� ���������� ���.
+      name: ���������� ���
     - type: Transform
       pos: 52.5,-15.5
       parent: 1
@@ -18605,7 +18615,7 @@ entities:
   - uid: 547
     components:
     - type: MetaData
-      name: Порт DAVID
+      name: ���� DAVID
     - type: Transform
       pos: 1.5,0.5
       parent: 1
@@ -18614,21 +18624,21 @@ entities:
   - uid: 348
     components:
     - type: MetaData
-      name: Порт DAVID
+      name: ���� DAVID
     - type: Transform
       pos: 1.5,0.5
       parent: 1
   - uid: 446
     components:
     - type: MetaData
-      name: Корма DAVID
+      name: ����� DAVID
     - type: Transform
       pos: 26.5,-19.5
       parent: 1
   - uid: 7449
     components:
     - type: MetaData
-      name: Нос DAVID
+      name: ��� DAVID
     - type: Transform
       pos: -55.5,-9.5
       parent: 1
@@ -18695,21 +18705,21 @@ entities:
       pos: 50.5,7.5
       parent: 1
     - type: FaxMachine
-      name: ГКИ
+      name: ���
   - uid: 5444
     components:
     - type: Transform
       pos: -36.5,-7.5
       parent: 1
     - type: FaxMachine
-      name: Военная полиция
+      name: ������� �������
   - uid: 5490
     components:
     - type: Transform
       pos: 27.5,-2.5
       parent: 1
     - type: FaxMachine
-      name: Брифинг
+      name: �������
   - uid: 6101
     components:
     - type: Transform
@@ -18723,14 +18733,14 @@ entities:
       pos: -14.5,6.5
       parent: 1
     - type: FaxMachine
-      name: Медицинский
+      name: �����������
   - uid: 6279
     components:
     - type: Transform
       pos: -24.5,-4.5
       parent: 1
     - type: FaxMachine
-      name: Квартирмейстер
+      name: ��������������
   - uid: 8032
     components:
     - type: Transform
@@ -18744,7 +18754,7 @@ entities:
       pos: 30.5,-14.5
       parent: 1
     - type: FaxMachine
-      name: Корреспондент
+      name: �������������
 - proto: CMFilingCabinetChest
   entities:
   - uid: 6275
@@ -18897,8 +18907,8 @@ entities:
   - uid: 5449
     components:
     - type: MetaData
-      desc: Alanero за помощь в строительстве Валькирии и Давида. Без него я бы точно не справился. Alanero, ты крутой!
-      name: Благодарность
+      desc: Alanero �� ������ � ������������� ��������� � ������. ��� ���� � �� ����� �� ���������. Alanero, �� ������!
+      name: �������������
     - type: Transform
       pos: -42.554504,-14.550685
       parent: 1
@@ -51552,7 +51562,7 @@ entities:
   - uid: 7448
     components:
     - type: MetaData
-      desc: ВНИМАНИЕ!!! СНИМАЕТ БЛОКИРОВКУ У КОМНАТЫ САМОУНИЧТОЖЕНИЯ! ВНИМАНИЕ!!!
+      desc: ��������!!! ������� ���������� � ������� ���������������! ��������!!!
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -61.74494,2.5457208
@@ -51859,64 +51869,64 @@ entities:
   - uid: 5341
     components:
     - type: MetaData
-      desc: Не называйте его вафельным, говорите полотенце в клеточку.
-      name: Вафельное полотенце
+      desc: �� ��������� ��� ���������, �������� ��������� � ��������.
+      name: ��������� ���������
     - type: Transform
       parent: 5340
     - type: InsideEntityStorage
   - uid: 5344
     components:
     - type: MetaData
-      desc: Не называйте его вафельным, говорите полотенце в клеточку.
-      name: Вафельное полотенце
+      desc: �� ��������� ��� ���������, �������� ��������� � ��������.
+      name: ��������� ���������
     - type: Transform
       parent: 5343
     - type: InsideEntityStorage
   - uid: 5348
     components:
     - type: MetaData
-      desc: Не называйте его вафельным, говорите полотенце в клеточку.
-      name: Вафельное полотенце
+      desc: �� ��������� ��� ���������, �������� ��������� � ��������.
+      name: ��������� ���������
     - type: Transform
       parent: 5346
     - type: InsideEntityStorage
   - uid: 5351
     components:
     - type: MetaData
-      desc: Не называйте его вафельным, говорите полотенце в клеточку.
-      name: Вафельное полотенце
+      desc: �� ��������� ��� ���������, �������� ��������� � ��������.
+      name: ��������� ���������
     - type: Transform
       parent: 5350
     - type: InsideEntityStorage
   - uid: 5354
     components:
     - type: MetaData
-      desc: Не называйте его вафельным, говорите полотенце в клеточку.
-      name: Вафельное полотенце
+      desc: �� ��������� ��� ���������, �������� ��������� � ��������.
+      name: ��������� ���������
     - type: Transform
       parent: 5353
     - type: InsideEntityStorage
   - uid: 5357
     components:
     - type: MetaData
-      desc: Не называйте его вафельным, говорите полотенце в клеточку.
-      name: Вафельное полотенце
+      desc: �� ��������� ��� ���������, �������� ��������� � ��������.
+      name: ��������� ���������
     - type: Transform
       parent: 5356
     - type: InsideEntityStorage
   - uid: 5360
     components:
     - type: MetaData
-      desc: Не называйте его вафельным, говорите полотенце в клеточку.
-      name: Вафельное полотенце
+      desc: �� ��������� ��� ���������, �������� ��������� � ��������.
+      name: ��������� ���������
     - type: Transform
       parent: 5359
     - type: InsideEntityStorage
   - uid: 5364
     components:
     - type: MetaData
-      desc: Не называйте его вафельным, говорите полотенце в клеточку.
-      name: Вафельное полотенце
+      desc: �� ��������� ��� ���������, �������� ��������� � ��������.
+      name: ��������� ���������
     - type: Transform
       parent: 5362
     - type: InsideEntityStorage
@@ -53334,7 +53344,7 @@ entities:
   - uid: 355
     components:
     - type: MetaData
-      name: Пилот нормандии
+      name: ����� ���������
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 14.5,-13.5
@@ -53342,7 +53352,7 @@ entities:
   - uid: 356
     components:
     - type: MetaData
-      name: Туалеты и бассейн
+      name: ������� � �������
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 18.5,10.5
@@ -53350,7 +53360,7 @@ entities:
   - uid: 357
     components:
     - type: MetaData
-      name: Отряд Браво
+      name: ����� �����
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 42.5,11.5
@@ -53358,7 +53368,7 @@ entities:
   - uid: 362
     components:
     - type: MetaData
-      name: Столовая
+      name: ��������
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 26.5,-7.5
@@ -53366,7 +53376,7 @@ entities:
   - uid: 363
     components:
     - type: MetaData
-      name: Отряд альфа
+      name: ����� �����
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 29.5,11.5
@@ -53374,7 +53384,7 @@ entities:
   - uid: 1741
     components:
     - type: MetaData
-      name: Десантный корабль DAVID
+      name: ��������� ������� DAVID
     - type: Transform
       pos: 0.5,0.5
       parent: 1

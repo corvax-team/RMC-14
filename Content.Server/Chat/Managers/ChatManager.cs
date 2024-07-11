@@ -50,7 +50,6 @@ namespace Content.Server.Chat.Managers
         //[Dependency] private readonly LinkAccountManager _linkAccount = default!;
         // [Dependency] private readonly RMCDiscordManager _discord = default!;
 
-
         /// <summary>
         /// The maximum length a player-sent message can be sent
         /// </summary>
@@ -285,7 +284,7 @@ namespace Content.Server.Chat.Managers
                                             ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
                                             ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
 
-            // _discord.SendDiscordAdminMessage(player.Name, message);
+            _discord.SendDiscordAdminMessage(player.Name, message);
 
             foreach (var client in clients)
             {
