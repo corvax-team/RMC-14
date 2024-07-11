@@ -1,6 +1,6 @@
 - type: entity
   id: BaseXenoTarget
-  parent: BaseStructureDynamic
+  parent: CCMBaseStructureDynamic
   abstract: true
   components:
   - type: Sprite
@@ -51,8 +51,8 @@
 
 - type: entity
   name: Drone target left
-  id: TargetDroneLeft
-  parent: BaseXenoTarget
+  id: CCMTargetDroneLeft
+  parent: CCMBaseXenoTarget
   description: A shooting target. This one is xeno drone
   components:
   - type: Sprite
@@ -61,8 +61,8 @@
 
 - type: entity
   name: Drone target right
-  id: TargetDroneRight
-  parent: BaseXenoTarget
+  id: CCMTargetDroneRight
+  parent: CCMBaseXenoTarget
   description: A shooting target. This one is xeno drone
   components:
   - type: Sprite
