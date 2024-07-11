@@ -179,7 +179,7 @@ public sealed partial class HumanoidCharacterAppearance : ICharacterAppearance, 
         return new(color.RByte, color.GByte, color.BByte);
     }
 
-    //string[] sponsorPrototypes - this just for ctrl+c, when i fix local server
+    //string[] sponsorPrototypes - this just for ctrl+c, when i fix local server, CCM
     public static HumanoidCharacterAppearance EnsureValid(HumanoidCharacterAppearance appearance, string species, Sex sex, string[] sponsorPrototypes)
     {
         var hairStyleId = appearance.HairStyleId;

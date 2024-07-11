@@ -819,6 +819,18 @@ namespace Content.Server.Ghost.Roles
 
             UpdateAllEui();
         }
+
+        //Corvax
+        public void OpenEuiLobby(ICommonSession session)
+        {
+            if (_openUis.ContainsKey(session))
+                CloseEui(session);
+
+            var eui = _openUis[session] = new GhostRolesEui();
+            _euiManager.OpenEui(eui, session);
+            eui.StateDirty();
+        }
+        //Corvax
     }
 
     [AnyCommand]
@@ -837,4 +849,23 @@ namespace Content.Server.Ghost.Roles
                 shell.WriteLine("You can only open the ghost roles UI on a client.");
         }
     }
+
+    //Corvax
+    [AnyCommand]
+    public sealed class LobbyGhostRolesCheck : IConsoleCommand
+    {
+        [Dependency] private readonly IEntityManager _e = default!;
+
+        public string Command => "LobbyGhostRolesCheck";
+        public string Description => "Opens the ghost role request window.";
+        public string Help => $"{Command}";
+        public void Execute(IConsoleShell shell, string argStr, string[] args)
+        {
+            if (shell.Player != null)
+                _e.System<GhostRoleSystem>().OpenEuiLobby(shell.Player);
+            else
+                shell.WriteLine("You can only open the ghost roles UI on a client.");
+        }
+    }
+    //Corvax
 }
