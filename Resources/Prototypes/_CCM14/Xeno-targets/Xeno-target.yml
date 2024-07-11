@@ -1,6 +1,6 @@
 - type: entity
-  id: BaseXenoTarget
-  parent: CCMBaseStructureDynamic
+  id: CCMBaseXenoTarget
+  parent: BaseStructureDynamic
   abstract: true
   components:
   - type: Sprite
