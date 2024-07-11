@@ -284,7 +284,7 @@ namespace Content.Server.Chat.Managers
                                             ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
                                             ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
 
-            _discord.SendDiscordAdminMessage(player.Name, message);
+            //_discord.SendDiscordAdminMessage(player.Name, message);
 
             foreach (var client in clients)
             {
