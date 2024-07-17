@@ -1356,6 +1356,20 @@ entities:
         - node:
             cleanable: True
             color: '#FFFFFFFF'
+            id: CMDecalStriped0
+          decals:
+            300: 31,15
+            301: 30,15
+            302: 29,15
+        - node:
+            color: '#FFFFFFFF'
+            id: CMDecalStriped1
+          decals:
+            303: 29,-31
+            304: 30,-31
+            305: 31,-31
+        - node:
+            color: '#FFFFFFFF'
             id: Dirt
           decals:
             1534: -59,-16
@@ -3691,7 +3705,7 @@ entities:
   - uid: 6528
     components:
     - type: MetaData
-      name: Нормандия
+      name: ���������
     - type: Transform
       parent: 1
     - type: MapGrid
@@ -15705,8 +15719,8 @@ entities:
   - uid: 8022
     components:
     - type: MetaData
-      desc: Синие перчатки для соревновательного бокса. Кажется, они тяжелее обычных...
-      name: синие боксёрские перчатки ССС
+      desc: ����� �������� ��� ����������������� �����. �������, ��� ������� �������...
+      name: ����� ��������� �������� ���
     - type: Transform
       parent: 8013
     - type: InsideEntityStorage
@@ -16724,9 +16738,9 @@ entities:
         - ClothingSpeedModifier
         entries:
         - message: >-
-            Обеспечивает следующую защиту:
+            ������������ ��������� ������:
 
-            - [color=orange]Взрывной[/color] урон [color=white]к содержимому[/color] снижается на [color=lightblue]10%[/color].
+            - [color=orange]��������[/color] ���� [color=white]� �����������[/color] ��������� �� [color=lightblue]10%[/color].
           priority: 0
           component: Armor
         title: null
@@ -19435,8 +19449,8 @@ entities:
   - uid: 5025
     components:
     - type: MetaData
-      desc: Ящик, содержащий топливные баки для двигателя антиматерии. В совокупности с двигателем это, возможно, пригодится вам.
-      name: Топливо антиматерии
+      desc: ����, ���������� ��������� ���� ��� ��������� �����������. � ������������ � ���������� ���, ��������, ���������� ���.
+      name: ������� �����������
     - type: Transform
       pos: 53.5,-15.5
       parent: 1
@@ -19456,8 +19470,8 @@ entities:
   - uid: 5029
     components:
     - type: MetaData
-      desc: Ящик, содержащий упакованные части двигателя антиматерии. Возможно, это пригодится вам.
-      name: Компоненты ДАМ
+      desc: ����, ���������� ����������� ����� ��������� �����������. ��������, ��� ���������� ���.
+      name: ���������� ���
     - type: Transform
       pos: 52.5,-15.5
       parent: 1
@@ -20058,7 +20072,7 @@ entities:
   - uid: 547
     components:
     - type: MetaData
-      name: Порт DAVID
+      name: ���� DAVID
     - type: Transform
       pos: 1.5,0.5
       parent: 1
@@ -20067,35 +20081,35 @@ entities:
   - uid: 348
     components:
     - type: MetaData
-      name: Порт DAVID
+      name: ���� DAVID
     - type: Transform
       pos: 1.5,0.5
       parent: 1
   - uid: 446
     components:
     - type: MetaData
-      name: Корма DAVID
+      name: ����� DAVID
     - type: Transform
       pos: 26.5,-19.5
       parent: 1
   - uid: 7449
     components:
     - type: MetaData
-      name: Нос DAVID
+      name: ��� DAVID
     - type: Transform
       pos: -55.5,-9.5
       parent: 1
   - uid: 8442
     components:
     - type: MetaData
-      name: Медицинский отдел
+      name: ����������� �����
     - type: Transform
       pos: -34.5,4.5
       parent: 1
   - uid: 8443
     components:
     - type: MetaData
-      name: Порт DAVID (сбитые координаты)
+      name: ���� DAVID (������ ����������)
     - type: Transform
       pos: -7.5,-15.5
       parent: 1
@@ -20162,49 +20176,49 @@ entities:
       pos: 50.5,7.5
       parent: 1
     - type: FaxMachine
-      name: ГКИ
+      name: ���
   - uid: 5444
     components:
     - type: Transform
       pos: -36.5,-7.5
       parent: 1
     - type: FaxMachine
-      name: Военная полиция
+      name: ������� �������
   - uid: 5490
     components:
     - type: Transform
       pos: 27.5,-2.5
       parent: 1
     - type: FaxMachine
-      name: Брифинг
+      name: �������
   - uid: 6101
     components:
     - type: Transform
       pos: -59.5,8.5
       parent: 1
     - type: FaxMachine
-      name: Мостик
+      name: ������
   - uid: 6226
     components:
     - type: Transform
       pos: -14.5,6.5
       parent: 1
     - type: FaxMachine
-      name: Медицинский
+      name: �����������
   - uid: 6279
     components:
     - type: Transform
       pos: -24.5,-4.5
       parent: 1
     - type: FaxMachine
-      name: Квартирмейстер
+      name: ��������������
   - uid: 8032
     components:
     - type: Transform
       pos: -54.5,-2.5
       parent: 1
     - type: FaxMachine
-      name: Сержантский советник
+      name: ����������� ��������
 - proto: CMFaxPress
   entities:
   - uid: 5597
@@ -20213,7 +20227,7 @@ entities:
       pos: 30.5,-14.5
       parent: 1
     - type: FaxMachine
-      name: Корреспондент
+      name: �������������
 - proto: CMFilingCabinetChest
   entities:
   - uid: 6275
@@ -20390,8 +20404,8 @@ entities:
   - uid: 5449
     components:
     - type: MetaData
-      desc: Alanero за помощь в строительстве Валькирии и Давида. Без него я бы точно не справился. Alanero, ты крутой!
-      name: Благодарность
+      desc: Alanero �� ������ � ������������� ��������� � ������. ��� ���� � �� ����� �� ���������. Alanero, �� ������!
+      name: �������������
     - type: Transform
       pos: 58.485405,24.806973
       parent: 1
@@ -23185,7 +23199,7 @@ entities:
   - uid: 8013
     components:
     - type: MetaData
-      name: шкафчик старшего сержантского советника
+      name: ������� �������� ������������ ���������
     - type: Transform
       pos: -55.5,-4.5
       parent: 1
@@ -24543,7 +24557,7 @@ entities:
       pos: 49.46859,11.631552
       parent: 1
     - type: Paper
-      content: Я определённо ненавижу эту работу...
+      content: � ���������� �������� ��� ������...
 - proto: CMPaperBin10
   entities:
   - uid: 6486
@@ -37509,18 +37523,18 @@ entities:
       parent: 1
     - type: NavMapBeacon
       color: '#D04648FF'
-      text: Альфа
+      text: �����
     - type: WarpPoint
-      location: Отряд Альфа
+      location: ����� �����
   - uid: 8214
     components:
     - type: Transform
       pos: 26.5,-7.5
       parent: 1
     - type: NavMapBeacon
-      text: Комната брифингов
+      text: ������� ���������
     - type: WarpPoint
-      location: Комната брифингов
+      location: ������� ���������
   - uid: 8215
     components:
     - type: Transform
@@ -37528,27 +37542,27 @@ entities:
       parent: 1
     - type: NavMapBeacon
       color: '#D27D2CFF'
-      text: Браво
+      text: �����
     - type: WarpPoint
-      location: Отряд Браво
+      location: ����� �����
   - uid: 8267
     components:
     - type: Transform
       pos: 20.5,5.5
       parent: 1
     - type: NavMapBeacon
-      text: Туалеты
+      text: �������
     - type: WarpPoint
-      location: Туалеты
+      location: �������
   - uid: 8268
     components:
     - type: Transform
       pos: 18.5,14.5
       parent: 1
     - type: NavMapBeacon
-      text: Бассейн
+      text: �������
     - type: WarpPoint
-      location: Бассейн
+      location: �������
 - proto: DefaultStationBeaconBridge
   entities:
   - uid: 7809
@@ -54283,7 +54297,7 @@ entities:
   - uid: 7448
     components:
     - type: MetaData
-      desc: ВНИМАНИЕ!!! СНИМАЕТ БЛОКИРОВКУ У КОМНАТЫ САМОУНИЧТОЖЕНИЯ! ВНИМАНИЕ!!!
+      desc: ��������!!! ������� ���������� � ������� ���������������! ��������!!!
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -61.74494,2.5457208
@@ -54593,64 +54607,64 @@ entities:
   - uid: 5341
     components:
     - type: MetaData
-      desc: Не называйте его вафельным, говорите полотенце в клеточку.
-      name: Вафельное полотенце
+      desc: �� ��������� ��� ���������, �������� ��������� � ��������.
+      name: ��������� ���������
     - type: Transform
       parent: 5340
     - type: InsideEntityStorage
   - uid: 5344
     components:
     - type: MetaData
-      desc: Не называйте его вафельным, говорите полотенце в клеточку.
-      name: Вафельное полотенце
+      desc: �� ��������� ��� ���������, �������� ��������� � ��������.
+      name: ��������� ���������
     - type: Transform
       parent: 5343
     - type: InsideEntityStorage
   - uid: 5348
     components:
     - type: MetaData
-      desc: Не называйте его вафельным, говорите полотенце в клеточку.
-      name: Вафельное полотенце
+      desc: �� ��������� ��� ���������, �������� ��������� � ��������.
+      name: ��������� ���������
     - type: Transform
       parent: 5346
     - type: InsideEntityStorage
   - uid: 5351
     components:
     - type: MetaData
-      desc: Не называйте его вафельным, говорите полотенце в клеточку.
-      name: Вафельное полотенце
+      desc: �� ��������� ��� ���������, �������� ��������� � ��������.
+      name: ��������� ���������
     - type: Transform
       parent: 5350
     - type: InsideEntityStorage
   - uid: 5354
     components:
     - type: MetaData
-      desc: Не называйте его вафельным, говорите полотенце в клеточку.
-      name: Вафельное полотенце
+      desc: �� ��������� ��� ���������, �������� ��������� � ��������.
+      name: ��������� ���������
     - type: Transform
       parent: 5353
     - type: InsideEntityStorage
   - uid: 5357
     components:
     - type: MetaData
-      desc: Не называйте его вафельным, говорите полотенце в клеточку.
-      name: Вафельное полотенце
+      desc: �� ��������� ��� ���������, �������� ��������� � ��������.
+      name: ��������� ���������
     - type: Transform
       parent: 5356
     - type: InsideEntityStorage
   - uid: 5360
     components:
     - type: MetaData
-      desc: Не называйте его вафельным, говорите полотенце в клеточку.
-      name: Вафельное полотенце
+      desc: �� ��������� ��� ���������, �������� ��������� � ��������.
+      name: ��������� ���������
     - type: Transform
       parent: 5359
     - type: InsideEntityStorage
   - uid: 5364
     components:
     - type: MetaData
-      desc: Не называйте его вафельным, говорите полотенце в клеточку.
-      name: Вафельное полотенце
+      desc: �� ��������� ��� ���������, �������� ��������� � ��������.
+      name: ��������� ���������
     - type: Transform
       parent: 5362
     - type: InsideEntityStorage
@@ -55832,32 +55846,32 @@ entities:
       desc: >2
          	
 
-        У меня здесь нет расовой дискриминации. Мне насрать на черножопых, на жидов, на макаронников и на латиносов. Вы все здесь — одинаково никчёмны.
-      name: Фонд цитат "ССС"
+        � ���� ����� ��� ������� �������������. ��� ������� �� ����������, �� �����, �� ������������ � �� ���������. �� ��� ����� � ��������� ��������.
+      name: ���� ����� "���"
     - type: Transform
       pos: -54.5,-12.5
       parent: 1
   - uid: 1587
     components:
     - type: MetaData
-      desc: 'Морским пехотинцам запрещено умирать без разрешения! '
-      name: Фонд цитат "ССС"
+      desc: '������� ���������� ��������� ������� ��� ����������! '
+      name: ���� ����� "���"
     - type: Transform
       pos: -56.5,-12.5
       parent: 1
   - uid: 1588
     components:
     - type: MetaData
-      desc: 'Если твой инстинкт слаб и заглушен, ты начнешь колебаться в момент истины. Тогда ты не убьёшь… тогда ты станешь мёртвым морским пехотинцем и окажешься по ноздри в говне. '
-      name: Фонд цитат "ССС"
+      desc: '���� ���� �������� ���� � ��������, �� ������� ���������� � ������ ������. ����� �� �� ������� ����� �� ������� ������ ������� ���������� � ��������� �� ������ � �����. '
+      name: ���� ����� "���"
     - type: Transform
       pos: -55.5,-12.5
       parent: 1
   - uid: 8517
     components:
     - type: MetaData
-      desc: 'Буду гонять вас на тренировках, пока из жопы кефир не польётся! '
-      name: Фонд цитат "ССС"
+      desc: '���� ������ ��� �� �����������, ���� �� ���� ����� �� ��������! '
+      name: ���� ����� "���"
     - type: Transform
       pos: -53.5,-12.5
       parent: 1
@@ -55879,6 +55893,8 @@ entities:
       parent: 1
   - uid: 5119
     components:
+    - type: MetaData
+      name: liaison privacy shutters
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -37.5,6.5
@@ -55897,6 +55913,8 @@ entities:
       parent: 1
   - uid: 8520
     components:
+    - type: MetaData
+      name: liaison privacy shutters
     - type: Transform
       pos: -50.5,-1.5
       parent: 1
@@ -56024,11 +56042,15 @@ entities:
   entities:
   - uid: 5317
     components:
+    - type: MetaData
+      name: chemistry shutters
     - type: Transform
       pos: -24.5,6.5
       parent: 1
   - uid: 5318
     components:
+    - type: MetaData
+      name: chemistry shutters
     - type: Transform
       pos: -17.5,6.5
       parent: 1
@@ -56048,6 +56070,8 @@ entities:
   entities:
   - uid: 6082
     components:
+    - type: MetaData
+      name: chemistry shutters
     - type: Transform
       pos: -60.5,1.5
       parent: 1
@@ -56055,6 +56079,8 @@ entities:
   entities:
   - uid: 4249
     components:
+    - type: MetaData
+      name: chemistry shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 15.5,13.5
@@ -56081,21 +56107,29 @@ entities:
   entities:
   - uid: 385
     components:
+    - type: MetaData
+      name: chemistry shutters
     - type: Transform
       pos: 22.5,2.5
       parent: 1
   - uid: 387
     components:
+    - type: MetaData
+      name: chemistry shutters
     - type: Transform
       pos: -50.5,2.5
       parent: 1
   - uid: 8133
     components:
+    - type: MetaData
+      name: chemistry shutters
     - type: Transform
       pos: 38.5,2.5
       parent: 1
   - uid: 8276
     components:
+    - type: MetaData
+      name: chemistry shutters
     - type: Transform
       pos: -14.5,2.5
       parent: 1
@@ -56103,6 +56137,8 @@ entities:
   entities:
   - uid: 5365
     components:
+    - type: MetaData
+      name: chemistry shutters
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 13.5,10.5
@@ -56624,7 +56660,7 @@ entities:
   - uid: 8007
     components:
     - type: MetaData
-      desc: Мишень для стрельбы. На ней изображён VIT. Вы знаете, что он виновен во всех новых картах. Нравятся ли они вам или нет, теперь перед вами ГКИ в виде мишени, пока я жду апстрима и добавления ксено мишени от нашего величайшего кодера. К слову, ради обновы давида я снёс пасхалку добрейшего Alanero. С его согласия! Конечно, конечно, конечно....
+      desc: ������ ��� ��������. �� ��� �������� VIT. �� ������, ��� �� ������� �� ���� ����� ������. �������� �� ��� ��� ��� ���, ������ ����� ���� ��� � ���� ������, ���� � ��� �������� � ���������� ����� ������ �� ������ ����������� ������. � �����, ���� ������ ������ � ��� �������� ���������� Alanero. � ��� ��������! �������, �������, �������....
     - type: Transform
       pos: -59.5,-10.5
       parent: 1
@@ -56721,8 +56757,8 @@ entities:
   - uid: 8416
     components:
     - type: MetaData
-      desc: Фигурка, изображающая пехотинца в экипировке.
-      name: фигурка пехотинца
+      desc: �������, ������������ ��������� � ����������.
+      name: ������� ���������
     - type: Transform
       pos: -50.69713,-15.278331
       parent: 1
@@ -56886,7 +56922,7 @@ entities:
   - uid: 355
     components:
     - type: MetaData
-      name: Пилот нормандии
+      name: ����� ���������
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 14.5,-13.5
@@ -56894,7 +56930,7 @@ entities:
   - uid: 362
     components:
     - type: MetaData
-      name: Столовая
+      name: ��������
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 26.5,-7.5
@@ -56902,7 +56938,7 @@ entities:
   - uid: 1741
     components:
     - type: MetaData
-      name: Десантный корабль DAVID
+      name: ��������� ������� DAVID
     - type: Transform
       pos: 0.5,0.5
       parent: 1
@@ -56973,16 +57009,16 @@ entities:
   - uid: 5131
     components:
     - type: MetaData
-      desc: Осторожно! Ведутся работы!
-      name: знак "работы"
+      desc: ���������! ������� ������!
+      name: ���� "������"
     - type: Transform
       pos: -43.374992,-2.3439374
       parent: 1
   - uid: 8494
     components:
     - type: MetaData
-      desc: Осторожно! Ведутся работы!
-      name: знак "работы"
+      desc: ���������! ������� ������!
+      name: ���� "������"
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -43.998184,-3.162033
@@ -56990,16 +57026,16 @@ entities:
   - uid: 8502
     components:
     - type: MetaData
-      desc: Осторожно! Ведутся работы!
-      name: знак "работы"
+      desc: ���������! ������� ������!
+      name: ���� "������"
     - type: Transform
       pos: -45.49343,-9.359264
       parent: 1
   - uid: 8503
     components:
     - type: MetaData
-      desc: Осторожно! Ведутся работы!
-      name: знак "работы"
+      desc: ���������! ������� ������!
+      name: ���� "������"
     - type: Transform
       pos: -40.395706,-15.3715725
       parent: 1
