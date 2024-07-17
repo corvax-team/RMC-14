@@ -16896,18 +16896,6 @@ entities:
     - type: Transform
       pos: -23.351307,10.710818
       parent: 1
-- proto: CMBeltSecurityFilled
-  entities:
-  - uid: 8321
-    components:
-    - type: Transform
-      parent: 8320
-    - type: InsideEntityStorage
-  - uid: 8333
-    components:
-    - type: Transform
-      parent: 8331
-    - type: InsideEntityStorage
 - proto: CMBeltUtilityFilled
   entities:
   - uid: 5395
@@ -20657,13 +20645,6 @@ entities:
     - type: Transform
       pos: -19.478636,15.5048275
       parent: 1
-- proto: CMHeadsetLeader
-  entities:
-  - uid: 8014
-    components:
-    - type: Transform
-      parent: 8013
-    - type: InsideEntityStorage
 - proto: CMHeadsetReporter
   entities:
   - uid: 5592

@@ -16,6 +16,7 @@
   - Xeno
   - Zombie
   - Revolutionary
+  - RMCXeno
 
 - type: npcFaction
   id: Mouse
@@ -42,6 +43,7 @@
   - PetsNT
   - Zombie
   - Revolutionary
+  - UNMC
 
 - type: npcFaction
   id: SimpleNeutral
