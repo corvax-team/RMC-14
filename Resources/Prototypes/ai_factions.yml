@@ -16,7 +16,7 @@
   - Xeno
   - Zombie
   - Revolutionary
-  - RMCXeno
+  - RMCXeno # CCM
 
 - type: npcFaction
   id: Mouse
@@ -43,7 +43,7 @@
   - PetsNT
   - Zombie
   - Revolutionary
-  - UNMC
+  - UNMC # CCM
 
 - type: npcFaction
   id: SimpleNeutral
