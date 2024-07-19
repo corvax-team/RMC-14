@@ -2,7 +2,7 @@
   id: UNMC
   hostile:
   - RMCXeno
-  - SimpleHostile # CCM
+  - SimpleHostile
 
 - type: npcFaction
   id: RMCXeno
