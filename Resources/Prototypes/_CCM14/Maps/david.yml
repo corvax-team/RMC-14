@@ -49,7 +49,7 @@
             # Marines
             CMSquadLeader: [2, 2]
 #            CMFireteamLeader: [4, 8]
-#            CMSmartGunOperator: [8, 16]
+            CMSmartGunOperator: [2, 2]
             CMWeaponsSpecialist: [2, 2]
             CMCombatTech: [2, 2]
             CMHospitalCorpsman: [2, 2]
