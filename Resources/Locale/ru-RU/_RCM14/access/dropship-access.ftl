@@ -1,1 +1,1 @@
-cm-access-dropship = Транспортер
+cm-access-dropship = Транспортёр

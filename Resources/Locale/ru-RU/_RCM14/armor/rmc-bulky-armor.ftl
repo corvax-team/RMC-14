@@ -1,2 +1,2 @@
-﻿rmc-bulky-armor-target-unable = {$target} Недостаёт силы носить её {$armor}!
-rmc-bulky-armor-user-unable = Нехватает силушек что-б носить {$armor}!
+﻿rmc-bulky-armor-target-unable = Существо "{$target}", слишком слабо, чтобы носить {$armor}!
+rmc-bulky-armor-user-unable = Вы слишком слабы, чтобы носить {$armor}!
