@@ -4,8 +4,8 @@ cm-xeno-not-enough-plasma = У вас недостаточно плазмы!
 # Construction
 cm-xeno-choose-resin-structure = Выберите структуру из смолы
 cm-xeno-order-construction = Построить структуру
-cm-xeno-too-close-to-other-node = Это слишком близко к объекту "($target)"!
-cm-xeno-requires-more-plasma = Для объекта "($construction)" требуется ещё { $plasma } плазмы.
+cm-xeno-too-close-to-other-node = Это слишком близко к объекту "{$target}"!
+cm-xeno-requires-more-plasma = Для объекта "{$construction}" требуется ещё { $plasma } плазмы.
 cm-xeno-construction-plasma-left = Здесь находится сооружение { $construction }. Оно требует ещё [color=cyan]{ $plasma }[/color] плазмы.
 cm-xeno-cant-reach-there = Вы не можете строить сооружения так далеко!
 cm-xeno-cant-build-in-self = Вы не можете строить сооружения так близко!
@@ -40,8 +40,8 @@ cm-xeno-leap-cancelled = Вы больше не готовитесь к прыж
 cm-xeno-weeds-source-already-here = Здесь уже есть смоляной узел!
 
 # Corrosive acid
-cm-xeno-acid-not-corrodible = Объект "($target)" не поддаётся коррозийной кислоте!
-cm-xeno-acid-already-corroding = На объекте "($target)" уже есть коррозийная кислота!
+cm-xeno-acid-not-corrodible = Объект "{$target}" не поддаётся коррозийной кислоте!
+cm-xeno-acid-already-corroding = На объекте "{$target}" уже есть коррозийная кислота!
 
 # Paralyzing Slash
 cm-xeno-paralyzing-slash-activate = Ваш следующий удар введёт нейротоксин!
