@@ -1,0 +1,5 @@
+- type: entity
+  parent: CCMBaseFaxMachineCommander
+  id: CCMFaxMachineCommander
+  name: commander long range fax machine
+  suffix: NukeCodes
