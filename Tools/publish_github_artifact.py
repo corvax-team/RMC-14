@@ -4,7 +4,7 @@ import requests
 import os
 import subprocess
 
-GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
+GITHUB_TOKEN = os.environ["DEPLOY_ORG_TOKEN"]
 PUBLISH_TOKEN = os.environ["PUBLISH_TOKEN"]
 ARTIFACT_ID = os.environ["ARTIFACT_ID"]
 GITHUB_REPOSITORY = os.environ["GITHUB_REPOSITORY"]
