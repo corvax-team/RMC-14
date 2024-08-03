@@ -19433,7 +19433,7 @@ entities:
     - type: Transform
       parent: 5838
     - type: InsideEntityStorage
-- proto: CMCoatCorrespondent
+- proto: RMCCoatCorrespondent
   entities:
   - uid: 5586
     components:
@@ -21155,7 +21155,7 @@ entities:
     - type: Transform
       parent: 5838
     - type: InsideEntityStorage
-- proto: CMJumpsuitCorrespondent
+- proto: RMCJumpsuitCorrespondent
   entities:
   - uid: 5588
     components:
