@@ -56104,14 +56104,6 @@ entities:
     - type: Transform
       pos: 47.5,5.5
       parent: 1
-- proto: RMCCrashLandBarrier
-  entities:
-  - uid: 1520
-    components:
-    - type: Transform
-      anchored: False
-      pos: -86.5,14.5
-      parent: 1
   - uid: 1521
     components:
     - type: Transform
