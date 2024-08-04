@@ -1,0 +1,3 @@
+ent-StandardUNMCWarship = { ent-['BaseStation', 'BaseStationNews', 'BaseStationCargo', 'BaseStationJobsSpawning', 'BaseStationRecords', 'BaseStationShuttles', 'BaseStationCentcomm', 'BaseStationEvacuation', 'BaseStationAlertLevels', 'BaseStationSiliconLawCrewsimov', 'BaseStationAllEventsEligible', 'BaseStationNanotrasen'] }
+
+  .desc = { ent-['BaseStation', 'BaseStationNews', 'BaseStationCargo', 'BaseStationJobsSpawning', 'BaseStationRecords', 'BaseStationShuttles', 'BaseStationCentcomm', 'BaseStationEvacuation', 'BaseStationAlertLevels', 'BaseStationSiliconLawCrewsimov', 'BaseStationAllEventsEligible', 'BaseStationNanotrasen'].desc }

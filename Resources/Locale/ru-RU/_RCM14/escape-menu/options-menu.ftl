@@ -1,5 +1,4 @@
 ui-options-header-cm = Колониальные Морпехи 14
-
 ui-options-function-cm-activate-attachable-barrel = Активировать крепление ствола
 ui-options-function-cm-activate-attachable-rail = Активировать крепление рельса
 ui-options-function-cm-activate-attachable-stock = Активировать крепление приклада

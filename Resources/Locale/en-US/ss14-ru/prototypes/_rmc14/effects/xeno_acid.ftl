@@ -1,0 +1,10 @@
+ent-XenoAcidNormal = corrosive acid
+    .desc = Burbling corrosive stuff. I wouldn't want to touch it.
+ent-XenoAcidWeak = weak corrosive acid
+    .desc = { ent-XenoAcidNormal.desc }
+ent-XenoAcidStrong = strong corrosive acid
+    .desc = { ent-XenoAcidNormal.desc }
+ent-XenoAcidSprayWeak = weak splatter
+    .desc = It burns! It burns, but not as much!
+ent-XenoAcidSprayStrong = strong splatter
+    .desc = It burns! It burns!

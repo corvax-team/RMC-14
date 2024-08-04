@@ -1,0 +1,16 @@
+ent-CMMarinePreparedMealBase = { ent-CMFoodBase }
+    .desc = { ent-CMFoodBase.desc }
+ent-CMMarinePreparedMealCornbread = Marine prepared meal (cornbread)
+    .desc = A tray of standard Marine food. Stale cornbread, tomato paste and some green goop fill this tray.
+ent-CMMarinePreparedMealChicken = Marine prepared meal (chicken)
+    .desc = A tray of standard Marine food. Moist chicken, dry rice and a mildly depressed piece of broccoli fill this tray.
+ent-CMMarinePreparedMealPasta = Marine prepared meal (pasta)
+    .desc = A tray of standard Marine food. Overcooked spaghetti, waterlogged carrots and two french fries fill this tray.
+ent-CMMarinePreparedMealPizza = Marine prepared meal (pizza)
+    .desc = A tray of standard Marine food. Cold pizza, wet green beans and a shitty egg fill this tray. Get something other than pizza, lardass.
+ent-CMMarinePreparedMealPork = Marine prepared meal (pork)
+    .desc = A tray of standard Marine food. Partially raw pork, goopy corn and some watery mashed potatoes fill this tray.
+ent-CMMarinePreparedMealTofu = Marine prepared meal (tofu)
+    .desc = The UNMC doesn't serve tofu you grass sucking hippie. The flag signifies your defeat.
+ent-RMCTray_empty = empty tray
+    .desc = Finished with its tour of duty.

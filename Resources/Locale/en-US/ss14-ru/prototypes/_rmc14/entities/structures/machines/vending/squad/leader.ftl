@@ -1,0 +1,12 @@
+ent-ColMarTechSLGear = ColMarTech squad leader gear rack
+    .desc = An automated gear rack for Squad Leaders.
+ent-ColMarTechSLEquipment = ColMarTech squad leader equipment rack
+    .desc = An automated rack hooked up to a colossal storage of Squad Leader standard-issue equipment.
+ent-RMCVendorBundleCrewLeader = essential SL kit
+    .desc = { ent-CMVendorBundleRiflemanApparel.desc }
+ent-RMCKitRifleM4SPR = M4SPR marksman kit
+    .desc = { ent-RMCKitBase.desc }
+ent-RMCKitCM54C = M54C rifle kit
+    .desc = { ent-RMCKitBase.desc }
+ent-RMCKitEngineering = engineering supply kit
+    .desc = { ent-RMCKitBase.desc }

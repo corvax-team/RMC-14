@@ -1,0 +1,15 @@
+ent-RMCPodDoor = podlock
+    .desc = That looks like it doesn't open easily. Maybe look for a button or use a breaching charge?
+ent-RMCPodDoorAlmayer = { ent-RMCPodDoor }
+    .desc = { ent-RMCPodDoor.desc }
+ent-RMCPodDoorAlmayerOpen = { ent-RMCPodDoorAlmayer }
+    .suffix = Open
+    .desc = { ent-RMCPodDoorAlmayer.desc }
+ent-RMCPodDoorAlmayerBlack = { ent-RMCPodDoor }
+    .desc = { ent-RMCPodDoor.desc }
+ent-RMCPodDoorAlmayerWhite = { ent-RMCPodDoor }
+    .desc = { ent-RMCPodDoor.desc }
+ent-RMCPodDoorAI = { ent-RMCPodDoor }
+    .desc = { ent-RMCPodDoor.desc }
+ent-RMCPodDoorAIWhite = { ent-RMCPodDoor }
+    .desc = { ent-RMCPodDoor.desc }

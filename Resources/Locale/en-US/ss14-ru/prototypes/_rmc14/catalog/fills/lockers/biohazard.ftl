@@ -1,0 +1,15 @@
+ent-CMClosetBioFilled = { ent-CMClosetBio }
+    .suffix = Filled, Generic
+    .desc = { ent-CMClosetBio.desc }
+ent-CMClosetBioVirologyFilled = { ent-CMClosetBioVirology }
+    .suffix = Filled, Virology
+    .desc = { ent-CMClosetBioVirology.desc }
+ent-CMClosetBioSecurityFilled = { ent-CMClosetBioSecurity }
+    .suffix = Filled, Security
+    .desc = { ent-CMClosetBioSecurity.desc }
+ent-CMClosetBioJanitorFilled = { ent-CMClosetBioJanitor }
+    .suffix = Filled, Janitor
+    .desc = { ent-CMClosetBioJanitor.desc }
+ent-CMClosetBioScientistFilled = { ent-CMClosetBioScientist }
+    .suffix = Filled, Science
+    .desc = { ent-CMClosetBioScientist.desc }

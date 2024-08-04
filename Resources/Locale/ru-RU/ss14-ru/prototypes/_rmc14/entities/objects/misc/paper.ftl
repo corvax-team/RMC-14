@@ -1,0 +1,14 @@
+ent-CMBasePaper = paper
+    .desc = A piece of white paper.
+ent-CMBasePaperFaxable = { ent-CMBasePaper }
+    .desc = { ent-CMBasePaper.desc }
+ent-CMPaper = paper
+    .desc = { ent-CMBasePaperFaxable.desc }
+ent-CMPaperWritten = { ent-CMPaper }
+    .desc = { ent-CMPaper.desc }
+ent-CMPaperJudgement = judgement
+    .desc = { ent-CMPaperWritten.desc }
+ent-CMPaperAlmayerStorage = almayer emergency storage note
+    .desc = { ent-CMPaperWritten.desc }
+ent-RMCPaperRequisitionInvoice = requisition invoice
+    .desc = A single unit of bureaucracy awaiting for approval.

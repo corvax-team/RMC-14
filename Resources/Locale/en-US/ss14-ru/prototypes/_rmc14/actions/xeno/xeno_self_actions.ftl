@@ -1,0 +1,26 @@
+ent-ActionXenoRest = Rest
+    .desc = Lie down to regenerate health and plasma more quickly while on weeds.
+ent-CMGuidebookActionXenoRest = Rest
+    .desc = Lie down to regenerate health and plasma more quickly while on weeds.
+ent-ActionXenoWatch = Watch Xenonid
+    .desc = { ent-ActionXenoBase.desc }
+ent-ActionXenoPheromones = Emit Pheromones (35)
+    .desc = Gives a buff to nearby xenonids.
+ent-ActionXenoHide = Hide
+    .desc = Hide under tables and other objects.
+ent-ActionXenoToggleCrest = Toggle Crest Defense
+    .desc = Increases your resistance to projectile damage but slows you down.
+ent-ActionXenoFortify = Fortify
+    .desc = Become immobile and extremely resistant to projectile damage.
+ent-ActionXenoResinWalker = Resin Walker (50)
+    .desc = Run faster on weeds.
+ent-ActionXenoZoom = Toggle Long-Range Sight
+    .desc = { ent-ActionXenoBase.desc }
+ent-ActionXenoWordQueen = Word of the Queen (50)
+    .desc = Sends a message to all members of your hive.
+ent-ActionXenoGrowOvipositor = Grow Ovipositor (700)
+    .desc = Become immobile and start laying eggs which will produce parasites. Has a 5 minute cooldown. [color=red]You must be in ovipositor mode for other xenonids to gain evolution points after round-start![/color]
+ent-ActionXenoTurnInvisible = Turn Invisible (20)
+    .desc = Become partially invisible for a short time or until you attack.
+ent-ActionXenoDefensiveShield = Defensive Shield (50)
+    .desc = Gain a temporary shield that blocks the next 200 damage (And is immune to explosive damage) lasting 7 seconds. Any damage that impacts the shield is reduced by 10 before processing.

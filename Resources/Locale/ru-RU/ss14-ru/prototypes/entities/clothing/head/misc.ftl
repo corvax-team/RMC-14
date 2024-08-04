@@ -25,6 +25,12 @@ ent-ClothingHeadHatFancyCrown = причудливая корона
 ent-ClothingHeadHatCatEars = кошачьи ушки
     .desc = НЯ!
     .suffix = НЕ МАППИТЬ!
+ent-ClothingHeadHatCatEarsValid = { ent-['ClothingHeadHatCatEars', 'BaseToggleClothing'] }
+
+  .suffix = Valid, DO NOT MAP
+  .desc = { ent-['ClothingHeadHatCatEars', 'BaseToggleClothing'].desc }
+ent-ActionBecomeValid = Become Valid
+    .desc = *notices your killsign* owo whats this
 ent-ClothingHeadHatDogEars = собачьи ушки
     .desc = Только для хороших мальчиков.
     .suffix = НЕ МАППИТЬ!

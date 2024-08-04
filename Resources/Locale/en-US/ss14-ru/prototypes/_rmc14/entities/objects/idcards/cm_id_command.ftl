@@ -1,0 +1,9 @@
+ent-CMIDCardStaffOfficer = staff officer ID card
+    .desc = { ent-CMIDCardSilver.desc }
+ent-CMIDCardCommandingOfficer = commanding officer ID card
+    .desc = { ent-CMIDCardGold.desc }
+ent-CMIDCardExecutiveOfficer = executive officer ID card
+    .desc = { ent-CMIDCardSilver.desc }
+ent-CMIDCardHighCommand = high command ID card
+    .desc = A gold-plated holo-badge reserved for those exclusively above your rank.
+    .suffix = Admin

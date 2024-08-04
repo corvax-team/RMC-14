@@ -1,0 +1,21 @@
+ent-CMXenoBase = { "" }
+    .desc = { "" }
+ent-CMXenoPrying = { "" }
+    .desc = { "" }
+ent-CMXenoPuller = { "" }
+    .desc = { "" }
+ent-CMXenoMelee = { "" }
+    .desc = { "" }
+ent-CMXenoLarge = { "" }
+    .desc = { "" }
+ent-CMXenoUndeveloped = { ent-CMXenoBase }
+    .desc = { ent-CMXenoBase.desc }
+ent-CMXenoAI = { ent-CMXenoBase }
+    .desc = { ent-CMXenoBase.desc }
+ent-CMXenoDeveloped = { ent-['CMXenoBase', 'CMXenoPrying', 'CMXenoPuller', 'CMXenoMelee', 'CMXenoAI'] }
+
+  .desc = { ent-['CMXenoBase', 'CMXenoPrying', 'CMXenoPuller', 'CMXenoMelee', 'CMXenoAI'].desc }
+ent-CMXenoTail = { "" }
+    .desc = { "" }
+ent-CMXenoFlammable = { "" }
+    .desc = { "" }

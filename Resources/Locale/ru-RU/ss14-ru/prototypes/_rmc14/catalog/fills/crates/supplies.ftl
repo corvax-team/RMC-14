@@ -1,0 +1,10 @@
+ent-CMCrateSupplyInternals = oxygen internals crate (x3 masks, x3 tanks)
+    .desc = { ent-CMCrateSupply.desc }
+ent-CMCrateSupplyEvacuation = emergency equipment (x2 toolbox, x2 hazard vest, x5 oxygen tank, x5 masks)
+    .desc = { ent-CMCrateSupply.desc }
+ent-CMCrateSuppliesBoxes = cardboard sheets (x50)
+    .desc = { ent-CMCrateSupply.desc }
+ent-CMCrateSupplyJanitor = assorted janitorial supplies
+    .desc = { ent-CMCrateSupply.desc }
+ent-CMCrateSuppliesCrayons = boxes of crayons
+    .desc = { ent-CMCrateSupply.desc }

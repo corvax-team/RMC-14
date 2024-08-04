@@ -1,0 +1,12 @@
+ent-CMFlare = flare
+    .desc = A red Marine issued flare. There are instructions on the side, it reads 'pull cord, make light'.
+ent-CMBoxPackFlareBase = box of M94 flare packs
+    .desc = A box of M94 marking flare packs, to brighten up your day.
+ent-CMBoxPackFlare = { ent-CMBoxPackFlareBase }
+    .suffix = Filled
+    .desc = { ent-CMBoxPackFlareBase.desc }
+ent-CMPackFlareBase = M94 marking flare pack
+    .desc = A packet of eight M94 Marking Flares. Carried by Marine soldiers to light dark areas that cannot be reached with the usual TNR Shoulder Lamp.
+ent-CMPackFlare = { ent-CMPackFlareBase }
+    .suffix = Filled
+    .desc = { ent-CMPackFlareBase.desc }

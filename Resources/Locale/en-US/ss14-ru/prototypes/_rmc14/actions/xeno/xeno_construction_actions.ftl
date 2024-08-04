@@ -1,0 +1,10 @@
+ent-CMGuidebookActionXenoBase = { "" }
+    .desc = { "" }
+ent-ActionXenoPlantWeeds = Plant Weeds (75)
+    .desc = Plant a weed node that will spread more weeds.
+ent-ActionXenoChooseStructure = Choose Resin Structure
+    .desc = Choose a structure to secrete with the 'Secrete Resin' action.
+ent-ActionXenoSecreteStructure = Secrete Resin
+    .desc = Builds the structure chosen with the 'Choose Resin Structure' action.
+ent-ActionXenoOrderConstruction = Order Construction
+    .desc = Starts construction of an important hive structure.

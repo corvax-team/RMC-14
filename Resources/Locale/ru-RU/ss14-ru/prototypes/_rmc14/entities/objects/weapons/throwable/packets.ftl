@@ -1,0 +1,12 @@
+ent-CMPacketBase = packet
+    .desc = { ent-BaseStorageItem.desc }
+ent-CMPacketGrenadeHighExplosive = HEDP grenade packet
+    .desc = It contains three HEDP high explosive grenades.
+ent-CMPacketGrenadeHighExplosiveFilled = HEDP grenade packet
+    .suffix = Filled
+    .desc = { ent-CMPacketGrenadeHighExplosive.desc }
+ent-CMPacketGrenadeFrag = HEFA grenade packet
+    .desc = It contains three HEFA grenades. Don't tell the HEFA order.
+ent-CMPacketGrenadeFragFilled = HEFA grenade packet
+    .suffix = Filled
+    .desc = { ent-CMPacketGrenadeFrag.desc }

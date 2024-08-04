@@ -1,0 +1,16 @@
+ent-CMApcBase = area power controller
+    .desc = { ent-BaseAPC.desc }
+ent-CMApcFrame = { ent-APCFrame }
+    .desc = { ent-APCFrame.desc }
+ent-CMApcConstructed = { ent-CMApcBase }
+    .suffix = APC, Open
+    .desc = { ent-CMApcBase.desc }
+ent-CMApcLowCapacity = { ent-CMApcBase }
+    .suffix = APC, Small powercell, 50kW
+    .desc = { ent-CMApcBase.desc }
+ent-CMApcMediumCapacity = { ent-CMApcBase }
+    .suffix = APC, Medium powercell, 100kW
+    .desc = { ent-CMApcBase.desc }
+ent-CMApcHighCapacity = { ent-CMApcBase }
+    .suffix = APC, High powercell, 150kW
+    .desc = { ent-CMApcBase.desc }

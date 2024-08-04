@@ -1,0 +1,10 @@
+ent-CMCanteenBase = { ent-DrinkBase }
+    .desc = { ent-DrinkBase.desc }
+ent-CMCanteen = canteen
+    .desc = You take a sip from your trusty Marine canteen...
+ent-CMMetalFlask = metal flask
+    .desc = A metal flask with a decent liquid capacity.
+ent-CMMarineFlask = Marine flask
+    .desc = A metal flask embossed with the Marine logo and probably filled with a slurry of water, motor oil, and medicinal alcohol.
+ent-CMWEYAFlask = We-Ya flask
+    .desc = A metal flask embossed with We-Ya's signature logo that some corporate bootlicker probably ordered to be stocked in USS military vessels' canteen vendors.

@@ -1,0 +1,2 @@
+ent-RMCEffectEmpowerBrown = { "" }
+    .desc = { "" }

@@ -1,0 +1,10 @@
+ent-CMBeakerBase = { ent-BaseBeaker }
+    .desc = { ent-BaseBeaker.desc }
+ent-CMBeaker = beaker
+    .desc = A beaker. Can hold up to 60 units.
+ent-CMBeakerLarge = large beaker
+    .desc = A large beaker. Can hold up to 120 units.
+ent-CMMiniTank = MS-11 Smart Refill Tank
+    .desc = A robust little tank capable of refilling autoinjectors that previously required a nanomed system to refill. Using the wonders of microchips, it automatically sorts the correct chemicals into most single reagent autoinjectors. It is unable to partially fill them however. A valve exists on the top to transfer reagents to another container or to flush it entirely.
+ent-CMPressurizedCanister = pressurized canister
+    .desc = A pressurized container. The inner part of a pressurized reagent canister pouch. Only compatible with its pouch, machinery or a storage tank.

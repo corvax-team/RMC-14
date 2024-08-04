@@ -10,3 +10,6 @@ construction-category-tiles = Плитки
 construction-category-utilities = Утилиты
 construction-category-misc = Разное
 construction-category-clothing = Одежда
+construction-category-favorites = Favorites
+construction-add-favorite-button = Add to favorites
+construction-remove-from-favorite-button = Remove from favorites

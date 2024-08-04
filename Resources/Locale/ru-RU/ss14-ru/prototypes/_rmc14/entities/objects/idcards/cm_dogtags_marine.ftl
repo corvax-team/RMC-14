@@ -1,0 +1,14 @@
+ent-CMDogtagRifleman = Rifleman's dogtags
+    .desc = { ent-CMIDCardStandardDogtag.desc }
+ent-CMDogtagCombatTech = Combat Tech's dogtags
+    .desc = { ent-CMIDCardStandardDogtag.desc }
+ent-CMDogtagFireteamLeader = Fireteam Leader's dogtags
+    .desc = { ent-CMIDCardStandardDogtag.desc }
+ent-CMDogtagHospitalCorpsman = Hospital Corpsman's dogtags
+    .desc = { ent-CMIDCardStandardDogtag.desc }
+ent-CMDogtagSmartGunOperator = Smart Gun Operator's dogtags
+    .desc = { ent-CMIDCardStandardDogtag.desc }
+ent-CMDogtagSquadLeader = Squad Leader's dogtags
+    .desc = { ent-CMIDCardStandardDogtag.desc }
+ent-CMDogtagWeaponsSpecialist = Weapons Specialist's dogtags
+    .desc = { ent-CMIDCardStandardDogtag.desc }
