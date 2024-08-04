@@ -152777,6 +152777,173 @@ entities:
     - type: Transform
       pos: 178.5,-33.5
       parent: 1
+- proto: RMCSpawnerFigurinePatron
+  entities:
+  - uid: 38963
+    components:
+    - type: Transform
+      pos: 43.5,-16.5
+      parent: 1
+  - uid: 38964
+    components:
+    - type: Transform
+      pos: 12.5,-27.5
+      parent: 1
+  - uid: 38965
+    components:
+    - type: Transform
+      pos: 6.5,-28.5
+      parent: 1
+  - uid: 38966
+    components:
+    - type: Transform
+      pos: 24.5,-38.5
+      parent: 1
+  - uid: 38967
+    components:
+    - type: Transform
+      pos: 60.5,-51.5
+      parent: 1
+  - uid: 38968
+    components:
+    - type: Transform
+      pos: 70.5,-71.5
+      parent: 1
+  - uid: 38969
+    components:
+    - type: Transform
+      pos: 86.5,-55.5
+      parent: 1
+  - uid: 38970
+    components:
+    - type: Transform
+      pos: 71.5,-40.5
+      parent: 1
+  - uid: 38971
+    components:
+    - type: Transform
+      pos: 104.5,-46.5
+      parent: 1
+  - uid: 38972
+    components:
+    - type: Transform
+      pos: 117.5,-49.5
+      parent: 1
+  - uid: 38973
+    components:
+    - type: Transform
+      pos: 132.5,-80.5
+      parent: 1
+  - uid: 38974
+    components:
+    - type: Transform
+      pos: 101.5,-95.5
+      parent: 1
+  - uid: 38975
+    components:
+    - type: Transform
+      pos: 80.5,-78.5
+      parent: 1
+  - uid: 38976
+    components:
+    - type: Transform
+      pos: 60.5,-83.5
+      parent: 1
+  - uid: 38977
+    components:
+    - type: Transform
+      pos: 20.5,-85.5
+      parent: 1
+  - uid: 38978
+    components:
+    - type: Transform
+      pos: 46.5,-116.5
+      parent: 1
+  - uid: 38979
+    components:
+    - type: Transform
+      pos: 41.5,-108.5
+      parent: 1
+  - uid: 38980
+    components:
+    - type: Transform
+      pos: 64.5,-116.5
+      parent: 1
+  - uid: 38981
+    components:
+    - type: Transform
+      pos: 67.5,-105.5
+      parent: 1
+  - uid: 38982
+    components:
+    - type: Transform
+      pos: 48.5,-129.5
+      parent: 1
+  - uid: 38983
+    components:
+    - type: Transform
+      pos: 102.5,-160.5
+      parent: 1
+  - uid: 38984
+    components:
+    - type: Transform
+      pos: 109.5,-155.5
+      parent: 1
+  - uid: 38985
+    components:
+    - type: Transform
+      pos: 108.5,-124.5
+      parent: 1
+  - uid: 38986
+    components:
+    - type: Transform
+      pos: 113.5,-105.5
+      parent: 1
+  - uid: 38987
+    components:
+    - type: Transform
+      pos: 119.5,-96.5
+      parent: 1
+  - uid: 38988
+    components:
+    - type: Transform
+      pos: 164.5,-94.5
+      parent: 1
+  - uid: 38989
+    components:
+    - type: Transform
+      pos: 182.5,-44.5
+      parent: 1
+  - uid: 38990
+    components:
+    - type: Transform
+      pos: 164.5,-87.5
+      parent: 1
+  - uid: 38991
+    components:
+    - type: Transform
+      pos: 208.5,-86.5
+      parent: 1
+  - uid: 38992
+    components:
+    - type: Transform
+      pos: 125.5,-196.5
+      parent: 1
+  - uid: 38993
+    components:
+    - type: Transform
+      pos: 96.5,-177.5
+      parent: 1
+  - uid: 38994
+    components:
+    - type: Transform
+      pos: 48.5,-173.5
+      parent: 1
+  - uid: 38995
+    components:
+    - type: Transform
+      pos: 26.5,-163.5
+      parent: 1
 - proto: RMCSpawnerRandomTools
   entities:
   - uid: 38905

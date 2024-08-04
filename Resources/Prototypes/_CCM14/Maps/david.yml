@@ -3,7 +3,7 @@
   mapName: David
   mapPath: /Maps/_CCM14/david.yml
   minPlayers: 0
-  maxPlayers: 40
+  maxPlayers: 100
   maxRandomOffset: 0
   randomRotation: false
   stations:
