@@ -45,12 +45,12 @@ cm-xeno-crippling-strike-activate = Ваш следующий удар введ�
 cm-xeno-crippling-strike-expire = Вы слишком долго ждали, ваш нейротоксин испорчен и не будет введён!
 cm-xeno-crippling-strike-hit = Мы значительно увеличели урон, нанесённый существу и замедлили его!
 # Pheromones
-cm-xeno-choose-pheromones = Выберите феромоны
-cm-pheromones-recovery = Восстановление
-cm-pheromones-warding = Укрепление
-cm-pheromones-frenzy = Буйство
-cm-xeno-pheromones-start = Вы начинаете выпускать феромоны "{ $pheromones }".
-cm-xeno-pheromones-stop = Вы прекращаете выпускать феромоны.
+cm-xeno-choose-pheromones = Choose Pheromones
+cm-pheromones-recovery = Recovery
+cm-pheromones-warding = Warding
+cm-pheromones-frenzy = Frenzy
+cm-xeno-pheromones-start = You start emitting { $pheromones } pheromones
+cm-xeno-pheromones-stop = You stop emitting pheromones
 # Regurgitate
 cm-xeno-none-devoured = Ваш желудок пуст!
 # Rest
@@ -87,3 +87,8 @@ cm-xeno-invisibility-expire = Мы чувствуем, что снова вид�
 # Ovipositor
 cm-xeno-ovipositor-attach = Мы залезаем в яйцеклад.
 cm-xeno-ovipositor-detach = Мы вылезаем из яйцеклада.
+# Defensive Shield
+rmc-xeno-defensive-shield-end = We feel our enhanced shield end!
+rmc-xeno-defensive-shield-resist-end = Our immunity to explosion damage ends!
+rmc-xeno-defensive-shield-activate = { $user } hunkers down and bolsters its defenses!
+rmc-xeno-defensive-shield-activate-self = We hunker down and bolster our defenses!

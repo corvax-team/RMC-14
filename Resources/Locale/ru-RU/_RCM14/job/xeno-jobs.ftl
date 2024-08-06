@@ -39,8 +39,8 @@ CMJobXenoWarrior = Войн
 # TODO CM14
 department-CMXeno = Ксеноморф
 cm-department-Xeno-description = ""
-cm-job-name-selectable-xenomorph = Ксеноморф
-CMXenoSelectableXenomorph = Ксеноморф
+cm-job-name-selectable-xenoid = Ксеноморф
+CMXenoSelectableXeno = Ксеноморф
 cm-job-supervisors-queen = Королеве
 role-timer-xeno-roles = Ксеноморф
 role-timer-xeno-drones = эволюция дронов и дроны

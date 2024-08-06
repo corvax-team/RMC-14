@@ -5,4 +5,4 @@ trait-spanish-desc = испанский
 trait-french-name = Французский акцент
 trait-french-desc = французский
 trait-mobster-name = Мафиозный акцент
-trait-mobster-desc = эй габагул фугеддабутит я иду сюда
+trait-mobster-desc = Э! Свинное рыло, даже не вздумай! Я щас подойду!

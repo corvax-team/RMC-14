@@ -1,3 +1,10 @@
+rmc-xeno-egg-dead-child = This child is dead.
+rmc-xeno-egg-has-child = This one is occupied with a child.
+rmc-xeno-egg-awake-child = { CAPITALIZE($parasite) } doesn't want to go back in!
+rmc-xeno-egg-fail-return = This egg can't hold this child.
+rmc-xeno-egg-return-user = We place the child back into the egg.
+rmc-xeno-egg-return-self = { CAPITALIZE($parasite) } crawls back into the egg.
+rmc-xeno-egg-return = { CAPITALIZE($user) } slides { $parasite } back into the egg.
 cm-xeno-egg-clear = Мы убираем вылупившееся яйцо.
 cm-xeno-egg-not-developed = Яйцо ещё не созрело.
 cm-xeno-egg-failed-must-weeds = Яйцо должно быть посажено на траве.

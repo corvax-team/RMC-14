@@ -11,3 +11,5 @@ CMJobCommandingOfficer = Командир
 cm-job-name-executive-officer = Исполнительный офицер
 cm-job-description-executive-officer = Вы являетесь вторым командиром на борту корабля и следующим в цепочке командования после командира.
 CMJobExecutiveOfficer = Исполнительный офицер
+# Admin only right now.
+cm-job-name-high-command = Высшее командование
