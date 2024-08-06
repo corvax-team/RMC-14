@@ -45,12 +45,20 @@ cm-xeno-crippling-strike-activate = Ваш следующий удар введ�
 cm-xeno-crippling-strike-expire = Вы слишком долго ждали, ваш нейротоксин испорчен и не будет введён!
 cm-xeno-crippling-strike-hit = Мы значительно увеличели урон, нанесённый существу и замедлили его!
 # Pheromones
-cm-xeno-choose-pheromones = Choose Pheromones
-cm-pheromones-recovery = Recovery
-cm-pheromones-warding = Warding
-cm-pheromones-frenzy = Frenzy
-cm-xeno-pheromones-start = You start emitting { $pheromones } pheromones
-cm-xeno-pheromones-stop = You stop emitting pheromones
+rmc-xeno-pheromones-help =
+    Pheromones provide a buff to all Xenos in range at the cost of some stored plasma every second, as follows:
+    
+    Frenzy (Red) - Увеличивают скорость передвижения, урон и шанс сбить маску с особых врагов.
+    
+    Warding (Green) - Когда ваша сестра в критическом состоянии - продлевает её жизнеспособность и уменьшает кровотёк на ксено-траве.
+    
+    Recovery (Blue) - Увеличивают скорость регенерации плазмы и здоровья. Регенерация всё-ещё происходит только на ксено-траве.
+cm-xeno-choose-pheromones = Выбрать феромоны
+cm-pheromones-recovery = Восстанавливающие
+cm-pheromones-warding = Опекающие
+cm-pheromones-frenzy = разздоривающие
+cm-xeno-pheromones-start = Вы начинаете источать { $pheromones } феромоны
+cm-xeno-pheromones-stop = Вы перестаёте источать феромоны
 # Regurgitate
 cm-xeno-none-devoured = Ваш желудок пуст!
 # Rest
@@ -88,7 +96,7 @@ cm-xeno-invisibility-expire = Мы чувствуем, что снова вид�
 cm-xeno-ovipositor-attach = Мы залезаем в яйцеклад.
 cm-xeno-ovipositor-detach = Мы вылезаем из яйцеклада.
 # Defensive Shield
-rmc-xeno-defensive-shield-end = We feel our enhanced shield end!
-rmc-xeno-defensive-shield-resist-end = Our immunity to explosion damage ends!
-rmc-xeno-defensive-shield-activate = { $user } hunkers down and bolsters its defenses!
-rmc-xeno-defensive-shield-activate-self = We hunker down and bolster our defenses!
+rmc-xeno-defensive-shield-end = Мы чувствуем, что наш панцырь вновь ослаб!
+rmc-xeno-defensive-shield-resist-end = Мы чувствуем, что наш панцырь вновь не так хорошо выдерживает взрывы!
+rmc-xeno-defensive-shield-activate = { $user } Затаился и укрепил свой панцырь!
+rmc-xeno-defensive-shield-activate-self = Мы затаились и укрепили свой панцырь!

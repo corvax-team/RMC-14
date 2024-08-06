@@ -1,9 +1,7 @@
-cm-gun-unskilled = Похоже, вы не знаете, как использовать { THE($gun) }
-cm-gun-no-ammo-message = У вас не осталось патронов!
-cm-gun-use-delay = Вам нужно подождать { $seconds } секунд, прежде чем стрелять снова!
-cm-gun-pump-examine = [bold]Нажмите вашу [color=cyan]уникальную клавишу действия[/color] (по умолчанию пробел), чтобы прокачаться перед стрельбой[/bold].
-rmc-breech-loaded-open-shoot-attempt = You need to close the breech first!
-rmc-breech-loaded-not-ready-to-shoot = You need to open and close the breech first!
+rmc-gun-unskilled = Похоже, вы не знаете, как использовать { THE($gun) }
+rmc-gun-no-ammo-message = У вас не осталось патронов!
+rmc-gun-use-delay = Вам нужно подождать { $seconds } секунд, прежде чем стрелять снова!
+rmc-gun-pump-examine = [bold]Нажмите вашу [color=cyan]уникальную клавишу действия[/color] (по умолчанию пробел), чтобы передёрнуть цевье перед стрельбой[/bold].
 rmc-breech-loaded-closed-load-attempt = You need to open the breech first!
 rmc-wield-use-delay = You need to wait { $seconds } seconds before wielding { THE($wieldable) }!
 rmc-shoot-use-delay = You need to wait { $seconds } seconds before shooting { THE($wieldable) }!

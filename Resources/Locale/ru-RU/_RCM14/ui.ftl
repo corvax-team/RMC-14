@@ -1,14 +1,13 @@
-cm-ui-cm14 = Колониальные Морпехи 14
-cm-ui-audio-humanoid-voicelines = Играйте в гуманоидные озвучки
-cm-ui-roadmap = Дорожная карта
-cm-ui-rmc14 = RMC14
+cm-ui-rmc14 = Колониальные морпехи 14
 cm-ui-audio-voicelines-arachnid = Play voicelines for arachnids
 cm-ui-audio-voicelines-diona = Play voicelines for dionae
 cm-ui-audio-voicelines-dwarf = Play voicelines for dwarves
 cm-ui-audio-voicelines-felinid = Play voicelines for felinids
+cm-ui-audio-voicelines-human = Сыграть звук голоса гуманоидов
 cm-ui-audio-voicelines-moth = Play voicelines for moths
 cm-ui-audio-voicelines-reptilian = Play voicelines for reptilians
 cm-ui-audio-voicelines-slime = Play voicelines for slimes
+cm-ui-roadmap = Дорожняя карта
 rmc-ui-link-discord-account = Link Discord Account
 rmc-ui-link-discord-account-text =
     Click the button below to copy your code.
