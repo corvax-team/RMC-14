@@ -1,1 +1,6 @@
-rmc-dropship-pre-flight-fueling = The shuttle is still undergoing pre-flight fueling and cannot depart yet. Please wait another { $minutes } minutes before trying again.
+rmc-dropship-pre-flight-fueling = Шаттл все еще проходит предполетную дозаправку и пока не может вылететь. Подождите еще { $minutes } { $minutes ->
+        [one] минуту
+        [few] минуты
+       *[other] минут
+	   }.
+

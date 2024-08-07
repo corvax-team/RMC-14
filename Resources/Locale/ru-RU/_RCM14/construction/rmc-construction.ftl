@@ -1,1 +1,1 @@
-rmc-construction-not-proper-surface = The { $construction } must be constructed on a proper surface!
+rmc-construction-not-proper-surface = Конструкция "{ $construction }" должна быть построена на устойчивой поверхности!
