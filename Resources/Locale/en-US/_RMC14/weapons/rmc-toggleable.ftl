@@ -1,8 +1,8 @@
-﻿rmc-toggleable-ammo-firing = Now firing {$ammo}
-rmc-toggleable-ammo-highly-precise = highly precise
-rmc-toggleable-ammo-armor-shredding = armor shredding
+﻿rmc-toggleable-ammo-firing = Теперь стрельбя из {$ammo}
+rmc-toggleable-ammo-highly-precise = очень точная
+rmc-toggleable-ammo-armor-shredding = против брони
 
-rmc-toggleable-recoil-compensation-on = You enable the {POSS-ADJ($gun)} recoil compensation.
-rmc-toggleable-recoil-compensation-off = You disable the {POSS-ADJ($gun)} recoil compensation.
+rmc-toggleable-recoil-compensation-on = Вы включили компенсацию отдачи оружия {$gun}.
+rmc-toggleable-recoil-compensation-off = Вы выключили the recoil compensation {$gun}.
 
-rmc-toggleable-autofire-requires-wielding = You need to wield {THE($gun)} to enable autofire.
+rmc-toggleable-autofire-requires-wielding = Вам нужно экипировать {$gun}, чтобы включить автоогонь.
