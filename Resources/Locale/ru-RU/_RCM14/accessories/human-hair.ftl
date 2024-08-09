@@ -1,161 +1,319 @@
-marking-HumanHairShorterLongBedhead = Shorter Long Bedhead (RMC)
-marking-RMCHumanHairCrew = Crewcut (RMC)
-marking-RMCHumanHairShort = Short Hair (RMC)
-marking-RMCHumanHairCut = Cut Hair (RMC)
-marking-RMCHumanHairFlair = Flaired Hair (RMC)
-marking-RMCHumanHairLong = Shoulder-length Hair (RMC)
-marking-RMCHumanHairLongAlt = Shoulder-length Hair Alt (RMC)
-marking-RMCHumanHairLonger = Long Hair (RMC)
-marking-RMCHumanHairLongerAlt = Long Hair Alt (RMC)
-marking-RMCHumanHairLongest = Very Long Hair (RMC)
-marking-RMCHumanHairLongFringe = Long Fringe (RMC)
-marking-RMCHumanHairLongestAlt = Longer Fringe (RMC)
-marking-RMCHumanHairHalfbang = Half-banged Hair (RMC)
-marking-RMCHumanHairHalfbangAlt = Half-banged Hair Alt (RMC)
-marking-RMCHumanHairPonytail1 = Ponytail 1 (RMC)
-marking-RMCHumanHairPonytail2 = Ponytail 2 (RMC)
-marking-RMCHumanHairPonytail3 = Ponytail 3 (RMC)
-marking-RMCHumanHairPonytail4 = Ponytail 4 (RMC)
-marking-RMCHumanHairPonytailRough = Ponytail, Rough (RMC)
-marking-RMCHumanHairSidePonytail = Side Ponytail (RMC)
-marking-RMCHumanHairParted = Parted (RMC)
-marking-RMCHumanHairPompadour = Pompadour (RMC)
-marking-RMCHumanHairCleancut = Gentleman's Cut (RMC)
-marking-RMCHumanHairQuiff = Quiff (RMC)
-marking-RMCHumanHairBedhead = Bedhead (RMC)
-marking-RMCHumanHairBedhead2 = Bedhead 2 (RMC)
-marking-RMCHumanHairBedhead3 = Bedhead 3 (RMC)
-marking-RMCHumanHairBeehive = Beehive (RMC)
-marking-RMCHumanHairBeehive2 = Beehive 2 (RMC)
-marking-RMCHumanHairBobcurl = Bobcurl (RMC)
-marking-RMCHumanHairBob = Bob (RMC)
-marking-RMCHumanHairBowl = Bowl (RMC)
-marking-RMCHumanHairBuzz = Buzzcut (RMC)
-marking-RMCHumanHairTall = Buzzcut Tall (RMC)
-marking-RMCHumanHairCombover = Combover (RMC)
-marking-RMCHumanHairCombover2 = Combover 2 (RMC)
-marking-RMCHumanHairFather = Father (RMC)
-marking-RMCHumanHairReverseMohawk = Reverse Mohawk (RMC)
-marking-RMCHumanHairDevillock = Devil Lock (RMC)
-marking-RMCHumanHairDreadlocks = Dreadlocks (RMC)
-marking-RMCHumanHairCurls = Curls (RMC)
-marking-RMCHumanHairAfro = Afro (RMC)
-marking-RMCHumanHairAfro2 = Afro 2 (RMC)
-marking-RMCHumanHairAfroLarge = Big Afro (RMC)
-marking-RMCHumanHairSargeant = Flat Top (RMC)
-marking-RMCHumanHairEmo = Emo (RMC)
-marking-RMCHumanHairLongEmo = Long Emo (RMC)
-marking-RMCHumanHairShortOvereye = Overeye Short (RMC)
-marking-RMCHumanHairLongOvereye = Overeye Long (RMC)
-marking-RMCHumanHairFlowingHair = Flow Hair (RMC)
-marking-RMCHumanHairFeather = Feather (RMC)
-marking-RMCHumanHairHitop = Hitop (RMC)
-marking-RMCHumanHairMohawk = Mohawk (RMC)
-marking-RMCHumanHairJensen = Adam Jensen Hair (RMC)
-marking-RMCHumanHairGelled = Gelled Back (RMC)
-marking-RMCHumanHairGentle = Gentle (RMC)
-marking-RMCHumanHairSpiky = Spiky (RMC)
-marking-RMCHumanHairKusangi = Kusanagi Hair (RMC)
-marking-RMCHumanHairKagami = Pigtails (RMC)
-marking-RMCHumanHairHimecut = Hime Cut (RMC)
-marking-RMCHumanHairBraid = Floorlength Braid (RMC)
-marking-RMCHumanHairMediumBraid = Medium Braid (RMC)
-marking-RMCHumanHairBraid2 = Long Braid (RMC)
-marking-RMCHumanHairOdango = Odango (RMC)
-marking-RMCHumanHairOmbre = Ombre (RMC)
-marking-RMCHumanHairUpdo = Updo (RMC)
-marking-RMCHumanHairSkinhead = Skinhead (RMC)
-marking-RMCHumanHairBalding = Balding Hair (RMC)
-marking-RMCHumanHairFamilyman = The Family Man (RMC)
-marking-RMCHumanHairMahdrills = Drillruru (RMC)
-marking-RMCHumanHairDandypomp = Dandy Pompadour (RMC)
-marking-RMCHumanHairPoofy = Poofy (RMC)
-marking-RMCHumanHairCrono = Chrono (RMC)
-marking-RMCHumanHairVegeta = Vegeta (RMC)
-marking-RMCHumanHairCIA = CIA (RMC)
-marking-RMCHumanHairMulder = Mulder (RMC)
-marking-RMCHumanHairScully = Scully (RMC)
-marking-RMCHumanHairNitori = Nitori (RMC)
-marking-RMCHumanHairJoestar = Joestar (RMC)
-marking-RMCHumanHairFlatTopFade = Flat Top Fade (RMC)
-marking-RMCHumanHairHighAndTight = High and Tight (RMC)
-marking-RMCHumanHairIceman = Iceman (RMC)
-marking-RMCHumanHairPvtJoker = Pvt. Joker (RMC)
-marking-RMCHumanHairLtRasczak = Lt. Rasczak (RMC)
-marking-RMCHumanHairMarineFade = Marine Fade (RMC)
-marking-RMCHumanHairMarineMohawk = Marine Mohawk (RMC)
-marking-RMCHumanHairMullet = Mullet (RMC)
-marking-RMCHumanHairShavedBalding = Shaved Balding (RMC)
-marking-RMCHumanHairWardaddy = Wardaddy (RMC)
-marking-RMCHumanHairMarineFlatTop = Marine Flat Top (RMC)
-marking-RMCHumanHairShavedHead = Shaved Head (RMC)
-marking-RMCHumanHairHeadStubble = Head Stubble (RMC)
-marking-RMCHumanHairCornRows = Corn Rows (RMC)
-marking-RMCHumanHairCurlyHair = Curly Hair (RMC)
-marking-RMCHumanHairPixieCutLeft = Pixie Cut Left (RMC)
-marking-RMCHumanHairPixieCutRight = Pixie Cut Right (RMC)
-marking-RMCHumanHairPvtRedding = Pvt. Redding (RMC)
-marking-RMCHumanHairPvtClarison = Pvt. Clarison (RMC)
-marking-RMCHumanHairCplDietrich = Cpl. Dietrich (RMC)
-marking-RMCHumanHairPvtVasquez = Pvt. Vasquez (RMC)
-marking-RMCHumanHairMarineBun = Marine Bun (RMC)
-marking-RMCHumanHairMarineBun2 = Marine Bun 2 (RMC)
-marking-RMCHumanHairPonytail6 = Ponytail 5 (RMC)
-marking-RMCHumanHairPonytail7 = Ponytail 6 (RMC)
-marking-RMCHumanHairShorthair3 = Short Hair 3 (RMC)
-marking-RMCHumanHairBun = Bun (RMC)
-marking-RMCHumanHairBun2 = Bun 2 (RMC)
-marking-RMCHumanHairShortbangs = Short Bangs (RMC)
-marking-RMCHumanHairShavedbun = Shaved Bun (RMC)
-marking-RMCHumanHairBunTopknot = Bun, Topknot (RMC)
-marking-RMCHumanHairBunMan = Man Bun (RMC)
-marking-RMCHumanHairHalfshaved = Half Shaved (RMC)
-marking-RMCHumanHairSleeze = Sleeze (RMC)
-marking-RMCHumanHairRows1 = Corn Rows 2 (RMC)
-marking-RMCHumanHairRows2 = Corn Rows 3 (RMC)
-marking-RMCHumanHairLowfade = Low Fade (RMC)
-marking-RMCHumanHairMedfade = Medium Fade (RMC)
-marking-RMCHumanHairHighfade = High Fade (RMC)
-marking-RMCHumanHairNofade = No Fade (RMC)
-marking-RMCHumanHairCoffeehouse = Coffee House Cut (RMC)
-marking-RMCHumanHairShavedpart = Partly Shaved (RMC)
-marking-RMCHumanHairUndercut = Undercut (RMC)
-marking-RMCHumanHairUndercutTop = Undercut, Top (RMC)
-marking-RMCHumanHairHighlight = Hightight (RMC)
-marking-RMCHumanHairFringetail = Fringe Tail (RMC)
-marking-RMCHumanHairRowbun = Row Bun (RMC)
-marking-RMCHumanHairRowDualTail = Row Tailed (RMC)
-marking-RMCHumanHairBowlcut2 = Bowl Cut 2 (RMC)
-marking-RMCHumanHairThinning = Thinning (RMC)
-marking-RMCHumanHairThinningrear = Thinning Back (RMC)
-marking-RMCHumanHairThinningfront = Thinning Front (RMC)
-marking-RMCHumanHairAverageJoe = Average Joe (RMC)
-marking-RMCHumanHairSideswept = Sideswept (RMC)
-marking-RMCHumanHairMohawkShaved = Shaved Mohawk (RMC)
-marking-RMCHumanHairMohawkShaved2 = Shaved Mohawk 2 (RMC)
-marking-RMCHumanHairMohawkShaved3 = Shaved Mohawk 3 (RMC)
-marking-RMCHumanHairSideUndercut = Side Undercut (RMC)
-marking-RMCHumanHairSideUndercutHang = Side Hang Undercut (RMC)
-marking-RMCHumanHairSideUndercutReverse = Side Hang Undercut (Reverse) (RMC)
-marking-RMCHumanHairGentle2 = Gentle 2 (RMC)
-marking-RMCHumanHairFlair2 = Flaired Hair 2 (RMC)
-marking-RMCHumanHairScully2 = Scully 2 (RMC)
-marking-RMCHumanHairScully2Alt = Scully 2 Alt (RMC)
-marking-RMCHumanHairPonytail8 = Ponytail 8 (RMC)
-marking-RMCHumanHairChelsea = Punk Shave, Chelsea (RMC)
-marking-RMCHumanHairChelseaSmallHawk = Punk Shave, Chelsea Small Hawk (RMC)
-marking-RMCHumanHairChelseaPonytail = Punk Shave, Chelsea Ponytail (RMC)
-marking-RMCHumanHairChelseaFringe = Punk Shave, Chelsea (Fringe) (RMC)
-marking-RMCHumanHairChelseaSmallHawkFringe = Punk Shave, Chelsea Small Hawk (Fringe) (RMC)
-marking-RMCHumanHairChelseaBigHawkFringe = Punk Shave, Chelsea Big Hawk (Fringe) (RMC)
-marking-RMCHumanHairChelseaPonytailFringe = Punk Shave, Chelsea Ponytail (Fringe) (RMC)
-marking-RMCHumanHairOxton = Oxton (RMC)
-marking-RMCHumanHairRowBraid = Row Braid (RMC)
-marking-RMCHumanHairCroft = Croft (RMC)
-marking-RMCHumanHairAviator = Aviator (RMC)
-marking-RMCHumanHairGantlePonytail = Gentle Ponytail (RMC)
-marking-RMCHumanHairEdgar = Edgar (RMC)
-marking-RMCHumanHairEmobun = Emo Little Bun (RMC)
-marking-RMCHumanHairTaper = Taper (RMC)
-marking-RMCHumanHairGentlebraid = Gentle Braid (RMC)
-marking-HumanHairShorterLongBedhead = Укороченное Длинное Изголовье
+marking-HumanHairShorterLongBedhead = Более короткая Бэдхеад (RMC)
+
+marking-RMCHumanHairCrew = Бритая (RMC)
+
+marking-RMCHumanHairShort = Короткая (RMC)
+
+marking-RMCHumanHairCut = Подстриженные волосы (RMC)
+
+marking-RMCHumanHairFlair = Распущенные волосы (RMC)
+
+marking-RMCHumanHairLong = Волосы до плеч (RMC)
+
+marking-RMCHumanHairLongAlt = Волосы до плеч (альтернатива) (RMC)
+
+marking-RMCHumanHairLonger = Длинные волосы (RMC)
+
+marking-RMCHumanHairLongerAlt = Длинные волосы (альтернатива) (RMC)
+
+marking-RMCHumanHairLongest = Очень длинные волосы (RMC)
+
+marking-RMCHumanHairLongFringe = Длинная Бахрома (RMC)
+
+marking-RMCHumanHairLongestAlt = Очень длинная Бахрома (RMC)
+
+marking-RMCHumanHairHalfbang = Наполовину уложенные уолосы (RMC)
+
+marking-RMCHumanHairHalfbangAlt = Наполовину уложенные волосы (альтернатива) (RMC)
+
+marking-RMCHumanHairPonytail1 = Конский хвостик 1 (RMC)
+
+marking-RMCHumanHairPonytail2 = Конский хвостик 2 (RMC)
+
+marking-RMCHumanHairPonytail3 = Конский хвостик 3 (RMC)
+
+marking-RMCHumanHairPonytail4 = Конский хвостик 4 (RMC)
+
+marking-RMCHumanHairPonytailRough = Конский хвостик, грубый (RMC)
+
+marking-RMCHumanHairSidePonytail = Боковой конский хвостик (RMC)
+
+marking-RMCHumanHairParted = Разделенная (RMC)
+
+marking-RMCHumanHairPompadour = Помпадур (RMC)
+
+marking-RMCHumanHairCleancut = Причёска джентельмена (RMC)
+
+marking-RMCHumanHairQuiff = Челка (RMC)
+
+marking-RMCHumanHairBedhead = Бэдхефд (RMC)
+
+marking-RMCHumanHairBedhead2 = Бэдхефд 2 (RMC)
+
+marking-RMCHumanHairBedhead3 = Бэдхефд 3 (RMC)
+
+marking-RMCHumanHairBeehive = Бихайв (RMC)
+
+marking-RMCHumanHairBeehive2 = Бихайв 2 (RMC)
+
+marking-RMCHumanHairBobcurl = Бобкурл (RMC)
+
+marking-RMCHumanHairBob = Боб (RMC)
+
+marking-RMCHumanHairBowl = Горшок (RMC)
+
+marking-RMCHumanHairBuzz = Баззкат (RMC)
+
+marking-RMCHumanHairTall = Баззкат длинный (RMC)
+
+marking-RMCHumanHairCombover = Расчёсанная (RMC)
+
+marking-RMCHumanHairCombover2 = Расчёсанная 2 (RMC)
+
+marking-RMCHumanHairFather = Отец (RMC)
+
+marking-RMCHumanHairReverseMohawk = Обратный эрокез (RMC)
+
+marking-RMCHumanHairDevillock = Дьявольский замок (RMC)
+
+marking-RMCHumanHairDreadlocks = Дреды (RMC)
+
+marking-RMCHumanHairCurls = Кудри (RMC)
+
+marking-RMCHumanHairAfro = Афро (RMC)
+
+marking-RMCHumanHairAfro2 = Афро 2 (RMC)
+
+marking-RMCHumanHairAfroLarge = Большая афро (RMC)
+
+marking-RMCHumanHairSargeant = Флэт топ (RMC)
+
+marking-RMCHumanHairEmo = Эмо (RMC)
+
+marking-RMCHumanHairLongEmo = Длинная эмо (RMC)
+
+marking-RMCHumanHairShortOvereye = Короткая на глаз (RMC)
+
+marking-RMCHumanHairLongOvereye = Длинная на глаз (RMC)
+
+marking-RMCHumanHairFlowingHair = Струящиеся волосы (RMC)
+
+marking-RMCHumanHairFeather = Перо (RMC)
+
+marking-RMCHumanHairHitop = Хайтоп (RMC)
+
+marking-RMCHumanHairMohawk = Эракез (RMC)
+
+marking-RMCHumanHairJensen = Причёска адама дженсена (RMC)
+
+marking-RMCHumanHairGelled = Геллед бэк (RMC)
+
+marking-RMCHumanHairGentle = Джентли (RMC)
+
+marking-RMCHumanHairSpiky = Шипастая (RMC)
+
+marking-RMCHumanHairKusangi = Кусанаги (RMC)
+
+marking-RMCHumanHairKagami = Кагами (RMC)
+
+marking-RMCHumanHairHimecut = Хайм (RMC)
+
+marking-RMCHumanHairBraid = Коса до пола (RMC)
+
+marking-RMCHumanHairMediumBraid = Средняя коса (RMC)
+
+marking-RMCHumanHairBraid2 = Длинная коса (RMC)
+
+marking-RMCHumanHairOdango = Оданго (RMC)
+
+marking-RMCHumanHairOmbre = Омбре (RMC)
+
+marking-RMCHumanHairUpdo = Апду (RMC)
+
+marking-RMCHumanHairSkinhead = Скинхэд (RMC)
+
+marking-RMCHumanHairBalding = Лысеющие волосы (RMC)
+
+marking-RMCHumanHairFamilyman = Семейный человек (RMC)
+
+marking-RMCHumanHairMahdrills = Дриллруру (RMC)
+
+marking-RMCHumanHairDandypomp = Денди помпадур (RMC)
+
+marking-RMCHumanHairPoofy = Пуфи (RMC)
+
+marking-RMCHumanHairCrono = Хроно (RMC)
+
+marking-RMCHumanHairVegeta = Вегета (RMC)
+
+marking-RMCHumanHairCIA = ЦРУ (RMC)
+
+marking-RMCHumanHairMulder = Малдер (RMC)
+
+marking-RMCHumanHairScully = Скалли (RMC)
+
+marking-RMCHumanHairNitori = Нитори (RMC)
+
+marking-RMCHumanHairJoestar = Джостар (RMC)
+
+marking-RMCHumanHairFlatTopFade = Плоская фейд (RMC)
+
+marking-RMCHumanHairHighAndTight = Высокая и плотная (RMC)
+
+marking-RMCHumanHairIceman = Айсмен (RMC)
+
+marking-RMCHumanHairPvtJoker = Ряд. Джокер (RMC)
+
+marking-RMCHumanHairLtRasczak = Лейт. Расчак (RMC)
+
+marking-RMCHumanHairMarineFade = Морпехский фейд (RMC)
+
+marking-RMCHumanHairMarineMohawk = Морпехский эрокез (RMC)
+
+marking-RMCHumanHairMullet = Муллет (RMC)
+
+marking-RMCHumanHairShavedBalding = Бритая лысина (RMC)
+
+marking-RMCHumanHairWardaddy = Вардедди (RMC)
+
+marking-RMCHumanHairMarineFlatTop = Морпехский флэт топ (RMC)
+
+marking-RMCHumanHairShavedHead = Бритая голова (RMC)
+
+marking-RMCHumanHairHeadStubble = Щетина (RMC)
+
+marking-RMCHumanHairCornRows = Корн Роус (RMC)
+
+marking-RMCHumanHairCurlyHair = Вьющиеся волосы (RMC)
+
+marking-RMCHumanHairPixieCutLeft = Пикси левая (RMC)
+
+marking-RMCHumanHairPixieCutRight = Пикси правая (RMC)
+
+marking-RMCHumanHairPvtRedding = Ряд. Реддинг (RMC)
+
+marking-RMCHumanHairPvtClarison = Ряд. Кларисон (RMC)
+
+marking-RMCHumanHairCplDietrich = Копр. Диетрич (RMC)
+
+marking-RMCHumanHairPvtVasquez = Ряд. Васкез (RMC)
+
+marking-RMCHumanHairMarineBun = Морпехская бан (RMC)
+
+marking-RMCHumanHairMarineBun2 = Морпехская бан 2 (RMC)
+
+marking-RMCHumanHairPonytail6 = Конский хвостик 5 (RMC)
+
+marking-RMCHumanHairPonytail7 = Конский хвостик 6 (RMC)
+
+marking-RMCHumanHairShorthair3 = Короткая 3 (RMC)
+
+marking-RMCHumanHairBun = Бан (RMC)
+
+marking-RMCHumanHairBun2 = Бан 2 (RMC)
+
+marking-RMCHumanHairShortbangs = Короткая чёлка (RMC)
+
+marking-RMCHumanHairShavedbun = Бритая бан (RMC)
+
+marking-RMCHumanHairBunTopknot = Бан, топ кнот (RMC)
+
+marking-RMCHumanHairBunMan = Мужская бан (RMC)
+
+marking-RMCHumanHairHalfshaved = Полу-бритая (RMC)
+
+marking-RMCHumanHairSleeze = Слиз (RMC)
+
+marking-RMCHumanHairRows1 = Корн ровс 2 (RMC)
+
+marking-RMCHumanHairRows2 = Корн ровс 3 (RMC)
+
+marking-RMCHumanHairLowfade = Лоу фейд (RMC)
+
+marking-RMCHumanHairMedfade = Медиум фейд (RMC)
+
+marking-RMCHumanHairHighfade = Хайд фейд (RMC)
+
+marking-RMCHumanHairNofade = Ноу фейд (RMC)
+
+marking-RMCHumanHairCoffeehouse = Коффи хаус (RMC)
+
+marking-RMCHumanHairShavedpart = Частично бритая (RMC)
+
+marking-RMCHumanHairUndercut = Андеркат (RMC)
+
+marking-RMCHumanHairUndercutTop = Андеркат, верх (RMC)
+
+marking-RMCHumanHairHighlight = Хайлайт (RMC)
+
+marking-RMCHumanHairFringetail = Хвост с бахрамой (RMC)
+
+marking-RMCHumanHairRowbun = Роу бан (RMC)
+
+marking-RMCHumanHairRowDualTail = Роу хвостатая (RMC)
+
+marking-RMCHumanHairBowlcut2 = Горшок 2 (RMC)
+
+marking-RMCHumanHairThinning = Тонкая (RMC)
+
+marking-RMCHumanHairThinningrear = Тонкая бэк (RMC)
+
+marking-RMCHumanHairThinningfront = Тонкая фронт (RMC)
+
+marking-RMCHumanHairAverageJoe = Обычный Джо (RMC)
+
+marking-RMCHumanHairSideswept = Чёлка в сторону (RMC)
+
+marking-RMCHumanHairMohawkShaved = Эрокез (RMC)
+
+marking-RMCHumanHairMohawkShaved2 = Эрокез 2 (RMC)
+
+marking-RMCHumanHairMohawkShaved3 = Эрокез 3 (RMC)
+
+marking-RMCHumanHairSideUndercut = Боковой андеркат (RMC)
+
+marking-RMCHumanHairSideUndercutHang = Боковой ханг андеркат (RMC)
+
+marking-RMCHumanHairSideUndercutReverse = Боковой ханг андеркат (обратный) (RMC)
+
+marking-RMCHumanHairGentle2 = Джентли 2 (RMC)
+
+marking-RMCHumanHairFlair2 = Распущенные волосы 2 (RMC)
+
+marking-RMCHumanHairScully2 = Скалли 2 (RMC)
+
+marking-RMCHumanHairScully2Alt = Скалли 2 (альтернатива) (RMC)
+
+marking-RMCHumanHairPonytail8 = Конский хвостик 8 (RMC)
+
+marking-RMCHumanHairChelsea = Панк, Челси (RMC)
+
+marking-RMCHumanHairChelseaSmallHawk = Панк, Челси Смол Хавк (RMC)
+
+marking-RMCHumanHairChelseaPonytail = Панк, Чесли Конский Хвостик (RMC)
+
+marking-RMCHumanHairChelseaFringe = Панк, Челси (Бахрома) (RMC)
+
+marking-RMCHumanHairChelseaSmallHawkFringe = Панк, Челси Смол Хавк (Бахрома) (RMC)
+
+marking-RMCHumanHairChelseaBigHawkFringe = Панк, Челси Биг Хавк (Бахрома) (RMC)
+
+marking-RMCHumanHairChelseaPonytailFringe = Панк, Челси Конский Хвостик (Бахрома) (RMC)
+
+marking-RMCHumanHairOxton = Окстон (RMC)
+
+marking-RMCHumanHairRowBraid = Роу коса (RMC)
+
+marking-RMCHumanHairCroft = Крофт (RMC)
+
+marking-RMCHumanHairAviator = Авиатор (RMC)
+
+marking-RMCHumanHairGantlePonytail = Дженти конский хвостик (RMC)
+
+marking-RMCHumanHairEdgar = Эдгар (RMC)
+
+marking-RMCHumanHairEmobun = Эмо маленькая бан (RMC)
+
+marking-RMCHumanHairTaper = Конус (RMC)
+
+marking-RMCHumanHairGentlebraid = Джентли коса (RMC)

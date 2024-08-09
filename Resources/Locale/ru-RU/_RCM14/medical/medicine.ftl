@@ -1,43 +1,57 @@
-reagent-name-cmdylovene = Диловен
-reagent-desc-cmdylovene = Антитоксин общего применения, нейтрализующий большинство токсинов в кровотоке. Обычно используется во многих современных химических препаратах. Может использоваться как
+﻿reagent-name-cmdylovene = Диловен
+reagent-desc-cmdylovene = Антитоксин общего назначения, нейтрализующий большинство токсинов в крови. Широко используется во многих современных химических препаратах. Может использоваться в качестве мягкого антигаллюциногена и для снятия усталости.
+
 reagent-name-cmethylredoxrazine = Этилредоксразин
-reagent-desc-cmethylredoxrazine = Нейтрализует действие алкоголя в кровотоке, окисляя его до молекул воды. Однако он не останавливает мгновенное опьянение. Будучи мощным окислителем, этилредоксразин стан
+reagent-desc-cmethylredoxrazine = Нейтрализует действие алкоголя в крови, окисляя его до молекул воды. Однако это не останавливает немедленное опьянение. Этилредоксразин, являясь мощным окислителем, становится токсичным в больших дозах.
+
 reagent-name-cmarithrazine = Аритразин
-reagent-desc-cmarithrazine = Стабилизированный вариант диловена. Его токсиноочищающие свойства ослаблены, имеются вредные побочные эффекты, но он не вступает в реакцию с другими соединениями для обр
-reagent-name-cmbicaridine = Бикаридин
-reagent-desc-cmbicaridine = Бикаридин - обезболивающее лекарство, которое может использоваться для лечения тяжелых внешних тупых травм и стабилизации состояния пациентов. Передозировка бикаридина в
+reagent-desc-cmarithrazine = Стабилизированный вариант диловена. Его свойства по выведению токсинов ослаблены и имеют вредные побочные эффекты, но он не вступает в реакцию с другими соединениями, образуя токсины.
+
+reagent-name-cmbicaridine = Бикариди
+reagent-desc-cmbicaridine = Бикаридин является обезболивающим препаратом и может быть использован для лечения тяжелых внешних травм и стабилизации состояния пациентов. Передозировка бикаридина может вызвать ожоги и выделение токсинов.
 reagent-name-cmcryoxadone = Криоксадон
-reagent-desc-cmcryoxadone = Промышленный криогенный препарат. Лечит большинство видов повреждений тканей. Его основное ограничение - температура тела пациента должна быть ниже 170 К для правильного
+reagent-desc-cmcryoxadone = Криогенная медицина промышленного класса. Лечит большинство видов повреждений тканей. Ее основное ограничение заключается в том, что температура тела пациента должна быть ниже 170°С для правильного метаболизма.
+
 reagent-name-cmdermaline = Дермалин
-reagent-desc-cmdermaline = Передовой препарат, используемый для лечения тяжелых ожоговых травм. Позволяет организму восстанавливать даже самые тяжелые ткани, поврежденные теплом. Передозировка дер
+reagent-desc-cmdermaline = Передовая медицина, используемая для лечения тяжелых ожоговых травм. Позволяет организму восстанавливать даже самые тяжелоповрежденные ткани. Передозировка дермалина может привести к серьезному повреждению внутренних тканей.
+
 reagent-name-cmdexalin = Дексалин
-reagent-desc-cmdexalin = Дексалин используется для лечения кислородного голодания путем подачи кислорода к красным кровяным тельцам непосредственно в кровоток. Используется в качестве антидота п
-reagent-name-cmdexalinplus = Дексалин Плюс
-reagent-desc-cmdexalinplus = Дексалин Плюс - это усовершенствованная форма Дексалина с добавлением железа и углерода для ускорения скорости связывания кислорода с гемоглобином в эритроцитах.
+reagent-desc-cmdexalin = Дексалин используется при лечении кислородной недостаточности путем подачи кислорода к эритроцитам непосредственно в кровотоке. Используется в качестве противоядия при отравлении лексорином.
+reagent-name-cmdexalinplus = Дексалин плюс
+reagent-desc-cmdexalinplus = Дексалин плюс - это усовершенствованная форма дексалина с добавлением железа и углерода для ускорения скорости связывания кислорода с гемоглобином в красных эритроцитах.
+
 reagent-name-cmepinephrine = Эпинефрин
-reagent-desc-cmepinephrine = Естественный стимулятор работы мышц и сердца. Полезен для перезапуска сердца. Передозировка может привести к нагрузке на сердце и повреждению тканей.
+reagent-desc-cmepinephrine = Натуральный стимулятор работы мышц и сердца. Полезен для возобновления работы сердца. Передозировка может вызвать нагрузку на сердце и повреждение тканей.
+
 reagent-name-cminaprovaline = Инапровалин
-reagent-desc-cminaprovaline = Инапровалин - синаптический стимулятор и кардиостимулятор. Обычно используется для стабилизации состояния пациентов. Если легкие функционируют, инапровалин обеспечивает
+reagent-desc-cminaprovaline = Инапровалин является синаптическим стимулятором и кардиостимулятором. Обычно используется для стабилизации состояния пациентов. Если легкие функционируют, инапровалин позволяет дышать при остановке сердца. Действует как слабое обезболивающее. Передозировка может привести к серьезному повреждению сердечной ткани.
+
 reagent-name-cmkelotane = Келотан
-reagent-desc-cmkelotane = Распространенное лекарство, используемое для лечения ожогов, едких и коррозийных травм. Передозировка келотана может привести к повреждению внутренних тканей.
+reagent-desc-cmkelotane = Обычное лекарство, используемое для лечения ожогов, травм, вызванных едкими веществами и коррозией. Передозировка келотаном может привести к повреждению внутренних тканей.
+
 reagent-name-cmleporazine = Лепоразин
-reagent-desc-cmleporazine = Препарат, используемый для лечения гипотермии и гипертермии. Стабилизирует температуру тела пациента. Предотвращает применение криогенных препаратов. Передозировка лепор
-reagent-name-cmtricordrazine = Трикордразин
+reagent-desc-cmleporazine = Препарат, используемый для лечения гипотермии и гипертермии. Стабилизирует температуру тела пациента. Предотвращает использование криогенных средств. Передозировка лепоразином может вызвать сильную сонливость.
+
+reagent-name-cmtricordrazine = Трикодразин
 reagent-desc-cmtricordrazine = Трикордразин - сильнодействующий стимулятор, первоначально полученный из кордразина. Может использоваться для лечения широкого спектра травм.
-reagent-name-cmmeralyne = Meralyne
-reagent-desc-cmmeralyne = Advanced analgesic medication used to treat extremely severe blunt trauma. Allows the body to quickly repair damaged tissue. Overdosing on Meralyne can cause severe corrosion to cell membranes.
-reagent-name-cmimidazoline = Imidazoline
-reagent-desc-cmimidazoline = Used for treating non-genetic eye trauma. Generally prescribed as treatment for most cases of eye trauma instead of performing a surgical operation.
-reagent-name-cmclonexadone = Clonexadone
-reagent-desc-cmclonexadone = Advanced cryogenic medicine made from cryoxadone. Treats most types of tissue damage. Requires temperatures below 170K to to metabolise correctly.
+
+reagent-name-cmmeralyne = Мералин
+reagent-desc-cmmeralyne = Современный обезболивающий препарат, используемый для лечения особо тяжелых травм. Позволяет организму быстро восстанавливать поврежденные ткани. Передозировка Мералином может вызвать серьезную коррозию клеточных мембран.
+
+reagent-name-cmimidazoline = Имидазолин
+reagent-desc-cmimidazoline = Используется для лечения негенетических травм глаз. Обычно назначается для лечения большинства случаев травм глаз вместо проведения хирургической операции.
+
+reagent-name-cmclonexadone = Клонаксадин
+reagent-desc-cmclonexadone = Современное криогенное лекарство, изготовленное на основе криоксадона. Лечит большинство видов повреждений тканей. Для правильного метаболизма требуется температура ниже 170 К.
+
 # Medical Icon Labels
-rmc-tricordazine-container-label-text = TI
-rmc-bicaridine-container-label-text = BI
-rmc-kelotane-container-label-text = KE
-rmc-dexalin-container-label-text = DX
-rmc-dylovene-container-label-text = DY
-rmc-inaprovaline-container-label-text = IN
-rmc-first-aid-container-label-text = FA
-rmc-emergency-medicine-container-label-text = EM
-rmc-dexalin-plus-container-label-text = D+
-rmc-epinephrine-container-label-text = EP
+rmc-tricordazine-container-label-text = ТРИ
+rmc-bicaridine-container-label-text = БИК
+rmc-kelotane-container-label-text = КЕЛ
+rmc-dexalin-container-label-text = ДЕК
+rmc-dylovene-container-label-text = ДИЛ
+rmc-inaprovaline-container-label-text = ИНА
+rmc-first-aid-container-label-text = ПМ
+rmc-emergency-medicine-container-label-text = ЭМ
+rmc-dexalin-plus-container-label-text = ДЕК+
+rmc-epinephrine-container-label-text = ЭПИ

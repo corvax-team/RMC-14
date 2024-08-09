@@ -1,20 +1,29 @@
-reagent-name-souto-classic = Класический Соуто
-reagent-desc-souto-classic = Газировка со вкусом мандарина, консервированная в Гаване.
-reagent-name-souto-cherry = Вишневый Соуто
-reagent-desc-souto-cherry = Газировка со вкусом вишни, консервируемая в Гаване
-reagent-name-souto-lime = Лаймовый Соуто
-reagent-desc-souto-lime = Консервированная в Гаване газировка со вкусом лайма
-reagent-name-souto-grape = Виноградный Соуто
-reagent-desc-souto-grape = Консервированная в Гаване газировка со вкусом винограда
-reagent-name-souto-blue = Голубиковый Соуто
-reagent-desc-souto-blue = Газировка со вкусом голубых фруктов, выпускаемая в Гаване
-reagent-name-souto-peach = Персиковый Соуто
-reagent-desc-souto-peach = Газировка со вкусом персика, внутри которой плавают кусочки персиковой косточки, консервируется в Гаване
-reagent-name-souto-cranberry = Клюквенный Соуто
-reagent-desc-souto-cranberry = Газировка со вкусом клюквы, консервированная в Гаване
-reagent-name-souto-vanilla = Ванильный Соуто
-reagent-desc-souto-vanilla = Консервированная в Гаване газировка со вкусом ванили
-reagent-name-souto-pineapple = Ананасовый Соуто
-reagent-desc-souto-pineapple = Консервированная в Гаване газировка со вкусом ананаса
+reagent-name-bobda-classic = Бобда Классик
+reagent-desc-bobda-classic = Газировка с мандариновым вкусом, консервируется в Гаване
+
+reagent-name-bobda-cherry = Вишневая Бобда
+reagent-desc-bobda-cherry = Газировка с вишнёвым вкусом, консервируется в Гаване.
+
+reagent-name-bobda-lime = Лаймовая Бобда
+reagent-desc-bobda-lime = Газировка со вкусом лайма, кансервируется в Гаване
+
+reagent-name-bobda-grape = Виноградная Бобда
+reagent-desc-bobda-grape = Газировка со вкусом винограда, кансервируется в Гаване
+
+reagent-name-bobda-blue = Бобда из голубой малины
+reagent-desc-bobda-blue = Газировка со вкусом голубой малины, кансервируется в Гаване
+
+reagent-name-bobda-peach = Персиковая Бобда
+reagent-desc-bobda-peach = Газировка с персиковым вкусом и плавающими внутри частичками персиковой косточки, конесервируется в Гаване
+
+reagent-name-bobda-cranberry = Клюквенный Бобда
+reagent-desc-bobda-cranberry = Газировка со вкусом клюквы, консервируется в Гаване
+
+reagent-name-bobda-vanilla = Ванильная Бобда
+reagent-desc-bobda-vanilla = Газировка со вкусом ванили, консервируется в Гаване
+
+reagent-name-bobda-pineapple = Ананасовая Бобда
+reagent-desc-bobda-pineapple = Газировка со вкусом ананаса, консервируется в Гаване
+
 reagent-name-fruit-beer = Фруктовое пиво
-reagent-desc-fruit-beer = Оскорбительный напиток со вкусом манго. По вкусу напоминает гнилые фрукты.
+reagent-desc-fruit-beer = Напиток с отвратительным вкусом манго. На вкус напоминает гнилые фрукты.
