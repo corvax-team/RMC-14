@@ -12,7 +12,9 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAnnounceDeathComponent, MobStateChangedEvent>(OnAnnounceDeathMobStateChanged);
+		// CCM
 		SubscribeLocalEvent<XenoAnnounceDeathComponent, ChasmFallingEvent>(OnChasmFalling);
+		// end
     }
 
     private void OnAnnounceDeathMobStateChanged(Entity<XenoAnnounceDeathComponent> ent, ref MobStateChangedEvent args)
