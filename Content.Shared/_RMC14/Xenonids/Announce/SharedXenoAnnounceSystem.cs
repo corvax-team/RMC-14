@@ -26,10 +26,12 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
             AnnounceSameHive(ent.Owner, Loc.GetString(ent.Comp.Message, ("xeno", ent.Owner)), color: ent.Comp.Color);
     }
 	
+	// CCM bug fix
 	private void OnChasmFalling(Entity<XenoAnnounceDeathComponent> ent, ref ChasmFallingEvent args)
 	{
 		AnnounceSameHive(ent.Owner, Loc.GetString(ent.Comp.Message, ("xeno", ent.Owner)), color: ent.Comp.Color);
 	}
+	// CCM end
 
     public string WrapHive(string message, Color? color = null)
     {

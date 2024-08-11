@@ -66,9 +66,10 @@ public sealed class ChasmSystem : EntitySystem
         if (playSound)
             _audio.PlayPredicted(component.FallingSound, chasm, tripper);
 		
-		// CM14 bug fix
+		// CCM bug fix
 		var ev = new ChasmFallingEvent(chasm, tripper);
 		RaiseLocalEvent(tripper, ref ev);
+		// end
     }
 
     private void OnStepTriggerAttempt(EntityUid uid, ChasmComponent component, ref StepTriggerAttemptEvent args)
@@ -82,7 +83,7 @@ public sealed class ChasmSystem : EntitySystem
     }
 }
 
-// CM14 bug fix
+// CCM bug fix
 [ByRefEvent]
 public readonly record struct ChasmFallingEvent(EntityUid Chasm, EntityUid Tripper)
 {
