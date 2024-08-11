@@ -1,1 +1,1 @@
-changelog-tab-title-CM = Колониальные Морпехи
+changelog-tab-title-CM = Колониальные морпехи
