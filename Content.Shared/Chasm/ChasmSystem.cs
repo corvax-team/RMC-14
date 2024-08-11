@@ -66,6 +66,7 @@ public sealed class ChasmSystem : EntitySystem
         if (playSound)
             _audio.PlayPredicted(component.FallingSound, chasm, tripper);
 		
+		// CM14 bug fix
 		var ev = new ChasmFallingEvent(chasm, tripper);
 		RaiseLocalEvent(tripper, ref ev);
     }
@@ -81,6 +82,7 @@ public sealed class ChasmSystem : EntitySystem
     }
 }
 
+// CM14 bug fix
 [ByRefEvent]
 public readonly record struct ChasmFallingEvent(EntityUid Chasm, EntityUid Tripper)
 {
