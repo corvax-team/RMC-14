@@ -488,7 +488,6 @@ namespace Content.Shared.Preferences
             var configManager = collection.Resolve<IConfigurationManager>();
             var prototypeManager = collection.Resolve<IPrototypeManager>();
             var netManager = collection.Resolve<INetManager>();
-            var sponsorsManager = collection.Resolve<ISharedSponsorsManager>(); // Corvax-Sponsor
 
             if (!prototypeManager.TryIndex(Species, out var speciesPrototype) || speciesPrototype.RoundStart == false)
             {
@@ -498,15 +497,18 @@ namespace Content.Shared.Preferences
 
             // Corvax-Sponsors-Start: Reset to human if player not sponsor
             var sponsorPrototypes = new List<string>();
-            if (netManager.IsClient)
+            if (collection.TryResolveType<ISharedSponsorsManager>(out var sponsorsManager))
             {
-                sponsorPrototypes = sponsorsManager.GetClientPrototypes();
+                if (netManager.IsClient)
+                {
+                    sponsorPrototypes = sponsorsManager.GetClientPrototypes();
+                }
+                else if (sponsorsManager.TryGetServerPrototypes(session.UserId, out var prototypes))
+                {
+                    sponsorPrototypes = prototypes;
+                }
             }
-            else if (sponsorsManager.TryGetServerPrototypes(session.UserId, out var prototypes))
-            {
-                sponsorPrototypes = prototypes;
-            }
-            
+
             if (speciesPrototype.SponsorOnly && !sponsorPrototypes.Contains(Species.Id))
             {
                 Species = SharedHumanoidAppearanceSystem.DefaultSpecies;
