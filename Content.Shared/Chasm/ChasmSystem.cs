@@ -7,6 +7,9 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Timing;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 
 namespace Content.Shared.Chasm;
 
@@ -15,6 +18,7 @@ namespace Content.Shared.Chasm;
 /// </summary>
 public sealed class ChasmSystem : EntitySystem
 {
+	[Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -42,7 +46,10 @@ public sealed class ChasmSystem : EntitySystem
         {
             if (_timing.CurTime < chasm.NextDeletionTime)
                 continue;
-
+			
+			if(TryComp<MobStateComponent>(uid, out var comp))
+				_mobState.ChangeMobState(uid, MobState.Dead, comp); 
+			
             QueueDel(uid);
         }
     }
@@ -65,11 +72,6 @@ public sealed class ChasmSystem : EntitySystem
 
         if (playSound)
             _audio.PlayPredicted(component.FallingSound, chasm, tripper);
-		
-		// CCM bug fix
-		var ev = new ChasmFallingEvent(chasm, tripper);
-		RaiseLocalEvent(tripper, ref ev);
-		// end
     }
 
     private void OnStepTriggerAttempt(EntityUid uid, ChasmComponent component, ref StepTriggerAttemptEvent args)
@@ -83,7 +85,6 @@ public sealed class ChasmSystem : EntitySystem
     }
 }
 
-// CCM bug fix
 [ByRefEvent]
 public readonly record struct ChasmFallingEvent(EntityUid Chasm, EntityUid Tripper)
 {
