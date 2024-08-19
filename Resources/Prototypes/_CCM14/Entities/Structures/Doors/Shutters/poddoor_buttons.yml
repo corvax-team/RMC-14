@@ -1,0 +1,16 @@
+# David
+- type: entity
+  parent: RMCPodDoorButton
+  id: CCMPodDoorDavidPortButton
+  name: port's podlock
+  
+- type: entity
+  parent: RMCPodDoorButton
+  id: CCMPodDoorDavidNukeStorageButton
+  name: nuke storage's podlock
+  
+- type: entity
+  parent: RMCPodDoorButton
+  id: CCMShutterDavidMechButton
+  name: mech's shutters
+  
