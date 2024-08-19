@@ -23,7 +23,7 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
         else
             AnnounceSameHive(ent.Owner, Loc.GetString(ent.Comp.Message, ("xeno", ent.Owner)), color: ent.Comp.Color);
     }
-
+	
     public string WrapHive(string message, Color? color = null)
     {
         color ??= Color.FromHex("#921992");

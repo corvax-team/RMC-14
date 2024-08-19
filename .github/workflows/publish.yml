@@ -72,7 +72,7 @@ jobs:
     - name: Publish version
       run: Tools/publish_github_artifact.py
       env:
-        GITHUB_TOKEN: ${{ secrets.DEPLOY_ORG_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
         ARTIFACT_ID: ${{ steps.artifact-upload-step.outputs.artifact-id }}
         GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}

@@ -1,0 +1,13 @@
+name: Clear artifacts
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  clean:
+    runs-on: [self-hosted, linux]
+    steps:
+      - name: Cleanup
+        uses: glassechidna/artifact-cleaner@master
