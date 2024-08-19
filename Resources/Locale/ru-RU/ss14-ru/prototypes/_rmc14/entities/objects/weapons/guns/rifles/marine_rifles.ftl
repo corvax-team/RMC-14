@@ -1,9 +1,9 @@
 ent-CMBaseWeaponRifle = { ent-['BaseItem', 'CMBaseWeaponGun', 'RMCBaseAttachableHolder'] }
   .desc = { ent-['BaseItem', 'CMBaseWeaponGun', 'RMCBaseAttachableHolder'].desc }
-ent-WeaponRifleM54C = M54C assault rifle MK2
+ent-WeaponRifleM54C = штурмовая винтовка M54C MK2
     .desc = Стандартная винтовка колониальных морпехов. Служит личному составу верой и правдой. Использует безгильзовые боеприпасы 10x24 мм.
-ent-WeaponRifleM54CE2 = M54CE2 heavy assault rifle
+ent-WeaponRifleM54CE2 = тяжелая штурмовая винтовка M54CE2
     .desc = Крупное оружие огневой поддержки отряда, способное вести непрерывный подавляющий огонь с укрепленной позиции. Хотя оно имеет плохую стабилизацию и малую точность, его можно брать в обе руки и вести стрельбу.
-ent-WeaponRifleM4SPR = M4SPR battle rifle
+ent-WeaponRifleM4SPR = боевая винтовка M4SPR
     .desc = Боевая винтовка M4SPR — это винтовка для пехотных снайперов, состоящая на вооружении колониальных морпехов. M4SPR с компоновкой буллпап идеально подходит для разведывательных групп и отрядов огневой поддержки.
 

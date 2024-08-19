@@ -1,11 +1,11 @@
 ent-CMWeaponPistolBase = { ent-['BaseItem', 'CMBaseWeaponGun', 'RMCBaseAttachableHolder'] }
 
   .desc = { ent-['BaseItem', 'CMBaseWeaponGun', 'RMCBaseAttachableHolder'].desc }
-ent-CMWeaponPistolM1984 = M1984 service pistol
-    .desc = An M1984 Service Pistol, once the standard issue sidearm of the Marines but has recently been replaced with the M77 combat pistol. Fires 9mm pistol rounds.
-ent-CMWeaponPistolM77 = M77 combat pistol
-    .desc = Standard issue Marine firearm. Also found in the hands of We-Ya PMC teams. Fires 9mm armor shredding rounds and is capable of 3-round burst.
-ent-CMWeaponPistolMK80 = MK80 pistol
-    .desc = A massive, formidable semi-automatic handgun chambered in 9mm squash-head rounds. A common sight throughout both UA and 3WE space, often held by both We-Ya PMC units and corporate executives. This weapon is also undergoing limited field testing as part of the Marines' next generation pistol program. The slide is engraved with the We-Ya logo reminding you who's really in charge.
-ent-RMCWeaponPistolSU6 = SU-6 smart pistol
-    .desc = The SU-6 Smartpistol is an IFF-based sidearm currently undergoing field testing in the UNMC. Uses modified .45 ACP IFF bullets. Capable of firing in bursts.
+ent-CMWeaponPistolM1984 = служебный пистолет M1984
+    .desc = Служебный пистолет M1984, когда-то стандартное табельное оружие морской пехоты, но недавно замененное боевым пистолетом M77. Стреляет 9-мм пистолетными патронами.
+ent-CMWeaponPistolM77 = боевой пистолет M77
+    .desc = Стандартное огнестрельное оружие морпехов. Также встречается в руках команд We-Ya PMC. Стреляет 9-мм бронебойными пулями и может стрелять очередями по 3 патрона.
+ent-CMWeaponPistolMK80 = пистолет MK80
+    .desc = Массивный, грозный полуавтоматический пистолет под экспансивные патроны калибра 9 мм. Распространенное зрелище в пространстве как UA, так и 3WE, часто используется как подразделениями We-Ya PMC, так и корпоративными руководителями. Это оружие также проходит ограниченные полевые испытания в рамках программы создания пистолетов следующего поколения морской пехоты. На затворе выгравирован логотип We-Ya, напоминающий вам, кто на самом деле главный.
+ent-RMCWeaponPistolSU6 = умный пистолет SU-6
+    .desc = SU-6 — это умный пистолет на базе IFF, который в настоящее время проходит полевые испытания в UNMC. Использует модифицированные пули .45 ACP IFF. Способен стрелять очередями.

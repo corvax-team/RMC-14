@@ -1,2 +1,2 @@
-ent-RMCProjectileTaser = taser bolt
+ent-RMCProjectileTaser = шокирующий снаряд
     .desc = { ent-BaseBullet.desc }

@@ -1,4 +1,4 @@
 ent-RMCBaseWeaponSniperRifle = { ent-CMBaseWeaponRifle }
     .desc = { ent-CMBaseWeaponRifle.desc }
-ent-CMM96SSniperRifle = M96S scoped rifle
-    .desc = A heavy sniper rifle manufactured by Aegis Armaments. It has a scope system and fires armor penetrating rounds out of a 15-round magazine. 'Peace Through Superior Firepower'
+ent-CMM96SSniperRifle = винтовка с оптическим прицелом M96S
+    .desc = Тяжелая снайперская винтовка производства Aegis Armaments. Имеет прицельную систему и стреляет бронебойными патронами из магазина на 15 патронов. «Мир через превосходную огневую мощь».

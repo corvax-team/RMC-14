@@ -1,10 +1,10 @@
 ent-CMBaseMagazinePistol = { ent-BaseMagazinePistol }
     .desc = { ent-BaseMagazinePistol.desc }
-ent-CMMagazinePistolM1984 = M1984 magazine (9mm)
+ent-CMMagazinePistolM1984 = магазин M1984 (9мм)
     .desc = { ent-CMBaseMagazinePistol.desc }
-ent-CMMagazinePistolM77AP = M77 AP magazine (9mm)
+ent-CMMagazinePistolM77AP = магазин M77 (9мм, бронебойные)
     .desc = { ent-CMBaseMagazinePistol.desc }
-ent-CMMagazinePistolMK80 = MK80 magazine (9mm Squash-Head)
+ent-CMMagazinePistolMK80 = магазин MK80 (9мм, экспансивные)
     .desc = { ent-CMBaseMagazinePistol.desc }
-ent-RMCMagazinePistolSU6 = SU-6 magazine (.45 ACP)
+ent-RMCMagazinePistolSU6 = магазин SU-6 (.45 ACP)
     .desc = { ent-CMBaseMagazinePistol.desc }

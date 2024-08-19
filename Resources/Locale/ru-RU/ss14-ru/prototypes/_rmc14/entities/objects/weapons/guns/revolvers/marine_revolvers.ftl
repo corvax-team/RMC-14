@@ -1,5 +1,4 @@
 ent-RMCWeaponRevolverBase = { ent-['BaseItem', 'CMBaseWeaponGun', 'RMCBaseAttachableHolder'] }
-
   .desc = { ent-['BaseItem', 'CMBaseWeaponGun', 'RMCBaseAttachableHolder'].desc }
-ent-RMCWeaponRevolverM44 = M44 combat revolver
-    .desc = A bulky revolver, occasionally carried by assault troops and officers in the Marine Corps, as well as civilian law enforcement. Fires .44 Magnum rounds.
+ent-RMCWeaponRevolverM44 = боевой револьвер M44
+    .desc = Громоздкий револьвер, который носят штурмовые отряды и офицеры корпуса морпехов, а также правоохранительные органы. Стреляет патронами .44 Magnum.

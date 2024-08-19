@@ -1,6 +1,6 @@
-ent-RMCBaseSpeedLoader44 = M44 speed loader (.44)
+ent-RMCBaseSpeedLoader44 = спидлоадер M44 (.44)
     .desc = { ent-BaseItem.desc }
-ent-RMCSpeedLoaderM44 = M44 speed loader (.44)
-    .desc = A revolver speed loader.
-ent-RMCSpeedLoader44Marksman = M44 marksman speed loader (.44)
-    .desc = A revolver speed loader filled with Marksman ammo.
+ent-RMCSpeedLoaderM44 = спидлоадер M44 (.44)
+    .desc = Револьверный ускоритель заряжания.
+ent-RMCSpeedLoader44Marksman = спидлоадер M44 (.44, снайперские)
+    .desc = Револьверный ускоритель заряжания, снаряженный снайперскими патронами.

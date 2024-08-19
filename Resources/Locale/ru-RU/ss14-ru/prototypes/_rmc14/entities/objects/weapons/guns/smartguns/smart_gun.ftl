@@ -1,2 +1,2 @@
-ent-RMCSmartGun = ML66A smart gun
-    .desc = The actual firearm in the Smart Gun System. Essentially a heavy, mobile machinegun.
+ent-RMCSmartGun = смартган ML66A
+    .desc = Настоящее огнестрельное оружие системы Smart Gun. По сути, тяжелый мобильный пулемет.
