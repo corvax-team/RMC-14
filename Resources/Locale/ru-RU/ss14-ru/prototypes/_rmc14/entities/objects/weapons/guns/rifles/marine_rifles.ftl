@@ -1,9 +1,9 @@
 ent-CMBaseWeaponRifle = { ent-['BaseItem', 'CMBaseWeaponGun', 'RMCBaseAttachableHolder'] }
-
   .desc = { ent-['BaseItem', 'CMBaseWeaponGun', 'RMCBaseAttachableHolder'].desc }
 ent-WeaponRifleM54C = M54C assault rifle MK2
-    .desc = The standard issue rifle of the Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
+    .desc = Стандартная винтовка колониальных морпехов. Служит личному составу верой и правдой. Использует безгильзовые боеприпасы 10x24 мм.
 ent-WeaponRifleM54CE2 = M54CE2 heavy assault rifle
-    .desc = A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
+    .desc = Крупное оружие огневой поддержки отряда, способное вести непрерывный подавляющий огонь с укрепленной позиции. Хотя оно имеет плохую стабилизацию и малую точность, его можно брать в обе руки и вести стрельбу.
 ent-WeaponRifleM4SPR = M4SPR battle rifle
-    .desc = The M4SPR battle rifle is a designated marksman rifle in service with the Marine. Sporting a bullpup configuration, the M4SPR battle rifle is perfect for reconnaissance and fire support teams.
+    .desc = Боевая винтовка M4SPR — это винтовка для пехотных снайперов, состоящая на вооружении колониальных морпехов. M4SPR с компоновкой буллпап идеально подходит для разведывательных групп и отрядов огневой поддержки.
+
