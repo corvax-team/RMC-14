@@ -3,17 +3,19 @@
   parent: RMCPodDoorAlmayerBlack
   id: CCMPodDoorDavidPort
   name: port's podlock
+  suffix: David
   
 - type: entity
   parent: RMCPodDoorAlmayerBlack
   id: CCMPodDoorDavidNukeStorage
   name: nuke storage's podlock
+  suffix: David
   
 - type: entity
   parent: RMCPodDoorAlmayerBlack
   id: CCMPodDoorDavidNukeStorageOpen
   name: nuke storage's podlock
-  suffix: Open
+  suffix: Open, David
   components:
   - type: Door
     state: Open
