@@ -4643,8 +4643,6 @@ entities:
       pos: -42.5,-14.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 327
   - uid: 7629
@@ -4653,8 +4651,6 @@ entities:
       pos: -41.5,-10.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 327
   - uid: 7631
@@ -27473,8 +27469,6 @@ entities:
       pos: -39.5,-12.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 327
     - type: AtmosPipeColor
@@ -28011,8 +28005,6 @@ entities:
       pos: -45.5,-12.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 327
     - type: AtmosPipeColor
@@ -42275,8 +42267,6 @@ entities:
       pos: -41.5,-1.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 327
   - uid: 6211
@@ -43059,8 +43049,6 @@ entities:
       pos: -40.5,-13.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 327
   - uid: 7415
@@ -43069,8 +43057,6 @@ entities:
       pos: -40.5,-16.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 327
   - uid: 7427
@@ -43079,8 +43065,6 @@ entities:
       pos: -43.5,-1.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 327
   - uid: 7628
@@ -54537,9 +54521,6 @@ entities:
     - type: Transform
       pos: -55.4465,-7.5931654
       parent: 1
-    missingComponents:
-    - Physics
-    - Fixtures
 - proto: OxygenCanister
   entities:
   - uid: 5267
