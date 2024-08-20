@@ -1,13 +1,14 @@
 - type: entity
   parent: CrateRodentCage
-  id: CCMCrateRudiCage
-  name: Rudi cage
+  id: CCMCrateRoudyCage
+  name: Roudy cage
   components:
   - type: Sprite
-    sprite: _CCM14/Structures/Storage/Crates/rudi_cage.rsi
+    sprite: _CCM14/Structures/Storage/Crates/roudy_cage.rsi
     layers:
     - state: base
     - state: closed
       map: ["enum.StorageVisualLayers.Door"]
   - type: Icon
-    sprite: _CCM14/Structures/Storage/Crates/rudi_cage.rsi
+    sprite: _CCM14/Structures/Storage/Crates/roudy_cage.rsi
+    

@@ -1,21 +1,21 @@
 {
   "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "By fluffy.skeleton(discord)",
   "size": {
     "x": 32,
     "y": 32
   },
-  "license": "CC-BY-SA-3.0",
-  "copyright": "By fluffy.skeleton(discord)",
   "states": [
     {
-      "name": "rudi",
+      "name": "roudy",
       "directions": 4
     },
     {
-      "name": "rudiCrit"
+      "name": "roudyCrit"
     },
     {
-        "name": "rudiDeath"
+        "name": "roudyDeath"
     },
     {
         "name": "sleeping"

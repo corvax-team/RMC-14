@@ -1,16 +1,16 @@
 # CCM TODO different customization (like sunglassess, masks wearing (like hamlet has)
 - type: entity
-  name: Rudi
+  name: Roudy
   parent: SimpleMobBase
-  id: CCMMobRudi
+  id: CCMMobRoudy
   description: Dude, how do you get so cute!? I want to look like you!
   components:
   - type: Sprite
     drawdepth: Mobs
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
-      state: rudi
-      sprite: _CCM14/Mobs/rudi.rsi
+      state: roudy
+      sprite: _CCM14/Mobs/roudy.rsi
   - type: Physics
   - type: Fixtures
     fixtures:
@@ -29,11 +29,11 @@
   - type: DamageStateVisuals
     states:
       Alive:
-        Base: Rudi
+        Base: Roudy
       Critical:
-        Base: rudiCrit
+        Base: roudyCrit
       Dead:
-        Base: rudiDeath
+        Base: roudyDeath
   - type: InteractionPopup
     successChance: 0.5
     interactSuccessString: petting-success-hamster
