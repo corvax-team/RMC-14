@@ -25,6 +25,7 @@
     - CMXenoSentinel
     - CMXenoSpitter
     - CMXenoWarrior
+    - CCMXenoRouny # CCM Rouny
 
 - type: entity
   id: CMJobsXenoDrones
@@ -43,7 +44,7 @@
     - CMXenoQueen
 
 - type: entity
-  id: CMJobsXenoTierThree
+  id: CMJobsXenoTierThree # CCM Tier 4 also :)
   categories:
   - HideSpawnMenu
   components:
@@ -55,3 +56,4 @@
     - CMXenoCrusher
     - CMXenoPraetorian
     - CMXenoRavager
+    - CCMXenoRouny # CCM Rouny
