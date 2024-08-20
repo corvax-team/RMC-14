@@ -128,7 +128,7 @@
   - type: RequisitionsElevator
   - type: CargoSellBlacklist
   - type: WarpPoint
-    location: the pit
+    location: Лифт # CCM locale TODO locale for RMC probably
 
 - type: entity
   parent: CMBaseStructureCorrodible
