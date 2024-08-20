@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Straight rails and sleepers made by varttist (discord), rail turn and rusty rails made by unit480 (discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "rail_double"
+    },
+    {
+      "name": "rail"
+    },
+    {
+      "name": "sleeper_double"
+    },
+    {
+      "name": "sleeper"
+    },
+    {
+      "name": "rail_chip_a"
+    },
+    {
+      "name": "rail_chip_b"
+    },
+    {
+      "name": "rail_turn"
+    },
+    {
+      "name": "rail_double_rusty"
+    },
+    {
+      "name": "rail_rusty"
+    }
+  ]
+}
