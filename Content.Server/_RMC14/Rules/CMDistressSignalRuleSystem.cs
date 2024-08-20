@@ -692,7 +692,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (xenoCandidate)
                 continue;
 
-            ChatManager.SendAdminAnnouncement("Can't start distress signal. Requires at least 1 xeno player but we have 0.");
+            ChatManager.DispatchServerAnnouncement("Невозможно запустить режим. Нужен хотя бы 1 готовый ксеноморф-игрок, но их не было."); // CCM DispatchServerAnnouncement, TODO Locale for RMC
             ev.Cancel();
         }
     }
