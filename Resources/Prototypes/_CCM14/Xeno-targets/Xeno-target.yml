@@ -4,7 +4,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: _CCM14/Object/xeno-target.rsi
+    sprite: _CCM14/Objects/xeno-target.rsi
     state: target_stake
     noRot: true
   - type: Repairable
