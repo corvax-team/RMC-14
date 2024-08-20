@@ -1,0 +1,13 @@
+- type: entity
+  name: Rudi Spawner
+  id: CCMSpawnMobRudi
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+      - state: rudi
+        sprite: _CCM14/Mobs/rudi.rsi
+  - type: ConditionalSpawner
+    prototypes:
+      - CCMMobRudi

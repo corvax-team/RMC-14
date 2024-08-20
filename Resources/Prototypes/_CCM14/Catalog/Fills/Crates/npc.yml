@@ -1,0 +1,8 @@
+- type: entity
+  id: CCMCrateNPCRudi
+  parent: CCMCrateRudiCage
+  suffix: Rudi
+  components:
+    - type: StorageFill
+      contents:
+        - id: CCMMobRudi
