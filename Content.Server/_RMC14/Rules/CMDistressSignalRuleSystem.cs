@@ -374,7 +374,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             spawnedDropships = true;
             var dropshipMap = _mapManager.CreateMap();
             var dropshipPoints = EntityQueryEnumerator<DropshipDestinationComponent, TransformComponent>();
-            var ships = new[] { "/Maps/_RMC14/alamo.yml", "/Maps/_RMC14/normandy.yml" };
+            var ships = new[] { "/Maps/_CCM14/alamo.yml", "/Maps/_CCM14/normandy.yml" }; // CCM correct shuttles
             var shipIndex = 0;
             while (dropshipPoints.MoveNext(out var destinationId, out _, out var destTransform))
             {
@@ -1176,6 +1176,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SelectedPlanetMapName = SelectedPlanetMapName switch
         {
             "lv624" => "LV-624",
+			"polyphemus" => "Polyphemus", // CCM map
             "solaris" => "Solaris Ridge",
             "prison" => "Fiorina Science Annex",
             "shiva" => "Shivas Snowball",
