@@ -115,7 +115,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [ViewVariables]
     public readonly Dictionary<string, float> MarinesPerXeno = new()
     {
-        ["/Maps/_CCM14/Planets/lv624.yml"] = 3.5f // CCM
+        ["/Maps/_CCM14/Planets/lv624.yml"] = 3f // CCM
+        ["/Maps/_CCM14/Planets/polyphemus.yml"] = 3.5f // CCM
         //["/Maps/_RMC14/solaris.yml"] = 3.5f,
         //["/Maps/_RMC14/prison.yml"] = 3.5f,
         //["/Maps/_RMC14/shiva.yml"] = 3.5f,
@@ -845,6 +846,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SelectedPlanetMapName = SelectedPlanetMapName switch
         {
             "lv624" => "LV-624",
+            "polyphemus" => "Polyphemus",
             "solaris" => "Solaris Ridge",
             "prison" => "Fiorina Science Annex",
             "shiva" => "Shivas Snowball",
