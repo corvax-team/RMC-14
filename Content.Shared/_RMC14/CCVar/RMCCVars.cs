@@ -91,7 +91,7 @@ public sealed class RMCCVars : CVars
     ///     Comma-separated list of maps to load as the planet in the distress signal gamemode.
     /// </summary>
     public static readonly CVarDef<string> RMCPlanetMaps =
-        CVarDef.Create("rmc.planet_maps", "/Maps/_CCM14/Planets/lv624.yml, /Maps/_CCM14/Planets/polyphemus.yml", CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.planet_maps", "/Maps/_CCM14/Planets/lv624.yml,/Maps/_CCM14/Planets/polyphemus.yml", CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<bool> RMCDrawStorageIconLabels =
         CVarDef.Create("rmc.draw_storage_icon_labels", true, CVar.REPLICATED | CVar.SERVER);
