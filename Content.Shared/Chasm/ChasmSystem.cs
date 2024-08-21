@@ -18,7 +18,7 @@ namespace Content.Shared.Chasm;
 /// </summary>
 public sealed class ChasmSystem : EntitySystem
 {
-	[Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -46,10 +46,10 @@ public sealed class ChasmSystem : EntitySystem
         {
             if (_timing.CurTime < chasm.NextDeletionTime)
                 continue;
-			
-			if(TryComp<MobStateComponent>(uid, out var comp))
-				_mobState.ChangeMobState(uid, MobState.Dead, comp); 
-			
+                
+            if(TryComp<MobStateComponent>(uid, out var comp))
+				_mobState.ChangeMobState(uid, MobState.Dead, comp);
+    
             QueueDel(uid);
         }
     }
