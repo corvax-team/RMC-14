@@ -1,10 +1,13 @@
 ﻿using System.Collections.Immutable;
+using System.Linq;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.Clothing;
+using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Prototypes;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
@@ -28,13 +31,17 @@ public sealed class SquadSystem : EntitySystem
 
     private readonly HashSet<EntityUid> _membersToUpdate = new();
 
+    private EntityQuery<SquadArmorWearerComponent> _squadArmorWearerQuery;
     private EntityQuery<SquadMemberComponent> _squadMemberQuery;
     private EntityQuery<SquadTeamComponent> _squadTeamQuery;
 
     public override void Initialize()
     {
+        _squadArmorWearerQuery = GetEntityQuery<SquadArmorWearerComponent>();
         _squadMemberQuery = GetEntityQuery<SquadMemberComponent>();
         _squadTeamQuery = GetEntityQuery<SquadTeamComponent>();
+
+        SubscribeLocalEvent<SquadArmorComponent, GetEquipmentVisualsEvent>(OnSquadArmorGetVisuals, after: [typeof(ClothingSystem)]);
 
         SubscribeLocalEvent<SquadMemberComponent, MapInitEvent>(OnSquadMemberMapInit);
         SubscribeLocalEvent<SquadMemberComponent, ComponentRemove>(OnSquadMemberRemove);
@@ -42,11 +49,33 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadMemberComponent, MobStateChangedEvent>(OnSquadMemberMobStateChanged);
         SubscribeLocalEvent<SquadMemberComponent, PlayerAttachedEvent>(OnSquadMemberPlayerAttached);
         SubscribeLocalEvent<SquadMemberComponent, PlayerDetachedEvent>(OnSquadMemberPlayerDetached);
-
         SubscribeLocalEvent<SquadMemberComponent, GetMarineIconEvent>(OnSquadRoleGetIcon);
+
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         RefreshSquadPrototypes();
+    }
+
+    private void OnSquadArmorGetVisuals(Entity<SquadArmorComponent> ent, ref GetEquipmentVisualsEvent args)
+    {
+        if (!_squadMemberQuery.TryComp(args.Equipee, out var member) ||
+            !_squadArmorWearerQuery.TryComp(args.Equipee, out var wearer))
+        {
+            return;
+        }
+
+        var rsi = wearer.Leader ? ent.Comp.LeaderRsi : ent.Comp.Rsi;
+        var layer = $"enum.{nameof(SquadArmorLayers)}.{ent.Comp.Layer}";
+        if (args.Layers.Any(l => l.Item1 == layer))
+            return;
+
+        args.Layers.Add((layer, new PrototypeLayerData
+        {
+            RsiPath = rsi.RsiPath.ToString(),
+            State = rsi.RsiState,
+            Color = member.BackgroundColor,
+            Visible = true,
+        }));
     }
 
     private void OnSquadMemberMapInit(Entity<SquadMemberComponent> ent, ref MapInitEvent args)
@@ -141,6 +170,19 @@ public sealed class SquadSystem : EntitySystem
 
         squad = default;
         return false;
+    }
+
+    public bool TryGetMemberSquad(Entity<SquadMemberComponent?> member, out Entity<SquadTeamComponent> squad)
+    {
+        squad = default;
+        if (!Resolve(member, ref member.Comp, false))
+            return false;
+
+        if (!TryComp(member.Comp.Squad, out SquadTeamComponent? team))
+            return false;
+
+        squad = (member.Comp.Squad.Value, team);
+        return true;
     }
 
     public bool TryEnsureSquad(EntProtoId id, out Entity<SquadTeamComponent> squad)
