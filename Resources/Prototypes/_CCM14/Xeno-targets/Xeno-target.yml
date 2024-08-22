@@ -56,7 +56,7 @@
   description: A shooting target. This one is xeno drone
   components:
   - type: Sprite
-    sprite: _CCM14/Object/xeno-target.rsi
+    sprite: _CCM14/Objects/xeno-target.rsi
     state: drone_l
 
 - type: entity
@@ -66,5 +66,5 @@
   description: A shooting target. This one is xeno drone
   components:
   - type: Sprite
-    sprite: _CCM14/Object/xeno-target.rsi
+    sprite: _CCM14/Objects/xeno-target.rsi
     state: drone_r
