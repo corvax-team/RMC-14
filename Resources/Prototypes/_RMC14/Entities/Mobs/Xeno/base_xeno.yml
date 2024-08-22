@@ -167,6 +167,7 @@
     alert: XenoNightVision
     overlay: true
   - type: ParalyzeOnPullAttemptImmune
+  - type: InfectOnPullAttemptImmune
   - type: GhostTakeoverAvailable
   - type: GhostRole
     makeSentient: true
@@ -328,6 +329,13 @@
     damage: #per second, scales with number of fire 'stacks'
       types:
         Heat: 3
+
+- type: entity
+  abstract: true
+  id: RMCXenoSpeechSounds
+  components:
+  - type: Speech
+    speechSounds: Xenonid
 
 - type: speechVerb
   id: Xeno

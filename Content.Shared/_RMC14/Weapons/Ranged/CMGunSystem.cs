@@ -45,6 +45,8 @@ public sealed class CMGunSystem : EntitySystem
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ProjectileComponent> _projectileQuery;
 
+    private int blockArcCollisionGroup = (int)(CollisionGroup.HighImpassable | CollisionGroup.Impassable);
+
     public override void Initialize()
     {
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
@@ -78,6 +80,8 @@ public sealed class CMGunSystem : EntitySystem
         SubscribeLocalEvent<GunRequireEquippedComponent, AttemptShootEvent>(OnRequireEquippedAttemptShoot);
 
         SubscribeLocalEvent<RevolverAmmoProviderComponent, UniqueActionEvent>(OnRevolverUniqueAction);
+
+        SubscribeLocalEvent<UserBlockShootingInsideContainersComponent, ShotAttemptedEvent>(OnUserBlockShootingInsideContainersAttemptShoot);
     }
 
     /// <summary>
@@ -151,8 +155,7 @@ public sealed class CMGunSystem : EntitySystem
     private void OnCollisionCheckArc(Entity<ProjectileFixedDistanceComponent> ent, ref PreventCollideEvent args)
     {
         int otherLayers = (int)args.OtherFixture.CollisionLayer;
-        int impassableLayer = (int)CollisionGroup.Impassable;
-        if (((Comp<ProjectileFixedDistanceComponent>(ent).ArcProj) && !((args.OtherFixture.CollisionLayer & impassableLayer) == impassableLayer)))
+        if (Comp<ProjectileFixedDistanceComponent>(ent).ArcProj && (args.OtherFixture.CollisionLayer & blockArcCollisionGroup) == 0)
             args.Cancelled = true;
         return;
     }
@@ -354,5 +357,14 @@ public sealed class CMGunSystem : EntitySystem
         _popup.PopupClient(popup, args.UserUid, args.UserUid, PopupType.SmallCaution);
 
         Dirty(gun);
+    }
+
+    private void OnUserBlockShootingInsideContainersAttemptShoot(Entity<UserBlockShootingInsideContainersComponent> ent, ref ShotAttemptedEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (_container.IsEntityInContainer(ent))
+            args.Cancel();
     }
 }

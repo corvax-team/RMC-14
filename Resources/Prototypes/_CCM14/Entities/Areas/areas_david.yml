@@ -1,0 +1,119 @@
+- type: entity
+  parent:
+  - RMCAreaProtectionMetal
+  - RMCAreaBase
+  id: CCMAreaDavid
+  suffix: David Area
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas_david.rsi
+    state: david
+  - type: Area
+    powerNet: david
+    hijackEvacuationArea: false
+    hijackEvacuationWeight: 0
+    hijackEvacuationType: null
+
+# Командование
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidCommand
+  name: Командование
+  components:
+  - type: Area
+    minimapColor: '#2D3FA2EE'
+    
+# Инженеры
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidEngineering
+  name: Инженерия
+  components:
+  - type: Sprite
+    state: engineering
+  - type: Area
+    minimapColor: '#C19504E7'
+    
+# Что-то
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidShipboard
+  components:
+  - type: Area
+    minimapColor: '#A22D2DEE'
+
+# Бриг
+- type: entity
+  parent: CCMAreaDavidShipboard
+  id: CCMAreaDavidBrid
+  name: Бриг
+  components:
+  - type: Sprite
+    state: brig
+    
+# Коридоры
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidHallways
+  name: Коридоры
+  
+# Техи
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidMaint
+  name: Техи
+  components:
+  - type: Sprite
+    state: lowerhull
+
+# Сервис
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidLiving
+  name: Сервис
+  components:
+  - type: Sprite
+    state: livingspace
+  - type: Area
+    minimapColor: '#6C6767D8'
+
+# Мед
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidMedical
+  name: Медицинский отдел
+  components:
+  - type: Sprite
+    state: medical
+  - type: Area
+    minimapColor: '#3DBF75EE'
+
+# Отряды (в т.ч. поставки)
+- type: entity
+  abstract: true
+  parent: CCMAreaDavid
+  id: CCMAreaDavidSquads
+  
+- type: entity
+  parent: CCMAreaDavidSquads
+  id: CCMAreaDavidSquadsAlpha
+  name: Отряд альфа
+  components:
+  - type: Sprite
+    state: alpha
+
+- type: entity
+  parent: CCMAreaDavidSquads
+  id: CCMAreaDavidSquadsBravo
+  name: Отряд браво
+  components:
+  - type: Sprite
+    state: bravo
+    
+- type: entity
+  parent: CCMAreaDavidSquads
+  id: CCMAreaDavudSquadsReq
+  name: Поставки
+  components:
+  - type: Sprite
+    state: req
