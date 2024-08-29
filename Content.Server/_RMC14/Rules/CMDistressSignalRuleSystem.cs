@@ -1170,7 +1170,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             return SelectedPlanetMap;
 
         SelectedPlanetMap = _random.Pick(_planetMaps.Split(","));
-        SelectedPlanetMapName = SelectedPlanetMap.Replace("/Maps/_RMC14/", "").Replace(".yml", "").Replace("/Maps_CCM14/Planets/", "");
+        SelectedPlanetMapName = SelectedPlanetMap.Replace("/Maps/_RMC14/", "").Replace(".yml", "").Replace("/Maps/_CCM14/Planets/", "");
 
         // TODO RMC14 save these somewhere and avert the shitcode
         SelectedPlanetMapName = SelectedPlanetMapName switch
