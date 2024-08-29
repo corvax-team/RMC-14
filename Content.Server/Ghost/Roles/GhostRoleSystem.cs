@@ -334,19 +334,19 @@ public sealed class GhostRoleSystem : EntitySystem
         {
             UpdateAllEui();
         }
-
-        //Corvax
-        public void OpenEuiLobby(ICommonSession session)
-        {
-            if (_openUis.ContainsKey(session))
-                CloseEui(session);
-
-            var eui = _openUis[session] = new GhostRolesEui();
-            _euiManager.OpenEui(eui, session);
-            eui.StateDirty();
-        }
-        //Corvax
     }
+
+    //Corvax
+    public void OpenEuiLobby(ICommonSession session)
+    {
+        if (_openUis.ContainsKey(session))
+            CloseEui(session);
+
+        var eui = _openUis[session] = new GhostRolesEui();
+        _euiManager.OpenEui(eui, session);
+        eui.StateDirty();
+    }
+    //Corvax
 
     // probably fine to be init because it's never added during entity initialization, but much later
     private void OnRaffleInit(Entity<GhostRoleRaffleComponent> ent, ref ComponentInit args)
