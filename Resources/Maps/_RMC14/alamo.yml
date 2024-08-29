@@ -105,7 +105,7 @@ entities:
       pos: -4.5,1.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -384.49503
+      secondsUntilStateChange: -1395.4585
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -117,7 +117,7 @@ entities:
       pos: -4.5,2.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -384.045
+      secondsUntilStateChange: -1395.0085
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -129,7 +129,7 @@ entities:
       pos: 3.5,1.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -390.5541
+      secondsUntilStateChange: -1401.5176
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -141,7 +141,7 @@ entities:
       pos: 3.5,2.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -385.57822
+      secondsUntilStateChange: -1396.5417
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -686,12 +686,24 @@ entities:
     - type: Transform
       pos: -4.5,7.5
       parent: 1
-- proto: CMAlamoWall85
+- proto: CMAlamoWall84Flipped
   entities:
   - uid: 87
     components:
     - type: Transform
       pos: 3.5,7.5
+      parent: 1
+- proto: CMAlamoWall85Flipped
+  entities:
+  - uid: 90
+    components:
+    - type: Transform
+      pos: 2.5,7.5
+      parent: 1
+  - uid: 91
+    components:
+    - type: Transform
+      pos: -3.5,7.5
       parent: 1
 - proto: CMAlamoWall86
   entities:
@@ -706,20 +718,6 @@ entities:
     components:
     - type: Transform
       pos: 1.5,7.5
-      parent: 1
-- proto: CMAlamoWall90
-  entities:
-  - uid: 90
-    components:
-    - type: Transform
-      pos: 2.5,7.5
-      parent: 1
-- proto: CMAlamoWall91
-  entities:
-  - uid: 91
-    components:
-    - type: Transform
-      pos: -3.5,7.5
       parent: 1
 - proto: CMAlamoWall92
   entities:

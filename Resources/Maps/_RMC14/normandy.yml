@@ -110,6 +110,10 @@ entities:
     - type: Transform
       pos: 0.5,8.5
       parent: 1
+    - type: DropshipTerminalWeapons
+      screenOne:
+        weapon: null
+        state: Cams
 - proto: CMLightFixtureAlwaysPowered
   entities:
   - uid: 106
@@ -743,12 +747,24 @@ entities:
     - type: Transform
       pos: -4.5,7.5
       parent: 1
-- proto: CMNormandyWall85
+- proto: CMNormandyWall84Flipped
+  entities:
+  - uid: 91
+    components:
+    - type: Transform
+      pos: 3.5,7.5
+      parent: 1
+- proto: CMNormandyWall85Flipped
   entities:
   - uid: 87
     components:
     - type: Transform
-      pos: 3.5,7.5
+      pos: -3.5,7.5
+      parent: 1
+  - uid: 90
+    components:
+    - type: Transform
+      pos: 2.5,7.5
       parent: 1
 - proto: CMNormandyWall86
   entities:
@@ -763,20 +779,6 @@ entities:
     components:
     - type: Transform
       pos: 1.5,7.5
-      parent: 1
-- proto: CMNormandyWall90
-  entities:
-  - uid: 90
-    components:
-    - type: Transform
-      pos: 2.5,7.5
-      parent: 1
-- proto: CMNormandyWall91
-  entities:
-  - uid: 91
-    components:
-    - type: Transform
-      pos: -3.5,7.5
       parent: 1
 - proto: CMNormandyWall92
   entities:
