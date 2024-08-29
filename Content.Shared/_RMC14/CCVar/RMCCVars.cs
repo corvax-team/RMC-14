@@ -111,6 +111,9 @@ public sealed class RMCCVars : CVars
     public static readonly CVarDef<string> RMCCorrosiveAcidDamageType =
         CVarDef.Create("rmc.corrosive_acid_damage_type", "Heat", CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCCorrosiveAcidDamageTimeSeconds =
+        CVarDef.Create("rmc.corrosive_acid_damage_time_seconds", 45, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<int> RMCTailStabMaxTargets =
         CVarDef.Create("rmc.tail_stab_max_targets", 1, CVar.REPLICATED | CVar.SERVER);
 
@@ -161,4 +164,7 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCDropshipHijackTravelTimeSeconds =
         CVarDef.Create("rmc.dropship_hijack_travel_time_seconds", 180, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCEntitiesLogDelete =
+        CVarDef.Create("rmc.entities_log_delete", false, CVar.SERVER | CVar.SERVERONLY);
 }
