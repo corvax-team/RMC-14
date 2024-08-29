@@ -1,0 +1,53 @@
+- type: decal
+  id: RailsRailDouble
+  sprite:
+    sprite: _CCM14/Decals/rails.rsi
+    state: rail_double
+
+- type: decal
+  id: RailsRail
+  sprite:
+    sprite: _CCM14/Decals/rails.rsi
+    state: rail
+
+- type: decal
+  id: RailsSleeperDouble
+  sprite:
+    sprite: _CCM14/Decals/rails.rsi
+    state: sleeper_double
+
+- type: decal
+  id: RailsSleeper
+  sprite:
+    sprite: _CCM14/Decals/rails.rsi
+    state: sleeper
+
+- type: decal
+  id: RailsRailChipA
+  sprite:
+    sprite: _CCM14/Decals/rails.rsi
+    state: rail_chip_a
+
+- type: decal
+  id: RailsRailChipB
+  sprite:
+    sprite: _CCM14/Decals/rails.rsi
+    state: rail_chip_b
+
+- type: decal
+  id: RailsRailTurn
+  sprite:
+    sprite: _CCM14/Decals/rails.rsi
+    state: rail_turn
+
+- type: decal
+  id: RailsRailDoubleRusty
+  sprite:
+    sprite: _CCM14/Decals/rails.rsi
+    state: rail_double_rusty
+
+- type: decal
+  id: RailsRailRusty
+  sprite:
+    sprite: _CCM14/Decals/rails.rsi
+    state: rail_rusty
