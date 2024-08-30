@@ -20,15 +20,15 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      500: Critical
-      600: Dead
+      600: Critical
+      700: Dead
   - type: Xeno
     role: CMXenoDefender
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStab # TODO RMC14 name it "tail slam"
+    - ActionXenoTailSlam # TODO RMC14 name it "tail slam" /welp, Corvax just add here maybe not what RMC wanted... but for now it is.
     - ActionXenoToggleCrest
     - ActionXenoHeadbutt
     - ActionXenoTailSweep
@@ -70,6 +70,12 @@
   - type: Tackle # min: 2, max: 4
     threshold: 4
     stun: 5
+  - type: XenoTailSlam
+    power: 1
+    stunTime: 500
+    tailDamage:
+      groups:
+        Brute: 55
   - type: Fixtures
     fixtures:
       fix1:

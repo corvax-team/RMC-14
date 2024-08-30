@@ -20,8 +20,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      450: Critical
-      550: Dead
+      550: Critical
+      650: Dead
   - type: Xeno
     role: CMXenoLurker
     actionIds:
@@ -57,6 +57,12 @@
     leapSound: /Audio/_RMC14/Xeno/alien_pounce.ogg
     knockdownRequiresInvisibility: true
   - type: XenoTurnInvisible
+  - type: XenoTailSlam
+    power: 0
+    stunTime: 100
+    tailDamage:
+      groups:
+        Brute: 35
   - type: XenoCripplingStrike
   - type: XenoMeleeSlow
     requiresKnockDown: true

@@ -39,6 +39,12 @@
     countedInSlots: false
     unlockAt: 0
   - type: XenoAcid
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 30
+    inject:
+      CCMXenoDroneJuice: 0.15
   - type: XenoConstruction
     buildDelay: 4
     canBuild:

@@ -20,8 +20,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      500: Critical
-      600: Dead
+      600: Critical
+      700: Dead
   - type: MeleeWeapon
     damage:
       groups:
@@ -49,6 +49,12 @@
     devolvesTo:
     - CMXenoLarva
   - type: XenoAcid
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 27
+    inject:
+      CCMXenoDroneJuice: 0.30
   - type: XenoConstruction
     buildDelay: 2
     canBuild:
@@ -74,8 +80,8 @@
     maxPlasma: 1000
     plasmaRegenOnWeeds: 4.5
   - type: Tackle # min: 2, max: 4
-    threshold: 4
-    stun: 7
+    threshold: 10
+    stun: 20
   - type: WhitelistPickup
     whitelist:
       components:

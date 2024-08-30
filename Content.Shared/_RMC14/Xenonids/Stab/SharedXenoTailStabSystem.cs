@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared.ActionBlocker;
@@ -182,6 +182,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                             _solutionContainer.TryAddReagent(solutionEnt.Value, reagent, amount);
                         }
                     }
+
 
                     var msg = Loc.GetString("rmc-xeno-tail-stab-self", ("target", hit));
                     _popup.PopupClient(msg, stab, stab);

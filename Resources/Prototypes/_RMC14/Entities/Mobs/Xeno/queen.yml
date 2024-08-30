@@ -26,8 +26,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      500: Critical
-      600: Dead
+      700: Critical
+      800: Dead
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -39,7 +39,7 @@
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStab
+    - ActionXenoTailSlam
     - ActionXenoOrderConstruction
     - ActionXenoAcidNormal
     - ActionXenoPheromones
@@ -62,6 +62,12 @@
     bypassTierCount: true
     unlockAt: 0
   - type: XenoAcid
+  - type: XenoTailSlam
+    power: 7
+    stunTime: 2900
+    tailDamage:
+      groups:
+        Brute: 80
   - type: XenoConstruction
     canBuild:
     - WallXenoResin

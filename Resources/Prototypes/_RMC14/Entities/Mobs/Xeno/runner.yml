@@ -20,8 +20,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      230: Critical
-      330: Dead
+      330: Critical
+      430: Dead
   - type: Fixtures
     fixtures:
       fix1:
@@ -41,7 +41,7 @@
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStab
+    - ActionXenoTailSlam
     - ActionXenoHide
     - ActionXenoLeap
     - ActionXenoBoneChips
@@ -54,6 +54,12 @@
     devolvesTo:
     - CMXenoLarva
   - type: XenoBoneChips
+  - type: XenoTailSlam
+    power: 0
+    stunTime: 100
+    tailDamage:
+      groups:
+        Brute: 35
   - type: XenoDevour
   - type: XenoHide
   - type: SlowOnPull
@@ -72,6 +78,7 @@
     max: 300
     evolvesTo:
     - CMXenoLurker
+    - CCMXenoRouny # CCM Rouny
   - type: XenoZoom
   - type: MeleeWeapon
     attackRate: 1.4
