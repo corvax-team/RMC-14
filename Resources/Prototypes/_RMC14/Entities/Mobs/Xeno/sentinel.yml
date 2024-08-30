@@ -20,8 +20,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      500: Critical
-      600: Dead
+      600: Critical
+      700: Dead
   - type: Xeno
     role: CMXenoSentinel
     actionIds:

@@ -20,8 +20,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      700: Critical
-      800: Dead
+      800: Critical
+      900: Dead
   - type: Xeno
     role: CMXenoCrusher
     actionIds:

@@ -20,8 +20,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      650: Critical
-      750: Dead
+      750: Critical
+      850: Dead
   - type: Xeno
     role: CMXenoBoiler
     actionIds:

@@ -26,8 +26,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      500: Critical
-      600: Dead
+      700: Critical
+      800: Dead
   - type: Tag
     tags:
     - DoorBumpOpener
