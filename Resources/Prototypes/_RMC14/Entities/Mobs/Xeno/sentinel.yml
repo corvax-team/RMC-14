@@ -20,8 +20,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      500: Critical
-      600: Dead
+      600: Critical
+      700: Dead
   - type: Xeno
     role: CMXenoSentinel
     actionIds:
@@ -63,5 +63,11 @@
     threshold: 4
     stun: 8
     chance: 0.50
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 27
+    inject:
+      CCMXenoLightNeuroToxin: 0.30
   - type: RMCXenoDamageVisuals
     prefix: sentinel

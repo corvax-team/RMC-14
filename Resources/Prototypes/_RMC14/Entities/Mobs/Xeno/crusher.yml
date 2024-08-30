@@ -20,15 +20,15 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      700: Critical
-      800: Dead
+      800: Critical
+      900: Dead
   - type: Xeno
     role: CMXenoCrusher
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStab
+    - ActionXenoTailSlam
     - ActionXenoCharge
     - ActionXenoStomp
     - ActionXenoDefensiveShield
@@ -48,7 +48,7 @@
     damage:
       types:
         Blunt: 60
-        Structural: 750
+        Structural: 1500
   - type: XenoAnimateMovement
   - type: XenoPlasma
     plasma: 400
@@ -70,6 +70,12 @@
     threshold: 5
     stun: 5
     chance: 0.25
+  - type: XenoTailSlam
+    power: 2.5
+    stunTime: 1900
+    tailDamage:
+      groups:
+        Brute: 70
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
     baseSprintSpeed: 3

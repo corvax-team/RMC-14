@@ -20,15 +20,15 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      500: Critical
-      600: Dead
+      600: Critical
+      700: Dead
   - type: Xeno
     role: CMXenoWarrior
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStab
+    - ActionXenoTailSlam
     - ActionXenoPunch
     - ActionXenoLunge
     - ActionXenoFling
@@ -67,6 +67,12 @@
   - type: Tackle # min: 2, max: 4
     threshold: 4
     stun: 5
+   - type: XenoTailSlam
+    power: 1.5
+    stunTime: 1200
+    tailDamage:
+      groups:
+        Brute: 65
   - type: XenoLifesteal
   - type: RMCXenoDamageVisuals
     prefix: warrior
