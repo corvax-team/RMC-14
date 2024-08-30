@@ -459,7 +459,8 @@ namespace Content.Server.GameTicking
                     ("seconds", duration.Seconds));
 
                 if (_distressSignal.SelectedPlanetMapName is { } planet &&
-                    _distressSignal.OperationName is { } operation)
+                    _distressSignal.OperationName is { } operation &&
+                    _distressSignal.Result is { } resultation)
                 {
                     var mapName = _gameMapManager.GetSelectedMap()?.MapName;
                     mapName ??= Loc.GetString("discord-round-notifications-unknown-map");
@@ -468,6 +469,7 @@ namespace Content.Server.GameTicking
                         ("operation", operation),
                         ("planet", planet),
                         ("ship", mapName),
+                        ("res", resultation),
                         ("hours", Math.Truncate(duration.TotalHours)),
                         ("minutes", duration.Minutes),
                         ("seconds", duration.Seconds));
