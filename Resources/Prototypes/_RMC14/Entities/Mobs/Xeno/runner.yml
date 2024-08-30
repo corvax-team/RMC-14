@@ -78,6 +78,7 @@
     max: 300
     evolvesTo:
     - CMXenoLurker
+    - CCMXenoRouny # CCM Rouny
   - type: XenoZoom
   - type: MeleeWeapon
     attackRate: 1.4
