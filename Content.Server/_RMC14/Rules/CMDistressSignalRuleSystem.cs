@@ -140,6 +140,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     [ViewVariables]
     public string? OperationName { get; private set; }
+    public string? Result { get; private set; }
 
     public override void Initialize()
     {
@@ -818,6 +819,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (xenosAlive && !marinesAlive)
             {
                 distress.Result = DistressSignalRuleResult.MajorXenoVictory;
+                Result = distress.Result.ToString().ToLower();
                 EndRound();
                 continue;
             }
@@ -828,12 +830,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (distress.Hijack)
                 {
                     distress.Result = DistressSignalRuleResult.MinorXenoVictory;
+                    Result = distress.Result.ToString().ToLower();
                     EndRound();
                     continue;
                 }
                 else
                 {
                     distress.Result = DistressSignalRuleResult.MajorMarineVictory;
+                    Result = distress.Result.ToString().ToLower();
                     EndRound();
                     continue;
                 }
@@ -842,6 +846,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (!xenosAlive && !marinesAlive)
             {
                 distress.Result = DistressSignalRuleResult.AllDied;
+                Result = distress.Result.ToString().ToLower();
                 EndRound();
                 continue;
             }
@@ -864,11 +869,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (_xenoEvolution.HasLiving<XenoComponent>(4))
                 {
                     distress.Result = DistressSignalRuleResult.MinorMarineVictory;
+                    Result = distress.Result.ToString().ToLower();
                     EndRound();
                 }
                 else
                 {
                     distress.Result = DistressSignalRuleResult.MajorMarineVictory;
+                    Result = distress.Result.ToString().ToLower();
                     EndRound();
                 }
             }
@@ -1129,11 +1136,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (_xenoEvolution.HasLiving<XenoComponent>(4))
             {
                 component.Result = DistressSignalRuleResult.MinorMarineVictory;
+                Result = component.Result.ToString().ToLower();
                 EndRound();
             }
             else
             {
                 component.Result = DistressSignalRuleResult.MajorMarineVictory;
+                Result = component.Result.ToString().ToLower();
                 EndRound();
             }
         }
