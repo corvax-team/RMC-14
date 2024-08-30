@@ -84895,13 +84895,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -26.5,-9.5
       parent: 1
-- proto: SurveillanceCameraWirelessRouterBase
-  entities:
-  - uid: 466
-    components:
-    - type: Transform
-      pos: 45.5,-3.5
-      parent: 1
 - proto: SurveillanceCameraWirelessRouterEntertainment
   entities:
   - uid: 465
