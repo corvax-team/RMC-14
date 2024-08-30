@@ -40,9 +40,9 @@
       entries:
       - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
         points: 40
-      - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
+      - id: CMMagazineSniperM96SIncendiary # TODO rmc14 CMMagazineSniperM96SIncendiary
         points: 40
-      - id: CMMagazineSniperM96S
+      - id: CMMagazineSniperM96SFlak
         points: 40
     - name: Extra Demolitionist Ammunition
       entries:
