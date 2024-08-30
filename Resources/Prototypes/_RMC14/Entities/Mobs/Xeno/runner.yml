@@ -41,7 +41,7 @@
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStab
+    - ActionXenoTailSlam
     - ActionXenoHide
     - ActionXenoLeap
     - ActionXenoBoneChips
@@ -54,6 +54,12 @@
     devolvesTo:
     - CMXenoLarva
   - type: XenoBoneChips
+  - type: XenoTailSlam
+    power: 0
+    stunTime: 100
+    tailDamage:
+      groups:
+        Brute: 35
   - type: XenoDevour
   - type: XenoHide
   - type: SlowOnPull

@@ -63,5 +63,11 @@
     threshold: 4
     stun: 8
     chance: 0.50
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 27
+    inject:
+      CCMXenoLightNeuroToxin: 0.30
   - type: RMCXenoDamageVisuals
     prefix: sentinel

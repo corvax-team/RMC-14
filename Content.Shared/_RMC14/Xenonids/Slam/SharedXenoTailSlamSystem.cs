@@ -22,9 +22,14 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._RMC14.Xenonids.Stab;
+using Content.Shared.Throwing;
+using Content.Shared.Stunnable;
+using YamlDotNet.Core.Tokens;
+//using Content.Shared._RMC14.Xenonids.Stab;
 
-public abstract class SharedXenoTailStabSystem : EntitySystem
+namespace Content.Shared._RMC14.Xenonids.Slam;
+
+public abstract class SharedXenoTailSlamSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
@@ -39,6 +44,9 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
+    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
+
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
     protected Box2Rotated LastTailAttack;
@@ -48,12 +56,12 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<XenoTailStabComponent, XenoTailStabEvent>(OnXenoTailStab);
+        SubscribeLocalEvent<XenoTailSlamComponent, XenoTailSlamEvent>(OnXenoTailSlam);
 
         Subs.CVar(_config, RMCCVars.RMCTailStabMaxTargets, v => _tailStabMaxTargets = v, true);
     }
 
-    private void OnXenoTailStab(Entity<XenoTailStabComponent> stab, ref XenoTailStabEvent args)
+    private void OnXenoTailSlam(Entity<XenoTailSlamComponent> stab, ref XenoTailSlamEvent args)
     {
         if (!_actionBlocker.CanAttack(stab) ||
             !TryComp(stab, out TransformComponent? transform))
@@ -142,7 +150,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
 
             foreach (var action in _actions.GetActions(stab))
             {
-                if (TryComp(action.Id, out XenoTailStabActionComponent? actionComp))
+                if (TryComp(action.Id, out XenoTailSlamActionComponent? actionComp))
                     _actions.SetCooldown(action.Id, actionComp.MissCooldown);
             }
         }
@@ -174,14 +182,19 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     if (change?.GetTotal() > FixedPoint2.Zero)
                         _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
 
-                    if (stab.Comp.Inject != null &&
-                        _solutionContainer.TryGetInjectableSolution(hit, out var solutionEnt, out _))
-                    {
-                        foreach (var (reagent, amount) in stab.Comp.Inject)
-                        {
-                            _solutionContainer.TryAddReagent(solutionEnt.Value, reagent, amount);
-                        }
-                    }
+                    //start corvax
+                    var targetId = hit;
+                    var stunTime = new TimeSpan(stab.Comp.StunTime);
+                    var power = stab.Comp.Power;
+                    var origin = _transform.GetMapCoordinates(stab.Owner);
+                    var target = _transform.GetMapCoordinates(targetId);
+                    var diff = target.Position - origin.Position;
+                    var length2 = diff.Length();
+                    diff *= power / 3 / length2;
+
+                    _stun.TryParalyze(targetId, stunTime, true) ;
+                    _throwing.TryThrow(targetId, diff, power);
+                    //end corvax
 
 
                     var msg = Loc.GetString("rmc-xeno-tail-stab-self", ("target", hit));
@@ -211,7 +224,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         RaiseLocalEvent(stab, ref attackEv);
     }
 
-    protected virtual void DoLunge(Entity<XenoTailStabComponent, TransformComponent> user, Vector2 localPos, EntProtoId animationId)
+    protected virtual void DoLunge(Entity<XenoTailSlamComponent, TransformComponent> user, Vector2 localPos, EntProtoId animationId)
     {
     }
 }

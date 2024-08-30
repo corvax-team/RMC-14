@@ -60,8 +60,11 @@
   - type: XenoAcidShroud
   - type: XenoGasToggle
   - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 27
     inject:
-      RMCMolecularAcid: 1 # TODO RMC14 6
+      CCMXenoStrongAcid: 0.05
   - type: XenoSprayAcid
     acid: XenoAcidSprayStrong
     barricadeDamage:

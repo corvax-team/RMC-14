@@ -59,8 +59,11 @@
       types:
         Heat: 5
   - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 30
     inject:
-      RMCMolecularAcid: 1 # TODO RMC14 2
+      CCMXenoNeuroToxin: 0.19
   - type: CMArmor
     armor: 15
     explosionArmor: 20

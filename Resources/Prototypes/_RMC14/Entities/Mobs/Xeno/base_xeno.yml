@@ -254,7 +254,7 @@
   components:
   - type: CombatMode
     canDisarm: true
-    disarmFailChance: 0
+    disarmFailChance: 80
   - type: MeleeWeapon
     widePrimary: true
     altDisarm: true
