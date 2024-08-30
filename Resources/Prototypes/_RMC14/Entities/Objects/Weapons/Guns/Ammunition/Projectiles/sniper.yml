@@ -12,7 +12,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 70
+        Piercing: 100 #Corvax modified - base 70
   - type: CMArmorPiercing
     amount: 50
 
@@ -23,6 +23,8 @@
   name: bullet (10x28mm)
   noSpawn: true
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
   - type: Projectile
     damage:
       types:
@@ -30,6 +32,9 @@
         Heat: 10
   - type: CMArmorPiercing
     amount: 20
+  - type: IgniteOnCollide
+    fireStacks: 1
+
 
 # TODO RMC14 slow
 - type: entity
@@ -38,12 +43,17 @@
   name: bullet (10x28mm)
   noSpawn: true
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
   - type: Projectile
     damage:
       types:
-        Piercing: 55
+        Piercing: 75
   - type: CMArmorPiercing
     amount: 0
+  - type: StunOnCollide
+    stunAmount: 0.5
+    knockdownAmount: 0.5
 
 - type: entity
   parent: CMBulletSniper10x28mm
@@ -54,6 +64,6 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 125
+        Piercing: 200
   - type: CMArmorPiercing
     amount: 50

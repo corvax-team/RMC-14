@@ -14,8 +14,8 @@
         crate: RMCCrateBoxMagazineRifleM54CAP
       - cost: 3000
         crate: RMCCrateBoxMagazineRifleM54CExt
-#      - cost: 2000
-#        crate: RMCCrateMagazineRifleM54CE2
+      - cost: 9000
+        crate: RMCCrateMagazineRifleM54CE2
       - cost: 2000
         crate: RMCCrateBoxMagazineRifleM4SPR
       - cost: 4000
@@ -114,8 +114,8 @@
         crate: RMCCratePlasteelSheets
       - cost: 2000
         crate: RMCCrateGlassSheets
-#      - cost: 2000
-#        crate: RMCCrateWoodenPlanks
+      - cost: 2000
+        crate: RMCCrateWoodenPlanks
 #      - cost: 2000
 #        crate: RMCCrateFoldingBarricades
 #      - cost: 3000
@@ -208,8 +208,8 @@
         crate: RMCCrateSmartGunSet
       - cost: 4000
         crate: RMCCrateM54C
-#      - cost: 4000
-#        crate: RMCCrateM54CE2
+      - cost: 18000
+        crate: RMCCrateM54CE2
       - cost: 3000
         crate: RMCCrateMK80
       - cost: 3000
