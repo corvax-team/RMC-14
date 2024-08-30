@@ -136,7 +136,7 @@
         sprintSpeedModifier: 0.65
       - !type:RemoveDamage
         group: Airloss
-      - !type:HealthChange
+      - !type:EqualHealthChange
         conditions:
         - !type:TotalDamage
           min: 100

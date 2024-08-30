@@ -52,8 +52,8 @@
   - type: CMArmorPiercing
     amount: 0
   - type: StunOnCollide
-    stunAmount: 0.5
-    knockdownAmount: 0.5
+    stunAmount: 1
+    knockdownAmount: 1
 
 - type: entity
   parent: CMBulletSniper10x28mm

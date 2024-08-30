@@ -67,7 +67,7 @@
   - type: Tackle # min: 2, max: 4
     threshold: 4
     stun: 5
-   - type: XenoTailSlam
+  - type: XenoTailSlam
     power: 1.5
     stunTime: 1200
     tailDamage:
