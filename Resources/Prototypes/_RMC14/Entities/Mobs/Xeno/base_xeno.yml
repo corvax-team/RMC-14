@@ -255,11 +255,11 @@
   id: CMXenoMelee
   components:
   - type: CombatMode
-    canDisarm: true
+    canDisarm: false
     disarmFailChance: 80
   - type: MeleeWeapon
     widePrimary: true
-    altDisarm: true
+    altDisarm: false
     angle: 60
     soundHit:
       collection: RCMXenoClaw
