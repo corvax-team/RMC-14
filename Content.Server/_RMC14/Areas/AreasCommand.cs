@@ -7,7 +7,7 @@ using Robust.Shared.Toolshed;
 
 namespace Content.Server._RMC14.Areas;
 
-[ToolshedCommand, AdminCommand(AdminFlags.Host)]
+[ToolshedCommand, AdminCommand(AdminFlags.Host | AdminFlags.Mapping)]
 public sealed class AreasCommand : ToolshedCommand
 {
     private MapSystem? _map;
