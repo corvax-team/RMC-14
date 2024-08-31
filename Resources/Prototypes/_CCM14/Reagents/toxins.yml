@@ -129,7 +129,7 @@
   unknown: true
   metabolisms:
     Medicine:
-      metabolismRate: 0.1
+      metabolismRate: 0.01
       effects:
       - !type:MovespeedModifier
         walkSpeedModifier: 0.65
