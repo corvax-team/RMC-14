@@ -1,0 +1,20 @@
+- type: entity
+  id: CCMKvassTank
+  parent: StorageTank
+  suffix: Empty
+  components:
+    - type: Sprite
+      sprite: _CCM14/Structures/Storage/kvass.rsi
+      state: kvass
+
+- type: entity
+  parent: CCMKvassTank
+  id: CCMKvassTankFull
+  suffix: Full
+  components:
+    - type: SolutionContainerManager
+      solutions:
+        tank:
+          reagents:
+            - ReagentId: Kvass
+              Quantity: 1500
