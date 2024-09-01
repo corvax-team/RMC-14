@@ -8,7 +8,7 @@
     sprite: _RMC14/Objects/Medical/hypospray.rsi
     layers:
       - state: empty
-        map: [ "enum.VialVisuals.Occupied" ]
+        map: [ "enum.HyposprayVisualLayers.Base" ]
       - state: hypospray1
         map: [ "enum.SolutionContainerLayers.Fill" ]
         visible: false
@@ -41,12 +41,7 @@
   - type: ContainerContainer
     containers:
       vial: !type:ContainerSlot
-  - type: GenericVisualizer
-    visuals:
-      enum.VialVisuals.Occupied:
-        enum.VialVisuals.Occupied:
-          False: { state: "empty"}
-          True: { state: "hypospray" }
+  - type: VialVisuals
   - type: RMCHypospray
     slotId: vial
     tacticalSkills:

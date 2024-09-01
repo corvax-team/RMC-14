@@ -1,12 +1,9 @@
-﻿using Content.Shared._RMC14.Areas;
-using Content.Shared._RMC14.Camera;
+﻿using Content.Shared._RMC14.Camera;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rules;
-using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Components;
-using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
@@ -26,9 +23,7 @@ namespace Content.Shared._RMC14.Mortar;
 
 public abstract class SharedMortarSystem : EntitySystem
 {
-    [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -63,7 +58,6 @@ public abstract class SharedMortarSystem : EntitySystem
         SubscribeLocalEvent<MortarComponent, AnchorStateChangedEvent>(OnMortarAnchorStateChanged);
         SubscribeLocalEvent<MortarComponent, ExaminedEvent>(OnMortarExamined);
         SubscribeLocalEvent<MortarComponent, ActivatableUIOpenAttemptEvent>(OnMortarActivatableUIOpenAttempt);
-        SubscribeLocalEvent<MortarComponent, CombatModeShouldHandInteractEvent>(OnMortarShouldInteract);
 
         SubscribeLocalEvent<MortarCameraShellComponent, MortarShellLandEvent>(OnMortarCameraShellLand);
 
@@ -90,9 +84,6 @@ public abstract class SharedMortarSystem : EntitySystem
 
         args.Handled = true;
         if (mortar.Comp.Deployed)
-            return;
-
-        if (!CanDeployPopup(mortar, user))
             return;
 
         mortar.Comp.Deployed = true;
@@ -217,8 +208,6 @@ public abstract class SharedMortarSystem : EntitySystem
         if (!CanLoadPopup(mortar, (shellId, shell), user, out var travelTime, out var coordinates))
             return;
 
-        _adminLogs.Add(LogType.RMCMortar, LogImpact.High, $"Mortar {ToPrettyString(mortar)} shell {ToPrettyString(shellId)} shot by {ToPrettyString(user)} aimed at {coordinates}");
-
         var container = _container.EnsureContainer<Container>(mortar, mortar.Comp.ContainerId);
         if (!_container.Insert(shellId, container))
             return;
@@ -289,11 +278,6 @@ public abstract class SharedMortarSystem : EntitySystem
 
         if (!ent.Comp.Deployed)
             args.Cancel();
-    }
-
-    private void OnMortarShouldInteract(Entity<MortarComponent> ent, ref CombatModeShouldHandInteractEvent args)
-    {
-        args.Cancelled = true;
     }
 
     private void OnMortarCameraShellLand(Entity<MortarCameraShellComponent> ent, ref MortarShellLandEvent args)
@@ -368,7 +352,7 @@ public abstract class SharedMortarSystem : EntitySystem
         if (mortar.Comp.Deployed)
             return;
 
-        if (!CanDeployPopup(mortar, user))
+        if (!HasSkillPopup(mortar, user, true))
             return;
 
         var ev = new DeployMortarDoAfterEvent();
@@ -394,21 +378,6 @@ public abstract class SharedMortarSystem : EntitySystem
             _popup.PopupEntity(msg, user, user, PopupType.SmallCaution);
 
         return false;
-    }
-
-    private bool CanDeployPopup(Entity<MortarComponent> mortar, EntityUid user)
-    {
-        if (!HasSkillPopup(mortar, user, true))
-            return false;
-
-        if (_area.TryGetArea(mortar, out _, out var area) &&
-            !area.Mortar)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-mortar-covered", ("mortar", mortar)), user, user, PopupType.SmallCaution);
-            return false;
-        }
-
-        return true;
     }
 
     protected virtual bool CanLoadPopup(

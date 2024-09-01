@@ -56,7 +56,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
 
         foreach (var entity in args.HitEntities)
         {
-            if (!_xeno.CanAbilityAttackTarget(xeno, entity) ||
+            if (!_xeno.CanHitLiving(xeno, entity) ||
                 HasComp<VictimCripplingStrikeSlowedComponent>(entity))
             {
                 continue;

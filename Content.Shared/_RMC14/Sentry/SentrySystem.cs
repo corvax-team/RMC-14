@@ -57,7 +57,6 @@ public sealed class SentrySystem : EntitySystem
         SubscribeLocalEvent<SentryComponent, SentryInsertMagazineDoAfterEvent>(OnSentryInsertMagazineDoAfter);
         SubscribeLocalEvent<SentryComponent, SentryDisassembleDoAfterEvent>(OnSentryDisassembleDoAfter);
         SubscribeLocalEvent<SentryComponent, ExaminedEvent>(OnSentryExamined);
-        SubscribeLocalEvent<SentryComponent, CombatModeShouldHandInteractEvent>(OnSentryShouldInteract);
 
         Subs.BuiEvents<SentryComponent>(SentryUiKey.Key,
             subs =>
@@ -258,11 +257,6 @@ public sealed class SentrySystem : EntitySystem
                 args.PushMarkup(msg);
             }
         }
-    }
-
-    private void OnSentryShouldInteract(Entity<SentryComponent> ent, ref CombatModeShouldHandInteractEvent args)
-    {
-        args.Cancelled = true;
     }
 
     private void OnSentryUpgradeBuiMsg(Entity<SentryComponent> sentry, ref SentryUpgradeBuiMsg args)

@@ -7,10 +7,8 @@
     contents:
     - id: RMCBinoculars
       amount: 2
-    - id: RMCLaserDesignator
-      amount: 2
-    - id: RMCRangefinder
-      amount: 2
+    - id: RMCLaserDesignator # TODO add 2 rangefinders and reduce the amount of this to 2
+      amount: 4
 
 - type: entity
   parent: RMCCrateAmmo
