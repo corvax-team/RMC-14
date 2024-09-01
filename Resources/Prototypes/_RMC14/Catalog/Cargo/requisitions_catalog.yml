@@ -156,6 +156,8 @@
         crate: RMCCrateFoodPizza
       - cost: 1000
         crate: RMCCrateFoodIngredients
+      - cost: 1000
+        crate: CCMKvassTankFull
     - name: Gear
       entries:
       - cost: 2000
