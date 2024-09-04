@@ -40,6 +40,15 @@ namespace Content.Shared.Localizations
             _loc.AddFunction(culture, "LOC", FormatLoc);
             _loc.AddFunction(culture, "NATURALFIXED", FormatNaturalFixed);
             _loc.AddFunction(culture, "NATURALPERCENT", FormatNaturalPercent);
+			
+			_loc.AddFunction(fallbackCulture, "PRESSURE", FormatPressure); // Corvax-Localization
+            _loc.AddFunction(fallbackCulture, "POWERWATTS", FormatPowerWatts); // Corvax-Localization
+            _loc.AddFunction(fallbackCulture, "POWERJOULES", FormatPowerJoules); // Corvax-Localization
+            _loc.AddFunction(fallbackCulture, "UNITS", FormatUnits); // Corvax-Localization
+            _loc.AddFunction(fallbackCulture, "TOSTRING", args => FormatToString(culture, args)); // Corvax-Localization
+            _loc.AddFunction(fallbackCulture, "LOC", FormatLoc); // Corvax-Localization
+            _loc.AddFunction(fallbackCulture, "NATURALFIXED", FormatNaturalFixed); // Corvax-Localization
+            _loc.AddFunction(fallbackCulture, "NATURALPERCENT", FormatNaturalPercent); // Corvax-Localization
 
 
             /*

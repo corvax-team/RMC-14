@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoCrusher
   name: Crusher
   description: A huge alien with an enormous armored crest.
@@ -19,18 +20,18 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      700: Critical
-      800: Dead
+      800: Critical
+      900: Dead
   - type: Xeno
     role: CMXenoCrusher
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStab
+    - ActionXenoTailSlam
     - ActionXenoCharge
     - ActionXenoStomp
-    #    - ActionXenoDefensiveShield
+    - ActionXenoDefensiveShield
     - ActionXenoDevolve
     tier: 3
     hudOffset: 0,0.375
@@ -47,7 +48,7 @@
     damage:
       types:
         Blunt: 60
-        Structural: 750
+        Structural: 1500
   - type: XenoAnimateMovement
   - type: XenoPlasma
     plasma: 400
@@ -60,9 +61,24 @@
     damage:
       groups:
         Brute: 40
-  - type: Tackle
+  - type: CrusherShield
+  - type: XenoShield
+  - type: XenoMeleeSlow
+    slowTime: 2
+    effect: RMCEffectCrusherSlow
+  - type: Tackle # min: 2, max: 6
     threshold: 5
     stun: 5
+    chance: 0.25
+  - type: XenoTailSlam
+    power: 2.5
+    stunTime: 1900
+    tailDamage:
+      groups:
+        Brute: 70
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
     baseSprintSpeed: 3
+  - type: XenoBrutalize
+  - type: RMCXenoDamageVisuals
+    prefix: crusher

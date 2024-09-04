@@ -153,10 +153,12 @@ namespace Content.Client.Options.UI.Tabs
             }
 
             AddHeader("ui-options-header-rmc");
-            AddButton(CMKeyFunctions.CMActivateAttachableBarrel);
-            AddButton(CMKeyFunctions.CMActivateAttachableRail);
-            AddButton(CMKeyFunctions.CMActivateAttachableStock);
-            AddButton(CMKeyFunctions.CMActivateAttachableUnderbarrel);
+            AddButton(CMKeyFunctions.RMCActivateAttachableBarrel);
+            AddButton(CMKeyFunctions.RMCActivateAttachableRail);
+            AddButton(CMKeyFunctions.RMCActivateAttachableStock);
+            AddButton(CMKeyFunctions.RMCActivateAttachableUnderbarrel);
+            AddButton(CMKeyFunctions.RMCFieldStripHeldItem);
+            AddButton(CMKeyFunctions.RMCCycleFireMode);
             AddButton(CMKeyFunctions.CMUniqueAction);
             AddButton(CMKeyFunctions.CMHolsterPrimary);
             AddButton(CMKeyFunctions.CMHolsterSecondary);
@@ -207,6 +209,9 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.MovePulledObject);
             AddButton(ContentKeyFunctions.ReleasePulledObject);
             AddButton(ContentKeyFunctions.Point);
+            AddButton(ContentKeyFunctions.RotateObjectClockwise);
+            AddButton(ContentKeyFunctions.RotateObjectCounterclockwise);
+            AddButton(ContentKeyFunctions.FlipObject);
 
             AddHeader("ui-options-header-ui");
             AddButton(ContentKeyFunctions.FocusChat);

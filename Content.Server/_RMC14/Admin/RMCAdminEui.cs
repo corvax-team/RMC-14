@@ -1,20 +1,22 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Server._RMC14.Rules;
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.EUI;
 using Content.Server.Mind;
-using Content.Server.Station.Systems;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Vendors;
+using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Administration;
 using Content.Shared.Eui;
-using Content.Shared.Preferences;
-using Content.Shared.Roles;
-using Robust.Shared.Prototypes;
+using Content.Shared.Mobs.Systems;
+using Robust.Shared.Player;
+using Robust.Shared.Reflection;
 using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Admin;
@@ -22,9 +24,12 @@ namespace Content.Server._RMC14.Admin;
 public sealed class RMCAdminEui : BaseEui
 {
     [Dependency] private readonly IAdminManager _admin = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private readonly IReflectionManager _reflection = default!;
 
     private readonly RMCAdminSystem _rmcAdmin;
+    private readonly SharedCMAutomatedVendorSystem _automatedVendor;
     private readonly SharedXenoHiveSystem _hive;
     private readonly MindSystem _mind;
     private readonly SquadSystem _squad;
@@ -38,6 +43,7 @@ public sealed class RMCAdminEui : BaseEui
         IoCManager.InjectDependencies(this);
 
         _rmcAdmin = _entities.System<RMCAdminSystem>();
+        _automatedVendor = _entities.System<SharedCMAutomatedVendorSystem>();
         _hive = _entities.System<SharedXenoHiveSystem>();
         _mind = _entities.System<MindSystem>();
         _squad = _entities.System<SquadSystem>();
@@ -58,38 +64,178 @@ public sealed class RMCAdminEui : BaseEui
         _admin.OnPermsChanged -= OnAdminPermsChanged;
     }
 
-    public override EuiStateBase GetNewState()
+    public static RMCAdminEuiState CreateState(IEntityManager entities)
     {
+        var squadSys = entities.System<SquadSystem>();
         var hives = new List<Hive>();
-        var hiveQuery = _entities.EntityQueryEnumerator<HiveComponent, MetaDataComponent>();
+        var hiveQuery = entities.EntityQueryEnumerator<HiveComponent, MetaDataComponent>();
         while (hiveQuery.MoveNext(out var uid, out _, out var metaData))
         {
-            hives.Add(new Hive(_entities.GetNetEntity(uid), metaData.EntityName));
+            hives.Add(new Hive(entities.GetNetEntity(uid), metaData.EntityName));
         }
 
         var squads = new List<Squad>();
-        foreach (var squadProto in _squad.SquadPrototypes)
+        foreach (var squadProto in squadSys.SquadPrototypes)
         {
             var exists = false;
             var members = 0;
-            if (_squad.TryGetSquad(squadProto, out var squad))
+            if (squadSys.TryGetSquad(squadProto, out var squad))
             {
                 exists = true;
-                members = _squad.GetSquadMembers(squad);
+                members = squadSys.GetSquadMembersAlive(squad);
             }
 
             squads.Add(new Squad(squadProto, exists, members));
         }
 
-        return new RMCAdminEuiState(_target, hives, squads);
+        var mobState = entities.System<MobStateSystem>();
+        var xenos = new List<Xeno>();
+        var xenoQuery = entities.EntityQueryEnumerator<ActorComponent, XenoComponent, MetaDataComponent>();
+        while (xenoQuery.MoveNext(out var uid, out _, out _, out var metaData))
+        {
+            if (metaData.EntityPrototype is not { } proto)
+                continue;
+
+            if (mobState.IsDead(uid))
+                continue;
+
+            xenos.Add(new Xeno(proto));
+        }
+
+        var marines = 0;
+        var marinesQuery = entities.EntityQueryEnumerator<ActorComponent, MarineComponent>();
+        while (marinesQuery.MoveNext(out var uid, out _, out _))
+        {
+            if (mobState.IsDead(uid))
+                continue;
+
+            marines++;
+        }
+
+        var marinesPerXeno = entities.System<CMDistressSignalRuleSystem>().MarinesPerXeno.ToDictionary();
+
+        return new RMCAdminEuiState(hives, squads, xenos, marines, marinesPerXeno);
+    }
+
+    public override EuiStateBase GetNewState()
+    {
+        var state = CreateState(_entities);
+
+        _entities.TryGetEntity(_target, out var target);
+        var specialistSkills = new List<(string Name, bool Present)>();
+        var comps = _reflection.FindTypesWithAttribute<SpecialistSkillComponentAttribute>().ToArray();
+        foreach (var comp in comps)
+        {
+            if (!comp.TryGetCustomAttribute(out SpecialistSkillComponentAttribute? attribute))
+            {
+                DebugTools.Assert($"Attribute {nameof(SpecialistSkillComponentAttribute)} not found on component {comp}");
+                continue;
+            }
+
+            var present = _entities.HasComponent(target, comp);
+            specialistSkills.Add((attribute.Name, present));
+        }
+
+        var points = 0;
+        var extraPoints = new Dictionary<string, int>();
+        if (_entities.TryGetComponent(target, out CMVendorUserComponent? vendorUser))
+        {
+            points = vendorUser.Points;
+
+            if (vendorUser.ExtraPoints is { } extra)
+                extraPoints = extra.ToDictionary();
+        }
+
+        return new RMCAdminEuiTargetState(
+            state.Hives,
+            state.Squads,
+            state.Xenos,
+            state.Marines,
+            state.MarinesPerXeno,
+            specialistSkills,
+            points,
+            extraPoints
+        );
     }
 
     public override void HandleMessage(EuiMessageBase msg)
     {
         base.HandleMessage(msg);
 
+        if (!HasPermission())
+            return;
+
         switch (msg)
         {
+            case RMCAdminSetVendorPointsMsg setPoints:
+            {
+                if (!_entities.TryGetEntity(_target, out var target))
+                    return;
+
+                var comp = _entities.EnsureComponent<CMVendorUserComponent>(target.Value);
+                var points = Math.Max(0, setPoints.Points);
+                _automatedVendor.SetPoints((target.Value, comp), points);
+                StateDirty();
+                break;
+            }
+            case RMCAdminSetSpecialistVendorPointsMsg setPoints:
+            {
+                if (!_entities.TryGetEntity(_target, out var target))
+                    return;
+
+                var comp = _entities.EnsureComponent<CMVendorUserComponent>(target.Value);
+                var type = SharedCMAutomatedVendorSystem.SpecialistPoints;
+                var points = Math.Max(0, setPoints.Points);
+                _automatedVendor.SetExtraPoints((target.Value, comp), type, points);
+                StateDirty();
+                break;
+            }
+            case RMCAdminAddSpecSkillMsg addSpecSkill:
+            {
+                if (!_entities.TryGetEntity(_target, out var target) ||
+                    !TryGetSpecSkillComponent(addSpecSkill.Component, out var comp))
+                {
+                    return;
+                }
+
+                if (!_entities.HasComponent(target.Value, comp.GetType()))
+                    _entities.AddComponent(target.Value, comp);
+
+                StateDirty();
+                break;
+            }
+            case RMCAdminRemoveSpecSkillMsg removeSpecSkill:
+            {
+                if (!_entities.TryGetEntity(_target, out var target) ||
+                    !TryGetSpecSkillComponent(removeSpecSkill.Component, out var comp))
+                {
+                    return;
+                }
+
+                if (!_entities.RemoveComponent(target.Value, comp.GetType()))
+                    return;
+
+                StateDirty();
+                break;
+            }
+            case RMCAdminCreateSquadMsg createSquad:
+            {
+                _squad.TryEnsureSquad(createSquad.SquadId, out _);
+                StateDirty();
+                break;
+            }
+            case RMCAdminAddToSquadMsg addToSquad:
+            {
+                if (!_entities.TryGetEntity(_target, out var target) ||
+                    !_squad.TryEnsureSquad(addToSquad.SquadId, out var squad))
+                {
+                    break;
+                }
+
+                _squad.AssignSquad(target.Value, (squad, squad), null);
+                StateDirty();
+                break;
+            }
             case RMCAdminChangeHiveMsg changeHive:
             {
                 if (_entities.TryGetEntity(_target, out var target) &&
@@ -148,24 +294,6 @@ public sealed class RMCAdminEui : BaseEui
                 StateDirty();
                 break;
             }
-            case RMCAdminCreateSquadMsg createSquad:
-            {
-                _squad.TryEnsureSquad(createSquad.SquadId, out _);
-                StateDirty();
-                break;
-            }
-            case RMCAdminAddToSquadMsg addToSquad:
-            {
-                if (!_entities.TryGetEntity(_target, out var target) ||
-                    !_squad.TryEnsureSquad(addToSquad.SquadId, out var squad))
-                {
-                    break;
-                }
-
-                _squad.AssignSquad(target.Value, (squad, squad), null);
-                StateDirty();
-                break;
-            }
         }
     }
 
@@ -174,12 +302,42 @@ public sealed class RMCAdminEui : BaseEui
         if (args.Player != Player)
             return;
 
-        if (!_admin.HasAdminFlag(Player, AdminFlags.Fun))
+        if (!HasPermission())
         {
             Close();
             return;
         }
 
         StateDirty();
+    }
+
+    private bool HasPermission()
+    {
+        return _admin.HasAdminFlag(Player, AdminFlags.Fun);
+    }
+
+    private bool TryGetSpecSkillComponent(string name, [NotNullWhen(true)] out IComponent? comp)
+    {
+        comp = null;
+        var comps = _reflection.FindTypesWithAttribute<SpecialistSkillComponentAttribute>().ToArray();
+        foreach (var type in comps)
+        {
+            if (!type.TryGetCustomAttribute(out SpecialistSkillComponentAttribute? attribute))
+            {
+                DebugTools.Assert($"Attribute {nameof(SpecialistSkillComponentAttribute)} not found on component {type}");
+                continue;
+            }
+
+            if (attribute.Name != name)
+                continue;
+
+            if (!_compFactory.TryGetRegistration(type, out var registration))
+                continue;
+
+            comp = _compFactory.GetComponent(registration);
+            return true;
+        }
+
+        return false;
     }
 }

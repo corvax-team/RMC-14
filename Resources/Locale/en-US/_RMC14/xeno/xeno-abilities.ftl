@@ -22,7 +22,11 @@ cm-xeno-evolution-failed-cannot-support = The Hive cannot support this caste yet
 cm-xeno-evolution-failed-hive-full = The hive cannot support another Tier {$tier}, wait for either more aliens to be born or someone to die.
 rmc-xeno-evolution-devolve-title = De-Evolve To
 rmc-xeno-evolution-devolve = You devolve to {$xeno}!
+rmc-xeno-evolution-cant-evolve-damaged = We must be at full health to evolve.
 rmc-xeno-evolution-cant-devolve-damaged = We are too weak to deevolve, we must regain our health first.
+rmc-xeno-evolution-cant-evolve-recent-queen-death-minutes = We must wait about {$minutes} minutes and {$seconds} seconds for the hive to recover from the previous Queen's death.
+rmc-xeno-evolution-cant-evolve-recent-queen-death-seconds = We must wait about {$seconds} seconds for the hive to recover from the previous Queen's death.
+rmc-xeno-evolution-failed-bad-location = We can't evolve here.
 
 # Fortify
 cm-xeno-fortify-cant-headbutt = You can't headbutt while fortifying!
@@ -37,7 +41,7 @@ cm-xeno-leap-cancelled = You cancel your leap!
 cm-xeno-weeds-source-already-here = There is already a resin node here!
 
 # Corrosive acid
-cm-xeno-acid-not-corrodible = You can't corrode {THE($target)}!
+cm-xeno-acid-not-corrodible = We cannot dissolve {THE($target)}!
 cm-xeno-acid-already-corroding = {THE($target)} already has corrosive acid on it!
 
 # Paralyzing Slash
@@ -51,6 +55,14 @@ cm-xeno-crippling-strike-expire = You have waited too long, your slash will no l
 cm-xeno-crippling-strike-hit = We significantly strengthen our attack, slowing the unknown!
 
 # Pheromones
+rmc-xeno-pheromones-help =
+    Pheromones provide a buff to all Xenos in range at the cost of some stored plasma every second, as follows:
+
+    Frenzy (Red) - Increased run speed, damage and chance to knock off headhunter masks.
+    
+    Warding (Green) - While in critical state, increased maximum negative health and slower off weed bleedout.
+
+    Recovery (Blue) - Increased plasma and health regeneration.
 cm-xeno-choose-pheromones = Choose Pheromones
 cm-pheromones-recovery = Recovery
 cm-pheromones-warding = Warding
@@ -101,3 +113,9 @@ cm-xeno-invisibility-expire = We feel our invisibility end!
 # Ovipositor
 cm-xeno-ovipositor-attach = We start attaching to the ovipositor.
 cm-xeno-ovipositor-detach = We start detaching from the ovipositor.
+
+# Defensive Shield
+rmc-xeno-defensive-shield-end = We feel our enhanced shield end!
+rmc-xeno-defensive-shield-resist-end = Our immunity to explosion damage ends!
+rmc-xeno-defensive-shield-activate = {$user} hunkers down and bolsters its defenses!
+rmc-xeno-defensive-shield-activate-self = We hunker down and bolster our defenses!

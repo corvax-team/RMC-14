@@ -1,0 +1,50 @@
+- type: entity
+  parent: RMCAreaBase
+  id: CCMAreaNova
+  suffix: Nova Outpost
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: blank
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#6C6767D8'
+
+- type: entity
+  parent:
+  - RMCAreaMax
+  - CCMAreaNova
+  id: CCMAreaNovaInteriorOob
+  name: Nova Outpost - Out Of Bounds
+  suffix: Nova Outpost
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: oob
+  - type: Area
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+
+- type: entity
+  parent:
+  - RMCAreaProtectionZero
+  - CCMAreaNova
+  id: CCMAreaNovaGround
+  name: Ground
+  components:
+  - type: Sprite
+    state: yellow
+
+- type: entity
+  parent:
+  - RMCAreaProtectionOne
+  - CCMAreaPolyphemus
+  id: CCMAreaNovaClosedArea
+  name: Closed area
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: red

@@ -1,0 +1,50 @@
+- type: entity
+  parent: RMCAreaBase
+  id: CCMAreaPolyphemus
+  suffix: Polyphemus
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: blank
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#6C6767D8'
+
+- type: entity
+  parent:
+  - RMCAreaMax
+  - CCMAreaPolyphemus
+  id: CCMAreaPolyphemusInteriorOob
+  name: Polyphemus - Out Of Bounds
+  suffix: Polyphemus
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: oob
+  - type: Area
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+
+- type: entity
+  parent:
+  - RMCAreaProtectionZero
+  - CCMAreaPolyphemus
+  id: CCMAreaPolyphemusGround
+  name: Ground
+  components:
+  - type: Sprite
+    state: yellow
+
+- type: entity
+  parent:
+  - RMCAreaProtectionOne
+  - CCMAreaPolyphemus
+  id: CCMAreaPolyphemusClosedArea
+  name: Closed area
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: red

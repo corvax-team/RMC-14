@@ -1,10 +1,10 @@
 - type: entity
-  id: BaseXenoTarget
+  id: CCMBaseXenoTarget
   parent: BaseStructureDynamic
   abstract: true
   components:
   - type: Sprite
-    sprite: _CCM14/Object/Xeno-target.rsi
+    sprite: _CCM14/Objects/xeno-target.rsi
     state: target_stake
     noRot: true
   - type: Repairable
@@ -51,20 +51,20 @@
 
 - type: entity
   name: Drone target left
-  id: TargetDroneLeft
-  parent: BaseTarget
+  id: CCMTargetDroneLeft
+  parent: CCMBaseXenoTarget
   description: A shooting target. This one is xeno drone
   components:
   - type: Sprite
-    sprite: _CCM14/Object/Xeno-target.rsi
+    sprite: _CCM14/Objects/xeno-target.rsi
     state: drone_l
 
 - type: entity
   name: Drone target right
-  id: TargetDroneRight
-  parent: BaseTarget
+  id: CCMTargetDroneRight
+  parent: CCMBaseXenoTarget
   description: A shooting target. This one is xeno drone
   components:
   - type: Sprite
-    sprite: _CCM14/Object/Xeno-target.rsi
+    sprite: _CCM14/Objects/xeno-target.rsi
     state: drone_r

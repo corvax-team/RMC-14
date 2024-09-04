@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoRunner
   name: Runner
   description: A small red alien that looks like it could run fairly quickly...
@@ -19,8 +20,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      230: Critical
-      330: Dead
+      330: Critical
+      430: Dead
   - type: Fixtures
     fixtures:
       fix1:
@@ -40,9 +41,9 @@
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStab
+    - ActionXenoTailSlam
     - ActionXenoHide
-    - ActionXenoPounce # TODO RMC14 call this pounce, not leap
+    - ActionXenoLeap
     - ActionXenoBoneChips
     - ActionXenoZoom
     - ActionXenoDevolve
@@ -53,8 +54,16 @@
     devolvesTo:
     - CMXenoLarva
   - type: XenoBoneChips
+  - type: XenoTailSlam
+    power: 0
+    stunTime: 100
+    tailDamage:
+      groups:
+        Brute: 35
   - type: XenoDevour
   - type: XenoHide
+  - type: SlowOnPull
+    multiplier: 0.86
   - type: XenoLeap
     delay: 0
     knockdownTime: 2
@@ -69,15 +78,19 @@
     max: 300
     evolvesTo:
     - CMXenoLurker
+    - CCMXenoRouny # CCM Rouny
   - type: XenoZoom
   - type: MeleeWeapon
     attackRate: 1.4
     damage:
       groups:
         Brute: 22.5
-  - type: Tackle
+  - type: Tackle # min: 4, max: 5
     threshold: 5
     stun: 8
+    chance: 0.40
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.55
     baseSprintSpeed: 10
+  - type: RMCXenoDamageVisuals
+    prefix: runner

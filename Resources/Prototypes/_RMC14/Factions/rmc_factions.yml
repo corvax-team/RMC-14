@@ -1,0 +1,10 @@
+﻿- type: npcFaction
+  id: UNMC
+  hostile:
+  - RMCXeno
+  - SimpleHostile # CCM
+
+- type: npcFaction
+  id: RMCXeno
+  hostile:
+  - UNMC

@@ -1,9 +1,11 @@
-﻿using Content.Shared.Chemistry.EntitySystems;
+﻿using Content.Shared._RMC14.Chemistry;
+using Robust.Shared.Containers;
+using Content.Shared._RMC14.Map;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Whitelist;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -11,12 +13,13 @@ namespace Content.Shared._RMC14.Medical.Refill;
 
 public sealed class CMRefillableSolutionSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] protected readonly SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {
@@ -28,20 +31,26 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     private void OnRefillerInteractUsing(Entity<CMSolutionRefillerComponent> ent, ref InteractUsingEvent args)
     {
         args.Handled = true;
-        if (!TryComp(args.Used, out CMRefillableSolutionComponent? refillable) ||
-            !_whitelist.IsValid(ent.Comp.Whitelist, args.Used))
+        var fillable = args.Used;
+        if(TryComp<RMCHyposprayComponent>(args.Used, out var hypo) && _container.TryGetContainer(args.Used, hypo.SlotId, out var container) && container.ContainedEntities.Count != 0)
         {
-            _popup.PopupClient(Loc.GetString("cm-refillable-solution-cannot-refill", ("user", ent.Owner), ("target", args.Used)), args.User, args.User, PopupType.SmallCaution);
+            fillable = container.ContainedEntities[0];
+        }
+
+        if (!TryComp(fillable, out CMRefillableSolutionComponent? refillable) ||
+            !_whitelist.IsValid(ent.Comp.Whitelist, fillable))
+        {
+            _popup.PopupClient(Loc.GetString("cm-refillable-solution-cannot-refill", ("user", ent.Owner), ("target", fillable)), args.User, args.User, PopupType.SmallCaution);
             return;
         }
 
-        if (!_solution.TryGetSolution(args.Used, refillable.Solution, out var solution))
+        if (!_solution.TryGetSolution(fillable, refillable.Solution, out var solution))
             return;
 
         var solutionComp = solution.Value.Comp.Solution;
         if (solutionComp.AvailableVolume == FixedPoint2.Zero)
         {
-            _popup.PopupClient(Loc.GetString("cm-refillable-solution-full", ("target", args.Used)), args.User, args.User);
+            _popup.PopupClient(Loc.GetString("cm-refillable-solution-full", ("target", fillable)), args.User, args.User);
             return;
         }
 
@@ -64,11 +73,13 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         if (anyRefilled)
         {
             Dirty(ent);
-            _popup.PopupClient(Loc.GetString("cm-refillable-solution-whirring-noise", ("user", ent.Owner), ("target", args.Used)), args.User, args.User);
+            var ev = new RefilledSolutionEvent();
+            RaiseLocalEvent(args.Used, ref ev);
+            _popup.PopupClient(Loc.GetString("cm-refillable-solution-whirring-noise", ("user", ent.Owner), ("target", fillable)), args.User, args.User);
         }
         else
         {
-            _popup.PopupClient(Loc.GetString("cm-refillable-solution-cannot-refill", ("user", ent.Owner), ("target", args.Used)), args.User, args.User, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("cm-refillable-solution-cannot-refill", ("user", ent.Owner), ("target", fillable)), args.User, args.User, PopupType.SmallCaution);
         }
     }
 
@@ -87,14 +98,10 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
             comp.RechargeAt = time + comp.RechargeCooldown;
             Dirty(uid, comp);
 
-            if (!xform.Anchored ||
-                !TryComp(xform.GridUid, out MapGridComponent? grid))
-            {
+            if (!xform.Anchored)
                 continue;
-            }
 
-            var position = _map.LocalToTile(xform.GridUid.Value, grid, xform.Coordinates);
-            var anchored = _map.GetAnchoredEntitiesEnumerator(xform.GridUid.Value, grid, position);
+            var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(uid);
             var any = false;
             while (anchored.MoveNext(out var anchoredId))
             {

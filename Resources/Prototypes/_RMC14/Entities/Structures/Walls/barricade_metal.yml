@@ -3,7 +3,6 @@
   parent: CMBaseStructureCorrodible
   id: CMBarricadeBase
   components:
-  - type: Anchorable
   - type: Rotatable
   - type: Appearance
   - type: Fixtures
@@ -25,6 +24,28 @@
     damageContainer: Inorganic
     damageModifierSet: CMBarricade
   - type: InteractionOutline
+  - type: RMCDropshipBlocked
+  - type: GenericVisualizer
+    visuals:
+      enum.BarbedWireVisualLayers.Wire:
+        barbWired:
+          UnWired: { state: metal_wire, visible: false }
+          WiredClosed: { state: metal_wire, visible: true }
+      enum.SprayAcidedVisuals.Acided:
+        acided:
+          True:
+            sprite: _RMC14/Effects/xeno_spray_acid.rsi
+            state: acid
+            visible: true
+          False:
+            visible: false
+  - type: DamageMultiplierFlags
+    flags: Breaching
+  - type: InvulnerabilityTime
+    whitelist:
+      components:
+      - Xeno
+    hitsToInvulnerability: 3
 
 # Metal Barricade Tree
 - type: entity
@@ -33,6 +54,8 @@
   name: metal barricade
   description: A metal barricade that keeps the unwanted out. Upgradable with metal, plasteel, or metal rods for different attributes. Repair with a welder.
   components:
+  - type: Climbable
+  - type: Anchorable
   - type: MeleeSound
     soundGroups:
       Brute:
@@ -42,12 +65,7 @@
     sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
     layers:
     - state: metal
-  - type: GenericVisualizer
-    visuals:
-      enum.BarbedWireVisualLayers.Wire:
-        barbWired:
-          UnWired: { state: metal_wire, visible: false }
-          WiredClosed: { state: metal_wire, visible: true }
+    - map: [ "acided" ]
     drawdepth: WallTops
   - type: InteractionPopup
     interactSuccessString: fence-rattle-success
@@ -73,14 +91,14 @@
         acts: [ "Destruction" ]
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 2
+    damageDivisor: 25
     trackAllDamage: true
     damageOverlay:
       sprite: _RMC14/Structures/Walls/Barricades/metal_barricade_cracks.rsi
   - type: Barbed
     thornsDamage:
       types:
-        Slash: 6
+        Slash: 10
   - type: Construction
     graph: BarricadeMetalGraph
     node: nodeMetal
@@ -97,12 +115,13 @@
       layers:
       - state: metal
       - state: burn_upgrade
+      - map: [ "acided" ]
     - type: Damageable
       damageContainer: Inorganic
       damageModifierSet: CMBurnBarricade
     - type: DamageVisuals
       thresholds: [4, 8, 12]
-      damageDivisor: 2
+      damageDivisor: 25
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
@@ -121,12 +140,13 @@
       layers:
       - state: metal
       - state: brute_upgrade
+      - map: [ "acided" ]
     - type: Damageable
       damageContainer: Inorganic
       damageModifierSet: CMBruteBarricade
     - type: DamageVisuals
       thresholds: [4, 8, 12]
-      damageDivisor: 2
+      damageDivisor: 25
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/brute_barricade_cracks.rsi
@@ -145,11 +165,12 @@
       layers:
       - state: metal
       - state: explosive_upgrade
+      - map: [ "acided" ]
     - type: ExplosionResistance
       damageCoefficient: 0.5
     - type: DamageVisuals
       thresholds: [4, 8, 12]
-      damageDivisor: 2
+      damageDivisor: 25
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
@@ -164,10 +185,12 @@
   name: turnstile
   description: A railing to prevent marines from stepping out of line.
   components:
+    - type: Anchorable
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
       layers:
       - state: turnstile
+      - map: [ "acided" ]
     - type: Damageable
       damageContainer: Inorganic
       damageModifierSet: Metallic
@@ -196,6 +219,7 @@
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
       layers:
       - state: turnstile_med
+      - map: [ "acided" ]
     - type: Construction
       graph: BarricadeTurnstileGraph
       node: nodeTurnstile
@@ -207,10 +231,13 @@
   name: handrail
   description: A railing, for your hands. Woooow.
   components:
+    - type: Anchorable
     - type: Sprite
       drawdepth: WallTops
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
-      state: handrail_a_0
+      layers:
+      - state: handrail_a_0
+      - map: [ "acided" ]
     - type: Physics
     - type: Repairable
     - type: Damageable
@@ -237,7 +264,9 @@
   id: RMCBarricadeHandrailAlt
   components:
     - type: Sprite
-      state: handrail_b_0
+      layers:
+      - state: handrail_b_0
+      - map: [ "acided" ]
     - type: Construction
       graph: BarricadeHandrailGraph
       node: nodeHandrail
@@ -247,7 +276,9 @@
   id: RMCBarricadeHandrailMed
   components:
     - type: Sprite
-      state: handrail_med
+      layers:
+      - state: handrail_med
+      - map: [ "acided" ]
     - type: Construction
       graph: BarricadeHandrailGraph
       node: nodeHandrail
@@ -257,7 +288,9 @@
   id: RMCBarricadeHandrailStrata
   components:
     - type: Sprite
-      state: handrail_strata
+      layers:
+      - state: handrail_strata
+      - map: [ "acided" ]
     - type: Construction
       graph: BarricadeHandrailGraph
       node: nodeHandrail
@@ -267,7 +300,21 @@
   id: RMCBarricadeHandrailKutjevo
   components:
     - type: Sprite
-      state: hr_kutjevo
+      layers:
+      - state: hr_kutjevo
+      - map: [ "acided" ]
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
+- type: entity
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeWireRail
+  components:
+    - type: Sprite
+      layers:
+      - state: wire_rail
+      - map: [ "acided" ]
     - type: Construction
       graph: BarricadeHandrailGraph
       node: nodeHandrail
@@ -279,6 +326,7 @@
   name: folding metal barricade
   description: A folding metal barricade weaker than the non-folding counterpart. Able to be opened and closed at a moment's notice. Repair with a welder.
   components:
+  - type: Anchorable
   - type: MeleeSound
     soundGroups:
       Brute:
@@ -289,6 +337,7 @@
     layers:
     - state: folding_metal
       map: ["enum.DoorVisualLayers.Base"]
+    - map: [ "acided" ]
     drawdepth: WallTops
   - type: Repairable
   - type: Destructible
@@ -315,6 +364,14 @@
           UnWired: { state: folding_metal_closed_wire, visible: false }
           WiredClosed: { state: folding_metal_wire, visible: true }
           WiredOpen: { state: folding_metal_closed_wire, visible: true }
+      enum.SprayAcidedVisuals.Acided:
+        acided:
+          True:
+            sprite: _RMC14/Effects/xeno_spray_acid.rsi
+            state: acid
+            visible: true
+          False:
+            visible: false
   - type: InteractionOutline
   - type: Door
     openSpriteState: folding_metal_closed
@@ -340,7 +397,7 @@
   - type: Barbed
     thornsDamage:
       types:
-        Slash: 6
+        Slash: 10
   - type: Construction
     graph: BarricadeMetalDoorGraph
     node: nodeBarricadeMetalDoor
@@ -348,64 +405,5 @@
     blacklist:
       components:
       - Xeno
-
-- type: entity
-  parent: CMBarricadeMetalDoor
-  id: CMBarricadePlasteelDoor
-  name: folding plasteel barricade
-  description: A tough folding plasteel barricade stronger than its metal counterpart. Can be closed and opened at a moment's notice. Repair with a welder.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
-    layers:
-    - state: plasteel
-      map: ["enum.DoorVisualLayers.Base"]
-    drawdepth: WallTops
-  - type: Repairable
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 800
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMSheetPlasteel1:
-            min: 4
-            max: 4
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.BarbedWireVisualLayers.Wire:
-        barbWired:
-          UnWired: { state: plasteel_closed_wire, visible: false }
-          WiredClosed: { state: plasteel_wire, visible: true }
-          WiredOpen: { state: plasteel_closed_wire, visible: true }
-  - type: Door
-    openSpriteState: plasteel_closed
-    closedSpriteState: plasteel
-    canPry: false
-    occludes: false
-    changeAirtight: false
-    bumpOpen: false
-    clickOpen: true
-    canCrush: false
-    closeTimeOne: 0
-    closeTimeTwo: 0
-    openTimeOne: 0
-    openTimeTwo: 0
-    openingAnimationTime: 0
-    closingAnimationTime: 0
-    # Allow you to close barricades while people are standing on them or multiple are wrenched in the same tile
-    performCollisionCheck: false
-    openSound:
-      path: /Audio/Items/ratchet.ogg
-    closeSound:
-      path: /Audio/Items/ratchet.ogg
-  - type: Construction
-    graph: BarricadePlasteelDoorGraph
-    node: nodeBarricadePlasteelDoor
+  - type: UseDelay
+    delay: 0.3

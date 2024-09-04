@@ -73,6 +73,8 @@
     - localdelete
     - fullstatereset
     - fuckrules
+    - showautofire
+    - showareas
 
 - Flags: MAPPING
   Commands:

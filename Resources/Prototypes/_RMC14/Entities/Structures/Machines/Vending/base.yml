@@ -2,14 +2,12 @@
 # TODO RMC14 deny and vend states
 - type: entity
   abstract: true
-  parent: CMCorrodible
   id: ColMarTechBase
   name: ColMarTech vendor
   placement:
     mode: SnapgridCenter
   components:
   - type: Transform
-    anchored: true
     noRot: true
   - type: Clickable
   - type: InteractionOutline
@@ -54,3 +52,7 @@
   - type: ActivatableUIRequiresAccess
   - type: WallMount
     arc: 360
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

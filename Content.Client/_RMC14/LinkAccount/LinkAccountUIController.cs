@@ -80,7 +80,7 @@ public sealed class LinkAccountUIController : UIController, IOnSystemChanged<Lin
                 _disableUntil = _timing.RealTime.Add(TimeSpan.FromSeconds(3));
             };
 
-            var messageLink = _config.GetCVar(CMCVars.RMCDiscordAccountLinkingMessageLink);
+            var messageLink = _config.GetCVar(RMCCVars.RMCDiscordAccountLinkingMessageLink);
             if (string.IsNullOrEmpty(messageLink))
             {
                 _window.LinkButton.Visible = false;
@@ -143,6 +143,16 @@ public sealed class LinkAccountUIController : UIController, IOnSystemChanged<Lin
             SetTabVisible(_patronPerksWindow.FigurineReferenceTab, tier is { Figurines: true });
 
             UpdateExamples();
+
+            for (var i = 0; i < _patronPerksWindow.Tabs.ChildCount; i++)
+            {
+                var child = _patronPerksWindow.Tabs.GetChild(i);
+                if (!child.GetValue(TabVisibleProperty))
+                    continue;
+
+                _patronPerksWindow.Tabs.CurrentTab = i;
+                break;
+            }
 
             _patronPerksWindow.OpenCentered();
             return;

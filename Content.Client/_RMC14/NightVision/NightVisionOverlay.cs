@@ -1,7 +1,6 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.NightVision;
-using Content.Shared._RMC14.Xenonids.Construction.Nest;
-using Content.Shared.Mobs.Components;
+using Content.Shared._RMC14.Xenonids;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -17,8 +16,11 @@ public sealed class NightVisionOverlay : Overlay
 
     private readonly ContainerSystem _container;
     private readonly TransformSystem _transform;
+    private readonly EntityQuery<XenoComponent> _xenoQuery;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
+
+    private readonly List<NightVisionRenderEntry> _entries = new();
 
     public NightVisionOverlay()
     {
@@ -26,6 +28,7 @@ public sealed class NightVisionOverlay : Overlay
 
         _container = _entity.System<ContainerSystem>();
         _transform = _entity.System<TransformSystem>();
+        _xenoQuery = _entity.GetEntityQuery<XenoComponent>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -40,34 +43,73 @@ public sealed class NightVisionOverlay : Overlay
         var eye = args.Viewport.Eye;
         var eyeRot = eye?.Rotation ?? default;
 
-        // TODO RMC14 this should use its own component
-        var entities = _entity.EntityQueryEnumerator<MobStateComponent, SpriteComponent, TransformComponent>();
-        while (entities.MoveNext(out var uid, out _, out var sprite, out var xform))
+        _entries.Clear();
+        var entities = _entity.EntityQueryEnumerator<RMCNightVisionVisibleComponent, SpriteComponent, TransformComponent>();
+        while (entities.MoveNext(out var uid, out var visible, out var sprite, out var xform))
         {
-            Render((uid, sprite, xform), eye?.Position.MapId, handle, eyeRot);
+            _entries.Add(new NightVisionRenderEntry((uid, sprite, xform),
+                eye?.Position.MapId,
+                eyeRot,
+                nightVision.SeeThroughContainers,
+                visible.Priority,
+                visible.Transparency));
         }
 
-        var nests = _entity.EntityQueryEnumerator<XenoNestComponent, SpriteComponent, TransformComponent>();
-        while (nests.MoveNext(out var uid, out _, out var sprite, out var xform))
+        _entries.Sort(SortPriority);
+
+        foreach (var entry in _entries)
         {
-            Render((uid, sprite, xform), eye?.Position.MapId, handle, eyeRot);
+            Render(entry.Ent,
+                entry.Map,
+                handle,
+                entry.EyeRot,
+                entry.NightVisionSeeThroughContainers,
+                entry.Transparency);
         }
 
         handle.SetTransform(Matrix3x2.Identity);
     }
 
-    private void Render(Entity<SpriteComponent, TransformComponent> ent, MapId? map, DrawingHandleWorld handle, Angle eyeRot)
+    private static int SortPriority(NightVisionRenderEntry x, NightVisionRenderEntry y)
+    {
+        return x.Priority.CompareTo(y.Priority);
+    }
+
+    private void Render(Entity<SpriteComponent, TransformComponent> ent,
+        MapId? map,
+        DrawingHandleWorld handle,
+        Angle eyeRot,
+        bool seeThroughContainers,
+        float? transparency)
     {
         var (uid, sprite, xform) = ent;
         if (xform.MapID != map)
             return;
 
-        if (_container.IsEntityOrParentInContainer(uid))
+        var seeThrough = seeThroughContainers && !_xenoQuery.HasComp(uid);
+        if (!seeThrough && _container.IsEntityOrParentInContainer(uid, xform: xform))
             return;
 
-        var position = _transform.GetWorldPosition(xform);
-        var rotation = _transform.GetWorldRotation(xform);
+        var (position, rotation) = _transform.GetWorldPositionRotation(xform);
 
+        var colorCache = sprite.Color;
+        if (transparency != null)
+        {
+            var color = sprite.Color * Color.White.WithAlpha(transparency.Value);
+            sprite.Color = color;
+        }
         sprite.Render(handle, eyeRot, rotation, position: position);
+        if (transparency != null)
+        {
+            sprite.Color = colorCache;
+        }
     }
 }
+
+public record struct NightVisionRenderEntry(
+    (EntityUid, SpriteComponent, TransformComponent) Ent,
+    MapId? Map,
+    Angle EyeRot,
+    bool NightVisionSeeThroughContainers,
+    int Priority,
+    float? Transparency);

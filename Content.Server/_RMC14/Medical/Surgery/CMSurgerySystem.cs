@@ -37,6 +37,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         SubscribeLocalEvent<CMSurgeryStepBleedEffectComponent, CMSurgeryStepEvent>(OnStepBleedComplete);
         SubscribeLocalEvent<CMSurgeryClampBleedEffectComponent, CMSurgeryStepEvent>(OnStepClampBleedComplete);
         SubscribeLocalEvent<CMSurgeryStepEmoteEffectComponent, CMSurgeryStepEvent>(OnStepScreamComplete);
+        SubscribeLocalEvent<RMCSurgeryStepSpawnEffectComponent, CMSurgeryStepEvent>(OnStepSpawnComplete);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -80,7 +81,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
             return;
         }
 
-        if (!_skills.HasSkills(user, new Skills { Surgery = 1 }))
+        if (!_skills.HasSkill(user, ent.Comp.SkillType, ent.Comp.Skill))
         {
             _popup.PopupEntity("You don't know how to perform surgery!", user, user);
             return;
@@ -111,6 +112,12 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
     private void OnStepScreamComplete(Entity<CMSurgeryStepEmoteEffectComponent> ent, ref CMSurgeryStepEvent args)
     {
         _chat.TryEmoteWithChat(args.Body, ent.Comp.Emote);
+    }
+
+    private void OnStepSpawnComplete(Entity<RMCSurgeryStepSpawnEffectComponent> ent, ref CMSurgeryStepEvent args)
+    {
+        if (TryComp(args.Body, out TransformComponent? xform))
+            SpawnAtPosition(ent.Comp.Entity, xform.Coordinates);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)

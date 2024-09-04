@@ -1,10 +1,1 @@
-cm-ui-cm-actions = Действия СМ
-cm-ui-transform-tab = Трансформация
-cm-ui-xeno-tab = Ксено
-cm-ui-xeno-hive = Улей:
-cm-ui-open-cm-actions = Открыть действия CM
-cm-ui-create-new-hive = Создать новый улей
-cm-ui-create-hive-title = Новое название улья
-cm-ui-humanoid = Гуманоид
-cm-ui-tier = Уровень { $tier }
-cm-xeno-words-of-the-queen-header = Слова королевы звучат в нашей голове...
+rmc-xeno-words-of-the-queen-header = В нашей голове звучат слова королевы...

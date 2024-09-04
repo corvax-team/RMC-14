@@ -7,10 +7,12 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Explosion;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mobs;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Physics.Systems;
+using System.Linq;
 using static Content.Shared._RMC14.Xenonids.Fortify.XenoFortifyComponent;
 using static Content.Shared.Physics.CollisionGroup;
 
@@ -42,11 +44,12 @@ public sealed class XenoFortifySystem : EntitySystem
         SubscribeLocalEvent<XenoFortifyComponent, XenoRestAttemptEvent>(OnXenoFortifyRestAttempt);
         SubscribeLocalEvent<XenoFortifyComponent, XenoTailSweepAttemptEvent>(OnXenoFortifyTailSweepAttempt);
         SubscribeLocalEvent<XenoFortifyComponent, XenoToggleCrestAttemptEvent>(OnXenoFortifyToggleCrestAttempt);
+        SubscribeLocalEvent<XenoFortifyComponent, MobStateChangedEvent>(OnXenoFortifyMobStateChanged);
     }
 
     private void OnXenoFortifyAction(Entity<XenoFortifyComponent> xeno, ref XenoFortifyActionEvent args)
     {
-        if (args.Handled || !TryComp(xeno, out TransformComponent? transform))
+        if (args.Handled)
             return;
 
         var attempt = new XenoFortifyAttemptEvent();
@@ -57,28 +60,10 @@ public sealed class XenoFortifySystem : EntitySystem
 
         args.Handled = true;
 
-        xeno.Comp.Fortified = !xeno.Comp.Fortified;
-        Dirty(xeno);
-
         if (xeno.Comp.Fortified)
-        {
-            _fixtures.TryCreateFixture(xeno, xeno.Comp.Shape, FixtureId, hard: true, collisionLayer: (int) WallLayer);
-            _transform.AnchorEntity((xeno, transform));
-        }
+            Unfortify(xeno);
         else
-        {
-            _fixtures.DestroyFixture(xeno, FixtureId);
-            _transform.Unanchor(xeno, transform);
-        }
-
-        _actionBlocker.UpdateCanMove(xeno);
-        _appearance.SetData(xeno, XenoVisualLayers.Fortify, xeno.Comp.Fortified);
-
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
-        {
-            if (action.BaseEvent is XenoFortifyActionEvent)
-                _actions.SetToggled(actionId, xeno.Comp.Fortified);
-        }
+            Fortify(xeno);
     }
 
     private void OnXenoFortifyGetArmor(Entity<XenoFortifyComponent> xeno, ref CMGetArmorEvent args)
@@ -92,7 +77,7 @@ public sealed class XenoFortifySystem : EntitySystem
 
     private void OnXenoFortifyBeforeStatusAdded(Entity<XenoFortifyComponent> xeno, ref BeforeStatusEffectAddedEvent args)
     {
-        if (xeno.Comp.Fortified && args.Key == xeno.Comp.ImmuneToStatus)
+        if (xeno.Comp.Fortified && xeno.Comp.ImmuneToStatuses.Contains(args.Key))
             args.Cancelled = true;
     }
 
@@ -144,5 +129,48 @@ public sealed class XenoFortifySystem : EntitySystem
             _popup.PopupClient(Loc.GetString("cm-xeno-fortify-cant-toggle-crest"), xeno, xeno);
             args.Cancelled = true;
         }
+    }
+
+    private void OnXenoFortifyMobStateChanged(Entity<XenoFortifyComponent> xeno, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState == MobState.Critical || args.NewMobState == MobState.Dead)
+            Unfortify(xeno);
+    }
+
+    private void Fortify(Entity<XenoFortifyComponent> xeno)
+    {
+        xeno.Comp.Fortified = true;
+
+        _fixtures.TryCreateFixture(xeno, xeno.Comp.Shape, FixtureId, hard: true, collisionLayer: (int) WallLayer);
+        _transform.AnchorEntity((xeno, Transform(xeno)));
+
+        FortifyUpdated(xeno);
+    }
+
+    private void Unfortify(Entity<XenoFortifyComponent> xeno)
+    {
+        xeno.Comp.Fortified = false;
+
+        _fixtures.DestroyFixture(xeno, FixtureId);
+        _transform.Unanchor(xeno, Transform(xeno));
+
+        FortifyUpdated(xeno);
+    }
+
+    private void FortifyUpdated(Entity<XenoFortifyComponent> xeno)
+    {
+        _actionBlocker.UpdateCanMove(xeno);
+        _appearance.SetData(xeno, XenoVisualLayers.Fortify, xeno.Comp.Fortified);
+
+        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        {
+            if (action.BaseEvent is XenoFortifyActionEvent)
+                _actions.SetToggled(actionId, xeno.Comp.Fortified);
+        }
+
+        Dirty(xeno);
+
+        var ev = new XenoFortifiedEvent(xeno.Comp.Fortified);
+        RaiseLocalEvent(xeno, ref ev);
     }
 }

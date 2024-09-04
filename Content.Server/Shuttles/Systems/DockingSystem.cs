@@ -1,4 +1,4 @@
-using System.Numerics;
+using Content.Server._RMC14.Dropship;
 using Content.Server.Doors.Systems;
 using Content.Server.NPC.Pathfinding;
 using Content.Server.Shuttles.Components;
@@ -6,13 +6,10 @@ using Content.Server.Shuttles.Events;
 using Content.Shared.Doors;
 using Content.Shared.Doors.Components;
 using Content.Shared.Popups;
-using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Events;
 using Content.Shared.Shuttles.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Physics;
-using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics.Joints;
 using Robust.Shared.Physics.Systems;
@@ -30,6 +27,7 @@ namespace Content.Server.Shuttles.Systems
         [Dependency] private readonly SharedJointSystem _jointSystem = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private readonly DropshipSystem _dropship = default!;
 
         private const string DockingJoint = "docking";
 
@@ -78,8 +76,14 @@ namespace Content.Server.Shuttles.Systems
 
             foreach (var entity in _dockingBoltSet)
             {
-                _doorSystem.TryClose(entity);
-                _doorSystem.SetBoltsDown((entity.Owner, entity.Comp2), enabled);
+                if (enabled)
+                {
+                    _dropship.LockDoor((entity, entity));
+                }
+                else
+                {
+                    _dropship.UnlockDoor((entity, entity));
+                }
             }
         }
 
@@ -281,24 +285,24 @@ namespace Content.Server.Shuttles.Systems
             {
                 if (_doorSystem.TryOpen(dockAUid, doorA))
                 {
-                    doorA.ChangeAirtight = false;
                     if (TryComp<DoorBoltComponent>(dockAUid, out var airlockA))
                     {
                         _doorSystem.SetBoltsDown((dockAUid, airlockA), true);
                     }
                 }
+                doorA.ChangeAirtight = false;
             }
 
             if (TryComp(dockBUid, out DoorComponent? doorB))
             {
                 if (_doorSystem.TryOpen(dockBUid, doorB))
                 {
-                    doorB.ChangeAirtight = false;
                     if (TryComp<DoorBoltComponent>(dockBUid, out var airlockB))
                     {
                         _doorSystem.SetBoltsDown((dockBUid, airlockB), true);
                     }
                 }
+                doorB.ChangeAirtight = false;
             }
 
             if (_pathfinding.TryCreatePortal(dockAXform.Coordinates, dockBXform.Coordinates, out var handle))

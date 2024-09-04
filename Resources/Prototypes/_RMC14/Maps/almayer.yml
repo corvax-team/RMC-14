@@ -1,10 +1,14 @@
-﻿- type: gameMap
+﻿# The Almayer map file is currently considered private content by RMC14, along with the map file for LV624.
+# The Almayer map file is to serve as a solution for a test fail that would result from the lack of its existence otherwise.
+# If you wish for this file, or LV624, to be public you may recreate them yourself and PR it to the repo.
+- type: gameMap
   id: Almayer
   mapName: Almayer
   mapPath: /Maps/_RMC14/almayer.yml
-  minPlayers: 0
+  minPlayers: 90
   maxRandomOffset: 0
   randomRotation: false
+  fallback: true
   stations:
     Almayer:
       stationProto: StandardNanotrasenStation
@@ -16,7 +20,7 @@
           #Command
           CMCommandingOfficer: [1, 1]
           CMExecutiveOfficer: [1, 1]
-          CMStaffOfficer: [1, 1]
+          CMStaffOfficer: [4, 4]
           CMSeniorEnlistedAdvisor: [2, 2]
 
           #Military Police
@@ -27,8 +31,8 @@
           #Auxiliary
           CMAuxiliarySupportOfficer: [1, 1]
 #          CMIntelOfficer: [4, 4]
-          CMPilotDropship: [2, 2] # TODO RMC14 1
-#          CMPilotGunship: [1, 1]
+          CMPilotDropship: [1, 1]
+          CMPilotGunship: [1, 1]
           CMDropshipCrewChief: [2, 2]
 
           #Engineering
@@ -44,13 +48,13 @@
 
           #Requisition
           CMQuartermaster: [1, 1]
-          CMCargoTech: [3, 3]
+          CMCargoTech: [4, 4]
 #          CMMessTech: [1, 1]
 
           #Marines
           CMSquadLeader: [4, 4]
           CMFireteamLeader: [4, 8]
-#          CMSmartGunOperator: [8, 16]
+          CMSmartGunOperator: [4, 4]
           CMWeaponsSpecialist: [4, 4]
           CMCombatTech: [8, 12]
           CMHospitalCorpsman: [8, 16]

@@ -10,6 +10,7 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Strip;
 using Content.Shared.Strip.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
@@ -32,6 +33,7 @@ public abstract partial class InventorySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly SharedStrippableSystem _strippable = default!;
 
     [ValidatePrototypeId<ItemSizePrototype>]
     private const string PocketableItemSize = "Small";
@@ -169,12 +171,8 @@ public abstract partial class InventorySystem
                 target,
                 itemUid)
             {
-                BlockDuplicate = true,
-                BreakOnHandChange = true,
                 BreakOnMove = true,
-                CancelDuplicate = true,
-                RequireCanInteract = true,
-                NeedHand = true
+                NeedHand = true,
             };
 
             _doAfter.TryStartDoAfter(args);
@@ -248,9 +246,17 @@ public abstract partial class InventorySystem
                 return false;
 
             if (slotDefinition.DependsOnComponents is { } componentRegistry)
+            {
                 foreach (var (_, entry) in componentRegistry)
+                {
                     if (!HasComp(slotEntity, entry.Component.GetType()))
                         return false;
+
+                    if (TryComp<AllowSuitStorageComponent>(slotEntity, out var comp) &&
+                        _whitelistSystem.IsWhitelistFailOrNull(comp.Whitelist, itemUid))
+                        return false;
+                }
+            }
         }
 
         var fittingInPocket = slotDefinition.SlotFlags.HasFlag(SlotFlags.POCKET) &&
@@ -412,12 +418,8 @@ public abstract partial class InventorySystem
                 target,
                 removedItem.Value)
             {
-                BlockDuplicate = true,
-                BreakOnHandChange = true,
                 BreakOnMove = true,
-                CancelDuplicate = true,
-                RequireCanInteract = true,
-                NeedHand = true
+                NeedHand = true,
             };
 
             _doAfter.TryStartDoAfter(args);

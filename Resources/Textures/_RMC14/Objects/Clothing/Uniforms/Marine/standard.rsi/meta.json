@@ -1,17 +1,21 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken/modified from cm-ss13 at https://github.com/cmss13-devs/cmss13/commit/724b03f06f95eed8bbc3ba1995719ef4d236bb62",
+  "copyright": "Taken/modified from cm-ss13 at https://github.com/cmss13-devs/cmss13/commit/724b03f06f95eed8bbc3ba1995719ef4d236bb62, edit by unit480 (discord)",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
-	{
+    {
       "name": "icon"
     },
-	{
+    {
       "name": "equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "jacket-equipped-INNERCLOTHING",
       "directions": 4
     },
     {
@@ -20,7 +24,7 @@
     },
     {
       "name": "inhand-right",
-	  "directions": 4
+      "directions": 4
     }
   ]
 }

@@ -1,3 +1,5 @@
+using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
@@ -12,6 +14,9 @@ public abstract partial class SharedGunSystem
     private void OnExamine(EntityUid uid, GunComponent component, ExaminedEvent args)
     {
         if (!args.IsInDetailsRange || !component.ShowExamineText)
+            return;
+
+        if (HasComp<XenoComponent>(args.Examiner))
             return;
 
         using (args.PushGroup(nameof(GunComponent)))
@@ -31,6 +36,9 @@ public abstract partial class SharedGunSystem
     private void OnAltVerb(EntityUid uid, GunComponent component, GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || component.SelectedMode == component.AvailableModes)
+            return;
+
+        if (HasComp<XenoComponent>(args.User))
             return;
 
         var nextMode = GetNextMode(component);
@@ -82,6 +90,10 @@ public abstract partial class SharedGunSystem
 
         Audio.PlayPredicted(component.SoundMode, uid, user);
         Popup(Loc.GetString("gun-selected-mode", ("mode", GetLocSelector(fire))), uid, user);
+
+        var ev = new RMCFireModeChangedEvent();
+        RaiseLocalEvent(uid, ref ev);
+
         Dirty(uid, component);
     }
 

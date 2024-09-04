@@ -1,9 +1,9 @@
 # Basic chair
 - type: entity
+  abstract: true
   parent: SeatBase
   id: CMSeatBase
-  name: chair
-  description: A rectangular metallic frame sitting on four legs with a back panel. Designed to fit the sitting position, more or less comfortably.
+  name: abstract chair
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/chairs.rsi
@@ -31,6 +31,18 @@
   components:
   - type: Sprite
     state: chair_alt
+
+- type: entity
+  parent: CMChair
+  id: RMCStool
+  name: stool
+  description: Apply butt.
+  components:
+  - type: Sprite
+    state: stool
+  - type: Construction
+    graph: CMSeat
+    node: stool
 
 # Comfy chair
 - type: entity

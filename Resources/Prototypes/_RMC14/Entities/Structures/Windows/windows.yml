@@ -7,6 +7,10 @@
     snap:
     - Wall
   components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: GlassSmack
   - type: Transform
     anchored: true
   - type: Sprite
@@ -14,8 +18,8 @@
   - type: PlacementReplacement
     key: walls
   - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Metallic
+    damageContainer: StructuralInorganic
+    damageModifierSet: Glass
   - type: Airtight
   - type: RadiationBlocker
     resistance: 2
@@ -34,6 +38,8 @@
         layer:
         - WallLayer
         density: 1000
+  - type: DamageMultiplierFlags
+    flags: Breaching
 
 - type: entity
   parent: CMBaseWindow
@@ -41,6 +47,8 @@
   name: hull window
   description: A glass window with a special rod matrix inside a wall frame. This one was made out of exotic materials to prevent hull breaches. No way to get through here.
   components:
+  - type: Corrodible
+    isCorrodible: false
   - type: Sprite
     sprite: _RMC14/Structures/Windows/almayer_window.rsi
     state: alm_rwindow0
@@ -52,19 +60,64 @@
     base: alm_rwindow
     mode: CardinalFlags
 
-# TODO destructible
 - type: entity
-  parent: CMWindowReinforcedAlmayerHull
+  parent: CMBaseWindow
   id: CMWindowReinforcedAlmayer
   name: reinforced window
   description: A glass window with a special rod matrix inside a wall frame. It looks rather strong. Might take a few good hits to shatter it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/almayer_window.rsi
+    state: alm_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/almayer_window.rsi
+    state: alm_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: alm_rwindow
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameAlmayer
+  - type: RMCWallExplosionDeletable
+  - type: Construction
+    graph: RMCWindowAlmayer
+    node: windowAlmayerReinforced
 
 - type: entity
   parent: CMBaseWindow
   id: CMWindowReinforcedWhiteHull
-  name: reinforced window
+  name: hull window
   description: An ultra-reinforced window designed to keep research a secure area. This one was made out of exotic materials to prevent hull breaches. No way to get through here.
   components:
+  - type: Corrodible
+    isCorrodible: false
   - type: Sprite
     sprite: _RMC14/Structures/Windows/white_reinforced_window.rsi
     state: white_rwindow0
@@ -76,15 +129,58 @@
     base: white_rwindow
     mode: CardinalFlags
 
-# TODO RMC14 break window
 - type: entity
-  parent: CMWindowReinforcedWhiteHull
+  parent: CMBaseWindow
   id: CMWindowReinforcedWhite
-  name: hull window
+  name: reinforced window
   description: A glass window with a special rod matrix inside a wall frame. It looks rather strong. Might take a few good hits to shatter it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/white_reinforced_window.rsi
+    state: white_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/white_reinforced_window.rsi
+    state: white_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: white_rwindow
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameWhite
+  - type: RMCWallExplosionDeletable
+  - type: Construction
+    graph: RMCWindowWhite
+    node: windowWhiteReinforced
 
 - type: entity
-  parent: CMWindowReinforcedWhite
+  parent: CMBaseWindow
   id: CMWindowWhiteColony
   name: window
   description: A glass window. It looks thin and flimsy. A few knocks with anything should shatter it.
@@ -99,40 +195,230 @@
     key: walls
     base: col_window
     mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 40
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameColony
+  - type: RMCWallExplosionDeletable
+  - type: Construction
+    graph: RMCWindowColony
+    node: windowColony
 
 - type: entity
-  parent: CMWindowWhiteColony
+  parent: CMBaseWindow
   id: CMWindowWhiteColonyReinforced
   name: reinforced window
   description: A glass window with a special rod matrix inside a wall frame. It looks rather strong. Might take a few good hits to shatter it.
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Windows/colony_rwindow.rsi
     state: col_rwindow0
   - type: Icon
+    sprite: _RMC14/Structures/Windows/colony_rwindow.rsi
     state: col_rwindow0
   - type: IconSmooth
     key: walls
     base: col_rwindow
     mode: CardinalFlags
-
-
-# Shiva
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameColonyReinforced
+  - type: RMCWallExplosionDeletable
+  - type: Construction
+    graph: RMCWindowColonyReinforced
+    node: windowColonyReinforced
 
 - type: entity
   parent: CMBaseWindow
-  id: CMWindowShiva
+  id: RMCWindowWood
   name: window
-  description: A glass window inside a wall frame.
+  description: A glass window. It looks thin and flimsy. A few knocks with anything should shatter it.
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Windows/shiva_window.rsi
-    state: shiva_window0
+    sprite: _RMC14/Structures/Windows/wood_window.rsi
+    state: wood_window0
   - type: Icon
-    sprite: _RMC14/Structures/Windows/shiva_window.rsi
-    state: shiva_window
+    sprite: _RMC14/Structures/Windows/wood_window.rsi
+    state: wood_window0
   - type: IconSmooth
     key: walls
-    base: shiva_window
+    base: wood_window
     mode: CardinalFlags
-  # 40 hp
-  # Temporary corner sprites taken from colony reinforced window, since no corner windows used on shiva.
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 40
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameWood
+  - type: RMCWallExplosionDeletable
+  - type: Construction
+    graph: RMCWindowWood
+    node: windowWood
+
+- type: entity
+  parent: CMBaseWindow
+  id: RMCWindowWoodReinforced
+  name: reinforced window
+  description: A glass window with a special rod matrix inside a wall frame. It looks rather strong. Might take a few good hits to shatter it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/wood_rwindow.rsi
+    state: wood_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/wood_rwindow.rsi
+    state: wood_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: wood_rwindow
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameWood
+  - type: RMCWallExplosionDeletable
+  - type: Construction
+    graph: RMCWindowWood
+    node: windowWoodReinforced
+
+- type: entity
+  parent: CMBaseWindow
+  id: RMCWindowAIReinforced
+  name: reinforced window
+  description: A glass window with a special rod matrix inside a wall frame. It looks rather strong. Might take a few good hits to shatter it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/ai_rwindow.rsi
+    state: ai_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/ai_rwindow.rsi
+    state: ai_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: ai_rwindow
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameAI
+  - type: RMCWallExplosionDeletable
+  - type: Construction
+    graph: RMCWindowAI
+    node: windowAIReinforced

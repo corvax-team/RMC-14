@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoHivelord
   name: Hivelord
   description: A builder of really big hives.
@@ -19,8 +20,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      550: Critical
-      650: Dead
+      650: Critical
+      750: Dead
   - type: Xeno
     role: CMXenoHivelord
     actionIds:
@@ -44,6 +45,12 @@
     devolvesTo:
     - CMXenoDrone
   - type: XenoAcid
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 35
+    inject:
+      CCMXenoDroneJuice: 0.30
   - type: XenoConstruction
     buildDelay: 1
     canBuild:
@@ -66,9 +73,10 @@
     damage:
       groups:
         Brute: 22.5
-  - type: Tackle
-    threshold: 3
+  - type: Tackle # min: 2, max: 4
+    threshold: 4
     stun: 9
+    chance: 0.45
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
     baseSprintSpeed: 3
@@ -83,3 +91,5 @@
       whitelist:
         components:
         - XenoEgg
+  - type: RMCXenoDamageVisuals
+    prefix: hivelord

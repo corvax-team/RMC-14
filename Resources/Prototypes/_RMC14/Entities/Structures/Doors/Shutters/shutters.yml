@@ -50,6 +50,9 @@
       path: /Audio/_RMC14/Machines/blastdoor.ogg
     closeSound:
       path: /Audio/_RMC14/Machines/blastdoor.ogg
+    performCollisionCheck: false
+    canCrush: false
+    canPry: false
   - type: Appearance
   - type: UserInterface
     interfaces:
@@ -59,11 +62,15 @@
     key: walls
     mode: NoSprite
   - type: Airtight
+  - type: Occluder
+  - type: RMCWallExplosionDeletable
   # TODO RMC14 Add linkable buttons and open/close logic to the shutters, thanks
 
 - type: entity
   parent: RMCShutterBase
   id: RMCShutterAlmayer
+  components:
+  - type: RMCPodDoor
 
 - type: entity
   parent: RMCShutterAlmayer

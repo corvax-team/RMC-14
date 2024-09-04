@@ -4,6 +4,7 @@ using System.Numerics;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Events;
+using Content.Shared._RMC14.Areas;
 using Content.Shared.Body.Components;
 using Content.Shared.Buckle.Components;
 using Content.Shared.CCVar;
@@ -82,6 +83,8 @@ public sealed partial class ShuttleSystem
     private void InitializeFTL()
     {
         SubscribeLocalEvent<StationPostInitEvent>(OnStationPostInit);
+        SubscribeLocalEvent<FTLComponent, ComponentShutdown>(OnFtlShutdown);
+
         _bodyQuery = GetEntityQuery<BodyComponent>();
         _buckleQuery = GetEntityQuery<BuckleComponent>();
         _beaconQuery = GetEntityQuery<FTLBeaconComponent>();
@@ -96,6 +99,12 @@ public sealed partial class ShuttleSystem
         _cfg.OnValueChanged(CCVars.FTLCooldown, time => FTLCooldown = time, true);
         _cfg.OnValueChanged(CCVars.FTLMassLimit, time => FTLMassLimit = time, true);
         _cfg.OnValueChanged(CCVars.HyperspaceKnockdownTime, time => _hyperspaceKnockdownTime = TimeSpan.FromSeconds(time), true);
+    }
+
+    private void OnFtlShutdown(Entity<FTLComponent> ent, ref ComponentShutdown args)
+    {
+        Del(ent.Comp.VisualizerEntity);
+        ent.Comp.VisualizerEntity = null;
     }
 
     private void OnStationPostInit(ref StationPostInitEvent ev)
@@ -424,8 +433,16 @@ public sealed partial class ShuttleSystem
         var comp = entity.Comp1;
         comp.StateTime = StartEndTime.FromCurTime(_gameTiming, DefaultArrivalTime);
         comp.State = FTLState.Arriving;
-        // TODO: Arrival effects
-        // For now we'll just use the ss13 bubbles but we can do fancier.
+
+        if (entity.Comp1.VisualizerProto != null)
+        {
+            comp.VisualizerEntity = SpawnAtPosition(entity.Comp1.VisualizerProto, entity.Comp1.TargetCoordinates);
+            var visuals = Comp<FtlVisualizerComponent>(comp.VisualizerEntity.Value);
+            visuals.Grid = entity.Owner;
+            Dirty(comp.VisualizerEntity.Value, visuals);
+            _transform.SetLocalRotation(comp.VisualizerEntity.Value, entity.Comp1.TargetAngle);
+            _pvs.AddGlobalOverride(comp.VisualizerEntity.Value);
+        }
 
         _thruster.DisableLinearThrusters(shuttle);
         _thruster.EnableLinearThrustDirection(shuttle, DirectionFlag.South);
@@ -842,17 +859,27 @@ public sealed partial class ShuttleSystem
         var aabbs = new List<Box2>(manager.Fixtures.Count);
         var tileSet = new List<(Vector2i, Tile)>();
 
+        var tiles = new HashSet<Vector2i>();
+        if (TryComp(uid, out MapGridComponent? shuttleGrid))
+        {
+            var enumerator = _maps.GetAllTilesEnumerator(uid, shuttleGrid);
+            while (enumerator.MoveNext(out var tile))
+            {
+                tiles.Add(tile.Value.GridIndices);
+            }
+        }
+
         foreach (var fixture in manager.Fixtures.Values)
         {
             if (!fixture.Hard)
                 continue;
 
-            var aabb = fixture.Shape.ComputeAABB(transform, 0);
+            var aabb = _physics.GetWorldAABB(uid, xform: xform);
 
             // Shift it slightly
             aabb = aabb.Translated(-grid.TileSizeHalfVector);
             // Create a small border around it.
-            aabb = aabb.Enlarged(0.2f);
+            aabb = aabb.Enlarged(-1f);
             aabbs.Add(aabb);
 
             // Handle clearing biome stuff as relevant.
@@ -876,6 +903,11 @@ public sealed partial class ShuttleSystem
 
                 if (_bodyQuery.TryGetComponent(ent, out var mob))
                 {
+                    var position = _transform.GetMapCoordinates(ent);
+                    var diff = position.Position - aabb.Center;
+                    if (!tiles.Contains(diff.Floored()))
+                        continue;
+
                     _logger.Add(LogType.Gib, LogImpact.Extreme, $"{ToPrettyString(ent):player} got gibbed by the shuttle" +
                                                                 $" {ToPrettyString(uid)} arriving from FTL at {xform.Coordinates:coordinates}");
                     var gibs = _bobby.GibBody(ent, body: mob);
@@ -883,7 +915,7 @@ public sealed partial class ShuttleSystem
                     continue;
                 }
 
-                if (HasComp<FTLBeaconComponent>(ent))
+                if (HasComp<FTLBeaconComponent>(ent) || HasComp<AreaComponent>(ent))
                     continue;
 
                 QueueDel(ent);

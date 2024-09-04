@@ -1,4 +1,4 @@
-﻿- type: Tag
+- type: Tag
   id: CMFireExtinguisherPortable
 
 - type: entity
@@ -20,13 +20,17 @@
     sprite: _RMC14/Objects/fire_extinguisher.rsi
     layers:
     - state: fire_extinguisher
-      map: [ "enabled" ]
+      map: [ "enum.ToggleVisuals.Layer" ]
   - type: GenericVisualizer
     visuals:
-      enum.FireExtinguisherVisuals.Safety:
-        enabled:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
           True: { state: fire_extinguisher } # TODO RMC14
           False: { state: fire_extinguisher }
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMFireExtinguisher
@@ -47,10 +51,13 @@
     sprite: _RMC14/Objects/fire_extinguisher_mini.rsi
     layers:
     - state: minife1
-      map: [ "enabled" ]
+      map: [ "enum.ToggleVisuals.Layer" ]
   - type: GenericVisualizer
     visuals:
-      enum.FireExtinguisherVisuals.Safety:
-        enabled:
-          True: { state: minife0 }
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: { state: minife0 } # TODO RMC14
           False: { state: minife1 }
+  - type: Tag
+    tags:
+    - CMFireExtinguisherPortable

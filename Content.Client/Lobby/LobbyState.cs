@@ -10,6 +10,11 @@ using Robust.Client;
 using Robust.Client.Console;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
+//Corvax
+using Content.Client.Ghost;
+using Content.Client.UserInterface.Systems.Ghost.Widgets;
+using Robust.Client.Console;
+//Corvax
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Timing;
 
@@ -26,6 +31,10 @@ namespace Content.Client.Lobby
         [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly IVoteManager _voteManager = default!;
         [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+        //corvax
+        //[UISystemDependency] private readonly GhostSystem? _system = default;
+        [Dependency] private readonly IClientConsoleHost _console = default!;
+        //corvax
 
         private ClientGameTicker _gameTicker = default!;
         private ContentAudioSystem _contentAudioSystem = default!;
@@ -58,6 +67,9 @@ namespace Content.Client.Lobby
             Lobby.CharacterPreview.PatronPerks.OnPressed += OnPatronPerksPressed;
             Lobby.ReadyButton.OnPressed += OnReadyPressed;
             Lobby.ReadyButton.OnToggled += OnReadyToggled;
+            //corvax
+            Lobby.GhostRolesButton.OnPressed += GhostRolesPressed;
+            //corvax
 
             _gameTicker.InfoBlobUpdated += UpdateLobbyUi;
             _gameTicker.LobbyStatusUpdated += LobbyStatusUpdated;
@@ -243,5 +255,18 @@ namespace Content.Client.Lobby
 
             _consoleHost.ExecuteCommand($"toggleready {newReady}");
         }
+
+        //Corvax
+        private void GhostRolesPressed(BaseButton.ButtonEventArgs args)
+        {
+            if (!_gameTicker.IsGameStarted)
+            {
+                return;
+            }
+
+            //_system?.OpenGhostRoles();
+            _console.RemoteExecuteCommand(null, "LobbyGhostRolesCheck");
+        }
+        //Corvax
     }
 }

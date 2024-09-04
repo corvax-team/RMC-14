@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text.RegularExpressions;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
 using Content.Corvax.Interfaces.Shared;
 using Content.Shared.CCVar;
@@ -107,6 +108,12 @@ namespace Content.Shared.Preferences
         public SpawnPriorityPreference SpawnPriority { get; private set; } = SpawnPriorityPreference.None;
 
         /// <summary>
+        /// When spawning into a squad role, what squad is preferred.
+        /// </summary>
+        [DataField]
+        public EntProtoId<SquadTeamComponent>? SquadPreference { get; private set; }
+
+        /// <summary>
         /// <see cref="_jobPriorities"/>
         /// </summary>
         public IReadOnlyDictionary<ProtoId<JobPrototype>, JobPriority> JobPriorities => _jobPriorities;
@@ -140,6 +147,7 @@ namespace Content.Shared.Preferences
             Gender gender,
             HumanoidCharacterAppearance appearance,
             SpawnPriorityPreference spawnPriority,
+            EntProtoId<SquadTeamComponent>? squadPreference,
             Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities,
             PreferenceUnavailableMode preferenceUnavailable,
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
@@ -155,6 +163,7 @@ namespace Content.Shared.Preferences
             Gender = gender;
             Appearance = appearance;
             SpawnPriority = spawnPriority;
+            SquadPreference = squadPreference;
             _jobPriorities = jobPriorities;
             PreferenceUnavailable = preferenceUnavailable;
             _antagPreferences = antagPreferences;
@@ -188,6 +197,7 @@ namespace Content.Shared.Preferences
                 other.Gender,
                 other.Appearance.Clone(),
                 other.SpawnPriority,
+                other.SquadPreference,
                 new Dictionary<ProtoId<JobPrototype>, JobPriority>(other.JobPriorities),
                 other.PreferenceUnavailable,
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
@@ -313,6 +323,11 @@ namespace Content.Shared.Preferences
             return new(this) { SpawnPriority = spawnPriority };
         }
 
+        public HumanoidCharacterProfile WithSquadPreference(EntProtoId<SquadTeamComponent>? squadPreference)
+        {
+            return new(this) { SquadPreference = squadPreference };
+        }
+
         public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<ProtoId<JobPrototype>, JobPriority>> jobPriorities)
         {
             var dictionary = new Dictionary<ProtoId<JobPrototype>, JobPriority>(jobPriorities);
@@ -397,48 +412,58 @@ namespace Content.Shared.Preferences
             };
         }
 
-        public HumanoidCharacterProfile WithTraitPreference(ProtoId<TraitPrototype> traitId, string? categoryId, bool pref)
+        public HumanoidCharacterProfile WithTraitPreference(ProtoId<TraitPrototype> traitId, IPrototypeManager protoManager)
         {
-            var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
-            var traitProto = prototypeManager.Index(traitId);
+            // null category is assumed to be default.
+            if (!protoManager.TryIndex(traitId, out var traitProto))
+                return new(this);
 
-            TraitCategoryPrototype? categoryProto = null;
-            if (categoryId != null && categoryId != "default")
-                categoryProto = prototypeManager.Index<TraitCategoryPrototype>(categoryId);
+            var category = traitProto.Category;
 
+            // Category not found so dump it.
+            TraitCategoryPrototype? traitCategory = null;
+
+            if (category != null && !protoManager.TryIndex(category, out traitCategory))
+                return new(this);
+
+            var list = new HashSet<ProtoId<TraitPrototype>>(_traitPreferences) { traitId };
+
+            if (traitCategory == null || traitCategory.MaxTraitPoints < 0)
+            {
+                return new(this)
+                {
+                    _traitPreferences = list,
+                };
+            }
+
+            var count = 0;
+            foreach (var trait in list)
+            {
+                // If trait not found or another category don't count its points.
+                if (!protoManager.TryIndex<TraitPrototype>(trait, out var otherProto) ||
+                    otherProto.Category != traitCategory)
+                {
+                    continue;
+                }
+
+                count += otherProto.Cost;
+            }
+
+            if (count > traitCategory.MaxTraitPoints && traitProto.Cost != 0)
+            {
+                return new(this);
+            }
+
+            return new(this)
+            {
+                _traitPreferences = list,
+            };
+        }
+
+        public HumanoidCharacterProfile WithoutTraitPreference(ProtoId<TraitPrototype> traitId, IPrototypeManager protoManager)
+        {
             var list = new HashSet<ProtoId<TraitPrototype>>(_traitPreferences);
-
-            if (pref)
-            {
-                list.Add(traitId);
-
-                if (categoryProto == null || categoryProto.MaxTraitPoints < 0)
-                {
-                    return new(this)
-                    {
-                        _traitPreferences = list,
-                    };
-                }
-
-                var count = 0;
-                foreach (var trait in list)
-                {
-                    var traitProtoTemp = prototypeManager.Index(trait);
-                    count += traitProtoTemp.Cost;
-                }
-
-                if (count > categoryProto.MaxTraitPoints && traitProto.Cost != 0)
-                {
-                    return new(this)
-                    {
-                        _traitPreferences = _traitPreferences,
-                    };
-                }
-            }
-            else
-            {
-                list.Remove(traitId);
-            }
+            list.Remove(traitId);
 
             return new(this)
             {
@@ -464,6 +489,7 @@ namespace Content.Shared.Preferences
             if (Species != other.Species) return false;
             if (PreferenceUnavailable != other.PreferenceUnavailable) return false;
             if (SpawnPriority != other.SpawnPriority) return false;
+            if (SquadPreference != other.SquadPreference) return false;
             if (!_jobPriorities.SequenceEqual(other._jobPriorities)) return false;
             if (!_antagPreferences.SequenceEqual(other._antagPreferences)) return false;
             if (!_traitPreferences.SequenceEqual(other._traitPreferences)) return false;
@@ -478,7 +504,7 @@ namespace Content.Shared.Preferences
             var configManager = collection.Resolve<IConfigurationManager>();
             var prototypeManager = collection.Resolve<IPrototypeManager>();
             var netManager = collection.Resolve<INetManager>();
-            var sponsorsManager = collection.Resolve<ISharedSponsorsManager>(); // Corvax-Sponsor
+            var compFactory = collection.Resolve<IComponentFactory>();
 
             if (!prototypeManager.TryIndex(Species, out var speciesPrototype) || speciesPrototype.RoundStart == false)
             {
@@ -488,15 +514,18 @@ namespace Content.Shared.Preferences
 
             // Corvax-Sponsors-Start: Reset to human if player not sponsor
             var sponsorPrototypes = new List<string>();
-            if (netManager.IsClient)
+            if (collection.TryResolveType<ISharedSponsorsManager>(out var sponsorsManager))
             {
-                sponsorPrototypes = sponsorsManager.GetClientPrototypes();
+                if (netManager.IsClient)
+                {
+                    sponsorPrototypes = sponsorsManager.GetClientPrototypes();
+                }
+                else if (sponsorsManager.TryGetServerPrototypes(session.UserId, out var prototypes))
+                {
+                    sponsorPrototypes = prototypes;
+                }
             }
-            else if (sponsorsManager.TryGetServerPrototypes(session.UserId, out var prototypes))
-            {
-                sponsorPrototypes = prototypes;
-            }
-            
+
             if (speciesPrototype.SponsorOnly && !sponsorPrototypes.Contains(Species.Id))
             {
                 Species = SharedHumanoidAppearanceSystem.DefaultSpecies;
@@ -608,11 +637,11 @@ namespace Content.Shared.Preferences
             }
 
             var antags = AntagPreferences
-                .Where(id => prototypeManager.TryIndex<AntagPrototype>(id, out var antag) && antag.SetPreference)
+                .Where(id => prototypeManager.TryIndex(id, out var antag) && antag.SetPreference)
                 .ToList();
 
             var traits = TraitPreferences
-                         .Where(prototypeManager.HasIndex<TraitPrototype>)
+                         .Where(prototypeManager.HasIndex)
                          .ToList();
 
             Name = name;
@@ -622,6 +651,13 @@ namespace Content.Shared.Preferences
             Gender = gender;
             Appearance = appearance;
             SpawnPriority = spawnPriority;
+
+            if (!prototypeManager.TryIndex(SquadPreference, out var squad) ||
+                !squad.TryGetComponent(out SquadTeamComponent? team, compFactory) ||
+                !team.RoundStart)
+            {
+                SquadPreference = null;
+            }
 
             _jobPriorities.Clear();
 
@@ -636,7 +672,7 @@ namespace Content.Shared.Preferences
             _antagPreferences.UnionWith(antags);
 
             _traitPreferences.Clear();
-            _traitPreferences.UnionWith(traits);
+            _traitPreferences.UnionWith(GetValidTraits(traits, prototypeManager));
 
             // Checks prototypes exist for all loadouts and dump / set to default if not.
             var toRemove = new ValueList<string>();
@@ -669,6 +705,45 @@ namespace Content.Shared.Preferences
                 HelmetName = ValidateNamedItem(NamedItems.HelmetName),
                 ArmorName = ValidateNamedItem(NamedItems.ArmorName),
             };
+        }
+
+        /// <summary>
+        /// Takes in an IEnumerable of traits and returns a List of the valid traits.
+        /// </summary>
+        public List<ProtoId<TraitPrototype>> GetValidTraits(IEnumerable<ProtoId<TraitPrototype>> traits, IPrototypeManager protoManager)
+        {
+            // Track points count for each group.
+            var groups = new Dictionary<string, int>();
+            var result = new List<ProtoId<TraitPrototype>>();
+
+            foreach (var trait in traits)
+            {
+                if (!protoManager.TryIndex(trait, out var traitProto))
+                    continue;
+
+                // Always valid.
+                if (traitProto.Category == null)
+                {
+                    result.Add(trait);
+                    continue;
+                }
+
+                // No category so dump it.
+                if (!protoManager.TryIndex(traitProto.Category, out var category))
+                    continue;
+
+                var existing = groups.GetOrNew(category.ID);
+                existing += traitProto.Cost;
+
+                // Too expensive.
+                if (existing > category.MaxTraitPoints)
+                    continue;
+
+                groups[category.ID] = existing;
+                result.Add(trait);
+            }
+
+            return result;
         }
 
         public ICharacterProfile Validated(ICommonSession session, IDependencyCollection collection)
@@ -706,6 +781,7 @@ namespace Content.Shared.Preferences
             hashCode.Add((int)Gender);
             hashCode.Add(Appearance);
             hashCode.Add((int)SpawnPriority);
+            hashCode.Add(SquadPreference);
             hashCode.Add((int)PreferenceUnavailable);
             hashCode.Add(NamedItems);
             return hashCode.ToHashCode();

@@ -1,6 +1,15 @@
 - type: entity
-  parent: BaseKnife
-  id: CMM5Bayonet
+  abstract: true
+  id: RMCBaseMeleeWeapon
+  components:
+  - type: MeleeDamageMultiplier
+    whitelist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: [ RMCBaseMeleeWeapon, BaseKnife, RMCAttachableBase ]
+  id: RMCM5Bayonet
   name: "M5 'Night Raider' bayonet"
   description: The standard-issue bayonet of the Marines. You can slide this knife into your boots. # TODO RMC14 , or attach it to the end of a rifle.
   components:
@@ -8,9 +17,12 @@
     slots:
     - mask
     - pocket
+    sprite: _RMC14/Objects/Weapons/Melee/m5_bayonet.rsi
   - type: Tag
     tags:
     - Knife
+    - RMCAttachmentBarrel
+    - RMCM5Bayonet
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Melee/m5_bayonet.rsi
     state: icon
@@ -30,16 +42,37 @@
   - type: DisarmMalus
     malus: 0.225
   - type: UsableWhileDevoured
+    damage:
+      types:
+        Slash: 10
+  - type: AttachableVisuals
+    rsi: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+    prefix: bayonet
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Slash: 20
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: -0.05
 
 - type: entity
   name: M11 throwing knife
-  parent: CMM5Bayonet
+  parent: [ RMCBaseMeleeWeapon, BaseKnife]
   id: CMM11Knife
   description: A military knife designed to be thrown at the enemy.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Melee/m11_knife.rsi
     state: icon
+  - type: Clothing
+    slots:
+    - mask
+    - pocket
+    sprite: _RMC14/Objects/Weapons/Melee/m5_bayonet.rsi
   - type: MeleeWeapon
     damage:
       types:
@@ -48,9 +81,15 @@
     damage:
       types:
         Slash: 50
+  - type: UsableWhileDevoured
+    damage:
+      types:
+        Slash: 3
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Weapons/Melee/m11_knife.rsi
+  - type: DisarmMalus
+    malus: 0.225
   - type: Tag
     tags:
     - ThrowingKnife
@@ -59,7 +98,7 @@
   id: ThrowingKnife
 
 - type: entity
-  parent: CMM5Bayonet
+  parent: [ RMCBaseMeleeWeapon, BaseKnife]
   id: CMM2132Machete
   name: M2132 machete
   description: Latest issue of the Marine Machete.
@@ -80,6 +119,15 @@
     damage:
       types:
         Slash: 4
+  - type: UsableWhileDevoured
+    damage:
+      types:
+        Slash: 14
   - type: Item
     size: Large
     sprite: _RMC14/Objects/Weapons/Melee/machete.rsi
+  - type: DisarmMalus
+    malus: 0.225
+
+- type: Tag
+  id: RMCM5Bayonet

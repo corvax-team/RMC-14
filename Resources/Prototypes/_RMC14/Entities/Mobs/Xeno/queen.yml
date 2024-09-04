@@ -2,6 +2,7 @@
   parent:
   - CMXenoDeveloped
   - CMXenoTail
+  - RMCXenoSpeechSounds
   id: CMXenoQueen
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
@@ -15,6 +16,8 @@
       state: alive
     - map: [ "enum.XenoVisualLayers.Ovipositor" ]
       sprite: _RMC14/Mobs/Xenonids/Queen/ovipositor.rsi
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
   - type: MobState
     allowedStates:
     - Alive
@@ -23,8 +26,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      500: Critical
-      600: Dead
+      700: Critical
+      800: Dead
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -36,7 +39,7 @@
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStab
+    - ActionXenoTailSlam
     - ActionXenoOrderConstruction
     - ActionXenoAcidNormal
     - ActionXenoPheromones
@@ -59,6 +62,12 @@
     bypassTierCount: true
     unlockAt: 0
   - type: XenoAcid
+  - type: XenoTailSlam
+    power: 7
+    stunTime: 2900
+    tailDamage:
+      groups:
+        Brute: 80
   - type: XenoConstruction
     canBuild:
     - WallXenoResin
@@ -83,9 +92,10 @@
       groups:
         Brute: 40
   - type: XenoOvipositorCapable
-  - type: Tackle
-    threshold: 3
+  - type: Tackle # min: 2, max: 6
+    threshold: 4
     stun: 11
+    chance: 0.55
   - type: Fixtures
     fixtures:
       fix1:
@@ -115,7 +125,7 @@
     footstepSoundCollection:
       collection: XenoFootstepLarge
       params:
-        volume: -12
+        volume: -8
 #  - type: RandomSound
 #    sound:
 #      collection: XenoQueenBreath # TODO RMC14
@@ -151,3 +161,12 @@
     - type: XenoScreech
     addActions:
     - ActionXenoScreech
+  - type: RMCXenoDamageVisuals
+    prefix: queen
+  - type: PreventPulledWhileAlive
+    whitelist:
+      components:
+      - Xeno
+    exceptEffects:
+    - Stun
+    - KnockedDown

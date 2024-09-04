@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoSentinel
   name: Sentinel
   description: A slithery, spitting kind of alien.
@@ -19,8 +20,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      500: Critical
-      600: Dead
+      600: Critical
+      700: Dead
   - type: Xeno
     role: CMXenoSentinel
     actionIds:
@@ -58,6 +59,15 @@
     damage:
       groups:
         Brute: 22.5
-  - type: Tackle
+  - type: Tackle # min: 4, max: 4
     threshold: 4
     stun: 8
+    chance: 0.50
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 27
+    inject:
+      CCMXenoLightNeuroToxin: 0.30
+  - type: RMCXenoDamageVisuals
+    prefix: sentinel

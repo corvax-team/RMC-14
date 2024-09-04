@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
   id: CMXenoLesserDrone
   name: Lesser Drone
   description: An alien drone. Looks... smaller.
@@ -38,6 +39,12 @@
     countedInSlots: false
     unlockAt: 0
   - type: XenoAcid
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 30
+    inject:
+      CCMXenoDroneJuice: 0.15
   - type: XenoConstruction
     buildDelay: 4
     canBuild:
@@ -54,7 +61,7 @@
     damage:
       groups:
         Brute: 20
-  - type: Tackle
+  - type: Tackle  # min: 4, max: 5
     threshold: 5
     stun: 5
   - type: WhitelistPickup
@@ -73,3 +80,5 @@
       types:
         Blunt: 2.5
   - type: XenoHiveCoreRole
+#  - type: RMCXenoDamageVisuals # TODO RMC14
+#    prefix: drone

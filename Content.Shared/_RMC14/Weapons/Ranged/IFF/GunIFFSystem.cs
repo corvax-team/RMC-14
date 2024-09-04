@@ -1,5 +1,7 @@
-﻿using Content.Shared.Hands.Components;
+﻿using Content.Shared._RMC14.Attachable.Systems;
+using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
+using Content.Shared.NPC.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Events;
@@ -12,17 +14,19 @@ public sealed class GunIFFSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
 
+    private EntityQuery<NpcFactionMemberComponent> _npcFactionMemberQuery;
     private EntityQuery<UserIFFComponent> _userIFFQuery;
 
     public override void Initialize()
     {
+        _npcFactionMemberQuery = GetEntityQuery<NpcFactionMemberComponent>();
         _userIFFQuery = GetEntityQuery<UserIFFComponent>();
 
         SubscribeLocalEvent<UserIFFComponent, GetIFFFactionEvent>(OnUserIFFGetFaction);
         SubscribeLocalEvent<InventoryComponent, GetIFFFactionEvent>(OnInventoryIFFGetFaction);
         SubscribeLocalEvent<HandsComponent, GetIFFFactionEvent>(OnHandsIFFGetFaction);
         SubscribeLocalEvent<ItemIFFComponent, InventoryRelayedEvent<GetIFFFactionEvent>>(OnItemIFFGetFaction);
-        SubscribeLocalEvent<GunIFFComponent, AmmoShotEvent>(OnGunIFFAmmoShot);
+        SubscribeLocalEvent<GunIFFComponent, AmmoShotEvent>(OnGunIFFAmmoShot, before: [typeof(AttachableIFFSystem)]);
         SubscribeLocalEvent<ProjectileIFFComponent, PreventCollideEvent>(OnProjectileIFFPreventCollide);
     }
 
@@ -62,7 +66,7 @@ public sealed class GunIFFSystem : EntitySystem
 
     private void OnGunIFFAmmoShot(Entity<GunIFFComponent> ent, ref AmmoShotEvent args)
     {
-        GiveAmmoIFF(ent, ref args);
+        GiveAmmoIFF(ent, ref args, ent.Comp.Intrinsic, ent.Comp.Enabled);
     }
 
     private void OnProjectileIFFPreventCollide(Entity<ProjectileIFFComponent> ent, ref PreventCollideEvent args)
@@ -73,7 +77,10 @@ public sealed class GunIFFSystem : EntitySystem
             return;
         }
 
-        if (IsInFaction(args.OtherEntity, faction))
+        if (ent.Comp.Enabled && IsInFaction(args.OtherEntity, faction))
+            args.Cancelled = true;
+
+        if (HasComp<EntityIFFComponent>(args.OtherEntity) && IsInFaction(args.OtherEntity, faction))
             args.Cancelled = true;
     }
 
@@ -94,16 +101,29 @@ public sealed class GunIFFSystem : EntitySystem
         Dirty(user);
     }
 
-    public void GiveAmmoIFF(EntityUid gun, ref AmmoShotEvent args)
+    public void GiveAmmoIFF(EntityUid gun, ref AmmoShotEvent args, bool intrinsic, bool enabled)
     {
-        if (!_container.TryGetContainingContainer((gun, null), out var container) ||
-            !_userIFFQuery.HasComp(container.Owner))
+        EntityUid owner;
+        if (intrinsic)
+        {
+            owner = gun;
+        }
+        else if (_container.TryGetContainingContainer((gun, null), out var container))
+        {
+            owner = container.Owner;
+        }
+        else
+        {
+            return;
+        }
+
+        if (!_userIFFQuery.HasComp(owner))
         {
             return;
         }
 
         var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
-        RaiseLocalEvent(container.Owner, ref ev);
+        RaiseLocalEvent(owner, ref ev);
 
         if (ev.Faction is not { } id)
             return;
@@ -112,6 +132,7 @@ public sealed class GunIFFSystem : EntitySystem
         {
             var iff = EnsureComp<ProjectileIFFComponent>(projectile);
             iff.Faction = id;
+            iff.Enabled = enabled;
             Dirty(projectile, iff);
         }
     }

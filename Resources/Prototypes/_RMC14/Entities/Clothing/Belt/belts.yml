@@ -1,43 +1,3 @@
-# Base
-- type: entity
-  abstract: true
-  parent: ClothingBeltBase
-  id: CMBeltBase
-  name: belt
-  description: Can hold various things.
-  components:
-  - type: Appearance
-  - type: Sprite
-    layers:
-    - state: icon
-    - state: half
-      map: [ "openLayer" ]
-    - state: full
-      map: [ "closedLayer" ]
-  - type: CMStorageVisualizer
-    storageClosed: closedLayer
-    storageOpen: openLayer
-  - type: Item
-    size: Large
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
-
-- type: entity
-  abstract: true
-  parent: CMBeltBase
-  id: CMBeltBaseStorage
-  components:
-  - type: Storage
-    maxItemSize: Small
-    grid:
-    - 0,0,13,1
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
-        ents: []
-
 # Simple
 - type: entity
   parent: ClothingBeltBase
@@ -72,7 +32,7 @@
       - Flare
 #      - # TODO RMC14 shotgun shell handfuls
       - CMMagazinePistol
-      - CMMagazineRevolver
+      - RMCMagazineRevolver
       - CMMagazineRifle
       - CMMagazineSmg
       - CMMagazineSniper
@@ -111,7 +71,10 @@
       - CableCoil
       - Multitool
       - Flashlight
-#      - # TODO nailgun, cell, circuit board
+      - PowerCell
+      - CMFireExtinguisherPortable
+      - RMCExplosiveBreachingCharge
+#      - # TODO nailgun, circuit board
       components:
       - Welder
       - PowerCell
@@ -151,9 +114,11 @@
       - Flashlight
       - Sidearm
       - CMMagazinePistol
-      - CMMagazineRevolver
+      - RMCMagazineRevolver
+      - PowerCell
+      - CMFireExtinguisherPortable
 #      - # TODO RMC14 handful of shotgun shells
-#      - # TODO nailgun, cell, circuit board
+#      - # TODO nailgun, circuit board
       components:
       - Welder
       - PowerCell
@@ -162,6 +127,12 @@
       - LightReplacer
       - EntrenchingTool
   - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
 
 - type: entity
   parent: CMBeltBase
@@ -175,6 +146,7 @@
     sprite: _RMC14/Objects/Clothing/Belt/knife.rsi
   - type: ItemSlots
   - type: CMHolster
+  - type: UsableWhileDevoured
   - type: CMItemSlots
     cooldown: 1
     cooldownPopup: You need to wait before drawing another knife!
@@ -189,7 +161,7 @@
   parent: CMBeltBaseStorage
   id: CMBeltMedical
   name: M276 pattern medical storage rig
-  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is a less common configuration, designed to transport medical supplies and pistol ammunition.
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is a less common configuration, designed to transport bulkier medical supplies.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/medical.rsi
@@ -209,8 +181,8 @@
       - Syringe
       - CMSurgicalLine
       - CMSynthGraft
-      - Bloodpack
       - Brutepack
+      - CMBloodPack
       - Gauze
       - Ointment
       - CMOintment
@@ -221,6 +193,7 @@
       - CMRollerBed
       - BodyBag
 #      - # TODO RMC14 latex gloves
+      - Hypospray
       components:
       - Hypospray
       - Defibrillator
@@ -240,7 +213,7 @@
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,41,1 # 21 slots
+    - 0,0,13,5 # 21 slots
     whitelist:
       tags:
       - DiscreteHealthAnalyzer
@@ -250,6 +223,7 @@
       - Syringe
       - CMAutoInjector
       - Brutepack
+      - CMBloodPack
       - Gauze
       - Ointment
       - CMOintment
@@ -260,7 +234,6 @@
       components:
       - Defibrillator
       - Pill
-      - BloodPack
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
     items:
@@ -278,50 +251,18 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/mortar.rsi
   - type: Storage
-    maxItemSize: Normal
+    maxItemSize: Huge
     whitelist:
-      tags:
-      - CMMortarShell
-#      - # TODO RMC14 pistol, revolver, flaregun
-  - type: FixedItemSizeStorage
-
-- type: entity
-  parent: CMBeltBaseStorage
-  id: CMBeltSecurity
-  name: M276 pattern military police rig
-  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This configuration is commonly seen among Marine Military Police and peacekeepers, though it can hold some light munitions.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/security.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/security.rsi
-  - type: Storage
-    maxItemSize: Normal
-    grid:
-    - 0,0,11,1 # 6 slots
-    whitelist:
-      tags:
-      - SecBeltEquip
-      - Taser
-      - Flashlight
-      - CMMagazinePistol
-#      - # TODO RMC14 shotgun handfuls
-      - Taser
       components:
-      - Handcuff
-      - Flash
-      - FlashOnTrigger
-      - Stunbaton
-      - ForensicScanner
-      - MeleeWeapon
-      - Gun
+      - MortarShell
+#      - # TODO RMC14 pistol, revolver, flaregun
   - type: FixedItemSizeStorage
 
 - type: entity
   parent: CMBeltMarine
   id: CMBeltSmartGunOperator
   name: M280 pattern smart gun operator drum belt
-  description: Despite the fact that 1. drum magazines are incredibly non-ergonomical, and 2. require incredibly precise machining in order to fit universally (spoiler, they don't, adding further to the myth of 'Smart Gun Personalities'), the Marines decided to issue a modified marine belt (more formally known by the designation M280) with hooks and dust covers (overly complex for the average jarhead) for the M56B system's drum munitions. When the carry catch on the drum isn't getting stuck in the oiled up velcro, the rig actually does do a decent job at holding a plentiful amount of drums. But at the end of the day, compared to standard rigs... it sucks, but isn't that what being a Marine is all about?
+  description: Despite the fact that 1. drum magazines are incredibly non-ergonomical, and 2. require incredibly precise machining in order to fit universally (spoiler, they don't, adding further to the myth of 'Smart Gun Personalities'), the Marines decided to issue a modified marine belt (more formally known by the designation M280) with hooks and dust covers (overly complex for the average jarhead) for the ML66A system's drum munitions. When the carry catch on the drum isn't getting stuck in the oiled up velcro, the rig actually does do a decent job at holding a plentiful amount of drums. But at the end of the day, compared to standard rigs... it sucks, but isn't that what being a Marine is all about?
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator.rsi
@@ -337,11 +278,14 @@
       - CMMagazineRifle
       - CMMagazineSmg
       - CMMagazineSniper
-#      - # TODO RMC14 smart gun magazine
+      - RMCMagazineSmartGun
 #      - # TODO RMC14 shotgun handfuls
       - Flare
   - type: FixedItemSizeStorage
-
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMagazineSmartGun
 
 - type: entity
   parent: CMBeltMarine
@@ -356,7 +300,7 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,11,2 # 12 slots
+    - 0,0,11,3 # 12 slots
     whitelist:
       tags:
       - Grenade
@@ -376,3 +320,44 @@
       tags:
       - Grenade
   - type: FixedItemSizeStorage
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltSmartPistol
+  name: M276 pattern SU-6 smart pistol holster rig
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the SU-6 smartpistol.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/smart_pistol.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/smart_pistol.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,13,1 # 7 slots
+    whitelist:
+      tags:
+      - RMCSmartPistol
+      - RMCMagazinePistolSU6
+  - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - RMCSmartPistolHolster
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCBeltUtilityGeneral
+  name: M276 G8-A general utility pouch
+  description: A small, lightweight pouch that can be clipped onto M3 Pattern armor to provide additional storage. The newer G8-A model, while uncomfortable, can also be clipped around the waist.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/sparepouch.rsi
+  - type: Clothing
+    slots:
+    - suitStorage
+    - belt
+    sprite: _RMC14/Objects/Clothing/Belt/sparepouch.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,9,1 # 9 slots

@@ -1,4 +1,4 @@
-﻿# Xeno AI
+# Xeno AI
 - type: htnCompound
   id: CMXenoCompound
   branches:
@@ -39,7 +39,7 @@
   id: CMXenoBase
   abstract: true
   save: false
-  components:
+  components: # TODO RMC14 camera recoil from large explosions? check 13
   - type: Damageable
     damageContainer: Xeno
   - type: Destructible
@@ -78,6 +78,8 @@
     - Piercing
     - Heat
     - Shock
+  - type: CMDefibrillatorBlocked
+    popup: defibrillator-xeno
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.2
     baseSprintSpeed: 4
@@ -99,7 +101,6 @@
   - type: Examiner
   - type: Eye
   - type: ContentEye
-  - type: CameraRecoil
   - type: MindContainer
     showExamineInfo: true
   - type: StatusIcon
@@ -119,6 +120,8 @@
     layers:
     - map: [ "enum.XenoVisualLayers.Base" ]
       state: alive
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
   - type: Physics
     bodyType: KinematicController
   - type: Fixtures
@@ -164,6 +167,7 @@
     alert: XenoNightVision
     overlay: true
   - type: ParalyzeOnPullAttemptImmune
+  - type: InfectOnPullAttemptImmune
   - type: GhostTakeoverAvailable
   - type: GhostRole
     makeSentient: true
@@ -194,7 +198,6 @@
     whitelist:
       components:
       - Xeno
-      - XenoEgg
       - Infectable
   - type: BlockPullingDead
   - type: XenoFriendly
@@ -212,6 +215,21 @@
   - type: XenoAnnounceDeath # TODO RMC14 announce location of death (area)
     message: cm-xeno-death
     color: "#459A62"
+  - type: ExplosionResistance
+    damageCoefficient: 2
+  - type: NpcFactionMember
+    factions:
+    - RMCXeno
+  - type: RMCNightVisionVisible
+  - type: CrashLandable
+  - type: UserBlacklistActivatableUI
+    keys:
+    - enum.VendingMachineUiKey.Key
+    - enum.PaperUiKey.Key
+  - type: ActiveInputMover
+  - type: HiveTracker
+  - type: RequireProjectileTarget
+    active: false
 
 - type: entity
   abstract: true
@@ -237,19 +255,20 @@
   id: CMXenoMelee
   components:
   - type: CombatMode
-    canDisarm: true
-    disarmFailChance: 0
+    canDisarm: false
+    disarmFailChance: 80
   - type: MeleeWeapon
     widePrimary: true
-    altDisarm: true
+    altDisarm: false
     angle: 60
     soundHit:
-      collection: AlienClaw
+      collection: RCMXenoClaw
     animation: WeaponArcBite
     damage:
       groups:
         Brute: 12
   - type: Tackle
+    chance: 0.35
 
 - type: entity
   abstract: true
@@ -267,13 +286,10 @@
   id: CMXenoAI
   parent: CMXenoBase
   abstract: true
-  components:
+#  components:
 #  - type: HTN # TODO RMC14 needs to not target nested marines
 #    rootTask:
 #      task: CMXenoCompound
-  - type: NpcFactionMember
-    factions:
-    - Xeno
 
 - type: entity
   id: CMXenoDeveloped
@@ -316,6 +332,13 @@
     damage: #per second, scales with number of fire 'stacks'
       types:
         Heat: 3
+
+- type: entity
+  abstract: true
+  id: RMCXenoSpeechSounds
+  components:
+  - type: Speech
+    speechSounds: Xenonid
 
 - type: speechVerb
   id: Xeno

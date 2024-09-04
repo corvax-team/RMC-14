@@ -1,6 +1,7 @@
 ﻿using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.UserInterface;
+using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -16,7 +17,10 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, ActivatableUIOpenAttemptEvent>(OnMarineCommunicationsComputerOpenAttempt);
     }
 
-    private void OnMarineCommunicationsComputerOpenAttempt(Entity<MarineCommunicationsComputerComponent> ent, ref ActivatableUIOpenAttemptEvent args)
+    private void OnMarineCommunicationsComputerOpenAttempt(
+        Entity<MarineCommunicationsComputerComponent> ent,
+        ref ActivatableUIOpenAttemptEvent args
+        )
     {
         if (args.Cancelled)
             return;
@@ -29,7 +33,20 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         }
     }
 
-    public virtual void AnnounceRadio(EntityUid sender, string message, ProtoId<RadioChannelPrototype> channel)
+    public virtual void AnnounceRadio(
+        EntityUid sender,
+        string message,
+        ProtoId<RadioChannelPrototype> channel
+        )
+    {
+    }
+
+    public virtual void AnnounceARES(
+        EntityUid? source,
+        string message,
+        SoundSpecifier? sound = null,
+        LocId? announcement = null
+        )
     {
     }
 }

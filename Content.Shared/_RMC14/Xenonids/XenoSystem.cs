@@ -2,9 +2,12 @@
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medical.Scanner;
+using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Vendors;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Rest;
@@ -32,12 +35,13 @@ namespace Content.Shared._RMC14.Xenonids;
 public sealed class XenoSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly CMDamageableSystem _cmDamageable = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -48,8 +52,11 @@ public sealed class XenoSystem : EntitySystem
     private EntityQuery<MarineComponent> _marineQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<MobThresholdsComponent> _mobThresholdsQuery;
+    private EntityQuery<XenoFriendlyComponent> _xenoFriendlyQuery;
+    private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
     private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
     private EntityQuery<XenoRecoveryPheromonesComponent> _xenoRecoveryQuery;
+    private EntityQuery<VictimInfectedComponent> _victimInfectedQuery;
 
     private float _xenoDamageDealtMultiplier;
     private float _xenoDamageReceivedMultiplier;
@@ -64,8 +71,11 @@ public sealed class XenoSystem : EntitySystem
         _marineQuery = GetEntityQuery<MarineComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _mobThresholdsQuery = GetEntityQuery<MobThresholdsComponent>();
+        _xenoFriendlyQuery = GetEntityQuery<XenoFriendlyComponent>();
+        _xenoNestedQuery = GetEntityQuery<XenoNestedComponent>();
         _xenoPlasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
         _xenoRecoveryQuery = GetEntityQuery<XenoRecoveryPheromonesComponent>();
+        _victimInfectedQuery = GetEntityQuery<VictimInfectedComponent>();
 
         SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit);
         SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
@@ -79,9 +89,9 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
         SubscribeLocalEvent<XenoComponent, RefreshMovementSpeedModifiersEvent>(OnXenoRefreshSpeed);
 
-        Subs.CVar(_config, CMCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
-        Subs.CVar(_config, CMCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
-        Subs.CVar(_config, CMCVars.CMXenoSpeedMultiplier, UpdateXenoSpeedMultiplier, true);
+        Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
+        Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
+        Subs.CVar(_config, RMCCVars.CMXenoSpeedMultiplier, UpdateXenoSpeedMultiplier, true);
 
         UpdatesAfter.Add(typeof(SharedXenoPheromonesSystem));
     }
@@ -139,8 +149,15 @@ public sealed class XenoSystem : EntitySystem
 
         // TODO RMC14 different hives
         // TODO RMC14 this still falsely plays the hit red flash effect on xenos if others are hit in a wide swing
-        if (HasComp<XenoFriendlyComponent>(target) ||
+        if (_xenoFriendlyQuery.HasComp(target) ||
             _mobState.IsDead(target))
+        {
+            args.Cancel();
+            return;
+        }
+
+        if (_xenoNestedQuery.HasComp(target) &&
+            _victimInfectedQuery.HasComp(target))
         {
             args.Cancel();
         }
@@ -216,6 +233,8 @@ public sealed class XenoSystem : EntitySystem
 
         xeno.Comp.Hive = hive;
         Dirty(xeno, xeno.Comp);
+
+        _nightVision.SetSeeThroughContainers(xeno.Owner, hiveEnt.Comp.SeeThroughContainers);
     }
 
     public void SetSameHive(Entity<XenoComponent?> to, Entity<XenoComponent?> from)
@@ -262,7 +281,7 @@ public sealed class XenoSystem : EntitySystem
             return;
         }
 
-        var heal = _cmDamageable.DistributeTypes((xeno, xeno.Comp), -amount);
+        var heal = _rmcDamageable.DistributeTypes((xeno, xeno.Comp), -amount);
 
         if (heal.GetTotal() > FixedPoint2.Zero)
         {
@@ -270,7 +289,7 @@ public sealed class XenoSystem : EntitySystem
             return;
         }
 
-        _damageable.TryChangeDamage(xeno, heal);
+        _damageable.TryChangeDamage(xeno, heal, true);
     }
 
     // TODO RMC14 generalize this for survivors, synthetics, enemy hives, etc
@@ -288,6 +307,23 @@ public sealed class XenoSystem : EntitySystem
         }
 
         return xenoOne.Comp.Hive == xenoTwo.Comp.Hive;
+    }
+
+    public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool hitNonMarines = false)
+    {
+        if (xeno == target)
+            return false;
+        // TODO RMC14 use hive member instead
+        if (TryComp<XenoComponent>(xeno, out var comp1) && TryComp<XenoComponent>(target, out var comp2) && comp1.Hive == comp2.Hive)
+            return false;
+
+        if (HasComp<MobStateComponent>(target) && _mobState.IsDead(target))
+            return false;
+
+        if (_xenoNestedQuery.HasComp(target))
+            return false;
+
+        return HasComp<MarineComponent>(target) || hitNonMarines;
     }
 
     public override void Update(float frameTime)
