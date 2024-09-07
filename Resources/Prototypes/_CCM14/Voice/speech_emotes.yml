@@ -1,0 +1,180 @@
+- type: emote
+  id: Shout
+  name: chat-emote-name-screams
+  category: Vocal
+  icon: _CCM14/Interface/Emotes/xeno.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    tags:
+    - Larva 
+    - Parasite
+    components:
+    - BorgChassis
+    - HumanoidAppearance
+    - CMXenoParasite
+  chatMessages: ["chat-emote-msg-screams"]
+  chatTriggers:
+    - scream
+    - кричать
+
+- type: emote
+  id: Growls
+  name: chat-emote-name-growls
+  category: Vocal
+  icon: _CCM14/Interface/Emotes/xeno.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    tags:
+    - Larva
+    - Parasite 
+    components:
+    - BorgChassis
+    - HumanoidAppearance
+    - CMXenoParasite
+  chatMessages: ["chat-emote-msg-growls"]
+  chatTriggers:
+    - growls
+    - рычать
+    - рычит
+
+- type: emote
+  id: ScreamingForHelp
+  name: chat-emote-name-screamingforhelp
+  category: Vocal
+  icon: _CCM14/Interface/Emotes/xeno.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    tags:
+    - Larva 
+    - Parasite
+    components:
+    - BorgChassis
+    - HumanoidAppearance
+  chatMessages: ["chat-emote-msg-screamingforhelp"]
+  chatTriggers:
+    - кричать о помощи
+    - screaming for help
+    - help me
+
+- type: emote
+  id: Sizzle
+  name: chat-emote-name-sizzle
+  category: Vocal
+  icon: _CCM14/Interface/Emotes/xeno.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    tags:
+    - Larva 
+    - Parasite
+    components:
+    - BorgChassis
+    - HumanoidAppearance
+    - CMXenoParasite
+  chatMessages: ["chat-emote-msg-sizzle"]
+  chatTriggers:
+    - шипит
+    - шипеть
+    - hiss
+    - sizzle
+
+- type: emote
+  id: Roars
+  name: chat-emote-name-roars
+  category: Vocal
+  icon: _CCM14/Interface/Emotes/xeno.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    tags:
+    - Larva
+    - Parasite 
+    components:
+    - BorgChassis
+    - HumanoidAppearance
+    - CMXenoParasite
+  chatMessages: ["chat-emote-msg-roars"]
+  chatTriggers:
+    - ревет
+    - реветь
+    - roars
+
+- type: emote
+  id: LarvaRoars
+  name: chat-emote-name-larva_roars
+  category: Vocal
+  icon: _CCM14/Interface/Emotes/xeno.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    tags:
+    - Parasite
+    - Boiler
+    - Boiler
+    - Burrower
+    - Carrier
+    - Crusher
+    - Defender
+    - Drone
+    - LesserDrone
+    - Hivelord
+    - Lurker
+    - Praetorian
+    - Queen
+    - Ravager
+    - Runner
+    - Sentinel
+    - Spitter
+    - Warrior
+    components:
+    - BorgChassis
+    - HumanoidAppearance
+  chatMessages: ["chat-emote-msg-larva_roars"]
+  chatTriggers:
+    - ревет
+    - реветь
+    - roars
+
+- type: emote
+  id: ParasiteScream
+  name: chat-emote-name-parasite_scream
+  category: Vocal
+  icon: _CCM14/Interface/Emotes/xeno.png
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    tags:
+    - Larva 
+    - Boiler
+    - Burrower
+    - Carrier
+    - Crusher
+    - Defender
+    - Drone
+    - LesserDrone
+    - Hivelord
+    - Lurker
+    - Praetorian
+    - Queen
+    - Ravager
+    - Runner
+    - Sentinel
+    - Spitter
+    - Warrior
+    components:
+    - BorgChassis
+    - HumanoidAppearance  
+  chatMessages: ["chat-emote-msg-parasite_screams"]
+  chatTriggers:
+    - scream
+    - кричать

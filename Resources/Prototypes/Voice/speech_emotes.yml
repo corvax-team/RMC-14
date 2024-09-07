@@ -10,6 +10,7 @@
   blacklist:
     components:
     - BorgChassis
+    - Xeno #CCM Banning xenomorphs from these emotions
   chatMessages: ["chat-emote-msg-scream"]
   chatTriggers:
     - scream
@@ -40,6 +41,7 @@
   blacklist:
     components:
     - BorgChassis
+    - Xeno #CCM Banning xenomorphs from these emotions
   chatMessages: ["chat-emote-msg-laugh"]
   chatTriggers:
     - laugh
@@ -86,6 +88,7 @@
   blacklist:
     components:
     - BorgChassis
+    - Xeno #CCM Banning xenomorphs from these emotions
   chatMessages: ["chat-emote-msg-sigh"]
   chatTriggers:
     - sigh
@@ -103,6 +106,7 @@
   blacklist:
     components:
     - BorgChassis
+    - Xeno
   chatMessages: ["chat-emote-msg-whistle"]
   chatTriggers:
     - whistle
@@ -120,6 +124,7 @@
   blacklist:
     components:
     - BorgChassis
+    - Xeno #CCM Banning xenomorphs from these emotions
   chatMessages: ["chat-emote-msg-crying"]
   chatTriggers:
     - cry
@@ -141,6 +146,7 @@
   blacklist:
     components:
     - BorgChassis
+    - Xeno #CCM Banning xenomorphs from these emotions
   chatMessages: ["chat-emote-msg-squish"]
   chatTriggers:
     - squish
@@ -159,6 +165,7 @@
   blacklist:
     components:
     - BorgChassis
+    - Xeno #CCM Banning xenomorphs from these emotions
   chatMessages: ["chat-emote-msg-chitter"]
   chatTriggers:
    - chitter
@@ -177,6 +184,7 @@
   blacklist:
     components:
     - BorgChassis
+    - Xeno #CCM Banning xenomorphs from these emotions
   chatMessages: ["chat-emote-msg-squeak"]
   chatTriggers:
    - squeak
@@ -195,6 +203,7 @@
   blacklist:
     components:
     - BorgChassis
+    - Xeno #CCM Banning xenomorphs from these emotions
   chatMessages: ["chat-emote-msg-click"]
   chatTriggers:
    - click
@@ -212,6 +221,7 @@
   blacklist:
     components:
     - BorgChassis
+    - Xeno #CCM Banning xenomorphs from these emotions
   chatMessages: ["chat-emote-msg-clap"]
   chatTriggers:
     - clap
@@ -230,6 +240,7 @@
   blacklist:
     components:
     - BorgChassis
+    - Xeno #CCM Banning xenomorphs from these emotions
   chatMessages: ["chat-emote-msg-snap"] # snaps <{THEIR($ent)}> fingers?
   chatTriggers:
     - snap
@@ -253,6 +264,7 @@
   blacklist:
     components:
     - BorgChassis
+    - Xeno #CCM Banning xenomorphs from these emotions
   chatMessages: ["chat-emote-msg-salute"]
   chatTriggers:
     - salute

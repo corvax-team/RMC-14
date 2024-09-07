@@ -4,10 +4,14 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - CCMXenoEmoteSounds #CCM Adding xeno emotion
   id: CMXenoSpitter
   name: Spitter
   description: A gross, oozing alien of some kind.
   components:
+  - type: Tag
+    tags:
+      - Spitter #CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-spitter
   - type: Sprite

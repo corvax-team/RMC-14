@@ -1,0 +1,31 @@
+- type: emoteSounds
+  id: CCMUnsexedXeno
+  params:
+    variation: 0.125
+  sounds:
+    Shout:
+      collection: XenoScreams
+    Growls:
+      collection: XenoGrowls
+    Sizzle:
+      collection: XenoHiss
+    Roars:
+      collection: XenoRoars
+    ScreamingForHelp:
+      collection: XenoScreamingForHelp
+
+- type: emoteSounds
+  id: CCMUnsexedLarva
+  params:
+    variation: 0.125
+  sounds:
+    LarvaRoars:
+      collection: XenoLarvaRoar
+
+- type: emoteSounds
+  id: CCMUnsexedParasite
+  params:
+    variation: 0.125
+  sounds:
+    ParasiteScream:
+      collection: XenoParasite

@@ -4,10 +4,14 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - CCMXenoEmoteSounds #CCM Adding xeno emotion
   id: CMXenoRavager
   name: Ravager
   description: A huge, nasty red alien with enormous scythed claws.
   components:
+  - type: Tag
+    tags:
+      - Ravager #CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-ravager
   - type: Sprite

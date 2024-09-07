@@ -1,0 +1,63 @@
+- type: soundCollection
+  id: XenoGrowls
+  files:
+  - /Audio/_CCM14/Voice/Xeno/xeno_growl1.ogg
+  - /Audio/_CCM14/Voice/Xeno/xeno_growl2.ogg
+  - /Audio/_CCM14/Voice/Xeno/xeno_growl3.ogg
+  - /Audio/_RMC14/Voice/Xeno/alien_growl1.ogg
+  - /Audio/_RMC14/Voice/Xeno/alien_growl2.ogg
+  - /Audio/_RMC14/Voice/Xeno/alien_growl3.ogg
+
+- type: soundCollection
+  id: XenoHiss
+  files:
+  - /Audio/_CCM14/Voice/Xeno/xeno_hiss1.ogg
+  - /Audio/_CCM14/Voice/Xeno/xeno_hiss2.ogg
+  - /Audio/_CCM14/Voice/Xeno/xeno_hiss3.ogg
+  - /Audio/_CCM14/Voice/Xeno/xeno_hiss4.ogg
+  - /Audio/_RMC14/Voice/Xeno/alien_hiss1.ogg
+  - /Audio/_RMC14/Voice/Xeno/alien_hiss2.ogg
+  - /Audio/_RMC14/Voice/Xeno/alien_hiss3.ogg
+
+- type: soundCollection
+  id: XenoRoars
+  files:
+  - /Audio/_CCM14/Voice/Xeno/xeno_roars.ogg
+  - /Audio/_RMC14/Voice/Xeno/alien_roar1.ogg
+  - /Audio/_RMC14/Voice/Xeno/alien_roar2.ogg
+  - /Audio/_RMC14/Voice/Xeno/alien_roar3.ogg
+  - /Audio/_RMC14/Voice/Xeno/alien_roar4.ogg
+  - /Audio/_RMC14/Voice/Xeno/alien_roar5.ogg
+  - /Audio/_RMC14/Voice/Xeno/alien_roar6.ogg
+
+- type: soundCollection
+  id: XenoScreamingForHelp
+  files:
+  - /Audio/_CCM14/Voice/Xeno/xeno_screaming_for_help.ogg
+  - /Audio/_RMC14/Voice/Xeno/alien_help1.ogg
+  - /Audio/_RMC14/Voice/Xeno/alien_help2.ogg
+  - /Audio/_RMC14/Voice/Xeno/alien_help3.ogg
+
+- type: soundCollection
+  id: XenoScreams
+  files:
+  - /Audio/_CCM14/Voice/Xeno/xeno_screams1.ogg
+  - /Audio/_CCM14/Voice/Xeno/xeno_screams2.ogg
+  - /Audio/_CCM14/Voice/Xeno/xeno_screams3.ogg
+  - /Audio/_CCM14/Voice/Xeno/xeno_screams4.ogg
+  - /Audio/_CCM14/Voice/Xeno/xeno_screams5.ogg
+  - /Audio/_CCM14/Voice/Xeno/xeno_screams6.ogg
+
+- type: soundCollection
+  id: XenoLarvaRoar
+  files:
+  - /Audio/_RMC14/Voice/Xeno/alien_roar_larva1.ogg
+  - /Audio/_RMC14/Voice/Xeno/alien_roar_larva2.ogg
+
+- type: soundCollection
+  id: XenoParasite
+  files:
+  - /Audio/_CCM14/Voice/Xeno/facehugger1.ogg
+  - /Audio/_CCM14/Voice/Xeno/facehugger2.ogg
+  - /Audio/_CCM14/Voice/Xeno/facehugger3.ogg
+  - /Audio/_CCM14/Voice/Xeno/facehugger4.ogg

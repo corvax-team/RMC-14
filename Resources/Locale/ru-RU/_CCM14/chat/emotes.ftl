@@ -1,0 +1,14 @@
+chat-emote-name-growls = Рычать
+chat-emote-name-larva_roars = Реветь
+chat-emote-name-parasite_scream = Кричать
+chat-emote-name-screamingforhelp = Кричать о помощи
+chat-emote-name-screams = Кричать
+chat-emote-name-sizzle = Шипеть
+chat-emote-name-roars = Реветь
+chat-emote-msg-growls = Рычит
+chat-emote-msg-screams = Кричит
+chat-emote-msg-screamingforhelp = Кричит о помощи
+chat-emote-msg-sizzle = Шипит
+chat-emote-msg-roars = Ревет
+chat-emote-msg-larva_roars = Ревет
+chat-emote-msg-parasite_screams = Кричит

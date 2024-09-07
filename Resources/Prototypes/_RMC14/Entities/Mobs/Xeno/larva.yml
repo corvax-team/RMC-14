@@ -5,6 +5,18 @@
   id: CMXenoLarva
   name: Larva
   components:
+  - type: Tag
+    tags:
+      - Larva
+  - type: Vocal
+    screamId: "LarvaRoars"
+    sounds:
+      Unsexed: CCMUnsexedLarva
+  - type: Speech
+    speechSounds: XenonidLarva
+    allowedEmotes: ['LarvaRoars']
+#CCM Adding xeno emotion and tag
+
   - type: GhostRole
     name: cm-job-name-xeno-larva
   - type: Sprite
@@ -57,8 +69,6 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.7
     baseSprintSpeed: 6.7
-  - type: Speech
-    speechSounds: XenonidLarva
 
 # For surgeries/failed incubations
 - type: entity

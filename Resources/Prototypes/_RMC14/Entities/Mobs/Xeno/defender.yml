@@ -4,10 +4,14 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - CCMXenoEmoteSounds #CCM Adding xeno emotion
   id: CMXenoDefender
   name: Defender
   description: A alien with an armored crest.
   components:
+  - type: Tag
+    tags:
+      - Defender #CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-defender
   - type: Sprite

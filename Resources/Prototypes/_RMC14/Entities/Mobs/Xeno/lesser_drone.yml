@@ -4,10 +4,14 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - CCMXenoEmoteSounds #CCM Adding xeno emotion
   id: CMXenoLesserDrone
   name: Lesser Drone
   description: An alien drone. Looks... smaller.
   components:
+  - type: Tag
+    tags:
+      - LesserDrone #CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-lesser-drone
   - type: Sprite

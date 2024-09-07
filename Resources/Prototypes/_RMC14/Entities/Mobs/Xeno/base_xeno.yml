@@ -345,3 +345,15 @@
   name: chat-speech-verb-name-default
   speechVerbStrings:
   - hisses
+
+#CCM Emotions are for xenomorphs
+- type: entity
+  abstract: true
+  id: CCMXenoEmoteSounds
+  components:
+  - type: Vocal
+    screamId: "Shout"
+    sounds:
+      Unsexed: CCMUnsexedXeno
+  - type: Speech
+    allowedEmotes: ['Sizzle', 'Shout', 'Roars', 'Growls', 'ScreamingForHelp']

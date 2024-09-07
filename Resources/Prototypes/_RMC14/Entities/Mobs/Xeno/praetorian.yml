@@ -4,10 +4,14 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - CCMXenoEmoteSounds #CCM Adding xeno emotion
   id: CMXenoPraetorian
   name: Praetorian
   description: A huge, looming beast of an alien.
   components:
+  - type: Tag
+    tags:
+      - Praetorian #CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-praetorian
   - type: Sprite

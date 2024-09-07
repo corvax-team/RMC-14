@@ -5,6 +5,17 @@
   id: CMXenoParasite # TODO RMC14 slowly die off weeds
   name: Parasite
   components:
+  - type: Tag
+    tags:
+      - Parasite
+  - type: Vocal
+    screamId: "ParasiteScream"
+    sounds:
+      Unsexed: CCMUnsexedParasite
+  - type: Speech
+    allowedEmotes: ['ParasiteScream']
+#CCM Adding xeno emotion and tag
+
   - type: GhostRole
     name: cm-job-name-xeno-parasite
     prob: 0.25

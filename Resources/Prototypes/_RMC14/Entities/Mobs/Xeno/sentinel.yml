@@ -4,10 +4,14 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - CCMXenoEmoteSounds #CCM Adding xeno emotion
   id: CMXenoSentinel
   name: Sentinel
   description: A slithery, spitting kind of alien.
   components:
+  - type: Tag
+    tags:
+      - Sentinel #CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-sentinel
   - type: Sprite

@@ -4,10 +4,14 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - CCMXenoEmoteSounds #CCM Adding xeno emotion
   id: CMXenoDrone
   name: Drone
   description: An alien drone.
   components:
+  - type: Tag
+    tags:
+      - Drone #CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-drone
   - type: Sprite

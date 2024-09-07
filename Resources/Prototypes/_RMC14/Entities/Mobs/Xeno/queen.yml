@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - RMCXenoSpeechSounds
+  - CCMXenoEmoteSounds #CCM Adding xeno emotion
   id: CMXenoQueen
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
@@ -30,6 +31,7 @@
       800: Dead
   - type: Tag
     tags:
+    - Queen #CCM Adding a xenomorph tag
     - DoorBumpOpener
     - FootstepSound
   - type: Xeno

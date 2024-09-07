@@ -4,10 +4,14 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - CCMXenoEmoteSounds #CCM Adding xeno emotion
   id: CMXenoBurrower
   name: Burrower
   description: A beefy alien with sharp claws.
   components:
+  - type: Tag
+    tags:
+      - Burrower #CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-burrower
   - type: Sprite

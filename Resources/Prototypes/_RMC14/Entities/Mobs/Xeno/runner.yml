@@ -4,10 +4,14 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - CCMXenoEmoteSounds #CCM Adding xeno emotion
   id: CMXenoRunner
   name: Runner
   description: A small red alien that looks like it could run fairly quickly...
   components:
+  - type: Tag
+    tags:
+      - Runner #CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-runner
   - type: Sprite
