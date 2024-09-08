@@ -9,12 +9,12 @@
     tags:
       - Larva
   - type: Vocal
-    screamId: "LarvaRoars"
+    screamId: "Snarl"
     sounds:
       Unsexed: CCMUnsexedLarva
   - type: Speech
     speechSounds: XenonidLarva
-    allowedEmotes: ['LarvaRoars']
+    allowedEmotes: ['Snarl']
 #CCM Adding xeno emotion and tag
 
   - type: GhostRole

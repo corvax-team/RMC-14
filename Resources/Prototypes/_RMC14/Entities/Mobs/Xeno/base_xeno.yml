@@ -351,6 +351,7 @@
   abstract: true
   id: CCMXenoEmoteSounds
   components:
+  - type: Emoting
   - type: Vocal
     screamId: "Shout"
     sounds:

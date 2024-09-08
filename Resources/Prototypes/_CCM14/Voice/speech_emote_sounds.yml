@@ -19,7 +19,7 @@
   params:
     variation: 0.125
   sounds:
-    LarvaRoars:
+    Snarl:
       collection: XenoLarvaRoar
 
 - type: emoteSounds
@@ -27,5 +27,5 @@
   params:
     variation: 0.125
   sounds:
-    ParasiteScream:
+    Screaming:
       collection: XenoParasite

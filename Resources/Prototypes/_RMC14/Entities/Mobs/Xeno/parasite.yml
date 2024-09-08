@@ -9,11 +9,11 @@
     tags:
       - Parasite
   - type: Vocal
-    screamId: "ParasiteScream"
+    screamId: "Screaming"
     sounds:
       Unsexed: CCMUnsexedParasite
   - type: Speech
-    allowedEmotes: ['ParasiteScream']
+    allowedEmotes: ['Screaming']
 #CCM Adding xeno emotion and tag
 
   - type: GhostRole
