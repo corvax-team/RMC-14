@@ -346,7 +346,7 @@
   speechVerbStrings:
   - hisses
 
-#CCM Emotions are for xenomorphs
+# CCM Emotions are for xenomorphs
 - type: entity
   abstract: true
   id: CCMXenoEmoteSounds

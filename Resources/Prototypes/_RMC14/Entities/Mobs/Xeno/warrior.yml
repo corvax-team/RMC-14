@@ -11,7 +11,7 @@
   components:
   - type: Tag
     tags:
-      - Warrior #CCM Adding a xenomorph tag
+      - CCMWarrior #CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-warrior
   - type: Sprite

@@ -11,7 +11,7 @@
   components:
   - type: Tag
     tags:
-      - Ravager #CCM Adding a xenomorph tag
+      - CCMRavager #CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-ravager
   - type: Sprite

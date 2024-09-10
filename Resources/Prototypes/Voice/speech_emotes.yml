@@ -10,7 +10,7 @@
   blacklist:
     components:
     - BorgChassis
-    - Xeno #CCM Banning xenomorphs from these emotions
+    - Xeno # CCM Banning xenomorphs from these emotions
   chatMessages: ["chat-emote-msg-scream"]
   chatTriggers:
     - scream

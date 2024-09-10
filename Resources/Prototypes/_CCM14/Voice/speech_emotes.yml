@@ -1,5 +1,5 @@
 - type: emote
-  id: Shout
+  id: CCMShout
   name: chat-emote-name-screams
   category: Vocal
   icon: _CCM14/Interface/Emotes/xeno.png
@@ -8,7 +8,7 @@
     - Vocal
   blacklist:
     tags:
-    - Larva 
+    - CCMLarva 
     components:
     - BorgChassis
     - HumanoidAppearance
@@ -19,7 +19,7 @@
     - кричать
 
 - type: emote
-  id: Growls
+  id: CCMGrowls
   name: chat-emote-name-growls
   category: Vocal
   icon: _CCM14/Interface/Emotes/xeno.png
@@ -28,8 +28,8 @@
     - Vocal
   blacklist:
     tags:
-    - Larva
-    - Parasite 
+    - CCMLarva
+    - CCMParasite 
     components:
     - BorgChassis
     - HumanoidAppearance
@@ -41,7 +41,7 @@
     - рычит
 
 - type: emote
-  id: ScreamingForHelp
+  id: CCMScreamingForHelp
   name: chat-emote-name-screamingforhelp
   category: Vocal
   icon: _CCM14/Interface/Emotes/xeno.png
@@ -50,8 +50,8 @@
     - Vocal
   blacklist:
     tags:
-    - Larva 
-    - Parasite
+    - CCMLarva 
+    - CCMParasite
     components:
     - BorgChassis
     - HumanoidAppearance
@@ -62,7 +62,7 @@
     - help me
 
 - type: emote
-  id: Sizzle
+  id: CCMSizzle
   name: chat-emote-name-sizzle
   category: Vocal
   icon: _CCM14/Interface/Emotes/xeno.png
@@ -71,8 +71,8 @@
     - Vocal
   blacklist:
     tags:
-    - Larva 
-    - Parasite
+    - CCMLarva 
+    - CCMParasite
     components:
     - BorgChassis
     - HumanoidAppearance
@@ -85,7 +85,7 @@
     - sizzle
 
 - type: emote
-  id: Roars
+  id: CCMSnarl
   name: chat-emote-name-roars
   category: Vocal
   icon: _CCM14/Interface/Emotes/xeno.png
@@ -94,7 +94,7 @@
     - Vocal
   blacklist:
     tags:
-    - Parasite 
+    - CCMParasite 
     components:
     - BorgChassis
     - HumanoidAppearance

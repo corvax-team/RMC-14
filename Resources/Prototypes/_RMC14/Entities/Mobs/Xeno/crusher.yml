@@ -4,14 +4,14 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
-  - CCMXenoEmoteSounds #CCM Adding xeno emotion
+  - CCMXenoEmoteSounds # CCM Adding xeno emotion
   id: CMXenoCrusher
   name: Crusher
   description: A huge alien with an enormous armored crest.
   components:
   - type: Tag
     tags:
-      - Crusher #CCM Adding a xenomorph tag
+      - CCMCrusher # CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-crusher
   - type: Sprite

@@ -1,8 +1,13 @@
 - type: entity
-  parent: RMCXenoRouny
+  parent: 
+  - RMCXenoRouny
+  - CCMXenoEmoteSounds
   id: CCMXenoRouny
   suffix: CCM14
   components:
+  - type: Tag
+    tags:
+      - CCMRouny
   - type: MobThresholds
     thresholds:
       0: Alive

@@ -1,5 +1,5 @@
 - type: soundCollection
-  id: XenoGrowls
+  id: CCMXenoGrowls
   files:
   - /Audio/_CCM14/Voice/Xeno/xeno_growl1.ogg
   - /Audio/_CCM14/Voice/Xeno/xeno_growl2.ogg
@@ -9,7 +9,7 @@
   - /Audio/_RMC14/Voice/Xeno/alien_growl3.ogg
 
 - type: soundCollection
-  id: XenoHiss
+  id: CCMXenoHiss
   files:
   - /Audio/_CCM14/Voice/Xeno/xeno_hiss1.ogg
   - /Audio/_CCM14/Voice/Xeno/xeno_hiss2.ogg
@@ -20,7 +20,7 @@
   - /Audio/_RMC14/Voice/Xeno/alien_hiss3.ogg
 
 - type: soundCollection
-  id: XenoRoars
+  id: CCMXenoRoars
   files:
   - /Audio/_CCM14/Voice/Xeno/xeno_roars.ogg
   - /Audio/_RMC14/Voice/Xeno/alien_roar1.ogg
@@ -31,7 +31,7 @@
   - /Audio/_RMC14/Voice/Xeno/alien_roar6.ogg
 
 - type: soundCollection
-  id: XenoScreamingForHelp
+  id: CCMXenoScreamingForHelp
   files:
   - /Audio/_CCM14/Voice/Xeno/xeno_screaming_for_help.ogg
   - /Audio/_RMC14/Voice/Xeno/alien_help1.ogg
@@ -39,7 +39,7 @@
   - /Audio/_RMC14/Voice/Xeno/alien_help3.ogg
 
 - type: soundCollection
-  id: XenoScreams
+  id: CCMXenoScreams
   files:
   - /Audio/_CCM14/Voice/Xeno/xeno_screams1.ogg
   - /Audio/_CCM14/Voice/Xeno/xeno_screams2.ogg
@@ -49,13 +49,13 @@
   - /Audio/_CCM14/Voice/Xeno/xeno_screams6.ogg
 
 - type: soundCollection
-  id: XenoLarvaRoar
+  id: CCMXenoLarvaRoar
   files:
   - /Audio/_RMC14/Voice/Xeno/alien_roar_larva1.ogg
   - /Audio/_RMC14/Voice/Xeno/alien_roar_larva2.ogg
 
 - type: soundCollection
-  id: XenoParasite
+  id: CCMXenoParasite
   files:
   - /Audio/_CCM14/Voice/Xeno/facehugger1.ogg
   - /Audio/_CCM14/Voice/Xeno/facehugger2.ogg

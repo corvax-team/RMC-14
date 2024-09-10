@@ -11,7 +11,7 @@
   components:
   - type: Tag
     tags:
-      - Spitter #CCM Adding a xenomorph tag
+      - CCMSpitter #CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-spitter
   - type: Sprite

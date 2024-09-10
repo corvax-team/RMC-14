@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent:
   - CMXenoRunner
-  - CCMXenoEmoteSounds #CCM Adding xeno emotion
+  - CCMXenoEmoteSounds # CCM Adding xeno emotion
   id: RMCXenoRouny
   abstract: true # CCM for TRUE Rouny
   name: Rouny
@@ -17,7 +17,7 @@
 - type: entity
   parent: 
   - CMXenoRunner
-  - CCMXenoEmoteSounds #CCM Adding xeno emotion
+  - CCMXenoEmoteSounds # CCM Adding xeno emotion
   id: RMCXenoWehny
   name: Wehny
   description: A cruel, cruel joke made by some sick individual.

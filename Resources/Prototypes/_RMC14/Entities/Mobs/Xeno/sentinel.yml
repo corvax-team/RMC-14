@@ -11,7 +11,7 @@
   components:
   - type: Tag
     tags:
-      - Sentinel #CCM Adding a xenomorph tag
+      - CCMSentinel #CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-sentinel
   - type: Sprite

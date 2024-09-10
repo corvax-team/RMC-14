@@ -11,7 +11,7 @@
   components:
   - type: Tag
     tags:
-      - Runner #CCM Adding a xenomorph tag
+      - CCMRunner #CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-runner
   - type: Sprite

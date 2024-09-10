@@ -31,7 +31,7 @@
       800: Dead
   - type: Tag
     tags:
-    - Queen #CCM Adding a xenomorph tag
+    - CCMQueen #CCM Adding a xenomorph tag
     - DoorBumpOpener
     - FootstepSound
   - type: Xeno

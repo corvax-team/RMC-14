@@ -5,9 +5,10 @@
   id: CMXenoLarva
   name: Larva
   components:
+# CCM Adding xeno emotion and tag
   - type: Tag
     tags:
-      - Larva
+      - CCMLarva
   - type: Vocal
     screamId: "Snarl"
     sounds:
@@ -15,7 +16,6 @@
   - type: Speech
     speechSounds: XenonidLarva
     allowedEmotes: ['Snarl']
-#CCM Adding xeno emotion and tag
 
   - type: GhostRole
     name: cm-job-name-xeno-larva

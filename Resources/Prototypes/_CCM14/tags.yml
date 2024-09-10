@@ -1,0 +1,56 @@
+- type: Tag
+  id: CCMBoiler
+
+- type: Tag
+  id: CCMBurrower
+
+- type: Tag
+  id: CCMCarrier
+
+- type: Tag
+  id: CCMCrusher
+
+- type: Tag
+  id: CCMDefender
+
+- type: Tag
+  id: CCMDrone
+
+- type: Tag
+  id: CCMHivelord
+
+- type: Tag
+  id: CCMLesserDrone
+
+- type: Tag
+  id: CCMLarva
+
+- type: Tag
+  id: CCMLurker
+
+- type: Tag
+  id: CCMParasite
+
+- type: Tag
+  id: CCMPraetorian
+
+- type: Tag
+  id: CCMQueen
+
+- type: Tag
+  id: CCMRavager
+
+- type: Tag
+  id: CCMRunner
+
+- type: Tag
+  id: CCMRouny
+
+- type: Tag
+  id: CCMSentinel
+
+- type: Tag
+  id: CCMSpitter
+
+- type: Tag
+  id: CCMWarrior

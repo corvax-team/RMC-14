@@ -4,14 +4,14 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
-  - CCMXenoEmoteSounds #CCM Adding xeno emotion
+  - CCMXenoEmoteSounds # CCM Adding xeno emotion
   id: CMXenoLurker
   name: Lurker
   description: A beefy, fast alien with sharp claws.
   components:
   - type: Tag
     tags:
-      - Lurker #CCM Adding a xenomorph tag
+      - CCMLurker # CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-lurker
   - type: Sprite

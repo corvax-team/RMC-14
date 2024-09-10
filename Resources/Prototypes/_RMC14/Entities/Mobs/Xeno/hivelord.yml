@@ -4,14 +4,14 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
-  - CCMXenoEmoteSounds #CCM Adding xeno emotion
+  - CCMXenoEmoteSounds # CCM Adding xeno emotion
   id: CMXenoHivelord
   name: Hivelord
   description: A builder of really big hives.
   components:
   - type: Tag
     tags:
-      - Hivelord #CCM Adding a xenomorph tag
+      - CCMHivelord # CCM Adding a xenomorph tag
   - type: GhostRole
     name: cm-job-name-xeno-hivelord
   - type: Sprite
