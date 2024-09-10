@@ -10,12 +10,12 @@
     tags:
       - CCMLarva
   - type: Vocal
-    screamId: "Snarl"
+    screamId: "CCMSnarl"
     sounds:
       Unsexed: CCMUnsexedLarva
   - type: Speech
     speechSounds: XenonidLarva
-    allowedEmotes: ['Snarl']
+    allowedEmotes: ['CCMSnarl']
 
   - type: GhostRole
     name: cm-job-name-xeno-larva

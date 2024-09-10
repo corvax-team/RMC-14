@@ -10,11 +10,11 @@
     tags:
       - CCMParasite
   - type: Vocal
-    screamId: "Shout"
+    screamId: "CCMShout"
     sounds:
       Unsexed: CCMUnsexedParasite
   - type: Speech
-    allowedEmotes: ['Shout']
+    allowedEmotes: ['CCMShout']
 
   - type: GhostRole
     name: cm-job-name-xeno-parasite

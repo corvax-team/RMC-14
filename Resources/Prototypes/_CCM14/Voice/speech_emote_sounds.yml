@@ -3,15 +3,15 @@
   params:
     variation: 0.125
   sounds:
-    Shout:
+    CCMShout:
       collection: CCMXenoScreams
-    Growls:
+    CCMGrowls:
       collection: CCMXenoGrowls
-    Sizzle:
+    CCMSizzle:
       collection: CCMXenoHiss
-    Roars:
+    CCMSnarl:
       collection: CCMXenoRoars
-    ScreamingForHelp:
+    CCMScreamingForHelp:
       collection: CCMXenoScreamingForHelp
 
 - type: emoteSounds
@@ -19,7 +19,7 @@
   params:
     variation: 0.125
   sounds:
-    Snarl:
+    CCMSnarl:
       collection: CCMXenoLarvaRoar
 
 - type: emoteSounds
@@ -27,5 +27,5 @@
   params:
     variation: 0.125
   sounds:
-    Shout:
+    CCMShout:
       collection: CCMXenoParasite
