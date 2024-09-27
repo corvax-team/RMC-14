@@ -223,7 +223,6 @@
     resinAllowed: false
     landingZone: true
     minimapColor: '#EBE5E5E3'
-    landingZone: true
 
 - type: entity
   parent: RMCAreaShivaExterior
@@ -236,7 +235,6 @@
     resinAllowed: false
     landingZone: true
     minimapColor: '#EBE5E5E3'
-    landingZone: true
 
 - type: entity
   parent: RMCAreaShivaExterior

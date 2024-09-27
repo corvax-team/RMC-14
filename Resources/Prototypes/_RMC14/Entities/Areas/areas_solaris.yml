@@ -1087,7 +1087,6 @@
     resinAllowed: false
     landingZone: true
     minimapColor: '#EBE5E5E3'
-    landingZone: true
 
 - type: entity
   parent: RMCAreaBigredv2Outside

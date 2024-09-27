@@ -156,7 +156,6 @@
     landingZone: true
     minimapColor: '#EBE5E5E3'
     resinAllowed: false
-    landingZone: true
 
 - type: entity
   parent: RMCAreaFiorinaLz
