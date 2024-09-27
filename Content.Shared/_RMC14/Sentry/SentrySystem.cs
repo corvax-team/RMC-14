@@ -1,4 +1,4 @@
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Interaction;
 using Content.Shared._RMC14.Map;
@@ -66,6 +66,7 @@ public sealed class SentrySystem : EntitySystem
         SubscribeLocalEvent<SentryComponent, SentryInsertMagazineDoAfterEvent>(OnSentryInsertMagazineDoAfter);
         SubscribeLocalEvent<SentryComponent, SentryDisassembleDoAfterEvent>(OnSentryDisassembleDoAfter);
         SubscribeLocalEvent<SentryComponent, ExaminedEvent>(OnSentryExamined);
+        SubscribeLocalEvent<SentryComponent, CombatModeShouldHandInteractEvent>(OnSentryShouldInteract);
 
         SubscribeLocalEvent<SentrySpikesComponent, AttackedEvent>(OnSentrySpikesAttacked);
 
@@ -81,7 +82,6 @@ public sealed class SentrySystem : EntitySystem
         _toUpdate.Add(sentry);
 
         if (sentry.Comp.StartingMagazine is { } magazine)
-        {
             TrySpawnInContainer(magazine, sentry, sentry.Comp.ContainerSlotId, out _);
 
         UpdateState(sentry);

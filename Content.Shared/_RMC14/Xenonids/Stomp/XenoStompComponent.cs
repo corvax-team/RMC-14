@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
@@ -19,9 +19,6 @@ public sealed partial class XenoStompComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(0.4);
-
-    [DataField, AutoNetworkedField]
-    public float ShortRange = 0.5f;
 
     [DataField, AutoNetworkedField]
     public float ShortRange = 0.5f;
