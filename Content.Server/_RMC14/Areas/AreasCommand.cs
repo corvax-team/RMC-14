@@ -41,4 +41,40 @@ public sealed class AreasCommand : ToolshedCommand
             QDel(uid);
         }
     }
+
+    [CommandImplementation("load")]
+    public void Load()
+    {
+        Load(_ => true);
+    }
+
+    [CommandImplementation("loadmortar")]
+    public void LoadMortar()
+    {
+        Load(a => a.MortarFire);
+    }
+
+    private void Load(Predicate<AreaComponent> predicate)
+    {
+        _map = GetSys<MapSystem>();
+
+        var query = EntityManager.AllEntityQueryEnumerator<AreaGridComponent, MapGridComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var areas, out var mapGrid, out var xform))
+        {
+            foreach (var (position, protoId) in areas.Areas)
+            {
+                if (!_prototypes.TryIndex(protoId, out var proto))
+                    continue;
+
+                if (!proto.TryGetComponent(out AreaComponent? areaComp, _compFactory))
+                    continue;
+
+                if (!predicate(areaComp))
+                    continue;
+
+                var coordinates = _map.ToCoordinates(uid, position, mapGrid);
+                Spawn(protoId, coordinates);
+            }
+        }
+    }
 }
