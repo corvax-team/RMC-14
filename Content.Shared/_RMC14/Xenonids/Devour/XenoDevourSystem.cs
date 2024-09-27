@@ -180,10 +180,14 @@ public sealed class XenoDevourSystem : EntitySystem
 
     private void OnXenoCanDropTarget(Entity<XenoDevourComponent> xeno, ref CanDropTargetEvent args)
     {
-        if (HasComp<DevourableComponent>(args.Dragged) && xeno.Owner == args.User)
-            args.CanDrop = true;
+        if (args.Handled)
+            return;
 
-        args.Handled = true;
+        if (HasComp<DevourableComponent>(args.Dragged) && xeno.Owner == args.User)
+        {
+            args.CanDrop = true;
+            args.Handled = true;
+        }
     }
 
     private void OnXenoActivate(Entity<XenoDevourComponent> xeno, ref ActivateInWorldEvent args)

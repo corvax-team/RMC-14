@@ -71,3 +71,7 @@
       CCMXenoLightNeuroToxin: 0.30
   - type: RMCXenoDamageVisuals
     prefix: sentinel
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: sentinel
