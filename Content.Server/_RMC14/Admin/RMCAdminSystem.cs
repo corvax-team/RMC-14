@@ -1,4 +1,4 @@
-﻿using Content.Server._RMC14.TacticalMap;
+using Content.Server._RMC14.TacticalMap;
 using Content.Server.EUI;
 using Content.Server.GameTicking;
 using Content.Server.Station.Systems;
