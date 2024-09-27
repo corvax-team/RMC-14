@@ -4,6 +4,8 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Construction.Components;
+using Content.Shared.Coordinates;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
@@ -182,7 +184,7 @@ public abstract class SharedMortarSystem : EntitySystem
                 ("shell", shellId));
             _popup.PopupPredicted(selfMsg, othersMsg, mortar, user);
 
-            _audio.PlayPredicted(mortar.Comp.FireSound, mortar, user);
+            _audio.PlayPredicted(mortar.Comp.ReloadSound, mortar, user);
         }
     }
 
@@ -379,6 +381,17 @@ public abstract class SharedMortarSystem : EntitySystem
 
         return false;
     }
+
+    private bool CanDeployPopup(Entity<MortarComponent> mortar, EntityUid user)
+    {
+        if (!HasSkillPopup(mortar, user, true))
+            return false;
+
+        if (!_area.CanMortarPlacement(user.ToCoordinates()))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-mortar-covered", ("mortar", mortar)), user, user, PopupType.SmallCaution);
+            return false;
+        }
 
     protected virtual bool CanLoadPopup(
         Entity<MortarComponent> mortar,
