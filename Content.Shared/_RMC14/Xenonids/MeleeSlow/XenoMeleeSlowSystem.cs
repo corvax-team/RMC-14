@@ -74,7 +74,7 @@ public sealed class XenoMeleeSlowSystem : EntitySystem
             if (victim.ExpiresAt > time)
                 continue;
 
-            RemCompDeferred<XenoMeleeSlowComponent>(uid);
+            RemCompDeferred<XenoSlowedComponent>(uid);
             _movementSpeed.RefreshMovementSpeedModifiers(uid);
         }
     }
