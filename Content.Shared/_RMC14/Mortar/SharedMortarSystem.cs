@@ -1,9 +1,12 @@
-﻿using Content.Shared._RMC14.Camera;
+using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Camera;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Construction.Components;
+using Content.Shared.Coordinates;
+using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
@@ -24,6 +27,7 @@ namespace Content.Shared._RMC14.Mortar;
 public abstract class SharedMortarSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -182,7 +186,7 @@ public abstract class SharedMortarSystem : EntitySystem
                 ("shell", shellId));
             _popup.PopupPredicted(selfMsg, othersMsg, mortar, user);
 
-            _audio.PlayPredicted(mortar.Comp.FireSound, mortar, user);
+            _audio.PlayPredicted(mortar.Comp.ReloadSound, mortar, user);
         }
     }
 
@@ -378,6 +382,20 @@ public abstract class SharedMortarSystem : EntitySystem
             _popup.PopupEntity(msg, user, user, PopupType.SmallCaution);
 
         return false;
+    }
+
+    private bool CanDeployPopup(Entity<MortarComponent> mortar, EntityUid user)
+    {
+        if (!HasSkillPopup(mortar, user, true))
+            return false;
+
+        if (!_area.CanMortarPlacement(user.ToCoordinates()))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-mortar-covered", ("mortar", mortar)), user, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        return true;
     }
 
     protected virtual bool CanLoadPopup(

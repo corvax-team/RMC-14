@@ -52,7 +52,7 @@
   components:
   - type: StorageFill
     contents:
-     - id: RMCPlankWood # TODO RMC14 add wood material
+     - id: RMCPlankWood
 
 #- type: entity # TODO RMC14 add folding barricades
 #  id: RMCCrateFoldingBarricades

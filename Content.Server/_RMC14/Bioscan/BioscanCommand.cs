@@ -28,11 +28,7 @@ public sealed class BioscanCommand : ToolshedCommand
         var bioscans = EntityManager.EntityQueryEnumerator<BioscanComponent>();
         while (bioscans.MoveNext(out var uid, out var bioscan))
         {
-            if (_bioscan.TryBioscanARES(ref bioscan.LastMarine, ref bioscan.MaxXenoAlive, bioscan.MarineSound, true))
-            {
-                EntityManager.Dirty(uid, bioscan);
-                return;
-            }
+            _bioscan.TryBioscanARES((uid, bioscan), true);
         }
     }
 
@@ -44,11 +40,7 @@ public sealed class BioscanCommand : ToolshedCommand
         var bioscans = EntityManager.EntityQueryEnumerator<BioscanComponent>();
         while (bioscans.MoveNext(out var uid, out var bioscan))
         {
-            if (_bioscan.TryBioscanARES(ref bioscan.LastXeno, ref bioscan.MaxMarinesAlive, bioscan.XenoSound, true))
-            {
-                EntityManager.Dirty(uid, bioscan);
-                return;
-            }
+            _bioscan.TryBioscanQueenMother((uid, bioscan), true);
         }
     }
 }
