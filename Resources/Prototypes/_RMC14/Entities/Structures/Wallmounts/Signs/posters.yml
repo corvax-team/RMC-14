@@ -409,3 +409,15 @@
   components:
   - type: Sprite
     state: falling_falcons
+
+# CCM added [begin]
+# By VanicGame
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterMines
+  name: "МИНЫ"
+  description: "Плакат, напоминающий о том, что стоит лучше смотреть себе под ноги. Здесь уместны шутки 'одна нога здесь - другая там'."
+  components:
+  - type: Sprite
+    state: mines
+# CCM added [end]
