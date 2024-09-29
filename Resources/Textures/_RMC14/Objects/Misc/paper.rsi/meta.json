@@ -254,6 +254,9 @@
     {
       "name": "pen-equipped-SUITSTORAGE",
       "directions": 4
+    },
+        {
+      "name": "paper_stamp-generic"
     }
   ]
 }
