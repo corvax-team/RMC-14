@@ -310,7 +310,7 @@ reagent-effect-guidebook-reduce-rotting =
     { $chance ->
         [1] Регенерирует
        *[other] регенерируют
-    } { NATURALFIXED($time, 3) } { MANY("second", $time) } гниения
+    } { NATURALFIXED($time, 3) } в секунду гниения
 reagent-effect-guidebook-innoculate-zombie-infection =
     { $chance ->
         [1] Лечит
@@ -320,7 +320,7 @@ reagent-effect-guidebook-area-reaction =
     { $chance ->
         [1] Вызывает
         *[other] вызывают
-    } дымовую или пенную реакцию на {NATURALFIXED($duration, 3)} {MANY("second", $duration)}
+    } дымовую или пенную реакцию на {NATURALFIXED($duration, 3)} секунд
 reagent-effect-guidebook-add-to-solution-reaction =
     { $chance ->
         [1] Заставляет
