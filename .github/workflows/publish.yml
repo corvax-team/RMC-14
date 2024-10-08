@@ -6,7 +6,7 @@ concurrency:
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 10 * * *'
+    - cron: '0 1 * * *'
 
 jobs:
   build:
@@ -26,7 +26,7 @@ jobs:
         SSH_KEY: ${{ secrets.SECRETS_PRIVATE_KEY }}
       if: ${{ env.SSH_KEY != '' }}
       run: |
-        mkdir -p ~/.ssh
+        mkdir ~/.ssh
         echo "${{ secrets.SECRETS_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         echo "HOST *" > ~/.ssh/config
@@ -77,8 +77,3 @@ jobs:
     #      run: Tools/actions_changelog_rss.py
     #      env:
     #        CHANGELOG_RSS_KEY: ${{ secrets.CHANGELOG_RSS_KEY }}
-
-    - uses: geekyeggo/delete-artifact@v5
-      if: always()
-      with:
-        name: build
