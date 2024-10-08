@@ -21,8 +21,8 @@ jobs:
         submodules: 'recursive'
         
     - name: Execute script
-    run: |
-    chmod +x Tools/publish_multi_request.py
+      run: |
+      chmod +x Tools/publish_multi_request.py
 
     # Corvax-Secrets-Start
     - name: Setup secrets
