@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Xenonids.Slam;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedXenoTailSlamSystem))]
+[Access(typeof(SharedXenoTailStabSystem))]
 public sealed partial class XenoTailSlamActionComponent : Component
 {
     [DataField, AutoNetworkedField]

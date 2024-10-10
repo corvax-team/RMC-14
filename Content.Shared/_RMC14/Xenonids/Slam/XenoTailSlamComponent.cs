@@ -5,11 +5,11 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._RMC14.Xenonids.Slam;
+namespace Content.Shared._RMC14.Xenonids.Stab;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedXenoTailSlamSystem))]
-public sealed partial class XenoTailSlamComponent : Component
+[Access(typeof(SharedXenoTailStabSystem))]
+public sealed partial class XenoTailStabComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntProtoId TailAnimationId = "WeaponArcThrust";
@@ -19,12 +19,6 @@ public sealed partial class XenoTailSlamComponent : Component
 
     [DataField]
     public DamageSpecifier TailDamage = new();
-
-    [DataField, AutoNetworkedField]
-    public long StunTime;
-
-    [DataField, AutoNetworkedField]
-    public float Power;
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier SoundHit = new SoundCollectionSpecifier("XenoBite", AudioParams.Default.WithVolume(-3));
@@ -37,4 +31,10 @@ public sealed partial class XenoTailSlamComponent : Component
 
     [DataField, AutoNetworkedField]
     public Dictionary<ProtoId<ReagentPrototype>, FixedPoint2>? Inject;
+
+    [DataField, AutoNetworkedField]
+    public bool Toggle = false;
+
+    [DataField, AutoNetworkedField]
+    public bool InjectNeuro = false;
 }
