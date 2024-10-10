@@ -35,20 +35,20 @@ internal sealed partial class ChatManager : IChatManager
         { "revolutionary", "#aa00ff" }
     };
 
-        [Dependency] private readonly IReplayRecordingManager _replay = default!;
-        [Dependency] private readonly IServerNetManager _netManager = default!;
-        [Dependency] private readonly IMoMMILink _mommiLink = default!;
-        [Dependency] private readonly IAdminManager _adminManager = default!;
-        [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-        [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
-        [Dependency] private readonly IConfigurationManager _configurationManager = default!;
-        [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
-        [Dependency] private readonly IEntityManager _entityManager = default!;
-        [Dependency] private readonly PlayerRateLimitManager _rateLimitManager = default!;
-        private ISharedSponsorsManager? _sponsorsManager; // Corvax-Sponsors
-        //Evil Corvax code remove. We dont need this.
-        //[Dependency] private readonly LinkAccountManager _linkAccount = default!;
-        // [Dependency] private readonly RMCDiscordManager _discord = default!;
+    [Dependency] private readonly IReplayRecordingManager _replay = default!;
+    [Dependency] private readonly IServerNetManager _netManager = default!;
+    [Dependency] private readonly IMoMMILink _mommiLink = default!;
+    [Dependency] private readonly IAdminManager _adminManager = default!;
+    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly IServerPreferencesManager _preferencesManager = default!;
+    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+    [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly PlayerRateLimitManager _rateLimitManager = default!;
+    private ISharedSponsorsManager? _sponsorsManager; // Corvax-Sponsors
+                                                      //Evil Corvax code remove. We dont need this.
+                                                      //[Dependency] private readonly LinkAccountManager _linkAccount = default!;
+                                                      // [Dependency] private readonly RMCDiscordManager _discord = default!;
 
     /// <summary>
     /// The maximum length a player-sent message can be sent
@@ -60,11 +60,11 @@ internal sealed partial class ChatManager : IChatManager
 
     private readonly Dictionary<NetUserId, ChatUser> _players = new();
 
-        public void Initialize()
-        {
-            IoCManager.Instance!.TryResolveType(out _sponsorsManager); // Corvax-Sponsors
-            _netManager.RegisterNetMessage<MsgChatMessage>();
-            _netManager.RegisterNetMessage<MsgDeleteChatMessagesBy>();
+    public void Initialize()
+    {
+        IoCManager.Instance!.TryResolveType(out _sponsorsManager); // Corvax-Sponsors
+        _netManager.RegisterNetMessage<MsgChatMessage>();
+        _netManager.RegisterNetMessage<MsgDeleteChatMessagesBy>();
 
         _configurationManager.OnValueChanged(CCVars.OocEnabled, OnOocEnabledChanged, true);
         _configurationManager.OnValueChanged(CCVars.AdminOocEnabled, OnAdminOocEnabledChanged, true);
@@ -250,20 +250,20 @@ internal sealed partial class ChatManager : IChatManager
             return;
         }
 
-            Color? colorOverride = null;
-            var wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message", ("playerName",player.Name), ("message", FormattedMessage.EscapeText(message)));
-            if (_adminManager.HasAdminFlag(player, AdminFlags.Admin))
-            {
-                var prefs = _preferencesManager.GetPreferences(player.UserId);
-                colorOverride = prefs.AdminOOCColor;
-            }
+        Color? colorOverride = null;
+        var wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message", ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+        if (_adminManager.HasAdminFlag(player, AdminFlags.Admin))
+        {
+            var prefs = _preferencesManager.GetPreferences(player.UserId);
+            colorOverride = prefs.AdminOOCColor;
+        }
 
-            // Corvax-Sponsors-Start
-            if (_sponsorsManager != null && _sponsorsManager.TryGetServerOocColor(player.UserId, out var oocColor))
-            {
-                wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", oocColor),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
-            }
-            // Corvax-Sponsors-End
+        // Corvax-Sponsors-Start
+        if (_sponsorsManager != null && _sponsorsManager.TryGetServerOocColor(player.UserId, out var oocColor))
+        {
+            wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", oocColor), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+        }
+        // Corvax-Sponsors-End
 
         //TODO: player.Name color, this will need to change the structure of the MsgChatMessage
         ChatMessageToAll(ChatChannel.OOC, message, wrappedMessage, EntityUid.Invalid, hideChat: false, recordReplay: true, colorOverride: colorOverride, author: player.UserId);
@@ -284,7 +284,7 @@ internal sealed partial class ChatManager : IChatManager
                                         ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
                                         ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
 
-            //_discord.SendDiscordAdminMessage(player.Name, message);
+        //_discord.SendDiscordAdminMessage(player.Name, message);
 
         foreach (var client in clients)
         {

@@ -9,8 +9,10 @@
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Rouny/rouny.rsi
   - type: XenoEvolution
-    max: 300
+    max: 200
     evolvesTo: [ ]
+  - type: Xeno
+    hidden: true
 
 - type: entity
   parent: CMXenoRunner
@@ -21,5 +23,7 @@
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Wehny/wehny.rsi
   - type: XenoEvolution
-    max: 300
+    max: 200
     evolvesTo: [ ]
+  - type: Xeno
+    hidden: true

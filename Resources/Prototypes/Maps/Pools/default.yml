@@ -2,6 +2,8 @@
   id: DefaultMapPool
   maps:
   - David # CCM
+#  - Savannah # TODO RMC14 tunguso4ka save me
+  - Almayer
 
 - type: gameMapPool
   id: DefaultMapPoolAlmayer

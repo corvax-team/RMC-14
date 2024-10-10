@@ -6109,6 +6109,8 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: AreaGrid
+      areaEntities: {}
+      colors: {}
       areas:
         87,112: RMCAreaSpace
         87,111: RMCAreaSpace
@@ -46032,12 +46034,12 @@ entities:
     - type: Transform
       pos: -25.5,-78.5
       parent: 1
-    - type: Door
-      secondsUntilStateChange: -20739.625
-      state: Opening
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
+    - type: Door
+      secondsUntilStateChange: -21341.064
+      state: Opening
   - uid: 8105
     components:
     - type: Transform
@@ -46109,23 +46111,23 @@ entities:
     - type: Transform
       pos: -36.5,-61.5
       parent: 1
-    - type: Door
-      secondsUntilStateChange: -10218.69
-      state: Opening
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
+    - type: Door
+      secondsUntilStateChange: -10820.128
+      state: Opening
   - uid: 6588
     components:
     - type: Transform
       pos: -36.5,-57.5
       parent: 1
-    - type: Door
-      secondsUntilStateChange: -23417.453
-      state: Opening
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
+    - type: Door
+      secondsUntilStateChange: -24018.893
+      state: Opening
   - uid: 6667
     components:
     - type: Transform
@@ -46161,12 +46163,12 @@ entities:
     - type: Transform
       pos: -30.5,-63.5
       parent: 1
-    - type: Door
-      secondsUntilStateChange: -17247.826
-      state: Opening
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
+    - type: Door
+      secondsUntilStateChange: -17849.266
+      state: Opening
   - uid: 7231
     components:
     - type: Transform
@@ -46198,12 +46200,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 35.5,-69.5
       parent: 1
-    - type: Door
-      secondsUntilStateChange: -7343.5938
-      state: Opening
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
+    - type: Door
+      secondsUntilStateChange: -7945.0327
+      state: Opening
   - uid: 9002
     components:
     - type: Transform
@@ -46247,12 +46249,12 @@ entities:
     - type: Transform
       pos: -1.5,-98.5
       parent: 1
-    - type: Door
-      secondsUntilStateChange: -18378.592
-      state: Opening
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
+    - type: Door
+      secondsUntilStateChange: -18980.031
+      state: Opening
   - uid: 10294
     components:
     - type: Transform
@@ -46501,6 +46503,53 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -2.495199,-32.53046
       parent: 1
+- proto: CMApc
+  entities:
+  - uid: 11158
+    components:
+    - type: Transform
+      pos: 37.5,-91.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 11279
+  - uid: 11282
+    components:
+    - type: Transform
+      pos: 26.5,-86.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 11366
+  - uid: 13200
+    components:
+    - type: Transform
+      pos: -10.5,-91.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 13248
+  - uid: 13250
+    components:
+    - type: Transform
+      pos: -28.5,-76.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 13254
+  - uid: 13806
+    components:
+    - type: Transform
+      pos: -53.5,-92.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 13809
 - proto: CMApcConstructed
   entities:
   - uid: 20449
@@ -46508,31 +46557,246 @@ entities:
     - type: Transform
       pos: 49.5,-66.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 4416
   - uid: 20450
     components:
     - type: Transform
       pos: 43.5,-67.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 5265
   - uid: 20451
     components:
     - type: Transform
       pos: 44.5,-64.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 5270
   - uid: 20460
     components:
     - type: Transform
       pos: 71.5,-56.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 6287
   - uid: 31464
     components:
     - type: Transform
       pos: -28.5,-76.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 6288
   - uid: 31567
     components:
     - type: Transform
       pos: -10.5,-91.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 6393
+- proto: CMApcNoPower
+  entities:
+  - uid: 10104
+    components:
+    - type: Transform
+      pos: 71.5,-56.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 10277
+  - uid: 10489
+    components:
+    - type: Transform
+      pos: 49.5,-66.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 10610
+  - uid: 10612
+    components:
+    - type: Transform
+      pos: 44.5,-64.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 10726
+  - uid: 10727
+    components:
+    - type: Transform
+      pos: 43.5,-67.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 10929
+  - uid: 11041
+    components:
+    - type: Transform
+      pos: 42.5,-87.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 11070
+  - uid: 11370
+    components:
+    - type: Transform
+      pos: 26.5,-92.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 11760
+  - uid: 11764
+    components:
+    - type: Transform
+      pos: 25.5,-67.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 11841
+  - uid: 11845
+    components:
+    - type: Transform
+      pos: 25.5,-82.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 11846
+  - uid: 11948
+    components:
+    - type: Transform
+      pos: 22.5,-60.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 11961
+  - uid: 12253
+    components:
+    - type: Transform
+      pos: 21.5,-74.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 12258
+  - uid: 12339
+    components:
+    - type: Transform
+      pos: 16.5,-89.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 12352
+  - uid: 12358
+    components:
+    - type: Transform
+      pos: 14.5,-68.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 12446
+  - uid: 12450
+    components:
+    - type: Transform
+      pos: 13.5,-84.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 12534
+  - uid: 12537
+    components:
+    - type: Transform
+      pos: 5.5,-33.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 12543
+  - uid: 12633
+    components:
+    - type: Transform
+      pos: 4.5,-77.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 12646
+  - uid: 12757
+    components:
+    - type: Transform
+      pos: 3.5,-94.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 12842
+  - uid: 12921
+    components:
+    - type: Transform
+      pos: 0.5,-51.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 12922
+  - uid: 12934
+    components:
+    - type: Transform
+      pos: -5.5,-50.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 13030
+  - uid: 13033
+    components:
+    - type: Transform
+      pos: -9.5,-30.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 13047
+  - uid: 13257
+    components:
+    - type: Transform
+      pos: -30.5,-57.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 13802
+  - uid: 14015
+    components:
+    - type: Transform
+      pos: -55.5,-53.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        rmc_apc_power_cell: !type:ContainerSlot
+          ent: 14020
 - proto: CMArmorM3VLBallistics
   entities:
   - uid: 20675
@@ -60447,854 +60711,1878 @@ entities:
     - type: Transform
       pos: 19.49259,-72.60548
       parent: 1
-- proto: CMLightFixtureAlwaysPowered
+- proto: CMLightFixture
   entities:
-  - uid: 4416
+  - uid: 14030
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: -56.5,-97.5
       parent: 1
-  - uid: 5265
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14031
     components:
     - type: Transform
       pos: -48.5,-101.5
       parent: 1
-  - uid: 5270
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14043
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -48.5,-93.5
       parent: 1
-  - uid: 6771
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14166
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: -34.5,-84.5
       parent: 1
-  - uid: 6774
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14290
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: -34.5,-80.5
       parent: 1
-  - uid: 6777
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14399
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: -34.5,-78.5
       parent: 1
-  - uid: 6781
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14415
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: -34.5,-75.5
       parent: 1
-  - uid: 7082
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14532
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -31.5,-87.5
       parent: 1
-  - uid: 7087
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14537
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -31.5,-84.5
       parent: 1
-  - uid: 7090
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14660
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -31.5,-80.5
       parent: 1
-  - uid: 7093
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14664
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -31.5,-78.5
       parent: 1
-  - uid: 7097
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14808
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -31.5,-75.5
       parent: 1
-  - uid: 7335
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14933
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: -29.5,-84.5
       parent: 1
-  - uid: 7446
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14942
     components:
     - type: Transform
       pos: -28.5,-87.5
       parent: 1
-  - uid: 7545
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 14944
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -27.5,-84.5
       parent: 1
-  - uid: 7550
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 15070
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -27.5,-76.5
       parent: 1
-  - uid: 7778
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 15072
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: -25.5,-84.5
       parent: 1
-  - uid: 8005
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 15185
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -23.5,-76.5
       parent: 1
-  - uid: 8104
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 15188
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -22.5,-85.5
       parent: 1
-  - uid: 8530
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 15190
     components:
     - type: Transform
       pos: -18.5,-98.5
       parent: 1
-  - uid: 8838
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 15197
     components:
     - type: Transform
       pos: -15.5,-94.5
       parent: 1
-  - uid: 8839
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 15304
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -15.5,-92.5
       parent: 1
-  - uid: 8842
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 15312
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -15.5,-88.5
       parent: 1
-  - uid: 8852
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 15554
     components:
     - type: Transform
       pos: -15.5,-53.5
       parent: 1
-  - uid: 8857
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 16076
     components:
     - type: Transform
       pos: -15.5,-49.5
       parent: 1
-  - uid: 8926
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 16080
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: -14.5,-87.5
       parent: 1
-  - uid: 9010
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 16628
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -13.5,-55.5
       parent: 1
-  - uid: 9086
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 16889
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -12.5,-87.5
       parent: 1
-  - uid: 9190
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 17240
     components:
     - type: Transform
       pos: -11.5,-98.5
       parent: 1
-  - uid: 9194
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 17541
     components:
     - type: Transform
       pos: -11.5,-94.5
       parent: 1
-  - uid: 9196
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21044
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -11.5,-92.5
       parent: 1
-  - uid: 9215
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21045
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: -11.5,-51.5
       parent: 1
-  - uid: 9224
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21046
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: -11.5,-38.5
       parent: 1
-  - uid: 9290
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21047
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: -10.5,-87.5
       parent: 1
-  - uid: 9306
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21048
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -10.5,-35.5
       parent: 1
-  - uid: 9310
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21049
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -10.5,-31.5
       parent: 1
-  - uid: 9387
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21050
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -9.5,-55.5
       parent: 1
-  - uid: 9389
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21051
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -9.5,-53.5
       parent: 1
-  - uid: 9391
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21052
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -9.5,-47.5
       parent: 1
-  - uid: 9396
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21053
     components:
     - type: Transform
       pos: -9.5,-40.5
       parent: 1
-  - uid: 9570
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21054
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: -7.5,-55.5
       parent: 1
-  - uid: 9573
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21055
     components:
     - type: Transform
       pos: -7.5,-49.5
       parent: 1
-  - uid: 9641
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21056
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -6.5,-88.5
       parent: 1
-  - uid: 9867
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21057
     components:
     - type: Transform
       pos: -4.5,-53.5
       parent: 1
-  - uid: 9878
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21058
     components:
     - type: Transform
       pos: -4.5,-40.5
       parent: 1
-  - uid: 9953
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21059
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -3.5,-95.5
       parent: 1
-  - uid: 9983
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21060
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -3.5,-35.5
       parent: 1
-  - uid: 9986
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21061
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -3.5,-31.5
       parent: 1
-  - uid: 10065
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21062
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: -2.5,-93.5
       parent: 1
-  - uid: 10104
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21063
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -2.5,-38.5
       parent: 1
-  - uid: 10277
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21064
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -0.5,-100.5
       parent: 1
-  - uid: 10489
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21065
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: 1.5,-100.5
       parent: 1
-  - uid: 10610
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21066
     components:
     - type: Transform
       pos: 2.5,-97.5
       parent: 1
-  - uid: 10612
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21067
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 2.5,-93.5
       parent: 1
-  - uid: 10726
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21068
     components:
     - type: Transform
       pos: 3.5,-58.5
       parent: 1
-  - uid: 10727
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21069
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 3.5,-48.5
       parent: 1
-  - uid: 10929
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21070
     components:
     - type: Transform
       pos: 5.5,-93.5
       parent: 1
-  - uid: 11041
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21071
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 6.5,-99.5
       parent: 1
-  - uid: 11070
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21072
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: 6.5,-38.5
       parent: 1
-  - uid: 11158
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21073
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 7.5,-95.5
       parent: 1
-  - uid: 11279
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21074
     components:
     - type: Transform
       pos: 8.5,-40.5
       parent: 1
-  - uid: 11282
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21075
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 8.5,-31.5
       parent: 1
-  - uid: 11366
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21076
     components:
     - type: Transform
       pos: 9.5,-58.5
       parent: 1
-  - uid: 11370
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21077
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 9.5,-48.5
       parent: 1
-  - uid: 11760
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21078
     components:
     - type: Transform
       pos: 13.5,-40.5
       parent: 1
-  - uid: 11764
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21079
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 13.5,-31.5
       parent: 1
-  - uid: 11961
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21080
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 15.5,-33.5
       parent: 1
-  - uid: 12358
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21081
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 19.5,-63.5
       parent: 1
-  - uid: 12646
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21082
     components:
     - type: Transform
       pos: 22.5,-66.5
       parent: 1
-  - uid: 12757
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21083
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 23.5,-60.5
       parent: 1
-  - uid: 12934
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21084
     components:
     - type: Transform
       pos: 25.5,-66.5
       parent: 1
-  - uid: 13047
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21085
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 26.5,-60.5
       parent: 1
-  - uid: 13200
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21086
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 27.5,22.5
       parent: 1
-  - uid: 13248
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21087
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: 28.5,-94.5
       parent: 1
-  - uid: 13254
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21088
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: 28.5,-67.5
       parent: 1
-  - uid: 13257
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21089
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: 28.5,-60.5
       parent: 1
-  - uid: 13806
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21090
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 34.5,-67.5
       parent: 1
-  - uid: 13809
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21091
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 34.5,-60.5
       parent: 1
-  - uid: 14030
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21092
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: 36.5,-71.5
       parent: 1
-  - uid: 14031
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21096
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 36.5,-68.5
       parent: 1
-  - uid: 14043
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21097
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: 36.5,-60.5
       parent: 1
-  - uid: 14166
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21098
     components:
     - type: Transform
       pos: 37.5,-66.5
       parent: 1
-  - uid: 14415
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21099
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 39.5,-60.5
       parent: 1
-  - uid: 14532
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21100
     components:
     - type: Transform
       pos: 40.5,-73.5
       parent: 1
-  - uid: 14537
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21101
     components:
     - type: Transform
       pos: 40.5,-66.5
       parent: 1
-  - uid: 14942
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21102
     components:
     - type: Transform
       pos: 43.5,-66.5
       parent: 1
-  - uid: 15070
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21103
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 44.5,-69.5
       parent: 1
-  - uid: 15072
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+  - uid: 21104
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 44.5,-68.5
       parent: 1
-- proto: CMLightFixtureSmallAlwaysPowered
+    - type: Physics
+      canCollide: False
+    - type: DeviceLinkSink
+      ports:
+      - On
+      - Off
+      - Toggle
+    - type: Fixtures
+      fixtures: {}
+- proto: CMLightFixtureSmall
   entities:
-  - uid: 6287
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: -39.5,-83.5
-      parent: 1
-  - uid: 6288
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: -39.5,-80.5
-      parent: 1
-  - uid: 6393
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: -38.5,-86.5
-      parent: 1
   - uid: 6581
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -36.5,-80.5
-      parent: 1
-  - uid: 6582
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -36.5,-77.5
-      parent: 1
-  - uid: 6685
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -35.5,-62.5
-      parent: 1
-  - uid: 6687
-    components:
-    - type: Transform
-      pos: -35.5,-60.5
-      parent: 1
-  - uid: 6690
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -35.5,-56.5
-      parent: 1
-  - uid: 6898
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: -33.5,-56.5
-      parent: 1
-  - uid: 7101
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -31.5,-62.5
-      parent: 1
-  - uid: 7346
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: -29.5,-62.5
-      parent: 1
-  - uid: 7348
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -29.5,-58.5
-      parent: 1
-  - uid: 7350
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: -29.5,-56.5
-      parent: 1
-  - uid: 7562
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -27.5,-62.5
-      parent: 1
-  - uid: 9766
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -5.5,-51.5
-      parent: 1
-  - uid: 11841
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 14.5,-82.5
-      parent: 1
-  - uid: 11845
-    components:
-    - type: Transform
-      pos: 14.5,-79.5
-      parent: 1
-  - uid: 11846
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 14.5,-75.5
-      parent: 1
-  - uid: 11948
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 15.5,-68.5
-      parent: 1
-  - uid: 12253
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 18.5,-87.5
-      parent: 1
-  - uid: 12258
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 18.5,-82.5
-      parent: 1
-  - uid: 12339
-    components:
-    - type: Transform
-      pos: 19.5,-91.5
-      parent: 1
-  - uid: 12352
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 19.5,-68.5
-      parent: 1
-  - uid: 12446
-    components:
-    - type: Transform
-      pos: 20.5,-79.5
-      parent: 1
-  - uid: 12450
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 20.5,-75.5
-      parent: 1
-  - uid: 12534
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 21.5,-91.5
-      parent: 1
-  - uid: 12537
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 21.5,-89.5
-      parent: 1
-  - uid: 12543
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 21.5,-81.5
-      parent: 1
-  - uid: 12633
-    components:
-    - type: Transform
-      pos: 22.5,-85.5
-      parent: 1
-  - uid: 12842
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 24.5,-68.5
-      parent: 1
-  - uid: 12921
-    components:
-    - type: Transform
-      pos: 25.5,-91.5
-      parent: 1
-  - uid: 12922
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 25.5,-87.5
-      parent: 1
-  - uid: 13030
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 26.5,-94.5
-      parent: 1
-  - uid: 13033
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 26.5,-85.5
-      parent: 1
-  - uid: 13250
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 28.5,-86.5
-      parent: 1
-  - uid: 13802
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 34.5,-88.5
-      parent: 1
-  - uid: 14015
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 36.5,-92.5
-      parent: 1
-  - uid: 14020
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 36.5,-88.5
-      parent: 1
-  - uid: 14290
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 38.5,-81.5
-      parent: 1
-  - uid: 14399
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 39.5,-88.5
-      parent: 1
-  - uid: 14660
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 41.5,-91.5
-      parent: 1
-  - uid: 14664
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 41.5,-86.5
-      parent: 1
-  - uid: 14808
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 42.5,-75.5
-      parent: 1
-  - uid: 14933
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 43.5,-86.5
-      parent: 1
-  - uid: 14944
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 43.5,-63.5
-      parent: 1
-  - uid: 15185
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 45.5,-83.5
-      parent: 1
-  - uid: 15188
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 45.5,-81.5
-      parent: 1
-  - uid: 15190
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 45.5,-73.5
-      parent: 1
-  - uid: 15197
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 45.5,-62.5
-      parent: 1
-  - uid: 15304
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 46.5,-88.5
-      parent: 1
-  - uid: 15312
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 46.5,-68.5
-      parent: 1
-  - uid: 15554
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 48.5,-84.5
-      parent: 1
-  - uid: 16076
-    components:
-    - type: Transform
-      pos: 53.5,-67.5
-      parent: 1
-  - uid: 16080
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 53.5,-57.5
-      parent: 1
-  - uid: 16628
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 59.5,-50.5
-      parent: 1
-  - uid: 16889
-    components:
-    - type: Transform
-      pos: 62.5,-53.5
-      parent: 1
-  - uid: 17240
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 66.5,-43.5
-      parent: 1
-  - uid: 17541
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 69.5,-50.5
       parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 6582
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 66.5,-43.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 6685
+    components:
+    - type: Transform
+      pos: 62.5,-53.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 6687
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 59.5,-50.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 6690
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 53.5,-57.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 6771
+    components:
+    - type: Transform
+      pos: 53.5,-67.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 6774
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 48.5,-84.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 6777
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 46.5,-68.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 6781
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 46.5,-88.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 6898
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 45.5,-62.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 7082
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 45.5,-73.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 7087
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 45.5,-81.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 7090
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 45.5,-83.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 7093
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 43.5,-63.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 7097
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 43.5,-86.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 7101
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 42.5,-75.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 7335
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 41.5,-86.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 7346
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 41.5,-91.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 7348
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 39.5,-88.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 7350
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 38.5,-81.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 7446
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 36.5,-88.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 7545
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 36.5,-92.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 7550
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 34.5,-88.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 7562
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 28.5,-86.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 7778
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 26.5,-85.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 8005
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 26.5,-94.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 8104
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 25.5,-87.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 8530
+    components:
+    - type: Transform
+      pos: 25.5,-91.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 8838
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 24.5,-68.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 8839
+    components:
+    - type: Transform
+      pos: 22.5,-85.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 8842
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 21.5,-81.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 8852
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 21.5,-89.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 8857
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 21.5,-91.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 8926
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 20.5,-75.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9010
+    components:
+    - type: Transform
+      pos: 20.5,-79.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9086
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 19.5,-68.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9190
+    components:
+    - type: Transform
+      pos: 19.5,-91.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9194
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 18.5,-82.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9196
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 18.5,-87.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9215
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 15.5,-68.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9224
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 14.5,-75.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9290
+    components:
+    - type: Transform
+      pos: 14.5,-79.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9306
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 14.5,-82.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9310
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -5.5,-51.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9387
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -27.5,-62.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9389
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: -29.5,-56.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9391
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -29.5,-58.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9396
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: -29.5,-62.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9570
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -31.5,-62.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9573
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: -33.5,-56.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9641
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -35.5,-56.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9766
+    components:
+    - type: Transform
+      pos: -35.5,-60.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9867
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -35.5,-62.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9878
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -36.5,-77.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9953
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -36.5,-80.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9983
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: -38.5,-86.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9986
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: -39.5,-80.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
+  - uid: 10065
+    components:
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: -39.5,-83.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
 - proto: CMLockerFridge
   entities:
   - uid: 20568
@@ -142552,18 +143840,6 @@ entities:
     - type: Transform
       pos: 35.5,-7.5
       parent: 1
-- proto: FireAxe
-  entities:
-  - uid: 20503
-    components:
-    - type: Transform
-      pos: -7.136674,106.35499
-      parent: 1
-  - uid: 31586
-    components:
-    - type: Transform
-      pos: -6.5,-96.5
-      parent: 1
 - proto: FoamedAluminiumMetal
   entities:
   - uid: 20606
@@ -143038,20 +144314,6 @@ entities:
       parent: 1
     - type: Physics
       bodyType: Static
-- proto: Pickaxe
-  entities:
-  - uid: 7227
-    components:
-    - type: Transform
-      parent: 13046
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 23295
-    components:
-    - type: Transform
-      pos: 26.52906,20.522488
-      parent: 1
 - proto: PlantBGoneSpray
   entities:
   - uid: 20833
@@ -144089,6 +145351,18 @@ entities:
     components:
     - type: Transform
       pos: -5.5,-49.5
+      parent: 1
+- proto: RMCFireAxe
+  entities:
+  - uid: 20503
+    components:
+    - type: Transform
+      pos: -7.136674,106.35499
+      parent: 1
+  - uid: 31586
+    components:
+    - type: Transform
+      pos: -6.5,-96.5
       parent: 1
 - proto: RMCFlashlight
   entities:
@@ -147156,6 +148430,48 @@ entities:
     - type: Transform
       pos: 36.50251,-90.26477
       parent: 1
+- proto: RMCGeneratorFusionColony
+  entities:
+  - uid: 21105
+    components:
+    - type: Transform
+      pos: -1.5,-91.5
+      parent: 1
+  - uid: 21106
+    components:
+    - type: Transform
+      pos: -2.5,-92.5
+      parent: 1
+  - uid: 21107
+    components:
+    - type: Transform
+      pos: -2.5,-93.5
+      parent: 1
+  - uid: 21108
+    components:
+    - type: Transform
+      pos: -2.5,-94.5
+      parent: 1
+  - uid: 21109
+    components:
+    - type: Transform
+      pos: 1.5,-91.5
+      parent: 1
+  - uid: 21110
+    components:
+    - type: Transform
+      pos: 2.5,-92.5
+      parent: 1
+  - uid: 21111
+    components:
+    - type: Transform
+      pos: 2.5,-93.5
+      parent: 1
+  - uid: 21112
+    components:
+    - type: Transform
+      pos: 2.5,-94.5
+      parent: 1
 - proto: RMCGlassesMedicalHUDGlasses
   entities:
   - uid: 6293
@@ -147619,6 +148935,20 @@ entities:
     - type: Transform
       pos: -54.5,-52.5
       parent: 1
+- proto: RMCPickaxe
+  entities:
+  - uid: 7227
+    components:
+    - type: Transform
+      parent: 13046
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 23295
+    components:
+    - type: Transform
+      pos: 26.52906,20.522488
+      parent: 1
 - proto: RMCPlankWood1
   entities:
   - uid: 13954
@@ -147904,6 +149234,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -39.5,-76.5
       parent: 1
+    - type: RMCPodDoor
+      id: garage_lv
   - uid: 30275
     components:
     - type: MetaData
@@ -147912,6 +149244,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -39.5,-77.5
       parent: 1
+    - type: RMCPodDoor
+      id: garage_lv
   - uid: 30279
     components:
     - type: MetaData
@@ -147920,6 +149254,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -39.5,-78.5
       parent: 1
+    - type: RMCPodDoor
+      id: garage_lv
   - uid: 31668
     components:
     - type: MetaData
@@ -147928,6 +149264,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: -11.5,-59.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31669
     components:
     - type: MetaData
@@ -147936,6 +149274,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: -10.5,-59.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31670
     components:
     - type: MetaData
@@ -147944,6 +149284,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: -9.5,-59.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31671
     components:
     - type: MetaData
@@ -147952,6 +149294,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: -15.5,-58.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31672
     components:
     - type: MetaData
@@ -147960,6 +149304,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: -14.5,-58.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31673
     components:
     - type: MetaData
@@ -147968,6 +149314,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: -13.5,-58.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31674
     components:
     - type: MetaData
@@ -147976,6 +149324,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -16.5,-57.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31675
     components:
     - type: MetaData
@@ -147984,6 +149334,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -16.5,-56.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31676
     components:
     - type: MetaData
@@ -147992,6 +149344,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -16.5,-55.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31677
     components:
     - type: MetaData
@@ -148000,6 +149354,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -17.5,-53.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31678
     components:
     - type: MetaData
@@ -148008,6 +149364,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -17.5,-52.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31679
     components:
     - type: MetaData
@@ -148016,6 +149374,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -17.5,-51.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31680
     components:
     - type: MetaData
@@ -148024,6 +149384,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -16.5,-49.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31681
     components:
     - type: MetaData
@@ -148032,6 +149394,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -16.5,-48.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31682
     components:
     - type: MetaData
@@ -148040,6 +149404,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -16.5,-47.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31683
     components:
     - type: MetaData
@@ -148047,6 +149413,8 @@ entities:
     - type: Transform
       pos: -15.5,-46.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31684
     components:
     - type: MetaData
@@ -148054,6 +149422,8 @@ entities:
     - type: Transform
       pos: -14.5,-46.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31685
     components:
     - type: MetaData
@@ -148061,6 +149431,8 @@ entities:
     - type: Transform
       pos: -13.5,-46.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31686
     components:
     - type: MetaData
@@ -148068,6 +149440,8 @@ entities:
     - type: Transform
       pos: -11.5,-45.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31687
     components:
     - type: MetaData
@@ -148075,6 +149449,8 @@ entities:
     - type: Transform
       pos: -10.5,-45.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31688
     components:
     - type: MetaData
@@ -148082,6 +149458,8 @@ entities:
     - type: Transform
       pos: -9.5,-45.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31689
     components:
     - type: MetaData
@@ -148089,6 +149467,8 @@ entities:
     - type: Transform
       pos: -7.5,-46.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31690
     components:
     - type: MetaData
@@ -148096,6 +149476,8 @@ entities:
     - type: Transform
       pos: -6.5,-46.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31691
     components:
     - type: MetaData
@@ -148103,6 +149485,8 @@ entities:
     - type: Transform
       pos: -5.5,-46.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31692
     components:
     - type: MetaData
@@ -148111,6 +149495,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -4.5,-47.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31693
     components:
     - type: MetaData
@@ -148119,6 +149505,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -4.5,-48.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31694
     components:
     - type: MetaData
@@ -148127,6 +149515,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -4.5,-49.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31695
     components:
     - type: MetaData
@@ -148135,6 +149525,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -3.5,-52.5
       parent: 1
+    - type: RMCPodDoor
+      id: 1
   - uid: 31696
     components:
     - type: MetaData
@@ -148143,6 +149535,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -3.5,-53.5
       parent: 1
+    - type: RMCPodDoor
+      id: 1
   - uid: 31697
     components:
     - type: MetaData
@@ -148151,6 +149545,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: -7.5,-58.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31698
     components:
     - type: MetaData
@@ -148159,6 +149555,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: -6.5,-58.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31699
     components:
     - type: MetaData
@@ -148167,6 +149565,8 @@ entities:
       rot: 3.141592653589793 rad
       pos: -5.5,-58.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31700
     components:
     - type: MetaData
@@ -148175,6 +149575,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -4.5,-57.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31701
     components:
     - type: MetaData
@@ -148183,6 +149585,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -4.5,-56.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
   - uid: 31702
     components:
     - type: MetaData
@@ -148191,6 +149595,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -4.5,-55.5
       parent: 1
+    - type: RMCPodDoor
+      id: science_blast
 - proto: RMCPodDoorButton
   entities:
   - uid: 20734
@@ -148204,9 +149610,10 @@ entities:
   - uid: 20968
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
       pos: -8.831545,-51.480083
       parent: 1
+    - type: RMCDoorButton
+      id: science_blast
     - type: Fixtures
       fixtures: {}
   - uid: 30280
@@ -148216,6 +149623,8 @@ entities:
     - type: Transform
       pos: -40.5,-79.5
       parent: 1
+    - type: RMCDoorButton
+      id: garage_lv
     - type: Fixtures
       fixtures: {}
   - uid: 30288
@@ -148225,6 +149634,8 @@ entities:
     - type: Transform
       pos: -39.5,-79.5
       parent: 1
+    - type: RMCDoorButton
+      id: garage_lv
     - type: Fixtures
       fixtures: {}
 - proto: RMCPowerCell
@@ -148236,6 +149647,36 @@ entities:
       parent: 1
 - proto: RMCPowerCellAPC
   entities:
+  - uid: 11279
+    components:
+    - type: Transform
+      parent: 11158
+    - type: Physics
+      canCollide: False
+  - uid: 11366
+    components:
+    - type: Transform
+      parent: 11282
+    - type: Physics
+      canCollide: False
+  - uid: 13248
+    components:
+    - type: Transform
+      parent: 13200
+    - type: Physics
+      canCollide: False
+  - uid: 13254
+    components:
+    - type: Transform
+      parent: 13250
+    - type: Physics
+      canCollide: False
+  - uid: 13809
+    components:
+    - type: Transform
+      parent: 13806
+    - type: Physics
+      canCollide: False
   - uid: 20362
     components:
     - type: Transform
@@ -148258,6 +149699,172 @@ entities:
     - type: Transform
       pos: -5.5,-55.5
       parent: 1
+- proto: RMCPowerCellAPCNoPower
+  entities:
+  - uid: 10277
+    components:
+    - type: Transform
+      parent: 10104
+    - type: Physics
+      canCollide: False
+  - uid: 10610
+    components:
+    - type: Transform
+      parent: 10489
+    - type: Physics
+      canCollide: False
+  - uid: 10726
+    components:
+    - type: Transform
+      parent: 10612
+    - type: Physics
+      canCollide: False
+  - uid: 10929
+    components:
+    - type: Transform
+      parent: 10727
+    - type: Physics
+      canCollide: False
+  - uid: 11070
+    components:
+    - type: Transform
+      parent: 11041
+    - type: Physics
+      canCollide: False
+  - uid: 11760
+    components:
+    - type: Transform
+      parent: 11370
+    - type: Physics
+      canCollide: False
+  - uid: 11841
+    components:
+    - type: Transform
+      parent: 11764
+    - type: Physics
+      canCollide: False
+  - uid: 11846
+    components:
+    - type: Transform
+      parent: 11845
+    - type: Physics
+      canCollide: False
+  - uid: 11961
+    components:
+    - type: Transform
+      parent: 11948
+    - type: Physics
+      canCollide: False
+  - uid: 12258
+    components:
+    - type: Transform
+      parent: 12253
+    - type: Physics
+      canCollide: False
+  - uid: 12352
+    components:
+    - type: Transform
+      parent: 12339
+    - type: Physics
+      canCollide: False
+  - uid: 12446
+    components:
+    - type: Transform
+      parent: 12358
+    - type: Physics
+      canCollide: False
+  - uid: 12534
+    components:
+    - type: Transform
+      parent: 12450
+    - type: Physics
+      canCollide: False
+  - uid: 12543
+    components:
+    - type: Transform
+      parent: 12537
+    - type: Physics
+      canCollide: False
+  - uid: 12646
+    components:
+    - type: Transform
+      parent: 12633
+    - type: Physics
+      canCollide: False
+  - uid: 12842
+    components:
+    - type: Transform
+      parent: 12757
+    - type: Physics
+      canCollide: False
+  - uid: 12922
+    components:
+    - type: Transform
+      parent: 12921
+    - type: Physics
+      canCollide: False
+  - uid: 13030
+    components:
+    - type: Transform
+      parent: 12934
+    - type: Physics
+      canCollide: False
+  - uid: 13047
+    components:
+    - type: Transform
+      parent: 13033
+    - type: Physics
+      canCollide: False
+  - uid: 13802
+    components:
+    - type: Transform
+      parent: 13257
+    - type: Physics
+      canCollide: False
+  - uid: 14020
+    components:
+    - type: Transform
+      parent: 14015
+    - type: Physics
+      canCollide: False
+- proto: RMCPowerCellHigh
+  entities:
+  - uid: 4416
+    components:
+    - type: Transform
+      parent: 20449
+    - type: Physics
+      canCollide: False
+  - uid: 5265
+    components:
+    - type: Transform
+      parent: 20450
+    - type: Physics
+      canCollide: False
+  - uid: 5270
+    components:
+    - type: Transform
+      parent: 20451
+    - type: Physics
+      canCollide: False
+  - uid: 6287
+    components:
+    - type: Transform
+      parent: 20460
+    - type: Physics
+      canCollide: False
+  - uid: 6288
+    components:
+    - type: Transform
+      parent: 31464
+    - type: Physics
+      canCollide: False
+  - uid: 6393
+    components:
+    - type: Transform
+      parent: 31567
+    - type: Physics
+      canCollide: False
 - proto: RMCPowerCellHighEmpty
   entities:
   - uid: 20365
@@ -149338,6 +150945,20 @@ entities:
     - type: Transform
       pos: -1.5,-60.5
       parent: 1
+- proto: RMCTargetClown
+  entities:
+  - uid: 20711
+    components:
+    - type: Transform
+      pos: 19.5,-81.5
+      parent: 1
+- proto: RMCTargetSyndicate
+  entities:
+  - uid: 20710
+    components:
+    - type: Transform
+      pos: 18.5,-81.5
+      parent: 1
 - proto: RMCToolboxElectricalFilled
   entities:
   - uid: 7081
@@ -149377,488 +150998,152 @@ entities:
   - uid: 15780
     components:
     - type: Transform
-      pos: 66.5,-105.5
+      pos: 54.5,-69.5
       parent: 1
   - uid: 20567
     components:
     - type: Transform
-      pos: 37.5,-93.5
+      pos: 51.5,-82.5
       parent: 1
   - uid: 20573
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 42.5,-82.5
+      pos: 49.5,-87.5
       parent: 1
   - uid: 20582
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 38.5,-86.5
+      pos: 72.5,-78.5
       parent: 1
   - uid: 20590
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 40.5,-81.5
+      pos: 72.5,-76.5
       parent: 1
   - uid: 20626
     components:
     - type: Transform
-      pos: 58.5,-76.5
+      pos: 72.5,-66.5
       parent: 1
   - uid: 20633
     components:
     - type: Transform
-      pos: 49.5,-75.5
+      pos: 71.5,-65.5
       parent: 1
   - uid: 20645
     components:
     - type: Transform
-      pos: 37.5,-70.5
+      pos: 59.5,-65.5
       parent: 1
   - uid: 20647
     components:
     - type: Transform
-      pos: 43.5,-72.5
+      pos: 58.5,-66.5
       parent: 1
   - uid: 20654
     components:
     - type: Transform
-      pos: 51.5,-66.5
+      pos: 58.5,-76.5
       parent: 1
   - uid: 20948
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -29.5,-59.5
+      pos: 58.5,-78.5
       parent: 1
   - uid: 20952
     components:
     - type: Transform
-      pos: -33.5,-58.5
+      pos: 58.5,-88.5
       parent: 1
-  - uid: 30990
+  - uid: 21026
     components:
     - type: Transform
-      pos: 71.5,-65.5
+      pos: 59.5,-89.5
       parent: 1
-  - uid: 30993
+  - uid: 21027
     components:
     - type: Transform
-      pos: 51.5,-72.5
+      pos: 72.5,-88.5
       parent: 1
-  - uid: 30995
+  - uid: 21028
     components:
     - type: Transform
-      pos: 71.5,-88.5
+      pos: 71.5,-89.5
       parent: 1
-  - uid: 31007
+  - uid: 21029
     components:
     - type: Transform
-      pos: 72.5,-77.5
+      pos: 73.5,-85.5
       parent: 1
-  - uid: 31011
+  - uid: 21030
     components:
     - type: Transform
-      pos: 58.5,-66.5
+      pos: 73.5,-89.5
       parent: 1
-  - uid: 31012
+  - uid: 21031
     components:
     - type: Transform
-      pos: -44.5,-83.5
+      pos: 63.5,-91.5
       parent: 1
-  - uid: 31013
+  - uid: 21032
     components:
     - type: Transform
-      pos: -58.5,-83.5
+      pos: 57.5,-91.5
       parent: 1
-  - uid: 31023
-    components:
-    - type: Transform
-      pos: -58.5,-70.5
-      parent: 1
-  - uid: 31028
-    components:
-    - type: Transform
-      pos: -44.5,-70.5
-      parent: 1
-  - uid: 31030
+  - uid: 21033
     components:
     - type: Transform
       pos: -58.5,-58.5
       parent: 1
-  - uid: 31031
+  - uid: 21034
     components:
     - type: Transform
       pos: -44.5,-58.5
       parent: 1
-  - uid: 31344
+  - uid: 21035
     components:
     - type: Transform
-      pos: 61.5,-61.5
+      pos: -44.5,-83.5
       parent: 1
-  - uid: 31345
+  - uid: 21036
     components:
     - type: Transform
-      pos: 63.5,-63.5
+      pos: -58.5,-83.5
       parent: 1
-  - uid: 31346
+  - uid: 21037
     components:
     - type: Transform
-      pos: 63.5,-57.5
+      pos: -61.5,-75.5
       parent: 1
-  - uid: 31347
+  - uid: 21038
     components:
     - type: Transform
-      pos: 70.5,-59.5
+      pos: -61.5,-79.5
       parent: 1
-  - uid: 31348
+  - uid: 21039
     components:
     - type: Transform
-      pos: 75.5,-63.5
+      pos: -58.5,-70.5
       parent: 1
-  - uid: 31349
+  - uid: 21040
     components:
     - type: Transform
-      pos: 73.5,-63.5
+      pos: -44.5,-70.5
       parent: 1
-  - uid: 31350
+  - uid: 21041
     components:
     - type: Transform
-      pos: 76.5,-66.5
+      pos: -51.5,-58.5
       parent: 1
-  - uid: 31351
+  - uid: 21042
     components:
     - type: Transform
-      pos: 76.5,-68.5
+      pos: -51.5,-83.5
       parent: 1
-  - uid: 31352
+  - uid: 21043
     components:
     - type: Transform
-      pos: 77.5,-70.5
-      parent: 1
-  - uid: 31353
-    components:
-    - type: Transform
-      pos: 76.5,-75.5
-      parent: 1
-  - uid: 31354
-    components:
-    - type: Transform
-      pos: 76.5,-80.5
-      parent: 1
-  - uid: 31355
-    components:
-    - type: Transform
-      pos: 76.5,-85.5
-      parent: 1
-  - uid: 31356
-    components:
-    - type: Transform
-      pos: 76.5,-89.5
-      parent: 1
-  - uid: 31357
-    components:
-    - type: Transform
-      pos: 67.5,-89.5
-      parent: 1
-  - uid: 31359
-    components:
-    - type: Transform
-      pos: 59.5,-65.5
-      parent: 1
-  - uid: 31360
-    components:
-    - type: Transform
-      pos: 72.5,-66.5
-      parent: 1
-  - uid: 31362
-    components:
-    - type: Transform
-      pos: 56.5,-57.5
-      parent: 1
-  - uid: 31363
-    components:
-    - type: Transform
-      pos: 45.5,-57.5
-      parent: 1
-  - uid: 31364
-    components:
-    - type: Transform
-      pos: 50.5,-61.5
-      parent: 1
-  - uid: 31365
-    components:
-    - type: Transform
-      pos: 37.5,-63.5
-      parent: 1
-  - uid: 31366
-    components:
-    - type: Transform
-      pos: 43.5,-63.5
-      parent: 1
-  - uid: 31367
-    components:
-    - type: Transform
-      pos: 39.5,-63.5
-      parent: 1
-  - uid: 31368
-    components:
-    - type: Transform
-      pos: 49.5,-71.5
-      parent: 1
-  - uid: 31372
-    components:
-    - type: Transform
-      pos: 50.5,-80.5
-      parent: 1
-  - uid: 31373
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 35.5,-74.5
-      parent: 1
-  - uid: 31374
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 35.5,-80.5
-      parent: 1
-  - uid: 31375
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 32.5,-76.5
-      parent: 1
-  - uid: 31376
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 43.5,-91.5
-      parent: 1
-  - uid: 31377
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 30.5,-76.5
-      parent: 1
-  - uid: 31380
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 44.5,-83.5
-      parent: 1
-  - uid: 31381
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 30.5,-78.5
-      parent: 1
-  - uid: 31383
-    components:
-    - type: Transform
-      pos: 43.5,-94.5
-      parent: 1
-  - uid: 31384
-    components:
-    - type: Transform
-      pos: 66.5,-103.5
-      parent: 1
-  - uid: 31385
-    components:
-    - type: Transform
-      pos: 49.5,-97.5
-      parent: 1
-  - uid: 31386
-    components:
-    - type: Transform
-      pos: 56.5,-106.5
-      parent: 1
-  - uid: 31387
-    components:
-    - type: Transform
-      pos: 56.5,-104.5
-      parent: 1
-  - uid: 31388
-    components:
-    - type: Transform
-      pos: 56.5,-101.5
-      parent: 1
-  - uid: 31389
-    components:
-    - type: Transform
-      pos: 53.5,-101.5
-      parent: 1
-  - uid: 31390
-    components:
-    - type: Transform
-      pos: 50.5,-102.5
-      parent: 1
-  - uid: 31391
-    components:
-    - type: Transform
-      pos: 47.5,-99.5
-      parent: 1
-  - uid: 31392
-    components:
-    - type: Transform
-      pos: 69.5,-97.5
-      parent: 1
-  - uid: 31393
-    components:
-    - type: Transform
-      pos: 73.5,-96.5
-      parent: 1
-  - uid: 31394
-    components:
-    - type: Transform
-      pos: 73.5,-100.5
-      parent: 1
-  - uid: 31395
-    components:
-    - type: Transform
-      pos: 71.5,-104.5
-      parent: 1
-  - uid: 31396
-    components:
-    - type: Transform
-      pos: 74.5,-101.5
-      parent: 1
-  - uid: 31397
-    components:
-    - type: Transform
-      pos: 79.5,-98.5
-      parent: 1
-  - uid: 31398
-    components:
-    - type: Transform
-      pos: 75.5,-97.5
-      parent: 1
-  - uid: 31399
-    components:
-    - type: Transform
-      pos: 80.5,-96.5
-      parent: 1
-  - uid: 31400
-    components:
-    - type: Transform
-      pos: 80.5,-93.5
-      parent: 1
-  - uid: 31401
-    components:
-    - type: Transform
-      pos: 82.5,-92.5
-      parent: 1
-  - uid: 31402
-    components:
-    - type: Transform
-      pos: 75.5,-93.5
-      parent: 1
-  - uid: 31403
-    components:
-    - type: Transform
-      pos: 81.5,-86.5
-      parent: 1
-  - uid: 31404
-    components:
-    - type: Transform
-      pos: 79.5,-79.5
-      parent: 1
-  - uid: 31405
-    components:
-    - type: Transform
-      pos: 79.5,-77.5
-      parent: 1
-  - uid: 31406
-    components:
-    - type: Transform
-      pos: 78.5,-73.5
-      parent: 1
-  - uid: 31407
-    components:
-    - type: Transform
-      pos: 79.5,-70.5
-      parent: 1
-  - uid: 31408
-    components:
-    - type: Transform
-      pos: 79.5,-67.5
-      parent: 1
-  - uid: 31409
-    components:
-    - type: Transform
-      pos: 79.5,-65.5
-      parent: 1
-  - uid: 31410
-    components:
-    - type: Transform
-      pos: 77.5,-62.5
-      parent: 1
-  - uid: 31412
-    components:
-    - type: Transform
-      pos: 52.5,-77.5
-      parent: 1
-  - uid: 31413
-    components:
-    - type: Transform
-      pos: 49.5,-87.5
-      parent: 1
-  - uid: 31414
-    components:
-    - type: Transform
-      pos: 51.5,-82.5
-      parent: 1
-  - uid: 31416
-    components:
-    - type: Transform
-      pos: -59.5,-77.5
-      parent: 1
-  - uid: 31417
-    components:
-    - type: Transform
-      pos: -70.5,-79.5
-      parent: 1
-  - uid: 31418
-    components:
-    - type: Transform
-      pos: -63.5,-76.5
-      parent: 1
-  - uid: 31419
-    components:
-    - type: Transform
-      pos: -51.5,-86.5
-      parent: 1
-  - uid: 31420
-    components:
-    - type: Transform
-      pos: -44.5,-88.5
-      parent: 1
-  - uid: 31421
-    components:
-    - type: Transform
-      pos: -39.5,-89.5
-      parent: 1
-  - uid: 31422
-    components:
-    - type: Transform
-      pos: -38.5,-79.5
-      parent: 1
-  - uid: 31423
-    components:
-    - type: Transform
-      pos: -32.5,-70.5
-      parent: 1
-  - uid: 31425
-    components:
-    - type: Transform
-      pos: -67.5,-83.5
-      parent: 1
-  - uid: 31426
-    components:
-    - type: Transform
-      pos: -63.5,-78.5
+      pos: -42.5,-79.5
       parent: 1
 - proto: RMCWeaponPistolSU6
   entities:
@@ -150261,20 +151546,6 @@ entities:
     components:
     - type: Transform
       pos: 5.5,-93.5
-      parent: 1
-- proto: TargetClown
-  entities:
-  - uid: 20711
-    components:
-    - type: Transform
-      pos: 19.5,-81.5
-      parent: 1
-- proto: TargetSyndicate
-  entities:
-  - uid: 20710
-    components:
-    - type: Transform
-      pos: 18.5,-81.5
       parent: 1
 - proto: Thruster
   entities:

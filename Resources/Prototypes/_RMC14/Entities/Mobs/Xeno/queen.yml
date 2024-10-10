@@ -58,7 +58,7 @@
     # Mature
 #    - ActionXenoSpit
 #    - ActionXenoToggleSpitType
-    tier: 4
+    tier: 0
     bypassTierCount: true
     unlockAt: 0
   - type: XenoAcid
@@ -101,7 +101,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.40
+          radius: 0.35
         density: 185
         mask:
         - MobMask
@@ -142,6 +142,7 @@
     whitelist:
       components:
       - XenoEgg
+      - XenoFruit
   - type: XenoEvolutionGranter
   - type: XenoEvolutionCapped
     id: CMXenoQueen
@@ -180,3 +181,6 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: xenoqueen
+  - type: AcidTrap
+  - type: TacticalMapLiveUpdateOnOvi
+    enabled: false
