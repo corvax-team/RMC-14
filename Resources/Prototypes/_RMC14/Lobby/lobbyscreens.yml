@@ -1,4 +1,7 @@
-﻿- type: lobbyBackground
-  id: Pyro
-  background: /Textures/_RMC14/Lobby/PyrotechnicianXeno.png
+﻿#- type: lobbyBackground
+#  id: Pyro
+#  background: /Textures/_RMC14/Lobby/PyrotechnicianXeno.png
 
+- type: lobbyBackground
+  id: CCMLogo
+  background: /Textures/_RMC14/Lobby/CCM_logo_lobby.png
