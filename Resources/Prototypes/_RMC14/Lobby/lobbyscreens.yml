@@ -1,4 +1,4 @@
-﻿- type: lobbyBackground
-  id: Pyro
-  background: /Textures/_RMC14/Lobby/PyrotechnicianXeno.png
-
+﻿# Removed by CCM
+#- type: lobbyBackground
+#  id: Pyro
+#  background: /Textures/_RMC14/Lobby/PyrotechnicianXeno.png
