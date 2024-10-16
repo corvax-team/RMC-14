@@ -1,5 +1,7 @@
-﻿defaultWindowTitle: Rouny's Marine Corps 14
-windowIconSet: /Textures/Logo/sleeping
-splashLogo: /Textures/Logo/logo.png
+###---------------------------------------CCM14-EDIT------------------------------------------###
+defaultWindowTitle: Corvax - Marine Corps 14
+windowIconSet: /Textures/Logo/icon
+splashLogo: /Textures/Logo/load_logo.png
+###---------------------------------------CCM14-EDIT------------------------------------------###
 
 # PJB PLEASE
