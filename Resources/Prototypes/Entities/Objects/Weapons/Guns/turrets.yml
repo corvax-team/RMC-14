@@ -204,7 +204,7 @@
   components:
     - type: NpcFactionMember
       factions:
-        - Xeno
+        - RMCXeno # CCM Xeno - RMCXeno
     - type: Sprite
       sprite: Objects/Weapons/Guns/Turrets/xenoturret.rsi
       noRot: true
@@ -229,7 +229,7 @@
       thresholds:
         - trigger:
             !type:DamageTrigger
-            damage: 100
+            damage: 1200 # CCM 100 - 1200
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]

@@ -1,0 +1,9 @@
+- type: rules
+  id: NearFloorWaterEntity
+  rules:
+    - !type:NearbyEntitiesRule
+      count: 3
+      whitelist:
+        tags:
+          - FloorWaterEntity
+      range: 3

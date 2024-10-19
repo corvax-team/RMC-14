@@ -7,6 +7,12 @@
     snap:
     - Wall
   components:
+  - type: AmbientSound
+    volume: -10
+    range: 3
+    enabled: true
+    sound:
+      path: /Audio/_CCM14/Ambience/coast.ogg
   - type: FloorOccluder
   - type: Transform
     anchored: true
