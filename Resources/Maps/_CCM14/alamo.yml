@@ -20,7 +20,7 @@ entities:
     - type: MetaData
       name: Аламо
     - type: Transform
-      parent: 2
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -66,18 +66,7 @@ entities:
       data:
         chunkSize: 4
     - type: GasTileOverlay
-  - uid: 2
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: PhysicsMap
-    - type: GridTree
-    - type: MovedGrids
-    - type: Broadphase
-    - type: OccluderTree
+    - type: RadiationGridResistance
 - proto: AtmosDeviceFanTiny
   entities:
   - uid: 182
@@ -99,6 +88,39 @@ entities:
     components:
     - type: Transform
       pos: 3.5,1.5
+      parent: 1
+- proto: CMAlamoCockpit
+  entities:
+  - uid: 5
+    components:
+    - type: Transform
+      pos: -0.5,6.5
+      parent: 1
+- proto: CMAlamoDoor
+  entities:
+  - uid: 6
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -4.5,2.5
+      parent: 1
+  - uid: 7
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,1.5
+      parent: 1
+  - uid: 9
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -4.5,1.5
+      parent: 1
+  - uid: 10
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,2.5
       parent: 1
 - proto: CMAlamoWall1
   entities:
@@ -471,33 +493,12 @@ entities:
     - type: Transform
       pos: 3.5,0.5
       parent: 1
-- proto: CMAlamoWall55
-  entities:
-  - uid: 6
-    components:
-    - type: Transform
-      pos: -4.5,1.5
-      parent: 1
 - proto: CMAlamoWall56
   entities:
   - uid: 66
     components:
     - type: Transform
       pos: -0.5,1.5
-      parent: 1
-- proto: CMAlamoWall57
-  entities:
-  - uid: 9
-    components:
-    - type: Transform
-      pos: 3.5,1.5
-      parent: 1
-- proto: CMAlamoWall58
-  entities:
-  - uid: 7
-    components:
-    - type: Transform
-      pos: -4.5,2.5
       parent: 1
 - proto: CMAlamoWall59
   entities:
@@ -512,13 +513,6 @@ entities:
     components:
     - type: Transform
       pos: 3.5,-9.5
-      parent: 1
-- proto: CMAlamoWall60
-  entities:
-  - uid: 10
-    components:
-    - type: Transform
-      pos: 3.5,2.5
       parent: 1
 - proto: CMAlamoWall61
   entities:
@@ -652,13 +646,6 @@ entities:
     components:
     - type: Transform
       pos: -1.5,6.5
-      parent: 1
-- proto: CMAlamoWall79
-  entities:
-  - uid: 5
-    components:
-    - type: Transform
-      pos: -0.5,6.5
       parent: 1
 - proto: CMAlamoWall8
   entities:
