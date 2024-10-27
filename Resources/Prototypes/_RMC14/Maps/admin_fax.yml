@@ -1,7 +1,7 @@
 - type: gameMap
   id: RMCAdminFax
   mapName: We-Ya Office
-  mapPath: /Maps/_RMC14/admin_fax.yml
+  mapPath: /Maps/_CCM14/operational_headquarters.yml # CCM Replaced by operational headquarters
   minPlayers: 10
   maxRandomOffset: 0
   randomRotation: false
