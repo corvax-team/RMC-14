@@ -59,7 +59,7 @@
 - type: entity
   parent: CCMBaseSandTree
   id: CCMDeadTree01
-  name: DeadTree
+  name: Dead tree
   components:
   - type: Sprite
     state: tree01
@@ -67,7 +67,7 @@
 - type: entity
   parent: CCMBaseSandTree
   id: CCMDeadTree02
-  name: DeadTree
+  name: Dead tree
   components:
   - type: Sprite
     state: tree02
@@ -75,7 +75,7 @@
 - type: entity
   parent: CCMBaseSandTree
   id: CCMDeadTree03
-  name: DeadTree
+  name: Dead tree
   components:
   - type: Sprite
     state: tree03
@@ -83,7 +83,7 @@
 - type: entity
   parent: CCMBaseSandTree
   id: CCMDeadTree04
-  name: DeadTree
+  name: Dead tree
   components:
   - type: Sprite
     state: tree04
@@ -91,7 +91,7 @@
 - type: entity
   parent: CCMBaseSandTree
   id: CCMSpruceTree
-  name: SpruceTree
+  name: Spruce tree
   components:
   - type: Sprite
     sprite: _CCM14/Objects/Decoration/Flora/flora_spruce_trees.rsi
