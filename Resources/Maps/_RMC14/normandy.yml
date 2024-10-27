@@ -20,7 +20,7 @@ entities:
     - type: MetaData
       name: Нормандия
     - type: Transform
-      parent: 2
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -67,19 +67,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-  - uid: 2
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: PhysicsMap
-    - type: GridTree
-    - type: MovedGrids
-    - type: Broadphase
-    - type: OccluderTree
-    - type: LoadedMap
 - proto: AtmosDeviceFanTiny
   entities:
   - uid: 182
@@ -123,6 +110,10 @@ entities:
     - type: Transform
       pos: 0.5,8.5
       parent: 1
+    - type: DropshipTerminalWeapons
+      screenOne:
+        weapon: null
+        state: Cams
 - proto: CMLightFixtureAlwaysPowered
   entities:
   - uid: 106
@@ -185,36 +176,36 @@ entities:
       parent: 1
 - proto: CMNormandyCockpit
   entities:
-  - uid: 9
+  - uid: 2
     components:
     - type: Transform
       pos: -0.5,6.5
       parent: 1
 - proto: CMNormandyDoor
   entities:
-  - uid: 5
+  - uid: 102
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 3.5,1.5
       parent: 1
-  - uid: 6
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -4.5,2.5
-      parent: 1
-  - uid: 7
+  - uid: 103
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 3.5,2.5
       parent: 1
-  - uid: 10
+  - uid: 104
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -4.5,1.5
+      parent: 1
+  - uid: 105
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -4.5,2.5
       parent: 1
 - proto: CMNormandyWall1
   entities:
@@ -230,26 +221,41 @@ entities:
     - type: Transform
       pos: -2.5,-7.5
       parent: 1
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 1.5,-7.5
+      parent: 1
 - proto: CMNormandyWall100
   entities:
-  - uid: 37
+  - uid: 6
+    components:
+    - type: Transform
+      pos: -2.5,10.5
+      parent: 1
+- proto: CMNormandyWall101
+  entities:
+  - uid: 7
     components:
     - type: Transform
       pos: -1.5,10.5
       parent: 1
-- proto: CMNormandyWall101
-  entities:
   - uid: 8
     components:
     - type: Transform
       pos: -0.5,10.5
       parent: 1
-- proto: CMNormandyWall102
-  entities:
-  - uid: 38
+  - uid: 9
     components:
     - type: Transform
       pos: 0.5,10.5
+      parent: 1
+- proto: CMNormandyWall102
+  entities:
+  - uid: 10
+    components:
+    - type: Transform
+      pos: 1.5,10.5
       parent: 1
 - proto: CMNormandyWall11
   entities:
@@ -272,20 +278,6 @@ entities:
     - type: Transform
       pos: 0.5,-7.5
       parent: 1
-- proto: CMNormandyWall14
-  entities:
-  - uid: 36
-    components:
-    - type: Transform
-      pos: 1.5,-7.5
-      parent: 1
-- proto: CMNormandyWall15
-  entities:
-  - uid: 55
-    components:
-    - type: Transform
-      pos: 2.5,-7.5
-      parent: 1
 - proto: CMNormandyWall16
   entities:
   - uid: 11
@@ -299,20 +291,6 @@ entities:
     components:
     - type: Transform
       pos: -4.5,-6.5
-      parent: 1
-- proto: CMNormandyWall18
-  entities:
-  - uid: 62
-    components:
-    - type: Transform
-      pos: -3.5,-6.5
-      parent: 1
-- proto: CMNormandyWall19
-  entities:
-  - uid: 67
-    components:
-    - type: Transform
-      pos: 2.5,-6.5
       parent: 1
 - proto: CMNormandyWall2
   entities:
@@ -440,20 +418,6 @@ entities:
     - type: Transform
       pos: -4.5,-3.5
       parent: 1
-- proto: CMNormandyWall36
-  entities:
-  - uid: 61
-    components:
-    - type: Transform
-      pos: -3.5,-3.5
-      parent: 1
-- proto: CMNormandyWall37
-  entities:
-  - uid: 65
-    components:
-    - type: Transform
-      pos: 2.5,-3.5
-      parent: 1
 - proto: CMNormandyWall38
   entities:
   - uid: 31
@@ -491,17 +455,47 @@ entities:
       parent: 1
 - proto: CMNormandyWall42
   entities:
-  - uid: 60
+  - uid: 36
     components:
     - type: Transform
-      pos: -3.5,-2.5
+      pos: -4.5,5.5
+      parent: 1
+  - uid: 37
+    components:
+    - type: Transform
+      pos: -4.5,4.5
+      parent: 1
+  - uid: 38
+    components:
+    - type: Transform
+      pos: -4.5,3.5
+      parent: 1
+  - uid: 39
+    components:
+    - type: Transform
+      pos: -4.5,0.5
       parent: 1
 - proto: CMNormandyWall43
   entities:
-  - uid: 66
+  - uid: 40
     components:
     - type: Transform
-      pos: 2.5,-2.5
+      pos: 3.5,5.5
+      parent: 1
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 3.5,4.5
+      parent: 1
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 3.5,3.5
+      parent: 1
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 3.5,0.5
       parent: 1
 - proto: CMNormandyWall44
   entities:
@@ -524,6 +518,11 @@ entities:
     - type: Transform
       pos: -4.5,-1.5
       parent: 1
+  - uid: 47
+    components:
+    - type: Transform
+      pos: -3.5,-7.5
+      parent: 1
 - proto: CMNormandyWall47
   entities:
   - uid: 48
@@ -545,6 +544,11 @@ entities:
     - type: Transform
       pos: 3.5,-1.5
       parent: 1
+  - uid: 51
+    components:
+    - type: Transform
+      pos: 2.5,-7.5
+      parent: 1
 - proto: CMNormandyWall5
   entities:
   - uid: 52
@@ -554,10 +558,20 @@ entities:
       parent: 1
 - proto: CMNormandyWall50
   entities:
-  - uid: 63
+  - uid: 53
     components:
     - type: Transform
-      pos: -4.5,-0.5
+      pos: -3.5,-2.5
+      parent: 1
+  - uid: 54
+    components:
+    - type: Transform
+      pos: -3.5,-3.5
+      parent: 1
+  - uid: 55
+    components:
+    - type: Transform
+      pos: -3.5,-6.5
       parent: 1
 - proto: CMNormandyWall51
   entities:
@@ -566,12 +580,26 @@ entities:
     - type: Transform
       pos: 3.5,-0.5
       parent: 1
-- proto: CMNormandyWall52
-  entities:
-  - uid: 42
+  - uid: 60
     components:
     - type: Transform
-      pos: -4.5,0.5
+      rot: 3.141592653589793 rad
+      pos: -4.5,-0.5
+      parent: 1
+  - uid: 61
+    components:
+    - type: Transform
+      pos: 2.5,-3.5
+      parent: 1
+  - uid: 62
+    components:
+    - type: Transform
+      pos: 2.5,-2.5
+      parent: 1
+  - uid: 63
+    components:
+    - type: Transform
+      pos: 2.5,-6.5
       parent: 1
 - proto: CMNormandyWall53
   entities:
@@ -580,28 +608,28 @@ entities:
     - type: Transform
       pos: -0.5,0.5
       parent: 1
-- proto: CMNormandyWall54
-  entities:
-  - uid: 53
-    components:
-    - type: Transform
-      pos: 3.5,0.5
-      parent: 1
-- proto: CMNormandyWall56
-  entities:
-  - uid: 70
+  - uid: 65
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: -0.5,1.5
+      pos: -0.5,4.5
       parent: 1
 - proto: CMNormandyWall59
   entities:
-  - uid: 71
+  - uid: 66
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
+      pos: -0.5,1.5
+      parent: 1
+  - uid: 67
+    components:
+    - type: Transform
       pos: -0.5,2.5
+      parent: 1
+  - uid: 68
+    components:
+    - type: Transform
+      pos: -0.5,3.5
       parent: 1
 - proto: CMNormandyWall6
   entities:
@@ -612,66 +640,24 @@ entities:
       parent: 1
 - proto: CMNormandyWall61
   entities:
-  - uid: 74
+  - uid: 70
     components:
     - type: Transform
       pos: -5.5,3.5
       parent: 1
-- proto: CMNormandyWall62
-  entities:
-  - uid: 41
-    components:
-    - type: Transform
-      pos: -4.5,3.5
-      parent: 1
-- proto: CMNormandyWall63
-  entities:
-  - uid: 72
-    components:
-    - type: Transform
-      pos: -0.5,3.5
-      parent: 1
-- proto: CMNormandyWall64
-  entities:
-  - uid: 51
-    components:
-    - type: Transform
-      pos: 3.5,3.5
-      parent: 1
 - proto: CMNormandyWall65
   entities:
-  - uid: 75
+  - uid: 71
     components:
     - type: Transform
       pos: 4.5,3.5
       parent: 1
 - proto: CMNormandyWall66
   entities:
-  - uid: 76
+  - uid: 72
     components:
     - type: Transform
       pos: -5.5,4.5
-      parent: 1
-- proto: CMNormandyWall67
-  entities:
-  - uid: 40
-    components:
-    - type: Transform
-      pos: -4.5,4.5
-      parent: 1
-- proto: CMNormandyWall68
-  entities:
-  - uid: 68
-    components:
-    - type: Transform
-      pos: -0.5,4.5
-      parent: 1
-- proto: CMNormandyWall69
-  entities:
-  - uid: 47
-    components:
-    - type: Transform
-      pos: 3.5,4.5
       parent: 1
 - proto: CMNormandyWall7
   entities:
@@ -682,63 +668,60 @@ entities:
       parent: 1
 - proto: CMNormandyWall70
   entities:
-  - uid: 77
+  - uid: 74
     components:
     - type: Transform
       pos: 4.5,4.5
       parent: 1
 - proto: CMNormandyWall71
   entities:
-  - uid: 78
+  - uid: 75
     components:
     - type: Transform
       pos: -5.5,5.5
       parent: 1
-- proto: CMNormandyWall72
-  entities:
-  - uid: 39
-    components:
-    - type: Transform
-      pos: -4.5,5.5
-      parent: 1
-- proto: CMNormandyWall73
-  entities:
-  - uid: 43
-    components:
-    - type: Transform
-      pos: 3.5,5.5
-      parent: 1
 - proto: CMNormandyWall74
   entities:
-  - uid: 79
+  - uid: 76
     components:
     - type: Transform
       pos: 4.5,5.5
       parent: 1
 - proto: CMNormandyWall75
   entities:
-  - uid: 80
+  - uid: 77
     components:
     - type: Transform
       pos: -4.5,6.5
       parent: 1
 - proto: CMNormandyWall76
   entities:
-  - uid: 81
+  - uid: 78
     components:
     - type: Transform
       pos: -3.5,6.5
       parent: 1
-- proto: CMNormandyWall77
-  entities:
-  - uid: 82
+  - uid: 79
     components:
     - type: Transform
       pos: -2.5,6.5
       parent: 1
-- proto: CMNormandyWall78
-  entities:
-  - uid: 87
+  - uid: 80
+    components:
+    - type: Transform
+      pos: 2.5,6.5
+      parent: 1
+  - uid: 81
+    components:
+    - type: Transform
+      pos: 1.5,6.5
+      parent: 1
+  - uid: 82
+    components:
+    - type: Transform
+      pos: 0.5,6.5
+      parent: 1
+  - uid: 83
     components:
     - type: Transform
       pos: -1.5,6.5
@@ -750,135 +733,98 @@ entities:
     - type: Transform
       pos: 1.5,-8.5
       parent: 1
-- proto: CMNormandyWall80
-  entities:
-  - uid: 86
-    components:
-    - type: Transform
-      pos: 0.5,6.5
-      parent: 1
-- proto: CMNormandyWall81
-  entities:
-  - uid: 85
-    components:
-    - type: Transform
-      pos: 1.5,6.5
-      parent: 1
-- proto: CMNormandyWall82
-  entities:
-  - uid: 83
-    components:
-    - type: Transform
-      pos: 2.5,6.5
-      parent: 1
 - proto: CMNormandyWall83
   entities:
-  - uid: 88
+  - uid: 85
     components:
     - type: Transform
       pos: 3.5,6.5
       parent: 1
 - proto: CMNormandyWall84
   entities:
-  - uid: 89
+  - uid: 86
     components:
     - type: Transform
       pos: -4.5,7.5
       parent: 1
-- proto: CMNormandyWall85
+- proto: CMNormandyWall84Flipped
   entities:
-  - uid: 94
+  - uid: 91
+    components:
+    - type: Transform
+      pos: 3.5,7.5
+      parent: 1
+- proto: CMNormandyWall85Flipped
+  entities:
+  - uid: 87
     components:
     - type: Transform
       pos: -3.5,7.5
       parent: 1
+  - uid: 90
+    components:
+    - type: Transform
+      pos: 2.5,7.5
+      parent: 1
 - proto: CMNormandyWall86
   entities:
-  - uid: 91
+  - uid: 88
     components:
     - type: Transform
       pos: -2.5,7.5
       parent: 1
 - proto: CMNormandyWall89
   entities:
-  - uid: 92
+  - uid: 89
     components:
     - type: Transform
       pos: 1.5,7.5
       parent: 1
-- proto: CMNormandyWall9
-  entities:
-  - uid: 54
-    components:
-    - type: Transform
-      pos: -3.5,-7.5
-      parent: 1
-- proto: CMNormandyWall90
-  entities:
-  - uid: 93
-    components:
-    - type: Transform
-      pos: 2.5,7.5
-      parent: 1
-- proto: CMNormandyWall91
-  entities:
-  - uid: 90
-    components:
-    - type: Transform
-      pos: 3.5,7.5
-      parent: 1
 - proto: CMNormandyWall92
   entities:
-  - uid: 95
+  - uid: 92
     components:
     - type: Transform
       pos: -2.5,8.5
       parent: 1
-- proto: CMNormandyWall93
-  entities:
-  - uid: 105
-    components:
-    - type: Transform
-      pos: -0.5,8.5
-      parent: 1
 - proto: CMNormandyWall94
   entities:
-  - uid: 96
+  - uid: 93
     components:
     - type: Transform
       pos: 1.5,8.5
       parent: 1
 - proto: CMNormandyWall95
   entities:
-  - uid: 97
+  - uid: 94
     components:
     - type: Transform
       pos: -2.5,9.5
       parent: 1
 - proto: CMNormandyWall96
   entities:
-  - uid: 98
+  - uid: 95
     components:
     - type: Transform
       pos: -1.5,9.5
       parent: 1
 - proto: CMNormandyWall97
   entities:
-  - uid: 102
+  - uid: 96
     components:
     - type: Transform
       pos: -0.5,9.5
       parent: 1
 - proto: CMNormandyWall98
   entities:
-  - uid: 103
+  - uid: 97
     components:
     - type: Transform
       pos: 0.5,9.5
       parent: 1
 - proto: CMNormandyWall99
   entities:
-  - uid: 104
+  - uid: 98
     components:
     - type: Transform
       pos: 1.5,9.5

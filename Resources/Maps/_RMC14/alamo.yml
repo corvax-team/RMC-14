@@ -20,7 +20,7 @@ entities:
     - type: MetaData
       name: Аламо
     - type: Transform
-      parent: 2
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -67,19 +67,6 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
-  - uid: 2
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: PhysicsMap
-    - type: GridTree
-    - type: MovedGrids
-    - type: Broadphase
-    - type: OccluderTree
-    - type: LoadedMap
 - proto: AtmosDeviceFanTiny
   entities:
   - uid: 182
@@ -104,37 +91,61 @@ entities:
       parent: 1
 - proto: CMAlamoCockpit
   entities:
-  - uid: 5
+  - uid: 2
     components:
     - type: Transform
       pos: -0.5,6.5
       parent: 1
 - proto: CMAlamoDoor
   entities:
-  - uid: 6
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -4.5,2.5
-      parent: 1
-  - uid: 7
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 3.5,1.5
-      parent: 1
-  - uid: 9
+  - uid: 56
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -4.5,1.5
       parent: 1
-  - uid: 10
+    - type: Door
+      secondsUntilStateChange: -1395.4585
+      state: Opening
+    - type: DeviceLinkSource
+      lastSignals:
+        DoorStatus: True
+  - uid: 57
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -4.5,2.5
+      parent: 1
+    - type: Door
+      secondsUntilStateChange: -1395.0085
+      state: Opening
+    - type: DeviceLinkSource
+      lastSignals:
+        DoorStatus: True
+  - uid: 58
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,1.5
+      parent: 1
+    - type: Door
+      secondsUntilStateChange: -1401.5176
+      state: Opening
+    - type: DeviceLinkSource
+      lastSignals:
+        DoorStatus: True
+  - uid: 102
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 3.5,2.5
       parent: 1
+    - type: Door
+      secondsUntilStateChange: -1396.5417
+      state: Opening
+    - type: DeviceLinkSource
+      lastSignals:
+        DoorStatus: True
 - proto: CMAlamoWall1
   entities:
   - uid: 3
@@ -149,26 +160,41 @@ entities:
     - type: Transform
       pos: -2.5,-7.5
       parent: 1
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 1.5,-7.5
+      parent: 1
 - proto: CMAlamoWall100
   entities:
-  - uid: 37
+  - uid: 6
+    components:
+    - type: Transform
+      pos: -2.5,10.5
+      parent: 1
+- proto: CMAlamoWall101
+  entities:
+  - uid: 7
     components:
     - type: Transform
       pos: -1.5,10.5
       parent: 1
-- proto: CMAlamoWall101
-  entities:
   - uid: 8
     components:
     - type: Transform
       pos: -0.5,10.5
       parent: 1
-- proto: CMAlamoWall102
-  entities:
-  - uid: 38
+  - uid: 9
     components:
     - type: Transform
       pos: 0.5,10.5
+      parent: 1
+- proto: CMAlamoWall102
+  entities:
+  - uid: 10
+    components:
+    - type: Transform
+      pos: 1.5,10.5
       parent: 1
 - proto: CMAlamoWall11
   entities:
@@ -191,20 +217,6 @@ entities:
     - type: Transform
       pos: 0.5,-7.5
       parent: 1
-- proto: CMAlamoWall14
-  entities:
-  - uid: 36
-    components:
-    - type: Transform
-      pos: 1.5,-7.5
-      parent: 1
-- proto: CMAlamoWall15
-  entities:
-  - uid: 55
-    components:
-    - type: Transform
-      pos: 2.5,-7.5
-      parent: 1
 - proto: CMAlamoWall16
   entities:
   - uid: 11
@@ -218,20 +230,6 @@ entities:
     components:
     - type: Transform
       pos: -4.5,-6.5
-      parent: 1
-- proto: CMAlamoWall18
-  entities:
-  - uid: 58
-    components:
-    - type: Transform
-      pos: -3.5,-6.5
-      parent: 1
-- proto: CMAlamoWall19
-  entities:
-  - uid: 63
-    components:
-    - type: Transform
-      pos: 2.5,-6.5
       parent: 1
 - proto: CMAlamoWall2
   entities:
@@ -359,20 +357,6 @@ entities:
     - type: Transform
       pos: -4.5,-3.5
       parent: 1
-- proto: CMAlamoWall36
-  entities:
-  - uid: 57
-    components:
-    - type: Transform
-      pos: -3.5,-3.5
-      parent: 1
-- proto: CMAlamoWall37
-  entities:
-  - uid: 61
-    components:
-    - type: Transform
-      pos: 2.5,-3.5
-      parent: 1
 - proto: CMAlamoWall38
   entities:
   - uid: 31
@@ -410,17 +394,47 @@ entities:
       parent: 1
 - proto: CMAlamoWall42
   entities:
-  - uid: 56
+  - uid: 36
     components:
     - type: Transform
-      pos: -3.5,-2.5
+      pos: -4.5,5.5
+      parent: 1
+  - uid: 37
+    components:
+    - type: Transform
+      pos: -4.5,4.5
+      parent: 1
+  - uid: 38
+    components:
+    - type: Transform
+      pos: -4.5,3.5
+      parent: 1
+  - uid: 39
+    components:
+    - type: Transform
+      pos: -4.5,0.5
       parent: 1
 - proto: CMAlamoWall43
   entities:
-  - uid: 62
+  - uid: 40
     components:
     - type: Transform
-      pos: 2.5,-2.5
+      pos: 3.5,5.5
+      parent: 1
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 3.5,4.5
+      parent: 1
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 3.5,3.5
+      parent: 1
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 3.5,0.5
       parent: 1
 - proto: CMAlamoWall44
   entities:
@@ -438,31 +452,41 @@ entities:
       parent: 1
 - proto: CMAlamoWall46
   entities:
-  - uid: 49
+  - uid: 46
     components:
     - type: Transform
       pos: -4.5,-1.5
       parent: 1
+  - uid: 47
+    components:
+    - type: Transform
+      pos: -3.5,-7.5
+      parent: 1
 - proto: CMAlamoWall47
   entities:
-  - uid: 51
+  - uid: 48
     components:
     - type: Transform
       pos: -3.5,-1.5
       parent: 1
 - proto: CMAlamoWall48
   entities:
-  - uid: 53
+  - uid: 49
     components:
     - type: Transform
       pos: 2.5,-1.5
       parent: 1
 - proto: CMAlamoWall49
   entities:
-  - uid: 54
+  - uid: 50
     components:
     - type: Transform
       pos: 3.5,-1.5
+      parent: 1
+  - uid: 51
+    components:
+    - type: Transform
+      pos: 2.5,-7.5
       parent: 1
 - proto: CMAlamoWall5
   entities:
@@ -473,10 +497,20 @@ entities:
       parent: 1
 - proto: CMAlamoWall50
   entities:
-  - uid: 60
+  - uid: 53
     components:
     - type: Transform
-      pos: -4.5,-0.5
+      pos: -3.5,-2.5
+      parent: 1
+  - uid: 54
+    components:
+    - type: Transform
+      pos: -3.5,-3.5
+      parent: 1
+  - uid: 55
+    components:
+    - type: Transform
+      pos: -3.5,-6.5
       parent: 1
 - proto: CMAlamoWall51
   entities:
@@ -485,12 +519,26 @@ entities:
     - type: Transform
       pos: 3.5,-0.5
       parent: 1
-- proto: CMAlamoWall52
-  entities:
-  - uid: 42
+  - uid: 60
     components:
     - type: Transform
-      pos: -4.5,0.5
+      rot: 3.141592653589793 rad
+      pos: -4.5,-0.5
+      parent: 1
+  - uid: 61
+    components:
+    - type: Transform
+      pos: 2.5,-3.5
+      parent: 1
+  - uid: 62
+    components:
+    - type: Transform
+      pos: 2.5,-2.5
+      parent: 1
+  - uid: 63
+    components:
+    - type: Transform
+      pos: 2.5,-6.5
       parent: 1
 - proto: CMAlamoWall53
   entities:
@@ -499,26 +547,28 @@ entities:
     - type: Transform
       pos: -0.5,0.5
       parent: 1
-- proto: CMAlamoWall54
-  entities:
-  - uid: 48
+  - uid: 65
     components:
     - type: Transform
-      pos: 3.5,0.5
+      rot: 3.141592653589793 rad
+      pos: -0.5,4.5
       parent: 1
-- proto: CMAlamoWall56
+- proto: CMAlamoWall59
   entities:
   - uid: 66
     components:
     - type: Transform
       pos: -0.5,1.5
       parent: 1
-- proto: CMAlamoWall59
-  entities:
   - uid: 67
     components:
     - type: Transform
       pos: -0.5,2.5
+      parent: 1
+  - uid: 68
+    components:
+    - type: Transform
+      pos: -0.5,3.5
       parent: 1
 - proto: CMAlamoWall6
   entities:
@@ -534,27 +584,6 @@ entities:
     - type: Transform
       pos: -5.5,3.5
       parent: 1
-- proto: CMAlamoWall62
-  entities:
-  - uid: 41
-    components:
-    - type: Transform
-      pos: -4.5,3.5
-      parent: 1
-- proto: CMAlamoWall63
-  entities:
-  - uid: 68
-    components:
-    - type: Transform
-      pos: -0.5,3.5
-      parent: 1
-- proto: CMAlamoWall64
-  entities:
-  - uid: 47
-    components:
-    - type: Transform
-      pos: 3.5,3.5
-      parent: 1
 - proto: CMAlamoWall65
   entities:
   - uid: 71
@@ -568,27 +597,6 @@ entities:
     components:
     - type: Transform
       pos: -5.5,4.5
-      parent: 1
-- proto: CMAlamoWall67
-  entities:
-  - uid: 40
-    components:
-    - type: Transform
-      pos: -4.5,4.5
-      parent: 1
-- proto: CMAlamoWall68
-  entities:
-  - uid: 65
-    components:
-    - type: Transform
-      pos: -0.5,4.5
-      parent: 1
-- proto: CMAlamoWall69
-  entities:
-  - uid: 46
-    components:
-    - type: Transform
-      pos: 3.5,4.5
       parent: 1
 - proto: CMAlamoWall7
   entities:
@@ -611,20 +619,6 @@ entities:
     - type: Transform
       pos: -5.5,5.5
       parent: 1
-- proto: CMAlamoWall72
-  entities:
-  - uid: 39
-    components:
-    - type: Transform
-      pos: -4.5,5.5
-      parent: 1
-- proto: CMAlamoWall73
-  entities:
-  - uid: 43
-    components:
-    - type: Transform
-      pos: 3.5,5.5
-      parent: 1
 - proto: CMAlamoWall74
   entities:
   - uid: 76
@@ -646,15 +640,26 @@ entities:
     - type: Transform
       pos: -3.5,6.5
       parent: 1
-- proto: CMAlamoWall77
-  entities:
   - uid: 79
     components:
     - type: Transform
       pos: -2.5,6.5
       parent: 1
-- proto: CMAlamoWall78
-  entities:
+  - uid: 80
+    components:
+    - type: Transform
+      pos: 2.5,6.5
+      parent: 1
+  - uid: 81
+    components:
+    - type: Transform
+      pos: 1.5,6.5
+      parent: 1
+  - uid: 82
+    components:
+    - type: Transform
+      pos: 0.5,6.5
+      parent: 1
   - uid: 83
     components:
     - type: Transform
@@ -666,27 +671,6 @@ entities:
     components:
     - type: Transform
       pos: 1.5,-8.5
-      parent: 1
-- proto: CMAlamoWall80
-  entities:
-  - uid: 82
-    components:
-    - type: Transform
-      pos: 0.5,6.5
-      parent: 1
-- proto: CMAlamoWall81
-  entities:
-  - uid: 81
-    components:
-    - type: Transform
-      pos: 1.5,6.5
-      parent: 1
-- proto: CMAlamoWall82
-  entities:
-  - uid: 80
-    components:
-    - type: Transform
-      pos: 2.5,6.5
       parent: 1
 - proto: CMAlamoWall83
   entities:
@@ -702,8 +686,20 @@ entities:
     - type: Transform
       pos: -4.5,7.5
       parent: 1
-- proto: CMAlamoWall85
+- proto: CMAlamoWall84Flipped
   entities:
+  - uid: 87
+    components:
+    - type: Transform
+      pos: 3.5,7.5
+      parent: 1
+- proto: CMAlamoWall85Flipped
+  entities:
+  - uid: 90
+    components:
+    - type: Transform
+      pos: 2.5,7.5
+      parent: 1
   - uid: 91
     components:
     - type: Transform
@@ -723,40 +719,12 @@ entities:
     - type: Transform
       pos: 1.5,7.5
       parent: 1
-- proto: CMAlamoWall9
-  entities:
-  - uid: 50
-    components:
-    - type: Transform
-      pos: -3.5,-7.5
-      parent: 1
-- proto: CMAlamoWall90
-  entities:
-  - uid: 90
-    components:
-    - type: Transform
-      pos: 2.5,7.5
-      parent: 1
-- proto: CMAlamoWall91
-  entities:
-  - uid: 87
-    components:
-    - type: Transform
-      pos: 3.5,7.5
-      parent: 1
 - proto: CMAlamoWall92
   entities:
   - uid: 92
     components:
     - type: Transform
       pos: -2.5,8.5
-      parent: 1
-- proto: CMAlamoWall93
-  entities:
-  - uid: 102
-    components:
-    - type: Transform
-      pos: -0.5,8.5
       parent: 1
 - proto: CMAlamoWall94
   entities:
