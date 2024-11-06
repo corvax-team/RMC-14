@@ -19,7 +19,6 @@ entities:
     components:
     - type: MetaData
       name: Аламо
-    - type: Transform
     - type: MapGrid
       chunks:
         0,0:
@@ -683,17 +682,31 @@ entities:
       parent: 1
 - proto: CMAlamoWall84
   entities:
-  - uid: 86
+  - uid: 87
     components:
     - type: Transform
       pos: -4.5,7.5
       parent: 1
+- proto: CMAlamoWall84Flipped
+  entities:
+  - uid: 86
+    components:
+    - type: Transform
+      pos: 3.5,7.5
+      parent: 1
 - proto: CMAlamoWall85
   entities:
-  - uid: 91
+  - uid: 2
     components:
     - type: Transform
       pos: -3.5,7.5
+      parent: 1
+- proto: CMAlamoWall85Flipped
+  entities:
+  - uid: 90
+    components:
+    - type: Transform
+      pos: 2.5,7.5
       parent: 1
 - proto: CMAlamoWall86
   entities:
@@ -716,33 +729,12 @@ entities:
     - type: Transform
       pos: -3.5,-7.5
       parent: 1
-- proto: CMAlamoWall90
-  entities:
-  - uid: 90
-    components:
-    - type: Transform
-      pos: 2.5,7.5
-      parent: 1
-- proto: CMAlamoWall91
-  entities:
-  - uid: 87
-    components:
-    - type: Transform
-      pos: 3.5,7.5
-      parent: 1
 - proto: CMAlamoWall92
   entities:
   - uid: 92
     components:
     - type: Transform
       pos: -2.5,8.5
-      parent: 1
-- proto: CMAlamoWall93
-  entities:
-  - uid: 102
-    components:
-    - type: Transform
-      pos: -0.5,8.5
       parent: 1
 - proto: CMAlamoWall94
   entities:

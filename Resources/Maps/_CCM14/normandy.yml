@@ -19,7 +19,6 @@ entities:
     components:
     - type: MetaData
       name: Нормандия
-    - type: Transform
     - type: MapGrid
       chunks:
         0,0:
@@ -771,6 +770,13 @@ entities:
     - type: Transform
       pos: -4.5,7.5
       parent: 1
+- proto: CMNormandyWall84Flipped
+  entities:
+  - uid: 2
+    components:
+    - type: Transform
+      pos: 3.5,7.5
+      parent: 1
 - proto: CMNormandyWall85
   entities:
   - uid: 94
@@ -806,26 +812,12 @@ entities:
     - type: Transform
       pos: 2.5,7.5
       parent: 1
-- proto: CMNormandyWall91
-  entities:
-  - uid: 90
-    components:
-    - type: Transform
-      pos: 3.5,7.5
-      parent: 1
 - proto: CMNormandyWall92
   entities:
   - uid: 95
     components:
     - type: Transform
       pos: -2.5,8.5
-      parent: 1
-- proto: CMNormandyWall93
-  entities:
-  - uid: 105
-    components:
-    - type: Transform
-      pos: -0.5,8.5
       parent: 1
 - proto: CMNormandyWall94
   entities:
