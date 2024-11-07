@@ -21861,7 +21861,7 @@ entities:
       pos: -26.5,13.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -47454.79
+      secondsUntilStateChange: -47582.254
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -24765,7 +24765,7 @@ entities:
       parent: 5558
 - proto: CMComputerDropshipNavigation
   entities:
-  - uid: 5861
+  - uid: 557
     components:
     - type: Transform
       pos: -0.5,8.5
@@ -25075,7 +25075,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 5711.660955
     - type: Door
-      secondsUntilStateChange: -2292.1013
+      secondsUntilStateChange: -2419.5662
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -25089,7 +25089,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 5711.660955
     - type: Door
-      secondsUntilStateChange: -2292.1013
+      secondsUntilStateChange: -2419.5662
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -25186,7 +25186,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 19962.313371
     - type: Door
-      secondsUntilStateChange: -99018.74
+      secondsUntilStateChange: -99146.2
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -25200,7 +25200,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 19962.313371
     - type: Door
-      secondsUntilStateChange: -99018.74
+      secondsUntilStateChange: -99146.2
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -27134,6 +27134,12 @@ entities:
       parent: 1
 - proto: CMLightFixtureAlwaysPowered
   entities:
+  - uid: 490
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,8.5
+      parent: 5558
   - uid: 1738
     components:
     - type: Transform
@@ -27197,12 +27203,6 @@ entities:
     components:
     - type: Transform
       pos: 2.5,-0.5
-      parent: 5558
-  - uid: 6087
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.5,8.5
       parent: 5558
 - proto: CMLightFixtureSmall
   entities:
@@ -29032,13 +29032,6 @@ entities:
     components:
     - type: Transform
       pos: -2.5,8.5
-      parent: 5558
-- proto: CMNormandyWall93
-  entities:
-  - uid: 7867
-    components:
-    - type: Transform
-      pos: -0.5,8.5
       parent: 5558
 - proto: CMNormandyWall94
   entities:
@@ -48421,7 +48414,7 @@ entities:
       pos: 37.5,20.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -2120.1016
+      secondsUntilStateChange: -2247.5664
       state: Closing
     - type: DeviceNetwork
       deviceLists:
