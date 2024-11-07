@@ -29,7 +29,7 @@
 #            CMAuxiliarySupportOfficer: [1, 1]
 #            CMIntelOfficer: [4, 4]
             CMPilotDropship: [1, 1]
-#            CMPilotGunship: [1, 1]
+            CMPilotGunship: [1, 1]
 #            CMDropshipCrewChief: [2, 2]
 
             # Engineering
@@ -48,7 +48,7 @@
 
             # Marines
             CMSquadLeader: [2, 2]
-#            CMFireteamLeader: [4, 8]
+            CMFireteamLeader: [2, 2]
             CMSmartGunOperator: [2, 2]
             CMWeaponsSpecialist: [2, 2]
             CMCombatTech: [2, 2]
