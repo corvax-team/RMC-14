@@ -193,7 +193,10 @@ public abstract class SharedXenoTailSlamSystem : EntitySystem
                     diff *= power / 3 / length2;
 
                     _stun.TryParalyze(targetId, stunTime, true) ;
-                    _throwing.TryThrow(targetId, diff, power);
+                    //check
+                    if(!targetId<XenoNestComponent>)
+                        _throwing.TryThrow(targetId, diff, power);
+                    //end check
                     //end corvax
 
 
