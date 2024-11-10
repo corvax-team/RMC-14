@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Chemistry.EntitySystems;
@@ -193,7 +194,10 @@ public abstract class SharedXenoTailSlamSystem : EntitySystem
                     diff *= power / 3 / length2;
 
                     _stun.TryParalyze(targetId, stunTime, true) ;
-                    _throwing.TryThrow(targetId, diff, power);
+                    //check
+                    if(!HasComp<XenoNestedComponent>(targetId))
+                        _throwing.TryThrow(targetId, diff, power);						
+                    //end check
                     //end corvax
 
 
