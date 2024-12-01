@@ -1215,6 +1215,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             "lv624" => "LV-624",
 			"polyphemus" => "Polyphemus", // CCM map
 			"nova" => "Nova Outpost",
+			"westernforest" => "Western Forest",
             "solaris" => "Solaris Ridge",
             "prison" => "Fiorina Science Annex",
             "shiva" => "Shivas Snowball",
