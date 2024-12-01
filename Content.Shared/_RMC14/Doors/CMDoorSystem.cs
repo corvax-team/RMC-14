@@ -55,7 +55,8 @@ public sealed class CMDoorSystem : EntitySystem
     private void OnButtonActivateInWorld(Entity<RMCDoorButtonComponent> button, ref ActivateInWorldEvent args)
     {
         var user = args.User;
-        if (HasComp<XenoComponent>(user))
+        
+        if (HasComp<XenoComponent>(user)/*corvax chek*/ & !HasComp<MarineComponent>(user)/*end chek*/)
             return;
 
         if (!_accessReader.IsAllowed(user, button))
