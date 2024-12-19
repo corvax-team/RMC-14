@@ -1,0 +1,27 @@
+﻿- type: entity
+  id: ActionXenoLayEgg
+  parent: ActionXenoBase
+  name: Lay Egg (800) 
+  description: Hatch an egg.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: LayEgg
+    event: !type:LayEggActionEvent
+    useDelay: 300
+
+- type: entity
+  id: ActionXenoSummonXeno
+  parent: ActionXenoBase
+  name: Summon Xeno (300)
+  description: Summon xenomorphs with your scream.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: mark_ambush
+    event: !type:SummonXenoActionEvent
+    useDelay: 120
