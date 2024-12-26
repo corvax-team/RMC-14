@@ -83,7 +83,7 @@ public sealed class RMCCVars : CVars
     ///     Comma-separated list of maps to load as the planet in the distress signal gamemode.
     /// </summary>
     public static readonly CVarDef<string> RMCPlanetMaps =
-        CVarDef.Create("rmc.planet_maps", "/Maps/_CCM14/Planets/nova.yml,/Maps/_CCM14/Planets/polyphemus.yml", CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.planet_maps", "/Maps/_CCM14/Planets/nova.yml,/Maps/_CCM14/Planets/polyphemus.yml,/Maps/_CCM14/Planets/westernforest.yml", CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCPlanetCoordinateVariance =
         CVarDef.Create("rmc.planet_coordinate_variance", 500, CVar.REPLICATED | CVar.SERVER);
