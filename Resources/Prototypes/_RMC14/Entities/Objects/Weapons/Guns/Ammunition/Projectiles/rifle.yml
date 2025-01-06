@@ -55,6 +55,5 @@
   - type: RMCStunOnHit
     maxRange: 32
     losesEffectWithRange: true
-    stunTime: 1
     superSlowTime: 4
     slowTime: 10
