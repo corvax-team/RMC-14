@@ -5,6 +5,5 @@ ent-RMCMagazineRifleM16 = M16 Magazine (5.56x45mm)
     .desc = { ent-CMMagazineRifleBase.desc }
 ent-RMCCartridgeRifleM16 = Cartridge (5.56x45)
     .desc = A 5.56x45 rifle cartridge
-ent-BulletRifle5.56x45mm = { ent-BulletRifle10x24mm }
-
-  .desc = { ent-BulletRifle10x24mm.desc }
+"ent-BulletRifle5.56x45mm" = { ent-BulletRifle10x24mm }
+    .desc = { ent-BulletRifle10x24mm.desc }
