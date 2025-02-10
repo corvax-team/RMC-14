@@ -1,0 +1,10 @@
+ent-RMCJacketCorporateBlack = black suit jacket
+    .desc = A black suit jacket.
+ent-RMCJacketCorporateBlue = blue suit jacket
+    .desc = A blue suit jacket.
+ent-RMCJacketCorporateBrown = brown suit jacket
+    .desc = A brown suit jacket.
+ent-RMCJacketCorporateFormal = formal suit jacket
+    .desc = A formal suit jacket.
+ent-RMCJacketCorporateKhaki = khaki jacket
+    .desc = A khaki suit jacket.

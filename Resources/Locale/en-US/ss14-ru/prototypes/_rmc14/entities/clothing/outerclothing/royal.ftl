@@ -1,0 +1,10 @@
+ent-RMCArmorRoyal = kestrel armoured vest
+    .desc = A customizable personal armor system used by the Royal Marines Commandos.
+ent-RMCArmorRoyalLight = kestrel light armoured vest
+    .desc = { ent-RMCArmorRoyal.desc }
+ent-RMCArmorRoyalPadded = kestrel armoured carry vest
+    .desc = { ent-RMCArmorRoyal.desc }
+ent-RMCArmorRoyalHarness = kestrel armoured smart gun harness
+    .desc = { ent-RMCArmorRoyal.desc }
+ent-RMCArmorRoyalPointman = kestrel pointman armour
+    .desc = { ent-RMCArmorRoyalPadded.desc }

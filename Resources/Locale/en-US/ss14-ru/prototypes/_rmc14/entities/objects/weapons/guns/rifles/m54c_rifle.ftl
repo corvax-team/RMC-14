@@ -1,0 +1,17 @@
+ent-WeaponRifleM54C = M54C assault rifle MK2
+    .desc = The standard issue rifle of the Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
+ent-CMMagazineRifleM54C = M54C magazine (10x24mm)
+    .desc = { ent-CMMagazineRifleBase.desc }
+ent-CMMagazineRifleM54CAP = M54C AP magazine (10x24mm)
+    .suffix = AP
+    .desc = { ent-CMMagazineRifleM54C.desc }
+ent-CMMagazineRifleM54CExt = M54C extended magazine (10x24mm)
+    .desc = { ent-CMMagazineRifleM54C.desc }
+ent-CMCartridgeRifle10x24mm = cartridge (10x24mm)
+    .desc = A 10x24mm cartridge. Fits in 10x24mm magazines.
+ent-CMCartridgeRifle10x24mmAP = AP cartridge (10x24mm)
+    .desc = An armor piercing 10x24mm cartridge. Fits in 10x24mm AP magazines.
+ent-BulletRifle10x24mm = { ent-RMCBaseBullet }
+    .desc = { ent-RMCBaseBullet.desc }
+ent-BulletRifle10x24mmAP = { ent-BulletRifle10x24mm }
+    .desc = { ent-BulletRifle10x24mm.desc }

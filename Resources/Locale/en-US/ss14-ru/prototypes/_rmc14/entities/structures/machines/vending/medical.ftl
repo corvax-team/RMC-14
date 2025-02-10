@@ -1,0 +1,12 @@
+ent-CMMedilinkSupplyPort = medilink supply port
+    .desc = A complex network of pipes and machinery, linking to large storage systems below the deck. Medical vendors linked to this port will be able to infinitely restock supplies.
+ent-CMVendorMedical = We-Ya-Med Plus
+    .desc = Medical pharmaceutical dispenser. Provided by We-Ya Pharmaceuticals Division(TM).
+ent-CMVendorChemistry = We-Ya-Chem Plus
+    .desc = Medical chemistry dispenser. Provided by We-Ya Pharmaceuticals Division(TM).
+ent-ColMarTechMarineMedical = ColMarTech MarineMed
+    .desc = Medical Pharmaceutical dispenser with basic medical supplies for marines.
+ent-RMCNanoMed = NanoMed
+    .desc = A wall-mounted medical equipment dispenser.
+ent-CMVendorBlood = MM Blood Dispenser
+    .desc = The Marine Med Brand Blood Pack Dispensary is the premier, top-of-the-line blood dispenser of 2105! Get yours today!

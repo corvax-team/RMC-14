@@ -1,0 +1,14 @@
+ent-XenoFruitBase = resin fruit
+    .desc = a fruit that shouldn't exist
+ent-XenoFruitLesser = lesser resin fruit
+    .desc = A fruit that can be eaten to immediately recover health.
+ent-XenoFruitGreater = greater resin fruit
+    .desc = A fruit that can be eaten to immediately recover health, and a strong regeneration effect for a few seconds.
+ent-XenoFruitUnstable = unstable resin fruit
+    .desc = A fruit that can be eaten to gain a strong overshield effect, and a small regeneration for several seconds.
+ent-XenoFruitSpore = spore resin fruit
+    .desc = A fruit that can be eaten to reenergize cooldowns. It also passively emits weak recovery pheromones.
+ent-XenoFruitSpeed = alacrit resin fruit
+    .desc = A fruit that can be eaten to move faster for a short amount of time.
+ent-XenoFruitPlasma = cruor resin fruit
+    .desc = A fruit that can be eaten to boost plasma generation.

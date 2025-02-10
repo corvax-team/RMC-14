@@ -1,0 +1,9 @@
+ent-WeaponRifleM54CMK1 = M54C assault rifle MK1
+    .desc = An older design of the Assault Rifle commonly used by the Marine Corps. Uses 10x24mm caseless ammunition.
+ent-WeaponRifleM54CMK1AP = { ent-WeaponRifleM54CMK1 }
+    .desc = { ent-WeaponRifleM54CMK1.desc }
+ent-CMMagazineRifleM54CMK1 = M54C MK1 magazine (10x24mm)
+    .desc = { ent-CMMagazineRifleBase.desc }
+ent-CMMagazineRifleM54CMK1AP = M54C MK1 AP magazine (10x24mm)
+    .suffix = AP
+    .desc = { ent-CMMagazineRifleM54CMK1.desc }

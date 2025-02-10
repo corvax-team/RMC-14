@@ -1,0 +1,12 @@
+ent-CMIDCardStaffOfficer = staff officer ID card
+    .desc = { ent-CMIDCardSilver.desc }
+ent-CMIDCardCommandingOfficer = commanding officer ID card
+    .desc = { ent-CMIDCardGold.desc }
+ent-CMIDCardExecutiveOfficer = executive officer ID card
+    .desc = { ent-CMIDCardSilver.desc }
+ent-CMIDCardHighCommand = high command ID card
+    .desc = A gold-plated holo-badge reserved for those exclusively above your rank.
+    .suffix = Admin
+ent-CMIDCardProvostSectorMarshal = Provost Sector Marshal ID card
+    .desc = A gold-plated holo-badge reserved for those exclusively above your rank, this one bares the symbol of the Provost Marshal's office.
+    .suffix = Admin

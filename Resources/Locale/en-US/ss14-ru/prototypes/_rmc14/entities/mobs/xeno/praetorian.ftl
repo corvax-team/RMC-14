@@ -1,0 +1,13 @@
+ent-CMXenoPraetorianBase = Praetorian
+    .desc = A huge, looming beast of an alien.
+ent-CMXenoPraetorian = { ent-CMXenoPraetorianBase }
+    .desc = { ent-CMXenoPraetorianBase.desc }
+ent-RMCXenoPraetorianWarden = { ent-CMXenoPraetorianBase }
+    .suffix = Warden
+    .desc = { ent-CMXenoPraetorianBase.desc }
+ent-RMCXenoPraetorianDancer = { ent-CMXenoPraetorianBase }
+    .suffix = Dancer
+    .desc = { ent-CMXenoPraetorianBase.desc }
+ent-RMCXenoPraetorianVanguard = { ent-CMXenoPraetorianBase }
+    .suffix = Vanguard
+    .desc = { ent-CMXenoPraetorianBase.desc }

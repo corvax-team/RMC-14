@@ -1,0 +1,1 @@
+rmc-xeno-stun-shaken = We are shaken and slowed by the sudden impact!

@@ -1,0 +1,14 @@
+ent-CMSpawnPointSmartGunOperator = smart gun operator spawn point
+    .desc = { ent-CMSpawnPointJobBase.desc }
+ent-CMSpawnPointSmartGunOperatorAlpha = { ent-CMSpawnPointSmartGunOperator }
+    .suffix = Alpha
+    .desc = { ent-CMSpawnPointSmartGunOperator.desc }
+ent-CMSpawnPointSmartGunOperatorBravo = { ent-CMSpawnPointSmartGunOperator }
+    .suffix = Bravo
+    .desc = { ent-CMSpawnPointSmartGunOperator.desc }
+ent-CMSpawnPointSmartGunOperatorCharlie = { ent-CMSpawnPointSmartGunOperator }
+    .suffix = Charlie
+    .desc = { ent-CMSpawnPointSmartGunOperator.desc }
+ent-CMSpawnPointSmartGunOperatorDelta = { ent-CMSpawnPointSmartGunOperator }
+    .suffix = Delta
+    .desc = { ent-CMSpawnPointSmartGunOperator.desc }

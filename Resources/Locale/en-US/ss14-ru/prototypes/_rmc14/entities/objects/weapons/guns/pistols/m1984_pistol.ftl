@@ -1,0 +1,13 @@
+ent-CMWeaponPistolM1984 = M1984 service pistol
+    .desc = An M1984 Service Pistol, once the standard issue sidearm of the Marines but has recently been replaced with the M77 combat pistol. Fires 9mm pistol rounds.
+ent-CMWeaponPistolM1984Empty = { ent-CMWeaponPistolM1984 }
+    .suffix = Empty
+    .desc = { ent-CMWeaponPistolM1984.desc }
+ent-CMMagazinePistolM1984 = M1984 magazine (9mm)
+    .desc = { ent-CMBaseMagazinePistol.desc }
+ent-CMBulletPistol9mm = bullet (9mm)
+    .desc = { ent-CMBulletBase.desc }
+ent-CMCartridgePistol9mm = cartridge (9mm)
+    .desc = { ent-CMCartridgePistolBase.desc }
+ent-RMCMagazinePistolM1984AP = M1984 AP magazine (9mm)
+    .desc = A pistol magazine. This one contains armor-piercing bullets, which have noticeably higher stopping power on well-armored targets, and noticeably less on unarmored or lightly-armored targets.

@@ -1,0 +1,16 @@
+ent-CMIDCardStandardDogtag = dog tag
+    .desc = A marine dog tag.
+ent-RMCInformationDogtag = information dog tag
+    .desc = A fallen marine's information dog tag.
+ent-CMIDCardBase = identification holo-badge
+    .desc = A slice of encoded compressed fiber glass. Used for identification and access control.
+ent-CMIDCardGold = gold identification holo-badge
+    .desc = A gold plated holo-badge which shows power and might.
+ent-CMIDCardSilver = silver identification holo-badge
+    .desc = A silver plated holo-badge which shows honour and dedication.
+ent-CMIDCardLanyard = identification holo-lanyard
+    .desc = A crude holo-lanyard. As cheap as they come.
+ent-FactionMarine = { "" }
+    .desc = { "" }
+ent-FactionSurvivor = { "" }
+    .desc = { "" }

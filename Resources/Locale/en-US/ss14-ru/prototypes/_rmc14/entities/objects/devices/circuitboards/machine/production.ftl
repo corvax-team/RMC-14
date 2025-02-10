@@ -1,0 +1,14 @@
+ent-CMSMESMachineCircuitboard = SMES machine board
+    .desc = A machine printed circuit board for a SMES.
+ent-CMAutolatheMachineCircuitboard = autolathe machine board
+    .desc = A machine printed circuit board for an autolathe
+ent-CMCircuitboardDispenserChem = chem dispenser machine board
+    .desc = A machine printed circuit board for a chemical dispenser.
+ent-CMCircuitboardDispenserBooze = booze dispenser machine board
+    .desc = A machine printed circuit board for a booze dispenser.
+ent-CMCircuitboardDispenserSoda = soda dispenser machine board
+    .desc = A machine printed circuit board for a soda dispenser.
+ent-CMCircuitboardChemMaster = chem master machine board
+    .desc = A machine printed circuit board for a chem master.
+ent-CMCircuitboardMicrowave = microwave machine board
+    .desc = A machine printed circuit board for a microwave.
