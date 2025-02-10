@@ -1,0 +1,16 @@
+ent-RMCCrateClothingLargePouches = large pouches crate (2x Pistol, Magazine, General)
+    .desc = { ent-RMCCrateWeldable.desc }
+ent-RMCCrateClothingMedicalPouches = medical pouches crate (1x firstaid, medical, syringe, medkit)
+    .desc = { ent-RMCCrateWeldable.desc }
+ent-RMCCrateClothingWebbing = webbing crate (x4)
+    .desc = { ent-RMCCrateWeldable.desc }
+ent-RMCCrateClothingWebbingVest = brown and black webbing crate (x2 each)
+    .desc = { ent-RMCCrateWeldable.desc }
+ent-RMCCrateClothingWebbingKnife = knife vest crate (x3)
+    .desc = { ent-RMCCrateWeldable.desc }
+ent-RMCCrateClothingWebbingHolster = shoulder holster crate (x4)
+    .desc = { ent-RMCCrateWeldable.desc }
+ent-RMCCrateClothingWebbingPouch = drop pouch crate (x4)
+    .desc = { ent-RMCCrateWeldable.desc }
+ent-RMCCrateClothingOfficerOutfit = officer outfit crate
+    .desc = { ent-RMCCrateWeldable.desc }

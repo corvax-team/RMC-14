@@ -1,0 +1,14 @@
+ent-CMPill = pill
+    .desc = A pill.
+ent-CMPillBicaridine = { ent-CMPill }
+    .desc = { ent-CMPill.desc }
+ent-CMPillDexalin = { ent-CMPill }
+    .desc = { ent-CMPill.desc }
+ent-CMPillDylovene = { ent-CMPill }
+    .desc = { ent-CMPill.desc }
+ent-CMPillInaprovaline = { ent-CMPill }
+    .desc = { ent-CMPill.desc }
+ent-CMPillKelotane = { ent-CMPill }
+    .desc = { ent-CMPill.desc }
+ent-CMPillTricordrazine = { ent-CMPill }
+    .desc = { ent-CMPill.desc }

@@ -1,0 +1,11 @@
+ent-CMBaseDefibrillator = emergency defibrillator
+    .desc = A handheld emergency defibrillator, used to restore fibrillating patients. Can optionally bring people back from the dead.
+ent-CMDefibrillator = { ent-CMBaseDefibrillator }
+    .suffix = RMC14
+    .desc = { ent-CMBaseDefibrillator.desc }
+ent-CMDefibrillatorEmpty = { ent-CMDefibrillator }
+    .suffix = RMC14, Empty
+    .desc = { ent-CMDefibrillator.desc }
+ent-CMDefibrillatorInfinite = { ent-CMBaseDefibrillator }
+    .suffix = RMC14, Infinite
+    .desc = { ent-CMBaseDefibrillator.desc }

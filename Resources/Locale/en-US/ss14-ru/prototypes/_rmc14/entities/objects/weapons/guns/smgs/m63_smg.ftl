@@ -1,0 +1,16 @@
+ent-WeaponSMGM63 = M63 submachine gun
+    .desc = The Aegis Battlefield Armaments M-63 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
+ent-CMMagazineSMGM63 = M63 HV magazine (10x20mm)
+    .desc = { ent-CMMagazineRifleBase.desc }
+ent-CMMagazineSMGM63AP = M63 AP magazine (10x20mm)
+    .desc = { ent-CMMagazineSMGM63.desc }
+ent-CMMagazineSMGM63Ext = M63 extended magazine (10x20mm)
+    .desc = { ent-CMMagazineSMGM63.desc }
+ent-CMCartridge10x20mm = cartridge (10x20mm)
+    .desc = { ent-CMCartridgeSMGBase.desc }
+ent-CMCartridge10x20mmAP = AP cartridge (10x20mm)
+    .desc = { ent-CMCartridge10x20mm.desc }
+ent-Bullet10x20mm = { ent-RMCBaseBullet }
+    .desc = { ent-RMCBaseBullet.desc }
+ent-Bullet10x20mmAP = { ent-Bullet10x20mm }
+    .desc = { ent-Bullet10x20mm.desc }

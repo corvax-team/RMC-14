@@ -1,0 +1,16 @@
+ent-RMCPlanetLV624 = LV-624
+    .desc = { "" }
+ent-RMCPlanetSolaris = Solaris Ridge
+    .desc = { "" }
+ent-RMCPlanetShiva = Shivas Snowball
+    .desc = { "" }
+ent-RMCPlanetFiorina = Fiorina Science Annex
+    .desc = { "" }
+ent-RMCPlanetTrijent = Trijent Dam
+    .desc = { "" }
+ent-RMCPlanetVaradero = New Varadero
+    .desc = { "" }
+ent-RMCPlanetKutjevo = Kutjevo Refinery
+    .desc = { "" }
+ent-RMCPlanetChances = LV-522 Chance's Claim
+    .desc = { "" }

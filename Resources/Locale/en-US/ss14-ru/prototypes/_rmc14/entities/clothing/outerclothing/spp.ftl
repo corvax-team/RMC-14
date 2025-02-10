@@ -1,0 +1,16 @@
+ent-RMCArmorSPP = SPP UM5 personal armor
+    .desc = Standard body armor of the SPP military, the UM5 (Union Medium MK5) is a medium body armor, roughly on par with the M3 pattern body armor in service with the UNMC, specialized towards ballistics protection. Unlike the M3, however, the plate has a heavier neckplate. This has earned many UN members to refer to SPP soldiers as 'tin men'.
+ent-RMCArmorSPPSupport = SPP UL6 personal armor
+    .desc = Standard body armor of the SPP military, the UM5 (Union Medium MK5) is a medium body armor, roughly on par with the M3 pattern body armor in service with the UNMC, specialized towards ballistics protection. Unlike the M3, however, the plate has a heavier neckplate. This has earned many UN members to refer to SPP soldiers as 'tin men'.
+ent-RMCArmorSPPSupportSynth = SPP UL6 synthetic personal armor
+    .desc = Modified variant of the UL6 personel armor system intended to be useable by Synthetic units. Offers no protection but very little movement impairment.
+ent-RMCArmorSPPCommando = SPP UM5CU personal armor
+    .desc = A modification of the UM5, designed for stealth operations.
+ent-RMCArmorSPPHeavy = SPP UH7 heavy plated armor
+    .desc = An extremely heavy-duty set of body armor in service with the SPP military, the UH7 (Union Heavy MK7) is known for having powerful ballistic protection, alongside a noticeable neck guard, fortified in order to allow the wearer to endure the stresses of the bulky helmet.
+ent-RMCCoatSPP = SPP UL4 officer jacket
+    .desc = A lightweight jacket, issued to officers of the SPP's military. Slightly protective from incoming damage, best off with proper armor however.
+ent-RMCCoatSPPSenior = SPP UL4 senior officer jacket
+    .desc = A lightweight jacket, issued to senior officers of the SPP's military. Made of high-quality materials, even going as far as having the ranks and insignia of the Kapitan and their Company emblazoned on the shoulders and front of the jacket. Slightly protective from incoming damage, best off with proper armor however.
+ent-RMCCoatSPPMP = SPP UL4 camouflaged jacket
+    .desc = A lightweight jacket, issued to troops when they're not expected to engage in combat. Still studded to the brim with kevlar shards, though the synthread construction reduces its effectiveness.

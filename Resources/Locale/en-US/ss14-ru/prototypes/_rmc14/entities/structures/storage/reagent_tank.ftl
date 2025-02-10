@@ -1,0 +1,9 @@
+ent-RMCTankReagentEmpty = reagent tank
+    .desc = A reagent tank, typically used to store large quantities of chemicals.
+    .suffix = Empty
+ent-RMCTankReagentWater = { ent-RMCTankReagentEmpty }
+    .suffix = Water
+    .desc = { ent-RMCTankReagentEmpty.desc }
+ent-RMCTankReagentFuel = fuel tank
+    .desc = A fuel tank, normally used to hold welding fuel. It's painted red with explosive warning labels.
+    .suffix = Fuel

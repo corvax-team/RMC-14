@@ -1,0 +1,9 @@
+ent-RMCWelderBase = blowtorch
+    .desc = Melts anything as long as it's fueled, don't forget your eye protection!
+ent-CMWelder = { ent-RMCWelderBase }
+    .desc = { ent-RMCWelderBase.desc }
+ent-RMCWelderAdmin = admin blowtorch
+    .desc = Melts anything as long as it's fueled, forget your eye protection!
+    .suffix = Admin, DO NOT MAP
+ent-CMWelderSmall = ME3 hand welder
+    .desc = A compact, handheld welding torch used by the Marines for cutting and welding jobs on the field. Due to the small size and slow strength, its function is limited compared to a full-sized technician's blowtorch.

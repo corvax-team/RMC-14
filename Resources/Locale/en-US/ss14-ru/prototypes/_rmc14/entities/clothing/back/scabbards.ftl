@@ -1,0 +1,14 @@
+ent-RMCScabbardBase = base scabbard
+    .desc = -- insert description here --
+ent-RMCScabbardMachete = H5 pattern M2132 machete scabbard
+    .desc = A large leather scabbard used to carry a M2132 machete. It can be strapped to the back or the waist.
+ent-RMCScabbardMacheteFilled = { ent-RMCScabbardMachete }
+    .suffix = Filled
+    .desc = { ent-RMCScabbardMachete.desc }
+ent-RMCScabbardMacheteSG = ML66A harness machete scabbard
+    .desc = A scabbard that connects to the ML66A combat harness for carrying a M2132 machete.
+ent-RMCScabbardMacheteSGFilled = { ent-RMCScabbardMacheteSG }
+    .suffix = Filled
+    .desc = { ent-RMCScabbardMacheteSG.desc }
+ent-RMCScabbardShotgun = L44 M42A2 shotgun scabbard
+    .desc = A large leather holster fitted for UNMC-issue shotguns. It has harnesses that allow it to be secured to the back for easy storage.

@@ -1,0 +1,16 @@
+ent-RMCBoxShotgunBase = box of shotgun shells
+    .desc = { ent-BaseStorageItem.desc }
+ent-RMCBoxShotgunBuckshot = box of buckshot shells
+    .desc = A box filled with buckshot spread shotgun shells. 12 Gauge.
+ent-RMCBoxShotgunSlugs = box of shotgun slugs
+    .desc = A box filled with heavy shotgun shells. A timeless classic. 12 Gauge.
+ent-RMCBoxShotgunIncendiary = box of incendiary slugs
+    .desc = A box filled with self-detonating incendiary shotgun rounds. 12 Gauge.
+ent-RMCBoxShotgunBeanbag = box of beanbag slugs
+    .desc = A box filled with beanbag shotgun shells used for non-lethal crowd control. 12 Gauge.
+ent-RMCBoxShotgunFlechette = box of flechette shells
+    .desc = A box filled with flechette shotgun shells. 12 Gauge.
+ent-RMCBoxShotgunIncendiaryBuckshot = box of incendiary buckshots
+    .desc = A box filled with self-detonating buckshot incendiary shotgun rounds. 12 Gauge.
+ent-RMCBoxShotgunBreaching = box of breaching shells
+    .desc = A box filled with breaching shotgun shells. 16 Gauge.

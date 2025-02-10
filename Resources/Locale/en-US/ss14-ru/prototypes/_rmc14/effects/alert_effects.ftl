@@ -1,0 +1,2 @@
+ent-RMCEffectAlert = { "" }
+    .desc = { "" }
