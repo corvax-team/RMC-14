@@ -3,7 +3,6 @@
   mapName: David
   mapPath: /Maps/_CCM14/david.yml
   minPlayers: 0
-  maxPlayers: 100
   maxRandomOffset: 0
   randomRotation: false
   stations:
@@ -23,28 +22,30 @@
             # Military Police
             CMChiefMP: [1, 1]
             CMMilitaryWarden: [1, 1]
-#            CMMilitaryPolice: [1, 2]
+            CMMilitaryPolice: [1, 1]
 
             # Auxiliary
-#            CMAuxiliarySupportOfficer: [1, 1]
-#            CMIntelOfficer: [4, 4]
+            CMAuxiliarySupportOfficer: [1, 1]
+            CMIntelOfficer: [2, 2]
             CMPilotDropship: [1, 1]
             CMPilotGunship: [1, 1]
-#            CMDropshipCrewChief: [2, 2]
+            CMDropshipCrewChief: [1, 1]
 
             # Engineering
             CMChiefEngineer: [1, 1]
 #            CMOrdnanceTech: [3, 3]
+            CMMaintTech: [2, 2]
 
             # Medical
             CMCMO: [1, 1]
-            CMDoctor: [1, 1]
-            CMNurse: [1, 1]
+            CMDoctor: [2, 2]
+            CMNurse: [2, 2]
 #            CMResearcher: [2, 2]
 
             # Requisition
             CMQuartermaster: [1, 1]
-            CMCargoTech: [1, 1]
+            CMCargoTech: [2, 2]
+#            CMMessTech: [1, 1]
 
             # Marines
             CMSquadLeader: [2, 2]
@@ -57,8 +58,6 @@
 
             # Civilians
             CMCorrespondent: [1, 1]
-            CMMaintTech: [1, 1]
-            CMMessTech: [1, 1]
 
             # Other
-#            CMLiaison: [1, 1]
+            CMLiaison: [1, 1]
