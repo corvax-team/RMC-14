@@ -1,0 +1,67 @@
+﻿[net]
+tickrate = 30
+max_connections = 1024
+
+[game]
+hostname = "🛰️ Corvax — Colonial Marines 🌍"
+desc = "Corvax первый русскоязычный проект в Space Station 14.\nПервый русскоязычный проект на тему колониальных морпехов.\nНа сервере средние требования к RP."
+soft_max_players = 100
+map_rotation = true
+lobbyduration = 180
+role_timers = false
+round_end_pvs_overrides = false
+
+[ghost]
+kill_crit = false
+role_time = 0
+
+[vote]
+restart_required_ratio = 0.85
+same_type_timeout = 300.0
+timerrestart = 30
+map_enabled = true
+preset_enabled = false
+
+[admin]
+deadmin_on_join = true
+see_own_notes = true
+server_ban_erase_player = true
+new_player_threshold = 600
+
+[atmos]
+space_wind = false
+monstermos_rip_tiles = false
+grid_impulse = false
+
+[ic]
+flavor_text = true
+enable_suicide = false
+
+[shuttle]
+auto_call_time = 0
+
+[discord]
+rich_main_icon_id = "corvax"
+
+[rules]
+time = 20.0
+
+[viewport]
+maximum_width = 26
+
+[infolinks]
+discord = "https://discord.gg/VWJZFUWgRc"
+wiki = "https://station14.ru/wiki/Портал:Colonial_Marines"
+patreon = "https://boosty.to/corvax"
+appeal = "https://discord.gg/QBCV2f42xG"
+
+[hub]
+advertise = true
+tags = "lang:ru,rp:med,region:eu_e"
+
+[physics]
+maxlinvelocity = 51
+grid_splitting = false
+
+[auth]
+mode = 1
