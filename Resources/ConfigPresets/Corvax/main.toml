@@ -10,6 +10,8 @@ map_rotation = true
 lobbyduration = 180
 role_timers = false
 round_end_pvs_overrides = false
+defaultpreset = "CMDistressSignal"
+fallbackpreset = "CMDistressSignal"
 
 [ghost]
 kill_crit = false
