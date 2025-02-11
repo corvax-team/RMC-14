@@ -1,0 +1,146 @@
+﻿- type: reagent
+  parent: CMReagent
+  id: CCMXenoLightNeuroToxin
+  name: reagent-name-rmclightneurotoxin
+  desc: reagent-desc-rmclightneurotoxin
+  physicalDesc: reagent-physical-desc-acidic
+  color: "#669911"
+  unknown: true
+  metabolisms:
+    Poison:
+      metabolismRate: 0.01 
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Toxin: 0.1
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.65
+        sprintSpeedModifier: 0.65
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 0.50
+        key: KnockedDown
+        component: KnockedDown
+        time: 2
+        type: Add
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 0.50
+        key: Stun
+        component: Stunned
+        time: 2
+        type: Add
+      - !type:PopupMessage
+        type: Local
+        visualType: SmallCaution
+        messages: [ "rmc-body-stings" ]
+        probability: 0.2
+
+
+
+- type: reagent
+  parent: CMReagent
+  id: CCMXenoNeuroToxin
+  name: reagent-name-rmcxenoneurotoxin
+  desc: reagent-desc-rmcxenoneurotoxin
+  physicalDesc: reagent-physical-desc-acidic
+  color: "#669922"
+  unknown: true
+  metabolisms:
+    Poison:
+      metabolismRate: 0.01 
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Toxin: 0.2
+            Burn: 0.2
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.65
+        sprintSpeedModifier: 0.65
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 0.20
+        key: KnockedDown
+        component: KnockedDown
+        time: 3
+        type: Add
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 0.20
+        key: Stun
+        component: Stunned
+        time: 3
+        type: Add
+      - !type:PopupMessage
+        type: Local
+        visualType: SmallCaution
+        messages: [ "rmc-body-stings" ]
+        probability: 0.2
+
+
+
+- type: reagent
+  parent: CMReagent
+  id: CCMXenoStrongAcid
+  name: reagent-name-rmcxenoneurotoxin
+  desc: reagent-desc-rmcxenoneurotoxin
+  physicalDesc: reagent-physical-desc-acidic
+  color: "#669922"
+  unknown: true
+  metabolisms:
+    Poison:
+      metabolismRate: 0.01 
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Burn: 2
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.65
+        sprintSpeedModifier: 0.65
+      - !type:GenericStatusEffect
+        key: KnockedDown
+        component: KnockedDown
+        time: 1
+        type: Add
+        refresh: false
+      - !type:PopupMessage
+        type: Local
+        visualType: Large
+        messages: [ "generic-reagent-effect-burning-insides" ]
+        probability: 0.33
+      - !type:Emote
+        emote: Scream
+        probability: 0.3
+
+- type: reagent
+  parent: CMReagent
+  id: CCMXenoDroneJuice
+  name: reagent-name-rmcdronejuice
+  desc: reagent-desc-rmcdronejuice
+  physicalDesc: reagent-physical-desc-acidic
+  color: "#669922"
+  unknown: true
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.01
+      effects:
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.65
+        sprintSpeedModifier: 0.65
+      - !type:RemoveDamage
+        group: Airloss
+      - !type:EqualHealthChange
+        conditions:
+        - !type:TotalDamage
+          min: 100
+        damage:
+        - Burn: -0.5
+        - Brute: -0.5
+        - Toxin: -0.5

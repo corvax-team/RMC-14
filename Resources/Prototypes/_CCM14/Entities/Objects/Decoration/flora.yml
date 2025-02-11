@@ -1,0 +1,98 @@
+- type: entity
+  id: CCMBaseSandTree
+  description: Yep, it's a tree.
+  abstract: true
+  components:
+  - type: SpriteFade
+  - type: Clickable
+  - type: Sprite
+    noRot: true
+    sprite: _CCM14/Objects/Decoration/Flora/flora_dead_trees.rsi
+    drawdepth: Overdoors
+    offset: 0,0.9
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.4,0.35,0.4"
+        density: 1000
+        layer:
+        - WallLayer
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/chop.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/tree_fell.ogg
+          params:
+            volume: 5
+            variation: 0.05
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Log:
+            min: 2
+            max: 8
+
+- type: entity
+  parent: CCMBaseSandTree
+  id: CCMDeadTree01
+  name: Dead tree
+  components:
+  - type: Sprite
+    state: tree01
+
+- type: entity
+  parent: CCMBaseSandTree
+  id: CCMDeadTree02
+  name: Dead tree
+  components:
+  - type: Sprite
+    state: tree02
+
+- type: entity
+  parent: CCMBaseSandTree
+  id: CCMDeadTree03
+  name: Dead tree
+  components:
+  - type: Sprite
+    state: tree03
+
+- type: entity
+  parent: CCMBaseSandTree
+  id: CCMDeadTree04
+  name: Dead tree
+  components:
+  - type: Sprite
+    state: tree04
+
+- type: entity
+  parent: CCMBaseSandTree
+  id: CCMSpruceTree
+  name: Spruce tree
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Decoration/Flora/flora_spruce_trees.rsi
+    state: tree

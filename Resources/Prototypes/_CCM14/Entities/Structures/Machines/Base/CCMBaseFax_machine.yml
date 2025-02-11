@@ -1,0 +1,20 @@
+- type: entity
+  parent: CMFax
+  id: CCMBaseFaxMachineCommander
+  abstract: true
+  name: commander long range fax machine
+  suffix: NukeCodes
+  components:
+    - type: FaxMachine
+      name: "Commander"
+      receiveNukeCodes: true
+    - type: StealTarget
+      stealGroup: FaxMachineCommander
+    - type: Sprite
+      sprite: _RMC14/Structures/Machines/fax_machine.rsi
+    - type: Corrodible
+      isCorrodible: false
+    - type: InteractedBlacklist
+      blacklist:
+        components:
+         - Xeno
