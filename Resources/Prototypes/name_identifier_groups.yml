@@ -1,31 +1,31 @@
 ﻿# Non-fungible apes, anyone?
 - type: nameIdentifierGroup
   id: Monkey
-  prefix: MK
+  prefix: ОБ # CCM-Localization
 
 - type: nameIdentifierGroup
   id: Kobold
-  prefix: KB
+  prefix: КБ # CCM-Localization
 
 - type: nameIdentifierGroup
   id: Holoparasite
-  prefix: HOLO
+  prefix: ГОЛО # CCM-Localization
 
 - type: nameIdentifierGroup
   id: MMI
-  prefix: MMI
+  prefix: ЧМИ # CCM-Localization
   minValue: 100
   maxValue: 999
 
 - type: nameIdentifierGroup
   id: PositronicBrain
-  prefix: PB
+  prefix: ПМ # CCM-Localization
   minValue: 10
   maxValue: 99
 
 - type: nameIdentifierGroup
   id: Silicon
-  prefix: Si
+  prefix: Кр # CCM-Localization
   minValue: 1000
   maxValue: 9999
 
@@ -40,6 +40,6 @@
 
 - type: nameIdentifierGroup
   id: CargoTelepads
-  prefix: TELE
+  prefix: ТЕЛЕ # CCM-Localization
   minValue: 0
   maxValue: 999
