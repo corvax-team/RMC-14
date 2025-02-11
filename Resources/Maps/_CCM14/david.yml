@@ -25608,15 +25608,6 @@ entities:
         solution@food: !type:ContainerSlot
           ent: 47
     - type: InsideEntityStorage
-- proto: CMHeadBeretWO
-  entities:
-  - uid: 8332
-    components:
-    - type: Transform
-      parent: 7295
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: CMHeadCap
   entities:
   - uid: 3123
