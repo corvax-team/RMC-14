@@ -1,2 +1,2 @@
-rmc-command-marineannounce-description = Send an in-game announcement.
-rmc-command-marineannounce-help = <rmcannounce> <sender> <message> or <rmcannounce> <message> to send announcement as High Command.
+rmc-command-marineannounce-description = Отправить внутриигровое объявление.
+rmc-command-marineannounce-help = <rmcannounce> <sender> <message> или <rmcannounce> <message> чтобы отправить от лица Верховного командования.

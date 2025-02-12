@@ -1,6 +1,6 @@
-rmc-acid-resist = You stop, drop, and roll, getting rid of the acid.
-rmc-glob-start-self = We begin to spit glob of acid gas!
-rmc-glob-start-others = { $user } prepares to spit a massive glob!
-rmc-glob-shoot-self = We spit glob of acid gas at the floor!
-rmc-glob-shoot-others = { $user } spits at the floor!
-rmc-glob-land = A glob of acid lands with a splat and explodes into noxious fumes!
+rmc-acid-resist = Вы останавливаетесь, падаете, и катаетесь, избавляясь от кислоты.
+rmc-glob-start-self = Мы начинаем выплёвывать шар кислотного газа!
+rmc-glob-start-others = { $user } готовится выплюнуть массивный шар!
+rmc-glob-shoot-self = Мы выплёвываем шар кислотного газа на пол!
+rmc-glob-shoot-others = { $user } плюёт на пол!
+rmc-glob-land = Кислотный шар с брызгами падает и взрывается, превращаясь в ядовитые испарения!
