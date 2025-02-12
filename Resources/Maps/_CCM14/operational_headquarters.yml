@@ -21344,15 +21344,6 @@ entities:
     - type: Transform
       pos: 33.361374,28.606653
       parent: 1
-- proto: RMCSmartPistolCase
-  entities:
-  - uid: 1186
-    components:
-    - type: Transform
-      parent: 1172
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: RMCStairsIce
   entities:
   - uid: 3174
