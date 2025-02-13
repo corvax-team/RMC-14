@@ -121,3 +121,57 @@
   components:
   - type: Sprite
     state: req
+
+#Помпы
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidFuelpumpEngineeringupper
+  name: Fuel pump - Engineering upper
+  components:
+  - type: Sprite
+    state: engineering
+  - type: Area
+    minimapColor: '#C19504E7'
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidFuelpumpEngineeringlower
+  name: Fuel pump - Engineering lower
+  components:
+  - type: Sprite
+    state: engineering
+  - type: Area
+    minimapColor: '#C19504E7'
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidFuelpumpMedupper
+  name: Fuel pump - Med upper
+  components:
+  - type: Sprite
+    state: engineering
+  - type: Area
+    minimapColor: '#C19504E7'
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidFuelpumpCargolower
+  name: Fuel pump - Cargo lower
+  components:
+  - type: Sprite
+    state: engineering
+  - type: Area
+    minimapColor: '#C19504E7'
+  
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidEngineeringFusionReactor
+  name: Engineering - Fusion reactor
+  components:
+  - type: Sprite
+    state: engineering
+  - type: Area
+    minimapColor: '#C19504E7'
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 1
+    hijackEvacuationType: Add
