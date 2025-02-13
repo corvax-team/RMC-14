@@ -87,6 +87,18 @@
     minimapColor: '#6C6767D8'
   - type: IntelRescueSurvivorArea
 
+#Эвак
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidEvac
+  name: Эвакуация
+  components:
+  - type: Sprite
+    state: livingspace
+  - type: Area
+    minimapColor: '#6C6767D8'
+  - type: IntelRescueSurvivorArea
+
 # Мед
 - type: entity
   parent: CCMAreaDavid
