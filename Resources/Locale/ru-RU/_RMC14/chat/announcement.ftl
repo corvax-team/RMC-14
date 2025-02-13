@@ -12,14 +12,14 @@ rmc-announcement-message-signed = [font size=16][bold][color=#CECECE]Объяв�
 rmc-announcement-message-raw = [font size=16][bold][color=#CECECE]{ $author }[/color][/bold][/font][font size=16][color=red]
     
     { $message }
-rmc-announcement-ares-message = [color=#CECECE][font size=16][bold]ARES v3.2 Постановка боевого приказа[/bold][/font][/color][color=red][font size=16][bold]
+rmc-announcement-ares-message = [color=#CECECE][font size=16][bold]АРЕС v3.2 Постановка боевого приказа[/bold][/font][/color][color=red][font size=16][bold]
     
     { $message }[/bold][/font][/color]
 rmc-announcement-ares-lz-designated =
     Боевой приказ отдал:
     
     Зона { $name } была назначена основной зоной высадки.
-rmc-announcement-ares-online = [color=#CECECE][font size=16][bold]ARES Онлайн[/bold][/font][/color][color=red][font size=16][bold]
+rmc-announcement-ares-online = [color=#CECECE][font size=16][bold]АРЕС Онлайн[/bold][/font][/color][color=red][font size=16][bold]
     
     { $message }[/bold][/font][/color]
 rmc-announcement-ares-map = [color=#CECECE][font size=16][bold]КОПЗ Альмайер[/bold][/font][/color][color=red][font size=16][bold]

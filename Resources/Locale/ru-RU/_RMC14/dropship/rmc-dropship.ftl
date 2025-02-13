@@ -1,74 +1,87 @@
-rmc-dropship-pre-flight-fueling = The shuttle is still undergoing pre-flight fueling and cannot depart yet. Please wait another { $minutes } minutes before trying again.
-rmc-dropship-pre-hijack = This terminal won't be operational for another { $minutes } minutes.
-rmc-dropship-weapons-title = Weapons Console
+rmc-dropship-pre-flight-fueling =
+    Десантный корабль всё ещё проходит предполётную дозаправку и пока не может взлететь. Пожалуйста, подождите ещё { $minutes } { $minutes ->
+        [one] минуту
+        [few] минуты
+       *[other] минут
+    }, и повторите попытку.
+rmc-dropship-pre-hijack = Этот терминал не будет работать ещё { $minutes } { $minutes ->
+        [one] минуту
+        [few] минуты
+       *[other] минут
+    }.
+rmc-dropship-weapons-title = Консоль вооружения
 rmc-dropship-weapons-main-screen-text =
-    U.N.M.C.
-    Dropship Weapons Control System
+    К.К.М.П.
+    Система управления оружием корабля
     V 0.1
 rmc-dropship-weapons-weapon-selected =
     { $weapon }
-    No ammo
+    Нет снарядов
 rmc-dropship-weapons-weapon-selected-ammo =
     { $weapon }
     { $ammo }
-    Ammo { $rounds } / { $maxRounds }
+    Снаряды: { $rounds } / { $maxRounds }
 rmc-dropship-weapons-target-strike =
-    Target Acquisition
+    Захват цели
     
-    Strike mode: { $mode }
+    Режим удара: { $mode }
     
-    Strike configuration { $weapon }
+    Конфиг. удара: { $weapon }
     
-    Target selected: { $target }
+    Выбранная цель: { $target }
     
-    Offset { $xOffset },{ $yOffset }
+    Смещение { $xOffset },{ $yOffset }
 
-#  Attack Vector {$vector}
-
-
-#  Offset 0,0
+#  Вектор атаки {$vector}
 
 
-#  Guidance computer INCOMPLETE
+#  Смещение 0,0
+
+
+#  Компьютер наведения НЕИСПРАВЕН
 
 rmc-dropship-weapons-equip-weapon-ammo =
     { $weapon }
-    { $rounds } rounds
-rmc-dropship-weapons-equip = EQUIP
-rmc-dropship-weapons-fire-mission = F-MISS
-rmc-dropship-weapons-target = TARGET
-rmc-dropship-weapons-maps = MAPS
-rmc-dropship-weapons-cams = CAMS
-rmc-dropship-weapons-cancel = CANCEL
-rmc-dropship-weapons-exit = EXIT
+    { $rounds } { $rounds ->
+        [one] снаряд
+        [few] снаряда
+       *[other] снарядов
+    }
+rmc-dropship-weapons-equip = СНАРЯЖ
+rmc-dropship-weapons-fire-mission = ОГН-ЗАД
+rmc-dropship-weapons-target = ЦЕЛЬ
+rmc-dropship-weapons-maps = КАРТА
+rmc-dropship-weapons-cams = КАМЕРЫ
+rmc-dropship-weapons-cancel = ОТМЕНА
+rmc-dropship-weapons-exit = ВЫХОД
 rmc-dropship-weapons-offset-calibration =
-    Camera
-    Offset
-rmc-dropship-weapons-offset-calibration-does-not-affect-direct-bombardment = Does not affect direct bombardment!
-rmc-dropship-weapons-fire = FIRE
-rmc-dropship-weapons-strike = STRIKE
-rmc-dropship-weapons-vector = VECTOR
-rmc-dropship-weapons-night-vision-on = NV-ON
-rmc-dropship-weapons-night-vision-off = NV-OFF
-rmc-dropship-weapons-weapon = WEAPON
+    Смещен.
+    Камеры
+rmc-dropship-weapons-offset-calibration-does-not-affect-direct-bombardment = Не влияет на прямой обстрел!
+rmc-dropship-weapons-fire = ОГОНЬ
+rmc-dropship-weapons-strike = УДАР
+rmc-dropship-weapons-vector = ВЕКТОР
+rmc-dropship-weapons-night-vision-on = НВ-ВКЛ
+rmc-dropship-weapons-night-vision-off = НВ-ВЫКЛ
+rmc-dropship-weapons-weapon = ОРУДИЕ
 rmc-dropship-weapons-previous = ^
 rmc-dropship-weapons-next = v
-rmc-dropship-weapons-fire-no-weapon = No weapon selected.
-rmc-dropship-weapons-fire-not-flying = Dropships can only fire fire while in flight.
-rmc-dropship-weapons-fire-not-skilled = You don't have the training to fire this weapon!
-rmc-dropship-weapons-fire-no-ammo = { $weapon } has no ammo.
-rmc-dropship-weapons-fire-cooldown = { $weapon } just fired, wait for it to cool down.
-rmc-dropship-weapons-point-gun = It has a { $weapon } loaded.
-rmc-dropship-weapons-point-ammo = It has a { $ammo } loaded.
-rmc-dropship-weapons-rounds-left = It has { $current } out of { $max } rounds left.
-rmc-dropship-utility-activate-not-flying = Utility Systems can only activate while in flight.
-rmc-dropship-utility-not-flyby = { $utility } can only be used during flyby.
-rmc-dropship-utility-not-skilled = You don't have the training to use this system!
-rmc-dropship-utility-cooldown = { $utility } was just used, you need to wait a bit before using it again.
-rmc-dropship-flyby-no-skill = You don't have the skill to perform a flyby.
-rmc-dropship-fabricator-title = Part Fabricator
-rmc-dropship-fabricator-points = Points: { $points }
-rmc-dropship-fabricator-equipment = [bold]Equipment[/bold]
-rmc-dropship-fabricator-ammo = [bold]Ammo[/bold]
-rmc-dropship-fabricator-fabricate = Fabricate ({ $cost })
-rmc-dropship-fabricator-busy = The dropship part fabricator is busy. Please wait for completion of previous operation.
+rmc-dropship-weapons-fire-no-weapon = Орудие не выбрано.
+rmc-dropship-weapons-fire-not-flying = Десантные корабли могут вести огонь только в полете.
+rmc-dropship-weapons-fire-not-skilled = У вас нет подготовки, чтобы стрелять из этого орудия!
+rmc-dropship-weapons-fire-no-ammo = У { $weapon } закончился боезапас.
+rmc-dropship-weapons-fire-cooldown = { $weapon } только что выстрелило, подождите, пока оно остынет.
+rmc-dropship-weapons-point-gun = В него установлено { $weapon }.
+rmc-dropship-weapons-point-ammo = В него заряжен { $ammo }.
+rmc-dropship-weapons-rounds-left = В нём { $current } из { $max } снарядов.
+rmc-dropship-utility-activate-not-flying = Вспомогательные системы могут быть активированы только в полете.
+rmc-dropship-utility-not-flyby = { $utility } может быть использовано только во время пролёта.
+rmc-dropship-utility-not-skilled =  У вас нет подготовки, чтобы использовать эту систему!
+rmc-dropship-utility-cooldown = { $utility } только что был использован, нужно немного подождать, прежде чем использовать его снова.
+rmc-dropship-flyby-no-skill = У вас нет подготовки, чтобы выполнить пролёт.
+rmc-dropship-fabricator-title = Фабрикатор частей
+rmc-dropship-fabricator-points = Очки: { $points }
+rmc-dropship-fabricator-equipment = [bold]Снаряжение[/bold]
+rmc-dropship-fabricator-ammo = [bold]Боеприпасы[/bold]
+rmc-dropship-fabricator-fabricate = Создать ({ $cost })
+rmc-dropship-fabricator-busy = Фабрикатор запчастей десантных кораблей занят. Пожалуйста, дождитесь завершения предыдущей операции.

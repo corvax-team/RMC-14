@@ -1,7 +1,7 @@
-command-description-mutiny-end = Removes mutineer status of all mutineers immediately. Reports results on console.
-command-description-mutiny-ismutineer = Returns Yes if the entity is a mutineer, No if otherwise.
-command-description-mutiny-list = Lists all current mutineers.
-command-description-mutiny-makemutineer = Makes an entity a mutineer. Note that the icon is only rendered on marines.
-command-description-mutiny-removemutineer = Makes an entity no longer a mutineer.
-mutineer-status-added = You have been made a mutineer by a Game Admin. You may now participate in the ongoing mutiny.
-mutineer-status-removed = You are no longer a mutineer and should not participate in an mutiny activity anymore.
+command-description-mutiny-end = Немедленно снимает статус мятежника со всех мятежников. Сообщает о результатах на консоль.
+command-description-mutiny-ismutineer = Возвращает Yes, если сущность является мутинером, No - в обратном случае.
+command-description-mutiny-list = Выводит список всех текущих мятежников.
+command-description-mutiny-makemutineer = Сделать сущность мятежником. Обратите внимание, что иконка отображается только на морпехах.
+command-description-mutiny-removemutineer = Делает сущность не мятежником.
+mutineer-status-added = Вы получили статус мятежника от игрового администратора. Теперь вы можете участвовать в текущем мятеже.
+mutineer-status-removed = Вы больше не являетесь мятежником и не должны участвовать в мятежной активности.

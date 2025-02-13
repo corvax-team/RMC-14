@@ -1,2 +1,2 @@
-markings-category-Undershirt = Undershirt
-markings-category-Underwear = Underwear
+markings-category-Undershirt = Нижняя одежда
+markings-category-Underwear = Нижнее бельё

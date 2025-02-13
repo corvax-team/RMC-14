@@ -1,1 +1,1 @@
-rmc-power-usage-display-defib = It has [color=yellow]{ $uses }[/color] out of [color=yellow]{ $maxuses }[/color] uses left in its internal battery.
+rmc-power-usage-display-defib = У него осталось [color=yellow]{ $uses }[/color] из [color=yellow]{ $maxuses }[/color] зарядов внутренней батареи.

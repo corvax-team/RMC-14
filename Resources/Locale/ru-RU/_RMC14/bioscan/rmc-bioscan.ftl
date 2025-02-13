@@ -1,4 +1,4 @@
-rmc-bioscan-ares-announcement = [color=white][font size=16][bold]ARES v3.2 Статус биосканирования[/bold][/font][/color][color=red][font size=14][bold]
+rmc-bioscan-ares-announcement = [color=white][font size=16][bold]АРЕС v3.2 Статус биосканирования[/bold][/font][/color][color=red][font size=14][bold]
     { $message }[/bold][/font][/color]
 rmc-bioscan-ares =
     Биосканирование завершено.

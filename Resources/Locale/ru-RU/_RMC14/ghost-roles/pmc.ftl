@@ -1,5 +1,5 @@
-rmc-ghost-role-information-pmc-standard-name = Weston-Yamada PMC (Standard)
+rmc-ghost-role-information-pmc-standard-name = Оператор ЧВК Вестон-Ямада (Стандарт)
 rmc-ghost-role-information-pmc-standard-description =
-    Ensure no damage is incurred against Weston-Yamada. Make sure the Corporate Liaison is safe.
-    Deny the Weston-Yamada's involvement and do not trust the UNMC forces.
-rmc-ghost-role-information-pmc-leader-name = Weston-Yamada PMC (Leader)
+    Проследите за тем, чтобы Вестон-Ямада не понесла убытков. Обеспечьте безопасность корпоративного связного.
+    Отрицайте причастность Вестон-Ямада и не доверяйте силам ККМП ОПЗ.
+rmc-ghost-role-information-pmc-leader-name = Оператор ЧВК Вестон-Ямада (Лидер)
