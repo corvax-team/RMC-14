@@ -11,7 +11,10 @@ lobbyduration = 180
 role_timers = false
 round_end_pvs_overrides = false
 defaultpreset = "CMDistressSignal"
+fallbackenabled = false
 fallbackpreset = "CMDistressSignal"
+round_end_sound_collection = "CMRoundEnd"
+contraband_examine = false
 
 [ghost]
 kill_crit = false
@@ -34,6 +37,7 @@ new_player_threshold = 600
 space_wind = false
 monstermos_rip_tiles = false
 grid_impulse = false
+max_process_time = 1
 
 [ic]
 flavor_text = true
@@ -78,5 +82,11 @@ grid_splitting = false
 [auth]
 mode = 1
 
+[explosion]
+can_create_vacuum = false
+
 [procgen]
 preload = false
+
+[build]
+engine_version = "240.1.3-source-gen-debug" #and remember to remove it next update
