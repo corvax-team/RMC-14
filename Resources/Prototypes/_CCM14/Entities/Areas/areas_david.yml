@@ -22,7 +22,8 @@
   components:
   - type: Area
     minimapColor: '#2D3FA2EE'
-    
+  - type: IntelRescueSurvivorArea
+
 # Инженеры
 - type: entity
   parent: CCMAreaDavid
@@ -36,7 +37,7 @@
     hijackEvacuationArea: true
     hijackEvacuationWeight: 1
     hijackEvacuationType: Add
-
+  - type: IntelRescueSurvivorArea
     
 # Что-то
 - type: entity
@@ -54,13 +55,16 @@
   components:
   - type: Sprite
     state: brig
-    
+  - type: IntelRescueSurvivorArea
+
 # Коридоры
 - type: entity
   parent: CCMAreaDavid
   id: CCMAreaDavidHallways
   name: Коридоры
-  
+  components:
+  - type: IntelRescueSurvivorArea
+
 # Техи
 - type: entity
   parent: CCMAreaDavid
@@ -69,6 +73,7 @@
   components:
   - type: Sprite
     state: lowerhull
+  - type: IntelRescueSurvivorArea
 
 # Сервис
 - type: entity
@@ -80,6 +85,7 @@
     state: livingspace
   - type: Area
     minimapColor: '#6C6767D8'
+  - type: IntelRescueSurvivorArea
 
 # Мед
 - type: entity
@@ -91,12 +97,15 @@
     state: medical
   - type: Area
     minimapColor: '#3DBF75EE'
+  - type: IntelRescueSurvivorArea
 
 # Отряды (в т.ч. поставки)
 - type: entity
   abstract: true
   parent: CCMAreaDavid
   id: CCMAreaDavidSquads
+  components:
+  - type: IntelRescueSurvivorArea
   
 - type: entity
   parent: CCMAreaDavidSquads
