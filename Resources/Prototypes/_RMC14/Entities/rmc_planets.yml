@@ -1,30 +1,30 @@
 ﻿###-----------------------------------------------------CCM14-----------------------------------------------------###
-#- type: entity
-#  id: RMCPlanetLV624
-#  name: LV-624
-#  components:
-#  - type: RMCPlanetMapPrototype
-#    map: /Maps/_RMC14/lv624.yml
-#    camouflage: Jungle
-#    announcement: "An automated distress signal has been received from the archaeological site of Lazarus Landing, on the border world of LV-624. A response team from the UNS Almayer will be dispatched shortly to investigate."
+- type: entity
+  id: RMCPlanetLV624
+  name: LV-624
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/lv624.yml
+    camouflage: Jungle
+    announcement: "An automated distress signal has been received from the archaeological site of Lazarus Landing, on the border world of LV-624. A response team from the UNS Almayer will be dispatched shortly to investigate."
 
-#- type: entity
-#  id: RMCPlanetSolaris
-#  name: Solaris Ridge
-#  components:
-#  - type: RMCPlanetMapPrototype
-#    map: /Maps/_RMC14/solaris.yml
-#    camouflage: Desert
-#    announcement: "Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada."
+- type: entity
+  id: RMCPlanetSolaris
+  name: Solaris Ridge
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/solaris.yml
+    camouflage: Desert
+    announcement: "Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada."
 
-#- type: entity
-#  id: RMCPlanetShiva
-#  name: Shivas Snowball
-#  components:
-#  - type: RMCPlanetMapPrototype
-#    map: /Maps/_RMC14/shiva.yml
-#    camouflage: Snow
-#    announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+- type: entity
+  id: RMCPlanetShiva
+  name: Shivas Snowball
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/shiva.yml
+    camouflage: Snow
+    announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
 
 #- type: entity
 #  id: RMCPlanetFiorina
