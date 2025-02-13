@@ -41,6 +41,16 @@ enable_suicide = false
 
 [shuttle]
 auto_call_time = 0
+arrivals_planet = false
+arrivals = false
+grid_fill = false
+preload_grids = false
+startup_time = 10
+travel_time = 100
+arrival_time = 10
+cooldown = 120
+mass_limit = -1
+emergency = false
 
 [discord]
 rich_main_icon_id = "corvax"
@@ -67,3 +77,6 @@ grid_splitting = false
 
 [auth]
 mode = 1
+
+[procgen]
+preload = false
