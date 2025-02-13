@@ -34,9 +34,6 @@
     state: engineering
   - type: Area
     minimapColor: '#C19504E7'
-    hijackEvacuationArea: true
-    hijackEvacuationWeight: 1
-    hijackEvacuationType: Add
   - type: IntelRescueSurvivorArea
     
 # Что-то
@@ -153,6 +150,10 @@
     state: engineering
   - type: Area
     minimapColor: '#C19504E7'
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 1
+    hijackEvacuationType: Add
+  - type: IntelRescueSurvivorArea
 
 - type: entity
   parent: CCMAreaDavid
@@ -163,6 +164,10 @@
     state: engineering
   - type: Area
     minimapColor: '#C19504E7'
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 1
+    hijackEvacuationType: Add
+  - type: IntelRescueSurvivorArea
 
 - type: entity
   parent: CCMAreaDavid
@@ -173,6 +178,10 @@
     state: engineering
   - type: Area
     minimapColor: '#C19504E7'
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 1
+    hijackEvacuationType: Add
+  - type: IntelRescueSurvivorArea
 
 - type: entity
   parent: CCMAreaDavid
@@ -183,7 +192,11 @@
     state: engineering
   - type: Area
     minimapColor: '#C19504E7'
-  
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 1
+    hijackEvacuationType: Add
+  - type: IntelRescueSurvivorArea
+
 - type: entity
   parent: CCMAreaDavid
   id: CCMAreaDavidEngineeringFusionReactor
@@ -196,3 +209,4 @@
     hijackEvacuationArea: true
     hijackEvacuationWeight: 1
     hijackEvacuationType: Add
+  - type: IntelRescueSurvivorArea
