@@ -118,7 +118,6 @@ ent-RMCAreaSavannahAtmosPort = Port Atmos
 ent-RMCAreaSavannahPumpStarboardBow = Starboard Bow Pump
     .desc = { ent-RMCAreaSavannahEngineering.desc }
 ent-RMCAreaSavannahPumpStarboard Quarter = Starboard Quarter Pump
-
   .desc = { ent-RMCAreaSavannahEngineering.desc }
 ent-RMCAreaSavannahPumpPortBow = Port Bow Pump
     .desc = { ent-RMCAreaSavannahEngineering.desc }
