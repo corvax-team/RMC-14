@@ -31,7 +31,7 @@ namespace Content.Shared.Humanoid
                         ("first", GetFirstName(speciesProto, gender)));
                 case SpeciesNaming.TheFirstofLast:
                     return Loc.GetString("namepreset-thefirstoflast",
-                        ("first", GetFirstName(speciesProto, gender)), ("last", GetLastName(speciesProto, gender))); // Corvax-LastnameGender
+                        ("first", GetFirstName(speciesProto, gender)), ("last", GetLastName(speciesProto, gender))); // CCM-Localization lastname gender
                 case SpeciesNaming.FirstDashFirst:
                     return Loc.GetString("namepreset-firstdashfirst",
                         ("first1", GetFirstName(speciesProto, gender)), ("first2", GetFirstName(speciesProto, gender)));
@@ -41,7 +41,7 @@ namespace Content.Shared.Humanoid
                 case SpeciesNaming.FirstLast:
                 default:
                     return Loc.GetString("namepreset-firstlast",
-                        ("first", GetFirstName(speciesProto, gender)), ("last", GetLastName(speciesProto, gender))); // Corvax-LastnameGender
+                        ("first", GetFirstName(speciesProto, gender)), ("last", GetLastName(speciesProto, gender))); // CCM-Localization lastname gender
             }
         }
 
@@ -60,8 +60,8 @@ namespace Content.Shared.Humanoid
                         return _random.Pick(_prototypeManager.Index<DatasetPrototype>(speciesProto.FemaleFirstNames).Values);
             }
         }
-
-        // Corvax-LastnameGender-Start: Added custom gender split logic
+        
+        // CCM-Localization-Start lastname gender
         public string GetLastName(SpeciesPrototype speciesProto, Gender? gender = null)
         {
             switch (gender)
@@ -77,6 +77,6 @@ namespace Content.Shared.Humanoid
                         return _random.Pick(_prototypeManager.Index<DatasetPrototype>(speciesProto.FemaleLastNames).Values);
             }
         }
-        // Corvax-LastnameGender-End
+        // CCM-Localization-End
     }
 }
