@@ -40,123 +40,123 @@
 
 - type: guideEntry
   parent: RMC
-  id: CСMGrifer
+  id: CCMGrifer
   name: cm-guide-entry-rules-Rule 1.
   priority: 5
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CСMGrifer.xml"
+  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMGrifer.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CСMKilled
+  id: CCMKilled
   name: cm-guide-entry-rules-Rule 2.
   priority: 6
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CСMKilled.xml"
+  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMKilled.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CСMAtmosphere
+  id: CCMAtmosphere
   name: cm-guide-entry-rules-Rule 3.
   priority: 7
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CСMAtmosphere.xml"
+  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMAtmosphere.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CСMMetaGame
+  id: CCMMetaGame
   name: cm-guide-entry-rules-Rule 3.1
   priority: 8
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CСMMetaGame.xml" 
+  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMMetaGame.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CСMMetaInformation
+  id: CCMMetaInformation
   name: cm-guide-entry-rules-Rule 3.2
   priority: 9
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CСMMetaInformation.xml"
+  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMMetaInformation.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CСMIC-OOC
+  id: CCMIC-OOC
   name: cm-guide-entry-rules-Rule 3.3
   priority: 10
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CСMIC-OOC.xml"
+  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMIC-OOC.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CСMMultiAccount
+  id: CCMMultiAccount
   name: cm-guide-entry-rules-Rule 3.4
   priority: 11
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CСMMultiAccount.xml"
+  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMMultiAccount.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CСMExitingRole
+  id: CCMExitingRole
   name: cm-guide-entry-rules-Rule 3.5
   priority: 12
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CСMExitingRole.xml"
+  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMExitingRole.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CСMIlliteracy
+  id: CCMIlliteracy
   name: cm-guide-entry-rules-Rule 3.6
   priority: 13
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CСMIlliteracy.xml"
+  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMIlliteracy.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CСMRespectfulEnvironment
+  id: CCMRespectfulEnvironment
   name: cm-guide-entry-rules-Rule 3.7
   priority: 14
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CСMRespectfulEnvironment.xml"
+  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMRespectfulEnvironment.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CСMEndRound
+  id: CCMEndRound
   name: cm-guide-entry-rules-Rule 3.8
   priority: 15
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CСMEndRound.xml"
+  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMEndRound.xml"
   
 - type: guideEntry
   parent: RMC
-  id: CСMCharacterLogic
+  id: CCMCharacterLogic
   name: cm-guide-entry-rules-Rule 4.
   priority: 16
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CСMCharacterLogic.xml"
+  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMCharacterLogic.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CСMResponsiblePlaying
+  id: CCMResponsiblePlaying
   name: cm-guide-entry-rules-Rule 5.
   priority: 17
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CСMResponsiblePlaying.xml"
+  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMResponsiblePlaying.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CСMERP
+  id: CCMERP
   name: cm-guide-entry-rules-Rule 6.
   priority: 18
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CСMERP.xml"
+  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMERP.xml"
 
 - type: guideEntry
   parent: RMC
-  id: CСMFoulPlay
+  id: CCMFoulPlay
   name: cm-guide-entry-rules-Rule 7.0
   priority: 19
   ruleEntry: true
-  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CСMFoulPlay.xml"
+  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMFoulPlay.xml"
 
 - type: guideEntry
   parent: RMC
