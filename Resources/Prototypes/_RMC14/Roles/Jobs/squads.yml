@@ -48,7 +48,7 @@
   name: Charlie
   components:
   - type: SquadTeam
-    roundStart: true
+#    roundStart: true #CCM
     color: "#C864C8"
     accessLevels:
     - CMAccessCharlie
@@ -62,7 +62,7 @@
   name: Delta
   components:
   - type: SquadTeam
-    roundStart: true
+#    roundStart: true #CCM
     color: "#4148C8"
     accessLevels:
     - CMAccessDelta

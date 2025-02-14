@@ -1,7 +1,7 @@
 - type: entity
   parent: CMDoubleDoorBase
-  id: CCMDoubleDoorCargoSolid
-  suffix: Cargo, Solid
+  id: CCMDoubleDoorCargoSolidLocked
+  suffix: Cargo, Solid, Locked
   components:
   - type: Sprite
     sprite: _CCM14/Structures/Doors/Airlocks/Double/cargo_solid.rsi
@@ -13,8 +13,8 @@
 
 - type: entity
   parent: CMDoubleDoorBase
-  id: CCMDoubleDoorCargoGlass
-  suffix: Cargo, Glass
+  id: CCMDoubleDoorCargoGlassLocked
+  suffix: Cargo, Glass, Locked
   components:
   - type: Sprite
     sprite: _CCM14/Structures/Doors/Airlocks/Double/cargo_glass.rsi

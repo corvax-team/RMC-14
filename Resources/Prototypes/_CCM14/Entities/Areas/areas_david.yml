@@ -18,7 +18,7 @@
 - type: entity
   parent: CCMAreaDavid
   id: CCMAreaDavidCommand
-  name: Командование
+  name: Command
   components:
   - type: Area
     minimapColor: '#2D3FA2EE'
@@ -28,7 +28,7 @@
 - type: entity
   parent: CCMAreaDavid
   id: CCMAreaDavidEngineering
-  name: Инженерия
+  name: Engineering
   components:
   - type: Sprite
     state: engineering
@@ -48,7 +48,7 @@
 - type: entity
   parent: CCMAreaDavidShipboard
   id: CCMAreaDavidBrid
-  name: Бриг
+  name: Brig
   components:
   - type: Sprite
     state: brig
@@ -58,7 +58,7 @@
 - type: entity
   parent: CCMAreaDavid
   id: CCMAreaDavidHallways
-  name: Коридоры
+  name: Corridors
   components:
   - type: IntelRescueSurvivorArea
 
@@ -66,7 +66,7 @@
 - type: entity
   parent: CCMAreaDavid
   id: CCMAreaDavidMaint
-  name: Техи
+  name: Technical rooms
   components:
   - type: Sprite
     state: lowerhull
@@ -76,7 +76,7 @@
 - type: entity
   parent: CCMAreaDavid
   id: CCMAreaDavidLiving
-  name: Сервис
+  name: Service
   components:
   - type: Sprite
     state: livingspace
@@ -88,7 +88,7 @@
 - type: entity
   parent: CCMAreaDavid
   id: CCMAreaDavidEvac
-  name: Эвакуация
+  name: Evacuation
   components:
   - type: Sprite
     state: livingspace
@@ -100,7 +100,7 @@
 - type: entity
   parent: CCMAreaDavid
   id: CCMAreaDavidMedical
-  name: Медицинский отдел
+  name: Medical Department
   components:
   - type: Sprite
     state: medical
@@ -119,7 +119,7 @@
 - type: entity
   parent: CCMAreaDavidSquads
   id: CCMAreaDavidSquadsAlpha
-  name: Отряд альфа
+  name: Alpha squad
   components:
   - type: Sprite
     state: alpha
@@ -127,7 +127,7 @@
 - type: entity
   parent: CCMAreaDavidSquads
   id: CCMAreaDavidSquadsBravo
-  name: Отряд браво
+  name: Bravo squad
   components:
   - type: Sprite
     state: bravo
@@ -135,7 +135,7 @@
 - type: entity
   parent: CCMAreaDavidSquads
   id: CCMAreaDavudSquadsReq
-  name: Поставки
+  name: Cargo
   components:
   - type: Sprite
     state: req

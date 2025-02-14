@@ -2,7 +2,7 @@
   id: DefaultMapPool
   maps:
   # - Savannah # Ship for downstreams and events
-  - David #CCM
+  - Almayer
 
 - type: gameMapPool
   id: DefaultMapPoolAlmayer

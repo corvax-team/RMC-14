@@ -1,5 +1,4 @@
-﻿###-----------------------------------------------------CCM14-----------------------------------------------------###
-- type: entity
+﻿- type: entity
   id: RMCPlanetLV624
   name: LV-624
   components:
@@ -26,6 +25,7 @@
     camouflage: Snow
     announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
 
+###-----------------------------------------------------CCM14-----------------------------------------------------###
 #- type: entity
 #  id: RMCPlanetFiorina
 #  name: Fiorina Science Annex
@@ -80,42 +80,4 @@
 #    map: /Maps/_RMC14/chances.yml
 #    camouflage: Classic
 #    announcement: "Pan-Pan. This is the commanding officer of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
-
-###-----------------------------------------------------CCM14-----------------------------------------------------###
-
-#- type: entity
-#  id: RMCPlanetlv624
-#  name: LV-624
-#  components:
-#  - type: RMCPlanetMapPrototype
-#    map: /Maps/_CCM14/Planets/lv624.yml
-#    camouflage: Classic
-#    announcement: "Pan-Pan. This is the commanding officer of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-624. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
-
-- type: entity
-  id: RMCPlanetChancesPolyphemus
-  name: Polyphemus
-  components:
-  - type: RMCPlanetMapPrototype
-    map: /Maps/_CCM14/Planets/polyphemus.yml
-    camouflage: Classic
-    announcement: "Pan-Pan. This is the commanding officer of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet Polyphemus. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
-
-- type: entity
-  id: RMCPlanetChancesNova
-  name: Nova Outpost
-  components:
-  - type: RMCPlanetMapPrototype
-    map: /Maps/_CCM14/Planets/nova.yml
-    camouflage: Classic
-    announcement: "Pan-Pan. This is the commanding officer of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet Nova Outpost. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
-
-- type: entity
-  id: RMCPlanetChancesWesternForest
-  name: Western forest
-  components:
-  - type: RMCPlanetMapPrototype
-    map: /Maps/_CCM14/Planets/westernforest.yml
-    camouflage: Classic
-    announcement: "Pan-Pan. This is the commanding officer of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet Western forest. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
 ###-----------------------------------------------------CCM14-----------------------------------------------------###

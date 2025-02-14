@@ -1,7 +1,5 @@
-###---------------------------------------CCM14-EDIT------------------------------------------###
-defaultWindowTitle: Corvax - Marine Corps 14
+defaultWindowTitle: Corvax - Colonial Marines
 windowIconSet: /Textures/Logo/icon
-splashLogo: /Textures/Logo/load_logo.png
-###---------------------------------------CCM14-EDIT------------------------------------------###
+splashLogo: /Textures/_CCM14/Logo/load_logo.png
 
 # PJB PLEASE

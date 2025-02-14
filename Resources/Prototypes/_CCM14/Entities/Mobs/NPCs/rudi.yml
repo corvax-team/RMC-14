@@ -1,4 +1,4 @@
-# CCM TODO different customization (like sunglassess, masks wearing (like hamlet has)
+# TODO CCM different customization (like sunglassess, masks wearing (like hamlet has)
 - type: entity
   name: Roudy
   parent: SimpleMobBase
@@ -54,4 +54,4 @@
       task: RuminantCompound
   - type: Body
     prototype: AnimalHemocyanin
-#  - type: XenoRest # CCM TODO probably
+#  - type: XenoRest # TODO CCM probably

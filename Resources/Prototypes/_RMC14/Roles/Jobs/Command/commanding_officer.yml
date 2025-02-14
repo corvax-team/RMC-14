@@ -51,6 +51,7 @@
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: cm-job-supervisors-marine-high-command
+#  whitelisted: true #CCM
   accessGroups:
   - ShipMasterAccess
   minimapIcon:

@@ -1,15 +1,9 @@
 - type: entity
-  parent: BaseItem
+  parent: CMEntrenchingTool
   id: CCMEntrenchingTool
   name: entrenching tool
   description: Used to dig holes and bash heads in. Folds in to fit in small spaces.
   components:
-  - type: Tag
-    tags:
-    - Shovel
-  - type: ItemToggle
-  - type: ItemToggleSize
-    activatedSize: Large
   - type: Sprite
     sprite: _CCM14/Objects/Tools/etool.rsi
     layers:
@@ -20,11 +14,3 @@
     - state: etool_overlay
       map: [ "enum.EntrenchingToolComponentVisualLayers.Dirt" ]
       visible: false
-  - type: Item
-    size: Small
-    sprite: _RMC14/Objects/Tools/etool.rsi
-    heldPrefix: etool
-  - type: UseDelay
-    delay: 0.25
-  - type: Appearance
-  - type: EntrenchingTool

@@ -20533,7 +20533,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 48.5,-9.5
       parent: 1
-- proto: CCMDoubleDoorCargoSolid
+- proto: CCMDoubleDoorCargoSolidLocked
   entities:
   - uid: 2177
     components:

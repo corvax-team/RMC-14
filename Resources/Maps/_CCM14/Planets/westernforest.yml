@@ -47630,7 +47630,7 @@ entities:
     - type: Transform
       pos: 44.5,30.5
       parent: 1
-- proto: CCMDoubleDoorCargoSolid
+- proto: CCMDoubleDoorCargoSolidLocked
   entities:
   - uid: 1113
     components:
