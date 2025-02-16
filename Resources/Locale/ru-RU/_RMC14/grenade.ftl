@@ -1,2 +1,2 @@
-cm-grenade-primed-user = You prime a { $used }!
-cm-grenade-primed-others = { $user } primes a { $used }!
+﻿cm-grenade-primed-user = Вы активируете { $used }!
+cm-grenade-primed-others = { $user } активирует { $used }!

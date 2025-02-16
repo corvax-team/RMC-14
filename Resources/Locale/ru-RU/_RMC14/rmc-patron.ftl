@@ -1,1 +1,1 @@
-rmc-patron-named-item = '{ $name }' { $baseName }
+﻿rmc-patron-named-item = '{$name}' {$baseName}

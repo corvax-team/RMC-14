@@ -1,20 +1,24 @@
-chat-radio-marine-highcommand = Marine High Command
-chat-radio-marine-common = Almayer
-chat-radio-marine-command = Command
-chat-radio-marine-medical = Medical
-chat-radio-marine-engineer = Engineering
-chat-radio-marine-military-police = Military Police
-chat-radio-marine-requisition = Requisition
-chat-radio-marine-intel = Intelligence
-chat-radio-marine-jtac = JTAC
-chat-radio-marine-alpha = Alpha
-chat-radio-marine-bravo = Bravo
-chat-radio-marine-charlie = Charlie
-chat-radio-marine-delta = Delta
-chat-radio-marine-echo = Echo
-chat-radio-marine-foxtrot = Foxtrot
-chat-radio-colony = Colony
-chat-radio-WY = We-Ya
-chat-radio-CMB = Colony Marshal Bureau
-chat-radio-provost = Provost
-chat-radio-hivemind = Hivemind
+chat-radio-marine-highcommand = Верховное командование ККМП
+
+chat-radio-marine-common = Альмайер
+chat-radio-marine-command = Команд
+chat-radio-marine-medical = Мед
+chat-radio-marine-engineer = Инж
+chat-radio-marine-military-police = Военпол
+chat-radio-marine-requisition = Снаб
+chat-radio-marine-intel = Разведка
+chat-radio-marine-jtac = ПАН
+
+chat-radio-marine-alpha = Альфа
+chat-radio-marine-bravo = Браво
+chat-radio-marine-charlie = Чарли
+chat-radio-marine-delta = Дельта
+chat-radio-marine-echo = Эхо
+chat-radio-marine-foxtrot = Фокстрот
+
+chat-radio-colony = Колония
+chat-radio-WY = Ве-Я
+chat-radio-CMB = Бюро колониальных маршаллов
+chat-radio-provost = Провост
+
+chat-radio-hivemind = Улей

@@ -1,16 +1,21 @@
-rmc-clothing-limit = You can't wear another one of those!
-rmc-dogtags-take = Retrieve Tag
-rmc-dogtags-already-taken = Someone's already taken { $target }'s information tag.
-rmc-dogtags-still-alive = You can't take a dogtag's information tag while its owner is alive.
-rmc-dogtags-read = It reads "{ $name } - { $assignment } - { $bloodtype }"
-rmc-dogtags-info-read-start =
-    There { $tags ->
-        [one] is one ID tag. It reads:
-       *[other] are { $tags } tags. They read:
-    }
+﻿rmc-clothing-limit = Вы не можете надеть ещё одну такую вещь!
+
+rmc-dogtags-take = Снять жетон
+rmc-dogtags-already-taken =  Кто-то уже снял информационный жетон { $target }.
+rmc-dogtags-still-alive = Вы не можете снять информационную половинку жетона, пока его владелец жив.
+
+rmc-dogtags-read = На нём написано "{ $name } - { $assignment } - { $bloodtype }"
+rmc-dogtags-info-read-start = Здесь {$tags ->
+    [one] один информационный жетон. На нём написано:
+    [few] { $tags } жетона. На них написано:
+    *[other] { $tags } жетонов. На них написано:
+}
+
 rmc-dogtags-info-read = { $number }. "{ $name } - { $assignment } - { $bloodtype }"
-rmc-dogtags-join = You join the tags together.
-rmc-dogtags-single-join = You join the two tags together.
-rmc-dogtags-unknown = unknown
-rmc-dogtags-info-joined-name = information dog tags
-rmc-dogtags-info-joined-desc = Fallen marines' information dog tags.
+
+rmc-dogtags-join = Вы объединяете жетоны.
+rmc-dogtags-single-join = Вы объединяете два жетона.
+
+rmc-dogtags-unknown = неизвестный
+rmc-dogtags-info-joined-name = информационные жетоны
+rmc-dogtags-info-joined-desc = Информационные жетоны павших морпехов.

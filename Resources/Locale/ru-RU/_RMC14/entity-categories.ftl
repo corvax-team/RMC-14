@@ -1,4 +1,4 @@
-rmc-entity-category-name-distress-signal-names = Distress Signal Names
-rmc-entity-category-name-surgeries = Surgeries
-rmc-entity-category-name-surgery-steps = Surgery Steps
-rmc-entity-category-name-squads = Squads
+﻿rmc-entity-category-name-distress-signal-names = Названия сигналов бедствия
+rmc-entity-category-name-surgeries = Операции
+rmc-entity-category-name-surgery-steps = Этапы операции
+rmc-entity-category-name-squads = Отряды

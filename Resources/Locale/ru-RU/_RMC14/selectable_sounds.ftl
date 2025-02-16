@@ -1,4 +1,5 @@
-rmc-sound-select = Changed sound to: { $sound }
-rmc-sound-select-whistle = Trench Whistle
-rmc-sound-select-crowbar = Crowbar
-rmc-sound-select-detector = Motion Detector
+﻿rmc-sound-select = Изменить звук на: { $sound }
+
+rmc-sound-select-whistle = Окопный свисток
+rmc-sound-select-crowbar = Лом
+rmc-sound-select-detector = Детектор движения

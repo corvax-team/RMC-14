@@ -1,1 +1,1 @@
-rmc-welder-component-danger = That was close! However, you realized you had the welder on and prevented disaster.
+﻿rmc-welder-component-danger = Чуть не случилось страшное! Однако вы успели сообразить, что сварочный аппарат включен, и катастрофа миновала.

@@ -1,1 +1,1 @@
-rmc-weed-killer-deploying = Dropship { $dropship } dispersing C10-W weedkiller due to potential biological infestation.
+﻿rmc-weed-killer-deploying = Десантный корабль { $dropship } распыляет гербицид C10-W из-за возможного биологического заражения.

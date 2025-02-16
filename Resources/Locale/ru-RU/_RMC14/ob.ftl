@@ -1,10 +1,9 @@
-rmc-ob-fuel-instructions =
-    Warhead Fuel Requirements:
-    { $requirements }
-rmc-ob-fuel-requirement = { $warhead }: { $fuel } Fuel blocks.
-rmc-ob-warning-one = The sky erupts into flames to the { $direction }!
-rmc-ob-warning-above-one = The sky erupts into flames right above you!
-rmc-ob-warning-two = The sky roars louder to the { $direction }!
-rmc-ob-warning-above-two = The sky roars louder right above you!
-rmc-ob-warning-three = OH GOD THE SKY WILL EXPLODE!!!
-rmc-ob-warning-above-three = YOU SHOULDN'T BE HERE!
+﻿rmc-ob-fuel-instructions = Потребность боеголовки в топливе:
+  { $requirements }
+rmc-ob-fuel-requirement = { $warhead }: { $fuel } топливных блоков.
+rmc-ob-warning-one = Небо вспыхивает огнём к { $direction } от вас!
+rmc-ob-warning-above-one = Небо над вами вспыхивает огнём!
+rmc-ob-warning-two = Небо ревет всё громче к { $direction } от вас!
+rmc-ob-warning-above-two = Небо над вами ревет всё громче!
+rmc-ob-warning-three = О БОЖЕ, НЕБО ВОТ-ВОТ ВЗОРВЁТСЯ!!!
+rmc-ob-warning-above-three = ВАМ НЕ СЛЕДУЕТ ЗДЕСЬ НАХОДИТЬСЯ!

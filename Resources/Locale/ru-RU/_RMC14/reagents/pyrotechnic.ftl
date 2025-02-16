@@ -1,2 +1,2 @@
-reagent-name-rmcphoron = Phoron
-reagent-desc-rmcphoron = A special form of metallic plasma that is not found on Earth. While phoron is highly flammable and extremely toxic, its high energy density makes it one of the best solid fuel alternatives. Liquid phoron is often used for research purposes and in the medical industry a catalyst to many advanced chemicals.
+reagent-name-rmcphoron = форон
+reagent-desc-rmcphoron = Особая форма металлической плазмы, которая не встречается на Земле. Хотя форон является легковоспламеняющимся и чрезвычайно токсичным веществом, его высокая плотность энергии делает форон одной из лучших альтернатив твёрдому топливу. Жидкий форон часто используется для исследовательских целей и в медицинской отрасли в качестве катализатора для многих продвинутых химикатов.
