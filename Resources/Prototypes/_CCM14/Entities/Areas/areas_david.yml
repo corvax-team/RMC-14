@@ -366,7 +366,7 @@
   - type: Area
     minimapColor: '#C19504E7'
     hijackEvacuationArea: true
-    hijackEvacuationWeight: 1
+    hijackEvacuationWeight: 0.1
     hijackEvacuationType: Add
   - type: IntelRescueSurvivorArea
 
@@ -380,7 +380,7 @@
   - type: Area
     minimapColor: '#C19504E7'
     hijackEvacuationArea: true
-    hijackEvacuationWeight: 1
+    hijackEvacuationWeight: 0.1
     hijackEvacuationType: Add
   - type: IntelRescueSurvivorArea
 
@@ -394,7 +394,7 @@
   - type: Area
     minimapColor: '#C19504E7'
     hijackEvacuationArea: true
-    hijackEvacuationWeight: 1
+    hijackEvacuationWeight: 0.1
     hijackEvacuationType: Add
   - type: IntelRescueSurvivorArea
 
@@ -408,7 +408,7 @@
   - type: Area
     minimapColor: '#C19504E7'
     hijackEvacuationArea: true
-    hijackEvacuationWeight: 1
+    hijackEvacuationWeight: 0.1
     hijackEvacuationType: Add
   - type: IntelRescueSurvivorArea
 
@@ -422,6 +422,6 @@
   - type: Area
     minimapColor: '#C19504E7'
     hijackEvacuationArea: true
-    hijackEvacuationWeight: 1
+    hijackEvacuationWeight: 0.2
     hijackEvacuationType: Add
   - type: IntelRescueSurvivorArea
