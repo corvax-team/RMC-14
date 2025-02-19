@@ -31,7 +31,7 @@ rmc-shoot-use-delay =
 rmc-shoot-harness-required = Нужна упряжь
 rmc-wear-smart-gun-required = Чтобы надеть их, вы должны быть оснащены смартганом.
 
-rmc-shoot-id-lock-unauthorized = Спусковой курок заблокирован. Неавторизованный пользователь.
+rmc-shoot-id-lock-unauthorized = Спусковой крючок заблокирован. Неавторизованный пользователь.
 rmc-id-lock-unauthorized = Действие запрещено. Неавторизованный пользователь.
 rmc-id-lock-authorization = Вы подняли { $gun }, зарегистрировав себя в качестве владельца.
 rmc-id-lock-authorization-combat = ( CAPITALIZE{$gun} ) регистрирует вас в качестве владельца.

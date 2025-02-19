@@ -1,2 +1,2 @@
-ent-CMSpawnPointCorrespondent =  точка появления корреспондент
+ent-CMSpawnPointCorrespondent = точка появления корреспондент
     .desc = { ent-CMSpawnPointJobBase.desc }
