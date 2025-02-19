@@ -1,2 +1,2 @@
-ent-CMSpawnPointMessTech = mess tech spawn point
+ent-CMSpawnPointMessTech = точка появления техник сервиса
     .desc = { ent-CMSpawnPointJobBase.desc }

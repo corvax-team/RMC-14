@@ -1,42 +1,42 @@
-ent-ActionXenoRest = Rest
-    .desc = Lie down to regenerate health more quickly while on weeds.
-ent-CMGuidebookActionXenoRest = Rest
-    .desc = Lie down to regenerate health more quickly while on weeds.
-ent-ActionXenoWatch = Watch Xenonid
+ent-ActionXenoRest = Отдыхать
+    .desc = Прилягте, чтобы восстановить здоровье быстрее, пока лежите на сорняках.
+ent-CMGuidebookActionXenoRest = Отдыхать
+    .desc = Прилягте, чтобы восстановить здоровье быстрее, пока лежите на сорняках.
+ent-ActionXenoWatch = Наблюдать за ксено
     .desc = { ent-ActionXenoBase.desc }
-ent-ActionXenoPheromones = Emit Pheromones (35)
-    .desc = Gives a buff to nearby xenonids. [color=cyan]Consumes 2.5 plasma per second.[/color]
-ent-ActionXenoHide = Hide
-    .desc = Hide under tables and other objects.
-ent-ActionXenoToggleCrest = Toggle Crest Defense
-    .desc = Increases your resistance to direct damage but slows you down. You count as one size bigger while you're crest is lowered.
-ent-ActionXenoFortify = Fortify
-    .desc = Become immobile and impassable to mobs, dramatically increasing your resistance to direct damage and explosions. Damage is further reduced from the direction you are facing. You can't be stunned by minor explosions. You count as two sizes bigger while fortified and still can attack structures or use tail slam.
-ent-ActionXenoFortifySteelcrest = Fortify
-    .desc = Become much slower, increasing your resistance to direct damage and explosions. Damage is greatly reduced from the direction you are facing. You count as two sizes bigger while fortified and still can attack strcutures or use tail slam, but your slashes do less damage.
-ent-ActionXenoResinWalker = Resin Walker (50)
-    .desc = Run faster on weeds. [color=cyan]Consumes 30 plasma per second.[/color]
-ent-ActionXenoZoom = Toggle Long-Range Sight
+ent-ActionXenoPheromones = Выделять феромоны (35)
+    .desc = Усиливает близлежащих ксенонидов. [color=cyan]Тратит 2,5 плазмы в секунду.[/color]
+ent-ActionXenoHide = Спрятаться
+    .desc = Прячьтесь под столами и другими объектами.
+ent-ActionXenoToggleCrest = Переключить защитный гребень
+    .desc = Повышает вашу сопротивляемость прямому урону, но замедляет вас. Пока ваш гребень опущен, вы считаетесь на один размер больше.
+ent-ActionXenoFortify = Укрепление
+    .desc = Станьте неподвижным и непроходимым для существ, очень сильно повысив свою сопротивляемость прямому урону и взрывам. Урон снижается в зависимости от направления, в которое вы смотрите. Лёгкие взрывы не могут вас оглушить. Используя Укрепление, вы считаетесь на два размера больше и по-прежнему можете атаковать постройки или использовать Удар хвостом.
+ent-ActionXenoFortifySteelcrest = Укрепление
+    .desc = Станьте сильно медленнее, сильно повысив свою сопротивляемость прямому урону и взрывам. Урон сильно снижается в зависимости от направления, в которое вы смотрите. Используя Укрепление, вы считаетесь на два размера больше и по-прежнему можете атаковать постройки или использовать Удар хвостом, но ваши удары когтями наносят меньше урона.
+ent-ActionXenoResinWalker = Смоляной ходок (50)
+    .desc = Бегайте быстрее по сорнякам. [color=cyan]Тратит 30 плазмы в секунду.[/color]
+ent-ActionXenoZoom = Переключить Дальнозоркость
     .desc = { ent-ActionXenoBase.desc }
-ent-ActionXenoWordQueen = Word of the Queen (50)
-    .desc = Sends a message to all members of your hive.
-ent-ActionXenoGrowOvipositor = Grow Ovipositor (700)
-    .desc = Become immobile and start laying eggs which will produce parasites. Has a 5 minute cooldown. [color=red]You must be in ovipositor mode for other xenonids to gain evolution points after round-start![/color]
-ent-ActionXenoTurnInvisible = Turn Invisible (20)
-    .desc = Become partially invisible for 30 seconds, or until you either damage or attempt to devour an enemy. Can be toggled off to become visible again, with a refund of 90% remaining cloak time. Increases your movement speed by 15% until the ability expires.
-ent-ActionXenoDefensiveShield = Defensive Shield (50)
-    .desc = Gain a temporary shield that blocks the next 200 damage (and is immune to explosive damage) that lasts 7 seconds. Any damage that impacts the shield is reduced by 10 before processing. [color=green]Cooldown is partially refunded upon attacking an enemy.[/color]
-ent-ActionXenoRetrieveEgg = Retrieve Egg
-    .desc = Retrieves an egg from your storage if you have an empty hand. Using this on an unplanted egg will pick up all nearby unplanted eggs. Using an egg in hand will put it into your storage.
-ent-ActionXenoThrowParasite = Throw Parasite
-    .desc = Retrieves a parasite from your storage if you have an empty hand. Using this on a parasite on the ground will pickup all nearby parasites. Targeting a tile with a parasite in hand will throw it up to 4 tiles away, where the parasite will be stunned for 5 seconds. Using a parasite in hand will add it to your storage.[color=green]Parasites won't die due to time while you hold or carry them.[/color]
-ent-ActionXenoParasiteReserve = Set Parasite Reserve
-    .desc = Sets your parasite Reserves. Observers cannot join as a stored parasite if your parasites stored is less than or equal to your reserve.
-ent-ActionXenoManageHive = Manage The Hive
+ent-ActionXenoWordQueen = Слово Королевы (50)
+    .desc = Отправляет сообщение всем членам вашего улья.
+ent-ActionXenoGrowOvipositor = Отрастить яйцеклад (700)
+    .desc = Станьте неподвижной и начните откладывать яйца, из которых появляются паразиты. Способность перезаряжается 5 минут. [color=red]Вы должны быть в режиме яйцеклада, чтобы другие ксенониды получали очки эволюции после начала раунда![/color]
+ent-ActionXenoTurnInvisible = Невидимость (20)
+    .desc = Обретите частичную невидимость на 30 секунд, или до тех пор, пока вы не нанесёте урон врагу или не попытаетесь его поглотить. Можно отключить, чтобы снова стать видимыми, при этом вам вернётся 90 % оставшегося времени невидимости. Пока способность действует, скорость передвижения увеличивается на 15%.
+ent-ActionXenoDefensiveShield = Защитный щит (50)
+    .desc = Получите временный щит, блокирующий следующие 200 единиц урона (и неуязвимый к взрывному урону), который будет действовать 7 секунд. Любой урон, нанесённый щиту, будет уменьшен на 10 перед вычетом его из прочности щита. [color=green] При атаке противника время действия частично перезарядится[/color].
+ent-ActionXenoRetrieveEgg = Извлечь яйцо
+    .desc = Извлекает яйцо из вашего хранилища, если у вас есть пустая рука. Если использовать это действие на непосаженном яйце, оно подберёт все непосаженные яйца поблизости. Использование яйца в руке поместит его в ваше хранилище.
+ent-ActionXenoThrowParasite = Метнуть паразита
+    .desc = Извлекает паразита из вашего хранилища, если у вас есть пустая рука. Если использовать это действие на паразите на земле, оно подберёт всех паразитов поблизости.  Кликнув по тайлу рукой с паразитом, вы метнёте его на расстояние до 4 тайлов, где паразит будет оглушен на 5 секунд. Использование паразита в руке поместит его в ваше хранилище.[color=green]Паразиты не умрут со временем, пока вы держите или носите их.[/color]
+ent-ActionXenoParasiteReserve = Установить запас паразитов
+    .desc = Устанавливает ваш запас паразитов. Наблюдатели не могут присоединиться в качестве хранящегося паразита, если количество хранящихся паразитов меньше или равно вашему запасу.
+ent-ActionXenoManageHive = Управление ульем
     .desc = { ent-ActionXenoBase.desc }
-ent-ActionXenoDodge = Dodge (200)
-    .desc = Gain a speed boost for 7 seconds. Your speed is doubled near standing enemies.
-ent-ActionXenoBurrow = Burrow
-    .desc = Burrow underground preventing you from getting hit from all sources. Once burrowed click a tile to move to it and resurface after a doafter that depends on distance.
-ent-ActionXenoSoak = Soak (20)
-    .desc = Soak in damage for 6 seconds. If you take 140 damage or higher, you regen 75 health and your tail slam gets refreshed.
+ent-ActionXenoDodge = Уклонение (200)
+    .desc = Получите прибавку к скорости на 7 секунд. Ваша скорость удваивается рядом со стоящими врагами.
+ent-ActionXenoBurrow = Зарыться
+    .desc = Зарывшись под землю, вы не будете получать урон ни от каких источников. Зарывшись, кликните по тайлу, чтобы переместиться на него, и выбраться на поверхность по истечении времени, зависящего от расстояния.
+ent-ActionXenoSoak = Поглощение (20)
+    .desc = Начните поглощать урон на протяжении 6 секунд. Если вы получите 140 ед. урона или больше, вы восстановите 75 ед. здоровья, а ваш Удар хвостом перезарядится.

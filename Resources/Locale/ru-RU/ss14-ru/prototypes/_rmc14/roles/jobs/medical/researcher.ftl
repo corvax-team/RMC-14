@@ -1,2 +1,2 @@
-ent-CMSpawnPointResearcher = researcher spawn point
+ent-CMSpawnPointResearcher = точка появления исследователь
     .desc = { ent-CMSpawnPointJobBase.desc }

@@ -1,8 +1,8 @@
-ent-RMCSpawnerProvostMarshal = provost spawner marshal
-    .suffix = Spawner, Admin, Low Law Understanding or Lower Rank
+ent-RMCSpawnerProvostMarshal = спавнер провост-маршал
+    .suffix = Спавнер, Админ, Слабое понимание закона или Низкий ранг
     .desc = { ent-MarkerBase.desc }
-ent-RMCRandomHumanoidProvostMarshal = provost ghost role marshal
-    .suffix = Role, Admin, Low Law Understanding or Lower Rank
+ent-RMCRandomHumanoidProvostMarshal = провост-маршал роль призрака
+    .suffix = Роль, Админ, Слабое понимание закона или Низкий ранг
     .desc = { "" }
-ent-RMCIDCardProvostMarshal = provost marshal ID card
+ent-RMCIDCardProvostMarshal = ИД-карта провост-лидер команды
     .desc = { ent-CMIDCardGold.desc }

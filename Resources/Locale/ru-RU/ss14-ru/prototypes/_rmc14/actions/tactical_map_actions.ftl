@@ -1,4 +1,4 @@
-ent-RMCActionOpenTacticalMap = Open Tactical Map
+ent-RMCActionOpenTacticalMap = Открыть тактическую карту
     .desc = { "" }
 ent-RMCActionOpenTacticalMapMarine = { ent-RMCActionOpenTacticalMap }
     .desc = { ent-RMCActionOpenTacticalMap.desc }

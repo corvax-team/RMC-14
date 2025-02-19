@@ -1,2 +1,2 @@
-ent-RMCActionGhilliePreparePosition = Prepare Position
-    .desc = Use the ghillie suit and the nearby environment to become near invisible.
+ent-RMCActionGhilliePreparePosition = Подготовить позицию
+    .desc = Используйте маскировочный костюм и окружающую местность, чтобы стать почти невидимым.

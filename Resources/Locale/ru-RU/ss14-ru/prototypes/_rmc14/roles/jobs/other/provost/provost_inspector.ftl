@@ -1,8 +1,8 @@
-ent-RMCSpawnerProvostInspector = provost spawner inspector
-    .suffix = Spawner, Player, Medium Law Understanding
+ent-RMCSpawnerProvostInspector = спавнер провост-инспектор
+    .suffix = Спавнер, Игрок, Среднее понимание закона
     .desc = { ent-MarkerBase.desc }
-ent-RMCRandomHumanoidProvostInspector = provost ghost role inspector
-    .suffix = Role, Player, Medium Law Understanding
+ent-RMCRandomHumanoidProvostInspector = провост-инспектор роль призрака
+    .suffix = Роль, Игрок, Среднее понимание закона
     .desc = { "" }
-ent-RMCIDCardProvostInspector = provost inspector ID card
+ent-RMCIDCardProvostInspector = ИД-карта провост-инспектор
     .desc = { ent-CMIDCardGold.desc }

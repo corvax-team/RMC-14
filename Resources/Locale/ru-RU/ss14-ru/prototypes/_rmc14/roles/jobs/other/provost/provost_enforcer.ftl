@@ -1,8 +1,8 @@
-ent-RMCSpawnerProvostEnforcer = provost spawner enforcer
-    .suffix = Spawner, Player, Given Objective
+ent-RMCSpawnerProvostEnforcer = спавнер провост-исполнитель
+    .suffix = Спавнер, Игрок, Поставленная задача
     .desc = { ent-MarkerBase.desc }
-ent-RMCRandomHumanoidProvostEnforcer = provost ghost role enforcer
-    .suffix = Role, Player, Given Objective
+ent-RMCRandomHumanoidProvostEnforcer = провост-исполнитель роль призрака
+    .suffix = Роль, Игрок, Поставленная задача
     .desc = { "" }
-ent-RMCIDCardProvostEnforcer = provost enforcer ID card
+ent-RMCIDCardProvostEnforcer = ИД-карта провост-исполнитель
     .desc = { ent-CMIDCardGold.desc }
