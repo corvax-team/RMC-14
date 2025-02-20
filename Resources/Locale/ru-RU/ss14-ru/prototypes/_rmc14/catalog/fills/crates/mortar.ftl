@@ -1,8 +1,8 @@
-ent-RMCCrateMortarKit = M402 mortar crate (Mortar x1, Mortar shell backpack x1)
+ent-RMCCrateMortarKit = ящик с миномётом M402 (Миномёт x1, Рюкзак для минометных снарядов x1)
     .desc = { ent-RMCCrateWeapons.desc }
-ent-RMCCrateMortarShellHE = M402 mortar shells crate (x6 HE)
+ent-RMCCrateMortarShellHE = ящик минометных снарядов M402 (x6 фугас)
     .desc = { ent-RMCCrateMortarAmmo.desc }
-ent-RMCCrateMortarShellIncendiary = M402 mortar shells crate (x6 Incend)
+ent-RMCCrateMortarShellIncendiary = ящик минометных снарядов M402 (x6 зажиг)
     .desc = { ent-RMCCrateMortarAmmo.desc }
-ent-RMCCrateMortarShellFlare = M402 mortar shells crate (x6 Flare/Camera)
+ent-RMCCrateMortarShellFlare = ящик минометных снарядов M402 (x6 свет/камера)
     .desc = { ent-RMCCrateMortarAmmo.desc }

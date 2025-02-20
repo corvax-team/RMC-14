@@ -1,6 +1,6 @@
 ent-CMClosetEmergencyFilled = { ent-CMClosetEmergency }
-    .suffix = Filled
+    .suffix = Заполненный
     .desc = { ent-CMClosetEmergency.desc }
 ent-CMClosetFireFilled = { ent-CMClosetFire }
-    .suffix = Filled
+    .suffix = Заполненный
     .desc = { ent-CMClosetFire.desc }

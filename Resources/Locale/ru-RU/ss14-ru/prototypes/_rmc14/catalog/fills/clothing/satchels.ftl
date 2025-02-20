@@ -1,6 +1,6 @@
 ent-RMCSatchelPizza = { ent-CMSatchel }
-    .suffix = Pizza, Filled
+    .suffix = Пицца, Заполненный
     .desc = { ent-CMSatchel.desc }
 ent-RMCSatchelCivilianFill = { ent-CMSatchel }
-    .suffix = Civilian, Filled
+    .suffix = Гражданский, Заполненный
     .desc = { ent-CMSatchel.desc }

@@ -1,4 +1,4 @@
-ent-RMCCrateResearchPhoron = phoron crate (x30)
+ent-RMCCrateResearchPhoron = ящик форона (x30)
     .desc = { ent-RMCCrateSecurePhoron.desc }
-ent-RMCCrateResearchPlastic = plastic crate (x20)
+ent-RMCCrateResearchPlastic = ящик пластика (x20)
     .desc = { ent-RMCCrateSecurePhoron.desc }

@@ -1,3 +1,3 @@
 ent-CMAnestheticTankFilled = { ent-CMAnestheticTank }
-    .suffix = Filled
+    .suffix = Заполненный
     .desc = { ent-CMAnestheticTank.desc }

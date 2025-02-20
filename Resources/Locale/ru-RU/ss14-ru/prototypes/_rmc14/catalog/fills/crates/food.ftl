@@ -1,8 +1,8 @@
-ent-RMCCrateFoodDonuts = donuts crate
+ent-RMCCrateFoodDonuts = ящик пончиков
     .desc = { ent-RMCCratePlastic.desc }
-ent-RMCCrateFoodMRE = Marine MRE crate
+ent-RMCCrateFoodMRE = ящик ИРП морпехов
     .desc = { ent-RMCCratePlastic.desc }
-ent-RMCCrateFoodPizza = pizza ready-to-eat crate
+ent-RMCCrateFoodPizza = ящик готовой пиццы
     .desc = { ent-RMCCratePlastic.desc }
-ent-RMCCrateFoodIngredients = ingredients crate
+ent-RMCCrateFoodIngredients = ящик ингредиентов
     .desc = { ent-RMCCratePlastic.desc }
