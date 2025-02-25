@@ -1,8 +1,8 @@
 # Rules
 
-ui-rules-header = RMC14 Official Server Rules
-ui-rules-header-rp = RMC14 Roleplay Official Server Rules
-ui-rules-accept = I have read and agree to follow the rules
-ui-rules-wait = The accept button will be enabled after { $time } seconds.
-ui-rules-button-home = Home
-ui-rules-button-back = Back
+ui-rules-header = Правила сервера
+ui-rules-header-rp = РП правила сервера
+ui-rules-accept = Я ознакомился и согласен следовать правилам
+ui-rules-wait = Кнопка принятия будет разблокирована через { $time } секунд.
+ui-rules-button-home = В начало
+ui-rules-button-back = Назад
