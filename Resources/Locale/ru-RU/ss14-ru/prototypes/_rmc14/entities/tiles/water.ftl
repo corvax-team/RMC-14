@@ -1,4 +1,4 @@
-ent-CMFloorShallowWaterEntity = shallow water
+ent-CMFloorShallowWaterEntity = мелководье
     .desc = { "" }
-ent-CMFloorDeepWaterEntity = deep water
+ent-CMFloorDeepWaterEntity = глубоководье
     .desc = { ent-CMFloorShallowWaterEntity.desc }

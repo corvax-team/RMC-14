@@ -1,2 +1,2 @@
-ent-CMScopingChunkLoader = SCOPING CHUNK LOADER YOU SHOULD NOT SEE THIS
+ent-CMScopingChunkLoader = SCOPING CHUNK LOADER ВЫ НЕ ДОЛЖНЫ ЭТО ВИДЕТЬ
     .desc = { "" }

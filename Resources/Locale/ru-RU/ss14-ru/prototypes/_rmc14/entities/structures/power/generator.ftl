@@ -1,6 +1,6 @@
-ent-RMCGeneratorFusion = S-52 fusion reactor
+ent-RMCGeneratorFusion = термоядерный реактор S-52
     .desc = { "" }
-ent-RMCGeneratorFusionColony = G-11 geothermal generator
-    .desc = A thermoelectric generator sitting atop a plasma-filled borehole.
-ent-RMCGeneratorFusionCell = WL-6 universal fuel cell
-    .desc = A rechargeable fuel cell.
+ent-RMCGeneratorFusionColony = геотермальный генератор G-11
+    .desc = Термоэлектрический генератор, расположенный поверх заполненной плазмой скважины.
+ent-RMCGeneratorFusionCell = универсальный топливный элемент WL-6
+    .desc = Перезаряжаемый топливный элемент.

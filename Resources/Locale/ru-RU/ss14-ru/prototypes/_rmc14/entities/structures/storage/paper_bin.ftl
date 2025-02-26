@@ -1,5 +1,5 @@
 ent-CMPaperBin = { ent-PaperBin }
-    .suffix = Empty
+    .suffix = Пустой
     .desc = { ent-PaperBin.desc }
 ent-CMPaperBin5 = { ent-CMPaperBin }
     .suffix = 5

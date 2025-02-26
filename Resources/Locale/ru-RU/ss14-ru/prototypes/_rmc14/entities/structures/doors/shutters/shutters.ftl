@@ -1,9 +1,9 @@
-ent-RMCShutterBaseIndestructible = shutters
-    .desc = That looks like it doesn't open easily.
+ent-RMCShutterBaseIndestructible = ставни
+    .desc = Не похоже, что они легко откроются.
 ent-RMCShutterBase = { ent-RMCShutterBaseIndestructible }
     .desc = { ent-RMCShutterBaseIndestructible.desc }
 ent-RMCShutterAlmayer = { ent-RMCShutterBase }
     .desc = { ent-RMCShutterBase.desc }
 ent-RMCShutterAlmayerOpen = { ent-RMCShutterAlmayer }
-    .suffix = Open
+    .suffix = Открыто
     .desc = { ent-RMCShutterAlmayer.desc }

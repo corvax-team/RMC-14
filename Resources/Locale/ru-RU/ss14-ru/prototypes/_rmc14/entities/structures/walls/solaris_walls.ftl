@@ -1,8 +1,8 @@
-ent-CMWallSolaris = colony wall
-    .desc = Tough looking walls that have been blasted by sand since the day they were erected. A testament to human willpower.
-ent-CMWallSolarisReinforced = reinforced colony wall
-    .desc = Tough looking walls that have been blasted by sand since the day they were erected. A testament to human willpower.
-ent-CMWallSolarisHull = heavy reinforced colony wall
-    .desc = Tough looking walls that have been blasted by sand since the day they were erected. A testament to human willpower.
-ent-CMWallSolarisRock = rock wall
-    .desc = Tough looking walls that have been blasted by sand since the day they were erected. A testament to human willpower.
+ent-CMWallSolaris = стена колонии
+    .desc = Крепко выглядящие стены, которые со дня своего возведения подвергались воздействию песка. Свидетельство силы человеческой воли.
+ent-CMWallSolarisReinforced = укреплённая стена колонии
+    .desc = Крепко выглядящие стены, которые со дня своего возведения подвергались воздействию песка. Свидетельство силы человеческой воли.
+ent-CMWallSolarisHull = тяжёлая укреплённая стена колонии
+    .desc = Крепко выглядящие стены, которые со дня своего возведения подвергались воздействию песка. Свидетельство силы человеческой воли.
+ent-CMWallSolarisRock = скальная стена
+    .desc = Крепко выглядящие стены, которые со дня своего возведения подвергались воздействию песка. Свидетельство силы человеческой воли.

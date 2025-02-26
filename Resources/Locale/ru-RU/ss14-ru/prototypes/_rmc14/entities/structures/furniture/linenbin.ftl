@@ -1,6 +1,6 @@
-ent-CMLinenBin = linen bin
-    .desc = A linen bin. It looks rather cosy.
-    .suffix = Empty
+ent-CMLinenBin = бельевая корзина
+    .desc = Корзина для белья. Смотрится довольно уютно.
+    .suffix = Пустой
 ent-CMLinenBinFilled = { ent-CMLinenBin }
-    .suffix = Filled
+    .suffix = Полный
     .desc = { ent-CMLinenBin.desc }

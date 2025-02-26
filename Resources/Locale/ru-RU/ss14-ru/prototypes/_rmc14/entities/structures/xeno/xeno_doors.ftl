@@ -1,4 +1,4 @@
-ent-DoorXenoResin = resin door
-    .desc = That's a resin door.
-ent-DoorXenoResinThick = thick resin door
-    .desc = A thick resin door, which is more durable.
+ent-DoorXenoResin = смоляная дверь
+    .desc = Это смоляная дверь.
+ent-DoorXenoResinThick = толстая смоляная дверь
+    .desc = Толстая смоляная дверь, более прочная.

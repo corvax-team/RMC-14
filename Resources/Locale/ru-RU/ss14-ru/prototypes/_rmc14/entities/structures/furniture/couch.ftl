@@ -1,6 +1,6 @@
-ent-RMCCouchMid = couch
-    .desc = A piece of Swedish flat pack furniture, just dont ask the MTs for an Allen key.
-    .suffix = Mid
+ent-RMCCouchMid = диван
+    .desc = Единица шведской корпусной мебели, только не просите у техников по обслуживанию шестигранный шлиц.
+    .suffix = Середина
 ent-RMCCouchEnd = { ent-RMCCouchMid }
-    .suffix = End
+    .suffix = Край
     .desc = { ent-RMCCouchMid.desc }

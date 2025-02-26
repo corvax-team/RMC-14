@@ -1,2 +1,2 @@
-ent-RMCBarricadeWood = wooden barricade
-    .desc = A wall made out of wooden planks nailed together. Not very sturdy, but can provide some concealment.
+ent-RMCBarricadeWood = деревянная баррикада
+    .desc = Стена, сделанная из деревянных досок, скрепленных гвоздями. Не очень прочная, но может послужить укрытием.

@@ -1,8 +1,8 @@
-ent-RMCWallHangar = hangar wall
+ent-RMCWallHangar = стена ангара
     .desc = { ent-CMWallMetal.desc }
-ent-RMCWallBunker = bunker wall
+ent-RMCWallBunker = стена бункера
     .desc = { ent-CMWallReinforced.desc }
-ent-RMCWallChigusa = facility wall
+ent-RMCWallChigusa = стена здания
     .desc = { ent-CMWallReinforced.desc }
 ent-RMCWallRockTrijent = { ent-CMWallRock }
     .desc = { ent-CMWallRock.desc }

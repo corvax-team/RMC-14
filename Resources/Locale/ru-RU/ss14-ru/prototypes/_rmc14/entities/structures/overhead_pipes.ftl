@@ -1,2 +1,2 @@
-ent-CMOverheadPipe = overhead pipe segment
+ent-CMOverheadPipe = сегмент подвесной трубы
     .desc = { "" }

@@ -1,3 +1,3 @@
-ent-CMShower = shower
-    .desc = The HS-451. Installed in the 2050s by the WeYa Hygiene Division.
-    .suffix = Empty
+ent-CMShower = душ
+    .desc = HS-451. Установлен в 2050-х годах Гигиеническим подразделением Ве-Я.
+    .suffix = Пустой

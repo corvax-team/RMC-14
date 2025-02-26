@@ -1,8 +1,8 @@
 ent-CMMemorialBase = { ent-Memorial }
     .desc = { ent-Memorial.desc }
-ent-CMMemorial = slab of victory
-    .desc = A ship memorial dedicated to the triumphs of the Marines and the fallen marines of this ship. On the left there are grand tales of victory etched into the slab. On the right there is a list of famous marines who have fallen in combat serving the Marines.
-ent-CMMemorialMaintainers = slab of remembrance
-    .desc = A memorial to all Maintainer Team members that have retired from working on RMC-14. No mentor names are present.
+ent-CMMemorial = плита победы
+    .desc = Корабельный мемориал, посвящённый победам морских пехотинцев и павшим морским пехотинцам этого корабля. Слева на плите высечены великие истории о победах. Справа - список знаменитых морских пехотинцев, павших в бою во время службы в Корпусе колониальной морской пехоты.
+ent-CMMemorialMaintainers = плита памяти
+    .desc = Мемориал всем членам команды мейнтейнеров, отошедшим от работы над RMC-14. Имена менторов не указаны.
 ent-CMMemorialAdmins = { ent-CMMemorialMaintainers }
-    .desc = A memorial to all Admins and Moderators who have retired from RMC-14. No mentor names are present.
+    .desc = Мемориал всем администраторам и модераторам, покинувшим RMC-14. Имена менторов не указаны.

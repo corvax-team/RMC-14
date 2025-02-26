@@ -1,6 +1,6 @@
-ent-CMLockerCMDCabinet = command tablet cabinet
-    .desc = A bulletproof cabinet containing the command tablet for usage by a Commander.
-    .suffix = Empty
+ent-CMLockerCMDCabinet = шкафчик командного планшета
+    .desc = Пуленепробиваемый шкафчик, содержащий командный планшет для использования командующим офицером.
+    .suffix = Пустой
 ent-CMLockerCMDCabinetFilled = { ent-CMLockerCMDCabinet }
-    .suffix = Filled
+    .suffix = Заполненный
     .desc = { ent-CMLockerCMDCabinet.desc }

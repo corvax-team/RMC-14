@@ -1,11 +1,11 @@
-ent-CMBed = bed
+ent-CMBed = кровать
     .desc = A mattress seated on a rectangular metallic frame. This is used to support a lying person in a comfortable manner, notably for regular sleep. Ancient technology, but still useful.
 ent-RMCBedAlt = { ent-CMBed }
     .desc = { ent-CMBed.desc }
 ent-RMCBedPsych = { ent-CMBed }
     .desc = { ent-CMBed.desc }
-ent-Bedroll = bedroll
-    .desc = A foldable bedroll, just about the only thing of comfort in the field. You're generally supposed to unroll it before sleeping, but who needs rules?
+ent-Bedroll = спальный мешок
+    .desc = Складной спальный мешок, практически единственная удобная вещь в полевых условиях. Обычно перед сном его полагается разворачивать, но кому нужны правила?
 ent-BedrollFolded = { ent-Bedroll }
-    .suffix = folded
+    .suffix = Сложенный
     .desc = { ent-Bedroll.desc }

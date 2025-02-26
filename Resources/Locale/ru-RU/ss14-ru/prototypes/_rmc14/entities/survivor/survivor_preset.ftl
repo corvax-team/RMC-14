@@ -1,2 +1,2 @@
-ent-RMCSurvivorPresetCivilian = civilian survivor preset
+ent-RMCSurvivorPresetCivilian = пресет гражданский выживший
     .desc = { "" }

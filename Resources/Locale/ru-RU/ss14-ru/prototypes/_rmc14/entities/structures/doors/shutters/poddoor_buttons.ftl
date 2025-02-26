@@ -1,2 +1,2 @@
-ent-RMCPodDoorButton = button
-    .desc = A remote control-switch for a door.
+ent-RMCPodDoorButton = кнопка
+    .desc = Удалённый переключатель дверей.

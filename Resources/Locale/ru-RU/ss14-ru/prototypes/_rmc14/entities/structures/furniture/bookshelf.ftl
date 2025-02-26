@@ -1,6 +1,6 @@
-ent-RMCBookcase = bookcase
+ent-RMCBookcase = книжный шкаф
     .desc = { ent-Bookshelf.desc }
-ent-RMCBookcaseMedical = medical manuals bookcase
+ent-RMCBookcaseMedical = книжный шкаф медицинских руководств
     .desc = { ent-RMCBookcase.desc }
-ent-RMCBookcaseEngineering = engineering manuals bookcase
+ent-RMCBookcaseEngineering = книжный шкаф инженерных руководств
     .desc = { ent-RMCBookcase.desc }

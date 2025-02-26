@@ -1,9 +1,9 @@
-ent-RMCTankReagentEmpty = reagent tank
-    .desc = A reagent tank, typically used to store large quantities of chemicals.
-    .suffix = Empty
+ent-RMCTankReagentEmpty = бак для реагентов
+    .desc = Бак для реагентов, используемый для хранения больших объемов химикатов.
+    .suffix = Пустой
 ent-RMCTankReagentWater = { ent-RMCTankReagentEmpty }
-    .suffix = Water
+    .suffix = Вода
     .desc = { ent-RMCTankReagentEmpty.desc }
-ent-RMCTankReagentFuel = fuel tank
-    .desc = A fuel tank, normally used to hold welding fuel. It's painted red with explosive warning labels.
-    .suffix = Fuel
+ent-RMCTankReagentFuel = бак для топлива
+    .desc = Топливный бак, как правило, используемый для хранения сварочного топлива. Он окрашен в красный цвет и помечен предупреждающими о взрывоопасности надписями.
+    .suffix = Сварочное топливо

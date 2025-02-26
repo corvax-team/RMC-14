@@ -1,5 +1,5 @@
-ent-RMCBaseWindowFrame = window frame
-    .desc = A big hole in the wall that used to sport a large window. Can be vaulted through.
+ent-RMCBaseWindowFrame = оконная рама
+    .desc = Большая дыра в стене, в которой раньше было большое окно. Сюда можно пролезть.
 ent-RMCWindowFrameAlmayer = { ent-RMCBaseWindowFrame }
     .desc = { ent-RMCBaseWindowFrame.desc }
 ent-RMCWindowFrameWhite = { ent-RMCBaseWindowFrame }
@@ -11,7 +11,7 @@ ent-RMCWindowFrameColony = { ent-RMCBaseWindowFrame }
 ent-RMCWindowFrameColonyReinforced = { ent-RMCBaseWindowFrame }
     .desc = { ent-RMCBaseWindowFrame.desc }
 ent-RMCWindowFrameHunterReinforced = { ent-RMCBaseWindowFrame }
-    .suffix = hunter
+    .suffix = Охотник
     .desc = { ent-RMCBaseWindowFrame.desc }
 ent-RMCWindowFrameWood = { ent-RMCBaseWindowFrame }
     .desc = { ent-RMCBaseWindowFrame.desc }

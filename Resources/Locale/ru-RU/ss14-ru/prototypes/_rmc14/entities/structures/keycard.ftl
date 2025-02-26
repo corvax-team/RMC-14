@@ -1,2 +1,2 @@
-ent-RMCKeycardDevice = keycard authentication device
-    .desc = This device is used to trigger station functions, which require multiple swipes of an ID card to authenticate.
+ent-RMCKeycardDevice = считыватель аутентификации ключ-карт
+    .desc = Это устройство используется для запуска некоторых функций станции, что требует одновременного проведения несколькими ИД-картами для аутентификации.
