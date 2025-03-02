@@ -1,0 +1,51 @@
+- type: entity
+  parent: RMCBaseTurret
+  id: CCMTurretPlanet
+  name: UN-640C static gauss turret
+  suffix: No Despawn, No Armor-piercing.
+  description: A fully-automated defence turret with mid-range targeting capabilities. Armed with a modified M32-S Autocannon and an internal belt feed and modified for UN warship use.
+  components:
+  - type: InteractionPopup
+    interactDelay: 0.2
+    successChance: 0.8
+    interactSuccessString: petting-success-generic
+    interactFailureString: petting-failure-generic
+    interactSuccessSound:
+      path: /Audio/Effects/double_beep.ogg
+  - type: Corrodible
+    isCorrodible: false
+  - type: Gun
+    fireRate: 4
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: CMCartridgeRifle10x24mm
+    capacity: 500
+  - type: NpcFactionMember
+    factions:
+    - UNMC
+  - type: MarineIFF
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: HTN
+    rootTask:
+      task: RMCTurretCompound
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+      VisionRadius: !type:Single
+        7.5
+      AggroVisionRadius: !type:Single
+        7.5
+  - type: UserIFF
+    faction: FactionMarine

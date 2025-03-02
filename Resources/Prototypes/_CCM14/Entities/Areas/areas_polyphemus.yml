@@ -37,6 +37,15 @@
   components:
   - type: Sprite
     state: yellow
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent:
@@ -48,3 +57,13 @@
   - type: Sprite
     sprite: _CCM14/Areas/areas.rsi
     state: red
+  - type: Area
+    buildSpecial: true
+    CAS: false
+    fulton: true
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: false
+    supplyDrop: false
