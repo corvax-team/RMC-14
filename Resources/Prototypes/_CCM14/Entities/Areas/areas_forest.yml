@@ -1,7 +1,7 @@
 - type: entity
   parent: RMCAreaBase
-  id: CCMAreaNova
-  suffix: Nova Outpost
+  id: CCMAreaForest
+  suffix: Forest
   components:
   - type: Sprite
     sprite: _RMC14/Areas/areas.rsi
@@ -11,13 +11,13 @@
     powerNet: ground
     minimapColor: '#6C6767D8'
 
-- type: entity
+- type: entity 
   parent:
   - RMCAreaMax
-  - CCMAreaNova
-  id: CCMAreaNovaInteriorOob
-  name: Nova Outpost - Out Of Bounds
-  suffix: Nova Outpost
+  - CCMAreaForest
+  id: CCMAreaForestInteriorOob
+  name: Forest - Out Of Bounds
+  suffix: Forest
   components:
   - type: Sprite
     sprite: _RMC14/Areas/areas_shiva.rsi
@@ -31,10 +31,10 @@
 - type: entity
   parent:
   - RMCAreaProtectionZero
-  - CCMAreaNova
-  id: CCMAreaNovaGround 
-  suffix: No mapping
+  - CCMAreaForest
+  id: CCMAreaForestGround
   name: Ground
+  suffix: No mapping
   components:
   - type: Sprite
     state: yellow
@@ -51,31 +51,30 @@
 - type: entity
   parent:
   - RMCAreaProtectionOne
-  - CCMAreaPolyphemus
-  id: CCMAreaNovaClosedArea
+  - CCMAreaForest
+  id: CCMAreaForestClosedArea
   name: Closed area
   components:
   - type: Sprite
     sprite: _CCM14/Areas/areas.rsi
     state: red
   - type: Area
-    buildSpecial: true
     CAS: false
-    fulton: true
+    fulton: false
     mortarPlacement: false
     mortarFire: false
-    lasing: true
+    lasing: false
     medevac: false
     OB: false
     supplyDrop: false
 
 - type: entity
   parent:
-  - CCMAreaNova
-  id: CCMAreaNovaFullProtection
+  - CCMAreaForest
+  id: CCMAreaForestFullProtection
   abstract: true
-  name: NovaFullProtection
-  suffix: Nova
+  name: ForestFullProtection
+  suffix: Forest
   components:
   - type: Sprite
     sprite: _RMC14/Areas/areas_shiva.rsi
@@ -92,11 +91,11 @@
 
 - type: entity
   parent:
-  - CCMAreaNova
-  id: CCMAreaNovaZeroProtection
+  - CCMAreaForest
+  id: CCMAreaForestZeroProtection
   abstract: true
-  name: NovaZeroProtection
-  suffix: Nova
+  name: ForestZeroProtection
+  suffix: Forest
   components:
   - type: Sprite
     sprite: _RMC14/Areas/areas_shiva.rsi
@@ -113,113 +112,53 @@
 
 - type: entity
   parent:
-  - CCMAreaNova
-  - CCMAreaNovaZeroProtection
-  id: CCMAreaNovaLandingHeadquarters
-  name: Landing Area and Headquarters
-  components:
-  - type: Sprite
-    state: head_quarters
-  - type: Area
-    minimapColor: '#6C6767D8'
-    CAS: true
-    fulton: true
-    mortarPlacement: true
-    mortarFire: true
-    lasing: true
-    medevac: true
-    OB: true
-    supplyDrop: true
-
-- type: entity
-  parent:
-  - CCMAreaNova
-  - CCMAreaNovaZeroProtection
-  id: CCMAreaNovaNorthwestCaves
-  name: Northwest - Caves
-  components:
-  - type: Sprite
-    state: northwest
-  - type: Area
-    minimapColor: '#6C6767D8'
-    CAS: true
-    fulton: true
-    mortarPlacement: true
-    mortarFire: true
-    lasing: true
-    medevac: true
-    OB: true
-    supplyDrop: true
-
-- type: entity
-  parent:
-  - CCMAreaNova
-  - CCMAreaNovaZeroProtection
-  id: CCMAreaNovaSouthwestCaves
-  name: Southwest - Caves
-  components:
-  - type: Sprite
-    state: southwest
-  - type: Area
-    minimapColor: '#6C6767D8'
-    CAS: true
-    fulton: true
-    mortarPlacement: true
-    mortarFire: true
-    lasing: true
-    medevac: true
-    OB: true
-    supplyDrop: true
-
-- type: entity
-  parent:
-  - CCMAreaNova
-  - CCMAreaNovaZeroProtection
-  id: CCMAreaNovaNortheastCaves
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestNortheastCaves
   name: Northeast - Caves
   components:
   - type: Sprite
     state: northeast
   - type: Area
     minimapColor: '#6C6767D8'
-    CAS: true
-    fulton: true
-    mortarPlacement: true
-    mortarFire: true
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
     lasing: true
     medevac: true
     OB: true
-    supplyDrop: true
+    supplyDrop: false
 
 - type: entity
   parent:
-  - CCMAreaNova
-  - CCMAreaNovaZeroProtection
-  id: CCMAreaNovaSoutheastCaves
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestSoutheasternCaves
   name: Southeast - Caves
   components:
   - type: Sprite
     state: southeast
   - type: Area
     minimapColor: '#6C6767D8'
-    CAS: true
-    fulton: true
-    mortarPlacement: true
-    mortarFire: true
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
     lasing: true
     medevac: true
     OB: true
-    supplyDrop: true
+    supplyDrop: false
 
 - type: entity
   parent:
-  - CCMAreaNova
-  - CCMAreaNovaZeroProtection
-  id: CCMAreaNovaNortheastHydroponics
-  name: Northeast - Hydroponics
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestNorthtown
+  name: North - Small town
   components:
   - type: Sprite
-    state: hydro_north
+    state: valley_north
   - type: Area
     minimapColor: '#6C6767D8'
     CAS: true
@@ -233,13 +172,13 @@
 
 - type: entity
   parent:
-  - CCMAreaNova
-  - CCMAreaNovaZeroProtection
-  id: CCMAreaNovaNortheastColony
-  name: Northeast - Colony
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestSouthtown
+  name: South - Small town
   components:
   - type: Sprite
-    state: anolab
+    state: valley_south
   - type: Area
     minimapColor: '#6C6767D8'
     CAS: true
@@ -253,13 +192,73 @@
 
 - type: entity
   parent:
-  - CCMAreaNova
-  - CCMAreaNovaZeroProtection
-  id: CCMAreaNovaSouthwestColony
-  name: Southwest - Colony
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestNorthwestCaves
+  name: Northwest - Caves
   components:
   - type: Sprite
-    state: bunker01_caves_outpost
+    state: northwest
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent:
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestSouthwestPLH
+  name: Southwest - Landing platform and Headquarters
+  components:
+  - type: Sprite
+    state: head_quarters
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: true
+    mortarPlacement: true
+    mortarFire: false
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent:
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestSouthwestCaves
+  name: Southwest - Caves
+  components:
+  - type: Sprite
+    state: southwest
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestRiver
+  name: Centre - River
+  components:
+  - type: Sprite
+    state: central
   - type: Area
     minimapColor: '#6C6767D8'
     CAS: true
@@ -273,9 +272,9 @@
 
 - type: entity
   parent:
-  - CCMAreaNova
-  - CCMAreaNovaZeroProtection
-  id: CCMAreaNovaLandingZone
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestLZ
   name: Landing zone
   components:
   - type: Sprite
