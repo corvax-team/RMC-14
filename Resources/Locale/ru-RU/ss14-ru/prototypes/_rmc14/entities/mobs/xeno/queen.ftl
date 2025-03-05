@@ -1,4 +1,4 @@
-ent-CMXenoQueen = Queen
-    .desc = A huge, looming alien creature. The biggest and the baddest.
+ent-CMXenoQueen = Королева
+    .desc = Огромное, грозное инопланетное существо. Самое большое и самое страшное.
 ent-XenoLeaderPheromoneRelay = { "" }
     .desc = { "" }

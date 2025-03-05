@@ -1,4 +1,4 @@
-ent-CMMobAvali = Urist C.M McRaptor
+ent-CMMobAvali = Урист C.M МакРаптор
     .suffix = RMC14
     .desc = { ent-CMBaseMobSpeciesOrganic.desc }
 ent-MobAvaliDummy = { ent-BaseSpeciesDummy }

@@ -1,2 +1,2 @@
-ent-RMCSpawnerRandomFolder = random folder spawner
+ent-RMCSpawnerRandomFolder = случайный спавнер папок
     .desc = { ent-MarkerBase.desc }

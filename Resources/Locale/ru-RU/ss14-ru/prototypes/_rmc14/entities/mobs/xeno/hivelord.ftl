@@ -1,7 +1,7 @@
-ent-CMXenoHivelordBase = Hivelord
-    .desc = A builder of really big hives.
+ent-CMXenoHivelordBase = Повелитель улья
+    .desc = Строитель очень больших ульев.
 ent-CMXenoHivelord = { ent-CMXenoHivelordBase }
     .desc = { ent-CMXenoHivelordBase.desc }
 ent-CMXenoHivelordResinWhisperer = { ent-CMXenoHivelordBase }
-    .suffix = Resin Whisperer
+    .suffix = Смоляной Шептун
     .desc = { ent-CMXenoHivelordBase.desc }

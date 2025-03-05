@@ -1,2 +1,2 @@
-ent-CMRandomPosterAny = random poster spawner
+ent-CMRandomPosterAny = случайный плакат
     .desc = { ent-MarkerBase.desc }

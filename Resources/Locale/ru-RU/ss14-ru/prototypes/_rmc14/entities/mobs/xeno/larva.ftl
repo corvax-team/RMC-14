@@ -1,4 +1,4 @@
-ent-CMXenoLarva = Larva
+ent-CMXenoLarva = Личинка
     .desc = { ent-CMXenoUndeveloped.desc }
-ent-RMCXenoEmbryo = alien embryo
-    .desc = All slimy and yucky.
+ent-RMCXenoEmbryo = инопланетный эмбрион
+    .desc = Весь в слизи и гадости.

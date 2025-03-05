@@ -1,2 +1,2 @@
-ent-CMXenoParasite = Parasite
+ent-CMXenoParasite = Лицехват
     .desc = { ent-CMXenoUndeveloped.desc }

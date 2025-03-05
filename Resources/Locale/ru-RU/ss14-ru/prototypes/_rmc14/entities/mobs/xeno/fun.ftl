@@ -1,5 +1,5 @@
-ent-RMCXenoRouny = Rouny
-    .desc = thas a fuckin rouny.
+ent-RMCXenoRouny = Руни
+    .desc = Это гребаный Руни.
     .suffix = RMC14
-ent-RMCXenoWehny = Wehny
-    .desc = A cruel, cruel joke made by some sick individual.
+ent-RMCXenoWehny = Веххи
+    .desc = Жестокая, жестокая шутка какого-то больного человека.

@@ -1,2 +1,2 @@
-ent-CMXenoBurrower = Burrower
-    .desc = A beefy alien with sharp claws.
+ent-CMXenoBurrower = Бурильщик
+    .desc = Мускулистый пришелец с острыми когтями.

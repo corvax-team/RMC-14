@@ -1,5 +1,5 @@
-ent-RMCMobVulpkanin = Urist C.M McVulp
+ent-RMCMobVulpkanin = Урист К.М. МакВулп
     .suffix = RMC14
     .desc = { ent-CMBaseMobSpeciesOrganic.desc }
-ent-MobVulpkaninDummy = Vulpkanin Dummy
-    .desc = A dummy vulpkanin meant to be used in character setup.
+ent-MobVulpkaninDummy = Кукла Вулканин
+    .desc = Кукла вульпканин, предназначенный для настройки персонажа.

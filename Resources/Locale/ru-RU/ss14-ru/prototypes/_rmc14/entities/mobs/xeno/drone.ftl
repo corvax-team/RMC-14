@@ -1,10 +1,10 @@
-ent-CMXenoDroneBase = Drone
-    .desc = An alien drone.
+ent-CMXenoDroneBase = Дрон
+    .desc = Инопланетный дрон.
 ent-CMXenoDrone = { ent-CMXenoDroneBase }
     .desc = { ent-CMXenoDroneBase.desc }
 ent-CMXenoDroneGardener = { ent-CMXenoDroneBase }
-    .suffix = Gardener
+    .suffix = Садовник
     .desc = { ent-CMXenoDroneBase.desc }
 ent-CMXenoDroneHealer = { ent-CMXenoDroneBase }
-    .suffix = Healer
+    .suffix = Целитель
     .desc = { ent-CMXenoDroneBase.desc }
