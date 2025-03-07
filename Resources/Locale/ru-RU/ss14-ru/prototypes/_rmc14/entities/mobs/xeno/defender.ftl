@@ -1,7 +1,7 @@
-ent-CMXenoDefenderBase = Defender
-    .desc = An alien with an armored crest.
+ent-CMXenoDefenderBase = Защитник
+    .desc = Инопланетянин с бронированным гребнем.
 ent-CMXenoDefender = { ent-CMXenoDefenderBase }
     .desc = { ent-CMXenoDefenderBase.desc }
 ent-CMXenoDefenderSteelcrest = { ent-CMXenoDefenderBase }
-    .suffix = Steelcrest
+    .suffix = Стальной Гребень
     .desc = { ent-CMXenoDefenderBase.desc }

@@ -1,2 +1,2 @@
-ent-CMXenoBoiler = Boiler
-    .desc = A huge, grotesque xenonid covered in glowing, oozing acid slime.
+ent-CMXenoBoiler = Бойлер
+    .desc = Огромный, гротескный ксеноморф, покрытый светящейся, сочащейся кислотой слизью.

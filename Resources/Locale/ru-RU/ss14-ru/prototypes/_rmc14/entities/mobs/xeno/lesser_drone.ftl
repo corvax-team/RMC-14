@@ -1,2 +1,2 @@
-ent-CMXenoLesserDrone = Lesser Drone
-    .desc = An alien drone. Looks... smaller.
+ent-CMXenoLesserDrone = Малый дрон
+    .desc = Инопланетный дрон. Выглядит... меньше.

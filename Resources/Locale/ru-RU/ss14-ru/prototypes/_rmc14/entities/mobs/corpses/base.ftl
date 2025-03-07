@@ -1,3 +1,3 @@
-ent-RMCHumanCorpse = unidentified corpse
-    .desc = I think they're dead.
-    .suffix = RMC14, Dead
+ent-RMCHumanCorpse = неопознанный труп
+    .desc = Я думаю, он мертв.
+    .suffix = RMC14, мертв

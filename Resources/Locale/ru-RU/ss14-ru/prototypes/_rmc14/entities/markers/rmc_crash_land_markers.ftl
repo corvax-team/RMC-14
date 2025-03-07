@@ -1,2 +1,2 @@
-ent-RMCCrashLandBarrier = crash land on touch barrier
+ent-RMCCrashLandBarrier = приземление на сенсорный барьер
     .desc = { ent-MarkerBase.desc }

@@ -1,3 +1,3 @@
-ent-CMMobReptilian = Urisst' C-M Mzhand
+ent-CMMobReptilian = Урист К.М. МакЯщер
     .suffix = RMC14
     .desc = { ent-CMBaseMobSpeciesOrganic.desc }
