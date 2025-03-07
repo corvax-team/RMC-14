@@ -1,6 +1,6 @@
-ent-CMPen = pen
-    .desc = It's a normal black ink pen.
-ent-CMPenClicky = WEYA pen
-    .desc = It's a WEYA brand extra clicky black ink pen.
-ent-CMPenFountain = fountain pen
-    .desc = A lavish testament to the ingenuity of AEGIS' craftsmanship, this fountain pen is a paragon of design and functionality. Detailed with golden accents and intricate mechanics, the pen allows for a swift change between a myriad of ink colors with a simple twist. A product of precision engineering, each mechanism inside the pen is designed to provide a seamless, effortless transition from one color to the next, creating an instrument of luxurious versatility.
+ent-CMPen = ручка
+    .desc = Это обычная ручка с чёрными чернилами.
+ent-CMPenClicky = ручка ВЕ-Я
+    .desc = Это крайне щёлкающая ручка бренда ВЕ-Я с чёрными чернилами.
+ent-CMPenFountain = перьевая ручка
+    .desc = Эта перьевая ручка является эталоном дизайна и функциональности, свидетельствуя об изобретательности мастеров компании Эгида. Дополненная золотыми акцентами и сложной механикой, ручка позволяет быстро выбрать один из мириадов цветов чернил простым движением. Продукт высокоточной инженерии, каждый механизм внутри ручки разработан так, чтобы гарантировать плавный, без лишних усилий переход от одного цвета к другому, создавая роскошный универсальный инструмент.

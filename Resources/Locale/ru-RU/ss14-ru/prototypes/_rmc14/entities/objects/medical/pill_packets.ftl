@@ -1,8 +1,8 @@
-ent-CMPacketPills = pill packet
-    .desc = Contains pills. Once you take them out, they don't go back in.
-ent-CMPacketPillsTricordrazine = tricordazine pill packet
-    .desc = This packet contains tricordazine pills. Heals all types of damage slightly. Once you take them out, they don't go back in. Don't take more than 2 pills in a short period.
-ent-CMPacketPillsBicaridine = bicaridine pill packet
-    .desc = This packet contains bicaridine pills. Heals brute damage effectively. Once you take them out, they don't go back in. Don't take more than 2 pills in a short period.
-ent-CMPacketPillsKelotane = kelotane pill packet
-    .desc = This packet contains kelotane pills. Heals burn damage effectively. Once you take them out, they don't go back in. Don't take more than 2 pills in a short period.
+ent-CMPacketPills = упаковка таблеток
+    .desc = Содержит таблетки. Если их вынуть, то обратно их уже не засунуть.
+ent-CMPacketPillsTricordrazine = упаковка таблеток трикордразина
+    .desc = В этой упаковке находятся таблетки трикордразина. Слабо лечит все виды повреждений. Вытащив таблетку, обратно её не засунуть. Не принимать больше 2 таблеток за короткий промежуток времени.
+ent-CMPacketPillsBicaridine = упаковка таблеток бикаридина
+    .desc = В этой упаковке находятся таблетки бикаридина. Эффективно лечит механические повреждения. Вытащив таблетку, обратно её не засунуть. Не принимать больше 2 таблеток за короткий промежуток времени.
+ent-CMPacketPillsKelotane = упаковка таблеток келотана
+    .desc = В этой упаковке находятся таблетки келотана. Эффективно лечит повреждения от ожогов. Вытащив таблетку, обратно её не засунуть. Не принимать больше 2 таблеток за короткий промежуток времени.

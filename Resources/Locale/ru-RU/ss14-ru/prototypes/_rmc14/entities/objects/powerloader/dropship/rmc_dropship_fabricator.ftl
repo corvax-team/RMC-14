@@ -1,2 +1,2 @@
-ent-RMCDropshipFabricator = dropship part fabricator
-    .desc = A large automated 3D printer for producing dropship parts.
+ent-RMCDropshipFabricator = фабрикатор частей корабля
+    .desc = Большой автоматизированный 3D-принтер для производства деталей кораблей.

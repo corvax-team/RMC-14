@@ -1,5 +1,5 @@
-ent-CMBedsheetBase = bedsheet
-    .desc = A surprisingly soft linen bedsheet.
+ent-CMBedsheetBase = простыня
+    .desc = Удивительно мягкая льняная простыня.
 ent-CMBedsheetBlue = { ent-CMBedsheetBase }
     .desc = { ent-CMBedsheetBase.desc }
 ent-CMBedsheetGreen = { ent-CMBedsheetBase }

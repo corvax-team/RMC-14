@@ -1,4 +1,4 @@
-ent-RMCPortableVendor = automated storage briefcase
-    .desc = A suitcase-sized automated storage and retrieval system. Designed to efficiently store and selectively dispense small items.
-ent-RMCPortableVendorCorporate = Weston-Yamada automated storage briefcase
-    .desc = A suitcase-sized automated storage and retrieval system. Designed to efficiently store and selectively dispense small items. This one has the Weston-Yamada logo stamped on its side.
+ent-RMCPortableVendor = чемодан автоматизированного хранения
+    .desc = Автоматизированная система хранения и выдачи предметов размером с чемодан. Предназначена для эффективного хранения и выборочной выдачи небольших предметов.
+ent-RMCPortableVendorCorporate = чемодан автоматизированного хранения Вестон-Ямада
+    .desc = Автоматизированная система хранения и выдачи предметов размером с чемодан. Предназначена для эффективного хранения и выборочной выдачи небольших предметов. На боку этой модели выбит логотип Вестон-Ямада.

@@ -1,6 +1,6 @@
-ent-RMCCableCoil = cable coil
-    .desc = A coil of power cable.
-    .suffix = Full
+ent-RMCCableCoil = моток кабеля
+    .desc = Моток электрического кабеля.
+    .suffix = Полный
 ent-RMCCableCoil30 = { ent-RMCCableCoil }
     .suffix = 30
     .desc = { ent-RMCCableCoil.desc }

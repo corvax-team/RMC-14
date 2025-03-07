@@ -1,9 +1,9 @@
-ent-RMCMatchbox = match box
-    .desc = A small box of 'Space-Proof' premium matches.
-ent-RMCMatchboxFull = match box
-    .suffix = Full
+ent-RMCMatchbox = спичечный коробок
+    .desc = Небольшой коробок «космосостойких» спичек премиум-класса.
+ent-RMCMatchboxFull = спичечный коробок
+    .suffix = Полный
     .desc = { ent-RMCMatchbox.desc }
-ent-RMCMatchstick = match
-    .desc = A simple match stick, used for lighting fine smokables.
-ent-RMCMatchstickPaper = paper match
-    .desc = A simple match stick, used for lighting fine smokables.
+ent-RMCMatchstick = спичка
+    .desc = Простая спичка, используемая для поджигания курева.
+ent-RMCMatchstickPaper = бумажная спичка
+    .desc = Простая спичка, используемая для поджигания курева.

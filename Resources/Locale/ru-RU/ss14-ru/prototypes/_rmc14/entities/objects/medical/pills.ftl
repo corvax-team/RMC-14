@@ -1,5 +1,5 @@
-ent-CMPill = pill
-    .desc = A pill.
+ent-CMPill = таблетка
+    .desc = Таблетка.
 ent-CMPillBicaridine = { ent-CMPill }
     .desc = { ent-CMPill.desc }
 ent-CMPillDexalin = { ent-CMPill }

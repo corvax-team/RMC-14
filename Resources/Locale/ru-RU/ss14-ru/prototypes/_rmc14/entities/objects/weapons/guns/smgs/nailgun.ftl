@@ -1,9 +1,9 @@
-ent-WeaponNailgun = nailgun
-    .desc = A carpentry tool, used to drive nails into tough surfaces. Of course, if there isn't anything there, that's just a very sharp nail launching at high velocity...
-    .suffix = Filled
-ent-RMCMagazineSMGNailgun = nailgun magazine (7x45mm)
-    .desc = A large magazine of oversized plasteel nails. Unfortunately, the production cost of those nail makes them ill-affordable for most military projects, and only some specific construction projects requires them.
-ent-RMCCartridge7x45mm = nail (7x45mm)
+ent-WeaponNailgun = гвоздомёт
+    .desc = Плотницкий инструмент, используемый для забивания гвоздей в прочные поверхности. Конечно, если поверхности нет, то это просто очень острый гвоздь, запущенный с большой скоростью...
+    .suffix = Заполненный
+ent-RMCMagazineSMGNailgun = магазин гвоздомёта (7x45мм)
+    .desc = Большой магазин огромных пласталевых гвоздей. К сожалению, стоимость производства этих гвоздей делает их недоступными для большинства военных проектов, и только некоторые специфические строительные проекты нуждаются в них.
+ent-RMCCartridge7x45mm = гвоздь (7x45мм)
     .desc = { ent-CMCartridgeSMGBase.desc }
 ent-Nail7x45mm = { ent-RMCBaseBullet }
     .desc = { ent-RMCBaseBullet.desc }

@@ -1,6 +1,6 @@
-ent-WeaponRifleXM88 = XM88 Heavy Rifle
-    .desc = An experimental man-portable anti-materiel rifle chambered in .458 SOCOM. It must be manually chambered for every shot.
+ent-WeaponRifleXM88 = тяжёлая винтовка XM88
+    .desc = Экспериментальная малогабаритная крупнокалиберная винтовка калибра .458 SOCOM. Перед каждым выстрелом необходимо вручную досылать патрон в патронник.
 ent-RMCBullet458SOCOM = { ent-BulletRifle10x24mm }
     .desc = { ent-BulletRifle10x24mm.desc }
-ent-RMCBox458SOCOM = box of .458 SOCOM
-    .desc = A box filled with handfuls of .458 SOCOM rounds, designed for use with the XM88 heavy rifle.
+ent-RMCBox458SOCOM = коробка патронов .458 SOCOM
+    .desc = Коробка, наполненная горстями патронов калибра .458 SOCOM, предназначенных для тяжёлой винтовки XM88.

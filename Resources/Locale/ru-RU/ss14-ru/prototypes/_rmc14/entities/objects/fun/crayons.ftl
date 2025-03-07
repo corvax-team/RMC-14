@@ -1,7 +1,7 @@
-ent-RMCCrayonBox = box of crayons
-    .desc = A box of every flavor of crayon.
+ent-RMCCrayonBox = коробка мелков
+    .desc = Коробка мелков всех цветов.
 ent-RMCBaseCrayon = { ent-Crayon }
-    .desc = A colorful crayon. Please refrain from eating it or putting it in your nose.
+    .desc = Цветной мелок. Пожалуйста, не ешьте его и не засовывайте в нос.
 ent-RMCCrayonRed = { ent-RMCBaseCrayon }
     .desc = { ent-RMCBaseCrayon.desc }
 ent-RMCCrayonOrange = { ent-RMCBaseCrayon }

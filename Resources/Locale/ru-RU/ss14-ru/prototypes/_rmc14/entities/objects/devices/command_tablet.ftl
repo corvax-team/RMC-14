@@ -1,2 +1,2 @@
-ent-RMCTabletCO = command tablet
-    .desc = A portable command interface used by top brass, capable of issuing commands over long ranges to their linked computer. Built to withstand a nuclear bomb.
+ent-RMCTabletCO = командный планшет
+    .desc = Портативный командный интерфейс, используемый высшим командным составом, способный передавать команды на большие расстояния на связанный с ним компьютер. Сконструирован так, чтобы выдержать попадание ядерной бомбы.

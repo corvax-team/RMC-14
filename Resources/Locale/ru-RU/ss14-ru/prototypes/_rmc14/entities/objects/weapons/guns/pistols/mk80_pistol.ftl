@@ -1,8 +1,8 @@
-ent-RMCMK80 = MK80 pistol
-    .desc = A massive, formidable semi-automatic handgun chambered in 9mm squash-head rounds. A common sight throughout both UN and TSE space, often held by both We-Ya PMC units and corporate executives. This weapon is also undergoing limited field testing as part of the Marines' next generation pistol program. The slide is engraved with the We-Ya logo reminding you who's really in charge.
-ent-CMMagazinePistolMK80 = MK80 magazine (9mm Squash-Head)
+ent-RMCMK80 = пистолет MK80
+    .desc = Массивный, грозный полуавтоматический пистолет под 9-мм патрон со сминаемой головкой (сквашхед). Его можно встретить как в ОПЗ, так и в ИТЗ, его часто используют как подразделения ЧВК Ве-Я, так и корпоративные менеджеры. Это оружие также проходит ограниченные полевые испытания в рамках программы создания пистолета нового поколения для колониальной морской пехоты. На затворе выгравирован логотип Ве-Я, напоминающий о том, кто здесь на самом деле хозяин.
+ent-CMMagazinePistolMK80 = магазин MK80 (9мм сквашхед)
     .desc = { ent-CMBaseMagazinePistol.desc }
-ent-RMCCartridgePistol9mmSquashHead = cartridge (9mm Squash-Head)
+ent-RMCCartridgePistol9mmSquashHead = патрон (9мм сквашхед)
     .desc = { ent-CMCartridgePistolBase.desc }
-ent-RCMBulletPistol9mmSquashHead = bullet (9mm Squash-Head)
+ent-RCMBulletPistol9mmSquashHead = пуля (9мм сквашхед)
     .desc = { ent-CMBulletBase.desc }

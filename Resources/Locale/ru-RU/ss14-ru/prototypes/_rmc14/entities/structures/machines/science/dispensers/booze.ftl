@@ -1,5 +1,5 @@
-ent-CMDispenserBooze = booze dispenser
-    .desc = A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one.
+ent-CMDispenserBooze = раздатчик алкоголя
+    .desc = Чудо техники, способное смешать именно ту смесь, которую вы хотите выпить, стоит только попросить.
 ent-CMDispenserBoozeEmpty = { ent-CMDispenserBooze }
-    .suffix = Empty
+    .suffix = Пустой
     .desc = { ent-CMDispenserBooze.desc }

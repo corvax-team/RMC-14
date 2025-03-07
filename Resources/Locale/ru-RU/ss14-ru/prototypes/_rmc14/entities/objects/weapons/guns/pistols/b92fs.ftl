@@ -1,4 +1,4 @@
 ent-RMCWeaponPistolB92FS = Beretta M92FS
-    .desc = A popular police firearm in the 20th century, often employed by hard-boiled cops while confronting terrorists. A classic of its time, chambered in 9mm. Normally found in the hands of Survivors and the Colony Liberation Front.
-ent-RMCMagazinePistolB92FS = Beretta M92FS magazine (9mm)
-    .desc = A magazine for the Beretta M92FS Pistol. Takes 9mm rounds.
+    .desc = Популярное полицейское оружие XX века, часто использовавшееся суровыми полицейскими в столкновениях с террористами. Классика своего времени, под патрон 9 мм. В основном встречается в руках выживших и Фронта Освобождения Колоний.
+ent-RMCMagazinePistolB92FS = магазин Beretta M92FS(9мм)
+    .desc = Магазин для пистолета Beretta M92FS. Использует патроны калибра 9мм.

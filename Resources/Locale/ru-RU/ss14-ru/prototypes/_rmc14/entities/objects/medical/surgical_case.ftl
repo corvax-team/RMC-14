@@ -1,5 +1,5 @@
-ent-CMSurgicalCase = surgical case
-    .desc = It's a medical case for storing basic surgical tools.
+ent-CMSurgicalCase = хирургический кейс
+    .desc = Это медицинский кейс для хранения базовых хирургических инструментов.
 ent-CMSurgicalCaseFilled = { ent-CMSurgicalCase }
-    .suffix = Filled
+    .suffix = Заполненный
     .desc = { ent-CMSurgicalCase.desc }

@@ -1,6 +1,6 @@
-ent-ColMarTechSCTGear = ColMarTech squad comtech gear rack
-    .desc = An automated gear rack for combat technicians.
-ent-ColMarTechSCTEquipment = ColMarTech squad comtech equipment rack
-    .desc = An automated rack hooked up to a colossal storage of combat technician standard-issue equipment.
-ent-ColMarTechSCTTools = ColMarTech squad comTech tools vendor
-    .desc = A vending machine that stores various extra tools that are useful on the field.
+ent-ColMarTechSCTGear = КолМарТех стойка снаряжения отрядного боевого техника
+    .desc = Автоматизированная стойка снаряжения боевых техников.
+ent-ColMarTechSCTEquipment = КолМарТех стойка экипировки отрядного боевого техника
+    .desc = Автоматизированная стойка, подключенная к гигантскому хранилищу стандартной экипировки боевых техников.
+ent-ColMarTechSCTTools = КолМарТех стойка инструментов отрядного боевого техника
+    .desc = Торгомат, в котором хранятся различные запасные инструменты, которые пригодятся на поле боя.

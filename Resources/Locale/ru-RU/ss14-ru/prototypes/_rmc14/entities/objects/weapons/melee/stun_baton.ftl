@@ -1,2 +1,2 @@
-ent-CMStunbaton = stun baton
-    .desc = A stun baton for incapacitating people with.
+ent-CMStunbaton = дубинка-шокер
+    .desc = Электрошоковая дубинка для обездвиживания людей.

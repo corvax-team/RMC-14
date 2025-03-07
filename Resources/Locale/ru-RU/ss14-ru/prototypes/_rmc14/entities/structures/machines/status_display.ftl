@@ -1,2 +1,2 @@
-ent-RMCStatusDisplay = status display
-    .desc = A monitor depicting the ship's current status. It flickers every so often.
+ent-RMCStatusDisplay = дисплей статуса
+    .desc = Монитор, отображающий текущее состояние корабля. Он периодически мерцает.

@@ -1,2 +1,2 @@
 ent-RMCDropper = { ent-Dropper }
-    .desc = A dropper. Transfers 5 units.
+    .desc = Пипетка. Перемещает 5 единиц.

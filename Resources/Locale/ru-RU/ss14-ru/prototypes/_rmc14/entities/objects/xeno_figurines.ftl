@@ -1,8 +1,8 @@
 ent-RMCBaseFigurineXeno = { ent-RMCBaseFigurinePatron }
     .desc = { ent-RMCBaseFigurinePatron.desc }
-ent-RMCSpawnerFigurineXeno = xeno figurine spawner
+ent-RMCSpawnerFigurineXeno = спавнер фигурки ксено
     .desc = { ent-MarkerBase.desc }
-ent-RMCFigurineXenoXippy = Xippy figurine
-    .desc = Always has a helpful xip for sisters in need.
-ent-RMCFigurineXenoWarrior616 = Warrior (XX-616) figurine
-    .desc = The hive's greatest fighter, she slew over 30 hosts with her might alone.
+ent-RMCFigurineXenoXippy = фигурка Ксиппи
+    .desc = Всегда даст полезный ксовет нуждающимся сёстрам.
+ent-RMCFigurineXenoWarrior616 = фигурка Воин (XX-616)
+    .desc = Величайший боец улья, она уничтожила более 30 носителей в одиночку.

@@ -1,6 +1,6 @@
-ent-RMCBucket = bucket
-    .desc = It's a bucket. Holds 120 units.
-ent-CMBucketMop = mop bucket
-    .desc = A larger bucket, typically used with a mop. Holds 240 units
-ent-CMBucketJani = janitorial bucket
-    .desc = It's a large bucket that fits in a janitorial cart. Holds 500 units.
+ent-RMCBucket = ведро
+    .desc = Это ведро. Вмещает 120 единиц.
+ent-CMBucketMop = ведро для швабры
+    .desc = Ведро большего размера, обычно используется со шваброй. Вмещает 240 единиц.
+ent-CMBucketJani = ведро уборщика
+    .desc = Это большое ведро, которое помещается в тележку уборщика. Вмещает 500 единиц.

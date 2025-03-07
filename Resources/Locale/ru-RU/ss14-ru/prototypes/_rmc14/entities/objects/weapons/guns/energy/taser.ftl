@@ -1,2 +1,2 @@
-ent-RMCWeaponTaser = disabler gun
-    .desc = An advanced stun device capable of firing balls of ionized electricity. Used for nonlethal takedowns.
+ent-RMCWeaponTaser = станнер
+    .desc = Продвинутое оглушающее устройство, способное стрелять шарами ионизированного электричества. Используется для нелетальных задержаний.

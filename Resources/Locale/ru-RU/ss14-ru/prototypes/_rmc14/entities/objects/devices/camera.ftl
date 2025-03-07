@@ -1,2 +1,2 @@
-ent-RMCCameraBroadcasting = broadcasting camera
-    .desc = Actively document everything you see, from the mundanity of shipside to the brutal battlefields below.
+ent-RMCCameraBroadcasting = вещательная камера
+    .desc = Активно документируйте всё, что видите, — от обыденности на корабле до жестоких полей сражений внизу.

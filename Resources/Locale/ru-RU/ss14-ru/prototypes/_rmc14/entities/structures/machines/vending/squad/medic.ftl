@@ -1,4 +1,4 @@
-ent-ColMarTechMedicalGear = ColMarTech squad medical gear rack
-    .desc = An automated gear rack for hospital corpsmen.
-ent-ColMarTechMedicalEquipment = ColMarTech squad medical equipment rack
-    .desc = An automated rack hooked up to a colossal storage of hospital corpsman standard-issue equipment.
+ent-ColMarTechMedicalGear = КолМарТех стойка снаряжения отрядного полевого санитара
+    .desc = Автоматизированная стойка снаряжения полевых санитаров.
+ent-ColMarTechMedicalEquipment = КолМарТех стойка экипировки отрядного полевого санитара
+    .desc = Автоматизированная стойка, подключенная к гигантскому хранилищу стандартной экипировки полевых санитаров.

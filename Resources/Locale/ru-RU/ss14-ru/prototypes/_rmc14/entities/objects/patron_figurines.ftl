@@ -1,7 +1,7 @@
 ent-RMCBaseFigurinePatron = { ent-BaseFigurine }
-    .desc = A small, detailed miniature.
-ent-RMCSpawnerFigurinePatron = patron figurine spawner
-    .desc = A patron figurine spawner.
+    .desc = Маленькая, детализированная миниатюрка.
+ent-RMCSpawnerFigurinePatron = спавнер фигурка патрона
+    .desc = Спавнер фигурки патрона.
 ent-RMCFigurinePatronFoxBridgeton = Fox Bridgeton figurine
     .desc = This is like that book by George Orwell, Nineteen Eighty Fo'
 ent-RMCFigurinePatronKillsTheMice = Kills-The-Mice figurine

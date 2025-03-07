@@ -1,3 +1,3 @@
-ent-CMBaseElectronics = base electronics
-    .suffix = Electronics
+ent-CMBaseElectronics = базовая электроника
+    .suffix = Электроника
     .desc = { ent-BaseElectronics.desc }

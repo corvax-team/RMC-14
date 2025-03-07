@@ -1,3 +1,3 @@
-ent-RMCAdminAccessConfigurator = admin access configurator
-    .desc = If found, please return to your nearest High Command official.
-    .suffix = RMC, Admin
+ent-RMCAdminAccessConfigurator = конфигуратор доступа администратора
+    .desc = В случае нахождения, пожалуйста, верните его ближайшему офицеру Верховного командования.
+    .suffix = RMC, Админ

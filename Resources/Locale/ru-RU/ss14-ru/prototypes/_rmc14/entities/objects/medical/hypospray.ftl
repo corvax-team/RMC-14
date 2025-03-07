@@ -1,8 +1,8 @@
-ent-CMHypospray = hypospray
-    .desc = The DeForest Medical Corporation hypospray is a sterile, air-needle auto-injector for rapid administration of drugs to patients.
+ent-CMHypospray = гипоспрей
+    .desc = Гипоспрей ДеФорест Медикал Корпорейшн - это стерильный автоинъектор с воздушной иглой для быстрого введения лекарств пациентам.
 ent-CMHyposprayWithVial = { ent-CMHypospray }
-    .suffix = Vial
+    .suffix = Ампула
     .desc = { ent-CMHypospray.desc }
 ent-CMHyposprayFilledTricord = { ent-CMHypospray }
-    .suffix = Filled, Tricordrazine
+    .suffix = Заполненный, Трикордразин
     .desc = { ent-CMHypospray.desc }

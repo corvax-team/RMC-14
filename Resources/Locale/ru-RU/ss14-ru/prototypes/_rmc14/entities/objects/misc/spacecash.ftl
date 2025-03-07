@@ -1,7 +1,7 @@
-ent-RMCSpaceCash = dollars
-    .desc = Ten US Government minted hundred-dollar bills. Every single damn one of them has Ben Fucking Franklin on them. The court of Bens sit impatiently, as if each one thought they alone belonged to you. This coven of angry Bens have all since learned about your relations with the other Bens, and they want answers.
-ent-RMCSpaceCash1 = 1 dollar bill
-    .desc = A single US Government minted one dollar bill. It has a picture of George Washington printed on it. Makes most people of English origin cry, but isn't worth very much. Could probably get you half a hot-dog in some systems.
+ent-RMCSpaceCash = доллар ОПЗ
+    .desc = Десять банкнот номиналом в сто долларов, отпечатанных правительством ОПЗ. На каждой из них изображен Бен, мать его, Франклин. Совет Бенов восседает в нетерпении, будто каждый из них считает, что принадлежит только вам. Этот шабаш разгневанных Бенов узнал о ваших связях с другими Бенами, и они хотят получить ответы.
+ent-RMCSpaceCash1 = долларовая банкнота
+    .desc = Банкнота номиналом один доллар, отпечатанная правительством ОПЗ. На ней изображён Джордж Вашингтон. Доводит до слез большинство англичан, но стоит не очень много. Вероятно, в некоторых системах вы сможете купить за неё половину хот-дога.
 ent-RMCSpaceCash10 = { ent-RMCSpaceCash1 }
     .suffix = 10
     .desc = { ent-RMCSpaceCash1.desc }

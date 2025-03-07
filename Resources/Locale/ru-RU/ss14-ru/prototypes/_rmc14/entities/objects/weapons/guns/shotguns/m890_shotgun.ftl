@@ -1,2 +1,2 @@
-ent-WeaponShotgunM890 = M890 tactical shotgun
-    .desc = A unique corporate made semi-automatic shotgun with a rapid fire rate and an attached Underslung Grenade Launcher. Holds 8 shotgun shells in the chamber.
+ent-WeaponShotgunM890 = тактический дробовик M890
+    .desc = Уникальный полуавтоматический дробовик корпоративного производства с высоким темпом стрельбы и подствольным гранатомётом. В патронник помещается 8 патронов.

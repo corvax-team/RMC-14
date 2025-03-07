@@ -1,2 +1,2 @@
-ent-RMCMagazineShotgunXM51 = XM51 magazine (16g)
-    .desc = A 16 gauge pump-action shotgun magazine.
+ent-RMCMagazineShotgunXM51 = магазин XM51 (16 кал.)
+    .desc = Магазин для помпового ружья 16 калибра.
