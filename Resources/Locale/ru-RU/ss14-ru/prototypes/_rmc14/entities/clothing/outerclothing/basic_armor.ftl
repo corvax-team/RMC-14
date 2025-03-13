@@ -1,4 +1,4 @@
-ent-CMArmorRiot = M5 riot control armor
-    .desc = A heavily modified suit of M2 MP Armor used to suppress riots from buckethead marines. Slows you down a lot.
+ent-CMArmorRiot = бронежилет подавления беспорядков M5
+    .desc = Сильно модифицированный бронежилет M2 ВП, используемый для подавления бунтов буйных колониальных морпехов. Сильно замедляет вас.
 ent-CMArmorRiotOld = { ent-CMArmorRiot }
-    .desc = Barring the slightly off-color plates, it's preserved quite well.
+    .desc = За исключением слегка выцветших пластин, он сохранился довольно неплохо.

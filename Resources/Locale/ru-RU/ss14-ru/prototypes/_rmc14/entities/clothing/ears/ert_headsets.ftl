@@ -1,6 +1,6 @@
 ent-RMCHeadsetDistressWeYaColony = { ent-RMCHeadsetLiaison }
-    .suffix = WeYa, Colony
+    .suffix = Ве-Я, Колония
     .desc = { ent-RMCHeadsetLiaison.desc }
-ent-RMCHeadsetDistressICBLiaison = ICB liaison headset
-    .suffix = WeYa, Colony
+ent-RMCHeadsetDistressICBLiaison = гарнитура связного БМТ
+    .suffix = Ве-Я, Колония
     .desc = { ent-RMCHeadsetLiaison.desc }

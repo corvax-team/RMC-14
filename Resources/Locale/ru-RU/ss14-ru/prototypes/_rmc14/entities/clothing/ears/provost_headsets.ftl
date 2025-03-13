@@ -1,2 +1,2 @@
-ent-RMCHeadsetProvost = UNMC provost headset
+ent-RMCHeadsetProvost = гарнитура Провост ККМП
     .desc = { ent-CMHeadset.desc }
