@@ -13,5 +13,5 @@ ent-CMCartridgeRifle10x24mmAP = бронебойный патрон (10x24мм)
     .desc = Бронебойный патрон 10х24мм. Подходит для бронебойных магазинов 10x24мм.
 ent-BulletRifle10x24mm = { ent-RMCBaseBullet }
     .desc = { ent-RMCBaseBullet.desc }
-ent-BulletRifle10x24mmAP = { ent-BulletRifle10x24мм }
-    .desc = { ent-BulletRifle10x24мм.desc }
+ent-BulletRifle10x24mmAP = { ent-BulletRifle10x24mm }
+    .desc = { ent-BulletRifle10x24mm.desc }
