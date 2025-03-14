@@ -57,9 +57,9 @@ rmc-xeno-fruit-feed-fail-self = Нам не удаётся скормить { $t
 rmc-xeno-fruit-feed-fail-target = { CAPITALIZE($user) } не удаётся скормить нам { $fruit }.
 rmc-xeno-fruit-feed-fail-others = { CAPITALIZE($user) } не удаётся скормить { $target } { $fruit }.
 
-rmc-xeno-fruit-feed-success-self = Мы скормили { $target) } { $fruit }.
+rmc-xeno-fruit-feed-success-self = Мы скормили { $target } { $fruit }.
 rmc-xeno-fruit-feed-success-target = { CAPITALIZE($user) } скормила нам { $fruit }.
-rmc-xeno-fruit-feed-success-others = { CAPITALIZE($user) } скормила { $target) } { $fruit }.
+rmc-xeno-fruit-feed-success-others = { CAPITALIZE($user) } скормила { $target } { $fruit }.
 
 # Fruit removed
 rmc-xeno-fruit-destroyed = Мы чувствуем, что один из наших фруктов был уничтожен!
@@ -92,4 +92,4 @@ rmc-xeno-fruit-ui-count = Посаженные фрукты: { $count }/{ $max }
 
 # Not-same hive
 rmc-xeno-fruit-wrong-hive = Это не из нашего улья!
-rmc-xeno-fruit-feed-wrong-hive = { $target) } не из нашего улья!!
+rmc-xeno-fruit-feed-wrong-hive = { $target } не из нашего улья!!
