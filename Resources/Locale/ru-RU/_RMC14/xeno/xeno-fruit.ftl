@@ -55,7 +55,7 @@ rmc-xeno-fruit-feed-start-others = { CAPITALIZE($user) } начинает ска
 
 rmc-xeno-fruit-feed-fail-self = Нам не удаётся скормить { $target } { $fruit }.
 rmc-xeno-fruit-feed-fail-target = { CAPITALIZE($user) } не удаётся скормить нам { $fruit }.
-rmc-xeno-fruit-feed-fail-others = { CAPITALIZE($user) } не удаётся скормить { $target) } { $fruit }.
+rmc-xeno-fruit-feed-fail-others = { CAPITALIZE($user) } не удаётся скормить { $target } { $fruit }.
 
 rmc-xeno-fruit-feed-success-self = Мы скормили { $target) } { $fruit }.
 rmc-xeno-fruit-feed-success-target = { CAPITALIZE($user) } скормила нам { $fruit }.
