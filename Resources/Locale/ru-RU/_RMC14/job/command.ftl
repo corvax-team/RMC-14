@@ -9,11 +9,11 @@ cm-job-prefix-staff-officer = ОШ
 CMJobStaffOfficer = Офицер штаба
 cm-job-name-commanding-officer = Командующий офицер
 cm-job-description-commanding-officer = Возглавьте операцию и выполните поставленную задачу.
-cm-job-prefix-commanding-officer = КОф
+cm-job-prefix-commanding-officer = КО
 CMJobCommandingOfficer = Командующий офицер
 cm-job-name-executive-officer = Исполнительный офицер
 cm-job-description-executive-officer = Вы являетесь заместителем командующего офицера на борту корабля, и следующим за ним по цепи командования.
-cm-job-prefix-executive-officer = ИОф
+cm-job-prefix-executive-officer = ИО
 CMJobExecutiveOfficer = Исполнительный офицер
 # Admin only right now.
 cm-job-name-high-command = Верховное командование
