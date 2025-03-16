@@ -1,12 +1,12 @@
 # Non Marine Personnel
-cm-job-name-correspondent = Correspondent
-cm-job-description-correspondent = You report on anything and everything that you deem fit to put within the pages of the news.
-cm-job-prefix-correspondent = PRESS
-CMJobCorrespondent = Correspondent
-cm-job-name-survivor = Survivor
-cm-job-description-survivor = You are a survivor of the attack on a corporate facility. You worked or lived in the colony/station, and managed to avoid the alien attacks... until now.
-CMJobSurvivor = Survivor
-cm-job-name-liaison = Corporate Liaison
-cm-job-description-liaison = Be the direct line of communication between the Almayer and We-Ya by sending faxes. Make sure the interests of the We-Ya are retained.
-cm-job-prefix-liaison = CL
-CMJobLiaison = Corporate Liaison
+cm-job-name-correspondent = Корреспондент
+cm-job-description-correspondent = Сообщайте обо всём, что посчитаете заслуживающим быть опубликованным в новостях.
+cm-job-prefix-correspondent = ПРЕССА
+CMJobCorrespondent = Корреспондент
+cm-job-name-survivor = Выживший
+cm-job-description-survivor = Вы выжили после нападения на корпоративный объект. Вы работали или жили в колонии/на станции, и вам удавалось избежать нападения инопланетян... до этого момента.
+CMJobSurvivor = Выживший
+cm-job-name-liaison = Корпоративный связной
+cm-job-description-liaison = Будьте прямым связующим звеном между Альмайером и Ве-Я путём отправки факсов. Следите за соблюдением интересов Вестон-Ямада.
+cm-job-prefix-liaison = КС
+CMJobLiaison = Корпоративный связной

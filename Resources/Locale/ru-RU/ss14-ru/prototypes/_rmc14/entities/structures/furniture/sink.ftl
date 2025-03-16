@@ -1,6 +1,6 @@
-ent-CMSinkEmpty = sink
-    .desc = A sink used for washing one's hands and face.
-    .suffix = Empty
-ent-CMSink = sink
-    .suffix = Water
+ent-CMSinkEmpty = раковина
+    .desc = Раковина, используемая для мытья рук и лица.
+    .suffix = Пустой
+ent-CMSink = раковина
+    .suffix = Вода
     .desc = { ent-CMSinkEmpty.desc }

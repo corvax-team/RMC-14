@@ -1,3 +1,3 @@
-ent-ColMarTechWardrobeCorp = Corporate Liaison's Personal Wardrobe
-    .desc = A wardrobe containing all the clothes an executive would ever need.
-    .suffix = Corp
+ent-ColMarTechWardrobeCorp = Личный гардероб корпоративного связного
+    .desc = Гардероб, в котором есть всё, что может понадобиться руководителю.
+    .suffix = Корп

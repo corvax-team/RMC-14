@@ -1,2 +1,2 @@
-ent-RMCActionViewIntelObjectives = View Intel Objectives
+ent-RMCActionViewIntelObjectives = Смотреть цели разведки
     .desc = { "" }

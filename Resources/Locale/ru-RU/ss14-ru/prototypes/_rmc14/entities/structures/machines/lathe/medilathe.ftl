@@ -1,6 +1,6 @@
-ent-RMCMedilathe = medilathe
-    .desc = A specialized autolathe made for printing medical items.
-    .suffix = Right Output
+ent-RMCMedilathe = медилат
+    .desc = Специализированный автолат, предназначенный для печати медицинских изделий.
+    .suffix = Продукция справа
 ent-RMCMedilatheLeft = { ent-RMCMedilathe }
-    .suffix = Left Output
+    .suffix = Продукция слева
     .desc = { ent-RMCMedilathe.desc }

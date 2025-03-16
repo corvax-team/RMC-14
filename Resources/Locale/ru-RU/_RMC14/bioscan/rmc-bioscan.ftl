@@ -1,43 +1,45 @@
-rmc-bioscan-ares-announcement = [color=white][font size=16][bold]ARES v3.2 Bioscan Status[/bold][/font][/color][color=red][font size=14][bold]
+rmc-bioscan-ares-announcement = [color=white][font size=16][bold]АРЕС v3.2 Статус биосканирования[/bold][/font][/color][color=red][font size=14][bold]
     { $message }[/bold][/font][/color]
 rmc-bioscan-ares =
-    Bioscan complete.
+    Биосканирование завершено.
     
-    Sensors indicate { $shipUncontained ->
-        [0] no
+    Датчики показывают { $shipUncontained ->
+        [0] отсутствие
        *[other] { $shipUncontained }
-    } unknown lifeform { $shipUncontained ->
-        [0] signatures
-        [1] signature
-       *[other] signatures
-    } present on the ship{ $shipLocation ->
+    } { $shipUncontained ->
+        [0] сигнатур неизвестных форм жизни
+        [1] сигнатуру неизвестной формы жизни
+        [few] сигнатуры неизвестных форм жизни
+       *[other] сигнатур неизвестных форм жизни
+    } на борту корабля{ $shipLocation ->
         [none] { "" }
-       *[other] , including one in { $shipLocation },
-    } and { $onPlanet ->
-        [0] no
-       *[other] approximately { $onPlanet }
+       *[other] , в том числе около отсека { $shipLocation },
+    } и { $onPlanet ->
+        [0] отсутствие
+       *[other] примерно { $onPlanet }
     } { $onPlanet ->
-        [0] signatures
-        [1] signature
-       *[other] signatures
-    } located elsewhere{ $planetLocation ->
+        [0] сигнатур
+        [1] сигнатуру
+        [few] сигнатуры
+       *[other] сигнатур
+    } в зоне боевых действий{ $planetLocation ->
         [none] .
-       *[other] , including one in { $planetLocation }
+       *[other] , в том числе около { $planetLocation }
     }
-rmc-bioscan-xeno-announcement = [color=#318850][font size=14][bold]The Queen Mother reaches into your mind from worlds away.
+rmc-bioscan-xeno-announcement = [color=#318850][font size=14][bold]Королева-мать достигает вашего сознания из далёких миров.
     { $message }[/bold][/font][/color]
 rmc-bioscan-xeno =
-    To my children and their Queen: I sense { $onShip ->
-        [0] no hosts
-        [1] approximately 1 host
-       *[other] approximately { $onShip } hosts
-    } in the metal hive{ $shipLocation ->
+    Моим детям и их Королеве: Я чувствую { $onShip ->
+        [0] отсутствие носителей
+        [1] одного носителя
+       *[other] примерно { $onShip } носителей
+    } в металлическом улье{ $shipLocation ->
         [none] { "" }
-       *[other] , including one in { $shipLocation },
-    } and { $onPlanet ->
-        [0] none
+       *[other] , в том числе около места { $shipLocation },
+    } и { $onPlanet ->
+        [0] отсутствие носителей
        *[other] { $onPlanet }
-    } scattered elsewhere{ $planetLocation ->
+    }, рассеянных по разным местам{ $planetLocation ->
         [none] .
-       *[other] , including one in { $planetLocation }
+       *[other] , в том числе около { $planetLocation }
     }

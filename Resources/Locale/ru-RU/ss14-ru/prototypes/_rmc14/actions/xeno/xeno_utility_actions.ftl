@@ -1,20 +1,20 @@
-ent-ActionXenoTransferPlasma = Transfer plasma (50)
-    .desc = Give plasma to a nearby xenonid.
-ent-ActionXenoHealerDroneTransferPlasma = Transfer plasma (100)
-    .desc = Give plasma to a nearby xenonid.
-ent-ActionXenoResinSurge = Resin Surge (75)
-    .desc = Speeds up fruit growth by 5 seconds when used on fruit, creates temporary walls when used on weeds or use on existing walls to reinforce them with 6000 hp for 15 seconds. Targeting anything else creates a 3x3 patch of weak sticky resin after a small doafter.
-ent-ActionXenoRetrieve = Retrieve (180 plasma, 100 energy)
-    .desc = Pull a xenonid to you if they are still, with a 0.6 second doafter.
-ent-ActionXenoAidHeal = Aid Xenonid Healing (100 plasma, 100+ health reserves)
-    .desc = Heals a nearby ally Xeno. Healing another Xeno will also heal you, and half your remaining health reserves will be consumed for extra healing. [color=red]This can't heal ignited xenonids![/color]
-ent-ActionXenoAidRejuvenate = Aid Xenonid Rejuvenate (100 plasma, 100 health reserves)
-    .desc = Remove ailments and stuns from a far away ally Xeno.
-ent-ActionXenoLeader = Choose/Follow Xenonid Leaders
-    .desc = Promotes and demotes xenonid leaders, or watches them. Promoting a xeno to leader will make them emit your pheromones around themselves.
-ent-ActionXenoHeal = Heal Xenonid (600)
-    .desc = Heals xenonids in a 4 tile range around where you click for 30% of their health over 20 seconds.
-ent-ActionXenoApplySalve = Apply Salve (200)
-    .desc = Apply a salve to use some of your health to heal allied Xenos up to 100 health over 5 seconds. You can stack multiple salves.
-ent-ActionXenoSacrifice = Sacrifice
-    .desc = Sacrifice your life to heal a sister. [color=red]YOU WILL ONLY RESPAWN IF YOU MAXED OUT YOUR TRANSFERRED HEALTH BY HEALING SISTERS.[/color]
+ent-ActionXenoTransferPlasma = Передать плазму (50)
+    .desc = Передайте плазму ксенониду поблизости.
+ent-ActionXenoHealerDroneTransferPlasma = Передать плазму (100)
+    .desc = Передайте плазму ксенониду поблизости.
+ent-ActionXenoResinSurge = Всплеск смолы (75)
+    .desc = Ускоряет созревание фруктов на 5 секунд при использовании на них, при использовании на сорняках создаёт временные стены, а при использовании на существующих стенах, укрепляет их 6000 единицами здоровья на 15 секунд. Если нацелить способность на что-нибудь другое, то после небольшой задержи образуется участок 3x3 слабой липкой смолы.
+ent-ActionXenoRetrieve = Притягивание (180 плазмы, 100 энергии)
+    .desc = Притяните к себе не двигающегося ксенонида, с задержкой в 0,6 секунды.
+ent-ActionXenoAidHeal = Лечение ксено (100 плазмы, 100+ запаса здоровья)
+    .desc = Излечите находящегося поблизости союзника Ксено. Исцеление другого ксено исцелит и вас, а половина вашего оставшегося запаса здоровья будет потрачена на дополнительное лечение. [color=red]Это не может лечить горящих ксенонидов![/color]
+ent-ActionXenoAidRejuvenate = Восстановление ксено (100 плазмы, 100+ запаса здоровья)
+    .desc = Снимает недуги и оглушение с находящихся на расстоянии союзных Ксено.
+ent-ActionXenoLeader = Выбрать/следовать за ксенонидом лидером
+    .desc = Повышение, понижение, или наблюдение за ксенонидом-лидером. Повышенный до лидера ксено станет излучать вокруг себя ваши феромоны.
+ent-ActionXenoHeal = Лечение ксено (600)
+    .desc = Исцелите ксенонидов в радиусе 4 тайлов вокруг места вашего клика на 30% от их здоровья в течение 20 секунд.
+ent-ActionXenoApplySalve = Нанесение мази (200)
+    .desc = Нанесите мазь, чтобы использовать часть своего здоровья для излечения союзных ксено вплоть до 100 единиц здоровья в течение 5 секунд. Эффект нескольких применённых мазей складывается.
+ent-ActionXenoSacrifice = Самопожертвование
+    .desc = Пожертвуйте своей жизнью, чтобы вылечить сестру. [color=red]ВЫ ВОЗРОДИТЕСЬ ТОЛЬКО ЕСЛИ ШКАЛА ЛЕЧЕНИЯ СЕСТЁР БЫЛА ПОЛНОСТЬЮ ЗАПОЛНЕНА.[/color]

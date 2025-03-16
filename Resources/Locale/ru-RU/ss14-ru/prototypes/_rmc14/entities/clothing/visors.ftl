@@ -1,2 +1,2 @@
-ent-RMCVisorNightVision = night vision optic
-    .desc = An insertable visor HUD into a standard UNMC helmet. This type gives a form of night vision and is standard issue in units with regular funding. It can be inserted into a recharger to recharge its internal battery.
+ent-RMCVisorNightVision = прибор ночного видения
+    .desc = Вставной визор, крепящийся к стандартным шлемам ККМП. Этот прибор даёт возможность видеть в темноте и входит в стандартное обмундирование подразделений с регулярным финансированием. Его можно вставить в зарядное устройство для подзарядки внутренней батареи.

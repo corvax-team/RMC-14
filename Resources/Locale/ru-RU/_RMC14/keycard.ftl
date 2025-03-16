@@ -1,6 +1,5 @@
-rmc-keycard-device = Keycard Authentication Device
-rmc-keycard-device-description =
-    This device is used to trigger some
-    high security events.
-    It requires the simultaneous swipe
-    of two high-level ID cards.
+﻿rmc-keycard-device = Считыватель аутентификации ключ-карт
+rmc-keycard-device-description = Это устройство используется для запуска некоторых
+  протоколов повышенной безопасности.
+  Для этого нужно провести по нему
+  двумя ИД-картами высокого уровня одновременно.

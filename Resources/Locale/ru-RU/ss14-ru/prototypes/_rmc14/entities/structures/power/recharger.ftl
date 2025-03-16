@@ -1,2 +1,2 @@
-ent-RMCRecharger = recharger
+ent-RMCRecharger = зарядное устройство
     .desc = { ent-BaseRecharger.desc }

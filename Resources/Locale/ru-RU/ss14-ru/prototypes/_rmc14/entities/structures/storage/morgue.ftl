@@ -1,4 +1,4 @@
-ent-CMMorgue = morgue
-    .desc = Used to store bodies until someone fetches them.
-ent-CMCrematorium = crematorium
-    .desc = A human incinerator. Works well on barbecue nights.
+ent-CMMorgue = морг
+    .desc = Используется для хранения тел, пока кто-нибудь не заберёт их.
+ent-CMCrematorium = крематорий
+    .desc = Человекосжигатель. Отлично подойдёт для вечера барбекю.

@@ -1,7 +1,7 @@
 ent-CMLightBulbBase = { ent-BaseLightbulb }
     .desc = { ent-BaseLightbulb.desc }
-ent-CMLightBulb = light bulb
-    .desc = A replacement light bulb.
-ent-CMLightBulbBroken = light bulb
-    .desc = A replacement light bulb.
-    .suffix = Broken
+ent-CMLightBulb = лампочка
+    .desc = Запасная лампочка.
+ent-CMLightBulbBroken = лампочка
+    .desc = Запасная лампочка.
+    .suffix = Разбитая

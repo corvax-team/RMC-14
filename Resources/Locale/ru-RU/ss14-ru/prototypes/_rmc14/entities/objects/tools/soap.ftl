@@ -1,8 +1,8 @@
-ent-CMSoap = soap
-    .desc = A cheap bar of soap. Doesn't smell.
-ent-CMSoapDeluxe = soap
-    .desc = A deluxe Waffle Co. brand bar of soap. Smells of strawberries.
-ent-CMSoapSyndie = soap
-    .desc = An untrustworthy bar of soap. Smells of fear.
-ent-CMSoapNT = soap
-    .desc = A WeYa brand bar of soap. Smells of phoron.
+ent-CMSoap = мыло
+    .desc = Дешёвый кусок мыла. Не пахнет.
+ent-CMSoapDeluxe = мыло
+    .desc = Элитный брусок мыла бренда Ваффл Ко. Пахнет клубникой.
+ent-CMSoapSyndie = мыло
+    .desc = Не вызывающий доверия кусок мыла. Пахнет страхом.
+ent-CMSoapNT = мыло
+    .desc = Брусок мыла марки Ве-Я. Пахнет фороном.

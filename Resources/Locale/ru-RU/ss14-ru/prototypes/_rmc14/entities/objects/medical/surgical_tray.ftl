@@ -1,5 +1,5 @@
-ent-RMCSurgicalTrayEmpty = surgical tray
+ent-RMCSurgicalTrayEmpty = хирургический лоток
     .desc = { ent-CMSurgicalCase.desc }
-ent-RMCSurgicalTray = surgical tray
-    .suffix = Filled, All Tools
+ent-RMCSurgicalTray = хирургический лоток
+    .suffix = Заполненный, Все инструменты
     .desc = { ent-RMCSurgicalTrayEmpty.desc }

@@ -1,2 +1,2 @@
-ent-RMCSpawnPointSurvivorSecurity = survivor security spawn point
+ent-RMCSpawnPointSurvivorSecurity = точка появления выживший охрана
     .desc = { ent-CMSpawnPointJobBase.desc }

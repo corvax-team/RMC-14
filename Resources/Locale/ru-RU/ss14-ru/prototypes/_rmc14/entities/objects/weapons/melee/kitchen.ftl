@@ -1,8 +1,8 @@
-ent-RMCKitchenKnife = knife
-    .desc = Can cut through any food.
-ent-RMCKitchenKnifePlastic = plastic knife
-    .desc = The bluntest of blades.
-ent-RMCKitchenKnifeChef = kitchen knife
-    .desc = A general purpose Chef's Knife made by SpaceCook Incorporated. Guaranteed to stay sharp for years to come.
-ent-RMCKitchenKnifeButcher = butcher's cleaver
-    .desc = A huge thing used for chopping and chopping up meat. This includes clowns and clown-by-products.
+ent-RMCKitchenKnife = нож
+    .desc = Может резать любые продукты.
+ent-RMCKitchenKnifePlastic = пластиковый нож
+    .desc = Самый тупой из ножей.
+ent-RMCKitchenKnifeChef = кухонный нож
+    .desc = Поварской нож общего назначения, изготовленный компанией «СпейсКук Инкорпорейтед». Гарантия сохранения остроты на долгие годы.
+ent-RMCKitchenKnifeButcher = тесак мясника
+    .desc = Большой нож, используемый для рубки и разделки мяса. В том числе клоунов и их побочных продуктов.

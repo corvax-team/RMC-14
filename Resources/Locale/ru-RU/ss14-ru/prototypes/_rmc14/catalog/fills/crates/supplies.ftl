@@ -1,10 +1,10 @@
-ent-RMCCrateSupplyInternals = oxygen internals crate (x3 masks, x3 tanks)
+ent-RMCCrateSupplyInternals = ящик кислородного снаряжения (x3 маска, x3 баллон)
     .desc = { ent-RMCCrateSupply.desc }
-ent-RMCCrateSupplyEvacuation = emergency equipment (x2 toolbox, x2 hazard vest, x5 oxygen tank, x5 masks)
+ent-RMCCrateSupplyEvacuation = ящик аварийного снаряжения (x2 ящик инструментов, x2 защитный жилет, x5 баллон кислорода, x5 маска)
     .desc = { ent-RMCCrateSupply.desc }
-ent-RMCCrateSuppliesBoxes = cardboard sheets (x50)
+ent-RMCCrateSuppliesBoxes = листы картона (x50)
     .desc = { ent-RMCCrateSupply.desc }
-ent-RMCCrateSupplyJanitor = assorted janitorial supplies
+ent-RMCCrateSupplyJanitor = ассортимент уборочных припасов
     .desc = { ent-RMCCrateSupply.desc }
-ent-RMCCrateSuppliesCrayons = boxes of crayons
+ent-RMCCrateSuppliesCrayons = коробка мелков
     .desc = { ent-RMCCrateSupply.desc }

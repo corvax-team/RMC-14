@@ -1,7 +1,7 @@
-ent-CMTarbackCigar = tarback cigar
-    .desc = Tarbacks by Reisland Tobacco. The Surgeon General has declared that smoking Tarbacks can be hazardous to one’s health. Reisland Tobacco has declared that the Surgeon General is a bitch. Rolled in Columbia.
+ent-CMTarbackCigar = сигара тарбак
+    .desc = Тарбак от Рейзланд Тобакко. Генеральный хирург ОПЗ заявил, что курение тарбака может быть опасным для здоровья. Компания Рейзланд Тобакко заявила, что Генеральный хирург - сучка. Скручено в Колумбии.
 ent-CMTarbackCigarSpent = { ent-CMTarbackCigar }
-    .suffix = spent
+    .suffix = Скуренные
     .desc = { ent-CMTarbackCigar.desc }
-ent-RMCTarbackTube = tarback tube
-    .desc = A single Tarback cigar in a protective metal tube. About as low-end as you can get. Rolled in Columbia.
+ent-RMCTarbackTube = туба тарбака
+    .desc = Одиночная сигара Тарбак в защитной металлической тубе. Настолько низкопробные, насколько это возможно. Скручено в Колумбии.

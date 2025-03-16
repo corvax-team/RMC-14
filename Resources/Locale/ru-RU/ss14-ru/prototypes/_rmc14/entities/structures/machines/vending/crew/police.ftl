@@ -1,4 +1,4 @@
-ent-ColMarTechMilitaryPoliceEquipment = ColMarTech Military Police Equipment Rack
-    .desc = An automated rack hooked up to a colossal storage of Military Police standard-issue equipment.
-ent-ColMarTechWardenEquipment = ColMarTech Military Warden Equipment Rack
-    .desc = An automated rack hooked up to a colossal storage of Military Police standard-issue equipment.
+ent-ColMarTechMilitaryPoliceEquipment = КолМарТех стойка экипировки военного полицейского
+    .desc = Автоматизированная стойка, подключенная к гигантскому хранилищу стандартной экипировки военной полиции.
+ent-ColMarTechWardenEquipment = КолМарТех стойка экипировки военного надзирателя
+    .desc = Автоматизированная стойка, подключенная к гигантскому хранилищу стандартной экипировки военной полиции.

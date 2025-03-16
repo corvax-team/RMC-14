@@ -1,3 +1,3 @@
-ent-RMCCorrespondentMicrophone = microphone
-    .desc = To report on the events where no other correspondent has gone before. Now with sound!
+ent-RMCCorrespondentMicrophone = микрофон
+    .desc = Освещать события там, где ещё не побывал ни один корреспондент. Теперь со звуком!
     .suffix = RMC

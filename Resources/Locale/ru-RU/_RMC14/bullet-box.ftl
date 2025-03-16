@@ -1,8 +1,18 @@
-rmc-bullet-box-amount = It contains { $amount } rounds.
-rmc-bullet-box-wrong-rounds = Those aren't the same rounds. Better not mix them up.
-rmc-bullet-box-box-empty = Box has no bullets left to give.
-rmc-bullet-box-box-full = Box has no more room for bullets.
-rmc-bullet-box-mag-empty = Magazine has no bullets left to give.
-rmc-bullet-box-mag-full = Magazine has no more room to take bullets.
-rmc-bullet-box-transfer-done = You have transferred { $amount } rounds to { THE($used) }
-rmc-bullet-box-transferto = Fill Box
+rmc-bullet-box-amount =
+    Здесь хранится { $amount } {$amount ->
+    [one] патрон
+    [few] патрона
+    *[other] патронов
+}.
+rmc-bullet-box-wrong-rounds = Это разные патроны. Лучше их не смешивать.
+rmc-bullet-box-box-empty = В коробке не осталось патронов.
+rmc-bullet-box-box-full = В коробке не осталось места для патронов.
+rmc-bullet-box-mag-empty = В магазине не осталось патронов.
+rmc-bullet-box-mag-full = В магазине не осталось места для патронов.
+rmc-bullet-box-transfer-done =
+    Вы переместили {$amount} {$amount ->
+    [one] патрон
+    [few] патрона
+    *[other] патронов
+} в { $used }
+rmc-bullet-box-transferto = Заполнить коробку

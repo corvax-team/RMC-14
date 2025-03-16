@@ -1,6 +1,6 @@
-ent-RMCSpawnerPMCLeader = We-Ya PMC Leader spawner
-    .suffix = Spawner
+ent-RMCSpawnerPMCLeader = спавнер оператор ЧВК Вестон-Ямада (Лидер)
+    .suffix = Спавнер
     .desc = { ent-MarkerBase.desc }
-ent-RMCRandomHumanoidPMCLeader = We-Ya PMC Leader ghost role
-    .suffix = Role
+ent-RMCRandomHumanoidPMCLeader = оператор ЧВК Вестон-Ямада (Лидер) роль призрака
+    .suffix = Роль
     .desc = { "" }

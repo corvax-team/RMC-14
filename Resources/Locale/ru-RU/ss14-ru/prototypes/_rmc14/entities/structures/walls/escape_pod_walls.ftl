@@ -1,4 +1,4 @@
-ent-RMCWallEscapePod0 = wall
+ent-RMCWallEscapePod0 = стена
     .desc = { ent-RMCBaseWallInvincibleNoIcon.desc }
 ent-RMCWallEscapePod1 = { ent-RMCWallEscapePod0 }
     .desc = { ent-RMCWallEscapePod0.desc }

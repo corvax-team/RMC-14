@@ -1,2 +1,2 @@
-ent-RMCNurseArmband = nurse armband
-    .desc = An armband, worn by the rookie nurses to display they are still not doctors. This one is dark red.
+ent-RMCNurseArmband = нарукавная повязка санитара
+    .desc = Нарукавная повязка, которую носят санитары-новички, чтобы показать, что они ещё не врачи. Эта - тёмно-красная.

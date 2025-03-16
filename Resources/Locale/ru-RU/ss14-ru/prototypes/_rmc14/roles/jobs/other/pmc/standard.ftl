@@ -1,6 +1,6 @@
-ent-RMCSpawnerPMCStandard = We-Ya PMC Standard spawner
-    .suffix = Spawner
+ent-RMCSpawnerPMCStandard = спавнер оператор ЧВК Вестон-Ямада (Стандарт)
+    .suffix = Спавнер
     .desc = { ent-MarkerBase.desc }
-ent-RMCRandomHumanoidPMCStandard = We-Ya PMC Standard ghost role
-    .suffix = Role
+ent-RMCRandomHumanoidPMCStandard = оператор ЧВК Вестон-Ямада (Стандарт) роль призрака
+    .suffix = Роль
     .desc = { "" }

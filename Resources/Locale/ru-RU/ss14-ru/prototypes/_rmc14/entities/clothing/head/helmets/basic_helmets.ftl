@@ -1,10 +1,10 @@
-ent-RMCHelmetBase = helmet
+ent-RMCHelmetBase = шлем
     .desc = { ent-ClothingHeadBase.desc }
 ent-RMCMarineHelmetBase = { ent-RMCHelmetBase }
     .desc = { ent-RMCHelmetBase.desc }
 ent-RMCFoldableHelmetBase = { "" }
     .desc = { "" }
-ent-ArmorHelmetRiot = riot helmet
-    .desc = It's a helmet specifically designed to protect against close range attacks. It covers your ears.
+ent-ArmorHelmetRiot = шлем для подавления беспорядков
+    .desc = Это шлем, разработанный специально для защиты от атак ближнего боя. Он защищает уши.
 ent-ArmorHelmetRiotOld = { ent-ArmorHelmetRiot }
-    .desc = BA scarred riot helmet covered in cobwebs. It still protects your ears.
+    .desc = Покрытый царапинами и паутиной шлем для подавления беспорядков. Он по-прежнему защищает уши.

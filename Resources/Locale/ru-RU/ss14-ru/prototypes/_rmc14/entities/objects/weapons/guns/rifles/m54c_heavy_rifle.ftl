@@ -1,4 +1,4 @@
-ent-WeaponRifleM54CE2 = M54CE2 heavy assault rifle
-    .desc = A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
-ent-CMMagazineRifleM54CE2 = M54CE2 magazine (10x24mm)
+ent-WeaponRifleM54CE2 = тяжёлая штурмовая винтовка M54CE2
+    .desc = Оружие поддержки больших отрядов, способное вести непрерывный подавляющий огонь, будучи установленным на позиции. Несмотря на неустойчивость и низкую точность, его можно таскать на себе и стрелять с двух рук.
+ent-CMMagazineRifleM54CE2 = магазин M54CE2 ((10x24mm)
     .desc = { ent-CMMagazineRifleM54C.desc }

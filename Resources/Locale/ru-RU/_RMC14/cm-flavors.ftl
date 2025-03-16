@@ -1,1 +1,1 @@
-flavor-base-bobda = scottish
+﻿flavor-base-bobda = по-шотландски

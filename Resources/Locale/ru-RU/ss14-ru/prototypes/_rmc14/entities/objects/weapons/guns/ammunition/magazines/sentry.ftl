@@ -1,4 +1,4 @@
-ent-RMCMagazineSentry = M30 ammo drum (10x28mm Caseless)
-    .desc = An ammo drum of 500 10x28mm caseless rounds for the UN 571-C Sentry Gun. Just feed it into the sentry gun's ammo port when its ammo is depleted.
-ent-RMCMagazineSentryShotgun = 12g buckshot drum
-    .desc = An ammo drum of 50 12g buckshot shells for the UN 12-G Shotgun Sentry. Just feed it into the sentry gun's ammo port when its ammo is depleted.
+ent-RMCMagazineSentry = патронный барабан M30 (10x28мм безгильзовые)
+    .desc = Патронный барабан с 500 безгильзовыми патронами калибра 10x28 мм для сторожевой турели UN 571-C. Просто установите его в гнездо для патронов турели, когда её барабан опустеет.
+ent-RMCMagazineSentryShotgun = барабан дроби 12 калибра
+    .desc = Патронный барабан с 50 ружейными дробовыми патронами 12 калибра для турели-дробовика UN 12-G. Просто установите его в гнездо для патронов турели, когда её барабан опустеет.

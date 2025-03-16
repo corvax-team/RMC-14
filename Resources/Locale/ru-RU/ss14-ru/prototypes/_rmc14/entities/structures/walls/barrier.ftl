@@ -1,2 +1,2 @@
-ent-CMDeployableBarrier = deployable barrier
-    .desc = A deployable barrier. Swipe your ID card to lock/unlock it.
+ent-CMDeployableBarrier = развёртываемый барьер
+    .desc = Развёртываемый барьер. Проведите своей ИД-картой, чтобы заблокировать/разблокировать его.

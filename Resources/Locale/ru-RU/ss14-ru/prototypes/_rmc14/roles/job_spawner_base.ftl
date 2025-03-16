@@ -1,5 +1,5 @@
 ent-CMSpawnPointJobBase = { ent-MarkerBase }
-    .desc = A RMC14 job spawner. Used for roundstart and late joins.
-    .suffix = Job Spawn
+    .desc = Спавнер ролей RMC14. Используется для раундстарта и позднего присоединения.
+    .suffix = Спавнер роли
 ent-CMGuidebookRole = { "" }
     .desc = { "" }

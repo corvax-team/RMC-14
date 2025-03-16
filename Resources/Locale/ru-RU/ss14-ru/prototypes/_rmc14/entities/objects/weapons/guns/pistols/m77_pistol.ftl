@@ -1,11 +1,11 @@
-ent-RMCWeaponPistolM77 = M77 combat pistol
-    .desc = Standard issue Marine firearm. Also found in the hands of We-Ya PMC teams. Fires 9mm armor shredding rounds and is capable of 3-round burst.
+ent-RMCWeaponPistolM77 = боевой пистолет M77
+    .desc = Стандартное личное оружие колониального морского пехотинца. Также его можно встретить на вооружении групп ЧВК Ве-Я. Стреляет патронами калибра 9 мм, пробивающими броню, и может вести огонь очередями по 3 патрона.
 ent-RMCWeaponPistolM77Empty = { ent-RMCWeaponPistolM77 }
-    .suffix = Empty
+    .suffix = Пустой
     .desc = { ent-RMCWeaponPistolM77.desc }
-ent-CMMagazinePistolM77AP = M77 AP magazine (9mm)
+ent-CMMagazinePistolM77AP = магазин M77 бронебойные (9мм)
     .desc = { ent-CMBaseMagazinePistol.desc }
-ent-CMBulletPistolM77AP = bullet (9mm AP)
+ent-CMBulletPistolM77AP = пуля (9мм ББ)
     .desc = { ent-CMBulletBase.desc }
-ent-CMCartridgePistolM77AP = cartridge (9mm AP)
+ent-CMCartridgePistolM77AP = патрон (9мм ББ)
     .desc = { ent-CMCartridgePistolBase.desc }

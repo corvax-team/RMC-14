@@ -1,9 +1,9 @@
-ent-RMCWelderBase = blowtorch
-    .desc = Melts anything as long as it's fueled, don't forget your eye protection!
+ent-RMCWelderBase = сварочный аппарат
+    .desc = Плавит что угодно, лишь бы было топливо, но не забывайте о защите глаз!
 ent-CMWelder = { ent-RMCWelderBase }
     .desc = { ent-RMCWelderBase.desc }
-ent-RMCWelderAdmin = admin blowtorch
-    .desc = Melts anything as long as it's fueled, forget your eye protection!
-    .suffix = Admin, DO NOT MAP
-ent-CMWelderSmall = ME3 hand welder
-    .desc = A compact, handheld welding torch used by the Marines for cutting and welding jobs on the field. Due to the small size and slow strength, its function is limited compared to a full-sized technician's blowtorch.
+ent-RMCWelderAdmin = сварочный аппарат администратора
+    .desc = Плавит что угодно, лишь бы было топливо, можете забыть о защите глаз!
+    .suffix = Админ, НЕ МАППИТЬ
+ent-CMWelderSmall = ручной сварочный аппарат ME3
+    .desc = Компактный ручной сварочный аппарат, используемый колониальными морскими пехотинцами для проведения резательных и сварочных работ в полевых условиях. Небольшой размер и малая мощность ограничивают его возможности по сравнению с полноразмерными сварочными аппаратами.

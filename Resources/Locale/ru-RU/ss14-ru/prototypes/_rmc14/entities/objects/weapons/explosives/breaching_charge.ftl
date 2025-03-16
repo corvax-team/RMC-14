@@ -1,4 +1,4 @@
-ent-RMCExplosiveBreachingCharge = breaching charge
-    .desc = An explosive device used to break into areas while protecting the user from the blast as well as deploying deadly shrapnel on the other side.
-ent-RMCExplosivePlastic = plastic explosives
-    .desc = Used to put holes in specific areas without too much extra hole.
+ent-RMCExplosiveBreachingCharge = пробивной заряд
+    .desc = Взрывное устройство, используемое для проникновения в помещения и защищающее оператора от взрыва с одной стороны, а также разбрасывающее смертоносную шрапнель с другой.
+ent-RMCExplosivePlastic = пластичная взрывчатка
+    .desc = Используется для проделывания отверстий в определённых местах, не слишком больших отверстий.

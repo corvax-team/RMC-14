@@ -1,8 +1,8 @@
-ent-CMWindowDirectional = window
-    .desc = A glass window. It looks thin and flimsy. A few knocks with anything should shatter it.
-ent-CMWindowReinforcedDirectional = reinforced window
-    .desc = A glass window reinforced with bracing rods. It looks rather strong. Might take a few good hits to shatter it.
-ent-CMWindowTintedDirectional = tinted window
-    .desc = A tinted glass window. It looks rather strong and opaque. Might take a few good hits to shatter it.
-ent-CMWindowUltraDirectional = ultra-reinforced window
-    .desc = An ultra-reinforced window designed to keep the briefing podium a secure area.
+ent-CMWindowDirectional = окно
+    .desc = Стеклянное окно. Выглядит тонким и хрупким. Несколько ударов чем-нибудь должны разбить его вдребезги.
+ent-CMWindowReinforcedDirectional = бронированное окно
+    .desc = Стеклянное окно, укреплённое стержнями. Выглядит довольно прочным. Потребуется несколько ударов, чтобы разбить его.
+ent-CMWindowTintedDirectional = тонированное окно
+    .desc = Стеклянное тонированное окно. Выглядит довольно прочным и непрозрачным. Потребуется несколько ударов, чтобы разбить его.
+ent-CMWindowUltraDirectional = ультрабронированное окно
+    .desc = Сверхпрочное окно, предназначенное для обеспечения безопасности подиума для брифингов.

@@ -1,3 +1,3 @@
-ent-CMMobDwarf = Urist C.M McHands The Dwarf
+ent-CMMobDwarf = Урист К.М. МакДворф
     .suffix = RMC14
     .desc = { ent-CMBaseMobSpeciesOrganic.desc }

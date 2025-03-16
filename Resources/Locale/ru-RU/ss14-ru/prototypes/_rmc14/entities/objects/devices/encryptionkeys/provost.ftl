@@ -1,2 +1,2 @@
-ent-RMCEncryptionKeyProvost = provost radio encryption Key
+ent-RMCEncryptionKeyProvost = ключ шифрования радио провост
     .desc = { ent-CMEncryptionKey.desc }

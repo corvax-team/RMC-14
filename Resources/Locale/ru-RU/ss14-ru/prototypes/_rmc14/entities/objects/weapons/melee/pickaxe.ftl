@@ -1,3 +1,3 @@
-ent-RMCPickaxe = pickaxe
-    .desc = It's a pickaxe. Notched to perfection, for jamming it into rocks.
+ent-RMCPickaxe = кирка
+    .desc = Это кирка. Зазубренная до совершенства, чтобы вбивать её в камни.
     .suffix = RMC

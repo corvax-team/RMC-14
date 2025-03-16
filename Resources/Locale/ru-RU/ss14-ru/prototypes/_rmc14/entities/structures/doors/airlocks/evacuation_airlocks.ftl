@@ -1,4 +1,4 @@
-ent-RMCAirlockEvacuation = Evacuation Airlock PL-6
-    .desc = It opens and closes.
-ent-RMCAirlockLifeboat = lifeboat docking hatch
-    .desc = A heavyset bulkhead for a lifeboat.
+ent-RMCAirlockEvacuation = шлюз эвакуации PL-6
+    .desc = Он открывается и закрывается.
+ent-RMCAirlockLifeboat = стыковочный люк спасательной шлюпки
+    .desc = Тяжелая переборка для спасательной шлюпки.

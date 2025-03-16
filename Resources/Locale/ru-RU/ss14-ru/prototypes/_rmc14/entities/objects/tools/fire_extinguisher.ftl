@@ -1,6 +1,6 @@
-ent-CMFireExtinguisher = fire extinguisher
-    .desc = A traditional red fire extinguisher.
-ent-CMFireExtinguisherPortable = portable fire extinguisher
-    .desc = A light and compact fibreglass-framed model fire extinguisher.
+ent-CMFireExtinguisher = огнетушитель
+    .desc = Традиционный красный огнетушитель.
+ent-CMFireExtinguisherPortable = портативный огнетушитель
+    .desc = Лёгкая и компактная модель огнетушителя в стекловолоконном корпусе.
 ent-RMCExtinguisherSpray = { ent-ExtinguisherSpray }
     .desc = { ent-ExtinguisherSpray.desc }

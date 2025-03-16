@@ -1,28 +1,29 @@
-ent-CMSniperEquipmentCase = sniper equipment case
+ent-CMSniperEquipmentCase = кейс снаряжения снайпера
     .desc =
-        A large case containing your very own long-range M96S sniper rifle, M45 ghillie armor and helmet, M42 scout sight, ammunition, spotter equipment, and additional pieces of equipment.
+        Большой кейс, содержащий вашу персональную дальнобойную снайперскую винтовку M96S, маскировочный бронежилет и шлем M45, визор скаута M42, боеприпасы, снаряжение корректировщика и дополнительное снаряжение.
         
-        NOTE: You cannot put items back inside this case.
-ent-RMCGrenadeSpecEquipmentCase = heavy grenadier equipment case
+        ПРИМЕЧАНИЕ: Вы не можете поместить предметы обратно в этот кейс.
+ent-RMCGrenadeSpecEquipmentCase = кейс снаряжения тяжёлого гренадёра
     .desc =
-        A large case containing a heavy-duty multi-shot M83 grenade launcher, M3-G4 grenadier armor and helmet, significant amount of various M40 grenades and additional pieces of equipment.
+        Большой кейс, содержащий тяжёлый многозарядный гранатомёт M83, бронежилет и шлем гренадёра M3-G4, большое количество различных гранат M40 и дополнительное снаряжение.
         
-        NOTE: You cannot put items back inside this case.
-ent-RMCDemoSpecEquipmentCase = demolitionist equipment case
+        ПРИМЕЧАНИЕ: Вы не можете поместить предметы обратно в этот кейс.
+ent-RMCDemoSpecEquipmentCase = кейс снаряжения подрывника
     .desc =
-        A large case containing a heavy-caliber M5 Anti-Tank Launcher, reinforced M3-T light armor, five 84mm rockets, and additional pieces of equipment.
+        Большой кейс, содержащий тяжелую противотанковую пусковую установку M5 ATL, усиленную лёгкую броню M3-T, пять 84-мм ракет и дополнительное снаряжение.
         
-        NOTE: You cannot put items back inside this case.
-ent-RMCScoutSpecEquipmentCase = scout equipment case
+        ПРИМЕЧАНИЕ: Вы не можете поместить предметы обратно в этот кейс.
+ent-RMCScoutSpecEquipmentCase = кейс снаряжения скаута
     .desc =
-        A large case containing an M4SPR custom battle rifle, M3-S light armor and helmet, M4SPR battle sight, M68 thermal cloak, V3 reactive thermal tarp, ammunition and additional pieces of equipment.
-        NOTE: You cannot put items back inside this case.
-ent-RMCKitLoader = loader kit
+        Большой кейс, содержащий модернизированную боевую винтовку M4SPR, лёгкий бронежилет и шлем M3-S, боевой прицел M4SPR, термоплащ M68, реактивный термобрезент V3, боеприпасы и дополнительное снаряжение.
+
+        ПРИМЕЧАНИЕ: Вы не можете поместить предметы обратно в этот кейс.
+ent-RMCKitLoader = набор заряжающего
     .desc =
-        A large kit containing all the supplies needed to turn a Private into the loading assistant for a Demolitions Specialist.
-        A little infographic series shows how reloading should be done:
-        Step One: Grab the Rocket
-        Step Two: Position yourself behind the Specialist
-        Step Three: Ensure the Specialist is wielding their Launcher
-        Step Four: Load the Rocket into the Launcher
-        Step Five: Stand clear of the back-blast
+        Большой набор, содержащий все необходимое, чтобы превратить обычного рядового в заряжающего и помощника подрывника.
+        Небольшая иллюстрация рассказывает, как следует производить перезарядку:
+        Шаг первый: Возьмите ракету
+        Шаг второй: Встаньте позади специалиста.
+        Шаг третий: Убедитесь, что специалист держит пусковую установку в двух руках.
+        Шаг четвертый: Зарядите ракету в пусковую установку
+        Шаг пятый: Берегитесь разлёта реактивной струи

@@ -1,7 +1,7 @@
-barbed-wire-slot-insert-full = The barricade already has barbed wire on it!
-barbed-wire-slot-insert-success = You wired the barricade with barbed wire.
-barbed-wire-damage = The barbed wire slice into your skin!
-barbed-wire-slot-wiring = You begin wiring the barricade with barbed wire...
-barbed-wire-cutting-action-begin = You begin cutting the barbed wire...
-barbed-wire-cutting-action-finish = You removed the barbed wire.
-barbed-wire-cant-climb = You can't climb the barbed wire.
+barbed-wire-slot-insert-full = Баррикада уже обмотана колючей проволокой!
+barbed-wire-slot-insert-success = Вы обматываете баррикаду колючей проволокой.
+barbed-wire-damage = Колючая проволока вонзается в вашу кожу!
+barbed-wire-slot-wiring = Вы начинаете обматывать баррикаду колючей проволокой...
+barbed-wire-cutting-action-begin = Вы начинаете перерезать колючую проволоку...
+barbed-wire-cutting-action-finish = Вы убрали колючую проволоку.
+barbed-wire-cant-climb = Вы не можете перелезть через колючую проволоку.

@@ -1,6 +1,6 @@
-rmc-ghost-role-information-bureau-marshal-name = Bureau Marshal
-rmc-ghost-role-information-bureau-marshal-description = Get your instructions from the CMB Office at Anchorpoint Station, and carry out your orders. Ensure that Colonial assets are safe and in your custody. Do not enforce or override Marine Law on a Marine Ship unless requested, as it's outside of your jurisdiction.
-rmc-ghost-role-information-bureau-deputy-name = Bureau Deputy
-rmc-ghost-role-information-bureau-observer-name = Interstellar Sapient-Life Rights Observer
-rmc-ghost-role-information-bureau-observer-description = As an Interstellar Sapient-Life Rights Observer, your duty is to monitor and document the treatment of sapient beings across space, ensuring compliance with interstellar law. If you arrived with the CMB, follow the orders of the deputies and their marshal while performing your role. Though you are now a paper pusher, your PhD qualifies you to provide medical aid in emergencies, support your comrades in the CMB if the situation turns critical.
-rmc-job-title-bureau-observer = Interstellar Sapient-Life Rights Observer
+rmc-ghost-role-information-bureau-marshal-name = Маршал бюро
+rmc-ghost-role-information-bureau-marshal-description = Получите инструкции в офисе БКМ (Бюро колониальных маршаллов) на станции Анкорпойнт и приступайте к их выполнению. Убедитесь, что колониальные активы находятся в безопасности и под вашим надзором. Не применяйте и не переступайте через Закон ККМП на корабле корпуса, если вас об этом не просят, так как это вне вашей юрисдикции.
+rmc-ghost-role-information-bureau-deputy-name = Представитель бюро
+rmc-ghost-role-information-bureau-observer-name = Межзвёздный смотритель за правами разумных существ
+rmc-ghost-role-information-bureau-observer-description = Будучи межзвёздным смотрителем за правами разумных существ, ваша работа заключается в мониторинге и документировании случаев обращения с разумными существами по всему космосу, обеспечивая соблюдение межзвёздного закона. Если вы прибыли вместе с представителями БКМ (Бюро колониальных маршаллов), то при выполнении своих обязанностей выполняйте приказы представителей и их маршала. Хотя вы обычный бумагомаратель, ваша докторская степень позволяет вам оказывать медицинскую помощь в чрезвычайных ситуациях и поддерживать своих товарищей из БКМ, если ситуация окажется критической.
+rmc-job-title-bureau-observer = Межзвёздный смотритель за правами разумных существ

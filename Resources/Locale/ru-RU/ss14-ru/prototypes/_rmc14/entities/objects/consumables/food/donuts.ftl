@@ -1,6 +1,6 @@
-ent-RMCBoxDonut = Yum! donuts
-    .desc = A box of mouth-watering "Yum!" brand donuts
-ent-RMCFoodDonut = donut
-    .desc = A donut. Rare on the frontier, so take care of it.
-ent-RMCFoodDonutFrosted = frosted donut
-    .desc = A pink frosted donut. Even more rare on the frontier.
+ent-RMCBoxDonut = пончики Ням!
+    .desc = Коробка аппетитных пончиков марки «Ням!».
+ent-RMCFoodDonut = пончик
+    .desc = Пончик. Редкость на фронтире, так что берегите его.
+ent-RMCFoodDonutFrosted = глазированный пончик
+    .desc = Розовый пончик с глазурью. Еще большая редкость на фронтире.

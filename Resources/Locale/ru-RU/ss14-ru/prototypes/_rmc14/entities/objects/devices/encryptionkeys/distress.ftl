@@ -1,4 +1,4 @@
-ent-RMCEncryptionKeyBureau = bureau encryption Key
+ent-RMCEncryptionKeyBureau = ключ радиошифрования бюро
     .desc = { ent-CMEncryptionKey.desc }
-ent-RMCEncryptionKeyFreelancer = freelancer encryption Key
+ent-RMCEncryptionKeyFreelancer = ключ радиошифрования фрилансер
     .desc = { ent-CMEncryptionKey.desc }

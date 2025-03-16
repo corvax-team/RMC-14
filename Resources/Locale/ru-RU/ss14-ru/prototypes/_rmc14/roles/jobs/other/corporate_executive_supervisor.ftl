@@ -1,6 +1,6 @@
-ent-RMCSpawnerCorporateExecutiveSupervisor = corporate executive supervisor spawner
-    .suffix = Spawner
+ent-RMCSpawnerCorporateExecutiveSupervisor = спавнер корпоративный исполнительный супервайзер
+    .suffix = Спавнер
     .desc = { ent-MarkerBase.desc }
-ent-RMCRandomHumanoidCorporateExecutiveSupervisor = corporate executive supervisor ghost role
-    .suffix = Role
+ent-RMCRandomHumanoidCorporateExecutiveSupervisor = корпоративный исполнительный супервайзер роль призрака
+    .suffix = Роль
     .desc = { "" }

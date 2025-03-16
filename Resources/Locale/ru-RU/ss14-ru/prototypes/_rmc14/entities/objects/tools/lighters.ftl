@@ -1,8 +1,8 @@
-ent-RMCZippo = zippo lighter
-    .desc = A fancy steel Zippo lighter. Ignite in style.
-ent-RMCLighter = cheap lighter
-    .desc = A cheap-as-free lighter.
-ent-RMCZippoExec = We-Ya executive zippo lighter
-    .desc = A remarkable Zippo lighter embellished in the Company's black and gold shade.
-ent-RMCZippoGold = golden zippo lighter
-    .desc = A gold-anodized Zippo lighter. Ostentatious, but it certainly stands out.
+ent-RMCZippo = зажигалка Зиппо
+    .desc = Зажигалка Зиппо из модной стали. Зажигайте стильно.
+ent-RMCLighter = дешёвая зажигалка
+    .desc = Дешёвая бесплатная зажигалка.
+ent-RMCZippoExec = зажигалка Зиппо представителя Ве-Я
+    .desc = Отличная зажигалка Зиппо, выполненная в фирменных чёрно-золотых тонах.
+ent-RMCZippoGold = золотая зажигалка Зиппо
+    .desc = Зажигалка Зиппо с золотым анодированием. Показушная, но, безусловно, выделяющаяся.

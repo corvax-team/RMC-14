@@ -1,4 +1,4 @@
-ent-RMCTileFire = fire
+ent-RMCTileFire = огонь
     .desc = { "" }
 ent-RMCTileFireGreen = { ent-RMCTileFire }
     .desc = { ent-RMCTileFire.desc }

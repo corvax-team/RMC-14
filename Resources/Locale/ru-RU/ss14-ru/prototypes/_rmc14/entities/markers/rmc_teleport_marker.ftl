@@ -1,6 +1,6 @@
-ent-RMCTriggerTeleporter = teleporter
+ent-RMCTriggerTeleporter = телепортатор
     .suffix = RMC14
     .desc = { ent-MarkerBase.desc }
-ent-RMCTriggerTeleporterViewer = teleporter viewer
+ent-RMCTriggerTeleporterViewer = телепортационный просмотрщик
     .suffix = RMC14
     .desc = { ent-MarkerBase.desc }

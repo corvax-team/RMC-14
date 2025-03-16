@@ -1,4 +1,4 @@
-ent-CMSpawnPointSurvivor = survivor spawn point
+ent-CMSpawnPointSurvivor = точка появления выживший
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-CMGuidebookRoleSurvivor = Survivor
+ent-CMGuidebookRoleSurvivor = Выживший
     .desc = { ent-CMGuidebookRole.desc }

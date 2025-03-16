@@ -1,2 +1,2 @@
-ent-RMCActionToggleCloak = Toggle Cloak
-    .desc = Enable or Disable your Thermal Cloak
+ent-RMCActionToggleCloak = Переключить плащ
+    .desc = Включить или отключить ваш термальный плащ

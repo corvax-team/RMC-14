@@ -1,2 +1,2 @@
-ent-RMCWaterCover = water cover
+ent-RMCWaterCover = крышка водовода
     .desc = { ent-CMCatwalk.desc }

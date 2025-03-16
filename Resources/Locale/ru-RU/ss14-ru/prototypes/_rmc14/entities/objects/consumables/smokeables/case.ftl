@@ -1,4 +1,4 @@
-ent-RMCCigarCase = cigar case
-    .desc = A case for holding your cigars when you are not smoking them.
-ent-RMCTarbackCase = tarbacks case
-    .desc = Don't let the fancy box and piece of paper spouting nonsense about tradition and quality fool you. These stogies are bottom of the barrel. Rolled in Columbia..
+ent-RMCCigarCase = портсигар
+    .desc = Футляр для хранения сигар, когда вы их не курите.
+ent-RMCTarbackCase = сигарная туба
+    .desc = Не позволяйте модной коробочке и листу бумаги, содержащему чепуху о традициях и качестве, обмануть вас. Эта черута - самое дно. Скручено в Колумбии.

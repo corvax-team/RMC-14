@@ -1,2 +1,2 @@
-ent-RMCBoxHandcuffs = Box of handcuffs
-    .desc = A box full of handcuffs
+ent-RMCBoxHandcuffs = коробка наручников
+    .desc = Полная коробка наручников.

@@ -1,2 +1,2 @@
-ent-RMCKitchenReagentGrinder = All-In-One Grinder
+ent-RMCKitchenReagentGrinder = Универсальный измельчитель
     .desc = { ent-KitchenReagentGrinder.desc }

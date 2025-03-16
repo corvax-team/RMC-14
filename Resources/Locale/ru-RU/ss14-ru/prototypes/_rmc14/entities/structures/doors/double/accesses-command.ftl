@@ -1,6 +1,6 @@
 ent-CMDoubleDoorCommandGlassLocked = { ent-CMDoubleDoorCommandGlass }
-    .suffix = Command, Glass, Locked
+    .suffix = Командный, Стеклянный, Закрыто
     .desc = { ent-CMDoubleDoorCommandGlass.desc }
 ent-CMDoubleDoorCommandSolidLocked = { ent-CMDoubleDoorCommandSolid }
-    .suffix = Command, Solid, Locked
+    .suffix = Командный, Сплошной, Закрыто
     .desc = { ent-CMDoubleDoorCommandSolid.desc }
