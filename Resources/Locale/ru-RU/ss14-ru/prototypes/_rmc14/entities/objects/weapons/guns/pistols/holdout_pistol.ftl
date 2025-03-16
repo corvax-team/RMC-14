@@ -1,9 +1,9 @@
-ent-RMCWeaponPistolHoldout = holdout pistol
-    .desc = A tiny pistol meant for hiding in hard-to-reach areas. Best not ask where it came from.
-    .suffix = Filled
-ent-RMCMagazinePistolHoldout = tiny pistol magazine (.22)
-    .desc = A surprisingly small magazine, holding .22 bullets. No Kolibri, but it's getting there.
-ent-CMBulletPistol22mm = bullet (.22)
+ent-RMCWeaponPistolHoldout = карманный пистолет
+    .desc = Миниатюрный пистолет, предназначенный для скрытого ношения в труднодоступных местах. Лучше не спрашивать, откуда он взялся.
+    .suffix = Заполненный
+ent-RMCMagazinePistolHoldout = магазин карманного пистолета (.22)
+    .desc = Удивительно маленький магазин, вмещающий патроны калибра .22. Не «Колибри», но всё идет к этому.
+ent-CMBulletPistol22mm = пуля (.22)
     .desc = { ent-CMBulletBase.desc }
-ent-CMCartridgePistol22mm = cartridge (.22)
+ent-CMCartridgePistol22mm = патрон (.22)
     .desc = { ent-CMCartridgePistolBase.desc }

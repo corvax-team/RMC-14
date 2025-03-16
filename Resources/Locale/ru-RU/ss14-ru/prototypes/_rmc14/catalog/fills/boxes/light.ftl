@@ -1,2 +1,2 @@
-ent-RMCBoxLightsMixed = box of replacement lights
-    .desc = This box is shaped on the inside so that only light tubes and bulbs fit.
+ent-RMCBoxLightsMixed = коробка запасных лампочек
+    .desc = Из-за особой формы этой коробки внутрь помещаются только лампы-трубки и лампочки.

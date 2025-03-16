@@ -1,6 +1,6 @@
 ent-CMShardBase = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
-ent-CMShardGlass = glass shard
-    .desc = A shard of broken glass. Could probably be used as ... a throwing weapon?
-ent-CMShardPhoron = phoron shard
-    .desc = A shard of broken phoron glass. Considerably tougher than normal glass shards. Apparently not tough enough to be a window.
+ent-CMShardGlass = осколок стекла
+    .desc = Осколок разбитого стекла. Может быть использован как... метательное оружие?
+ent-CMShardPhoron = осколок форона
+    .desc = Осколок разбитого форонового стекла. Значительно прочнее обычных осколков стекла. Очевидно, недостаточно прочный, чтобы стать окном.

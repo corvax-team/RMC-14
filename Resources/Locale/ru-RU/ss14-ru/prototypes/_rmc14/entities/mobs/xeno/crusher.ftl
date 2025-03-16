@@ -1,2 +1,2 @@
-ent-CMXenoCrusher = Crusher
-    .desc = A huge alien with an enormous armored crest.
+ent-CMXenoCrusher = Крушитель
+    .desc = Огромный инопланетянин с огромным бронированным гребнем.

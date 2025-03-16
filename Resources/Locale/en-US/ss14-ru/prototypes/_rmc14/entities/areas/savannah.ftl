@@ -117,8 +117,7 @@ ent-RMCAreaSavannahAtmosPort = Port Atmos
     .desc = { ent-RMCAreaSavannahEngineering.desc }
 ent-RMCAreaSavannahPumpStarboardBow = Starboard Bow Pump
     .desc = { ent-RMCAreaSavannahEngineering.desc }
-ent-RMCAreaSavannahPumpStarboard Quarter = Starboard Quarter Pump
-
+ent-RMCAreaSavannahPumpStarboardQuarter = Starboard Quarter Pump
   .desc = { ent-RMCAreaSavannahEngineering.desc }
 ent-RMCAreaSavannahPumpPortBow = Port Bow Pump
     .desc = { ent-RMCAreaSavannahEngineering.desc }

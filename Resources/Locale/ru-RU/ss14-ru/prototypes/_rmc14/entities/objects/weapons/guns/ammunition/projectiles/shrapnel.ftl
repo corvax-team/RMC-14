@@ -1,2 +1,2 @@
-ent-CMProjectileShrapnel = shrapnel
+ent-CMProjectileShrapnel = шрапнель
     .desc = { ent-RMCBaseBullet.desc }

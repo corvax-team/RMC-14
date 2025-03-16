@@ -1,8 +1,8 @@
-ent-CMSMESBase = SMES
-    .desc = A high-capacity superconducting magnetic energy storage (SMES) unit.
+ent-CMSMESBase = СМЭС
+    .desc = Сверхпроводящая Магнитная Энергонакопительная Станция (СМЭС) большой ёмкости.
 ent-CMSMESBasic = { ent-CMSMESBase }
-    .suffix = Basic, 8MW
+    .suffix = Базовый, 8МВт
     .desc = { ent-CMSMESBase.desc }
 ent-CMSMESEmpty = { ent-CMSMESBasic }
-    .suffix = Empty
+    .suffix = Пустой
     .desc = { ent-CMSMESBasic.desc }

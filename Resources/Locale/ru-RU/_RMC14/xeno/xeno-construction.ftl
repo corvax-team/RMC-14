@@ -1,56 +1,73 @@
-cm-xeno-construction-failed-weeds = Bad place for a garden!
-cm-xeno-construction-failed-need-weeds = We can only shape on weeds. Find some resin before you start building!
-cm-xeno-construction-failed-cant-build = We can't build there!
-cm-xeno-construction-failed-select-structure = We need to select a structure to build first! Use the "Choose Resin Structure" action.
-cm-xeno-construction-failed-requires-support = { CAPITALIZE(MAKEPLURAL($choice)) } need a wall or resin door next to them to stand up.
-rmc-xeno-construction-remote-failed-need-line-of-sight = We need direct line of sight to build!
-rmc-xeno-construction-remote-failed-need-on-weeds = We must be standing on weeds to establish a connection to the resin.
-rmc-xeno-construction-remote-construct = We focus our plasma into the weeds below us and force the weeds to secrete resin!
-rmc-xeno-construction-remote-open-door = We focus our connection to the resin and remotely open the resin door.
-rmc-xeno-construction-remote-close-door = We focus our connection to the resin and remotely close the resin door.
-rmc-xeno-construction-no-map-resin-hole = The ground isn't solid
-rmc-xeno-construction-must-have-weeds-resin-hole = Resin holes must be built on weeds.
-rmc-xeno-construction-blocked-resin-hole = There's something built here already.
-rmc-xeno-construction-similar-too-close-resin-hole = There are other resin holes nearby!
-cm-xeno-construction-resin-hole-burned-down = We sense one of our Hive's { $type } traps at { $location } has been burnt!
-cm-xeno-construction-resin-hole-destroyed = We sense one of our Hive's { $type } traps at { $location } has been destroyed!
-rmc-xeno-construction-resin-hole-activate = We sense one of our Hive's { $type } traps at { $location } has been triggered!
-rmc-xeno-construction-resin-hole-no-acid = We can't secrete any acid into the resin hole!
-rmc-xeno-construction-resin-hole-good-acid = It already has good acid in.
-cm-xeno-construction-resin-hole-full = The resin trap already has something in it!
-rmc-xeno-construction-resin-hole-filling-gas = We begin charging the resin trap with gas.
-rmc-xeno-construction-resin-hole-filling-acid = We begin charging the resin trap with acid.
-rmc-xeno-construction-resin-hole-finished-acid = { $xeno } pressurises the resin trap with acid!
-rmc-xeno-construction-resin-hole-finished-acid-self = We pressurise the resin trap with acid!
-rmc-xeno-construction-resin-hole-finished-gas = { $xeno } presurises the resin trap with gas!
-rmc-xeno-construction-resin-hole-finished-gas-self = We pressurise the resin trap with gas!
-rmc-xeno-construction-resin-hole-filling-parasite = We start placing the parasite into the resin trap.
-rmc-xeno-construction-resin-hole-finished-parasite = We place a parasite in the resin trap.
-rmc-xeno-construction-resin-hole-enter-parasite = { CAPITALIZE($parasite) } crawls into the resin trap.
-rmc-xeno-construction-resin-hole-uproot = We start uprooting the node so we can put the resin hole in its place...
-rmc-xeno-construction-resin-hole-empty = It's empty.
-rmc-xeno-construction-resin-hole-parasite = There's a little one inside.
-rmc-xeno-construction-resin-hole-gas = It's filled with pressurised gas.
-rmc-xeno-construction-resin-hole-acid = It's filled with pressurised acid.
-rmc-xeno-construction-resin-hole-empty-name = empty
-rmc-xeno-construction-resin-hole-parasite-name = parasite
-rmc-xeno-construction-resin-hole-gas-name = gas
-rmc-xeno-construction-resin-hole-acid-name = acid
-rmc-xeno-construction-tunnel-empty-non-xeno-enter-failure = You stare into the dark abyss
-rmc-xeno-construction-tunnel-occupied-non-xeno-enter-failure = You stare into the dark abyss, making out what appears to be two little lights... almost like something is watching
-rmc-xeno-construction-tunnel-full-xeno-failure = The tunnel is too crowded, wait for others to exit!
-rmc-xeno-construction-tunnel-large-xeno-enter = We begin heaving our monstrous bulk into { $tunnelName }
-rmc-xeno-construction-tunnel-default-xeno-enter = We begin crawling down into { $tunnelName }
-rmc-xeno-construction-tunnel-xeno-immobile-failure = We cannot move at all!
-rmc-xeno-construction-no-map-tunnel = The ground isn't solid.
-rmc-xeno-construction-blocked-tunnel = There's something built here already.
-rmc-xeno-construction-bad-area-tunnel = There's no way to burrow here.
-rmc-xeno-construction-bad-tile-tunnel = We scrape around, but we can't seem to dig through that kind of floor.
-rmc-xeno-construction-resin-tunnel-uproot = We start uprooting the node so we can dig a tunnel in its place...
-rmc-xeno-construction-resin-tunnel-create-tunnel = We start digging...
+cm-xeno-construction-failed-weeds = Плохое место для сада!
+cm-xeno-construction-failed-need-weeds = Мы можем придавать форму только на сорняках. Найдите немного смолы, прежде чем начать строительство!
+cm-xeno-construction-failed-cant-build = Мы не можем тут строить!
+cm-xeno-construction-failed-select-structure = Сначала нам нужно выбрать структуру для строительства! Используйте действие «Выбрать смоляную структуру».
+cm-xeno-construction-failed-requires-support = { CAPITALIZE($choice) } можно построить только у стены или смоляной двери.
+
+rmc-xeno-construction-remote-failed-need-line-of-sight = Нам нужна прямая видимость чтобы строить!
+rmc-xeno-construction-remote-failed-need-on-weeds = Мы должны стоять на сорняках, чтобы установить связь со смолой.
+rmc-xeno-construction-remote-construct = Мы фокусируем нашу плазму на сорняках под нами и заставляем их выделять смолу!
+rmc-xeno-construction-remote-open-door = Мы фокусируемся на нашей связи со смолой и дистанционно открываем смоляную дверь.
+rmc-xeno-construction-remote-close-door =Мы фокусируемся на нашей связи со смолой и дистанционно закрываем смоляную дверь.
+
+rmc-xeno-construction-no-map-resin-hole = Земля не твёрдая
+rmc-xeno-construction-must-have-weeds-resin-hole = Смоляные ямы должны быть построены на сорняках.
+rmc-xeno-construction-blocked-resin-hole = Здесь уже что-то построено.
+rmc-xeno-construction-similar-too-close-resin-hole = Поблизости уже имеются другие смоляные ямы!
+
+cm-xeno-construction-resin-hole-burned-down = Мы чувствуем, как одна из { $type } ловушек нашего Улья сгорела в локации { $location }!
+cm-xeno-construction-resin-hole-destroyed = Мы чувствуем, как одна из { $type } ловушек нашего Улья была уничтожена в локации { $location }!
+rmc-xeno-construction-resin-hole-activate = Мы чувствуем, как одна из { $type } ловушек нашего Улья была активирована в локации { $location }!
+rmc-xeno-construction-resin-hole-no-acid = Мы не можем выделить кислоту в смоляную яму!
+rmc-xeno-construction-resin-hole-good-acid = В ней уже есть хорошая кислота.
+
+cm-xeno-construction-resin-hole-full = В смоляной ловушке уже что-то есть!
+
+rmc-xeno-construction-resin-hole-filling-gas = Мы начинаем заряжать смоляную ловушку газом.
+rmc-xeno-construction-resin-hole-filling-acid = Мы начинаем заряжать смоляную ловушку кислотой.
+rmc-xeno-construction-resin-hole-finished-acid = { $xeno } нагнетает кислоту в смоляную ловушку!
+rmc-xeno-construction-resin-hole-finished-acid-self = Мы нагнали кислоту в смоляную ловушку!
+rmc-xeno-construction-resin-hole-finished-gas = { $xeno } нагнетает газ в смоляную ловушку!
+rmc-xeno-construction-resin-hole-finished-gas-self = Мы нагнали газ в смоляную ловушку!
+rmc-xeno-construction-resin-hole-filling-parasite = Мы начинаем помещать паразита в смоляную ловушку.
+rmc-xeno-construction-resin-hole-finished-parasite = Мы поместили паразита в смоляную ловушку.
+rmc-xeno-construction-resin-hole-enter-parasite = { CAPITALIZE($parasite) } заползает в смоляную ловушку..
+
+rmc-xeno-construction-resin-hole-uproot = Мы начинаем выкорчевывать узел, чтобы на его месте можно было выкопать смоляную яму...
+
+rmc-xeno-construction-resin-hole-empty = Тут пусто.
+rmc-xeno-construction-resin-hole-parasite = Внутри малыш.
+rmc-xeno-construction-resin-hole-gas = Она заполнена газом под давлением.
+rmc-xeno-construction-resin-hole-acid = Она заполнена кислотой под давлением.
+
+rmc-xeno-construction-resin-hole-empty-name = пустых
+rmc-xeno-construction-resin-hole-parasite-name = паразитных
+rmc-xeno-construction-resin-hole-gas-name = газовых
+rmc-xeno-construction-resin-hole-acid-name = кислотных
+
+rmc-xeno-construction-tunnel-empty-non-xeno-enter-failure = Вы заглядываете в тёмную бездну
+rmc-xeno-construction-tunnel-occupied-non-xeno-enter-failure = Вы заглядываете в тёмную бездну, разглядывая что-то похожее на два маленьких огонька... как будто кто-то наблюдает за вами
+
+rmc-xeno-construction-tunnel-full-xeno-failure = В туннеле слишком людно, подождите, пока другие выйдут!
+
+rmc-xeno-construction-tunnel-large-xeno-enter = Мы начинаем заталкивать нашу здоровенную тушу в { $tunnelName }
+rmc-xeno-construction-tunnel-default-xeno-enter = Мы начинаем спускаться в { $tunnelName }
+
+rmc-xeno-construction-tunnel-xeno-immobile-failure = Мы не можем двигаться!
+
+rmc-xeno-construction-no-map-tunnel = Земля не твёрдая.
+rmc-xeno-construction-blocked-tunnel = Здесь уже что-то построено.
+rmc-xeno-construction-bad-area-tunnel = Здесь никак не зарыться.
+rmc-xeno-construction-bad-tile-tunnel = Мы поскреблись, но не смогли прорыть такой пол.
+
+rmc-xeno-construction-resin-tunnel-uproot = Мы начинаем выкорчевывать узел, чтобы на его месте можно было прорыть туннель...
+rmc-xeno-construction-resin-tunnel-create-tunnel = Мы начинаем рыть...
+
 rmc-xeno-construction-default-tunnel-name = { $areaName } ({ $coordX }, { $coordY }) { $greekLetter }
-rmc-xeno-construction-default-area-name = Unknown
-rmc-xeno-construction-failed-tunnel-rename = Tunnel names must be unique!
-rmc-xeno-construction-tunnel-examine = The pheromone scent reads: { $tunnelName }
-rmc-xeno-construction-tunnel-fill = You start collapsing the tunnel!
-rmc-xeno-construction-tunnel-fill-xeno-drop = The tunnel suddenly collapses, forcing you out!
+rmc-xeno-construction-default-area-name = Неизвестно
+
+rmc-xeno-construction-failed-tunnel-rename = Названия туннелей должны быть уникальными!
+rmc-xeno-construction-tunnel-examine = Феромонный шлейф гласит: { $tunnelName }
+
+rmc-xeno-construction-tunnel-fill = Мы начинаем разрушать туннель!
+rmc-xeno-construction-tunnel-fill-xeno-drop = Туннель внезапно обрушивается, вынуждая нас выбраться наружу!

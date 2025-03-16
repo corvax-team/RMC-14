@@ -1,5 +1,5 @@
-ent-RMCWallLifeboat00 = wall
-    .desc = Separates you from certain death.
+ent-RMCWallLifeboat00 = стена
+    .desc = Отделяет вас от верной смерти.
 ent-RMCWallLifeboat01 = { ent-RMCWallLifeboat00 }
     .desc = { ent-RMCWallLifeboat00.desc }
 ent-RMCWallLifeboat02 = { ent-RMCWallLifeboat00 }

@@ -1,8 +1,8 @@
-ent-CMHandsBlackMarine = marine combat gloves
-    .desc = Standard issue marine tactical gloves. It reads: 'knit by Marine Widows Association'.
-ent-RMCHandsLatexMarine = marine medical combat gloves
-    .desc = Standard issue marine sterile gloves, offers regular protection whilst offering the user a better grip when performing medical work.
-ent-RMCHandsCOGloves = commanding officer's gloves
-    .desc = You may like these gloves, but THEY think you are unworthy of them.
-ent-RMCHandsM3G4 = M3-G4 grenadier gloves
-    .desc = A pair of plated, but nimble, gloves.
+ent-CMHandsBlackMarine = боевые перчатки ККМП
+    .desc = Стандартные тактические перчатки колониального морского пехотинца. Здесь написано: 'Связано Ассоциацией вдов ветеранов'.
+ent-RMCHandsLatexMarine = медицинские боевые перчатки ККМП
+    .desc = Стандартные стерильные перчатки колониального морского пехотинца, обеспечивающие надежную защиту и улучшающие хват при выполнении медицинских процедур.
+ent-RMCHandsCOGloves = перчатки командующего офицера
+    .desc = Может, вам и нравятся эти перчатки, но ОНИ считают вас недостойными.
+ent-RMCHandsM3G4 = перчатки M3-G4 гренадёра
+    .desc = Пара покрытых пластинами, но проворных перчаток.

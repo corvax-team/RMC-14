@@ -1,8 +1,8 @@
-ent-ActionToggleMarineHud = Toggle Marine Hud
-    .desc = Toggle marine icons.
-ent-ActionToggleXenoHud = Toggle Xeno Hud
-    .desc = Toggle xeno health and plasma bars.
-ent-ActionFindParasite = Find Parasite
-    .desc = Find Ghostrolable Parasites
-ent-ActionJoinXeno = Join as Xeno
-    .desc = Find burrowed larva to join as.
+ent-ActionToggleMarineHud = Переключить интерфейс морпехов
+    .desc = Переключает иконки морпехов.
+ent-ActionToggleXenoHud = Переключить интерфейс ксено
+    .desc = Переключает полоски здоровья и плазмы ксено.
+ent-ActionFindParasite = Найти паразита
+    .desc = Найти паразита с ролью призрака
+ent-ActionJoinXeno = Присоединиться за ксено
+    .desc = Найти зарывшуюся личинку чтобы присоединиться к раунду.

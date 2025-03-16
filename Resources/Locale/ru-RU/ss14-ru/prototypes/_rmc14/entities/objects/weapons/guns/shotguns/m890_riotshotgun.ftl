@@ -1,2 +1,2 @@
-ent-RMCWeaponShotgunM890Riot = M890 tactical riot shotgun
-    .desc = A unique corporate made semi-automatic riot shotgun with a rapid fire rate. Holds 8 Beanbag shells in the chamber. Specially made for crowd control during tough situations.
+ent-RMCWeaponShotgunM890Riot = нелетальный тактический дробовик M890
+    .desc = Уникальный полуавтоматический дробовик корпоративного производства с высоким темпом стрельбы. В патронник помещается 8 травматических патронов. Предназначен для подавления толпы в сложных ситуациях.

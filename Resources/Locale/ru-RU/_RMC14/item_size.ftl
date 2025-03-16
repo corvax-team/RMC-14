@@ -1,1 +1,1 @@
-item-component-size-Invalid = invalid
+﻿item-component-size-Invalid = некорректный

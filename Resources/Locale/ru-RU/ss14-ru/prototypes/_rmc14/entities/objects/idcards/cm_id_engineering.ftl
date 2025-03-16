@@ -1,6 +1,6 @@
-ent-CMIDCardChiefEngineer = chief engineer ID card
+ent-CMIDCardChiefEngineer = ИД-карта главного инженера
     .desc = { ent-CMIDCardSilver.desc }
-ent-CMIDCardOrdnanceTech = ordnance tech's ID card
+ent-CMIDCardOrdnanceTech = ИД-карта техника по вооружению
     .desc = { ent-CMIDCardBase.desc }
-ent-CMIDCardMaintTech = maintenance tech's ID card
+ent-CMIDCardMaintTech = ИД-карта техника по обслуживанию
     .desc = { ent-CMIDCardBase.desc }

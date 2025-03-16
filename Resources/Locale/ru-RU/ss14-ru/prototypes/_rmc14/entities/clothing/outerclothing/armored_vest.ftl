@@ -1,2 +1,2 @@
-ent-RMCArmorVest = armored vest
-    .desc = An armored vest that protects against some damage.
+ent-RMCArmorVest = бронежилет
+    .desc = Бронежилет, обеспечивающий некоторую защиту от повреждений.

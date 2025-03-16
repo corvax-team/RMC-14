@@ -1,5 +1,5 @@
-ent-RMCVialBox = vial storage box
-    .desc = A place to store your fragile vials when you are not using them.
+ent-RMCVialBox = коробка ампул
+    .desc = Место для хранения хрупких ампул, пока вы их не используете.
 ent-RMCVialBoxFull = { ent-RMCVialBox }
-    .suffix = Full
+    .suffix = Заполненный
     .desc = { ent-RMCVialBox.desc }

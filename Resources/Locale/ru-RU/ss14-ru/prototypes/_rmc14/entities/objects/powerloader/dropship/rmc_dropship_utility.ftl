@@ -1,6 +1,6 @@
 ent-RMCDropshipAttachmentUtility = { ent-RMCDropshipAttachmentBase }
     .desc = { ent-RMCDropshipAttachmentBase.desc }
-ent-RMCDropshipAttachmentMedevac = RMU-4M medevac system
-    .desc = A winch system to lift injured marines on medical stretchers onto the dropship. Attaches to the crew served attach point at the back of the drop-ship.
-ent-RMCDropshipAttachmentFulton = RMU-19 fulton recovery system
-    .desc = A winch system to collect any fulton recovery balloons in high altitude. Make sure you turn it on!
+ent-RMCDropshipAttachmentMedevac = система медэвака RMU-4M
+    .desc = Лебёдка для поднятия раненых на медицинских носилках на десантный корабль. Устанавливается к точке крепления вспомогательной систем в задней части корабля и обслуживается экипажем вручную.
+ent-RMCDropshipAttachmentFulton = система возврата фултонов RMU-19
+    .desc = Лебёдочная система для подбора любых шаров-фултонов на большой высоте. Обязательно включите её!

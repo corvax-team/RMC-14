@@ -1,6 +1,6 @@
-ent-RMCRotaryPhone = rotary phone
-    .desc = The finger plate is a little stiff.
-ent-RMCRotaryPhoneWallmount = wall-mounted phone
-    .desc = It is a wall mounted telephone. The fine text reads: To log your details with the mainframe please insert your keycard into the slot below. Unfortunately the slot is jammed. You can still use the phone, however.
-ent-RMCTelephone = telephone
+ent-RMCRotaryPhone = дисковый телефон
+    .desc = Номеронабиратель немного жестковат.
+ent-RMCRotaryPhoneWallmount = настенный телефон
+    .desc = Это настенный телефон. Мелкая надпись гласит: Для регистрации ваших данных на мейнфрейме, пожалуйста, вставьте вашу ключ-карту в щель внизу. К несчастью, гнездо заклинило. Однако вы всё равно можете воспользоваться телефоном.
+ent-RMCTelephone = телефон
     .desc = { ent-BaseItem.desc }

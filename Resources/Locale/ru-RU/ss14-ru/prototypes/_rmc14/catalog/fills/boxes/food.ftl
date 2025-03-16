@@ -1,2 +1,2 @@
-ent-RMCBoxIngredients = surplus box of ingredients
-    .desc = This box contains ingredients.
+ent-RMCBoxIngredients = коробка ингредиентов
+    .desc = В этой коробке содержатся ингредиенты.

@@ -1,1 +1,1 @@
-rmc-clock-examine = The { $device } reads: [color=white]{ $time }[/color]
+rmc-clock-examine = { CAPITALIZE($device) } показывают: [color=white]{ $time }[/color]

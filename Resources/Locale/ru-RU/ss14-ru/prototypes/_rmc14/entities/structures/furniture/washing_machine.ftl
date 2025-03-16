@@ -1,4 +1,4 @@
-ent-CMWashingMachine = washing machine
-    .desc = The WM-321 is a rugged, cylindrical powerhouse, equipped with a transparent window. This one is not operational.
-ent-CMWashingMachineDouble = washing machine (double)
+ent-CMWashingMachine = стиральная машина
+    .desc = WM-321 - надёжная цилиндрическая электромашина, оснащённая прозрачным окном. Эта штука не работает.
+ent-CMWashingMachineDouble = стиральная машина (двойная)
     .desc = { ent-CMWashingMachine.desc }

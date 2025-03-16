@@ -1,7 +1,7 @@
-ent-CMXenoRunnerBase = Runner
-    .desc = A small red alien that looks like it could run fairly quickly...
+ent-CMXenoRunnerBase = Бегун
+    .desc = Маленький красный инопланетянин, который, похоже, может бегать довольно быстро...
 ent-CMXenoRunner = { ent-CMXenoRunnerBase }
     .desc = { ent-CMXenoRunnerBase.desc }
 ent-RMCXenoRunnerAcider = { ent-CMXenoRunnerBase }
-    .suffix = Acider
+    .suffix = Кислотный
     .desc = { ent-CMXenoRunnerBase.desc }

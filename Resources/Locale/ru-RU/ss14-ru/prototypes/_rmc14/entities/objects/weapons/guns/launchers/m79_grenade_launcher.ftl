@@ -1,2 +1,2 @@
-ent-CMWeaponLauncherM79 = M79 grenade launcher
-    .desc = The M79 grenade launcher is a single-shot, shoulder-fired, break-action grenade launcher.
+ent-CMWeaponLauncherM79 = гранатомёт M79
+    .desc = Гранатомёт M79 - это однозарядный переломный гранатомёт для стрельбы с плеча.

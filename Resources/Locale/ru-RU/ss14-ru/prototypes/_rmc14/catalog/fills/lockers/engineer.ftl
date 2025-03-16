@@ -1,6 +1,6 @@
 ent-CMClosetToolFilled = { ent-CMClosetTool }
-    .suffix = Filled
+    .suffix = Заполненный
     .desc = { ent-CMClosetTool.desc }
 ent-CMClosetRadiationFilled = { ent-CMClosetRadiation }
-    .suffix = Filled
+    .suffix = Заполненный
     .desc = { ent-CMClosetRadiation.desc }

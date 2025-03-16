@@ -1,2 +1,2 @@
-ent-RMCBible = bible
-    .desc = Apply to head repeatedly.
+ent-RMCBible = библия
+    .desc = Многократно приложите к голове.

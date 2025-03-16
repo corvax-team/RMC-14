@@ -1,75 +1,74 @@
-rmc-xeno-strain-specialized-into = It has specialized into { INDEFINITE($strain) } { $strain }.
-rmc-xeno-dancer-name = Dancer
-rmc-xeno-dancer-description =
-    You trade your spit, acid ball, acid spray, dash, and a small bit of armor for high single-target damage.
-    You gain the ability to:
-    - Break walls and other simple structures with your slash attack.
-    - Cause enemies to be marked on slash and tailstab hits which effects your other abilities.
-    - Impale an enemy for your base slash damage and pierce some armor, hitting twice on marked.
-    - Trip an enemy to disarm them, or stun them if marked.
-    - Gain a temporary speed boost thats doubled around your enemies.
-rmc-xeno-dancer-popup = A performance fit for a Queen, this one will become my instrument of death.
-rmc-xeno-vanguard-name = Vanguard
-rmc-xeno-vanguard-description =
-    You trade your spit, acid ball, acid spray, corrosive acid, and some health for a strong one hit shield that recharges out of combat.
-    You gain the ability to:
-    - Break walls and other simple structures with your slash attack.
-    - Pierce through enemies in a line, recharging your shield if you hit at least 2.
-    - Blitz to get into a group of enemies and use it again to hit all around you, recharging your shield if you hit at least 1.
-    - Cleave an enemy either flinging them or rooting them in place, both stronger with your shield up.
-rmc-xeno-vanguard-popup = Fearless you are born, fearless you serve, fearless you die. This one will become my Vanguard.
-rmc-xeno-warden-name = Warden
-rmc-xeno-warden-description =
-    You trade your acid ball, acid spray, dash, and a small bit of your slash damage and speed to become an effective medic.
-    You gain the ability to:
-    - Emit strong pheromones.
-    - Retrieve endangered, knocked-down or resting allies and pull them to your location.
-    - Use an internal hitpoint pool that fills with every slash against your enemies, which can be spent to aid your allies and yourself by healing them or curing their ailments.
-rmc-xeno-warden-popup = This one will deny her sisters' deaths until they earn it. Fight or be forgotten.
-rmc-xeno-gardener-name = Gardener
-rmc-xeno-gardener-description =
-    You trade your choice of resin secretions, corrosive acid, and ability to transfer plasma for a tiny bit of extra health regeneration on weeds and several new abilities.
-    You gain the ability to:
-    - Plant up to six potent resin fruits for your sisters at the cost of a bit of your health for each fruit you shape.
-    - Plant hardier weeds.
-    Your Resin Surge allows you to:
-    - Create patches of sticky resin.
-    - Temporarily reinforce structures with your plasma.
-    - Build short-lived walls
-    - Speed up the growth of your fruits.
-rmc-xeno-gardener-popup = The glory of gardening: hands in the weeds, head in the dark, heart with resin.
-rmc-xeno-healer-name = Healer
-rmc-xeno-healer-description =
-    You lose your choice of resin secretions, a chunk of your slash damage, and you will experience a slighty-increased difficulty in tackling hosts in exchange for strong pheromones, and the ability to heal your sisters wounds.
-    You gain the ability to:
-    - Plant up to 3 lesser resin fruits
-    - Heal sisters by using plasma and some of your health.
-rmc-xeno-healer-popup = Divided we fall, united we win. We live for the hive, we die for the hive.
-rmc-xeno-resin-whisperer-name = Resin Whisperer
-rmc-xeno-resin-whisperer-description =
-    You lose:
-    - Your corrosive acid
-    - Your ability to secrete thick resin
-    - Your ability to reinforce resin secretions
-    - Your ability to plant weed nodes outside of weeds
-    - A fifth of your plasma reserves to.
-    You gain the ability to:
-    - Remotely place resin secretions including weed nodes up to a distance of twelve paces!
-    - Enhance your vision and gain a stronger connection to the resin.
-rmc-xeno-resin-whisperer-popup = We let the resin guide us. It whispers, so listen closely.
-rmc-xeno-acider-name = Acider
-rmc-xeno-acider-description =
-    You trade your leap, bone chips, long-range sight, and a little speed to gain more health, some armor, and a new organ that fills with volatile acid over time.
-    You gain the ability to:
-    - Cause your enemies to be covered in acid on hit.
-    - Gain acid reserves from slashing your enemies, and passively over time, which can be spent on corrosive acid as strong as a boiler's but applied much faster.
-    - Become a living bomb using all your stored up acid. Survive for 20 seconds and you explode, coating your enemies and their defenses with acid. You'll reincarnate as a larva afterwards.
-rmc-xeno-acider-popup = This one will be the last thing they hear. A martyr.
-rmc-xeno-steelcrest-name = Steelcrest
-rmc-xeno-steelcrest-description =
-    You trade your tail sweep and a small amount of slash damage for increased headbutt damage and fortified mobility to become a moving tank.
-    You gain the ability to:
-    - Move while fortified. Being fortified gives less armor and more directional armor, and no longer protects you from explosion stun.
-    - Headbutt while fortified. Headbutt doesn't lose damage and keeps it's higher range with high knockback.
-    - Soak in damage for 6 seconds for a small heal that also refreshes your tail slam.
-rmc-xeno-steelcrest-popup = This one, like my will, is indomitable. It will become my steel crest against all that defy me.
+﻿rmc-xeno-strain-specialized-into = Её специализация - { $strain }.
+
+rmc-xeno-dancer-name = Танцор
+rmc-xeno-dancer-description = Вы обмениваете ваш Плевок, Кислотный шар, Кислотные брызги, Рывок и небольшое количество брони на высокий урон по одной цели.
+   Вы получаете следующие способности:
+   - Разрушайте стены и другие простые конструкции вашими ударами когтями.
+   - Ваши удары когтями и Удар хвостом будут помечать врагов, что будет влиять на другие ваши способности.
+   - Используйте Пронзание, чтобы нанести враге ваш базовый урон и пробить некоторое количество брони, удар удвоится если враг имеет отметку.
+   - Используйте Подножку, чтобы обезоружить врага, или оглушить если враг имеет отметку.
+   - Получите временное увеличение скорости, которое удвоится при нахождении около врага.
+rmc-xeno-dancer-popup = Выступление, достойное Королевы, станет моим орудием смерти.
+
+rmc-xeno-vanguard-name = Авангард
+rmc-xeno-vanguard-description = Вы обмениваете ваш Плевок, Кислотный шар, Кислотные брызги, Рывок и небольшое количество здоровья на сильный, блокирующий одно попадание щит, который перезаряжается вне боя.
+   Вы получаете следующие способности:
+   - Разрушайте стены и другие простые конструкции вашими ударами когтями.
+   - Используйте Пробитие, чтобы поразить линию врагов, и перезарядить свой щит, если вы задели хотя бы 2.
+   - Используйте Блиц, чтобы ворваться в группу врагов, и используйте его снова, чтобы ударить всех вокруг себя и перезарядить свой щит, если вы задели хотя бы 1.
+   - Используйте Раскол на враге, чтобы либо отбросить его, либо задержать на месте - оба варианта сильнее при имеющемся щите.
+rmc-xeno-vanguard-popup = В бесстрашии ты рождаешься, в бесстрашии ты служишь, в бесстрашии ты умираешь. Этот станет моим Авангардом.
+
+rmc-xeno-warden-name = Смотритель
+rmc-xeno-warden-description = Вы обмениваете ваш Плевок, Кислотный шар, Кислотные брызги, Рывок и небольшое количество урона и скорости удара когтями, чтобы стать эффективным целителем.
+  Вы получаете следующие способности:
+  - Вы выделяете сильные феромоны.
+  - Используйте Притягивание на умирающих, сбитых с ног, или отдыхающих союзников, чтобы притянуть их к себе.
+  - Каждый удар когтями по врагам пополняет ваш внутренний запас здоровья, который можно потратить на помощь союзникам и себя, исцеляя или леча недуги.
+rmc-xeno-warden-popup = Она не даст умереть своим сёстрам, пока они этого не заслужат. Борись или будь забытой.
+
+rmc-xeno-gardener-name = Садовник
+rmc-xeno-gardener-description = Вы обмениваете ваши Выделение смолы, Едкую кислоту и способность передавать плазму на небольшое дополнительное восстановление здоровья на сорняках и несколько новых способностей.
+  Вы получаете следующие способности:
+  - Вы можете посадить до шести сильных смоляных фруктов для своих сестёр, тратя часть здоровья за каждый сформированный фрукт.
+  - Вы можете выращивать более крепкую смолу.
+  Ваш Всплеск смолы позволяют вам:
+  - Создавать участки липкой смолы.
+  - Временно укреплять структуры за счёт вашей плазмы.
+  - Создавать нестабильные стены.
+  - Ускорять рост ваших фруктов.
+rmc-xeno-gardener-popup = Слава садоводству: руки в сорняках, голова во тьме, сердце со смолой.
+
+rmc-xeno-healer-name = Лекарь
+rmc-xeno-healer-description = Вы теряете способность выделять смолу, часть урона удара когтями, и вам будет немного труднее валить на землю носителей, в обмен на сильные феромоны и способность исцелять раны своих сестёр.
+    Вы получаете следующие способности:
+    - Вы можете посадить до трёх малых смоляных фруктов.
+    - Вы можете исцелять сестёр, используя плазму и часть своего здоровья.
+rmc-xeno-healer-popup = Разделенные мы падём, единые мы победим. Мы живём ради улья, мы умираем ради улья.
+
+rmc-xeno-resin-whisperer-name = Заклинатель смолы
+rmc-xeno-resin-whisperer-description = Вы теряете способность:
+  - Накладывать едкую кислоту.
+  - Выделять густую смолу.
+  - Укреплять смоляные выделения.
+  - Сажать узлы за пределами сорняков.
+  - Вы так же теряете пятую часть вашего запаса плазмы.
+  Вы получаете следующие способности:
+  - Вы можете размещать смоляные выделения, включая узлы сорняков, на расстоянии до двенадцати шагов!
+  - Вы можете улучшить своё зрение и укрепить связь со смолой.
+rmc-xeno-resin-whisperer-popup = Мы позволяем смоле вести нас. Она шепчет, так что слушайте внимательно.
+
+rmc-xeno-acider-name = Кислотник
+rmc-xeno-acider-description = Вы обмениваете ваш Прыжок, Костяной шип, Дальнозоркость, и небольшое количество скорости на повышенное здоровье, небольшое количество брони, и новый орган, который со временем будет наполняться летучей кислотой.
+  - Ваши удары будут покрывать врагов кислотой.
+  - Запас кислоты будет накапливаться во время ударов когтями, а также пассивно со временем, и его можно будет потратить для наложения Едкой кислоты, такой же сильной, как у Бойлера, но наносимой гораздо быстрее.
+  - Вы можете превратиться в живую бомбу, используя весь запас кислоты. Прожив 20 секунд вы взорвётесь, покрыв кислотой ваших врагов и их оборону. После этого вы возродитесь в виде личинки.
+rmc-xeno-acider-popup = Это будет последнее, что они услышат. Мученика.
+
+rmc-xeno-steelcrest-name = Стальной гребень
+rmc-xeno-steelcrest-description = Вы обмениваете ваш Взмах хвостом и часть урона удара когтями на повышенный урон Удара головой и подвижность при Укреплении, чтобы стать мобильным танком.
+   Вы получаете следующие способности:
+   - Перемещение при Укреплении. Использование Укрепления даёт меньше брони, но больше направленной брони, а также больше не защищает вас от оглушения взрывом.
+   - Удар головой при Укреплении. Удар головой не теряет урон и сохраняет свою высокую дальность и высокое отбрасывание.
+   - Используйте Поглощение чтобы начать поглощать урон на протяжении 6 секунд с небольшим исцелением, одновременно перезаряжая ваш Шлепок хвостом.
+rmc-xeno-steelcrest-popup = Он, подобно моей воле, несокрушим. Он станет моим стальным панцирем против всех, кто бросит мне вызов.

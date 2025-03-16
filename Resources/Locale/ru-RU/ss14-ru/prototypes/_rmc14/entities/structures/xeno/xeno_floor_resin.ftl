@@ -1,8 +1,8 @@
 ent-XenoBaseFloorResin = { "" }
     .desc = { "" }
-ent-XenoStickyResin = sticky resin
-    .desc = A layer of disgusting sticky slime.
-ent-XenoStickyResinWeak = weak sticky resin
-    .desc = A thin and weak layer of disgusting sticky slime. It looks like it's already melting...
-ent-XenoFastResin = fast resin
-    .desc = A layer of disgusting sleek slime.
+ent-XenoStickyResin = липкая смола
+    .desc = Слой отвратительной липкой слизи.
+ent-XenoStickyResinWeak = слабая липкая смола
+    .desc = Тонкий и слабый слой отвратительной липкой слизи. Похоже, она уже тает...
+ent-XenoFastResin = ускоряющая смола
+    .desc = Слой отвратительной гладкой слизи.

@@ -1,4 +1,4 @@
-ent-CMFence = fence
-    .desc = A large metal mesh strewn between two poles. Intended as a cheap way to separate areas, while allowing one to see through it.
-ent-RMCFenceBroken = broken fence
-    .desc = A mess of broken wire strewn between two poles, it's not blocking anyone's way through.
+ent-CMFence = ограждение
+    .desc = Большая металлическая сетка, натянутая между двумя столбами. Предназначена в качестве дешёвого способа разделения пространства, позволяя при этом смотреть сквозь неё.
+ent-RMCFenceBroken = сломанное ограждение
+    .desc = Обрывки проволоки, растянувшиеся между двумя столбами, уже никому не преградят путь.

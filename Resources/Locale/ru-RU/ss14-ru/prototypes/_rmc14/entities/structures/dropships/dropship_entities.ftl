@@ -1,4 +1,4 @@
-ent-RMCDropshipDoorBlocker = dropship door blocker
-    .desc = Blocks barricades from being pulled into the dropship.
-ent-RMCUtilityAttachmentPoint = utility attach point
-    .desc = An attachment point for utility systems
+ent-RMCDropshipDoorBlocker = блокировщик двери десантного корабля
+    .desc = Не позволяет затащить баррикады на корабль.
+ent-RMCUtilityAttachmentPoint = точка крепления вспомогательной систем
+    .desc = Точка крепления вспомогательной систем корабля.

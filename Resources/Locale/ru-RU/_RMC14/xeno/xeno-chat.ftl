@@ -1,3 +1,3 @@
-rmc-no-queen-hivemind-chat = There is no Queen. You are alone.
-rmc-new-queen = A new Queen has risen to lead the Hive! Rejoice!
-rmc-hive-supports-castes = The Hive can now support: { $castes }
+﻿rmc-no-queen-hivemind-chat = Королевы нет. Мы одни.
+rmc-new-queen = Новая Королева возглавила Улей! Возрадуемся!
+rmc-hive-supports-castes = Теперь Улей может поддерживать: {$castes}

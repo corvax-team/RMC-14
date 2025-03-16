@@ -1,8 +1,8 @@
-ent-RMCSpawnerRandomTools = random tools spawner
-    .desc = This is a random tool.
-ent-RMCSpawnerRandomToolbox = random toolbox spawner
-    .desc = This is a random toolbox.
-ent-RMCSpawnerRandomPowercell = random powercell spawner
-    .desc = This is a random powercell.
-ent-RMCSpawnerRandomTechSupply = random tech supply spawner
-    .desc = This is a random piece of technology supplies.
+ent-RMCSpawnerRandomTools = случайный спавнер инструментов
+    .desc = Это случайный инструмент.
+ent-RMCSpawnerRandomToolbox = случайный спавнер ящика с инструментами
+    .desc = Это случайный набор инструментов.
+ent-RMCSpawnerRandomPowercell = случайный спавнер батареек
+    .desc = Это случайный элемент питания.
+ent-RMCSpawnerRandomTechSupply = случайный спавнер технических средств
+    .desc = Это случайная часть технологических принадлежностей.

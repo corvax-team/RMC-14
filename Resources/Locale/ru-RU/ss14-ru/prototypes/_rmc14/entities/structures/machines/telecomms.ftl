@@ -1,5 +1,5 @@
-ent-CMTelecomServer = telecommunication server
-    .desc = When powered and filled with encryption keys it allows radio headset communication.
+ent-CMTelecomServer = телекоммуникационный сервер
+    .desc = Когда запитан и заполнен ключами шифрования, он обеспечивает связь по радиогарнитуре.
 ent-CMTelecomServerFilled = { ent-CMTelecomServer }
-    .suffix = Filled
+    .suffix = Заполненный
     .desc = { ent-CMTelecomServer.desc }

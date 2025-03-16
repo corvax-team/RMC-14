@@ -1,2 +1,2 @@
-ent-RMCDeskFlag = old USMC desk flag
-    .desc = A relic of a bygone era, you roughly remember learning about it in history class, the flag of the once great United States Marine Corps. Semper Fi.
+ent-RMCDeskFlag = старый настольный флажок КМП США
+    .desc = Реликвия минувшей эпохи, вы смутно припоминаете, как узнавали о ней на уроках истории, — флаг некогда великой морской пехоты Соединенных Штатов. Semper Fi. Всегда верен.

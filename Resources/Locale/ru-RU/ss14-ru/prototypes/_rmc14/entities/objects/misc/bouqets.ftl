@@ -1,6 +1,6 @@
-ent-RMCBouqetRose = rose bouqet
-    .desc = A collection of roses arranged in wrapping paper.
-ent-RMCBouqetLily = lily bouqet
-    .desc = A collection of lilies arranged in wrapping paper. Appropriate for a memorial occasion.
-ent-RMCBouqetPoppy = poppy bouqet
-    .desc = A collection of poppies arranged in wrapping paper.
+ent-RMCBouqetRose = букет из роз
+    .desc = Коллекция роз, завёрнутых в обёрточную бумагу.
+ent-RMCBouqetLily = букет из лилий
+    .desc = Коллекция лилий, завёрнутых в обёрточную бумагу. Уместно для торжественного события.
+ent-RMCBouqetPoppy = букет из маков
+    .desc = Коллекция маков, завёрнутых в обёрточную бумагу.

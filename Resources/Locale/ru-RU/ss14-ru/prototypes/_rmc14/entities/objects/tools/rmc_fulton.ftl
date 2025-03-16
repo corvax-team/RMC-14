@@ -1,5 +1,5 @@
-ent-RMCFulton = fulton recovery device
-    .desc = A system used by the UNMC for retrieving objects of interest on the ground from an AUD-25 dropship. Can be used to extract unrevivable corpses, or crates, typically lasting around 3 minutes in the air.
+ent-RMCFulton = устройство подъёма фултон
+    .desc = Система, используемая ККМП для возвращения с земли на борт десантного корабля AUD-25 объектов, представляющих интерес. Может использоваться для поднятия в воздух невозрождаемых трупов или ящиков, длительность нахождения в воздухе обычно составляет около 3 минут.
     .suffix = 1
 ent-RMCFulton20 = { ent-RMCFulton }
     .suffix = 20

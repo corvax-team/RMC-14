@@ -1,6 +1,6 @@
-ent-RMCNailgunCompact = compact nailgun
-    .desc = A carpentry tool, used to drive nails into tough surfaces. Cannot fire nails offensively due to a lack of a gas seal around the nail, meaning it cannot build up the pressure to fire.
-    .suffix = Filled
-ent-RMCNailgunTactical = tactical compact nailgun
-    .desc = A carpentry tool, used to drive nails into tough surfaces. This one is military grade, it's olive drab and tacticool. Cannot fire nails as a projectile.
-    .suffix = Filled
+ent-RMCNailgunCompact = компактный гвоздомёт
+    .desc = Плотницкий инструмент, используемый для забивания гвоздей в прочные поверхности. Не может стрелять гвоздями из-за отсутствия уплотнительного кольца вокруг гвоздя, что препятствует созданию давления для выстрела.
+    .suffix = Заполненный
+ent-RMCNailgunTactical = тактический компактный гвоздомёт
+    .desc = Плотницкий инструмент, используемый для забивания гвоздей в прочные поверхности. Эта модель - военного образца, она оливкового цвета и тактикульная. Не может выстреливать гвоздями в качестве снарядов.
+    .suffix = Заполненный

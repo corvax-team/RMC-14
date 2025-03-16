@@ -1,2 +1,2 @@
-ent-CMRadioHandheld = marine radiophone
-    .desc = Also known as a Walkie-Talkie, this device allows for long range communication when telecommunications are down.
+ent-CMRadioHandheld = радиотелефон морпехов
+    .desc = Это устройство, также известное как уоки-токи, обеспечивает возможность передачи данных на большие расстояния, когда телекоммуникации не работают.

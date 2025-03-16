@@ -1,8 +1,8 @@
-ent-RMCCrateBoxBulletsRifle = rifle ammo box crate (10x24mm) (x600 rounds)
+ent-RMCCrateBoxBulletsRifle = коробка патронов для штурмовой винтовки (10x24мм) (x600 патронов)
     .desc = { ent-RMCCrateAmmo.desc }
-ent-RMCCrateBoxBulletsRifleAP = rifle AP ammo box crate (10x24mm AP) (x600 rounds)
+ent-RMCCrateBoxBulletsRifleAP = коробка бронебойных патронов для штурмовой винтовки (10x24мм ББ) (x600 патронов)
     .desc = { ent-RMCCrateAmmo.desc }
-ent-RMCCrateBoxBulletsSMG = smg ammo box crate (10x20mm AP) (x600 rounds)
+ent-RMCCrateBoxBulletsSMG = коробка патронов для пистолета-пулемёта (10x20мм ББ) (x600 патронов)
     .desc = { ent-RMCCrateAmmo.desc }
-ent-RMCCrateBoxBulletsSMGAP = smg AP ammo box crate (10x20mm AP) (x600 rounds)
+ent-RMCCrateBoxBulletsSMGAP = коробка бронебойных патронов для пистолета-пулемёта(10x20мм ББ) (x600 патронов)
     .desc = { ent-RMCCrateAmmo.desc }

@@ -1,10 +1,10 @@
-ent-RMCWeaponRevolverMateba = Mateba autorevolver custom
-    .desc = The .454 Mateba 6 Unica autorevolver is a semi-automatic handcannon that uses its own recoil to rotate the cylinders. Extremely rare, prohibitively costly, and unyieldingly powerful, it's found in the hands of a select few high-ranking UNMC officials. Stylish, sophisticated, and above all, extremely deadly.
-ent-RMCBaseSpeedLoaderMateba = Mateba speed loader (.454)
+ent-RMCWeaponRevolverMateba = заказной авторевольвер Матеба
+    .desc = Авторевольвер .454 Матеба 6 Уника - мощный полуавтоматический револьвер, использующий собственную отдачу для вращения барабана. Чрезвычайно редкий, непомерно дорогой и неукротимо мощный, он встречается в руках немногих высокопоставленных офицеров ККМП. Стильный, изысканный и, прежде всего, экстремально смертоносный.
+ent-RMCBaseSpeedLoaderMateba = спидлоадер Матеба (.454)
     .desc = { ent-BaseItem.desc }
 ent-RMCSpeedLoaderMateba = { ent-RMCBaseSpeedLoaderMateba }
-    .desc = A formidable .454 speedloader, made exclusively for the Mateba autorevolver. Packs a devastating punch. This standard-variant is optimized for anti-armor.
-ent-RMCCartridgeRevolverMateba = cartridge (.454)
+    .desc = Грозный спидлоадер под патрон .454, предназначенный исключительно для авторевольвера Матеба. Наносит сокрушительный урон. Этот стандартный вариант оптимизирован для борьбы с бронированными целями.
+ent-RMCCartridgeRevolverMateba = патрон (.454)
     .desc = { ent-CMCartridgePistolBase.desc }
-ent-RMCBulletMateba = bullet (.454)
+ent-RMCBulletMateba = пуля (.454)
     .desc = { ent-CMBulletBase.desc }

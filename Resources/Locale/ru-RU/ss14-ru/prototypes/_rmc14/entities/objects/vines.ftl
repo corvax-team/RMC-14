@@ -1,6 +1,6 @@
-ent-CMVinesBase = vines
+ent-CMVinesBase = лозы
     .desc = { "" }
-ent-CMVinesLight = vines
-    .desc = A mass of twisted vines.
-ent-CMVinesHeavy = vines
-    .desc = A thick, coiled mass of twisted vines.
+ent-CMVinesLight = лозы
+    .desc = Массив скрученных лоз.
+ent-CMVinesHeavy = лозы
+    .desc = Густой, завившийся массив скрученных лоз.

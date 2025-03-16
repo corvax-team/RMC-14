@@ -1,2 +1,2 @@
-ent-XenoTunnel = Tunnel
-    .desc = A tunnel entrance. Looks like it was dug by some kind of clawed beast.
+ent-XenoTunnel = туннель
+    .desc = Вход в туннель. Похоже, его прорыл какой-то когтистый зверь.

@@ -1,10 +1,10 @@
-ent-RMCSpawnerIntelBase = intel spawner
+ent-RMCSpawnerIntelBase = разведчик
     .desc = { ent-MarkerBase.desc }
-ent-RMCSpawnerIntelClose = objective landmark close
+ent-RMCSpawnerIntelClose = объективный ориентир близко
     .desc = { ent-RMCSpawnerIntelBase.desc }
-ent-RMCSpawnerIntelMedium = objective landmark medium
+ent-RMCSpawnerIntelMedium = объективный ориентир средний
     .desc = { ent-RMCSpawnerIntelBase.desc }
-ent-RMCSpawnerIntelFar = objective landmark far
+ent-RMCSpawnerIntelFar = объективный ориентир далеко
     .desc = { ent-RMCSpawnerIntelBase.desc }
-ent-RMCSpawnerIntelScience = objective landmark science
+ent-RMCSpawnerIntelScience = объективный ориентир наука
     .desc = { ent-RMCSpawnerIntelBase.desc }

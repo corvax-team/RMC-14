@@ -1,8 +1,8 @@
-ent-RMCSmallFloodlight = small floodlight
-    .desc = A small bit of light in the darkness.
-ent-RMCTallFloodlight = tall floodlight
-    .desc = A pillar of light in the darkness.
-ent-RMCFloodlightBroken = tall broken floodlight
-    .desc = A pasted on note says 'To fix, unscrew the panel, crowbar out the damaged assembly, weld it fixed, add 2 cable, then close the panel.'
-ent-RMCLZFloodlight = LZ floodlight
-    .desc = An indestructible bit of light in the darkness. Never seems to run out of power.
+ent-RMCSmallFloodlight = маленький прожектор
+    .desc = Крупица света во тьме.
+ent-RMCTallFloodlight = высокий прожектор
+    .desc = Столб света во тьме.
+ent-RMCFloodlightBroken = высокий разбитый прожектор
+    .desc = В приклеенной записке сказано 'Чтобы починить: открутите панель, выньте поврежденный узел монтировкой, заварите его, присоедините 2 кабеля, затем прикрутите панель.'
+ent-RMCLZFloodlight = прожектор посадочной площадки
+    .desc = Неразрушимый светоч во тьме. Похоже, его энергия никогда не закончится.

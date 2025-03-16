@@ -1,9 +1,9 @@
-ent-WeaponRifleAR10 = AR10 assault rifle
-    .desc = An earlier version of the more widespread M16 rifle. Considered to be the father of the 20th century rifle. How one of these ended up here is a mystery of its own. It is chambered in 7.62x51mm.
-    .suffix = Filled
-ent-RMCMagazineRifleAR10 = AR10 Magazine (7.62x51mm)
+ent-WeaponRifleAR10 = штурмовая винтовка AR10
+    .desc = Ранняя версия более распространённой винтовки M16. Считается отцом винтовок XX века. Как одна из них оказалась здесь - загадка. Использует патроны калибра 7.62x51 мм.
+    .suffix = Заполненный
+ent-RMCMagazineRifleAR10 = магазин AR10 (7.62x51мм)
     .desc = { ent-CMMagazineRifleBase.desc }
-ent-RMCCartridgeRifleAR10 = Cartridge (7.62x51)
-    .desc = A 7.62x51 rifle cartridge
+ent-RMCCartridgeRifleAR10 = патрон (7.62x51мм)
+    .desc = Патрон для винтовки калибра 7.62x51 мм.
 ent-BulletRifleAR10 = { ent-RMCBaseBullet }
     .desc = { ent-RMCBaseBullet.desc }

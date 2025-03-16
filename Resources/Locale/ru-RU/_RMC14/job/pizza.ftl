@@ -1,4 +1,4 @@
-cm-job-name-pizza-deliverer = Pizza Deliverer
-cm-job-description-pizza-deliverer = "'That'll be... sixteen orders of cheesy fries, eight large double topping pizzas, nine bottles of Four Loko... hello? Is anyone on this ship? Your pizzas are getting cold.'"
-cm-job-prefix-pizza-deliverer = Pizza Delivery
-CMPizzaDeliverer = Pizza Deliverer
+cm-job-name-pizza-deliverer = Доставщик пиццы
+cm-job-description-pizza-deliverer = «Вы заказали... шестнадцать порций сырного картофеля фри, восемь больших пицц с двойной начинкой, девять бутылок "Фоуртин Локо"... алло? Кто-нибудь есть на этом корабле? Ваша пицца остывает».
+cm-job-prefix-pizza-deliverer = Доставка пиццы
+CMPizzaDeliverer = Доставщик пиццы

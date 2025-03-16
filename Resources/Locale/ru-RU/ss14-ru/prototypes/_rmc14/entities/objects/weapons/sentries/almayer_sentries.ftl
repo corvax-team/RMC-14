@@ -1,4 +1,4 @@
-ent-RMCTurretAlmayer = UN-635C static gauss turret
-    .desc = A fully-automated defence turret with mid-range targeting capabilities. Armed with a modified M32-S Autocannon and an internal belt feed and modified for UN warship use.
-ent-RMCDeployerSentry = sentry deployment system
-    .desc = A box that deploys a sentry turret.
+ent-RMCTurretAlmayer = стационарная гаусс-турель UN-635C
+    .desc = Полностью автоматизированная оборонительная турель с возможностью ведения огня на средней дистанции. Вооружена модифицированной автопушкой M32-S с внутренним ленточным питанием и модифицирована для использования на боевых кораблях ОПЗ.
+ent-RMCDeployerSentry = система развёртывания турели
+    .desc = Ящик, в котором хранится сторожевая турель.

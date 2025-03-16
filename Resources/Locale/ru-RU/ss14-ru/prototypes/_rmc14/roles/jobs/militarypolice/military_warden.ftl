@@ -1,2 +1,2 @@
-ent-CMSpawnPointMilitaryWarden = military warden spawn point
+ent-CMSpawnPointMilitaryWarden = точка появления военный надзиратель
     .desc = { ent-CMSpawnPointJobBase.desc }

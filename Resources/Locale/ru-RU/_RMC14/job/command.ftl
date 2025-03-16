@@ -1,19 +1,19 @@
 # command
-cm-job-name-senior-enlisted-advisor = Senior Enlisted Advisor
-cm-job-description-senior-enlisted-advisor = Advise and train inexperienced crew members and marines alike. Bark out orders to new privates to get geared.
-cm-job-prefix-senior-enlisted-advisor = SEA
-CMJobSeniorEnlistedAdvisor = Senior Enlisted Advisor
-cm-job-name-staff-officer = Staff Officer
-cm-job-description-staff-officer = Monitor the marines, man the CIC. In charge of logistics and the overwatch system.
-cm-job-prefix-staff-officer = SO
-CMJobStaffOfficer = Staff Officer
-cm-job-name-commanding-officer = Commanding Officer
-cm-job-description-commanding-officer = Lead your company and complete the mission.
-cm-job-prefix-commanding-officer = CO
-CMJobCommandingOfficer = Commanding Officer
-cm-job-name-executive-officer = Executive Officer
-cm-job-description-executive-officer = You are second in command aboard the ship, and are the next in the chain of command after the Commanding Officer.
-cm-job-prefix-executive-officer = XO
-CMJobExecutiveOfficer = Executive Officer
+cm-job-name-senior-enlisted-advisor = Старший сержантский советник
+cm-job-description-senior-enlisted-advisor = Консультируйте и обучайте неопытных членов экипажа и морских пехотинцев. Кричите приказы новеньким рядовым, чтобы они собирались.
+cm-job-prefix-senior-enlisted-advisor = ССС
+CMJobSeniorEnlistedAdvisor = Старший сержантский советник
+cm-job-name-staff-officer = Офицер штаба
+cm-job-description-staff-officer = Наблюдайте за морскими пехотинцами, руководите БИЦ. Отвечайте за логистику и систему наблюдения.
+cm-job-prefix-staff-officer = ОШ
+CMJobStaffOfficer = Офицер штаба
+cm-job-name-commanding-officer = Командующий офицер
+cm-job-description-commanding-officer = Возглавьте операцию и выполните поставленную задачу.
+cm-job-prefix-commanding-officer = КО
+CMJobCommandingOfficer = Командующий офицер
+cm-job-name-executive-officer = Исполнительный офицер
+cm-job-description-executive-officer = Вы являетесь заместителем командующего офицера на борту корабля, и следующим за ним по цепи командования.
+cm-job-prefix-executive-officer = ИО
+CMJobExecutiveOfficer = Исполнительный офицер
 # Admin only right now.
-cm-job-name-high-command = High Command
+cm-job-name-high-command = Верховное командование

@@ -1,6 +1,6 @@
-ent-CMCoatDressBluesEnlisted = marine enlisted dress blues jacket
-    .desc = The jacket of the legendary Marine dress blues, virtually unchanged since the 19th century. You're wearing history, Marine. Don't let your ancestors down.
-ent-CMCoatDressBluesSenior = marine NCO dress blues jacket
-    .desc = The jacket of the legendary Marine dress blues, virtually unchanged since the 19th century. Features the adornments of a decorated non-commissioned officer. Heritage, embodied.
-ent-CMCoatDressBluesGeneral = marine officer dress blues jacket
-    .desc = The jacket of the legendary Marine dress blues, virtually unchanged since the 19th century. Features the sleek dark design of the uniform worn by a commissioned officer.
+ent-CMCoatDressBluesEnlisted = синий парадный мундир рядовых
+    .desc = Мундир легендарного синего костюма морских пехотинцев, практически не изменившегося с XIX века. На тебе история, морпех. Не подведи своих предков.
+ent-CMCoatDressBluesSenior = синий парадный мундир сержантов
+    .desc = Мундир легендарного синего костюма морских пехотинцев, практически не изменившегося с XIX века. Отличается украшениями награждённого офицера сержантского состава. Наследие, воплощённое в жизнь.
+ent-CMCoatDressBluesGeneral = синий парадный мундир офицеров
+    .desc = Мундир легендарного синего костюма морских пехотинцев, практически не изменившегося с XIX века. Отличается элегантным тёмным дизайном, характерным для униформы офицеров.

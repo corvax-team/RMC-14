@@ -1,2 +1,2 @@
-ent-RMCWeaponShotgunXM51 = XM51 breaching scattergun
-    .desc = An experimental shotgun model going through testing trials in the UNMC. Based on the original civilian and CMB version, the XM51 is a mag-fed, pump-action shotgun. It utilizes special 16-gauge breaching rounds which are effective at breaching walls and doors. Users are advised not to employ the weapon against soft or armored targets due to low performance of the shells.
+ent-RMCWeaponShotgunXM51 = пробивное ружье XM51
+    .desc = Экспериментальная модель дробовика, проходящая полевые испытания в ККМП ОПЗ. Основанная на оригинальной гражданской версии и версии для БКМ, модель XM51 представляет собой помповый дробовик с магазинной перезарядкой. Оно использует специальные патроны 16-го калибра, эффективные при пробивании стен и дверей. Из-за низкой эффективности патрона, пользователям не рекомендуется использовать оружие против мягких или бронированных целей.

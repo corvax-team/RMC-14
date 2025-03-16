@@ -1,6 +1,6 @@
-ent-ActionXenoEvolve = Evolve
-    .desc = Evolve to the next caste of xenonid or choose a strain if one is available.
-ent-ActionXenoDevolve = De-evolve
-    .desc = Devolve to the previous caste of xenonid. [color=red]You won't get your evolution points refunded![/color]
-ent-CMGuidebookActionXenoEvolve = Evolve
-    .desc = Evolve to the next caste of xenonid or choose a strain if one is available.
+ent-ActionXenoEvolve = Эволюционировать
+    .desc = Эволюционируйте в следующую касту ксенонидов или выберите специализацию, если она доступна.
+ent-ActionXenoDevolve = Деградировать
+    .desc = Деградируйте в предыдущую касту ксенонидов. [color=red]Очки эволюции не вернутся![/color]
+ent-CMGuidebookActionXenoEvolve = Эволюционировать
+    .desc = Эволюционируйте в следующую касту ксенонидов или выберите специализацию, если она доступна.

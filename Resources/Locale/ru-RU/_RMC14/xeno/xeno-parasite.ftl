@@ -1,19 +1,25 @@
-rmc-xeno-failed-cant-infect = We can't infect { THE($target) }!
-rmc-xeno-failed-cant-reach = We can't reach { $target }, they need to be lying down!
-rmc-xeno-failed-target-dead = We can't infect the dead!
-rmc-xeno-infect-success = The parasite smashes against { $target }'s { $clothing } and rips it off!
-rmc-xeno-infect-fail = The parasite smashes against { $target }'s { $clothing }!
-rmc-xeno-failed-parasite-dead = We can't infect with a dead child!
-rmc-xeno-cant-throw = We can't throw { THE($target) }!
-rmc-xeno-parasite-dead = { CAPITALIZE(SUBJECT($parasite)) } { CONJUGATE-BE($parasite) } not moving.
-rmc-xeno-parasite-announce-infect = We sense that { $xeno } has infected a host at { $location }!
-rmc-xeno-parasite-player-pickup = { CAPITALIZE($parasite) } can handle { REFLEXIVE($parasite) }!
-rmc-xeno-parasite-nonplayer-pull = Pulling { $parasite } might hurt { OBJECT($parasite) }!
-rmc-xeno-parasite-ai-active = { CAPITALIZE(SUBJECT($parasite)) } seems to be active.
-rmc-xeno-parasite-ai-idle = { CAPITALIZE(SUBJECT($parasite)) } { CONJUGATE-BE($parasite) } resting.
-rmc-xeno-parasite-ai-dying = [color=red]{ CAPITALIZE(SUBJECT($parasite)) } needs to return to safety![/color]
-rmc-xeno-parasite-ai-eaten = { CAPITALIZE($parasite) } is furiously cannibalized by the other nearby parasites!
-rmc-xeno-parasite-ghost-carrier-none = { THE($xeno) } has no sheltered parasites!
-rmc-xeno-parasite-ghost-carrier-reserved = { THE($xeno) } has reserved the remaining parasites for { REFLEXIVE($xeno) }.
-rmc-xeno-parasite-ghost-carrier-dead = { THE($xeno) } is dead and all { POSS_ADJ($xeno) } died with { OBJECT($xeno) }.
-rmc-xeno-parasite-carrier-death = The chittering mass of tiny aliens try to escape { THE($xeno) }!
+rmc-xeno-failed-cant-infect = Мы не можем заразить { $target }!
+rmc-xeno-failed-cant-reach = Мы не можем дотянуться до { $target }, они должны лежать!
+rmc-xeno-failed-target-dead = Мы не можем заражать мёртвых!
+rmc-xeno-infect-success = Паразит врезается и срывает { $clothing } { $target }!
+rmc-xeno-infect-fail = Паразит врезается в { $clothing } { $target }!
+rmc-xeno-failed-parasite-dead = Мертвое дитя не может заразить!
+rmc-xeno-cant-throw = Мы не можем бросить { $target }!
+
+rmc-xeno-parasite-dead = { CAPITALIZE($parasite) } не двигается.
+rmc-xeno-parasite-announce-infect = Мы чувствуем, что { $xeno } заразил носителя в локации { $location }!
+
+rmc-xeno-parasite-player-pickup = {CAPITALIZE($parasite)} может справиться сама!
+rmc-xeno-parasite-nonplayer-pull = Если мы потянем { $parasite }, это может ей повредить!
+
+rmc-xeno-parasite-ai-active = Она бодрствует.
+rmc-xeno-parasite-ai-idle = Она отдыхает.
+rmc-xeno-parasite-ai-dying = [color=red]Она должна вернуться в безопасное место![/color]
+
+rmc-xeno-parasite-ai-eaten = { CAPITALIZE($parasite) } яростно поедается другими паразитами-каннибалами!
+
+rmc-xeno-parasite-ghost-carrier-none = У { $xeno } нет хранящихся паразитов!
+rmc-xeno-parasite-ghost-carrier-reserved = { CAPITALIZE($xeno) } зарезервировала остальных паразитов для себя.
+rmc-xeno-parasite-ghost-carrier-dead = {CAPITALIZE($xeno)} погибает, и все её паразиты вместе с ней.
+
+rmc-xeno-parasite-carrier-death = Щебечущая масса крошечных инопланетян пытается убежать от { $xeno }!

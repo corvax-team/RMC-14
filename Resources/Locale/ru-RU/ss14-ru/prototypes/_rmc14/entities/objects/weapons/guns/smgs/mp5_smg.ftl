@@ -1,9 +1,9 @@
-ent-WeaponSMGMP5 = MP5 submachinegun
-    .desc = A German design, this was one of the most widely used submachine guns in the world. It's still possible to find this firearm in the hands of collectors or gun fanatics.
-    .suffix = Filled
-ent-CMMagazineSMGMP5 = MP5 magazine (9mm)
-    .desc = A 9mm magazine for the MP5.
-ent-CMCartridge9mmSMG = cartridge (9mm SMG)
-    .desc = A 9mm cartridge for the mp5 submachinegun.
+ent-WeaponSMGMP5 = пистолет-пулемёт MP5
+    .desc = Немецкая разработка, этот пистолет-пулемёт был одним из самых распространённых в мире. Его до сих пор можно найти в руках коллекционеров или фанатиков оружия.
+    .suffix = Заполненный
+ent-CMMagazineSMGMP5 = магазин MP5 (9мм)
+    .desc = 9-мм магазин для пистолета-пулемёта MP5.
+ent-CMCartridge9mmSMG = патрон (9мм ПП)
+    .desc = 9-мм патрон для пистолета-пулемёта MP5.
 ent-CMBullet9mmSMG = { ent-Bullet10x20mm }
     .desc = { ent-Bullet10x20mm.desc }

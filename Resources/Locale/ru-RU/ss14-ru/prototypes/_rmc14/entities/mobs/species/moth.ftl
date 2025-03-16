@@ -1,3 +1,3 @@
-ent-CMMobMoth = Urist C.M McFluff
+ent-CMMobMoth = Урист К.М. МакМоль
     .suffix = RMC14
     .desc = { ent-CMBaseMobSpeciesOrganic.desc }

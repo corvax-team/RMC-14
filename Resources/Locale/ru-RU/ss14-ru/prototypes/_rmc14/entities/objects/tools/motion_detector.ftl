@@ -1,2 +1,2 @@
-ent-RMCMotionDetector = motion detector
-    .desc = A device that detects movement, but ignores marines.
+ent-RMCMotionDetector = детектор движения
+    .desc = Устройство, которое засекает движение, но игнорирует колониальных морпехов.

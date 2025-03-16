@@ -1,2 +1,2 @@
-ent-CMFlash = flash
-    .desc = Used for blinding and being an asshole. Recharges one flash every 15 seconds. You must wait 1 second between uses for the capacitor to recharge.
+ent-CMFlash = вспышка
+    .desc = Используется, чтобы ослеплять и быть мудаком. Каждые 15 секунд перезаряжается одна вспышка. Между использованиями необходимо подождать 1 секунду, пока перезарядится конденсатор.
