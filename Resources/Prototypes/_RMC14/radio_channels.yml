@@ -76,7 +76,7 @@
 - type: radioChannel
   id: MarineJTAC
   name: chat-radio-marine-jtac
-  keycode: "п" #CCM
+  keycode: "н" #CCM
   frequency: 1487
   color: "#ad3b98"
   longRange: true
