@@ -1,4 +1,4 @@
-species-name-rodentia = Rodentia
+species-name-rodentia = Грызлит
 # head markings
 
 ## patterns

@@ -1,4 +1,4 @@
-ent-RMCCrateAttachmentRedDot = коробка прицелов red-dot (x8)
+ent-RMCCrateAttachmentRedDot = коробка прицелов Точка (x8)
     .desc = { ent-RMCCrateWeldable.desc }
 ent-RMCCrateAttachmentSmartScope = коробка смарт-прицелов B8 (x4)
     .desc = { ent-RMCCrateWeldable.desc }

@@ -1,65 +1,65 @@
 - type: rank
   id: RMCRankSergeantMajor
-  name: Sergeant Major
-  prefix: SgtMaj.
+  name: Сержант-майор
+  prefix: СержМайр.
   paygrade: E9E
 
 - type: rank
   id: RMCRankMasterGunnerySergeant
-  name: Master Gunnery Sergeant
-  prefix: MGySgt.
+  name: Мастер-ганнери-сержант
+  prefix: МастГанСерж.
   paygrade: E9
 
 - type: rank
   id: RMCRankFirstSergeant
-  name: First Sergeant
-  prefix: 1Sgt.
+  name: Первый сержант
+  prefix: 1-й Серж.
   paygrade: E8E
 
 - type: rank
   id: RMCRankMasterSergeant
-  name: Master Sergeant
-  prefix: MSgt.
+  name: Мастер-сержант
+  prefix: МастСерж.
   paygrade: E8
 
 - type: rank
   id: RMCRankGunnerySergeant
-  name: Gunnery Sergeant
-  prefix: GySgt.
+  name: Ганнери-сержант
+  prefix: ГанСерж.
   paygrade: E7
 
 - type: rank
   id: RMCRankStaffSergeant
-  name: Staff Sergeant
-  prefix: SSgt.
+  name: Штаб-сержант
+  prefix: ШтабСерж.
   paygrade: E6
 
 - type: rank
   id: RMCRankSergeant
-  name: Sergeant
-  prefix: Sgt.
+  name: Сержант
+  prefix: Серж.
   paygrade: E5
 
 - type: rank
   id: RMCRankCorporal
-  name: Corporal
-  prefix: Cpl.
+  name: Капрал
+  prefix: Кпр.
   paygrade: E4
 
 - type: rank
   id: RMCRankLanceCorporal
-  name: Lance Corporal
-  prefix: LCpl.
+  name: Лэнс-капрал
+  prefix: ЛнКпр.
   paygrade: E3
 
 - type: rank
   id: RMCRankPrivateFirstClass
-  name: Private First Class
-  prefix: PFC.
+  name: Рядовой первого класса
+  prefix: Ряд 1-кл.
   paygrade: E2
 
 - type: rank
   id: RMCRankPrivate
-  name: Private
-  prefix: PVT.
+  name: Рядовой
+  prefix: Ряд.
   paygrade: E1
