@@ -1,6 +1,6 @@
 ﻿- type: rank
   id: RMCRankCivilian
-  name: Civilian
+  name: Гражданский
   prefix: Гражд.
   malePrefix: Мистер
   femalePrefix: Миссис
