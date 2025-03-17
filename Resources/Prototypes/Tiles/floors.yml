@@ -15,7 +15,6 @@
     collection: FootstepFloor
   itemDrop: FloorTileItemSteel
   heatCapacity: 10000
-  indestructible: true
 
 - type: tile
   id: FloorSteelCheckerLight
@@ -252,7 +251,6 @@
     collection: BarestepWood
   itemDrop: FloorTileItemWood
   heatCapacity: 10000
-  indestructible: true
 
 - type: tile
   id: FloorWhite
@@ -976,7 +974,6 @@
     collection: FootstepTile
   itemDrop: FloorTileItemGrayConcreteMono
   heatCapacity: 10000
-  indestructible: true
 
 - type: tile
   id: FloorGrayConcreteSmooth
@@ -1013,7 +1010,6 @@
     collection: FootstepTile
   itemDrop: FloorTileItemOldConcrete
   heatCapacity: 10000
-  indestructible: true
 
 - type: tile
   id: FloorOldConcreteMono
@@ -1596,7 +1592,6 @@
     collection: FootstepAsteroid
   heatCapacity: 10000
   weather: true
-  indestructible: true
 
 - type: tile
   id: FloorAsteroidIronsand
@@ -1667,7 +1662,6 @@
   footstepSounds:
     collection: FootstepAsteroid
   heatCapacity: 10000
-  indestructible: true
 
 - type: tile
   id: FloorCaveDrought

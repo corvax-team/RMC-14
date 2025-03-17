@@ -8,7 +8,6 @@
     collection: FootstepFloor
   itemDrop: CMTileItemSteel
   heatCapacity: 10000
-  indestructible: true
 
 - type: tile
   parent: CMTileBase
