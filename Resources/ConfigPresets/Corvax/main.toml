@@ -15,6 +15,7 @@ fallbackenabled = false
 fallbackpreset = "CMDistressSignal"
 round_end_sound_collection = "CMRoundEnd"
 contraband_examine = false
+map_pool = "CCMMapPool"
 
 [ghost]
 kill_crit = false
