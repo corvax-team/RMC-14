@@ -25,57 +25,59 @@
     camouflage: Snow
     announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
 
-- type: entity
-  id: RMCPlanetFiorina
-  name: Fiorina Science Annex
-  components:
-  - type: RMCPlanetMapPrototype
-    map: /Maps/_RMC14/prison.yml
-    camouflage: Classic
-    minPlayers: 130
-    announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+###-----------------------------------------------------CCM14-----------------------------------------------------###
+#- type: entity
+#  id: RMCPlanetFiorina
+#  name: Fiorina Science Annex
+#  components:
+#  - type: RMCPlanetMapPrototype
+#    map: /Maps/_RMC14/prison.yml
+#    camouflage: Classic
+#    minPlayers: 130
+#    announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
 
-- type: entity
-  id: RMCPlanetTrijent
-  name: Trijent Dam
-  components:
-  - type: RMCPlanetMapPrototype
-    map: /Maps/_RMC14/trijent.yml
-    camouflage: Desert
-    minPlayers: 130
-    announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
+#- type: entity
+#  id: RMCPlanetTrijent
+#  name: Trijent Dam
+#  components:
+#  - type: RMCPlanetMapPrototype
+#    map: /Maps/_RMC14/trijent.yml
+#    camouflage: Desert
+#    minPlayers: 130
+#    announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
 
-- type: entity
-  id: RMCPlanetVaradero
-  name: New Varadero
-  components:
-  - type: RMCPlanetMapPrototype
-    map: /Maps/_RMC14/varadero.yml
-    camouflage: Jungle
-    announcement: "An automated distress signal has been received from UN Outpost New Varadero. A response team from the UNS Almayer will be dispatched shortly to investigate.
-      Designation: Island research station and mining facility
+#- type: entity
+#  id: RMCPlanetVaradero
+#  name: New Varadero
+#  components:
+#  - type: RMCPlanetMapPrototype
+#    map: /Maps/_RMC14/varadero.yml
+#    camouflage: Jungle
+#    announcement: "An automated distress signal has been received from UN Outpost New Varadero. A response team from the UNS Almayer will be dispatched shortly to investigate.
+#      Designation: Island research station and mining facility
+#
+#      Population: 47
+#      Current Temperature: 68F Interior, 97F Exterior
+#      Outpost Commander: UN Rep. Steve Haifisch
+#      Telecommunications Array: Repairs required
+#
+#      No further information available at this time."
 
-      Population: 47
-      Current Temperature: 68F Interior, 97F Exterior
-      Outpost Commander: UN Rep. Steve Haifisch
-      Telecommunications Array: Repairs required
+#- type: entity
+#  id: RMCPlanetKutjevo
+#  name: Kutjevo Refinery
+#  components:
+#  - type: RMCPlanetMapPrototype
+#    map: /Maps/_RMC14/kutjevo.yml
+#    camouflage: Desert
+#    announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
 
-      No further information available at this time."
-
-- type: entity
-  id: RMCPlanetKutjevo
-  name: Kutjevo Refinery
-  components:
-  - type: RMCPlanetMapPrototype
-    map: /Maps/_RMC14/kutjevo.yml
-    camouflage: Desert
-    announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
-
-- type: entity
-  id: RMCPlanetChances
-  name: LV-522 Chance's Claim
-  components:
-  - type: RMCPlanetMapPrototype
-    map: /Maps/_RMC14/chances.yml
-    camouflage: Classic
-    announcement: "Pan-Pan. This is the commanding officer of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
+#- type: entity
+#  id: RMCPlanetChances
+#  name: LV-522 Chance's Claim
+#  components:
+#  - type: RMCPlanetMapPrototype
+#    map: /Maps/_RMC14/chances.yml
+#    camouflage: Classic
+#    announcement: "Pan-Pan. This is the commanding officer of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
+###-----------------------------------------------------CCM14-----------------------------------------------------###

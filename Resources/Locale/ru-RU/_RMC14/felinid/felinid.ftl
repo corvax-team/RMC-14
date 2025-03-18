@@ -1,4 +1,4 @@
-species-name-felinid = Felinid
+species-name-felinid = Фелинид
 marking-FelinidEarsBasic = Basic Ears
 marking-FelinidEarsBasic-basic_outer = Outer ear
 marking-FelinidEarsBasic-basic_inner = Inner ear

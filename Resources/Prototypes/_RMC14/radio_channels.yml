@@ -2,7 +2,7 @@
 - type: radioChannel #UNMC High Command, for events and such, basically CentComm channel
   id: MarineHighCommand
   name: chat-radio-marine-highcommand
-  keycode: "z" #z in cm13
+  keycode: "й" #CCM
   frequency: 1471
   color: "#318779"
   longRange: true
@@ -11,7 +11,7 @@
 - type: radioChannel
   id: MarineCommon
   name: chat-radio-marine-common
-  keycode: "g" #; and g in cm13
+  keycode: "о" #CCM
   frequency: 1480
   color: "#B4B4B4"
   colorblindColor: "#6FD08C"
@@ -22,7 +22,7 @@
 - type: radioChannel
   id: MarineCommand
   name: chat-radio-marine-command
-  keycode: "v" #v in cm13
+  keycode: "к" #CCM
   frequency: 1481
   color: "#5b96d4"
   longRange: true
@@ -31,7 +31,7 @@
 - type: radioChannel
   id: MarineMedical
   name: chat-radio-marine-medical
-  keycode: "m" #m in cm13
+  keycode: "м" #CCM
   frequency: 1482
   color: "#009771"
   longRange: true
@@ -40,7 +40,7 @@
 - type: radioChannel
   id: MarineEngineer
   name: chat-radio-marine-engineer
-  keycode: "n" #n in cm13
+  keycode: "и" #CCM
   frequency: 1483
   color: "#e4860c"
   longRange: true
@@ -49,7 +49,7 @@
 - type: radioChannel
   id: MarineMilitaryPolice
   name: chat-radio-marine-military-police
-  keycode: "p" #p in cm13
+  keycode: "в" #CCM
   frequency: 1484
   color: "#be324f"
   longRange: true
@@ -58,7 +58,7 @@
 - type: radioChannel
   id: MarineRequisition
   name: chat-radio-marine-requisition
-  keycode: "u" #u in cm13
+  keycode: "с" #CCM
   frequency: 1485
   color: "#b17324"
   longRange: true
@@ -67,7 +67,7 @@
 - type: radioChannel
   id: MarineIntel
   name: chat-radio-marine-intel
-  keycode: "t" #t in cm13
+  keycode: "р" #CCM
   frequency: 1486
   color: "#059705"
   longRange: true
@@ -76,7 +76,7 @@
 - type: radioChannel
   id: MarineJTAC
   name: chat-radio-marine-jtac
-  keycode: "j" #j in CM13
+  keycode: "н" #CCM
   frequency: 1487
   color: "#ad3b98"
   longRange: true
@@ -86,7 +86,7 @@
 - type: radioChannel
   id: MarineAlpha
   name: chat-radio-marine-alpha
-  keycode: "a" #a in cm13
+  keycode: "а" #CCM
   frequency: 1491
   color: "#dc0a0a"
   longRange: true
@@ -95,7 +95,7 @@
 - type: radioChannel
   id: MarineBravo
   name: chat-radio-marine-bravo
-  keycode: "b" #b in cm13
+  keycode: "б" #CCM
   frequency: 1492
   color: "#f2af03"
   longRange: true
@@ -104,7 +104,7 @@
 - type: radioChannel
   id: MarineCharlie
   name: chat-radio-marine-charlie
-  keycode: "c" #c in cm13
+  keycode: "ч" #CCM
   frequency: 1493
   color: "#a94ac2"
   longRange: true
@@ -113,7 +113,7 @@
 - type: radioChannel
   id: MarineDelta
   name: chat-radio-marine-delta
-  keycode: "d" #d in cm13
+  keycode: "д" #CCM
   frequency: 1494
   color: "#038ae1"
   longRange: true
@@ -122,7 +122,7 @@
 - type: radioChannel
   id: MarineEcho
   name: chat-radio-marine-echo
-  keycode: "e" #e in cm13
+  keycode: "э" #CCM
   frequency: 1495
   color: "#3be1b1"
   longRange: true
@@ -131,7 +131,7 @@
 - type: radioChannel
   id: MarineFoxtrot
   name: chat-radio-marine-foxtrot
-  keycode: "f" #f in cm13
+  keycode: "ф" #CCM
   frequency: 1496
   color: "#c23c07"
   longRange: true
@@ -141,7 +141,7 @@
 - type: radioChannel
   id: Colony
   name: chat-radio-colony
-  keycode: "o" #o in cm13
+  keycode: "л" #CCM
   frequency: 1469
   color: "#cf40a6" #todo rmc14
   longRange: true
@@ -158,7 +158,7 @@
 - type: radioChannel # Only used by Corporate Liason to hand out to bodyguards / command.
   id: WEYA
   name: chat-radio-WY
-  keycode: "w" #w in CM13
+  keycode: "я" #CCM
   frequency: 1231
   color: "#fe9b24"
   longRange: true
@@ -167,7 +167,7 @@
 - type: radioChannel
   id: CMB
   name: chat-radio-CMB
-  keycode: "l"
+  keycode: "ц" #CCM
   frequency: 1220
   color: "#1b748c"
   longRange: true
@@ -176,7 +176,7 @@
 - type: radioChannel
   id: Provost
   name: chat-radio-provost
-  keycode: "r"
+  keycode: "п" #CCM
   frequency: 1473
   color: "#9b0612"
   longRange: true
@@ -185,7 +185,7 @@
 - type: radioChannel
   id: Hivemind
   name: chat-radio-hivemind
-  keycode: "h"
+  keycode: "у" #CCM
   frequency: 426
   color: "#8b36a6"
   longRange: true

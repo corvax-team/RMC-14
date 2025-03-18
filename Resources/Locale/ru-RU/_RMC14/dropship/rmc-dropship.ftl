@@ -62,7 +62,9 @@ rmc-dropship-weapons-fire = ОГОНЬ
 rmc-dropship-weapons-strike = УДАР
 rmc-dropship-weapons-vector = ВЕКТОР
 rmc-dropship-weapons-night-vision-on = НВ-ВКЛ
-rmc-dropship-weapons-night-vision-off = НВ-ВЫКЛ
+rmc-dropship-weapons-night-vision-off =
+    НВ-
+    ВЫКЛ
 rmc-dropship-weapons-weapon = ОРУДИЕ
 rmc-dropship-weapons-previous = ^
 rmc-dropship-weapons-next = v

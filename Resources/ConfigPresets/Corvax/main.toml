@@ -90,3 +90,6 @@ preload = false
 
 [build]
 engine_version = "240.1.3-source-gen-debug" #and remember to remove it next update
+
+[rmc]
+admin_fax_area_map = "Maps/_CCM14/operational_headquarters.yml"

@@ -1,0 +1,24 @@
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CCMDoubleDoorCargoSolidLocked
+  suffix: Cargo, Solid, Locked
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Doors/Airlocks/Double/cargo_solid.rsi
+  - type: Occluder
+  - type: PaintableAirlock
+    department: CMCargo
+  - type: AccessReader
+    access: [["CMAccessRequisitions"]]
+
+- type: entity
+  parent: CMDoubleDoorBase
+  id: CCMDoubleDoorCargoGlassLocked
+  suffix: Cargo, Glass, Locked
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Doors/Airlocks/Double/cargo_glass.rsi
+  - type: PaintableAirlock
+    department: CMCargo
+  - type: AccessReader
+    access: [["CMAccessRequisitions"]]
