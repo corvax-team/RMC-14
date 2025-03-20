@@ -41,5 +41,5 @@ cm-job-name-selectable-xenonid = Ксенонид
 CMXenoSelectableXeno = Ксенонид
 cm-job-supervisors-queen = Королеве
 role-timer-xeno-roles = Ксенонид
-role-timer-xeno-drones = дроны, и из них эволюционирующие
+role-timer-xeno-drones = трутни, и из них эволюционирующие
 role-timer-xeno-tier-three = касты третьего уровня

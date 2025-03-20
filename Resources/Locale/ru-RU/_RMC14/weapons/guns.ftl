@@ -48,20 +48,20 @@ rmc-iff-toggle-on = включаете
 
 rmc-revolver-spin = Вы вращаете барабан.
 
-rmc-examine-text-weapon-accuracy = Текущий множитель точности составляет [color={ $color }]{TOSTRING($accuracy, "F2")}[/color].
+rmc-examine-text-weapon-accuracy = Текущий множитель точности составляет [color={ $colour }]{TOSTRING($accuracy, "F2")}[/color].
 
-rmc-examine-text-scatter-max = Текущий максимальный разброс составляет [color={ $color }]{TOSTRING($scatter, "F1")}[/color] градусов.
-rmc-examine-text-scatter-min = Текущий минимальный разброс составляет [color={ $color }]{TOSTRING($scatter, "F1")}[/color] градусов.
+rmc-examine-text-scatter-max = Текущий максимальный разброс составляет [color={ $colour }]{TOSTRING($scatter, "F1")}[/color] градусов.
+rmc-examine-text-scatter-min = Текущий минимальный разброс составляет [color={ $colour }]{TOSTRING($scatter, "F1")}[/color] градусов.
 rmc-examine-text-shots-to-max-scatter =
-      Максимальный разброс будет достигнут за [color={ $color }]{ $shots }{ $shots ->
+      Максимальный разброс будет достигнут за [color={ $colour }]{ $shots } { $shots ->
         [one] выстрел
         [few] выстрела
         *[other] выстрелов
     }[/color] .
 rmc-examine-text-iff = [color=cyan]Это оружие будет игнорировать и стрелять мимо союзников![/color]
 rmc-examine-text-id-lock-no-user = [color=chartreuse]Оно не зарегистрировано. Поднимите его, чтобы зарегистрировать себя в качестве владельца.[/color]
-rmc-examine-text-id-lock = [color=chartreuse]Оно зарегистрировано на [/color][color={ $color }]{ $name }[/color][color=chartreuse].[/color]
-rmc-examine-text-id-lock-unlocked = [color=chartreuse]Оно зарегистрировано на [/color][color={ $color }]{ $name }[/color][color=chartreuse], но ограничения на огонь сняты.[/color]
+rmc-examine-text-id-lock = [color=chartreuse]Оно зарегистрировано на [/color][color={ $colour }]{ $name }[/color][color=chartreuse].[/color]
+rmc-examine-text-id-lock-unlocked = [color=chartreuse]Оно зарегистрировано на [/color][color={ $colour }]{ $name }[/color][color=chartreuse], но ограничения на огонь сняты.[/color]
 
 rmc-gun-rack-examine = [bold]Нажмите вашу клавишу [color=cyan]уникального действия[/color] (Пробел по умолчанию) чтобы передёрнуть затвор перед выстрелом.[/bold]
 rmc-gun-rack-first-with = Сначала вам нужно передёрнуть затвор оружия при помощи { $key }!
