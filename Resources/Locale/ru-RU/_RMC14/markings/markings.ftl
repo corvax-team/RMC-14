@@ -1,1 +1,1 @@
-marking-LongEarsStandard = Long Ears Standard
+marking-LongEarsStandard = Длинные уши Стандарт

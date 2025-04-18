@@ -1,1 +1,1 @@
-rmc-empty-solution-verb = Remove chemicals
+rmc-empty-solution-verb = Удалить химикаты

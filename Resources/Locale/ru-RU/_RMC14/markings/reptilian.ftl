@@ -1,3 +1,3 @@
-marking-LizardChestDragonwings = Draconic Wings
-marking-LizardChestDragonwings-body_dragonwings = Draconic Wings
-marking-LizardChestDragonwings-body_dragonwings_membrane = Draconic Wings Membrane
+marking-LizardChestDragonwings = Драконьи крылья
+marking-LizardChestDragonwings-body_dragonwings = Драконьи крылья
+marking-LizardChestDragonwings-body_dragonwings_membrane = Драконьи крылья Мембрана

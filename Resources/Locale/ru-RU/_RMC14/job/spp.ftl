@@ -1,23 +1,23 @@
 rmc-ghost-role-information-spp-rules =
-    You are a [color=red][bold]SPP member[/bold][/color]. You may or may not be hostile to the marines, depending on admin instructions.
-    You don't remember any of your previous life, and you don't remember anything you learned as a ghost.
-    You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
-    You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
-CMSPPLeader = SPP Starshiy Serzhant
+    Вы являетесь [color=red][bold]членом СНП[/bold][/color]. Вы можете быть или НЕ быть враждебным к колониальным морпехам, в зависимости от указаний администратора.
+    Вы не помните ничего из своей предыдущей жизни и не помните ничего из того, что узнали, будучи призраком.
+    Вам разрешается помнить знания об игре в целом, например, как готовить, как использовать предметы и т.д.
+    Вам абсолютно [color=red]НЕ[/color] разрешено помнить, скажем, имя, внешность и т. д. вашего предыдущего персонажа.
+CMSPPLeader = СНП Старший сержант
 rmc-job-description-spp-leader = ""
-rmc-job-prefix-spp-leader = SL
-CMSPPSpecialist = SPP Serzhant
+rmc-job-prefix-spp-leader = КомОт
+CMSPPSpecialist = СНП Сержант
 rmc-job-description-spp-specialist = ""
-rmc-job-prefix-spp-specialist = Spc
-CMSPPSoldier = SPP Ryadovoy
+rmc-job-prefix-spp-specialist = Спец
+CMSPPSoldier = СНП Рядовой
 rmc-job-description-spp-soldier = ""
-rmc-job-prefix-spp-soldier = Sol
-CMSPPEngineer = SPP MSzht Engineer
+rmc-job-prefix-spp-soldier = Боец
+CMSPPEngineer = СНП МлСерж Инженер
 rmc-job-description-spp-engineer = ""
-rmc-job-prefix-spp-engineer = Sap
-CMSPPMedic = SPP MSzht Medic
+rmc-job-prefix-spp-engineer = Сапёр
+CMSPPMedic = СНП МлСерж Медик
 rmc-job-description-spp-medic = ""
-rmc-job-prefix-spp-medic = Med
-CMSPPMilitaryPolice = SPP Politsiya
+rmc-job-prefix-spp-medic = Медик
+CMSPPMilitaryPolice = СНП Полицейский
 rmc-job-description-spp-military-police = ""
-rmc-job-prefix-spp-military-police = MP
+rmc-job-prefix-spp-military-police = Военпол

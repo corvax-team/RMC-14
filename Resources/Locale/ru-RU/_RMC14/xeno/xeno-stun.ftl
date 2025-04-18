@@ -1,4 +1,4 @@
 rmc-xeno-stun-shaken = Мы потрясены и замедлены внезапным ударом!
-rmc-xeno-stun-interrupt-shaken = You are knocked off-balance by the sudden massive impact!
-rmc-xeno-shaken = You are shaken by the sudden heavy impact!
-rmc-xeno-knocked-back = You are thrown back by the sudden massive force!
+rmc-xeno-stun-interrupt-shaken = Внезапный сильный удар выводит вас из равновесия!
+rmc-xeno-shaken = Вы пошатнулись от внезапного сильного удара!
+rmc-xeno-knocked-back = Внезапная мощная сила отбрасывает вас назад!

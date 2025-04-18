@@ -32,13 +32,13 @@ rmc-mortar-interface = Интерфейс миномёта
 rmc-mortar-target-x = Координата X:
 rmc-mortar-target-y = Координата Y:
 rmc-mortar-target-set = Навестись
-rmc-mortar-target-too-close = Вы не можете навестись на эти координаты, это слишком близко к вашему миномету.
-rmc-mortar-target-too-far = You cannot aim at this coordinate, it is too far from your mortar.
+rmc-mortar-target-too-close = Вы не можете навестись на эти координаты, это слишком близко к вашему миномёту.
+rmc-mortar-target-too-far = Вы не можете навестись на эти координаты, это слишком далеко от вашего миномёта.
 rmc-mortar-offset-x = Смещение X:
 rmc-mortar-offset-y = Смещение Y:
 rmc-mortar-offset-set = Установить смещение
 rmc-mortar-offset-too-far = Вы не можете установить смещение на эти координаты, они слишком далеко от исходной цели.
-rmc-mortar-offset-too-close = ы не можете установить смещение на эти координаты, это слишком близко к вашему миномету.
+rmc-mortar-offset-too-close = Вы не можете установить смещение на эти координаты, это слишком близко к вашему миномёту.
 rmc-mortar-offset-max =
     Макс. смещение
     смещение: { $max }

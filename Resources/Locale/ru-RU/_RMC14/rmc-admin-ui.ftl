@@ -1,19 +1,25 @@
-rmc-ui-cm-actions = RMC Actions
-rmc-ui-transform-tab = Transform
-rmc-ui-open-rmc-actions = Open RMC Actions
-rmc-ui-marine-tab = Marine
-rmc-ui-automated-vendor-points = Automated Vendor Points
-rmc-ui-points = Points:
-rmc-ui-specialist-points = Specialist Points:
-rmc-ui-weapons-specialist-skills = Weapons Specialist Skills
-rmc-ui-create-squad = Create Squad
-rmc-ui-members = Members: { $members } alive
-rmc-ui-add-to-squad = Add to Squad
-rmc-ui-xeno-tab = Xeno
-rmc-ui-xeno-hive = Hive:
-rmc-ui-create-new-hive = Create new hive
-rmc-ui-create-hive-title = New hive name
-rmc-ui-humanoid = Humanoid
-rmc-ui-tier = Tier { $tier }
-rmc-ui-admin = RMC Admin UI
-rmc-ui-rejuvenate-nearby-marines = Rejuvenate all nearby marines
+rmc-ui-cm-actions = RMC Действия
+rmc-ui-transform-tab = Превращение
+rmc-ui-open-rmc-actions = Открыть RMC Действия
+rmc-ui-marine-tab = Морпехи
+rmc-ui-automated-vendor-points = Очки КолМарТех торгомата
+rmc-ui-points = Очки:
+rmc-ui-specialist-points = Очки специалиста:
+rmc-ui-weapons-specialist-skills = Навыки специалиста по вооружению
+rmc-ui-create-squad = Создать отряд
+rmc-ui-members =
+        Бойцы: { $members } { $members ->
+            [one] жив
+            [few] живы
+            [many] живо
+            *[other] живо
+        }
+rmc-ui-add-to-squad = Добавить в отряд
+rmc-ui-xeno-tab = Ксено
+rmc-ui-xeno-hive = Улей:
+rmc-ui-create-new-hive = Создать новый Улей
+rmc-ui-create-hive-title = Новое имя улья
+rmc-ui-humanoid = Гуманоид
+rmc-ui-tier = Уровень { $tier }
+rmc-ui-admin = RMC Админ интерфейс
+rmc-ui-rejuvenate-nearby-marines = Исцелить всех близлежащих морпехов

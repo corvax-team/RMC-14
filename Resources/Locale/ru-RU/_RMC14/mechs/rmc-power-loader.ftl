@@ -11,11 +11,11 @@ rmc-power-loader-transfer-ammo =
         [few] снаряда
        *[other] снарядов
     } в { $ammo }.
-rmc-power-loader-wrong-weapon = That's the wrong kind of ammo!
+rmc-power-loader-wrong-weapon = Это не тот тип боеприпасов!
 rmc-power-loader-wrong-ammo = Это разные типы боеприпасов!
 rmc-power-loader-full-ammo = { CAPITALIZE($ammo) } полон!
 rmc-power-loader-occupied-weapon = Здесь уже установлено орудие!
 rmc-power-loader-occupied-ammo = Сперва необходимо выгрузить ящик со снарядами!
 rmc-power-loader-ammo-no-weapon = Сперва необходимо установить орудие!
-rmc-power-loader-occupied = There's already something installed there!
+rmc-power-loader-occupied = Здесь уже что-то установлено!
 rmc-power-loader-occupied-utility = Здесь уже установлена вспомогательная система!

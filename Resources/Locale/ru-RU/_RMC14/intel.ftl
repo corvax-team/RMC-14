@@ -14,8 +14,8 @@ rmc-intel-clue-technical-manual = { $intel } в локации { $area }.
 rmc-intel-clue-experimental-device = Найти { $intel } в локации { $area }.
 rmc-intel-not-intel-jumpsuit = Вы не можете носить это, не надев форму офицера разведки ККМП.
 rmc-intel-survivor-pickup =
-    You have no use for the { $thing }.
-    Focus on getting out alive first.
+    { CAPITALIZE($thing) } вам ничем не поможет.
+    Сначала постарайтесь выбраться живыми.
 rmc-intel-survivor-read =
-    You have no need to read the { $thing }.
-    Focus on getting out alive first.
+    Вам незачем читать { $thing }.
+    Сначала постарайтесь выбраться живыми.

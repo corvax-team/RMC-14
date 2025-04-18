@@ -1,7 +1,7 @@
-rmc-supply-drop-not-operational = Supply drop pad is not operational.
-rmc-supply-drop-no-crate = No crate was detected on the drop pad. Get Requisitions on the line!
-rmc-supply-drop-underground = The landing zone is underground. The supply drop cannot reach here.
-rmc-supply-drop-blocked = The landing zone appears to be obstructed or out of bounds. Package would be lost on drop.
-rmc-supply-drop-crate-open = The crate is not secure on the drop pad. Please close it!
-rmc-supply-drop-crate-load = { $crate } loads into a launch tube. Stand clear!
-rmc-supply-drop-squad-announcement = { $crate } supply drop incoming. Heads up!
+rmc-supply-drop-not-operational = Платформа сброса припасов не работает.
+rmc-supply-drop-no-crate = На платформе сброса припасов не обнаружен ящик. Свяжитесь с отделом снабжения!
+rmc-supply-drop-underground = Зона приземления находится под землёй. Сброс снабжения не может попасть сюда.
+rmc-supply-drop-blocked = Зона приземления заграждена или находится вне зоны действия. Поставка будет утеряна при сбросе.
+rmc-supply-drop-crate-open = Ящик не зафиксирован на платформе сброса припасов. Пожалуйста, закройте его!
+rmc-supply-drop-crate-load = { $crate } загружается в пусковую трубу. Не подходить!
+rmc-supply-drop-squad-announcement = Сброс припасов { $crate } прибывает. Берегите головы!

@@ -1,2 +1,2 @@
-rmc-ghost-role-information-hefa-shrapnelsworn-name = HEFA Shrapnelsworn
-rmc-ghost-role-information-hefa-shrapnelsworn-description = Brother's armed specially with the power of HEFA to which they will use to punish all heretics with. They carry as much HEFA as they can via their pockets, and bags.
+rmc-ghost-role-information-hefa-shrapnelsworn-name = Шрапнелеклятвенник HEFA
+rmc-ghost-role-information-hefa-shrapnelsworn-description = Братья, специально вооруженные силой шрапнели HEFA, с помощью которой они накажут всех еретиков. Они носят столько HEFA, сколько могут унести в своих карманах и сумках.

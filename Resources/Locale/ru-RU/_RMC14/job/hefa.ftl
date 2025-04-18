@@ -1,4 +1,4 @@
-cm-job-name-hefa-shrapnelsworn = HEFA Shrapnelsworn
+cm-job-name-hefa-shrapnelsworn = Шрапнелеклятвенник HEFA
 cm-job-description-hefa-shrapnelsworn = ""
 cm-job-prefix-hefa-shrapnelsworn = OHEFA
-CMHEFAShrapnelsworn = HEFA Shrapnelsworn
+CMHEFAShrapnelsworn = Шрапнелеклятвенник HEFA

@@ -1,2 +1,2 @@
-rmc-refinable-can-be-refined = This can be refined using a [color=cyan]{ $tool }[/color]!
-rmc-refinable-not-enough = You need at least { $amount } { $name } to do this.
+rmc-refinable-can-be-refined = Это можно уточнить, используя: [color=cyan]{ $tool }[/color]!
+rmc-refinable-not-enough = Чтобы это сделать, вам нужно как минимум { $amount } { $name }.

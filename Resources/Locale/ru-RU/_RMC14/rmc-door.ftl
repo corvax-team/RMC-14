@@ -1,2 +1,2 @@
-rmc-door-button-pressed-self = You press { THE($button) }
-rmc-door-button-pressed-others = { $user } presses { THE($button) }
+rmc-door-button-pressed-self = Вы нажимаете на { $button }
+rmc-door-button-pressed-others = { $user } нажимает на { $button }

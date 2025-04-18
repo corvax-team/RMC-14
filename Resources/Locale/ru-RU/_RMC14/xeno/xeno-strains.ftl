@@ -9,15 +9,15 @@ rmc-xeno-dancer-description =
     - Используйте Подножку, чтобы обезоружить врага, или оглушить если враг имеет отметку.
     - Получите временное увеличение скорости, которое удвоится при нахождении около врага.
 rmc-xeno-dancer-popup = Выступление, достойное Королевы, станет моим орудием смерти.
-rmc-xeno-oppressor-name = Oppressor
+rmc-xeno-oppressor-name = Угнетатель
 rmc-xeno-oppressor-description =
-    You trade your tail stab, spit, acid ball, acid spray, corrosive acid, dash, and a small bit of your slash damage and speed for higher explosive resistance and abilities to manipulate the battlefield.
-    You gain the ability to:
-    - Break walls and other simple structures with your slash attack.
-    - Do extra damage with your slash on downed, immobile, or slowed foes.
-    - Seize an enemy with your tail to pull them in, or Abduct a line of foes.
-    - Lash the foes in front of you pushing them back and slowing them.
-    - Punch an enemy, knocking them back, or rooting and piercing armor instead if they're downed, immobile, or slowed.
+    Вы обмениваете ваш Удар хвостом, Плевок, Кислотный шар, Кислотные брызги, Едкую кислоту, Рывок, небольшое количество урона когтями, и скорости на повышенную взрывоустойчивость и способность манипулировать полем боя.
+    Вы получаете следующие способности:
+    - Разрушайте стены и другие простые конструкции вашими ударами когтями.
+    - Наносите дополнительные повреждения вашими ударами когтями по лежащим, обездвиженным или замедленным врагам.
+    - Хватайте врага своим хвостом, чтобы притянуть его к себе, или похитить целую вереницу врагов.
+    - Хлестайте хвостом врагов перед собой, отталкивая их назад и замедляя.
+    - Бейте врага, отталкивая его назад, или останавливайте и пробивайте броню, если они лежат, обездвижены или замедлены.
 rmc-xeno-oppressor-popup = My reach is endless, this one will pull down the heavens.
 rmc-xeno-vanguard-name = Авангард
 rmc-xeno-vanguard-description =
@@ -28,24 +28,16 @@ rmc-xeno-vanguard-description =
     - Используйте Блиц, чтобы ворваться в группу врагов, и используйте его снова, чтобы ударить всех вокруг себя и перезарядить свой щит, если вы задели хотя бы 1.
     - Используйте Раскол на враге, чтобы либо отбросить его, либо задержать на месте - оба варианта сильнее при имеющемся щите.
 rmc-xeno-vanguard-popup = В бесстрашии ты рождаешься, в бесстрашии ты служишь, в бесстрашии ты умираешь. Этот станет моим Авангардом.
-rmc-xeno-valkyrie-name = Valkyrie
+rmc-xeno-valkyrie-name = Валькирия
 rmc-xeno-valkyrie-description =
-    You trade your tail stab, spit, acid ball, acid spray, corrosive acid, and some speed to gain some armor and frontline support abilities.
-    You gain the ability to:
-    - Break the strongest of walls and other reinforced structures with your slash attack, and emit strong pheromones.
-    - Extinguish friend or capture alike with your tail, or knock away explosives and down enemies with your High Gallop. 
-    - Heal you and your allies for every slash, gaining fury, then enrage yourself and ally for more armor and healing.
-    - Rejuvenate a group all at once with a rallying shriek, removing their ailments.
-    - Retrieve endangered, knocked-down or resting allies and pull them to your location.
-rmc-xeno-valkyrie-popup = This one will deny her sisters' deaths until they earn it. Fight or be forgotten.
-rmc-xeno-warden-name = Смотритель
-rmc-xeno-warden-description =
-    Вы обмениваете ваш Плевок, Кислотный шар, Кислотные брызги, Рывок и небольшое количество урона и скорости удара когтями, чтобы стать эффективным целителем.
+    Вы обмениваете ваш Удар хвостом, Плевок, Кислотный шар, Кислотные брызги, Едкую кислоту, и небольшое количество скорости на небольшое количество брони и способность поддержки фронта.
     Вы получаете следующие способности:
-    - Вы выделяете сильные феромоны.
-    - Используйте Притягивание на умирающих, сбитых с ног, или отдыхающих союзников, чтобы притянуть их к себе.
-    - Каждый удар когтями по врагам пополняет ваш внутренний запас здоровья, который можно потратить на помощь союзникам и себя, исцеляя или леча недуги.
-rmc-xeno-warden-popup = Она не даст умереть своим сёстрам, пока они этого не заслужат. Борись или будь забытой.
+    - Разрушайте прочные стены и другие укреплённые конструкции вашими ударами когтями и испускайте сильные феромоны.
+    - Тушите друзей и пленников хвостом, отбрасывайте взрывчатку и сбивайте врагов своим Высоким галопом.
+    - Исцеляйте себя и своих союзников за каждый удар, накапливайте ярость, а затем разъяряйте себя и союзников, чтобы получить еще больше брони и исцеления.
+    - Мощно исцеляйте всю группу Объединяющим визгом, снимая с них недуги.
+    - Вытаскивайте умирающих, сбитых с ног или отдыхающих союзников и притягивайте их к себе.
+rmc-xeno-valkyrie-popup = Она не даст умереть своим сёстрам, пока они этого не заслужат. Борись или будь забытой.
 rmc-xeno-gardener-name = Садовник
 rmc-xeno-gardener-description =
     Вы обмениваете ваши Выделение смолы, Едкую кислоту и способность передавать плазму на небольшое дополнительное восстановление здоровья на сорняках и несколько новых способностей.

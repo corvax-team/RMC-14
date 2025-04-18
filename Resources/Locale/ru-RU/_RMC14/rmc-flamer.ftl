@@ -1,4 +1,4 @@
-rmc-flamer-tank-not-potent-enough = This chemical is not potent enough to be used in a flamethrower!
-rmc-flamer-ignite-first = You need to ignite the gun with { $key } first!
-rmc-flamer-ignite-first-with = You need to ignite the gun first!
-rmc-flamer-refill = You refill { THE($refilled) }
+rmc-flamer-tank-not-potent-enough = Это химическое вещество недостаточно сильно, чтобы его можно было использовать в огнемёте!
+rmc-flamer-ignite-first = Сначала нужно поджечь оружие с помощью {  $key  }!
+rmc-flamer-ignite-first-with = Сначала нужно поджечь оружие!
+rmc-flamer-refill = Вы дозаправляете { $refilled }
