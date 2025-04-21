@@ -1,2 +1,2 @@
-ent-RMCColonyLiberationFrontCup = CLF Cup
-    .desc = A tough, well-worn cup marked with the CLF sigil born from the defiance sparked by the Slaughter of Xibou.
+ent-RMCColonyLiberationFrontCup = кружка ФОК
+    .desc = Прочная, потёртая кружка с эмблемой ФОК, рождённого в результате неповиновения, вызванного Резнёй на Ксибу.

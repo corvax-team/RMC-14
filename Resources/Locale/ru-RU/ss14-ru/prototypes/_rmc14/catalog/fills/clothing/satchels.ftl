@@ -5,5 +5,5 @@ ent-RMCSatchelCivilianFill = { ent-CMSatchel }
     .suffix = Гражданский, Заполненный
     .desc = { ent-CMSatchel.desc }
 ent-RMCSatchelHEFAFill = { ent-CMSatchelMarine }
-    .suffix = HEFA, Filled
+    .suffix = HEFA, Заполненный
     .desc = { ent-CMSatchelMarine.desc }

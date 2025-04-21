@@ -1,2 +1,2 @@
-ent-RMCM5CameraGear = M5 Camera Gear
-    .desc = A camera and associated headgear designed to allow marine commanders to see what their troops can see. A more robust version of this equipment is integrated into all standard UNMC combat helmets. Can be worn over the ear or head.
+ent-RMCM5CameraGear = камера M5
+    .desc = Камера и сопутствующий головной убор, предназначенные для того, чтобы командиры подразделений колониальной морской пехоты могли видеть то, что видят их солдаты. Более надёжная версия этого оборудования интегрирована во все стандартные боевые шлемы ККМП. Можно носить на ухе или на голове.

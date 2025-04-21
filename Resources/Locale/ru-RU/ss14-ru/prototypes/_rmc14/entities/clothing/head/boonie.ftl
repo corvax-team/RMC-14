@@ -1,5 +1,5 @@
-ent-RMCBoonie = UNMC boonie hat
-    .desc = A floppy bush hat. Protects only from the sun and rain, but very comfortable.
+ent-RMCBoonie = армейская панама ККМП
+    .desc = Небрежная панама. Защищает только от солнца и дождя, но очень удобная.
 ent-RMCBoonieTan = { ent-RMCBoonie }
-    .suffix = Tan
+    .suffix = Коричневый
     .desc = { ent-RMCBoonie.desc }

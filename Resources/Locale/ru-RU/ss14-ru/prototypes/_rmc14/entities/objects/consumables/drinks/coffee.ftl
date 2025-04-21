@@ -1,4 +1,4 @@
-ent-RMCDrinkCoffee = coffee
-    .desc = Careful, the beverage you're about to enjoy is extremely hot.
-ent-RMCDrinkCoffeeGrind = The Daily Grind
-    .desc = Rise and Shine! Time to drink the Daily Grind!
+ent-RMCDrinkCoffee = кофе
+    .desc = Осторожно, напиток, которым вы собираетесь насладиться, очень горячий.
+ent-RMCDrinkCoffeeGrind = Дейли Гринд
+    .desc = Проснись и пой! Пора пить Дейли Гринд!

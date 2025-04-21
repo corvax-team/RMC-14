@@ -1,4 +1,4 @@
-ent-RMCAreaLv759 = LV-759 Hybrisa Prospera
+ent-RMCAreaLv759 = LV-759 Гибрис Проспера
     .desc = { ent-RMCAreaBase.desc }
 ent-RMCAreaLv759Indoors = Hybrisa - Indoors
     .desc = { ent-RMCAreaLv759.desc }

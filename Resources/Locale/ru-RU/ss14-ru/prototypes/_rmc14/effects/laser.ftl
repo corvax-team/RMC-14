@@ -1,6 +1,6 @@
-ent-RMCM96SLaser = M96S laser
+ent-RMCM96SLaser = лазер M96S
     .desc = { "" }
-ent-RMCAMRLaser = AMR laser
+ent-RMCAMRLaser = лазер AMR
     .desc = { "" }
-ent-RMCSpottingLaser = spotting laser
+ent-RMCSpottingLaser = целеуказательный лазер
     .desc = { "" }

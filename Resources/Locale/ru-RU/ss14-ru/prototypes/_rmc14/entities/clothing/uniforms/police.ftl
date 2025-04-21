@@ -1,7 +1,7 @@
 ent-CMJumpsuitMP = комбинезон военной полиции
     .desc = Стандартная униформа военной полиции. В ней имеются фрагменты лёгкого кевлара для защиты от колющего оружия и пуль.
-ent-RMCJumpsuitMPCorporate = corporate security officer's jumpsuit
-    .desc = It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection.
+ent-RMCJumpsuitMPCorporate = комбинезон корпоративной охраны
+    .desc = Он сделан из более прочного материала, чем стандартные комбинезоны, чтобы обеспечить надёжную защиту.
 ent-CMJumpsuitWarden = униформа военного надзирателя
     .desc = Стандартная униформа военного надзирателя. В ней имеются фрагменты лёгкого кевлара для защиты от колющего оружия и пуль.
 ent-CMJumpsuitWardenBlue = синяя униформа надзирателя

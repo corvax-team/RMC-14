@@ -1,4 +1,4 @@
-ent-RMCAreaKutjevo = Нефтеперерабатывающий завод Кутьево
+ent-RMCAreaKutjevo = Перерабатывающий комплекс Кутьево
     .suffix = Зона Кутьево
     .desc = { ent-RMCAreaBase.desc }
 ent-RMCAreaShuttleDrop1Kutjevo = Кутьево - Зона высадки корабля Аламо

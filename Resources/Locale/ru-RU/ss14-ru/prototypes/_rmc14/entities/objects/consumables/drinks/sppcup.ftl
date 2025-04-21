@@ -1,2 +1,2 @@
-ent-RMCSocialistPPCup = SPP Cup
-    .desc = A tough, crimson cup stamped with the SPP emblem—built like a real krepky muzhik, ready to serve comrades in toil and glory among the stars.
+ent-RMCSocialistPPCup = кружка СНП
+    .desc = Крепкая алая кружка с эмблемой СНП - сделана как настоящий крепкий мужик, готовый служить товарищам в труде и славе среди звезд.

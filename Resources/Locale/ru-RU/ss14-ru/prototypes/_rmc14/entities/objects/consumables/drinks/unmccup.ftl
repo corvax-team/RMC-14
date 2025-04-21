@@ -1,2 +1,2 @@
-ent-RMCMarineCorpsCup = UNMC cup
-    .desc = A rugged, military-grade mug featuring the UNMC insignia, built for endurance in any deployment—whether aboard a ship or in the field.
+ent-RMCMarineCorpsCup = кружка ККМП
+    .desc = Прочная кружка военного образца с эмблемой ККМП, рассчитанная на длительную эксплуатацию в любых обстоятельствах - на борту корабля или в полевых условиях.

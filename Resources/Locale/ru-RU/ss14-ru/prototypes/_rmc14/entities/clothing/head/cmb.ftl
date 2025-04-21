@@ -1,2 +1,2 @@
-ent-RMCArmorHelmetM10CMB = M11R pattern CMB Riot helmet
-    .desc = A CMB variant of the standard M10 pattern. The front plate is reinforced. This one is a lot more tight fitting.
+ent-RMCArmorHelmetM10CMB = шлем для подавления беспорядков M11R БКМ
+    .desc = Вариант стандартного шлема M10 для БКМ. Лобовая пластина усилена. Этот вариант прилегает гораздо плотнее.

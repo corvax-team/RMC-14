@@ -1,6 +1,6 @@
-ent-RMCArmorM4RLight = M4R pattern CMB light armor
-    .desc = A dark set of armor, which is a modification of the security variant of Armat Systems M3 armor. Designed for riot control and protest suppression in mind. The side of it has a metallic insignia with 'CMB RIOT CONTROL' on it. The laws of the Earth stretch beyond the Sol.
-ent-RMCArmorM4RMedium = M4R pattern CMB armor
-    .desc = A dark set of armor, which is a modification of the security variant of Armat Systems M3 armor. Designed for riot control and protest suppression in mind. The side of it has a metallic insignia with 'CMB RIOT CONTROL' on it. The laws of the Earth stretch beyond the Sol.
-ent-RMCArmorM4RMarshallMedium = M4R pattern CMB Marshal armor
-    .desc = A custom fit variation of the CMB Riot armor, intended to be worn the Marshals themselves, has a golden lining with rank insignia. Has additional layer of lightweigh protective materials.
+ent-RMCArmorM4RLight = лёгкий бронежилет M4R БКМ
+    .desc = Тёмный комплект бронежилета, являющийся модификацией варианта бронежилета охраны M3 от Armat Systems. Предназначен для борьбы с беспорядками и подавления демонстраций. На боку имеется металлическая эмблема с надписью «БКМ БОРЬБА С БЕСПОРЯДКАМИ». аконы Земли распространяются далеко за пределы Солнечной системы.
+ent-RMCArmorM4RMedium = бронежилет M4R БКМ
+    .desc = Тёмный комплект бронежилета, являющийся модификацией варианта бронежилета охраны M3 от Armat Systems. Предназначен для борьбы с беспорядками и подавления демонстраций. На боку имеется металлическая эмблема с надписью «БКМ БОРЬБА С БЕСПОРЯДКАМИ». аконы Земли распространяются далеко за пределы Солнечной системы.
+ent-RMCArmorM4RMarshallMedium = бронежилет M4R маршалла БКМ
+    .desc = Индивидуальный вариант бронежилета БКМ, предназначенный для ношения самими маршалами, имеет золотую подкладку со знаками отличия. Обладает дополнительным слоем облегченных защитных материалов.

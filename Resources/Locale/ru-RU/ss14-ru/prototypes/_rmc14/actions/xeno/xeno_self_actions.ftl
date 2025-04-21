@@ -40,5 +40,5 @@ ent-ActionXenoBurrow = Зарыться
     .desc = Зарывшись под землю, вы не будете получать урон ни от каких источников. Зарывшись, кликните по тайлу, чтобы переместиться на него, и выбраться на поверхность по истечении времени, зависящего от расстояния.
 ent-ActionXenoSoak = Поглощение (20)
     .desc = Начните поглощать урон на протяжении 6 секунд. Если вы получите 140 ед. урона или больше, вы восстановите 75 ед. здоровья, а ваш Удар хвостом перезарядится.
-ent-ActionXenoEmpower = Empower (50)
-    .desc = On first activation it, gain a small amount of shield. After 6 seconds or using it again, get empowered based on surrounding enemies (max 6), gaining shield from each. If you empowered from at least 3 targets, you become Super-Empowered, gaing additional damage on melee attacks, and changing how some of your other abilities work.
+ent-ActionXenoEmpower = Усиление (50)
+    .desc = При первой активации вы получите небольшое количество щитов. Через 6 секунд или при повторном использовании вы получите усиление, зависящее от окружающих врагов (не более 6), получая щит за каждого из них. Если вы получили усиление хотя бы от 3 целей, вы получите Суперусиление, что позволит наносить дополнительный урон при атаках ближнего боя и изменит работу некоторых других ваших способностей.

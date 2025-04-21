@@ -1,2 +1,2 @@
 ent-RMCIDSPP = { ent-CMIDCardStandardDogtag }
-    .desc = A soldier dog tag.
+    .desc = Солдатский жетон.

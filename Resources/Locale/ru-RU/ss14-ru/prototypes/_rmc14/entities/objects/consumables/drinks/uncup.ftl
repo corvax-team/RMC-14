@@ -1,2 +1,2 @@
-ent-RMCUnitedNationsCup = UN Cup
-    .desc = A sleek, official UN cup, symbolizing unity, order, and authority across the stars. Crafted for those who uphold peace and progress.
+ent-RMCUnitedNationsCup = кружка ОПЗ
+    .desc = Изящная, официальная кружка ОЗП, символизирующая единство, порядок и власть среди звёзд. Создана для тех, кто поддерживает мир и прогресс.

@@ -1,4 +1,4 @@
 ent-RMCAllowSuitStorageClothingExternalWebbing = { "" }
     .desc = { "" }
-ent-RMCOuterClothingExternalWebbing = external webbing
-    .desc = Designed to be worn over a jumpsuit rather than clipped on.
+ent-RMCOuterClothingExternalWebbing = внешняя разгрузка
+    .desc = Предназначен для ношения поверх комбинезона, а не для застёгивания на нём.

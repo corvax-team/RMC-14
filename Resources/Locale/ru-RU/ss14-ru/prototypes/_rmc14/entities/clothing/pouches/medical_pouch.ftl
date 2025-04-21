@@ -1,3 +1,3 @@
 ent-RMCPouchMedicalERT = { ent-RMCPouchMedical }
-    .suffix = ERT
+    .suffix = ОБР
     .desc = { ent-RMCPouchMedical.desc }
