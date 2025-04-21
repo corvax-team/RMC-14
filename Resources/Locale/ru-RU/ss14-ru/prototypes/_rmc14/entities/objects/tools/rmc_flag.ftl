@@ -1,6 +1,6 @@
-ent-RMCFlagCarriableBase = flag
+ent-RMCFlagCarriableBase = флаг
     .desc = { ent-BaseItem.desc }
-ent-RMCFlagCarriableUN = UN flag
-    .desc = The flag of the UN.
-ent-RMCFlagCarriableUNMC = UNMC flag
-    .desc = The flag of the UNMC.
+ent-RMCFlagCarriableUN = флаг ОПЗ
+    .desc = Флаг Объединённого Правительства Земли.
+ent-RMCFlagCarriableUNMC = флаг ККМП
+    .desc = Флаг Корпуса Колониальной Морской Пехоты.

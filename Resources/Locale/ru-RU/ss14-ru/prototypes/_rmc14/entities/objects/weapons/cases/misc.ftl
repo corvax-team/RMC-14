@@ -1,2 +1,2 @@
-ent-RMCKitHonorGuard = honor guard kit
+ent-RMCKitHonorGuard = набор почётной гвардии
     .desc = { ent-RMCKitBase.desc }

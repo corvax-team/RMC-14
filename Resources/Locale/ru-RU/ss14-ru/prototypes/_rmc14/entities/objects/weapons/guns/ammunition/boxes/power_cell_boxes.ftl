@@ -1,2 +1,2 @@
-ent-RMCBoxMagazinePowerCellsHigh = box of high-capacity power cells (x8)
-    .desc = A box of High-Capacity Power Cells to keep your electronics going all night long!
+ent-RMCBoxMagazinePowerCellsHigh = коробка высокоёмких батарей (x8)
+    .desc = Коробка батарей высокой ёмкости, чтобы ваша электроника работала всю ночь напролёт!

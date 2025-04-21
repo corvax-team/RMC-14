@@ -3,11 +3,11 @@ ent-CMSniperEquipmentCase = кейс снаряжения снайпера
         Большой кейс, содержащий вашу персональную дальнобойную снайперскую винтовку M96S, маскировочный бронежилет и шлем M45, визор скаута M42, боеприпасы, снаряжение корректировщика и дополнительное снаряжение.
         
         ПРИМЕЧАНИЕ: Вы не можете поместить предметы обратно в этот кейс.
-ent-RMCAntiMaterielEquipmentCase = anti-materiel sniper equipment case
+ent-RMCAntiMaterielEquipmentCase = кейс крупнокалиберного снаряжения снайпера
     .desc =
-        A large case containing your very own long-range XM43E1 anti-materiel sniper rifle, M45 ghillie armor and helmet, M42 scout sight, ammunition, spotter equipment, and additional pieces of equipment.
+         Большой кейс, содержащий вашу персональную дальнобойную крупнокалиберную снайперскую винтовку XM43E1, маскировочный бронежилет и шлем M45, визор скаута M42, боеприпасы, снаряжение корректировщика и дополнительное снаряжение.
         
-        NOTE: You cannot put items back inside this case.
+        ПРИМЕЧАНИЕ: Вы не можете поместить предметы обратно в этот кейс.
 ent-RMCGrenadeSpecEquipmentCase = кейс снаряжения тяжёлого гренадёра
     .desc =
         Большой кейс, содержащий тяжёлый многозарядный гранатомёт M83, бронежилет и шлем гренадёра M3-G4, большое количество различных гранат M40 и дополнительное снаряжение.
@@ -32,5 +32,5 @@ ent-RMCKitLoader = набор заряжающего
         Шаг третий: Убедитесь, что специалист держит пусковую установку в двух руках.
         Шаг четвертый: Зарядите ракету в пусковую установку
         Шаг пятый: Берегитесь разлёта реактивной струи
-ent-RMCKitSpotter = spotter kit
+ent-RMCKitSpotter = набор корректировщика
     .desc = { ent-RMCKitBase.desc }

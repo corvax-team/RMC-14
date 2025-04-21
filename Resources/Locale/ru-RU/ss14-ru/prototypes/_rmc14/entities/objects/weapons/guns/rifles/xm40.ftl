@@ -1,6 +1,6 @@
-ent-RMCWeaponRifleXM40 = XM40 assault rifle
-    .desc = One of the experimental predecessors to the M54C line that never saw widespread adoption beyond elite marine units. Of the rifles in the UNMC inventory that are still in production, this is the only one to feature an integrated suppressor. It can accept M54C MK2 magazines, but also features its own proprietary magazine system. Extremely lethal in burstfire mode.
-ent-RMCMagazineRifleXM40AP = XM40 AP magazine (10x24mm)
+ent-RMCWeaponRifleXM40 = штурмовая винтовка XM40
+    .desc = Одна из экспериментальных предшественниц линейки M54C, которая так и не получила широкого распространения за пределами элитных подразделений колониальной морской пехоты. Из всех винтовок ККМП, которые до сих пор находятся в производстве, только эта имеет встроенный глушитель. Винтовка может использовать магазины от M54C MK2, но также имеет собственную магазинную систему. Крайне смертоносна в режиме стрельбы очередями.
+ent-RMCMagazineRifleXM40AP = магазин XM40 бронебойные (10x24мм)
     .desc = { ent-CMMagazineRifleBase.desc }
-ent-RMCMagazineRifleXM40HEAP = XM40 HEAP magazine (10x24mm)
+ent-RMCMagazineRifleXM40HEAP = магазин XM40 бронебойно-разрывные (10x24мм)
     .desc = { ent-CMMagazineRifleBase.desc }

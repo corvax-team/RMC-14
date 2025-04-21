@@ -1,6 +1,6 @@
 ent-RMCDropshipAttachmentEngine = { ent-RMCDropshipAttachmentBase }
     .desc = { ent-RMCDropshipAttachmentBase.desc }
-ent-RMCDropshipAttachmentFuelEnhancer = fuel enhancer
-    .desc = A fuel enhancement system for dropships. It improves the thrust produced by the fuel combustion for faster travels. Fits inside the engine attach points. You need a powerloader to lift it.
-ent-RMCDropshipAttachmentCoolingSystem = cooling system
-    .desc = A cooling system for dropships. It produces additional cooling reducing delays between launch. Fits inside the engine attach points. You need a powerloader to lift it.
+ent-RMCDropshipAttachmentFuelEnhancer = обогатитель топлива
+    .desc = Система обогащения топлива для десантных кораблей. Повышает создаваемую при сгорании топлива тягу для ускорения полёта. Устанавливается на точки крепления двигателей. Чтобы поднять её, нужен силовой погрузчик.
+ent-RMCDropshipAttachmentCoolingSystem = система охлаждения
+    .desc = Система охлаждения для десантных кораблей. Обеспечивает дополнительное охлаждение, сокращая задержки между взлётами. Устанавливается на точки крепления двигателей. Чтобы поднять её, нужен силовой погрузчик.

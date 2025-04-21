@@ -1,8 +1,8 @@
-ent-RMCWeaponMar50LMG = MAR-50 light machine gun
-    .desc = A cheap, reliable LMG chambered in 7.62x39mm. Commonly found in the hands of slightly better funded criminals.
-ent-RMCMagazineMar50LMG = MAR drum magazine (7.62x39mm)
-    .desc = A 7.62x39mm drum magazine for the MAR-50 LMG.
-ent-RMCCartridgeRifle762x39mm = cartridge (7.62x39mm)
-    .desc = A 7.62x39mm cartridge. Fits in 7.62x39mm magazines.
+ent-RMCWeaponMar50LMG = лёгкий пулемёт MAR-50
+    .desc = Дешёвый и надёжный лёгкий пулемёт, использующий патроны 7,62х39 мм. Часто встречается в руках чуть более обеспеченных преступников.
+ent-RMCMagazineMar50LMG = барабанный магазин MAR (7.62x39 мм)
+    .desc = Барабанный магазин калибра 7,62x39 мм для лёгкого пулемёта MAR-50.
+ent-RMCCartridgeRifle762x39mm = патрон (7.62x39 мм)
+    .desc = Патрон калибра 7.62x39 мм. Подходит к 7,62x39 мм магазинам.
 ent-RMCBulletRifle762x39mm = { ent-RMCBaseBullet }
     .desc = { ent-RMCBaseBullet.desc }

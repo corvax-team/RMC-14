@@ -1,2 +1,2 @@
-ent-RMCWeaponRifleM54C2 = M54C/2 assault rifle MK2
-    .desc = A modified version M54C assault rifle MK2, re-engineered for better weight, handling and accuracy. Fires precise two-round bursts. Given only to elite units.
+ent-RMCWeaponRifleM54C2 = штурмовая винтовка M54C/2 MK2
+    .desc = Модифицированная версия штурмовой винтовки M54C MK2, пересобранная для снижения веса, улучшения эргономики и повышения точности стрельбы. Стреляет точной двойной очередью. Выдаётся только элитным подразделениям.

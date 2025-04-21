@@ -1,6 +1,6 @@
-ent-RMCWeaponFlamer = M34 incinerator unit
-    .desc = M34 incinerator unit has proven to be one of the most effective weapons at clearing out soft-targets. This is a weapon to be feared and respected as it is quite deadly.
-ent-RMCTankFlamer = incinerator tank
-    .desc = A fuel tank used to store fuel for use in the M34 incinerator unit. Handle with care.
-ent-RMCCaseFlamer = M34 incinerator case
-    .desc = A gun case containing the M34 incinerator unit. It does come loaded, but you'll still have to find extra tanks as you go.
+ent-RMCWeaponFlamer = огнемёт M34
+    .desc = Огнемёт M34 зарекомендовала себя как одно из самых эффективных орудий для уничтожения мягких целей. Это оружие следует бояться и уважать, поскольку оно весьма смертоносно.
+ent-RMCTankFlamer = огнемётный баллон
+    .desc = Топливный баллон, используемый для хранения зажигательной смеси огнемёта M34. Обращайтесь с ним осторожно.
+ent-RMCCaseFlamer = кейс огнемёта M34
+    .desc = Оружейный кейс, содержащий огнемёт M34. Поставляется заряженным, но вам всё равно придётся найти дополнительные баллоны для него.

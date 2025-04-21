@@ -1,9 +1,9 @@
-ent-RMCWeaponBoltActionRifle = Basira-Armstrong bolt-action hunting rifle
-    .desc = Named after its eccentric designers, the Basira-Armstrong is a cheap but reliable civilian bolt-action rifle frequently found in the outer colonies. Despite its legally-mandated limited magazine capacity, its light weight and legendary accuracy makes it popular among hunters and competitive shooters.
-    .suffix = Filled
-ent-RMCMagazineRifleHunting = Basira-Armstrong magazine (6.5mm)
+ent-RMCWeaponBoltActionRifle = охотничья винтовка Басира-Армстронг со скользящим затвором
+    .desc = Названная в честь своих эксцентричных конструкторов, винтовка Басира-Армстронга - это недорогая, но надёжная гражданская винтовка со скользящим затвором, часто встречающаяся на окраинных колониях. Несмотря на ограниченную законом ёмкость магазина, лёгкий вес и легендарная точность делают её популярной среди охотников и спортсменов.
+    .suffix = Заполненный
+ent-RMCMagazineRifleHunting = магазин Басира-Армстронг (6.5 мм)
     .desc = { ent-CMMagazineRifleBase.desc }
-ent-RMCCartridgeBoltActionRifle = Cartridge (5.56x45)
-    .desc = A Cartridge for the Basira-Armstrong hunting rifle. Compliant with the 15-cartridge limit on civilian hunting rifles.
+ent-RMCCartridgeBoltActionRifle = патрон (6.5 мм)
+    .desc = Патрон для охотничьей винтовки Басира-Армстронг. Соответствует ограничению на 15 патронов для гражданских охотничьих ружей.
 ent-RMCBulletRifleHunting = { ent-BulletRifle10x24mm }
     .desc = { ent-BulletRifle10x24mm.desc }

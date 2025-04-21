@@ -1,12 +1,12 @@
 ent-WeaponRifleM54CE2 = тяжёлая штурмовая винтовка M54CE2
     .desc = Оружие поддержки больших отрядов, способное вести непрерывный подавляющий огонь, будучи установленным на позиции. Несмотря на неустойчивость и низкую точность, его можно таскать на себе и стрелять с двух рук.
-ent-CMMagazineRifleM54CE2 = магазин M54CE2 ((10x24mm)
+ent-CMMagazineRifleM54CE2 = магазин M54CE2 (10x24мм)
     .desc = { ent-CMMagazineRifleM54C.desc }
-ent-CMMagazineRifleM54CE2HT = M54CE2 HT magazine (10x24mm)
+ent-CMMagazineRifleM54CE2HT = магазин M54CE2 голо-целевые (10x24мм)
     .desc = { ent-CMMagazineRifleM54CE2.desc }
-ent-CMCartridgeRifle10x24mmHT = cartridge (10x24mm)
-    .desc = A 10x24mm HT cartridge. Fits in 10x24mm holo targeting magazines.
+ent-CMCartridgeRifle10x24mmHT = патрон (10x24мм)
+    .desc = Голо-целевой патрон калибра 10x24 мм. Подходит для голо-целевых магазинов 10x24 мм.
 ent-BulletRifle10x24mmHT = { ent-BulletRifle10x24mm }
     .desc = { ent-BulletRifle10x24mm.desc }
-ent-CMMagazineRifleM54CE2AP = M54CE2 AP magazine (10x24mm)
+ent-CMMagazineRifleM54CE2AP = магазин M54CE2 бронебойные (10x24мм)
     .desc = { ent-CMMagazineRifleM54CE2.desc }

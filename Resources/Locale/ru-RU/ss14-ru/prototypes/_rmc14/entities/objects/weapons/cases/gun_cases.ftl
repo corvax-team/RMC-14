@@ -28,5 +28,5 @@ ent-RMCM54CMK2Case = кейс штурмовой винтовки M54C MK2
     .desc = Оружейный кейс, содержащий штурмовую винтовку M54C MK2.
 ent-RMCM42A2ShotgunCase = кейс помпового дробовика M42A2
     .desc = Оружейный кейс, содержащий помповый дробовик M42A2.
-ent-RMCM79Case = M79 grenade launcher case
-    .desc = A gun case containing the M79 grenade launcher. Comes with three different grenade packets
+ent-RMCM79Case = кейс гранатомёта M79
+    .desc = Оружейный кейс, содержащий гранатомёт M79. В комплект входят три упаковки с различными гранатами.

@@ -22,5 +22,5 @@ ent-RMCComputerIntel = компьютер разведданных
 ent-RMCIntelTechTree = дерево технологий разведданных
     .desc = { "" }
 ent-RMCIntelDebug = { ent-RMCIntelPaperScrap }
-    .suffix = DEBUG, DO NOT MAP
+    .suffix = ДЕБАГ, НЕ МАППИТЬ
     .desc = { ent-RMCIntelPaperScrap.desc }
