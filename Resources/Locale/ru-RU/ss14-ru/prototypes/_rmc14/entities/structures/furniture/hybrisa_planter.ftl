@@ -1,2 +1,2 @@
-ent-RMCPlanter = concrete planter
-    .desc = A decorative concrete planter.
+ent-RMCPlanter = бетонная клумба
+    .desc = Декоративная бетонная клумба.

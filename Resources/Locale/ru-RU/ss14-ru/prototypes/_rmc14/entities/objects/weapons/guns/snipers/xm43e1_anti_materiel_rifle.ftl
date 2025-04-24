@@ -1,8 +1,8 @@
-ent-RMCXM43E1AntiMaterielRifle = XM43E1 anti-materiel rifle
-    .desc = An experimental anti-materiel rifle produced by Aegis Armaments, recently reacquired from the deep storage of an abandoned prototyping facility. This one in particular is currently undergoing field testing. Chambered in 10x99mm Caseless. This weapon can punch through thin metal plating and walls, though it'll lose most of its lethality in the process. It can even work for demolitions, with experienced users known to disassemble segments of solid, reinforced walls in the field with just a single standard magazine of 10x99mm. In lieu of explosives or an engineer, they instead use each of the 8 shots to break down vital structural supports, taking the wall apart in the process.
-ent-RMCMagazineSniperXM43E1AntiMateriel = XM43E1 marksman magazine (10x99mm)
-    .desc = A magazine of caseless 10x99mm anti-materiel rounds, capable of penetrating through most infantry-level materiel. Depending on what you hit, it might even have enough energy to wound anything behind the target.
-ent-RMCCartridgeSniper10x99mmAntiMateriel = cartridge (10x99mm) (AntiMateriel)
+ent-RMCXM43E1AntiMaterielRifle = крупнокалиберная снайперская винтовка XM43E1
+    .desc = Экспериментальная крупнокалиберная винтовка производства «Эгида Армаментс», недавно полученная из запасников заброшенного центра прототипирования. В частности, эта винтовка в настоящее время проходит полевые испытания. Использует безгильзовые патроны калибра 10х99 мм. Это оружие способно пробивать тонкие металлические плиты и стены, хотя при этом будет потеряна большая часть убойной силы выстрела. Опытные специалисты способны разобрать на куски цельную армированную стену, используя всего один стандартный магазин калибра 10х99 мм. Без взрывчатки или инженера, они используют каждый из 8 выстрелов для разрушения несущих конструкций, в результате чего стена разлетается на части.
+ent-RMCMagazineSniperXM43E1AntiMateriel = магазин XM43E1 марксман (10x99мм)
+    .desc = Магазин безгильзовых крупнокалиберных патронов калибра 10x99 мм, способных пробивать большинство материалов, которыми оснащена пехота. В зависимости от того, во что вы попадёте, энергии пули может хватить даже на поражение того, что находится позади цели.
+ent-RMCCartridgeSniper10x99mmAntiMateriel = патрон (10x99мм) (AntiMateriel)
     .desc = { ent-CMCartridgeSniper10x28mm.desc }
-ent-RMCBulletSniper10x99mmAntiMateriel = bullet (10x99mm)
+ent-RMCBulletSniper10x99mmAntiMateriel = пуля (10x99мм)
     .desc = { ent-CMBulletSniper10x28mm.desc }

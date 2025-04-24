@@ -1,4 +1,4 @@
-ent-RMCGeneratorFusionFake = permanently destroyed S-52 fusion reactor
+ent-RMCGeneratorFusionFake = безвозвратно уничтоженный термоядерный реактор S-52
     .desc = { "" }
 ent-RMCGeneratorFusion = термоядерный реактор S-52
     .desc = { "" }

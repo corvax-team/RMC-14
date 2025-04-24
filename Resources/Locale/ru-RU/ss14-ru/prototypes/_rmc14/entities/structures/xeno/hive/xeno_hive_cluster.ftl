@@ -1,4 +1,5 @@
-ent-HiveClusterXeno = Hive Cluster
-    .desc = A large clump of gooey mass. It rhythmically pulses, as if its pumping something into the weeds below...
-ent-HiveClusterXenoConstructionNode = Hive Cluster
-    .desc = A large clump of gooey mass. Looks like a marker for something.
+ent-HiveClusterXeno = кластер улья
+    .desc = Большой комок липкой массы. Он ритмично пульсирует, как будто перекачивает что-то в сорняки внизу...
+ent-HiveClusterXenoConstructionNode = кластер улья
+    .desc = Большой комок липкой массы. Похож на маркер для чего-то.
+    .suffix = Строительство

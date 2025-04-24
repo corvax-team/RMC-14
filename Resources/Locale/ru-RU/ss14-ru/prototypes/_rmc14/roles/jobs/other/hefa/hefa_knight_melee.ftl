@@ -1,6 +1,6 @@
-ent-RMCSpawnerHEFAShrapnelswornMelee = hefa shrapnelsworn melee spawner
-    .suffix = Spawner
+ent-RMCSpawnerHEFAShrapnelswornMelee = спавнер шрапнелеклятвенник HEFA пехотинец
+    .suffix = Спавнер
     .desc = { ent-RMCSpawnerHEFAShrapnelsworn.desc }
-ent-RMCRandomHumanoidHEFAShrapnelswornMelee = hefa shrapnelsworn melee ghost role
-    .suffix = Role
+ent-RMCRandomHumanoidHEFAShrapnelswornMelee = шрапнелеклятвенник HEFA пехотинец роль призрака
+    .suffix = Роль
     .desc = { ent-RMCRandomHumanoidHEFAShrapnelsworn.desc }

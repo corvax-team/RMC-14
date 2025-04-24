@@ -1,5 +1,5 @@
-ent-RMCCactus = cactus
-    .desc = It's a small, spiky cactus.
+ent-RMCCactus = кактус
+    .desc = Это маленький, шипастый кактус.
 ent-RMCCactus1 = { ent-RMCCactus }
     .desc = { ent-RMCCactus.desc }
 ent-RMCCactus2 = { ent-RMCCactus }

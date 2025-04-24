@@ -1,10 +1,10 @@
 ent-XenoTunnel = туннель
     .desc = Вход в туннель. Похоже, его прорыл какой-то когтистый зверь.
-ent-XenoTunnelMaint = Maintenance Hatch
-    .desc = An entrance to a maintenance tunnel. You can see bits of slime and resin within. Pieces of debris keep you from getting a closer look.
+ent-XenoTunnelMaint = люк техобслуживания
+    .desc = Вход в туннель для технического обслуживания. Внутри видны кусочки слизи и смолы. Обломки мусора мешают вам рассмотреть его получше.
 ent-XenoTunnelMaintNoXenoDesc = { ent-XenoTunnelMaint }
-    .desc = An entrance to a maintenance tunnel. Pieces of debris keep you from getting a closer look.
-ent-XenoTunnelMaintHybrisa = Sewer Manhole
+    .desc = Вход в туннель для технического обслуживания. Обломки мусора мешают вам рассмотреть его получше.
+ent-XenoTunnelMaintHybrisa = канализационный люк
     .desc = { ent-XenoTunnelMaint.desc }
-ent-XenoTunnelMaintHybrisaNoXenoDesc = Sewer Manhole
+ent-XenoTunnelMaintHybrisaNoXenoDesc = канализационный люк
     .desc = { ent-XenoTunnelMaintNoXenoDesc.desc }

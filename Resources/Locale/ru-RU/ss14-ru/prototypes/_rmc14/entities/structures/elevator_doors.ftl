@@ -1,4 +1,4 @@
-ent-RMCElevatorDoorBroken = broken elevator door
-    .desc = completely broken, the elevator is not going to work.
+ent-RMCElevatorDoorBroken = сломанная дверь лифта
+    .desc = Полностью сломана, лифт не работает.
 ent-RMCElevatorDoorBrokenRight = { ent-RMCElevatorDoorBroken }
     .desc = { ent-RMCElevatorDoorBroken.desc }

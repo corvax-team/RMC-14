@@ -1,5 +1,5 @@
 ent-RMCSensorTower = экспериментальная сенсорная вышка
     .desc = Вышка с множеством чувствительных датчиков, предназначенных для отслеживания погодных условий. Эта была приспособлена для отслеживания биологических сигнатур.
 ent-RMCSensorTowerOn = { ent-RMCSensorTower }
-    .suffix = On, No break chance
+    .suffix = Вкл, Нет шанса сломаться
     .desc = { ent-RMCSensorTower.desc }

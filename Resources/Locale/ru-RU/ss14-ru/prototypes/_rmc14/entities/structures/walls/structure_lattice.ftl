@@ -1,11 +1,11 @@
-ent-RMCStructureLattice = structural lattice
-    .desc = Like rebar, but in space.
+ent-RMCStructureLattice = структурная решётка
+    .desc = Как арматура, только в космосе.
 ent-RMCStructureLatticeB = { ent-RMCStructureLattice }
     .desc = { ent-RMCStructureLattice.desc }
 ent-RMCStructureLatticeC = { ent-RMCStructureLattice }
     .desc = { ent-RMCStructureLattice.desc }
-ent-RMCStructureLatticeDouble = structural lattice
-    .desc = Like rebar, but in space.
+ent-RMCStructureLatticeDouble = структурная решётка
+    .desc = Как арматура, только в космосе.
 ent-RMCStructureLatticeDoubleB = { ent-RMCStructureLatticeDouble }
     .desc = { ent-RMCStructureLatticeDouble.desc }
 ent-RMCStructureLatticeDoubleC = { ent-RMCStructureLatticeDouble }

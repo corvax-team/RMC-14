@@ -1,5 +1,5 @@
-ent-HiveEggMorpherXeno = Egg Morpher
-    .desc = A disgusting biomass generator that reeks of rotting flesh. Capable of producing parasites on its own.
-ent-HiveEggMorpherXenoConstructionNode = Egg Morpher
-    .desc = A disgusting biomass generator that reeks of rotting flesh. Looks like a marker for something.
-    .suffix = Construction
+ent-HiveEggMorpherXeno = морфер яиц
+    .desc = Отвратительный биомассовый генератор, воняющий гниющей плотью. Способен самостоятельно производить паразитов.
+ent-HiveEggMorpherXenoConstructionNode = морфер яиц
+    .desc = Отвратительный биомассовый генератор, воняющий гниющей плотью. Похож на маркер для чего-то.
+    .suffix = Строительство

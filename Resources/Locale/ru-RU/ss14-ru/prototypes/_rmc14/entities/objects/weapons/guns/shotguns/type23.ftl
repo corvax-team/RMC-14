@@ -1,2 +1,2 @@
-ent-RMCWeaponShotgunType23 = Type 23 riot shotgun
-    .desc = As SPP soldiers frequently reported being outmatched by enemy combatants, SPP High Command commissioned a large amount of Type 23 shotguns, originally used for quelling defector colony riots. This slow semi-automatic shotgun chambers 8 gauge, and packs a mean punch.
+ent-RMCWeaponShotgunType23 = штурмовой дробовик Тип 23
+    .desc = В связи с частыми сообщениями солдат СНП о том, что враги превосходят их в численности, верховное командование СНП заказало большое количество дробовиков Тип 23, которые изначально использовались для подавления бунтов в колониях перебежчиков. Это медленный полуавтоматический дробовик под патрон 8 калибра, и он реально мощный.

@@ -1,6 +1,6 @@
-ent-RMCBenchLeft = bench
-    .desc = A metal frame, with seats that are fitted with synthetic leather, they've faded in time.
-    .suffix = Left
+ent-RMCBenchLeft = лавка
+    .desc = Металлический каркас, с сиденьями, обтянутыми искусственной кожей, потускневшей от времени.
+    .suffix = Слева
 ent-RMCBenchRight = { ent-RMCBenchLeft }
-    .suffix = Right
+    .suffix = Справа
     .desc = { ent-RMCBenchLeft.desc }

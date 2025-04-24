@@ -1,4 +1,4 @@
-ent-RMCWallSandstone = sandstone wall
-    .desc = A heavy wall of sandstone.
-ent-RMCWallSandstoneRuned = runed sandstone wall
-    .desc = A heavy wall of sandstone, with elegant carvings and runes inscribed upon its face.
+ent-RMCWallSandstone = песчаниковая стена
+    .desc = Тяжёлая стена из песчаника.
+ent-RMCWallSandstoneRuned = песчаниковая стена с рунами
+    .desc = Тяжёлая стена из песчаника, покрытая изящной резьбой и начертанными на её лицевой стороне рунами.

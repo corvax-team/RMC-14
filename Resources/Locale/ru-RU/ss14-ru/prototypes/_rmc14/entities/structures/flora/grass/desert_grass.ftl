@@ -1,5 +1,5 @@
-ent-RMCGrassDesert = desert grass
-    .suffix = Light
+ent-RMCGrassDesert = пустынная трава
+    .suffix = Редкая
     .desc = { ent-RMCBaseGrass.desc }
 ent-RMCGrassDesert1 = { ent-RMCGrassDesert }
     .desc = { ent-RMCGrassDesert.desc }
@@ -24,7 +24,7 @@ ent-RMCGrassDesert10 = { ent-RMCGrassDesert }
 ent-RMCGrassDesert11 = { ent-RMCGrassDesert }
     .desc = { ent-RMCGrassDesert.desc }
 ent-RMCGrassDesertHeavy = { ent-RMCGrassDesert }
-    .suffix = Heavy
+    .suffix = Густая
     .desc = { ent-RMCGrassDesert.desc }
 ent-RMCGrassDesertHeavy1 = { ent-RMCGrassDesertHeavy }
     .desc = { ent-RMCGrassDesertHeavy.desc }

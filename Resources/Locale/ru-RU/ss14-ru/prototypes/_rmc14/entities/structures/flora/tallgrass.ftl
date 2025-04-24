@@ -1,11 +1,11 @@
-ent-RMCGrassTallBase = tallgrass
-    .suffix = Centre
+ent-RMCGrassTallBase = высокая трава
+    .suffix = Середина
     .desc = { ent-CMBaseStructure.desc }
 ent-RMCGrassTallSidesBase = { ent-RMCGrassTallBase }
-    .suffix = Sides
+    .suffix = Бока
     .desc = { ent-RMCGrassTallBase.desc }
 ent-RMCGrassTallCornerBase = { ent-RMCGrassTallBase }
-    .suffix = Corner
+    .suffix = Угол
     .desc = { ent-RMCGrassTallBase.desc }
 ent-RMCGrassTallDesert = { ent-RMCGrassTallBase }
     .desc = { ent-RMCGrassTallBase.desc }

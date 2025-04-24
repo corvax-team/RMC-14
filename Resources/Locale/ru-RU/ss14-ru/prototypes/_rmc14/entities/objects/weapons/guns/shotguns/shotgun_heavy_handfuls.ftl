@@ -1,10 +1,10 @@
-ent-RMCShellShotgunHeavyBuckshot = handful of heavy buckshot shells
+ent-RMCShellShotgunHeavyBuckshot = горсть тяжёлых дробовых патронов
     .desc = { ent-CMShellShotgunBase.desc }
-ent-RMCShellShotgunHeavySlugs = handful of heavy shotgun slugs
+ent-RMCShellShotgunHeavySlugs = горсть тяжёлых ружейных пуль
     .desc = { ent-CMShellShotgunBase.desc }
-ent-RMCShellShotgunHeavyBeanbag = handful of heavy beanbag slugs
+ent-RMCShellShotgunHeavyBeanbag = горсть тяжёлых травматических пуль
     .desc = { ent-CMShellShotgunBase.desc }
-ent-RMCShellShotgunHeavyFlechette = handful of heavy flechette shells
+ent-RMCShellShotgunHeavyFlechette = горсть тяжёлых патронов-флешетт
     .desc = { ent-CMShellShotgunBase.desc }
-ent-RMCShellShotgunIncendiaryHeavyBuckshot = handful of heavy dragonbreath buckshot shells
+ent-RMCShellShotgunIncendiaryHeavyBuckshot = горсть тяжёлой зажигательной дроби
     .desc = { ent-CMShellShotgunBuckshot.desc }

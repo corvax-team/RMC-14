@@ -6,5 +6,5 @@ ent-CMM11Knife = метательный нож M11
     .desc = Войсковой нож, предназначенный для метания в противника.
 ent-CMM2132Machete = мачете M2132
     .desc = Новейшее мачете колониальной морской пехоты.
-ent-RMCCeremonialSword = ceremonial sabre
-    .desc = A fancy ceremonial sabre passed down from generation to generation. Despite this, it has been very well cared for, and is in top condition.
+ent-RMCCeremonialSword = церемониальная сабля
+    .desc = Изысканная церемониальная сабля, передававшаяся из поколения в поколение. Несмотря на это, за ней очень хорошо ухаживали, и она находится в идеальном состоянии.

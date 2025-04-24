@@ -1,6 +1,6 @@
-ent-RMCSpawnerHEFAShrapnelsworn = hefa shrapnelsworn spawner
-    .suffix = Spawner
+ent-RMCSpawnerHEFAShrapnelsworn = спавнер шрапнелеклятвенник HEFA
+    .suffix = Спавнер
     .desc = { ent-MarkerBase.desc }
-ent-RMCRandomHumanoidHEFAShrapnelsworn = hefa shrapnelsworn ghost role
-    .suffix = Role
+ent-RMCRandomHumanoidHEFAShrapnelsworn = шрапнелеклятвенник HEFA роль призрака
+    .suffix = Роль
     .desc = { "" }

@@ -1,2 +1,2 @@
-ent-RMCDrill = mining drill
-    .desc = An old mining drill, seemingly used for mining. And possibly drilling.
+ent-RMCDrill = буровая установка
+    .desc = Старая буровая установка, похоже, использовавшаяся для добычи полезных ископаемых. И, возможно, для бурения.

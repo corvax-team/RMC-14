@@ -14,5 +14,5 @@ ent-RMCBoxShotgunIncendiaryBuckshot = коробка зажигательной 
     .desc = Коробка, наполненная самоподрывающимися зажигательными дробовыми патронами. 12 калибр.
 ent-RMCBoxShotgunBreaching = коробка пробивных патронов
     .desc = Коробка, наполненная пробивными ружейными патронами. 16 калибр.
-ent-RMCBoxShotgunBuckshot8g = box of buckshot shells
-    .desc = A box filled with buckshot spread shotgun shells. 8 Gauge.
+ent-RMCBoxShotgunBuckshot8g = коробка дробовых ружейных патронов
+    .desc = Коробка, наполненная дробовыми ружейными патронами. 8 калибр.

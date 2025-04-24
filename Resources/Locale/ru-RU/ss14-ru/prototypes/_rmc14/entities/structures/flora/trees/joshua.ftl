@@ -1,5 +1,5 @@
-ent-RMCTreeJoshua = joshua tree
-    .desc = A tall tree covered in spiky-like needles, covering its trunk.
+ent-RMCTreeJoshua = юкка коротколистная
+    .desc = Высокое дерево, покрытое шипастыми иглами, устилающими его ствол.
 ent-RMCTreeJoshua1 = { ent-RMCTreeJoshua }
     .desc = { ent-RMCTreeJoshua.desc }
 ent-RMCTreeJoshua2 = { ent-RMCTreeJoshua }
