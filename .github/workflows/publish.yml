@@ -16,19 +16,19 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get install -y python3-paramiko python3-lxml
 
-    - uses: actions/checkout@v3.6.0
+    - uses: actions/checkout@v4.2.2
       with:
         submodules: 'recursive'
-        
+
     # Due to using self-hosted runner we need to setup .NET locally in runner temp directory.
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v4.3.0
+      uses: actions/setup-dotnet@v4.1.0
       with:
         dotnet-version: 9.0.x
       env:
-        DOTNET_INSTALL_DIR: ${{ runner.temp }}/.dotnet 
+        DOTNET_INSTALL_DIR: ${{ runner.temp }}/.dotnet
 
-    # After installation(?) We need to setup PATH for that .NET installation 
+    # After installation(?) We need to setup PATH for that .NET installation
     - name: Set DOTNET_ROOT and PATH
       run: |
         echo "DOTNET_ROOT=${{ runner.temp }}/.dotnet" >> $GITHUB_ENV
