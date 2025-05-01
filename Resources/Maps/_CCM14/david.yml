@@ -10583,8 +10583,6 @@ entities:
       pos: -18.5,-3.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 147
   - uid: 205
@@ -10593,8 +10591,6 @@ entities:
       pos: -15.5,-13.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 147
   - uid: 206
@@ -18231,7 +18227,6 @@ entities:
           - 944
           - 950
           - 951
-          - invalid
           - 943
           - 947
         paper_label: !type:ContainerSlot
@@ -18450,7 +18445,6 @@ entities:
           - 88
           - 95
           - 89
-          - invalid
           - 87
           - 90
           - 96
@@ -21376,8 +21370,6 @@ entities:
       pos: -13.5,-4.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 147
     - type: AtmosPipeColor
@@ -21794,8 +21786,6 @@ entities:
       pos: -13.5,-3.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 147
     - type: AtmosPipeColor
@@ -21806,8 +21796,6 @@ entities:
       pos: -18.5,-2.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 147
     - type: AtmosPipeColor
@@ -36405,8 +36393,6 @@ entities:
       pos: -16.5,-4.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 147
   - uid: 4428
@@ -36416,8 +36402,6 @@ entities:
       pos: -16.5,-3.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 147
   - uid: 4429
@@ -36471,8 +36455,6 @@ entities:
       pos: -17.5,-1.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 147
   - uid: 4436
@@ -36481,8 +36463,6 @@ entities:
       pos: -18.5,-1.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 147
   - uid: 4437
@@ -36491,8 +36471,6 @@ entities:
       pos: -22.5,-3.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 147
   - uid: 4438
@@ -36501,8 +36479,6 @@ entities:
       pos: -12.5,-9.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 147
   - uid: 4439
@@ -36511,8 +36487,6 @@ entities:
       pos: -18.5,-5.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 147
   - uid: 4440
@@ -36521,8 +36495,6 @@ entities:
       pos: -17.5,-5.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 147
   - uid: 4441
@@ -36531,8 +36503,6 @@ entities:
       pos: -11.5,-12.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 147
       - 155
@@ -36542,8 +36512,6 @@ entities:
       pos: -11.5,-13.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 147
       - 155
@@ -36553,8 +36521,6 @@ entities:
       pos: -11.5,-14.5
       parent: 1
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 147
       - 155
