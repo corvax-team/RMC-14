@@ -23,10 +23,10 @@
             CMMilitaryWarden: [1, 1]
             CMMilitaryPolice: [1, 1]
             # Auxiliary
-            CMAuxiliarySupportOfficer: [1, 1]
+#            CMAuxiliarySupportOfficer: [1, 1]
             CMIntelOfficer: [2, 2]
             CMPilotDropship: [1, 1]
-            CMPilotGunship: [1, 1]
+#            CMPilotGunship: [1, 1]
             CMDropshipCrewChief: [1, 1]
             # Engineering
             CMChiefEngineer: [1, 1]
