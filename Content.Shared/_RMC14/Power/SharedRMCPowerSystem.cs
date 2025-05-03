@@ -120,6 +120,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         if (ent.Comp.StartingCell is { } startingCell)
             TrySpawnInContainer(startingCell, ent, ent.Comp.CellContainerSlot, out _);
 
+        /* CCM14 apc resprite
+
         var sprite = EnsureComp<SpriteSetRenderOrderComponent>(ent);
         switch (Transform(ent).LocalRotation.GetDir())
         {
@@ -138,6 +140,8 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         }
 
         Dirty(ent, sprite);
+
+        */
     }
 
     private void OnApcRemove<T>(Entity<RMCApcComponent> ent, ref T args)
