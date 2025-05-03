@@ -126,7 +126,7 @@
         enum.ApcVisualLayers.ChargeState: # TODO RMC14
           NotCharging: { state: display-lack }
           Charging: { state: display-full }
-          FullCharge: { statse: display-charging }
+          FullCharge: { state: display-charging }
 
 # APC under construction
 - type: entity
