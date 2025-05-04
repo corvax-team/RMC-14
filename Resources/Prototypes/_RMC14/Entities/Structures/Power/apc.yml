@@ -14,7 +14,7 @@
   - type: Sprite
     drawdepth: WallMountedItems
     sprite: _RMC14/Structures/Power/apc.rsi
-    offset: 0,-0.75
+    offset: 0,-0.75 # CCM14 apc sprite fix
     layers:
     - state: base
       map: [ "base" ]
