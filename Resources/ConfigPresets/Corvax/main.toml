@@ -102,3 +102,12 @@ enabled = false
 
 [build]
 engine_version = "248.0.3-source-gen-debug" #and remember to remove it next update...xd
+
+[rmc]
+late_joins_per_burrowed_larva = 3.5
+late_joins_per_burrowed_larva_early = 3.5
+late_joins_per_burrowed_larva_early_threshold_minutes = 5
+marines_per_xeno = 3.5
+auto_balance_step = 0.5
+auto_balance_min = 2.5
+auto_balance_max = 4.5
