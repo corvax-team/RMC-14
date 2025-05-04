@@ -1,0 +1,4 @@
+- type: shader
+  id: FpvDroneShader
+  kind: source
+  path: "/Textures/Shaders/flashed_effect.swsl"

@@ -1,0 +1,58 @@
+- type: constructionGraph
+  id: MarineDroneGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: CMFPVDroneControl
+          steps:
+            - tag: Drone
+              name: folding drone
+              icon:
+                sprite: _CM/Structures/Machines/Computer/Drone.rsi
+                state: Drone
+              doAfter: 15
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+    - node: CMFPVDroneControl
+      entity: CMFPVDroneControl
+
+- type: construction
+  name: "- folding computer"
+  id: MarineDroneConstruction
+  graph: MarineDroneGraph
+  startNode: start
+  targetNode: CMFPVDroneControl
+  category: construction-category-cm-structures
+  description: The engineer's best friend.
+  icon:
+    sprite: _CM/Structures/Machines/Computer/Drone.rsi
+    state: Drone
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: entity
+  name: drone toolbox
+  suffix: Marine, Drone
+  id: ToolboxDroneMarine
+  description: A toolbox with drone.
+  parent: ToolboxElectrical
+  components:
+  - type: Sprite
+    sprite: _CM/Objects/Tools/Toolboxes/toolbox_drone.rsi
+    state: icon
+  - type: Item
+    sprite: _CM/Objects/Tools/Toolboxes/toolbox_drone.rsi
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Tag
+    tags:
+    - Drone
+
+- type: Tag
+  id: Drone

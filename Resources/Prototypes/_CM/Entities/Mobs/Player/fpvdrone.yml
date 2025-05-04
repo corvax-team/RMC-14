@@ -1,0 +1,63 @@
+- type: entity
+  parent: [BaseMob, ClothingOuterArmorUnpoweredFlashlight]
+  id: FpvDroneObserver
+  name: Fpv drone
+  noSpawn: true
+  components:
+  - type: InteractionOutline
+  - type: TagInteraction
+    whitelistTag: InteractionCAS
+  - type: Sprite
+    sprite: Mobs/Silicon/fpv.rsi
+    state: marker
+    drawdepth: Mobs
+  - type: Input
+    context: "aghost"
+  - type: Physics
+    bodyType: KinematicController
+  - type: Stripping
+  - type: CargoSellBlacklist
+  - type: DoAfter
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 15
+        mask:
+        - FlyingMobMask
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 8
+    baseWalkSpeed: 4
+  - type: MovementIgnoreGravity
+    globalReceive: true
+  - type: CanMoveInAir
+  - type: Visibility
+    layer: 1
+  - type: Alerts
+  - type: ShowJobIcons
+  - type: Xeno
+    actions:
+      - ActionFpvDroneExplosive
+  - type: FpvDroneExplosive
+    damage:
+      types:
+        Brute: 400
+
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          Girder:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

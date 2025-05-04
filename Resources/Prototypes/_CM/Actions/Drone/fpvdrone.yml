@@ -1,0 +1,14 @@
+- type: entity
+  id: ActionFpvDroneExplosive
+  name: "Explosive Detonation"
+  description: "Detonate the FPV Drone's explosive charge."
+  noSpawn: true
+  components:
+    - type: InstantAction
+      useDelay: 0
+      priority: 7
+      icon:
+        sprite: _CM/Actions/drone.rsi
+        state: blast
+      event: !type:FpvDroneExplosiveEvent
+      checkCanInteract: false
