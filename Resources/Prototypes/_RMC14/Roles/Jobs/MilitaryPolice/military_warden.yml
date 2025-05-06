@@ -7,7 +7,7 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
-    time: 36000 # 10 hours
+    time: 10800 # 3 hours. CCM14 role timers. RMC: 36000 # 10 hours
   ranks:
     RMCRankGunnerySergeant:
     - !type:RoleTimeRequirement

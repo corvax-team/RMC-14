@@ -7,13 +7,19 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
-    time: 54000 # 15 hours
+    time: 10800 # 3 hours. CCM14 role timers. RMC: 54000 # 15 hours
+# CCM14 role timers [remove/start]
+#  - !type:RoleTimeRequirement
+#    role: CMJobMilitaryWarden
+#    time: 18000 # 5 hours
+#  - !type:DepartmentTimeRequirement
+#    department: CMCommand
+#    time: 18000 # 5 hours
+# CCM14 role timers [remove/end] [add/start]
   - !type:RoleTimeRequirement
-    role: CMJobMilitaryWarden
-    time: 18000 # 5 hours
-  - !type:DepartmentTimeRequirement
-    department: CMCommand
-    time: 18000 # 5 hours
+    role: CMJobSquadLeader
+    time: 3600 # 1 hour
+# CCM14 role timers [add/end]
   ranks:
     RMCRankFirstLT:
     - !type:RoleTimeRequirement
