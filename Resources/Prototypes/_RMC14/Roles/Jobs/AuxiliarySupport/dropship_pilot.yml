@@ -5,9 +5,15 @@
   description: cm-job-description-dropship-pilot
   playTimeTracker: CMJobPilotDropship
   requirements:
-  - !type:TotalJobsTimeRequirement
-    group: CMJobsDropship
-    time: 7200 # 2 hours
+# CCM14 role timers [remove/start]
+#  - !type:TotalJobsTimeRequirement
+#    group: CMJobsDropship
+#    time: 7200 # 2 hours
+# CCM14 role timers [remove/end] [add/start]
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 10800 # 3 hours
+# CCM14 role timers [add/end] 
   ranks:
     RMCRankSecondLT: []
   startingGear: CMGearPilotDropship

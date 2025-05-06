@@ -5,24 +5,28 @@
   description: cm-job-description-senior-enlisted-advisor
   playTimeTracker: CMJobSeniorEnlistedAdvisor
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: CMSquad
-    time: 54000 # 15 hours
+# CCM14 role timers [remove/start]
+#  - !type:DepartmentTimeRequirement
+#    department: CMSquad
+#    time: 54000 # 15 hours
+# CCM14 role timers [remove/end]
   - !type:TotalJobsTimeRequirement
     group: CMJobsEngineering
-    time: 36000 # 10 hours
+    time: 10800 # 3 hours. CCM14 role timers. RMC: 36000 # 10 hours
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
-    time: 54000 # 15 hours
+    time: 10800 # 3 hours. CCM14 role timers. RMC: 54000 # 15 hours
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
-    time: 54000 # 15 hours
-  - !type:DepartmentTimeRequirement
-    department: CMCommand
-    time: 54000 # 15 hours
+    time: 10800 # 3 hours. CCM14 role timers. RMC: 54000 # 15 hours
+# CCM14 role timers [remove/start]
+#  - !type:DepartmentTimeRequirement
+#    department: CMCommand
+#    time: 54000 # 15 hours
+# CCM14 role timers [remove/start]
   - !type:DepartmentTimeRequirement
     department: CMRequisitions
-    time: 36000 # 10 hours
+    time: 10800 # 3 hours. CCM14 role timers. RMC: 36000 # 10 hours
   ranks: # TODO Selectable Ranks for SEA
     RMCRankSergeantMajor:
     - !type:RoleTimeRequirement
