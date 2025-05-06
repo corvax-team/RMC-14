@@ -7,7 +7,12 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
-    time: 36000 # 10 hours
+    time: 21600 # 6 hours. CCM14 role timers. RMC: 36000 # 10 hours
+# CCM14 role timers [add/start]
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 10800 # 3 hours
+# CCM14 role timers [add/end]
   ranks:
     RMCRankSergeant:
     - !type:RoleTimeRequirement
