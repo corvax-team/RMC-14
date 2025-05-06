@@ -5,9 +5,24 @@
   description: cm-job-description-executive-officer
   playTimeTracker: CMJobExecutiveOfficer
   requirements:
+# CCM14 role timers [remove/start]
+#  - !type:DepartmentTimeRequirement
+#    department: CMCommand
+#    time: 36000 # 10 hours
+# CCM14 role timers [remove/end] [add/start]
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
+    time: 21600 # 6 hours
   - !type:DepartmentTimeRequirement
-    department: CMCommand
-    time: 36000 # 10 hours
+    department: CMRequisitions
+    time: 10800 # 3 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 10800 # 3 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
+    time: 10800 # 3 hours
+# CCM14 role timers [add/end]
   ranks:
     RMCRankCaptain: []
   weight: 5

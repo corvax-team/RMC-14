@@ -5,36 +5,42 @@
   description: cm-job-description-commanding-officer
   playTimeTracker: CMJobCommandingOfficer
   requirements:
-  - !type:DepartmentTimeRequirement
-    department: CMSquad
-    time: 126000 # 35 hours, any roles
-  - !type:RoleTimeRequirement
-    role: CMJobSquadLeader
-    time: 54000 # 15 hours
-  - !type:TotalJobsTimeRequirement
-    group: CMJobsEngineering
-    time: 36000 # 10 hours
-  - !type:DepartmentTimeRequirement
-    department: CMMilitaryPolice
-    time: 108000 # 30 hours
-  - !type:RoleTimeRequirement
-    role: CMJobMilitaryWarden
-    time: 36000 # 10 hours, you need 5 to get CMP either way
-  - !type:RoleTimeRequirement
-    role: CMJobChiefMP
-    time: 36000 # 10 hours
-  - !type:TotalJobsTimeRequirement
-    group: CMJobsMedical
-    time: 36000 # 10 hours
+# CCM14 role timers [remove/start]
+#  - !type:DepartmentTimeRequirement
+#    department: CMSquad
+#    time: 126000 # 35 hours, any roles
+#  - !type:RoleTimeRequirement
+#    role: CMJobSquadLeader
+#    time: 54000 # 15 hours
+#  - !type:TotalJobsTimeRequirement
+#    group: CMJobsEngineering
+#    time: 36000 # 10 hours
+#  - !type:DepartmentTimeRequirement
+#    department: CMMilitaryPolice
+#    time: 108000 # 30 hours
+#  - !type:RoleTimeRequirement
+#    role: CMJobMilitaryWarden
+#    time: 36000 # 10 hours, you need 5 to get CMP either way
+#  - !type:RoleTimeRequirement
+#    role: CMJobChiefMP
+#    time: 36000 # 10 hours
+#  - !type:TotalJobsTimeRequirement
+#    group: CMJobsMedical
+#    time: 36000 # 10 hours
+#  - !type:DepartmentTimeRequirement
+#    department: CMCommand
+#    time: 72000 # 20 hours, either in SO or XO
+#  - !type:RoleTimeRequirement
+#    role: CMJobExecutiveOfficer
+#    time: 108000 # 30 hours, minimum time in an explicitly commander position
+#  - !type:DepartmentTimeRequirement
+#    department: CMRequisitions
+#    time: 18000 # 5 hours
+# CCM14 role timers [remove/end] [add/start]
   - !type:DepartmentTimeRequirement
     department: CMCommand
-    time: 72000 # 20 hours, either in SO or XO
-  - !type:RoleTimeRequirement
-    role: CMJobExecutiveOfficer
-    time: 108000 # 30 hours, minimum time in an explicitly commander position
-  - !type:DepartmentTimeRequirement
-    department: CMRequisitions
-    time: 18000 # 5 hours
+    time: 10800 # 3 hours
+# CCM14 role timers [add/end]
   ranks:
     RMCRankColonel:
     - !type:RoleTimeRequirement
