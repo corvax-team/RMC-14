@@ -3,9 +3,9 @@ meta:
   category: Map
   engineVersion: 248.0.3-source-gen-debug
   forkId: colonialmarines
-  forkVersion: b6971160c7ec12d8a620916255279324aba20164
-  time: 04/30/2025 16:37:03
-  entityCount: 29235
+  forkVersion: 0e093711cb9270968c1d856ce9b06d2a18a333f9
+  time: 05/08/2025 11:50:14
+  entityCount: 29224
 maps:
 - 1
 grids:
@@ -41558,22 +41558,6 @@ entities:
       parent: 1
 - proto: BarricadeBlock
   entities:
-  - uid: 33
-    components:
-    - type: Transform
-      pos: 171.5,120.5
-      parent: 1
-  - uid: 34
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 137.5,111.5
-      parent: 1
-  - uid: 35
-    components:
-    - type: Transform
-      pos: 170.5,120.5
-      parent: 1
   - uid: 36
     components:
     - type: Transform
@@ -41588,12 +41572,6 @@ entities:
     components:
     - type: Transform
       pos: 89.5,69.5
-      parent: 1
-  - uid: 41
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 183.5,83.5
       parent: 1
   - uid: 42
     components:
@@ -41610,45 +41588,11 @@ entities:
     - type: Transform
       pos: 112.5,109.5
       parent: 1
-  - uid: 45
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 12.5,13.5
-      parent: 1
-  - uid: 46
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 12.5,14.5
-      parent: 1
-  - uid: 47
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 13.5,13.5
-      parent: 1
-  - uid: 48
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 13.5,14.5
-      parent: 1
   - uid: 49
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 209.5,107.5
-      parent: 1
-  - uid: 50
-    components:
-    - type: Transform
-      pos: 12.5,21.5
-      parent: 1
-  - uid: 51
-    components:
-    - type: Transform
-      pos: 13.5,21.5
       parent: 1
 - proto: BarricadeDirectional
   entities:
@@ -42930,12 +42874,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 4.5,134.5
-      parent: 1
-  - uid: 261
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 69.5,104.5
       parent: 1
 - proto: CMApcLowCapacity
   entities:

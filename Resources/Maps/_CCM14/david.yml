@@ -2,10 +2,10 @@ meta:
   format: 7
   category: Map
   engineVersion: 248.0.3-source-gen-debug
-  forkId: ""
-  forkVersion: ""
-  time: 05/02/2025 22:30:52
-  entityCount: 6432
+  forkId: colonialmarines
+  forkVersion: 0e093711cb9270968c1d856ce9b06d2a18a333f9
+  time: 05/07/2025 08:03:41
+  entityCount: 6429
 maps:
 - 1
 grids:
@@ -11715,7 +11715,7 @@ entities:
       pos: -26.5,13.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -75852.98
+      secondsUntilStateChange: -76521.04
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15307,7 +15307,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 5711.660955
     - type: Door
-      secondsUntilStateChange: -30690.291
+      secondsUntilStateChange: -31358.355
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15321,7 +15321,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 5711.660955
     - type: Door
-      secondsUntilStateChange: -30690.291
+      secondsUntilStateChange: -31358.355
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15412,7 +15412,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 19962.313371
     - type: Door
-      secondsUntilStateChange: -127416.93
+      secondsUntilStateChange: -128084.99
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15426,7 +15426,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 19962.313371
     - type: Door
-      secondsUntilStateChange: -127416.93
+      secondsUntilStateChange: -128084.99
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -19229,11 +19229,6 @@ entities:
     components:
     - type: Transform
       pos: 51.5,16.5
-      parent: 1
-  - uid: 1574
-    components:
-    - type: Transform
-      pos: 47.5,-8.5
       parent: 1
   - uid: 1575
     components:
@@ -30612,14 +30607,6 @@ entities:
       rot: 4.71238898038469 rad
       pos: -42.5,12.5
       parent: 1
-- proto: ComputerPowerMonitoring
-  entities:
-  - uid: 3522
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 47.5,-7.5
-      parent: 1
 - proto: ConveyorBelt
   entities:
   - uid: 3523
@@ -36584,7 +36571,7 @@ entities:
       pos: 37.5,20.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -30518.291
+      secondsUntilStateChange: -31186.355
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -48073,13 +48060,6 @@ entities:
     - type: Transform
       pos: -30.222038,-13.587204
       parent: 1
-- proto: KitchenElectricGrill
-  entities:
-  - uid: 5962
-    components:
-    - type: Transform
-      pos: 16.5,-5.5
-      parent: 1
 - proto: KitchenKnife
   entities:
   - uid: 5963
@@ -48089,11 +48069,6 @@ entities:
       parent: 1
 - proto: KitchenReagentGrinder
   entities:
-  - uid: 5964
-    components:
-    - type: Transform
-      pos: 13.5,-6.5
-      parent: 1
   - uid: 5965
     components:
     - type: Transform
@@ -48113,11 +48088,6 @@ entities:
       parent: 1
 - proto: LootSpawnerIndustrial
   entities:
-  - uid: 5968
-    components:
-    - type: Transform
-      pos: 47.5,-8.5
-      parent: 1
   - uid: 5969
     components:
     - type: Transform
@@ -49311,17 +49281,17 @@ entities:
     - type: Transform
       pos: 51.081573,12.880931
       parent: 1
-- proto: RMCChemDispenserGround
+- proto: RMCChemDispenserMedbay
   entities:
-  - uid: 6139
-    components:
-    - type: Transform
-      pos: -28.5,10.5
-      parent: 1
-  - uid: 6140
+  - uid: 3379
     components:
     - type: Transform
       pos: -29.5,13.5
+      parent: 1
+  - uid: 3380
+    components:
+    - type: Transform
+      pos: -28.5,10.5
       parent: 1
 - proto: RMCChemStorageMedbay
   entities:
@@ -49675,6 +49645,13 @@ entities:
     components:
     - type: Transform
       pos: -61.5,5.5
+      parent: 1
+- proto: RMCKitchenReagentGrinder
+  entities:
+  - uid: 3378
+    components:
+    - type: Transform
+      pos: 16.5,-5.5
       parent: 1
 - proto: RMCLamp
   entities:
@@ -51086,6 +51063,13 @@ entities:
     components:
     - type: Transform
       pos: 40.5,-3.5
+      parent: 1
+- proto: RMCTelecomSensorComputer2
+  entities:
+  - uid: 1574
+    components:
+    - type: Transform
+      pos: 47.5,-7.5
       parent: 1
 - proto: RMCTelecomServerRack
   entities:
