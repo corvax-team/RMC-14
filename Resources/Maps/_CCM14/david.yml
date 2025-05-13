@@ -3,9 +3,9 @@ meta:
   category: Map
   engineVersion: 248.0.3-source-gen-debug
   forkId: colonialmarines
-  forkVersion: 0e093711cb9270968c1d856ce9b06d2a18a333f9
-  time: 05/07/2025 08:03:41
-  entityCount: 6429
+  forkVersion: 3d91a084ba4802adfcc4da1062a2dbc3f71f5eba
+  time: 05/11/2025 10:38:30
+  entityCount: 6440
 maps:
 - 1
 grids:
@@ -364,7 +364,7 @@ entities:
           version: 6
         -2,-1:
           ind: -2,-1
-          tiles: WgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAASgAAAAAAQwAAAAAAQwAAAAAAQwAAAAAAQwAAAAAAQwAAAAAAQwAAAAAAQwAAAAAAQwAAAAAAQwAAAAAAQwAAAAAARAAAAAAARAAAAAAARAAAAAAAWgMAAAAAWgMAAAAAawAAAAAAAQAAAAAAGgAAAAAAGgAAAAAAbQAAAAAAGgAAAAAAGgAAAAAAAQAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAAWgMAAAAAWgMAAAAAawAAAAAAGgAAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAGgAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAAWgMAAAAAWgMAAAAAawAAAAAAGgAAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAGgAAAAAARAAAAAAARAAAAAAARAAAAAAAWgMAAAAARAAAAAAAQwAAAAAAWgMAAAAAWgMAAAAAawAAAAAAbAAAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAbwAAAAAARAAAAAAARAAAAAAARAAAAAAAWgMAAAAARAAAAAAARAAAAAAAWgMAAAAAWgMAAAAAawAAAAAAGgAAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAGgAAAAAARAAAAAAARAAAAAAARAAAAAAAWgMAAAAARAAAAAAARAAAAAAAWgMAAAAAWgMAAAAAawAAAAAAGgAAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAGgAAAAAARAAAAAAARAAAAAAARAAAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAawAAAAAAAQAAAAAAGgAAAAAAGgAAAAAAbgAAAAAAGgAAAAAAGgAAAAAAAQAAAAAARAAAAAAARAAAAAAARAAAAAAAWgMAAAAAYgAAAAAAZQAAAAAAaAAAAAAAWgMAAAAAawAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARQAAAAAASQAAAAAAWgMAAAAAYwAAAAAABwAAAAAAaQAAAAAAWgMAAAAATQAAAAAASQAAAAAASQAAAAAASQAAAAAASQAAAAAASQAAAAAASQAAAAAASQAAAAAATAAAAAAARgAAAAAARAAAAAAAWgMAAAAAYwAAAAAABwAAAAAAaQAAAAAAWgMAAAAAAQAAAAAAAQAAAAAAAQAAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAawAAAAAARgAAAAAARAAAAAAAWgMAAAAAYwAAAAAABwAAAAAAaQAAAAAAWgMAAAAAHQAAAAAAHQAAAAAAHQAAAAAAHQAAAAAAWgMAAAAAwQAAAAAAwwAAAAAAQwAAAAAASwAAAAAARwAAAAAAQwAAAAAABwAAAAAAYwAAAAAABwAAAAAAaQAAAAAAWgMAAAAAHQAAAAAAHQAAAAAAHQAAAAAAHQAAAAAAAQAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARQAAAAAASQAAAAAAWgMAAAAAZAAAAAAAZgAAAAAAagAAAAAAWgMAAAAAHQAAAAAAHQAAAAAAHQAAAAAAHQAAAAAAWgMAAAAAwgAAAAAAxAAAAAAAxQAAAAAATAAAAAAARgAAAAAARAAAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAAQAAAAAAAQAAAAAAWgMAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAA
+          tiles: WgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAASgAAAAAAQwAAAAAAQwAAAAAAQwAAAAAAQwAAAAAAQwAAAAAAQwAAAAAAQwAAAAAAQwAAAAAAQwAAAAAAQwAAAAAARAAAAAAARAAAAAAARAAAAAAAWgMAAAAAWgMAAAAAawAAAAAAAQAAAAAAGgAAAAAAGgAAAAAAbQAAAAAAGgAAAAAAGgAAAAAAAQAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAAWgMAAAAAWgMAAAAAawAAAAAAGgAAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAGgAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAAWgMAAAAAWgMAAAAAawAAAAAAGgAAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAGgAAAAAARAAAAAAARAAAAAAARAAAAAAAWgMAAAAARAAAAAAAQwAAAAAAWgMAAAAAWgMAAAAAawAAAAAAbAAAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAbwAAAAAARAAAAAAARAAAAAAARAAAAAAAWgMAAAAARAAAAAAARAAAAAAAWgMAAAAAWgMAAAAAawAAAAAAGgAAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAGgAAAAAARAAAAAAARAAAAAAARAAAAAAAWgMAAAAARAAAAAAARAAAAAAAWgMAAAAAWgMAAAAAawAAAAAAGgAAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAGgAAAAAARAAAAAAARAAAAAAARAAAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAawAAAAAAAQAAAAAAGgAAAAAAGgAAAAAAbgAAAAAAGgAAAAAAGgAAAAAAAQAAAAAARAAAAAAARAAAAAAARAAAAAAAWgMAAAAAYgAAAAAAZQAAAAAAaAAAAAAAWgMAAAAAawAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARQAAAAAASQAAAAAAWgMAAAAAYwAAAAAABwAAAAAAaQAAAAAAWgMAAAAATQAAAAAASQAAAAAASQAAAAAASQAAAAAASQAAAAAASQAAAAAASQAAAAAASQAAAAAATAAAAAAARgAAAAAARAAAAAAAWgMAAAAAYwAAAAAABwAAAAAAaQAAAAAAWgMAAAAAAQAAAAAAAQAAAAAAAQAAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAawAAAAAARgAAAAAARAAAAAAAWgMAAAAAYwAAAAAABwAAAAAAaQAAAAAAWgMAAAAAHQAAAAAAHQAAAAAAHQAAAAAAHQAAAAAAWgMAAAAARAAAAAAARAAAAAAAQwAAAAAASwAAAAAARwAAAAAAQwAAAAAABwAAAAAAYwAAAAAABwAAAAAAaQAAAAAAWgMAAAAAHQAAAAAAHQAAAAAAHQAAAAAAHQAAAAAAAQAAAAAARAAAAAAARAAAAAAARAAAAAAARAAAAAAARQAAAAAASQAAAAAAWgMAAAAAZAAAAAAAZgAAAAAAagAAAAAAWgMAAAAAHQAAAAAAHQAAAAAAHQAAAAAAHQAAAAAAWgMAAAAAwgAAAAAAxAAAAAAAxQAAAAAATAAAAAAARgAAAAAARAAAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAWgMAAAAAAQAAAAAAAQAAAAAAWgMAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAAGgAAAAAA
           version: 6
         -2,0:
           ind: -2,0
@@ -3626,8 +3626,8 @@ entities:
         - volume: 2500
           temperature: 293.15
           moles:
-          - 13.233623
-          - 49.783638
+          - 21.556692
+          - 81.09424
           - 0
           - 0
           - 0
@@ -11309,18 +11309,6 @@ entities:
     - type: Transform
       pos: 15.935905,-8.298841
       parent: 1
-- proto: ClothingHandsGlovesBoxingRigged
-  entities:
-  - uid: 88
-    components:
-    - type: MetaData
-      desc: ����� �������� ��� ����������������� �����. �������, ��� ������� �������...
-      name: ����� ��������� �������� ���
-    - type: Transform
-      parent: 84
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: ClothingHeadHatBeretQM
   entities:
   - uid: 105
@@ -11715,7 +11703,7 @@ entities:
       pos: -26.5,13.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -76521.04
+      secondsUntilStateChange: -77218.16
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15307,7 +15295,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 5711.660955
     - type: Door
-      secondsUntilStateChange: -31358.355
+      secondsUntilStateChange: -32055.473
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15321,7 +15309,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 5711.660955
     - type: Door
-      secondsUntilStateChange: -31358.355
+      secondsUntilStateChange: -32055.473
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15412,7 +15400,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 19962.313371
     - type: Door
-      secondsUntilStateChange: -128084.99
+      secondsUntilStateChange: -128782.11
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -15426,7 +15414,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 19962.313371
     - type: Door
-      secondsUntilStateChange: -128084.99
+      secondsUntilStateChange: -128782.11
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -18371,16 +18359,14 @@ entities:
     - type: Transform
       pos: -55.5,-4.5
       parent: 1
-    - type: Lock
-      locked: False
     - type: EntityStorage
       air:
         volume: 200
         immutable: False
         temperature: 293.1462
         moles:
-        - 10.197565
-        - 38.362274
+        - 1.8744949
+        - 7.051673
         - 0
         - 0
         - 0
@@ -18397,20 +18383,19 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 87
           - 90
-          - 96
-          - 99
-          - 93
-          - 94
-          - 91
-          - 89
-          - 95
-          - 88
-          - 97
-          - 98
-          - 92
           - 85
+          - 92
+          - 98
+          - 97
+          - 95
+          - 89
+          - 91
+          - 94
+          - 93
+          - 99
+          - 96
+          - 87
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -19827,6 +19812,13 @@ entities:
     - type: Transform
       pos: 26.5,-15.5
       parent: 1
+- proto: CMSpawnPointMilitaryPolice
+  entities:
+  - uid: 88
+    components:
+    - type: Transform
+      pos: -34.5,-5.5
+      parent: 1
 - proto: CMSpawnPointMilitaryWarden
   entities:
   - uid: 1667
@@ -20241,6 +20233,16 @@ entities:
     components:
     - type: Transform
       pos: -13.5,-5.5
+      parent: 1
+  - uid: 3386
+    components:
+    - type: Transform
+      pos: -20.5,-4.5
+      parent: 1
+  - uid: 3387
+    components:
+    - type: Transform
+      pos: -21.5,-4.5
       parent: 1
 - proto: CMTableReinforcedBlack
   entities:
@@ -20689,6 +20691,16 @@ entities:
     components:
     - type: Transform
       pos: -36.5,-6.5
+      parent: 1
+  - uid: 3383
+    components:
+    - type: Transform
+      pos: 52.5,5.5
+      parent: 1
+  - uid: 3384
+    components:
+    - type: Transform
+      pos: 52.5,6.5
       parent: 1
 - proto: CMTelecomServer
   entities:
@@ -36571,7 +36583,7 @@ entities:
       pos: 37.5,20.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -31186.355
+      secondsUntilStateChange: -31883.473
       state: Closing
     - type: DeviceNetwork
       deviceLists:
@@ -49503,6 +49515,32 @@ entities:
     - type: Transform
       pos: 0.5,3.5
       parent: 58
+- proto: RMCFlagCarriableUN
+  entities:
+  - uid: 3382
+    components:
+    - type: Transform
+      anchored: True
+      pos: 29.5,-2.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+      bodyType: Static
+    - type: SpriteSetRenderOrder
+      offset: 0,0.5
+- proto: RMCFlagCarriableUNMC
+  entities:
+  - uid: 3381
+    components:
+    - type: Transform
+      anchored: True
+      pos: 22.5,-2.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+      bodyType: Static
+    - type: SpriteSetRenderOrder
+      offset: 0,0.5
 - proto: RMCFuelPump
   entities:
   - uid: 6159
@@ -50124,6 +50162,33 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: RMCRecharger
+  entities:
+  - uid: 3385
+    components:
+    - type: Transform
+      pos: 52.5,5.5
+      parent: 1
+  - uid: 3388
+    components:
+    - type: Transform
+      pos: -21.5,-4.5
+      parent: 1
+  - uid: 3441
+    components:
+    - type: Transform
+      pos: -20.5,-4.5
+      parent: 1
+  - uid: 3446
+    components:
+    - type: Transform
+      pos: -36.5,8.5
+      parent: 1
+  - uid: 3448
+    components:
+    - type: Transform
+      pos: -56.5,3.5
+      parent: 1
 - proto: RMCRotaryPhone
   entities:
   - uid: 6227
