@@ -393,6 +393,7 @@
 - type: tile
   parent: CMPlanetBase
   id: CMPlanetCorsatSquare
+  isSubfloor: false # CCM14 add
   name: corsat squares
   sprite: /Textures/_RMC14/Tiles/planet/corsat/squares.png
   footstepSounds:
@@ -411,6 +412,7 @@
 - type: tile
   parent: CMPlanetBase
   id: CMPlanetCorsatPlate
+  isSubfloor: false # CCM14 add
   name: corsat plate
   sprite: /Textures/_RMC14/Tiles/planet/corsat/plate.png
   footstepSounds:
