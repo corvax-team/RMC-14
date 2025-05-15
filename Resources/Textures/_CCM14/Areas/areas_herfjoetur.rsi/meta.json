@@ -1,0 +1,128 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "By varttist (discord)",
+    "size": {
+      "x": 32,
+      "y": 32
+    },
+    "states": [
+      {
+        "name": "bridge"
+      },
+      {
+        "name": "comqu"
+      },
+      {
+        "name": "io"
+      },
+      {
+        "name": "tcomms"
+      },
+      {
+        "name": "combrif"
+      },
+      {
+        "name": "bridge_a"
+      },
+      {
+        "name": "bridge_b"
+      },
+      {
+        "name": "brif"
+      },
+      {
+        "name": "lz1"
+      },
+      {
+        "name": "lz2"
+      },
+      {
+        "name": "centhall"
+      },
+      {
+        "name": "serv"
+      },
+      {
+        "name": "pilots"
+      },
+      {
+        "name": "brighall"
+      },
+      {
+        "name": "brigmain"
+      },
+      {
+        "name": "briginner"
+      },
+      {
+        "name": "brigprison"
+      },
+      {
+        "name": "medhall"
+      },
+      {
+        "name": "medcham"
+      },
+      {
+        "name": "medchem"
+      },
+      {
+        "name": "medsur"
+      },
+      {
+        "name": "medinner"
+      },
+      {
+        "name": "medmorg"
+      },
+      {
+        "name": "cargohall"
+      },
+      {
+        "name": "cargostor"
+      },
+      {
+        "name": "evac"
+      },
+      {
+        "name": "ogun"
+      },
+      {
+        "name": "alpha1"
+      },
+      {
+        "name": "alpha2"
+      },
+      {
+        "name": "bravo1"
+      },
+      {
+        "name": "bravo2"
+      },
+      {
+        "name": "enghall"
+      },
+      {
+        "name": "engmain"
+      },
+      {
+        "name": "engenergy"
+      },
+      {
+        "name": "engatmos"
+      },
+      {
+        "name": "tech1"
+      },
+      {
+        "name": "tech2"
+      },
+      {
+        "name": "tech3"
+      },
+      {
+        "name": "tech4"
+      }
+    ]
+  }

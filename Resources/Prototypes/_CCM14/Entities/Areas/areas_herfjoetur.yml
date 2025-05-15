@@ -1,0 +1,586 @@
+- type: entity
+  parent:
+  - RMCAreaProtectionMetal
+  - RMCAreaBase
+  id: CCMAreaHerfjoetur
+  suffix: Herfjoetur Area
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas_herfjoetur.rsi
+    state: bridge
+  - type: Area
+    powerNet: Herfjoetur
+    hijackEvacuationArea: false
+    hijackEvacuationWeight: 0
+    hijackEvacuationType: None
+  - type: IntelRescueSurvivorArea
+
+#
+# Command
+#
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturCommandServer
+  name: Server room
+  components:
+  - type: Sprite
+    state: tcomms
+
+# SEA, EO, SO
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturCommandQuarters
+  name: Command Quarters
+  components:
+  - type: Area
+    minimapColor: "#2d49ebed"
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: comqu
+
+# IO
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturCommandIO
+  name: IO Room
+  components:
+  - type: Sprite
+    state: io
+
+# Bridge
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturCommandBridge
+  name: Ship's bridge
+  components:
+  - type: Sprite
+    state: bridge
+
+# Bridge Hall A
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturCommandBridgeHallA
+  name: Bridge hall A
+  components:
+  - type: Sprite
+    state: bridge_a
+
+# Bridge Hall B
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturCommandBridgeHallB
+  name: Bridge hall B
+  components:
+  - type: Sprite
+    state: bridge_b
+
+# Command brif room
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturCommandBriefingRoom
+  name: Command briefing room
+  components:
+  - type: Sprite
+    state: combrif
+
+#
+# General
+#
+
+# Brif room
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturGeneralBriefingRoom
+  name: General briefing room
+  components:
+  - type: Sprite
+    state: brif
+
+# LZ I
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturGeneralLZI
+  name: Landing Zone I
+  components:
+  - type: Sprite
+    state: lz1
+
+# LZ II
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturGeneralLZII
+  name: Landing Zone II
+  components:
+  - type: Sprite
+    state: lz2
+
+# Central hall
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturGeneralCentralHall
+  name: Central hall
+  components:
+  - type: Sprite
+    state: centhall
+
+#
+# Brig
+#
+
+# Brig's hallway
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturBrigHallway
+  name: Brig's hallway
+  components:
+  - type: Sprite
+    state: brighall
+
+# Brig's main hall
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturBrigMainHall
+  name: Brig's main hall
+  components:
+  - type: Sprite
+    state: brigmain
+
+# Brig's inner hall
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturBrigInnerHall
+  name: Brig's inner hall
+  components:
+  - type: Sprite
+    state: briginner
+
+# Brig's prison
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturBrigPrison
+  name: Brig's prison
+  components:
+  - type: Sprite
+    state: brigprison
+
+#
+# Medbay
+#
+
+# Medbay's hall
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturMedbayHall
+  name: Medbay's hall
+  components:
+  - type: Sprite
+    state: medhall
+
+# Medbay's chambers
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturMedbayChambers
+  name: Medbay's chambers
+  components:
+  - type: Sprite
+    state: medcham
+
+# Medbay's chemistry
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturMedbayChemistry
+  name: Medbay's chemistry
+  components:
+  - type: Sprite
+    state: medchem
+
+# Medbay's surgery
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturMedbaySurgery
+  name: Medbay's surgery
+  components:
+  - type: Sprite
+    state: medsur
+
+# Medbay's inner hall
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturMedbayInnerHall
+  name: Medbay's inner hall
+  components:
+  - type: Sprite
+    state: medinner
+
+# Medbay's morgue
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturMedbayMorgue
+  name: Medbay's morgue
+  components:
+  - type: Sprite
+    state: medmorg
+
+#
+# Cargo
+#
+
+# Cargo's hall
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturCargoHall
+  name: Cargo's hall
+  components:
+  - type: Sprite
+    state: cargohall
+
+# Cargo's storage
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturCargoStorage
+  name: Cargo's storage
+  components:
+  - type: Sprite
+    state: cargostor
+
+#
+# Alpha
+#
+
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturAlpha1
+  name: Alpha staging area
+  components:
+  - type: Sprite
+    state: alpha1
+
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturAlpha2
+  name: Alpha staging area
+  components:
+  - type: Sprite
+    state: alpha2
+
+#
+# Bravo
+#
+
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturBravo1
+  name: Bravo staging area
+  components:
+  - type: Sprite
+    state: bravo1
+
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturBravo2
+  name: Bravo staging area
+  components:
+  - type: Sprite
+    state: bravo2
+
+#
+# Engineering
+#
+
+# Engineering hallway
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturEngineeringHallway
+  name: Engineering hallway
+  components:
+  - type: Sprite
+    state: enghall
+
+# Engineering main hall
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturEngineeringMainHall
+  name: Engineering hallway
+  components:
+  - type: Sprite
+    state: engmain
+
+# Engineering energy area
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturEngineeringEnergyArea
+  name: Engineering energy area
+  components:
+  - type: Sprite
+    state: engenergy
+  - type: Area
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.2
+    hijackEvacuationType: Add
+
+# Engineering atmos
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturEngineeringAtmos
+  name: Engineering atmos
+  components:
+  - type: Sprite
+    state: engatmos
+
+#
+# Technical tunnels
+#
+
+# Alpha
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturTechnicalTunnelsAplhaA
+  name: "Technical tunnels: alpha A"
+  components:
+  - type: Sprite
+    state: tech1
+
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturTechnicalTunnelsAplhaB
+  name: "Technical tunnels: alpha B"
+  components:
+  - type: Sprite
+    state: tech2
+
+# Bravo
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturTechnicalTunnelsBravoA
+  name: "Technical tunnels: bravo A"
+  components:
+  - type: Sprite
+    state: tech1
+
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturTechnicalTunnelsBravoB
+  name: "Technical tunnels: bravo B"
+  components:
+  - type: Sprite
+    state: tech2
+
+# Atmos
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturTechnicalTunnelsAtmos
+  name: "Technical tunnels: atmos"
+  components:
+  - type: Sprite
+    state: tech1
+
+# Recreational area
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturTechnicalTunnelsRecreationalArea
+  name: "Technical tunnels: recreational area"
+  components:
+  - type: Sprite
+    state: tech1
+
+# Orbital gun
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturTechnicalTunnelsOrbitalGun
+  name: "Technical tunnels: orbital gun"
+  components:
+  - type: Sprite
+    state: tech1
+
+# Evacuation
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturTechnicalTunnelsEvacuation
+  name: "Technical tunnels: evacuation"
+  components:
+  - type: Sprite
+    state: tech1
+
+# Right wing
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturTechnicalTunnelsRightWingA
+  name: "Technical tunnels: right wing A"
+  components:
+  - type: Sprite
+    state: tech1
+
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturTechnicalTunnelsRightWingB
+  name: "Technical tunnels: right wing B"
+  components:
+  - type: Sprite
+    state: tech2
+
+# Left wing
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturTechnicalTunnelsLeftWingA
+  name: "Technical tunnels: left wing A"
+  components:
+  - type: Sprite
+    state: tech1
+
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturTechnicalTunnelsLeftWingB
+  name: "Technical tunnels: left wing B"
+  components:
+  - type: Sprite
+    state: tech2
+
+#
+# Pumps
+#
+
+# Right wing
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturPumpRightWing
+  name: "Pump: right wing"
+  components:
+  - type: Sprite
+    state: tech3
+  - type: Area
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.1
+    hijackEvacuationType: Add
+
+# Left wing
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturPumpLeftWing
+  name: "Pump: left wing"
+  components:
+  - type: Sprite
+    state: tech3
+  - type: Area
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.1
+    hijackEvacuationType: Add
+
+# Alpha
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturPumpAlpha
+  name: "Pump: alpha"
+  components:
+  - type: Sprite
+    state: tech3
+  - type: Area
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.1
+    hijackEvacuationType: Add
+
+# Bravo
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturPumpBravo
+  name: "Pump: bravo"
+  components:
+  - type: Sprite
+    state: tech3
+  - type: Area
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.1
+    hijackEvacuationType: Add
+
+#
+# Other
+#
+
+# Pilots rooms
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturPilotsRooms
+  name: Pilots' rooms
+  components:
+  - type: Sprite
+    state: pilots
+
+# Service
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturService
+  name: Service
+  components:
+  - type: Sprite
+    state: serv
+
+# Evacuation hall
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturEvacuationHall
+  name: Evacuation hall
+  components:
+  - type: Sprite
+    state: evac
+
+# Orbital gun hall
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturOrbitalGunHall
+  name: Orbital gun hall
+  components:
+  - type: Sprite
+    state: ogun
+
+# Shooting range
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturShootingRange
+  name: Shooting range
+  components:
+  - type: Sprite
+    state: ogun
+
+# Training hall
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturTrainingHall
+  name: Training hall
+  components:
+  - type: Sprite
+    state: serv
+
+# Pool
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturPool
+  name: Pool
+  components:
+  - type: Sprite
+    state: evac
+
+# Toilets
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturToilets
+  name: Toilets
+  components:
+  - type: Sprite
+    state: serv
+
+# Recreation area (library, cleaner, reporter, tools)
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturRecreationArea
+  name: Recreation area
+  components:
+  - type: Sprite
+    state: evac
+
+# Self-destruct system
+- type: entity
+  parent: CCMAreaHerfjoetur
+  id: CCMAreaHerfjoeturBombArea
+  name: Self-destruct system (Bomb)
+  components:
+  - type: Sprite
+    state: ogun
