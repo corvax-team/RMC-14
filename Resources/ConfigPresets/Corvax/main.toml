@@ -65,6 +65,9 @@ time = 20.0
 [viewport]
 maximum_width = 26
 
+[movement]
+mob_pushing = true
+
 [infolinks]
 discord = "https://discord.gg/VWJZFUWgRc"
 wiki = "https://station14.ru/wiki/Портал:Colonial_Marines"
