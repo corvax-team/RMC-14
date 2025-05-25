@@ -1,5 +1,5 @@
 chat-radio-marine-highcommand = Верховное командование ККМП
-chat-radio-marine-common = Альмайер
+chat-radio-marine-common = Общий
 chat-radio-marine-command = Команд
 chat-radio-marine-medical = Мед
 chat-radio-marine-engineer = Инж
