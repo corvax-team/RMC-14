@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 248.0.3
+  engineVersion: 248.0.3-source-gen-debug
   forkId: ""
   forkVersion: ""
-  time: 03/31/2025 16:53:34
-  entityCount: 193
+  time: 05/25/2025 11:12:53
+  entityCount: 194
 maps: []
 grids:
 - 1
@@ -75,6 +75,45 @@ entities:
     - type: GridAtmosphere
       version: 2
       data:
+        tiles:
+          0,0:
+            0: 32759
+          0,-1:
+            0: 29491
+          0,1:
+            0: 4215
+          -1,1:
+            0: 51447
+          0,2:
+            0: 513
+          -1,2:
+            0: 524
+          -2,0:
+            0: 2176
+          -1,0:
+            0: 30583
+          -1,-1:
+            0: 65262
+          0,-2:
+            0: 13104
+          -1,-2:
+            0: 61152
+        uniqueMixes:
+        - volume: 2500
+          temperature: 293.15
+          moles:
+          - 21.824879
+          - 82.10312
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
@@ -199,7 +238,7 @@ entities:
   - uid: 6
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: -4.5,2.5
       parent: 1
   - uid: 7
@@ -211,7 +250,7 @@ entities:
   - uid: 10
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 1.5707963267948966 rad
       pos: -4.5,1.5
       parent: 1
 - proto: CMNormandyWall1
@@ -1280,16 +1319,24 @@ entities:
   - uid: 90
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 3,4.5
+      rot: 1.5707963267948966 rad
+      pos: -2.5,-3.5
       parent: 1
     - type: Fixtures
       fixtures: {}
   - uid: 191
     components:
     - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,4.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 194
+    components:
+    - type: Transform
       rot: 1.5707963267948966 rad
-      pos: -3,-3.5
+      pos: -3.5,4.5
       parent: 1
     - type: Fixtures
       fixtures: {}
