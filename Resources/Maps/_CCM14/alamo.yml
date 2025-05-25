@@ -2,9 +2,9 @@ meta:
   format: 7
   category: Grid
   engineVersion: 248.0.3-source-gen-debug
-  forkId: colonialmarines
-  forkVersion: 5c46de81e461bd9da9b0199897dec7890b7408ac
-  time: 05/02/2025 10:31:50
+  forkId: ""
+  forkVersion: ""
+  time: 05/25/2025 10:40:19
   entityCount: 194
 maps: []
 grids:
@@ -75,6 +75,45 @@ entities:
     - type: GridAtmosphere
       version: 2
       data:
+        tiles:
+          0,0:
+            0: 32759
+          0,-1:
+            0: 29491
+          0,1:
+            0: 4215
+          -1,1:
+            0: 51447
+          0,2:
+            0: 513
+          -1,2:
+            0: 524
+          -2,0:
+            0: 2176
+          -1,0:
+            0: 30583
+          -1,-1:
+            0: 65262
+          0,-2:
+            0: 13104
+          -1,-2:
+            0: 61152
+        uniqueMixes:
+        - volume: 2500
+          temperature: 293.15
+          moles:
+          - 21.824879
+          - 82.10312
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
