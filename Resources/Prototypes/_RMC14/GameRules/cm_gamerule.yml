@@ -6,3 +6,6 @@
   - type: GameRule
     minPlayers: 1
   - type: CMDistressSignalRule
+    squadIds: # CCM14 Squads
+    - SquadAlpha
+    - SquadBravo
