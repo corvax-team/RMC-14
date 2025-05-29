@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f7b9367cb5c083a8c052a40dece9417031e28ffe/icons/obj/structures/machinery/motion_sensor_v2.dmi",
+  "copyright": "by varttist (discord)",
   "size": {
     "x": 64,
     "y": 160
@@ -14,9 +14,9 @@
       "name": "sensor_",
       "delays": [
         [
-          0.1,
           0.5,
-          5.4
+          0.5,
+          3.0
         ]
       ]
     },
