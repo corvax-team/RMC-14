@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 251.0.1-source-gen-debug
+  engineVersion: 251.0.1-fixtures-fix
   forkId: ""
   forkVersion: ""
-  time: 05/23/2025 10:43:09
-  entityCount: 34079
+  time: 05/29/2025 17:59:57
+  entityCount: 34088
 maps:
 - 1
 grids:
@@ -13115,7 +13115,8 @@ entities:
             0: 61439
             2: 4096
           14,-42:
-            0: 65535
+            0: 32767
+            2: 32768
           14,-45:
             0: 65535
           15,-44:
@@ -62036,6 +62037,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: 109.5,-88.5
       parent: 1
+  - uid: 31369
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 59.5,-164.5
+      parent: 1
 - proto: Chair
   entities:
   - uid: 471
@@ -63453,14 +63460,8 @@ entities:
   - uid: 703
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 58.5,-19.5
-      parent: 1
-  - uid: 704
-    components:
-    - type: Transform
       rot: 3.141592653589793 rad
-      pos: 58.5,-20.5
+      pos: 58.5,-22.5
       parent: 1
   - uid: 705
     components:
@@ -65152,6 +65153,36 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 111.5,-167.5
+      parent: 1
+  - uid: 31733
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 57.5,-22.5
+      parent: 1
+  - uid: 34080
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 56.5,-22.5
+      parent: 1
+  - uid: 34081
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 55.5,-21.5
+      parent: 1
+  - uid: 34082
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 55.5,-20.5
+      parent: 1
+  - uid: 34083
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 59.5,-21.5
       parent: 1
 - proto: CMBedsheetGray
   entities:
@@ -72833,6 +72864,12 @@ entities:
     components:
     - type: Transform
       pos: 84.5,-123.5
+      parent: 1
+  - uid: 34086
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 61.5,-46.5
       parent: 1
 - proto: CMToiletEmpty
   entities:
@@ -220495,8 +220532,8 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 17
           - 19
+          - 17
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -220680,11 +220717,6 @@ entities:
     components:
     - type: Transform
       pos: 99.66829,-170.92982
-      parent: 1
-  - uid: 31369
-    components:
-    - type: Transform
-      pos: 59.5,-164.5
       parent: 1
   - uid: 31370
     components:
@@ -221149,6 +221181,28 @@ entities:
           showEnts: False
           occludes: True
           ent: null
+- proto: RMCExplosivePlastic
+  entities:
+  - uid: 31812
+    components:
+    - type: Transform
+      pos: 40.630367,-144.45586
+      parent: 1
+  - uid: 31813
+    components:
+    - type: Transform
+      pos: 40.411617,-144.25793
+      parent: 1
+  - uid: 31814
+    components:
+    - type: Transform
+      pos: 157.34631,-163.36307
+      parent: 1
+  - uid: 31815
+    components:
+    - type: Transform
+      pos: 166.32236,-172.43631
+      parent: 1
 - proto: RMCFlagCarriableUNMC
   entities:
   - uid: 31428
@@ -223028,6 +223082,32 @@ entities:
       rot: 3.141592653589793 rad
       pos: 56,-75
       parent: 1
+- proto: RMCRecharger
+  entities:
+  - uid: 34084
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 102.5,-181.5
+      parent: 1
+  - uid: 34085
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 75.5,-120.5
+      parent: 1
+  - uid: 34087
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 61.5,-46.5
+      parent: 1
+  - uid: 34088
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 29.5,-7.5
+      parent: 1
 - proto: RMCRock
   entities:
   - uid: 31728
@@ -223059,10 +223139,10 @@ entities:
       parent: 1
 - proto: RMCSensorTower
   entities:
-  - uid: 31733
+  - uid: 704
     components:
     - type: Transform
-      pos: 59.5,-19.5
+      pos: 57.5,-20.5
       parent: 1
 - proto: RMCSmallFloodlight
   entities:
@@ -224031,28 +224111,6 @@ entities:
     components:
     - type: Transform
       pos: 48.488686,-83.87438
-      parent: 1
-- proto: SeismicCharge
-  entities:
-  - uid: 31812
-    components:
-    - type: Transform
-      pos: 40.660305,-144.46478
-      parent: 1
-  - uid: 31813
-    components:
-    - type: Transform
-      pos: 40.367203,-144.22394
-      parent: 1
-  - uid: 31814
-    components:
-    - type: Transform
-      pos: 157.38615,-163.43166
-      parent: 1
-  - uid: 31815
-    components:
-    - type: Transform
-      pos: 166.41473,-172.4614
       parent: 1
 - proto: ShardCrystalCyan
   entities:
