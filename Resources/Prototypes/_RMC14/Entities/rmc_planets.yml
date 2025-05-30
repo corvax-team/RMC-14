@@ -6,6 +6,7 @@
     map: /Maps/_RMC14/lv624.yml
     camouflage: Jungle
     announcement: "An automated distress signal has been received from the archaeological site of Lazarus Landing, on the border world of LV-624. A response team from the UNS Almayer will be dispatched shortly to investigate."
+    minPlayers: 30 # CCM14-mappool
 
 - type: entity
   id: RMCPlanetSolaris
@@ -15,6 +16,7 @@
     map: /Maps/_RMC14/solaris.yml
     camouflage: Desert
     announcement: "Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada."
+    minPlayers: 45 # CCM14-mappool
 
 - type: entity
   id: RMCPlanetShiva
@@ -24,6 +26,7 @@
     map: /Maps/_RMC14/shiva.yml
     camouflage: Snow
     announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    minPlayers: 90 # CCM14-mappool
 
 - type: entity
   id: RMCPlanetFiorina
@@ -32,7 +35,7 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/prison.yml
     camouflage: Classic
-    minPlayers: 130
+    minPlayers: 90 # CCM14-mappool
     announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
 
 - type: entity
@@ -44,6 +47,7 @@
     camouflage: Desert
     minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
+    minPlayers: 90 # CCM14-mappool
 
 - type: entity
   id: RMCPlanetVaradero
@@ -61,6 +65,7 @@
       Telecommunications Array: Repairs required
 
       No further information available at this time."
+    minPlayers: 45 # CCM14-mappool
 
 - type: entity
   id: RMCPlanetKutjevo
@@ -70,6 +75,7 @@
     map: /Maps/_RMC14/kutjevo.yml
     camouflage: Desert
     announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
+    minPlayers: 30 # CCM14-mappool
 
 - type: entity
   id: RMCPlanetChances
@@ -98,6 +104,7 @@
       CMSurvivorDoctor: RMCSurvivorForeconBase
       CMSurvivorEngineer: RMCSurvivorForeconBase
       CMSurvivorSecurity: RMCSurvivorForeconBase
+    minPlayers: 90 # CCM14-mappool
 
 - type: entity
   id: RMCPlanetHybrisa
@@ -107,4 +114,4 @@
     map: /Maps/_RMC14/hybrisa.yml
     camouflage: Urban
     announcement: "An automated distress signal has been received from the Weston-Yamada colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce. Recently fully acquired from the TSE, this former colony is now a key asset for Weston-Yamada, with a sprawling urban center housing thousands of residents and numerous smaller outer colonies under its control. The UNS Almayer has been dispatched to investigate the situation."
-    minPlayers: 130
+    minPlayers: 90 # CCM14-mappool
