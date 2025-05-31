@@ -135,11 +135,13 @@
 - type: stack
   id: CMSandbagEmpty
   name: empty sandbags
+  icon: { sprite: _RMC14/Objects/Misc/sandbags.rsi, state: sandbag_stack } # CCM add
   spawn: CMSandbagEmpty
   maxCount: 50
 
 - type: stack
   id: CMSandbagFull
-  name: empty sandbags
+  name: sandbags # CCM edit
+  icon: { sprite: _RMC14/Objects/Misc/sandbags.rsi, state: sandbag_pile } # CCM add
   spawn: CMSandbagFull
   maxCount: 50

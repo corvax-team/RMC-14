@@ -30,3 +30,6 @@
   - type: EntrenchingTool
   - type: XenoTunnelFiller
   - type: Shovel
+  - type: Tool # CCM14 add
+    qualities:
+      - CCMDigging

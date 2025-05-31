@@ -1,0 +1,6 @@
+- type: tool
+  id: CCMDigging
+  name: tool-quality-digging-name
+  toolName: tool-quality-digging-tool-name
+  spawn: Shovel
+  icon: { sprite: _RMC14/Objects/Tools/etool.rsi, state: etool }
