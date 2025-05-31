@@ -58,7 +58,7 @@
   - type: ReceiverXenoClaws
     maxHealth: 800
     minimumClawStrength: Normal
-    hitsToDestroy: 10
+    hitsToDestroy: 15
   - type: Construction
     graph: CCMGabion
     node: gabion
