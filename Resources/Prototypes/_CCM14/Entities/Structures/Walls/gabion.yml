@@ -70,7 +70,7 @@
   description: The frame of a quick-erect fortification. Fill it with sand bags to make it stronger.
   components:
   - type: Sprite
-    sprite: _CCM14/Structures/Walls/gabion.rsi # TODO поменять текстуру
+    sprite: _CCM14/Structures/Walls/gabion_empty.rsi
     state: full
   - type: Destructible
     thresholds:
