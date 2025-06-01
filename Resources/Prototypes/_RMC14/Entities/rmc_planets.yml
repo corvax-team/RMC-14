@@ -45,7 +45,6 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/trijent.yml
     camouflage: Desert
-    minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
     minPlayers: 90 # CCM14-mappool
 
