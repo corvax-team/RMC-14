@@ -90,6 +90,28 @@
   - type: Sprite
     state: david
 
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidCommandCommandingofficer
+  name: Commanding officer's quarters
+  components:
+  - type: Area
+    minimapColor: "#2da289ed"
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: officerstudy
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidCommandliaisonquarters
+  name: Corporate liaison quarters
+  components:
+  - type: Area
+    minimapColor: "#2da289ed"
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: officerstudy
+
 # Инженеры
 - type: entity
   parent: CCMAreaDavid
@@ -101,7 +123,7 @@
   - type: Area
     minimapColor: '#C19504E7'
   - type: IntelRescueSurvivorArea
-    
+
 - type: entity
   parent: CCMAreaDavid
   id: CCMAreaDavidEngineeringMaintenanceRooms
@@ -126,6 +148,15 @@
   parent: CCMAreaDavidShipboard
   id: CCMAreaDavidBrid
   name: Brig
+  components:
+  - type: Sprite
+    state: brig
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavidShipboard
+  id: CCMAreaDavidBridsecond
+  name: Brig - Second floor
   components:
   - type: Sprite
     state: brig
@@ -178,6 +209,28 @@
   - type: IntelRescueSurvivorArea
   - type: Sprite
     state: hangar
+  - type: Area
+    minimapColor: "#c7701fed"
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidHallwaysSecondfloor
+  name: Corridors - Second floor
+  components:
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: hangar
+  - type: Area
+    minimapColor: "#c7701fed"
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidHallwaysCore
+  name: David - Core
+  components:
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: tcomms
   - type: Area
     minimapColor: "#c7701fed"
 
@@ -324,7 +377,7 @@
   id: CCMAreaDavidSquads
   components:
   - type: IntelRescueSurvivorArea
-  
+
 - type: entity
   parent: CCMAreaDavidSquads
   id: CCMAreaDavidSquadsAlpha
@@ -412,6 +465,8 @@
     hijackEvacuationType: Add
   - type: IntelRescueSurvivorArea
 
+###
+
 - type: entity
   parent: CCMAreaDavid
   id: CCMAreaDavidEngineeringFusionReactor
@@ -419,6 +474,34 @@
   components:
   - type: Sprite
     state: coreroom
+  - type: Area
+    minimapColor: '#C19504E7'
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.3
+    hijackEvacuationType: Add
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidEngineeringSterngroundfloor
+  name: Fuel pump - Stern ground floor
+  components:
+  - type: Sprite
+    state: lifeboat_pump
+  - type: Area
+    minimapColor: '#C19504E7'
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.2
+    hijackEvacuationType: Add
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidEngineeringSecondfloorpump
+  name: Fuel pump - Second floor
+  components:
+  - type: Sprite
+    state: lifeboat_pump
   - type: Area
     minimapColor: '#C19504E7'
     hijackEvacuationArea: true

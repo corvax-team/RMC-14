@@ -21,7 +21,7 @@
             # Military Police
             CMChiefMP: [1, 1]
             CMMilitaryWarden: [1, 1]
-            CMMilitaryPolice: [1, 1]
+            CMMilitaryPolice: [2, 2]
             # Auxiliary
 #            CMAuxiliarySupportOfficer: [1, 1]
             CMIntelOfficer: [2, 2]
