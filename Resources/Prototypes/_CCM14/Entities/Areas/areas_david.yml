@@ -390,6 +390,16 @@
 
 - type: entity
   parent: CCMAreaDavidSquads
+  id: CCMAreaDavidSquadsFoxtrot
+  name: Foxtrot squad
+  components:
+  - type: Sprite
+    state: yellow
+  - type: Area
+    minimapColor: "#dd1717ec"
+
+- type: entity
+  parent: CCMAreaDavidSquads
   id: CCMAreaDavidSquadsBravo
   name: Bravo squad
   components:
