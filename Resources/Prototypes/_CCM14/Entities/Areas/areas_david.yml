@@ -13,6 +13,8 @@
     hijackEvacuationArea: false
     hijackEvacuationWeight: 0
     hijackEvacuationType: None
+  - type: IntelRecoverCorpsesArea
+  - type: IntelRescueSurvivorArea
 
 # Командование
 - type: entity
@@ -89,6 +91,7 @@
   - type: IntelRescueSurvivorArea
   - type: Sprite
     state: david
+  - type: IntelRecoverCorpsesArea
 
 - type: entity
   parent: CCMAreaDavid
@@ -369,6 +372,7 @@
   - type: Area
     minimapColor: "#bf3da9ed"
   - type: IntelRescueSurvivorArea
+  - type: IntelRecoverCorpsesArea
 
 # Отряды (в т.ч. поставки)
 - type: entity
