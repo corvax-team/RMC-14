@@ -54904,7 +54904,7 @@ entities:
     - type: Transform
       pos: -86.50977,15.53576
       parent: 1
-- proto: ClothingHeadHatWelding
+- proto: RMCHelmetWelding
   entities:
   - uid: 38
     components:

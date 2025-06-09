@@ -62053,7 +62053,7 @@ entities:
     - type: Transform
       pos: 52.5,-183.5
       parent: 1
-- proto: ClothingHeadHatWelding
+- proto: RMCHelmetWelding
   entities:
   - uid: 90
     components:

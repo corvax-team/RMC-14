@@ -40962,7 +40962,7 @@ entities:
     - type: Transform
       pos: 18.934875,-31.383087
       parent: 1
-- proto: ClothingHeadHatWelding
+- proto: RMCHelmetWelding
   entities:
   - uid: 52
     components:

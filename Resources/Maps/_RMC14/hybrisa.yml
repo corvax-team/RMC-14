@@ -73166,7 +73166,7 @@ entities:
     - type: Transform
       pos: -168.80145,-84.35434
       parent: 1
-- proto: ClothingHeadHatWelding
+- proto: RMCHelmetWelding
   entities:
   - uid: 749
     components:

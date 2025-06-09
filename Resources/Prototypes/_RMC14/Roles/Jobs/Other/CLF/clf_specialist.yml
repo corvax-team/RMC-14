@@ -1,87 +1,100 @@
 ﻿- type: job
   parent: CMJobBase
-  id: RMCCLFSoldier
-  name: rmc-clf-soldier
+  id: RMCCLFSpecialist
+  name: rmc-clf-specialist
   description: rmc-ghost-role-information-clf-description
-  playTimeTracker: CMJobCLFSoldier
+  playTimeTracker: RMCJobCLFSpecialist
   ranks:
     RMCRankCLFRebel: [ ]
-  startingGear: RMCGearCLFSoldier
-  icon: RMCJobIconCLFSoldier
+  startingGear: RMCGearCLFSpecialist
+  icon: RMCJobIconCLFSpecialist
   joinNotifyCrew: false
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
-        RMCSkillFirearms: 1
-        RMCSkillMeleeWeapons: 1
-        RMCSkillPolice: 2
-        RMCSkillFireman: 1
-        RMCSkillConstruction: 1
-        RMCSkillEngineer: 1
         RMCSkillMedical: 1
-        RMCSkillVehicles: 1
-        RMCSkillEndurance: 1
+        RMCSkillCqc: 1
+        RMCSkillEngineer: 1
+        RMCSkillLeadership: 1
+        RMCSkillEndurance: 2
+        RMCSkillMeleeWeapons: 1
         RMCSkillJtac: 1
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
     - type: NpcFactionMember
       factions:
       - CLF
     - type: JobPrefix
-      prefix: rmc-job-prefix-clf-soldier
+      prefix: rmc-job-prefix-clf-specialist
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidCLFSoldier
-  name: clf ghost role soldier
+  id: RMCRandomHumanoidCLFSpecialist
+  name: clf ghost role specialist
   suffix: Spawner, Player
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/clf_armband.rsi
     state: icon
   - type: RandomHumanoidSpawner
-    settings: RMCCLFSoldier
+    settings: RMCCLFSpecialist
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RMCCLFSoldier
+  id: RMCCLFSpecialist
   components:
   - type: GhostRole
-    name: rmc-ghost-role-clf-soldier
+    name: rmc-ghost-role-clf-specialist
     description: rmc-ghost-role-information-clf-description
     rules: rmc-ghost-role-information-clf-rules
     reregister: false
-    job: RMCCLFSoldier
+    job: RMCCLFSpecialist
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
 
 - type: startingGear
-  id: RMCGearCLFSoldier
+  id: RMCGearCLFSpecialist
   equipment:
     head: RMCArmorHelmetSecurity
     mask: RMCM5Bayonet # TODO RMC14
     ears: RMCHeadsetDistressCLF
+    eyes: RMCGlassesM4SPRBattleSight
     jumpsuit: RMCJumpsuitCLFSoldier
     neck: RMCCLFArmband
     outerClothing: RMCArmorVestNone
     gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown
-    id: RMCIDCardCLFSoldier
-    belt: RMCM276ShotgunShellLoadingRigFill # TODO RMC14
-    back: RMCWeaponShotgunHG3712
-    pocket1: RMCFlashlight
-    pocket2: RMCPouchFirstAidInjectors
+    id: RMCIDCardCLFSpecialist
+    belt: CMM77BeltFilled
+    back: RMCSatchelLightpack
+    suitstorage: RMCWeaponMar50LMG
+    pocket1: RMCPouchExplosiveFilledC4SPP
+    pocket2: RMCPouchFirstAidERT
   inhand:
-  - WeaponSMGM63 # TODO RMC14
-  - CMMagazineSMGM63 # TODO RMC14
+  - RMCWeaponLauncherM5ATL  # TODO RMC14 - Make foldable variant that goes into the bag
+  - RMCEarmuffs
+  storage:
+    back:
+    - RMCFlashlight
+    - CMFirstAidKitFilled
+    - CMCrowbar
+    - CMMRE
+    - RMCRangefinder
+    - RMCGrenadeIED
+    - RMCGrenadeIED
 
 - type: playTimeTracker
-  id: CMJobCLFSoldier
+  id: RMCJobCLFSpecialist
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconCLFSoldier
+  id: RMCJobIconCLFSpecialist
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: clf_mil
+    state: clf_spec
