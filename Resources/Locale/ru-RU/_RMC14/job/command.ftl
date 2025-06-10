@@ -15,6 +15,9 @@ cm-job-name-executive-officer = Исполнительный офицер
 cm-job-description-executive-officer = Вы являетесь заместителем командующего офицера на борту корабля, и следующим за ним по цепи командования.
 cm-job-prefix-executive-officer = ИО
 CMJobExecutiveOfficer = Исполнительный офицер
+# Special operation capable
+rmc-job-prefix-forecon-marksman = MKSMN
+rmc-job-prefix-forecon-support-tech = SPT
 # Special forces
 rmc-job-prefix-forecon = FORECON
 rmc-job-prefix-forecon-co = FORECON CO

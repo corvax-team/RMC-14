@@ -1,5 +1,6 @@
 ent-RMCCrateOpenableBase = { ent-BaseStructureDynamic }
     .desc = { ent-BaseStructureDynamic.desc }
+
 ent-RMCSecureCase = кейс для хранения
     .desc = Черный кейс для хранения.
 ent-RMCSecureCaseDouble = кейсы

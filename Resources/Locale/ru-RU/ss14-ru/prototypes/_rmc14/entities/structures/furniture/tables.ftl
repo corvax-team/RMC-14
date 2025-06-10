@@ -1,5 +1,7 @@
 ent-CMTable = стол
     .desc = Квадратная металлическая поверхность, стоящая на четырёх ножках. Сюда удобно класть вещи.
+ent-RMCLargeTable = table
+    .desc = A square metal surface resting on four legs. Useful to put stuff on.
 ent-CMTableReinforced = укреплённый стол
     .desc = Квадратная металлическая поверхность, стоящая на четырёх ножках. Эта модель оснащена боковыми панелями, что позволяет использовать её как рабочий стол.
 ent-CMTableReinforcedRequisition = { ent-CMTableReinforced }
@@ -23,3 +25,5 @@ ent-RMCTablePrison = стол
 ent-RMCTableHunter = стол
     .desc = Квадратная металлическая поверхность, стоящая на четырёх ножках. Эта модель оснащена боковыми панелями, что позволяет использовать её как рабочий стол, но не позволяет его перевернуть.
     .suffix = Охотник
+ent-RMCLargeTableBar = bar table
+    .desc = A wooden table that has seen better days. There's the stickly sensation of spilled drinks within the cracks of the wood.

@@ -1,5 +1,3 @@
-ent-RMCRandomHumanoidCLFCellCommander = clf cell commander role
-    .suffix = Role
+ent-RMCRandomHumanoidCLFCellCommander = clf ghost role cell commander
+    .suffix = Spawner, Player
     .desc = { "" }
-ent-RMCIDCardCLFCellCommander = clf cell commander's ID card
-    .desc = { ent-CMIDCardBase.desc }

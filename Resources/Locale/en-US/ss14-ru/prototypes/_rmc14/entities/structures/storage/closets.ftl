@@ -1,5 +1,7 @@
-ent-CMClosetBase = closet
+ent-CMClosetBaseUnanchored = closet
     .desc = It's a basic storage unit.
+ent-CMClosetBase = { ent-CMClosetBaseUnanchored }
+    .desc = { ent-CMClosetBaseUnanchored.desc }
 ent-RMCCabinetBase = cabinet
     .desc = Old will forever be in fashion.
 ent-RMCClosetBlack = formal closet
@@ -34,3 +36,5 @@ ent-CMClosetBioScientist = { ent-CMClosetBio }
     .desc = { ent-CMClosetBio.desc }
 ent-CMClosetAlien = strange closet
     .desc = It looks alien!
+ent-RMCClosetGoldenArrowGear = personal locker
+    .desc = An immobile storag unit.

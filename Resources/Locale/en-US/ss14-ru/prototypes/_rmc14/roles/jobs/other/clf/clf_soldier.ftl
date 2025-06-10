@@ -1,5 +1,3 @@
-ent-RMCRandomHumanoidCLFSoldier = clf soldier role
-    .suffix = Role
+ent-RMCRandomHumanoidCLFSoldier = clf ghost role soldier
+    .suffix = Spawner, Player
     .desc = { "" }
-ent-RMCIDCardCLFSoldier = clf soldier's ID card
-    .desc = { ent-CMIDCardBase.desc }

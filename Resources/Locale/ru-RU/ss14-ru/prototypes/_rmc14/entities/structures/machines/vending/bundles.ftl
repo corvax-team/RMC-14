@@ -18,5 +18,7 @@ ent-RMCVendorBundleMilitaryPoliceApparel = базовый полицейский
     .desc = Содержит визор военной полиции, заполненный пояс и шлем M10.
 ent-CMVendorBundleCrewMedicalEssentialsNurse = базовый медицинский набор
     .desc = Содержит дефибриллятор, аптечку, медицинские инструменты и фонарик.
+ent-RMCVendorBundleCrewMedicalEssentialsDoctor = essential medical set
+    .desc = Contains a defibrillator, a first-aid kit, medical tools and a flashlight.
 ent-RMCCommandingOfficerEssentialsBundle = базовый набор командующего офицера
     .desc = Содержит лазерный целеуказатель, свисток и станнер.

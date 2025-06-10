@@ -1,4 +1,6 @@
 ent-CMBeltBase = belt
     .desc = Can hold various things.
-ent-CMBeltBaseStorage = { ent-CMBeltBase }
+ent-RMCBeltBaseStorageNoVisuals = { ent-CMBeltBase }
     .desc = { ent-CMBeltBase.desc }
+ent-CMBeltBaseStorage = { ent-RMCBeltBaseStorageNoVisuals }
+    .desc = { ent-RMCBeltBaseStorageNoVisuals.desc }

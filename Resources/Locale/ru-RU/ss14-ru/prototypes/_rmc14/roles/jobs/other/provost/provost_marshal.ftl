@@ -4,3 +4,4 @@ ent-RMCSpawnerProvostMarshal = спавнер провост-маршал
 ent-RMCRandomHumanoidProvostMarshal = провост-маршал роль призрака
     .suffix = Роль, Админ, Слабое понимание закона или Низкий ранг
     .desc = { "" }
+

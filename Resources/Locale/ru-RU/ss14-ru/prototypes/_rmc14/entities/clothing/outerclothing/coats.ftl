@@ -60,5 +60,7 @@ ent-RMCProvostCommandJacketFilled = { ent-RMCProvostCommandJacket }
 ent-RMCProvostCoatMarshalFilled = { ent-RMCProvostCoatMarshal }
     .suffix = Заполненный
     .desc = { ent-RMCProvostCoatMarshal.desc }
+ent-CMUtilityVestSynth = synthetic utility vest
+    .desc = A leather utility vest worn by synthetic UNMC personnel. The vest is rather lightweight but has a few pockets for carrying small items. It is not very protective, but it is a good choice for the Synthetics who want to look stylish while working.
 ent-RMCJacketWindbreaker = green windbreaker
     .desc = A green windbreaker.

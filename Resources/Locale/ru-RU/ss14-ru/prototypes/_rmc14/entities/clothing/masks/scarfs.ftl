@@ -112,3 +112,7 @@ ent-RMCMaskNeckerchiefGreenDown = шейный платок
 ent-RMCMaskNeckerchiefSquad = отрядный шейный платок ККМП
     .suffix = НЕ МАППИТЬ
     .desc = { ent-RMCMaskNeckerchiefAlpha.desc }
+ent-RMCMaskNeckerchiefWhite = { ent-RMCMaskNeckerchiefAlpha }
+    .desc = { ent-RMCMaskNeckerchiefAlpha.desc }
+ent-RMCMaskNeckerchiefWhiteDown = neckerchief
+    .desc = { ent-RMCBaseScarfDown.desc }

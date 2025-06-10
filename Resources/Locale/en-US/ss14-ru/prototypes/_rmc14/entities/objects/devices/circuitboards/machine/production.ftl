@@ -12,3 +12,5 @@ ent-CMCircuitboardChemMaster = chem master machine board
     .desc = A machine printed circuit board for a chem master.
 ent-CMCircuitboardMicrowave = microwave machine board
     .desc = A machine printed circuit board for a microwave.
+ent-RMCArmylatheMachineCircuitboard = armylathe machine board
+    .desc = A machine printed circuit board for an armylathe

@@ -20,6 +20,9 @@ map_pool = "CCMMapPool"
 kill_crit = false
 role_time = 0
 
+[movement]
+mob_pushing = true
+
 [vote]
 restart_required_ratio = 0.85
 same_type_timeout = 300.0

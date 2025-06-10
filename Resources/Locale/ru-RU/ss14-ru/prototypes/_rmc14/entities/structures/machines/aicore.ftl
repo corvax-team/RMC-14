@@ -14,5 +14,7 @@ ent-RMCAICoreSubstrate = подложка ARES
     .desc = Подложка памяти ARES, содержащая сложные протоколы и информацию. Некоторые функции могут работать только на подложке, без участия основного операционного блока ARES.
 ent-RMCAIConsoleARES = интерфейс ARES
     .desc = Консоль, созданная для взаимодействия с ARES и обеспечивающая связь один на один.
+ent-RMCAIConsoleInterface = AI interface console
+    .desc = A large, bulky computer intended to allow the user to interface with the ship's AI.
 ent-RMCAIConsoleHERMES = контроллер обслуживания HERMES
     .desc = Консоль, созданная для облегчения работы с Средними Джо, позволяющая с лёгкостью распределять ресурсы.

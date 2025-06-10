@@ -1,5 +1,7 @@
 ent-ColMarTechFood = КолМарТех СтряпняМат
     .desc = Поставщик блюд для колониальных морских пехотинцев, содержащий стандартные военные блюда.
+ent-RMCNutriCoVendor = NutriCo AutoChef
+    .desc = An autochef food dispenser, capable of distributing food containing all the essential vitamins and nutrients anyone could ever need. Inedible-looking sludge is passed through a variety of heaters, re-shapers, and solidifiers before being artificially flavored to create something that looks and tastes mostly edible.
 ent-CMVendorBooze = АлкоМат
     .desc = Чудо техники, способное мгновенно смешать порцию именно того напитка, который вы пожелаете.
 ent-CMVendorChess = ШахматМат

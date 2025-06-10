@@ -1,3 +1,5 @@
+ent-CMClosetBaseUnanchored = closet
+    .desc = It's a basic storage unit.
 ent-CMClosetBase = шкаф
     .desc = Базовое устройство хранения.
 ent-RMCCabinetBase = шкафчик
@@ -34,3 +36,5 @@ ent-CMClosetBioScientist = { ent-CMClosetBio }
     .desc = { ent-CMClosetBio.desc }
 ent-CMClosetAlien = странный шкаф
     .desc = Выглядит чужеродно!
+ent-RMCClosetGoldenArrowGear = personal locker
+    .desc = An immobile storag unit.

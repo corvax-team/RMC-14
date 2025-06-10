@@ -1,2 +1,5 @@
 ent-RMCBible = библия
     .desc = Многократно приложите к голове.
+ent-RMCBibleHEFA = Holy texts of the High Explosive Fragmenting Anti-personnel hand grenade.
+    .desc = Praised be thee, reverend Clearsmire who has brought us into the light of the shrapnel! Sworn to the holy service of the HEFA lord are we, and while few, we are the voices of the silent many! Printed in the RESS.
+    .suffix = Filled

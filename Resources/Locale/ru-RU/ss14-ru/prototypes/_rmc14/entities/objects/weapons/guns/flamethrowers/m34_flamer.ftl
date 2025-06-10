@@ -1,5 +1,8 @@
 ent-RMCWeaponFlamer = огнемёт M34
     .desc = Огнемёт M34 зарекомендовала себя как одно из самых эффективных орудий для уничтожения мягких целей. Это оружие следует бояться и уважать, поскольку оно весьма смертоносно.
+ent-RMCWeaponFlamerUnloaded = { ent-RMCWeaponFlamer }
+    .suffix = Unloaded
+    .desc = { ent-RMCWeaponFlamer.desc }
 ent-RMCTankFlamer = огнемётный баллон
     .desc = Топливный баллон, используемый для хранения зажигательной смеси огнемёта M34. Обращайтесь с ним осторожно.
 ent-RMCCaseFlamer = кейс огнемёта M34

@@ -1,5 +1,8 @@
 ent-WeaponRifleM54CMK1 = штурмовая винтовка M54C MK1
     .desc = Устаревший вариант автомата, широко используемого в Корпусе колониальной морской пехоты. Использует безгильзовые патроны калибра 10х24 мм.
+ent-WeaponRifleM54CMK1Unloaded = { ent-WeaponRifleM54CMK1 }
+    .suffix = Unloaded
+    .desc = { ent-WeaponRifleM54CMK1.desc }
 ent-WeaponRifleM54CMK1AP = { ent-WeaponRifleM54CMK1 }
     .desc = { ent-WeaponRifleM54CMK1.desc }
 ent-CMMagazineRifleM54CMK1 = магазин M54C MK1 (10x24мм)

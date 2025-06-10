@@ -18,5 +18,7 @@ ent-RMCVendorBundleMilitaryPoliceApparel = Essential Police Set
     .desc = Contains security HUD-glasses, a filled security belt and a M10 helmet.
 ent-CMVendorBundleCrewMedicalEssentialsNurse = essential medical set
     .desc = Contains a defibrillator, a first-aid kit, medical tools and a flashlight.
+ent-RMCVendorBundleCrewMedicalEssentialsDoctor = essential medical set
+    .desc = Contains a defibrillator, a first-aid kit, medical tools and a flashlight.
 ent-RMCCommandingOfficerEssentialsBundle = Commanding Officer Essentials kit
     .desc = Contains a laser designator, whistle, and a disabler.

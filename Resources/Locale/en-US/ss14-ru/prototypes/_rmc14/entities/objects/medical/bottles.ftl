@@ -12,3 +12,5 @@ ent-CMBottleDexalin = dexalin bottle
     .desc = A small bottle. Contains dexalin - used to treat oxygen deprivation.
 ent-CMBottleInaprovaline = inaprovaline bottle
     .desc = A small bottle. Contains inaprovaline - used to stabilize patients.
+ent-CMBottleTricordrazine = tricordrazine bottle
+    .desc = A small bottle. Contains tricordrazine - A weak but catch-all medicine for treating all sorts of damage.

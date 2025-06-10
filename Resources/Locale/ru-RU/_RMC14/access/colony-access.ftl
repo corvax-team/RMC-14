@@ -6,3 +6,6 @@ cm-access-colony-brig = Колония Охранный
 cm-access-colony-medbay = Колония Медицинский
 cm-access-colony-command = Колония Командный
 rmc-access-colony-armory = Колония Оружейная
+rmc-access-tsepa = TSEPA
+rmc-access-tsepa-brig = TSEPA Brig
+rmc-access-tsepa-inspector = TSEPA Inspector

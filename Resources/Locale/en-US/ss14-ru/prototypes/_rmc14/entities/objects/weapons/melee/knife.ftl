@@ -1,10 +1,12 @@
 ent-RMCBaseMeleeWeapon = { "" }
     .desc = { "" }
 ent-RMCM5Bayonet = M5 'Night Raider' bayonet
-    .desc = The standard-issue bayonet of the Marines. You can slide this knife into your boots.
+    .desc = The standard-issue bayonet of the Marines. You can slide this knife into your boots, or attach it to the end of a rifle.
 ent-CMM11Knife = M11 throwing knife
     .desc = A military knife designed to be thrown at the enemy.
 ent-CMM2132Machete = M2132 machete
     .desc = Latest issue of the Marine Machete.
 ent-RMCCeremonialSword = ceremonial sabre
     .desc = A fancy ceremonial sabre passed down from generation to generation. Despite this, it has been very well cared for, and is in top condition.
+ent-RMCM2100Machete = M2100 "Ngájhe" machete
+    .desc = An older issue UNMC machete, never left testing. Designed in the Central African Republic. The notching made it hard to clean, and as such the UNMC refused to adopt it - despite the superior bludgeoning power offered.

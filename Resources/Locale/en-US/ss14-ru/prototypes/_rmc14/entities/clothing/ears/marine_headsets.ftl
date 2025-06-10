@@ -60,3 +60,5 @@ ent-CMHeadsetFoxtrotEngineer = marine foxtrot engineer radio headset
     .desc = This is used by the marine Foxtrot combat engineers.
 ent-CMHeadsetFoxtrotMedic = marine foxtrot corpsman radio headset
     .desc = This is used by the marine Foxtrot combat medics.
+ent-RMCHeadsetGoldenArrow = sun riders radio headset
+    .desc = This is used by the UNMC Sun Riders Platoon.

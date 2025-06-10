@@ -46,4 +46,6 @@ command-description-xenomature = Instantly matures a xeno. Applicable to the Que
 command-description-weedkiller = Runs weed killer on the current location's area. This kills all weeds and resin structures nearby.
 command-description-withxenotier = Filters entities or entity prototypes to those of a specific xenonid tier.
 command-description-spawnallmapinserts = Spawns all map inserts, with forced guaranteed spawn probability.
+command-description-forceplanetmap = Forces the next round to start with the specified planet.
 command-description-rmcresetahelptracking = Resets all data about tracked AHelp conversations on the Discord. Useful for when AHelps are not showing up on the Discord relay properly.
+command-description-hijack-trigger = Triggers hijack on the map that you are currently on.

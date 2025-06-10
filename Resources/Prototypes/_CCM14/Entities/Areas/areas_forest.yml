@@ -130,6 +130,7 @@
     medevac: true
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent:
@@ -150,6 +151,7 @@
     medevac: true
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent:
@@ -210,6 +212,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent:
@@ -251,6 +254,7 @@
     medevac: true
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent:
@@ -294,3 +298,4 @@
     supplyDrop: false
     landingZone: true
     linkedLz: dropship_lz1
+    weatherEnabled: false

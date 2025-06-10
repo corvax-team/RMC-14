@@ -18,3 +18,6 @@ ent-CMPillCanisterKelotane = таблетница келотана
 ent-CMPillCanisterTricordrazine = таблетница трикордразина
     .suffix = Трикордразин, 16
     .desc = { ent-CMPillCanister.desc }
+ent-RMCPillCanisterRussianRed = Russian red pill bottle
+    .suffix = Russian Red, 16
+    .desc = { ent-CMPillCanister.desc }

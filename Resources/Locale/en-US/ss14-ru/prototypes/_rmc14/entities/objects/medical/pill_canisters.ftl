@@ -18,3 +18,6 @@ ent-CMPillCanisterKelotane = kelotane pill bottle
 ent-CMPillCanisterTricordrazine = tricordrazine pill bottle
     .suffix = Tricordrazine, 16
     .desc = { ent-CMPillCanister.desc }
+ent-RMCPillCanisterRussianRed = Russian red pill bottle
+    .suffix = Russian Red, 16
+    .desc = { ent-CMPillCanister.desc }

@@ -1,5 +1,8 @@
 ent-CMAirlock = airlock
     .desc = { ent-CMBaseDoor.desc }
+ent-CMAirlockShuttle = { ent-CMAirlock }
+    .suffix = Shuttle
+    .desc = { ent-CMAirlock.desc }
 ent-CMAirlockCommand = command airlock
     .suffix = Command
     .desc = { ent-CMAirlock.desc }

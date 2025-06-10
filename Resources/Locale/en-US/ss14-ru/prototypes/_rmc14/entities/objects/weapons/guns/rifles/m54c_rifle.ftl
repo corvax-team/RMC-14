@@ -1,5 +1,8 @@
 ent-WeaponRifleM54C = M54C assault rifle MK2
     .desc = The standard issue rifle of the Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
+ent-WeaponRifleM54CStripped = { ent-WeaponRifleM54C }
+    .suffix = Stripped
+    .desc = { ent-WeaponRifleM54C.desc }
 ent-CMMagazineRifleM54C = M54C magazine (10x24mm)
     .desc = { ent-CMMagazineRifleBase.desc }
 ent-CMMagazineRifleM54CAP = M54C AP magazine (10x24mm)

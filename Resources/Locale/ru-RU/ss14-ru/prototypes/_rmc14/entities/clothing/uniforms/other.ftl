@@ -38,3 +38,6 @@ ent-RMCJumpsuitCivilianJanitor = janitor's jumpsuit
     .desc = It's the official uniform of the colony's janitor.
 ent-RMCJumpsuitCLFSoldier = Colonial Liberation Front uniform
     .desc = A stylish grey-green jumpsuit - standard issue for colonists. This version appears to have the symbol of the Colonial Liberation Front emblazoned in select areas.
+ent-RMCJumpsuitCLFWebbing = { ent-RMCJumpsuitCLFSoldier }
+    .suffix = Webbing
+    .desc = { ent-RMCJumpsuitCLFSoldier.desc }

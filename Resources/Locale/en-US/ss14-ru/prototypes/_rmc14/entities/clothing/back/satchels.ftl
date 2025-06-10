@@ -86,3 +86,5 @@ ent-RMCSatchelPMCMedic = { ent-CMSatchelMarineMedic }
     .desc = pmc medic combat pack
 ent-RMCSatchelTSEPA = TSP-4 police pack
     .desc = A TSEPA standard-issue Three Suns Pack MK4.
+ent-RMCSatchelMARSOC = UNMC SOF combat pack
+    .desc = A streamlined combat pack for UNMC SOF Raiders.

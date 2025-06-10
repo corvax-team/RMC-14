@@ -1,0 +1,17 @@
+ent-RMCTentBodyBase = UNMC field tent
+    .desc = A standard UNMC Tent. This one is just a general purpose version. Unfold in a suitable location for micro-FOB vibes. ComTech not included. ENTRANCE TO THE SOUTH.
+ent-RMCTentRoofBase = UNMC field tent
+    .desc = A standard UNMC Tent. This one is just a general purpose version. Unfold in a suitable location for micro-FOB vibes. ComTech not included. ENTRANCE TO THE SOUTH.
+    .suffix = Roof
+ent-RMCTentBodyStandard = { ent-RMCTentBodyBase }
+    .suffix = For Mapping Only
+    .desc = { ent-RMCTentBodyBase.desc }
+ent-RMCTentRoofStandard = { ent-RMCTentRoofBase }
+    .suffix = For Mapping Only (Roof)
+    .desc = { ent-RMCTentRoofBase.desc }
+ent-RMCTentBodyExtended = UNMC extended field tent
+    .desc = A standard UNMC Tent. This one is just an extended general purpose version. Unfold in a suitable location for mega FOB vibes. Mess Tech not included. ENTRANCE TO THE SOUTH.
+    .suffix = For Mapping Only
+ent-RMCTentRoofExtended = UNMC extended field tent
+    .desc = A standard UNMC Tent. This one is just an extended general purpose version. Unfold in a suitable location for mega FOB vibes. Mess Tech not included. ENTRANCE TO THE SOUTH.
+    .suffix = For Mapping Only (Roof)

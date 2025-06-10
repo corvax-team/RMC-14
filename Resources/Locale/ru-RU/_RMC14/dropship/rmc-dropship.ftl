@@ -35,9 +35,7 @@ rmc-dropship-weapons-target-strike =
 
 #  Вектор атаки {$vector}
 
-
 #  Смещение 0,0
-
 
 #  Компьютер наведения НЕИСПРАВЕН
 

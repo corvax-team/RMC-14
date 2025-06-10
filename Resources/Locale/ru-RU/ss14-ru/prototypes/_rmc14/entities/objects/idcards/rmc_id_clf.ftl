@@ -1,0 +1,12 @@
+ent-RMCIDCardCLFBase = { ent-CMIDCardBase }
+    .desc = { ent-CMIDCardBase.desc }
+ent-RMCIDCardCLFSoldier = clf soldier's ID card
+    .desc = { ent-RMCIDCardCLFBase.desc }
+ent-RMCIDCardCLFEngineer = clf engineer's ID card
+    .desc = { ent-RMCIDCardCLFBase.desc }
+ent-RMCIDCardCLFMedic = clf medic's ID card
+    .desc = { ent-RMCIDCardCLFBase.desc }
+ent-RMCIDCardCLFSpecialist = clf specialists's ID card
+    .desc = { ent-RMCIDCardCLFBase.desc }
+ent-RMCIDCardCLFCellCommander = clf cell commander's ID card
+    .desc = { ent-RMCIDCardCLFBase.desc }

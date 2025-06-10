@@ -6,3 +6,5 @@ ent-CMMemorialMaintainers = slab of remembrance
     .desc = A memorial to all Maintainer Team members that have retired from working on RMC-14. No mentor names are present.
 ent-CMMemorialAdmins = { ent-CMMemorialMaintainers }
     .desc = A memorial to all Admins and Moderators who have retired from RMC-14. No mentor names are present.
+ent-RMCMemorialWall = { ent-CMMemorial }
+    .desc = { ent-CMMemorial.desc }

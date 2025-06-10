@@ -26,3 +26,4 @@ chat-radio-spp-cct = СПН БоевКонт
 chat-radio-royal-marine = Royal Marine
 chat-radio-tse = Three Suns Empire
 chat-radio-hivemind = Улей
+chat-radio-marine-sun-riders = Sun Riders

@@ -8,3 +8,5 @@ ent-CMM2132Machete = мачете M2132
     .desc = Новейшее мачете колониальной морской пехоты.
 ent-RMCCeremonialSword = церемониальная сабля
     .desc = Изысканная церемониальная сабля, передававшаяся из поколения в поколение. Несмотря на это, за ней очень хорошо ухаживали, и она находится в идеальном состоянии.
+ent-RMCM2100Machete = M2100 "Ngájhe" machete
+    .desc = An older issue UNMC machete, never left testing. Designed in the Central African Republic. The notching made it hard to clean, and as such the UNMC refused to adopt it - despite the superior bludgeoning power offered.

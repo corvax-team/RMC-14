@@ -16,7 +16,7 @@
     map: /Maps/_RMC14/solaris.yml
     camouflage: Desert
     announcement: "Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada."
-    minPlayers: 45 # CCM14-mappool
+    minPlayers: 30 # CCM14-mappool
 
 - type: entity
   id: RMCPlanetShiva
@@ -26,7 +26,7 @@
     map: /Maps/_RMC14/shiva.yml
     camouflage: Snow
     announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
-    minPlayers: 90 # CCM14-mappool
+    minPlayers: 50 # CCM14-mappool
 
 - type: entity
   id: RMCPlanetFiorina
@@ -35,7 +35,7 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/prison.yml
     camouflage: Classic
-    minPlayers: 90 # CCM14-mappool
+    minPlayers: 50 # CCM14-mappool
     announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
 
 - type: entity
@@ -46,7 +46,7 @@
     map: /Maps/_RMC14/trijent.yml
     camouflage: Desert
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
-    minPlayers: 90 # CCM14-mappool
+    minPlayers: 50 # CCM14-mappool
 
 - type: entity
   id: RMCPlanetVaradero
@@ -64,7 +64,7 @@
       Telecommunications Array: Repairs required
 
       No further information available at this time."
-    minPlayers: 45 # CCM14-mappool
+    minPlayers: 35 # CCM14-mappool
 
 - type: entity
   id: RMCPlanetKutjevo
@@ -103,7 +103,7 @@
       CMSurvivorDoctor: RMCSurvivorForeconBase
       CMSurvivorEngineer: RMCSurvivorForeconBase
       CMSurvivorSecurity: RMCSurvivorForeconBase
-    minPlayers: 90 # CCM14-mappool
+    minPlayers: 70 # CCM14-mappool
 
 - type: entity
   id: RMCPlanetHybrisa

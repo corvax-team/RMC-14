@@ -12,3 +12,5 @@ ent-CMCircuitboardChemMaster = машинная плата химмастера
     .desc = Печатная плата для химмастера.
 ent-CMCircuitboardMicrowave = машинная плата микроволновки
     .desc = Печатная плата для микроволновки.
+ent-RMCArmylatheMachineCircuitboard = armylathe machine board
+    .desc = A machine printed circuit board for an armylathe

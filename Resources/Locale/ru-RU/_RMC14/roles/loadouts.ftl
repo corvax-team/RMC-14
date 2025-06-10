@@ -5,6 +5,7 @@ rmc-loadout-group-headwear = Головные уборы
 rmc-loadout-group-helmet-garbs = Шлемные аксессуары
 rmc-loadout-group-paperwork = Бюрократия
 rmc-loadout-group-plushies = Плюшки
+rmc-loadout-group-recreational = Recreational
 rmc-loadout-group-weapons = Оружие
 rmc-loadout-group-canned-drinks = Банки напитков
 rmc-loadout-group-flasks = Фляжки

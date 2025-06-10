@@ -1,5 +1,7 @@
 ent-CMIDCardStandardDogtag = жетон
     .desc = Жетон колониального морского пехотинца.
+ent-RMCInformationDogtagProp = faded information dog tag
+    .desc = A fallen marine's information dog tag. It looks battered and the name is worn out.
 ent-RMCInformationDogtag = информационный жетон
     .desc = Информационный жетон погибшего колониального морского пехотинца.
 ent-RMCDogtagProp = dog tag
@@ -15,4 +17,6 @@ ent-CMIDCardLanyard = идентификационный голо-шнурок
 ent-FactionMarine = { "" }
     .desc = { "" }
 ent-FactionSurvivor = { "" }
+    .desc = { "" }
+ent-FactionTSE = { "" }
     .desc = { "" }

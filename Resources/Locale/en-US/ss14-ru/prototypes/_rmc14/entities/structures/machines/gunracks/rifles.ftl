@@ -1,0 +1,12 @@
+ent-RMCGunRackM54CEmpty = M54C gun rack
+    .desc = AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, UNMC comissioned racks with fixed slots which only fit M54C rifles. Some say they were cheaper, and some say the main reason was marine's ability to easily break anything more complex than a tungsten ball.
+    .suffix = M54C, Empty
+ent-RMCGunRackM54CFilled = { ent-RMCGunRackM54CEmpty }
+    .suffix = M54C, Filled
+    .desc = { ent-RMCGunRackM54CEmpty.desc }
+ent-RMCGunRackM54CMk1Empty = M54C Mk1 gun rack
+    .desc = AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, UNMC comissioned racks with fixed slots which only fit M54C Mk1 rifles. Some say they were cheaper, and some say the main reason was marine's ability to easily break anything more complex than a tungsten ball.
+    .suffix = M54C Mk1, Empty
+ent-RMCGunRackM54CMk1Filled = { ent-RMCGunRackM54CMk1Empty }
+    .suffix = M54C Mk1, Filled
+    .desc = { ent-RMCGunRackM54CMk1Empty.desc }

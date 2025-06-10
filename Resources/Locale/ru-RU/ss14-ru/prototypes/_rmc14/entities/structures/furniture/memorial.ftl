@@ -6,3 +6,5 @@ ent-CMMemorialMaintainers = плита памяти
     .desc = Мемориал всем членам команды мейнтейнеров, отошедшим от работы над RMC-14. Имена менторов не указаны.
 ent-CMMemorialAdmins = { ent-CMMemorialMaintainers }
     .desc = Мемориал всем администраторам и модераторам, покинувшим RMC-14. Имена менторов не указаны.
+ent-RMCMemorialWall = { ent-CMMemorial }
+    .desc = { ent-CMMemorial.desc }

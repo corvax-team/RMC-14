@@ -265,6 +265,14 @@ ent-RMCFigurinePatronLilianaShorkGodwin = Liliana 'Shork' Godwin figurine
     .desc = SHORK GANG RISE UP!!
 ent-RMCFigurinePatronKuafuSpeedDemonLightweaver = Kuafu 'Speed Demon' Lightweaver figurine
     .desc = { ent-RMCBaseFigurinePatron.desc }
+ent-RMCFigurinePatronJackHunterDunes = Jack 'Hunter' Dunes figurine
+    .desc = This item smells of old MRE, and blood......seems like people thrown this one at their targets with all the dents on it.
+ent-RMCFigurinePatronDurganChumCarlyle = Durgan 'Chum' Carlyle figurine
+    .desc = { ent-RMCBaseFigurinePatron.desc }
+ent-RMCFigurinePatronAdrianArchangelGutierrez = Adrian 'Archangel' Gutierrez figurine
+    .desc = The Armor and looks worn and battered, You notice a faded cross on his left shoulder pad.  On the back of the helmet you see his callsign. "Archangel" In a faded red. You can almost notice a faint smile.
+ent-RMCFigurinePatronNeza = Neza figurine
+    .desc = Charlie squad till the day he dies, again.
 ent-RMCFigurinePatronNanSnowBunnyMazu = Nan 'Snow Bunny' Mazu figurine
     .desc =
         The Way of Sunlight

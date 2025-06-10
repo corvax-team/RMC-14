@@ -1,5 +1,8 @@
 ent-ColMarTechCrewSynthetic = ColMarTech Synthetic Equipment Rack
     .desc = An automated rack hooked up to a colossal storage of various equipment. Can be accessed only by synthetic units.
+ent-ColMarTechCrewSyntheticColony = ColMarTech Synthetic Equipment Rack
+    .suffix = Colony Synth Access
+    .desc = { ent-ColMarTechCrewSynthetic.desc }
 ent-ColMarTechCrewSyntheticGear = ColMarTech Synthetic Auxiliary Gear Rack
     .desc = An automated gear rack hooked up to a colossal storage of various medical and engineering supplies. Can be accessed only by synthetic units.
 ent-WeYaExperimentalToolsVendor = We-Ya Experimental Tools Vendor

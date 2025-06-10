@@ -16,3 +16,6 @@ ent-CMWindoorSecureEngineering = { ent-CMWindoorSecure }
 ent-CMWindoorSecureCommand = { ent-CMWindoorSecure }
     .suffix = Командный, Закрыто
     .desc = { ent-CMWindoorSecure.desc }
+ent-RMCWindoorSecureTSEPABrig = { ent-CMWindoorSecure }
+    .suffix = TSEPA, Brig, Locked
+    .desc = { ent-CMWindoorSecure.desc }

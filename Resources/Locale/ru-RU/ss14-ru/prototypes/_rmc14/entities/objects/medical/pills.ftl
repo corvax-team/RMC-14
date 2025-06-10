@@ -12,3 +12,5 @@ ent-CMPillKelotane = { ent-CMPill }
     .desc = { ent-CMPill.desc }
 ent-CMPillTricordrazine = { ent-CMPill }
     .desc = { ent-CMPill.desc }
+ent-RMCPillRussianRed = { ent-CMPill }
+    .desc = { ent-CMPill.desc }

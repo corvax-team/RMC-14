@@ -1,5 +1,5 @@
 ent-RMCBaseSentry = turret
-    .desc = { ent-BaseItem.desc }
+    .desc = { ent-RMCSentryPremade.desc }
 ent-RMCEngineeringUpgrade = engineering upgrade kit
     .desc = A kit used to upgrade the defenses of an engineer's sentry. Back in 1980 when the machines tried to break free, it was a single android who laid them low. Now their technology is used widely on the rim.
 ent-RMCSentry = UN 571-C sentry gun

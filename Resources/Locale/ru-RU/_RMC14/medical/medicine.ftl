@@ -30,6 +30,8 @@ reagent-name-cmimidazoline = имидазолин
 reagent-desc-cmimidazoline = Используется для лечения негенетических повреждений глаз. Обычно назначается в качестве лечения в большинстве случаев травм глаз вместо хирургического вмешательства.
 reagent-name-cmclonexadone = клонексадон
 reagent-desc-cmclonexadone = Продвинутый криогенный препарат, изготовленный на основе криоксадона. Лечит большинство видов повреждений тканей. Для правильного метаболизма температура тела пациента должна быть ниже 170 К (-103.15 ℃).
+reagent-name-rmcrussianred = Russian Red
+reagent-desc-rmcrussianred = An emergency radiation treatment. The list of potential side effects include retinal damage and unconsciousness.
 # Medical Icon Labels
 rmc-tricordazine-container-label-text = ТР
 rmc-bicaridine-container-label-text = БИ
@@ -41,4 +43,16 @@ rmc-first-aid-container-label-text = ПП
 rmc-emergency-medicine-container-label-text = АВ
 rmc-dexalin-plus-container-label-text = Д+
 rmc-epinephrine-container-label-text = ЭП
+rmc-merabic-container-label-text = MB
+rmc-russianred-container-label-text = Rr
 rmc-custom-container-label-text = { $customLabel }
+# Antidepressants
+reagent-name-rmcmethylphenidate = Methylphenidate
+reagent-desc-rmcmethylphenidate = A commonly prescribed psychostimulant that increases activity of the central nervous system. Often used to treat attention deficit hyperactivity disorder (ADHD) and narcolepsy. This drug improves performance primarily in the executive function in the prefrontal cortex (reasoning, inhibiting behaviors, organizing, problem solving, planning ect.)
+reagent-name-rmccitalopram = Citalopram
+reagent-desc-rmccitalopram = Citalopram is a drug used to treat depression, obsessive-compulsive disorder and panic disorder. It is considered safe for consumption and has been commonly available since 1998.
+reagent-name-rmcparoxetine = Paroxetine
+reagent-desc-rmcparoxetine = Very powerful antidepressant used to treat: major depressive disorder (MDD), obsessive-compulsive disorder (OCD), social anxiety disorder (SAD), panic disorder, posttraumatic stress disorder (PTSD), generalized anxiety disorder (GAD) and prenmenstrual dysphoric disorder (PMDD). Prolonged use may have side effects.
+antidepressant-effect-rmcmethylphenidate = Your mind feels focused and undivided.
+antidepressant-effect-rmccitalopram = Your mind feels stable... a little stable.
+antidepressant-effect-rmcparoxetine = Your mind feels much more stable.

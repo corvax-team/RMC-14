@@ -1,5 +1,7 @@
 ent-CMTable = table
     .desc = A square metal surface resting on four legs. Useful to put stuff on.
+ent-RMCLargeTable = table
+    .desc = A square metal surface resting on four legs. Useful to put stuff on.
 ent-CMTableReinforced = reinforced table
     .desc = A square metal surface resting on four legs. This one has side panels, making it useful as a desk.
 ent-CMTableReinforcedRequisition = { ent-CMTableReinforced }
@@ -23,3 +25,5 @@ ent-RMCTablePrison = table
 ent-RMCTableHunter = table
     .desc = A square metal surface resting on four legs. This one has side panels, making it useful as a desk, but impossible to flip.
     .suffix = Hunter
+ent-RMCLargeTableBar = bar table
+    .desc = A wooden table that has seen better days. There's the stickly sensation of spilled drinks within the cracks of the wood.

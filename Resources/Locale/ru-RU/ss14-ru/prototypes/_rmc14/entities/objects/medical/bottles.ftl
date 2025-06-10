@@ -12,3 +12,5 @@ ent-CMBottleDexalin = бутылочка дексалина
     .desc = Маленькая бутылочка. Содержит дексалин - используется для лечения кислородного голодания.
 ent-CMBottleInaprovaline = бутылочка инапровалина
     .desc = Маленькая бутылочка. Содержит инапровалин - используется для стабилизации состояния пациентов.
+ent-CMBottleTricordrazine = tricordrazine bottle
+    .desc = A small bottle. Contains tricordrazine - A weak but catch-all medicine for treating all sorts of damage.

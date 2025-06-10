@@ -14,5 +14,7 @@ ent-RMCAICoreSubstrate = ARES Substrate
     .desc = The memory substrate of ARES, containing complex protocols and information. Limited capabilities can operate on substrate alone, without the main ARES Unit operational.
 ent-RMCAIConsoleARES = ARES Interface
     .desc = A console built to interface with ARES, allowing for 1:1 communication.
+ent-RMCAIConsoleInterface = AI interface console
+    .desc = A large, bulky computer intended to allow the user to interface with the ship's AI.
 ent-RMCAIConsoleHERMES = HERMES Maintenance Controller.
     .desc = A console built to facilitate Average Joes and their operation, allowing for simple allocation of resources.

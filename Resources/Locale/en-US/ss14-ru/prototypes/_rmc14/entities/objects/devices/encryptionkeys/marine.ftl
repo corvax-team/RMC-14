@@ -16,3 +16,5 @@ ent-CMEncryptionKeySOF = sof's encryption key
     .desc = { ent-CMEncryptionKey.desc }
 ent-RMCEncryptionKeyFORECON = forecon encryption key
     .desc = { ent-CMEncryptionKey.desc }
+ent-RMCEncryptionKeySunRiders = sun riders encryption key
+    .desc = { ent-CMEncryptionKey.desc }
