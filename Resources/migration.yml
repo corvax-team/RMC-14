@@ -1145,3 +1145,23 @@ RMCVendorBundleXOShotgun: WeaponShotgunM890
 
 # 2025-05-05
 RMCArmorHelmetM12Dust: CMArmorHelmetM12
+
+# 2025-05-20
+GrenadeFlashBang: RMCGrenadeFlashBang
+
+# 2025-05-21
+CMVendorWalkman: CMVendorCassettes
+CMPosterWalkman: RMCPosterCassettePlayer
+
+# 2025-05-29
+CMBucketJani: RMCBucketJanitorial
+
+# 2025-05-24
+Katana: RMCKatana
+
+# 2025-06-7
+DrinkWhiskeyBottleFull: RMCDrinkAlcoholWhiskey
+DrinkWineBottleFull: RMCDrinkAlcoholPurpleWine
+DrinkVodkaBottleFull: RMCDrinkAlcoholVodka
+DrinkVermouthBottleFull: RMCDrinkAlcoholVermouth
+DrinkSakeBottleFull: RMCDrinkAlcoholSake
