@@ -61984,23 +61984,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 71.5077,-27.154387
       parent: 1
-- proto: CCMNuclearBomb
-  entities:
-  - uid: 463
-    components:
-    - type: Transform
-      pos: 86.5,-32.5
-      parent: 1
-- proto: CCMNukeDisk
-  entities:
-  - uid: 464
-    components:
-    - type: Transform
-      pos: 135.67584,-21.296782
-      parent: 1
-    - type: SpecialRespawn
-      stationMap:
-        1: 1
 - proto: CCMTurretPlanet
   entities:
   - uid: 465
@@ -219429,13 +219412,6 @@ entities:
     components:
     - type: Transform
       pos: 41.66885,-1.6495156
-      parent: 1
-- proto: NukeCodePaper
-  entities:
-  - uid: 31213
-    components:
-    - type: Transform
-      pos: 102.47159,-180.97028
       parent: 1
 - proto: OreBox
   entities:

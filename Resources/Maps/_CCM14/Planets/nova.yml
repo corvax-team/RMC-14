@@ -42273,23 +42273,6 @@ entities:
     - type: Transform
       pos: 30.521008,78.61527
       parent: 1
-- proto: CCMNuclearBomb
-  entities:
-  - uid: 143
-    components:
-    - type: Transform
-      pos: 226.5,12.5
-      parent: 1
-- proto: CCMNukeDisk
-  entities:
-  - uid: 144
-    components:
-    - type: Transform
-      pos: 188.47977,85.60053
-      parent: 1
-    - type: SpecialRespawn
-      stationMap:
-        1: 1
 - proto: CCMScrewdriver
   entities:
   - uid: 145
@@ -106352,13 +106335,6 @@ entities:
     components:
     - type: Transform
       pos: 237.67758,88.56081
-      parent: 1
-- proto: NukeCodePaper
-  entities:
-  - uid: 12108
-    components:
-    - type: Transform
-      pos: 75.38989,115.10358
       parent: 1
 - proto: OreBox
   entities:

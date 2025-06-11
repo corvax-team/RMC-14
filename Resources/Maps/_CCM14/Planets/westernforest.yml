@@ -38186,30 +38186,6 @@ entities:
     - type: Transform
       pos: 34.5,7.5
       parent: 1
-- proto: CCMNuclearBomb
-  entities:
-  - uid: 205
-    components:
-    - type: Transform
-      pos: 209.5,96.5
-      parent: 1
-- proto: CCMNukeCodePaper
-  entities:
-  - uid: 206
-    components:
-    - type: Transform
-      pos: 34.44437,7.0160494
-      parent: 1
-- proto: CCMNukeDisk
-  entities:
-  - uid: 207
-    components:
-    - type: Transform
-      pos: 189.87167,10.210935
-      parent: 1
-    - type: SpecialRespawn
-      stationMap:
-        1: 1
 - proto: CCMShutterDavidCargoButton
   entities:
   - uid: 208
