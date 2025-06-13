@@ -1,2 +1,2 @@
-ent-RMCSpawnPointPVEDynagridEngineer = dyangrid engineer spawn point
+ent-RMCSpawnPointPVEDynagridEngineer = Инженер Dyangrid Spawn Point
     .desc = { ent-CMSpawnPointJobBase.desc }

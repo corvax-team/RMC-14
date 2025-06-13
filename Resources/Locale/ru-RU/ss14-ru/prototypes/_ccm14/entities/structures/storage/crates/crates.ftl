@@ -1,2 +1,2 @@
-ent-CCMCrateRoudyCage = Roudy cage
+ent-CCMCrateRoudyCage = Кейс с Руди
     .desc = { ent-CrateRodentCage.desc }

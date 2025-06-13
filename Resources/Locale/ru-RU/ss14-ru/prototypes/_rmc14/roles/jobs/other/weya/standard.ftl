@@ -1,9 +1,9 @@
-ent-RMCRandomHumanoidPMCStandardM63B2 = weya pmc ghost role standard
+ent-RMCRandomHumanoidPMCStandardM63B2 = Стандарт роли призрака Weya PMC
     .suffix = Spawner, Player, M63B2
     .desc = { "" }
-ent-RMCRandomHumanoidPMCStandardSSG45 = weya pmc ghost role standard
+ent-RMCRandomHumanoidPMCStandardSSG45 = Стандарт роли призрака Weya PMC
     .suffix = Spawner, Player, SSG45
     .desc = { "" }
-ent-RMCRandomHumanoidPMCStandardM54C2 = weya pmc ghost role standard
+ent-RMCRandomHumanoidPMCStandardM54C2 = Стандарт роли призрака Weya PMC
     .suffix = Spawner, Player, M54C2
     .desc = { "" }

@@ -14,5 +14,5 @@ ent-CMEncryptionKeyFoxtrot = ключ радиошифрования фокст�
     .desc = { ent-CMEncryptionKey.desc }
 ent-CMEncryptionKeySOF = ключ радиошифрования ССО
     .desc = { ent-CMEncryptionKey.desc }
-ent-RMCEncryptionKeyFORECON = forecon encryption key
+ent-RMCEncryptionKeyFORECON = Ключ шифрования
     .desc = { ent-CMEncryptionKey.desc }

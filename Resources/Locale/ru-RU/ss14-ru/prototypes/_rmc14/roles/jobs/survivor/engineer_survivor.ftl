@@ -1,6 +1,6 @@
 ent-RMCSpawnPointSurvivorEngineer = точка появления выживший инженер
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetEngineer = engineer colonist preset
+ent-RMCSurvivorPresetEngineer = Инженер -колонист предустановлен
     .desc = { ent-RMCSurvivorPresetCivilian.desc }
-ent-RMCRandomHumanoidSurvivorEngineer = engineer colonist ghost role
+ent-RMCRandomHumanoidSurvivorEngineer = Инженер -колонист -призрачный
     .desc = { ent-MarkerBase.desc }

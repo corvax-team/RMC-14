@@ -2,5 +2,5 @@ ent-ArmorHelmetRiot = шлем для подавления беспорядко�
     .desc = Это шлем, разработанный специально для защиты от атак ближнего боя. Он защищает уши.
 ent-ArmorHelmetRiotOld = { ent-ArmorHelmetRiot }
     .desc = Покрытый царапинами и паутиной шлем для подавления беспорядков. Он по-прежнему защищает уши.
-ent-RMCArmorHelmetSecurity = helmet
-    .desc = Standard security gear. Protects the head from impacts.
+ent-RMCArmorHelmetSecurity = шлем
+    .desc = Стандартное снаряжение безопасности. Защищает голову от ударов.

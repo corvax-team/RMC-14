@@ -1,4 +1,4 @@
-ent-CMSpawnPointForeconMarksman = forecon marksman spawn point
+ent-CMSpawnPointForeconMarksman = Стрелка склона.
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetForeconMarksman = forecon marksman survivor preset
+ent-RMCSurvivorPresetForeconMarksman = Пресс для выжившего в основном
     .desc = { ent-RMCSurvivorPresetForecon.desc }

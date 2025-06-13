@@ -1,4 +1,4 @@
-ent-CMSpawnPointForeconSquadLeader = forecon squad leader spawn point
+ent-CMSpawnPointForeconSquadLeader = Лидер отряда отдела позора
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetForeconSquadLead = forecon squad leader survivor preset
+ent-RMCSurvivorPresetForeconSquadLead = Проверка лидера отряда
     .desc = { ent-RMCSurvivorPresetForecon.desc }

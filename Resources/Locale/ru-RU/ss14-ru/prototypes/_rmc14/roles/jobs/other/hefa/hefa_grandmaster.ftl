@@ -1,6 +1,6 @@
-ent-RMCRandomHumanoidHEFAShrapnelswornHostile = hefa ghost role grandmaster
-    .suffix = Spawner, Player, Hostile
+ent-RMCRandomHumanoidHEFAShrapnelswornHostile = Грандист Гефа -призрака
+    .suffix = Спаунер, игрок, враждебный
     .desc = { "" }
-ent-RMCRandomHumanoidHEFAShrapnelswornFriendly = hefa ghost role grandmaster
-    .suffix = Spawner, Player, Friendly
+ent-RMCRandomHumanoidHEFAShrapnelswornFriendly = Грандист Гефа -призрака
+    .suffix = Спаунер, игрок, дружелюбный
     .desc = { "" }

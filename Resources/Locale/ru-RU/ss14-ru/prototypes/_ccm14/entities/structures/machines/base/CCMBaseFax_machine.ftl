@@ -1,3 +1,3 @@
-ent-CCMBaseFaxMachineCommander = commander long range fax machine
-    .suffix = NukeCodes
+ent-CCMBaseFaxMachineCommander = Факс машина командования
+    .suffix = Nukecodes
     .desc = { ent-CMFax.desc }

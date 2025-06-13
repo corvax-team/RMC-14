@@ -1,3 +1,3 @@
-ent-RMCRandomHumanoidPMCEngineer = weya pmc ghost role engineer
-    .suffix = Spawner, Player
+ent-RMCRandomHumanoidPMCEngineer = WEYA PMC Ghost Ingener
+    .suffix = Спаунер, игрок
     .desc = { "" }

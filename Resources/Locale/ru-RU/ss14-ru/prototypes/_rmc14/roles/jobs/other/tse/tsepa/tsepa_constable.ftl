@@ -1,2 +1,2 @@
-ent-RMCSpawnPointTSEPAConstable = tsepa constable spawn point
+ent-RMCSpawnPointTSEPAConstable = Цепа -констебль Spawn Point
     .desc = { ent-CMSpawnPointJobBase.desc }

@@ -1,2 +1,2 @@
-ent-CCMShower = shower
-    .desc = Shower, used for water procedures.
+ent-CCMShower = душ
+    .desc = Душ, используется для водных процедур.

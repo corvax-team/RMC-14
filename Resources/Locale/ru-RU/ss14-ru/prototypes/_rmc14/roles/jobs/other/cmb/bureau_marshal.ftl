@@ -1,3 +1,3 @@
 ent-RMCRandomHumanoidBureauMarshal = маршал бюро роль призрака
-    .suffix = Spawner, Player, Friendly
+    .suffix = Спаунер, игрок, дружелюбный
     .desc = { "" }

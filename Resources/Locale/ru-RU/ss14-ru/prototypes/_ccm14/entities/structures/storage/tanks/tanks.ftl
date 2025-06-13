@@ -1,6 +1,6 @@
 ent-CCMKvassTank = { ent-StorageTank }
-    .suffix = Empty
+    .suffix = Пустой
     .desc = { ent-StorageTank.desc }
 ent-CCMKvassTankFull = { ent-CCMKvassTank }
-    .suffix = Full
+    .suffix = Полный
     .desc = { ent-CCMKvassTank.desc }

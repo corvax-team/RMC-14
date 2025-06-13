@@ -1,4 +1,4 @@
-ent-XenoBaseProjectile = projectile
+ent-XenoBaseProjectile = снаряд
     .desc = { "" }
 ent-XenoSpitImpactSounds = { "" }
     .desc = { "" }

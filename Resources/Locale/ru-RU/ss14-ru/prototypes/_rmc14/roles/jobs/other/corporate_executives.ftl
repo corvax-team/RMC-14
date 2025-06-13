@@ -1,6 +1,6 @@
-ent-RMCRandomHumanoidCorporateExecutiveSupervisor = corporate executive supervisor ghost role
-    .suffix = Spawner, Player, Neutral
+ent-RMCRandomHumanoidCorporateExecutiveSupervisor = Корпоративный исполнительный руководитель -призрачный
+    .suffix = Спаунер, игрок, нейтральный
     .desc = { "" }
-ent-RMCRandomHumanoidCorporateExecutiveSpecialist = corporate executive specialist ghost role
-    .suffix = Spawner, Player, Neutral
+ent-RMCRandomHumanoidCorporateExecutiveSpecialist = Корпоративный исполнительный специалист по призраку
+    .suffix = Спаунер, игрок, нейтральный
     .desc = { "" }

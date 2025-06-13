@@ -1,6 +1,6 @@
 ent-RMCTargetHuman = мишень-человек
     .desc = Стрелковая мишень. Эта - человек.
-    .suffix = RMC
+    .suffix = Rmc
 ent-RMCTargetXeno = мишень-ксенонид
     .desc = Стрелковая мишень. Эта - ксенонид.
 ent-RMCTargetArmored = стрелковая мишень

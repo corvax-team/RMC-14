@@ -1,3 +1,3 @@
 ent-RMCFireAxe = пожарный топор
-    .suffix = RMC
+    .suffix = Rmc
     .desc = { ent-FireAxe.desc }

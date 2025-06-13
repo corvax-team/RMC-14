@@ -1,4 +1,4 @@
-ent-RMCHeadsetRoyalMarine = royal marine headset
-    .desc = A sleek headset used by the Royal Marines Commando. Low profile enough to fit under their unique helmets.
-ent-RMCEncryptionKeyRoyalMarine = royal marine radio encryption key
+ent-RMCHeadsetRoyalMarine = Королевская морская гарнитура
+    .desc = Главная гарнитура, используемая Королевским морским пехотинцем. Достаточно низкий профиль, чтобы поместиться под их уникальными шлемами.
+ent-RMCEncryptionKeyRoyalMarine = Ключ шифрования Royal Marine Radio
     .desc = { ent-CMEncryptionKey.desc }

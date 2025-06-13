@@ -11,5 +11,5 @@ ent-RMCMagazineRifleM54CMK1Incendiary = магазин M54C MK1 зажигате
     .suffix = Зажигательные
     .desc = { ent-CMMagazineRifleM54CMK1.desc }
 ent-RMCMagazineRifleM54CMK1HEAP = магазин M54C MK1 бронебойно-разрывные (10x24мм)
-    .suffix = HEAP
+    .suffix = Куча
     .desc = { ent-CMMagazineRifleM54CMK1.desc }

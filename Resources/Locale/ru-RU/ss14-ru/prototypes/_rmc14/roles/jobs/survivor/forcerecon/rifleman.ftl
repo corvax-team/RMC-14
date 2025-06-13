@@ -1,2 +1,2 @@
-ent-CMSpawnPointForeconRifleman = forecon rifleman spawn point
+ent-CMSpawnPointForeconRifleman = SODECON RIFLENMEN SPAWN Point
     .desc = { ent-CMSpawnPointJobBase.desc }

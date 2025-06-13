@@ -1,7 +1,7 @@
-ent-RMCXenoCarrierBase = Carrier
-    .desc = A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures.
+ent-RMCXenoCarrierBase = Перевозчик
+    .desc = Странно выглядящее инопланетное существо. Он несет несколько соревновательных существ.
 ent-CMXenoCarrier = Носитель
     .desc = Странное на вид инопланетное существо. Он несет на себе несколько передвигающихся суставчатых крабоподобных существ.
 ent-RMCXenoCarrierEggsac = { ent-RMCXenoCarrierBase }
-    .suffix = Eggsac
+    .suffix = Яйца
     .desc = { ent-RMCXenoCarrierBase.desc }

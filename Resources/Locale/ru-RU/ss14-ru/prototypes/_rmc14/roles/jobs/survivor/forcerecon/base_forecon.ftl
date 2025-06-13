@@ -1,6 +1,6 @@
-ent-RMCSurvivorPresetForeconNoPrimary = forecon no primary survivor preset
+ent-RMCSurvivorPresetForeconNoPrimary = Отсешение нет первичного предварительного выживаемого
     .desc = { "" }
-ent-RMCSurvivorPresetForecon = forecon survivor preset
+ent-RMCSurvivorPresetForecon = ПРЕДУПРЕЖДЕНИЕ ПРЕДУПРЕЖДЕНИЯ ПРЕДОСТАВЛЕНИЯ
     .desc = { ent-RMCSurvivorPresetForeconNoPrimary.desc }
-ent-RMCSurvivorPresetForeconNoPistol = forecon survivor preset
+ent-RMCSurvivorPresetForeconNoPistol = ПРЕДУПРЕЖДЕНИЕ ПРЕДУПРЕЖДЕНИЯ ПРЕДОСТАВЛЕНИЯ
     .desc = { ent-RMCSurvivorPresetForecon.desc }

@@ -1,5 +1,5 @@
-ent-RMCPouchGeneralLarge = large general pouch
-    .desc = A general-purpose pouch used to carry more differently sized items.
+ent-RMCPouchGeneralLarge = большой общий пакет
+    .desc = Мешочек общего назначения, используемый для ношения более разнообразных предметов.
 ent-RMCPouchGeneralLargeFilledSmartGunDrums = { ent-RMCPouchGeneralLarge }
-    .suffix = Filled, Smart Gun Drums
+    .suffix = Заполненные, умные пистолетные барабаны
     .desc = { ent-RMCPouchGeneralLarge.desc }

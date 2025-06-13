@@ -1,6 +1,6 @@
-ent-RMCRandomHumanoidSPPLeaderHostile = spp ghost role leader
-    .suffix = Spawner, Player, Hostile
+ent-RMCRandomHumanoidSPPLeaderHostile = SPP Ghost Role Leader
+    .suffix = Спаунер, игрок, враждебный
     .desc = { "" }
-ent-RMCRandomHumanoidSPPLeaderFriendly = spp ghost role leader
-    .suffix = Spawner, Player, Friendly
+ent-RMCRandomHumanoidSPPLeaderFriendly = SPP Ghost Role Leader
+    .suffix = Спаунер, игрок, дружелюбный
     .desc = { "" }

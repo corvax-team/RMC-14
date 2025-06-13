@@ -1,11 +1,11 @@
 ent-RMCWeaponPistolM13 = M13 Auto Pistol
-    .desc = The M13 Auto Pistol, a compact, rapid-firing sidearm designed for close-quarters defense. With a 40-round magazine, it emphasizes fire rate over precision, providing effective suppressive fire in short-range engagements.
+    .desc = Auto Pistol M13, компактное, быстрое боевик, предназначенное для защиты за близкие четверти. В журнале с 40 раундами он подчеркивает частоту пожара по сравнению с точностью, обеспечивая эффективный подавляющий огонь в ближайших наступлениях.
 ent-RMCWeaponPistolM13Empty = { ent-RMCWeaponPistolM13 }
-    .suffix = Empty
+    .suffix = Пустой
     .desc = { ent-RMCWeaponPistolM13.desc }
-ent-RMCMagazinePistolM13 = M13 HV Magazine (10x20mm)
+ent-RMCMagazinePistolM13 = M13 HV Magazine (10x20 мм)
     .desc = { ent-CMBaseMagazinePistol.desc }
-ent-RMCMagazinePistolM13Ext = M13 HV Extended Magazine (10x20mm)
+ent-RMCMagazinePistolM13Ext = M13 HV Extended Magazine (10x20 мм)
     .desc = { ent-CMBaseMagazinePistol.desc }
-ent-RMCMagazinePistolM13Drum = M13 HV Drum Magazine (10x20mm)
+ent-RMCMagazinePistolM13Drum = M13 HV Drum Magazine (10x20 мм)
     .desc = { ent-CMBaseMagazinePistol.desc }

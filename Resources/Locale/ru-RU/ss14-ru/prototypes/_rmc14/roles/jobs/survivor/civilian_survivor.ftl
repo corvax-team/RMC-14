@@ -1,6 +1,6 @@
 ent-RMCSurvivorPresetCivilian = пресет гражданский выживший
     .desc = { "" }
-ent-RMCSurvivorPresetCivilianOutfits = civilian colonist preset with random outfits
+ent-RMCSurvivorPresetCivilianOutfits = Гражданский колонист предварительно предшествовал случайных нарядов
     .desc = { ent-RMCSurvivorPresetCivilian.desc }
-ent-RMCRandomHumanoidSurvivorCivilian = civilian colonist ghost role
+ent-RMCRandomHumanoidSurvivorCivilian = Гражданский колонист -роли призрака
     .desc = { ent-MarkerBase.desc }

@@ -1,2 +1,2 @@
-ent-RMCSpawnPointTSEPASeniorConstable = tsepa senior constable spawn point
+ent-RMCSpawnPointTSEPASeniorConstable = Цепа старший констебль Споун
     .desc = { ent-CMSpawnPointJobBase.desc }

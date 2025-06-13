@@ -1,6 +1,6 @@
-ent-RMCPlanetChancesPolyphemus = Polyphemus
+ent-RMCPlanetChancesPolyphemus = Полифем
     .desc = { "" }
-ent-RMCPlanetChancesNova = Nova Outpost
+ent-RMCPlanetChancesNova = Новая форпост
     .desc = { "" }
-ent-RMCPlanetChancesWesternForest = Western forest
+ent-RMCPlanetChancesWesternForest = Западный лес
     .desc = { "" }

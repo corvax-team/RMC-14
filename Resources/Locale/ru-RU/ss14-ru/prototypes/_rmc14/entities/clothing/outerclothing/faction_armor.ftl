@@ -1,7 +1,7 @@
 ent-RMCArmorMARSOC = бронежилет рейдера ККМП
     .desc = Сильно модифицированный бронежилет M3. Используется рейдерами корпуса колониальной морской пехоты.
 ent-RMCArmorMARSOCXM40 = { ent-RMCArmorMARSOC }
-    .suffix = XM40 HEAP, Filled
+    .suffix = XM40 куча, заполненная
     .desc = { ent-RMCArmorMARSOC.desc }
 ent-CMArmorIronBear = жилет H1 Железных медведей
     .desc = Защитный жилет, который носят наёмники из «Железных медведей».

@@ -1,2 +1,2 @@
-ent-RMCIDCardFreePressResponder = Free Press ID card
-    .desc = A common ID card. This one seems to be well traveled.
+ent-RMCIDCardFreePressResponder = Бесплатная идентификационная карта для прессы
+    .desc = Общая идентификационная карта. Это кажется хорошо пройденным.

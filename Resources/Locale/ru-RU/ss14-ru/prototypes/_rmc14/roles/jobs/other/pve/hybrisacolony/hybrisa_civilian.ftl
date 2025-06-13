@@ -1,2 +1,2 @@
-ent-RMCSpawnPointPVEHybrisaCivilian = hybrisa civilian spawn point
+ent-RMCSpawnPointPVEHybrisaCivilian = Гибриса гражданская спавной точка
     .desc = { ent-CMSpawnPointJobBase.desc }

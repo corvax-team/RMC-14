@@ -1,6 +1,6 @@
-ent-RMCCaseBase = case
+ent-RMCCaseBase = случай
     .desc = { ent-BaseStorageItem.desc }
-ent-RMCGunCaseBase = base gun case
-    .desc = A gun case.
-ent-RMCBaseEquipmentCase = base equipment case
-    .desc = A loadout case.
+ent-RMCGunCaseBase = Базовый пистолет
+    .desc = Корпус оружия.
+ent-RMCBaseEquipmentCase = Базовое оборудование корпус
+    .desc = Корпус загрузки.

@@ -16,5 +16,5 @@ ent-RMCJumpsuitVeteranPMCKutjevo = униформа корпоративной �
     .desc = Бронированная униформа, которую носят сотрудники корпоративной охраны Ве-Я. Этот вариант лучше дышит и подходит для использования в жарких и сухих условиях.
 ent-RMCJumpsuitVeteranPMCKutjevoLead = униформа корпоративной охраны Ве-Я
     .desc = Бронированная униформа, которую носят сотрудники корпоративной охраны Ве-Я. Этот вариант лучше дышит и подходит для использования в жарких и сухих условиях, и имеет золотые нарукавные повязки, обозначающие командира команды.
-ent-RMCJumpsuitVeteranPMCDirector = director's suit
-    .desc = It's a suit that oozes with authority. Belongs to someone very important.
+ent-RMCJumpsuitVeteranPMCDirector = Костюм режиссера
+    .desc = Это иск, который сочится с авторитетом. Принадлежит кому -то очень важному.

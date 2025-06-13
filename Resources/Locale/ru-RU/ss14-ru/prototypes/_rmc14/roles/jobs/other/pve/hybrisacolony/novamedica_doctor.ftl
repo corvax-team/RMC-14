@@ -1,2 +1,2 @@
-ent-RMCSpawnPointPVENovaMedicaDoctor = nova medica doctor spawn point
+ent-RMCSpawnPointPVENovaMedicaDoctor = Nova Medica Doctor Spawn Point
     .desc = { ent-CMSpawnPointJobBase.desc }

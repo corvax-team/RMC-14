@@ -1,6 +1,6 @@
-ent-RMCPouch = abstract pouch
-    .desc = The physical manifestation of the concept of a pouch. Woah.
-ent-RMCPouchStorage = storage pouch
+ent-RMCPouch = Абстрактная сумка
+    .desc = Физическое проявление концепции мешочка. Воах.
+ent-RMCPouchStorage = пакет для хранения
     .desc = { ent-RMCPouch.desc }
 ent-RMCPouchClosed = { ent-RMCPouch }
     .desc = { ent-RMCPouch.desc }

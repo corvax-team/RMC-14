@@ -1,8 +1,8 @@
-ent-RMCRandomHumanoidFreelancerLeaderHostile = freelancer ghost role leader
-    .suffix = Spawner, Player, Hostile
+ent-RMCRandomHumanoidFreelancerLeaderHostile = Фрилансер призрак ролевой лидер
+    .suffix = Спаунер, игрок, враждебный
     .desc = { "" }
-ent-RMCRandomHumanoidFreelancerLeaderFriendly = freelancer ghost role leader
-    .suffix = Spawner, Player, Friendly
+ent-RMCRandomHumanoidFreelancerLeaderFriendly = Фрилансер призрак ролевой лидер
+    .suffix = Спаунер, игрок, дружелюбный
     .desc = { "" }
 ent-RMCSpawnerFreelancerLeader = спавнер наёмник-лидер
     .suffix = Спавнер

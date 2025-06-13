@@ -2,5 +2,5 @@ ent-RMCLightStick = красная светопалка
     .desc = Вы можете втыкать их в землю.
 ent-RMCLightStickRedSmall = { ent-RMCLightStick }
     .desc = { ent-RMCLightStick.desc }
-ent-RMCLightStickBlueSmall = blue lightstick
+ent-RMCLightStickBlueSmall = Синий лампа
     .desc = { ent-RMCLightStick.desc }

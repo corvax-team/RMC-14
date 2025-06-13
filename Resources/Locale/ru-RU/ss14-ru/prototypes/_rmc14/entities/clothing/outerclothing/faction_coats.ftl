@@ -1,10 +1,10 @@
 ent-RMCCoatBureauDeputy = куртка помощника маршала бюро
     .desc = Плотная и стильная чёрная кожаная куртка с приколотым к ней значком помощника маршала. На спине вышиты мощные буквы «ПОМОЩНИК», олицетворяющие правосудие, власть и защиту во Внешнем кольце. Законы Земли распространяются далеко за пределы Солнечной системы.
 ent-RMCCoatBureauDeputyNoFilter = { ent-RMCCoatBureauDeputy }
-    .suffix = No Filter
+    .suffix = Нет фильтра
     .desc = { ent-RMCCoatBureauDeputy.desc }
 ent-RMCCoatBureauMarshalNoFilter = { ent-RMCCoatBureauMarshal }
-    .suffix = No Filter
+    .suffix = Нет фильтра
     .desc = { ent-RMCCoatBureauMarshal.desc }
 ent-RMCCoatBureauMarshal = куртка маршала бюро
     .desc = Плотная и стильная чёрная кожаная куртка с приколотым к ней маршальским значком. На спине вышиты мощные буквы «МАРШАЛ», олицетворяющие правосудие, власть и защиту во Внешнем кольце. Законы Земли распространяются далеко за пределы Солнечной системы.

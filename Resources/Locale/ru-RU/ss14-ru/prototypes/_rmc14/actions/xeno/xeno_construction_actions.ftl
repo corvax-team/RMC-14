@@ -24,5 +24,5 @@ ent-ActionXenoDigTunnel = Прорыть туннель (200)
     .desc = Проройте туннель для быстрого перемещения по улью.
 ent-ActionLesserDronePlantWeeds = Посадить сорняки (75)
     .desc = Посадите узел сорняков, который распространит ещё больше сорняков.
-ent-ActionXenoExpandWeeds = Expand Weeds (50)
-    .desc = Expand existing weeds or turn a weed tile into a node.
+ent-ActionXenoExpandWeeds = Расширить сорняки (50)
+    .desc = Расширить существующие сорняки или превратить плитку сорняков в узел.

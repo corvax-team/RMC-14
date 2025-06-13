@@ -1,6 +1,6 @@
-ent-RMCRandomHumanoidSPPMedicHostile = spp ghost role medic
-    .suffix = Spawner, Player, Hostile
+ent-RMCRandomHumanoidSPPMedicHostile = SPP Ghost Role Medic
+    .suffix = Спаунер, игрок, враждебный
     .desc = { "" }
-ent-RMCRandomHumanoidSPPMedicFriendly = spp ghost role medic
-    .suffix = Spawner, Player, Friendly
+ent-RMCRandomHumanoidSPPMedicFriendly = SPP Ghost Role Medic
+    .suffix = Спаунер, игрок, дружелюбный
     .desc = { "" }

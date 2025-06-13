@@ -1,3 +1,3 @@
-ent-RMCRandomHumanoidWeYaGoon = weya corporate ghost role goon
-    .suffix = Spawner, Player
+ent-RMCRandomHumanoidWeYaGoon = Вейя корпоративная роль призрака Гун
+    .suffix = Спаунер, игрок
     .desc = { ent-MarkerBase.desc }

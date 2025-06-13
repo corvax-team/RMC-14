@@ -1,3 +1,3 @@
-ent-RMCMarkerAreaLabel = area
-    .suffix = Tactical Map Area Label
+ent-RMCMarkerAreaLabel = область
+    .suffix = Тактическая марки
     .desc = { ent-MarkerBase.desc }

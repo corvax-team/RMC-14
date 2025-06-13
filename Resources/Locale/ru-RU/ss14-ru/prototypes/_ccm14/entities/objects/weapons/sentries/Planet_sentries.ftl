@@ -1,3 +1,3 @@
-ent-CCMTurretPlanet = UN-640C static gauss turret
-    .desc = A fully-automated defence turret with mid-range targeting capabilities. Armed with a modified M32-S Autocannon and an internal belt feed and modified for UN warship use.
-    .suffix = No Despawn, No Armor-piercing.
+ent-CCMTurretPlanet = Un-640c Static Gauss Turret
+    .desc = Полностью автоматизированная оборонительная башня со средним таргетингом. Вооружен модифицированной M32-S и внутренней подачей патрон и модифицирован для использования военного корабля ООН.
+    .suffix = Никакого оттаивания, нет доспехи.

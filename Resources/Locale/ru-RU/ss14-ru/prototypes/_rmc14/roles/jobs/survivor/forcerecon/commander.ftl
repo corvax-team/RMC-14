@@ -1,2 +1,2 @@
-ent-CMSpawnPointForeconCommander = commanding officer spawn point
+ent-CMSpawnPointForeconCommander = Командир Spawn Point
     .desc = { ent-CMSpawnPointJobBase.desc }

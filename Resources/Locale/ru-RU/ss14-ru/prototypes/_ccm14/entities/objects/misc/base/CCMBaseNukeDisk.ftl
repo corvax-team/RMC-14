@@ -1,2 +1,2 @@
-ent-CCMBaseNukeDisk = nuclear authentication disk
-    .desc = A nuclear auth disk, capable of arming a nuke if used along with a code. Note from nanotrasen reads "THIS IS YOUR MOST IMPORTANT POSESSION, SECURE DAT FUKKEN DISK!"
+ent-CCMBaseNukeDisk = Диск ядерной аутентификации
+    .desc = Диск ядерного авто, способный взорвать всё, если он используется вместе с кодом. Примечание от Nanotrasen гласит: «Это ваш самый важный предмет, защитите диск Fukken!»

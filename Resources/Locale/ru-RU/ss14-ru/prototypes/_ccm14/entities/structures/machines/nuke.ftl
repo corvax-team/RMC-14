@@ -1,2 +1,2 @@
-ent-CCMNuclearBomb = nuclear fission explosive
-    .desc = You probably shouldn't stick around to see if this is armed.
+ent-CCMNuclearBomb = Ядерное деление взрывоопасно
+    .desc = Вы, вероятно, не должны оставаться в стороне, чтобы посмотреть, вооружено ли это.

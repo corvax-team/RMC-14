@@ -17,5 +17,5 @@ ent-CMCrowbarRed = аварийная монтировка
 ent-CMHandLabeler = { ent-HandLabeler }
     .desc = { ent-HandLabeler.desc }
 ent-RMCShovel = { ent-Shovel }
-    .suffix = RMC
+    .suffix = Rmc
     .desc = { ent-Shovel.desc }

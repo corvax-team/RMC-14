@@ -1,11 +1,11 @@
-ent-RMCXenoQueenBase = Queen
-    .desc = A huge, looming alien creature. The biggest and the baddest.
+ent-RMCXenoQueenBase = Королева
+    .desc = Огромное, надвигающее инопланетное существо. Самый большой и самый плохой.
 ent-CMXenoQueen = Королева
     .desc = Огромное, грозное инопланетное существо. Самое большое и самое страшное.
 ent-XenoLeaderPheromoneRelay = { "" }
     .desc = { "" }
 ent-RMCXenoQueenMaid = { ent-RMCXenoQueenBase }
-    .suffix = Cat Maid Queen
+    .suffix = Королева кошек
     .desc = { ent-RMCXenoQueenBase.desc }
-ent-RMCQueenEye = queen eye
-    .desc = It seems to be a visual projection of someone.
+ent-RMCQueenEye = Королева глаз
+    .desc = Кажется, это визуальная проекция кого -то.

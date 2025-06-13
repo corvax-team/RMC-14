@@ -1,3 +1,3 @@
 ent-RMCSpawnerCorpse = Спавнер трупов - Неизвестный
-    .suffix = RMC
+    .suffix = Rmc
     .desc = { ent-MarkerBase.desc }

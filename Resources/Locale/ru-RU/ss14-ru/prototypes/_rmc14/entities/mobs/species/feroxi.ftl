@@ -1,5 +1,5 @@
-ent-RMCMobFeroxi = Urist C.M McFeroxi
+ent-RMCMobFeroxi = Урист С.М. МакФерокси
     .suffix = RMC14
     .desc = { ent-CMBaseMobSpeciesOrganic.desc }
-ent-MobFeroxiDummy = Feroxi Dummy
-    .desc = A dummy feroxi meant to be used in character setup.
+ent-MobFeroxiDummy = Ферокси манекен
+    .desc = Фиктивная ферокси предназначена для использования в настройке символов.

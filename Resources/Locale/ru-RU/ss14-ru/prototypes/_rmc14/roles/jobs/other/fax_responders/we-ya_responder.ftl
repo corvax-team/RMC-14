@@ -1,2 +1,2 @@
-ent-RMCIDCardWeYaResponder = We-Ya Communications Executive ID card
-    .desc = A fancy, faux gold plated ID card. One of many given to Weston-Yamada's army of fax operators.
+ent-RMCIDCardWeYaResponder = We-Ya Communications Executive Id Card
+    .desc = Причудливая идентификационная карта из искусственного золота. Один из многих, переданный армии факсировщиков Уэстон-Ямады.

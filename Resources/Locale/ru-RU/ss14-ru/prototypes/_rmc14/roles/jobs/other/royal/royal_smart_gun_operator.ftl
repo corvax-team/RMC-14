@@ -1,3 +1,3 @@
-ent-RMCRandomHumanoidRoyalMarinesSGO = royal crown marines ghost role smart gun operator
-    .suffix = Spawner, Player, Friendly
+ent-RMCRandomHumanoidRoyalMarinesSGO = Royal Crown Marines Ghost Role
+    .suffix = Спаунер, игрок, дружелюбный
     .desc = { "" }

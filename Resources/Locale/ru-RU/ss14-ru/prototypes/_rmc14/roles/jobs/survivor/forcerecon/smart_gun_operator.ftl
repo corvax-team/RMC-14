@@ -1,2 +1,2 @@
-ent-CMSpawnPointForeconSmartGunOperator = forecon smart gun operator spawn point
+ent-CMSpawnPointForeconSmartGunOperator = Оператор Spawn Operator Shodecon Smart Gun Point
     .desc = { ent-CMSpawnPointJobBase.desc }

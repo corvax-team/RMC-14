@@ -1,6 +1,6 @@
-ent-RMCHeadCapTSEPA = tsepa cap
+ent-RMCHeadCapTSEPA = Цепа Кэп
     .desc = { ent-CMHeadCapMP.desc }
-ent-RMCHeadBeretTSE = tse beret
+ent-RMCHeadBeretTSE = TSE BERET
     .desc = { ent-CMHeadBeret.desc }
-ent-RMCHeadBeretTSEPA = tsepa beret
+ent-RMCHeadBeretTSEPA = Цепа Берет
     .desc = { ent-CMHeadBeret.desc }

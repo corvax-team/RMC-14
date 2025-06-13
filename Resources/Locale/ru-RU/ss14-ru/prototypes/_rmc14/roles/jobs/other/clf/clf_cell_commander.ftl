@@ -1,5 +1,5 @@
-ent-RMCRandomHumanoidCLFCellCommander = clf cell commander role
-    .suffix = Role
+ent-RMCRandomHumanoidCLFCellCommander = Роль командира CLF Cell
+    .suffix = Роль
     .desc = { "" }
-ent-RMCIDCardCLFCellCommander = clf cell commander's ID card
+ent-RMCIDCardCLFCellCommander = Идентификационная карта CLF Cell Commander
     .desc = { ent-CMIDCardBase.desc }

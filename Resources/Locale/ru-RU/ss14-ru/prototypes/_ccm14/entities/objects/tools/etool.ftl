@@ -1,2 +1,2 @@
-ent-CCMEntrenchingTool = entrenching tool
-    .desc = Used to dig holes and bash heads in. Folds in to fit in small spaces.
+ent-CCMEntrenchingTool = Ржавый инструмент
+    .desc = Используется для копания.

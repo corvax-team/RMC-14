@@ -1,4 +1,4 @@
 ent-FactionRoyalMarines = { "" }
     .desc = { "" }
-ent-RMCIDRoyalMarines = royal marine dogtags
+ent-RMCIDRoyalMarines = Королевские морские собачки
     .desc = { ent-CMIDCardStandardDogtag.desc }

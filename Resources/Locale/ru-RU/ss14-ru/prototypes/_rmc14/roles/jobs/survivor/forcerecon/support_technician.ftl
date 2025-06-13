@@ -1,4 +1,4 @@
-ent-CMSpawnPointForeconSupportTech = forecon support tech spawn point
+ent-CMSpawnPointForeconSupportTech = Проверка поддержки Tech Tech Spawn Point
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetForeconSupportTech = forecon support technician survivor preset
+ent-RMCSurvivorPresetForeconSupportTech = Техник по поддержке склона
     .desc = { ent-RMCSurvivorPresetForeconNoPistol.desc }
