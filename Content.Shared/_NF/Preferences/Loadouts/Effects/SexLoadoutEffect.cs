@@ -1,29 +1,28 @@
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Humanoid;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Preferences.Loadouts.Effects;
 
-public sealed partial class SpeciesLoadoutEffect : LoadoutEffect
+/// <summary>
+/// Checks for a profile to be within a particular set of sexes.
+/// </summary>
+public sealed partial class SexLoadoutEffect : LoadoutEffect
 {
-    [DataField(required: true)]
-    public List<ProtoId<SpeciesPrototype>> Species = new();
-
-    [DataField] // Frontier
-    public bool Inverted; // Frontier: if true, list is a blacklist, not a whitelist
+    [DataField("sex", required: true)]
+    public List<Sex> Sexes = default!;
 
     public override bool Validate(HumanoidCharacterProfile profile, RoleLoadout loadout, LoadoutPrototype proto, ICommonSession? session, IDependencyCollection collection, // Corvax-Sponsors
         [NotNullWhen(false)] out FormattedMessage? reason)
     {
-        if (Species.Contains(profile.Species))
+        if (Sexes.Contains(profile.Sex))
         {
             reason = null;
             return true;
         }
-
-        reason = FormattedMessage.FromUnformatted(Loc.GetString("loadout-group-species-restriction"));
+        reason = new FormattedMessage();
+        reason.TryAddMarkup(Loc.GetString("sex-loadout-invalid"), out var _);
         return false;
     }
 }

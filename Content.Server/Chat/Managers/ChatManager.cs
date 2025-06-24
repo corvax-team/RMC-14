@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using Content.Server._RMC14.Discord;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server._RMC14.Mentor;
+using Content.Corvax.Interfaces.Shared; // Corvax-Sponsors
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
@@ -55,6 +56,7 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
     [Dependency] private readonly RMCDiscordManager _discord = default!;
     [Dependency] private readonly MentorManager _mentor = default!;
+    private ISharedSponsorsManager? _sponsorsManager; // Corvax-Sponsors
 
     /// <summary>
     /// The maximum length a player-sent message can be sent
@@ -68,6 +70,7 @@ internal sealed partial class ChatManager : IChatManager
 
     public void Initialize()
     {
+        IoCManager.Instance!.TryResolveType(out _sponsorsManager); // Corvax-Sponsors
         _netManager.RegisterNetMessage<MsgChatMessage>();
         _netManager.RegisterNetMessage<MsgDeleteChatMessagesBy>();
 
@@ -298,6 +301,13 @@ internal sealed partial class ChatManager : IChatManager
             var color = _linkAccount.GetPatronOOCHexColor(player.Channel.UserId);
             wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", $"{color}"),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
         }
+
+        // Corvax-Sponsors-Start
+        if (_sponsorsManager != null && _sponsorsManager.TryGetServerOocColor(player.UserId, out var oocColor))
+        {
+            wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", oocColor),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+        }
+        // Corvax-Sponsors-End
 
         //TODO: player.Name color, this will need to change the structure of the MsgChatMessage
         ChatMessageToAll(ChatChannel.OOC, message, wrappedMessage, EntityUid.Invalid, hideChat: false, recordReplay: true, colorOverride: colorOverride, author: player.UserId);
