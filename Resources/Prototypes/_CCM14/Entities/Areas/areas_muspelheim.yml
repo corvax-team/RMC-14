@@ -1,0 +1,999 @@
+- type: entity
+  parent: RMCAreaBase
+  id: CCMAreaMuspelheim
+  suffix: Muspelheim
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_strata.rsi
+    state: base_ico
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#6C6767D8'
+    landingZone: false
+
+- type: entity
+  parent:
+  - RMCAreaMax
+  - CCMAreaMuspelheim
+  id: CCMAreaMuspelheimInteriorOob
+  name: Muspelheim - Out Of Bounds
+  suffix: Muspelheim
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: oob
+  - type: Area
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+
+- type: entity
+  parent:
+  - RMCAreaProtectionZero
+  - CCMAreaMuspelheim
+  id: CCMAreaMuspelheimGround
+  name: Ground
+  suffix: No mapping
+  components:
+  - type: Sprite
+    state: base_ico
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent:
+  - RMCAreaProtectionOne
+  - CCMAreaMuspelheim
+  id: CCMAreaMuspelheimClosedArea
+  name: Closed area
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: red
+  - type: Area
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  id: CCMAreaMuspelheimFullProtection
+  abstract: true
+  name: MuspelheimFullProtection
+  suffix: Muspelheim
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: oob
+  - type: Area
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  id: CCMAreaMuspelheimZeroProtection
+  abstract: true
+  name: MuspelheimZeroProtection
+  suffix: Muspelheim
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: oob
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimLZ
+  name: Landing zone
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: red
+  - type: Area
+    minimapColor: '#6C6767D8'
+    noTunnel: True
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    landingZone: true
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimLZTelecommunicationTower
+  name:  LZ1 - Telecommunication Tower
+  components:
+  - type: Sprite
+    state: outpost_gen_1
+  - type: Area
+    minimapColor: '#6C6767D8'
+    noTunnel: True
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    landingZone: true
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimLZNeighbourhood
+  name:  LZ1 - Neighbourhood
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_kutjevo.rsi
+    state: lz_dunes
+  - type: Area
+    minimapColor: '#6C6767D8'
+    noTunnel: True
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    landingZone: true
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimGroundfloorMainHall
+  name: Ground floor - Main Hall
+  components:
+  - type: Sprite
+    state: ug_jung_mine_1
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimGroundfloorShowerroom
+  name: Ground floor - Shower room
+  components:
+  - type: Sprite
+    state: ag
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimGroundfloorKitchen
+  name: Ground floor - Kitchen
+  components:
+  - type: Sprite
+    state: dorms_beno
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimGroundfloorCafeteria
+  name: Ground floor - Cafeteria
+  components:
+  - type: Sprite
+    state: ug_jung_0
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimGroundfloorRecreationRooms
+  name: Ground floor - Recreation Rooms
+  components:
+  - type: Sprite
+    state: ug_jung_8
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimGroundfloorReception
+  name: Ground floor - Reception
+  components:
+  - type: Sprite
+    state: outpost_admin_1
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimGroundfloorSecurityroom
+  name: Ground floor - Security room
+  components:
+  - type: Sprite
+    state: outpost_sec_0
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimGroundfloorBathroom
+  name: Ground floor - Bathroom
+  components:
+  - type: Sprite
+    state: ug_jung_mine_1
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimGroundfloorHospital
+  name: Ground floor - Hospital
+  components:
+  - type: Sprite
+    state: outpost_med_stock
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimGroundfloorTechnicalrooms
+  name: Ground floor - Technical rooms
+  components:
+  - type: Sprite
+    state: sewers
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimGroundfloorLadder
+  name: Ground floor - Ladder
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_almayer.rsi
+    state: stairs_lowerdeck
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+    buildSpecial: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimSecondfloorLadder
+  name: Second floor - Ladder
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_almayer.rsi
+    state: stairs_upperdeck
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+    buildSpecial: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimSecondfloorUpperLadder
+  name: Second floor - Upper Ladder
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_almayer.rsi
+    state: stairs_lowerdeck
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+    buildSpecial: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimSecondfloorFrontLadder
+  name: Second floor - Front Ladder
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_almayer.rsi
+    state: stairs_lowerdeck
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+    buildSpecial: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimThirdfloorLadder
+  name: Third floor - Ladder
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_almayer.rsi
+    state: stairs_upperdeck
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+    buildSpecial: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimThirdfloorCentralLadder
+  name: Third floor - Central ladder
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_almayer.rsi
+    state: stairs_upperdeck
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+    buildSpecial: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimSecondfloorCorridors
+  name: Second floor - Corridors
+  components:
+  - type: Sprite
+    state: dorms_1
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimSecondfloorArmamentdepot
+  name: Second floor - Armament depot
+  components:
+  - type: Sprite
+    state: outpost_engi_2
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimSecondfloorGeneratorroom
+  name: Second floor - Generator room
+  components:
+  - type: Sprite
+    state: outpost_maint
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimSecondfloorTechnicalrooms
+  name: Second floor - Technical rooms
+  components:
+  - type: Sprite
+    state: dorms_3
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimSecondfloorServerRoom
+  name: Second floor - Server Room
+  components:
+  - type: Sprite
+    state: tcomms4
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimSecondfloorMeetingroom
+  name: Second floor - Meeting room
+  components:
+  - type: Sprite
+    state: dorms_canteen
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimSecondfloorEngineering
+  name: Second floor - Engineering
+  components:
+  - type: Sprite
+    state: outpost_engi_0
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimSecondfloorArtifactStorage
+  name: Second floor - Artifact Storage
+  components:
+  - type: Sprite
+    state: dorms_lobby
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimSecondfloorlaboratory
+  name: Second floor - Laboratory
+  components:
+  - type: Sprite
+    state: marshriver
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimSecondfloorHydroponics
+  name: Second floor - Hydroponics
+  components:
+  - type: Sprite
+    state: outpost_engi_4
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimvThirdFloorTechnicalrooms
+  name: Third Floor - Technical rooms
+  components:
+  - type: Sprite
+    state: dorms_2
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimvThirdFloorUpperCorridor
+  name: Third Floor - Upper Corridor
+  components:
+  - type: Sprite
+    state: dorms_1
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimvThirdFloorCaves
+  name: Third Floor - Caves
+  components:
+  - type: Sprite
+    state: hive_1
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimvThirdFloorLaboratory
+  name: Third Floor - Laboratory
+  components:
+  - type: Sprite
+    state: garage
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimvThirdFloorLowertechnicalrooms
+  name: Third Floor - Lower technical rooms
+  components:
+  - type: Sprite
+    state: sewers4
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimvThirdFloorLowerCorridor
+  name: Third Floor - Lower corridor
+  components:
+  - type: Sprite
+    state: sewers2
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimvThirdFloorServerroom
+  name: Third Floor - Server room
+  components:
+  - type: Sprite
+    state: tcomms2
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimvThirdFloorBioscanningtower
+  name: Third Floor - Bioscanning Tower
+  components:
+  - type: Sprite
+    state: tcomms1
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimvThirdFloorRadarControlroom
+  name: Third Floor - Radar control room
+  components:
+  - type: Sprite
+    state: ug_jung_dorm
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimvThirdFloorBattlefield
+  name: Third Floor - Battlefield
+  components:
+  - type: Sprite
+    state: rstation_deck
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimvThirdFloorEngineeringWorkshop
+  name: Third Floor - Engineering Workshop
+  components:
+  - type: Sprite
+    state: shed_3_ag
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimvThirdFloorOfficeCommandingOfficer
+  name: Third Floor - Office Commanding Officer
+  components:
+  - type: Sprite
+    state: marshcenter
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaMuspelheim
+  - CCMAreaMuspelheimZeroProtection
+  id: CCMAreaMuspelheimvThirdFloorCorridorscentralladder
+  name: Third Floor - Corridors at the central ladder
+  components:
+  - type: Sprite
+    state: outpost_canteen_2
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
