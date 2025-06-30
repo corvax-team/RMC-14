@@ -19,7 +19,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Administration.Commands
 {
-    [AdminCommand(AdminFlags.Fun)] // CCM ToDo
+    [AdminCommand(AdminFlags.Fun)] // CCM-CommandPerms
     public sealed class SetOutfitCommand : IConsoleCommand
     {
         [Dependency] private readonly IEntityManager _entities = default!;

@@ -9,7 +9,7 @@ using Robust.Shared.Player;
 
 namespace Content.Server.Traitor.Uplink.Commands
 {
-    [AdminCommand(AdminFlags.Fun)] // CCM ToDo
+    [AdminCommand(AdminFlags.Fun)] // CCM-CommandPerms
     public sealed class AddUplinkCommand : IConsoleCommand
     {
         [Dependency] private readonly IEntityManager _entManager = default!;

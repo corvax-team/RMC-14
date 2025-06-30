@@ -5,7 +5,7 @@ using Robust.Shared.Audio;
 
 namespace Content.Server._RMC14.Marines;
 
-[AdminCommand(AdminFlags.Fun)] // CCM ToDo
+[AdminCommand(AdminFlags.Fun)] // CCM-CommandPerms
 public sealed class AresAnnounceCommand : IConsoleCommand
 {
     public string Command => "aresannounce";
