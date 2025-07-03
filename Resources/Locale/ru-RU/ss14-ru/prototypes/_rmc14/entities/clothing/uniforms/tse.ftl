@@ -1,2 +1,2 @@
-ent-RMCJumpsuitTSEPA = tsepa uniform
-    .desc = The standard uniform of a TSEPA officer.
+ent-RMCJumpsuitTSEPA = униформа TSEPA
+    .desc = Стандартная форма офицера TSEPA.

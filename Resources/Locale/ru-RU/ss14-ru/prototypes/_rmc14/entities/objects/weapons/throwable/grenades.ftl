@@ -1,5 +1,5 @@
-ent-CMGrenadeBase = grenade
-    .desc = Duck and cover.
+ent-CMGrenadeBase = граната
+    .desc = Пригнитесь и накройте крышкой.
 ent-RMCM40DPTags = { "" }
     .desc = { "" }
 ent-RMCGrenadeFlashBang = светошумовая граната

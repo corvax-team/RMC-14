@@ -1,2 +1,2 @@
-ent-RMCIDCardCMBResponder = CMB Communications Officer ID card
-    .desc = Issued to the fax operators of CMB Regional Command. Represents a commitment to upholding the law.
+ent-RMCIDCardCMBResponder = ИД-карта сотрудника по связям с общественностью БКМ
+    .desc = Выдается операторам факса регионального командования БКМ. Представляет собой обязательство соблюдать закон.

@@ -1,2 +1,2 @@
-ent-RMCIDCardUNMCAdjutant = UNMC Adjutant ID card
-    .desc = A fancy ID card. Issued to the adjutants of high command.
+ent-RMCIDCardUNMCAdjutant = ИД-карта адъютанта ККМП
+    .desc = Изысканное удостоверение личности. Выдаётся адъютантам высшего командования.

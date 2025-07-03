@@ -1,6 +1,6 @@
 ent-RMCSpawnPointSurvivorDoctor = точка появления выживший доктор
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetDoctor = doctor colonist preset
+ent-RMCSurvivorPresetDoctor = шаблон роли колониальный доктор
     .desc = { ent-RMCSurvivorPresetCivilian.desc }
-ent-RMCRandomHumanoidSurvivorDoctor = doctor colonist ghost role
+ent-RMCRandomHumanoidSurvivorDoctor = колониальный доктор роль призрака
     .desc = { ent-MarkerBase.desc }

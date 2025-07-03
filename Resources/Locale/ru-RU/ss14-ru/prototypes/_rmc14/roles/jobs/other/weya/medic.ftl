@@ -1,3 +1,3 @@
-ent-RMCRandomHumanoidPMCMedic = weya pmc ghost role medic
-    .suffix = Spawner, Player
+ent-RMCRandomHumanoidPMCMedic = санитар отряда ЧВК роль призрака
+    .suffix = Спавнер, Игрок
     .desc = { "" }

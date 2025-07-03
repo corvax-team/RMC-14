@@ -1,3 +1,3 @@
-ent-RMCIDCardUNMCBrigadierGeneral = brigadier general ID card
-    .desc = Issued to the top brass of the UNMC. Premium, sleek, built to last.
-    .suffix = Admin
+ent-RMCIDCardUNMCBrigadierGeneral = ИД-карта бригадного генерала ККМП
+    .desc = Выдадаётся высшему руководству ККМП. Престиж, элегантность, долговечность.
+    .suffix = Админ

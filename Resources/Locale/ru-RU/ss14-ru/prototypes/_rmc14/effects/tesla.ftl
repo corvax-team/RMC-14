@@ -1,2 +1,2 @@
-ent-EffectTeslaBeam = electric beam
+ent-EffectTeslaBeam = электрический луч
     .desc = { "" }

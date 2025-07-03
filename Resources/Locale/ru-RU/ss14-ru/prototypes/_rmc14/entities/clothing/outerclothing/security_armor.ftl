@@ -1,2 +1,2 @@
-ent-RMCArmorSecurity = security armor
-    .desc = An armored vest that protects against some damage. This one has a Weston-Yamada corporate badge.
+ent-RMCArmorSecurity = бронежилет безопасности
+    .desc = Бронированный жилет, который защищает от некоторых повреждений. У этого есть корпоративный значок Weston-Yamada.

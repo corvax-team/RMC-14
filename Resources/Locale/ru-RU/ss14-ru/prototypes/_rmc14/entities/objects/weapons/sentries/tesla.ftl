@@ -1,8 +1,8 @@
 ent-RMCBaseTesla = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
-ent-RMCTesla = UN 21S tesla coil
-    .desc = A perfected way of producing high-voltage, low-current and high-frequency electricity. Minor modifications allow it to only hit hostile targets with a devastating shock.
-ent-RMCTeslaMicro = UN 25S micro tesla coil
-    .desc = A perfected way of producing high-voltage, low-current and high-frequency electricity. Minor modifications allow it to only hit hostile targets with a devastating shock. This one is smaller and more lightweight.
-ent-RMCTeslaOverclocked = UN 21S overclocked tesla coil
-    .desc = A perfected way of producing high-voltage, low-current and high-frequency electricity. Minor modifications allow it to only hit hostile targets with a devastating shock. This one is significantly overclocked, providing a lot more voltage at the cost of speed.
+ent-RMCTesla = катушка теслы UN 21S
+    .desc = Совершенный способ производства высоковольтного, слаботочного и высокочастотного электричества. Незначительные модификации позволяют ему поражать враждебные цели только разрушительным шоком.
+ent-RMCTeslaMicro = микро-катушка теслы UN 25S
+    .desc = Совершенный способ производства высоковольтного, слаботочного и высокочастотного электричества. Незначительные модификации позволяют ему поражать враждебные цели только разрушительным шоком. Эта меньше и легче.
+ent-RMCTeslaOverclocked = разогнанная катушка теслы UN 21S
+    .desc = Совершенный способ производства высоковольтного, слаботочного и высокочастотного электричества. Незначительные модификации позволяют ему поражать враждебные цели только разрушительным шоком. Эта значительно разогнана для обеспечения гораздо большего напряжения за счет скорости.

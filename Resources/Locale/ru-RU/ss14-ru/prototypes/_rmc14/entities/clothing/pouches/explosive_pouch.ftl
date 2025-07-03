@@ -1,5 +1,5 @@
-ent-RMCPouchExplosive = explosive pouch
-    .desc = It can carry grenades, plastic explosives, mine boxes, and other explosives.
+ent-RMCPouchExplosive = подсумок для взрывчатки
+    .desc = В нем можно переносить гранаты, пластичную взрывчатку, ящики с минами и другие взрывчатые вещества.
 ent-RMCPouchExplosiveFilledPlasticExplosives = { ent-RMCPouchExplosive }
     .desc = { ent-RMCPouchExplosive.desc }
 ent-RMCPouchExplosiveFilledHEFA = { ent-RMCPouchExplosive }

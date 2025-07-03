@@ -1,3 +1,3 @@
-ent-RMCRandomHumanoidWeYaLawyerSupervisor = weya corporate ghost role lawyer supervisor
-    .suffix = Spawner, Player
+ent-RMCRandomHumanoidWeYaLawyerSupervisor = старший адвокат ЧВК роль призрака
+    .suffix = Спавнер, Игрок
     .desc = { ent-MarkerBase.desc }

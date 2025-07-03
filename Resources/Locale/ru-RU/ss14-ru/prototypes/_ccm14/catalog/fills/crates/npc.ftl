@@ -1,3 +1,3 @@
 ent-CCMCrateNPCRoudy = { ent-CCMCrateRoudyCage }
-    .suffix = Filled
+    .suffix = Заполненный
     .desc = { ent-CCMCrateRoudyCage.desc }

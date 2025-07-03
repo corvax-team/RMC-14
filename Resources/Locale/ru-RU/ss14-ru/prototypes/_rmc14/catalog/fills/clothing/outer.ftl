@@ -1,9 +1,9 @@
 ent-RMCOuterClothingExternalWebbingForeconSurvivorFill = { ent-RMCOuterClothingExternalWebbing }
-    .suffix = FORECON, Filled
+    .suffix = Форекон, Заполненный
     .desc = { ent-RMCOuterClothingExternalWebbing.desc }
 ent-RMCArmorUDEPForeconFilled = { ent-RMCArmorUDEPForecon }
-    .suffix = FORECON, Filled
+    .suffix = Форекон, Заполненный
     .desc = { ent-RMCArmorUDEPForecon.desc }
 ent-RMCJacketWindbreakerForeconFilled = { ent-RMCJacketWindbreaker }
-    .suffix = FORECON, Filled
+    .suffix = Форекон, Заполненный
     .desc = { ent-RMCJacketWindbreaker.desc }

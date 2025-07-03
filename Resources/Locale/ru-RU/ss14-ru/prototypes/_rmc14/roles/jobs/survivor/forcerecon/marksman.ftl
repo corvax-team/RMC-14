@@ -1,4 +1,4 @@
-ent-CMSpawnPointForeconMarksman = forecon marksman spawn point
+ent-CMSpawnPointForeconMarksman = точка появления марксман отряда силовой разведки
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetForeconMarksman = forecon marksman survivor preset
+ent-RMCSurvivorPresetForeconMarksman = шаблон роли марксман отряда силовой разведки
     .desc = { ent-RMCSurvivorPresetForecon.desc }

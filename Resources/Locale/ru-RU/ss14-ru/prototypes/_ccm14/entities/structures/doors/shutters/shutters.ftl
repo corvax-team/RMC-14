@@ -1,6 +1,6 @@
-ent-CCMShutterDavidMech = mech's shutters
-    .suffix = David
+ent-CCMShutterDavidMech = ставни гаража погрузчика
+    .suffix = Давид
     .desc = { ent-RMCShutterAlmayer.desc }
-ent-CCMShutterDavidCargo = cargo's shutters
-    .suffix = David
+ent-CCMShutterDavidCargo = ставни карго
+    .suffix = Давид
     .desc = { ent-RMCShutterAlmayer.desc }

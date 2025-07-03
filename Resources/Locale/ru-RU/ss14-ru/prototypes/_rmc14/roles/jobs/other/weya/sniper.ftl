@@ -1,3 +1,3 @@
-ent-RMCRandomHumanoidPMCSniper = weya pmc ghost role sniper
-    .suffix = Spawner, Player
+ent-RMCRandomHumanoidPMCSniper = снайпер отряда ЧВК роль призрака
+    .suffix = Спавнер, Игрок
     .desc = { "" }

@@ -1,8 +1,8 @@
 ent-RMCPouchMedicalSocMarineRaiderFill = { ent-RMCPouchMedicalSoc }
-    .suffix = Filled
+    .suffix = Заполненный
     .desc = { ent-RMCPouchMedicalSoc.desc }
-ent-RMCPouchMedical = medical pouch
-    .desc = It can carry small medical supplies.
+ent-RMCPouchMedical = медицинский подсумок
+    .desc = В нем можно перевозить небольшие медицинские принадлежности.
 ent-RMCPouchMedicalFill = { ent-RMCPouchMedical }
     .suffix = Заполненный
     .desc = { ent-RMCPouchMedical.desc }

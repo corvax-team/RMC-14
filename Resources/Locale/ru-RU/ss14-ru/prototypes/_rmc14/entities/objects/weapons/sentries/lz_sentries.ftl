@@ -1,4 +1,4 @@
-ent-RMCBaseTurret = turret
+ent-RMCBaseTurret = турель
     .desc = { ent-BaseStructure.desc }
 ent-RMCTurretGaussSpaceborne = гаусс-турель UN-577 Спейсборн
     .desc = Полностью автоматизированная оборонительная турель с возможностью ведения огня на средней дистанции. Вооружена модифицированной автопушкой M32-S с внутренним ленточным питанием.

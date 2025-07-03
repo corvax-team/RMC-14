@@ -1,2 +1,2 @@
-ent-RMCStoragePlantBag = plant bag
+ent-RMCStoragePlantBag = сумка для растений
     .desc = { ent-BaseStorageItem.desc }

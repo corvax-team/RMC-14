@@ -1,6 +1,6 @@
-ent-RMCRandomHumanoidSPPRiflemanHostile = spp ghost role rifleman
-    .suffix = Spawner, Player, Hostile
+ent-RMCRandomHumanoidSPPRiflemanHostile = стрелок СССП роль призрака
+    .suffix = Спавнер, Игрок, Враждебный
     .desc = { "" }
-ent-RMCRandomHumanoidSPPRiflemanFriendly = spp ghost role rifleman
-    .suffix = Spawner, Player, Friendly
+ent-RMCRandomHumanoidSPPRiflemanFriendly = стрелок СССП роль призрака
+    .suffix = Спавнер, Игрок, Дружелюбный
     .desc = { "" }

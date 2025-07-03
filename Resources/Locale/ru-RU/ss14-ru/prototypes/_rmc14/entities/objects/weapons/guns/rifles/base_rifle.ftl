@@ -6,5 +6,5 @@ ent-RMCBaseWeaponMagazineVisuals = { "" }
     .desc = { "" }
 ent-CMMagazineRifleBase = { ent-BaseMagazineRifle }
     .desc = { ent-BaseMagazineRifle.desc }
-ent-CMBaseCartridgeRifle = cartridge
+ent-CMBaseCartridgeRifle = патрон
     .desc = { ent-BaseCartridgeRifle.desc }

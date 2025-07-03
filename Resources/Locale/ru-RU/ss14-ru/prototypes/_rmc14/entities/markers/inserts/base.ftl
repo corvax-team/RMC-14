@@ -1,2 +1,2 @@
-ent-RMCMapInsertBase = Map Insert Base
+ent-RMCMapInsertBase = базовая вставка карты
     .desc = { ent-MarkerBase.desc }

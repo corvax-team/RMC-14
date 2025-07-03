@@ -1,6 +1,6 @@
 ent-CCMDoubleDoorCargoSolidLocked = { ent-CMDoubleDoorBase }
-    .suffix = Cargo, Solid, Locked
+    .suffix = Карго, Сплошной, Закрыт
     .desc = { ent-CMDoubleDoorBase.desc }
 ent-CCMDoubleDoorCargoGlassLocked = { ent-CMDoubleDoorBase }
-    .suffix = Cargo, Glass, Locked
+    .suffix = Карго, Стеклянный, Закрыт
     .desc = { ent-CMDoubleDoorBase.desc }

@@ -1,5 +1,5 @@
-ent-RMCScabbardBase = base scabbard
-    .desc = -- insert description here --
+ent-RMCScabbardBase = базовые ножны
+    .desc = -- Вставьте описание здесь --
 ent-RMCScabbardMachete = ножны H5 для мачете M2132
     .desc = Большие кожаные ножны, предназначенные для транспортировки мачете M2132. Их можно закрепить на спине или на поясе.
 ent-RMCScabbardMacheteFilled = { ent-RMCScabbardMachete }

@@ -1,3 +1,3 @@
-rmc-ghost-name-marine-raider = Marine Raider (Friendly)
-rmc-job-name-marine-raider = Marine Raider
+rmc-ghost-name-marine-raider = офицер ССО (Дружелюбный)
+rmc-job-name-marine-raider = офицер ССО
 rmc-job-prefix-marine-raider = Op.

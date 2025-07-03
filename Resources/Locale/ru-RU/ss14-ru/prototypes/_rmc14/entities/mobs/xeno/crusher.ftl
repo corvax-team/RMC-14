@@ -1,9 +1,9 @@
-ent-CMXenoCrusherBase = Crusher
-    .desc = A huge alien with an enormous armored crest.
+ent-CMXenoCrusherBase = Крушитель
+    .desc = Огромный инопланетянин с огромным бронированным гребнем.
 ent-RMCXenoCrusher = { ent-CMXenoCrusherBase }
     .desc = { ent-CMXenoCrusherBase.desc }
 ent-RMCXenoCrusherCharger = { ent-CMXenoCrusherBase }
-    .suffix = Charger
+    .suffix = Спринтер
     .desc = { ent-CMXenoCrusherBase.desc }
 ent-CMXenoCrusher = Крушитель
     .desc = Огромный инопланетянин с огромным бронированным гребнем.

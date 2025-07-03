@@ -1,13 +1,13 @@
 ent-CMBed = кровать
-    .desc = A mattress seated on a rectangular metallic frame. This is used to support a lying person in a comfortable manner, notably for regular sleep. Ancient technology, but still useful.
+    .desc = Матрас, установленный на прямоугольной металлической раме. Используется для поддержки лежащего человека в удобной форме, особенно для обычного сна. Древняя технология, но все еще полезная.
 ent-RMCBedAlt = { ent-CMBed }
     .desc = { ent-CMBed.desc }
 ent-RMCBedPsych = { ent-CMBed }
     .desc = { ent-CMBed.desc }
 ent-RMCBedDingy = { ent-CMBed }
     .desc = { ent-CMBed.desc }
-ent-RMCBedAlien = alien bed
-    .suffix = Alien
+ent-RMCBedAlien = инопланетная кровать
+    .suffix = Инопланетный
     .desc = { ent-CMBed.desc }
 ent-Bedroll = спальный мешок
     .desc = Складной спальный мешок, практически единственная удобная вещь в полевых условиях. Обычно перед сном его полагается разворачивать, но кому нужны правила?

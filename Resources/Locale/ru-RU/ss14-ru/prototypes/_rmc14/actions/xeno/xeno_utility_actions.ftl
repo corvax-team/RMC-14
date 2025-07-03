@@ -26,5 +26,5 @@ ent-ActionXenoTantrum = Истерика (100 плазмы, 75 ярости)
     .desc = Даёт вам и вашим союзникам временную броню на несколько секунд, на вас она действует дольше. Крушители и Разрушители вместо этого получают прибавку к скорости.
 ent-ActionXenoFightOrFlight = Борись или беги (100 плазмы, 75 ярости)
     .desc = Снимает недуги и оглушение со всех союзников вокруг вас. Радиус действия больше, если после использования навыка у вас остаётся >75 ярости.
-ent-ActionXenoQueenEye = Enter Eye Form
-    .desc = Look around any area with weeds remotely. You can use infinite range abilities while in this form, and build resin from afar.
+ent-ActionXenoQueenEye = Войти в форму ока
+    .desc = Осматривайте территорию с сорняками удалённо. В этой форме вы можете использовать способности с бесконечной дальностью и строить смолу издалека.

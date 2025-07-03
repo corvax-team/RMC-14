@@ -1,4 +1,4 @@
-ent-RMCBaseMaterialDoor = door
+ent-RMCBaseMaterialDoor = дверь
     .desc = { ent-BaseMaterialDoor.desc }
-ent-RMCSandstoneDoor = sandstone door
-    .desc = It opens and closes.
+ent-RMCSandstoneDoor = Дверь песчаника
+    .desc = Открывается и закрывается.

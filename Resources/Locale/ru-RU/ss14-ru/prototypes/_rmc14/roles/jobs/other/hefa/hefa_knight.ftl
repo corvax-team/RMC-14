@@ -1,8 +1,8 @@
-ent-RMCRandomHumanoidHEFAShrapnelswornMeleeHostile = hefa ghost role shrapnelsworn
-    .suffix = Spawner, Player, Hostile
+ent-RMCRandomHumanoidHEFAShrapnelswornMeleeHostile = шрапнелеклятвенник HEFA роль призрака
+    .suffix = Спавнер, Игрок, Враждебный
     .desc = { ent-RMCRandomHumanoidHEFAShrapnelswornHostile.desc }
-ent-RMCRandomHumanoidHEFAShrapnelswornMeleeFriendly = hefa ghost role shrapnelsworn
-    .suffix = Spawner, Player, Friendly
+ent-RMCRandomHumanoidHEFAShrapnelswornMeleeFriendly = шрапнелеклятвенник HEFA роль призрака
+    .suffix = Спавнер, Игрок, Дружелюбный
     .desc = { ent-RMCRandomHumanoidHEFAShrapnelswornFriendly.desc }
 ent-RMCSpawnerHEFAShrapnelsworn = спавнер шрапнелеклятвенник HEFA
     .suffix = Спавнер

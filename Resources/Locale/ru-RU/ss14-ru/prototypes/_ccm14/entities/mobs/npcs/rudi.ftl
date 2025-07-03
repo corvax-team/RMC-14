@@ -1,2 +1,2 @@
-ent-CCMMobRoudy = Roudy
-    .desc = Dude, how do you get so cute!? I want to look like you!
+ent-CCMMobRoudy = Руди
+    .desc = Чувак, как ты стал таким милым!? Я хочу выглядеть как ты!

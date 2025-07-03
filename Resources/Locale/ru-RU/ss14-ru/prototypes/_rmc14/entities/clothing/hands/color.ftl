@@ -8,5 +8,5 @@ ent-CMHandsWhite = белые перчатки
     .desc = Пара белых перчаток.
 ent-CMHandsWhiteDress = парадные перчатки
     .desc = Пара модных белых перчаток, которые носят колониальные морские пехотинцы в парадной форме.
-ent-RMCHandsPurple = purple gloves
-    .desc = A pair of gloves, they don't look special in any way.
+ent-RMCHandsPurple = фиолетовые перчатки
+    .desc = Пара перчаток, они не выглядят чем-то особенным.

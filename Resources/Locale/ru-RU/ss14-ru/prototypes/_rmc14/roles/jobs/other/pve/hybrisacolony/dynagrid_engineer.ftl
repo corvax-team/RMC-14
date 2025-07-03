@@ -1,2 +1,2 @@
-ent-RMCSpawnPointPVEDynagridEngineer = dyangrid engineer spawn point
+ent-RMCSpawnPointPVEDynagridEngineer = точка появления инженер колонии
     .desc = { ent-CMSpawnPointJobBase.desc }

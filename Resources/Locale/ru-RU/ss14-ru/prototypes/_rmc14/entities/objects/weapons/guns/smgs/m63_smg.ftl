@@ -1,7 +1,7 @@
 ent-WeaponSMGM63 = пистолет-пулемёт M63
     .desc = Пистолет-пулемёт M-63 компании «Эгида Батлфилд Армаментс». Часто используется лёгкой пехотой, разведчиками, техниками и санитарами.
 ent-RMCWeaponSMGM63ExtendedFilled = { ent-WeaponSMGM63 }
-    .suffix = Filled, Extended
+    .suffix = Заполненный, Расширенный
     .desc = { ent-WeaponSMGM63.desc }
 ent-CMMagazineSMGM63 = магазин M63 HV (10x20мм)
     .desc = { ent-CMMagazineRifleBase.desc }

@@ -1,9 +1,9 @@
-ent-CCMPodDoorDavidPort = port's podlock
-    .suffix = David
+ent-CCMPodDoorDavidPort = портовые ставни
+    .suffix = Давид
     .desc = { ent-RMCPodDoorAlmayerBlack.desc }
-ent-CCMPodDoorDavidNukeStorage = nuke storage's podlock
-    .suffix = David
+ent-CCMPodDoorDavidNukeStorage = ставни ядерного хранилища
+    .suffix = Давид
     .desc = { ent-RMCPodDoorAlmayerBlack.desc }
-ent-CCMPodDoorDavidNukeStorageOpen = nuke storage's podlock
-    .suffix = Open, David
+ent-CCMPodDoorDavidNukeStorageOpen = ставни ядерного хранилища
+    .suffix = Открыто, Давид
     .desc = { ent-RMCPodDoorAlmayerBlack.desc }

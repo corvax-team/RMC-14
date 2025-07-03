@@ -1,6 +1,6 @@
-ent-RMCSpawnerPMCLeader = спавнер оператор ЧВК Вестон-Ямада (Лидер)
+ent-RMCSpawnerPMCLeader = лидер отряда ЧВК роль призрака
     .suffix = Спавнер
     .desc = { ent-MarkerBase.desc }
-ent-RMCRandomHumanoidPMCLeader = оператор ЧВК Вестон-Ямада (Лидер) роль призрака
+ent-RMCRandomHumanoidPMCLeader = лидер отряда ЧВК роль призрака
     .suffix = Роль
     .desc = { "" }

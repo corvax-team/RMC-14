@@ -6,5 +6,5 @@ ent-CCMWrench = { ent-CMWrench }
     .desc = { ent-CMWrench.desc }
 ent-CCMCrowbar = { ent-CMCrowbar }
     .desc = { ent-CMCrowbar.desc }
-ent-CCMCrowbarRed = emergency crowbar
+ent-CCMCrowbarRed = Аварийная монтировка
     .desc = { ent-CCMCrowbar.desc }

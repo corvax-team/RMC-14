@@ -1,9 +1,9 @@
-ent-RMCRandomHumanoidPMCStandardM63B2 = weya pmc ghost role standard
-    .suffix = Spawner, Player, M63B2
+ent-RMCRandomHumanoidPMCStandardM63B2 = член отряда ЧВК роль призрака
+    .suffix = Спавнер, Игрок, M63B2
     .desc = { "" }
-ent-RMCRandomHumanoidPMCStandardSSG45 = weya pmc ghost role standard
-    .suffix = Spawner, Player, SSG45
+ent-RMCRandomHumanoidPMCStandardSSG45 = член отряда ЧВК роль призрака
+    .suffix = Спавнер, Игрок, SSG45
     .desc = { "" }
-ent-RMCRandomHumanoidPMCStandardM54C2 = weya pmc ghost role standard
-    .suffix = Spawner, Player, M54C2
+ent-RMCRandomHumanoidPMCStandardM54C2 = член отряда ЧВК роль призрака
+    .suffix = Спавнер, Игрок, M54C2
     .desc = { "" }

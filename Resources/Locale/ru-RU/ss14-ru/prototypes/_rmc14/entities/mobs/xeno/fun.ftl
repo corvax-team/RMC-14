@@ -3,5 +3,5 @@ ent-RMCXenoRouny = Руни
     .suffix = RMC14
 ent-RMCXenoWehny = Веххи
     .desc = Жестокая, жестокая шутка какого-то больного человека.
-ent-RMCXenoLesserCarrier = Lesser Carrier
-    .desc = A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures. Looks... smaller.
+ent-RMCXenoLesserCarrier = Малый носитель
+    .desc = Странно выглядящее инопланетное существо. Оно несет в себе множество суетливых членистых существ, похожих на крабов. Выглядит ... меньше.

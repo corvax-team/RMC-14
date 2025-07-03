@@ -1,4 +1,4 @@
-ent-RMCArmourM4TSEPA = M4 pattern light TSEPA armour
-    .desc = A modified variant of the M4R armor, stripped of additional riot plating for civilian officer use. A 'TSEPA' badge is sewn into the chestplate.
-ent-RMCArmourM4TSEPAChief = M4 pattern inspector TSEPA armour
-    .desc = A modified variant of the M4 TSEPA armour to have the additional riot plating returned, feauturing a golden insignia on the chestplate.
+ent-RMCArmourM4TSEPA = легкий бронежилет M4 TSEPA
+    .desc = Модифицированный вариант брони M4R, лишенный дополнительного защитного покрытия для использования гражданскими офицерами. В нагрудную пластину вшит значок 'TSEPA'.
+ent-RMCArmourM4TSEPAChief = бронежилет инспектора M4 TSEPA
+    .desc = Модифицированный вариант брони M4 TSEPA с дополнительной защитной пластиной и золотой эмблемой на нагруднике.

@@ -1,4 +1,4 @@
-ent-RMCMobSkrell = Urist R McFrog
+ent-RMCMobSkrell = Урист Р. Макфрог
     .suffix = RMC14
     .desc = { ent-CMBaseMobSpeciesOrganic.desc }
 ent-MobSkrellDummy = { ent-BaseSpeciesDummy }

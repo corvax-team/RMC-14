@@ -1,4 +1,4 @@
-ent-RMCIntelBase = intel item
+ent-RMCIntelBase = предмет исследований
     .desc = { ent-BaseItem.desc }
 ent-RMCIntelReadableBase = { ent-RMCIntelBase }
     .desc = { ent-RMCIntelBase.desc }

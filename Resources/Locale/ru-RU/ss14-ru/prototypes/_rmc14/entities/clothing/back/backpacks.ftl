@@ -22,5 +22,5 @@ ent-CMBackpackWelder = сварочный рюкзак техника ККМП
     .desc = Специализированный рюкзак, который носят техники колониальной морской пехоты. Он оснащён топливным резервуаром для быстрой заправки сварочного аппарата.
 ent-RMCBackpackAmmo = стойка для патронов IMP
     .desc = Голый каркас IMP с креплениями, предназначенный для транспортировки нескольких ящиков патронов, но благодаря изобретательности морпехов в него может поместиться любой громоздкий ящик. Поможет вам носить с собой дополнительные патроны или припасы.
-ent-RMCBackpackWelderPMC = pmc technician welderpack
-    .desc = Ergonomic, protected, high capacity backpack, designed for Weston-Yamada PMCs. Features a small fueltank for quick blowtorch refueling.
+ent-RMCBackpackWelderPMC = сварочный рюкзак техника ЧВК
+    .desc = Эргономичный, защищенный рюкзак повышенной вместимости, разработанный для ЧВК Weston-Yamada. Имеет небольшой топливный бак для быстрой дозаправки паяльной лампы.

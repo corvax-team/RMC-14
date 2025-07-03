@@ -1,2 +1,2 @@
-ent-RMCSpawnPointTSEPASeniorConstable = tsepa senior constable spawn point
+ent-RMCSpawnPointTSEPASeniorConstable = точка появления старший полисмен TSEPA
     .desc = { ent-CMSpawnPointJobBase.desc }

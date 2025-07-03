@@ -1,8 +1,8 @@
 ent-CMMedilinkSupplyPort = порт подачи медилинк
     .desc = Сложная сеть труб и устройств, соединённых с обширными складскими резервуарами под палубой. Медицинские торгоматы, подключенные к этому порту, могут пополнять свои запасы бесконечно.
-ent-CMVendorMedicalAllAccess = We-Ya-Med Plus
-    .desc = Medical pharmaceutical dispenser. Provided by We-Ya Pharmaceuticals Division(TM).
-    .suffix = All Access
+ent-CMVendorMedicalAllAccess = Ве-Я-Мед Плюс
+    .desc = Раздатчик медицинских препаратов. Предоставлен компанией Ве-Я Фармасьютикалс(TM), подразделением Вестон-Ямада.
+    .suffix = Общий доступ
 ent-CMVendorMedical = Ве-Я-Мед Плюс
     .desc = Раздатчик медицинских препаратов. Предоставлен компанией Ве-Я Фармасьютикалс(TM), подразделением Вестон-Ямада.
 ent-CMVendorChemistry = Ве-Я-Хим Плюс

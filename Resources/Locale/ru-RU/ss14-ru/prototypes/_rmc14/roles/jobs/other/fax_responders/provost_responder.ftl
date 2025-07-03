@@ -1,2 +1,2 @@
-ent-RMCIDCardProvostResponder = provost responder ID card
-    .desc = Issued to members of the Provost Marshal Office.
+ent-RMCIDCardProvostResponder = ИД-карта сотрудника по связям с общественностью приставолитета
+    .desc = Выдается членам приставолитета.

@@ -1,6 +1,6 @@
-ent-CCMKvassTank = { ent-StorageTank }
-    .suffix = Empty
-    .desc = { ent-StorageTank.desc }
+ent-CCMKvassTank = бочка с квасом
+    .suffix = Пустой
+    .desc = Жёлтая бочка с напитком на хлебных зёрнах.
 ent-CCMKvassTankFull = { ent-CCMKvassTank }
-    .suffix = Full
+    .suffix = Полный
     .desc = { ent-CCMKvassTank.desc }

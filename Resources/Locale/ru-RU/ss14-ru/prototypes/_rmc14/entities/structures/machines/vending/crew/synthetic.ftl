@@ -1,8 +1,8 @@
-ent-ColMarTechCrewSynthetic = ColMarTech Synthetic Equipment Rack
-    .desc = An automated rack hooked up to a colossal storage of various equipment. Can be accessed only by synthetic units.
-ent-ColMarTechCrewSyntheticGear = ColMarTech Synthetic Auxiliary Gear Rack
-    .desc = An automated gear rack hooked up to a colossal storage of various medical and engineering supplies. Can be accessed only by synthetic units.
-ent-WeYaExperimentalToolsVendor = We-Ya Experimental Tools Vendor
-    .desc = A smaller vendor hooked up to a cache of specially provisioned, experimental tools and equipment provided by the We-Ya Research and Development Division(TM). Handle with care.
-ent-RMCVendorBundleCompactNailgunKit = compact nailgun kit
-    .desc = Contains a compact nailgun, two magazines and a nailgun holster.
+ent-ColMarTechCrewSynthetic = КолМарТех автоматическая стойка экипировки синтетиков
+    .desc = Автоматизированная стойка, подключенная к колоссальному хранилищу различного оборудования. Доступ возможен только для синтетиков.
+ent-ColMarTechCrewSyntheticGear = КолМарТех стойка снаряжения синтетиков поддержки
+    .desc = Автоматизированная стойка экипировки, подключенная к колоссальному хранилищу различных медицинских и инженерных принадлежностей. Доступ возможен только для синтетиков.
+ent-WeYaExperimentalToolsVendor = торгомат We-Ya эксперементальные инструменты
+    .desc = ебольшой торгомат подключенный к тайнику специально подготовленных экспериментальных инструментов и оборудования, предоставленных We-Ya Research and Development Division (TM). Обращаться с осторожностью.
+ent-RMCVendorBundleCompactNailgunKit = компактный комплект гвоздомёта
+    .desc = В комплект входит компактный гвоздомёт, два магазина и кобура для гвоздомёта.

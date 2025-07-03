@@ -1,2 +1,2 @@
-ent-CCMSpawnMobRoudy = Roudy Spawner
+ent-CCMSpawnMobRoudy = Руди Спавнер
     .desc = { ent-MarkerBase.desc }

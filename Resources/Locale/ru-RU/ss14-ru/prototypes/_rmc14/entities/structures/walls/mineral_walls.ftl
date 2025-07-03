@@ -1,8 +1,8 @@
 ent-RMCWallSandstone = песчаниковая стена
     .desc = Тяжёлая стена из песчаника.
-ent-RMCWallSandstoneTemple = sandstone temple wall
-    .desc = A heavy wall of sandstone.
-ent-RMCWallSandstoneTempleRuned = runed sandstone temple wall
-    .desc = A heavy wall of sandstone, with elegant carvings and runes inscribed upon its face.
+ent-RMCWallSandstoneTemple = стена храма из песчаника
+    .desc = Тяжелая стена песчаника.
+ent-RMCWallSandstoneTempleRuned = стена храма из рунического песчаника
+    .desc = Тяжёлая стена из песчаника, покрытая изящной резьбой и начертанными на её лицевой стороне рунами.
 ent-RMCWallSandstoneRuned = песчаниковая стена с рунами
     .desc = Тяжёлая стена из песчаника, покрытая изящной резьбой и начертанными на её лицевой стороне рунами.

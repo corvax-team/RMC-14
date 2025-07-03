@@ -1,3 +1,3 @@
-ent-CMBaseMachineCircuitboard = machine board
-    .suffix = Machine Board
+ent-CMBaseMachineCircuitboard = машинная плата
+    .suffix = Машинная плата
     .desc = { ent-BaseMachineCircuitboard.desc }

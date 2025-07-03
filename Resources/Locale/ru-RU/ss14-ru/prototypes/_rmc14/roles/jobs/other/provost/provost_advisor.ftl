@@ -1,6 +1,6 @@
-ent-RMCSpawnerProvostAdvisor = спавнер провост-советник
+ent-RMCSpawnerProvostAdvisor = спавнер советник военного приставолитета
     .suffix = Спавнер, Игрок, Слабое понимание закона
     .desc = { ent-MarkerBase.desc }
-ent-RMCRandomHumanoidProvostAdvisor = провост-советник роль призрака
+ent-RMCRandomHumanoidProvostAdvisor = советник военного приставолитета роль призрака
     .suffix = Роль, Игрок, Слабое понимание закона
     .desc = { "" }

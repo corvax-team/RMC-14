@@ -1,2 +1,2 @@
-ent-Test = jungle camo test
-    .desc = junjle
+ent-Test = тест камуфляжа джунглей
+    .desc = джунгли

@@ -1,6 +1,6 @@
-ent-RMCSpawnerProvostChiefInspector = спавнер провост-старший инспектор
+ent-RMCSpawnerProvostChiefInspector = спавнер старший инспектор военного приставолитета
     .suffix = Спавнер, Игрок, Хорошее понимание закона
     .desc = { ent-MarkerBase.desc }
-ent-RMCRandomHumanoidProvostChiefInspector = провост-старший инспектор роль призрака
+ent-RMCRandomHumanoidProvostChiefInspector = старший инспектор военного приставолитета роль призрака
     .suffix = Роль, Игрок, Хорошее понимание закона
     .desc = { "" }

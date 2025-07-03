@@ -1,4 +1,4 @@
-ent-CMBeltBase = belt
-    .desc = Can hold various things.
+ent-CMBeltBase = пояс
+    .desc = Может вмещать различные вещи.
 ent-CMBeltBaseStorage = { ent-CMBeltBase }
     .desc = { ent-CMBeltBase.desc }

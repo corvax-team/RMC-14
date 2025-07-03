@@ -1,2 +1,2 @@
-ent-RMCSpawnPointTSEPAInspector = tsepa inspector spawn point
+ent-RMCSpawnPointTSEPAInspector = точка появления инспектор TSEPA
     .desc = { ent-CMSpawnPointJobBase.desc }

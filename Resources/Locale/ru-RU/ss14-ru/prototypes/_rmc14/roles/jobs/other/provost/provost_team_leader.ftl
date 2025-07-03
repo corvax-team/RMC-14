@@ -1,6 +1,6 @@
-ent-RMCSpawnerProvostTeamLeader = спавнер провост-лидер команды
+ent-RMCSpawnerProvostTeamLeader = спавнер лидер отряда военного приставолитета
     .suffix = Спавнер, Игрок
     .desc = { ent-MarkerBase.desc }
-ent-RMCRandomHumanoidProvostTeamLeader = провост-лидер команды роль призрака
+ent-RMCRandomHumanoidProvostTeamLeader = лидер отряда военного приставолитета роль призрака
     .suffix = Роль, Игрок
     .desc = { "" }

@@ -1,2 +1,2 @@
-ent-RMCIDCardTSEPA = TSEPA ID card
+ent-RMCIDCardTSEPA = ИД-карта TSEPA
     .desc = { ent-CMIDCardLanyard.desc }

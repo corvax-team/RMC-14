@@ -11,5 +11,5 @@ ent-RMCCableCoil10 = { ent-RMCCableCoil }
     .suffix = 10
     .desc = { ent-RMCCableCoil.desc }
 ent-RMCCableCoil1 = { ent-RMCCableCoil }
-    .suffix = Single
+    .suffix = Один
     .desc = { ent-RMCCableCoil.desc }
