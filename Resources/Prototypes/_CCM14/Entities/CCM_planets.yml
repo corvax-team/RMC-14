@@ -6,7 +6,6 @@
     map: /Maps/_CCM14/Planets/polyphemus.yml
     camouflage: Classic
     announcement: "Pan-Pan. This is the commanding officer of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet Polyphemus. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
-    minPlayers: 10
 
 - type: entity
   id: RMCPlanetChancesNova
