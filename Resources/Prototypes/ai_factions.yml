@@ -55,6 +55,11 @@
   - AllHostile
   - Wizard
   - Dragon
+  - UNMC
+  - SPP
+  - WeYa
+  - Survivor
+  - CLF
 
 - type: npcFaction
   id: SimpleNeutral
@@ -83,6 +88,11 @@
   - AllHostile
   - Wizard
   - Dragon
+  - UNMC
+  - SPP
+  - WeYa
+  - Survivor
+  - CLF
 
 - type: npcFaction
   id: Zombie
@@ -123,6 +133,11 @@
   - Zombie
   - Revolutionary
   - Wizard
+  - UNMC
+  - SPP
+  - WeYa
+  - Survivor
+  - CLF
 
 - type: npcFaction
   id: Wizard

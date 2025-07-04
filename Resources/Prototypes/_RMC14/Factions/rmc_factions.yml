@@ -2,6 +2,9 @@
   id: UNMC
   hostile:
   - RMCXeno
+  - SimpleHostile
+  - Xeno
+  - AllHostile
 
 - type: npcFaction
   id: RMCXeno
@@ -21,38 +24,62 @@
   - WeYa
   - Survivor
   - CLF
+  - SimpleHostile
+  - Xeno
+  - AllHostile
 
 - type: npcFaction
   id: SPP
   hostile:
   - RMCXeno
+  - SimpleHostile
+  - Xeno
+  - AllHostile
 
 - type: npcFaction
   id: CLF
   hostile:
   - RMCXeno
+  - SimpleHostile
+  - Xeno
+  - AllHostile
 
 - type: npcFaction
   id: WeYa
   hostile:
   - RMCXeno
+  - SimpleHostile
+  - Xeno
+  - AllHostile
 
 - type: npcFaction
   id: Survivor
   hostile:
   - RMCXeno
+  - SimpleHostile
+  - Xeno
+  - AllHostile
 
 - type: npcFaction
   id: RoyalMarines
   hostile:
   - RMCXeno
+  - SimpleHostile
+  - Xeno
+  - AllHostile
 
 - type: npcFaction
   id: Bureau
   hostile:
   - RMCXeno
+  - SimpleHostile
+  - Xeno
+  - AllHostile
 
 - type: npcFaction
   id: TSE
   hostile:
   - RMCXeno
+  - SimpleHostile
+  - Xeno
+  - AllHostile

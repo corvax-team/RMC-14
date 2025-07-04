@@ -1,10 +1,11 @@
-﻿using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Body.Systems;
 using Content.Shared.Body.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Content.Shared._RMC14.Xenonids.Parasite;
 
 namespace Content.Shared._RMC14.Xenonids.Gut;
 
@@ -47,6 +48,12 @@ public sealed class SharedXenoGutSystem : EntitySystem
         if (!_xenoPlasma.HasPlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
 
+        TryComp(args.Target, out VictimInfectedComponent? infected);
+        if (infected != null && infected.CurrentStage >= 5)
+        {
+            return;
+        }
+
         args.Handled = true;
 
         var ev = new XenoGutDoAfterEvent();
@@ -72,6 +79,12 @@ public sealed class SharedXenoGutSystem : EntitySystem
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
+
+        TryComp(args.Target, out VictimInfectedComponent? infected);
+        if (infected != null && infected.CurrentStage >= 5)
+        {
+            return;
+        }
 
         args.Handled = true;
         if (_net.IsServer)

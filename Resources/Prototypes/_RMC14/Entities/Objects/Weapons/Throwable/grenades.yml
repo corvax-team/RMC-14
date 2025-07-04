@@ -204,7 +204,6 @@
   - type: Tag
     tags:
     - Grenade
-    - LauncherCompatibleGrenade
   - type: Ammo
   - type: ClusterLimitHits
   - type: CMExplosionEffect
