@@ -5,7 +5,6 @@ using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Stations;
-using Content.Server._RMC14.Xenonids.Construction.Tunnel;
 using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -60,6 +59,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.JoinXeno;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
@@ -93,6 +93,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Rules;
@@ -113,7 +114,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly XenoHiveSystem _hive = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly ItemCamouflageSystem _camo = default!;
-    [Dependency] private readonly MarineSystem _marines = default!;
     [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
@@ -153,6 +153,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly RMCGameRuleExtrasSystem _gameRulesExtras = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
+    [Dependency] private readonly ISerializationManager _serialization = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
@@ -169,7 +170,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private string _adminFaxAreaMap = string.Empty;
     private int _mapVoteExcludeLast;
     private bool _useCarryoverVoting;
-    private TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
+    private readonly TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
     private bool _landingZoneMiasmaEnabled;
     private TimeSpan _sunsetDuration;
     private TimeSpan _sunriseDuration;
@@ -177,6 +178,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private float _hijackShipWeight;
     private int _hijackMinBurrowed;
     private int _xenosMinimum;
+    private bool _usingCustomOperationName;
 
     private readonly List<MapId> _almayerMaps = [];
     private readonly List<EntityUid> _marineList = [];
@@ -196,6 +198,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     public string? OperationName { get; private set; }
 
     private readonly Dictionary<EntProtoId<RMCPlanetMapPrototypeComponent>, int> _carryoverVotes = new();
+
+    private IVoteHandle? _currentVote;
 
     public override void Initialize()
     {
@@ -270,7 +274,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             // TODO: come up with random name like operation name, in a function that can be reused for hive v hive
             comp.Hive = _hive.CreateHive("xenonid hive", comp.HiveId);
-            if (!SpawnXenoMap((uid, comp)))
+            if (comp.SpawnPlanet && !SpawnXenoMap((uid, comp)))
             {
                 Log.Error("Failed to load xeno map");
                 // TODO: how should the gamemode handle failure? restart immediately or create an alert for admins
@@ -280,15 +284,20 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _intel.RunSpawners();
 
             SetFriendlyHives(comp.Hive);
-            UnpowerFaxes(_transform.GetMapId(comp.XenoMap));
+
+            if (comp.XenoMap != null)
+                UnpowerFaxes(_transform.GetMapId(comp.XenoMap.Value));
 
             SetCamoType();
 
             SpawnSquads((uid, comp));
             SpawnAdminAreas(comp);
 
-            var bioscan = Spawn(null, MapCoordinates.Nullspace);
-            EnsureComp<BioscanComponent>(bioscan);
+            if (comp.Bioscan)
+            {
+                var bioscan = Spawn(null, MapCoordinates.Nullspace);
+                EnsureComp<BioscanComponent>(bioscan);
+            }
 
             var xenoSpawnPoints = new List<EntityUid>();
             var spawnQuery = AllEntityQuery<XenoSpawnPointComponent>();
@@ -365,10 +374,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (SelectedPlanetMap != null)
             {
                 if (SelectedPlanetMap.Value.Comp.SurvivorJobs != null)
-                    comp.SurvivorJobs = SelectedPlanetMap.Value.Comp.SurvivorJobs;
+                    comp.SurvivorJobs = _serialization.CreateCopy(SelectedPlanetMap.Value.Comp.SurvivorJobs, notNullableOverride: true);
 
-                comp.SurvivorJobInserts = SelectedPlanetMap.Value.Comp.SurvivorJobInserts;
-                comp.SurvivorJobOverrides = SelectedPlanetMap.Value.Comp.SurvivorJobOverrides;
+                comp.SurvivorJobInserts = _serialization.CreateCopy(SelectedPlanetMap.Value.Comp.SurvivorJobInserts);
+                comp.SurvivorJobOverrides = _serialization.CreateCopy(SelectedPlanetMap.Value.Comp.SurvivorJobOverrides);
             }
 
             var survivorSpawnersLeft = new Dictionary<ProtoId<JobPrototype>, List<EntityUid>>();
@@ -400,14 +409,26 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 }
 
                 var spawnAsJob = job;
+                var selectRandomInsert = SelectedPlanetMap?.Comp.SelectRandomSurvivorInsert ?? false;
 
-                if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var insert))
+                var playerId = _random.Pick(list);
+                if (!_player.TryGetSessionById(playerId, out var player))
+                {
+                    Log.Error($"Failed to find player with id {playerId} during survivor selection.");
+                    return null;
+                }
+
+                // select an insert in order, reducing the slot of that insert
+                if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var insert) && !selectRandomInsert)
                 {
                     var insertSuccess = false;
 
                     for (var i = 0; i < insert.Count; i++)
                     {
                         var (insertJob, amount) = insert[i];
+
+                        if (!IsAllowed(playerId, insertJob))
+                            continue; // check insert playtime requirements
 
                         if (amount == -1)
                         {
@@ -438,6 +459,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (survJob != job)
                         continue;
 
+                    if (selectRandomInsert) // select a random insert if there are any and if this map supports random inserts
+                    {
+                        if (comp.SurvivorJobInserts != null && comp.SurvivorJobInserts.TryGetValue(job, out var randomInsertList))
+                            spawnAsJob = _random.Pick(randomInsertList).Insert;
+                    }
+
                     if (amount == -1)
                         break;
 
@@ -450,12 +477,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     comp.SurvivorJobs[i] = (survJob, amount - 1);
                 }
 
-                var playerId = _random.PickAndTake(list);
-                if (!_player.TryGetSessionById(playerId, out var player))
-                {
-                    Log.Error($"Failed to find player with id {playerId} during survivor selection.");
-                    return null;
-                }
+                list.Remove(playerId); // remove the player from the pool because they passed the checks
 
                 var spawner = _random.PickAndTake(jobSpawnersLeft);
                 ev.PlayerPool.Remove(player);
@@ -540,7 +562,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             totalSurvivors = (int) Math.Clamp(totalSurvivors, _minimumSurvivors, _maximumSurvivors);
             var marines = ev.PlayerPool.Count - totalXenos - totalSurvivors;
             var jobSlotScaling = _config.GetCVar(RMCCVars.RMCJobSlotScaling);
-            if (marines > 0 && jobSlotScaling)
+            if (comp.DoJobSlotScaling && marines > 0 && jobSlotScaling)
             {
                 var stations = EntityQueryEnumerator<StationJobsComponent, StationSpawningComponent>();
                 while (stations.MoveNext(out var stationId, out var stationJobs, out _))
@@ -592,133 +614,141 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 }
             }
 
-            NetUserId? queenSelected = null;
-            for (var i = xenoCandidates.Length - 1; i >= 0; i--)
+            if (comp.SpawnXenos)
             {
-                var list = xenoCandidates[i];
-                while (list.Count > 0)
+                NetUserId? queenSelected = null;
+                for (var i = xenoCandidates.Length - 1; i >= 0; i--)
                 {
-                    queenSelected = SpawnXeno(list, comp.QueenEnt);
-                    if (queenSelected != null)
-                        break;
-                }
-
-                if (queenSelected != null)
-                {
-                    totalXenos--;
-                    break;
-                }
-            }
-
-            foreach (var list in xenoCandidates)
-            {
-                list.Clear();
-            }
-
-            foreach (var (id, profile) in ev.Profiles)
-            {
-                if (id == queenSelected)
-                    continue;
-
-                if (!IsAllowed(id, comp.XenoSelectableJob))
-                    continue;
-
-                if (profile.JobPriorities.TryGetValue(comp.XenoSelectableJob, out var priority) &&
-                    priority > JobPriority.Never)
-                {
-                    xenoCandidates[(int) priority].Add(id);
-                }
-            }
-
-            var selectedXenos = 0;
-            for (var i = xenoCandidates.Length - 1; i >= 0; i--)
-            {
-                var list = xenoCandidates[i];
-                while (list.Count > 0 && selectedXenos < totalXenos)
-                {
-                    if (SpawnXeno(list, comp.LarvaEnt, true) != null)
-                        selectedXenos++;
-                }
-            }
-
-            // Any unfilled xeno slots become larva
-            var unfilled = totalXenos - selectedXenos;
-            if (unfilled > 0)
-                _hive.IncreaseBurrowedLarva(unfilled);
-
-            var survivorCandidates = new Dictionary<ProtoId<JobPrototype>, List<NetUserId>[]>();
-            foreach (var job in comp.SurvivorJobs)
-            {
-                survivorCandidates[job.Job] = new List<NetUserId>[priorities];
-
-                var jobList = survivorCandidates[job.Job];
-                for (var i = 0; i < jobList.Length; i++)
-                {
-                    jobList[i] = [];
-                }
-            }
-
-            foreach (var player in ev.PlayerPool)
-            {
-                foreach (var (job, players) in survivorCandidates)
-                {
-                    var id = player.UserId;
-                    if (!IsAllowed(id, comp.CivilianSurvivorJob) || !IsAllowed(id, job))
-                        continue;
-
-                    if (!ev.Profiles.TryGetValue(id, out var profile))
-                        continue;
-
-                    var overriden = false;
-
-                    if (comp.SurvivorJobOverrides != null)
-                    { // Override the job
-                        foreach (var (originalJob, overrideJob) in comp.SurvivorJobOverrides)
-                        {
-                            if (profile.JobPriorities.TryGetValue(originalJob, out var originalPriority) &&
-                                originalPriority > JobPriority.Never && overrideJob == job)
-                            {
-                                players[(int)originalPriority].Add(id);
-                                overriden = true;
-                                break;
-                            }
-                        }
+                    var list = xenoCandidates[i];
+                    while (list.Count > 0)
+                    {
+                        queenSelected = SpawnXeno(list, comp.QueenEnt);
+                        if (queenSelected != null)
+                            break;
                     }
 
-                    if (overriden)
+                    if (queenSelected != null)
+                    {
+                        totalXenos--;
+                        break;
+                    }
+                }
+
+                foreach (var list in xenoCandidates)
+                {
+                    list.Clear();
+                }
+
+                foreach (var (id, profile) in ev.Profiles)
+                {
+                    if (id == queenSelected)
                         continue;
 
-                    if (profile.JobPriorities.TryGetValue(job, out var priority) &&
+                    if (!IsAllowed(id, comp.XenoSelectableJob))
+                        continue;
+
+                    if (profile.JobPriorities.TryGetValue(comp.XenoSelectableJob, out var priority) &&
                         priority > JobPriority.Never)
                     {
-                        players[(int)priority].Add(id);
+                        xenoCandidates[(int) priority].Add(id);
                     }
                 }
+
+                var selectedXenos = 0;
+                for (var i = xenoCandidates.Length - 1; i >= 0; i--)
+                {
+                    var list = xenoCandidates[i];
+                    while (list.Count > 0 && selectedXenos < totalXenos)
+                    {
+                        if (SpawnXeno(list, comp.LarvaEnt, true) != null)
+                            selectedXenos++;
+                    }
+                }
+
+                // Any unfilled xeno slots become larva
+                var unfilled = totalXenos - selectedXenos;
+                if (unfilled > 0)
+                    _hive.IncreaseBurrowedLarva(unfilled);
             }
 
-            var selectedSurvivors = 0;
-            for (var i = priorities - 1; i >= 0; i--)
+            if (comp.SpawnSurvivors)
             {
-                foreach (var (job, players) in survivorCandidates)
+                var survivorCandidates = new Dictionary<ProtoId<JobPrototype>, List<NetUserId>[]>();
+                foreach (var job in comp.SurvivorJobs)
                 {
-                    var list = players[i];
-                    while (list.Count > 0 && selectedSurvivors < totalSurvivors)
+                    survivorCandidates[job.Job] = new List<NetUserId>[priorities];
+
+                    var jobList = survivorCandidates[job.Job];
+                    for (var i = 0; i < jobList.Length; i++)
                     {
-                        if (SpawnSurvivor(job, list, out var stop) is { } id)
-                        {
-                            foreach (var (_, otherPlayersLists) in survivorCandidates)
+                        jobList[i] = [];
+                    }
+                }
+
+                foreach (var player in ev.PlayerPool)
+                {
+                    foreach (var (job, players) in survivorCandidates)
+                    {
+                        var id = player.UserId;
+                        if (!IsAllowed(id, comp.CivilianSurvivorJob) || !IsAllowed(id, job))
+                            continue;
+
+                        if (!ev.Profiles.TryGetValue(id, out var profile))
+                            continue;
+
+                        var overriden = false;
+
+                        if (comp.SurvivorJobOverrides != null)
+                        { // Override the job
+                            foreach (var (originalJob, overrideJob) in comp.SurvivorJobOverrides)
                             {
-                                foreach (var otherPlayers in otherPlayersLists)
+                                if (profile.JobPriorities.TryGetValue(originalJob, out var originalPriority) &&
+                                    originalPriority > JobPriority.Never && overrideJob == job)
                                 {
-                                    otherPlayers.Remove(id);
+                                    players[(int)originalPriority].Add(id);
+                                    overriden = true;
+                                    break;
                                 }
                             }
-
-                            selectedSurvivors++;
                         }
 
-                        if (stop)
-                            break;
+                        if (overriden)
+                            continue;
+
+                        if (profile.JobPriorities.TryGetValue(job, out var priority) &&
+                            priority > JobPriority.Never)
+                        {
+                            players[(int)priority].Add(id);
+                        }
+                    }
+                }
+
+                var selectedSurvivors = 0;
+                for (var i = priorities - 1; i >= 0; i--)
+                {
+                    foreach (var (job, players) in survivorCandidates)
+                    {
+                        var list = players[i];
+                        var ignoreLimit = comp.IgnoreMaximumSurvivorJobs.Contains(job);
+                        while (list.Count > 0 && (ignoreLimit || selectedSurvivors < totalSurvivors))
+                        {
+                            if (SpawnSurvivor(job, list, out var stop) is { } id)
+                            {
+                                foreach (var (_, otherPlayersLists) in survivorCandidates)
+                                {
+                                    foreach (var otherPlayers in otherPlayersLists)
+                                    {
+                                        otherPlayers.Remove(id);
+                                    }
+                                }
+
+                                if (!ignoreLimit)
+                                    selectedSurvivors++;
+                            }
+
+                            if (stop)
+                                break;
+                        }
                     }
                 }
             }
@@ -837,13 +867,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 ev.SpawnResult = _stationSpawning.SpawnPlayerMob(coordinates, ev.Job, ev.HumanoidCharacterProfile, ev.Station);
             }
 
-            // TODO RMC14 split this out with an event
-            SpriteSpecifier? icon = null;
-            if (job.HasIcon && _prototypes.TryIndex(job.Icon, out var jobIcon))
-                icon = jobIcon.Icon;
-
-            _marines.MakeMarine(ev.SpawnResult.Value, icon);
-
             if (squad != null)
             {
                 _squad.AssignSquad(ev.SpawnResult.Value, squad.Value, jobId);
@@ -855,12 +878,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     EnsureComp<AlmayerComponent>(xform.GridUid.Value);
                 }
 
-                if (TryComp(ev.SpawnResult, out HungerComponent? hunger))
+                if (comp.SetHunger && TryComp(ev.SpawnResult, out HungerComponent? hunger))
                     _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
             }
 
-            var faction = HasComp<RMCSurvivorComponent>(ev.SpawnResult.Value) ? comp.SurvivorFaction : comp.MarineFaction;
-            _gunIFF.SetUserFaction(ev.SpawnResult.Value, faction);
             return;
         }
     }
@@ -957,7 +978,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (TryComp(xeno, out ActorComponent? actor))
                 {
                     var session = actor.PlayerSession;
-
                     Entity<MindComponent> mind;
 
                     if (_mind.TryGetMind(session, out var mindId, out var mindComp))
@@ -966,11 +986,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                         mind = _mind.CreateMind(session.UserId);
 
                     var ghost = _ghost.SpawnGhost((mind.Owner, mind.Comp), xeno);
+                    if (ghost != null)
+                        EnsureComp<JoinXenoCooldownIgnoreComponent>(ghost.Value);
 
                     var origin = _transform.GetMoverCoordinates(xeno);
-
                     _popup.PopupCoordinates(Loc.GetString("rmc-xeno-hibernation"), origin, Filter.SinglePlayer(session), true, PopupType.MediumXeno);
                 }
+
                 QueueDel(xeno);
             }
             else
@@ -1029,7 +1051,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 break;
 
             rule.HijackSongPlayed = true;
-            _audio.PlayGlobal(rule.HijackSong, Filter.Broadcast(), true);
+            var song = _audio.PlayGlobal(rule.HijackSong, Filter.Broadcast(), true);
+            if (song?.Entity is { } songEnt)
+                EnsureComp<RMCHijackSongComponent>(songEnt);
+
             rule.ForceEndAt = time + _forceEndHijackTime;
             break;
         }
@@ -1091,6 +1116,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     protected override void OnStartAttempt(Entity<CMDistressSignalRuleComponent, GameRuleComponent> gameRule, RoundStartAttemptEvent ev)
     {
         if (ev.Forced || ev.Cancelled)
+            return;
+
+        if (!gameRule.Comp1.RequireXenoPlayers)
             return;
 
         var query = QueryAllRules();
@@ -1348,7 +1376,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (areaProto.TryGet(out var area, _prototypes, _compFactory) &&
                     area.LandingZone)
                 {
-                    var coordinates = _mapSystem.ToCoordinates(rule.Comp.XenoMap, indices);
+                    var coordinates = _mapSystem.ToCoordinates(rule.Comp.XenoMap.Value, indices);
                     Spawn(gas, coordinates);
                 }
             }
@@ -1360,10 +1388,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             RemCompDeferred<DeletedByWeedKillerComponent>(uid);
         }
 
-        var rmcAmbientComp = EnsureComp<RMCAmbientLightComponent>(rule.Comp.XenoMap);
-        var rmcAmbientEffectComp = EnsureComp<RMCAmbientLightEffectsComponent>(rule.Comp.XenoMap);
+        var xenoMap = rule.Comp.XenoMap.Value;
+        var rmcAmbientComp = EnsureComp<RMCAmbientLightComponent>(xenoMap);
+        var rmcAmbientEffectComp = EnsureComp<RMCAmbientLightEffectsComponent>(xenoMap);
         var colorSequence = _rmcAmbientLight.ProcessPrototype(rmcAmbientEffectComp.Sunset);
-        _rmcAmbientLight.SetColor((rule.Comp.XenoMap, rmcAmbientComp), colorSequence, _sunsetDuration);
+        _rmcAmbientLight.SetColor((xenoMap, rmcAmbientComp), colorSequence, _sunsetDuration);
 
         return true;
     }
@@ -1607,14 +1636,16 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (!component.AresGreetingDone && announcementTime >= component.AresGreetingDelay)
         {
             component.AresGreetingDone = true;
-            _marineAnnounce.AnnounceARES(default, "ARES. Online. Good morning, marines.", component.AresGreetingAudio,"rmc-announcement-ares-online");
+
+            if (component.StartARESAnnouncements)
+                _marineAnnounce.AnnounceARES(default, "ARES. Online. Good morning, marines.", component.AresGreetingAudio,"rmc-announcement-ares-online");
         }
 
         if (!component.AresMapDone && announcementTime >= component.AresMapDelay)
         {
             component.AresMapDone = true;
 
-            if (SelectedPlanetMap != null)
+            if (SelectedPlanetMap != null && component.StartARESAnnouncements)
             {
                 var announcement = SelectedPlanetMap.Value.Comp.Announcement;
                 _marineAnnounce.AnnounceARES(default, announcement, announcement: "rmc-announcement-ares-map");
@@ -1664,6 +1695,17 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         SelectedPlanetMap = null;
     }
 
+    public void SetPlanet(RMCPlanet planet)
+    {
+        SelectedPlanetMap = planet;
+    }
+
+    public void SetCustomOperationName(string customname)
+    {
+        OperationName = customname;
+        _usingCustomOperationName = true;
+    }
+
     private void StartPlanetVote()
     {
         if (!_config.GetCVar(RMCCVars.RMCPlanetMapVote))
@@ -1699,9 +1741,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         };
         vote.SetInitiatorOrServer(null);
 
-        var handle = _voteManager.CreateVote(vote);
-        handle.OnFinished += (_, args) =>
+        _currentVote = _voteManager.CreateVote(vote);
+        _currentVote.OnFinished += (_, args) =>
         {
+            _currentVote = null;
             RMCPlanet picked;
 
             var voteResult = planets.Zip(args.Votes);
@@ -1731,10 +1774,28 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _carryoverVotes[picked.Proto.ID] = 0;
             SelectedPlanetMap = picked;
         };
+        _currentVote.OnCancelled += _ => _currentVote = null;
+    }
+
+    public bool HasPlanetVoteRunning()
+    {
+        return _currentVote != null;
+    }
+
+    public void CancelPlanetVote()
+    {
+        _currentVote?.Cancel();
     }
 
     private string GetRandomOperationName()
     {
+        if (_usingCustomOperationName && OperationName != null)
+        {
+            _usingCustomOperationName = false;
+
+            return OperationName;
+        }
+
         var name = string.Empty;
         if (_operationNames.Count > 0)
             name += $"{_random.Pick(_operationNames)} ";
@@ -1782,6 +1843,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private void EndRound(CMDistressSignalRuleComponent rule, DistressSignalRuleResult result, LocId? customMessage = null)
     {
+        if (!rule.AutoEnd)
+            return;
+
         // you might be wondering what this check is doing here
         // the answer is simple
         // the absolute unit that wrote game rule system and game ticker made a conveniently named ActiveTick method
@@ -1803,10 +1867,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         switch (rule.Result)
         {
             case DistressSignalRuleResult.MajorMarineVictory:
-                var rmcAmbientComp = EnsureComp<RMCAmbientLightComponent>(rule.XenoMap);
-                var rmcAmbientEffectComp = EnsureComp<RMCAmbientLightEffectsComponent>(rule.XenoMap);
-                var colorSequence = _rmcAmbientLight.ProcessPrototype(rmcAmbientEffectComp.Sunrise);
-                _rmcAmbientLight.SetColor((rule.XenoMap, rmcAmbientComp), colorSequence, _sunriseDuration);
+                if (rule.XenoMap is { } xenoMap)
+                {
+                    var rmcAmbientComp = EnsureComp<RMCAmbientLightComponent>(xenoMap);
+                    var rmcAmbientEffectComp = EnsureComp<RMCAmbientLightEffectsComponent>(xenoMap);
+                    var colorSequence = _rmcAmbientLight.ProcessPrototype(rmcAmbientEffectComp.Sunrise);
+                    _rmcAmbientLight.SetColor((xenoMap, rmcAmbientComp), colorSequence, _sunriseDuration);
+                }
 
                 var ares = _ares.EnsureARES();
                 _marineAnnounce.AnnounceRadio(ares,

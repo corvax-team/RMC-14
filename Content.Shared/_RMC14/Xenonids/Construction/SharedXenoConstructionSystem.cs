@@ -73,6 +73,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly XenoNestSystem _xenoNest = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
+    [Dependency] private readonly ITileDefinitionManager _tile = default!;
 
     private static readonly ImmutableArray<Direction> Directions = Enum.GetValues<Direction>()
         .Where(d => d != Direction.Invalid)
@@ -851,14 +852,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private bool InRangePopup(EntityUid xeno, EntityCoordinates target, float range)
     {
+        var origin = _transform.GetMoverCoordinates(xeno);
         target = target.SnapToGrid(EntityManager, _map);
-        if (!_interaction.InRangeUnobstructed(xeno, target, range))
+        if (!_transform.InRange(origin, target, range))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-cant-reach-there"), target, xeno);
             return false;
         }
 
-        var origin = _transform.GetMoverCoordinates(xeno);
         if (_transform.InRange(origin, target, 0.75f))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-cant-build-in-self"), target, xeno);
@@ -975,6 +976,18 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (choice != null &&
             _prototype.TryIndex(choice, out var choiceProto))
         {
+            if (choiceProto.HasComponent<HiveConstructionRequiresWeedableSurfaceComponent>(_compFactory))
+            {
+                if (!_mapSystem.TryGetTileRef(gridId, grid, tile, out var tileRef) ||
+                    !_tile.TryGetDefinition(tileRef.Tile.TypeId, out var tileDef) ||
+                    tileDef.ID == ContentTileDefinition.SpaceID ||
+                    tileDef is ContentTileDefinition { WeedsSpreadable: false })
+                {
+                    _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), xeno, xeno);
+                    return false;
+                }
+            }
+
             if (choiceProto.HasComponent<HiveConstructionRequiresHiveCoreComponent>(_compFactory))
             {
                 if (_hive.GetHive(xeno.Owner) is { } hiveEnt)

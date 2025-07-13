@@ -24,6 +24,10 @@
     time: 10800 # 3 hours
 # CCM14 role timers [add/end]
   ranks:
+    RMCRankFirstLT:
+    - !type:RoleTimeRequirement
+      role: CMJobStaffOfficer
+      time: 252000 # 70 hours
     RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearStaffOfficer
@@ -73,7 +77,7 @@
   equipment:
     jumpsuit: CMJumpsuitBO
     shoes: RMCShoesLaceup
-    head: RMCHeadCapFlippable
+    head: CMHeadCapOfficer
     id: CMIDCardStaffOfficer
     ears: RMCHeadsetMarineCommand
     pocket1: RMCPouchGeneralLarge

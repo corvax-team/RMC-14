@@ -9,6 +9,9 @@
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleQueen
   - type: GhostRole
     name: cm-job-name-xeno-queen
   - type: Sprite
@@ -250,6 +253,9 @@
   - type: XenoToggleChargingKnockback
     enabled: false
   - type: XenoToggleChargingStop
+  - type: FixedIdentity
+    name: cm-job-name-xeno-queen
+  - type: RMCImmuneToFireTileDamage
 
 - type: entity
   parent: RMCXenoQueenBase
@@ -261,6 +267,7 @@
 
 - type: entity
   id: XenoLeaderPheromoneRelay
+  categories: [ HideSpawnMenu ]
   components:
   - type: XenoPheromones
 
