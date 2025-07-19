@@ -111,6 +111,8 @@
     OB: true
     supplyDrop: true
 
+# ФОБ
+
 - type: entity
   parent:
   - CCMAreaPolyphemus
@@ -119,7 +121,8 @@
   name: Landing Area and Headquarters
   components:
   - type: Sprite
-    state: head_quarters
+    sprite: _CCM14/Areas/areas.rsi
+    state: fob
   - type: Area
     minimapColor: '#6C6767D8'
     CAS: true
@@ -130,7 +133,48 @@
     medevac: true
     OB: true
     supplyDrop: true
-    linkedLz: dropship_lz1
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemusLandingHeadquarters
+  id: CCMAreaPolyphemusCargo
+  name: FOB - Cargo
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: fob_1
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemusLandingHeadquarters
+  id: CCMAreaPolyphemusMedbay
+  name: FOB - Medbay
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: fob_2
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+# Восточные шахты
 
 - type: entity
   parent:
@@ -140,11 +184,35 @@
   name: Eastern - Mines
   components:
   - type: Sprite
-    state: hh_mines
+    sprite: _CCM14/Areas/areas.rsi
+    state: yellow
   - type: Area
     minimapColor: '#6C6767D8'
     CAS: false
-    fulton: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+# Западный завод
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusWesternPlant
+  name: West - Processing Plant
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: blue
+  - type: Area
+    minimapColor: "#264d7ad7"
+    CAS: true
+    fulton: false
     mortarPlacement: false
     mortarFire: false
     lasing: true
@@ -156,21 +224,24 @@
   parent:
   - CCMAreaPolyphemus
   - CCMAreaPolyphemusZeroProtection
-  id: CCMAreaPolyphemusWesternPlant
-  name: West - Processing Plant
+  id: CCMAreaPolyphemusWesternPlantEntrance
+  name: West - Processing Plant - Entrance
   components:
   - type: Sprite
-    state: research
+    sprite: _CCM14/Areas/areas.rsi
+    state: blue_x
   - type: Area
     minimapColor: "#264d7ad7"
     CAS: true
     fulton: true
-    mortarPlacement: false
-    mortarFire: false
+    mortarPlacement: true
+    mortarFire: true
     lasing: true
     medevac: true
     OB: true
-    supplyDrop: false
+    supplyDrop: true
+
+# Западные бараки
 
 - type: entity
   parent:
@@ -180,17 +251,20 @@
   name: West - Residential Premises
   components:
   - type: Sprite
-    state: eta_research
+    sprite: _CCM14/Areas/areas.rsi
+    state: blue
   - type: Area
     minimapColor: "#3a756bd7"
     CAS: true
-    fulton: true
+    fulton: false
     mortarPlacement: false
-    mortarFire: true
+    mortarFire: false
     lasing: true
-    medevac: true
+    medevac: false
     OB: true
     supplyDrop: false
+
+# Центральная дамба
 
 - type: entity
   parent:
@@ -212,6 +286,8 @@
     OB: true
     supplyDrop: true
 
+# Восточная диспетчерская
+
 - type: entity
   parent:
   - CCMAreaPolyphemus
@@ -224,13 +300,15 @@
   - type: Area
     minimapColor: '#7e6e28d7'
     CAS: false
-    fulton: true
+    fulton: false
     mortarPlacement: false
     mortarFire: false
     lasing: true
-    medevac: true
+    medevac: false
     OB: false
-    supplyDrop: true
+    supplyDrop: false
+
+# Западная диспетчерская
 
 - type: entity
   parent:
@@ -244,13 +322,15 @@
   - type: Area
     minimapColor: "#7e6e28d7"
     CAS: false
-    fulton: true
+    fulton: false
     mortarPlacement: false
     mortarFire: false
     lasing: true
-    medevac: true
+    medevac: false
     OB: false
-    supplyDrop: true
+    supplyDrop: false
+
+# Северный бункер
 
 - type: entity
   parent:
@@ -264,13 +344,15 @@
   - type: Area
     minimapColor: "#862e2ed7"
     CAS: false
-    fulton: true
+    fulton: false
     mortarPlacement: false
     mortarFire: false
     lasing: true
-    medevac: true
-    OB: true
-    supplyDrop: true
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+# Восточные пещеры
 
 - type: entity
   parent:
@@ -280,7 +362,29 @@
   name: East - Caves
   components:
   - type: Sprite
-    state: genetics
+    sprite: _CCM14/Areas/areas.rsi
+    state: east
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusEastCavesOpen
+  name: East - Caves
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: east_open
   - type: Area
     minimapColor: '#6C6767D8'
     CAS: false
@@ -291,6 +395,8 @@
     medevac: true
     OB: true
     supplyDrop: true
+
+# Западные пещеры
 
 - type: entity
   parent:
@@ -300,27 +406,29 @@
   name: West - Caves
   components:
   - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
     state: west
   - type: Area
     minimapColor: '#6C6767D8'
     CAS: false
-    fulton: true
+    fulton: false
     mortarPlacement: false
     mortarFire: false
     lasing: true
-    medevac: true
+    medevac: false
     OB: true
-    supplyDrop: true
+    supplyDrop: false
 
 - type: entity
   parent:
   - CCMAreaPolyphemus
   - CCMAreaPolyphemusZeroProtection
-  id: CCMAreaPolyphemusNorthCaves
-  name: North - Caves
+  id: CCMAreaPolyphemusWestCavesOpen
+  name: West - Caves
   components:
   - type: Sprite
-    state: caves_north
+    sprite: _CCM14/Areas/areas.rsi
+    state: west_open
   - type: Area
     minimapColor: '#6C6767D8'
     CAS: true
@@ -332,6 +440,31 @@
     OB: true
     supplyDrop: true
 
+# Северные пещеры
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusNorthCaves
+  name: North - Caves
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: north
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+# Северо-восточные пещеры
+
 - type: entity
   parent:
   - CCMAreaPolyphemus
@@ -340,17 +473,41 @@
   name: Northeastern - Caves
   components:
   - type: Sprite
-    state: tutorial
+    sprite: _CCM14/Areas/areas.rsi
+    state: northeast
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusNortheasternCavesOpen
+  name: Northeastern - Caves
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: northeast_open
   - type: Area
     minimapColor: '#6C6767D8'
     CAS: true
     fulton: true
-    mortarPlacement: false
+    mortarPlacement: true
     mortarFire: true
     lasing: true
     medevac: true
     OB: true
     supplyDrop: true
+
+# Посадочная зона
 
 - type: entity
   parent:

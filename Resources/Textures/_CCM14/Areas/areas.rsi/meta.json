@@ -8,7 +8,49 @@
   },
   "states": [
     {
-      "name": "red"
+        "name": "red"
+    },
+    {
+        "name": "yellow"
+    },
+    {
+        "name": "green"
+    },
+    {
+        "name": "west"
+    },
+    {
+        "name": "west_open"
+    },
+    {
+        "name": "east"
+    },
+    {
+        "name": "east_open"
+    },
+    {
+        "name": "northeast"
+    },
+    {
+        "name": "northeast_open"
+    },
+    {
+        "name": "north"
+    },
+    {
+        "name": "fob"
+    },
+    {
+        "name": "fob_1"
+    },
+    {
+        "name": "fob_2"
+    },
+    {
+        "name": "blue"
+    },
+    {
+        "name": "blue_x"
     }
   ]
 }
