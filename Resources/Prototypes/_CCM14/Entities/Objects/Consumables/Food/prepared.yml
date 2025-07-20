@@ -1,0 +1,37 @@
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: CCMMarinePreparedMealPastaWithMeat
+  name: UNMC prepared meal (pasta with meat)
+  description: Hello VIT.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Consumable/Food/prepared.rsi
+    state: pasta_with_meat
+  - type: Food
+    transferAmount: 3
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 12
+          
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: CCMMarinePreparedMealVegetableSalad
+  name: UNMC prepared meal (vegetable salad)
+  description: Vegetable salad with garlic croutons.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Consumable/Food/prepared.rsi
+    state: vegetable_salad
+  - type: Food
+    transferAmount: 3
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 7

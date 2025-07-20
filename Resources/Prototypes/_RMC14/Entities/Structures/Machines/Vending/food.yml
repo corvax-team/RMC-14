@@ -38,6 +38,10 @@
         amount: 15
       - id: CMMarinePreparedMealTofu
         amount: 15
+      - id: CCMMarinePreparedMealPastaWithMeat # Corvax
+        amount: 15
+      - id: CCMMarinePreparedMealVegetableSalad # Corvax
+        amount: 15
       - id: CMMarineProteinBar
         amount: 50
     - name: Flasks
