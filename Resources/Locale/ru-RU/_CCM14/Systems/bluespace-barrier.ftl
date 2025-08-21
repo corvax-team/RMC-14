@@ -1,0 +1,1 @@
+tgmc-bluespace-barrier-disappear = блюспейс барьер был деактивирован
