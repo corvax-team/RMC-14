@@ -1,0 +1,139 @@
+- type: entity
+  parent: CMBaseWallInvincible
+  id: TGMCBluespaceBarrier
+  name: Bluespace Barrier
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Walls/bluespace_barrier.rsi
+    color: "#7ec9f7"
+    state: icon
+  - type: Icon
+    sprite: _CCM14/Structures/Walls/bluespace_barrier.rsi
+    color: "#7ec9f7"
+    state: icon
+  - type: PointLight
+  - type: BluespaceBarrier
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: TGMCBluespaceBarrier20Min
+  name: Bluespace Barrier
+  suffix: 20 Min
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Walls/bluespace_barrier.rsi
+    color: "#7ec9f7"
+    state: icon
+  - type: Icon
+    sprite: _CCM14/Structures/Walls/bluespace_barrier.rsi
+    color: "#7ec9f7"
+    state: icon
+  - type: PointLight
+  - type: BluespaceBarrier
+    disappearTime: 1200 #~20 min
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: TGMCBluespaceBarrier15Min
+  name: Bluespace Barrier
+  suffix: 15 Min
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Walls/bluespace_barrier.rsi
+    color: "#7ec9f7"
+    state: icon
+  - type: Icon
+    sprite: _CCM14/Structures/Walls/bluespace_barrier.rsi
+    color: "#7ec9f7"
+    state: icon
+  - type: PointLight
+  - type: BluespaceBarrier
+    disappearTime: 900 #~15 min
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: TGMCBluespaceBarrier10Min
+  name: Bluespace Barrier
+  suffix: 10 Min
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Walls/bluespace_barrier.rsi
+    color: "#7ec9f7"
+    state: icon
+  - type: Icon
+    sprite: _CCM14/Structures/Walls/bluespace_barrier.rsi
+    color: "#7ec9f7"
+    state: icon
+  - type: PointLight
+  - type: BluespaceBarrier
+    disappearTime: 600 #~10 min
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: TGMCBiologicalBarrier
+  name: Bio Barrier
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Walls/bluespace_barrier.rsi
+    color: "#dbcd4d"
+    state: icon
+  - type: Icon
+    sprite: _CCM14/Structures/Walls/bluespace_barrier.rsi
+    color: "#dbcd4d"
+    state: icon
+  - type: PointLight
+  - type: BiologicalBarrier
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: TGMCBiologicalBarrier5Onl
+  name: Bio Barrier
+  suffix: 5 Online
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Walls/bluespace_barrier.rsi
+    color: "#dbcd4d"
+    state: icon
+  - type: Icon
+    sprite: _CCM14/Structures/Walls/bluespace_barrier.rsi
+    color: "#dbcd4d"
+    state: icon
+  - type: PointLight
+  - type: BiologicalBarrier
+    disappearWhen: 5
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: TGMCBiologicalBarrier10Onl
+  name: Bio Barrier
+  suffix: 10 Online
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Walls/bluespace_barrier.rsi
+    color: "#dbcd4d"
+    state: icon
+  - type: Icon
+    sprite: _CCM14/Structures/Walls/bluespace_barrier.rsi
+    color: "#dbcd4d"
+    state: icon
+  - type: PointLight
+  - type: BiologicalBarrier
+    disappearWhen: 10
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: TGMCBiologicalBarrier20Onl
+  name: Bio Barrier
+  suffix: 20 Online
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Walls/bluespace_barrier.rsi
+    color: "#dbcd4d"
+    state: icon
+  - type: Icon
+    sprite: _CCM14/Structures/Walls/bluespace_barrier.rsi
+    color: "#dbcd4d"
+    state: icon
+  - type: PointLight
+  - type: BiologicalBarrier
+    disappearWhen: 20
