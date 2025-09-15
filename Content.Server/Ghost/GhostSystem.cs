@@ -1,5 +1,7 @@
 using System.Linq;
 using System.Numerics;
+using Content.Server._Forge.Sponsors; // Forge-Change
+using Content.Server._NF.CryoSleep; // Frontier
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
@@ -70,6 +72,9 @@ namespace Content.Server.Ghost
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly TagSystem _tag = default!;
         [Dependency] private readonly NameModifierSystem _nameMod = default!;
+        [Dependency] private readonly IAdminManager _admin = default!; // Frontier
+        [Dependency] private readonly CryoSleepSystem _cryo = default!; // Frontier
+        [Dependency] private readonly SponsorManager _sponsors = default!; // Forge-Change
 
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -486,7 +491,34 @@ namespace Content.Server.Ghost
                 return null;
             }
 
-            var ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
+            // Forge-Change-Start
+            var user = mind.Comp.UserId;
+            EntityUid ghost;
+            try
+            {
+                if (user != null && _sponsors.TryGetSponsor(user.Value, out var level)
+                                 && _sponsors.TryGetSponsorGhost(level, out var sponsorGhost))
+                {
+                    ghost = Spawn(sponsorGhost, spawnPosition.Value);
+                }
+                else
+                {
+                    ghost = Spawn(GameTicker.ObserverPrototypeName, spawnPosition.Value);
+                }
+
+                if (!HasComp<GhostComponent>(ghost))
+                {
+                    AddComp<GhostComponent>(ghost);
+                    Log.Warning($"Added missing GhostComponent to {ToPrettyString(ghost)}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Failed to spawn ghost: {ex}");
+                return null;
+            }
+            // Forge-Change-End
+
             var ghostComponent = Comp<GhostComponent>(ghost);
 
             // Try setting the ghost entity name to either the character name or the player name.

@@ -3,6 +3,9 @@ using Content.Server._RMC14.Discord;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server._RMC14.Mentor;
 using Content.Server._RMC14.PlayTimeTracking;
+using Content.Server._Forge.Discord; // Forge-Change
+using Content.Server._Forge.Sponsors; // Forge-Change
+using Content.Server._NF.Auth;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -28,6 +31,7 @@ using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
 using Content.Server.Voting.Managers;
 using Content.Server.Worldgen.Tools;
+using Content.Shared._Forge.Sponsors; // Forge-Change
 using Content.Shared.Administration.Logs;
 using Content.Shared.Administration.Managers;
 using Content.Shared.Chat;
@@ -81,6 +85,10 @@ namespace Content.Server.IoC
             IoCManager.Register<ConnectionManager>();
             IoCManager.Register<MultiServerKickManager>();
             IoCManager.Register<CVarControlManager>();
+            IoCManager.Register<MiniAuthManager>(); //Frontier
+            IoCManager.Register<DiscordAuthManager>(); // Forge-Change
+            IoCManager.Register<SponsorManager>(); // Forge-Change
+            IoCManager.Register<ISharedSponsorManager, SponsorManager>(); // Forge-Change
 
             IoCManager.Register<DiscordLink>();
             IoCManager.Register<DiscordChatLink>();

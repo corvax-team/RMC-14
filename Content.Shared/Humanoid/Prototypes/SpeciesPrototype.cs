@@ -1,4 +1,4 @@
-using Content.Shared._Forge.Sponsor;
+using Content.Shared._Forge.Sponsors;
 using Content.Shared.Dataset;
 using Content.Shared.Humanoid.Markings;
 using Robust.Shared.Prototypes;
@@ -138,6 +138,11 @@ public sealed partial class SpeciesPrototype : IPrototype
     [DataField]
     public int MaxAge = 120;
 
+    /// <summary>
+    ///     Frontier: Forced marking color for this species, used for overwrites to force marking to use a single color, eg for Sheleg hair.
+    /// </summary>
+    [DataField]
+    public Color ForcedMarkingColor { get; private set; } = new();
     // Forge-Change-Start: job restrictions by species
     [DataField("jobWhitelist")]
     public List<string>? JobWhitelist { get; private set; }

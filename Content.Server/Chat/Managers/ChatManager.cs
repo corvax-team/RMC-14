@@ -5,6 +5,7 @@ using Content.Server._RMC14.Discord;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server._RMC14.Mentor;
 using Content.Corvax.Interfaces.Shared; // Corvax-Sponsors
+using Content.Server._Forge.Sponsors; // Forge-Change
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
@@ -13,6 +14,7 @@ using Content.Server.Players.RateLimiting;
 using Content.Server.Preferences.Managers;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._Forge.Sponsors; // Forge-Change
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -51,6 +53,7 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private readonly PlayerRateLimitManager _rateLimitManager = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly DiscordChatLink _discordLink = default!;
+    [Dependency] private readonly SponsorManager _sponsors = default!; // Forge-Change
 
     // RMC14
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
@@ -297,6 +300,15 @@ internal sealed partial class ChatManager : IChatManager
         }
         if (_netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) &&
             _linkAccount.GetConnectedPatron(player)?.Tier != null)
+        // Forge-Change-Start
+        if (_sponsors.TryGetSponsor(player.UserId, out SponsorLevel level)
+            && _sponsors.TryGetSponsorColor(level, out var sponsorColor)
+            && !_adminManager.HasAdminFlag(player, AdminFlags.Admin))
+        {
+            wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", sponsorColor), ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+        }
+        // Forge-Change-End
+        if (  _netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) && player.Channel.UserData.PatronTier is { } patron && PatronOocColors.TryGetValue(patron, out var patronColor))
         {
             var color = _linkAccount.GetPatronOOCHexColor(player.Channel.UserId);
             wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", $"{color}"),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
