@@ -29,13 +29,6 @@ public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
     {
         var ticker = _entMan.System<ClientGameTicker>();
 
-        if (!ticker.IsGameStarted)
-        {
-            ShowNotReadyWindow("Раунд ещё не начался.");
-            Close();
-            return;
-        }
-
         var roundStart = ticker.RoundStartTimeSpan;
         var curTime = _gameTiming.CurTime;
         var timeSinceStart = curTime - roundStart;
