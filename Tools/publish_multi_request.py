@@ -11,7 +11,7 @@ PUBLISH_TOKEN = os.environ["PUBLISH_TOKEN"]
 VERSION = os.environ["GITHUB_SHA"]
 
 RELEASE_DIR = "release"
-ROBUST_CDN_URL = "https://cdn.station14.ru/"
+ROBUST_CDN_URL = "https://cdn.corvax-wega.ru/"
 
 def main():
     parser = argparse.ArgumentParser()
