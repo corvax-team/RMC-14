@@ -18,6 +18,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
+using Content.Shared.Players.JobWhitelist; // CCM sponsor
 
 namespace Content.Shared.Preferences
 {
@@ -659,15 +660,6 @@ namespace Content.Shared.Preferences
             {
                 flavortext = FormattedMessage.RemoveMarkupOrThrow(FlavorText);
             }
-
-            // Frontier
-            //make sure theres no funny bank stuff going on
-            var bankBalance = BankBalance;
-            if (BankBalance <= 0)
-            {
-                bankBalance = 0;
-            }
-            // End Frontier
 
             var appearance = HumanoidCharacterAppearance.EnsureValid(Appearance, Species, Sex, sponsorPrototypes); // Corvax-Sponsors
 

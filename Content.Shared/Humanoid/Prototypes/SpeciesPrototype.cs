@@ -1,3 +1,4 @@
+using Content.Shared._Forge.Sponsor;
 using Content.Shared.Dataset;
 using Content.Shared.Humanoid.Markings;
 using Robust.Shared.Prototypes;
@@ -136,6 +137,17 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// </summary>
     [DataField]
     public int MaxAge = 120;
+
+    // Forge-Change-Start: job restrictions by species
+    [DataField("jobWhitelist")]
+    public List<string>? JobWhitelist { get; private set; }
+
+    [DataField("jobBlacklist")]
+    public List<string>? JobBlacklist { get; private set; }
+
+    [DataField("sponsorLevel")]
+    public SponsorLevel SponsorLevel = SponsorLevel.None;
+    // Forge-Change-End
 }
 
 public enum SpeciesNaming : byte

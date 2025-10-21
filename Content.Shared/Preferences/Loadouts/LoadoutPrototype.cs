@@ -55,4 +55,10 @@ public sealed partial class LoadoutPrototype : IPrototype, IEquipmentLoadout
     /// <inheritdoc />
     [DataField]
     public Dictionary<string, List<EntProtoId>> Storage { get; set; } = new();
+
+    /// <summary>
+    /// Frontier - effects to both validate and hide layout options in the menu
+    /// </summary>
+    [DataField]
+    public List<LoadoutEffect> HideEffects = new();
 }
