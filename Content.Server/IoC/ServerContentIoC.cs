@@ -5,7 +5,6 @@ using Content.Server._RMC14.Mentor;
 using Content.Server._RMC14.PlayTimeTracking;
 using Content.Server._Forge.Discord; // Forge-Change
 using Content.Server._Forge.Sponsors; // Forge-Change
-using Content.Server._NF.Auth;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -85,7 +84,6 @@ namespace Content.Server.IoC
             IoCManager.Register<ConnectionManager>();
             IoCManager.Register<MultiServerKickManager>();
             IoCManager.Register<CVarControlManager>();
-            IoCManager.Register<MiniAuthManager>(); //Frontier
             IoCManager.Register<DiscordAuthManager>(); // Forge-Change
             IoCManager.Register<SponsorManager>(); // Forge-Change
             IoCManager.Register<ISharedSponsorManager, SponsorManager>(); // Forge-Change

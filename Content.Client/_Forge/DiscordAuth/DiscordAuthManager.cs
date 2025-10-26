@@ -14,7 +14,7 @@ public sealed class DiscordAuthManager
     public string AuthLink = default!;
     public string ErrorMessage = default!;
     public Texture? QrCodeTexture;
-    public const string DiscordServerLink = "https://discord.gg/q7ybZ5BaXW";
+    public const string DiscordServerLink = "https://discord.gg/D3rSfbwZpx";
 
     public void Initialize()
     {

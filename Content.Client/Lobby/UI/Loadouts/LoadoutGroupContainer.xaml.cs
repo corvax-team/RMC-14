@@ -94,6 +94,7 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
         .ToDictionary(g => g.Key, g => g.ToList());
 
         foreach (var kvp in groups)
+        {
         // Corvax-Loadouts-Start
         var groupLoadouts = _groupProto.Loadouts;
         if (collection.TryResolveType<ISharedLoadoutsManager>(out var loadoutsManager) && _groupProto.ID == "Inventory")
@@ -166,6 +167,7 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
             }
         }
     }
+  }
 
     private ToggleLoadoutButton CreateToggleButton(KeyValuePair<string, List<LoadoutPrototype>> kvp, LoadoutContainer firstElement, SubLoadoutContainer subContainer)
     {

@@ -5,37 +5,33 @@ public sealed class SponsorData
 {
     public static readonly Dictionary<string, SponsorLevel> RolesMap = new()
     {
-        { "1228412355705307148", SponsorLevel.Level1 }, // Бустер
-        { "1388838190009290932", SponsorLevel.Level1 }, // Подмастерье Форжа
-        { "1388839804375924736", SponsorLevel.Level2 }, // Оружейник
-        { "1388839967475634176", SponsorLevel.Level3 }, // Мастер Кузни
-        { "1388840103966933003", SponsorLevel.Level4 }, // Великий Кузнец
-        { "1388840314860736512", SponsorLevel.Level5 }, // Архитектор Горна
-        { "1388840456921550942", SponsorLevel.Level6 }, // Демиург Форжа
-        { "1228303275833425992", SponsorLevel.Level6 }, // Руководитель Проекта
-        { "1381007703425679522", SponsorLevel.Level6 }, // Помощник Рука
-        { "1228659342668988416", SponsorLevel.Level4 }, // Старший Модер
-        { "1351127483432570910", SponsorLevel.Level4 }, // ГГМ
-        { "1227934528442728498", SponsorLevel.Level4 }, // Начкар
-        { "1229422799362195577", SponsorLevel.Level4 }, // Старший ментор
-        { "1257628115988119562", SponsorLevel.Level3 } // Смотритель Сервера
+        { "1145599037878325249", SponsorLevel.Level1 }, // Бустер
+        { "1224015397679005787", SponsorLevel.Level2 }, // Морпех
+        { "1179165691111288963", SponsorLevel.Level3 }, // Преторианец
+        { "1224015459792453713", SponsorLevel.Level4 }, // Санитар
+        { "1179166010650144768", SponsorLevel.Level5 }, // Руни
+        { "1224015729838395532", SponsorLevel.Level6 }, // Специалист
+        { "1179166168817356831", SponsorLevel.Level7 }, // Королева улья
+        { "1428440206666633266", SponsorLevel.Level8 }, // Разум улья
     };
 
     public static readonly Dictionary<SponsorLevel, string> SponsorColor = new()
     {
-        { SponsorLevel.Level1, "#6bb9f0" },
-        { SponsorLevel.Level2, "#8a9eff" },
-        { SponsorLevel.Level3, "#bdbe6b" },
-        { SponsorLevel.Level4, "#bdbe6b" },
-        { SponsorLevel.Level5, "#ff9e2c" },
-        { SponsorLevel.Level6, "#ffd700" }
+        { SponsorLevel.Level1, "#ff6ee7ff" },
+        { SponsorLevel.Level2, "#9bbe2c" },
+        { SponsorLevel.Level3, "#206694" },
+        { SponsorLevel.Level4, "#1b4351" },
+        { SponsorLevel.Level5, "#b83232" },
+        { SponsorLevel.Level6, "#11ecbc" },
+        { SponsorLevel.Level7, "#71368a" },
+        { SponsorLevel.Level8, "#ad1457" }
     };
 
     public static readonly Dictionary<SponsorLevel, string> SponsorGhost = new()
     {
-        { SponsorLevel.Level3, "MobObserver" },
-        { SponsorLevel.Level4, "MobObserver" },
-        { SponsorLevel.Level5, "MobObserver" },
+        { SponsorLevel.Level3, "SponsorGhostPretor" },
+        { SponsorLevel.Level5, "SponsorGhostRuni" },
+        { SponsorLevel.Level7, "SponsorGhostQueen" },
         { SponsorLevel.Level6, "MobObserver" }
     };
 
@@ -61,5 +57,7 @@ public enum SponsorLevel : byte
     Level3 = 3,
     Level4 = 4,
     Level5 = 5,
-    Level6 = 6
+    Level6 = 6,
+    Level7 = 7,
+    Level8 = 8
 }

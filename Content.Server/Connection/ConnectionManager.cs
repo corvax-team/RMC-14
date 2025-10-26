@@ -20,7 +20,6 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Content.Server._NF.Auth; // Frontier
 using Content.Corvax.Interfaces.Shared; // Corvax-Sponsors
 using Content.Corvax.Interfaces.Server; // Corvax-Sponsors
 
@@ -69,7 +68,6 @@ namespace Content.Server.Connection
         [Dependency] private readonly IHttpClientHolder _http = default!;
         [Dependency] private readonly IAdminManager _adminManager = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
-        [Dependency] private readonly MiniAuthManager _authManager = default!; //Frontier
         [Dependency] private readonly SponsorManager _sponsorMan = default!; // Forge-Change
         [Dependency] private readonly DiscordAuthManager _discordAuth = default!; // Forge-Change
 
