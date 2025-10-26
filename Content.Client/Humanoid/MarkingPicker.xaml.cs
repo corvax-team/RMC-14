@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Corvax.Interfaces.Shared; // Corvax-Sponsors
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
@@ -22,6 +23,7 @@ public sealed partial class MarkingPicker : Control
     [Dependency] private readonly IEntityManager _entityManager = default!;
 
     private readonly SpriteSystem _sprite;
+    private ISharedSponsorsManager? _sponsorsManager; // Corvax-Sponsors
 
     public Action<MarkingSet>? OnMarkingAdded;
     public Action<MarkingSet>? OnMarkingRemoved;
@@ -127,6 +129,7 @@ public sealed partial class MarkingPicker : Control
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+        IoCManager.Instance!.TryResolveType(out _sponsorsManager); // Corvax-Sponsors
 
         _sprite = _entityManager.System<SpriteSystem>();
 
@@ -230,6 +233,10 @@ public sealed partial class MarkingPicker : Control
 
             var item = CMarkingsUnused.AddItem($"{GetMarkingName(marking)}", _sprite.Frame0(marking.Sprites[0]));
             item.Metadata = marking;
+            // Corvax-Sponsors-Start
+            if (marking.SponsorOnly && _sponsorsManager != null)
+                item.Disabled = !_sponsorsManager.GetClientPrototypes().Contains(marking.ID);
+            // Corvax-Sponsors-End
         }
 
         CMarkingPoints.Visible = _currentMarkings.PointsLeft(_selectedMarkingCategory) != -1;

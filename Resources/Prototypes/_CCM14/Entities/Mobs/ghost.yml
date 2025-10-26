@@ -1,0 +1,35 @@
+- type: entity
+  parent: MobObserver
+  id: SponsorGhostPretor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _CCM14/Mobs/Ghost/sponsorGhostPretor.rsi
+    state: animated
+
+- type: entity
+  parent: MobObserver
+  id: SponsorGhostRuni
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _CCM14/Mobs/Ghost/sponsorGhostRuni.rsi
+    state: animated
+
+- type: entity
+  parent: MobObserver
+  id: SponsorGhostQueen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _CCM14/Mobs/Ghost/sponsorGhostQueen.rsi
+    state: animated
+
+- type: entity
+  parent: MobObserver
+  id: SponsorGhostFacehugger
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _CCM14/Mobs/Ghost/sponsorGhostFacehugger.rsi
+    state: animated
