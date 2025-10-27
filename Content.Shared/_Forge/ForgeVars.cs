@@ -37,7 +37,7 @@ public sealed class ForgeVars
 
 
     public static readonly CVarDef<string> DiscordApiUrl =
-        CVarDef.Create("jerry.discord_api_url", "http://46.118.102.175:2424/api", CVar.CONFIDENTIAL | CVar.SERVERONLY);
+        CVarDef.Create("jerry.discord_api_url", "http://c-pl-1.apexnodes.xyz:10594/api", CVar.CONFIDENTIAL | CVar.SERVERONLY);
 
     public static readonly CVarDef<bool> DiscordAuthEnabled =
         CVarDef.Create("jerry.discord_auth_enabled", true, CVar.CONFIDENTIAL | CVar.SERVERONLY);
@@ -46,5 +46,5 @@ public sealed class ForgeVars
         CVarDef.Create("jerry.discord_guildId", "1136006498842063049", CVar.CONFIDENTIAL | CVar.SERVERONLY);
 
     public static readonly CVarDef<string> ApiKey =
-        CVarDef.Create("jerry.discord_apikey", "f3a8c1e7b6d24f5a9e2c4d1b7f8a9c2e", CVar.CONFIDENTIAL | CVar.SERVERONLY);
+        CVarDef.Create("jerry.discord_apikey", "aa75439f-1003-4c78-b835-c0849e0f743c", CVar.CONFIDENTIAL | CVar.SERVERONLY);
 }
