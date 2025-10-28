@@ -83,16 +83,33 @@
                     <!-- Gold line -->
                     <controls:HLine Color="{x:Static style:StyleNano.NanoGold}" Thickness="2" />
                     <controls:HSpacer Spacing="10" />
-                    <!-- Voting & misc button bar -->
-                    <BoxContainer Orientation="Horizontal" MinSize="0 40" HorizontalAlignment="Right">
-                        <Button Name="AHelpButton" Access="Public" Text="{Loc 'ui-lobby-ahelp-button'}"
-                                StyleClasses="ButtonBig" />
-                        <vote:VoteCallMenuButton Name="CallVoteButton" StyleClasses="ButtonBig" />
-                        <Button Name="OptionsButton" Access="Public" StyleClasses="ButtonBig"
-                                Text="{Loc 'ui-lobby-options-button'}" />
-                        <Button Name="LeaveButton" Access="Public" StyleClasses="ButtonBig"
-                                Text="{Loc 'ui-lobby-leave-button'}" />
-                    </BoxContainer>
+<!-- Верхний ряд кнопок -->
+<BoxContainer Orientation="Horizontal"
+              MinSize="0 40"
+              HorizontalAlignment="Right"
+              SeparationOverride="6"
+              Margin="0 0 10 0">
+    <Button Name="AHelpButton" Access="Public"
+            Text="{Loc 'ui-lobby-ahelp-button'}"
+            StyleClasses="ButtonBig" />
+    <vote:VoteCallMenuButton Name="CallVoteButton" StyleClasses="ButtonBig" />
+    <Button Name="OptionsButton" Access="Public"
+            StyleClasses="ButtonBig"
+            Text="{Loc 'ui-lobby-options-button'}" />
+    <Button Name="LeaveButton" Access="Public"
+            StyleClasses="ButtonBigRed"
+            Text="{Loc 'ui-lobby-leave-button'}" />
+</BoxContainer>
+
+<!-- Отступ и кнопка авторизации -->
+<controls:HSpacer Spacing="6" />
+<Button Name="DiscordAuthButton" Access="Public"
+        Text="Авторизация Discord"
+        StyleClasses="ButtonBig"
+        HorizontalAlignment="Right"
+        Margin="0 0 10 0"
+        MinWidth="200" />
+
                     <controls:HSpacer Spacing="10" />
                     <!-- Server info -->
                     <controls:NanoHeading Text="{Loc 'ui-lobby-server-info-block'}" />
