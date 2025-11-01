@@ -33,3 +33,19 @@
   - type: Tool # CCM14 add
     qualities:
       - CCMDigging
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      path: /Audio/Weapons/bladeslice.ogg
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/punchmiss.ogg
+    deactivatedSoundOnHit:
+      collection: MetalThud
+    activatedDamage:
+      types:
+        Blunt: 30
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 3
+    soundHit:
+      collection: MetalThud
