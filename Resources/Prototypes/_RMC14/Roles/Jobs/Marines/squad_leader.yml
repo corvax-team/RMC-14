@@ -40,7 +40,7 @@
   dummyStartingGear: CMGearSquadLeaderEquipped
   icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   marineAuthorityLevel: 2
   accessGroups:
   - SquadLeader
@@ -83,6 +83,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: leader
     - type: RMCTrackable
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearSquadLeader
@@ -175,6 +176,17 @@
       role: CMJobSquadLeader
       time: 1
 
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleSL
+  name: The Squad Leader
+  description: The Squad Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: squad_leader
+
 - type: entity
   id: RMCGuidebookActionMove
   name: Move order
@@ -183,7 +195,7 @@
   - type: Sprite
     sprite: _RMC14/Actions/marine_actions.rsi
     state: move
-    
+
 - type: entity
   id: RMCGuidebookActionHold
   name: Hold order

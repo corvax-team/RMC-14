@@ -22278,14 +22278,6 @@ entities:
     - type: Transform
       pos: 51.5,10.5
       parent: 1
-- proto: CMLightBulbBroken
-  entities:
-  - uid: 1557
-    components:
-    - type: Transform
-      rot: -0.7853981633974483 rad
-      pos: -45.66379,16.643574
-      parent: 1
 - proto: CMLightFixture
   entities:
   - uid: 1558
@@ -25323,26 +25315,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 56.5,20.5
-      parent: 1
-- proto: CMLightFixtureSmallEmpty
-  entities:
-  - uid: 2058
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 36.5,17.5
-      parent: 1
-  - uid: 2059
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 34.5,17.5
-      parent: 1
-  - uid: 2060
-    components:
-    - type: Transform
-      rot: 4.71238898038469 rad
-      pos: -45.5,15.5
       parent: 1
 - proto: CMLightReplacer
   entities:
