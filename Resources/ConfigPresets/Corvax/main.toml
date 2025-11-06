@@ -1,5 +1,5 @@
 [net]
-tickrate = 30
+tickrate = 25
 max_connections = 1024
 
 [game]
@@ -112,3 +112,6 @@ engine_version = "264.0.2-fix-physics" #and remember to remove it next update...
 
 [movement]
 mob_pushing = true
+
+[jerry]
+discord_auth_enabled = true
