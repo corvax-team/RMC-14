@@ -11,7 +11,7 @@ PUBLISH_TOKEN = os.environ["PUBLISH_TOKEN"]
 VERSION = os.environ["GITHUB_SHA"]
 
 RELEASE_DIR = "release"
-ROBUST_CDN_URL = "http://146.59.52.189:27690/"
+ROBUST_CDN_URL = "http://93.88.206.10:27690/"
 
 def main():
     parser = argparse.ArgumentParser()
