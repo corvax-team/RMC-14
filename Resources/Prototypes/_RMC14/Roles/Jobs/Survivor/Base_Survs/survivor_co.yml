@@ -7,10 +7,19 @@
   startingGear: CMGearCommandingOfficer
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-nobody
-  whitelisted: true
+  whitelisted: false # CCM   RMC: true
   spawnMenuRoleName: Survivor CO (Base)
   useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
   basePlaytimeTracker: true
+  requirements:
+# CCM14 role timers [remove/start]
+  - !type:DepartmentTimeRequirement
+    department: CMCommand
+    time: 10800 # 3 hour
+# CCM14 role timers [remove/end]
+  - !type:RoleTimeRequirement
+    role: CMJobIntelOfficer
+    time: 10800 # 3 hours
 
 - type: playTimeTracker
   id: RMCJobSurvivorCO
