@@ -1,5 +1,4 @@
-﻿using QRCoder;
-using System.Linq;
+﻿using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading;
@@ -30,7 +29,7 @@ public sealed partial class DiscordAuthManager : IPostInjectInit
     private bool _enabled = false;
     private string _apiUrl = string.Empty;
     private string _apiKey = string.Empty;
-    private string _discordGuild = String.Empty;
+    private string _discordGuild = string.Empty;
     public event EventHandler<ICommonSession>? PlayerVerified;
 
     public void PostInject()
@@ -62,6 +61,7 @@ public sealed partial class DiscordAuthManager : IPostInjectInit
     {
         _sponsors.Sponsors.Remove(e.Channel.UserId);
     }
+
     private void OnAuthSkip(MsgDiscordAuthSkip msg)
     {
         var session = _playerMgr.GetSessionById(msg.MsgChannel.UserId);
@@ -89,7 +89,6 @@ public sealed partial class DiscordAuthManager : IPostInjectInit
             return;
         }
 
-
         var data = await IsVerified(args.Session.UserId);
         if (data.Status && data.UserData is not null)
         {
@@ -98,12 +97,10 @@ public sealed partial class DiscordAuthManager : IPostInjectInit
         }
 
         var link = await GenerateLink(args.Session.UserId);
-        var qrCode = await GenerateQrCode(link ?? "");
         var message = new MsgDiscordAuthRequired
         {
             Link = link ?? "",
-            ErrorMessage = data.ErrorMessage ?? "",
-            QrCodeBytes = qrCode
+            ErrorMessage = data.ErrorMessage ?? ""
         };
         args.Session.Channel.SendMessage(message);
     }
@@ -115,7 +112,6 @@ public sealed partial class DiscordAuthManager : IPostInjectInit
         var requestUrl = $"{_apiUrl}/uuid?method=uid&id={userId}";
         var request = new HttpRequestMessage(HttpMethod.Get, requestUrl);
 
-        // try catch block to catch HttpRequestExceptions due to remote service unavailability
         try
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
@@ -143,7 +139,7 @@ public sealed partial class DiscordAuthManager : IPostInjectInit
                     Level = level
                 };
                 _netMgr.ServerSendMessage(message, session.Channel);
-                _sawmill.Info($"{userId} is sponsor now.\nUserId: {userId}. Level: {Enum.GetName(level)}:{(int) level}");
+                _sawmill.Info($"{userId} is sponsor now.\nUserId: {userId}. Level: {Enum.GetName(level)}:{(int)level}");
             }
 
             return new DiscordData(true, new DiscordUserData(userId, discordUuid.DiscordId));
@@ -222,7 +218,6 @@ public sealed partial class DiscordAuthManager : IPostInjectInit
         _sawmill.Debug($"Generating link for {userId}");
         var requestUrl = $"{_apiUrl}/link?uid={userId}";
 
-        // try catch block to catch HttpRequestExceptions due to remote service unavailability
         try
         {
             var response = await _httpClient.GetAsync(requestUrl, cancel);
@@ -246,29 +241,6 @@ public sealed partial class DiscordAuthManager : IPostInjectInit
         catch (Exception e)
         {
             _sawmill.Error($"Unexpected error verifying user via auth service. Error: {e.Message}. Stack: \n{e.StackTrace}");
-            return null;
-        }
-    }
-    private async Task<byte[]?> GenerateQrCode(string url)
-    {
-        try
-        {
-            using var qrGenerator = new QRCodeGenerator();
-            using var qrCodeData = qrGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.Default);
-            using var qrCode = new PngByteQRCode(qrCodeData);
-            byte[] darkColor = new byte[] { 255, 255, 255, 100 };
-            byte[] lightColor = new byte[] { 255, 255, 255, 0 };
-
-            return qrCode.GetGraphic(
-                pixelsPerModule: 10,
-                darkColorRgba: darkColor,
-                lightColorRgba: lightColor,
-                drawQuietZones: false
-            );
-        }
-        catch (Exception ex)
-        {
-            _sawmill.Error($"Failed to generate QR code: {ex.Message}");
             return null;
         }
     }
