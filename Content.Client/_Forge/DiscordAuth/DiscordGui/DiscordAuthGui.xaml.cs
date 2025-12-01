@@ -21,32 +21,18 @@ public sealed partial class DiscordAuthGui : Control
         IoCManager.InjectDependencies(this);
         LayoutContainer.SetAnchorPreset(this, LayoutContainer.LayoutPreset.Wide);
 
-        var link = _discordAuthManager.AuthLink;
+        // Устанавливаем текст только если элемент существует
+        AuthLinkEdit?.SetText(_discordAuthManager.AuthLink ?? "");
+        DLinkEdit?.SetText(DiscordAuthManager.DiscordServerLink);
 
-        AuthLinkEdit.SetText(link);
-        DLinkEdit.SetText(DiscordAuthManager.DiscordServerLink);
-        InfoLabel.SetMessage(Loc.GetString("stalker-discord-info"));
-        ErrorMessage.SetMessage(_discordAuthManager.ErrorMessage);
-
-        // QR-код удалён, виджет скрыт
-        QrCodeDisplay.Visible = false;
+        InfoLabel?.SetMessage(Loc.GetString("stalker-discord-info"));
+        ErrorMessage?.SetMessage(_discordAuthManager.ErrorMessage);
 
         var uriOpener = IoCManager.Resolve<IUriOpener>();
 
-        QuitButton.OnPressed += _ =>
-        {
-            _consoleHost.ExecuteCommand("disconnect");
-        };
-
-        AuthorizeButton.OnPressed += _ =>
-        {
-            uriOpener.OpenUri(link);
-        };
-
-        DiscordButton.OnPressed += _ =>
-        {
-            uriOpener.OpenUri(DiscordAuthManager.DiscordServerLink);
-        };
+        QuitButton.OnPressed += _ => _consoleHost.ExecuteCommand("disconnect");
+        AuthorizeButton.OnPressed += _ => uriOpener.OpenUri(_discordAuthManager.AuthLink ?? "");
+        DiscordButton.OnPressed += _ => uriOpener.OpenUri(DiscordAuthManager.DiscordServerLink);
         SkipButton.OnPressed += OnSkipButtonPressed;
     }
 
