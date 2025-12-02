@@ -44,19 +44,23 @@ public sealed partial class DiscordAuthGui : Control
             ResetSkipButton();
     }
 
-    private void OnSkipButtonPressed(BaseButton.ButtonEventArgs args)
+private void OnSkipButtonPressed(BaseButton.ButtonEventArgs args)
+{
+    // Первый клик — подтверждение
+    if (_skipButtonResetOn is null)
     {
-        if (_skipButtonResetOn is null)
-        {
-            _skipButtonResetOn = _gameTiming.CurTime.Add(TimeSpan.FromSeconds(3));
-            SkipButton.ModulateSelfOverride = Color.DarkRed;
-            SkipButton.Text = Loc.GetString("stalker-discord-auth-skip-confirm");
-            return;
-        }
-
-        _discordAuthManager.OnAuthSkip();
-        ResetSkipButton();
+        _skipButtonResetOn = _gameTiming.CurTime.Add(TimeSpan.FromSeconds(3));
+        SkipButton.ModulateSelfOverride = Color.DarkRed;
+        SkipButton.Text = Loc.GetString("stalker-discord-auth-skip-confirm");
+        return;
     }
+
+    // Второй клик — выполняем команду
+    _consoleHost.ExecuteCommand("scene LobbyState");
+
+    ResetSkipButton();
+}
+
 
     private void ResetSkipButton()
     {
