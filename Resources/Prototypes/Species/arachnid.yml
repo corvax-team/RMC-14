@@ -13,8 +13,10 @@
   femaleFirstNames: NamesArachnidFirst
   maleLastNames: NamesArachnidLast # CCM-LastnameGender
   femaleLastNames: NamesArachnidLast # CCM-LastnameGender
-#  sexes: #CCM edit
-#  - Unsexed #CCM edit
+  sexes:
+  - Unsexed
+  - Male #ccm14 edit
+  - Female #ccm14 edit
 
 - type: speciesBaseSprites
   id: MobArachnidSprites
