@@ -1,3 +1,4 @@
+#Please note This file has been edited by CCM14 developers.
 - type: species
   id: Arachnid
   name: species-name-arachnid
@@ -12,8 +13,8 @@
   femaleFirstNames: NamesArachnidFirst
   maleLastNames: NamesArachnidLast # CCM-LastnameGender
   femaleLastNames: NamesArachnidLast # CCM-LastnameGender
-  sexes:
-  - Unsexed
+#  sexes: #CCM edit
+#  - Unsexed #CCM edit
 
 - type: speciesBaseSprites
   id: MobArachnidSprites
