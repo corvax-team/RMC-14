@@ -32,7 +32,8 @@ public sealed class SponsorData
         { SponsorLevel.Level3, "SponsorGhostPretor" },
         { SponsorLevel.Level5, "SponsorGhostRuni" },
         { SponsorLevel.Level7, "SponsorGhostQueen" },
-        { SponsorLevel.Level6, "MobObserver" }
+        { SponsorLevel.Level6, "MobObserver" },
+        { SponsorLevel.Level8, "SponsorGhostQueen" }
     };
 
     public static SponsorLevel ParseRoles(List<string> roles)
