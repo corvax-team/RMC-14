@@ -1,0 +1,139 @@
+- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  id: CCMXenoSwarmer
+  name: Swarmer
+  description: A beefy alien with an armored carapace.
+  components:
+# TODO Swarmer guide мне лень сделаете за меня
+#  - type: GuideHelp
+#    guides:
+#    - CCMGuideRoleSwarmer
+  - type: GhostRole
+    name: ccm-job-name-xeno-swarmer
+  - type: Sprite
+    sprite: _CCM14/Mobs/Xenonids/Swarmer/swarmer.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive #Вождь баланс
+      700: Critical #Вождь баланс
+      800: Dead #Вождь баланс
+  - type: Xeno
+    role: CCMXenoSwarmer
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidWeak
+    - ActionXenoPheromones
+    - ActionXenoTailWhirlwind
+    - ActionXenoDashFlight
+    - ActionXenoOrderConstruction
+    - ActionXenoPlantWeeds
+    - ActionXenoPlantHiveWeeds
+    - ActionXenoChooseStructure
+    - ActionXenoSecreteStructure
+    - ActionXenoTransferPlasma
+    - ActionXenoDevolve
+    tier: 3
+    hudOffset: -0.15,0.25
+    unlockAt: 900 # 15 minutes
+  - type: XenoConstruction
+    buildDelay: 1
+    canBuild:
+    - CCMWallXenoWeedBoundResin
+    - CCMWallXenoThickWeedBoundResin
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
+    - HiveRecoveryNodeXenoConstructionNode
+  - type: XenoRegen
+    restHealMultiplier:  1.4 #Вождь баланс
+  - type: XenoHeavy
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoHivelord
+  - type: XenoAcid
+  - type: XenoDevour
+  - type: TailWhirlwind
+    damage: 
+      groups:
+        Brute: 25 #Вождь баланс
+  - type: XenoLeap
+    plasmaCost: 400
+    delay: 0
+  - type: XenoPheromones
+    pheromonesMultiplier: 2.5
+    pheroSuffix: hivelord
+  - type: XenoPlasma
+    plasma: 1500 #Вождь баланс
+    maxPlasma: 1500 #Вождь баланс
+    plasmaRegenOnWeeds: 6.5
+    plasmaTransferDelay: 0.75
+  - type: CMArmor
+    xenoArmor: 20 #Вождь баланс
+    explosionArmor: 40 #Вождь баланс
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 35 #Вождь баланс
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 48  #Вождь баланс
+  - type: Tackle
+    max: 4
+  - type: WhitelistPickup
+    whitelist:
+      components:
+      - XenoParasite
+      - XenoEgg
+      - XenoFruit
+  - type: TunnelRenamer
+  - type: EggPlantTime
+    plantTime: 2
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.4525
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.5025
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.3625
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: RMCSize
+    size: Big
+  - type: RMCXenoDamageVisuals
+    prefix: hivelord
+# TODO Swarmer map icon
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: warrior
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2 #Вождь баланс
+  - type: XenoInhands
+    prefix: hivelord
+  - type: FixedIdentity
+    name: ccm-job-name-xeno-swarmer
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT3
+  - type: RMCActionOrder
+    id: CCMXenoSwarmer

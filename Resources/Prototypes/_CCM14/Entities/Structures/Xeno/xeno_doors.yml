@@ -1,0 +1,98 @@
+- type: entity
+  parent: DoorXenoResin
+  id: DoorXenoWeedBoundResin
+  name: weed bound resin
+  description: A thick resin door, which is more durable.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Xenos/xeno_resin_door.rsi
+    layers:
+    - state: weedboundresin
+      map: ["enum.DoorVisualLayers.Base"]
+    - state: closed_unlit
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+    - state: closed_unlit
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+  - type: Door
+    crushDamage:
+      types:
+        Blunt: 15
+    openSpriteState: weedboundresinopen
+    closedSpriteState: weedboundresin
+    openingSpriteState: weedboundresinopening
+    closingSpriteState: weedboundresinclosing
+    openSound:
+      path: /Audio/_RMC14/Xeno/alien_resin_move1.ogg
+    closeSound:
+      path: /Audio/_RMC14/Xeno/alien_resin_move2.ogg
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 1390
+  - type: XenoConstructionPlasmaCost
+    plasma: 120
+    scalingCost: true
+  - type: XenoStructureUpgradeable
+    cost: 75
+    to: DoorXenoThickWeedBoundResin
+    
+
+
+- type: entity
+  parent: DoorXenoResin
+  id: DoorXenoThickWeedBoundResin
+  name: thick weed bound resin
+  description: A thick resin door, which is more durable.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Xenos/xeno_resin_door.rsi
+    layers:
+    - state: thickweedboundresin
+      map: ["enum.DoorVisualLayers.Base"]
+    - state: closed_unlit
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+    - state: closed_unlit
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+  - type: Door
+    crushDamage:
+      types:
+        Blunt: 15
+    openSpriteState: thickweedboundresinopen
+    closedSpriteState: thickweedboundresin
+    openingSpriteState: thickweedboundresinopening
+    closingSpriteState: thickweedboundresinclosing
+    openSound:
+      path: /Audio/_RMC14/Xeno/alien_resin_move1.ogg
+    closeSound:
+      path: /Audio/_RMC14/Xeno/alien_resin_move2.ogg
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1600
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: IconSmooth
+    key: walls
+    mode: NoSprite
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 1390
+  - type: XenoConstructionPlasmaCost
+    plasma: 170
+    scalingCost: true
+  - type: XenoStructureUpgradeable
+    to: null
