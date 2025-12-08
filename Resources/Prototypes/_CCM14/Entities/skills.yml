@@ -1,0 +1,14 @@
+- type: entity
+  parent: RMCSkillBase
+  id: CMMSkillCombatMech
+  name: CombatMech
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: RMCPamphletAdmin
+  id: RMCPamphletAdminCombatMech1
+  name: combat mech 1 instructional pamphlet
+  components:
+  - type: SkillPamphlet
+    addSkills:
+      CMMSkillCombatMech: 1

@@ -1,0 +1,21 @@
+{
+  "copyright" : "Made for Corvax RMC-14",
+  "license" : "CC-BY-SA-3.0",
+  "version": 1,
+  "size": {
+    "x": 96,
+    "y": 96
+  },
+  "states": [
+    {
+      "name": "mech",
+      "directions": 4
+    },
+    {
+      "name": "mech-open"
+    },
+    {
+      "name": "mech-broken"
+    }
+  ]
+}
