@@ -1,0 +1,35 @@
+- type: entity
+  id: MCSmoke
+  name: smoke
+  categories: [ MCContent ]
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - MCSmoke
+    - HideContextMenu
+  - type: Sprite
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke2
+    color: "#FFBF58"
+  - type: MCSmoke
+  - type: MCEdgeSpreader
+  - type: Transform
+    anchored: true
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape: !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        mask:
+        - MobMask
+        layer:
+        - MidImpassable
+  - type: Occluder
+  - type: TimedDespawn
+    lifetime: 12
+
+- type: Tag
+  id: MCSmoke

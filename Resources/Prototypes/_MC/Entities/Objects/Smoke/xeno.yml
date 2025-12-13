@@ -1,0 +1,47 @@
+- type: entity
+  parent: MCSmoke
+  id: MCSmokeXenoNeurotoxin
+  name: smoke xeno neurotoxin
+  components:
+  - type: Sprite
+    color: "#ffbf58"
+  - type: MCSmokeReagent
+    reagents:
+    - ReagentId: MCNeurotoxin
+      Quantity: 7
+
+- type: entity
+  parent: MCSmoke
+  id: MCSmokeXenoTransvitox
+  name: smoke xeno transvitox
+  components:
+  - type: Sprite
+    color: "#abf775"
+  - type: MCSmokeReagent
+    reagents:
+    - ReagentId: MCTransvitox
+      Quantity: 7
+
+- type: entity
+  parent: MCSmoke
+  id: MCSmokeXenoSanguinal
+  name: smoke xeno sanguinal
+  components:
+  - type: Sprite
+    color: "#bb0a1e"
+  - type: MCSmokeReagent
+    reagents:
+    - ReagentId: MCSanguinal
+      Quantity: 7
+
+- type: entity
+  parent: MCSmoke
+  id: MCSmokeXenoOzelomelyn
+  name: smoke xeno ozelomelyn
+  components:
+  - type: Sprite
+    color: "#f1ddcf"
+  - type: MCSmokeReagent
+    reagents:
+    - ReagentId: MCOzelomelyn
+      Quantity: 7
