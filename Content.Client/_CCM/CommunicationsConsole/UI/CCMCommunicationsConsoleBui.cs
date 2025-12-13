@@ -25,3 +25,4 @@ public sealed class CCMCommunicationsConsoleBui : BoundUserInterface
     }
 }
 // thanks to _gadmin1 (discord) for the provided code
+// Бля чё это? Чисто насрал для паблиша сорянчик уберу скоро наверное
