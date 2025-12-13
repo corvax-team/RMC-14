@@ -1,0 +1,9 @@
+- type: job
+  parent: CMJobXenoBase
+  id: CCMXenoRoyalParasite
+  name: rmc-xeno-royal-parasite-ghost-role-name
+  playTimeTracker: CCMJobXenoRoyalParasite
+
+- type: playTimeTracker
+  id: CCMJobXenoRoyalParasite
+  isXeno: true

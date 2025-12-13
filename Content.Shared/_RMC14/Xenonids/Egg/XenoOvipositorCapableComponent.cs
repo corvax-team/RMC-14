@@ -24,5 +24,8 @@ public sealed partial class XenoOvipositorCapableComponent : Component
     public EntProtoId[] ActionIds = ["ActionXenoLeader", "ActionXenoHeal", "ActionXenoQueenEye"];
 
     [DataField, AutoNetworkedField]
+    public bool CanLayRoyalEggs = true;
+
+    [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId, EntityUid> Actions = new();
 }

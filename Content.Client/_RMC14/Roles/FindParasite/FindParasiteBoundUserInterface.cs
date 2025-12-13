@@ -10,12 +10,11 @@ public sealed partial class FindParasiteBoundUserInterface(EntityUid owner, Enum
     : BoundUserInterface(owner, uiKey)
 {
     private ItemList.Item? _selectedItem;
-
-    // Deselecting directly via code still activates events,
-    // prevent activation of function "OnItemDeselect" if "_impledDeselect" is true
+    private SpawnerData? _selectedSpawnerData;
     private bool _impledDeselect;
 
     private ItemList? _spawnerList;
+    private List<SpawnerData>? _currentSpawners;
 
     [ViewVariables]
     private FindParasiteWindow? _window;
@@ -37,14 +36,14 @@ public sealed partial class FindParasiteBoundUserInterface(EntityUid owner, Enum
 
         spawnButton.OnButtonDown += args =>
         {
-            if (_selectedItem is null)
+            if (_selectedItem is null || _selectedSpawnerData is null)
             {
                 args.Button.Disabled = true;
                 return;
             }
 
             var selected = (NetEntity)_selectedItem.Metadata!;
-            TakeParasiteRole(selected);
+            TakeParasiteRole(selected, _selectedSpawnerData.IsRoyalParasite);
             Close();
         };
     }
@@ -60,6 +59,10 @@ public sealed partial class FindParasiteBoundUserInterface(EntityUid owner, Enum
         }
 
         var activeParasiteSpawners = uiState.ActiveParasiteSpawners;
+        _currentSpawners = activeParasiteSpawners;
+
+        _selectedItem = null;
+        _selectedSpawnerData = null;
         _spawnerList.Clear();
 
         foreach (var spawnerData in activeParasiteSpawners)
@@ -79,53 +82,34 @@ public sealed partial class FindParasiteBoundUserInterface(EntityUid owner, Enum
 
         var newSelectedItem = args.ItemList[args.ItemIndex];
         var newSelected = (NetEntity)newSelectedItem.Metadata!;
-
+        var newSelectedData = _currentSpawners?[args.ItemIndex];
 
         if (_selectedItem is null)
         {
             FollowParasiteSpawner(newSelected);
             _selectedItem = newSelectedItem;
+            _selectedSpawnerData = newSelectedData;
             return;
         }
 
-        var originalSelected = (NetEntity)_selectedItem.Metadata!;
-
-        if (newSelected == originalSelected)
-        {
-            TakeParasiteRole(originalSelected);
-            Close();
-            return;
-        }
-        else
+        if (_selectedItem != newSelectedItem)
         {
             _impledDeselect = true;
             _selectedItem.Selected = false;
+            _impledDeselect = false;
         }
+
         _selectedItem = newSelectedItem;
+        _selectedSpawnerData = newSelectedData;
         FollowParasiteSpawner(newSelected);
     }
 
     private void OnItemDeselect(ItemList.ItemListDeselectedEventArgs args)
     {
-        var deselected = (NetEntity)args.ItemList[args.ItemIndex].Metadata!;
-
-        if (_selectedItem is null)
-        {
-            return;
-        }
-
         if (_impledDeselect)
         {
             _impledDeselect = false;
             return;
-        }
-
-        var originalSelected = (NetEntity)_selectedItem.Metadata!;
-
-        if (deselected == originalSelected)
-        {
-            TakeParasiteRole(originalSelected);
-            Close();
         }
     }
 
@@ -134,8 +118,8 @@ public sealed partial class FindParasiteBoundUserInterface(EntityUid owner, Enum
         SendMessage(new FollowParasiteSpawnerMessage(spawner));
     }
 
-    public void TakeParasiteRole(NetEntity spawner)
+    public void TakeParasiteRole(NetEntity spawner, bool isRoyalParasite = false)
     {
-        SendMessage(new TakeParasiteRoleMessage(spawner));
+        SendMessage(new TakeParasiteRoleMessage(new NetEntity(owner.Id), spawner, isRoyalParasite));
     }
 }

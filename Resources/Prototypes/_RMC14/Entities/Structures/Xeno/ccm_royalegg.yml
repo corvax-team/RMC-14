@@ -1,0 +1,32 @@
+- type: entity
+  id: CCMXenoRoyalEgg
+  parent: XenoEgg
+  name: royal egg
+  description: A particularly large, unusual egg with a iridescent sheen.
+  components:
+  - type: XenoEgg
+    spawn: CCMXenoRoyalParasite
+    minTime: 10
+    maxTime: 15
+    eggOpenTime: 0.9
+    knockdownTime: 1
+    itemState: egg_item
+    growingState: egg_growing
+    grownState: egg
+    openedState: egg_opened
+    openingState: egg_opening
+    normalSprite: _RMC14/Structures/Xenos/xeno_royal_egg.rsi
+    currentSprite: _RMC14/Structures/Xenos/xeno_royal_egg.rsi
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_royal_egg.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 55
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          XenoEggDestroyed:
+            min: 1
+            max: 1

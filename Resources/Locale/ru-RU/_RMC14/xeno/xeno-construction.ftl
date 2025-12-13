@@ -77,3 +77,4 @@ rmc-xeno-construction-recovery-node-heal-other = { CAPITALIZE($target) } нач�
 rmc-xeno-construction-no-map-structure = The ground isn't solid.
 rmc-xeno-construction-must-have-weeds-structure = We can only make this on weeds!
 rmc-xeno-construction-tunnel-fill-xeno-drop = Туннель внезапно обрушивается, вынуждая нас выбраться наружу!
+rmc-xeno-construction-resin-hole-queen-displeased = Королева будет недовольна тобой если ты поместишь это в дыру.

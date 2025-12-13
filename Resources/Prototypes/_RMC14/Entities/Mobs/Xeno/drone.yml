@@ -60,6 +60,7 @@
       - XenoParasite
       - XenoEgg
       - XenoFruit
+      - CCMRoyalParasite
   - type: TunnelRenamer
   - type: EggPlantTime
     plantTime: 2.5

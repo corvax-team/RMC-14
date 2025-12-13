@@ -16,17 +16,14 @@ public sealed class ReserveParasitesBoundUserInterface(EntityUid owner, Enum uiK
 
         _window = this.CreateWindow<ReserveParasitesWindow>();
         if (EntMan.TryGetComponent<XenoParasiteThrowerComponent>(Owner, out var paras))
-            _window.SetReserveShown(paras.ReservedParasites);
+            _window.SetReserveShown(paras.ReservedParasites, paras.ReservedRoyalParasites,
+                                    paras.CurParasites, paras.CurRoyalParasites);
 
         _window.ApplyButton.OnPressed += _ =>
         {
             SendMessage(new XenoChangeParasiteReserveMessage(_window.ReserveBar.Value));
+            SendMessage(new CCMXenoChangeRoyalParasiteReserveMessage(_window.RoyalReserveBar.Value));
             _window.Close();
         };
-    }
-
-    public void ChangeReserve(int newReserve)
-    {
-        SendMessage(new XenoChangeParasiteReserveMessage(newReserve));
     }
 }

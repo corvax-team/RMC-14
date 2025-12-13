@@ -2,7 +2,10 @@
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedXenoParasiteSystem))]
-
-public sealed partial class ParasiteTiredOutComponent : Component;
+public sealed partial class ParasiteTiredOutComponent : Component
+{
+    [DataField, AutoNetworkedField]
+    public TimeSpan CooldownEndTime;
+}

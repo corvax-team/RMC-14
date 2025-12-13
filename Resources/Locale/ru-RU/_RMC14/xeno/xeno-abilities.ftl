@@ -78,11 +78,11 @@ cm-xeno-crippling-strike-hit = Мы значительно усилили наш
 # Pheromones
 rmc-xeno-pheromones-help =
     Феромоны дают усиление всем ксено в радиусе действия за счет расхода плазмы каждую секунду. Доступные усиления:
-    
+
     Неистовство (Красное) - Повышенная скорость бега и урон.
-    
+
     Защита (Зелёное) - Когда ксено находится в критическом состоянии, его запас критического здоровья повышен, а умирание из-за нахождения не на сорняках замедлено.
-    
+
     Восстановления (Синее) - Повышенное восстановление плазмы и здоровья.
 cm-xeno-choose-pheromones = Выбрать феромоны
 cm-pheromones-recovery = Восстановления
@@ -138,8 +138,9 @@ rmc-xeno-retrieve-egg-current = { CAPITALIZE(SUBJECT($xeno)) } хранит: { $
 cm-xeno-throw-parasite-no-parasites = У нас не хранятся никакие паразиты!
 cm-xeno-throw-parasite-too-many-parasites = Мы не можем нести больше паразитов!
 cm-xeno-throw-parasite-stash-parasite = Мы помещаем паразита в надёжное место. Теперь у нас: { $cur_parasites }/{ $max_parasites }.
+cm-xeno-throw-parasite-stash-royal = Мы помещаем королевского паразита в надёжное место. Теперь у нас: { $cur_royals }/{ $max_royals } королевских паразитов.
 cm-xeno-throw-parasite-unstash-parasite = Мы достаём паразита из нашего хранилища. Теперь у нас: { $cur_parasites }/{ $max_parasites }.
-rmc-xeno-throw-parasite-current = { CAPITALIZE(SUBJECT($xeno)) } хранит: { $cur_paras }/{ $max_paras } паразитов.
+cm-xeno-throw-parasite-unstash-royal = Мы достаём королевского паразита из нашего хранилища. Теперь у нас: { $cur_royals }/{ $max_royals } королевских паразитов.
 rmc-xeno-throw-parasite-reserves =
     У { $xeno } имеется { $rev_paras } { $rev_paras ->
         [one] доступная роль

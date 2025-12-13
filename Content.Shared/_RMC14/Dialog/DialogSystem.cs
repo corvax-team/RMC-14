@@ -54,7 +54,7 @@ public sealed class DialogSystem : EntitySystem
         _ui.CloseUi(ent.Owner, DialogUiKey.Key);
 
         if (ent.Comp.ConfirmEvent != null)
-            RaiseLocalEvent(ent, ent.Comp.ConfirmEvent);
+            RaiseLocalEvent(ent, (object)ent.Comp.ConfirmEvent);
     }
 
     private void OnDialogClosed(Entity<DialogComponent> ent, ref BoundUIClosedEvent args)
