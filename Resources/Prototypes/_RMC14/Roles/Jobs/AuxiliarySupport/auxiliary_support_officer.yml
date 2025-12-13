@@ -35,8 +35,8 @@
   icon: "CMJobIconASO"
   requireAdminNotify: true
   joinNotifyCrew: false
-  marineAuthorityLevel: 13
-  supervisors: cm-job-supervisors-co
+  marineAuthorityLevel: 12
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - ASO
   roleWeight: 0.25
@@ -76,6 +76,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
     - type: RMCTrackable
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearASO

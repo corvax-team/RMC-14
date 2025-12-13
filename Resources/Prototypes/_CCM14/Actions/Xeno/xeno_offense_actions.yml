@@ -1,0 +1,51 @@
+- type: entity
+  id: ActionXenoTailWhirlwind
+  parent: ActionXenoBase
+  name: Tail wirlwind (350)
+  description: Knock down any enemies close to you.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tail_sweep
+    useDelay: 20
+  - type: InstantAction
+    event: !type:TailWhirlwindActionEvent
+  - type: RMCDazeableAction
+  - type: XenoActionPlasma
+    cost: 350
+
+- type: entity
+  parent: ActionXenoLeap
+  id: ActionXenoDashFlight
+  name: Dash flight (400)
+  description: Dash a short distance towards a given location.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: charge
+    useDelay: 15
+  - type: TargetAction
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:XenoLeapActionEvent
+
+- type: entity
+  id: ActionXenoPlantHiveWeeds
+  parent: ActionXenoBase
+  name: Plant hive Weeds (150)
+  description: Plant a weed node that will spread more weeds.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: plant_weeds
+    useDelay: 300
+  - type: InstantAction
+    event: !type:XenoPlantWeedsActionEvent
+      plasmaCost: 150
+      prototype: XenoHiveWeedsSource

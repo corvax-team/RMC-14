@@ -1,0 +1,25 @@
+- type: emoteSounds
+  parent: [UnisexArachnid, RMCFemaleHuman]
+  id: CCMFemaleArachnid
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      path: /Audio/Voice/Arachnid/arachnid_scream.ogg
+    Laugh:
+      path: /Audio/Voice/Arachnid/arachnid_laugh.ogg
+    Chitter:
+      path: /Audio/Voice/Arachnid/arachnid_chitter.ogg
+    Click:
+      path: /Audio/Voice/Arachnid/arachnid_click.ogg
+    Weh:
+      collection: Weh
+    Hew:
+      collection: Hew
+    Honk:
+      collection: BikeHorn
+    Gasp:
+      collection: FemaleGasp
+    DefaultDeathgasp:
+      collection: FemaleDeathGasp
+#\\UWU//

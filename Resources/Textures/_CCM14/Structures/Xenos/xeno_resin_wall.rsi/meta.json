@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "license": "All Rights Reserved",
+  "copyright": "Denlero",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "thickweedboundresin"
+    },
+    {
+      "name": "thickweedboundresin0",
+      "directions": 4
+    },
+    {
+      "name": "thickweedboundresin1",
+      "directions": 4
+    },
+    {
+      "name": "thickweedboundresin2",
+      "directions": 4
+    },
+    {
+      "name": "thickweedboundresin3",
+      "directions": 4
+    },
+    {
+      "name": "thickweedboundresin4",
+      "directions": 4
+    },
+    {
+      "name": "thickweedboundresin5",
+      "directions": 4
+    },
+    {
+      "name": "thickweedboundresin6",
+      "directions": 4
+    },
+    {
+      "name": "thickweedboundresin7",
+      "directions": 4
+    },
+    {
+      "name": "weedboundresin"
+    },
+    {
+      "name": "weedboundresin0",
+      "directions": 4
+    },
+    {
+      "name": "weedboundresin1",
+      "directions": 4
+    },
+    {
+      "name": "weedboundresin2",
+      "directions": 4
+    },
+    {
+      "name": "weedboundresin3",
+      "directions": 4
+    },
+    {
+      "name": "weedboundresin4",
+      "directions": 4
+    },
+    {
+      "name": "weedboundresin5",
+      "directions": 4
+    },
+    {
+      "name": "weedboundresin6",
+      "directions": 4
+    },
+    {
+      "name": "weedboundresin7",
+      "directions": 4
+    }
+  ]
+}

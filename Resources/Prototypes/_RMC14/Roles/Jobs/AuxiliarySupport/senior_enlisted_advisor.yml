@@ -43,8 +43,8 @@
   latejoinArrivalSound:
     path: /Audio/_RMC14/Announcements/ARES/attention_jingle.ogg
   marineAuthorityLevel: 5
-  supervisors: cm-job-supervisors-co
-#  whitelisted: true #CCM
+  supervisors: rmc-job-supervisors-commander
+  whitelisted: false #ccm-edit
   accessGroups:
   - MarineMain
   roleWeight: 0.25

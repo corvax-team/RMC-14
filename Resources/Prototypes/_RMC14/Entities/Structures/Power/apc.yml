@@ -14,7 +14,6 @@
   - type: Sprite
     drawdepth: WallMountedItems
     sprite: _RMC14/Structures/Power/apc.rsi
-    offset: 0,-0.75 # CCM14 apc sprite fix
     layers:
     - state: base
       map: [ "base" ]
@@ -195,6 +194,8 @@
   - type: ContainerContainer
     containers:
       rmc_apc_power_cell: !type:ContainerSlot
+  - type: SpriteSetRenderOrder
+    offset: 0.45,-0.32
 
 # APCs in use
 - type: entity

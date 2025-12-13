@@ -1,0 +1,199 @@
+{
+  "version": 1,
+  "license": "All Rights Reserved",
+  "copyright": "Denlero",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "weedboundresin",
+	  "directions": 4
+    },
+    {
+      "name": "thickweedboundresinclosing",
+      "directions": 4,
+	  "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "thickweedboundresinopen",
+      "directions": 4
+    },
+    {
+      "name": "thickweedboundresinopening",
+      "directions": 4,
+	  "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "weedboundresin",
+      "directions": 4
+    },
+    {
+      "name": "weedboundresinclosing",
+      "directions": 4,
+	  "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "weedboundresinopen",
+      "directions": 4
+    },
+    {
+      "name": "weedboundresinopening",
+      "directions": 4,
+	  "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ]
+      ]
+    },
+	{
+      "name": "closed_unlit",
+      "directions": 4
+    }
+  ]
+}
