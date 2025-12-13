@@ -9,3 +9,59 @@
 - type: lobbyBackground
   id: CCMLogoNew
   background: /Textures/_CCM14/Lobby/CCM_New.png
+  
+- type: lobbyBackground
+  id: CCMLogoNew
+  background: /Textures/_CCM14/Lobby/LobbyArt1.png
+  
+- type: lobbyBackground
+  id: CCMLogoNew
+  background: /Textures/_CCM14/Lobby/LobbyArt2.png
+
+- type: lobbyBackground
+  id: CCMLogoNew
+  background: /Textures/_CCM14/Lobby/LobbyArt3.png
+
+- type: lobbyBackground
+  id: CCMLogoNew
+  background: /Textures/_CCM14/Lobby/LobbyArt4.png
+
+- type: lobbyBackground
+  id: CCMLogoNew
+  background: /Textures/_CCM14/Lobby/LobbyArt5.png
+
+- type: lobbyBackground
+  id: CCMLogoNew
+  background: /Textures/_CCM14/Lobby/LobbyArt6.png
+
+- type: lobbyBackground
+  id: CCMLogoNew
+  background: /Textures/_CCM14/Lobby/LobbyArt7.png
+
+- type: lobbyBackground
+  id: CCMLogoNew
+  background: /Textures/_CCM14/Lobby/LobbyArt8.png
+
+- type: lobbyBackground
+  id: CCMLogoNew
+  background: /Textures/_CCM14/Lobby/LobbyArt9.png
+
+- type: lobbyBackground
+  id: CCMLogoNew
+  background: /Textures/_CCM14/Lobby/LobbyArt10.png
+
+- type: lobbyBackground
+  id: CCMLogoNew
+  background: /Textures/_CCM14/Lobby/LobbyArt11.png
+
+- type: lobbyBackground
+  id: CCMLogoNew
+  background: /Textures/_CCM14/Lobby/LobbyArt12.png
+
+- type: lobbyBackground
+  id: CCMLogoNew
+  background: /Textures/_CCM14/Lobby/LobbyArt13.png
+
+- type: lobbyBackground
+  id: CCMLogoNew
+  background: /Textures/_CCM14/Lobby/LobbyArt14.png
