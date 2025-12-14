@@ -1,2 +1,2 @@
-rmc-xeno-burrowed-surge-start = The hive swells with power! We will now steadily gain burrowed larva over time.
-rmc-xeno-burrowed-surge-end = The hive's power wanes. We will no longer gain pooled larva over time.
+rmc-xeno-burrowed-surge-start = Улей становится сильнее! Теперь мы будем постепенно получать зарытых личинок со временем.
+rmc-xeno-burrowed-surge-end = Сила улья угасает. Мы больше не будем получать зарытых личинок со временем.
