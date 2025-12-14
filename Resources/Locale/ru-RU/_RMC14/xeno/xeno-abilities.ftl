@@ -336,3 +336,19 @@ rmc-gut-start-others = { $user } вонзает когти в тело { $target
 rmc-gut-finish-self = Мы разрываем этого жалкого носителя пополам!!
 rmc-gut-finish-others = { $user } разрывает { $target } пополам!!
 rmc-xeno-soak-end-others = { CAPITALIZE($xeno) } приходит в ярость, получив достаточно урона!
+
+# Shed Spikes
+rmc-shed-spikes = Мы сбросили наши шипы и не можем получать новые в течение 30 секунд!
+rmc-shed-spikes-back = Мы снова можем получать шипы!
+
+# Spike Shield
+rmc-spike-shield-self = Мы поднимаем наши шипы, формируя защитный панцирь!
+rmc-spike-shield-others = { $user } поднимает свои костяные иглы, формируя защитный панцирь!
+rmc-spike-shield-hit = { $user } разбрасывает шипы повсюду!
+
+# Doomed
+rmc-doomed-fail = Это не работает...
+
+# Destroy
+rmc-destroy-cant-reach = У нас нет прямой дороги этой точке!
+rmc-destroy-cant-area = Мы не можем прыгнуть в эту область!
