@@ -79,12 +79,12 @@ rmc-xeno-fruit-ui-count = Посаженные фрукты: { $count }/{ $max }
 rmc-xeno-fruit-wrong-hive = Это не из нашего улья!
 rmc-xeno-fruit-feed-wrong-hive = { $target } не из нашего улья!!
 # Weeds
-rmc-xeno-fruit-weed-boost = We sense that these weeds multiply resin fruit growth time by [bold]{ $percent }%[/bold].
-# Effects
-rmc-xeno-fruit-consume-examine = This fruit gives the following effects on consumption:
-rmc-xeno-fruit-instant-heal = Instantly restores [bold]{ $amount }[/bold] health.
-rmc-xeno-fruit-regen-heal = Regenerates [bold]{ $amount }[/bold] health per second for { $time } seconds.
-rmc-xeno-fruit-shield = Grants an overshield equal to [bold]{ $percent }%[/bold] of our max health, up to [bold]{ $max }[/bold] max. It decays after { $duration } seconds, losing { $decay } per second.
-rmc-xeno-fruit-cooldown = Reduces ability cooldowns on next cast by [bold]{ $amount }%[/bold] on slash, up to [bold]{ $max }%[/bold] max. This effect lasts { $time } seconds.
-rmc-xeno-fruit-speed = Boosts our speed by [bold]{ $amount }[/bold] for { $time } seconds.
-rmc-xeno-fruit-regen-plasma = Regenerates [bold]{ $amount }[/bold] plasma per second for { $time } seconds.
+rmc-xeno-fruit-weed-boost = Мы чувствуем, что эти сорняки увеличивают время роста смоляного фрукта на [bold]{ $percent }%[/bold].
+# Эффекты
+rmc-xeno-fruit-consume-examine = Этот фрукт даёт следующие эффекты при употреблении:
+rmc-xeno-fruit-instant-heal = Мгновенно восстанавливает [bold]{ $amount }[/bold] здоровья.
+rmc-xeno-fruit-regen-heal = Регенерирует [bold]{ $amount }[/bold] здоровья в секунду в течение { $time } секунд.
+rmc-xeno-fruit-shield = Даёт дополнительный щит, равный [bold]{ $percent }%[/bold] от нашего максимального здоровья, до [bold]{ $max }[/bold] максимум. Он пропадает через { $duration } секунд, теряя { $decay } в секунду.
+rmc-xeno-fruit-cooldown = Уменьшает время восстановления способности при следующем применении на [bold]{ $amount }%[/bold] при ударе, до [bold]{ $max }%[/bold] максимум. Этот эффект длится { $time } секунд.
+rmc-xeno-fruit-speed = Увеличивает нашу скорость на [bold]{ $amount }[/bold] в течение { $time } секунд.
+rmc-xeno-fruit-regen-plasma = Регенерирует [bold]{ $amount }[/bold] плазмы в секунду в течение { $time } секунд.
