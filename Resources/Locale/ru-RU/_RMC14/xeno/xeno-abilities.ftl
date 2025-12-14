@@ -293,7 +293,7 @@ rmc-xeno-abduct-more =
        *[other] целей
     }!
 # Tail Lash
-Headbite
+# Headbite
 rmc-xeno-headbite-others = { $xeno } агрессивно хватает голову { $target }.
 rmc-xeno-headbite-self = Мы агрессивно хватаем голову { $target }.
 rmc-xeno-headbite-warning-larva = Мы не можем вредить этому носителю! Внутри него есть сестра.
