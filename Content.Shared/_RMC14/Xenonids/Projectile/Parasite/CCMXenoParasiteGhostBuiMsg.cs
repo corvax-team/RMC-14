@@ -8,11 +8,8 @@ public sealed class CCMXenoParasiteGhostBuiMsg : BoundUserInterfaceMessage
 {
     public NetEntity Actor { get; }
 
-    public CCMXenoParasiteGhostBuiMsg(EntityUid actor, IEntityManager? entityManager = null)
+    public CCMXenoParasiteGhostBuiMsg(NetEntity actor)
     {
-        if (entityManager != null)
-            Actor = entityManager.GetNetEntity(actor);
-        else
-            Actor = new NetEntity(actor.Id);
+        Actor = actor;
     }
 }

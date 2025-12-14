@@ -59,25 +59,8 @@ public sealed class XenoEggRoleSystem : EntitySystem
         SubscribeLocalEvent<DialogComponent, CCMTakeParasiteConfirmEvent>(OnDialogTakeParasiteConfirm);
         SubscribeLocalEvent<DialogComponent, CCMTakeCarrierParasiteConfirmEvent>(OnDialogTakeCarrierParasiteConfirm);
         SubscribeLocalEvent<XenoParasiteInfectEvent>((EntityEventHandler<XenoParasiteInfectEvent>)OnParasiteInfectSuccess);
-        SubscribeLocalEvent<MindRemovedMessage>(OnParasiteMindRemoved);
 
         Subs.CVar(_config, RMCCVars.RMCParasiteSpawnInitialDelayMinutes, v => _parasiteSpawnDelay = TimeSpan.FromMinutes(v), true);
-    }
-
-
-    private void OnParasiteMindRemoved(MindRemovedMessage ev)
-    {
-        var parasite = ev.Container.Owner;
-        var mind = ev.Mind.Owner;
-
-        if (HasComp<InfectionSuccessComponent>(parasite) && HasComp<XenoParasiteComponent>(parasite))
-        {
-            if (TryComp<MindComponent>(mind, out var mindComp) && mindComp.OwnedEntity != null)
-            {
-                EnsureComp<InfectionSuccessComponent>(mindComp.OwnedEntity.Value);
-                RemComp<InfectionSuccessComponent>(parasite);
-            }
-        }
     }
 
     private void OnParasiteInfectSuccess(XenoParasiteInfectEvent ev)

@@ -24,7 +24,6 @@ public sealed partial class ReserveParasitesWindow : DefaultWindow
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-        InitializeWindow();
     }
 
     private SpinBox _reserveBar = default!;
