@@ -301,36 +301,36 @@ rmc-xeno-headbite-warning = Мы можем прокусить голову то
 rmc-xeno-headbite-hit-self = Мы пронзаем голову { $target } нашей внутренней челюстью!
 rmc-xeno-headbite-hit-others = { $xeno } пронзает голову { $target } своей внутренней челюстью!
 
-Produce Eggs
+# Produce Eggs
 rmc-xeno-produce-eggs-no-plasma = У нас недостаточно плазмы для формирования яиц.
 rmc-xeno-produce-eggs-new-egg = Мы создаём яйцо. Теперь удерживаем: { $cureggs } / { $maxeggs }.
 rmc-xeno-produce-eggs-start = Мы начинаем формировать яйца.
 
-Eggsac Passive
+# Eggsac Passive
 rmc-xeno-sustain-egg-decaying = Мы можем поддерживать только { $max } яиц на сорняках улья! Наше старейшее яйцо быстро слабеет и разрушается.
 rmc-xeno-sustain-death = { CAPITALIZE(THE($xeno)) } корчится, когда его инкубатор лопается в кислотную жижу!
 
-Apprehend
+# Apprehend
 rmc-xeno-apprehend-activate = Наш следующий удар замедлит!
 rmc-xeno-apprehend-deactivate = Мы чувствуем, как наша скорость теряется!
 rmc-xeno-apprehend-expire = Мы ждали слишком долго, наш удар больше не замедлит врагов!
 
-Rage
+# Rage
 rmc-xeno-rage-lock = Мы ощущаем эйфорический прилив, достигнув максимальной ярости! Мы ЗАБЛОКИРОВАНЫ на максимальной Ярости!
 rmc-xeno-rage-expire = Наше тело успокаивается. Мы не можем получать ярость в течение { $cooldown } секунд.
 rmc-xeno-rage-examine = { CAPITALIZE(SUBJECT($xeno)) } { CONJUGATE-BE($xeno) } имеет { $amount }/{ $max } зарядов ярости.
 
-Eviscerate
+# Eviscerate
 rmc-xeno-eviscerate-fail = Мы не можем потрошить с 0 зарядов ярости!
 rmc-xeno-eviscerate-windup-self = Мы начинаем готовиться к сокрушительному удару!
 rmc-xeno-eviscerate-windup = { $xeno } начинает готовиться к сокрушительному удару!
 rmc-xeno-eviscerate-windup-small-self = Мы начинаем готовиться к удару!
 rmc-xeno-eviscerate-windup-small = { $xeno } начинает готовиться к удару!
 
-Fling
+# Fling
 rmc-xeno-fling-too-big = { CAPITALIZE(THE($target)) } слишком большой, чтобы мы могли его швырнуть!
 
-Gut
+# Gut
 rmc-gut-start-self = Мы вонзаем когти в тело этого несчастного носителя, начиная разрывать его пополам!
 rmc-gut-start-others = { $user } вонзает когти в тело { $target }, начиная разрывать его пополам!
 rmc-gut-finish-self = Мы разрываем этого жалкого носителя пополам!!
