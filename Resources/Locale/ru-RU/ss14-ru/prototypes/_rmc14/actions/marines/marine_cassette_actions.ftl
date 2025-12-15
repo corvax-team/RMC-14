@@ -1,8 +1,8 @@
 ent-RMCActionCassetteBase = { ent-ActionMarineBase }
     .desc = { ent-ActionMarineBase.desc }
-ent-RMCActionCassettePlayPause = Play/Pause
-    .desc = Starts or stops playing music.
-ent-RMCActionCassetteNext = Next song
-    .desc = Moves to the next track.
-ent-RMCActionCassetteRestart = Restart song
-    .desc = Restarts the current track.
+ent-RMCActionCassettePlayPause = Играть/Остановить
+    .desc = начинает или останавливает играть музыку.
+ent-RMCActionCassetteNext = Следующая песня
+    .desc = Начинает играть следующий трек.
+ent-RMCActionCassetteRestart = Рестарт песни
+    .desc = начинает сначала текущий трек.
