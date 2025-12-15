@@ -76,5 +76,5 @@ ent-ActionXenoEmpower = Усиление (50)
     .desc = При первой активации вы получите небольшое количество щитов. Через 6 секунд или при повторном использовании вы получите усиление, зависящее от окружающих врагов (не более 6), получая щит за каждого из них. Если вы получили усиление хотя бы от 3 целей, вы получите Суперусиление, что позволит наносить дополнительный урон при атаках ближнего боя и изменит работу некоторых других ваших способностей.
 ent-RMCGuidebookActionXenoGenerateEggs = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
-ent-ActionXenoGenerateEggs = Generate Eggs (50)
-    .desc = Generate an egg every 30 seconds, which goes into your storage. [color=cyan]Consumes 15 plasma every 2 seconds.[/color]
+ent-ActionXenoGenerateEggs = Генерировать яйца (50)
+    .desc = Генерирует яйца каждые 30 секунд, который перемещаются в ваше хранилище, [color=cyan] потребляет 15 плазмы каждые 2 секунды.[/color]
