@@ -1,7 +1,5 @@
-rmc-marine-command-override-no-senior-command-found = No senior command staff found. The automatic transfer of Commander authority will be launched in one minute. To ensure that you as a candidate are not ignored, please keep your ID with you.
+rmc-marine-command-override-no-senior-command-found = Старший командный состав корабля не найден, автоматический выбор кандидата на передачу полномочий командира будет осуществлен через одну минуту, держите вашу карту при себе, чтобы вас не проигнорировали как кандидата.
 rmc-marine-command-override-no-candidates-found = Automatic transfer of Commander authority has been cancelled. Reason: No relevant candidates found.
-rmc-marine-command-override-senior-command-found = Automatic transfer of Commander authority has been cancelled. Reason: Senior сommand staff found.
-rmc-marine-command-override-commander-chosen =
-    Due to the absence of senior command staff, { $job } { $character } appointed acting Commander and will assume command until further notice. Please direct all inquiries and follow instructions accordingly.
-    Command headset is available in the CIC Command Tablet cabinet.
-rmc-marine-command-override-access-added = Missing necessary command accesses added to ID.
+rmc-marine-command-override-senior-command-found = Автоматическая передача полномочий командира отменена. Причина: ни один кандидат не найден.
+rmc-marine-command-override-commander-chosen = Связи с отсутствием старшего командного состава, { $job } { $character } назначен командиром, данный кандидат будет осуществлять деятельность командира до дальнейших распоряжений или пробуждения официального командира. Направляйте все запросы и следуйте инструкциям как положено. Гарнитура и планшет можно получить в сейфе планшета командующего офицера, который находится на командном мостике.
+rmc-marine-command-override-access-added = Необходимые доступы командного состава были добавлены на карту удостоверение кандидата. 
