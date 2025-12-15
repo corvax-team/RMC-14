@@ -33,17 +33,47 @@ rmc-job-name-spotter = Корректировщик
 rmc-job-prefix-loader = LDR
 CMJobCombatTech = Боевой техник
 rmc-job-prefix-spotter = SPTR
-rmc-job-name-weapons-specialist-demo = Demolitionist Specialist
-rmc-job-prefix-weapons-specialist-demo = DEMO
-rmc-job-name-weapons-specialist-grenadier = Grenadier Specialist
-rmc-job-prefix-weapons-specialist-grenadier = GRND
-rmc-job-name-weapons-specialist-sniper = Sniper Specialist
-rmc-job-prefix-weapons-specialist-sniper = SNPR
-rmc-job-name-weapons-specialist-anti-materiel-sniper = AMR Specialist
-rmc-job-prefix-weapons-specialist-anti-materiel-sniper = AMR
-rmc-job-name-weapons-specialist-scout = Scout Specialist
-rmc-job-prefix-weapons-specialist-scout = SCT
-rmc-job-name-forecon-spotter = Recon Spotter
-rmc-job-name-recruit = Recruit
-rmc-job-description-recruit = Follow orders and learn from those above you. Get yelled at by an instructor. Graduate to become a marine.
-rmc-job-prefix-recruit = RCT
+rmc-job-name-weapons-specialist-demo = Специалист подрывник
+rmc-job-prefix-weapons-specialist-demo = ПОДР
+rmc-job-name-weapons-specialist-grenadier = Специалист гренадер
+rmc-job-prefix-weapons-specialist-grenadier = ГРНД
+rmc-job-name-weapons-specialist-sniper = Специалист снайпер
+rmc-job-prefix-weapons-specialist-sniper = СНПР
+rmc-job-name-weapons-specialist-anti-materiel-sniper = Специалист АМР снайпер
+rmc-job-prefix-weapons-specialist-anti-materiel-sniper = АМР
+rmc-job-name-weapons-specialist-pyro = Специалист пиротехник
+rmc-job-prefix-weapons-specialist-pyro = ПИРО
+rmc-job-name-weapons-specialist-scout = Специалист скаут
+rmc-job-prefix-weapons-specialist-scout = СКТ
+rmc-job-name-forecon-spotter = Разведчик
+rmc-job-name-recruit = Рекрут
+rmc-job-description-recruit = Следуй приказам и учись у старших. Получай по шапке от инструктора. Выпустишься — и станешь морпехом.
+rmc-job-prefix-recruit = РЕКР
+cm-job-name-section-sergeant = Section Sergeant
+cm-job-description-section-sergeant = Leader of one of the platoon's sections. Give your section and squads objectives and follow orders from the Plat CO. Keep your section in one piece.
+cm-job-prefix-section-sergeant = SctSgt
+CMPVESectionSergeant = Section Sergeant
+
+cm-job-name-platoon-commander = Командир Взвода
+cm-job-description-platoon-commander = Координируйте и руководите своим взводом, подчиняйтесь командованию роты и приведите солдат к победе.
+cm-job-prefix-platoon-commander = ВзводКОМ
+CMPVEPlatoonCommander = Командир Взвода
+
+rmc-job-name-pve-forecon-rifleman = Стрелок
+rmc-job-prefix-pve-forecon-rifleman = СТР
+
+rmc-job-name-pve-forecon-smartgunner = Оператор смартгана
+rmc-job-prefix-pve-forecon-smartgunner = ОСг
+
+rmc-job-name-pve-forecon-corpsman = Санитар
+rmc-job-prefix-pve-forecon-corpsman = ПС
+
+rmc-job-name-pve-forecon-rto = Оператор радио-связи
+rmc-job-description-pve-forecon-rto = Вы — оператор радио связи. Обеспечьте стабильную связь между вашим отрядом и командованием.
+rmc-job-prefix-pve-forecon-rto = ОРС
+
+rmc-job-name-pve-forecon-assistant-lead = Помощник командира отряда
+rmc-job-prefix-pve-forecon-assistant-lead = АКО
+
+rmc-job-name-pve-forecon-squad-lead = Командир Отряда
+rmc-job-prefix-pve-forecon-squad-lead = КО
