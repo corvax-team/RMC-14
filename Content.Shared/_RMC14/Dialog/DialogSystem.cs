@@ -54,7 +54,7 @@ public sealed class DialogSystem : EntitySystem
         _ui.CloseUi(ent.Owner, DialogUiKey.Key);
 
         if (ent.Comp.ConfirmEvent != null)
-            RaiseLocalEvent(ent, (object)ent.Comp.ConfirmEvent);
+            RaiseLocalEvent(ent, ent.Comp.ConfirmEvent);
     }
 
     private void OnDialogClosed(Entity<DialogComponent> ent, ref BoundUIClosedEvent args)
@@ -82,7 +82,7 @@ public sealed class DialogSystem : EntitySystem
         OpenOptions(actor, actor, title, options, message);
     }
 
-    public void OpenInput(EntityUid target, EntityUid actor, string message, DialogInputEvent? ev, bool largeInput = false, int characterLimit = 200, bool autoFocus = true)
+    public void OpenInput(EntityUid target, EntityUid actor, string message, DialogInputEvent? ev, bool largeInput = false, int characterLimit = 200)
     {
         var dialog = EnsureComp<DialogComponent>(target);
         dialog.DialogType = DialogType.Input;
@@ -90,16 +90,14 @@ public sealed class DialogSystem : EntitySystem
         dialog.InputEvent = ev;
         dialog.LargeInput = largeInput;
         dialog.CharacterLimit = characterLimit;
-        dialog.AutoFocus = autoFocus;
-
         Dirty(target, dialog);
 
         _ui.TryOpenUi(target, DialogUiKey.Key, actor);
     }
 
-    public void OpenInput(EntityUid actor, string message, DialogInputEvent? ev, bool largeInput = false, int characterLimit = 200, bool autoFocus = true)
+    public void OpenInput(EntityUid actor, string message, DialogInputEvent? ev, bool largeInput = false, int characterLimit = 200)
     {
-        OpenInput(actor, actor, message, ev, largeInput, characterLimit, autoFocus);
+        OpenInput(actor, actor, message, ev, largeInput, characterLimit);
     }
 
     public void OpenConfirmation(EntityUid target, EntityUid actor, string title, string message, object ev)

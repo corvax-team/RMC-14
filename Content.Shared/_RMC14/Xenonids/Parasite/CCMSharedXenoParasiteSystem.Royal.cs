@@ -1,5 +1,9 @@
 using Robust.Shared.Timing;
 using Content.Shared.Popups;
+using Content.Shared.Verbs;
+using Content.Shared.UserInterface;
+using Content.Shared.Ghost;
+using Content.Shared._RMC14.Xenonids.Egg;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
 
@@ -63,5 +67,26 @@ public abstract partial class SharedXenoParasiteSystem
         }
 
         EntityManager.Dirty(parasiteUid, royalComp);
+    }
+
+    private void OnRoyalParasiteGetActivationVerbs(Entity<CCMRoyalParasiteComponent> parasite, ref GetVerbsEvent<ActivationVerb> args)
+    {
+        if (!HasComp<GhostComponent>(args.User))
+            return;
+
+        if (_mobState.IsDead(parasite) || HasComp<ParasiteSpentComponent>(parasite))
+            return;
+
+        var user = args.User;
+        var verb = new ActivationVerb
+        {
+            Text = Loc.GetString("rmc-xeno-egg-royal-ghost-verb"),
+            Act = () =>
+            {
+                _ui.TryOpenUi(parasite.Owner, XenoParasiteGhostUI.Key, user);
+            },
+        };
+
+        args.Verbs.Add(verb);
     }
 }

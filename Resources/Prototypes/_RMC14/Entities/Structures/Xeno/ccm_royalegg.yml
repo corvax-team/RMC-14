@@ -4,6 +4,7 @@
   name: royal egg
   description: A particularly large, unusual egg with a iridescent sheen.
   components:
+  - type: CCMXenoRoyalEgg
   - type: XenoEgg
     spawn: CCMXenoRoyalParasite
     minTime: 10
@@ -23,10 +24,13 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 55
+        damage: 100
       behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          XenoEggDestroyed:
-            min: 1
-            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 75
+      behaviors:
+      - !type:BurnBodyBehavior { }

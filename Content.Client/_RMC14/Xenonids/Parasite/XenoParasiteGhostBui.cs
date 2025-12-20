@@ -17,6 +17,6 @@ public sealed class XenoParasiteGhostBui(EntityUid owner, Enum uiKey) : BoundUse
         base.Open();
         _window = this.CreateWindow<XenoParasiteGhostWindow>();
         _window.DenyButton.OnPressed += _ => _window.Close();
-        _window.ConfirmButton.OnPressed += _ => SendPredictedMessage(new CCMXenoParasiteGhostBuiMsg(EntMan.GetNetEntity(Owner)));
+        _window.ConfirmButton.OnPressed += _ => SendPredictedMessage(new XenoParasiteGhostBuiMsg((uint)Owner.Id));
     }
 }

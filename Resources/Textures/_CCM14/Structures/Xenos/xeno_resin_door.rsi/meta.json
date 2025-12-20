@@ -8,10 +8,6 @@
   },
   "states": [
     {
-      "name": "weedboundresin",
-	  "directions": 4
-    },
-    {
       "name": "thickweedboundresinclosing",
       "directions": 4,
 	  "delays": [
@@ -55,6 +51,10 @@
     },
     {
       "name": "thickweedboundresinopen",
+      "directions": 4
+    },
+    {
+      "name": "thickweedboundresin",
       "directions": 4
     },
     {

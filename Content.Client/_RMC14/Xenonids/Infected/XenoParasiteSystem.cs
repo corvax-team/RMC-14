@@ -57,10 +57,10 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
         if (sprite == null)
             return;
 
-        if (!sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer))
+        if (!TryComp<CCMParasiteSpriteComponent>(parasite, out var spriteComp))
             return;
 
-        if (TryComp<TransformComponent>(parasite, out var transform) && transform.ParentUid.IsValid())
+        if (!sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer))
             return;
 
         var inMask = false;
@@ -75,22 +75,15 @@ public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
 
         _lastInMaskState[parasite] = inMask;
 
-        var isRoyal = HasComp<CCMRoyalParasiteComponent>(parasite);
-
         if (inMask)
         {
-            var maskRsi = new ResPath(isRoyal
-                ? "_RMC14/Mobs/Xenonids/RoyalParasite/royal_parasite_mask.rsi"
-                : "_RMC14/Mobs/Xenonids/Parasite/parasite_mask.rsi");
-            sprite.LayerSetRSI(layer, maskRsi);
-            sprite.LayerSetState(layer, "equipped-MASK");
+            sprite.LayerSetRSI(layer, new ResPath(spriteComp.MaskRsi));
+            sprite.LayerSetState(layer, spriteComp.MaskInventoryState);
         }
         else
         {
-            var normalRsi = new ResPath(isRoyal
-                ? "_RMC14/Mobs/Xenonids/RoyalParasite/royalparasite.rsi"
-                : "_RMC14/Mobs/Xenonids/Parasite/parasite.rsi");
-            sprite.LayerSetRSI(layer, normalRsi);
+            sprite.LayerSetRSI(layer, new ResPath(spriteComp.NormalRsi));
+            sprite.LayerSetState(layer, spriteComp.NormalState);
         }
     }
 

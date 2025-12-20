@@ -1,24 +1,61 @@
+using Content.Client._RMC14.Xenonids.Projectile.Parasite;
+using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Roles.FindParasite;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Content.Client._RMC14.Roles.FindParasite;
 
 [UsedImplicitly]
-public sealed partial class FindParasiteBoundUserInterface(EntityUid owner, Enum uiKey)
-    : BoundUserInterface(owner, uiKey)
+public sealed partial class FindParasiteBoundUserInterface : BoundUserInterface
 {
+    private IEntityManager _entManager;
+    private EntityUid _owner;
+
     private ItemList.Item? _selectedItem;
-    private SpawnerData? _selectedSpawnerData;
-    private bool _impledDeselect;
+
+    // Deselecting directly via code still activates events,
+    // prevent activation of function "OnItemDeselect" if "_impledDeselect" is true
+    private bool _impledDeselect = false;
 
     private ItemList? _spawnerList;
-    private List<SpawnerData>? _currentSpawners;
 
     [ViewVariables]
     private FindParasiteWindow? _window;
 
+    public FindParasiteBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    {
+        _owner = owner;
+        _entManager = IoCManager.Resolve<IEntityManager>();
+    }
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        base.UpdateState(state);
+
+        if (state is not FindParasiteUIState ||
+            _spawnerList is null)
+        {
+            return;
+        }
+        var uiState = (FindParasiteUIState)state;
+
+        var activeParasiteSpawners = uiState.ActiveParasiteSpawners;
+        _spawnerList.Clear();
+
+        foreach (var spawnerData in activeParasiteSpawners)
+        {
+            var item = new ItemList.Item(_spawnerList);
+            item.Text = spawnerData.Name;
+            item.Metadata = spawnerData.Spawner;
+            _spawnerList.Add(item);
+        }
+    }
     protected override void Open()
     {
         base.Open();
@@ -34,83 +71,83 @@ public sealed partial class FindParasiteBoundUserInterface(EntityUid owner, Enum
         spawnButton.Text = Loc.GetString("xeno-ui-find-parasite-spawn-button");
         spawnButton.Disabled = true;
 
-        spawnButton.OnButtonDown += args =>
+        spawnButton.OnButtonDown += (BaseButton.ButtonEventArgs args) =>
         {
-            if (_selectedItem is null || _selectedSpawnerData is null)
+            if (_selectedItem is null)
             {
                 args.Button.Disabled = true;
                 return;
             }
+            NetEntity selected = (NetEntity)_selectedItem.Metadata!;
 
-            var selected = (NetEntity)_selectedItem.Metadata!;
-            TakeParasiteRole(selected, _selectedSpawnerData.IsRoyalParasite);
+            TakeParasiteRole(selected);
             Close();
         };
+
     }
-
-    protected override void UpdateState(BoundUserInterfaceState state)
-    {
-        base.UpdateState(state);
-
-        if (state is not FindParasiteUIState uiState ||
-            _spawnerList is null)
-        {
-            return;
-        }
-
-        var activeParasiteSpawners = uiState.ActiveParasiteSpawners;
-        _currentSpawners = activeParasiteSpawners;
-
-        _selectedItem = null;
-        _selectedSpawnerData = null;
-        _spawnerList.Clear();
-
-        foreach (var spawnerData in activeParasiteSpawners)
-        {
-            var item = new ItemList.Item(_spawnerList)
-            {
-                Text = spawnerData.Name,
-                Metadata = spawnerData.Spawner,
-            };
-            _spawnerList.Add(item);
-        }
-    }
-
     private void OnItemSelect(ItemList.ItemListSelectedEventArgs args)
     {
         _window!.SpawnButton.Disabled = false;
 
-        var newSelectedItem = args.ItemList[args.ItemIndex];
-        var newSelected = (NetEntity)newSelectedItem.Metadata!;
-        var newSelectedData = _currentSpawners?[args.ItemIndex];
+        ItemList.Item newSelectedItem = args.ItemList[args.ItemIndex];
+        NetEntity newSelected = (NetEntity)newSelectedItem.Metadata!;
+
 
         if (_selectedItem is null)
         {
             FollowParasiteSpawner(newSelected);
             _selectedItem = newSelectedItem;
-            _selectedSpawnerData = newSelectedData;
             return;
         }
 
-        if (_selectedItem != newSelectedItem)
+        NetEntity originalSelected = (NetEntity)_selectedItem.Metadata!;
+
+        if (newSelected == originalSelected)
+        {
+            TakeParasiteRole(originalSelected);
+            Close();
+            return;
+        }
+        else
         {
             _impledDeselect = true;
             _selectedItem.Selected = false;
-            _impledDeselect = false;
         }
-
         _selectedItem = newSelectedItem;
-        _selectedSpawnerData = newSelectedData;
         FollowParasiteSpawner(newSelected);
     }
 
     private void OnItemDeselect(ItemList.ItemListDeselectedEventArgs args)
     {
+        NetEntity deselected = (NetEntity)args.ItemList[args.ItemIndex].Metadata!;
+
+        if (_selectedItem is null)
+        {
+            return;
+        }
+
         if (_impledDeselect)
         {
             _impledDeselect = false;
             return;
         }
+
+        NetEntity originalSelected = (NetEntity)_selectedItem.Metadata!;
+
+        if (deselected == originalSelected)
+        {
+            TakeParasiteRole(originalSelected);
+            Close();
+            return;
+        }
+
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        if (!disposing) return;
+        _window?.Dispose();
     }
 
     public void FollowParasiteSpawner(NetEntity spawner)
@@ -118,8 +155,8 @@ public sealed partial class FindParasiteBoundUserInterface(EntityUid owner, Enum
         SendMessage(new FollowParasiteSpawnerMessage(spawner));
     }
 
-    public void TakeParasiteRole(NetEntity spawner, bool isRoyalParasite = false)
+    public void TakeParasiteRole(NetEntity spawner)
     {
-        SendMessage(new TakeParasiteRoleMessage(new NetEntity(owner.Id), spawner, isRoyalParasite));
+        SendMessage(new TakeParasiteRoleMessage(spawner));
     }
 }

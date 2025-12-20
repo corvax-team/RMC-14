@@ -17,6 +17,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Client.GameObjects;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Utility;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client._RMC14.Xenonids;
@@ -91,7 +92,16 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
             inMask = maskData;
 
         if (inMask)
+        {
+            var isRoyal = HasComp<CCMRoyalParasiteComponent>(entity);
+
+            var maskRsi = new ResPath(isRoyal
+                ? "_RMC14/Mobs/Xenonids/RoyalParasite/royal_parasite_mask.rsi"
+                : "_RMC14/Mobs/Xenonids/Parasite/parasite_mask.rsi");
+            sprite.LayerSetRSI(layer, maskRsi);
+            sprite.LayerSetState(layer, "equipped-MASK");
             return;
+        }
 
         // TODO RMC14 split this up into multiple systems with ordered event subscription
         // TODO RMC14 please god

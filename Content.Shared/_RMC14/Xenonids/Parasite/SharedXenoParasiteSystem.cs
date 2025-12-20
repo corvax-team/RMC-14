@@ -8,9 +8,11 @@ using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Sprite;
 using Content.Shared._RMC14.Stealth;
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hide;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Leap;
@@ -88,6 +90,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly XenoEvolutionSystem _evolution = default!;
 
     private const CollisionGroup LeapCollisionGroup = CollisionGroup.InteractImpassable;
     private const CollisionGroup ThrownCollisionGroup = CollisionGroup.InteractImpassable | CollisionGroup.BarricadeImpassable;
@@ -118,6 +121,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<XenoParasiteComponent, XenoLeapStoppedEvent>(OnParasiteLeapStopped);
         SubscribeLocalEvent<XenoParasiteComponent, ThrownEvent>(OnParasiteThrown);
         SubscribeLocalEvent<XenoParasiteComponent, LandEvent>(OnParasiteLand);
+        SubscribeLocalEvent<XenoParasiteComponent, GetVerbsEvent<ActivationVerb>>(OnParasiteGetActivationVerbs);
 
         SubscribeLocalEvent<ParasiteSpentComponent, MapInitEvent>(OnParasiteSpentMapInit);
         SubscribeLocalEvent<ParasiteSpentComponent, UpdateMobStateEvent>(OnParasiteSpentUpdateMobState,
@@ -137,6 +141,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<VictimBurstComponent, ExaminedEvent>(OnVictimBurstExamine);
 
         SubscribeLocalEvent<CCMRoyalParasiteComponent, ExaminedEvent>(OnExaminedRoyal);
+        SubscribeLocalEvent<CCMRoyalParasiteComponent, GetVerbsEvent<ActivationVerb>>(OnRoyalParasiteGetActivationVerbs);
 
         SubscribeLocalEvent<BursterComponent, MoveInputEvent>(OnTryMove);
         IntializeAI();
@@ -493,13 +498,28 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             }
         }
     }
-    private void OnParasiteGetVerbs(Entity<XenoParasiteComponent> parasite, ref GetVerbsEvent<InteractionVerb> args)
+    private void OnParasiteGetActivationVerbs(Entity<XenoParasiteComponent> parasite, ref GetVerbsEvent<ActivationVerb> args)
     {
         if (!HasComp<GhostComponent>(args.User))
             return;
 
         if (_mobState.IsDead(parasite) || HasComp<ParasiteSpentComponent>(parasite))
             return;
+
+        if (HasComp<CCMRoyalParasiteComponent>(parasite))
+            return;
+
+        var user = args.User;
+        var verb = new ActivationVerb
+        {
+            Text = Loc.GetString("rmc-xeno-egg-ghost-verb"),
+            Act = () =>
+            {
+                _ui.TryOpenUi(parasite.Owner, XenoParasiteGhostUI.Key, user);
+            },
+        };
+
+        args.Verbs.Add(verb);
     }
 
     private void OnVictimInfectedMapInit(Entity<VictimInfectedComponent> victim, ref MapInitEvent args)
@@ -714,6 +734,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         var victimInfected = EnsureComp<VictimInfectedComponent>(victim);
         victimInfected.InfectingParasite = parasite.Owner;
+        victimInfected.IsRoyalLarva = TryComp<CCMRoyalParasiteComponent>(parasite, out _);
+        SetHive((victim, victimInfected), _hive.GetHive(parasite.Owner)?.Owner);
         Dirty(victim, victimInfected);
 
         RefreshIncubationMultipliers(victim);
@@ -928,7 +950,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
             // spawn the larva
             if (infected.BurstAt <= curTime && infected.SpawnedLarva == null)
-                SpawnLarva((uid, infected), out _);
+                SpawnLarva((uid, infected), out _, infected.IsRoyalLarva);
 
             // Stages
             // Percentage of how far along we out to burst time times the number of stages, truncated. You can't go back a stage once you've reached one
@@ -1130,6 +1152,10 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         var coords = _transform.GetMoverCoordinates(ent);
 
+        var isRoyalInfection = ent.Comp.InfectingParasite != null &&
+                              Exists(ent.Comp.InfectingParasite.Value) &&
+                              HasComp<CCMRoyalParasiteComponent>(ent.Comp.InfectingParasite.Value);
+
         if (_container.TryGetContainer(ent, ent.Comp.LarvaContainerId, out var container))
         {
             foreach (var larva in container.ContainedEntities)
@@ -1138,6 +1164,14 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 var invc = EnsureComp<RMCTemporaryInvincibilityComponent>(larva);
                 invc.ExpiresAt = _timing.CurTime + ent.Comp.LarvaInvincibilityTime;
                 Dirty(larva, invc);
+
+                if (isRoyalInfection)
+                {
+                    if (TryComp<XenoEvolutionComponent>(larva, out var evolution))
+                    {
+                        _evolution.AddPointsUncapped((larva, evolution), 150);
+                    }
+                }
             }
 
             _container.EmptyContainer(container, destination: coords);
@@ -1227,10 +1261,11 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         Dirty(burst);
     }
 
-    public void SpawnLarva(Entity<VictimInfectedComponent> victim, out EntityUid spawned)
+    public void SpawnLarva(Entity<VictimInfectedComponent> victim, out EntityUid spawned, bool isRoyal = false)
     {
         var larvaContainer = _container.EnsureContainer<ContainerSlot>(victim.Owner, victim.Comp.LarvaContainerId);
-        spawned = SpawnInContainerOrDrop(victim.Comp.BurstSpawn, victim.Owner, larvaContainer.ID);
+        var larvaProto = isRoyal ? (EntProtoId)"CMXenoRoyalLarva" : victim.Comp.BurstSpawn;
+        spawned = SpawnInContainerOrDrop(larvaProto, victim.Owner, larvaContainer.ID);
         LinkLarvaToVictim(victim, spawned);
     }
 

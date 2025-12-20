@@ -54,6 +54,8 @@
     canBuild:
     - CCMWallXenoWeedBoundResin
     - CCMWallXenoThickWeedBoundResin
+    - DoorXenoWeedBoundResin
+    - DoorXenoThickWeedBoundResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
     - HiveEggMorpherXenoConstructionNode
@@ -68,7 +70,7 @@
   - type: XenoAcid
   - type: XenoDevour
   - type: TailWhirlwind
-    damage: 
+    damage:
       groups:
         Brute: 25 #Вождь баланс
   - type: XenoLeap

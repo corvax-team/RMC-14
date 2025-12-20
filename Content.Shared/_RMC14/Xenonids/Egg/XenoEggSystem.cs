@@ -114,6 +114,8 @@ public sealed class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoEggComponent, StepTriggeredOffEvent>(OnXenoEggStepTriggered);
         SubscribeLocalEvent<XenoEggComponent, BeforeDamageChangedEvent>(OnXenoEggBeforeDamageChanged);
         SubscribeLocalEvent<XenoEggComponent, DestructionEventArgs>(OnDestruction);
+        SubscribeLocalEvent<XenoEggComponent, GetVerbsEvent<ActivationVerb>>(OnEggGetActivationVerbs);
+        SubscribeLocalEvent<CCMXenoRoyalEggComponent, GetVerbsEvent<ActivationVerb>>(OnRoyalEggGetActivationVerbs);
 
         SubscribeLocalEvent<XenoFragileEggComponent, ComponentShutdown>(OnFragileConvert);
         SubscribeLocalEvent<XenoFragileEggComponent, RefreshNameModifiersEvent>(OnFragileRefreshModifier);
@@ -499,7 +501,15 @@ public sealed class XenoEggSystem : EntitySystem
         var eggContainer = _container.EnsureContainer<ContainerSlot>(egg.Owner, egg.Comp.CreatureContainerId);
         spawned = SpawnInContainerOrDrop(egg.Comp.Spawn, egg.Owner, eggContainer.ID);
 
-        _hive.SetSameHive(egg.Owner, spawned.Value);
+        if (TryComp<CCMRoyalEggProducerComponent>(egg, out var producerComp) && producerComp.Producer is { } producer && Exists(producer))
+        {
+            var hive = _hive.GetHive(producer);
+            _hive.SetHive(spawned.Value, hive);
+        }
+        else
+        {
+            _hive.SetSameHive(egg.Owner, spawned.Value);
+        }
 
         egg.Comp.SpawnedCreature = spawned;
         Dirty(egg);
@@ -884,6 +894,10 @@ public sealed class XenoEggSystem : EntitySystem
             producer.NextRoyalEggAt = time + producer.RoyalEggInterval;
             Dirty(uid, producer);
 
+            var eggProducer = EnsureComp<CCMRoyalEggProducerComponent>(egg);
+            eggProducer.Producer = uid;
+            Dirty(egg, eggProducer);
+
             _popup.PopupEntity("A royal egg emerges!", uid);
         }
 
@@ -1051,6 +1065,53 @@ public sealed class XenoEggSystem : EntitySystem
             fragile.BurstAt = time + fragile.BurstDelay;
             _jitter.DoJitter(uid, fragile.BurstDelay / 2, true, 40, 8, true);
         }
+    }
+
+    private void OnEggGetActivationVerbs(Entity<XenoEggComponent> egg, ref GetVerbsEvent<ActivationVerb> args)
+    {
+        if (!HasComp<GhostComponent>(args.User))
+            return;
+
+        if (_mobState.IsDead(egg))
+            return;
+
+        if (HasComp<CCMXenoRoyalEggComponent>(egg))
+            return;
+
+        var user = args.User;
+        var eggUid = egg.Owner;
+        var verb = new ActivationVerb
+        {
+            Text = Loc.GetString("rmc-xeno-egg-ghost-verb"),
+            Act = () =>
+            {
+                _ui.TryOpenUi(eggUid, XenoParasiteGhostUI.Key, user);
+            },
+        };
+
+        args.Verbs.Add(verb);
+    }
+
+    private void OnRoyalEggGetActivationVerbs(Entity<CCMXenoRoyalEggComponent> egg, ref GetVerbsEvent<ActivationVerb> args)
+    {
+        if (!HasComp<GhostComponent>(args.User))
+            return;
+
+        if (TryComp<XenoEggComponent>(egg, out var eggComp) && _mobState.IsDead(egg.Owner))
+            return;
+
+        var user = args.User;
+        var eggUid = egg.Owner;
+        var verb = new ActivationVerb
+        {
+            Text = Loc.GetString("rmc-xeno-egg-royal-ghost-verb"),
+            Act = () =>
+            {
+                _ui.TryOpenUi(eggUid, XenoParasiteGhostUI.Key, user);
+            },
+        };
+
+        args.Verbs.Add(verb);
     }
 }
 

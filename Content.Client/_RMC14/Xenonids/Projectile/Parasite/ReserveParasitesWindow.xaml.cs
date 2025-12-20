@@ -17,7 +17,6 @@ public sealed partial class ReserveParasitesWindow : DefaultWindow
     [Dependency] private readonly ILocalizationManager _localization = default!;
 
     private int _maxRegular;
-    private int _maxRoyal;
     private bool _isUpdating;
 
     public ReserveParasitesWindow()
@@ -27,16 +26,16 @@ public sealed partial class ReserveParasitesWindow : DefaultWindow
     }
 
     private SpinBox _reserveBar = default!;
-    private SpinBox _royalReserveBar = default!;
     private Button _applyButton = default!;
 
     public SpinBox ReserveBar => _reserveBar;
-    public SpinBox RoyalReserveBar => _royalReserveBar;
     public Button ApplyButton => _applyButton;
 
-    public void SetReserveShown(int number)
+    public void SetReserveShown(int currentRegular, int maxRegular)
     {
         Title = Loc.GetString("rmc-xeno-reserve-parasites-title");
+
+        _maxRegular = maxRegular;
 
         var vBox = new BoxContainer
         {
@@ -56,27 +55,16 @@ public sealed partial class ReserveParasitesWindow : DefaultWindow
                         },
                         (_reserveBar = new SpinBox
                         {
-                            Value = 0,
+                            Value = currentRegular,
                             HorizontalExpand = true
                         })
                     }
                 },
-                new BoxContainer
+                new Label
                 {
-                    Orientation = BoxContainer.LayoutOrientation.Horizontal,
-                    Children =
-                    {
-                        new Label
-                        {
-                            Text = Loc.GetString("rmc-xeno-reserve-royal-parasites-label"),
-                            MinSize = new Vector2(130, 0)
-                        },
-                        (_royalReserveBar = new SpinBox
-                        {
-                            Value = 0,
-                            HorizontalExpand = true
-                        })
-                    }
+                    Text = Loc.GetString("rmc-xeno-reserve-royal-parasites-unavailable"),
+                    Modulate = Color.FromHex("#FFC0C0"),
+                    Margin = new Thickness(4, 4, 4, 4)
                 },
                 (_applyButton = new Button
                 {
@@ -88,22 +76,8 @@ public sealed partial class ReserveParasitesWindow : DefaultWindow
 
         Contents.AddChild(vBox);
         MinSize = new Vector2(300, 0);
-    }
 
-    /// <param name="currentRegular">Current number of reserved regular parasites</param>
-    /// <param name="currentRoyal">Current number of reserved royal parasites</param>
-    /// <param name="maxRegular">Maximum number of regular parasites that can be reserved</param>
-    /// <param name="maxRoyal">Maximum number of royal parasites that can be reserved</param>
-    public void SetReserveShown(int currentRegular, int currentRoyal, int maxRegular, int maxRoyal)
-    {
         _isUpdating = true;
-
-        _maxRegular = maxRegular;
-        _maxRoyal = maxRoyal;
-
-        _reserveBar.Value = Math.Min(currentRegular, maxRegular);
-        _royalReserveBar.Value = Math.Min(currentRoyal, maxRoyal);
-
         _isUpdating = false;
 
         _reserveBar.ValueChanged += args =>
@@ -114,17 +88,6 @@ public sealed partial class ReserveParasitesWindow : DefaultWindow
             _isUpdating = true;
             var value = Math.Clamp(args.Value, 0, _maxRegular);
             _reserveBar.Value = value;
-            _isUpdating = false;
-        };
-
-        _royalReserveBar.ValueChanged += args =>
-        {
-            if (_isUpdating)
-                return;
-
-            _isUpdating = true;
-            var value = Math.Clamp(args.Value, 0, _maxRoyal);
-            _royalReserveBar.Value = value;
             _isUpdating = false;
         };
     }

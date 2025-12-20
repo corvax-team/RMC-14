@@ -6,11 +6,15 @@ namespace Content.Shared._RMC14.Xenonids.Parasite;
 public sealed partial class CCMParasiteSpriteComponent : Component
 {
     [DataField]
-    public string MobRsi = "Sprites/_RMC14/Mobs/Xenonids/Parasite/parasite.rsi";
+    public string MaskRsi = "_RMC14/Mobs/Xenonids/Parasite/parasite_mask.rsi";
 
     [DataField]
-    public string InventoryRsi = "Sprites/_RMC14/Mobs/Xenonids/Parasite/parasite_inventory.rsi";
+    public string MaskInventoryState = "icon";
 
     [DataField]
-    public string InventoryState = "icon";
+    public string NormalRsi = "_RMC14/Mobs/Xenonids/Parasite/parasite.rsi";
+
+    [DataField]
+    public string NormalState = "alive";
 }
+

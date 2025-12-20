@@ -36,10 +36,10 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
 
         SubscribeLocalEvent<XenoParasiteThrowerComponent, ExaminedEvent>(OnParasiteThrowerExamine);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoChangeParasiteReserveMessage>(OnParasiteReserveChange);
-        SubscribeLocalEvent<XenoParasiteThrowerComponent, CCMXenoChangeRoyalParasiteReserveMessage>(OnRoyalParasiteReserveChange);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoReserveParasiteActionEvent>(OnSetReserve);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, ThrowItemAttemptEvent>(OnThrowAttempt);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, ThrowAttemptEvent>(OnPreThrowAttempt);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, GetVerbsEvent<ActivationVerb>>(OnCarrierGetActivationVerbs);
     }
 
     private void OnParasiteThrowerExamine(Entity<XenoParasiteThrowerComponent> thrower, ref ExaminedEvent args)
@@ -58,12 +58,10 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
             if (HasComp<GhostComponent>(args.Examiner))
             {
                 var availableRegular = Math.Max(0, totalParasites - thrower.Comp.ReservedParasites);
-                var availableRoyal = Math.Max(0, totalRoyalParasites - thrower.Comp.ReservedRoyalParasites);
-                var availableRoles = availableRegular + availableRoyal;
 
-                if (availableRoles > 0)
+                if (availableRegular > 0)
                 {
-                    args.PushMarkup(Loc.GetString("rmc-xeno-parasite-ghost-roles-available", ("count", availableRoles)));
+                    args.PushMarkup(Loc.GetString("rmc-xeno-parasite-ghost-roles-available", ("count", availableRegular)));
                 }
                 else
                 {
@@ -79,15 +77,6 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
         var totalParasites = Math.Max(0, thrower.Comp.CurParasites + inHandParasites);
         var newVal = Math.Clamp(args.NewReserve, 0, totalParasites);
         thrower.Comp.ReservedParasites = newVal;
-        Dirty(thrower);
-    }
-
-    private void OnRoyalParasiteReserveChange(Entity<XenoParasiteThrowerComponent> thrower, ref CCMXenoChangeRoyalParasiteReserveMessage args)
-    {
-        var inHandRoyalParasites = CountParasitesInHand(thrower.Owner, true);
-        var totalRoyalParasites = Math.Max(0, thrower.Comp.CurRoyalParasites + inHandRoyalParasites);
-        var newVal = Math.Clamp(args.NewRoyalReserve, 0, totalRoyalParasites);
-        thrower.Comp.ReservedRoyalParasites = newVal;
         Dirty(thrower);
     }
 
@@ -163,6 +152,30 @@ public abstract partial class SharedXenoParasiteThrowerSystem : EntitySystem
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-no-parasites"), thrower.Owner, args.User);
                 return;
             }
+        }
+    }
+
+    private void OnCarrierGetActivationVerbs(Entity<XenoParasiteThrowerComponent> thrower, ref GetVerbsEvent<ActivationVerb> args)
+    {
+        if (!HasComp<GhostComponent>(args.User))
+            return;
+
+        var totalParasites = thrower.Comp.CurParasites + thrower.Comp.CurParasitesInHands;
+        var availableRegular = Math.Max(0, totalParasites - thrower.Comp.ReservedParasites);
+
+        if (availableRegular > 0)
+        {
+            var user = args.User;
+            var verb = new ActivationVerb
+            {
+                Text = Loc.GetString("rmc-xeno-egg-ghost-verb"),
+                Act = () =>
+                {
+                    _ui.TryOpenUi(thrower.Owner, XenoParasiteGhostUI.Key, user);
+                },
+            };
+
+            args.Verbs.Add(verb);
         }
     }
 }

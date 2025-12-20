@@ -30,9 +30,13 @@
     slots: [mask]
     sprite: _RMC14/Mobs/Xenonids/RoyalParasite/royal_parasite_mask.rsi
   - type: CCMParasiteSprite
-    mobRsi: _RMC14/Mobs/Xenonids/RoyalParasite/royalparasite.rsi
-    inventoryRsi: _RMC14/Mobs/Xenonids/RoyalParasite/royal_parasite_inventory.rsi
-    inventoryState: icon
+    maskRsi: _RMC14/Mobs/Xenonids/RoyalParasite/royal_parasite_mask.rsi
+    maskInventoryState: icon
+    normalRsi: _RMC14/Mobs/Xenonids/RoyalParasite/royalparasite.rsi
+    normalState: alive
+  - type: HideLayerClothing
+    slots:
+    - Snout
   - type: MobState
     allowedStates:
     - Alive
@@ -65,7 +69,7 @@
   - type: XenoTailStab
     tailDamage:
       groups:
-        Brute: 10
+        Brute: 25
   - type: XenoLeap
     plasmaCost: 5
     knockdownTime: 2

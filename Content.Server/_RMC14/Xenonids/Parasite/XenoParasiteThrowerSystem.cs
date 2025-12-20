@@ -63,10 +63,11 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
     {
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoThrowParasiteActionEvent>(OnThrowParasite);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, CCMXenoThrowRoyalParasiteActionEvent>(OnThrowRoyalParasite);
-        SubscribeLocalEvent<XenoParasiteThrowerComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, UserActivateInWorldEvent>(OnXenoParasiteThrowerUseInHand);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoDevolveBuiMsg>(OnXenoDevolveDoAfter);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, ComponentShutdown>(OnParasiteThrowerShutdown);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, MobStateChangedEvent>(OnMobStateChanged);
     }
 
     public override void Initialize()
@@ -353,12 +354,17 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         DropAllStoredParasites(xeno);
     }
 
+    private void OnParasiteThrowerShutdown(Entity<XenoParasiteThrowerComponent> xeno, ref ComponentShutdown args)
+    {
+        DropAllStoredParasites(xeno);
+    }
+
     private void OnMobStateChanged(Entity<XenoParasiteThrowerComponent> xeno, ref MobStateChangedEvent args)
     {
-        if (args.NewMobState != MobState.Dead)
-            return;
-
-        DropAllStoredParasites(xeno, 0.75f);
+        if (args.NewMobState == MobState.Dead)
+        {
+            DropAllStoredParasites(xeno);
+        }
     }
 
     private bool DropAllStoredParasites(Entity<XenoParasiteThrowerComponent> xeno, float chance = 1.0f)
@@ -508,9 +514,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
     public EntityUid? TryRemoveGhostParasite(Entity<XenoParasiteThrowerComponent> xeno, out string message)
     {
         message = "";
-        var regularParasites = xeno.Comp.CurParasites - xeno.Comp.CurRoyalParasites;
-        var regularInHands = xeno.Comp.CurParasitesInHands - xeno.Comp.CurRoyalParasitesInHands;
-        var totalRegularParasites = regularParasites + regularInHands;
+        var totalRegularParasites = xeno.Comp.CurParasites + xeno.Comp.CurParasitesInHands;
 
         if (totalRegularParasites <= 0)
         {
@@ -543,56 +547,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         return parasite;
     }
 
-    public EntityUid? TryRemoveGhostRoyalParasite(Entity<XenoParasiteThrowerComponent> xeno, out string message)
-    {
-        message = "";
-        var totalRoyalParasites = xeno.Comp.CurRoyalParasites + xeno.Comp.CurRoyalParasitesInHands;
-        if (totalRoyalParasites <= 0)
-        {
-            message = Loc.GetString("rmc-xeno-parasite-ghost-carrier-royal-none", ("xeno", xeno));
-            return null;
-        }
-
-        if (xeno.Comp.ReservedRoyalParasites >= totalRoyalParasites)
-        {
-            message = Loc.GetString("rmc-xeno-parasite-ghost-carrier-reserved", ("xeno", xeno));
-            return null;
-        }
-
-        if (_mobState.IsDead(xeno))
-        {
-            message = Loc.GetString("rmc-xeno-parasite-ghost-carrier-dead", ("xeno", xeno));
-            return null;
-        }
-
-        var container = _container.EnsureContainer<Container>(xeno.Owner, "royal_storage");
-        var para = container.ContainedEntities.FirstOrDefault(uid => HasComp<CCMRoyalParasiteComponent>(uid));
-
-        EntityUid parasite;
-        if (para == default)
-        {
-            var newParasite = RemoveParasite(xeno, true);
-            if (newParasite == null)
-                return null;
-            parasite = newParasite.Value;
-        }
-        else
-        {
-            parasite = para;
-            _container.Remove(para, container);
-            xeno.Comp.CurRoyalParasites--;
-            Dirty(xeno);
-        }
-
-        _hive.SetSameHive(xeno.Owner, parasite);
-        _rmcObstacleSlamming.MakeImmune(parasite);
-        _transform.DropNextTo(parasite, xeno.Owner);
-        _throw.TryThrow(parasite, _random.NextAngle().RotateVec(Vector2.One), 3);
-
-        return parasite;
-    }
-
-    public void HandleGhostParasitePossession(Entity<XenoParasiteThrowerComponent> xeno, EntityUid ghost, bool isRoyal)
+    public void HandleGhostParasitePossession(Entity<XenoParasiteThrowerComponent> xeno, EntityUid ghost)
     {
         if (!TryComp(ghost, out GhostComponent? ghostComp))
         {
@@ -621,17 +576,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             }
         }
 
-        EntityUid? parasiteUid = null;
-        string errorMessage = "";
-
-        if (isRoyal)
-        {
-            parasiteUid = TryRemoveGhostRoyalParasite(xeno, out errorMessage);
-        }
-        else
-        {
-            parasiteUid = TryRemoveGhostParasite(xeno, out errorMessage);
-        }
+        var parasiteUid = TryRemoveGhostParasite(xeno, out var errorMessage);
 
         if (parasiteUid == null)
         {

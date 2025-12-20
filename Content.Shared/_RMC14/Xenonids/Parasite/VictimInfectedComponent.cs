@@ -80,6 +80,9 @@ public sealed partial class VictimInfectedComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? InfectingParasite;
 
+    [DataField, AutoNetworkedField]
+    public bool IsRoyalLarva = false;
+
     /// <summary>
     ///     What hive the larva is from.
     /// </summary>
