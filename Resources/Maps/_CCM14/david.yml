@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 12/11/2025 15:56:37
-  entityCount: 11409
+  time: 12/17/2025 20:42:50
+  entityCount: 11406
 maps:
 - 1
 grids:
@@ -688,6 +688,8 @@ entities:
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
+      inherent: True
+      enabled: True
     - type: DecalGrid
       chunkCollection:
         version: 2
@@ -13815,6 +13817,9 @@ entities:
         54,119: CCMAreaDavidEvac
         54,120: CCMAreaDavidEvac
         54,121: CCMAreaDavidEvac
+    - type: GravityShake
+      nextShake: 0
+      shakeTimes: 10
   - uid: 11
     mapInit: true
     paused: true
@@ -20646,7 +20651,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 618.0327152
     - type: Door
-      secondsUntilStateChange: -20073.65
+      secondsUntilStateChange: -20170.723
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -20660,7 +20665,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 618.0327152
     - type: Door
-      secondsUntilStateChange: -20073.65
+      secondsUntilStateChange: -20170.723
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -20724,7 +20729,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 19962.313371
     - type: Door
-      secondsUntilStateChange: -215567.66
+      secondsUntilStateChange: -215664.72
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -20738,7 +20743,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 19962.313371
     - type: Door
-      secondsUntilStateChange: -215567.66
+      secondsUntilStateChange: -215664.72
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -22441,8 +22446,8 @@ entities:
           occludes: True
           ents:
           - 2118
-          - 2119
-          - 2120
+          - invalid
+          - invalid
           - 2121
         paper_label: !type:ContainerSlot
           showEnts: False
@@ -55214,27 +55219,6 @@ entities:
     - type: Transform
       pos: 32.570667,108.77272
       parent: 1
-- proto: RMCArmorVestMedic
-  entities:
-  - uid: 2119
-    components:
-    - type: Transform
-      parent: 2117
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 2120
-    components:
-    - type: Transform
-      parent: 2117
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 8034
-    components:
-    - type: Transform
-      pos: -27.493582,10.673471
-      parent: 1
 - proto: RMCArmoryLockerBlueFilled
   entities:
   - uid: 8035
@@ -77536,11 +77520,12 @@ entities:
       sections:
       - hasBoxes: False
         holidays: []
+        ranks: []
         jobs: []
         sharedSpecLimit: null
         entries:
-        - giveMapBlip: null
-          giveIcon: null
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 8
           points: null
@@ -77548,14 +77533,15 @@ entities:
           recommended: False
           multiplier: 8
           max: 8
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
+          giveIcon: null
           id: CMTricordrazineAutoInjectorNoSkill
         takeOne: null
         takeAll: null
@@ -77563,11 +77549,12 @@ entities:
         name: Autoinjectors
       - hasBoxes: False
         holidays: []
+        ranks: []
         jobs: []
         sharedSpecLimit: null
         entries:
-        - giveMapBlip: null
-          giveIcon: null
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 8
           points: null
@@ -77575,14 +77562,15 @@ entities:
           recommended: False
           multiplier: 8
           max: 8
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
+          giveIcon: null
           id: CMHealthAnalyzer
         takeOne: null
         takeAll: null
@@ -77590,11 +77578,12 @@ entities:
         name: Devices
       - hasBoxes: False
         holidays: []
+        ranks: []
         jobs: []
         sharedSpecLimit: null
         entries:
-        - giveMapBlip: null
-          giveIcon: null
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 8
           points: null
@@ -77602,17 +77591,18 @@ entities:
           recommended: False
           multiplier: 8
           max: 8
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
+          giveIcon: null
           id: CMBurnKit10
-        - giveMapBlip: null
-          giveIcon: null
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 8
           points: null
@@ -77620,17 +77610,18 @@ entities:
           recommended: False
           multiplier: 8
           max: 8
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
+          giveIcon: null
           id: CMTraumaKit10
-        - giveMapBlip: null
-          giveIcon: null
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 8
           points: null
@@ -77638,17 +77629,18 @@ entities:
           recommended: False
           multiplier: 8
           max: 8
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
+          giveIcon: null
           id: CMOintment10
-        - giveMapBlip: null
-          giveIcon: null
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 8
           points: null
@@ -77656,14 +77648,15 @@ entities:
           recommended: False
           multiplier: 8
           max: 8
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
+          giveIcon: null
           id: CMGauze10
         takeOne: null
         takeAll: null
@@ -77682,11 +77675,12 @@ entities:
       sections:
       - hasBoxes: False
         holidays: []
+        ranks: []
         jobs: []
         sharedSpecLimit: null
         entries:
-        - giveMapBlip: null
-          giveIcon: null
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 25
           points: null
@@ -77694,17 +77688,18 @@ entities:
           recommended: False
           multiplier: 25
           max: 25
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
+          giveIcon: null
           id: CMMRE
-        - giveMapBlip: null
-          giveIcon: null
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 25
           points: null
@@ -77712,14 +77707,15 @@ entities:
           recommended: False
           multiplier: 25
           max: 25
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
+          giveIcon: null
           id: CMDrinkWEYAWaterBottle30
         takeOne: null
         takeAll: null
@@ -77727,11 +77723,12 @@ entities:
         name: Food and beverage
       - hasBoxes: False
         holidays: []
+        ranks: []
         jobs: []
         sharedSpecLimit: null
         entries:
-        - giveMapBlip: null
-          giveIcon: null
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 5
           points: null
@@ -77739,17 +77736,18 @@ entities:
           recommended: False
           multiplier: 5
           max: 5
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
-          id: CMPackFlare
-        - giveMapBlip: null
           giveIcon: null
+          id: CMPackFlare
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 8
           points: null
@@ -77757,17 +77755,18 @@ entities:
           recommended: False
           multiplier: 8
           max: 8
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
-          id: RMCM5Bayonet
-        - giveMapBlip: null
           giveIcon: null
+          id: RMCM5Bayonet
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 5
           points: null
@@ -77775,14 +77774,15 @@ entities:
           recommended: False
           multiplier: 5
           max: 5
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
+          giveIcon: null
           id: RMCRadioHandheldAlmayer
         takeOne: null
         takeAll: null
@@ -77790,11 +77790,12 @@ entities:
         name: Utility
       - hasBoxes: False
         holidays: []
+        ranks: []
         jobs: []
         sharedSpecLimit: null
         entries:
-        - giveMapBlip: null
-          giveIcon: null
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 15
           points: null
@@ -77802,17 +77803,18 @@ entities:
           recommended: False
           multiplier: 15
           max: 15
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
+          giveIcon: null
           id: CMMaskGas
-        - giveMapBlip: null
-          giveIcon: null
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 15
           points: null
@@ -77820,14 +77822,15 @@ entities:
           recommended: False
           multiplier: 15
           max: 15
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
+          giveIcon: null
           id: CMMaskCoif
         takeOne: null
         takeAll: null
@@ -77844,11 +77847,12 @@ entities:
       sections:
       - hasBoxes: False
         holidays: []
+        ranks: []
         jobs: []
         sharedSpecLimit: null
         entries:
-        - giveMapBlip: null
-          giveIcon: null
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 25
           points: null
@@ -77856,17 +77860,18 @@ entities:
           recommended: False
           multiplier: 25
           max: 25
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
+          giveIcon: null
           id: CMMRE
-        - giveMapBlip: null
-          giveIcon: null
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 25
           points: null
@@ -77874,14 +77879,15 @@ entities:
           recommended: False
           multiplier: 25
           max: 25
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
+          giveIcon: null
           id: CMDrinkWEYAWaterBottle30
         takeOne: null
         takeAll: null
@@ -77889,11 +77895,12 @@ entities:
         name: Food and beverage
       - hasBoxes: False
         holidays: []
+        ranks: []
         jobs: []
         sharedSpecLimit: null
         entries:
-        - giveMapBlip: null
-          giveIcon: null
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 5
           points: null
@@ -77901,17 +77908,18 @@ entities:
           recommended: False
           multiplier: 5
           max: 5
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
-          id: CMPackFlare
-        - giveMapBlip: null
           giveIcon: null
+          id: CMPackFlare
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 8
           points: null
@@ -77919,17 +77927,18 @@ entities:
           recommended: False
           multiplier: 8
           max: 8
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
-          id: RMCM5Bayonet
-        - giveMapBlip: null
           giveIcon: null
+          id: RMCM5Bayonet
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 5
           points: null
@@ -77937,14 +77946,15 @@ entities:
           recommended: False
           multiplier: 5
           max: 5
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
+          giveIcon: null
           id: RMCRadioHandheldAlmayer
         takeOne: null
         takeAll: null
@@ -77952,11 +77962,12 @@ entities:
         name: Utility
       - hasBoxes: False
         holidays: []
+        ranks: []
         jobs: []
         sharedSpecLimit: null
         entries:
-        - giveMapBlip: null
-          giveIcon: null
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 15
           points: null
@@ -77964,17 +77975,18 @@ entities:
           recommended: False
           multiplier: 15
           max: 15
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
+          giveIcon: null
           id: CMMaskGas
-        - giveMapBlip: null
-          giveIcon: null
+        - replaceSlot: null
+          linkedEntries: []
           name: null
           amount: 15
           points: null
@@ -77982,14 +77994,15 @@ entities:
           recommended: False
           multiplier: 15
           max: 15
-          linkedEntries: []
           box: null
+          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
+          giveIcon: null
           id: CMMaskCoif
         takeOne: null
         takeAll: null

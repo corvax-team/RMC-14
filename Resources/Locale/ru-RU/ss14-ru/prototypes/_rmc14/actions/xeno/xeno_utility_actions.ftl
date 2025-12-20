@@ -38,5 +38,5 @@ ent-ActionXenoFightOrFlight = Борись или беги (100 плазмы, 75
     .desc = Снимает недуги и оглушение со всех союзников вокруг вас. Радиус действия больше, если после использования навыка у вас остаётся >75 ярости.
 ent-RMCGuidebookActionXenoFightOrFlight = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
-ent-ActionXenoQueenEye = Enter Eye Form
-    .desc = Look around any area with weeds remotely. You can use infinite range abilities while in this form, and build resin from afar.
+ent-ActionXenoQueenEye = Активировать око королевы 
+    .desc = Осматривайте любую область с сорняками удалённо. В этой форме вы можете выращивать смолу на расстоянии, строить и и использовать некоторые способности с бесконечным радиусом.

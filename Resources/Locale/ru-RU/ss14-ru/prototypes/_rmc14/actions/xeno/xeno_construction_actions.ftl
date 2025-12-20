@@ -36,5 +36,5 @@ ent-ActionLesserDronePlantWeeds = Посадить сорняки (75)
     .desc = Посадите узел сорняков, который распространит ещё больше сорняков.
 ent-RMCGuidebookActionXenoPlantWeeds = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
-ent-ActionXenoExpandWeeds = Expand Weeds (50)
-    .desc = Expand existing weeds or turn a weed tile into a node.
+ent-ActionXenoExpandWeeds = расширять сорняки (50)
+    .desc = расширяет сорняки от других сорняков, или превращает сорняки в узел.

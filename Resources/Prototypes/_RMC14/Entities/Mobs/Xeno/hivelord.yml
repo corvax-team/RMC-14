@@ -31,6 +31,10 @@
   - type: XenoDevolve
     devolvesTo:
     - CMXenoDrone
+  - type: XenoEvolution
+    max: 500
+    evolvesTo:
+    - CCMXenoSwarmer
   - type: XenoAcid
   - type: XenoDevour
   - type: XenoPheromones

@@ -1,0 +1,4 @@
+- type: shader
+  id: CCMVignetteMech
+  kind: source
+  path: "/Textures/_CCM14/Shaders/vignette.swsl"

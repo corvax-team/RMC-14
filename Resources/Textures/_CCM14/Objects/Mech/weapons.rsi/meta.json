@@ -1,0 +1,32 @@
+{
+  "copyright" : "Made for Corvax RMC-14",
+  "license" : "CC-BY-SA-3.0",
+  "version": 1,
+  "size": {
+    "x": 64,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "assaultrifle"
+    },
+    {
+      "name": "flamer"
+    },
+    {
+      "name": "rocketlauncher"
+    },
+    {
+      "name": "rpg"
+    },
+    {
+      "name": "shotgun"
+    },
+    {
+      "name": "smg"
+    },
+    {
+      "name": "tow"
+    }
+  ]
+}

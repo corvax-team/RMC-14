@@ -1,0 +1,15 @@
+﻿namespace Content.Client._CCM.Mech;
+
+/// <summary>
+/// This is used for visualizing mech constructions
+/// </summary>
+[RegisterComponent]
+public sealed partial class CCMMechAssemblyVisualsComponent : Component
+{
+    /// <summary>
+    /// The prefix that is followed by the number which
+    /// denotes the current state to use.
+    /// </summary>
+    [DataField(required: true)]
+    public string StatePrefix = string.Empty;
+}

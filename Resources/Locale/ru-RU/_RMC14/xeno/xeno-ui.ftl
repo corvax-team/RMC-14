@@ -14,11 +14,11 @@ xeno-ui-rename-tunnel-verb = Переименовать туннель
 xeno-ui-enter-tunnel-verb = Войти в туннель
 xeno-ui-select-destination-tunnel-title = Выбрать туннель назначения
 xeno-ui-select-destination-tunnel-submit-text = Выбрать туннель
-rmc-xeno-ui-burrowed-need-time = You ghosted too recently. You cannot become a burrowed larva until 2.5 minutes have passed ({ $seconds } seconds remaining).
-rmc-xeno-tracker-target-Queen = Queen
-rmc-xeno-tracker-target-HiveLeader = Hive Leader
-rmc-xeno-tracker-target-Tunnel = Tunnel
-rmc-xeno-tracker-target-HiveCore = Hive Core
-rmc-xeno-ui-ovi-needed-label = [bold][color=red]The Queen must be in their\novipositor for you to gain points![/color][/bold]
-rmc-xeno-ui-evolution-points = Evolution points: { $points } / { $maxPoints }
-rmc-ui-xeno-strain-confirm = Confirm
+rmc-xeno-ui-burrowed-need-time = вы недавно стали призраком, вам требуется 2.5 минуты быть призраком чтобы стать лярвой. ({ $seconds } секунд осталось).
+rmc-xeno-tracker-target-Queen = Королева 
+rmc-xeno-tracker-target-HiveLeader = Лидер
+rmc-xeno-tracker-target-Tunnel = Туннель
+rmc-xeno-tracker-target-HiveCore = Ядро Улья
+rmc-xeno-ui-ovi-needed-label = [bold][color=red]Королева должна находиться на яйцекладе чтобы улей получал очки эволюции![/color][/bold]
+rmc-xeno-ui-evolution-points = Очки эволюции: { $points } / { $maxPoints }
+rmc-ui-xeno-strain-confirm = Подтвердить?

@@ -1,5 +1,6 @@
-using Content.Shared.ActionBlocker;
+//using Content.Shared.ActionBlocker; // CCM-change
 using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Events; // CCM-change
 
 namespace Content.Shared.Movement.Systems;
 
@@ -11,6 +12,7 @@ public abstract partial class SharedMoverController
         SubscribeLocalEvent<MovementRelayTargetComponent, ComponentShutdown>(OnTargetRelayShutdown);
         SubscribeLocalEvent<MovementRelayTargetComponent, AfterAutoHandleStateEvent>(OnAfterRelayTargetState);
         SubscribeLocalEvent<RelayInputMoverComponent, AfterAutoHandleStateEvent>(OnAfterRelayState);
+        SubscribeLocalEvent<RelayInputMoverComponent, CanMoveUpdatedEvent>(OnRelayCanMoveUpdated);
     }
 
     private void OnAfterRelayTargetState(Entity<MovementRelayTargetComponent> entity, ref AfterAutoHandleStateEvent args)
@@ -22,6 +24,17 @@ public abstract partial class SharedMoverController
     {
         PhysicsSystem.UpdateIsPredicted(entity.Owner);
     }
+
+    // CCM-change-start
+    private void OnRelayCanMoveUpdated(Entity<RelayInputMoverComponent> ent, ref CanMoveUpdatedEvent args)
+    {
+        if (args.CanMove)
+            return;
+
+        if (MoverQuery.TryComp(ent.Comp.RelayEntity, out var inputMoverComponent))
+            SetMoveInput((ent.Comp.RelayEntity, inputMoverComponent), MoveButtons.None);
+    }
+    // CCM-change-end
 
     /// <summary>
     ///     Sets the relay entity and marks the component as dirty. This only exists because people have previously

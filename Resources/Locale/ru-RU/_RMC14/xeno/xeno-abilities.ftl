@@ -294,40 +294,62 @@ rmc-xeno-abduct-more =
        *[other] целей
     }!
 # Tail Lash
-rmc-xeno-tail-lash-no-room = Нам не хватает места, чтобы совершить всхлест хвостом!
 # Headbite
-rmc-xeno-headbite-others = { $xeno } grabs { $target }'s head aggressively.
-rmc-xeno-headbite-self = We grab { $target }'s head aggressively.
-rmc-xeno-headbite-warning-larva = We should not harm this host! It has a sister inside.
-rmc-xeno-headbite-warning = We can only headbite an unconscious, adjacent target!
-rmc-xeno-headbite-hit-self = We pierce { $target }'s head with our inner jaw!
-rmc-xeno-headbite-hit-others = { $xeno } pierces { $target }'s head with its inner jaw!
+rmc-xeno-headbite-others = { $xeno } агрессивно хватает голову { $target }.
+rmc-xeno-headbite-self = Мы агрессивно хватаем голову { $target }.
+rmc-xeno-headbite-warning-larva = Мы не можем вредить этому носителю! Внутри него есть сестра.
+rmc-xeno-headbite-warning = Мы можем прокусить голову только бессознательной цели рядом!
+rmc-xeno-headbite-hit-self = Мы пронзаем голову { $target } нашей внутренней челюстью!
+rmc-xeno-headbite-hit-others = { $xeno } пронзает голову { $target } своей внутренней челюстью!
+
 # Produce Eggs
-rmc-xeno-produce-eggs-no-plasma = We don't have enough plasma to support forming eggs.
-rmc-xeno-produce-eggs-new-egg = We generate an egg. Now holding: { $cur_eggs } / { $max_eggs }.
-rmc-xeno-produce-eggs-start = We start forming eggs.
+rmc-xeno-produce-eggs-no-plasma = У нас недостаточно плазмы для формирования яиц.
+rmc-xeno-produce-eggs-new-egg = Мы создаём яйцо. Теперь удерживаем: { $cureggs } / { $maxeggs }.
+rmc-xeno-produce-eggs-start = Мы начинаем формировать яйца.
+
 # Eggsac Passive
-rmc-xeno-sustain-egg-decaying = We can only sustain { $max } eggs off hive weeds! Our oldest egg is decaying rapidly.
-rmc-xeno-sustain-death = { CAPITALIZE(THE($xeno)) } throes as its eggsac bursts into a mess of acid!
+rmc-xeno-sustain-egg-decaying = Мы можем поддерживать только { $max } яиц на сорняках улья! Наше старейшее яйцо быстро слабеет и разрушается.
+rmc-xeno-sustain-death = { CAPITALIZE(THE($xeno)) } корчится, когда его инкубатор лопается в кислотную жижу!
+
 # Apprehend
-rmc-xeno-apprehend-activate = Our next slash will slow!
-rmc-xeno-apprehend-deactivate = We feel our speed wane!
-rmc-xeno-apprehend-expire = We have waited too long, our slash will no longer slow enemies!
+rmc-xeno-apprehend-activate = Наш следующий удар замедлит!
+rmc-xeno-apprehend-deactivate = Мы чувствуем, как наша скорость теряется!
+rmc-xeno-apprehend-expire = Мы ждали слишком долго, наш удар больше не замедлит врагов!
+
 # Rage
-rmc-xeno-rage-lock = We feel a euphoric rush as we reach max rage! We are LOCKED at max Rage!
-rmc-xeno-rage-expire = Our adrenal glands spasm. We cannot gain any rage for { $cooldown } seconds.
-rmc-xeno-rage-examine = { CAPITALIZE(SUBJECT($xeno)) } { CONJUGATE-BE($xeno) } has { $amount }/{ $max } rage stacks.
+rmc-xeno-rage-lock = Мы ощущаем эйфорический прилив, достигнув максимальной ярости! Мы ЗАБЛОКИРОВАНЫ на максимальной Ярости!
+rmc-xeno-rage-expire = Наше тело успокаивается. Мы не можем получать ярость в течение { $cooldown } секунд.
+rmc-xeno-rage-examine = { CAPITALIZE(SUBJECT($xeno)) } { CONJUGATE-BE($xeno) } имеет { $amount }/{ $max } зарядов ярости.
+
 # Eviscerate
-rmc-xeno-eviscerate-fail = We can't do eviscerate with 0 rage stacks!
-rmc-xeno-eviscerate-windup-self = We begin digging in for a massive strike!
-rmc-xeno-eviscerate-windup = { $xeno } begins digging in for a massive strike!
-rmc-xeno-eviscerate-windup-small-self = We begin digging in for a strike!
-rmc-xeno-eviscerate-windup-small = { $xeno } begins digging in for a strike!
+rmc-xeno-eviscerate-fail = Мы не можем потрошить с 0 зарядов ярости!
+rmc-xeno-eviscerate-windup-self = Мы начинаем готовиться к сокрушительному удару!
+rmc-xeno-eviscerate-windup = { $xeno } начинает готовиться к сокрушительному удару!
+rmc-xeno-eviscerate-windup-small-self = Мы начинаем готовиться к удару!
+rmc-xeno-eviscerate-windup-small = { $xeno } начинает готовиться к удару!
+
 # Fling
-rmc-xeno-fling-too-big = { CAPITALIZE(THE($target)) } is too big for us to fling!
+rmc-xeno-fling-too-big = { CAPITALIZE(THE($target)) } слишком большой, чтобы мы могли его швырнуть!
+
 # Gut
-rmc-gut-start-self = We plunge our claws into the body of this unfortunate host, starting to tear them in half!
-rmc-gut-start-others = { $user } plunges their claws into the body of { $target }, starting to tear them in half!
-rmc-gut-finish-self = We tear this pathetic host in half!!
-rmc-gut-finish-others = { $user } tears { $target } in half!!
+rmc-gut-start-self = Мы вонзаем когти в тело этого несчастного носителя, начиная разрывать его пополам!
+rmc-gut-start-others = { $user } вонзает когти в тело { $target }, начиная разрывать его пополам!
+rmc-gut-finish-self = Мы разрываем этого жалкого носителя пополам!!
+rmc-gut-finish-others = { $user } разрывает { $target } пополам!!
 rmc-xeno-soak-end-others = { CAPITALIZE($xeno) } приходит в ярость, получив достаточно урона!
+
+# Shed Spikes
+rmc-shed-spikes = Мы сбросили наши шипы и не можем получать новые в течение 30 секунд!
+rmc-shed-spikes-back = Мы снова можем получать шипы!
+
+# Spike Shield
+rmc-spike-shield-self = Мы поднимаем наши шипы, формируя защитный панцирь!
+rmc-spike-shield-others = { $user } поднимает свои костяные иглы, формируя защитный панцирь!
+rmc-spike-shield-hit = { $user } разбрасывает шипы повсюду!
+
+# Doomed
+rmc-doomed-fail = Это не работает...
+
+# Destroy
+rmc-destroy-cant-reach = У нас нет прямой дороги этой точке!
+rmc-destroy-cant-area = Мы не можем прыгнуть в эту область!

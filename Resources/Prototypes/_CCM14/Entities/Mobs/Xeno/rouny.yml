@@ -20,13 +20,12 @@
     - ActionXenoBoneChips
     - ActionXenoZoom
     - ActionXenoDevolve
-    tier: 4
+    tier: 3
     hudOffset: 0,0.63
     unlockAt: 900 # 15 minutes
   - type: XenoDevolve
     devolvesTo:
-    - CMXenoLarva
-    - CMXenoRunner
+    - RMCXenoLurkerBase
   - type: XenoEvolutionCapped
     id: CCMXenoRouny
     max: 1

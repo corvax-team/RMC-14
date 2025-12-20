@@ -1,0 +1,28 @@
+uniform highp float intensity;
+uniform highp float transitionProgress;
+uniform sampler2D SCREEN_TEXTURE;
+
+void fragment()
+{
+    highp vec2 center = vec2(0.5, 0.5);
+    highp vec2 uv = UV;
+
+    highp float dist = distance(uv, center);
+
+    highp float baseVignette = 1.0 - dist * 1.8;
+    baseVignette = pow(baseVignette, 2.0);
+
+    highp float animVignette = 1.0 - dist * 3.0; // Более сильный эффект
+    animVignette = pow(animVignette, 3.0);
+
+    highp float permanentAlpha = (1.0 - baseVignette) * intensity * 0.5;
+    
+    highp float animatedAlpha = (1.0 - animVignette) * intensity * 1;
+    animatedAlpha *= (1.0 - transitionProgress);
+
+    highp float finalAlpha = permanentAlpha + animatedAlpha;
+    finalAlpha = clamp(finalAlpha, 0.0, 1.0);
+
+    vec4 screenColor = texture(SCREEN_TEXTURE, UV);
+    COLOR = mix(screenColor, vec4(0.0, 0.0, 0.0, 1.0), finalAlpha);
+}

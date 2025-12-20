@@ -296,28 +296,29 @@ namespace Content.Shared.Movement.Systems
             Dirty(entity.Owner, entity.Comp);
         }
 
-        private void HandleDirChange(EntityUid entity, Direction dir, ushort subTick, bool state)
+        private void HandleDirChange(Entity<InputMoverComponent?> entity, Direction dir, ushort subTick, bool state) // CCM-edit
         {
             // Relayed movement just uses the same keybinds given we're moving the relayed entity
             // the same as us.
 
+            if (!MoverQuery.Resolve(entity, ref entity.Comp)) // CCM-add
+                return;
+
             // TODO: Should move this into HandleMobMovement itself.
-            if (TryComp<RelayInputMoverComponent>(entity, out var relayMover))
+            if (entity.Comp.CanMove && RelayQuery.TryComp(entity, out var relayMover)) // CCM-change
             {
-                DebugTools.Assert(relayMover.RelayEntity != entity);
+                DebugTools.Assert(relayMover.RelayEntity != entity.Owner); // CCM-change
                 DebugTools.AssertNotNull(relayMover.RelayEntity);
 
                 if (MoverQuery.TryGetComponent(entity, out var mover))
                     SetMoveInput((entity, mover), MoveButtons.None);
 
-                if (!_mobState.IsIncapacitated(entity))
-                    HandleDirChange(relayMover.RelayEntity, dir, subTick, state);
-
+                HandleDirChange(relayMover.RelayEntity, dir, subTick, state); // CCM-change
                 return;
             }
 
-            if (!MoverQuery.TryGetComponent(entity, out var moverComp))
-                return;
+            // if (!MoverQuery.TryGetComponent(entity, out var moverComp)) // CCM-change
+            //     return;
 
             // For stuff like "Moving out of locker" or the likes
             // We'll relay a movement input to the parent.
@@ -330,7 +331,7 @@ namespace Content.Shared.Movement.Systems
                 RaiseLocalEvent(xform.ParentUid, ref relayMoveEvent);
             }
 
-            SetVelocityDirection((entity, moverComp), dir, subTick, state);
+            SetVelocityDirection((entity, entity.Comp), dir, subTick, state); // CCM-change
         }
 
         private void OnInputInit(Entity<InputMoverComponent> entity, ref ComponentInit args)

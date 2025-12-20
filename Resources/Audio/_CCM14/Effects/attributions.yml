@@ -1,0 +1,9 @@
+- files: ["nominal.ogg"]
+  copyright: '"nominal.ogg" by /tg/station'
+  license: "CC-BY-SA-3.0"
+  source: "https://github.com/tgstation/tgstation/blob/26937abeb259b74f9525ccd4469b52fb9c26c65d/sound/vehicles/mecha/nominal.ogg"
+
+- files: ["critdestr.ogg"]
+  copyright: '"critdestr.ogg" by /tg/station'
+  license: "CC-BY-SA-3.0"
+  source: "https://github.com/tgstation/tgstation/blob/26937abeb259b74f9525ccd4469b52fb9c26c65d/sound/vehicles/mecha/critdestr.ogg"

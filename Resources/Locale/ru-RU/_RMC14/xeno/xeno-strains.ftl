@@ -84,59 +84,80 @@ rmc-xeno-steelcrest-description =
     - Удар головой при Укреплении. Удар головой не теряет урон и сохраняет свою высокую дальность и высокое отбрасывание.
     - Используйте Поглощение чтобы начать поглощать урон на протяжении 6 секунд с небольшим исцелением, одновременно перезаряжая ваш Шлепок хвостом.
 rmc-xeno-steelcrest-popup = Он, подобно моей воле, несокрушим. Он станет моим стальным панцирем против всех, кто бросит мне вызов.
-rmc-xeno-maid-name = Cat Maid
+rmc-xeno-maid-name = Кошка-горничная
 rmc-xeno-maid-description =
-    You trade your dignity.
-    You gain the ability to:
-    - Cause mental anguish in friends and foes alike.
-rmc-xeno-maid-popup = Rawr :3
-rmc-xeno-vampire-name = Vampire
+    Ты обмениваешь своё достоинство.
+    Ты получаешь способность:
+    - Вызывать душевные страдания у друзей и врагов.
+rmc-xeno-maid-popup = Рррр :3
+
+rmc-xeno-vampire-name = Вампир
 rmc-xeno-vampire-description =
-    You lose all of your abilities and you forfeit a chunk of your health and damage in exchange for a large amount of armor, a little bit of movement speed, increased attack speed, and brand new abilities that make you an assassin.
-    You gain the ability to:
-    - Rush on your opponent to disorient them.
-    - Flurry to unleash a forward cleave that can hit and slow three talls and heal you for every tall you hit.
-    - A special AoE Tail Jab to knock talls away, doing more damage with direct hits and even more damage and a stun if they smack into walls.
-    - Execute unconscious talls with a headbite to heal your wounds.
-rmc-xeno-vampire-popup = Show no mercy! Slaughter them all!
-rmc-xeno-eggsac-name = Eggsac
+    Ты теряешь все свои способности и жертвуешь частью здоровья и урона в обмен на большое количество брони, немного скорости передвижения, повышенную скорость атаки и новые способности, превращающие тебя в ассасина.
+    Ты получаешь способность:
+    - Бросок на противника, чтобы дезориентировать его.
+    - Серия ударов: мощный рубящий удар вперёд, который может задеть и замедлить трёх носителей и исцелить тебя за каждого задетого.
+    - Особый AoE удар хвостом, чтобы отбросить носителей, нанося больше урона при прямом попадании и ещё больше урона и оглушение, если они ударятся о стены.
+    - Казнь жертв в критическом состоянии укусом головы, чтобы исцелить свои раны.
+rmc-xeno-vampire-popup = Не щадить! Уничтожить их всех!
+
+rmc-xeno-eggsac-name = Инкубатор
 rmc-xeno-eggsac-description =
-    You trade your ability to store parasites and make resin traps for stronger pheromones, more egg storage, and the ability to produce eggs.
-    You gain the ability to:
-    - Place eggs from slightly farther away.
-    - Put eggs on non-hive weeds. You can have 4 sustained this way at once, and they will last awhile while you're near and not long if you're far.
-    - Sustained Eggs will convert into normal eggs upon touching hive weeds, and cannot produce sentient parasites.
-    - Use plasma over time to make eggs.
-rmc-xeno-eggsac-popup = An egg is always an adventure; the next one may be different.
-rmc-xeno-berserker-name = Berserker
+    Ты обмениваешь способность хранить паразитов и создавать ловушки из смолы на более сильные феромоны, большее хранилище яиц и возможность производить яйца.
+    Ты получаешь способность:
+    - Размещать яйца немного дальше.
+    - Класть яйца на не-ульевую смолу. Ты можешь поддерживать до 4 таких одновременно; они будут держаться дольше, если ты рядом, и недолго, если далеко.
+    - Поддерживаемые яйца превратятся в обычные при контакте с смолой улья. Они не могут производить разумных паразитов.
+    - Использовать плазму со временем для создания яиц.
+rmc-xeno-eggsac-popup = Каждое яйцо — это загадка; следующее может быть другим.
+
+rmc-xeno-berserker-name = Берсерк
 rmc-xeno-berserker-description =
-    You lose:
-    - Your empower, charge, and scissor cut.
-    - Some health.
-    - A bit of your influence under frenzy pheromones.
-    You gain:
-    - Movement speed, a slight increase in armor, and gain a new set of abilities that make you a terrifying melee monster.
-    - The ability to heal when you slash and gain a stack of rage that increases your armor, movement speed, and your heals per slash, to a maximum of six rage.
-    - Apprehend to increase your movement speed and apply a slow on the next target you slash.
-    - Eviscerate to unleash a devastating windmill attack that heals you for every enemy you hit after an immobilizing wind-up.
-    - Clothesline to fling your target to heal yourself, even more-so if you have a rage stack that will be used up.
-rmc-xeno-berserker-popup = Unbridled fury fills this one. You will become an extension of my rage.
-rmc-xeno-charger-name = Charger
+    Ты теряешь:
+    - Своё усиление, рывок и удар ножницами.
+    - Немного здоровья.
+    - Часть влияния под феромонами ярости.
+    Ты получаешь:
+    - Скорость передвижения, небольшое увеличение брони и новый набор способностей, делающих тебя монстром ближнего боя.
+    - Способность исцеляться при ударах и получать заряд ярости, увеличивающий твою броню, скорость и лечение за удар, до максимума в шесть зарядов.
+    - Захват: увеличивает твою скорость и накладывает замедление на следующую цель, которую ты ударишь.
+    - Потрошение: разрушительная атака с кручением, которая исцеляет тебя за каждого врага, которого ты заденешь после обездвиживающей подготовки.
+    - Особый удар: швырнуть цель, чтобы исцелиться; ещё сильнее, если у тебя есть заряд ярости, который будет потрачен.
+rmc-xeno-berserker-popup = Безудержная ярость наполняет этого. Ты станешь продолжением моей ярости.
+
+rmc-xeno-charger-name = Таран
 rmc-xeno-charger-description =
-    In exchange for:
-    - Your defensive shield ability.
-    - A little bit of your armor and damage.
-    - Your slowdown resist from turrets.
-    - Your influence under frenzy pheromones.
-    - Your stomp no longer knocking down talls.
-    - Your ability to lock your direction.
+    В обмен на:
+    - Свою способность укрепленного щита.
+    - Немного брони и урона.
+    - Сопротивление к замедлению от турелей.
+    - Своё влияние под феромонами ярости.
+    - Твой топот больше не сбивает носителей с ног.
+    - Способность фиксировать направление.
     
-    You gain:
-    - A considerable amount of health.
-    - Some speed.
-    - Your stomp does extra damage when stomping over a grounded tall.
-    - Your charge is now manually-controlled and momentum-based; the further you go, the more damage and speed you will gain until you achieve maximum momentum, indicated by your roar.
-    - Your armor is now directional, being the toughest on the front, weaker on the sides, and weakest from the back.
-    - You gain an ability to tumble to pass through enemies.
-    - You gain an ability to forcefully move enemies via ramming into them.
-rmc-xeno-charger-popup = Nothing stops this hive. This one will become both the immovable object and the unstoppable force.
+    Ты получаешь:
+    - Значительное количество здоровья.
+    - Немного скорости.
+    - Твой топот наносит дополнительный урон при наступании на поверженного носителя.
+    - Твой рывок теперь управляется вручную и основан на разгоне; чем дальше ты идёшь, тем больше урона и скорости получаешь, пока не достигнешь максимального разгона, обозначенного твоим ревом.
+    - Твоя броня теперь крепче в определенных местах: самая крепкая спереди, слабее по бокам и самая слабая сзади.
+    - Ты получаешь способность переката, чтобы проходить сквозь врагов.
+    - Ты получаешь способность силой перемещать врагов, врезаясь в них.
+rmc-xeno-charger-popup = Ничто не остановит этот улей. Он станет и непреодолимой преградой, и неудержимой силой.
+
+rmc-xeno-hedgehog-name = Еж
+# TODO RMC14 limb damage shrapnel and causing damage when they move (P.S, это локализатор, я хз зачем это обобщение, я его решил не переводить, вдруг не надо? Но если кратко, тут про то что еж наносит урон при хождении)
+rmc-xeno-hedgehog-description = Вы теряете:
+  - Свои способности усиления, рывка и ножниц.
+  - Часть скорости ходьбы и скорости атаки.
+  - Ваша система плазмы заменяется костяными осколками (макс. 300).
+  Вы получаете:
+  - Повышенное здоровье и броню, которые масштабируются с количеством осколков (+2.5 брони за каждые 50 осколков).
+  - Огненные шипы: Выпускает 8 шипов, которые вонзаются в цели, замедляя их. (75 осколков, перезарядка 10с).
+  - Щит из шипов: Временный щит, который наносит урон ближайшим врагам при ударе (150 осколков, длительность 2с, перезарядка 11с).
+  - Сброс шипов: Выпускает все осколки во всех направлениях для огромного урона, даёт ускорение, но прекращает генерацию шипов на 30с (мин. 50 осколков, перезарядка 30с).
+rmc-xeno-hedgehog-popup = Шкура этого существа покрыта смертоносными шипами. Пусть они подойдут и будут пронзены вашей защитой.
+
+rmc-xeno-watcher-name = Наблюдатель
+rmc-xeno-watcher-description = Вы теряете способность прятаться, но получаете улучшенное зрение. Вы можете переключаться между обычным улучшенным зрением и сильно улучшенным зрением.
+rmc-xeno-watcher-popup = Теперь вы Наблюдатель. У вас улучшенное зрение, но вы не можете прятаться.

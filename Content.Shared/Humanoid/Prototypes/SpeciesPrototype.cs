@@ -1,3 +1,4 @@
+using Content.Shared._Forge.Sponsors;
 using Content.Shared.Dataset;
 using Content.Shared.Humanoid.Markings;
 using Robust.Shared.Prototypes;
@@ -33,6 +34,14 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// </summary>
     [DataField(required: true)]
     public bool RoundStart { get; private set; } = false;
+
+    // Corvax-Sponsors-Start
+    /// <summary>
+    /// Whether the species is available only for sponsors
+    /// </summary>
+    [DataField]
+    public bool SponsorOnly { get; private set; } = false;
+    // Corvax-Sponsors-End
 
     // The below two are to avoid fetching information about the species from the entity
     // prototype.
@@ -128,6 +137,22 @@ public sealed partial class SpeciesPrototype : IPrototype
     /// </summary>
     [DataField]
     public int MaxAge = 120;
+
+    /// <summary>
+    ///     Frontier: Forced marking color for this species, used for overwrites to force marking to use a single color, eg for Sheleg hair.
+    /// </summary>
+    [DataField]
+    public Color ForcedMarkingColor { get; private set; } = new();
+    // Forge-Change-Start: job restrictions by species
+    [DataField("jobWhitelist")]
+    public List<string>? JobWhitelist { get; private set; }
+
+    [DataField("jobBlacklist")]
+    public List<string>? JobBlacklist { get; private set; }
+
+    [DataField("sponsorLevel")]
+    public SponsorLevel SponsorLevel = SponsorLevel.None;
+    // Forge-Change-End
 }
 
 public enum SpeciesNaming : byte

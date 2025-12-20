@@ -1,56 +1,51 @@
 cm-job-name-survivor = Выживший
 cm-job-description-survivor = Вы выжили после нападения на корпоративный объект. Вы работали или жили в колонии/на станции, и вам удавалось избежать нападения инопланетян... до этого момента.
 CMJobSurvivor = Выживший
-cm-job-name-survivor-doctor = Doctor Colonist
-CMJobSurvivorDoctor = Doctor Colonist
-cm-job-name-survivor-engineer = Engineer Colonist
-CMJobSurvivorEngineer = Engineer Colonist
-cm-job-name-survivor-scientist = Scientist Colonist
-cm-job-name-survivor-security = Security Colonist
-CMJobSurvivorSecurity = Security Colonist
-rmc-job-name-survivor-synth = Survivor Synthetic
-rmc-job-description-survivor-synth = You are a synthetic survivor of the attack on a corporate facility.
+cm-job-name-survivor-doctor = Врач колонист
+CMJobSurvivorDoctor = Врач колонист
+cm-job-name-survivor-engineer = Инженер колонист
+CMJobSurvivorEngineer = Инженер Колонист
+cm-job-name-survivor-scientist = Ученый колонист
+cm-job-name-survivor-security = Офицер колонист
+CMJobSurvivorSecurity = Офицер колонист
+rmc-job-name-survivor-synth = Выживший синтетик
+rmc-job-description-survivor-synth = Вы синтетик выживший после нападения на корпоративный обьект Ве-Я.
 # Playtime trackers
-rmc-playtime-tracker-job-name-survivor = Civilian Survivor
-rmc-playtime-tracker-job-name-survivor-doctor = Doctor Survivor
-rmc-playtime-tracker-job-name-survivor-engineer = Engineer Survivor
-rmc-playtime-tracker-job-name-survivor-security = Security Survivor
-rmc-playtime-tracker-job-name-survivor-corporate = Corporate Survivor
-rmc-playtime-tracker-job-name-survivor-scientist = Scientist Survivor
-rmc-playtime-tracker-job-name-survivor-military = Military Survivor
-rmc-playtime-tracker-job-name-survivor-co = Survivor CO
-rmc-playtime-tracker-job-name-survivor-synth = Survivor Synthetic
-cm-job-name-survivor-trucker = Trucker Colonist
+rmc-playtime-tracker-job-name-survivor = Гражданский колонист
+rmc-playtime-tracker-job-name-survivor-doctor = Врач колонист
+rmc-playtime-tracker-job-name-survivor-engineer = Инженер колонист
+rmc-playtime-tracker-job-name-survivor-security = Офицер колонист
+rmc-playtime-tracker-job-name-survivor-corporate = Корпоративный колонист
+rmc-playtime-tracker-job-name-survivor-scientist = Ученый колонист
+rmc-playtime-tracker-job-name-survivor-military = Военный колонист
+rmc-playtime-tracker-job-name-survivor-co = Выживший КО
+rmc-playtime-tracker-job-name-survivor-synth = Выживший синтетик
+cm-job-name-survivor-trucker = Водитель грузовика
 rmc-job-name-survivor-cmb-deputy = CMB Deputy
 CMSurvivorCMBDeputy = CMB Deputy
-cm-job-name-survivor-corporate = Corporate Colonist
+cm-job-name-survivor-corporate = Корпоративный Колонист
 # Misc variants
-cm-job-name-survivor-miner = Miner Colonist
-cm-job-name-surivor-priest = Priest Colonist
-CMJobSurvivorCorporate = Corporate Colonist
-rmc-job-greeting-survivor =
-    You are a survivor of the attack on the colony. You worked or lived in the colony, and managed to avoid the alien attacks... until now.
+cm-job-name-survivor-miner = Шахтер
+cm-job-name-surivor-priest = Священник
+CMJobSurvivorCorporate = Выживший корпоративный связной
+rmc-job-greeting-survivor = Вы — выживший после проникновения био угрозы на колонию. Вы работали или жили в колонии и сумели избежать атаки ксеноморфов... до этого момента. 
+
+    Вы полностью осознаёте угрозу ксеноморфов и можете использовать это знание по своему усмотрению. 
+
+    Вы НЕ осведомлены о морпехах или их намерениях.
     
-    You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+    Вы [bold][color=#51A16C][font size=16]НЕВРАЖДЕБНЫ к ККМП![/font][/color][/bold] 
+rmc-job-greeting-forecon = Вы — морпех из подразделения разведки сил ККМП (Форекон) с корабля ККМП «Ганьют», оказавшийся на этой планете после того, как ваша команда была уничтожена при расследовании сигнала бедствия. Ваш пилот и большая часть отряда погибла, вы и оставшиеся бойцы вынуждены были сражаться и скрываться, чтобы выжить... но с истощающимися запасами и заканчивающейся едой, возможно, единственный шанс на спасение — двигаться на запад к разбившемуся десантному кораблю, чтобы добыть что‑нибудь полезное.
     
-    You are NOT aware of the marines or their intentions.
-    
-    You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
-rmc-job-greeting-forecon =
-    You are UNMC Force Reconnaissance (FORECON) marine from the UNS Hanyut, stranded on this planet after your team was wiped out while investigating the distress signal. With your pilot dead along with the majority of your unit, you and your team have been running and gunning to survive... but with supplies low and food running out maybe your only means of survival is to move west to the crashed dropship to salvage anything useful.
-    
-    You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
-    
-    You are NOT aware of the marines or their intentions.
-    
-    You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
-rmc-job-name-survivor-co = Survivor CO
-rmc-job-description-survivor-co = You are a commanding officer of the UNMC.
-rmc-job-name-forecon = FORECON Survivor
-rmc-job-description-forecon = You are a stranded UNMC Forecon marine. Your ship, the UNS Hanyut, crashed and you are stranded on the planet. Do what it takes to survive!
-rmc-job-name-forecon-synth = Synthetic
-rmc-job-name-forecon-sniper = Sniper
-rmc-job-name-forecon-marksman = Marksman
+    Вы [bold][color=#51A16C][font size=16]НЕВРАЖДЕБНЫ к ККМП![/font][/color][/bold]
+
+rmc-job-name-survivor-co = Выживший КОМ
+rmc-job-description-survivor-co = Вы командующий офицер в составе ККМП
+rmc-job-name-forecon = Выживший форекон
+rmc-job-description-forecon = Вы — морпех корпуса ККМП "Форекон", оказавшийся один. Ваш корабль "ганьют" потерпел крушение, и теперь вы остались на этой планете. Сделайте всё возможное, чтобы выжить!
+rmc-job-name-forecon-synth = Синтетик Форекон
+rmc-job-name-forecon-sniper = Снайпер
+rmc-job-name-forecon-marksman = Стрелок
 rmc-job-name-survivor-lv624-archeologist = Archeologist
 rmc-job-name-survivor-lv624-cargo-technician = Cargo Technician
 rmc-job-name-survivor-lv624-corporate-liaison = LV-624 Corporate Liaison
