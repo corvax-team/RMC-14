@@ -29,7 +29,6 @@ rmc-lore-examinable-s5-red-dot-sight = Многофункциональный п
 
 rmc-lore-examinable-s6-reflex-sight = рефлекторный прицел, простой в своей системе, громоздкий и сделан для долгой службы, используется для более сложных и ограниченных военных расчётах, совместим с многими рельсовыми системами и устанавливается почти на все вооружение. использует обозначение AN/PVG-72 Reflex Sight
 
--- Телескопический прицел S8 (4x)
 rmc-lore-examinable-s8-4x-telescopic-scope = Телескопический прицел S8 одна из самых простых, долговечных и эффективных моделей прицелов, примерная максимальная дальность 780 м с использованием 10.24 мм патронов. Что в общем неплохо для данного прицела. Сделан  организацией Armat и носит обозначения AN/PVQ-31 4x Optic.
 
 rmc-lore-examinable-s4-2x-telescopic-mini-scope = A light-duty optic, designated as the AN/PVQ-45 2x Optic. Suited towards short to medium-range engagements. Users are advised to zero it often, as the first mass-production batch had a tendency to drift in one direction or another with sustained use.
