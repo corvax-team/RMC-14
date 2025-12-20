@@ -4,10 +4,7 @@
   name: royal egg
   description: A particularly large, unusual egg with a iridescent sheen.
   components:
-<<<<<<< HEAD
   - type: CCMXenoRoyalEgg
-=======
->>>>>>> origin/master
   - type: XenoEgg
     spawn: CCMXenoRoyalParasite
     minTime: 10

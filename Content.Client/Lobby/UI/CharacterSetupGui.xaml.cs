@@ -105,6 +105,10 @@ namespace Content.Client.Lobby.UI
 
             foreach (var (slot, character) in _preferencesManager.Preferences!.Characters)
             {
+                // Only show Human characters
+                if (character is HumanoidCharacterProfile humanoidProfile && humanoidProfile.Species != "Human")
+                    continue;
+
                 numberOfFullSlots++;
                 var characterPickerButton = new CharacterPickerButton(_entManager,
                     _protomanager,
