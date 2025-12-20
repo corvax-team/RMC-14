@@ -173,7 +173,8 @@ namespace Content.Shared.Preferences
         {
             Name = name;
             FlavorText = flavortext;
-            Species = species;
+            // Only allow Human species
+            Species = species == "Human" ? species : "Human";
             Age = age;
             Sex = sex;
             Gender = gender;
@@ -249,10 +250,31 @@ namespace Content.Shared.Preferences
         {
             species ??= SharedHumanoidAppearanceSystem.DefaultSpecies;
 
-            return new()
-            {
-                Species = species,
-            };
+            // Only allow Human species
+            if (species != "Human")
+                species = SharedHumanoidAppearanceSystem.DefaultSpecies;
+
+            return new(
+                string.Empty,
+                string.Empty,
+                species,
+                18,
+                Sex.Male,
+                Gender.Male,
+                HumanoidCharacterAppearance.DefaultWithSpecies(species),
+                SpawnPriorityPreference.None,
+                ArmorPreference.Random,
+                null,
+                new() { { SharedGameTicker.FallbackOverflowJob, JobPriority.High } },
+                PreferenceUnavailableMode.SpawnAsOverflow,
+                new(),
+                new(),
+                new(),
+                new SharedRMCNamedItems(),
+                false,
+                string.Empty,
+                string.Empty
+            );
         }
 
         // TODO: This should eventually not be a visual change only.
@@ -274,6 +296,10 @@ namespace Content.Shared.Preferences
         public static HumanoidCharacterProfile RandomWithSpecies(string? species = null)
         {
             species ??= SharedHumanoidAppearanceSystem.DefaultSpecies;
+
+            // Only allow Human species
+            if (species != "Human")
+                species = "Human";
 
             var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
             var random = IoCManager.Resolve<IRobustRandom>();
@@ -300,15 +326,27 @@ namespace Content.Shared.Preferences
 
             var name = GetName(species, gender);
 
-            return new HumanoidCharacterProfile()
-            {
-                Name = name,
-                Sex = sex,
-                Age = age,
-                Gender = gender,
-                Species = species,
-                Appearance = HumanoidCharacterAppearance.Random(species, sex),
-            };
+            return new(
+                name,
+                string.Empty,
+                species,
+                age,
+                sex,
+                gender,
+                HumanoidCharacterAppearance.Random(species, sex),
+                SpawnPriorityPreference.None,
+                ArmorPreference.Random,
+                null,
+                new() { { SharedGameTicker.FallbackOverflowJob, JobPriority.High } },
+                PreferenceUnavailableMode.SpawnAsOverflow,
+                new(),
+                new(),
+                new(),
+                new SharedRMCNamedItems(),
+                false,
+                string.Empty,
+                string.Empty
+            );
         }
 
         public HumanoidCharacterProfile WithName(string name)
@@ -338,6 +376,9 @@ namespace Content.Shared.Preferences
 
         public HumanoidCharacterProfile WithSpecies(string species)
         {
+            // Only allow Human species
+            if (species != "Human")
+                species = "Human";
             return new(this) { Species = species };
         }
 
@@ -558,7 +599,8 @@ namespace Content.Shared.Preferences
             var prototypeManager = collection.Resolve<IPrototypeManager>();
             var compFactory = collection.Resolve<IComponentFactory>();
 
-            if (!prototypeManager.TryIndex(Species, out var speciesPrototype) || speciesPrototype.RoundStart == false)
+            // Only allow Human species
+            if (Species.Id != "Human" || !prototypeManager.TryIndex(Species, out var speciesPrototype) || speciesPrototype.RoundStart == false)
             {
                 Species = SharedHumanoidAppearanceSystem.DefaultSpecies;
                 speciesPrototype = prototypeManager.Index(Species);
