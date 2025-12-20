@@ -1,0 +1,22 @@
+- type: entity
+  parent: CMXenoLarva
+  id: CMXenoRoyalLarva
+  name: Royal Larva
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      45: Critical
+      90: Dead
+  - type: XenoEvolution
+    canEvolveWithoutGranter: true
+    requiresGranter: false
+    max: 200
+    evolvesTo:
+    - CMXenoHiveLord
+    - CMXenoWarrior
+    - CMXenoSpitter
+    - CMXenoLurker
+  - type: Tag
+    tags:
+    - CMXenoRoyalLarva
