@@ -65,12 +65,7 @@ rmc-xeno-parasite-ghost-dead = This parasite is dead or spent.
 # Reserve parasite UI
 rmc-xeno-reserve-parasites-title = Reserve Parasites
 rmc-xeno-reserve-parasites-label = Regular Parasites
-<<<<<<< HEAD
 rmc-xeno-reserve-parasites-apply = Apply
 rmc-xeno-reserve-royal-parasites-unavailable = Royal parasites in storage are permanently protected and cannot be reserved. Ghosts can only become royal parasites through eggs or ground parasites.
-=======
-rmc-xeno-reserve-royal-parasites-label = Royal Parasites
-rmc-xeno-reserve-parasites-apply = Apply
->>>>>>> origin/master
 # Parasite confirmation dialog
 rmc-xeno-parasite-confirm-text = Are you sure?

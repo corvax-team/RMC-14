@@ -67,12 +67,7 @@ rmc-xeno-parasite-ghost-dead = Этот паразит мёртв или ист�
 # Reserve parasite UI
 rmc-xeno-reserve-parasites-title = Зарезервировать Паразитов
 rmc-xeno-reserve-parasites-label = Обычные Паразиты
-<<<<<<< HEAD
 rmc-xeno-reserve-parasites-apply = Применить
 rmc-xeno-reserve-royal-parasites-unavailable = Королевские паразиты в хранилище постоянно защищены и не могут быть зарезервированы. Призраки могут стать королевскими паразитами только через яйца или паразитов на земле.
-=======
-rmc-xeno-reserve-royal-parasites-label = Королевские Паразиты
-rmc-xeno-reserve-parasites-apply = Применить
->>>>>>> origin/master
 # Parasite confirmation dialog
 rmc-xeno-parasite-confirm-text = Вы уверены?
