@@ -173,8 +173,9 @@ namespace Content.Shared.Preferences
         {
             Name = name;
             FlavorText = flavortext;
-            // Only allow Human species
-            Species = species == "Human" ? species : "Human";
+            // Only allow specific species
+            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Nian", "Felinid", "Dwarf" };
+            Species = allowedSpecies.Contains(species) ? species : "Human";
             Age = age;
             Sex = sex;
             Gender = gender;
@@ -250,8 +251,9 @@ namespace Content.Shared.Preferences
         {
             species ??= SharedHumanoidAppearanceSystem.DefaultSpecies;
 
-            // Only allow Human species
-            if (species != "Human")
+            // Only allow specific species
+            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Nian", "Felinid", "Dwarf" };
+            if (!allowedSpecies.Contains(species))
                 species = SharedHumanoidAppearanceSystem.DefaultSpecies;
 
             return new(
@@ -283,10 +285,11 @@ namespace Content.Shared.Preferences
             var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
             var random = IoCManager.Resolve<IRobustRandom>();
 
-            // Only allow Human species
+            // Only allow specific species
+            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Nian", "Felinid", "Dwarf" };
             var species = random.Pick(prototypeManager
                 .EnumeratePrototypes<SpeciesPrototype>()
-                .Where(x => x.ID == "Human" && x.RoundStart)
+                .Where(x => allowedSpecies.Contains(x.ID) && x.RoundStart)
                 .ToArray()
             ).ID;
 
@@ -297,8 +300,9 @@ namespace Content.Shared.Preferences
         {
             species ??= SharedHumanoidAppearanceSystem.DefaultSpecies;
 
-            // Only allow Human species
-            if (species != "Human")
+            // Only allow specific species
+            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Nian", "Felinid", "Dwarf" };
+            if (!allowedSpecies.Contains(species))
                 species = "Human";
 
             var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
@@ -376,8 +380,9 @@ namespace Content.Shared.Preferences
 
         public HumanoidCharacterProfile WithSpecies(string species)
         {
-            // Only allow Human species
-            if (species != "Human")
+            // Only allow specific species
+            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Nian", "Felinid", "Dwarf" };
+            if (!allowedSpecies.Contains(species))
                 species = "Human";
             return new(this) { Species = species };
         }
@@ -599,10 +604,11 @@ namespace Content.Shared.Preferences
             var prototypeManager = collection.Resolve<IPrototypeManager>();
             var compFactory = collection.Resolve<IComponentFactory>();
 
-            // Only allow Human species
-            if (Species.Id != "Human" || !prototypeManager.TryIndex(Species, out var speciesPrototype) || speciesPrototype.RoundStart == false)
+            // Only allow specific species - convert any disallowed species to Human
+            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Nian", "Felinid", "Dwarf" };
+            if (!allowedSpecies.Contains(Species.Id) || !prototypeManager.TryIndex(Species, out var speciesPrototype) || speciesPrototype.RoundStart == false)
             {
-                Species = SharedHumanoidAppearanceSystem.DefaultSpecies;
+                Species = SharedHumanoidAppearanceSystem.DefaultSpecies; // Defaults to Human
                 speciesPrototype = prototypeManager.Index(Species);
             }
 // Corvax-frontier-blacklistrace

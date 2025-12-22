@@ -68,12 +68,28 @@ namespace Content.Server.Database
             var profiles = new Dictionary<int, ICharacterProfile>(maxSlot);
             foreach (var profile in prefs.Profiles)
             {
-                profiles[profile.Slot] = ConvertProfiles(profile);
+                var convertedProfile = ConvertProfiles(profile);
+
+                // Validate species - only allow: Human, Avali, Arachnid, Nian, Felinid, Dwarf
+                if (convertedProfile is HumanoidCharacterProfile humanoidProfile)
+                {
+                    var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Nian", "Felinid", "Dwarf" };
+                    if (!allowedSpecies.Contains(humanoidProfile.Species.Id))
+                    {
+                        humanoidProfile.Species = "Human";
+                        profile.Species = "Human";
+                        db.DbContext.Update(profile);
+                    }
+                }
+
+                profiles[profile.Slot] = convertedProfile;
             }
 
             var constructionFavorites = new List<ProtoId<ConstructionPrototype>>(prefs.ConstructionFavorites.Count);
             foreach (var favorite in prefs.ConstructionFavorites)
                 constructionFavorites.Add(new ProtoId<ConstructionPrototype>(favorite));
+
+            await db.DbContext.SaveChangesAsync(cancel);
 
             return new PlayerPreferences(profiles, prefs.SelectedCharacterSlot, Color.FromHex(prefs.AdminOOCColor), constructionFavorites);
         }

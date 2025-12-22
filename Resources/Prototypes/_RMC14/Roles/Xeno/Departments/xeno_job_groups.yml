@@ -6,6 +6,7 @@
     name: role-timer-xeno-roles
     color: "#8b36a6"
     jobs:
+    - CCMXenoSwarmer
     - CMXenoBoiler
     - CMXenoBurrower
     - CMXenoCarrier
@@ -16,6 +17,7 @@
     - CMXenoParasite
     - CCMXenoRoyalParasite
     - CMXenoLarva
+    - CMXenoRoyalLarva
     - CMXenoLesserDrone
     - CMXenoLurker
     - CMXenoPraetorian
@@ -49,7 +51,9 @@
     name: role-timer-xeno-tier-three
     color: "#8b36a6"
     jobs:
+    - CCMXenoSwarmer
     - CMXenoBoiler
     - CMXenoCrusher
     - CMXenoPraetorian
     - CMXenoRavager
+    - CCMXenoRouny

@@ -16,6 +16,9 @@
 #    - CCMGuideRoleSwarmer
   - type: GhostRole
     name: ccm-job-name-xeno-swarmer
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.85
+    baseSprintSpeed: 3.25
   - type: Sprite
     sprite: _CCM14/Mobs/Xenonids/Swarmer/swarmer.rsi
   - type: MobState
@@ -25,9 +28,9 @@
     - Dead
   - type: MobThresholds
     thresholds:
-      0: Alive #Вождь баланс
-      700: Critical #Вождь баланс
-      800: Dead #Вождь баланс
+      0: Alive
+      650: Critical #Вождь баланс
+      750: Dead #Вождь баланс
   - type: Xeno
     role: CCMXenoSwarmer
     actionIds:
@@ -50,7 +53,7 @@
     hudOffset: -0.15,0.25
     unlockAt: 900 # 15 minutes
   - type: XenoConstruction
-    buildDelay: 1
+    buildDelay: 0.85
     canBuild:
     - CCMWallXenoWeedBoundResin
     - CCMWallXenoThickWeedBoundResin
@@ -72,7 +75,7 @@
   - type: TailWhirlwind
     damage:
       groups:
-        Brute: 25 #Вождь баланс
+        Brute: 20 #Вождь баланс
   - type: XenoLeap
     plasmaCost: 400
     delay: 0
@@ -80,13 +83,13 @@
     pheromonesMultiplier: 2.5
     pheroSuffix: hivelord
   - type: XenoPlasma
-    plasma: 1500 #Вождь баланс
-    maxPlasma: 1500 #Вождь баланс
+    plasma: 1350 #Вождь баланс
+    maxPlasma: 1350 #Вождь баланс
     plasmaRegenOnWeeds: 6.5
     plasmaTransferDelay: 0.75
   - type: CMArmor
-    xenoArmor: 20 #Вождь баланс
-    explosionArmor: 40 #Вождь баланс
+    xenoArmor: 15 #Вождь баланс
+    explosionArmor: 35 #Вождь баланс
   - type: MeleeWeapon
     damage:
       groups:
@@ -94,7 +97,7 @@
   - type: XenoTailStab
     tailDamage:
       groups:
-        Brute: 48  #Вождь баланс
+        Brute: 45  #Вождь баланс
   - type: Tackle
     max: 4
   - type: WhitelistPickup
@@ -130,7 +133,7 @@
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: warrior
   - type: IntelRecoverCorpseObjectiveOnDeath
-    value: 0.2 #Вождь баланс
+    value: 0.7
   - type: XenoInhands
     prefix: hivelord
   - type: FixedIdentity

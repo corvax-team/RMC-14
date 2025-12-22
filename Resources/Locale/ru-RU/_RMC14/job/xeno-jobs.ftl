@@ -36,6 +36,8 @@ cm-job-name-xeno-spitter = Плевальщик
 CMJobXenoSpitter = Плевальщик
 cm-job-name-xeno-warrior = Воин
 CMJobXenoWarrior = Воин
+ccm-job-name-xeno-swarmer = Роевик
+CCMXenoSwarmer = Роевик
 # TODO RMC14
 department-CMXeno = Ксенониды
 cm-department-Xeno-description = ""

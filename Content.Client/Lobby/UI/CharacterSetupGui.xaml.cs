@@ -105,8 +105,9 @@ namespace Content.Client.Lobby.UI
 
             foreach (var (slot, character) in _preferencesManager.Preferences!.Characters)
             {
-                // Only show Human characters
-                if (character is HumanoidCharacterProfile humanoidProfile && humanoidProfile.Species != "Human")
+                // Only show characters with allowed species
+                var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Nian", "Felinid", "Dwarf" };
+                if (character is HumanoidCharacterProfile humanoidProfile && !allowedSpecies.Contains(humanoidProfile.Species.Id))
                     continue;
 
                 numberOfFullSlots++;
