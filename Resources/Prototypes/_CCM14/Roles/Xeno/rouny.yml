@@ -1,8 +1,0 @@
-- type: job
-  parent: CMJobXenoBase
-  id: CCMXenoRouny
-  name: ccm-job-name-xeno-rouny
-  playTimeTracker: CCMJobXenoRouny
-
-- type: playTimeTracker
-  id: CCMJobXenoRouny
