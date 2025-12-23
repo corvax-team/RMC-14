@@ -6,11 +6,11 @@ meta:
   forkVersion: ""
   time: 12/17/2025 20:45:02
   entityCount: 191
-maps: []
+maps:
+- 191
 grids:
 - 1
-orphans:
-- 1
+orphans: []
 nullspace: []
 tilemap:
   0: Space
@@ -119,44 +119,6 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ImplicitRoof
-    - type: GasTileOverlay
-    - type: RadiationGridResistance
-    - type: ImplicitRoof
-    - type: Dropship
-      localHijackSound: !type:SoundPathSpecifier
-        path: /Audio/_RMC14/Machines/Shuttle/queen_alarm.ogg
-      marineHijackSound: !type:SoundPathSpecifier
-        params:
-          volume: -5
-        path: /Audio/_RMC14/Announcements/ARES/hijack.ogg
-      generalQuartersSound: !type:SoundPathSpecifier
-        path: /Audio/_RMC14/Announcements/ARES/GQfullcall.ogg
-      unidentifledlifesignsSound: !type:SoundPathSpecifier
-        path: /Audio/_RMC14/Announcements/ARES/unidentified_lifesigns.ogg
-      lastLocked: {}
-      attachmentPoints:
-      - 80
-      - 84
-      - 104
-      - 105
-      - 106
-      - 184
-      - 185
-      - 193
-      - 194
-      - 195
-      crashWarningSound: !type:SoundPathSpecifier
-        params:
-          volume: -5
-        path: /Audio/_RMC14/Announcements/ARES/dropship_emergency.ogg
-      crashSound: !type:SoundPathSpecifier
-        params:
-          volume: -1
-        path: /Audio/_RMC14/Dropship/dropship_crash.ogg
-      incomingSound: !type:SoundPathSpecifier
-        params:
-          volume: -1
-        path: /Audio/_RMC14/Dropship/dropship_incoming.ogg
     - type: AreaGrid
       labels: {}
       areaEntities: {}
