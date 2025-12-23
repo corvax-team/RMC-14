@@ -1,16 +1,16 @@
 meta:
   format: 7
-  category: Map
-  engineVersion: 264.0.2
+  category: Grid
+  engineVersion: 264.0.2-fix-physics
   forkId: ""
   forkVersion: ""
-  time: 12/17/2025 20:45:23
+  time: 09/22/2025 15:01:27
   entityCount: 200
-maps:
-- 21
+maps: []
 grids:
 - 1
-orphans: []
+orphans:
+- 1
 nullspace: []
 tilemap:
   0: Space
@@ -28,12 +28,11 @@ entities:
   entities:
   - uid: 1
     mapInit: true
-    paused: true
     components:
     - type: MetaData
       name: Нормандия
     - type: Transform
-      parent: 21
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -46,11 +45,11 @@ entities:
           version: 7
         0,-1:
           ind: 0,-1
-          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADTAAAAAAAAWgEAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0wAAAAAAANEAAAAAAABaAQAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANMAAAAAAADRAAAAAAAAWgEAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADTAAAAAAAA0QAAAAAAAFoBAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0wAAAAAAANEAAAAAAABaAQAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANMAAAAAAADRAAAAAAAAWgEAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADTAAAAAAAA0QAAAAAAAFoBAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA1QAAAAAAANgAAAAAAADRAAAAAAAAWgEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABaAQAAAAAAWgEAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0wAAAAAAANEAAAAAAABaAQAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANMAAAAAAADRAAAAAAAAWgEAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADTAAAAAAAA0QAAAAAAAFoBAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0wAAAAAAANEAAAAAAABaAQAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANMAAAAAAADRAAAAAAAAWgEAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADTAAAAAAAA0QAAAAAAAFoBAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA1QAAAAAAANgAAAAAAADRAAAAAAAAWgEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
           version: 7
         -1,-1:
           ind: -1,-1
-          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAWgEAAAAAANMAAAAAAADRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAAAAWgEAAAAAANEAAAAAAADTAAAAAAAA0QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAFoBAAAAAADRAAAAAAAA0wAAAAAAANEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAABaAQAAAAAA0QAAAAAAANMAAAAAAADRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAAAAWgEAAAAAANEAAAAAAADTAAAAAAAA0QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAFoBAAAAAADRAAAAAAAA0wAAAAAAANEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAABaAQAAAAAA0QAAAAAAANMAAAAAAADRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABaAQAAAAAA0QAAAAAAANQAAAAAAADVAAAAAAAA1QAAAAAAAA==
+          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAWgEAAAAAAFoBAAAAAABaAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAAAAWgEAAAAAANEAAAAAAADTAAAAAAAA0QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAFoBAAAAAADRAAAAAAAA0wAAAAAAANEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAABaAQAAAAAA0QAAAAAAANMAAAAAAADRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAAAAWgEAAAAAANEAAAAAAADTAAAAAAAA0QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAFoBAAAAAADRAAAAAAAA0wAAAAAAANEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAABaAQAAAAAA0QAAAAAAANMAAAAAAADRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABaAQAAAAAA0QAAAAAAANQAAAAAAADVAAAAAAAA1QAAAAAAAA==
           version: 7
     - type: Broadphase
     - type: Physics
@@ -91,68 +90,68 @@ entities:
           -1,1:
             0: 247
             1: 51200
-            2: 4096
+            17: 4096
           0,2:
             1: 1
-            3: 512
-            4: 13388
+            2: 512
+            21: 13388
           -1,2:
-            3: 512
+            2: 512
             1: 12
-            4: 57617
+            21: 57617
           -2,0:
             1: 2176
-            4: 9284
+            21: 9284
           -1,0:
             0: 30583
           -1,-1:
             0: 65254
-            5: 8
+            3: 8
           0,-2:
-            6: 16
-            7: 256
-            8: 4096
+            4: 16
+            5: 256
+            6: 4096
+            7: 32
+            8: 512
+            0: 8192
+            18: 1
+            21: 8
+          -1,-2:
             9: 32
             10: 512
             0: 8192
-            11: 1
-            4: 8
-          -1,-2:
-            12: 32
-            13: 512
-            0: 8192
-            14: 64
-            15: 1024
-            16: 16384
-            17: 128
-            18: 2048
-            19: 32768
-            20: 4
-            21: 8
+            11: 64
+            12: 1024
+            13: 16384
+            14: 128
+            15: 2048
+            16: 32768
+            19: 4
+            20: 8
           1,0:
-            4: 8465
+            21: 8465
           1,1:
-            4: 4386
+            21: 4386
           -2,1:
-            4: 17442
+            21: 17442
           -2,2:
-            4: 8
+            21: 8
           0,-3:
-            4: 53728
+            21: 53728
           1,-3:
-            4: 256
+            21: 256
           1,-1:
-            4: 4386
+            21: 4386
           1,-2:
-            4: 8737
+            21: 8737
           -2,-2:
-            4: 8748
+            21: 8748
           -2,-1:
-            4: 17442
+            21: 17442
           -2,-3:
-            4: 33920
+            21: 33920
           -1,-3:
-            4: 54320
+            21: 54320
         uniqueMixes:
         - volume: 2500
           temperature: 11.971821
@@ -185,39 +184,9 @@ entities:
           - 0
           - 0
         - volume: 2500
-          temperature: 293.15
-          moles:
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-        - volume: 2500
           moles:
           - 3.6551704E-08
           - 4.0741952E-08
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-        - volume: 2500
-          immutable: True
-          moles:
-          - 0
-          - 0
           - 0
           - 0
           - 0
@@ -308,21 +277,6 @@ entities:
           moles:
           - 8.3579445
           - 31.441753
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-          - 0
-        - volume: 2500
-          temperature: 11.97182
-          moles:
-          - 3.2648282
-          - 12.281958
           - 0
           - 0
           - 0
@@ -454,6 +408,36 @@ entities:
           - 0
           - 0
         - volume: 2500
+          temperature: 293.15
+          moles:
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+        - volume: 2500
+          temperature: 11.97182
+          moles:
+          - 3.2648282
+          - 12.281958
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+        - volume: 2500
           temperature: 11.971819
           moles:
           - 3.703631
@@ -473,6 +457,21 @@ entities:
           moles:
           - 6.223543
           - 23.412374
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+          - 0
+        - volume: 2500
+          immutable: True
+          moles:
+          - 0
+          - 0
           - 0
           - 0
           - 0
@@ -504,8 +503,12 @@ entities:
       - 84
       - 104
       - 105
+      - 106
       - 184
       - 185
+      - 193
+      - 194
+      - 195
       crashWarningSound: !type:SoundPathSpecifier
         params:
           volume: -5
@@ -523,418 +526,44 @@ entities:
       dnas: []
       fibers: []
       fingerprints: []
-    - type: AreaGrid
-      labels: {}
-      areaEntities: {}
-      colors:
-        0,0: '#6C6767D8'
-        0,1: '#6C6767D8'
-        0,2: '#6C6767D8'
-        0,3: '#6C6767D8'
-        0,4: '#6C6767D8'
-        0,5: '#6C6767D8'
-        0,6: '#EBE5E5EE'
-        0,7: '#6C6767D8'
-        0,8: '#6C6767D8'
-        0,9: '#EBE5E5EE'
-        0,10: '#EBE5E5EE'
-        1,0: '#6C6767D8'
-        1,1: '#6C6767D8'
-        1,2: '#6C6767D8'
-        1,3: '#6C6767D8'
-        1,4: '#6C6767D8'
-        1,5: '#6C6767D8'
-        1,6: '#EBE5E5EE'
-        1,7: '#EBE5E5EE'
-        1,8: '#EBE5E5EE'
-        1,9: '#EBE5E5EE'
-        1,10: '#EBE5E5EE'
-        2,0: '#6C6767D8'
-        2,1: '#6C6767D8'
-        2,2: '#6C6767D8'
-        2,3: '#6C6767D8'
-        2,4: '#6C6767D8'
-        2,5: '#6C6767D8'
-        2,6: '#EBE5E5EE'
-        2,7: '#6C6767D8'
-        3,0: '#EBE5E5EE'
-        3,1: '#6C6767D8'
-        3,2: '#6C6767D8'
-        3,3: '#EBE5E5EE'
-        3,4: '#EBE5E5EE'
-        3,5: '#EBE5E5EE'
-        3,6: '#EBE5E5EE'
-        3,7: '#EBE5E5EE'
-        4,3: '#EBE5E5EE'
-        4,4: '#EBE5E5EE'
-        4,5: '#EBE5E5EE'
-        -6,3: '#EBE5E5EE'
-        -6,4: '#EBE5E5EE'
-        -6,5: '#EBE5E5EE'
-        -5,0: '#EBE5E5EE'
-        -5,1: '#6C6767D8'
-        -5,2: '#6C6767D8'
-        -5,3: '#EBE5E5EE'
-        -5,4: '#EBE5E5EE'
-        -5,5: '#EBE5E5EE'
-        -5,6: '#EBE5E5EE'
-        -5,7: '#EBE5E5EE'
-        -4,0: '#6C6767D8'
-        -4,1: '#6C6767D8'
-        -4,2: '#6C6767D8'
-        -4,3: '#6C6767D8'
-        -4,4: '#6C6767D8'
-        -4,5: '#6C6767D8'
-        -4,6: '#EBE5E5EE'
-        -4,7: '#6C6767D8'
-        -3,0: '#6C6767D8'
-        -3,1: '#6C6767D8'
-        -3,2: '#6C6767D8'
-        -3,3: '#6C6767D8'
-        -3,4: '#6C6767D8'
-        -3,5: '#6C6767D8'
-        -3,6: '#EBE5E5EE'
-        -3,7: '#EBE5E5EE'
-        -3,8: '#EBE5E5EE'
-        -3,9: '#EBE5E5EE'
-        -3,10: '#EBE5E5EE'
-        -2,0: '#6C6767D8'
-        -2,1: '#6C6767D8'
-        -2,2: '#6C6767D8'
-        -2,3: '#6C6767D8'
-        -2,4: '#6C6767D8'
-        -2,5: '#6C6767D8'
-        -2,6: '#EBE5E5EE'
-        -2,7: '#6C6767D8'
-        -2,8: '#6C6767D8'
-        -2,9: '#EBE5E5EE'
-        -2,10: '#EBE5E5EE'
-        -1,0: '#EBE5E5EE'
-        -1,1: '#EBE5E5EE'
-        -1,2: '#EBE5E5EE'
-        -1,3: '#EBE5E5EE'
-        -1,4: '#EBE5E5EE'
-        -1,5: '#6C6767D8'
-        -1,6: '#6C6767D8'
-        -1,7: '#6C6767D8'
-        -1,8: '#6C6767D8'
-        -1,9: '#EBE5E5EE'
-        -1,10: '#EBE5E5EE'
-        0,-8: '#6C6767D8'
-        0,-7: '#6C6767D8'
-        0,-6: '#6C6767D8'
-        0,-5: '#6C6767D8'
-        0,-4: '#6C6767D8'
-        0,-3: '#6C6767D8'
-        0,-2: '#6C6767D8'
-        0,-1: '#6C6767D8'
-        1,-10: '#EBE5E5EE'
-        1,-9: '#EBE5E5EE'
-        1,-8: '#EBE5E5EE'
-        1,-7: '#6C6767D8'
-        1,-6: '#6C6767D8'
-        1,-5: '#6C6767D8'
-        1,-4: '#6C6767D8'
-        1,-3: '#6C6767D8'
-        1,-2: '#6C6767D8'
-        1,-1: '#6C6767D8'
-        2,-10: '#EBE5E5EE'
-        2,-8: '#EBE5E5EE'
-        2,-7: '#EBE5E5EE'
-        2,-6: '#EBE5E5EE'
-        2,-5: '#EBE5E5EE'
-        2,-4: '#EBE5E5EE'
-        2,-3: '#EBE5E5EE'
-        2,-2: '#EBE5E5EE'
-        2,-1: '#6C6767D8'
-        3,-10: '#EBE5E5EE'
-        3,-7: '#EBE5E5EE'
-        3,-6: '#EBE5E5EE'
-        3,-5: '#EBE5E5EE'
-        3,-4: '#EBE5E5EE'
-        3,-3: '#EBE5E5EE'
-        3,-2: '#EBE5E5EE'
-        3,-1: '#EBE5E5EE'
-        4,-7: '#EBE5E5EE'
-        4,-6: '#EBE5E5EE'
-        4,-5: '#EBE5E5EE'
-        4,-4: '#EBE5E5EE'
-        4,-3: '#EBE5E5EE'
-        -6,-7: '#EBE5E5EE'
-        -6,-6: '#EBE5E5EE'
-        -6,-5: '#EBE5E5EE'
-        -6,-4: '#EBE5E5EE'
-        -6,-3: '#EBE5E5EE'
-        -5,-10: '#EBE5E5EE'
-        -5,-7: '#EBE5E5EE'
-        -5,-6: '#EBE5E5EE'
-        -5,-5: '#EBE5E5EE'
-        -5,-4: '#EBE5E5EE'
-        -5,-3: '#EBE5E5EE'
-        -5,-2: '#EBE5E5EE'
-        -5,-1: '#EBE5E5EE'
-        -4,-10: '#EBE5E5EE'
-        -4,-8: '#EBE5E5EE'
-        -4,-7: '#EBE5E5EE'
-        -4,-6: '#EBE5E5EE'
-        -4,-5: '#EBE5E5EE'
-        -4,-4: '#EBE5E5EE'
-        -4,-3: '#EBE5E5EE'
-        -4,-2: '#EBE5E5EE'
-        -4,-1: '#6C6767D8'
-        -3,-10: '#EBE5E5EE'
-        -3,-9: '#EBE5E5EE'
-        -3,-8: '#EBE5E5EE'
-        -3,-7: '#6C6767D8'
-        -3,-6: '#6C6767D8'
-        -3,-5: '#6C6767D8'
-        -3,-4: '#6C6767D8'
-        -3,-3: '#6C6767D8'
-        -3,-2: '#6C6767D8'
-        -3,-1: '#6C6767D8'
-        -2,-8: '#6C6767D8'
-        -2,-7: '#6C6767D8'
-        -2,-6: '#6C6767D8'
-        -2,-5: '#6C6767D8'
-        -2,-4: '#6C6767D8'
-        -2,-3: '#6C6767D8'
-        -2,-2: '#6C6767D8'
-        -2,-1: '#6C6767D8'
-        -1,-8: '#6C6767D8'
-        -1,-7: '#6C6767D8'
-        -1,-6: '#6C6767D8'
-        -1,-5: '#6C6767D8'
-        -1,-4: '#6C6767D8'
-        -1,-3: '#6C6767D8'
-        -1,-2: '#6C6767D8'
-        -1,-1: '#6C6767D8'
-      areas:
-        -2,8: CCMAreaNormandy
-        -2,7: CCMAreaNormandy
-        -2,6: CCMAreaNormandy
-        -2,5: CCMAreaNormandy
-        -1,8: CCMAreaNormandy
-        -1,7: CCMAreaNormandy
-        -1,6: CCMAreaNormandy
-        -1,5: CCMAreaNormandy
-        0,8: CCMAreaNormandy
-        0,7: CCMAreaNormandy
-        0,6: CCMAreaNormandy
-        0,5: CCMAreaNormandy
-        3,6: CCMAreaNormandy
-        3,5: CCMAreaNormandy
-        3,4: CCMAreaNormandy
-        3,3: CCMAreaNormandy
-        3,2: CCMAreaNormandy
-        3,1: CCMAreaNormandy
-        3,0: CCMAreaNormandy
-        3,-1: CCMAreaNormandy
-        3,-2: CCMAreaNormandy
-        2,6: CCMAreaNormandy
-        2,5: CCMAreaNormandy
-        2,4: CCMAreaNormandy
-        2,3: CCMAreaNormandy
-        2,2: CCMAreaNormandy
-        2,1: CCMAreaNormandy
-        2,0: CCMAreaNormandy
-        2,-1: CCMAreaNormandy
-        2,-2: CCMAreaNormandy
-        1,6: CCMAreaNormandy
-        1,5: CCMAreaNormandy
-        1,4: CCMAreaNormandy
-        1,3: CCMAreaNormandy
-        1,2: CCMAreaNormandy
-        1,1: CCMAreaNormandy
-        1,0: CCMAreaNormandy
-        1,-1: CCMAreaNormandy
-        1,-2: CCMAreaNormandy
-        0,4: CCMAreaNormandy
-        0,3: CCMAreaNormandy
-        0,2: CCMAreaNormandy
-        0,1: CCMAreaNormandy
-        0,0: CCMAreaNormandy
-        0,-1: CCMAreaNormandy
-        0,-2: CCMAreaNormandy
-        4,-3: CCMAreaNormandy
-        4,-4: CCMAreaNormandy
-        4,-5: CCMAreaNormandy
-        4,-6: CCMAreaNormandy
-        4,-7: CCMAreaNormandy
-        3,-3: CCMAreaNormandy
-        3,-4: CCMAreaNormandy
-        3,-5: CCMAreaNormandy
-        3,-6: CCMAreaNormandy
-        3,-7: CCMAreaNormandy
-        2,-3: CCMAreaNormandy
-        2,-4: CCMAreaNormandy
-        2,-6: CCMAreaNormandy
-        2,-5: CCMAreaNormandy
-        2,-7: CCMAreaNormandy
-        1,-3: CCMAreaNormandy
-        1,-4: CCMAreaNormandy
-        1,-5: CCMAreaNormandy
-        1,-6: CCMAreaNormandy
-        1,-7: CCMAreaNormandy
-        0,-3: CCMAreaNormandy
-        0,-4: CCMAreaNormandy
-        0,-5: CCMAreaNormandy
-        0,-6: CCMAreaNormandy
-        0,-7: CCMAreaNormandy
-        -1,-3: CCMAreaNormandy
-        -1,-4: CCMAreaNormandy
-        -1,-5: CCMAreaNormandy
-        -1,-6: CCMAreaNormandy
-        -1,-7: CCMAreaNormandy
-        -2,-3: CCMAreaNormandy
-        -2,-4: CCMAreaNormandy
-        -2,-5: CCMAreaNormandy
-        -2,-6: CCMAreaNormandy
-        -2,-7: CCMAreaNormandy
-        -3,-3: CCMAreaNormandy
-        -3,-4: CCMAreaNormandy
-        -3,-5: CCMAreaNormandy
-        -3,-6: CCMAreaNormandy
-        -3,-7: CCMAreaNormandy
-        -4,-3: CCMAreaNormandy
-        -4,-4: CCMAreaNormandy
-        -4,-5: CCMAreaNormandy
-        -4,-6: CCMAreaNormandy
-        -4,-7: CCMAreaNormandy
-        -5,-3: CCMAreaNormandy
-        -5,-4: CCMAreaNormandy
-        -5,-5: CCMAreaNormandy
-        -5,-6: CCMAreaNormandy
-        -5,-7: CCMAreaNormandy
-        -6,-3: CCMAreaNormandy
-        -6,-4: CCMAreaNormandy
-        -6,-5: CCMAreaNormandy
-        -6,-6: CCMAreaNormandy
-        -6,-7: CCMAreaNormandy
-        -4,-8: CCMAreaNormandy
-        -3,-8: CCMAreaNormandy
-        -2,-8: CCMAreaNormandy
-        -1,-8: CCMAreaNormandy
-        0,-8: CCMAreaNormandy
-        1,-8: CCMAreaNormandy
-        2,-8: CCMAreaNormandy
-        1,-9: CCMAreaNormandy
-        1,-10: CCMAreaNormandy
-        2,-10: CCMAreaNormandy
-        3,-10: CCMAreaNormandy
-        -3,-10: CCMAreaNormandy
-        -4,-10: CCMAreaNormandy
-        -5,-10: CCMAreaNormandy
-        -3,-9: CCMAreaNormandy
-        -4,-2: CCMAreaNormandy
-        -4,-1: CCMAreaNormandy
-        -4,0: CCMAreaNormandy
-        -4,1: CCMAreaNormandy
-        -4,2: CCMAreaNormandy
-        -4,3: CCMAreaNormandy
-        -4,4: CCMAreaNormandy
-        -3,-2: CCMAreaNormandy
-        -3,-1: CCMAreaNormandy
-        -3,0: CCMAreaNormandy
-        -3,1: CCMAreaNormandy
-        -3,2: CCMAreaNormandy
-        -3,3: CCMAreaNormandy
-        -3,4: CCMAreaNormandy
-        -2,-2: CCMAreaNormandy
-        -2,-1: CCMAreaNormandy
-        -2,0: CCMAreaNormandy
-        -2,2: CCMAreaNormandy
-        -2,1: CCMAreaNormandy
-        -2,3: CCMAreaNormandy
-        -2,4: CCMAreaNormandy
-        -1,-2: CCMAreaNormandy
-        -1,-1: CCMAreaNormandy
-        -1,0: CCMAreaNormandy
-        -1,3: CCMAreaNormandy
-        -1,4: CCMAreaNormandy
-        -1,1: CCMAreaNormandy
-        -1,2: CCMAreaNormandy
-        -3,5: CCMAreaNormandy
-        -3,6: CCMAreaNormandy
-        -4,5: CCMAreaNormandy
-        -4,6: CCMAreaNormandy
-        -5,5: CCMAreaNormandy
-        -5,6: CCMAreaNormandy
-        -3,7: CCMAreaNormandy
-        -3,8: CCMAreaNormandy
-        -3,9: CCMAreaNormandy
-        -2,9: CCMAreaNormandy
-        -1,9: CCMAreaNormandy
-        0,9: CCMAreaNormandy
-        1,8: CCMAreaNormandy
-        1,9: CCMAreaNormandy
-        1,7: CCMAreaNormandy
-        2,7: CCMAreaNormandy
-        3,7: CCMAreaNormandy
-        -4,7: CCMAreaNormandy
-        -5,7: CCMAreaNormandy
-        -5,4: CCMAreaNormandy
-        -5,3: CCMAreaNormandy
-        -5,2: CCMAreaNormandy
-        -5,1: CCMAreaNormandy
-        -5,0: CCMAreaNormandy
-        -5,-1: CCMAreaNormandy
-        -5,-2: CCMAreaNormandy
-        -6,3: CCMAreaNormandy
-        -6,4: CCMAreaNormandy
-        -6,5: CCMAreaNormandy
-        4,3: CCMAreaNormandy
-        4,4: CCMAreaNormandy
-        4,5: CCMAreaNormandy
-        0,10: CCMAreaNormandy
-        -1,10: CCMAreaNormandy
-        -2,10: CCMAreaNormandy
-        -3,10: CCMAreaNormandy
-        1,10: CCMAreaNormandy
-  - uid: 21
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: GridTree
-    - type: Broadphase
-    - type: OccluderTree
 - proto: AtmosDeviceFanTiny
   entities:
   - uid: 2
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,2.5
       parent: 1
   - uid: 3
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,1.5
       parent: 1
   - uid: 4
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,2.5
       parent: 1
   - uid: 5
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,1.5
+      parent: 1
+- proto: CMComputerDropshipCamerasAlamo
+  entities:
+  - uid: 6
+    mapInit: true
+    components:
+    - type: Transform
+      pos: -1.5,8.5
       parent: 1
 - proto: CMComputerDropshipNavigation
   entities:
   - uid: 7
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -0.5,8.5
@@ -948,7 +577,6 @@ entities:
   entities:
   - uid: 8
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 0.5,8.5
@@ -957,11 +585,80 @@ entities:
       nextAnnounceAt: -286.8371288
       lastAnnounceAt: -286.8371288
       map: invalid
+- proto: CMLightFixtureAlwaysPowered
+  entities:
+  - uid: 9
+    mapInit: true
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -2.5,-4.5
+      parent: 1
+  - uid: 10
+    mapInit: true
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 1.5,-4.5
+      parent: 1
+  - uid: 11
+    mapInit: true
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,2.5
+      parent: 1
+  - uid: 12
+    mapInit: true
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -1.5,2.5
+      parent: 1
+  - uid: 13
+    mapInit: true
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,-0.5
+      parent: 1
+  - uid: 14
+    mapInit: true
+    components:
+    - type: Transform
+      pos: -3.5,-0.5
+      parent: 1
+  - uid: 15
+    mapInit: true
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -3.5,5.5
+      parent: 1
+  - uid: 16
+    mapInit: true
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,5.5
+      parent: 1
+  - uid: 17
+    mapInit: true
+    components:
+    - type: Transform
+      pos: 2.5,-0.5
+      parent: 1
+  - uid: 18
+    mapInit: true
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,8.5
+      parent: 1
 - proto: CMNormandyCockpit
   entities:
   - uid: 19
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -0.5,6.5
@@ -1021,31 +718,198 @@ entities:
     - DoorBolt
 - proto: CMNormandyDoorAft
   entities:
-  - uid: 22
+  - uid: 30
+    mapInit: true
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -0.5,-7.5
       parent: 1
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.49,-1.49
+            - 0.49,-1.49
+            - 0.49,1.49
+            - -0.49,1.49
+          mask:
+          - Impassable
+          - MidImpassable
+          - HighImpassable
+          - LowImpassable
+          layer:
+          - MidImpassable
+          - HighImpassable
+          - BulletImpassable
+          - InteractImpassable
+          - Opaque
+          density: 100
+          hard: True
+          restitution: 0
+          friction: 0.4
+        rmc_dropship_blocked:
+          shape: !type:PhysShapeCircle
+            radius: 0.49
+            position: 0,0
+          mask:
+          - DropshipImpassable
+          layer: []
+          density: 1
+          hard: True
+          restitution: 0
+          friction: 0.4
+    - type: DeviceNetwork
+      address: 0866-E10E
+      receiveFrequency: 1280
+    - type: XenoToggleChargingDamage
+      destroyDamage: 1000
+    - type: ContainerContainer
+      containers:
+        board: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 31
+    - type: DoorBolt
+      powered: True
+    - type: RMCPowerReceiver
+      mode: Active
 - proto: CMNormandyDoorPort
   entities:
-  - uid: 24
+  - uid: 23
+    mapInit: true
     components:
     - type: Transform
       pos: 3.5,1.5
       parent: 1
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.49,-0.49
+            - 0.49,-0.49
+            - 0.49,1.49
+            - -0.49,1.49
+          mask:
+          - Impassable
+          - MidImpassable
+          - HighImpassable
+          - LowImpassable
+          layer:
+          - MidImpassable
+          - HighImpassable
+          - BulletImpassable
+          - InteractImpassable
+          - Opaque
+          density: 100
+          hard: True
+          restitution: 0
+          friction: 0.4
+        rmc_dropship_blocked:
+          shape: !type:PhysShapeCircle
+            radius: 0.49
+            position: 0,0
+          mask:
+          - DropshipImpassable
+          layer: []
+          density: 1
+          hard: True
+          restitution: 0
+          friction: 0.4
+    - type: DeviceNetwork
+      address: 5586-270F
+      receiveFrequency: 1280
+    - type: DeviceLinkSource
+      lastSignals:
+        DoorStatus: False
+    - type: XenoToggleChargingDamage
+      destroyDamage: 1000
+    - type: ContainerContainer
+      containers:
+        board: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 24
+    - type: DoorBolt
+      powered: True
+    - type: RMCPowerReceiver
+      mode: Active
+    - type: Forensics
+      residues: []
+      dnas: []
+      fibers: []
+      fingerprints: []
 - proto: CMNormandyDoorStarboard
   entities:
-  - uid: 23
+  - uid: 21
+    mapInit: true
     components:
     - type: Transform
-      pos: -4.5,1.5
+      rot: 3.141592653589793 rad
+      pos: -4.5,2.5
       parent: 1
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.49,-0.49
+            - 0.49,-0.49
+            - 0.49,1.49
+            - -0.49,1.49
+          mask:
+          - Impassable
+          - MidImpassable
+          - HighImpassable
+          - LowImpassable
+          layer:
+          - MidImpassable
+          - HighImpassable
+          - BulletImpassable
+          - InteractImpassable
+          - Opaque
+          density: 100
+          hard: True
+          restitution: 0
+          friction: 0.4
+        rmc_dropship_blocked:
+          shape: !type:PhysShapeCircle
+            radius: 0.49
+            position: 0,0
+          mask:
+          - DropshipImpassable
+          layer: []
+          density: 1
+          hard: True
+          restitution: 0
+          friction: 0.4
+    - type: DeviceNetwork
+      address: 147E-0E86
+      receiveFrequency: 1280
+    - type: XenoToggleChargingDamage
+      destroyDamage: 1000
+    - type: ContainerContainer
+      containers:
+        board: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 22
+    - type: DoorBolt
+      powered: True
+    - type: RMCPowerReceiver
+      mode: Active
 - proto: CMNormandyWall1
   entities:
   - uid: 25
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,-9.5
@@ -1093,7 +957,6 @@ entities:
   entities:
   - uid: 26
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -2.5,-7.5
@@ -1139,21 +1002,55 @@ entities:
           friction: 0.4
 - proto: CMNormandyWall100
   entities:
-  - uid: 195
-    components:
-    - type: Transform
-      pos: -2.5,10.5
-      parent: 1
-- proto: CMNormandyWall101
-  entities:
   - uid: 27
+    mapInit: true
     components:
     - type: Transform
       pos: -1.5,10.5
       parent: 1
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.5,-0.5
+            - 0.5,-0.5
+            - 0.5,0.5
+            - -0.5,0.5
+          mask:
+          - Impassable
+          - MidImpassable
+          - HighImpassable
+          - LowImpassable
+          - InteractImpassable
+          layer:
+          - Impassable
+          - MidImpassable
+          - HighImpassable
+          - LowImpassable
+          - BulletImpassable
+          - InteractImpassable
+          - Opaque
+          density: 1000
+          hard: True
+          restitution: 0
+          friction: 0.4
+        rmc_dropship_blocked:
+          shape: !type:PhysShapeCircle
+            radius: 0.49
+            position: 0,0
+          mask:
+          - DropshipImpassable
+          layer: []
+          density: 1
+          hard: True
+          restitution: 0
+          friction: 0.4
+- proto: CMNormandyWall101
+  entities:
   - uid: 28
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -0.5,10.5
@@ -1197,23 +1094,57 @@ entities:
           hard: True
           restitution: 0
           friction: 0.4
+- proto: CMNormandyWall102
+  entities:
   - uid: 29
+    mapInit: true
     components:
     - type: Transform
       pos: 0.5,10.5
       parent: 1
-- proto: CMNormandyWall102
-  entities:
-  - uid: 194
-    components:
-    - type: Transform
-      pos: 1.5,10.5
-      parent: 1
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.5,-0.5
+            - 0.5,-0.5
+            - 0.5,0.5
+            - -0.5,0.5
+          mask:
+          - Impassable
+          - MidImpassable
+          - HighImpassable
+          - LowImpassable
+          - InteractImpassable
+          layer:
+          - Impassable
+          - MidImpassable
+          - HighImpassable
+          - LowImpassable
+          - BulletImpassable
+          - InteractImpassable
+          - Opaque
+          density: 1000
+          hard: True
+          restitution: 0
+          friction: 0.4
+        rmc_dropship_blocked:
+          shape: !type:PhysShapeCircle
+            radius: 0.49
+            position: 0,0
+          mask:
+          - DropshipImpassable
+          layer: []
+          density: 1
+          hard: True
+          restitution: 0
+          friction: 0.4
 - proto: CMNormandyWall14
   entities:
   - uid: 32
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 1.5,-7.5
@@ -1261,7 +1192,6 @@ entities:
   entities:
   - uid: 33
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 2.5,-7.5
@@ -1309,7 +1239,6 @@ entities:
   entities:
   - uid: 34
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -5.5,-6.5
@@ -1357,7 +1286,6 @@ entities:
   entities:
   - uid: 35
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,-6.5
@@ -1405,7 +1333,6 @@ entities:
   entities:
   - uid: 36
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -3.5,-6.5
@@ -1453,7 +1380,6 @@ entities:
   entities:
   - uid: 37
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 2.5,-6.5
@@ -1501,7 +1427,6 @@ entities:
   entities:
   - uid: 38
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -3.5,-9.5
@@ -1549,7 +1474,6 @@ entities:
   entities:
   - uid: 39
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,-6.5
@@ -1597,7 +1521,6 @@ entities:
   entities:
   - uid: 40
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 4.5,-6.5
@@ -1645,7 +1568,6 @@ entities:
   entities:
   - uid: 41
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -5.5,-5.5
@@ -1693,7 +1615,6 @@ entities:
   entities:
   - uid: 42
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,-5.5
@@ -1741,7 +1662,6 @@ entities:
   entities:
   - uid: 43
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -3.5,-5.5
@@ -1789,7 +1709,6 @@ entities:
   entities:
   - uid: 44
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 2.5,-5.5
@@ -1837,7 +1756,6 @@ entities:
   entities:
   - uid: 45
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,-5.5
@@ -1885,7 +1803,6 @@ entities:
   entities:
   - uid: 46
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 4.5,-5.5
@@ -1933,7 +1850,6 @@ entities:
   entities:
   - uid: 47
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -5.5,-4.5
@@ -1981,7 +1897,6 @@ entities:
   entities:
   - uid: 48
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,-4.5
@@ -2029,7 +1944,6 @@ entities:
   entities:
   - uid: 49
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -2.5,-9.5
@@ -2077,7 +1991,6 @@ entities:
   entities:
   - uid: 50
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -3.5,-4.5
@@ -2125,7 +2038,6 @@ entities:
   entities:
   - uid: 51
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 2.5,-4.5
@@ -2173,7 +2085,6 @@ entities:
   entities:
   - uid: 52
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,-4.5
@@ -2221,7 +2132,6 @@ entities:
   entities:
   - uid: 53
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 4.5,-4.5
@@ -2269,7 +2179,6 @@ entities:
   entities:
   - uid: 54
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -5.5,-3.5
@@ -2317,7 +2226,6 @@ entities:
   entities:
   - uid: 55
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,-3.5
@@ -2365,7 +2273,6 @@ entities:
   entities:
   - uid: 56
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -3.5,-3.5
@@ -2413,7 +2320,6 @@ entities:
   entities:
   - uid: 57
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 2.5,-3.5
@@ -2461,7 +2367,6 @@ entities:
   entities:
   - uid: 58
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,-3.5
@@ -2509,7 +2414,6 @@ entities:
   entities:
   - uid: 59
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 4.5,-3.5
@@ -2557,7 +2461,6 @@ entities:
   entities:
   - uid: 60
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 1.5,-9.5
@@ -2605,7 +2508,6 @@ entities:
   entities:
   - uid: 61
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -5.5,-2.5
@@ -2653,7 +2555,6 @@ entities:
   entities:
   - uid: 62
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,-2.5
@@ -2701,7 +2602,6 @@ entities:
   entities:
   - uid: 63
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -3.5,-2.5
@@ -2749,7 +2649,6 @@ entities:
   entities:
   - uid: 64
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 2.5,-2.5
@@ -2797,7 +2696,6 @@ entities:
   entities:
   - uid: 65
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,-2.5
@@ -2845,7 +2743,6 @@ entities:
   entities:
   - uid: 66
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 4.5,-2.5
@@ -2893,7 +2790,6 @@ entities:
   entities:
   - uid: 67
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,-1.5
@@ -2941,7 +2837,6 @@ entities:
   entities:
   - uid: 68
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -3.5,-1.5
@@ -2989,7 +2884,6 @@ entities:
   entities:
   - uid: 69
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 2.5,-1.5
@@ -3037,7 +2931,6 @@ entities:
   entities:
   - uid: 70
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,-1.5
@@ -3085,7 +2978,6 @@ entities:
   entities:
   - uid: 71
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 2.5,-9.5
@@ -3133,7 +3025,6 @@ entities:
   entities:
   - uid: 72
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,-0.5
@@ -3181,7 +3072,6 @@ entities:
   entities:
   - uid: 73
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,-0.5
@@ -3229,7 +3119,6 @@ entities:
   entities:
   - uid: 74
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,0.5
@@ -3277,7 +3166,6 @@ entities:
   entities:
   - uid: 75
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -0.5,0.5
@@ -3325,7 +3213,6 @@ entities:
   entities:
   - uid: 76
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,0.5
@@ -3373,7 +3260,6 @@ entities:
   entities:
   - uid: 77
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -3422,7 +3308,6 @@ entities:
   entities:
   - uid: 78
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -3471,7 +3356,6 @@ entities:
   entities:
   - uid: 79
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,-9.5
@@ -3519,7 +3403,6 @@ entities:
   entities:
   - uid: 80
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -5.5,3.5
@@ -3567,7 +3450,6 @@ entities:
   entities:
   - uid: 81
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,3.5
@@ -3615,7 +3497,6 @@ entities:
   entities:
   - uid: 82
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -0.5,3.5
@@ -3663,7 +3544,6 @@ entities:
   entities:
   - uid: 83
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,3.5
@@ -3711,7 +3591,6 @@ entities:
   entities:
   - uid: 84
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 4.5,3.5
@@ -3759,7 +3638,6 @@ entities:
   entities:
   - uid: 85
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -5.5,4.5
@@ -3807,7 +3685,6 @@ entities:
   entities:
   - uid: 86
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,4.5
@@ -3855,7 +3732,6 @@ entities:
   entities:
   - uid: 87
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -0.5,4.5
@@ -3903,7 +3779,6 @@ entities:
   entities:
   - uid: 88
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,4.5
@@ -3951,7 +3826,6 @@ entities:
   entities:
   - uid: 89
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -2.5,-8.5
@@ -3999,7 +3873,6 @@ entities:
   entities:
   - uid: 90
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 4.5,4.5
@@ -4047,7 +3920,6 @@ entities:
   entities:
   - uid: 91
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -5.5,5.5
@@ -4095,7 +3967,6 @@ entities:
   entities:
   - uid: 92
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,5.5
@@ -4143,7 +4014,6 @@ entities:
   entities:
   - uid: 93
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,5.5
@@ -4191,7 +4061,6 @@ entities:
   entities:
   - uid: 94
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 4.5,5.5
@@ -4239,7 +4108,6 @@ entities:
   entities:
   - uid: 95
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,6.5
@@ -4287,7 +4155,6 @@ entities:
   entities:
   - uid: 96
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -3.5,6.5
@@ -4335,7 +4202,6 @@ entities:
   entities:
   - uid: 97
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -2.5,6.5
@@ -4383,7 +4249,6 @@ entities:
   entities:
   - uid: 98
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -1.5,6.5
@@ -4431,7 +4296,6 @@ entities:
   entities:
   - uid: 99
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 1.5,-8.5
@@ -4479,7 +4343,6 @@ entities:
   entities:
   - uid: 100
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 0.5,6.5
@@ -4527,7 +4390,6 @@ entities:
   entities:
   - uid: 101
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 1.5,6.5
@@ -4575,7 +4437,6 @@ entities:
   entities:
   - uid: 102
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 2.5,6.5
@@ -4623,7 +4484,6 @@ entities:
   entities:
   - uid: 103
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,6.5
@@ -4671,7 +4531,6 @@ entities:
   entities:
   - uid: 104
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,7.5
@@ -4719,7 +4578,6 @@ entities:
   entities:
   - uid: 105
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,7.5
@@ -4765,23 +4623,16 @@ entities:
           friction: 0.4
 - proto: CMNormandyWall85
   entities:
-  - uid: 31
+  - uid: 106
+    mapInit: true
     components:
     - type: Transform
       pos: -3.5,7.5
-      parent: 1
-- proto: CMNormandyWall85Flipped
-  entities:
-  - uid: 30
-    components:
-    - type: Transform
-      pos: 2.5,7.5
       parent: 1
 - proto: CMNormandyWall86
   entities:
   - uid: 107
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -2.5,7.5
@@ -4829,7 +4680,6 @@ entities:
   entities:
   - uid: 108
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 1.5,7.5
@@ -4877,10 +4727,56 @@ entities:
   entities:
   - uid: 109
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -3.5,-7.5
+      parent: 1
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            radius: 0.01
+            vertices:
+            - -0.5,-0.5
+            - 0.5,-0.5
+            - 0.5,0.5
+            - -0.5,0.5
+          mask:
+          - Impassable
+          - MidImpassable
+          - HighImpassable
+          - LowImpassable
+          - InteractImpassable
+          layer:
+          - Impassable
+          - MidImpassable
+          - HighImpassable
+          - LowImpassable
+          - BulletImpassable
+          - InteractImpassable
+          - Opaque
+          density: 1000
+          hard: True
+          restitution: 0
+          friction: 0.4
+        rmc_dropship_blocked:
+          shape: !type:PhysShapeCircle
+            radius: 0.49
+            position: 0,0
+          mask:
+          - DropshipImpassable
+          layer: []
+          density: 1
+          hard: True
+          restitution: 0
+          friction: 0.4
+- proto: CMNormandyWall90
+  entities:
+  - uid: 110
+    mapInit: true
+    components:
+    - type: Transform
+      pos: 2.5,7.5
       parent: 1
     - type: Fixtures
       fixtures:
@@ -4925,7 +4821,6 @@ entities:
   entities:
   - uid: 111
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -2.5,8.5
@@ -4973,7 +4868,6 @@ entities:
   entities:
   - uid: 112
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 1.5,8.5
@@ -5021,7 +4915,6 @@ entities:
   entities:
   - uid: 113
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -2.5,9.5
@@ -5069,7 +4962,6 @@ entities:
   entities:
   - uid: 114
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -1.5,9.5
@@ -5117,7 +5009,6 @@ entities:
   entities:
   - uid: 115
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -0.5,9.5
@@ -5165,7 +5056,6 @@ entities:
   entities:
   - uid: 116
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 0.5,9.5
@@ -5213,7 +5103,6 @@ entities:
   entities:
   - uid: 117
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 1.5,9.5
@@ -5261,259 +5150,222 @@ entities:
   entities:
   - uid: 118
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 2.25,5.55
       parent: 1
   - uid: 119
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -3.75,3.55
       parent: 1
   - uid: 120
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -2.75,-5.45
       parent: 1
   - uid: 121
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -2.25,-3.45
       parent: 1
   - uid: 122
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 1.25,-5.45
       parent: 1
   - uid: 123
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 1.75,-3.45
       parent: 1
   - uid: 124
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 1.25,-3.45
       parent: 1
   - uid: 125
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -3.25,5.55
       parent: 1
   - uid: 126
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -3.75,5.55
       parent: 1
   - uid: 127
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -3.25,3.55
       parent: 1
   - uid: 128
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -2.75,-3.45
       parent: 1
   - uid: 129
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -2.25,-1.45
       parent: 1
   - uid: 130
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -2.75,-1.45
       parent: 1
   - uid: 131
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 1.25,-1.45
       parent: 1
   - uid: 132
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 1.75,-1.45
       parent: 1
   - uid: 133
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -2.25,-5.45
       parent: 1
   - uid: 134
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -3.75,0.55
       parent: 1
   - uid: 135
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -3.25,0.55
       parent: 1
   - uid: 136
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 0.25,4.55
       parent: 1
   - uid: 137
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 0.75,4.55
       parent: 1
   - uid: 138
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 0.25,2.55
       parent: 1
   - uid: 139
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 0.7825818,2.55
       parent: 1
   - uid: 140
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 0.25,0.55
       parent: 1
   - uid: 141
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 0.75,0.55
       parent: 1
   - uid: 142
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 2.75,0.55
       parent: 1
   - uid: 143
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 2.25,3.55
       parent: 1
   - uid: 144
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 2.25,0.55
       parent: 1
   - uid: 145
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 2.75,5.55
       parent: 1
   - uid: 146
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 2.75,3.55
       parent: 1
   - uid: 147
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 1.75,-5.45
       parent: 1
   - uid: 148
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -1.75,0.55
       parent: 1
   - uid: 149
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -1.25,0.55
       parent: 1
   - uid: 150
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -1.75,2.55
       parent: 1
   - uid: 151
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -1.25,2.55
       parent: 1
   - uid: 152
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -1.75,4.55
       parent: 1
   - uid: 153
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -1.25,4.55
       parent: 1
   - uid: 154
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5521,7 +5373,6 @@ entities:
       parent: 1
   - uid: 155
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5529,7 +5380,6 @@ entities:
       parent: 1
   - uid: 156
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5537,7 +5387,6 @@ entities:
       parent: 1
   - uid: 157
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5545,7 +5394,6 @@ entities:
       parent: 1
   - uid: 158
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5553,7 +5401,6 @@ entities:
       parent: 1
   - uid: 159
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5561,7 +5408,6 @@ entities:
       parent: 1
   - uid: 160
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5569,7 +5415,6 @@ entities:
       parent: 1
   - uid: 161
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5577,7 +5422,6 @@ entities:
       parent: 1
   - uid: 162
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5585,7 +5429,6 @@ entities:
       parent: 1
   - uid: 163
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5593,7 +5436,6 @@ entities:
       parent: 1
   - uid: 164
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5601,7 +5443,6 @@ entities:
       parent: 1
   - uid: 165
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5609,7 +5450,6 @@ entities:
       parent: 1
   - uid: 166
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5617,7 +5457,6 @@ entities:
       parent: 1
   - uid: 167
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5625,7 +5464,6 @@ entities:
       parent: 1
   - uid: 168
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5633,7 +5471,6 @@ entities:
       parent: 1
   - uid: 169
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5641,7 +5478,6 @@ entities:
       parent: 1
   - uid: 170
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5649,7 +5485,6 @@ entities:
       parent: 1
   - uid: 171
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5657,7 +5492,6 @@ entities:
       parent: 1
   - uid: 172
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5665,7 +5499,6 @@ entities:
       parent: 1
   - uid: 173
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5673,7 +5506,6 @@ entities:
       parent: 1
   - uid: 174
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5681,7 +5513,6 @@ entities:
       parent: 1
   - uid: 175
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5689,7 +5520,6 @@ entities:
       parent: 1
   - uid: 176
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5697,7 +5527,6 @@ entities:
       parent: 1
   - uid: 177
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5705,7 +5534,6 @@ entities:
       parent: 1
   - uid: 178
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5713,7 +5541,6 @@ entities:
       parent: 1
   - uid: 179
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5721,7 +5548,6 @@ entities:
       parent: 1
   - uid: 180
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5729,7 +5555,6 @@ entities:
       parent: 1
   - uid: 181
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5739,7 +5564,6 @@ entities:
   entities:
   - uid: 182
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5747,7 +5571,6 @@ entities:
       parent: 1
   - uid: 183
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5757,7 +5580,6 @@ entities:
   entities:
   - uid: 20
     mapInit: true
-    paused: true
     components:
     - type: Transform
       parent: 19
@@ -5765,46 +5587,61 @@ entities:
       nextSound: -286.8371288
     - type: Physics
       canCollide: False
-- proto: RMCComputerDropshipCamerasNormandy
-  entities:
-  - uid: 6
+  - uid: 22
+    mapInit: true
     components:
     - type: Transform
-      pos: -1.5,8.5
-      parent: 1
+      parent: 21
+    - type: EmitSoundOnCollide
+      nextSound: -286.8371288
+    - type: Physics
+      canCollide: False
+  - uid: 24
+    mapInit: true
+    components:
+    - type: Transform
+      parent: 23
+    - type: EmitSoundOnCollide
+      nextSound: -286.8371288
+    - type: Physics
+      canCollide: False
+  - uid: 31
+    mapInit: true
+    components:
+    - type: Transform
+      parent: 30
+    - type: EmitSoundOnCollide
+      nextSound: -286.8371288
+    - type: Physics
+      canCollide: False
 - proto: RMCDropshipDoorBlocker
   entities:
   - uid: 196
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -0.5,6.5
       parent: 1
   - uid: 197
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,1.5
       parent: 1
   - uid: 198
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,2.5
       parent: 1
   - uid: 199
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 3.5,2.5
       parent: 1
   - uid: 200
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -4.5,1.5
@@ -5813,7 +5650,6 @@ entities:
   entities:
   - uid: 184
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -5821,129 +5657,15 @@ entities:
       parent: 1
   - uid: 185
     mapInit: true
-    paused: true
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 4,-4
       parent: 1
-- proto: RMCLightFixtureAlwaysPowered
-  entities:
-  - uid: 9
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -2.5,-4.5
-      parent: 1
-  - uid: 10
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 1.5,-4.5
-      parent: 1
-  - uid: 11
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 0.5,2.5
-      parent: 1
-  - uid: 12
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -1.5,2.5
-      parent: 1
-  - uid: 13
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.5,-0.5
-      parent: 1
-  - uid: 14
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      pos: -3.5,-0.5
-      parent: 1
-  - uid: 15
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -3.5,5.5
-      parent: 1
-  - uid: 16
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.5,5.5
-      parent: 1
-  - uid: 17
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      pos: 2.5,-0.5
-      parent: 1
-  - uid: 18
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.5,8.5
-      parent: 1
-- proto: RMCMonitorCameraNormandy
-  entities:
-  - uid: 106
-    components:
-    - type: MetaData
-      name: Нормандия 3
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -2.5,-3.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 110
-    components:
-    - type: MetaData
-      name: Нормандия 2
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -3.5,4.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
-  - uid: 190
-    components:
-    - type: MetaData
-      name: Нормандия 1
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 2.5,4.5
-      parent: 1
-    - type: Fixtures
-      fixtures: {}
 - proto: RMCNanoMed
   entities:
   - uid: 186
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: -3.5,-2.5
@@ -5954,12 +5676,11 @@ entities:
       sections:
       - hasBoxes: False
         holidays: []
-        ranks: []
         jobs: []
         sharedSpecLimit: null
         entries:
-        - replaceSlot: null
-          linkedEntries: []
+        - giveMapBlip: null
+          giveIcon: null
           name: null
           amount: 2
           points: null
@@ -5967,18 +5688,17 @@ entities:
           recommended: False
           multiplier: 2
           max: 2
+          linkedEntries: []
           box: null
-          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
-          giveIcon: null
           id: CMTricordrazineAutoInjectorNoSkill
-        - replaceSlot: null
-          linkedEntries: []
+        - giveMapBlip: null
+          giveIcon: null
           name: null
           amount: 4
           points: null
@@ -5986,18 +5706,17 @@ entities:
           recommended: False
           multiplier: 4
           max: 4
+          linkedEntries: []
           box: null
-          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
-          giveIcon: null
           id: CMGauze10
-        - replaceSlot: null
-          linkedEntries: []
+        - giveMapBlip: null
+          giveIcon: null
           name: null
           amount: 4
           points: null
@@ -6005,15 +5724,14 @@ entities:
           recommended: False
           multiplier: 4
           max: 4
+          linkedEntries: []
           box: null
-          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
-          giveIcon: null
           id: CMOintment10
         takeOne: null
         takeAll: null
@@ -6021,12 +5739,11 @@ entities:
         name: Supplies
       - hasBoxes: False
         holidays: []
-        ranks: []
         jobs: []
         sharedSpecLimit: null
         entries:
-        - replaceSlot: null
-          linkedEntries: []
+        - giveMapBlip: null
+          giveIcon: null
           name: null
           amount: 3
           points: null
@@ -6034,15 +5751,14 @@ entities:
           recommended: False
           multiplier: 3
           max: 3
+          linkedEntries: []
           box: null
-          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
-          giveIcon: null
           id: CMHealthAnalyzer
         takeOne: null
         takeAll: null
@@ -6050,7 +5766,6 @@ entities:
         name: Utility
   - uid: 187
     mapInit: true
-    paused: true
     components:
     - type: Transform
       pos: 2.5,-2.5
@@ -6061,12 +5776,11 @@ entities:
       sections:
       - hasBoxes: False
         holidays: []
-        ranks: []
         jobs: []
         sharedSpecLimit: null
         entries:
-        - replaceSlot: null
-          linkedEntries: []
+        - giveMapBlip: null
+          giveIcon: null
           name: null
           amount: 2
           points: null
@@ -6074,18 +5788,17 @@ entities:
           recommended: False
           multiplier: 2
           max: 2
+          linkedEntries: []
           box: null
-          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
-          giveIcon: null
           id: CMTricordrazineAutoInjectorNoSkill
-        - replaceSlot: null
-          linkedEntries: []
+        - giveMapBlip: null
+          giveIcon: null
           name: null
           amount: 4
           points: null
@@ -6093,18 +5806,17 @@ entities:
           recommended: False
           multiplier: 4
           max: 4
+          linkedEntries: []
           box: null
-          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
-          giveIcon: null
           id: CMGauze10
-        - replaceSlot: null
-          linkedEntries: []
+        - giveMapBlip: null
+          giveIcon: null
           name: null
           amount: 4
           points: null
@@ -6112,15 +5824,14 @@ entities:
           recommended: False
           multiplier: 4
           max: 4
+          linkedEntries: []
           box: null
-          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
-          giveIcon: null
           id: CMOintment10
         takeOne: null
         takeAll: null
@@ -6128,12 +5839,11 @@ entities:
         name: Supplies
       - hasBoxes: False
         holidays: []
-        ranks: []
         jobs: []
         sharedSpecLimit: null
         entries:
-        - replaceSlot: null
-          linkedEntries: []
+        - giveMapBlip: null
+          giveIcon: null
           name: null
           amount: 3
           points: null
@@ -6141,15 +5851,14 @@ entities:
           recommended: False
           multiplier: 3
           max: 3
+          linkedEntries: []
           box: null
-          giveMapBlip: null
           boxAmount: null
           boxSlots: null
           giveSquadRoleName: null
           isAppendSquadRoleName: False
           givePrefix: null
           isAppendPrefix: False
-          giveIcon: null
           id: CMHealthAnalyzer
         takeOne: null
         takeAll: null
@@ -6159,7 +5868,6 @@ entities:
   entities:
   - uid: 188
     mapInit: true
-    paused: true
     components:
     - type: MetaData
       name: Нормандия
@@ -6177,11 +5885,39 @@ entities:
           ent: 189
     - type: Fixtures
       fixtures: {}
+- proto: RMCSurveillanceCameraAlmayer
+  entities:
+  - uid: 190
+    mapInit: true
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -2.5,-3.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 191
+    mapInit: true
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,4.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 192
+    mapInit: true
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -3.5,4.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
 - proto: RMCTelephone
   entities:
   - uid: 189
     mapInit: true
-    paused: true
     components:
     - type: Transform
       parent: 188
@@ -6193,19 +5929,22 @@ entities:
       canCollide: False
 - proto: RMCUtilityAttachmentPoint
   entities:
-  - uid: 191
+  - uid: 193
+    mapInit: true
     components:
     - type: Transform
-      pos: -0.5,-6.5
+      pos: -0.5,-2.5
       parent: 1
-  - uid: 192
+  - uid: 194
+    mapInit: true
     components:
     - type: Transform
       pos: -0.5,-4.5
       parent: 1
-  - uid: 193
+  - uid: 195
+    mapInit: true
     components:
     - type: Transform
-      pos: -0.5,-2.5
+      pos: -0.5,-6.5
       parent: 1
 ...
