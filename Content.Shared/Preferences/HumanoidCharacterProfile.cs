@@ -252,7 +252,7 @@ namespace Content.Shared.Preferences
             species ??= SharedHumanoidAppearanceSystem.DefaultSpecies;
 
             // Only allow specific species
-            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Nian", "Felinid", "Dwarf" };
+            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Moth", "Felinid", "Dwarf" };
             if (!allowedSpecies.Contains(species))
                 species = SharedHumanoidAppearanceSystem.DefaultSpecies;
 
@@ -286,7 +286,7 @@ namespace Content.Shared.Preferences
             var random = IoCManager.Resolve<IRobustRandom>();
 
             // Only allow specific species
-            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Nian", "Felinid", "Dwarf" };
+            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Moth", "Felinid", "Dwarf" };
             var species = random.Pick(prototypeManager
                 .EnumeratePrototypes<SpeciesPrototype>()
                 .Where(x => allowedSpecies.Contains(x.ID) && x.RoundStart)
@@ -301,7 +301,7 @@ namespace Content.Shared.Preferences
             species ??= SharedHumanoidAppearanceSystem.DefaultSpecies;
 
             // Only allow specific species
-            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Nian", "Felinid", "Dwarf" };
+            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Moth", "Felinid", "Dwarf" };
             if (!allowedSpecies.Contains(species))
                 species = "Human";
 
@@ -381,7 +381,7 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithSpecies(string species)
         {
             // Only allow specific species
-            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Nian", "Felinid", "Dwarf" };
+            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Moth", "Felinid", "Dwarf" };
             if (!allowedSpecies.Contains(species))
                 species = "Human";
             return new(this) { Species = species };
@@ -605,7 +605,7 @@ namespace Content.Shared.Preferences
             var compFactory = collection.Resolve<IComponentFactory>();
 
             // Only allow specific species - convert any disallowed species to Human
-            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Nian", "Felinid", "Dwarf" };
+            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Moth", "Felinid", "Dwarf" };
             if (!allowedSpecies.Contains(Species.Id) || !prototypeManager.TryIndex(Species, out var speciesPrototype) || speciesPrototype.RoundStart == false)
             {
                 Species = SharedHumanoidAppearanceSystem.DefaultSpecies; // Defaults to Human
