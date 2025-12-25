@@ -1,3 +1,4 @@
+using Content.Shared._Stories.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
@@ -17,6 +18,9 @@ public abstract partial class SharedGunSystem
             return;
 
         if (HasComp<XenoComponent>(args.Examiner))
+            return;
+
+        if (HasComp<VehicleGunComponent>(args.Examined)) // Stories-APC-Content-Tweak
             return;
 
         using (args.PushGroup(nameof(GunComponent)))
@@ -39,6 +43,9 @@ public abstract partial class SharedGunSystem
             return;
 
         if (HasComp<XenoComponent>(args.User))
+            return;
+            
+        if (HasComp<VehicleGunComponent>(args.Target)) // Stories-APC-Content-Tweak
             return;
 
         var nextMode = GetNextMode(component);

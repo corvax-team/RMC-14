@@ -14,7 +14,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
-namespace Content.Server._Stories.Vehicle;
+namespace Content.Server.Corvax.Vehicle;
 
 public sealed class VehicleSystem : EntitySystem
 {

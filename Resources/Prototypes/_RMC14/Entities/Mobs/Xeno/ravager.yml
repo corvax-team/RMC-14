@@ -17,14 +17,14 @@
   - type: GhostRole
     name: cm-job-name-xeno-ravager
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Ravager/ravager.rsi
+    sprite: _Stories/Mobs/Xenos/Ravager/ravager.rsi
     layers:
     - map: [ "enum.XenoVisualLayers.Base", "enum.XenoShardVisualLayers.Base" ]
       state: alive
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
     - map: [ "enum.RMCShieldVisuals.Base" ]
-      sprite: _RMC14/Effects/xeno_shields.rsi
+      sprite: _Stories/Effects/xeno_shields.rsi # Stories-Fixes
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Left" ]
       visible: false
@@ -152,6 +152,10 @@
     name: cm-job-name-xeno-ravager
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT3
+    # Stories-Vehicle-Content-Start
+  - type: VehicleDamageMultiplier
+    mult: 2
+    # Stories-Vehicle-Content-End
 
 - type: entity
   parent: RMCXenoRavagerBase
@@ -194,7 +198,7 @@
   suffix: Berserker
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Ravager/berserker_ravager.rsi
+    sprite: _Stories/Mobs/Xenos/Ravager/berserker_ravager.rsi
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -267,7 +271,7 @@
   suffix: Hedgehog
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Ravager/hedgehog_ravager.rsi
+    sprite: _Stories/Mobs/Xenos/Ravager/hedgehog_ravager.rsi
   - type: Xeno
     actionIds:
     - ActionXenoRest

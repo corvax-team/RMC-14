@@ -301,9 +301,15 @@
         crate: RMCCrateSupplyJanitor
       - cost: 2000
         crate: RMCCrateSuppliesCrayons
-#    - name: Vehicle Ammo
-#      entries: []
-    - name: Weapons
+    - name: Боеприпасы для техники
+      entries:
+      - cost: 3000
+        crate: STCrateBoxAmmoDualcannon
+      - cost: 2000
+        crate: STCrateBoxAmmoFrontalcannon
+      - cost: 2000
+        crate: STCrateBoxAmmoFlareLauncher
+    - name: Оружие
       entries:
       - cost: 4000
         crate: RMCCrateM54CE2
