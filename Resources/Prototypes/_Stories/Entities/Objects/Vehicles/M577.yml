@@ -1,5 +1,5 @@
 - type: entity
-  id: STVehicleM577APC
+  id: CMMVehicleM577APC
   name: M577 Armored Personnel Carrier
   description: "An M577 Armored Personnel Carrier. An armored transport with four big wheels. Entrances on the sides and back."
   components:
@@ -34,7 +34,7 @@
   - type: Sprite
     drawdepth: Mobs
     noRot: true
-    sprite: _Stories/Mobs/Vehicles/base_apc.rsi
+    sprite: _CCM/Mobs/Vehicles/base_apc.rsi
     layers:
     - map: [ "enum.VehicleVisualLayers.Base" ]
       state: apc_base
@@ -108,13 +108,13 @@
       st-vehicle-slot-primary:
         hardpointType: HDPT_PRIMARY
       st-vehicle-slot-special:
-        startingAttachables: [STMarineVehicleFiringPortWeaponOne, STMarineVehicleFiringPortWeaponTwo]
+        startingAttachables: [CCMMarineVehicleFiringPortWeaponOne, CCMMarineVehicleFiringPortWeaponTwo]
         hardpointType: HDPT_SPECIAL
         multiModule: true
         maxModules: 2
         hiddenInUI: true
   - type: VehicleAttachableHolderVisuals
-    rsi: _Stories/Mobs/Vehicles/base_apc.rsi
+    rsi: _CCM/Mobs/Vehicles/base_apc.rsi
     damagedState: damaged_frame
   - type: NpcFactionMember
     factions:
@@ -153,17 +153,17 @@
     bullet: 48
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_Stories/Interface/map_blips_large.rsi
+      sprite: /Textures/_CCM/Interface/map_blips_large.rsi
       state: apc
     background:
-      sprite: /Textures/_Stories/Interface/map_blips_large.rsi
+      sprite: /Textures/_CCM/Interface/map_blips_large.rsi
       state: empty_background
   - type: TacticalMapTracked
   - type: MarineMapTracked
 
 - type: entity
-  parent: STVehicleM577APC
-  id: STVehicleM577APCWithModules
+  parent: CCMVehicleM577APC
+  id: CCMVehicleM577APCWithModules
   name: M577 Armored Personnel Carrier
   description: "An M577 Armored Personnel Carrier. An armored transport with four big wheels. Entrances on the sides and back."
   suffix: "Modules"
@@ -171,19 +171,19 @@
   - type: VehicleAttachableHolder
     slots:
       st-vehicle-slot-treads:
-        startingAttachables: [STMarineVehicleM577Wheels]
+        startingAttachables: [CCMMarineVehicleM577Wheels]
         hardpointType: HDPT_TREADS
       st-vehicle-slot-support:
-        startingAttachables: [STMarineVehicleFlareLauncher]
+        startingAttachables: [CCMMarineVehicleFlareLauncher]
         hardpointType: HDPT_SUPPORT
       st-vehicle-slot-secondary:
-        startingAttachables: [STMarineVehicleFrontalCannon]
+        startingAttachables: [CCMMarineVehicleFrontalCannon]
         hardpointType: HDPT_SECONDARY
       st-vehicle-slot-primary:
-        startingAttachables: [STMarineVehicleDualcannon]
+        startingAttachables: [CCMMarineVehicleDualcannon]
         hardpointType: HDPT_PRIMARY
       st-vehicle-slot-special:
-        startingAttachables: [STMarineVehicleFiringPortWeaponOne, STMarineVehicleFiringPortWeaponTwo]
+        startingAttachables: [CCMMarineVehicleFiringPortWeaponOne, CCMMarineVehicleFiringPortWeaponTwo]
         hardpointType: HDPT_SPECIAL
         multiModule: true
         maxModules: 2

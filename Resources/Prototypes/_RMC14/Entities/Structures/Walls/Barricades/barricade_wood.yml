@@ -60,7 +60,7 @@
       types:
         Blunt: 22
   - type: RMCMesonsNonviewable
-    # Stories-Vehicle-Content-Start
+    # Corvax-Vehicle-Content-Start
   - type: VehicleStructureTarget
     minimumClassToDestroy: Weak
-    # Stories-Vehicle-Content-End
+    # Corvax-Vehicle-Content-End

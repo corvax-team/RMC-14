@@ -77,7 +77,7 @@ public sealed class PopupOverlay : Overlay
 
         var matrix = args.ViewportControl.GetWorldToScreenMatrix();
         var ourEntity = _playerMgr.LocalEntity;
-        // Stories-Popup-Fix-Start
+        // Corvax-Popup-Fix-Start
         EntityUid? eyeTarget = null;
         if (ourEntity != null && 
             _entManager.TryGetComponent<EyeComponent>(ourEntity.Value, out var eyeComp) &&
@@ -98,12 +98,12 @@ public sealed class PopupOverlay : Overlay
                 ourPos = viewPos.Position;
             }
         }
-        // Stories-Popup-Fix-End
+        // Corvax-Popup-Fix-End
 
         foreach (var popup in _popup.WorldLabels)
         {
             if (popup.InitialPos.EntityId != EntityUid.Invalid && 
-                !_entManager.EntityExists(popup.InitialPos.EntityId)) // Stories-Popup-Fix-End
+                !_entManager.EntityExists(popup.InitialPos.EntityId)) // Corvax-Popup-Fix-End
             {
                 continue;
             }
@@ -115,17 +115,17 @@ public sealed class PopupOverlay : Overlay
 
             var distance = (mapPos.Position - ourPos).Length();
 
-            if (!args.WorldBounds.Contains(mapPos.Position)) // Stories-Popup-Fix
+            if (!args.WorldBounds.Contains(mapPos.Position)) // Corvax-Popup-Fix
                 continue;
 
-            // Stories-Popup-Fix-Start    
+            // Corvax-Popup-Fix-Start    
             if (viewEntity != null && _entManager.EntityExists(viewEntity.Value))
             {
                 if (!_examine.InRangeUnOccluded(viewPos, mapPos, distance,
                         e => e == popup.InitialPos.EntityId || e == viewEntity, entMan: _entManager))
                     continue;
             }
-            // Stories-Popup-Fix-End
+            // Corvax-Popup-Fix-End
             var pos = Vector2.Transform(mapPos.Position, matrix);
             _controller.DrawPopup(popup, worldHandle, pos, scale);
         }

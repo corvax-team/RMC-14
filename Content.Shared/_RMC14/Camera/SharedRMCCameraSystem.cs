@@ -199,7 +199,7 @@ public abstract class SharedRMCCameraSystem : EntitySystem
 
         Refresh(ent, old);
     }
-    // Stories-Vehicle-Content-Start
+    // Corvax-Vehicle-Content-Start
     public void SetCameraActive(EntityUid camera, bool active, RMCCameraComponent? cameraComp = null)
     {
         if (!Resolve(camera, ref cameraComp))
@@ -224,7 +224,8 @@ public abstract class SharedRMCCameraSystem : EntitySystem
             }
         }
     }
-    // Stories-Vehicle-Content-End
+    // Corvax-Vehicle-Content-End
+
     protected virtual void Refresh(Entity<RMCCameraComputerComponent> ent, EntityUid? old)
     {
         Dirty(ent);

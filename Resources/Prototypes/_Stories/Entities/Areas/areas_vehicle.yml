@@ -1,6 +1,6 @@
 ﻿- type: entity
   parent: RMCAreaBase
-  id: STVehicleArea
+  id: CCMVehicleArea
   name: Vehicle
   components:
   - type: Sprite

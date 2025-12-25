@@ -58,7 +58,7 @@
   - type: RMCMesonsNonviewable
   - type: VehicleStructureTarget
     momentumLossFactor: 0
-    DamageToVehicleOnFail: 0
+    damageToVehicleOnFail: 0
 
 - type: entity
   parent: BaseItem

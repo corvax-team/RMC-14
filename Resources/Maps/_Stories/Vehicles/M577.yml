@@ -15,42 +15,42 @@ nullspace: []
 tilemap:
   4: Space
   3: CMShuttleTileInvisible
-  19: STVehicleFloor12
-  30: STVehicleFloor13
-  36: STVehicleFloor21
-  39: STVehicleFloor23
-  32: STVehicleFloor24
-  0: STVehicleFloor25
-  22: STVehicleFloor27
-  12: STVehicleFloor35
-  8: STVehicleFloor38
-  9: STVehicleFloor39
-  26: STVehicleFloor4
-  11: STVehicleFloor40
-  1: STVehicleFloor41
-  27: STVehicleFloor42
-  23: STVehicleFloor43
-  28: STVehicleFloor46
-  13: STVehicleFloor57
-  6: STVehicleFloor58
-  20: STVehicleFloor59
-  24: STVehicleFloor6
-  40: STVehicleFloor64
-  42: STVehicleFloor68
-  41: STVehicleFloor69
-  34: STVehicleFloor70
-  31: STVehicleFloor8
-  17: STVehicleFloor83
-  15: STVehicleFloor85
-  16: STVehicleFloor86
-  14: STVehicleFloor87
-  29: STVehicleFloor88
-  25: STVehicleFloor89
-  35: STVehicleFloor92
-  38: STVehicleFloor93
-  33: STVehicleFloor95
-  37: STVehicleFloor96
-  43: STVehicleFloor97
+  19: CCMVehicleFloor12
+  30: CCMVehicleFloor13
+  36: CCMVehicleFloor21
+  39: CCMVehicleFloor23
+  32: CCMVehicleFloor24
+  0: CCMVehicleFloor25
+  22: CCMVehicleFloor27
+  12: CCMVehicleFloor35
+  8: CCMVehicleFloor38
+  9: CCMVehicleFloor39
+  26: CCMVehicleFloor4
+  11: CCMVehicleFloor40
+  1: CCMVehicleFloor41
+  27: CCMVehicleFloor42
+  23: CCMVehicleFloor43
+  28: CCMVehicleFloor46
+  13: CCMVehicleFloor57
+  6: CCMVehicleFloor58
+  20: CCMVehicleFloor59
+  24: CCMVehicleFloor6
+  40: CCMVehicleFloor64
+  42: CCMVehicleFloor68
+  41: CCMVehicleFloor69
+  34: CCMVehicleFloor70
+  31: CCMVehicleFloor8
+  17: CCMVehicleFloor83
+  15: CCMVehicleFloor85
+  16: CCMVehicleFloor86
+  14: CCMVehicleFloor87
+  29: CCMVehicleFloor88
+  25: CCMVehicleFloor89
+  35: CCMVehicleFloor92
+  38: CCMVehicleFloor93
+  33: CCMVehicleFloor95
+  37: CCMVehicleFloor96
+  43: CCMVehicleFloor97
 entities:
 - proto: ""
   entities:
@@ -109,86 +109,86 @@ entities:
       areaEntities: {}
       colors: {}
       areas:
-        -5,4: STVehicleArea
-        -5,3: STVehicleArea
-        -5,2: STVehicleArea
-        -5,1: STVehicleArea
-        -5,0: STVehicleArea
-        -5,-1: STVehicleArea
-        -5,-2: STVehicleArea
-        -5,-3: STVehicleArea
-        -4,4: STVehicleArea
-        -4,3: STVehicleArea
-        -4,2: STVehicleArea
-        -4,0: STVehicleArea
-        -4,1: STVehicleArea
-        -4,-1: STVehicleArea
-        -4,-2: STVehicleArea
-        -4,-3: STVehicleArea
-        -3,4: STVehicleArea
-        -3,3: STVehicleArea
-        -3,2: STVehicleArea
-        -3,1: STVehicleArea
-        -3,-1: STVehicleArea
-        -3,-2: STVehicleArea
-        -3,-3: STVehicleArea
-        -2,4: STVehicleArea
-        -2,3: STVehicleArea
-        -2,2: STVehicleArea
-        -2,1: STVehicleArea
-        -2,0: STVehicleArea
-        -2,-1: STVehicleArea
-        -2,-2: STVehicleArea
-        -2,-3: STVehicleArea
-        -1,4: STVehicleArea
-        -1,3: STVehicleArea
-        -1,2: STVehicleArea
-        -1,1: STVehicleArea
-        -1,0: STVehicleArea
-        -1,-1: STVehicleArea
-        -1,-2: STVehicleArea
-        -1,-3: STVehicleArea
-        0,4: STVehicleArea
-        0,3: STVehicleArea
-        0,2: STVehicleArea
-        0,1: STVehicleArea
-        0,0: STVehicleArea
-        0,-1: STVehicleArea
-        0,-2: STVehicleArea
-        0,-3: STVehicleArea
-        1,4: STVehicleArea
-        1,3: STVehicleArea
-        1,2: STVehicleArea
-        1,1: STVehicleArea
-        1,0: STVehicleArea
-        1,-1: STVehicleArea
-        1,-2: STVehicleArea
-        1,-3: STVehicleArea
-        2,4: STVehicleArea
-        2,3: STVehicleArea
-        2,2: STVehicleArea
-        2,1: STVehicleArea
-        2,0: STVehicleArea
-        2,-1: STVehicleArea
-        2,-2: STVehicleArea
-        2,-3: STVehicleArea
-        3,4: STVehicleArea
-        3,3: STVehicleArea
-        3,2: STVehicleArea
-        3,1: STVehicleArea
-        3,0: STVehicleArea
-        3,-1: STVehicleArea
-        3,-2: STVehicleArea
-        3,-3: STVehicleArea
-        4,4: STVehicleArea
-        4,3: STVehicleArea
-        4,2: STVehicleArea
-        4,1: STVehicleArea
-        4,0: STVehicleArea
-        4,-1: STVehicleArea
-        4,-2: STVehicleArea
-        4,-3: STVehicleArea
-        -3,0: STVehicleArea
+        -5,4: CCMVehicleArea
+        -5,3: CCMVehicleArea
+        -5,2: CCMVehicleArea
+        -5,1: CCMVehicleArea
+        -5,0: CCMVehicleArea
+        -5,-1: CCMVehicleArea
+        -5,-2: CCMVehicleArea
+        -5,-3: CCMVehicleArea
+        -4,4: CCMVehicleArea
+        -4,3: CCMVehicleArea
+        -4,2: CCMVehicleArea
+        -4,0: CCMVehicleArea
+        -4,1: CCMVehicleArea
+        -4,-1: CCMVehicleArea
+        -4,-2: CCMVehicleArea
+        -4,-3: CCMVehicleArea
+        -3,4: CCMVehicleArea
+        -3,3: CCMVehicleArea
+        -3,2: CCMVehicleArea
+        -3,1: CCMVehicleArea
+        -3,-1: CCMVehicleArea
+        -3,-2: CCMVehicleArea
+        -3,-3: CCMVehicleArea
+        -2,4: CCMVehicleArea
+        -2,3: CCMVehicleArea
+        -2,2: CCMVehicleArea
+        -2,1: CCMVehicleArea
+        -2,0: CCMVehicleArea
+        -2,-1: CCMVehicleArea
+        -2,-2: CCMVehicleArea
+        -2,-3: CCMVehicleArea
+        -1,4: CCMVehicleArea
+        -1,3: CCMVehicleArea
+        -1,2: CCMVehicleArea
+        -1,1: CCMVehicleArea
+        -1,0: CCMVehicleArea
+        -1,-1: CCMVehicleArea
+        -1,-2: CCMVehicleArea
+        -1,-3: CCMVehicleArea
+        0,4: CCMVehicleArea
+        0,3: CCMVehicleArea
+        0,2: CCMVehicleArea
+        0,1: CCMVehicleArea
+        0,0: CCMVehicleArea
+        0,-1: CCMVehicleArea
+        0,-2: CCMVehicleArea
+        0,-3: CCMVehicleArea
+        1,4: CCMVehicleArea
+        1,3: CCMVehicleArea
+        1,2: CCMVehicleArea
+        1,1: CCMVehicleArea
+        1,0: CCMVehicleArea
+        1,-1: CCMVehicleArea
+        1,-2: CCMVehicleArea
+        1,-3: CCMVehicleArea
+        2,4: CCMVehicleArea
+        2,3: CCMVehicleArea
+        2,2: CCMVehicleArea
+        2,1: CCMVehicleArea
+        2,0: CCMVehicleArea
+        2,-1: CCMVehicleArea
+        2,-2: CCMVehicleArea
+        2,-3: CCMVehicleArea
+        3,4: CCMVehicleArea
+        3,3: CCMVehicleArea
+        3,2: CCMVehicleArea
+        3,1: CCMVehicleArea
+        3,0: CCMVehicleArea
+        3,-1: CCMVehicleArea
+        3,-2: CCMVehicleArea
+        3,-3: CCMVehicleArea
+        4,4: CCMVehicleArea
+        4,3: CCMVehicleArea
+        4,2: CCMVehicleArea
+        4,1: CCMVehicleArea
+        4,0: CCMVehicleArea
+        4,-1: CCMVehicleArea
+        4,-2: CCMVehicleArea
+        4,-3: CCMVehicleArea
+        -3,0: CCMVehicleArea
 - proto: CMSeatPassenger
   entities:
   - uid: 35
@@ -279,7 +279,7 @@ entities:
     - type: Transform
       pos: -0.8884474,2.8350697
       parent: 1
-- proto: STVehicle1stSupportGunnerSeat
+- proto: CCMVehicle1stSupportGunnerSeat
   entities:
   - uid: 32
     components:
@@ -287,14 +287,14 @@ entities:
       rot: 3.141592653589793 rad
       pos: -0.5,2.5
       parent: 1
-- proto: STVehicle2stSupportGunnerSeat
+- proto: CCMVehicle2stSupportGunnerSeat
   entities:
   - uid: 31
     components:
     - type: Transform
       pos: -0.5,-1.5
       parent: 1
-- proto: STVehicleAPCLocker
+- proto: CCMVehicleAPCLocker
   entities:
   - uid: 21
     components:
@@ -303,7 +303,7 @@ entities:
       parent: 1
     missingComponents:
     - Anchorable
-- proto: STVehicleAPCWall17
+- proto: CCMVehicleAPCWall17
   entities:
   - uid: 22
     components:
@@ -312,7 +312,7 @@ entities:
       parent: 1
     - type: Occluder
       enabled: False
-- proto: STVehicleAPCWall23
+- proto: CCMVehicleAPCWall23
   entities:
   - uid: 26
     components:
@@ -321,70 +321,70 @@ entities:
       parent: 1
     - type: Occluder
       enabled: False
-- proto: STVehicleAPCWall29
+- proto: CCMVehicleAPCWall29
   entities:
   - uid: 29
     components:
     - type: Transform
       pos: 1.5,3.5
       parent: 1
-- proto: STVehicleAPCWall31
+- proto: CCMVehicleAPCWall31
   entities:
   - uid: 25
     components:
     - type: Transform
       pos: 0.5,3.5
       parent: 1
-- proto: STVehicleAPCWall32
+- proto: CCMVehicleAPCWall32
   entities:
   - uid: 50
     components:
     - type: Transform
       pos: 0.5,-1.5
       parent: 1
-- proto: STVehicleAPCWall37
+- proto: CCMVehicleAPCWall37
   entities:
   - uid: 8
     components:
     - type: Transform
       pos: 3.5,-1.5
       parent: 1
-- proto: STVehicleAPCWall38
+- proto: CCMVehicleAPCWall38
   entities:
   - uid: 3
     components:
     - type: Transform
       pos: 3.5,-0.5
       parent: 1
-- proto: STVehicleAPCWall39
+- proto: CCMVehicleAPCWall39
   entities:
   - uid: 5
     components:
     - type: Transform
       pos: 3.5,0.5
       parent: 1
-- proto: STVehicleAPCWall40
+- proto: CCMVehicleAPCWall40
   entities:
   - uid: 6
     components:
     - type: Transform
       pos: 3.5,1.5
       parent: 1
-- proto: STVehicleAPCWall41
+- proto: CCMVehicleAPCWall41
   entities:
   - uid: 4
     components:
     - type: Transform
       pos: 3.5,2.5
       parent: 1
-- proto: STVehicleAPCWall42
+- proto: CCMVehicleAPCWall42
   entities:
   - uid: 2
     components:
     - type: Transform
       pos: 3.5,3.5
       parent: 1
-- proto: STVehicleAPCWall43
+- proto: CCMVehicleAPCWall43
   entities:
   - uid: 7
     components:
@@ -396,7 +396,7 @@ entities:
     - type: Transform
       pos: 1.5,-1.5
       parent: 1
-- proto: STVehicleAPCWall44
+- proto: CCMVehicleAPCWall44
   entities:
   - uid: 9
     components:
@@ -408,14 +408,14 @@ entities:
     - type: Transform
       pos: -1.5,-1.5
       parent: 1
-- proto: STVehicleAPCWall45
+- proto: CCMVehicleAPCWall45
   entities:
   - uid: 34
     components:
     - type: Transform
       pos: -0.5,-1.5
       parent: 1
-- proto: STVehicleAPCWall45Alt
+- proto: CCMVehicleAPCWall45Alt
   entities:
   - uid: 54
     components:
@@ -423,49 +423,49 @@ entities:
       rot: 3.141592653589793 rad
       pos: -0.5,3.5
       parent: 1
-- proto: STVehicleAPCWall46
+- proto: CCMVehicleAPCWall46
   entities:
   - uid: 13
     components:
     - type: Transform
       pos: -3.5,-1.5
       parent: 1
-- proto: STVehicleAPCWall47
+- proto: CCMVehicleAPCWall47
   entities:
   - uid: 12
     components:
     - type: Transform
       pos: -3.5,-0.5
       parent: 1
-- proto: STVehicleAPCWall48
+- proto: CCMVehicleAPCWall48
   entities:
   - uid: 14
     components:
     - type: Transform
       pos: -3.5,0.5
       parent: 1
-- proto: STVehicleAPCWall49
+- proto: CCMVehicleAPCWall49
   entities:
   - uid: 15
     components:
     - type: Transform
       pos: -3.5,1.5
       parent: 1
-- proto: STVehicleAPCWall50
+- proto: CCMVehicleAPCWall50
   entities:
   - uid: 17
     components:
     - type: Transform
       pos: -3.5,2.5
       parent: 1
-- proto: STVehicleAPCWall51
+- proto: CCMVehicleAPCWall51
   entities:
   - uid: 16
     components:
     - type: Transform
       pos: -3.5,3.5
       parent: 1
-- proto: STVehicleAPCWall55
+- proto: CCMVehicleAPCWall55
   entities:
   - uid: 23
     components:
@@ -486,49 +486,49 @@ entities:
       parent: 1
     - type: Occluder
       enabled: False
-- proto: STVehicleAPCWall62
+- proto: CCMVehicleAPCWall62
   entities:
   - uid: 49
     components:
     - type: Transform
       pos: -0.5,-1.5
       parent: 1
-- proto: STVehicleAPCWall65
+- proto: CCMVehicleAPCWall65
   entities:
   - uid: 19
     components:
     - type: Transform
       pos: -2.5,3.5
       parent: 1
-- proto: STVehicleAPCWall66
+- proto: CCMVehicleAPCWall66
   entities:
   - uid: 18
     components:
     - type: Transform
       pos: -1.5,3.5
       parent: 1
-- proto: STVehicleAPCWall67
+- proto: CCMVehicleAPCWall67
   entities:
   - uid: 52
     components:
     - type: Transform
       pos: 2.5,3.5
       parent: 1
-- proto: STVehicleAPCWall68
+- proto: CCMVehicleAPCWall68
   entities:
   - uid: 33
     components:
     - type: Transform
       pos: 1.5,3.5
       parent: 1
-- proto: STVehicleAPCWall69
+- proto: CCMVehicleAPCWall69
   entities:
   - uid: 53
     components:
     - type: Transform
       pos: 0.5,-0.5
       parent: 1
-- proto: STVehicleAPCWall70
+- proto: CCMVehicleAPCWall70
   entities:
   - uid: 55
     components:
@@ -690,7 +690,7 @@ entities:
     - type: Transform
       pos: -4.5,-2.5
       parent: 1
-- proto: STVehicleArmorDriverSeat
+- proto: CCMVehicleArmorDriverSeat
   entities:
   - uid: 28
     components:
@@ -698,7 +698,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 2.5,-0.5
       parent: 1
-- proto: STVehicleArmorGunnerSeat
+- proto: CCMVehicleArmorGunnerSeat
   entities:
   - uid: 20
     components:
@@ -706,7 +706,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 2.5,1.5
       parent: 1
-- proto: STVehicleEnterpoint
+- proto: CCMVehicleEnterpoint
   entities:
   - uid: 95
     components:
@@ -729,7 +729,7 @@ entities:
       parent: 1
     - type: VehicleEnterPoint
       direction: Back
-- proto: STVehicleInteriorCamera
+- proto: CCMVehicleInteriorCamera
   entities:
   - uid: 87
     components:
@@ -738,7 +738,7 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
-- proto: STVehicleInteriorExtinguisherCabinet
+- proto: CCMVehicleInteriorExtinguisherCabinet
   entities:
   - uid: 89
     components:
@@ -747,7 +747,7 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
-- proto: STVehicleInteriorLight
+- proto: CCMVehicleInteriorLight
   entities:
   - uid: 88
     components:
@@ -757,14 +757,14 @@ entities:
       parent: 1
     - type: WarpPoint
       location: M577 бронетранспортёр
-- proto: STVehicleInteriorNanoMed
+- proto: CCMVehicleInteriorNanoMed
   entities:
   - uid: 90
     components:
     - type: Transform
       pos: -2.25,2.5
       parent: 1
-- proto: STVehicleInteriorViewport
+- proto: CCMVehicleInteriorViewport
   entities:
   - uid: 91
     components:
@@ -789,7 +789,7 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
-- proto: STVehicleInteriorWallMountPhone
+- proto: CCMVehicleInteriorWallMountPhone
   entities:
   - uid: 30
     components:

@@ -172,7 +172,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
 
     protected override void DoDamageEffect(List<EntityUid> targets, EntityUid? user, TransformComponent targetXform)
     {
-        // Stories-Vehicle-Damage-Visuals-Start
+        // Corvax-Vehicle-Damage-Visuals-Start
         foreach (var target in targets)
         {
             if (HasComp<VehicleComponent>(target) || HasComp<VehicleAttachableComponent>(target))
@@ -181,7 +181,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
             // Server never sends the event to us for predictiveeevent.
             _color.RaiseEffect(Color.Red, targets, Filter.Local());
         }
-        // Stories-Vehicle-Damage-Visuals-End
+        // Corvax-Vehicle-Damage-Visuals-End
     }
 
     /// <summary>

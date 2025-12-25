@@ -15,7 +15,7 @@ namespace Content.Server.Popups
         [Dependency] private readonly SharedTransformSystem _transform = default!;
         [Dependency] private readonly RMCPopupSystem _rmcPopup = default!;
 
-        // Stories-Popup-Fix-Start
+        // Corvax-Popup-Fix-Start
         /// <summary>
         /// Builds a popup visibility filter that respects a player's current view target.
         /// If the player has an <see cref="EyeComponent"/> with a valid <c>Target</c>,
@@ -99,7 +99,7 @@ namespace Content.Server.Popups
 
             return filter;
         }
-        // Stories-Popup-Fix-End
+        // Corvax-Popup-Fix-End
 
         public override void PopupCursor(string? message, PopupType type = PopupType.Small)
         {
@@ -146,7 +146,7 @@ namespace Content.Server.Popups
             if (message == null)
                 return;
             var mapPos = _transform.ToMapCoordinates(coordinates);
-            var filter = CreateEyeAwareFilterCoords(mapPos); // Stories-Popup-Fix
+            var filter = CreateEyeAwareFilterCoords(mapPos); // Corvax-Popup-Fix
             RaiseNetworkEvent(new PopupCoordinatesEvent(message, type, GetNetCoordinates(coordinates)), filter);
         }
 
@@ -173,7 +173,7 @@ namespace Content.Server.Popups
                 return;
 
             var mapPos = _transform.ToMapCoordinates(coordinates);
-            var filter = CreateEyeAwareFilterCoords(mapPos); // Stories-Popup-Fix
+            var filter = CreateEyeAwareFilterCoords(mapPos); // Corvax-Popup-Fix
             if (recipient != null)
             {
                 // Don't send to recipient, since they predicted it locally
@@ -187,7 +187,7 @@ namespace Content.Server.Popups
             if (message == null)
                 return;
 
-            var filter = CreateEyeAwareFilter(uid); // Stories-Popup-Fix
+            var filter = CreateEyeAwareFilter(uid); // Corvax-Popup-Fix
             RaiseNetworkEvent(new PopupEntityEvent(message, type, GetNetEntity(uid)), filter);
         }
 
@@ -241,13 +241,13 @@ namespace Content.Server.Popups
                     return;
 
                 // Don't send to recipient, since they predicted it locally
-                var filter = CreateEyeAwareFilter(uid).RemovePlayerByAttachedEntity(recipient.Value); // Stories-Popup-Fix
+                var filter = CreateEyeAwareFilter(uid).RemovePlayerByAttachedEntity(recipient.Value); // Corvax-Popup-Fix
                 RaiseNetworkEvent(new PopupEntityEvent(message, type, GetNetEntity(uid)), filter);
             }
             else
             {
                 // With no recipient, send to everyone (in PVS range)
-                var filter = CreateEyeAwareFilter(uid); // Stories-Popup-Fix
+                var filter = CreateEyeAwareFilter(uid); // Corvax-Popup-Fix
                 RaiseNetworkEvent(new PopupEntityEvent(message, type, GetNetEntity(uid)), filter);
             }
         }

@@ -10,4 +10,4 @@ public record struct AttemptMeleeEvent(EntityUid User, bool Cancelled = false, s
 /// Raised directed on the target entity when being attacked.
 /// </summary>
 [ByRefEvent]
-public record struct GettingMeleeAttemptEvent(EntityUid Attacker, bool Cancelled = false); // Stories-Vehicle-Content
+public record struct GettingMeleeAttemptEvent(EntityUid Attacker, bool Cancelled = false); // Corvax-Vehicle-Content

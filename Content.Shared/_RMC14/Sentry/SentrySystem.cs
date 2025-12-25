@@ -7,7 +7,7 @@ using Content.Shared._RMC14.NPC;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Weapons.Ranged.Homing;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
-using Content.Shared._Stories.Vehicle;
+using Content.Shared._CCM.Vehicle;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -427,10 +427,9 @@ public sealed class SentrySystem : EntitySystem
             return false;
         }
 
-        // Stories-Vehicle-Content-Start
+        // Corvax-Vehicle-Content
         if (HasComp<VehicleGridComponent>(Transform(sentry).GridUid))
             return false;
-        // Stories-Vehicle-Content-End
 
         return true;
     }

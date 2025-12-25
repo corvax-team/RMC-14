@@ -1,18 +1,18 @@
-st-ui-vehicle-status-title = Статус транспорта
-st-ui-vehicle-hull-integrity = Целостность корпуса: { $integrity }%
-st-ui-vehicle-hull-destroyed = Корпус уничтожен
-st-ui-vehicle-door-state-label = Двери
-st-ui-vehicle-door-state =
+ccm-ui-vehicle-status-title = Статус транспорта
+ccm-ui-vehicle-hull-integrity = Целостность корпуса: { $integrity }%
+ccm-ui-vehicle-hull-destroyed = Корпус уничтожен
+ccm-ui-vehicle-door-state-label = Двери
+ccm-ui-vehicle-door-state =
     { $locked ->
         [true] Заблокированы
        *[false] Разблокированы
     }
-st-ui-vehicle-armor-resistances =
+ccm-ui-vehicle-armor-resistances =
     { $unfolded ->
         [true] ↑ Сопротивления брони
        *[false] ↓ Сопротивления брони
     }
-st-ui-vehicle-resistance-entry =
+ccm-ui-vehicle-resistance-entry =
     { $type ->
         [Heat] Биологическая защита:
         [Slash] Защита от порезов:
@@ -21,44 +21,44 @@ st-ui-vehicle-resistance-entry =
         [Expl] Взрывоустойчивость:
        *[other] { $type }:
     }
-st-ui-vehicle-passengers =
+ccm-ui-vehicle-passengers =
     { $unfolded ->
         [true] ↑ Пассажиры
        *[false] ↓ Пассажиры
     }
-st-ui-vehicle-total-passengers = Пассажиров:
-st-ui-vehicle-passengers-category = Живые:
-st-ui-vehicle-dead-category = Раненые:
-st-ui-vehicle-xeno-category = Ксеноморфы:
-st-ui-vehicle-role-reserved-slot =
+ccm-ui-vehicle-total-passengers = Пассажиров:
+ccm-ui-vehicle-passengers-category = Живые:
+ccm-ui-vehicle-dead-category = Раненые:
+ccm-ui-vehicle-xeno-category = Ксеноморфы:
+ccm-ui-vehicle-role-reserved-slot =
     { $name ->
         [Crewmen] Экипаж:
         [Synthetic-Unit] Синтетики:
        *[other] { $name }:
     }
-st-ui-vehicle-hardpoints = Узлы вооружения
-st-ui-vehicle-no-hardpoints = Нет установленных узлов
-st-ui-vehicle-hardpoint-integrity = Целостность: { $integrity }%
-st-ui-vehicle-hardpoint-destroyed = Уничтожено
-st-ui-vehicle-ammo = Боеприпасы: { $current } / { $max }
-st-ui-vehicle-mags = Магазины: { $current } / { $max }
-st-ui-vehicle-spare-mags = Запасные магазины:
-st-ui-select-hardpoint-title = Выбрать точку крепления
-st-ui-select-hardpoint-contain = Доступные точки крепления:
-st-vehicle-ui-no-any-hardpoint = Отсутствуют доступные точки крепления.
-st-vehicle-ui-magazine-loaded = ✓
-st-vehicle-ui-magazine-empty = ✗
-st-vehicle-ui-ammo-info = | Боеприпасы: { $current }/{ $max }
-st-vehicle-ui-hardpoint-button = { $name } [{ $status }]{ $ammo }
-st-vehicle-ui-spare-info = Запасные магазины: { $current }/{ $max }
-st-vehicle-ui-available-weapons = Доступное оружие:
-st-vehicle-ui-loaded-empty-legend = [✓] = Загруженный магазин | [✗] = Пустой
-st-vehicle-ui-click-to-reload = Нажмите на оружие для перезарядки из запасных магазинов
-st-vehicle-ui-window-title = Загрузчик боекомплекта
-st-vehicle-slot-treads = Передвижение
-st-vehicle-slot-support = Вспомогательное оборудование
-st-vehicle-slot-secondary = Вторичное вооружение
-st-vehicle-slot-primary = Основное вооружение
-st-vehicle-slot-special = Специальный модуль
-st-ui-attachable-holder-strip-ui-empty-slot = [Пусто]
-st-vehicle-holder-strip-ui-title = Снятие модулей
+ccm-ui-vehicle-hardpoints = Узлы вооружения
+ccm-ui-vehicle-no-hardpoints = Нет установленных узлов
+ccm-ui-vehicle-hardpoint-integrity = Целостность: { $integrity }%
+ccm-ui-vehicle-hardpoint-destroyed = Уничтожено
+ccm-ui-vehicle-ammo = Боеприпасы: { $current } / { $max }
+ccm-ui-vehicle-mags = Магазины: { $current } / { $max }
+ccm-ui-vehicle-spare-mags = Запасные магазины:
+ccm-ui-select-hardpoint-title = Выбрать точку крепления
+ccm-ui-select-hardpoint-contain = Доступные точки крепления:
+ccm-vehicle-ui-no-any-hardpoint = Отсутствуют доступные точки крепления.
+ccm-vehicle-ui-magazine-loaded = ✓
+ccm-vehicle-ui-magazine-empty = ✗
+ccm-vehicle-ui-ammo-info = | Боеприпасы: { $current }/{ $max }
+ccm-vehicle-ui-hardpoint-button = { $name } [{ $status }]{ $ammo }
+ccm-vehicle-ui-spare-info = Запасные магазины: { $current }/{ $max }
+ccm-vehicle-ui-available-weapons = Доступное оружие:
+ccm-vehicle-ui-loaded-empty-legend = [✓] = Загруженный магазин | [✗] = Пустой
+ccm-vehicle-ui-click-to-reload = Нажмите на оружие для перезарядки из запасных магазинов
+ccm-vehicle-ui-window-title = Загрузчик боекомплекта
+ccm-vehicle-slot-treads = Передвижение
+ccm-vehicle-slot-support = Вспомогательное оборудование
+ccm-vehicle-slot-secondary = Вторичное вооружение
+ccm-vehicle-slot-primary = Основное вооружение
+ccm-vehicle-slot-special = Специальный модуль
+ccm-ui-attachable-holder-strip-ui-empty-slot = [Пусто]
+ccm-vehicle-holder-strip-ui-title = Снятие модулей

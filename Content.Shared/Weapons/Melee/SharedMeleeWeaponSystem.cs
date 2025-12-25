@@ -447,7 +447,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return false;
         }
 
-        // Stories-Vehicle-Content-Start
+        // Corvax-Vehicle-Content-Start
         if (target != null)
         {
             var meleeAttemptEv = new GettingMeleeAttemptEvent(user);
@@ -456,7 +456,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             if (meleeAttemptEv.Cancelled)
                 return false;
         }
-        // Stories-Vehicle-Content-End
+        // Corvax-Vehicle-Content-End
 
         // Attack confirmed
         for (var i = 0; i < swings; i++)

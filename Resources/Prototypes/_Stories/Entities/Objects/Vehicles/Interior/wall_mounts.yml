@@ -1,11 +1,11 @@
 - type: entity
-  id: STVehicleInteriorViewport
+  id: CMMVehicleInteriorViewport
   name: viewport
   description: A reinforced viewing port allowing the vehicle crew to observe the outside world. Thick glass and armored casing protect it from external damage.
   components:
   - type: Sprite
     drawdepth: WallMountedItems
-    sprite: _Stories/Objects/Vehicles/Interior/general.rsi
+    sprite: _CMM/Objects/Vehicles/Interior/general.rsi
     state: viewport
   - type: Appearance
   - type: WallMount
@@ -26,12 +26,12 @@
 
 - type: entity 
   parent: RMCSurveillanceCameraAlmayer
-  id: STVehicleInteriorCamera
+  id: CMMVehicleInteriorCamera
   name: camera
   components:
   - type: Sprite
     drawdepth: WallMountedItems
-    sprite: _Stories/Objects/Vehicles/Interior/general.rsi
+    sprite: _CMM/Objects/Vehicles/Interior/general.rsi
     offset: 0.4, 0.4
     layers:
     - map: [ "enum.SurveillanceCameraVisualsKey.Layer" ]
@@ -45,7 +45,7 @@
       Disabled: vehicle_camera
       InUse: vehicle_camera
   - type: RMCCamera
-    id: STVehicleInteriorCamera
+    id: CMMVehicleInteriorCamera
   - type: Corrodible
     isCorrodible: false
   - type: GenericVisualizer
@@ -61,12 +61,12 @@
 
 - type: entity
   parent: RMCRotaryPhone
-  id: STVehicleInteriorWallMountPhone
+  id: CMMVehicleInteriorWallMountPhone
   name: wall-mounted phone
   description: "It is a wall mounted telephone. The fine text reads: To log your details with the mainframe please insert your keycard into the slot below. Unfortunately the slot is jammed. You can still use the phone, however."
   components:
   - type: Sprite
-    sprite: _Stories/Objects/Vehicles/Interior/general.rsi
+    sprite: _CMM/Objects/Vehicles/Interior/general.rsi
     layers:
       - state: wall_phone
         map: [ "base" ]
@@ -81,14 +81,14 @@
     isCorrodible: false
 
 - type: entity
-  id: STVehicleInteriorNanoMed
+  id: CMMVehicleInteriorNanoMed
   name: nanomed
   placement:
     mode: PlaceFree
   components:
   - type: Sprite
     drawdepth: WallMountedItems
-    sprite: _Stories/Objects/Vehicles/Interior/general.rsi
+    sprite: _CMM/Objects/Vehicles/Interior/general.rsi
     layers:
     - state: "nanomed"
     - state: "nanomed"
@@ -157,7 +157,7 @@
     isCorrodible: false
 
 - type: entity
-  id: STVehicleInteriorExtinguisherCabinet
+  id: CMMVehicleInteriorExtinguisherCabinet
   name: extinguisher cabinet
   description: A small wall mounted cabinet designed to hold a fire extinguisher.
   placement:
@@ -180,7 +180,7 @@
   - type: Clickable
   - type: InteractionOutline
   - type: Sprite
-    sprite: _Stories/Objects/Vehicles/Interior/general.rsi
+    sprite: _CMM/Objects/Vehicles/Interior/general.rsi
     layers:
     - map: ["open"]
       state: extinguisher_empty
@@ -226,7 +226,7 @@
 
 - type: entity
   parent: CMLockerBase
-  id: STVehicleAPCLocker
+  id: CMMVehicleAPCLocker
   name: locker
   suffix: Empty
   description: A bulletproof cabinet.
@@ -235,7 +235,7 @@
     arc: 175
   - type: Sprite
     drawdepth: WallMountedItems
-    sprite: _Stories/Objects/Vehicles/Interior/general.rsi
+    sprite: _CMM/Objects/Vehicles/Interior/general.rsi
     layers:
     - state: locker_open
       map: ["enum.StorageVisualLayers.Base"]

@@ -7,8 +7,8 @@ using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
-using Content.Shared._Stories.Vehicle;
-using Content.Shared._Stories.Attachables;
+using Content.Shared._CCM.Vehicle;
+using Content.Shared._CCM.Attachables;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -96,7 +96,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] private readonly AttachableHolderSystem _attachableHolder = default!;
     [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
 
-    // Stories
+    // Corvax
     [Dependency] private readonly VehicleAttachableHolderSystem _vehicleHolder = default!;
 
     private const float InteractNextFire = 0.3f;
@@ -126,7 +126,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         InitializeContainer();
         InitializeSolution();
 
-        InitializeVehicleGun(); // Stories-APC-Gun-Tweak
+        InitializeVehicleGun(); // Corvax-Vehicle-Content
 
         // Interactions
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<AlternativeVerb>>(OnAltVerb);
@@ -210,7 +210,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         gunEntity = default;
         gunComp = null;
 
-        // Stories-Vehicle-Gun-Content-Start
+        // Corvax-Vehicle-Content-Start
         if (TryComp<VehiclePilotComponent>(entity, out var pilot) &&
             HasComp<VehicleComponent>(pilot.Vehicle) &&
             pilot.Gun is { } vehGun &&
@@ -220,7 +220,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             gunComp = vehGunComp;
             return true;
         }
-        // Stories-Vehicle-Gun-Content-End
+        // Corvax-Vehicle-Gun-Content-End
 
         if (Hands.GetActiveItem(entity) is { } held &&
             TryComp(held, out GunComponent? gun))
@@ -381,7 +381,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             return null;
         }
 
-        // Stories-Vehicle-Gun-Content-Tweak-Start
+        // Corvax-Vehicle-Content-Start
         var userXform = Transform(user);
         fromCoordinates = userXform.Coordinates;
 
@@ -397,7 +397,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             var rotatedOffset = rotation.RotateVec(vehicleAttachable.Offset);
             fromCoordinates = fromCoordinates.Offset(rotatedOffset);
         }
-        // Stories-Vehicle-Gun-Content-Tweak-End
+        // Corvax-Vehicle-Content-End
 
         // Remove ammo
         var ev = new TakeAmmoEvent(shots, new List<(EntityUid? Entity, IShootable Shootable)>(), fromCoordinates, user);
@@ -429,7 +429,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             // If they're firing an existing clip then don't play anything.
             if (shots > 0)
             {
-                // STORIES | Prediction kicked my ass, so I whipped this up. Catch me later when Im not clueless
+                // Corvax | Prediction kicked my ass
                 if (!HasComp<VehicleGunComponent>(gunUid))
                 {
                     PopupSystem.PopupCursor(ev.Reason ?? Loc.GetString("gun-magazine-fired-empty"));

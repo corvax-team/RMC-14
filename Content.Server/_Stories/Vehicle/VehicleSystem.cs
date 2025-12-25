@@ -3,8 +3,8 @@ using Content.Server.Light.EntitySystems;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.MotionDetector;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared._Stories.Attachables;
-using Content.Shared._Stories.Vehicle;
+using Content.Shared._CCM.Attachables;
+using Content.Shared._CCM.Vehicle;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Light.Components;
@@ -14,7 +14,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
-namespace Content.Server.Corvax.Vehicle;
+namespace Content.Server._CCM.Vehicle;
 
 public sealed class VehicleSystem : EntitySystem
 {
@@ -54,14 +54,14 @@ public sealed class VehicleSystem : EntitySystem
         if (!md.Comp.Enabled)
         {
             _popup.PopupEntity(
-                Loc.GetString("st-motion-detector-scan-disabled", ("md", md), ("target", args.Target.Value)),
+                Loc.GetString("ccm-motion-detector-scan-disabled", ("md", md), ("target", args.Target.Value)),
                 md.Owner, args.User);
             return;
         }
 
         _popup.PopupPredicted(
-            Loc.GetString("st-motion-detector-scan-start-self", ("md", md), ("target", args.Target.Value)),
-            Loc.GetString("st-motion-detector-scan-start-others", ("user", args.User), ("md", md), ("target", args.Target.Value)),
+            Loc.GetString("ccm-motion-detector-scan-start-self", ("md", md), ("target", args.Target.Value)),
+            Loc.GetString("ccm-motion-detector-scan-start-others", ("user", args.User), ("md", md), ("target", args.Target.Value)),
             md.Owner, args.User);
 
         var doAfterArgs = new DoAfterArgs(EntityManager, args.User, 3f, new MotionDetectorScanDoAfterEvent(),
@@ -74,8 +74,8 @@ public sealed class VehicleSystem : EntitySystem
         if (!_doAfter.TryStartDoAfter(doAfterArgs))
         {
             _popup.PopupPredicted(
-                Loc.GetString("st-motion-detector-scan-stop-self", ("target", args.Target.Value)),
-                Loc.GetString("st-motion-detector-scan-stop-others", ("user", args.User), ("md", md)),
+                Loc.GetString("ccm-motion-detector-scan-stop-self", ("target", args.Target.Value)),
+                Loc.GetString("ccm-motion-detector-scan-stop-others", ("user", args.User), ("md", md)),
                 md.Owner, args.User);
             return;
         }
@@ -91,7 +91,7 @@ public sealed class VehicleSystem : EntitySystem
         if (!md.Comp.Enabled)
         {
             _popup.PopupEntity(
-                Loc.GetString("st-motion-detector-scan-disabled", ("md", md), ("target", args.Target.Value)),
+                Loc.GetString("ccm-motion-detector-scan-disabled", ("md", md), ("target", args.Target.Value)),
                 md.Owner, args.User);
             return;
         }
@@ -100,8 +100,8 @@ public sealed class VehicleSystem : EntitySystem
             return;
 
         _popup.PopupPredicted(
-            Loc.GetString("st-motion-detector-scan-finish-self", ("md", md), ("target", args.Target.Value)),
-            Loc.GetString("st-motion-detector-scan-finish-others", ("user", args.User), ("md", md)),
+            Loc.GetString("ccm-motion-detector-scan-finish-self", ("md", md), ("target", args.Target.Value)),
+            Loc.GetString("ccm-motion-detector-scan-finish-others", ("user", args.User), ("md", md)),
             md.Owner, args.User);
 
         int humansInside = 0;
@@ -125,7 +125,7 @@ public sealed class VehicleSystem : EntitySystem
 
         if (humansInside > 0 || xenosInside > 0)
         {
-            var msg = Loc.GetString("st-motion-detector-scan-result",
+            var msg = Loc.GetString("ccm-motion-detector-scan-result",
                 ("md", md),
                 ("target", args.Target.Value),
                 ("humans", humansInside),
@@ -138,7 +138,7 @@ public sealed class VehicleSystem : EntitySystem
         {
             _audio.PlayPvs(md.Comp.ScanEmptySound, args.User);
             _popup.PopupEntity(
-                Loc.GetString("st-motion-detector-scan-empty", ("md", md), ("target", args.Target.Value)),
+                Loc.GetString("ccm-motion-detector-scan-empty", ("md", md), ("target", args.Target.Value)),
                 md.Owner, args.User);
         }
     }

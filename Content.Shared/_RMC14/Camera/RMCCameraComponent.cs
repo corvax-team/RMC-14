@@ -14,5 +14,5 @@ public sealed partial class RMCCameraComponent : Component
     public bool Rename = true;
 
     [DataField, AutoNetworkedField]
-    public bool Active = true;  // Stories-Vehicle-Content
+    public bool Active = true;  // Corvax-Vehicle-Content
 }

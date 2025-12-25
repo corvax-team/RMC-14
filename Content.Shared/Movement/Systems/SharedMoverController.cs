@@ -1,8 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared.ActionBlocker;
-using Content.Shared._Stories.Vehicle;
-using Content.Shared._Stories.Vehicle.Systems;
+using Content.Shared._CCM.Vehicle;
+using Content.Shared._CCM.Vehicle.Systems;
 using Content.Shared.CCVar;
 using Content.Shared.Friction;
 using Content.Shared.Gravity;
@@ -48,7 +48,7 @@ public abstract partial class SharedMoverController : VirtualController
     [Dependency] private   readonly SharedTransformSystem _transform = default!;
     [Dependency] private   readonly TagSystem _tags = default!;
 
-    // Stories
+    // Corvax
     [Dependency] private   readonly SharedVehicleSystem _vehicle = default!;
 
     protected EntityQuery<CanMoveInAirComponent> CanMoveInAirQuery;
@@ -64,7 +64,7 @@ public abstract partial class SharedMoverController : VirtualController
     protected EntityQuery<RelayInputMoverComponent> RelayQuery;
     protected EntityQuery<PullableComponent> PullableQuery;
     protected EntityQuery<TransformComponent> XformQuery;
-    protected EntityQuery<VehicleMovementComponent> VehicleMoveQuery; // Stories-Vehicle-Movement-Tweak
+    protected EntityQuery<VehicleMovementComponent> VehicleMoveQuery; // Corvax-Vehicle-Movement-Tweak
 
     private static readonly ProtoId<TagPrototype> FootstepSoundTag = "FootstepSound";
 
@@ -96,7 +96,7 @@ public abstract partial class SharedMoverController : VirtualController
         FootstepModifierQuery = GetEntityQuery<FootstepModifierComponent>();
         MapGridQuery = GetEntityQuery<MapGridComponent>();
         MapQuery = GetEntityQuery<MapComponent>();
-        VehicleMoveQuery = GetEntityQuery<VehicleMovementComponent>(); // Stories-Vehicle-Movement-Tweak
+        VehicleMoveQuery = GetEntityQuery<VehicleMovementComponent>(); // Corvax-Vehicle-Movement-Tweak
 
         SubscribeLocalEvent<MovementSpeedModifierComponent, TileFrictionEvent>(OnTileFriction);
 
@@ -198,14 +198,14 @@ public abstract partial class SharedMoverController : VirtualController
             UsedMobMovement[uid] = false;
             return;
         }
-        // Stories-Vehicle-Movement-Tweak-Start
+        // Corvax-Vehicle-Movement-Tweak-Start
         if (VehicleMoveQuery.TryComp(uid, out var vehicleMove) && vehicleMove.Blocked)
         {
             PhysicsSystem.ResetDynamics(uid, physicsComponent);
             UsedMobMovement[uid] = false;
             return;
         }
-        // Stories-Vehicle-Movement-Tweak-End
+        // Corvax-Vehicle-Movement-Tweak-End
         // If the body is in air but isn't weightless then it can't move
         // TODO: MAKE ISWEIGHTLESS EVENT BASED
         var weightless = _gravity.IsWeightless(uid, physicsComponent, xform);
@@ -337,7 +337,7 @@ public abstract partial class SharedMoverController : VirtualController
                 // TODO apparently this results in a duplicate move event because "This should have its event run during
                 // island solver"??. So maybe SetRotation needs an argument to avoid raising an event?
                 var worldRot = _transform.GetWorldRotation(xform);
-                // Stories-Vehicle-Movement-Tweak-Start
+                // Corvax-Vehicle-Movement-Tweak-Start
                 var delta = xform.LocalRotation + wishDir.ToWorldAngle() - worldRot;
 
                 if (VehicleMoveQuery.HasComponent(uid))
@@ -357,7 +357,7 @@ public abstract partial class SharedMoverController : VirtualController
                 {
                     _transform.SetLocalRotation(uid, delta, xform);
                 }
-                // Stories-Vehicle-Movement-Tweak-End
+                // Corvax-Vehicle-Movement-Tweak-End
             }
 
             if (!weightless && MobMoverQuery.TryGetComponent(uid, out var mobMover) &&

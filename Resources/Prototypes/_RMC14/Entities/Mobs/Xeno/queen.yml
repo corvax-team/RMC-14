@@ -16,12 +16,12 @@
   - type: GhostRole
     name: cm-job-name-xeno-queen
   - type: Sprite
-    sprite: _Stories/Mobs/Xenos/Queen/queen.rsi
+    sprite: _RMC14/Mobs/Xenonids/Queen/queen.rsi
     layers:
     - map: [ "enum.XenoVisualLayers.Base" ]
       state: alive
     - map: [ "enum.XenoVisualLayers.Ovipositor" ]
-      sprite: _Stories/Mobs/Xenos/Queen/ovipositor.rsi
+      sprite: _RMC14/Mobs/Xenonids/Queen/ovipositor.rsi
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Left" ]
@@ -29,7 +29,7 @@
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
     - map: [ "enum.RMCShieldVisuals.Base" ]
-      sprite: _Stories/Effects/xeno_shields.rsi # Stories-Fixes
+      sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
     - map: [ "focused" ]
       sprite: _RMC14/Interface/xeno_hud.rsi
@@ -82,6 +82,7 @@
     tier: 0
     bypassTierCount: true
     unlockAt: 0
+    hudOffset: -0.1,0
   - type: XenoHeavy
   - type: XenoAcid
   - type: XenoConstruction
@@ -147,13 +148,6 @@
         density: 185
         layer:
         - BulletImpassable
-      fix3:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.90
-        density: 185
-        layer:
-        - Transport
   - type: DropshipHijacker
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.4
@@ -273,26 +267,17 @@
   - type: XenoToggleChargingKnockback
     enabled: false
   - type: XenoToggleChargingStop
-  - type: XenoRankNames
-    rankNames:
-      0: rmc-xeno-fem-young
-      2: rmc-xeno-fem-mature
-      3: rmc-xeno-fem-elder
-      4: rmc-xeno-fem-ancient
-      5: rmc-xeno-fem-prime
   - type: FixedIdentity
     name: cm-job-name-xeno-queen
-  - type: TTS # Stories-TTS
-    voice: cirilla
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartTQ
   - type: RMCTrackable
-    # Stories-Vehicle-Content-Start
-  - type: VehicleDamageMultiplier
-    mult: 2
-    # Stories-Vehicle-Content-End
   - type: ExcludedFromKingVote
     canVote: true
+    # Corvax-Vehicle-Content-Start
+  - type: VehicleDamageMultiplier
+    mult: 2
+    # Corvax-Vehicle-Content-End
 
 - type: entity
   parent: RMCXenoQueenBase
@@ -331,8 +316,6 @@
   - type: OwOAccent
   - type: Speech
     speechSounds: Cat
-    audioParams: # Stories-TTS
-      volume: -8
 
 - type: entity
   parent: StationAiHolo

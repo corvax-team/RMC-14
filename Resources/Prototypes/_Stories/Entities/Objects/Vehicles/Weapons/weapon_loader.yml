@@ -1,10 +1,10 @@
 - type: entity
   parent: BaseStructure
   name: Weapon Loader
-  id: VehicleWeaponsLoader
+  id: CCMVehicleWeaponsLoader
   components:
   - type: Sprite
-    sprite: _Stories/Objects/Vehicles/Interior/general.rsi
+    sprite: _CCM/Objects/Vehicles/Interior/general.rsi
     state: weapons_loader
   - type: Animateable
   - type: InteractionOutline

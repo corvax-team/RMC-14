@@ -32,7 +32,7 @@ public enum CollisionGroup
     XenoProjectileImpassable = 1 << 27,
     DropshipImpassable = 1 << 28,
 
-    // Stories
+    // Corvax
     Transport = 1 << 29, 
 
     MapGrid = MapGridHelpers.CollisionGroup, // Map grids, like shuttles. This is the actual grid itself, not the walls or other entities connected to the grid.

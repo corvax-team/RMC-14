@@ -1,6 +1,6 @@
-ent-STVehicleArmorDriverSeat = бронесиденье водителя
+ent-CCMVehicleArmorDriverSeat = бронесиденье водителя
     .desc = Прочное кресло с фиксатором, опускающимся на тело. Защищает от травм при столкновении и удерживает на месте. Пристегнитесь, дети!
-ent-STVehicleArmorGunnerSeat = бронесиденье стрелка
+ent-CCMVehicleArmorGunnerSeat = бронесиденье стрелка
     .desc = Прочное кресло с фиксатором, опускающимся на тело. Защищает от травм при столкновении и удерживает на месте. Пристегнитесь, дети!
-ent-STVehicle1stSupportGunnerSeat = сиденье первого вспомогательного стрелка
-ent-STVehicle2stSupportGunnerSeat = сиденье второго вспомогательного стрелка
+ent-CCMVehicle1stSupportGunnerSeat = сиденье первого вспомогательного стрелка
+ent-CCMVehicle2stSupportGunnerSeat = сиденье второго вспомогательного стрелка

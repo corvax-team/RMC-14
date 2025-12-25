@@ -189,10 +189,10 @@
   - type: Tag
     tags:
     - RMCMetalBarricade
-    # Stories-Vehicle-Content-Start
+    # Corvax-Vehicle-Content-Start
   - type: VehicleStructureTarget
     minimumClassToDestroy: Weak
-    # Stories-Vehicle-Content-End
+    # Corvax-Vehicle-Content-End
 
 - type: entity
   parent: CMBarricadeMetal
@@ -308,10 +308,10 @@
     - type: Construction
       graph: BarricadeTurnstileGraph
       node: nodeTurnstile
-    # Stories-Vehicle-Content-Start
+    # Corvax-Vehicle-Content-Start
     - type: VehicleStructureTarget
       minimumClassToDestroy: Weak
-    # Stories-Vehicle-Content-End
+    # Corvax-Vehicle-Content-End
 
 - type: entity
   parent: CMBarricadeTurnstile
@@ -366,10 +366,10 @@
     - type: Construction
       graph: BarricadeHandrailGraph
       node: nodeHandrail
-    # Stories-Vehicle-Content-Start
+    # Corvax-Vehicle-Content-Start
     - type: VehicleStructureTarget
       minimumClassToDestroy: Weak
-    # Stories-Vehicle-Content-End
+    # Corvax-Vehicle-Content-End
 
 - type: entity
   parent: RMCBarricadeHandrail

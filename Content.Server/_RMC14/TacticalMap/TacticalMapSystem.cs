@@ -15,8 +15,8 @@ using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
-using Content.Shared._Stories.Attachables;
-using Content.Shared._Stories.Vehicle;
+using Content.Shared._CCM.Attachables;
+using Content.Shared._CCM.Vehicle;
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Database;
@@ -834,7 +834,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             ent.Comp.Map = xform.GridUid;
         }
 
-        // Stories-Vehicle-Content-Start
+        // Corvax-Vehicle-Content-Start
         var finalIcon = icon;
         if (TryComp<VehicleComponent>(ent, out var vehicle) && icon is SpriteSpecifier.Rsi vehicleRsi)
         {
@@ -857,7 +857,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 finalIcon = new SpriteSpecifier.Rsi(vehicleRsi.RsiPath, $"{vehicleRsi.RsiState}_wreck");
             }
         }
-        // Stories-Vehicle-Content-End
+        // Corvax-Vehicle-Content-End
         var status = TacticalMapBlipStatus.Alive;
         if (_mobState.IsDead(ent))
         {

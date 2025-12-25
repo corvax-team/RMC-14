@@ -1,5 +1,5 @@
 - type: entity
-  id: STVehicleEnterpoint
+  id: CCMVehicleEnterpoint
   name: Vehicle EnterPoint Marker
   components:
   - type: Transform
@@ -16,7 +16,7 @@
 
 - type: entity
   parent: BaseItem
-  id: STMarineVehicleAttachableBase
+  id: CCMMarineVehicleAttachableBase
   abstract: true
   components:
   - type: Item
@@ -44,7 +44,7 @@
 
 - type: entity
   parent: STMarineVehicleAttachableBase
-  id: STMarineVehicleGunAttachableBase
+  id: CCMMarineVehicleGunAttachableBase
   abstract: true
   components:
   - type: GunIFF
@@ -55,7 +55,7 @@
 
 - type: entity
   parent: BaseStructure
-  id: STVehicleMoveBlockerMarker
+  id: CCMVehicleMoveBlockerMarker
   name: vehicle move block marker
   description:
   placement:

@@ -36,7 +36,7 @@ namespace Content.Shared.Movement.Components
         public Vector2 CurTickSprintMovement;
 
         public MoveButtons HeldMoveButtons = MoveButtons.None;
-        public MoveButtons LastPressedDirection = MoveButtons.None; // Stories-Vehicle-Movement-Tweak
+        public MoveButtons LastPressedDirection = MoveButtons.None; // Corvax-Vehicle-Movement-Content
 
         /// <summary>
         /// Does our input indicate actual movement, and not just modifiers?

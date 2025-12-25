@@ -74,7 +74,7 @@ public sealed partial class StationJobsSystem : EntitySystem
         stationJobs.JobList = stationJobs.SetupAvailableJobs.ToDictionary(
             x => x.Key,
             x=> (int?)(x.Value[1] < 0 ? null : x.Value[1]));
-        // Stories-Vehicle-Crewman-Content-Start
+        // Corvax-Vehicle-Crewman-Content-Start
         var playerCount = _player.PlayerCount;
         foreach (var (jobId, _) in stationJobs.JobList.ToArray())
         {
@@ -86,7 +86,7 @@ public sealed partial class StationJobsSystem : EntitySystem
                 stationJobs.JobList[jobId] = 0;
             }
         }
-        // Stories-Vehicle-Crewman-Content-End
+        // Corvax-Vehicle-Crewman-Content-End
         stationJobs.TotalJobs = stationJobs.JobList.Values.Select(x => x ?? 0).Sum();
 
         UpdateJobsAvailable();

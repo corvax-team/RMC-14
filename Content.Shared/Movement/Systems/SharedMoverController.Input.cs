@@ -91,7 +91,7 @@ namespace Content.Shared.Movement.Systems
             if (entity.Comp.HeldMoveButtons == buttons)
                 return;
 
-            // Stories-Vehicle-Fix-Start
+            // Corvax-Vehicle-Fix-Start
             if (VehicleMoveQuery.TryGetComponent(entity.Owner, out var vehicleMove))
             {
                 if ((buttons & ~entity.Comp.HeldMoveButtons) != 0)
@@ -103,7 +103,7 @@ namespace Content.Shared.Movement.Systems
                     Dirty(entity.Owner, vehicleMove);
                 }
             }
-            // Stories-Vehicle-Fix-End
+            // Corvax-Vehicle-Fix-End
 
             // Relay the fact we had any movement event.
             // TODO: Ideally we'd do these in a tick instead of out of sim.
@@ -382,13 +382,13 @@ namespace Content.Shared.Movement.Systems
 
         public (Vector2 Walking, Vector2 Sprinting) GetVelocityInput(InputMoverComponent mover)
         {
-            var moverEntity = (mover.Owner, mover); // Stories-Vehicle-Movement-Tweak
+            var moverEntity = (mover.Owner, mover); // Corvax-Vehicle-Movement-Tweak
             if (!Timing.InSimulation)
             {
                 // Outside of simulation we'll be running client predicted movement per-frame.
                 // So return a full-length vector as if it's a full tick.
                 // Physics system will have the correct time step anyways.
-                var immediateDir = DirVecForButtons(mover.HeldMoveButtons, moverEntity); // Stories-Vehicle-Movement-Tweak
+                var immediateDir = DirVecForButtons(mover.HeldMoveButtons, moverEntity); // Corvax-Vehicle-Movement-Tweak
                 return mover.Sprinting ? (Vector2.Zero, immediateDir) : (immediateDir, Vector2.Zero);
             }
 
@@ -409,7 +409,7 @@ namespace Content.Shared.Movement.Systems
                 remainingFraction = (ushort.MaxValue - mover.LastInputSubTick) / (float) ushort.MaxValue;
             }
 
-            var curDir = DirVecForButtons(mover.HeldMoveButtons, moverEntity) * remainingFraction; // Stories-Vehicle-Movement-Tweak
+            var curDir = DirVecForButtons(mover.HeldMoveButtons, moverEntity) * remainingFraction; // Corvax-Vehicle-Movement-Tweak
 
             if (mover.Sprinting)
             {
@@ -456,7 +456,7 @@ namespace Content.Shared.Movement.Systems
 
                 ref var lastMoveAmount = ref entity.Comp.Sprinting ? ref entity.Comp.CurTickSprintMovement : ref entity.Comp.CurTickWalkMovement;
 
-                lastMoveAmount += DirVecForButtons(entity.Comp.HeldMoveButtons, entity) * fraction; // Stories-Vehicle-Movement-Tweak
+                lastMoveAmount += DirVecForButtons(entity.Comp.HeldMoveButtons, entity) * fraction; // Corvax-Vehicle-Movement-Tweak
 
                 entity.Comp.LastInputSubTick = subTick;
             }
@@ -497,13 +497,13 @@ namespace Content.Shared.Movement.Systems
         /// <summary>
         ///     Retrieves the normalized direction vector for a specified combination of movement keys.
         /// </summary>
-        public Vector2 DirVecForButtons(MoveButtons buttons, Entity<InputMoverComponent>? entity = null) // Stories-Vehicle-Movement-Tweak
+        public Vector2 DirVecForButtons(MoveButtons buttons, Entity<InputMoverComponent>? entity = null) // Corvax-Vehicle-Movement-Tweak
         {
             // key directions are in screen coordinates
             // _moveDir is in world coordinates
             // if the camera is moved, this needs to be changed
 
-            if (entity != null && VehicleMoveQuery.HasComponent(entity)) // Stories-Vehicle-Movement-Tweak
+            if (entity != null && VehicleMoveQuery.HasComponent(entity)) // Corvax-Vehicle-Movement-Tweak
                 return VehicleDirVecForButtons(buttons, entity.Value);
 
             var x = 0;
@@ -528,7 +528,7 @@ namespace Content.Shared.Movement.Systems
 
             return vec;
         }
-        // Stories-Vehicle-Movement-Tweak-Start
+        // Corvax-Vehicle-Movement-Tweak-Start
         public Vector2 VehicleDirVecForButtons(MoveButtons buttons, Entity<InputMoverComponent> entity)
         {
             var currentDirection = MoveButtons.None;
@@ -559,7 +559,7 @@ namespace Content.Shared.Movement.Systems
 
             return vec;
         }
-        // Stories-Vehicle-Movement-Tweak-End
+        // Corvax-Vehicle-Movement-Tweak-End
         private static bool HasFlag(MoveButtons buttons, MoveButtons flag)
         {
             return (buttons & flag) == flag;

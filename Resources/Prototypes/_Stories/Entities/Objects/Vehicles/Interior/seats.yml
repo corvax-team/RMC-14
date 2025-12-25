@@ -1,5 +1,5 @@
 - type: entity
-  id: STVehicleBaseSeat
+  id: CCMVehicleBaseSeat
   abstract: true
   description: You sit in this. Either by will or force.
   placement:
@@ -20,7 +20,7 @@
         mask:
         - TableMask
   - type: Sprite
-    sprite: _Stories/Objects/Vehicles/Interior/general.rsi
+    sprite: _CCM/Objects/Vehicles/Interior/general.rsi
     state: armor_chair
     noRot: true
   - type: Strap
@@ -29,21 +29,21 @@
   - type: RMCMesonsNonviewable
 
 - type: entity
-  parent: STVehicleBaseSeat
-  id: STVehicleArmorDriverSeat
+  parent: CCMVehicleBaseSeat
+  id: CCMVehicleArmorDriverSeat
   name: armor driver seat
   description: A sturdy chair with a brace that lowers over your body. Prevents being flung around in vehicle during crash being injured as a result. Fasten your seatbelts, kids! Fix with welding tool in case of damage.
   components:
   - type: VehiclePilotSeat
     actionIds:
-    - STVehicleVehicleStatusAction
-    - STVehicleLockDoorsAction
+    - CCMVehicleVehicleStatusAction
+    - CCMVehicleLockDoorsAction
     skills:
       RMCSkillVehicles: 2
 
 - type: entity
   parent: STVehicleBaseSeat
-  id: STVehicleArmorGunnerSeat
+  id: CCMVehicleArmorGunnerSeat
   name: armor gunner's seat
   description: A sturdy chair with a brace that lowers over your body. Prevents being flung around in vehicle during crash being injured as a result. Fasten your seatbelts, kids! Fix with welding tool in case of damage.
   components:
@@ -51,32 +51,32 @@
     isGunner: true
     zoom: 1.43, 1.43
     actionIds:
-    - STVehicleVehicleStatusAction
-    - STVehicleSelectHardpointAction
+    - CCMVehicleVehicleStatusAction
+    - CCMVehicleSelectHardpointAction
     skills:
       RMCSkillVehicles: 2
 
 - type: entity
-  parent: STVehicleBaseSeat
-  id: STVehicle1stSupportGunnerSeat
+  parent: CCMVehicleBaseSeat
+  id: CCMVehicle1stSupportGunnerSeat
   name: 1st support gunner's seat
   components:
   - type: VehicleController
     id: FiringPortWeaponOne
     actionIds:
-    - STVehicleReloadSpecialAction
+    - CCMVehicleReloadSpecialAction
 
 - type: entity
-  parent: STVehicleBaseSeat
-  id: STVehicle2stSupportGunnerSeat
+  parent: CCMVehicleBaseSeat
+  id: CCMVehicle2stSupportGunnerSeat
   name: 2st support gunner's seat
   components:
   - type: VehicleController
     id: FiringPortWeaponTwo
     actionIds:
-    - STVehicleReloadSpecialAction
+    - CCMVehicleReloadSpecialAction
   - type: Sprite
-    sprite: _Stories/Objects/Vehicles/Interior/general.rsi
+    sprite: _CCM/Objects/Vehicles/Interior/general.rsi
     state: armor_chair
     noRot: true
     offset: 0, 0.2

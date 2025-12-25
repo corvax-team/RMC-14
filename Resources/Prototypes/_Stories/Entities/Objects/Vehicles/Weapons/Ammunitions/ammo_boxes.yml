@@ -1,7 +1,7 @@
 - type: entity
   abstract: true
   parent: BaseItem
-  id: STBaseVehicleMagazine
+  id: CCMBaseVehicleMagazine
   components:
   - type: Item
     size: Large
@@ -17,13 +17,13 @@
           Empty: { state: slauncher_0 }
 
 - type: entity
-  parent: STBaseVehicleMagazine
-  id: STVehicleAmmoFlareLauncher
+  parent: CCMBaseVehicleMagazine
+  id: CCMVehicleAmmoFlareLauncher
   name: M-87F Flare Launcher magazine
   description: A support armament grenade magazine. This one is loaded with flares packaged in expendable shells.
   components:
   - type: Sprite
-    sprite: _Stories/Objects/Vehicles/Weapons/Ammunitions/ammo.rsi
+    sprite: _CCM/Objects/Vehicles/Weapons/Ammunitions/ammo.rsi
     layers:
     - state: slauncher_1
       map: [ "base" ]
@@ -32,13 +32,13 @@
     projectilePrototype: CMFlare
 
 - type: entity
-  parent: STBaseVehicleMagazine
-  id: STVehicleAmmoBoyarsDualcannon
+  parent: CCMBaseVehicleMagazine
+  id: CCMVehicleAmmoBoyarsDualcannon
   name: PARS-159 Dualcannon IFF Magazine
   description: A magazine for PARS-159 Boyars Dualcannon filled with 20mm rounds. Slightly contuses targets upon hit. Supports IFF.
   components:
   - type: Sprite
-    sprite: _Stories/Objects/Vehicles/Weapons/Ammunitions/ammo.rsi
+    sprite: _CCM/Objects/Vehicles/Weapons/Ammunitions/ammo.rsi
     layers:
     - state: ace_autocannon
       map: [ "base" ]
@@ -55,13 +55,13 @@
           Empty: { state: ace_autocannon_empty }
 
 - type: entity
-  parent: STBaseVehicleMagazine
-  id: STVehicleAmmoREFrontalCannon
+  parent: CCMBaseVehicleMagazine
+  id: CCMVehicleAmmoREFrontalCannon
   name: RE-RE700 Frontal Cannon magazine
   description: A big box of bullets that looks suspiciously similar to the box you would use to refill a M56 Cupola. The Bleihagel logo sticker has peeled slightly and it looks like there's another logo underneath...
   components:
   - type: Sprite
-    sprite: _Stories/Objects/Vehicles/Weapons/Ammunitions/ammo.rsi
+    sprite: _CCM/Objects/Vehicles/Weapons/Ammunitions/ammo.rsi
     layers:
     - state: frontal_1
       map: [ "base" ]
@@ -78,13 +78,13 @@
           Empty: { state: frontal_0 }
 
 - type: entity
-  parent: STBaseVehicleMagazine
-  id: STVehicleAmmoM56FPW
+  parent: CCMBaseVehicleMagazine
+  id: CCMVehicleAmmoM56FPW
   name: M56 FPW Magazine
   description: A magazine for an M56 Firing Port Weapon. Supports IFF.
   components:
   - type: Sprite
-    sprite: _Stories/Objects/Vehicles/Weapons/Ammunitions/ammo.rsi
+    sprite: _CCM/Objects/Vehicles/Weapons/Ammunitions/ammo.rsi
     layers:
     - state: cupola_1
       map: [ "base" ]

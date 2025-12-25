@@ -1,1 +1,1 @@
-ent-STVehicleArea = Транспорт
+ent-CCMVehicleArea = Транспорт

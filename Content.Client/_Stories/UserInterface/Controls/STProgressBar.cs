@@ -3,10 +3,10 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface.Controls;
 using UIRange = Robust.Client.UserInterface.Controls.Range;
 
-namespace Content.Client._Stories.UserInterface.Control;
+namespace Content.Client._CCM.UserInterface.Control;
 
 [Virtual]
-public class STProgressBar : UIRange
+public class CCMProgressBar : UIRange
 {
     private StyleBox? _backgroundStyleBoxOverride;
     private StyleBox? _foregroundStyleBoxOverride;

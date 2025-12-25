@@ -89,7 +89,7 @@
     - RMCSurveillanceCameraAlmayer
     - RMCMonitorCameraAlamo
     - RMCMonitorCameraNormandy
-    - STVehicleInteriorCamera
+    - CCMVehicleInteriorCamera
   - type: WallMount
     arc: 360
 

@@ -1,6 +1,6 @@
 - type: entity
   parent: CMBaseStructureCorrodible
-  id: STVehicleRequisitionConsole
+  id: CCMVehicleRequisitionConsole
   name: vehicle elevator
   description: A console for the Vehicle
   suffix: Vehicle
@@ -64,10 +64,10 @@
   - type: RMCMesonsNonviewable
   - type: VehicleElevatorComputer
     orders:
-    - STVehicleM577APC
+    - CCMVehicleM577APC
 
 - type: entity
-  id: STVehicleRequisitionElevator
+  id: CCMVehicleRequisitionElevator
   name: cargo elevator
   suffix: Lowered, Requisitions
   placement:
@@ -113,7 +113,7 @@
 
 - type: entity
   parent: CMBaseStructureCorrodible
-  id: STVehicleRequisitionRailing
+  id: CCMVehicleRequisitionRailing
   name: retractable railing
   description: That looks like it doesn't open easily.
   suffix: Raised
@@ -149,7 +149,7 @@
     isCorrodible: false
 
 - type: entity
-  id: STVehicleRequisitionGear
+  id: CCMVehicleRequisitionGear
   name: gear
   description: ""
   placement:
@@ -171,7 +171,7 @@
 
 - type: entity
   parent: ColMarTechCargo
-  id: STVendingVehicleGearM577
+  id: CCMVendingVehicleGearM577
   name: ASRS automated modules vendor
   description: An automated supply rack hooked up to a big storage of various modules. Can be accessed by the Vehicle Crew.
   components:
@@ -179,13 +179,13 @@
     access:
     - [ "CMAccessCrewman" ]
   - type: Sprite
-    sprite: _Stories/Objects/Vehicles/Vending/vehicle_gear.rsi
+    sprite: _CCM/Objects/Vehicles/Vending/vehicle_gear.rsi
   - type: CMAutomatedVendor
     baseSprite:
-      sprite: _Stories/Objects/Vehicles/Vending/vehicle_gear.rsi
+      sprite: _CCM/Objects/Vehicles/Vending/vehicle_gear.rsi
       state: base
     animationSprite:
-      sprite: _Stories/Objects/Vehicles/Vending/vehicle_gear.rsi
+      sprite: _CCM/Objects/Vehicles/Vending/vehicle_gear.rsi
       state: vend
     sound:
       path: /Audio/_RMC14/Machines/vending_drop.ogg
@@ -197,13 +197,13 @@
     sections:
     - name: M577 бронетранспортёр
       entries:
-      - id: STMarineVehicleDualcannon
+      - id: CCMMarineVehicleDualcannon
         amount: 1
-      - id: STMarineVehicleFrontalCannon
+      - id: CCMMarineVehicleFrontalCannon
         amount: 1
-      - id: STMarineVehicleFlareLauncher
+      - id: CCMMarineVehicleFlareLauncher
         amount: 1
-      - id: STMarineVehicleM577Wheels
+      - id: CCMMarineVehicleM577Wheels
         amount: 1
   - type: Fixtures
     fixtures:

@@ -1,5 +1,5 @@
 - type: entity
-  id: STVehicleSelectHardpointAction
+  id: CCMVehicleSelectHardpointAction
   name: Weapon Mount Control
   description: Open the vehicle’s weapon mount interface to manage installed weapons and modules.
   categories:
@@ -8,14 +8,14 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _Stories/Actions/vehicle_actions.rsi
+      sprite: _CCM/Actions/vehicle_actions.rsi
       state: chamber_swap
     useDelay: 1
   - type: InstantAction
     event: !type:VehicleSelectHardpointEvent
 
 - type: entity
-  id: STVehicleVehicleStatusAction
+  id: CCMVehicleVehicleStatusAction
   name: Vehicle Status
   description: View hull integrity, systems status, and onboard crew conditions.
   categories:
@@ -24,14 +24,14 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _Stories/Actions/vehicle_actions.rsi
+      sprite: _CCM/Actions/vehicle_actions.rsi
       state: vehicle_status
     useDelay: 1
   - type: InstantAction
     event: !type:VehicleStatusMenuEvent
 
 - type: entity
-  id: STVehicleLockDoorsAction
+  id: CCMVehicleLockDoorsAction
   name: Lock Doors
   description: Lock the vehicle’s doors.
   categories:
@@ -40,14 +40,14 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _Stories/Actions/vehicle_actions.rsi
+      sprite: _CCM/Actions/vehicle_actions.rsi
       state: door_unlocked
     useDelay: 1
   - type: InstantAction
     event: !type:VehicleLockDoorsEvent
 
 - type: entity
-  id: STVehicleReloadSpecialAction
+  id: CCMVehicleReloadSpecialAction
   name: Reload M56 FPW
   description: "Reloads M56 FPW machine guns. Automatically reloads when ammo is depleted or when this action is used. Reload time: 10 seconds."
   categories:
@@ -56,7 +56,7 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _Stories/Actions/vehicle_actions.rsi
+      sprite: _CCM/Actions/vehicle_actions.rsi
       state: chamber_swap
     useDelay: 1
   - type: InstantAction

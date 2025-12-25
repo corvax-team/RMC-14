@@ -88,5 +88,5 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     public readonly Dictionary<CamouflageType, ProtoId<StartingGearPrototype>>? CamouflageStartingGear;
 
     [DataField]
-    public int MinPlayers = 0; // Stories-Vehicle-Crewman-Content
+    public int MinPlayers = 0; // Corvax-Vehicle-Crewman-Content
 }
