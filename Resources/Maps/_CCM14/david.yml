@@ -75832,14 +75832,14 @@ entities:
     - type: Transform
       pos: 12.092681,110.73857
       parent: 1
-- proto: RMCSpawnerPVEAlamo
+- proto: CCMSpawnerAlamo
   entities:
   - uid: 2119
     components:
     - type: Transform
       pos: 0.5,1.5
       parent: 1
-- proto: RMCSpawnerPVENormandy
+- proto: CCMSpawnerNormandy
   entities:
   - uid: 2120
     components:

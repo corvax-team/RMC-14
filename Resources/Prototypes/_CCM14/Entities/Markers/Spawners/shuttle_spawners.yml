@@ -1,0 +1,15 @@
+- type: entity
+  parent: RMCSpawnerShuttle
+  id: CCMSpawnerAlamo
+  suffix: Alamo
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/alamo.yml"
+
+- type: entity
+  parent: RMCSpawnerShuttle
+  id: CCMSpawnerNormandy
+  suffix: Normandy
+  components:
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/normandy.yml"
