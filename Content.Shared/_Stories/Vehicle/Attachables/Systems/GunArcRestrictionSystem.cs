@@ -1,3 +1,12 @@
+/*
+Copyright (c) 2025 Inconnu (Discord: Inconnu1337).
+All Rights Reserved.
+
+An exclusive license is granted to Denlero (Discord: Denlero)
+for the Corvax Colonial Marines project, with full rights
+to use, modify, distribute, and sublicense.
+Third-party use requires Denlero's consent.
+*/
 using Content.Shared._CCM.Attachables;
 using Content.Shared.Examine;
 using Content.Shared.Popups;

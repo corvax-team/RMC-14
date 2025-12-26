@@ -1,8 +1,8 @@
-using Content.Shared._Stories.Vehicle.Systems;
+using Content.Shared._CCM.Vehicle.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared._Stories.Vehicle;
+namespace Content.Shared._CCM.Vehicle;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(SharedVehicleSystem))]
