@@ -12,6 +12,7 @@ public class CCMProgressBar : UIRange
     private StyleBox? _foregroundStyleBoxOverride;
     private bool _vertical;
 
+    public Label Label { get; }
 
     public bool Vertical
     {
