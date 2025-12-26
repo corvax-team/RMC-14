@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._Stories.Attachables;
+namespace Content.Shared._CCM.Attachables;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class VehicleAttachableHolderComponent : Component

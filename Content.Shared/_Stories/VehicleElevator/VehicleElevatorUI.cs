@@ -2,7 +2,7 @@
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Stories.VehicleElevator;
+namespace Content.Shared._CCM.VehicleElevator;
 
 [Serializable, NetSerializable]
 public enum VehicleElevatorUIKey

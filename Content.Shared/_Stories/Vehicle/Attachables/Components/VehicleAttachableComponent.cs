@@ -1,12 +1,12 @@
 using System.Numerics;
 using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared._Stories.Vehicle.Systems;
+using Content.Shared._CCM.Vehicle.Systems;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Stories.Attachables;
+namespace Content.Shared._CCM.Attachables;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(VehicleAttachableHolderSystem), typeof(SharedVehicleSystem), typeof(AttachableModifiersSystem))]

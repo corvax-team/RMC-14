@@ -1,6 +1,6 @@
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Stories.Attachables;
+namespace Content.Shared._CCM.Attachables;
 
 [Prototype, Serializable]
 public sealed partial class HardpointTypePrototype : IPrototype

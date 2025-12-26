@@ -7,7 +7,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 
-namespace Content.Client._Stories.Vehicle.Attachables.UI;
+namespace Content.Client._CCM.Vehicle.Attachables.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class VehicleAttachableHolderChooseSlotMenu : FancyWindow

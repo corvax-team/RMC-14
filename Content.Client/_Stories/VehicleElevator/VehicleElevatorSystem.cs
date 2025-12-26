@@ -1,11 +1,11 @@
 ﻿using Content.Shared._RMC14.Requisitions.Components;
-using Content.Shared._Stories.VehicleElevator;
-using Content.Shared._Stories.VehicleElevator.Components;
+using Content.Shared._CCM.VehicleElevator;
+using Content.Shared._CCM.VehicleElevator.Components;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 using static Robust.Client.GameObjects.SpriteComponent;
 
-namespace Content.Client._Stories.VehicleElevator;
+namespace Content.Client._CCM.VehicleElevator;
 
 public sealed class VehicleElevatorSystem : SharedVehicleElevatorSystem
 {

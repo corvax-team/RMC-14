@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Scoping;
-using Content.Shared._Stories.Attachables;
+using Content.Shared._CCM.Attachables;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Interaction.Components;
@@ -13,7 +13,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Map;
 
-namespace Content.Shared._Stories.Vehicle.Systems;
+namespace Content.Shared._CCM.Vehicle.Systems;
 
 public sealed partial class SharedVehicleSystem
 {
@@ -73,7 +73,7 @@ public sealed partial class SharedVehicleSystem
     {
         if (seat.Comp.IsGunner && HasComp<SynthComponent>(args.Buckle))
         {
-            _popup.PopupClient(Loc.GetString("st-vehicle-synth-no-heavy-weapons"), args.Buckle);
+            _popup.PopupClient(Loc.GetString("ccm-vehicle-synth-no-heavy-weapons"), args.Buckle);
             args.Cancelled = true;
             return;
         }
@@ -228,8 +228,8 @@ public sealed partial class SharedVehicleSystem
                     TryComp<VehicleComponent>(pilot.Comp.Vehicle, out var vehicle))
                 {
                     var icon = vehicle.Locked
-                        ? new SpriteSpecifier.Rsi(new ResPath("/Textures/_Stories/Actions/vehicle_actions.rsi"), "door_locked")
-                        : new SpriteSpecifier.Rsi(new ResPath("/Textures/_Stories/Actions/vehicle_actions.rsi"), "door_unlocked");
+                        ? new SpriteSpecifier.Rsi(new ResPath("/Textures/_CCM/Actions/vehicle_actions.rsi"), "door_locked")
+                        : new SpriteSpecifier.Rsi(new ResPath("/Textures/_CCM/Actions/vehicle_actions.rsi"), "door_unlocked");
 
                     _actions.SetIcon(actionEntity.Value, icon);
 
@@ -272,7 +272,7 @@ public sealed partial class SharedVehicleSystem
 
         if (HasComp<ScopingComponent>(pilot))
         {
-            _popup.PopupClient(Loc.GetString("st-vehicle-cannot-observe-while-scoping"), pilot, pilot);
+            _popup.PopupClient(Loc.GetString("ccm-vehicle-cannot-observe-while-scoping"), pilot, pilot);
             return false;
         }
 

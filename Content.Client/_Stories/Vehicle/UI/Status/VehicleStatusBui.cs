@@ -1,6 +1,6 @@
-using Content.Client._Stories.UserInterface.Control;
-using Content.Shared._Stories.Attachables;
-using Content.Shared._Stories.Vehicle;
+using Content.Client._CCM.UserInterface.Control;
+using Content.Shared._CCM.Attachables;
+using Content.Shared._CCM.Vehicle;
 using Content.Shared.Damage;
 using Content.Shared.Explosion.Components;
 using Content.Shared.FixedPoint;
@@ -10,7 +10,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 
-namespace Content.Client._Stories.Vehicle.UI.Status;
+namespace Content.Client._CCM.Vehicle.UI.Status;
 
 [UsedImplicitly]
 public sealed class VehicleStatusBui : BoundUserInterface
@@ -73,8 +73,8 @@ public sealed class VehicleStatusBui : BoundUserInterface
         if (_window == null)
             return;
 
-        _window.ResistancesToggle.Text = Loc.GetString("st-ui-vehicle-armor-resistances", ("unfolded", _resistancesExpanded));
-        _window.PassengersToggle.Text = Loc.GetString("st-ui-vehicle-passengers", ("unfolded", _passengersExpanded));
+        _window.ResistancesToggle.Text = Loc.GetString("ccm-ui-vehicle-armor-resistances", ("unfolded", _resistancesExpanded));
+        _window.PassengersToggle.Text = Loc.GetString("ccm-ui-vehicle-passengers", ("unfolded", _passengersExpanded));
     }
 
     public void Refresh()
@@ -107,8 +107,8 @@ public sealed class VehicleStatusBui : BoundUserInterface
             _window.IntegrityProgressBar.Value = integrity;
 
         var labelText = integrity <= 0 || vehicle.Destroyed
-            ? Loc.GetString("st-ui-vehicle-hull-destroyed")
-            : Loc.GetString("st-ui-vehicle-hull-integrity", ("integrity", integrity.ToString("F0")));
+            ? Loc.GetString("ccm-ui-vehicle-hull-destroyed")
+            : Loc.GetString("ccm-ui-vehicle-hull-integrity", ("integrity", integrity.ToString("F0")));
 
         if (_window.IntegrityProgressBar.Label.Text != labelText)
             _window.IntegrityProgressBar.Label.Text = labelText;
@@ -165,7 +165,7 @@ public sealed class VehicleStatusBui : BoundUserInterface
 
         var locked = _lastState?.DoorState ?? false;
 
-        _window.DoorLockLabel.Text = Loc.GetString("st-ui-vehicle-door-state", ("locked", locked));
+        _window.DoorLockLabel.Text = Loc.GetString("ccm-ui-vehicle-door-state", ("locked", locked));
 
         if (locked)
         {
@@ -213,7 +213,7 @@ public sealed class VehicleStatusBui : BoundUserInterface
 
             var typeLabel = new Label
             {
-                Text = Loc.GetString("st-ui-vehicle-resistance-entry", ("type", damageType)),
+                Text = Loc.GetString("ccm-ui-vehicle-resistance-entry", ("type", damageType)),
                 HorizontalExpand = true,
                 FontColorOverride = Color.FromHex("#E0E0E0")
             };
@@ -255,7 +255,7 @@ public sealed class VehicleStatusBui : BoundUserInterface
 
             var overallLabel = new Label
             {
-                Text = Loc.GetString("st-ui-vehicle-resistance-entry", ("type", "Expl")),
+                Text = Loc.GetString("ccm-ui-vehicle-resistance-entry", ("type", "Expl")),
                 HorizontalExpand = true,
                 FontColorOverride = Color.FromHex("#E0E0E0")
             };
@@ -284,7 +284,7 @@ public sealed class VehicleStatusBui : BoundUserInterface
 
                 var modLabel = new Label
                 {
-                    Text = Loc.GetString("st-ui-vehicle-resistance-entry", ("type", "Expl")),
+                    Text = Loc.GetString("ccm-ui-vehicle-resistance-entry", ("type", "Expl")),
                     HorizontalExpand = true,
                     FontColorOverride = Color.FromHex("#B0B0B0")
                 };
@@ -321,10 +321,10 @@ public sealed class VehicleStatusBui : BoundUserInterface
         _window.PassengerCategoriesContainer.RemoveAllChildren();
 
         if (vehicle.PassengerSlots.Max > 0)
-            AddPassengerCategory("st-ui-vehicle-passengers-category", vehicle.PassengerSlots, "#4CAF50");
+            AddPassengerCategory("ccm-ui-vehicle-passengers-category", vehicle.PassengerSlots, "#4CAF50");
 
         if (vehicle.RevivableDeadSlots.Max > 0)
-            AddPassengerCategory("st-ui-vehicle-dead-category", vehicle.RevivableDeadSlots, "#FF9800");
+            AddPassengerCategory("ccm-ui-vehicle-dead-category", vehicle.RevivableDeadSlots, "#FF9800");
 
         foreach (var roleGroup in vehicle.RoleReservedSlots)
         {
@@ -337,7 +337,7 @@ public sealed class VehicleStatusBui : BoundUserInterface
 
             var nameLabel = new Label
             {
-                Text = Loc.GetString("st-ui-vehicle-role-reserved-slot", ("name", roleGroup.CategoryName)),
+                Text = Loc.GetString("ccm-ui-vehicle-role-reserved-slot", ("name", roleGroup.CategoryName)),
                 HorizontalExpand = true,
                 FontColorOverride = Color.FromHex("#E0E0E0")
             };
@@ -407,7 +407,7 @@ public sealed class VehicleStatusBui : BoundUserInterface
         {
             _window.HardpointsContainer.AddChild(new Label
             {
-                Text = Loc.GetString("st-ui-vehicle-no-hardpoints"),
+                Text = Loc.GetString("ccm-ui-vehicle-no-hardpoints"),
                 Margin = new Thickness(8),
                 HorizontalAlignment = Control.HAlignment.Center,
                 FontColorOverride = Color.FromHex("#888888")
@@ -489,7 +489,7 @@ public sealed class VehicleStatusBui : BoundUserInterface
                     Margin = new Thickness(0, 0, 0, 6)
                 };
 
-                bar.Label.Text = Loc.GetString("st-ui-vehicle-hardpoint-integrity",
+                bar.Label.Text = Loc.GetString("ccm-ui-vehicle-hardpoint-integrity",
                     ("integrity", health.ToString("F0")));
 
                 bar.ForegroundStyleBoxOverride =
@@ -515,7 +515,7 @@ public sealed class VehicleStatusBui : BoundUserInterface
 
                 destroyedPanel.AddChild(new Label
                 {
-                    Text = Loc.GetString("st-ui-vehicle-hardpoint-destroyed"),
+                    Text = Loc.GetString("ccm-ui-vehicle-hardpoint-destroyed"),
                     HorizontalAlignment = Control.HAlignment.Center,
                     Margin = new Thickness(4),
                     FontColorOverride = Color.FromHex("#F44336")
@@ -540,7 +540,7 @@ public sealed class VehicleStatusBui : BoundUserInterface
                 Margin = new Thickness(0, 0, 0, 4)
             };
 
-            ammoBar.Label.Text = Loc.GetString("st-ui-vehicle-ammo",
+            ammoBar.Label.Text = Loc.GetString("ccm-ui-vehicle-ammo",
                 ("current", info.CurrentAmmo),
                 ("max", info.MaxAmmo));
 
@@ -563,7 +563,7 @@ public sealed class VehicleStatusBui : BoundUserInterface
 
                 magsRow.AddChild(new Label
                 {
-                    Text = Loc.GetString("st-ui-vehicle-spare-mags"),
+                    Text = Loc.GetString("ccm-ui-vehicle-spare-mags"),
                     HorizontalExpand = true,
                     FontColorOverride = Color.FromHex("#B0B0B0")
                 });

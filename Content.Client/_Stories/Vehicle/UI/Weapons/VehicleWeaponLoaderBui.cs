@@ -1,9 +1,9 @@
-using Content.Shared._Stories.Attachables;
-using Content.Shared._Stories.Vehicle;
+using Content.Shared._CCM.Attachables;
+using Content.Shared._CCM.Vehicle;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface.Controls;
 
-namespace Content.Client._Stories.Vehicle.UI.Weapons;
+namespace Content.Client._CCM.Vehicle.UI.Weapons;
 
 [UsedImplicitly]
 public sealed class VehicleWeaponLoaderBui : BoundUserInterface
@@ -45,7 +45,7 @@ public sealed class VehicleWeaponLoaderBui : BoundUserInterface
         {
             _window.HardpointsContainer.AddChild(new Label
             {
-                Text = Loc.GetString("st-vehicle-ui-no-any-hardpoint")
+                Text = Loc.GetString("ccm-vehicle-ui-no-any-hardpoint")
             });
             return;
         }
@@ -65,14 +65,14 @@ public sealed class VehicleWeaponLoaderBui : BoundUserInterface
             };
 
             var statusText = hardpointInfo.HasActiveMagazine
-                ? Loc.GetString("st-vehicle-ui-magazine-loaded")
-                : Loc.GetString("st-vehicle-ui-magazine-empty");
+                ? Loc.GetString("ccm-vehicle-ui-magazine-loaded")
+                : Loc.GetString("ccm-vehicle-ui-magazine-empty");
 
             var ammoInfo = hardpointInfo.HasActiveMagazine
-                ? Loc.GetString("st-vehicle-ui-ammo-info", ("current", hardpointInfo.CurrentAmmo), ("max", hardpointInfo.MaxAmmo))
+                ? Loc.GetString("ccm-vehicle-ui-ammo-info", ("current", hardpointInfo.CurrentAmmo), ("max", hardpointInfo.MaxAmmo))
                 : "";
 
-            var buttonText = Loc.GetString("st-vehicle-ui-hardpoint-button",
+            var buttonText = Loc.GetString("ccm-vehicle-ui-hardpoint-button",
                 ("name", hardpointInfo.Name),
                 ("status", statusText),
                 ("ammo", ammoInfo));
@@ -85,7 +85,7 @@ public sealed class VehicleWeaponLoaderBui : BoundUserInterface
 
             var spareInfo = new Label
             {
-                Text = Loc.GetString("st-vehicle-ui-spare-info", ("current", hardpointInfo.SpareCount), ("max", hardpointInfo.MaxSpares)),
+                Text = Loc.GetString("ccm-vehicle-ui-spare-info", ("current", hardpointInfo.SpareCount), ("max", hardpointInfo.MaxSpares)),
                 StyleClasses = { "LabelSubText" },
                 FontColorOverride = Color.Gray
             };

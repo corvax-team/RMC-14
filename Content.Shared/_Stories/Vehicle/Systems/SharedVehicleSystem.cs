@@ -9,7 +9,7 @@ using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Scoping;
-using Content.Shared._Stories.Attachables;
+using Content.Shared._CCM.Attachables;
 using Content.Shared.Access.Systems;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
@@ -45,7 +45,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Buckle.Components;
 using Content.Shared._RMC14.Dropship;
 
-namespace Content.Shared._Stories.Vehicle.Systems;
+namespace Content.Shared._CCM.Vehicle.Systems;
 
 public sealed partial class SharedVehicleSystem : EntitySystem
 {
@@ -218,7 +218,7 @@ public sealed partial class SharedVehicleSystem : EntitySystem
 
         if (HasComp<DropshipComponent>(xform.GridUid) || HasComp<FTLComponent>(xform.GridUid))
         {
-            _popup.PopupEntity(Loc.GetString("st-vehicle-cant-leave-on-shuttle"), args.User);
+            _popup.PopupEntity(Loc.GetString("ccm-vehicle-cant-leave-on-shuttle"), args.User);
             args.Handled = true;
             return;
         }
@@ -341,8 +341,8 @@ public sealed partial class SharedVehicleSystem : EntitySystem
         vehicle.Locked = !vehicle.Locked;
 
         var icon = vehicle.Locked
-            ? new SpriteSpecifier.Rsi(new ResPath("/Textures/_Stories/Actions/vehicle_actions.rsi"), "door_locked")
-            : new SpriteSpecifier.Rsi(new ResPath("/Textures/_Stories/Actions/vehicle_actions.rsi"), "door_unlocked");
+            ? new SpriteSpecifier.Rsi(new ResPath("/Textures/_CCM/Actions/vehicle_actions.rsi"), "door_locked")
+            : new SpriteSpecifier.Rsi(new ResPath("/Textures/_CCM/Actions/vehicle_actions.rsi"), "door_unlocked");
 
         foreach (var action in _actions.GetActions(pilot))
         {
@@ -430,7 +430,7 @@ public sealed partial class SharedVehicleSystem : EntitySystem
     {
         if (TryComp<RMCSizeComponent>(args.Attacker, out var rmcSize) && rmcSize.Size < ent.Comp.SizeRequiredToHit)
         {
-            _popup.PopupClient(Loc.GetString("st-vehicle-wrong-size-to-attack"), args.Attacker);
+            _popup.PopupClient(Loc.GetString("ccm-vehicle-wrong-size-to-attack"), args.Attacker);
             args.Cancelled = true;
         }
     }
@@ -626,13 +626,13 @@ public sealed partial class SharedVehicleSystem : EntitySystem
 
         if (ent.Comp.Watcher != null)
         {
-            _popup.PopupEntity(Loc.GetString("st-vehicle-viewport-taken"), args.User);
+            _popup.PopupEntity(Loc.GetString("ccm-vehicle-viewport-taken"), args.User);
             return;
         }
 
         if (HasComp<ScopingComponent>(args.User))
         {
-            _popup.PopupCursor(Loc.GetString("st-vehicle-cannot-observe-while-scoping"), args.User);
+            _popup.PopupCursor(Loc.GetString("ccm-vehicle-cannot-observe-while-scoping"), args.User);
             return;
         }
 
@@ -787,7 +787,7 @@ public sealed partial class SharedVehicleSystem : EntitySystem
                 comp.XenoSlots.Current++;
             else
             {
-                _popup.PopupEntity(Loc.GetString("st-vehicle-is-full"), user);
+                _popup.PopupEntity(Loc.GetString("ccm-vehicle-is-full"), user);
                 return;
             }
         }
@@ -797,7 +797,7 @@ public sealed partial class SharedVehicleSystem : EntitySystem
                 comp.RevivableDeadSlots.Current++;
             else
             {
-                _popup.PopupEntity(Loc.GetString("st-vehicle-is-full"), user);
+                _popup.PopupEntity(Loc.GetString("ccm-vehicle-is-full"), user);
                 return;
             }
         }
@@ -811,7 +811,7 @@ public sealed partial class SharedVehicleSystem : EntitySystem
             }
             else
             {
-                _popup.PopupEntity(Loc.GetString("st-vehicle-is-full"), user);
+                _popup.PopupEntity(Loc.GetString("ccm-vehicle-is-full"), user);
                 return;
             }
         }
@@ -821,7 +821,7 @@ public sealed partial class SharedVehicleSystem : EntitySystem
         }
         else
         {
-            _popup.PopupEntity(Loc.GetString("st-vehicle-is-full"), user);
+            _popup.PopupEntity(Loc.GetString("ccm-vehicle-is-full"), user);
             return;
         }
 
@@ -922,7 +922,7 @@ public sealed partial class SharedVehicleSystem : EntitySystem
 
         if (HasComp<XenoComponent>(user) && vehicle.Destroyed)
         {
-            _popup.PopupClient(Loc.GetString("st-vehicle-xeno-push-back-hull"), user);
+            _popup.PopupClient(Loc.GetString("ccm-vehicle-xeno-push-back-hull"), user);
             return true;
         }
 
@@ -962,14 +962,14 @@ public sealed partial class SharedVehicleSystem : EntitySystem
 
             if (!hasAccess || !correctFaction)
             {
-                _popup.PopupClient(Loc.GetString("st-vehicle-locked"), user);
+                _popup.PopupClient(Loc.GetString("ccm-vehicle-locked"), user);
                 return false;
             }
 
             return true;
         }
 
-        _popup.PopupClient(Loc.GetString("st-vehicle-locked"), user);
+        _popup.PopupClient(Loc.GetString("ccm-vehicle-locked"), user);
         return false;
     }
 

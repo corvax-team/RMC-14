@@ -4,7 +4,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._Stories.Vehicle.Systems;
+namespace Content.Shared._CCM.Vehicle.Systems;
 
 public sealed partial class SharedVehicleSystem
 {
@@ -66,7 +66,7 @@ public sealed partial class SharedVehicleSystem
                 // TODO apparently this results in a duplicate move event because "This should have its event run during
                 // island solver"??. So maybe SetRotation needs an argument to avoid raising an event?
                 var worldRot = _transform.GetWorldRotation(xform);
-                // Stories-Vehicle-Movement-Tweak-Start
+                // Corvax-Vehicle-Movement-Tweak-Start
                 var delta = xform.LocalRotation + wishDir.ToWorldAngle() - worldRot;
 
                 if (VehicleMoveQuery.HasComponent(uid))
@@ -94,6 +94,6 @@ public sealed partial class SharedVehicleSystem
                 {
                     _transform.SetLocalRotation(uid, delta, xform);
                 }
-                // Stories-Vehicle-Movement-Tweak-End
+                // Corvax-Vehicle-Movement-Tweak-End
             }
 */

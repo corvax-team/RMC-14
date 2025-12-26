@@ -11,7 +11,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
-namespace Content.Server._Stories.Vehicle;
+namespace Content.Server._CCM.Vehicle;
 
 public sealed class CrewmanSpawnSystem : EntitySystem
 {

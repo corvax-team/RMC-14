@@ -1,11 +1,11 @@
-using Content.Shared._Stories.Vehicle;
+using Content.Shared._CCM.Vehicle;
 using Content.Shared.Damage;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
-namespace Content.Client._Stories.Vehicle;
+namespace Content.Client._CCM.Vehicle;
 
 public sealed class VehicleDamageOverlaySystem : EntitySystem
 {

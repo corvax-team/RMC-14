@@ -9,7 +9,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 
-namespace Content.Client._Stories.Vehicle.Attachables.UI;
+namespace Content.Client._CCM.Vehicle.Attachables.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class VehicleAttachableHolderStripMenu : FancyWindow
@@ -72,7 +72,7 @@ public sealed partial class VehicleAttachableHolderStripMenu : FancyWindow
 
             _attachableButton = new Button
             {
-                Text = Loc.GetString("st-vehicle-attachable-holder-strip-ui-empty-slot"),
+                Text = Loc.GetString("ccm-vehicle-attachable-holder-strip-ui-empty-slot"),
                 HorizontalExpand = true,
                 HorizontalAlignment = HAlignment.Stretch,
                 StyleClasses = { StyleBase.ButtonOpenRight },
@@ -100,7 +100,7 @@ public sealed partial class VehicleAttachableHolderStripMenu : FancyWindow
         {
             if (attachableName == null)
             {
-                _attachableButton.Text = Loc.GetString("st-ui-attachable-holder-strip-ui-empty-slot");
+                _attachableButton.Text = Loc.GetString("ccm-ui-attachable-holder-strip-ui-empty-slot");
                 _attachableButton.Disabled = true;
                 return;
             }

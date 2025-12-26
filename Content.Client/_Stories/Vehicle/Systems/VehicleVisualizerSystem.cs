@@ -1,13 +1,13 @@
-using Content.Client._Stories.Vehicle.Attachables;
-using Content.Shared._Stories.Attachables;
-using Content.Shared._Stories.Vehicle;
+using Content.Client._CCM.Vehicle.Attachables;
+using Content.Shared._CCM.Attachables;
+using Content.Shared._CCM.Vehicle;
 using Content.Shared.Damage;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Robust.Client.GameObjects;
 using Robust.Shared.Utility;
 
-namespace Content.Client._Stories.Vehicle;
+namespace Content.Client._CCM.Vehicle;
 
 public sealed class VehicleVisualizerSystem : VisualizerSystem<VehicleComponent>
 {

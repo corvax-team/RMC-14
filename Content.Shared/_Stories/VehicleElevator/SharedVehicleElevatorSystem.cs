@@ -1,5 +1,5 @@
 using Content.Shared._RMC14.Requisitions.Components;
-using Content.Shared._Stories.VehicleElevator.Components;
+using Content.Shared._CCM.VehicleElevator.Components;
 using Content.Shared.Climbing.Components;
 using Content.Shared.StepTrigger.Systems;
 using Robust.Shared.Configuration;
@@ -7,7 +7,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using static Content.Shared._RMC14.Requisitions.Components.RequisitionsRailingMode;
 
-namespace Content.Shared._Stories.VehicleElevator;
+namespace Content.Shared._CCM.VehicleElevator;
 
 public abstract class SharedVehicleElevatorSystem : EntitySystem
 {

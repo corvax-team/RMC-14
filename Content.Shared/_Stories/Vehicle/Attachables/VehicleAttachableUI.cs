@@ -1,6 +1,6 @@
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Stories.Attachables;
+namespace Content.Shared._CCM.Attachables;
 
 [Serializable, NetSerializable]
 public sealed class VehicleAttachableHolderStripUserInterfaceState(Dictionary<string, (string?, bool)> attachableSlots)

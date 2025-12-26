@@ -1,8 +1,8 @@
-using Content.Shared._Stories.Vehicle.Systems;
+using Content.Shared._CCM.Vehicle.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._Stories.Vehicle;
+namespace Content.Shared._CCM.Vehicle;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedVehicleSystem))]
@@ -21,5 +21,5 @@ public sealed partial class VehicleStructureTargetComponent : Component
     public int DamageToVehicleOnFail = 5;
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? DestroySound = new SoundPathSpecifier("/Audio/_Stories/metal_crash.ogg", AudioParams.Default.WithVolume(20));
+    public SoundSpecifier? DestroySound = new SoundPathSpecifier("/Audio/_CCM/metal_crash.ogg", AudioParams.Default.WithVolume(-6));
 }

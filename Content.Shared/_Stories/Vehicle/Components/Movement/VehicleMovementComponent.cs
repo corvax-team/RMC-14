@@ -1,10 +1,10 @@
-using Content.Shared._Stories.Vehicle.Systems;
+using Content.Shared._CCM.Vehicle.Systems;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared._Stories.Vehicle;
+namespace Content.Shared._CCM.Vehicle;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(SharedVehicleSystem), typeof(SharedMoverController))]
@@ -56,7 +56,7 @@ public sealed partial class VehicleMovementComponent : Component
     public TimeSpan InputDelay = TimeSpan.FromSeconds(0.2);
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? MovementSound = new SoundPathSpecifier("/Audio/_Stories/tank_driving.ogg", AudioParams.Default.WithVolume(-4));
+    public SoundSpecifier? MovementSound = new SoundPathSpecifier("/Audio/_CCM/tank_driving.ogg", AudioParams.Default.WithVolume(-4));
 
     [DataField, AutoNetworkedField]
     public EntityUid? AudioStream;

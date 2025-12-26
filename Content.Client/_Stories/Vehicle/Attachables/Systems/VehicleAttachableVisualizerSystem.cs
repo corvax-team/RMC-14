@@ -1,5 +1,5 @@
-using Content.Shared._Stories.Vehicle;
-using Content.Shared._Stories.Attachables;
+using Content.Shared._CCM.Vehicle;
+using Content.Shared._CCM.Attachables;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Robust.Client.GameObjects;
@@ -7,11 +7,11 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Robust.Client.GameObjects;
 using Robust.Shared.GameStates;
-using Content.Client._Stories.Vehicle.Attachables;
+using Content.Client._CCM.Vehicle.Attachables;
 using Content.Shared._RMC14.Damage;
 using Content.Shared.FixedPoint;
 
-namespace Content.Client._Stories.Vehicle;
+namespace Content.Client._CCM.Vehicle;
 
 public sealed class VehicleAttachableVisualizerSystem : VisualizerSystem<VehicleAttachableDamageVisualsComponent>
 {

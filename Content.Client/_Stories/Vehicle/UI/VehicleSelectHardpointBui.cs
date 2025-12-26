@@ -1,9 +1,9 @@
-using Content.Shared._Stories.Attachables;
-using Content.Shared._Stories.Vehicle;
+using Content.Shared._CCM.Attachables;
+using Content.Shared._CCM.Vehicle;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface.Controls;
 
-namespace Content.Client._Stories.Vehicle.UI;
+namespace Content.Client._CCM.Vehicle.UI;
 
 [UsedImplicitly]
 public sealed class VehicleSelectHardpointBui : BoundUserInterface
@@ -56,7 +56,7 @@ public sealed class VehicleSelectHardpointBui : BoundUserInterface
         {
             _window.HardpointsContainer.AddChild(new Label
             {
-                Text = Loc.GetString("st-vehicle-ui-no-any-hardpoint"),
+                Text = Loc.GetString("ccm-vehicle-ui-no-any-hardpoint"),
                 HorizontalExpand = true
             });
             return;

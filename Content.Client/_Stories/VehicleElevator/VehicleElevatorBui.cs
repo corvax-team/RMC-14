@@ -1,6 +1,6 @@
 ﻿using Content.Client._RMC14;
-using Content.Shared._Stories.VehicleElevator;
-using Content.Shared._Stories.VehicleElevator.Components;
+using Content.Shared._CCM.VehicleElevator;
+using Content.Shared._CCM.VehicleElevator.Components;
 using JetBrains.Annotations;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
@@ -8,7 +8,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using static Content.Shared._RMC14.Requisitions.Components.RequisitionsElevatorMode;
 
-namespace Content.Client._Stories.VehicleElevator;
+namespace Content.Client._CCM.VehicleElevator;
 
 [UsedImplicitly]
 public sealed class VehicleElevatorBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
@@ -49,7 +49,7 @@ public sealed class VehicleElevatorBui(EntityUid owner, Enum uiKey) : BoundUserI
             _ => "other"
         };
 
-        var platformLabel = Loc.GetString("st-vehicle-elevator-label", ("state", stateKey));
+        var platformLabel = Loc.GetString("ccm-vehicle-elevator-label", ("state", stateKey));
         _window.PlatformLabel.SetMessage(platformLabel);
 
         _window.LowerPlatformButton.Visible = uiState.PlatformLowered == Raised;

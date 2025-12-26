@@ -1,13 +1,13 @@
 using System.Linq;
-using Content.Shared._Stories.Vehicle;
-using Content.Shared._Stories.Vehicle.Systems;
+using Content.Shared._CCM.Vehicle;
+using Content.Shared._CCM.Vehicle.Systems;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
 
-namespace Content.Shared._Stories.Attachables;
+namespace Content.Shared._CCM.Attachables;
 
 public sealed partial class AttachableModifiersSystem : EntitySystem
 {
@@ -161,7 +161,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
 
             if (!_holder.TryGetHolder(ent.Owner, out holder) || holder is null)
             {
-                var msg = Loc.GetString("st-destroyed-vehicle-attachable-deleted", ("attachable", ent.Owner));
+                var msg = Loc.GetString("ccm-destroyed-vehicle-attachable-deleted", ("attachable", ent.Owner));
                 _popup.PopupPredicted(msg, msg, ent, ent, PopupType.Small);
 
                 PredictedQueueDel(ent.Owner);

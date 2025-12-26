@@ -1,4 +1,4 @@
-namespace Content.Shared._Stories.Vehicle;
+namespace Content.Shared._CCM.Vehicle;
 
 [RegisterComponent]
 public sealed partial class VehicleInteriorDoorComponent : Component

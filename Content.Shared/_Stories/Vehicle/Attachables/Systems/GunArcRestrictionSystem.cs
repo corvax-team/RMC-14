@@ -1,4 +1,4 @@
-using Content.Shared._Stories.Attachables;
+using Content.Shared._CCM.Attachables;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Components;
@@ -56,7 +56,7 @@ public sealed class GunArcRestrictionSystem : EntitySystem
         if (!args.IsInDetailsRange)
             return;
 
-        args.PushMarkup(Loc.GetString("st-vehicle-gun-arc-restriction-examine",
+        args.PushMarkup(Loc.GetString("ccm-vehicle-gun-arc-restriction-examine",
             ("degrees", Math.Round(component.MaxAngleDeviation.Degrees * 2, 1))));
     }
 

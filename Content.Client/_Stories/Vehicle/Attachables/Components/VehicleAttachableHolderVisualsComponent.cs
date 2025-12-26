@@ -1,6 +1,6 @@
 using Robust.Shared.Utility;
 
-namespace Content.Client._Stories.Vehicle.Attachables;
+namespace Content.Client._CCM.Vehicle.Attachables;
 
 [RegisterComponent, AutoGenerateComponentState]
 public sealed partial class VehicleAttachableHolderVisualsComponent : Component

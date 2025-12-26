@@ -2,7 +2,7 @@
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 
-namespace Content.Client._Stories.VehicleElevator;
+namespace Content.Client._CCM.VehicleElevator;
 
 [GenerateTypedNameReferences]
 public sealed partial class VehicleElevatorWindow : DefaultWindow

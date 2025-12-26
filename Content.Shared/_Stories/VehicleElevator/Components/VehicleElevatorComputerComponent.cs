@@ -1,7 +1,7 @@
 ﻿using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Stories.VehicleElevator.Components;
+namespace Content.Shared._CCM.VehicleElevator.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedVehicleElevatorSystem))]

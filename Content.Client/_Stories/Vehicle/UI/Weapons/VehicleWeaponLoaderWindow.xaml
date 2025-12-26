@@ -3,10 +3,10 @@
                      SetSize="550 350"
                      MinSize="550 350"
                      Resizable="True"
-                     Title="{Loc st-vehicle-ui-window-title}">
+                     Title="{Loc ccm-vehicle-ui-window-title}">
     <BoxContainer Orientation="Vertical" VerticalExpand="True" Margin="8">
-        <Label Text="{Loc st-vehicle-ui-available-weapons}" Margin="0,0,0,8" />
-        <Label Text="{Loc st-vehicle-ui-loaded-empty-legend}" 
+        <Label Text="{Loc ccm-vehicle-ui-available-weapons}" Margin="0,0,0,8" />
+        <Label Text="{Loc ccm-vehicle-ui-loaded-empty-legend}" 
                Margin="0,0,0,4" 
                StyleClasses="LabelSubText"/>
         <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
@@ -15,7 +15,7 @@
                          VerticalExpand="True" 
                          Access="Public" />
         </ScrollContainer>
-        <Label Text="{Loc st-vehicle-ui-click-to-reload}" 
+        <Label Text="{Loc ccm-vehicle-ui-click-to-reload}" 
                Margin="0,8,0,0" 
                StyleClasses="LabelSubText"/>
     </BoxContainer>

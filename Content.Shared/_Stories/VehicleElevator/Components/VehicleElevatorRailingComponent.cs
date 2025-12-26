@@ -1,7 +1,7 @@
 ﻿using Content.Shared._RMC14.Requisitions.Components;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._Stories.VehicleElevator.Components;
+namespace Content.Shared._CCM.VehicleElevator.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 [Access(typeof(SharedVehicleElevatorSystem))]

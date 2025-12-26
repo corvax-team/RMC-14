@@ -2,7 +2,7 @@ using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._Stories.Vehicle;
+namespace Content.Shared._CCM.Vehicle;
 
 [Serializable, NetSerializable]
 public enum VehicleAttachableVisualLayers : byte

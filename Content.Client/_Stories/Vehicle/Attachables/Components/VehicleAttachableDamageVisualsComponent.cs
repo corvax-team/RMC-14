@@ -1,4 +1,4 @@
-namespace Content.Client._Stories.Vehicle.Attachables;
+namespace Content.Client._CCM.Vehicle.Attachables;
 
 [RegisterComponent]
 public sealed partial class VehicleAttachableDamageVisualsComponent : Component

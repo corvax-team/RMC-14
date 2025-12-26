@@ -1,8 +1,8 @@
-using Content.Shared._Stories.Attachables;
+using Content.Shared._CCM.Attachables;
 using Robust.Client.GameObjects;
 using Robust.Shared.Containers;
 
-namespace Content.Client._Stories.Vehicle.Attachables;
+namespace Content.Client._CCM.Vehicle.Attachables;
 
 public sealed class VehicleAttachableHolderVisuals : EntitySystem
 {

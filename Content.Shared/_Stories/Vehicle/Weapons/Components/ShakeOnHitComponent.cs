@@ -1,7 +1,7 @@
 using Content.Shared._RMC14.Stun;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._Stories.Vehicle;
+namespace Content.Shared._CCM.Vehicle;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ShakeOnHitComponent : Component

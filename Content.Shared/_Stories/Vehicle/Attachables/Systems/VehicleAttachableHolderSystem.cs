@@ -3,7 +3,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared._Stories.Vehicle;
+using Content.Shared._CCM.Vehicle;
 using Content.Shared.Containers;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.Components;
@@ -18,7 +18,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Stories.Attachables;
+namespace Content.Shared._CCM.Attachables;
 
 public sealed class VehicleAttachableHolderSystem : EntitySystem
 {
@@ -343,7 +343,7 @@ public sealed class VehicleAttachableHolderSystem : EntitySystem
 
         if (attachableComp.Destroyed)
         {
-            var msg = Loc.GetString("st-destroyed-vehicle-attachable-deleted", ("attachable", attachableUid));
+            var msg = Loc.GetString("ccm-destroyed-vehicle-attachable-deleted", ("attachable", attachableUid));
             _popup.PopupEntity(msg, attachableUid, PopupType.Small);
 
             QueueDel(attachableUid);

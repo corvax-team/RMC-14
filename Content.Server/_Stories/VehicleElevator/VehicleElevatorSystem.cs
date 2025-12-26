@@ -1,7 +1,7 @@
 ﻿using Content.Server.Administration.Logs;
 using Content.Shared._RMC14.Requisitions.Components;
-using Content.Shared._Stories.VehicleElevator;
-using Content.Shared._Stories.VehicleElevator.Components;
+using Content.Shared._CCM.VehicleElevator;
+using Content.Shared._CCM.VehicleElevator.Components;
 using Content.Shared.Database;
 using Content.Shared.UserInterface;
 using Robust.Server.Audio;
@@ -11,7 +11,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using static Content.Shared._RMC14.Requisitions.Components.RequisitionsElevatorMode;
 
-namespace Content.Server._Stories.VehicleRequisitions;
+namespace Content.Server._CCM.VehicleRequisitions;
 
 public sealed partial class VehicleElevatorSystem : SharedVehicleElevatorSystem
 {

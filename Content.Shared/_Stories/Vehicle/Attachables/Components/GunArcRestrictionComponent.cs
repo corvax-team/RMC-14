@@ -12,5 +12,5 @@ public sealed partial class GunArcRestrictionComponent : Component
     public Angle ArcDirection = Angle.Zero;
 
     [DataField]
-    public string? RestrictionMessage = "st-vehicle-gun-arc-restriction";
+    public string? RestrictionMessage = "ccm-vehicle-gun-arc-restriction";
 }

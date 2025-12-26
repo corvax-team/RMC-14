@@ -5,7 +5,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._Stories.Vehicle;
+namespace Content.Shared._CCM.Vehicle;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class VehicleComponent : Component
@@ -35,7 +35,7 @@ public sealed partial class VehicleComponent : Component
     public bool Locked;
 
     [DataField, AutoNetworkedField]
-    public ResPath GridPath = new ResPath("/Maps/_Stories/Vehicles/M577.yml");
+    public ResPath GridPath = new ResPath("/Maps/_CCM/Vehicles/M577.yml");
 
     [DataField, AutoNetworkedField]
     public string MovementSlot = "st-vehicle-slot-treads";
@@ -65,7 +65,7 @@ public sealed partial class VehicleComponent : Component
     public SlotCount PassengerSlots = new();
 
     [DataField, AutoNetworkedField]
-    public List<RoleSlotGroup> RoleReservedSlots { get; set; } = new();
+    public List<RoleSlotGroup> RoleReservedSlots = new();
 
     [DataField, AutoNetworkedField]
     public SlotCount RevivableDeadSlots = new();

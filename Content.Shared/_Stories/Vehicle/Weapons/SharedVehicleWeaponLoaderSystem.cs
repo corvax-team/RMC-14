@@ -7,7 +7,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 
-namespace Content.Shared._Stories.Vehicle.Systems;
+namespace Content.Shared._CCM.Vehicle.Systems;
 
 public sealed partial class SharedVehicleWeaponLoaderSystem : EntitySystem
 {
@@ -89,28 +89,28 @@ public sealed partial class SharedVehicleWeaponLoaderSystem : EntitySystem
 
         if (compatibleHardpoint == null || gunComp == null)
         {
-            _popup.PopupCursor(Loc.GetString("st-vehicle-loader-no-compatible-weapon"), args.User);
+            _popup.PopupCursor(Loc.GetString("ccm-vehicle-loader-no-compatible-weapon"), args.User);
             args.Handled = true;
             return;
         }
 
         if (!_skills.HasAllSkills(args.User, loader.Comp.Skills))
         {
-            _popup.PopupCursor(Loc.GetString("st-vehicle-loader-skill-required"), args.User);
+            _popup.PopupCursor(Loc.GetString("ccm-vehicle-loader-skill-required"), args.User);
             args.Handled = true;
             return;
         }
 
         if (gunComp.SpareMagazinesContainer.ContainedEntities.Count >= gunComp.MaxSpareMagazines)
         {
-            _popup.PopupCursor(Loc.GetString("st-vehicle-loader-storage-full"), args.User);
+            _popup.PopupCursor(Loc.GetString("ccm-vehicle-loader-storage-full"), args.User);
             args.Handled = true;
             return;
         }
 
         if (_net.IsServer && _container.Insert(args.Used, gunComp.SpareMagazinesContainer))
         {
-            _popup.PopupEntity(Loc.GetString("st-vehicle-loader-magazine-loaded",
+            _popup.PopupEntity(Loc.GetString("ccm-vehicle-loader-magazine-loaded",
                 ("weapon", Name(compatibleHardpoint.Value))), loader.Owner, args.User);
             _audio.PlayPvs(loader.Comp.LoadSound, loader.Owner);
             UpdateLoaderUI(loader);
@@ -134,13 +134,13 @@ public sealed partial class SharedVehicleWeaponLoaderSystem : EntitySystem
 
         if (!_skills.HasAllSkills(args.Actor, loader.Comp.Skills))
         {
-            _popup.PopupCursor(Loc.GetString("st-vehicle-loader-skill-required"), args.Actor);
+            _popup.PopupCursor(Loc.GetString("ccm-vehicle-loader-skill-required"), args.Actor);
             return;
         }
 
         if (gun.SpareMagazinesContainer.ContainedEntities.Count == 0)
         {
-            _popup.PopupCursor(Loc.GetString("st-vehicle-loader-no-spare-magazines"), args.Actor);
+            _popup.PopupCursor(Loc.GetString("ccm-vehicle-loader-no-spare-magazines"), args.Actor);
             return;
         }
 
@@ -163,7 +163,7 @@ public sealed partial class SharedVehicleWeaponLoaderSystem : EntitySystem
             _container.Remove(spareMag, gun.SpareMagazinesContainer);
             _container.Insert(spareMag, gun.ActiveMagazineContainer);
 
-            _popup.PopupEntity(Loc.GetString("st-vehicle-loader-magazine-loaded",
+            _popup.PopupEntity(Loc.GetString("ccm-vehicle-loader-magazine-loaded",
                 ("weapon", Name(hardpoint))), loader.Owner, args.Actor);
             _audio.PlayPvs(loader.Comp.LoadSound, loader.Owner);
             Dirty(hardpoint, gun);

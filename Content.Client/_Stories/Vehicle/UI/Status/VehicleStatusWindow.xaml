@@ -1,10 +1,10 @@
 <controls:VehicleStatusWindow
     xmlns="https://spacestation14.io"
-    xmlns:controls="clr-namespace:Content.Client._Stories.Vehicle.UI.Status"
+    xmlns:controls="clr-namespace:Content.Client._CCM.Vehicle.UI.Status"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
-    xmlns:stui="clr-namespace:Content.Client._Stories.UserInterface.Control"
-    Title="{Loc st-ui-vehicle-status-title}"
+    xmlns:stui="clr-namespace:Content.Client._CCM.UserInterface.Control"
+    Title="{Loc ccm-ui-vehicle-status-title}"
     MinSize="520 700">
     <PanelContainer>
         <PanelContainer.PanelOverride>
@@ -23,7 +23,7 @@
                             BackgroundColor="#1A1A1A" />
                     </PanelContainer.PanelOverride>
                     <BoxContainer Orientation="Vertical" Margin="8">
-                        <Label Text="{Loc st-ui-vehicle-status-title}" 
+                        <Label Text="{Loc ccm-ui-vehicle-status-title}" 
                                StyleClasses="LabelHeading" 
                                FontColorOverride="#E0E0E0"
                                HorizontalAlignment="Center"
@@ -44,7 +44,7 @@
                             BackgroundColor="#252525" />
                     </PanelContainer.PanelOverride>
                     <BoxContainer Orientation="Horizontal" Margin="8" HorizontalExpand="True">
-                        <Label Text="{Loc st-ui-vehicle-door-state-label}" 
+                        <Label Text="{Loc ccm-ui-vehicle-door-state-label}" 
                                StyleClasses="LabelSubText"
                                FontColorOverride="#B0B0B0"
                                VerticalAlignment="Center"/>
@@ -99,7 +99,7 @@
                             BackgroundColor="#252525" />
                     </PanelContainer.PanelOverride>
                     <BoxContainer Orientation="Vertical" Margin="8">
-                        <Label Text="{Loc st-ui-vehicle-hardpoints}" 
+                        <Label Text="{Loc ccm-ui-vehicle-hardpoints}" 
                                StyleClasses="LabelHeading" 
                                FontColorOverride="Khaki" 
                                HorizontalAlignment="Center"

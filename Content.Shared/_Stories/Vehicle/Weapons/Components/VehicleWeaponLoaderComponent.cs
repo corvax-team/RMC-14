@@ -3,7 +3,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._Stories.Vehicle;
+namespace Content.Shared._CCM.Vehicle;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class VehicleWeaponLoaderComponent : Component
@@ -15,5 +15,5 @@ public sealed partial class VehicleWeaponLoaderComponent : Component
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int> Skills = new();
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? LoadSound = new SoundPathSpecifier("/Audio/_Stories/hydraulics_3.ogg");
+    public SoundSpecifier? LoadSound = new SoundPathSpecifier("/Audio/_CCM/hydraulics_3.ogg");
 }

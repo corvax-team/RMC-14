@@ -37,7 +37,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Player;
 
-namespace Content.Shared._Stories.Vehicle.Systems;
+namespace Content.Shared._CCM.Vehicle.Systems;
 
 public sealed partial class SharedVehicleSystem
 {
@@ -380,7 +380,7 @@ public sealed partial class SharedVehicleSystem
             if (isFriendly)
             {
                 _popup.PopupEntity(
-                    Loc.GetString("st-vehicle-rammed-ally"),
+                    Loc.GetString("ccm-vehicle-rammed-ally"),
                     human,
                     human,
                     PopupType.MediumCaution
@@ -455,7 +455,7 @@ public sealed partial class SharedVehicleSystem
             if (blocked)
             {
                 _popup.PopupEntity(
-                    Loc.GetString("st-xeno-blocks-vehicle", ("xeno", xeno), ("vehicle", vehicle.Owner)),
+                    Loc.GetString("ccm-xeno-blocks-vehicle", ("xeno", xeno), ("vehicle", vehicle.Owner)),
                     xeno,
                     PopupType.LargeCaution
                 );
@@ -816,7 +816,7 @@ public sealed partial class SharedVehicleSystem
         }
 
         _popup.PopupEntity(
-            Loc.GetString("st-vehicle-pushes-over", ("vehicle", vehicle.Owner), ("target", door)),
+            Loc.GetString("ccm-vehicle-pushes-over", ("vehicle", vehicle.Owner), ("target", door)),
             door,
             PopupType.LargeCaution
         );
@@ -865,7 +865,7 @@ public sealed partial class SharedVehicleSystem
         }
 
         _popup.PopupEntity(
-            Loc.GetString("st-vehicle-crushes", ("vehicle", vehicle.Owner), ("target", structure)),
+            Loc.GetString("ccm-vehicle-crushes", ("vehicle", vehicle.Owner), ("target", structure)),
             structure,
             PopupType.MediumCaution
         );
@@ -895,7 +895,7 @@ public sealed partial class SharedVehicleSystem
         ApplyDamage(otherVehicle, FixedPoint2.New(damage));
 
         _popup.PopupEntity(
-            Loc.GetString("st-vehicle-crushes-vehicle", ("vehicle", vehicle.Owner), ("target", otherVehicle)),
+            Loc.GetString("ccm-vehicle-crushes-vehicle", ("vehicle", vehicle.Owner), ("target", otherVehicle)),
             otherVehicle,
             PopupType.LargeCaution
         );

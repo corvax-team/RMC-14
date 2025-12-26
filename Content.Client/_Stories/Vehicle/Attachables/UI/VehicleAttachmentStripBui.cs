@@ -1,7 +1,7 @@
-using Content.Shared._Stories.Attachables;
+using Content.Shared._CCM.Attachables;
 using Robust.Client.UserInterface;
 
-namespace Content.Client._Stories.Vehicle.Attachables.UI;
+namespace Content.Client._CCM.Vehicle.Attachables.UI;
 
 public sealed class VehicleAttachmentStripBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
