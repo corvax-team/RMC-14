@@ -195,7 +195,7 @@ public abstract partial class SharedBuckleSystem
     private void OnBuckleUpdateCanMove(EntityUid uid, BuckleComponent component, UpdateCanMoveEvent args)
     {
         // RMC14
-        if (HasComp<RMCAllowStrapMovementComponent>(component.BuckledTo)
+        if (HasComp<RMCAllowStrapMovementComponent>(component.BuckledTo))
             return;
 
         if (component.Buckled)

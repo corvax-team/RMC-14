@@ -1,0 +1,11 @@
+- type: tile
+  parent: CCMVehicleFloor1
+  id: CCMVehicleFloor96
+  name: door floor black
+  sprite: /Textures/_CCM14//Tiles/Vehicle/Base_Interior/floor_door_black.png
+
+- type: tile
+  parent: CCMVehicleFloor1
+  id: CCMVehicleFloor97
+  name: door floor black 2
+  sprite: /Textures/_CCM14//Tiles/Vehicle/Base_Interior/floor_door_black_2.png
