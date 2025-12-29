@@ -25,6 +25,7 @@
             # Auxiliary
 #            CMAuxiliarySupportOfficer: [1, 1]
             CMIntelOfficer: [2, 2]
+            CMVehicleCrewman: [2, 2]
             CMPilotDropship: [1, 1]
             CMPilotGunship: [1, 1]
             CMDropshipCrewChief: [1, 1]
