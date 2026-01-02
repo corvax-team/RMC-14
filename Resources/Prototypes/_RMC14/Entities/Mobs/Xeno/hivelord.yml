@@ -153,6 +153,8 @@
     plasmaTransferDelay: 0.5
   - type: AcidTrap
   - type: XenoEvolution
+    evolvesTo:
+    - CCMXenoSwarmer
     strains:
     - CMXenoHivelordResinWhisperer
     - CMXenoHivelordDesigner
@@ -202,6 +204,9 @@
     maxPlasma: 800
     plasmaRegenOnWeeds: 5.5
     plasmaTransferDelay: 0.5
+  - type: XenoEvolution
+    evolvesTo:
+    - CCMXenoSwarmer
   - type: XenoZoom
   - type: ResinWhisperer
     maxRemoteConstructDistance: 11

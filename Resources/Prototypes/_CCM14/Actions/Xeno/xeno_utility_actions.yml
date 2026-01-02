@@ -1,0 +1,18 @@
+- type: entity
+  id: ActionXenoSwarmerChargeTail
+  parent: ActionXenoBase
+  name: Charge tail (100 plasma, 50 fury)
+  description: Each press improves the effect of the "Tail Vortex" ability.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CCM14/Actions/xeno_actions.rsi
+      state: charge_tail
+    useDelay: 0.5
+  - type: InstantAction
+    event:  #TODO Swarmer charge event
+  - type: XenoActionPlasma
+    cost: 100
+  - type: XenoActionEnergy
+    cost: 50

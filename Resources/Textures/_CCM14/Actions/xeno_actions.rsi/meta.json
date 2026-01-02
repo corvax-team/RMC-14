@@ -9,6 +9,15 @@
   "states": [
     {
       "name": "mirage"
+    },
+    {
+      "name": "plant_hive_weeds"
+    },
+    {
+      "name": "tail_vortex"
+    },
+    {
+      "name": "charge_tail"
     }
   ]
 }

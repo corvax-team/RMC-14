@@ -49,6 +49,9 @@
     - ActionXenoSecreteStructure
     - ActionXenoTransferPlasma
     - ActionXenoDevolve
+    - ActionXenoChargedDash # my act.
+    - ActionXenoTailVortex # my act.
+    - ActionXenoSwarmerChargeTail # my act.
     tier: 3
     hudOffset: -0.15,0.25
     unlockAt: 900 # 15 minutes
@@ -85,6 +88,10 @@
     damage:
       groups:
         Brute: 20 #Вождь баланс
+  - type: TailVortex # My comp  # ready
+    damage:
+      groups:
+        Brute: 15
   - type: XenoLeap
     plasmaCost: 400
     delay: 0

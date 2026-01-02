@@ -1,0 +1,16 @@
+- type: entity
+  id: ActionXenoPlantHiveWeeds
+  parent: ActionXenoBase
+  name: Plant Hive Weeds (150)
+  description: Plant a weed node that will spread more weeds.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CCM14/Actions/xeno_actions.rsi
+      state: plant_hive_weeds
+    useDelay: 180 # 3 min
+  - type: InstantAction
+    event: !type:XenoPlantWeedsActionEvent
+      plasmaCost: 150
+      prototype: XenoHiveWeedsSource
