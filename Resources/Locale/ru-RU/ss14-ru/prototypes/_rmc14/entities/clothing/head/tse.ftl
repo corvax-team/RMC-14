@@ -1,0 +1,15 @@
+ent-RMCHeadCapTSEPA = кепка TSEPA
+    .desc = { ent-CMHeadCapMP.desc }
+ent-RMCHeadBeretTSE = берет TSE
+    .desc = { ent-CMHeadBeret.desc }
+ent-RMCHeadBeretTSEPA = берет TSEPA
+    .desc = { ent-CMHeadBeret.desc }
+ent-RMCHeadCapTSEPAPeaked = peaked tsepa cap
+    .desc = A dark peaked cap enscribed with the powerful silver & red Sakura flower shaped emblem of the TSEPA. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
+    .suffix = Silver and Red
+ent-RMCHeadCapTSEPAPeakedGoldSilver = { ent-RMCHeadCapTSEPAPeaked }
+    .desc = A dark peaked cap enscribed with the powerful silver & gold Sakura flower shaped emblem of the TSEPA. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
+    .suffix = Silver and Gold
+ent-RMCHeadCapTSEPAPeakedGold = { ent-RMCHeadCapTSEPAPeaked }
+    .desc = A dark peaked cap enscribed with the powerful red & gold Sakura flower shaped emblem of the TSEPA, more commonly used by higher ranking Constables & TSEPA personnel. Empire and Honor, Bound by Duty. Duty Beyond Borders, Justice Across Worlds.
+    .suffix = Gold

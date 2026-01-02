@@ -1,0 +1,16 @@
+- type: entity
+  parent: Paper
+  id: CCMBaseNukeCodePaper
+  abstract: true
+  name: nuclear authentication codes
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paper.rsi
+  - type: NukeCodePaper
+    allNukesAvailable: true
+  - type: Corrodible
+    isCorrodible: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

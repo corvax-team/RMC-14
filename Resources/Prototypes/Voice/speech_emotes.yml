@@ -25,6 +25,17 @@
     - yells
     - yelled
     - yelling
+    # CCM-Localization-Start
+    - кричит
+    - кричит.
+    - кричит!
+    - орёт
+    - орёт.
+    - орёт!
+    - визжит
+    - визжит.
+    - визжит!
+    # CCM-Localization-End
 
 - type: emote
   id: Laugh
@@ -54,6 +65,15 @@
     - chortle
     - chortles
     - chortling
+    # CCM-Localization-Start
+    - смеется
+    - смеётся
+    - хохочет
+    - хихикает
+    - хихикнул
+    - хихикнула
+    - ржёт
+    # CCM-Localization-End
 
 - type: emote
   id: Honk
@@ -72,6 +92,9 @@
     - honks
     - honked
     - honking
+    # CCM-Localization-Start
+    - хонк
+    # CCM-Localization-End
 
 - type: emote
   id: Sigh
@@ -89,6 +112,11 @@
     - sigh
     - sighs
     - sighed
+    # CCM-Localization-Start
+    - вздыхает
+    - вздохнул
+    - вздохнула
+    # CCM-Localization-End
 
 - type: emote
   id: Whistle
@@ -106,6 +134,10 @@
     - whistle
     - whistles
     - whistleblowing
+    # CCM-Localization-Start
+    - свистит
+    - свистнул
+    # CCM-Localization-End
 
 - type: emote
   id: Crying
@@ -126,6 +158,10 @@
     - sob
     - sobs
     - sobbing
+    # CCM-Localization-Start
+    - плачет
+    - рыдает
+    # CCM-Localization-End
 
 - type: emote
   id: Squish
@@ -144,6 +180,9 @@
     - squish
     - squishing
     - squishes
+    # CCM-Localization-Start
+    - хлюпает
+    # CCM-Localization-End
 
 - type: emote
   id: Chitter
@@ -162,6 +201,9 @@
    - chitter
    - chitters
    - chittered
+   # CCM-Localization-Start
+   - стрекочет
+   # CCM-Localization-End
 
 - type: emote
   id: Squeak
@@ -180,6 +222,9 @@
    - squeak
    - squeaks
    - squeaked
+   # CCM-Localization-Start
+   - пищит
+   # CCM-Localization-End
 
 - type: emote
   id: Click
@@ -197,6 +242,10 @@
   chatTriggers:
    - click
    - clicks
+   # CCM-Localization-Start
+   - клац
+   - клацает
+   # CCM-Localization-End
 
 # hand emotes
 - type: emote
@@ -215,6 +264,15 @@
     - claps
     - clapping
     - clapped
+    # CCM-Localization-Start
+    - хлопает
+    - хлопнул
+    - хлопнула
+    - хлопает в ладоши
+    - хлопнул в ладоши
+    - хлопнула в ладоши
+    - апплодирует
+    # CCM-Localization-End
 
 - type: emote
   id: ClapSingle
@@ -260,6 +318,20 @@
     - snaps its fingers
     - snapping fingers
     - snapped fingers
+    # CCM-Localization-Start
+    - щелкает
+    - щелкнул
+    - щелкнула
+    - щёлкает
+    - щёлкнул
+    - щёлкнула
+    - щелкает пальцами
+    - щелкнул пальцами
+    - щелкнула пальцами
+    - щёлкает пальцами
+    - щёлкнул пальцами
+    - щёлкнула пальцами
+    # CCM-Localization-End
 
 - type: emote
   id: Thump
@@ -285,6 +357,13 @@
     - thumps her tail
     - thumps his tail
     - thumps its tail
+    # CCM-Localization-Start
+    - стучит хвостом
+    - стукнул хвостом
+    - стукнула хвостом
+    - стукнул своим хвостом
+    - стукнула своим хвостом
+    # CCM-Localization-End
 
 - type: emote
   id: Salute
@@ -301,6 +380,12 @@
   chatTriggers:
     - salute
     - salutes
+    # CCM-Localization-Start
+    - салютует
+    - отдаёт честь
+    - отдал честь
+    - отдала честь
+    # CCM-Localization-End
 
 - type: emote
   id: Gasp
@@ -354,6 +439,11 @@
     - buzz
     - buzzed
     - buzzes
+    # CCM-Localization-Start
+    - жужжит
+    - зажужжал
+    - зажужжала
+    # CCM-Localization-End
 
 - type: emote
   id: Weh
@@ -388,6 +478,9 @@
     - chirps
     - chirped
     - chirping
+    # CCM-Localization-Start
+    - чирикает
+    # CCM-Localization-End
 
 # Machine Emotes
 - type: emote
@@ -407,6 +500,9 @@
     - beeps
     - beeped
     - beeping
+    # CCM-Localization-Start
+    - бип
+    # CCM-Localization-End
 
 - type: emote
   id: Chime
@@ -425,6 +521,9 @@
     - chimes
     - chimed
     - chiming
+    # CCM-Localization-Start
+    - дзынь
+    # CCM-Localization-End
 
 - type: emote
   id: Buzz-Two
@@ -449,6 +548,14 @@
     - buzzes twice
     - buzzing twice
     - buzzed twice
+    # CCM-Localization-Start
+    - бипбуп
+    - бип буп
+    - бип-буп
+    - бипбип
+    - бип бип
+    - бип-бип
+    # CCM-Localization-End
 
 - type: emote
   id: Ping
@@ -467,3 +574,6 @@
     - pings
     - pinged
     - pinging
+    # CCM-Localization-Start
+    - пинг
+    # CCM-Localization-End

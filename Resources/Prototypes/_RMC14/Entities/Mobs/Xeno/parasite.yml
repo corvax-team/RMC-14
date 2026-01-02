@@ -94,7 +94,12 @@
   - type: Clothing
     quickEquip: false
     slots: [mask]
-    sprite: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
+    sprite: _RMC14/Mobs/Xenonids/Parasite/parasite_mask.rsi
+  - type: CCMParasiteSprite
+    maskRsi: _RMC14/Mobs/Xenonids/Parasite/parasite_mask.rsi
+    maskInventoryState: icon
+    normalRsi: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
+    normalState: alive
   - type: HideLayerClothing
     slots:
     - Snout
@@ -145,6 +150,7 @@
 - type: entity
   parent: CMXenoParasiteBase
   id: CMXenoParasite
+  description: A parasite whose only goal is to spread the power of the hive.
   components:
   - type: SleepNPC
   - type: ParasiteAI

@@ -1,0 +1,6 @@
+Logo designed by varttist (discord) specifically for the Corvax Colonial Marines project.
+The rights belong to the project corvax colonial marines.
+
+Files covered by this license:
+- load_logo.png
+- logo.png

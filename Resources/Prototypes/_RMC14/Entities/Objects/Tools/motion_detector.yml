@@ -44,6 +44,10 @@
   - type: Tag
     tags:
     - RMCDetector
+    # Corvax-Vehicle-Content-Start
+  - type: Speech
+    speechVerb: Robotic
+    # Corvax-Vehicle-Content-End
 
 - type: entity
   parent: RMCMotionDetector

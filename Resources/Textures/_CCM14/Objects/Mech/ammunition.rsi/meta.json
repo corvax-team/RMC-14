@@ -1,0 +1,35 @@
+{
+  "copyright" : "Made for Corvax RMC-14",
+  "license" : "CC-BY-SA-3.0",
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "ammo_band"
+    },
+    {
+      "name": "assaultrifle_ammo-1"
+    },
+    {
+      "name": "assaultrifle_ammo_e"
+    },
+    {
+      "name": "shotgun_ammo-1"
+    },
+    {
+      "name": "shotgun_ammo_e"
+    },
+    {
+      "name": "smg_ammo-1"
+    },
+    {
+      "name": "smg_ammo_e"
+    },
+    {
+      "name": "rpg_ammo"
+    }
+  ]
+}

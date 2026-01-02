@@ -1,0 +1,13 @@
+ent-CMWeaponPistolM1984 = служебный пистолет M1984
+    .desc = Служебный пистолет M1984 когда-то был стандартным личным оружием колониальной морской пехоты, но недавно был вытеснен боевым пистолетом M77. Использует пистолетные патроны калибра 9 мм.
+ent-CMWeaponPistolM1984Empty = { ent-CMWeaponPistolM1984 }
+    .suffix = Пустой
+    .desc = { ent-CMWeaponPistolM1984.desc }
+ent-CMMagazinePistolM1984 = магазин M1984 (9мм)
+    .desc = { ent-CMBaseMagazinePistol.desc }
+ent-CMBulletPistol9mm = пуля (9мм)
+    .desc = { ent-CMBulletBase.desc }
+ent-CMCartridgePistol9mm = патрон (9мм)
+    .desc = { ent-CMCartridgePistolBase.desc }
+ent-RMCMagazinePistolM1984AP = магазин M1984 бронебойные (9мм)
+    .desc = Пистолетный магазин. В нём находятся бронебойные патроны, которые обладают заметно большей поражающей способностью по хорошо бронированным целям и заметно меньшей - по небронированным или легкобронированным.

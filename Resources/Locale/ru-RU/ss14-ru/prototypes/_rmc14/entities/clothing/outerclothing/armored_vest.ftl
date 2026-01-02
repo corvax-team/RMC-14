@@ -1,0 +1,17 @@
+ent-RMCArmorVest = бронежилет
+    .desc = Бронежилет, обеспечивающий некоторую защиту от повреждений.
+ent-RMCArmorVestWeYa = We-Ya security armor vest
+    .desc = An armored vest that protects against some damage. This one has a Weston-Yamada corporate badge.
+ent-RMCArmorSecurity = security armor vest
+    .desc = { ent-RMCArmorVestWeYa.desc }
+ent-RMCArmorVestCivilian = armored vest
+    .desc = An general-use, unmarked armored vest that protects against some damage.
+ent-RMCArmorVestMP = MP armor vest
+    .desc = A type of body armor designed for protection against internal threats. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against cuts, explosions or bio-threats. Not recommend for direct combat or for deployment use against hostiles.
+ent-RMCArmorVestIO = intel armor vest
+    .desc = A type of body armor designed for mobility. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions, or bio-threats. Not recommend for direct combat.
+ent-RMCArmorVestMedic = corpsman armor vest
+    .desc = { ent-RMCArmorVestMP.desc }
+ent-RMCArmorVestNone = armor vest
+    .suffix = None
+    .desc = { ent-RMCArmorVestMedic.desc }

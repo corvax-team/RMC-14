@@ -8,6 +8,7 @@
     collection: FootstepPlating
   friction: 1
   heatCapacity: 10000
+  indestructible: true #CCM #Map issue
 
 - type: tile
   id: PlatingDamaged

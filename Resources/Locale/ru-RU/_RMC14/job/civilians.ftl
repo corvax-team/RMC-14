@@ -1,0 +1,23 @@
+# Non Marine Personnel
+cm-job-name-correspondent = Корреспондент
+cm-job-description-correspondent = Сообщайте обо всём, что посчитаете заслуживающим быть опубликованным в новостях.
+cm-job-prefix-correspondent = ПРЕССА
+CMJobCorrespondent = Корреспондент
+cm-job-name-liaison = Корпоративный связной
+rmc-job-name-synth = ККМП Синтетик
+rmc-job-description-synth = Помогайте и поддерживайте персонал ККМП.
+rmc-job-prefix-synth = СИНТ
+RMCJobSynthetic = Синтетик
+rmc-job-name-synth-colony = Colony Synthetic
+rmc-job-description-synth-colony = Support and assist the Colony Personnel.
+rmc-job-name-dynagrid-engineer = Dynagrid Engineer
+rmc-job-description-dynagrid-engineer = Maintain the Dynagrid Nexus and other power facilities of Hybrisa Prospera.
+rmc-job-prefix-dynagrid-engineer = DG ENG
+rmc-job-name-novamed-doctor = Nova Medica Doctor
+rmc-job-description-novamed-doctor = Treat inbound patients at the Nova Medica Hospital.
+rmc-job-prefix-novamed-doctor = NM DOC
+rmc-job-name-hybrisa-civilian = Hybrisa Prospera Colonist
+rmc-job-description-hybrisa-civilian = Live out your life within Hybrisa Prospera.
+cm-job-description-liaison = Будьте прямым связующим звеном между Альмайером и Ве-Я путём отправки факсов. Следите за соблюдением интересов Вестон-Ямада.
+cm-job-prefix-liaison = КС
+CMJobLiaison = Корпоративный связной

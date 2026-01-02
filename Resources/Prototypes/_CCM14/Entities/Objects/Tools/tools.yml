@@ -1,0 +1,41 @@
+- type: entity
+  parent: CMScrewdriver
+  id: CCMScrewdriver
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Tools/screwdriver.rsi
+
+- type: entity
+  parent: CMWirecutter
+  id: CCMWirecutter
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Tools/wirecutters.rsi
+
+- type: entity
+  parent: CMWrench
+  id: CCMWrench
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Tools/wrench.rsi
+
+- type: entity
+  parent: CMCrowbar
+  id: CCMCrowbar
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Tools/crowbar.rsi
+
+- type: entity
+  parent: CCMCrowbar
+  id: CCMCrowbarRed
+  name: emergency crowbar
+  components:
+  - type: Tag
+    tags:
+    - Crowbar
+    - CrowbarRed
+  - type: Sprite
+    state: red-icon
+  - type: Item
+    heldPrefix: red

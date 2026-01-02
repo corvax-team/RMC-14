@@ -1,0 +1,12 @@
+ent-RMCSmokeAcid = кислотный газ
+    .desc = { "" }
+ent-RMCSmokeNeurotoxin = нейротоксичный газ
+    .desc = { "" }
+ent-RMCSmokeRunner = кислотный дым
+    .desc = { "" }
+ent-RMCSmokeAcidShroud = кислотный газ
+    .desc = { ent-RMCSmokeAcid.desc }
+ent-RMCSmokeNeurotoxinShroud = нейротоксичный газ
+    .desc = { ent-RMCSmokeNeurotoxin.desc }
+ent-RMCSmokeAcidDeathcloud = кислотный газ
+    .desc = { ent-RMCSmokeAcid.desc }

@@ -1,0 +1,14 @@
+ent-RMCPhoneboxBase = телефонная будка
+    .desc = Телефонная будка, устаревшая, но действующая технология. Они используются для связи внутри и между колониями без помех. Как бы надёжны они ни были, похоже, линия не работает.
+ent-RMCPhoneboxBrokenBase = разбитая телефонная будка
+    .desc = Телефонная будка, устаревшая, но действующая технология. Они используются для связи внутри и между колониями без помех. Похоже, она полностью разрушена, залита кровью, а стёкла разбиты. Прятаться внутри было бы бессмысленно.
+ent-RMCPhoneboxOff = { ent-RMCPhoneboxBase }
+    .suffix = Выкл
+    .desc = { ent-RMCPhoneboxBase.desc }
+ent-RMCPhoneboxOn = { ent-RMCPhoneboxBase }
+    .suffix = Вкл
+    .desc = { ent-RMCPhoneboxBase.desc }
+ent-RMCPhoneboxBroken = { ent-RMCPhoneboxBrokenBase }
+    .desc = { ent-RMCPhoneboxBrokenBase.desc }
+ent-RMCPhoneboxBrokenBloody = { ent-RMCPhoneboxBrokenBase }
+    .desc = { ent-RMCPhoneboxBrokenBase.desc }

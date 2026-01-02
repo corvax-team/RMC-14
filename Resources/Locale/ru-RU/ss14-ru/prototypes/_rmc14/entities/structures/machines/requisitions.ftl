@@ -1,0 +1,13 @@
+ent-RMCASRSAccount = аккаунт АСИСТ
+    .desc = { "" }
+ent-CMASRSConsole = консоль АСИСТ
+    .desc = Консоль Автоматизированной Системы Извлечения Складских Товаров.
+    .suffix = Снабжение
+ent-CMCargoElevator = грузовой подъёмник
+    .suffix = Опущен, Снабжение
+    .desc = { "" }
+ent-CMRailing = выдвижные перила
+    .desc = Похоже, их так просто не открыть.
+    .suffix = Поднятые
+ent-CMGear = столбик
+    .desc = { "" }

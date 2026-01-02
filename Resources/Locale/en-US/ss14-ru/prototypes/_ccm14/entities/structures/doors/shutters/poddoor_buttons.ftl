@@ -1,0 +1,12 @@
+ent-CCMPodDoorDavidPortButton = port's podlock
+    .desc = Button that opens port's podlock. ATTENTION! MAY CAUSE DEPRESSURIZATION!
+    .suffix = David
+ent-CCMPodDoorDavidNukeStorageButton = nuke storage's podlock
+    .desc = Button that opent nuke storage's podlock. USE ONLY IN CASE OF EMERGENCY!
+    .suffix = David
+ent-CCMShutterDavidMechButton = mech's shutters
+    .suffix = David
+    .desc = { ent-RMCPodDoorButton.desc }
+ent-CCMShutterDavidCargoButton = cargo's shutters
+    .suffix = David
+    .desc = { ent-RMCPodDoorButton.desc }

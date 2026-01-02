@@ -1,0 +1,57 @@
+# TODO CCM different customization (like sunglassess, masks wearing (like hamlet has)
+- type: entity
+  name: Roudy
+  parent: SimpleMobBase
+  id: CCMMobRoudy
+  description: Dude, how do you get so cute!? I want to look like you!
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: roudy
+      sprite: _CCM14/Mobs/roudy.rsi
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 5
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Speech
+    speechVerb: Arachnid
+    speechSounds: Arachnid
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: Roudy
+      Critical:
+        Base: roudyCrit
+      Dead:
+        Base: roudyDeath
+  - type: InteractionPopup
+    successChance: 0.5
+    interactSuccessString: petting-success-hamster
+    interactFailureString: petting-failure-hamster
+    interactSuccessSpawn: EffectHearts
+    interactSuccessSound:
+      path: /Audio/Voice/Arachnid/arachnid_chitter.ogg
+  - type: ReplacementAccent
+    accent: crab
+  - type: Bloodstream
+    bloodMaxVolume: 50
+    bloodReagent: CopperBlood
+  - type: Tag
+    tags:
+    - VimPilot
+  - type: HTN
+    rootTask:
+      task: RuminantCompound
+  - type: Body
+    prototype: AnimalHemocyanin
+#  - type: XenoRest # TODO CCM probably

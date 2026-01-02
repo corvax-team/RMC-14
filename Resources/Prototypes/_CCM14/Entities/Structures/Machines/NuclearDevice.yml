@@ -1,0 +1,121 @@
+- type: entity
+  parent: [BaseStructure, StructureWheeled]
+  id: CCMNuclearDevice
+  name: Nuclear Device
+  description: It's the only way to be sure.
+  suffix: НЕ УДАЛЯТЬ!
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _CCM14/Objects/Nuke/ccmnuclearbomb.rsi
+    noRot: true
+    layers:
+    - state: nuclearbomb_base
+      map: ["enum.NukeVisualLayers.Base"]
+    - state: nuclearbomb_deployed_unlit
+      map: ["enum.NukeVisualLayers.Unlit"]
+      shader: unshaded
+      visible: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.NukeVisuals.Deployed:
+        enum.NukeVisualLayers.Base:
+          False: { state: nuclearbomb_base }
+          True:  { state: nuclearbomb_deployed }
+        enum.NukeVisualLayers.Unlit:
+          True:  { visible: true }
+          False: { visible: false }
+      enum.NukeVisuals.State:
+        enum.NukeVisualLayers.Unlit:
+          Idle:        { state: nuclearbomb_deployed_unlit }
+          Armed:       { state: nuclearbomb_timing }
+          YoureFucked: { state: nuclearbomb_exploding }
+  - type: Physics
+    bodyType: Static
+  - type: ClothingSpeedModifier
+    walkModifier: 3.5
+    sprintModifier: 3.5
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.50
+        density: 255
+        mask:
+        - MachineMask
+        layer:
+        - HalfWallLayer
+  - type: PointLight
+    enabled: false
+    radius: 2
+    energy: 1.0
+    color: "#FF4020"
+    mask: /Textures/Effects/LightMasks/double_cone.png
+  - type: RotatingLight
+    speed: 30
+  - type: NukeLabel
+    blacklist:
+  - type: Nuke
+    explosionType: RMCOBXenoTunnel #CCMOBXenoTunnel
+    maxIntensity: 400 # CCM update to let XenoQueen/Defender/SteelDefender die of nuke boom
+    intensitySlope: 1
+    totalIntensity: 5000000
+    diskSlot:
+      name: nuke-slot-component-slot-name-disk
+      insertSound:
+        path: /Audio/Machines/terminal_insert_disc.ogg
+      ejectSound:
+        path: /Audio/Machines/terminal_insert_disc.ogg
+      whitelist:
+        components:
+        - NukeDisk
+    alertLevelOnActivate: Green
+    alertLevelOnDeactivate: Green
+  - type: InteractionOutline
+  - type: ActivatableUI
+    key: enum.NukeUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.NukeUiKey.Key:
+        type: NukeBoundUserInterface
+  - type: CargoSellBlacklist
+  - type: ArrivalsBlacklist
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      Nuke: !type:ContainerSlot
+  - type: StealTarget
+    stealGroup: NuclearBomb
+  - type: NavMapBeacon
+    color: "#ff0000"
+    text: nuclear fission explosive
+    enabled: false
+  - type: WarpPoint
+    follow: true
+    location: nuclear bomb
+  - type: Corrodible
+    isCorrodible: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: TacticalMapIcon
+    icon:
+      sprite: _CCM14/Interface/map_blips.rsi
+      state: nuke
+  - type: TacticalMapTracked
+  - type: XenoMapTracked
+  - type: MarineMapTracked
+  - type: PowerLoaderGrabbable
+    virtualRight: RMCVirtualWarheadRightAegis
+    virtualLeft: RMCVirtualWarheadLeftAegis
+  - type: RMCExplosiveDelete
+    whitelist:
+      components:
+      - XenoTunnel
+  - type: SpawnOnTerminate
+    spawn: RMCOrbitalCannonExplosionAegis
+    projectileAdjust: false

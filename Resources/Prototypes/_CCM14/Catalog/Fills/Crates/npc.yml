@@ -1,0 +1,8 @@
+- type: entity
+  id: CCMCrateNPCRoudy
+  parent: CCMCrateRoudyCage
+  suffix: Filled
+  components:
+    - type: StorageFill
+      contents:
+        - id: CCMMobRoudy

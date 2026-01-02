@@ -1,0 +1,15 @@
+ent-CMClosetEmergencyFilled = { ent-CMClosetEmergency }
+    .suffix = Заполненный
+    .desc = { ent-CMClosetEmergency.desc }
+ent-CMClosetFireFilled = { ent-CMClosetFire }
+    .suffix = Заполненный
+    .desc = { ent-CMClosetFire.desc }
+ent-CMLockerCommanderSecureFilled = { ent-CMLockerCommanderSecure }
+    .suffix = Заполненный
+    .desc = { ent-CMLockerCommanderSecure.desc }
+ent-CMLockerStaffShotgunFilled = { ent-CMLockerStaff }
+    .suffix = Filled
+    .desc = { ent-CMLockerStaff.desc }
+ent-CMLockerStaffRifleFilled = { ent-CMLockerStaff }
+    .suffix = Filled
+    .desc = { ent-CMLockerStaff.desc }

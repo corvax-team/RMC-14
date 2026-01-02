@@ -1,0 +1,14 @@
+ent-CCMVehicleRequisitionConsole = консоль лифта транспорта
+    .desc = Консоль управления лифтом транспорта.
+    .suffix = Транспорт
+ent-CCMVehicleRequisitionElevator = транспортный лифт
+    .desc = ""
+    .suffix = Опущен, Транспорт
+ent-CCMVehicleRequisitionRailing = выдвижное ограждение
+    .desc = Похоже, просто так его не открыть.
+    .suffix = Поднято, Транспорт
+ent-CCMVehicleRequisitionGear = шестерня
+    .desc = ""
+    .suffix = Транспорт
+ent-CCMVendingVehicleGearM577 = консоль снабжения модулей ASRS
+    .desc = Автоматизированная стойка снабжения, подключённая к большому складу различных модулей. Доступна только для экипажа техники.

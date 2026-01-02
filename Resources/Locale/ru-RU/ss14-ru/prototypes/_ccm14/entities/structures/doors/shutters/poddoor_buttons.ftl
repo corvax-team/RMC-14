@@ -1,0 +1,12 @@
+ent-CCMPodDoorDavidPortButton = портовые ставни
+    .desc = Кнопка, которая открывает ставни порта. МОЖЕТ ПРИВЕСТИ К РАЗГЕРМЕТИЗАЦИИ!
+    .suffix = Давид
+ent-CCMPodDoorDavidNukeStorageButton = ставни ядерного хранилища
+    .desc = Кнопка, открывающая хранилище с ядерным оружием. ИСПОЛЬЗОВАТЬ ТОЛЬКО В ЧРЕЗВЫЧАЙНЫХ СЛУЧАЯХ!
+    .suffix = Давид
+ent-CCMShutterDavidMechButton = ставни гаража погрузчика
+    .suffix = Давид
+    .desc = { ent-RMCPodDoorButton.desc }
+ent-CCMShutterDavidCargoButton = ставни карго
+    .suffix = Давид
+    .desc = { ent-RMCPodDoorButton.desc }

@@ -1,0 +1,39 @@
+﻿- type: lobbyBackground
+  id: CCMLogo
+  background: /Textures/_CCM14/Lobby/CCM_logo_lobby.png
+
+- type: lobbyBackground
+  id: CCMLogoLetni
+  background: /Textures/_CCM14/Lobby/Letni_CCM.png
+
+- type: lobbyBackground
+  id: CCMLogoNew
+  background: /Textures/_CCM14/Lobby/CCM_New.png
+  
+- type: lobbyBackground
+  id: LobbyArt1
+  background: /Textures/_CCM14/Lobby/LobbyArt1.png
+  
+- type: lobbyBackground
+  id: LobbyArt3
+  background: /Textures/_CCM14/Lobby/LobbyArt3.png
+
+- type: lobbyBackground
+  id: LobbyArt5
+  background: /Textures/_CCM14/Lobby/LobbyArt5.png
+
+- type: lobbyBackground
+  id: LobbyArt6
+  background: /Textures/_CCM14/Lobby/LobbyArt6.png
+
+- type: lobbyBackground
+  id: LobbyArt8
+  background: /Textures/_CCM14/Lobby/LobbyArt8.png
+
+- type: lobbyBackground
+  id: LobbyArt9
+  background: /Textures/_CCM14/Lobby/LobbyArt9.png
+
+- type: lobbyBackground
+  id: LobbyArt14
+  background: /Textures/_CCM14/Lobby/LobbyArt14.png

@@ -1,0 +1,9 @@
+ent-CCMPodDoorDavidPort = port's podlock
+    .suffix = David
+    .desc = { ent-RMCPodDoorAlmayerBlack.desc }
+ent-CCMPodDoorDavidNukeStorage = nuke storage's podlock
+    .suffix = David
+    .desc = { ent-RMCPodDoorAlmayerBlack.desc }
+ent-CCMPodDoorDavidNukeStorageOpen = nuke storage's podlock
+    .suffix = Open, David
+    .desc = { ent-RMCPodDoorAlmayerBlack.desc }

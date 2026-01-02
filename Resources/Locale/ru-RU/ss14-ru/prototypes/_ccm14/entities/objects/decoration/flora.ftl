@@ -1,0 +1,12 @@
+ent-CCMBaseSandTree = { "" }
+    .desc = Да, это дерево.
+ent-CCMDeadTree01 = Мертвое дерево
+    .desc = { ent-CCMBaseSandTree.desc }
+ent-CCMDeadTree02 = Мертвое дерево
+    .desc = { ent-CCMBaseSandTree.desc }
+ent-CCMDeadTree03 = Мертвое дерево
+    .desc = { ent-CCMBaseSandTree.desc }
+ent-CCMDeadTree04 = Мертвое дерево
+    .desc = { ent-CCMBaseSandTree.desc }
+ent-CCMSpruceTree = Еловое дерево
+    .desc = { ent-CCMBaseSandTree.desc }

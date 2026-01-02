@@ -5,9 +5,11 @@
   description: cm-job-description-hospital-corpsman
   playTimeTracker: CMJobHospitalCorpsman
   requirements:
-  - !type:TotalJobsTimeRequirement
-    group: CMJobsMedical
-    time: 3600 # 1 hours
+# CCM14 role timers [remove/start]
+#  - !type:TotalJobsTimeRequirement
+#    group: CMJobsMedical
+#    time: 3600 # 1 hours
+# CCM14 role timers [remove/end]
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 3600 # 1 hour

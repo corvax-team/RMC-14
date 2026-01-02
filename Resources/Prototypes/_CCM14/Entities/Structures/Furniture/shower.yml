@@ -1,0 +1,25 @@
+- type: entity
+  id: CCMShower
+  name: shower
+  description: Shower, used for water procedures.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wallmount
+  components:
+    - type: Clickable
+    - type: InteractionOutline
+    - type: Construction
+      graph: SurveillanceCamera
+      node: assembly
+    - type: WallMount
+    - type: Transform
+      anchored: false
+    - type: Damageable
+      damageContainer: Inorganic
+      damageModifierSet: Metallic
+    - type: Sprite
+      drawdepth: WallMountedItems
+      sprite: _CCM14/Structures/Furniture/shower.rsi
+      layers:
+        - state: shower

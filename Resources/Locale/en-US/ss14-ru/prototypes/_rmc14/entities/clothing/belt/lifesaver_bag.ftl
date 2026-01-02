@@ -1,0 +1,9 @@
+ent-CMBeltMedicBag = M276 pattern lifesaver bag
+    .desc = The M276 is the standard load-bearing equipment of the UNMC. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
+ent-RMCBeltMedicBagERTFilled = { ent-CMBeltMedicBag }
+    .desc = { ent-CMBeltMedicBag.desc }
+ent-RMCBeltMedicBagPMC = WY-TM625 pattern medical bag
+    .desc = The WY-TM625 is the standard load-bearing equipment of the W-Y security forces. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
+ent-RMCBeltMedicBagPMCFilled = { ent-RMCBeltMedicBagPMC }
+    .suffix = Filled
+    .desc = { ent-RMCBeltMedicBagPMC.desc }

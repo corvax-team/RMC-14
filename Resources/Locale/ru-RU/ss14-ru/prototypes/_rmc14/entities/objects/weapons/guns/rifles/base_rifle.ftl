@@ -1,0 +1,14 @@
+ent-RMCBaseWeaponRifleNoDualWieldPenaltyNoMagazineProvider = { ent-CMBaseWeaponGun }
+    .desc = { ent-CMBaseWeaponGun.desc }
+ent-RMCBaseWeaponRifleNoMagazineProvider = { ent-RMCBaseWeaponRifleNoDualWieldPenaltyNoMagazineProvider }
+    .desc = { ent-RMCBaseWeaponRifleNoDualWieldPenaltyNoMagazineProvider.desc }
+ent-CMBaseWeaponRifleNoDualWieldPenalty = { ent-CMBaseWeaponGun }
+    .desc = { ent-CMBaseWeaponGun.desc }
+ent-CMBaseWeaponRifle = { ent-CMBaseWeaponRifleNoDualWieldPenalty }
+    .desc = { ent-CMBaseWeaponRifleNoDualWieldPenalty.desc }
+ent-RMCBaseWeaponMagazineVisuals = { "" }
+    .desc = { "" }
+ent-CMMagazineRifleBase = { ent-BaseMagazineRifle }
+    .desc = { ent-BaseMagazineRifle.desc }
+ent-CMBaseCartridgeRifle = патрон
+    .desc = { ent-BaseCartridgeRifle.desc }

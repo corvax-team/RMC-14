@@ -1,0 +1,11 @@
+ent-CMLightTubeBase = { ent-CMLightBulbBase }
+    .desc = { ent-CMLightBulbBase.desc }
+ent-CMLightTube = лампа-трубка
+    .desc = Запасная лампа-трубка.
+    .suffix = Warm
+ent-RMCLightTubeBlue = { ent-CMLightTube }
+    .suffix = Blue
+    .desc = { ent-CMLightTube.desc }
+ent-CMLightTubeBroken = лампа-трубка
+    .desc = Запасная лампа-трубка.
+    .suffix = Разбитая

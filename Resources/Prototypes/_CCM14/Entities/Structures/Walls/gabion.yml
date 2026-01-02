@@ -1,0 +1,89 @@
+- type: entity
+  parent: CMBaseStructure
+  abstract: true
+  id: CCMBaseGabion
+  name: gabion
+  components:
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Sprite
+    sprite: _CCM14/Structures/Walls/gabion.rsi
+    state: full
+  - type: Icon
+    sprite: _CCM14/Structures/Walls/gabion.rsi
+    state: full
+  - type: IconSmooth
+    key: walls
+    base: gabion
+  - type: XenoWeedable
+    spawn: XenoWeedsWall
+  - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
+  - type: XenoConstructionSupport
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+        density: 1000
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/Effects/Footsteps/snowstep1.ogg"
+
+- type: entity
+  parent: CCMBaseGabion
+  id: CCMGabion
+  name: gabion
+  description: A quickly erected fortification filled with sand or earth.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Walls/gabion.rsi
+    state: full
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 800
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ReceiverXenoClaws
+    maxHealth: 800
+    minimumClawStrength: Normal
+    hitsToDestroy: 15
+  - type: Construction
+    graph: CCMGabion
+    node: gabion
+
+- type: entity
+  parent: CCMBaseGabion
+  id: CCMGabionEmpty
+  name: empty gabion
+  description: The frame of a quick-erect fortification. Fill it with sand bags to make it stronger.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Walls/gabion_empty.rsi
+    state: full
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ReceiverXenoClaws
+    maxHealth: 200
+    minimumClawStrength: Normal
+    hitsToDestroy: 2
+  - type: Construction
+    graph: CCMGabion
+    node: gabion_empty

@@ -1,0 +1,12 @@
+ent-RMCPouchExplosive = подсумок для взрывчатки
+    .desc = В нем можно переносить гранаты, пластичную взрывчатку, ящики с минами и другие взрывчатые вещества.
+ent-RMCPouchExplosiveFilledPlasticExplosives = { ent-RMCPouchExplosive }
+    .desc = { ent-RMCPouchExplosive.desc }
+ent-RMCPouchExplosiveFilledHEFA = { ent-RMCPouchExplosive }
+    .desc = { ent-RMCPouchExplosive.desc }
+ent-RMCPouchExplosiveFilledHEDP = { ent-RMCPouchExplosive }
+    .desc = { ent-RMCPouchExplosive.desc }
+ent-RMCPouchExplosiveFilledSPP = { ent-RMCPouchExplosive }
+    .desc = { ent-RMCPouchExplosive.desc }
+ent-RMCPouchExplosiveFilledC4SPP = { ent-RMCPouchExplosive }
+    .desc = { ent-RMCPouchExplosive.desc }

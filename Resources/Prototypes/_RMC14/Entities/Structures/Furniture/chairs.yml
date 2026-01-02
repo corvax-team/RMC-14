@@ -18,6 +18,11 @@
     tags:
     - RMCSeat
   - type: RMCMesonsNonviewable
+    # Corvax-Vehicle-Content-Start
+  - type: VehicleStructureTarget
+    momentumLossFactor: 0
+    damageToVehicleOnFail: 0
+    # Corvax-Vehicle-Content-End
 
 - type: entity
   parent: [ CMSeatBase, ChairFolding ]

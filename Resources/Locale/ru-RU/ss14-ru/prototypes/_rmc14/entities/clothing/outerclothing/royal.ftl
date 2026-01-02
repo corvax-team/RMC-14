@@ -1,0 +1,13 @@
+ent-RMCArmorRoyal = бронежилет Пустельга
+    .desc = Настраиваемый индивидуальный бронежилет, используемый коммандос Королевской морской пехоты.
+ent-RMCArmorRoyalLight = лёгкий бронежилет Пустельга
+    .desc = { ent-RMCArmorRoyal.desc }
+ent-RMCArmorRoyalPadded = бронежилет Пустельга с подсумками
+    .desc = { ent-RMCArmorRoyal.desc }
+ent-RMCArmorRoyalHarness = бронеобвязка смартагана Пустельга
+    .desc = { ent-RMCArmorRoyal.desc }
+ent-RMCArmorRoyalHarnessFilled = { ent-RMCArmorRoyalHarness }
+    .suffix = Заполненный
+    .desc = { ent-RMCArmorRoyalHarness.desc }
+ent-RMCArmorRoyalPointman = бронежилет штурмовика Пустельга
+    .desc = { ent-RMCArmorRoyalPadded.desc }

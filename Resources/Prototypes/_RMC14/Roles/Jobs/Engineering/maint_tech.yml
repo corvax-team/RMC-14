@@ -7,7 +7,7 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
-    time: 7200 # 2 hours
+    time: 3600 # 1 hour. CCM14 role timers. RMC: 7200 # 2 hours
   startingGear: CMGearMaintTech
   icon: "CMJobIconMaintTech"
   joinNotifyCrew: false

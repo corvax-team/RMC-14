@@ -1,0 +1,9 @@
+ent-CCMPodDoorDavidPort = портовые ставни
+    .suffix = Давид
+    .desc = { ent-RMCPodDoorAlmayerBlack.desc }
+ent-CCMPodDoorDavidNukeStorage = ставни ядерного хранилища
+    .suffix = Давид
+    .desc = { ent-RMCPodDoorAlmayerBlack.desc }
+ent-CCMPodDoorDavidNukeStorageOpen = ставни ядерного хранилища
+    .suffix = Открыто, Давид
+    .desc = { ent-RMCPodDoorAlmayerBlack.desc }

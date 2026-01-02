@@ -34,7 +34,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.bleed_time_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> CMMarinesPerXeno =
-        CVarDef.Create("rmc.marines_per_xeno", 3f, CVar.SERVER | CVar.SERVERONLY);
+        CVarDef.Create("rmc.marines_per_xeno", 6f, CVar.SERVER | CVar.SERVER); // CCM-cvars-permission
 
     public static readonly CVarDef<bool> RMCAutoBalance =
         CVarDef.Create("rmc.auto_balance", true, CVar.SERVER | CVar.SERVERONLY);
@@ -402,7 +402,7 @@ public sealed partial class RMCCVars : CVars
     CVarDef.Create("rmc.tacmap_alert_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCParasiteSpawnInitialDelayMinutes =
-        CVarDef.Create("rmc.parasite_spawn_initial_delay_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.parasite_spawn_initial_delay_minutes", 5f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCXenoSpawnInitialMuteDurationSeconds =
         CVarDef.Create("rmc.xeno_spawn_initial_mute_duration_seconds", 180f, CVar.REPLICATED | CVar.SERVER);

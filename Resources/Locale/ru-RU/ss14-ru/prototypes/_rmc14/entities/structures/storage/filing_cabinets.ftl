@@ -1,0 +1,13 @@
+ent-CMFilingCabinetBase = { ent-BaseStructureDynamic }
+    .desc = Большой шкафчик с ящиками.
+    .suffix = Пустой
+ent-CMFilingCabinet = картотечный шкаф
+    .desc = { ent-CMFilingCabinetBase.desc }
+ent-CMFilingCabinetTall = высокий картотечный шкаф
+    .desc = { ent-CMFilingCabinetBase.desc }
+ent-CMFilingCabinetTallWood = высокий деревянный картотечный шкаф
+    .desc = { ent-CMFilingCabinetTall.desc }
+ent-CMFilingCabinetChest = комод
+    .desc = { ent-CMFilingCabinetBase.desc }
+ent-CMFilingCabinetChestWood = деревянный комод
+    .desc = { ent-CMFilingCabinetChest.desc }

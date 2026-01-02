@@ -1,0 +1,13 @@
+- type: entity
+  name: Roudy Spawner
+  id: CCMSpawnMobRoudy
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+      - state: roudy
+        sprite: _CCM14/Mobs/roudy.rsi
+  - type: ConditionalSpawner
+    prototypes:
+      - CCMMobRoudy

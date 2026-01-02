@@ -6,13 +6,13 @@
   requirements:
   - !type:TotalJobsTimeRequirement
     group: CMJobsXeno
-    time: 36000 # 10 hours
+    time: 32400 # 9 hours. CCM14 role timers. RMC: 36000 # 10 hours
   - !type:TotalJobsTimeRequirement
     group: CMJobsXenoDrones
-    time: 18000 # 5 hours
+    time: 10800 # 3 hours. CCM14 role timers. RMC: 18000 # 5 hours
   - !type:TotalJobsTimeRequirement
     group: CMJobsXenoTierThree
-    time: 10800 # 3 hours
+    time: 3600 # 1 hour. CCM14 role timers. RMC: 10800 # 3 hours
   weight: 100
   requireAdminNotify: true
   hidden: false

@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared.ActionBlocker;
+using Content.Shared._CCM.Vehicle;
+using Content.Shared._CCM.Vehicle.Systems;
 using Content.Shared.CCVar;
 using Content.Shared.Friction;
 using Content.Shared.Gravity;
@@ -46,6 +48,9 @@ public abstract partial class SharedMoverController : VirtualController
     [Dependency] private   readonly SharedTransformSystem _transform = default!;
     [Dependency] private   readonly TagSystem _tags = default!;
 
+    // Corvax
+    [Dependency] private   readonly SharedVehicleSystem _vehicle = default!;
+
     protected EntityQuery<CanMoveInAirComponent> CanMoveInAirQuery;
     protected EntityQuery<FootstepModifierComponent> FootstepModifierQuery;
     protected EntityQuery<InputMoverComponent> MoverQuery;
@@ -59,6 +64,7 @@ public abstract partial class SharedMoverController : VirtualController
     protected EntityQuery<RelayInputMoverComponent> RelayQuery;
     protected EntityQuery<PullableComponent> PullableQuery;
     protected EntityQuery<TransformComponent> XformQuery;
+    protected EntityQuery<VehicleMovementComponent> VehicleMoveQuery; // Corvax-Vehicle-Movement-Tweak
 
     private static readonly ProtoId<TagPrototype> FootstepSoundTag = "FootstepSound";
 
@@ -90,6 +96,7 @@ public abstract partial class SharedMoverController : VirtualController
         FootstepModifierQuery = GetEntityQuery<FootstepModifierComponent>();
         MapGridQuery = GetEntityQuery<MapGridComponent>();
         MapQuery = GetEntityQuery<MapComponent>();
+        VehicleMoveQuery = GetEntityQuery<VehicleMovementComponent>(); // Corvax-Vehicle-Movement-Tweak
 
         SubscribeLocalEvent<MovementSpeedModifierComponent, TileFrictionEvent>(OnTileFriction);
 
@@ -151,11 +158,11 @@ public abstract partial class SharedMoverController : VirtualController
                 dirtied = true;
             }
 
-            if (relayTargetMover.CanMove != mover.CanMove)
-            {
-                relayTargetMover.CanMove = mover.CanMove;
-                dirtied = true;
-            }
+            // if (relayTargetMover.CanMove != mover.CanMove) // CCM-change
+            // {
+            //     relayTargetMover.CanMove = mover.CanMove;
+            //     dirtied = true;
+            // }
 
             if (dirtied)
             {
@@ -191,7 +198,14 @@ public abstract partial class SharedMoverController : VirtualController
             UsedMobMovement[uid] = false;
             return;
         }
-
+        // Corvax-Vehicle-Movement-Tweak-Start
+        if (VehicleMoveQuery.TryComp(uid, out var vehicleMove) && vehicleMove.Blocked)
+        {
+            PhysicsSystem.ResetDynamics(uid, physicsComponent);
+            UsedMobMovement[uid] = false;
+            return;
+        }
+        // Corvax-Vehicle-Movement-Tweak-End
         // If the body is in air but isn't weightless then it can't move
         // TODO: MAKE ISWEIGHTLESS EVENT BASED
         var weightless = _gravity.IsWeightless(uid, physicsComponent, xform);
@@ -323,8 +337,27 @@ public abstract partial class SharedMoverController : VirtualController
                 // TODO apparently this results in a duplicate move event because "This should have its event run during
                 // island solver"??. So maybe SetRotation needs an argument to avoid raising an event?
                 var worldRot = _transform.GetWorldRotation(xform);
+                // Corvax-Vehicle-Movement-Tweak-Start
+                var delta = xform.LocalRotation + wishDir.ToWorldAngle() - worldRot;
 
-                _transform.SetLocalRotation(uid, xform.LocalRotation + wishDir.ToWorldAngle() - worldRot, xform);
+                if (VehicleMoveQuery.HasComponent(uid))
+                {
+                    var currentDir = worldRot.GetCardinalDir();
+                    var wishAngle = wishDir.ToWorldAngle();
+                    var wishCardinal = wishAngle.GetCardinalDir();
+
+                    if (currentDir.GetOpposite() != wishCardinal)
+                    {
+                        var cardinalAngle = wishCardinal.ToAngle();
+                        var cardinalDelta = xform.LocalRotation + cardinalAngle - worldRot;
+                        _transform.SetLocalRotationNoLerp(uid, cardinalDelta, xform);
+                    }
+                }
+                else
+                {
+                    _transform.SetLocalRotation(uid, delta, xform);
+                }
+                // Corvax-Vehicle-Movement-Tweak-End
             }
 
             if (!weightless && MobMoverQuery.TryGetComponent(uid, out var mobMover) &&

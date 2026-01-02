@@ -1,0 +1,17 @@
+ent-RMCSpawnerEvacuationPodSouth = спавнер спасательная капсула
+    .desc = Определяет место спавна спасательной капсулы.
+    .suffix = Юг
+ent-RMCSpawnerEvacuationPodEast = { ent-RMCSpawnerEvacuationPodSouth }
+    .suffix = Восток
+    .desc = { ent-RMCSpawnerEvacuationPodSouth.desc }
+ent-RMCSpawnerEvacuationPodNorth = { ent-RMCSpawnerEvacuationPodSouth }
+    .suffix = Север
+    .desc = { ent-RMCSpawnerEvacuationPodSouth.desc }
+ent-RMCSpawnerEvacuationPodWest = { ent-RMCSpawnerEvacuationPodSouth }
+    .suffix = Запад
+    .desc = { ent-RMCSpawnerEvacuationPodSouth.desc }
+ent-RMCSpawnerEvacuationPodEastLiaison = { ent-RMCSpawnerEvacuationPodSouth }
+    .suffix = Восток, Связной
+    .desc = { ent-RMCSpawnerEvacuationPodSouth.desc }
+ent-RMCSpawnerLifeboat = спавнер спасательной шлюпки
+    .desc = Определяет место спавна спасательной шлюпки.

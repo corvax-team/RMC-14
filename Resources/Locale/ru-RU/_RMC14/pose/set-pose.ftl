@@ -1,0 +1,3 @@
+rmc-set-pose-examined = [color=lightblue][bold]{ CAPITALIZE($ent) } { $pose }[/bold][/color]
+rmc-set-pose-dialog = Это { $ent }. { CAPITALIZE($ent) }...
+rmc-set-pose-title = Установить позу

@@ -1,0 +1,14 @@
+ent-CMSpawnPointSquadLeader = squad leader spawn point
+    .desc = { ent-CMSpawnPointJobBase.desc }
+ent-CMSpawnPointSquadLeaderAlpha = { ent-CMSpawnPointSquadLeader }
+    .suffix = Alpha
+    .desc = { ent-CMSpawnPointSquadLeader.desc }
+ent-CMSpawnPointSquadLeaderBravo = { ent-CMSpawnPointSquadLeader }
+    .suffix = Bravo
+    .desc = { ent-CMSpawnPointSquadLeader.desc }
+ent-CMSpawnPointSquadLeaderCharlie = { ent-CMSpawnPointSquadLeader }
+    .suffix = Charlie
+    .desc = { ent-CMSpawnPointSquadLeader.desc }
+ent-CMSpawnPointSquadLeaderDelta = { ent-CMSpawnPointSquadLeader }
+    .suffix = Delta
+    .desc = { ent-CMSpawnPointSquadLeader.desc }

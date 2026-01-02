@@ -9,6 +9,7 @@
   itemDrop: CMTileItemSteel
   heatCapacity: 10000
   friction: 1
+  indestructible: true #CCM #Map issue
 
 - type: tile
   abstract: true

@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Buckle;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Standing;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._CCM.Vehicle;
 using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Cuffs.Components;

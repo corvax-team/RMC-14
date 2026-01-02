@@ -1,0 +1,314 @@
+- type: entity
+  parent: RMCAreaBase
+  id: CCMAreaForest
+  suffix: Forest
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: blank
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#6C6767D8'
+    landingZone: false
+
+- type: entity
+  parent:
+  - RMCAreaMax
+  - CCMAreaForest
+  id: CCMAreaForestInteriorOob
+  name: Forest - Out Of Bounds
+  suffix: Forest
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: oob
+  - type: Area
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+
+- type: entity
+  parent:
+  - RMCAreaProtectionZero
+  - CCMAreaForest
+  id: CCMAreaForestGround
+  name: Ground
+  suffix: No mapping
+  components:
+  - type: Sprite
+    state: yellow
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent:
+  - RMCAreaProtectionOne
+  - CCMAreaForest
+  id: CCMAreaForestClosedArea
+  name: Closed area
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: red
+  - type: Area
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaForest
+  id: CCMAreaForestFullProtection
+  abstract: true
+  name: ForestFullProtection
+  suffix: Forest
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: oob
+  - type: Area
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaForest
+  id: CCMAreaForestZeroProtection
+  abstract: true
+  name: ForestZeroProtection
+  suffix: Forest
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: oob
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent:
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestNortheastCaves
+  name: Northeast - Caves
+  components:
+  - type: Sprite
+    state: northeast
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestSoutheasternCaves
+  name: Southeast - Caves
+  components:
+  - type: Sprite
+    state: southeast
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestNorthtown
+  name: North - Small town
+  components:
+  - type: Sprite
+    state: valley_north
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    paradropping: true
+    weatherEnabled: true
+
+- type: entity
+  parent:
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestSouthtown
+  name: South - Small town
+  components:
+  - type: Sprite
+    state: valley_south
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    paradropping: true
+    weatherEnabled: true
+
+- type: entity
+  parent:
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestNorthwestCaves
+  name: Northwest - Caves
+  components:
+  - type: Sprite
+    state: northwest
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestSouthwestPLH
+  name: Southwest - Landing platform and Headquarters
+  components:
+  - type: Sprite
+    state: head_quarters
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: true
+    mortarPlacement: true
+    mortarFire: false
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz1
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestSouthwestCaves
+  name: Southwest - Caves
+  components:
+  - type: Sprite
+    state: southwest
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestRiver
+  name: Centre - River
+  components:
+  - type: Sprite
+    state: central
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    paradropping: true
+    weatherEnabled: true
+
+- type: entity
+  parent:
+  - CCMAreaForest
+  - CCMAreaForestZeroProtection
+  id: CCMAreaForestLZ
+  name: Landing zone
+  components:
+  - type: Sprite
+    state: red2
+  - type: Area
+    minimapColor: '#6C6767D8'
+    noTunnel: True
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    landingZone: true
+    linkedLz: dropship_lz1
+    paradropping: false
+    weatherEnabled: false

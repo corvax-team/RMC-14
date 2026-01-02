@@ -1,0 +1,14 @@
+ent-RMCPouchReagentCanister = подсумок канистры сжатых реагентов
+    .desc = Подсумок герметичной канистры для сжатых  реагентов. Используется для заправки специальных инъекторов, а также для хранения одного такого. Можно пополнить с помощью бака реагентов или химического раздатчика. Можно носить, прикрепив к карману.
+ent-RMCPouchReagentCanisterBicaridine = { ent-RMCPouchReagentCanister }
+    .suffix = Бикаридин
+    .desc = { ent-RMCPouchReagentCanister.desc }
+ent-RMCPouchReagentCanisterKelotane = { ent-RMCPouchReagentCanister }
+    .suffix = Келотан
+    .desc = { ent-RMCPouchReagentCanister.desc }
+ent-RMCPouchReagentCanisterTricordrazineRevival = { ent-RMCPouchReagentCanister }
+    .suffix = Трикордразин - Реанимация
+    .desc = { ent-RMCPouchReagentCanister.desc }
+ent-RMCPouchReagentCanisterTricordrazine = { ent-RMCPouchReagentCanister }
+    .suffix = Трикордразин
+    .desc = { ent-RMCPouchReagentCanister.desc }

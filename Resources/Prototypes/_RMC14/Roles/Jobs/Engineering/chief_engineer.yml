@@ -7,7 +7,7 @@
   requirements:
   - !type:TotalJobsTimeRequirement
     group: CMJobsEngineering
-    time: 72000 # 20 hours
+    time: 32400 # 9 hours. CCM14 role timers. RMC: 72000 # 20 hours
   ranks:
     RMCRankFirstLT:
     - !type:RoleTimeRequirement

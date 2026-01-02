@@ -1,0 +1,8 @@
+ent-ColMarTechFood = КолМарТех СтряпняМат
+    .desc = Поставщик блюд для колониальных морских пехотинцев, содержащий стандартные военные блюда.
+ent-RMCNutriCoVendor = NutriCo AutoChef
+    .desc = An autochef food dispenser, capable of distributing food containing all the essential vitamins and nutrients anyone could ever need. Inedible-looking sludge is passed through a variety of heaters, re-shapers, and solidifiers before being artificially flavored to create something that looks and tastes mostly edible.
+ent-CMVendorBooze = АлкоМат
+    .desc = Чудо техники, способное мгновенно смешать порцию именно того напитка, который вы пожелаете.
+ent-CMVendorChess = ШахматМат
+    .desc = В 2143 году корпорация Ред-Стар Дринкс, входящая в СПП-АК (Администрация Колоний), провела рекламный тотализатор по поиску специальных кодов на внутренней стороне крышечек ограниченной партии водки Ред Стар, в результате которого участники получали Шахматмат с пожизненным запасом пополнений.

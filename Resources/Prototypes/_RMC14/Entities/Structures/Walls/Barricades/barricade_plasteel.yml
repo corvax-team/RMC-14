@@ -80,6 +80,10 @@
   - type: Tag
     tags:
     - RMCPlasteelBarricade
+    # Corvax-Vehicle-Content-Start
+  - type: VehicleStructureTarget
+    minimumClassToDestroy: Weak
+    # Corvax-Vehicle-Content-End
 
 - type: Tag
   id: RMCPlasteelBarricade

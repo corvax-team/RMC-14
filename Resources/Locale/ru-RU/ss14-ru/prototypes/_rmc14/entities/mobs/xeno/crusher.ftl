@@ -1,0 +1,9 @@
+ent-CMXenoCrusherBase = Крушитель
+    .desc = Огромный инопланетянин с огромным бронированным гребнем.
+ent-RMCXenoCrusher = { ent-CMXenoCrusherBase }
+    .desc = { ent-CMXenoCrusherBase.desc }
+ent-RMCXenoCrusherCharger = { ent-CMXenoCrusherBase }
+    .suffix = Спринтер
+    .desc = { ent-CMXenoCrusherBase.desc }
+ent-CMXenoCrusher = Крушитель
+    .desc = Огромный инопланетянин с огромным бронированным гребнем.

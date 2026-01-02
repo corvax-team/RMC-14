@@ -1,0 +1,56 @@
+- type: entity
+  parent: BaseStructure
+  id: CCMWreath
+  name: wreath
+  description: "Almost alive new year's wreath! Grants free new year's mood"
+  components:
+  - type: Sprite
+    sprite: _CCM14\Objects\Decoration\New year\wreath.rsi
+    state: wreath
+  - type: Icon
+    sprite: _CCM14\Objects\Decoration\New year\wreath.rsi
+    state: icon
+  - type: Tag
+    tags: [ New Year ]
+  - type: Physics
+    canCollide: false
+  - type: Fixtures
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 10
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+
+
+- type: entity
+  parent: BaseStructure
+  id: CCMLolipop
+  name: Lollipop
+  description: "Very sweet lollipop, sadly, but you can't eat it. Grants free new year's mood"
+  components:
+  - type: Sprite
+    sprite: _CCM14\Objects\Decoration\New year\lollipop.rsi
+    state: lollipop
+  - type: Icon
+    sprite: _CCM14\Objects\Decoration\New year\wreath.rsi
+    state: icon
+  - type: Tag
+    tags: [ New Year ]
+  - type: Physics
+    canCollide: false
+  - type: Fixtures
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 10
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]

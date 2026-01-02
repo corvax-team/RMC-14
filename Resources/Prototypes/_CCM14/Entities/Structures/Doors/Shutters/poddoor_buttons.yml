@@ -1,0 +1,26 @@
+# David
+- type: entity
+  parent: RMCPodDoorButton
+  id: CCMPodDoorDavidPortButton
+  name: port's podlock
+  description: Button that opens port's podlock. ATTENTION! MAY CAUSE DEPRESSURIZATION!
+  suffix: David
+  
+- type: entity
+  parent: RMCPodDoorButton
+  id: CCMPodDoorDavidNukeStorageButton
+  name: nuke storage's podlock
+  description: Button that opent nuke storage's podlock. USE ONLY IN CASE OF EMERGENCY!
+  suffix: David
+  
+- type: entity
+  parent: RMCPodDoorButton
+  id: CCMShutterDavidMechButton
+  name: mech's shutters
+  suffix: David
+  
+- type: entity
+  parent: RMCPodDoorButton
+  id: CCMShutterDavidCargoButton
+  name: cargo's shutters
+  suffix: David

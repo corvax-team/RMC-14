@@ -1,0 +1,114 @@
+[net]
+tickrate = 30
+max_connections = 1024
+
+[game]
+hostname = "🛰️ Corvax — Colonial Marines 🌍"
+desc = "Corvax первый русскоязычный проект в Space Station 14.\nПервый русскоязычный проект на тему колониальных морпехов.\nНа сервере средние требования к RP."
+soft_max_players = 100
+map_rotation = true
+lobbyduration = 180
+round_end_pvs_overrides = false
+defaultpreset = "CMDistressSignal"
+fallbackenabled = false
+fallbackpreset = "CMDistressSignal"
+round_end_sound_collection = "CMRoundEnd"
+contraband_examine = false
+map_pool = "CCMMapPool"
+
+[ghost]
+kill_crit = false
+role_time = 0
+
+[vote]
+restart_required_ratio = 0.85
+same_type_timeout = 300.0
+timerrestart = 30
+map_enabled = true
+preset_enabled = false
+
+[admin]
+deadmin_on_join = true
+see_own_notes = true
+server_ban_erase_player = true
+new_player_threshold = 600
+
+[atmos]
+space_wind = false
+monstermos_rip_tiles = false
+grid_impulse = false
+max_process_time = 1
+
+[ic]
+flavor_text = true
+enable_suicide = false
+
+[shuttle]
+auto_call_time = 0
+arrivals_planet = false
+arrivals = false
+grid_fill = false
+preload_grids = false
+startup_time = 10
+travel_time = 100
+arrival_time = 10
+cooldown = 120
+mass_limit = -1
+emergency = false
+
+[discord]
+rich_main_icon_id = "corvax"
+
+[rules]
+time = 20.0
+
+[viewport]
+maximum_width = 26
+
+[infolinks]
+discord = "https://discord.gg/VWJZFUWgRc"
+wiki = "https://station14.ru/wiki/Портал:Colonial_Marines"
+patreon = "https://boosty.to/corvax"
+appeal = "https://discord.gg/QBCV2f42xG"
+
+[hub]
+advertise = true
+tags = "lang:ru,rp:med,region:eu_e"
+
+[physics]
+maxlinvelocity = 51
+grid_splitting = false
+
+[auth]
+mode = 1
+
+[explosion]
+can_create_vacuum = false
+
+[procgen]
+preload = false
+
+[rmc]
+late_joins_per_burrowed_larva = 3.5
+late_joins_per_burrowed_larva_early = 3.5
+late_joins_per_burrowed_larva_early_threshold_minutes = 5
+marines_per_xeno = 3.5
+auto_balance_step = 0.5
+auto_balance_min = 2.5
+auto_balance_max = 4.5
+distress_xenos_minimum = 1
+
+[gateway]
+generator_enabled = false
+
+[accessibility]
+screen_shake_intensity = 1
+
+[events]
+enabled = false
+
+[build]
+engine_version = "264.0.2-fix-physics" #and remember to remove it next update...xd
+
+[movement]
+mob_pushing = true

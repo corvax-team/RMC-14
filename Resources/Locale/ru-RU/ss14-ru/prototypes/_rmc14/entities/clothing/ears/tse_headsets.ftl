@@ -1,0 +1,10 @@
+ent-RMCEncryptionKeyTSE = ключ шифрования радио TSE
+    .desc = { ent-CMEncryptionKey.desc }
+ent-RMCEncryptionKeyTSEPA = ключ шифрования радио TSEPA
+    .desc = { ent-RMCEncryptionKeyTSE.desc }
+ent-RMCHeadsetTSEAbstract = { ent-RMCHeadsetIcons }
+    .desc = { ent-RMCHeadsetIcons.desc }
+ent-RMCHeadsetTSE = радиогарнитура TSE
+    .desc = { ent-RMCHeadsetTSEAbstract.desc }
+ent-RMCHeadsetTSEPA = радиогарнитура TSEPA
+    .desc = { ent-RMCHeadsetTSEAbstract.desc }

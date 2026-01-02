@@ -1,0 +1,12 @@
+ent-CCMBaseSandTree = { "" }
+    .desc = Yep, it's a tree.
+ent-CCMDeadTree01 = Dead tree
+    .desc = { ent-CCMBaseSandTree.desc }
+ent-CCMDeadTree02 = Dead tree
+    .desc = { ent-CCMBaseSandTree.desc }
+ent-CCMDeadTree03 = Dead tree
+    .desc = { ent-CCMBaseSandTree.desc }
+ent-CCMDeadTree04 = Dead tree
+    .desc = { ent-CCMBaseSandTree.desc }
+ent-CCMSpruceTree = Spruce tree
+    .desc = { ent-CCMBaseSandTree.desc }

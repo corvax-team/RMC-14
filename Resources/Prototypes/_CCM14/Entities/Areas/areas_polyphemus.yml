@@ -1,0 +1,571 @@
+- type: entity
+  parent: RMCAreaBase
+  id: CCMAreaPolyphemus
+  suffix: Polyphemus
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: blank
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#6C6767D8'
+    landingZone: false
+
+- type: entity
+  parent:
+  - RMCAreaMax
+  - CCMAreaPolyphemus
+  id: CCMAreaPolyphemusInteriorOob
+  name: Polyphemus - Out Of Bounds
+  suffix: Polyphemus
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: oob
+  - type: Area
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+
+- type: entity
+  parent:
+  - RMCAreaProtectionZero
+  - CCMAreaPolyphemus
+  id: CCMAreaPolyphemusGround
+  name: Ground
+  suffix: No mapping
+  components:
+  - type: Sprite
+    state: yellow
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent:
+  - RMCAreaProtectionOne
+  - CCMAreaPolyphemus
+  id: CCMAreaPolyphemusClosedArea
+  name: Closed area
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: red
+  - type: Area
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  id: CCMAreaPolyphemusFullProtection
+  abstract: true
+  name: PolyphemusFullProtection
+  suffix: Polyphemus
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: oob
+  - type: Area
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  id: CCMAreaPolyphemusZeroProtection
+  abstract: true
+  name: PolyphemusZeroProtection
+  suffix: Polyphemus
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: oob
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+# ФОБ
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusLandingHeadquarters
+  name: Landing Area and Headquarters
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: fob
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    paradropping: true
+    weatherEnabled: true
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemusLandingHeadquarters
+  id: CCMAreaPolyphemusCargo
+  name: FOB - Cargo
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: fob_1
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: true
+    weatherEnabled: true
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemusLandingHeadquarters
+  id: CCMAreaPolyphemusMedbay
+  name: FOB - Medbay
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: fob_2
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: true
+    weatherEnabled: false
+
+# Восточные шахты
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusEasternMines
+  name: Eastern - Mines
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: yellow
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+# Западный завод
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusWesternPlant
+  name: West - Processing Plant
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: blue
+  - type: Area
+    minimapColor: "#264d7ad7"
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusWesternPlantEntrance
+  name: West - Processing Plant - Entrance
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: blue_x
+  - type: Area
+    minimapColor: "#264d7ad7"
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    paradropping: true
+    weatherEnabled: true
+
+# Западные бараки
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusWestResidentialPremises
+  name: West - Residential Premises
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: blue
+  - type: Area
+    minimapColor: "#3a756bd7"
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: true
+    weatherEnabled: false
+
+# Центральная дамба
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusDam
+  name: Centre - The dam
+  components:
+  - type: Sprite
+    state: central
+  - type: Area
+    minimapColor: "#517a2ad7"
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    paradropping: true
+    weatherEnabled: true
+
+# Восточная диспетчерская
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusEastPumping
+  name: East - Pumping station
+  components:
+  - type: Sprite
+    state: construction
+  - type: Area
+    minimapColor: '#7e6e28d7'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: false
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+# Западная диспетчерская
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusWestPumping
+  name: West - Pumping station
+  components:
+  - type: Sprite
+    state: construction
+  - type: Area
+    minimapColor: "#7e6e28d7"
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: false
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+# Северный бункер
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusNorthGeneratorRoom
+  name: North - Generator room
+  components:
+  - type: Sprite
+    state: genetics
+  - type: Area
+    minimapColor: "#862e2ed7"
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: false
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+# Восточные пещеры
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusEastCaves
+  name: East - Caves
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: east
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusEastCavesOpen
+  name: East - Caves
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: east_open
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: true
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    paradropping: true
+    weatherEnabled: false
+
+# Западные пещеры
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusWestCaves
+  name: West - Caves
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: west
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusWestCavesOpen
+  name: West - Caves
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: west_open
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    paradropping: true
+    weatherEnabled: false
+
+# Северные пещеры
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusNorthCaves
+  name: North - Caves
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: north
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+# Северо-восточные пещеры
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusNortheasternCaves
+  name: Northeastern - Caves
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: northeast
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusNortheasternCavesOpen
+  name: Northeastern - Caves
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: northeast_open
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+# Посадочная зона
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusLZ
+  name: Landing zone
+  components:
+  - type: Sprite
+    state: red
+  - type: Area
+    minimapColor: '#6C6767D8'
+    noTunnel: True
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    landingZone: true
+    linkedLz: dropship_lz1
+    paradropping: false
+    weatherEnabled: true

@@ -88,6 +88,22 @@
     offset: "0,0"
     color: "#FFEFD2"
     mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
+#ccm-edit
+  - type: ActivatableUI
+    key: enum.DropshipTerminalWeaponsUi.Key
+  - type: AccessReader
+    access: [ [ "CMAccessPilot" ], [ "CMAccessSquadLeaderPrep" ], [ "RMCAccessWeYaFlight" ] ]
+  - type: ActivatableUIRequiresAccess
+  - type: UserInterface
+    interfaces:
+      enum.DropshipTerminalWeaponsUi.Key:
+        type: DropshipWeaponsBui
+  - type: DropshipTerminalWeapons
+  - type: TacticalMapComputer
+  - type: RequiresSkill
+    skills:
+      RMCSkillPilot: 1
+###
 
 - type: entity
   parent: RMCPropComputerBase

@@ -1,0 +1,12 @@
+ent-RMCRandomHumanoidHEFAShrapnelswornMeleeHostile = шрапнелеклятвенник HEFA роль призрака
+    .suffix = Спавнер, Игрок, Враждебный
+    .desc = { ent-RMCRandomHumanoidHEFAShrapnelswornHostile.desc }
+ent-RMCRandomHumanoidHEFAShrapnelswornMeleeFriendly = шрапнелеклятвенник HEFA роль призрака
+    .suffix = Спавнер, Игрок, Дружелюбный
+    .desc = { ent-RMCRandomHumanoidHEFAShrapnelswornFriendly.desc }
+ent-RMCSpawnerHEFAShrapnelsworn = спавнер шрапнелеклятвенник HEFA
+    .suffix = Спавнер
+    .desc = { ent-MarkerBase.desc }
+ent-RMCRandomHumanoidHEFAShrapnelsworn = шрапнелеклятвенник HEFA роль призрака
+    .suffix = Роль
+    .desc = { "" }

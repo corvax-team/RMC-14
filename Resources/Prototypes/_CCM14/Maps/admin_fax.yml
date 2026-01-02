@@ -1,0 +1,13 @@
+- type: gameMap
+  id: CCMAdminFax
+  mapName: operational headquarters
+  mapPath: /Maps/_CCM14/operational_headquarters.yml
+  minPlayers: 0
+  maxRandomOffset: 0
+  randomRotation: false
+  stations:
+    AdminFax:
+      stationProto: NanotrasenCentralCommand
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'operational headquarters'

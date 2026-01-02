@@ -5,7 +5,7 @@ using Robust.Shared.Toolshed.Errors;
 
 namespace Content.Server.Administration.Toolshed;
 
-[ToolshedCommand, AdminCommand(AdminFlags.Debug)]
+[ToolshedCommand, AdminCommand(AdminFlags.Fun)] // CCM-CommandPerms
 public sealed class RejuvenateCommand : ToolshedCommand
 {
     private RejuvenateSystem? _rejuvenate;

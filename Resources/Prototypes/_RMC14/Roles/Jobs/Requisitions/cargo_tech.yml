@@ -7,7 +7,7 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
-    time: 18000 # 5 hours
+    time: 10800 # 3 hours. CCM14 role timers. RMC: 18000 # 5 hours
   ranks:
     RMCRankLanceCorporal:
     - !type:RoleTimeRequirement

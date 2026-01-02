@@ -1,0 +1,11 @@
+ent-RMCRadioHandheldColonyBase = коротковолновое радио
+    .desc = { ent-RadioHandheld.desc }
+ent-RMCRadioHandheldColony = { ent-RMCRadioHandheldColonyBase }
+    .suffix = Вкл
+    .desc = { ent-RMCRadioHandheldColonyBase.desc }
+ent-RMCRadioHandheldColonyOff = { ent-RMCRadioHandheldColonyBase }
+    .suffix = Выкл
+    .desc = { ent-RMCRadioHandheldColonyBase.desc }
+ent-RMCRadioHandheldAlmayer = { ent-RMCRadioHandheldColonyBase }
+    .suffix = Вкл
+    .desc = { ent-RMCRadioHandheldColonyBase.desc }

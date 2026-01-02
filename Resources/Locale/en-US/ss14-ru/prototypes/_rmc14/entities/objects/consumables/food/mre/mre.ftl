@@ -1,0 +1,11 @@
+ent-CMMRE = UNMC MRE
+    .desc = A Meal, Ready-to-Eat. A single-meal combat ration designed to provide a soldier with enough nutrients for a day of strenuous work. Its expiration date is at least 20 years ahead of your combat life expectancy.
+ent-CMMREComponentBase = MRE component
+    .desc = A package from a Meal Ready-to-Eat, property of the Marines. Contains a part of a meal, prepared for field consumption.
+ent-CMMREFoodBase = { ent-CMFoodBase }
+    .desc = The contents of a Marine Standard issue MRE.
+ent-RMCBoxMREEmpty = box of MREs (x12)
+    .desc = A box of MREs. Nutritious, but not delicious.
+ent-RMCBoxMRE = { ent-RMCBoxMREEmpty }
+    .suffix = Filled
+    .desc = { ent-RMCBoxMREEmpty.desc }

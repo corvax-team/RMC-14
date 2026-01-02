@@ -1,0 +1,22 @@
+cm-iv-attach-self-injecting = Вы присоединяете { $iv } к { $target }, вводя { DAT-OBJ($target) } содержимое.
+cm-iv-attach-others-injecting = { $user } присоединяет { $iv } к { $target }, вводя { DAT-OBJ($target) } содержимое.
+cm-iv-attach-self-drawing = Вы присоединяете { $iv } к { $target }, набирая { OBJECT($target) } кровь.
+cm-iv-attach-others-drawing = { $user } присоединяет { $iv } к { $target }, набирая { OBJECT($target) } кровь.
+cm-iv-attach-no-skill = Вы не знаете как присоединить это!
+cm-iv-detach-self = Вы отсоединяете { $iv } от { $target }.
+cm-iv-detach-others = { $user } отсоединяет { $iv } от { $target }.
+cm-iv-detach-no-skill = Вы не знаете как отсоединить это!
+cm-iv-rip = Игла выдёргивается из { $target }, разве это не больно??
+cm-iv-now-injecting = Капельница теперь вводит содержимое.
+cm-iv-now-taking = Капельница теперь набирает кровь.
+cm-iv-verb-toggle-inject = Переключить ввод\набор
+cm-iv-examine-injecting = { CAPITALIZE($iv) } вводит содержимое.
+cm-iv-examine-drawing = { CAPITALIZE($iv) } набирает кровь.
+cm-iv-examine-chemicals = Установлен { $attached } с { $units } единицами жидкости.
+cm-iv-examine-chemicals-none = Пакет не установлен.
+cm-iv-examine-attached = Присоединено к { $attached }.
+cm-iv-examine-attached-none = Никто не присоединён.
+cm-blood-pack-cannot-self = Вы не можете воткнуть его в себя.
+cm-blood-pack-poke-self = Вы втыкаете в { $target } { $pack }.
+cm-blood-pack-poke-others = { $user } втыкает в { $target } { $pack }.
+cm-blood-pack-contains = В нем содержится: [color=#BB0000FF]{ $units } единиц[/color] жидкости.

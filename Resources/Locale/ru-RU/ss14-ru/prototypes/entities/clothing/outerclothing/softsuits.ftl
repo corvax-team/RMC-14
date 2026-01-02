@@ -1,0 +1,17 @@
+ent-ClothingOuterHardsuitEVA = скафандр ВКД
+    .desc = Лёгкий космический скафандр, способный защитить владельца от космического вакуума во время аварийной ситуации.
+ent-ClothingOuterEVASuitSyndicate = syndicate EVA suit
+    .desc = Has a tag on the back that reads: 'Totally not property of an enemy corporation, honest!'
+# Corvax-HiddenDesc-Start
+ent-ClothingOuterHardsuitSyndicate = кроваво-красный скафандр ВКД
+    .suffix = Синдикат
+    .desc = { ent-ClothingOuterHardsuitEVA.desc }
+# Corvax-HiddenDesc-End
+ent-ClothingOuterSuitEmergency = аварийный скафандр ВКД
+    .desc = Аварийный скафандр ВКД со встроенным шлемом. Он ужасно медленный и не имеет температурной защиты, но его достаточно, чтобы выиграть время в жёстком вакууме космоса.
+ent-ClothingOuterHardsuitEVAPrisoner = тюремный скафандр ВКД
+    .desc = Лёгкий космический скафандр, способный защитить заключённого от космического вакуума во время аварийной ситуации.
+ent-ClothingOuterHardsuitAncientEVA = пустотный скафандр NTSRA
+    .desc = Древний космический скафандр, разработанный по заказу Центкома подразделением NTSRA - ассоциацией космических исследований Nanotrasen. Он изготовлен с особой тщательностью, обеспечивая большую мобильность, чем большинство современных космических костюмов.
+ent-ClothingOuterHardsuitVoidParamed = пустотный скафандр парамедика
+    .desc = Пустотный скафандр, предназначенный для парамедиков.

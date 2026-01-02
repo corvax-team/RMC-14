@@ -7,18 +7,17 @@ using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 
-
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Ban)]
 public sealed class BanCommand : LocalizedCommands
 {
-
     [Dependency] private readonly IPlayerLocator _locator = default!;
     [Dependency] private readonly IBanManager _bans = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly ILogManager _logManager = default!;
+    [Dependency] private readonly IAdminManager _adminManager = default!;
 
     public override string Command => "ban";
 
@@ -27,6 +26,7 @@ public sealed class BanCommand : LocalizedCommands
         string target;
         string reason;
         uint minutes;
+
         if (!Enum.TryParse(_cfg.GetCVar(CCVars.ServerBanDefaultSeverity), out NoteSeverity severity))
         {
             _logManager.GetSawmill("admin.server_ban")
@@ -51,7 +51,6 @@ public sealed class BanCommand : LocalizedCommands
                     shell.WriteLine(Help);
                     return;
                 }
-
                 break;
             case 4:
                 target = args[0];
@@ -70,7 +69,6 @@ public sealed class BanCommand : LocalizedCommands
                     shell.WriteLine(Help);
                     return;
                 }
-
                 break;
             default:
                 shell.WriteLine(Loc.GetString("cmd-ban-invalid-arguments"));
@@ -88,6 +86,41 @@ public sealed class BanCommand : LocalizedCommands
         }
 
         var targetUid = located.UserId;
+
+        var targetSession = _playerManager.Sessions.FirstOrDefault(s => s.UserId == targetUid);
+        AdminFlags targetFlags = AdminFlags.None;
+
+        if (targetSession != null && targetSession.AttachedEntity != null)
+        {
+            var entUid = targetSession.AttachedEntity.Value;
+            var adminData = _adminManager.GetAdminData(entUid);
+            if (adminData != null)
+                targetFlags = adminData.Flags;
+
+            // Запрет на бан хоста
+            if (targetFlags.HasFlag(AdminFlags.Host))
+            {
+                shell.WriteError("Нельзя забанить игрока с флагом Host!");
+                return;
+            }
+        }
+
+        // флаги исполнителя
+        AdminFlags executorFlags = AdminFlags.None;
+        if (player != null && player.AttachedEntity.HasValue)
+        {
+            var playerAdminData = _adminManager.GetAdminData(player.AttachedEntity.Value);
+            if (playerAdminData != null)
+                executorFlags = playerAdminData.Flags;
+        }
+
+        // Обычный админ не может банить другого админа
+        if (targetFlags.HasFlag(AdminFlags.Admin) && !executorFlags.HasFlag(AdminFlags.Permissions))
+        {
+            shell.WriteError("Обычный админ не может забанить другого админа!");
+            return;
+        }
+
         var targetHWid = located.LastHWId;
 
         _bans.CreateServerBan(targetUid, target, player?.UserId, null, targetHWid, minutes, severity, reason);

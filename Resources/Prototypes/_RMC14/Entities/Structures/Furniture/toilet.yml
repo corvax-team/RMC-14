@@ -60,3 +60,8 @@
 #        DoorVisualState.DoorOpen:
 #          DoorOpen: { state: disposal-open }
 #          DoorClosed: { state: disposal-closed }
+    # Corvax-Vehicle-Content-Start
+  - type: VehicleStructureTarget
+    momentumLossFactor: 0
+    damageToVehicleOnFail: 0
+    # Corvax-Vehicle-Content-End

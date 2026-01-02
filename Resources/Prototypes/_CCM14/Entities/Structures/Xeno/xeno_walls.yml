@@ -1,0 +1,64 @@
+- type: entity
+  parent: CMBaseWallXeno
+  id: CCMWallXenoWeedBoundResin
+  name: weed bound resin
+  description: Weird slime solidified into a wall.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Xenos/xeno_resin_wall.rsi
+  - type: Icon
+    sprite: _CCM14/Structures/Xenos/xeno_resin_wall.rsi
+    state: weedboundresin
+  - type: IconSmooth
+    key: walls
+    base: weedboundresin
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1400
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: XenoNestSurface
+  - type: XenoConstructionPlasmaCost
+    plasma: 120
+    scalingCost: true
+  - type: XenoStructureUpgradeable
+    to: CCMWallXenoThickWeedBoundResin
+    cost: 75
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 225
+        
+- type: entity
+  parent: CMBaseWallXeno
+  id: CCMWallXenoThickWeedBoundResin
+  name: thick weed bound resin
+  description: Weird slime solidified into a wall.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Xenos/xeno_resin_wall.rsi
+  - type: Icon
+    sprite: _CCM14/Structures/Xenos/xeno_resin_wall.rsi
+    state: thickweedboundresin
+  - type: IconSmooth
+    key: walls
+    base: thickweedboundresin
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1890
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: XenoNestSurface
+  - type: XenoConstructionPlasmaCost
+    plasma: 170
+    scalingCost: true
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 338

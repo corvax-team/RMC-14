@@ -28,11 +28,11 @@ public sealed partial class DialogComponent : Component
     public bool LargeInput;
 
     [DataField, AutoNetworkedField]
+    public bool AutoFocus = true;
+
+    [DataField, AutoNetworkedField]
     public object? ConfirmEvent;
 
     [DataField, AutoNetworkedField]
     public int CharacterLimit = 200;
-
-    [DataField]
-    public bool AutoFocus = true;
 }

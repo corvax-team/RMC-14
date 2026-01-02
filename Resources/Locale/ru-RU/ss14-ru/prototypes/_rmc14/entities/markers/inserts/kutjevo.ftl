@@ -1,0 +1,12 @@
+ent-RMCMapInsertKutjevoCommunications = SE Checkpoint
+    .suffix = Вставьте Kutjevo
+    .desc = { ent-RMCMapInsertBase.desc }
+ent-RMCMapInsertKutjevoCleaningProgBotany = Очистка ботаника
+    .suffix = Вставьте Kutjevo
+    .desc = { ent-RMCMapInsertBase.desc }
+ent-RMCMapInsertKutjevoTrappedMonke = Пойманный в ловушку клоуна
+    .suffix = Вставьте Kutjevo
+    .desc = { ent-RMCMapInsertBase.desc }
+ent-RMCMapInsertSolarisPlinkingSpotNorthLZ = Партинг Spot North LZ
+    .suffix = Вставьте Kutjevo
+    .desc = { ent-RMCMapInsertBase.desc }

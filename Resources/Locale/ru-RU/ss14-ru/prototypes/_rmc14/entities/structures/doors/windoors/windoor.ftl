@@ -1,0 +1,9 @@
+ent-CMBaseWindoor = { ent-BaseStructure }
+    .desc = { ent-BaseStructure.desc }
+ent-CMWindoor = стеклянное раздвижное окно
+    .desc = Окно, которое ещё и дверь. Дверокно, если хотите.
+ent-RMCWindoorSoro = { ent-CMWindoor }
+    .suffix = Blue
+    .desc = { ent-CMWindoor.desc }
+ent-CMWindoorSecure = раздвижное бронеокно
+    .desc = Толстый кусок закалённого стекла на металлических направляющих. Наверняка прочнее, чем вы.

@@ -1,0 +1,15 @@
+ent-CMAirlockBrigLocked = { ent-CMAirlockSecurity }
+    .suffix = Бриг, Закрыто
+    .desc = { ent-CMAirlockSecurity.desc }
+ent-CMAirlockGlassBrigLocked = { ent-CMAirlockGlassSecurity }
+    .suffix = Бриг, Закрыто, Стеклянный
+    .desc = { ent-CMAirlockGlassSecurity.desc }
+ent-CMAirlockMaintBrigLocked = { ent-CMAirlockMaint }
+    .suffix = Бриг, Закрыто, Техобслуживание
+    .desc = { ent-CMAirlockMaint.desc }
+ent-CMAirlockArmoryLocked = { ent-CMAirlockSecurity }
+    .suffix = Оружейная, Закрыто
+    .desc = { ent-CMAirlockSecurity.desc }
+ent-CMAirlockGlassArmoryLocked = { ent-CMAirlockGlassSecurity }
+    .suffix = Оружейная, Закрыто, Стеклянный
+    .desc = { ent-CMAirlockGlassSecurity.desc }

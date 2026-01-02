@@ -1,0 +1,10 @@
+- type: entity
+  parent: MarkerBase
+  id: CCMMarkerERTCrash
+  name: ERT marker crash
+  components:
+  - type: CCMERTCrashMarker
+  - type: Sprite
+    layers:
+    - sprite: Markers/cross.rsi
+      state: pink

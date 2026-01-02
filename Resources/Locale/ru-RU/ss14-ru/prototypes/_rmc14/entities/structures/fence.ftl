@@ -1,0 +1,14 @@
+ent-CMFence = ограждение
+    .desc = Большая металлическая сетка, натянутая между двумя столбами. Предназначена в качестве дешёвого способа разделения пространства, позволяя при этом смотреть сквозь неё.
+ent-RMCFenceBroken = сломанное ограждение
+    .desc = Обрывки проволоки, растянувшиеся между двумя столбами, уже никому не преградят путь.
+ent-RMCFenceHybrisa = { ent-CMFence }
+    .desc = { ent-CMFence.desc }
+ent-RMCFenceHybrisaBroken = { ent-RMCFenceBroken }
+    .desc = { ent-RMCFenceBroken.desc }
+ent-RMCFenceHybrisaElectric = { ent-CMFence }
+    .suffix = Под напряжением
+    .desc = { ent-CMFence.desc }
+ent-RMCFenceHybrisaElectricBroken = { ent-RMCFenceBroken }
+    .suffix = Под напряжением
+    .desc = { ent-RMCFenceBroken.desc }

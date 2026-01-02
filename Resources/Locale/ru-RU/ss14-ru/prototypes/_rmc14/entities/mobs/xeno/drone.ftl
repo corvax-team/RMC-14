@@ -1,0 +1,10 @@
+ent-CMXenoDroneBase = Трутень
+    .desc = Инопланетный трутень.
+ent-CMXenoDrone = { ent-CMXenoDroneBase }
+    .desc = { ent-CMXenoDroneBase.desc }
+ent-CMXenoDroneGardener = { ent-CMXenoDroneBase }
+    .suffix = Садовник
+    .desc = { ent-CMXenoDroneBase.desc }
+ent-CMXenoDroneHealer = { ent-CMXenoDroneBase }
+    .suffix = Целитель
+    .desc = { ent-CMXenoDroneBase.desc }

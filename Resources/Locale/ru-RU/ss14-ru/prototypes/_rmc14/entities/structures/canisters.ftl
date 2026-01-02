@@ -1,0 +1,16 @@
+ent-RMCCanisterBase = канистра
+    .desc = Канистра для газа.
+ent-RMCCanisterGrey = канистра (Воздух)
+    .desc = Канистра для газа.
+ent-RMCCanisterBlack = канистра (CO2)
+    .desc = Канистра для газа.
+ent-RMCCanisterBlue = канистра (O2)
+    .desc = Канистра для газа.
+ent-RMCCanisterRed = канистра (N2)
+    .desc = Канистра для газа.
+ent-RMCCanisterOrange = канистра (Форон)
+    .desc = Канистра для газа.
+ent-RMCCanisterRedWhite = канистра (N2O)
+    .desc = Канистра для газа.
+ent-RMCCanisterBrokenBase = разбитая канистра
+    .desc = Разбитая канистра для газа. Совершенно бесполезна.

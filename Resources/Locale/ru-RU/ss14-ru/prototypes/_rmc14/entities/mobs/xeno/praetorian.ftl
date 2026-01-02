@@ -1,0 +1,16 @@
+ent-CMXenoPraetorianBase = Преторианец
+    .desc = Огромное, грозное чудище.
+ent-CMXenoPraetorian = { ent-CMXenoPraetorianBase }
+    .desc = { ent-CMXenoPraetorianBase.desc }
+ent-RMCXenoPraetorianValkyrie = { ent-CMXenoPraetorianBase }
+    .suffix = Валькирия
+    .desc = { ent-CMXenoPraetorianBase.desc }
+ent-RMCXenoPraetorianDancer = { ent-CMXenoPraetorianBase }
+    .suffix = Танцор
+    .desc = { ent-CMXenoPraetorianBase.desc }
+ent-RMCXenoPraetorianOppressor = { ent-CMXenoPraetorianBase }
+    .suffix = Угнетатель
+    .desc = { ent-CMXenoPraetorianBase.desc }
+ent-RMCXenoPraetorianVanguard = { ent-CMXenoPraetorianBase }
+    .suffix = Авангард
+    .desc = { ent-CMXenoPraetorianBase.desc }

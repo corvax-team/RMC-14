@@ -1,3 +1,5 @@
+using System.Linq;
+using Content.Corvax.Interfaces.Shared; // Corvax-Loadouts
 using Content.Shared.Clothing;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
@@ -93,6 +95,16 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
 
         foreach (var kvp in groups)
         {
+        // Corvax-Loadouts-Start
+        var groupLoadouts = _groupProto.Loadouts;
+        if (collection.TryResolveType<ISharedLoadoutsManager>(out var loadoutsManager) && _groupProto.ID == "Inventory")
+        {
+            groupLoadouts = loadoutsManager.GetClientPrototypes().Select(id => (ProtoId<LoadoutPrototype>)id).ToList();
+        }
+        // Corvax-Loadouts-End
+
+        foreach (var loadoutProto in groupLoadouts) // Corvax-Loadouts
+        {
             var protos = kvp.Value;
 
             if (protos.Count > 1)
@@ -155,6 +167,7 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
             }
         }
     }
+  }
 
     private ToggleLoadoutButton CreateToggleButton(KeyValuePair<string, List<LoadoutPrototype>> kvp, LoadoutContainer firstElement, SubLoadoutContainer subContainer)
     {

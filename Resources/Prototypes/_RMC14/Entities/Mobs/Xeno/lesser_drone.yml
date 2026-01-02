@@ -84,6 +84,7 @@
       - XenoParasite
       - XenoEgg
       - XenoFruit
+      - CCMRoyalParasite
   - type: TunnelRenamer
   - type: MultiHandedHolder
     items:

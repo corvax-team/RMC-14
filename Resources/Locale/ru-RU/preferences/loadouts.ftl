@@ -1,0 +1,15 @@
+# Name
+loadout-name-edit-label = Настраиваемое имя
+loadout-name-edit-label-dataset = Sets a custom name to be used if you play this role. If empty, a random name will be selected instead.
+loadout-name-edit-tooltip = Не более { $max } символов. Если имя не указано, оно будет выбрано случайным образом.
+# Restrictions
+loadout-restrictions = Ограничения
+loadouts-min-limit = Мин. кол-во: { $count }
+loadouts-max-limit = Макс. кол-во: { $count }
+loadouts-points-limit = Очки: { $count } / { $max }
+loadouts-count-items-in-group =
+    { $item } and { $count } other { $count ->
+        [1] item
+       *[other] items
+    }
+loadouts-points-restriction = Не хватает очков

@@ -1,0 +1,10 @@
+ent-CCMScrewdriver = { ent-CMScrewdriver }
+    .desc = { ent-CMScrewdriver.desc }
+ent-CCMWirecutter = { ent-CMWirecutter }
+    .desc = { ent-CMWirecutter.desc }
+ent-CCMWrench = { ent-CMWrench }
+    .desc = { ent-CMWrench.desc }
+ent-CCMCrowbar = { ent-CMCrowbar }
+    .desc = { ent-CMCrowbar.desc }
+ent-CCMCrowbarRed = emergency crowbar
+    .desc = { ent-CCMCrowbar.desc }

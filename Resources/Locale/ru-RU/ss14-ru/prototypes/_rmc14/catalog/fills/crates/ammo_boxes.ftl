@@ -1,0 +1,10 @@
+ent-RMCCrateBoxShellsShotgunSlugs = коробка ружейных патронов (100x пулевых патронов)
+    .desc = { ent-RMCCrateAmmo.desc }
+ent-RMCCrateBoxShellsShotgunBuckshot = коробка ружейных патронов (100x дробовых патронов)
+    .desc = { ent-RMCCrateAmmo.desc }
+ent-RMCCrateBoxShellsShotgunFlechette = коробка ружейных патронов (100x патронов флешетта)
+    .desc = { ent-RMCCrateAmmo.desc }
+ent-RMCCrateBoxShellsShotgunBreaching = коробка ружейных патронов (120x пробивных патронов)
+    .desc = { ent-RMCCrateAmmo.desc }
+ent-RMCCrateBoxAmmo458 = коробка патронов .458 (.458 x 300)
+    .desc = { ent-RMCCrateAmmo.desc }

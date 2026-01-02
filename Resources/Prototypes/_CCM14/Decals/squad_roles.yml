@@ -1,0 +1,55 @@
+- type: decal
+  id: SquadRolesMarine
+  tags: ["squad_roles"]
+  sprite:
+    sprite: _CCM14/Decals/squad_roles.rsi
+    state: marine
+
+- type: decal
+  id: SquadRolesTech
+  tags: ["squad_roles"]
+  sprite:
+    sprite: _CCM14/Decals/squad_roles.rsi
+    state: tech
+
+- type: decal
+  id: SquadRolesMed
+  tags: ["squad_roles"]
+  sprite:
+    sprite: _CCM14/Decals/squad_roles.rsi
+    state: med
+
+- type: decal
+  id: SquadRolesSpecial
+  tags: ["squad_roles"]
+  sprite:
+    sprite: _CCM14/Decals/squad_roles.rsi
+    state: special
+
+- type: decal
+  id: SquadRolesSmart
+  tags: ["squad_roles"]
+  sprite:
+    sprite: _CCM14/Decals/squad_roles.rsi
+    state: smart
+
+- type: decal
+  id: SquadRolesLead
+  tags: ["squad_roles"]
+  sprite:
+    sprite: _CCM14/Decals/squad_roles.rsi
+    state: lead
+
+- type: decal
+  id: SquadRolesGroup
+  tags: ["squad_roles"]
+  sprite:
+    sprite: _CCM14/Decals/squad_roles.rsi
+    state: group
+
+- type: decal
+  id: SquadRolesSquad
+  tags: ["squad_roles"]
+  sprite:
+    sprite: _CCM14/Decals/squad_roles.rsi
+    state: squad

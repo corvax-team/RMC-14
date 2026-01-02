@@ -66,6 +66,11 @@
         Blunt: 40 # TODO RMC14 reduce window health to 100, check per window
   - type: XenoCrusherChargable
     instantDestroy: True
+    # Corvax-Vehicle-Content-Start
+  - type: VehicleStructureTarget
+    momentumLossFactor: 0
+    damageToVehicleOnFail: 0
+    # Corvax-Vehicle-Content-End
 
 - type: entity
   parent: CMBaseWindowIndestructible

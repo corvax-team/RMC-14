@@ -1,0 +1,14 @@
+ent-CMSpawnPointHospitalCorpsman = точка появления полевой санитар
+    .desc = { ent-CMSpawnPointJobBase.desc }
+ent-CMSpawnPointHospitalCorpsmanAlpha = { ent-CMSpawnPointHospitalCorpsman }
+    .suffix = Альфа
+    .desc = { ent-CMSpawnPointHospitalCorpsman.desc }
+ent-CMSpawnPointHospitalCorpsmanBravo = { ent-CMSpawnPointHospitalCorpsman }
+    .suffix = Браво
+    .desc = { ent-CMSpawnPointHospitalCorpsman.desc }
+ent-CMSpawnPointHospitalCorpsmanCharlie = { ent-CMSpawnPointHospitalCorpsman }
+    .suffix = Чарли
+    .desc = { ent-CMSpawnPointHospitalCorpsman.desc }
+ent-CMSpawnPointHospitalCorpsmanDelta = { ent-CMSpawnPointHospitalCorpsman }
+    .suffix = Дельта
+    .desc = { ent-CMSpawnPointHospitalCorpsman.desc }

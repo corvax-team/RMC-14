@@ -1,0 +1,16 @@
+ent-RMCBarrelPileBase = груда бочек
+    .desc = Энергия большой кучи.
+ent-RMCBarrelPileYard = { ent-RMCBarrelPileBase }
+    .desc = { ent-RMCBarrelPileBase.desc }
+ent-RMCBarrelBase = бочка
+    .desc = Бочка для хранения вещей.
+ent-RMCBarrelBlue = синяя бочка
+    .desc = Синяя бочка для хранения вещей.
+ent-RMCBarrelGreen = зелёная бочка
+    .desc = Зелёная бочка для хранения вещей.
+ent-RMCBarrelRed = красная бочка
+    .desc = Красная бочка для хранения вещей.
+ent-RMCBarrelWhite = белая бочка
+    .desc = Белая бочка для хранения вещей.
+ent-RMCBarrelYellow = жёлтая бочка
+    .desc = Желтая бочка для хранения вещей.

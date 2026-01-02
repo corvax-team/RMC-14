@@ -1,0 +1,16 @@
+hc-none-description = У пациента нет активной голокарты.
+hc-urgent-description = Пациенту требуется несрочная операция.
+hc-emergency-description = Пациент нуждается в жизненно важном лечении.
+hc-permadead-description = Пациент безвозвратно скончался.
+hc-xeno-description = Пациент заражен личинкой ксено.
+hc-none-name = Нет
+hc-urgent-name = Операция
+hc-emergency-name = Экстренно
+hc-permadead-name = Смерть
+hc-xeno-name = Личинка
+scannable-holocard-verb-text = Изменить голокарту
+scannable-holocard-verb-message = Изменить голокарту
+ui-holocard-change-title = Изменить голокарту
+ui-holocard-change-searchbar-placeholder = Голокарта
+ui-health-scanner-holocard-change = Изменить
+ui-holocard-change-insufficient-skill = Вам не хватает медицинских навыков для применения голокарты

@@ -1,0 +1,12 @@
+ent-CMFloorShallowWaterEntity = мелководье
+    .desc = { "" }
+ent-CMFloorDeepWaterEntity = глубоководье
+    .desc = { ent-CMFloorShallowWaterEntity.desc }
+ent-RMCRiverSorokyne = river
+    .desc = { ent-CMFloorShallowWaterEntity.desc }
+ent-RMCFloorShallowWaterEntityRed = { ent-CMFloorShallowWaterEntity }
+    .suffix = Red
+    .desc = { ent-CMFloorShallowWaterEntity.desc }
+ent-RMCFloorShallowWaterEntityDarkRed = { ent-RMCFloorShallowWaterEntityRed }
+    .suffix = Dark Red
+    .desc = { ent-RMCFloorShallowWaterEntityRed.desc }

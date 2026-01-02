@@ -1,0 +1,16 @@
+# David
+- type: entity
+  parent: RMCShutterAlmayer
+  id: CCMShutterDavidMech
+  name: mech's shutters
+  suffix: David
+  components:
+  - type: RMCPodDoor
+
+- type: entity
+  parent: RMCShutterAlmayer
+  id: CCMShutterDavidCargo
+  name: cargo's shutters
+  suffix: David
+  components:
+  - type: RMCPodDoor

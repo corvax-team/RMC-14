@@ -1,3 +1,5 @@
+using Content.Server._Forge.Discord; // Forge-Change
+using Content.Server._Forge.Sponsors; // Forge-Change
 using Content.Server.Acz;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
@@ -111,6 +113,7 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<GhostKickManager>().Initialize();
                 IoCManager.Resolve<ServerInfoManager>().Initialize();
                 IoCManager.Resolve<ServerApi>().Initialize();
+                IoCManager.Resolve<DiscordAuthManager>().Initialize(); // Forge-Change
 
                 _voteManager.Initialize();
                 _updateManager.Initialize();
@@ -159,6 +162,7 @@ namespace Content.Server.Entry
                 IoCManager.Resolve<IConnectionManager>().PostInit();
                 IoCManager.Resolve<MultiServerKickManager>().Initialize();
                 IoCManager.Resolve<CVarControlManager>().Initialize();
+                IoCManager.Resolve<SponsorManager>().Initialize(); // Forge-Change
             }
         }
 

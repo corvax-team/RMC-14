@@ -67,6 +67,9 @@
     blacklist:
       components:
       - Xeno
+  - type: VehicleStructureTarget
+    momentumLossFactor: 0
+    damageToVehicleOnFail: 0
 
 - type: entity
   parent: RMCTrashBinBase

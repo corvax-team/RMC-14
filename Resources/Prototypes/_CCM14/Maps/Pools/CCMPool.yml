@@ -1,0 +1,5 @@
+- type: gameMapPool
+  id: CCMMapPool
+  maps:
+  - David
+  - Herfjoetur

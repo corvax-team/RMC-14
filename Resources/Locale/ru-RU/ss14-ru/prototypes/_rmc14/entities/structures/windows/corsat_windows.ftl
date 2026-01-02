@@ -1,0 +1,16 @@
+ent-RMCWindowFrameCorsatReinforced = { ent-RMCWindowFrameColonyReinforced }
+    .desc = { ent-RMCWindowFrameColonyReinforced.desc }
+ent-RMCWindowCorsatReinforced = бронированное окно
+    .desc = Стеклянное окно со специальной матрицей из стержней внутри настенной рамы. Выглядит довольно прочным. Потребуется несколько ударов, чтобы разбить его.
+ent-RMCWindowCorsatReinforcedSecurity = { ent-RMCWindowCorsatReinforced }
+    .desc = A red tinted glass window with a special rod matrix inside a wall frame. It looks very strong.
+ent-RMCWindowCorsatReinforcedResearch = { ent-RMCWindowCorsatReinforced }
+    .desc = A purple tinted glass window with a special rod matrix inside a wall frame. It looks quite strong. Might take some good hits to shatter it.
+ent-RMCWindowCorsatHull = hull window
+    .desc = A glass window with a special rod matrix inside a wall frame. This one has an automatic shutter system to prevent any atmospheric breach.
+ent-RMCWindowCorsatHullResearch = { ent-RMCWindowCorsatHull }
+    .desc = { ent-RMCWindowCorsatHull.desc }
+ent-RMCWindowCorsatHullSec = { ent-RMCWindowCorsatHull }
+    .desc = { ent-RMCWindowCorsatHull.desc }
+ent-RMCWindowCorsatResearchHull = hull window
+    .desc = A glass window. Something tells you this one is somehow indestructible.

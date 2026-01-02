@@ -1,0 +1,10 @@
+ent-CMIDCardASO = ИД-карта офицера вспомогательной поддержки
+    .desc = { ent-CMIDCardSilver.desc }
+ent-CMIDCardPilotDropship = ИД-карта пилота транспортного корабля
+    .desc = { ent-CMIDCardBase.desc }
+ent-CMIDCardPilotGunship = ИД-карта пилота штурмового корабля
+    .desc = { ent-CMIDCardBase.desc }
+ent-CMIDCardDCC = ИД-карта члена экипажа десантного корабля
+    .desc = { ent-CMIDCardBase.desc }
+ent-CMIDCardIntelOfficer = ИД-карта офицера разведки
+    .desc = { ent-CMIDCardSilver.desc }

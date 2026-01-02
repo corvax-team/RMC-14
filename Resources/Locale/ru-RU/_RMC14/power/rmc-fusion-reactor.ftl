@@ -1,0 +1,12 @@
+rmc-fusion-reactor-insert-already-has-cell = { $reactor } уже имеет ячейку. Сначала извлеките её ломом!
+rmc-fusion-reactor-insert-start-self = Вы начинаете устанавливать { $cell } в { $reactor }.
+rmc-fusion-reactor-insert-fail-self = Вам не удалось установить { $cell } в { $reactor }.
+rmc-fusion-reactor-insert-finish-self = Вы установили { $cell } в { $reactor }.
+rmc-fusion-reactor-remove-none = В { $reactor } нет топливного элемента, который можно извлечь.
+rmc-fusion-reactor-remove-start-self = Вы начинаете вытаскивать { $cell } из { $reactor }.
+rmc-fusion-reactor-remove-finish-self = Вы вытаскиваете { $cell } из { $reactor }.
+rmc-fusion-reactor-repair-not-needed = { $reactor } не нуждается в ремонте.
+rmc-fusion-reactor-repair-different-tool = Для ремонта { $reactor } нужен другой инструмент.
+rmc-fusion-reactor-repair-start-self = Вы начали ремонтировать { $reactor } при помощьи { $tool }.
+rmc-fusion-reactor-already-destroyed = Вы не видите причин атаковать { $reactor }.
+rmc-fusion-reactor-destroyed = { CAPITALIZE($reactor) } разлетается на части!

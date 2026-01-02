@@ -1,0 +1,1 @@
+ent-CCMVehicleArea = Транспорт

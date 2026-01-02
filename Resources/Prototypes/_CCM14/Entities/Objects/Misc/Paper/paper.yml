@@ -1,0 +1,20 @@
+- type: entity
+  parent: CCMBaseNukeCodePaper
+  id: CCMNukeCodePaper
+  name: nuclear authentication codes
+
+- type: entity
+  id: CCMFolderNuclearCodes
+  parent: BaseItem
+  name: nuclear code folder
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paper.rsi
+    layers:
+    - state: folder_black_red
+  - type: SpawnItemsOnUse
+    items:
+    - id: CCMNukeCodePaper
+    sound:
+      path: /Audio/Effects/packetrip.ogg
+  - type: Appearance

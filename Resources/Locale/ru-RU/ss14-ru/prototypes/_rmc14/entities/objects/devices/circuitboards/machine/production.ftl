@@ -1,0 +1,16 @@
+ent-CMSMESMachineCircuitboard = машинная плата СМЭС
+    .desc = Печатная плата для СМЭСа.
+ent-CMAutolatheMachineCircuitboard = машинная плата автолата
+    .desc = Печатная плата дляn автолата
+ent-CMCircuitboardDispenserChem = машинная плата химраздатчика
+    .desc = Печатная плата для химраздатчика.
+ent-CMCircuitboardDispenserBooze = машинная плата алкомата
+    .desc = Печатная плата для алкомата.
+ent-CMCircuitboardDispenserSoda = машинная плата безалкомата
+    .desc = Печатная плата для безалкомата.
+ent-CMCircuitboardChemMaster = машинная плата химмастера
+    .desc = Печатная плата для химмастера.
+ent-CMCircuitboardMicrowave = машинная плата микроволновки
+    .desc = Печатная плата для микроволновки.
+ent-RMCArmylatheMachineCircuitboard = armylathe machine board
+    .desc = A machine printed circuit board for an armylathe

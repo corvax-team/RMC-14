@@ -1,0 +1,10 @@
+ent-RMCPelletHeavyShotgunBuckshot = тяжёлая дробь
+    .desc = { ent-CMPelletShotgunBase.desc }
+ent-RMCPelletHeavyShotgunSlug = тяжёлая пуля
+    .desc = { ent-CMPelletShotgunBase.desc }
+ent-RMCPelletHeavyShotgunBeanbag = тяжёлая травматическая пуля
+    .desc = { ent-CMPelletShotgunBase.desc }
+ent-RMCPelletHeavyShotgunFlechette = тяжёлая флешетта
+    .desc = { ent-CMPelletShotgunBase.desc }
+ent-RMCPelletHeavyShotgunIncendiaryBuckshot = тяжёлая зажигательная дробь
+    .desc = { ent-RMCPelletHeavyShotgunBuckshot.desc }

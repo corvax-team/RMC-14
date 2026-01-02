@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "https://github.com/cmss13-devs/cmss13",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "nuclearbomb_deployed"
+    },
+    {
+      "name": "nuclearbomb_deployed_unlit"
+    },
+    {
+      "name": "nuclearbomb_timing",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "nuclearbomb_exploding",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "nuclearbomb_base"
+    },
+    {
+      "name": "nuclearbombc",
+      "delays": [
+        [
+          1,
+          0.3,
+          0.3
+        ]
+      ]
+    }
+  ]
+}

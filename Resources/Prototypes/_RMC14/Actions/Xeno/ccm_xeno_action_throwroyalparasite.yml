@@ -1,0 +1,27 @@
+- type: entity
+  id: CCMActionXenoThrowRoyalParasite
+  parent: ActionXenoBase
+  name: Royal Bond
+  description: Retrieves a royal child from your storage if you have an empty hand. Using this on a royal child on the ground will pickup it. Targeting a tile with a royal child in hand will throw it up to 6 tiles away, where the child will be stunned for 3 seconds. Using a royal child in hand will add it to your storage. [color=green]Children won't die due to time while you hold or carry them.[/color]
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: throw_royal_parasite
+    useDelay: 0
+  - type: TargetAction
+    checkCanAccess: false
+    deselectOnMiss: false
+    repeat: true
+    range: 16
+  - type: WorldTargetAction
+    event: !type:CCMXenoThrowRoyalParasiteActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CCMGuidebookActionXenoThrowRoyalParasite
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: throw_royal_parasite

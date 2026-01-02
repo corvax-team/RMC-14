@@ -1,0 +1,16 @@
+- type: entity
+  parent: CMEntrenchingTool
+  id: CCMEntrenchingTool
+  name: entrenching tool
+  description: Used to dig holes and bash heads in. Folds in to fit in small spaces.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Tools/etool.rsi
+    layers:
+    - state: etool
+      map: [ "enum.EntrenchingToolComponentVisualLayers.Base" ]
+    - state: etool_c
+      map: [ "enum.EntrenchingToolComponentVisualLayers.Folded" ]
+    - state: etool_overlay
+      map: [ "enum.EntrenchingToolComponentVisualLayers.Dirt" ]
+      visible: false

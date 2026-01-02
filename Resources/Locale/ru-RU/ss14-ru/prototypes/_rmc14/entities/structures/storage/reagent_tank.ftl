@@ -1,0 +1,9 @@
+ent-RMCTankReagentEmpty = бак для реагентов
+    .desc = Бак для реагентов, используемый для хранения больших объемов химикатов.
+    .suffix = Пустой
+ent-RMCTankReagentWater = { ent-RMCTankReagentEmpty }
+    .suffix = Вода
+    .desc = { ent-RMCTankReagentEmpty.desc }
+ent-RMCTankReagentFuel = бак для топлива
+    .desc = Топливный бак, как правило, используемый для хранения сварочного топлива. Он окрашен в красный цвет и помечен предупреждающими о взрывоопасности надписями.
+    .suffix = Сварочное топливо

@@ -447,6 +447,17 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return false;
         }
 
+        // Corvax-Vehicle-Content-Start
+        if (target != null)
+        {
+            var meleeAttemptEv = new GettingMeleeAttemptEvent(user);
+            RaiseLocalEvent(target.Value, ref meleeAttemptEv);
+
+            if (meleeAttemptEv.Cancelled)
+                return false;
+        }
+        // Corvax-Vehicle-Content-End
+
         // Attack confirmed
         for (var i = 0; i < swings; i++)
         {

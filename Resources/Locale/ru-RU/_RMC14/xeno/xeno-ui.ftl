@@ -1,0 +1,24 @@
+rmc-xeno-words-of-the-queen-header = Слова Королевы раздаются в нашей голове...
+xeno-ui-reserve-parasites-title = Запас паразитов
+xeno-ui-reserve-parasites-apply-button-text = Применить
+xeno-reserve-parasites-verb = Запасные паразиты
+xeno-ui-find-parasite-title = Найти паразита
+xeno-ui-find-parasite-spawn-button = Взять паразита
+xeno-ui-find-parasite-item = { $itemName } ({ $areaName })
+xeno-ui-default-area-name = Неизвестно
+xeno-ui-find-parasite-regular = лицехват
+xeno-ui-find-parasite-royal = королевский лицехват
+xeno-ui-name-tunnel-title = Назвать туннель
+xeno-ui-name-tunnel-submit-text = Применить название
+xeno-ui-rename-tunnel-verb = Переименовать туннель
+xeno-ui-enter-tunnel-verb = Войти в туннель
+xeno-ui-select-destination-tunnel-title = Выбрать туннель назначения
+xeno-ui-select-destination-tunnel-submit-text = Выбрать туннель
+rmc-xeno-ui-burrowed-need-time = вы недавно стали призраком, вам требуется 2.5 минуты быть призраком чтобы стать лярвой. ({ $seconds } секунд осталось).
+rmc-xeno-tracker-target-Queen = Королева 
+rmc-xeno-tracker-target-HiveLeader = Лидер
+rmc-xeno-tracker-target-Tunnel = Туннель
+rmc-xeno-tracker-target-HiveCore = Ядро Улья
+rmc-xeno-ui-ovi-needed-label = [bold][color=red]Королева должна находиться на яйцекладе чтобы улей получал очки эволюции![/color][/bold]
+rmc-xeno-ui-evolution-points = Очки эволюции: { $points } / { $maxPoints }
+rmc-ui-xeno-strain-confirm = Подтвердить?

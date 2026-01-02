@@ -31,6 +31,10 @@
   - type: XenoDevolve
     devolvesTo:
     - CMXenoDrone
+  - type: XenoEvolution
+    max: 500
+    evolvesTo:
+    - CCMXenoSwarmer
   - type: XenoAcid
   - type: XenoDevour
   - type: XenoPheromones
@@ -76,6 +80,7 @@
       - XenoParasite
       - XenoEgg
       - XenoFruit
+      - CCMRoyalParasite
   - type: MultiHandedHolder
     items:
     - hands: 2

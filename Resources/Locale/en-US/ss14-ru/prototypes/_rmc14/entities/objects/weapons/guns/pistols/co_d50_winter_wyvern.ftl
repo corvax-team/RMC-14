@@ -1,0 +1,14 @@
+ent-RMCWeaponPistolCOD50WinterWyvern = vintage D50 Winter Wyvern
+    .desc = A bulky 50 caliber pistol with a serious kick. Hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. Very elegant.
+ent-RMCMagazinePistolD50WinterWyvernHI = D50 winter wyvern HI magazine (.50AE)
+    .desc = { ent-CMBaseMagazinePistol.desc }
+ent-RMCCartridgePistolHI50AE = cartridge (High Impact .50AE)
+    .desc = { ent-CMCartridgePistolBase.desc }
+ent-RMCBulletPistolHI50AE = bullet (HI50AE)
+    .desc = { ent-CMBulletBase.desc }
+ent-RMCMagazinePistolD50WinterWyvernHIAP = D50 winter wyvern HIAP Magazine (.50AE)
+    .desc = { ent-CMBaseMagazinePistol.desc }
+ent-RMCCartridgePistolHIAP50AE = cartridge (High Impact Armor-Piercing .50AE)
+    .desc = { ent-CMCartridgePistolBase.desc }
+ent-RMCBulletPistolHIAP50AE = bullet (HIAP50AE)
+    .desc = { ent-CMBulletBase.desc }

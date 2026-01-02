@@ -1,0 +1,11 @@
+ent-CMAlamoDoor = люк экипажа Аламо
+    .desc = { ent-CMBaseDoor.desc }
+ent-CMAlamoCockpit = кабина
+    .suffix = Аламо
+    .desc = { ent-CMBaseDoor.desc }
+ent-CMAlamoDoorAft = alamo cargo door
+    .desc = { ent-RMCDropshipDoorAftBase.desc }
+ent-CMAlamoDoorPort = alamo crew hatch
+    .desc = { ent-RMCDropshipDoorPortBase.desc }
+ent-CMAlamoDoorStarboard = alamo crew hatch
+    .desc = { ent-RMCDropshipDoorStarboardBase.desc }

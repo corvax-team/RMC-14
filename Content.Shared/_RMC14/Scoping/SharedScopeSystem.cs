@@ -8,6 +8,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
+using Content.Shared._CCM.Vehicle;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Ranged.Components;
@@ -228,6 +229,12 @@ public abstract partial class SharedScopeSystem : EntitySystem
         {
             var msgError = Loc.GetString("cm-action-popup-scoping-user-must-wield", ("scope", ent));
             _popup.PopupClient(msgError, user, user);
+            return false;
+        }
+        // Corvax-Vehicle-Content
+        if (HasComp<VehiclePilotComponent>(user) || HasComp<VehicleViewportWatcherComponent>(user))
+        {
+            _popup.PopupClient(Loc.GetString("ccm-vehicle-cannot-observe-while-scoping"), user, user);
             return false;
         }
 

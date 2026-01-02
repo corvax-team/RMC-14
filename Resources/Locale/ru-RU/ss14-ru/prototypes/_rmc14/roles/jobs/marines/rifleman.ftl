@@ -1,0 +1,16 @@
+ent-CMSpawnPointRifleman = точка появления стрелок
+    .desc = { ent-CMSpawnPointJobBase.desc }
+ent-CMSpawnPointRiflemanAlpha = { ent-CMSpawnPointRifleman }
+    .suffix = Альфа
+    .desc = { ent-CMSpawnPointRifleman.desc }
+ent-CMSpawnPointRiflemanBravo = { ent-CMSpawnPointRifleman }
+    .suffix = Браво
+    .desc = { ent-CMSpawnPointRifleman.desc }
+ent-CMSpawnPointRiflemanCharlie = { ent-CMSpawnPointRifleman }
+    .suffix = Чарли
+    .desc = { ent-CMSpawnPointRifleman.desc }
+ent-CMSpawnPointRiflemanDelta = { ent-CMSpawnPointRifleman }
+    .suffix = Дельта
+    .desc = { ent-CMSpawnPointRifleman.desc }
+ent-CMGuidebookRoleYou = Вы?
+    .desc = { ent-CMGuidebookRole.desc }

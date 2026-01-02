@@ -11,7 +11,10 @@ public sealed partial class SpeciesLoadoutEffect : LoadoutEffect
     [DataField(required: true)]
     public List<ProtoId<SpeciesPrototype>> Species = new();
 
-    public override bool Validate(HumanoidCharacterProfile profile, RoleLoadout loadout, ICommonSession? session, IDependencyCollection collection,
+    [DataField] // Frontier
+    public bool Inverted; // Frontier: if true, list is a blacklist, not a whitelist
+
+    public override bool Validate(HumanoidCharacterProfile profile, RoleLoadout loadout, LoadoutPrototype proto, ICommonSession? session, IDependencyCollection collection, // Corvax-Sponsors
         [NotNullWhen(false)] out FormattedMessage? reason)
     {
         if (Species.Contains(profile.Species))

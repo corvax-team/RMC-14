@@ -1,0 +1,17 @@
+ent-RMCArmorVest = armor vest
+    .desc = An armored vest that protects against some damage.
+ent-RMCArmorVestWeYa = We-Ya security armor vest
+    .desc = An armored vest that protects against some damage. This one has a Weston-Yamada corporate badge.
+ent-RMCArmorSecurity = security armor vest
+    .desc = { ent-RMCArmorVestWeYa.desc }
+ent-RMCArmorVestCivilian = armored vest
+    .desc = An general-use, unmarked armored vest that protects against some damage.
+ent-RMCArmorVestMP = M3-XL pattern MP armor vest
+    .desc = A type of body armor designed for protection against internal threats. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against cuts, explosions or bio-threats. Not recommended for direct combat or for deployment use against hostiles.
+ent-RMCArmorVestIO = M3-XL pattern intel armor vest
+    .desc = A type of body armor designed for mobility. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions, or bio-threats. Not recommended for direct combat.
+ent-RMCArmorVestMedic = M3-XL pattern corpsman armor vest
+    .desc = A type of M3-XL body armor, made specially for UNMC Corpsmen. The shoulder pads have been taken off for ease of movement. Not recommended for direct combat or for deployment use against hostiles.
+ent-RMCArmorVestNone = armor vest
+    .suffix = None
+    .desc = { ent-RMCArmorVestMedic.desc }

@@ -15,6 +15,12 @@
   - type: Tag
     tags:
     - Platform
+    # Corvax-Vehicle-Content-Start
+  - type: VehicleStructureTarget
+    momentumLossFactor: 0
+    damageToVehicleOnFail: 0
+    minimumClassToDestroy: Weak
+    # Corvax-Vehicle-Content-End
 
 - type: entity
   abstract: true

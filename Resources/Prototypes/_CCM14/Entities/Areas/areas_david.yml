@@ -1,0 +1,586 @@
+- type: entity
+  parent:
+  - RMCAreaProtectionMetal
+  - RMCAreaBase
+  id: CCMAreaDavid
+  suffix: David Area
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas_david.rsi
+    state: david
+  - type: Area
+    weatherEnabled: false
+    powerNet: david
+    hijackEvacuationArea: false
+    hijackEvacuationWeight: 0
+    hijackEvacuationType: None
+  - type: IntelRecoverCorpsesArea
+  - type: IntelRescueSurvivorArea
+
+# Командование
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidCommand #deleted
+  name: Command
+  components:
+  - type: Area
+    minimapColor: '#2D3FA2EE'
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidCommandServer
+  name: Server room
+  components:
+  - type: Area
+    minimapColor: "#061d9eed"
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: tcomms
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidCommandDropshipMaintenance
+  name: Dropship maintenance room
+  components:
+  - type: Area
+    minimapColor: "#8ca22ded"
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: dropshiprepair
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidCommandSEA
+  name: SEA Room
+  components:
+  - type: Area
+    minimapColor: "#2da289ed"
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: officerstudy
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidCommandBridge
+  name: Ship's bridge
+  components:
+  - type: Area
+    minimapColor: "#1d85caec"
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: selfdestruct
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidCommandQuarters
+  name: Command Quarters
+  components:
+  - type: Area
+    minimapColor: "#2d49ebed"
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: cic
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidCommandIO
+  name: IO Room
+  components:
+  - type: Area
+    minimapColor: "#5a2da2ed"
+    retrieveItemObjective: true
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: david
+  - type: IntelRecoverCorpsesArea
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidCommandCommandingofficer
+  name: Commanding officer's quarters
+  components:
+  - type: Area
+    minimapColor: "#2da289ed"
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: officerstudy
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidCommandliaisonquarters
+  name: Corporate liaison quarters
+  components:
+  - type: Area
+    minimapColor: "#2da289ed"
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: officerstudy
+
+# Инженеры
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidEngineering
+  name: Engineering
+  components:
+  - type: Sprite
+    state: engineering
+  - type: Area
+    minimapColor: '#C19504E7'
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidEngineeringMaintenanceRooms
+  name: Maintenance rooms
+  components:
+  - type: Sprite
+    state: lifesupport
+  - type: Area
+    minimapColor: "#e2af06e7"
+  - type: IntelRescueSurvivorArea
+
+# Что-то
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidShipboard
+  components:
+  - type: Area
+    minimapColor: '#A22D2DEE'
+
+# Бриг
+- type: entity
+  parent: CCMAreaDavidShipboard
+  id: CCMAreaDavidBrid
+  name: Brig
+  components:
+  - type: Sprite
+    state: brig
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavidShipboard
+  id: CCMAreaDavidBridsecond
+  name: Brig - Second floor
+  components:
+  - type: Sprite
+    state: brig
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavidShipboard
+  id: CCMAreaDavidBridOrbital
+  name: Orbital Cannon
+  components:
+  - type: Sprite
+    state: weaponroom
+  - type: IntelRescueSurvivorArea
+
+# Коридоры
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidHallways
+  name: Corridors #Deleted
+  components:
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidHallwaysStern
+  name: Corridors - the stern of the ship
+  components:
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: upperhull
+  - type: Area
+    minimapColor: "#2da25aed"
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidHallwaysBow
+  name: Corridors - the bow of the ship
+  components:
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: lowerhull
+  - type: Area
+    minimapColor: "#2da250ed"
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidHallwaysBoardingPlatform
+  name: Corridors - boarding platform
+  components:
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: hangar
+  - type: Area
+    minimapColor: "#c7701fed"
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidHallwaysSecondfloor
+  name: Corridors - Second floor
+  components:
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: hangar
+  - type: Area
+    minimapColor: "#c7701fed"
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidHallwaysCore
+  name: David - Core
+  components:
+  - type: IntelRescueSurvivorArea
+  - type: Sprite
+    state: tcomms
+  - type: Area
+    minimapColor: "#c7701fed"
+
+# Техи
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidMaint #Deleted
+  name: Technical rooms
+  components:
+  - type: Sprite
+    state: aft
+  - type: IntelRescueSurvivorArea
+  - type: Area
+    minimapColor: "#351111ed"
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidMaintUpperStern
+  name: Technical rooms - upper part of the stern
+  components:
+  - type: Sprite
+    state: aft
+  - type: IntelRescueSurvivorArea
+  - type: Area
+    minimapColor: '#351111ed'
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidMaintLowerAft
+  name: Technical rooms - lower aft
+  components:
+  - type: Sprite
+    state: aft
+  - type: IntelRescueSurvivorArea
+  - type: Area
+    minimapColor: '#351111ed'
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidMaintBowUpper
+  name: Technical rooms - upper part of the ship's bow
+  components:
+  - type: Sprite
+    state: aft
+  - type: IntelRescueSurvivorArea
+  - type: Area
+    minimapColor: '#351111ed'
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidMaintBowLower
+  name: Technical rooms - lower part of the ship's bow
+  components:
+  - type: Sprite
+    state: aft
+  - type: IntelRescueSurvivorArea
+  - type: Area
+    minimapColor: '#351111ed'
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidMaintFeeds
+  name: Feeds
+  components:
+  - type: Sprite
+    state: lowerhull
+  - type: IntelRescueSurvivorArea
+  - type: Area
+    minimapColor: '#351111ed'
+
+# Сервис
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidLiving
+  name: Service
+  components:
+  - type: Sprite
+    state: livingspace
+  - type: Area
+    minimapColor: "#2e6139d6"
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidLivingBriefing
+  name: Briefing room
+  components:
+  - type: Sprite
+    state: briefing
+  - type: Area
+    minimapColor: "#68aa1cd7"
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidLivingPVT
+  name: PVT room
+  components:
+  - type: Sprite
+    state: officerrnr
+  - type: Area
+    minimapColor: "#1374acd7"
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidLivingShower
+  name: Shower room
+  components:
+  - type: Sprite
+    state: laundry
+  - type: Area
+    minimapColor: "#0f9136d7"
+  - type: IntelRescueSurvivorArea
+
+#Эвак
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidEvac
+  name: Evacuation
+  components:
+  - type: Sprite
+    state: lifeboat
+  - type: Area
+    minimapColor: "#d81c1cd7"
+  - type: IntelRescueSurvivorArea
+
+# Мед
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidMedical
+  name: Medical Department
+  components:
+  - type: Sprite
+    state: medical
+  - type: Area
+    minimapColor: "#bf3da9ed"
+  - type: IntelRescueSurvivorArea
+  - type: IntelRecoverCorpsesArea
+
+# Отряды (в т.ч. поставки)
+- type: entity
+  abstract: true
+  parent: CCMAreaDavid
+  id: CCMAreaDavidSquads
+  components:
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavidSquads
+  id: CCMAreaDavidSquadsAlpha
+  name: Alpha squad
+  components:
+  - type: Sprite
+    state: alpha
+  - type: Area
+    minimapColor: "#dd1717ec"
+
+- type: entity
+  parent: CCMAreaDavidSquads
+  id: CCMAreaDavidSquadsFoxtrot
+  name: Foxtrot squad
+  components:
+  - type: Sprite
+    state: yellow
+  - type: Area
+    minimapColor: "#dd1717ec"
+
+- type: entity
+  parent: CCMAreaDavidSquads
+  id: CCMAreaDavidSquadsBravo
+  name: Bravo squad
+  components:
+  - type: Sprite
+    state: bravo
+  - type: Area
+    minimapColor: "#b3ce19ec"
+
+- type: entity
+  parent: CCMAreaDavidSquads
+  id: CCMAreaDavudSquadsReq
+  name: Cargo
+  components:
+  - type: Sprite
+    state: req
+  - type: Area
+    minimapColor: "#b8730cec"
+
+- type: entity
+  parent: CCMAreaDavidSquads
+  id: CCMAreaDavidGunshipBoardingPlatform
+  name: Gunship boarding platform
+  components:
+  - type: Sprite
+    state: req
+  - type: Area
+    minimapColor: "#b8730cec"
+
+#Помпы
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidFuelpumpEngineeringupper
+  name: Fuel pump - Engineering upper
+  components:
+  - type: Sprite
+    state: lifeboat_pump
+  - type: Area
+    minimapColor: '#C19504E7'
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.1
+    hijackEvacuationType: Add
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidFuelpumpEngineeringlower
+  name: Fuel pump - Engineering lower
+  components:
+  - type: Sprite
+    state: lifeboat_pump
+  - type: Area
+    minimapColor: '#C19504E7'
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.1
+    hijackEvacuationType: Add
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidFuelpumpMedupper
+  name: Fuel pump - Med upper
+  components:
+  - type: Sprite
+    state: lifeboat_pump
+  - type: Area
+    minimapColor: '#C19504E7'
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.1
+    hijackEvacuationType: Add
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidFuelpumpCargolower
+  name: Fuel pump - Cargo lower
+  components:
+  - type: Sprite
+    state: lifeboat_pump
+  - type: Area
+    minimapColor: '#C19504E7'
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.1
+    hijackEvacuationType: Add
+  - type: IntelRescueSurvivorArea
+
+###
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidEngineeringFusionReactor
+  name: Engineering - Fusion reactor
+  components:
+  - type: Sprite
+    state: coreroom
+  - type: Area
+    minimapColor: '#C19504E7'
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.2
+    hijackEvacuationType: Add
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidEngineeringSterngroundfloor
+  name: Fuel pump - Stern ground floor
+  components:
+  - type: Sprite
+    state: lifeboat_pump
+  - type: Area
+    minimapColor: '#C19504E7'
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.2
+    hijackEvacuationType: Add
+  - type: IntelRescueSurvivorArea
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidEngineeringSecondfloorpump
+  name: Fuel pump - Second floor
+  components:
+  - type: Sprite
+    state: lifeboat_pump
+  - type: Area
+    minimapColor: '#C19504E7'
+    hijackEvacuationArea: true
+    hijackEvacuationWeight: 0.1
+    hijackEvacuationType: Add
+  - type: IntelRescueSurvivorArea
+
+#ladder
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidGroundfloorladder
+  name: Ground floor - Ladder
+  components:
+  - type: Sprite
+    state: lifeboat_pump
+  - type: Area
+    minimapColor: '#C19504E7'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+    buildSpecial: false
+    paradropping: false
+
+- type: entity
+  parent: CCMAreaDavid
+  id: CCMAreaDavidSecondfloorladder
+  name: Second floor - Ladder
+  components:
+  - type: Sprite
+    state: lifeboat_pump
+  - type: Area
+    minimapColor: '#C19504E7'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+    buildSpecial: false
+    paradropping: false

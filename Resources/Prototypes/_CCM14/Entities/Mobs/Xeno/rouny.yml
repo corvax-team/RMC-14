@@ -1,0 +1,40 @@
+- type: entity
+  parent: RMCXenoRouny
+  id: CCMXenoRouny
+  suffix: CCM14
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      350: Critical
+      450: Dead
+  - type: Xeno
+    role: CCMXenoRouny
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoHide
+    - ActionXenoLeap
+    - ActionXenoBoneChips
+    - ActionXenoZoom
+    - ActionXenoDevolve
+    tier: 3
+    hudOffset: 0,0.63
+    unlockAt: 900 # 15 minutes
+  - type: XenoDevolve
+    devolvesTo:
+    - RMCXenoLurkerBase
+  - type: XenoEvolutionCapped
+    id: CCMXenoRouny
+    max: 1
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 8
+    baseSprintSpeed: 15
+  - type: XenoMaturing
+    critThreshold: 650
+    deadThreshold: 750
+    delay: 900 # 15 minutes
+  - type: RMCXenoDamageVisuals
+    prefix: rouny

@@ -1,0 +1,29 @@
+# David
+- type: entity
+  parent: RMCPodDoorAlmayerBlack
+  id: CCMPodDoorDavidPort
+  name: port's podlock
+  suffix: David
+  
+- type: entity
+  parent: RMCPodDoorAlmayerBlack
+  id: CCMPodDoorDavidNukeStorage
+  name: nuke storage's podlock
+  suffix: David
+  
+- type: entity
+  parent: RMCPodDoorAlmayerBlack
+  id: CCMPodDoorDavidNukeStorageOpen
+  name: nuke storage's podlock
+  suffix: Open, David
+  components:
+  - type: Door
+    state: Open
+  - type: Occluder
+    enabled: false
+  - type: Physics
+    canCollide: false
+  - type: Airtight
+    airBlocked: false
+  - type: RadiationBlocker
+    enabled: false

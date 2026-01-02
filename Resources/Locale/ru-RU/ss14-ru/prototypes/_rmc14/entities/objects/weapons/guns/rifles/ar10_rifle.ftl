@@ -1,0 +1,9 @@
+ent-WeaponRifleAR10 = штурмовая винтовка AR10
+    .desc = Ранняя версия более распространённой винтовки M16. Считается отцом винтовок XX века. Как одна из них оказалась здесь - загадка. Использует патроны калибра 7.62x51 мм.
+    .suffix = Заполненный
+ent-RMCMagazineRifleAR10 = магазин AR10 (7.62x51мм)
+    .desc = { ent-CMMagazineRifleBase.desc }
+ent-RMCCartridgeRifleAR10 = патрон (7.62x51мм)
+    .desc = Патрон для винтовки калибра 7.62x51 мм.
+ent-BulletRifleAR10 = { ent-RMCBaseBullet }
+    .desc = { ent-RMCBaseBullet.desc }

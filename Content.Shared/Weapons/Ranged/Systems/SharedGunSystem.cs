@@ -7,6 +7,8 @@ using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
+using Content.Shared._CCM.Vehicle;
+using Content.Shared._CCM.Attachables;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -65,7 +67,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] protected readonly ISharedAdminLogManager Logs = default!;
     [Dependency] protected readonly DamageableSystem Damageable = default!;
     [Dependency] protected readonly ExamineSystemShared Examine = default!;
-    [Dependency] private   readonly SharedHandsSystem _hands = default!;
+    [Dependency] protected   readonly SharedHandsSystem Hands = default!;
     [Dependency] private   readonly ItemSlotsSystem _slots = default!;
     [Dependency] private   readonly RechargeBasicEntityAmmoSystem _recharge = default!;
     [Dependency] protected readonly SharedActionsSystem Actions = default!;
@@ -94,6 +96,9 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] private readonly AttachableHolderSystem _attachableHolder = default!;
     [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
 
+    // Corvax
+    [Dependency] private readonly VehicleAttachableHolderSystem _vehicleHolder = default!;
+
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;
     private const float EjectOffset = 0.4f;
@@ -120,6 +125,8 @@ public abstract partial class SharedGunSystem : EntitySystem
         InitializeClothing();
         InitializeContainer();
         InitializeSolution();
+
+        InitializeVehicleGun(); // Corvax-Vehicle-Content
 
         // Interactions
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<AlternativeVerb>>(OnAltVerb);
@@ -182,13 +189,40 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     public bool TryGetGun(EntityUid entity, out EntityUid gunEntity, [NotNullWhen(true)] out GunComponent? gunComp)
     {
-        if(_attachableHolder.TryGetInhandSupercedingGun(entity, out gunEntity, out gunComp))
+        var activeWeaponEvt = new GetActiveWeaponEvent(null, false);
+        RaiseLocalEvent(entity, ref activeWeaponEvt);
+        if (activeWeaponEvt.Handled && activeWeaponEvt.Weapon != null)
+        {
+            gunEntity = activeWeaponEvt.Weapon.Value;
+            if (TryComp(gunEntity, out GunComponent? comp))
+            {
+                gunComp = comp;
+                return true;
+            }
+            gunEntity = default;
+            gunComp = null;
+            return false;
+        }
+
+        if (_attachableHolder.TryGetInhandSupercedingGun(entity, out gunEntity, out gunComp))
             return true;
 
         gunEntity = default;
         gunComp = null;
 
-        if (_hands.GetActiveItem(entity) is { } held &&
+        // Corvax-Vehicle-Content-Start
+        if (TryComp<VehiclePilotComponent>(entity, out var pilot) &&
+            HasComp<VehicleComponent>(pilot.Vehicle) &&
+            pilot.Gun is { } vehGun &&
+            TryComp<GunComponent>(vehGun, out var vehGunComp))
+        {
+            gunEntity = vehGun;
+            gunComp = vehGunComp;
+            return true;
+        }
+        // Corvax-Vehicle-Gun-Content-End
+
+        if (Hands.GetActiveItem(entity) is { } held &&
             TryComp(held, out GunComponent? gun))
         {
             gunEntity = held;
@@ -257,11 +291,8 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     public List<EntityUid>? AttemptShoot(EntityUid user, EntityUid gunUid, GunComponent gun, List<int>? predictedProjectiles = null, ICommonSession? userSession = null)
     {
-        if (gun.FireRateModified <= 0f ||
-            !_actionBlockerSystem.CanAttack(user))
-        {
+        if (gun.FireRateModified <= 0f || !_actionBlockerSystem.CanAttack(user))
             return null;
-        }
 
         var toCoordinates = gun.ShootCoordinates;
 
@@ -271,16 +302,8 @@ public abstract partial class SharedGunSystem : EntitySystem
         var curTime = Timing.CurTime;
 
         // check if anything wants to prevent shooting
-        var prevention = new ShotAttemptedEvent
-        {
-            User = user,
-            Used = (gunUid, gun)
-        };
+        var prevention = new ShotAttemptedEvent { User = user, Used = (gunUid, gun) };
         RaiseLocalEvent(gunUid, ref prevention);
-        if (prevention.Cancelled)
-            return null;
-
-        RaiseLocalEvent(user, ref prevention);
         if (prevention.Cancelled)
             return null;
 
@@ -334,7 +357,15 @@ public abstract partial class SharedGunSystem : EntitySystem
             shots = Math.Min(shots, gun.ShotsPerBurstModified - gun.ShotCounter);
         }
 
-        var fromCoordinates = Transform(user).Coordinates;
+        var shootingEntity = user;
+        var shootEvt = new GetShootingEntityEvent(null, false);
+        RaiseLocalEvent(user, ref shootEvt);
+
+        if (shootEvt.Handled && shootEvt.ShootingEntity is { } overrideShooter)
+            shootingEntity = overrideShooter;
+
+        var fromCoordinates = Transform(shootingEntity).Coordinates;
+
         var attemptEv = new AttemptShootEvent(user, null, fromCoordinates, toCoordinates);
         RaiseLocalEvent(gunUid, ref attemptEv);
 
@@ -349,6 +380,24 @@ public abstract partial class SharedGunSystem : EntitySystem
             gun.NextFire = attemptEv.ResetCooldown ? curTime : TimeSpan.FromSeconds(Math.Max(lastFire.TotalSeconds + SafetyNextFire, gun.NextFire.TotalSeconds));
             return null;
         }
+
+        // Corvax-Vehicle-Content-Start
+        var userXform = Transform(user);
+        fromCoordinates = userXform.Coordinates;
+
+        if (TryComp<VehicleAttachableComponent>(gunUid, out var vehicleAttachable))
+        {
+            var rotation = userXform.WorldRotation;
+            if (_vehicleHolder.TryGetHolder(gunUid, out var holder) && TryComp<TransformComponent>(holder, out var holderXform))
+            {
+                fromCoordinates = holderXform.Coordinates;
+                rotation = holderXform.WorldRotation;
+            }
+
+            var rotatedOffset = rotation.RotateVec(vehicleAttachable.Offset);
+            fromCoordinates = fromCoordinates.Offset(rotatedOffset);
+        }
+        // Corvax-Vehicle-Content-End
 
         // Remove ammo
         var ev = new TakeAmmoEvent(shots, new List<(EntityUid? Entity, IShootable Shootable)>(), fromCoordinates, user);
@@ -380,12 +429,14 @@ public abstract partial class SharedGunSystem : EntitySystem
             // If they're firing an existing clip then don't play anything.
             if (shots > 0)
             {
-                PopupSystem.PopupCursor(ev.Reason ?? Loc.GetString("gun-magazine-fired-empty"));
+                // Corvax | Prediction kicked my ass
+                if (!HasComp<VehicleGunComponent>(gunUid))
+                {
+                    PopupSystem.PopupCursor(ev.Reason ?? Loc.GetString("gun-magazine-fired-empty"));
+                    gun.NextFire = TimeSpan.FromSeconds(Math.Max(lastFire.TotalSeconds + SafetyNextFire, gun.NextFire.TotalSeconds));
+                    Audio.PlayPredicted(gun.SoundEmpty, gunUid, user);
+                }
 
-                // Don't spam safety sounds at gun fire rate, play it at a reduced rate.
-                // May cause prediction issues? Needs more tweaking
-                gun.NextFire = TimeSpan.FromSeconds(Math.Max(lastFire.TotalSeconds + SafetyNextFire, gun.NextFire.TotalSeconds));
-                Audio.PlayPredicted(gun.SoundEmpty, gunUid, user);
                 return null;
             }
 
@@ -425,10 +476,30 @@ public abstract partial class SharedGunSystem : EntitySystem
         var shotEv = new GunShotEvent(user, ev.Ammo, fromCoordinates, toCoordinates.Value);
         RaiseLocalEvent(gunUid, ref shotEv);
 
-        if (userImpulse && TryComp<PhysicsComponent>(user, out var userPhysics))
+        // if (userImpulse && TryComp<PhysicsComponent>(user, out var userPhysics))
+        // {
+        //     if (_gravity.IsWeightless(user, userPhysics))
+        //         CauseImpulse(fromCoordinates, toCoordinates.Value, user, userPhysics);
+        // }
+        if (userImpulse)
         {
-            if (_gravity.IsWeightless(user, userPhysics))
-                CauseImpulse(fromCoordinates, toCoordinates.Value, user, userPhysics);
+            EntityUid? effectiveShooterForImpulse = user;
+
+            if (user is { } u)
+            {
+                var shootEvtTmp = new GetShootingEntityEvent(null, false);
+                RaiseLocalEvent(u, ref shootEvtTmp);
+
+                if (shootEvtTmp.Handled && shootEvtTmp.ShootingEntity is { } impulseOverrideShooter)
+                    effectiveShooterForImpulse = impulseOverrideShooter;
+            }
+
+            if (effectiveShooterForImpulse is { } eff && 
+                TryComp<PhysicsComponent>(eff, out var userPhysics))
+            {
+                if (_gravity.IsWeightless(eff, userPhysics))
+                    CauseImpulse(fromCoordinates, toCoordinates.Value, eff, userPhysics);
+            }
         }
 
         DirtyField(gunUid, gun, nameof(GunComponent.BurstActivated));
@@ -952,9 +1023,26 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         var projectile = EnsureComp<ProjectileComponent>(uid);
         projectile.Weapon = gunUid;
-        var shooter = user ?? gunUid;
-        if (shooter != null)
-            Projectiles.SetShooter(uid, projectile, shooter.Value);
+
+        EntityUid? effectiveShooter = null;
+
+        if (user is { } u)
+        {
+            var shootEvt = new GetShootingEntityEvent(null, false);
+            RaiseLocalEvent(u, ref shootEvt);
+
+            if (shootEvt.Handled && shootEvt.ShootingEntity is { } overrideShooter)
+                effectiveShooter = overrideShooter;
+            else
+                effectiveShooter = u;
+        }
+        else
+        {
+            effectiveShooter = gunUid;
+        }
+
+        if (effectiveShooter is { } eff)
+            Projectiles.SetShooter(uid, projectile, eff);
 
         TransformSystem.SetWorldRotationNoLerp(uid, direction.ToWorldAngle() + projectile.Angle);
     }
@@ -1145,7 +1233,10 @@ public abstract partial class SharedGunSystem : EntitySystem
 /// <param name="Cancelled">Set this to true if the shot should be cancelled.</param>
 /// <param name="ThrowItems">Set this to true if the ammo shouldn't actually be fired, just thrown.</param>
 [ByRefEvent]
-public record struct AttemptShootEvent(EntityUid User, string? Message, EntityCoordinates FromCoordinates, EntityCoordinates? ToCoordinates, bool Cancelled = false, bool ThrowItems = false, bool ResetCooldown = false); // RMC14
+public record struct AttemptShootEvent(EntityUid User, string? Message, EntityCoordinates FromCoordinates, EntityCoordinates? ToCoordinates, bool ThrowItems = false, bool ResetCooldown = false) // Cancelled удален
+{
+    public bool Cancelled { get; set; } = false;
+}
 
 /// <summary>
 ///     Raised directed on the gun after firing.

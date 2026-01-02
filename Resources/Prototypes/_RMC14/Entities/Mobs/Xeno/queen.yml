@@ -274,6 +274,10 @@
   - type: RMCTrackable
   - type: ExcludedFromKingVote
     canVote: true
+    # Corvax-Vehicle-Content-Start
+  - type: VehicleDamageMultiplier
+    mult: 2
+    # Corvax-Vehicle-Content-End
 
 - type: entity
   parent: RMCXenoQueenBase

@@ -1,0 +1,46 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Gabion by varttist (discord)",
+    "size": {
+      "x": 32,
+      "y": 32
+    },
+    "states": [
+      {
+        "name": "full"
+      },
+      {
+        "name": "gabion0",
+        "directions": 4
+      },
+      {
+        "name": "gabion1",
+        "directions": 4
+      },
+      {
+        "name": "gabion2",
+        "directions": 4
+      },
+      {
+        "name": "gabion3",
+        "directions": 4
+      },
+      {
+        "name": "gabion4",
+        "directions": 4
+      },
+      {
+        "name": "gabion5",
+        "directions": 4
+      },
+      {
+        "name": "gabion6",
+        "directions": 4
+      },
+      {
+        "name": "gabion7",
+        "directions": 4
+      }
+    ]
+  }

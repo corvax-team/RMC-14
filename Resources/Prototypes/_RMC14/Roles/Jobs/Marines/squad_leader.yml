@@ -5,18 +5,27 @@
   description: cm-job-description-squad-leader
   playTimeTracker: CMJobSquadLeader
   requirements:
-  - !type:RoleTimeRequirement
-    role: CMJobHospitalCorpsman
-    time: 3600 # 1 hour
+# CCM14 role timers [remove/start]
+#  - !type:RoleTimeRequirement
+#    role: CMJobHospitalCorpsman
+#    time: 3600 # 1 hour
+# CCM14 role timers [remove/end]
   - !type:RoleTimeRequirement
     role: CMJobCombatTech
     time: 3600 # 1 hour
-  - !type:RoleTimeRequirement
-    role: CMJobFireteamLeader
-    time: 18000 # 5 hours
+# CCM14 role timers [remove/start]
+#  - !type:RoleTimeRequirement
+#    role: CMJobFireteamLeader
+#    time: 18000 # 5 hours
+# CCM14 role timers [remove/end] 
   - !type:DepartmentTimeRequirement
     department: CMSquad
-    time: 36000 # 10 hours
+    time: 32400 # 9 hours. CCM14 role timers. RMC: 36000 # 10 hours
+# CCM14 role timers [add/start]
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 3600 # 1 hour
+# CCM14 role timers [add/end]
   ranks:
     RMCRankGunnerySergeant:
     - !type:RoleTimeRequirement
