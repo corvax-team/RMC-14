@@ -42,14 +42,6 @@ public static class ServerPackaging
         "Content.Shared.Database",
     };
 
-    // Include Corvax interface DLLs so typechecker can resolve them during verification
-    private static readonly List<string> ServerExtraContentAssemblies = new()
-    {
-        "Content.Corvax.Interfaces.Shared",
-        "Content.Corvax.Interfaces.Server",
-        "Content.Corvax.Interfaces.Shared"
-    };
-
     private static readonly List<string> ServerExtraAssemblies = new()
     {
         // Python script had Npgsql. though we want Npgsql.dll as well soooo
@@ -187,9 +179,7 @@ public static class ServerPackaging
 
         var inputPassCore = graph.InputCore;
         var inputPassResources = graph.InputResources;
-    var contentAssemblies = new List<string>(ServerContentAssemblies);
-    // Add extra server-side content assemblies (e.g. third-party or interface DLLs)
-    contentAssemblies.AddRange(ServerExtraContentAssemblies);
+        var contentAssemblies = new List<string>(ServerContentAssemblies);
 
         // Additional assemblies that need to be copied such as EFCore.
         var sourcePath = Path.Combine(contentDir, "bin", "Content.Server");

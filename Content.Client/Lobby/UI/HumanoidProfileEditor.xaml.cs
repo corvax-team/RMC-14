@@ -2,7 +2,6 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using Content.Client._RMC14.NamedItems;
-using Content.Client._Forge.Sponsors; // Forge-Change
 using Content.Client.Humanoid;
 using Content.Client.Lobby.UI.Loadouts;
 using Content.Client.Lobby.UI.Roles;
@@ -18,8 +17,6 @@ using Content.Shared._RMC14.NamedItems;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
-using Content.Shared._Forge.ForgeVars; // Forge-Change
-using Content.Shared._Forge.Sponsors; // Forge-Change
 using Content.Shared.GameTicking;
 using Content.Shared.Guidebook;
 using Content.Shared.Humanoid;
@@ -61,7 +58,6 @@ namespace Content.Client.Lobby.UI
         private readonly LobbyUIController _controller;
 
         private readonly SpriteSystem _sprite;
-        private readonly SponsorManager _sponsorMan; // Forge-Change
 
         // CCvar.
         private int _maxNameLength;
@@ -129,8 +125,7 @@ namespace Content.Client.Lobby.UI
             IPrototypeManager prototypeManager,
             IResourceManager resManager,
             JobRequirementsManager requirements,
-            MarkingManager markings,
-            SponsorManager sponsorMan)
+            MarkingManager markings)
         {
             RobustXamlLoader.Load(this);
             _sawmill = logManager.GetSawmill("profile.editor");
@@ -145,7 +140,6 @@ namespace Content.Client.Lobby.UI
             _requirements = requirements;
             _controller = UserInterfaceManager.GetUIController<LobbyUIController>();
             _sprite = _entManager.System<SpriteSystem>();
-            _sponsorMan = sponsorMan;
 
             _maxNameLength = _cfgManager.GetCVar(CCVars.MaxNameLength);
             _allowFlavorText = _cfgManager.GetCVar(CCVars.FlavorText);
@@ -716,7 +710,6 @@ namespace Content.Client.Lobby.UI
         {
             SpeciesButton.Clear();
             _species.Clear();
-            var userId = _playerManager.LocalUser;
 
             // Only allow specific species
             var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Moth", "Felinid", "Dwarf" };
@@ -726,13 +719,6 @@ namespace Content.Client.Lobby.UI
 
             for (var i = 0; i < _species.Count; i++)
             {
-                if (_species[i].SponsorLevel != SponsorLevel.None && userId != null)
-                {
-                    if (!_sponsorMan.TryGetSponsor(userId.Value, out var level))
-                        continue;
-                    if (_species[i].SponsorLevel > level)
-                        continue;
-                }
                 var name = Loc.GetString(_species[i].Name);
                 SpeciesButton.AddItem(name, i);
 
