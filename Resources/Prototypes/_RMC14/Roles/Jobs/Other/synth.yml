@@ -4,14 +4,25 @@
   name: rmc-job-name-synth
   description: rmc-job-description-synth
   playTimeTracker: RMCJobSynthetic
+  requirements:
+#  CCM14 role timers [remove/start]
+   - !type:TotalJobsTimeRequirement
+     group: CMJobsMedical
+     time: 36000 # 10 hours
+   - !type:TotalJobsTimeRequirement
+     group: CMJobsEngineering
+     time: 32400 # 9 hours. CCM14 role timers. RMC: 72000 # 20 hours
+   - !type:OverallPlaytimeRequirement
+     time: 72000 # 10 hours
+#  CCM14 role timers [remove/end]
   ranks:
     RMCRankMasterSergeant: [ ]
   startingGear: RMCGearSyntheticEquipped
   dummyStartingGear: RMCGearSyntheticEquipped
   icon: "RMCJobIconSynth"
   joinNotifyCrew: true
-  whitelisted: true
-  supervisors: rmc-job-supervisors-commander
+  whitelisted: false
+  supervisors: cm-job-supervisors-co
   accessGroups:
   - ShipMasterAccess
   - Synth
@@ -69,7 +80,7 @@
         types:
           Blunt: 35
     - type: Synth
-  hidden: true
+  hidden: false
 
 - type: startingGear
   id: RMCGearSyntheticEquipped

@@ -49,3 +49,19 @@
     event: !type:XenoPlantWeedsActionEvent
       plasmaCost: 150
       prototype: XenoHiveWeedsSource
+
+- type: entity
+  id: CCMActionXenoMirrorClones
+  parent: ActionXenoBase
+  name: Mirror Clones
+  description: Creates three mirror copies that follow you and fake attacks for 10 seconds.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    useDelay: 25
+    icon:
+      sprite: _CCM14/Actions/xeno_actions.rsi
+      state: mirage
+  - type: InstantAction
+    event: !type:XenoMirrorClonesActionEvent
+      plasmaCost: 50

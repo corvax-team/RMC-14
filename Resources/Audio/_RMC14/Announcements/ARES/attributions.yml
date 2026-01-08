@@ -1,12 +1,14 @@
+# Corvax-CM Update sound start
 - files: ["ares_online.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/14c5cbb3b77f7ce43e5571355784cb4abcd021ea/sound/AI/ares_online.ogg"
+  license: "CC-BY-4.0"
+  copyright: ""
+  source: ""
 
 - files: ["bioscan.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/bioscan.ogg"
+  license: "CC-BY-4.0"
+  copyright: ""
+  source: ""
+# Corvax-CM Update sound end
 
 - files: ["dropship_emergency.ogg"]
   license: "CC-BY-SA-3.0"
