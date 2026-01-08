@@ -1,0 +1,41 @@
+- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  - CCMProtomorphBase
+  id: CCMProtomorphNeomorph
+  name: Neomorph
+  description: TODO desc
+  components:
+  - type: GhostRole
+    name: ccm-job-name-protomorph-neomorph
+  - type: Sprite
+    sprite: _CCM14/Pathogen/Mobs/Protomorphs/neomorph.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      400: Critical
+      500: Dead
+  - type: Xeno
+    role: CCMProtomorphNeomorph
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    tier: 1
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_CCM14/Interface/map_blips.rsi
+      state: neomorph
+  - type: RMCXenoDamageVisuals
+    prefix: neomorph

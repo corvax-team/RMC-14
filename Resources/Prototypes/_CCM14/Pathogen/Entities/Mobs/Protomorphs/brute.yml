@@ -1,0 +1,53 @@
+- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  - CCMProtomorphBase
+  id: CCMProtomorphBrute
+  name: Brute
+  description: A mutated xenomorph drone, lacking a tail. Instead of arms, it has massive club-shaped appendages that transform every attack into a devastating blow. It retains the agility and aggression typical of its species.
+  components:
+  - type: GhostRole
+    name: ccm-job-name-protomorph-brute
+  - type: Sprite
+    sprite: _CCM14/Pathogen/Mobs/Protomorphs/brute.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      500: Critical
+      600: Dead
+  - type: Xeno
+    role: CCMProtomorphBrute
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    tier: 2
+  - type: XenoClaws
+    clawType: Sharp
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 40
+    attackRate: 0.7
+    animation: CCMWeaponArcSmash
+    soundHit:
+      path: /Audio/Effects/hit_kick.ogg
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.5
+    baseSprintSpeed: 2.5
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_CCM14/Interface/map_blips.rsi
+      state: brute
+  - type: RMCXenoDamageVisuals
+    prefix: brute

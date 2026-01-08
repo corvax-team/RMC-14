@@ -1,0 +1,44 @@
+- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  - CCMProtomorphBase
+  id: CCMProtomorphQueen
+  name: Queen
+  description: The ultimate evolutionary nightmare. Mutated by an alien pathogen, she became the white ghost LV-895. Deprived of the ability to reproduce, she compensates with pure, unbridled fury and an armored body. Her club crushes bones, and her needles and acid pierce any defense. This is not the hive mother—this is its punishing wrath.
+  components:
+  - type: GhostRole
+    name: ccm-job-name-protomorph-queen
+  - type: Sprite
+    sprite: _CCM14/Pathogen/Mobs/Protomorphs/queen.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      400: Critical
+      500: Dead
+  - type: Xeno
+    role: CCMProtomorphQueen
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    tier: 0
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: xenoqueen
+    background:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: xeno_ruler
+  - type: RMCXenoDamageVisuals #TODO queen blood sprites
+    prefix: queen

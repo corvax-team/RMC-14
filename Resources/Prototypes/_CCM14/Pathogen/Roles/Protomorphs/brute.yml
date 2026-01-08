@@ -1,0 +1,9 @@
+- type: job
+  parent: CCMJobProtomorphBase
+  id: CCMProtomorphBrute
+  name: ccm-job-name-protomorph-brute
+  playTimeTracker: CCMJobProtomorphBrute
+
+- type: playTimeTracker
+  id: CCMJobProtomorphBrute
+  isXeno: true

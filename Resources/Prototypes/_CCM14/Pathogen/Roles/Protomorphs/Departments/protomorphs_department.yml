@@ -1,0 +1,19 @@
+- type: department
+  parent: CMDepartmentBase
+  id: CCMProtomorphs
+  name: ccm-department-protomorphs-name
+  description: ccm-department-protomorphs-description
+  color: "#FFFFFF"
+  weight: 100
+  customName: Protomorphs
+  roles:
+  - CCMProtomorphBlight
+  - CCMProtomorphBloodburster
+  - CCMProtomorphBrute
+  - CCMProtomorphNeomorph
+  - CCMProtomorphPopper
+  - CCMProtomorphQueen
+  - CCMProtomorphSprinter
+  - CCMProtomorphVenator
+  departmentRadio: Hivemind
+  headOfDepartment: CCMProtomorphQueen

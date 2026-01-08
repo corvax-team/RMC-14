@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "dimdimich1996",
+  "size": {
+    "x": 48,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "alive",
+      "directions": 4
+    },
+    {
+      "name": "sleeping"
+    },
+    {
+      "name": "crit"
+    },
+    {
+      "name": "dead"
+    },
+    {
+      "name": "neomorph_walk_3",
+      "directions": 4
+    },
+    {
+      "name": "neomorph_walk_2",
+      "directions": 4
+    },
+    {
+      "name": "neomorph_walk_1",
+      "directions": 4
+    },
+    {
+      "name": "neomorph_walk_0",
+      "directions": 4
+    },
+    {
+      "name": "neomorph_rest_3"
+    },
+    {
+      "name": "neomorph_rest_2"
+    },
+    {
+      "name": "neomorph_rest_1"
+    },
+    {
+      "name": "neomorph_rest_0"
+    },
+    {
+      "name": "neomorph_downed_3"
+    },
+    {
+      "name": "neomorph_downed_2"
+    },
+    {
+      "name": "neomorph_downed_1"
+    },
+    {
+      "name": "neomorph_downed_0"
+    }
+  ]
+}

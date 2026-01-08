@@ -1,0 +1,9 @@
+- type: job
+  parent: CCMJobProtomorphBase
+  id: CCMProtomorphBlight
+  name: ccm-job-name-protomorph-blight
+  playTimeTracker: CCMJobProtomorphBlight
+
+- type: playTimeTracker
+  id: CCMJobProtomorphBlight
+  isXeno: true

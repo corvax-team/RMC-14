@@ -1,0 +1,21 @@
+- type: job
+  parent: CCMJobProtomorphBase
+  id: CCMProtomorphBloodburster
+  name: ccm-job-name-protomorph-bloodburster
+  playTimeTracker: CCMJobProtomorphBloodburster
+  hidden: false
+  jobPreviewEntity: CCMPlayerProtomorphBloodbursterPreview
+
+- type: playTimeTracker
+  id: CCMJobProtomorphBloodburster
+  isXeno: true
+
+- type: entity
+  id: CCMPlayerProtomorphBloodbursterPreview
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _CCM14/Pathogen/Mobs/Protomorphs/Bloodburster/bloodburster.rsi
+    layers:
+    - state: alive
+      scale: 0.5, 0.5

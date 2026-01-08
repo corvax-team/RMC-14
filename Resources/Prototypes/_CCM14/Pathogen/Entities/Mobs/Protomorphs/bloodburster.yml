@@ -1,0 +1,78 @@
+- type: entity
+  abstract: true
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  - CCMProtomorphBase
+  id: CCMProtomorphBloodbursterBase
+  name: Bloodburster
+  description: TODO desc
+  components:
+  - type: GhostRole
+    name: ccm-job-name-protomorph-bloodburster
+  - type: Sprite
+    sprite: _CCM14/Pathogen/Mobs/Protomorphs/Bloodburster/bloodburster.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      400: Critical
+      500: Dead
+  - type: Xeno
+    role: CCMProtomorphBloodburster
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoHide
+    tier: 0
+  - type: XenoHide
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 185
+        mask:
+        - SmallMobMask
+        - BarbedBarricade
+        - BarricadeImpassable
+        layer:
+        - SmallMobLayer
+  - type: XenoLight
+  - type: MeleeWeapon
+    attackRate: 2
+    damage:
+      groups:
+        Brute: 7
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 15
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 4
+    baseSprintSpeed: 8
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_CCM14/Interface/map_blips.rsi
+      state: bloodburster
+
+- type: entity
+  parent: CCMProtomorphBloodbursterBase
+  id: CCMProtomorphBloodburster
+
+- type: entity
+  parent: CCMProtomorphBloodbursterBase
+  id: CCMProtomorphBloodyBloodburster
+  components:
+  - type: Sprite
+    sprite: _CCM14/Pathogen/Mobs/Protomorphs/Bloodburster/bloody_bloodburster.rsi

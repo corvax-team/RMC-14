@@ -1,0 +1,27 @@
+- type: job
+  parent: CCMJobProtomorphBase
+  id: CCMProtomorphQueen
+  name: ccm-job-name-protomorph-queen
+  playTimeTracker: CCMJobProtomorphQueen
+  weight: 100
+  requireAdminNotify: true
+  hidden: false
+  supervisors: nobody
+  jobPreviewEntity: CCMPlayerProtomorphQueenPreview
+  accessGroups:
+  - CMAccessXeno
+  - CMAccessXenoQueen
+
+- type: playTimeTracker
+  id: CCMJobProtomorphQueen
+  isXeno: true
+
+- type: entity
+  id: CCMPlayerProtomorphQueenPreview
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _CCM14/Pathogen/Mobs/Protomorphs/queen.rsi
+    layers:
+    - state: alive
+      scale: 0.5, 0.5

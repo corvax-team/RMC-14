@@ -1,0 +1,68 @@
+- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  - CCMProtomorphBase
+  id: CCMProtomorphSprinter
+  name: Sprinter
+  description: A deformed mutant xenomorph outcast. Its white color, deformed body, and arthropod-like jaws betray a foreign infection. It is extremely aggressive toward everyone, including its own kind, and is capable of single-handedly tearing apart a Warrior. Beware of its white, caustic blood.
+  components:
+  - type: GhostRole
+    name: ccm-job-name-protomorph-sprinter
+  - type: Sprite
+    sprite: _CCM14/Pathogen/Mobs/Protomorphs/sprinter.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      400: Critical
+      500: Dead
+  - type: Xeno
+    role: CCMProtomorphSprinter
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoHide
+    tier: 1
+  - type: XenoHide
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 85
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        - BarbedBarricade
+        - BarricadeImpassable
+        layer:
+        - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 85
+        layer:
+        - BulletImpassable
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 5.55
+    baseSprintSpeed: 10
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_CCM14/Interface/map_blips.rsi
+      state: sprinter
+  - type: RMCXenoDamageVisuals
+    prefix: sprinter

@@ -1,0 +1,40 @@
+- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  - CCMProtomorphBase
+  id: CCMProtomorphVenator
+  name: Venator
+  description: A dog-sized predator, the perfect stealth hunter. It camouflages itself by distorting light, but its subtle shimmer gives it away. Six limbs, deadly sickle-shaped claws, and a three-tongued mouth with which it "tests" the air. Beware: it's already close.
+  components:
+  - type: GhostRole
+    name: ccm-job-name-protomorph-venator
+  - type: Sprite
+    sprite: _CCM14/Pathogen/Mobs/Protomorphs/venator.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      400: Critical
+      500: Dead
+  - type: Xeno
+    role: CCMProtomorphVenator
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    tier: 1
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_CCM14/Interface/map_blips.rsi
+      state: venator
+  - type: RMCXenoDamageVisuals
+    prefix: venator

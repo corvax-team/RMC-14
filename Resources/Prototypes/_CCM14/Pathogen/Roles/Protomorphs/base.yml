@@ -1,0 +1,13 @@
+- type: job
+  abstract: true
+  parent: CMJobBase
+  id: CCMJobProtomorphBase
+  description: null
+  joinNotifyCrew: false
+  icon: "CMJobIconEmpty"
+  supervisors: cm-job-supervisors-queen
+  accessGroups:
+  - CMAccessXeno
+  hasIcon: false
+  hidden: true
+  isXeno: true

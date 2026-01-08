@@ -1,0 +1,41 @@
+- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoTail
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  - CCMProtomorphBase
+  id: CCMProtomorphBlight
+  name: Blight
+  description: A dangerous thrower, similar in appearance to a Venator. It hides in cover and fires acid globs that explode after a slight delay. Its spider-like fangs reveal its arthropod ancestry.
+  components:
+  - type: GhostRole
+    name: ccm-job-name-protomorph-blight
+  - type: Sprite
+    sprite: _CCM14/Pathogen/Mobs/Protomorphs/blight.rsi
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      400: Critical
+      500: Dead
+  - type: Xeno
+    role: CCMProtomorphBlight
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    tier: 1
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_CCM14/Interface/map_blips.rsi
+      state: blight
+  - type: RMCXenoDamageVisuals
+    prefix: blight

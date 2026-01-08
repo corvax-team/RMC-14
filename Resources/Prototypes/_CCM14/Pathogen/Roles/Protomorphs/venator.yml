@@ -1,0 +1,9 @@
+- type: job
+  parent: CCMJobProtomorphBase
+  id: CCMProtomorphVenator
+  name: ccm-job-name-protomorph-venator
+  playTimeTracker: CCMJobProtomorphVenator
+
+- type: playTimeTracker
+  id: CCMJobProtomorphVenator
+  isXeno: true
