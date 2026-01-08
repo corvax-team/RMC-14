@@ -2,7 +2,7 @@
   id: Herfjoetur
   mapName: Herfjoetur
   mapPath: /Maps/_CCM14/herfjoetur.yml
-  minPlayers: 0 # После плейтеста поменять на 20+
+  minPlayers: 35 # После плейтеста поменять на 20+
   maxRandomOffset: 0
   randomRotation: false
   stations:
@@ -26,6 +26,8 @@
 #            CMAuxiliarySupportOfficer: [1, 1]
             CMIntelOfficer: [2, 2]
             CMPilotDropship: [1, 1]
+            CMPilotGunship: [1, 1]
+            CMVehicleCrewman: [2, 2]
 #            CMPilotGunship: [1, 1]
             CMDropshipCrewChief: [1, 1]
             # Engineering

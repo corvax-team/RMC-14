@@ -4,7 +4,7 @@
   id: CCMVehicleWeaponsLoader
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/general.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/general.rsi
     state: weapons_loader
   - type: Animateable
   - type: InteractionOutline

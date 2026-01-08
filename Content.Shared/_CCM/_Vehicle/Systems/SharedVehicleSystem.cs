@@ -1013,10 +1013,19 @@ public sealed partial class SharedVehicleSystem : EntitySystem
 
     public void UpdateVehicleStatusUI(Entity<VehicleComponent> vehicle)
     {
+        if (vehicle.Comp.Hardpoints == null)
+            return;
+
         var hardpoints = new List<HardpointInfo>();
         foreach (var hardpoint in vehicle.Comp.Hardpoints)
         {
+            if (!Exists(hardpoint))
+                continue;
+                
             if (!TryComp<VehicleGunComponent>(hardpoint, out var gun))
+                continue;
+
+            if (gun.ActiveMagazineContainer == null || gun.SpareMagazinesContainer == null)
                 continue;
 
             var hasActiveMag = gun.ActiveMagazineContainer.ContainedEntity != null;
@@ -1025,7 +1034,9 @@ public sealed partial class SharedVehicleSystem : EntitySystem
 
             int currentAmmo = 0;
             int maxAmmo = 0;
-            if (hasActiveMag && TryComp<VehicleGunMagazineComponent>(gun.ActiveMagazineContainer.ContainedEntity!.Value, out var activeMag))
+            if (hasActiveMag && 
+                gun.ActiveMagazineContainer.ContainedEntity is { } magazineEntity &&
+                TryComp<VehicleGunMagazineComponent>(magazineEntity, out var activeMag))
             {
                 currentAmmo = activeMag.Shots;
                 maxAmmo = activeMag.Capacity;

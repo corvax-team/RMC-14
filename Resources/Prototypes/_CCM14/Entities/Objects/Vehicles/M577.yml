@@ -100,15 +100,15 @@
     worn: false
   - type: VehicleAttachableHolder
     slots:
-      st-vehicle-slot-treads:
+      ccm-vehicle-slot-treads:
         hardpointType: HDPT_TREADS
-      st-vehicle-slot-support:
+      ccm-vehicle-slot-support:
         hardpointType: HDPT_SUPPORT
-      st-vehicle-slot-secondary:
+      ccm-vehicle-slot-secondary:
         hardpointType: HDPT_SECONDARY
-      st-vehicle-slot-primary:
+      ccm-vehicle-slot-primary:
         hardpointType: HDPT_PRIMARY
-      st-vehicle-slot-special:
+      ccm-vehicle-slot-special:
         startingAttachables: [CCMMarineVehicleFiringPortWeaponOne, CCMMarineVehicleFiringPortWeaponTwo]
         hardpointType: HDPT_SPECIAL
         multiModule: true

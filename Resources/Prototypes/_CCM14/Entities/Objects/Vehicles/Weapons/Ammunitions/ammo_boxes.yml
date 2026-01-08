@@ -23,7 +23,7 @@
   description: A support armament grenade magazine. This one is loaded with flares packaged in expendable shells.
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Weapons/Ammunitions/ammo.rsi
+    sprite: _CCM14/Objects/Vehicles/Weapons/Ammunitions/ammo.rsi
     layers:
     - state: slauncher_1
       map: [ "base" ]
@@ -38,7 +38,7 @@
   description: A magazine for PARS-159 Boyars Dualcannon filled with 20mm rounds. Slightly contuses targets upon hit. Supports IFF.
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Weapons/Ammunitions/ammo.rsi
+    sprite: _CCM14/Objects/Vehicles/Weapons/Ammunitions/ammo.rsi
     layers:
     - state: ace_autocannon
       map: [ "base" ]
@@ -61,7 +61,7 @@
   description: A big box of bullets that looks suspiciously similar to the box you would use to refill a M56 Cupola. The Bleihagel logo sticker has peeled slightly and it looks like there's another logo underneath...
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Weapons/Ammunitions/ammo.rsi
+    sprite: _CCM14/Objects/Vehicles/Weapons/Ammunitions/ammo.rsi
     layers:
     - state: frontal_1
       map: [ "base" ]
@@ -84,7 +84,7 @@
   description: A magazine for an M56 Firing Port Weapon. Supports IFF.
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Weapons/Ammunitions/ammo.rsi
+    sprite: _CCM14/Objects/Vehicles/Weapons/Ammunitions/ammo.rsi
     layers:
     - state: cupola_1
       map: [ "base" ]

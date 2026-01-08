@@ -42,6 +42,10 @@
   name: welding kit
   description: A heavy-duty, portable welding fluid carrier.
   components:
+  - type: Storage
+    grid:
+    - 0,0,6,3
+    maxItemSize: Normal
   - type: Item
     size: Huge
   - type: Clothing

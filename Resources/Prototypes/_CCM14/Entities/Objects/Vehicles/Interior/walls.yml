@@ -5,10 +5,10 @@
   suffix: 1
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14Objects/Vehicles/Interior/apc.rsi
     state: apc_back_1
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_back_1
   - type: Occluder
     enabled: true
@@ -19,10 +19,10 @@
   suffix: 2
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_back_2
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_back_2
   - type: Occluder
     enabled: true
@@ -33,10 +33,10 @@
   suffix: 3
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_back_3
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_back_3
   - type: Occluder
     enabled: true
@@ -47,10 +47,10 @@
   suffix: 4
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_front_1
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_front_1
   - type: Occluder
     enabled: true
@@ -61,10 +61,10 @@
   suffix: 5
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_front_2
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_front_2
   - type: Occluder
     enabled: true
@@ -75,10 +75,10 @@
   suffix: 6
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_front_3
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_front_3
   - type: Occluder
     enabled: true
@@ -89,10 +89,10 @@
   suffix: 7
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_left_1
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_left_1
   - type: Occluder
     enabled: true
@@ -103,10 +103,10 @@
   suffix: 8
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_left_2
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_left_2
   - type: Occluder
     enabled: true
@@ -117,10 +117,10 @@
   suffix: 9
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_left_3
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_left_3
   - type: Occluder
     enabled: true
@@ -131,10 +131,10 @@
   suffix: 10
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_left_4
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_left_4
   - type: Occluder
     enabled: true
@@ -145,10 +145,10 @@
   suffix: 11
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_right_1
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_right_1
   - type: Occluder
     enabled: true
@@ -159,10 +159,10 @@
   suffix: 12
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_right_2
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_right_2
   - type: Occluder
     enabled: true
@@ -172,10 +172,10 @@
   suffix: 13
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_right_3
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_right_3
   - type: VehicleInteriorDoor
   - type: Transform
@@ -188,10 +188,10 @@
   suffix: 14
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_right_4
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_right_4
   - type: Occluder
     enabled: true
@@ -202,10 +202,10 @@
   suffix: 15
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_L
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_L
   - type: Occluder
     enabled: true
@@ -216,10 +216,10 @@
   suffix: 16
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_R
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_R
   - type: Occluder
     enabled: true
@@ -230,10 +230,10 @@
   suffix: 17
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_L
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_L
   - type: Occluder
     enabled: true
@@ -244,10 +244,10 @@
   suffix: 18
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_L_1
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_L_1
   - type: Occluder
     enabled: true
@@ -258,10 +258,10 @@
   suffix: 19
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_L_2
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_L_2
   - type: Occluder
     enabled: true
@@ -272,10 +272,10 @@
   suffix: 20
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_L_3
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_L_3
   - type: Occluder
     enabled: true
@@ -286,10 +286,10 @@
   suffix: 21
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_L_4
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_L_4
   - type: Occluder
     enabled: true
@@ -300,10 +300,10 @@
   suffix: 22
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_L_5
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_L_5
   - type: Occluder
     enabled: true
@@ -314,10 +314,10 @@
   suffix: 23
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_R
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_R
   - type: Occluder
     enabled: true
@@ -328,10 +328,10 @@
   suffix: 24
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_R_1
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_R_1
   - type: Occluder
     enabled: true
@@ -342,10 +342,10 @@
   suffix: 25
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_R_2
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_R_2
   - type: Occluder
     enabled: true
@@ -356,10 +356,10 @@
   suffix: 26
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_R_3
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_R_3
   - type: Occluder
     enabled: true
@@ -370,10 +370,10 @@
   suffix: 27
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_R_4
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_inverse_R_4
   - type: Occluder
     enabled: true
@@ -384,10 +384,10 @@
   suffix: 28
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_small_L
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_small_L
   - type: Occluder
     enabled: true
@@ -398,10 +398,10 @@
   suffix: 29
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_small_R
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: corner_small_R
   - type: Occluder
     enabled: true
@@ -412,10 +412,10 @@
   suffix: 31
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: door_back
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: door_back
   - type: Occluder
     enabled: true
@@ -429,12 +429,12 @@
   suffix: 32
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: door_front
     color: "#FFFFFF64"
     drawdepth: 7
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: door_front
   - type: Occluder
     enabled: false
@@ -448,10 +448,10 @@
   suffix: 33
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: door_rear_center
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: door_rear_center
   - type: Occluder
     enabled: true
@@ -462,10 +462,10 @@
   suffix: 34
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: door_rear_left
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: door_rear_left
   - type: Occluder
     enabled: true
@@ -476,10 +476,10 @@
   suffix: 35
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: door_rear_right
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: door_rear_right
   - type: Occluder
     enabled: true
@@ -490,10 +490,10 @@
   suffix: 36
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: exit_door
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: exit_door
   - type: Occluder
     enabled: true
@@ -504,10 +504,10 @@
   suffix: 37
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: front_1
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: front_1
   - type: Occluder
     enabled: true
@@ -518,10 +518,10 @@
   suffix: 38
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: front_2
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: front_2
   - type: Occluder
     enabled: true
@@ -532,10 +532,10 @@
   suffix: 39
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: front_3
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: front_3
   - type: Occluder
     enabled: true
@@ -546,10 +546,10 @@
   suffix: 40
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: front_4
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: front_4
   - type: Occluder
     enabled: true
@@ -560,10 +560,10 @@
   suffix: 41
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: front_5
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: front_5
   - type: Occluder
     enabled: true
@@ -574,10 +574,10 @@
   suffix: 42
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: front_6
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: front_6
   - type: Occluder
     enabled: true
@@ -588,10 +588,10 @@
   suffix: 43
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: front_wheel_L
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: front_wheel_L
   - type: Occluder
     enabled: true
@@ -602,10 +602,10 @@
   suffix: 44
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: front_wheel_R
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: front_wheel_R
   - type: Occluder
     enabled: true
@@ -617,12 +617,12 @@
   suffix: 45
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: m56_FPW
     drawdepth: 6
     offset: 0, 0.1
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: m56_FPW
   - type: Occluder
     enabled: false
@@ -636,12 +636,12 @@
   suffix: 45
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: m56_FPW
     drawdepth: 4
     offset: 0, 0.5
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: m56_FPW
   - type: Occluder
     enabled: false
@@ -654,10 +654,10 @@
   suffix: 46
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: rear_1
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: rear_1
   - type: Occluder
     enabled: true
@@ -668,10 +668,10 @@
   suffix: 47
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: rear_2
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: rear_2
   - type: Occluder
     enabled: true
@@ -682,10 +682,10 @@
   suffix: 48
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: rear_3
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: rear_3
   - type: Occluder
     enabled: true
@@ -699,10 +699,10 @@
   suffix: 49
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: rear_4
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: rear_4
   - type: Occluder
     enabled: true
@@ -713,10 +713,10 @@
   suffix: 50
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: rear_5
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: rear_5
   - type: Occluder
     enabled: true
@@ -727,10 +727,10 @@
   suffix: 51
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: rear_6
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: rear_6
   - type: Occluder
     enabled: true
@@ -741,10 +741,10 @@
   suffix: 52
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: rear_wheel_L
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: rear_wheel_L
   - type: Occluder
     enabled: true
@@ -755,10 +755,10 @@
   suffix: 53
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: rear_wheel_R
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: rear_wheel_R
   - type: Occluder
     enabled: true
@@ -769,10 +769,10 @@
   suffix: 54
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: sensors_equipment
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: sensors_equipment
   - type: Occluder
     enabled: true
@@ -783,10 +783,10 @@
   suffix: 55
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall
   - type: Occluder
     enabled: true
@@ -797,10 +797,10 @@
   suffix: 56
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_1
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_1
   - type: Occluder
     enabled: true
@@ -811,10 +811,10 @@
   suffix: 57
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_2
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_2
   - type: Occluder
     enabled: true
@@ -825,10 +825,10 @@
   suffix: 58
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_3
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_3
   - type: Occluder
     enabled: true
@@ -839,10 +839,10 @@
   suffix: 59
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_4
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_4
   - type: Occluder
     enabled: true
@@ -853,10 +853,10 @@
   suffix: 60
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_5
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_5
   - type: Occluder
     enabled: true
@@ -867,10 +867,10 @@
   suffix: 61
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_6
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_6
   - type: Occluder
     enabled: true
@@ -881,12 +881,12 @@
   suffix: 62
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_door_front
     color: "#FFFFFF64"
     drawdepth: 7
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_door_front
   - type: Occluder
     enabled: false
@@ -907,10 +907,10 @@
     - Wall
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_small_L
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_small_L
   - type: Transform
     anchored: true
@@ -923,10 +923,10 @@
   suffix: 64
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_small_R
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wall_small_R
   - type: Occluder
     enabled: true
@@ -937,10 +937,10 @@
   suffix: 65
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wheel_back_top_1
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wheel_back_top_1
   - type: Occluder
     enabled: true
@@ -951,10 +951,10 @@
   suffix: 66
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wheel_back_top_2
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wheel_back_top_2
   - type: Occluder
     enabled: true
@@ -965,10 +965,10 @@
   suffix: 67
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wheel_front_top_1
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wheel_front_top_1
   - type: Occluder
     enabled: true
@@ -979,10 +979,10 @@
   suffix: 68
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wheel_front_top_2
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: wheel_front_top_2
   - type: Occluder
     enabled: true
@@ -993,12 +993,12 @@
   suffix: 69
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc_corner.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc_corner.rsi
     state: corner
     offset: -0.5, 0
     drawdepth: 2
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc_corner.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc_corner.rsi
     state: corner
   - type: Transform
     anchored: true
@@ -1012,10 +1012,10 @@
   suffix: 70
   components:
   - type: Sprite
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: black
   - type: Icon
-    sprite: _CCM14//Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: black
   - type: Occluder
     enabled: true

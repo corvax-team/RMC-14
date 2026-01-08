@@ -307,6 +307,10 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (prevention.Cancelled)
             return null;
 
+        RaiseLocalEvent(user, ref prevention);
+        if (prevention.Cancelled)
+            return null;
+
         // Need to do this to play the clicking sound for empty automatic weapons
         // but not play anything for burst fire.
         if (gun.NextFire > curTime)

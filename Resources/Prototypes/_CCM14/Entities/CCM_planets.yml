@@ -4,7 +4,7 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_CCM14/Planets/polyphemus.yml
-    camouflage: Classic
+    camouflage: Snow
     survivorJobs:
     - CMSurvivor: 3
     - CMSurvivorCorporate: 1
@@ -31,7 +31,7 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_CCM14/Planets/nova.yml
-    camouflage: Desert
+    camouflage: Snow
     survivorJobs:
     - CMSurvivor: 1
     - CMSurvivorCorporate: 1
@@ -39,7 +39,7 @@
     - CMSurvivorEngineer: 1
     - CMSurvivorSecurity: 1
     - CMSurvivorScientist: 1
-    announcement: "От аванпоста ООН «Нова» получен автоматический сигнал бедствия. В ближайшее время для расследования будет отправлена группа реагирования с корабля ООН «Дэвид».
+    announcement: "От аванпоста ООН «Нова» получен автоматический сигнал бедствия. В ближайшее время для расследования будет отправлена группа реагирования с корабля UNS David.
       Назначение: горнодобывающее предприятие
 
       Население: 15 человек
@@ -58,7 +58,7 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_CCM14/Planets/westernforest.yml
-    camouflage: Classic
+    camouflage: Snow
     survivorJobs:
     - CMSurvivor: 3
     - CMSurvivorCorporate: 1

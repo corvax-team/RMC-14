@@ -7,6 +7,7 @@ for the Corvax Colonial Marines project, with full rights
 to use, modify, distribute, and sublicense.
 Third-party use requires Denlero's consent.
 */
+/*
 using Content.Server._RMC14.Rules;
 using Content.Server.GameTicking;
 using Content.Server.Spawners.Components;
@@ -140,3 +141,4 @@ public sealed class CrewmanSpawnSystem : EntitySystem
         return true;
     }
 }
+*/

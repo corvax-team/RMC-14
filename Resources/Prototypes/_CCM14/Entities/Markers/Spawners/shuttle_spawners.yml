@@ -4,7 +4,7 @@
   suffix: Alamo
   components:
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/alamo.yml"
+    spawn: "/Maps/_CCM14/alamoGrid.yml"
 
 - type: entity
   parent: RMCSpawnerShuttle
@@ -12,4 +12,4 @@
   suffix: Normandy
   components:
   - type: GridSpawner
-    spawn: "/Maps/_RMC14/normandy.yml"
+    spawn: "/Maps/_CCM14/normandyGrid.yml"

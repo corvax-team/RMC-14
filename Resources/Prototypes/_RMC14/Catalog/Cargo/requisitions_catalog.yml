@@ -304,11 +304,11 @@
     - name: Боеприпасы для техники
       entries:
       - cost: 3000
-        crate: STCrateBoxAmmoDualcannon
+        crate: CCMCrateBoxAmmoDualcannon
       - cost: 2000
-        crate: STCrateBoxAmmoFrontalcannon
+        crate: CCMCrateBoxAmmoFrontalcannon
       - cost: 2000
-        crate: STCrateBoxAmmoFlareLauncher
+        crate: CCMCrateBoxAmmoFlareLauncher
     - name: Оружие
       entries:
       - cost: 4000
