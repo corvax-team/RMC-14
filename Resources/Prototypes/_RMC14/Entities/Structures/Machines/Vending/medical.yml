@@ -82,6 +82,8 @@
         amount: 3
       - id: CMKelotaneAutoInjector
         amount: 3
+      - id: CCMDoxarubixadoneAutoInjector
+        amount: 5
 #      - id: CMOxycodoneAutoinjector # TODO RMC14
 #        amount: 3
 #      - id: CMTramadolAutoinjector # TODO RMC14

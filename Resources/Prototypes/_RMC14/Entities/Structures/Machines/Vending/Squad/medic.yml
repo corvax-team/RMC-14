@@ -78,6 +78,8 @@
         points: 1
       - id: CMKelotaneAutoInjector
         points: 1
+      - id: CCMDoxarubixadoneAutoInjector
+        points: 1
 #      - id: CMAutoinjectorOxycodone
 #        points: 2
 #      - id: CMAutoinjectorTramadol
