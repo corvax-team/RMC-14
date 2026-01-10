@@ -9,7 +9,7 @@
   - CCMProtomorphBase
   id: CCMProtomorphVenator
   name: Venator
-  description: A dog-sized predator, the perfect stealth hunter. It camouflages itself by distorting light, but its subtle shimmer gives it away. Six limbs, deadly sickle-shaped claws, and a three-tongued mouth with which it "tests" the air. Beware: it's already close.
+  description: A dog-sized predator, the perfect stealth hunter. It camouflages itself by distorting light, but its subtle shimmer gives it away. Six limbs, deadly sickle-shaped claws, and a three-tongued mouth with which it "tests" the air. Beware - it's already close.
   components:
   - type: GhostRole
     name: ccm-job-name-protomorph-venator
