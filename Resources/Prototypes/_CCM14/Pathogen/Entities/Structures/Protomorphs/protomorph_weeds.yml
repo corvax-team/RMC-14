@@ -1,0 +1,61 @@
+- type: entity
+  parent: XenoWeeds
+  id: CCMProtomorphWeeds
+  suffix: Pathogen
+  components:
+  - type: Sprite
+    sprite: _CCM14/Pathogen/Structures/Protomorphs/protomorph_weeds.rsi
+  - type: XenoWeeds
+    spawns: CCMProtomorphWeeds
+    wallSpawns: CCMProtomorpWeedsWall
+
+- type: entity
+  parent: CCMProtomorphWeeds
+  id: CCMProtomorphWeedsSource
+  suffix: Pathogen, Node
+  components:
+  - type: Sprite
+    layers:
+    - state: weed0
+    - state: constructionnode
+
+- type: entity
+  parent: XenoHiveWeeds
+  id: CCMProtomorphHiveWeeds
+  suffix: Pathogen
+  components:
+  - type: Sprite
+    sprite: _CCM14/Pathogen/Structures/Protomorphs/protomorph_weeds.rsi
+  - type: XenoWeeds
+    spawns: CCMProtomorphHiveWeeds
+    wallSpawns: CCMProtomorpWeedsWall
+
+- type: entity
+  parent: CCMProtomorphHiveWeeds
+  id: CCMProtomorphHiveWeedsSource
+  suffix: Pathogen, Node
+  components:
+  - type: Sprite
+    layers:
+    - state: hive_weed0
+    - state: constructionnode
+
+- type: entity
+  parent: XenoWeedsWall
+  id: CCMProtomorpWeedsWall
+  suffix: Pathogen
+  components:
+  - type: Sprite
+    sprite: _CCM14/Pathogen/Structures/Protomorphs/protomorph_weeds.rsi
+  - type: XenoNestSurface
+    nest: CCMProtomorpNest
+
+- type: entity
+  parent: XenoNest
+  id: CCMProtomorpNest
+  suffix: Pathogen
+  components:
+  - type: Sprite
+    sprite: _CCM14/Pathogen/Structures/Protomorphs/protomorph_weeds.rsi
+    state: nest_overlay
+    drawdepth: OverMobs

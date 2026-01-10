@@ -14,8 +14,10 @@ namespace Content.Shared._RMC14.Xenonids.Weeds;
 [Access(typeof(SharedXenoWeedsSystem))]
 public sealed partial class XenoWeedableComponent : Component
 {
+    /*ccm pathogen start
     [DataField, AutoNetworkedField]
     public EntProtoId? Spawn;
+    ccm pathogen end*/
 
     [DataField, AutoNetworkedField]
     [Access(typeof(SharedXenoWeedsSystem), typeof(XenoNestSystem))]

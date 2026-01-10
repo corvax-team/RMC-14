@@ -209,10 +209,10 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                         if (!HasComp<CommunicationsTowerComponent>(anchoredId))
                             _appearance.SetData(anchoredId, WeededEntityLayers.Layer, true);
 
-                        if (weedable.Spawn == null)
+                        if (weeds.WallSpawns == null) //ccm pathogen
                             continue;
 
-                        weedable.Entity = SpawnAtPosition(weedable.Spawn, anchoredId.ToCoordinates());
+                        weedable.Entity = SpawnAtPosition(weeds.WallSpawns, anchoredId.ToCoordinates()); //ccm pathogen
                         var wallWeeds = EnsureComp<XenoWallWeedsComponent>(weedable.Entity.Value);
                         wallWeeds.Weeds = source;
                         Dirty(weedable.Entity.Value, wallWeeds);

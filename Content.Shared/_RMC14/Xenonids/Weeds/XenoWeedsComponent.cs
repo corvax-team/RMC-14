@@ -39,7 +39,10 @@ public sealed partial class XenoWeedsComponent : Component
 
     [DataField]
     public EntProtoId Spawns = "XenoWeeds";
-
+    //ccm pathogen start
+    [DataField]
+    public EntProtoId? WallSpawns = "XenoWeedsWall";
+    //ccm pathogen end
     [DataField, AutoNetworkedField]
     public List<EntityUid> Spread = new();
 
