@@ -1,13 +1,11 @@
-﻿using Content.Client.Lobby.UI;
-using Content.Client.Message;
-using Content.Shared._RMC14.CCVar;
+﻿using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.LinkAccount;
+using Content.Client.Message;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 using static Robust.Client.UserInterface.Controls.LineEdit;
 using static Robust.Client.UserInterface.Controls.TabContainer;
@@ -47,20 +45,10 @@ public sealed class LinkAccountUIController : UIController, IOnSystemChanged<Lin
 
     private void OnUpdated()
     {
-        if (UIManager.ActiveScreen is not LobbyGui gui)
-            return;
-
-        gui.CharacterPreview.PatronPerks.Visible = _linkAccount.CanViewPatronPerks();
     }
 
     private void OnLobbyMessageReceived(SharedRMCDisplayLobbyMessageEvent message)
     {
-        if (UIManager.ActiveScreen is not LobbyGui gui)
-            return;
-
-        var user = FormattedMessage.EscapeText(message.User);
-        var msg = FormattedMessage.EscapeText(message.Message);
-        gui.LobbyMessageLabel.SetMarkupPermissive($"[font size=20]Lobby message by: {user}\n{msg}[/font]");
     }
 
     public void ToggleWindow()

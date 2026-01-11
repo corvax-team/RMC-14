@@ -17,14 +17,17 @@ using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
 using Content.Shared.Traits;
+using Content.Shared._RMC14.CCVar;
 using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
 using Robust.Client.State;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Shared.Configuration;
+using Robust.Shared.Localization;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Utility;
 
 namespace Content.Client.Lobby;
@@ -41,6 +44,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     [Dependency] private readonly JobRequirementsManager _requirements = default!;
     [Dependency] private readonly MarkingManager _markings = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [UISystemDependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
     [UISystemDependency] private readonly ClientInventorySystem _inventory = default!;
     [UISystemDependency] private readonly StationSpawningSystem _spawn = default!;
@@ -52,16 +56,13 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     private CharacterSetupGuiSavePanel? _savePanel;
 
     /// <summary>
-    /// This is the characher preview panel in the chat. This should only update if their character updates.
-    /// </summary>
-    private LobbyCharacterPreviewPanel? PreviewPanel => GetLobbyPreview();
-
-    /// <summary>
     /// This is the modified profile currently being edited.
     /// </summary>
     private HumanoidCharacterProfile? EditedProfile => _profileEditor?.Profile;
 
     private int? EditedSlot => _profileEditor?.CharacterSlot;
+
+    private const string DefaultLobbyXenoPrefix = "XX";
 
     public override void Initialize()
     {
@@ -80,17 +81,9 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         _configurationManager.OnValueChanged(CCVars.GameRoleWhitelist, _ => RefreshProfileEditor());
 
         _linkAccount.Updated += RefreshProfileEditor;
+        _configurationManager.OnValueChanged(RMCCVars.RMCLobbyXenoName, _ => UpdateLobbyHeader());
     }
 
-    private LobbyCharacterPreviewPanel? GetLobbyPreview()
-    {
-        if (_stateManager.CurrentState is LobbyState lobby)
-        {
-            return lobby.Lobby?.CharacterPreview;
-        }
-
-        return null;
-    }
 
     private void OnRequirementsUpdated()
     {
@@ -137,23 +130,21 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
     private void PreferencesDataLoaded()
     {
-        PreviewPanel?.SetLoaded(true);
-
         if (_stateManager.CurrentState is not LobbyState)
             return;
 
         ReloadCharacterSetup();
+        UpdateLobbyHeader();
     }
 
     public void OnStateEntered(LobbyState state)
     {
-        PreviewPanel?.SetLoaded(_preferencesManager.ServerDataLoaded);
         ReloadCharacterSetup();
+        UpdateLobbyHeader();
     }
 
     public void OnStateExited(LobbyState state)
     {
-        PreviewPanel?.SetLoaded(false);
         _profileEditor?.Dispose();
         _characterSetup?.Dispose();
 
@@ -166,35 +157,12 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     /// </summary>
     public void ReloadCharacterSetup()
     {
-        RefreshLobbyPreview();
         var (characterGui, profileEditor) = EnsureGui();
         characterGui.ReloadCharacterPickers();
         profileEditor.SetProfile(
             (HumanoidCharacterProfile?) _preferencesManager.Preferences?.SelectedCharacter,
             _preferencesManager.Preferences?.SelectedCharacterIndex);
-    }
-
-    /// <summary>
-    /// Refreshes the character preview in the lobby chat.
-    /// </summary>
-    private void RefreshLobbyPreview()
-    {
-        if (PreviewPanel == null)
-            return;
-
-        // Get selected character, load it, then set it
-        var character = _preferencesManager.Preferences?.SelectedCharacter;
-
-        if (character is not HumanoidCharacterProfile humanoid)
-        {
-            PreviewPanel.SetSprite(EntityUid.Invalid);
-            PreviewPanel.SetSummaryText(string.Empty);
-            return;
-        }
-
-        var dummy = LoadProfileEntity(humanoid, null, true);
-        PreviewPanel.SetSprite(dummy);
-        PreviewPanel.SetSummaryText(humanoid.Summary);
+        UpdateLobbyHeader();
     }
 
     private void RefreshProfileEditor()
@@ -330,6 +298,72 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         }
 
         return (_characterSetup, _profileEditor);
+    }
+
+    private void UpdateLobbyHeader()
+    {
+        if (_stateManager.CurrentState is not LobbyState lobby || lobby.Lobby == null)
+            return;
+
+        var profile = _preferencesManager.Preferences?.SelectedCharacter as HumanoidCharacterProfile;
+        lobby.Lobby.WelcomeCharacterName.Text = string.IsNullOrWhiteSpace(profile?.Name)
+            ? Loc.GetString("identity-unknown-name")
+            : profile.Name;
+        lobby.Lobby.WelcomeXenoName.Text = BuildLobbyXenoName(profile);
+    }
+
+    private string BuildLobbyXenoName(HumanoidCharacterProfile? profile)
+    {
+        var fallback = EnsureLobbyXenoName();
+
+        var prefix = profile?.XenoPrefix?.Trim() ?? string.Empty;
+        var postfix = profile?.XenoPostfix?.Trim() ?? string.Empty;
+
+        if (string.IsNullOrWhiteSpace(prefix) && string.IsNullOrWhiteSpace(postfix))
+            return fallback;
+
+        if (string.IsNullOrWhiteSpace(prefix))
+            prefix = DefaultLobbyXenoPrefix;
+
+        var number = ExtractLobbyXenoNumber(fallback);
+        if (string.IsNullOrWhiteSpace(number))
+            number = "000";
+
+        return string.IsNullOrWhiteSpace(postfix)
+            ? $"{prefix}-{number}"
+            : $"{prefix}-{number}{postfix}";
+    }
+
+    private string EnsureLobbyXenoName()
+    {
+        var current = _configurationManager.GetCVar(RMCCVars.RMCLobbyXenoName);
+        if (!string.IsNullOrWhiteSpace(current))
+            return current;
+
+        var generated = $"{DefaultLobbyXenoPrefix}-{_random.Next(0, 1000):000}";
+        _configurationManager.SetCVar(RMCCVars.RMCLobbyXenoName, generated);
+        return generated;
+    }
+
+    private static string ExtractLobbyXenoNumber(string name)
+    {
+        var dashIndex = name.IndexOf('-');
+        if (dashIndex >= 0 && dashIndex + 1 < name.Length)
+        {
+            var digits = new string(name[(dashIndex + 1)..].TakeWhile(char.IsDigit).ToArray());
+            if (digits.Length > 0)
+                return digits.PadLeft(3, '0');
+        }
+
+        var allDigits = new string(name.Where(char.IsDigit).ToArray());
+        if (allDigits.Length > 0)
+        {
+            if (allDigits.Length >= 3)
+                return allDigits[..3];
+            return allDigits.PadLeft(3, '0');
+        }
+
+        return string.Empty;
     }
 
     #region Helpers

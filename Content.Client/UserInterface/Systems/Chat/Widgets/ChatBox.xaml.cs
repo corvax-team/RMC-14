@@ -1,4 +1,5 @@
 using Content.Client._RMC14.Chat;
+using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Chat.Controls;
 using Content.Shared.Chat;
 using Content.Shared.Input;
@@ -27,6 +28,8 @@ public partial class ChatBox : UIWidget
     private readonly ChatUIController _controller;
 
     public bool Main { get; set; }
+    public bool UseLobbyTheme { get; private set; }
+    public bool LobbyCrtEnabled { get; private set; }
 
     public ChatSelectChannel SelectedChannel => ChatInput.ChannelSelector.SelectedChannel;
 
@@ -118,6 +121,7 @@ public partial class ChatBox : UIWidget
 
     public void AddLine(string message, Color color, NetEntity sender, string unwrapped, ChatChannel channel, bool repeatCheckSender)
     {
+        color = AdjustLobbyTextColor(color);
         var formatted = new FormattedMessage(3);
         formatted.PushColor(color);
         formatted.AddMarkupOrThrow(message);
@@ -129,6 +133,23 @@ public partial class ChatBox : UIWidget
             return;
 
         Contents.AddMessage(formatted);
+    }
+
+    public void SetLobbyTheme(bool enabled, bool crtEnabled)
+    {
+        UseLobbyTheme = enabled;
+        LobbyCrtEnabled = crtEnabled;
+    }
+
+    private Color AdjustLobbyTextColor(Color color)
+    {
+        if (!UseLobbyTheme)
+            return color;
+
+        if (color == Color.LightGray || color == Color.DarkGray)
+            return LobbyCrtEnabled ? StyleNano.LobbyCrtMutedText : StyleNano.LobbyCleanMutedText;
+
+        return color;
     }
 
     // RMC14

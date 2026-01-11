@@ -68,6 +68,30 @@ namespace Content.Client.Stylesheets
         public const string StyleClassChatFilterOptionButton = "chatFilterOptionButton";
         public const string StyleClassStorageButton = "storageButton";
         public const string StyleClassInset = "Inset";
+        public const string StyleClassLobbyThemeCrt = "LobbyThemeCrt";
+        public const string StyleClassLobbyThemeClean = "LobbyThemeClean";
+        public const string StyleClassLobbyCenterPanel = "LobbyCenterPanel";
+        public const string StyleClassLobbyCenterGlow = "LobbyCenterGlow";
+        public const string StyleClassLobbyInfoPanel = "LobbyInfoPanel";
+        public const string StyleClassLobbyInfoDivider = "LobbyInfoDivider";
+        public const string StyleClassLobbyWelcomeLine1 = "LobbyWelcomeLine1";
+        public const string StyleClassLobbyWelcomeLine2 = "LobbyWelcomeLine2";
+        public const string StyleClassLobbyWelcomeLine3 = "LobbyWelcomeLine3";
+        public const string StyleClassLobbyCountdown = "LobbyCountdown";
+        public const string StyleClassLobbyInfoTitle = "LobbyInfoTitle";
+        public const string StyleClassLobbyInfoLine = "LobbyInfoLine";
+        public const string StyleClassLobbyInfoText = "LobbyInfoText";
+        public const string StyleClassLobbyMenuButton = "LobbyMenuButton";
+        public const string StyleClassLobbyMenuDivider = "LobbyMenuDivider";
+        public const string StyleClassLobbyMenuIconButton = "LobbyMenuIconButton";
+        public const string StyleClassLobbyTopButton = "LobbyTopButton";
+        public const string StyleClassLobbyChatPanel = "LobbyChatPanel";
+        public const string StyleClassLobbyChatPanelInner = "LobbyChatPanelInner";
+        public const string StyleClassLobbyChatInputPanel = "LobbyChatInputPanel";
+        public const string StyleClassLobbyChatLineEdit = "LobbyChatLineEdit";
+        public const string StyleClassLobbyChatSelectorButton = "LobbyChatSelectorButton";
+        public const string StyleClassLobbyChatFilterButton = "LobbyChatFilterButton";
+        public const string StyleClassLobbyEmblem = "LobbyEmblem";
 
         public const string StyleClassConsoleHeading = "ConsoleHeading";
         public const string StyleClassConsoleSubHeading = "ConsoleSubHeading";
@@ -117,6 +141,14 @@ namespace Content.Client.Stylesheets
         public static readonly Color ButtonColorGoodDefault = Color.FromHex("#3E6C45");
         public static readonly Color ButtonColorGoodHovered = Color.FromHex("#31843E");
         public static readonly Color ButtonColorGoodDisabled = Color.FromHex("#164420");
+
+        public static readonly Color LobbyCrtAccent = Color.FromHex("#00EA4C");
+        public static readonly Color LobbyCrtText = Color.FromHex("#0AE14A");
+        public static readonly Color LobbyCrtMutedText = Color.FromHex("#A0C7B1");
+        public static readonly Color LobbyCleanAccent = Color.FromHex("#5F6D7C");
+        public static readonly Color LobbyCleanText = Color.FromHex("#E3E7EE");
+        public static readonly Color LobbyCleanMutedText = Color.FromHex("#B3BCC9");
+        public static readonly Color LobbyCrtGlow = Color.FromHex("#3AFF7899");
 
         //NavMap
         public static readonly Color PointRed = Color.FromHex("#B02E26");
@@ -174,6 +206,7 @@ namespace Content.Client.Stylesheets
             var notoSans12 = resCache.NotoStack(size: 12);
             var notoSansItalic12 = resCache.NotoStack(variation: "Italic", size: 12);
             var notoSansBold12 = resCache.NotoStack(variation: "Bold", size: 12);
+            var notoSansBold14 = resCache.NotoStack(variation: "Bold", size: 14);
             var notoSansBoldItalic12 = resCache.NotoStack(variation: "BoldItalic", size: 12);
             var notoSansBoldItalic14 = resCache.NotoStack(variation: "BoldItalic", size: 14);
             var notoSansBoldItalic16 = resCache.NotoStack(variation: "BoldItalic", size: 16);
@@ -390,6 +423,212 @@ namespace Content.Client.Stylesheets
                 BackgroundColor = ChatBackgroundColor,
             };
             chatSubBg.SetContentMarginOverride(StyleBox.Margin.All, 2);
+
+            var lobbyPanelCrt = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#0B100E").WithAlpha(0.92f),
+                BorderColor = LobbyCrtAccent,
+                BorderThickness = new Thickness(1)
+            };
+            lobbyPanelCrt.SetContentMarginOverride(StyleBox.Margin.All, 6);
+
+            var lobbyPanelGlowCrt = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Transparent,
+                BorderColor = Color.FromHex("#00EB4C").WithAlpha(0.5f),
+                BorderThickness = new Thickness(2)
+            };
+            lobbyPanelGlowCrt.SetContentMarginOverride(StyleBox.Margin.All, 0);
+
+            var lobbyPanelClean = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#12171C").WithAlpha(0.95f),
+                BorderColor = LobbyCleanAccent,
+                BorderThickness = new Thickness(1)
+            };
+            lobbyPanelClean.SetContentMarginOverride(StyleBox.Margin.All, 6);
+
+            var lobbyPanelGlowClean = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Transparent,
+                BorderColor = Color.FromHex("#00EB4C").WithAlpha(0.4f),
+                BorderThickness = new Thickness(2)
+            };
+            lobbyPanelGlowClean.SetContentMarginOverride(StyleBox.Margin.All, 0);
+
+            var lobbyInfoPanelCrt = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#0A0E0C").WithAlpha(0.8f),
+                BorderColor = LobbyCrtAccent,
+                BorderThickness = new Thickness(1)
+            };
+            lobbyInfoPanelCrt.SetContentMarginOverride(StyleBox.Margin.All, 4);
+
+            var lobbyInfoPanelClean = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#12161B").WithAlpha(0.9f),
+                BorderColor = LobbyCleanAccent,
+                BorderThickness = new Thickness(1)
+            };
+            lobbyInfoPanelClean.SetContentMarginOverride(StyleBox.Margin.All, 4);
+
+            var lobbyInfoDividerCrt = new StyleBoxFlat
+            {
+                BackgroundColor = LobbyCrtAccent
+            };
+
+            var lobbyInfoDividerClean = new StyleBoxFlat
+            {
+                BackgroundColor = LobbyCleanAccent
+            };
+
+            var lobbyMenuDividerCrt = new StyleBoxFlat
+            {
+                BackgroundColor = LobbyCrtAccent.WithAlpha(0.9f),
+                BorderColor = LobbyCrtAccent.WithAlpha(0.6f),
+                BorderThickness = new Thickness(1)
+            };
+
+            var lobbyMenuDividerClean = new StyleBoxFlat
+            {
+                BackgroundColor = LobbyCleanAccent.WithAlpha(0.9f),
+                BorderColor = LobbyCleanAccent.WithAlpha(0.6f),
+                BorderThickness = new Thickness(1)
+            };
+
+            var lobbyButtonCrt = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#0A120D"),
+                BorderColor = LobbyCrtAccent,
+                BorderThickness = new Thickness(1)
+            };
+
+            var lobbyButtonCrtHover = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#122319"),
+                BorderColor = LobbyCrtAccent,
+                BorderThickness = new Thickness(1)
+            };
+
+            var lobbyButtonCrtPressed = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#15301F"),
+                BorderColor = LobbyCrtAccent,
+                BorderThickness = new Thickness(1)
+            };
+
+            var lobbyButtonClean = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#192029"),
+                BorderColor = LobbyCleanAccent,
+                BorderThickness = new Thickness(1)
+            };
+
+            var lobbyButtonCleanHover = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#24303B"),
+                BorderColor = LobbyCleanAccent,
+                BorderThickness = new Thickness(1)
+            };
+
+            var lobbyButtonCleanPressed = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#2A3945"),
+                BorderColor = LobbyCleanAccent,
+                BorderThickness = new Thickness(1)
+            };
+
+            var lobbyMenuButtonCrt = new StyleBoxFlat
+            {
+                BackgroundColor = LobbyCrtAccent,
+                BorderColor = LobbyCrtAccent,
+                BorderThickness = new Thickness(1)
+            };
+            lobbyMenuButtonCrt.SetContentMarginOverride(StyleBox.Margin.All, 4);
+
+            var lobbyMenuButtonCrtHover = new StyleBoxFlat
+            {
+                BackgroundColor = LobbyCrtAccent.WithAlpha(0f),
+                BorderColor = LobbyCrtAccent,
+                BorderThickness = new Thickness(1)
+            };
+            lobbyMenuButtonCrtHover.SetContentMarginOverride(StyleBox.Margin.All, 4);
+
+            var lobbyMenuButtonCrtPressed = new StyleBoxFlat
+            {
+                BackgroundColor = LobbyCrtAccent.WithAlpha(0.95f),
+                BorderColor = LobbyCrtAccent,
+                BorderThickness = new Thickness(1)
+            };
+            lobbyMenuButtonCrtPressed.SetContentMarginOverride(StyleBox.Margin.All, 4);
+
+            var lobbyMenuButtonCrtDisabled = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#00611F"),
+                BorderColor = Color.FromHex("#00611F"),
+                BorderThickness = new Thickness(1)
+            };
+            lobbyMenuButtonCrtDisabled.SetContentMarginOverride(StyleBox.Margin.All, 4);
+
+            var lobbyMenuButtonClean = new StyleBoxFlat
+            {
+                BackgroundColor = LobbyCrtAccent,
+                BorderColor = LobbyCrtAccent,
+                BorderThickness = new Thickness(1)
+            };
+            lobbyMenuButtonClean.SetContentMarginOverride(StyleBox.Margin.All, 4);
+
+            var lobbyMenuButtonCleanHover = new StyleBoxFlat
+            {
+                BackgroundColor = LobbyCrtAccent.WithAlpha(0f),
+                BorderColor = LobbyCrtAccent,
+                BorderThickness = new Thickness(1)
+            };
+            lobbyMenuButtonCleanHover.SetContentMarginOverride(StyleBox.Margin.All, 4);
+
+            var lobbyMenuButtonCleanPressed = new StyleBoxFlat
+            {
+                BackgroundColor = LobbyCrtAccent.WithAlpha(1f),
+                BorderColor = LobbyCrtAccent,
+                BorderThickness = new Thickness(2)
+            };
+            lobbyMenuButtonCleanPressed.SetContentMarginOverride(StyleBox.Margin.All, 4);
+
+            var lobbyMenuButtonCleanDisabled = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#009430"),
+                BorderColor = Color.FromHex("#009430"),
+                BorderThickness = new Thickness(1)
+            };
+            lobbyMenuButtonCleanDisabled.SetContentMarginOverride(StyleBox.Margin.All, 4);
+
+            var lobbyChatPanelCrt = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#0C1011").WithAlpha(0.85f),
+                BorderColor = LobbyCrtAccent,
+                BorderThickness = new Thickness(1)
+            };
+
+            var lobbyChatPanelClean = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#131820").WithAlpha(0.9f),
+                BorderColor = LobbyCleanAccent,
+                BorderThickness = new Thickness(1)
+            };
+
+            var lobbyChatInputCrt = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#090D0B"),
+                BorderColor = LobbyCrtAccent,
+                BorderThickness = new Thickness(1)
+            };
+
+            var lobbyChatInputClean = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#0F1318"),
+                BorderColor = LobbyCleanAccent,
+                BorderThickness = new Thickness(1)
+            };
 
             var actionSearchBoxTex = resCache.GetTexture("/Textures/Interface/Nano/black_panel_dark_thin_border.png");
             var actionSearchBox = new StyleBoxTexture
@@ -957,6 +1196,455 @@ namespace Content.Client.Stylesheets
                     {
                         new StyleProperty(PanelContainer.StylePropertyPanel, chatBg),
                     }),
+
+                Element<PanelContainer>().Class(StyleClassLobbyCenterPanel).Class(StyleClassLobbyThemeCrt)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyPanelCrt),
+
+                Element<PanelContainer>().Class(StyleClassLobbyCenterGlow).Class(StyleClassLobbyThemeCrt)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyPanelGlowCrt)
+                    .Prop(Control.StylePropertyModulateSelf, Color.White),
+
+                Element<PanelContainer>().Class(StyleClassLobbyCenterPanel).Class(StyleClassLobbyThemeClean)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyPanelClean),
+
+                Element<PanelContainer>().Class(StyleClassLobbyCenterGlow).Class(StyleClassLobbyThemeClean)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyPanelGlowClean)
+                    .Prop(Control.StylePropertyModulateSelf, Color.White),
+
+                Element<PanelContainer>().Class(StyleClassLobbyInfoPanel).Class(StyleClassLobbyThemeCrt)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyInfoPanelCrt),
+
+                Element<PanelContainer>().Class(StyleClassLobbyInfoPanel).Class(StyleClassLobbyThemeClean)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyInfoPanelClean),
+
+                Element<PanelContainer>().Class(StyleClassLobbyInfoDivider).Class(StyleClassLobbyThemeCrt)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyInfoDividerCrt),
+
+                Element<PanelContainer>().Class(StyleClassLobbyInfoDivider).Class(StyleClassLobbyThemeClean)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyInfoDividerClean),
+
+                Element<PanelContainer>().Class(StyleClassLobbyChatPanel).Class(StyleClassLobbyThemeCrt)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyChatPanelCrt),
+
+                Element<PanelContainer>().Class(StyleClassLobbyChatPanel).Class(StyleClassLobbyThemeClean)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyChatPanelClean),
+
+                Element<PanelContainer>().Class(StyleClassLobbyChatPanelInner).Class(StyleClassLobbyThemeCrt)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyChatPanelCrt),
+
+                Element<PanelContainer>().Class(StyleClassLobbyChatPanelInner).Class(StyleClassLobbyThemeClean)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyChatPanelClean),
+
+                Element<PanelContainer>().Class(StyleClassLobbyChatInputPanel).Class(StyleClassLobbyThemeCrt)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyChatInputCrt),
+
+                Element<PanelContainer>().Class(StyleClassLobbyChatInputPanel).Class(StyleClassLobbyThemeClean)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyChatInputClean),
+
+                Element<PanelContainer>().Class(StyleClassLobbyMenuDivider).Class(StyleClassLobbyThemeCrt)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyMenuDividerCrt),
+
+                Element<PanelContainer>().Class(StyleClassLobbyMenuDivider).Class(StyleClassLobbyThemeClean)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyMenuDividerClean),
+
+                Element<TextureRect>().Class(StyleClassLobbyEmblem).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Control.StylePropertyModulateSelf, LobbyCrtAccent),
+
+                Element<TextureRect>().Class(StyleClassLobbyEmblem).Class(StyleClassLobbyThemeClean)
+                    .Prop(Control.StylePropertyModulateSelf, LobbyCleanAccent),
+
+                Element<Label>().Class(StyleClassLobbyWelcomeLine1).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center)
+                    .Prop(Label.StylePropertyFont, notoSansBold14)
+                    .Prop(Label.StylePropertyFontColor, LobbyCrtText),
+
+                Element<Label>().Class(StyleClassLobbyWelcomeLine2).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center)
+                    .Prop(Label.StylePropertyFont, notoSansBold18)
+                    .Prop(Label.StylePropertyFontColor, LobbyCrtText),
+
+                Element<Label>().Class(StyleClassLobbyWelcomeLine3).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center)
+                    .Prop(Label.StylePropertyFont, notoSansBold16)
+                    .Prop(Label.StylePropertyFontColor, LobbyCrtMutedText),
+
+                Element<Label>().Class(StyleClassLobbyWelcomeLine1).Class(StyleClassLobbyThemeClean)
+                    .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center)
+                    .Prop(Label.StylePropertyFont, notoSansBold14)
+                    .Prop(Label.StylePropertyFontColor, LobbyCleanText),
+
+                Element<Label>().Class(StyleClassLobbyWelcomeLine2).Class(StyleClassLobbyThemeClean)
+                    .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center)
+                    .Prop(Label.StylePropertyFont, notoSansBold18)
+                    .Prop(Label.StylePropertyFontColor, LobbyCleanText),
+
+                Element<Label>().Class(StyleClassLobbyWelcomeLine3).Class(StyleClassLobbyThemeClean)
+                    .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center)
+                    .Prop(Label.StylePropertyFont, notoSansBold16)
+                    .Prop(Label.StylePropertyFontColor, LobbyCleanMutedText),
+
+                Element<Label>().Class(StyleClassLobbyCountdown).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center)
+                    .Prop(Label.StylePropertyFont, notoSansBold14)
+                    .Prop(Label.StylePropertyFontColor, LobbyCrtAccent),
+
+                Element<Label>().Class(StyleClassLobbyCountdown).Class(StyleClassLobbyThemeClean)
+                    .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center)
+                    .Prop(Label.StylePropertyFont, notoSansBold14)
+                    .Prop(Label.StylePropertyFontColor, LobbyCleanAccent),
+
+                Element<Label>().Class(StyleClassLobbyInfoTitle).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Label.StylePropertyFont, notoSansBold14)
+                    .Prop(Label.StylePropertyFontColor, LobbyCrtAccent),
+
+                Element<Label>().Class(StyleClassLobbyInfoTitle).Class(StyleClassLobbyThemeClean)
+                    .Prop(Label.StylePropertyFont, notoSansBold14)
+                    .Prop(Label.StylePropertyFontColor, LobbyCleanAccent),
+
+                Element<Label>().Class(StyleClassLobbyInfoLine).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Label.StylePropertyFont, notoSans12)
+                    .Prop(Label.StylePropertyFontColor, LobbyCrtMutedText),
+
+                Element<Label>().Class(StyleClassLobbyInfoLine).Class(StyleClassLobbyThemeClean)
+                    .Prop(Label.StylePropertyFont, notoSans12)
+                    .Prop(Label.StylePropertyFontColor, LobbyCleanMutedText),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(BoxContainer), new[] {StyleClassLobbyInfoText, StyleClassLobbyThemeCrt}, null, null),
+                    new SelectorElement(typeof(RichTextLabel), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, notoSans12),
+                        new StyleProperty("font-color", LobbyCrtMutedText)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(BoxContainer), new[] {StyleClassLobbyInfoText, StyleClassLobbyThemeClean}, null, null),
+                    new SelectorElement(typeof(RichTextLabel), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, notoSans12),
+                        new StyleProperty("font-color", LobbyCleanMutedText)
+                    }),
+
+                Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCrt),
+
+                Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCrtHover),
+
+                Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCrtPressed),
+
+                Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCrtDisabled),
+
+                Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassNormal)
+                    .Prop(Button.StylePropertyModulateSelf, Color.White),
+
+                Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyModulateSelf, Color.White),
+
+                Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyModulateSelf, Color.White),
+
+                Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(Button.StylePropertyModulateSelf, Color.White),
+
+                Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeClean)
+                    .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonClean),
+
+                Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCleanHover),
+
+                Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCleanPressed),
+
+                Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCleanDisabled),
+
+                Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassNormal)
+                    .Prop(Button.StylePropertyModulateSelf, Color.White),
+
+                Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyModulateSelf, Color.White),
+
+                Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyModulateSelf, Color.White),
+
+                Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(Button.StylePropertyModulateSelf, Color.White),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassLobbyThemeCrt}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Left),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(8, 0, 0, 0)),
+                        new StyleProperty(Label.StylePropertyFont, notoSansBold14),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#000000"))
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassLobbyThemeClean}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Left),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(8, 0, 0, 0)),
+                        new StyleProperty(Label.StylePropertyFont, notoSansBold14),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#000000"))
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassLobbyThemeCrt}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, LobbyCrtAccent)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassLobbyThemeClean}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, LobbyCrtAccent)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassLobbyThemeCrt}, null, new[] {ContainerButton.StylePseudoClassDisabled}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#000000"))
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassLobbyThemeClean}, null, new[] {ContainerButton.StylePseudoClassDisabled}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#000000"))
+                    }),
+
+                Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton).Class(StyleClassLobbyThemeCrt)
+                    .Prop(ContainerButton.StylePropertyStyleBox, lobbyMenuButtonCrt),
+
+                Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(ContainerButton.StylePropertyStyleBox, lobbyMenuButtonCrtHover),
+
+                Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(ContainerButton.StylePropertyStyleBox, lobbyMenuButtonCrtPressed),
+
+                Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(ContainerButton.StylePropertyStyleBox, lobbyMenuButtonCrtDisabled),
+
+                Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton).Class(StyleClassLobbyThemeClean)
+                    .Prop(ContainerButton.StylePropertyStyleBox, lobbyMenuButtonClean),
+
+                Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(ContainerButton.StylePropertyStyleBox, lobbyMenuButtonCleanHover),
+
+                Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(ContainerButton.StylePropertyStyleBox, lobbyMenuButtonCleanPressed),
+
+                Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(ContainerButton.StylePropertyStyleBox, lobbyMenuButtonCleanDisabled),
+
+                Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton)
+                    .Pseudo(ContainerButton.StylePseudoClassNormal)
+                    .Prop(Control.StylePropertyModulateSelf, Color.White),
+
+                Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Control.StylePropertyModulateSelf, Color.White),
+
+                Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Control.StylePropertyModulateSelf, Color.White),
+
+                Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton)
+                    .Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(Control.StylePropertyModulateSelf, Color.White),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(ContainerButton), new[] {StyleClassLobbyMenuIconButton}, null, null),
+                    new SelectorElement(typeof(TextureRect), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#000000"))
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(ContainerButton), new[] {StyleClassLobbyMenuIconButton}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                    new SelectorElement(typeof(TextureRect), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#00EB4C"))
+                    }),
+
+                Element<Button>().Class(StyleClassLobbyTopButton).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonCrt),
+
+                Element<Button>().Class(StyleClassLobbyTopButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonCrtHover),
+
+                Element<Button>().Class(StyleClassLobbyTopButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonCrtPressed),
+
+                Element<Button>().Class(StyleClassLobbyTopButton).Class(StyleClassLobbyThemeClean)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonClean),
+
+                Element<Button>().Class(StyleClassLobbyTopButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonCleanHover),
+
+                Element<Button>().Class(StyleClassLobbyTopButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonCleanPressed),
+
+                Element<Button>().Class(StyleClassLobbyTopButton)
+                    .Prop(nameof(Control.Margin), new Thickness(4, 0, 4, 0)),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyTopButton, StyleClassLobbyThemeCrt}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, notoSans12),
+                        new StyleProperty(Label.StylePropertyFontColor, LobbyCrtText)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyTopButton, StyleClassLobbyThemeClean}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, notoSans12),
+                        new StyleProperty(Label.StylePropertyFontColor, LobbyCleanText)
+                    }),
+
+                Element<Button>().Class(StyleClassLobbyChatSelectorButton).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonCrt),
+
+                Element<Button>().Class(StyleClassLobbyChatSelectorButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonCrtHover),
+
+                Element<Button>().Class(StyleClassLobbyChatSelectorButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonCrtPressed),
+
+                Element<Button>().Class(StyleClassLobbyChatSelectorButton).Class(StyleClassLobbyThemeClean)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonClean),
+
+                Element<Button>().Class(StyleClassLobbyChatSelectorButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonCleanHover),
+
+                Element<Button>().Class(StyleClassLobbyChatSelectorButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonCleanPressed),
+
+                Element<Button>().Class(StyleClassLobbyChatFilterButton).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonCrt),
+
+                Element<Button>().Class(StyleClassLobbyChatFilterButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonCrtHover),
+
+                Element<Button>().Class(StyleClassLobbyChatFilterButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonCrtPressed),
+
+                Element<Button>().Class(StyleClassLobbyChatFilterButton).Class(StyleClassLobbyThemeClean)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonClean),
+
+                Element<Button>().Class(StyleClassLobbyChatFilterButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonCleanHover),
+
+                Element<Button>().Class(StyleClassLobbyChatFilterButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, lobbyButtonCleanPressed),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyChatSelectorButton, StyleClassLobbyThemeCrt}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, notoSans12),
+                        new StyleProperty(Label.StylePropertyFontColor, LobbyCrtText)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyChatSelectorButton, StyleClassLobbyThemeClean}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, notoSans12),
+                        new StyleProperty(Label.StylePropertyFontColor, LobbyCleanText)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyChatFilterButton, StyleClassLobbyThemeCrt}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, notoSans12),
+                        new StyleProperty(Label.StylePropertyFontColor, LobbyCrtText)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyChatFilterButton, StyleClassLobbyThemeClean}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, notoSans12),
+                        new StyleProperty(Label.StylePropertyFontColor, LobbyCleanText)
+                    }),
+
+                Element<LineEdit>().Class(StyleClassLobbyChatLineEdit).Class(StyleClassLobbyThemeCrt)
+                    .Prop("font-color", LobbyCrtText)
+                    .Prop(LineEdit.StylePropertyCursorColor, LobbyCrtAccent)
+                    .Prop(LineEdit.StylePropertySelectionColor, LobbyCrtAccent.WithAlpha(0.35f)),
+
+                Element<LineEdit>().Class(StyleClassLobbyChatLineEdit).Class(StyleClassLobbyThemeClean)
+                    .Prop("font-color", LobbyCleanText)
+                    .Prop(LineEdit.StylePropertyCursorColor, LobbyCleanAccent)
+                    .Prop(LineEdit.StylePropertySelectionColor, LobbyCleanAccent.WithAlpha(0.35f)),
+
+                Element<LineEdit>().Class(StyleClassLobbyChatLineEdit).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(LineEdit.StylePseudoClassPlaceholder)
+                    .Prop("font-color", LobbyCrtMutedText),
+
+                Element<LineEdit>().Class(StyleClassLobbyChatLineEdit).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(LineEdit.StylePseudoClassPlaceholder)
+                    .Prop("font-color", LobbyCleanMutedText),
 
                 // Chat lineedit - we don't actually draw a stylebox around the lineedit itself, we put it around the
                 // input + other buttons, so we must clear the default stylebox
