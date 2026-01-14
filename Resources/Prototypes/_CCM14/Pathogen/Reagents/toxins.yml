@@ -1,0 +1,22 @@
+- type: reagent
+  parent: CMReagent
+  id: CCMPathogen
+  name: ccm-reagent-name-pathogen
+  group: Toxins
+  desc: ccm-reagent-desc-pathogen
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: bitter
+  color: "#000000"
+  metabolisms:
+    Poison:
+      metabolismRate: 0.1
+      effects:
+      - !type:PathogenInfection
+        conditions:
+          - !type:ReagentThreshold
+            min: 5
+            max: 25
+      - !type:BirthBloodburster
+        conditions:
+          - !type:ReagentThreshold
+            min: 25
