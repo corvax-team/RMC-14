@@ -15,3 +15,4 @@ ui-lobby-join-hive-button = Присоединиться к Улью
 ui-lobby-not-ready-button = Не готов
 ui-lobby-round-start-timer = Начало раунда через { $time }
 ui-lobby-round-start-paused = Отчет был приостановлен
+ui-lobby-welcome = Добро пожаловать,

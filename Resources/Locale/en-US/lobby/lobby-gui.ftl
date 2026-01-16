@@ -1,4 +1,5 @@
 ui-lobby-title = Lobby: {$serverName}
+ui-lobby-welcome = Welcome,
 ui-lobby-ahelp-button = AHelp
 ui-lobby-options-button = Options
 ui-lobby-leave-button = Leave

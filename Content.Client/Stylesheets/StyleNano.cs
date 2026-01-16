@@ -142,7 +142,7 @@ namespace Content.Client.Stylesheets
         public static readonly Color ButtonColorGoodHovered = Color.FromHex("#31843E");
         public static readonly Color ButtonColorGoodDisabled = Color.FromHex("#164420");
 
-        public static readonly Color LobbyCrtAccent = Color.FromHex("#00EA4C");
+        public static readonly Color LobbyCrtAccent = Color.FromHex("#2EF241");
         public static readonly Color LobbyCrtText = Color.FromHex("#0AE14A");
         public static readonly Color LobbyCrtMutedText = Color.FromHex("#A0C7B1");
         public static readonly Color LobbyCleanAccent = Color.FromHex("#5F6D7C");
@@ -1394,22 +1394,22 @@ namespace Content.Client.Stylesheets
                     new SelectorElement(typeof(Label), null, null, null)),
                     new[]
                     {
-                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Left),
-                        new StyleProperty(nameof(Control.Margin), new Thickness(8, 0, 0, 0)),
-                        new StyleProperty(Label.StylePropertyFont, notoSansBold14),
-                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#000000"))
-                    }),
+                          new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Left),
+                            new StyleProperty(nameof(Control.Margin), new Thickness(40, 0, 0, 0)),
+                          new StyleProperty(Label.StylePropertyFont, notoSansBold14),
+                          new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#000000"))
+                      }),
 
                 new StyleRule(new SelectorChild(
                     new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassLobbyThemeClean}, null, null),
                     new SelectorElement(typeof(Label), null, null, null)),
                     new[]
                     {
-                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Left),
-                        new StyleProperty(nameof(Control.Margin), new Thickness(8, 0, 0, 0)),
-                        new StyleProperty(Label.StylePropertyFont, notoSansBold14),
-                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#000000"))
-                    }),
+                          new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Left),
+                            new StyleProperty(nameof(Control.Margin), new Thickness(40, 0, 0, 0)),
+                          new StyleProperty(Label.StylePropertyFont, notoSansBold14),
+                          new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#000000"))
+                      }),
 
                 new StyleRule(new SelectorChild(
                     new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassLobbyThemeCrt}, null, new[] {ContainerButton.StylePseudoClassHover}),
@@ -1435,12 +1435,54 @@ namespace Content.Client.Stylesheets
                         new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#000000"))
                     }),
 
+                  new StyleRule(new SelectorChild(
+                      new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassLobbyThemeClean}, null, new[] {ContainerButton.StylePseudoClassDisabled}),
+                      new SelectorElement(typeof(Label), null, null, null)),
+                      new[]
+                      {
+                          new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#000000"))
+                      }),
                 new StyleRule(new SelectorChild(
-                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassLobbyThemeClean}, null, new[] {ContainerButton.StylePseudoClassDisabled}),
-                    new SelectorElement(typeof(Label), null, null, null)),
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassLobbyThemeCrt}, null, null),
+                    new SelectorElement(typeof(TextureRect), null, null, null)),
                     new[]
                     {
-                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#000000"))
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#000000"))
+                    }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassLobbyThemeClean}, null, null),
+                    new SelectorElement(typeof(TextureRect), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#000000"))
+                    }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassLobbyThemeCrt}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                    new SelectorElement(typeof(TextureRect), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, LobbyCrtAccent)
+                    }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassLobbyThemeClean}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                    new SelectorElement(typeof(TextureRect), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, LobbyCrtAccent)
+                    }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassLobbyThemeCrt}, null, new[] {ContainerButton.StylePseudoClassDisabled}),
+                    new SelectorElement(typeof(TextureRect), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#000000"))
+                    }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassLobbyThemeClean}, null, new[] {ContainerButton.StylePseudoClassDisabled}),
+                    new SelectorElement(typeof(TextureRect), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#000000"))
                     }),
 
                 Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton).Class(StyleClassLobbyThemeCrt)
@@ -1489,21 +1531,21 @@ namespace Content.Client.Stylesheets
                     .Pseudo(ContainerButton.StylePseudoClassDisabled)
                     .Prop(Control.StylePropertyModulateSelf, Color.White),
 
-                new StyleRule(new SelectorChild(
-                    new SelectorElement(typeof(ContainerButton), new[] {StyleClassLobbyMenuIconButton}, null, null),
-                    new SelectorElement(typeof(TextureRect), null, null, null)),
-                    new[]
-                    {
-                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#000000"))
-                    }),
+                  new StyleRule(new SelectorChild(
+                      new SelectorElement(typeof(ContainerButton), new[] {StyleClassLobbyMenuIconButton}, null, null),
+                      new SelectorElement(typeof(TextureRect), null, null, null)),
+                      new[]
+                      {
+                          new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#000000"))
+                      }),
 
-                new StyleRule(new SelectorChild(
-                    new SelectorElement(typeof(ContainerButton), new[] {StyleClassLobbyMenuIconButton}, null, new[] {ContainerButton.StylePseudoClassHover}),
-                    new SelectorElement(typeof(TextureRect), null, null, null)),
-                    new[]
-                    {
-                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#00EB4C"))
-                    }),
+                  new StyleRule(new SelectorChild(
+                      new SelectorElement(typeof(ContainerButton), new[] {StyleClassLobbyMenuIconButton}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                      new SelectorElement(typeof(TextureRect), null, null, null)),
+                      new[]
+                      {
+                          new StyleProperty(Control.StylePropertyModulateSelf, LobbyCrtAccent)
+                      }),
 
                 Element<Button>().Class(StyleClassLobbyTopButton).Class(StyleClassLobbyThemeCrt)
                     .Prop(Button.StylePropertyStyleBox, lobbyButtonCrt),

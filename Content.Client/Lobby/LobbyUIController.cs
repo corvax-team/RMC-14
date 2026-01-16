@@ -6,6 +6,7 @@ using Content.Client.Inventory;
 using Content.Client.Lobby.UI;
 using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Station;
+using Content.Client.Stylesheets;
 using Content.Shared._RMC14.Armor;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
@@ -22,6 +23,7 @@ using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
 using Robust.Client.State;
 using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Shared.Configuration;
 using Robust.Shared.Localization;
@@ -306,10 +308,25 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
             return;
 
         var profile = _preferencesManager.Preferences?.SelectedCharacter as HumanoidCharacterProfile;
-        lobby.Lobby.WelcomeCharacterName.Text = string.IsNullOrWhiteSpace(profile?.Name)
+        var characterName = string.IsNullOrWhiteSpace(profile?.Name)
             ? Loc.GetString("identity-unknown-name")
             : profile.Name;
+        lobby.Lobby.WelcomeCharacterName.Text = characterName;
+        UpdateLobbyNameFont(lobby.Lobby.WelcomeCharacterName, characterName);
         lobby.Lobby.WelcomeXenoName.Text = BuildLobbyXenoName(profile);
+    }
+
+    private void UpdateLobbyNameFont(Label label, string? name)
+    {
+        var length = name?.Length ?? 0;
+        var size = length switch
+        {
+            <= 12 => 15,
+            <= 21 => 14,
+            _ => 13
+        };
+
+        label.FontOverride = _resourceCache.NotoStack(variation: "Bold", size: size);
     }
 
     private string BuildLobbyXenoName(HumanoidCharacterProfile? profile)
