@@ -1,5 +1,11 @@
 ui-lobby-title = Lobby: {$serverName}
 ui-lobby-welcome = Welcome,
+ui-lobby-menu-toggle = Menu
+ui-lobby-planetary-map-label = Current planetary map:
+ui-lobby-music-header = In the lobby now playing:
+ui-lobby-music-line = {$title} — {$author}
+ui-lobby-music-none = No music playing
+ui-lobby-music-unknown = Unknown author
 ui-lobby-ahelp-button = AHelp
 ui-lobby-options-button = Options
 ui-lobby-leave-button = Leave

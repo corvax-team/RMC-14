@@ -1,3 +1,4 @@
+using Content.Client.Audio;
 using Content.Client.GameTicking.Managers;
 using Content.Client.Lobby.UI;
 using Content.Client.UserInterface.Systems.Chat;
@@ -10,11 +11,26 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
+using System;
+using System.Collections.Generic;
 
 namespace Content.Client.Lobby
 {
     public sealed class LobbyState : State
     {
+        private readonly record struct LobbyTrackInfo(string Title, string Author);
+
+        private static readonly Dictionary<string, LobbyTrackInfo> LobbyTrackInfoMap = new()
+        {
+            ["/audio/_rmc14/lobby/super_nova_in_the_catacombs.ogg"] = new("Super Nova In The Catacombs", "WigWoo1"),
+            ["/audio/_rmc14/lobby/shadowinthesilvernebula.ogg"] = new("Shadow in the Silver Nebula", "Mendax"),
+            ["/audio/_rmc14/lobby/the_fallen_queen.ogg"] = new("The Fallen Queen", "Bolgarich"),
+            ["/audio/_rmc14/lobby/enemy_is_unknown.ogg"] = new("Enemy Is Unknown", "Nighty"),
+            ["/audio/_rmc14/lobby/dire_situation.ogg"] = new("Dire Situation", "GoodShowOldChap"),
+            ["/audio/_rmc14/lobby/time_is_running_out.ogg"] = new("Time Is Running Out", "Nighty"),
+            ["/audio/_rmc14/lobby/dropzone.ogg"] = new("Dropzone", "Qwesta"),
+        };
+
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
         [Dependency] private readonly IResourceCache _resourceCache = default!;
@@ -23,6 +39,7 @@ namespace Content.Client.Lobby
         [Dependency] private readonly IVoteManager _voteManager = default!;
 
         private ClientGameTicker _gameTicker = default!;
+        private ContentAudioSystem _audioSystem = default!;
 
         protected override Type? LinkedScreenType { get; } = typeof(LobbyGui);
         public LobbyGui? Lobby;
@@ -38,6 +55,7 @@ namespace Content.Client.Lobby
 
             var chatController = _userInterfaceManager.GetUIController<ChatUIController>();
             _gameTicker = _entityManager.System<ClientGameTicker>();
+            _audioSystem = _entityManager.System<ContentAudioSystem>();
 
             chatController.SetMainChat(true);
 
@@ -51,6 +69,9 @@ namespace Content.Client.Lobby
 
             _gameTicker.InfoBlobUpdated += UpdateLobbyUi;
             _gameTicker.LobbyStatusUpdated += LobbyStatusUpdated;
+
+            _audioSystem.LobbySoundtrackChanged += UpdateLobbySoundtrackInfo;
+            UpdateLobbySoundtrackInfo(new LobbySoundtrackChangedEvent(null));
         }
 
         protected override void Shutdown()
@@ -59,6 +80,7 @@ namespace Content.Client.Lobby
             chatController.SetMainChat(false);
             _gameTicker.InfoBlobUpdated -= UpdateLobbyUi;
             _gameTicker.LobbyStatusUpdated -= LobbyStatusUpdated;
+            _audioSystem.LobbySoundtrackChanged -= UpdateLobbySoundtrackInfo;
 
             _voteManager.ClearPopupContainer();
 
@@ -122,6 +144,54 @@ namespace Content.Client.Lobby
 
             Lobby!.SetReadyState(_gameTicker.AreWeReady);
             Lobby!.SetRoundState(_gameTicker.IsGameStarted);
+        }
+
+        private void UpdateLobbySoundtrackInfo(LobbySoundtrackChangedEvent ev)
+        {
+            if (Lobby == null)
+                return;
+
+            if (ev.SoundtrackFilename == null)
+            {
+                Lobby.LobbyMusicText.Text = Loc.GetString("ui-lobby-music-none");
+                return;
+            }
+
+            if (!TryGetLobbyTrackInfo(ev.SoundtrackFilename, out var track))
+            {
+                var title = GetTrackTitleFromFilename(ev.SoundtrackFilename);
+                var author = Loc.GetString("ui-lobby-music-unknown");
+                Lobby.LobbyMusicText.Text = FormatLobbyMusicLine(title, author);
+                return;
+            }
+
+            Lobby.LobbyMusicText.Text = FormatLobbyMusicLine(track.Title, track.Author);
+        }
+
+        private static bool TryGetLobbyTrackInfo(string filename, out LobbyTrackInfo info)
+        {
+            return LobbyTrackInfoMap.TryGetValue(filename.ToLowerInvariant(), out info);
+        }
+
+        private static string GetTrackTitleFromFilename(string filename)
+        {
+            var start = filename.LastIndexOf('/') + 1;
+            if (start < 0)
+                start = 0;
+            var end = filename.LastIndexOf('.');
+            if (end <= start)
+                end = filename.Length;
+            var name = filename.Substring(start, end - start);
+            return name.Replace('_', ' ');
+        }
+
+        private static string FormatLobbyMusicLine(string title, string author)
+        {
+            var line = Loc.GetString("ui-lobby-music-line", ("title", title), ("author", author));
+            if (line.Length <= 36 && title.Length <= 24 && author.Length <= 20)
+                return line;
+
+            return $"{title}{Environment.NewLine}— {author}";
         }
 
         private void UpdateLobbyBackground()

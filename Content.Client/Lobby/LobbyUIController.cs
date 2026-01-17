@@ -321,9 +321,9 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         var length = name?.Length ?? 0;
         var size = length switch
         {
-            <= 12 => 15,
-            <= 21 => 14,
-            _ => 13
+            <= 12 => 18,
+            <= 21 => 15,
+            _ => 14
         };
 
         label.FontOverride = _resourceCache.NotoStack(variation: "Bold", size: size);

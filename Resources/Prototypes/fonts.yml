@@ -1,38 +1,38 @@
 - type: font
   id: Default
-  path: /Fonts/NotoSans/NotoSans-Regular.ttf
+  path: /Fonts/Bedstead/bedstead.otf
 
 - type: font
   id: DefaultItalic
-  path: /Fonts/NotoSans/NotoSans-Italic.ttf
+  path: /Fonts/Bedstead/bedstead.otf
 
 - type: font
   id: DefaultBold
-  path: /Fonts/NotoSans/NotoSans-Bold.ttf
+  path: /Fonts/Bedstead/bedstead.otf
 
 - type: font
   id: DefaultBoldItalic
-  path: /Fonts/NotoSans/NotoSans-BoldItalic.ttf
+  path: /Fonts/Bedstead/bedstead.otf
 
 - type: font
   id: NotoSansDisplay
-  path: /Fonts/NotoSansDisplay/NotoSansDisplay-Regular.ttf
+  path: /Fonts/Bedstead/bedstead.otf
 
 - type: font
   id: NotoSansDisplayItalic
-  path: /Fonts/NotoSansDisplay/NotoSansDisplay-Italic.ttf
+  path: /Fonts/Bedstead/bedstead.otf
 
 - type: font
   id: NotoSansDisplayBold
-  path: /Fonts/NotoSansDisplay/NotoSansDisplay-Bold.ttf
+  path: /Fonts/Bedstead/bedstead.otf
 
 - type: font
   id: NotoSansDisplayBoldItalic
-  path: /Fonts/NotoSansDisplay/NotoSansDisplay-BoldItalic.ttf
+  path: /Fonts/Bedstead/bedstead.otf
 
 - type: font
   id: BoxRound
-  path: /Fonts/Boxfont-round/Boxfont Round.ttf
+  path: /Fonts/Bedstead/bedstead.otf
 
 - type: font
   id: AnimalSilence
@@ -40,8 +40,9 @@
 
 - type: font
   id: Monospace
-  path: /EngineFonts/NotoSans/NotoSansMono-Regular.ttf
+  path: /Fonts/Bedstead/bedstead.otf
 
 - type: font
   id: Emoji
-  path: /Fonts/NotoEmoji.ttf
+  path: /Fonts/Bedstead/bedstead.otf
+

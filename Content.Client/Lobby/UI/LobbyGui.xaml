@@ -22,11 +22,13 @@
                                         MinWidth="416" MaxWidth="576">
                             <BoxContainer Orientation="Vertical" SeparationOverride="10" Margin="12 12 12 12">
                                 <BoxContainer Orientation="Horizontal" SeparationOverride="10">
-                                    <TextureRect Name="CenterEmblem" MinSize="96 96"
-                                                 VerticalAlignment="Center"
-                                                 Stretch="KeepAspectCentered"
-                                                 StyleClasses="LobbyEmblem"
-                                                 TexturePath="/Textures/_CCM14/Logo/logocm.png" />
+                                    <ContainerButton Name="EmblemButton" VerticalAlignment="Center">
+                                        <TextureRect Name="CenterEmblem" MinSize="96 96"
+                                                     VerticalAlignment="Center"
+                                                     Stretch="KeepAspectCentered"
+                                                     StyleClasses="LobbyEmblem"
+                                                     TexturePath="/Textures/_CCM14/Logo/logocm.png" />
+                                    </ContainerButton>
                                     <BoxContainer Orientation="Vertical" SeparationOverride="2" VerticalAlignment="Center"
                                                   HorizontalAlignment="Center" Margin="20 0 0 0">
                                         <Label Name="WelcomeLine1" Text="{Loc 'ui-lobby-welcome'}" StyleClasses="LobbyWelcomeLine1" />
@@ -121,6 +123,21 @@
                     <BoxContainer Orientation="Vertical" SeparationOverride="4" Name="VoteContainer"
                                   Access="Public" HorizontalAlignment="Left"
                                   VerticalAlignment="Top" Margin="0 8" />
+                    <Button Name="LeftMenuToggleButton" Visible="False"
+                            Text="{Loc 'ui-lobby-menu-toggle'}" MinHeight="32"
+                            HorizontalAlignment="Left" VerticalAlignment="Top"
+                            Margin="8 8 0 0"
+                            StyleClasses="LobbyTopButton" />
+                    <PanelContainer Name="LobbyMusicPanel" StyleClasses="LobbyMusicPanel"
+                                    MinHeight="64" MaxWidth="408">
+                        <BoxContainer Name="LobbyMusicInfo" Orientation="Vertical"
+                                      SeparationOverride="4" Margin="6 6 6 6">
+                            <Label Name="LobbyMusicHeader" Text="{Loc 'ui-lobby-music-header'}"
+                                   StyleClasses="LobbyMusicHeader" />
+                            <Label Name="LobbyMusicText" Access="Public"
+                                   StyleClasses="LobbyInfoLine" />
+                        </BoxContainer>
+                    </PanelContainer>
                 </LayoutContainer>
             </Control>
             <!-- Character setup state -->
@@ -130,8 +147,14 @@
         <!-- Right column -->
         <PanelContainer Name="RightSide" Access="Public" HorizontalAlignment="Right"
                         VerticalExpand="True" HorizontalExpand="True"
-                        MinWidth="380" SizeFlagsStretchRatio="0.9"
+                        MinWidth="400" SizeFlagsStretchRatio="0.95"
                         StyleClasses="LobbyChatPanel">
+            <TextureRect Name="RightSideBackground"
+                         TexturePath="/Textures/_CCM14/Lobby/rightside_chat_bg.png"
+                         Stretch="Scale"
+                         MouseFilter="Ignore"
+                         HorizontalExpand="True"
+                         VerticalExpand="True" />
             <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" SeparationOverride="6"
                           Margin="8 8 8 8">
                 <BoxContainer Orientation="Horizontal" MinSize="0 32" Name="TopButtonBar"

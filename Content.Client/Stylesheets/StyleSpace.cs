@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Client.Resources;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
@@ -30,9 +30,9 @@ namespace Content.Client.Stylesheets
             (
                 new []
                 {
-                    "/Fonts/NotoSans/NotoSans-Regular.ttf",
-                    "/Fonts/NotoSans/NotoSansSymbols-Regular.ttf",
-                    "/Fonts/NotoSans/NotoSansSymbols2-Regular.ttf"
+                    "/Fonts/Bedstead/bedstead.otf",
+                    "/Fonts/Bedstead/bedstead.otf",
+                    "/Fonts/Bedstead/bedstead.otf"
                 },
                 10
             );
@@ -40,9 +40,9 @@ namespace Content.Client.Stylesheets
             (
                 new []
                 {
-                    "/Fonts/NotoSans/NotoSans-Bold.ttf",
-                    "/Fonts/NotoSans/NotoSansSymbols-Regular.ttf",
-                    "/Fonts/NotoSans/NotoSansSymbols2-Regular.ttf"
+                    "/Fonts/Bedstead/bedstead.otf",
+                    "/Fonts/Bedstead/bedstead.otf",
+                    "/Fonts/Bedstead/bedstead.otf"
                 },
                 16
             );
@@ -199,3 +199,4 @@ namespace Content.Client.Stylesheets
         }
     }
 }
+

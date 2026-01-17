@@ -26,9 +26,9 @@ public sealed class PopupUIController : UIController, IOnStateEntered<GameplaySt
         base.Initialize();
         var cache = IoCManager.Resolve<IResourceCache>();
 
-        _smallFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Italic.ttf"), 10);
-        _mediumFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Italic.ttf"), 12);
-        _largeFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-BoldItalic.ttf"), 14);
+        _smallFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/Bedstead/bedstead.otf"), 10);
+        _mediumFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/Bedstead/bedstead.otf"), 12);
+        _largeFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/Bedstead/bedstead.otf"), 14);
     }
 
     public void OnStateEntered(GameplayState state)
@@ -123,3 +123,4 @@ public sealed class PopupUIController : UIController, IOnStateEntered<GameplaySt
         }
     }
 }
+
