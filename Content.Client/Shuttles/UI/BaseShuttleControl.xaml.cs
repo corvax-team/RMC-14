@@ -48,7 +48,7 @@ public partial class BaseShuttleControl : MapGridControl
     {
         RobustXamlLoader.Load(this);
         Maps = EntManager.System<SharedMapSystem>();
-        Font = new VectorFont(IoCManager.Resolve<IResourceCache>().GetResource<FontResource>("/Fonts/Bedstead/bedstead.otf"), 12);
+        Font = new VectorFont(IoCManager.Resolve<IResourceCache>().GetResource<FontResource>("/Fonts/Exo2/Exo2-Regular.ttf"), 12);
 
         _drawJob = new GridDrawJob()
         {
@@ -311,4 +311,5 @@ public sealed class GridDrawData
 
     public GameTick LastBuild;
 }
+
 

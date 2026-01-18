@@ -26,19 +26,12 @@ public sealed class RoadmapUIController : UIController, IOnStateEntered<LobbySta
 
     public void OnStateEntered(LobbyState state)
     {
-        if (_shown || _window != null)
-            return;
-
-        if (_infoUIController.RulesPopup != null)
-            return;
-
-        ToggleRoadmap();
+        // Do not auto-open roadmap on state entry.
     }
 
     private void OnAccepted()
     {
-        if (!_shown)
-            ToggleRoadmap();
+        // Do not auto-open roadmap after accepting rules.
     }
 
     public void ToggleRoadmap()

@@ -39,11 +39,26 @@ public sealed partial class MiscTab : Control
             layoutEntries.Add(new OptionDropDownCVar<string>.ValueOption(layout.ToString()!, Loc.GetString($"ui-options-hud-layout-{layout.ToString()!.ToLower()}")));
         }
 
+        var colorThemeEntries = new List<OptionDropDownCVar<string>.ValueOption>
+        {
+            new("green", Loc.GetString("ui-options-ui-color-theme-green")),
+            new("blue", Loc.GetString("ui-options-ui-color-theme-blue")),
+        };
+
+        var lobbyBackgroundPresetEntries = new List<OptionDropDownCVar<string>.ValueOption>
+        {
+            new("console", Loc.GetString("ui-options-lobby-background-preset-console")),
+            new("community", Loc.GetString("ui-options-lobby-background-preset-community")),
+            new("rmca", Loc.GetString("ui-options-lobby-background-preset-rmca")),
+        };
+
         // Channel can be null in replays so.
         // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
         ShowOocPatronColor.Visible = _linkAccount.Tier != null;
 
         Control.AddOptionDropDown(CVars.InterfaceTheme, DropDownHudTheme, themeEntries);
+        Control.AddOptionDropDown(RMCCVars.RMCUIColorTheme, DropDownUiColorTheme, colorThemeEntries);
+        Control.AddOptionDropDown(RMCCVars.RMCLobbyBackgroundPreset, DropDownLobbyBackgroundPreset, lobbyBackgroundPresetEntries);
         Control.AddOptionDropDown(CCVars.UILayout, DropDownHudLayout, layoutEntries);
 
         Control.AddOptionCheckBox(CVars.DiscordEnabled, DiscordRich);

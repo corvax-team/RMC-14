@@ -95,7 +95,7 @@ public partial class MapGridControl : LayoutContainer
         ActualRadarRange = range;
 
         var cache = IoCManager.Resolve<IResourceCache>();
-        _largerFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/Bedstead/bedstead.otf"), 16);
+        _largerFont = new VectorFont(cache.GetResource<FontResource>("/Fonts/Exo2/Exo2-Regular.ttf"), 16);
     }
 
     public void ForceRecenter()
@@ -241,4 +241,5 @@ public partial class MapGridControl : LayoutContainer
         }
     }
 }
+
 

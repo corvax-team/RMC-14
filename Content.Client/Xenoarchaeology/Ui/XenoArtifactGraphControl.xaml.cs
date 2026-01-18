@@ -44,7 +44,7 @@ public sealed partial class XenoArtifactGraphControl : BoxContainer
         _artifactSystem = _entityManager.System<XenoArtifactSystem>();
 
         var fontResource = IoCManager.Resolve<IResourceCache>()
-                                     .GetResource<FontResource>("/Fonts/Bedstead/bedstead.otf");
+                                     .GetResource<FontResource>("/Fonts/Exo2/Exo2-Regular.ttf");
         _font = new VectorFont(fontResource, 16);
     }
 
@@ -205,5 +205,6 @@ public sealed partial class XenoArtifactGraphControl : BoxContainer
         return (NodeDiameter * num) + MinXSpacing * (num - 1);
     }
 }
+
 
 

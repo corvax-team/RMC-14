@@ -13,7 +13,7 @@
                 <LayoutContainer Name="BackgroundViewportArea" HorizontalExpand="True" VerticalExpand="True"
                                  RectClipContent="True">
                     <TextureRect Access="Public" VerticalExpand="True" HorizontalExpand="True" Name="Background"
-                                 Stretch="KeepAspectCovered" CanShrink="True" />
+                                 Stretch="KeepAspectCentered" CanShrink="True" />
                     <PanelContainer Name="CenterMenuGlow" StyleClasses="LobbyCenterGlow"
                                     HorizontalAlignment="Center" VerticalAlignment="Center"
                                     MinWidth="416" MaxWidth="576">

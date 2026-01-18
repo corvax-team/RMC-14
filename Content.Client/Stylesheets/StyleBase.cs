@@ -19,6 +19,7 @@ namespace Content.Client.Stylesheets
         public const string StyleClassItalic = "Italic";
 
         public const string ClassAngleRect = "AngleRect";
+        public const string StyleClassVoteButton = "VoteButton";
 
         public const string ButtonOpenRight = "OpenRight";
         public const string ButtonOpenLeft = "OpenLeft";
@@ -48,9 +49,9 @@ namespace Content.Client.Stylesheets
             (
                 new []
                 {
-                    "/Fonts/Bedstead/bedstead.otf",
-                    "/Fonts/Bedstead/bedstead.otf",
-                    "/Fonts/Bedstead/bedstead.otf"
+                    "/Fonts/Exo2/Exo2-Regular.ttf",
+                    "/Fonts/Exo2/Exo2-Regular.ttf",
+                    "/Fonts/Exo2/Exo2-Regular.ttf"
                 },
                 12
             );
@@ -58,9 +59,9 @@ namespace Content.Client.Stylesheets
             (
                 new []
                 {
-                    "/Fonts/Bedstead/bedstead.otf",
-                    "/Fonts/Bedstead/bedstead.otf",
-                    "/Fonts/Bedstead/bedstead.otf"
+                    "/Fonts/Exo2/Exo2-Regular.ttf",
+                    "/Fonts/Exo2/Exo2-Regular.ttf",
+                    "/Fonts/Exo2/Exo2-Regular.ttf"
                 },
                 12
             );
@@ -247,4 +248,5 @@ namespace Content.Client.Stylesheets
         }
     }
 }
+
 

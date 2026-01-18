@@ -1,38 +1,38 @@
 - type: font
   id: Default
-  path: /Fonts/Bedstead/bedstead.otf
+  path: /Fonts/Exo2/Exo2-Regular.ttf
 
 - type: font
   id: DefaultItalic
-  path: /Fonts/Bedstead/bedstead.otf
+  path: /Fonts/Exo2/Exo2-Italic.ttf
 
 - type: font
   id: DefaultBold
-  path: /Fonts/Bedstead/bedstead.otf
+  path: /Fonts/Exo2/Exo2-Bold.ttf
 
 - type: font
   id: DefaultBoldItalic
-  path: /Fonts/Bedstead/bedstead.otf
+  path: /Fonts/Exo2/Exo2-BoldItalic.ttf
 
 - type: font
   id: NotoSansDisplay
-  path: /Fonts/Bedstead/bedstead.otf
+  path: /Fonts/Exo2/Exo2-Regular.ttf
 
 - type: font
   id: NotoSansDisplayItalic
-  path: /Fonts/Bedstead/bedstead.otf
+  path: /Fonts/Exo2/Exo2-Italic.ttf
 
 - type: font
   id: NotoSansDisplayBold
-  path: /Fonts/Bedstead/bedstead.otf
+  path: /Fonts/Exo2/Exo2-Bold.ttf
 
 - type: font
   id: NotoSansDisplayBoldItalic
-  path: /Fonts/Bedstead/bedstead.otf
+  path: /Fonts/Exo2/Exo2-BoldItalic.ttf
 
 - type: font
   id: BoxRound
-  path: /Fonts/Bedstead/bedstead.otf
+  path: /Fonts/Exo2/Exo2-Regular.ttf
 
 - type: font
   id: AnimalSilence
@@ -40,9 +40,10 @@
 
 - type: font
   id: Monospace
-  path: /Fonts/Bedstead/bedstead.otf
+  path: /Fonts/Exo2/Exo2-Regular.ttf
 
 - type: font
   id: Emoji
-  path: /Fonts/Bedstead/bedstead.otf
+  path: /Fonts/Exo2/Exo2-Regular.ttf
+
 

@@ -92,6 +92,8 @@ namespace Content.Client.Lobby.UI
             UpdateReadyLabel(ReadyButton.Pressed);
             ApplyLobbyTheme(_cfg.GetCVar(RMCCVars.RMCLobbyCrtEnabled));
             _cfg.OnValueChanged(RMCCVars.RMCLobbyCrtEnabled, ApplyLobbyTheme);
+            _cfg.OnValueChanged(RMCCVars.RMCUIColorTheme,
+                _ => ApplyLobbyTheme(_cfg.GetCVar(RMCCVars.RMCLobbyCrtEnabled)));
         }
 
         public void SwitchState(LobbyGuiState state)

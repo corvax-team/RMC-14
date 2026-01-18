@@ -14,6 +14,7 @@ namespace Content.Client.UserInterface.Systems.ScanlineOverlay;
 
 public sealed class ScanlineOverlayUIController : UIController, IOnStateEntered<LobbyState>, IOnStateExited<LobbyState>
 {
+
     private readonly Dictionary<Control, (ScanlineOverlayControl Overlay, Action<Control> ChildAddedHandler)> _overlays = new();
 
     public override void Initialize()
@@ -59,6 +60,7 @@ public sealed class ScanlineOverlayUIController : UIController, IOnStateEntered<
 
     private void AttachOverlay(Control host)
     {
+
         if (_overlays.ContainsKey(host))
             return;
 

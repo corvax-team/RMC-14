@@ -114,7 +114,7 @@ public sealed partial class TacticalMapControl : TextureRect
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-        _font = new VectorFont(_resourceCache.GetResource<FontResource>("/Fonts/Bedstead/bedstead.otf"), 10);
+        _font = new VectorFont(_resourceCache.GetResource<FontResource>("/Fonts/Exo2/Exo2-Regular.ttf"), 10);
 
         _tunnelInfoLabel = new Label
         {
@@ -421,7 +421,7 @@ public sealed partial class TacticalMapControl : TextureRect
             position = position with { Y = position.Y - LabelYOffset * overlayScale };
 
             float fontSize = Math.Max(8f, overlayScale * 10f);
-            VectorFont labelFont = new(_resourceCache.GetResource<FontResource>("/Fonts/Bedstead/bedstead.otf"), (int)fontSize);
+            VectorFont labelFont = new(_resourceCache.GetResource<FontResource>("/Fonts/Exo2/Exo2-Regular.ttf"), (int)fontSize);
 
             float textWidth = label.Length * fontSize * 0.6f;
             float textHeight = fontSize;
@@ -700,7 +700,7 @@ public sealed partial class TacticalMapControl : TextureRect
     private void DrawLabelAtPosition(DrawingHandleScreen handle, string label, Vector2 position, float overlayScale, bool isDragging)
     {
         float fontSize = Math.Max(8f, overlayScale * 10f);
-        VectorFont labelFont = new(_resourceCache.GetResource<FontResource>("/Fonts/Bedstead/bedstead.otf"), (int)fontSize);
+        VectorFont labelFont = new(_resourceCache.GetResource<FontResource>("/Fonts/Exo2/Exo2-Regular.ttf"), (int)fontSize);
 
         Vector2 drawn = handle.DrawString(labelFont, position, label, Color.Transparent);
         position -= drawn / 2;
@@ -1262,4 +1262,5 @@ public sealed partial class TacticalMapControl : TextureRect
         LineThicknesses.Add(LineThickness);
     }
 }
+
 

@@ -30,9 +30,9 @@ namespace Content.Client.Stylesheets
             (
                 new []
                 {
-                    "/Fonts/Bedstead/bedstead.otf",
-                    "/Fonts/Bedstead/bedstead.otf",
-                    "/Fonts/Bedstead/bedstead.otf"
+                    "/Fonts/Exo2/Exo2-Regular.ttf",
+                    "/Fonts/Exo2/Exo2-Regular.ttf",
+                    "/Fonts/Exo2/Exo2-Regular.ttf"
                 },
                 10
             );
@@ -40,12 +40,13 @@ namespace Content.Client.Stylesheets
             (
                 new []
                 {
-                    "/Fonts/Bedstead/bedstead.otf",
-                    "/Fonts/Bedstead/bedstead.otf",
-                    "/Fonts/Bedstead/bedstead.otf"
+                    "/Fonts/Exo2/Exo2-Regular.ttf",
+                    "/Fonts/Exo2/Exo2-Regular.ttf",
+                    "/Fonts/Exo2/Exo2-Regular.ttf"
                 },
                 16
             );
+            var exo2Regular12 = resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 12);
 
             var progressBarBackground = new StyleBoxFlat
             {
@@ -61,13 +62,20 @@ namespace Content.Client.Stylesheets
 
             var textureInvertedTriangle = resCache.GetTexture("/Textures/Interface/Nano/inverted_triangle.svg.png");
 
-            var tabContainerPanel = new StyleBoxTexture();
-            tabContainerPanel.SetPatchMargin(StyleBox.Margin.All, 2);
+            var tabContainerPanel = new StyleBoxFlat
+            {
+                BackgroundColor = StyleNano.PanelDark.WithAlpha(0.95f),
+            };
 
-            var tabContainerBoxActive = new StyleBoxFlat {BackgroundColor = new Color(64, 64, 64)};
+            var tabContainerBoxActive = new StyleBoxFlat {BackgroundColor = StyleNano.PanelDark.WithAlpha(0.98f)};
             tabContainerBoxActive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
-            var tabContainerBoxInactive = new StyleBoxFlat {BackgroundColor = new Color(32, 32, 32)};
+            var tabContainerBoxInactive = new StyleBoxFlat {BackgroundColor = StyleNano.PanelDark.WithAlpha(0.9f)};
             tabContainerBoxInactive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
+
+            var voteButtonBox = new StyleBoxTexture(BaseAngleRect);
+            voteButtonBox.SetPadding(StyleBox.Margin.All, 1);
+            voteButtonBox.SetContentMarginOverride(StyleBox.Margin.Vertical, 2);
+            voteButtonBox.SetContentMarginOverride(StyleBox.Margin.Horizontal, 12);
 
             Stylesheet = new Stylesheet(BaseRules.Concat(new StyleRule[]
             {
@@ -152,8 +160,12 @@ namespace Content.Client.Stylesheets
                     .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center),
 
                 Element<PanelContainer>().Class(ClassAngleRect)
-                    .Prop(PanelContainer.StylePropertyPanel, BaseAngleRect)
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#202030")),
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = StyleNano.PanelDark.WithAlpha(0.95f),
+                        BorderThickness = new Thickness(1),
+                        BorderColor = StyleNano.PanelDark.WithAlpha(1f),
+                    }),
 
                 Child()
                     .Parent(Element<Button>().Class(ContainerButton.StylePseudoClassDisabled))
@@ -180,6 +192,63 @@ namespace Content.Client.Stylesheets
                 Element<OptionButton>().Pseudo(ContainerButton.StylePseudoClassDisabled)
                     .Prop(Control.StylePropertyModulateSelf, ButtonColorDisabled),
 
+                Element<Button>().Class(StyleClassVoteButton)
+                    .Prop(Button.StylePropertyStyleBox, voteButtonBox),
+
+                Element<Button>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassNormal)
+                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonBase.WithAlpha(0.8f)),
+
+                Element<Button>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonBase.WithAlpha(0.85f)),
+
+                Element<Button>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonPressed.WithAlpha(0.85f)),
+
+                Element<Button>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonDisabledCrt.WithAlpha(0.8f)),
+
+                Element<OptionButton>().Class(StyleClassVoteButton)
+                    .Prop(ContainerButton.StylePropertyStyleBox, voteButtonBox),
+
+                Element<OptionButton>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassNormal)
+                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonBase.WithAlpha(0.8f)),
+
+                Element<OptionButton>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonBase.WithAlpha(0.85f)),
+
+                Element<OptionButton>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonPressed.WithAlpha(0.85f)),
+
+                Element<OptionButton>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonDisabledCrt.WithAlpha(0.8f)),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassVoteButton}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, exo2Regular12),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#B3B3B3")),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(OptionButton), new[] {StyleClassVoteButton}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, exo2Regular12),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#B3B3B3")),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(OptionButton), new[] {StyleClassVoteButton}, null, null),
+                    new SelectorElement(typeof(Label), new[] {OptionButton.StyleClassOptionButton}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, exo2Regular12),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#B3B3B3")),
+                    }),
+
                 Element<TextureRect>().Class(OptionButton.StyleClassOptionTriangle)
                     .Prop(TextureRect.StylePropertyTexture, textureInvertedTriangle),
 
@@ -199,4 +268,5 @@ namespace Content.Client.Stylesheets
         }
     }
 }
+
 

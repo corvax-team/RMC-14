@@ -19,7 +19,7 @@ public sealed class RMCIconLabelSystem : SharedRMCIconLabelSystem
 
     public override void Initialize()
     {
-        _font = new VectorFont(_cache.GetResource<FontResource>("/Fonts/Bedstead/bedstead.otf"), 8);
+        _font = new VectorFont(_cache.GetResource<FontResource>("/Fonts/Exo2/Exo2-Regular.ttf"), 8);
 
         Subs.CVar(_config, RMCCVars.RMCDrawStorageIconLabels, v => _drawStorageIconLabels = v, true);
     }
@@ -58,4 +58,5 @@ public sealed class RMCIconLabelSystem : SharedRMCIconLabelSystem
         }
     }
 }
+
 

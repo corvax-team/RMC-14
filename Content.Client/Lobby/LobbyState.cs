@@ -4,15 +4,18 @@ using Content.Client.Lobby.UI;
 using Content.Client.UserInterface.Systems.Chat;
 using Content.Client.TextScreen;
 using Content.Client.Voting;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.CCVar;
 using Robust.Client.ResourceManagement;
 using Robust.Client.State;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Content.Client.Lobby
 {
@@ -37,12 +40,72 @@ namespace Content.Client.Lobby
         [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly IVoteManager _voteManager = default!;
+        [Dependency] private readonly IRobustRandom _random = default!;
 
         private ClientGameTicker _gameTicker = default!;
         private ContentAudioSystem _audioSystem = default!;
 
         protected override Type? LinkedScreenType { get; } = typeof(LobbyGui);
         public LobbyGui? Lobby;
+        private const float LobbyBackgroundRotationSeconds = 30f;
+        private string? _activeLobbyBackgroundPreset;
+        private string? _currentLobbyBackgroundPath;
+        private IReadOnlyList<string>? _presetBackgrounds;
+        private TimeSpan _nextLobbyBackgroundChange = TimeSpan.Zero;
+
+        private static readonly Dictionary<string, string[]> LobbyBackgroundPresets = new()
+        {
+            {
+                "console",
+                new[]
+                {
+                    "/Textures/_CCM14/Lobby/lobbytgmc.png",
+                    "/Textures/_CCM14/Lobby/lobbyweyland.png",
+                }
+            },
+            {
+                "community",
+                new[]
+                {
+                    "/Textures/_CCM14/Lobby/CCM_logo_lobby.png",
+                    "/Textures/_CCM14/Lobby/Letni_CCM.png",
+                    "/Textures/_CCM14/Lobby/CCM_New.png",
+                    "/Textures/_CCM14/Lobby/LobbyArt1.png",
+                    "/Textures/_CCM14/Lobby/LobbyArt3.png",
+                    "/Textures/_CCM14/Lobby/LobbyArt5.png",
+                    "/Textures/_CCM14/Lobby/LobbyArt6.png",
+                    "/Textures/_CCM14/Lobby/LobbyArt8.png",
+                    "/Textures/_CCM14/Lobby/LobbyArt9.png",
+                    "/Textures/_CCM14/Lobby/LobbyArt14.png",
+                }
+            },
+            {
+                "rmca",
+                new[]
+                {
+                    "/Textures/_RMC14/Lobby/good_hits.png",
+                    "/Textures/_RMC14/Lobby/running_from_ravager.png",
+                    "/Textures/_RMC14/Lobby/Judgment_Day.png",
+                    "/Textures/_RMC14/Lobby/WEYALobby.png",
+                    "/Textures/_RMC14/Lobby/APushTooFar.png",
+                    "/Textures/_RMC14/Lobby/LiquorCabinetsLastStand.png",
+                    "/Textures/_RMC14/Lobby/Intelligence.png",
+                    "/Textures/_RMC14/Lobby/Focus_Fire.png",
+                    "/Textures/_RMC14/Lobby/Eyes_Up.png",
+                    "/Textures/_RMC14/Lobby/Cornered.png",
+                    "/Textures/_RMC14/Lobby/Move_Out.png",
+                    "/Textures/_RMC14/Lobby/Lone_Medevac.png",
+                    "/Textures/_RMC14/Lobby/Fly_the_Friendly_Skies.png",
+                    "/Textures/_RMC14/Lobby/Battered.png",
+                    "/Textures/_RMC14/Lobby/MarineMajor.png",
+                    "/Textures/_RMC14/Lobby/smart_gun.png",
+                    "/Textures/_RMC14/Lobby/sisters.png",
+                    "/Textures/_RMC14/Lobby/only_you_shnee.png",
+                    "/Textures/_RMC14/Lobby/from_fobbiton_with_love.png",
+                    "/Textures/_RMC14/Lobby/PyrotechnicianXeno.png",
+                }
+            },
+        };
 
         protected override void Startup()
         {
@@ -66,6 +129,7 @@ namespace Content.Client.Lobby
             Lobby.RightSide.SetWidth = width;
 
             UpdateLobbyUi();
+            _cfg.OnValueChanged(RMCCVars.RMCLobbyBackgroundPreset, _ => UpdateLobbyBackground(true), true);
 
             _gameTicker.InfoBlobUpdated += UpdateLobbyUi;
             _gameTicker.LobbyStatusUpdated += LobbyStatusUpdated;
@@ -96,6 +160,7 @@ namespace Content.Client.Lobby
         public override void FrameUpdate(FrameEventArgs e)
         {
             UpdateRoundCountdown();
+            UpdateLobbyBackgroundRotation();
             if (_gameTicker.IsGameStarted)
             {
                 var roundTime = _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan);
@@ -196,15 +261,94 @@ namespace Content.Client.Lobby
 
         private void UpdateLobbyBackground()
         {
-            if (_gameTicker.LobbyBackground != null)
+            UpdateLobbyBackground(false);
+        }
+
+        private void UpdateLobbyBackground(bool force)
+        {
+            if (Lobby == null)
+                return;
+
+            var preset = _cfg.GetCVar(RMCCVars.RMCLobbyBackgroundPreset);
+            var normalizedPreset = preset.ToLowerInvariant();
+            if (!string.Equals(_activeLobbyBackgroundPreset, normalizedPreset, StringComparison.Ordinal))
             {
-                Lobby!.Background.Texture = _resourceCache.GetResource<TextureResource>(_gameTicker.LobbyBackground );
-            }
-            else
-            {
-                Lobby!.Background.Texture = null;
+                _activeLobbyBackgroundPreset = normalizedPreset;
+                force = true;
             }
 
+            if (TryGetPresetBackgrounds(normalizedPreset, out var backgrounds))
+            {
+                _presetBackgrounds = backgrounds;
+                if (force || _currentLobbyBackgroundPath == null)
+                    SetLobbyBackground(PickRandomPresetBackground());
+                ScheduleNextLobbyBackgroundChange();
+                return;
+            }
+
+            _presetBackgrounds = null;
+            var serverBackground = _gameTicker.LobbyBackground;
+            if (force || !string.Equals(_currentLobbyBackgroundPath, serverBackground, StringComparison.OrdinalIgnoreCase))
+                SetLobbyBackground(serverBackground);
+        }
+
+        private void UpdateLobbyBackgroundRotation()
+        {
+            if (Lobby == null || _presetBackgrounds == null)
+                return;
+
+            if (_gameTiming.CurTime < _nextLobbyBackgroundChange)
+                return;
+
+            SetLobbyBackground(PickRandomPresetBackground());
+            ScheduleNextLobbyBackgroundChange();
+        }
+
+        private void ScheduleNextLobbyBackgroundChange()
+        {
+            _nextLobbyBackgroundChange = _gameTiming.CurTime + TimeSpan.FromSeconds(LobbyBackgroundRotationSeconds);
+        }
+
+        private string? PickRandomPresetBackground()
+        {
+            var backgrounds = _presetBackgrounds;
+            if (backgrounds == null || backgrounds.Count == 0)
+                return null;
+
+            if (backgrounds.Count == 1)
+                return backgrounds[0];
+
+            var current = _currentLobbyBackgroundPath;
+            var candidates = backgrounds.Where(path => !string.Equals(path, current, StringComparison.OrdinalIgnoreCase)).ToArray();
+            return _random.Pick(candidates.Length > 0 ? candidates : backgrounds);
+        }
+
+        private void SetLobbyBackground(string? path)
+        {
+            if (Lobby == null)
+                return;
+
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                Lobby.Background.Texture = null;
+                _currentLobbyBackgroundPath = null;
+                return;
+            }
+
+            Lobby.Background.Texture = _resourceCache.GetResource<TextureResource>(path);
+            _currentLobbyBackgroundPath = path;
+        }
+
+        private static bool TryGetPresetBackgrounds(string preset, out string[] backgrounds)
+        {
+            if (LobbyBackgroundPresets.TryGetValue(preset, out var value))
+            {
+                backgrounds = value;
+                return true;
+            }
+
+            backgrounds = Array.Empty<string>();
+            return false;
         }
 
     }

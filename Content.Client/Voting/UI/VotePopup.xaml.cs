@@ -47,6 +47,7 @@ namespace Content.Client.Voting.UI
                     ToggleMode = true,
                     Group = group
                 };
+                button.AddStyleClass(StyleBase.StyleClassVoteButton);
                 _voteButtons[i] = button;
                 VoteOptionsContainer.AddChild(button);
                 var i1 = i;
