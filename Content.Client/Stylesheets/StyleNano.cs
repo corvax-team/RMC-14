@@ -392,11 +392,18 @@ namespace Content.Client.Stylesheets
                 ExpandMarginBottom = 3,
                 ContentMarginBottomOverride = 0
             };
-            var uiWindowBackgroundTint = PanelDark.WithAlpha(0.95f);
+            var uiWindowBackgroundTint = PanelDark.WithAlpha(0.99f);
             var windowBackground = new StyleBoxFlat
             {
                 BackgroundColor = uiWindowBackgroundTint,
             };
+
+            var optionsWindowBackground = new StyleBoxTexture
+            {
+                Texture = resCache.GetTexture("/Textures/_CCM14/Lobby/rightside_chat_bg.png"),
+                Modulate = Color.White.WithAlpha(0.99f),
+            };
+            optionsWindowBackground.SetPatchMargin(StyleBox.Margin.All, 2);
 
             var borderedWindowBackgroundTex = resCache.GetTexture("/Textures/Interface/Nano/window_background_bordered.png");
             var borderedWindowBackground = new StyleBoxFlat
@@ -1062,6 +1069,19 @@ namespace Content.Client.Stylesheets
                     new[]
                     {
                         new StyleProperty(PanelContainer.StylePropertyPanel, windowBackground),
+                    }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(PanelContainer), new[] {DefaultWindow.StyleClassWindowPanel}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(PanelContainer.StylePropertyPanel, optionsWindowBackground),
+                    }),
+                Element<PanelContainer>().Class("OptionsGeneralBackground")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxTexture
+                    {
+                        Texture = resCache.GetTexture("/Textures/_CCM14/Lobby/rightside_chat_bg.png"),
+                        Modulate = PanelDark.WithAlpha(1f),
                     }),
                 // bordered window background
                 new StyleRule(
@@ -2201,16 +2221,79 @@ namespace Content.Client.Stylesheets
                 // Small Label
                 new StyleRule(new SelectorElement(typeof(Label), new[] {StyleClassLabelSubText}, null, null), new[]
                 {
-                    new StyleProperty(Label.StylePropertyFont, notoSans10),
+                    new StyleProperty(Label.StylePropertyFont, exo2Regular12),
                     new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#3A6B47")),
+                }),
+
+                new StyleRule(new SelectorElement(typeof(Label), new[] {"OptionSettingLabel"}, null, null), new[]
+                {
+                    new StyleProperty(Label.StylePropertyFont, exo2Regular12),
+                    new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#B3B3B3")),
                 }),
 
                 // Label Key
                 new StyleRule(new SelectorElement(typeof(Label), new[] {StyleClassLabelKeyText}, null, null), new[]
                 {
-                    new StyleProperty(Label.StylePropertyFont, notoSansBold12),
+                    new StyleProperty(Label.StylePropertyFont, exo2Regular12),
                     new StyleProperty(Label.StylePropertyFontColor, NanoGold)
                 }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleBase.StyleClassVerticalTabButton}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 14)),
+                        new StyleProperty(Label.StylePropertyFontColor, NanoGold),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, exo2Regular12),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#B3B3B3")),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(RichTextLabel), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, exo2Regular12),
+                        new StyleProperty("font-color", Color.FromHex("#B3B3B3")),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(LineEdit), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty("font", exo2Regular12),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorChild(
+                        new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                        new SelectorElement(typeof(Button), null, null, null)),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, exo2Regular12),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#B3B3B3")),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorChild(
+                        new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                        new SelectorElement(typeof(OptionButton), null, null, null)),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, exo2Regular12),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#B3B3B3")),
+                    }),
 
                 new StyleRule(new SelectorElement(typeof(Label), new[] {StyleClassLabelSecondaryColor}, null, null),
                     new[]
@@ -2751,6 +2834,44 @@ namespace Content.Client.Stylesheets
 
                 Element<PanelContainer>().Class("BackgroundDark")
                     .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(PanelDark.WithAlpha(0.95f))),
+
+                Element<PanelContainer>().Class("VerticalTabListBackground")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = PanelDark.WithAlpha(0.75f),
+                        BorderThickness = new Thickness(2, 0, 0, 0),
+                        BorderColor = LobbyMenuButtonBase.WithAlpha(0.95f),
+                    }),
+
+                Element<PanelContainer>().Class("VerticalTabContentBackground")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(PanelDark.WithAlpha(0.9f))),
+
+                Element<Button>().Class(StyleBase.StyleClassVerticalTabButton)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = PanelDark.WithAlpha(0.9f),
+                        BorderThickness = new Thickness(1),
+                        BorderColor = PanelDark.WithAlpha(1f),
+                    }),
+
+                Element<Button>().Class(StyleBase.StyleClassVerticalTabButton)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = LobbyMenuButtonBase.WithAlpha(0.7f),
+                        BorderThickness = new Thickness(1),
+                        BorderColor = LobbyMenuButtonBase.WithAlpha(0.8f),
+                    }),
+
+                Element<Button>().Class(StyleBase.StyleClassVerticalTabButton)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = LobbyMenuButtonPressed.WithAlpha(0.7f),
+                        BorderThickness = new Thickness(1),
+                        BorderColor = LobbyMenuButtonPressed.WithAlpha(0.9f),
+                    }),
+
 
                 //PDA - Buttons
                 Element<PdaSettingsButton>().Pseudo(ContainerButton.StylePseudoClassNormal)

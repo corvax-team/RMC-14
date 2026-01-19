@@ -17,6 +17,8 @@ namespace Content.Client.Stylesheets
         public const string StyleClassLabelHeading = "LabelHeading";
         public const string StyleClassLabelSubText = "LabelSubText";
         public const string StyleClassItalic = "Italic";
+        public const string StyleClassVerticalTabButton = "VerticalTabButton";
+        public const string StyleClassOptionsMenuRoot = "OptionsMenuRoot";
 
         public const string ClassAngleRect = "AngleRect";
         public const string StyleClassVoteButton = "VoteButton";

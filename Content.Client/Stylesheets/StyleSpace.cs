@@ -167,6 +167,17 @@ namespace Content.Client.Stylesheets
                         BorderColor = StyleNano.PanelDark.WithAlpha(1f),
                     }),
 
+                Element<PanelContainer>().Class("VerticalTabListBackground")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = StyleNano.PanelDark.WithAlpha(0.6f),
+                        BorderThickness = new Thickness(2, 0, 0, 0),
+                        BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.6f),
+                    }),
+
+                Element<PanelContainer>().Class("VerticalTabContentBackground")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(StyleNano.PanelDark.WithAlpha(0.9f))),
+
                 Child()
                     .Parent(Element<Button>().Class(ContainerButton.StylePseudoClassDisabled))
                     .Child(Element<Label>())

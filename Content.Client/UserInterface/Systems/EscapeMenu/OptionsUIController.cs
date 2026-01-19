@@ -30,7 +30,7 @@ public sealed class OptionsUIController : UIController
             return;
         }
 
-        _optionsWindow.Tabs.CurrentTab = tab;
+        _optionsWindow.SelectTabIndex(tab);
     }
 
     private OptionsMenu _optionsWindow = default!;

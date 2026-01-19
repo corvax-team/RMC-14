@@ -360,9 +360,18 @@ namespace Content.Client.Options.UI.Tabs
 
             control.BindButton2.Binding = bind2;
             control.BindButton2.UpdateText();
+            control.UpdateSecondaryVisibility(bind2 != null);
 
             control.BindButton2.Button.Disabled = activeBinds.Count == 0;
             control.ResetButton.Disabled = !_inputManager.IsKeyFunctionModified(control.Function);
+        }
+
+        public void RefreshKeyControls()
+        {
+            foreach (var control in _keyControls.Values)
+            {
+                UpdateKeyControl(control);
+            }
         }
 
         protected override void EnteredTree()
@@ -532,7 +541,9 @@ namespace Content.Client.Options.UI.Tabs
             public readonly BoundKeyFunction Function;
             public readonly BindButton BindButton1;
             public readonly BindButton BindButton2;
+            public readonly Button AddBindButton;
             public readonly Button ResetButton;
+            private bool _secondaryExpanded;
 
             public KeyControl(KeyRebindTab parent, BoundKeyFunction function)
             {
@@ -547,6 +558,7 @@ namespace Content.Client.Options.UI.Tabs
 
                 BindButton1 = new BindButton(parent, this, StyleBase.ButtonOpenRight);
                 BindButton2 = new BindButton(parent, this, StyleBase.ButtonOpenLeft);
+                AddBindButton = new Button { Text = "+", MinSize = new Vector2(28, 0) };
                 ResetButton = new Button { Text = Loc.GetString("ui-options-bind-reset"), StyleClasses = { StyleBase.ButtonCaution } };
 
                 var hBox = new BoxContainer
@@ -557,11 +569,15 @@ namespace Content.Client.Options.UI.Tabs
                         new Control {MinSize = new Vector2(5, 0)},
                         name,
                         BindButton1,
+                        AddBindButton,
                         BindButton2,
                         new Control {MinSize = new Vector2(10, 0)},
                         ResetButton
                     }
                 };
+
+                BindButton2.Visible = false;
+                AddBindButton.OnPressed += _ => SetSecondaryExpanded(true);
 
                 ResetButton.OnPressed += args =>
                 {
@@ -573,6 +589,24 @@ namespace Content.Client.Options.UI.Tabs
                 };
 
                 AddChild(hBox);
+            }
+
+            public void UpdateSecondaryVisibility(bool hasSecondBinding)
+            {
+                if (hasSecondBinding)
+                    _secondaryExpanded = true;
+                else
+                    _secondaryExpanded = false;
+
+                BindButton2.Visible = _secondaryExpanded;
+                AddBindButton.Visible = !_secondaryExpanded;
+            }
+
+            private void SetSecondaryExpanded(bool expanded)
+            {
+                _secondaryExpanded = expanded;
+                BindButton2.Visible = expanded;
+                AddBindButton.Visible = !expanded;
             }
         }
 
@@ -598,7 +632,7 @@ namespace Content.Client.Options.UI.Tabs
 
                 Button.OnKeyBindDown += ButtonOnOnKeyBindDown;
 
-                MinSize = new Vector2(200, 0);
+                MinSize = new Vector2(140, 0);
             }
 
             protected override void EnteredTree()
