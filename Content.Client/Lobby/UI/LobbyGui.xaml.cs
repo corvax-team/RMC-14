@@ -98,7 +98,6 @@ namespace Content.Client.Lobby.UI
 
         public void SwitchState(LobbyGuiState state)
         {
-            DefaultState.Visible = false;
             CharacterSetupState.Visible = false;
 
             switch (state)
@@ -108,15 +107,9 @@ namespace Content.Client.Lobby.UI
                     RightSide.Visible = true;
                     break;
                 case LobbyGuiState.CharacterSetup:
+                    DefaultState.Visible = true;
                     CharacterSetupState.Visible = true;
-
-                    var actualWidth = (float) UserInterfaceManager.RootControl.PixelWidth;
-                    var setupWidth = (float) LeftColumn.PixelWidth;
-
-                    if (1 - (setupWidth / actualWidth) > 0.30)
-                    {
-                        RightSide.Visible = false;
-                    }
+                    RightSide.Visible = true;
 
                     UserInterfaceManager.GetUIController<LobbyUIController>().ReloadCharacterSetup();
 

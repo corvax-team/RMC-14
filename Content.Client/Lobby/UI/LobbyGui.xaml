@@ -142,7 +142,7 @@
             </Control>
             <!-- Character setup state -->
             <!-- This is injected on startup. Funky! -->
-            <Control Access="Public" Visible="False" Name="CharacterSetupState" VerticalExpand="True" HorizontalExpand="True" />
+            <LayoutContainer Access="Public" Visible="False" Name="CharacterSetupState" VerticalExpand="True" HorizontalExpand="True" />
         </LayoutContainer>
         <!-- Right column -->
         <PanelContainer Name="RightSide" Access="Public" HorizontalAlignment="Right"

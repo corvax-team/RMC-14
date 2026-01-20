@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using System.Numerics;
 using Content.Client._RMC14.LinkAccount;
 using Content.Client.Guidebook;
 using Content.Client.Humanoid;
@@ -31,6 +33,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using Robust.Shared.Timing;
 
 namespace Content.Client.Lobby;
 
@@ -51,6 +54,9 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     [UISystemDependency] private readonly ClientInventorySystem _inventory = default!;
     [UISystemDependency] private readonly StationSpawningSystem _spawn = default!;
     [UISystemDependency] private readonly GuidebookSystem _guide = default!;
+    private bool _characterSetupLayoutHooked;
+    private Control? _characterSetupHost;
+    private bool _pendingShowCharacterSetup;
     [UISystemDependency] private readonly CMArmorSystem _armorSystem = default!;
 
     private CharacterSetupGui? _characterSetup;
@@ -152,6 +158,13 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
         _characterSetup = null;
         _profileEditor = null;
+        _pendingShowCharacterSetup = false;
+        if (_characterSetupHost != null)
+        {
+            _characterSetupHost.OnResized -= UpdateCharacterSetupLayout;
+            _characterSetupHost = null;
+        }
+        _characterSetupLayoutHooked = false;
     }
 
     /// <summary>
@@ -160,11 +173,32 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     public void ReloadCharacterSetup()
     {
         var (characterGui, profileEditor) = EnsureGui();
+        characterGui.Visible = false;
+        profileEditor.Visible = false;
+        UpdateCharacterSetupLayout();
         characterGui.ReloadCharacterPickers();
         profileEditor.SetProfile(
             (HumanoidCharacterProfile?) _preferencesManager.Preferences?.SelectedCharacter,
             _preferencesManager.Preferences?.SelectedCharacterIndex);
+        UpdateCharacterSetupLayout();
+        _pendingShowCharacterSetup = true;
         UpdateLobbyHeader();
+    }
+
+    public override void FrameUpdate(FrameEventArgs args)
+    {
+        base.FrameUpdate(args);
+
+        if (!_pendingShowCharacterSetup || _characterSetup == null || _profileEditor == null)
+            return;
+
+        if (_stateManager.CurrentState is not LobbyState)
+            return;
+
+        UpdateCharacterSetupLayout();
+        _characterSetup.Visible = true;
+        _profileEditor.Visible = true;
+        _pendingShowCharacterSetup = false;
     }
 
     private void RefreshProfileEditor()
@@ -255,6 +289,10 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         _profileEditor.OnOpenGuidebook += _guide.OpenHelp;
 
         _characterSetup = new CharacterSetupGui(_profileEditor);
+        _characterSetup.HorizontalExpand = false;
+        _characterSetup.VerticalExpand = false;
+        _characterSetup.Visible = false;
+        LayoutContainer.SetAnchorPreset(_characterSetup, LayoutContainer.LayoutPreset.Center);
 
         _characterSetup.CloseButton.OnPressed += _ =>
         {
@@ -296,10 +334,45 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
         if (_stateManager.CurrentState is LobbyState lobby)
         {
-            lobby.Lobby?.CharacterSetupState.AddChild(_characterSetup);
+            if (lobby.Lobby != null)
+            {
+                lobby.Lobby.CharacterSetupState.AddChild(_characterSetup);
+                if (!_characterSetupLayoutHooked)
+                {
+                    lobby.Lobby.CharacterSetupState.OnResized += UpdateCharacterSetupLayout;
+                    _characterSetupHost = lobby.Lobby.CharacterSetupState;
+                    _characterSetupLayoutHooked = true;
+                }
+            }
         }
 
         return (_characterSetup, _profileEditor);
+    }
+
+    private const float CharacterSetupWidthFactor = 0.68f;
+    private const float CharacterSetupHeightFactor = 0.68f;
+
+    private void UpdateCharacterSetupLayout()
+    {
+        if (_characterSetup == null)
+            return;
+
+        var parent = _characterSetup.Parent;
+        var baseSize = Vector2.Zero;
+        if (_stateManager.CurrentState is LobbyState lobby && lobby.Lobby != null)
+            baseSize = lobby.Lobby.CharacterSetupState.Size;
+        if (baseSize.X <= 1f || baseSize.Y <= 1f)
+            baseSize = parent?.Size ?? Vector2.Zero;
+        if (baseSize.X <= 1f || baseSize.Y <= 1f)
+            return;
+
+        var size = new Vector2(baseSize.X * CharacterSetupWidthFactor, baseSize.Y * CharacterSetupHeightFactor);
+        var pos = (baseSize - size) / 2f;
+        pos = new Vector2(pos.X, MathF.Max(0f, pos.Y - baseSize.Y * 0.10f));
+
+        LayoutContainer.SetAnchorPreset(_characterSetup, LayoutContainer.LayoutPreset.TopLeft);
+        _characterSetup.SetSize = size;
+        LayoutContainer.SetPosition(_characterSetup, pos);
     }
 
     private void UpdateLobbyHeader()
