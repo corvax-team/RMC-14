@@ -362,9 +362,10 @@ namespace Content.Client.Lobby.UI
 
             _leftMenuDragStarted = true;
 
-            var menuGlobal = _leftMenuLastGlobal;
-            if (!_leftMenuAnchorInitialized)
-                InitializeLeftMenuAnchor(menuGlobal);
+            if (!_leftMenuAnchorInitialized && CanInitializeLeftMenuAnchor())
+                InitializeLeftMenuAnchor(CenterMenuGlow.GlobalPosition);
+
+            var menuGlobal = CenterMenuGlow.GlobalPosition;
 
             _leftMenuDragOffset = UserInterfaceManager.MousePositionScaled.Position - menuGlobal;
             return true;
@@ -396,6 +397,16 @@ namespace Content.Client.Lobby.UI
             LayoutContainer.SetAnchorPreset(CenterMenuGlow, LayoutPreset.TopLeft);
             LayoutContainer.SetPosition(CenterMenuGlow, menuGlobal - parentGlobal);
             _leftMenuAnchorInitialized = true;
+        }
+
+        private bool CanInitializeLeftMenuAnchor()
+        {
+            if (CenterMenuGlow.Parent == null)
+                return false;
+
+            var parentSize = CenterMenuGlow.Parent.Size;
+            var menuSize = CenterMenuGlow.Size;
+            return parentSize.X > 1f && parentSize.Y > 1f && menuSize.X > 1f && menuSize.Y > 1f;
         }
 
 

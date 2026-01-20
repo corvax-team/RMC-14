@@ -368,7 +368,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
         var size = new Vector2(baseSize.X * CharacterSetupWidthFactor, baseSize.Y * CharacterSetupHeightFactor);
         var pos = (baseSize - size) / 2f;
-        pos = new Vector2(pos.X, MathF.Max(0f, pos.Y - baseSize.Y * 0.10f));
+        pos = new Vector2(pos.X + baseSize.X * 0.05f, MathF.Max(0f, pos.Y - baseSize.Y * 0.02f));
 
         LayoutContainer.SetAnchorPreset(_characterSetup, LayoutContainer.LayoutPreset.TopLeft);
         _characterSetup.SetSize = size;
