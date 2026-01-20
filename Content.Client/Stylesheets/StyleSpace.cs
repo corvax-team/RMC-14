@@ -176,7 +176,7 @@ namespace Content.Client.Stylesheets
                     }),
 
                 Element<PanelContainer>().Class("VerticalTabContentBackground")
-                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(StyleNano.PanelDark.WithAlpha(0.9f))),
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(StyleNano.PanelDark.WithAlpha(0.95f))),
 
                 Child()
                     .Parent(Element<Button>().Class(ContainerButton.StylePseudoClassDisabled))

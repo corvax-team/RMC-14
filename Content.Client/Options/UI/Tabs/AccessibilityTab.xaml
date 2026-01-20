@@ -1,9 +1,10 @@
 <Control xmlns="https://spacestation14.io"
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:ui="clr-namespace:Content.Client.Options.UI">
-    <BoxContainer Orientation="Vertical">
-        <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
-            <BoxContainer Orientation="Vertical" Margin="8">
+    <PanelContainer StyleClasses="OptionsGeneralBackground">
+        <BoxContainer Orientation="Vertical">
+            <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                <BoxContainer Orientation="Vertical" Margin="8">
                 <Label Text="{Loc 'cm-ui-rmc14'}"
                         StyleClasses="LabelKeyText"/>
                 <CheckBox Name="RMCChatSquadColorModeCheckBox" Text="{Loc 'rmc-ui-options-chat-squad-color-mode'}" />
@@ -24,8 +25,9 @@
                 <Label Text="{Loc 'ui-options-accessability-header-content'}"
                        StyleClasses="LabelKeyText"/>
                 <CheckBox Name="CensorNudityCheckBox" Text="{Loc 'ui-options-censor-nudity'}" />
-            </BoxContainer>
-        </ScrollContainer>
-        <ui:OptionsTabControlRow Name="Control" Access="Public" />
-    </BoxContainer>
+                </BoxContainer>
+            </ScrollContainer>
+            <ui:OptionsTabControlRow Name="Control" Access="Public" />
+        </BoxContainer>
+    </PanelContainer>
 </Control>
