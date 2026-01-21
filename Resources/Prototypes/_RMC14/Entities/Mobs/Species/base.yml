@@ -6,6 +6,9 @@
   name: Urist C.M. McHands
   suffix: RMC14
   components:
+  # mc-changes-start
+  - type: CEZPhysics #A [z-levels]
+  # mc-changes-end
   - type: Fixtures
     fixtures:
       fix1:

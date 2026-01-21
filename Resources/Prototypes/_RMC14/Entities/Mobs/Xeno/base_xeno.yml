@@ -368,6 +368,7 @@
   - type: EmoteCooldown
   - type: RMCMesonsNonviewable
     xenoVisible: true
+  - type: CEZPhysics # [z-levels]
 
 - type: entity
   abstract: true
