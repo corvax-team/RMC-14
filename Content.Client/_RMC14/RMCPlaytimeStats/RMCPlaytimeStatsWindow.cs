@@ -23,6 +23,14 @@ namespace Content.Client._RMC14.RMCPlaytimeStats;
 [GenerateTypedNameReferences]
 public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
 {
+    private enum OverallCategory
+    {
+        Overall = 0,
+        Xeno = 1,
+        Marines = 2,
+        Survivors = 3
+    }
+
     [Dependency] private readonly JobRequirementsManager _jobRequirementsManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
@@ -33,6 +41,8 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
     private readonly Color _buttonNormalColor = Color.FromHex("#2F2F3B");
     private bool _useAltColor;
     private Button? _selectedButton;
+    private OverallCategory _overallCategory = OverallCategory.Overall;
+    private bool _suppressOverallCategoryEvent;
 
     private TimeSpan _bronzeTime;
     private TimeSpan _silverTime;
@@ -47,6 +57,10 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
+
+        SetupOverallCategorySelector();
+        LayoutContainer.SetAnchorPreset(BackgroundImage, LayoutContainer.LayoutPreset.Wide);
+        LayoutContainer.SetAnchorPreset(ContentRoot, LayoutContainer.LayoutPreset.Wide);
 
         LoadMedalTimes();
         PopulateDepartmentButtons();
@@ -144,74 +158,13 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
 
     private void PopulateDepartmentButtons()
     {
-        var rolePlaytimes = _jobRequirementsManager.FetchPlaytimeJobIdByRoles();
-        var departmentsWithPlaytime = new Dictionary<string, (DepartmentPrototype Dept, List<(JobPrototype Job, TimeSpan Time)> Roles)>();
-
-        foreach (var rolePlaytime in rolePlaytimes)
-        {
-            var jobId = rolePlaytime.Key;
-            var playtime = rolePlaytime.Value;
-
-            if (!_prototypeManager.TryIndex<JobPrototype>(jobId, out var job))
-                continue;
-
-            var depts = _prototypeManager.EnumeratePrototypes<DepartmentPrototype>()
-                .Where(d => d.Roles.Contains(job.ID))
-                .ToList();
-
-            if (depts.Count == 0)
-                continue;
-
-            foreach (var dept in depts)
-            {
-                if (!departmentsWithPlaytime.TryGetValue(dept.ID, out var deptData))
-                {
-                    deptData = (dept, new List<(JobPrototype, TimeSpan)>());
-                    departmentsWithPlaytime[dept.ID] = deptData;
-                }
-
-                deptData.Roles.Add((job, playtime));
-            }
-        }
-
-        var generalButton = new Button
-        {
-            Text = Loc.GetString("ui-playtime-general-tab"),
-            HorizontalExpand = true,
-            ToggleMode = true,
-            Pressed = true,
-            Name = "GeneralTabButton"
-        };
-
-        generalButton.OnPressed += _ => ShowGeneralTab();
-        DepartmentButtons.AddChild(generalButton);
-        _selectedButton = generalButton;
-
-        if (departmentsWithPlaytime.Count > 0)
-        {
-            var sortedDepartments = departmentsWithPlaytime.Values
-                .OrderBy(d => d.Dept, DepartmentUIComparer.Instance)
-                .ToList();
-
-            foreach (var (dept, roles) in sortedDepartments)
-            {
-                var button = new Button
-                {
-                    Text = Loc.GetString(dept.Name),
-                    HorizontalExpand = true,
-                    ToggleMode = true,
-                    ToolTip = Loc.GetString(dept.Name),
-                    Name = dept.ID
-                };
-
-                button.OnPressed += _ => ShowDepartmentTab(dept, roles);
-                DepartmentButtons.AddChild(button);
-            }
-        }
+        DepartmentButtons.DisposeAllChildren();
+        _selectedButton = null;
     }
 
     private void ShowDepartmentTab(DepartmentPrototype dept, List<(JobPrototype Job, TimeSpan Time)> roles)
     {
+        OverallHeader.Visible = false;
         if (_selectedButton != null)
         {
             _selectedButton.Pressed = false;
@@ -290,23 +243,12 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
 
     private void ShowGeneralTab()
     {
-        if (_selectedButton != null)
-        {
-            _selectedButton.Pressed = false;
-        }
-
-        foreach (var child in DepartmentButtons.Children)
-        {
-            if (child is Button button && button.Name == "GeneralTabButton")
-            {
-                button.Pressed = true;
-                _selectedButton = button;
-                break;
-            }
-        }
+        OverallHeader.Visible = true;
+        _selectedButton = null;
 
         DepartmentContent.RemoveAllChildren();
         var rolePlaytimes = _jobRequirementsManager.FetchPlaytimeJobIdByRoles();
+        var filtered = FilterRolePlaytimes(rolePlaytimes).ToList();
 
         var content = new BoxContainer
         {
@@ -316,14 +258,14 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
             Margin = new Thickness(0, 5, 0, 0)
         };
 
-        var totalTime = rolePlaytimes.Sum(r => r.Value.Ticks);
+        var totalTime = filtered.Sum(r => r.Value.Ticks);
         var overallLabel = new Label
         {
             Text = Loc.GetString("ui-playtime-overall", ("time", new TimeSpan(totalTime))),
             Margin = new Thickness(0, 0, 0, 5)
         };
 
-        content.AddChild(overallLabel);
+        OverallLabel.Text = overallLabel.Text;
         content.AddChild(new HSeparator { Margin = new Thickness(0, 5, 0, 5) });
 
         var scrollContainer = new ScrollContainer
@@ -347,20 +289,18 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         rolesList.AddChild(new HSeparator());
         _useAltColor = false;
 
-        foreach (var kvp in rolePlaytimes.OrderBy(r => Loc.GetString(r.Key)))
+        foreach (var kvp in filtered.OrderBy(r => Loc.GetString(r.Key)))
         {
             if (!_prototypeManager.TryIndex<JobPrototype>(kvp.Key, out var job))
                 continue;
 
-            var dept = _prototypeManager.EnumeratePrototypes<DepartmentPrototype>()
-                .Where(d => d.Roles.Contains(job.ID))
-                .FirstOrDefault();
+            var deptId = GetDepartmentIdForOverallCategory(job);
 
             var entry = new RMCPlaytimeStatsEntry(
                 job.LocalizedName,
                 kvp.Value,
                 new StyleBoxFlat(_useAltColor ? _altColor : _defaultColor),
-                GetMedalIcon(dept?.ID, kvp.Value, kvp.Key));
+                GetMedalIcon(deptId, kvp.Value, kvp.Key));
 
             rolesList.AddChild(entry);
             _useAltColor ^= true;
@@ -370,6 +310,79 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         content.AddChild(scrollContainer);
         DepartmentContent.AddChild(content);
         DepartmentContent.Visible = true;
+    }
+
+    private void SetupOverallCategorySelector()
+    {
+        OverallCategorySelector.AddItem(Loc.GetString("ui-playtime-category-overall"), (int) OverallCategory.Overall);
+        OverallCategorySelector.AddItem(Loc.GetString("ui-playtime-category-xeno"), (int) OverallCategory.Xeno);
+        OverallCategorySelector.AddItem(Loc.GetString("ui-playtime-category-marines"), (int) OverallCategory.Marines);
+        OverallCategorySelector.AddItem(Loc.GetString("ui-playtime-category-survivors"), (int) OverallCategory.Survivors);
+        OverallCategorySelector.SelectId((int) _overallCategory);
+
+        OverallCategorySelector.OnItemSelected += args =>
+        {
+            if (_suppressOverallCategoryEvent)
+                return;
+
+            args.Button.SelectId(args.Id);
+            _overallCategory = (OverallCategory) args.Id;
+            ShowGeneralTab();
+        };
+    }
+
+    private IEnumerable<KeyValuePair<string, TimeSpan>> FilterRolePlaytimes(IEnumerable<KeyValuePair<string, TimeSpan>> rolePlaytimes)
+    {
+        if (_overallCategory == OverallCategory.Overall)
+            return rolePlaytimes;
+
+        var deptId = _overallCategory switch
+        {
+            OverallCategory.Xeno => "CMXeno",
+            OverallCategory.Marines => "CMSquad",
+            OverallCategory.Survivors => "CMSurvivor",
+            _ => string.Empty
+        };
+
+        if (string.IsNullOrEmpty(deptId))
+            return rolePlaytimes;
+
+        return rolePlaytimes.Where(kvp => JobInDepartment(kvp.Key, deptId));
+    }
+
+    private bool JobInDepartment(string jobId, string deptId)
+    {
+        if (!_prototypeManager.TryIndex<JobPrototype>(jobId, out var job))
+            return false;
+
+        foreach (var dept in _prototypeManager.EnumeratePrototypes<DepartmentPrototype>())
+        {
+            if (dept.ID != deptId)
+                continue;
+
+            if (dept.Roles.Contains(job.ID))
+                return true;
+        }
+
+        return false;
+    }
+
+    private string? GetDepartmentIdForOverallCategory(JobPrototype job)
+    {
+        if (_overallCategory == OverallCategory.Overall)
+        {
+            var dept = _prototypeManager.EnumeratePrototypes<DepartmentPrototype>()
+                .FirstOrDefault(d => d.Roles.Contains(job.ID));
+            return dept?.ID;
+        }
+
+        return _overallCategory switch
+        {
+            OverallCategory.Xeno => "CMXeno",
+            OverallCategory.Marines => "CMSquad",
+            OverallCategory.Survivors => "CMSurvivor",
+            _ => null
+        };
     }
 
     private void HeaderClicked(RMCPlaytimeStatsHeader.Header header,

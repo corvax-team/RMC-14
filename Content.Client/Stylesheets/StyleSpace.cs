@@ -76,6 +76,7 @@ namespace Content.Client.Stylesheets
             voteButtonBox.SetPadding(StyleBox.Margin.All, 1);
             voteButtonBox.SetContentMarginOverride(StyleBox.Margin.Vertical, 2);
             voteButtonBox.SetContentMarginOverride(StyleBox.Margin.Horizontal, 12);
+            var voteButtonBase = Color.FromHex("#00A316");
 
             Stylesheet = new Stylesheet(BaseRules.Concat(new StyleRule[]
             {
@@ -207,13 +208,13 @@ namespace Content.Client.Stylesheets
                     .Prop(Button.StylePropertyStyleBox, voteButtonBox),
 
                 Element<Button>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassNormal)
-                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonBase.WithAlpha(0.8f)),
+                    .Prop(Control.StylePropertyModulateSelf, voteButtonBase.WithAlpha(0.8f)),
 
                 Element<Button>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassHover)
-                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonBase.WithAlpha(0.85f)),
+                    .Prop(Control.StylePropertyModulateSelf, voteButtonBase.WithAlpha(0.85f)),
 
                 Element<Button>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassPressed)
-                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonPressed.WithAlpha(0.85f)),
+                    .Prop(Control.StylePropertyModulateSelf, voteButtonBase.WithAlpha(0.85f)),
 
                 Element<Button>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassDisabled)
                     .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonDisabledCrt.WithAlpha(0.8f)),
@@ -222,13 +223,13 @@ namespace Content.Client.Stylesheets
                     .Prop(ContainerButton.StylePropertyStyleBox, voteButtonBox),
 
                 Element<OptionButton>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassNormal)
-                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonBase.WithAlpha(0.8f)),
+                    .Prop(Control.StylePropertyModulateSelf, voteButtonBase.WithAlpha(0.8f)),
 
                 Element<OptionButton>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassHover)
-                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonBase.WithAlpha(0.85f)),
+                    .Prop(Control.StylePropertyModulateSelf, voteButtonBase.WithAlpha(0.85f)),
 
                 Element<OptionButton>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassPressed)
-                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonPressed.WithAlpha(0.85f)),
+                    .Prop(Control.StylePropertyModulateSelf, voteButtonBase.WithAlpha(0.85f)),
 
                 Element<OptionButton>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassDisabled)
                     .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonDisabledCrt.WithAlpha(0.8f)),

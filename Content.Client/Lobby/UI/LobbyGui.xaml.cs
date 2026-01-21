@@ -1,4 +1,5 @@
 using Content.Client._RMC14.Roadmap;
+using Content.Client._RMC14.RMCPlaytimeStats;
 using Content.Client.CrewManifest;
 using Content.Client.GameTicking.Managers;
 using Content.Client._RMC14.Lobby;
@@ -42,6 +43,7 @@ namespace Content.Client.Lobby.UI
         private LateJoinGui? _lateJoinWindow;
         private VoteCallMenu? _voteMenu;
         private ObserveWarningWindow? _observeWindow;
+        private RMCPlaytimeStatsWindow? _statsWindow;
         private bool _suppressReadyToggle;
         private bool _leftMenuVisible = true;
         private readonly DragDropHelper<Control> _leftMenuDragHelper;
@@ -81,6 +83,7 @@ namespace Content.Client.Lobby.UI
             LeftMenuToggleButton.OnPressed += _ => ToggleLeftMenu(true);
 
             TutorialButton.OnPressed += _ => OpenTutorial();
+            StatsButton.OnPressed += _ => OpenStats();
             SetupCharacterButton.OnPressed += _ => OpenCharacterSetup();
             PollsButton.OnPressed += _ => OpenPolls();
             ObserveButton.OnPressed += _ => OpenObserve();
@@ -212,6 +215,7 @@ namespace Content.Client.Lobby.UI
             SetThemeClass(PollsButton, crtEnabled);
             SetThemeClass(ObserveButton, crtEnabled);
             SetThemeClass(ReadyButton, crtEnabled);
+            SetThemeClass(StatsButton, crtEnabled);
             SetThemeClass(JoinUsmcButton, crtEnabled);
             SetThemeClass(JoinHiveButton, crtEnabled);
             SetThemeClass(CrewManifestButton, crtEnabled);
@@ -233,6 +237,7 @@ namespace Content.Client.Lobby.UI
             ApplyButtonGlow(PollsButton, crtEnabled);
             ApplyButtonGlow(ObserveButton, crtEnabled);
             ApplyButtonGlow(ReadyButton, crtEnabled);
+            ApplyButtonGlow(StatsButton, crtEnabled);
             ApplyButtonGlow(JoinUsmcButton, crtEnabled);
             ApplyButtonGlow(JoinHiveButton, crtEnabled);
 
@@ -426,6 +431,17 @@ namespace Content.Client.Lobby.UI
             }
 
             _tutorialWindow.OpenCentered();
+        }
+
+        private void OpenStats()
+        {
+            if (_statsWindow == null || _statsWindow.Disposed)
+            {
+                _statsWindow = new RMCPlaytimeStatsWindow();
+                _statsWindow.OnClose += () => _statsWindow = null;
+            }
+
+            _statsWindow.OpenCentered();
         }
 
         private void OpenCharacterSetup()

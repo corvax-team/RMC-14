@@ -75,10 +75,6 @@ namespace Content.Client.Lobby.UI
             };
 
             CharEditor.AddChild(profileEditor);
-            RulesButton.OnPressed += _ => new RulesAndInfoWindow().Open();
-
-            StatsButton.OnPressed += _ => new RMCPlaytimeStatsWindow().OpenCentered(); // RMC-PlaytimeStats-Tweak
-
             CommendationsReceivedButton.OnPressed += _ =>
                 IoCManager.Resolve<CommendationsManager>().OpenReceivedWindow();
             CommendationsGivenButton.OnPressed += _ =>

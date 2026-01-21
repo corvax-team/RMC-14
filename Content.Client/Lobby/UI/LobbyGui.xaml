@@ -61,6 +61,17 @@
                                                      Margin="8 0 0 0"
                                                      TexturePath="/Textures/_CCM14/Logo/icon/custom.png" />
                                     </Button>
+                                    <Button Name="StatsButton" Access="Public"
+                                            Text="{Loc 'character-setup-gui-character-setup-stats-button'}"
+                                            StyleClasses="LobbyMenuButton" MinHeight="40" HorizontalExpand="True">
+                                        <TextureRect MinSize="20 20"
+                                                     HorizontalAlignment="Left"
+                                                     VerticalAlignment="Center"
+                                                     Stretch="KeepAspectCentered"
+                                                     CanShrink="True"
+                                                     Margin="8 0 0 0"
+                                                     TexturePath="/Textures/_CCM14/Logo/icon/book.png" />
+                                    </Button>
                                     <Button Name="OptionsButton" Access="Public"
                                             Text="{Loc 'ui-lobby-options-button'}"
                                             StyleClasses="LobbyMenuButton" MinHeight="40">
