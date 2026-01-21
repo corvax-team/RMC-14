@@ -9,14 +9,23 @@
   color: "#000000"
   metabolisms:
     Poison:
-      metabolismRate: 0.1
+      metabolismRate: 0.017
       effects:
       - !type:PathogenInfection
         conditions:
           - !type:ReagentThreshold
             min: 5
             max: 25
+        amount: 1
+        seconds: 15
       - !type:BirthBloodburster
         conditions:
           - !type:ReagentThreshold
             min: 25
+      - !type:AdjustReagent
+        conditions:
+          - !type:ReagentThreshold
+            min: 5
+            max: 25
+        reagent: CCMPathogen
+        amount: 0.2

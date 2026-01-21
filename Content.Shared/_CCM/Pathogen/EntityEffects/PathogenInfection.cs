@@ -8,4 +8,8 @@ public sealed partial class PathogenInfection : EventEntityEffect<PathogenInfect
 {
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("reagent-effect-guidebook-emp-reaction-effect", ("chance", Probability)); // TODO сделать гайдбук для патогена
+
+    public float Amount = 1f;
+    public float Seconds = 1f;
 }
+
