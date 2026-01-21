@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server._CCM.Database;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -161,6 +162,10 @@ namespace Content.Server.Database
             {
                 return;
             }
+
+            await db.ProfileJobPriorityWeights
+                .Where(w => w.PlayerUserId == userId.UserId && w.Slot == slot)
+                .ExecuteDeleteAsync();
 
             db.Profile.Remove(profile);
         }
@@ -423,6 +428,50 @@ namespace Content.Server.Database
             profile.XenoPostfix = humanoid.XenoPostfix;
 
             return profile;
+        }
+
+        public async Task<List<ProfileJobPriorityWeight>> GetJobPriorityWeights(Guid userId, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+
+            return await db.DbContext.ProfileJobPriorityWeights
+                .Where(w => w.PlayerUserId == userId)
+                .ToListAsync(cancel);
+        }
+
+        public async Task UpsertJobPriorityWeights(Guid userId, int slot, IReadOnlyList<JobPriorityWeightUpdate> updates, CancellationToken cancel = default)
+        {
+            if (updates.Count == 0)
+                return;
+
+            await using var db = await GetDb(cancel);
+
+            var jobIds = updates.Select(u => u.JobId).ToArray();
+            var existing = await db.DbContext.ProfileJobPriorityWeights
+                .Where(w => w.PlayerUserId == userId && w.Slot == slot && jobIds.Contains(w.JobName))
+                .ToDictionaryAsync(w => w.JobName, cancel);
+
+            foreach (var update in updates)
+            {
+                if (existing.TryGetValue(update.JobId, out var row))
+                {
+                    row.MissedRounds = update.MissedRounds;
+                    row.LastAssignedRoundId = update.LastAssignedRoundId;
+                }
+                else
+                {
+                    db.DbContext.ProfileJobPriorityWeights.Add(new ProfileJobPriorityWeight
+                    {
+                        PlayerUserId = userId,
+                        Slot = slot,
+                        JobName = update.JobId,
+                        MissedRounds = update.MissedRounds,
+                        LastAssignedRoundId = update.LastAssignedRoundId
+                    });
+                }
+            }
+
+            await db.DbContext.SaveChangesAsync(cancel);
         }
         #endregion
 
@@ -2270,3 +2319,5 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         }
     }
 }
+
+// # CCM priority rework

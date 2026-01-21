@@ -53,10 +53,10 @@ humanoid-profile-editor-antags-tab = Antags
 humanoid-profile-editor-antag-preference-yes-button = Yes
 humanoid-profile-editor-antag-preference-no-button = No
 
-humanoid-profile-editor-job-priority-high-button = High
-humanoid-profile-editor-job-priority-medium-button = Medium
-humanoid-profile-editor-job-priority-low-button = Low
+humanoid-profile-editor-job-priority-first-button = 1st order
+humanoid-profile-editor-job-priority-second-button = 2nd order
 humanoid-profile-editor-job-priority-never-button = Never
+humanoid-profile-editor-job-chance = Chance: { $chance }%
 humanoid-profile-editor-naming-rules-warning = Warning: Offensive or LRP IC names and descriptions will lead to admin intervention on this server. Read our \[Rules\] for more.
 humanoid-profile-editor-markings-tab = Markings
 humanoid-profile-editor-flavortext-tab = Description
@@ -70,3 +70,5 @@ humanoid-profile-editor-trait-count-hint = Points available: [{$current}/{$max}]
 trait-category-disabilities = Disabilities
 trait-category-speech = Speech traits
 trait-category-quirks = Quirks
+
+# CCM priority rework

@@ -4,6 +4,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server._CCM.Database;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server.Administration.Logs;
 using Content.Shared.Administration.Logs;
@@ -49,6 +50,8 @@ namespace Content.Server.Database
         // Single method for two operations for transaction.
         Task DeleteSlotAndSetSelectedIndex(NetUserId userId, int deleteSlot, int newSlot);
         Task<PlayerPreferences?> GetPlayerPreferencesAsync(NetUserId userId, CancellationToken cancel);
+        Task<List<ProfileJobPriorityWeight>> GetJobPriorityWeights(Guid userId, CancellationToken cancel = default);
+        Task UpsertJobPriorityWeights(Guid userId, int slot, IReadOnlyList<JobPriorityWeightUpdate> updates, CancellationToken cancel = default);
         #endregion
 
         #region User Ids
@@ -571,6 +574,18 @@ namespace Content.Server.Database
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetPlayerPreferencesAsync(userId, cancel));
+        }
+
+        public Task<List<ProfileJobPriorityWeight>> GetJobPriorityWeights(Guid userId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetJobPriorityWeights(userId, cancel));
+        }
+
+        public Task UpsertJobPriorityWeights(Guid userId, int slot, IReadOnlyList<JobPriorityWeightUpdate> updates, CancellationToken cancel = default)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpsertJobPriorityWeights(userId, slot, updates, cancel));
         }
 
         public Task AssignUserIdAsync(string name, NetUserId userId)
@@ -1540,3 +1555,5 @@ namespace Content.Server.Database
         }
     }
 }
+
+// # CCM priority rework

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -10,6 +11,7 @@ using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Sprite;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Guidebook;
+using Content.Shared._CCM.Preferences;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.LinkAccount;
 using Content.Shared._RMC14.Marines.Squads;
@@ -102,6 +104,9 @@ namespace Content.Client.Lobby.UI
         private List<(string, RequirementsSelector)> _jobPriorities = new();
 
         private readonly Dictionary<string, BoxContainer> _jobCategories;
+        private readonly Dictionary<string, Label> _jobChanceLabels = new();
+        private Dictionary<ProtoId<JobPrototype>, float> _jobPriorityChances = new();
+        private int? _jobPriorityChancesSlot;
 
         private Direction _previewRotation = Direction.North;
 
@@ -946,6 +951,7 @@ namespace Content.Client.Lobby.UI
             JobList.DisposeAllChildren();
             _jobCategories.Clear();
             _jobPriorities.Clear();
+            _jobChanceLabels.Clear();
             var firstCategory = true;
 
             // Get all displayed departments
@@ -963,9 +969,8 @@ namespace Content.Client.Lobby.UI
             var items = new[]
             {
                 ("humanoid-profile-editor-job-priority-never-button", (int) JobPriority.Never),
-                ("humanoid-profile-editor-job-priority-low-button", (int) JobPriority.Low),
-                ("humanoid-profile-editor-job-priority-medium-button", (int) JobPriority.Medium),
-                ("humanoid-profile-editor-job-priority-high-button", (int) JobPriority.High),
+                ("humanoid-profile-editor-job-priority-second-button", (int) JobPriority.Second),
+                ("humanoid-profile-editor-job-priority-first-button", (int) JobPriority.First),
             };
 
             foreach (var department in departments)
@@ -1027,6 +1032,12 @@ namespace Content.Client.Lobby.UI
                         Orientation = LayoutOrientation.Horizontal,
                     };
 
+                    var jobStack = new BoxContainer()
+                    {
+                        Orientation = LayoutOrientation.Vertical,
+                        HorizontalExpand = true,
+                    };
+
                     var selector = new RequirementsSelector()
                     {
                         Margin = new Thickness(3f, 3f, 3f, 0f),
@@ -1064,16 +1075,26 @@ namespace Content.Client.Lobby.UI
                                 other.Select(selectedPrio);
                                 continue;
                             }
-
-                            if (selectedJobPrio != JobPriority.High || (JobPriority) other.Selected != JobPriority.High)
-                                continue;
-
-                            // Lower any other high priorities to medium.
-                            other.Select((int)JobPriority.Medium);
-                            Profile = Profile?.WithJobPriority(jobId, JobPriority.Medium);
                         }
 
-                        // TODO: Only reload on high change (either to or from).
+                        if (selectedJobPrio.IsFirst())
+                        {
+                            var firstCount = _jobPriorities.Count(entry => ((JobPriority) entry.Item2.Selected).IsFirst());
+                            foreach (var (jobId, other) in _jobPriorities)
+                            {
+                                if (firstCount <= 2)
+                                    break;
+
+                                if (jobId == job.ID || !((JobPriority) other.Selected).IsFirst())
+                                    continue;
+
+                                other.Select((int)JobPriority.Second);
+                                Profile = Profile?.WithJobPriority(jobId, JobPriority.Second);
+                                firstCount--;
+                            }
+                        }
+
+                        // TODO: Only reload on first-order change (either to or from).
                         ReloadPreview();
 
                         UpdateJobPriorities();
@@ -1117,14 +1138,27 @@ namespace Content.Client.Lobby.UI
                         };
                     }
 
+                    var chanceLabel = new Label
+                    {
+                        Margin = new Thickness(5f, 0f, 0f, 0f),
+                        Visible = false,
+                        StyleClasses = { StyleBase.StyleClassLabelSubText }
+                    };
+
+                    _jobChanceLabels[job.ID] = chanceLabel;
+
                     _jobPriorities.Add((job.ID, selector));
-                    jobContainer.AddChild(selector);
+                    jobStack.AddChild(selector);
+                    jobStack.AddChild(chanceLabel);
+
+                    jobContainer.AddChild(jobStack);
                     jobContainer.AddChild(loadoutWindowBtn);
                     category.AddChild(jobContainer);
                 }
             }
 
             UpdateJobPriorities();
+            ApplyJobPriorityChances();
         }
 
         private void OpenLoadout(JobPrototype? jobProto, RoleLoadout roleLoadout, RoleLoadoutPrototype roleLoadoutProto)
@@ -1428,7 +1462,40 @@ namespace Content.Client.Lobby.UI
             foreach (var (jobId, prioritySelector) in _jobPriorities)
             {
                 var priority = Profile?.JobPriorities.GetValueOrDefault(jobId, JobPriority.Never) ?? JobPriority.Never;
-                prioritySelector.Select((int) priority);
+                prioritySelector.Select((int) priority.NormalizeSecond());
+            }
+
+            ApplyJobPriorityChances();
+        }
+
+        public void SetJobPriorityChances(int slot, IReadOnlyDictionary<ProtoId<JobPrototype>, float> chances)
+        {
+            if (CharacterSlot != slot)
+                return;
+
+            _jobPriorityChancesSlot = slot;
+            _jobPriorityChances = new Dictionary<ProtoId<JobPrototype>, float>(chances);
+            ApplyJobPriorityChances();
+        }
+
+        private void ApplyJobPriorityChances()
+        {
+            if (_jobPriorityChancesSlot == null || Profile == null || _jobPriorityChancesSlot != CharacterSlot)
+                return;
+
+            foreach (var (jobId, label) in _jobChanceLabels)
+            {
+                var protoId = new ProtoId<JobPrototype>(jobId);
+                var priority = Profile.JobPriorities.GetValueOrDefault(protoId, JobPriority.Never);
+                if (!priority.IsFirst())
+                {
+                    label.Visible = false;
+                    continue;
+                }
+
+                var chance = _jobPriorityChances.GetValueOrDefault(protoId, 0f);
+                label.Text = Loc.GetString("humanoid-profile-editor-job-chance", ("chance", MathF.Round(chance, 1)));
+                label.Visible = true;
             }
         }
 
@@ -1855,3 +1922,5 @@ namespace Content.Client.Lobby.UI
         }
     }
 }
+
+// # CCM priority rework

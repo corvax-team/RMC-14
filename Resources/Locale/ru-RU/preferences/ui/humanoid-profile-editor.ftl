@@ -50,10 +50,10 @@ humanoid-profile-editor-department-jobs-label = { $departmentName }
 humanoid-profile-editor-antags-tab = Антагонисты
 humanoid-profile-editor-antag-preference-yes-button = Да
 humanoid-profile-editor-antag-preference-no-button = Нет
-humanoid-profile-editor-job-priority-high-button = Высокий
-humanoid-profile-editor-job-priority-medium-button = Средний
-humanoid-profile-editor-job-priority-low-button = Низкий
+humanoid-profile-editor-job-priority-first-button = 1 порядок
+humanoid-profile-editor-job-priority-second-button = 2 порядок
 humanoid-profile-editor-job-priority-never-button = Никогда
+humanoid-profile-editor-job-chance = Шанс: { $chance }%
 humanoid-profile-editor-naming-rules-warning = Внимание: Оскорбительные или странные имена и описания могут повлечь за собой беседу с администрацией. Прочитайте \[Правила\].
 humanoid-profile-editor-markings-tab = Черты внешности
 humanoid-profile-editor-flavortext-tab = Описание
@@ -63,3 +63,5 @@ humanoid-profile-editor-trait-count-hint = Доступно очков: [{ $curr
 trait-category-disabilities = Ограничения
 trait-category-speech = Черты речи
 trait-category-quirks = Причуды
+
+# CCM priority rework

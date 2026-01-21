@@ -1,10 +1,14 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.GameTicking;
+using Content.Server.Preferences.Managers;
+using Content.Server._CCM.Station.Jobs;
 using Content.Server.Station.Components;
 using Content.Shared.CCVar;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking;
+using Content.Shared._CCM.Preferences;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using JetBrains.Annotations;
@@ -27,6 +31,8 @@ public sealed partial class StationJobsSystem : EntitySystem
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly IServerPreferencesManager _preferences = default!;
+    [Dependency] private readonly JobPriorityWeightManager _jobPriorityWeights = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -37,6 +43,15 @@ public sealed partial class StationJobsSystem : EntitySystem
         SubscribeLocalEvent<StationJobsComponent, ComponentShutdown>(OnStationDeletion);
         SubscribeLocalEvent<PlayerJoinedLobbyEvent>(OnPlayerJoinedLobby);
         Subs.CVar(_configurationManager, CCVars.GameDisallowLateJoins, _ => UpdateJobsAvailable(), true);
+        _player.PlayerStatusChanged += OnPlayerStatusChanged;
+        _preferences.PreferencesUpdated += OnPreferencesUpdated;
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        _player.PlayerStatusChanged -= OnPlayerStatusChanged;
+        _preferences.PreferencesUpdated -= OnPreferencesUpdated;
     }
 
     private void OnInit(Entity<StationJobsComponent> ent, ref ComponentInit args)
@@ -437,11 +452,11 @@ public sealed partial class StationJobsSystem : EntitySystem
             return null;
 
         var available = GetAvailableJobs(station);
-        bool TryPick(JobPriority priority, [NotNullWhen(true)] out ProtoId<JobPrototype>? jobId)
+        bool TryPick(Func<JobPriority, bool> priorityMatch, [NotNullWhen(true)] out ProtoId<JobPrototype>? jobId)
         {
             var filtered = jobPriorities
                 .Where(p =>
-                            p.Value == priority
+                            priorityMatch(p.Value)
                             && disallowedJobs != null
                             && !disallowedJobs.Contains(p.Key)
                             && available.Contains(p.Key))
@@ -458,17 +473,12 @@ public sealed partial class StationJobsSystem : EntitySystem
             return false;
         }
 
-        if (TryPick(JobPriority.High, out var picked))
+        if (TryPick(priority => priority.IsFirst(), out var picked))
         {
             return picked;
         }
 
-        if (TryPick(JobPriority.Medium, out picked))
-        {
-            return picked;
-        }
-
-        if (TryPick(JobPriority.Low, out picked))
+        if (TryPick(priority => priority.IsSecond(), out picked))
         {
             return picked;
         }
@@ -528,6 +538,7 @@ public sealed partial class StationJobsSystem : EntitySystem
     private void OnPlayerJoinedLobby(PlayerJoinedLobbyEvent ev)
     {
         RaiseNetworkEvent(_cachedAvailableJobs, ev.PlayerSession.Channel);
+        UpdateJobPriorityChancesForAll();
     }
 
     private void OnStationRenamed(EntityUid uid, StationJobsComponent component, StationRenamedEvent args)
@@ -535,5 +546,86 @@ public sealed partial class StationJobsSystem : EntitySystem
         UpdateJobsAvailable();
     }
 
+    private void OnPreferencesUpdated(NetUserId userId)
+    {
+        UpdateJobPriorityChancesForAll();
+    }
+
+    private void OnPlayerStatusChanged(object? sender, SessionStatusEventArgs args)
+    {
+        UpdateJobPriorityChancesForAll();
+    }
+
+    private void UpdateJobPriorityChancesForAll()
+    {
+        if (_gameTicker.RunLevel != GameRunLevel.PreRoundLobby)
+            return;
+
+        var profiles = new Dictionary<NetUserId, HumanoidCharacterProfile>();
+        var selectedSlots = new Dictionary<NetUserId, int>();
+        var sessionMinutes = new Dictionary<NetUserId, float>();
+
+        foreach (var session in _player.Sessions)
+        {
+            if (!_preferences.TryGetCachedPreferences(session.UserId, out var prefs) ||
+                prefs.SelectedCharacter is not HumanoidCharacterProfile profile)
+            {
+                continue;
+            }
+
+            profiles[session.UserId] = profile;
+            selectedSlots[session.UserId] = prefs.SelectedCharacterIndex;
+            sessionMinutes[session.UserId] = MathF.Max(0f, (float) (DateTime.UtcNow - session.ConnectedTime).TotalMinutes);
+        }
+
+        if (profiles.Count == 0)
+            return;
+
+        var currentRoundId = _gameTicker.RoundId;
+        var candidates = GetPlayersJobCandidates(null, JobPriority.First, profiles);
+        var jobWeights = new Dictionary<ProtoId<JobPrototype>, Dictionary<NetUserId, float>>();
+        var jobTotals = new Dictionary<ProtoId<JobPrototype>, float>();
+
+        foreach (var (user, jobs) in candidates)
+        {
+            foreach (var job in jobs)
+            {
+                if (!jobWeights.TryGetValue(job, out var weights))
+                {
+                    weights = new Dictionary<NetUserId, float>();
+                    jobWeights[job] = weights;
+                }
+
+                var weight = CalculateFirstOrderWeight(user, selectedSlots[user], job, sessionMinutes[user], currentRoundId);
+                weights[user] = weight;
+                jobTotals[job] = jobTotals.GetValueOrDefault(job) + weight;
+            }
+        }
+
+        foreach (var (userId, profile) in profiles)
+        {
+            if (!_player.TryGetSessionById(userId, out var session))
+                continue;
+
+            var chances = new Dictionary<ProtoId<JobPrototype>, float>();
+            if (candidates.TryGetValue(userId, out var userJobs))
+            {
+                foreach (var jobId in userJobs)
+                {
+                    if (!jobTotals.TryGetValue(jobId, out var total) || total <= 0f)
+                        continue;
+
+                    var weight = jobWeights[jobId][userId];
+                    chances[jobId] = weight / total * 100f;
+                }
+            }
+
+            var slot = selectedSlots[userId];
+            RaiseNetworkEvent(new JobPriorityChancesEvent(slot, chances), session.Channel);
+        }
+    }
+
     #endregion
 }
+
+// # CCM priority rework

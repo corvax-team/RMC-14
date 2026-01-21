@@ -10,6 +10,7 @@ using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Station;
 using Content.Client.Stylesheets;
 using Content.Shared._RMC14.Armor;
+using Content.Shared._CCM.Preferences;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
 using Content.Shared.GameTicking;
@@ -62,6 +63,8 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     private CharacterSetupGui? _characterSetup;
     private HumanoidProfileEditor? _profileEditor;
     private CharacterSetupGuiSavePanel? _savePanel;
+    private Dictionary<ProtoId<JobPrototype>, float> _jobPriorityChances = new();
+    private int? _jobPriorityChancesSlot;
 
     /// <summary>
     /// This is the modified profile currently being edited.
@@ -180,6 +183,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         profileEditor.SetProfile(
             (HumanoidCharacterProfile?) _preferencesManager.Preferences?.SelectedCharacter,
             _preferencesManager.Preferences?.SelectedCharacterIndex);
+        ApplyJobPriorityChances();
         UpdateCharacterSetupLayout();
         _pendingShowCharacterSetup = true;
         UpdateLobbyHeader();
@@ -207,6 +211,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         _profileEditor?.RefreshJobs();
         _profileEditor?.RefreshLoadouts();
         _profileEditor?.RefreshRMC(_linkAccount.Tier);
+        ApplyJobPriorityChances();
     }
 
     private void SaveProfile()
@@ -237,6 +242,13 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         {
             lobbyGui.SwitchState(LobbyGui.LobbyGuiState.Default);
         }
+    }
+
+    public void UpdateJobPriorityChances(int characterSlot, Dictionary<ProtoId<JobPrototype>, float> chances)
+    {
+        _jobPriorityChancesSlot = characterSlot;
+        _jobPriorityChances = new Dictionary<ProtoId<JobPrototype>, float>(chances);
+        ApplyJobPriorityChances();
     }
 
     private void OpenSavePanel()
@@ -456,6 +468,14 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         return string.Empty;
     }
 
+    private void ApplyJobPriorityChances()
+    {
+        if (_profileEditor == null || _jobPriorityChancesSlot == null)
+            return;
+
+        _profileEditor.SetJobPriorityChances(_jobPriorityChancesSlot.Value, _jobPriorityChances);
+    }
+
     #region Helpers
 
     /// <summary>
@@ -478,9 +498,13 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     /// </summary>
     public JobPrototype GetPreferredJob(HumanoidCharacterProfile profile)
     {
-        var highPriorityJob = profile.JobPriorities.FirstOrDefault(p => p.Value == JobPriority.High).Key;
+        var firstPriorityJob = profile.JobPriorities.FirstOrDefault(p => p.Value.IsFirst()).Key;
+        if (firstPriorityJob != default)
+            return _prototypeManager.Index<JobPrototype>(firstPriorityJob.Id ?? SharedGameTicker.FallbackOverflowJob);
+
+        var secondPriorityJob = profile.JobPriorities.FirstOrDefault(p => p.Value.IsSecond()).Key;
         // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract (what is resharper smoking?)
-        return _prototypeManager.Index<JobPrototype>(highPriorityJob.Id ?? SharedGameTicker.FallbackOverflowJob);
+        return _prototypeManager.Index<JobPrototype>(secondPriorityJob.Id ?? SharedGameTicker.FallbackOverflowJob);
     }
 
     public void GiveDummyLoadout(EntityUid uid, RoleLoadout? roleLoadout)
@@ -644,3 +668,5 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
     #endregion
 }
+
+// # CCM priority rework

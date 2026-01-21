@@ -23,6 +23,7 @@ namespace Content.Server.Database
         public DbSet<Profile> Profile { get; set; } = null!;
         public DbSet<AssignedUserId> AssignedUserId { get; set; } = null!;
         public DbSet<Player> Player { get; set; } = default!;
+        public DbSet<ProfileJobPriorityWeight> ProfileJobPriorityWeights { get; set; } = null!;
         public DbSet<Admin> Admin { get; set; } = null!;
         public DbSet<AdminRank> AdminRank { get; set; } = null!;
         public DbSet<Round> Round { get; set; } = null!;
@@ -114,11 +115,6 @@ namespace Content.Server.Database
 
             modelBuilder.Entity<Job>()
                 .HasIndex(j => j.ProfileId);
-
-            modelBuilder.Entity<Job>()
-                .HasIndex(j => j.ProfileId, "IX_job_one_high_priority")
-                .IsUnique()
-                .HasFilter("priority = 3");
 
             modelBuilder.Entity<Job>()
                 .HasIndex(j => new { j.ProfileId, j.JobName })
@@ -605,13 +601,29 @@ namespace Content.Server.Database
         public DbJobPriority Priority { get; set; }
     }
 
+    [PrimaryKey(nameof(PlayerUserId), nameof(Slot), nameof(JobName))]
+    public class ProfileJobPriorityWeight
+    {
+        [Required]
+        public Guid PlayerUserId { get; set; }
+
+        public int Slot { get; set; }
+
+        [Required]
+        public string JobName { get; set; } = null!;
+
+        public int MissedRounds { get; set; }
+
+        public int? LastAssignedRoundId { get; set; }
+    }
+
     public enum DbJobPriority
     {
         // These enum values HAVE to match the ones in JobPriority in Content.Shared
         Never = 0,
-        Low = 1,
-        Medium = 2,
-        High = 3
+        Second = 1,
+        SecondFallback = 2,
+        First = 3
     }
 
     public class Antag
@@ -1517,3 +1529,5 @@ namespace Content.Server.Database
         public float Score { get; set; }
     }
 }
+
+// # CCM priority rework

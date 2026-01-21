@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ namespace Content.Server.Preferences.Managers
 {
     public interface IServerPreferencesManager
     {
+        event Action<NetUserId>? PreferencesUpdated;
+
         void Init();
 
         Task LoadData(ICommonSession session, CancellationToken cancel);
@@ -27,3 +30,5 @@ namespace Content.Server.Preferences.Managers
         Task SetConstructionFavorites(NetUserId userId, List<ProtoId<ConstructionPrototype>> favorites);
     }
 }
+
+// # CCM priority rework

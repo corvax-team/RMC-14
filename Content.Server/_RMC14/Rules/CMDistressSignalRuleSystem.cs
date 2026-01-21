@@ -51,6 +51,7 @@ using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.Spawners;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._CCM.Preferences;
 using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.WeedKiller;
@@ -661,7 +662,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 }
             }
 
-            var priorities = Enum.GetValues<JobPriority>().Length;
+            var priorities = JobPriorityExtensions.OrderedRoundstartPriorities.Count;
             var xenoCandidates = new List<NetUserId>[priorities];
             for (var i = 0; i < xenoCandidates.Length; i++)
             {
@@ -676,7 +677,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (profile.JobPriorities.TryGetValue(comp.QueenJob, out var priority) &&
                     priority > JobPriority.Never)
                 {
-                    xenoCandidates[(int) priority].Add(id);
+                    xenoCandidates[GetPriorityBucket(priority)].Add(id);
                 }
             }
 
@@ -716,7 +717,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (profile.JobPriorities.TryGetValue(comp.XenoSelectableJob, out var priority) &&
                         priority > JobPriority.Never)
                     {
-                        xenoCandidates[(int) priority].Add(id);
+                        xenoCandidates[GetPriorityBucket(priority)].Add(id);
                     }
                 }
 
@@ -784,7 +785,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                                 if (profile.JobPriorities.TryGetValue(originalJob, out var originalPriority) &&
                                     originalPriority > JobPriority.Never && overrideJob == job)
                                 {
-                                    players[(int)originalPriority].Add(id);
+                                    players[GetPriorityBucket(originalPriority)].Add(id);
                                     overriden = true;
                                     break;
                                 }
@@ -797,7 +798,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                         if (profile.JobPriorities.TryGetValue(job, out var priority) &&
                             priority > JobPriority.Never)
                         {
-                            players[(int)priority].Add(id);
+                            players[GetPriorityBucket(priority)].Add(id);
                         }
                     }
                 }
@@ -903,6 +904,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         {
             Spawn(id);
         }
+    }
+
+    private static int GetPriorityBucket(JobPriority priority)
+    {
+        return priority.IsFirst() ? 1 : 0;
     }
 
     public void SetCamoType(CamouflageType? ct = null)
@@ -2195,3 +2201,5 @@ public sealed class Spawners
     public readonly Dictionary<ProtoId<JobPrototype>, List<EntityUid>> NonSquad = new();
     public readonly Dictionary<ProtoId<JobPrototype>, List<EntityUid>> NonSquadFull = new();
 }
+
+// # CCM priority rework

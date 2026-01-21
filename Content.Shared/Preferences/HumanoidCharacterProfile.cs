@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text.RegularExpressions;
+using Content.Shared._CCM.Preferences;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared._RMC14.Xenonids.Name;
@@ -38,7 +39,7 @@ namespace Content.Shared.Preferences
         private Dictionary<ProtoId<JobPrototype>, JobPriority> _jobPriorities = new()
         {
             {
-                SharedGameTicker.FallbackOverflowJob, JobPriority.High
+                SharedGameTicker.FallbackOverflowJob, JobPriority.First
             }
         };
 
@@ -188,19 +189,7 @@ namespace Content.Shared.Preferences
             _traitPreferences = traitPreferences;
             _loadouts = loadouts;
 
-            var hasHighPrority = false;
-            foreach (var (key, value) in _jobPriorities)
-            {
-                if (value == JobPriority.Never)
-                    _jobPriorities.Remove(key);
-                else if (value != JobPriority.High)
-                    continue;
-
-                if (hasHighPrority)
-                    _jobPriorities[key] = JobPriority.Medium;
-
-                hasHighPrority = true;
-            }
+            _jobPriorities = NormalizeJobPriorities(_jobPriorities);
 
             NamedItems = namedItems;
             PlaytimePerks = playtimePerks;
@@ -266,7 +255,7 @@ namespace Content.Shared.Preferences
                 SpawnPriorityPreference.None,
                 ArmorPreference.Random,
                 null,
-                new() { { SharedGameTicker.FallbackOverflowJob, JobPriority.High } },
+                new() { { SharedGameTicker.FallbackOverflowJob, JobPriority.First } },
                 PreferenceUnavailableMode.SpawnAsOverflow,
                 new(),
                 new(),
@@ -340,7 +329,7 @@ namespace Content.Shared.Preferences
                 SpawnPriorityPreference.None,
                 ArmorPreference.Random,
                 null,
-                new() { { SharedGameTicker.FallbackOverflowJob, JobPriority.High } },
+                new() { { SharedGameTicker.FallbackOverflowJob, JobPriority.First } },
                 PreferenceUnavailableMode.SpawnAsOverflow,
                 new(),
                 new(),
@@ -425,20 +414,7 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<ProtoId<JobPrototype>, JobPriority>> jobPriorities)
         {
             var dictionary = new Dictionary<ProtoId<JobPrototype>, JobPriority>(jobPriorities);
-            var hasHighPrority = false;
-
-            foreach (var (key, value) in dictionary)
-            {
-                if (value == JobPriority.Never)
-                    dictionary.Remove(key);
-                else if (value != JobPriority.High)
-                    continue;
-
-                if (hasHighPrority)
-                    dictionary[key] = JobPriority.Medium;
-
-                hasHighPrority = true;
-            }
+            dictionary = NormalizeJobPriorities(dictionary);
 
             return new(this)
             {
@@ -453,20 +429,10 @@ namespace Content.Shared.Preferences
             {
                 dictionary.Remove(jobId);
             }
-            else if (priority == JobPriority.High)
-            {
-                // There can only ever be one high priority job.
-                foreach (var (job, value) in dictionary)
-                {
-                    if (value == JobPriority.High)
-                        dictionary[job] = JobPriority.Medium;
-                }
-
-                dictionary[jobId] = priority;
-            }
             else
             {
-                dictionary[jobId] = priority;
+                dictionary[jobId] = priority.NormalizeSecond();
+                EnforceFirstPriorityLimit(dictionary, jobId);
             }
 
             return new(this)
@@ -699,22 +665,13 @@ namespace Content.Shared.Preferences
                 .Where(p => prototypeManager.TryIndex<JobPrototype>(p.Key, out var job) && job.SetPreference && p.Value switch
                 {
                     JobPriority.Never => false, // Drop never since that's assumed default.
-                    JobPriority.Low => true,
-                    JobPriority.Medium => true,
-                    JobPriority.High => true,
+                    JobPriority.Second => true,
+                    JobPriority.SecondFallback => true,
+                    JobPriority.First => true,
                     _ => false
                 }));
 
-            var hasHighPrio = false;
-            foreach (var (key, value) in priorities)
-            {
-                if (value != JobPriority.High)
-                    continue;
-
-                if (hasHighPrio)
-                    priorities[key] = JobPriority.Medium;
-                hasHighPrio = true;
-            }
+            priorities = NormalizeJobPriorities(priorities);
 
             var antags = AntagPreferences
                 .Where(id => prototypeManager.TryIndex(id, out var antag) && antag.SetPreference)
@@ -972,5 +929,58 @@ namespace Content.Shared.Preferences
         {
             return new HumanoidCharacterProfile(this);
         }
+
+        private static Dictionary<ProtoId<JobPrototype>, JobPriority> NormalizeJobPriorities(
+            Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities)
+        {
+            var normalized = new Dictionary<ProtoId<JobPrototype>, JobPriority>(jobPriorities.Count);
+            foreach (var (key, value) in jobPriorities)
+            {
+                if (value == JobPriority.Never)
+                    continue;
+
+                normalized[key] = value.NormalizeSecond();
+            }
+
+            EnforceFirstPriorityLimit(normalized, null);
+            return normalized;
+        }
+
+        private static void EnforceFirstPriorityLimit(
+            Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities,
+            ProtoId<JobPrototype>? preferredJob)
+        {
+            var firstJobs = jobPriorities
+                .Where(kvp => kvp.Value.IsFirst())
+                .Select(kvp => kvp.Key)
+                .ToList();
+
+            if (firstJobs.Count <= 2)
+                return;
+
+            var keep = new HashSet<ProtoId<JobPrototype>>();
+            if (preferredJob is { } preferred &&
+                jobPriorities.TryGetValue(preferred, out var preferredPriority) &&
+                preferredPriority.IsFirst())
+            {
+                keep.Add(preferred);
+            }
+
+            foreach (var job in firstJobs)
+            {
+                if (keep.Count >= 2)
+                    break;
+
+                keep.Add(job);
+            }
+
+            foreach (var job in firstJobs)
+            {
+                if (!keep.Contains(job))
+                    jobPriorities[job] = JobPriority.Second;
+            }
+        }
     }
 }
+
+// # CCM priority rework

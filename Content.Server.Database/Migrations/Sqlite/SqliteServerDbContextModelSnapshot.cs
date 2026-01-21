@@ -654,11 +654,36 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.HasIndex("ProfileId", "JobName")
                         .IsUnique();
 
-                    b.HasIndex(new[] { "ProfileId" }, "IX_job_one_high_priority")
-                        .IsUnique()
-                        .HasFilter("priority = 3");
-
                     b.ToTable("job", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ProfileJobPriorityWeight", b =>
+                {
+                    b.Property<string>("JobName")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("job_name");
+
+                    b.Property<int?>("LastAssignedRoundId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("last_assigned_round_id");
+
+                    b.Property<int>("MissedRounds")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("missed_rounds");
+
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<int>("Slot")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("slot");
+
+                    b.HasKey("PlayerUserId", "Slot", "JobName")
+                        .HasName("PK_profile_job_priority_weight");
+
+                    b.ToTable("profile_job_priority_weight", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.PlayTime", b =>
@@ -2862,3 +2887,5 @@ namespace Content.Server.Database.Migrations.Sqlite
         }
     }
 }
+
+// # CCM priority rework
