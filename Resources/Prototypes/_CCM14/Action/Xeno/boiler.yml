@@ -4,17 +4,19 @@
   name: Deploy Traps (60)
   description: Deploys a line of temporary resin traps that, when an enemy walks over, stuns them momentarily.
   components:
-  - type: WorldTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: resin_pit
-    event: !type:RMCXenoDeployTrapsActionEvent
     useDelay: 20
+  - type: WorldTargetAction
+    event: !type:RMCXenoDeployTrapsActionEvent
+  - type: TargetAction
     range: 13
-  - type: ActionBlockIfResting
   - type: XenoActionPlasma
     cost: 60
+  - type: ActionBlockIfResting
 
 - type: entity
   parent: ActionXenoBase
@@ -22,14 +24,49 @@
   name: Acid Mine (40)
   description: Designate a tile in which a 3x3 acid mine will erupt. If anyone is in the 3x3 ranged acid mine, they'll be hit with acid.
   components:
-  - type: WorldTargetAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_mine
-    event: !type:RMCXenoDeployAcidMineEvent
     useDelay: 6
+  - type: WorldTargetAction
+    event: !type:RMCXenoDeployAcidMineEvent
+  - type: TargetAction
     range: 13
-  - type: ActionBlockIfResting
   - type: XenoActionPlasma
     cost: 40
+  - type: ActionBlockIfResting
+
+- type: entity
+  id: ActionXenoAcidShotgun
+  parent: ActionXenoBase
+  name: Acid shotgun (60) # TODO RMC14 proper plasma costs
+  description: Launch a scatter shot of small acid blobs that fire damage enemies akin to spitter/praetorian spit. Targets restrained by traps take 75% increased damage.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: acid_shotgun
+    useDelay: 13
+  - type: WorldTargetAction
+    event: !type:XenoScatteredSpitActionEvent
+  - type: TargetAction
+    range: 15
+    checkCanAccess: false
+  - type: ActionBlockIfResting
+
+- type: entity
+  id: ActionXenoTrapperZoom
+  parent: ActionXenoBase
+  name: Toggle Long-Range Sight
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: toggle_long_range
+    useDelay: 0.2
+  - type: InstantAction
+    event: !type:XenoZoomActionEvent
