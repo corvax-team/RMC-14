@@ -561,28 +561,80 @@ public sealed partial class StationJobsSystem : EntitySystem
         if (_gameTicker.RunLevel != GameRunLevel.PreRoundLobby)
             return;
 
-        var profiles = new Dictionary<NetUserId, HumanoidCharacterProfile>();
+        var jobSlotCounts = GetRoundstartJobSlotCounts();
+        var selectedProfiles = new Dictionary<NetUserId, HumanoidCharacterProfile>();
         var selectedSlots = new Dictionary<NetUserId, int>();
         var sessionMinutes = new Dictionary<NetUserId, float>();
 
         foreach (var session in _player.Sessions)
         {
-            if (!_preferences.TryGetCachedPreferences(session.UserId, out var prefs) ||
-                prefs.SelectedCharacter is not HumanoidCharacterProfile profile)
-            {
+            if (!_preferences.TryGetCachedPreferences(session.UserId, out var prefs))
                 continue;
-            }
 
-            profiles[session.UserId] = profile;
+            if (prefs.SelectedCharacter is HumanoidCharacterProfile profile)
+                selectedProfiles[session.UserId] = profile;
+
             selectedSlots[session.UserId] = prefs.SelectedCharacterIndex;
             sessionMinutes[session.UserId] = MathF.Max(0f, (float) (DateTime.UtcNow - session.ConnectedTime).TotalMinutes);
         }
 
-        if (profiles.Count == 0)
+        if (selectedProfiles.Count == 0)
             return;
 
         var currentRoundId = _gameTicker.RoundId;
+
+        foreach (var session in _player.Sessions)
+        {
+            var userId = session.UserId;
+            if (!_preferences.TryGetCachedPreferences(userId, out var prefs))
+                continue;
+
+            foreach (var (slot, character) in prefs.Characters)
+            {
+                if (character is not HumanoidCharacterProfile profile)
+                    continue;
+
+                var profiles = selectedProfiles;
+                var slots = selectedSlots;
+
+                if (!selectedSlots.TryGetValue(userId, out var selectedSlot) || selectedSlot != slot)
+                {
+                    profiles = new Dictionary<NetUserId, HumanoidCharacterProfile>(selectedProfiles)
+                    {
+                        [userId] = profile
+                    };
+
+                    slots = new Dictionary<NetUserId, int>(selectedSlots)
+                    {
+                        [userId] = slot
+                    };
+                }
+
+                var chances = CalculateFirstOrderChancesForUser(
+                    userId,
+                    profiles,
+                    slots,
+                    sessionMinutes,
+                    currentRoundId,
+                    jobSlotCounts);
+
+                RaiseNetworkEvent(new JobPriorityChancesEvent(slot, chances), session.Channel);
+            }
+        }
+    }
+
+    private Dictionary<ProtoId<JobPrototype>, float> CalculateFirstOrderChancesForUser(
+        NetUserId userId,
+        Dictionary<NetUserId, HumanoidCharacterProfile> profiles,
+        Dictionary<NetUserId, int> selectedSlots,
+        Dictionary<NetUserId, float> sessionMinutes,
+        int currentRoundId,
+        Dictionary<ProtoId<JobPrototype>, int> jobSlotCounts)
+    {
         var candidates = GetPlayersJobCandidates(null, JobPriority.First, profiles);
+        if (!candidates.TryGetValue(userId, out var userJobs))
+            return new Dictionary<ProtoId<JobPrototype>, float>();
+
         var jobWeights = new Dictionary<ProtoId<JobPrototype>, Dictionary<NetUserId, float>>();
         var jobTotals = new Dictionary<ProtoId<JobPrototype>, float>();
 
@@ -602,27 +654,25 @@ public sealed partial class StationJobsSystem : EntitySystem
             }
         }
 
-        foreach (var (userId, profile) in profiles)
+        var chances = new Dictionary<ProtoId<JobPrototype>, float>();
+        foreach (var jobId in userJobs)
         {
-            if (!_player.TryGetSessionById(userId, out var session))
+            if (!jobTotals.TryGetValue(jobId, out var total) || total <= 0f)
                 continue;
 
-            var chances = new Dictionary<ProtoId<JobPrototype>, float>();
-            if (candidates.TryGetValue(userId, out var userJobs))
+            var weight = jobWeights[jobId][userId];
+            var slotCount = jobSlotCounts.GetValueOrDefault(jobId, 1);
+            if (slotCount <= 0)
             {
-                foreach (var jobId in userJobs)
-                {
-                    if (!jobTotals.TryGetValue(jobId, out var total) || total <= 0f)
-                        continue;
-
-                    var weight = jobWeights[jobId][userId];
-                    chances[jobId] = weight / total * 100f;
-                }
+                chances[jobId] = 0f;
+                continue;
             }
 
-            var slot = selectedSlots[userId];
-            RaiseNetworkEvent(new JobPriorityChancesEvent(slot, chances), session.Channel);
+            var chance = weight / total * 100f * slotCount;
+            chances[jobId] = MathF.Min(100f, chance);
         }
+
+        return chances;
     }
 
     #endregion

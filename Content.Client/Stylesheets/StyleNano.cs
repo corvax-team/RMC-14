@@ -1018,6 +1018,32 @@ namespace Content.Client.Stylesheets
             var sliderFillBlue = new StyleBoxTexture(sliderFillBox) { Modulate = Color.Blue };
             var sliderFillWhite = new StyleBoxTexture(sliderFillBox) { Modulate = Color.FromHex("#D5FFE0") };
 
+            var optionsSliderBack = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#0F1A13"),
+                BorderThickness = new Thickness(1),
+                BorderColor = Color.FromHex("#2F6B46"),
+            };
+
+            var optionsSliderFore = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Transparent,
+                BorderThickness = new Thickness(1),
+                BorderColor = Color.FromHex("#2F6B46"),
+            };
+
+            var optionsSliderFill = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#2F6B46"),
+            };
+
+            var optionsSliderGrab = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#D5FFE0"),
+                BorderThickness = new Thickness(1),
+                BorderColor = Color.FromHex("#2F6B46"),
+            };
+
             var boxFont13 = resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 13);
 
             var insetBack = new StyleBoxTexture
@@ -2007,6 +2033,20 @@ namespace Content.Client.Stylesheets
                     new StyleProperty(TextureRect.StylePropertyTexture, monotoneCheckBoxTextureChecked),
                 }),
 
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(TextureRect), new [] { CheckBox.StyleClassCheckBox }, null, null)), new[]
+                {
+                    new StyleProperty(TextureRect.StylePropertyTexture, monotoneCheckBoxTextureUnchecked),
+                }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(TextureRect), new [] { CheckBox.StyleClassCheckBox, CheckBox.StyleClassCheckBoxChecked }, null, null)), new[]
+                {
+                    new StyleProperty(TextureRect.StylePropertyTexture, monotoneCheckBoxTextureChecked),
+                }),
+
                 // Tooltip
                 new StyleRule(new SelectorElement(typeof(Tooltip), null, null, null), new[]
                 {
@@ -2545,6 +2585,16 @@ namespace Content.Client.Stylesheets
                     new StyleProperty(Slider.StylePropertyFill, sliderFillWhite),
                 }),
 
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(Slider), null, null, null)), new []
+                {
+                    new StyleProperty(Slider.StylePropertyBackground, optionsSliderBack),
+                    new StyleProperty(Slider.StylePropertyForeground, optionsSliderFore),
+                    new StyleProperty(Slider.StylePropertyGrabber, optionsSliderGrab),
+                    new StyleProperty(Slider.StylePropertyFill, optionsSliderFill),
+                }),
+
                 // chat channel option selector
                 new StyleRule(new SelectorElement(typeof(Button), new[] {StyleClassChatChannelSelectorButton}, null, null), new[]
                 {
@@ -2969,5 +3019,7 @@ namespace Content.Client.Stylesheets
         }
     }
 }
+
+// # CCM priority rework
 
 

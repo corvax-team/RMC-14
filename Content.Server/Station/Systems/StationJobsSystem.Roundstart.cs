@@ -64,7 +64,7 @@ public sealed partial class StationJobsSystem
 
         if (profiles.Count == 0)
             return new();
-
+// CCM priority rework
         var originalProfiles = profiles;
 
         // We need to modify this collection later, so make a copy of it.
@@ -90,7 +90,7 @@ public sealed partial class StationJobsSystem
                 sessionMinutes[userId] = 0f;
             }
         }
-
+        // CCM priority rework
         // Player <-> (job, station)
         var assigned = new Dictionary<NetUserId, (ProtoId<JobPrototype>?, EntityUid)>(profiles.Count);
 
@@ -158,7 +158,7 @@ public sealed partial class StationJobsSystem
 
                     optionsRemaining--;
                 }
-
+// CCM priority rework
                 NetUserId PickPlayerForJob(ProtoId<JobPrototype> job)
                 {
                     if (!isFirstOrder || jobWeights == null || !jobWeights.TryGetValue(job, out var weights))
@@ -166,7 +166,7 @@ public sealed partial class StationJobsSystem
 
                     return PickWeightedPlayer(jobPlayerOptions[job], weights);
                 }
-
+// CCM priority rework
                 jobPlayerOptions.Clear(); // We reuse this collection.
 
                 // Goes through every candidate, and adds them to jobPlayerOptions, so that the candidate players
@@ -180,7 +180,7 @@ public sealed partial class StationJobsSystem
                             jobPlayerOptions.Add(job, new HashSet<NetUserId>());
 
                         jobPlayerOptions[job].Add(user);
-
+// CCM priority rework
                         if (jobWeights != null)
                         {
                             if (!jobWeights.TryGetValue(job, out var weights))
@@ -192,7 +192,7 @@ public sealed partial class StationJobsSystem
                             weights[user] = CalculateFirstOrderWeight(user, selectedSlots[user], job, sessionMinutes[user], currentRoundId);
                         }
                     }
-
+// CCM priority rework
                     optionsRemaining++;
                 }
 
@@ -312,7 +312,7 @@ public sealed partial class StationJobsSystem
         }
 
         endFunc:
-        UpdateJobPriorityWeights(originalProfiles, assigned, selectedSlots, currentRoundId);
+        UpdateJobPriorityWeights(originalProfiles, assigned, selectedSlots, currentRoundId); // CCM priority rework
         return assigned;
     }
 
@@ -437,6 +437,7 @@ public sealed partial class StationJobsSystem
 
         return outputDict;
     }
+// # CCM priority rework-start
 
     private void UpdateJobPriorityWeights(
         IReadOnlyDictionary<NetUserId, HumanoidCharacterProfile> profiles,
@@ -468,6 +469,118 @@ public sealed partial class StationJobsSystem
     private const float SessionMinutesPerBonus = 60f;
     private const float MinFirstOrderWeight = 0.1f;
 
+    private readonly Dictionary<(NetUserId UserId, int Slot, ProtoId<JobPrototype> JobId), FirstOrderWeightOverride>
+        _firstOrderWeightOverrides = new();
+    private readonly Dictionary<NetUserId, float> _sessionMinutesOverrides = new();
+    private readonly Dictionary<NetUserId, float> _externalBonusOverrides = new();
+
+    public readonly record struct FirstOrderChanceReportEntry(
+        ProtoId<JobPrototype> JobId,
+        float ChancePercent,
+        float Weight,
+        float TotalWeight,
+        FirstOrderWeightBreakdown Breakdown);
+
+    public bool TryGetFirstOrderChanceReport(
+        NetUserId userId,
+        HumanoidCharacterProfile profile,
+        int slot,
+        out List<FirstOrderChanceReportEntry> report,
+        out string? warning)
+    {
+        report = new List<FirstOrderChanceReportEntry>();
+        warning = null;
+
+        var selectedProfiles = new Dictionary<NetUserId, HumanoidCharacterProfile>();
+        var selectedSlots = new Dictionary<NetUserId, int>();
+        var sessionMinutes = new Dictionary<NetUserId, float>();
+
+        foreach (var session in _player.Sessions)
+        {
+            if (!_preferences.TryGetCachedPreferences(session.UserId, out var prefs))
+                continue;
+
+            if (prefs.SelectedCharacter is HumanoidCharacterProfile selectedProfile)
+                selectedProfiles[session.UserId] = selectedProfile;
+
+            selectedSlots[session.UserId] = prefs.SelectedCharacterIndex;
+            sessionMinutes[session.UserId] = MathF.Max(0f, (float) (DateTime.UtcNow - session.ConnectedTime).TotalMinutes);
+        }
+
+        if (selectedProfiles.Count == 0)
+        {
+            warning = "No lobby profiles are available.";
+            return false;
+        }
+
+        var profiles = new Dictionary<NetUserId, HumanoidCharacterProfile>(selectedProfiles)
+        {
+            [userId] = profile
+        };
+
+        var slots = new Dictionary<NetUserId, int>(selectedSlots)
+        {
+            [userId] = slot
+        };
+
+        var currentRoundId = _gameTicker.RoundId;
+        var jobSlotCounts = GetRoundstartJobSlotCounts();
+        var candidates = GetPlayersJobCandidates(null, JobPriority.First, profiles);
+
+        if (!candidates.TryGetValue(userId, out var userJobs) || userJobs.Count == 0)
+        {
+            warning = "Player has no first-order jobs.";
+            return false;
+        }
+
+        var jobWeights = new Dictionary<ProtoId<JobPrototype>, Dictionary<NetUserId, float>>();
+        var jobTotals = new Dictionary<ProtoId<JobPrototype>, float>();
+
+        foreach (var (user, jobs) in candidates)
+        {
+            foreach (var job in jobs)
+            {
+                if (!jobWeights.TryGetValue(job, out var weights))
+                {
+                    weights = new Dictionary<NetUserId, float>();
+                    jobWeights[job] = weights;
+                }
+
+                var weight = CalculateFirstOrderWeight(user, slots[user], job, sessionMinutes.GetValueOrDefault(user), currentRoundId);
+                weights[user] = weight;
+                jobTotals[job] = jobTotals.GetValueOrDefault(job) + weight;
+            }
+        }
+
+        foreach (var jobId in userJobs)
+        {
+            if (!jobTotals.TryGetValue(jobId, out var total) || total <= 0f)
+                continue;
+
+            var weight = jobWeights[jobId][userId];
+            var slotCount = jobSlotCounts.GetValueOrDefault(jobId, 1);
+            if (slotCount <= 0)
+                continue;
+
+            var chance = MathF.Min(100f, weight / total * 100f * slotCount);
+            var breakdown = CalculateFirstOrderWeightBreakdown(
+                userId,
+                slot,
+                jobId,
+                sessionMinutes.GetValueOrDefault(userId),
+                currentRoundId);
+
+            report.Add(new FirstOrderChanceReportEntry(
+                jobId,
+                chance,
+                weight,
+                total,
+                breakdown));
+        }
+
+        return report.Count > 0;
+    }
+
     private float CalculateFirstOrderWeight(
         NetUserId user,
         int slot,
@@ -476,16 +589,12 @@ public sealed partial class StationJobsSystem
         int currentRoundId)
     {
         var weight = BaseFirstOrderWeight;
-        if (_jobPriorityWeights.TryGetWeight(user, slot, jobId, out var record) && record != null)
-        {
-            weight += record.MissedRounds * MissedRoundWeight;
-            if (record.LastAssignedRoundId.HasValue &&
-                record.LastAssignedRoundId.Value == currentRoundId - 1)
-            {
-                weight += RecentRolePenalty;
-            }
-        }
+        var (missedRounds, assignedLastRound) = GetFirstOrderWeightInputs(user, slot, jobId, currentRoundId);
+        weight += missedRounds * MissedRoundWeight;
+        if (assignedLastRound)
+            weight += RecentRolePenalty;
 
+        sessionMinutes = GetSessionMinutesOverride(user, sessionMinutes);
         var sessionBonusSteps = (int) MathF.Floor(sessionMinutes / SessionMinutesPerBonus);
         if (sessionBonusSteps > 0)
             weight += sessionBonusSteps * (MissedRoundWeight / 3f);
@@ -494,11 +603,154 @@ public sealed partial class StationJobsSystem
         return MathF.Max(weight, MinFirstOrderWeight);
     }
 
+    private FirstOrderWeightBreakdown CalculateFirstOrderWeightBreakdown(
+        NetUserId user,
+        int slot,
+        ProtoId<JobPrototype> jobId,
+        float sessionMinutes,
+        int currentRoundId)
+    {
+        var baseWeight = BaseFirstOrderWeight;
+        var (missedRounds, assignedLastRound) = GetFirstOrderWeightInputs(user, slot, jobId, currentRoundId);
+        var missedWeight = missedRounds * MissedRoundWeight;
+        var recentPenalty = assignedLastRound ? RecentRolePenalty : 0f;
+
+        sessionMinutes = GetSessionMinutesOverride(user, sessionMinutes);
+        var sessionBonusSteps = (int) MathF.Floor(sessionMinutes / SessionMinutesPerBonus);
+        var sessionBonus = sessionBonusSteps > 0 ? sessionBonusSteps * (MissedRoundWeight / 3f) : 0f;
+
+        var externalBonus = GetExternalWeightModifier(user);
+        var total = baseWeight + missedWeight + recentPenalty + sessionBonus + externalBonus;
+        if (total < MinFirstOrderWeight)
+            total = MinFirstOrderWeight;
+
+        return new FirstOrderWeightBreakdown(
+            baseWeight,
+            missedRounds,
+            missedWeight,
+            recentPenalty,
+            sessionBonusSteps,
+            sessionBonus,
+            externalBonus,
+            total);
+    }
+
+    public readonly record struct FirstOrderWeightBreakdown(
+        float BaseWeight,
+        int MissedRounds,
+        float MissedWeight,
+        float RecentPenalty,
+        int SessionBonusSteps,
+        float SessionBonus,
+        float ExternalBonus,
+        float TotalWeight);
+
+    public void SetFirstOrderWeightOverride(
+        NetUserId userId,
+        int slot,
+        ProtoId<JobPrototype> jobId,
+        int missedRounds,
+        bool assignedLastRound)
+    {
+        _firstOrderWeightOverrides[(userId, slot, jobId)] =
+            new FirstOrderWeightOverride(missedRounds, assignedLastRound);
+    }
+
+    public bool ClearFirstOrderWeightOverride(NetUserId userId, int slot, ProtoId<JobPrototype> jobId)
+    {
+        return _firstOrderWeightOverrides.Remove((userId, slot, jobId));
+    }
+
+    public void ClearFirstOrderWeightOverrides(NetUserId userId)
+    {
+        var keys = _firstOrderWeightOverrides.Keys
+            .Where(key => key.UserId == userId)
+            .ToList();
+
+        foreach (var key in keys)
+        {
+            _firstOrderWeightOverrides.Remove(key);
+        }
+    }
+
+    public void SetSessionMinutesOverride(NetUserId userId, float sessionMinutes)
+    {
+        _sessionMinutesOverrides[userId] = MathF.Max(0f, sessionMinutes);
+    }
+
+    public void ClearSessionMinutesOverride(NetUserId userId)
+    {
+        _sessionMinutesOverrides.Remove(userId);
+    }
+
+    public void SetExternalWeightOverride(NetUserId userId, float bonus)
+    {
+        _externalBonusOverrides[userId] = bonus;
+    }
+
+    public void ClearExternalWeightOverride(NetUserId userId)
+    {
+        _externalBonusOverrides.Remove(userId);
+    }
+
+    private (int MissedRounds, bool AssignedLastRound) GetFirstOrderWeightInputs(
+        NetUserId user,
+        int slot,
+        ProtoId<JobPrototype> jobId,
+        int currentRoundId)
+    {
+        if (_firstOrderWeightOverrides.TryGetValue((user, slot, jobId), out var overrideValues))
+            return (overrideValues.MissedRounds, overrideValues.AssignedLastRound);
+
+        if (_jobPriorityWeights.TryGetWeight(user, slot, jobId, out var record) && record != null)
+        {
+            var assignedLastRound = record.LastAssignedRoundId.HasValue &&
+                record.LastAssignedRoundId.Value == currentRoundId - 1;
+            return (record.MissedRounds, assignedLastRound);
+        }
+
+        return (0, false);
+    }
+
+    private float GetSessionMinutesOverride(NetUserId user, float sessionMinutes)
+    {
+        return _sessionMinutesOverrides.TryGetValue(user, out var overrideMinutes)
+            ? overrideMinutes
+            : sessionMinutes;
+    }
+
     private float GetExternalWeightModifier(NetUserId user)
     {
+        if (_externalBonusOverrides.TryGetValue(user, out var overrideBonus))
+            return overrideBonus;
+
         // Placeholder for donate/admin modifiers.
         return 0f;
     }
+
+    private Dictionary<ProtoId<JobPrototype>, int> GetRoundstartJobSlotCounts()
+    {
+        var counts = new Dictionary<ProtoId<JobPrototype>, int>();
+        var query = EntityQueryEnumerator<StationJobsComponent>();
+        while (query.MoveNext(out var uid, out var stationJobs))
+        {
+            var jobs = GetRoundStartJobs(uid, stationJobs);
+            foreach (var (jobId, slot) in jobs)
+            {
+                var count = slot ?? 1;
+                if (count <= 0)
+                    continue;
+
+                counts[jobId] = counts.GetValueOrDefault(jobId) + count;
+            }
+        }
+
+        return counts;
+    }
+
+    private readonly record struct FirstOrderWeightOverride(
+        int MissedRounds,
+        bool AssignedLastRound);
 
     private NetUserId PickWeightedPlayer(IReadOnlyCollection<NetUserId> candidates, Dictionary<NetUserId, float> weights)
     {
@@ -524,4 +776,4 @@ public sealed partial class StationJobsSystem
     }
 }
 
-// # CCM priority rework
+// # CCM priority rework-end

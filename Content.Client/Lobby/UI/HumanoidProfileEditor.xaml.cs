@@ -968,9 +968,9 @@ namespace Content.Client.Lobby.UI
 
             var items = new[]
             {
-                ("humanoid-profile-editor-job-priority-never-button", (int) JobPriority.Never),
-                ("humanoid-profile-editor-job-priority-second-button", (int) JobPriority.Second),
                 ("humanoid-profile-editor-job-priority-first-button", (int) JobPriority.First),
+                ("humanoid-profile-editor-job-priority-second-button", (int) JobPriority.Second),
+                ("humanoid-profile-editor-job-priority-never-button", (int) JobPriority.Never),
             };
 
             foreach (var department in departments)
@@ -1486,13 +1486,6 @@ namespace Content.Client.Lobby.UI
             foreach (var (jobId, label) in _jobChanceLabels)
             {
                 var protoId = new ProtoId<JobPrototype>(jobId);
-                var priority = Profile.JobPriorities.GetValueOrDefault(protoId, JobPriority.Never);
-                if (!priority.IsFirst())
-                {
-                    label.Visible = false;
-                    continue;
-                }
-
                 var chance = _jobPriorityChances.GetValueOrDefault(protoId, 0f);
                 label.Text = Loc.GetString("humanoid-profile-editor-job-chance", ("chance", MathF.Round(chance, 1)));
                 label.Visible = true;

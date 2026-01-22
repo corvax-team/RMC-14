@@ -10,5 +10,6 @@
         <TextureButton Name="Help" StyleClasses="HelpButton"/>
     </Control>
     <BoxContainer Name="OptionsContainer"
-                  SetWidth="400"/>
+                  SetWidth="300"/>
 </BoxContainer>
+<!-- # CCM priority rework -->

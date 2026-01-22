@@ -53,8 +53,8 @@ humanoid-profile-editor-antags-tab = Antags
 humanoid-profile-editor-antag-preference-yes-button = Yes
 humanoid-profile-editor-antag-preference-no-button = No
 
-humanoid-profile-editor-job-priority-first-button = 1st order
-humanoid-profile-editor-job-priority-second-button = 2nd order
+humanoid-profile-editor-job-priority-first-button = Highest
+humanoid-profile-editor-job-priority-second-button = Lowest
 humanoid-profile-editor-job-priority-never-button = Never
 humanoid-profile-editor-job-chance = Chance: { $chance }%
 humanoid-profile-editor-naming-rules-warning = Warning: Offensive or LRP IC names and descriptions will lead to admin intervention on this server. Read our \[Rules\] for more.

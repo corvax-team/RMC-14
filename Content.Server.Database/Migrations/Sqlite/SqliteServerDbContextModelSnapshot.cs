@@ -657,35 +657,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("job", (string)null);
                 });
 
-            modelBuilder.Entity("Content.Server.Database.ProfileJobPriorityWeight", b =>
-                {
-                    b.Property<string>("JobName")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("job_name");
-
-                    b.Property<int?>("LastAssignedRoundId")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("last_assigned_round_id");
-
-                    b.Property<int>("MissedRounds")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("missed_rounds");
-
-                    b.Property<Guid>("PlayerUserId")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("player_user_id");
-
-                    b.Property<int>("Slot")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("slot");
-
-                    b.HasKey("PlayerUserId", "Slot", "JobName")
-                        .HasName("PK_profile_job_priority_weight");
-
-                    b.ToTable("profile_job_priority_weight", (string)null);
-                });
-
             modelBuilder.Entity("Content.Server.Database.PlayTime", b =>
                 {
                     b.Property<int>("Id")
@@ -917,6 +888,34 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsUnique();
 
                     b.ToTable("profile", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.ProfileJobPriorityWeight", b =>
+                {
+                    b.Property<Guid>("PlayerUserId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_user_id");
+
+                    b.Property<int>("Slot")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("slot");
+
+                    b.Property<string>("JobName")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("job_name");
+
+                    b.Property<int?>("LastAssignedRoundId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("last_assigned_round_id");
+
+                    b.Property<int>("MissedRounds")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("missed_rounds");
+
+                    b.HasKey("PlayerUserId", "Slot", "JobName")
+                        .HasName("PK_profile_job_priority_weights");
+
+                    b.ToTable("profile_job_priority_weights", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.ProfileLoadout", b =>

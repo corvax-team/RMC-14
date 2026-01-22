@@ -24,7 +24,7 @@ public sealed partial class RequirementsSelector : BoxContainer
     public event Action<int>? OnSelected;
     public event Action<List<ProtoId<GuideEntryPrototype>>>? OnOpenGuidebook;
 
-    public int Selected => _options.SelectedId;
+    public int Selected => _options.SelectedValue;
 
     public RequirementsSelector()
     {
@@ -42,7 +42,7 @@ public sealed partial class RequirementsSelector : BoxContainer
         _options.OnItemSelected += args =>
         {
             _options.Select(args.Id);
-            OnSelected?.Invoke(args.Id);
+            OnSelected?.Invoke(args.Button.SelectedValue);
         };
 
         var requirementsLabel = new Label()
@@ -125,13 +125,15 @@ public sealed partial class RequirementsSelector : BoxContainer
         return new Button
         {
             Text = text,
-            MinWidth = 90,
+            MinWidth = 55,
             HorizontalExpand = true,
         };
     }
 
     public void Select(int id)
     {
-        _options.Select(id);
+        _options.SelectByValue(id);
     }
 }
+
+// # CCM priority rework

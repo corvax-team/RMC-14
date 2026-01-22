@@ -12,11 +12,11 @@
                        Margin="8 0 0 0" VAlign="Center"
                        StyleClasses="LabelHeadingBigger" />
                 <Button Name="CommendationsReceivedButton" HorizontalExpand="True"
-                        Text="Medals and Jellies Received"
+                        Text="{Loc 'character-setup-gui-commendations-received'}"
                         StyleClasses="ButtonBig"
                         HorizontalAlignment="Right" />
                 <Button Name="CommendationsGivenButton"
-                        Text="Medals and Jellies Given"
+                        Text="{Loc 'character-setup-gui-commendations-given'}"
                         StyleClasses="ButtonBig"
                         HorizontalAlignment="Right" />
                 <cc:CommandButton Name="AdminRemarksButton"
@@ -34,7 +34,7 @@
                 </PanelContainer.PanelOverride>
             </PanelContainer>
             <BoxContainer Orientation="Horizontal" VerticalExpand="True" SeparationOverride="0">
-                <ScrollContainer MinSize="325 0" Margin="5 5 0 0">
+                <ScrollContainer MinSize="280 0" Margin="5 5 0 0">
                     <BoxContainer Name="Characters" Orientation="Vertical" />
                 </ScrollContainer>
                 <PanelContainer MinSize="2 0">
@@ -47,3 +47,4 @@
         </BoxContainer>
     </Control>
 </Control>
+<!-- # CCM priority rework -->
