@@ -1,4 +1,5 @@
 - type: entity
+  abstract: true
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -6,7 +7,7 @@
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
   - RMCXenoMobCollision
-  id: CMXenoBoiler
+  id: RMCXenoBoilerBase
   name: Boiler
   description: A huge, grotesque xenonid covered in glowing, oozing acid slime.
   components:
@@ -16,7 +17,7 @@
   - type: GhostRole
     name: cm-job-name-xeno-boiler
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Boiler/boiler.rsi
+    sprite: _RMC14/Mobs/Xenonids/Burrower/boiler.rsi
   - type: Fixtures
     fixtures:
       fix1:
@@ -27,7 +28,6 @@
         mask:
         - MobMask
         - BarbedBarricade
-        - BarricadeImpassable
         layer:
         - MobLayer
       fix2:
@@ -49,20 +49,8 @@
       750: Dead
   - type: Xeno
     role: CMXenoBoiler
-    actionIds:
-    - ActionXenoRest
-    - ActionXenoRegurgitate
-    - ActionXenoWatch
-    - ActionXenoTailStabBoiler
-    - ActionXenoAcidStrong
-    - ActionXenoBombard
-    - ActionXenoToggleGasType
-    - ActionXenoSprayAcidBoiler
-    - ActionXenoZoom
-    - ActionXenoAcidShroud
-    - ActionXenoDevolve
     tier: 3
-    hudOffset: -0.15,0.05
+    hudOffset: 0,0.35
     unlockAt: 900 # 15 minutes
   - type: XenoHeavy
   - type: XenoDevolve
@@ -82,9 +70,6 @@
     offsetLength: 3
     speed: 0.8
     doAfter: 0.5
-  - type: XenoBombard
-  - type: XenoAcidShroud
-  - type: XenoGasToggle
   - type: XenoTailStab
     toggle: true
     inject:
@@ -92,11 +77,6 @@
     tailDamage:
       groups:
         Brute: 30
-  - type: XenoSprayAcid
-    acid: XenoAcidSprayStrong
-    barricadeDamage:
-      types:
-        Heat: 5
   - type: MeleeWeapon
     damage:
       groups:
@@ -105,10 +85,6 @@
     chance: 0.25
     stunMin: 3
     stunMax: 4
-  - type: AcidBloodSplash
-    isActivateSplashOnGib: false
-  - type: RMCGibOnDeath
-    gibChance: 1.0
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
@@ -133,7 +109,6 @@
     autoRot: true
   - type: RMCSize
     size: Big
-  - type: XenoDeathcloud
   - type: NeurotoxinInjector
     neuroPerSecond: 20
     injectInContact: false
@@ -152,16 +127,99 @@
     prefix: boiler
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      sprite: _RMC14/Interface/map_blips.rsi
       state: boiler
   - type: Flammable
-    damage: #per second, scales with number of fire 'stacks'
+    damage: # per second, scales with number of fire 'stacks'
       types:
         Heat: 3
   - type: XenoToggleChargingKnockback
     enabled: false
   - type: XenoToggleChargingStop
-  - type: FixedIdentity
-    name: cm-job-name-xeno-boiler
-  - type: RMCActionOrder
-    id: CMXenoBoiler
+  - type: XenoDeathcloud
+
+- type: entity
+  parent: RMCXenoBoilerBase
+  id: CMXenoBoiler
+  components:
+  - type: XenoBombard
+  - type: XenoAcidShroud
+  - type: XenoGasToggle
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStabBoiler
+    - ActionXenoAcidStrong
+    - ActionXenoBombard
+    - ActionXenoToggleGasType
+    - ActionXenoSprayAcidBoiler
+    - ActionXenoZoom
+    - ActionXenoAcidShroud
+    - ActionXenoDevolve
+  - type: XenoSprayAcid
+    acid: XenoAcidSprayStrong
+    barricadeDamage:
+      types:
+        Heat: 5
+  - type: XenoEvolution
+    strains:
+    - RMCXenoBoilerTrapper
+  - type: AcidTrap
+
+- type: entity
+  parent: RMCXenoBoilerBase
+  id: RMCXenoBoilerTrapper
+  suffix: Trapper
+  components:
+  - type: Sprite
+    sprite: _CCM14/Mobs/Xenos/Boiler/trapper_boiler.rsi
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStabBoiler
+    - ActionXenoAcidStrong
+    - ActionXenoDeployTraps
+    - ActionXenoDeployAcidMine
+    - ActionXenoAcidShotgun
+    - ActionXenoTrapperZoom
+    - ActionXenoDevolve
+    hidden: true
+  - type: XenoStrain
+    name: rmc-xeno-trapper-name
+    description: rmc-xeno-trapper-description
+    popup: rmc-xeno-trapper-popup
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      590: Critical
+      690: Dead
+  # In theory, one of the projectiles should fly for 5 tiles, the other 9 for 4.
+  # This would be useless if the trapper didn't get a full charge on a Marine caught in his trap.
+  # But the current projectile system doesn't work like in CM13,
+  # where we have the original projectile, and a chance to get a shrpanel.
+  # Yvi :jokerage:
+  - type: XenoScatteredSpit
+    plasmaCost: 60
+    maxProjectiles: 9
+    maxDeviation: 40
+    projectileId: XenoAcidShotgunProjectile
+  - type: RMCXenoDeployTraps
+  - type: RMCXenoDeployAcidMine
+  - type: XenoZoom
+    zoom: 1.75, 1.75
+    offsetLength: 0
+    speed: 1
+    doAfter: 0
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.66
+    baseSprintSpeed: 3
+  - type: CMArmor
+    armor: 0
+    explosionArmor: 20
+  - type: RMCXenoAcidInsight
+  - type: RMCXenoBoostOnHit
+  - type: XenoDevour
