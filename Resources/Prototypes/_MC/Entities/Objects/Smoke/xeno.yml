@@ -33,3 +33,41 @@
   components:
   - type: Sprite
     color: "#f1ddcf"
+  # - type: MCSmokeReagent
+  #   reagents:
+  #   - ReagentId: MCOzelomelyn
+  #     Quantity: 7
+  # - type: Occluder
+
+# Acid
+- type: entity
+  parent: MCSmokeXeno
+  id: MCSmokeXenoAcid
+  name: smoke xeno acid
+  components:
+  - type: Tag
+    tags:
+    - MCSmoke
+    - MCDamageAcid
+    - HideContextMenu
+  - type: Sprite
+    color: "#86B028"
+  - type: MCSmokeDamage
+    damage:
+      types:
+        MCBurn: 25
+  - type: Occluder
+
+- type: entity
+  parent: MCSmokeXenoAcid
+  id: MCSmokeXenoAcidLight
+  name: smoke xeno acid light
+  components:
+  - type: Sprite
+    color: "#85b0285e"
+  - type: MCSmokeDamage
+    damage:
+      types:
+        MCBurn: 25
+  - type: MCTimedDespawnDisappearanceVisuals
+    maxAlpha: 0.36

@@ -30,8 +30,10 @@ public sealed class MCXenoPounceSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = null!;
     [Dependency] private readonly DamageableSystem _damageable = null!;
     [Dependency] private readonly TagSystem _tag = null!;
+
     [Dependency] private readonly SharedXenoHiveSystem _rmcXenoHive = null!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = null!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = null!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -134,6 +136,9 @@ private bool UseAbility(Entity<MCXenoPounceComponent> entity, MapCoordinates tar
     private void OnHit(Entity<MCXenoPouncingComponent> entity, ref PreventCollideEvent args)
     {
         if (args.OtherFixture.CollisionLayer == (int)CollisionGroup.SlipLayer)
+            return;
+
+        if (_tag.HasTag(args.OtherEntity, AcidSprayTag))
             return;
 
         if (_tag.HasTag(args.OtherEntity, AcidSprayTag))
