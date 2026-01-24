@@ -1,7 +1,9 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Threading;
 using Content.Client._RMC14.NamedItems;
 using Content.Client.Humanoid;
 using Content.Client.Lobby.UI.Loadouts;
@@ -40,6 +42,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Direction = Robust.Shared.Maths.Direction;
 
@@ -104,8 +107,11 @@ namespace Content.Client.Lobby.UI
         private List<(string, RequirementsSelector)> _jobPriorities = new();
 
         private readonly Dictionary<string, BoxContainer> _jobCategories;
-        private readonly Dictionary<string, Label> _jobChanceLabels = new();
-        private Dictionary<ProtoId<JobPrototype>, float> _jobPriorityChances = new();
+        private readonly Dictionary<string, RichTextLabel> _jobChanceLabels = new();
+        private readonly Dictionary<string, PanelContainer> _jobChanceUnderlines = new();
+        private readonly Dictionary<string, AnimatedTextureRect> _jobChanceSpinners = new();
+        private readonly Dictionary<string, CancellationTokenSource> _jobChanceSpinnerTokens = new();
+        private Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo> _jobPriorityChances = new();
         private int? _jobPriorityChancesSlot;
 
         private Direction _previewRotation = Direction.North;
@@ -952,6 +958,7 @@ namespace Content.Client.Lobby.UI
             _jobCategories.Clear();
             _jobPriorities.Clear();
             _jobChanceLabels.Clear();
+            _jobChanceUnderlines.Clear();
             var firstCategory = true;
 
             // Get all displayed departments
@@ -1138,18 +1145,23 @@ namespace Content.Client.Lobby.UI
                         };
                     }
 
-                    var chanceLabel = new Label
-                    {
-                        Margin = new Thickness(5f, 0f, 0f, 0f),
-                        Visible = false,
-                        StyleClasses = { StyleBase.StyleClassLabelSubText }
-                    };
+                    var chanceLabel = selector.SubtitleLabelControl;
+                    chanceLabel.Margin = new Thickness(0f, 2f, 0f, 0f);
+                    chanceLabel.Visible = false;
+                    chanceLabel.MouseFilter = MouseFilterMode.Stop;
+                    chanceLabel.StyleClasses.Add(StyleBase.StyleClassLabelSubText);
+                    selector.SubtitleUnderlineControl.Visible = false;
+                    selector.SubtitleSpinnerControl.Visible = false;
 
                     _jobChanceLabels[job.ID] = chanceLabel;
+                    _jobChanceUnderlines[job.ID] = selector.SubtitleUnderlineControl;
+                    _jobChanceSpinners[job.ID] = selector.SubtitleSpinnerControl;
+
+                    chanceLabel.OnMouseEntered += _ => StartChanceHover(job.ID);
+                    chanceLabel.OnMouseExited += _ => StopChanceHover(job.ID);
 
                     _jobPriorities.Add((job.ID, selector));
                     jobStack.AddChild(selector);
-                    jobStack.AddChild(chanceLabel);
 
                     jobContainer.AddChild(jobStack);
                     jobContainer.AddChild(loadoutWindowBtn);
@@ -1468,13 +1480,13 @@ namespace Content.Client.Lobby.UI
             ApplyJobPriorityChances();
         }
 
-        public void SetJobPriorityChances(int slot, IReadOnlyDictionary<ProtoId<JobPrototype>, float> chances)
+        public void SetJobPriorityChances(int slot, IReadOnlyDictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo> chances)
         {
             if (CharacterSlot != slot)
                 return;
 
             _jobPriorityChancesSlot = slot;
-            _jobPriorityChances = new Dictionary<ProtoId<JobPrototype>, float>(chances);
+            _jobPriorityChances = new Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo>(chances);
             ApplyJobPriorityChances();
         }
 
@@ -1486,10 +1498,71 @@ namespace Content.Client.Lobby.UI
             foreach (var (jobId, label) in _jobChanceLabels)
             {
                 var protoId = new ProtoId<JobPrototype>(jobId);
-                var chance = _jobPriorityChances.GetValueOrDefault(protoId, 0f);
-                label.Text = Loc.GetString("humanoid-profile-editor-job-chance", ("chance", MathF.Round(chance, 1)));
+                var info = _jobPriorityChances.GetValueOrDefault(protoId);
+                var chanceRounded = MathF.Round(info.ChancePercent, 2, MidpointRounding.AwayFromZero);
+                var chanceText = chanceRounded.ToString("0.00", CultureInfo.CurrentCulture);
+                label.SetMarkup(Loc.GetString("humanoid-profile-editor-job-chance", ("chance", chanceText)));
+                label.TooltipDelay = 1f;
+                label.ToolTip = BuildChanceFormula(info);
                 label.Visible = true;
+                if (_jobChanceUnderlines.TryGetValue(jobId, out var underline))
+                    underline.Visible = false;
+                if (_jobChanceSpinners.TryGetValue(jobId, out var spinner))
+                    spinner.Visible = false;
             }
+        }
+
+        private static string BuildChanceFormula(JobPriorityChanceInfo info)
+        {
+            var baseWeight = MathF.Round(info.BaseWeight, 2);
+            var missedWeight = MathF.Round(info.MissedWeight, 2);
+            var recentPenalty = MathF.Round(MathF.Abs(info.RecentPenalty), 2);
+            var sessionHours = (int) MathF.Floor(info.SessionHours);
+
+            return Loc.GetString(
+                "ccm-job-chance-formula",
+                ("base", baseWeight),
+                ("missed", missedWeight),
+                ("recent", recentPenalty),
+                ("sessionHours", sessionHours));
+        }
+
+        private void StartChanceHover(string jobId)
+        {
+            if (!_jobChanceSpinners.TryGetValue(jobId, out var spinner))
+                return;
+
+            CancelChanceSpinner(jobId);
+            spinner.Visible = true;
+
+            var tokenSource = new CancellationTokenSource();
+            _jobChanceSpinnerTokens[jobId] = tokenSource;
+
+            Robust.Shared.Timing.Timer.Spawn(TimeSpan.FromSeconds(1.2), () =>
+            {
+                if (tokenSource.IsCancellationRequested)
+                    return;
+
+                spinner.Visible = false;
+            }, tokenSource.Token);
+        }
+
+        private void StopChanceHover(string jobId)
+        {
+            if (_jobChanceSpinners.TryGetValue(jobId, out var spinner))
+                spinner.Visible = false;
+
+            CancelChanceSpinner(jobId);
+        }
+
+        private void CancelChanceSpinner(string jobId)
+        {
+            if (!_jobChanceSpinnerTokens.TryGetValue(jobId, out var tokenSource))
+                return;
+
+            tokenSource.Cancel();
+            tokenSource.Dispose();
+            _jobChanceSpinnerTokens.Remove(jobId);
         }
 
         private void UpdateSexControls()

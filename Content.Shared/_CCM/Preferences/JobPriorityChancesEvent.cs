@@ -11,13 +11,21 @@ namespace Content.Shared._CCM.Preferences;
 public sealed class JobPriorityChancesEvent : EntityEventArgs
 {
     public int CharacterSlot { get; }
-    public Dictionary<ProtoId<JobPrototype>, float> Chances { get; }
+    public Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo> Chances { get; }
 
-    public JobPriorityChancesEvent(int characterSlot, Dictionary<ProtoId<JobPrototype>, float> chances)
+    public JobPriorityChancesEvent(int characterSlot, Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo> chances)
     {
         CharacterSlot = characterSlot;
         Chances = chances;
     }
 }
+
+[Serializable, NetSerializable]
+public readonly record struct JobPriorityChanceInfo(
+    float ChancePercent,
+    float BaseWeight,
+    float MissedWeight,
+    float RecentPenalty,
+    float SessionHours);
 
 // # CCM priority rework

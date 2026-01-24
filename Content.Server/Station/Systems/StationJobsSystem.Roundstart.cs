@@ -595,7 +595,7 @@ public sealed partial class StationJobsSystem
             weight += RecentRolePenalty;
 
         sessionMinutes = GetSessionMinutesOverride(user, sessionMinutes);
-        var sessionBonusSteps = (int) MathF.Floor(sessionMinutes / SessionMinutesPerBonus);
+        var sessionBonusSteps = (int) MathF.Floor(MathF.Min(sessionMinutes, 360f) / SessionMinutesPerBonus);
         if (sessionBonusSteps > 0)
             weight += sessionBonusSteps * (MissedRoundWeight / 3f);
 
@@ -616,7 +616,7 @@ public sealed partial class StationJobsSystem
         var recentPenalty = assignedLastRound ? RecentRolePenalty : 0f;
 
         sessionMinutes = GetSessionMinutesOverride(user, sessionMinutes);
-        var sessionBonusSteps = (int) MathF.Floor(sessionMinutes / SessionMinutesPerBonus);
+        var sessionBonusSteps = (int) MathF.Floor(MathF.Min(sessionMinutes, 360f) / SessionMinutesPerBonus);
         var sessionBonus = sessionBonusSteps > 0 ? sessionBonusSteps * (MissedRoundWeight / 3f) : 0f;
 
         var externalBonus = GetExternalWeightModifier(user);

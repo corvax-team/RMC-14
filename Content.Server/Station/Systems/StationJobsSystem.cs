@@ -623,7 +623,7 @@ public sealed partial class StationJobsSystem : EntitySystem
         }
     }
 
-    private Dictionary<ProtoId<JobPrototype>, float> CalculateFirstOrderChancesForUser(
+    private Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo> CalculateFirstOrderChancesForUser(
         NetUserId userId,
         Dictionary<NetUserId, HumanoidCharacterProfile> profiles,
         Dictionary<NetUserId, int> selectedSlots,
@@ -633,7 +633,7 @@ public sealed partial class StationJobsSystem : EntitySystem
     {
         var candidates = GetPlayersJobCandidates(null, JobPriority.First, profiles);
         if (!candidates.TryGetValue(userId, out var userJobs))
-            return new Dictionary<ProtoId<JobPrototype>, float>();
+            return new Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo>();
 
         var jobWeights = new Dictionary<ProtoId<JobPrototype>, Dictionary<NetUserId, float>>();
         var jobTotals = new Dictionary<ProtoId<JobPrototype>, float>();
@@ -654,7 +654,7 @@ public sealed partial class StationJobsSystem : EntitySystem
             }
         }
 
-        var chances = new Dictionary<ProtoId<JobPrototype>, float>();
+        var chances = new Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo>();
         foreach (var jobId in userJobs)
         {
             if (!jobTotals.TryGetValue(jobId, out var total) || total <= 0f)
@@ -664,12 +664,24 @@ public sealed partial class StationJobsSystem : EntitySystem
             var slotCount = jobSlotCounts.GetValueOrDefault(jobId, 1);
             if (slotCount <= 0)
             {
-                chances[jobId] = 0f;
+                chances[jobId] = new JobPriorityChanceInfo(0f, 0f, 0f, 0f, 0f);
                 continue;
             }
 
             var chance = weight / total * 100f * slotCount;
-            chances[jobId] = MathF.Min(100f, chance);
+            var breakdown = CalculateFirstOrderWeightBreakdown(
+                userId,
+                selectedSlots[userId],
+                jobId,
+                sessionMinutes.GetValueOrDefault(userId),
+                currentRoundId);
+            var sessionHours = MathF.Min(6f, sessionMinutes.GetValueOrDefault(userId) / 60f);
+            chances[jobId] = new JobPriorityChanceInfo(
+                MathF.Min(100f, chance),
+                breakdown.BaseWeight,
+                breakdown.MissedWeight,
+                breakdown.RecentPenalty,
+                sessionHours);
         }
 
         return chances;

@@ -53,7 +53,8 @@ humanoid-profile-editor-antag-preference-no-button = Нет
 humanoid-profile-editor-job-priority-first-button = Высший
 humanoid-profile-editor-job-priority-second-button = Низший
 humanoid-profile-editor-job-priority-never-button = Никогда
-humanoid-profile-editor-job-chance = Шанс: { $chance }%
+humanoid-profile-editor-job-chance = Шанс: [u]{ $chance }%[/u]
+ccm-job-chance-formula = Вес = Стандарт({ $base }) + Пропуск({ $missed }) + Сессия({ $sessionHours } часов) - Недавно({ $recent })
 humanoid-profile-editor-naming-rules-warning = Внимание: Оскорбительные или странные имена и описания могут повлечь за собой беседу с администрацией. Прочитайте \[Правила\].
 humanoid-profile-editor-markings-tab = Черты внешности
 humanoid-profile-editor-flavortext-tab = Описание

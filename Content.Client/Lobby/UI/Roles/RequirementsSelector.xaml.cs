@@ -25,6 +25,12 @@ public sealed partial class RequirementsSelector : BoxContainer
     public event Action<List<ProtoId<GuideEntryPrototype>>>? OnOpenGuidebook;
 
     public int Selected => _options.SelectedValue;
+    public RichTextLabel SubtitleLabelControl => SubtitleLabel;
+    public PanelContainer SubtitleUnderlineControl => SubtitleUnderline;
+    public AnimatedTextureRect SubtitleSpinnerControl => SubtitleSpinner;
+
+    private static readonly SpriteSpecifier ChanceSpinnerSprite =
+        new SpriteSpecifier.Rsi(new ResPath("/Textures/_CCM/UI/loading_spinner.rsi"), "spinner");
 
     public RequirementsSelector()
     {
@@ -64,6 +70,9 @@ public sealed partial class RequirementsSelector : BoxContainer
                 requirementsLabel
             }
         };
+
+        SubtitleSpinner.SetFromSpriteSpecifier(ChanceSpinnerSprite);
+        SubtitleSpinner.DisplayRect.Stretch = TextureRect.StretchMode.KeepAspectCentered;
 
         Help.OnPressed += _ =>
         {

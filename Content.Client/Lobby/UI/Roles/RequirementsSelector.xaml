@@ -1,9 +1,26 @@
 <BoxContainer xmlns="https://spacestation14.io"
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
          Orientation="Horizontal">
-    <Label Name="TitleLabel"
-           Margin="5 0"
-           MouseFilter="Stop"/>
+    <BoxContainer Name="TitleContainer"
+                  Orientation="Vertical"
+                  Margin="5 0"
+                  MouseFilter="Stop">
+        <Label Name="TitleLabel" />
+        <BoxContainer Name="SubtitleRow"
+                      Orientation="Horizontal">
+            <RichTextLabel Name="SubtitleLabel" Visible="False" />
+            <AnimatedTextureRect Name="SubtitleSpinner"
+                                 Visible="False"
+                                 SetSize="18 18"
+                                 Margin="4 0 0 0" />
+        </BoxContainer>
+        <PanelContainer Name="SubtitleUnderline" Visible="False" MinSize="0 1" HorizontalExpand="True">
+            <PanelContainer.PanelOverride>
+                <gfx:StyleBoxFlat BackgroundColor="#3A6B47" />
+            </PanelContainer.PanelOverride>
+        </PanelContainer>
+    </BoxContainer>
 
     <!--21 was the height of OptionsContainer at the time that this button was added. So I am limiting the texture to 21x21-->
     <Control SetSize="21 21">

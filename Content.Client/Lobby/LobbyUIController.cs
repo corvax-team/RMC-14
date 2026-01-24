@@ -63,7 +63,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     private CharacterSetupGui? _characterSetup;
     private HumanoidProfileEditor? _profileEditor;
     private CharacterSetupGuiSavePanel? _savePanel;
-    private readonly Dictionary<int, Dictionary<ProtoId<JobPrototype>, float>> _jobPriorityChancesBySlot = new();
+    private readonly Dictionary<int, Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo>> _jobPriorityChancesBySlot = new();
 
     /// <summary>
     /// This is the modified profile currently being edited.
@@ -243,9 +243,9 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         }
     }
 
-    public void UpdateJobPriorityChances(int characterSlot, Dictionary<ProtoId<JobPrototype>, float> chances)
+    public void UpdateJobPriorityChances(int characterSlot, Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo> chances)
     {
-        _jobPriorityChancesBySlot[characterSlot] = new Dictionary<ProtoId<JobPrototype>, float>(chances);
+        _jobPriorityChancesBySlot[characterSlot] = new Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo>(chances);
         ApplyJobPriorityChances();
     }
 
@@ -476,7 +476,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
             return;
 
         var chances = _jobPriorityChancesBySlot.GetValueOrDefault(slot.Value) ??
-            new Dictionary<ProtoId<JobPrototype>, float>();
+            new Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo>();
 
         _profileEditor.SetJobPriorityChances(slot.Value, chances);
     }

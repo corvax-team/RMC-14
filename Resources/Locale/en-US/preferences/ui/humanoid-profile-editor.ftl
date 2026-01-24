@@ -56,7 +56,8 @@ humanoid-profile-editor-antag-preference-no-button = No
 humanoid-profile-editor-job-priority-first-button = Highest
 humanoid-profile-editor-job-priority-second-button = Lowest
 humanoid-profile-editor-job-priority-never-button = Never
-humanoid-profile-editor-job-chance = Chance: { $chance }%
+humanoid-profile-editor-job-chance = Chance: [u] { $chance }%[/u]
+ccm-job-chance-formula = weight = (base value({ $base })+role missed({ $missed })+recently rolled(-{ $recent })+current session({ $sessionHours } hours))
 humanoid-profile-editor-naming-rules-warning = Warning: Offensive or LRP IC names and descriptions will lead to admin intervention on this server. Read our \[Rules\] for more.
 humanoid-profile-editor-markings-tab = Markings
 humanoid-profile-editor-flavortext-tab = Description
