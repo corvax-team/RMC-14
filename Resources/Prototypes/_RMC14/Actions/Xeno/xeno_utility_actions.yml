@@ -411,4 +411,3 @@
     event: !type:XenoDoomActionEvent
   - type: XenoActionPlasma
     cost: 50
- 
