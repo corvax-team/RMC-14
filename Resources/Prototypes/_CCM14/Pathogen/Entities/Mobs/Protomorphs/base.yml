@@ -2,3 +2,5 @@
   abstract: true
   id: CCMProtomorphBase
   suffix: Pathogen
+  components:
+  - type: Protomorph
