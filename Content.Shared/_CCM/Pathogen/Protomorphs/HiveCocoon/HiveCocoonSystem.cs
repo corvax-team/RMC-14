@@ -45,7 +45,7 @@ public sealed class HiveCocoonSystem : EntitySystem
         cocoon.Comp.MarineContainer = _container.EnsureContainer<Container>(cocoon, cocoon.Comp.MarineContainerId);
         cocoon.Comp.EquipmentContainer = _container.EnsureContainer<Container>(cocoon, cocoon.Comp.EquipmentContainerId);
         cocoon.Comp.BloodbursterSlot = _container.EnsureContainer<ContainerSlot>(cocoon, cocoon.Comp.BloodbursterSlotId);
-    } // Работает
+    }
 
     private void OnCocoonGetAlternativeVerb(Entity<HiveCocoonComponent> cocoon, ref GetVerbsEvent<AlternativeVerb> args)
     {
@@ -62,7 +62,7 @@ public sealed class HiveCocoonSystem : EntitySystem
             Text = Loc.GetString("ccm-cocoon-verb-start-spinning"),
             Act = () => StartPupate(cocoon, user, target)
         });
-    } // Вроде работает но вопросик по радиусу взаимодействия все еще остался
+    }
 
     private void OnCocoonCanDropTarget(Entity<HiveCocoonComponent> cocoon, ref CanDropTargetEvent args)
     {
@@ -71,18 +71,18 @@ public sealed class HiveCocoonSystem : EntitySystem
 
         args.CanDrop = CanPupate(cocoon, args.User, args.Dragged);
         args.Handled = true;
-    } // Работает
+    }
 
     private void OnCocoonDragDropTarget(Entity<HiveCocoonComponent> cocoon, ref DragDropTargetEvent args)
     {
         args.Handled = StartPupate(cocoon, args.User, args.Dragged);
-    } // Работает
+    }
 
     private void OnCocoonPupateDoAfterAttempt(Entity<HiveCocoonComponent> cocoon, ref DoAfterAttemptEvent<CocoonPupateDoAfterEvent> args)
     {
         if (args.DoAfter.Args.Target is { } target && !CanPupate(cocoon, args.DoAfter.Args.User, target))
             args.Cancel();
-    } // Работает
+    }
 
     private void OnCocoonPupateDoAfter(Entity<HiveCocoonComponent> cocoon, ref CocoonPupateDoAfterEvent args)
     {
@@ -104,7 +104,7 @@ public sealed class HiveCocoonSystem : EntitySystem
         {
             TrySetState(cocoon, HiveCocoonState.Half);
         }
-    } // Работает
+    }
 
     private void OnCocoonExamined(Entity<HiveCocoonComponent> cocoon, ref ExaminedEvent args)
     {
@@ -120,7 +120,7 @@ public sealed class HiveCocoonSystem : EntitySystem
             if (cur >= max)
                 args.PushMarkup(Loc.GetString("ccm-cocoon-examine-remaining-time", ("time", (int)(cocoon.Comp.PupateAt - _timing.CurTime).TotalSeconds)));
         }
-    } // Работает
+    }
 
     private void OnCocoonDestruction(Entity<HiveCocoonComponent> cocoon, ref DestructionEventArgs args)
     {
@@ -138,7 +138,7 @@ public sealed class HiveCocoonSystem : EntitySystem
 
         if (cocoon.Comp.BloodbursterSlot.ContainedEntity is { } bloodburster)
             _container.Remove(bloodburster, cocoon.Comp.BloodbursterSlot);
-    } // Работает
+    }
 
     public void TrySetState(Entity<HiveCocoonComponent> cocoon, HiveCocoonState state)
     {
@@ -147,7 +147,7 @@ public sealed class HiveCocoonSystem : EntitySystem
 
         cocoon.Comp.State = state;
         _appearance.SetData(cocoon, HiveCocoonLayers.Base, state);
-    } // Работает
+    }
 
     public bool TryStartPupate(Entity<HiveCocoonComponent?> cocoon, EntityUid user, EntityUid target)
     {
@@ -158,7 +158,7 @@ public sealed class HiveCocoonSystem : EntitySystem
             return false;
 
         return StartPupate((cocoon, cocoon.Comp), user, target);
-    } // Работает
+    }
 
     public bool StartPupate(Entity<HiveCocoonComponent> cocoon, EntityUid user, EntityUid target)
     {
@@ -171,7 +171,7 @@ public sealed class HiveCocoonSystem : EntitySystem
         };
 
         return _doAfter.TryStartDoAfter(doAfter);
-    } // Работает
+    }
 
     public bool CanPupate(Entity<HiveCocoonComponent> cocoon, EntityUid user, EntityUid target)
     {
@@ -194,7 +194,7 @@ public sealed class HiveCocoonSystem : EntitySystem
         RaiseLocalEvent(cocoon, ref attempt);
 
         return !attempt.Cancelled;
-    } // Работает
+    }
 
     public override void Update(float frameTime)
     {
@@ -207,7 +207,7 @@ public sealed class HiveCocoonSystem : EntitySystem
                 foreach (var marine in cocoon.MarineContainer.ContainedEntities.ToArray())
                 {
                     _container.Insert(marine, cocoon.EquipmentContainer);
-                    _body.GibBody(marine, gibOrgans: true);
+                    _body.GibBody(marine, false);
                 }
 
                 PredictedTrySpawnInContainer(cocoon.SpawnId, uid, cocoon.BloodbursterSlotId, out _);
@@ -225,5 +225,5 @@ public sealed class HiveCocoonSystem : EntitySystem
                 TrySetState((uid, cocoon), HiveCocoonState.Empty);
             }
         }
-    } // Работает
+    }
 }
