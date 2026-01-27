@@ -1,16 +1,16 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "dimdimich1996",
+  "copyright": "cocoon_full and cocoon_opening by denlero, everything else by dimdimich1996",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
-    {
-      "name": "cocoon_full"
+	{
+      "name": "cocoon_empty"
     },
-    {
+	{
       "name": "cocoon_half",
       "delays": [
         [
@@ -21,8 +21,29 @@
       ]
     },
     {
-      "name": "cocoon_empty"
+      "name": "cocoon_full",
+      "delays": [
+        [
+          0.1,
+          0.2,
+          0.1
+        ]
+      ]
     },
+	{
+	  "name": "cocoon_opening",
+	  "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+	},
     {
       "name": "cocoon_pop",
       "delays": [

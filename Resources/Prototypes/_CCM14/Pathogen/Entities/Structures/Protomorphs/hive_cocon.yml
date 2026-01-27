@@ -1,0 +1,37 @@
+- type: entity
+  id: CCMHiveCocoon
+  parent: BaseHiveStructure
+  name: Cocoon
+  description: Incubator for hive offspring.
+  suffix: Pathogen
+  components:
+  - type: Sprite
+    sprite: _CCM14/Pathogen/Structures/Protomorphs/protomorph_cocon.rsi
+    layers: 
+    - state: cocoon_empty
+      map: [ "enum.HiveCocoonLayers.Base" ]
+  - type: Appearance
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 300
+  - type: HiveCocoon
+    visualStates:
+      Empty: cocoon_empty
+      Half: cocoon_half
+      Full: cocoon_full
+      Opening: cocoon_opening
+    openingTime: 0.7
+    insertWhitelist:
+      components:
+      - Marine
+      - Survivor
+    
