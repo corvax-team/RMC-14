@@ -4,7 +4,7 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_CCM14/Planets/polyphemus.yml
-    camouflage: Snow
+    camouflage: Classic
     survivorJobs:
     - CMSurvivor: 3
     - CMSurvivorCorporate: 1
@@ -31,7 +31,7 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_CCM14/Planets/nova.yml
-    camouflage: Snow
+    camouflage: Desert
     survivorJobs:
     - CMSurvivor: 1
     - CMSurvivorCorporate: 1
@@ -58,7 +58,7 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_CCM14/Planets/westernforest.yml
-    camouflage: Snow
+    camouflage: Jungle
     survivorJobs:
     - CMSurvivor: 3
     - CMSurvivorCorporate: 1
