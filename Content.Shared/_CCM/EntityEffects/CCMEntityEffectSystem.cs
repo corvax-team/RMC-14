@@ -58,7 +58,7 @@ public sealed class CCMEntityEffectSystem : EntitySystem
                         _sawmill.Debug($"find effect {effect}");
                         if (isPathogenInfection)
                             continue;
-                        if (effect.GetType().Name == args.GetType().Name)
+                        if (effect.GetType().Name == args.Effect.GetType().Name)
                             isPathogenInfection = true;
                     }
                     if (isPathogenInfection)
