@@ -16,7 +16,11 @@
      time: 72000 # 10 hours
 #  CCM14 role timers [remove/end]
   ranks:
-    RMCRankMasterSergeant: [ ]
+    RMCRankChiefWarrantOfficer:
+    - !type:RoleTimeRequirement
+      role: RMCJobSynthetic
+      time: 270000 # 75 hours
+    RMCRankWarrantOfficer: [ ]
   startingGear: RMCGearSyntheticEquipped
   dummyStartingGear: RMCGearSyntheticEquipped
   icon: "RMCJobIconSynth"

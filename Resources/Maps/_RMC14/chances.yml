@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 10/20/2025 01:51:43
+  time: 01/16/2026 04:41:34
   entityCount: 27127
 maps:
 - 1
@@ -42523,7 +42523,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -61239.19
+      secondsUntilStateChange: -61578.047
       state: Opening
 - proto: CMAirlockMedicalLocked
   entities:
@@ -53182,7 +53182,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 10666.0893339
     - type: Door
-      secondsUntilStateChange: -48817.844
+      secondsUntilStateChange: -49156.7
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -53198,7 +53198,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 10666.0893339
     - type: Door
-      secondsUntilStateChange: -48817.844
+      secondsUntilStateChange: -49156.7
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -84490,6 +84490,18 @@ entities:
     - type: Transform
       pos: 72.5,-89.5
       parent: 1
+- proto: RMCCrateBlackmarketFireArms
+  entities:
+  - uid: 10993
+    components:
+    - type: Transform
+      pos: 27.810196,-1.1503251
+      parent: 1
+  - uid: 10994
+    components:
+    - type: Transform
+      pos: 29.48506,-2.47845
+      parent: 1
 - proto: RMCCrateExplosives
   entities:
   - uid: 7718
@@ -91562,31 +91574,53 @@ entities:
       parent: 1
 - proto: RMCGeneratorFusionColony
   entities:
-  - uid: 9086
-    components:
-    - type: Transform
-      pos: -72.5,-33.5
-      parent: 1
-  - uid: 9087
-    components:
-    - type: Transform
-      pos: -72.5,-32.5
-      parent: 1
   - uid: 9088
     components:
     - type: Transform
       pos: -71.5,-31.5
       parent: 1
-  - uid: 9089
+- proto: RMCGeneratorFusionColonyNoMapIcon
+  entities:
+  - uid: 9086
     components:
     - type: Transform
-      pos: -70.5,-31.5
+      pos: -72.5,-32.5
       parent: 1
-  - uid: 9090
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 9087
+    components:
+    - type: Transform
+      pos: -72.5,-33.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 9089
     components:
     - type: Transform
       pos: -69.5,-31.5
       parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 9090
+    components:
+    - type: Transform
+      pos: -70.5,-31.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
 - proto: RMCGirderDisplaced
   entities:
   - uid: 9091
@@ -103741,16 +103775,6 @@ entities:
       parent: 1
 - proto: RMCSecureCaseDouble
   entities:
-  - uid: 10993
-    components:
-    - type: Transform
-      pos: 29.5,-2.5
-      parent: 1
-  - uid: 10994
-    components:
-    - type: Transform
-      pos: 27.923544,-0.924935
-      parent: 1
   - uid: 10995
     components:
     - type: Transform

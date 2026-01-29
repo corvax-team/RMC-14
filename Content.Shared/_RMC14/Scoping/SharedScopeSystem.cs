@@ -9,6 +9,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared._CCM.Vehicle;
+using Content.Shared._RMC14.Overwatch;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Ranged.Components;
@@ -235,6 +236,13 @@ public abstract partial class SharedScopeSystem : EntitySystem
         if (HasComp<VehiclePilotComponent>(user) || HasComp<VehicleViewportWatcherComponent>(user))
         {
             _popup.PopupClient(Loc.GetString("ccm-vehicle-cannot-observe-while-scoping"), user, user);
+            return false;
+        }
+
+        if (HasComp<OverwatchWatchingComponent>(user))
+        {
+            var msgError = Loc.GetString("rmc-action-popup-scoping-user-cannot-view-cameras", ("scope", ent));
+            _popup.PopupClient(msgError, user, user);
             return false;
         }
 

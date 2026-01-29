@@ -12,7 +12,7 @@
       scenarioProbability: 0.1
     - scenarioName: asset_protection
       scenarioProbability: 0.1
-    survivorJobInserts:
+    survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
       - CMSurvivorPriest: 1
@@ -30,7 +30,14 @@
       CMSurvivorScientist:
       - CMSurvivorLV624Archeologist: 2
     survivorJobScenarios:
-      asset_protection:
+      asset_protection: # Corporate Dome Goons, order of job priority for goons. Scientist is overriden into doctor.
+      - CMSurvivorCorporate: 1
+      - CMSurvivorEngineer: 1
+      - CMSurvivorDoctor: 1
+      - CMSurvivorSecurity: 1
+      - CMSurvivor: -1
+    survivorJobVariantScenarios:
+      asset_protection: # Corporate Dome Goons
         CMSurvivor:
         - CMSurvivorLV624CorporateDomeGoon: -1
         CMSurvivorCorporate:
@@ -43,6 +50,9 @@
         - CMSurvivorLV624CorporateDomeGoonLead: 1
         CMSurvivorScientist:
         - CMSurvivor: 0
+    survivorJobOverrideScenarios:
+      asset_protection: # Corporate Dome Goons
+        CMSurvivorScientist: CMSurvivorDoctor
 
 
 - type: entity
@@ -54,6 +64,8 @@
     camouflage: Desert
     announcement: "Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada."
     minPlayers: 25 # CCM14-mappool
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingSolaris
     nightmareScenarios:
     - scenarioName: clfmining
       scenarioProbability: 0.1
@@ -67,7 +79,7 @@
     - CMSurvivorEngineer: 4
     - CMSurvivorSecurity: 2
     - CMSurvivorScientist: 2
-    survivorJobInserts:
+    survivorJobVariants:
       RMCSurvivorCommandingOfficer:
       - CMSurvivorSolarisCMBMarshal: 1
       CMSurvivor:
@@ -90,43 +102,49 @@
       - CMSurvivorSolarisUNPeacekeeper: -1
       CMSurvivorScientist:
       - CMSurvivorSolarisScientist: -1
-#    survivorJobScenarios:
-#      clfmining:
-#        CMSurvivor:
-#        - : 1
-#        - : -1
-#        CMSurvivorCorporate:
-#        - : 1
-#        - : -1
-#        CMSurvivorDoctor:
-#        - : 1
-#        - : -1
-#        CMSurvivorEngineer:
-#        - : 1
-#        - : -1
-#        CMSurvivorSecurity:
-#        - : 1
-#        - : -1
-#        CMSurvivorScientist:
-#        - : -1
-#      crashlanding_offices:
-#        CMSurvivor:
-#        - : 1
-#        - : -1
-#        CMSurvivorCorporate:
-#        - : 1
-#        - : -1
-#        CMSurvivorDoctor:
-#        - : 1
-#        - : -1
-#        CMSurvivorEngineer:
-#        - : 1
-#        - : -1
-#        CMSurvivorSecurity:
-#        - : 1
-#        - : -1
-#        CMSurvivorScientist:
-#        - : -1
+    survivorJobScenarios:
+      crashlanding_offices: # PMC, order of job priority for PMCs. Scientist is overriden into doctor.
+      - RMCSurvivorCommandingOfficer: 1
+      - CMSurvivorEngineer: 1
+      - CMSurvivorDoctor: 1
+      - CMSurvivorSecurity: 1
+      - CMSurvivorCorporate: 1
+      - CMSurvivor: -1
+    survivorJobVariantScenarios:
+      crashlanding_offices: # PMC
+        RMCSurvivorCommandingOfficer:
+        - RMCSurvivorSolarisPMCCommander: 1
+        CMSurvivorSecurity:
+        - RMCSurvivorSolarisPMCLeader: 1
+        CMSurvivorDoctor:
+        - RMCSurvivorSolarisPMCMedic: 1
+        CMSurvivorCorporate:
+        - RMCSurvivorSolarisCorporateSupervisor: 1
+        CMSurvivorEngineer:
+        - RMCSurvivorSolarisPMCEngineer: 1
+        CMSurvivor:
+        - RMCSurvivorSolarisPMCStandard: -1
+      # clfmining:
+      #   CMSurvivor:
+      #   - : 1
+      #   - : -1
+      #   CMSurvivorCorporate:
+      #   - : 1
+      #   - : -1
+      #   CMSurvivorDoctor:
+      #   - : 1
+      #   - : -1
+      #   CMSurvivorEngineer:
+      #   - : 1
+      #   - : -1
+      #   CMSurvivorSecurity:
+      #   - : 1
+      #   - : -1
+      #   CMSurvivorScientist:
+      #   - : -1
+    survivorJobOverrideScenarios:
+      crashlanding_offices: # PMC
+        CMSurvivorScientist: CMSurvivorDoctor
 
 
 - type: entity
@@ -160,7 +178,7 @@
     camouflage: Classic
     minPlayers: 45 # CCM14-mappool
     announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
-    survivorJobInserts:
+    survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
       - CMSurvivorISR: -1
@@ -208,7 +226,7 @@
       - CMSurvivorCMBDeputy: 1
       CMSurvivorScientist:
       - CMSurvivorTrijentResearcher: 2
-#    survivorJobScenarios:
+#    survivorJobVariantScenarios:
 #      clf_pods:
 #        CMSurvivor:
 #        - : -1
@@ -226,7 +244,7 @@
 #        - : -1
 #        CMSurvivorScientist:
 #        - : -1
-#    survivorJobScenarios:
+#    survivorJobVariantScenarios:
 #      spp_bar:
 #        CMSurvivor:
 #        - : -1
@@ -271,7 +289,7 @@
     - CMSurvivorEngineer: 4
     - CMSurvivorSecurity: 2
     - CMSurvivorScientist: 2
-    survivorJobInserts:
+    survivorJobVariants:
       RMCSurvivorCommandingOfficer:
       - RMCSurvivorCommanderNewVaradero: 1
       CMSurvivor:
@@ -299,7 +317,9 @@
     camouflage: Desert
     announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
     minPlayers: 25 # CCM14-mappool
-    survivorJobInserts:
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingKutjevo
+    survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
       - RMCSurvivorKutjevoChaplain: 1
@@ -325,15 +345,15 @@
     minPlayers: 15 # CCM14-mappool
     camouflage: Classic
     announcement: "Pan-Pan. This is the commander of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
-    selectRandomSurvivorInsert: false
+    selectRandomSurvivorVariant: false
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
-    - RMCSurvivorForeconBase: 7
-    survivorJobInserts:
+    - RMCSurvivorForeconSupportTech: 1
+    - RMCSurvivorForeconBase: 6 # todo 7 when eight survs
+    survivorJobVariants:
       RMCSurvivorCommandingOfficer:
       - RMCSurvivorForeconCommander: 1
       RMCSurvivorForeconBase:
-      - RMCSurvivorForeconSupportTech: 1
       - RMCSurvivorForeconSquadLeader: 1
       - RMCSurvivorForeconSniper: 1
       - RMCSurvivorForeconSmartgunOperator: 1
@@ -342,8 +362,8 @@
     survivorJobOverrides:
       CMSurvivor: RMCSurvivorForeconBase
       CMSurvivorCorporate: RMCSurvivorForeconBase
-      CMSurvivorDoctor: RMCSurvivorForeconBase
-      CMSurvivorEngineer: RMCSurvivorForeconBase
+      CMSurvivorDoctor: RMCSurvivorForeconSupportTech
+      CMSurvivorEngineer: RMCSurvivorForeconSupportTech
       CMSurvivorSecurity: RMCSurvivorForeconBase
       CMSurvivorScientist: RMCSurvivorForeconBase
 
@@ -392,7 +412,7 @@
     camouflage: Jungle
     minPlayers: 55
     announcement: "An automated distress signal has been recieved from a mining colony on border world LV-976, \"Sorokyne Outpost\". A response team from the UNS Almayer will be dispatched shortly to investigate."
-    survivorJobInserts:
+    survivorJobVariants:
       CMSurvivor:
       - CMJobSurvivorSoroCivilian: -1
       - CMJobSurvivorSoroMiner: -1
@@ -409,7 +429,7 @@
       - CMJobSurvivorArmyReservist: 2
       CMSurvivorScientist:
       - CMJobSurvivorCECResearcher: 2
-#    survivorJobScenarios:
+#    survivorJobVariantScenarios:
 #      clfcamp:
 #        CMSurvivor:
 #        - : -1
