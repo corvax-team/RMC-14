@@ -1,26 +1,41 @@
-﻿"Changes: Sprites":
+﻿"Спрайты":
 - changed-files:
   - any-glob-to-any-file: '**/*.rsi/*.png'
 
-"Changes: Map":
+"Карты":
 - changed-files:
   - any-glob-to-any-file:
     - 'Resources/Maps/**/*.yml'
     - 'Resources/Prototypes/Maps/**/*.yml'
 
-"Changes: UI":
+"UI":
 - changed-files:
   - any-glob-to-any-file: '**/*.xaml*'
 
-"Changes: Shaders":
+"Шейдеры":
 - changed-files:
   - any-glob-to-any-file: '**/*.swsl'
 
-"Changes: Audio":
+"Аудио":
 - changed-files:
   - any-glob-to-any-file: '**/*.ogg'
 
-"Changes: No C#":
+"C#":
 - changed-files:
-  # Equiv to any-glob-to-all as long as this has one matcher. If ALL changed files are not C# files, then apply label.
-  - all-globs-to-all-files: "!**/*.cs"
+  - all-glob-to-any-files: "**/*.cs"
+
+"Локализация":
+- changed-file:
+  - all-glob-to-any-file: "**/*.ftl"
+
+"Прототипы":
+- changed-file:
+  - all-glob-to-any-file: "**/*.yml"
+
+"Гайбдук":
+- changed-file:
+  - all-glob-to-any-file: "Resources/ServerInfo/**/*.xml"
+
+"Сервер":
+- changed-file:
+  - all-glob-to-any-file: "Resources/ConfigPresets/**/*.toml"
