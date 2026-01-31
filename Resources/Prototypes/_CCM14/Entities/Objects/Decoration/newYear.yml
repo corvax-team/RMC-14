@@ -5,10 +5,10 @@
   description: "Almost alive new year's wreath! Grants free new year's mood"
   components:
   - type: Sprite
-    sprite: _CCM14\Objects\Decoration\New year\wreath.rsi
+    sprite: _CCM14/Objects/Decoration/NewYear/wreath.rsi
     state: wreath
   - type: Icon
-    sprite: _CCM14\Objects\Decoration\New year\wreath.rsi
+    sprite: _CCM14/Objects/Decoration/NewYear/wreath.rsi
     state: icon
   - type: Tag
     tags: [ New Year ]
@@ -26,7 +26,6 @@
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
 
-
 - type: entity
   parent: BaseStructure
   id: CCMLolipop
@@ -34,10 +33,10 @@
   description: "Very sweet lollipop, sadly, but you can't eat it. Grants free new year's mood"
   components:
   - type: Sprite
-    sprite: _CCM14\Objects\Decoration\New year\lollipop.rsi
+    sprite: _CCM14/Objects/Decoration/NewYear/lollipop.rsi
     state: lollipop
   - type: Icon
-    sprite: _CCM14\Objects\Decoration\New year\wreath.rsi
+    sprite: _CCM14/Objects/Decoration/NewYear/wreath.rsi
     state: icon
   - type: Tag
     tags: [ New Year ]

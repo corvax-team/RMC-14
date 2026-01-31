@@ -107,8 +107,8 @@ screen_shake_intensity = 1
 [events]
 enabled = false
 
-[build]
-engine_version = "264.0.2-fix-physics" #and remember to remove it next update...xd
-
 [movement]
 mob_pushing = true
+
+[jerry]
+discord_auth_enabled = true
