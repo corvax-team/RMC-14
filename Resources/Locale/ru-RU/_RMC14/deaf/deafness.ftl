@@ -1,7 +1,7 @@
-rmc-deaf-start = You notice you can't hear anything... you're deaf!
-rmc-deaf-end = You start hearing things again!
+rmc-deaf-start = Вы замечаете, что не можете ничего услышать... вы оглохли!
+rmc-deaf-end = Вы начинаете слышать вновь!
 rmc-deaf-chat-color = [bold][font size=14][color=red]{ $message }[/color][/font][/bold]
-rmc-deaf-talk-self = You cannot hear yourself speak!
-rmc-deaf-talk-others = Someone near talks but you cannot hear them.
-rmc-deaf-hear-self = You mutter something about... { $message }
-rmc-deaf-hear-others = ...You hear something about... { $message }
+rmc-deaf-talk-self = Вы не можете слышать свой собственный голос!
+rmc-deaf-talk-others = Кто-то около вас говорит, но вы не слышите о чём.
+rmc-deaf-hear-self = Вы о чём-то бормочете... { $message }
+rmc-deaf-hear-others = ...Вы слышите что-то о... { $message }

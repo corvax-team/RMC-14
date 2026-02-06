@@ -1,4 +1,4 @@
-reagent-name-rmc-cherry-jelly = Cherry Jelly
-reagent-desc-rmc-cherry-jelly = Sweet jelly made from the cherry fruit.
-reagent-name-rmc-peanut-butter = Peanut Butter
-reagent-desc-rmc-peanut-butter = Creamy butter made from peanuts.
+reagent-name-rmc-cherry-jelly = Вишнёвое желе
+reagent-desc-rmc-cherry-jelly = Сладкое желе из вишни.
+reagent-name-rmc-peanut-butter = Арахисовая паста
+reagent-desc-rmc-peanut-butter = Паста из арахиса.

@@ -72,9 +72,9 @@ rmc-gun-stacks-hit-multiple =
 rmc-gun-stacks-reset = { CAPITALIZE($weapon) } издаёт писк, теряя данные о наведении на цель и возвращаесь к обычному режиму стрельбы.
 rmc-gun-shoot-air-self = YOU FIRE YOUR { CAPITALIZE($weapon) } INTO THE AIR!
 rmc-gun-shoot-air-other = { CAPITALIZE(THE($user)) } FIRES { CAPITALIZE(THE($weapon)) } INTO THE AIR!
-rmc-gun-shoot-air-blocked = The roof above you is too dense.
-rmc-gun-shoot-air-examine = [bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default){ $harm ->
+rmc-gun-shoot-air-blocked = Крыша над вами слишком плотная.
+rmc-gun-shoot-air-examine = [bold]Нажмите [color=cyan]специальное взаимодействие[/color]  (По стандарту Spacebar){ $harm ->
         [true] { " while in harm mode" }
        *[false] { "" }
     } to fire into the air.[/bold]
-rmc-flare-gun-examine = The last signal flare fired has the designation: [color=#ad3b98][bold]{ $id }[/bold][/color]
+rmc-flare-gun-examine = Последняя выпущенная сигнальная ракета имеет обозначение: [color=#ad3b98][bold]{ $id }[/bold][/color]

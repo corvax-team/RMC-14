@@ -89,8 +89,8 @@ rmc-dropship-fabricator-points = Очки: { $points }
 rmc-dropship-fabricator-equipment = [bold]Снаряжение[/bold]
 rmc-dropship-fabricator-ammo = [bold]Боеприпасы[/bold]
 rmc-dropship-fabricator-fabricate = Создать ({ $cost })
-rmc-dropship-firemission-warning = A DROPSHIP FIRES TOWARDS THE { $direction }
-rmc-dropship-firemission-warning-above = A DROPSHIP FIRES RIGHT ONTOP OF YOU!
+rmc-dropship-firemission-warning = ВЫСТРЕЛИ ЛЕТЯТ ПРЯМО НА { $direction }
+rmc-dropship-firemission-warning-above = КАНОННАДА ВЫСТРЕЛОВ ОБРУШИВАЕТСЯ ПРЯМО НА ВАС!
 rmc-dropship-paradrop-target-screen-text =
     HPU-1 Paradrop Deployment System
     { $hasTarget }
@@ -100,6 +100,6 @@ rmc-dropship-paradrop-target-screen-target-none =
 rmc-dropship-paradrop-target-screen-target-targeting =
     Locked to { $dropTarget }.
     Paradropping available.
-rmc-dropship-paradrop-lock-no-target = No target selected.
-rmc-dropship-paradrop-lock-target-not-flying = You can only enable the paradrop module while in flight.
+rmc-dropship-paradrop-lock-no-target = Цель не выбрана.
+rmc-dropship-paradrop-lock-target-not-flying = Вы можете включить модуль десантирования только в полёте.
 rmc-dropship-fabricator-busy = Фабрикатор запчастей десантных кораблей занят. Пожалуйста, дождитесь завершения предыдущей операции.

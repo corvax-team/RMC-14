@@ -1,12 +1,12 @@
 rmc-attachable-holder-strip-ui-title = Снять приспособления
-rmc-attachable-holder-strip-ui-empty-slot = ничего
+rmc-attachable-holder-strip-ui-empty-slot = Пусто
 rmc-verb-strip-attachables = Снять приспособления
 rmc-aslot-barrel = Ствол
-rmc-bslot-barrel = Mateba Barrel
+rmc-bslot-barrel = Ствол Матёбы
 rmc-aslot-rail = Крепление
 rmc-aslot-stock = Приклад
 rmc-aslot-underbarrel = Подствольное
-rmc-aslot-harness = Harness
+rmc-aslot-harness = Крепление
 rmc-attachable-activation-fail-not-wielded = { CAPITALIZE($holder) } нужно держать в обеих руках, чтобы активировать { $attachable }!
 rmc-attachable-activation-fail-not-held = { CAPITALIZE($holder) } нужно держать в руке, чтобы активировать { $attachable }!
 rmc-attachable-activation-fail-not-owned = { CAPITALIZE($holder) } нужно экипировать или держать в двух руках, чтобы активировать { $attachable }!
