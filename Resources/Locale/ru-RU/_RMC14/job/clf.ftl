@@ -1,25 +1,25 @@
 rmc-ghost-role-information-clf-rules =
-    You are a [color=red][bold]CLF member[/bold][/color]. You are hostile to the marines unless stated otherwise.
-    You don't remember any of your previous life, and you don't remember anything you learned as a ghost.
-    You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
-    You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
-rmc-ghost-role-information-clf-description = Ensure the marines are repelled from this space, for the free colonies!
-rmc-ghost-role-clf-cell-commander = CLF Cell Commander (Hostile)
-rmc-clf-cell-commander = CLF Cell Commander
-CMCLFCellCommander = CLF Cell Commander
-rmc-ghost-role-clf-soldier = CLF Soldier (Hostile)
-rmc-clf-soldier = CLF Soldier
+    Вы - [color=red][bold]Повстанец КФО[/bold][/color]. Вы враждебны к морпехам, если не сказано обратное.
+    Вы не помните ничего из своей прошлой жизни и ничего из того, что вы узнали, пока были призраком.
+    Вам разрешено знать общие знания об игре, такие как открывание двери, готовка еды, использование предметов и тд.
+    Вам абсолютно [color=red]ЗАПРЕЩЕНО[/color] помнить имя, внешность, имя и прочую информацию о вашем прошлом персонаже.
+rmc-ghost-role-information-clf-description = Обеспечьте провал этих грязных продажных крыс из ОПЗ и жалких корпоратов, во славу восстания!
+rmc-ghost-role-clf-cell-commander = Командир Ячейки КФО (Враждебный)
+rmc-clf-cell-commander = Командир Ячейки КФО
+CMCLFCellCommander = Командир Ячейки КФО
+rmc-ghost-role-clf-soldier = Повстанец КФО (Враждебный)
+rmc-clf-soldier = Повстанец КФО
 rmc-job-description-clf-cell-commander = ""
-rmc-ghost-role-clf-engineer = CLF Technician (Hostile)
-rmc-clf-engineer = CLF Technician
-rmc-job-prefix-clf-engineer = TECH
-rmc-ghost-role-clf-medic = CLF Medic (Hostile)
-rmc-clf-medic = CLF Medic
-rmc-job-prefix-clf-medic = MED
-rmc-ghost-role-clf-specialist = CLF Specialist (Hostile)
-rmc-clf-specialist = CLF Specialist
-rmc-job-prefix-clf-specialist = SPC
-rmc-job-prefix-clf-cell-commander = CMDR
+rmc-ghost-role-clf-engineer = Механик КФО (Враждебный)
+rmc-clf-engineer = Механик КФО
+rmc-job-prefix-clf-engineer = ТЕХ
+rmc-ghost-role-clf-medic = Санитар КФО (Враждебный)
+rmc-clf-medic = Санитар КФО
+rmc-job-prefix-clf-medic = Сан
+rmc-ghost-role-clf-specialist = Боевик КФО (Враждебный)
+rmc-clf-specialist = Боевик КФО
+rmc-job-prefix-clf-specialist = СПЕЦ
+rmc-job-prefix-clf-cell-commander = КМДР
 CMCLFSoldier = CLF Soldier
 rmc-job-description-clf-soldier = ""
 rmc-job-prefix-clf-soldier = GRL

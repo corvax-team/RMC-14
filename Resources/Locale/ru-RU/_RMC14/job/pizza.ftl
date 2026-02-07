@@ -1,12 +1,12 @@
 rmc-ghost-role-information-pizza-rules =
-    You are a [color=red][bold]Pizza Deliverer[/bold][/color]. You are not hostile to any faction.
-    You don't remember any of your previous life, and you don't remember anything you learned as a ghost.
-    You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
-    You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
-rmc-ghost-role-information-pizza-description = Your job is to deliver your pizzas. You're PRETTY sure this is the right place...
-rmc-ghost-name-pizza = Pizza Deliverer (Neutral)
-rmc-job-name-pizza = Pizza Deliverer
-rmc-job-prefix-pizza = PIZZA
+    Вы - [color=red][bold]Доставщик Пиццы[/bold][/color]. Вы не враждебны ни к одной фракции.
+    Вы не помните ничего из своей прошлой жизни и ничего из того, что вы узнали, пока были призраком.
+    Вам разрешено знать общие знания об игре, такие как открывание двери, готовка еды, использование предметов и тд.
+    Вам абсолютно [color=red]ЗАПРЕЩЕНО[/color] помнить имя, внешность, имя и прочую информацию о вашем прошлом персонаже.
+rmc-ghost-role-information-pizza-description = Ваша задача развозить пиццу. Вы ТОЧНО уверено, что это именно тот адрес...
+rmc-ghost-name-pizza = Доставщик Пиццы (Нейтральный)
+rmc-job-name-pizza = Доставщик Пиццы
+rmc-job-prefix-pizza = ПИЦЦА
 cm-job-name-pizza-deliverer = Доставщик пиццы
 cm-job-description-pizza-deliverer = «Вы заказали... шестнадцать порций сырного картофеля фри, восемь больших пицц с двойной начинкой, девять бутылок "Фоуртин Локо"... алло? Кто-нибудь есть на этом корабле? Ваша пицца остывает».
 cm-job-prefix-pizza-deliverer = Доставка пиццы

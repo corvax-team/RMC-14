@@ -37,17 +37,17 @@ rmc-ghost-name-spp-friendly-mp = СССП Военная Полиция (Дру�
 rmc-job-name-spp-mp = Полиция
 rmc-job-prefix-spp-mp = ВП
 
-rmc-ghost-name-spp-commando-leader = СССП Коммандор Лидер (!DEATHSQUAD!)
-rmc-job-name-spp-commando-leader = 1-ый Коммандор
-rmc-job-prefix-spp-commando-leader = 1ыйКомм.
+rmc-ghost-name-spp-commando-leader = "Пастух" СССП (!DEATHSQUAD!)
+rmc-job-name-spp-commando-leader = Лидер Отряда
+rmc-job-prefix-spp-commando-leader = Паст.
 
-rmc-ghost-name-spp-commando-medic = СССП Комсандор Медик (!DEATHSQUAD!)
-rmc-job-name-spp-commando-medic = 2-ой Коммандор
-rmc-job-prefix-spp-commando-medic = 2ойКомм.
+rmc-ghost-name-spp-commando-medic = Санитар Коммандо СССП (!DEATHSQUAD!)
+rmc-job-name-spp-commando-medic = Санитар Коммандо
+rmc-job-prefix-spp-commando-medic = Сан. Комман.
 
-rmc-ghost-name-spp-commando = СССП Коммандор (!DEATHSQUAD!)
-rmc-job-name-spp-commando = Младший Коммандор
-rmc-job-prefix-spp-commando = МлКомм.
+rmc-ghost-name-spp-commando = Коммандо СССП (!DEATHSQUAD!)
+rmc-job-name-spp-commando = Коммандо
+rmc-job-prefix-spp-commando = Комман.
 
 rmc-job-name-spp-gunner = Тяжёлый пулемётчик
 rmc-job-prefix-spp-gunner = Тяж. Пул.
@@ -57,17 +57,17 @@ rmc-job-name-spp-rifleman-pve = Стрелок
 rmc-job-prefix-spp-rifleman-pve = Стр
 rmc-ghost-name-spp-rifleman-pve = СССП Стрелок
 
-rmc-job-name-spp-corpsman = Corpsman
-rmc-job-prefix-spp-corpsman = HM
-rmc-ghost-name-spp-corpsman = SPP Corpsman
+rmc-job-name-spp-corpsman = Санитар
+rmc-job-prefix-spp-corpsman = Сан
+rmc-ghost-name-spp-corpsman = Санитар СССП
 
-rmc-job-name-spp-overwatch = Platoon Commander
-rmc-job-prefix-spp-overwatch = PltCo.
-rmc-ghost-name-spp-overwatch = SPP PltCo.
+rmc-job-name-spp-overwatch = Взводный Командир
+rmc-job-prefix-spp-overwatch = Вз. Ком.
+rmc-ghost-name-spp-overwatch = Взводный Командир СССП
 
-rmc-job-name-spp-sectionsergeant = Section Sergeant
-rmc-job-prefix-spp-sectionsergeant = Sec. Sarge
-rmc-ghost-name-spp-sectionsergeant = SPP Section Sergeant
+rmc-job-name-spp-sectionsergeant = Сержант отделения
+rmc-job-prefix-spp-sectionsergeant = Сжт. Отд.
+rmc-ghost-name-spp-sectionsergeant = Сержант Отделения СССП
 
 rmc-job-name-spp-squadlead = Командир Отряда
 rmc-job-prefix-spp-squadlead = КомОт

@@ -14,7 +14,7 @@ cm-job-name-survivor-corporate = Корпоративный колонист
 cm-job-name-survivor-scientist = Учёный колонист
 
 rmc-job-name-survivor-co = Выживший КО
-rmc-job-description-survivor-co = Вы командующий офицер в составе ККМП.
+rmc-job-description-survivor-co = Вы - переживший почти полное уничтожение своего соединения Командир Сил Обороны и Сдерживания.
 
 rmc-job-name-survivor-synth = Выживший синтетик
 rmc-job-description-survivor-synth Вы синтетик, переживший нападение на корпоративный объект.
@@ -35,15 +35,15 @@ rmc-playtime-tracker-job-name-survivor-synth = Выживший синтетик
 
 cm-job-name-survivor-trucker = Трекер колониста
 
-cm-job-name-survivor-icb = Представитель Бюро межзвездной торговли
-CMJobSurvivorICB = Представитель Бюро межзвездной торговли
-cm-job-prefix-survivor-icb = ПБМТ
+cm-job-name-survivor-icb = Представитель Антимонопольного Бюро
+CMJobSurvivorICB = Представитель Антимонопольного Бюро
+cm-job-prefix-survivor-icb = ПАБ
 
-cm-job-name-survivor-isr = Interstellar Life Rights Observer
-CMJobSurvivorISR = Interstellar Life Rights Observer
+cm-job-name-survivor-isr = Уполномоченный Наблюдатель по Правам Разумных Существ
+CMJobSurvivorISR = Уполномоченный Наблюдатель по Правам Разумных Существ
 
-rmc-job-name-survivor-cmb-deputy = Заместитель БКМ
-CMSurvivorCMBDeputy = Заместитель БКМ
+rmc-job-name-survivor-cmb-deputy = Помощник Маршала БКМ
+CMSurvivorCMBDeputy = Помощник Маршала БКМ
 
 rmc-job-name-survivor-bureau-marshal = Маршал БКМ
 cm-job-prefix-survivor-cmb-marshal = БКМ Марш.
@@ -75,7 +75,7 @@ cm-job-name-surivor-priest = Священник
 
 # FORECON survs
 
-rmc-job-greeting-forecon = Вы — морпех из подразделения разведки сил ККМП (Форекон) с корабля ККМП «Ганьют», оказавшийся на этой планете после того, как ваша команда была уничтожена при расследовании сигнала бедствия. Ваш пилот и большая часть отряда погибла, вы и оставшиеся бойцы вынуждены были сражаться и скрываться, чтобы выжить... но с истощающимися запасами и заканчивающейся едой, возможно, единственный шанс на спасение — двигаться на запад к разбившемуся десантному кораблю, чтобы добыть что‑нибудь полезное.
+rmc-job-greeting-forecon = Вы — морпех из подразделения СОиС (Силы Обороны и Сдерживания) с корабля «Ганьют», оказавшийся на этой планете после того, как ваша команда была уничтожена при расследовании сигнала бедствия. Ваш пилот и большая часть отряда погибла, вы и оставшиеся бойцы вынуждены были сражаться и скрываться, чтобы выжить... но с истощающимися запасами и заканчивающейся едой, возможно, единственный шанс на спасение — двигаться на запад к разбившемуся десантному кораблю, чтобы добыть что‑нибудь полезное.
 
   Вы полностью осознаёте угрозу ксеноморфов и можете использовать это знание по своему усмотрению.
 
@@ -84,20 +84,20 @@ rmc-job-greeting-forecon = Вы — морпех из подразделения
   Вы [bold][color=#51A16C][font size=16]НЕ враждебны к ККМП![/font][/color][/bold]
 
 rmc-job-name-forecon = Выживший ФОРЕКОН
-rmc-job-description-forecon = Вы — морпех корпуса ККМП "Форекон", оказавшийся один. Ваш корабль "ганьют" потерпел крушение, и теперь вы остались на этой планете. Сделайте всё возможное, чтобы выжить!
+rmc-job-description-forecon = Вы — солдат СОиС, оказавшийся один. Ваш корабль "ганьют" потерпел крушение, и теперь вы остались на этой планете. Сделайте всё возможное, чтобы выжить!
 
-rmc-job-name-forecon-sniper = Снайпер ФОРЕКОН
-rmc-job-name-forecon-marksman = Стрелок ФОРЕКОН
-rmc-job-name-forecon-support-tech = Техник поддержки ФОРЕКОН
-rmc-job-name-forecon-synth = Синтетик ФОРЕКОН
-rmc-job-name-forecon-commander = Командир ФОРЕКОН
+rmc-job-name-forecon-sniper = Снайпер СОиС
+rmc-job-name-forecon-marksman = Стрелок СОиС
+rmc-job-name-forecon-support-tech = Техник поддержки СОиС
+rmc-job-name-forecon-synth = Синтетик СОиС
+rmc-job-name-forecon-commander = Командир СОиС
 
 # LV-624 survs
 
 rmc-job-name-survivor-lv624-archeologist = Археолог
 rmc-job-name-survivor-lv624-cargo-technician = Техник поставок
 rmc-job-name-survivor-lv624-corporate-liaison = Корпоративный связной LV-624
-rmc-job-name-survivor-lv624-security-guard = Охраник Ве-Я
+rmc-job-name-survivor-lv624-security-guard = Охраник
 rmc-job-name-survivor-lv624-medical-technician = Медицинский техник
 rmc-job-name-survivor-lv624-engineer = Инженер
 

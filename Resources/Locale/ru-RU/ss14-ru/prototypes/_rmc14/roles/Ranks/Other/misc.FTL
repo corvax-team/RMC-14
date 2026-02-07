@@ -1,0 +1,26 @@
+- type: rank
+  id: RMCRankOperator
+  name: Оператор
+  prefix: Опер.
+
+- type: rank
+  id: RMCRankOperative
+  name: Оперативник
+  prefix: Опер.
+
+- type: rank
+  id: RMCRankSynthetic
+  name: Синтетик
+  prefix: Синт.
+  paygrade: E8
+
+- type: rank
+  id: RMCRankSyntheticMG
+  name: Синтетик
+  prefix: Синт.
+  paygrade: E9
+
+- type: rank
+  id: RMCRankSyntheticColonist
+  name: Синтетик
+  prefix: Синт.

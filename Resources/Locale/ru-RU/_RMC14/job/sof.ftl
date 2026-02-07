@@ -1,12 +1,12 @@
 rmc-ghost-role-information-sof-rules =
-    You are a [color=red][bold]MARSOC SOF member[/bold][/color]. You may or may not be hostile to the marines, depending on admin instructions.
-    You don't remember any of your previous life, and you don't remember anything you learned as a ghost.
-    You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
-    You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
-rmc-ghost-role-information-sof-description = You are an elite Marine Raider Operative, the best of the best, absolutely loyal to High Command and must follow their directives. Execute the mission assigned to you with extreme prejudice!
-rmc-ghost-name-marine-raider = Marine Raider (Friendly)
-rmc-job-name-marine-raider = Marine Raider
+    Вы - [color=red][bold]оперативник КСОМП[/bold][/color]. Вы дружественны к морпехам, пока не сказано обратное.
+    Вы не помните ничего из своей прошлой жизни и ничего из того, что вы узнали, пока были призраком.
+    Вам разрешено знать общие знания об игре, такие как открывание двери, готовка еды, использование предметов и тд.
+    Вам абсолютно [color=red]ЗАПРЕЩЕНО[/color] помнить имя, внешность, имя и прочую информацию о вашем прошлом персонаже.
+rmc-ghost-role-information-sof-description = Вы - элита, спецназ, на вас расчитывают и вас боятся, не подведите. Данная вам миссия не потерпит провала, поражение равно смерть!
+rmc-ghost-name-marine-raider = "Поинтмен" (Дружественный)
+rmc-job-name-marine-raider = Оперативник-налётчик
 rmc-job-prefix-marine-raider = Op.
-rmc-ghost-name-marine-raider-leader = Marine Raider Team Leader (Friendly)
-rmc-job-name-marine-raider-leader = Marine Raider Team Leader
+rmc-ghost-name-marine-raider-leader = "Ведущий" (Дружественный)
+rmc-job-name-marine-raider-leader = Лидер отряда Налётчиков
 rmc-job-prefix-marine-raider-leader = TL.

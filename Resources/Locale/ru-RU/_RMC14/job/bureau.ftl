@@ -1,20 +1,20 @@
 rmc-ghost-role-information-bureau-rules =
-    You are a [color=cyan][bold]Bureau member[/bold][/color]. You may or may not be hostile to the marines, depending on admin instructions.
-    You don't remember any of your previous life, and you don't remember anything you learned as a ghost.
-    You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
-    You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
-rmc-ghost-role-information-bureau-marshal-description = Получите инструкции в офисе БКМ (Бюро колониальных маршаллов) на станции Анкорпойнт и приступайте к их выполнению. Убедитесь, что колониальные активы находятся в безопасности и под вашим надзором. Не применяйте и не переступайте через Закон ККМП на корабле корпуса, если вас об этом не просят, так как это вне вашей юрисдикции.
-rmc-ghost-role-information-bureau-observer-description = Будучи межзвёздным смотрителем за правами разумных существ, ваша работа заключается в мониторинге и документировании случаев обращения с разумными существами по всему космосу, обеспечивая соблюдение межзвёздного закона. Если вы прибыли вместе с представителями БКМ (Бюро колониальных маршаллов), то при выполнении своих обязанностей выполняйте приказы представителей и их маршала. Хотя вы обычный бумагомаратель, ваша докторская степень позволяет вам оказывать медицинскую помощь в чрезвычайных ситуациях и поддерживать своих товарищей из БКМ, если ситуация окажется критической.
-rmc-ghost-role-information-icb-description = Oversee trade operations, enforce regulations, and investigate potential smuggling or black market activity. You are expected to collaborate with CMB deputies and ensure compliance with interstellar trade laws.
-rmc-ghost-name-bureau-marshal = Bureau Marshal (Friendly)
-rmc-job-name-bureau-marshal = Bureau Marshal
-rmc-job-prefix-bureau-marshal = CMB MAR
-rmc-ghost-name-bureau-deputy = Bureau Deputy (Friendly)
-rmc-job-name-bureau-deputy = Bureau Deputy
-rmc-job-prefix-bureau-deputy = CMB DEP
-rmc-ghost-name-bureau-observer = Interstellar Sapient-Life Rights Observer (Friendly)
-rmc-job-name-bureau-observer = Interstellar Sapient-Life Rights Observer
-rmc-job-prefix-bureau-observer = OBS
-rmc-ghost-name-icb = Interstellar Commerce Bureau Liaison (Friendly)
-rmc-job-name-icb = Interstellar Commerce Bureau Liaison
-rmc-job-prefix-icb = ICB
+    Вы - [color=cyan][bold]Офицер БКМ[/bold][/color]. Вы дружественны к морпехам, если не сказано обратное.
+    Вы не помните ничего из своей прошлой жизни и ничего из того, что вы узнали, пока были призраком.
+    Вам разрешено знать общие знания об игре, такие как открывание двери, готовка еды, использование предметов и тд.
+    Вам абсолютно [color=red]ЗАПРЕЩЕНО[/color] помнить имя, внешность, имя и прочую информацию о вашем прошлом персонаже.
+rmc-ghost-role-information-bureau-marshal-description = Получите инструкции в офисе БКМ (Бюро колониальных маршаллов) и приступайте к их выполнению. Следите за выполнением законов, не переступайте его сами и помните, что никто не выше закона.
+rmc-ghost-role-information-bureau-observer-description = Будучи уполномоченным наблюдателем по правам разумных существ, вы должны обнаруживать и документировать случаи нарушения ОПРС по всему космосу. Если вы прибыли вместе с представителями БКМ (Бюро колониальных маршаллов), то при выполнении своих обязанностей выполняйте приказы представителей и их маршала. Хотя вы обычный бумагомаратель, ваша докторская степень позволяет вам оказывать медицинскую помощь в чрезвычайных ситуациях и поддерживать своих товарищей из БКМ, если ситуация окажется критической.
+rmc-ghost-role-information-icb-description = Следите за торговыми операциями, выполнением законов торговли и попытками корпоративного произвола. Вы - самый опытный сотрудник, когда дело доходит до борьбы с монополией, нелегальной торговлей и корпоративным произволом во всей группе, так что не подведите Маршала.
+rmc-ghost-name-bureau-marshal = Колониальный Маршал (FДружественный
+rmc-job-name-bureau-marshal = Колониальный Маршал
+rmc-job-prefix-bureau-marshal = БКМ МАР
+rmc-ghost-name-bureau-deputy = Помощник Маршала (Дружественный)
+rmc-job-name-bureau-deputy = Помощник Маршала
+rmc-job-prefix-bureau-deputy = БКМ ПОМ
+rmc-ghost-name-bureau-observer = Уполномоченный Наблюдатель по Правам Разумных Существ (Дружественный)
+rmc-job-name-bureau-observer = Уполномоченный Наблюдатель по Правам Разумных Существ
+rmc-job-prefix-bureau-observer = УНПРС
+rmc-ghost-name-icb = Представитель Антимонопольного Бюро (Дружественный)
+rmc-job-name-icb = Представитель Антимонопольного Бюро
+rmc-job-prefix-icb = ПАБ

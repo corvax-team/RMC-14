@@ -1,0 +1,4 @@
+- type: rank
+  id: RMCRankHEFASer
+  name: Сир
+  prefix: Сир
