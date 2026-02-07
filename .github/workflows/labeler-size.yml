@@ -2,7 +2,7 @@ name: "Labels: Size"
 on: pull_request_target
 jobs:
   size-label:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: size-label
         uses: "pascalgn/size-label-action@v0.5.5"
@@ -12,9 +12,9 @@ jobs:
           # Custom size configuration
           sizes: >
             {
-              "0": "XS",
-              "10": "S",
-              "100": "M",
-              "1000": "L",
-              "5000": "XL"
+              "0": "размер: XS",
+              "10": "размер: S",
+              "100": "размер: M",
+              "1000": "размер: L",
+              "5000": "размер: XL"
             }
