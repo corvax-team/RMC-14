@@ -15,9 +15,6 @@ public sealed partial class HiveCocoonComponent : Component
     public HiveCocoonState State;
 
     [DataField, AutoNetworkedField]
-    public Dictionary<HiveCocoonState, string?> VisualStates = new();
-
-    [DataField, AutoNetworkedField]
     public TimeSpan OpeningTime = TimeSpan.Zero;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]

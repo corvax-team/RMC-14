@@ -5,17 +5,41 @@
   description: Incubator for hive offspring.
   suffix: Pathogen
   components:
+  - type: GuideHelp
+    guides:
+    - CCMGuideHiveCocoon
   - type: Sprite
     sprite: _CCM14/Pathogen/Structures/Protomorphs/protomorph_cocon.rsi
     layers: 
     - state: cocoon_empty
       map: [ "enum.HiveCocoonLayers.Base" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.HiveCocoonLayers.Base:
+        cocoonState:
+          Empty: { state: cocoon_empty }
+          Half: { state: cocoon_half }
+          Full: { state: cocoon_full }
+          Opening: { state: cocoon_opening }
   - type: Appearance
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        layer:
+        - BulletImpassable
+        restitution: 0.3
+        friction: 0.2
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 1200
+        damage: 600
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
@@ -24,14 +48,49 @@
       types:
         Slash: 300
   - type: HiveCocoon
-    visualStates:
-      Empty: cocoon_empty
-      Half: cocoon_half
-      Full: cocoon_full
-      Opening: cocoon_opening
     openingTime: 0.7
     insertWhitelist:
       components:
       - Marine
       - Survivor
-    
+  - type: CollisionWake
+    enabled: false
+  - type: HiveConstructionRequiresHiveWeeds
+  - type: HiveConstructionRequiresSpace
+  - type: HiveConstructionLimited
+    id: CCMHiveCocoon
+
+- type: entity
+  id: CCMHiveCocoonConstructionNode
+  parent: BaseHiveStructureNode
+  name: Cocoon
+  description: Incubator for hive offspring.
+  suffix: Pathogen Construction
+  components:
+  - type: GuideHelp
+    guides:
+    - CCMGuideHiveCocoon
+  - type: Sprite
+    sprite: _CCM14/Pathogen/Structures/Protomorphs/protomorph_cocon.rsi
+    layers:
+    - state: cocoon_full
+      color: '#FFFFFFAA'
+    - sprite: _RMC14/Interface/xeno_hud.rsi
+      state: xeno_structure_node_indicator
+      scale: 0.8, 0.8
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: HiveConstructionNode
+    initialPlasmaCost: 400
+    plasmaCost: 450
+    spawn: CCMHiveCocoon
+  - type: HiveConstructionRequiresHiveWeeds
+  - type: HiveConstructionRequiresSpace
+  - type: HiveConstructionLimited
+    id: CCMHiveCocoon
