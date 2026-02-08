@@ -5,6 +5,9 @@
   description: Incubator for hive offspring.
   suffix: Pathogen
   components:
+  - type: GuideHelp
+    guides:
+    - CCMGuideHiveCocoon
   - type: Sprite
     sprite: _CCM14/Pathogen/Structures/Protomorphs/protomorph_cocon.rsi
     layers: 
@@ -64,6 +67,9 @@
   description: Incubator for hive offspring.
   suffix: Pathogen Construction
   components:
+  - type: GuideHelp
+    guides:
+    - CCMGuideHiveCocoon
   - type: Sprite
     sprite: _CCM14/Pathogen/Structures/Protomorphs/protomorph_cocon.rsi
     layers:

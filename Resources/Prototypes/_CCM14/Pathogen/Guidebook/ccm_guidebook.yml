@@ -1,0 +1,15 @@
+- type: guideEntry
+  parent: RMC
+  id: CCMPathogen
+  name: Pathogen
+  priority: 1
+  text: "/ServerInfo/Guidebook/_RMC14/RMC14.xml" #TODO Pathogen main guide
+  children:
+  - CCMGuideHiveCocoon
+
+- type: guideEntry
+  parent: RMC
+  id: CCMGuideHiveCocoon
+  priority: 1
+  name: "Hive Cocoon Guide"
+  text: "/ServerInfo/Guidebook/_CCM14/Pathogen/Guides/CCMGuideHiveCocoon.xml"
