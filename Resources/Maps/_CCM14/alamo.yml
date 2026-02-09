@@ -1,16 +1,16 @@
 meta:
   format: 7
-  category: Map
+  category: Grid
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 12/17/2025 20:45:02
-  entityCount: 191
-maps:
-- 191
+  time: 01/12/2026 18:13:47
+  entityCount: 186
+maps: []
 grids:
 - 1
-orphans: []
+orphans:
+- 1
 nullspace: []
 tilemap:
   0: Space
@@ -31,7 +31,7 @@ entities:
     - type: MetaData
       name: Аламо
     - type: Transform
-      parent: 191
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -303,38 +303,6 @@ entities:
         -4,-6: CCMAreaAlamo
         -4,-7: CCMAreaAlamo
         -4,-8: CCMAreaAlamo
-  - uid: 191
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: GridTree
-    - type: Broadphase
-    - type: OccluderTree
-- proto: AtmosDeviceFanTiny
-  entities:
-  - uid: 2
-    components:
-    - type: Transform
-      pos: -4.5,2.5
-      parent: 1
-  - uid: 3
-    components:
-    - type: Transform
-      pos: -4.5,1.5
-      parent: 1
-  - uid: 4
-    components:
-    - type: Transform
-      pos: 3.5,2.5
-      parent: 1
-  - uid: 5
-    components:
-    - type: Transform
-      pos: 3.5,1.5
-      parent: 1
 - proto: CMAlamoCockpit
   entities:
   - uid: 6
@@ -346,7 +314,7 @@ entities:
     - DoorBolt
 - proto: CMAlamoDoorAft
   entities:
-  - uid: 7
+  - uid: 2
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -354,19 +322,17 @@ entities:
       parent: 1
 - proto: CMAlamoDoorPort
   entities:
-  - uid: 9
+  - uid: 3
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -4.5,2.5
+      pos: 3.5,1.5
       parent: 1
 - proto: CMAlamoDoorStarboard
   entities:
-  - uid: 8
+  - uid: 4
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 3.5,2.5
+      pos: -4.5,1.5
       parent: 1
 - proto: CMAlamoWall1
   entities:

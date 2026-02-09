@@ -40,7 +40,7 @@ public sealed class ForgeVars
         CVarDef.Create("jerry.discord_api_url", "http://c-pl-1.apexnodes.xyz:10594/api", CVar.CONFIDENTIAL | CVar.SERVERONLY);
 
     public static readonly CVarDef<bool> DiscordAuthEnabled =
-        CVarDef.Create("jerry.discord_auth_enabled", true, CVar.CONFIDENTIAL | CVar.SERVERONLY);
+        CVarDef.Create("jerry.discord_auth_enabled", false, CVar.CONFIDENTIAL | CVar.SERVERONLY);
 
     public static readonly CVarDef<string> DiscordGuildID =
         CVarDef.Create("jerry.discord_guildId", "1136006498842063049", CVar.CONFIDENTIAL | CVar.SERVERONLY);

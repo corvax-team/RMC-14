@@ -1,35 +1,36 @@
 <!-- Guidelines: https://docs.spacestation14.io/en/getting-started/pr-guideline -->
 
-## About the PR
-<!-- What did you change? -->
+## Описание PR
+<!-- Что вы изменили?? -->
 
-## Why / Balance
-<!-- Discuss how this would affect game balance or explain why it was changed. Link any relevant discussions or issues. -->
+## Почему / Баланс
+<!-- Обсудите, как это повлияет на баланс игры или объясните, почему это было изменено. Укажите ссылки на соответствующие обсуждения или issue. -->
 
-## Technical details
-<!-- Summary of code changes for easier review. -->
+## Технические детали
+<!-- Краткое описание изменений в коде для облегчения проверки. -->
 
-## Media
-<!-- Attach media if the PR makes ingame changes (clothing, items, features, etc).
-Small fixes/refactors are exempt. Media may be used in RMC14 progress reports with credit. -->
+## Медиа
+<!-- Прикрепите медиафайлы, если PR вносит изменения в игру (одежда, предметы, механики и т.д.).
+Небольшие исправления/рефакторинг освобождаются от этого требования. -->
 
-## Requirements
-<!-- Confirm the following by placing an X in the brackets [X]: -->
-- [ ] I have read and am following the [Pull Request and Changelog Guidelines](https://docs.spacestation14.com/en/general-development/codebase-info/pull-request-guidelines.html).
-- [ ] I have added media to this PR or it does not require an ingame showcase.
-<!-- You should understand that not following the above may get your PR closed at maintainer’s discretion -->
-- [ ] By submitting this code and/or assets, I confirm that I either own them or have provided the correct necessary licenses to use and distribute them. I agree to be fully responsible for any legal claims or issues arising from the use of these materials.
+## Требования
+<!-- Подтвердите следующее, поставив X в скобках [X]: -->
+- [] Я прочитал(а) и следую [рекомендациям по оформлению Pull Request и Changelog](https://docs.spacestation14.com/en/general-development/codebase-info/pull-request-guidelines.html).
+- [] Я добавил(а) медиафайлы к этому PR или он не требует демонстрации в игре.
+- [] Предоставляя этот код и/или ресурсы, я подтверждаю, что я либо являюсь их владельцем, либо предоставил необходимые лицензии для их использования и распространения. Я согласен нести полную ответственность за любые юридические претензии или проблемы, возникающие в связи с использованием этих материалов.
+<!-- Вы должны понимать, что несоблюдение вышеуказанного может привести к закрытию вашего PR по усмотрению сопровождающего -->
 
 **Changelog**
-<!-- Add a Changelog entry to make players aware of new features or changes that could affect gameplay.
-Admin changes may be listed for admins to see with admin:
-Coding changes with no changes visible in-game may be listed for other contributors with code:
-Make sure to read the guidelines.
-Changelog must have a :cl: symbol, so the bot recognizes the changes and adds them to the game's changelog. -->
+<!-- Добавьте запись в Changelog, чтобы игроки знали о новых функциях или изменениях, которые могут повлиять на игровой процесс.
+Администраторы могут просматривать список изменений в администраторе, чтобы его могли видеть администраторы в admin:
+Изменения в коде, которые не видны в игре, могут быть указаны для других участников в code:
+Убедитесь, что вы прочитали рекомендации и вынесли этот шаблон Changelog из блока комментариев, чтобы он отображался.
+Changelog должен иметь символ :cl:, чтобы бот распознал изменения и добавил их в список изменений игры. -->
+
 :cl:
-- add: Added fun!
-- remove: Removed fun!
-- tweak: Changed fun!
-- fix: Fixed fun!
-- admin: Admin related change!
-- code: Code related change for contributors!
+- add: Добавлено веселье!
+- remove: Удалено веселье!
+- tweak: Изменено веселье!
+- fix: Исправлено веселье!
+- admin: Изменение связанное с администрированием!
+- code: Изменения связанное с кодом для контрибьюторов!

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseItem
   id: RMCIntelBase
@@ -321,9 +321,9 @@
             state: upgrade
       -
         - name: Nuclear Device
-          description: 	Purchase a nuclear device. Only purchasable 116 minutes into the operation. It's the only way to be sure.
+          description: 	Purchase a nuclear device. Only purchasable 80 minutes into the operation. It's the only way to be sure.
           cost: 5
-          timeLock: 115m
+          timeLock: 80m
           events:
           - !type:TechLogisticsDeliveryEvent
             object: RMCNuke

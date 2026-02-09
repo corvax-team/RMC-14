@@ -1,0 +1,32 @@
+- type: reagent
+  parent: [CMReagentMedicine, Doxarubixadone]
+  id: CCMDoxarubixadone
+  name: reagent-name-ccmdoxarubixadone
+  desc: reagent-desc-ccmdoxarubixadone
+  color: "#9B7BFF"
+  overdose: 10
+  criticalOverdose: 15
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Cellular: -0.5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 10
+        damage:
+          groups:
+            Toxin: 3
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 15
+        damage:
+          groups:
+            Toxin: 9
+
+

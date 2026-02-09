@@ -2,7 +2,9 @@
   id: StructuralMarine
   supportedGroups:
   - Brute
+  - Genetic # Corvax-CM: Added Genetic damage type support
   supportedTypes:
   - Heat
   - Shock
   - Structural
+  - Cellular # Corvax-CM: Added Cellular damage type support

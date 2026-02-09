@@ -16,6 +16,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Directions;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
@@ -34,6 +35,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
@@ -97,7 +99,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         SubscribeLocalEvent<TileFireComponent, MapInitEvent>(OnTileFireMapInit);
         SubscribeLocalEvent<TileFireComponent, VaporHitEvent>(OnTileFireVaporHit);
-        SubscribeLocalEvent<TileFireComponent, InteractHandEvent>(OnTileFireInteractHand, before: [typeof(InteractionPopupSystem)]);
+        SubscribeLocalEvent<TileFireComponent, InteractHandEvent>(OnTileFireInteractHand, before: new [] {typeof(InteractionPopupSystem), typeof(DamagePopupSystem)});
         SubscribeLocalEvent<TileFireComponent, PreventCollideEvent>(OnTileFirePreventCollide);
 
         SubscribeLocalEvent<CraftsIntoMolotovComponent, ExaminedEvent>(OnCraftsIntoMolotovExamined);
@@ -115,7 +117,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         SubscribeLocalEvent<SteppingOnFireComponent, CMGetArmorEvent>(OnSteppingOnFireGetArmor);
         SubscribeLocalEvent<SteppingOnFireComponent, ComponentRemove>(OnSteppingOnFireRemoved);
 
-        SubscribeLocalEvent<CanBeFirePattedComponent, InteractHandEvent>(OnCanBeFirePattedInteractHand, before: [typeof(InteractionPopupSystem)]);
+        SubscribeLocalEvent<CanBeFirePattedComponent, InteractHandEvent>(OnCanBeFirePattedInteractHand, before: new [] {typeof(InteractionPopupSystem), typeof(DamagePopupSystem)});
 
         SubscribeLocalEvent<FlammableComponent, IgnitedEvent>(OnFlammableIgnite);
         SubscribeLocalEvent<FlammableComponent, RMCExtinguishedEvent>(OnFlammableExtinguished);
@@ -137,6 +139,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (!CanBeIgnited(args.Target, ent, ent.Comp.Intensity))
             return;
 
+        ChangeBurnColor(args.Target, ent.Comp.BurnColor);
         Ignite(args.Target, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.Duration, false);
     }
 
@@ -395,6 +398,10 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     }
 
     public virtual void AdjustStacks(Entity<FlammableComponent?> flammable, int stacks)
+    {
+    }
+
+    public virtual void DoStopDropRollAnimation(EntityUid uid)
     {
     }
 
@@ -662,7 +669,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             if (!_prototype.TryIndexReagent(solutionReagent.Reagent.Prototype, out ReagentPrototype? reagent))
                 continue;
 
-            intensity += reagent.Intensity * solutionReagent.Quantity;
+            intensity += reagent.IntensityMod * solutionReagent.Quantity;
         }
 
         if (intensity < ent.Comp.MinIntensity)
@@ -713,7 +720,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
         using (args.PushGroup(nameof(RMCImmuneToIgnitionComponent)))
         {
-            args.PushMarkup(Loc.GetString("rmc-immune-to-ignition-examine", ("ent", ent)));
+            args.PushMarkup(Loc.GetString("rmc-immune-to-ignition-examine", ("ent", ent), ("direct", ent.Comp.ImmuneToDirectHits)));
         }
     }
 
@@ -794,6 +801,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks))
             return;
+
+        ChangeBurnColor(flammableEnt, ent.Comp.BurnColor);
 
         // If this fire can bypass immunity, mark the target as having bypass-active fire
         if (!CanFireBypassImmunity(ent, other))
@@ -980,14 +989,14 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             }
         }
 
-        var steppingQuery = EntityQueryEnumerator<SteppingOnFireComponent>();
-        while (steppingQuery.MoveNext(out var uid, out var stepping))
+        var steppingQuery = EntityQueryEnumerator<SteppingOnFireComponent, PhysicsComponent>();
+        while (steppingQuery.MoveNext(out var uid, out var stepping, out var body))
         {
             stepping.ArmorMultiplier = 1;
             Dirty(uid, stepping);
 
             var isStepping = false;
-            foreach (var contact in _physics.GetContactingEntities(uid, approximate: true))
+            foreach (var contact in _physics.GetContactingEntities(uid, body, approximate: true))
             {
                 if (!_igniteOnCollideQuery.TryComp(contact, out var ignite))
                     continue;
@@ -1049,6 +1058,15 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             _inventory.RelayEvent((target, inv), ref ev);
 
         return ev.Ignite;
+    }
+
+    public void ChangeBurnColor(EntityUid target, Color color)
+    {
+        if (TryComp<RMCFireColorComponent>(target, out var fireColorComp))
+        {
+            fireColorComp.Color = color;
+            Dirty(target, fireColorComp);
+        }
     }
 }
 

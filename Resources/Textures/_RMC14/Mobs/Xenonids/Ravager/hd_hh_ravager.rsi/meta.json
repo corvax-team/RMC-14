@@ -59,6 +59,46 @@
     },
     {
       "name": "ravager_rest_2"
+    },
+    {
+      "name": "hedgehog_1",
+      "directions": 4
+    },
+    {
+      "name": "hedgehog_2",
+      "directions": 4
+    },
+    {
+      "name": "hedgehog_3",
+      "directions": 4
+    },
+    {
+      "name": "hedgehog_4",
+      "directions": 4
+    },
+    {
+      "name": "hedgehog_1_crit"
+    },
+    {
+      "name": "hedgehog_1_resting"
+    },
+    {
+      "name": "hedgehog_2_crit"
+    },
+    {
+      "name": "hedgehog_2_resting"
+    },
+    {
+      "name": "hedgehog_3_crit"
+    },
+    {
+      "name": "hedgehog_3_resting"
+    },
+    {
+      "name": "hedgehog_4_crit"
+    },
+    {
+      "name": "hedgehog_4_resting"
     }
   ]
 }

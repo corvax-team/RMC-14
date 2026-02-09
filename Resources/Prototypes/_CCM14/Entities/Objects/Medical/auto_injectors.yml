@@ -1,0 +1,18 @@
+- type: entity
+  parent: CMAutoInjector
+  id: CCMDoxarubixadoneAutoInjector
+  name: Doxarubixadone autoinjector
+  description: An autoinjector loaded with 3 uses of Doxarubixadone, a medicine for treating cellular/genetic damage.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 5
+        reagents:
+        - ReagentId: CCMDoxarubixadone
+          Quantity: 5
+  - type: CMRefillableSolution
+    reagents:
+      CCMDoxarubixadone: 5
+  - type: IconLabel
+    labelTextLocId: ccm-doxarubixadone-container-label-text
