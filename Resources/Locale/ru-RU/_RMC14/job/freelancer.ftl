@@ -1,19 +1,19 @@
 rmc-ghost-role-information-freelancer-rules =
-    You are a [color=blue][bold]Freelancer[/bold][/color]. You may or may not be hostile to the marines, depending on admin instructions.
-    You don't remember any of your previous life, and you don't remember anything you learned as a ghost.
-    You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
-    You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
-rmc-ghost-role-information-freelancer-friendly-description = Help the crew of the UNS ship in exchange for payment, and choose your payment well. Do what your Warlord says. Ensure your survival at all costs.
-rmc-ghost-role-information-freelancer-hostile-description = Ransack the UNS ship and kill anyone who gets in your way. Do what your Warlord says. Ensure your survival at all costs.
-rmc-ghost-name-freelancer-hostile-standard = Mercenary Rifleman (Hostile)
-rmc-ghost-name-freelancer-friendly-standard = Mercenary Rifleman (Friendly)
-rmc-job-name-freelancer-standard = Mercenary
-rmc-job-prefix-freelancer-standard = MERC
-rmc-ghost-name-freelancer-hostile-medic = Mercenary Medic (Hostile)
-rmc-ghost-name-freelancer-friendly-medic = Mercenary Medic (Friendly)
-rmc-job-name-freelancer-medic = Medic
-rmc-job-prefix-freelancer-medic = MED
-rmc-ghost-name-freelancer-hostile-leader = Mercenary Leader (Hostile)
-rmc-ghost-name-freelancer-friendly-leader = Mercenary Leader (Friendly)
-rmc-job-name-freelancer-leader = Leader
-rmc-job-prefix-freelancer-leader = SL
+    Вы — [color=blue][bold]Фрилансер[/bold][/color]. Ваша враждебность к морским пехотинцам может зависеть от указаний администрации.
+    Вы ничего не помните о своей прошлой жизни и не помните ничего из того, чему научились, будучи призраком.
+    Вам разрешается запоминать общие сведения об игре, например, как готовить еду, как использовать предметы и т.д.
+    Вам категорически ЗАПРЕЩЕНО вспоминать, например, имя, внешность и т.д. вашего предыдущего персонажа.
+rmc-ghost-role-information-freelancer-friendly-description = Помогите экипажу корабля UNS в обмен на плату, и выберите оплату обдуманно. Выполняйте указания своего военачальника. Обеспечьте своё выживание любой ценой.
+rmc-ghost-role-information-freelancer-hostile-description = Разграбьте корабль UNS и уничтожьте всех, кто встанет у вас на пути. Выполняйте указания своего военачальника. Обеспечьте своё выживание любой ценой.
+rmc-ghost-name-freelancer-hostile-standard = Наёмный стрелок (Враждебный)
+rmc-ghost-name-freelancer-friendly-standard = Наёмный стрелок (Дружественный)
+rmc-job-name-freelancer-standard = Наёмник
+rmc-job-prefix-freelancer-standard = Наём.
+rmc-ghost-name-freelancer-hostile-medic = Наёмный Медик (Враждебный)
+rmc-ghost-name-freelancer-friendly-medic = Наёмный Медик (Дружественный)
+rmc-job-name-freelancer-medic = Медик
+rmc-job-prefix-freelancer-medic = Мед.
+rmc-ghost-name-freelancer-hostile-leader = Лидер Наемников (Враждебный)
+rmc-ghost-name-freelancer-friendly-leader = Лидер Наёмников (Дружественный)
+rmc-job-name-freelancer-leader = Лидер
+rmc-job-prefix-freelancer-leader = ЛН

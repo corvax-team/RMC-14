@@ -1,0 +1,11 @@
+<Document>
+  #Hive cocoon
+  used by protomorphs to replenish the hive's composition
+  <Box>
+    <GuideEntityEmbed Entity="CCMHiveCocoon"/>
+    <GuideEntityEmbed Entity="CCMHiveCocoonConstructionNode"/>
+  </Box>
+  [bold]Instructions for use[/bold]: By dragging a stunned marine onto the cocoon or using the context menu to grab him, a delay will begin after which the target will be placed in the cocoon!
+  
+  [bold]Conditions[/bold]: As soon as [color=#ff0000]2 marines[/color] are in the cocoon, a [color=#ff0000]25-second[/color] timer starts, after which the marines' bodies will dissolve and the cocoon will spit out a bloodbuster.
+</Document>

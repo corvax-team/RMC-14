@@ -12,3 +12,8 @@
       Female: RMCFemaleHuman
   - type: FixedIdentity
     name: cm-chatsan-replacement-human
+# Corvax-CM start
+  - type: Tag
+    tags:
+    - Marine
+# Corvax-CM end

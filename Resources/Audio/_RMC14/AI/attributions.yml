@@ -28,7 +28,9 @@
   copyright: "cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/commandreport.ogg"
 
+# Corvax-CM Update sound start
 - files: ["announce.ogg"]
-  license: "CC-BY-SA-3.0"
-  copyright: "cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/misc/interference.ogg"
+  license: "CC-BY-4.0"
+  copyright: ""
+  source: ""
+# Corvax-CM Update sound end

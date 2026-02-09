@@ -5,7 +5,7 @@
   suffix: 1
   components:
   - type: Sprite
-    sprite: _CCM14Objects/Vehicles/Interior/apc.rsi
+    sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi
     state: apc_back_1
   - type: Icon
     sprite: _CCM14/Objects/Vehicles/Interior/apc.rsi

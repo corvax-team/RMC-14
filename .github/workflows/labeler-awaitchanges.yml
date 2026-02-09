@@ -1,0 +1,30 @@
+name: "Labels: Await Changes"
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  add_label:
+    if: ${{ github.event.review.state == 'changes_requested'}}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+    - uses: tspascoal/get-user-teams-membership@v3
+      id: checkUserMember
+      with:
+        username: ${{ github.actor }}
+        team: "maintainers"
+        GITHUB_TOKEN: ${{ secrets.LABELER_PAT }}
+    - if: ${{ steps.checkUserMember.outputs.isTeamMember == 'true' }}
+      uses: actions-ecosystem/action-add-labels@v1
+      with:
+        labels: "Ожидание изменений"
+    - if: ${{ steps.checkUserMember.outputs.isTeamMember == 'true' }}
+      uses: actions-ecosystem/action-remove-labels@v1
+      with:
+        labels: |
+          Требуется ревью
+          Одобрено

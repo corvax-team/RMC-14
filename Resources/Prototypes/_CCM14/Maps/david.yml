@@ -23,7 +23,7 @@
             CMMilitaryWarden: [1, 1]
             CMMilitaryPolice: [2, 2]
             # Auxiliary
-#            CMAuxiliarySupportOfficer: [1, 1]
+            CMAuxiliarySupportOfficer: [1, 1]
             CMIntelOfficer: [2, 2]
             CMVehicleCrewman: [2, 2]
             CMPilotDropship: [1, 1]
@@ -41,7 +41,6 @@
             # Requisition
             CMQuartermaster: [1, 1]
             CMCargoTech: [2, 2]
-#            CMMessTech: [1, 1]
             # Marines
             CMSquadLeader: [2, 2]
             CMFireteamLeader: [2, 2]
@@ -53,4 +52,6 @@
             # Civilians
             CMCorrespondent: [1, 1]
             # Other
+            CMMessTech: [1,1]
             CMLiaison: [1, 1]
+            RMCJobSynthetic: [1, 1]

@@ -112,3 +112,6 @@ engine_version = "264.0.2-fix-physics" #and remember to remove it next update...
 
 [movement]
 mob_pushing = true
+
+[jerry]
+discord_auth_enabled = true
