@@ -1,5 +1,5 @@
-ent-CMBeltBase = belt
-    .desc = Can hold various things.
+ent-CMBeltBase = Пояс
+    .desc = В нём можно хранить вещи.
 ent-RMCBeltBaseStorageNoVisuals = { ent-CMBeltBase }
     .desc = { ent-CMBeltBase.desc }
 ent-CMBeltBaseStorage = { ent-CMBeltBase }
