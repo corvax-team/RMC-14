@@ -61,10 +61,6 @@
       extraPoints:
         ExperimentalTools: 30
     - type: DemoSpecWhitelist
-    - type: GrenadeSpecWhitelist
-    - type: ScoutWhitelist
-    - type: SniperWhitelist
-    - type: PyroWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-synth
     - type: TacticalMapIcon
