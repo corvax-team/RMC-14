@@ -1,4 +1,4 @@
-<DefaultWindow
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
     xmlns="https://spacestation14.io"
     Title="{Loc admin-announce-title}"
     MinWidth="500">
@@ -15,4 +15,5 @@
             <Button Name="AnnounceButton" Access="Public" Disabled="True" Text="{Loc admin-announce-button}" HorizontalAlignment="Center"/>
         </GridContainer>
     </GridContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

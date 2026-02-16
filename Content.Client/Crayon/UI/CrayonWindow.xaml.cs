@@ -18,7 +18,7 @@ using static Robust.Client.UserInterface.Controls.BaseButton;
 namespace Content.Client.Crayon.UI
 {
     [GenerateTypedNameReferences]
-    public sealed partial class CrayonWindow : DefaultWindow
+    public sealed partial class CrayonWindow : DefaultCMWindow
     {
         [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
         private readonly SpriteSystem _spriteSystem = default!;
@@ -197,3 +197,4 @@ namespace Content.Client.Crayon.UI
         }
     }
 }
+

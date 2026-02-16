@@ -121,7 +121,7 @@
     factions:
     - UNMC
   - type: AccessReader
-    access: [["CMAccessBrig"],["CMAccessCommand"],["CMAccessCrewman"]]
+    access: [["CMAccessBrig"],["CMAccessCrewman"]]
   - type: UserIFF
     faction: FactionMarine
   - type: VehicleMovement

@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using Content.Client.Administration.Systems;
 using Content.Client.Stylesheets;
@@ -407,7 +407,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         Action onClose,
         Func<T, LineEdit> edit,
         Func<T, NetUserId?> selectedPlayer
-    ) where T : DefaultWindow
+    ) where T : DefaultCMWindow
     {
         if (window != null)
             return true;
@@ -529,3 +529,4 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         _mentorWindow.ClaimIndicator.Text = $"Claimed by {string.Join(", ", claims)}";
     }
 }
+

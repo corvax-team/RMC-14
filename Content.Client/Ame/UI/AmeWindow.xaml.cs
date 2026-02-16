@@ -8,7 +8,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client.Ame.UI
 {
     [GenerateTypedNameReferences]
-    public sealed partial class AmeWindow : DefaultWindow
+    public sealed partial class AmeWindow : DefaultCMWindow
     {
         public event Action<UiButton>? OnAmeButton;
 
@@ -73,3 +73,4 @@ namespace Content.Client.Ame.UI
         }
     }
 }
+

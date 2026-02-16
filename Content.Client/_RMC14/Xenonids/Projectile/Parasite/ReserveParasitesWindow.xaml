@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<customControls:DefaultWindow xmlns="clr-namespace:Robust.Client.UserInterface.Controls;assembly=Robust.Client"
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls" xmlns="https://spacestation14.io"
                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                               xmlns:customControls="clr-namespace:Robust.Client.UserInterface.CustomControls;assembly=Robust.Client"
                               Title="Reserve Parasites"
                               MinSize="300 200">
-</customControls:DefaultWindow>
+</ccm:DefaultCMWindow>
+
+

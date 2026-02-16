@@ -1,4 +1,4 @@
-﻿<DefaultWindow
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
@@ -16,4 +16,5 @@
             <controls:ConfirmButton Name="SubmitRespawnButton" Text="{Loc admin-player-actions-respawn}" ConfirmationText="{Loc 'admin-player-actions-confirm'}" Disabled="True"/>
         </BoxContainer>
     </BoxContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

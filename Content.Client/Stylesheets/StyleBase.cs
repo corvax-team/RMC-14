@@ -82,37 +82,23 @@ namespace Content.Client.Stylesheets
 
             BaseButtonOpenRight = new StyleBoxTexture(BaseButton)
             {
-                Texture = new AtlasTexture(buttonTex, UIBox2.FromDimensions(new Vector2(0, 0), new Vector2(14, 24))),
+                Texture = buttonTex,
             };
-            BaseButtonOpenRight.SetPatchMargin(StyleBox.Margin.Right, 0);
-            BaseButtonOpenRight.SetContentMarginOverride(StyleBox.Margin.Right, 8);
-            BaseButtonOpenRight.SetPadding(StyleBox.Margin.Right, 2);
 
             BaseButtonOpenLeft = new StyleBoxTexture(BaseButton)
             {
-                Texture = new AtlasTexture(buttonTex, UIBox2.FromDimensions(new Vector2(10, 0), new Vector2(14, 24))),
+                Texture = buttonTex,
             };
-            BaseButtonOpenLeft.SetPatchMargin(StyleBox.Margin.Left, 0);
-            BaseButtonOpenLeft.SetContentMarginOverride(StyleBox.Margin.Left, 8);
-            BaseButtonOpenLeft.SetPadding(StyleBox.Margin.Left, 1);
 
             BaseButtonOpenBoth = new StyleBoxTexture(BaseButton)
             {
-                Texture = new AtlasTexture(buttonTex, UIBox2.FromDimensions(new Vector2(10, 0), new Vector2(3, 24))),
+                Texture = buttonTex,
             };
-            BaseButtonOpenBoth.SetPatchMargin(StyleBox.Margin.Horizontal, 0);
-            BaseButtonOpenBoth.SetContentMarginOverride(StyleBox.Margin.Horizontal, 8);
-            BaseButtonOpenBoth.SetPadding(StyleBox.Margin.Right, 2);
-            BaseButtonOpenBoth.SetPadding(StyleBox.Margin.Left, 1);
 
             BaseButtonSquare = new StyleBoxTexture(BaseButton)
             {
-                Texture = new AtlasTexture(buttonTex, UIBox2.FromDimensions(new Vector2(10, 0), new Vector2(3, 24))),
+                Texture = buttonTex,
             };
-            BaseButtonSquare.SetPatchMargin(StyleBox.Margin.Horizontal, 0);
-            BaseButtonSquare.SetContentMarginOverride(StyleBox.Margin.Horizontal, 8);
-            BaseButtonSquare.SetPadding(StyleBox.Margin.Right, 2);
-            BaseButtonSquare.SetPadding(StyleBox.Margin.Left, 1);
 
             BaseAngleRect = new StyleBoxTexture
             {

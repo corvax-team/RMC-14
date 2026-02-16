@@ -8,7 +8,7 @@
     <BoxContainer Name="MainContainer" VerticalExpand="True" HorizontalExpand="True" Orientation="Horizontal"
                   SeparationOverride="8">
         <!-- Left column -->
-        <LayoutContainer Name="LeftColumn" HorizontalExpand="True" VerticalExpand="True" SizeFlagsStretchRatio="2.5">
+        <LayoutContainer Name="LeftColumn" HorizontalExpand="True" VerticalExpand="True" SizeFlagsStretchRatio="3.3">
             <Control Name="DefaultState" VerticalExpand="True" HorizontalExpand="True">
                 <LayoutContainer Name="BackgroundViewportArea" HorizontalExpand="True" VerticalExpand="True"
                                  RectClipContent="True">
@@ -16,6 +16,7 @@
                                  Stretch="KeepAspectCentered" CanShrink="True" />
                     <PanelContainer Name="CenterMenuGlow" StyleClasses="LobbyCenterGlow"
                                     HorizontalAlignment="Center" VerticalAlignment="Center"
+                                    Margin="-20 0 0 0"
                                     MinWidth="416" MaxWidth="576">
                         <PanelContainer Name="CenterMenuPanel" StyleClasses="LobbyCenterPanel"
                                         HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -85,16 +86,6 @@
                                     </Button>
                                     <PanelContainer Name="ObserveDivider" StyleClasses="LobbyMenuDivider"
                                                     MinSize="0 2" HorizontalExpand="True" Margin="0 6" />
-                                    <Button Name="ObserveButton" Access="Public" Text="{Loc 'ui-lobby-observe-button'}"
-                                            StyleClasses="LobbyMenuButton" MinHeight="40" HorizontalExpand="True">
-                                        <TextureRect MinSize="20 20"
-                                                     HorizontalAlignment="Left"
-                                                     VerticalAlignment="Center"
-                                                     Stretch="KeepAspectCentered"
-                                                     CanShrink="True"
-                                                     Margin="8 0 0 0"
-                                                     TexturePath="/Textures/_CCM14/Logo/icon/observe.png" />
-                                    </Button>
                                     <BoxContainer Orientation="Horizontal" SeparationOverride="6" HorizontalExpand="True">
                                         <Button Name="JoinUsmcButton" Access="Public" Text="{Loc 'ui-lobby-join-uscm-button'}"
                                                 StyleClasses="LobbyMenuButton" MinHeight="40" HorizontalExpand="True">
@@ -127,12 +118,22 @@
                                                      Margin="8 0 0 0"
                                                      TexturePath="/Textures/_CCM14/Logo/icon/jointoxeno.png" />
                                     </Button>
+                                    <Button Name="ObserveButton" Access="Public" Text="{Loc 'ui-lobby-observe-button'}"
+                                            StyleClasses="LobbyMenuButton" MinHeight="40" HorizontalExpand="True">
+                                        <TextureRect MinSize="20 20"
+                                                     HorizontalAlignment="Left"
+                                                     VerticalAlignment="Center"
+                                                     Stretch="KeepAspectCentered"
+                                                     CanShrink="True"
+                                                     Margin="8 0 0 0"
+                                                     TexturePath="/Textures/_CCM14/Logo/icon/observe.png" />
+                                    </Button>
                                 </BoxContainer>
                             </BoxContainer>
                         </PanelContainer>
                     </PanelContainer>
                     <BoxContainer Orientation="Vertical" SeparationOverride="4" Name="VoteContainer"
-                                  Access="Public" HorizontalAlignment="Left"
+                                  Access="Public" HorizontalAlignment="Center"
                                   VerticalAlignment="Top" Margin="0 8" />
                     <Button Name="LeftMenuToggleButton" Visible="False"
                             Text="{Loc 'ui-lobby-menu-toggle'}" MinHeight="32"
@@ -158,7 +159,7 @@
         <!-- Right column -->
         <PanelContainer Name="RightSide" Access="Public" HorizontalAlignment="Right"
                         VerticalExpand="True" HorizontalExpand="True"
-                        MinWidth="400" SizeFlagsStretchRatio="0.95"
+                        MinWidth="400" SizeFlagsStretchRatio="0.7"
                         StyleClasses="LobbyChatPanel">
             <TextureRect Name="RightSideBackground"
                          TexturePath="/Textures/_CCM14/Lobby/rightside_chat_bg.png"
@@ -200,4 +201,5 @@
             </BoxContainer>
         </PanelContainer>
     </BoxContainer>
+    <!-- # CCM priority rework -->
 </lobbyUi:LobbyGui>

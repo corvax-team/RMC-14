@@ -32,8 +32,8 @@ namespace Content.Client.Voting.UI
             if (_vote.TargetEntity != null && _vote.TargetEntity != 0)
             {
                 _targetEntity = new NetEntity(_vote.TargetEntity.Value);
-                FollowVoteTarget.Visible = true;
                 FollowVoteTarget.OnPressed += _ => AttemptFollowVoteEntity();
+                FollowVoteTarget.Visible = true;
             }
 
             Modulate = Color.White.WithAlpha(0.75f);

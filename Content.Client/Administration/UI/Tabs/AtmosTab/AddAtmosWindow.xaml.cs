@@ -11,7 +11,7 @@ namespace Content.Client.Administration.UI.Tabs.AtmosTab
 {
     [GenerateTypedNameReferences]
     [UsedImplicitly]
-    public sealed partial class AddAtmosWindow : DefaultWindow
+    public sealed partial class AddAtmosWindow : DefaultCMWindow
     {
         [Dependency] private readonly IPlayerManager _players = default!;
         [Dependency] private readonly IEntityManager _entities = default!;
@@ -49,3 +49,4 @@ namespace Content.Client.Administration.UI.Tabs.AtmosTab
         }
     }
 }
+

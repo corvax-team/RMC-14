@@ -11,7 +11,7 @@ using Robust.Shared.Localization;
 namespace Content.Client.Administration.UI.Tabs.AdminTab
 {
     [GenerateTypedNameReferences]
-    public sealed partial class AdminShuttleWindow : DefaultWindow
+    public sealed partial class AdminShuttleWindow : DefaultCMWindow
     {
         public AdminShuttleWindow()
         {
@@ -29,3 +29,4 @@ namespace Content.Client.Administration.UI.Tabs.AdminTab
         }
     }
 }
+

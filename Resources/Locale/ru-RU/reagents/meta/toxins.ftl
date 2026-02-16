@@ -56,3 +56,12 @@ reagent-name-mechanotoxin = механотоксин
 reagent-desc-mechanotoxin = Нейротоксин, используемый в качестве яда некоторыми видами пауков. При накоплении в организме затрудняет передвижение.
 reagent-name-toxintrash = trash
 reagent-desc-toxintrash = An awful-smelling fluid. Deadly to non-vox.
+
+reagent-name-rmclightneurotoxin = легкий нейротоксин
+reagent-desc-rmclightneurotoxin = Ослабленный нейротоксин, нарушающий работу нервной системы.
+
+reagent-name-rmcxenoneurotoxin = ксено нейротоксин
+reagent-desc-rmcxenoneurotoxin = Сильный нейротоксин, полученный из ксенонной биологии.
+
+reagent-name-rmcdronejuice = сок дрона
+reagent-desc-rmcdronejuice = Вязкий токсичный секрет ксенонного дрона.

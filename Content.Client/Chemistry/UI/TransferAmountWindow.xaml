@@ -1,4 +1,4 @@
-﻿<DefaultWindow xmlns="https://spacestation14.io"
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls" xmlns="https://spacestation14.io"
             Title="{Loc 'ui-transfer-amount-title'}"
             Resizable="False">
 
@@ -12,4 +12,5 @@
         </BoxContainer>
         <Button Name="ApplyButton" Access="Public" Text="{Loc 'ui-transfer-amount-apply'}"/>
     </BoxContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

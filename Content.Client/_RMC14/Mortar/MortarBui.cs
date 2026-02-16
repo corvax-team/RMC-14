@@ -1,4 +1,4 @@
-п»їusing Content.Shared._RMC14.Mortar;
+using Content.Shared._RMC14.Mortar;
 // CCM start
 using Content.Client.GameTicking.Managers;
 // CCM end
@@ -37,7 +37,7 @@ public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         {
             var remaining = MortarUnlockTime - timeSinceStart;
             var minutesLeft = Math.Ceiling(remaining.TotalMinutes);
-            ShowNotReadyWindow($"РџРѕРєР° С‚СѓРјР°РЅ РЅРµ СЂР°Р·РІРµРµС‚СЃСЏ, СЃРёСЃС‚РµРјР° СѓРїСЂР°РІР»РµРЅРёСЏ РЅРµР°РєС‚РёРІРЅР°. РџРѕРґРѕР¶РґРёС‚Рµ РµС‰С‘ {minutesLeft} РјРёРЅСѓС‚.");
+            ShowNotReadyWindow($"Пока туман не развеется, система управления неактивна. Подождите ещё {minutesLeft} минут.");
             Close();
             return;
         }
@@ -81,9 +81,9 @@ public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
     // CCM start
     private void ShowNotReadyWindow(string message)
     {
-        var popup = new DefaultWindow
+        var popup = new DefaultCMWindow
         {
-            Title = "РњРёРЅРѕРјС‘С‚",
+            Title = "Миномёт",
             MinSize = new Vector2(300, 100)
         };
 

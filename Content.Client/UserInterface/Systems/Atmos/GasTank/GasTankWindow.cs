@@ -111,7 +111,7 @@ public sealed class GasTankWindow
                 _topLabel,
                 (btnClose = new TextureButton
                 {
-                    StyleClasses = {DefaultWindow.StyleClassWindowCloseButton},
+                    StyleClasses = {DefaultCMWindow.StyleClassWindowCloseButton},
                     VerticalAlignment = VAlignment.Center
                 })
             }
@@ -239,5 +239,6 @@ public sealed class GasTankWindow
         return false;
     }
 }
+
 
 

@@ -10,7 +10,7 @@ namespace Content.Client._RMC14.Medical.HUD.Holocard;
 ///     A window that allows you to change the holocard of the associated entity
 /// </summary>
 [GenerateTypedNameReferences]
-public sealed partial class HolocardChangeWindow : DefaultWindow
+public sealed partial class HolocardChangeWindow : DefaultCMWindow
 {
     [Dependency] private readonly IEntityManager _entities = default!;
 
@@ -54,3 +54,4 @@ public sealed partial class HolocardChangeWindow : DefaultWindow
         }
     }
 }
+

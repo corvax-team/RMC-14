@@ -1,4 +1,4 @@
-﻿<DefaultWindow xmlns="https://spacestation14.io"
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls" xmlns="https://spacestation14.io"
                Title="{Loc 'credits-window-title'}"
                SetSize="650 650">
     <TabContainer Name="MasterTabContainer">
@@ -41,4 +41,5 @@
                           Margin="2 2 0 0" />
         </ScrollContainer>
     </TabContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

@@ -12,7 +12,7 @@ using Robust.Shared.Localization;
 namespace Content.Client._RMC14.Xenonids.Projectile.Parasite;
 
 [GenerateTypedNameReferences]
-public sealed partial class ReserveParasitesWindow : DefaultWindow
+public sealed partial class ReserveParasitesWindow : DefaultCMWindow
 {
     [Dependency] private readonly ILocalizationManager _localization = default!;
 
@@ -92,3 +92,4 @@ public sealed partial class ReserveParasitesWindow : DefaultWindow
         };
     }
 }
+

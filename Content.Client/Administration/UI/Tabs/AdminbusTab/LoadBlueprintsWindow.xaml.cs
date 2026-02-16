@@ -12,7 +12,7 @@ namespace Content.Client.Administration.UI.Tabs.AdminbusTab
 {
     [GenerateTypedNameReferences]
     [UsedImplicitly]
-    public sealed partial class LoadBlueprintsWindow : DefaultWindow
+    public sealed partial class LoadBlueprintsWindow : DefaultCMWindow
     {
         [Dependency] private readonly IEntityManager _entityManager = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
@@ -117,3 +117,4 @@ namespace Content.Client.Administration.UI.Tabs.AdminbusTab
         }
     }
 }
+

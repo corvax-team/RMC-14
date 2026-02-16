@@ -1,4 +1,4 @@
-﻿<DefaultWindow
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
     xmlns="https://spacestation14.io"
     Title="{Loc 'ui-bql-results-title'}">
     <BoxContainer Orientation="Vertical">
@@ -7,4 +7,5 @@
             <BoxContainer Orientation="Vertical" Name="ItemList" VerticalExpand="True" />
         </ScrollContainer>
     </BoxContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

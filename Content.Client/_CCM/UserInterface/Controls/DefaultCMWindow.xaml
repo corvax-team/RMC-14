@@ -1,0 +1,17 @@
+<ccm:DefaultCMWindow xmlns="https://spacestation14.io"
+                     xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
+                     MinWidth="100" MinHeight="50">
+    <PanelContainer StyleClasses="CMWindowFrame" />
+    <BoxContainer Orientation="Vertical" SeparationOverride="0">
+        <PanelContainer Name="WindowHeader" StyleClasses="windowHeader">
+            <BoxContainer Orientation="Horizontal">
+                <Label Margin="5 0 0 0" HorizontalExpand="true" Name="TitleLabel" ClipText="True"
+                       Text="{Loc 'defaultwindow-placeholder-title'}" VAlign="Center" StyleClasses="windowTitle" />
+                <TextureButton Name="CloseButton" StyleClasses="windowCloseButton" VerticalAlignment="Center" />
+            </BoxContainer>
+        </PanelContainer>
+        <PanelContainer Name="ContentsBackground" StyleClasses="CMWindowBodyBackground" Margin="10" RectClipContent="True" VerticalExpand="true">
+            <Control Name="ContentsContainer" />
+        </PanelContainer>
+    </BoxContainer>
+</ccm:DefaultCMWindow>

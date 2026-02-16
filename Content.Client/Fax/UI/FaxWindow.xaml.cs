@@ -8,7 +8,7 @@ using Robust.Client.UserInterface;
 namespace Content.Client.Fax.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class FaxWindow : DefaultWindow
+public sealed partial class FaxWindow : DefaultCMWindow
 {
     public event Action? FileButtonPressed;
     public event Action? PaperButtonPressed;
@@ -100,3 +100,4 @@ public sealed partial class FaxWindow : DefaultWindow
             PaperButton.Text = Loc.GetString("fax-machine-ui-paper-button-normal");
     }
 }
+

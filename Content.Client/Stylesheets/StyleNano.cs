@@ -132,29 +132,29 @@ namespace Content.Client.Stylesheets
         public const string StyleClassPopupMessageLarge = "PopupMessageLarge";
         public const string StyleClassPopupMessageLargeCaution = "PopupMessageLargeCaution";
 
-        public static Color PanelDark = Color.FromHex("#0A120B");
+        public static Color PanelDark = Color.FromHex("#001304");
 
         public static Color NanoGold = Color.FromHex("#6CFF6C");
         public static Color GoodGreenFore = Color.FromHex("#3AFF6A");
         public static Color ConcerningOrangeFore = Color.FromHex("#78FF6A");
         public static Color DangerousRedFore = Color.FromHex("#48FF6A");
-        public static Color DisabledFore = Color.FromHex("#23402B");
+        public static Color DisabledFore = Color.FromHex("#284b32");
 
-        public static Color ButtonColorDefault = Color.FromHex("#1F7A31");
-        public static Color ButtonColorDefaultRed = Color.FromHex("#1F7A31");
+        public static Color ButtonColorDefault = Color.FromHex("#127E2B");
+        public static Color ButtonColorDefaultRed = Color.FromHex("#127E2B");
         public static Color ButtonColorHovered = Color.FromHex("#24903A");
         public static Color ButtonColorHoveredRed = Color.FromHex("#24903A");
         public static Color ButtonColorPressed = Color.FromHex("#1A5E27");
-        public static Color ButtonColorDisabled = Color.FromHex("#123A1C");
+        public static Color ButtonColorDisabled = Color.FromHex("#1C682F"); // CCM 10 > 15: lobby rework
 
         public static Color ButtonColorCautionDefault = Color.FromHex("#1F7A31");
         public static Color ButtonColorCautionHovered = Color.FromHex("#24903A");
         public static Color ButtonColorCautionPressed = Color.FromHex("#1A5E27");
-        public static Color ButtonColorCautionDisabled = Color.FromHex("#123A1C");
+        public static Color ButtonColorCautionDisabled = Color.FromHex("#1f5e2e");
 
         public static Color ButtonColorGoodDefault = Color.FromHex("#1F7A31");
         public static Color ButtonColorGoodHovered = Color.FromHex("#24903A");
-        public static Color ButtonColorGoodDisabled = Color.FromHex("#123A1C");
+        public static Color ButtonColorGoodDisabled = Color.FromHex("#164722");
 
         public static Color LobbyCrtAccent = Color.FromHex("#2EF241");
         public static Color LobbyCrtText = Color.FromHex("#0AE14A");
@@ -175,16 +175,16 @@ namespace Content.Client.Stylesheets
         public static Color PointMagenta = Color.FromHex("#00EB4C");
 
         // Context menu button colors
-        public static Color ButtonColorContext = Color.FromHex("#1F7A31");
-        public static Color ButtonColorContextHover = Color.FromHex("#24903A");
-        public static Color ButtonColorContextPressed = Color.FromHex("#1A5E27");
-        public static Color ButtonColorContextDisabled = Color.FromHex("#123A1C");
+        public static Color ButtonColorContext = Color.FromHex("#0B2E15");
+        public static Color ButtonColorContextHover = Color.FromHex("#0F381B");
+        public static Color ButtonColorContextPressed = Color.FromHex("#082310");
+        public static Color ButtonColorContextDisabled = Color.FromHex("#082310");
 
         // Examine button colors
-        public static Color ExamineButtonColorContext = Color.FromHex("#1F7A31");
-        public static Color ExamineButtonColorContextHover = Color.FromHex("#24903A");
-        public static Color ExamineButtonColorContextPressed = Color.FromHex("#1A5E27");
-        public static Color ExamineButtonColorContextDisabled = Color.FromHex("#123A1C");
+        public static Color ExamineButtonColorContext = Color.FromHex("#0B2E15");
+        public static Color ExamineButtonColorContextHover = Color.FromHex("#0F381B");
+        public static Color ExamineButtonColorContextPressed = Color.FromHex("#082310");
+        public static Color ExamineButtonColorContextDisabled = Color.FromHex("#082310");
 
         // Fancy Tree elements
         public static Color FancyTreeEvenRowColor = Color.FromHex("#0E1A11");
@@ -226,15 +226,15 @@ namespace Content.Client.Stylesheets
             CurrentTheme = theme;
             if (theme == UiColorTheme.Blue)
             {
-                PanelDark = Color.FromHex("#001F45");
+                PanelDark = Color.FromHex("#072F6A");
                 NanoGold = Color.FromHex("#6CB4FF");
                 GoodGreenFore = Color.FromHex("#3A8CFF");
                 ConcerningOrangeFore = Color.FromHex("#78B6FF");
                 DangerousRedFore = Color.FromHex("#489CFF");
                 DisabledFore = Color.FromHex("#1E3348");
 
-                ButtonColorDefault = Color.FromHex("#1F4D7A");
-                ButtonColorDefaultRed = Color.FromHex("#1F4D7A");
+                ButtonColorDefault = Color.FromHex("#18408A");
+                ButtonColorDefaultRed = Color.FromHex("#18408A");
                 ButtonColorHovered = Color.FromHex("#2A5FA0");
                 ButtonColorHoveredRed = Color.FromHex("#2A5FA0");
                 ButtonColorPressed = Color.FromHex("#1B4063");
@@ -266,15 +266,15 @@ namespace Content.Client.Stylesheets
                 PointGreen = Color.FromHex("#2F7ED6");
                 PointMagenta = Color.FromHex("#00B0EB");
 
-                ButtonColorContext = Color.FromHex("#1F4D7A");
-                ButtonColorContextHover = Color.FromHex("#2A5FA0");
-                ButtonColorContextPressed = Color.FromHex("#1B4063");
-                ButtonColorContextDisabled = Color.FromHex("#123044");
+                ButtonColorContext = Color.FromHex("#08243A");
+                ButtonColorContextHover = Color.FromHex("#0B2C47");
+                ButtonColorContextPressed = Color.FromHex("#061B2F");
+                ButtonColorContextDisabled = Color.FromHex("#061B2F");
 
-                ExamineButtonColorContext = Color.FromHex("#1F4D7A");
-                ExamineButtonColorContextHover = Color.FromHex("#2A5FA0");
-                ExamineButtonColorContextPressed = Color.FromHex("#1B4063");
-                ExamineButtonColorContextDisabled = Color.FromHex("#123044");
+                ExamineButtonColorContext = Color.FromHex("#08243A");
+                ExamineButtonColorContextHover = Color.FromHex("#0B2C47");
+                ExamineButtonColorContextPressed = Color.FromHex("#061B2F");
+                ExamineButtonColorContextDisabled = Color.FromHex("#061B2F");
 
                 FancyTreeEvenRowColor = Color.FromHex("#0E141A");
                 FancyTreeSelectedRowColor = Color.FromHex("#132033");
@@ -283,15 +283,15 @@ namespace Content.Client.Stylesheets
             }
             else
             {
-                PanelDark = Color.FromHex("#001F01");
+                PanelDark = Color.FromHex("#001304");
                 NanoGold = Color.FromHex("#6CFF6C");
                 GoodGreenFore = Color.FromHex("#3AFF6A");
                 ConcerningOrangeFore = Color.FromHex("#78FF6A");
                 DangerousRedFore = Color.FromHex("#48FF6A");
                 DisabledFore = Color.FromHex("#23402B");
 
-                ButtonColorDefault = Color.FromHex("#1F7A31");
-                ButtonColorDefaultRed = Color.FromHex("#1F7A31");
+                ButtonColorDefault = Color.FromHex("#127E2B");
+                ButtonColorDefaultRed = Color.FromHex("#127E2B");
                 ButtonColorHovered = Color.FromHex("#24903A");
                 ButtonColorHoveredRed = Color.FromHex("#24903A");
                 ButtonColorPressed = Color.FromHex("#1A5E27");
@@ -323,15 +323,15 @@ namespace Content.Client.Stylesheets
                 PointGreen = Color.FromHex("#38b026");
                 PointMagenta = Color.FromHex("#00EB4C");
 
-                ButtonColorContext = Color.FromHex("#1F7A31");
-                ButtonColorContextHover = Color.FromHex("#24903A");
-                ButtonColorContextPressed = Color.FromHex("#1A5E27");
-                ButtonColorContextDisabled = Color.FromHex("#123A1C");
+                ButtonColorContext = Color.FromHex("#0B2E15");
+                ButtonColorContextHover = Color.FromHex("#0F381B");
+                ButtonColorContextPressed = Color.FromHex("#082310");
+                ButtonColorContextDisabled = Color.FromHex("#082310");
 
-                ExamineButtonColorContext = Color.FromHex("#1F7A31");
-                ExamineButtonColorContextHover = Color.FromHex("#24903A");
-                ExamineButtonColorContextPressed = Color.FromHex("#1A5E27");
-                ExamineButtonColorContextDisabled = Color.FromHex("#123A1C");
+                ExamineButtonColorContext = Color.FromHex("#0B2E15");
+                ExamineButtonColorContextHover = Color.FromHex("#0F381B");
+                ExamineButtonColorContextPressed = Color.FromHex("#082310");
+                ExamineButtonColorContextDisabled = Color.FromHex("#082310");
 
                 FancyTreeEvenRowColor = Color.FromHex("#0E1A11");
                 FancyTreeSelectedRowColor = Color.FromHex("#13261A");
@@ -376,20 +376,18 @@ namespace Content.Client.Stylesheets
             var robotoMonoBold12 = resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", size: 12);
             var robotoMonoBold14 = resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", size: 14);
 
-            var windowHeaderTex = resCache.GetTexture("/Textures/Interface/Nano/window_header.png");
-            var windowHeader = new StyleBoxTexture
+            var windowHeader = new StyleBoxFlat
             {
-                Texture = windowHeaderTex,
-                PatchMarginBottom = 3,
-                ExpandMarginBottom = 3,
+                BackgroundColor = (CurrentTheme == UiColorTheme.Blue
+                    ? Color.FromHex("#0F2A55")
+                    : Color.FromHex("#0E2A16")).WithAlpha(0.4f),
                 ContentMarginBottomOverride = 0
             };
-            var windowHeaderAlertTex = resCache.GetTexture("/Textures/Interface/Nano/window_header_alert.png");
-            var windowHeaderAlert = new StyleBoxTexture
+            var windowHeaderAlert = new StyleBoxFlat
             {
-                Texture = windowHeaderAlertTex,
-                PatchMarginBottom = 3,
-                ExpandMarginBottom = 3,
+                BackgroundColor = (CurrentTheme == UiColorTheme.Blue
+                    ? Color.FromHex("#0F2A55")
+                    : Color.FromHex("#0E2A16")).WithAlpha(0.4f),
                 ContentMarginBottomOverride = 0
             };
             var uiWindowBackgroundTint = PanelDark.WithAlpha(0.99f);
@@ -401,7 +399,7 @@ namespace Content.Client.Stylesheets
             var optionsWindowBackground = new StyleBoxTexture
             {
                 Texture = resCache.GetTexture("/Textures/_CCM14/Lobby/rightside_chat_bg.png"),
-                Modulate = Color.White.WithAlpha(0.99f),
+                Modulate = Color.White.WithAlpha(1f),
             };
             optionsWindowBackground.SetPatchMargin(StyleBox.Margin.All, 2);
 
@@ -457,6 +455,8 @@ namespace Content.Client.Stylesheets
             buttonStorage.SetContentMarginOverride(StyleBox.Margin.Horizontal, 4);
 
             var buttonContext = new StyleBoxTexture { Texture = Texture.White };
+            buttonContext.SetPadding(StyleBox.Margin.All, 0);
+            buttonContext.SetContentMarginOverride(StyleBox.Margin.All, 2);
 
             var buttonRectTex = resCache.GetTexture("/Textures/Interface/Nano/light_panel_background_bordered.png");
             var buttonRect = new StyleBoxTexture(BaseButton)
@@ -517,21 +517,18 @@ namespace Content.Client.Stylesheets
 
             var topButtonOpenRight = new StyleBoxTexture(topButtonBase)
             {
-                Texture = new AtlasTexture(buttonTex, UIBox2.FromDimensions(new Vector2(0, 0), new Vector2(14, 24))),
+                Texture = buttonTex,
             };
-            topButtonOpenRight.SetPatchMargin(StyleBox.Margin.Right, 0);
 
             var topButtonOpenLeft = new StyleBoxTexture(topButtonBase)
             {
-                Texture = new AtlasTexture(buttonTex, UIBox2.FromDimensions(new Vector2(10, 0), new Vector2(14, 24))),
+                Texture = buttonTex,
             };
-            topButtonOpenLeft.SetPatchMargin(StyleBox.Margin.Left, 0);
 
             var topButtonSquare = new StyleBoxTexture(topButtonBase)
             {
-                Texture = new AtlasTexture(buttonTex, UIBox2.FromDimensions(new Vector2(10, 0), new Vector2(3, 24))),
+                Texture = buttonTex,
             };
-            topButtonSquare.SetPatchMargin(StyleBox.Margin.Horizontal, 0);
 
             var chatChannelButtonTex = resCache.GetTexture("/Textures/Interface/Nano/rounded_button.svg.96dpi.png");
             var chatChannelButton = new StyleBoxTexture
@@ -817,15 +814,15 @@ namespace Content.Client.Stylesheets
             var lobbyChatInputCrt = new StyleBoxFlat
             {
                 BackgroundColor = Color.FromHex("#090D0B"),
-                BorderColor = LobbyCrtAccent,
-                BorderThickness = new Thickness(1)
+                BorderColor = Color.Transparent,
+                BorderThickness = new Thickness(0)
             };
 
             var lobbyChatInputClean = new StyleBoxFlat
             {
                 BackgroundColor = Color.FromHex("#0A130E"),
-                BorderColor = LobbyCleanAccent,
-                BorderThickness = new Thickness(1)
+                BorderColor = Color.Transparent,
+                BorderThickness = new Thickness(0)
             };
 
             var actionSearchBoxTex = resCache.GetTexture("/Textures/Interface/Nano/black_panel_dark_thin_border.png");
@@ -870,17 +867,17 @@ namespace Content.Client.Stylesheets
 
             var monotoneButtonOpenLeft = new StyleBoxTexture(monotoneButton)
             {
-                Texture = resCache.GetTexture("/Textures/Interface/Nano/Monotone/monotone_button_open_left.svg.96dpi.png"),
+                Texture = monotoneButton.Texture,
             };
 
             var monotoneButtonOpenRight = new StyleBoxTexture(monotoneButton)
             {
-                Texture = resCache.GetTexture("/Textures/Interface/Nano/Monotone/monotone_button_open_right.svg.96dpi.png"),
+                Texture = monotoneButton.Texture,
             };
 
             var monotoneButtonOpenBoth = new StyleBoxTexture(monotoneButton)
             {
-                Texture = resCache.GetTexture("/Textures/Interface/Nano/Monotone/monotone_button_open_both.svg.96dpi.png"),
+                Texture = monotoneButton.Texture,
             };
 
             // Monotone (filled)
@@ -891,21 +888,26 @@ namespace Content.Client.Stylesheets
 
             var monotoneFilledButtonOpenLeft = new StyleBoxTexture(monotoneButton)
             {
-                Texture = new AtlasTexture(buttonTex, UIBox2.FromDimensions(new Vector2(10, 0), new Vector2(14, 24))),
+                Texture = buttonTex,
             };
-            monotoneFilledButtonOpenLeft.SetPatchMargin(StyleBox.Margin.Left, 0);
 
             var monotoneFilledButtonOpenRight = new StyleBoxTexture(monotoneButton)
             {
-                Texture = new AtlasTexture(buttonTex, UIBox2.FromDimensions(new Vector2(0, 0), new Vector2(14, 24))),
+                Texture = buttonTex,
             };
-            monotoneFilledButtonOpenRight.SetPatchMargin(StyleBox.Margin.Right, 0);
 
             var monotoneFilledButtonOpenBoth = new StyleBoxTexture(monotoneButton)
             {
-                Texture = new AtlasTexture(buttonTex, UIBox2.FromDimensions(new Vector2(10, 0), new Vector2(3, 24))),
+                Texture = buttonTex,
             };
-            monotoneFilledButtonOpenBoth.SetPatchMargin(StyleBox.Margin.Horizontal, 0);
+            var optionButtonOpenBoth = new StyleBoxTexture
+            {
+                Texture = buttonTex,
+            };
+            optionButtonOpenBoth.SetPatchMargin(StyleBox.Margin.All, 10);
+            optionButtonOpenBoth.SetPadding(StyleBox.Margin.All, 1);
+            optionButtonOpenBoth.SetContentMarginOverride(StyleBox.Margin.Vertical, 2);
+            optionButtonOpenBoth.SetContentMarginOverride(StyleBox.Margin.Horizontal, 14);
 
             // CheckBox
             var checkBoxTextureChecked = resCache.GetTexture("/Textures/Interface/Nano/checkbox_checked.svg.96dpi.png");
@@ -977,8 +979,31 @@ namespace Content.Client.Stylesheets
             var stripeBack = new StyleBoxTexture
             {
                 Texture = stripeBackTex,
-                Mode = StyleBoxTexture.StretchMode.Tile
+                Mode = StyleBoxTexture.StretchMode.Tile,
+                Modulate = (CurrentTheme == UiColorTheme.Blue
+                    ? Color.FromHex("#0B1E3A")
+                    : Color.FromHex("#06130B")).WithAlpha(0.6f)
             };
+            // CCM rework lobby - start
+            var scrollBarNormal = new StyleBoxFlat
+            {
+                BackgroundColor = ButtonColorDefault.WithAlpha(0.55f),
+                ContentMarginLeftOverride = 10,
+                ContentMarginTopOverride = 10
+            };
+            var scrollBarHovered = new StyleBoxFlat
+            {
+                BackgroundColor = ButtonColorHovered.WithAlpha(0.7f),
+                ContentMarginLeftOverride = 10,
+                ContentMarginTopOverride = 10
+            };
+            var scrollBarGrabbed = new StyleBoxFlat
+            {
+                BackgroundColor = ButtonColorPressed.WithAlpha(0.8f),
+                ContentMarginLeftOverride = 10,
+                ContentMarginTopOverride = 10
+            };
+            // CCM rework lobby - end
 
             // Slider
             var sliderOutlineTex = resCache.GetTexture("/Textures/Interface/Nano/slider_outline.svg.96dpi.png");
@@ -988,24 +1013,25 @@ namespace Content.Client.Stylesheets
             var sliderFillBox = new StyleBoxTexture
             {
                 Texture = sliderFillTex,
-                Modulate = Color.FromHex("#3E6C45")
+                Modulate = LobbyMenuButtonBase * new Color(0.85f, 0.85f, 0.85f, 1f)
             };
 
             var sliderBackBox = new StyleBoxTexture
             {
                 Texture = sliderFillTex,
-                Modulate = PanelDark,
+                Modulate = CurrentTheme == UiColorTheme.Blue ? Color.FromHex("#0B3B7A") : PanelDark,
             };
 
             var sliderForeBox = new StyleBoxTexture
             {
                 Texture = sliderOutlineTex,
-                Modulate = Color.FromHex("#254535")
+                Modulate = CurrentTheme == UiColorTheme.Blue ? Color.FromHex("#082B55") : Color.FromHex("#1E3A28")
             };
 
             var sliderGrabBox = new StyleBoxTexture
             {
                 Texture = sliderGrabTex,
+                Modulate = LobbyMenuButtonBase * new Color(0.85f, 0.85f, 0.85f, 1f)
             };
 
             sliderFillBox.SetPatchMargin(StyleBox.Margin.All, 12);
@@ -1034,14 +1060,20 @@ namespace Content.Client.Stylesheets
 
             var optionsSliderFill = new StyleBoxFlat
             {
-                BackgroundColor = Color.FromHex("#2F6B46"),
+                BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                    ? ButtonColorHovered
+                    : ButtonColorHovered,
             };
 
             var optionsSliderGrab = new StyleBoxFlat
             {
-                BackgroundColor = Color.FromHex("#D5FFE0"),
+                BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                    ? ButtonColorHovered
+                    : ButtonColorHovered,
                 BorderThickness = new Thickness(1),
-                BorderColor = Color.FromHex("#2F6B46"),
+                BorderColor = CurrentTheme == UiColorTheme.Blue
+                    ? ButtonColorHovered
+                    : ButtonColorHovered,
             };
 
             var boxFont13 = resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 13);
@@ -1078,7 +1110,7 @@ namespace Content.Client.Stylesheets
                     new SelectorElement(typeof(Label), new[] {DefaultWindow.StyleClassWindowTitle}, null, null),
                     new[]
                     {
-                        new StyleProperty(Label.StylePropertyFontColor, NanoGold),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.Transparent),
                         new StyleProperty(Label.StylePropertyFont, notoSansDisplayBold14),
                     }),
                 // Alert (white) window title.
@@ -1109,6 +1141,15 @@ namespace Content.Client.Stylesheets
                         Texture = resCache.GetTexture("/Textures/_CCM14/Lobby/rightside_chat_bg.png"),
                         Modulate = PanelDark.WithAlpha(1f),
                     }),
+                // CCM rework ui - start
+                Element<PanelContainer>().Class("CCMEscapeMenuBackground")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#061223").WithAlpha(0.9f)
+                            : Color.FromHex("#071B0D").WithAlpha(0.9f),
+                    }),
+                // CCM rework ui - end
                 // bordered window background
                 new StyleRule(
                     new SelectorElement(null, new[] {StyleClassBorderedWindowPanel}, null, null),
@@ -1176,6 +1217,12 @@ namespace Content.Client.Stylesheets
                 Element<ContainerButton>().Class(ContainerButton.StyleClassButton)
                     .Class(ButtonSquare)
                     .Prop(ContainerButton.StylePropertyStyleBox, BaseButtonSquare),
+
+                Element<OptionButton>()
+                    .Prop(ContainerButton.StylePropertyStyleBox, optionButtonOpenBoth),
+
+                Element<MultiselectOptionButton<object>>()
+                    .Prop(ContainerButton.StylePropertyStyleBox, optionButtonOpenBoth),
 
                 new StyleRule(new SelectorElement(typeof(Label), new[] { Button.StyleClassButton }, null, null), new[]
                 {
@@ -2533,6 +2580,32 @@ namespace Content.Client.Stylesheets
                     {
                         new StyleProperty(StripeBack.StylePropertyBackground, stripeBack),
                     }),
+                // CCM rework lobby - start
+                new StyleRule(SelectorElement.Type(typeof(VScrollBar)), new[]
+                {
+                    new StyleProperty(ScrollBar.StylePropertyGrabber, scrollBarNormal),
+                }),
+                new StyleRule(new SelectorElement(typeof(VScrollBar), null, null, new[] { ScrollBar.StylePseudoClassHover }), new[]
+                {
+                    new StyleProperty(ScrollBar.StylePropertyGrabber, scrollBarHovered),
+                }),
+                new StyleRule(new SelectorElement(typeof(VScrollBar), null, null, new[] { ScrollBar.StylePseudoClassGrabbed }), new[]
+                {
+                    new StyleProperty(ScrollBar.StylePropertyGrabber, scrollBarGrabbed),
+                }),
+                new StyleRule(SelectorElement.Type(typeof(HScrollBar)), new[]
+                {
+                    new StyleProperty(ScrollBar.StylePropertyGrabber, scrollBarNormal),
+                }),
+                new StyleRule(new SelectorElement(typeof(HScrollBar), null, null, new[] { ScrollBar.StylePseudoClassHover }), new[]
+                {
+                    new StyleProperty(ScrollBar.StylePropertyGrabber, scrollBarHovered),
+                }),
+                new StyleRule(new SelectorElement(typeof(HScrollBar), null, null, new[] { ScrollBar.StylePseudoClassGrabbed }), new[]
+                {
+                    new StyleProperty(ScrollBar.StylePropertyGrabber, scrollBarGrabbed),
+                }),
+                // CCM rework lobby - end
 
                 // StyleClassItemStatus
                 new StyleRule(SelectorElement.Class(StyleClassItemStatus), new[]
@@ -2635,15 +2708,18 @@ namespace Content.Client.Stylesheets
                 }),
                 new StyleRule(new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassNormal}), new[]
                 {
-                    new StyleProperty(Control.StylePropertyModulateSelf, ButtonColorDefault),
+                    new StyleProperty(Control.StylePropertyModulateSelf,
+                        CurrentTheme == UiColorTheme.Blue ? ButtonColorDefault : Color.FromHex("#15A31E")),
                 }),
                 new StyleRule(new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassHover}), new[]
                 {
-                    new StyleProperty(Control.StylePropertyModulateSelf, ButtonColorHovered),
+                    new StyleProperty(Control.StylePropertyModulateSelf,
+                        CurrentTheme == UiColorTheme.Blue ? ButtonColorHovered : Color.FromHex("#138A1A")),
                 }),
                 new StyleRule(new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassPressed}), new[]
                 {
-                    new StyleProperty(Control.StylePropertyModulateSelf, ButtonColorPressed),
+                    new StyleProperty(Control.StylePropertyModulateSelf,
+                        CurrentTheme == UiColorTheme.Blue ? ButtonColorPressed : Color.FromHex("#0F7116")),
                 }),
                 new StyleRule(new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassDisabled}), new[]
                 {
@@ -2662,7 +2738,7 @@ namespace Content.Client.Stylesheets
                 }),
 
                 Element<PanelContainer>().Class(OptionButton.StyleClassOptionsBackground)
-                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(PanelDark.WithAlpha(0.95f))),
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(PanelDark.WithAlpha(1f))),
 
                 new StyleRule(new SelectorElement(typeof(PanelContainer), new []{ ClassHighDivider}, null, null), new []
                 {
@@ -2690,6 +2766,44 @@ namespace Content.Client.Stylesheets
                         BorderColor = PanelDark.WithAlpha(1f),
                     }),
 
+                // CCM rework lobby - start
+                Element<PanelContainer>().Class("FancyWindowFrame")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = Color.Transparent,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = PanelDark.WithAlpha(1f),
+                    }),
+
+                Element<PanelContainer>().Class("FancyWindowBodyBackground")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = PanelDark.WithAlpha(0.95f),
+                    }),
+                // CCM rework lobby - end
+
+                // CCM rework lobby - start
+                Element<PanelContainer>().Class("CMWindowFrame")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#0A1A33").WithAlpha(0.9f)
+                            : Color.FromHex("#06130B").WithAlpha(0.9f),
+                        BorderThickness = new Thickness(1),
+                        BorderColor = CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#123D72").WithAlpha(0.9f)
+                            : Color.FromHex("#1E3A28").WithAlpha(0.9f),
+                    }),
+
+                Element<PanelContainer>().Class("CMWindowBodyBackground")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#0B1E3A").WithAlpha(0.85f)
+                            : Color.FromHex("#001304").WithAlpha(0.85f),
+                    }),
+                // CCM rework lobby - end
+
                 Element<PanelContainer>().Class("BackgroundOpenRight")
                     .Prop(PanelContainer.StylePropertyPanel, BaseButtonOpenRight)
                     .Prop(Control.StylePropertyModulateSelf, PanelDark.WithAlpha(0.95f)),
@@ -2711,14 +2825,31 @@ namespace Content.Client.Stylesheets
                 // Window Headers
                 Element<Label>().Class("FancyWindowTitle")
                     .Prop("font", boxFont13)
-                    .Prop("font-color", NanoGold),
+                    .Prop("font-color", Color.Transparent),
 
                 Element<PanelContainer>().Class("WindowHeadingBackground")
-                    .Prop("panel", new StyleBoxTexture(BaseButtonOpenLeft) { Padding = default })
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#0C140F")),
+                    .Prop("panel", new StyleBoxFlat
+                    {
+                        BackgroundColor = Color.FromHex("#393940").WithAlpha(0.90f),
+                    }),
 
                 Element<PanelContainer>().Class("WindowHeadingBackgroundLight")
-                    .Prop("panel", new StyleBoxTexture(BaseButtonOpenLeft) { Padding = default }),
+                    .Prop("panel", new StyleBoxFlat
+                    {
+                        BackgroundColor = Color.FromHex("#393940").WithAlpha(0.70f),
+                    }),
+
+                // CCM rework lobby - start
+                Element<TextureButton>().Class("windowCloseButton")
+                    .Prop(TextureButton.StylePropertyTexture, resCache.GetTexture("/Textures/Interface/Nano/cross.svg.png"))
+                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#C1C1C1")),
+
+                Element<TextureButton>().Class("windowCloseButton").Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#C1C1C1").WithAlpha(0.6f)),
+
+                Element<TextureButton>().Class("windowCloseButton").Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#C1C1C1")),
+                // CCM rework lobby - end
 
                 // Window Header Help Button
                 Element<TextureButton>().Class(FancyWindow.StyleClassWindowHelpButton)
@@ -2888,7 +3019,9 @@ namespace Content.Client.Stylesheets
                 Element<PanelContainer>().Class("VerticalTabListBackground")
                     .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
                     {
-                        BackgroundColor = PanelDark.WithAlpha(0.75f),
+                        BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#08264F").WithAlpha(0.85f)
+                            : PanelDark.WithAlpha(0.75f),
                         BorderThickness = new Thickness(2, 0, 0, 0),
                         BorderColor = LobbyMenuButtonBase.WithAlpha(0.95f),
                     }),
@@ -2899,7 +3032,9 @@ namespace Content.Client.Stylesheets
                 Element<Button>().Class(StyleBase.StyleClassVerticalTabButton)
                     .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
                     {
-                        BackgroundColor = PanelDark.WithAlpha(0.9f),
+                        BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#123D72").WithAlpha(0.9f)
+                            : PanelDark.WithAlpha(0.9f),
                         BorderThickness = new Thickness(1),
                         BorderColor = PanelDark.WithAlpha(1f),
                     }),
@@ -2908,9 +3043,13 @@ namespace Content.Client.Stylesheets
                     .Pseudo(ContainerButton.StylePseudoClassHover)
                     .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
                     {
-                        BackgroundColor = LobbyMenuButtonBase.WithAlpha(0.7f),
+                        BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#1D4AA1").WithAlpha(0.8f)
+                            : LobbyMenuButtonBase.WithAlpha(0.7f),
                         BorderThickness = new Thickness(1),
-                        BorderColor = LobbyMenuButtonBase.WithAlpha(0.8f),
+                        BorderColor = CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#1D4AA1").WithAlpha(0.9f)
+                            : LobbyMenuButtonBase.WithAlpha(0.8f),
                     }),
 
                 Element<Button>().Class(StyleBase.StyleClassVerticalTabButton)

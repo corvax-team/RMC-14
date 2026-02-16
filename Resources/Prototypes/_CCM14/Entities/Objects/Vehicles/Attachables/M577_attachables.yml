@@ -13,7 +13,6 @@
     hardpointType: HDPT_PRIMARY
     damageMult: 0.2
     skill: RMCSkillEngineer
-    level: 2
     maxHealth: 500
     offset: 0.8, 1.15
   - type: VehicleAttachableVisuals
@@ -32,7 +31,6 @@
       path: /Audio/_CCM14/dual_autocannon_fire.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/empty.ogg
-    cameraRecoilScalarModified: 0
     cameraRecoilScalar: 0
   - type: VehicleGun
     maxSpareMagazines: 2
@@ -56,7 +54,6 @@
     hardpointType: HDPT_SUPPORT
     damageMult: 0.1
     skill: RMCSkillEngineer
-    level: 2
     maxHealth: 500
     offset: -0.3, 0.6
   - type: VehicleAttachableVisuals
@@ -74,7 +71,6 @@
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ugl.ogg
     projectileSpeed: 25
-    cameraRecoilScalarModified: 0
     cameraRecoilScalar: 0
   - type: VehicleGun
     acceptedMagazineTypes: ["flare_launcher"]
@@ -104,7 +100,6 @@
     hardpointType: HDPT_SECONDARY
     damageMult: 0.11
     skill: RMCSkillEngineer
-    level: 2
     maxHealth: 350
     offset: 0.3, -1.6
   - type: VehicleAttachableVisuals
@@ -123,7 +118,6 @@
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
-    cameraRecoilScalarModified: 0
     cameraRecoilScalar: 0
   - type: VehicleGun
     maxSpareMagazines: 1
@@ -147,7 +141,6 @@
     hardpointType: HDPT_SPECIAL
     damageMult: 0
     skill: RMCSkillEngineer
-    level: 2
     maxHealth: 100
     ignored: true
     offset: 0.8, 0.55
@@ -163,7 +156,6 @@
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
-    cameraRecoilScalarModified: 0
     cameraRecoilScalar: 0
   - type: VehicleGun
     needHands: true
@@ -191,7 +183,6 @@
     hardpointType: HDPT_SPECIAL
     damageMult: 0
     skill: RMCSkillEngineer
-    level: 2
     maxHealth: 100
     ignored: true
     offset: -0.8, 0.55
@@ -211,7 +202,6 @@
     hardpointType: HDPT_TREADS
     damageMult: 0.15
     skill: RMCSkillEngineer
-    level: 2
     maxHealth: 500
   - type: VehicleAttachableVisuals
     rsi: _CCM14/Mobs/Vehicles/base_apc.rsi

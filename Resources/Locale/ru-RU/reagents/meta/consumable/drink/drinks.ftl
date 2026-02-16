@@ -62,3 +62,6 @@ reagent-name-posca = поска
 reagent-desc-posca = Напиток бедных воинов из забытой эпохи.
 reagent-name-mopwata = швабода
 reagent-desc-mopwata = Грязная, застоявшаяся вода из-под швабры, швабровая вода.
+
+reagent-name-kvass = квас
+reagent-desc-kvass = Традиционный ферментированный напиток с мягким кисловатым вкусом.

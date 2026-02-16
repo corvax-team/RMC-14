@@ -87,9 +87,6 @@
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: LightArmor
-  - type: Construction
-    graph: MechDisassemble
-    node: start
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Mecha/mechmove03.ogg
@@ -153,9 +150,6 @@
         Cold: 0
         Heat: 0
         Shock: 0
-    pilotWhitelist:
-      components:
-        - HumanoidAppearance
   - type: MeleeWeapon
     hidden: true
     range: 2

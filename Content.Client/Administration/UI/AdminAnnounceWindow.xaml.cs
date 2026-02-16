@@ -9,7 +9,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.Administration.UI
 {
     [GenerateTypedNameReferences]
-    public sealed partial class AdminAnnounceWindow : DefaultWindow
+    public sealed partial class AdminAnnounceWindow : DefaultCMWindow
     {
         [Dependency] private readonly ILocalizationManager _localization = default!;
 
@@ -39,3 +39,4 @@ namespace Content.Client.Administration.UI
         }
     }
 }
+

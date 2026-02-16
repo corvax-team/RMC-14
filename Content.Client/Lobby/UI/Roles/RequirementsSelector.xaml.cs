@@ -28,6 +28,7 @@ public sealed partial class RequirementsSelector : BoxContainer
     public RichTextLabel SubtitleLabelControl => SubtitleLabel;
     public PanelContainer SubtitleUnderlineControl => SubtitleUnderline;
     public AnimatedTextureRect SubtitleSpinnerControl => SubtitleSpinner;
+    public bool RequirementsLocked => _lockStripe.Visible;
 
     private static readonly SpriteSpecifier ChanceSpinnerSprite =
         new SpriteSpecifier.Rsi(new ResPath("/Textures/_CCM/UI/loading_spinner.rsi"), "spinner");

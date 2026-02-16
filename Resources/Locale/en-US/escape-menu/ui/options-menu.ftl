@@ -19,11 +19,13 @@ ui-options-value-percent = { TOSTRING($value, "P0") }
 
 ui-options-discordrich = Enable Discord Rich Presence
 ui-options-general-ui-style = UI Style
+ui-options-general-lobby = Lobby
 ui-options-general-discord = Discord
 ui-options-general-cursor = Cursor
 ui-options-general-speech = Speech
 ui-options-general-storage = Storage
 ui-options-general-accessibility = Accessibility
+# CCM priority rework
 
 ## Audio menu
 

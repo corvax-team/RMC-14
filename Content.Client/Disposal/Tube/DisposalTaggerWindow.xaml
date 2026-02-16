@@ -1,4 +1,4 @@
-﻿<DefaultWindow xmlns="https://spacestation14.io"
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls" xmlns="https://spacestation14.io"
             Title="{Loc 'disposal-tagger-window-title'}"
             MinSize="500 110"
             SetSize="500 110">
@@ -16,4 +16,5 @@
                     Text="{Loc 'disposal-tagger-window-tag-confirm-button'}" />
         </BoxContainer>
     </BoxContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

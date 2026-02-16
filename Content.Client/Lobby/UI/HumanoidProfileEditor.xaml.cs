@@ -1113,7 +1113,7 @@ namespace Content.Client.Lobby.UI
                         Text = Loc.GetString("loadout-window"),
                         HorizontalAlignment = HAlignment.Right,
                         VerticalAlignment = VAlignment.Center,
-                        Margin = new Thickness(3f, 3f, 0f, 0f),
+                        Margin = new Thickness(1f, 3f, 0f, 0f),
                     };
 
                     var collection = IoCManager.Instance!;
@@ -1495,20 +1495,33 @@ namespace Content.Client.Lobby.UI
             if (_jobPriorityChancesSlot == null || Profile == null || _jobPriorityChancesSlot != CharacterSlot)
                 return;
 
-            foreach (var (jobId, label) in _jobChanceLabels)
+            foreach (var (jobId, selector) in _jobPriorities)
             {
+                if (!_jobChanceLabels.TryGetValue(jobId, out var label))
+                    continue;
+
+                if (selector.RequirementsLocked)
+                {
+                    label.Visible = false;
+                    if (_jobChanceUnderlines.TryGetValue(jobId, out var underlineHidden))
+                        underlineHidden.Visible = false;
+                    if (_jobChanceSpinners.TryGetValue(jobId, out var spinnerHidden))
+                        spinnerHidden.Visible = false;
+                    continue;
+                }
+
                 var protoId = new ProtoId<JobPrototype>(jobId);
                 var info = _jobPriorityChances.GetValueOrDefault(protoId);
                 var chanceRounded = MathF.Round(info.ChancePercent, 2, MidpointRounding.AwayFromZero);
                 var chanceText = chanceRounded.ToString("0.00", CultureInfo.CurrentCulture);
                 label.SetMarkup(Loc.GetString("humanoid-profile-editor-job-chance", ("chance", chanceText)));
-                label.TooltipDelay = 1f;
+                label.TooltipDelay = 1.2f;
                 label.ToolTip = BuildChanceFormula(info);
                 label.Visible = true;
-                if (_jobChanceUnderlines.TryGetValue(jobId, out var underline))
-                    underline.Visible = false;
-                if (_jobChanceSpinners.TryGetValue(jobId, out var spinner))
-                    spinner.Visible = false;
+                if (_jobChanceUnderlines.TryGetValue(jobId, out var underlineVisible))
+                    underlineVisible.Visible = false;
+                if (_jobChanceSpinners.TryGetValue(jobId, out var spinnerVisible))
+                    spinnerVisible.Visible = false;
             }
         }
 

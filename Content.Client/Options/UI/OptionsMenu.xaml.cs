@@ -8,7 +8,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client.Options.UI
 {
     [GenerateTypedNameReferences]
-    public sealed partial class OptionsMenu : DefaultWindow
+    public sealed partial class OptionsMenu : DefaultCMWindow
     {
         [Dependency] private readonly IClientAdminManager _adminManager = default!;
         private readonly MiscTab _miscTab;
@@ -58,7 +58,7 @@ namespace Content.Client.Options.UI
             }
             else if (_adminTabAdded)
             {
-                Tabs.RemoveChild(_adminOptionsTab);
+                Tabs.RemoveTab(_adminOptionsTab);
                 _adminTabAdded = false;
             }
 
@@ -72,9 +72,11 @@ namespace Content.Client.Options.UI
                 _adminOptionsTab.Control.ReloadValues();
         }
 
-        public void SelectTabIndex(int tab)
-        {
-            Tabs.CurrentTab = tab;
-        }
+    public void SelectTabIndex(int tab)
+    {
+        Tabs.CurrentTab = tab;
     }
 }
+// # CCM priority rework
+}
+

@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 namespace Content.Client._RMC14.TacticalMap;
 
 [GenerateTypedNameReferences]
-public sealed partial class LabelTextDialog : DefaultWindow
+public sealed partial class LabelTextDialog : DefaultCMWindow
 {
     public event Action<string>? OnLabelConfirmed;
     public event Action? OnLabelDeleted;
@@ -96,3 +96,4 @@ public sealed partial class LabelTextDialog : DefaultWindow
         dialog.OpenCentered();
     }
 }
+

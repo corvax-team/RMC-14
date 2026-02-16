@@ -125,8 +125,17 @@ namespace Content.Client.Lobby
             _voteManager.SetPopupContainer(Lobby.VoteContainer);
             LayoutContainer.SetAnchorPreset(Lobby, LayoutContainer.LayoutPreset.Wide);
 
-            var width = _cfg.GetCVar(CCVars.ServerLobbyRightPanelWidth);
-            Lobby.RightSide.SetWidth = width;
+            // CCM rework lobby - start
+            var width = _cfg.GetCVar(CCVars.ServerLobbyRightPanelWidth) * 0.65f;
+            var uiScale = Lobby.RightSide.UIScale;
+            if (uiScale <= 0f)
+                uiScale = 1f;
+            var scaleAdjust = uiScale > 1f ? uiScale * 1.15f : MathF.Max(0.6f, uiScale * 0.9f);
+            var desiredWidth = width / scaleAdjust;
+            if (Lobby.Size.X > 1f)
+                desiredWidth = MathF.Min(desiredWidth, Lobby.Size.X * 0.38f);
+            Lobby.RightSide.SetWidth = desiredWidth;
+            // CCM rework lobby - end
 
             UpdateLobbyUi();
             _cfg.OnValueChanged(RMCCVars.RMCLobbyBackgroundPreset, _ => UpdateLobbyBackground(true), true);

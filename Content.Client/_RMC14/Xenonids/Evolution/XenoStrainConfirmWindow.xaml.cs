@@ -7,7 +7,7 @@ using Robust.Shared.Utility;
 namespace Content.Client._RMC14.Xenonids.Evolution
 {
 	[GenerateTypedNameReferences]
-    public sealed partial class XenoStrainConfirmWindow : DefaultWindow
+    public sealed partial class XenoStrainConfirmWindow : DefaultCMWindow
     {
         public event System.Action? OnConfirm;
 
@@ -32,3 +32,4 @@ namespace Content.Client._RMC14.Xenonids.Evolution
         }
     }
 }
+

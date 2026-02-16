@@ -34,6 +34,9 @@ public sealed partial class StationJobsSystem : EntitySystem
     [Dependency] private readonly IServerPreferencesManager _preferences = default!;
     [Dependency] private readonly JobPriorityWeightManager _jobPriorityWeights = default!;
 
+    private const string RiflemanJobId = "CMRifleman";
+    private const string XenonidJobId = "CMXenoSelectableXeno";
+
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -632,7 +635,11 @@ public sealed partial class StationJobsSystem : EntitySystem
         Dictionary<ProtoId<JobPrototype>, int> jobSlotCounts)
     {
         var candidates = GetPlayersJobCandidates(null, JobPriority.First, profiles);
-        if (!candidates.TryGetValue(userId, out var userJobs))
+        var userFirstOrderJobs = candidates.TryGetValue(userId, out var userJobs)
+            ? userJobs.ToHashSet()
+            : new HashSet<string>();
+
+        if (!profiles.TryGetValue(userId, out var userProfile))
             return new Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo>();
 
         var jobWeights = new Dictionary<ProtoId<JobPrototype>, Dictionary<NetUserId, float>>();
@@ -655,24 +662,39 @@ public sealed partial class StationJobsSystem : EntitySystem
         }
 
         var chances = new Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo>();
-        foreach (var jobId in userJobs)
+        foreach (var jobId in userProfile.JobPriorities.Keys)
         {
-            if (!jobTotals.TryGetValue(jobId, out var total) || total <= 0f)
-                continue;
+            var jobProtoId = new ProtoId<JobPrototype>(jobId);
+            var weight = CalculateFirstOrderWeight(
+                userId,
+                selectedSlots[userId],
+                jobProtoId,
+                sessionMinutes.GetValueOrDefault(userId),
+                currentRoundId);
+            var total = jobTotals.GetValueOrDefault(jobProtoId);
+            if (!userFirstOrderJobs.Contains(jobId))
+                total += weight;
 
-            var weight = jobWeights[jobId][userId];
-            var slotCount = jobSlotCounts.GetValueOrDefault(jobId, 1);
+            var slotCount = jobSlotCounts.GetValueOrDefault(jobProtoId, 1);
             if (slotCount <= 0)
             {
                 chances[jobId] = new JobPriorityChanceInfo(0f, 0f, 0f, 0f, 0f);
                 continue;
             }
 
+            if (total <= 0f)
+            {
+                chances[jobId] = new JobPriorityChanceInfo(0f, 0f, 0f, 0f, 0f);
+                continue;
+            }
+
             var chance = weight / total * 100f * slotCount;
+            if (jobId == RiflemanJobId || jobId == XenonidJobId)
+                chance = 100f;
             var breakdown = CalculateFirstOrderWeightBreakdown(
                 userId,
                 selectedSlots[userId],
-                jobId,
+                jobProtoId,
                 sessionMinutes.GetValueOrDefault(userId),
                 currentRoundId);
             var sessionHours = MathF.Min(6f, sessionMinutes.GetValueOrDefault(userId) / 60f);

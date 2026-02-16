@@ -502,7 +502,7 @@ public sealed class UserAHelpUIHandler : IAHelpUIHandler
     }
     public bool IsAdmin => false;
     public bool IsOpen => _window is { Disposed: false, IsOpen: true };
-    private DefaultWindow? _window;
+    private DefaultCMWindow? _window;
     private BwoinkPanel? _chatPanel;
     private bool _discordRelayActive;
 
@@ -569,7 +569,7 @@ public sealed class UserAHelpUIHandler : IAHelpUIHandler
         _chatPanel = new BwoinkPanel(text => SendMessageAction?.Invoke(_ownerId, text, true, false));
         _chatPanel.InputTextChanged += text => InputTextChanged?.Invoke(_ownerId, text);
         _chatPanel.RelayedToDiscordLabel.Visible = relayActive;
-        _window = new DefaultWindow()
+        _window = new DefaultCMWindow()
         {
             TitleClass="windowTitleAlert",
             HeaderClass="windowHeaderAlert",
@@ -592,3 +592,4 @@ public sealed class UserAHelpUIHandler : IAHelpUIHandler
         _chatPanel = null;
     }
 }
+

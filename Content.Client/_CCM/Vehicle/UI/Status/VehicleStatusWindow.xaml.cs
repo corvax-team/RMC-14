@@ -5,10 +5,11 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._CCM.Vehicle.UI.Status;
 
 [GenerateTypedNameReferences]
-public sealed partial class VehicleStatusWindow : DefaultWindow
+public sealed partial class VehicleStatusWindow : DefaultCMWindow
 {
     public VehicleStatusWindow()
     {
         RobustXamlLoader.Load(this);
     }
 }
+

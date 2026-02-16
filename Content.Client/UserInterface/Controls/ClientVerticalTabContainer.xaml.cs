@@ -66,6 +66,34 @@ public sealed partial class ClientVerticalTabContainer : BoxContainer
         return index;
     }
 
+    public void RemoveTab(Control control)
+    {
+        if (!_tabs.TryGetValue(control, out var button))
+            return;
+
+        _tabs.Remove(control);
+        _controls.Remove(control);
+
+        if (control.Parent == ContentsContainer)
+            ContentsContainer.RemoveChild(control);
+        else
+            control.Visible = false;
+
+        if (button.Parent == TabContainer)
+            TabContainer.RemoveChild(button);
+        else
+            button.Visible = false;
+
+        if (_currentControl == control)
+        {
+            var previous = _controls.Count > 0 ? _controls[^1] : null;
+            if (previous != null)
+                SelectTab(previous);
+            else
+                _currentControl = null;
+        }
+    }
+
     protected override void ChildRemoved(Control child)
     {
         if (_tabs.Remove(child, out var button))
@@ -105,3 +133,4 @@ public sealed partial class ClientVerticalTabContainer : BoxContainer
         _currentControl = control;
     }
 }
+// # CCM priority rework

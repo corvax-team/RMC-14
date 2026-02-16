@@ -29,6 +29,7 @@
                 StyleClasses="VoteButton" />
 
         <PanelContainer StyleClasses="LowDivider" />
-        <Label Margin="12 0 0 0" StyleClasses="LabelSubText" Text="{Loc 'ui-vote-fluff'}" />
+        <!-- CCM rework lobby - start -->
+        <!-- CCM rework lobby - end -->
     </BoxContainer>
 </ui:VoteCallMenu>

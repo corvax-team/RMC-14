@@ -77,13 +77,9 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
         _escapeWindow.OnClose += DeactivateButton;
         _escapeWindow.OnOpen += ActivateButton;
 
-        _escapeWindow.ChangelogButton.OnPressed += _ =>
-        {
-            CloseEscapeWindow();
-            _changelog.ToggleWindow();
-        };
-
-        _escapeWindow.CreditsButton.OnPressed += _ => new CreditsWindow().OpenCentered();
+        // CCM rework lobby - start
+        // Removed Changelog/Credits buttons from EscapeMenu.
+        // CCM rework lobby - end
 
         _escapeWindow.PatronPerksButton.Visible = _linkAccount.CanViewPatronPerks();
         _escapeWindow.PatronPerksButton.OnPressed += _ =>
@@ -133,7 +129,7 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
         };
 
         // Hide wiki button if we don't have a link for it.
-        _escapeWindow.WikiButton.Visible = _cfg.GetCVar(CCVars.InfoLinksWiki) != "";
+        _escapeWindow.WikiButton.Visible = _cfg.GetCVar(CCVars.InfoLinksWiki) != "https://station14.ru/wiki/%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D0%BB:Colonial_Marines";
 
         CommandBinds.Builder
             .Bind(EngineKeyFunctions.EscapeMenu,

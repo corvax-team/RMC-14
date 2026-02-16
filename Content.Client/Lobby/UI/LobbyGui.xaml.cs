@@ -51,6 +51,7 @@ namespace Content.Client.Lobby.UI
         private Vector2 _leftMenuDragOffset;
         private bool _leftMenuAnchorInitialized;
         private Vector2 _leftMenuLastGlobal;
+        private Vector2 _voteLastSize;
 
         private const string LeftMenuHideAnimationKey = "lobby-left-menu-hide";
         private const string LeftMenuShowAnimationKey = "lobby-left-menu-show";
@@ -67,7 +68,7 @@ namespace Content.Client.Lobby.UI
             LayoutContainer.SetAnchorPreset(BackgroundViewportArea, LayoutPreset.Wide);
             LayoutContainer.SetAnchorPreset(Background, LayoutPreset.Wide);
             LayoutContainer.SetAnchorAndMarginPreset(CenterMenuGlow, LayoutPreset.Center);
-            LayoutContainer.SetAnchorPreset(VoteContainer, LayoutPreset.TopLeft);
+            LayoutContainer.SetAnchorPreset(VoteContainer, LayoutPreset.TopLeft); // # CCM priority rework
             LayoutContainer.SetAnchorAndMarginPreset(LobbyMusicPanel, LayoutPreset.TopRight, margin: 6);
             LayoutContainer.SetGrowHorizontal(LobbyMusicPanel, LayoutContainer.GrowDirection.Begin);
 
@@ -339,6 +340,55 @@ namespace Content.Client.Lobby.UI
 
             if (CenterMenuGlow.Visible)
                 _leftMenuLastGlobal = CenterMenuGlow.GlobalPosition;
+
+            // CCM rework lobby - start
+            if (VoteContainer.Size.X > 1f && VoteContainer.Size.Y > 1f)
+                _voteLastSize = VoteContainer.Size;
+            // CCM rework lobby - end
+
+            UpdateVoteContainerAnchor();
+        }
+
+        private void UpdateVoteContainerAnchor()
+        {
+            if (VoteContainer.Parent == null)
+                return;
+
+            // CCM rework lobby - start
+            var voteSize = VoteContainer.Size;
+            if (voteSize.X <= 1f || voteSize.Y <= 1f)
+                voteSize = _voteLastSize;
+            if (voteSize.X <= 1f || voteSize.Y <= 1f)
+                return;
+
+            var parentGlobal = VoteContainer.Parent.GlobalPosition;
+            var menuSize = CenterMenuGlow.Size;
+            if (menuSize.X <= 1f || menuSize.Y <= 1f)
+                return;
+
+            var menuGlobal = CenterMenuGlow.GlobalPosition;
+            var voteX = menuGlobal.X + (menuSize.X - voteSize.X) * 0.5f - parentGlobal.X;
+            var voteY = -parentGlobal.Y + 6f;
+            // CCM rework lobby - end
+
+            // CCM rework lobby - start
+            var leftGlobal = LeftColumn.GlobalPosition;
+            var leftSize = LeftColumn.Size;
+            if (leftSize.X > 1f && leftSize.Y > 1f)
+            {
+                var minX = leftGlobal.X - parentGlobal.X;
+                var maxX = minX + leftSize.X - voteSize.X;
+                var minY = leftGlobal.Y - parentGlobal.Y;
+                var maxY = minY + leftSize.Y - voteSize.Y;
+                if (maxX >= minX)
+                    voteX = Math.Clamp(voteX, minX, maxX);
+                if (maxY >= minY)
+                    voteY = Math.Clamp(voteY, minY, maxY);
+            }
+
+            LayoutContainer.SetAnchorPreset(VoteContainer, LayoutPreset.TopLeft);
+            LayoutContainer.SetPosition(VoteContainer, new Vector2(voteX, voteY));
+            // CCM rework lobby - end
         }
 
         private void OnLeftMenuDragKeyBindDown(GUIBoundKeyEventArgs args)
@@ -384,6 +434,22 @@ namespace Content.Client.Lobby.UI
             var parentGlobal = CenterMenuGlow.Parent.GlobalPosition;
             var mousePos = UserInterfaceManager.MousePositionScaled.Position;
             var newPos = mousePos - _leftMenuDragOffset - parentGlobal;
+            // CCM rework lobby - start
+            var menuSize = CenterMenuGlow.Size;
+            var leftGlobal = LeftColumn.GlobalPosition;
+            var leftSize = LeftColumn.Size;
+            if (leftSize.X > 1f && leftSize.Y > 1f && menuSize.X > 1f && menuSize.Y > 1f)
+            {
+                var minX = leftGlobal.X - parentGlobal.X;
+                var maxX = minX + leftSize.X - menuSize.X;
+                var minY = leftGlobal.Y - parentGlobal.Y;
+                var maxY = minY + leftSize.Y - menuSize.Y;
+                if (maxX >= minX)
+                    newPos.X = Math.Clamp(newPos.X, minX, maxX);
+                if (maxY >= minY)
+                    newPos.Y = Math.Clamp(newPos.Y, minY, maxY);
+            }
+            // CCM rework lobby - end
             LayoutContainer.SetPosition(CenterMenuGlow, newPos);
             return true;
         }

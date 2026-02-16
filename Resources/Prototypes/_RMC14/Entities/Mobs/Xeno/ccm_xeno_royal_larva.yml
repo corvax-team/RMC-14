@@ -15,7 +15,6 @@
     requiresGranter: false
     max: 200
     evolvesTo:
-    - CMXenoHiveLord
     - CMXenoWarrior
     - CMXenoSpitter
     - CMXenoLurker

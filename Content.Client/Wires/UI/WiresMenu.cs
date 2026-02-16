@@ -179,7 +179,7 @@ namespace Content.Client.Wires.UI
                     }),
                     (CloseButton = new TextureButton
                     {
-                        StyleClasses = {DefaultWindow.StyleClassWindowCloseButton},
+                        StyleClasses = {DefaultCMWindow.StyleClassWindowCloseButton},
                         VerticalAlignment = VAlignment.Center
                     })
                 }
@@ -599,5 +599,6 @@ namespace Content.Client.Wires.UI
         }
     }
 }
+
 
 
