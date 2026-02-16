@@ -159,6 +159,7 @@ public partial class ChatBox : UIWidget
             return;
 
         Contents.AddMessage(formatted);
+        Contents.InvalidateArrange();
     }
 
     // RMC14
