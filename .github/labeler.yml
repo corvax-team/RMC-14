@@ -25,17 +25,17 @@
   - all-glob-to-any-files: "**/*.cs"
 
 "Локализация":
-- changed-file:
+- changed-files:
   - all-glob-to-any-file: "**/*.ftl"
 
 "Прототипы":
-- changed-file:
+- changed-files:
   - all-glob-to-any-file: "**/*.yml"
 
 "Гайбдук":
-- changed-file:
+- changed-files:
   - all-glob-to-any-file: "Resources/ServerInfo/**/*.xml"
 
 "Сервер":
-- changed-file:
+- changed-files:
   - all-glob-to-any-file: "Resources/ConfigPresets/**/*.toml"

@@ -1,15 +1,16 @@
-name: "Labels: Approved"
+name: "Labels: Await Changes"
+
 on:
   pull_request_review:
     types: [submitted]
+
 jobs:
   add_label:
-    # Change the repository name after you've made sure the team name is correct for your fork!
-    if: ${{ github.event.review.state == 'approved' }}
+    if: ${{ github.event.review.state == 'changes_requested'}}
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: write
-    runs-on: ubuntu-latest
     steps:
     - uses: tspascoal/get-user-teams-membership@v3
       id: checkUserMember
@@ -20,10 +21,10 @@ jobs:
     - if: ${{ steps.checkUserMember.outputs.isTeamMember == 'true' }}
       uses: actions-ecosystem/action-add-labels@v1
       with:
-        labels: "Одобрено"
-    - if: ${{ steps.checkUserMember.outputs.isTeamMember == 'true'}}
+        labels: "Ожидание изменений"
+    - if: ${{ steps.checkUserMember.outputs.isTeamMember == 'true' }}
       uses: actions-ecosystem/action-remove-labels@v1
       with:
         labels: |
           Требуется ревью
-          Ожидание изменений
+          Одобрено
