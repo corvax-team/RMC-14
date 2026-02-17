@@ -1,9 +1,9 @@
-ent-RMCHoodBioGeneral = bio hood
-    .desc = A hood that protects the head and face from biological contaminants.
+ent-RMCHoodBioGeneral = Био=капюшон
+    .desc = Капюшон, защищающий голову и лицо от биологических загрязнений.
     .suffix = Generic, RMC
-ent-RMCHoodBioWeYa = WeYa-TSS MK II - bio hood
-    .desc = The 'Weston-Yamada TerraScientia bio-suit MK II'. An advanced light-weight bio-suit developed in-house by Weston-Yamada. It's a hood that protects the head and face from biological contaminants, synthetic compliant. Offers no real protection.
+ent-RMCHoodBioWeYa = Биокапюшон VI-BS MK II
+    .desc = 'Vitezstvi - bio-Suit Mark II'. Соврменный лёгкий био-капюшон разработанный Подразделением патентного поиска и разработки Vitezstvi. Это капюшон, который защищает голову и лицо от биологических загрязнений, изготовлен из синтетики. Защиты от пуль не обеспечивает.
     .suffix = Generic, WeYa
-ent-RMCHoodBioWeYaAlt = WeYa-TSS MK I - bio hood
-    .desc = The 'Weston-Yamada TerraScientia bio-suit MK I'. An advanced light-weight bio-suit developed in-house by Weston-Yamada. It's a hood that protects the head and face from biological contaminants.
+ent-RMCHoodBioWeYaAlt = Биокапюшон VI-BS MK I
+    .desc = 'Vitezstvi - bio-Suit Mark II'. Соврменный лёгкий био-капюшон разработанный Подразделением патентного поиска и разработки Vitezstvi. Это капюшон, который защищает голову и лицо от биологических загрязнений, изготовлен из синтетики.
     .suffix = Generic, WeYa, Alt

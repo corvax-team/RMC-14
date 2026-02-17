@@ -1,4 +1,4 @@
 ent-RMCEarMiscClothingBase = { ent-Clothing }
     .desc = { ent-Clothing.desc }
-ent-RMCEarmuffs = earmuffs
-    .desc = Protects your hearing from loud noises, and quiet ones as well.
+ent-RMCEarmuffs = Наушники
+    .desc = Защищает вас как от громких звуков, так и от тихих.
