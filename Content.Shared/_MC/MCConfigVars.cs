@@ -8,6 +8,8 @@ public sealed class MCConfigVars : CVars
 {
     public static readonly CVarDef<bool> ChatEmoji =
         CVarDef.Create("mc.chat.emoji", true, CVar.ARCHIVE | CVar.CLIENT);
+
+
     /**
      * Z-Levels
      */
