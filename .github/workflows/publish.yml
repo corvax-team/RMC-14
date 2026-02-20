@@ -6,16 +6,19 @@ concurrency:
 
 on:
   workflow_dispatch:
-  # schedule:
-   # - cron: '0 10 * * *'
+  push:
+    branches:
+      - master
+      - patogen-master
 
 jobs:
   build:
     runs-on: self-hosted
+    environment: ${{ github.ref_name == 'master' && 'production' || 'mapper' }}
 
     steps:
-    - name: Fail if we are attempting to run on the master branch
-      if: ${{GITHUB.REF_NAME == 'master' && github.repository == 'space-wizards/space-station-14'}}
+    - name: Fail if we are attempting to run on the master branch of upstream
+      if: ${{ github.ref_name == 'master' && github.repository == 'space-wizards/space-station-14' }}
       run: exit 1
 
     - name: Install dependencies
@@ -40,15 +43,12 @@ jobs:
     - name: Check .NET
       run: dotnet --info
 
-    - name: Check .NET installation
-      run: dotnet --info
-
     - name: Get Engine Tag
       run: |
         cd RobustToolbox
         git fetch --depth=1
 
-    - name: Install dependencies
+    - name: Restore
       run: dotnet restore
 
     - name: Build Packaging
@@ -60,12 +60,16 @@ jobs:
     - name: Package client
       run: dotnet run --project Content.Packaging client --no-wipe-release
 
+    # --- Исправленный шаг определения форка ---
+    - name: Determine Fork
+      run: echo "FORK_ID=${{ github.ref_name == 'master' && 'colonialmarines' || 'colonialmarines-pathogen' }}" >> $GITHUB_ENV
+
+    # --- Публикация с явной передачей форка в скрипт ---
     - name: Publish version
-      run: Tools/publish_multi_request.py
+      run: python3 Tools/publish_multi_request.py --fork-id ${{ env.FORK_ID }}
       env:
         PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
-        GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
-        FORK_ID: ${{ vars.FORK_ID }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
 
     - name: Publish changelog (Discord)
       continue-on-error: true
