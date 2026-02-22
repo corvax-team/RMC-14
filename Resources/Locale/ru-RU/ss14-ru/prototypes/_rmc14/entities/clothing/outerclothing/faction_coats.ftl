@@ -1,6 +1,6 @@
-ent-RMCCoatBureauTrenchCoatBrown = brown trench-coat
-    .desc = A worn, brown, old style trench-coat. When a bum sees a cop coming, he don't stick around.
-ent-RMCCoatBureauTrenchCoatGrey = grey trench-coat
+ent-RMCCoatBureauTrenchCoatBrown = Коричневое пальто
+    .desc = Поношенный коричневый тренч старого образца. Когда бродяга видит приближающегося копа, он не остается поблизости.
+ent-RMCCoatBureauTrenchCoatGrey = Серое пальто
     .desc = A worn, grey, old style trench-coat. When a bum sees a cop coming, he don't stick around.
 ent-RMCCoatBureauTrenchCoatBeige = beige trench-coat
     .desc = A worn, tan, old style trench-coat. A classic of noir-style apparel.
