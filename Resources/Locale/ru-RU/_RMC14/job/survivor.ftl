@@ -84,7 +84,7 @@ rmc-job-greeting-forecon = Вы — морпех из подразделения
   Вы [bold][color=#51A16C][font size=16]НЕ враждебны к ККМП![/font][/color][/bold]
 
 rmc-job-name-forecon = Выживший ФОРЕКОН
-rmc-job-description-forecon = Вы — солдат СОиС, оказавшийся один. Ваш корабль "ганьют" потерпел крушение, и теперь вы остались на этой планете. Сделайте всё возможное, чтобы выжить!
+rmc-job-description-forecon = Вы — солдат СОиС, оказавшийся один. Ваш корабль "Ганьют" потерпел крушение, и теперь вы остались на этой планете. Сделайте всё возможное, чтобы выжить!
 
 rmc-job-name-forecon-sniper = Снайпер СОиС
 rmc-job-name-forecon-marksman = Стрелок СОиС
@@ -101,55 +101,55 @@ rmc-job-name-survivor-lv624-security-guard = Охраник
 rmc-job-name-survivor-lv624-medical-technician = Медицинский техник
 rmc-job-name-survivor-lv624-engineer = Инженер
 
-rmc-job-greeting-corporate-dome-cl = You are the last alive Executive of Lazarus Landing!
+rmc-job-greeting-corporate-dome-cl = Вы последний оставшийся в живых Администратор на Лазарус Лэндинг!
 
-  You are aware of the xenonid threat.
+  Вы знаете об угрозе ксеноморфов.
 
-  Your primary objective is to survive the outbreak.
+  Ваша главная цель - выжить.
 
-  You are a Corporate Liaison stationed on LV-624 from Weston-Yamada. You were tipped off about some very peculiar looking eggs recovered from the alien temple North-East of the colony. Being the smart Executive the Company hired you to be, you decided to prepare your office for the worst when the first 'parasite' was born in the vats of the Research Dome. Turned out, you were right, everyone who called you crazy and called these the new 'synthetics' is now dead, you along with your Corporate Security detail are the only survivors due to your paranoia. The xenonid onslaught was relentless, a fuel tank was shot by one of the Officers, leading to the destruction of a part of the dome, along with a lot of the defences being melted. You must survive and find a way to contact Weston-Yamada.
+  Вы являетесь связистом корпорации, работающим на LV-624. Вам сообщили о каких-то яйцах необычного вида, найденных в храме пришельцев к северо-востоку от колонии. Будучи умным администратором, каким вас наняла компания, вы решили подготовить свой офис к худшему, когда в резервуарах Исследовательского купола родился первый "паразит". Оказалось, ты был прав, все, кто называл тебя сумасшедшим и эти новые "синтетики", теперь мертвы, ты и твоя корпоративная служба безопасности - единственные, кто выжил из-за своей паранойи. Атака ксеноморфов была беспощадной, один из офицеров выстрелил в топливный бак, что привело к разрушению части купола, а также к расплавлению многих защитных сооружений. Вы должны выжить и найти способ связаться с компанией.
 
-  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+  Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ к ККМП![/font][/color][/bold]
 
-rmc-job-greeting-corporate-dome-goon = You are a Corporate Security Officer!
+rmc-job-greeting-corporate-dome-goon = Вы = корпоративный охранник!
 
-  You are aware of the xenonid threat.
+  Вы знаете об угрозе ксеноморфов.
 
-  Your primary objective is to survive the outbreak.
+  Ваша главная цель - выжить.
 
-  You are a Corporate Security Officer stationed on LV-624 from Weston-Yamada. Suddenly one day you were pulled aside by the Corporate Liaison and told to bring supplies from the Marshals Offices to their office, and fast. You began fortifying the Corporate Dome and was told by the Executive that something big will ravage the entire colony, excluding you. Turns out, the Liaison was right, these so called 'xenonids' broke containment from the Research Dome and began destroying the entire colony. Once they came for the Dome and tried to kill all of you, you barely managed to hold them off even after losing one Officer and alot of the defences. The Liaison said they will soon find a way to contact Weston-Yamada and to remain steadfast until rescue arrives.
+  Вы - офицер охраны LV-624. Внезапно в один прекрасный день представитель Корпорации отозвал вас в сторонку и велел принести припасы из офисов маршалов в их офис, и побыстрее. Вы начали укреплять Корпоративный купол, а администратор сказал, что что-то серьезное обрушится на всю колонию, не считая вас. Оказывается, Связной был прав, эти так называемые "ксеноморфы" прорвали защитную оболочку Исследовательского купола и начали уничтожать всю колонию. Как только они ворвались в Купол и попытались убить вас всех, вам едва удалось сдержать их, даже потеряв одного офицера и большую часть сил обороны. Связной сказал, что они скоро найдут способ связаться с компанией и остаться стойкими до прибытия спасателей.
 
-  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+  Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ К ККМП![/font][/color][/bold]
 
-rmc-job-greeting-corporate-dome-goon-lead = You are a Corporate Security Lead!
+rmc-job-greeting-corporate-dome-goon-lead = Вы - Шеф корпоративной охраны!
 
-  You are aware of the xenonid threat.
+  Вы знаете об угрозе ксеноморфов.
 
-  Your primary objective is to survive the outbreak.
+  Ваша главная цель - выжить.
 
-  You are a Corporate Security Lead stationed on LV-624 from Weston-Yamada. Suddenly one day you were pulled aside by the Corporate Liaison and told to organize the security forces present, and fast. You began fortifying the Corporate Dome and was told by the Executive that something big will ravage the entire colony, excluding you. Turns out, the Liaison was right, these so called 'xenonids' broke containment from the Research Dome and began destroying the entire colony. Once they came for the Dome and tried to kill all of you, you barely managed to hold them off even after losing one Officer and alot of the defences. The Liaison said they will soon find a way to contact Weston-Yamada and to remain steadfast until rescue arrives.
+  Вы - начальник охраны исследовательского объекта на LV-624 . Неожиданно в один прекрасный день представитель Корпорации отозвал вас в сторонку и велел организовать силы безопасности, и побыстрее. Вы начали укреплять Корпоративный купол, а администратор сказал, что что-то серьезное обрушится на всю колонию, не считая вас. Оказывается, Связной был прав, эти так называемые "ксеноморфы" прорвали защитную оболочку Исследовательского купола и начали уничтожать всю колонию. Как только они ворвались в Купол и попытались убить вас всех, вам едва удалось сдержать их, даже потеряв одного офицера и большую часть сил обороны. Связной сказал, что они скоро найдут способ связаться с компанией и остаться стойкими до прибытия спасателей.
 
-  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+  Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ к ККМП![/font][/color][/bold]
 
-rmc-job-greeting-corporate-dome-goon-medic = You are a Corporate Security Medic!
+rmc-job-greeting-corporate-dome-goon-medic = Вы - Медик корпоративной охраны!
 
-  You are aware of the xenonid threat.
+  Вы знаете об угрозе ксеноморфов.
 
-  Your primary objective is to survive the outbreak.
+  Ваша главная цель - выжить.
 
-  You are a Corporate Security Medic stationed on LV-624 from Weston-Yamada. Suddenly one day you were pulled aside by the Corporate Liaison and told to bring supplies from the Medbay to their office, and fast. You began fortifying the Corporate Dome and was told by the Executive that something big will ravage the entire colony, excluding you. Turns out, the Liaison was right, these so called 'xenonids' broke containment from the Research Dome and began destroying the entire colony. Once they came for the Dome and tried to kill all of you, you barely managed to hold them off even after losing one Officer and alot of the defences. The Liaison said they will soon find a way to contact Weston-Yamada and to remain steadfast until rescue arrives.
+  Вы - медик корпоративной службы безопасности, работающий на LV-624 в Уэстон-Ямада. Внезапно в один прекрасный день сотрудник по связям с общественностью отозвал вас в сторону и велел принести все необходимое из медотсека в их офис, и побыстрее. Вы начали укреплять Корпоративный купол, и администратор сказал вам, что что-то серьезное разрушит всю колонию, за исключением вас. Оказывается, Связной был прав, эти так называемые "ксеноморфы" прорвали защитную оболочку Исследовательского купола и начали уничтожать всю колонию. Как только они ворвались в Купол и попытались убить вас всех, вам едва удалось сдержать их, даже потеряв одного офицера и большую часть сил обороны. Связной сказал, что они скоро найдут способ связаться с компанией и оставаться стойкими до прибытия спасателей.
 
-  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+  Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ К ККМП![/font][/color][/bold]
 
-rmc-job-greeting-corporate-dome-goon-engi = You are a Corporate Security Technician!
+rmc-job-greeting-corporate-dome-goon-engi = Вы - техник корпоративной охраны!
 
-  You are aware of the xenonid threat.
+  Вы знаете об угрозе ксеноморфов.
 
-  Your primary objective is to survive the outbreak.
+  Ваша главная цель - выжить.
 
-  You are a Corporate Security Technician stationed on LV-624 from Weston-Yamada. Suddenly one day you were pulled aside by the Corporate Liaison and told to bring supplies from Engineering to their office, and fast. You began fortifying the Corporate Dome and was told by the Executive that something big will ravage the entire colony, excluding you. Turns out, the Liaison was right, these so called 'xenonids' broke containment from the Research Dome and began destroying the entire colony. Once they came for the Dome and tried to kill all of you, you barely managed to hold them off even after losing one Officer and alot of the defences. The Liaison said they will soon find a way to contact Weston-Yamada and to remain steadfast until rescue arrives.
+  Вы техник-специалист корпоративной безопасности, работающий на LV-624. Внезапно в один прекрасный день сотрудник по связям с общественностью корпорации отозвал вас в сторону и велел доставить материалы из инженерного отдела в их офис, и побыстрее. Вы начали укреплять Корпоративный купол, и администратор сказал вам, что что-то серьезное разрушит всю колонию, за исключением вас. Оказывается, Связной был прав, эти так называемые "ксенониды" прорвали защитную оболочку Исследовательского купола и начали уничтожать всю колонию. Как только они ворвались в Купол и попытались убить вас всех, вам едва удалось сдержать их, даже потеряв одного офицера и большую часть сил обороны. Связной сказал, что они скоро найдут способ связаться с компанией и оставаться стойкими до прибытия спасателей.
 
-  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+  Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ к ККМП![/font][/color][/bold]
 
 # New Varadero Survs
 
@@ -163,7 +163,7 @@ cm-job-name-survivor-medical-technician = Медик Нью Вардеро
 
 cm-job-name-survivor-technician = Инженер Нью Вардеро
 
-cm-job-name-survivor-un-peacekeeper = Миротворец ООН
+cm-job-name-survivor-un-peacekeeper = Миротворец ГИОР
 
 cm-job-name-survivor-new-varadero-researcher = Учёный Нью Вардеро
 
@@ -182,7 +182,7 @@ rmc-job-prefix-fire-protection-specialist-hybrisa = СПБ
 
 rmc-job-name-survivor-grind-barista = Бариста
 
-rmc-job-name-survivor-tmcc-miner = Шахтёр - TMCC
+rmc-job-name-survivor-tmcc-miner = Шахтёр - High Rock Company
 
 rmc-job-name-survivor-medical-doctor = Доктор
 
@@ -192,9 +192,9 @@ rmc-job-name-survivor-xenoarchaeologist = Ксеноархеолог
 
 rmc-job-name-survivor-xenobiologist = Ксенобиолог
 
-rmc-job-name-survivor-pizza-galaxy = Водитель пиццы Galaxy
+rmc-job-name-survivor-pizza-galaxy = Водитель Пицца-Гэлэкси
 
-rmc-job-name-survivor-commercial-pilot = Коммерческий пилот Ве-Я
+rmc-job-name-survivor-commercial-pilot = Коммерческий пилот Космологистики
 
 rmc-job-name-survivor-hybrisa-engineer = Электрик
 rmc-job-name-survivor-construction-worker = Строитель
@@ -206,21 +206,21 @@ rmc-job-name-survivor-infrastructure-engineer = Инженер инфрастр�
 
 rmc-job-name-survivor-reactor-technician = Техник реактора
 
-rmc-job-name-survivor-armed-police-officer = Народный вооружённый полицейский
+rmc-job-name-survivor-armed-police-officer = Милицейский
 
 rmc-job-name-survivor-army-reservist = Армейски резервист
 rmc-job-prefix-army-reservist = 202/Армия
 
 rmc-job-name-survivor-moh-doctor = Доктор министерства здравоохранения
 
-rmc-job-name-survivor-cec-researcher = Исследователь Корпуса Космической Эксплорации
+rmc-job-name-survivor-cec-researcher = Исследователь Корпуса Исследования Космоса
 
 rmc-job-name-survivor-soro-civilian = Гражданин
 
 rmc-job-name-survivor-fire-protection-specialist = Специалист по пожарной безопастности
 rmc-job-prefix-fire-protection-specialist = СПБ
 
-rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
+rmc-job-name-survivor-soro-miner = Шахтёр
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Корпоративный связной - Halcyon Dynamics
 
@@ -257,11 +257,11 @@ CMSurvivorFiorinaEngineer = Инженер Фрионы
 cm-job-name-survivor-fiorina-researcher = Учёный Фрионы
 CMSurvivorFiorinaResearcher = Учёный Фрионы
 
-cm-job-name-survivor-riot-officer = Офицер ООН
-CMSurvivorFiorinaRiotOfficer = Офицер ООН
-cm-job-prefix-survivor-riot-officer = ООН Офицер
+cm-job-name-survivor-riot-officer = Офицер ГИОР
+CMSurvivorFiorinaRiotOfficer = Офицер ГИОР
+cm-job-prefix-survivor-riot-officer = ГИОР Офицер
 
-CMSurvivorFiorinaPrisonGuard = Корпоративный офицер Ве-Я
+CMSurvivorFiorinaPrisonGuard = Корпоративный офицер Vitezstvi
 
 # Kutjevo Refinery Survs
 
@@ -293,7 +293,7 @@ rmc-job-name-survivor-solaris-scientist = Учённый Соляриса
 
 rmc-job-name-survivor-solaris-trucker = Оператор тяжёлой техники
 
-rmc-job-name-survivor-unmc-recruiter = Рекрут ККМП
+rmc-job-name-survivor-unmc-recruiter = Рекрутёр ККМП
 
 # Shivas survs
 
