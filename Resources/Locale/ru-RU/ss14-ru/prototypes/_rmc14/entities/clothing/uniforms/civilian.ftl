@@ -1,8 +1,8 @@
-ent-RMCJumpsuitDispatcherUniform = dispatchers uniform
-    .desc = A blue dress shirt and khakis with a small red security patch sewn on.
-ent-RMCJumpsuitBlueWorkwear = blue workwear
-    .desc = A pair of brown canvas workpants paired with a dark blue workshirt. A common pairing among blue-collar workers.
-ent-RMCJumpsuitKhakiWorkwear = khaki workwear
-    .desc = A pair of jeans paired with a khaki workshirt. A common pairing among blue-collar workers due to its drab look.
+ent-RMCJumpsuitDispatcherUniform = Униформа диспетчера
+    .desc = Синяя рубашка и брюки цвета хаки с нашитой на них маленькой красной нашивкой охраны.
+ent-RMCJumpsuitBlueWorkwear = Рабочая одежда
+    .desc = Коричневые рабочие штаны из парусины в сочетании с темно-синей рабочей рубашкой. Обычная пара среди "синих воротничков".
+ent-RMCJumpsuitKhakiWorkwear = Рабочая одежда
+    .desc = Джинсы в сочетании с рабочей рубашкой цвета хаки. Распространенный вариант среди "синих воротничков" из-за своего однотонного внешнего вида.
 ent-RMCJumpsuitKhakiWorkwearJacketless = { ent-RMCJumpsuitKhakiWorkwear }
     .desc = { ent-RMCJumpsuitKhakiWorkwear.desc }

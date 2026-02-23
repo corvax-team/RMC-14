@@ -1,2 +1,2 @@
-ent-RMCJumpsuitTSEPA = униформа TSEPA
-    .desc = Стандартная форма офицера TSEPA.
+ent-RMCJumpsuitTSEPA = униформа ПСОПЗ
+    .desc = Стандартная форма офицера ПСОПЗ.

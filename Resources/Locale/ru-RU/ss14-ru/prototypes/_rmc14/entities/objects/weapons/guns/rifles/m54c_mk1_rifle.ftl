@@ -1,5 +1,5 @@
-ent-RMCWeaponRifleM54CMK1 = M54C assault rifle MK1
-    .desc = An older design of the Assault Rifle commonly used by the Marine Corps. Uses 10x24mm caseless ammunition.
+ent-RMCWeaponRifleM54CMK1 = M54C MK1
+    .desc = Устаревший вариант автомата, широко используемого в Корпусе колониальной морской пехоты. Использует безгильзовые патроны калибра 10х24 мм.
 ent-RMCWeaponRifleM54CMK1Unloaded = { ent-RMCWeaponRifleM54CMK1 }
     .suffix = Unloaded
     .desc = { ent-RMCWeaponRifleM54CMK1.desc }

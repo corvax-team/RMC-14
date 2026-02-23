@@ -1,2 +1,2 @@
-ent-RMCSuitRadiation = radiation suit
-    .desc = A suit that protects against radiation. Label: Made with lead, do not eat insulation.
+ent-RMCSuitRadiation = Противорадиационный костюм
+    .desc = Костюм, защищающий от радиации. Надпись на этикетке: Изготовлен из свинца, не употреблять.
