@@ -106,6 +106,21 @@ namespace Content.Server.Database
 
         public async Task SaveCharacterSlotAsync(NetUserId userId, ICharacterProfile? profile, int slot)
         {
+            // CCM rework lobby - start
+            try
+            {
+                await SaveCharacterSlotInternal(userId, profile, slot);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                await SaveCharacterSlotInternal(userId, profile, slot);
+            }
+            // CCM rework lobby - end
+        }
+
+        private async Task SaveCharacterSlotInternal(NetUserId userId, ICharacterProfile? profile, int slot)
+        {
+            // CCM rework lobby - start
             await using var db = await GetDb();
 
             if (profile is null)
@@ -150,6 +165,7 @@ namespace Content.Server.Database
             }
 
             await db.DbContext.SaveChangesAsync();
+            // CCM rework lobby - end
         }
 
         private static async Task DeleteCharacterSlot(ServerDbContext db, NetUserId userId, int slot)
@@ -328,10 +344,15 @@ namespace Content.Server.Database
                     ArmorName = profile.NamedItems?.ArmorName,
                     SentryName = profile.NamedItems?.SentryName,
                 },
-                profile.PlaytimePerks,
-                profile.XenoPrefix,
-                profile.XenoPostfix
-            );
+                  profile.PlaytimePerks,
+                  profile.XenoPrefix,
+                  profile.XenoPostfix,
+                  false,
+                  false,
+                  string.Empty,
+                  "agnostic",
+                  "neutral"
+              );
         }
 
         private static Profile ConvertProfiles(HumanoidCharacterProfile humanoid, int slot, Profile? profile = null)

@@ -1,6 +1,7 @@
 <BoxContainer Name="Container" xmlns="https://spacestation14.io"
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+         xmlns:style="clr-namespace:Content.Client.Stylesheets"
          Orientation="Horizontal"
          HorizontalExpand="True"
          MouseFilter="Ignore"
@@ -8,7 +9,7 @@
     <Button Name="SelectButton" ToggleMode="True" Margin="0 0 5 0" HorizontalExpand="True"/>
     <PanelContainer SetSize="64 64" HorizontalAlignment="Right">
         <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BackgroundColor="#1B1B1E" />
+            <graphics:StyleBoxFlat BackgroundColor="{x:Static style:StyleNano.PanelDark}" />
         </PanelContainer.PanelOverride>
         <SpriteView Name="Sprite" Scale="4 4" MouseFilter="Stop"/>
     </PanelContainer>

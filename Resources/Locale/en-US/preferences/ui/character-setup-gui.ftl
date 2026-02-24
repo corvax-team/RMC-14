@@ -16,3 +16,10 @@ character-setup-gui-save-panel-nosave = Don't save
 character-setup-gui-save-panel-cancel = Cancel
 
 # CCM priority rework
+character-setup-gui-title = Character setup
+character-setup-gui-new-character = New character
+character-setup-gui-save-character = Save
+character-setup-gui-reset-character = Reset
+character-setup-gui-delete-character = Delete character
+character-setup-gui-delete-confirm = Confirm
+character-setup-gui-delete-confirm-countdown = Confirm ({$seconds})

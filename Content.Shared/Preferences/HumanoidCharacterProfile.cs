@@ -150,6 +150,21 @@ namespace Content.Shared.Preferences
         [DataField]
         public string XenoPostfix { get; private set; } = string.Empty;
 
+        [DataField]
+        public bool AlwaysRandomName { get; private set; }
+
+        [DataField]
+        public bool AlwaysRandomAppearance { get; private set; }
+
+        [DataField]
+        public string OriginId { get; private set; } = string.Empty;
+
+        [DataField]
+        public string ReligionId { get; private set; } = "agnostic";
+
+        [DataField]
+        public string CorporateRelationId { get; private set; } = "neutral";
+
         public HumanoidCharacterProfile(
             string name,
             string flavortext,
@@ -169,7 +184,12 @@ namespace Content.Shared.Preferences
             SharedRMCNamedItems namedItems,
             bool playtimePerks,
             string xenoPrefix,
-            string xenoPostfix)
+            string xenoPostfix,
+            bool alwaysRandomName,
+            bool alwaysRandomAppearance,
+            string originId,
+            string religionId,
+            string corporateRelationId)
         {
             Name = name;
             FlavorText = flavortext;
@@ -195,6 +215,11 @@ namespace Content.Shared.Preferences
             PlaytimePerks = playtimePerks;
             XenoPrefix = xenoPrefix;
             XenoPostfix = xenoPostfix;
+            AlwaysRandomName = alwaysRandomName;
+            AlwaysRandomAppearance = alwaysRandomAppearance;
+            OriginId = originId;
+            ReligionId = religionId;
+            CorporateRelationId = corporateRelationId;
         }
 
         /// <summary>Copy constructor</summary>
@@ -217,7 +242,12 @@ namespace Content.Shared.Preferences
                 other.NamedItems,
                 other.PlaytimePerks,
                 other.XenoPrefix,
-                other.XenoPostfix)
+                other.XenoPostfix,
+                other.AlwaysRandomName,
+                other.AlwaysRandomAppearance,
+                other.OriginId,
+                other.ReligionId,
+                other.CorporateRelationId)
         {
         }
 
@@ -263,7 +293,12 @@ namespace Content.Shared.Preferences
                 new SharedRMCNamedItems(),
                 false,
                 string.Empty,
-                string.Empty
+                string.Empty,
+                false,
+                false,
+                string.Empty,
+                "agnostic",
+                "neutral"
             );
         }
 
@@ -337,7 +372,12 @@ namespace Content.Shared.Preferences
                 new SharedRMCNamedItems(),
                 false,
                 string.Empty,
-                string.Empty
+                string.Empty,
+                false,
+                false,
+                string.Empty,
+                "agnostic",
+                "neutral"
             );
         }
 
@@ -409,6 +449,31 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithXenoPostfix(string postfix)
         {
             return new(this) { XenoPostfix = postfix };
+        }
+
+        public HumanoidCharacterProfile WithAlwaysRandomName(bool value)
+        {
+            return new(this) { AlwaysRandomName = value };
+        }
+
+        public HumanoidCharacterProfile WithAlwaysRandomAppearance(bool value)
+        {
+            return new(this) { AlwaysRandomAppearance = value };
+        }
+
+        public HumanoidCharacterProfile WithOriginId(string originId)
+        {
+            return new(this) { OriginId = originId };
+        }
+
+        public HumanoidCharacterProfile WithReligionId(string religionId)
+        {
+            return new(this) { ReligionId = religionId };
+        }
+
+        public HumanoidCharacterProfile WithCorporateRelationId(string corporateRelationId)
+        {
+            return new(this) { CorporateRelationId = corporateRelationId };
         }
 
         public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<ProtoId<JobPrototype>, JobPriority>> jobPriorities)

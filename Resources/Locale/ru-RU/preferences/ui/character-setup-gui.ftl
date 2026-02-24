@@ -14,3 +14,10 @@ character-setup-gui-save-panel-save = Сохранить
 character-setup-gui-save-panel-nosave = Не сохранять
 character-setup-gui-save-panel-cancel = Отмена
 # CCM priority rework
+character-setup-gui-title = Персонаж
+character-setup-gui-new-character = Новый персонаж
+character-setup-gui-save-character = Сохранить
+character-setup-gui-reset-character = Сбросить
+character-setup-gui-delete-character = Удалить персонажа
+character-setup-gui-delete-confirm = Подтвердить
+character-setup-gui-delete-confirm-countdown = Подтвердить ({$seconds})

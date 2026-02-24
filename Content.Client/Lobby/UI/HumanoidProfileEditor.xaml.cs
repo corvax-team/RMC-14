@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Threading;
+using System.Collections.Generic;
+using Content.Client._CCM.UserInterface.Controls;
 using Content.Client._RMC14.NamedItems;
 using Content.Client.Humanoid;
 using Content.Client.Lobby.UI.Loadouts;
@@ -70,6 +72,24 @@ namespace Content.Client.Lobby.UI
 
         private FlavorText.FlavorText? _flavorText;
         private TextEdit? _flavorTextEdit;
+        private DefaultCMWindow? _originSelectWindow;
+        // CCM rework lobby - start
+        private DefaultCMWindow? _hairStyleWindow;
+        private DefaultCMWindow? _facialHairWindow;
+        private DefaultCMWindow? _eyeColorWindow;
+        private DefaultCMWindow? _appearanceMarkingsWindow;
+        private Control? _hairStyleHost;
+        private Control? _facialHairHost;
+        private Control? _eyeColorHost;
+        private Control? _appearanceMarkingsHost;
+        private int _hairStyleHostIndex;
+        private int _facialHairHostIndex;
+        private int _eyeColorHostIndex;
+        private int _appearanceMarkingsHostIndex;
+        // CCM rework lobby - end
+        private readonly List<(string Id, string LocId)> _originOptions = new();
+        private readonly List<(string Id, string LocId)> _religionOptions = new();
+        private readonly List<(string Id, string LocId)> _corporateRelationOptions = new();
 
         // One at a time.
         private LoadoutWindow? _loadoutWindow;
@@ -81,6 +101,8 @@ namespace Content.Client.Lobby.UI
         /// If we're attempting to save.
         /// </summary>
         public event Action? Save;
+        public event Action<HumanoidCharacterProfile?>? ProfileChanged;
+        public event Action<bool>? ShowClothesChanged;
 
         /// <summary>
         /// Entity used for the profile editor preview
@@ -119,6 +141,8 @@ namespace Content.Client.Lobby.UI
         private ColorSelectorSliders _rgbSkinColorSelector;
 
         private bool _isDirty;
+        private bool _syncingPreferenceUnavailable;
+        private StyleNano.UiColorTheme _appliedTheme;
 
         private static readonly ProtoId<GuideEntryPrototype> DefaultSpeciesGuidebook = "Species";
 
@@ -193,13 +217,14 @@ namespace Content.Client.Lobby.UI
             NameEdit.IsValid = args => args.Length <= _maxNameLength;
             NameRandomize.OnPressed += args => RandomizeName();
             RandomizeEverythingButton.OnPressed += args => { RandomizeEverything(); };
-            WarningLabel.SetMarkup($"[color=red]{Loc.GetString("humanoid-profile-editor-naming-rules-warning")}[/color]");
+            AlwaysRandomNameButton.OnPressed += _ => SetAlwaysRandomName(AlwaysRandomNameButton.Pressed);
+            AlwaysRandomAppearanceButton.OnPressed += _ => SetAlwaysRandomAppearance(AlwaysRandomAppearanceButton.Pressed);
 
             #endregion Name
 
             #region Appearance
 
-            TabContainer.SetTabTitle(0, Loc.GetString("humanoid-profile-editor-appearance-tab"));
+            TabContainer.SetTabTitle(0, Loc.GetString("humanoid-profile-editor-character-tab"));
 
             #region Sex
 
@@ -238,6 +263,54 @@ namespace Content.Client.Lobby.UI
 
             #endregion Gender
 
+            // CCM rework lobby - start
+            _originOptions.Add(("east-europe", "humanoid-profile-editor-origin-east-europe"));
+            _originOptions.Add(("west-europe", "humanoid-profile-editor-origin-west-europe"));
+            _originOptions.Add(("north-africa", "humanoid-profile-editor-origin-north-africa"));
+            _originOptions.Add(("south-africa", "humanoid-profile-editor-origin-south-africa"));
+            _originOptions.Add(("north-america", "humanoid-profile-editor-origin-north-america"));
+            _originOptions.Add(("south-america", "humanoid-profile-editor-origin-south-america"));
+            _originOptions.Add(("united-states", "humanoid-profile-editor-origin-united-states"));
+            _originOptions.Add(("east-asia", "humanoid-profile-editor-origin-east-asia"));
+            _originOptions.Add(("south-asia", "humanoid-profile-editor-origin-south-asia"));
+            _originOptions.Add(("oceania", "humanoid-profile-editor-origin-oceania"));
+
+            _religionOptions.Add(("agnostic", "humanoid-profile-editor-religion-agnostic"));
+            _religionOptions.Add(("christianity", "humanoid-profile-editor-religion-christianity"));
+            _religionOptions.Add(("islam", "humanoid-profile-editor-religion-islam"));
+            _religionOptions.Add(("buddhism", "humanoid-profile-editor-religion-buddhism"));
+            _religionOptions.Add(("hinduism", "humanoid-profile-editor-religion-hinduism"));
+            _religionOptions.Add(("judaism", "humanoid-profile-editor-religion-judaism"));
+            _religionOptions.Add(("other", "humanoid-profile-editor-religion-other"));
+
+            _corporateRelationOptions.Add(("loyal", "humanoid-profile-editor-corporate-loyal"));
+            _corporateRelationOptions.Add(("neutral", "humanoid-profile-editor-corporate-neutral"));
+            _corporateRelationOptions.Add(("distant", "humanoid-profile-editor-corporate-distant"));
+            _corporateRelationOptions.Add(("hostile", "humanoid-profile-editor-corporate-hostile"));
+
+            OriginButton.OnPressed += _ => OpenOriginSelectWindow();
+
+            for (var i = 0; i < _religionOptions.Count; i++)
+                ReligionButton.AddItem(Loc.GetString(_religionOptions[i].LocId), i);
+
+            ReligionButton.OnItemSelected += args =>
+            {
+                ReligionButton.SelectId(args.Id);
+                SetReligion(_religionOptions[args.Id].Id);
+            };
+
+            for (var i = 0; i < _corporateRelationOptions.Count; i++)
+                CorporateRelationButton.AddItem(Loc.GetString(_corporateRelationOptions[i].LocId), i);
+
+            CorporateRelationButton.OnItemSelected += args =>
+            {
+                CorporateRelationButton.SelectId(args.Id);
+                SetCorporateRelation(_corporateRelationOptions[args.Id].Id);
+            };
+
+            BackgroundInfoButton.OnPressed += _ => OpenBackgroundInfoWindow();
+            // CCM rework lobby - end
+
             RefreshSpecies();
 
             SpeciesButton.OnItemSelected += args =>
@@ -265,6 +338,40 @@ namespace Content.Client.Lobby.UI
             #endregion
 
             #region Hair
+
+            // CCM rework lobby - start
+            HairStyleToggleButton.OnPressed += args =>
+            {
+                if (args.Button.Pressed)
+                    OpenHairStyleWindow();
+                else
+                    _hairStyleWindow?.Close();
+            };
+
+            FacialHairToggleButton.OnPressed += args =>
+            {
+                if (args.Button.Pressed)
+                    OpenFacialHairWindow();
+                else
+                    _facialHairWindow?.Close();
+            };
+
+            EyeColorToggleButton.OnPressed += args =>
+            {
+                if (args.Button.Pressed)
+                    OpenEyeColorWindow();
+                else
+                    _eyeColorWindow?.Close();
+            };
+
+            AppearanceMarkingsToggleButton.OnPressed += args =>
+            {
+                if (args.Button.Pressed)
+                    OpenAppearanceMarkingsWindow();
+                else
+                    _appearanceMarkingsWindow?.Close();
+            };
+            // CCM rework lobby - end
 
             HairStylePicker.OnMarkingSelect += newStyle =>
             {
@@ -477,21 +584,50 @@ namespace Content.Client.Lobby.UI
 
             #region Jobs
 
-            TabContainer.SetTabTitle(1, Loc.GetString("humanoid-profile-editor-jobs-tab"));
+            TabContainer.SetTabTitle(1, Loc.GetString("humanoid-profile-editor-marines-tab"));
+            TabContainer.SetTabTitle(2, Loc.GetString("humanoid-profile-editor-xeno-tab"));
+            TabContainer.SetTabTitle(3, Loc.GetString("humanoid-profile-editor-other-tab"));
 
-            PreferenceUnavailableButton.AddItem(
+            PreferenceUnavailableButtonMarines.AddItem(
                 Loc.GetString("humanoid-profile-editor-preference-unavailable-stay-in-lobby-button"),
                 (int) PreferenceUnavailableMode.StayInLobby);
-            PreferenceUnavailableButton.AddItem(
+            PreferenceUnavailableButtonMarines.AddItem(
                 Loc.GetString("humanoid-profile-editor-preference-unavailable-spawn-as-overflow-button",
                               ("overflowJob", Loc.GetString(SharedGameTicker.FallbackOverflowJobName))),
                 (int) PreferenceUnavailableMode.SpawnAsOverflow);
 
-            PreferenceUnavailableButton.OnItemSelected += args =>
+            PreferenceUnavailableButtonXeno.AddItem(
+                Loc.GetString("humanoid-profile-editor-preference-unavailable-stay-in-lobby-button"),
+                (int) PreferenceUnavailableMode.StayInLobby);
+            PreferenceUnavailableButtonXeno.AddItem(
+                Loc.GetString("humanoid-profile-editor-preference-unavailable-spawn-as-overflow-button",
+                    ("overflowJob", Loc.GetString(SharedGameTicker.FallbackOverflowJobName))),
+                (int) PreferenceUnavailableMode.SpawnAsOverflow);
+
+            PreferenceUnavailableButtonMarines.OnItemSelected += args =>
             {
-                PreferenceUnavailableButton.SelectId(args.Id);
+                if (_syncingPreferenceUnavailable)
+                    return;
+
+                _syncingPreferenceUnavailable = true;
+                PreferenceUnavailableButtonMarines.SelectId(args.Id);
+                PreferenceUnavailableButtonXeno.SelectId(args.Id);
                 Profile = Profile?.WithPreferenceUnavailable((PreferenceUnavailableMode) args.Id);
                 SetDirty();
+                _syncingPreferenceUnavailable = false;
+            };
+
+            PreferenceUnavailableButtonXeno.OnItemSelected += args =>
+            {
+                if (_syncingPreferenceUnavailable)
+                    return;
+
+                _syncingPreferenceUnavailable = true;
+                PreferenceUnavailableButtonXeno.SelectId(args.Id);
+                PreferenceUnavailableButtonMarines.SelectId(args.Id);
+                Profile = Profile?.WithPreferenceUnavailable((PreferenceUnavailableMode) args.Id);
+                SetDirty();
+                _syncingPreferenceUnavailable = false;
             };
 
             _jobCategories = new Dictionary<string, BoxContainer>();
@@ -501,15 +637,9 @@ namespace Content.Client.Lobby.UI
 
             #endregion Jobs
 
-            TabContainer.SetTabTitle(2, Loc.GetString("humanoid-profile-editor-antags-tab"));
-            // TODO RMC14 antags
-            TabContainer.SetTabVisible(2, false);
-
             RefreshTraits();
 
             #region Markings
-
-            TabContainer.SetTabTitle(4, Loc.GetString("humanoid-profile-editor-markings-tab"));
 
             Markings.OnMarkingAdded += OnMarkingChange;
             Markings.OnMarkingRemoved += OnMarkingChange;
@@ -540,6 +670,9 @@ namespace Content.Client.Lobby.UI
             ShowClothes.OnToggled += args =>
             {
                 ReloadPreview();
+                // CCM rework lobby - start
+                ShowClothesChanged?.Invoke(ShowClothes.Pressed);
+                // CCM rework lobby - end
             };
 
             SpeciesInfoButton.OnPressed += OnSpeciesInfoButtonPressed;
@@ -559,8 +692,7 @@ namespace Content.Client.Lobby.UI
             }
 
             var namedItems = UserInterfaceManager.GetUIController<NamedItemsUIController>();
-            TabContainer.SetTabTitle(5, Loc.GetString("rmc-ui-named-items"));
-            TabContainer.SetTabVisible(5, namedItems.Available);
+            // Named items remain hidden in the misc tab for now.
             NamedItems.PrimaryGun.OnTextChanged += args => SetItemName(RMCNamedItemType.PrimaryGun, args.Text);
             NamedItems.Sidearm.OnTextChanged += args => SetItemName(RMCNamedItemType.Sidearm, args.Text);
             NamedItems.Helmet.OnTextChanged += args => SetItemName(RMCNamedItemType.Helmet, args.Text);
@@ -568,38 +700,87 @@ namespace Content.Client.Lobby.UI
             NamedItems.Sentry.OnTextChanged += args => SetItemName(RMCNamedItemType.Sentry, args.Text);
 
             UpdateSpeciesGuidebookIcon();
+            // CCM rework lobby - start
+            ApplyThemeColors(force: true, refreshJobs: false);
+            // CCM rework lobby - end
             IsDirty = false;
         }
+
+        // CCM rework lobby - start
+        protected override void FrameUpdate(FrameEventArgs args)
+        {
+            base.FrameUpdate(args);
+            ApplyThemeColors();
+        }
+
+        private void ApplyThemeColors(bool force = false, bool refreshJobs = true)
+        {
+            var theme = StyleNano.CurrentTheme;
+            if (!force && theme == _appliedTheme)
+                return;
+
+            _appliedTheme = theme;
+
+            var sectionBackground = theme == StyleNano.UiColorTheme.Blue
+                ? Color.FromHex("#0E2950").WithAlpha(0.93f)
+                : Color.FromHex("#0A2C18").WithAlpha(0.9f);
+            var sectionBorder = theme == StyleNano.UiColorTheme.Blue
+                ? Color.FromHex("#165197").WithAlpha(0.95f)
+                : Color.FromHex("#2B7E45").WithAlpha(0.95f);
+            var dividerColor = sectionBorder;
+            var tabsPanelBackground = theme == StyleNano.UiColorTheme.Blue
+                ? Color.FromHex("#0D2242").WithAlpha(0.95f)
+                : Color.FromHex("#142B1C").WithAlpha(0.94f);
+            var tabsPanelBorder = theme == StyleNano.UiColorTheme.Blue
+                ? Color.FromHex("#1B5CA7").WithAlpha(0.92f)
+                : Color.FromHex("#2F8A51").WithAlpha(0.9f);
+
+            StyleBoxFlat BuildSectionBox()
+            {
+                return new StyleBoxFlat
+                {
+                    BackgroundColor = sectionBackground,
+                    BorderColor = sectionBorder,
+                    BorderThickness = new Thickness(1f),
+                    ContentMarginTopOverride = 10f,
+                    ContentMarginBottomOverride = 10f,
+                    ContentMarginLeftOverride = 10f,
+                    ContentMarginRightOverride = 10f,
+                };
+            }
+
+            CharacterBlockContainer.PanelOverride = BuildSectionBox();
+            AppearanceBlockContainer.PanelOverride = BuildSectionBox();
+            BackgroundBlockContainer.PanelOverride = BuildSectionBox();
+            ProfileHighlight.PanelOverride = BuildSectionBox();
+
+            CharacterBlockDivider.PanelOverride = new StyleBoxFlat { BackgroundColor = dividerColor };
+            AppearanceBlockDivider.PanelOverride = new StyleBoxFlat { BackgroundColor = dividerColor };
+            BackgroundBlockDivider.PanelOverride = new StyleBoxFlat { BackgroundColor = dividerColor };
+
+            TabContainer.PanelStyleBoxOverride = new StyleBoxFlat
+            {
+                BackgroundColor = tabsPanelBackground,
+                BorderColor = tabsPanelBorder,
+                BorderThickness = new Thickness(1f)
+            };
+
+            if (refreshJobs)
+                RefreshJobs();
+        }
+        // CCM rework lobby - end
 
         /// <summary>
         /// Refreshes the flavor text editor status.
         /// </summary>
         public void RefreshFlavorText()
         {
-            if (_allowFlavorText)
-            {
-                if (_flavorText != null)
-                    return;
+            if (_flavorText != null)
+                return;
 
-                _flavorText = new FlavorText.FlavorText();
-                TabContainer.AddChild(_flavorText);
-                TabContainer.SetTabTitle(TabContainer.ChildCount - 1, Loc.GetString("humanoid-profile-editor-flavortext-tab"));
-                _flavorTextEdit = _flavorText.CFlavorTextInput;
-
-                _flavorText.OnFlavorTextChanged += OnFlavorTextChange;
-            }
-            else
-            {
-                if (_flavorText == null)
-                    return;
-
-                TabContainer.RemoveChild(_flavorText);
-                _flavorText.OnFlavorTextChanged -= OnFlavorTextChange;
-                _flavorText.Dispose();
-                _flavorTextEdit?.Dispose();
-                _flavorTextEdit = null;
-                _flavorText = null;
-            }
+            _flavorText = new FlavorText.FlavorText();
+            _flavorTextEdit = _flavorText.CFlavorTextInput;
+            _flavorText.OnFlavorTextChanged += OnFlavorTextChange;
         }
 
         /// <summary>
@@ -610,7 +791,6 @@ namespace Content.Client.Lobby.UI
             TraitsList.DisposeAllChildren();
 
             var traits = _prototypeManager.EnumeratePrototypes<TraitPrototype>().OrderBy(t => Loc.GetString(t.Name)).ToList();
-            TabContainer.SetTabTitle(3, Loc.GetString("humanoid-profile-editor-traits-tab"));
 
             if (traits.Count < 1)
             {
@@ -813,6 +993,9 @@ namespace Content.Client.Lobby.UI
 
         private void SetDirty()
         {
+            // CCM rework lobby - start
+            ProfileChanged?.Invoke(Profile);
+            // CCM rework lobby - end
             // If it equals default then reset the button.
             if (Profile == null || _preferencesManager.Preferences?.SelectedCharacter.MemberwiseEquals(Profile) == true)
             {
@@ -834,7 +1017,6 @@ namespace Content.Client.Lobby.UI
 
         public void RefreshRMC(SharedRMCPatronTier? tier)
         {
-            TabContainer.SetTabVisible(5, tier is { NamedItems: true });
         }
 
         /// <summary>
@@ -863,6 +1045,18 @@ namespace Content.Client.Lobby.UI
         /// Resets the profile to the defaults.
         /// </summary>
         public void ResetToDefault()
+        {
+            SetProfile(
+                (HumanoidCharacterProfile?) _preferencesManager.Preferences?.SelectedCharacter,
+                _preferencesManager.Preferences?.SelectedCharacterIndex);
+        }
+
+        public void RequestSave()
+        {
+            Save?.Invoke();
+        }
+
+        public void RequestReset()
         {
             SetProfile(
                 (HumanoidCharacterProfile?) _preferencesManager.Preferences?.SelectedCharacter,
@@ -898,6 +1092,12 @@ namespace Content.Client.Lobby.UI
             UpdatePlaytimePerks();
             UpdateXenoPrefix();
             UpdateXenoPostfix();
+            UpdateAlwaysRandomToggles();
+            UpdateOriginButton();
+            UpdateReligionButton();
+            UpdateCorporateRelationButton();
+            BackgroundInfoButton.Disabled = false;
+            SetBackgroundInfoExpanded(false);
 
             RefreshAntags();
             RefreshJobs();
@@ -909,8 +1109,15 @@ namespace Content.Client.Lobby.UI
 
             if (Profile != null)
             {
-                PreferenceUnavailableButton.SelectId((int) Profile.PreferenceUnavailable);
+                _syncingPreferenceUnavailable = true;
+                PreferenceUnavailableButtonMarines.SelectId((int) Profile.PreferenceUnavailable);
+                PreferenceUnavailableButtonXeno.SelectId((int) Profile.PreferenceUnavailable);
+                _syncingPreferenceUnavailable = false;
             }
+            // CCM rework lobby - start
+            ProfileChanged?.Invoke(Profile);
+            ShowClothesChanged?.Invoke(ShowClothes.Pressed);
+            // CCM rework lobby - end
         }
 
 
@@ -954,12 +1161,51 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         public void RefreshJobs()
         {
-            JobList.DisposeAllChildren();
+            JobListMarines.DisposeAllChildren();
+            JobListXeno.DisposeAllChildren();
             _jobCategories.Clear();
             _jobPriorities.Clear();
             _jobChanceLabels.Clear();
             _jobChanceUnderlines.Clear();
-            var firstCategory = true;
+            var firstMarinesCategory = true;
+            var firstXenoCategory = true;
+            var marinesNextLightStripe = true;
+            var xenoNextLightStripe = true;
+
+            // CCM rework lobby - start
+            var isBlueTheme = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue;
+            var rowLightColor = (isBlueTheme ? Color.FromHex("#14355F") : Color.FromHex("#134F27")).WithAlpha(0.74f);
+            var rowDarkColor = (isBlueTheme ? Color.FromHex("#0D2340") : Color.FromHex("#0D351A")).WithAlpha(0.74f);
+            var headerLightColor = (isBlueTheme ? Color.FromHex("#184472") : Color.FromHex("#1A6432")).WithAlpha(0.80f);
+            var headerDarkColor = (isBlueTheme ? Color.FromHex("#113257") : Color.FromHex("#124926")).WithAlpha(0.80f);
+            var stripeBorderColor = StyleNano.NanoGold.WithAlpha(0.75f);
+
+            bool ConsumeStripeLight(bool isXenoDepartment)
+            {
+                if (isXenoDepartment)
+                {
+                    var light = xenoNextLightStripe;
+                    xenoNextLightStripe = !xenoNextLightStripe;
+                    return light;
+                }
+
+                var marinesLight = marinesNextLightStripe;
+                marinesNextLightStripe = !marinesNextLightStripe;
+                return marinesLight;
+            }
+
+            Color NextCategoryStripeColor(bool isXenoDepartment)
+            {
+                var light = ConsumeStripeLight(isXenoDepartment);
+                return light ? headerLightColor : headerDarkColor;
+            }
+
+            Color NextRoleStripeColor(bool isXenoDepartment)
+            {
+                var light = ConsumeStripeLight(isXenoDepartment);
+                return light ? rowLightColor : rowDarkColor;
+            }
+            // CCM rework lobby - end
 
             // Get all displayed departments
             var departments = new List<DepartmentPrototype>();
@@ -973,6 +1219,24 @@ namespace Content.Client.Lobby.UI
 
             departments.Sort(DepartmentUIComparer.Instance);
 
+            bool IsXenoDepartment(DepartmentPrototype department) =>
+                department.ID.Contains("Xeno", StringComparison.OrdinalIgnoreCase) ||
+                department.Roles.Any(jobId => jobId.Id.Contains("Xeno", StringComparison.OrdinalIgnoreCase));
+
+            // Put Marine Corps department at the top of the Marines tab.
+            var marineDepartmentIndex = departments.FindIndex(d => d.ID == "CMSquad");
+            if (marineDepartmentIndex > 0)
+            {
+                var marineDepartment = departments[marineDepartmentIndex];
+                departments.RemoveAt(marineDepartmentIndex);
+
+                var firstMarineDepartmentIndex = departments.FindIndex(d => !IsXenoDepartment(d));
+                if (firstMarineDepartmentIndex < 0)
+                    firstMarineDepartmentIndex = 0;
+
+                departments.Insert(firstMarineDepartmentIndex, marineDepartment);
+            }
+
             var items = new[]
             {
                 ("humanoid-profile-editor-job-priority-first-button", (int) JobPriority.First),
@@ -983,6 +1247,8 @@ namespace Content.Client.Lobby.UI
             foreach (var department in departments)
             {
                 var departmentName = Loc.GetString(department.Name);
+                var isXenoDepartment = IsXenoDepartment(department);
+                var targetList = isXenoDepartment ? JobListXeno : JobListMarines;
 
                 if (!_jobCategories.TryGetValue(department.ID, out var category))
                 {
@@ -996,9 +1262,13 @@ namespace Content.Client.Lobby.UI
 
                     category.Visible = department.IsCM && !department.Hidden;
 
-                    if (firstCategory && category.Visible)
+                    if (isXenoDepartment && firstXenoCategory && category.Visible)
                     {
-                        firstCategory = false;
+                        firstXenoCategory = false;
+                    }
+                    else if (!isXenoDepartment && firstMarinesCategory && category.Visible)
+                    {
+                        firstMarinesCategory = false;
                     }
                     else
                     {
@@ -1010,19 +1280,26 @@ namespace Content.Client.Lobby.UI
 
                     category.AddChild(new PanelContainer
                     {
-                        PanelOverride = new StyleBoxFlat {BackgroundColor = Color.FromHex("#464966")},
+                        PanelOverride = new StyleBoxFlat
+                        {
+                            BackgroundColor = NextCategoryStripeColor(isXenoDepartment),
+                            BorderColor = stripeBorderColor,
+                            BorderThickness = new Thickness(1f),
+                        },
+                        Margin = new Thickness(0f, 0f, 0f, 2f),
                         Children =
                         {
                             new Label
                             {
                                 Text = department.CustomName ?? Loc.GetString("humanoid-profile-editor-department-jobs-label", ("departmentName", departmentName)),
-                                Margin = new Thickness(5f, 0, 0, 0)
+                                Margin = new Thickness(8f, 1f, 0f, 1f),
+                                StyleClasses = { StyleNano.StyleClassLabelHeadingBigger },
                             }
                         }
                     });
 
                     _jobCategories[department.ID] = category;
-                    JobList.AddChild(category);
+                    targetList.AddChild(category);
                 }
 
                 var jobs = department.Roles.Select(jobId => _prototypeManager.Index(jobId))
@@ -1047,7 +1324,8 @@ namespace Content.Client.Lobby.UI
 
                     var selector = new RequirementsSelector()
                     {
-                        Margin = new Thickness(3f, 3f, 3f, 0f),
+                        Margin = new Thickness(4f, 2f, 4f, 2f),
+                        HorizontalAlignment = HAlignment.Left,
                     };
                     selector.OnOpenGuidebook += OnOpenGuidebook;
 
@@ -1058,7 +1336,7 @@ namespace Content.Client.Lobby.UI
                     };
                     var jobIcon = _prototypeManager.Index(job.Icon);
                     icon.Texture = _sprite.Frame0(jobIcon.Icon);
-                    selector.Setup(items, job.LocalizedName, 200, job.LocalizedDescription, icon, job.Guides);
+                    selector.Setup(items, job.LocalizedName, 280, job.LocalizedDescription, icon, job.Guides);
 
                     if (!_requirements.IsAllowed(job, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
                     {
@@ -1113,7 +1391,7 @@ namespace Content.Client.Lobby.UI
                         Text = Loc.GetString("loadout-window"),
                         HorizontalAlignment = HAlignment.Right,
                         VerticalAlignment = VAlignment.Center,
-                        Margin = new Thickness(1f, 3f, 0f, 0f),
+                        Margin = new Thickness(2f, 0f, 2f, 0f),
                     };
 
                     var collection = IoCManager.Instance!;
@@ -1165,7 +1443,20 @@ namespace Content.Client.Lobby.UI
 
                     jobContainer.AddChild(jobStack);
                     jobContainer.AddChild(loadoutWindowBtn);
-                    category.AddChild(jobContainer);
+                    category.AddChild(new PanelContainer
+                    {
+                        PanelOverride = new StyleBoxFlat
+                        {
+                            BackgroundColor = NextRoleStripeColor(isXenoDepartment),
+                            BorderColor = stripeBorderColor,
+                            BorderThickness = new Thickness(1f),
+                        },
+                        Margin = new Thickness(0f, 2f, 0f, 0f),
+                        Children =
+                        {
+                            jobContainer
+                        }
+                    });
                 }
             }
 
@@ -1398,6 +1689,119 @@ namespace Content.Client.Lobby.UI
 
             _entManager.System<MetaDataSystem>().SetEntityName(PreviewDummy, newName);
         }
+
+        // CCM rework lobby - start
+        private void SetAlwaysRandomName(bool value)
+        {
+            Profile = Profile?.WithAlwaysRandomName(value);
+            SetDirty();
+        }
+
+        private void SetAlwaysRandomAppearance(bool value)
+        {
+            Profile = Profile?.WithAlwaysRandomAppearance(value);
+            SetDirty();
+        }
+
+        private void SetOrigin(string id)
+        {
+            Profile = Profile?.WithOriginId(id);
+            UpdateOriginButton();
+            SetDirty();
+        }
+
+        private void SetReligion(string id)
+        {
+            Profile = Profile?.WithReligionId(id);
+            SetDirty();
+        }
+
+        private void SetCorporateRelation(string id)
+        {
+            Profile = Profile?.WithCorporateRelationId(id);
+            SetDirty();
+        }
+
+        private void OpenOriginSelectWindow()
+        {
+            if (_originSelectWindow == null)
+            {
+                _originSelectWindow = new DefaultCMWindow
+                {
+                    Title = Loc.GetString("humanoid-profile-editor-origin-title")
+                };
+
+                var list = new BoxContainer
+                {
+                    Orientation = LayoutOrientation.Vertical,
+                    SeparationOverride = 4
+                };
+
+                foreach (var option in _originOptions)
+                {
+                    var button = new Button
+                    {
+                        Text = Loc.GetString(option.LocId),
+                        HorizontalExpand = true
+                    };
+
+                    var id = option.Id;
+                    button.OnPressed += _ =>
+                    {
+                        SetOrigin(id);
+                        _originSelectWindow?.Close();
+                    };
+
+                    list.AddChild(button);
+                }
+
+                _originSelectWindow.Contents.AddChild(list);
+            }
+
+            _originSelectWindow.OpenCentered();
+        }
+
+        private void OpenBackgroundInfoWindow()
+        {
+            var expanded = !BackgroundInfoInlineContainer.Visible;
+
+            if (expanded)
+                EnsureBackgroundInfoInline();
+
+            SetBackgroundInfoExpanded(expanded);
+        }
+
+        private void EnsureBackgroundInfoInline()
+        {
+            if (_flavorText == null)
+            {
+                _flavorText = new FlavorText.FlavorText();
+                _flavorText.OnFlavorTextChanged += OnFlavorTextChange;
+                _flavorTextEdit = _flavorText.CFlavorTextInput;
+                _flavorText.HorizontalExpand = true;
+            }
+            else
+            {
+                _flavorText.HorizontalExpand = true;
+            }
+
+            if (_flavorText.Parent != BackgroundInfoInlineContainer)
+            {
+                _flavorText.Orphan();
+                BackgroundInfoInlineContainer.AddChild(_flavorText);
+            }
+
+            UpdateFlavorTextEdit();
+        }
+
+        private void SetBackgroundInfoExpanded(bool expanded)
+        {
+            BackgroundInfoInlineContainer.Visible = expanded;
+            BackgroundInfoButton.Text = Loc.GetString(expanded
+                ? "humanoid-profile-editor-background-info-close"
+                : "humanoid-profile-editor-background-info-open");
+        }
+        // CCM rework lobby - end
 
         private void SetSpawnPriority(SpawnPriorityPreference newSpawnPriority)
         {
@@ -1860,6 +2264,115 @@ namespace Content.Client.Lobby.UI
             EyeColorPicker.SetData(Profile.Appearance.EyeColor);
         }
 
+        // CCM rework lobby - start
+        private void OpenHairStyleWindow()
+        {
+            if (_hairStyleWindow != null)
+                return;
+
+            _hairStyleWindow = CreatePickerWindow(
+                Loc.GetString("humanoid-profile-editor-hair-style-button"),
+                HairStylePickerContainer,
+                HairStyleToggleButton,
+                ref _hairStyleHost,
+                ref _hairStyleHostIndex,
+                () => _hairStyleWindow = null);
+        }
+
+        private void OpenFacialHairWindow()
+        {
+            if (_facialHairWindow != null)
+                return;
+
+            _facialHairWindow = CreatePickerWindow(
+                Loc.GetString("humanoid-profile-editor-facial-hair-button"),
+                FacialHairPickerContainer,
+                FacialHairToggleButton,
+                ref _facialHairHost,
+                ref _facialHairHostIndex,
+                () => _facialHairWindow = null);
+        }
+
+        private void OpenEyeColorWindow()
+        {
+            if (_eyeColorWindow != null)
+                return;
+
+            _eyeColorWindow = CreatePickerWindow(
+                Loc.GetString("humanoid-profile-editor-eye-color-button"),
+                EyeColorPickerContainer,
+                EyeColorToggleButton,
+                ref _eyeColorHost,
+                ref _eyeColorHostIndex,
+                () => _eyeColorWindow = null,
+                new Vector2(560, 200));
+        }
+
+        private void OpenAppearanceMarkingsWindow()
+        {
+            if (_appearanceMarkingsWindow != null)
+                return;
+
+            _appearanceMarkingsWindow = CreatePickerWindow(
+                Loc.GetString("humanoid-profile-editor-appearance-markings-button"),
+                AppearanceMarkingsContainer,
+                AppearanceMarkingsToggleButton,
+                ref _appearanceMarkingsHost,
+                ref _appearanceMarkingsHostIndex,
+                () => _appearanceMarkingsWindow = null);
+        }
+
+        private DefaultCMWindow CreatePickerWindow(
+            string title,
+            Control pickerContainer,
+            Button toggleButton,
+            ref Control? host,
+            ref int hostIndex,
+            Action onClosed,
+            Vector2? minSize = null)
+        {
+            if (pickerContainer.Parent != null)
+            {
+                host = pickerContainer.Parent;
+                hostIndex = pickerContainer.GetPositionInParent();
+                host.RemoveChild(pickerContainer);
+            }
+
+            pickerContainer.Visible = true;
+
+            var restoreHostLocal = host;
+            var restoreIndexLocal = hostIndex;
+
+            var window = new DefaultCMWindow
+            {
+                Title = title,
+                Resizable = false,
+                MinSize = minSize ?? new Vector2(320, 240)
+            };
+
+            window.Contents.AddChild(pickerContainer);
+            window.OnClose += () =>
+            {
+                if (pickerContainer.Parent != null)
+                    pickerContainer.Parent.RemoveChild(pickerContainer);
+
+                if (restoreHostLocal != null)
+                {
+                    restoreHostLocal.AddChild(pickerContainer);
+                    var safeIndex = Math.Clamp(restoreIndexLocal, 0, Math.Max(0, restoreHostLocal.ChildCount - 1));
+                    pickerContainer.SetPositionInParent(safeIndex);
+                }
+
+                pickerContainer.Visible = false;
+                toggleButton.Pressed = false;
+                onClosed();
+            };
+
+            window.OpenCentered();
+            return window;
+        }
+        // CCM rework lobby - end
+
         private void UpdateNamedItems()
         {
             NamedItems.PrimaryGun.Text = Profile?.NamedItems.PrimaryGunName ?? string.Empty;
@@ -1883,6 +2396,65 @@ namespace Content.Client.Lobby.UI
         {
             XenoPostfix.Text = Profile?.XenoPostfix ?? string.Empty;
         }
+
+        // CCM rework lobby - start
+        private void UpdateAlwaysRandomToggles()
+        {
+            AlwaysRandomNameButton.Pressed = Profile?.AlwaysRandomName ?? false;
+            AlwaysRandomAppearanceButton.Pressed = Profile?.AlwaysRandomAppearance ?? false;
+        }
+
+        private void UpdateOriginButton()
+        {
+            var originId = Profile?.OriginId ?? string.Empty;
+            OriginButton.Text = ResolveOptionLabel(_originOptions, originId,
+                Loc.GetString("humanoid-profile-editor-origin-select"));
+        }
+
+        private void UpdateReligionButton()
+        {
+            var religionId = Profile?.ReligionId ?? string.Empty;
+            var index = FindOptionIndex(_religionOptions, religionId);
+            if (index < 0 && _religionOptions.Count > 0)
+                index = 0;
+
+            if (index >= 0)
+                ReligionButton.SelectId(index);
+        }
+
+        private void UpdateCorporateRelationButton()
+        {
+            var relationId = Profile?.CorporateRelationId ?? string.Empty;
+            var index = FindOptionIndex(_corporateRelationOptions, relationId);
+            if (index < 0 && _corporateRelationOptions.Count > 0)
+                index = 0;
+
+            if (index >= 0)
+                CorporateRelationButton.SelectId(index);
+        }
+
+        private int FindOptionIndex(List<(string Id, string LocId)> options, string id)
+        {
+            for (var i = 0; i < options.Count; i++)
+            {
+                if (options[i].Id == id)
+                    return i;
+            }
+
+            return -1;
+        }
+
+        private string ResolveOptionLabel(List<(string Id, string LocId)> options, string id, string fallback)
+        {
+            foreach (var option in options)
+            {
+                if (option.Id == id)
+                    return Loc.GetString(option.LocId);
+            }
+
+            return fallback;
+        }
+        // CCM rework lobby - end
 
         private void UpdateSaveButton()
         {

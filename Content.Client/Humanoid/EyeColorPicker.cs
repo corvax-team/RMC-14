@@ -22,11 +22,15 @@ public sealed class EyeColorPicker : Control
     {
         var vBox = new BoxContainer
         {
-            Orientation = BoxContainer.LayoutOrientation.Vertical
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            HorizontalExpand = true,
+            VerticalExpand = true
         };
         AddChild(vBox);
 
         vBox.AddChild(_colorSelectors = new ColorSelectorSliders());
+        _colorSelectors.HorizontalExpand = true;
+        _colorSelectors.VerticalExpand = true;
         _colorSelectors.SelectorType = ColorSelectorSliders.ColorSelectorType.Hsv; // defaults color selector to HSV
 
         _colorSelectors.OnColorChanged += ColorValueChanged;

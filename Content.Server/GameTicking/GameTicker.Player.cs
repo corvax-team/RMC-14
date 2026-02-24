@@ -1,6 +1,7 @@
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
+using Content.Shared.Humanoid;
 using Content.Shared.GameWindow;
 using Content.Shared.Players;
 using Content.Shared.Preferences;
@@ -178,7 +179,26 @@ namespace Content.Server.GameTicking
 
         public HumanoidCharacterProfile GetPlayerProfile(ICommonSession p)
         {
-            return (HumanoidCharacterProfile) _prefsManager.GetPreferences(p.UserId).SelectedCharacter;
+            var profile = (HumanoidCharacterProfile) _prefsManager.GetPreferences(p.UserId).SelectedCharacter;
+
+            if (!profile.AlwaysRandomName && !profile.AlwaysRandomAppearance)
+                return profile;
+
+            // CCM rework lobby - start
+            var randomized = new HumanoidCharacterProfile(profile);
+            if (randomized.AlwaysRandomName)
+            {
+                randomized = randomized.WithName(HumanoidCharacterProfile.GetName(randomized.Species, randomized.Gender));
+            }
+
+            if (randomized.AlwaysRandomAppearance)
+            {
+                var appearance = HumanoidCharacterAppearance.Random(randomized.Species, randomized.Sex);
+                randomized = randomized.WithCharacterAppearance(appearance);
+            }
+
+            return randomized;
+            // CCM rework lobby - end
         }
 
         public void PlayerJoinGame(ICommonSession session, bool silent = false)

@@ -174,14 +174,30 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     /// </summary>
     public void ReloadCharacterSetup()
     {
+        // CCM rework lobby - start
+        HumanoidCharacterProfile? selectedProfile = null;
+        int? selectedIndex = null;
+        var prefs = _preferencesManager.Preferences;
+        if (prefs != null && prefs.Characters.Count > 0)
+        {
+            selectedIndex = prefs.SelectedCharacterIndex;
+            if (!prefs.Characters.TryGetValue(selectedIndex.Value, out var profile))
+            {
+                var fallbackSlot = prefs.Characters.Keys.First();
+                _preferencesManager.SelectCharacter(fallbackSlot);
+                selectedIndex = fallbackSlot;
+                profile = prefs.Characters[fallbackSlot];
+            }
+
+            selectedProfile = profile as HumanoidCharacterProfile;
+        }
+        // CCM rework lobby - end
         var (characterGui, profileEditor) = EnsureGui();
         characterGui.Visible = false;
         profileEditor.Visible = false;
         UpdateCharacterSetupLayout();
         characterGui.ReloadCharacterPickers();
-        profileEditor.SetProfile(
-            (HumanoidCharacterProfile?) _preferencesManager.Preferences?.SelectedCharacter,
-            _preferencesManager.Preferences?.SelectedCharacterIndex);
+        profileEditor.SetProfile(selectedProfile, selectedIndex);
         ApplyJobPriorityChances();
         UpdateCharacterSetupLayout();
         _pendingShowCharacterSetup = true;
@@ -304,7 +320,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         _characterSetup.Visible = false;
         LayoutContainer.SetAnchorPreset(_characterSetup, LayoutContainer.LayoutPreset.Center);
 
-        _characterSetup.CloseButton.OnPressed += _ =>
+        _characterSetup.CloseButtonControl.OnPressed += _ =>
         {
             // Open the save panel if we have unsaved changes.
             if (_profileEditor.Profile != null && _profileEditor.IsDirty)
@@ -359,7 +375,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         return (_characterSetup, _profileEditor);
     }
 
-    private const float CharacterSetupWidthFactor = 0.68f;
+    private const float CharacterSetupWidthFactor = 0.646f;
     private const float CharacterSetupHeightFactor = 0.68f;
 
     private void UpdateCharacterSetupLayout()
@@ -379,6 +395,18 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         var size = new Vector2(baseSize.X * CharacterSetupWidthFactor, baseSize.Y * CharacterSetupHeightFactor);
         var pos = (baseSize - size) / 2f;
         pos = new Vector2(pos.X + baseSize.X * 0.05f, MathF.Max(0f, pos.Y - baseSize.Y * 0.02f));
+
+        // CCM rework lobby - start
+        if (_characterSetup.HasManualPosition)
+        {
+            var maxPos = new Vector2(
+                MathF.Max(0f, baseSize.X - size.X),
+                MathF.Max(0f, baseSize.Y - size.Y));
+            pos = new Vector2(
+                MathF.Min(MathF.Max(0f, _characterSetup.ManualPosition.X), maxPos.X),
+                MathF.Min(MathF.Max(0f, _characterSetup.ManualPosition.Y), maxPos.Y));
+        }
+        // CCM rework lobby - end
 
         LayoutContainer.SetAnchorPreset(_characterSetup, LayoutContainer.LayoutPreset.TopLeft);
         _characterSetup.SetSize = size;

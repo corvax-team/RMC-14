@@ -121,6 +121,7 @@ namespace Content.Client.Stylesheets
         public const string StyleClassLabelSecondaryColor = "LabelSecondaryColor";
         public const string StyleClassLabelBig = "LabelBig";
         public const string StyleClassLabelSmall = "LabelSmall";
+        public const string StyleClassCMProfileFont = "CMProfileFont";
         public const string StyleClassButtonBig = "ButtonBig";
 
         public const string StyleClassButtonHelp = "HelpButton";
@@ -839,9 +840,11 @@ namespace Content.Client.Stylesheets
             };
 
             var tabContainerBoxActive = new StyleBoxFlat { BackgroundColor = PanelDark.WithAlpha(0.98f) };
-            tabContainerBoxActive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
+            tabContainerBoxActive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 8);
+            tabContainerBoxActive.SetContentMarginOverride(StyleBox.Margin.Vertical, 3);
             var tabContainerBoxInactive = new StyleBoxFlat { BackgroundColor = PanelDark.WithAlpha(0.9f) };
-            tabContainerBoxInactive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
+            tabContainerBoxInactive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 8);
+            tabContainerBoxInactive.SetContentMarginOverride(StyleBox.Margin.Vertical, 3);
 
             var progressBarBackground = new StyleBoxFlat
             {
@@ -993,7 +996,9 @@ namespace Content.Client.Stylesheets
             };
             var scrollBarHovered = new StyleBoxFlat
             {
-                BackgroundColor = ButtonColorHovered.WithAlpha(0.7f),
+                BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                    ? Color.FromHex("#123A78").WithAlpha(0.9f)
+                    : Color.FromHex("#1A5A2B").WithAlpha(0.9f),
                 ContentMarginLeftOverride = 10,
                 ContentMarginTopOverride = 10
             };
@@ -2040,10 +2045,21 @@ namespace Content.Client.Stylesheets
                 new StyleRule(new SelectorElement(typeof(TabContainer), null, null, null),
                     new[]
                     {
+                        new StyleProperty("font", notoSansBold12),
                         new StyleProperty(TabContainer.StylePropertyPanelStyleBox, tabContainerPanel),
                         new StyleProperty(TabContainer.StylePropertyTabStyleBox, tabContainerBoxActive),
                         new StyleProperty(TabContainer.StylePropertyTabStyleBoxInactive, tabContainerBoxInactive),
                     }),
+                // CCM rework lobby - start
+                new StyleRule(new SelectorElement(typeof(Content.Client._CCM.UserInterface.Controls.CenteredTabContainer), null, null, null),
+                    new[]
+                    {
+                        new StyleProperty("font", notoSansBold12),
+                        new StyleProperty(TabContainer.StylePropertyPanelStyleBox, tabContainerPanel),
+                        new StyleProperty(TabContainer.StylePropertyTabStyleBox, tabContainerBoxActive),
+                        new StyleProperty(TabContainer.StylePropertyTabStyleBoxInactive, tabContainerBoxInactive),
+                    }),
+                // CCM rework lobby - end
 
                 // ProgressBar
                 new StyleRule(new SelectorElement(typeof(ProgressBar), null, null, null),
@@ -2954,6 +2970,58 @@ namespace Content.Client.Stylesheets
 
                 // ---
 
+                // Character setup top action buttons
+                Element<Button>().Class("CharacterSetupActionButton")
+                    .Prop(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
+                        ? Color.FromHex("#123667")
+                        : Color.FromHex("#0F6B24")),
+
+                Element<Button>().Class("CharacterSetupActionButton").Pseudo(ContainerButton.StylePseudoClassNormal)
+                    .Prop(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
+                        ? Color.FromHex("#123667")
+                        : Color.FromHex("#0F6B24")),
+
+                Element<Button>().Class("CharacterSetupActionButton").Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
+                        ? Color.FromHex("#194583")
+                        : Color.FromHex("#14842D")),
+
+                Element<Button>().Class("CharacterSetupActionButton").Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
+                        ? Color.FromHex("#0E274D")
+                        : Color.FromHex("#0B531B")),
+
+                Element<Button>().Class("CharacterSetupActionButton").Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(Control.StylePropertyModulateSelf, ButtonColorDisabled),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {"CharacterSetupActionButton"}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, notoSansBold12),
+                        new StyleProperty(Label.StylePropertyFontColor, CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#86BBF2")
+                            : Color.FromHex("#9DFFB2")),
+                    }),
+
+                Element<Label>().Class("CharacterCarouselName")
+                    .Prop(Label.StylePropertyFont, notoSansBold12),
+
+                Element<Label>().Class("CharacterCarouselNameSelected")
+                    .Prop(Label.StylePropertyFont, notoSansBold14)
+                    .Prop(Label.StylePropertyFontColor, CurrentTheme == UiColorTheme.Blue
+                        ? Color.FromHex("#9FC8F2")
+                        : Color.FromHex("#BFFFD0")),
+
+                Element<Label>().Class("CharacterEditorSectionTitle")
+                    .Prop(Label.StylePropertyFont, notoSansBold14)
+                    .Prop(Label.StylePropertyFontColor, CurrentTheme == UiColorTheme.Blue
+                        ? Color.FromHex("#89B8E8")
+                        : Color.FromHex("#AFFFBD")),
+
+                // ---
+
                 // Small Button ---
                 Element<Button>().Class("ButtonSmall")
                     .Prop(ContainerButton.StylePropertyStyleBox, smallButtonBase),
@@ -3096,6 +3164,70 @@ namespace Content.Client.Stylesheets
                 Element<Label>().Class("PdaWindowFooterText")
                     .Prop(Label.StylePropertyFont, notoSans10)
                     .Prop(Label.StylePropertyFontColor, Color.FromHex("#234837")),
+
+                // CCM rework lobby - start
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(BoxContainer), new[] {StyleClassCMProfileFont}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, bedstead15),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(BoxContainer), new[] {StyleClassCMProfileFont}, null, null),
+                    new SelectorElement(typeof(RichTextLabel), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, bedstead15),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(BoxContainer), new[] {StyleClassCMProfileFont}, null, null),
+                    new SelectorElement(typeof(LineEdit), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty("font", bedstead15),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(BoxContainer), new[] {StyleClassCMProfileFont}, null, null),
+                    new SelectorElement(typeof(Content.Client._CCM.UserInterface.Controls.CenteredTabContainer), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty("font", bedstead15),
+                        new StyleProperty(TabContainer.stylePropertyTabFontColor, CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#8FC4F6")
+                            : Color.FromHex("#B7FFC8")),
+                        new StyleProperty(TabContainer.StylePropertyTabFontColorInactive, CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#679CCB")
+                            : Color.FromHex("#94D5A3")),
+                        new StyleProperty(TabContainer.StylePropertyTabStyleBox, new StyleBoxFlat
+                        {
+                            BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                                ? Color.FromHex("#0F2A52").WithAlpha(0.92f)
+                                : Color.FromHex("#0A2C18").WithAlpha(0.9f),
+                            BorderColor = Color.Transparent,
+                            BorderThickness = new Thickness(0f),
+                            ContentMarginLeftOverride = 10f,
+                            ContentMarginRightOverride = 10f,
+                            ContentMarginTopOverride = 3f,
+                            ContentMarginBottomOverride = 3f
+                        }),
+                        new StyleProperty(TabContainer.StylePropertyTabStyleBoxInactive, new StyleBoxFlat
+                        {
+                            BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                                ? Color.FromHex("#0E2548").WithAlpha(0.86f)
+                                : Color.FromHex("#0A2C18").WithAlpha(0.82f),
+                            BorderColor = Color.Transparent,
+                            BorderThickness = new Thickness(0f),
+                            ContentMarginLeftOverride = 10f,
+                            ContentMarginRightOverride = 10f,
+                            ContentMarginTopOverride = 3f,
+                            ContentMarginBottomOverride = 3f
+                        }),
+                    }),
+                // CCM rework lobby - end
 
                 // Fancy Tree
                 Element<ContainerButton>().Identifier(TreeItem.StyleIdentifierTreeButton)
