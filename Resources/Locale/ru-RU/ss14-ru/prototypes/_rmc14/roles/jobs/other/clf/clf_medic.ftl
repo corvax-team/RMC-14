@@ -1,3 +1,3 @@
-ent-RMCRandomHumanoidCLFMedic = clf ghost role medic
+ent-RMCRandomHumanoidCLFMedic = Призрачная роль Медика КФО
     .suffix = Spawner, Player
     .desc = { "" }

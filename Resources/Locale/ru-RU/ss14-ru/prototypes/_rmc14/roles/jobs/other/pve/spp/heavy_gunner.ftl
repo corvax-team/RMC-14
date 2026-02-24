@@ -1,3 +1,3 @@
-ent-RMCSpawnPointSPPGunnerPVE = spp heavy gunner spawn point
+ent-RMCSpawnPointSPPGunnerPVE = Точка спавна Тяжёлого Пулемётчика СССП
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }

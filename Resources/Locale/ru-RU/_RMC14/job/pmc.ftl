@@ -54,7 +54,7 @@ rmc-ghost-name-pmc-leader = Командир Vitezstvi (Дружественны
 rmc-job-name-pmc-leader = Командир
 rmc-job-prefix-pmc-leader = КомОт
 
-rmc-ghost-name-pmc-lead-investigator = Ведущий Исследователь Vitezstvi (Нейтральный)
+rmc-ghost-name-pmc-lead-investigator = Ведущий Исследователь Vitezstvi (Дружественный)
 rmc-job-name-pmc-lead-investigator = Ведущий Исследователь
 rmc-job-prefix-pmc-lead-investigator = ВИ
 
