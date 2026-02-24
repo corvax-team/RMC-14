@@ -10,5 +10,5 @@ ent-RMCHardhatWhite = { ent-RMCHardHat }
     .desc = { ent-RMCHardHat.desc }
 ent-RMCHardhatWhiteAlt = Шахтёрский шлем Ча́йнí Комбайн
     .desc = { ent-RMCHardHat.desc }
-ent-RMCHardhatRedTMCC = Каска Тартарус-Майнинг
+ent-RMCHardhatRedTMCC = Каска Хай Рок Компани
     .desc = { ent-RMCHardhatRed.desc }

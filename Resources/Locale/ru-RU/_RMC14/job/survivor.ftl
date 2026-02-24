@@ -83,7 +83,7 @@ rmc-job-greeting-forecon = Вы — морпех из подразделения
 
   Вы [bold][color=#51A16C][font size=16]НЕ враждебны к ККМП![/font][/color][/bold]
 
-rmc-job-name-forecon = Выживший ФОРЕКОН
+rmc-job-name-forecon = Выживший СОиС
 rmc-job-description-forecon = Вы — солдат СОиС, оказавшийся один. Ваш корабль "Ганьют" потерпел крушение, и теперь вы остались на этой планете. Сделайте всё возможное, чтобы выжить!
 
 rmc-job-name-forecon-sniper = Снайпер СОиС

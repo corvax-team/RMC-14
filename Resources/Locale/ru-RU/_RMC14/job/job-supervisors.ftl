@@ -1,5 +1,5 @@
 # supervisors
-cm-job-supervisors-we-ya = корпоративному офису компании Вестон-Ямада
+cm-job-supervisors-we-ya = корпоративному офису компании Vitezstvi
 cm-job-supervisors-aso = офицеру вспомогательной поддержки
 cm-job-supervisors-co = командующему офицеру
 cm-job-supervisors-cmo = офицеру медицинской службы

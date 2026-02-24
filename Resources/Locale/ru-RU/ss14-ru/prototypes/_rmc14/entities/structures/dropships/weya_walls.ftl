@@ -1,4 +1,4 @@
-ent-RMCBaseWeyaWall = We-Ya-LWI HR-150 Бегущий
+ent-RMCBaseWeyaWall = VI-LWI HR-150 Бегущий
     .desc = { ent-CMBaseWallInvincible.desc }
 ent-RMCWeyaTailLeft1 = хвост
     .desc = { ent-RMCBaseWeyaWall.desc }

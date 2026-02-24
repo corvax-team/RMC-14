@@ -1,7 +1,7 @@
 ent-RMCDispenserBase = { "" }
     .desc = { "" }
 ent-RMCChemDispenserBase = раздатчик химикатов
-    .desc = Сложная машина для смешивания элементов в химические вещества. Продукт компании Ве-Я.
+    .desc = Сложная машина для смешивания элементов в химические вещества. Продукт компании Интердайн Фармацевтик.
 ent-RMCChemDispenserGround = { ent-RMCChemDispenserBase }
     .suffix = Наземный
     .desc = { ent-RMCChemDispenserBase.desc }
@@ -23,7 +23,7 @@ ent-RMCChemStorageResearch = { ent-RMCChemStorageBase }
     .suffix = Исследования
     .desc = { ent-RMCChemStorageBase.desc }
 ent-RMCChemDispenserCorpsmanBase = раздатчик химикатов под давлением
-    .desc = Упрощённый раздатчик химикатов, предназначенный для работы с канистрами реагентов под давлением. Продукт компании Ве-Я.
+    .desc = Упрощённый раздатчик химикатов, предназначенный для работы с канистрами реагентов под давлением. Продукт компании Интердайн Фармацевтик
 ent-RMCChemDispenserCorpsmanMedbay = { ent-RMCChemDispenserCorpsmanBase }
     .suffix = Медотсек
     .desc = { ent-RMCChemDispenserCorpsmanBase.desc }
