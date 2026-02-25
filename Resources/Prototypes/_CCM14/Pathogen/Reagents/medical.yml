@@ -1,0 +1,297 @@
+# Final Stage
+- type: reagent
+  parent: CMReagent
+  id: CCMPeptideR895a
+  name: ccm-reagent-name-peptide-r-895-a
+  group: Medicals
+  desc: ccm-reagent-desc-peptide-r-895-a
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: bitter
+  color: "#a83312"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:Toxic
+        potency: 5
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          reagent: CCMPathogen
+          min: 3
+        reagent: CCMPathogen
+        amount: -3
+      - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold
+          min: 1
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: CCMPeptideR895a
+          min: 1
+        effectProto: StatusEffectSeeingRainbow
+        type: Add
+        time: 7
+        refresh: false
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: CCMPeptideR895a
+          min: 5
+        effectProto: StatusEffectForcedSleeping
+        time: 5
+        type: Add
+      - !type:Emote
+        emote: Yawn
+        showInChat: true
+        probability: 0.1
+      - !type:Drunk
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.65
+        sprintSpeedModifier: 0.65
+
+# Stage 3
+- type: reagent
+  parent: CMReagent
+  id: CCMPeptideR
+  name: ccm-reagent-name-peptide-r-catalyst
+  group: Medicals
+  desc: ccm-reagent-desc-peptide-r-catalyst
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: bitter
+  color: "#9b4941"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:Toxic
+        potency: 3
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: CCMPeptideR895a
+          min: 1
+        effectProto: StatusEffectSeeingRainbow
+        type: Add
+        time: 10
+        refresh: false
+      - !type:Drunk
+
+- type: reagent
+  parent: CMReagent
+  id: CCMPeptide800
+  name: ccm-reagent-name-peptide-800
+  group: Medical
+  desc: ccm-reagent-desc-peptide-800
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: bitter
+  color: "#91442f"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold
+          min: 1
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: CCMPeptideR895a
+          min: 1
+        effectProto: StatusEffectSeeingRainbow
+        type: Add
+        time: 10
+        refresh: false
+      - !type:Drunk
+
+- type: reagent
+  parent: CMReagent
+  id: CCMPeptide95a
+  name: ccm-reagent-name-peptide-95-a
+  group: Medical
+  desc: ccm-reagent-desc-peptide-95-a
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: bitter
+  color: "#D04D1A"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:Emote
+        emote: Yawn
+        showInChat: true
+        probability: 0.1
+      - !type:Drunk
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: CCMPeptideR895a
+          min: 1
+        effectProto: StatusEffectForcedSleeping
+        time: 3
+        type: Add
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.65
+        sprintSpeedModifier: 0.65
+
+# Stage 2
+- type: reagent
+  parent: CMReagent
+  id: CCMDirtyPeptideR
+  name: ccm-reagent-name-dirty-peptide-r-catalyst
+  group: Medicals
+  desc: ccm-reagent-desc-dirty-peptide-r-catalyst
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: bitter
+  color: "#b65d55"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:Toxic
+        potency: 10
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: CCMDirtyPeptideR
+          min: 1
+        effectProto: StatusEffectSeeingRainbow
+        type: Add
+        time: 15
+        refresh: false
+      - !type:Drunk
+
+- type: reagent
+  parent: CMReagent
+  id: CCMDirtyPeptide800
+  name: ccm-reagent-name-dirty-peptide-800
+  group: Medical
+  desc: ccm-reagent-desc-dirty-peptide-800
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: bitter
+  color: "#b46f5c"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold
+          min: 1
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: CCMDirtyPeptide800
+          min: 1
+        effectProto: StatusEffectSeeingRainbow
+        type: Add
+        time: 15
+        refresh: false
+      - !type:Drunk
+
+- type: reagent
+  parent: CMReagent
+  id: CCMDirtyPeptide95a
+  name: ccm-reagent-name-dirty-peptide-95-a
+  group: Medical
+  desc: ccm-reagent-desc-dirty-peptide-95-a
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: bitter
+  color: "#ca7f62"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:Emote
+        emote: Yawn
+        showInChat: true
+        probability: 0.5
+      - !type:Drunk
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: CCMDirtyPeptide95a
+          min: 1
+        effectProto: StatusEffectForcedSleeping
+        time: 8
+        type: Add
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.5
+        sprintSpeedModifier: 0.5
+
+# Stage 1
+- type: reagent
+  parent: CMReagent
+  id: CCMUnstablePeptideR
+  name: ccm-reagent-name-unstable-peptide-r-catalyst
+  group: Medicals
+  desc: ccm-reagent-desc-unstable-peptide-r-catalyst
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: bitter
+  color: "#814842"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:Toxic
+        potency: 15
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: CCMUnstablePeptideR
+          min: 1
+        effectProto: StatusEffectSeeingRainbow
+        type: Add
+        time: 20
+        refresh: false
+      - !type:Drunk
+
+- type: reagent
+  parent: CMReagent
+  id: CCMUnstablePeptide800
+  name: ccm-reagent-name-unstable-peptide-800
+  group: Medical
+  desc: ccm-reagent-desc-unstable-peptide-800
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: bitter
+  color: "#96513d"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold
+          min: 1
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: CCMUnstablePeptide800
+          min: 1
+        effectProto: StatusEffectSeeingRainbow
+        type: Add
+        time: 20
+        refresh: false
+      - !type:Drunk
+
+- type: reagent
+  parent: CMReagent
+  id: CCMUnstablePeptide95a
+  name: ccm-reagent-name-unstable-peptide-95-a
+  group: Medical
+  desc: ccm-reagent-desc-unstable-peptide-95-a
+  physicalDesc: reagent-physical-desc-opaque
+  flavor: bitter
+  color: "#ac674c"
+  metabolisms:
+    Medicine:
+      effects:
+      - !type:Emote
+        emote: Yawn
+        showInChat: true
+        probability: 1
+      - !type:Drunk
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          reagent: CCMUnstablePeptide95a
+          min: 3
+        effectProto: StatusEffectForcedSleeping
+        time: 10
+        type: Add
+      - !type:MovespeedModifier
+        walkSpeedModifier: 0.5
+        sprintSpeedModifier: 0.5

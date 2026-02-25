@@ -305,34 +305,6 @@
         crate: RMCCrateSupplyJanitor
       - cost: 2000
         crate: RMCCrateSuppliesCrayons
-    - name: Боеприпасы для техники
-      entries:
-      - cost: 3000
-        crate: CCMCrateBoxAmmoDualcannon
-      - cost: 2000
-        crate: CCMCrateBoxAmmoFrontalcannon
-      - cost: 2000
-        crate: CCMCrateBoxAmmoFlareLauncher
-    - name: Оружие
-      entries:
-      - cost: 4000
-        crate: RMCCrateM54CE2
-      - cost: 3000
-        crate: RMCCrateMK80
-      - cost: 4000
-        crate: RMCCrateM54CMK1
-      - cost: 4000
-        crate: RMCCrateXM88
-      - cost: 3000
-        crate: RMCCrateSU6
-      - cost: 4000
-        crate: RMCCrateM34
-      - cost: 3000
-        crate: RMCCrateMOU53
-      - cost: 3000
-        crate: RMCCrateXM51
-      - cost: 4000
-        crate: RMCCrateM85A1
     - name: Weapons Specialist Ammo
       entries:
       - cost: 4000
@@ -375,3 +347,39 @@
 #        Black Market Orders
 #      - cost: 5 We-Ya Funnybucks
 #        crate: RMCCrateD18
+
+#ccm pathogen start
+    - name: Боеприпасы для техники
+      entries:
+      - cost: 3000
+        crate: CCMCrateBoxAmmoDualcannon
+      - cost: 2000
+        crate: CCMCrateBoxAmmoFrontalcannon
+      - cost: 2000
+        crate: CCMCrateBoxAmmoFlareLauncher
+    - name: Оружие
+      entries:
+      - cost: 4000
+        crate: RMCCrateM54CE2
+      - cost: 3000
+        crate: RMCCrateMK80
+      - cost: 4000
+        crate: RMCCrateM54CMK1
+      - cost: 4000
+        crate: RMCCrateXM88
+      - cost: 3000
+        crate: RMCCrateSU6
+      - cost: 4000
+        crate: RMCCrateM34
+      - cost: 3000
+        crate: RMCCrateMOU53
+      - cost: 3000
+        crate: RMCCrateXM51
+      - cost: 4000
+        crate: RMCCrateM85A1
+
+    - name: Продвинутая наука # Патоген-мод категория (Pathogen)
+      entries:
+      - cost: 100 # Заглушка
+        crate: ClothingHeadWehcellentCap # Заглушка
+#ccm pathogen end

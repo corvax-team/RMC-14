@@ -1,0 +1,29 @@
+- type: reagent
+  parent: Blood
+  id: CCMXenoBlood
+  name: ccm-reagent-name-xeno-blood
+  desc: ccm-reagent-desc-xeno-blood
+  physicalDesc: reagent-physical-desc-opaque
+  color: "#9bc0b7"
+  unknown: true
+  metabolisms:
+    Poison:
+      effects:
+      - !type:AdjustReagent
+        reagent: CCMPathogen
+        amount: 2
+
+- type: reagent
+  parent: Blood
+  id: CCMXenoPlasma
+  name: ccm-reagent-name-xeno-plasma
+  desc: ccm-reagent-desc-xeno-plasma
+  physicalDesc: reagent-physical-desc-opaque
+  color: "#b19bc0"
+  unknown: true
+  metabolisms:
+    Poison:
+      effects:
+      - !type:AdjustReagent
+        reagent: CCMPathogen
+        amount: 0.4

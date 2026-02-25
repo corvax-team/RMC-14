@@ -1,0 +1,136 @@
+# Final Stage
+- type: reaction
+  id: CCMPeptideR895a
+  minTemp: 32640
+  source: true
+  requiredMixerCategories:
+  - Centrifuge
+  reactants:
+    CCMPeptideR:
+      amount: 1
+    CCMPeptide800:
+      amount: 1
+    CCMPeptide95a:
+      amount: 1
+  products:
+    CCMPeptideR895a: 1
+
+# Stage 3
+- type: reaction
+  id: CCMPeptideRClean
+  source: true
+  requiredMixerCategories:
+  - Centrifuge
+  reactants:
+    CCMDirtyPeptideR:
+      amount: 1
+  products:
+    CCMPeptideR: 1
+
+- type: reaction
+  id: CCMPeptide800Clean
+  source: true
+  requiredMixerCategories:
+  - Centrifuge
+  reactants:
+    CCMDirtyPeptide800:
+      amount: 1
+  products:
+    CCMPeptide800: 1
+
+- type: reaction
+  id: CCMPeptide95aClean
+  source: true
+  requiredMixerCategories:
+  - Centrifuge
+  reactants:
+    CCMDirtyPeptide95a:
+      amount: 1
+  products:
+    CCMPeptide95a: 1
+
+# Stage 2
+- type: reaction
+  id: CCMDirtyPeptideR
+  minTemp: 27200
+  reactants:
+    CCMUnstablePeptideR:
+      amount: 5
+    CMLeporazine:
+      amount: 4
+    CCMXenoPlasma:
+      amount: 2
+    CMClonexadone:
+      amount: 4
+  products:
+    CCMDirtyPeptideR: 5
+
+- type: reaction
+  id: CCMDirtyPeptide800
+  source: true
+  minTemp: 19040
+  requiredMixerCategories:
+  - Electrolysis
+  reactants:
+    CCMUnstablePeptide800:
+      amount: 5
+    CCMXenoBlood:
+      amount: 10
+  products:
+    CCMDirtyPeptide800: 5
+
+- type: reaction
+  id: CCMDirtyPeptide95a
+  source: true
+  minTemp: 12240
+  requiredMixerCategories:
+  - Electrolysis
+  reactants:
+    CCMUnstablePeptide95a:
+      amount: 5
+    Tazinide:
+      amount: 2
+  products:
+    CCMDirtyPeptide95a: 5
+    Tazinide: 1
+
+# Stage 1
+- type: reaction
+  id: CCMUnstablePeptideR
+  minTemp: 24480
+  reactants:
+    RMCPhoron:
+      amount: 10
+    CMArithrazine:
+      amount: 3
+    CMDermaline:
+      amount: 2
+  products:
+    CCMUnstablePeptideR: 5
+
+- type: reaction
+  id: CCMUnstablePeptide800
+  minTemp: 16320
+  reactants:
+    RMCPhoron:
+      amount: 10
+    RMCNapalm:
+      amount: 5
+    RMCBGel:
+      amount: 5
+  products:
+    CCMUnstablePeptide800: 5
+
+- type: reaction
+  id: CCMUnstablePeptide95a
+  minTemp: 9520
+  reactants:
+    RMCPhoron:
+      amount: 10
+    Pyrazine:
+      amount: 10
+    Lipolicide:
+      amount: 2
+  products:
+    CCMUnstablePeptide95a: 5
+    Lipolicide: 1
