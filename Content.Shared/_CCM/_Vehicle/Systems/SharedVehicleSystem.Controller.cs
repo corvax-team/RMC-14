@@ -102,7 +102,7 @@ public sealed partial class SharedVehicleSystem
         if (vehicle == null)
             return true;
 
-        if (!IsConscious(buckle, skills, out _))
+        if (!IsConscious(buckle, vehicle.Value, skills, out _))
             return false;
 
         return true;
@@ -113,7 +113,7 @@ public sealed partial class SharedVehicleSystem
         if (seat.Comp.Vehicle == null)
             return;
 
-        if (!IsConscious(args.Buckle, seat.Comp.Skills, out var eye))
+        if (!IsConscious(args.Buckle, seat.Comp.Vehicle.Value, seat.Comp.Skills, out var eye))
             return;
 
         var pilot = EnsureComp<VehiclePilotComponent>(args.Buckle);
@@ -194,7 +194,7 @@ public sealed partial class SharedVehicleSystem
 
         var controllable = seat.Comp.ControllableEntity!.Value;
 
-        if (!IsConscious(args.Buckle, seat.Comp.Skills, out var eye))
+        if (!IsConscious(args.Buckle, seat.Comp.Vehicle.Value, seat.Comp.Skills, out var eye))
             return;
 
         var pilot = EnsureComp<VehiclePilotComponent>(args.Buckle);
@@ -247,7 +247,7 @@ public sealed partial class SharedVehicleSystem
         }
     }
 
-    public bool IsConscious(EntityUid pilot, Dictionary<EntProtoId<SkillDefinitionComponent>, int> skills,
+    public bool IsConscious(EntityUid pilot, EntityUid vehicle, Dictionary<EntProtoId<SkillDefinitionComponent>, int> skills,
         [NotNullWhen(true)] out EyeComponent? eye)
     {
         eye = null;
