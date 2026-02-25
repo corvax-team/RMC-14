@@ -1,39 +1,39 @@
-﻿rmc-ghost-role-information-spp-rules = Вы являетесь [color=red][bold]солдатом СССП[/bold][/color]. Вы нейтральны/дружественны к морпехам, особые отбстояьельства и администрация могут это поменять.
+﻿rmc-ghost-role-information-spp-rules = Вы являетесь [color=red][bold]солдатом СССП[/bold][/color]. Вы нейтральны/дружественны к морпехам, особые отбстоятельства и администрация могут это поменять.
     Вы не помните ничего из своей предыдущей жизни и не помните ничего из того, что узнали, будучи призраком.
     Вам разрешается помнить знания об игре в целом, например, как готовить, как использовать предметы и т.д.
     Вам абсолютно [color=red]НЕ[/color] разрешено помнить, скажем, имя, внешность и т. д. вашего предыдущего персонажа.
 
-rmc-ghost-role-information-spp-friendly-description = Вытащите корабль ОПЗ из трудной ситуации, прислушивайтесь к указаниям своего сержанта. Во имя революции!
-rmc-ghost-role-information-spp-hostile-description = Вытащите корабль ОПЗ из трудной ситуации, прислушивайтесь к указаниям своего сержанта. Во имя революции!
+rmc-ghost-role-information-spp-friendly-description = Вы откликнулись на зов о помощи корабля ККМП. Окажите услугу и вытащите своих 'Земных' товарищей из трудной ситуации, прислушивайтесь к указаниям своего сержанта. Во имя революции!
+rmc-ghost-role-information-spp-hostile-description = Вы откликнулись на зов о помощи корабля ККМП. Окажите услугу и вытащите своих 'Земных' товарищей из трудной ситуации, прислушивайтесь к указаниям своего сержанта. Во имя революции!
 rmc-ghost-role-information-spp-pve-description = Выполняйте все приказы командования и исполняйте их наилучшим образом. Во славу народа!
 
-rmc-ghost-name-spp-hostile-leader = СССП Командир Отряда (Нейтральный)
-rmc-ghost-name-spp-friendly-leader = СССП Командир Отряда (Нейтральный)
+rmc-ghost-name-spp-hostile-leader = СССП Командир Отряда (Нейтр/друж)
+rmc-ghost-name-spp-friendly-leader = СССП Командир Отряда (Нейтр/друж)
 rmc-job-name-spp-leader = Старший Сержант
 rmc-job-prefix-spp-leader = КомОт
 
-rmc-ghost-name-spp-hostile-specialist = СССП Специалист по вооружению (Нейтральный)
-rmc-ghost-name-spp-friendly-specialist = СССП Специалист по вооружению (Нейтральный)
+rmc-ghost-name-spp-hostile-specialist = СССП Специалист по вооружению (Нейтр/друж)
+rmc-ghost-name-spp-friendly-specialist = СССП Специалист по вооружению (Нейтр/друж)
 rmc-job-name-spp-specialist = Сержант
 rmc-job-prefix-spp-specialist = Спец.
 
-rmc-ghost-name-spp-hostile-rifleman = СССП Стрелок (Нейтральный)
-rmc-ghost-name-spp-friendly-rifleman = СССП Стрелок (Нейтральный)
+rmc-ghost-name-spp-hostile-rifleman = СССП Стрелок (Нейтр/друж)
+rmc-ghost-name-spp-friendly-rifleman = СССП Стрелок (Нейтр/друж)
 rmc-job-name-spp-rifleman = Призывник
 rmc-job-prefix-spp-rifleman = Стр
 
-rmc-ghost-name-spp-hostile-engineer = СССП Саппёр (Нейтральный)
-rmc-ghost-name-spp-friendly-engineer = СССП Саппёр (Нейтральный)
+rmc-ghost-name-spp-hostile-engineer = СССП Саппёр (Нейтр/друж)
+rmc-ghost-name-spp-friendly-engineer = СССП Саппёр (Нейтр/друж)
 rmc-job-name-spp-engineer = Сапёр
 rmc-job-prefix-spp-engineer = Сап.
 
-rmc-ghost-name-spp-hostile-medic = СССП Медик отряда (Нейтральный)
-rmc-ghost-name-spp-friendly-medic = СССП Медик отряда (Нейтральный)
+rmc-ghost-name-spp-hostile-medic = СССП Медик отряда (Нейтр/друж)
+rmc-ghost-name-spp-friendly-medic = СССП Медик отряда (Нейтр/друж)
 rmc-job-name-spp-medic = Медик
 rmc-job-prefix-spp-medic = МО
 
-rmc-ghost-name-spp-hostile-mp = СССП Военная полиция (Нейтральный)
-rmc-ghost-name-spp-friendly-mp = СССП Военная Полиция (Нейтральный)
+rmc-ghost-name-spp-hostile-mp = СССП Военная полиция (Нейтр/друж)
+rmc-ghost-name-spp-friendly-mp = СССП Военная Полиция (Нейтр/друж)
 rmc-job-name-spp-mp = Полиция
 rmc-job-prefix-spp-mp = ВП
 
