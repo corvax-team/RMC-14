@@ -10,7 +10,7 @@ rmc-dropship-pre-hijack =
         [few] минуты
        *[other] минут
     }.
-rmc-dropship-invalid-hijack = Lights flash from the terminal but you can't comprehend their meaning.
+rmc-dropship-invalid-hijack = Из терминала излучаются какие-то вспышки, но они вне вашего понимания.
 rmc-dropship-weapons-title = Консоль вооружения
 rmc-dropship-weapons-main-screen-text =
     К.К.М.П.
