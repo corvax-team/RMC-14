@@ -1,4 +1,4 @@
-cm-ui-rmc14 = RMC14 \ ККМ
+cm-ui-rmc14 = CM14
 rmc-ui-options-cassettes-volume = Громкость кассет:
 rmc-ui-options-hijack-song-volume = Громкость песни перехвата:
 rmc-ui-voicelines = Реплики
@@ -109,3 +109,4 @@ rmc-tacmap-alert-area = Местоположение: { $area }
 rmc-tacmap-alert-no-area = Неизвестно
 rmc-ui-auto-eject-magazines = Автоматическое извлечение магазинов из оружия
 # CCM priority rework
+rmc-ui-options-barks-volume = ��������� bark-������:

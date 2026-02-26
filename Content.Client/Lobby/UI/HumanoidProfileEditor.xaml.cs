@@ -219,6 +219,7 @@ namespace Content.Client.Lobby.UI
             RandomizeEverythingButton.OnPressed += args => { RandomizeEverything(); };
             AlwaysRandomNameButton.OnPressed += _ => SetAlwaysRandomName(AlwaysRandomNameButton.Pressed);
             AlwaysRandomAppearanceButton.OnPressed += _ => SetAlwaysRandomAppearance(AlwaysRandomAppearanceButton.Pressed);
+            InitializeBarkSettings();
 
             #endregion Name
 
@@ -1093,6 +1094,7 @@ namespace Content.Client.Lobby.UI
             UpdateXenoPrefix();
             UpdateXenoPostfix();
             UpdateAlwaysRandomToggles();
+            UpdateBarkSettings();
             UpdateOriginButton();
             UpdateReligionButton();
             UpdateCorporateRelationButton();
@@ -1655,6 +1657,7 @@ namespace Content.Client.Lobby.UI
             }
 
             UpdateGenderControls();
+            UpdateBarkSettings();
             Markings.SetSex(newSex);
             ReloadPreview();
         }

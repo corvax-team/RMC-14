@@ -5,15 +5,12 @@
     <PanelContainer StyleClasses="OptionsGeneralBackground">
         <BoxContainer Orientation="Vertical">
             <BoxContainer Orientation="Vertical" Margin="8 8 8 8" VerticalExpand="True">
-                <Label Text="{Loc 'cm-ui-rmc14'}"
+                <Label Text="{Loc 'ui-options-volume-label'}"
                        StyleClasses="LabelKeyText"/>
                 <BoxContainer Orientation="Vertical" Margin="0 3 0 0">
                     <ui:OptionSlider Name="SliderVolumeCassettes" Title="{Loc 'rmc-ui-options-cassettes-volume'}" />
                     <ui:OptionSlider Name="SliderVolumeHijackSong" Title="{Loc 'rmc-ui-options-hijack-song-volume'}" />
-                </BoxContainer>
-                <Label Text="{Loc 'ui-options-volume-label'}"
-                       StyleClasses="LabelKeyText"/>
-                <BoxContainer Orientation="Vertical" Margin="0 3 0 0">
+                    <ui:OptionSlider Name="SliderVolumeBarks" Title="{Loc 'ccm-ui-options-barks-volume'}" />
                     <ui:OptionSlider Name="SliderVolumeMaster" Title="{Loc 'ui-options-master-volume'}"
                                      Margin="0 0 0 8" />
                     <ui:OptionSlider Name="SliderVolumeMidi" Title="{Loc 'ui-options-midi-volume'}" />
@@ -27,7 +24,6 @@
                     <CheckBox Name="RestartSoundsCheckBox" Text="{Loc 'ui-options-restart-sounds'}" />
                     <CheckBox Name="EventMusicCheckBox" Text="{Loc 'ui-options-event-music'}" />
                     <CheckBox Name="AdminSoundsCheckBox" Text="{Loc 'ui-options-admin-sounds'}" />
-                    <CheckBox Name="BwoinkSoundCheckBox" Text="{Loc 'ui-options-bwoink-sound'}" />
                 </BoxContainer>
             </BoxContainer>
             <ui:OptionsTabControlRow Name="Control" Access="Public" />

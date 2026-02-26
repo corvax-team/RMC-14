@@ -832,6 +832,25 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("armor_preference");
 
+                    b.Property<float>("BarkPitch")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("real")
+                        .HasDefaultValue(1f)
+                        .HasColumnName("bark_pitch");
+
+                    b.Property<float>("BarkSpeed")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("real")
+                        .HasDefaultValue(1f)
+                        .HasColumnName("bark_speed");
+
+                    b.Property<string>("BarkVoice")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("BarkMaleVoice01")
+                        .HasColumnName("bark_voice");
+
                     b.Property<string>("CharacterName")
                         .IsRequired()
                         .HasColumnType("text")
@@ -2971,5 +2990,3 @@ namespace Content.Server.Database.Migrations.Postgres
         }
     }
 }
-
-// # CCM priority rework

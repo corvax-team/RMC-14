@@ -87,6 +87,20 @@ namespace Content.Server.Database
                 .Property(p => p.XenoPostfix)
                 .HasDefaultValue(string.Empty);
 
+            // CCM barks - start
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.BarkVoice)
+                .HasDefaultValue("BarkMaleVoice01");
+
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.BarkPitch)
+                .HasDefaultValue(1f);
+
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.BarkSpeed)
+                .HasDefaultValue(1f);
+            // CCM barks - end
+
             modelBuilder.Entity<Antag>()
                 .HasIndex(p => new {HumanoidProfileId = p.ProfileId, p.AntagName})
                 .IsUnique();
@@ -589,6 +603,9 @@ namespace Content.Server.Database
         public bool PlaytimePerks { get; set; } = true;
         public string XenoPrefix { get; set; } = string.Empty;
         public string XenoPostfix { get; set; } = string.Empty;
+        public string BarkVoice { get; set; } = "BarkMaleVoice01";
+        public float BarkPitch { get; set; } = 1f;
+        public float BarkSpeed { get; set; } = 1f;
     }
 
     public class Job

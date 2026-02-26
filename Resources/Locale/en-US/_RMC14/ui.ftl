@@ -1,8 +1,7 @@
-﻿cm-ui-rmc14 = RMC14
+﻿cm-ui-rmc14 = CM14
 
 rmc-ui-options-cassettes-volume = Cassette volume:
 rmc-ui-options-hijack-song-volume = Hijack song volume:
-
 rmc-ui-voicelines = Voicelines
 rmc-ui-options-tab-voicelines = Voicelines
 rmc-ui-audio-voicelines-yourself = Play voicelines from yourself

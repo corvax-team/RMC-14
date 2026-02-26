@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text.RegularExpressions;
+using Content.Shared._CCM.Barks;
 using Content.Shared._CCM.Preferences;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
@@ -165,6 +166,15 @@ namespace Content.Shared.Preferences
         [DataField]
         public string CorporateRelationId { get; private set; } = "neutral";
 
+        [DataField]
+        public string BarkVoice { get; private set; } = BarkPrototype.Default;
+
+        [DataField]
+        public float BarkPitch { get; private set; } = 1f;
+
+        [DataField]
+        public float BarkSpeed { get; private set; } = 1f;
+
         public HumanoidCharacterProfile(
             string name,
             string flavortext,
@@ -189,7 +199,10 @@ namespace Content.Shared.Preferences
             bool alwaysRandomAppearance,
             string originId,
             string religionId,
-            string corporateRelationId)
+            string corporateRelationId,
+            string barkVoice,
+            float barkPitch,
+            float barkSpeed)
         {
             Name = name;
             FlavorText = flavortext;
@@ -220,6 +233,9 @@ namespace Content.Shared.Preferences
             OriginId = originId;
             ReligionId = religionId;
             CorporateRelationId = corporateRelationId;
+            BarkVoice = barkVoice;
+            BarkPitch = barkPitch;
+            BarkSpeed = barkSpeed;
         }
 
         /// <summary>Copy constructor</summary>
@@ -247,7 +263,10 @@ namespace Content.Shared.Preferences
                 other.AlwaysRandomAppearance,
                 other.OriginId,
                 other.ReligionId,
-                other.CorporateRelationId)
+                other.CorporateRelationId,
+                other.BarkVoice,
+                other.BarkPitch,
+                other.BarkSpeed)
         {
         }
 
@@ -298,7 +317,10 @@ namespace Content.Shared.Preferences
                 false,
                 string.Empty,
                 "agnostic",
-                "neutral"
+                "neutral",
+                BarkPrototype.Default,
+                1f,
+                1f
             );
         }
 
@@ -377,7 +399,10 @@ namespace Content.Shared.Preferences
                 false,
                 string.Empty,
                 "agnostic",
-                "neutral"
+                "neutral",
+                BarkPrototype.Default,
+                1f,
+                1f
             );
         }
 
@@ -474,6 +499,21 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithCorporateRelationId(string corporateRelationId)
         {
             return new(this) { CorporateRelationId = corporateRelationId };
+        }
+
+        public HumanoidCharacterProfile WithBarkVoice(string barkVoice)
+        {
+            return new(this) { BarkVoice = barkVoice };
+        }
+
+        public HumanoidCharacterProfile WithBarkPitch(float barkPitch)
+        {
+            return new(this) { BarkPitch = barkPitch };
+        }
+
+        public HumanoidCharacterProfile WithBarkSpeed(float barkSpeed)
+        {
+            return new(this) { BarkSpeed = barkSpeed };
         }
 
         public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<ProtoId<JobPrototype>, JobPriority>> jobPriorities)
@@ -625,6 +665,9 @@ namespace Content.Shared.Preferences
             if (PlaytimePerks != other.PlaytimePerks) return false;
             if (XenoPrefix != other.XenoPrefix) return false;
             if (XenoPostfix != other.XenoPostfix) return false;
+            if (BarkVoice != other.BarkVoice) return false;
+            if (Math.Abs(BarkPitch - other.BarkPitch) > 0.0001f) return false;
+            if (Math.Abs(BarkSpeed - other.BarkSpeed) > 0.0001f) return false;
             return Appearance.MemberwiseEquals(other.Appearance);
         }
 
@@ -861,6 +904,17 @@ namespace Content.Shared.Preferences
 
                 XenoPostfix = ValidateXenoName(XenoPostfix, true);
             }
+
+            // CCM barks - start
+            if (!prototypeManager.TryIndex<BarkPrototype>(BarkVoice, out var barkPrototype) ||
+                !barkPrototype.RoundStart)
+            {
+                BarkVoice = BarkPrototype.Default;
+            }
+
+            BarkPitch = Math.Clamp(BarkPitch, 0.7f, 1.4f);
+            BarkSpeed = Math.Clamp(BarkSpeed, 0.7f, 1.4f);
+            // CCM barks - end
         }
 
         /// <summary>
@@ -944,6 +998,9 @@ namespace Content.Shared.Preferences
             hashCode.Add(PlaytimePerks);
             hashCode.Add(XenoPrefix);
             hashCode.Add(XenoPostfix);
+            hashCode.Add(BarkVoice);
+            hashCode.Add(BarkPitch);
+            hashCode.Add(BarkSpeed);
             return hashCode.ToHashCode();
         }
 

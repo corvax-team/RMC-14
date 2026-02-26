@@ -114,7 +114,6 @@ humanoid-profile-editor-background-info-label = Background info:
 humanoid-profile-editor-background-info-open = Open
 humanoid-profile-editor-background-info-close = Hide
 humanoid-profile-editor-background-info-title = Background info
-
 trait-category-disabilities = Disabilities
 trait-category-speech = Speech traits
 trait-category-quirks = Quirks

@@ -47,6 +47,33 @@
                                           Text="{Loc 'humanoid-profile-editor-always-random-name'}" />
                                 <CheckBox Name="AlwaysRandomAppearanceButton"
                                           Text="{Loc 'humanoid-profile-editor-always-random-appearance'}" />
+                                <!-- CCM barks - start -->
+                                <BoxContainer Name="BarkSettingsContainer" Orientation="Vertical" SeparationOverride="4" Margin="0 4 0 0">
+                                    <Label Text="{Loc 'ccm-humanoid-profile-editor-bark-title'}" StyleClasses="CharacterEditorSectionTitle" />
+                                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                        <Label Text="{Loc 'ccm-humanoid-profile-editor-bark-voice-label'}" />
+                                        <Control HorizontalExpand="True" />
+                                        <OptionButton Name="BarkVoiceButton" HorizontalAlignment="Right" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                        <Label Name="BarkVoiceTypeLabel" Text="{Loc 'ccm-humanoid-profile-editor-bark-type-normal'}" />
+                                        <Control HorizontalExpand="True" />
+                                        <Button Name="BarkPreviewButton" Text="{Loc 'ccm-humanoid-profile-editor-bark-preview'}" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                        <Label Text="{Loc 'ccm-humanoid-profile-editor-bark-pitch-label'}" />
+                                        <Control HorizontalExpand="True" />
+                                        <Label Name="BarkPitchValueLabel" Text="1.0x" />
+                                    </BoxContainer>
+                                    <Slider Name="BarkPitchSlider" MinValue="0.7" MaxValue="1.4" Value="1.0" HorizontalExpand="True" />
+                                    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+                                        <Label Text="{Loc 'ccm-humanoid-profile-editor-bark-speed-label'}" />
+                                        <Control HorizontalExpand="True" />
+                                        <Label Name="BarkSpeedValueLabel" Text="1.0x" />
+                                    </BoxContainer>
+                                    <Slider Name="BarkSpeedSlider" MinValue="0.7" MaxValue="1.4" Value="1.0" HorizontalExpand="True" />
+                                </BoxContainer>
+                                <!-- CCM barks - end -->
                             </BoxContainer>
                         </ui:HighlightedContainer>
                         <ui:HighlightedContainer Name="AppearanceBlockContainer" HorizontalExpand="True" SizeFlagsStretchRatio="1.25">

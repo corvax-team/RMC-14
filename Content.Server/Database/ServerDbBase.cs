@@ -351,7 +351,10 @@ namespace Content.Server.Database
                   false,
                   string.Empty,
                   "agnostic",
-                  "neutral"
+                  "neutral",
+                  profile.BarkVoice,
+                  profile.BarkPitch,
+                  profile.BarkSpeed
               );
         }
 
@@ -447,6 +450,9 @@ namespace Content.Server.Database
             profile.PlaytimePerks = humanoid.PlaytimePerks;
             profile.XenoPrefix = humanoid.XenoPrefix;
             profile.XenoPostfix = humanoid.XenoPostfix;
+            profile.BarkVoice = humanoid.BarkVoice;
+            profile.BarkPitch = humanoid.BarkPitch;
+            profile.BarkSpeed = humanoid.BarkSpeed;
 
             return profile;
         }

@@ -60,6 +60,20 @@ public sealed partial class CCVars
         public static readonly CVarDef<float> InterfaceVolume =
             CVarDef.Create("audio.interface_volume", 0.50f, CVar.ARCHIVE | CVar.CLIENTONLY);
 
+        // CCM barks - start
+        /// <summary>
+        ///     Enables bark voice playback for spoken text.
+        /// </summary>
+        public static readonly CVarDef<bool> BarksEnabled =
+            CVarDef.Create("barks.enabled", true, CVar.REPLICATED | CVar.SERVER);
+
+        /// <summary>
+        ///     Local bark volume gain. 0 means muted, 1 means neutral gain.
+        /// </summary>
+        public static readonly CVarDef<float> BarksVolume =
+            CVarDef.Create("barks.volume", 1f, CVar.ARCHIVE | CVar.CLIENTONLY);
+        // CCM barks - end
+
     /// <summary>
     ///     Lobby music collection string
     /// </summary>
