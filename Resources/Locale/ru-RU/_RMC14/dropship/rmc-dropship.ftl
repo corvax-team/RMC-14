@@ -89,8 +89,8 @@ rmc-dropship-fabricator-points = Очки: { $points }
 rmc-dropship-fabricator-equipment = [bold]Снаряжение[/bold]
 rmc-dropship-fabricator-ammo = [bold]Боеприпасы[/bold]
 rmc-dropship-fabricator-fabricate = Создать ({ $cost })
-rmc-dropship-firemission-warning = ВЫСТРЕЛИ ЛЕТЯТ ПРЯМО НА { $direction }
-rmc-dropship-firemission-warning-above = КАНОННАДА ВЫСТРЕЛОВ ОБРУШИВАЕТСЯ ПРЯМО НА ВАС!
+rmc-dropship-firemission-warning = ЯРКИЕ ЛИНИИ В НЕБЕ ЛЕТЯТ ПРЯМО НА { $direction }
+rmc-dropship-firemission-warning-above = КАНОННАДА ВЫСТРЕЛОВ ВОТ-ВОТ ОБРУШИТСЯ ПРЯМО НА ВАС!
 rmc-dropship-paradrop-target-screen-text =
     HPU-1 Paradrop Deployment System
     { $hasTarget }
