@@ -508,7 +508,8 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
         var alert = trackerMode.Alert;
         var severity = TrackerSystem.CenterSeverity;
-
+        
+        squad = squad.Replace(" ", ""); // CCM14 | RMC-14 shit fix
         if (ent.Comp.Mode == SquadLeaderMode)
             alert += squad;
 
