@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._CCM.Pathogen.Protomorphs.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
