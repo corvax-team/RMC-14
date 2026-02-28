@@ -72,7 +72,7 @@ rmc-ghost-name-pmc-bodyguard = Головорез Vitezstvi (Группа тел
 rmc-job-name-pmc-bodyguard-lead = Командир Охраны
 rmc-ghost-name-pmc-bodyguard-lead = Командир Охраны Vitezstvi (Группа телохранителей высокопоставленных лиц)
 
-rmc-job-name-pmc-corporate-goon = Охрана Vitezstvi
+rmc-job-name-pmc-corporate-goon = Охранник Vitezstvi
 rmc-job-name-pmc-corporate-goon-engi = Техник Охраны Vitezstvi
 rmc-job-name-pmc-corporate-goon-medic = Медик Охраны Vitezstvi
 rmc-job-name-pmc-corporate-goon-leader = Командир Охраны Vitezstvi
@@ -83,11 +83,11 @@ rmc-job-name-pmc-pve-force-leader = Ротмеистер
 rmc-job-prefix-pmc-pve-force-leader = РМ
 rmc-job-name-pmc-pve-force-command = Тысячник
 
-rmc-ghost-name-pmc-whiteout = Боевое подразделение "Белая мгла" Vitezstvi (!DEATHSQUAD!)
-rmc-job-name-pmc-whiteout = Боевое подразделеие "Белая мгла"
+rmc-ghost-name-pmc-whiteout = Подразделение "Белая мгла" VI (!DEATHSQUAD!)
+rmc-job-name-pmc-whiteout = Подразделеие "Белая мгла" VI
 
-rmc-ghost-name-pmc-whiteout-gunner = Спец-подразделение "Белая мгла" (!DEATHSQUAD!)
-rmc-job-name-pmc-whiteout-gunner = Спец-подразделение "Белая мгла"
+rmc-ghost-name-pmc-whiteout-gunner = Подразделение "Белая мгла" VI (!DEATHSQUAD!)
+rmc-job-name-pmc-whiteout-gunner = Подразделение "Белая мгла" VI
 
 rmc-job-prefix-pmc-whiteout = БМ
 rmc-job-prefix-pmc-pve-force-command = КомСил
