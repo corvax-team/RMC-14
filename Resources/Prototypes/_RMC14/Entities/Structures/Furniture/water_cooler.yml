@@ -52,10 +52,6 @@
   - type: StaticPrice
     price: 500
   - type: RMCMesonsNonviewable
-  - type: InteractedBlacklist
-    blacklist:
-      components:
-      - Xeno
     # Corvax-Vehicle-Content-Start
   - type: VehicleStructureTarget
     momentumLossFactor: 0

@@ -53,8 +53,9 @@ public sealed class RMCGameRuleExtrasSystem : EntitySystem
             endEvent.AddLine(Loc.GetString("cm-distress-signal-medals"));
             foreach (var award in marineAwards)
             {
+                // TODO RMC14 rank
                 endEvent.AddLine(Loc.GetString("rmc-distress-signal-got-medal", ("receiver", award.Receiver), ("award", award.Name),
-                    ("awardDescription", award.Text), ("giver", award.Giver)));
+                    ("awardDescription", award.Text)));
             }
 
             endEvent.AddLine(string.Empty);

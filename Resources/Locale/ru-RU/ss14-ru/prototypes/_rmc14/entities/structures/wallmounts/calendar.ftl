@@ -1,5 +1,5 @@
-ent-RMCCalendarBase = wall calendar
-    .desc = Classic office decoration and a place to stare at maniacally.
+ent-RMCCalendarBase = Настенный календарь
+    .desc = Классическое оформление офиса и место, на которое можно смотреть с маниакальным интересом.
 ent-RMCCalendarColonist = { ent-RMCCalendarBase }
     .suffix = Colony
     .desc = { ent-RMCCalendarBase.desc }

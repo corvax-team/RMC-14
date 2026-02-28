@@ -60,7 +60,7 @@ public abstract partial class SharedGunSystem
         args.Verbs.Add(verb);
     }
 
-    public SelectiveFire GetNextMode(GunComponent component) //RMC14
+    private SelectiveFire GetNextMode(GunComponent component)
     {
         var modes = new List<SelectiveFire>();
 

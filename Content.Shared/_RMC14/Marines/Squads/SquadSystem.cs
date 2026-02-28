@@ -3,8 +3,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Chat;
-using Content.Shared._RMC14.Commendations;
-using Content.Shared._RMC14.Recommendation;
 using Content.Shared._RMC14.Cryostorage;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Marines.Announce;
@@ -60,7 +58,6 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly SharedAwardRecommendationSystem _awardRecommendation = default!;
     [Dependency] private readonly SharedRMCBanSystem _rmcBan = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
 
@@ -100,7 +97,6 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadMemberComponent, LeftCryostorageEvent>(OnSquadMemberLeftCryo);
         SubscribeLocalEvent<SquadMemberComponent, GetMarineSquadNameEvent>(OnSquadRoleGetName);
 
-        SubscribeLocalEvent<SquadLeaderComponent, ComponentRemove>(OnSquadLeaderRemoved);
         SubscribeLocalEvent<SquadLeaderComponent, EntityTerminatingEvent>(OnSquadLeaderTerminating);
         SubscribeLocalEvent<SquadLeaderComponent, GetMarineIconEvent>(OnSquadLeaderGetMarineIcon, after: [typeof(SharedMarineSystem)]);
 
@@ -242,12 +238,6 @@ public sealed class SquadSystem : EntitySystem
         }
 
         squad.Roles[jobId] = roles + 1;
-    }
-
-    private void OnSquadLeaderRemoved(Entity<SquadLeaderComponent> ent, ref ComponentRemove args)
-    {
-        // Disable recommendation ability when squad leader is demoted
-        _awardRecommendation.SetCanRecommend(ent, false);
     }
 
     private void OnSquadLeaderTerminating(Entity<SquadLeaderComponent> ent, ref EntityTerminatingEvent args)
@@ -447,17 +437,6 @@ public sealed class SquadSystem : EntitySystem
 
         squad = (member.Comp.Squad.Value, team);
         return true;
-    }
-
-    /// <summary>
-    /// Gets the squad name for a given marine entity. Returns null if the marine is not in a squad.
-    /// </summary>
-    public string? GetSquadName(EntityUid marine)
-    {
-        if (TryGetMemberSquad((marine, null), out var squad))
-            return Name(squad);
-
-        return null;
     }
 
     public bool HasSquad(EntProtoId id)
@@ -723,10 +702,6 @@ public sealed class SquadSystem : EntitySystem
 
         var newLeader = EnsureComp<SquadLeaderComponent>(toPromote);
         newLeader.Icon = icon;
-
-        EnsureComp<RMCAwardRecommendationComponent>(toPromote);
-        _awardRecommendation.SetCanRecommend(toPromote, true);
-
         if (!EnsureComp(toPromote, out MarineOrdersComponent orders))
         {
             orders.Intrinsic = false;

@@ -13,9 +13,6 @@
     limit: 1
     hasIconSprite: true
   - type: Appearance
-  - type: Tag
-    tags:
-    - RMCPVEArmorAccessory
 
 - type: entity
   abstract: true

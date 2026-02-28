@@ -85,7 +85,4 @@ public sealed partial class DropshipComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan CancelFlightTime = TimeSpan.FromSeconds(10);
-
-    [DataField]
-    public SoundSpecifier ArrivalSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Shuttle/engine_landing.ogg");
 }

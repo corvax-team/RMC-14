@@ -23,8 +23,3 @@
   id: MarineSecuritySatchel
   equipment:
     back: CMSatchelSecurity
-
-- type: loadout
-  id: ProvostSecuritySatchel
-  equipment:
-    back: CMSatchelSecurityFilledProvostInspector

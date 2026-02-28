@@ -24,7 +24,6 @@
       - CMSurgicalLine
       - CMSynthGraft
       - Hypospray
-      - PillPacket
       components:
       - Hypospray
 

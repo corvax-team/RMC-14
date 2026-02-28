@@ -101,8 +101,8 @@ public sealed partial class AimedShotComponent : Component
     public TargetedEffects TargetEffect = TargetedEffects.Targeted;
 
     /// <summary>
-    ///     If the targeting visual should display a direction indicator while the laser is turned off.
+    ///     The additional direction effect to apply to entities being aimed at while the laser is turned off.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool ShowDirection = true;
+    public DirectionTargetedEffects DirectionTargetEffect = DirectionTargetedEffects.DirectionTargeted;
 }

@@ -20,10 +20,6 @@
     - Alive
     - Critical
     - Dead
-  - type: Tag
-    tags:
-    - DoorBumpOpener
-    - RMCSynthGrabbable
   - type: MobThresholds
     thresholds:
       0: Alive

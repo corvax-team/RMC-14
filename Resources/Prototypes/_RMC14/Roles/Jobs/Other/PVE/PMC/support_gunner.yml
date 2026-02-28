@@ -21,7 +21,18 @@
       factions:
       - WeYa
     - type: Skills
-      preset: RMCSkillPresetPVESGO
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillSmartGun: 1
+        RMCSkillEndurance: 1
+        RMCSkillJtac: 1
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-gunner
     - type: AssignSquad

@@ -1,3 +1,3 @@
-ent-RMCSpawnPointSPPRiflemanPVE = spp rifleman spawn point
+ent-RMCSpawnPointSPPRiflemanPVE = Точка спавна солдата СССП
     .suffix = PVE
     .desc = { "" }

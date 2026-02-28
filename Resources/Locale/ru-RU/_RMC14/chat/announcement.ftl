@@ -1,5 +1,4 @@
 rmc-announcement-author = Командования
-rmc-announcement-author-shipside = Командование корабля
 rmc-announcement-author-highcommand = Верховного командования ККМП ОПЗ
 rmc-announcement-message = [font size=16][bold][color=#CECECE]Объявление { $author }[/color][/bold][/font][font size=16][color=red]
     
@@ -41,8 +40,6 @@ rmc-announcement-dropship-hijack-hive = Королева приказала ме
 rmc-announcement-ares-command = [color=#CECECE][font size=16][bold]ARES v3.2[/bold][/font][/color][color=red][font size=16]
     
     { $message }[/font][/color]
-rmc-announcement-unidentified-lifesigns = [color=#CECECE][font size=16][bold]Неизвестные признаки жизни[/bold][/font][/color][color=red][font size=16][bold]
+rmc-announcement-unidentified-lifesigns = [color=#CECECE][font size=16][bold]Unidentifled lifesigns[/bold][/font][/color][color=red][font size=16][bold]
     
-    Неизвестные признаки жизни ({ $count }) обнаружены на борту { $name }. Рекомендация: заблокировать наружные люки доступа, включая воздуховоды и вентиляционные каналы.[/bold][/font][/color]
-
-rmc-announcement-shipside-header = Пожалуйста, напишите сообщение, чтобы сообщить об этом экипажу.
+    Примерно ({ $count }) Неидентифицированных форм жизни обнаружено на Десантном Корабле { $name }. Рекомендации: Закрыть все наружные выходы, в том числе воздуховоды и вентиляции.[/bold][/font][/color]

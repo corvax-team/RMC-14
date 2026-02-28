@@ -65,7 +65,7 @@ public sealed class RMCUserInterfaceSystem : EntitySystem
                 if (system.TerminatingOrDeleted(uiEnt))
                     return;
 
-                if (!system.Resolve(uiEnt, ref uiEnt.Comp, false))
+                if (!system.Resolve(uiEnt, ref uiEnt.Comp))
                     return;
 
                 foreach (var bui in uiEnt.Comp.ClientOpenInterfaces.Values)

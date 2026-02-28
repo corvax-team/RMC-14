@@ -156,7 +156,7 @@ public abstract partial class SharedGunSystem
 
         if (ejectMag)
         {
-            EjectMagazine(uid, component, user); //RMC14
+            EjectMagazine(uid, component);
             Audio.PlayPredicted(component.SoundAutoEject, uid, user);
         }
 
@@ -193,13 +193,13 @@ public abstract partial class SharedGunSystem
         Appearance.SetData(uid, AmmoVisuals.AmmoMax, capacity, appearance);
     }
 
-    private void EjectMagazine(EntityUid uid, MagazineAmmoProviderComponent component, EntityUid? user) //RMC14
+    private void EjectMagazine(EntityUid uid, MagazineAmmoProviderComponent component)
     {
         var ent = GetMagazineEntity(uid);
 
         if (ent == null)
             return;
 
-        _slots.TryEject(uid, MagazineSlot, user, out var a, excludeUserAudio: true); //RMC14
+        _slots.TryEject(uid, MagazineSlot, null, out var a, excludeUserAudio: true);
     }
 }

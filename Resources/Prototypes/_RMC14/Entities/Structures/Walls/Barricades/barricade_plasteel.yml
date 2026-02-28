@@ -88,9 +88,6 @@
 - type: Tag
   id: RMCPlasteelBarricade
 
-- type: Tag
-  id: RMCPlasteelBarricade
-
 # Metal Barricade Upgrades
 - type: entity
   parent: RMCBarricadePlasteel

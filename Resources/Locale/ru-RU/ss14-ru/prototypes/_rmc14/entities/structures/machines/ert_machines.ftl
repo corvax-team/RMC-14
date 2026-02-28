@@ -1,5 +1,5 @@
-ent-RMCSpawnerERTShuttle = ert shuttle spawner
-    .desc = Defines a location to spawn an ERT shuttle in.
+ent-RMCSpawnerERTShuttle = Спавнер Шаттла ОБР
+    .desc = Определяет местоположение, в котором должен появиться шаттл ОБР.
     .suffix = Generic
 ent-RMCSpawnerERTShuttleWeYa = { ent-RMCSpawnerERTShuttle }
     .suffix = PMC

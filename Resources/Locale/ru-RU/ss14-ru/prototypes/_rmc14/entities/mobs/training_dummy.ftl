@@ -1,5 +1,5 @@
-ent-RMCTrainingDummy = training dummy
-    .desc = A training dummy used by the UNMC to simulate a humanoid body. Feels almost too lifelike.
+ent-RMCTrainingDummy = Тренировочный манекен
+    .desc = Тренировочный манекен, используемый ККМП для имитации тела гуманоида. Выглядит почти как живой.
     .suffix = RMC14
-ent-SpawnRMCTrainingDummy = RMC Training Dummy Spawner
+ent-SpawnRMCTrainingDummy = RMC Спавнер тренировочного манекена
     .desc = { ent-MarkerBase.desc }

@@ -1,8 +1,5 @@
 using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.Construction;
-using Content.Shared._RMC14.Emplacements;
-using Content.Shared.Construction.Components;
-using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -37,7 +34,6 @@ public sealed class BarricadeSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
-    [Dependency] private readonly SharedWeaponMountSystem _weaponMount = default!;
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
 
@@ -56,8 +52,6 @@ public sealed class BarricadeSystem : EntitySystem
         SubscribeLocalEvent<FullSandbagComponent, ActivateInWorldEvent>(OnFullActivateInWorld);
         SubscribeLocalEvent<FullSandbagComponent, AfterInteractEvent>(OnFullAfterInteract);
         SubscribeLocalEvent<FullSandbagComponent, SandbagBuildDoAfterEvent>(OnFullBuildDoAfter);
-
-        SubscribeLocalEvent<BarricadeComponent, AnchorAttemptEvent>(OnAnchorAttempt);
     }
 
     private void OnAfterInteract(Entity<EntrenchingToolComponent> tool, ref AfterInteractEvent args)
@@ -275,24 +269,6 @@ public sealed class BarricadeSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnAnchorAttempt(Entity<BarricadeComponent> ent, ref AnchorAttemptEvent args)
-    {
-        if (args.Cancelled)
-            return;
-
-        var coordinates = ent.Owner.ToCoordinates();
-        if (_transform.GetGrid(coordinates) is not { } gridId)
-            return;
-
-        if (!TryComp(gridId, out MapGridComponent? grid))
-            return;
-
-        if (_weaponMount.HasWeaponMountNearbyPopup((gridId, grid), coordinates, ent,  user: args.User))
-        {
-            args.Cancel();
-        }
-    }
-
     private bool StartDigging(Entity<EntrenchingToolComponent> tool, EntityUid user, EntityCoordinates clicked)
     {
         if (!CanDig(tool, user, clicked, true, out var grid, out var tile))
@@ -456,7 +432,8 @@ public sealed class BarricadeSystem : EntitySystem
             }
         }
 
-        if (!_rmcConstruction.CanBuildAt(coordinates, full.Comp.Builds, out var popupStr, user: user))
+        var name = _prototype.TryIndex(full.Comp.Builds, out var builds) ? builds.Name : Name(full);
+        if (!_rmcConstruction.CanBuildAt(coordinates, name, out var popupStr))
         {
             if (popup)
                 _popup.PopupClient(popupStr, user, user, PopupType.SmallCaution);
@@ -489,32 +466,6 @@ public sealed class BarricadeSystem : EntitySystem
             }
         }
 
-        return false;
-    }
-
-    /// <summary>
-    ///     Check if a barricade is anchored near the given coordinates.
-    /// </summary>
-    /// <param name="grid">The map grid being checked.</param>
-    /// <param name="user">The entity performing the search</param>
-    /// <param name="coordinates">The coordinates used as the center</param>
-    /// <param name="range">The radius of the search area</param>
-    /// <returns>True if an anchored entity with a <see cref="BarricadeComponent"/> within the specified range</returns>
-    public bool HasBarricadeNearbyPopup(Entity<MapGridComponent> grid, EntityUid user, EntityCoordinates coordinates, int range)
-    {
-        var position = _mapSystem.LocalToTile(grid, grid, coordinates);
-        var checkArea = new Box2(position.X - range + 1, position.Y - range + 1, position.X + range, position.Y + range);
-        var enumerable = _mapSystem.GetLocalAnchoredEntities(grid, grid, checkArea);
-
-        foreach (var anchored in enumerable)
-        {
-            if (HasComp<BarricadeComponent>(anchored))
-            {
-                var msg = Loc.GetString("barricade-anchored-too-close", ("barricade", anchored));
-                _popup.PopupClient(msg, user, user, PopupType.SmallCaution );
-                return true;
-            }
-        }
         return false;
     }
 }

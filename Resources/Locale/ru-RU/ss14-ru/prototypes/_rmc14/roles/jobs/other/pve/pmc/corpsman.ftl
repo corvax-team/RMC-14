@@ -1,3 +1,3 @@
-ent-RMCSpawnPointPMCCorpsmanPVE = weya pmc medic spawn point
+ent-RMCSpawnPointPMCCorpsmanPVE = Точка спавна медика ЧВК Vitezstvi
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }

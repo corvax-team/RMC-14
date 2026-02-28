@@ -1,4 +1,4 @@
-# MedKit Pouch
+﻿# MedKit Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
   id: RMCPouchMedkit
@@ -14,7 +14,6 @@
         - DiscreteHealthAnalyzer
         - Dropper
         - Pill
-        - PillPacket
         - Bottle
         - Syringe
         - PillCanister
@@ -48,7 +47,6 @@
       - DiscreteHealthAnalyzer
       - Dropper
       - Pill
-      - PillPacket
       - Bottle
       - Syringe
       - PillCanister
@@ -168,18 +166,3 @@
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
     - id: CMHealthAnalyzer
-
-- type: entity
-  parent: RMCPouchMedkit
-  id: RMCPouchMedkitFillRoyalMedic
-  suffix: Filled, Royal Medic
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMBloodPackFull
-    - id: CMBloodPackFull
-    - id: CMTraumaKit10
-    - id: CMTraumaKit10
-    - id: CMBurnKit10
-    - id: CMBurnKit10
-    #- id: RMCSplints5 # TODO RMC14

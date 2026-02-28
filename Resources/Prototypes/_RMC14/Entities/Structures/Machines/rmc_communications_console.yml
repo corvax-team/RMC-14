@@ -75,8 +75,6 @@
     interfaces:
       enum.MarineControlComputerUi.Key:
         type: MarineControlComputerBui
-      enum.MarineControlComputerUi.MedalsPanel:
-        type: MedalsPanelBui
       enum.DialogUiKey.Key:
         type: DialogBui
   - type: MarineControlComputer

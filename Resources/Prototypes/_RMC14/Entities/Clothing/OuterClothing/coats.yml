@@ -30,10 +30,6 @@
         type: StorageBoundUserInterface
       enum.UniformAccessoriesUi.Key:
         type: UniformAccessoryBui
-  - type: InteractedBlacklist
-    blacklist:
-      components:
-      - Xeno
 
 - type: entity
   abstract: True
@@ -317,11 +313,10 @@
   - type: CMArmor
     melee: 10
 
-# CCM-14-start
 # Tanker
 - type: entity
   parent: [RMCBaseJacketButtonable, RMCBaseJacket]
-  id: RMCCoatTanker # why it's not in our folder?
+  id: RMCCoatTanker
   name: tanker jacket
   description: A comfortable jacket provided to anyone expected to operate near or inside heavy machinery. Special material within the arms jams up any machinery it gets caught up in, protecting the wearer from injury.
   components:
@@ -331,7 +326,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/tanker.rsi
   - type: CMArmor
     melee: 10
-# CCM-14-end
 
 # Auxiliary Supply Officer
 - type: entity
@@ -1037,7 +1031,7 @@
   parent: RMCCoatSnowSurvivor
   id: RMCCoatSnowSurvivorCMBDeputy
   name: CMB deputy parka
-  description: A snow suit tailored to the CMB's needs. It can protect the wearer from extreme cold. The back is enscribed with the powerful letters of 'DEPUTY' representing justice, authority, and protection in the outer rim.
+  description: A snow suit tailored to the CMB's needs. It can protect the wearer from extreme cold. The back is enscribed with the powerful letters of 'DEPUTY' representing justice, authority, and protection in the outer rim. The laws of the Earth stretch beyond the Sol.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Snowsuits/cmb.rsi

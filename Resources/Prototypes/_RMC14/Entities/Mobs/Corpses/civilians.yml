@@ -429,7 +429,7 @@
   id: RMCGearCorpseUnitedNationsRiotOfficer
   equipment:
     head: ArmorHelmetPMCRiotShield
-    jumpsuit: RMCJumpsuitRiotControl
+    jumpsuit: RMCJumpsuitUNSecurity
     outerClothing: RMCArmorPMCRiot
     belt: CMStunbaton
     gloves: CMHandsBlackMarine

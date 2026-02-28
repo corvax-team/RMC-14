@@ -27,37 +27,37 @@ ent-RMCContainerRedMiddle = { ent-RMCContainerBase }
 ent-RMCContainerRedRight = { ent-RMCContainerBase }
     .suffix = Красный, Справа
     .desc = { ent-RMCContainerBase.desc }
-ent-RMCContainerFujinLeft = Fujin Cargo Container
+ent-RMCContainerFujinLeft = Грузовой контейнер Фуджин
     .desc =
-        A huge industrial shipping container.
-        This one is from Fujin, a manufacturer of a variety of electronical and mechanical products.
-        At least, that is what is says on the container. You have literally never heard of this company before.
+        Огромный индустриальный контейнер.
+        Этот от компании Fujin, производителя различных электронных и механических изделий.
+        По крайней мере, так написано на контейнере. Вы буквально никогда раньше не слышали об этой компании.
     .suffix = Fujin, Left
 ent-RMCContainerFujinMiddle = { ent-RMCContainerFujinLeft }
     .suffix = Fujin, Middle
     .desc = { ent-RMCContainerFujinLeft.desc }
-ent-RMCContainerApocraphyLeft = Apocraphy Cargo Container
+ent-RMCContainerApocraphyLeft = Грузовой контенер Апокрафи
     .desc =
-        A huge industrial shipping container.
-        This one is from The Apocrahpy Corporation, a manufacturer of medical and biotechnological parts.
-        You remember hearing about one of their latest drugs, and how dangerous it was... though they claimed to be close to finding a solution.
+        Огромный индустриальный контейнер.
+        Этот от корпорации Apocrahpy, производителя медицинских и биотехнологических компонентов.
+        Вы помните, как слышали об одном из их последних наркотиков и о том, насколько он опасен... хоть они утверждали, что близки к поиску решения.
     .suffix = Apocraphy, Left
 ent-RMCContainerApocraphyMiddle = { ent-RMCContainerApocraphyLeft }
     .suffix = Apocraphy, Middle
     .desc = { ent-RMCContainerApocraphyLeft.desc }
-ent-RMCContainerPathosLeft = Pathos Cargo Container
+ent-RMCContainerPathosLeft = Грузовой контейнер Пазос
     .desc =
-        A huge industrial shipping container.
-        This one is from Pathos, a computer parts and motion detector manufacturer.
-        You still wonder why we have a container of old Motion Detectors, and if they even still work.
+        Огромный индустриальный контейнер.
+        Этот от Pathos, производителя компьютерных комплектующих и детекторов движения.
+        Вы все еще удивляетесь, зачем нам понадобился целый контейнер старых датчиков движения и работают ли они вообще до сих пор.
     .suffix = Pathos, Left
 ent-RMCContainerPathosMiddle = { ent-RMCContainerPathosLeft }
     .suffix = Pathos, Middle
     .desc = { ent-RMCContainerPathosLeft.desc }
-ent-RMCContainerWeYaLeft = Weston-Yamada Cargo Container
+ent-RMCContainerWeYaLeft = Грузовой контейнер VItezstvi
     .desc =
-        A huge industrial shipping container.
-        This one is from The Weston-Yamada Corporation, you have probably heard of them before.
+        Огромный индустриальный контейнер
+        Этот от компании Vitezstvi, вы, возможно, о ней слышали.
     .suffix = WeYa, Left
 ent-RMCContainerWeYaMiddle = { ent-RMCContainerWeYaLeft }
     .suffix = WeYa, Middle
@@ -74,11 +74,11 @@ ent-RMCContainerWeYaAltMiddle = { ent-RMCContainerWeYaLeft }
 ent-RMCContainerWeYaAltRight = { ent-RMCContainerWeYaLeft }
     .suffix = WeYa Alt, Right
     .desc = { ent-RMCContainerWeYaLeft.desc }
-ent-RMCContainerTrijentLeft = Trijent Corporation Cargo Container
+ent-RMCContainerTrijentLeft = Грузовой контейнер Триджент
     .desc =
-        A huge industrial shipping container.
-        This one is from The Trijent Corporation's mining operations.
-        If this breaks open, you figure you probably shouldn't breathe in what's inside.
+        Огромный индустриальный контейнер.
+        Этот от горнодобывающей компании Trijent.
+        Если он откроется, вы поймете, что вам, вероятно, не стоит вдыхать то, что находится внутри.
     .suffix = Trijent, Left
 ent-RMCContainerTrijentMiddle = { ent-RMCContainerTrijentLeft }
     .suffix = Trijent, Middle
@@ -95,11 +95,11 @@ ent-RMCContainerTrijentAltMiddle = { ent-RMCContainerTrijentLeft }
 ent-RMCContainerTrijentAltRight = { ent-RMCContainerTrijentLeft }
     .suffix = Trijent Alt, Right
     .desc = { ent-RMCContainerTrijentLeft.desc }
-ent-RMCContainerFerretLeft = Ferret Heavy Industries Cargo Container
+ent-RMCContainerFerretLeft = Грузовой контейнер Феррет Хэви Индастриз
     .desc =
-        A huge industrial shipping container.
-        This one is from Ferret Heavy Industries, a manufacturer of terrestrial crawlers and powerloaders.
-        Unfortunately, the company went bankrupt. Fortunately, these containers are really cheap now.
+        Огромный индустриальный контейнер.
+        Этот от Ferret Heavy Industries, производителя наземных кравлеров и силовых погрузчиков.
+        К сожалению, компания обанкротилась. К счастью, сейчас эти контейнеры действительно дешевы.
     .suffix = Ferret, Left
 ent-RMCContainerFerretMiddle = { ent-RMCContainerFerretLeft }
     .suffix = Ferret, Middle
@@ -107,10 +107,11 @@ ent-RMCContainerFerretMiddle = { ent-RMCContainerFerretLeft }
 ent-RMCContainerFerretRight = { ent-RMCContainerFerretLeft }
     .suffix = Ferret, Right
     .desc = { ent-RMCContainerFerretLeft.desc }
-ent-RMCContainerNovarisLeft = Novaris Cargo Container
+ent-RMCContainerNovarisLeft = Грузовой контейнер Новарис
     .desc =
-        A huge industrial shipping containerThis one is from Novaris, they makes just about anything and everything.
-        You notice this container has a peeling note on it, saying all contents were transferred from another station decades ago, how long has it been here?
+        Огромный индустриальный контейнер.
+        Этот от Novaris, они делают практически все, что угодно.
+        Вы заметили, что на этом контейнере есть отклеившаяся записка, в которой говорится, что все содержимое было перевезено с другой станции несколько десятилетий назад, как долго он здесь находится?
     .suffix = Novaris, Left
 ent-RMCContainerNovarisMiddle = { ent-RMCContainerNovarisLeft }
     .suffix = Novaris, Middle
@@ -118,15 +119,15 @@ ent-RMCContainerNovarisMiddle = { ent-RMCContainerNovarisLeft }
 ent-RMCContainerNovarisRight = { ent-RMCContainerNovarisLeft }
     .suffix = Novaris, Right
     .desc = { ent-RMCContainerNovarisLeft.desc }
-ent-RMCContainerAICMiddle = AIC Cargo Container
+ent-RMCContainerAICMiddle = Грузовой контейнер СПСП
     .desc =
-        A huge industrial shipping container.
-        This one is from the Asian Industrial Collective, which was absorded into the SPP. Their massive industrial output has ensured that cargo containers bearing their symbols and name won't be disappearing any time soon.
+        Огромный индустриальный контейнер.
+        Этот от Социалистической Партии Союзных Планет, которая потом стала СССП. Их массовое промышленное производство гарантирует, что грузовые контейнеры с их символикой и названием не исчезнут в ближайшее время.
     .suffix = AIC, Middle
-ent-RMCContainerSPPLeft = SPP Cargo Container
+ent-RMCContainerSPPLeft = Грузовой контейнер СССП
     .desc =
-        A huge industrial shipping container.
-        This one is from the Socialist Progressive Peoples, as indicated by the massive symbol on the side.
+        Огромный индустриальный контейнер.
+        Этот - от Союза Советских Социалистических Планет, о чем свидетельствует массивный символ на боку.
     .suffix = SPP, Left
 ent-RMCContainerSPPMiddle = { ent-RMCContainerSPPLeft }
     .suffix = SPP, Middle
@@ -143,10 +144,10 @@ ent-RMCContainerSPPAltMiddle = { ent-RMCContainerSPPLeft }
 ent-RMCContainerSPPAltRight = { ent-RMCContainerSPPLeft }
     .suffix = SPP Alt, Right
     .desc = { ent-RMCContainerSPPLeft.desc }
-ent-RMCContainerMSPLeft = Ministry of Space Protection Cargo Container
+ent-RMCContainerMSPLeft = Грузовой контейнер НСТСС
     .desc =
-        A huge industrial shipping container.
-        This one belongs to the SPP's Ministry of Space Protection.
+        Огромный грузовой контейнер.
+        Принадлежит Народному Секретариату Транспортного Сообщения и Связи.
     .suffix = MSP, Left
 ent-RMCContainerMSPMiddle = { ent-RMCContainerMSPLeft }
     .suffix = MSP, Middle
@@ -154,10 +155,10 @@ ent-RMCContainerMSPMiddle = { ent-RMCContainerMSPLeft }
 ent-RMCContainerMSPRight = { ent-RMCContainerMSPLeft }
     .suffix = MSP, Right
     .desc = { ent-RMCContainerMSPLeft.desc }
-ent-RMCContainerUNMCLeft = United Nations Marine Corps Cargo Container
+ent-RMCContainerUNMCLeft = Грузовой контейнер ККМП
     .desc =
-        A huge industrial shipping container.
-        This one belongs to the UN's United Nations Marine Corps.
+        Огромный индустриальный контейнер.
+        Этот пренадлежит Колониальному Корпусу Морской Пехоты ОПЗ.
     .suffix = UNMC, Left
 ent-RMCContainerUNMCMiddle = { ent-RMCContainerUNMCLeft }
     .suffix = UNMC, Middle
@@ -165,10 +166,10 @@ ent-RMCContainerUNMCMiddle = { ent-RMCContainerUNMCLeft }
 ent-RMCContainerUNMCRight = { ent-RMCContainerUNMCLeft }
     .suffix = UNMC, Right
     .desc = { ent-RMCContainerUNMCLeft.desc }
-ent-RMCContainerAegisLeft = AEGIS Cargo Container
+ent-RMCContainerAegisLeft = Грузовой контейнер АЕГИС
     .desc =
-        A huge industrial shipping container.
-        This one is from AEGIS, the defense contractors behind the M54C and other marine weaponry.
+        Огромный индустриальный контейнер.
+        Этот от AEGIS, оборонных подрядчиков, стоящих за созданием M54C и другого вооружения морской пехоты и армии ОПЗ.
     .suffix = Aegis, Left
 ent-RMCContainerAegisMiddle = { ent-RMCContainerAegisLeft }
     .suffix = Aegis, Middle

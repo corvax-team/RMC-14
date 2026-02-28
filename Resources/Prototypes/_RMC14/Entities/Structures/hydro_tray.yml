@@ -15,7 +15,7 @@
         mask:
         - MachineMask
         layer:
-        - MachineLayer
+        - BulletImpassable
   - type: Anchorable
   - type: Pullable
   - type: Destructible

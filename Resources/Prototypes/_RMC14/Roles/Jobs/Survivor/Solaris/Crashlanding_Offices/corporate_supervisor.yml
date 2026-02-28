@@ -3,12 +3,12 @@
   id: RMCSurvivorSolarisCorporateSupervisor
   name: rmc-job-name-survivor-solaris-corporate-supervisor
   ranks:
-    RMCRankWeYaAssistantManager: []
+    RMCRankWeYaExecutiveSupervisor: []
   accessGroups:
   - ColonistPMC
   access:
   - CMAccessIllegal
-  icon: "CMJobIconExecAssMan"
+  icon: CMJobIconExecSpec
   greeting: rmc-job-greeting-solaris-pmc-supervisor
   spawnMenuRoleName: Survivor — Corporate Supervisor (Solaris Ridge special survivor)
   startingGear: RMCGearSurvivorSolarisCorporateSupervisor

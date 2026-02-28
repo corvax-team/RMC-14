@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Attachable.Components;
-using Content.Shared._RMC14.Emplacements;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Utility;
 
@@ -10,16 +9,8 @@ public sealed class RMCCombatModeSystem : EntitySystem
     public SpriteSpecifier.Rsi? GetCrosshair(Entity<WieldedCrosshairComponent?, WieldableComponent?> crosshair)
     {
         // Require the held item to be wielded (this keeps existing behavior).
-        if (!Resolve(crosshair, ref crosshair.Comp1, false))
+        if (!Resolve(crosshair, ref crosshair.Comp1, ref crosshair.Comp2, false))
             return null;
-
-        if (!Resolve(crosshair, ref crosshair.Comp2, false))
-        {
-            if (TryComp(crosshair.Owner, out MountableWeaponComponent? mountable) && mountable.MountedTo != null)
-                return crosshair.Comp1?.Rsi;
-
-            return null;
-        }
 
         if (crosshair.Comp2 is not { Wielded: true })
             return null;

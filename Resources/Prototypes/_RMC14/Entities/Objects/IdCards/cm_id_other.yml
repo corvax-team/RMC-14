@@ -86,7 +86,6 @@
   - type: ItemIFF
     factions:
     - FactionWeYa
-    - FactionMarine
   - type: PresetIdCard
     job: CMLiaison
 
@@ -221,6 +220,16 @@
     groups:
     - Colony
     - RMCWeYa
+
+- type: entity
+  id: FactionWeYa
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - Colony
+    - WEYA
 
 - type: entity
   parent: CMIDCardLanyard

@@ -2,7 +2,6 @@
   parent: Bed
   id: CMBed
   name: bed
-  suffix: RMC
   description: A mattress seated on a rectangular metallic frame. This is used to support a lying person in a comfortable manner, notably for regular sleep. Ancient technology, but still useful.
   components:
   - type: Transform
@@ -18,31 +17,20 @@
   - type: Construction
     graph: RMCBed
     node: bed
-  - type: RMCMesonsNonviewable
-  - type: Damageable
-    damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine
-  - type: MeleeReceivedMultiplier
-    xenoDamage:
-      types:
-        Slash: 51
-    otherMultiplier: 1
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 50
+        damage: 75
       behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
       - !type:SpawnEntitiesBehavior
         spawn:
           CMSheetMetal1:
             min: 1
             max: 1
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
+  - type: RMCMesonsNonviewable
     # Corvax-Vehicle-Content-Start
   - type: VehicleStructureTarget
     momentumLossFactor: 0
@@ -86,7 +74,7 @@
   parent: CMBed
   id: RMCBedAlien
   name: alien bed
-  suffix: RMC|Alien
+  suffix: Alien
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/bed.rsi
@@ -126,7 +114,7 @@
 - type: entity
   parent: RMCBedBunkGreen
   id: RMCBedBunkGreenUnanchored
-  suffix: RMC|Unanchored
+  suffix: Unanchored
   components:
   - type: Transform
     anchored: false
@@ -147,7 +135,6 @@
   parent: [BaseItem, BaseFoldable]
   id: Bedroll
   name: bedroll
-  suffix: RMC
   description: A foldable bedroll, just about the only thing of comfort in the field. You're generally supposed to unroll it before sleeping, but who needs rules?
   components:
   - type: Transform

@@ -34,9 +34,6 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: GuideHelp
-    guides:
-    - RMCGuideRoleCombatTechnician
   - type: InteractionOutline
   - type: Appearance
   - type: Corrodible
@@ -131,9 +128,6 @@
   id: RMCPortableGeneratorBase # TODO RMC14 - Functionality
   parent: [ BaseMachine, SmallConstructibleMachine, StructureWheeled]
   components:
-    - type: GuideHelp
-      guides:
-      - RMCGuideRoleCombatTechnician
     - type: Transform
       anchored: False
     - type: Physics

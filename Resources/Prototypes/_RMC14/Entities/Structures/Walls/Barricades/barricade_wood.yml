@@ -46,6 +46,7 @@
   - type: XenoCrusherChargable
     instantDestroy: true
   - type: Climbable
+  - type: RMCMesonsNonviewable
     # Corvax-Vehicle-Content-Start
   - type: VehicleStructureTarget
     minimumClassToDestroy: Weak

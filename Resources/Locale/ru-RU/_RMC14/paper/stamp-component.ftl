@@ -1,12 +1,12 @@
 stamp-component-stamped-name-cm-default = Пропечатано
-stamp-component-stamped-name-cm-we-ya = Ве-Я
+stamp-component-stamped-name-cm-we-ya = Vitezstvi
 stamp-component-stamped-name-cm-marine = Верховное командование ККМП
 stamp-component-stamped-name-cm-cmb = Бюро колониальных маршалов
-stamp-component-stamped-name-cm-provost = Офис маршала военного приставолитета
+stamp-component-stamped-name-cm-provost = Офис военного приставолитета
 stamp-component-stamped-name-cm-clf = Колониальный Фронт Освобождения
 stamp-component-stamped-name-cm-spp = СССП
 stamp-component-stamped-name-cm-free-press = Свободная пресса
-stamp-component-stamped-name-cm-tse = Империя Трёх Солнц
+stamp-component-stamped-name-cm-tse = Империя Миртана
 stamp-component-stamped-name-cm-xo = Исполнительный офицер
 stamp-component-stamped-name-cm-co = Командующий офицер
 stamp-component-stamped-name-cm-aso = Офицер вспомогательной поддержки

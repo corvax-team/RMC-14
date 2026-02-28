@@ -10,7 +10,4 @@ public sealed partial class DropshipAttachedSpriteComponent : Component
 {
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi? Sprite;
-
-    [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi? WeaponSlotSprite;
 }

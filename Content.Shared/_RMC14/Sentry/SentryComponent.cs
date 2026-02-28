@@ -62,6 +62,9 @@ public sealed partial class SentryComponent : Component
     public EntProtoId<SkillDefinitionComponent> DelaySkill = "RMCSkillConstruction";
 
     [DataField, AutoNetworkedField]
+    public bool HomingShots = true;
+
+    [DataField, AutoNetworkedField]
     public EntityUid? Camera;
 
     [DataField, AutoNetworkedField]
@@ -81,12 +84,6 @@ public sealed partial class SentryComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan AlertCooldown = TimeSpan.FromSeconds(5);
-
-    /// <summary>
-    ///     Can the sentry be picked up or toggled on/off.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool IsLocked;
 }
 
 [Serializable, NetSerializable]

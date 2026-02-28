@@ -13,7 +13,7 @@
     - id: CMArmorHelmetM11
     - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
-    - id: RMCPVEArmorCaseB12
+    - id: RMCArmorB12PVE
 
 - type: entityTable
   id: RMCClosetGoldenArrowSGOFill
@@ -21,7 +21,7 @@
     children:
     - id: RMCSmartGunPVE
     - id: RMCPowerCellSmartgun
-    - id: RMCPVEArmorCaseM3SGO
+    - id: RMCArmorM3PVESGO
     - id: RMCBeltSmartGunOperatorPistolFilled
     - id: RMCMagazineSmartGun
     - id: RMCMagazineSmartGun

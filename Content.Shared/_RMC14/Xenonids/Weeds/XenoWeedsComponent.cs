@@ -1,7 +1,5 @@
 using Content.Shared._RMC14.Xenonids.ManageHive.Boons;
-using Content.Shared._RMC14.Xenonids.Designer;
 using Content.Shared.Damage;
-using Robust.Shared.Analyzers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -9,7 +7,7 @@ namespace Content.Shared._RMC14.Xenonids.Weeds;
 
 // TODO RMC14 field deltas for auto states
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedXenoWeedsSystem), typeof(HiveBoonSystem), typeof(WeedboundWallSystem))]
+[Access(typeof(SharedXenoWeedsSystem), typeof(HiveBoonSystem))]
 public sealed partial class XenoWeedsComponent : Component
 {
     [DataField]
@@ -69,7 +67,4 @@ public sealed partial class XenoWeedsComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool BlockOtherWeeds;
-
-    [DataField, AutoNetworkedField]
-    public List<EntityUid> WeedboundStructures = new();
 }

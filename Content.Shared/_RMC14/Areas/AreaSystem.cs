@@ -331,14 +331,14 @@ public sealed class AreaSystem : EntitySystem
         return false;
     }
 
-    public bool CanResinPopup(Entity<MapGridComponent, AreaGridComponent?> grid, Vector2i indices, EntityUid? user, bool popup = true)
+    public bool CanResinPopup(Entity<MapGridComponent, AreaGridComponent?> grid, Vector2i indices, EntityUid? user)
     {
         if (!TryGetArea(grid, indices, out var area, out _))
             return true;
 
         if (area.Value.Comp.WeedKilling)
         {
-            if (user != null && popup)
+            if (user != null)
                 _popup.PopupClient("This area is unsuited to host the hive!", user.Value, user.Value, PopupType.MediumCaution);
 
             return false;
@@ -351,7 +351,7 @@ public sealed class AreaSystem : EntitySystem
         if (roundDuration > _earlySpreadHiveTime)
             return true;
 
-        if (user != null && popup)
+        if (user != null)
             _popup.PopupClient("It's too early to spread the hive this far.", user.Value, user.Value, PopupType.MediumCaution);
 
         return false;

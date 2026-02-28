@@ -1,6 +1,6 @@
-ent-RMCIDCardTSEPA = ИД-карта TSEPA
+ent-RMCIDCardTSEPA = ИД-карта ПСОПЗ
     .desc = { ent-CMIDCardLanyard.desc }
-ent-RMCIDCardTSEPASilverGold = TSEPA silver gold badge
-    .desc = The silver with gold accents badge which represents that the wearer is a TSEPA Senior Constable. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
-ent-RMCIDCardTSEPAGold = TSEPA gold badge
-    .desc = The gold badge which represents that the wearer is a TSEPA Inspector. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+ent-RMCIDCardTSEPASilverGold = Серебряно-Золотой значок ПСОПЗ
+    .desc = Tсеребряный значок с золотыми вставками, который означает, что его обладатель является старшим констеблем ПСОПЗ. Это знак справедливости, авторитета и защиты. Защита тех, кто не может этого сделать. Этот значок символизирует приверженность присяге, которую всегда соблюдают.
+ent-RMCIDCardTSEPAGold = Золотой значок ПСОПЗ
+    .desc = Золотой значок, который означает, что его владелец является инспектором ПСОПЗ. Это знак справедливости, авторитета и защиты. Защита тех, кто не может этого сделать. Этот значок символизирует приверженность данной присяге, которую всегда соблюдают.

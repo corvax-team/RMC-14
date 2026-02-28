@@ -90,3 +90,9 @@ public sealed partial class RMCFocusedShootingComponent : Component
     [DataField, AutoNetworkedField]
     public Color LaserColor = Color.Blue;
 }
+
+[Serializable, NetSerializable]
+public enum FocusedVisuals : byte
+{
+    Focused,
+}

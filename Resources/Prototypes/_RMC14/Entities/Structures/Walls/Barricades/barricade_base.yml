@@ -11,9 +11,6 @@
   parent: CMBaseStructureCorrodible
   id: CMBarricadeBase
   components:
-  - type: GuideHelp
-    guides:
-    - RMCGuideRoleCombatTechnician
   - type: Corrodible
     structure: false
   - type: Rotatable
@@ -86,7 +83,7 @@
     maximumFireStacks: 0.5
     damage:
       types:
-        Heat: 2
+        Heat: 3.75
   - type: ExaminableDamage
     messages: RMCBarricadeMessages
   # - type: RMCGenericExamine TODO

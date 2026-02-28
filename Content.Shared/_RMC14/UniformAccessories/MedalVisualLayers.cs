@@ -1,4 +1,4 @@
-using Robust.Shared.Serialization;
+﻿using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.UniformAccessories;
 
@@ -6,5 +6,4 @@ namespace Content.Shared._RMC14.UniformAccessories;
 public enum MedalVisualLayers
 {
     Base,
-    Base1,
 }

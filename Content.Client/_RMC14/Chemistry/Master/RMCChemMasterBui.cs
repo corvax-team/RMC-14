@@ -100,7 +100,6 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
 
         _window.CreatePillsButton.OnPressed += _ => SendPredictedMessage(new RMCChemMasterCreatePillsMsg());
         _window.PresetsButton.OnPressed += _ => OpenPresetWindow(chemMaster);
-        _window.AutoSelectButton.OnPressed += _ => SendPredictedMessage(new RMCChemMasterAutoSelectToggleMsg());
         _window.SelectAllButton.OnPressed += _ =>
         {
             if (!_container.TryGetContainer(Owner, chemMaster.PillBottleContainer, out var container))
@@ -147,7 +146,6 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
 
         var anySelected = chemMaster.SelectedBottles.Count > 0;
         _window.CreatePillsButton.Disabled = !anySelected;
-        _window.AutoSelectButton.Pressed = chemMaster.AutoSelectPillBottles;
     }
 
     private void UpdateBeaker(Entity<RMCChemMasterComponent> chemMaster)

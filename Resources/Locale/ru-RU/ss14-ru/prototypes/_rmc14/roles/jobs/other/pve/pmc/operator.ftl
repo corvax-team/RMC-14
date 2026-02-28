@@ -1,3 +1,3 @@
-ent-RMCSpawnPointPMCOperatorPVE = weya pmc operator spawn point
+ent-RMCSpawnPointPMCOperatorPVE = Точка спавна оператора ЧВК Vitezstvi
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }

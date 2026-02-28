@@ -1,7 +1,7 @@
 ent-RMCWeaponRevolverSpearhead = авторевольвер БКМ Спирхед
     .desc = Громоздкий револьвер, временами используемый штурмовиками и офицерами Корпуса колониальной морской пехоты, а также гражданскими правоохранительными органами. Использует патроны калибра .357 Магнум.
-ent-RMCWeaponRevolverSpearheadCustom = Spearhead custom autorevolver
-    .desc = An automatic revolver chambered in .357, custom made of darker metal and with a wooden handle, clearly made for a person with taste in mind.
+ent-RMCWeaponRevolverSpearheadCustom = Кастомный Спирхэд
+    .desc = Автоматический револьвер под патрон 357-го калибра, изготовленный на заказ из темного металла с деревянной рукояткой. Явно создан для человека со вкусом.
 ent-RMCWeaponRevolverSpearheadEmpty = { ent-RMCWeaponRevolverSpearhead }
     .suffix = Пустой
     .desc = { ent-RMCWeaponRevolverSpearhead.desc }

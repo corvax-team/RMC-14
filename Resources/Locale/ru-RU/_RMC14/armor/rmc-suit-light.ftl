@@ -1,1 +1,1 @@
-rmc-suit-light-short = Ваш источник света отключается.
+rmc-suit-light-short = Ваш фонарь отключается.

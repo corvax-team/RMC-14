@@ -54,8 +54,6 @@
         state: cargo
     - type: RMCTrackable
     - type: MutinyEligible
-    - type: RMCAwardRecommendation
-    - type: SeeNewPlayers
 
 - type: startingGear
   id: CMGearQuartermaster

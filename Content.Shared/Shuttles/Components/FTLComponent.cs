@@ -30,7 +30,7 @@ public sealed partial class FTLComponent : Component
     public float TravelTime = 0f;
 
     [DataField]
-    public EntProtoId? VisualizerProto; // = "FtlVisualizerEntity" RMC14 no ftl visualizer;
+    public EntProtoId? VisualizerProto = "FtlVisualizerEntity";
 
     [DataField, AutoNetworkedField]
     public EntityUid? VisualizerEntity;

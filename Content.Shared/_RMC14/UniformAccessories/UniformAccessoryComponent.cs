@@ -1,4 +1,4 @@
-using Robust.Shared.GameStates;
+﻿using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 using static Robust.Shared.Utility.SpriteSpecifier;
 
@@ -26,7 +26,7 @@ public sealed partial class UniformAccessoryComponent : Component
     public bool HiddenByJacketRolling = false;
 
     [DataField, AutoNetworkedField]
-    public List<string>? LayerKeys;
+    public string? LayerKey;
 
     [DataField, AutoNetworkedField]
     public bool HasIconSprite = false;

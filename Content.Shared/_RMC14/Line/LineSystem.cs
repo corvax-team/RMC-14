@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
-using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared.Beam.Components;
@@ -23,7 +22,6 @@ public sealed class LineSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionalBlock = default!;
 
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
@@ -43,8 +41,8 @@ public sealed class LineSystem : EntitySystem
     public List<LineTile> DrawLine(EntityCoordinates start, EntityCoordinates end, TimeSpan delayPer, float? range, out EntityUid? blocker, bool hitBlocker = false, bool thick = false)
     {
         blocker = null;
-        start = _mapSystem.AlignToGrid(start);
-        end = _mapSystem.AlignToGrid(end);
+        start = _mapSystem.AlignToGrid(_transform.GetMoverCoordinates(start));
+        end = _mapSystem.AlignToGrid(_transform.GetMoverCoordinates(end));
         var tiles = new List<LineTile>();
         if (!start.TryDistance(EntityManager, _transform, end, out var distance))
             return tiles;
@@ -93,14 +91,10 @@ public sealed class LineSystem : EntitySystem
             for (var j = 0; j < coords.Count; j++)
             {
                 var entityCoords = coords[j];
-                var blocked = IsTileBlocked(grid, lastCoords, entityCoords, hitBlocker, out blocker, out var hitBlockerOverride);
-                hitBlocker = hitBlockerOverride;
-
-                if (j == 0 && blocked && !hitBlocker)
-                {
-                    centerBlocked = true;
-                    break;
-                }
+                var direction = (entityCoords.Position - lastCoords.Position).ToWorldAngle();
+                var blocked = IsTileBlocked(grid, entityCoords, direction, out blocker);
+                if (blocked && !hitBlocker)
+                    continue;
 
                 var mapCoords = _transform.ToMapCoordinates(entityCoords);
 
@@ -135,10 +129,9 @@ public sealed class LineSystem : EntitySystem
         return tiles;
     }
 
-    private bool IsTileBlocked(Entity<MapGridComponent>? grid, EntityCoordinates previousCoords, EntityCoordinates coords, bool hitBlocker, [NotNullWhen(true)] out EntityUid? blocker, out bool hitBlockerOverride)
+    private bool IsTileBlocked(Entity<MapGridComponent>? grid, EntityCoordinates coords, Angle angle, [NotNullWhen(true)] out EntityUid? blocker)
     {
         blocker = default;
-        hitBlockerOverride = hitBlocker;
         if (grid == null)
             return false;
 
@@ -152,16 +145,29 @@ public sealed class LineSystem : EntitySystem
                     continue;
 
                 var barricadeDir = _transform.GetWorldRotation(uid.Value).GetCardinalDir();
-                if (_directionalBlock.IsBehindTarget(uid.Value, coords.EntityId, previousCoords))
+                var direction = angle.GetDir();
+                if (barricadeDir == direction || barricadeDir == direction.GetOpposite())
                 {
                     blocker = uid.Value;
                     return true;
                 }
-                if (_directionalBlock.IsFacingTarget(uid.Value, coords.EntityId, previousCoords))
+
+                if (!direction.IsCardinal())
                 {
-                    blocker = uid.Value;
-                    hitBlockerOverride = false;
-                    return true;
+                    var blocked = direction switch
+                    {
+                        Direction.SouthEast => barricadeDir is Direction.North or Direction.West,
+                        Direction.NorthEast => barricadeDir is Direction.South or Direction.West,
+                        Direction.NorthWest => barricadeDir is Direction.South or Direction.East,
+                        Direction.SouthWest => barricadeDir is Direction.North or Direction.East,
+                        _ => false,
+                    };
+
+                    if (blocked)
+                    {
+                        blocker = uid.Value;
+                        return true;
+                    }
                 }
             }
             else if (_doorQuery.TryComp(uid, out var door))

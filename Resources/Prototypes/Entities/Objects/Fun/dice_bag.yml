@@ -24,10 +24,6 @@
     whitelist:
       tags:
       - Dice
-  - type: InteractedBlacklist
-    blacklist:
-      components:
-      - Xeno
 
 - type: entity
   parent: DiceBag

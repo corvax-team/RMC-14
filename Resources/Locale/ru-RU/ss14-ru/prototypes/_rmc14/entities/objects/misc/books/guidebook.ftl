@@ -1,7 +1,7 @@
-ent-RMCGuidebookLawMarine = marine law
-    .desc = Usually being the favorite read of any member of the Military Police of the UNMC, it's whole meaning is to work as the scales for the sword of justice that brandishes onboard the vessels of the United Nations Marine Corps, so peace and order can be maintained. It's nicknames may include but are not limited to: Devil's Red Book, Bible of All Sinners, THE Book, ML, Red Brick, Provost's Torture Manual, Provost's Red Devil's Torture Bible of All Sinners.
-ent-RMCGuidebookLawMarineProvost = marine law: limited provost edition
+ent-RMCGuidebookLawMarine = Военный закон
+    .desc = Обычно эта книга является любимым чтивом любого сотрудника военной полиции ККМП, и ее смысл заключается в том, чтобы служить весами для меча правосудия, которым размахивают на борту судов морской пехоты Объединённого Правительства Земли, чтобы поддерживать мир и порядок. Его прозвища могут включать, но не ограничиваться ими: "Красная книга дьявола", "Библия всех грешников", КНИГА, ВЗ, Красный Кирпич, "Руководство по пыткам приставолитета", "Библия пыток всех грешников Красного дьявола Приставолитета".
+ent-RMCGuidebookLawMarineProvost = Военный закон: лимитированная версия приставолитета
     .suffix = Guidebook, Admeme
     .desc = { ent-RMCGuidebookLawMarine.desc }
-ent-RMCGuidebookSOP = standard operating procedure
-    .desc = One of the most important books onboard any United Nations Marine Corps vessel, or at least that's how you are supposed to feel about it. The book carries within it's pages the UNMC guidelines and procedures regarding all kinds of situations.
+ent-RMCGuidebookSOP = Военные уставы
+    .desc = Одна из самых важных книг на борту любого судна колониальной пехоты ОПЗ, или, по крайней мере, именно так вы должны к ней относиться. На страницах книги изложены руководящие принципы и процедуры ККМП, касающиеся всевозможных ситуаций.

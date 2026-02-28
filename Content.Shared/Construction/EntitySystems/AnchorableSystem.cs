@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Construction;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Components;
 using Content.Shared.Containers.ItemSlots;
@@ -140,7 +139,7 @@ public sealed partial class AnchorableSystem : EntitySystem
 
         var xform = Transform(uid);
         if (TryComp<PhysicsComponent>(uid, out var anchorBody) &&
-            !TileFree(xform.Coordinates, anchorBody, uid)) // RMC14
+            !TileFree(xform.Coordinates, anchorBody))
         {
             _popup.PopupClient(Loc.GetString("anchorable-occupied"), uid, args.User);
             return;
@@ -235,7 +234,7 @@ public sealed partial class AnchorableSystem : EntitySystem
         _adminLogger.Add(LogType.Anchor, LogImpact.Low, $"{ToPrettyString(userUid):user} is trying to anchor {ToPrettyString(uid):entity} to {transform.Coordinates:targetlocation}");
 
         if (TryComp<PhysicsComponent>(uid, out var anchorBody) &&
-            !TileFree(transform.Coordinates, anchorBody, uid)) //RMC14
+            !TileFree(transform.Coordinates, anchorBody))
         {
             _popup.PopupClient(Loc.GetString("anchorable-occupied"), uid, userUid);
             return;
@@ -287,7 +286,7 @@ public sealed partial class AnchorableSystem : EntitySystem
     /// <summary>
     /// Returns true if no hard anchored entities exist on the coordinate tile that would collide with the provided physics body.
     /// </summary>
-    public bool TileFree(EntityCoordinates coordinates, PhysicsComponent anchorBody, EntityUid? anchoringEntity = null) // RMC14
+    public bool TileFree(EntityCoordinates coordinates, PhysicsComponent anchorBody)
     {
         // Probably ignore CanCollide on the anchoring body?
         var gridUid = _transformSystem.GetGrid(coordinates);
@@ -296,14 +295,14 @@ public sealed partial class AnchorableSystem : EntitySystem
             return false;
 
         var tileIndices = _map.TileIndicesFor((gridUid.Value, grid), coordinates);
-        return TileFree((gridUid.Value, grid), tileIndices, anchorBody.CollisionLayer, anchorBody.CollisionMask, anchoringEntity); //RMC14
+        return TileFree((gridUid.Value, grid), tileIndices, anchorBody.CollisionLayer, anchorBody.CollisionMask);
     }
 
     /// <summary>
     /// Returns true if no hard anchored entities match the collision layer or mask specified.
     /// </summary>
     /// <param name="grid"></param>
-    public bool TileFree(Entity<MapGridComponent> grid, Vector2i gridIndices, int collisionLayer = 0, int collisionMask = 0, EntityUid? anchoringEntity = null) //RMC14
+    public bool TileFree(Entity<MapGridComponent> grid, Vector2i gridIndices, int collisionLayer = 0, int collisionMask = 0)
     {
         var enumerator = _map.GetAnchoredEntitiesEnumerator(grid, grid.Comp, gridIndices);
 
@@ -319,17 +318,6 @@ public sealed partial class AnchorableSystem : EntitySystem
             if ((body.CollisionMask & collisionLayer) != 0x0 ||
                 (body.CollisionLayer & collisionMask) != 0x0)
             {
-                // RMC14
-                if (anchoringEntity != null)
-                {
-                    var ev = new RMCCheckTileFreeEvent(ent.Value);
-                    RaiseLocalEvent(anchoringEntity.Value, ref ev);
-
-                    if (ev.IsTileFree)
-                        continue;
-                }
-                //
-
                 return false;
             }
         }

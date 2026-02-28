@@ -1,9 +1,7 @@
 ﻿using System.Numerics;
-using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.NewPlayer;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
-using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 
 namespace Content.Client._RMC14.NewPlayer;
@@ -11,11 +9,8 @@ namespace Content.Client._RMC14.NewPlayer;
 public sealed class NewPlayerVisualizerSystem : VisualizerSystem<NewPlayerLabelComponent>
 {
     [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IConfigurationManager _configManager = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
 
     private EntityQuery<SeeNewPlayersComponent> _seeNewPlayersQuery;
-    private bool _showPlayerIcons;
 
     public override void Initialize()
     {
@@ -25,8 +20,6 @@ public sealed class NewPlayerVisualizerSystem : VisualizerSystem<NewPlayerLabelC
 
         SubscribeLocalEvent<SeeNewPlayersComponent, LocalPlayerAttachedEvent>(OnSeeNewPlayersLocalAttached);
         SubscribeLocalEvent<SeeNewPlayersComponent, LocalPlayerDetachedEvent>(OnSeeNewPlayersLocalDetached);
-
-        Subs.CVar(_configManager, RMCCVars.RMCShowNewPlayerIcons, NewPlayerIconsOptionChanged, true);
     }
 
     private void OnSeeNewPlayersLocalAttached(Entity<SeeNewPlayersComponent> ent, ref LocalPlayerAttachedEvent args)
@@ -58,16 +51,13 @@ public sealed class NewPlayerVisualizerSystem : VisualizerSystem<NewPlayerLabelC
 
     private void UpdateAppearance(Entity<AppearanceComponent, SpriteComponent> ent)
     {
-        var spriteEntity = (ent.Owner, ent.Comp2);
-
-        if (!_sprite.LayerMapTryGet(spriteEntity, NewPlayerLayers.Layer, out var layer, false))
+        if (!ent.Comp2.LayerMapTryGet(NewPlayerLayers.Layer, out var layer))
             return;
 
         if (!_seeNewPlayersQuery.TryComp(_player.LocalEntity, out var see) ||
-            !AppearanceSystem.TryGetData(ent, NewPlayerLayers.Layer, out NewPlayerVisuals visual, ent) ||
-            !_showPlayerIcons)
+            !AppearanceSystem.TryGetData(ent, NewPlayerLayers.Layer, out NewPlayerVisuals visual, ent))
         {
-            _sprite.LayerSetVisible(spriteEntity, layer, false);
+            ent.Comp2.LayerSetVisible(layer, false);
             return;
         }
 
@@ -83,14 +73,8 @@ public sealed class NewPlayerVisualizerSystem : VisualizerSystem<NewPlayerLabelC
         if (state == null)
             return;
 
-        _sprite.LayerSetSprite(spriteEntity, layer, state);
-        _sprite.LayerSetVisible(spriteEntity, layer, true);
-        _sprite.LayerSetOffset(spriteEntity, layer, new Vector2(0, 0.21f));
-    }
-
-    private void NewPlayerIconsOptionChanged(bool enabled)
-    {
-        _showPlayerIcons = enabled;
-        UpdateAllAppearance();
+        ent.Comp2.LayerSetSprite(layer, state);
+        ent.Comp2.LayerSetVisible(layer, true);
+        ent.Comp2.LayerSetOffset(layer, new Vector2(0, 0.21f));
     }
 }

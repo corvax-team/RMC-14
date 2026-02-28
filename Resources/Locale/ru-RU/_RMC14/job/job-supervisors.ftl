@@ -1,5 +1,5 @@
 # supervisors
-cm-job-supervisors-we-ya = корпоративному офису компании Вестон-Ямада
+cm-job-supervisors-we-ya = корпоративному офису компании Vitezstvi
 cm-job-supervisors-aso = офицеру вспомогательной поддержки
 cm-job-supervisors-co = командующему офицеру
 cm-job-supervisors-cmo = офицеру медицинской службы
@@ -10,6 +10,6 @@ cm-job-supervisors-cmp = начальнику военной полиции
 cm-job-supervisors-qm = квартирмейстеру
 cm-job-supervisors-ce = главному инженеру
 cm-job-supervisors-sl = действующему командиру отряда
-cm-job-supervisors-staff = Server Staff
+cm-job-supervisors-staff = администрации сервера
 cm-job-supervisors-nobody = никому, вы сами по себе.
-cm-job-supervisors-colonists = the sapient colonists
+cm-job-supervisors-colonists = колонистам

@@ -1,6 +1,5 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Gibbing;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
@@ -11,7 +10,6 @@ using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
-using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Gut;
 
@@ -70,17 +68,8 @@ public sealed class SharedXenoGutSystem : EntitySystem
         };
 
         var selfMsg = Loc.GetString("rmc-gut-start-self");
-        _popup.PopupClient(selfMsg, xeno.Owner, xeno.Owner, PopupType.LargeCaution);
-
-        var xenoMsg = Loc.GetString("rmc-gut-start-xenos", ("user", xeno.Owner));
-        var xenoFilter = Filter.PvsExcept(xeno.Owner, entityManager: EntityManager)
-            .RemoveWhereAttachedEntity(uid => !EntityManager.HasComponent<XenoComponent>(uid));
-        _popup.PopupPredicted(xenoMsg, xeno.Owner, null, xenoFilter, true, PopupType.LargeCaution);
-
-        var marineMsg = Loc.GetString("rmc-gut-start-marines", ("target", args.Target));
-        var marineFilter = Filter.PvsExcept(xeno.Owner, entityManager: EntityManager)
-            .RemoveWhereAttachedEntity(uid => !EntityManager.HasComponent<MarineComponent>(uid));
-        _popup.PopupPredicted(marineMsg, xeno.Owner, null, marineFilter, true, PopupType.LargeCaution);
+        var othersMsg = Loc.GetString("rmc-gut-start-others", ("user", xeno.Owner), ("target", args.Target));
+        _popup.PopupPredicted(selfMsg, othersMsg, xeno.Owner, xeno.Owner, PopupType.LargeCaution);
 
         _doAfter.TryStartDoAfter(doAfter);
         _jitter.DoJitter(args.Target, xeno.Comp.Delay, true, 14f, 5f, true);
@@ -113,17 +102,8 @@ public sealed class SharedXenoGutSystem : EntitySystem
         }
 
         var selfMsg = Loc.GetString("rmc-gut-finish-self");
-        _popup.PopupClient(selfMsg, xeno.Owner, xeno.Owner, PopupType.LargeCaution);
-
-        var xenoMsg = Loc.GetString("rmc-gut-finish-xenos", ("user", xeno.Owner));
-        var xenoFilter = Filter.PvsExcept(xeno.Owner, entityManager: EntityManager)
-            .RemoveWhereAttachedEntity(uid => !EntityManager.HasComponent<XenoComponent>(uid));
-        _popup.PopupPredicted(xenoMsg, xeno.Owner, null, xenoFilter, true, PopupType.LargeCaution);
-
-        var marineMsg = Loc.GetString("rmc-gut-finish-marines", ("target", args.Target));
-        var marineFilter = Filter.PvsExcept(xeno.Owner, entityManager: EntityManager)
-            .RemoveWhereAttachedEntity(uid => !EntityManager.HasComponent<MarineComponent>(uid));
-        _popup.PopupPredicted(marineMsg, xeno.Owner, null, marineFilter, true, PopupType.LargeCaution);
+        var othersMsg = Loc.GetString("rmc-gut-finish-others", ("user", xeno.Owner), ("target", args.Target));
+        _popup.PopupPredicted(selfMsg, othersMsg, xeno.Owner, xeno.Owner, PopupType.LargeCaution);
 
         foreach (var action in _rmcActions.GetActionsWithEvent<XenoGutActionEvent>(xeno))
         {

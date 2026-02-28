@@ -33,7 +33,7 @@
   parent: RMCGearSurvivorCMBDeputy
   id: RMCGearSurvivorFiorinaRiotOfficer
   equipment:
-    jumpsuit: RMCJumpsuitRiotControl
+    jumpsuit: RMCJumpsuitUNSecurity
     back: CMSatchelSecuritySurvivorFillRiotOfficer
     outerClothing: RMCArmorPMCRiot
     head: ArmorHelmetPMCRiot

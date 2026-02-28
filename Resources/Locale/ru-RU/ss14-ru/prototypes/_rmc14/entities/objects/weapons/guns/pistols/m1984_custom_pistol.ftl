@@ -1,2 +1,2 @@
-ent-CMWeaponPistolM1984Custom = Custom M1984 service pistol
-    .desc = A M1984 Service Pistol, once the standard issue sidearm of the Marines but has recently been replaced with the M77 combat pistol. Fires 9mm pistol rounds. This one has had it's wooden grips replaced with gaudy ivory ones.
+ent-CMWeaponPistolM1984Custom = Кастомный пистолет M1984
+    .desc = Служебный пистолет M1984, когда-то бывшее стандартным вооружением морской пехоты, но недавно его заменили на боевой пистолет М77. Стреляет 9-миллиметровыми пистолетными патронами. У этого пистолета деревянные рукоятки заменены на безвкусные из слоновой кости.

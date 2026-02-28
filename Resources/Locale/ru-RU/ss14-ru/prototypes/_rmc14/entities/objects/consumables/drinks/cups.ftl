@@ -1,14 +1,14 @@
-ent-RMCCoffeeCup = coffee mug
-    .desc = A ceramic coffee mug. Practically guaranteed to fall and spill scalding-hot drink onto your brand-new shirt. Ouch.
+ent-RMCCoffeeCup = Кофейная кружка
+    .desc = Керамическая кофейная кружка. Вы практически гарантированно упадете и прольете обжигающе горячий напиток на свою новенькую рубашку. Ауч.
 ent-RMCCoffeeCupFilled = { ent-RMCCoffeeCup }
     .suffix = Filled
     .desc = { ent-RMCCoffeeCup.desc }
-ent-RMCMarineCorpsCup = UNMC cup
-    .desc = A rugged, military-grade mug featuring the UNMC insignia, built for endurance in any deployment—whether aboard a ship or in the field.
-ent-RMCSocialistPPCup = SPP cup
-    .desc = A tough, crimson cup stamped with the SPP emblem—built like a real krepky muzhik, ready to serve comrades in toil and glory among the stars.
-ent-RMCUnitedNationsCup = UN cup
-    .desc = A sleek, official UN cup, symbolizing unity, order, and authority across the stars. Crafted for those who uphold peace and progress.
-ent-RMCWestonYamadaCup = WEYA cup
-    .desc = A clean, stylish cup with the logo of the Weston-Yamada Corporation branded on the side. Used throughout the company hierarchy, from interns to division directors.
+ent-RMCMarineCorpsCup = Кружка ККМП
+    .desc = Прочная кружка военного образца с эмблемой ККМП, созданная для использования в любых условиях - будь то на борту корабля или в полевых условиях.
+ent-RMCSocialistPPCup = Кружка СССП
+    .desc = Прочная малиновая чашка с эмблемой СССП — настоящий крепкий мужик, готовый служить товарищам в трудах и славе среди звезд..
+ent-RMCUnitedNationsCup = Кружка ОПЗ
+    .desc = Изящный официальная кружка ОПЗ, символизирующий единство, порядок и власть среди звезд. Создан для тех, кто поддерживает господство и прогресс.
+ent-RMCWestonYamadaCup = Корпоративная кружка
+    .desc = Чистая, стильная чашка с фирменным логотипом корпорации на боку. Используется во всей иерархии компании, от стажеров до директоров подразделений.
 

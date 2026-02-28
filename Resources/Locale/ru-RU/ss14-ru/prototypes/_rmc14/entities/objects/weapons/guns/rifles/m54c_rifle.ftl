@@ -1,5 +1,5 @@
-ent-RMCWeaponRifleM54C = M54C assault rifle MK2
-    .desc = The standard issue rifle of the Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
+ent-RMCWeaponRifleM54C = M54C MK2
+    .desc = Стандартный автомат колониальных морских пехотинцев. Распространена среди большинства военнослужащих. Использует безгильзовые патроны калибра 10х24 мм.
 ent-RMCWeaponRifleM54CStripped = { ent-RMCWeaponRifleM54C }
     .suffix = Stripped, Filled
     .desc = { ent-RMCWeaponRifleM54C.desc }
@@ -10,7 +10,7 @@ ent-RMCWeaponRifleM54CFilled = { ent-RMCWeaponRifleM54C }
     .suffix = Filled
     .desc = { ent-RMCWeaponRifleM54C.desc }
 ent-RMCWeaponRifleM54CWhite = { ent-RMCWeaponRifleM54CSemiStripped }
-    .desc = A M54C Mk2 with a Weston-Yamada logo imprinted on the reciever. Used primarily by Weston-Yamada's corporate security forces, and comes equipped with a drab corproate white paint job.
+    .desc = M54C Mk2 с логотипом VItezstvi на ресивере. Используется в основном службами безопасности Vitezstvi и окрашен в серый фирменный белый цвет.
     .suffix = White, No UGL
 ent-WeaponRifleM54C = штурмовая винтовка M54C MK2
     .desc = Стандартный автомат колониальных морских пехотинцев. Распространена среди большинства военнослужащих. Использует безгильзовые патроны калибра 10х24 мм.

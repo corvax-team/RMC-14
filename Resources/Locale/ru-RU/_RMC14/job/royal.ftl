@@ -1,9 +1,9 @@
 rmc-ghost-role-information-rcm-rules =
-    You are a [color=yellow][bold]Royal Crown Marine[/bold][/color]. You are friendly to the UNMC.
-    You don't remember any of your previous life, and you don't remember anything you learned as a ghost.
-    You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
-    You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
-rmc-ghost-role-information-rcm-description = Ensure the survival of the UNS ship, eliminate any hostiles, and assist the crew in any way possible.
-rmc-ghost-name-rcm-sgo = Royal Crown Marines Smart Gun Operator (Friendly)
-rmc-job-name-rcm-sgo = Royal Marines Smart Gun Operator
-rmc-job-prefix-rcm-sgo = RCM SGO
+    Вы - [color=yellow][bold]Солдат Империи[/bold][/color]. Вы дружественны к морпехам.
+    Вы не помните ничего из своей прошлой жизни и ничего из того, что вы узнали, пока были призраком.
+    Вам разрешено знать общие знания об игре, такие как открывание двери, готовка еды, использование предметов и тд.
+    Вам абсолютно [color=red]ЗАПРЕЩЕНО[/color] помнить имя, внешность, имя и прочую информацию о вашем прошлом персонаже.
+rmc-ghost-role-information-rcm-description = Вы прибыли по приказу Военного Атташе Империи Миртана, помогите морпехам и заставьте тварей поплатиться за своё существование. Если уж до этого дошло, продайте свою жизнь как можно дороже, Император в помощь.
+rmc-ghost-name-rcm-sgo = Оператор Смартгана Империи (Дружественный)
+rmc-job-name-rcm-sgo = Оператор Смартгана Империи
+rmc-job-prefix-rcm-sgo = ОСГИ

@@ -44,9 +44,6 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     public readonly string? SpawnMenuRoleName;
 
     [DataField]
-    public readonly string? NewToJobInfo;
-
-    [DataField]
     public readonly Dictionary<ProtoId<RankPrototype>, HashSet<JobRequirement>?>? Ranks;
 
     [DataField]

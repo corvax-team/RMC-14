@@ -100,9 +100,6 @@
   - type: Appearance
   - type: HelmetAccessoryHolder
     isHat: false
-  - type: Tag
-    tags:
-    - RMCHelmet
 
 - type: entity
   parent: RMCHelmetBase

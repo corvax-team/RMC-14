@@ -7,8 +7,6 @@
   startingGear: RMCGearSurvivorGoonLead
   icon: "RMCJobIconPMCGoonLead"
   hasIcon: true
-  ranks:
-    RMCRankCivilianSeniorOfficer: []
   special:
   - !type:AddComponentSpecial
     components:

@@ -77,8 +77,6 @@
         state: background_command
     - type: RMCTrackable
     - type: MutinyEligible
-    - type: RMCAwardRecommendation
-    - type: SeeNewPlayers
 
 - type: startingGear
   id: CMGearASO

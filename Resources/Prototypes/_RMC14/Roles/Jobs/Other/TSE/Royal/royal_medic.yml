@@ -34,13 +34,6 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-medic
-    - type: TacticalMapIcon
-      icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_medic
-      background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_twe
   hidden: true
 
 - type: entity
@@ -71,7 +64,6 @@
       role: CMJobHospitalCorpsman
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
-    squad: SquadRoyalMarines
 
 - type: startingGear
   id: RMCGearRoyalMedic
@@ -80,7 +72,7 @@
     eyes: RMCGlassesMedicalHUDGlasses
     ears: RMCHeadsetRoyalMarine
     jumpsuit: RMCJumpsuitMarineRoyalMedic
-    outerClothing: RMCArmorRoyalLightFilledMedic
+    outerClothing: RMCArmorRoyalLightFilled
     gloves: RMCHandsLatexMarine # TODO RMC14 TSE medic gloves
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCWeaponRifleL24
@@ -88,7 +80,7 @@
     belt: RMCBeltMedicBagRoyal
     back: RMCSatchelLightpackFilledRoyalMedic
     pocket1: RMCPouchReagentCanisterTricordrazineRevival
-    pocket2: RMCPouchMedkitFillRoyalMedic
+    pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker
   id: RMCJobRoyalMedic

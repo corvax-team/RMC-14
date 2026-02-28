@@ -36,6 +36,8 @@
           collection: MetalBreak
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: TimedDespawn
+    lifetime: 1200
   - type: HTN
     rootTask:
       task: RMCTurretCompound
@@ -58,21 +60,16 @@
   components:
   - type: Transform
     anchored: true
-  - type: Appearance
   - type: Sprite
     sprite: _RMC14/Structures/Machines/sentry_deployer.rsi
-    layers:
-    - state: floor_sentry_installed
-      map: [ "enum.EquipmentDeployState.UnDeployed" ]
-    - state: floor_sentry_deployed
-      map: [ "enum.EquipmentDeployState.Deployed" ]
-      visible: false
-  - type: RMCEquipmentDeployer
-    deployPrototype: RMCTurretAlmayer
-    isDeployableByHand: true
-    isDeployable: true
-    alertLevelRequired: Red
+    state: floor_sentry_installed
+  - type: SpawnOnInteract
+    spawn: RMCTurretAlmayer
+    requireEvacuation: true
+    evacuationPopup: rmc-sentry-not-emergency
+    popup: rmc-sentry-deploy
+    sound:
+      path: /Audio/_RMC14/Machines/hydraulics_1.ogg
     blacklist:
       components:
       - Xeno
-  - type: InteractionOutline

@@ -96,9 +96,6 @@ public sealed class RMCChemMasterPillBottleSelectAllMsg(bool selectAll) : BoundU
 }
 
 [Serializable, NetSerializable]
-public sealed class RMCChemMasterAutoSelectToggleMsg : BoundUserInterfaceMessage;
-
-[Serializable, NetSerializable]
 public sealed class RMCChemMasterApplyPresetMsg(string presetName, string bottleLabel, RMCPillBottleColors bottleColor, uint pillType, bool usePresetNameAsLabel) : BoundUserInterfaceMessage
 {
     public readonly string PresetName = presetName;

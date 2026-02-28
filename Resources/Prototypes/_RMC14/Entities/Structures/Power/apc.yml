@@ -5,9 +5,6 @@
   description: A control terminal for the area electrical systems.
   categories: [ HideSpawnMenu ]
   components:
-  - type: GuideHelp
-    guides:
-    - RMCGuideRoleCombatTechnician
   - type: Transform
     anchored: true
   - type: AccessReader

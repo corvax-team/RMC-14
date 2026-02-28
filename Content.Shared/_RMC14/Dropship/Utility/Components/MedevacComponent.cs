@@ -10,12 +10,8 @@ public sealed partial class MedevacComponent : Component
     public const string AnimationState = "medevac_system_active";
     public const string AnimationDelay = "medevac_system_delay";
 
-    [DataField, AutoNetworkedField]
-    public bool IsActivated;
+    public bool IsActivated = false;
 
     [DataField, AutoNetworkedField]
     public TimeSpan DelayLength = TimeSpan.FromSeconds(3);
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? Target;
 }

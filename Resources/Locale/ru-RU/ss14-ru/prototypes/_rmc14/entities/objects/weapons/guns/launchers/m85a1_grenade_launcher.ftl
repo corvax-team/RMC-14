@@ -1,2 +1,2 @@
-ent-RMCWeaponLauncherM85A1 = M85A1 grenade launcher
-    .desc = A heavy, low-angle, break-action 40mm grenade launcher. Archaic in core design, inferior to more modern semi automatic M92, M95 grenade launchers and M94 impact launcher, but doesn't require a magnetic armature or an advanced expertice to operate, not to mention near flawless reliability, extremely low cost and low weight due to mostly being made out of polymer materials.
+ent-RMCWeaponLauncherM85A1 = Гранатомёт M85A1
+    .desc = Тяжёлый, переломный сорокамиллиметровый гранатомёт. Архаичный в дизайне и уступает более современным полуавтоматическим гранатометам M92, M95 и M94 impact launcher, но не требует магнитного крепления или специальных знаний для работы, не говоря уже о практически безупречной надежности, чрезвычайно низкой стоимости и малом весе, поскольку в основном изготовлен из полимерных материалов.

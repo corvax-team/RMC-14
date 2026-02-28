@@ -1,2 +1,2 @@
-ent-CMSpawnPointForeconCommander = точка появления командир отряда силовой разведки
+ent-CMSpawnPointForeconCommander = Точка спавна Командира СОиС
     .desc = { ent-CMSpawnPointJobBase.desc }

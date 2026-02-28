@@ -10,17 +10,17 @@ requisition-paper-print-manifest = [head=2]
     С/Н { $serialNumber }[/head]
 requisition-paper-print-content = - { $count } { $item }
 # Supply Drop Console
-ui-supply-drop-consle-name = Supply Drop Console
-ui-supply-drop-console-name-bolded = [bold]SUPPLY DROP[/bold]
-ui-supply-drop-console-longitude = Longitude:
-ui-supply-drop-console-latitude = Latitude:
-ui-supply-drop-pad-status = [bold]Supply Pad Status[/bold]
-ui-supply-drop-console-update = Update
-ui-supply-drop-console-ready = Ready to fire!
-ui-supply-drop-console-launch = LAUNCH SUPPLY DROP
-ui-supply-drop-console-cooldown = { $time } seconds until next launch
+ui-supply-drop-consle-name = Консоль сброса припасов
+ui-supply-drop-console-name-bolded = [bold]СБРОС ПРИПАСОВ[/bold]
+ui-supply-drop-console-longitude = Долгота:
+ui-supply-drop-console-latitude = Широта:
+ui-supply-drop-pad-status = [bold]Статус панели сабжения[/bold]
+ui-supply-drop-console-update = Обновить
+ui-supply-drop-console-ready = Готово к выстрелу!
+ui-supply-drop-console-launch = ЗАПУСТИТЬ
+ui-supply-drop-console-cooldown = { $time } секунд до следующего выстрела
 ui-supply-drop-crate-status =
     { $hasCrate ->
-        [true] Supply Pad Status: crate loaded.
-       *[false] No crate loaded.
+        [true] Статус панели снабжения: ящик загружен.
+       *[false] Ящик отсутсвует.
     }

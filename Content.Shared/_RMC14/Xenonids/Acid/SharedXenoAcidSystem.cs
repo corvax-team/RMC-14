@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.Weapons.Ranged.Events;
@@ -359,8 +360,5 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         }
     }
 
-    public void SetCorrodible(CorrodibleComponent component, bool isCorrodible)
-    {
-        component.IsCorrodible = isCorrodible;
-    }
+
 }

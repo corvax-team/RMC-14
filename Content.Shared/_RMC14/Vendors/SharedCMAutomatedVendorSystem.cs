@@ -521,11 +521,13 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (section.SharedSpecLimit is { } globalLimit && !HasComp<IgnoreSpecLimitsComponent>(actor))
         {
-            if (TryComp<RMCVendorSpecialistComponent>(vendor, out var thisSpecVendor))
+            if (HasComp<RMCVendorSpecialistComponent>(vendor))
             {
+                var thisSpecVendor = Comp<RMCVendorSpecialistComponent>(vendor);
+
                 // If the vendor's own value is at or above the capacity, immediately return.
                 if (thisSpecVendor.GlobalSharedVends.TryGetValue(args.Entry, out var vendCount) &&
-                    vendCount >= globalLimit)
+                    vendCount >= section.SharedSpecLimit)
                 {
                     // FIXME
                     ResetChoices();
@@ -535,31 +537,50 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
                 // Get every RMCVendorSpec
                 var specVendors = EntityQueryEnumerator<RMCVendorSpecialistComponent>();
-                var allVendorsTotal = 0;
+                // Used to verify newer vendors
+                var maxAmongVendors = 0;
 
-                // Goes through each RMCVendorSpec and gets the value for this kit type.
-                while (specVendors.MoveNext(out _, out var specVendorComponent))
+                if (thisSpecVendor.GlobalSharedVends.TryGetValue(args.Entry, out vendCount))
+                    // So it doesn't matter what order the vendors are checked in
+                    maxAmongVendors = vendCount;
+
+                // Goes through each RMCVendorSpec and gets the largest value for this kit type.
+                while (specVendors.MoveNext(out var vendorId, out _))
                 {
+                    var specVendorComponent = EnsureComp<RMCVendorSpecialistComponent>(vendorId);
                     foreach (var linkedEntry in args.LinkedEntries)
                     {
                         specVendorComponent.GlobalSharedVends.TryGetValue(linkedEntry, out var linkedCount);
-                        allVendorsTotal += linkedCount;
+                        maxAmongVendors += linkedCount;
                     }
+
                     if (specVendorComponent.GlobalSharedVends.TryGetValue(args.Entry, out vendCount))
                     {
-                        allVendorsTotal += vendCount;
+                        if (vendCount > maxAmongVendors)
+                        {
+                            maxAmongVendors = specVendorComponent.GlobalSharedVends[args.Entry];
+                        }
+                        else
+                        {
+                            specVendorComponent.GlobalSharedVends[args.Entry] = maxAmongVendors;
+                        }
                     }
+                    else // Does not exist on the currently checked vendor
+                        specVendorComponent.GlobalSharedVends.Add(args.Entry, maxAmongVendors);
+
+                    Dirty(vendorId, specVendorComponent);
                 }
 
-                if (allVendorsTotal >= globalLimit)
+                thisSpecVendor.GlobalSharedVends[args.Entry] = maxAmongVendors;
+
+                if (thisSpecVendor.GlobalSharedVends[args.Entry] >= section.SharedSpecLimit)
                 {
                     ResetChoices();
                     _popup.PopupEntity(Loc.GetString("cm-vending-machine-specialist-max"), vendor.Owner, actor);
                     return;
                 }
 
-                var old = thisSpecVendor.GlobalSharedVends.GetValueOrDefault(args.Entry, 0);
-                thisSpecVendor.GlobalSharedVends[args.Entry] = old + 1;
+                thisSpecVendor.GlobalSharedVends[args.Entry] += 1;
                 Dirty(vendor, thisSpecVendor);
 
                 AddComp(actor, new RMCSpecCryoRefundComponent

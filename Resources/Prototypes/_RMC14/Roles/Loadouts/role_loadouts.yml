@@ -562,7 +562,6 @@
   id: JobCMProvostInspector
   points: 7
   groups:
-  - ProvostSecurityBackpack
   - ProvostRoleSpecificOuterwearRMC
   - HeadwearRMC
   - EyewearRMC

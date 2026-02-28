@@ -53,32 +53,31 @@
         amount: 5
     - name: Armor
       entries:
-      - id: RMCPVEArmorCaseM3
+      - id: ArmorHelmetM10
+        amount: 15
+      - id: RMCArmorM3PVE
         name: Standard M3 Pattern Armor Set
         amount: 15
-      - id: RMCPVEArmorCaseM3Smooth
-        name: Smooth M3 Pattern Armor Set
-        amount: 15
-      - id: RMCPVEArmorCaseM3Ridged
+      - id: RMCArmorM3PVERidged
         name: Ridged M3 Pattern Armor Set
         amount: 15
-    - name: Armor Webbings
+      - id: RMCArmorM3PVESmooth
+        name: Smooth M3 Pattern Armor Set
+        amount: 15
+    - name: Attachable Armor
       entries:
-      - id: RMCArmorWebbingDrum
-        name: M3 Armor Drum Webbing
-        amount: 5
-      - id: RMCArmorWebbingMag
-        name: M3 Pattern Magazine Webbing
-        amount: 5
-      - id: RMCArmorWebbingGrenade
-        name: M3 Armor Grenadier Webbing
-        amount: 5
-      - id: RMCArmorWebbingPouch
-        name: M3 Pattern Pouch Webbing
-        amount: 5
-      - id: RMCArmorWebbingShell
-        name: M3 Pattern Shotgun Shell Webbing
-        amount: 5
+      - id: RMCPVEArmorNeckGuard
+        amount: 10
+      - id: RMCPVEArmorShinGuard
+        amount: 10
+      - id: RMCPVEArmorKneeGuard
+        amount: 10
+      - id: RMCPVEArmorGroinPlate
+        amount: 10
+      - id: RMCPVEArmorPads
+        amount: 10
+      - id: RMCPVEArmorBracers
+        amount: 10
     - name: Backpack
       entries:
       - id: CMBackpackMarine

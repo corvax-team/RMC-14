@@ -37,11 +37,11 @@ public sealed class SynthSystem : SharedSynthSystem
         if (!HasComp<BodyComponent>(ent.Owner))
             return;
 
-        var organComps = _body.GetBodyOrganEntityComps<OrganComponent>(ent.Owner);
+        var organs = _body.GetBodyOrganEntityComps<OrganComponent>(ent.Owner);
 
-        foreach (var organ in organComps)
+        foreach (var organ in organs)
         {
-            Del(organ); // Synths do not metabolize chems or breathe
+            QueueDel(organ); // Synths do not metabolize chems or breathe
         }
 
         var headSlots = _body.GetBodyChildrenOfType(ent, BodyPartType.Head);

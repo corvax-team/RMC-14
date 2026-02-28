@@ -11,9 +11,8 @@ public sealed partial class RoadmapWindow : DefaultWindow
     public RoadmapWindow()
     {
         RobustXamlLoader.Load(this);
-        var year = DateTime.UtcNow.Year;
         var msg = new FormattedMessage();
-        msg.AddMarkupOrThrow($"[font size=24]ROADMAP [bold]{year}[/bold][/font]");
+        msg.AddMarkupOrThrow("[font size=24]ROADMAP [bold]2025[/bold][/font]");
         Header.SetMessage(msg);
     }
 }

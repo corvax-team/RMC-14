@@ -11,7 +11,6 @@
   name: Burrower
   description: A beefy alien with sharp claws.
   components:
-  - type: CanBuildThickFromConstructNode
   - type: GuideHelp
     guides:
     - RMCGuideRoleBurrower
@@ -24,10 +23,6 @@
     - Alive
     - Critical
     - Dead
-  - type: Tag
-    tags:
-    - DoorBumpOpener
-    - RMCSynthGrabbable
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -122,7 +117,6 @@
     - HiveEggMorpherXenoConstructionNode
     - HiveClusterXenoConstructionNode
     - HiveRecoveryNodeXenoConstructionNode
-    - HivePlasmaTreeXenoConstructionNode
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
   - type: FixedIdentity

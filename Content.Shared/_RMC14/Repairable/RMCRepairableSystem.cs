@@ -105,7 +105,6 @@ public sealed class RMCRepairableSystem : EntitySystem
         var ev = new RMCRepairableDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, repairable.Comp.Delay, ev, repairable, used: args.Used)
         {
-            NeedHand = true,
             BreakOnMove = true,
             BlockDuplicate = true,
             DuplicateCondition = DuplicateConditions.SameEvent
@@ -232,7 +231,6 @@ public sealed class RMCRepairableSystem : EntitySystem
         var ev = new RMCNailgunRepairableDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, repairable, used: args.Used)
         {
-            NeedHand = true,
             BreakOnMove = true,
             BlockDuplicate = true,
             DuplicateCondition = DuplicateConditions.SameEvent
