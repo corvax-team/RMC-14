@@ -87,11 +87,11 @@ rmc-ui-ghost-color = Ghost Color
 rmc-ui-ghost-color-clear = Clear
 rmc-ui-ghost-color-save = Save
 rmc-area-info = { $area }{ $restrictions }
-rmc-tacmap-alert-ceiling-level-0 = [color=green]✓[/color] All actions allowed
-rmc-tacmap-alert-ceiling-level-1 = [color=red]✗[/color] Mortar Placement, Lasing, Medevac
-rmc-tacmap-alert-ceiling-level-2 = [color=red]✗[/color] Supply Drops, Mortar Fire
-rmc-tacmap-alert-ceiling-level-3 = [color=red]✗[/color] CAS
-rmc-tacmap-alert-ceiling-level-4 = [color=red]✗[/color] OB
+rmc-tacmap-alert-ceiling-level-0 = [color=green]✓[/color] Доступно всё
+rmc-tacmap-alert-ceiling-level-1 = [color=red]✗[/color] Установка мортиры, Лазерное наведение, Медэвак
+rmc-tacmap-alert-ceiling-level-2 = [color=red]✗[/color] Поставки, Стрельба из мортиры
+rmc-tacmap-alert-ceiling-level-3 = [color=red]✗[/color] КАС
+rmc-tacmap-alert-ceiling-level-4 = [color=red]✗[/color] ОБ
 rmc-tacmap-alert-allowed-actions = [color=green]✓[/color] { $actions }
 rmc-tacmap-alert-restricted-actions = [color=red]✗[/color] { $actions }
 rmc-ui-shoutout-marine = [bold]Operation funded by [color=green]{ $name }[/color]![/bold]
