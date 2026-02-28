@@ -106,6 +106,7 @@
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 4
+    plasmaTransferDelay: 0
   - type: CMArmor
     xenoArmor: 25
     explosionArmor: 100
@@ -277,6 +278,9 @@
   - type: RMCTrackable
   - type: ExcludedFromKingVote
     canVote: true
+  - type: RemoveComponents
+    components:
+    - type: Gibbable
     # Corvax-Vehicle-Content-Start
   - type: VehicleDamageMultiplier
     mult: 2
