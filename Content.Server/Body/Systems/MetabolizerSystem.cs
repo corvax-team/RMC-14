@@ -177,7 +177,7 @@ namespace Content.Server.Body.Systems
                     var rate = entry.MetabolismRate * group.MetabolismRateModifier;
 
                     // Remove $rate, as long as there's enough reagent there to actually remove that much
-                    mostToRemove = FixedPoint2.Clamp(rate, 0, quantity);
+                    mostToRemove = FixedPoint2.Min(rate, quantity); // CCM-14 // Clamp -> Min, 0 deleted
 
                     float scale = (float) mostToRemove / (float) rate;
 
@@ -223,6 +223,13 @@ namespace Content.Server.Body.Systems
                     // We have processed a reagant, so count it towards the cap
                     reagents += 1;
                 }
+                // CCM-14-start: Pathogen
+                else if (mostToRemove < FixedPoint2.Zero)
+                {
+                    solution.AddReagent(reagent, -mostToRemove);
+                    reagents += 1;
+                }
+                // CCM-14-end
             }
 
             _solutionContainerSystem.UpdateChemicals(soln.Value);

@@ -5,11 +5,13 @@ using Content.Shared._CCM.Pathogen.Actions;
 using Content.Shared._CCM.Pathogen.EntityEffects;
 using Content.Shared._CCM.Pathogen.Protomorphs.Components;
 using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared.Actions;
 using Content.Shared.Body.Prototypes;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -23,6 +25,9 @@ public sealed class CCMEntityEffectSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly SharedActionsSystem _action = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private readonly DamageableSystem _damage = default!;
     private List<(EntityUid, ReagentId)> _infected = new List<(EntityUid, ReagentId)>();
     private Dictionary<ReagentPrototype, (ProtoId<MetabolismGroupPrototype>, ReagentEffectsEntry)> _pathogen = new Dictionary<ReagentPrototype, (ProtoId<MetabolismGroupPrototype>, ReagentEffectsEntry)>();
     public override void Initialize()
@@ -56,20 +61,19 @@ public sealed class CCMEntityEffectSystem : EntitySystem
         if (args.Args is not EntityEffectReagentArgs reagentArgs)
             return;
 
-        if (!ReagentEntry(args.Args.TargetEntity, args.Effect, out var entry))
+        if (!TryGetReagentEntryFromEffect(args.Args.TargetEntity, args.Effect, out var entry))
             return;
 
         foreach (var (reagentId, solution, group, reagentEntry) in entry)
         {
-            _solution.RemoveReagent(solution, reagentId, _solution.GetTotalPrototypeQuantity(args.Args.TargetEntity, reagentId.Prototype));
+            var quantity = new ReagentQuantity(reagentId, _solution.GetTotalPrototypeQuantity(args.Args.TargetEntity, reagentId.Prototype) + 1);
+            solution.Comp.Solution.RemoveReagent(quantity, ignoreReagentData: true);
         }
 
         var target = args.Args.TargetEntity;
         _container.EnsureContainer<ContainerSlot>(target, "bloodburster");
         Log.Debug($"Added container 'bloodburster' to entity {ToPrettyString(target)}");
         var bloodburster = Spawn(args.Effect.Bloodburster);
-        if (!HasComp<BloodbursterComponent>(bloodburster))
-            AddComp<BloodbursterComponent>(bloodburster);
         Log.Debug($"Spawned {ToPrettyString(bloodburster)} into void");
         if (!_container.TryGetContainer(target, "bloodburster", out var container))
         {
@@ -81,6 +85,9 @@ public sealed class CCMEntityEffectSystem : EntitySystem
             Log.Debug($"Cannot insert {ToPrettyString(bloodburster)} to {ToPrettyString(target)} with container {ToPrettyString(EntityUid.Parse(container.ID))}");
             return;
         }
+
+        var comp = EnsureComp<BloodbursterComponent>(bloodburster);
+        comp.ActionId = _action.AddAction(bloodburster, comp.Action);
     }
 
     private void OnActionTrigged(EntityUid uid, BloodbursterComponent comp, ref BirthBloodbursterActionEvent args)
@@ -88,10 +95,13 @@ public sealed class CCMEntityEffectSystem : EntitySystem
         if (!_container.TryGetContainingContainer(uid, out var container))
             return;
 
-        var owner = container.Owner;
-
         if (!_container.Remove(uid, container))
             return;
+
+        _damage.TryChangeDamage(container.Owner, comp.Damage, ignoreResistances: true);
+        _action.RemoveAction(args.Performer, comp.ActionId);
+
+        comp.ActionId = null;
     }
 
     private void OnPrototypesReload(PrototypesReloadedEventArgs args)
@@ -116,7 +126,7 @@ public sealed class CCMEntityEffectSystem : EntitySystem
         }
     }
 
-    private bool ReagentEntry(EntityUid uid, EntityEffect findEffect, [NotNullWhen(true)] out List<(ReagentId, Entity<SolutionComponent>, ProtoId<MetabolismGroupPrototype>, ReagentEffectsEntry)>? entry)
+    private bool TryGetReagentEntryFromEffect(EntityUid uid, EntityEffect findEffect, [NotNullWhen(true)] out List<(ReagentId, Entity<SolutionComponent>, ProtoId<MetabolismGroupPrototype>, ReagentEffectsEntry)>? entry)
     {
         entry = null;
 

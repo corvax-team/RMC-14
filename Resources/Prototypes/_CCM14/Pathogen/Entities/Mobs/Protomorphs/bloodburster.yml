@@ -65,6 +65,11 @@
     icon:
       sprite: /Textures/_CCM14/Interface/map_blips.rsi
       state: bloodburster
+  - type: Bloodburster
+    action: ActionXenoBirthBloodburster
+    damage:
+      types:
+        Slash: 1000
 
 - type: entity
   parent: CCMProtomorphBloodbursterBase

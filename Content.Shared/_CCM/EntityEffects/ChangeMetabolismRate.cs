@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
@@ -27,8 +28,6 @@ public sealed partial class ChangeMetabolismRate : EntityEffect
             return;
 
         var rate = Rate.HasValue ? Rate.Value : Amount / Seconds;
-        // var metabolizerRate = TimeSpan.FromSeconds(1.5f);
-        // if (!TryComp<Metabol>)
 
         if (reagentArgs.Reagent is null)
             return;

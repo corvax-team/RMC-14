@@ -10,5 +10,5 @@ public sealed partial class BirthBloodburster : EventEntityEffect<BirthBloodburs
         => Loc.GetString("reagent-effect-guidebook-emp-reaction-effect", ("chance", Probability)); // TODO сделать гайдбук для патогена
 
     [DataField]
-    public EntProtoId Bloodburster = "Bloodburster";
+    public EntProtoId Bloodburster = "CCMProtomorphBloodburster";
 }
