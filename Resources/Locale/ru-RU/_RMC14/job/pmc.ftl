@@ -79,9 +79,9 @@ rmc-job-name-pmc-corporate-goon-leader = Командир Охраны Vitezstvi
 
 rmc-job-name-pmc-pve-team-leader = Командир Отделения
 rmc-job-prefix-pmc-pve-team-leader = КО
-rmc-job-name-pmc-pve-force-leader = Ротмеистер
-rmc-job-prefix-pmc-pve-force-leader = РМ
-rmc-job-name-pmc-pve-force-command = Тысячник
+rmc-job-name-pmc-pve-force-leader = Координационный Лидер
+rmc-job-prefix-pmc-pve-force-leader = КЛ
+rmc-job-name-pmc-pve-force-command = Стратег-Командер
 
 rmc-ghost-name-pmc-whiteout = Подразделение "Белая мгла" VI (!DEATHSQUAD!)
 rmc-job-name-pmc-whiteout = Подразделеие "Белая мгла" VI
@@ -90,26 +90,29 @@ rmc-ghost-name-pmc-whiteout-gunner = Подразделение "Белая мг
 rmc-job-name-pmc-whiteout-gunner = Подразделение "Белая мгла" VI
 
 rmc-job-prefix-pmc-whiteout = БМ
-rmc-job-prefix-pmc-pve-force-command = КомСил
+rmc-job-prefix-pmc-pve-force-command = СтраКом
 
 # Executives
 
 rmc-ghost-role-information-corp-exec-description = Вы - корпоративный чиновник. Ваша задача — поддерживать и отстаивать интересы своей компании.
 
-rmc-ghost-name-corp-exec-supervisor = Руководитель корпоративного управления (Нейтральный)
-rmc-job-name-corp-exec-supervisor = Руководитель корпоративного управления
+rmc-ghost-name-corp-exec-supervisor = Руководитель корп управления (Нейтральный)
+rmc-job-name-corp-exec-supervisor = Руководитель корп управления
 
-rmc-ghost-name-corp-exec-ass-man = Помощник корпоративного менеджера (Нейтральный)
-rmc-job-name-corp-exec-ass-man = Помощник корпоративного менеджера
+rmc-ghost-name-corp-exec-ass-man = Помощник корп менеджера (Нейтральный)
+rmc-job-name-corp-exec-ass-man = Помощник корп менеджера
 
-rmc-ghost-name-corp-exec-div-man = Менеджер корпоративного подразделения (Нейтральный)
-rmc-job-name-corp-exec-div-man = Менеджер корпоративного подразделения
+rmc-ghost-name-corp-exec-div-man = Менеджер корп подразделения (Нейтральный)
+rmc-job-name-corp-exec-div-man = Менеджер корпо подразделения
 
-rmc-ghost-name-corp-exec-chief = Генеральный директор корпорации (Нейтральный)
-rmc-job-name-corp-exec-chief = Генеральный директор корпорации
+rmc-ghost-name-corp-exec-chief = Генеральный директор (Нейтральный)
+rmc-job-name-corp-exec-chief = Генеральный директор
 
 rmc-ghost-name-corp-dep-director = Заместитель директора (Нейтральный)
 rmc-job-name-corp-dep-director = Заместитель директора
 
 rmc-ghost-name-corp-director = Директор (Нейтральный)
 rmc-job-name-corp-director = Директор
+
+# Corpses
+rmc-job-name-pmc-operator-corpse = Оператор ЧВК

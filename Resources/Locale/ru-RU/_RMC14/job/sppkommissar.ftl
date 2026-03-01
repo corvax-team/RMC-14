@@ -25,6 +25,6 @@ rmc-job-name-spp-brigade-kommissar = Бригадный Комиссар
 rmc-job-description-spp-brigade-kommissar = Вы — политический офицер бригадного уровня. Вы выполняете приказы партии или отдаете их, являясь авторитетом в политических вопросах подразделения. На благо партииродины!
 rmc-job-prefix-spp-brigade-kommissar = Бриг. Ком.
 
-rmc-job-name-spp-division-kommissar = Дивизионный Комиссап
+rmc-job-name-spp-division-kommissar = Дивизионный Комиссар
 rmc-job-description-spp-division-kommissar = Вы — политический офицер дивизионного уровня. Ваше слово считается словом партии, если не указано иное. Вы являетесь главным политическим советником полповников и генералов. За родину!
 rmc-job-prefix-spp-division-kommissar = Див. Ком.

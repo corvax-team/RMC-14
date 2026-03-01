@@ -5,60 +5,33 @@ rmc-ghost-role-information-provost-rules =
     Вам абсолютно [color=red]ЗАПРЕЩЕНО[/color] помнить имя, внешность, имя и прочую информацию о вашем прошлом персонаже.
 rmc-ghost-role-information-provost-description = Пусть закон ведёт вашу суровую длань, никому не избежать от правосудия, даже военнослужащим и их командирам.
 rmc-ghost-role-information-provost-squad-description = Вас вызвали не просто так, защитите честь закона и покажите тому, кто осмелился его пресечь, чем заканчиваются шутки с уставом.
+
 rmc-ghost-name-corp-provost-advisor = Пристав-Советник (Дружественный)
 rmc-job-name-corp-provost-advisor = Пристав-Советник
-rmc-job-name-provost-advisor = Советник Военного Приставолитета
-rmc-ghost-name-corp-provost-chief = Старший Пристав-Испектор (Дружественный)
-rmc-job-name-corp-provost-chief = Старший Пристав-Испектор
-rmc-job-prefix-provost-chief = СП-И
+rmc-job-prefix-provost-advisor = Пр-С
+
+rmc-ghost-name-corp-provost-chief = Ст. Пристав-Инспектор (Дружественный)
+rmc-job-name-corp-provost-chief = Ст. Пристав-Инспектор
+rmc-job-prefix-provost-chief = Ст. Пр-И
+
 rmc-ghost-name-corp-provost-deputy-marshal = Помощник Пристава (Дружественный)
 rmc-job-name-corp-provost-deputy-marshal = Помощник Пристава
-rmc-job-description-provost-advisor = ""
+rmc-job-prefix-provost-deputy-marshal = Пом. Пр.
+
 rmc-ghost-name-corp-provost-enforcer = Силовик (Дружественный)
 rmc-job-name-corp-provost-enforcer = Силовик
-rmc-job-prefix-provost-advisor = Сов. ВП
+rmc-job-prefix-provost-enforcer = Сил
+
 rmc-ghost-name-corp-provost-inspector = Пристав-Инспектор (Дружественный)
 rmc-job-name-corp-provost-inspector = Пристав-Инспектор
-CMProvostAdvisor = Советник Военного Приставолитета
-rmc-ghost-name-corp-provost-marshal = Пристав-Испектор (Дружественный)
-rmc-job-name-corp-provost-marshal = Пристав-Испектор
-rmc-ghost-role-information-provost-advisor-name = Советник Военного Приставолитета
-rmc-ghost-name-corp-provost-team-leader = Лидер Карательного Отряда (Дружественный)
-rmc-job-name-corp-provost-team-leader = Лидер Отряда
-rmc-ghost-role-information-provost-advisor-description = Вы не обладаете прямыми полномочиями, но от вас требуется обеспечить корректное выполнение норм закона ККМП.
-rmc-job-name-provost-chief-inspector = Старший Пристав-Испектор
-rmc-job-description-provost-chief-inspector = ""
-rmc-job-prefix-provost-chief-inspector = Ст. П-И
-CMProvostChiefInspector = Старший Пристав-Испектор
-rmc-ghost-role-information-provost-chief-inspector-name = Старший Пристав-Испектор
-rmc-ghost-role-information-provost-chief-inspector-description = Вы - последнее слово в законе ККМП в пределах вашего района деятельности.
-rmc-job-name-provost-deputy-marshal = Помощник Пристава
-rmc-job-description-provost-deputy-marshal = ""
-rmc-job-prefix-provost-deputy-marshal = Пом. Прис.
-CMProvostDeputyMarshal = Помощник Пристава
-rmc-ghost-role-information-provost-deputy-marshal-name = Помощник Пристава
-rmc-ghost-role-information-provost-deputy-marshal-description = ""
-rmc-job-name-provost-enforcer = Силовик
-rmc-job-description-provost-enforcer = ""
-rmc-job-prefix-provost-enforcer = Пом. Прис.
-CMProvostEnforcer = Помощник Пристава
-rmc-ghost-role-information-provost-enforcer-name = Помощник Пристава
-rmc-ghost-role-information-provost-enforcer-description = Железные латы закона. Выполните поставленную перед вами миссию.
-rmc-job-name-provost-inspector = Пристав-Инспектор
-rmc-job-description-provost-inspector = ""
-rmc-job-prefix-provost-inspector = Прис-Инсп.
-CMProvostInspector = Пристав-Инспектор
-rmc-ghost-role-information-provost-inspector-name = Пристав-Инспектор
-rmc-ghost-role-information-provost-inspector-description = Вы - последнее слово в законе ККМП в пределах вашего района деятельности.
-rmc-job-name-provost-marshal = Пристав-Инспектор
-rmc-job-description-provost-marshal = ""
-rmc-job-prefix-provost-marshal = Прис-Инсп.
-CMProvostMarshal = Пристав-Инспектор
-rmc-ghost-role-information-provost-marshal-name = Пристав-Инспектор
-rmc-ghost-role-information-provost-marshal-description = ""
-rmc-job-name-provost-team-leader = Лидер Карательного Отряда
-rmc-job-description-provost-team-leader = ""
+rmc-job-prefix-provost-inspector = Пр-И
+rmc-job-description-inspector = Обучайте новеньких офицеров военной полиции, помогайте с расследованиями и решениями конфликтов, затрагивающих Военный Закон на корабле, следите за тем, чтобы Военная Полиции действовала в соответствии с уставом.
+    Инспекторы - линия связи между кораблём и Военным Приставолитетом, решающее слово закона, стоящее выше слова Командующего Офицера.
+
+rmc-ghost-name-corp-provost-marshal = Секториальный Пристав (Дружественный)
+rmc-job-name-corp-provost-marshal = Секториальный Пристав 
+rmc-job-prefix-provost-marshal = Сек. Пр.
+
+rmc-ghost-name-corp-provost-team-leader = Лидер карательного отряда (Дружественный)
+rmc-job-name-corp-provost-team-leader = Лидер
 rmc-job-prefix-provost-team-leader = ЛКО
-CMProvostDeputyTeamLeader = Лидер Карательного Отряда
-rmc-ghost-role-information-provost-team-leader-name = Лидер Карательного Отряда
-rmc-ghost-role-information-provost-team-leader-description = Будьте головой дракона военного приставолитета, покажите недругу, чем кончаются шутки с законом

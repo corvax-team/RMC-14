@@ -97,7 +97,7 @@ rmc-job-name-forecon-commander = Командир СОиС
 rmc-job-name-survivor-lv624-archeologist = Археолог
 rmc-job-name-survivor-lv624-cargo-technician = Техник поставок
 rmc-job-name-survivor-lv624-corporate-liaison = Корпоративный связной LV-624
-rmc-job-name-survivor-lv624-security-guard = Охраник
+rmc-job-name-survivor-lv624-security-guard = Охранник
 rmc-job-name-survivor-lv624-medical-technician = Медицинский техник
 rmc-job-name-survivor-lv624-engineer = Инженер
 
