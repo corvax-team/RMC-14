@@ -18,4 +18,4 @@ jobs:
         with:
           dirtyLabel: "Мёрдж конфликт"
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          commentOnDirty: "PR имеет конфликты с ${{ github.branch.target}}, пожалуйста устраните их прежде чем мы сможем проверить PR"
+          commentOnDirty: "PR имеет конфликты с ${{ github.ref_name }}, пожалуйста устраните их прежде чем мы сможем проверить PR"

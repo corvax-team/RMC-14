@@ -17,7 +17,7 @@ rmc-job-name-survivor-co = Выживший КО
 rmc-job-description-survivor-co = Вы - переживший почти полное уничтожение своего соединения Командир Сил Обороны и Сдерживания.
 
 rmc-job-name-survivor-synth = Выживший синтетик
-rmc-job-description-survivor-synth Вы синтетик, переживший нападение на корпоративный объект.
+rmc-job-description-survivor-synth = Вы синтетик, переживший нападение на корпоративный объект.
 
 rmc-job-name-survivor-military = Военный колонист
 rmc-job-description-survivor-military = Вы выживший после нашествия ксеноморфов в колонии и член какой-то военной организации.

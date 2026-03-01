@@ -108,7 +108,7 @@
 
 - type: alert
   parent: SquadTracker
-  id: SquadTrackerAlpha
+  id: SquadTrackerАльфа # CCM14 | РМС-14 жестко насрали и снова забыли про форки. Русский в названии прото не гуд, но как есть. # TODO: сделать по адекватному
   category: SquadTracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
@@ -134,7 +134,7 @@
   description: Tracks the Alpha Squad Leader.
 
 - type: alert
-  id: SquadTrackerBravo
+  id: SquadTrackerБраво # CCM14 | РМС-14 жестко насрали и снова забыли про форки. Русский в названии прото не гуд, но как есть.
   parent: SquadTracker
   category: SquadTracker
   icons:
@@ -162,7 +162,7 @@
 
 - type: alert
   parent: SquadTracker
-  id: SquadTrackerCharlie
+  id: SquadTrackerЧарли # CCM14 | РМС-14 жестко насрали и снова забыли про форки. Русский в названии прото не гуд, но как есть.
   category: SquadTracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
@@ -189,7 +189,7 @@
 
 - type: alert
   parent: SquadTracker
-  id: SquadTrackerDelta
+  id: SquadTrackerДельта # CCM14 | РМС-14 жестко насрали и снова забыли про форки. Русский в названии прото не гуд, но как есть.
   category: SquadTracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
@@ -216,7 +216,7 @@
 
 - type: alert
   parent: SquadTracker
-  id: SquadTrackerEcho
+  id: SquadTrackerЭхо # CCM14 | РМС-14 жестко насрали и снова забыли про форки. Русский в названии прото не гуд, но как есть.
   category: SquadTracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
@@ -243,7 +243,7 @@
 
 - type: alert
   parent: SquadTracker
-  id: SquadTrackerFoxtrot
+  id: SquadTrackerФокстрот # CCM14 | РМС-14 жестко насрали и снова забыли про форки. Русский в названии прото не гуд, но как есть.
   category: SquadTracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
@@ -270,7 +270,7 @@
 
 - type: alert
   parent: SquadTracker
-  id: SquadTrackerIntel
+  id: SquadTrackerРазведка # CCM14 | РМС-14 жестко насрали и снова забыли про форки. Русский в названии прото не гуд, но как есть.
   category: SquadTracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
@@ -324,7 +324,7 @@
 
 - type: alert
   parent: SquadTracker
-  id: SquadTrackerRecon
+  id: SquadTrackerСиловаяРазведка # CCM14 | РМС-14 жестко насрали и снова забыли про форки. Русский в названии прото не гуд, но как есть.
   category: SquadTracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi

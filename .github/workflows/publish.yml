@@ -6,10 +6,10 @@ concurrency:
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
-      - patogen-master
+#  push:
+#    branches:
+#      - master
+#      - patogen-master
 
 jobs:
   build:

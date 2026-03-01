@@ -10,11 +10,11 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
           # Custom size configuration
-          sizes: >
+          размер: >
             {
-              "0": "размер: XS",
-              "10": "размер: S",
-              "100": "размер: M",
-              "1000": "размер: L",
-              "5000": "размер: XL"
+              "0": "XS",
+              "10": "S",
+              "100": "M",
+              "1000": "L",
+              "5000": "XL"
             }

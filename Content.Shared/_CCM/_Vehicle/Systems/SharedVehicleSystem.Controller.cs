@@ -257,7 +257,7 @@ public sealed partial class SharedVehicleSystem
 
         if (skills.Count > 0 && !HasComp<SkillsComponent>(pilot))
         {
-            _popup.PopupClient(Loc.GetString("rmc-skills-cant-operate", ("target", pilot)), pilot, pilot);
+            _popup.PopupClient(Loc.GetString("rmc-skills-cant-operate", ("target", vehicle)), pilot, pilot);
             return false;
         }
 
@@ -275,7 +275,7 @@ public sealed partial class SharedVehicleSystem
 
         if (skills.Count > 0 && !_skills.HasAllSkills(pilot, skills))
         {
-            _popup.PopupClient(Loc.GetString("rmc-skills-cant-operate", ("target", pilot)), pilot, pilot);
+            _popup.PopupClient(Loc.GetString("rmc-skills-cant-operate", ("target", vehicle)), pilot, pilot);
             return false;
         }
 
