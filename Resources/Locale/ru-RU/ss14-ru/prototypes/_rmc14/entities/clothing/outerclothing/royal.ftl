@@ -1,13 +1,22 @@
-ent-RMCArmorRoyal = бронежилет Пустельга
-    .desc = Настраиваемый индивидуальный бронежилет, используемый коммандос Имперской армии.
-ent-RMCArmorRoyalLight = лёгкий бронежилет Пустельга
+ent-RMCArmorRoyal = бронежилет 'Пустельга'
+    .desc = Модифицируемый индивидуальный бронежилет, используемый коммандос Имперской армии.
+ent-RMCArmorRoyalLight = лёгкий бронежилет П'устельга'
     .desc = { ent-RMCArmorRoyal.desc }
-ent-RMCArmorRoyalPadded = бронежилет Пустельга с подсумками
+ent-RMCArmorRoyalPadded = бронежилет 'Пустельга' с подсумками
     .desc = { ent-RMCArmorRoyal.desc }
-ent-RMCArmorRoyalHarness = бронеобвязка смартагана Пустельга
+ent-RMCArmorRoyalHarness = бронеобвязка смартагана 'Пустельга'
     .desc = { ent-RMCArmorRoyal.desc }
 ent-RMCArmorRoyalHarnessFilled = { ent-RMCArmorRoyalHarness }
     .suffix = Заполненный
     .desc = { ent-RMCArmorRoyalHarness.desc }
-ent-RMCArmorRoyalPointman = бронежилет штурмовика Пустельга
+ent-RMCArmorRoyalPointman = бронежилет штурмовика 'Пустельга'
     .desc = { ent-RMCArmorRoyalPadded.desc }
+ent-RMCArmorRoyalPointman = Бронежилет штурмовика 'Пустельга'
+    .desc = { ent-RMCArmorRoyal.desc }
+
+#парамарины/Драккар
+
+ent-RMCArmorParaVest = Бронежилет 'Ястреб'
+    .desc = Лёгкий, мобильный флак-жилет, разработанный для спец-подразделения "Драккар". Разработан так, чтобы защищать жизненно-важные точки и при этом не сковывать движения. На далёких мирах только смерть, и движение - жизнь, в самом буквальнейшем смысле. Для храбрецов, осмелившихся рискнуть своей жизнью ради долга и грёз о победе. Фаревел, солдат, 'Ножом, винтовкой, кулаком, станем последним рубежом'.
+ent-RMCArmorParaSynthVest = Бронежилет синтетика 'Ястреб'
+    .desc = { ent-RMCArmorParaVest.desc }
