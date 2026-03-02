@@ -99,7 +99,7 @@ public sealed class ServerUpdateManager : IPostInjectInit
 
     private void WatchdogOnUpdateReceived()
     {
-        _chatManager.DispatchServerAnnouncement(Loc.GetString("server-updates-received"));
+        _chatManager.DispatchServerAnnouncementLoc("server-updates-received");
         _updateOnRoundEnd = true;
         ServerEmptyUpdateRestartCheck("update notification");
     }

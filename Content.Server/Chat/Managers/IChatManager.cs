@@ -15,14 +15,17 @@ namespace Content.Server.Chat.Managers
         /// <param name="message"></param>
         /// <param name="colorOverride">Override the color of the message being sent.</param>
         void DispatchServerAnnouncement(string message, Color? colorOverride = null);
+        void DispatchServerAnnouncementLoc(string messageLocId, (string, object)[]? args = null, Color? colorOverride = null);
 
         void DispatchServerMessage(ICommonSession player, string message, bool suppressLog = false);
+        void DispatchServerMessageLoc(ICommonSession player, string messageLocId, (string, object)[]? args = null, bool suppressLog = false);
 
         void TrySendOOCMessage(ICommonSession player, string message, OOCChatType type);
 
         void SendHookOOC(string sender, string message);
         void SendHookAdmin(string sender, string message);
         void SendAdminAnnouncement(string message, AdminFlags? flagBlacklist = null, AdminFlags? flagWhitelist = null);
+        void SendAdminAnnouncementLoc(string messageLocId, (string, object)[]? args = null, AdminFlags? flagBlacklist = null, AdminFlags? flagWhitelist = null);
         void SendAdminAnnouncementMessage(ICommonSession player, string message, bool suppressLog = true);
 
         void ChatMessageToOne(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat,

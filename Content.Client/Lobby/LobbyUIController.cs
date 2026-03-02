@@ -17,6 +17,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Localizations;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
@@ -51,6 +52,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     [Dependency] private readonly MarkingManager _markings = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
     [UISystemDependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
     [UISystemDependency] private readonly ClientInventorySystem _inventory = default!;
     [UISystemDependency] private readonly StationSpawningSystem _spawn = default!;
@@ -92,6 +94,9 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
         _linkAccount.Updated += RefreshProfileEditor;
         _configurationManager.OnValueChanged(RMCCVars.RMCLobbyXenoName, _ => UpdateLobbyHeader());
+        // CCM rework lobby - start
+        _contentLoc.CultureChanged += OnCultureChanged;
+        // CCM rework lobby - end
     }
 
 
@@ -168,6 +173,29 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         }
         _characterSetupLayoutHooked = false;
     }
+
+    // CCM rework lobby - start
+    private void OnCultureChanged(string _)
+    {
+        if (_stateManager.CurrentState is not LobbyState)
+            return;
+
+        _profileEditor?.Dispose();
+        _characterSetup?.Dispose();
+        _profileEditor = null;
+        _characterSetup = null;
+        _pendingShowCharacterSetup = false;
+
+        if (_characterSetupHost != null)
+        {
+            _characterSetupHost.OnResized -= UpdateCharacterSetupLayout;
+            _characterSetupHost = null;
+        }
+
+        _characterSetupLayoutHooked = false;
+        ReloadCharacterSetup();
+    }
+    // CCM rework lobby - end
 
     /// <summary>
     /// Reloads every single character setup control.

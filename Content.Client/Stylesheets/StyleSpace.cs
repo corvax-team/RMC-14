@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Content.Client.Resources;
 using Robust.Client.Graphics;
@@ -24,8 +25,36 @@ namespace Content.Client.Stylesheets
 
         public override Stylesheet Stylesheet { get; }
 
-        public StyleSpace(IResourceCache resCache) : base(resCache)
+        public StyleSpace(IResourceCache resCache, string theme = "green") : base(resCache)
         {
+            var isBlueTheme = theme.Equals("blue", StringComparison.OrdinalIgnoreCase);
+
+            var launcherFrameBackground = (isBlueTheme
+                ? Color.FromHex("#070E1B")
+                : Color.FromHex("#0B150D")).WithAlpha(0.96f);
+            var launcherFrameBorder = (isBlueTheme
+                ? Color.FromHex("#1C5CA8")
+                : Color.FromHex("#2B7E45")).WithAlpha(0.98f);
+            var launcherDivider = Color.FromHex("#545A66");
+            var launcherTitleColor = isBlueTheme
+                ? Color.FromHex("#58A6FF")
+                : Color.FromHex("#95E7B1");
+            var launcherStateColor = isBlueTheme
+                ? Color.FromHex("#C4DAF8")
+                : Color.FromHex("#D1EBDD");
+            var launcherButtonNormal = isBlueTheme
+                ? Color.FromHex("#1B2F56")
+                : Color.FromHex("#2B4433");
+            var launcherButtonHover = isBlueTheme
+                ? Color.FromHex("#23406F")
+                : Color.FromHex("#365B43");
+            var launcherButtonPressed = isBlueTheme
+                ? Color.FromHex("#152544")
+                : Color.FromHex("#1F3528");
+            var launcherButtonText = isBlueTheme
+                ? Color.FromHex("#D5E4F9")
+                : Color.FromHex("#D8F0E2");
+
             var notoSans10 = resCache.GetFont
             (
                 new []
@@ -47,6 +76,10 @@ namespace Content.Client.Stylesheets
                 16
             );
             var exo2Regular12 = resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 12);
+            var bedstead12 = resCache.GetFont("/Fonts/Bedstead/bedstead.otf", 12);
+            var bedstead13 = resCache.GetFont("/Fonts/Bedstead/bedstead.otf", 13);
+            var bedstead15 = resCache.GetFont("/Fonts/Bedstead/bedstead.otf", 15);
+            var bedstead20 = resCache.GetFont("/Fonts/Bedstead/bedstead.otf", 20);
 
             var progressBarBackground = new StyleBoxFlat
             {
@@ -166,6 +199,65 @@ namespace Content.Client.Stylesheets
                         BackgroundColor = StyleNano.PanelDark.WithAlpha(0.95f),
                         BorderThickness = new Thickness(1),
                         BorderColor = StyleNano.PanelDark.WithAlpha(1f),
+                    }),
+
+                Element<PanelContainer>().Class("LauncherConnectingFrame")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = launcherFrameBackground,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = launcherFrameBorder,
+                    }),
+
+                Element<PanelContainer>().Class("LauncherConnectingDivider")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = launcherDivider,
+                        ContentMarginLeftOverride = 2,
+                        ContentMarginBottomOverride = 1,
+                    }),
+
+                Element<Label>().Class("LauncherConnectingTitle")
+                    .Prop(Label.StylePropertyFont, bedstead15)
+                    .Prop(Label.StylePropertyFontColor, launcherTitleColor),
+
+                Element<Label>().Class("LauncherConnectingStateLabel")
+                    .Prop(Label.StylePropertyFont, bedstead13)
+                    .Prop(Label.StylePropertyFontColor, launcherStateColor),
+
+                Element<Label>().Class("LauncherConnectingReasonLabel")
+                    .Prop(Label.StylePropertyFont, bedstead13)
+                    .Prop(Label.StylePropertyFontColor, launcherStateColor),
+
+                Element<RichTextLabel>().Class("LauncherConnectingReasonLabel")
+                    .Prop(Label.StylePropertyFont, bedstead13),
+
+                Element<Label>().Class("LauncherConnectingReasonSmallLabel")
+                    .Prop(Label.StylePropertyFont, bedstead12)
+                    .Prop(Label.StylePropertyFontColor, launcherStateColor),
+
+                Element<RichTextLabel>().Class("LauncherConnectingReasonSmallLabel")
+                    .Prop(Label.StylePropertyFont, bedstead12),
+
+                Element<Button>().Class("LauncherConnectingButton")
+                    .Prop(Control.StylePropertyModulateSelf, launcherButtonNormal),
+
+                Element<Button>().Class("LauncherConnectingButton").Pseudo(ContainerButton.StylePseudoClassNormal)
+                    .Prop(Control.StylePropertyModulateSelf, launcherButtonNormal),
+
+                Element<Button>().Class("LauncherConnectingButton").Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Control.StylePropertyModulateSelf, launcherButtonHover),
+
+                Element<Button>().Class("LauncherConnectingButton").Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Control.StylePropertyModulateSelf, launcherButtonPressed),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {"LauncherConnectingButton"}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, bedstead15),
+                        new StyleProperty(Label.StylePropertyFontColor, launcherButtonText),
                     }),
 
                 Element<PanelContainer>().Class("VerticalTabListBackground")

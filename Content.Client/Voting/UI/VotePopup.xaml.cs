@@ -57,19 +57,20 @@ namespace Content.Client.Voting.UI
 
         public void UpdateData()
         {
-            VoteTitle.SetMessage(FormattedMessage.FromUnformatted(_vote.Title));
-            VoteCaller.Text = Loc.GetString("ui-vote-created", ("initiator", _vote.Initiator));
+            VoteTitle.SetMessage(FormattedMessage.FromUnformatted(LocalizeVoteText(_vote.Title)));
+            VoteCaller.Text = Loc.GetString("ui-vote-created", ("initiator", LocalizeVoteText(_vote.Initiator)));
 
             for (var i = 0; i < _voteButtons.Length; i++)
             {
                 var entry = _vote.Entries[i];
+                var entryText = LocalizeVoteText(entry.Text);
                 if (_vote.DisplayVotes)
                 {
-                    _voteButtons[i].Text = Loc.GetString("ui-vote-button", ("text", entry.Text), ("votes", entry.Votes));
+                    _voteButtons[i].Text = Loc.GetString("ui-vote-button", ("text", entryText), ("votes", entry.Votes));
                 }
                 else
                 {
-                    _voteButtons[i].Text = Loc.GetString("ui-vote-button-no-votes", ("text", entry.Text));
+                    _voteButtons[i].Text = Loc.GetString("ui-vote-button-no-votes", ("text", entryText));
                 }
 
                 if (_vote.OurVote == i)
@@ -84,6 +85,13 @@ namespace Content.Client.Voting.UI
                 var msg = new GhostWarpToTargetRequestEvent(_targetEntity.Value);
                 _net.SendSystemNetworkMessage(msg);
             }
+        }
+
+        private static string LocalizeVoteText(string text)
+        {
+            return Loc.TryGetString(text, out var localized)
+                ? localized
+                : text;
         }
 
         protected override void FrameUpdate(FrameEventArgs args)

@@ -24,6 +24,7 @@ using Content.Shared.Chat;
 using Content.Shared.Damage.ForceSay;
 using Content.Shared.Decals;
 using Content.Shared.Input;
+using Content.Shared.Localizations;
 using Content.Shared.Radio;
 using Content.Shared.Roles.RoleCodeword;
 using Robust.Client.GameObjects;
@@ -63,6 +64,7 @@ public sealed partial class ChatUIController : UIController
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IReplayRecordingManager _replayRecording = default!;
     [Dependency] private readonly StaffHelpUIController _staffHelpUI = default!;
+    [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
 
     [UISystemDependency] private readonly ExamineSystem? _examine = default;
     [UISystemDependency] private readonly GhostSystem? _ghost = default;
@@ -257,6 +259,9 @@ public sealed partial class ChatUIController : UIController
 
         _config.OnValueChanged(CCVars.ChatWindowOpacity, OnChatWindowOpacityChanged);
         _config.OnValueChanged(CCVars.AccessibilityColorblindFriendly, v => _colorBlindMode = v, true);
+        // CCM rework lobby - start
+        _contentLoc.CultureChanged += OnCultureChanged;
+        // CCM rework lobby - end
 
         InitializeHighlights();
 
@@ -269,6 +274,36 @@ public sealed partial class ChatUIController : UIController
 
         _colorBlindReplacements = colors.ToImmutableArray();
     }
+
+    // CCM rework lobby - start
+    private void OnCultureChanged(string _)
+    {
+        RefreshLocalization();
+    }
+
+    public void RefreshLocalization()
+    {
+        foreach (var chat in _chats)
+        {
+            chat.RefreshLocalization();
+        }
+
+        var root = UIManager.RootControl;
+        if (root != null)
+            RefreshChatWindowsRecursive(root);
+    }
+
+    private static void RefreshChatWindowsRecursive(Control control)
+    {
+        if (control is ChatWindow chatWindow)
+            chatWindow.RefreshLocalization();
+
+        foreach (var child in control.Children)
+        {
+            RefreshChatWindowsRecursive(child);
+        }
+    }
+    // CCM rework lobby - end
 
     public void OnScreenLoad()
     {

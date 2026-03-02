@@ -5,6 +5,11 @@ ccm-humanoid-profile-editor-bark-voice-label = Bark Type:
 ccm-humanoid-profile-editor-bark-preview = Preview
 ccm-humanoid-profile-editor-bark-pitch-label = Pitch:
 ccm-humanoid-profile-editor-bark-speed-label = Speed:
+ccm-humanoid-profile-editor-bark-type-normal = Voice:
+ccm-humanoid-profile-editor-bark-type-robot = Voice:
+ccm-humanoid-profile-editor-bark-type-alien = Voice:
+ccm-humanoid-profile-editor-bark-type-creature = Voice:
+
 
 ccm-bark-voice-01 = Male 1
 ccm-bark-voice-02 = Male 2

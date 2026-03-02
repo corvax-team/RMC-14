@@ -382,3 +382,10 @@ ui-options-overlay-merge-distance = Дистанция объединения с
 ui-options-overlay-ghost-fade-distance = Дистанция затухания оверлея призраков от курсора
 ui-options-overlay-ghost-hide-distance = Дистанция скрытия оверлея призраков от курсора
 # CCM priority rework
+ui-options-client-language = Язык клиента:
+ui-options-language-russian = Русский
+ui-options-language-english = Английский
+ui-options-language-restart-title = Требуется перезапуск
+ui-options-language-restart-warning = Для смены языка требуется перезапуск игры. Перезапустить игру?
+ui-options-language-restart-confirm = Подтвердить
+ui-options-language-restart-cancel = Отмена

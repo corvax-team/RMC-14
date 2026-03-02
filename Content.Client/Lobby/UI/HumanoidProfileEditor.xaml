@@ -82,7 +82,7 @@
                                     <Label Text="{Loc 'humanoid-profile-editor-appearance-title'}" StyleClasses="CharacterEditorSectionTitle" />
                                     <Control HorizontalExpand="True"/>
                                     <Button Name="ShowClothes" Pressed="True" ToggleMode="True"
-                                            Text="Снаряжение" MinSize="120 0" HorizontalAlignment="Right" />
+                                            Text="{Loc 'humanoid-profile-editor-clothing-show'}" MinSize="120 0" HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <PanelContainer Name="AppearanceBlockDivider" MinHeight="2" HorizontalExpand="True">
                                     <PanelContainer.PanelOverride>

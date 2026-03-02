@@ -64,4 +64,13 @@ public class ChatInputBox : PanelContainer
             (false, false) => Loc.GetString("hud-chatbox-info-unbound")
         };
     }
+
+    // CCM rework lobby - start
+    public void RefreshLocalization()
+    {
+        Input.PlaceHolder = GetChatboxInfoPlaceholder();
+        ChannelSelector.RefreshLocalization();
+        FilterButton.Popup.RefreshLocalization();
+    }
+    // CCM rework lobby - end
 }

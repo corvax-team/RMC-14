@@ -23,7 +23,7 @@ namespace Content.Client.Stylesheets
         private void ApplyColorTheme(string theme)
         {
             SheetNano = new StyleNano(_resourceCache, theme).Stylesheet;
-            SheetSpace = new StyleSpace(_resourceCache).Stylesheet;
+            SheetSpace = new StyleSpace(_resourceCache, theme).Stylesheet;
             _userInterfaceManager.Stylesheet = SheetNano;
         }
     }

@@ -101,6 +101,20 @@ namespace Content.Server.Database
                 .HasDefaultValue(1f);
             // CCM barks - end
 
+            // CCM profile background - start
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.OriginId)
+                .HasDefaultValue(string.Empty);
+
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.ReligionId)
+                .HasDefaultValue("agnostic");
+
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.CorporateRelationId)
+                .HasDefaultValue("neutral");
+            // CCM profile background - end
+
             modelBuilder.Entity<Antag>()
                 .HasIndex(p => new {HumanoidProfileId = p.ProfileId, p.AntagName})
                 .IsUnique();
@@ -606,6 +620,9 @@ namespace Content.Server.Database
         public string BarkVoice { get; set; } = "BarkMaleVoice01";
         public float BarkPitch { get; set; } = 1f;
         public float BarkSpeed { get; set; } = 1f;
+        public string OriginId { get; set; } = string.Empty;
+        public string ReligionId { get; set; } = "agnostic";
+        public string CorporateRelationId { get; set; } = "neutral";
     }
 
     public class Job

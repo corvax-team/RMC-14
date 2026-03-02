@@ -485,7 +485,7 @@ namespace Content.Server.Voting.Managers
             }
             else
             {
-                options.InitiatorText = Loc.GetString("ui-vote-initiator-server");
+                options.InitiatorText = "ui-vote-initiator-server";
             }
         }
 

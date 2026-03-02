@@ -7,6 +7,7 @@ using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Client.UserInterface.Systems.Info;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.Shared.CCVar;
+using Content.Shared.Localizations;
 using JetBrains.Annotations;
 using Robust.Client.Console;
 using Robust.Client.UserInterface;
@@ -30,6 +31,7 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
     [Dependency] private readonly OptionsUIController _options = default!;
     [Dependency] private readonly GuidebookUIController _guidebook = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+    [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
 
     private Options.UI.EscapeMenu? _escapeWindow;
 
@@ -37,6 +39,9 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
 
     public override void Initialize()
     {
+        // CCM rework lobby - start
+        _contentLoc.CultureChanged += OnCultureChanged;
+        // CCM rework lobby - end
         _linkAccount.Updated += () =>
         {
             if (_escapeWindow != null)
@@ -71,16 +76,75 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
     public void OnStateEntered(GameplayState state)
     {
         DebugTools.Assert(_escapeWindow == null);
+        CreateEscapeWindow();
 
+        CommandBinds.Builder
+            .Bind(EngineKeyFunctions.EscapeMenu,
+                InputCmdHandler.FromDelegate(_ => ToggleWindow()))
+            .Register<EscapeUIController>();
+    }
+
+    public void OnStateExited(GameplayState state)
+    {
+        DestroyEscapeWindow();
+
+        CommandBinds.Unregister<EscapeUIController>();
+    }
+
+    private void EscapeButtonOnOnPressed(ButtonEventArgs obj)
+    {
+        ToggleWindow();
+    }
+
+    private void CloseEscapeWindow()
+    {
+        _escapeWindow?.Close();
+    }
+
+    /// <summary>
+    /// Toggles the game menu.
+    /// </summary>
+    public void ToggleWindow()
+    {
+        if (_escapeWindow == null)
+            return;
+
+        if (_escapeWindow.IsOpen)
+        {
+            CloseEscapeWindow();
+            EscapeButton!.Pressed = false;
+        }
+        else
+        {
+            _escapeWindow.OpenCentered();
+            EscapeButton!.Pressed = true;
+        }
+    }
+
+    // CCM rework lobby - start
+    private void OnCultureChanged(string _)
+    {
+        if (_escapeWindow == null)
+            return;
+
+        var wasOpen = _escapeWindow.IsOpen;
+        DestroyEscapeWindow();
+        CreateEscapeWindow();
+
+        if (!wasOpen || _escapeWindow == null)
+            return;
+
+        _escapeWindow.OpenCentered();
+        EscapeButton?.SetClickPressed(true);
+    }
+
+    private void CreateEscapeWindow()
+    {
         _escapeWindow = UIManager.CreateWindow<Options.UI.EscapeMenu>();
-
         _escapeWindow.OnClose += DeactivateButton;
         _escapeWindow.OnOpen += ActivateButton;
 
-        // CCM rework lobby - start
         // Removed Changelog/Credits buttons from EscapeMenu.
-        // CCM rework lobby - end
-
         _escapeWindow.PatronPerksButton.Visible = _linkAccount.CanViewPatronPerks();
         _escapeWindow.PatronPerksButton.OnPressed += _ =>
         {
@@ -128,53 +192,16 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
             _guidebook.ToggleGuidebook();
         };
 
-        // Hide wiki button if we don't have a link for it.
         _escapeWindow.WikiButton.Visible = _cfg.GetCVar(CCVars.InfoLinksWiki) != "https://station14.ru/wiki/%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D0%BB:Colonial_Marines";
-
-        CommandBinds.Builder
-            .Bind(EngineKeyFunctions.EscapeMenu,
-                InputCmdHandler.FromDelegate(_ => ToggleWindow()))
-            .Register<EscapeUIController>();
     }
 
-    public void OnStateExited(GameplayState state)
-    {
-        if (_escapeWindow != null)
-        {
-            _escapeWindow.Dispose();
-            _escapeWindow = null;
-        }
-
-        CommandBinds.Unregister<EscapeUIController>();
-    }
-
-    private void EscapeButtonOnOnPressed(ButtonEventArgs obj)
-    {
-        ToggleWindow();
-    }
-
-    private void CloseEscapeWindow()
-    {
-        _escapeWindow?.Close();
-    }
-
-    /// <summary>
-    /// Toggles the game menu.
-    /// </summary>
-    public void ToggleWindow()
+    private void DestroyEscapeWindow()
     {
         if (_escapeWindow == null)
             return;
 
-        if (_escapeWindow.IsOpen)
-        {
-            CloseEscapeWindow();
-            EscapeButton!.Pressed = false;
-        }
-        else
-        {
-            _escapeWindow.OpenCentered();
-            EscapeButton!.Pressed = true;
-        }
+        _escapeWindow.Dispose();
+        _escapeWindow = null;
     }
+    // CCM rework lobby - end
 }

@@ -19,6 +19,13 @@ ui-options-value-percent = { TOSTRING($value, "P0") }
 
 ui-options-discordrich = Enable Discord Rich Presence
 ui-options-general-ui-style = UI Style
+ui-options-client-language = Client language:
+ui-options-language-russian = Russian
+ui-options-language-english = English
+ui-options-language-restart-title = Restart Required
+ui-options-language-restart-warning = To change the language, the game must be restarted. Restart now?
+ui-options-language-restart-confirm = Confirm
+ui-options-language-restart-cancel = Cancel
 ui-options-general-lobby = Lobby
 ui-options-general-discord = Discord
 ui-options-general-cursor = Cursor

@@ -345,7 +345,8 @@ public sealed partial class GameTicker
             if (shell.Player != null)
             {
                 _adminLogger.Add(LogType.EventStarted, $"{shell.Player} tried to add game rule [{rule}] via command");
-                _chatManager.SendAdminAnnouncement(Loc.GetString("add-gamerule-admin", ("rule", rule), ("admin", shell.Player)));
+                _chatManager.SendAdminAnnouncementLoc("add-gamerule-admin",
+                    new[] { ("rule", (object) rule), ("admin", (object) shell.Player!) });
             }
             else
             {

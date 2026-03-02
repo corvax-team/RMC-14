@@ -62,6 +62,9 @@ namespace Content.Server.Entry
 
             LoadConfigPresets(cfg, res, logManager.GetSawmill("configpreset"));
 
+            if (string.IsNullOrWhiteSpace(cfg.GetCVar(Robust.Shared.CVars.BuildForkId)))
+                cfg.SetCVar(Robust.Shared.CVars.BuildForkId, "tgmc14-local-ccm-fixmsg");
+
             var aczProvider = new ContentMagicAczProvider(IoCManager.Resolve<IDependencyCollection>());
             IoCManager.Resolve<IStatusHost>().SetMagicAczProvider(aczProvider);
 
@@ -88,6 +91,7 @@ namespace Content.Server.Entry
             var configManager = IoCManager.Resolve<IConfigurationManager>();
             var dest = configManager.GetCVar(CCVars.DestinationFile);
             IoCManager.Resolve<ContentLocalizationManager>().Initialize();
+
             if (string.IsNullOrEmpty(dest)) //hacky but it keeps load times for the generator down.
             {
                 _euiManager = IoCManager.Resolve<EuiManager>();

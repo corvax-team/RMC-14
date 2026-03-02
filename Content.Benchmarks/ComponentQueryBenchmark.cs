@@ -41,7 +41,6 @@ public class ComponentQueryBenchmark
     [GlobalSetup]
     public void Setup()
     {
-        ProgramShared.PathOffset = "../../../../";
         PoolManager.Startup(typeof(QueryBenchSystem).Assembly);
 
         _pair = PoolManager.GetServerClient().GetAwaiter().GetResult();

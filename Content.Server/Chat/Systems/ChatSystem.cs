@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,7 @@ using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Localizations;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Players;
 using Content.Shared.Players.RateLimiting;
@@ -71,6 +73,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly CMChatSystem _cmChat = default!;
     [Dependency] private readonly RMCEmoteSystem _rmcEmote = default!;
     [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
+    [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
 
     // RMC14
     [Dependency] private readonly RMCChatBansManager _rmcChatBans = default!;
@@ -103,8 +106,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (_loocEnabled == val) return;
 
         _loocEnabled = val;
-        _chatManager.DispatchServerAnnouncement(
-            Loc.GetString(val ? "chat-manager-looc-chat-enabled-message" : "chat-manager-looc-chat-disabled-message"));
+        _chatManager.DispatchServerAnnouncementLoc(
+            val ? "chat-manager-looc-chat-enabled-message" : "chat-manager-looc-chat-disabled-message");
     }
 
     private void OnDeadLoocEnabledChanged(bool val)
@@ -112,8 +115,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (_deadLoocEnabled == val) return;
 
         _deadLoocEnabled = val;
-        _chatManager.DispatchServerAnnouncement(
-            Loc.GetString(val ? "chat-manager-dead-looc-chat-enabled-message" : "chat-manager-dead-looc-chat-disabled-message"));
+        _chatManager.DispatchServerAnnouncementLoc(
+            val ? "chat-manager-dead-looc-chat-enabled-message" : "chat-manager-dead-looc-chat-disabled-message");
     }
 
     private void OnCritLoocEnabledChanged(bool val)
@@ -122,8 +125,8 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
 
         _critLoocEnabled = val;
-        _chatManager.DispatchServerAnnouncement(
-            Loc.GetString(val ? "chat-manager-crit-looc-chat-enabled-message" : "chat-manager-crit-looc-chat-disabled-message"));
+        _chatManager.DispatchServerAnnouncementLoc(
+            val ? "chat-manager-crit-looc-chat-enabled-message" : "chat-manager-crit-looc-chat-disabled-message");
     }
 
         private void OnDeadChatEnabledChanged(bool val)
@@ -132,8 +135,8 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
 
         _DeadchatEnabled = val;
-        _chatManager.DispatchServerAnnouncement(
-            Loc.GetString(val ? "set-dchat-command-dchat-enabled" : "set-dchat-command-dchat-disabled"));
+        _chatManager.DispatchServerAnnouncementLoc(
+            val ? "set-dchat-command-dchat-enabled" : "set-dchat-command-dchat-disabled");
     }
 
     private void OnGameChange(GameRunLevelChangedEvent ev)
@@ -245,8 +248,10 @@ public sealed partial class ChatSystem : SharedChatSystem
         bool shouldCapitalize = (desiredType != InGameICChatType.Emote);
         bool shouldPunctuate = _configurationManager.GetCVar(CCVars.ChatPunctuation) || player != null && _netConfigManager.GetClientCVar(player.Channel, RMCCVars.RMCAutoPunctuate);
         // Capitalizing the word I only happens in English, so we check language here
-        bool shouldCapitalizeTheWordI = (!CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Parent.Name == "en")
-            || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en");
+        var localeCode = player != null
+            ? GetClientLocaleCode(player.Channel)
+            : _contentLoc.CurrentCultureCode;
+        var shouldCapitalizeTheWordI = IsEnglishLocale(localeCode);
 
         message = SanitizeInGameICMessage(source, message, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI);
 
@@ -372,8 +377,32 @@ public sealed partial class ChatSystem : SharedChatSystem
     {
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 
-        var wrappedMessage = Loc.GetString("chat-manager-sender-announcement-wrap-message", ("sender", sender), ("message", FormattedMessage.EscapeText(message)));
-        _chatManager.ChatMessageToAll(ChatChannel.Radio, message, wrappedMessage, default, false, true, colorOverride);
+        string WrapForCurrentCulture() => Loc.GetString("chat-manager-sender-announcement-wrap-message",
+            ("sender", sender),
+            ("message", FormattedMessage.EscapeText(message)));
+        var wrappedMessage = WrapForCurrentCulture();
+
+        foreach (var session in _playerManager.Sessions)
+        {
+            _chatManager.ChatMessageToOne(
+                ChatChannel.Radio,
+                message,
+                WithChannelCulture(session.Channel, WrapForCurrentCulture),
+                default,
+                false,
+                session.Channel,
+                colorOverride);
+        }
+
+        _replay.RecordServerMessage(new ChatMessage(
+            ChatChannel.Radio,
+            message,
+            wrappedMessage,
+            default,
+            null,
+            false,
+            colorOverride));
+
         if (playSound)
         {
             _audio.PlayGlobal(announcementSound == null ? DefaultAnnouncementSound : _audio.ResolveSound(announcementSound), Filter.Broadcast(), true, AudioParams.Default.WithVolume(-2f));
@@ -402,8 +431,33 @@ public sealed partial class ChatSystem : SharedChatSystem
     {
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 
-        var wrappedMessage = Loc.GetString("chat-manager-sender-announcement-wrap-message", ("sender", sender), ("message", FormattedMessage.EscapeText(message)));
-        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrappedMessage, source ?? default, false, true, colorOverride);
+        string WrapForCurrentCulture() => Loc.GetString("chat-manager-sender-announcement-wrap-message",
+            ("sender", sender),
+            ("message", FormattedMessage.EscapeText(message)));
+        var wrappedMessage = WrapForCurrentCulture();
+        var sourceUid = source ?? default;
+
+        foreach (var session in filter.Recipients)
+        {
+            _chatManager.ChatMessageToOne(
+                ChatChannel.Radio,
+                message,
+                WithChannelCulture(session.Channel, WrapForCurrentCulture),
+                sourceUid,
+                false,
+                session.Channel,
+                colorOverride);
+        }
+
+        _replay.RecordServerMessage(new ChatMessage(
+            ChatChannel.Radio,
+            message,
+            wrappedMessage,
+            GetNetEntity(sourceUid),
+            null,
+            false,
+            colorOverride));
+
         if (playSound)
         {
             _audio.PlayGlobal(announcementSound?.ToString() ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
@@ -429,7 +483,10 @@ public sealed partial class ChatSystem : SharedChatSystem
     {
         sender ??= Loc.GetString("chat-manager-sender-announcement");
 
-        var wrappedMessage = Loc.GetString("chat-manager-sender-announcement-wrap-message", ("sender", sender), ("message", FormattedMessage.EscapeText(message)));
+        string WrapForCurrentCulture() => Loc.GetString("chat-manager-sender-announcement-wrap-message",
+            ("sender", sender),
+            ("message", FormattedMessage.EscapeText(message)));
+        var wrappedMessage = WrapForCurrentCulture();
         var station = _stationSystem.GetOwningStation(source);
 
         if (station == null)
@@ -442,7 +499,26 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         var filter = _stationSystem.GetInStation(stationDataComp);
 
-        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrappedMessage, source, false, true, colorOverride);
+        foreach (var session in filter.Recipients)
+        {
+            _chatManager.ChatMessageToOne(
+                ChatChannel.Radio,
+                message,
+                WithChannelCulture(session.Channel, WrapForCurrentCulture),
+                source,
+                false,
+                session.Channel,
+                colorOverride);
+        }
+
+        _replay.RecordServerMessage(new ChatMessage(
+            ChatChannel.Radio,
+            message,
+            wrappedMessage,
+            GetNetEntity(source),
+            null,
+            false,
+            colorOverride));
 
         if (playDefaultSound)
         {
@@ -493,14 +569,22 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         name = FormattedMessage.EscapeText(name);
 
-        var wrappedMessage = Loc.GetString(speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
+        string WrapForCurrentCulture() => Loc.GetString(speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
             ("entityName", name),
             ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
             ("fontType", speech.FontId),
             ("fontSize", speech.FontSize),
             ("message", FormattedMessage.EscapeText(message)));
+        var wrappedMessage = WrapForCurrentCulture();
 
-        SendInVoiceRange(ChatChannel.Local, message, wrappedMessage, source, range);
+        SendInVoiceRange(
+            ChatChannel.Local,
+            message,
+            source,
+            range,
+            author: null,
+            wrappedMessage,
+            channel => WithChannelCulture(channel, WrapForCurrentCulture));
 
         var ev = new EntitySpokeEvent(source, message, null, null);
         RaiseLocalEvent(source, ev, true);
@@ -564,14 +648,16 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
         name = FormattedMessage.EscapeText(name);
 
-        var wrappedMessage = Loc.GetString("chat-manager-entity-whisper-wrap-message",
+        string WrapWhisperForCurrentCulture() => Loc.GetString("chat-manager-entity-whisper-wrap-message",
             ("entityName", name), ("message", FormattedMessage.EscapeText(message)));
 
-        var wrappedobfuscatedMessage = Loc.GetString("chat-manager-entity-whisper-wrap-message",
+        string WrapObfuscatedForCurrentCulture() => Loc.GetString("chat-manager-entity-whisper-wrap-message",
             ("entityName", nameIdentity), ("message", FormattedMessage.EscapeText(obfuscatedMessage)));
 
-        var wrappedUnknownMessage = Loc.GetString("chat-manager-entity-whisper-unknown-wrap-message",
+        string WrapUnknownForCurrentCulture() => Loc.GetString("chat-manager-entity-whisper-unknown-wrap-message",
             ("message", FormattedMessage.EscapeText(obfuscatedMessage)));
+
+        var wrappedMessage = WrapWhisperForCurrentCulture();
 
 
         foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange, ignoreXenos))
@@ -586,13 +672,37 @@ public sealed partial class ChatSystem : SharedChatSystem
                 continue; // Won't get logged to chat, and ghosts are too far away to see the pop-up, so we just won't send it to them.
 
             if (data.Range <= WhisperClearRange)
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, message, wrappedMessage, source, false, session.Channel);
+            {
+                _chatManager.ChatMessageToOne(
+                    ChatChannel.Whisper,
+                    message,
+                    WithChannelCulture(session.Channel, WrapWhisperForCurrentCulture),
+                    source,
+                    false,
+                    session.Channel);
+            }
             //If listener is too far, they only hear fragments of the message
             else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange))
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, wrappedobfuscatedMessage, source, false, session.Channel);
+            {
+                _chatManager.ChatMessageToOne(
+                    ChatChannel.Whisper,
+                    obfuscatedMessage,
+                    WithChannelCulture(session.Channel, WrapObfuscatedForCurrentCulture),
+                    source,
+                    false,
+                    session.Channel);
+            }
             //If listener is too far and has no line of sight, they can't identify the whisperer's identity
             else
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, wrappedUnknownMessage, source, false, session.Channel);
+            {
+                _chatManager.ChatMessageToOne(
+                    ChatChannel.Whisper,
+                    obfuscatedMessage,
+                    WithChannelCulture(session.Channel, WrapUnknownForCurrentCulture),
+                    source,
+                    false,
+                    session.Channel);
+            }
         }
 
         _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range), speechStyleClass: CompOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass, repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(source)));
@@ -637,14 +747,22 @@ public sealed partial class ChatSystem : SharedChatSystem
         string name = FormattedMessage.EscapeText(nameOverride ?? Name(ent));
 
         // Emotes use Identity.Name, since it doesn't actually involve your voice at all.
-        var wrappedMessage = Loc.GetString("chat-manager-entity-me-wrap-message",
+        string WrapForCurrentCulture() => Loc.GetString("chat-manager-entity-me-wrap-message",
             ("entityName", name),
             ("entity", ent),
             ("message", FormattedMessage.RemoveMarkupOrThrow(action)));
+        var wrappedMessage = WrapForCurrentCulture();
 
         if (checkEmote)
             TryEmoteChatInput(source, action);
-        SendInVoiceRange(ChatChannel.Emotes, action, wrappedMessage, source, range, author);
+        SendInVoiceRange(
+            ChatChannel.Emotes,
+            action,
+            source,
+            range,
+            author,
+            wrappedMessage,
+            channel => WithChannelCulture(channel, WrapForCurrentCulture));
         if (!hideLog)
             if (name != Name(source))
                 _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user} as {name}: {action}");
@@ -678,19 +796,27 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (HasComp<RMCUnconsciousComponent>(source)) // RMC14
             return;
 
-        var wrappedMessage = Loc.GetString("chat-manager-entity-looc-wrap-message",
+        string WrapForCurrentCulture() => Loc.GetString("chat-manager-entity-looc-wrap-message",
             ("entityName", name),
             ("message", FormattedMessage.EscapeText(message)));
+        var wrappedMessage = WrapForCurrentCulture();
 
-        SendInVoiceRange(ChatChannel.LOOC, message, wrappedMessage, source, hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal, player.UserId);
+        SendInVoiceRange(
+            ChatChannel.LOOC,
+            message,
+            source,
+            hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal,
+            player.UserId,
+            wrappedMessage,
+            channel => WithChannelCulture(channel, WrapForCurrentCulture));
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"LOOC from {player:Player}: {message}");
     }
 
     private void SendDeadChat(EntityUid source, ICommonSession player, string message, bool hideChat)
     {
-        var clients = GetDeadChatClients();
+        var clients = GetDeadChatClients().ToList();
         var playerName = Name(source);
-        string wrappedMessage;
+        var wrappedMessage = string.Empty;
         if (!_adminManager.IsAdmin(player) && !_DeadchatEnabled) // RMC14 - Check the status of the "rmc.dead_chat_enabled" CCvar before continuing.
             return;
 
@@ -704,22 +830,54 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         if (_adminManager.IsAdmin(player))
         {
-            wrappedMessage = Loc.GetString("chat-manager-send-admin-dead-chat-wrap-message",
+            string WrapAdminForCurrentCulture() => Loc.GetString("chat-manager-send-admin-dead-chat-wrap-message",
                 ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
                 ("userName", player.Channel.UserName),
                 ("message", FormattedMessage.EscapeText(message)));
+            wrappedMessage = WrapAdminForCurrentCulture();
+            foreach (var client in clients)
+            {
+                _chatManager.ChatMessageToOne(
+                    ChatChannel.Dead,
+                    message,
+                    WithChannelCulture(client, WrapAdminForCurrentCulture),
+                    source,
+                    hideChat,
+                    client,
+                    author: player.UserId);
+            }
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Admin dead chat from {player:Player}: {message}");
         }
         else
         {
-            wrappedMessage = Loc.GetString("chat-manager-send-dead-chat-wrap-message",
+            string WrapDeadForCurrentCulture() => Loc.GetString("chat-manager-send-dead-chat-wrap-message",
                 ("deadChannelName", Loc.GetString("chat-manager-dead-channel-name")),
                 ("playerName", (playerName)),
                 ("message", FormattedMessage.EscapeText(message)));
+            wrappedMessage = WrapDeadForCurrentCulture();
+            foreach (var client in clients)
+            {
+                _chatManager.ChatMessageToOne(
+                    ChatChannel.Dead,
+                    message,
+                    WithChannelCulture(client, WrapDeadForCurrentCulture),
+                    source,
+                    hideChat,
+                    client,
+                    author: player.UserId);
+            }
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Dead chat from {player:Player}: {message}");
         }
 
-        _chatManager.ChatMessageToMany(ChatChannel.Dead, message, wrappedMessage, source, hideChat, true, clients.ToList(), author: player.UserId);
+        _replay.RecordServerMessage(new ChatMessage(
+            ChatChannel.Dead,
+            message,
+            wrappedMessage,
+            GetNetEntity(source),
+            null,
+            hideChat,
+            speechStyleClass: CompOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass,
+            repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(source)));
     }
     #endregion
 
@@ -774,7 +932,15 @@ public sealed partial class ChatSystem : SharedChatSystem
     /// <summary>
     ///     Sends a chat message to the given players in range of the source entity.
     /// </summary>
-    private void SendInVoiceRange(ChatChannel channel, string message, string wrappedMessage, EntityUid source, ChatTransmitRange range, NetUserId? author = null)
+    private void SendInVoiceRange(
+        ChatChannel channel,
+        string message,
+        EntityUid source,
+        ChatTransmitRange range,
+        NetUserId? author,
+        string replayWrappedMessage,
+        Func<INetChannel, string> wrappedMessageFactory,
+        Func<INetChannel, string>? messageFactory = null)
     {
         foreach (var (session, data) in GetRecipients(source, VoiceRange))
         {
@@ -783,7 +949,9 @@ public sealed partial class ChatSystem : SharedChatSystem
                 continue;
 
             var entHideChat = entRange == MessageRangeCheckResult.HideChat; // RMC14 ear deafness
-            var ev = new ChatMessageOverrideInVoiceRangeEvent(session, channel, source, message, wrappedMessage, entHideChat);
+            var localizedMessage = messageFactory?.Invoke(session.Channel) ?? message;
+            var wrappedMessage = wrappedMessageFactory(session.Channel);
+            var ev = new ChatMessageOverrideInVoiceRangeEvent(session, channel, source, localizedMessage, wrappedMessage, entHideChat);
 
             if (session.AttachedEntity != null)
                 RaiseLocalEvent(session.AttachedEntity.Value, ref ev);
@@ -793,7 +961,36 @@ public sealed partial class ChatSystem : SharedChatSystem
             _chatManager.ChatMessageToOne(channel, ev.Message, ev.WrappedMessage, source, ev.EntHideChat, session.Channel, author: author);
         }
 
-        _replay.RecordServerMessage(new ChatMessage(channel, message, wrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range), speechStyleClass: CompOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass, repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(source)));
+        _replay.RecordServerMessage(new ChatMessage(channel, message, replayWrappedMessage, GetNetEntity(source), null, MessageRangeHideChatForReplay(range), speechStyleClass: CompOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass, repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(source)));
+    }
+
+    private string GetClientLocaleCode(INetChannel channel)
+    {
+        var locale = _netConfigManager.GetClientCVar(channel, CCVars.ClientLocale);
+        return string.IsNullOrWhiteSpace(locale) ? "ru-RU" : locale;
+    }
+
+    private static bool IsEnglishLocale(string locale)
+    {
+        return locale.StartsWith("en", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private T WithChannelCulture<T>(INetChannel channel, Func<T> action)
+    {
+        var locale = GetClientLocaleCode(channel);
+        var oldCulture = _contentLoc.CurrentCultureCode;
+        if (oldCulture.Equals(locale, StringComparison.OrdinalIgnoreCase))
+            return action();
+
+        _contentLoc.SetCulture(locale);
+        try
+        {
+            return action();
+        }
+        finally
+        {
+            _contentLoc.SetCulture(oldCulture);
+        }
     }
 
     /// <summary>

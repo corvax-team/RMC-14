@@ -21,6 +21,10 @@ mob_pushing = true
 [net]
 tickrate = 30
 
+[build]
+fork_id = "tgmc14-local-ccm-fixmsg"
+version = "dev-2026-02-26-launcher-fix-2"
+
 [physics]
 # Makes mapping annoying
 grid_splitting = false

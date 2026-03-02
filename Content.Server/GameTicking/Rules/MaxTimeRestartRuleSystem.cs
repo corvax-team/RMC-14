@@ -49,7 +49,8 @@ public sealed class MaxTimeRestartRuleSystem : GameRuleSystem<MaxTimeRestartRule
     {
         GameTicker.EndRound(Loc.GetString("rule-time-has-run-out"));
 
-        _chatManager.DispatchServerAnnouncement(Loc.GetString("rule-restarting-in-seconds",("seconds", (int) component.RoundEndDelay.TotalSeconds)));
+        _chatManager.DispatchServerAnnouncementLoc("rule-restarting-in-seconds",
+            new[] { ("seconds", (object) (int) component.RoundEndDelay.TotalSeconds) });
 
         // TODO FULL GAME SAVE
         Timer.Spawn(component.RoundEndDelay, () => GameTicker.RestartRound());

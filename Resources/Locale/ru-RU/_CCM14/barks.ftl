@@ -5,10 +5,10 @@ ccm-humanoid-profile-editor-bark-voice-label = Тип барка:
 ccm-humanoid-profile-editor-bark-preview = Прослушать
 ccm-humanoid-profile-editor-bark-pitch-label = Тон:
 ccm-humanoid-profile-editor-bark-speed-label = Темп:
-ccm-humanoid-profile-editor-bark-type-normal = Тип: Обычный
-ccm-humanoid-profile-editor-bark-type-robot = Тип: Робот
-ccm-humanoid-profile-editor-bark-type-alien = Тип: Ксено
-ccm-humanoid-profile-editor-bark-type-creature = Тип: Существо
+ccm-humanoid-profile-editor-bark-type-normal = Голос:
+ccm-humanoid-profile-editor-bark-type-robot = Голос:
+ccm-humanoid-profile-editor-bark-type-alien = Голос:
+ccm-humanoid-profile-editor-bark-type-creature = Голос:
 
 ccm-bark-voice-01 = Мужской 1
 ccm-bark-voice-02 = Мужской 2

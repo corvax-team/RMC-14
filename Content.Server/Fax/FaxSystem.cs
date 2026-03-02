@@ -621,7 +621,8 @@ public sealed class FaxSystem : EntitySystem
 
     private void NotifyAdmins(string faxName, string faxReceiver)
     {
-        _chat.SendAdminAnnouncement(Loc.GetString("fax-machine-chat-notify", ("fax", faxName), ("faxReceiver", faxReceiver)));
+        _chat.SendAdminAnnouncementLoc("fax-machine-chat-notify",
+            new[] { ("fax", (object) faxName), ("faxReceiver", (object) faxReceiver) });
         _audioSystem.PlayGlobal("/Audio/Machines/high_tech_confirm.ogg", Filter.Empty().AddPlayers(_adminManager.ActiveAdmins), false, AudioParams.Default.WithVolume(-8f));
     }
 }

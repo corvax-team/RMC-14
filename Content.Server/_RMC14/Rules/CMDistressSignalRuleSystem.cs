@@ -1842,11 +1842,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         var vote = new VoteOptions
         {
-            Title = Loc.GetString("rmc-distress-signal-next-map-title"),
+            Title = "rmc-distress-signal-next-map-title",
             Options = options,
             Duration = TimeSpan.FromMinutes(2),
         };
-        vote.SetInitiatorOrServer(null);
+        vote.InitiatorText = "ui-vote-initiator-server";
 
         _currentVote = _voteManager.CreateVote(vote);
         _currentVote.OnFinished += (_, args) =>

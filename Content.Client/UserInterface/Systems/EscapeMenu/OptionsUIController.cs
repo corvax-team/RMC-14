@@ -1,6 +1,7 @@
 using System;
 using System.Numerics;
 using Content.Client.Options.UI;
+using Content.Shared.Localizations;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
@@ -13,6 +14,7 @@ namespace Content.Client.UserInterface.Systems.EscapeMenu;
 public sealed class OptionsUIController : UIController
 {
     [Dependency] private readonly IConsoleHost _con = default!;
+    [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
     private const float OptionsBaseWidth = 950f;
     private const float OptionsBaseHeight = 710f;
     private Control? _optionsHost;
@@ -21,6 +23,9 @@ public sealed class OptionsUIController : UIController
     public override void Initialize()
     {
         _con.RegisterCommand("options", Loc.GetString("cmd-options-desc"), Loc.GetString("cmd-options-help"), OptionsCommand);
+        // CCM rework lobby - start
+        _contentLoc.CultureChanged += OnCultureChanged;
+        // CCM rework lobby - end
     }
 
     private void OptionsCommand(IConsoleShell shell, string argStr, string[] args)
@@ -51,6 +56,26 @@ public sealed class OptionsUIController : UIController
         _optionsWindow = UIManager.CreateWindow<OptionsMenu>();
         HookOptionsHost();
     }
+
+    // CCM rework lobby - start
+    private void OnCultureChanged(string _)
+    {
+        if (_optionsWindow is not { Disposed: false })
+            return;
+
+        var wasOpen = _optionsWindow.IsOpen;
+        var selectedTab = _optionsWindow.Tabs.CurrentTab;
+
+        _optionsWindow.Dispose();
+        _optionsWindow = default!;
+
+        if (!wasOpen)
+            return;
+
+        OpenWindow();
+        _optionsWindow.SelectTabIndex(selectedTab);
+    }
+    // CCM rework lobby - end
 
     public void OpenWindow()
     {

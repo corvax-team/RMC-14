@@ -2782,6 +2782,59 @@ namespace Content.Client.Stylesheets
                         BorderColor = PanelDark.WithAlpha(1f),
                     }),
 
+                Element<PanelContainer>().Class("LauncherConnectingFrame")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = Color.FromHex("#111317").WithAlpha(0.96f),
+                        BorderThickness = new Thickness(1),
+                        BorderColor = CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#1B5FB0").WithAlpha(0.95f)
+                            : Color.FromHex("#2B7E45").WithAlpha(0.95f),
+                    }),
+
+                Element<Label>().Class("LauncherConnectingTitle")
+                    .Prop(Label.StylePropertyFont, bedstead20)
+                    .Prop(Label.StylePropertyFontColor, CurrentTheme == UiColorTheme.Blue
+                        ? Color.FromHex("#8FC4F6")
+                        : Color.FromHex("#AFFFBD")),
+
+                Element<Label>().Class("LauncherConnectingStateLabel")
+                    .Prop(Label.StylePropertyFont, bedstead15)
+                    .Prop(Label.StylePropertyFontColor, CurrentTheme == UiColorTheme.Blue
+                        ? Color.FromHex("#A8CCF2")
+                        : Color.FromHex("#BCEFC7")),
+
+                Element<Button>().Class("LauncherConnectingButton")
+                    .Prop(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
+                        ? Color.FromHex("#164383")
+                        : Color.FromHex("#146A2C")),
+
+                Element<Button>().Class("LauncherConnectingButton").Pseudo(ContainerButton.StylePseudoClassNormal)
+                    .Prop(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
+                        ? Color.FromHex("#164383")
+                        : Color.FromHex("#146A2C")),
+
+                Element<Button>().Class("LauncherConnectingButton").Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
+                        ? Color.FromHex("#1D4AA1")
+                        : Color.FromHex("#1A7D35")),
+
+                Element<Button>().Class("LauncherConnectingButton").Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
+                        ? Color.FromHex("#0F325F")
+                        : Color.FromHex("#0E4F22")),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {"LauncherConnectingButton"}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, bedstead15),
+                        new StyleProperty(Label.StylePropertyFontColor, CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#B3D6FA")
+                            : Color.FromHex("#C7FFD3")),
+                    }),
+
                 // CCM rework lobby - start
                 Element<PanelContainer>().Class("FancyWindowFrame")
                     .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat

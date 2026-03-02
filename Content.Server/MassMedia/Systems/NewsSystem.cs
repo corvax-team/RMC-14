@@ -181,11 +181,13 @@ public sealed class NewsSystem : SharedNewsSystem
         {
             _audio.PlayPvs(ent.Comp.ConfirmSound, ent);
 
-            _chatManager.SendAdminAnnouncement(Loc.GetString("news-publish-admin-announcement",
-                                                             ("actor", msg.Actor),
-                                                             ("title", article.Value.Title),
-                                                             ("author", article.Value.Author ?? Loc.GetString("news-read-ui-no-author"))
-            ));
+            _chatManager.SendAdminAnnouncementLoc("news-publish-admin-announcement",
+                new[]
+                {
+                    ("actor", (object) msg.Actor),
+                    ("title", (object) article.Value.Title),
+                    ("author", (object) (article.Value.Author ?? Loc.GetString("news-read-ui-no-author"))),
+                });
         }
     }
 

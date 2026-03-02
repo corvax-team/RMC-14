@@ -45,7 +45,10 @@ public sealed class UserDbDataManager : IPostInjectInit
     {
         _users.Remove(session.UserId, out var data);
         if (data == null)
-            throw new InvalidOperationException("Did not have cached data in ClientDisconnect!");
+        {
+            _sawmill.Warning($"Did not have cached data in ClientDisconnect for {session}.");
+            return;
+        }
 
         data.Cancel.Cancel();
         data.Cancel.Dispose();

@@ -99,6 +99,14 @@ public partial class ChatBox : UIWidget
         }
     }
 
+    // CCM rework lobby - start
+    public void RefreshLocalization()
+    {
+        ChatInput.RefreshLocalization();
+        _controller.UpdateSelectedChannel(this);
+    }
+    // CCM rework lobby - end
+
     private void OnChannelFilter(ChatChannel channel, bool active)
     {
         Contents.Clear();

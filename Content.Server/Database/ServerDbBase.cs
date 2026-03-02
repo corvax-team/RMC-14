@@ -349,9 +349,9 @@ namespace Content.Server.Database
                   profile.XenoPostfix,
                   false,
                   false,
-                  string.Empty,
-                  "agnostic",
-                  "neutral",
+                  profile.OriginId,
+                  profile.ReligionId,
+                  profile.CorporateRelationId,
                   profile.BarkVoice,
                   profile.BarkPitch,
                   profile.BarkSpeed
@@ -450,6 +450,9 @@ namespace Content.Server.Database
             profile.PlaytimePerks = humanoid.PlaytimePerks;
             profile.XenoPrefix = humanoid.XenoPrefix;
             profile.XenoPostfix = humanoid.XenoPostfix;
+            profile.OriginId = humanoid.OriginId;
+            profile.ReligionId = humanoid.ReligionId;
+            profile.CorporateRelationId = humanoid.CorporateRelationId;
             profile.BarkVoice = humanoid.BarkVoice;
             profile.BarkPitch = humanoid.BarkPitch;
             profile.BarkSpeed = humanoid.BarkSpeed;

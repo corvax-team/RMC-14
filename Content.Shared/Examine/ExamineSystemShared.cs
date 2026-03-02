@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.Watch;
+using Content.Shared.Localizations;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Interaction;
@@ -23,6 +24,7 @@ namespace Content.Shared.Examine
         [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
         [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
         [Dependency] protected readonly MobStateSystem MobStateSystem = default!;
+        [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
 
         // RMC14
         [Dependency] private readonly QueenEyeSystem _queenEye = default!;
@@ -303,7 +305,8 @@ namespace Content.Shared.Examine
             //Add an entity description if one is declared
             if (!string.IsNullOrEmpty(metadata.EntityDescription))
             {
-                message.AddText(metadata.EntityDescription);
+                var description = GetLocalizedDescription(metadata);
+                message.AddText(description);
                 hasDescription = true;
             }
 
@@ -320,6 +323,52 @@ namespace Content.Shared.Examine
             newMessage.Pop();
 
             return newMessage;
+        }
+
+        private string GetLocalizedDescription(MetaDataComponent metadata)
+        {
+            var description = metadata.EntityDescription;
+
+            if (string.IsNullOrWhiteSpace(description))
+                return string.Empty;
+
+            // If description is actually a locale id, resolve it for current culture.
+            if (Loc.TryGetString(description, out var localizedDescription))
+                return localizedDescription;
+
+            var prototype = metadata.EntityPrototype;
+            if (prototype == null)
+                return description;
+
+            // Prototype description should always follow the current culture.
+            var currentPrototypeDescription = prototype.Description;
+            if (description.Equals(currentPrototypeDescription, StringComparison.Ordinal))
+                return currentPrototypeDescription;
+
+            // Some entities carry a stale literal (often RU) captured earlier.
+            // If the stored text matches prototype description in another supported locale,
+            // treat it as stale and use current-culture prototype description instead.
+            var currentCulture = _contentLoc.CurrentCultureCode;
+            var fallbackCultures = new[] { "ru-RU", "en-US" };
+
+            foreach (var culture in fallbackCultures)
+            {
+                if (culture.Equals(currentCulture, StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                _contentLoc.SetCulture(culture);
+                try
+                {
+                    if (description.Equals(prototype.Description, StringComparison.Ordinal))
+                        return currentPrototypeDescription;
+                }
+                finally
+                {
+                    _contentLoc.SetCulture(currentCulture);
+                }
+            }
+
+            return description;
         }
     }
 

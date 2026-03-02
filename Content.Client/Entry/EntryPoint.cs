@@ -25,6 +25,7 @@ using Content.Client.Stylesheets;
 using Content.Client.UserInterface;
 using Content.Client.Viewport;
 using Content.Client.Voting;
+using Content.Shared.CCVar;
 using Content.Shared.Ame.Components;
 using Content.Shared.Gravity;
 using Content.Shared.Localizations;
@@ -93,6 +94,7 @@ namespace Content.Client.Entry
             IoCManager.InjectDependencies(this);
 
             _contentLoc.Initialize();
+            _configManager.OnValueChanged(CCVars.ClientLocale, cultureCode => _contentLoc.SetCulture(cultureCode), true);
             _componentFactory.DoAutoRegistrations();
             _componentFactory.IgnoreMissingComponents();
 
