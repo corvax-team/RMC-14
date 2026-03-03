@@ -1,6 +1,6 @@
 ent-RMCArmorRoyal = бронежилет 'Пустельга'
     .desc = Модифицируемый индивидуальный бронежилет, используемый коммандос Имперской армии.
-ent-RMCArmorRoyalLight = лёгкий бронежилет П'устельга'
+ent-RMCArmorRoyalLight = лёгкий бронежилет 'Пустельга'
     .desc = { ent-RMCArmorRoyal.desc }
 ent-RMCArmorRoyalPadded = бронежилет 'Пустельга' с подсумками
     .desc = { ent-RMCArmorRoyal.desc }

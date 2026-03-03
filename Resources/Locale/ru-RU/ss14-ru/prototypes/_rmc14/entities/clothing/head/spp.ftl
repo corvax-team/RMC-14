@@ -28,5 +28,5 @@ ent-CMHeadCapSPPUshankaCivilian = ушанка СССП СЛ8г
     .desc = { ent-CMHeadCapSPPUshanka.desc }
 ent-RMCHeadCapSPPPolKomWhite = Фуражка UL5 C-1
     .desc = Головной убор, выдаваемый высокопоставленным офицерам флота или армии.
-ent-RMCHeadCapSPPPolBlack = Фкражка UL5 P-1
+ent-RMCHeadCapSPPPolBlack = Фуражка UL5 P-1
     .desc = Головной убор, выдаваемый Комиссарам СССП. Напоминает октябрь.
