@@ -36,3 +36,5 @@ ent-RMCFancySuitJacketBrown = Коричневый пиджак
     .desc = { ent-RMCFancySuitJacketBlack.desc }
 ent-RMCFancySuitJacketLightBrown = Светло-коричневый пиджак
     .desc = { ent-RMCFancySuitJacketBlack.desc }
+ent-RMCJacketWindbreakerWEYA = Ветровка Vitezstvi
+    .desc = Корпоративная ветровка, которую обычно одевают члены Административной Части Vitezstvi.
