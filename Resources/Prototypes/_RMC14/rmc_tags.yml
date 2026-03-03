@@ -177,3 +177,6 @@
 
 - type: Tag
   id: RMCSentryLaptop
+
+- type: Tag # CCM-fix-test
+  id: Marine

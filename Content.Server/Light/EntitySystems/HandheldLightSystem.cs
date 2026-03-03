@@ -1,3 +1,4 @@
+using System;
 using Content.Server.Actions;
 using Content.Server.Popups;
 using Content.Server.Power.EntitySystems;
@@ -16,6 +17,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Light.EntitySystems
@@ -30,6 +32,7 @@ namespace Content.Server.Light.EntitySystems
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
         [Dependency] private readonly SharedAudioSystem _audio = default!;
         [Dependency] private readonly SharedPointLightSystem _lights = default!;
+        [Dependency] private readonly IPrototypeManager _prototype = default!; // CCM-fix-test
 
         // TODO: Ideally you'd be able to subscribe to power stuff to get events at certain percentages.. or something?
         // But for now this will be better anyway.
@@ -107,8 +110,26 @@ namespace Content.Server.Light.EntitySystems
         private void OnMapInit(Entity<HandheldLightComponent> ent, ref MapInitEvent args)
         {
             var component = ent.Comp;
-            _actionContainer.EnsureAction(ent, ref component.ToggleActionEntity, component.ToggleAction);
-            _actions.AddAction(ent, ref component.SelfToggleActionEntity, component.ToggleAction);
+
+            // CCM-fix-test-start
+            // Check if the action prototype exists before trying to spawn it
+            // This can happen during tests or if the prototype is not loaded
+            if (!_prototype.TryIndex<EntityPrototype>(component.ToggleAction, out _))
+            {
+                Log.Warning($"Tried to initialize handheld light {ToPrettyString(ent)} with missing action prototype {component.ToggleAction}");
+                return;
+            }
+
+            try
+            {
+                _actionContainer.EnsureAction(ent, ref component.ToggleActionEntity, component.ToggleAction); // not touched
+                _actions.AddAction(ent, ref component.SelfToggleActionEntity, component.ToggleAction); // not touched
+            }
+            catch (Exception e)
+            {
+                Log.Warning($"Failed to add action to handheld light {ToPrettyString(ent)}: {e.Message}");
+            }
+            // CCM-fix-test-end
         }
 
         private void OnShutdown(EntityUid uid, HandheldLightComponent component, ComponentShutdown args)

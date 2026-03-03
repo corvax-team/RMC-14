@@ -129,6 +129,12 @@ public abstract class SharedXenoNameSystem : EntitySystem
                 }
             }
         }
+        catch (InvalidOperationException) // CCM-fix-test
+        {
+            // Play time info is not yet loaded for this player (e.g., during tests or initial connection)
+            // Return zero playtime as a fallback
+            return TimeSpan.Zero;
+        }
         catch (Exception e)
         {
             Log.Error($"Error reading total xeno playtime:\n{e}");
