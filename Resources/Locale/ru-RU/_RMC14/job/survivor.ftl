@@ -14,10 +14,10 @@ cm-job-name-survivor-corporate = Корпоративный колонист
 cm-job-name-survivor-scientist = Учёный колонист
 
 rmc-job-name-survivor-co = Выживший КО
-rmc-job-description-survivor-co = Вы - переживший почти полное уничтожение своего соединения Командир Сил Обороны и Сдерживания.
+rmc-job-description-survivor-co = Вы командующий офицер в составе ККМП.
 
 rmc-job-name-survivor-synth = Выживший синтетик
-rmc-job-description-survivor-synth = Вы синтетик, переживший нападение на корпоративный объект.
+rmc-job-description-survivor-synth Вы синтетик, переживший нападение на корпоративный объект.
 
 rmc-job-name-survivor-military = Военный колонист
 rmc-job-description-survivor-military = Вы выживший после нашествия ксеноморфов в колонии и член какой-то военной организации.
@@ -35,15 +35,15 @@ rmc-playtime-tracker-job-name-survivor-synth = Выживший синтетик
 
 cm-job-name-survivor-trucker = Трекер колониста
 
-cm-job-name-survivor-icb = Представитель Антимонопольного Бюро
-CMJobSurvivorICB = Представитель Антимонопольного Бюро
-cm-job-prefix-survivor-icb = ПАБ
+cm-job-name-survivor-icb = Представитель Бюро межзвездной торговли
+CMJobSurvivorICB = Представитель Бюро межзвездной торговли
+cm-job-prefix-survivor-icb = ПБМТ
 
-cm-job-name-survivor-isr = Уполномоченный Наблюдатель по Правам Разумных Существ
-CMJobSurvivorISR = Уполномоченный Наблюдатель по Правам Разумных Существ
+cm-job-name-survivor-isr = Interstellar Life Rights Observer
+CMJobSurvivorISR = Interstellar Life Rights Observer
 
-rmc-job-name-survivor-cmb-deputy = Помощник Маршала БКМ
-CMSurvivorCMBDeputy = Помощник Маршала БКМ
+rmc-job-name-survivor-cmb-deputy = Заместитель БКМ
+CMSurvivorCMBDeputy = Заместитель БКМ
 
 rmc-job-name-survivor-bureau-marshal = Маршал БКМ
 cm-job-prefix-survivor-cmb-marshal = БКМ Марш.
@@ -75,7 +75,7 @@ cm-job-name-surivor-priest = Священник
 
 # FORECON survs
 
-rmc-job-greeting-forecon = Вы — морпех из подразделения СОиС (Силы Обороны и Сдерживания) с корабля «Ганьют», оказавшийся на этой планете после того, как ваша команда была уничтожена при расследовании сигнала бедствия. Ваш пилот и большая часть отряда погибла, вы и оставшиеся бойцы вынуждены были сражаться и скрываться, чтобы выжить... но с истощающимися запасами и заканчивающейся едой, возможно, единственный шанс на спасение — двигаться на запад к разбившемуся десантному кораблю, чтобы добыть что‑нибудь полезное.
+rmc-job-greeting-forecon = Вы — морпех из подразделения разведки сил ККМП (Форекон) с корабля ККМП «Ганьют», оказавшийся на этой планете после того, как ваша команда была уничтожена при расследовании сигнала бедствия. Ваш пилот и большая часть отряда погибла, вы и оставшиеся бойцы вынуждены были сражаться и скрываться, чтобы выжить... но с истощающимися запасами и заканчивающейся едой, возможно, единственный шанс на спасение — двигаться на запад к разбившемуся десантному кораблю, чтобы добыть что‑нибудь полезное.
 
   Вы полностью осознаёте угрозу ксеноморфов и можете использовать это знание по своему усмотрению.
 
@@ -83,73 +83,73 @@ rmc-job-greeting-forecon = Вы — морпех из подразделения
 
   Вы [bold][color=#51A16C][font size=16]НЕ враждебны к ККМП![/font][/color][/bold]
 
-rmc-job-name-forecon = Выживший СОиС
-rmc-job-description-forecon = Вы — солдат СОиС, оказавшийся один. Ваш корабль "Ганьют" потерпел крушение, и теперь вы остались на этой планете. Сделайте всё возможное, чтобы выжить!
+rmc-job-name-forecon = Выживший ФОРЕКОН
+rmc-job-description-forecon = Вы — морпех корпуса ККМП "Форекон", оказавшийся один. Ваш корабль "ганьют" потерпел крушение, и теперь вы остались на этой планете. Сделайте всё возможное, чтобы выжить!
 
-rmc-job-name-forecon-sniper = Снайпер СОиС
-rmc-job-name-forecon-marksman = Стрелок СОиС
-rmc-job-name-forecon-support-tech = Техник поддержки СОиС
-rmc-job-name-forecon-synth = Синтетик СОиС
-rmc-job-name-forecon-commander = Командир СОиС
+rmc-job-name-forecon-sniper = Снайпер ФОРЕКОН
+rmc-job-name-forecon-marksman = Стрелок ФОРЕКОН
+rmc-job-name-forecon-support-tech = Техник поддержки ФОРЕКОН
+rmc-job-name-forecon-synth = Синтетик ФОРЕКОН
+rmc-job-name-forecon-commander = Командир ФОРЕКОН
 
 # LV-624 survs
 
 rmc-job-name-survivor-lv624-archeologist = Археолог
 rmc-job-name-survivor-lv624-cargo-technician = Техник поставок
 rmc-job-name-survivor-lv624-corporate-liaison = Корпоративный связной LV-624
-rmc-job-name-survivor-lv624-security-guard = Охраник
+rmc-job-name-survivor-lv624-security-guard = Охраник Ве-Я
 rmc-job-name-survivor-lv624-medical-technician = Медицинский техник
 rmc-job-name-survivor-lv624-engineer = Инженер
 
-rmc-job-greeting-corporate-dome-cl = Вы последний оставшийся в живых Администратор на Лазарус Лэндинг!
+rmc-job-greeting-corporate-dome-cl = You are the last alive Executive of Lazarus Landing!
 
-  Вы знаете об угрозе ксеноморфов.
+  You are aware of the xenonid threat.
 
-  Ваша главная цель - выжить.
+  Your primary objective is to survive the outbreak.
 
-  Вы являетесь связистом корпорации, работающим на LV-624. Вам сообщили о каких-то яйцах необычного вида, найденных в храме пришельцев к северо-востоку от колонии. Будучи умным администратором, каким вас наняла компания, вы решили подготовить свой офис к худшему, когда в резервуарах Исследовательского купола родился первый "паразит". Оказалось, ты был прав, все, кто называл тебя сумасшедшим и эти новые "синтетики", теперь мертвы, ты и твоя корпоративная служба безопасности - единственные, кто выжил из-за своей паранойи. Атака ксеноморфов была беспощадной, один из офицеров выстрелил в топливный бак, что привело к разрушению части купола, а также к расплавлению многих защитных сооружений. Вы должны выжить и найти способ связаться с компанией.
+  You are a Corporate Liaison stationed on LV-624 from Weston-Yamada. You were tipped off about some very peculiar looking eggs recovered from the alien temple North-East of the colony. Being the smart Executive the Company hired you to be, you decided to prepare your office for the worst when the first 'parasite' was born in the vats of the Research Dome. Turned out, you were right, everyone who called you crazy and called these the new 'synthetics' is now dead, you along with your Corporate Security detail are the only survivors due to your paranoia. The xenonid onslaught was relentless, a fuel tank was shot by one of the Officers, leading to the destruction of a part of the dome, along with a lot of the defences being melted. You must survive and find a way to contact Weston-Yamada.
 
-  Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ к ККМП![/font][/color][/bold]
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-greeting-corporate-dome-goon = Вы = корпоративный охранник!
+rmc-job-greeting-corporate-dome-goon = You are a Corporate Security Officer!
 
-  Вы знаете об угрозе ксеноморфов.
+  You are aware of the xenonid threat.
 
-  Ваша главная цель - выжить.
+  Your primary objective is to survive the outbreak.
 
-  Вы - офицер охраны LV-624. Внезапно в один прекрасный день представитель Корпорации отозвал вас в сторонку и велел принести припасы из офисов маршалов в их офис, и побыстрее. Вы начали укреплять Корпоративный купол, а администратор сказал, что что-то серьезное обрушится на всю колонию, не считая вас. Оказывается, Связной был прав, эти так называемые "ксеноморфы" прорвали защитную оболочку Исследовательского купола и начали уничтожать всю колонию. Как только они ворвались в Купол и попытались убить вас всех, вам едва удалось сдержать их, даже потеряв одного офицера и большую часть сил обороны. Связной сказал, что они скоро найдут способ связаться с компанией и остаться стойкими до прибытия спасателей.
+  You are a Corporate Security Officer stationed on LV-624 from Weston-Yamada. Suddenly one day you were pulled aside by the Corporate Liaison and told to bring supplies from the Marshals Offices to their office, and fast. You began fortifying the Corporate Dome and was told by the Executive that something big will ravage the entire colony, excluding you. Turns out, the Liaison was right, these so called 'xenonids' broke containment from the Research Dome and began destroying the entire colony. Once they came for the Dome and tried to kill all of you, you barely managed to hold them off even after losing one Officer and alot of the defences. The Liaison said they will soon find a way to contact Weston-Yamada and to remain steadfast until rescue arrives.
 
-  Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ К ККМП![/font][/color][/bold]
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-greeting-corporate-dome-goon-lead = Вы - Шеф корпоративной охраны!
+rmc-job-greeting-corporate-dome-goon-lead = You are a Corporate Security Lead!
 
-  Вы знаете об угрозе ксеноморфов.
+  You are aware of the xenonid threat.
 
-  Ваша главная цель - выжить.
+  Your primary objective is to survive the outbreak.
 
-  Вы - начальник охраны исследовательского объекта на LV-624. Неожиданно в один прекрасный день представитель Корпорации отозвал вас в сторонку и велел организовать силы безопасности, и побыстрее. Вы начали укреплять Корпоративный купол, а администратор сказал, что что-то серьезное обрушится на всю колонию, не считая вас. Оказывается, Связной был прав, эти так называемые "ксеноморфы" прорвали защитную оболочку Исследовательского купола и начали уничтожать всю колонию. Как только они ворвались в Купол и попытались убить вас всех, вам едва удалось сдержать их, даже потеряв одного офицера и большую часть сил обороны. Связной сказал, что они скоро найдут способ связаться с компанией и остаться стойкими до прибытия спасателей.
+  You are a Corporate Security Lead stationed on LV-624 from Weston-Yamada. Suddenly one day you were pulled aside by the Corporate Liaison and told to organize the security forces present, and fast. You began fortifying the Corporate Dome and was told by the Executive that something big will ravage the entire colony, excluding you. Turns out, the Liaison was right, these so called 'xenonids' broke containment from the Research Dome and began destroying the entire colony. Once they came for the Dome and tried to kill all of you, you barely managed to hold them off even after losing one Officer and alot of the defences. The Liaison said they will soon find a way to contact Weston-Yamada and to remain steadfast until rescue arrives.
 
-  Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ к ККМП![/font][/color][/bold]
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-greeting-corporate-dome-goon-medic = Вы - Медик корпоративной охраны!
+rmc-job-greeting-corporate-dome-goon-medic = You are a Corporate Security Medic!
 
-  Вы знаете об угрозе ксеноморфов.
+  You are aware of the xenonid threat.
 
-  Ваша главная цель - выжить.
+  Your primary objective is to survive the outbreak.
 
-  Вы - медик корпоративной службы безопасности, работающий на LV-624. Внезапно в один прекрасный день сотрудник по связям с общественностью отозвал вас в сторону и велел принести все необходимое из медотсека в их офис, и побыстрее. Вы начали укреплять Корпоративный купол, и администратор сказал вам, что что-то серьезное разрушит всю колонию, за исключением вас. Оказывается, Связной был прав, эти так называемые "ксеноморфы" прорвали защитную оболочку Исследовательского купола и начали уничтожать всю колонию. Как только они ворвались в Купол и попытались убить вас всех, вам едва удалось сдержать их, даже потеряв одного офицера и большую часть сил обороны. Связной сказал, что они скоро найдут способ связаться с компанией и оставаться стойкими до прибытия спасателей.
+  You are a Corporate Security Medic stationed on LV-624 from Weston-Yamada. Suddenly one day you were pulled aside by the Corporate Liaison and told to bring supplies from the Medbay to their office, and fast. You began fortifying the Corporate Dome and was told by the Executive that something big will ravage the entire colony, excluding you. Turns out, the Liaison was right, these so called 'xenonids' broke containment from the Research Dome and began destroying the entire colony. Once they came for the Dome and tried to kill all of you, you barely managed to hold them off even after losing one Officer and alot of the defences. The Liaison said they will soon find a way to contact Weston-Yamada and to remain steadfast until rescue arrives.
 
-  Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ К ККМП![/font][/color][/bold]
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-greeting-corporate-dome-goon-engi = Вы - техник корпоративной охраны!
+rmc-job-greeting-corporate-dome-goon-engi = You are a Corporate Security Technician!
 
-  Вы знаете об угрозе ксеноморфов.
+  You are aware of the xenonid threat.
 
-  Ваша главная цель - выжить.
+  Your primary objective is to survive the outbreak.
 
-  Вы техник-специалист корпоративной безопасности, работающий на LV-624. Внезапно в один прекрасный день сотрудник по связям с общественностью корпорации отозвал вас в сторону и велел доставить материалы из инженерного отдела в их офис, и побыстрее. Вы начали укреплять Корпоративный купол, и администратор сказал вам, что что-то серьезное разрушит всю колонию, за исключением вас. Оказывается, Связной был прав, эти так называемые "ксенониды" прорвали защитную оболочку Исследовательского купола и начали уничтожать всю колонию. Как только они ворвались в Купол и попытались убить вас всех, вам едва удалось сдержать их, даже потеряв одного офицера и большую часть сил обороны. Связной сказал, что они скоро найдут способ связаться с компанией и оставаться стойкими до прибытия спасателей.
+  You are a Corporate Security Technician stationed on LV-624 from Weston-Yamada. Suddenly one day you were pulled aside by the Corporate Liaison and told to bring supplies from Engineering to their office, and fast. You began fortifying the Corporate Dome and was told by the Executive that something big will ravage the entire colony, excluding you. Turns out, the Liaison was right, these so called 'xenonids' broke containment from the Research Dome and began destroying the entire colony. Once they came for the Dome and tried to kill all of you, you barely managed to hold them off even after losing one Officer and alot of the defences. The Liaison said they will soon find a way to contact Weston-Yamada and to remain steadfast until rescue arrives.
 
-  Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ к ККМП![/font][/color][/bold]
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
 # New Varadero Survs
 
@@ -163,7 +163,7 @@ cm-job-name-survivor-medical-technician = Медик Нью Вардеро
 
 cm-job-name-survivor-technician = Инженер Нью Вардеро
 
-cm-job-name-survivor-un-peacekeeper = Миротворец ГИОР
+cm-job-name-survivor-un-peacekeeper = Миротворец ООН
 
 cm-job-name-survivor-new-varadero-researcher = Учёный Нью Вардеро
 
@@ -182,7 +182,7 @@ rmc-job-prefix-fire-protection-specialist-hybrisa = СПБ
 
 rmc-job-name-survivor-grind-barista = Бариста
 
-rmc-job-name-survivor-tmcc-miner = Шахтёр - High Rock Company
+rmc-job-name-survivor-tmcc-miner = Шахтёр - TMCC
 
 rmc-job-name-survivor-medical-doctor = Доктор
 
@@ -192,9 +192,9 @@ rmc-job-name-survivor-xenoarchaeologist = Ксеноархеолог
 
 rmc-job-name-survivor-xenobiologist = Ксенобиолог
 
-rmc-job-name-survivor-pizza-galaxy = Водитель Пицца-Гэлэкси
+rmc-job-name-survivor-pizza-galaxy = Водитель пиццы Galaxy
 
-rmc-job-name-survivor-commercial-pilot = Коммерческий пилот Космологистики
+rmc-job-name-survivor-commercial-pilot = Коммерческий пилот Ве-Я
 
 rmc-job-name-survivor-hybrisa-engineer = Электрик
 rmc-job-name-survivor-construction-worker = Строитель
@@ -206,21 +206,21 @@ rmc-job-name-survivor-infrastructure-engineer = Инженер инфрастр�
 
 rmc-job-name-survivor-reactor-technician = Техник реактора
 
-rmc-job-name-survivor-armed-police-officer = Милицейский
+rmc-job-name-survivor-armed-police-officer = Народный вооружённый полицейский
 
 rmc-job-name-survivor-army-reservist = Армейски резервист
 rmc-job-prefix-army-reservist = 202/Армия
 
 rmc-job-name-survivor-moh-doctor = Доктор министерства здравоохранения
 
-rmc-job-name-survivor-cec-researcher = Исследователь Корпуса Исследования Космоса
+rmc-job-name-survivor-cec-researcher = Исследователь Корпуса Космической Эксплорации
 
 rmc-job-name-survivor-soro-civilian = Гражданин
 
 rmc-job-name-survivor-fire-protection-specialist = Специалист по пожарной безопастности
 rmc-job-prefix-fire-protection-specialist = СПБ
 
-rmc-job-name-survivor-soro-miner = Шахтёр
+rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Корпоративный связной - Halcyon Dynamics
 
@@ -257,11 +257,11 @@ CMSurvivorFiorinaEngineer = Инженер Фрионы
 cm-job-name-survivor-fiorina-researcher = Учёный Фрионы
 CMSurvivorFiorinaResearcher = Учёный Фрионы
 
-cm-job-name-survivor-riot-officer = Офицер ГИОР
-CMSurvivorFiorinaRiotOfficer = Офицер ГИОР
-cm-job-prefix-survivor-riot-officer = ГИОР Офицер
+cm-job-name-survivor-riot-officer = Офицер ООН
+CMSurvivorFiorinaRiotOfficer = Офицер ООН
+cm-job-prefix-survivor-riot-officer = ООН Офицер
 
-CMSurvivorFiorinaPrisonGuard = Корпоративный офицер Vitezstvi
+CMSurvivorFiorinaPrisonGuard = Корпоративный офицер Ве-Я
 
 # Kutjevo Refinery Survs
 
@@ -293,67 +293,7 @@ rmc-job-name-survivor-solaris-scientist = Учённый Соляриса
 
 rmc-job-name-survivor-solaris-trucker = Оператор тяжёлой техники
 
-rmc-job-name-survivor-unmc-recruiter = Рекрутёр ККМП
-
-rmc-job-greeting-solaris-pmc = Вы - выживший из потерпевшего крушения корабля!
-
-  Вам НЕ известно об угрозе ксеноморфов.
-
-  Ваша главная цель - выжить. Вы полагаете, что где-то на севере потерпел крушение второй десантный корабль, который перевозил дополнительные припасы.
-
-  Вы - наёмник из ЧВК Vitezstvi. Ваш корабль направлялся в Солярис-Ридж, чтобы сопровождать помощника управляющего. По пути ваш корабль получил сигнал бедствия от колонии о нападении. Обеспокоенный тем, что это может быть атака КФО, ваш пилот на полной скорости направился к колонии. Однако при входе в атмосферу отказал двигатель, и вы потеряли сознание от перегрузки. Вы просыпаетесь раненым... и видите, что корабль рухнул на колонию. Ваши товарищи по команде лежат мертвыми рядом с вами, но некоторых не хватает. Возможно, они выжили и перебрались в другое место? Вам нужно выяснить, что случилось с колонией, посмотреть, сможете ли вы найти кого-нибудь из своих товарищей по отряду, и найти способ связаться с Коммандованием.
-
-  Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ к ККМП![/font][/color][/bold]
-
-rmc-job-greeting-solaris-pmc-medic = Вы - выживший из потерпевшего крушения корабля!
-
-  Вам НЕ известно об угрозе ксеноморфов.
-
-  Ваша главная цель - выжить. Вы полагаете, что где-то на севере потерпел крушение второй десантный корабль, который перевозил дополнительные припасы.
-
-  Вы - медик ЧВК Vitezstvi. Ваш корабль направлялся в Солярис-Ридж, чтобы сопровождать помощника управляющего. По пути ваш корабль получил сигнал бедствия из колонии о нападении. Опасаясь, что это может быть атака КФО, ваш пилот направил корабль на полную скорость к колонии. Однако при входе в атмосферу двигатель отказал, и вы потеряли сознание от перегрузки. Вы просыпаетесь раненым... и видите, что корабль врезался в колонию. Ваши товарищи по отряду лежат мертвыми рядом с вами, но некоторых не хватает. Возможно, они выжили и переехали в другое место? Вам нужно выяснить, что случилось с колонией, посмотреть, сможете ли вы найти кого-нибудь из своих товарищей по отряду, и найти способ связаться с Коммандованием.
-
-  Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ к ККМП![/font][/color][/bold]
-
-rmc-job-greeting-solaris-pmc-engineer = Вы - выживший из потерпевшего крушения корабля!
-
-  Вам НЕ известно об угрозе ксеноморфов.
-
-  Ваша главная цель - выжить. Вы полагаете, что где-то на севере потерпел крушение второй десантный корабль, который перевозил дополнительные припасы.
-
-  Вы - инженер ЧВК Vitezstvi. Ваш корабль направлялся в Солярис-Ридж, чтобы сопровождать помощника управляющего. По пути ваш корабль получил сигнал бедствия из колонии о нападении. Опасаясь, что это может быть атака КФО, ваш пилот направил корабль на полную скорость к колонии. Однако при входе в атмосферу двигатель отказал, и вы потеряли сознание от перегрузки. Вы просыпаетесь раненым... и видите, что корабль врезался в колонию. Ваши товарищи по отряду лежат мертвыми рядом с вами, но некоторых не хватает. Возможно, они выжили и переехали в другое место? Вам нужно выяснить, что случилось с колонией, посмотреть, сможете ли вы найти кого-нибудь из своих товарищей по отряду, и найти способ связаться с Коммандованием.
-
-  Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ к ККМП![/font][/color][/bold]
-
-rmc-job-greeting-solaris-pmc-leader = Вы - выживший из потерпевшего крушения корабля!
-
-  Вам НЕ известно об угрозе ксеноморфов.
-
-  Ваша главная цель - выжить. Вы полагаете, что где-то на севере потерпел крушение второй десантный корабль, который перевозил дополнительные припасы.
-
-  Вы - лидер группы ЧВК Vitezstvi. Ваш корабль направлялся в Солярис-Ридж, чтобы сопровождать помощника управляющего. По пути ваш корабль получил сигнал бедствия из колонии о нападении. Опасаясь, что это может быть атака КФО, ваш пилот направил корабль на полную скорость к колонии. Однако при входе в атмосферу двигатель отказал, и вы потеряли сознание от перегрузки. Вы просыпаетесь раненым... и видите, что корабль врезался в колонию. Ваши товарищи по отряду лежат мертвыми рядом с вами, но некоторых не хватает. Возможно, они выжили и переехали в другое место? Вам нужно выяснить, что случилось с колонией, посмотреть, сможете ли вы найти кого-нибудь из своих товарищей по отряду, и найти способ связаться с Коммандованием.
-
-  Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ к ККМП![/font][/color][/bold]
-
-rmc-job-greeting-solaris-pmc-commander = Вы - выживший из потерпевшего крушения корабля!
-
-  Вам НЕ известно об угрозе ксеноморфов.
-
-  Ваша главная цель - выжить. Вы полагаете, что где-то на севере потерпел крушение второй десантный корабль, который перевозил дополнительные припасы.
-
-  Вы - руководителем полевых операций ЧВК Vitezstvi. Ваш корабль направлялся в Солярис-Ридж, чтобы сопровождать помощника управляющего. По пути ваш корабль получил сигнал бедствия из колонии о нападении. Опасаясь, что это может быть атака КФО, ваш пилот направил корабль на полную скорость к колонии. Однако при входе в атмосферу двигатель отказал, и вы потеряли сознание от перегрузки. Вы просыпаетесь раненым... и видите, что корабль врезался в колонию. Ваши товарищи по отряду лежат мертвыми рядом с вами, но некоторых не хватает. Возможно, они выжили и переехали в другое место? Вам нужно выяснить, что случилось с колонией, посмотреть, сможете ли вы найти кого-нибудь из своих товарищей по отряду, и найти способ связаться с Коммандованием.
-
-  Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ к ККМП![/font][/color][/bold]
-
-rmc-job-greeting-solaris-pmc-supervisor = Вы - выживший из потерпевшего крушения корабля!
-
-  Вам НЕ известно об угрозе ксеноморфов.
-
-  Ваша главная цель - выжить. Вы полагаете, что где-то на севере потерпел крушение второй десантный корабль, который перевозил дополнительные припасы.
-
-  Вы - Помощник Менеджера из Административной Части Vitezstvi. Вас сопровождали на борту корабля ЧВК в Солярис-Ридж. По пути корабль получил сигнал бедствия из колонии о нападении. Опасаясь, что это может быть атака КФО, пилот направил корабль на полную скорость к колонии. Однако при входе в атмосферу двигатель отказал, и вы потеряли сознание от перегрузки. Вы просыпаетесь раненым... и видите, что корабль врезался в колонию. Ваши сопровождающие из ЧВК лежат мертвыми рядом с вами, но некоторых не хватает. Возможно, они выжили и переехали в другое место? Вы должны встать и найти способ связаться с Коммандованием.
-
-  Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ к ККМП![/font][/color][/bold]
+rmc-job-name-survivor-unmc-recruiter = Рекрут ККМП
 
 # Shivas survs
 
