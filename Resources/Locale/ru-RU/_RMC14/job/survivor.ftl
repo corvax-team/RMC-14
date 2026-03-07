@@ -14,7 +14,7 @@ cm-job-name-survivor-corporate = Корпоративный колонист
 cm-job-name-survivor-scientist = Учёный колонист
 
 rmc-job-name-survivor-co = Выживший КО
-rmc-job-description-survivor-co = Вы - переживший почти полное уничтожение своего соединения Командир Сил Обороны и Сдерживания.
+rmc-job-description-survivor-co = Вы - переживший почти полное уничтожение своего соединения командир местного гарнизона.
 
 rmc-job-name-survivor-synth = Выживший синтетик
 rmc-job-description-survivor-synth = Вы синтетик, переживший нападение на корпоративный объект.
@@ -33,7 +33,7 @@ rmc-playtime-tracker-job-name-survivor-military = Военный выживши�
 rmc-playtime-tracker-job-name-survivor-co = Выживший КО
 rmc-playtime-tracker-job-name-survivor-synth = Выживший синтетик
 
-cm-job-name-survivor-trucker = Трекер колониста
+cm-job-name-survivor-trucker = Дальнобойщик
 
 cm-job-name-survivor-icb = Представитель Антимонопольного Бюро
 CMJobSurvivorICB = Представитель Антимонопольного Бюро
@@ -90,7 +90,7 @@ rmc-job-name-forecon-sniper = Снайпер
 rmc-job-name-forecon-marksman = Стрелок
 rmc-job-name-forecon-support-tech = Техник поддержки
 rmc-job-name-forecon-synth = Синтетик
-rmc-job-name-forecon-commander = Командир
+rmc-job-name-forecon-commander = Командующий гарнизоном
 
 # LV-624 survs
 

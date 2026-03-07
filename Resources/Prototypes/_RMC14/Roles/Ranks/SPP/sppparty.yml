@@ -2,40 +2,40 @@
 
 - type: rank
   id: RMCRankSPPPoliticalKommissar
-  name: Political Kommissar
-  prefix: Kom.
+  name: Политический Руководитель
+  prefix: ПолРук.
   paygrade: P2
 
 - type: rank
   id: RMCRankSPPPoliticalBattalionKommissar
-  name: Battalion Kommissar
-  prefix: Batt. Kom.
+  name: Старший ПолитРук
+  prefix: Ст. ПолРук.
   paygrade: P3
 
 - type: rank
   id: RMCRankSPPPoliticalSrBattalionKommissar
-  name: Senior Battalion Kommissar
-  prefix: Sr. Batt. Pol.
+  name: Комиссар
+  prefix: Ком.
   paygrade: P4
 
 - type: rank
   id: RMCRankSPPPoliticalRegimentalKommissar
-  name: Regimental Kommissar
-  prefix: Reg. Pol.
+  name: Старший Комиссар
+  prefix: Ст. Ком.
   paygrade: P5
 
 - type: rank
   id: RMCRankSPPPoliticalBrigadeKommissar
-  name: Brigade Kommissar
-  prefix: Brig. Kom.
+  name: Бригадный Комиссар
+  prefix: Бриг. Ком.
   paygrade: P6
 
 #Above ranks could be seen regularly, rank below is political Kommisar High-comm equivelant, think Bgen or MajorGen.
 
 - type: rank
   id: RMCRankSPPPoliticalDivisionKommissar
-  name: Division Kommissar
-  prefix: Div. Kom.
+  name: Дивизионный Комиссар
+  prefix: Див. Ком.
   paygrade: P7
 
 #-

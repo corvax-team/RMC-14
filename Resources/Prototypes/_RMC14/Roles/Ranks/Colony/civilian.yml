@@ -17,13 +17,13 @@
 
 - type: rank
   id: RMCRankCivilianAssistantProfessor
-  name: Assistant Professor
-  prefix: Asst. Prof.
+  name: Помощник Профессора
+  prefix: Пом. Проф.
 
 - type: rank
   id: RMCRankCivilianAssociateProfessor
-  name: Associate Professor
-  prefix: Assoc. Prof.
+  name: Доцент
+  prefix: Доц.
 
 - type: rank
   id: RMCRankCivilianProfessor
@@ -32,8 +32,8 @@
 
 - type: rank
   id: RMCRankCivilianRegentsProfessor
-  name: Regents Professor
-  prefix: Regents Prof.
+  name: Правительственный профессор
+  prefix: Прав. Проф.
 
 
 - type: rank

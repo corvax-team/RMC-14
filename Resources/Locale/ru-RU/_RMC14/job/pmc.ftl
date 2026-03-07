@@ -81,7 +81,7 @@ rmc-job-name-pmc-pve-team-leader = Командир Отделения
 rmc-job-prefix-pmc-pve-team-leader = КО
 rmc-job-name-pmc-pve-force-leader = Координационный Лидер
 rmc-job-prefix-pmc-pve-force-leader = КЛ
-rmc-job-name-pmc-pve-force-command = Стратег-Командер
+rmc-job-name-pmc-pve-force-command = Командующий войсками
 
 rmc-ghost-name-pmc-whiteout = Подразделение "Белая мгла" VI (!DEATHSQUAD!)
 rmc-job-name-pmc-whiteout = Подразделеие "Белая мгла" VI
@@ -90,7 +90,7 @@ rmc-ghost-name-pmc-whiteout-gunner = Подразделение "Белая мг
 rmc-job-name-pmc-whiteout-gunner = Подразделение "Белая мгла" VI
 
 rmc-job-prefix-pmc-whiteout = БМ
-rmc-job-prefix-pmc-pve-force-command = СтраКом
+rmc-job-prefix-pmc-pve-force-command = КомВой
 
 # Executives
 

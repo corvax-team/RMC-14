@@ -1,4 +1,4 @@
-ent-RMCHoodBioGeneral = Био=капюшон
+ent-RMCHoodBioGeneral = Биокапюшон
     .desc = Капюшон, защищающий голову и лицо от биологических загрязнений.
     .suffix = Generic, RMC
 ent-RMCHoodBioWeYa = Биокапюшон VI-BS MK II

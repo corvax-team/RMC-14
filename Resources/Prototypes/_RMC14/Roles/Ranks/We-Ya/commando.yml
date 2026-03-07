@@ -1,5 +1,5 @@
-- type: rank
+- type: rank # CCM14
   id: RMCRankWeYaCommando
-  name: Corporate Commando
-  prefix: OPR.
-  paygrade: WY-COM
+  name: VI Командос
+  prefix: Опер.
+  paygrade: VI-КОМ
