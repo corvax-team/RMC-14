@@ -12,6 +12,7 @@ using Content.Shared._CCM.Attachables;
 using Content.Shared.CombatMode;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -205,14 +206,8 @@ public sealed partial class GunSystem : SharedGunSystem
         }
 
         // Define target coordinates relative to gun entity, so that network latency on moving grids doesn't fuck up the target location.
-
-        // Corvax-Vehicle-Content-Start
-        var changedEntity = entity;
-        if (_vehicleAttachableHolder.TryGetHolder(gunUid, out var nullableHolder) && nullableHolder is { } holder)
-            changedEntity = holder;
-
-        var coordinates = TransformSystem.ToCoordinates(changedEntity, mousePos);
-        // Corvax-Vehicle-Content-End
+        var coordinateEntity = HasComp<GunUseGunOriginComponent>(gunUid) ? gunUid : entity;
+        var coordinates = TransformSystem.ToCoordinates(coordinateEntity, mousePos);
 
         NetEntity? target = null;
         if (_state.CurrentState is GameplayStateBase screen)
@@ -314,17 +309,17 @@ public sealed partial class GunSystem : SharedGunSystem
         };
 
         _animPlayer.Play(ent, anim, "muzzle-flash");
-        if (!TryComp(gunUid, out PointLightComponent? light))
+        if (!TryComp(ent, out PointLightComponent? light))
         {
             light = Factory.GetComponent<PointLightComponent>();
             light.NetSyncEnabled = false;
-            AddComp(gunUid, light);
+            AddComp(ent, light);
         }
 
-        Lights.SetEnabled(gunUid, true, light);
-        Lights.SetRadius(gunUid, 2f, light);
-        Lights.SetColor(gunUid, Color.FromHex("#cc8e2b"), light);
-        Lights.SetEnergy(gunUid, 5f, light);
+        Lights.SetEnabled(ent, true, light);
+        Lights.SetRadius(ent, 2f, light);
+        Lights.SetColor(ent, Color.FromHex("#cc8e2b"), light);
+        Lights.SetEnergy(ent, 5f, light);
 
         var animTwo = new Animation()
         {
@@ -356,10 +351,10 @@ public sealed partial class GunSystem : SharedGunSystem
             }
         };
 
-        var uidPlayer = EnsureComp<AnimationPlayerComponent>(gunUid);
+        var uidPlayer = EnsureComp<AnimationPlayerComponent>(ent);
 
-        _animPlayer.Stop(gunUid, uidPlayer, "muzzle-flash-light");
-        _animPlayer.Play((gunUid, uidPlayer), animTwo, "muzzle-flash-light");
+        _animPlayer.Stop(ent, uidPlayer, "muzzle-flash-light");
+        _animPlayer.Play((ent, uidPlayer), animTwo, "muzzle-flash-light");
     }
 
     public override void ShootProjectile(EntityUid uid,

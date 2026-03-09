@@ -92,7 +92,7 @@ public sealed partial class StrapComponent : Component
     public bool BuckleOnInteractHand = true;
 
     /// <summary>
-    /// CCM: Whether being buckled to this entity should change the buckled ent's drawdepth.
+    /// Whether being buckled to this entity should change the buckled ent's drawdepth.
     /// </summary>
     [DataField]
     public bool ModifyBuckleDrawDepth = true;
