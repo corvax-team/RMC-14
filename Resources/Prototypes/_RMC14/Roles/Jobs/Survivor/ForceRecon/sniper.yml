@@ -4,6 +4,8 @@
   name: rmc-job-name-forecon-sniper
   startingGear: RMCGearForeconSniper
   icon: "RMCJobIconForeconSniper"
+  ranks:
+    RMCRankPrivateFirstClass: []
   spawnMenuRoleName: FORECON Sniper (Survivor)
   special:
   - !type:AddComponentSpecial

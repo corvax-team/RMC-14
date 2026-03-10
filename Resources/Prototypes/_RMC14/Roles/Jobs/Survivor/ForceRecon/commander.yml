@@ -5,7 +5,7 @@
   description: cm-job-description-commanding-officer
   playTimeTracker: RMCJobSurvivorCO
   ranks:
-    RMCRankMajor: []
+    RMCRankSecondLT: []
   accessGroups:
   - ColonistEngi
   startingGear: RMCGearForeconCommander

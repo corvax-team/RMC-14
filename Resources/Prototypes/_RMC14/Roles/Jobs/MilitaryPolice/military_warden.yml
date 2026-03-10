@@ -9,15 +9,15 @@
     department: CMMilitaryPolice
     time: 10800 # 3 hours. CCM14 role timers. RMC: 36000 # 10 hours
   ranks:
-    RMCRankGunnerySergeant:
+    RMCRankMP6:
     - !type:RoleTimeRequirement
       role: CMJobMilitaryWarden
-      time: 252000 # 70 hours
-    RMCRankStaffSergeant:
+      time: 630000 # 175 hours CCM14
+    RMCRankMP5:
     - !type:RoleTimeRequirement
       role: CMJobMilitaryWarden
-      time: 36000 # 10 hours
-    RMCRankSergeant: []
+      time: 90000 # 25 hours CCM14
+    RMCRankMP4: []
   weight: 5
   startingGear: CMGearMilitaryWarden
   icon: "CMJobIconMilitaryWarden"

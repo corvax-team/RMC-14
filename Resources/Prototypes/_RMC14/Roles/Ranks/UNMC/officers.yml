@@ -48,12 +48,56 @@
 
 - type: rank
   id: RMCRankChiefWarrantOfficer
-  name: Chief Warrant Officer
-  prefix: CWarOff.
+  name: Старший уорент офицер
+  prefix: СУО.
   paygrade: O0-2
 
 - type: rank
   id: RMCRankWarrantOfficer
-  name: Warrant Officer
-  prefix: WarOff.
+  name: Уорент офицер
+  prefix: УорОф.
   paygrade: O0-1
+
+# Военная полиция | CCM14
+
+- type: rank
+  id: RMCRankMP1
+  name: Старший уорент офицер 3-го класса
+  prefix: СУО3.
+  paygrade: CW3MP
+
+- type: rank
+  id: RMCRankMP2
+  name: Старший уорент офицер 4-го класса
+  prefix: СУО4.
+  paygrade: CW4MP
+
+- type: rank
+  id: RMCRankMP3
+  name: Главный уорент офицер 5-го класса
+  prefix: СУО5.
+  paygrade: CW5MP
+
+- type: rank
+  id: RMCRankMP4
+  name: Второй Лейтенант
+  prefix: 2йЛт.
+  paygrade: O1MP
+
+- type: rank
+  id: RMCRankMP5
+  name: Первый Лейтенант
+  prefix: 1йЛт.
+  paygrade: O2MP
+
+- type: rank
+  id: RMCRankMP6
+  name: Капитан
+  prefix: Кап.
+  paygrade: O3MP
+
+- type: rank
+  id: RMCRankMP7
+  name: Комендант
+  prefix: Ком.
+  paygrade: O4MP

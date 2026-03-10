@@ -10,7 +10,7 @@
       stationProto: StandardUNMCWarship
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'LCS-14 DAVID'
+          mapNameTemplate: 'UEG "Давид"'
         - type: StationJobs
           availableJobs:
             # Command

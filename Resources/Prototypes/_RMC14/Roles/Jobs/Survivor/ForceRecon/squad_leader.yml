@@ -3,7 +3,7 @@
   id: RMCSurvivorForeconSquadLeader
   name: cm-job-name-squad-leader
   ranks:
-    RMCRankSecondLT: []
+    RMCRankSergeant: []
   icon: "CMJobIconSquadLeader"
   roleWeight: 1
   requirements:

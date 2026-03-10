@@ -1,8 +1,8 @@
-rmc-armor-melee = Защита от ударов
-rmc-armor-bullet = Защита от пуль
-rmc-armor-bio = РХБЗ
-rmc-armor-explosion-armor = Поглощение взрывов
-rmc-examine-armor = - Имеет [color=yellow]{ $text }[/color] оценку в [color=lightblue]{ $value }[/color].
+rmc-armor-melee = Защиту от ударов
+rmc-armor-bullet = Защиту от пуль
+rmc-armor-bio = Биозащиту
+rmc-armor-explosion-armor = Защиту от взрывов
+rmc-examine-armor = - [color=yellow]{ $text }[/color] с оценкой в [color=lightblue]{ $value }[/color].
 rmc-examine-armor-xeno-header = [color=white]{ CAPITALIZE(SUBJECT($xeno)) } имеет:[/color]
 rmc-examine-armor-xeno = - [color=lightblue]{ $armor }[/color] [color=yellow]броня[/color]
 rmc-examine-armor-xeno-frontal = - [color=lightblue]{ $armor }[/color] [color=yellow]передняя броня[/color]

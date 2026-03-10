@@ -4,6 +4,8 @@
   name: cm-job-name-smart-gun-operator
   startingGear: RMCGearForeconSmartgunOperator
   icon: "CMJobIconSmartGunOperator"
+  ranks:
+    RMCRankLanceCorporal: []
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobSmartGunOperator

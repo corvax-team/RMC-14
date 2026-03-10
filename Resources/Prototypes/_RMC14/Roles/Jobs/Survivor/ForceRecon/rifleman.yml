@@ -3,6 +3,8 @@
   id: RMCSurvivorForeconRifleman
   name: cm-job-name-rifleman
   icon: "RMCJobIconForeconRifleman"
+  ranks:
+    RMCRankPrivate: []
   spawnMenuRoleName: FORECON Rifleman (Survivor)
   special:
   - !type:AddComponentSpecial

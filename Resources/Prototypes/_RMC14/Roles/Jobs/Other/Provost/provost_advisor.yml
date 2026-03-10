@@ -5,6 +5,14 @@
   description: rmc-ghost-role-information-provost-description
   playTimeTracker: CMJobProvostAdvisor
   ranks:
+    RMCRankProvostAdvisor2:
+    - !type:RoleTimeRequirement
+      role: CMJobProvostAdvisor
+      time: 270000 # 75 hours CCM14
+    RMCRankProvostAdvisor1:
+    - !type:RoleTimeRequirement
+      role: CMJobProvostAdvisor
+      time: 90000 # 25 hours CCM14
     RMCRankProvostAdvisor: []
   startingGear: RMCGearProvostAdvisor
   icon: RMCJobIconProvostAdvisor

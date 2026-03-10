@@ -4,6 +4,8 @@
   name: rmc-job-name-forecon-support-tech
   startingGear: RMCGearForeconSupportTech
   icon: "CMJobIconCombatTech"
+  ranks:
+    RMCRankCorporal: []
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobCombatTech

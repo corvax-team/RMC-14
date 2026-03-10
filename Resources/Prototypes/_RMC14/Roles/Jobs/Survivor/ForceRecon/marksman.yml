@@ -4,6 +4,8 @@
   name: rmc-job-name-forecon-marksman
   startingGear: RMCGearForeconMarksman
   icon: "CMJobIconWeaponsSpecialist"
+  ranks:
+    RMCRankPrivateFirstClass: []
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobWeaponsSpecialist

@@ -66,6 +66,6 @@
 
 - type: rank
   id: RMCRankRecruit
-  name: Recruit
-  prefix: Rct.
+  name: Новобранец
+  prefix: Нов.
   paygrade: E0

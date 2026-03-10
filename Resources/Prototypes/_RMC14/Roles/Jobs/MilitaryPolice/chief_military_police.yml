@@ -7,25 +7,29 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
-    time: 10800 # 3 hours. CCM14 role timers. RMC: 54000 # 15 hours
-# CCM14 role timers [remove/start]
-#  - !type:RoleTimeRequirement
-#    role: CMJobMilitaryWarden
-#    time: 18000 # 5 hours
-#  - !type:DepartmentTimeRequirement
-#    department: CMCommand
-#    time: 18000 # 5 hours
-# CCM14 role timers [remove/end] [add/start]
+    time: 36000 # 10 hours. CCM14 role timers. RMC: 54000 # 15 hours
+# CCM14 role timers [remove/start] не знаю что это по этому не трогал
+  - !type:RoleTimeRequirement
+    role: CMJobMilitaryWarden
+    time: 18000 # 5 hours CCM14
+  - !type:DepartmentTimeRequirement
+    department: CMCommand
+    time: 10800 # 3 hours CCM14
+# CCM14 role timers [remove/end] [add/start] не знаю что это по этому не трогал
   - !type:RoleTimeRequirement
     role: CMJobSquadLeader
     time: 3600 # 1 hour
-# CCM14 role timers [add/end]
+# CCM14 role timers [add/end] не знаю что это по этому не трогал
   ranks:
-    RMCRankFirstLT:
+    RMCRankMP7:
     - !type:RoleTimeRequirement
       role: CMJobChiefMP
-      time: 252000 # 70 hours
-    RMCRankSecondLT: []
+      time: 270000 # 75 hours CCM14
+    RMCRankMP6:
+    - !type:RoleTimeRequirement
+      role: CMJobChiefMP
+      time: 90000 # 25 hours CCM14
+    RMCRankMP5: []
   weight: 5
   startingGear: CMGearChiefMP
   icon: "CMJobIconChiefMP"
