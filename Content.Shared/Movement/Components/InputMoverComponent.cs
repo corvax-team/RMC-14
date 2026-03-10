@@ -37,7 +37,6 @@ namespace Content.Shared.Movement.Components
 
         [ViewVariables]
         public MoveButtons HeldMoveButtons = MoveButtons.None;
-        public MoveButtons LastPressedDirection = MoveButtons.None; // Corvax-Vehicle-Movement-Content
 
         /// <summary>
         /// Does our input indicate actual movement, and not just modifiers?

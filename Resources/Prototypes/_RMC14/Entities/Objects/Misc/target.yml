@@ -78,9 +78,9 @@
     maxLightEnergy: 8
   - type: RMCFireColor
   - type: CanBeFirePatted
-  - type: VehicleStructureTarget # CCM-vehicle
-    momentumLossFactor: 0
-    DamageToVehicleOnFail: 0
+  # - type: VehicleStructureTarget # CCM-vehicle
+  #   momentumLossFactor: 0
+  #   DamageToVehicleOnFail: 0
 
 - type: entity
   name: xenonid target

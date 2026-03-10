@@ -77,37 +77,16 @@ public sealed class PopupOverlay : Overlay
 
         var matrix = args.ViewportControl.GetWorldToScreenMatrix();
         var ourEntity = _playerMgr.LocalEntity;
-        // Corvax-Popup-Fix-Start
-        EntityUid? eyeTarget = null;
-        if (ourEntity != null && 
-            _entManager.TryGetComponent<EyeComponent>(ourEntity.Value, out var eyeComp) &&
-            eyeComp.Target != null &&
-            _entManager.EntityExists(eyeComp.Target.Value))
-        {
-            eyeTarget = eyeComp.Target;
-        }
-
-        var viewEntity = eyeTarget ?? ourEntity;
         var viewPos = new MapCoordinates(args.WorldAABB.Center, args.MapId);
         var ourPos = args.WorldBounds.Center;
-        if (viewEntity != null && _entManager.EntityExists(viewEntity.Value))
+        if (ourEntity != null)
         {
-            if (_entManager.TryGetComponent<TransformComponent>(viewEntity.Value, out var xform))
-            {
-                viewPos = _transform.GetMapCoordinates(viewEntity.Value, xform);
-                ourPos = viewPos.Position;
-            }
+            viewPos = _transform.GetMapCoordinates(ourEntity.Value);
+            ourPos = viewPos.Position;
         }
-        // Corvax-Popup-Fix-End
 
         foreach (var popup in _popup.WorldLabels)
         {
-            if (popup.InitialPos.EntityId != EntityUid.Invalid && 
-                !_entManager.EntityExists(popup.InitialPos.EntityId)) // Corvax-Popup-Fix-End
-            {
-                continue;
-            }
-
             var mapPos = _transform.ToMapCoordinates(popup.InitialPos);
 
             if (mapPos.MapId != args.MapId)
@@ -115,17 +94,11 @@ public sealed class PopupOverlay : Overlay
 
             var distance = (mapPos.Position - ourPos).Length();
 
-            if (!args.WorldBounds.Contains(mapPos.Position)) // Corvax-Popup-Fix
+            // Should handle fade here too wyci.
+            if (!args.WorldBounds.Contains(mapPos.Position) || !_examine.InRangeUnOccluded(viewPos, mapPos, distance,
+                    e => e == popup.InitialPos.EntityId || e == ourEntity, entMan: _entManager))
                 continue;
 
-            // Corvax-Popup-Fix-Start    
-            if (viewEntity != null && _entManager.EntityExists(viewEntity.Value))
-            {
-                if (!_examine.InRangeUnOccluded(viewPos, mapPos, distance,
-                        e => e == popup.InitialPos.EntityId || e == viewEntity, entMan: _entManager))
-                    continue;
-            }
-            // Corvax-Popup-Fix-End
             var pos = Vector2.Transform(mapPos.Position, matrix);
             _controller.DrawPopup(popup, worldHandle, pos, scale);
         }

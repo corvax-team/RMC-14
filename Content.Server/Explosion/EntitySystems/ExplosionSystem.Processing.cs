@@ -1,7 +1,6 @@
 using System.Numerics;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared._RMC14.Explosion;
-using Content.Shared._CCM.Vehicle;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Database;
@@ -498,8 +497,7 @@ public sealed partial class ExplosionSystem
             && !HasComp<VehicleComponent>(uid)
             && !HasComp<GridVehicleMoverComponent>(uid)
             && _physicsQuery.TryGetComponent(uid, out var physics)
-            && physics.BodyType == BodyType.Dynamic
-            && !HasComp<VehicleComponent>(uid)) // Corvax-Vehicle-Fix
+            && physics.BodyType == BodyType.Dynamic)
         {
             var pos = _transformSystem.GetWorldPosition(xform);
             var dir = pos - epicenter.Position;

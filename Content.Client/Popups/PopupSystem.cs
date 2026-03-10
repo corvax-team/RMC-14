@@ -67,19 +67,13 @@ namespace Content.Client.Popups
                 .RemoveOverlay<PopupOverlay>();
         }
 
-        private void WrapAndRepeatPopup(PopupLabel existingLabel, string popupMessage, ScreenCoordinates? newCursorPosition = null)
+        private void WrapAndRepeatPopup(PopupLabel existingLabel, string popupMessage)
         {
             existingLabel.TotalTime = 0;
             existingLabel.Repeats += 1;
             existingLabel.Text = Loc.GetString("popup-system-repeated-popup-stacking-wrap",
                 ("popup-message", popupMessage),
                 ("count", existingLabel.Repeats));
-            // Corvax-Popup-Fix-Start
-            if (existingLabel is CursorPopupLabel cursorLabel && newCursorPosition.HasValue)
-            {
-                cursorLabel.InitialPos = newCursorPosition.Value;
-            }
-            // Corvax-Popup-Fix-End
         }
 
         private void PopupMessage(string? message, PopupType type, EntityCoordinates coordinates, EntityUid? entity, bool recordReplay)
@@ -144,14 +138,13 @@ namespace Content.Client.Popups
                 _replayRecording.RecordClientMessage(new PopupCursorEvent(message, type));
 
             var popupData = new CursorPopupData(message, type);
-            var currentMousePos = _inputManager.MouseScreenPosition; // Corvax-Popup-Fix
             if (_aliveCursorLabels.TryGetValue(popupData, out var existingLabel))
             {
-                WrapAndRepeatPopup(existingLabel, popupData.Message, currentMousePos); // Corvax-Popup-Fix
+                WrapAndRepeatPopup(existingLabel, popupData.Message);
                 return;
             }
 
-            var label = new CursorPopupLabel(currentMousePos) // Corvax-Popup-Fix
+            var label = new CursorPopupLabel(_inputManager.MouseScreenPosition)
             {
                 Text = message,
                 Type = type,

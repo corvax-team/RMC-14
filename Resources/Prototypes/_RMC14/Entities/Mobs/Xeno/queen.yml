@@ -275,10 +275,10 @@
   - type: RemoveComponents
     components:
     - type: Gibbable
-    # Corvax-Vehicle-Content-Start
-  - type: VehicleDamageMultiplier
-    mult: 2
-    # Corvax-Vehicle-Content-End
+  #   # Corvax-Vehicle-Content-Start
+  # - type: VehicleDamageMultiplier
+  #   mult: 2
+  #   # Corvax-Vehicle-Content-End
 
 - type: entity
   parent: RMCXenoQueenBase
