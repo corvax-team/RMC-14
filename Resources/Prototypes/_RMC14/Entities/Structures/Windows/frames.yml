@@ -70,11 +70,6 @@
         Blunt: 80
   - type: XenoCrusherChargable
   - type: RMCMesonsNonviewable
-    # Corvax-Vehicle-Content-Start
-  - type: VehicleStructureTarget
-    momentumLossFactor: 0
-    damageToVehicleOnFail: 0
-    # Corvax-Vehicle-Content-End
 
 - type: entity
   parent: RMCBaseWindowFrame

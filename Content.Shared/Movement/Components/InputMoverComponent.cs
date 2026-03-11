@@ -35,8 +35,8 @@ namespace Content.Shared.Movement.Components
         public Vector2 CurTickWalkMovement;
         public Vector2 CurTickSprintMovement;
 
+        [ViewVariables]
         public MoveButtons HeldMoveButtons = MoveButtons.None;
-        public MoveButtons LastPressedDirection = MoveButtons.None; // Corvax-Vehicle-Movement-Content
 
         /// <summary>
         /// Does our input indicate actual movement, and not just modifiers?
@@ -44,12 +44,14 @@ namespace Content.Shared.Movement.Components
         /// <remarks>
         /// This can be useful to filter out input from just pressing the walk button with no directions, for example.
         /// </remarks>
+        [ViewVariables]
         public bool HasDirectionalMovement => (HeldMoveButtons & MoveButtons.AnyDirection) != MoveButtons.None;
 
         // I don't know if we even need this networked? It's mostly so conveyors can calculate properly.
         /// <summary>
         /// Direction to move this tick.
         /// </summary>
+        [ViewVariables]
         public Vector2 WishDir;
 
         /// <summary>
@@ -78,6 +80,7 @@ namespace Content.Shared.Movement.Components
 
         public const float LerpTime = 1.0f;
 
+        [ViewVariables]
         public bool Sprinting => (HeldMoveButtons & MoveButtons.Walk) == 0x0;
 
         [ViewVariables(VVAccess.ReadWrite)]

@@ -18,7 +18,6 @@
   - type: Construction
     graph: RMCBed
     node: bed
-  - type: RMCMesonsNonviewable
   - type: Damageable
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
@@ -41,13 +40,7 @@
           CMSheetMetal1:
             min: 1
             max: 1
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-    # Corvax-Vehicle-Content-Start
-  - type: VehicleStructureTarget
-    momentumLossFactor: 0
-    damageToVehicleOnFail: 0
-    # Corvax-Vehicle-Content-End
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: CMBed

@@ -37,16 +37,3 @@
   components:
   - type: PresetIdCard
     job: CMIntelOfficer
-
-- type: entity
-  parent: CMIDCardStandardDogtag
-  id: CMDogtagCrewman
-  name: Crewman's dogtags
-  components:
-  - type: PresetIdCard
-    job: CMVehicleCrewman
-
-- type: entity
-  parent: [ RMCIDCardStandardDogtagHidden, CMDogtagCrewman ]
-  id: RMCDogtagCrewmanHidden
-  categories: [ HideSpawnMenu ]

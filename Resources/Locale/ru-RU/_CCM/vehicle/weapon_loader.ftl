@@ -1,1 +1,0 @@
-ent-CCMVehicleWeaponsLoader = Загрузчик боекомплекта

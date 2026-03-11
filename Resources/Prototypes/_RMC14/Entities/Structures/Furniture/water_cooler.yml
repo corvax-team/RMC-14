@@ -56,11 +56,11 @@
     blacklist:
       components:
       - Xeno
-    # Corvax-Vehicle-Content-Start
-  - type: VehicleStructureTarget
-    momentumLossFactor: 0
-    damageToVehicleOnFail: 0
-    # Corvax-Vehicle-Content-End
+  #   # Corvax-Vehicle-Content-Start
+  # - type: VehicleStructureTarget
+  #   momentumLossFactor: 0
+  #   damageToVehicleOnFail: 0
+  #   # Corvax-Vehicle-Content-End
 
 - type: entity
   parent: RMCWaterCooler

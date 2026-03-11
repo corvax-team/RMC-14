@@ -5,6 +5,7 @@
   name: table
   description: A square metal surface resting on four legs. Useful to put stuff on.
   components:
+  - type: RMCVehicleSmashable
   - type: Corrodible
     timeToApply: 4
     structure: true
@@ -40,11 +41,6 @@
     instantDestroy: true
     passOnDestroy: true
   - type: RMCMesonsNonviewable
-    # Corvax-Vehicle-Content-Start
-  - type: VehicleStructureTarget
-    momentumLossFactor: 0
-    damageToVehicleOnFail: 0
-    # Corvax-Vehicle-Content-End
 
 - type: entity
   parent: CMTable
