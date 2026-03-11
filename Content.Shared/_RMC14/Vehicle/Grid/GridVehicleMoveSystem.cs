@@ -54,6 +54,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
     private const float Clearance = PhysicsConstants.PolygonRadius * 0.75f;
     private const double MobCollisionDamage = 8;
+    private const double UnpoweredDoorCollisionDamage = 1000;
     private static readonly TimeSpan MobCollisionKnockdown = TimeSpan.FromSeconds(1.5);
     private static readonly TimeSpan MobCollisionCooldown = TimeSpan.FromSeconds(0.75);
     private static readonly ProtoId<DamageTypePrototype> CollisionDamageType = "Blunt";

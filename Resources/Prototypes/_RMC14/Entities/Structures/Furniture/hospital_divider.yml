@@ -6,6 +6,7 @@
   components:
   - type: Transform
     noRot: true
+  - type: RMCVehicleSmashable
   - type: Physics
     bodyType: Static
   - type: Sprite

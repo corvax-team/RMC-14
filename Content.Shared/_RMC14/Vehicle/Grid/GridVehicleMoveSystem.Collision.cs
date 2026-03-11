@@ -90,6 +90,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             var isMob = TryComp(other, out MobStateComponent? mob);
             var isXeno = HasComp<XenoComponent>(other);
             var collisionClass = ClassifyCollisionCandidate(other, otherXform, otherBody, hardCollidable, isMob, isBarricade, isFoldable, hasDoor, isXeno);
+            var isUnpoweredDoor = hasDoor && IsDoorUnpowered(other);
 
             if (collisionClass == VehicleCollisionClass.SoftMob && isXeno)
             {
@@ -119,17 +120,20 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
             if (hasDoor && !_net.IsClient)
             {
-                _door.TryOpen(other, door, operatorUid);
-                if (isBarricade)
-                    _door.OnPartialOpen(other, door);
+                if (!isUnpoweredDoor)
+                {
+                    _door.TryOpen(other, door, operatorUid);
+                    if (isBarricade)
+                        _door.OnPartialOpen(other, door);
+                }
             }
 
             if (collisionClass == VehicleCollisionClass.Ignore)
                 continue;
 
-            if (collisionClass == VehicleCollisionClass.Breakable)
+            if (collisionClass == VehicleCollisionClass.Breakable || isUnpoweredDoor)
             {
-                if (TrySmash(other, uid, ref playedCollisionSound))
+                if (TrySmash(other, uid, ref playedCollisionSound) || TryBreakDoor(other, uid, ref playedCollisionSound))
                     continue;
                 continue;
             }
@@ -165,6 +169,38 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         }
 
         return true;
+    }
+
+    private bool IsDoorUnpowered(EntityUid target)
+    {
+        if (TryComp(target, out AirlockComponent? airlock))
+            return !airlock.Powered;
+
+        if (TryComp(target, out FirelockComponent? firelock))
+            return !firelock.Powered;
+
+        return false;
+    }
+
+    private bool TryBreakDoor(EntityUid target, EntityUid vehicle, ref bool playedCollisionSound)
+    {
+        if (!HasComp<DoorComponent>(target))
+            return false;
+
+        PlayCollisionSound(vehicle, ref playedCollisionSound);
+
+        if (_net.IsClient)
+            return true;
+
+        var damage = new DamageSpecifier
+        {
+            DamageDict =
+            {
+                [CollisionDamageType] = UnpoweredDoorCollisionDamage,
+            },
+        };
+
+        return _damageable.TryChangeDamage(target, damage, true, origin: vehicle, tool: vehicle) != null;
     }
 
     private void ApplyWheelCollisionDamage(EntityUid vehicle, GridVehicleMoverComponent mover, float damage)
