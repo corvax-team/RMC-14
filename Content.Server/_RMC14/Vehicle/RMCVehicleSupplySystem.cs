@@ -298,13 +298,23 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
     {
         SendConsoleState(ent.Owner, ent.Comp);
     }
-
-    private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapInitEvent args)
+    
+// CCM edit start
+private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapInitEvent args)
+{
+    // Откладываем заполнение до следующего тика,
+    // когда все консоли уже проинициализированы
+    Timer.Spawn(TimeSpan.Zero, () =>
     {
-        SeedStoredFromConsoles(ent);
-
-        Dirty(ent);
-    }
+        if (!Deleted(ent))
+        {
+            SeedStoredFromConsoles(ent);
+            Dirty(ent);
+            SendConsoleStateAll();
+        }
+    });
+}
+// CCM edit end
 
     private void SeedStoredFromConsoles(Entity<RMCVehicleSupplyLiftComponent> lift)
     {
@@ -1530,15 +1540,12 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
 
         return unlocked;
     }
-
-    private static bool IsEntryUnlocked(RMCVehicleSupplyEntry entry, HashSet<string> unlocked)
-    {
-        if (string.IsNullOrWhiteSpace(entry.Unlock))
-            return true;
-
-        return unlocked.Contains(Normalize(entry.Unlock));
-    }
-
+// CCM edit start
+private static bool IsEntryUnlocked(RMCVehicleSupplyEntry entry, HashSet<string> unlocked)
+{
+    return true;
+} 
+// CCM edit end
     private IReadOnlyList<string> GetHardpointsForVehicle(string vehicleId, IReadOnlyList<RMCVehicleSupplyEntry> entries)
     {
         var key = Normalize(vehicleId);
