@@ -15,10 +15,10 @@
     requiresGranter: false
     max: 200
     evolvesTo:
-    - CMXenoHiveLord
+    - CMXenoHivelord
     - CMXenoWarrior
     - CMXenoSpitter
     - CMXenoLurker
-  - type: Tag
-    tags:
-    - CMXenoRoyalLarva
+#  - type: Tag
+#    tags:
+#    - CMXenoRoyalLarva
