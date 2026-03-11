@@ -22,20 +22,20 @@
 
 "C#":
 - changed-files:
-  - all-glob-to-any-files: "**/*.cs"
+  - any-glob-to-any-file: "**/*.cs"
 
 "Локализация":
 - changed-files:
-  - all-glob-to-any-file: "**/*.ftl"
+  - any-glob-to-any-file: "**/*.ftl"
 
 "Прототипы":
 - changed-files:
-  - all-glob-to-any-file: "**/*.yml"
+  - any-glob-to-any-file: "**/*.yml"
 
-"Гайбдук":
+"Гайдбук":
 - changed-files:
-  - all-glob-to-any-file: "Resources/ServerInfo/**/*.xml"
+  - any-glob-to-any-file: "Resources/ServerInfo/**/*.xml"
 
 "Сервер":
 - changed-files:
-  - all-glob-to-any-file: "Resources/ConfigPresets/**/*.toml"
+  - any-glob-to-any-file: "Resources/ConfigPresets/**/*.toml"
