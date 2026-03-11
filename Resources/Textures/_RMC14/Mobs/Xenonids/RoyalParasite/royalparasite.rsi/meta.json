@@ -65,7 +65,8 @@
             ]
         },
         {
-            "name": "equipped-MASK"
+            "name": "equipped-MASK",
+            "directions": 4
         }
     ]
 }
