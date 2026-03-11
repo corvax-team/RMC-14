@@ -113,7 +113,7 @@
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
-    maxIntegrity: 300
+    maxIntegrity: 1000
     repairFuelCost: 10
     bypassEntryOnZero: true
     repairTimePerIntegrity: 0.03
@@ -204,7 +204,7 @@
         - LargeMobLayer
   - type: Damageable
     damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine
+    damageModifierSet: RMCVehicleFrameCLFVan
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
@@ -258,7 +258,7 @@
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
-    maxIntegrity: 300
+    maxIntegrity: 1000
     repairFuelCost: 10
     bypassEntryOnZero: true
     repairTimePerIntegrity: 0.03
@@ -403,7 +403,7 @@
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
-    maxIntegrity: 300
+    maxIntegrity: 1000
     repairFuelCost: 10
     bypassEntryOnZero: true
     repairTimePerIntegrity: 0.03
@@ -548,7 +548,7 @@
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
-    maxIntegrity: 300
+    maxIntegrity: 1000
     repairFuelCost: 10
     bypassEntryOnZero: true
     repairTimePerIntegrity: 0.03
@@ -653,7 +653,7 @@
         - LargeMobLayer
   - type: Damageable
     damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine
+    damageModifierSet: RMCVehicleFrameAPC
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
@@ -755,7 +755,7 @@
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
-    maxIntegrity: 500
+    maxIntegrity: 1000
     repairFuelCost: 15
     bypassEntryOnZero: true
   - type: RMCRepairable
@@ -872,7 +872,8 @@
       interiorCoords: 0.25,-1
 
 - type: entity
-  id: RMCVehicleHumvee
+  id: RMCVehicleHumveeBase
+  abstract: true
   name: humvee
   description: A fast armored utility vehicle outfitted for patrols and support.
   components:
@@ -930,9 +931,6 @@
         - LargeMobLayer
         layer:
         - LargeMobLayer
-  - type: Damageable
-    damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
@@ -1015,12 +1013,6 @@
       insertDelay: 1.5
   - type: RMCVehicleWheelSlots
     slotCount: 1
-  - type: RMCHardpointIntegrity
-    maxIntegrity: 350
-    repairFuelCost: 12
-    bypassEntryOnZero: true
-    repairTimePerIntegrity: 0.03
-    repairTimeMax: 8
   - type: RMCRepairable
     delay: 8
     heal: 150
@@ -1048,11 +1040,34 @@
 
 
 - type: entity
-  parent: RMCVehicleHumvee
+  parent: RMCVehicleHumveeBase
+  id: RMCVehicleHumvee
+  components:
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 1000
+    repairFuelCost: 12
+    bypassEntryOnZero: true
+    repairTimePerIntegrity: 0.03
+    repairTimeMax: 8
+
+- type: entity
+  parent: RMCVehicleHumveeBase
   id: RMCVehicleHumveeMedical
   name: humvee (medical)
   description: A medical-configured humvee outfitted for field triage.
   components:
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 1000
+    repairFuelCost: 12
+    bypassEntryOnZero: true
+    repairTimePerIntegrity: 0.03
+    repairTimeMax: 8
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/humvee_medical.rsi
     layers:
@@ -1112,11 +1127,20 @@
       radius: 0.5
       interiorCoords: 2.94, -0.44
 - type: entity
-  parent: RMCVehicleHumvee
+  parent: RMCVehicleHumveeBase
   id: RMCVehicleHumveeTransport
   name: humvee (transport)
   description: A transport humvee configured for passenger movement.
   components:
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 1000
+    repairFuelCost: 12
+    bypassEntryOnZero: true
+    repairTimePerIntegrity: 0.03
+    repairTimeMax: 8
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/humvee_transport.rsi
     layers:
@@ -1177,11 +1201,20 @@
       interiorCoords: 3.56,-0.36
 
 - type: entity
-  parent: RMCVehicleHumvee
+  parent: RMCVehicleHumveeBase
   id: RMCVehicleHumveeARC
   name: humvee (arc)
   description: A humvee configured for ARC interior layout.
   components:
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: RMCVehicleFrameARC
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 800
+    repairFuelCost: 12
+    bypassEntryOnZero: true
+    repairTimePerIntegrity: 0.03
+    repairTimeMax: 8
   - type: RMCVehicleDeployable
     deployTime: 5
     undeployTime: 5
@@ -1204,7 +1237,6 @@
     - offset: 1,-0.1
       radius: 0.5
       interiorCoords: 3.56, -0.42
-
 
 - type: entity
   id: RMCVehicleTank
@@ -1271,7 +1303,7 @@
         - LargeMobLayer
   - type: Damageable
     damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine
+    damageModifierSet: RMCVehicleFrameTank
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
@@ -1375,7 +1407,7 @@
   - type: RMCVehicleWheelSlots
     slotCount: 2
   - type: RMCHardpointIntegrity
-    maxIntegrity: 600
+    maxIntegrity: 1000
     repairFuelCost: 20
     bypassEntryOnZero: true
     repairTimePerIntegrity: 0.04

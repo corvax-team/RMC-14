@@ -7,7 +7,6 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/apc.rsi
   - type: Item
     size: Large
-  - type: RMCHardpointIntegrity
 
 - type: entity
   parent: RMCAPCHardpointBase
@@ -19,6 +18,9 @@
     state: tires
   - type: RMCHardpointItem
     hardpointType: Wheel
+    damageMultiplier: 0.15
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 500
   - type: Tag
     tags:
     - RMCVehicleHardpointWheel
@@ -34,6 +36,9 @@
     state: front_cannon
   - type: RMCHardpointItem
     hardpointType: Cannon
+    damageMultiplier: 0.11
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 350
   - type: Tag
     tags:
     - RMCVehicleHardpointCannon
@@ -75,6 +80,9 @@
     state: dual_cannon
   - type: RMCHardpointItem
     hardpointType: Turret
+    damageMultiplier: 0.2
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 500
   - type: Tag
     tags:
     - RMCVehicleHardpointTurret
@@ -121,6 +129,9 @@
     state: comms_relay
   - type: RMCHardpointItem
     hardpointType: SupportAttachment
+    damageMultiplier: 0.075
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 100
   - type: Tag
     tags:
     - RMCVehicleHardpointSupportAttachment
@@ -137,6 +148,9 @@
     state: flare_launcher
   - type: RMCHardpointItem
     hardpointType: SupportAttachment
+    damageMultiplier: 0.1
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 500
   - type: Tag
     tags:
     - RMCVehicleHardpointSupportAttachment
@@ -186,6 +200,9 @@
     state: freighter_storage
   - type: RMCHardpointItem
     hardpointType: SupportAttachment
+    damageMultiplier: 0.075
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 100
   - type: Tag
     tags:
     - RMCVehicleHardpointSupportAttachment
@@ -204,6 +221,8 @@
     state: m56_FPW
   - type: Item
     size: Huge
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 100
   - type: VehiclePortGun
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision

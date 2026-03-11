@@ -7,7 +7,6 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/humvee.rsi
   - type: Item
     size: Large
-  - type: RMCHardpointIntegrity
 
 - type: entity
   parent: RMCVehicleHumveeHardpointBase
@@ -19,6 +18,9 @@
     state: tires
   - type: RMCHardpointItem
     hardpointType: Wheel
+    damageMultiplier: 0.15
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 500
   - type: Tag
     tags:
     - RMCVehicleHardpointWheel
@@ -34,6 +36,9 @@
     state: humveeturret
   - type: RMCHardpointItem
     hardpointType: Turret
+    damageMultiplier: 0.15
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 100
   - type: Tag
     tags:
     - RMCVehicleHardpointTurret
@@ -77,6 +82,9 @@
     state: humveecannon
   - type: RMCHardpointItem
     hardpointType: Cannon
+    damageMultiplier: 0.1
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 125
   - type: Tag
     tags:
     - RMCVehicleHardpointCannon
@@ -132,6 +140,9 @@
     state: humveelauncher
   - type: RMCHardpointItem
     hardpointType: Launcher
+    damageMultiplier: 0.0
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 100
   - type: Tag
     tags:
     - RMCVehicleHardpointLauncher
@@ -181,6 +192,9 @@
     state: snowplow
   - type: RMCHardpointItem
     hardpointType: FrontAttachment
+    damageMultiplier: 0.075
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 100
   - type: Tag
     tags:
     - RMCVehicleHardpointFrontAttachment
@@ -197,6 +211,9 @@
     state: overlight
   - type: RMCHardpointItem
     hardpointType: RoofAttachment
+    damageMultiplier: 0.1
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 500
   - type: Tag
     tags:
     - RMCVehicleHardpointRoofAttachment
@@ -215,6 +232,9 @@
     state: humveehatch
   - type: RMCHardpointItem
     hardpointType: RoofAttachment
+    damageMultiplier: 0.075
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 100
   - type: Tag
     tags:
     - RMCVehicleHardpointRoofAttachment

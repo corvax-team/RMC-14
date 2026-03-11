@@ -11,8 +11,10 @@
     size: Large
   - type: RMCHardpointItem
     hardpointType: Wheel
+    damageMultiplier: 0.15
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 500
   - type: Tag
     tags:
     - RMCVehicleHardpointWheel
   - type: RMCVehicleWheelItem
-  - type: RMCHardpointIntegrity

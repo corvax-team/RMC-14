@@ -7,7 +7,6 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/tank.rsi
   - type: Item
     size: Large
-  - type: RMCHardpointIntegrity
 
 - type: entity
   parent: RMCVehicleTankHardpointBase
@@ -19,6 +18,9 @@
     state: ltb_cannon
   - type: RMCHardpointItem
     hardpointType: Turret
+    damageMultiplier: 0.05
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 450
   - type: Tag
     tags:
     - RMCVehicleHardpointTurret
@@ -61,6 +63,9 @@
     state: treads
   - type: RMCHardpointItem
     hardpointType: Wheel
+    damageMultiplier: 0.15
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 300
   - type: Tag
     tags:
     - RMCVehicleHardpointWheel
@@ -77,13 +82,14 @@
     state: treads
   - type: RMCHardpointItem
     hardpointType: Wheel
+    damageMultiplier: 0.15
   - type: Tag
     tags:
     - RMCVehicleHardpointWheel
     - RMCVehicleHardpointTreads
   - type: RMCVehicleWheelItem
   - type: RMCHardpointIntegrity
-    maxIntegrity: 150
+    maxIntegrity: 500
   - type: RMCHardpointDamageModifier
     modifierSets:
     - RMCVehicleArmorCaustic
@@ -100,6 +106,9 @@
     state: tires
   - type: RMCHardpointItem
     hardpointType: Wheel
+    damageMultiplier: 0.15
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 100
   - type: Tag
     tags:
     - RMCVehicleHardpointWheel
@@ -116,6 +125,9 @@
     state: ballistic_armor
   - type: RMCHardpointItem
     hardpointType: Armor
+    damageMultiplier: 0.5
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 1000
   - type: RMCVehicleArmorHardpoint
     modifierSets:
     - RMCVehicleArmorBallistic
@@ -132,6 +144,9 @@
     state: concussive_armor
   - type: RMCHardpointItem
     hardpointType: Armor
+    damageMultiplier: 0.5
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 1000
   - type: RMCVehicleArmorHardpoint
     explosionCoefficient: 0.5
   - type: RMCHardpointVisual
@@ -147,6 +162,9 @@
     state: caustic_armor
   - type: RMCHardpointItem
     hardpointType: Armor
+    damageMultiplier: 0.5
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 1000
   - type: RMCVehicleArmorHardpoint
     modifierSets:
     - RMCVehicleArmorCaustic
@@ -163,6 +181,9 @@
     state: paladin_armor
   - type: RMCHardpointItem
     hardpointType: Armor
+    damageMultiplier: 0.5
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 1000
   - type: RMCVehicleArmorHardpoint
     modifierSets:
     - RMCVehicleArmorPaladin
@@ -180,6 +201,9 @@
     state: snowplow
   - type: RMCHardpointItem
     hardpointType: Armor
+    damageMultiplier: 0.5
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 150
   - type: RMCHardpointVisual
     vehicleState: snowplow_0
 
@@ -193,6 +217,9 @@
     state: ltb_cannon
   - type: RMCHardpointItem
     hardpointType: Cannon
+    damageMultiplier: 0.125
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 500
   - type: Tag
     tags:
     - RMCVehicleHardpointCannon
@@ -255,6 +282,9 @@
     state: ltaaap_minigun
   - type: RMCHardpointItem
     hardpointType: Cannon
+    damageMultiplier: 0.125
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 350
   - type: Tag
     tags:
     - RMCVehicleHardpointCannon
@@ -335,6 +365,9 @@
     state: ace_autocannon
   - type: RMCHardpointItem
     hardpointType: Cannon
+    damageMultiplier: 0.125
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 500
   - type: Tag
     tags:
     - RMCVehicleHardpointCannon
@@ -388,6 +421,9 @@
     state: drgn_flamer
   - type: RMCHardpointItem
     hardpointType: Cannon
+    damageMultiplier: 0.125
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 400
   - type: Tag
     tags:
     - RMCVehicleHardpointCannon
@@ -448,6 +484,9 @@
     state: flamer
   - type: RMCHardpointItem
     hardpointType: Launcher
+    damageMultiplier: 0.0
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 300
   - type: Tag
     tags:
     - RMCVehicleHardpointLauncher
@@ -516,6 +555,9 @@
     state: glauncher
   - type: RMCHardpointItem
     hardpointType: Launcher
+    damageMultiplier: 0.0
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 500
   - type: Tag
     tags:
     - RMCVehicleHardpointLauncher
@@ -582,6 +624,9 @@
     state: tow_launcher
   - type: RMCHardpointItem
     hardpointType: Launcher
+    damageMultiplier: 0.0
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 500
   - type: Tag
     tags:
     - RMCVehicleHardpointLauncher
@@ -644,6 +689,9 @@
     state: m56_cupola
   - type: RMCHardpointItem
     hardpointType: Launcher
+    damageMultiplier: 0.0
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 350
   - type: Tag
     tags:
     - RMCVehicleHardpointLauncher
@@ -709,6 +757,9 @@
     state: m56_cupola
   - type: RMCHardpointItem
     hardpointType: Launcher
+    damageMultiplier: 0.0
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 350
   - type: Tag
     tags:
     - RMCVehicleHardpointLauncher
@@ -772,6 +823,9 @@
     state: warray
   - type: RMCHardpointItem
     hardpointType: Support
+    damageMultiplier: 0.075
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 250
   - type: Tag
     tags:
     - RMCVehicleHardpointSupportAttachment
@@ -791,6 +845,9 @@
     state: odrive_enhancer
   - type: RMCHardpointItem
     hardpointType: Support
+    damageMultiplier: 0.075
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 250
   - type: Tag
     tags:
     - RMCVehicleHardpointSupportAttachment
@@ -809,6 +866,9 @@
     state: slauncher_0
   - type: RMCHardpointItem
     hardpointType: Support
+    damageMultiplier: 0.075
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 100
   - type: Tag
     tags:
     - RMCVehicleHardpointSupportAttachment
@@ -863,6 +923,9 @@
     state: slauncher_1
   - type: RMCHardpointItem
     hardpointType: Support
+    damageMultiplier: 0.075
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 500
   - type: Tag
     tags:
     - RMCVehicleHardpointSupportAttachment
@@ -920,6 +983,9 @@
     state: artillery
   - type: RMCHardpointItem
     hardpointType: Support
+    damageMultiplier: 0.075
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 250
   - type: Tag
     tags:
     - RMCVehicleHardpointSupportAttachment

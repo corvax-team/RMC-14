@@ -2,7 +2,12 @@ rmc-vehicle-wheel-repaired = Wheel repaired.
 rmc-hardpoint-remove-verb = Remove {$slot}
 rmc-hardpoint-repaired = Hardpoint repaired.
 rmc-hardpoint-intact = Hardpoint is already intact.
-rmc-hardpoint-integrity-examine = Integrity: {$current}/{$max} ({$percent}%)
+rmc-hardpoint-integrity-examine = Integrity: [color={$color}]{$current}/{$max} ({$percent}%)[/color]
+rmc-hardpoint-condition-pristine = It is in pristine condition.
+rmc-hardpoint-condition-good = It is in good condition.
+rmc-hardpoint-condition-worn = It is showing wear.
+rmc-hardpoint-condition-bad = It is in bad condition.
+rmc-hardpoint-condition-critical = It is barely holding together.
 rmc-hardpoint-ui-title = Hardpoints
 rmc-hardpoint-ui-empty-slot = Empty
 rmc-hardpoint-ui-integrity = {$current}/{$max} ({$percent}%)
