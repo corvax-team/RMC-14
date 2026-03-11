@@ -131,7 +131,7 @@ public abstract class SharedXenoNameSystem : EntitySystem
         }
         catch (Exception e)
         {
-            Log.Warning($"Error reading total xeno playtime:\n{e}");
+            Log.Error($"Error reading total xeno playtime:\n{e}");
         }
 
         return xenoPlaytime;
