@@ -22819,8 +22819,6 @@ entities:
           occludes: True
           ents:
           - 2118
-          - invalid
-          - invalid
           - 2121
         paper_label: !type:ContainerSlot
           showEnts: False
@@ -73418,13 +73416,9 @@ entities:
       pos: -39.875244,3.6757555
       parent: 1
     - type: HandheldLight
-      toggleActionEntity: 255
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 255
     - type: ActionsContainer
   - uid: 10596
     components:
