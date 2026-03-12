@@ -449,6 +449,9 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
 
     private void TryToggleLift(Entity<RMCVehicleSupplyConsoleComponent> console, Entity<RMCVehicleSupplyLiftComponent> lift, bool raise)
     {
+        if (console.Comp.OrderUsed)
+           return;
+
         var comp = lift.Comp;
         if (comp.NextMode != null || comp.Busy)
             return;
@@ -476,6 +479,8 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
                         {
                             if (TryRemoveStored(comp, key))
                             {
+                                console.Comp.OrderUsed = true;
+                                Dirty(console);
                                 canQueueVehicle = true;
                                 nextVehicle = selected;
                                 comp.PendingVehicleEntity = null;
