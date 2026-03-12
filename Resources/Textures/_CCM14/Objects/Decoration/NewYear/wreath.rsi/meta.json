@@ -1,7 +1,7 @@
 {
     "version": 1,
-    "license": "?????",
-    "copyright": "@denlero",
+    "license": "CC-BY-SA-3.0",
+    "copyright": "denlero",
     "size": {
         "x": 32,
         "y": 32
@@ -10,7 +10,7 @@
         {
             "name": "wreath"
         },
-         {
+        {
             "name": "icon"
         }
     ]
