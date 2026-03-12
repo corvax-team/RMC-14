@@ -227,18 +227,16 @@
                     <BoxContainer Name="JobListXeno" Orientation="Vertical" />
                 </ScrollContainer>
             </BoxContainer>
-            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                <ScrollContainer VerticalExpand="True">
-                    <BoxContainer Name="MiscTabContainer" Orientation="Vertical" />
-                </ScrollContainer>
-                <BoxContainer Name="AntagList" Visible="False" />
-                <BoxContainer Name="TraitsList" Visible="False" />
-                <BoxContainer Name="MarkingsTab" Visible="False">
-                    <Label Text="{Loc 'humanoid-profile-editor-markings-tab'}" />
-                </BoxContainer>
-                <BoxContainer Name="NamedItemsTab" Visible="False">
-                    <namedItems:NamedItemsPicker Name="NamedItems" />
-                </BoxContainer>
-            </BoxContainer>
         </ccm:CenteredTabContainer>
+        <BoxContainer Name="OtherTabHiddenContainer" Visible="False">
+            <BoxContainer Name="MiscTabContainer" Orientation="Vertical" />
+            <BoxContainer Name="AntagList" Visible="False" />
+            <BoxContainer Name="TraitsList" Visible="False" />
+            <BoxContainer Name="MarkingsTab" Visible="False">
+                <Label Text="{Loc 'humanoid-profile-editor-markings-tab'}" />
+            </BoxContainer>
+            <BoxContainer Name="NamedItemsTab" Visible="False">
+                <namedItems:NamedItemsPicker Name="NamedItems" />
+            </BoxContainer>
+        </BoxContainer>
 </BoxContainer>

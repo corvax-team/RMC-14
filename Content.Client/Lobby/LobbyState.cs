@@ -44,6 +44,10 @@ namespace Content.Client.Lobby
 
         private ClientGameTicker _gameTicker = default!;
         private ContentAudioSystem _audioSystem = default!;
+        private float _lastRightPanelWidth = -1f;
+
+        private const float LobbyRightPanelMinRatio = 0.216f;
+        private const float LobbyRightPanelMaxRatio = 0.336f;
 
         protected override Type? LinkedScreenType { get; } = typeof(LobbyGui);
         public LobbyGui? Lobby;
@@ -124,18 +128,7 @@ namespace Content.Client.Lobby
 
             _voteManager.SetPopupContainer(Lobby.VoteContainer);
             LayoutContainer.SetAnchorPreset(Lobby, LayoutContainer.LayoutPreset.Wide);
-
-            // CCM rework lobby - start
-            var width = _cfg.GetCVar(CCVars.ServerLobbyRightPanelWidth) * 0.65f;
-            var uiScale = Lobby.RightSide.UIScale;
-            if (uiScale <= 0f)
-                uiScale = 1f;
-            var scaleAdjust = uiScale > 1f ? uiScale * 1.15f : MathF.Max(0.6f, uiScale * 0.9f);
-            var desiredWidth = width / scaleAdjust;
-            if (Lobby.Size.X > 1f)
-                desiredWidth = MathF.Min(desiredWidth, Lobby.Size.X * 0.38f);
-            Lobby.RightSide.SetWidth = desiredWidth;
-            // CCM rework lobby - end
+            UpdateRightPanelLayout();
 
             UpdateLobbyUi();
             _cfg.OnValueChanged(RMCCVars.RMCLobbyBackgroundPreset, _ => UpdateLobbyBackground(true), true);
@@ -168,6 +161,7 @@ namespace Content.Client.Lobby
 
         public override void FrameUpdate(FrameEventArgs e)
         {
+            UpdateRightPanelLayout();
             UpdateRoundCountdown();
             UpdateLobbyBackgroundRotation();
             if (_gameTicker.IsGameStarted)
@@ -178,6 +172,35 @@ namespace Content.Client.Lobby
             }
 
             Lobby!.StationTime.Text = Loc.GetString("lobby-state-player-status-round-not-started");
+        }
+
+        private void UpdateRightPanelLayout()
+        {
+            if (Lobby == null)
+                return;
+
+            var hostWidth = Lobby.Size.X;
+            if (hostWidth <= 1f)
+                return;
+
+            var uiScale = Lobby.RightSide.UIScale;
+            if (uiScale <= 0f)
+                uiScale = 1f;
+
+            // Keep right panel visually stable across UI scales and different monitor sizes.
+            var basePanelWidth = _cfg.GetCVar(CCVars.ServerLobbyRightPanelWidth);
+            var desiredWidth = (basePanelWidth / uiScale) / 1.25f;
+            desiredWidth = Math.Clamp(
+                desiredWidth,
+                hostWidth * LobbyRightPanelMinRatio,
+                hostWidth * LobbyRightPanelMaxRatio);
+            desiredWidth = MathF.Round(desiredWidth);
+
+            if (MathF.Abs(_lastRightPanelWidth - desiredWidth) < 0.5f)
+                return;
+
+            Lobby.RightSide.SetWidth = desiredWidth;
+            _lastRightPanelWidth = desiredWidth;
         }
 
         private void UpdateRoundCountdown()

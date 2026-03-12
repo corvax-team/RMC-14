@@ -16,7 +16,7 @@
                                  Stretch="KeepAspectCentered" CanShrink="True" />
                     <PanelContainer Name="CenterMenuGlow" StyleClasses="LobbyCenterGlow"
                                     HorizontalAlignment="Center" VerticalAlignment="Center"
-                                    Margin="-20 0 0 0"
+                                    Margin="0 0 0 0"
                                     MinWidth="416" MaxWidth="576">
                         <PanelContainer Name="CenterMenuPanel" StyleClasses="LobbyCenterPanel"
                                         HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -158,8 +158,8 @@
         </LayoutContainer>
         <!-- Right column -->
         <PanelContainer Name="RightSide" Access="Public" HorizontalAlignment="Right"
-                        VerticalExpand="True" HorizontalExpand="True"
-                        MinWidth="400" SizeFlagsStretchRatio="0.7"
+                        VerticalExpand="True" HorizontalExpand="False"
+                        MinWidth="400"
                         StyleClasses="LobbyChatPanel">
             <TextureRect Name="RightSideBackground"
                          TexturePath="/Textures/_CCM14/Lobby/rightside_chat_bg.png"

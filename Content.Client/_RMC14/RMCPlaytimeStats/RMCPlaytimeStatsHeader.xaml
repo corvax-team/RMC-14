@@ -16,7 +16,7 @@
                    Text="{Loc ui-playtime-header-role-type}"
                    MouseFilter="Pass"
                    Margin="5,5,5,5"/>
-            <customControls:VSeparator/>
+            <customControls:VSeparator Name="HeaderVerticalSeparator"/>
             <Label Name="PlaytimeLabel"
                    SizeFlagsStretchRatio="3"
                    HorizontalExpand="True"
@@ -25,6 +25,6 @@
                    MouseFilter="Pass"
                    Margin="5,5,5,5"/>
         </BoxContainer>
-        <customControls:HSeparator/>
+        <customControls:HSeparator Name="HeaderBottomSeparator"/>
     </BoxContainer>
 </Control>

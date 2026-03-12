@@ -6,6 +6,10 @@
                 Title="{Loc ui-playtime-stats-title}"
                 SetSize="720 540">
     <LayoutContainer Name="RootLayout" HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer Name="ContentBackdrop"
+                        MouseFilter="Ignore"
+                        HorizontalExpand="True"
+                        VerticalExpand="True" />
         <TextureRect Name="BackgroundImage"
                      TexturePath="/Textures/_CCM14/Lobby/rightside_chat_bg.png"
                      Stretch="Scale"
@@ -15,11 +19,13 @@
         <BoxContainer Name="ContentRoot" Orientation="Vertical" Margin="10,10,10,10" HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Orientation="Vertical" Name="DepartmentButtons" Visible="False" SetSize="0 0" />
             <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
-                <BoxContainer Name="OverallHeader" Orientation="Horizontal" Margin="0 0 0 6">
-                    <Label Name="OverallLabel" />
-                    <Control HorizontalExpand="True" />
-                    <OptionButton Name="OverallCategorySelector" MinWidth="200" />
-                </BoxContainer>
+                <PanelContainer Name="OverallHeaderBackground">
+                    <BoxContainer Name="OverallHeader" Orientation="Horizontal" Margin="6 4 6 4">
+                        <Label Name="OverallLabel" />
+                        <Control HorizontalExpand="True" />
+                        <OptionButton Name="OverallCategorySelector" MinWidth="200" />
+                    </BoxContainer>
+                </PanelContainer>
                 <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Name="DepartmentContent" />
             </BoxContainer>
         </BoxContainer>

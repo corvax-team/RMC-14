@@ -52,6 +52,15 @@ namespace Content.Client.Lobby.UI
         private readonly Dictionary<SpriteView, float> _hoverRotationTimes = new();
         private readonly HashSet<SpriteView> _hoveredViews = new();
         private StyleNano.UiColorTheme _appliedTheme;
+        private float _lastCarouselWidth = -1f;
+        private CarouselLayoutMode _carouselLayoutMode = CarouselLayoutMode.Five;
+
+        private enum CarouselLayoutMode
+        {
+            One,
+            Three,
+            Five
+        }
 
         public event Action<int>? SelectCharacter;
         public event Action<int>? DeleteCharacter;
@@ -69,6 +78,7 @@ namespace Content.Client.Lobby.UI
             CharEditor.AddChild(profileEditor);
             LayoutContainer.SetAnchorPreset(CarouselLayout, LayoutContainer.LayoutPreset.Wide);
             LayoutContainer.SetAnchorPreset(CarouselBackgroundPanel, LayoutContainer.LayoutPreset.Wide);
+            LayoutContainer.SetAnchorPreset(CarouselBorderPanel, LayoutContainer.LayoutPreset.Wide);
             LayoutContainer.SetAnchorPreset(CarouselSideShade, LayoutContainer.LayoutPreset.Wide);
 
             NewCharacterButton.OnPressed += _ => CreateCharacter();
@@ -110,6 +120,7 @@ namespace Content.Client.Lobby.UI
         {
             base.FrameUpdate(args);
             ApplyThemeColors();
+            UpdateCarouselLayoutIfNeeded();
             UpdateRotation(args.DeltaSeconds);
             UpdateDeleteCountdown(args.DeltaSeconds);
         }
@@ -125,12 +136,10 @@ namespace Content.Client.Lobby.UI
 
             var panelTex = _resourceCache.GetTexture("/Textures/Interface/Nano/button.svg.96dpi.png");
             var frameColor = theme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#143C78")
-                : Color.FromHex("#1B3D28");
+                ? Color.FromHex("#0B3578")
+                : Color.FromHex("#16301F");
             var carouselFloorTexture = _resourceCache.GetTexture("/Textures/_CCM14/Tiles/Vehicle/Base_Interior/floor_2.png");
-            var carouselTint = theme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#B9D4F3")
-                : Color.FromHex("#D9F2DD");
+            var carouselTint = frameColor.WithAlpha(0.22f);
             var carouselSideShadeColor = Color.Transparent;
             var dividerColor = theme == StyleNano.UiColorTheme.Blue
                 ? Color.FromHex("#165197").WithAlpha(0.95f)
@@ -143,6 +152,12 @@ namespace Content.Client.Lobby.UI
             };
             back.SetPatchMargin(StyleBox.Margin.All, 10);
             BackgroundPanel.PanelOverride = back;
+            MenuBorderPanel.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Transparent,
+                BorderColor = dividerColor,
+                BorderThickness = new Thickness(1)
+            };
             var carouselTileBack = new StyleBoxTexture
             {
                 Texture = carouselFloorTexture,
@@ -152,6 +167,12 @@ namespace Content.Client.Lobby.UI
             };
             carouselTileBack.SetPatchMargin(StyleBox.Margin.All, 0);
             CarouselBackgroundPanel.PanelOverride = carouselTileBack;
+            CarouselBorderPanel.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Transparent,
+                BorderColor = dividerColor,
+                BorderThickness = new Thickness(1)
+            };
             CarouselLeftShade.PanelOverride = new StyleBoxFlat { BackgroundColor = carouselSideShadeColor };
             CarouselRightShade.PanelOverride = new StyleBoxFlat { BackgroundColor = carouselSideShadeColor };
 
@@ -254,6 +275,8 @@ namespace Content.Client.Lobby.UI
         {
             // CCM rework lobby - start
             DeletePreviewEntities();
+            _carouselLayoutMode = ResolveCarouselLayoutMode();
+            ApplyCarouselLayoutMode(_carouselLayoutMode);
 
             if (_carouselProfiles.Count == 0)
             {
@@ -277,7 +300,7 @@ namespace Content.Client.Lobby.UI
             else
                 _centerPreviewSpeciesId = SharedHumanoidAppearanceSystem.DefaultSpecies;
 
-            if (_carouselProfiles.Count == 1)
+            if (_carouselProfiles.Count == 1 || _carouselLayoutMode == CarouselLayoutMode.One)
             {
                 LeftPreviewContainer.Visible = false;
                 RightPreviewContainer.Visible = false;
@@ -288,8 +311,8 @@ namespace Content.Client.Lobby.UI
 
             LeftPreviewContainer.Visible = true;
             RightPreviewContainer.Visible = true;
-            LeftFarPreviewContainer.Visible = _carouselProfiles.Count >= 4;
-            RightFarPreviewContainer.Visible = _carouselProfiles.Count >= 4;
+            LeftFarPreviewContainer.Visible = _carouselLayoutMode == CarouselLayoutMode.Five && _carouselProfiles.Count >= 4;
+            RightFarPreviewContainer.Visible = _carouselLayoutMode == CarouselLayoutMode.Five && _carouselProfiles.Count >= 4;
 
             var leftIndex = (_carouselIndex - 1 + _carouselProfiles.Count) % _carouselProfiles.Count;
             var rightIndex = (_carouselIndex + 1) % _carouselProfiles.Count;
@@ -303,7 +326,7 @@ namespace Content.Client.Lobby.UI
 
             _leftPreviewEntity = CreatePreviewEntity(left.Profile);
             _rightPreviewEntity = CreatePreviewEntity(right.Profile);
-            if (_carouselProfiles.Count >= 4)
+            if (_carouselLayoutMode == CarouselLayoutMode.Five && _carouselProfiles.Count >= 4)
             {
                 _leftFarPreviewEntity = CreatePreviewEntity(leftFar.Profile);
                 _rightFarPreviewEntity = CreatePreviewEntity(rightFar.Profile);
@@ -311,7 +334,7 @@ namespace Content.Client.Lobby.UI
 
             SetPreview(LeftPreview, LeftNameLabel, left.Profile, _leftPreviewEntity, true);
             SetPreview(RightPreview, RightNameLabel, right.Profile, _rightPreviewEntity, true);
-            if (_carouselProfiles.Count >= 4)
+            if (_carouselLayoutMode == CarouselLayoutMode.Five && _carouselProfiles.Count >= 4)
             {
                 SetPreview(LeftFarPreview, LeftFarNameLabel, leftFar.Profile, _leftFarPreviewEntity, true);
                 SetPreview(RightFarPreview, RightFarNameLabel, rightFar.Profile, _rightFarPreviewEntity, true);
@@ -578,6 +601,92 @@ namespace Content.Client.Lobby.UI
             LayoutContainer.SetPosition(this, newPos);
             _manualPosition = newPos;
             _hasManualPosition = true;
+            // CCM rework lobby - end
+        }
+
+        private void UpdateCarouselLayoutIfNeeded()
+        {
+            // CCM rework lobby - start
+            var width = CarouselPanel.Size.X;
+            if (width <= 0f)
+                return;
+
+            if (Math.Abs(width - _lastCarouselWidth) < 1f)
+                return;
+
+            _lastCarouselWidth = width;
+            UpdateCarousel();
+            // CCM rework lobby - end
+        }
+
+        private CarouselLayoutMode ResolveCarouselLayoutMode()
+        {
+            // CCM rework lobby - start
+            if (_carouselProfiles.Count <= 1)
+                return CarouselLayoutMode.One;
+
+            var width = CarouselPanel.Size.X;
+            if (width <= 0f)
+                return _carouselProfiles.Count >= 4 ? CarouselLayoutMode.Five : CarouselLayoutMode.Three;
+
+            const float minThreeWidth = 640f;
+            const float minFiveWidth = 980f;
+
+            if (width < minThreeWidth)
+                return CarouselLayoutMode.One;
+
+            if (_carouselProfiles.Count >= 4 && width >= minFiveWidth)
+                return CarouselLayoutMode.Five;
+
+            return CarouselLayoutMode.Three;
+            // CCM rework lobby - end
+        }
+
+        private void ApplyCarouselLayoutMode(CarouselLayoutMode mode)
+        {
+            // CCM rework lobby - start
+            switch (mode)
+            {
+                case CarouselLayoutMode.One:
+                    CarouselPreviewRow.SeparationOverride = 8;
+                    CenterPreviewContainer.MinSize = new Vector2(200f, 170f);
+                    CenterPreview.Scale = new Vector2(6.4f, 6.4f);
+                    LeftPreviewContainer.MinSize = new Vector2(140f, 130f);
+                    RightPreviewContainer.MinSize = new Vector2(140f, 130f);
+                    LeftFarPreviewContainer.MinSize = new Vector2(120f, 120f);
+                    RightFarPreviewContainer.MinSize = new Vector2(120f, 120f);
+                    LeftPreview.Scale = new Vector2(5.2f, 5.2f);
+                    RightPreview.Scale = new Vector2(5.2f, 5.2f);
+                    LeftFarPreview.Scale = new Vector2(4.6f, 4.6f);
+                    RightFarPreview.Scale = new Vector2(4.6f, 4.6f);
+                    break;
+                case CarouselLayoutMode.Three:
+                    CarouselPreviewRow.SeparationOverride = 10;
+                    CenterPreviewContainer.MinSize = new Vector2(200f, 170f);
+                    CenterPreview.Scale = new Vector2(6.6f, 6.6f);
+                    LeftPreviewContainer.MinSize = new Vector2(150f, 140f);
+                    RightPreviewContainer.MinSize = new Vector2(150f, 140f);
+                    LeftFarPreviewContainer.MinSize = new Vector2(120f, 120f);
+                    RightFarPreviewContainer.MinSize = new Vector2(120f, 120f);
+                    LeftPreview.Scale = new Vector2(5.6f, 5.6f);
+                    RightPreview.Scale = new Vector2(5.6f, 5.6f);
+                    LeftFarPreview.Scale = new Vector2(4.8f, 4.8f);
+                    RightFarPreview.Scale = new Vector2(4.8f, 4.8f);
+                    break;
+                default:
+                    CarouselPreviewRow.SeparationOverride = 12;
+                    CenterPreviewContainer.MinSize = new Vector2(220f, 180f);
+                    CenterPreview.Scale = new Vector2(7f, 7f);
+                    LeftPreviewContainer.MinSize = new Vector2(180f, 160f);
+                    RightPreviewContainer.MinSize = new Vector2(180f, 160f);
+                    LeftFarPreviewContainer.MinSize = new Vector2(160f, 140f);
+                    RightFarPreviewContainer.MinSize = new Vector2(160f, 140f);
+                    LeftPreview.Scale = new Vector2(6.4f, 6.4f);
+                    RightPreview.Scale = new Vector2(6.4f, 6.4f);
+                    LeftFarPreview.Scale = new Vector2(5.1f, 5.1f);
+                    RightFarPreview.Scale = new Vector2(5.1f, 5.1f);
+                    break;
+            }
             // CCM rework lobby - end
         }
 

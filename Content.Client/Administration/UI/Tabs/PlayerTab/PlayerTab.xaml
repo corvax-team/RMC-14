@@ -5,7 +5,7 @@
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Horizontal">
             <Label Name="PlayerCount" HorizontalExpand="True" Text="{Loc player-tab-player-count}" />
-            <LineEdit Name="SearchLineEdit" HorizontalExpand="True"
+            <LineEdit Name="SearchLineEdit" HorizontalExpand="True" StyleClasses="actionSearchBox"
                       PlaceHolder="{Loc player-tab-filter-line-edit-placeholder}" />
             <Button Name="ShowDisconnectedButton" HorizontalExpand="True"
                     Text="{Loc player-tab-show-disconnected}" ToggleMode="True" />

@@ -17,6 +17,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
 using Robust.Client.GameObjects;
 using Robust.Shared.Utility;
+using Content.Client.Stylesheets;
 
 namespace Content.Client._RMC14.RMCPlaytimeStats;
 
@@ -35,10 +36,16 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
 
-    private readonly Color _altColor = Color.FromHex("#292B38");
-    private readonly Color _defaultColor = Color.FromHex("#2F2F3B");
-    private readonly Color _buttonSelectedColor = Color.FromHex("#3E6E4B");
-    private readonly Color _buttonNormalColor = Color.FromHex("#2F2F3B");
+    private Color _altColor = Color.FromHex("#124120");
+    private Color _defaultColor = Color.FromHex("#0D3518");
+    private Color _headerColor = Color.FromHex("#185B2B");
+    private Color _panelColor = Color.FromHex("#05180A");
+    private Color _textColor = Color.White;
+    private Color _mutedTextColor = Color.White;
+    private Color _separatorColor = Color.FromHex("#2B7E45");
+    private Color _buttonSelectedColor = Color.FromHex("#138C2F");
+    private Color _buttonNormalColor = Color.FromHex("#0D3518");
+    private StyleNano.UiColorTheme _appliedTheme;
     private bool _useAltColor;
     private Button? _selectedButton;
     private OverallCategory _overallCategory = OverallCategory.Overall;
@@ -61,10 +68,13 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         SetupOverallCategorySelector();
         LayoutContainer.SetAnchorPreset(BackgroundImage, LayoutContainer.LayoutPreset.Wide);
         LayoutContainer.SetAnchorPreset(ContentRoot, LayoutContainer.LayoutPreset.Wide);
+        LayoutContainer.SetAnchorPreset(ContentBackdrop, LayoutContainer.LayoutPreset.Wide);
 
         LoadMedalTimes();
         PopulateDepartmentButtons();
+        ApplyThemeColors(true);
         ShowGeneralTab();
+        _config.OnValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged, false);
     }
 
     private void LoadMedalTimes()
@@ -198,7 +208,8 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
             Text = Loc.GetString("ui-playtime-department-total",
                 ("department", deptName),
                 ("time", ContentLocalizationManager.FormatPlaytime(deptTotalTimeSpan))),
-            Margin = new Thickness(0, 0, 0, 5)
+            Margin = new Thickness(0, 0, 0, 5),
+            FontColorOverride = _mutedTextColor
         };
 
         content.AddChild(deptTotalLabel);
@@ -218,7 +229,8 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         var header = new RMCPlaytimeStatsHeader();
         header.OnHeaderClicked += (header, direction) =>
             HeaderClicked(header, direction, rolesList);
-        header.BackgroundColorPlaytimePanel.PanelOverride = new StyleBoxFlat(_altColor);
+        header.BackgroundColorPlaytimePanel.PanelOverride = new StyleBoxFlat(_headerColor);
+        header.ApplyTheme(_textColor, _separatorColor);
         rolesList.AddChild(header);
         rolesList.AddChild(new HSeparator());
 
@@ -230,6 +242,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
                 playtime,
                 new StyleBoxFlat(_useAltColor ? _altColor : _defaultColor),
                 GetMedalIcon(dept.ID, playtime, job.ID));
+            entry.ApplyTheme(_textColor, _separatorColor);
 
             rolesList.AddChild(entry);
             _useAltColor ^= true;
@@ -262,10 +275,12 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         var overallLabel = new Label
         {
             Text = Loc.GetString("ui-playtime-overall", ("time", new TimeSpan(totalTime))),
-            Margin = new Thickness(0, 0, 0, 5)
+            Margin = new Thickness(0, 0, 0, 5),
+            FontColorOverride = _mutedTextColor
         };
 
         OverallLabel.Text = overallLabel.Text;
+        OverallLabel.FontColorOverride = _mutedTextColor;
         content.AddChild(new HSeparator { Margin = new Thickness(0, 5, 0, 5) });
 
         var scrollContainer = new ScrollContainer
@@ -283,7 +298,8 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         header.OnHeaderClicked += (header, direction) =>
             HeaderClicked(header, direction, rolesList);
 
-        header.BackgroundColorPlaytimePanel.PanelOverride = new StyleBoxFlat(_altColor);
+        header.BackgroundColorPlaytimePanel.PanelOverride = new StyleBoxFlat(_headerColor);
+        header.ApplyTheme(_textColor, _separatorColor);
 
         rolesList.AddChild(header);
         rolesList.AddChild(new HSeparator());
@@ -301,6 +317,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
                 kvp.Value,
                 new StyleBoxFlat(_useAltColor ? _altColor : _defaultColor),
                 GetMedalIcon(deptId, kvp.Value, kvp.Key));
+            entry.ApplyTheme(_textColor, _separatorColor);
 
             rolesList.AddChild(entry);
             _useAltColor ^= true;
@@ -422,6 +439,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         {
             var styleBox = new StyleBoxFlat { BackgroundColor = _useAltColor ? _altColor : _defaultColor };
             entry.UpdateShading(styleBox);
+            entry.ApplyTheme(_textColor, _separatorColor);
             container.AddChild(entry);
             _useAltColor ^= true;
         }
@@ -448,8 +466,80 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         {
             var styleBox = new StyleBoxFlat { BackgroundColor = _useAltColor ? _altColor : _defaultColor };
             entry.UpdateShading(styleBox);
+            entry.ApplyTheme(_textColor, _separatorColor);
             container.AddChild(entry);
             _useAltColor ^= true;
         }
+    }
+
+    // CCM rework lobby - start
+    private void OnThemeChanged(string _)
+    {
+        ApplyThemeColors();
+    }
+
+    private void ApplyThemeColors(bool force = false)
+    {
+        var theme = StyleNano.CurrentTheme;
+        if (!force && theme == _appliedTheme)
+            return;
+
+        _appliedTheme = theme;
+
+        if (theme == StyleNano.UiColorTheme.Blue)
+        {
+            _defaultColor = Color.FromHex("#163764").WithAlpha(0.92f);
+            _altColor = Color.FromHex("#1B4074").WithAlpha(0.92f);
+            _headerColor = Color.FromHex("#214B86").WithAlpha(0.96f);
+            _panelColor = Color.FromHex("#102A56").WithAlpha(0.84f);
+            _textColor = Color.FromHex("#E3EEFF");
+            _mutedTextColor = Color.FromHex("#B5D1F3");
+            _separatorColor = Color.FromHex("#2D5F9E").WithAlpha(0.95f);
+            _buttonNormalColor = Color.FromHex("#1A4A8C");
+            _buttonSelectedColor = Color.FromHex("#1F58A5");
+            BackgroundImage.ModulateSelfOverride = Color.FromHex("#5D84BA").WithAlpha(0.22f);
+        }
+        else
+        {
+            _defaultColor = Color.FromHex("#0D3518").WithAlpha(0.92f);
+            _altColor = Color.FromHex("#124120").WithAlpha(0.92f);
+            _headerColor = Color.FromHex("#185B2B").WithAlpha(0.96f);
+            _panelColor = Color.FromHex("#05180A").WithAlpha(0.84f);
+            _textColor = Color.FromHex("#ECFFF0");
+            _mutedTextColor = Color.FromHex("#C6EACB");
+            _separatorColor = Color.FromHex("#2B7E45").WithAlpha(0.95f);
+            _buttonNormalColor = Color.FromHex("#138C2F");
+            _buttonSelectedColor = Color.FromHex("#15A31E");
+            BackgroundImage.ModulateSelfOverride = Color.FromHex("#5B9A6A").WithAlpha(0.18f);
+        }
+
+        ContentBackdrop.PanelOverride = new StyleBoxFlat
+        {
+            BackgroundColor = _panelColor,
+            BorderColor = _separatorColor,
+            BorderThickness = new Thickness(1)
+        };
+
+        OverallHeaderBackground.PanelOverride = new StyleBoxFlat
+        {
+            BackgroundColor = _headerColor,
+            BorderColor = _separatorColor,
+            BorderThickness = new Thickness(1)
+        };
+
+        OverallLabel.FontColorOverride = _mutedTextColor;
+        OverallCategorySelector.ModulateSelfOverride = _buttonNormalColor;
+
+        if (DepartmentContent.ChildCount > 0)
+            ShowGeneralTab();
+    }
+    // CCM rework lobby - end
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+            _config.UnsubValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged);
+
+        base.Dispose(disposing);
     }
 }

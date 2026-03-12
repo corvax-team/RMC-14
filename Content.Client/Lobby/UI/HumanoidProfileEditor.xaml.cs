@@ -587,7 +587,6 @@ namespace Content.Client.Lobby.UI
 
             TabContainer.SetTabTitle(1, Loc.GetString("humanoid-profile-editor-marines-tab"));
             TabContainer.SetTabTitle(2, Loc.GetString("humanoid-profile-editor-xeno-tab"));
-            TabContainer.SetTabTitle(3, Loc.GetString("humanoid-profile-editor-other-tab"));
 
             PreferenceUnavailableButtonMarines.AddItem(
                 Loc.GetString("humanoid-profile-editor-preference-unavailable-stay-in-lobby-button"),

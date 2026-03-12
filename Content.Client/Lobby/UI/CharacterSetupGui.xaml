@@ -5,18 +5,22 @@
          VerticalExpand="True">
     <Control>
         <PanelContainer Name="BackgroundPanel" />
+        <PanelContainer Name="MenuBorderPanel" MouseFilter="Ignore" />
         <BoxContainer Orientation="Vertical" SeparationOverride="8" Margin="8 8 8 8" VerticalExpand="True">
-            <PanelContainer Name="WindowHeader" StyleClasses="windowHeader">
+            <PanelContainer Name="WindowHeader">
                 <BoxContainer Orientation="Horizontal">
-                    <Label Name="TitleLabel" Margin="5 0 0 0" HorizontalExpand="True"
-                           Text="{Loc 'character-setup-gui-title'}"
-                           VAlign="Center" StyleClasses="windowTitle" />
-                    <TextureButton Name="CloseButton" StyleClasses="windowCloseButton" VerticalAlignment="Center" />
+                    <PanelContainer HorizontalExpand="True">
+                        <Label Name="TitleLabel" Margin="5 0 0 0" HorizontalExpand="True"
+                               Text="{Loc 'character-setup-gui-title'}"
+                               VAlign="Center" StyleClasses="windowTitle" />
+                    </PanelContainer>
+                    <TextureButton Name="CloseButton" StyleClasses="CharacterSetupVisibleCloseButton" VerticalAlignment="Center" MinSize="22 22" />
                 </BoxContainer>
             </PanelContainer>
             <PanelContainer Name="CarouselPanel" MinHeight="200" HorizontalExpand="True">
                 <LayoutContainer Name="CarouselLayout" HorizontalExpand="True" VerticalExpand="True">
                     <PanelContainer Name="CarouselBackgroundPanel" HorizontalExpand="True" VerticalExpand="True" MouseFilter="Ignore" />
+                    <PanelContainer Name="CarouselBorderPanel" HorizontalExpand="True" VerticalExpand="True" MouseFilter="Ignore" />
                     <BoxContainer Name="CarouselSideShade"
                                   Orientation="Horizontal"
                                   HorizontalExpand="True"

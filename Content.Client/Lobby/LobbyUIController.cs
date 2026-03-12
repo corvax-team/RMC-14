@@ -403,7 +403,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         return (_characterSetup, _profileEditor);
     }
 
-    private const float CharacterSetupWidthFactor = 0.646f;
+    private const float CharacterSetupWidthFactor = 0.66f;
     private const float CharacterSetupHeightFactor = 0.68f;
 
     private void UpdateCharacterSetupLayout()
