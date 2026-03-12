@@ -81,6 +81,8 @@
   components:
   - type: Transform
     anchored: false
+  - type: Physics
+    bodyType: Static
   - type: WallMount
     arc: 360
   - type: Sprite
@@ -413,3 +415,13 @@
   - type: EntityStorageVisuals
     stateBaseClosed: locker_open
     stateBaseOpen: locker_open
+
+- type: entity
+  parent: RMCVehicleAmmoLoader
+  id: RMCVehicleTankAmmoLoader
+  name: tank ammo loader
+  description: A loader for tank hardpoint ammunition.
+  components:
+  - type: Sprite
+    drawdepth: LowFloors
+

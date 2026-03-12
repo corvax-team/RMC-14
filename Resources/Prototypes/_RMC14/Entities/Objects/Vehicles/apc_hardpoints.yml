@@ -46,15 +46,15 @@
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
-    fireRate: 2.5
+    fireRate: 3.3333333
     selectedMode: FullAuto
     availableModes:
     - FullAuto
-    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
+    soundGunshot: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
     cameraRecoilScalar: 0
   - type: BallisticAmmoProvider
     cycleable: false
-    proto: CMCartridgeSentry10x50mm
+    proto: RMCVehicleCartridgeAPCFrontalCannon10x50mm
     capacity: 500
   - type: RMCVehicleHardpointAmmo
     magazineSize: 500
@@ -90,7 +90,7 @@
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
-    fireRate: 2.5
+    fireRate: 2
     selectedMode: FullAuto
     availableModes:
     - FullAuto
@@ -182,7 +182,7 @@
   - type: GunFireArc
     arc: 360
   - type: RefillableByBulletBox
-    bulletType: RMCFlarePackAmmo
+    bulletType: RMCVehicleAmmoBoxFlareLauncher
   - type: GunMuzzleOffset
     offset: "0,0"
     muzzleOffset: "0,0"

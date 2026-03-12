@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2-fix-physics
   forkId: ""
   forkVersion: ""
-  time: 02/25/2026 12:06:45
-  entityCount: 38
+  time: 03/12/2026 10:11:34
+  entityCount: 39
 maps:
 - 1
 grids:
@@ -78,10 +78,31 @@ entities:
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
+      inherent: True
+      enabled: True
     - type: DecalGrid
       chunkCollection:
         version: 2
         nodes: []
+    - type: MapAtmosphere
+      space: False
+      mixture:
+        volume: 2500
+        immutable: True
+        temperature: 293.15
+        moles:
+        - 21.8124
+        - 81.1594
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
     - type: GridAtmosphere
       version: 2
       data:
@@ -93,7 +114,7 @@ entities:
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: 1.1941843,-1.5094545
+      pos: 1.3380296,-1.647059
       parent: 2
     - type: Fixtures
       fixtures: {}
@@ -112,6 +133,13 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 0.70269585,-2.3210986
+      parent: 2
+- proto: RMCVehicleTankAmmoLoader
+  entities:
+  - uid: 38
+    components:
+    - type: Transform
+      pos: 1.340075,-1.3274913
       parent: 2
 - proto: RMCVehicleInteriorExtinguisher
   entities:

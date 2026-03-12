@@ -29,6 +29,9 @@
   components:
   - type: Transform
     anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
 
 - type: entity
   parent: RMCVehicleViewport
@@ -103,3 +106,4 @@
   - type: Sprite
     state: viewport_door
     drawdepth: Overdoors
+

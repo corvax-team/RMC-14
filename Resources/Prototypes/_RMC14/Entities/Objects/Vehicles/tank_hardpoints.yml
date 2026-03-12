@@ -603,7 +603,7 @@
   - type: GunFireArc
     arc: 120
   - type: RefillableByBulletBox
-    bulletType: RMCVehicleAmmoBoxGrenadeLauncher
+    bulletType: RMCVehicleAmmoBoxSmokeLauncher
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
@@ -962,7 +962,7 @@
   - type: GunFireArc
     arc: 360
   - type: RefillableByBulletBox
-    bulletType: RMCFlarePackAmmo
+    bulletType: RMCVehicleAmmoBoxFlareLauncher
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true

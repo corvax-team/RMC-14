@@ -6,7 +6,6 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -20,7 +19,6 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class RMCVehiclePortGunSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
@@ -28,7 +26,6 @@ public sealed class RMCVehiclePortGunSystem : EntitySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly RMCVehicleSystem _vehicleSystem = default!;
     [Dependency] private readonly RMCVehicleViewToggleSystem _viewToggle = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
@@ -40,8 +37,6 @@ public sealed class RMCVehiclePortGunSystem : EntitySystem
         SubscribeLocalEvent<VehiclePortGunControllerComponent, InteractUsingEvent>(OnPortGunInteractUsing);
         SubscribeLocalEvent<VehiclePortGunControllerComponent, ExaminedEvent>(OnPortGunExamined);
         SubscribeLocalEvent<VehiclePortGunControllerComponent, GetVerbsEvent<AlternativeVerb>>(OnPortGunVerbs);
-        SubscribeLocalEvent<VehiclePortGunControllerComponent, BoundUIOpenedEvent>(OnPortGunUiOpened);
-        SubscribeLocalEvent<VehiclePortGunControllerComponent, RMCVehiclePortGunEjectMessage>(OnPortGunUiEject);
 
         SubscribeLocalEvent<VehiclePortGunComponent, ComponentShutdown>(OnPortGunShutdown);
         SubscribeLocalEvent<VehiclePortGunComponent, GunShotEvent>(OnPortGunShot);
@@ -113,8 +108,6 @@ public sealed class RMCVehiclePortGunSystem : EntitySystem
             _viewToggle.EnableViewToggle(args.User, vehicle, ent.Owner, insideTarget: null, isOutside: true);
         }
 
-        _ui.OpenUi(ent.Owner, RMCVehiclePortGunUiKey.Key, args.User);
-        UpdatePortGunUi(ent.Owner, gunUid);
         args.Handled = true;
     }
 
@@ -149,12 +142,7 @@ public sealed class RMCVehiclePortGunSystem : EntitySystem
 
         if (_itemSlots.TryInsert(gunUid, magSlot, args.Used, args.User))
         {
-            UpdatePortGunUi(ent.Owner, gunUid);
             args.Handled = true;
-        }
-        else if (ejected)
-        {
-            UpdatePortGunUi(ent.Owner, gunUid);
         }
     }
 
@@ -171,10 +159,6 @@ public sealed class RMCVehiclePortGunSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!TryGetControllerForGun(ent.Owner, out var controller))
-            return;
-
-        UpdatePortGunUi(controller, ent.Owner);
     }
 
     private void OnPortGunContainerInserted(Entity<VehiclePortGunComponent> ent, ref EntInsertedIntoContainerMessage args)
@@ -182,10 +166,6 @@ public sealed class RMCVehiclePortGunSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!TryGetControllerForGun(ent.Owner, out var controller))
-            return;
-
-        UpdatePortGunUi(controller, ent.Owner);
     }
 
     private void OnPortGunContainerRemoved(Entity<VehiclePortGunComponent> ent, ref EntRemovedFromContainerMessage args)
@@ -193,10 +173,6 @@ public sealed class RMCVehiclePortGunSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!TryGetControllerForGun(ent.Owner, out var controller))
-            return;
-
-        UpdatePortGunUi(controller, ent.Owner);
     }
 
     private void OnPortGunOperatorShutdown(Entity<VehiclePortGunOperatorComponent> ent, ref ComponentShutdown args)
@@ -251,51 +227,10 @@ public sealed class RMCVehiclePortGunSystem : EntitySystem
         AlternativeVerb ejectVerb = new()
         {
             Text = Loc.GetString("rmc-vehicle-portgun-eject"),
-            Act = () =>
-            {
-                if (_itemSlots.TryEjectToHands(gun, slot, user, excludeUserAudio: true))
-                    UpdatePortGunUi(controller, gun);
-            },
+            Act = () => _itemSlots.TryEjectToHands(gun, slot, user, excludeUserAudio: true),
             Priority = 2,
         };
         args.Verbs.Add(ejectVerb);
-    }
-
-    private void OnPortGunUiOpened(Entity<VehiclePortGunControllerComponent> ent, ref BoundUIOpenedEvent args)
-    {
-        if (!Equals(args.UiKey, RMCVehiclePortGunUiKey.Key))
-            return;
-
-        if (!TryGetGunFromController(ent, out var gunUid))
-            return;
-
-        UpdatePortGunUi(ent.Owner, gunUid);
-    }
-
-    private void OnPortGunUiEject(Entity<VehiclePortGunControllerComponent> ent, ref RMCVehiclePortGunEjectMessage args)
-    {
-        if (!Equals(args.UiKey, RMCVehiclePortGunUiKey.Key))
-            return;
-
-        if (args.Actor == default || !Exists(args.Actor))
-            return;
-
-        if (!TryGetGunFromController(ent, out var gunUid))
-            return;
-
-        if (!TryComp(gunUid, out VehiclePortGunComponent? portGun) || portGun.Operator != args.Actor)
-            return;
-
-        if (!TryComp(gunUid, out ItemSlotsComponent? gunSlots) ||
-            !_itemSlots.TryGetSlot(gunUid, "gun_magazine", out var magSlot, gunSlots))
-        {
-            return;
-        }
-
-        if (magSlot.HasItem)
-            _itemSlots.TryEjectToHands(gunUid, magSlot, args.Actor, excludeUserAudio: true);
-
-        UpdatePortGunUi(ent.Owner, gunUid);
     }
 
     private bool TryGetPortGun(
@@ -373,59 +308,6 @@ public sealed class RMCVehiclePortGunSystem : EntitySystem
         return true;
     }
 
-    private bool TryGetControllerForGun(EntityUid gunUid, out EntityUid controller)
-    {
-        controller = default;
-
-        if (!_container.TryGetContainingContainer((gunUid, null), out var container))
-            return false;
-
-        var vehicle = container.Owner;
-
-        var query = EntityQueryEnumerator<VehiclePortGunControllerComponent, TransformComponent>();
-        while (query.MoveNext(out var controllerUid, out var controllerComp, out _))
-        {
-            if (!_vehicleSystem.TryGetVehicleFromInterior(controllerUid, out var vehicleUid) || vehicleUid == null)
-                continue;
-
-            if (vehicleUid.Value != vehicle)
-                continue;
-
-            if (!TryGetGunFromController((controllerUid, controllerComp), out var controllerGun))
-                continue;
-
-            if (controllerGun != gunUid)
-                continue;
-
-            controller = controllerUid;
-            return true;
-        }
-
-        return false;
-    }
-
-    private void UpdatePortGunUi(EntityUid controller, EntityUid gunUid)
-    {
-        if (_net.IsClient)
-            return;
-
-        if (!TryComp(gunUid, out GunComponent? _))
-            return;
-
-        var ammoEv = new GetAmmoCountEvent();
-        RaiseLocalEvent(gunUid, ref ammoEv);
-
-        var hasMagazine = false;
-        if (TryComp(gunUid, out ItemSlotsComponent? slots) &&
-            _itemSlots.TryGetSlot(gunUid, "gun_magazine", out var magSlot, slots))
-        {
-            hasMagazine = magSlot.HasItem;
-        }
-
-        var state = new RMCVehiclePortGunUiState(ammoEv.Count, ammoEv.Capacity, hasMagazine);
-        _ui.SetUiState(controller, RMCVehiclePortGunUiKey.Key, state);
-    }
-
     private void ClearOperator(EntityUid user, VehiclePortGunOperatorComponent? operatorComp = null)
     {
         if (!Resolve(user, ref operatorComp, logMissing: false))
@@ -440,14 +322,10 @@ public sealed class RMCVehiclePortGunSystem : EntitySystem
         }
 
         var vehicle = operatorComp.Vehicle;
-        var controller = operatorComp.Controller;
         RemCompDeferred<VehiclePortGunOperatorComponent>(user);
 
-        if (controller != null)
-        {
-            _ui.CloseUi(controller.Value, RMCVehiclePortGunUiKey.Key, user);
-            _viewToggle.DisableViewToggle(user, controller.Value);
-        }
+        if (operatorComp.Controller != null)
+            _viewToggle.DisableViewToggle(user, operatorComp.Controller.Value);
 
         if (_net.IsClient)
             return;
