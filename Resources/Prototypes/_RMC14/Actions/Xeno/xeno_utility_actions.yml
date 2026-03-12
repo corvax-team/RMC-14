@@ -433,10 +433,13 @@
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoKingTailSmash
-  name: "Королевский удар хвостом"
-  description: "Король с силой наносит круговую атаку, поражая всех вокруг."
-  icon:
-    sprite: Interface/Actions/king_tail_smash.rsi
-    state: icon
-  useDelay: 18
-  event: !type:XenoKingTailSmashEvent
+  name: Королевский удар хвостом
+  description: Король с силой наносит круговую атаку, поражая всех вокруг.
+  components:
+  - type: Action
+    icon:
+      sprite: Interface/Actions/king_tail_smash.rsi
+      state: icon
+    useDelay: 18
+  - type: InstantAction
+    event: !type:XenoKingTailSmashEvent
