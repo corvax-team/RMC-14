@@ -1,12 +1,11 @@
 using System;
 using Robust.Shared.Serialization;
-using Robust.Shared.Serialization.Manager.Attributes;
 
 namespace Content.Shared._RMC14.Intel.Tech;
 
-[DataDefinition, NetSerializable, Serializable]
-public sealed partial class TechUnlockVehicleEvent
+[Serializable, NetSerializable]
+public sealed class TechUnlockVehicleEvent
 {
-    [DataField]
-    public string Unlock = string.Empty;
+    [DataField("unlock")]
+    public string Unlock = null!;
 }
