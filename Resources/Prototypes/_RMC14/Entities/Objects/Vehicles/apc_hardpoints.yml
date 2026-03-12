@@ -55,9 +55,9 @@
   - type: BallisticAmmoProvider
     cycleable: false
     proto: CMCartridgeSentry10x50mm
-    capacity: 200
+    capacity: 500
   - type: RMCVehicleHardpointAmmo
-    magazineSize: 200
+    magazineSize: 500
     maxStoredMagazines: 1
   - type: GunFireArc
     arc: 180
@@ -169,7 +169,7 @@
   - type: ShootAtFixedPoint
   - type: BallisticAmmoProvider
     cycleable: false
-    capacity: 8
+    capacity: 10
     whitelist:
       tags:
       - Flare
@@ -177,8 +177,8 @@
       - RMCFlareCAS
     proto: CMFlare
   - type: RMCVehicleHardpointAmmo
-    magazineSize: 8
-    maxStoredMagazines: 2
+    magazineSize: 10
+    maxStoredMagazines: 3
   - type: GunFireArc
     arc: 360
   - type: RefillableByBulletBox

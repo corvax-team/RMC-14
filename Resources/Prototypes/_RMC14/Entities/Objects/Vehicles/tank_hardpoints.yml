@@ -253,7 +253,7 @@
     capacity: 4
   - type: RMCVehicleHardpointAmmo
     magazineSize: 4
-    maxStoredMagazines: 2
+    maxStoredMagazines: 3
   - type: GunFireArc
     arc: 120
   - type: RefillableByBulletBox
@@ -456,9 +456,9 @@
   - type: BallisticAmmoProvider
     cycleable: false
     proto: RMCVehicleCartridgeDragonFlame
-    capacity: 150
+    capacity: 60
   - type: RMCVehicleHardpointAmmo
-    magazineSize: 150
+    magazineSize: 60
     maxStoredMagazines: 1
   - type: GunFireArc
     arc: 120
@@ -596,10 +596,10 @@
   - type: BallisticAmmoProvider
     cycleable: false
     proto: CMGrenadeHighExplosive
-    capacity: 3
+    capacity: 10
   - type: RMCVehicleHardpointAmmo
-    magazineSize: 3
-    maxStoredMagazines: 10
+    magazineSize: 10
+    maxStoredMagazines: 3
   - type: GunFireArc
     arc: 120
   - type: RefillableByBulletBox
@@ -664,7 +664,7 @@
     capacity: 5
   - type: RMCVehicleHardpointAmmo
     magazineSize: 5
-    maxStoredMagazines: 3
+    maxStoredMagazines: 1
   - type: GunFireArc
     arc: 120
   - type: RefillableByBulletBox
@@ -795,10 +795,10 @@
   - type: BallisticAmmoProvider
     cycleable: false
     proto: RMCVehicleCartridgeSentry10x50mm
-    capacity: 100
+    capacity: 500
   - type: RMCVehicleHardpointAmmo
-    magazineSize: 100
-    maxStoredMagazines: 3
+    magazineSize: 500
+    maxStoredMagazines: 2
   - type: GunFireArc
     arc: 180
   - type: RefillableByBulletBox
@@ -949,7 +949,7 @@
   - type: ShootAtFixedPoint
   - type: BallisticAmmoProvider
     cycleable: false
-    capacity: 8
+    capacity: 10
     whitelist:
       tags:
       - Flare
@@ -957,8 +957,8 @@
       - RMCFlareCAS
     proto: CMFlare
   - type: RMCVehicleHardpointAmmo
-    magazineSize: 8
-    maxStoredMagazines: 2
+    magazineSize: 10
+    maxStoredMagazines: 3
   - type: GunFireArc
     arc: 360
   - type: RefillableByBulletBox

@@ -23,8 +23,8 @@
           Full: { state: frontal_0, visible: true }
   - type: Appearance
   - type: BulletBox
-    amount: 200
-    max: 200
+    amount: 500
+    max: 500
     bulletType: RMCVehicleAmmoBoxFrontal
   - type: Tag
     tags:
@@ -50,8 +50,8 @@
           High: { state: frontal_0, visible: true }
           Full: { state: frontal_0, visible: true }
   - type: BulletBox
-    amount: 200
-    max: 200
+    amount: 500
+    max: 500
     bulletType: RMCVehicleAmmoBoxFrontal
 
 - type: entity
@@ -74,8 +74,8 @@
           High: { state: cupola_0, visible: true }
           Full: { state: cupola_0, visible: true }
   - type: BulletBox
-    amount: 400
-    max: 400
+    amount: 500
+    max: 500
     bulletType: RMCVehicleAmmoBoxCupola
 
 - type: entity
@@ -98,8 +98,8 @@
           High: { state: glauncher_0, visible: true }
           Full: { state: glauncher_0, visible: true }
   - type: BulletBox
-    amount: 120
-    max: 120
+    amount: 10
+    max: 10
     bulletType: RMCVehicleAmmoBoxGrenadeLauncher
 
 - type: entity
@@ -116,14 +116,14 @@
     visuals:
       enum.BulletBoxLayers.Fill:
         enum.BulletBoxLayers.Fill:
-          Empty: { state: ltbcannon_4, visible: true }
-          Low: { state: ltbcannon_3, visible: true }
+          Empty: { state: ltbcannon_0, visible: true }
+          Low: { state: ltbcannon_1, visible: true }
           Medium: { state: ltbcannon_2, visible: true }
-          High: { state: ltbcannon_1, visible: true }
-          Full: { state: ltbcannon_0, visible: true }
+          High: { state: ltbcannon_3, visible: true }
+          Full: { state: ltbcannon_4, visible: true }
   - type: BulletBox
-    amount: 60
-    max: 60
+    amount: 4
+    max: 4
     bulletType: RMCVehicleAmmoBoxLTBCannon
 
 - type: entity
@@ -146,8 +146,8 @@
           High: { state: quad_rocket, visible: true }
           Full: { state: quad_rocket, visible: true }
   - type: BulletBox
-    amount: 90
-    max: 90
+    amount: 5
+    max: 5
     bulletType: RMCVehicleAmmoBoxRocketLauncher
 
 - type: entity
@@ -170,8 +170,8 @@
           High: { state: ace_autocannon, visible: true }
           Full: { state: ace_autocannon, visible: true }
   - type: BulletBox
-    amount: 60
-    max: 60
+    amount: 40
+    max: 40
     bulletType: RMCVehicleAmmoBoxAceAutocannon
 
 - type: entity
@@ -194,8 +194,8 @@
           High: { state: drgn_flametank, visible: true }
           Full: { state: drgn_flametank, visible: true }
   - type: BulletBox
-    amount: 200
-    max: 200
+    amount: 60
+    max: 60
     bulletType: RMCVehicleAmmoBoxDragonFlameTank
 
 - type: entity
@@ -218,8 +218,8 @@
           High: { state: ltaa, visible: true }
           Full: { state: ltaa, visible: true }
   - type: BulletBox
-    amount: 200
-    max: 200
+    amount: 500
+    max: 500
     bulletType: RMCVehicleAmmoBoxLTAA
 
 - type: entity

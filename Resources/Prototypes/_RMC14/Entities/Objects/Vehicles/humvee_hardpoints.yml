@@ -115,10 +115,10 @@
   - type: BallisticAmmoProvider
     cycleable: false
     proto: RMCVehicleCartridgeRERotaryCannon10x50mm
-    capacity: 200
+    capacity: 500
   - type: RMCVehicleHardpointAmmo
-    magazineSize: 200
-    maxStoredMagazines: 1
+    magazineSize: 500
+    maxStoredMagazines: 2
   - type: GunFireArc
     arc: 180
   - type: RefillableByBulletBox
