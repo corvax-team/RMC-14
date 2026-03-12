@@ -93,6 +93,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
     overlayState: humveecannon_0
+    fireWhileRotatingGraceDegrees: 20
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
@@ -124,7 +125,7 @@
     bulletType: RMCVehicleAmmoBoxFrontal
   - type: GunMuzzleOffset
     offset: "0,0"
-    muzzleOffset: "0,-1.2"
+    muzzleOffset: "0,0"
     useAimDirection: true
     useContainerOwner: false
   - type: RMCHardpointVisual
