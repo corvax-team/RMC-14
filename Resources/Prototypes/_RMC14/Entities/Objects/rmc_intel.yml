@@ -228,7 +228,7 @@
           cost: 5
           events:
           - !type:TechUnlockVehicleEvent
-            unlock: RMCVehicleHumveeARC
+            Unlock: RMCVehicleHumveeARC
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: humvee
