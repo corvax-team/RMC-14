@@ -115,11 +115,43 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         fixtureQ = GetEntityQuery<FixturesComponent>();
         SubscribeLocalEvent<GridVehicleMoverComponent, ComponentStartup>(OnMoverStartup);
         SubscribeLocalEvent<GridVehicleMoverComponent, ComponentShutdown>(OnMoverShutdown);
+        SubscribeLocalEvent<GridVehicleMoverComponent, EntParentChangedMessage>(OnMoverParentChanged);
+        SubscribeLocalEvent<GridVehicleMoverComponent, MoveEvent>(OnMoverMove);
+        SubscribeLocalEvent<GridVehicleMoverComponent, ReAnchorEvent>(OnMoverReAnchor);
         SubscribeLocalEvent<GridVehicleMoverComponent, VehicleCanRunEvent>(OnMoverCanRun);
         SubscribeLocalEvent<GridVehicleMoverComponent, PreventCollideEvent>(OnMoverPreventCollide);
     }
 
     private void OnMoverStartup(Entity<GridVehicleMoverComponent> ent, ref ComponentStartup args)
+    {
+        SyncMoverToCurrentGrid(ent, centerOnTile: true);
+    }
+
+    private void OnMoverShutdown(Entity<GridVehicleMoverComponent> ent, ref ComponentShutdown args)
+    {
+        _hardState.Remove(ent.Owner);
+        _movementAccumulator.Remove(ent.Owner);
+    }
+
+    private void OnMoverParentChanged(Entity<GridVehicleMoverComponent> ent, ref EntParentChangedMessage args)
+    {
+        SyncMoverToCurrentGrid(ent, centerOnTile: false);
+    }
+
+    private void OnMoverMove(Entity<GridVehicleMoverComponent> ent, ref MoveEvent args)
+    {
+        if (!args.ParentChanged)
+            return;
+
+        SyncMoverToCurrentGrid(ent, centerOnTile: false);
+    }
+
+    private void OnMoverReAnchor(Entity<GridVehicleMoverComponent> ent, ref ReAnchorEvent args)
+    {
+        SyncMoverToCurrentGrid(ent, centerOnTile: false);
+    }
+
+    private void SyncMoverToCurrentGrid(Entity<GridVehicleMoverComponent> ent, bool centerOnTile)
     {
         var uid = ent.Owner;
         var xform = Transform(uid);
@@ -132,23 +164,20 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         ent.Comp.CurrentTile = tile;
         ent.Comp.TargetTile = tile;
-        ent.Comp.Position = new Vector2(tile.X + 0.5f, tile.Y + 0.5f);
+        ent.Comp.Position = centerOnTile
+            ? new Vector2(tile.X + 0.5f, tile.Y + 0.5f)
+            : coords.Position;
         ent.Comp.CurrentSpeed = 0f;
         ent.Comp.NextPushTime = TimeSpan.Zero;
         ent.Comp.NextTurnTime = TimeSpan.Zero;
         ent.Comp.InPlaceTurnBlockUntil = TimeSpan.Zero;
         ent.Comp.IsCommittedToMove = false;
         ent.Comp.IsPushMove = false;
+        ent.Comp.IsMoving = false;
         _hardState[uid] = true;
         _movementAccumulator[uid] = 0f;
 
         Dirty(uid, ent.Comp);
-    }
-
-    private void OnMoverShutdown(Entity<GridVehicleMoverComponent> ent, ref ComponentShutdown args)
-    {
-        _hardState.Remove(ent.Owner);
-        _movementAccumulator.Remove(ent.Owner);
     }
 
     private void OnMoverCanRun(Entity<GridVehicleMoverComponent> ent, ref VehicleCanRunEvent args)
@@ -218,7 +247,11 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             var steps = 0;
             while (accumulator >= MovementFixedStep && steps < MaxFixedStepsPerFrame)
             {
-                UpdateMovement(uid, mover, vehicle, grid, gridComp, inputDir, pushing, MovementFixedStep);
+                var currentXform = Transform(uid);
+                if (currentXform.GridUid is not { } currentGrid || !gridQ.TryComp(currentGrid, out var currentGridComp))
+                    break;
+
+                UpdateMovement(uid, mover, vehicle, currentGrid, currentGridComp, inputDir, pushing, MovementFixedStep);
                 accumulator -= MovementFixedStep;
                 steps++;
             }
