@@ -1,12 +1,12 @@
-rmc-cassette-play = You press { THE($player) } 'play' button, { $current } of { $total }
-rmc-cassette-playing = Now playing { $current } of { $total }
-rmc-cassette-pause = You pause { THE($player) }
-rmc-cassette-resume = Resuming { $current } of { $total }
-rmc-cassette-change = You change the song, { $current } of { $total }
-rmc-cassette-restart = You restart the song, { $current } of { $total }
-rmc-cassette-tape-examine = It has [color=lightblue]{ $total }[/color] tracks.
-rmc-cassette-tape-custom = [color=cyan]Use it while in your hand to choose a custom track to play.[/color]
-rmc-cassette-tape-custom-choose = Choose a track
-rmc-cassette-player-examine-tape = It has a { $tape } inside.
-rmc-cassette-player-examine-none = It doesn't have a cassette inside.
-rmc-cassette-player-eject = Eject tape
+rmc-cassette-play = Вы нажимаете кнопку 'воспроизвести' на { THE($player) }, { $current } из { $total }
+rmc-cassette-playing = Сейчас играет { $current } из { $total }
+rmc-cassette-pause = Вы ставите на паузу { THE($player) }
+rmc-cassette-resume = Продолжается { $current } из { $total }
+rmc-cassette-change = Вы меняете песню, { $current } из { $total }
+rmc-cassette-restart = Вы перезапускаете песню, { $current } из { $total }
+rmc-cassette-tape-examine = В ней [color=lightblue]{ $total }[/color] трэков.
+rmc-cassette-tape-custom = [color=cyan]Используйте её держа в руке, чтобы выбрать пользовательскую дорожку для воспроизведения.[/color]
+rmc-cassette-tape-custom-choose = Выберите трэк
+rmc-cassette-player-examine-tape = В нем находится { $tape }.
+rmc-cassette-player-examine-none = В нем нет кассеты.
+rmc-cassette-player-eject = Извлечь кассету

@@ -1,2 +1,2 @@
-rmc-standing-stand-when-able = You will now stand up as soon as you are able to.
-rmc-standing-keep-lying = You will now try to stay lying down on the floor.
+rmc-standing-stand-when-able = Теперь вы будете вставать, как только сможете.
+rmc-standing-keep-lying = Сейчас вы попытаетесь остаться лежать на полу.
