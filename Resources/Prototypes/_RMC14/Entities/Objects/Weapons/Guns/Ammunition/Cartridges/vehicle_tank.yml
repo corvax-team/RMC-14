@@ -58,6 +58,14 @@
     muzzleFlash: MuzzleFlashEffectVehicleOver
     muzzleFlashOffset: 1.2, 0
 
+- type: entity
+  parent: CMCartridge10x20mmAP
+  id: RMCVehicleCartridgeLTAAAP
+  name: cartridge (10x20mm-APC)
+  components:
+  - type: CartridgeAmmo
+    proto: RMCVehicleBulletLTAAAP
+
 # Projectiles
 - type: entity
   id: RMCVehicleLTBCannonImpact
@@ -123,7 +131,7 @@
     damageArea: 2.5
     falloffDistance: 1.5
   - type: CMArmorPiercing
-    amount: 40
+    amount: 30
   - type: IgnorePredictionHide
 
 - type: entity
@@ -169,6 +177,19 @@
         mask:
         - Impassable
         - BulletImpassable
+
+- type: entity
+  parent: Bullet10x20mmAP
+  id: RMCVehicleBulletLTAAAP
+  name: bullet (10x20mm-APC)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: CMArmorPiercing
+    amount: 30
 
 - type: entity
   id: RMCVehicleDragonFlameImpact

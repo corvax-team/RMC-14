@@ -223,6 +223,65 @@
     bulletType: RMCVehicleAmmoBoxLTAA
 
 - type: entity
+  parent: CMCartridgeSentry10x50mm
+  id: RMCVehicleCartridgeSentry10x50mm
+  name: cartridge (10x50mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: CMBulletSentry10x50mm
+    muzzleFlash: MuzzleFlashEffectVehicleOver
+    muzzleFlashOffset: 1.2, 0
+
+- type: entity
+  parent: CMCartridgeSentry10x50mm
+  id: RMCVehicleCartridgeBoyarsDualCannon10x50mm
+  name: cartridge (10x50mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: RMCVehicleBulletBoyarsDualCannon10x50mm
+    muzzleFlash: MuzzleFlashEffectVehicleOver
+    muzzleFlashOffset: 1.2, 0
+
+- type: entity
+  parent: CMCartridgeSentry10x50mm
+  id: RMCVehicleCartridgeRERotaryCannon10x50mm
+  name: cartridge (10x50mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: RMCVehicleBulletRERotaryCannon10x50mm
+    muzzleFlash: MuzzleFlashEffectVehicleOver
+    muzzleFlashOffset: 1.2, 0
+
+- type: entity
+  parent: CMBulletSentry10x50mm
+  id: RMCVehicleBulletBoyarsDualCannon10x50mm
+  name: bullet (10x50mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 50
+  - type: CMArmorPiercing
+    amount: 15
+
+- type: entity
+  parent: CMBulletSentry10x50mm
+  id: RMCVehicleBulletRERotaryCannon10x50mm
+  name: bullet (10x50mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 15
+
+- type: entity
   parent: RMCRocket84mmAntiArmor
   id: RMCVehicleRocket84mmAntiArmor
   categories: [ HideSpawnMenu ]
@@ -232,11 +291,30 @@
     deleteOnSpawn: false
 
 - type: entity
-  parent: RMCProjectileRocket84mmAntiArmor
+  parent: RMCProjectileRocket84mm
   id: RMCVehicleProjectileRocket84mmAntiArmor
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Blunt: 160
+        Heat: 150
     maxFixedRange: 32
+  - type: CMArmorPiercing
+    amount: 50
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/m5spec_projectiles.rsi
+    layers:
+    - state: m5_84mm_ap
+  - type: Explosive
+    explosionType: RMC
+    maxIntensity: 10
+    intensitySlope: 5
+    totalIntensity: 35
+    maxTileBreak: 0
+  - type: RMCKnockOutOnCollide
+    paralyzeTime: 6
   - type: TriggerOnFixedDistanceStop
     delay: 0

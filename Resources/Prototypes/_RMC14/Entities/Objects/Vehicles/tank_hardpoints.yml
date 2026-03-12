@@ -333,7 +333,7 @@
     accuracyMultiplierUnwielded: 4
   - type: BallisticAmmoProvider
     cycleable: false
-    proto: CMCartridge10x20mmAP
+    proto: RMCVehicleCartridgeLTAAAP
     capacity: 500
   - type: RMCVehicleHardpointAmmo
     magazineSize: 500

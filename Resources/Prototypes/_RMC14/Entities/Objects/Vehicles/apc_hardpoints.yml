@@ -98,7 +98,7 @@
     cameraRecoilScalar: 0
   - type: BallisticAmmoProvider
     cycleable: false
-    proto: CMCartridgeSentry10x50mm
+    proto: RMCVehicleCartridgeBoyarsDualCannon10x50mm
     capacity: 60
   - type: RMCVehicleHardpointAmmo
     magazineSize: 60
