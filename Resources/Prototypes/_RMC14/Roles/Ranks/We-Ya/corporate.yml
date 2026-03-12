@@ -6,25 +6,25 @@
 
 - type: rank
   id: RMCRankWeYaJuniorExecutive
-  name: Младший чиновник
-  prefix: Мл. Чин.
+  name: Младший Администратор
+  prefix: Мл. Адм.
   paygrade: КОРП2
 
 - type: rank
   id: RMCRankWeYaExecutive
-  name: Чиновник
-  prefix: Чин.
+  name: Администратор
+  prefix: Адм.
   paygrade: КОРП3
 
 - type: rank
   id: RMCRankWeYaSeniorExecutive
-  name: Старший Чиновник
-  prefix: Ст. Чин.
+  name: Старший Администратор
+  prefix: Ст. Адм.
   paygrade: КОРП4
 
 - type: rank
   id: RMCRankWeYaExecutiveSpecialist
-  name: Административнй специалист
+  name: Административный специалист
   prefix: Адм. Спец.
   paygrade: КОРП5
 
@@ -48,8 +48,8 @@
 
 - type: rank
   id: RMCRankWeYaChiefExecutive
-  name: Старший Администратор
-  prefix: Ст. Адм.
+  name: Главный Администратор
+  prefix: Гл. Адм.
   paygrade: КОРП9
 
 - type: rank

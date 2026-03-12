@@ -22,6 +22,6 @@ ent-RMCPodDoorButtonWeYaOfficeQuarterWindows = ставни окон кормы
 ent-RMCPodDoorButtonSPP = { ent-RMCPodDoorButton }
     .suffix = Locked, SPP
     .desc = { ent-RMCPodDoorButton.desc }
-ent-RMCPodDoorButtonHybrisaCavesLockdown = Caves Lockdown
+ent-RMCPodDoorButtonHybrisaCavesLockdown = Локдаун пещер
     .suffix = Hybrisa
     .desc = { ent-RMCPodDoorButton.desc }
