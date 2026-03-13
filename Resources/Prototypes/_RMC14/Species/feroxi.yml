@@ -12,8 +12,7 @@
   skinColoration: Hues
   maleFirstNames: names_feroxi_male
   femaleFirstNames: names_feroxi_female
-  maleLastNames: names_feroxi_last
-  femaleLastNames: names_feroxi_last
+  lastNames: names_feroxi_last
 
 - type: speciesBaseSprites
   id: MobFeroxiSprites

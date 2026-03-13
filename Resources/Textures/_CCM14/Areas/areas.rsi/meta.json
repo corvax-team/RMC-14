@@ -8,58 +8,49 @@
   },
   "states": [
     {
-      "name": "red"
+        "name": "red"
     },
     {
-      "name": "yellow"
+        "name": "yellow"
     },
     {
-      "name": "green"
+        "name": "green"
     },
     {
-      "name": "west"
+        "name": "west"
     },
     {
-      "name": "west_1"
+        "name": "west_open"
     },
     {
-      "name": "west_2"
+        "name": "east"
     },
     {
-      "name": "west_3"
+        "name": "east_open"
     },
     {
-      "name": "west_open"
+        "name": "northeast"
     },
     {
-      "name": "east"
+        "name": "northeast_open"
     },
     {
-      "name": "east_open"
+        "name": "north"
     },
     {
-      "name": "northeast"
+        "name": "fob"
     },
     {
-      "name": "northeast_open"
+        "name": "fob_1"
     },
     {
-      "name": "north"
+        "name": "fob_2"
     },
     {
-      "name": "fob"
+        "name": "blue"
     },
     {
-      "name": "fob_1"
-    },
-    {
-      "name": "fob_2"
-    },
-    {
-      "name": "blue"
-    },
-    {
-      "name": "blue_x"
+        "name": "blue_x"
     }
   ]
 }

@@ -6,8 +6,8 @@
   - type: Sprite
     sprite: _CCM14/Structures/Doors/Airlocks/Double/cargo_solid.rsi
   - type: Occluder
-#  - type: PaintableAirlock
-#    department: CMCargo
+  - type: PaintableAirlock
+    department: CMCargo
   - type: AccessReader
     access: [["CMAccessRequisitions"]]
 
@@ -18,7 +18,7 @@
   components:
   - type: Sprite
     sprite: _CCM14/Structures/Doors/Airlocks/Double/cargo_glass.rsi
-#  - type: PaintableAirlock
-#    department: CMCargo
+  - type: PaintableAirlock
+    department: CMCargo
   - type: AccessReader
     access: [["CMAccessRequisitions"]]

@@ -8,7 +8,7 @@ namespace Content.Shared._CCM.CommunicationsConsole.Components;
 public sealed partial class CCMCommunicationsConsoleComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntProtoId CrasherMarkerForERT = "CCMMarkerERTCrash";
+    public EntProtoId CrasherMarkerForERT = "CCMERTCrashMarkerComponent";
 
     [DataField, AutoNetworkedField]
     public bool ERTCalled { get; set; } = false;

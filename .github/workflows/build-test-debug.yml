@@ -11,12 +11,12 @@ on:
 jobs:
   build:
     if: github.actor != 'RounyBot' && github.event.pull_request.draft == false
-#    strategy:
-#      fail-fast: true
-#      matrix:
-#        os: [ubuntu-latest]
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
 
-    runs-on: self-hosted
+    runs-on: ${{ matrix.os }}
 
     steps:
     - name: Checkout Master
@@ -57,7 +57,7 @@ jobs:
     name: Build & Test Debug
     needs:
       - build
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: CI succeeded
         run: exit 0

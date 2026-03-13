@@ -8,6 +8,8 @@
     - type: FaxMachine
       name: "Commander"
       receiveNukeCodes: true
+    - type: StealTarget
+      stealGroup: FaxMachineCommander
     - type: Sprite
       sprite: _RMC14/Structures/Machines/fax_machine.rsi
     - type: Corrodible

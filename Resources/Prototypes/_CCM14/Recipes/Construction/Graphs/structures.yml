@@ -7,6 +7,9 @@
   targetNode: gabion
   category: construction-category-cm-structures
   description: A quickly erected fortification filled with sand or earth.
+  icon:
+    sprite: _CCM14/Structures/Walls/gabion.rsi
+    state: full
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
