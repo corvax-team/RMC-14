@@ -96,23 +96,23 @@ rmc-job-prefix-pmc-pve-force-command = КомВой
 
 rmc-ghost-role-information-corp-exec-description = Вы - корпоративный чиновник. Ваша задача — поддерживать и отстаивать интересы своей компании.
 
-rmc-ghost-name-corp-exec-supervisor = Руководитель корп управления (Нейтральный)
-rmc-job-name-corp-exec-supervisor = Руководитель корп управления
+rmc-ghost-name-corp-exec-supervisor = VI Руководитель корп. управления (Нейтральный)
+rmc-job-name-corp-exec-supervisor = VI Руководитель корп. управления
 
-rmc-ghost-name-corp-exec-ass-man = Помощник корп менеджера (Нейтральный)
-rmc-job-name-corp-exec-ass-man = Помощник корп менеджера
+rmc-ghost-name-corp-exec-ass-man = VI Помощник корп. менеджера (Нейтральный)
+rmc-job-name-corp-exec-ass-man = VI Помощник корп. менеджера
 
-rmc-ghost-name-corp-exec-div-man = Менеджер корп подразделения (Нейтральный)
-rmc-job-name-corp-exec-div-man = Менеджер корпо подразделения
+rmc-ghost-name-corp-exec-div-man = VI Менеджер корп. подразделения (Нейтральный)
+rmc-job-name-corp-exec-div-man = VI Менеджер корп. подразделения
 
-rmc-ghost-name-corp-exec-chief = Генеральный директор (Нейтральный)
-rmc-job-name-corp-exec-chief = Генеральный директор
+rmc-ghost-name-corp-exec-chief = VI Генеральный директор (Нейтральный)
+rmc-job-name-corp-exec-chief = VI Генеральный директор
 
-rmc-ghost-name-corp-dep-director = Заместитель директора (Нейтральный)
-rmc-job-name-corp-dep-director = Заместитель директора
+rmc-ghost-name-corp-dep-director = VI Заместитель директора (Нейтральный)
+rmc-job-name-corp-dep-director = VI Заместитель директора
 
-rmc-ghost-name-corp-director = Директор (Нейтральный)
-rmc-job-name-corp-director = Директор
+rmc-ghost-name-corp-director = VI Директор Адм. крыла (Нейтральный)
+rmc-job-name-corp-director = VI Директор Адм. крыла
 
 # Corpses
 rmc-job-name-pmc-operator-corpse = Оператор ЧВК

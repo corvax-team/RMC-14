@@ -989,7 +989,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                     }
                 }
 
-                _marineAnnounce.AnnounceARESStaging(user, "The UNMC tactical map has been updated.", sound);
+                _marineAnnounce.AnnounceARESStaging(user, "Тактическая карта ККМП была обновлена.", sound);
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the marine tactical map for {ToPrettyString(mapId)}");
             }
 
@@ -999,7 +999,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 map.XenoLabels = new Dictionary<Vector2i, string>(labels);
                 map.LastUpdateXenoBlips = map.XenoBlips.ToDictionary();
                 map.LastUpdateXenoStructureBlips = map.XenoStructureBlips.ToDictionary();
-                _xenoAnnounce.AnnounceSameHive(user, "The Xenonid tactical map has been updated.", sound);
+                _xenoAnnounce.AnnounceSameHive(user, "Тактическая карта ксеноморфов была обновлена.", sound);
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the xenonid tactical map for {ToPrettyString(mapId)}");
             }
 

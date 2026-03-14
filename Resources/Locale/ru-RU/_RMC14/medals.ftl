@@ -8,7 +8,7 @@ rmc-medal-recipient = Получатель медали
 rmc-medal-recipient-prompt = Кого вы хотите наградить медалью?
 rmc-medal-type = Тип медали
 rmc-medal-type-prompt = Каким типом медали вы ходите наградить?
-rmc-medal-citation-prompt = What should the medal citation read?
+rmc-medal-citation-prompt = Что должно быть написано на медали?
 rmc-medal-awarded = Медаль вручена
 # Medal Errors
 rmc-medal-error-self-award = Вы не можете наградить себя медалью!

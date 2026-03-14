@@ -6,8 +6,8 @@ rmc-ghost-role-information-corp-exec-rules =
 
 rmc-ghost-role-information-corp-legal-description = Ваша задача - обеспечивать правовую защиту своей компании и её интересов.
 
-rmc-ghost-name-corp-exec-specialist-legal = Административный Специалист (Нейтральный)
-rmc-job-name-corp-exec-specialist-legal = Административный Специалист
+rmc-ghost-name-corp-exec-specialist-legal = VI Юридический специалист (Нейтральный)
+rmc-job-name-corp-exec-specialist-legal = VI Юридический специалист 
 
-rmc-ghost-name-corp-exec-supervisor-legal = Административный Супервайзер (Нейтральный)
-rmc-job-name-corp-exec-supervisor-legal = Административный Супервайзер
+rmc-ghost-name-corp-exec-supervisor-legal = VI Юридический Супервайзер (Нейтральный)
+rmc-job-name-corp-exec-supervisor-legal = VI Юридический Супервайзер
