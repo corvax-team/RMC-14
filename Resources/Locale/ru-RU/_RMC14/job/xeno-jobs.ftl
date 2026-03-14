@@ -39,11 +39,11 @@ CMJobXenoWarrior = Воин
 ccm-job-name-xeno-swarmer = Роевик
 CCMXenoSwarmer = Роевик
 # TODO RMC14
-department-CMXeno = Ксенониды
+department-CMXeno = Ксеноморфы
 cm-department-Xeno-description = ""
-cm-job-name-selectable-xenonid = Ксенонид
-CMXenoSelectableXeno = Ксенонид
+cm-job-name-selectable-xenonid = Ксеноморф
+CMXenoSelectableXeno = Ксеноморф
 cm-job-supervisors-queen = Королеве
-role-timer-xeno-roles = Ксенонид
+role-timer-xeno-roles = Ксеноморф
 role-timer-xeno-drones = трутни, и из них эволюционирующие
 role-timer-xeno-tier-three = касты третьего уровня
