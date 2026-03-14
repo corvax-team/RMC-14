@@ -605,14 +605,14 @@ public sealed partial class RMCHardpointMenu : FancyWindow
     {
         const float baseWidth = 450f;
         const float widthPerHardpoint = 30f;
-        const float baseHeight = 245f;
-        const float rowHeight = 20f;
+        const float baseHeight = 250f;
+        const float rowHeight = 54f;
 
         var targetWidth = baseWidth + hardpointCount * widthPerHardpoint;
         var targetHeight = baseHeight + hardpointCount * rowHeight;
 
-        if (!hasFrameIntegrity)
-            targetHeight -= 24f;
+        if (hasFrameIntegrity)
+            targetHeight += 34f;
 
         if (hasError)
             targetHeight += 24f;
@@ -620,9 +620,9 @@ public sealed partial class RMCHardpointMenu : FancyWindow
         var rootWidth = UserInterfaceManager.WindowRoot?.Size.X ?? 1400f;
         var rootHeight = UserInterfaceManager.WindowRoot?.Size.Y ?? 900f;
         var maxWidth = MathF.Max(baseWidth, rootWidth - 80f);
-        var maxHeight = MathF.Max(420f, rootHeight - 80f);
+        var maxHeight = MathF.Max(360f, rootHeight - 80f);
         var clampedWidth = Math.Clamp(targetWidth, baseWidth, maxWidth);
-        var clampedHeight = Math.Clamp(targetHeight, 420f, maxHeight);
+        var clampedHeight = Math.Clamp(targetHeight, 360f, maxHeight);
         var targetSize = new Vector2(clampedWidth, clampedHeight);
 
         if (SetSize != targetSize)

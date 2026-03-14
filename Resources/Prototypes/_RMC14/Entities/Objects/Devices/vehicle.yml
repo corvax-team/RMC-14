@@ -105,12 +105,8 @@
       hardpointType: Wheel
       insertDelay: 1.5
       whitelist:
-        tags:
-        - RMCVehicleHardpointVanWheel
-    - id: turret-1
-      hardpointType: Turret
-      required: false
-      insertDelay: 1.5
+        components:
+        - RMCVehicleWheelItem
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
@@ -250,12 +246,8 @@
       hardpointType: Wheel
       insertDelay: 1.5
       whitelist:
-        tags:
-        - RMCVehicleHardpointVanWheel
-    - id: turret-1
-      hardpointType: Turret
-      required: false
-      insertDelay: 1.5
+        components:
+        - RMCVehicleWheelItem
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
@@ -396,12 +388,8 @@
       hardpointType: Wheel
       insertDelay: 1.5
       whitelist:
-        tags:
-        - RMCVehicleHardpointVanWheel
-    - id: turret-1
-      hardpointType: Turret
-      required: false
-      insertDelay: 1.5
+        components:
+        - RMCVehicleWheelItem
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
@@ -542,12 +530,8 @@
       hardpointType: Wheel
       insertDelay: 1.5
       whitelist:
-        tags:
-        - RMCVehicleHardpointVanWheel
-    - id: turret-1
-      hardpointType: Turret
-      required: false
-      insertDelay: 1.5
+        components:
+        - RMCVehicleWheelItem
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
@@ -757,9 +741,6 @@
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 1.5
-      whitelist:
-        tags:
-        - RMCVehicleHardpointAPCWheel
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
@@ -1008,7 +989,7 @@
       required: false
       whitelist:
         tags:
-        - RMCVehicleHardpointRoofAttachment
+        - RMCVehicleHardpointHumveeRoofAttachment
     - id: front
       hardpointType: FrontAttachment
       visualLayer: support-2
@@ -1016,13 +997,10 @@
       required: false
       whitelist:
         tags:
-        - RMCVehicleHardpointFrontAttachment
+        - RMCVehicleHardpointHumveeFrontAttachment
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 1.5
-      whitelist:
-        tags:
-        - RMCVehicleHardpointHumveeWheel
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCRepairable
@@ -1104,7 +1082,7 @@
       required: false
       whitelist:
         tags:
-        - RMCVehicleHardpointRoofAttachment
+        - RMCVehicleHardpointHumveeRoofAttachment
     - id: front
       hardpointType: FrontAttachment
       visualLayer: support-2
@@ -1112,13 +1090,10 @@
       required: false
       whitelist:
         tags:
-        - RMCVehicleHardpointFrontAttachment
+        - RMCVehicleHardpointHumveeFrontAttachment
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 1.5
-      whitelist:
-        tags:
-        - RMCVehicleHardpointHumveeWheel
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/humvee_medical_interior.yml
     enterDoAfter: 1.0
@@ -1179,7 +1154,7 @@
       required: false
       whitelist:
         tags:
-        - RMCVehicleHardpointRoofAttachment
+        - RMCVehicleHardpointHumveeRoofAttachment
     - id: front
       hardpointType: FrontAttachment
       visualLayer: support-2
@@ -1187,13 +1162,10 @@
       required: false
       whitelist:
         tags:
-        - RMCVehicleHardpointFrontAttachment
+        - RMCVehicleHardpointHumveeFrontAttachment
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 1.5
-      whitelist:
-        tags:
-        - RMCVehicleHardpointHumveeWheel
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/humvee_transport_interior.yml
     enterDoAfter: 1.0
@@ -1229,14 +1201,6 @@
     bypassEntryOnZero: true
     repairTimePerIntegrity: 0.03
     repairTimeMax: 8
-  - type: RMCHardpointSlots
-    slots:
-    - id: wheel-1
-      hardpointType: Wheel
-      insertDelay: 1.5
-      whitelist:
-        tags:
-        - RMCVehicleHardpointHumveeWheel
   - type: RMCVehicleDeployable
     deployTime: 5
     undeployTime: 5
@@ -1402,6 +1366,9 @@
       visualLayer: primary
       insertDelay: 3.0
       required: false
+      whitelist:
+        tags:
+        - RMCVehicleHardpointTankTurret
     - id: secondary
       hardpointType: Secondary
       visualLayer: secondary
@@ -1430,7 +1397,7 @@
   - type: RMCVehicleWheelSlots
     slotCount: 2
   - type: RMCHardpointIntegrity
-    maxIntegrity: 400
+    maxIntegrity: 1000
     repairFuelCost: 20
     bypassEntryOnZero: true
     repairTimePerIntegrity: 0.04
