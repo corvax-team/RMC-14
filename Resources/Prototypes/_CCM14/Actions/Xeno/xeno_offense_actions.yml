@@ -65,3 +65,23 @@
   - type: InstantAction
     event: !type:XenoMirrorClonesActionEvent
       plasmaCost: 50
+
+- type: entity
+  parent: ActionXenoTailLash
+  id: CCMActionXenoButting
+  name: Butting (80)
+  description: Use your head to but enemies and fling them in large area.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _CCM14/Actions/xeno_actions.rsi
+      state: butting
+    useDelay: 20
+  - type: TargetAction
+    range: 15
+    deselectOnMiss: false
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:XenoTailLashActionEvent
+  - type: ActionBlockIfResting
