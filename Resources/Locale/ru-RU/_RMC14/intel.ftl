@@ -19,38 +19,38 @@ rmc-intel-survivor-pickup =
 rmc-intel-survivor-read =
     Вам незачем читать { $thing }.
     Сначала постарайтесь выбраться живыми.
-rmc-ui-intel-title = Marine Tech Tree Objectives
-rmc-ui-intel-header = [bold]Marine Tech Tree Objectives[/bold]
-rmc-ui-intel-tech-points = [bold]Tech Points[/bold]
-rmc-ui-intel-tier = [bold]Tier[/bold]
-rmc-ui-intel-objectives = [bold]Objectives[/bold]
-rmc-ui-intel-documents = [color=#5B88B0]Documents:[/color]
-rmc-ui-intel-upload-data = [color=#5B88B0]Upload data:[/color]
-rmc-ui-intel-retrieve-items = [color=#5B88B0]Retrieve items:[/color]
-rmc-ui-intel-miscellaneous = [color=#5B88B0]Miscellaneous:[/color]
-rmc-ui-intel-analyze-chemicals = [color=#5B88B0]Analyze chemicals:[/color]
-rmc-ui-intel-rescue-survivors = [color=#5B88B0]Rescue survivors:[/color]
-rmc-ui-intel-recover-corpses = [color=#5B88B0]Recover corpses:[/color]
-rmc-ui-intel-colony-comms = [color=#5B88B0]Colony communications:[/color]
-rmc-ui-intel-colony-power = [color=#5B88B0]Colony power:[/color]
+rmc-ui-intel-title = Цели в технологическом древе морской пехоты
+rmc-ui-intel-header = [bold]Цели в технологическом древе морской пехоты[/bold]
+rmc-ui-intel-tech-points = [bold]Технические очки[/bold]
+rmc-ui-intel-tier = [bold]Уровень[/bold]
+rmc-ui-intel-objectives = [bold]Цели[/bold]
+rmc-ui-intel-documents = [color=#5B88B0]Документы:[/color]
+rmc-ui-intel-upload-data = [color=#5B88B0]Загружено данных:[/color]
+rmc-ui-intel-retrieve-items = [color=#5B88B0]Извлечено предметов:[/color]
+rmc-ui-intel-miscellaneous = [color=#5B88B0]Разное:[/color]
+rmc-ui-intel-analyze-chemicals = [color=#5B88B0]Анализировано химикатов:[/color]
+rmc-ui-intel-rescue-survivors = [color=#5B88B0]Спасено выживших:[/color]
+rmc-ui-intel-recover-corpses = [color=#5B88B0]Забрано тел:[/color]
+rmc-ui-intel-colony-comms = [color=#5B88B0]Связь колонии:[/color]
+rmc-ui-intel-colony-power = [color=#5B88B0]Энергия колонии:[/color]
 rmc-ui-intel-clues = [bold]Clues[/bold]
 rmc-ui-intel-points-value = { $value }
 rmc-ui-intel-tier-value = { $value }
-rmc-ui-intel-total-credits = Total earned credits: { $value }
+rmc-ui-intel-total-credits = Всего заработано кредитов: { $value }
 rmc-ui-intel-progress = { $current } / { $total }
 rmc-ui-intel-infinite-progress = { $current } / ∞
 rmc-ui-intel-colony-status =
     { $online ->
-        [true] Online.
-       *[false] Offline.
+        [true] Онлайн.
+       *[false] Оффлайн.
     }
-rmc-ui-tech-tier-header = [font size=14][bold]Tier: { $tier }[/bold][/font]
-rmc-ui-tech-points-value = Tech points: { $value }
-rmc-ui-tech-repurchasable = Repurchasable
-rmc-ui-tech-incremental-price = Incremental price: +{ $increase } per purchase
-rmc-ui-tech-purchase-button = Purchase
-rmc-ui-tech-information-header = [bold]Information[/bold]
-rmc-ui-tech-name-label = [color=#5B88B0]Name:[/color]
-rmc-ui-tech-description-label = [color=#5B88B0]Description:[/color]
-rmc-ui-tech-cost-label = [color=#5B88B0]Cost:[/color]
-rmc-ui-tech-statistics-label = [color=#5B88B0]Statistics:[/color]
+rmc-ui-tech-tier-header = [font size=14][bold]Уровень: { $tier }[/bold][/font]
+rmc-ui-tech-points-value = Технические очки: { $value }
+rmc-ui-tech-repurchasable = Выкупить
+rmc-ui-tech-incremental-price = Увеличивающаяся цена: +{ $increase } за покупку
+rmc-ui-tech-purchase-button = Купить
+rmc-ui-tech-information-header = [bold]Информация[/bold]
+rmc-ui-tech-name-label = [color=#5B88B0]Название:[/color]
+rmc-ui-tech-description-label = [color=#5B88B0]Описание:[/color]
+rmc-ui-tech-cost-label = [color=#5B88B0]Стоимость:[/color]
+rmc-ui-tech-statistics-label = [color=#5B88B0]Статистика:[/color]

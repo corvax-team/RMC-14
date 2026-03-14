@@ -1,7 +1,7 @@
 # Foldable
 
-rmc-dogtag-verb-hide = Hide dogtags
-rmc-dogtag-verb-show = Show dogtags
+rmc-dogtag-verb-hide = Спрятать жетоны
+rmc-dogtag-verb-show = Показать жетоны
 rmc-jacket-verb-fold = Снять куртку
 rmc-jacket-verb-unfold = Надеть куртку
 rmc-sleeves-verb-fold = Закатать рукава
@@ -13,14 +13,14 @@ rmc-jacket-verb = Снять\надеть куртку
 rmc-sleeves-verb = Закатать\раскатать рукава
 rmc-sleeves-cannot = Вы не можете раскатать рукава! Попробуйте надеть куртку.
 # Weapons
-rmc-gun-foldable-launcher-unfold-self = You begin to unfold and expand the { $weapon }
-rmc-gun-foldable-launcher-unfold-others = { $user } begins to unfold the { $weapon }.
-rmc-gun-foldable-launcher-fold-self = You begin to fold the { $weapon }
-rmc-gun-foldable-launcher-fold-others = { $user } begins to unfold the { $weapon }.
-rmc-gun-foldable-launcher-fold-finish-self = You finish folding the { $weapon }.
-rmc-gun-foldable-launcher-fold-finish-others = { $user } finishes folding the { $weapon }.
-rmc-gun-foldable-launcher-unfold-finish-self = You finish unfolding the { $weapon }.
-rmc-gun-foldable-launcher-unfold-finish-others = { $user } finishes unfolding the { $weapon }.
-rmc-gun-foldable-launcher-examine = [bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default) to fold the weapon.[/bold]
-rmc-gun-foldable-launcher-examine-unfold = [bold]Press your [color=cyan]in-hand activation[/color] keybind (Z by default) to unfold the weapon.[/bold]
-rmc-gun-foldable-launcher-fold-already-fired-attempt = The { $weapon } has already been fired - you can't fold it back up again!
+rmc-gun-foldable-launcher-unfold-self = Вы начинаете разворачивать { $weapon }.
+rmc-gun-foldable-launcher-unfold-others = { $user } начинает разворачивать { $weapon }.
+rmc-gun-foldable-launcher-fold-self = Вы начинаете складывать { $weapon }.
+rmc-gun-foldable-launcher-fold-others = { $user } начинает складывать { $weapon }.
+rmc-gun-foldable-launcher-fold-finish-self = Вы заканчиваете складывать { $weapon }.
+rmc-gun-foldable-launcher-fold-finish-others = { $user } заканчивает складывать { $weapon }.
+rmc-gun-foldable-launcher-unfold-finish-self = Вы заканчиваете разворачивать { $weapon }.
+rmc-gun-foldable-launcher-unfold-finish-others = { $user } заканчивает разворачивать { $weapon }.
+rmc-gun-foldable-launcher-examine = [bold]Нажмите клавишу [color=cyan]особого действия[/color] (по умолчанию Пробел), чтобы сложить оружие.[/bold]
+rmc-gun-foldable-launcher-examine-unfold = [bold]Нажмите клавишу [color=cyan]активации в руке[/color] (по умолчанию Z), чтобы развернуть оружие.[/bold]
+rmc-gun-foldable-launcher-fold-already-fired-attempt = { $weapon } уже было использовано — вы не можете сложить его обратно!

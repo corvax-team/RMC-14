@@ -45,6 +45,7 @@
     thresholds:
     - range: 22
       falloff: 10
+
 - type: entity
   parent: RMCBaseBullet
   id: RMCBulletSentryFireProjectile

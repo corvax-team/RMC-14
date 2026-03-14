@@ -68,7 +68,7 @@
     Slash: 0.5
     Piercing: 0.5
 
-# Vehicle armor modifier sets (distinct from barricades)
+# Vehicle armor modifier sets
 - type: damageModifierSet
   id: RMCVehicleArmorBallistic
   coefficients:
@@ -94,3 +94,38 @@
     Shock: 0.75
     Cold: 0.75
     Caustic: 0.75
+
+- type: damageModifierSet
+  id: RMCVehicleFrameTank
+  coefficients:
+    Blunt: 0.8
+    Slash: 0.7
+    Piercing: 0.4
+    Structural: 0.8
+    Caustic: 1
+
+- type: damageModifierSet
+  id: RMCVehicleFrameAPC
+  coefficients:
+    Blunt: 0.7
+    Slash: 0.8
+    Piercing: 0.6
+    Structural: 0.7
+    Caustic: 1
+
+- type: damageModifierSet
+  id: RMCVehicleFrameARC
+  coefficients:
+    Blunt: 0.8
+    Slash: 1
+    Piercing: 0.6
+    Structural: 0.8
+    Caustic: 1
+
+- type: damageModifierSet
+  id: RMCVehicleFrameCLFVan
+  coefficients:
+    Blunt: 0.8
+    Slash: 0.9
+    Piercing: 0.8
+    Structural: 0.8

@@ -284,22 +284,10 @@ public sealed class VehicleTurretSystem : EntitySystem
     {
         origin = default;
 
-        if (HasComp<VehicleTurretAttachmentComponent>(turretUid) &&
-            TryGetParentTurret(turretUid, out var parentUid, out var parentTurret))
-        {
-            turretUid = parentUid;
-            turret = parentTurret;
-        }
-
         if (!TryGetVehicle(turretUid, out var vehicle))
             return false;
 
-        var vehicleRot = _transform.GetWorldRotation(vehicle);
-        var baseFacingAngle = GetVehicleFacingAngle(vehicle, vehicleRot);
-        var facingAngle = GetOffsetFacing(turret, turret, vehicleRot, baseFacingAngle);
-        var offset = GetPixelOffset(turret, facingAngle) / PixelsPerMeter;
-        var baseCoords = _transform.GetMoverCoordinates(vehicle);
-        origin = baseCoords.Offset(offset);
+        origin = _transform.GetMoverCoordinates(turretUid);
         return true;
     }
 

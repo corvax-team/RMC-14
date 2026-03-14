@@ -5,6 +5,7 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: RMCVehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/fridge.rsi
   - type: AccessReader

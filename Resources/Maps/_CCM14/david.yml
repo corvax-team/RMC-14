@@ -73232,6 +73232,13 @@ entities:
     - type: Transform
       pos: 61.5,101.5
       parent: 1
+- proto: RMCIntelDetector
+  entities:
+  - uid: 10575
+    components:
+    - type: Transform
+      pos: 33.414417,108.58522
+      parent: 1
 - proto: RMCKeycardDevice
   entities:
   - uid: 10576

@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using Content.Client._RMC14.Vehicle;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Vehicle.Components;
@@ -8,6 +9,7 @@ using Robust.Client.Graphics;
 using Robust.Shared.Containers;
 using Robust.Shared.Enums;
 using Robust.Shared.GameObjects;
+using Robust.Shared.IoC;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
 
@@ -22,8 +24,10 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
     public bool Enabled { get; set; }
 
     private readonly IEntityManager _ents;
+    private readonly IEyeManager _eye;
     private readonly SharedTransformSystem _transform;
     private readonly SharedContainerSystem _container;
+    private readonly VehicleTurretMuzzleOffsetSystem _vehicleTurretMuzzle;
     private readonly EntityQuery<GunComponent> _gunQ;
     private readonly EntityQuery<GunFireArcComponent> _fireArcQ;
     private readonly EntityQuery<GridVehicleMoverComponent> _moverQ;
@@ -35,8 +39,10 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
     public VehicleHardpointDebugOverlay(IEntityManager ents)
     {
         _ents = ents;
+        _eye = IoCManager.Resolve<IEyeManager>();
         _transform = ents.System<SharedTransformSystem>();
         _container = ents.System<SharedContainerSystem>();
+        _vehicleTurretMuzzle = ents.System<VehicleTurretMuzzleOffsetSystem>();
         _gunQ = ents.GetEntityQuery<GunComponent>();
         _fireArcQ = ents.GetEntityQuery<GunFireArcComponent>();
         _moverQ = ents.GetEntityQuery<GridVehicleMoverComponent>();
@@ -120,6 +126,18 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
     {
         origin = default;
         muzzlePos = default;
+
+        if (_turretQ.HasComp(uid) &&
+            _vehicleTurretMuzzle.TryGetRenderedGunOrigin(uid, null, out var renderedOrigin))
+        {
+            var renderedMap = _transform.ToMapCoordinates(renderedOrigin);
+            if (renderedMap.MapId != mapId)
+                return false;
+
+            origin = renderedMap.Position;
+            muzzlePos = origin;
+            return true;
+        }
 
         var baseUid = uid;
         if (muzzle.UseContainerOwner &&
@@ -220,6 +238,17 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
     {
         originCoords = default;
 
+        if (_turretQ.HasComp(uid) &&
+            _vehicleTurretMuzzle.TryGetRenderedGunOrigin(uid, null, out var renderedOrigin))
+        {
+            var renderedMap = _transform.ToMapCoordinates(renderedOrigin);
+            if (renderedMap.MapId != mapId)
+                return false;
+
+            originCoords = renderedOrigin;
+            return true;
+        }
+
         var baseUid = uid;
         if (_muzzleQ.TryComp(uid, out var muzzle) &&
             muzzle.UseContainerOwner &&
@@ -290,9 +319,11 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
         TryGetAnchorTurret(turretUid, turret, out var anchorUid, out var anchorTurret);
 
         var vehicleRot = _transform.GetWorldRotation(vehicle);
+        var eyeRot = _eye.CurrentEye.Rotation;
         var baseFacingAngle = GetVehicleFacingAngle(vehicle, vehicleRot);
-        var anchorFacingAngle = GetOffsetFacing(anchorTurret, anchorTurret, vehicleRot, baseFacingAngle);
-        var anchorLocalOffset = (-vehicleRot).RotateVec(GetPixelOffset(anchorTurret, anchorFacingAngle) / PixelsPerMeter);
+        var anchorFacingAngle = GetRenderFacing(anchorTurret, anchorTurret, vehicleRot, baseFacingAngle, eyeRot);
+        var anchorPixelOffset = GetPixelOffset(anchorTurret, anchorFacingAngle) / PixelsPerMeter;
+        var anchorLocalOffset = GetVehicleLocalOffset(anchorTurret, anchorPixelOffset, vehicleRot, eyeRot);
         var anchorCoords = baseCoords.Offset(anchorLocalOffset);
 
         basePos = baseMap.Position;
@@ -305,7 +336,7 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
         }
 
         var localRot = anchorTurret.RotateToCursor ? anchorTurret.WorldRotation : Angle.Zero;
-        var turretFacingAngle = GetOffsetFacing(turret, anchorTurret, vehicleRot, baseFacingAngle);
+        var turretFacingAngle = GetRenderFacing(turret, anchorTurret, vehicleRot, baseFacingAngle, eyeRot);
         var worldOffset = GetPixelOffset(turret, turretFacingAngle) / PixelsPerMeter;
         Vector2 relativeAnchorOffset;
         Vector2 turretLocalOffset;
@@ -330,8 +361,11 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
             turretLocalOffset = (-vehicleRot).RotateVec(worldOffset);
             relativeAnchorOffset = (-localRot).RotateVec(turretLocalOffset);
         }
-        var turretCoords = new EntityCoordinates(anchorUid, relativeAnchorOffset);
-        var turretMap = _transform.ToMapCoordinates(turretCoords);
+        MapCoordinates turretMap;
+        if (turret.OffsetRotatesWithTurret)
+            turretMap = _transform.ToMapCoordinates(new EntityCoordinates(anchorUid, relativeAnchorOffset));
+        else
+            turretMap = _transform.ToMapCoordinates(baseCoords.Offset(anchorLocalOffset + relativeAnchorOffset));
         if (turretMap.MapId != mapId)
             return false;
 
@@ -367,12 +401,12 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
 
     private static Direction GetDirectionalDir(Angle facing)
     {
-        return facing.GetCardinalDir();
+        return VehicleTurretDirectionHelpers.GetRenderAlignedCardinalDir(facing);
     }
 
     private static Direction GetDirectionalDir(float normalized)
     {
-        return new Angle(normalized).GetCardinalDir();
+        return VehicleTurretDirectionHelpers.GetRenderAlignedCardinalDir(new Angle(normalized));
     }
 
     private static Angle GetDirectionalAngle(Direction dir)
@@ -447,7 +481,29 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
         return vehicleRot;
     }
 
-    private Angle GetOffsetFacing(
+    private static Vector2 GetVehicleLocalOffset(
+        VehicleTurretComponent turret,
+        Vector2 offset,
+        Angle vehicleRot,
+        Angle eyeRot)
+    {
+        if (turret.UseDirectionalOffsets)
+            offset = (-eyeRot).RotateVec(offset);
+
+        return (-vehicleRot).RotateVec(offset);
+    }
+
+    private static Angle GetRenderFacing(
+        VehicleTurretComponent turret,
+        VehicleTurretComponent anchorTurret,
+        Angle vehicleRot,
+        Angle baseFacingAngle,
+        Angle eyeRot)
+    {
+        return (GetOffsetFacing(turret, anchorTurret, vehicleRot, baseFacingAngle) + eyeRot).Reduced();
+    }
+
+    private static Angle GetOffsetFacing(
         VehicleTurretComponent turret,
         VehicleTurretComponent anchorTurret,
         Angle vehicleRot,

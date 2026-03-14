@@ -1,2 +1,2 @@
-rmc-button-up-verb = Button up
-rmc-unbutton-verb = Unbutton
+rmc-button-up-verb = Застегнуть пуговицы
+rmc-unbutton-verb = Отстегнуть пуговицы

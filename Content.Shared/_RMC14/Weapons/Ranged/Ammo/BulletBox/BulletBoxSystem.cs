@@ -37,6 +37,9 @@ public sealed class BulletBoxSystem : EntitySystem
         using (args.PushGroup(nameof(BulletBoxComponent)))
         {
             args.PushText(Loc.GetString("rmc-bullet-box-amount", ("amount", ent.Comp.Amount)));
+
+            if (!string.IsNullOrWhiteSpace(ent.Comp.UsedIn))
+                args.PushText(Loc.GetString("rmc-bullet-box-used-in", ("vehicle", ent.Comp.UsedIn)));
         }
     }
 

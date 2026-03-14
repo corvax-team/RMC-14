@@ -7,7 +7,6 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/humvee.rsi
   - type: Item
     size: Large
-  - type: RMCHardpointIntegrity
 
 - type: entity
   parent: RMCVehicleHumveeHardpointBase
@@ -19,6 +18,9 @@
     state: tires
   - type: RMCHardpointItem
     hardpointType: Wheel
+    damageMultiplier: 0.15
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 500
   - type: Tag
     tags:
     - RMCVehicleHardpointWheel
@@ -34,6 +36,9 @@
     state: humveeturret
   - type: RMCHardpointItem
     hardpointType: Turret
+    damageMultiplier: 0.15
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 100
   - type: Tag
     tags:
     - RMCVehicleHardpointTurret
@@ -77,6 +82,9 @@
     state: humveecannon
   - type: RMCHardpointItem
     hardpointType: Cannon
+    damageMultiplier: 0.1
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 125
   - type: Tag
     tags:
     - RMCVehicleHardpointCannon
@@ -85,6 +93,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
     overlayState: humveecannon_0
+    fireWhileRotatingGraceDegrees: 20
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
@@ -105,19 +114,19 @@
     accuracyMultiplierUnwielded: 5
   - type: BallisticAmmoProvider
     cycleable: false
-    proto: RMCVehicleCartridgeSentry10x50mm
-    capacity: 200
+    proto: RMCVehicleCartridgeRERotaryCannon10x50mm
+    capacity: 500
   - type: RMCVehicleHardpointAmmo
-    magazineSize: 200
-    maxStoredMagazines: 1
+    magazineSize: 500
+    maxStoredMagazines: 2
   - type: GunFireArc
     arc: 180
   - type: RefillableByBulletBox
-    bulletType: RMCVehicleAmmoBoxFrontal
+    bulletType: RMCVehicleAmmoBoxRERotaryCannon
   - type: GunMuzzleOffset
     offset: "0,0"
-    muzzleOffset: "0,-1.2"
-    useAimDirection: true
+    muzzleOffset: "0,0"
+    useAimDirection: false
     useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: humveecannon_0
@@ -132,6 +141,9 @@
     state: humveelauncher
   - type: RMCHardpointItem
     hardpointType: Launcher
+    damageMultiplier: 0.0
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 100
   - type: Tag
     tags:
     - RMCVehicleHardpointLauncher
@@ -181,6 +193,9 @@
     state: snowplow
   - type: RMCHardpointItem
     hardpointType: FrontAttachment
+    damageMultiplier: 0.075
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 100
   - type: Tag
     tags:
     - RMCVehicleHardpointFrontAttachment
@@ -197,6 +212,9 @@
     state: overlight
   - type: RMCHardpointItem
     hardpointType: RoofAttachment
+    damageMultiplier: 0.1
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 500
   - type: Tag
     tags:
     - RMCVehicleHardpointRoofAttachment
@@ -215,6 +233,9 @@
     state: humveehatch
   - type: RMCHardpointItem
     hardpointType: RoofAttachment
+    damageMultiplier: 0.075
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 100
   - type: Tag
     tags:
     - RMCVehicleHardpointRoofAttachment
