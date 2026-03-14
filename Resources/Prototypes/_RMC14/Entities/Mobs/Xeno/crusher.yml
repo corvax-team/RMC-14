@@ -66,10 +66,14 @@
     damage:
       groups:
         Brute: 40
+      types:
+        Structural: 40
   - type: XenoTailStab
     tailDamage:
       groups:
         Brute: 48
+      types:
+        Structural: 48
   - type: XenoMeleeSlow
     slowTime: 2
   - type: Tackle
@@ -113,6 +117,7 @@
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT3
 
+
 - type: entity
   parent: CMXenoCrusherBase
   id: RMCXenoCrusher
@@ -126,6 +131,9 @@
     - ActionXenoCharge
     - ActionXenoStomp
     - ActionXenoDefensiveShield
+    - ActionXenoToggleCharging
+    - CCMActionXenoButting #CCM Изменения
+    - CCMActionXenoDurability #CCM Изменения
     - ActionXenoDevolve
   - type: CrusherShield
   - type: XenoCharge
@@ -134,9 +142,31 @@
         Blunt: 60
         Structural: 750
   - type: XenoShield
-  - type: XenoEvolution
-    strains:
-    - RMCXenoCrusherCharger
+  - type: CombatMode #CCM Изменения
+    toggleMouseRotator: false
+  - type: XenoToggleCharging #CCM Изменения
+  - type: XenoTailLash #CCM Изменения
+    effect: RMCEffectXenoTelegraphRed
+    effectEdge: RMCEffectXenoTelegraphRed
+    height: 2
+    width: 2
+    windup: 0
+    stunTime: 1.25
+    slowTime: 4
+    flingDistance: 2
+  - type: XenoFortify
+    armor: 0
+    frontalArmor: 0
+    explosionArmor: 150
+    changeExplosionWeakness: false
+    canHeadbuttFortified: false
+    canMoveFortified: true
+    damageAddedFortified:
+      groups:
+        Brute: -10
+#  - type: XenoEvolution #CCM Изменения
+#    strains:
+#    - RMCXenoCrusherCharger
   - type: RMCActionOrder
     id: RMCXenoCrusher
 
