@@ -81,7 +81,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             if (!HasComp<XenoComponent>(other))
                 continue;
 
-            if (!CanXenoMoveVehicle(mover, other))
+            if (!CanXenoPushVehicle(mover, other))
                 continue;
 
             if (!TryComp<InputMoverComponent>(other, out var input))
@@ -130,12 +130,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return _timing.CurTime >= mover.NextPushTime;
     }
 
-    private bool CanXenoMoveVehicle(GridVehicleMoverComponent mover, EntityUid xeno)
+    private bool CanXenoPushVehicle(GridVehicleMoverComponent mover, EntityUid xeno)
     {
-        if (!mover.AllowXenoPush)
+        if (!mover.CanXenosPush)
             return false;
 
-        if (mover.XenoMoveMinimumSize is not { } minSize)
+        if (mover.XenoPushMinimumSize is not { } minSize)
             return true;
 
         if (!_size.TryGetSize(xeno, out var size))

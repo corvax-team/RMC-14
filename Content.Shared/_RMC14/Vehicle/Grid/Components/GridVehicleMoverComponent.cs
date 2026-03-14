@@ -80,10 +80,13 @@ public sealed partial class GridVehicleMoverComponent : Component
     public RMCSizes? XenoBlockMinimumSize;
 
     [DataField, AutoNetworkedField]
-    public RMCSizes? XenoMoveMinimumSize;
+    public bool CanXenosPush = true;
 
     [DataField, AutoNetworkedField]
-    public bool AllowXenoPush = true;
+    public RMCSizes? XenoPushMinimumSize;
+
+    [NonSerialized]
+    public EntityUid? SyncedGrid;
 
     [AutoNetworkedField]
     public float SmashSlowdownMultiplier = 1f;

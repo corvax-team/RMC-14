@@ -22,6 +22,12 @@ public sealed partial class RMCHardpointItemComponent : Component
     public string HardpointType = string.Empty;
 
     [DataField]
+    public ProtoId<RMCHardpointVehicleFamilyPrototype>? VehicleFamily;
+
+    [DataField]
+    public ProtoId<RMCHardpointSlotTypePrototype>? SlotType;
+
+    [DataField]
     public float DamageMultiplier = 1f;
 }
 
@@ -30,6 +36,9 @@ public sealed partial class RMCHardpointItemComponent : Component
 [Access(typeof(RMCHardpointSystem))]
 public sealed partial class RMCHardpointSlotsComponent : Component
 {
+    [DataField]
+    public ProtoId<RMCHardpointVehicleFamilyPrototype>? VehicleFamily;
+
     [DataField(required: true)]
     public List<RMCHardpointSlot> Slots = new();
 
@@ -63,6 +72,9 @@ public sealed partial class RMCHardpointSlot
 
     [DataField(required: true)]
     public string HardpointType { get; set; } = string.Empty;
+
+    [DataField]
+    public ProtoId<RMCHardpointSlotTypePrototype>? SlotType { get; set; }
 
     [DataField]
     public string VisualLayer { get; set; } = string.Empty;

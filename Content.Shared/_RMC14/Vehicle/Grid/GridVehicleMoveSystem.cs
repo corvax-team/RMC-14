@@ -8,7 +8,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Vehicle.Components;
-using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids;
@@ -45,7 +44,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCVehicleWheelSystem _wheels = default!;
 
     private EntityQuery<MapGridComponent> gridQ;
@@ -117,7 +115,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         fixtureQ = GetEntityQuery<FixturesComponent>();
         SubscribeLocalEvent<GridVehicleMoverComponent, ComponentStartup>(OnMoverStartup);
         SubscribeLocalEvent<GridVehicleMoverComponent, ComponentShutdown>(OnMoverShutdown);
-        SubscribeLocalEvent<GridVehicleMoverComponent, EntParentChangedMessage>(OnMoverParentChanged);
         SubscribeLocalEvent<GridVehicleMoverComponent, MoveEvent>(OnMoverMove);
         SubscribeLocalEvent<GridVehicleMoverComponent, ReAnchorEvent>(OnMoverReAnchor);
         SubscribeLocalEvent<GridVehicleMoverComponent, VehicleCanRunEvent>(OnMoverCanRun);
@@ -126,7 +123,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
     private void OnMoverStartup(Entity<GridVehicleMoverComponent> ent, ref ComponentStartup args)
     {
-        SyncMoverToCurrentGrid(ent, centerOnTile: true);
+        TrySyncMoverToCurrentGrid(ent, centerOnTile: true, force: true);
     }
 
     private void OnMoverShutdown(Entity<GridVehicleMoverComponent> ent, ref ComponentShutdown args)
@@ -135,35 +132,52 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         _movementAccumulator.Remove(ent.Owner);
     }
 
-    private void OnMoverParentChanged(Entity<GridVehicleMoverComponent> ent, ref EntParentChangedMessage args)
-    {
-        SyncMoverToCurrentGrid(ent, centerOnTile: false);
-    }
-
     private void OnMoverMove(Entity<GridVehicleMoverComponent> ent, ref MoveEvent args)
     {
         if (!args.ParentChanged)
             return;
 
-        SyncMoverToCurrentGrid(ent, centerOnTile: false);
+        TrySyncMoverToCurrentGrid(ent, centerOnTile: false);
     }
 
     private void OnMoverReAnchor(Entity<GridVehicleMoverComponent> ent, ref ReAnchorEvent args)
     {
-        SyncMoverToCurrentGrid(ent, centerOnTile: false);
+        TrySyncMoverToCurrentGrid(ent, centerOnTile: false);
     }
 
-    private void SyncMoverToCurrentGrid(Entity<GridVehicleMoverComponent> ent, bool centerOnTile)
+    // Vehicle traversal can change grids through several engine paths. Keep all resync logic in one place.
+    private bool TrySyncMoverToCurrentGrid(
+        Entity<GridVehicleMoverComponent> ent,
+        bool centerOnTile,
+        TransformComponent? xform = null,
+        bool force = false)
     {
         var uid = ent.Owner;
-        var xform = Transform(uid);
+        xform ??= Transform(uid);
 
         if (xform.GridUid is not { } grid || !gridQ.TryComp(grid, out var gridComp))
-            return;
+        {
+            if (ent.Comp.SyncedGrid == null)
+                return false;
+
+            ent.Comp.SyncedGrid = null;
+            ent.Comp.CurrentSpeed = 0f;
+            ent.Comp.IsCommittedToMove = false;
+            ent.Comp.IsPushMove = false;
+            ent.Comp.IsMoving = false;
+            _hardState[uid] = true;
+            _movementAccumulator[uid] = 0f;
+            Dirty(uid, ent.Comp);
+            return true;
+        }
+
+        if (!force && ent.Comp.SyncedGrid == grid)
+            return false;
 
         var coords = xform.Coordinates.WithEntityId(grid, transform, EntityManager);
         var tile = map.TileIndicesFor(grid, gridComp, coords);
 
+        ent.Comp.SyncedGrid = grid;
         ent.Comp.CurrentTile = tile;
         ent.Comp.TargetTile = tile;
         ent.Comp.Position = centerOnTile
@@ -180,6 +194,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         _movementAccumulator[uid] = 0f;
 
         Dirty(uid, ent.Comp);
+        return true;
     }
 
     private void OnMoverCanRun(Entity<GridVehicleMoverComponent> ent, ref VehicleCanRunEvent args)
@@ -193,8 +208,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (!HasComp<XenoComponent>(operatorUid))
             return;
 
-        if (!CanXenoMoveVehicle(ent.Comp, operatorUid))
-            args.CanRun = false;
+        args.CanRun = false;
     }
 
     private void OnMoverPreventCollide(Entity<GridVehicleMoverComponent> ent, ref PreventCollideEvent args)
@@ -231,6 +245,8 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             if (vehicle.MovementKind != VehicleMovementKind.Grid)
                 continue;
 
+            TrySyncMoverToCurrentGrid((uid, mover), centerOnTile: false, xform);
+
             if (xform.GridUid is not { } grid || !gridQ.TryComp(grid, out var gridComp))
                 continue;
 
@@ -250,6 +266,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             while (accumulator >= MovementFixedStep && steps < MaxFixedStepsPerFrame)
             {
                 var currentXform = Transform(uid);
+                TrySyncMoverToCurrentGrid((uid, mover), centerOnTile: false, currentXform);
                 if (currentXform.GridUid is not { } currentGrid || !gridQ.TryComp(currentGrid, out var currentGridComp))
                     break;
 
