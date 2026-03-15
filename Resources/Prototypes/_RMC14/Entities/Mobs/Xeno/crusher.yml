@@ -141,6 +141,15 @@
       types:
         Blunt: 60
         Structural: 750
+  - type: MobThresholds #CCM Изменения
+    thresholds:
+      0: Alive
+      800: Critical
+      900: Dead
+  - type: CMArmor # CCM Изменения
+    xenoArmor: 10
+    frontalArmor: 40
+    sideArmor: 25
   - type: XenoShield
   - type: CombatMode #CCM Изменения
     toggleMouseRotator: false
