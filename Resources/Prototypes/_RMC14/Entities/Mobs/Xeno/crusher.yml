@@ -133,8 +133,10 @@
     - ActionXenoDefensiveShield
     - ActionXenoToggleCharging
     - ActionXenoTumble #CCM Изменения
-    - ActionXenoTailLash #CCM Изменения - fast fix
-    - ActionXenoFortify #CCM Изменения - fast fix
+    - CCMActionXenoHeadcliff
+    - CCMActionXenoEndure
+#    - ActionXenoTailLash #CCM backup
+#    - ActionXenoFortify #CCM backup
     - ActionXenoDevolve
   - type: CrusherShield
   - type: XenoCharge
