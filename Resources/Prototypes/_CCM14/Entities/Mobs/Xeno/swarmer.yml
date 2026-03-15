@@ -84,7 +84,7 @@
     plasmaCost: 400
     delay: 0
   - type: XenoPheromones
-    pheromonesMultiplier: 4
+    pheromonesMultiplier: 3
 #    pheroSuffix: hivelord #Сделать суффикс феромонов свармера
   - type: XenoEvolutionCapped
     id: CCMXenoSwarmer
@@ -102,13 +102,13 @@
       groups:
         Brute: 35 #Вождь баланс
       types:
-        Structural: 35
+        Structural: 15
   - type: XenoTailStab
     tailDamage:
       groups:
         Brute: 45  #Вождь баланс
       types:
-        Structural: 45
+        Structural: 25
   - type: Tackle
     max: 4
   - type: WhitelistPickup
@@ -138,11 +138,10 @@
     size: Big
   - type: RMCXenoDamageVisuals
     prefix: hivelord
-# TODO Swarmer map icon
   - type: TacticalMapIcon
     icon:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
-      state: warrior
+      state: swarmer
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.7
   - type: XenoInhands
