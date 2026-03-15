@@ -76,17 +76,17 @@
   - type: ExplodeOnTrigger
   - type: DeleteOnTrigger
   - type: CMExplosionEffect
-    minShrapnel: 40
-    maxShrapnel: 100
+    minShrapnel: 20
+    maxShrapnel: 50
     shrapnelSpeed: 8
   - type: RMCScorchEffect
     radius: 3
     centerRadius: 1
   - type: Explosive
     explosionType: RMCLTBCannon
-    maxIntensity: 40
+    maxIntensity: 25
     intensitySlope: 18
-    totalIntensity: 650
+    totalIntensity: 500
     tileBreakScale: 4
     maxTileBreak: 12
 
