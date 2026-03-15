@@ -171,7 +171,7 @@
   - type: XenoFortify #CCM Изменения
     armor: 0
     frontalArmor: 0
-    explosionArmor: 115
+    explosionArmor: 150
     changeExplosionWeakness: false
     canHeadbuttFortified: false
     canMoveFortified: true
