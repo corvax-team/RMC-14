@@ -67,13 +67,13 @@
       groups:
         Brute: 40
       types:
-        Structural: 40
+        Structural: 60 #CCM Изменения
   - type: XenoTailStab
     tailDamage:
       groups:
         Brute: 48
       types:
-        Structural: 48
+        Structural: 74 #CCM Изменения
   - type: XenoMeleeSlow
     slowTime: 2
   - type: Tackle
@@ -147,9 +147,9 @@
       800: Critical
       900: Dead
   - type: CMArmor # CCM Изменения
-    xenoArmor: 10
-    frontalArmor: 40
-    sideArmor: 25
+    xenoArmor: 30
+    frontalArmor: 15
+    sideArmor: 5
   - type: XenoShield
   - type: CombatMode #CCM Изменения
     toggleMouseRotator: false
@@ -163,10 +163,10 @@
     stunTime: 1.25
     slowTime: 4
     flingDistance: 2
-  - type: XenoFortify
+  - type: XenoFortify #CCM Изменения
     armor: 0
     frontalArmor: 0
-    explosionArmor: 150
+    explosionArmor: 115
     changeExplosionWeakness: false
     canHeadbuttFortified: false
     canMoveFortified: true
