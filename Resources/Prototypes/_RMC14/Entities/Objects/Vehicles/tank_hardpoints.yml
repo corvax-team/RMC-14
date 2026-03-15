@@ -15,7 +15,8 @@
   description: A tank turret hardpoint.
   components:
   - type: Sprite
-    state: ltb_cannon
+    sprite: _RMC14/Structures/Vehicles/tank.rsi
+    state: tank_turret_0
   - type: RMCHardpointItem
     hardpointType: Turret
     vehicleFamily: Tank
@@ -38,7 +39,6 @@
   - type: ItemSlots
     slots:
       turret-cannon:
-        startingItem: RMCVehicleTankAceAutocannon
         whitelist:
           components:
           - RMCHardpointItem
@@ -246,7 +246,7 @@
   - type: GunIgnoreContainerOwnerCollision
   - type: ShootAtFixedPoint
   - type: Gun
-    fireRate: 0.9
+    fireRate: 0.0625
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto

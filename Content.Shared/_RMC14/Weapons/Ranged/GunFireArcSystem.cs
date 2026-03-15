@@ -21,6 +21,13 @@ public sealed class GunFireArcSystem : EntitySystem
         if (args.ToCoordinates == null)
             return;
 
+        if (!args.FromCoordinates.IsValid(EntityManager) || !args.ToCoordinates.Value.IsValid(EntityManager))
+        {
+            args.Cancelled = true;
+            args.ResetCooldown = true;
+            return;
+        }
+
         var fromMap = _transform.ToMapCoordinates(args.FromCoordinates);
         var toMap = _transform.ToMapCoordinates(args.ToCoordinates.Value);
         var direction = toMap.Position - fromMap.Position;

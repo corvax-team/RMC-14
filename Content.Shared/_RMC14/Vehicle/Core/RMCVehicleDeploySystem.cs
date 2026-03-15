@@ -297,7 +297,11 @@ public sealed class RMCVehicleDeploySystem : EntitySystem
             return;
 
         if (!TryGetVehicleFromContained(ent.Owner, out var vehicle))
+        {
+            args.Cancelled = true;
+            args.ResetCooldown = true;
             return;
+        }
 
         if (!TryComp(vehicle, out RMCVehicleDeployableComponent? deployable))
             return;
