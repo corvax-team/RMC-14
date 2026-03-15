@@ -153,11 +153,11 @@
     sideArmor: 5
   - type: XenoShield
   - type: XenoTumble #CCM Изменения
-    range: 4
+    range: 1
     impactRange: 2
     damage:
       types:
-        Blunt: 30
+        Blunt: 25
   - type: XenoToggleCharging #CCM Изменения
   - type: XenoTailLash #CCM Изменения
     effect: RMCEffectXenoTelegraphRed
