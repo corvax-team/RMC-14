@@ -296,7 +296,7 @@
   - type: VehicleTurretAttachment
   - type: VehicleTurret
     fireWhileRotatingGraceDegrees: 180
-    useBarrelDirectionForShots: false
+    useBarrelDirectionForShots: true
     maxShotCurvatureDegrees: 10
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true

@@ -889,7 +889,7 @@
   - type: RMCVehicleSound
     runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
     runningSoundCooldown: 2
-    hornSound: /Audio/Effects/Vehicle/sound_vehicles_humvee_horn.ogg
+    hornSound: /Audio/_RMC14/Vehicle/sound_vehicles_humvee_horn.ogg
     hornCooldown: 1
 #    collisionSound: /Audio/_RMC14/Structures/metalhit.ogg
 #    collisionSoundCooldown: 0.4

@@ -87,14 +87,16 @@
     overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
     overlayState: humveecannon_0
     fireWhileRotatingGraceDegrees: 20
+    useBarrelDirectionForShots: true
+    maxShotCurvatureDegrees: 10
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
-    fireRate: 10
+    fireRate: 5 # 0.2 seconds between shots
     selectedMode: FullAuto
     availableModes:
     - FullAuto
-    soundGunshot: /Audio/Effects/Vehicle/sound_weapons_humvee_cannon.ogg
+    soundGunshot: /Audio/_RMC14/Vehicle/weapons/sound_weapons_humvee_cannon.ogg
     cameraRecoilScalar: 0
   - type: GunIFF
     enabled: true
@@ -123,6 +125,20 @@
     useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: humveecannon_0
+
+- type: entity
+  parent: RMCVehicleHumveeCannon
+  id: RMCVehicleHumveeARCCannon
+  name: ARC cannon
+  description: A burst-fire cannon configured for an ARC humvee turret.
+  components:
+  - type: Gun
+    fireRate: 5 # 0.2 seconds between shots
+    burstFireRate: 5
+    shotsPerBurst: 3
+    selectedMode: Burst
+    availableModes:
+    - Burst
 
 - type: entity
   parent: RMCVehicleHumveeHardpointBase
