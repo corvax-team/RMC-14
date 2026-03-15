@@ -52,6 +52,11 @@
     tier: 3
     hudOffset: -0.15,0.25
     unlockAt: 900 # 15 minutes
+  - type: MeleeDamageMultiplier
+    multiplier: 4
+    whitelist:
+      components:
+      - Vehicle
   - type: XenoConstruction
     buildDelay: 0.85
     canBuild:
