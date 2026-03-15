@@ -1,4 +1,4 @@
-ui-lobby-title = Лобби: { $serverName }
+﻿ui-lobby-title = Лобби: { $serverName }
 ui-lobby-ahelp-button = АХелп
 ui-lobby-options-button = Настройки
 ui-lobby-leave-button = Выйти
@@ -22,3 +22,10 @@ ui-lobby-music-header = В лобби играет:
 ui-lobby-music-line = {$title} — {$author}
 ui-lobby-music-none = Музыка не играет
 ui-lobby-music-unknown = Неизвестный автор
+
+ui-lobby-taskbar-rating = Рейтинг
+ui-lobby-taskbar-donate = Спонсорство
+ui-lobby-taskbar-menu = Меню
+ui-lobby-taskbar-customization = Кастомизация
+ui-lobby-taskbar-achievements = Достижения
+

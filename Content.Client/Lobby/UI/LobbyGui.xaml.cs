@@ -27,6 +27,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Localization;
 using Robust.Shared.Input;
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace Content.Client.Lobby.UI
@@ -50,11 +51,13 @@ namespace Content.Client.Lobby.UI
         private bool _leftMenuDragStarted;
         private Vector2 _leftMenuDragOffset;
         private bool _leftMenuAnchorInitialized;
+        private bool _leftMenuAutoCenter = true;
         private Vector2 _leftMenuLastGlobal;
         private Vector2 _voteLastSize;
 
         private const string LeftMenuHideAnimationKey = "lobby-left-menu-hide";
         private const string LeftMenuShowAnimationKey = "lobby-left-menu-show";
+        private const float LeftMenuCenterYOffsetPercent = 0.06f;
 
         public LobbyGui()
         {
@@ -74,14 +77,15 @@ namespace Content.Client.Lobby.UI
 
             SetupChatStyles();
             SetupLeftMenuToggle();
+            SetupTaskbarLabelHover();
+            SetupButtonIconHover();
 
             LeaveButton.OnPressed += _ => _consoleHost.ExecuteCommand("disconnect");
             OptionsButton.OnPressed += _ => UserInterfaceManager.GetUIController<OptionsUIController>().ToggleWindow();
             GuidesButton.OnPressed += _ => UserInterfaceManager.GetUIController<GuidebookUIController>().ToggleGuidebook();
             UpdatesButton.OnPressed += _ => UserInterfaceManager.GetUIController<RoadmapUIController>().ToggleRoadmap();
 
-            EmblemButton.OnPressed += _ => ToggleLeftMenu(false);
-            LeftMenuToggleButton.OnPressed += _ => ToggleLeftMenu(true);
+            TaskbarMenuButton.OnPressed += _ => ToggleLeftMenu(!_leftMenuVisible);
 
             TutorialButton.OnPressed += _ => OpenTutorial();
             StatsButton.OnPressed += _ => OpenStats();
@@ -170,13 +174,79 @@ namespace Content.Client.Lobby.UI
 
         private void SetupLeftMenuToggle()
         {
-            EmblemButton.StyleBoxOverride = new StyleBoxEmpty();
-            LeftMenuToggleButton.Visible = false;
             CenterMenuGlow.AnimationCompleted += OnLeftMenuAnimationCompleted;
             CenterMenuGlow.MouseFilter = Control.MouseFilterMode.Pass;
             CenterMenuPanel.MouseFilter = Control.MouseFilterMode.Pass;
             CenterMenuGlow.OnKeyBindDown += OnLeftMenuDragKeyBindDown;
             CenterMenuGlow.OnKeyBindUp += OnLeftMenuDragKeyBindUp;
+            CenterCharacterSprite.Modulate = new Color(0.76f, 0.76f, 0.76f, 1f);
+            CenterFacehuggerPortrait.Modulate = new Color(0.72f, 0.72f, 0.72f, 1f);
+        }
+
+        private void SetupTaskbarLabelHover()
+        {
+            BindTaskbarLabelHover(TaskbarMenuButton, TaskbarMenuLabel);
+            BindTaskbarLabelHover(TaskbarDonateButton, TaskbarDonateLabel);
+            BindTaskbarLabelHover(TaskbarCustomizationButton, TaskbarCustomizationLabel);
+        }
+
+        private static void BindTaskbarLabelHover(ContainerButton button, Label label)
+        {
+            button.OnMouseEntered += _ => label.FontColorOverride = StyleNano.LobbyMenuButtonBase;
+            button.OnMouseExited += _ => label.FontColorOverride = Color.Black;
+            label.FontColorOverride = Color.Black;
+        }
+
+        private void SetupButtonIconHover()
+        {
+            BindButtonIconHover(ReadyButton);
+            BindButtonIconHover(SetupCharacterButton);
+            BindButtonIconHover(StatsButton);
+            BindButtonIconHover(OptionsButton);
+            BindButtonIconHover(JoinUsmcButton);
+            BindButtonIconHover(JoinHiveButton);
+            BindButtonIconHover(ObserveButton);
+            BindButtonIconHover(CrewManifestButton);
+            BindButtonIconHover(TaskbarRatingButton);
+            BindButtonIconHover(TaskbarAchievementsButton);
+        }
+
+        private static void BindButtonIconHover(Control button)
+        {
+            button.OnMouseEntered += _ =>
+            {
+                if (button is BaseButton { Disabled: true })
+                {
+                    SetButtonIconColor(button, Color.Black);
+                    return;
+                }
+
+                SetButtonIconColor(button, StyleNano.LobbyMenuButtonBase);
+            };
+            button.OnMouseExited += _ => SetButtonIconColor(button, Color.Black);
+            SetButtonIconColor(button, Color.Black);
+        }
+
+        private static void SetButtonIconColor(Control root, Color color)
+        {
+            foreach (var texture in EnumerateTextureRects(root))
+            {
+                texture.ModulateSelfOverride = color;
+            }
+        }
+
+        private static IEnumerable<TextureRect> EnumerateTextureRects(Control root)
+        {
+            foreach (var child in root.Children)
+            {
+                if (child is TextureRect texture)
+                    yield return texture;
+
+                foreach (var nested in EnumerateTextureRects(child))
+                {
+                    yield return nested;
+                }
+            }
         }
 
         private void ApplyLobbyTheme(bool crtEnabled)
@@ -192,8 +262,7 @@ namespace Content.Client.Lobby.UI
             SetThemeClass(Chat.ChatInput.Input, crtEnabled);
             SetThemeClass(Chat.ChatInput.ChannelSelector, crtEnabled);
             SetThemeClass(Chat.ChatInput.FilterButton, crtEnabled);
-            SetThemeClass(CenterEmblem, crtEnabled);
-            SetThemeClass(LeftMenuToggleButton, crtEnabled);
+            SetThemeClass(LeftTaskbarPanel, crtEnabled);
             SetThemeClass(WelcomeLine1, crtEnabled);
             SetThemeClass(WelcomeCharacterName, crtEnabled);
             SetThemeClass(WelcomeXenoName, crtEnabled);
@@ -220,6 +289,30 @@ namespace Content.Client.Lobby.UI
             SetThemeClass(JoinUsmcButton, crtEnabled);
             SetThemeClass(JoinHiveButton, crtEnabled);
             SetThemeClass(CrewManifestButton, crtEnabled);
+            SetThemeClass(TaskbarRatingButton, crtEnabled);
+            SetThemeClass(TaskbarDonateButton, crtEnabled);
+            SetThemeClass(TaskbarMenuButton, crtEnabled);
+            SetThemeClass(TaskbarCustomizationButton, crtEnabled);
+            SetThemeClass(TaskbarAchievementsButton, crtEnabled);
+            SetThemeClass(TaskbarRatingLabel, crtEnabled);
+            SetThemeClass(TaskbarDonateLabel, crtEnabled);
+            SetThemeClass(TaskbarMenuLabel, crtEnabled);
+            SetThemeClass(TaskbarCustomizationLabel, crtEnabled);
+            SetThemeClass(TaskbarAchievementsLabel, crtEnabled);
+
+            TaskbarMenuLabel.FontColorOverride = Color.Black;
+            TaskbarDonateLabel.FontColorOverride = Color.Black;
+            TaskbarCustomizationLabel.FontColorOverride = Color.Black;
+            SetButtonIconColor(ReadyButton, Color.Black);
+            SetButtonIconColor(SetupCharacterButton, Color.Black);
+            SetButtonIconColor(StatsButton, Color.Black);
+            SetButtonIconColor(OptionsButton, Color.Black);
+            SetButtonIconColor(JoinUsmcButton, Color.Black);
+            SetButtonIconColor(JoinHiveButton, Color.Black);
+            SetButtonIconColor(ObserveButton, Color.Black);
+            SetButtonIconColor(CrewManifestButton, Color.Black);
+            SetButtonIconColor(TaskbarRatingButton, Color.Black);
+            SetButtonIconColor(TaskbarAchievementsButton, Color.Black);
 
             ApplyGlow(WelcomeLine1, crtEnabled);
             ApplyGlow(WelcomeCharacterName, crtEnabled);
@@ -291,7 +384,8 @@ namespace Content.Client.Lobby.UI
 
             if (show)
             {
-                LeftMenuToggleButton.Visible = false;
+                _leftMenuAutoCenter = true;
+                _leftMenuAnchorInitialized = false;
                 CenterMenuGlow.Visible = true;
                 CenterMenuGlow.Modulate = Color.Transparent;
                 CenterMenuGlow.PlayAnimation(BuildLeftMenuAnimation(Color.Transparent, Color.White), LeftMenuShowAnimationKey);
@@ -308,7 +402,6 @@ namespace Content.Client.Lobby.UI
             {
                 CenterMenuGlow.Visible = false;
                 CenterMenuGlow.Modulate = Color.White;
-                LeftMenuToggleButton.Visible = true;
             }
         }
 
@@ -347,6 +440,32 @@ namespace Content.Client.Lobby.UI
             // CCM rework lobby - end
 
             UpdateVoteContainerAnchor();
+            UpdateLeftMenuAnchor();
+            UpdateTaskbarAnchor();
+        }
+
+        private void UpdateLeftMenuAnchor()
+        {
+            if (_leftMenuDragStarted || CenterMenuGlow.Parent == null)
+                return;
+
+            if (!_leftMenuAutoCenter)
+                return;
+
+            var menuSize = CenterMenuGlow.Size;
+            var leftSize = LeftColumn.Size;
+            if (menuSize.X <= 1f || menuSize.Y <= 1f || leftSize.X <= 1f || leftSize.Y <= 1f)
+                return;
+
+            var parentGlobal = CenterMenuGlow.Parent.GlobalPosition;
+            var leftGlobal = LeftColumn.GlobalPosition;
+
+            var x = leftGlobal.X - parentGlobal.X + (leftSize.X - menuSize.X) * 0.5f;
+            var y = leftGlobal.Y - parentGlobal.Y + (leftSize.Y - menuSize.Y) * 0.5f + leftSize.Y * LeftMenuCenterYOffsetPercent;
+
+            LayoutContainer.SetAnchorPreset(CenterMenuGlow, LayoutPreset.TopLeft);
+            LayoutContainer.SetPosition(CenterMenuGlow, new Vector2(x, y));
+            _leftMenuAnchorInitialized = true;
         }
 
         private void UpdateVoteContainerAnchor()
@@ -391,6 +510,28 @@ namespace Content.Client.Lobby.UI
             // CCM rework lobby - end
         }
 
+        private void UpdateTaskbarAnchor()
+        {
+            if (LeftTaskbarPanel.Parent == null)
+                return;
+
+            var panelSize = LeftTaskbarPanel.Size;
+            if (panelSize.X <= 1f || panelSize.Y <= 1f)
+                return;
+
+            var parentGlobal = LeftTaskbarPanel.Parent.GlobalPosition;
+            var leftGlobal = LeftColumn.GlobalPosition;
+            var leftSize = LeftColumn.Size;
+            if (leftSize.X <= 1f || leftSize.Y <= 1f)
+                return;
+
+            var x = leftGlobal.X - parentGlobal.X + (leftSize.X - panelSize.X) * 0.5f;
+            var y = leftGlobal.Y - parentGlobal.Y + leftSize.Y - panelSize.Y - 2f;
+
+            LayoutContainer.SetAnchorPreset(LeftTaskbarPanel, LayoutPreset.TopLeft);
+            LayoutContainer.SetPosition(LeftTaskbarPanel, new Vector2(x, y));
+        }
+
         private void OnLeftMenuDragKeyBindDown(GUIBoundKeyEventArgs args)
         {
             if (args.Function != EngineKeyFunctions.UIClick || !CenterMenuGlow.Visible)
@@ -416,6 +557,7 @@ namespace Content.Client.Lobby.UI
                 return false;
 
             _leftMenuDragStarted = true;
+            _leftMenuAutoCenter = false;
 
             if (!_leftMenuAnchorInitialized && CanInitializeLeftMenuAnchor())
                 InitializeLeftMenuAnchor(CenterMenuGlow.GlobalPosition);

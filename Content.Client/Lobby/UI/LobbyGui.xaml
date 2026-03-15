@@ -22,20 +22,29 @@
                                         HorizontalAlignment="Center" VerticalAlignment="Center"
                                         MinWidth="416" MaxWidth="576">
                             <BoxContainer Orientation="Vertical" SeparationOverride="10" Margin="12 12 12 12">
-                                <BoxContainer Orientation="Horizontal" SeparationOverride="10">
-                                    <ContainerButton Name="EmblemButton" VerticalAlignment="Center">
-                                        <TextureRect Name="CenterEmblem" MinSize="96 96"
-                                                     VerticalAlignment="Center"
-                                                     Stretch="KeepAspectCentered"
-                                                     StyleClasses="LobbyEmblem"
-                                                     TexturePath="/Textures/_CCM14/Logo/logocm.png" />
-                                    </ContainerButton>
+                                <BoxContainer Orientation="Horizontal" SeparationOverride="16" HorizontalAlignment="Center">
+                                    <PanelContainer MinSize="88 88" VerticalAlignment="Center">
+                                        <SpriteView Name="CenterCharacterSprite"
+                                                    Access="Public"
+                                                    MinSize="88 88"
+                                                    SetSize="88 88"
+                                                    OverrideDirection="South"
+                                                    Scale="2.8 2.8"
+                                                    Stretch="Fill" />
+                                    </PanelContainer>
                                     <BoxContainer Orientation="Vertical" SeparationOverride="2" VerticalAlignment="Center"
-                                                  HorizontalAlignment="Center" Margin="20 0 0 0">
-                                        <Label Name="WelcomeLine1" Text="{Loc 'ui-lobby-welcome'}" StyleClasses="LobbyWelcomeLine1" />
-                                        <Label Name="WelcomeCharacterName" Access="Public" StyleClasses="LobbyWelcomeLine2" />
-                                        <Label Name="WelcomeXenoName" Access="Public" StyleClasses="LobbyWelcomeLine3" />
+                                                  HorizontalAlignment="Center">
+                                        <Label Name="WelcomeLine1" Text="{Loc 'ui-lobby-welcome'}"
+                                               StyleClasses="LobbyWelcomeLine1" HorizontalAlignment="Center" />
+                                        <Label Name="WelcomeCharacterName" Access="Public"
+                                               StyleClasses="LobbyWelcomeLine2" HorizontalAlignment="Center" />
+                                        <Label Name="WelcomeXenoName" Access="Public"
+                                               StyleClasses="LobbyWelcomeLine3" HorizontalAlignment="Center" />
                                     </BoxContainer>
+                                    <TextureRect Name="CenterFacehuggerPortrait" MinSize="96 96"
+                                                 VerticalAlignment="Center"
+                                                 Stretch="KeepAspectCentered"
+                                                 TexturePath="/Textures/_RMC14/Mobs/Xenonids/Parasite/parasite.rsi/sleeping.png" />
                                 </BoxContainer>
                                 <PanelContainer Name="ReadyDivider" StyleClasses="LobbyMenuDivider"
                                                 MinSize="0 2" HorizontalExpand="True" Margin="0 6" />
@@ -135,11 +144,47 @@
                     <BoxContainer Orientation="Vertical" SeparationOverride="4" Name="VoteContainer"
                                   Access="Public" HorizontalAlignment="Center"
                                   VerticalAlignment="Top" Margin="0 8" />
-                    <Button Name="LeftMenuToggleButton" Visible="False"
-                            Text="{Loc 'ui-lobby-menu-toggle'}" MinHeight="32"
-                            HorizontalAlignment="Left" VerticalAlignment="Top"
-                            Margin="8 8 0 0"
-                            StyleClasses="LobbyTopButton" />
+                    <PanelContainer Name="LeftTaskbarPanel" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                                    Margin="0 0 0 8" MinWidth="790" MaxWidth="890" MinHeight="84" MaxHeight="84"
+                                    StyleClasses="LobbyMusicPanel">
+                        <BoxContainer Orientation="Horizontal" SeparationOverride="8" Margin="8 8 8 8"
+                                      HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalExpand="True">
+                            <ContainerButton Name="TaskbarRatingButton" MinSize="72 52" Margin="4 0 4 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="0.9">
+                                <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextureRect MinSize="32 32" MaxSize="32 32" Stretch="KeepAspectCentered"
+                                                 TexturePath="/Textures/_CCM14/Logo/icon/rating.png" />
+                                    <Label Name="TaskbarRatingLabel" Text="{Loc 'ui-lobby-taskbar-rating'}"
+                                           StyleClasses="LobbyTaskbarLabel" HorizontalAlignment="Center" Visible="False" />
+                                </BoxContainer>
+                            </ContainerButton>
+                            <ContainerButton Name="TaskbarDonateButton" MinSize="126 60" Margin="4 0 4 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="1.8">
+                                <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Label Name="TaskbarDonateLabel" Text="{Loc 'ui-lobby-taskbar-donate'}"
+                                           StyleClasses="TaskbarLabelSmall" HorizontalAlignment="Center" />
+                                </BoxContainer>
+                            </ContainerButton>
+                            <ContainerButton Name="TaskbarMenuButton" MinSize="98 52" Margin="4 0 4 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="1">
+                                <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Label Name="TaskbarMenuLabel" Text="{Loc 'ui-lobby-taskbar-menu'}"
+                                           StyleClasses="TaskbarLabelSmall" HorizontalAlignment="Center" />
+                                </BoxContainer>
+                            </ContainerButton>
+                            <ContainerButton Name="TaskbarCustomizationButton" MinSize="126 60" Margin="4 0 4 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="1.8">
+                                <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Label Name="TaskbarCustomizationLabel" Text="{Loc 'ui-lobby-taskbar-customization'}"
+                                           StyleClasses="TaskbarLabelSmall" HorizontalAlignment="Center" />
+                                </BoxContainer>
+                            </ContainerButton>
+                            <ContainerButton Name="TaskbarAchievementsButton" MinSize="72 52" Margin="4 0 4 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="0.9">
+                                <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextureRect MinSize="32 32" MaxSize="32 32" Stretch="KeepAspectCentered"
+                                                 TexturePath="/Textures/_CCM14/Logo/icon/achievement.png" />
+                                    <Label Name="TaskbarAchievementsLabel" Text="{Loc 'ui-lobby-taskbar-achievements'}"
+                                           StyleClasses="LobbyTaskbarLabel" HorizontalAlignment="Center" Visible="False" />
+                                </BoxContainer>
+                            </ContainerButton>
+                        </BoxContainer>
+                    </PanelContainer>
                     <PanelContainer Name="LobbyMusicPanel" StyleClasses="LobbyMusicPanel"
                                     MinHeight="64" MaxWidth="408">
                         <BoxContainer Name="LobbyMusicInfo" Orientation="Vertical"

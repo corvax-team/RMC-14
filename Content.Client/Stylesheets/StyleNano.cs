@@ -93,6 +93,10 @@ namespace Content.Client.Stylesheets
         public const string StyleClassLobbyMusicHeader = "LobbyMusicHeader";
         public const string StyleClassLobbyInfoLine = "LobbyInfoLine";
         public const string StyleClassLobbyInfoText = "LobbyInfoText";
+        public const string StyleClassLobbyTaskbarLabel = "LobbyTaskbarLabel";
+        public const string StyleClassLobbyTaskbarMenuLabel = "LobbyTaskbarMenuLabel";
+        public const string StyleClassLobbyTaskbarMenuIcon = "LobbyTaskbarMenuIcon";
+        public const string StyleClassLobbyTaskbarLabelSmall = "TaskbarLabelSmall";
         public const string StyleClassLobbyMenuButton = "LobbyMenuButton";
         public const string StyleClassLobbyReadyButton = "LobbyReadyButton";
         public const string StyleClassLobbyMenuDivider = "LobbyMenuDivider";
@@ -570,8 +574,8 @@ namespace Content.Client.Stylesheets
             var lineEdit = new StyleBoxFlat
             {
                 BackgroundColor = CurrentTheme == UiColorTheme.Blue
-                    ? Color.FromHex("#143A76").WithAlpha(0.94f)
-                    : Color.FromHex("#0E361A").WithAlpha(0.94f),
+                    ? Color.FromHex("#0C1F44").WithAlpha(0.96f)
+                    : Color.FromHex("#071A0D").WithAlpha(0.96f),
                 BorderColor = CurrentTheme == UiColorTheme.Blue
                     ? Color.FromHex("#1F5CAB").WithAlpha(0.96f)
                     : Color.FromHex("#2B7E45").WithAlpha(0.96f),
@@ -821,14 +825,14 @@ namespace Content.Client.Stylesheets
 
             var lobbyChatInputCrt = new StyleBoxFlat
             {
-                BackgroundColor = Color.FromHex("#090D0B"),
+                BackgroundColor = Color.FromHex("#030504"),
                 BorderColor = Color.Transparent,
                 BorderThickness = new Thickness(0)
             };
 
             var lobbyChatInputClean = new StyleBoxFlat
             {
-                BackgroundColor = Color.FromHex("#0A130E"),
+                BackgroundColor = Color.FromHex("#04070B"),
                 BorderColor = Color.Transparent,
                 BorderThickness = new Thickness(0)
             };
@@ -1633,6 +1637,88 @@ namespace Content.Client.Stylesheets
                     .Prop(Label.StylePropertyFont, notoSans12)
                     .Prop(Label.StylePropertyFontColor, LobbyCleanMutedText),
 
+                Element<Label>().Class(StyleClassLobbyTaskbarLabel).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center)
+                    .Prop(Label.StylePropertyFont, bedstead15)
+                    .Prop(Label.StylePropertyFontColor, Color.Black),
+
+                Element<Label>().Class(StyleClassLobbyTaskbarLabel).Class(StyleClassLobbyThemeClean)
+                    .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center)
+                    .Prop(Label.StylePropertyFont, bedstead15)
+                    .Prop(Label.StylePropertyFontColor, Color.Black),
+
+                Element<Label>().Class(StyleClassLobbyTaskbarLabel)
+                    .Prop(Label.StylePropertyFontColor, Color.Black),
+
+                Element<Label>().Class(StyleClassLobbyTaskbarMenuLabel).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center)
+                    .Prop(Label.StylePropertyFont, notoSansBold16)
+                    .Prop(Label.StylePropertyFontColor, Color.Black),
+
+                Element<Label>().Class(StyleClassLobbyTaskbarMenuLabel).Class(StyleClassLobbyThemeClean)
+                    .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center)
+                    .Prop(Label.StylePropertyFont, notoSansBold16)
+                    .Prop(Label.StylePropertyFontColor, Color.Black),
+
+                Element<Label>().Class(StyleClassLobbyTaskbarMenuLabel)
+                    .Prop(Label.StylePropertyFontColor, Color.Black),
+
+                Element<Label>().Class(StyleClassLobbyTaskbarLabelSmall).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center)
+                    .Prop(Label.StylePropertyFont, notoSansBold16)
+                    .Prop(Label.StylePropertyFontColor, Color.Black),
+
+                Element<Label>().Class(StyleClassLobbyTaskbarLabelSmall).Class(StyleClassLobbyThemeClean)
+                    .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center)
+                    .Prop(Label.StylePropertyFont, notoSansBold16)
+                    .Prop(Label.StylePropertyFontColor, Color.Black),
+
+                Element<Label>().Class(StyleClassLobbyTaskbarLabelSmall)
+                    .Prop(Label.StylePropertyFontColor, Color.Black),
+
+                Element<TextureRect>().Class(StyleClassLobbyTaskbarMenuIcon)
+                    .Prop(Control.StylePropertyModulateSelf, LobbyMenuButtonBase.WithAlpha(0.9f)),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorChild(
+                        new SelectorElement(typeof(ContainerButton), new[] {StyleClassLobbyMenuIconButton}, null, null),
+                        new SelectorElement(typeof(BoxContainer), null, null, null)),
+                    new SelectorElement(typeof(Label), new[] {StyleClassLobbyTaskbarLabel}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.Black)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorChild(
+                        new SelectorElement(typeof(ContainerButton), new[] {StyleClassLobbyMenuIconButton}, null, null),
+                        new SelectorElement(typeof(BoxContainer), null, null, null)),
+                    new SelectorElement(typeof(Label), new[] {StyleClassLobbyTaskbarLabelSmall}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.Black)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorChild(
+                        new SelectorElement(typeof(ContainerButton), new[] {StyleClassLobbyMenuIconButton}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                        new SelectorElement(typeof(BoxContainer), null, null, null)),
+                    new SelectorElement(typeof(Label), new[] {StyleClassLobbyTaskbarLabel}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, LobbyMenuButtonBase)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorChild(
+                        new SelectorElement(typeof(ContainerButton), new[] {StyleClassLobbyMenuIconButton}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                        new SelectorElement(typeof(BoxContainer), null, null, null)),
+                    new SelectorElement(typeof(Label), new[] {StyleClassLobbyTaskbarLabelSmall}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, LobbyMenuButtonBase)
+                    }),
+
                 new StyleRule(new SelectorChild(
                     new SelectorElement(typeof(BoxContainer), new[] {StyleClassLobbyInfoText, StyleClassLobbyThemeCrt}, null, null),
                     new SelectorElement(typeof(RichTextLabel), null, null, null)),
@@ -1853,19 +1939,19 @@ namespace Content.Client.Stylesheets
 
                 Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton)
                     .Pseudo(ContainerButton.StylePseudoClassNormal)
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#D5FFE0")),
+                    .Prop(Control.StylePropertyModulateSelf, Color.White),
 
                 Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton)
                     .Pseudo(ContainerButton.StylePseudoClassHover)
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#D5FFE0")),
+                    .Prop(Control.StylePropertyModulateSelf, Color.White),
 
                 Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton)
                     .Pseudo(ContainerButton.StylePseudoClassPressed)
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#D5FFE0")),
+                    .Prop(Control.StylePropertyModulateSelf, Color.White),
 
                 Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton)
                     .Pseudo(ContainerButton.StylePseudoClassDisabled)
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#D5FFE0")),
+                    .Prop(Control.StylePropertyModulateSelf, Color.White),
 
                   new StyleRule(new SelectorChild(
                       new SelectorElement(typeof(ContainerButton), new[] {StyleClassLobbyMenuIconButton}, null, null),
@@ -2917,18 +3003,24 @@ namespace Content.Client.Stylesheets
                 // Window Headers
                 Element<Label>().Class("FancyWindowTitle")
                     .Prop("font", boxFont13)
-                    .Prop("font-color", Color.Transparent),
+                    .Prop("font-color", CurrentTheme == UiColorTheme.Blue
+                        ? Color.FromHex("#D4E4FF")
+                        : Color.FromHex("#DCEFE0")),
 
                 Element<PanelContainer>().Class("WindowHeadingBackground")
                     .Prop("panel", new StyleBoxFlat
                     {
-                        BackgroundColor = Color.FromHex("#393940").WithAlpha(0.90f),
+                        BackgroundColor = (CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#1A3678")
+                            : Color.FromHex("#0F2A17")).WithAlpha(0.96f),
                     }),
 
                 Element<PanelContainer>().Class("WindowHeadingBackgroundLight")
                     .Prop("panel", new StyleBoxFlat
                     {
-                        BackgroundColor = Color.FromHex("#393940").WithAlpha(0.70f),
+                        BackgroundColor = (CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#21458F")
+                            : Color.FromHex("#163820")).WithAlpha(0.84f),
                     }),
 
                 // CCM rework lobby - start

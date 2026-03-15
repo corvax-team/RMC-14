@@ -1,15 +1,15 @@
 <Control xmlns="https://spacestation14.io" MinWidth="300" MaxWidth="900" HorizontalAlignment="Center">
     <PanelContainer StyleClasses="AngleRect" />
     <BoxContainer Margin="4" Orientation="Vertical">
-        <Label Name="VoteCaller" HorizontalAlignment="Center" />
-        <RichTextLabel Name="VoteTitle" HorizontalAlignment="Center" />
+        <Label Name="VoteCaller" HorizontalAlignment="Center" StyleClasses="VoteCallerText" />
+        <RichTextLabel Name="VoteTitle" HorizontalAlignment="Center" StyleClasses="VoteTitleText" />
         <Button Margin="4 4" Name="FollowVoteTarget" Text="{Loc 'ui-vote-follow-button-popup'}" Visible="False"
                 StyleClasses="VoteButton"></Button>
 
         <GridContainer Columns="3" Name="VoteOptionsContainer" HorizontalExpand="True" Margin="0 6 0 0" />
-        <BoxContainer Orientation="Horizontal">
-            <ProgressBar Margin="4" HorizontalExpand="True" Name="TimeLeftBar" MinValue="0" MaxValue="1" />
-            <Label Name="TimeLeftText" />
+        <BoxContainer Orientation="Horizontal" Margin="4 0 4 0">
+            <ProgressBar HorizontalExpand="True" Name="TimeLeftBar" MinValue="0" MaxValue="1" MinHeight="20" MaxHeight="20" />
+            <Label Name="TimeLeftText" Margin="4 0 0 0" />
         </BoxContainer>
     </BoxContainer>
     <!-- # CCM priority rework -->

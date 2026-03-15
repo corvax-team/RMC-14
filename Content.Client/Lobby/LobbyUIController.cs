@@ -65,6 +65,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     private CharacterSetupGui? _characterSetup;
     private HumanoidProfileEditor? _profileEditor;
     private CharacterSetupGuiSavePanel? _savePanel;
+    private EntityUid? _lobbyHeaderPreviewDummy;
     private readonly Dictionary<int, Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo>> _jobPriorityChancesBySlot = new();
 
     /// <summary>
@@ -160,6 +161,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
     public void OnStateExited(LobbyState state)
     {
+        ClearLobbyHeaderPreview();
         _profileEditor?.Dispose();
         _characterSetup?.Dispose();
 
@@ -180,6 +182,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         if (_stateManager.CurrentState is not LobbyState)
             return;
 
+        ClearLobbyHeaderPreview();
         _profileEditor?.Dispose();
         _characterSetup?.Dispose();
         _profileEditor = null;
@@ -450,15 +453,38 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         var characterName = string.IsNullOrWhiteSpace(profile?.Name)
             ? Loc.GetString("identity-unknown-name")
             : profile.Name;
-        lobby.Lobby.WelcomeCharacterName.Text = characterName;
-        UpdateLobbyNameFont(lobby.Lobby.WelcomeCharacterName, characterName);
+        var formattedCharacterName = FormatLobbyCharacterName(characterName);
+        lobby.Lobby.WelcomeCharacterName.Text = formattedCharacterName;
+        UpdateLobbyNameFont(lobby.Lobby.WelcomeCharacterName, formattedCharacterName);
         lobby.Lobby.WelcomeXenoName.Text = BuildLobbyXenoName(profile);
+        UpdateLobbyHeaderPreview(lobby, profile);
+    }
+
+    private void UpdateLobbyHeaderPreview(LobbyState lobby, HumanoidCharacterProfile? profile)
+    {
+        if (_lobbyHeaderPreviewDummy != null && EntityManager.EntityExists(_lobbyHeaderPreviewDummy.Value))
+            EntityManager.DeleteEntity(_lobbyHeaderPreviewDummy.Value);
+
+        _lobbyHeaderPreviewDummy = LoadProfileEntity(profile, null, true);
+        lobby.Lobby?.CenterCharacterSprite.SetEntity(_lobbyHeaderPreviewDummy);
+    }
+
+    private void ClearLobbyHeaderPreview()
+    {
+        if (_lobbyHeaderPreviewDummy != null && EntityManager.EntityExists(_lobbyHeaderPreviewDummy.Value))
+            EntityManager.DeleteEntity(_lobbyHeaderPreviewDummy.Value);
+
+        _lobbyHeaderPreviewDummy = null;
+
+        if (_stateManager.CurrentState is LobbyState lobby && lobby.Lobby != null)
+            lobby.Lobby.CenterCharacterSprite.SetEntity(null);
     }
 
     private void UpdateLobbyNameFont(Label label, string? name)
     {
-        var length = name?.Length ?? 0;
-        var size = length switch
+        var raw = name ?? string.Empty;
+        var longestLine = raw.Split('\n').Max(static line => line.Length);
+        var size = longestLine switch
         {
             <= 12 => 18,
             <= 21 => 15,
@@ -466,6 +492,19 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         };
 
         label.FontOverride = _resourceCache.NotoStack(variation: "Bold", size: size);
+    }
+
+    private static string FormatLobbyCharacterName(string name)
+    {
+        if (name.Length <= 18)
+            return name;
+
+        var tokens = name.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (tokens.Length >= 2)
+            return $"{tokens[0]}\n{string.Join(' ', tokens.Skip(1))}";
+
+        var splitAt = Math.Clamp(name.Length / 2, 8, name.Length - 4);
+        return $"{name[..splitAt]}\n{name[splitAt..]}";
     }
 
     private string BuildLobbyXenoName(HumanoidCharacterProfile? profile)

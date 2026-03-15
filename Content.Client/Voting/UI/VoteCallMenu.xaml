@@ -6,11 +6,11 @@
     <BoxContainer Orientation="Vertical">
         <BoxContainer Margin="8 0" Orientation="Horizontal">
             <Label Text="{Loc 'ui-vote-create-title'}"
-                   HorizontalExpand="True" VAlign="Center" StyleClasses="LabelHeading" />
-            <TextureButton Name="CloseButton" StyleClasses="windowCloseButton"
+                   HorizontalExpand="True" VAlign="Center" StyleClasses="VoteMenuTitle" />
+            <TextureButton Name="CloseButton" StyleClasses="VoteMenuCloseButton"
                            VerticalAlignment="Center" />
         </BoxContainer>
-        <controls:HighDivider />
+        <PanelContainer StyleClasses="VoteMenuDivider" />
 
         <BoxContainer Orientation="Vertical" Margin="8 2 8 0" VerticalExpand="True" VerticalAlignment="Top">
             <BoxContainer Orientation="Vertical">

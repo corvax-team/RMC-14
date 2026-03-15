@@ -48,7 +48,7 @@ namespace Content.Client.LateJoin
 
         public LateJoinGui()
         {
-            MinSize = SetSize = new Vector2(360, 560);
+            MinSize = SetSize = new Vector2(440, 620);
             IoCManager.InjectDependencies(this);
             _sprites = _entitySystem.GetEntitySystem<SpriteSystem>();
             _crewManifest = _entitySystem.GetEntitySystem<CrewManifestSystem>();
@@ -170,6 +170,14 @@ namespace Content.Client.LateJoin
                 var firstCategory = true;
                 var departments = _prototypeManager.EnumerateCM<DepartmentPrototype>().ToArray();
                 Array.Sort(departments, DepartmentUIComparer.Instance);
+
+                // Keep the main marine department at the top of the late-join list.
+                var marineDepartmentIndex = Array.FindIndex(departments, department => department.ID == "CMSquad");
+                if (marineDepartmentIndex > 0)
+                {
+                    (departments[0], departments[marineDepartmentIndex]) =
+                        (departments[marineDepartmentIndex], departments[0]);
+                }
 
                 _jobButtons[id] = new Dictionary<string, List<JobButton>>();
 
