@@ -180,8 +180,8 @@
     damageAddedFortified:
       groups:
         Brute: -30
-  - type: Sprite #CCM Change - Как починю удалить
-    sprite: _RMC14/Mobs/Xenonids/Crusher/charger_crusher.rsi
+#  - type: Sprite #CCM Backup
+#    sprite: _RMC14/Mobs/Xenonids/Crusher/charger_crusher.rsi
 #  - type: XenoEvolution #CCM Изменения
 #    strains:
 #    - RMCXenoCrusherCharger
