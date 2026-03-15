@@ -59,11 +59,15 @@
     - CCMWallXenoThickWeedBoundResin
     - DoorXenoWeedBoundResin
     - DoorXenoThickWeedBoundResin
+    - XenoStickyResin
+    - XenoFastResin
+    - HiveAcidPillarXeno
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
     - HiveEggMorpherXenoConstructionNode
     - HiveClusterXenoConstructionNode
     - HiveRecoveryNodeXenoConstructionNode
+    - HivePlasmaTreeXenoConstructionNode
   - type: XenoRegen
     restHealMultiplier:  1.4 #Вождь баланс
   - type: XenoHeavy
