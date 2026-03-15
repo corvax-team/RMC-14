@@ -139,7 +139,7 @@ public sealed class VehicleTurretMuzzleOffsetSystem : EntitySystem
         }
 
         var baseRotation = GetBaseRotation(weaponUid, muzzle.AngleOffset);
-        var offset = GetGunMuzzleOffset(muzzle, baseRotation);
+        var offset = GetGunMuzzleOffset(weaponUid, muzzle, baseRotation);
         origin = muzzle.RotateDirectionalOffsets || !muzzle.UseDirectionalOffsets
             ? origin.Offset(baseRotation.RotateVec(offset))
             : origin.Offset(offset);
@@ -185,13 +185,20 @@ public sealed class VehicleTurretMuzzleOffsetSystem : EntitySystem
         return origin.Offset(desiredOffset - currentOffset);
     }
 
-    private Vector2 GetGunMuzzleOffset(GunMuzzleOffsetComponent muzzle, Angle baseRotation)
+    private Vector2 GetGunMuzzleOffset(EntityUid weaponUid, GunMuzzleOffsetComponent muzzle, Angle baseRotation)
     {
         if (!muzzle.UseDirectionalOffsets)
             return muzzle.Offset;
 
-        var renderFacing = (baseRotation + _eye.CurrentEye.Rotation).Reduced();
-        var renderOffset = VehicleTurretDirectionHelpers.GetRenderAlignedCardinalDir(renderFacing) switch
+        var facing = baseRotation;
+        if (TryComp(weaponUid, out VehicleTurretComponent? _) &&
+            TryGetVehicle(weaponUid, out var vehicle))
+        {
+            var vehicleRot = _transform.GetWorldRotation(vehicle);
+            facing = GetVehicleFacingAngle(vehicle, vehicleRot);
+        }
+
+        var worldOffset = VehicleTurretDirectionHelpers.GetRenderAlignedCardinalDir(facing.Reduced()) switch
         {
             Direction.North => muzzle.OffsetNorth,
             Direction.East => muzzle.OffsetEast,
@@ -200,9 +207,7 @@ public sealed class VehicleTurretMuzzleOffsetSystem : EntitySystem
             _ => muzzle.Offset,
         };
 
-        return muzzle.RotateDirectionalOffsets
-            ? (-_eye.CurrentEye.Rotation).RotateVec(renderOffset)
-            : renderOffset;
+        return worldOffset;
     }
 
     private Angle GetBaseRotation(EntityUid baseUid, Angle angleOffset)
@@ -220,8 +225,7 @@ public sealed class VehicleTurretMuzzleOffsetSystem : EntitySystem
         Angle eyeRotation,
         bool useRight)
     {
-        var renderFacing = (baseRotation + eyeRotation).Reduced();
-        var renderOffset = VehicleTurretDirectionHelpers.GetRenderAlignedCardinalDir(renderFacing) switch
+        var worldOffset = VehicleTurretDirectionHelpers.GetRenderAlignedCardinalDir(baseRotation.Reduced()) switch
         {
             Direction.North => useRight ? muzzle.OffsetRightNorth : muzzle.OffsetLeftNorth,
             Direction.East => useRight ? muzzle.OffsetRightEast : muzzle.OffsetLeftEast,
@@ -230,11 +234,7 @@ public sealed class VehicleTurretMuzzleOffsetSystem : EntitySystem
             _ => useRight ? muzzle.OffsetRight : muzzle.OffsetLeft
         };
 
-        var localOffset = eyeRotation == Angle.Zero
-            ? renderOffset
-            : (-eyeRotation).RotateVec(renderOffset);
-
-        return baseRotation.RotateVec(localOffset);
+        return baseRotation.RotateVec(worldOffset);
     }
 
     private bool TryGetVehicle(EntityUid turretUid, out EntityUid vehicle)
@@ -338,6 +338,14 @@ public sealed class VehicleTurretMuzzleOffsetSystem : EntitySystem
         return VehicleTurretDirectionHelpers.GetRenderAlignedCardinalDir(facing);
     }
 
+    private Angle GetVehicleFacingAngle(EntityUid vehicle, Angle vehicleRot)
+    {
+        if (TryComp(vehicle, out GridVehicleMoverComponent? mover) && mover.CurrentDirection != Vector2i.Zero)
+            return new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y).ToWorldAngle();
+
+        return vehicleRot;
+    }
+
     private static Angle GetDirectionalAngle(Direction dir)
     {
         return dir.ToAngle();
@@ -365,11 +373,4 @@ public sealed class VehicleTurretMuzzleOffsetSystem : EntitySystem
         return (vehicleRot + anchorTurret.WorldRotation).Reduced();
     }
 
-    private Angle GetVehicleFacingAngle(EntityUid vehicle, Angle vehicleRot)
-    {
-        if (TryComp(vehicle, out GridVehicleMoverComponent? mover) && mover.CurrentDirection != Vector2i.Zero)
-            return new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y).ToWorldAngle();
-
-        return vehicleRot;
-    }
 }
