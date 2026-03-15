@@ -132,9 +132,9 @@
     - ActionXenoStomp
     - ActionXenoDefensiveShield
     - ActionXenoToggleCharging
-    - ActionXenoTumble #CCM Изменения
-    - ActionXenoTailLash #CCM backup
-    - ActionXenoFortify #CCM backup
+    - ActionXenoTumble #CCM Change
+    - CCMActionXenoHeadcliff #CCM
+    - CCMActionXenoEndure #CCM
     - ActionXenoDevolve
   - type: CrusherShield
   - type: XenoCharge
@@ -142,24 +142,24 @@
       types:
         Blunt: 60
         Structural: 750
-  - type: MobThresholds #CCM Изменения
+  - type: MobThresholds #CCM Change
     thresholds:
       0: Alive
       800: Critical
       900: Dead
-  - type: CMArmor # CCM Изменения
+  - type: CMArmor # CCM Change
     xenoArmor: 30
     frontalArmor: 10
     sideArmor: 5
   - type: XenoShield
-  - type: XenoTumble #CCM Изменения
+  - type: XenoTumble #CCM Change
     range: 1
     impactRange: 2
     damage:
       types:
         Blunt: 25
-  - type: XenoToggleCharging #CCM Изменения
-  - type: XenoTailLash #CCM Изменения
+  - type: XenoToggleCharging #CCM Change
+  - type: XenoTailLash #CCM Change
     effect: RMCEffectXenoTelegraphRed
     effectEdge: RMCEffectXenoTelegraphRed
     height: 1
@@ -168,9 +168,9 @@
     stunTime: 1.25
     slowTime: 4
     flingDistance: 6
-  - type: XenoFortify #CCM Изменения
-    armor: 0
-    frontalArmor: 15
+  - type: XenoFortify #CCM Change
+    armor: 15
+    frontalArmor: 0
     explosionArmor: 80
     changeExplosionWeakness: false
     canHeadbuttFortified: false
@@ -185,7 +185,7 @@
       - Vehicle
   - type: Sprite #CCM Backup
     sprite: _RMC14/Mobs/Xenonids/Crusher/charger_crusher.rsi
-#  - type: XenoEvolution #CCM Изменения
+#  - type: XenoEvolution #CCM Change
 #    strains:
 #    - RMCXenoCrusherCharger
   - type: RMCActionOrder
