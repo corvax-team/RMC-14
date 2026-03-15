@@ -1,9 +1,59 @@
-- type: rank
+- type: rank # CCM14
   id: RMCRankCLFRebel
-  name: Диверсант
-  prefix: Див.
+  name: Солдадо
+  prefix: Сол.
+  paygrade: E1
+
+- type: rank
+  id: RMCRankCLFRebel2
+  name: Солдадо Дэ Примера
+  prefix: СолДэПри.
+  paygrade: E2
+
+- type: rank
+  id: RMCRankCLFRebel3
+  name: Кабо
+  prefix: Кап.
+  paygrade: E3
+
+- type: rank
+  id: RMCRankCLFRebel4
+  name: Сарженто Дэ ТэпЦеро
+  prefix: СарДэТэп.
+  paygrade: E4
+
+- type: rank
+  id: RMCRankCLFRebel5
+  name: Сарженто Дэ Сегундо
+  prefix: СарДэСег.
+  paygrade: E5
+
+- type: rank
+  id: RMCRankCLFRebel6
+  name: Сарженто Дэ Примеро
+  prefix: СарДэПри.
+  paygrade: E6
+
+- type: rank
+  id: RMCRankCLFRebel7
+  name: Саб-Тэниенте
+  prefix: СабТэн.
+  paygrade: O1
 
 - type: rank
   id: RMCRankCLFRebelCommander
-  name: Командир Диверсионной Ячейки
-  prefix: КДЯ.
+  name: Тэниенте
+  prefix: Тэн.
+  paygrade: O2
+
+- type: rank
+  id: RMCRankCLFRebelOfficer
+  name: Примэр Тэниенте
+  prefix: ПримТэн.
+  paygrade: O3
+
+- type: rank
+  id: RMCRankCLFRebel1Officer1
+  name: Капитан
+  prefix: Кап.
+  paygrade: O4

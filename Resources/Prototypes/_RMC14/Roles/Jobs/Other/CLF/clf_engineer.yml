@@ -1,11 +1,11 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: RMCCLFEngineer
   name: rmc-clf-engineer
   description: rmc-ghost-role-information-clf-description
   playTimeTracker: RMCJobCLFEngineer
   ranks:
-    RMCRankCLFRebel: [ ]
+    RMCRankCLFRebel3: [ ]
   startingGear: RMCGearCLFEngineer
   icon: RMCJobIconCLFEngineer
   joinNotifyCrew: false
