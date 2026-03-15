@@ -158,7 +158,7 @@
     effect: RMCEffectXenoTelegraphRed
     effectEdge: RMCEffectXenoTelegraphRed
     height: 1
-    width: 1
+    width: 3
     windup: 0
     stunTime: 1.25
     slowTime: 4
