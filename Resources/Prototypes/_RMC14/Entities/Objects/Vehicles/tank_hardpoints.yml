@@ -35,6 +35,13 @@
     pixelOffsetEast: "-10,0"
     pixelOffsetSouth: "0,10"
     pixelOffsetWest: "10,0"
+  - type: ItemSlots
+    slots:
+      turret-cannon:
+        startingItem: RMCVehicleTankAceAutocannon
+        whitelist:
+          components:
+          - RMCHardpointItem
   - type: RMCHardpointSlots
     vehicleFamily: Tank
     slots:
@@ -229,9 +236,9 @@
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,30"
-    pixelOffsetEast: "40,0"
+    pixelOffsetEast: "30,0"
     pixelOffsetSouth: "0,-50"
-    pixelOffsetWest: "-40,0"
+    pixelOffsetWest: "-30,0"
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: ltb_cannon_0
@@ -262,12 +269,12 @@
   - type: GunMuzzleOffset
     useDirectionalOffsets: true
     rotateDirectionalOffsets: true
-    offsetNorth: "0,-2"
-    offsetEast: "0,-1.8"
-    offsetSouth: "0,-2"
-    offsetWest: "0,-2"
+    offsetNorth: "0,-1.5"
+    offsetEast: "0.4,-1.9"
+    offsetSouth: "0,-1"
+    offsetWest: "-0.4,-1.9"
     useAimDirection: true
-    muzzleOffset: "0,0"
+
   - type: RMCHardpointVisual
     vehicleState: ltb_cannon_0
 
@@ -293,10 +300,10 @@
     maxShotCurvatureDegrees: 10
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
-    pixelOffsetNorth: "0,30"
-    pixelOffsetEast: "35,0"
+    pixelOffsetNorth: "0,40"
+    pixelOffsetEast: "33,0"
     pixelOffsetSouth: "0,-50"
-    pixelOffsetWest: "-35,0"
+    pixelOffsetWest: "-33,0"
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: ltaaap_minigun_0
@@ -344,10 +351,10 @@
     applyToMuzzleFlash: true
     useDirectionalOffsets: true
     rotateDirectionalOffsets: true
-    offsetEast: "0.45,-1.05"
-    offsetWest: "-0.45, -1.05"
+    offsetEast: "0.45,-1.3"
+    offsetWest: "-0.45, -1.3"
     offsetSouth: "0, -0.55"
-    offsetNorth: "0, -0.9"
+    offsetNorth: "0, -1.3"
     useAimDirection: true
     useContainerOwner: false
   - type: RMCHardpointVisual
@@ -372,6 +379,11 @@
   - type: VehicleTurret
     offsetRotatesWithTurret: true
     showOverlay: true
+    useDirectionalOffsets: true
+    pixelOffsetNorth: "0,25"
+    pixelOffsetEast: "30,0"
+    pixelOffsetSouth: "0,-40"
+    pixelOffsetWest: "-30,0"
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: ace_autocannon_0
   - type: GunUseGunOrigin
@@ -399,10 +411,13 @@
   - type: RefillableByBulletBox
     bulletType: RMCVehicleAmmoBoxAceAutocannon
   - type: GunMuzzleOffset
-    offset: "0,0"
+    applyToMuzzleFlash: true
     useDirectionalOffsets: true
-    offsetEast: "0,0.2"
-    muzzleOffset: "0,-1"
+    rotateDirectionalOffsets: true
+    offsetEast: "0.45,-0.7"
+    offsetWest: "-0.45, -0.7"
+    offsetSouth: "0, -0.55"
+    offsetNorth: "0, -1.1"
     useAimDirection: true
     useContainerOwner: false
   - type: RMCHardpointVisual
@@ -431,9 +446,9 @@
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,25"
-    pixelOffsetEast: "40,0"
+    pixelOffsetEast: "30,0"
     pixelOffsetSouth: "0,-40"
-    pixelOffsetWest: "-40,0"
+    pixelOffsetWest: "-30,0"
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: GunIgnorePrediction
@@ -461,10 +476,13 @@
   - type: RefillableByBulletBox
     bulletType: RMCVehicleAmmoBoxDragonFlameTank
   - type: GunMuzzleOffset
-    offset: "0,0"
+    applyToMuzzleFlash: true
     useDirectionalOffsets: true
-    offsetEast: "0,0.2"
-    muzzleOffset: "0,-1"
+    rotateDirectionalOffsets: true
+    offsetEast: "0.45,-1.1"
+    offsetWest: "-0.45, -1.1"
+    offsetSouth: "0, -0.55"
+    offsetNorth: "0, -1.3"
     useAimDirection: true
     useContainerOwner: false
   - type: RMCHardpointVisual
