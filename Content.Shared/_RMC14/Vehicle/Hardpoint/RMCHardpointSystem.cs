@@ -165,6 +165,9 @@ public sealed class RMCHardpointSystem : EntitySystem
         var speedMult = 1f;
         var accelMult = 1f;
         var viewScale = 0f;
+        var cursorMaxOffset = 0f;
+        var cursorOffsetSpeed = 0.5f;
+        var cursorPvsIncrease = 0f;
         var hasWeaponMods = false;
         var hasSpeedMods = false;
         var hasAccelMods = false;
@@ -194,6 +197,9 @@ public sealed class RMCHardpointSystem : EntitySystem
             if (TryComp(item, out RMCVehicleGunnerViewAttachmentComponent? viewMod))
             {
                 viewScale = Math.Max(viewScale, viewMod.PvsScale);
+                cursorMaxOffset = Math.Max(cursorMaxOffset, viewMod.CursorMaxOffset);
+                cursorOffsetSpeed = MathF.Max(cursorOffsetSpeed, viewMod.CursorOffsetSpeed);
+                cursorPvsIncrease = Math.Max(cursorPvsIncrease, viewMod.CursorPvsIncrease);
                 hasViewMods = true;
             }
         }
@@ -268,6 +274,9 @@ public sealed class RMCHardpointSystem : EntitySystem
         {
             var view = EnsureComp<RMCVehicleGunnerViewComponent>(vehicle);
             view.PvsScale = viewScale;
+            view.CursorMaxOffset = cursorMaxOffset;
+            view.CursorOffsetSpeed = cursorOffsetSpeed;
+            view.CursorPvsIncrease = cursorPvsIncrease;
             Dirty(vehicle, view);
         }
         else
@@ -780,7 +789,13 @@ public sealed class RMCHardpointSystem : EntitySystem
 
         var hullFraction = anyIntact ? ent.Comp.FrameDamageFractionWhileIntact : 1f;
         if (TryComp(ent.Owner, out RMCHardpointIntegrityComponent? frameIntegrity))
-            DamageHardpoint(ent.Owner, ent.Owner, totalDamage * hullFraction, frameIntegrity);
+        {
+            var frameDamage = ScaleDamage(args.Damage, hullFraction);
+            var frameAmount = GetVehicleFrameDamageAmount(ent.Owner, frameDamage);
+            if (frameAmount > 0f)
+                DamageHardpoint(ent.Owner, ent.Owner, frameAmount, frameIntegrity);
+        }
+
         args.Damage = ScaleDamage(args.Damage, hullFraction);
     }
 
@@ -878,6 +893,24 @@ public sealed class RMCHardpointSystem : EntitySystem
         }
     }
 
+    private float GetVehicleFrameDamageAmount(EntityUid vehicle, DamageSpecifier damage)
+    {
+        var total = MathF.Max(damage.GetTotal().Float(), 0f);
+        if (!TryComp(vehicle, out DamageProtectionBuffComponent? protection) ||
+            protection.Modifiers.Count == 0)
+        {
+            return total;
+        }
+
+        var modifiedDamage = damage;
+        foreach (var modifier in protection.Modifiers.Values)
+        {
+            modifiedDamage = DamageSpecifier.ApplyModifierSet(modifiedDamage, modifier);
+        }
+
+        return MathF.Max(modifiedDamage.GetTotal().Float(), 0f);
+    }
+
     private void OnHardpointIntegrityInit(Entity<RMCHardpointIntegrityComponent> ent, ref ComponentInit args)
     {
         if (ent.Comp.Integrity <= 0f)
@@ -904,6 +937,80 @@ public sealed class RMCHardpointSystem : EntitySystem
             ("current", (int)MathF.Ceiling(current)),
             ("max", (int)MathF.Ceiling(max)),
             ("percent", (int)MathF.Round(percent * 100f))));
+
+        if (TryGetArmorExamineModifiers(ent.Owner, out var acid, out var slash, out var bullet, out var explosive, out var blunt))
+        {
+            args.PushMarkup(Loc.GetString("rmc-hardpoint-armor-modifiers-examine",
+                ("acid", FormatModifierValue(acid)),
+                ("slash", FormatModifierValue(slash)),
+                ("bullet", FormatModifierValue(bullet)),
+                ("explosive", FormatModifierValue(explosive)),
+                ("blunt", FormatModifierValue(blunt))));
+        }
+    }
+
+    private bool TryGetArmorExamineModifiers(
+        EntityUid uid,
+        out float acid,
+        out float slash,
+        out float bullet,
+        out float explosive,
+        out float blunt)
+    {
+        acid = 1f;
+        slash = 1f;
+        bullet = 1f;
+        explosive = 1f;
+        blunt = 1f;
+
+        if (!TryComp(uid, out RMCVehicleArmorHardpointComponent? armor))
+            return false;
+
+        if (TryComp(uid, out RMCHardpointItemComponent? item) &&
+            item.VehicleFamily == "Tank" &&
+            _prototypeManager.TryIndex<DamageModifierSetPrototype>("RMCVehicleFrameTank", out var tankBase))
+        {
+            ApplyDamageModifierCoefficients(tankBase, ref acid, ref slash, ref bullet, ref explosive, ref blunt);
+        }
+
+        foreach (var modifierSetId in armor.ModifierSets)
+        {
+            if (!_prototypeManager.TryIndex(modifierSetId, out DamageModifierSetPrototype? modifierSet))
+                continue;
+
+            ApplyDamageModifierCoefficients(modifierSet, ref acid, ref slash, ref bullet, ref explosive, ref blunt);
+        }
+
+        return true;
+    }
+
+    private static void ApplyDamageModifierCoefficients(
+        DamageModifierSet modifierSet,
+        ref float acid,
+        ref float slash,
+        ref float bullet,
+        ref float explosive,
+        ref float blunt)
+    {
+        if (modifierSet.Coefficients.TryGetValue("Caustic", out var acidCoefficient))
+            acid *= acidCoefficient;
+
+        if (modifierSet.Coefficients.TryGetValue("Slash", out var slashCoefficient))
+            slash *= slashCoefficient;
+
+        if (modifierSet.Coefficients.TryGetValue("Piercing", out var bulletCoefficient))
+            bullet *= bulletCoefficient;
+
+        if (modifierSet.Coefficients.TryGetValue("Structural", out var explosiveCoefficient))
+            explosive *= explosiveCoefficient;
+
+        if (modifierSet.Coefficients.TryGetValue("Blunt", out var bluntCoefficient))
+            blunt *= bluntCoefficient;
+    }
+
+    private static string FormatModifierValue(float value)
+    {
+        return value.ToString("0.###");
     }
 
     private string GetHardpointIntegrityColor(float percent)

@@ -541,6 +541,9 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         {
             var view = EnsureComp<RMCVehicleGunnerViewUserComponent>(user);
             view.PvsScale = gunnerView.PvsScale;
+            view.CursorMaxOffset = gunnerView.CursorMaxOffset;
+            view.CursorOffsetSpeed = gunnerView.CursorOffsetSpeed;
+            view.CursorPvsIncrease = gunnerView.CursorPvsIncrease;
             Dirty(user, view);
             _eyeSystem.UpdatePvsScale(user);
             return;

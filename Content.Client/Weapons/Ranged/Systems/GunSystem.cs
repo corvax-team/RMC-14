@@ -6,7 +6,9 @@ using Content.Client._RMC14.Weapons.Ranged.Prediction;
 using Content.Client.Animations;
 using Content.Client.Gameplay;
 using Content.Client.Items;
+using Content.Client._RMC14.Vehicle;
 using Content.Client.Weapons.Ranged.Components;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared.CombatMode;
@@ -41,6 +43,7 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedMapSystem _maps = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly VehicleTurretInputSystem _vehicleTurretInput = default!;
 
     // RMC14
     [Dependency] private readonly ItemPickupSystem _itemPickup = default!;
@@ -193,6 +196,11 @@ public sealed partial class GunSystem : SharedGunSystem
             return;
 
         var mousePos = _eyeManager.PixelToMap(_inputManager.MouseScreenPosition);
+        if (TryComp<VehicleTurretComponent>(gunUid, out _) &&
+            _vehicleTurretInput.TryGetLastAimCoordinates(gunUid, out var vehicleAim))
+        {
+            mousePos = vehicleAim;
+        }
 
         if (mousePos.MapId == MapId.Nullspace)
         {
@@ -202,9 +210,19 @@ public sealed partial class GunSystem : SharedGunSystem
             return;
         }
 
-        // Define target coordinates relative to gun entity, so that network latency on moving grids doesn't fuck up the target location.
-        var coordinateEntity = HasComp<GunUseGunOriginComponent>(gunUid) ? gunUid : entity;
-        var coordinates = TransformSystem.ToCoordinates(coordinateEntity, mousePos);
+        EntityCoordinates coordinates;
+        if (HasComp<ShootAtFixedPointComponent>(gunUid))
+        {
+            // Fixed-point weapons need a stable world target, not a target relative to the rotating gun.
+            // Otherwise the endpoint rotates with the barrel and diverges from the aimed map position.
+            coordinates = TransformSystem.ToCoordinates(mousePos);
+        }
+        else
+        {
+            // Define target coordinates relative to gun entity, so that network latency on moving grids doesn't fuck up the target location.
+            var coordinateEntity = HasComp<GunUseGunOriginComponent>(gunUid) ? gunUid : entity;
+            coordinates = TransformSystem.ToCoordinates(coordinateEntity, mousePos);
+        }
 
         NetEntity? target = null;
         if (_state.CurrentState is GameplayStateBase screen)

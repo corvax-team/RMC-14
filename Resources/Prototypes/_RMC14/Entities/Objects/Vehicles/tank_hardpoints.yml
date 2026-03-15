@@ -142,6 +142,8 @@
   - type: RMCHardpointIntegrity
     maxIntegrity: 1000
   - type: RMCVehicleArmorHardpoint
+    modifierSets:
+    - RMCVehicleArmorConcussive
     explosionCoefficient: 0.5
   - type: RMCHardpointVisual
     vehicleState: concussive_armor_0
@@ -975,5 +977,7 @@
     maxIntegrity: 250
   - type: RMCVehicleGunnerViewAttachment
     pvsScale: 0.35
+    cursorMaxOffset: 5
+    cursorPvsIncrease: 0.5
   - type: RMCHardpointVisual
     vehicleState: artillerymod_0

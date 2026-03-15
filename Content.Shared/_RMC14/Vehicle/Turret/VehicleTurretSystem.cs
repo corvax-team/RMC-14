@@ -607,7 +607,7 @@ public sealed class VehicleTurretSystem : EntitySystem
         var vehicleRot = _transform.GetWorldRotation(vehicle);
 
         if (args.ToCoordinates != null &&
-            TryGetTurretOrigin(targetUid, targetTurret, out var originCoords))
+            TryGetTurretOrigin(ent.Owner, ent.Comp, out var originCoords))
         {
             var originMap = _transform.ToMapCoordinates(originCoords);
             var targetMap = _transform.ToMapCoordinates(args.ToCoordinates.Value);
