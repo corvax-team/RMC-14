@@ -238,7 +238,7 @@
   - type: GunIgnoreContainerOwnerCollision
   - type: ShootAtFixedPoint
   - type: Gun
-    fireRate: 0.9
+    fireRate: 0.155
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto

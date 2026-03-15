@@ -59,11 +59,15 @@
     - CCMWallXenoThickWeedBoundResin
     - DoorXenoWeedBoundResin
     - DoorXenoThickWeedBoundResin
+    - XenoStickyResin
+    - XenoFastResin
+    - HiveAcidPillarXeno
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
     - HiveEggMorpherXenoConstructionNode
     - HiveClusterXenoConstructionNode
     - HiveRecoveryNodeXenoConstructionNode
+    - HivePlasmaTreeXenoConstructionNode
   - type: XenoRegen
     restHealMultiplier:  1.4 #Вождь баланс
   - type: XenoHeavy
@@ -80,8 +84,11 @@
     plasmaCost: 400
     delay: 0
   - type: XenoPheromones
-    pheromonesMultiplier: 2.5
-    pheroSuffix: hivelord
+    pheromonesMultiplier: 4
+#    pheroSuffix: hivelord #Сделать суффикс феромонов свармера
+  - type: XenoEvolutionCapped
+    id: CCMXenoSwarmer
+    max: 1
   - type: XenoPlasma
     plasma: 1350 #Вождь баланс
     maxPlasma: 1350 #Вождь баланс
@@ -94,10 +101,14 @@
     damage:
       groups:
         Brute: 35 #Вождь баланс
+      types:
+        Structural: 35
   - type: XenoTailStab
     tailDamage:
       groups:
         Brute: 45  #Вождь баланс
+      types:
+        Structural: 45
   - type: Tackle
     max: 4
   - type: WhitelistPickup

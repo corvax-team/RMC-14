@@ -66,10 +66,14 @@
     damage:
       groups:
         Brute: 40
+      types:
+        Structural: 60 #CCM Изменения
   - type: XenoTailStab
     tailDamage:
       groups:
         Brute: 48
+      types:
+        Structural: 74 #CCM Изменения
   - type: XenoMeleeSlow
     slowTime: 2
   - type: Tackle
@@ -113,6 +117,7 @@
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT3
 
+
 - type: entity
   parent: CMXenoCrusherBase
   id: RMCXenoCrusher
@@ -126,6 +131,10 @@
     - ActionXenoCharge
     - ActionXenoStomp
     - ActionXenoDefensiveShield
+    - ActionXenoToggleCharging
+    - ActionXenoTumble #CCM Изменения
+    - CCMActionXenoButting #CCM Изменения
+    - CCMActionXenoDurability #CCM Изменения
     - ActionXenoDevolve
   - type: CrusherShield
   - type: XenoCharge
@@ -133,10 +142,45 @@
       types:
         Blunt: 60
         Structural: 750
+  - type: MobThresholds #CCM Изменения
+    thresholds:
+      0: Alive
+      800: Critical
+      900: Dead
+  - type: CMArmor # CCM Изменения
+    xenoArmor: 30
+    frontalArmor: 10
+    sideArmor: 5
   - type: XenoShield
-  - type: XenoEvolution
-    strains:
-    - RMCXenoCrusherCharger
+  - type: XenoTumble #CCM Изменения
+    range: 4
+    impactRange: 2
+    damage:
+      types:
+        Blunt: 30
+  - type: XenoToggleCharging #CCM Изменения
+  - type: XenoTailLash #CCM Изменения
+    effect: RMCEffectXenoTelegraphRed
+    effectEdge: RMCEffectXenoTelegraphRed
+    height: 1
+    width: 3
+    windup: 0
+    stunTime: 1.25
+    slowTime: 4
+    flingDistance: 6
+  - type: XenoFortify #CCM Изменения
+    armor: 0
+    frontalArmor: 0
+    explosionArmor: 150
+    changeExplosionWeakness: false
+    canHeadbuttFortified: false
+    canMoveFortified: true
+    damageAddedFortified:
+      groups:
+        Brute: -30
+#  - type: XenoEvolution #CCM Изменения
+#    strains:
+#    - RMCXenoCrusherCharger
   - type: RMCActionOrder
     id: RMCXenoCrusher
 
@@ -165,9 +209,9 @@
     - ActionXenoRam
     - ActionXenoDevolve
   - type: CMArmor
-    xenoArmor: 20
-    frontalArmor: 30
-    sideArmor: 15
+    xenoArmor: 25
+    frontalArmor: 10
+    sideArmor: 5
   - type: MeleeWeapon
     damage:
       groups:
