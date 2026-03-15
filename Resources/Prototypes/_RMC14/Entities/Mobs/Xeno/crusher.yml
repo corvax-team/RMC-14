@@ -101,8 +101,8 @@
         Blunt: 16
   - type: RMCSize
     size: Immobile
-  - type: RMCXenoDamageVisuals
-    prefix: crusher
+#  - type: RMCXenoDamageVisuals 
+#    prefix: crusher
   - type: TacticalMapIcon
     icon:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -133,8 +133,8 @@
     - ActionXenoDefensiveShield
     - ActionXenoToggleCharging
     - ActionXenoTumble #CCM Изменения
-    - CCMActionXenoButting #CCM Изменения
-    - CCMActionXenoDurability #CCM Изменения
+    - ActionXenoTailLash #CCM Изменения - fast fix
+    - ActionXenoFortify #CCM Изменения - fast fix
     - ActionXenoDevolve
   - type: CrusherShield
   - type: XenoCharge
@@ -170,7 +170,7 @@
     flingDistance: 6
   - type: XenoFortify #CCM Изменения
     armor: 0
-    frontalArmor: 0
+    frontalArmor: 15
     explosionArmor: 150
     changeExplosionWeakness: false
     canHeadbuttFortified: false
@@ -178,6 +178,8 @@
     damageAddedFortified:
       groups:
         Brute: -30
+  - type: Sprite #CCM Change - Как починю удалить
+    sprite: _RMC14/Mobs/Xenonids/Crusher/charger_crusher.rsi
 #  - type: XenoEvolution #CCM Изменения
 #    strains:
 #    - RMCXenoCrusherCharger
