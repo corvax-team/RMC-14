@@ -167,7 +167,7 @@
     windup: 0
     stunTime: 1.25
     slowTime: 4
-    flingDistance: 2
+    flingDistance: 6
   - type: XenoFortify #CCM Изменения
     armor: 0
     frontalArmor: 0
@@ -177,7 +177,7 @@
     canMoveFortified: true
     damageAddedFortified:
       groups:
-        Brute: -10
+        Brute: -30
 #  - type: XenoEvolution #CCM Изменения
 #    strains:
 #    - RMCXenoCrusherCharger
