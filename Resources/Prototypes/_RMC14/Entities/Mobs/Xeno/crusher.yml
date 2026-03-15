@@ -169,8 +169,8 @@
     slowTime: 4
     flingDistance: 6
   - type: XenoFortify #CCM Изменения
-    armor: 15
-    frontalArmor: 0
+    armor: 0
+    frontalArmor: 15
     explosionArmor: 150
     changeExplosionWeakness: false
     canHeadbuttFortified: false
