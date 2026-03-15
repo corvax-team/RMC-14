@@ -82,6 +82,9 @@
   - type: XenoPheromones
     pheromonesMultiplier: 4
 #    pheroSuffix: hivelord #Сделать суффикс феромонов свармера
+  - type: XenoEvolutionCapped
+    id: CCMXenoSwarmer
+    max: 1
   - type: XenoPlasma
     plasma: 1350 #Вождь баланс
     maxPlasma: 1350 #Вождь баланс
