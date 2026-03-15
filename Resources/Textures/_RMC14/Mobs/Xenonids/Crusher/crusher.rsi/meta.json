@@ -28,22 +28,6 @@
       "directions": 4
     },
     {
-      "name": "crusher_fortify_0",
-      "directions": 4
-    },
-    {
-      "name": "crusher_fortify_1",
-      "directions": 4
-    },
-    {
-      "name": "crusher_fortify_2",
-      "directions": 4
-    },
-    {
-      "name": "crusher_fortify_3",
-      "directions": 4
-    },
-    {
       "name": "crusher_walk_0",
       "directions": 4
     },
