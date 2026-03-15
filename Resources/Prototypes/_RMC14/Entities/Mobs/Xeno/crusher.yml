@@ -132,7 +132,7 @@
     - ActionXenoStomp
     - ActionXenoDefensiveShield
     - ActionXenoToggleCharging
-    - ActionXenoTumble
+    - ActionXenoTumble #CCM Изменения
     - CCMActionXenoButting #CCM Изменения
     - CCMActionXenoDurability #CCM Изменения
     - ActionXenoDevolve
@@ -149,12 +149,10 @@
       900: Dead
   - type: CMArmor # CCM Изменения
     xenoArmor: 30
-    frontalArmor: 15
+    frontalArmor: 10
     sideArmor: 5
   - type: XenoShield
-  - type: CombatMode #CCM Изменения
-    toggleMouseRotator: false
-  - type: XenoTumble
+  - type: XenoTumble #CCM Изменения
     range: 4
     impactRange: 2
     damage:
@@ -211,9 +209,9 @@
     - ActionXenoRam
     - ActionXenoDevolve
   - type: CMArmor
-    xenoArmor: 20
-    frontalArmor: 30
-    sideArmor: 15
+    xenoArmor: 25
+    frontalArmor: 10
+    sideArmor: 5
   - type: MeleeWeapon
     damage:
       groups:
