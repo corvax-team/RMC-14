@@ -44,6 +44,7 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly VehicleTurretInputSystem _vehicleTurretInput = default!;
+    [Dependency] private readonly VehicleTurretMuzzleOffsetSystem _vehicleTurretMuzzle = default!;
 
     // RMC14
     [Dependency] private readonly ItemPickupSystem _itemPickup = default!;
@@ -382,5 +383,11 @@ public sealed partial class GunSystem : SharedGunSystem
         EnsureComp<PredictedProjectileClientComponent>(uid);
         Physics.UpdateIsPredicted(uid);
         base.ShootProjectile(uid, direction, gunVelocity, gunUid, user, speed);
+
+        if (gunUid is { } weaponUid &&
+            _vehicleTurretMuzzle.TryGetRenderedGunOrigin(weaponUid, null, out var renderedOrigin))
+        {
+            _xform.SetCoordinates(uid, renderedOrigin);
+        }
     }
 }

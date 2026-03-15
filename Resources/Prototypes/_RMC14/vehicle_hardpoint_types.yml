@@ -1,41 +1,41 @@
-- type: rmcHardpointVehicleFamily
+- type: rMCHardpointVehicleFamily
   id: Van
 
-- type: rmcHardpointVehicleFamily
+- type: rMCHardpointVehicleFamily
   id: APC
 
-- type: rmcHardpointVehicleFamily
+- type: rMCHardpointVehicleFamily
   id: Humvee
 
-- type: rmcHardpointVehicleFamily
+- type: rMCHardpointVehicleFamily
   id: Tank
 
-- type: rmcHardpointSlotType
+- type: rMCHardpointSlotType
   id: Wheel
 
-- type: rmcHardpointSlotType
+- type: rMCHardpointSlotType
   id: Turret
 
-- type: rmcHardpointSlotType
+- type: rMCHardpointSlotType
   id: Cannon
 
-- type: rmcHardpointSlotType
+- type: rMCHardpointSlotType
   id: Launcher
 
-- type: rmcHardpointSlotType
+- type: rMCHardpointSlotType
   id: RoofAttachment
 
-- type: rmcHardpointSlotType
+- type: rMCHardpointSlotType
   id: FrontAttachment
 
-- type: rmcHardpointSlotType
+- type: rMCHardpointSlotType
   id: SupportAttachment
 
-- type: rmcHardpointSlotType
+- type: rMCHardpointSlotType
   id: Armor
 
-- type: rmcHardpointSlotType
+- type: rMCHardpointSlotType
   id: Treads
 
-- type: rmcHardpointSlotType
+- type: rMCHardpointSlotType
   id: Tires

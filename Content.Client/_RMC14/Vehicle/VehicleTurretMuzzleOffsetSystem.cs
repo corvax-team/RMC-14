@@ -139,8 +139,8 @@ public sealed class VehicleTurretMuzzleOffsetSystem : EntitySystem
         }
 
         var baseRotation = GetBaseRotation(weaponUid, muzzle.AngleOffset);
-        var offset = GetGunMuzzleOffset(weaponUid, muzzle, baseRotation);
-        origin = muzzle.RotateDirectionalOffsets || !muzzle.UseDirectionalOffsets
+        var (offset, rotateOffset) = GetGunMuzzleOffset(weaponUid, muzzle, baseRotation);
+        origin = rotateOffset
             ? origin.Offset(baseRotation.RotateVec(offset))
             : origin.Offset(offset);
 
@@ -185,20 +185,19 @@ public sealed class VehicleTurretMuzzleOffsetSystem : EntitySystem
         return origin.Offset(desiredOffset - currentOffset);
     }
 
-    private Vector2 GetGunMuzzleOffset(EntityUid weaponUid, GunMuzzleOffsetComponent muzzle, Angle baseRotation)
+    private (Vector2 Offset, bool Rotate) GetGunMuzzleOffset(
+        EntityUid weaponUid,
+        GunMuzzleOffsetComponent muzzle,
+        Angle baseRotation)
     {
         if (!muzzle.UseDirectionalOffsets)
-            return muzzle.Offset;
+            return (muzzle.Offset, true);
 
-        var facing = baseRotation;
-        if (TryComp(weaponUid, out VehicleTurretComponent? _) &&
-            TryGetVehicle(weaponUid, out var vehicle))
-        {
-            var vehicleRot = _transform.GetWorldRotation(vehicle);
-            facing = GetVehicleFacingAngle(vehicle, vehicleRot);
-        }
+        var dir = TryGetRenderedTurretDirection(weaponUid, out var turretDir)
+            ? turretDir
+            : GetDirectionalDir(baseRotation);
 
-        var worldOffset = VehicleTurretDirectionHelpers.GetRenderAlignedCardinalDir(facing.Reduced()) switch
+        var worldOffset = dir switch
         {
             Direction.North => muzzle.OffsetNorth,
             Direction.East => muzzle.OffsetEast,
@@ -207,7 +206,27 @@ public sealed class VehicleTurretMuzzleOffsetSystem : EntitySystem
             _ => muzzle.Offset,
         };
 
-        return worldOffset;
+        return (worldOffset, muzzle.RotateDirectionalOffsets);
+    }
+
+    private bool TryGetRenderedTurretDirection(EntityUid weaponUid, out Direction dir)
+    {
+        dir = default;
+
+        if (!TryComp(weaponUid, out VehicleTurretComponent? turret) ||
+            !turret.OffsetRotatesWithTurret ||
+            !TryGetVehicle(weaponUid, out var vehicle))
+        {
+            return false;
+        }
+
+        TryGetAnchorTurret(weaponUid, turret, out _, out var anchorTurret);
+        var vehicleRot = _transform.GetWorldRotation(vehicle);
+        var eyeRot = _eye.CurrentEye.Rotation;
+        var baseFacingAngle = GetVehicleFacingAngle(vehicle, vehicleRot);
+        var facing = GetRenderFacing(turret, anchorTurret, vehicleRot, baseFacingAngle, eyeRot);
+        dir = GetDirectionalDir(facing);
+        return true;
     }
 
     private Angle GetBaseRotation(EntityUid baseUid, Angle angleOffset)
