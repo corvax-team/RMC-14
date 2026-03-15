@@ -1,0 +1,18 @@
+- type: entity # CCM - Сделано так, дабы если произошёл казус, не сносить всё
+  parent: ActionXenoTailLash
+  id: CCMActionXenoHeadcliff
+  name: "Headcliff (80)"
+  description: "Fling back your enemies, stuns and slows down them. Fling them in raduis of 1x3, with minor windup"
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: headbutt
+    useDelay: 22
+
+  - type: entity
+  parent: ActionXenoFortify
+  id: CCMActionXenoEndure
+  name: Endure
+  description: "Down your head and absorb damage. Gives you alot of armor, especially explosive armor. In this state, you slowed like for 50% of your movement speed"

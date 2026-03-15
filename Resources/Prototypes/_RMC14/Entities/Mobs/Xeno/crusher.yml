@@ -67,13 +67,13 @@
       groups:
         Brute: 40
       types:
-        Structural: 60 #CCM Изменения
+        Structural: 30 #CCM Изменения
   - type: XenoTailStab
     tailDamage:
       groups:
         Brute: 48
       types:
-        Structural: 74 #CCM Изменения
+        Structural: 38 #CCM Изменения
   - type: XenoMeleeSlow
     slowTime: 2
   - type: Tackle
@@ -133,8 +133,10 @@
     - ActionXenoDefensiveShield
     - ActionXenoToggleCharging
     - ActionXenoTumble #CCM Изменения
-    - ActionXenoTailLash #CCM Изменения - fast fix
-    - ActionXenoFortify #CCM Изменения - fast fix
+    - CCMActionXenoHeadcliff
+    - CCMActionXenoEndure
+#    - ActionXenoTailLash #CCM backup
+#    - ActionXenoFortify #CCM backup
     - ActionXenoDevolve
   - type: CrusherShield
   - type: XenoCharge
@@ -153,33 +155,33 @@
     sideArmor: 5
   - type: XenoShield
   - type: XenoTumble #CCM Изменения
-    range: 4
+    range: 1
     impactRange: 2
     damage:
       types:
-        Blunt: 30
+        Blunt: 25
   - type: XenoToggleCharging #CCM Изменения
   - type: XenoTailLash #CCM Изменения
     effect: RMCEffectXenoTelegraphRed
     effectEdge: RMCEffectXenoTelegraphRed
     height: 1
     width: 3
-    windup: 0
+    windup: 0.1
     stunTime: 1.25
     slowTime: 4
     flingDistance: 6
   - type: XenoFortify #CCM Изменения
     armor: 0
     frontalArmor: 15
-    explosionArmor: 150
+    explosionArmor: 80
     changeExplosionWeakness: false
     canHeadbuttFortified: false
     canMoveFortified: true
     damageAddedFortified:
       groups:
         Brute: -30
-  - type: Sprite #CCM Change - Как починю удалить
-    sprite: _RMC14/Mobs/Xenonids/Crusher/charger_crusher.rsi
+#  - type: Sprite #CCM Backup
+#    sprite: _RMC14/Mobs/Xenonids/Crusher/charger_crusher.rsi
 #  - type: XenoEvolution #CCM Изменения
 #    strains:
 #    - RMCXenoCrusherCharger
