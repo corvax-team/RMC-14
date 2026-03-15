@@ -178,6 +178,11 @@
     damageAddedFortified:
       groups:
         Brute: -30
+  - type: MeleeDamageMultiplier #CCM Change
+    multiplier: 8
+    whitelist:
+      components:
+      - Vehicle
   - type: Sprite #CCM Backup
     sprite: _RMC14/Mobs/Xenonids/Crusher/charger_crusher.rsi
 #  - type: XenoEvolution #CCM Изменения
