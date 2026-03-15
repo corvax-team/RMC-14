@@ -148,8 +148,8 @@
   - type: XenoTailLash #CCM Изменения
     effect: RMCEffectXenoTelegraphRed
     effectEdge: RMCEffectXenoTelegraphRed
-    height: 2
-    width: 2
+    height: 1
+    width: 1
     windup: 0
     stunTime: 1.25
     slowTime: 4
