@@ -132,6 +132,7 @@
     - ActionXenoStomp
     - ActionXenoDefensiveShield
     - ActionXenoToggleCharging
+    - ActionXenoTumble
     - CCMActionXenoButting #CCM Изменения
     - CCMActionXenoDurability #CCM Изменения
     - ActionXenoDevolve
@@ -153,6 +154,12 @@
   - type: XenoShield
   - type: CombatMode #CCM Изменения
     toggleMouseRotator: false
+  - type: XenoTumble
+    range: 4
+    impactRange: 2
+    damage:
+      types:
+        Blunt: 30
   - type: XenoToggleCharging #CCM Изменения
   - type: XenoTailLash #CCM Изменения
     effect: RMCEffectXenoTelegraphRed
