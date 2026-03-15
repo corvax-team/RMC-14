@@ -11,8 +11,15 @@
       state: headbutt
     useDelay: 22
 
-  - type: entity
+- type: entity
   parent: ActionXenoFortify
   id: CCMActionXenoEndure
   name: Endure
   description: "Down your head and absorb damage. Gives you alot of armor, especially explosive armor. In this state, you slowed like for 50% of your movement speed"
+  components: 
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: soak
+    useDelay: 1
