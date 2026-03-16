@@ -4,6 +4,7 @@ rmc-bullet-box-amount =
         [few] патрона
        *[other] патронов
     }.
+rmc-bullet-box-used-in = Used in: { $vehicle }
 rmc-bullet-box-wrong-rounds = Это разные патроны. Лучше их не смешивать.
 rmc-bullet-box-box-empty = В коробке не осталось патронов.
 rmc-bullet-box-box-full = В коробке не осталось места для патронов.

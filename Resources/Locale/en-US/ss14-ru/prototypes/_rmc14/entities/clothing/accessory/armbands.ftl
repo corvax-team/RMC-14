@@ -1,7 +1,7 @@
 ent-RMCArmbandBase = armband
     .desc = An abstract armband.
 ent-RMCAlphaArmband = alpha armband
-    .desc = An armband in squad colors, worn for ease of idenfication.
+    .desc = An armband in squad colors, worn for ease of identification.
 ent-RMCBravoArmband = bravo armband
     .desc = { ent-RMCAlphaArmband.desc }
 ent-RMCCharlieArmband = charlie armband

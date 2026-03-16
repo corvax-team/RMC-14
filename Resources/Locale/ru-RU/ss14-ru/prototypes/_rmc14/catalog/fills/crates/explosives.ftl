@@ -32,3 +32,5 @@ ent-RMCCrateGrenadesAirburstStarShell = ящик 40-мм гранат M74 AGM-H 
     .desc = { ent-RMCCrateExplosives.desc }
 ent-RMCCrateGrenadesBatonSlug = ящик оглушающих снарядов HIRR (x6)
     .desc = { ent-RMCCrateExplosives.desc }
+ent-RMCCrateExplosiveClaymoreMine = M20 Claymore mine crate (x10)
+    .desc = { ent-RMCCrateExplosives.desc }

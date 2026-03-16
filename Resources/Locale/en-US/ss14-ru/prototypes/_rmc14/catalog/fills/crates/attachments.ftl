@@ -38,5 +38,5 @@ ent-RMCCrateAttachmentRifleStock = rifle stock attachment crate (x4)
     .desc = { ent-RMCCrateBase.desc }
 ent-RMCCrateAttachmentShotgunStock = shotgun stock attachment crate (x4)
     .desc = { ent-RMCCrateBase.desc }
-ent-RMCCrateAttachmentSmgStock = submachinegun stock attachment crate (x4)
+ent-RMCCrateAttachmentSmgStock = submachinegun solid stock attachment crate (x4)
     .desc = { ent-RMCCrateBase.desc }

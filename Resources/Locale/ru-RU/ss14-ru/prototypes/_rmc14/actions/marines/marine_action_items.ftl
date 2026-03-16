@@ -28,3 +28,7 @@ ent-RMCActionToggleLaser = Переключить лазер
     .desc = Включает или выключает ваш лазер.
 ent-RMCActionAimedShot = Прицельный выстрел
     .desc = Находясь в боевом режиме, наведите курсор на цель и нажмите уникальную клавишу действия, чтобы начать прицеливание.
+ent-RMCActionBroiler = Switch Tank
+    .desc = Switch to a different fuel tank.
+ent-RMCActionDismount = Dismount
+    .desc = Stop using the weapon

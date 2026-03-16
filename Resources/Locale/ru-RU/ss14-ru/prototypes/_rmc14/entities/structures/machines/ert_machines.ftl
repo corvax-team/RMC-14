@@ -1,12 +1,2 @@
-ent-RMCSpawnerERTShuttle = Спавнер Шаттла ОБР
-    .desc = Определяет местоположение, в котором должен появиться шаттл ОБР.
-    .suffix = Generic
-ent-RMCSpawnerERTShuttleWeYa = { ent-RMCSpawnerERTShuttle }
-    .suffix = PMC
-    .desc = { ent-RMCSpawnerERTShuttle.desc }
-ent-RMCSpawnerERTShuttleSPP = { ent-RMCSpawnerERTShuttle }
-    .suffix = SPP
-    .desc = { ent-RMCSpawnerERTShuttle.desc }
-ent-RMCSpawnerERTShuttleTSE = { ent-RMCSpawnerERTShuttle }
-    .suffix = TSE
-    .desc = { ent-RMCSpawnerERTShuttle.desc }
+
+

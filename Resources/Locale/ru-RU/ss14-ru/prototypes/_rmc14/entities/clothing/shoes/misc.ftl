@@ -1,5 +1,7 @@
 ent-RMCShoesLaceup = шнурованные ботинки
     .desc = Пик моды, и они уже отполированы!
+ent-RMCShoesLaceupDress = dress shoes
+    .desc = Pre-polished fancy dress shoes. You can see your reflection in them.
 ent-RMCShoesLaceupBrown = { ent-RMCShoesLaceup }
     .desc = { ent-RMCShoesLaceup.desc }
 ent-RMCShoesFancyLeather = fancy leather shoes

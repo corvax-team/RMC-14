@@ -1,7 +1,7 @@
 ent-ActionXenoRest = Rest
-    .desc = Lie down to regenerate health more quickly while on weeds.
+    .desc = Lie down to regenerate health more quickly while on weeds. [color=red]Your rest keybind will also activate this action, Shift+R by default.[/color]
 ent-RMCGuidebookActionXenoRest = Rest
-    .desc = Lie down to regenerate health more quickly while on weeds.
+    .desc = Lie down to regenerate health more quickly while on weeds. [color=red]Your rest keybind will also activate this action, Shift+R by default.[/color]
 ent-ActionXenoWatch = Watch Xenonid
     .desc = { ent-ActionXenoBase.desc }
 ent-RMCGuidebookActionXenoWatch = Watch Xenonid
@@ -35,7 +35,7 @@ ent-RMCGuidebookActionXenoToggleLongRangeSight = { ent-CMGuidebookActionXenoBase
 ent-ActionXenoWordQueen = Word of the Queen (50)
     .desc = Sends a message to all members of your hive.
 ent-ActionXenoGrowOvipositor = Grow Ovipositor (700)
-    .desc = Become immobile and start laying eggs which will produce parasites. Has a 5 minute cooldown. [color=red]You must be in ovipositor mode for other xenonids to gain evolution points after round-start![/color]
+    .desc = Become immobile and start laying eggs which will produce children. Has a 5 minute cooldown. [color=red]You must be in ovipositor mode for other xenonids to gain evolution points after round-start![/color]
 ent-RMCGuidebookActionXenoGrowOvipositor = Grow Ovipositor
     .desc = Become immobile and start laying eggs which will produce parasites.
 ent-ActionXenoTurnInvisible = Turn Invisible (20)
@@ -50,12 +50,12 @@ ent-ActionXenoRetrieveEgg = Retrieve Egg
     .desc = Retrieves an egg from your storage if you have an empty hand. Using this on an unplanted egg will pick up all nearby unplanted eggs. Using an egg in hand will put it into your storage.
 ent-RMCGuidebookActionXenoRetrieveEgg = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
-ent-ActionXenoThrowParasite = Throw Parasite
-    .desc = Retrieves a parasite from your storage if you have an empty hand. Using this on a parasite on the ground will pickup all nearby parasites. Targeting a tile with a parasite in hand will throw it up to 4 tiles away, where the parasite will be stunned for 5 seconds. Using a parasite in hand will add it to your storage. [color=green]Parasites won't die due to time while you hold or carry them.[/color]
+ent-ActionXenoThrowParasite = Carrier's Bond
+    .desc = Retrieves a child from your storage if you have an empty hand. Using this on a child on the ground will pickup all nearby children. Targeting a tile with a child in hand will throw it up to 4 tiles away, where the child will be stunned for 5 seconds. Using a child in hand will add it to your storage. [color=green]Children won't die due to time while you hold or carry them.[/color]
 ent-RMCGuidebookActionXenoThrowParasite = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
-ent-ActionXenoParasiteReserve = Set Parasite Reserve
-    .desc = Sets your parasite Reserves. Observers cannot join as a stored parasite if your parasites stored is less than or equal to your reserve.
+ent-ActionXenoParasiteReserve = Set Child Reserve
+    .desc = Sets your child Reserves. Observers cannot join as a stored child if your children stored is less than or equal to your reserve.
 ent-RMCGuidebookActionXenoSetParasiteReserve = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
 ent-ActionXenoManageHive = Manage The Hive

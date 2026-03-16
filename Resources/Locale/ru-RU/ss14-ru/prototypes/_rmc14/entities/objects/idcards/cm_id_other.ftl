@@ -40,8 +40,7 @@ ent-RMCIDCardDeputySurvivor = Серебрянный значок помощни
     .desc = Серебряный значок, который означает, что его обладатель является сотрудником Бюро. Это знак справедливости, авторитета и защиты. Защита тех, кто не может защититься сам. Этот значок символизирует приверженность присяге, которую он всегда соблюдает.
 ent-RMCIDCardPMC = голо-значок ЧВК Vitezstvi
     .desc = Корпоративный голо-значок. Имеет уникальный незакрывающийся низ.
-ent-FactionWeYa = { "" }
-    .desc = { "" }
+
 ent-RMCIDCardPMCColony = { ent-RMCIDCardPMC }
     .desc = { ent-RMCIDCardPMC.desc }
 ent-RMCIDCardBureauObserver = ИД-карта

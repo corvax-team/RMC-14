@@ -10,3 +10,6 @@ ent-RMCDecalSpawnerXenoSplatters = xeno blood spawner
 ent-RMCDecalSpawnerOilSplatters = oil spawner
     .suffix = RMC14
     .desc = { ent-RMCDecalSpawnerBase.desc }
+ent-RMCDecalSpawnerAcidBloodSplash = xeno acid splash spawner
+    .suffix = RMC14
+    .desc = { ent-RMCDecalSpawnerXenoSplatters.desc }

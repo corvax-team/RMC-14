@@ -1,5 +1,4 @@
-ent-FactionSPP = { "" }
-    .desc = { "" }
+
 ent-FactionHalcyon = { "" }
     .desc = { "" }
 ent-RMCIDSPP = { ent-CMIDCardStandardDogtag }

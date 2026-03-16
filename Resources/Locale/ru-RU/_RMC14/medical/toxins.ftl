@@ -1,3 +1,5 @@
+reagent-name-rmcgenerictoxin = Generic Toxin
+reagent-desc-rmcgenerictoxin = General identification for many similar toxins, sometimes created as a byproduct through chemical reactions.
 reagent-name-rmcmolecularacid = разбавленная молекулярная кислота
 reagent-desc-rmcmolecularacid = Кислота неизвестного состава, этот образец, похоже, не так опасен, как те, что встречаются в кровеносной системе ксенонидов.
 rmc-body-stings = Ваше тело слегка жжёт.

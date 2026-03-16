@@ -1,6 +1,7 @@
 cm-ui-rmc14 = RMC14 \ ККМ
 rmc-ui-options-cassettes-volume = Громкость кассет:
 rmc-ui-options-hijack-song-volume = Громкость музыки хайджека:
+rmc-ui-options-xeno-ability-previews = Show xeno ability previews
 rmc-ui-voicelines = Голосовые реплики
 rmc-ui-options-tab-voicelines = Голосовые реплики
 rmc-ui-audio-voicelines-yourself = Проигрывать свои голосовые реплики
@@ -86,6 +87,12 @@ rmc-ui-figurine-in-preferences =
 rmc-ui-ghost-color = Ghost Color
 rmc-ui-ghost-color-clear = Clear
 rmc-ui-ghost-color-save = Save
+rmc-ui-show-new-player-icons = Show new player icons as mentor or department head roles
+rmc-ui-xeno-night-vision-default = Xeno night vision default
+rmc-ui-xeno-night-vision-default-off = Off
+rmc-ui-xeno-night-vision-default-half = Half light
+rmc-ui-xeno-night-vision-default-full = Full
+rmc-night-vision-mode-verb = Set night vision: { $mode }
 rmc-area-info = { $area }{ $restrictions }
 rmc-tacmap-alert-ceiling-level-0 = [color=green]✓[/color] Доступно всё
 rmc-tacmap-alert-ceiling-level-1 = [color=red]✗[/color] Установка мортиры, Лазерное наведение, Медэвак
@@ -96,6 +103,10 @@ rmc-tacmap-alert-allowed-actions = [color=green]✓[/color] { $actions }
 rmc-tacmap-alert-restricted-actions = [color=red]✗[/color] { $actions }
 rmc-ui-shoutout-marine = [bold]Operation funded by [color=green]{ $name }[/color]![/bold]
 rmc-ui-shoutout-xeno = [bold]Hive established by [color=purple]{ $name }[/color]![/bold]
+rmc-ui-options-chat-squad-color-mode = Colorize names of the speaker by squads
+# Dialog input
+rmc-dialog-input-placeholder-default = Enter text
+rmc-dialog-input-placeholder-smart-check = More than 3 consecutive spaces will be trimmed
 rmc-ui-options-alternate-sprites = Use non-trypophobia inducing sprites
 
 # Фичи Патреона RMC нет смысла переводить - Finish

@@ -1,5 +1,7 @@
 rmc-announcement-author = Командования
+rmc-announcement-author-shipside = Command Ship
 rmc-announcement-author-highcommand = Верховного командования ККМП ОПЗ
+rmc-announcement-author-queen-mother = The Queen Mother
 rmc-announcement-message = [font size=16][bold][color=#CECECE]Объявление { $author }[/color][/bold][/font][font size=16][color=red]
     
     { $message }
@@ -43,3 +45,4 @@ rmc-announcement-ares-command = [color=#CECECE][font size=16][bold]ARES v3.2[/bo
 rmc-announcement-unidentified-lifesigns = [color=#CECECE][font size=16][bold]Unidentifled lifesigns[/bold][/font][/color][color=red][font size=16][bold]
     
     Примерно ({ $count }) Неидентифицированных форм жизни обнаружено на Десантном Корабле { $name }. Рекомендации: Закрыть все наружные выходы, в том числе воздуховоды и вентиляции.[/bold][/font][/color]
+rmc-announcement-shipside-header = Please write a message to announce to the crew
