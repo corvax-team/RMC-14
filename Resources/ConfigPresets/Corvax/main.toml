@@ -41,7 +41,6 @@ max_process_time = 1
 
 [ic]
 flavor_text = true
-enable_suicide = false
 
 [shuttle]
 auto_call_time = 0
@@ -97,6 +96,7 @@ auto_balance_step = 0.5
 auto_balance_min = 2.5
 auto_balance_max = 4.5
 distress_xenos_minimum = 1
+enable_suicide = false
 
 [gateway]
 generator_enabled = false

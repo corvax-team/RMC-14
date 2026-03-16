@@ -11,7 +11,8 @@
   skinColoration: Hues
   maleFirstNames: RMCNamesAvaliFirst
   femaleFirstNames: RMCNamesAvaliFirst
-  lastNames: RMCNamesAvaliLast
+  maleLastNames: RMCNamesAvaliLast # CCM-Localization
+  femaleLastNames: RMCNamesAvaliLast # CCM-Localization
   naming: FirstLastCombined
 
 - type: speciesBaseSprites
