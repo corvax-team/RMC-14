@@ -1,7 +1,7 @@
 rmc-announcement-author = Командования
-rmc-announcement-author-shipside = Command Ship
+rmc-announcement-author-shipside = Корабельного командования
 rmc-announcement-author-highcommand = Верховного командования ККМП ОПЗ
-rmc-announcement-author-queen-mother = The Queen Mother
+rmc-announcement-author-queen-mother = Императрицы
 rmc-announcement-message = [font size=16][bold][color=#CECECE]Объявление { $author }[/color][/bold][/font][font size=16][color=red]
     
     { $message }
@@ -24,7 +24,7 @@ rmc-announcement-ares-lz-designated =
 rmc-announcement-ares-online = [color=#CECECE][font size=16][bold]АРЕС Онлайн[/bold][/font][/color][color=red][font size=16][bold]
     
     { $message }[/bold][/font][/color]
-rmc-announcement-ares-map = [color=#CECECE][font size=16][bold]КОПЗ Альмайер[/bold][/font][/color][color=red][font size=16][bold]
+rmc-announcement-ares-map = [color=#CECECE][font size=16][bold]Фрегат ОПЗ[/bold][/font][/color][color=red][font size=16][bold]
     
     { $message }[/bold][/font][/color]
 rmc-announcement-cooldown = Между объявлениями должно пройти не менее { $seconds } секунд.
