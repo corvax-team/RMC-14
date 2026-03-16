@@ -1,5 +1,5 @@
-ent-WeaponRifleL83A2 = L83A2 rifle
-    .desc = A civilian grade caseless rifle utilised by TSEPA officers.
+ent-WeaponRifleL83A2 = L83A2
+    .desc = Гражданская безгильзовая винтовка, которую используют офицеры Полицейских Сил Объединённого Правительства Земли.
     .suffix = Filled
 ent-RMCWeaponRifleL83A2 = Винтовка L83A2
     .desc = Гражданская безгильзовая винтовка, используемая офицерами ПСОПЗ.
