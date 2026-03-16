@@ -8,4 +8,3 @@ ent-RMCXenoParasiteWatcher = { ent-CMXenoParasiteBase }
 ent-RMCXenoParasitePrimeHiveAssign = { ent-CMXenoParasite }
     .suffix = Auto-Assign, Prime Hive
     .desc = { ent-CMXenoParasite.desc }
-

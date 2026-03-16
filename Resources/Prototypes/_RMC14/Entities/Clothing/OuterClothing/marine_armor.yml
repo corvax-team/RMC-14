@@ -314,10 +314,9 @@
       tags:
       - RMCUniformCMP
 
-# CCM-14-start
 - type: entity
   parent: CMArmorM3Medium
-  id: RMCArmorM3MediumTanker # why it's not in our folder?
+  id: RMCArmorM3MediumTanker
   name: M3 pattern tanker armor
   description: A modified and refashioned suit of M3 Pattern armor designed to be worn by the loader of a UNMC vehicle crew. While the suit is a bit more encumbering to wear with the crewman uniform, it offers the loader a degree of protection that would otherwise not be enjoyed.
   components:
@@ -330,7 +329,6 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/tanker/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/tanker/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/tanker/urban.rsi
-# CCM-14-end
 
 #Officer armors
 - type: entity

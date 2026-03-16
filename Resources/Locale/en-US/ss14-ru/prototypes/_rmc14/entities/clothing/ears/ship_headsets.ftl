@@ -49,3 +49,5 @@ ent-RMCHeadsetSynth = marine synth headset
     .desc = Issued only to UNMC synthetics.
 ent-RMCHeadsetPrisoner = prisoner headset
     .desc = Headset provided to prisoners as directed by Marine Law.
+ent-RMCHeadsetCrewman = marine vehicle crew radio headset
+    .desc = Used by UNMC vehicle crew, features a non-standard brace.

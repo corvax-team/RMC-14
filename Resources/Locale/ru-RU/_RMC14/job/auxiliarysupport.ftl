@@ -20,4 +20,6 @@ cm-job-description-intel = Собирайте разведданные с пов
 cm-job-prefix-intel = ОР
 CMJobIntelOfficer = Офицер разведки
 cm-job-name-vc = Экипаж бронетехники
+cm-job-description-vc = Operate and maintain the ship's armored vehicles. Represent the armored presence during the operation, maintain and repair your vehicles.
 cm-job-prefix-vc = ЭБ
+CMJobVehicleCrewman = Vehicle Crew

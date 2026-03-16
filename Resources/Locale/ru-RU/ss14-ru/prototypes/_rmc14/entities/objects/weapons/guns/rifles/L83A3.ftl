@@ -10,7 +10,6 @@ ent-RMCMagazineRifleL83A3AP = магазин L83A3 бронебойные (5,56x
     .suffix = ББ
 ent-RMCCartridgeRifleL83A3AP = бронебойный патрон (5,56x45)
     .desc = бронебойный винтовочный патрон 5,56x45
-
 ent-RMCMagazineRifleL83A3HEAP = Магазин L83A3 удар-бойные (5.56x45мм)
     .desc = Магазин ударно-бронебойных патрон калибра 5.56x45 для винтовки L83A3.
 ent-RMCMagazineRifleL83A3Incendiary = Магазин L83A3 зажигательные (5.56x45мм)
