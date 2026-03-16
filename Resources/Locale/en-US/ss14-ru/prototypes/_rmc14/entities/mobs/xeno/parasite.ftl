@@ -1,6 +1,10 @@
 ent-CMXenoParasiteBase = Parasite
     .desc = { ent-CMXenoUndeveloped.desc }
 ent-CMXenoParasite = { ent-CMXenoParasiteBase }
+    .desc = A parasite whose only goal is to spread the power of the hive.
+ent-RMCXenoParasiteWatcher = { ent-CMXenoParasiteBase }
+    .suffix = Watcher
     .desc = { ent-CMXenoParasiteBase.desc }
-ent-CCMXenoRoyalParasite = Royal Parasite
-    .desc = A royal parasite capable of infecting multiple hosts during its lifetime.
+ent-RMCXenoParasitePrimeHiveAssign = { ent-CMXenoParasite }
+    .suffix = Auto-Assign, Prime Hive
+    .desc = { ent-CMXenoParasite.desc }

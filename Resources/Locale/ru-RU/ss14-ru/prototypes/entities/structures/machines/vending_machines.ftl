@@ -154,3 +154,5 @@ ent-VendingMachineChemicals = ХимкоМат
     .desc = Вероятно, не кофемашина.
 ent-VendingMachineChemicalsSyndicate = СиндиСоки
     .desc = Надеюсь, не из свежевыжатых синдикатовцев?
+ent-RMCVehicleHardpointVendor = vehicle hardpoint printer
+    .desc = A machine for printing vehicle hardpoints.

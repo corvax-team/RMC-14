@@ -1,5 +1,3 @@
-ent-FactionSPP = { "" }
-    .desc = { "" }
 ent-FactionHalcyon = { "" }
     .desc = { "" }
 ent-RMCIDSPP = SPP dog tag

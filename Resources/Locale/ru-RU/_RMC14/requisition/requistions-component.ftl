@@ -18,6 +18,7 @@ ui-supply-drop-pad-status = [bold]Статус панели сабжения[/bo
 ui-supply-drop-console-update = Обновить
 ui-supply-drop-console-ready = Готово к выстрелу!
 ui-supply-drop-console-launch = ЗАПУСТИТЬ
+ui-supply-drop-console-launch-confirmation = Confirm Supply Drop?
 ui-supply-drop-console-cooldown = { $time } секунд до следующего выстрела
 ui-supply-drop-crate-status =
     { $hasCrate ->

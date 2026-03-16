@@ -7,29 +7,44 @@ rmc-ghost-role-information-rcm-description = Вы прибыли по прика
 rmc-ghost-name-rcm-sgo = Оператор СГ (Дружественный)
 rmc-job-name-rcm-sgo = Оператор СГ
 rmc-job-prefix-rcm-sgo = ОСГ
-
 rmc-ghost-name-rcm-commando = Пехотинец (Дружественный)
 rmc-job-name-rcm-commando = Солдат Империи
 rmc-job-prefix-rcm-commando = Пех
-
 rmc-ghost-name-rcm-marksman = Марксман (Дружественный)
 rmc-job-name-rcm-marksman = Марксман
 rmc-job-prefix-rcm-marksman = Марксм
-
 rmc-ghost-name-rcm-breacher = Штурмовик (Дружественный)
 rmc-job-name-rcm-breacher = Штурмовик
 rmc-job-prefix-rcm-breacher = Штурм
-
 rmc-ghost-name-rcm-medic = Полевой медик (Дружественный)
 rmc-job-name-rcm-medic = Полевой медик
 rmc-job-prefix-rcm-medic = ПМ
-
 rmc-ghost-name-rcm-teamlead = Лидер Отряда (Дружественный)
 rmc-job-name-rcm-teamlead = Лидер Отряда
 rmc-job-prefix-rcm-teamlead = СЛ
-
 rmc-job-name-rcm-lieutenant = Полевой Стратег
 rmc-job-prefix-rcm-lieutenant = ПолСтрат
-
+rmc-job-name-rcm-captain = Captain
+rmc-job-prefix-rcm-captain = RCM CAPT
 rmc-job-name-rcm-major = Полемарх
 rmc-job-prefix-rcm-major = Полем
+rmc-job-name-rcm-pve-rifleman = Rifleman
+rmc-job-prefix-rcm-pve-rifleman = RM
+rmc-job-name-rcm-pve-troop-sergeant = Sergeant
+rmc-job-prefix-rcm-pve-troop-sergeant = Sgt
+rmc-job-name-rcm-pve-section-leader = Section Leader
+rmc-job-prefix-rcm-pve-section-leader = STL
+rmc-job-name-rcm-pve-team-leader = Team Leader
+rmc-job-prefix-rcm-pve-team-leader = TL
+rmc-job-name-rcm-pve-gpmg-gunner = GPMG Gunner
+rmc-job-prefix-rcm-pve-gpmg-gunner = GPMG
+rmc-job-name-rcm-pve-medical-assistant = Medical Assistant
+rmc-job-prefix-rcm-pve-medical-assistant = MA
+rmc-job-name-rcm-pve-assault-engineer = Assault Engineer
+rmc-job-prefix-rcm-pve-assault-engineer = AE
+rmc-job-name-rcm-pve-scout-sniper = Scout Sniper
+rmc-job-prefix-rcm-pve-scout-sniper = SnS
+rmc-job-name-rcm-pve-bombardment-specialist = Bombardment Specialist
+rmc-job-prefix-rcm-pve-bombardment-specialist = BMBRD
+rmc-job-name-rcm-pve-troop-commander = Commander
+rmc-job-prefix-rcm-pve-troop-commander = Com

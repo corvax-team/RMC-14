@@ -11,3 +11,5 @@ cm-job-name-militarypolice = Офицер военной полиции
 cm-job-description-militarypolice = Обеспечивайте соблюдение закона КМП. Задерживайте нарушителей. Следите за безопасностью корабельного персонала.
 cm-job-prefix-militarypolice = ВП
 CMJobMilitaryPolice = Офицер военной полиции
+rmc-job-name-honor-guard = Honor Guard
+rmc-job-prefix-honor-guard = HG

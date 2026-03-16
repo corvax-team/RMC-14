@@ -146,5 +146,3 @@ bounty-description-lasergun = Караван утилизаторов запра
 bounty-description-food = После нашествия крысиного короля соседняя станция унатхов осталась без еды. Необходима большая партия мясных блюд.
 bounty-description-flashes = ПРИВЕТСТВИЕ \[Станция] НАМ НЕОБХОДИМЫ 6 ВСПЫШЕК ДЛЯ ОБЫЧНЫХ \[ТренировкаУпражнение] С СОТРУДНИКАМИ СЛУЖБЫ БЕЗОПАСНОСТИ. ВСЁ \[Нормально].
 bounty-description-ring = On this EXTRAORDINARY day there will be a wedding between the Gelts, but Mr. Gelt has lost the rings, send a pair of rings.
-bounty-description-tooth-space-carp = Некоторым парням из Космической Австралии нужны зубы для изготовления их традиционной одежды. Пришлите им парочку от космических карпов.
-bounty-description-tooth-sharkminnow = Шеф-повар утверждает, что зубы карпоакулы - это что-то вроде высококачественного ножа. Я не знаю о чём он говорит, но он хочет получить набор. Отправьте его ему.

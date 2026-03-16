@@ -6,5 +6,7 @@ ent-RMCAlternateFoldableUniformBase = { ent-RMCUniformBase }
     .desc = { ent-RMCUniformBase.desc }
 ent-RMCUniformSuitCoordsBase = { ent-RMCUniformBase }
     .desc = { ent-RMCUniformBase.desc }
+ent-RMCArmoredUniformBase = { ent-RMCUniformBase }
+    .desc = { ent-RMCUniformBase.desc }
 ent-RMCMarineUniformBase = { ent-RMCUniformBase }
     .desc = { ent-RMCUniformBase.desc }

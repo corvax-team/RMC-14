@@ -5,3 +5,6 @@ ent-CMXenoRavager = Разрушитель
 ent-RMCXenoRavagerBerserker = { ent-RMCXenoRavagerBase }
     .suffix = Берсеркер
     .desc = { ent-RMCXenoRavagerBase.desc }
+ent-RMCXenoRavagerHedgehog = { ent-RMCXenoRavagerBase }
+    .suffix = Hedgehog
+    .desc = { ent-RMCXenoRavagerBase.desc }

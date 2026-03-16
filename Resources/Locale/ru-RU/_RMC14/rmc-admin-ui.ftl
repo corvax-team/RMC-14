@@ -23,3 +23,5 @@ rmc-ui-humanoid = Гуманоид
 rmc-ui-tier = Уровень { $tier }
 rmc-ui-admin = RMC Админ интерфейс
 rmc-ui-rejuvenate-nearby-marines = Исцелить всех близлежащих морпехов
+rmc-ui-chat-bans = Chat Bans
+rmc-ui-delay-round-end = Delay round end

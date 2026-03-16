@@ -16,6 +16,12 @@ rmc-intel-not-intel-jumpsuit = Вы не можете носить это, не 
 rmc-intel-survivor-pickup =
     { CAPITALIZE($thing) } вам ничем не поможет.
     Сначала постарайтесь выбраться живыми.
+rmc-intel-survivor-xeno-pull =
+    Trying to take the { $thing } with me will only slow me down.
+    I should focus on getting help first.
+rmc-intel-survivor-corpse-pull =
+    I can't save { $thing }, they'll only slow me down.
+    I should focus on getting help first.
 rmc-intel-survivor-read =
     Вам незачем читать { $thing }.
     Сначала постарайтесь выбраться живыми.
@@ -46,6 +52,7 @@ rmc-ui-intel-colony-status =
     }
 rmc-ui-tech-tier-header = [font size=14][bold]Уровень: { $tier }[/bold][/font]
 rmc-ui-tech-points-value = Технические очки: { $value }
+rmc-ui-tech-points = [font size=14][bold]Points: { $points }[/bold][/font]
 rmc-ui-tech-repurchasable = Выкупить
 rmc-ui-tech-incremental-price = Увеличивающаяся цена: +{ $increase } за покупку
 rmc-ui-tech-purchase-button = Купить

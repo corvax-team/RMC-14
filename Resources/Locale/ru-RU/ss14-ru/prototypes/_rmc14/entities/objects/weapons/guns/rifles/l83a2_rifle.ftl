@@ -1,6 +1,8 @@
+ent-WeaponRifleL83A2 = L83A2 rifle
+    .desc = A civilian grade caseless rifle utilised by TSEPA officers.
+    .suffix = Filled
 ent-RMCWeaponRifleL83A2 = Винтовка L83A2
     .desc = Гражданская безгильзовая винтовка, используемая офицерами ПСОПЗ.
-
 ent-RMCMagazineRifleL83A2 = магазин L83A2 (5,56x45 мм)
     .desc = Магазин с патронами калибра 5,56x45 мм для винтовки L83A2.
 ent-RMCCartridgeRifleL83A2 = патрон (5,56x45)
@@ -12,18 +14,13 @@ ent-RMCCartridgeRifleL83A2AP = бронебойный патрон (5,56x45)
     .desc = бронебойный винтовочный патрон 5,56x45
 ent-BulletRifle556x45mmAP = { ent-BulletRifle10x24mm }
     .desc = { ent-BulletRifle10x24mm.desc }
-
 ent-RMCMagazineRifleL83A2HEAP = Магазин L83A2 удар-бойные (5.56x45мм)
     .desc = Магазин ударно-бронебойных патрон калибра 5.56x45 для винтовки L83A2.
-
 ent-RMCMagazineRifleL83A2Incendiary = Магазин L83A2 зажигательные (5.56x45мм)
     .desc = Магазин зажигательных патрон калибра 5.56х45 для винтовки L83A2.
-
 ent-RMCMagazineRifleL83A2Extended = Увеличенный магазин L83A2 (5.56x45мм)
     .desc = Увеличенный магазин для патрон калибра 5.56.45 для винтовки L83A2.
-
 ent-RMCCartridgeRifleL83A2HEAP = Ударно-бронебойный патрон (5.56x45мм)
     .desc = винтовочный ударно-бронебойный патрон калибра 5.56x45мм.
-
 ent-RMCCartridgeRifleL83A2Incendiary = Зажигательный патрон (5.56x45мм)
     .desc = Винтовочный зажигательный патрон калибра 5.56x45мм.

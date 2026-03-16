@@ -10,8 +10,6 @@
   - type: Icon
     sprite: _CCM14/Objects/Decoration/NewYear/wreath.rsi
     state: icon
-  - type: Tag
-    tags: [ New Year ]
   - type: Physics
     canCollide: false
   - type: Fixtures
@@ -38,8 +36,6 @@
   - type: Icon
     sprite: _CCM14/Objects/Decoration/NewYear/wreath.rsi
     state: icon
-  - type: Tag
-    tags: [ New Year ]
   - type: Physics
     canCollide: false
   - type: Fixtures

@@ -51,11 +51,11 @@
 - type: startingGear
   id: CMGearVC
   equipment:
-    jumpsuit: RMCJumpsuitNormCivilianBlackWebbing
+    jumpsuit: CMJumpsuitMarineTanker
     shoes: CMBootsBlackFilled
     id: CMDogtagCrewman
-    ears: RMCHeadCapTruckerBlue
-    outerClothing: RMCCoatBomberGrey
+    ears: RMCHeadsetCrewman
+    outerClothing: RMCCoatTanker
 
 - type: entity
   parent: CMSpawnPointJobBase
