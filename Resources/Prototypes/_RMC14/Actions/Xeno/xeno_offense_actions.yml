@@ -700,20 +700,20 @@
   - type: EntityTargetAction
     event: !type:XenoGutActionEvent
 
-- type: entity
-  id: ActionXenoStomp
-  parent: ActionXenoBase
-  name: Stomp (30)
-  description: Slam the ground with a 5x5 AOE, slowing down and disarming all enemies in range. Deals heavy damage to targets you are on top of.
-  components:
-  - type: Action
-    itemIconStyle: NoItem
-    icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: stomp
-    useDelay: 18
-  - type: InstantAction
-    event: !type:XenoStompActionEvent
+#- type: entity #CCM Change - See it in /Resources/Prototypes/_CCM14/Actions/Xeno/xeno_crusher.yml
+#  id: ActionXenoStomp
+#  parent: ActionXenoBase
+#  name: Stomp (30)
+#  description: Slam the ground with a 5x5 AOE, slowing down and disarming all enemies in range. Deals heavy damage to targets you are on top of.
+#  components:
+#  - type: Action
+#    itemIconStyle: NoItem
+#    icon:
+#      sprite: _RMC14/Actions/xeno_actions.rsi
+#      state: stomp
+#    useDelay: 18
+#  - type: InstantAction
+#    event: !type:XenoStompActionEvent
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -755,6 +755,11 @@
     checkCanAccess: false
   - type: WorldTargetAction
     event: !type:XenoChargeActionEvent
+  - type: ActionSharedCooldown #CCM Change - Linked to Tumble
+    id: ActionXenoCharge
+    ids:
+    - ActionXenoTumble
+    cooldown: 4
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -1437,6 +1442,11 @@
   - type: ActionBlockIfResting
   - type: XenoActionPlasma
     cost: 25
+  - type: ActionSharedCooldown #CCM Change - Linked to Charge
+    id: ActionXenoTumble
+    ids:
+    - ActionXenoCharge
+    cooldown: 4
 
 - type: entity
   parent: ActionXenoBase
