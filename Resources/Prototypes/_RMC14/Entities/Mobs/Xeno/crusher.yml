@@ -157,7 +157,7 @@
     impactRange: 2
     damage:
       types:
-        Blunt: 60
+        Blunt: 40
         Structural: 750
   - type: XenoToggleCharging #CCM Change
   - type: XenoTailLash #CCM Change
