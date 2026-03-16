@@ -42,7 +42,7 @@ ccm-xeno-royal-parasite-ghost-role-name = Королевский лицехва�
 # Shared ghost role time messages
 rmc-xeno-egg-ghost-need-time = Вы умерли слишком недавно. Вы не можете стать паразитом ещё 3 минуты ({ $seconds } секунд осталось).
 rmc-xeno-egg-ghost-need-time-round = Вы не можете стать паразитом до того, как пройдёт достаточно времени в раунде ({ $seconds } секунд осталось).
-rmc-xeno-egg-ghost-bypass-time = You successfully infected your target. You may become a parasite again.
+rmc-xeno-egg-ghost-bypass-time = Вы успешно заразили свою цель. Вы можете снова стать паразитом.
 rmc-xeno-egg-ghost-royal-confirm = Вы уверены, что хотите стать королевским паразитом?
 rmc-xeno-egg-ghost-confirm = Вы уверены, что хотите стать паразитом?
 rmc-xeno-egg-royal-ghost-verb = Стать королевским паразитом
