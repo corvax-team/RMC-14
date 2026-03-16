@@ -1,6 +1,6 @@
 - type: entity # CCM - Сделано так, дабы если произошёл казус, не сносить всё
   parent: ActionXenoTailLash
-  id: CCMActionXenoHeadcliff
+  id: CCMActionXenoHeadcliff #CCM Action
   name: "Headcliff (80)"
   description: "Fling back your enemies, stuns and slows down them. Fling them in raduis of 1x3, with minor windup"
   components:
@@ -10,7 +10,34 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: headbutt
     useDelay: 22
+  - type: ActionSharedCooldown
+    id: CCMActionXenoHeadcliff
+    ids:
+    - ActionXenoStomp
+    cooldown: 6
 
+#Non CCM Action
+- type: entity
+  id: ActionXenoStomp
+  parent: ActionXenoBase
+  name: Stomp (30)
+  description: Slam the ground with a 5x5 AOE, slowing down and disarming all enemies in range. Deals heavy damage to targets you are on top of.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: stomp
+    useDelay: 18
+  - type: InstantAction
+    event: !type:XenoStompActionEvent
+  - type: ActionSharedCooldown
+    id: ActionXenoStomp
+    ids:
+    - CCMActionXenoHeadcliff
+    cooldown: 6
+
+#CCM Action
 - type: entity
   parent: ActionXenoFortify
   id: CCMActionXenoEndure
@@ -23,3 +50,29 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: soak
     useDelay: 1
+  - type: ActionSharedCooldown
+    id: CCMActionXenoEndure
+    ids:
+    - ActionXenoDefensiveShield
+    cooldown: 6
+
+# Non CCM Action
+- type: entity
+  id: ActionXenoDefensiveShield
+  parent: ActionXenoBase
+  name: Defensive Shield (50)
+  description: Gain a temporary shield that blocks the next 200 damage (and is immune to explosive damage) that lasts 7 seconds. Any damage that impacts the shield is reduced by 10 before processing. [color=green]Cooldown is partially refunded upon attacking an enemy.[/color]
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: empower
+    useDelay: 26
+  - type: InstantAction
+    event: !type:XenoDefensiveShieldActionEvent
+  - type: ActionSharedCooldown #CCM Change
+    id: ActionXenoDefensiveShield
+    ids:
+    - CCMActionXenoEndure
+    cooldown: 6

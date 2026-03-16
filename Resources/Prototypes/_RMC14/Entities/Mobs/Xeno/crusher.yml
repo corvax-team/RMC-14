@@ -145,19 +145,20 @@
   - type: MobThresholds #CCM Change
     thresholds:
       0: Alive
-      800: Critical
-      900: Dead
+      750: Critical
+      850: Dead
   - type: CMArmor # CCM Change
-    xenoArmor: 30
-    frontalArmor: 10
-    sideArmor: 5
+    xenoArmor: 15
+    frontalArmor: 25
+    sideArmor: 20
   - type: XenoShield
   - type: XenoTumble #CCM Change
-    range: 1
+    range: 4
     impactRange: 2
     damage:
       types:
-        Blunt: 25
+        Blunt: 40
+        Structural: 750
   - type: XenoToggleCharging #CCM Change
   - type: XenoTailLash #CCM Change
     effect: RMCEffectXenoTelegraphRed
@@ -165,8 +166,8 @@
     height: 1
     width: 3
     windup: 0.1
-    stunTime: 1.25
-    slowTime: 4
+    stunTime: 2
+    slowTime: 0
     flingDistance: 6
   - type: XenoFortify #CCM Change
     armor: 15
@@ -182,8 +183,8 @@
     multiplier: 8
     whitelist:
       components:
-      - Vehicle
-  - type: Sprite #CCM Backup
+      - Vehicle #CCM - x8 damage to any vehicle, like tank or humvy
+  - type: Sprite #CCM Backup 
     sprite: _RMC14/Mobs/Xenonids/Crusher/charger_crusher.rsi
 #  - type: XenoEvolution #CCM Change
 #    strains:
