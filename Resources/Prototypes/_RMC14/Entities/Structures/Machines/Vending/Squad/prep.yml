@@ -593,12 +593,6 @@
       - id: RMCCassetteTapeBolgarich
       - id: RMCCassetteTapeQwertyquerty
       - id: RMCCassetteTapePigeonBeans
-# Custom Cassetes - Like songs or else
-      - id: CCMCassetteTapeNautiliusPompilus
-      - id: CCMCassetteTapeKINO
-      - id: CCMCassetteTapeUNMC
-      - id: CCMCassetteTapeSSSP
-      - id: CCMCassetteTapeGermany
 
 - type: entity
   parent: ColMarTechBase
