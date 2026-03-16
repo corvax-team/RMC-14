@@ -14,7 +14,7 @@
     id: CCMActionXenoHeadcliff
     ids:
     - ActionXenoStomp
-    cooldown: 4
+    cooldown: 6
 
 #Non CCM Action
 - type: entity
@@ -35,7 +35,7 @@
     id: ActionXenoStomp
     ids:
     - CCMActionXenoHeadcliff
-    cooldown: 4
+    cooldown: 6
 
 #CCM Action
 - type: entity
@@ -54,7 +54,7 @@
     id: CCMActionXenoEndure
     ids:
     - ActionXenoDefensiveShield
-    cooldown: 4
+    cooldown: 6
 
 # Non CCM Action
 - type: entity
@@ -75,4 +75,4 @@
     id: ActionXenoDefensiveShield
     ids:
     - CCMActionXenoEndure
-    cooldown: 4
+    cooldown: 6
