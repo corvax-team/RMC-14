@@ -131,7 +131,6 @@
   components:
   - type: Transform
     anchored: true
-  - type: Occluder
   - type: Sprite
     sprite: _RMC14/Effects/smoke.rsi
     state: smoke2
