@@ -16,5 +16,5 @@
     maxIntegrity: 500
   - type: Tag
     tags:
-    - RMCVehicleHardpointWheel
+    - RMCVehicleHardpointVanWheel
   - type: RMCVehicleWheelItem

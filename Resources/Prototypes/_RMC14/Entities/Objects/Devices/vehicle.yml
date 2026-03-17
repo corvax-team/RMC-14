@@ -7,6 +7,7 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
+    mobCollisionDamage: 12 # CCM14
     maxSpeed: 8
     acceleration: 5
     deceleration: 12
@@ -104,8 +105,8 @@
       hardpointType: Wheel
       insertDelay: 1.5
       whitelist:
-        components:
-        - RMCVehicleWheelItem
+        tags:
+        - RMCVehicleHardpointVanWheel
     - id: turret-1
       hardpointType: Turret
       required: false
@@ -143,7 +144,6 @@
       radius: 0.75
       interiorCoords: 0.25,-1
 
-
 - type: entity
   id: RMCVehicleCLFVan
   name: CLF van
@@ -153,6 +153,7 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
+    mobCollisionDamage: 12 # CCM14
     maxSpeed: 8
     acceleration: 5
     deceleration: 12
@@ -249,8 +250,8 @@
       hardpointType: Wheel
       insertDelay: 1.5
       whitelist:
-        components:
-        - RMCVehicleWheelItem
+        tags:
+        - RMCVehicleHardpointVanWheel
     - id: turret-1
       hardpointType: Turret
       required: false
@@ -297,6 +298,7 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
+    mobCollisionDamage: 12 # CCM14
     maxSpeed: 8
     acceleration: 5
     deceleration: 12
@@ -394,8 +396,8 @@
       hardpointType: Wheel
       insertDelay: 1.5
       whitelist:
-        components:
-        - RMCVehicleWheelItem
+        tags:
+        - RMCVehicleHardpointVanWheel
     - id: turret-1
       hardpointType: Turret
       required: false
@@ -442,6 +444,7 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
+    mobCollisionDamage: 12 # CCM14
     maxSpeed: 8
     acceleration: 5
     deceleration: 12
@@ -539,8 +542,8 @@
       hardpointType: Wheel
       insertDelay: 1.5
       whitelist:
-        components:
-        - RMCVehicleWheelItem
+        tags:
+        - RMCVehicleHardpointVanWheel
     - id: turret-1
       hardpointType: Turret
       required: false
@@ -604,6 +607,7 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
+    mobCollisionDamage: 40 # CCM14
     maxSpeed: 7
     acceleration: 4
     deceleration: 10
@@ -733,7 +737,7 @@
       required: false
       whitelist:
         tags:
-        - RMCVehicleHardpointTurret
+        - RMCVehicleHardpointAPCTurret
     - id: secondary
       hardpointType: Cannon
       visualLayer: secondary
@@ -741,7 +745,7 @@
       required: false
       whitelist:
         tags:
-        - RMCVehicleHardpointCannon
+        - RMCVehicleHardpointAPCCannon
     - id: support
       hardpointType: SupportAttachment
       visualLayer: support
@@ -749,10 +753,13 @@
       required: false
       whitelist:
         tags:
-        - RMCVehicleHardpointSupportAttachment
+        - RMCVehicleHardpointAPCSupportAttachment
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 1.5
+      whitelist:
+        tags:
+        - RMCVehicleHardpointAPCWheel
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
@@ -882,6 +889,7 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
+    mobCollisionDamage: 20 # CCM14
     maxSpeed: 9
     acceleration: 6
     deceleration: 12
@@ -912,7 +920,7 @@
       world:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.425,-1.2,0.425,1.2
+          bounds: -0.7,-1.125,0.7,1.125
         density: 1000
         mask:
         - Impassable
@@ -924,7 +932,7 @@
       mob:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.425,-1.2,0.425,1.2
+          bounds: -0.7,-1.125,0.7,1.125
         density: 1000
         mask:
         - MidImpassable
@@ -1012,6 +1020,9 @@
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 1.5
+      whitelist:
+        tags:
+        - RMCVehicleHardpointHumveeWheel
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCRepairable
@@ -1038,7 +1049,6 @@
     - offset: 1,-0.1
       radius: 0.45
       interiorCoords: 2.41,-1.35
-
 
 - type: entity
   parent: RMCVehicleHumveeBase
@@ -1106,6 +1116,9 @@
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 1.5
+      whitelist:
+        tags:
+        - RMCVehicleHardpointHumveeWheel
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/humvee_medical_interior.yml
     enterDoAfter: 1.0
@@ -1113,20 +1126,19 @@
     maxPassengers: 4
     maxXenos: 2
     entryPoints:
-
     - offset: 0.45,1.6
       radius: 0.5
       interiorCoords: 0.89, -0.57
     - offset: -0.45,1.6
       radius: 0.5
       interiorCoords: 0.89,-1.35
-
     - offset: -1,-0.2
       radius: 0.5
       interiorCoords: 3.01, -1.23
     - offset: 1,-0.2
       radius: 0.5
       interiorCoords: 2.94, -0.44
+
 - type: entity
   parent: RMCVehicleHumveeBase
   id: RMCVehicleHumveeTransport
@@ -1179,6 +1191,9 @@
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 1.5
+      whitelist:
+        tags:
+        - RMCVehicleHardpointHumveeWheel
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/humvee_transport_interior.yml
     enterDoAfter: 1.0
@@ -1192,11 +1207,9 @@
     - offset: -0.45,1.6
       radius: 0.5
       interiorCoords: 1.48,-1.17
-
     - offset: -1,-0.1
       radius: 0.45
       interiorCoords: 3.55, -1.36
-
     - offset: 1,-0.1
       radius: 0.45
       interiorCoords: 3.56,-0.36
@@ -1216,6 +1229,14 @@
     bypassEntryOnZero: true
     repairTimePerIntegrity: 0.03
     repairTimeMax: 8
+  - type: RMCHardpointSlots
+    slots:
+    - id: wheel-1
+      hardpointType: Wheel
+      insertDelay: 1.5
+      whitelist:
+        tags:
+        - RMCVehicleHardpointHumveeWheel
   - type: RMCVehicleDeployable
     deployTime: 5
     undeployTime: 5
@@ -1248,6 +1269,7 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
+    mobCollisionDamage: 100 # CCM14
     maxSpeed: 3
     acceleration: 1
     deceleration: 8
@@ -1357,7 +1379,7 @@
         startingItem: RMCVehicleTankTurret
         whitelist:
           tags:
-          - RMCVehicleHardpointTurret
+          - RMCVehicleHardpointTankTurret
       wheel-1:
         startingItem: RMCVehicleTankTreads
         whitelist:
@@ -1392,7 +1414,7 @@
       required: false
       whitelist:
         tags:
-        - RMCVehicleHardpointSupportAttachment
+        - RMCVehicleHardpointTankSupportAttachment
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 2.0

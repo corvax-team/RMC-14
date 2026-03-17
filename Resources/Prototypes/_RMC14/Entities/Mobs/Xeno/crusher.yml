@@ -26,8 +26,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      700: Critical
-      800: Dead
+      750: Critical
+      850: Dead
   - type: Xeno
     role: CMXenoCrusher
     actionIds:
@@ -80,7 +80,7 @@
     chance: 0.25
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
-    baseSprintSpeed: 3
+    baseSprintSpeed: 2.35
   - type: SlowOnPull
     slowdowns:
     - multiplier: 0.68
@@ -101,8 +101,8 @@
         Blunt: 16
   - type: RMCSize
     size: Immobile
-#  - type: RMCXenoDamageVisuals 
-#    prefix: crusher
+  - type: RMCXenoDamageVisuals 
+    prefix: crusher
   - type: TacticalMapIcon
     icon:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -131,61 +131,42 @@
     - ActionXenoCharge
     - ActionXenoStomp
     - ActionXenoDefensiveShield
-    - ActionXenoToggleCharging
-    - ActionXenoTumble #CCM Change
-    - CCMActionXenoHeadcliff #CCM
-    - CCMActionXenoEndure #CCM
+    - ActionXenoToggleCharging #CCM Change 
+    - CCMActionXenoSwap
     - ActionXenoDevolve
   - type: CrusherShield
+    amount: 500
+    explosionResistanceDuration: 5
   - type: XenoCharge
+    plasmaCost: 80 #CCM Change - Base is 20
     damage:
       types:
         Blunt: 60
         Structural: 750
-  - type: MobThresholds #CCM Change
-    thresholds:
-      0: Alive
-      750: Critical
-      850: Dead
+  - type: ExplosionResistance #CCM Change
+    damageCoefficient: 1.25 #Base coefficient - 2
   - type: CMArmor # CCM Change
-    xenoArmor: 15
-    frontalArmor: 25
-    sideArmor: 20
+    xenoArmor: 20
+    frontalArmor: 20
+    sideArmor: 10
+  - type: XenoFling
+    range: -2
+    dazeTime: 2
+    throwSpeed: 7.5
+    paralyzeTime: 0
+    slowTime: 8
   - type: XenoShield
-  - type: XenoTumble #CCM Change
-    range: 4
-    impactRange: 2
-    damage:
-      types:
-        Blunt: 40
-        Structural: 750
   - type: XenoToggleCharging #CCM Change
-  - type: XenoTailLash #CCM Change
-    effect: RMCEffectXenoTelegraphRed
-    effectEdge: RMCEffectXenoTelegraphRed
-    height: 1
-    width: 3
-    windup: 0.1
-    stunTime: 2
-    slowTime: 0
-    flingDistance: 6
-  - type: XenoFortify #CCM Change
-    armor: 15
-    frontalArmor: 0
-    explosionArmor: 80
-    changeExplosionWeakness: false
-    canHeadbuttFortified: false
-    canMoveFortified: true
-    damageAddedFortified:
-      groups:
-        Brute: -30
+    maxStage: 12
+    minimumSteps: 2
   - type: MeleeDamageMultiplier #CCM Change
-    multiplier: 8
+    multiplier: 10
     whitelist:
       components:
-      - Vehicle #CCM - x8 damage to any vehicle, like tank or humvy
-  - type: Sprite #CCM Backup 
-    sprite: _RMC14/Mobs/Xenonids/Crusher/charger_crusher.rsi
+      - Vehicle #CCM - x10 damage to any vehicle, like tank or humvy
+  - type: XenoEvolutionCapped
+    id: RMCXenoCrusher
+    max: 1
 #  - type: XenoEvolution #CCM Change
 #    strains:
 #    - RMCXenoCrusherCharger

@@ -19,3 +19,7 @@
       enum.CCMCommunicationsConsoleUi.Key:
         type: CCMCommunicationsConsoleBui
   - type: CCMCommunicationsConsole
+    mapPaths:
+      - /Maps/_CCM14/Shuttle/ert_spp_shuttle_spp.yml
+      - /Maps/_CCM14/Shuttle/ert_pmc_shuttle_weya.yml
+      - /Maps/_CCM14/Shuttle/ert_pmc_shuttle_freelancer.yml

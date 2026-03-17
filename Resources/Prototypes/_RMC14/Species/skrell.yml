@@ -12,7 +12,8 @@
   skinColoration: Hues
   maleFirstNames: RMCNamesSkrellFirst
   femaleFirstNames: RMCNamesSkrellFirst
-  lastNames: RMCNamesSkrellLast
+  maleLastNames: RMCNamesSkrellLast # CCM-Localization
+  femaleLastNames: RMCNamesSkrellLast # CCM-Localization
 
 - type: speciesBaseSprites
   id: MobSkrellSprites

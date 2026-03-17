@@ -53,11 +53,13 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     private EntityQuery<FixturesComponent> fixtureQ;
 
     private const float Clearance = PhysicsConstants.PolygonRadius * 0.75f;
-    private const double MobCollisionDamage = 8;
-    private const double UnpoweredDoorCollisionDamage = 1000;
-    private static readonly TimeSpan MobCollisionKnockdown = TimeSpan.FromSeconds(1.5);
-    private static readonly TimeSpan MobCollisionCooldown = TimeSpan.FromSeconds(0.75);
-    private static readonly ProtoId<DamageTypePrototype> CollisionDamageType = "Blunt";
+    // CCM14-start
+    // private const double MobCollisionDamage = 8;
+    // private const double UnpoweredDoorCollisionDamage = 1000;
+    // private static readonly TimeSpan MobCollisionKnockdown = TimeSpan.FromSeconds(1.5);
+    // private static readonly TimeSpan MobCollisionCooldown = TimeSpan.FromSeconds(0.75);
+    // private static readonly ProtoId<DamageTypePrototype> CollisionDamageType = "Blunt";
+    // CCM14-end
     private const int GridVehicleStaticBlockerMask =
         (int) (CollisionGroup.Impassable |
                CollisionGroup.HighImpassable |

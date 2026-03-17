@@ -23,7 +23,7 @@ public sealed partial class RMCVehicleSupplyEntry
     public List<EntProtoId> Hardpoints = new();
 }
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class RMCVehicleSupplyConsoleComponent : Component
 {
     [DataField(required: true)]

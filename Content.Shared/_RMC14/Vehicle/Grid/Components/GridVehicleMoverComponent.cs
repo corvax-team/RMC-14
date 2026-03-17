@@ -1,9 +1,11 @@
 using System;
 using System.Numerics;
 using Content.Shared._RMC14.Stun;
+using Content.Shared.Damage.Prototypes;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Vehicle.Components;
 
@@ -88,4 +90,20 @@ public sealed partial class GridVehicleMoverComponent : Component
 
     [AutoNetworkedField]
     public TimeSpan SmashSlowdownUntil;
+    // CCM14-start
+    [DataField, AutoNetworkedField]
+    public double MobCollisionDamage = 8;
+
+    [DataField, AutoNetworkedField]
+    public double UnpoweredDoorCollisionDamage = 1000;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan MobCollisionKnockdown = TimeSpan.FromSeconds(1.5);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan MobCollisionCooldown = TimeSpan.FromSeconds(0.75);
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<DamageTypePrototype> CollisionDamageType = "Blunt";
+    // CCM14-end
 }

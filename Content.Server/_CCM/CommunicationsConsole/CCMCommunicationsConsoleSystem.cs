@@ -1,33 +1,26 @@
 ﻿using System.Linq;
-using Content.Shared._CCM.CommunicationsConsole;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
+using Content.Shared._CCM.CommunicationsConsole;
 using Content.Shared._CCM.CommunicationsConsole.Components;
 using Content.Shared._CCM.CommunicationsConsole.UI;
-using Content.Shared.DoAfter;
 using Content.Shared._RMC14.Marines.Announce;
 using Robust.Shared.EntitySerialization.Systems;
-using Robust.Shared.Timing;
-using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+
 namespace Content.Server._CCM.CommunicationsConsole;
 
 public sealed class CCMCommunicationsConsoleSystem : CCMSharedCommunicationsConsoleSystem
 {
-    [Dependency] private readonly ShuttleSystem _shuttle = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
-    [Dependency] private readonly IMapManager _mapManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly ShuttleSystem _shuttle = default!;
 
-    protected override void OnRunMessage(Entity<CCMCommunicationsConsoleComponent> entity, ref CCMCommunicationsConsoleERTCallBuiMessage args)
+    protected override void OnRunMessage(Entity<CCMCommunicationsConsoleComponent> entity,
+        ref CCMCommunicationsConsoleERTCallBuiMessage args)
     {
         if (entity.Comp.ERTCalled)
             return;
@@ -40,6 +33,7 @@ public sealed class CCMCommunicationsConsoleSystem : CCMSharedCommunicationsCons
         SpawnERTMap(entity.Comp.MapPaths);
         CrashERTShuttle(entity.Comp.FTLFlyTime);
     }
+
     private void CrashERTShuttle(TimeSpan flyTime)
     {
         var points = EntityQuery<CCMERTCrashMarkerComponent>().ToList();
@@ -60,23 +54,28 @@ public sealed class CCMCommunicationsConsoleSystem : CCMSharedCommunicationsCons
                 shuttle,
                 Transform(pointUid).Coordinates.Offset(crashMarker.Offset),
                 Angle.Zero,
-                hyperspaceTime: (float) flyTime.TotalSeconds
+                hyperspaceTime: (float)flyTime.TotalSeconds
             );
             return;
         }
     }
 
-    private void SpawnERTMap(List<ResPath> mapPath)
+    private void SpawnERTMap(List<ResPath> mapPaths)
     {
-        var random = new Random();
+        if (mapPaths.Count == 0)
+            return;
 
-        var selectedMapPath = mapPath[random.Next(mapPath.Count)];
+        var selectedMapPath = _random.Pick(mapPaths);
 
-        var mapId = new MapId(random.Next(1, 1000));
+        var mapLoader = Get<MapLoaderSystem>();
 
-        var mapLoader = EntitySystem.Get<MapLoaderSystem>();
-        mapLoader.TryLoadMapWithId(mapId, selectedMapPath, out var map, out _);
-        _mapSystem.InitializeMap(mapId);
+        if (!mapLoader.TryLoadMap(selectedMapPath, out var mapUid, out _))
+            return;
+
+        if (!TryComp<MapComponent>(mapUid, out var mapComp))
+            return;
+
+        _mapSystem.InitializeMap(mapComp.MapId);
     }
 }
 // thanks to _gadmin1 (discord) for the provided code
