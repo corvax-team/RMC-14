@@ -164,6 +164,9 @@
     whitelist:
       components:
       - Vehicle #CCM - x10 damage to any vehicle, like tank or humvy
+  - type: XenoEvolutionCapped
+    id: RMCXenoCrusher
+    max: 1
 #  - type: XenoEvolution #CCM Change
 #    strains:
 #    - RMCXenoCrusherCharger
