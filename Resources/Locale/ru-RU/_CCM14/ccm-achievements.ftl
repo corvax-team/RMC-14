@@ -1,0 +1,96 @@
+ccm-achievements-header = Достижения
+ccm-achievements-tab-general = Общий
+ccm-achievements-tab-misc = Прочее
+ccm-achievements-tab-marines = Морпехи
+ccm-achievements-tab-xenos = Ксеноморфы
+ccm-achievements-progress-summary = Выполнено: { $completed } / { $total }
+ccm-achievements-hide-completed-on = Скрывать выполненные: Да
+ccm-achievements-hide-completed-off = Скрывать выполненные: Нет
+ccm-achievements-completed = Выполнено
+ccm-achievements-in-progress = В процессе
+ccm-achievements-progress-label = { $current } / { $goal }
+ccm-achievements-empty = В этой категории пока ничего не видно.
+ccm-achievements-toast-header = Достижение выполнено
+
+ccm-achievement-general-veteran-title = Ветеран
+ccm-achievement-general-veteran-desc = Ты видел многое. И пережил ещё больше. Требование: сыграть 50 раундов.
+ccm-achievement-general-living-legend-title = Живая легенда
+ccm-achievement-general-living-legend-desc = В бараках о тебе рассказывают истории. Требование: сыграть 200 раундов.
+ccm-achievement-general-campaign-veteran-title = Ветеран кампаний
+ccm-achievement-general-campaign-veteran-desc = Ты прошёл множество битв. Требование: выиграть 50 раундов за всё время.
+ccm-achievement-general-war-legend-title = Легенда войны
+ccm-achievement-general-war-legend-desc = Твоё имя знают и люди, и улей. Требование: выиграть 200 раундов за всё время.
+
+ccm-achievement-misc-logistician-title = Логист
+ccm-achievement-misc-logistician-desc = Патроны не появляются из воздуха. Требование: заказать 20 поставок через реквизицию.
+ccm-achievement-misc-friendly-fire-title = Огонь по своим
+ccm-achievement-misc-friendly-fire-desc = Иногда в пылу боя случаются ошибки. Требование: нанести 500 урона союзникам.
+ccm-achievement-misc-queen-slayer-title = Кошмар королевы
+ccm-achievement-misc-queen-slayer-desc = Королева знает твоё имя. И ненавидит его. Требование: поучаствовать в убийстве королевы ксеноморфов.
+
+ccm-achievement-marine-field-medic-title = Полевой врач
+ccm-achievement-marine-field-medic-desc = Немного бинтов ещё никому не вредило. Требование: вылечить 5 000 урона союзникам.
+ccm-achievement-marine-combat-surgeon-title = Боевой хирург
+ccm-achievement-marine-combat-surgeon-desc = Под огнём лечить сложнее. Требование: вылечить 25 000 урона союзникам.
+ccm-achievement-marine-guardian-angel-title = Ангел-хранитель
+ccm-achievement-marine-guardian-angel-desc = Ты спас больше жизней, чем можешь сосчитать. Требование: вылечить 100 000 урона союзникам.
+ccm-achievement-marine-legendary-medic-title = Легендарный медик
+ccm-achievement-marine-legendary-medic-desc = Без тебя половина десанта бы не вернулась. Требование: вылечить 250 000 урона союзникам.
+
+ccm-achievement-marine-corpsman-title = Санитар
+ccm-achievement-marine-corpsman-desc = Тянуть раненых - часть работы. Требование: возродить 25 морпехов.
+ccm-achievement-marine-paramedic-title = Парамедик
+ccm-achievement-marine-paramedic-desc = Ты всегда приходишь вовремя. Требование: возродить 100 морпехов.
+ccm-achievement-marine-savior-title = Спаситель
+ccm-achievement-marine-savior-desc = Ты вытащил из ада больше людей, чем любой другой. Требование: возродить 300 морпехов.
+
+ccm-achievement-marine-mechanic-title = Механик
+ccm-achievement-marine-mechanic-desc = Без укреплений мы бы уже проиграли. Требование: построить 50 укреплений.
+ccm-achievement-marine-fortifier-title = Фортификатор
+ccm-achievement-marine-fortifier-desc = Теперь это крепость. Требование: построить 500 укреплений.
+ccm-achievement-marine-defense-architect-title = Архитектор обороны
+ccm-achievement-marine-defense-architect-desc = Ни один жук не пройдёт. Требование: построить 2 000 укреплений.
+
+ccm-achievement-marine-victory-title = Победа десанта
+ccm-achievement-marine-victory-desc = Планета очищена. Требование: выиграть 10 раундов за морпехов.
+ccm-achievement-marine-campaigns-veteran-title = Ветеран кампаний корпуса
+ccm-achievement-marine-campaigns-veteran-desc = Морпехи уже считают тебя своим ветераном. Требование: выиграть 50 раундов за морпехов.
+ccm-achievement-marine-corps-legend-title = Легенда корпуса
+ccm-achievement-marine-corps-legend-desc = Твоё имя знают все морпехи. Требование: выиграть 200 раундов за морпехов.
+ccm-achievement-marine-commander-title = Командир
+ccm-achievement-marine-commander-desc = Кто-то должен отдавать приказы. Требование: выиграть раунд, играя за офицера или командира.
+
+ccm-achievement-marine-recruit-title = Новобранец
+ccm-achievement-marine-recruit-desc = Каждый морпех начинает с первого жука. Требование: убить 100 ксеноморфов.
+ccm-achievement-marine-bug-hunter-title = Охотник на жуков
+ccm-achievement-marine-bug-hunter-desc = Теперь это уже привычка. Требование: убить 500 ксеноморфов.
+ccm-achievement-marine-exterminator-title = Экстерминатор
+ccm-achievement-marine-exterminator-desc = В улье о тебе уже знают. Требование: убить 1 000 ксеноморфов.
+ccm-achievement-marine-hive-nightmare-title = Кошмар улья
+ccm-achievement-marine-hive-nightmare-desc = Ксеноморфы начинают избегать тебя. Требование: убить 2 500 ксеноморфов.
+ccm-achievement-marine-hive-genocide-title = Геноцид улья
+ccm-achievement-marine-hive-genocide-desc = Это уже не война. Это истребление. Требование: убить 5 000 ксеноморфов.
+
+ccm-achievement-xeno-hive-growth-title = Рост улья
+ccm-achievement-xeno-hive-growth-desc = Улей начинает доминировать. Требование: выиграть 10 раундов за ксеноморфов.
+ccm-achievement-xeno-domination-title = Доминирование
+ccm-achievement-xeno-domination-desc = Люди больше не контролируют планету. Требование: выиграть 50 раундов за ксеноморфов.
+ccm-achievement-xeno-hive-empire-title = Империя улья
+ccm-achievement-xeno-hive-empire-desc = Планета принадлежит ксеноморфам. Требование: выиграть 150 раундов за ксеноморфов.
+
+ccm-achievement-xeno-hive-birth-title = Рождение улья
+ccm-achievement-xeno-hive-birth-desc = Улей начинает расти. Требование: эволюционировать в новую касту.
+ccm-achievement-xeno-young-hunter-title = Молодой охотник
+ccm-achievement-xeno-young-hunter-desc = Люди - отличная добыча. Требование: убить 50 морпехов.
+ccm-achievement-xeno-predator-title = Хищник
+ccm-achievement-xeno-predator-desc = Морпехи уже знают твоё имя. Требование: убить 250 морпехов.
+ccm-achievement-xeno-drop-horror-title = Ужас десанта
+ccm-achievement-xeno-drop-horror-desc = Высадка становится всё сложнее. Требование: убить 500 морпехов.
+ccm-achievement-xeno-marine-nightmare-title = Кошмар морпехов
+ccm-achievement-xeno-marine-nightmare-desc = Люди боятся высаживаться. Требование: убить 1 000 морпехов.
+ccm-achievement-xeno-apex-predator-title = Апекс-хищник
+ccm-achievement-xeno-apex-predator-desc = Ты вершина пищевой цепи. Требование: убить 3 000 морпехов.
+ccm-achievement-xeno-queen-wrath-title = Королевская ярость
+ccm-achievement-xeno-queen-wrath-desc = Даже морпехи боятся королевы. Требование: убить 10 морпехов, играя за королеву.
+ccm-achievement-xeno-planet-mistress-title = Владычица планеты
+ccm-achievement-xeno-planet-mistress-desc = Планета теперь принадлежит улью. Требование: победить в раунде, играя за королеву.

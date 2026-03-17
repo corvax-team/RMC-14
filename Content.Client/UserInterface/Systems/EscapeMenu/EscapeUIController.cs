@@ -2,6 +2,7 @@
 using Content.Client._RMC14.Roadmap;
 using Content.Client.Credits;
 using Content.Client.Gameplay;
+using Content.Client._CCM.Achievements;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Client.UserInterface.Systems.Info;
@@ -30,6 +31,7 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
     [Dependency] private readonly InfoUIController _info = default!;
     [Dependency] private readonly OptionsUIController _options = default!;
     [Dependency] private readonly GuidebookUIController _guidebook = default!;
+    [Dependency] private readonly CCMAchievementsUIController _achievements = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
     [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
 
@@ -190,6 +192,12 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
         _escapeWindow.GuidebookButton.OnPressed += _ =>
         {
             _guidebook.ToggleGuidebook();
+        };
+
+        _escapeWindow.AchievementsButton.OnPressed += _ =>
+        {
+            CloseEscapeWindow();
+            _achievements.OpenWindow();
         };
 
         _escapeWindow.WikiButton.Visible = _cfg.GetCVar(CCVars.InfoLinksWiki) != "https://station14.ru/wiki/%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D0%BB:Colonial_Marines";

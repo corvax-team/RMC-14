@@ -1130,6 +1130,12 @@ namespace Content.Client.Lobby.UI
             if (Profile == null || !_entManager.EntityExists(PreviewDummy))
                 return;
 
+            if (!_entManager.HasComponent<HumanoidAppearanceComponent>(PreviewDummy))
+            {
+                ReloadPreview();
+                return;
+            }
+
             _entManager.System<HumanoidAppearanceSystem>().LoadProfile(PreviewDummy, Profile);
 
             // Check and set the dirty flag to enable the save/reset buttons as appropriate.

@@ -1311,6 +1311,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     break;
             }
 
+            if (distress.Result == DistressSignalRuleResult.MajorMarineVictory && xenosAlive)
+            {
+                Log.Info("Cancelling pending MajorMarineVictory because living xenos were detected again.");
+                distress.Result = null;
+                distress.CustomRoundEndMessage = null;
+                distress.EndAtAllClear = null;
+            }
+
             var marines = EntityQueryEnumerator<ActorComponent, MarineComponent, MobStateComponent, TransformComponent>();
             var marinesAlive = false;
             _marineList.Clear();
@@ -1398,7 +1406,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 }
             }
 
-            if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
+            if (HasLivingQueen())
             {
                 distress.QueenDiedCheck = null;
                 continue;
@@ -1410,7 +1418,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (Timing.CurTime >= distress.QueenDiedCheck)
             {
-                if (_xenoEvolution.HasLiving<XenoComponent>(4))
+                if (GetLivingVictoryXenoCount(distress, time) >= 4)
                     EndRound(distress, DistressSignalRuleResult.MinorMarineVictory);
                 else
                     EndRound(distress, DistressSignalRuleResult.MajorMarineVictory, "rmc-distress-signal-majormarinevictory-timeout");
@@ -1772,7 +1780,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             return;
         }
 
-        if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
+        if (HasLivingQueen())
             component.QueenDiedCheck = null;
 
         if (component.QueenDiedCheck == null)
@@ -1780,11 +1788,55 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         if (time >= component.QueenDiedCheck)
         {
-            if (_xenoEvolution.HasLiving<XenoComponent>(4))
+            if (GetLivingVictoryXenoCount(component, time) >= 4)
                 EndRound(component, DistressSignalRuleResult.MinorMarineVictory);
             else
                 EndRound(component, DistressSignalRuleResult.MajorMarineVictory, "rmc-distress-signal-majormarinevictory-timeout");
         }
+    }
+
+    private bool HasLivingQueen()
+    {
+        var query = EntityQueryEnumerator<XenoEvolutionGranterComponent, MobStateComponent>();
+        while (query.MoveNext(out var uid, out _, out var mobState))
+        {
+            if (_mobState.IsAlive(uid, mobState))
+                return true;
+        }
+
+        return false;
+    }
+
+    private int GetLivingVictoryXenoCount(CMDistressSignalRuleComponent distress, TimeSpan time)
+    {
+        var total = 0;
+        var query = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var xeno, out var mobState, out var xform))
+        {
+            if (!xeno.ContributesToVictory)
+                continue;
+
+            if (HasComp<ThunderdomeMapComponent>(xform.MapUid) ||
+                (_containers.IsEntityInContainer(uid) && !HasComp<XenoEvolutionGranterComponent>(uid)))
+            {
+                continue;
+            }
+
+            if (!_mobState.IsAlive(uid, mobState))
+                continue;
+
+            if (distress.AbandonedAt != null &&
+                time >= distress.AbandonedAt &&
+                distress.Hijack &&
+                !_almayerMaps.Contains(xform.MapID))
+            {
+                continue;
+            }
+
+            total++;
+        }
+
+        return total;
     }
 
     private RMCPlanet SelectRandomPlanet()
@@ -1993,10 +2045,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (rule.StartTime == null || Timing.CurTime - rule.StartTime < rule.RoundEndCheckDelay)
             return;
 
-        Log.Info($"Attempting to set {nameof(rule)} result to {result}");
         if (rule.Result != null)
+        {
+            if (rule.Result != result)
+                Log.Info($"Skipping round result change to {result}, existing result is {rule.Result}");
             return;
+        }
 
+        Log.Info($"Setting {nameof(rule)} result to {result}");
         rule.Result = result;
         rule.CustomRoundEndMessage = customMessage;
         switch (rule.Result)
@@ -2021,8 +2077,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     "Commencing final systems scan in 3 minutes.",
                     rule.AllClearChannel);
                 rule.EndAtAllClear ??= Timing.CurTime + rule.AllClearEndDelay;
+                Log.Info($"Major marine victory registered. Round end scheduled for {rule.EndAtAllClear}");
                 break;
             default:
+                Log.Info($"Round result {rule.Result} registered. Ending round immediately.");
                 _roundEnd.EndRound();
                 break;
         }

@@ -11,6 +11,8 @@ using Content.Server._RMC14.LinkAccount;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.IP;
+using Content.Shared._CCM.Achievements;
+using Content.Shared._CCM.Stats;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Prototypes;
@@ -2220,6 +2222,599 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             stats.ParasiteInfects++;
 
             await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<CCMPlayerStatsSnapshot> GetCCMPlayerStats(Guid player)
+        {
+            await using var db = await GetDb();
+            var stats = await db.DbContext.CCMPlayerStats
+                .FirstOrDefaultAsync(s => s.PlayerId == player);
+
+            return ToCCMStatsSnapshot(stats);
+        }
+
+        public async Task<CCMPlayerAchievementStatsSnapshot> GetCCMPlayerAchievementStats(Guid player)
+        {
+            await using var db = await GetDb();
+            var stats = await db.DbContext.CCMPlayerAchievementStats
+                .FirstOrDefaultAsync(s => s.PlayerId == player);
+
+            return ToCCMAchievementStatsSnapshot(stats);
+        }
+
+        public async Task AdjustCCMPlayerAchievementStats(
+            Guid player,
+            int friendlyFireDamageDelta = 0,
+            int requisitionOrdersDelta = 0,
+            int xenoEvolutionsDelta = 0,
+            int officerWinsDelta = 0,
+            int queenKillsDelta = 0,
+            int queenWinsDelta = 0,
+            int queenKillParticipationsDelta = 0)
+        {
+            await using var db = await GetDb();
+
+            var stats = await db.DbContext.CCMPlayerAchievementStats
+                .FirstOrDefaultAsync(s => s.PlayerId == player);
+
+            stats ??= db.DbContext.CCMPlayerAchievementStats
+                .Add(new CCMPlayerAchievementStats { PlayerId = player })
+                .Entity;
+
+            stats.FriendlyFireDamage = Math.Max(0, stats.FriendlyFireDamage + friendlyFireDamageDelta);
+            stats.RequisitionOrders = Math.Max(0, stats.RequisitionOrders + requisitionOrdersDelta);
+            stats.XenoEvolutions = Math.Max(0, stats.XenoEvolutions + xenoEvolutionsDelta);
+            stats.OfficerWins = Math.Max(0, stats.OfficerWins + officerWinsDelta);
+            stats.QueenKills = Math.Max(0, stats.QueenKills + queenKillsDelta);
+            stats.QueenWins = Math.Max(0, stats.QueenWins + queenWinsDelta);
+            stats.QueenKillParticipations = Math.Max(0, stats.QueenKillParticipations + queenKillParticipationsDelta);
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task SetCCMUnlockedAchievementIds(Guid player, string unlockedAchievementIds)
+        {
+            await using var db = await GetDb();
+
+            var stats = await db.DbContext.CCMPlayerAchievementStats
+                .FirstOrDefaultAsync(s => s.PlayerId == player);
+
+            stats ??= db.DbContext.CCMPlayerAchievementStats
+                .Add(new CCMPlayerAchievementStats { PlayerId = player })
+                .Entity;
+
+            stats.UnlockedAchievementIds = unlockedAchievementIds;
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task SaveCCMRoundStats(
+            Guid player,
+            int year,
+            int month,
+            int roundsPlayed,
+            int roundsWon,
+            int roundsLost,
+            int roundSecondsPlayed,
+            int totalDamageDealt,
+            int totalKills,
+            int victoryPoints,
+            int impactPoints,
+            int revives,
+            int healingDone,
+            int structuresBuilt,
+            int deaths,
+            int shotsFired,
+            int marineRoundsPlayed,
+            int marineRoundsWon,
+            int marineRoundsLost,
+            int marineDamageDealt,
+            int marineKills,
+            int marineVictoryPoints,
+            int marineImpactPoints,
+            int marineRevives,
+            int marineHealingDone,
+            int marineStructuresBuilt,
+            int marineDeaths,
+            int marineShotsFired,
+            int xenoRoundsPlayed,
+            int xenoRoundsWon,
+            int xenoRoundsLost,
+            int xenoDamageDealt,
+            int xenoKills,
+            int xenoVictoryPoints,
+            int xenoImpactPoints,
+            int xenoHealingDone,
+            int xenoStructuresBuilt,
+            int xenoDeaths,
+            int xenoShotsFired)
+        {
+            await using var db = await GetDb();
+
+            var stats = await db.DbContext.CCMPlayerStats
+                .FirstOrDefaultAsync(s => s.PlayerId == player);
+
+            stats ??= db.DbContext.CCMPlayerStats
+                .Add(new CCMPlayerStats { PlayerId = player })
+                .Entity;
+
+            stats.RoundsPlayed += roundsPlayed;
+            stats.RoundsWon += roundsWon;
+            stats.RoundsLost += roundsLost;
+            stats.RoundSecondsPlayed += roundSecondsPlayed;
+            stats.TotalDamageDealt += totalDamageDealt;
+            stats.TotalKills += totalKills;
+            stats.VictoryPoints += victoryPoints;
+            stats.ImpactPoints += impactPoints;
+            stats.Revives += revives;
+            stats.HealingDone += healingDone;
+            stats.StructuresBuilt += structuresBuilt;
+            stats.Deaths += deaths;
+            stats.ShotsFired += shotsFired;
+            stats.MarineRoundsPlayed += marineRoundsPlayed;
+            stats.MarineRoundsWon += marineRoundsWon;
+            stats.MarineRoundsLost += marineRoundsLost;
+            stats.MarineDamageDealt += marineDamageDealt;
+            stats.MarineKills += marineKills;
+            stats.MarineVictoryPoints += marineVictoryPoints;
+            stats.MarineImpactPoints += marineImpactPoints;
+            stats.MarineRevives += marineRevives;
+            stats.MarineHealingDone += marineHealingDone;
+            stats.MarineStructuresBuilt += marineStructuresBuilt;
+            stats.MarineDeaths += marineDeaths;
+            stats.MarineShotsFired += marineShotsFired;
+            stats.XenoRoundsPlayed += xenoRoundsPlayed;
+            stats.XenoRoundsWon += xenoRoundsWon;
+            stats.XenoRoundsLost += xenoRoundsLost;
+            stats.XenoDamageDealt += xenoDamageDealt;
+            stats.XenoKills += xenoKills;
+            stats.XenoVictoryPoints += xenoVictoryPoints;
+            stats.XenoImpactPoints += xenoImpactPoints;
+            stats.XenoHealingDone += xenoHealingDone;
+            stats.XenoStructuresBuilt += xenoStructuresBuilt;
+            stats.XenoDeaths += xenoDeaths;
+            stats.XenoShotsFired += xenoShotsFired;
+
+            var monthly = await db.DbContext.CCMPlayerMonthlyStats
+                .FirstOrDefaultAsync(s => s.PlayerId == player && s.Year == year && s.Month == month);
+
+            monthly ??= db.DbContext.CCMPlayerMonthlyStats
+                .Add(new CCMPlayerMonthlyStats
+                {
+                    PlayerId = player,
+                    Year = year,
+                    Month = month,
+                })
+                .Entity;
+
+            monthly.RoundsPlayed += roundsPlayed;
+            monthly.RoundsWon += roundsWon;
+            monthly.RoundsLost += roundsLost;
+            monthly.RoundSecondsPlayed += roundSecondsPlayed;
+            monthly.TotalDamageDealt += totalDamageDealt;
+            monthly.TotalKills += totalKills;
+            monthly.VictoryPoints += victoryPoints;
+            monthly.ImpactPoints += impactPoints;
+            monthly.Revives += revives;
+            monthly.HealingDone += healingDone;
+            monthly.StructuresBuilt += structuresBuilt;
+            monthly.Deaths += deaths;
+            monthly.ShotsFired += shotsFired;
+            monthly.MarineRoundsPlayed += marineRoundsPlayed;
+            monthly.MarineRoundsWon += marineRoundsWon;
+            monthly.MarineRoundsLost += marineRoundsLost;
+            monthly.MarineDamageDealt += marineDamageDealt;
+            monthly.MarineKills += marineKills;
+            monthly.MarineVictoryPoints += marineVictoryPoints;
+            monthly.MarineImpactPoints += marineImpactPoints;
+            monthly.MarineRevives += marineRevives;
+            monthly.MarineHealingDone += marineHealingDone;
+            monthly.MarineStructuresBuilt += marineStructuresBuilt;
+            monthly.MarineDeaths += marineDeaths;
+            monthly.MarineShotsFired += marineShotsFired;
+            monthly.XenoRoundsPlayed += xenoRoundsPlayed;
+            monthly.XenoRoundsWon += xenoRoundsWon;
+            monthly.XenoRoundsLost += xenoRoundsLost;
+            monthly.XenoDamageDealt += xenoDamageDealt;
+            monthly.XenoKills += xenoKills;
+            monthly.XenoVictoryPoints += xenoVictoryPoints;
+            monthly.XenoImpactPoints += xenoImpactPoints;
+            monthly.XenoHealingDone += xenoHealingDone;
+            monthly.XenoStructuresBuilt += xenoStructuresBuilt;
+            monthly.XenoDeaths += xenoDeaths;
+            monthly.XenoShotsFired += xenoShotsFired;
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<CCMLeaderboardPage> GetCCMLeaderboard(
+            Guid viewer,
+            CCMLeaderboardCategory category,
+            CCMLeaderboardTimeframe timeframe,
+            int page,
+            int pageSize)
+        {
+            await using var db = await GetDb();
+
+            page = Math.Max(1, page);
+            pageSize = Math.Max(1, pageSize);
+            var now = DateTime.UtcNow;
+
+            IQueryable<LeaderboardRow> query = timeframe == CCMLeaderboardTimeframe.CurrentMonth
+                ? GetMonthlyLeaderboardQuery(db, now.Year, now.Month, category)
+                : GetAllTimeLeaderboardQuery(db, category);
+
+            query = query
+                .Where(r => r.Score > 0)
+                .OrderByDescending(r => r.Score)
+                .ThenBy(r => r.Ckey);
+
+            var totalEntries = await query.CountAsync();
+            var totalPages = Math.Max(1, (int) Math.Ceiling(totalEntries / (float) pageSize));
+            page = Math.Min(page, totalPages);
+
+            var rows = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var entries = rows
+                .Select((row, index) => new CCMLeaderboardEntry(
+                    (page - 1) * pageSize + index + 1,
+                    row.Ckey,
+                    row.Score,
+                    row.PlayerId == viewer))
+                .ToArray();
+
+            CCMLeaderboardEntry? viewerEntry = null;
+            var viewerRow = await query.FirstOrDefaultAsync(r => r.PlayerId == viewer);
+            if (viewerRow != null)
+            {
+                var higherCount = await query.CountAsync(r => r.Score > viewerRow.Score);
+                var viewerRank = higherCount + 1;
+                var pageStart = (page - 1) * pageSize + 1;
+                var pageEnd = pageStart + pageSize - 1;
+                if (viewerRank < pageStart || viewerRank > pageEnd)
+                    viewerEntry = new CCMLeaderboardEntry(viewerRank, viewerRow.Ckey, viewerRow.Score, true);
+            }
+
+            return new CCMLeaderboardPage(category, timeframe, page, totalPages, entries, viewerEntry);
+        }
+
+        private static IQueryable<LeaderboardRow> GetAllTimeLeaderboardQuery(DbGuard db, CCMLeaderboardCategory category)
+        {
+            return category switch
+            {
+                CCMLeaderboardCategory.OverallVictoryPoints => ProjectLeaderboard(
+                    db.DbContext.CCMPlayerStats.Select(s => new LeaderboardScoreProjection
+                    {
+                        PlayerId = s.PlayerId,
+                        Score = s.VictoryPoints,
+                    }),
+                    db),
+                CCMLeaderboardCategory.OverallKills => ProjectLeaderboard(
+                    db.DbContext.CCMPlayerStats.Select(s => new LeaderboardScoreProjection
+                    {
+                        PlayerId = s.PlayerId,
+                        Score = s.TotalKills,
+                    }),
+                    db),
+                CCMLeaderboardCategory.MarineVictoryPoints => ProjectLeaderboard(
+                    db.DbContext.CCMPlayerStats.Select(s => new LeaderboardScoreProjection
+                    {
+                        PlayerId = s.PlayerId,
+                        Score = s.MarineVictoryPoints,
+                    }),
+                    db),
+                CCMLeaderboardCategory.MarineImpact => ProjectLeaderboard(
+                    db.DbContext.CCMPlayerStats.Select(s => new LeaderboardScoreProjection
+                    {
+                        PlayerId = s.PlayerId,
+                        Score = s.MarineImpactPoints,
+                    }),
+                    db),
+                CCMLeaderboardCategory.MarineKills => ProjectLeaderboard(
+                    db.DbContext.CCMPlayerStats.Select(s => new LeaderboardScoreProjection
+                    {
+                        PlayerId = s.PlayerId,
+                        Score = s.MarineKills,
+                    }),
+                    db),
+                CCMLeaderboardCategory.XenoVictoryPoints => ProjectLeaderboard(
+                    db.DbContext.CCMPlayerStats.Select(s => new LeaderboardScoreProjection
+                    {
+                        PlayerId = s.PlayerId,
+                        Score = s.XenoVictoryPoints,
+                    }),
+                    db),
+                CCMLeaderboardCategory.XenoImpact => ProjectLeaderboard(
+                    db.DbContext.CCMPlayerStats.Select(s => new LeaderboardScoreProjection
+                    {
+                        PlayerId = s.PlayerId,
+                        Score = s.XenoImpactPoints,
+                    }),
+                    db),
+                CCMLeaderboardCategory.XenoKills => ProjectLeaderboard(
+                    db.DbContext.CCMPlayerStats.Select(s => new LeaderboardScoreProjection
+                    {
+                        PlayerId = s.PlayerId,
+                        Score = s.XenoKills,
+                    }),
+                    db),
+                _ => Enumerable.Empty<LeaderboardRow>().AsQueryable(),
+            };
+        }
+
+        private static IQueryable<LeaderboardRow> GetMonthlyLeaderboardQuery(DbGuard db, int year, int month, CCMLeaderboardCategory category)
+        {
+            return category switch
+            {
+                CCMLeaderboardCategory.OverallVictoryPoints => ProjectLeaderboard(
+                    db.DbContext.CCMPlayerMonthlyStats
+                        .Where(s => s.Year == year && s.Month == month)
+                        .Select(s => new LeaderboardScoreProjection
+                        {
+                            PlayerId = s.PlayerId,
+                            Score = s.VictoryPoints,
+                        }),
+                    db),
+                CCMLeaderboardCategory.OverallKills => ProjectLeaderboard(
+                    db.DbContext.CCMPlayerMonthlyStats
+                        .Where(s => s.Year == year && s.Month == month)
+                        .Select(s => new LeaderboardScoreProjection
+                        {
+                            PlayerId = s.PlayerId,
+                            Score = s.TotalKills,
+                        }),
+                    db),
+                CCMLeaderboardCategory.MarineVictoryPoints => ProjectLeaderboard(
+                    db.DbContext.CCMPlayerMonthlyStats
+                        .Where(s => s.Year == year && s.Month == month)
+                        .Select(s => new LeaderboardScoreProjection
+                        {
+                            PlayerId = s.PlayerId,
+                            Score = s.MarineVictoryPoints,
+                        }),
+                    db),
+                CCMLeaderboardCategory.MarineImpact => ProjectLeaderboard(
+                    db.DbContext.CCMPlayerMonthlyStats
+                        .Where(s => s.Year == year && s.Month == month)
+                        .Select(s => new LeaderboardScoreProjection
+                        {
+                            PlayerId = s.PlayerId,
+                            Score = s.MarineImpactPoints,
+                        }),
+                    db),
+                CCMLeaderboardCategory.MarineKills => ProjectLeaderboard(
+                    db.DbContext.CCMPlayerMonthlyStats
+                        .Where(s => s.Year == year && s.Month == month)
+                        .Select(s => new LeaderboardScoreProjection
+                        {
+                            PlayerId = s.PlayerId,
+                            Score = s.MarineKills,
+                        }),
+                    db),
+                CCMLeaderboardCategory.XenoVictoryPoints => ProjectLeaderboard(
+                    db.DbContext.CCMPlayerMonthlyStats
+                        .Where(s => s.Year == year && s.Month == month)
+                        .Select(s => new LeaderboardScoreProjection
+                        {
+                            PlayerId = s.PlayerId,
+                            Score = s.XenoVictoryPoints,
+                        }),
+                    db),
+                CCMLeaderboardCategory.XenoImpact => ProjectLeaderboard(
+                    db.DbContext.CCMPlayerMonthlyStats
+                        .Where(s => s.Year == year && s.Month == month)
+                        .Select(s => new LeaderboardScoreProjection
+                        {
+                            PlayerId = s.PlayerId,
+                            Score = s.XenoImpactPoints,
+                        }),
+                    db),
+                CCMLeaderboardCategory.XenoKills => ProjectLeaderboard(
+                    db.DbContext.CCMPlayerMonthlyStats
+                        .Where(s => s.Year == year && s.Month == month)
+                        .Select(s => new LeaderboardScoreProjection
+                        {
+                            PlayerId = s.PlayerId,
+                            Score = s.XenoKills,
+                        }),
+                    db),
+                _ => Enumerable.Empty<LeaderboardRow>().AsQueryable(),
+            };
+        }
+
+        private static IQueryable<LeaderboardRow> ProjectLeaderboard(IQueryable<LeaderboardScoreProjection> scores, DbGuard db)
+        {
+            return scores.Join(
+                db.DbContext.Player,
+                stats => stats.PlayerId,
+                player => player.UserId,
+                (stats, player) => new LeaderboardRow
+                {
+                    PlayerId = stats.PlayerId,
+                    Ckey = player.LastSeenUserName,
+                    Score = stats.Score,
+                });
+        }
+
+        private static CCMPlayerStatsSnapshot ToCCMStatsSnapshot(CCMPlayerStats? stats)
+        {
+            if (stats == null)
+                return new CCMPlayerStatsSnapshot(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+            return new CCMPlayerStatsSnapshot(
+                stats.RoundsPlayed,
+                stats.RoundsWon,
+                stats.RoundsLost,
+                stats.RoundSecondsPlayed,
+                stats.TotalDamageDealt,
+                stats.TotalKills,
+                stats.VictoryPoints,
+                stats.ImpactPoints,
+                stats.Revives,
+                stats.HealingDone,
+                stats.StructuresBuilt,
+                stats.Deaths,
+                stats.ShotsFired,
+                stats.MarineRoundsPlayed,
+                stats.MarineRoundsWon,
+                stats.MarineRoundsLost,
+                stats.MarineDamageDealt,
+                stats.MarineKills,
+                stats.MarineVictoryPoints,
+                stats.MarineImpactPoints,
+                stats.MarineRevives,
+                stats.MarineHealingDone,
+                stats.MarineStructuresBuilt,
+                stats.MarineDeaths,
+                stats.MarineShotsFired,
+                stats.XenoRoundsPlayed,
+                stats.XenoRoundsWon,
+                stats.XenoRoundsLost,
+                stats.XenoDamageDealt,
+                stats.XenoKills,
+                stats.XenoVictoryPoints,
+                stats.XenoImpactPoints,
+                stats.XenoHealingDone,
+                stats.XenoStructuresBuilt,
+                stats.XenoDeaths,
+                stats.XenoShotsFired);
+        }
+
+        private static CCMPlayerAchievementStatsSnapshot ToCCMAchievementStatsSnapshot(CCMPlayerAchievementStats? stats)
+        {
+            if (stats == null)
+                return new CCMPlayerAchievementStatsSnapshot(0, 0, 0, 0, 0, 0, 0, Array.Empty<string>());
+
+            var unlocked = string.IsNullOrWhiteSpace(stats.UnlockedAchievementIds)
+                ? Array.Empty<string>()
+                : stats.UnlockedAchievementIds.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+            return new CCMPlayerAchievementStatsSnapshot(
+                stats.FriendlyFireDamage,
+                stats.RequisitionOrders,
+                stats.XenoEvolutions,
+                stats.OfficerWins,
+                stats.QueenKills,
+                stats.QueenWins,
+                stats.QueenKillParticipations,
+                unlocked);
+        }
+
+        private static int GetLeaderboardScore(CCMPlayerStats stats, CCMLeaderboardCategory category)
+        {
+            return category switch
+            {
+                CCMLeaderboardCategory.OverallVictoryPoints => stats.VictoryPoints,
+                CCMLeaderboardCategory.OverallKills => stats.TotalKills,
+                CCMLeaderboardCategory.MarineVictoryPoints => stats.MarineVictoryPoints,
+                CCMLeaderboardCategory.MarineImpact => stats.MarineImpactPoints,
+                CCMLeaderboardCategory.MarineKills => stats.MarineKills,
+                CCMLeaderboardCategory.XenoVictoryPoints => stats.XenoVictoryPoints,
+                CCMLeaderboardCategory.XenoImpact => stats.XenoImpactPoints,
+                CCMLeaderboardCategory.XenoKills => stats.XenoKills,
+                _ => 0,
+            };
+        }
+
+        private static int GetLeaderboardScore(CCMPlayerMonthlyStats stats, CCMLeaderboardCategory category)
+        {
+            return category switch
+            {
+                CCMLeaderboardCategory.OverallVictoryPoints => stats.VictoryPoints,
+                CCMLeaderboardCategory.OverallKills => stats.TotalKills,
+                CCMLeaderboardCategory.MarineVictoryPoints => stats.MarineVictoryPoints,
+                CCMLeaderboardCategory.MarineImpact => stats.MarineImpactPoints,
+                CCMLeaderboardCategory.MarineKills => stats.MarineKills,
+                CCMLeaderboardCategory.XenoVictoryPoints => stats.XenoVictoryPoints,
+                CCMLeaderboardCategory.XenoImpact => stats.XenoImpactPoints,
+                CCMLeaderboardCategory.XenoKills => stats.XenoKills,
+                _ => 0,
+            };
+        }
+
+        private sealed class LeaderboardRow
+        {
+            public Guid PlayerId { get; init; }
+            public string Ckey { get; init; } = string.Empty;
+            public int Score { get; init; }
+        }
+
+        private sealed class LeaderboardScoreProjection
+        {
+            public Guid PlayerId { get; init; }
+            public int Score { get; init; }
+        }
+
+        public async Task<(int MarineWins, int XenoWins)> GetCCMRoundWinStats()
+        {
+            await using var db = await GetDb();
+            var stats = await db.DbContext.CCMRoundWinStats
+                .FirstOrDefaultAsync(s => s.Id == 1);
+
+            stats ??= await TryImportLegacyCCMRoundWinStats(db);
+
+            return stats == null
+                ? (0, 0)
+                : (stats.MarineWins, stats.XenoWins);
+        }
+
+        public async Task<(int MarineWins, int XenoWins)> AdjustCCMRoundWinStats(int marineDelta, int xenoDelta)
+        {
+            await using var db = await GetDb();
+            var stats = await db.DbContext.CCMRoundWinStats
+                .FirstOrDefaultAsync(s => s.Id == 1);
+
+            stats ??= await TryImportLegacyCCMRoundWinStats(db);
+
+            stats ??= db.DbContext.CCMRoundWinStats
+                .Add(new CCMRoundWinStats
+                {
+                    Id = 1,
+                })
+                .Entity;
+
+            stats.MarineWins = Math.Max(0, stats.MarineWins + marineDelta);
+            stats.XenoWins = Math.Max(0, stats.XenoWins + xenoDelta);
+
+            await db.DbContext.SaveChangesAsync();
+
+            return (stats.MarineWins, stats.XenoWins);
+        }
+
+        private static async Task<CCMRoundWinStats?> TryImportLegacyCCMRoundWinStats(DbGuard db)
+        {
+            try
+            {
+                var connection = db.DbContext.Database.GetDbConnection();
+                if (connection.State != System.Data.ConnectionState.Open)
+                    await connection.OpenAsync();
+
+                await using var command = connection.CreateCommand();
+                command.CommandText = "SELECT marine_wins, xeno_wins FROM rmc_round_win_stats LIMIT 1";
+
+                await using var reader = await command.ExecuteReaderAsync();
+                if (!await reader.ReadAsync())
+                    return null;
+
+                var stats = db.DbContext.CCMRoundWinStats
+                    .Add(new CCMRoundWinStats
+                    {
+                        Id = 1,
+                        MarineWins = reader.IsDBNull(0) ? 0 : reader.GetInt32(0),
+                        XenoWins = reader.IsDBNull(1) ? 0 : reader.GetInt32(1),
+                    })
+                    .Entity;
+
+                await db.DbContext.SaveChangesAsync();
+                return stats;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public async Task<Dictionary<string, List<string>>?> GetActionOrder(Guid player)

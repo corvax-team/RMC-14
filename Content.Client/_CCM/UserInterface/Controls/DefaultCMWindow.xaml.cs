@@ -80,6 +80,10 @@ namespace Content.Client._CCM.UserInterface.Controls
         }
 
         public UIControl Contents { get; private set; }
+        public PanelContainer HeaderPanel => WindowHeader;
+        public PanelContainer BodyPanel => ContentsBackground;
+        public Label WindowTitleLabel => TitleLabel;
+        public TextureButton WindowCloseButton => CloseButton;
 
         private const int DragMarginSize = 7;
         private const float HeaderSizeY = 25;

@@ -3,10 +3,12 @@
                      MinWidth="100" MinHeight="50">
     <PanelContainer StyleClasses="CMWindowFrame" />
     <BoxContainer Orientation="Vertical" SeparationOverride="0">
-        <PanelContainer Name="WindowHeader" StyleClasses="windowHeader">
-            <BoxContainer Orientation="Horizontal">
-                <Label Margin="5 0 0 0" HorizontalExpand="true" Name="TitleLabel" ClipText="True"
-                       Text="{Loc 'defaultwindow-placeholder-title'}" VAlign="Center" StyleClasses="windowTitle" />
+        <PanelContainer Name="WindowHeader" StyleClasses="windowHeader" Margin="10 10 10 0">
+            <BoxContainer Orientation="Horizontal" Margin="0 0 0 0">
+                <Control HorizontalExpand="True">
+                    <Label Margin="5 0 0 0" HorizontalExpand="true" Name="TitleLabel" ClipText="True"
+                           Text="{Loc 'defaultwindow-placeholder-title'}" VAlign="Center" StyleClasses="windowTitle" />
+                </Control>
                 <TextureButton Name="CloseButton" StyleClasses="windowCloseButton" VerticalAlignment="Center" />
             </BoxContainer>
         </PanelContainer>

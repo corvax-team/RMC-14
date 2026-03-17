@@ -545,6 +545,391 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("blacklist", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.CCMPlayerMonthlyStats", b =>
+                {
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_id");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("year");
+
+                    b.Property<int>("Month")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("month");
+
+                    b.Property<int>("Deaths")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("deaths");
+
+                    b.Property<int>("HealingDone")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("healing_done");
+
+                    b.Property<int>("ImpactPoints")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("impact_points");
+
+                    b.Property<int>("MarineDamageDealt")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_damage_dealt");
+
+                    b.Property<int>("MarineDeaths")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_deaths");
+
+                    b.Property<int>("MarineHealingDone")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_healing_done");
+
+                    b.Property<int>("MarineImpactPoints")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_impact_points");
+
+                    b.Property<int>("MarineKills")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_kills");
+
+                    b.Property<int>("MarineRevives")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_revives");
+
+                    b.Property<int>("MarineRoundsLost")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_rounds_lost");
+
+                    b.Property<int>("MarineRoundsPlayed")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_rounds_played");
+
+                    b.Property<int>("MarineRoundsWon")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_rounds_won");
+
+                    b.Property<int>("MarineShotsFired")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_shots_fired");
+
+                    b.Property<int>("MarineStructuresBuilt")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_structures_built");
+
+                    b.Property<int>("MarineVictoryPoints")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_victory_points");
+
+                    b.Property<int>("Revives")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("revives");
+
+                    b.Property<int>("RoundSecondsPlayed")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("round_seconds_played");
+
+                    b.Property<int>("RoundsLost")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("rounds_lost");
+
+                    b.Property<int>("RoundsPlayed")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("rounds_played");
+
+                    b.Property<int>("RoundsWon")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("rounds_won");
+
+                    b.Property<int>("ShotsFired")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("shots_fired");
+
+                    b.Property<int>("StructuresBuilt")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("structures_built");
+
+                    b.Property<int>("TotalDamageDealt")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("total_damage_dealt");
+
+                    b.Property<int>("TotalKills")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("total_kills");
+
+                    b.Property<int>("VictoryPoints")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("victory_points");
+
+                    b.Property<int>("XenoDamageDealt")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_damage_dealt");
+
+                    b.Property<int>("XenoDeaths")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_deaths");
+
+                    b.Property<int>("XenoHealingDone")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_healing_done");
+
+                    b.Property<int>("XenoImpactPoints")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_impact_points");
+
+                    b.Property<int>("XenoKills")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_kills");
+
+                    b.Property<int>("XenoRoundsLost")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_rounds_lost");
+
+                    b.Property<int>("XenoRoundsPlayed")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_rounds_played");
+
+                    b.Property<int>("XenoRoundsWon")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_rounds_won");
+
+                    b.Property<int>("XenoShotsFired")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_shots_fired");
+
+                    b.Property<int>("XenoStructuresBuilt")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_structures_built");
+
+                    b.Property<int>("XenoVictoryPoints")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_victory_points");
+
+                    b.HasKey("PlayerId", "Year", "Month")
+                        .HasName("PK_ccm_player_monthly_stats");
+
+                    b.ToTable("ccm_player_monthly_stats", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CCMPlayerAchievementStats", b =>
+                {
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_id");
+
+                    b.Property<int>("FriendlyFireDamage")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("friendly_fire_damage");
+
+                    b.Property<int>("OfficerWins")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("officer_wins");
+
+                    b.Property<int>("QueenKillParticipations")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("queen_kill_participations");
+
+                    b.Property<int>("QueenKills")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("queen_kills");
+
+                    b.Property<int>("QueenWins")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("queen_wins");
+
+                    b.Property<int>("RequisitionOrders")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("requisition_orders");
+
+                    b.Property<string>("UnlockedAchievementIds")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("unlocked_achievement_ids");
+
+                    b.Property<int>("XenoEvolutions")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_evolutions");
+
+                    b.HasKey("PlayerId")
+                        .HasName("PK_ccm_player_achievement_stats");
+
+                    b.ToTable("ccm_player_achievement_stats", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CCMPlayerStats", b =>
+                {
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_id");
+
+                    b.Property<int>("Deaths")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("deaths");
+
+                    b.Property<int>("HealingDone")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("healing_done");
+
+                    b.Property<int>("ImpactPoints")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("impact_points");
+
+                    b.Property<int>("MarineDamageDealt")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_damage_dealt");
+
+                    b.Property<int>("MarineDeaths")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_deaths");
+
+                    b.Property<int>("MarineHealingDone")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_healing_done");
+
+                    b.Property<int>("MarineImpactPoints")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_impact_points");
+
+                    b.Property<int>("MarineKills")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_kills");
+
+                    b.Property<int>("MarineRevives")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_revives");
+
+                    b.Property<int>("MarineRoundsLost")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_rounds_lost");
+
+                    b.Property<int>("MarineRoundsPlayed")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_rounds_played");
+
+                    b.Property<int>("MarineRoundsWon")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_rounds_won");
+
+                    b.Property<int>("MarineShotsFired")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_shots_fired");
+
+                    b.Property<int>("MarineStructuresBuilt")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_structures_built");
+
+                    b.Property<int>("MarineVictoryPoints")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_victory_points");
+
+                    b.Property<int>("Revives")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("revives");
+
+                    b.Property<int>("RoundSecondsPlayed")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("round_seconds_played");
+
+                    b.Property<int>("RoundsLost")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("rounds_lost");
+
+                    b.Property<int>("RoundsPlayed")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("rounds_played");
+
+                    b.Property<int>("RoundsWon")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("rounds_won");
+
+                    b.Property<int>("ShotsFired")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("shots_fired");
+
+                    b.Property<int>("StructuresBuilt")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("structures_built");
+
+                    b.Property<int>("TotalDamageDealt")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("total_damage_dealt");
+
+                    b.Property<int>("TotalKills")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("total_kills");
+
+                    b.Property<int>("VictoryPoints")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("victory_points");
+
+                    b.Property<int>("XenoDamageDealt")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_damage_dealt");
+
+                    b.Property<int>("XenoDeaths")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_deaths");
+
+                    b.Property<int>("XenoHealingDone")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_healing_done");
+
+                    b.Property<int>("XenoImpactPoints")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_impact_points");
+
+                    b.Property<int>("XenoKills")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_kills");
+
+                    b.Property<int>("XenoRoundsLost")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_rounds_lost");
+
+                    b.Property<int>("XenoRoundsPlayed")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_rounds_played");
+
+                    b.Property<int>("XenoRoundsWon")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_rounds_won");
+
+                    b.Property<int>("XenoShotsFired")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_shots_fired");
+
+                    b.Property<int>("XenoStructuresBuilt")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_structures_built");
+
+                    b.Property<int>("XenoVictoryPoints")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_victory_points");
+
+                    b.HasKey("PlayerId")
+                        .HasName("PK_ccm_player_stats");
+
+                    b.ToTable("ccm_player_stats", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CCMRoundWinStats", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("ccm_round_win_stats_id");
+
+                    b.Property<int>("MarineWins")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("marine_wins");
+
+                    b.Property<int>("XenoWins")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("xeno_wins");
+
+                    b.HasKey("Id")
+                        .HasName("PK_ccm_round_win_stats");
+
+                    b.ToTable("ccm_round_win_stats", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.ConnectionLog", b =>
                 {
                     b.Property<int>("Id")
@@ -2130,6 +2515,45 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Profile");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.CCMPlayerMonthlyStats", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithMany("CCMMonthlyStats")
+                        .HasForeignKey("PlayerId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_ccm_player_monthly_stats_player_player_id1");
+
+                    b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CCMPlayerAchievementStats", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithOne("CCMAchievementStats")
+                        .HasForeignKey("Content.Server.Database.CCMPlayerAchievementStats", "PlayerId")
+                        .HasPrincipalKey("Content.Server.Database.Player", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_ccm_player_achievement_stats_player_player_id");
+
+                    b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CCMPlayerStats", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithOne("CCMStats")
+                        .HasForeignKey("Content.Server.Database.CCMPlayerStats", "PlayerId")
+                        .HasPrincipalKey("Content.Server.Database.Player", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_ccm_player_stats_player_player_id");
+
+                    b.Navigation("Player");
+                });
+
             modelBuilder.Entity("Content.Server.Database.ConnectionLog", b =>
                 {
                     b.HasOne("Content.Server.Database.Server", "Server")
@@ -2822,6 +3246,12 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("AdminWatchlistsLastEdited");
 
                     b.Navigation("AdminWatchlistsReceived");
+
+                    b.Navigation("CCMMonthlyStats");
+
+                    b.Navigation("CCMAchievementStats");
+
+                    b.Navigation("CCMStats");
 
                     b.Navigation("ChatBans");
 

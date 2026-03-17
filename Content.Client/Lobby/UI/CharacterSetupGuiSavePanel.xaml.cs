@@ -11,6 +11,9 @@ public sealed partial class CharacterSetupGuiSavePanel : DefaultCMWindow
     {
         RobustXamlLoader.Load(this);
 
+        Title = string.Empty;
+        HeaderPanel.Visible = false;
+
         CancelButton.OnPressed += _ =>
         {
             Close();

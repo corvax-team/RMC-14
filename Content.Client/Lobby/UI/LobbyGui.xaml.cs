@@ -1,5 +1,7 @@
 using Content.Client._RMC14.Roadmap;
 using Content.Client._RMC14.RMCPlaytimeStats;
+using Content.Client._CCM.Achievements;
+using Content.Client._CCM.Stats;
 using Content.Client.CrewManifest;
 using Content.Client.GameTicking.Managers;
 using Content.Client._RMC14.Lobby;
@@ -44,7 +46,8 @@ namespace Content.Client.Lobby.UI
         private LateJoinGui? _lateJoinWindow;
         private VoteCallMenu? _voteMenu;
         private ObserveWarningWindow? _observeWindow;
-        private RMCPlaytimeStatsWindow? _statsWindow;
+        private CCMStatisticsWindow? _statsWindow;
+        private CCMLeaderboardWindow? _leaderboardWindow;
         private bool _suppressReadyToggle;
         private bool _leftMenuVisible = true;
         private readonly DragDropHelper<Control> _leftMenuDragHelper;
@@ -86,6 +89,8 @@ namespace Content.Client.Lobby.UI
             UpdatesButton.OnPressed += _ => UserInterfaceManager.GetUIController<RoadmapUIController>().ToggleRoadmap();
 
             TaskbarMenuButton.OnPressed += _ => ToggleLeftMenu(!_leftMenuVisible);
+            TaskbarRatingButton.OnPressed += _ => OpenLeaderboard();
+            TaskbarAchievementsButton.OnPressed += _ => UserInterfaceManager.GetUIController<CCMAchievementsUIController>().OpenWindow();
 
             TutorialButton.OnPressed += _ => OpenTutorial();
             StatsButton.OnPressed += _ => OpenStats();
@@ -645,11 +650,24 @@ namespace Content.Client.Lobby.UI
         {
             if (_statsWindow == null || _statsWindow.Disposed)
             {
-                _statsWindow = new RMCPlaytimeStatsWindow();
+                _statsWindow = new CCMStatisticsWindow();
                 _statsWindow.OnClose += () => _statsWindow = null;
             }
 
+            _statsWindow.RefreshData();
             _statsWindow.OpenCentered();
+        }
+
+        private void OpenLeaderboard()
+        {
+            if (_leaderboardWindow == null || _leaderboardWindow.Disposed)
+            {
+                _leaderboardWindow = new CCMLeaderboardWindow();
+                _leaderboardWindow.OnClose += () => _leaderboardWindow = null;
+            }
+
+            _leaderboardWindow.RefreshData();
+            _leaderboardWindow.OpenCentered();
         }
 
         private void OpenCharacterSetup()

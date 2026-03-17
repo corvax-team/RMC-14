@@ -380,7 +380,11 @@ namespace Content.Client.Lobby.UI
             if (_centerPreviewEntity == default)
                 return;
 
-            if (forceRespawn || profile.Species != _centerPreviewSpeciesId || !_entManager.EntityExists(_centerPreviewEntity))
+            var needsHumanoidRespawn = !_entManager.HasComponent<HumanoidAppearanceComponent>(_centerPreviewEntity);
+            if (forceRespawn ||
+                needsHumanoidRespawn ||
+                profile.Species != _centerPreviewSpeciesId ||
+                !_entManager.EntityExists(_centerPreviewEntity))
             {
                 if (_centerPreviewEntity != default)
                     _entManager.DeleteEntity(_centerPreviewEntity);

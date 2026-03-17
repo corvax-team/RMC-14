@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Content.Server._CCM.Database;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server.Administration.Logs;
+using Content.Shared._CCM.Achievements;
+using Content.Shared._CCM.Stats;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Construction.Prototypes;
@@ -391,6 +393,74 @@ namespace Content.Server.Database
         Task<List<RMCCommendation>> GetCommendationsGiven(Guid player);
 
         Task IncreaseInfects(Guid player);
+
+        Task<CCMPlayerStatsSnapshot> GetCCMPlayerStats(Guid player);
+
+        Task<CCMPlayerAchievementStatsSnapshot> GetCCMPlayerAchievementStats(Guid player);
+
+        Task AdjustCCMPlayerAchievementStats(
+            Guid player,
+            int friendlyFireDamageDelta = 0,
+            int requisitionOrdersDelta = 0,
+            int xenoEvolutionsDelta = 0,
+            int officerWinsDelta = 0,
+            int queenKillsDelta = 0,
+            int queenWinsDelta = 0,
+            int queenKillParticipationsDelta = 0);
+
+        Task SetCCMUnlockedAchievementIds(Guid player, string unlockedAchievementIds);
+
+        Task SaveCCMRoundStats(
+            Guid player,
+            int year,
+            int month,
+            int roundsPlayed,
+            int roundsWon,
+            int roundsLost,
+            int roundSecondsPlayed,
+            int totalDamageDealt,
+            int totalKills,
+            int victoryPoints,
+            int impactPoints,
+            int revives,
+            int healingDone,
+            int structuresBuilt,
+            int deaths,
+            int shotsFired,
+            int marineRoundsPlayed,
+            int marineRoundsWon,
+            int marineRoundsLost,
+            int marineDamageDealt,
+            int marineKills,
+            int marineVictoryPoints,
+            int marineImpactPoints,
+            int marineRevives,
+            int marineHealingDone,
+            int marineStructuresBuilt,
+            int marineDeaths,
+            int marineShotsFired,
+            int xenoRoundsPlayed,
+            int xenoRoundsWon,
+            int xenoRoundsLost,
+            int xenoDamageDealt,
+            int xenoKills,
+            int xenoVictoryPoints,
+            int xenoImpactPoints,
+            int xenoHealingDone,
+            int xenoStructuresBuilt,
+            int xenoDeaths,
+            int xenoShotsFired);
+
+        Task<CCMLeaderboardPage> GetCCMLeaderboard(
+            Guid viewer,
+            CCMLeaderboardCategory category,
+            CCMLeaderboardTimeframe timeframe,
+            int page,
+            int pageSize);
+
+        Task<(int MarineWins, int XenoWins)> GetCCMRoundWinStats();
+
+        Task<(int MarineWins, int XenoWins)> AdjustCCMRoundWinStats(int marineDelta, int xenoDelta);
 
         Task<Dictionary<string, List<string>>?> GetAllActionOrders(Guid player);
 
@@ -1279,6 +1349,153 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.IncreaseInfects(player));
+        }
+
+        public Task<CCMPlayerStatsSnapshot> GetCCMPlayerStats(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCCMPlayerStats(player));
+        }
+
+        public Task<CCMPlayerAchievementStatsSnapshot> GetCCMPlayerAchievementStats(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCCMPlayerAchievementStats(player));
+        }
+
+        public Task AdjustCCMPlayerAchievementStats(
+            Guid player,
+            int friendlyFireDamageDelta = 0,
+            int requisitionOrdersDelta = 0,
+            int xenoEvolutionsDelta = 0,
+            int officerWinsDelta = 0,
+            int queenKillsDelta = 0,
+            int queenWinsDelta = 0,
+            int queenKillParticipationsDelta = 0)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AdjustCCMPlayerAchievementStats(
+                player,
+                friendlyFireDamageDelta,
+                requisitionOrdersDelta,
+                xenoEvolutionsDelta,
+                officerWinsDelta,
+                queenKillsDelta,
+                queenWinsDelta,
+                queenKillParticipationsDelta));
+        }
+
+        public Task SetCCMUnlockedAchievementIds(Guid player, string unlockedAchievementIds)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetCCMUnlockedAchievementIds(player, unlockedAchievementIds));
+        }
+
+        public Task SaveCCMRoundStats(
+            Guid player,
+            int year,
+            int month,
+            int roundsPlayed,
+            int roundsWon,
+            int roundsLost,
+            int roundSecondsPlayed,
+            int totalDamageDealt,
+            int totalKills,
+            int victoryPoints,
+            int impactPoints,
+            int revives,
+            int healingDone,
+            int structuresBuilt,
+            int deaths,
+            int shotsFired,
+            int marineRoundsPlayed,
+            int marineRoundsWon,
+            int marineRoundsLost,
+            int marineDamageDealt,
+            int marineKills,
+            int marineVictoryPoints,
+            int marineImpactPoints,
+            int marineRevives,
+            int marineHealingDone,
+            int marineStructuresBuilt,
+            int marineDeaths,
+            int marineShotsFired,
+            int xenoRoundsPlayed,
+            int xenoRoundsWon,
+            int xenoRoundsLost,
+            int xenoDamageDealt,
+            int xenoKills,
+            int xenoVictoryPoints,
+            int xenoImpactPoints,
+            int xenoHealingDone,
+            int xenoStructuresBuilt,
+            int xenoDeaths,
+            int xenoShotsFired)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SaveCCMRoundStats(
+                player,
+                year,
+                month,
+                roundsPlayed,
+                roundsWon,
+                roundsLost,
+                roundSecondsPlayed,
+                totalDamageDealt,
+                totalKills,
+                victoryPoints,
+                impactPoints,
+                revives,
+                healingDone,
+                structuresBuilt,
+                deaths,
+                shotsFired,
+                marineRoundsPlayed,
+                marineRoundsWon,
+                marineRoundsLost,
+                marineDamageDealt,
+                marineKills,
+                marineVictoryPoints,
+                marineImpactPoints,
+                marineRevives,
+                marineHealingDone,
+                marineStructuresBuilt,
+                marineDeaths,
+                marineShotsFired,
+                xenoRoundsPlayed,
+                xenoRoundsWon,
+                xenoRoundsLost,
+                xenoDamageDealt,
+                xenoKills,
+                xenoVictoryPoints,
+                xenoImpactPoints,
+                xenoHealingDone,
+                xenoStructuresBuilt,
+                xenoDeaths,
+                xenoShotsFired));
+        }
+
+        public Task<CCMLeaderboardPage> GetCCMLeaderboard(
+            Guid viewer,
+            CCMLeaderboardCategory category,
+            CCMLeaderboardTimeframe timeframe,
+            int page,
+            int pageSize)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCCMLeaderboard(viewer, category, timeframe, page, pageSize));
+        }
+
+        public Task<(int MarineWins, int XenoWins)> GetCCMRoundWinStats()
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCCMRoundWinStats());
+        }
+
+        public Task<(int MarineWins, int XenoWins)> AdjustCCMRoundWinStats(int marineDelta, int xenoDelta)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AdjustCCMRoundWinStats(marineDelta, xenoDelta));
         }
 
         public Task<Dictionary<string, List<string>>?> GetAllActionOrders(Guid player)

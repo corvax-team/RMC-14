@@ -2530,6 +2530,38 @@ namespace Content.Client.Stylesheets
                     new StyleProperty(Label.StylePropertyFont, robotoMonoBold14)
                 }),
 
+                new StyleRule(new SelectorElement(typeof(OutputPanel), new[] {"DebugConsoleOutput"}, null, null), new[]
+                {
+                    new StyleProperty(OutputPanel.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#0C1730").WithAlpha(0.9f)
+                            : Color.FromHex("#0A160E").WithAlpha(0.9f),
+                        BorderColor = CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#285A9A").WithAlpha(0.75f)
+                            : Color.FromHex("#2B7E45").WithAlpha(0.75f),
+                        BorderThickness = new Thickness(1),
+                        ContentMarginLeftOverride = 3,
+                        ContentMarginRightOverride = 3,
+                        ContentMarginBottomOverride = 3,
+                        ContentMarginTopOverride = 3,
+                    })
+                }),
+
+                new StyleRule(new SelectorElement(typeof(HistoryLineEdit), new[] {"DebugConsoleInput"}, null, null), new[]
+                {
+                    new StyleProperty(LineEdit.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#0A1326").WithAlpha(0.96f)
+                            : Color.FromHex("#09110B").WithAlpha(0.96f),
+                        BorderColor = CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#285A9A").WithAlpha(0.82f)
+                            : Color.FromHex("#2B7E45").WithAlpha(0.82f),
+                        BorderThickness = new Thickness(1)
+                    })
+                }),
+
                 // Big Button
                 new StyleRule(new SelectorChild(
                     new SelectorElement(typeof(Button), new[] {StyleClassButtonBig}, null, null),
@@ -2863,7 +2895,18 @@ namespace Content.Client.Stylesheets
                 }),
 
                 Element<PanelContainer>().Class(OptionButton.StyleClassOptionsBackground)
-                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(PanelDark.WithAlpha(1f))),
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#0E2349").WithAlpha(0.97f)
+                            : Color.FromHex("#07180A").WithAlpha(0.97f),
+                        BorderThickness = new Thickness(1),
+                        BorderColor = LobbyMenuButtonBase.WithAlpha(0.6f),
+                        ContentMarginLeftOverride = 4,
+                        ContentMarginTopOverride = 4,
+                        ContentMarginRightOverride = 4,
+                        ContentMarginBottomOverride = 4,
+                    }),
 
                 new StyleRule(new SelectorElement(typeof(PanelContainer), new []{ ClassHighDivider}, null, null), new []
                 {

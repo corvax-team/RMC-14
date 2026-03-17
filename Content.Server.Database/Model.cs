@@ -62,6 +62,10 @@ namespace Content.Server.Database
         public DbSet<RMCSquadPreference> RMCSquadPreferences { get; set; } = default!;
         public DbSet<RMCCommendation> RMCCommendations { get; set; } = default!;
         public DbSet<RMCPlayerStats> RMCPlayerStats { get; set; } = default!;
+        public DbSet<CCMPlayerStats> CCMPlayerStats { get; set; } = default!;
+        public DbSet<CCMPlayerMonthlyStats> CCMPlayerMonthlyStats { get; set; } = default!;
+        public DbSet<CCMPlayerAchievementStats> CCMPlayerAchievementStats { get; set; } = default!;
+        public DbSet<CCMRoundWinStats> CCMRoundWinStats { get; set; } = default!;
         public DbSet<RMCPlayerActionOrder> RMCPlayerActionOrder { get; set; } = default!;
         public DbSet<RMCChatBans> RMCPlayerChatBans { get; set; } = default!;
 
@@ -514,6 +518,30 @@ namespace Content.Server.Database
                 .HasPrincipalKey<Player>(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<CCMPlayerStats>()
+                .HasOne(s => s.Player)
+                .WithOne(p => p.CCMStats)
+                .HasForeignKey<CCMPlayerStats>(p => p.PlayerId)
+                .HasPrincipalKey<Player>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CCMPlayerMonthlyStats>()
+                .HasKey(s => new { s.PlayerId, s.Year, s.Month });
+
+            modelBuilder.Entity<CCMPlayerMonthlyStats>()
+                .HasOne(s => s.Player)
+                .WithMany(p => p.CCMMonthlyStats)
+                .HasForeignKey(s => s.PlayerId)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CCMPlayerAchievementStats>()
+                .HasOne(s => s.Player)
+                .WithOne(p => p.CCMAchievementStats)
+                .HasForeignKey<CCMPlayerAchievementStats>(p => p.PlayerId)
+                .HasPrincipalKey<Player>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<RMCPlayerActionOrder>()
                 .HasOne(a => a.Player)
                 .WithMany(p => p.ActionOrder)
@@ -820,6 +848,9 @@ namespace Content.Server.Database
         public List<RMCCommendation> CommendationsGiven { get; set; } = default!;
         public List<RMCCommendation> CommendationsReceived { get; set; } = default!;
         public RMCPlayerStats Stats { get; set; } = default!;
+        public CCMPlayerStats? CCMStats { get; set; }
+        public CCMPlayerAchievementStats? CCMAchievementStats { get; set; }
+        public List<CCMPlayerMonthlyStats> CCMMonthlyStats { get; set; } = default!;
         public List<RMCPlayerActionOrder> ActionOrder { get; set; } = default!;
         public List<RMCChatBans> ChatBans { get; set; } = default!;
         public List<RMCChatBans> AdminChatBansCreated { get; set; } = default!;
