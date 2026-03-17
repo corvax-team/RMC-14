@@ -157,7 +157,7 @@
     range: 1
 
 - type: entity
-  parent: RMCSmokeExplosionProof
+  parent: MCSmoke
   id: RMCSmoke
   components:
   - type: DeleteOnExplosion
