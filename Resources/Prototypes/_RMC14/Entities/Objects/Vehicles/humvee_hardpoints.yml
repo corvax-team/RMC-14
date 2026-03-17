@@ -23,7 +23,7 @@
     maxIntegrity: 500
   - type: Tag
     tags:
-    - RMCVehicleHardpointWheel
+    - RMCVehicleHardpointHumveeWheel
   - type: RMCVehicleWheelItem
 
 - type: entity
@@ -41,7 +41,6 @@
     maxIntegrity: 100
   - type: Tag
     tags:
-    - RMCVehicleHardpointTurret
     - RMCVehicleHardpointHumveeTurret
   - type: VehicleTurret
     rotateToCursor: true
@@ -63,14 +62,14 @@
       insertDelay: 2.0
       whitelist:
         tags:
-        - RMCVehicleHardpointCannon
+        - RMCVehicleHardpointHumveeCannon
     - id: turret-launcher
       hardpointType: Launcher
       required: false
       insertDelay: 2.0
       whitelist:
         tags:
-        - RMCVehicleHardpointLauncher
+        - RMCVehicleHardpointHumveeLauncher
 
 - type: entity
   parent: RMCVehicleHumveeHardpointBase
@@ -87,7 +86,7 @@
     maxIntegrity: 125
   - type: Tag
     tags:
-    - RMCVehicleHardpointCannon
+    - RMCVehicleHardpointHumveeCannon
   - type: VehicleTurretAttachment
   - type: VehicleTurret
     showOverlay: true
@@ -146,7 +145,7 @@
     maxIntegrity: 100
   - type: Tag
     tags:
-    - RMCVehicleHardpointLauncher
+    - RMCVehicleHardpointHumveeLauncher
   - type: VehicleTurretAttachment
   - type: VehicleTurret
     showOverlay: true
@@ -198,7 +197,7 @@
     maxIntegrity: 100
   - type: Tag
     tags:
-    - RMCVehicleHardpointFrontAttachment
+    - RMCVehicleHardpointHumveeFrontAttachment
   - type: RMCHardpointVisual
     vehicleState: snowplow_0
 
@@ -217,7 +216,7 @@
     maxIntegrity: 500
   - type: Tag
     tags:
-    - RMCVehicleHardpointRoofAttachment
+    - RMCVehicleHardpointHumveeRoofAttachment
   - type: RMCVehicleSpotlightModifier
     radiusMultiplier: 2.0
   - type: RMCHardpointVisual
@@ -238,6 +237,6 @@
     maxIntegrity: 100
   - type: Tag
     tags:
-    - RMCVehicleHardpointRoofAttachment
+    - RMCVehicleHardpointHumveeRoofAttachment
   - type: RMCHardpointVisual
     vehicleState: humveehatch_0

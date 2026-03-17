@@ -23,7 +23,7 @@
     maxIntegrity: 500
   - type: Tag
     tags:
-    - RMCVehicleHardpointWheel
+    - RMCVehicleHardpointAPCWheel
   - type: RMCVehicleWheelItem
 
 - type: entity
@@ -41,7 +41,7 @@
     maxIntegrity: 350
   - type: Tag
     tags:
-    - RMCVehicleHardpointCannon
+    - RMCVehicleHardpointAPCCannon
   - type: VehicleTurret
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
@@ -85,7 +85,7 @@
     maxIntegrity: 500
   - type: Tag
     tags:
-    - RMCVehicleHardpointTurret
+    - RMCVehicleHardpointAPCTurret
   - type: VehicleTurret
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
@@ -115,7 +115,6 @@
     offsetWest: "0,0"
     muzzleOffset: "0,0"
     useAimDirection: true
-
   - type: RMCHardpointVisual
     vehicleState: dualcannon_0
 
@@ -134,7 +133,7 @@
     maxIntegrity: 100
   - type: Tag
     tags:
-    - RMCVehicleHardpointSupportAttachment
+    - RMCVehicleHardpointAPCSupportAttachment
   - type: RMCHardpointVisual
     vehicleState: comms_relay_0
 
@@ -153,7 +152,7 @@
     maxIntegrity: 500
   - type: Tag
     tags:
-    - RMCVehicleHardpointSupportAttachment
+    - RMCVehicleHardpointAPCSupportAttachment
   - type: VehicleTurret
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
@@ -205,7 +204,7 @@
     maxIntegrity: 100
   - type: Tag
     tags:
-    - RMCVehicleHardpointSupportAttachment
+    - RMCVehicleHardpointAPCSupportAttachment
   - type: RMCHardpointVisual
     vehicleState: freight_0
 
