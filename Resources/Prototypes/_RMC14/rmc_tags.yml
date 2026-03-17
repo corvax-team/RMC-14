@@ -176,6 +176,9 @@
   id: RMCUniformMarine
 
 - type: Tag
+  id: Marine
+
+- type: Tag
   id: RMCUniformUNSecurity
 
 - type: Tag
