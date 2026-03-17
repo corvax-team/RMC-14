@@ -1,6 +1,6 @@
-ent-RMCSmartpackBase = Рюкзак S-V42
+ent-RMCSmartpackBase = рюкзак S-V42
     .desc = Совместный проект ОПЗ и Vitezstvi. Как утверждается, это высококлассная разработка и современная технология со встроенным фонарем на плече, который следует за вашим взглядом.
-ent-RMCSmartpackA1Base = Рюкзак S-V42A1
+ent-RMCSmartpackA1Base = рюкзак S-V42A1
     .desc = Пересмотренный совместный проект ОПЗ и Vitezstvi. Как утверждается, это высококлассная разработка и современная технология со встроенным фонарем на плече, который следует за вашим взглядом.
 ent-RMCSmartpack = { ent-RMCSmartpackBase }
     .desc = { ent-RMCSmartpackBase.desc }

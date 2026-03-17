@@ -1,4 +1,4 @@
-ent-CMBeltMedicBag = Пояс для спасения жизни M276
+ent-CMBeltMedicBag = пояс для спасения жизни M276
     .desc = M276 является стандартным снаряжением ККМП. Эта версия представляет собой вещевой мешок, наполненный различными инъекторами и лёгкими предметами медицинского назначения, и широко распространена среди медиков.
 ent-RMCBeltMedicBagERTFilled = { ent-CMBeltMedicBag }
     .desc = { ent-CMBeltMedicBag.desc }
@@ -7,7 +7,7 @@ ent-RMCBeltMedicBagSPP = Type 41 pattern lifesaver bag
 ent-RMCBeltMedicBagSPPCommandoFilled = { ent-RMCBeltMedicBagSPP }
     .suffix = Commando, Filled
     .desc = { ent-RMCBeltMedicBagSPP.desc }
-ent-RMCBeltMedicBagPMC = Медицинская сумка VI-TM625
+ent-RMCBeltMedicBagPMC = медицинская сумка VI-TM625
     .desc = VI-TM625 является стандартным снаряжением наёмников Vitezstvi. Представляет собой вещевой мешок, наполненный различными инъекторами и лёгкими предметами медицинского назначения.
 ent-RMCBeltMedicBagPMCFilled = { ent-RMCBeltMedicBagPMC }
     .suffix = Заполненный
