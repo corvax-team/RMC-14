@@ -135,7 +135,7 @@
     - CCMActionXenoSwap
     - ActionXenoDevolve
   - type: CrusherShield
-    amount: 300
+    amount: 500
     explosionResistanceDuration: 5
   - type: XenoCharge
     plasmaCost: 80 #CCM Change - Base is 20
