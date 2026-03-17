@@ -233,7 +233,7 @@
       -
         - name: Tank
           description: Authorizes the deployment of a heavy armored tank. Powerhouse of the frontline.
-          cost: 5
+          cost: 10
           events:
           - !type:TechUnlockVehicleEvent
             unlock: RMCVehicleTank
