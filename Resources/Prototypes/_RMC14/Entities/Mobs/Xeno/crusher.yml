@@ -138,6 +138,7 @@
     amount: 300
     explosionResistanceDuration: 5
   - type: XenoCharge
+    plasmaCost: 80 #CCM Change - Base is 20
     damage:
       types:
         Blunt: 60
