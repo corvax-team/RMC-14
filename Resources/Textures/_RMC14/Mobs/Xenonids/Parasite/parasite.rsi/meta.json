@@ -63,6 +63,28 @@
     },
     {
       "name": "impregnated"
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "knocked_down"
+    },
+    {
+      "name": "equipped-MASK",
+      "directions": 4
+    },
+    {
+      "name": "parasite_downed_0"
+    },
+    {
+      "name": "parasite_downed_1"
+    },
+    {
+      "name": "parasite_downed_2"
+    },
+    {
+      "name": "parasite_downed_3"
     }
   ]
 }
