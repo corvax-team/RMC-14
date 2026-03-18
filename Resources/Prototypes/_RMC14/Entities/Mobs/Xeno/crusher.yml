@@ -131,7 +131,7 @@
     - ActionXenoCharge
     - ActionXenoStomp
     - ActionXenoDefensiveShield
-    - CCMActionXenoSwap
+    - ActionXenoToggleCharging
     - ActionXenoDevolve
   - type: CrusherShield
     amount: 300 #CCM Changed - Base 200
@@ -141,6 +141,7 @@
       types:
         Blunt: 60
         Structural: 750
+  - type: XenoToggleCharging #CCM Change
   - type: XenoShield
   - type: XenoEvolution
     strains:
