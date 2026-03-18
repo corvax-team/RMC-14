@@ -1,9 +1,9 @@
-ent-CMBeltMedicBag = пояс для спасения жизни M276
+ent-CMBeltMedicBag = медицинский пояс M276
     .desc = M276 является стандартным снаряжением ККМП. Эта версия представляет собой вещевой мешок, наполненный различными инъекторами и лёгкими предметами медицинского назначения, и широко распространена среди медиков.
 ent-RMCBeltMedicBagERTFilled = { ent-CMBeltMedicBag }
     .desc = { ent-CMBeltMedicBag.desc }
-ent-RMCBeltMedicBagSPP = Type 41 pattern lifesaver bag
-    .desc = The Type 41 load rig is the standard load-bearing equipment of the SPP military. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
+ent-RMCBeltMedicBagSPP = медицинский пояс Тип 41
+    .desc = Пояс Тип 41 является стандартным вспомогатльным оборудованием армии СССП. В этой конфигурации устанавливается сумка, наполненная различными инъекторами и легкими медицинскими принадлежностями, широко используется среди медиков.
 ent-RMCBeltMedicBagSPPCommandoFilled = { ent-RMCBeltMedicBagSPP }
     .suffix = Commando, Filled
     .desc = { ent-RMCBeltMedicBagSPP.desc }

@@ -2,5 +2,5 @@ ent-CMHandsCaptain = капитанские перчатки
     .desc = Пара капитанских перчаток.
 ent-CMHandsLatex = латексные перчатки
     .desc = Пара латексных перчаток.
-ent-RMCHandsTychoGloves = Tycho 4000 radiation protection gloves
-    .desc = The burn-resistant gloves for the Weston-Yamada Tycho 4000 Radiation Protection Suit. It's lined with lead, and is pretty heavy, but it'll keep you safe from Radiological materials.
+ent-RMCHandsTychoGloves = противорадиационные перчатки Tycho 4000
+    .desc = Износостойкие перчатки для костюма радиационной защиты Vitezstvi Tycho 4000. Он имеет свинцовую подкладку и довольно тяжелый, но он защитит вас от радиационного излучения.

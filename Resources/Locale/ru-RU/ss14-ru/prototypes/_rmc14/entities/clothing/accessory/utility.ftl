@@ -1,6 +1,6 @@
-ent-RMCUtilityBase = Утилита
+ent-RMCUtilityBase = утилита
     .desc = Утилитный аксессуар.
-ent-RMCStethoscope = Стетоскоп
+ent-RMCStethoscope = стетоскоп
     .desc = Устаревшее, но не менее полезное приспособление для прослушивания тела человека. Так же придает вам профессиональный вид.
-ent-RMCHorizonFlower = blue horizon flower
-    .desc = A beautiful blue flower that symbolizes hope and rememberance.
+ent-RMCHorizonFlower = цветок голубого горизонта
+    .desc = Прекрасный синий цветок, символизирующий веру и воспоминание.
