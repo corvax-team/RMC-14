@@ -1,6 +1,6 @@
-ent-RMCSmartGunPVE = ML66A heavy support gun
-    .desc = The actual firearm in the Support Gun System. Essentially a heavy, mobile machinegun.
+ent-RMCSmartGunPVE = Тяжёлый пулемёт поддержки ML66A
+    .desc = Стреляющая часть системы Смартган. По сути, это переносной тяжёлый пулемёт.
     .suffix = PVE
-ent-RMCAttachmentSmartgunHarness = ML66A heavy support gun harness
-    .desc = A specialized harness for the ML66A heavy support gun, assisting with recoil control and stability, while also allowing for easy manuvering of the weapon and even suspending it without a grip.
+ent-RMCAttachmentSmartgunHarness = Система ручной переноски ML66A
+    .desc = Специальная подвеска для смартгана ML66A, обеспечивающая контроль отдачи и устойчивость, а также позволяющая легко управлять оружием и даже подвешивать его без захвата.
     .suffix = PVE, DO NOT MAP FOR PVP.

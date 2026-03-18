@@ -31,16 +31,16 @@
       bin-container: !type:Container
   - type: Bin
     initialContents:
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
     whitelist:
       requireAll: true
       components:
@@ -52,11 +52,15 @@
   - type: StaticPrice
     price: 500
   - type: RMCMesonsNonviewable
-    # Corvax-Vehicle-Content-Start
-  - type: VehicleStructureTarget
-    momentumLossFactor: 0
-    damageToVehicleOnFail: 0
-    # Corvax-Vehicle-Content-End
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  #   # Corvax-Vehicle-Content-Start
+  # - type: VehicleStructureTarget
+  #   momentumLossFactor: 0
+  #   damageToVehicleOnFail: 0
+  #   # Corvax-Vehicle-Content-End
 
 - type: entity
   parent: RMCWaterCooler

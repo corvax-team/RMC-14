@@ -5,3 +5,4 @@ cm-ghost-window-text =
     Решение изменить нельзя, так что выбирайте с умом!
 cm-ghost-window-stay = Остаться в теле
 cm-ghost-ghost = Призрак
+rmc-ghost-gui-toggle-lighting-manager-popup-halfbright = Half-bright mode.

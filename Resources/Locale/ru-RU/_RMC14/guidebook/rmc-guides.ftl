@@ -20,5 +20,6 @@ rmc-guide-entry-rules-survivor-roleplay = Отыгрыш ролей выживш
 rmc-guide-entry-rules-hostile-faction-roleplay = Отыгрыш ролей вражеской фракции
 rmc-guide-entry-rules-command-chain = Цепочка командования
 rmc-guide-entry-rules-core = Основные правила
+rmc-guide-entry-rules-community = Community Rules
 rmc-guide-entry-rules-command = Правила командования
 rmc-guide-entry-rules-roleplay-standards = Стандарты отыгрыша

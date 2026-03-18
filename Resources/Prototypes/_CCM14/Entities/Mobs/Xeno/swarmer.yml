@@ -52,6 +52,11 @@
     tier: 3
     hudOffset: -0.15,0.25
     unlockAt: 900 # 15 minutes
+  - type: MeleeDamageMultiplier
+    multiplier: 4
+    whitelist:
+      components:
+      - Vehicle
   - type: XenoConstruction
     buildDelay: 0.85
     canBuild:
@@ -59,11 +64,15 @@
     - CCMWallXenoThickWeedBoundResin
     - DoorXenoWeedBoundResin
     - DoorXenoThickWeedBoundResin
+    - XenoStickyResin
+    - XenoFastResin
+    - HiveAcidPillarXeno
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
     - HiveEggMorpherXenoConstructionNode
     - HiveClusterXenoConstructionNode
     - HiveRecoveryNodeXenoConstructionNode
+    - HivePlasmaTreeXenoConstructionNode
   - type: XenoRegen
     restHealMultiplier:  1.4 #Вождь баланс
   - type: XenoHeavy
@@ -80,8 +89,11 @@
     plasmaCost: 400
     delay: 0
   - type: XenoPheromones
-    pheromonesMultiplier: 2.5
-    pheroSuffix: hivelord
+    pheromonesMultiplier: 3
+#    pheroSuffix: hivelord #Сделать суффикс феромонов свармера
+  - type: XenoEvolutionCapped
+    id: CCMXenoSwarmer
+    max: 1
   - type: XenoPlasma
     plasma: 1350 #Вождь баланс
     maxPlasma: 1350 #Вождь баланс
@@ -94,10 +106,14 @@
     damage:
       groups:
         Brute: 35 #Вождь баланс
+      types:
+        Structural: 15
   - type: XenoTailStab
     tailDamage:
       groups:
         Brute: 45  #Вождь баланс
+      types:
+        Structural: 25
   - type: Tackle
     max: 4
   - type: WhitelistPickup
@@ -127,11 +143,10 @@
     size: Big
   - type: RMCXenoDamageVisuals
     prefix: hivelord
-# TODO Swarmer map icon
   - type: TacticalMapIcon
     icon:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
-      state: warrior
+      state: swarmer
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.7
   - type: XenoInhands

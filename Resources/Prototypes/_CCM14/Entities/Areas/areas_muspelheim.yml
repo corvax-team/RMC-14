@@ -39,6 +39,7 @@
   suffix: No mapping
   components:
   - type: Sprite
+    sprite: _RMC14/Areas/areas_strata.rsi # IDK what need in a good way
     state: base_ico
   - type: Area
     CAS: true

@@ -1,5 +1,5 @@
 ent-RMCMobSkrell = Urist R McFrog
     .suffix = RMC14
-    .desc = { ent-CMBaseMobSpeciesOrganic.desc }
+    .desc = { ent-RMCBaseMobSpeciesOrganic.desc }
 ent-MobSkrellDummy = { ent-BaseSpeciesDummy }
     .desc = { ent-BaseSpeciesDummy.desc }

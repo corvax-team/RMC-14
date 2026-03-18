@@ -1,26 +1,26 @@
-- type: rank
+- type: rank # CCM14
   id: RMCRankOperator
-  name: Operator
-  prefix: OPR.
+  name: Оператор
+  prefix: опер.
 
 - type: rank
   id: RMCRankOperative
-  name: Operative
-  prefix: OPR.
+  name: Оперативник
+  prefix: Опер.
 
 - type: rank
   id: RMCRankSynthetic
-  name: Synthetic
-  prefix: Syn.
+  name: Синтетик
+  prefix: Синт.
   paygrade: E8
 
 - type: rank
   id: RMCRankSyntheticMG
-  name: Synthetic
-  prefix: Syn.
+  name: Синтетик
+  prefix: Синт.
   paygrade: E9
 
 - type: rank
   id: RMCRankSyntheticColonist
-  name: Synthetic
-  prefix: Syn.
+  name: Синтетик
+  prefix: Синт.

@@ -1,2 +1,2 @@
-ent-RMCWeaponShotgunM3717 = M37-17 pump shotgun
-    .desc = A military version of the iconic HG 37-12, this design can fit one extra shell in each of its dual-tube internal magazines, and fires shells with increased velocity, resulting in more damage. Issued to select UNMC vessels and stations in the outer veil.
+ent-RMCWeaponShotgunM3717 = M37-17
+    .desc = Являясь военной версией легендарного HG 37-12, эта модель позволяет помещать по одному дополнительному патрону в каждый из двухтрубчатых внутренних магазинов и выстреливает патронами с повышенной скоростью, что приводит к увеличению урона. Выпущена для отдельных кораблей и станций ККМП по всему сектору.

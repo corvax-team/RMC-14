@@ -95,3 +95,5 @@ ent-RMCAreaFiorinaStationTelecommLz2North = Fiorina - LZ2 North Communications R
     .desc = { ent-RMCAreaFiorinaStationTelecomm.desc }
 ent-RMCAreaFiorinaStationTelecommLz2Maint = Fiorina - Backup Communications Relay
     .desc = { ent-RMCAreaFiorinaStationTelecomm.desc }
+ent-RMCAreaFiorinaStationRocinante = Tramp Freighter Rocinante
+    .desc = { ent-RMCAreaFiorinaMaintenance.desc }

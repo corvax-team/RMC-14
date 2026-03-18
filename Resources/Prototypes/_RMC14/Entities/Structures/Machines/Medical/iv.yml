@@ -56,9 +56,6 @@
       components:
       - Xeno
   - type: RMCMesonsNonviewable
-  - type: VehicleStructureTarget
-    momentumLossFactor: 0
-    damageToVehicleOnFail: 0
 
 - type: entity
   parent: BaseItem
@@ -112,6 +109,9 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 500
 
 - type: entity
   parent: CMBloodPack

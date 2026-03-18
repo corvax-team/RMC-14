@@ -96,6 +96,7 @@
   parent: RMCShutterBase
   id: RMCShutterAlmayer
   components:
+  - type: RMCVehicleSmashable
   - type: RMCPodDoor
   - type: Clickable
   - type: InteractionOutline

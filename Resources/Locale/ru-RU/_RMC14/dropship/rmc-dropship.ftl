@@ -10,7 +10,7 @@ rmc-dropship-pre-hijack =
         [few] минуты
        *[other] минут
     }.
-rmc-dropship-invalid-hijack = Lights flash from the terminal but you can't comprehend their meaning.
+rmc-dropship-invalid-hijack = Из терминала излучаются какие-то вспышки, но они вне вашего понимания.
 rmc-dropship-weapons-title = Консоль вооружения
 rmc-dropship-weapons-main-screen-text =
     К.К.М.П.
@@ -56,6 +56,11 @@ rmc-dropship-weapons-cancel = ОТМЕНА
 rmc-dropship-weapons-exit = ВЫХОД
 rmc-dropship-weapons-lock = LOCK
 rmc-dropship-weapons-clear = CLEAR
+rmc-dropship-weapons-enable = ENABLE
+rmc-dropship-weapons-disable = DISABLE
+rmc-dropship-weapons-deploy = DEPLOY
+rmc-dropship-weapons-retract = RETRACT
+rmc-dropship-weapons-auto-deploy = AUTO-DEPLOY
 rmc-dropship-weapons-offset-calibration =
     Смещен.
     Камеры
@@ -89,8 +94,8 @@ rmc-dropship-fabricator-points = Очки: { $points }
 rmc-dropship-fabricator-equipment = [bold]Снаряжение[/bold]
 rmc-dropship-fabricator-ammo = [bold]Боеприпасы[/bold]
 rmc-dropship-fabricator-fabricate = Создать ({ $cost })
-rmc-dropship-firemission-warning = A DROPSHIP FIRES TOWARDS THE { $direction }
-rmc-dropship-firemission-warning-above = A DROPSHIP FIRES RIGHT ONTOP OF YOU!
+rmc-dropship-firemission-warning = ЯРКИЕ ЛИНИИ В НЕБЕ ЛЕТЯТ ПРЯМО НА { $direction }
+rmc-dropship-firemission-warning-above = КАНОННАДА ВЫСТРЕЛОВ ВОТ-ВОТ ОБРУШИТСЯ ПРЯМО НА ВАС!
 rmc-dropship-paradrop-target-screen-text =
     HPU-1 Paradrop Deployment System
     { $hasTarget }
@@ -100,6 +105,24 @@ rmc-dropship-paradrop-target-screen-target-none =
 rmc-dropship-paradrop-target-screen-target-targeting =
     Locked to { $dropTarget }.
     Paradropping available.
-rmc-dropship-paradrop-lock-no-target = No target selected.
-rmc-dropship-paradrop-lock-target-not-flying = You can only enable the paradrop module while in flight.
+rmc-dropship-paradrop-lock-no-target = Цель не выбрана.
+rmc-dropship-paradrop-lock-target-not-flying = Вы можете включить модуль десантирования только в полёте.
+rmc-dropship-medevac-system-screen-text = RMU-4M Medevac System
+rmc-dropship-fulton-system-screen-text = RMU-19 Fulton Recovery System
+rmc-dropship-locked = This bird is now ours for the next { $minutes } minutes.
+rmc-dropship-locked-out = The shuttle is not responding, try again in { $minutes } minutes.
+rmc-dropship-locked-out-bypass = You partially bypassed the lockout, try again!
+rmc-dropship-locked-out-bypass-complete = You successfully removed the lockout!
+rmc-dropship-equipment-deployer-text = { $deployName }
+rmc-dropship-equipment-deployer-health = Condition: { $status }
+rmc-dropship-equipment-deployer-ammo = Ammo: { $ammoCount } / { $totalAmmoCount }
+rmc-dropship-equipment-deployer-status = Deploy Status: { $deployed }
+rmc-dropship-equipment-deployer-auto-deploy = Auto-Deploy: { $autoDeploy }
+rmc-dropship-equipment-enabled = ENABLED
+rmc-dropship-equipment-disabled = DISABLED
+rmc-dropship-equipment-deployed = DEPLOYED
+rmc-dropship-equipment-undeployed = UNDEPLOYED
+rmc-dropship-equipment-operational = OPERATIONAL
+rmc-dropship-equipment-damaged = DAMAGED
+rmc-dropship-equipment-destroyed = DESTROYED
 rmc-dropship-fabricator-busy = Фабрикатор запчастей десантных кораблей занят. Пожалуйста, дождитесь завершения предыдущей операции.

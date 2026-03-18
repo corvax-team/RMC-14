@@ -1,3 +1,5 @@
+ent-BaseXenoArtifactItem = artifact
+    .desc = A strange artifact from time unknown. Looks like a good time. Fits in hand perfectly.
 ent-ComplexXenoArtifactItem = { ent-BaseXenoArtifactItem }
     .suffix = Hand-Sized
     .desc = { ent-BaseXenoArtifactItem.desc }

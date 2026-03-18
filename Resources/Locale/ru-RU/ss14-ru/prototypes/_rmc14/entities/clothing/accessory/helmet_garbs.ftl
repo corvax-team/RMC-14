@@ -1,17 +1,20 @@
 
 
-ent-RMCRC6RiotShield = RC6 riot shield
-    .desc = The complimentary, but sold separate face shield associated with the RC6 riot helmet.
+ent-RMCHelmetGarbNightVisionPVE = old M1 multi-spectrum visor
+    .desc = A failed prototype for next generation HUD optics for the Marine Corps that was surpassed by the current issue integrated IR optic, this flip down visor offers a full visor suite with multi-spectrum capabilities. A really cool piece until you realize you are one headbang away from losing night capability.
 
-ent-RMCHelmetGarbChaplainPatch = UNMC chaplain helmet patch
-    .desc = This patch is all that remains of the Chaplaincy of the UNS Almayer, along with the Chaplains themselves. Both no longer exist as a result of losses suffered during Tychon Tackle.
-ent-RMCHelmetGarbPeaceFlair = peace flair
-    .desc = Doesn't matter when it's Arcturian, baby..
-ent-RMCHelmetGarbIoFlair = io flair
-    .desc = The Arcturians might be our allies now, but Io is forever a stain on trans-species relations. Never forget those who gave their lives aboard the UNS Doramin..
-ent-RMCHelmetGarbTerraTekFlair = TerraTek flair
-    .desc = Flair for some weird tech company back on Earth. How did they get promotional material this far out in the rim?.
-ent-RMCHelmetGarbUNMCFlair = UNMC flair
-    .desc = These pins get handed out like candy at enlistment offices. Wear it with pride marine.
-ent-RMCHelmetGarbMovieTicket = movie ticket
-    .desc = A pair of red movie tickets. It reminds you of a time you could watch more then the same 5 or so VHS films the Almayer has.
+ent-RMCRC6RiotShield = Лицевой щит RC6
+    .desc = Крепкий баллистический щиток шлема RC6.
+
+ent-RMCHelmetGarbChaplainPatch = Патч капеллана ККМП
+    .desc = Этот патч - единственное, что осталось от священников на военных кораблях. Они перестали существовать уже очень давно.
+ent-RMCHelmetGarbPeaceFlair = Значок мира
+    .desc = "Я, вообще-то, за мир.." - сказал он, когда скидывал на больницу напалм.
+ent-RMCHelmetGarbIoFlair = Значок Ио
+    .desc = Очередной значок, не понятно что значащий. Хотя бы он неплохо выглядит...
+ent-RMCHelmetGarbTerraTekFlair = Значок ТерраТех
+    .desc = Значок какой-то давно сгинувшей ремонтной компании. Буквально реликвия прошлого.
+ent-RMCHelmetGarbUNMCFlair = Значок ККМП
+    .desc = Эти значки раздавали как конфетки в тренировочном лагере. Носите с гордостью, солдат.
+ent-RMCHelmetGarbMovieTicket = Билет в кино
+    .desc = Пара красных билетов в кино. Напоминает о временнах, когда на корабле было больше 5 фильмов, не то что сейчас.

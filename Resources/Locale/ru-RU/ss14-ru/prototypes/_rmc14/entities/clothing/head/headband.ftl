@@ -25,5 +25,5 @@ ent-CMHeadBandFoxtrot = повязка Фокстрот
     .desc = { ent-CMHeadBandAlpha.desc }
 ent-CMHeadBandIntel = повязка разведки
     .desc = Кусок ткани, принадлежавший опытному спецназовцу, но никто, похоже, не помнит его имени. Гадюка...? Змей...?
-ent-CMHeadBandRebel = rebel headband
-    .desc = A headband made from a simple strip of cloth. The words "DOWN WITH TYRANTS" are emblazoned on the front.
+ent-CMHeadBandRebel = Повязка повстанца
+    .desc = Гловная повязка, сделанная из простейшего куска ткани. На лицевой стороне выгравированы слова "ДОЛОЙ ТИРАНОВ".

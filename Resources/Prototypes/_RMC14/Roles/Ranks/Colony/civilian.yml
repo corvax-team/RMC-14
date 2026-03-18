@@ -16,9 +16,25 @@
   prefix: Док.
 
 - type: rank
+  id: RMCRankCivilianAssistantProfessor
+  name: Помощник Профессора
+  prefix: Пом. Проф.
+
+- type: rank
+  id: RMCRankCivilianAssociateProfessor
+  name: Доцент
+  prefix: Доц.
+
+- type: rank
   id: RMCRankCivilianProfessor
   name: Профессор
   prefix: Проф.
+
+- type: rank
+  id: RMCRankCivilianRegentsProfessor
+  name: Правительственный профессор
+  prefix: Прав. Проф.
+
 
 - type: rank
   id: RMCRankCivilianRepresentative

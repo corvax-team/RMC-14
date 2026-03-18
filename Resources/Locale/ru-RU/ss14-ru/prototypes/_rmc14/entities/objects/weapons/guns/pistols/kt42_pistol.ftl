@@ -1,4 +1,4 @@
-ent-RMCWeaponPistolKT42 = KT-42 automag
-    .desc = The KT-42 Automag is an archaic but reliable design, going back many decades. There have been many versions and variations, but the 42 is by far the most common. You can't go wrong with this handcannon.
-ent-RMCMagazinePistolKT42 = KT-42 magazine (.44)
-    .desc = A .44 pistol magazine.
+ent-RMCWeaponPistolKT42 = Автопистолет KT-42
+    .desc = Автопистолет KT-42 - это архаичная, но надежная конструкция, используемая уже много десятилетий. Существует множество версий и вариаций, но 42-я, безусловно, самая распространенная. С этой ручной пушкой вы не ошибетесь.
+ent-RMCMagazinePistolKT42 = Магазин KT-42 (.44)
+    .desc = Магазин под патрон .44.

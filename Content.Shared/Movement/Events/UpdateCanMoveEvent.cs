@@ -17,7 +17,7 @@ public sealed class UpdateCanMoveEvent : CancellableEntityEventArgs
 }
 
 /// <summary>
-/// CCM: Event raised directed on an entity when their value of <see cref="InputMoverComponent.CanMove"/> is updated.
+/// Event raised directed on an entity when their value of <see cref="InputMoverComponent.CanMove"/> is updated.
 /// </summary>
 [ByRefEvent]
 public readonly record struct CanMoveUpdatedEvent(bool CanMove);

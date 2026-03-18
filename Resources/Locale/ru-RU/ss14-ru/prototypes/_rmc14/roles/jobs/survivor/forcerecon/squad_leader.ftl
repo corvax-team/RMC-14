@@ -1,4 +1,4 @@
-ent-CMSpawnPointForeconSquadLeader = точка появления лидер отряда силовой разведки
+ent-CMSpawnPointForeconSquadLeader = Точка появления Лидера Отряда СОиС
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetForeconSquadLead = шаблон роли лидер отряда силовой разведки
+ent-RMCSurvivorPresetForeconSquadLead = Шаблон роли Лидер Отряда СОиС
     .desc = { ent-RMCSurvivorPresetForecon.desc }

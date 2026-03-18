@@ -1,6 +1,6 @@
-ent-RMCSurvivorPresetForeconNoPrimary = шаблон офицера силовой разведки
+ent-RMCSurvivorPresetForeconNoPrimary = Шаблон выживший из СОиС
     .desc = { "" }
-ent-RMCSurvivorPresetForecon = шаблон офицера силовой разведки
+ent-RMCSurvivorPresetForecon = Шаблон выживший из СОиС
     .desc = { ent-RMCSurvivorPresetForeconNoPrimary.desc }
-ent-RMCSurvivorPresetForeconNoPistol = шаблон офицера силовой разведки без пистолета
+ent-RMCSurvivorPresetForeconNoPistol = Шаблон выживший из СОиС
     .desc = { ent-RMCSurvivorPresetForecon.desc }

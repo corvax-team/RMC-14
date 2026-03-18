@@ -19,8 +19,3 @@
     - map: [ "back" ]
     - map: [ "mask" ]
     - map: [ "head" ]
-    # Corvax-Vehicle-Content-Start
-  - type: VehicleStructureTarget
-    momentumLossFactor: 0
-    damageToVehicleOnFail: 0
-    # Corvax-Vehicle-Content-End

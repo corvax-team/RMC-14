@@ -1,2 +1,2 @@
-ent-RMCGunRackBase = gun rack
-    .desc = AEGIS-produced gun rack for storage of long guns. While initial model was supposed to be extremely modifiable, UNMC comissioned racks with fixed slots. Some say they were cheaper, and some say the main reason was marine's ability to easily break anything more complex than a tungsten ball.
+ent-RMCGunRackBase = Оружейная стойка
+    .desc = Оружейный стеллаж для хранения длинноствольного оружия производства AEGIS. Хотя предполагалось, что первоначальная модель будет легко модифицируемой, ККМП ввела в эксплуатацию стеллажи с фиксированными прорезями. Некоторые говорят, что они были дешевле, а некоторые говорят, что основной причиной была способность морпехов легко разбивать что-либо более сложное, чем вольфрамовый шарик.

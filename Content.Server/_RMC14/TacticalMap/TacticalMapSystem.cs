@@ -15,8 +15,6 @@ using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
-using Content.Shared._CCM.Attachables;
-using Content.Shared._CCM.Vehicle;
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Database;
@@ -118,6 +116,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, HiveLeaderStatusChangedEvent>(OnHiveLeaderStatusChanged);
 
         SubscribeLocalEvent<MapBlipIconOverrideComponent, MapInitEvent>(OnMapBlipOverrideMapInit);
+
 
         SubscribeLocalEvent<RottingComponent, MapInitEvent>(OnRottingMapInit);
         SubscribeLocalEvent<RottingComponent, ComponentRemove>(OnRottingRemove);
@@ -365,7 +364,16 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private void UpdateTacticalMapState(Entity<TacticalMapUserComponent> ent)
     {
         var mapName = _distressSignal.SelectedPlanetMapName ?? string.Empty;
-        var state = new TacticalMapBuiState(mapName);
+
+        // Get squad objectives if player is in a squad
+        Dictionary<SquadObjectiveType, string>? squadObjectives = null;
+        if (TryComp<SquadMemberComponent>(ent, out var squadMember) &&
+            _squad.TryGetMemberSquad((ent, squadMember), out var squad))
+        {
+            squadObjectives = _squad.GetSquadObjectives((squad.Owner, squad.Comp));
+        }
+
+        var state = new TacticalMapBuiState(mapName, squadObjectives);
         _ui.SetUiState(ent.Owner, TacticalMapUserUi.Key, state);
     }
 
@@ -834,30 +842,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             ent.Comp.Map = xform.GridUid;
         }
 
-        // Corvax-Vehicle-Content-Start
-        var finalIcon = icon;
-        if (TryComp<VehicleComponent>(ent, out var vehicle) && icon is SpriteSpecifier.Rsi vehicleRsi)
-        {
-            var hasHardpoints = false;
-
-            foreach (var hardpoint in vehicle.Hardpoints)
-            {
-                if (!TryComp<VehicleAttachableComponent>(hardpoint, out var attachable))
-                    continue;
-
-                if (attachable.Ignored || attachable.Destroyed)
-                    continue;
-
-                hasHardpoints = true;
-                break;
-            }
-
-            if (vehicle.Destroyed || !hasHardpoints)
-            {
-                finalIcon = new SpriteSpecifier.Rsi(vehicleRsi.RsiPath, $"{vehicleRsi.RsiState}_wreck");
-            }
-        }
-        // Corvax-Vehicle-Content-End
         var status = TacticalMapBlipStatus.Alive;
         if (_mobState.IsDead(ent))
         {
@@ -874,7 +858,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 status = TacticalMapBlipStatus.Defibabble4;
         }
 
-        var blip = new TacticalMapBlip(indices, finalIcon, ent.Comp.Color, status, ent.Comp.Background, ent.Comp.HiveLeader);
+        var blip = new TacticalMapBlip(indices, icon, ent.Comp.Color, status, ent.Comp.Background, ent.Comp.HiveLeader);
         if (_marineMapTrackedQuery.HasComp(ent))
         {
             tacticalMap.MarineBlips[ent.Owner.Id] = blip;

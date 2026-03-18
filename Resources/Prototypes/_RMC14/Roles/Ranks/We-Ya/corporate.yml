@@ -1,105 +1,105 @@
-- type: rank
+- type: rank # CCM14
   id: RMCRankWeYaTrainee
-  name: Trainee
-  prefix: Trn.
-  paygrade: WYC1
+  name: Стажёр
+  prefix: Стаж.
+  paygrade: КОРП1
 
 - type: rank
   id: RMCRankWeYaJuniorExecutive
-  name: Junior Executive
-  prefix: Jr. Exec.
-  paygrade: WYC2
+  name: Младший чиновник
+  prefix: Мл. Чин.
+  paygrade: КОРП2
 
 - type: rank
   id: RMCRankWeYaExecutive
-  name: Executive
-  prefix: Exec.
-  paygrade: WYC3
+  name: Чиновник
+  prefix: Чин.
+  paygrade: КОРП3
 
 - type: rank
   id: RMCRankWeYaSeniorExecutive
-  name: Senior Executive
-  prefix: Sr. Exec.
-  paygrade: WYC4
+  name: Старший Чиновник
+  prefix: Ст. Чин.
+  paygrade: КОРП4
 
 - type: rank
   id: RMCRankWeYaExecutiveSpecialist
-  name: Executive Specialist
-  prefix: Exec. Spc.
-  paygrade: WYC5
+  name: Административнй специалист
+  prefix: Адм. Спец.
+  paygrade: КОРП5
 
 - type: rank
   id: RMCRankWeYaExecutiveSupervisor
-  name: Executive Supervisor
-  prefix: Exec. Spvsr.
-  paygrade: WYC6
+  name: Административный Супервайзер
+  prefix: Адм. Суп.
+  paygrade: КОРП6
 
 - type: rank
   id: RMCRankWeYaAssistantManager
-  name: Assistant Manager
-  prefix: Assis. Mng.
-  paygrade: WYC7
+  name: Помощник Менеджера
+  prefix: Пом. Мен.
+  paygrade: КОРП7
 
 - type: rank
   id: RMCRankWeYaDivisionManager
-  name: Division Manager
-  prefix: Div. Mng.
-  paygrade: WYC8
+  name: Менеджер Крыла
+  prefix: Мен. Кр.
+  paygrade: КОРП8
 
 - type: rank
   id: RMCRankWeYaChiefExecutive
-  name: Chief Executive
-  prefix: Chief. Exec.
-  paygrade: WYC9
+  name: Старший Администратор
+  prefix: Ст. Адм.
+  paygrade: КОРП9
 
 - type: rank
   id: RMCRankWeYaDeputyDirector
-  name: Deputy Director
-  prefix: Dep. Director
-  paygrade: WYC10
+  name: Заместитель Директора
+  prefix: Зам. Дир.
+  paygrade: КОРП10
 
 - type: rank
   id: RMCRankWeYaDirector
-  name: Director
-  prefix: Director
-  paygrade: WYC11
+  name: Директор
+  prefix: Директор
+  paygrade: КОРП11
 
 # Lawyers
 - type: rank
   id: RMCRankWeYaLegalSpecialist
-  name: Legal Specialist
-  prefix: Legal Spc.
-  paygrade: WYC5
+  name: Правовой Специалист
+  prefix: Прав. Спец.
+  paygrade: КОРП5
 
 - type: rank
   id: RMCRankWeYaLegalSupervisor
-  name: Legal Supervisor
-  prefix: Legal Spvsr.
-  paygrade: WYC6
+  name: Юридический Руководитель
+  prefix: Юр. Рук.
+  paygrade: КОРП6
 
 # Pilots
 - type: rank
   id: RMCRankWeYaPilotOfficer
-  name: Captain
-  prefix: Capt
-  paygrade: WYPO2
+  name: Капитан
+  prefix: Кап.
+  paygrade: АЭРО2
 
 # Synthetics
 # A/N: probably not particularly useful, but I want some variety 
 - type: rank
   id: RMCRankWeYaUtilitySynth # Simple labor synths (drivers, cargo haulers, repairmen)
-  name: Utility Synthetic
-  prefix: U. Syn.
-  paygrade: WYS1
+  name: Сервисный Синтетик
+  prefix: Серв. Синт.
+  paygrade: КОРС1
   
 - type: rank
   id: RMCRankWeYaAssistantSynth # Secretaries, data entry, analysis, PR, etc.
-  name: Assistant Synthetic
-  prefix: Assis. Syn.
-  paygrade: WYS2
+  name: Синтетик-Адъютант
+  prefix: СинтАд.
+  paygrade: КОРС2
   
 - type: rank
   id: RMCRankWeYaAdministrativeSynth # Project managers, directors, overseers (with organic oversight obv)
-  name: Administrative Synthetic
-  prefix: Adm. Syn.
-  paygrade: WYS3
+  name: Административный Синтетик
+  prefix: Адм. Синт.
+  paygrade: КОРС3

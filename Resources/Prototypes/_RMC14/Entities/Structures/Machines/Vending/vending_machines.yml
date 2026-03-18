@@ -27,6 +27,7 @@
         - MachineMask
         layer:
         - MachineLayer
+        - BulletImpassable #TODO Remove this after vendor tipping is added
         density: 200
   - type: Repairable
     doAfterDelay: 8
@@ -126,6 +127,7 @@
   name: Hot Drinks machine
   description: A vending machine which dispenses hot drinks.
   components:
+  - type: RMCVehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/coffee.rsi
   - type: VendingMachine
@@ -176,6 +178,7 @@
   name: Hot Foods Machine
   description: A vending machine full of ready to cook meals, mhmmmm taste the nutritional goodness!
   components:
+  - type: RMCVehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/snack.rsi
   - type: VendingMachine
@@ -226,6 +229,7 @@
   name: Bobda Softdrinks
   description: A softdrink vendor provided by Bobda Soda Company, Havana.
   components:
+  - type: RMCVehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/cola.rsi
   - type: VendingMachine
@@ -297,6 +301,43 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/spp_cola.rsi
+
+- type: entity
+  parent: RMCVendorColaSPP
+  id: RMCVendorNutriCoDrinkSPP
+  name: drink dispenser
+  suffix: SPP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/NutriCo/drink.rsi
+    offset: 0, 0.5
+
+- type: entity
+  parent: CMVendor
+  id: RMCVendorSoda
+  name: Cold Drinks machine
+  description: A vending machine that contains cold drinks. This one appears to be produced by Tsumetai-Umi, a subsidairy of Neterai Foods International, which itself is subsidiary of Weston-Yamada.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/sodavend.rsi
+  - type: VendingMachine
+    pack: RMCVendorSoda
+
+- type: vendingMachineInventory
+  id: RMCVendorSoda
+  startingInventory: # TODO RMC14
+    CMDrinkCanCola: 10
+    CMDrinkCanMountainWind: 10
+    CMDrinkCanThirteenLoko: 10
+    CMDrinkCanDrGibb: 10
+    CMDrinkCanStarkist: 10
+    CMDrinkCanSpaceUp: 10
+    CMDrinkCanLemonLime: 10
+    CMDrinkCanIcedTea: 10
+    CMDrinkCanGrape: 10
+    CMDrinkCanTonic: 10
+    CMDrinkCanSoda: 10
+    CMDrinkCanFruitBeer: 10
 
 # Cigarettes
 - type: entity
@@ -630,6 +671,7 @@
   name: Dinnerware
   description: A kitchen and restaurant equipment vendor.
   components:
+  - type: RMCVehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/dinnerware.rsi
     snapCardinals: true

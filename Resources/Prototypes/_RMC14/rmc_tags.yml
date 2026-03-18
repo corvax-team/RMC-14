@@ -56,10 +56,16 @@
   id: Pouch
 
 - type: Tag
+  id: SurvivalPouch
+
+- type: Tag
   id: LauncherCompatibleGrenade
 
 - type: Tag
   id: CMFlarePack
+
+- type: Tag
+  id: CMXenoRoyalLarva
 
 - type: Tag
   id: RMCSmartPistol
@@ -86,7 +92,19 @@
   id: RMCWeaponRevolverM44
 
 - type: Tag
+  id: RMCSheetMetal
+
+- type: Tag
   id: RMCGlass
+
+- type: Tag
+  id: RMCHelmet
+
+- type: Tag
+  id: RMCPVEArmor
+
+- type: Tag
+  id: RMCPVEArmorAccessory
 
 - type: Tag
   id: Scabbard
@@ -113,6 +131,78 @@
   id: RMCXenoLarva
 
 - type: Tag
+  id: RMCVehicleHardpointWheel
+
+- type: Tag
+  id: RMCVehicleHardpointTreads
+
+- type: Tag
+  id: RMCVehicleHardpointTires
+
+- type: Tag
+  id: RMCVehicleHardpointTurret
+
+- type: Tag
+  id: RMCVehicleHardpointHumveeTurret
+
+- type: Tag
+  id: RMCVehicleHardpointCannon
+
+- type: Tag
+  id: RMCVehicleHardpointLauncher
+
+- type: Tag
+  id: RMCVehicleHardpointFrontAttachment
+
+- type: Tag
+  id: RMCVehicleHardpointRoofAttachment
+
+- type: Tag
+  id: RMCVehicleHardpointSupportAttachment
+
+- type: Tag
+  id: RMCVehicleHardpointVanWheel
+
+- type: Tag
+  id: RMCVehicleHardpointTankTurret
+
+- type: Tag
+  id: RMCVehicleHardpointTankCannon
+
+- type: Tag
+  id: RMCVehicleHardpointTankLauncher
+
+- type: Tag
+  id: RMCVehicleHardpointTankSupportAttachment
+
+- type: Tag
+  id: RMCVehicleHardpointAPCWheel
+
+- type: Tag
+  id: RMCVehicleHardpointAPCCannon
+
+- type: Tag
+  id: RMCVehicleHardpointAPCTurret
+
+- type: Tag
+  id: RMCVehicleHardpointAPCSupportAttachment
+
+- type: Tag
+  id: RMCVehicleHardpointHumveeWheel
+
+- type: Tag
+  id: RMCVehicleHardpointHumveeCannon
+
+- type: Tag
+  id: RMCVehicleHardpointHumveeLauncher
+
+- type: Tag
+  id: RMCVehicleHardpointHumveeFrontAttachment
+
+- type: Tag
+  id: RMCVehicleHardpointHumveeRoofAttachment
+
+- type: Tag
   id: RipOffOnInfection
 
 - type: Tag
@@ -127,6 +217,38 @@
 - type: Tag
   id: RMCSynthResetKey
 
+- type: Tag
+  id: RMCUniformMarine
+
+- type: Tag
+  id: RMCUniformUNSecurity
+
+- type: Tag
+  id: RMCUniformMP
+
+- type: Tag
+  id: RMCUniformWarden
+
+- type: Tag
+  id: RMCUniformCMP
+
+- type: Tag
+  id: RMCUniformPMC
+
+- type: Tag
+  id: RMCUniformSPP
+
+- type: Tag
+  id: RMCUniformCMB
+
+- type: Tag
+  id: RMCUniformTSE
 
 - type: Tag
   id: RMCXenoParasitePreparingLeap
+
+- type: Tag
+  id: RMCSynthGrabbable # whitelist tag for synths being able to grab particular xenos
+
+- type: Tag
+  id: RMCSentryLaptop

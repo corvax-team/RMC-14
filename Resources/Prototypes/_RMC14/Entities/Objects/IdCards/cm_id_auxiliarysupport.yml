@@ -39,14 +39,9 @@
     job: CMIntelOfficer
 
 - type: entity
-  parent: CMIDCardStandardDogtag
+  parent: CMIDCardSilver
   id: CMDogtagCrewman
-  name: Crewman's dogtags
+  name: vehicle crewman's ID card
   components:
   - type: PresetIdCard
     job: CMVehicleCrewman
-
-- type: entity
-  parent: [ RMCIDCardStandardDogtagHidden, CMDogtagCrewman ]
-  id: RMCDogtagCrewmanHidden
-  categories: [ HideSpawnMenu ]

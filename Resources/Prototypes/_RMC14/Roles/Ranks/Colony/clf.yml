@@ -1,9 +1,9 @@
 - type: rank
   id: RMCRankCLFRebel
-  name: Rebel
-  prefix: REB.
+  name: Диверсант
+  prefix: Див.
 
 - type: rank
   id: RMCRankCLFRebelCommander
-  name: Rebel Commander
-  prefix: REBC.
+  name: Командир Диверсионной Ячейки
+  prefix: КДЯ.

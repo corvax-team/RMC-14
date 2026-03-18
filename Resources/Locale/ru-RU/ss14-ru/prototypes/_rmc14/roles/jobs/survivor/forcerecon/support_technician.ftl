@@ -1,4 +1,4 @@
-ent-CMSpawnPointForeconSupportTech = точка появления техник поддежки силовой разведки
+ent-CMSpawnPointForeconSupportTech = Точка появления Техника СОиС
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetForeconSupportTech = техник поддежки силовой разведки
+ent-RMCSurvivorPresetForeconSupportTech = Шаблон роли Техни СОиС
     .desc = { ent-RMCSurvivorPresetForeconNoPistol.desc }

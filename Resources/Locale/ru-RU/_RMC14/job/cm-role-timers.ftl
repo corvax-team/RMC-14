@@ -8,10 +8,10 @@ role-timer-survivor-roles = any survivor roles
 role-timer-total-department-insufficient = Требуется ещё [color=yellow]{ TOSTRING($time, "0") }[/color] минут игры за [color={ $rolesColor }]{ $roles }[/color] чтобы играть на этой роли.
 role-timer-total-department-too-high = Требуется на [color=yellow]{ TOSTRING($time, "0") }[/color] меньше минут за [color={ $departmentColor }]{ $rolesColor }[/color] чтобы играть на этой роли. (Вы пытаетесь играть за роль для новичков?)
 # Survs
-role-timer-civilian-survivor-roles = any civilian survivor roles
-role-timer-engineer-survivor-roles = any engineer survivor roles
-role-timer-medical-survivor-roles = any medical survivor roles
-role-timer-corporate-survivor-roles = any corporate survivor roles
-role-timer-security-survivor-roles = any security survivor roles
-role-timer-security-scientist-roles = any researcher survivor roles
-role-timer-commander-survivor-roles = any commander survivor roles
+role-timer-civilian-survivor-roles = Любые роли выживших штатских
+role-timer-engineer-survivor-roles = Любые роли вышивших инженеров
+role-timer-medical-survivor-roles = Любые роли выживших медиков
+role-timer-corporate-survivor-roles = Любые роли выживших корпоратов
+role-timer-security-survivor-roles = Любые роли выживших охранников
+role-timer-security-scientist-roles = Любые роли выживших учённых
+role-timer-commander-survivor-roles = любые роли выжившего командования

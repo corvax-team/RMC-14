@@ -26,8 +26,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      700: Critical
-      800: Dead
+      750: Critical
+      850: Dead
   - type: Xeno
     role: CMXenoCrusher
     actionIds:
@@ -66,17 +66,21 @@
     damage:
       groups:
         Brute: 40
+      types:
+        Structural: 30 #CCM Изменения
   - type: XenoTailStab
     tailDamage:
       groups:
         Brute: 48
+      types:
+        Structural: 38 #CCM Изменения
   - type: XenoMeleeSlow
     slowTime: 2
   - type: Tackle
     chance: 0.25
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
-    baseSprintSpeed: 3
+    baseSprintSpeed: 2.35
   - type: SlowOnPull
     slowdowns:
     - multiplier: 0.68
@@ -97,7 +101,7 @@
         Blunt: 16
   - type: RMCSize
     size: Immobile
-  - type: RMCXenoDamageVisuals
+  - type: RMCXenoDamageVisuals 
     prefix: crusher
   - type: TacticalMapIcon
     icon:
@@ -113,6 +117,7 @@
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT3
 
+
 - type: entity
   parent: CMXenoCrusherBase
   id: RMCXenoCrusher
@@ -126,17 +131,45 @@
     - ActionXenoCharge
     - ActionXenoStomp
     - ActionXenoDefensiveShield
+    - ActionXenoToggleCharging #CCM Change 
+    - CCMActionXenoSwap
     - ActionXenoDevolve
   - type: CrusherShield
+    amount: 500
+    explosionResistanceDuration: 5
   - type: XenoCharge
+    plasmaCost: 80 #CCM Change - Base is 20
     damage:
       types:
         Blunt: 60
         Structural: 750
+  - type: ExplosionResistance #CCM Change
+    damageCoefficient: 1.25 #Base coefficient - 2
+  - type: CMArmor # CCM Change
+    xenoArmor: 20
+    frontalArmor: 20
+    sideArmor: 10
+  - type: XenoFling
+    range: -2
+    dazeTime: 2
+    throwSpeed: 7.5
+    paralyzeTime: 0
+    slowTime: 8
   - type: XenoShield
-  - type: XenoEvolution
-    strains:
-    - RMCXenoCrusherCharger
+  - type: XenoToggleCharging #CCM Change
+    maxStage: 12
+    minimumSteps: 2
+  - type: MeleeDamageMultiplier #CCM Change
+    multiplier: 10
+    whitelist:
+      components:
+      - Vehicle #CCM - x10 damage to any vehicle, like tank or humvy
+  - type: XenoEvolutionCapped
+    id: RMCXenoCrusher
+    max: 1
+#  - type: XenoEvolution #CCM Change
+#    strains:
+#    - RMCXenoCrusherCharger
   - type: RMCActionOrder
     id: RMCXenoCrusher
 
@@ -165,9 +198,9 @@
     - ActionXenoRam
     - ActionXenoDevolve
   - type: CMArmor
-    xenoArmor: 20
-    frontalArmor: 30
-    sideArmor: 15
+    xenoArmor: 25
+    frontalArmor: 10
+    sideArmor: 5
   - type: MeleeWeapon
     damage:
       groups:

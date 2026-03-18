@@ -1,4 +1,3 @@
-ent-RMCRandomHumanoidCLFCellCommander = clf cell commander role
+ent-RMCRandomHumanoidCLFCellCommander = Роль Командир Ячейки КФО
     .suffix = Role
     .desc = { "" }
-

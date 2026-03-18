@@ -13,6 +13,9 @@ rmc-breech-loaded-open-shoot-attempt = Сначала вам нужно закр
 rmc-breech-loaded-not-ready-to-shoot = Сначала вам нужно открыть и закрыть затвор!
 rmc-breech-loaded-closed-load-attempt = Сначала вам нужно открыть затвор!
 rmc-breech-loaded-closed-extract-attempt = Сначала вам нужно открыть затвор!
+rmc-breech-loaded-toggle-attempt-cooldown = You must wait before { $action } the chamber again!
+rmc-breech-loaded-open = opening
+rmc-breech-loaded-close = closing
 rmc-wield-use-delay =
     Вам нужно подождать { $seconds }  { $seconds ->
         [one] секунду
@@ -27,6 +30,7 @@ rmc-shoot-use-delay =
     } перед тем, как вы сможете выстрелить из { $wieldable }!
 rmc-shoot-harness-required = Нужна упряжь
 rmc-wear-smart-gun-required = Чтобы надеть их, вы должны быть оснащены смартганом.
+rmc-gun-arc-blocked = You cannot fire outside of the weapon's firing arc.
 rmc-shoot-id-lock-unauthorized = Спусковой крючок заблокирован. Неавторизованный пользователь.
 rmc-id-lock-unauthorized = Действие запрещено. Неавторизованный пользователь.
 rmc-id-lock-authorization = Вы подняли { $gun }, зарегистрировав себя в качестве владельца.
@@ -72,9 +76,11 @@ rmc-gun-stacks-hit-multiple =
 rmc-gun-stacks-reset = { CAPITALIZE($weapon) } издаёт писк, теряя данные о наведении на цель и возвращаесь к обычному режиму стрельбы.
 rmc-gun-shoot-air-self = YOU FIRE YOUR { CAPITALIZE($weapon) } INTO THE AIR!
 rmc-gun-shoot-air-other = { CAPITALIZE(THE($user)) } FIRES { CAPITALIZE(THE($weapon)) } INTO THE AIR!
-rmc-gun-shoot-air-blocked = The roof above you is too dense.
-rmc-gun-shoot-air-examine = [bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default){ $harm ->
+rmc-gun-shoot-air-blocked = Крыша над вами слишком плотная.
+rmc-gun-shoot-air-examine = [bold]Нажмите [color=cyan]специальное взаимодействие[/color]  (По стандарту Spacebar){ $harm ->
         [true] { " while in harm mode" }
        *[false] { "" }
     } to fire into the air.[/bold]
-rmc-flare-gun-examine = The last signal flare fired has the designation: [color=#ad3b98][bold]{ $id }[/bold][/color]
+rmc-flare-gun-examine = Последняя выпущенная сигнальная ракета имеет обозначение: [color=#ad3b98][bold]{ $id }[/bold][/color]
+expendable-light-starshell-ash-empty-name = extinguished star shell ash
+expendable-light-starshell-ash-empty-desc = Burnt out remains of a star shell

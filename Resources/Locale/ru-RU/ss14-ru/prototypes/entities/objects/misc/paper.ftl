@@ -27,7 +27,6 @@ ent-NukeCodePaper = коды ядерной аутентификации
 ent-NukeCodePaperStation = { ent-NukeCodePaper }
     .suffix = Только станция
     .desc = { ent-NukeCodePaper.desc }
-
 ent-TraitorCodePaper = кодовое слово синдиката
     .desc = Раскрытое кодовое слово, с помощью которого можно связаться с Синдикатом.
     .suffix = НЕ МАППИТЬ
