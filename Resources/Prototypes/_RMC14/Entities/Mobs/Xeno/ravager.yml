@@ -51,6 +51,7 @@
     - ActionXenoEmpower
     - ActionXenoScissorCut
     - ActionXenoDevolve
+    - MCActionXenoRavage
     tier: 3
     hudOffset: 0,0.1
     unlockAt: 900 # 15 minutes
@@ -70,6 +71,7 @@
     explosionArmor: 80
   - type: XenoClaws
     clawType: VerySharp
+  - type: MCXenoRavage # CCM Change
   - type: MeleeWeapon
     attackRate: 1.05
     damage:

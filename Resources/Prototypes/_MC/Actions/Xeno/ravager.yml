@@ -7,8 +7,8 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _MC/Interface/Actions/Xeno/ravager.rsi
-      state: ravage
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: soak
     useDelay: 6
   - type: InstantAction
     event: !type:MCXenoRavageActionEvent
