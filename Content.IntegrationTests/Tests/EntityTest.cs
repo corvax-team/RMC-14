@@ -98,7 +98,7 @@ namespace Content.IntegrationTests.Tests
                             Assert.Fail($"Failed to delete {meta.EntityPrototype}, NAME: {meta.EntityName}");
                         }
 
-                        Assert.That(entityMan.EntityCount, Is.Zero, $"One of these prototypes is to blame in chunk {i}-{max}: {string.Join(",", chunk)}");
+                        Assert.That(entityMan.EntityCount, Is.Zero, $"One of these prototypes is to blame: {string.Join(",", chunk)}");
                     });
                 });
 
