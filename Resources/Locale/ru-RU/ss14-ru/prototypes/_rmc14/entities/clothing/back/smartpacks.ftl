@@ -1,7 +1,7 @@
 ent-RMCSmartpackBase = рюкзак S-V42
-    .desc = Совместный проект ОПЗ и Vitezstvi. Как утверждается, это высококлассная разработка и современная технология со встроенным фонарем на плече, который следует за вашим взглядом.
+    .desc = Совместный проект ОПЗ и Vitezstvi. Высокотехнологичная разработка со встроенным наплечным фонарем, который следует за вашим взглядом.
 ent-RMCSmartpackA1Base = рюкзак S-V42A1
-    .desc = Пересмотренный совместный проект ОПЗ и Vitezstvi. Как утверждается, это высококлассная разработка и современная технология со встроенным фонарем на плече, который следует за вашим взглядом.
+    .desc = Обновленный совместный проект ОПЗ и Vitezstvi. Высокотехнологичная разработка со встроенным наплечным фонарем, который следует за вашим взглядом.
 ent-RMCSmartpack = { ent-RMCSmartpackBase }
     .desc = { ent-RMCSmartpackBase.desc }
 ent-RMCSmartpackBlack = { ent-RMCSmartpackBase }
@@ -23,5 +23,5 @@ ent-RMCSmartpackA1Tan = { ent-RMCSmartpackA1Base }
 ent-RMCSmartpackA1White = { ent-RMCSmartpackA1Base }
     .desc = { ent-RMCSmartpackA1Base.desc }
 ent-RMCPMCSyntheticSmartpack = { ent-RMCSmartpackA1White }
-    .suffix = Filled, PMC Synthetic
+    .suffix = Заполненный, Синтетик ЧВК
     .desc = { ent-RMCSmartpackA1White.desc }

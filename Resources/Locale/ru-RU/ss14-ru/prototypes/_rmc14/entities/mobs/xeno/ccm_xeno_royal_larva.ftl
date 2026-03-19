@@ -1,2 +1,2 @@
-ent-CMXenoRoyalLarva = Royal Larva
+ent-CMXenoRoyalLarva = Королевская личинка
     .desc = { ent-CMXenoLarva.desc }

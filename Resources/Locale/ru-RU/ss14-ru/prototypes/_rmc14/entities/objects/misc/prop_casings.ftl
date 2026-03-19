@@ -1,6 +1,6 @@
-ent-RMCBasePropCasing = spent casing
-    .desc = Empty and useless now.
-    .suffix = Prop
+ent-RMCBasePropCasing = стреляная гильза
+    .desc = Теперь она пуста и бесполезна.
+    .suffix = Проп
 ent-RMCBasePropCasing1 = { ent-RMCBasePropCasing }
     .desc = { ent-RMCBasePropCasing.desc }
 ent-RMCBasePropCasing2 = { ent-RMCBasePropCasing }

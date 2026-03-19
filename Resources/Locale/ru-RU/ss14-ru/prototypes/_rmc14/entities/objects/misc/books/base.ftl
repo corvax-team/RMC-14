@@ -1,5 +1,5 @@
-ent-RMCBookBase = book
+ent-RMCBookBase = книга
     .desc = { ent-BaseItem.desc }
-ent-RMCGuidebookBase = book
-    .suffix = Guidebook
+ent-RMCGuidebookBase = книга
+    .suffix = Руководство
     .desc = { ent-BaseItem.desc }

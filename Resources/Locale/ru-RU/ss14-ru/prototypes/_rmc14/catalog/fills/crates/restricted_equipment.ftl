@@ -2,5 +2,5 @@ ent-RMCCrateRestrictedEquipmentArmorM4 = ящик бронежилета мор�
     .desc = { ent-RMCCrateWeldable.desc }
 ent-RMCCrateRestrictedEquipmentArmorB12 = ящик бронежилета морской пехоты B12 (x1 шлем, x1 бронежилет)
     .desc = { ent-RMCCrateWeldable.desc }
-ent-RMCCrateRestrictedEquipmentIntelSupportKit = Field Intelligence Support Kit crate (x1 fulton, x1 data detector, 1x intel pamphlet, 1x large document pouch, 1x intel radio key)
+ent-RMCCrateRestrictedEquipmentIntelSupportKit = ящик набора поддержки полевой разведки (x1 фултон, x1 детектор данных, 1x буклет разведки, 1x большой подсумок для документов, 1x ключ радиоканала разведки)
     .desc = { ent-RMCCrateBase.desc }

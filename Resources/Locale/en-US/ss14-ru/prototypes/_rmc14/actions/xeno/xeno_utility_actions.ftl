@@ -48,5 +48,3 @@ ent-ActionXenoBulwarkOfTheHive = Bulwark Of The Hive
     .desc = Grants all hivemembers around you a temporary shield that blocks 200 damage for 10 seconds. While their shield is up, hivemembers can only take damage up to 10% of their health at a time.
 ent-ActionXenoDoom = Doom (50)
     .desc = Turns off lights around you for 10 seconds, and slows, dazes, and drains hostiles as well.
-ent-ActionXenoKingTailSmash = Королевский удар хвостом
-    .desc = Король с силой наносит круговую атаку, поражая всех вокруг.

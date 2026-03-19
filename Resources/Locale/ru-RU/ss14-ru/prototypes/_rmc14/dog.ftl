@@ -1,2 +1,2 @@
-ent-RMCDogLizard = dog
+ent-RMCDogLizard = собака
     .desc = { "" }

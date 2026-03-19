@@ -1,3 +1,3 @@
-ent-RMCTimerTrigger = timer
-    .desc = Used to time things. Works well with contraptions which has to count down. Tick tock.
+ent-RMCTimerTrigger = таймер
+    .desc = Используется для отсчёта времени. Отлично подходит для устройств, требующих обратного отсчёта. Тик-так.
     .suffix = RMC

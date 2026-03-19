@@ -1,4 +1,4 @@
-cmd-fixpower-desc = Force the RMCPowerSystem to recalculate all power related entities.
-cmd-fixpower-help = Usage: fixpower
-cmd-nukemap-desc = Kills and destroys everything on a map!
-cmd-nukemap-help = nukemap <mapID>
+cmd-fixpower-desc = Принудительно заставляет RMCPowerSystem пересчитать все сущности, связанные с питанием.
+cmd-fixpower-help = Использование: fixpower
+cmd-nukemap-desc = Убивает и уничтожает всё на указанной карте!
+cmd-nukemap-help = Использование: nukemap <ID_карты>

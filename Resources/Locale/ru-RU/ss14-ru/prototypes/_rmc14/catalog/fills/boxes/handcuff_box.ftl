@@ -1,4 +1,4 @@
 ent-RMCBoxHandcuffs = коробка наручников
     .desc = Полная коробка наручников.
-ent-RMCBoxZiptie = ziptie box
-    .desc = A box full of zipties.
+ent-RMCBoxZiptie = коробка стяжек
+    .desc = Коробка, полная пластиковых стяжек.

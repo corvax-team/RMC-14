@@ -1,4 +1,4 @@
-ent-RMCWallMeterBase = meter
+ent-RMCWallMeterBase = настенный измеритель
     .desc = { "" }
 ent-RMCWallMeterGreen = { ent-RMCWallMeterBase }
     .desc = { ent-RMCWallMeterBase.desc }

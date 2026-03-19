@@ -6,5 +6,5 @@ ent-CMXenoHivelordResinWhisperer = { ent-CMXenoHivelordBase }
     .suffix = Смоляной Шептун
     .desc = { ent-CMXenoHivelordBase.desc }
 ent-CMXenoHivelordDesigner = { ent-CMXenoHivelordBase }
-    .suffix = Designer
+    .suffix = Дизайнер
     .desc = { ent-CMXenoHivelordBase.desc }

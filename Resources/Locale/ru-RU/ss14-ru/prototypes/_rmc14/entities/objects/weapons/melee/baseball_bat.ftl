@@ -1,4 +1,4 @@
-ent-RMCBaseballBat = wooden baseball bat
-    .desc = A large wooden baseball bat. Commonly used in colony recreation, but also used as a means of self defense. Often carried by thugs and ruffians.
-ent-RMCBaseballBatMetal = metal baseball bat
-    .desc = A large metal baseball bat. Compared to its wooden cousin, the metal bat offers a bit more more force. Often carried by thugs and ruffians.
+ent-RMCBaseballBat = деревянная бейсбольная бита
+    .desc = Тяжёлая деревянная бейсбольная бита. Часто используется для отдыха в колониях, но нередко служит и средством самообороны. Популярна среди бандитов и хулиганов.
+ent-RMCBaseballBatMetal = металлическая бейсбольная бита
+    .desc = Тяжёлая металлическая бейсбольная бита. По сравнению со своим деревянным собратом, она наносит чуть более мощные удары. Излюбленное оружие банд и налётчиков.

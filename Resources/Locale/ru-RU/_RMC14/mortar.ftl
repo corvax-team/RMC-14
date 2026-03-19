@@ -1,72 +1,70 @@
 rmc-mortar-deploy-start = Вы начинаете устанавливать { $mortar }.
 rmc-mortar-deploy-end-not-planet = Вы установили портативный миномётный набор М402. Это плохая идея.
-rmc-mortar-shell-busy = Кто-то ещё сейчас использует { $mortar }
+rmc-mortar-shell-busy = Кто-то ещё сейчас использует { $mortar }.
 rmc-mortar-not-aimed = { CAPITALIZE($mortar) } сначала нужно навести.
 rmc-mortar-covered = Возможно, вам не стоит устанавливать { $mortar } внутри помещения.
 rmc-mortar-target-invalid = Вы не можете выстрелить из { $mortar } по этой цели.
 rmc-mortar-target-not-area = Эта территория вне допустимой зоны!
-rmc-mortar-target-covered = Вы не можете попасть в цель. Вероятно, она находится под землей.
+rmc-mortar-target-covered = Вы не можете попасть в цель. Вероятно, она находится под крышей или в помещении.
 rmc-mortar-target-is-lz = Вы не можете бомбить зону высадки!
 rmc-mortar-bad-idea = Вы понимаете, насколько это плохая идея, и быстро останавливаетесь.
 rmc-mortar-cant-insert = Вы не можете зарядить { $shell } в { $mortar }!
 rmc-mortar-not-deployed = Сначала { $mortar } нужно установить!
-rmc-mortar-fire-cooldown = Ствол { $mortar } ещё обжигающе горяч. Подождите несколько секунд и подождите со стрельбой.
-rmc-mortar-less-accurate-with-range = [color=red]Чем дальше цель, тем ниже будет точность.![/color]
-rmc-mortar-target-start-self = Вы начинаете корректировать угол и дальность стрельбы { $mortar } в соответствии с новыми координатами.
+rmc-mortar-fire-cooldown = Ствол { $mortar } ещё обжигающе горяч. Подождите несколько секунд перед следующим выстрелом.
+rmc-mortar-less-accurate-with-range = [color=red]Чем дальше цель, тем ниже будет точность![/color]
+rmc-mortar-target-start-self = Вы начинаете корректировать угол и дальность стрельбы { $mortar } по новым координатам.
 rmc-mortar-target-start-others = { $user } начинает корректировать угол и дальность стрельбы { $mortar }.
-rmc-mortar-target-finish-self = Вы заканчиваете корректировать угол и дальность стрельбы { $mortar } в соответствии с новыми координатами.
-rmc-mortar-target-finish-others = { $user } заканчивает корректировать угол и дальность стрельбы { $mortar }.
-rmc-mortar-dial-start-self = Вы начинаете устанавливать смещение угла и дальности стрельбы { $mortar } в соответствии с новыми координатами.
-rmc-mortar-dial-start-others = { $user } начинаете устанавливать смещение угла и дальности стрельбы { $mortar }.
-rmc-mortar-dial-finish-self = Вы заканчиваете устанавливать смещение угла и дальности стрельбы { $mortar } в соответствии с новыми координатами.
-rmc-mortar-dial-finish-others = { $user } заканчивает устанавливать смещение угла и дальности стрельбы { $mortar }.
+rmc-mortar-target-finish-self = Вы закончили корректировать угол и дальность стрельбы { $mortar } по новым координатам.
+rmc-mortar-target-finish-others = { $user } закончил корректировать угол и дальность стрельбы { $mortar }.
+rmc-mortar-dial-start-self = Вы начинаете устанавливать смещение для { $mortar } по новым координатам.
+rmc-mortar-dial-start-others = { $user } начинает устанавливать смещение для { $mortar }.
+rmc-mortar-dial-finish-self = Вы закончили устанавливать смещение для { $mortar } по новым координатам.
+rmc-mortar-dial-finish-others = { $user } закончил устанавливать смещение для { $mortar }.
 rmc-mortar-shell-load-start-self = Вы начинаете заряжать { $shell } в { $mortar }.
 rmc-mortar-shell-load-start-others = { $user } начинает заряжать { $shell } в { $mortar }.
 rmc-mortar-shell-load-finish-self = Вы зарядили { $shell } в { $mortar }.
-rmc-mortar-shell-fire = { $user } заряжает { $shell } в { $mortar }.
-rmc-mortar-shell-warning = СНАРЯД ПАДАЕТ К { $direction } ОТ ВАС
-rmc-mortar-shell-warning-above = СНАРЯД ПАДАЕТ ПРЯМО НА ВАС
-rmc-mortar-shell-impact-warning = СНАРЯД ВОТ-ВОТ УПАДЁТ К { $direction } ОТ ВАС
-rmc-mortar-shell-impact-warning-above = СНАРЯД ВОТ-ВОТ УПАДЁТ ПРЯМО НА ВАС
+rmc-mortar-shell-fire = { $user } производит выстрел из { $mortar }, зарядив { $shell }.
+rmc-mortar-shell-warning = СНАРЯД ПАДАЕТ К { $direction } ОТ ВАС!
+rmc-mortar-shell-warning-above = СНАРЯД ПАДАЕТ ПРЯМО НА ВАС!
+rmc-mortar-shell-impact-warning = СНАРЯД ВОТ-ВОТ УПАДЁТ К { $direction } ОТ ВАС!
+rmc-mortar-shell-impact-warning-above = СНАРЯД ВОТ-ВОТ УПАДЁТ ПРЯМО НА ВАС!
 rmc-mortar-interface = Интерфейс миномёта
-rmc-mortar-target-title = Target Coordinates
-rmc-mortar-offset-title = Target Offset
+rmc-mortar-target-title = Координаты цели
+rmc-mortar-offset-title = Смещение цели
 rmc-mortar-target-x = Координата X:
 rmc-mortar-target-y = Координата Y:
 rmc-mortar-target-set = Навестись
-rmc-mortar-target-too-close = Вы не можете навестись на эти координаты, это слишком близко к вашему миномёту.
-rmc-mortar-target-too-far = Вы не можете навестись на эти координаты, это слишком далеко от вашего миномёта.
+rmc-mortar-target-too-close = Слишком близко! Вы не можете навестись на эти координаты.
+rmc-mortar-target-too-far = Слишком далеко! Эти координаты вне зоны досягаемости.
 rmc-mortar-offset-x = Смещение X:
 rmc-mortar-offset-y = Смещение Y:
 rmc-mortar-offset-set = Установить смещение
-rmc-mortar-offset-too-far = Вы не можете установить смещение на эти координаты, они слишком далеко от исходной цели.
-rmc-mortar-offset-too-close = Вы не можете установить смещение на эти координаты, это слишком близко к вашему миномёту.
+rmc-mortar-offset-too-far = Слишком сильное смещение от исходной цели.
+rmc-mortar-offset-too-close = Смещение делает цель слишком близкой к миномёту.
 rmc-mortar-offset-max =
     Макс. смещение
-    смещение: { $max }
-rmc-mortar-view-camera =
-    Смотреть
-    Камеру
-rmc-mortar-camera-title = Интерфейс камеры миномёта
+    ({ $max })
+rmc-mortar-view-camera = Камера наведения
+rmc-mortar-camera-title = Вид с камеры миномёта
 rmc-mortar-camera-name = Пара-кам ({ $x }):({ $y })
 # Targeting mode
-rmc-mortar-toggle-mode = Toggle Targeting Mode
-rmc-mortar-toggle-mode-message = Switch between coordinate and laser targeting modes
-rmc-mortar-coordinates-mode-switched-self = You switch { THE($mortar) } to coordinates targeting mode.
-rmc-mortar-laser-mode-switched-self = You switch { THE($mortar) } to laser targeting mode.
-rmc-mortar-coordinates-mode-switched-others = { $user } switches { THE($mortar) } to coordinates targeting mode.
-rmc-mortar-laser-mode-switched-others = { $user } switches { THE($mortar) } to laser targeting mode.
-rmc-mortar-linking-start = You start linking { THE($laserDesignator) } to { THE($mortar) }.
-rmc-mortar-laser-linked-self = You successfully link { THE($laserDesignator) } to { THE($mortar) }.
-rmc-mortar-laser-linked-others = { $user } successfully links { THE($laserDesignator) } to { THE($mortar) }.
-rmc-mortar-already-linking = { CAPITALIZE(THE($mortar)) } is already being linked to a laser designator.
-rmc-mortar-no-laser-target = { CAPITALIZE(THE($mortar)) } has no laser target to fire at!
-rmc-mortar-no-laser-designator = { CAPITALIZE(THE($mortar)) } has no linked laser designator!
-rmc-mortar-in-coordinates-mode = { CAPITALIZE(THE($mortar)) } is currently set to coordinates targeting mode.
-rmc-mortar-in-laser-mode = { CAPITALIZE(THE($mortar)) } is currently set to laser targeting mode.
-rmc-mortar-laser-aimed = { CAPITALIZE(THE($mortar)) } is aimed on target and ready to fire!
-rmc-mortar-toggle-mode-hint = [color=cyan]Alt + Click mortar to switch targeting modes.[/color]
-rmc-mortar-dial-coordinates = { CAPITALIZE(THE($mortar)) } is set to laser targeting mode, switch to coordinate targeting in order to dial coordinates!
-rmc-mortar-beeping = beeps!
-rmc-mortar-beeping-warning = beeps warningly!
-rmc-mortar-targeting = { CAPITALIZE(THE($mortar)) } is still targeting.
+rmc-mortar-toggle-mode = Переключить режим наведения
+rmc-mortar-toggle-mode-message = Переключение между ручными координатами и лазерным наведением
+rmc-mortar-coordinates-mode-switched-self = Вы переключили { $mortar } в режим наведения по координатам.
+rmc-mortar-laser-mode-switched-self = Вы переключили { $mortar } в режим лазерного наведения.
+rmc-mortar-coordinates-mode-switched-others = { $user } переключил { $mortar } в режим наведения по координатам.
+rmc-mortar-laser-mode-switched-others = { $user } переключил { $mortar } в режим лазерного наведения.
+rmc-mortar-linking-start = Вы начинаете привязку { $laserDesignator } к { $mortar }.
+rmc-mortar-laser-linked-self = Вы успешно привязали { $laserDesignator } к { $mortar }.
+rmc-mortar-laser-linked-others = { $user } успешно привязал { $laserDesignator } к { $mortar }.
+rmc-mortar-already-linking = { CAPITALIZE($mortar) } уже в процессе привязки к лазерному целеуказателю.
+rmc-mortar-no-laser-target = У { $mortar } нет лазерной метки для стрельбы!
+rmc-mortar-no-laser-designator = У { $mortar } нет привязанного лазерного целеуказателя!
+rmc-mortar-in-coordinates-mode = { CAPITALIZE($mortar) } в данный момент настроен на режим координат.
+rmc-mortar-in-laser-mode = { CAPITALIZE($mortar) } в данный момент настроен на лазерный режим.
+rmc-mortar-laser-aimed = { CAPITALIZE($mortar) } наведен на метку и готов к открытию огня!
+rmc-mortar-toggle-mode-hint = [color=cyan]Alt + Клик по миномёту, чтобы сменить режим наведения.[/color]
+rmc-mortar-dial-coordinates = { CAPITALIZE($mortar) } в режиме лазерного наведения. Переключитесь на координаты, чтобы изменить их вручную!
+rmc-mortar-beeping = пищит!
+rmc-mortar-beeping-warning = издаёт тревожный писк!
+rmc-mortar-targeting = { CAPITALIZE($mortar) } всё ещё наводится.

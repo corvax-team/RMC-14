@@ -15,5 +15,5 @@ ent-CMPillTricordrazine = { ent-CMPill }
 ent-RMCPillRussianRed = { ent-CMPill }
     .desc = { ent-CMPill.desc }
 ent-RMCPillAntiZed = { ent-CMPill }
-    .suffix = DO NOT MAP, AntiZed
+    .suffix = НЕ МАППИТЬ, AntiZed
     .desc = { ent-CMPill.desc }

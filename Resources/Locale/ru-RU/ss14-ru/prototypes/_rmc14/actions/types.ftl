@@ -1,6 +1,6 @@
-ent-ActionToggleVulpkaninWagging = action-name-toggle-wagging
-    .desc = action-description-toggle-wagging
-ent-ActionToggleFelinidWagging = { ent-ActionToggleWagging }
-    .desc = { ent-ActionToggleWagging.desc }
-ent-ActionToggleAvaliWagging = { ent-ActionToggleWagging }
-    .desc = { ent-ActionToggleWagging.desc }
+ent-ActionToggleVulpkaninWagging = Вилять хвостом
+    .desc = Позволяет начать или перестать вилять хвостом.
+ent-ActionToggleFelinidWagging = { ent-ActionToggleVulpkaninWagging }
+    .desc = { ent-ActionToggleVulpkaninWagging.desc }
+ent-ActionToggleAvaliWagging = { ent-ActionToggleVulpkaninWagging }
+    .desc = { ent-ActionToggleVulpkaninWagging.desc }

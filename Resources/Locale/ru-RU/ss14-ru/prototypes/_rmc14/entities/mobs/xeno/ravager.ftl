@@ -6,5 +6,5 @@ ent-RMCXenoRavagerBerserker = { ent-RMCXenoRavagerBase }
     .suffix = Берсеркер
     .desc = { ent-RMCXenoRavagerBase.desc }
 ent-RMCXenoRavagerHedgehog = { ent-RMCXenoRavagerBase }
-    .suffix = Hedgehog
+    .suffix = Дикобраз
     .desc = { ent-RMCXenoRavagerBase.desc }

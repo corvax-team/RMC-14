@@ -1,4 +1,4 @@
 ent-RMCEffectAlert = { "" }
     .desc = { "" }
-ent-RMCActiveAlertEffect = exclamation
+ent-RMCActiveAlertEffect = восклицательный знак
     .desc = { "" }

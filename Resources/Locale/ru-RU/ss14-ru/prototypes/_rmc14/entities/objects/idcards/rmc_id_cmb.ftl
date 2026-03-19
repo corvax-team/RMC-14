@@ -1,6 +1,6 @@
-ent-RMCIDCardCMBDeputy = CMB deputy silver badge
-    .desc = The silver badge which represents that the wearer is a CMB Deputy. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
-ent-RMCIDCardCMBRiotOfficer = CMB riot officer silver badge
-    .desc = The silver badge which represents that the wearer is a CMB Riot Control Officer. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
-ent-RMCIDCardCMBMarshal = CMB marshal gold badge
-    .desc = A coveted gold badge signifying that the wearer is one of the few CMB Marshals patroling the outer rim. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+ent-RMCIDCardCMBDeputy = серебряный значок представителя БКМ
+    .desc = Серебряный значок, подтверждающий статус представителя Бюро. Это символ правосудия, власти и защиты тех, кто не может постоять за себя. Значок воплощает непоколебимую верность присяге, которая всегда исполняется.
+ent-RMCIDCardCMBRiotOfficer = серебряный значок офицера подавления беспорядков БКМ
+    .desc = Серебряный значок, подтверждающий, что его обладатель — офицер подразделения по контролю беспорядков БКМ. Это символ правосудия, власти и защиты тех, кто в ней нуждается. Этот значок символизирует верность долгу и присяге.
+ent-RMCIDCardCMBMarshal = золотой значок маршала БКМ
+    .desc = Заветный золотой значок, подтверждающий, что его обладатель — один из немногих маршалов БКМ, патрулирующих Внешнее кольцо. Это знак справедливости, авторитета и защиты. Защищать тех, кто не может защитить себя. Этот значок символизирует приверженность присяге, которая всегда выполняется.

@@ -1,2 +1,2 @@
-ent-CCMCommunicationsConsole = emergency communication console
-    .desc = This can be used for various important functions.
+ent-CCMCommunicationsConsole = консоль экстренной связи
+    .desc = Используется для выполнения различных важных функций командования.

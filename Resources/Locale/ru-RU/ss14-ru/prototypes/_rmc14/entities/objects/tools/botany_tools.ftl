@@ -1,6 +1,6 @@
-ent-RMCToolMiniHoe = mini hoe
-    .desc = It's used for removing weeds or scratching your back.
-ent-RMCToolSpade = spade
-    .desc = A small tool for digging and moving dirt.
-ent-RMCToolHatchet = hatchet
-    .desc = A sharp hand hatchet, commonly used to cut things apart, be it timber or other objects. Often found in the hands of woodsmen, scouts, and looters.
+ent-RMCToolMiniHoe = малая мотыга
+    .desc = Используется для прополки сорняков или для того, чтобы почесать спину.
+ent-RMCToolSpade = совок
+    .desc = Небольшой инструмент для копания и перемещения земли.
+ent-RMCToolHatchet = топорик
+    .desc = Острый ручной топорик, обычно используемый для рубки древесины или других предметов. Часто встречается в руках лесников, разведчиков и мародёров.

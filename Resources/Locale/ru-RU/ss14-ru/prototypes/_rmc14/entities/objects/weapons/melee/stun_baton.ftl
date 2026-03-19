@@ -1,6 +1,6 @@
-ent-RMCStunBatonDamaged = damaged stun baton
-    .desc = A stun baton for incapacitating people with. This one seems pretty broken and beat up, especially around the on/off switch..
+ent-RMCStunBatonDamaged = повреждённая дубинка-шокер
+    .desc = Электрошоковая дубинка для обездвиживания целей. Эта выглядит изрядно побитой и сломанной, особенно в районе переключателя.
 ent-CMStunbaton = дубинка-шокер
     .desc = Электрошоковая дубинка для обездвиживания людей.
 ent-RMCTelescopicBaton = телескопическая дубинка
-    .desc = Компактное, но сбалансированное оружие самообороны. В сложенном виде может быть скрыто.
+    .desc = Компактное и хорошо сбалансированное оружие самообороны. В сложенном виде её легко носить скрытно.

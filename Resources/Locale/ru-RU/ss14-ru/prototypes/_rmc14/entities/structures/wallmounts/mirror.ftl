@@ -1,2 +1,2 @@
-ent-RMCMirror = mirror
-    .desc = Mirror mirror on the wall, who's the most robust of them all?
+ent-RMCMirror = зеркало
+    .desc = Свет мой, зеркальце, скажи, да всю правду доложи: кто на свете всех робастней?

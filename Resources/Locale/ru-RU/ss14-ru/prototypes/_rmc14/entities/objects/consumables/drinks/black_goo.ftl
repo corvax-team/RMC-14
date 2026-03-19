@@ -1,8 +1,8 @@
-ent-RMCBlackGooGlass = strange bottle
-    .desc = A strange bottle of unknown origin.
+ent-RMCBlackGooGlass = странная бутыль
+    .desc = Загадочный сосуд неизвестного происхождения.
 ent-RMCBlackGooGlassFull = { ent-RMCBlackGooGlass }
-    .suffix = DO NOT MAP, full
+    .suffix = НЕ МАППИТЬ, полная
     .desc = { ent-RMCBlackGooGlass.desc }
-ent-RMCBlackGooGlassAntiZedFull = even stranger bottle
-    .desc = A bottle of blue labeled CURE...
-    .suffix = DO NOT MAP, AntiZed, full
+ent-RMCBlackGooGlassAntiZedFull = ещё более странная бутыль
+    .desc = Сосуд с синей жидкостью и этикеткой «ЛЕКАРСТВО»...
+    .suffix = НЕ МАППИТЬ, Анти-Зед, полная

@@ -1,4 +1,4 @@
-ent-CCMWreath = wreath
-    .desc = Almost alive new year's wreath! Grants free new year's mood
-ent-CCMLolipop = Lollipop
-    .desc = Very sweet lollipop, sadly, but you can't eat it. Grants free new year's mood
+ent-CCMWreath = рождественский венок
+    .desc = Почти живой новогодний венок! Дарит бесплатное новогоднее настроение.
+ent-CCMLolipop = леденец
+    .desc = Очень сладкий леденец. К сожалению, его нельзя съесть. Дарит бесплатное новогоднее настроение.

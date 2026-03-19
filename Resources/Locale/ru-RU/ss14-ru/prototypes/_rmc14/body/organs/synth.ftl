@@ -1,2 +1,2 @@
-ent-RMCOrganSynthBrain = brain
+ent-RMCOrganSynthBrain = мозг
     .desc = { ent-BaseItem.desc }

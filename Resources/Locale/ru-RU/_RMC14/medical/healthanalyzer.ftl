@@ -1,4 +1,4 @@
-rmc-health-analyzer-title = Health Scan
+rmc-health-analyzer-title = Анализ состояния
 rmc-health-analyzer-patient = Пациент: { $name }
 rmc-health-analyzer-brute = Травмы
 rmc-health-analyzer-burn = Ожоги

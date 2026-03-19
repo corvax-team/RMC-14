@@ -1,6 +1,6 @@
 ent-CCMSpawnerAlamo = { ent-RMCSpawnerShuttle }
-    .suffix = Alamo
+    .suffix = Аламо
     .desc = { ent-RMCSpawnerShuttle.desc }
 ent-CCMSpawnerNormandy = { ent-RMCSpawnerShuttle }
-    .suffix = Normandy
+    .suffix = Нормандия
     .desc = { ent-RMCSpawnerShuttle.desc }

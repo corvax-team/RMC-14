@@ -1,3 +1,3 @@
-ent-CCMNuclearDevice = Nuclear Device
-    .desc = It's the only way to be sure.
+ent-CCMNuclearDevice = Ядерное устройство
+    .desc = Только так можно быть уверенным до конца.
     .suffix = НЕ УДАЛЯТЬ!

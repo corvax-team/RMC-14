@@ -13,9 +13,9 @@ rmc-laser-designator-target-name-squad = лазер { $squad }-{ $id }
 rmc-laser-designator-target-name = лазер { $id }
 rmc-laser-designator-target-abbreviation-squad = { $letter }-{ $id }
 rmc-laser-designator-target-abbreviation = { $id }
-rmc-laser-designator-examine-id = ID отслеживания для CAS: { $id }. #need to allign with medevac
+rmc-laser-designator-examine-id = ID отслеживания для авиаудара (CAS): { $id }.
 rmc-laser-designator-signal-flare-examine = [color=red]Его нельзя подобрать, пока он горит.[/color]
-rmc-laser-designator-signal-flare-examine-id = This target has the designator: [color=#ad3b98][bold]{ $id }[/bold][/color]
+rmc-laser-designator-signal-flare-examine-id = Этот целеуказатель имеет ID: [color=#ad3b98][bold]{ $id }[/bold][/color]
 rmc-laser-designator-switch-mode = Переключиться в режим { $mode }
 rmc-laser-designator-in-rangefinder-mode = { CAPITALIZE($item) } находится в режиме дальномера.
 rmc-laser-designator-in-designator-mode = { CAPITALIZE($item) } находится в режиме указателя целей CAS.

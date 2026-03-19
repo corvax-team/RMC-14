@@ -1,12 +1,12 @@
 ent-RMCCouchMid = диван
-    .desc = Единица шведской корпусной мебели, только не просите у техников по обслуживанию шестигранный шлиц.
+    .desc = Единица шведской корпусной мебели, только не просите у техников по обслуживанию шестигранный ключ.
     .suffix = Середина
 ent-RMCCouchEnd = { ent-RMCCouchMid }
     .suffix = Край
     .desc = { ent-RMCCouchMid.desc }
-ent-RMCCouchLeftBar = bar booth
-    .desc = An old wooden booth with red cushioning. There are stains in the cushions.
-    .suffix = Left
+ent-RMCCouchLeftBar = барная кабинка
+    .desc = Старая деревянная кабинка с красной обивкой. На подушках виднеются пятна.
+    .suffix = Левая
 ent-RMCCouchRightBar = { ent-RMCCouchLeftBar }
-    .suffix = Right
+    .suffix = Правая
     .desc = { ent-RMCCouchLeftBar.desc }

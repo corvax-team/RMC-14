@@ -1,7 +1,7 @@
-ent-RMCCalendarBase = Настенный календарь
+ent-RMCCalendarBase = настенный календарь
     .desc = Классическое оформление офиса и место, на которое можно смотреть с маниакальным интересом.
 ent-RMCCalendarColonist = { ent-RMCCalendarBase }
-    .suffix = Colony
+    .suffix = Колония
     .desc = { ent-RMCCalendarBase.desc }
 ent-RMCCalendarWeYa = { ent-RMCCalendarBase }
     .suffix = WeYa

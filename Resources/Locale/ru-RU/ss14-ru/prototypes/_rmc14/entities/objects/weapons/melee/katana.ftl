@@ -1,15 +1,15 @@
-ent-RMCKatana = katana
-    .desc = A finely made Japanese sword, with a well sharpened blade. The blade has been filed to a molecular edge, and is extremely deadly. Commonly found in the hands of mercenaries and yakuza.
+ent-RMCKatana = катана
+    .desc = Искусно сделанный японский меч с отлично заточенным клинком. Лезвие доведено до молекулярной остроты и чрезвычайно смертоносно. Часто встречается в руках наёмников и якудза.
     .suffix = RMC14
-ent-RMCKatanaSharp = absurdly sharp katana
+ent-RMCKatanaSharp = абсурдно острая катана
     .desc =
-        That's it. I'm sick of all this "Masterwork Bastard Sword" bullshit that's going on in RMC-14 right now. Katanas deserve much better than that. Much, much better than that.
+        Всё, с меня хватит этого бреда про «мастерские полуторные мечи», который сейчас творится в RMC-14. Катаны заслуживают куда большего. Намного, намного большего.
         
-        I should know what I'm talking about. I myself commissioned a genuine katana in Japan for 2,400,000 Yen (that's about $20,000) and have been practicing with it for almost 2 years now. I can even cut slabs of solid steel with my katana.
+        Я знаю, о чём говорю. Я лично заказал настоящую катану в Японии за 2 400 000 иен (около 20 000 долларов) и практикуюсь с ней уже почти 2 года. Я могу своей катаной разрубать стальные плиты.
         
-        Japanese smiths spend years working on a single katana and fold it up to a million times to produce the finest blades known to mankind.
+        Японские кузнецы годами трудятся над одной катаной, складывая сталь до миллиона раз, чтобы создать лучшие клинки, известные человечеству.
         
-        Katanas are thrice as sharp as European swords and thrice as hard for that matter too. Anything a longsword can cut through, a katana can cut through better. I'm pretty sure a katana could easily bisect a knight wearing full plate with a simple vertical slash.
+        Катаны в три раза острее европейских мечей и во столько же раз тверже. Всё, что может разрубить длинный меч, катана разрубит лучше. Я уверен, что катана легко рассечёт рыцаря в полном латном доспехе простым вертикальным ударом.
         
-        Ever wonder why medieval Europe never bothered conquering Japan? That's right, they were too scared to fight the disciplined Samurai and their katanas of destruction. Even in World War II, American soldiers targeted the men with the katanas first because their killing power was feared and respected.
-    .suffix = Admeme
+        Никогда не задумывались, почему средневековая Европа даже не пыталась завоевать Японию? Всё верно, они слишком боялись дисциплинированных самураев и их разрушительных катан. Даже во Второй мировой войне американские солдаты в первую очередь целились в людей с катанами, потому что их убойную силу боялись и уважали.
+    .suffix = Адмемы

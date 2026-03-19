@@ -1,5 +1,5 @@
-ent-RMCDirtBandageProp = dirty bandages
-    .desc = Some used gauze.
+ent-RMCDirtBandageProp = грязные бинты
+    .desc = Использованная марля. Грязная и местами окровавленная.
 ent-RMCDirtBandageProp2 = { ent-RMCDirtBandageProp }
     .desc = { ent-RMCDirtBandageProp.desc }
 ent-RMCDirtBandageProp3 = { ent-RMCDirtBandageProp }

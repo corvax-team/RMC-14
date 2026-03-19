@@ -1,6 +1,6 @@
 ent-RMCEncryptionKeyBureau = ключ радиошифрования бюро
     .desc = { ent-CMEncryptionKey.desc }
-ent-RMCEncryptionKeyBureauDamaged = damaged bureau encryption key
+ent-RMCEncryptionKeyBureauDamaged = повреждённый ключ радиошифрования бюро
     .desc = { ent-CMEncryptionKey.desc }
 ent-RMCEncryptionKeyDukes = ключ радиошифрования Дюка
     .desc = { ent-CMEncryptionKey.desc }

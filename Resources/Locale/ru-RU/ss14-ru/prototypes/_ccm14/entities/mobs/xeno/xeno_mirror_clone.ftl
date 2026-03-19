@@ -1,2 +1,2 @@
-ent-CCMXenoHunterMirrorClone = Clone
-    .desc = A shimmering copy.
+ent-CCMXenoHunterMirrorClone = Двойник
+    .desc = Мерцающая копия.

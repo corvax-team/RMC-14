@@ -1,5 +1,5 @@
-ent-RMCConcreteStatue = Бетонная статуя
-    .desc = Декоративная статуэтка с "крыльями" компании - фирменное произведение искусства в стиле брутализма.
+ent-RMCConcreteStatue = бетонная статуя
+    .desc = Декоративная статуэтка с «крыльями» компании — фирменное произведение искусства в стиле брутализма.
 ent-RMCConcreteStatueOffset = { ent-RMCConcreteStatue }
-    .suffix = Offset
+    .suffix = Смещённая
     .desc = { ent-RMCConcreteStatue.desc }
