@@ -58,6 +58,7 @@ public sealed class RMCHardpointSystem : EntitySystem
     [Dependency] private readonly SharedGunSystem _guns = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedExplosionSystem _explosion = default!;
+    [Dependency] private readonly RMCVehicleTopologySystem _topology = default!;
 
     public override void Initialize()
     {
@@ -102,29 +103,12 @@ public sealed class RMCHardpointSystem : EntitySystem
 
         ent.Comp.PendingRemovals.Clear();
 
-        var isAttachment = HasComp<VehicleTurretAttachmentComponent>(args.Entity);
-        var logAttachment = isAttachment ||
-                            slot.HardpointType.Equals("TurretWeapon", StringComparison.OrdinalIgnoreCase);
-        var itemType = TryComp<RMCHardpointItemComponent>(args.Entity, out var hardpointItem)
-            ? hardpointItem.HardpointType
-            : "<none>";
-
-        if (!IsValidHardpoint(args.Entity, slot))
+        if (!IsValidHardpoint(args.Entity, ent.Comp, slot))
         {
-            if (logAttachment)
-            {
-                Log.Info($"[rmc-hardpoints] Insert rejected: owner={ToPrettyString(ent.Owner)} slot={slot.Id} slotType={slot.HardpointType} item={ToPrettyString(args.Entity)} itemType={itemType} attachment={isAttachment}");
-            }
-
             if (TryComp<ItemSlotsComponent>(ent.Owner, out var itemSlots))
                 _itemSlots.TryEject(ent.Owner, args.Container.ID, null, out _, itemSlots, excludeUserAudio: true);
 
             return;
-        }
-
-        if (logAttachment)
-        {
-            Log.Info($"[rmc-hardpoints] Inserted: owner={ToPrettyString(ent.Owner)} slot={slot.Id} slotType={slot.HardpointType} item={ToPrettyString(args.Entity)} itemType={itemType} attachment={isAttachment}");
         }
 
         ent.Comp.LastUiError = null;
@@ -149,12 +133,6 @@ public sealed class RMCHardpointSystem : EntitySystem
 
         ApplyArmorHardpointModifiers(ent.Owner, args.Entity, adding: false);
         RefreshSupportModifiers(ent.Owner);
-
-        var isAttachment = HasComp<VehicleTurretAttachmentComponent>(args.Entity);
-        if (isAttachment)
-        {
-            Log.Info($"[rmc-hardpoints] Removed: owner={ToPrettyString(ent.Owner)} slot={args.Container.ID} item={ToPrettyString(args.Entity)} attachment=true stack={Environment.StackTrace}");
-        }
 
         ent.Comp.LastUiError = null;
         RefreshCanRun(ent.Owner);
@@ -188,6 +166,9 @@ public sealed class RMCHardpointSystem : EntitySystem
         var speedMult = 1f;
         var accelMult = 1f;
         var viewScale = 0f;
+        var cursorMaxOffset = 0f;
+        var cursorOffsetSpeed = 0.5f;
+        var cursorPvsIncrease = 0f;
         var hasWeaponMods = false;
         var hasSpeedMods = false;
         var hasAccelMods = false;
@@ -217,6 +198,9 @@ public sealed class RMCHardpointSystem : EntitySystem
             if (TryComp(item, out RMCVehicleGunnerViewAttachmentComponent? viewMod))
             {
                 viewScale = Math.Max(viewScale, viewMod.PvsScale);
+                cursorMaxOffset = Math.Max(cursorMaxOffset, viewMod.CursorMaxOffset);
+                cursorOffsetSpeed = MathF.Max(cursorOffsetSpeed, viewMod.CursorOffsetSpeed);
+                cursorPvsIncrease = Math.Max(cursorPvsIncrease, viewMod.CursorPvsIncrease);
                 hasViewMods = true;
             }
         }
@@ -291,6 +275,9 @@ public sealed class RMCHardpointSystem : EntitySystem
         {
             var view = EnsureComp<RMCVehicleGunnerViewComponent>(vehicle);
             view.PvsScale = viewScale;
+            view.CursorMaxOffset = cursorMaxOffset;
+            view.CursorOffsetSpeed = cursorOffsetSpeed;
+            view.CursorPvsIncrease = cursorPvsIncrease;
             Dirty(vehicle, view);
         }
         else
@@ -415,7 +402,7 @@ public sealed class RMCHardpointSystem : EntitySystem
         if (ent.Comp.CompletingInserts.Contains(slot.Id))
             return;
 
-        if (!IsValidHardpoint(args.Item, slot))
+        if (!IsValidHardpoint(args.Item, ent.Comp, slot))
         {
             args.Cancelled = true;
             return;
@@ -488,7 +475,7 @@ public sealed class RMCHardpointSystem : EntitySystem
         if (!_itemSlots.TryGetSlot(ent.Owner, args.SlotId, out var slot, itemSlots))
             return;
 
-        if (!IsValidHardpoint(item, hardpointSlot))
+        if (!IsValidHardpoint(item, ent.Comp, hardpointSlot))
             return;
 
         ent.Comp.CompletingInserts.Add(args.SlotId);
@@ -559,18 +546,36 @@ public sealed class RMCHardpointSystem : EntitySystem
         return false;
     }
 
-    private bool IsValidHardpoint(EntityUid item, RMCHardpointSlot slot)
+    private bool IsValidHardpoint(EntityUid item, RMCHardpointSlotsComponent slots, RMCHardpointSlot slot)
     {
         if (!TryComp<RMCHardpointItemComponent>(item, out var hardpoint))
             return false;
 
-        if (slot.Whitelist != null)
-            return _whitelist.IsValid(slot.Whitelist, item);
+        if (slots.VehicleFamily is not null)
+        {
+            if (hardpoint.VehicleFamily is not { } vehicleFamily)
+                return false;
+
+            if (vehicleFamily != slots.VehicleFamily.Value)
+                return false;
+        }
+
+        if (slot.SlotType is not null)
+        {
+            if (hardpoint.SlotType is not { } slotType)
+                return false;
+
+            if (slotType != slot.SlotType.Value)
+                return false;
+        }
 
         if (string.IsNullOrWhiteSpace(slot.HardpointType))
-            return true;
+            return slot.Whitelist == null || _whitelist.IsValid(slot.Whitelist, item);
 
-        return string.Equals(hardpoint.HardpointType, slot.HardpointType, StringComparison.OrdinalIgnoreCase);
+        if (!string.Equals(hardpoint.HardpointType, slot.HardpointType, StringComparison.OrdinalIgnoreCase))
+            return false;
+
+        return slot.Whitelist == null || _whitelist.IsValid(slot.Whitelist, item);
     }
 
     private bool HasAllRequired(EntityUid uid, RMCHardpointSlotsComponent component, ItemSlotsComponent? itemSlots = null)
@@ -785,7 +790,13 @@ public sealed class RMCHardpointSystem : EntitySystem
 
         var hullFraction = anyIntact ? ent.Comp.FrameDamageFractionWhileIntact : 1f;
         if (TryComp(ent.Owner, out RMCHardpointIntegrityComponent? frameIntegrity))
-            DamageHardpoint(ent.Owner, ent.Owner, totalDamage * hullFraction, frameIntegrity);
+        {
+            var frameDamage = ScaleDamage(args.Damage, hullFraction);
+            var frameAmount = GetVehicleFrameDamageAmount(ent.Owner, frameDamage);
+            if (frameAmount > 0f)
+                DamageHardpoint(ent.Owner, ent.Owner, frameAmount, frameIntegrity);
+        }
+
         args.Damage = ScaleDamage(args.Damage, hullFraction);
     }
 
@@ -883,6 +894,24 @@ public sealed class RMCHardpointSystem : EntitySystem
         }
     }
 
+    private float GetVehicleFrameDamageAmount(EntityUid vehicle, DamageSpecifier damage)
+    {
+        var total = MathF.Max(damage.GetTotal().Float(), 0f);
+        if (!TryComp(vehicle, out DamageProtectionBuffComponent? protection) ||
+            protection.Modifiers.Count == 0)
+        {
+            return total;
+        }
+
+        var modifiedDamage = damage;
+        foreach (var modifier in protection.Modifiers.Values)
+        {
+            modifiedDamage = DamageSpecifier.ApplyModifierSet(modifiedDamage, modifier);
+        }
+
+        return MathF.Max(modifiedDamage.GetTotal().Float(), 0f);
+    }
+
     private void OnHardpointIntegrityInit(Entity<RMCHardpointIntegrityComponent> ent, ref ComponentInit args)
     {
         if (ent.Comp.Integrity <= 0f)
@@ -909,6 +938,80 @@ public sealed class RMCHardpointSystem : EntitySystem
             ("current", (int)MathF.Ceiling(current)),
             ("max", (int)MathF.Ceiling(max)),
             ("percent", (int)MathF.Round(percent * 100f))));
+
+        if (TryGetArmorExamineModifiers(ent.Owner, out var acid, out var slash, out var bullet, out var explosive, out var blunt))
+        {
+            args.PushMarkup(Loc.GetString("rmc-hardpoint-armor-modifiers-examine",
+                ("acid", FormatModifierValue(acid)),
+                ("slash", FormatModifierValue(slash)),
+                ("bullet", FormatModifierValue(bullet)),
+                ("explosive", FormatModifierValue(explosive)),
+                ("blunt", FormatModifierValue(blunt))));
+        }
+    }
+
+    private bool TryGetArmorExamineModifiers(
+        EntityUid uid,
+        out float acid,
+        out float slash,
+        out float bullet,
+        out float explosive,
+        out float blunt)
+    {
+        acid = 1f;
+        slash = 1f;
+        bullet = 1f;
+        explosive = 1f;
+        blunt = 1f;
+
+        if (!TryComp(uid, out RMCVehicleArmorHardpointComponent? armor))
+            return false;
+
+        if (TryComp(uid, out RMCHardpointItemComponent? item) &&
+            item.VehicleFamily == "Tank" &&
+            _prototypeManager.TryIndex<DamageModifierSetPrototype>("RMCVehicleFrameTank", out var tankBase))
+        {
+            ApplyDamageModifierCoefficients(tankBase, ref acid, ref slash, ref bullet, ref explosive, ref blunt);
+        }
+
+        foreach (var modifierSetId in armor.ModifierSets)
+        {
+            if (!_prototypeManager.TryIndex(modifierSetId, out DamageModifierSetPrototype? modifierSet))
+                continue;
+
+            ApplyDamageModifierCoefficients(modifierSet, ref acid, ref slash, ref bullet, ref explosive, ref blunt);
+        }
+
+        return true;
+    }
+
+    private static void ApplyDamageModifierCoefficients(
+        DamageModifierSet modifierSet,
+        ref float acid,
+        ref float slash,
+        ref float bullet,
+        ref float explosive,
+        ref float blunt)
+    {
+        if (modifierSet.Coefficients.TryGetValue("Caustic", out var acidCoefficient))
+            acid *= acidCoefficient;
+
+        if (modifierSet.Coefficients.TryGetValue("Slash", out var slashCoefficient))
+            slash *= slashCoefficient;
+
+        if (modifierSet.Coefficients.TryGetValue("Piercing", out var bulletCoefficient))
+            bullet *= bulletCoefficient;
+
+        if (modifierSet.Coefficients.TryGetValue("Structural", out var explosiveCoefficient))
+            explosive *= explosiveCoefficient;
+
+        if (modifierSet.Coefficients.TryGetValue("Blunt", out var bluntCoefficient))
+            blunt *= bluntCoefficient;
+    }
+
+    private static string FormatModifierValue(float value)
+    {
+        return value.ToString("0.###");
     }
 
     private string GetHardpointIntegrityColor(float percent)
@@ -1288,7 +1391,7 @@ public sealed class RMCHardpointSystem : EntitySystem
 
     private bool TryInsertTurretAttachment(Entity<RMCHardpointSlotsComponent> ent, EntityUid user, EntityUid used)
     {
-        if (!TryComp(used, out RMCHardpointItemComponent? hardpointItem))
+        if (!HasComp<RMCHardpointItemComponent>(used))
             return false;
 
         if (!TryComp(ent.Owner, out ItemSlotsComponent? itemSlots))
@@ -1297,14 +1400,9 @@ public sealed class RMCHardpointSystem : EntitySystem
         var requiresTurret = HasComp<VehicleTurretAttachmentComponent>(used);
         var hasMatchingEmptySlot = false;
 
-        if (requiresTurret)
-        {
-            Log.Info($"[rmc-hardpoints] Attachment insert attempt: user={ToPrettyString(user)} vehicle={ToPrettyString(ent.Owner)} item={ToPrettyString(used)} itemType={hardpointItem.HardpointType}");
-        }
-
         foreach (var slot in ent.Comp.Slots)
         {
-            if (!IsValidHardpoint(used, slot))
+            if (!IsValidHardpoint(used, ent.Comp, slot))
                 continue;
 
             if (_itemSlots.TryGetSlot(ent.Owner, slot.Id, out var vehicleSlot, itemSlots) &&
@@ -1317,8 +1415,6 @@ public sealed class RMCHardpointSystem : EntitySystem
 
         if (!requiresTurret && hasMatchingEmptySlot)
             return false;
-
-        var handled = false;
 
         foreach (var slot in ent.Comp.Slots)
         {
@@ -1334,15 +1430,8 @@ public sealed class RMCHardpointSystem : EntitySystem
 
             foreach (var turretSlot in turretSlots.Slots)
             {
-                if (!IsValidHardpoint(used, turretSlot))
-                {
-                    if (requiresTurret)
-                    {
-                        Log.Info($"[rmc-hardpoints] Attachment rejected by turret slot: turret={ToPrettyString(turretUid)} slot={turretSlot.Id} slotType={turretSlot.HardpointType} itemType={hardpointItem.HardpointType}");
-                    }
-
+                if (!IsValidHardpoint(used, turretSlots, turretSlot))
                     continue;
-                }
 
                 if (!_itemSlots.TryGetSlot(turretUid, turretSlot.Id, out var turretItemSlot, turretItemSlots))
                     continue;
@@ -1350,12 +1439,7 @@ public sealed class RMCHardpointSystem : EntitySystem
                 if (turretItemSlot.HasItem)
                     continue;
 
-                handled = true;
-                var inserted = _itemSlots.TryInsertFromHand(turretUid, turretItemSlot, user);
-                if (requiresTurret)
-                {
-                    Log.Info($"[rmc-hardpoints] Attachment insert result: turret={ToPrettyString(turretUid)} slot={turretSlot.Id} success={inserted}");
-                }
+                _itemSlots.TryInsertFromHand(turretUid, turretItemSlot, user);
                 return true;
             }
         }
@@ -1366,7 +1450,7 @@ public sealed class RMCHardpointSystem : EntitySystem
             return true;
         }
 
-        return handled;
+        return false;
     }
 
     private void AddTurretRemoveVerbs(
@@ -1574,22 +1658,7 @@ public sealed class RMCHardpointSystem : EntitySystem
 
     private bool TryGetContainingVehicleFrame(EntityUid owner, out EntityUid vehicle)
     {
-        vehicle = default;
-        var current = owner;
-
-        while (_containers.TryGetContainingContainer(current, out var container))
-        {
-            var containerOwner = container.Owner;
-            if (HasComp<VehicleComponent>(containerOwner))
-            {
-                vehicle = containerOwner;
-                return true;
-            }
-
-            current = containerOwner;
-        }
-
-        return false;
+        return _topology.TryGetVehicle(owner, out vehicle);
     }
 
     private void UpdateFrameDamageAppearance(EntityUid uid, RMCHardpointIntegrityComponent component)

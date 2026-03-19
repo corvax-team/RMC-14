@@ -80,6 +80,15 @@ public sealed partial class RMCVehicleGunnerViewAttachmentComponent : Component
 {
     [DataField]
     public float PvsScale = 0.35f;
+
+    [DataField]
+    public float CursorMaxOffset;
+
+    [DataField]
+    public float CursorOffsetSpeed = 0.5f;
+
+    [DataField]
+    public float CursorPvsIncrease;
 }
 
 /// <summary>
@@ -91,6 +100,15 @@ public sealed partial class RMCVehicleGunnerViewComponent : Component
 {
     [DataField, AutoNetworkedField]
     public float PvsScale;
+
+    [DataField, AutoNetworkedField]
+    public float CursorMaxOffset;
+
+    [DataField, AutoNetworkedField]
+    public float CursorOffsetSpeed = 0.5f;
+
+    [DataField, AutoNetworkedField]
+    public float CursorPvsIncrease;
 }
 
 /// <summary>
@@ -102,4 +120,13 @@ public sealed partial class RMCVehicleGunnerViewUserComponent : Component
 {
     [DataField, AutoNetworkedField]
     public float PvsScale;
+
+    [DataField, AutoNetworkedField]
+    public float CursorMaxOffset;
+
+    [DataField, AutoNetworkedField]
+    public float CursorOffsetSpeed = 0.5f;
+
+    [DataField, AutoNetworkedField]
+    public float CursorPvsIncrease;
 }

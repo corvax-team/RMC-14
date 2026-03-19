@@ -123,7 +123,6 @@ public sealed partial class RMCHardpointMenu : FancyWindow
     {
         TrySetVehicleIcon();
         UpdatePreviewOverlays(hardpoints);
-        UpdateWindowSizing(hardpoints.Count, hasFrameIntegrity, !string.IsNullOrWhiteSpace(error));
 
         var hasError = !string.IsNullOrWhiteSpace(error);
         ErrorLabel.Visible = hasError;
@@ -305,6 +304,8 @@ public sealed partial class RMCHardpointMenu : FancyWindow
 
             HardpointList.AddChild(panel);
         }
+
+        UpdateWindowSizing(hasFrameIntegrity, !string.IsNullOrWhiteSpace(error));
     }
 
     private void UpdatePreviewOverlays(IReadOnlyList<RMCHardpointUiEntry> hardpoints)
@@ -601,28 +602,33 @@ public sealed partial class RMCHardpointMenu : FancyWindow
         ClearPreviewOverlays();
     }
 
-    private void UpdateWindowSizing(int hardpointCount, bool hasFrameIntegrity, bool hasError)
+    private void UpdateWindowSizing(bool hasFrameIntegrity, bool hasError)
     {
-        const float baseWidth = 450f;
-        const float widthPerHardpoint = 30f;
-        const float baseHeight = 245f;
-        const float rowHeight = 20f;
+        const float baseWidth = 580f;
+        const float baseHeight = 210f;
+        const float listPadding = 24f;
+        const float errorHeight = 24f;
+        const float frameHeight = 40f;
+        const float minHeight = 300f;
 
-        var targetWidth = baseWidth + hardpointCount * widthPerHardpoint;
-        var targetHeight = baseHeight + hardpointCount * rowHeight;
+        HardpointList.InvalidateMeasure();
+        HardpointList.Measure(Vector2Helpers.Infinity);
 
-        if (!hasFrameIntegrity)
-            targetHeight -= 24f;
+        var targetWidth = baseWidth;
+        var targetHeight = baseHeight + HardpointList.DesiredSize.Y + listPadding;
+
+        if (hasFrameIntegrity)
+            targetHeight += frameHeight;
 
         if (hasError)
-            targetHeight += 24f;
+            targetHeight += errorHeight;
 
         var rootWidth = UserInterfaceManager.WindowRoot?.Size.X ?? 1400f;
         var rootHeight = UserInterfaceManager.WindowRoot?.Size.Y ?? 900f;
         var maxWidth = MathF.Max(baseWidth, rootWidth - 80f);
-        var maxHeight = MathF.Max(420f, rootHeight - 80f);
+        var maxHeight = MathF.Max(minHeight, rootHeight - 80f);
         var clampedWidth = Math.Clamp(targetWidth, baseWidth, maxWidth);
-        var clampedHeight = Math.Clamp(targetHeight, 420f, maxHeight);
+        var clampedHeight = Math.Clamp(targetHeight, minHeight, maxHeight);
         var targetSize = new Vector2(clampedWidth, clampedHeight);
 
         if (SetSize != targetSize)

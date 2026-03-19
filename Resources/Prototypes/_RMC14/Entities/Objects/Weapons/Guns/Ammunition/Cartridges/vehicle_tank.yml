@@ -26,7 +26,6 @@
   - type: CartridgeAmmo
     proto: RMCProjectileAceAutocannonFlak
     muzzleFlash: MuzzleFlashEffectVehicleOver
-    muzzleFlashOffset: 1.2, 0
 
 - type: entity
   parent: CMBaseCartridgeRifle
@@ -41,7 +40,6 @@
   - type: CartridgeAmmo
     proto: RMCVehicleProjectileDragonFlame
     muzzleFlash: MuzzleFlashEffectVehicleOver
-    muzzleFlashOffset: 1.2, 0
 
 - type: entity
   parent: CMBaseCartridgeRifle
@@ -56,7 +54,6 @@
   - type: CartridgeAmmo
     proto: RMCVehicleProjectileTankFlamer
     muzzleFlash: MuzzleFlashEffectVehicleOver
-    muzzleFlashOffset: 1.2, 0
 
 - type: entity
   parent: CMCartridge10x20mmAP

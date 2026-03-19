@@ -119,8 +119,34 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
         if (!muzzle.UseDirectionalOffsets)
             return (muzzle.Offset, true);
 
-        var dir = GetBaseDirection(baseUid, baseRotation);
-        var offset = dir switch
+        var dir = TryGetTurretLocalDirection(baseUid, out var turretDir)
+            ? turretDir
+            : GetBaseDirection(baseUid, baseRotation);
+
+        var offset = GetDirectionalOffset(muzzle, dir);
+
+        return (offset, muzzle.RotateDirectionalOffsets);
+    }
+
+    private bool TryGetTurretLocalDirection(EntityUid baseUid, out Direction dir)
+    {
+        dir = default;
+
+        if (!TryComp(baseUid, out VehicleTurretComponent? turret) ||
+            !turret.OffsetRotatesWithTurret)
+        {
+            return false;
+        }
+
+        TryGetAnchorTurret(baseUid, turret, out _, out var anchorTurret);
+        var localRotation = anchorTurret.RotateToCursor ? anchorTurret.WorldRotation : Angle.Zero;
+        dir = VehicleTurretDirectionHelpers.GetRenderAlignedCardinalDir(localRotation);
+        return true;
+    }
+
+    private static Vector2 GetDirectionalOffset(GunMuzzleOffsetComponent muzzle, Direction dir)
+    {
+        return dir switch
         {
             Direction.North => muzzle.OffsetNorth,
             Direction.East => muzzle.OffsetEast,
@@ -128,8 +154,6 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
             Direction.West => muzzle.OffsetWest,
             _ => muzzle.Offset,
         };
-
-        return (offset, muzzle.RotateDirectionalOffsets);
     }
 
     private Direction GetBaseDirection(EntityUid baseUid, Angle baseRotation)
@@ -139,4 +163,69 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
 
         return VehicleTurretDirectionHelpers.GetRenderAlignedCardinalDir(baseRotation);
     }
+
+    private bool TryGetVehicle(EntityUid turretUid, out EntityUid vehicle)
+    {
+        vehicle = default;
+        var current = turretUid;
+
+        while (_container.TryGetContainingContainer((current, null), out var container))
+        {
+            var owner = container.Owner;
+            if (HasComp<VehicleComponent>(owner))
+            {
+                vehicle = owner;
+                return true;
+            }
+
+            current = owner;
+        }
+
+        return false;
+    }
+
+    private void TryGetAnchorTurret(
+        EntityUid turretUid,
+        VehicleTurretComponent turret,
+        out EntityUid anchorUid,
+        out VehicleTurretComponent anchorTurret)
+    {
+        anchorUid = turretUid;
+        anchorTurret = turret;
+
+        if (!HasComp<VehicleTurretAttachmentComponent>(turretUid))
+            return;
+
+        if (!TryGetParentTurret(turretUid, out var parentUid, out var parentTurret))
+            return;
+
+        anchorUid = parentUid;
+        anchorTurret = parentTurret;
+    }
+
+    private bool TryGetParentTurret(
+        EntityUid turretUid,
+        out EntityUid parentUid,
+        out VehicleTurretComponent parentTurret)
+    {
+        parentUid = default;
+        parentTurret = default!;
+        var current = turretUid;
+
+        while (_container.TryGetContainingContainer((current, null), out var container))
+        {
+            var owner = container.Owner;
+            if (TryComp(owner, out VehicleTurretComponent? turret))
+            {
+                parentUid = owner;
+                parentTurret = turret;
+                return true;
+            }
+
+            current = owner;
+        }
+
+        return false;
+    }
+
 }

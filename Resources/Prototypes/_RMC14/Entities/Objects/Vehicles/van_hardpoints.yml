@@ -11,10 +11,9 @@
     size: Large
   - type: RMCHardpointItem
     hardpointType: Wheel
+    vehicleFamily: Van
+    slotType: Wheel
     damageMultiplier: 0.15
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
-  - type: Tag
-    tags:
-    - RMCVehicleHardpointVanWheel
   - type: RMCVehicleWheelItem

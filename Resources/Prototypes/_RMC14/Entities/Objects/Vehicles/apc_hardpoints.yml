@@ -18,12 +18,11 @@
     state: tires
   - type: RMCHardpointItem
     hardpointType: Wheel
+    vehicleFamily: APC
+    slotType: Wheel
     damageMultiplier: 0.15
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
-  - type: Tag
-    tags:
-    - RMCVehicleHardpointAPCWheel
   - type: RMCVehicleWheelItem
 
 - type: entity
@@ -36,12 +35,11 @@
     state: front_cannon
   - type: RMCHardpointItem
     hardpointType: Cannon
+    vehicleFamily: APC
+    slotType: Cannon
     damageMultiplier: 0.11
   - type: RMCHardpointIntegrity
     maxIntegrity: 350
-  - type: Tag
-    tags:
-    - RMCVehicleHardpointAPCCannon
   - type: VehicleTurret
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
@@ -80,12 +78,11 @@
     state: dual_cannon
   - type: RMCHardpointItem
     hardpointType: Turret
+    vehicleFamily: APC
+    slotType: Turret
     damageMultiplier: 0.2
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
-  - type: Tag
-    tags:
-    - RMCVehicleHardpointAPCTurret
   - type: VehicleTurret
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
@@ -128,12 +125,11 @@
     state: comms_relay
   - type: RMCHardpointItem
     hardpointType: SupportAttachment
+    vehicleFamily: APC
+    slotType: SupportAttachment
     damageMultiplier: 0.075
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
-  - type: Tag
-    tags:
-    - RMCVehicleHardpointAPCSupportAttachment
   - type: RMCHardpointVisual
     vehicleState: comms_relay_0
 
@@ -147,12 +143,11 @@
     state: flare_launcher
   - type: RMCHardpointItem
     hardpointType: SupportAttachment
+    vehicleFamily: APC
+    slotType: SupportAttachment
     damageMultiplier: 0.1
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
-  - type: Tag
-    tags:
-    - RMCVehicleHardpointAPCSupportAttachment
   - type: VehicleTurret
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
@@ -199,12 +194,11 @@
     state: freighter_storage
   - type: RMCHardpointItem
     hardpointType: SupportAttachment
+    vehicleFamily: APC
+    slotType: SupportAttachment
     damageMultiplier: 0.075
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
-  - type: Tag
-    tags:
-    - RMCVehicleHardpointAPCSupportAttachment
   - type: RMCHardpointVisual
     vehicleState: freight_0
 

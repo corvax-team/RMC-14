@@ -314,7 +314,6 @@
   - type: CartridgeAmmo
     proto: RMCVehicleBulletAPCFrontalCannon10x50mm
     muzzleFlash: MuzzleFlashEffectVehicleOver
-    muzzleFlashOffset: 1.2, 0
 
 - type: entity
   parent: CMCartridgeSentry10x50mm
@@ -325,7 +324,6 @@
   - type: CartridgeAmmo
     proto: CMBulletSentry10x50mm
     muzzleFlash: MuzzleFlashEffectVehicleOver
-    muzzleFlashOffset: 1.2, 0
 
 - type: entity
   parent: CMCartridgeSentry10x50mm
@@ -336,7 +334,6 @@
   - type: CartridgeAmmo
     proto: RMCVehicleBulletBoyarsDualCannon10x50mm
     muzzleFlash: MuzzleFlashEffectVehicleOver
-    muzzleFlashOffset: 1.2, 0
 
 - type: entity
   parent: CMCartridgeSentry10x50mm
@@ -347,7 +344,6 @@
   - type: CartridgeAmmo
     proto: RMCVehicleBulletRERotaryCannon10x50mm
     muzzleFlash: MuzzleFlashEffectVehicleOver
-    muzzleFlashOffset: 1.2, 0
 
 - type: entity
   parent: CMBulletSentry10x50mm
@@ -359,6 +355,19 @@
     damage:
       types:
         Piercing: 36
+
+- type: entity
+  parent: CMBulletSentry10x50mm
+  id: RMCVehicleBulletAPCFrontCannon10x50mm
+  name: bullet (10x50mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 15
 
 - type: entity
   parent: CMBulletSentry10x50mm

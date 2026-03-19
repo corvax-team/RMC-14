@@ -19,8 +19,8 @@ public sealed class VehicleTurretSystem : EntitySystem
     private const float PixelsPerMeter = 32f;
     private const float FireAlignmentToleranceDegrees = 2f;
 
-    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly RMCVehicleTopologySystem _topology = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -354,22 +354,7 @@ public sealed class VehicleTurretSystem : EntitySystem
 
     private bool TryGetVehicle(EntityUid turretUid, out EntityUid vehicle)
     {
-        vehicle = default;
-        var current = turretUid;
-
-        while (_container.TryGetContainingContainer((current, null), out var container))
-        {
-            var owner = container.Owner;
-            if (HasComp<VehicleComponent>(owner))
-            {
-                vehicle = owner;
-                return true;
-            }
-
-            current = owner;
-        }
-
-        return false;
+        return _topology.TryGetVehicle(turretUid, out vehicle);
     }
 
     public bool TryResolveRotationTarget(
@@ -413,22 +398,15 @@ public sealed class VehicleTurretSystem : EntitySystem
     {
         parentUid = default;
         parentTurret = default!;
-        var current = turretUid;
 
-        while (_container.TryGetContainingContainer((current, null), out var container))
+        if (!_topology.TryGetParentTurret(turretUid, out parentUid) ||
+            !TryComp(parentUid, out VehicleTurretComponent? resolvedTurret))
         {
-            var owner = container.Owner;
-            if (TryComp(owner, out VehicleTurretComponent? turret))
-            {
-                parentUid = owner;
-                parentTurret = turret;
-                return true;
-            }
-
-            current = owner;
+            return false;
         }
 
-        return false;
+        parentTurret = resolvedTurret;
+        return true;
     }
 
     public bool TryAimAtTarget(EntityUid turretUid, EntityUid target, out EntityCoordinates targetCoords)
@@ -598,19 +576,53 @@ public sealed class VehicleTurretSystem : EntitySystem
         if (!targetTurret.RotateToCursor)
             return;
 
-        var alignmentTolerance = MathHelper.DegreesToRadians(
-            MathF.Max(FireAlignmentToleranceDegrees + ent.Comp.FireWhileRotatingGraceDegrees, 0f));
-
         if (!TryGetVehicle(targetUid, out var vehicle))
             return;
 
+        if (!IsAlignedForShot(ent.Owner, ent.Comp, targetUid, targetTurret, vehicle, args.ToCoordinates))
+        {
+            args.Cancelled = true;
+            args.ResetCooldown = true;
+            return;
+        }
+
+        ApplyShotDirectionConstraint(ent.Comp, targetTurret, targetUid, vehicle, ref args);
+    }
+
+    public bool IsAlignedForShot(EntityUid turretUid, EntityCoordinates? toCoordinates)
+    {
+        if (!TryComp(turretUid, out VehicleTurretComponent? turret))
+            return true;
+
+        if (!TryResolveRotationTarget(turretUid, turret, out var targetUid, out var targetTurret))
+            return true;
+
+        if (!targetTurret.RotateToCursor)
+            return true;
+
+        if (!TryGetVehicle(targetUid, out var vehicle))
+            return true;
+
+        return IsAlignedForShot(turretUid, turret, targetUid, targetTurret, vehicle, toCoordinates);
+    }
+
+    private bool IsAlignedForShot(
+        EntityUid turretUid,
+        VehicleTurretComponent turret,
+        EntityUid targetUid,
+        VehicleTurretComponent targetTurret,
+        EntityUid vehicle,
+        EntityCoordinates? toCoordinates)
+    {
+        var alignmentTolerance = MathHelper.DegreesToRadians(
+            MathF.Max(FireAlignmentToleranceDegrees + turret.FireWhileRotatingGraceDegrees, 0f));
         var vehicleRot = _transform.GetWorldRotation(vehicle);
 
-        if (args.ToCoordinates != null &&
-            TryGetTurretOrigin(targetUid, targetTurret, out var originCoords))
+        if (toCoordinates != null &&
+            TryGetTurretOrigin(turretUid, turret, out var originCoords))
         {
             var originMap = _transform.ToMapCoordinates(originCoords);
-            var targetMap = _transform.ToMapCoordinates(args.ToCoordinates.Value);
+            var targetMap = _transform.ToMapCoordinates(toCoordinates.Value);
             var direction = targetMap.Position - originMap.Position;
             if (direction.LengthSquared() > 0.0001f)
             {
@@ -618,11 +630,7 @@ public sealed class VehicleTurretSystem : EntitySystem
                 var currentWorldRotation = (targetTurret.WorldRotation + vehicleRot).Reduced();
                 var desiredDelta = Angle.ShortestDistance(currentWorldRotation, desiredWorldRotation);
                 if (Math.Abs(desiredDelta.Theta) > alignmentTolerance)
-                {
-                    args.Cancelled = true;
-                    args.ResetCooldown = true;
-                    return;
-                }
+                    return false;
             }
         }
 
@@ -632,14 +640,7 @@ public sealed class VehicleTurretSystem : EntitySystem
             : (targetTurret.TargetRotation + vehicleRot).Reduced();
 
         var delta = Angle.ShortestDistance(worldRotation, targetWorldRotation);
-        if (Math.Abs(delta.Theta) <= alignmentTolerance)
-        {
-            ApplyShotDirectionConstraint(ent.Comp, targetTurret, targetUid, vehicle, ref args);
-            return;
-        }
-
-        args.Cancelled = true;
-        args.ResetCooldown = true;
+        return Math.Abs(delta.Theta) <= alignmentTolerance;
     }
 
     private void ApplyShotDirectionConstraint(
