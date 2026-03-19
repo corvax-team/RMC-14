@@ -1,8 +1,8 @@
-ent-ActionRMCVehicleToggleView = Toggle View
-    .desc = Switch between the interior and exterior view.
-ent-ActionRMCVehicleDeploy = Deploy Vehicle
-    .desc = Deploy or retract the vehicle.
-ent-ActionRMCVehicleLock = Toggle Vehicle Lock
-    .desc = Locks or unlocks vehicle entry doors.
-ent-ActionRMCVehicleSelectHardpoint = Select Hardpoint
-    .desc = Select this hardpoint for firing.
+ent-ActionRMCVehicleToggleView = Переключение вида
+    .desc = Переключение между вида снаружи и внутри транспорта.
+ent-ActionRMCVehicleDeploy = Развёртывание транспорта
+    .desc = Развёрнуть или свернуть транспорт.
+ent-ActionRMCVehicleLock = Закрыть транспорт
+    .desc = Закрывает или открывает входные двери транспорта.
+ent-ActionRMCVehicleSelectHardpoint = Выбрать точку крепления
+    .desc = Выберите эту точку крепления для стрельбы.
