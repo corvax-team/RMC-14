@@ -38,7 +38,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.bleed_time_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> CMMarinesPerXeno =
-        CVarDef.Create("rmc.marines_per_xeno", 6f, CVar.SERVER | CVar.SERVER); // CCM-cvars-permission
+        CVarDef.Create("rmc.marines_per_xeno", 6f, CVar.SERVER | CVar.SERVERONLY); // CCM-cvars-permission
 
     public static readonly CVarDef<bool> RMCAutoBalance =
         CVarDef.Create("rmc.auto_balance", true, CVar.SERVER | CVar.SERVERONLY);

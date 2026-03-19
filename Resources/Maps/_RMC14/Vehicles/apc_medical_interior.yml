@@ -14,7 +14,7 @@ orphans: []
 nullspace: []
 tilemap:
   1: Space
-  0: FloorMetalDiamond
+  0: CMFloorPlating
   25: RMCFloorVehicleInteriorDarkSterile
   22: RMCFloorVehicleInteriorDarkSterileGreen11
   26: RMCFloorVehicleInteriorDarkSterileGreen12

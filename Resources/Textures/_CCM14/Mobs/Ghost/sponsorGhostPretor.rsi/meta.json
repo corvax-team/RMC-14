@@ -1,6 +1,7 @@
 {
   "version": 1,
-  "copyright": "Property of Corvax Colonial Marines",
+  "license" : "CC-BY-SA-3.0",
+  "copyright" : "Made for Corvax RMC-14",
   "size": {
     "x": 64,
     "y": 64

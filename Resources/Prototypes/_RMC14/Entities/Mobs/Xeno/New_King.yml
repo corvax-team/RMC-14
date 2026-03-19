@@ -35,9 +35,10 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    - ActionXenoRend
     - ActionXenoDoom
+    - ActionXenoScissorCut
     - ActionXenoPheromones
+    - ActionXenoDefensiveShield
     tier: 0
     bypassTierCount: true
     countedInSlots: false
@@ -65,7 +66,9 @@
   - type: XenoTailStab
     tailDamage:
       groups:
-        Brute: 66
+        Brute: 70
+    stunTime: 1.5
+    range: 2.5
   - type: Tackle
     stunMin: 6
     stunMax: 10
@@ -164,9 +167,10 @@
       3: rmc-xeno-mature-king
       4: rmc-xeno-mature-king
       5: rmc-xeno-mature-king
-  - type: XenoRend
-    damage:
-      groups:
-        Brute: 25
 
   - type: XenoDoom
+  - type: CrusherShield
+  - type: XenoScissorCut
+    damage:
+      types:
+        Slash: 45
