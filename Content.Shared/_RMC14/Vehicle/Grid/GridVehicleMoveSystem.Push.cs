@@ -132,6 +132,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
     private bool CanXenoMoveVehicle(GridVehicleMoverComponent mover, EntityUid xeno)
     {
+        if (!mover.AllowXenoPush)
+            return false;
+
         if (mover.XenoMoveMinimumSize is not { } minSize)
             return true;
 

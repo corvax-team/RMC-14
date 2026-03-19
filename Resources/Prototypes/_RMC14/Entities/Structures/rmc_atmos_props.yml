@@ -173,6 +173,7 @@
   name: space heater
   description: It's an electric space heater. It heats the room through radiation with electricity.
   components:
+  - type: RMCVehicleSmashable
   - type: Transform
   - type: Physics
     bodyType: Dynamic

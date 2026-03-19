@@ -57,22 +57,16 @@ cm-job-name-platoon-commander = Командир Взвода
 cm-job-description-platoon-commander = Координируйте и руководите своим взводом, подчиняйтесь командованию роты и приведите солдат к победе.
 cm-job-prefix-platoon-commander = ВзводКОМ
 CMPVEPlatoonCommander = Командир Взвода
-
 rmc-job-name-pve-forecon-rifleman = Стрелок
 rmc-job-prefix-pve-forecon-rifleman = СТР
-
 rmc-job-name-pve-forecon-smartgunner = Оператор смартгана
 rmc-job-prefix-pve-forecon-smartgunner = ОСг
-
 rmc-job-name-pve-forecon-corpsman = Санитар
 rmc-job-prefix-pve-forecon-corpsman = ПС
-
 rmc-job-name-pve-forecon-rto = Оператор радио-связи
 rmc-job-description-pve-forecon-rto = Вы — оператор радио связи. Обеспечьте стабильную связь между вашим отрядом и командованием.
 rmc-job-prefix-pve-forecon-rto = ОРС
-
 rmc-job-name-pve-forecon-assistant-lead = Помощник командира отряда
 rmc-job-prefix-pve-forecon-assistant-lead = АКО
-
 rmc-job-name-pve-forecon-squad-lead = Командир Отряда
 rmc-job-prefix-pve-forecon-squad-lead = КО

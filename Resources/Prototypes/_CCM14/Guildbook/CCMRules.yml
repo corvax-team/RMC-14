@@ -70,13 +70,13 @@
   ruleEntry: true
   text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMMetaGame.xml"
 
-#- type: guideEntry
-#  parent: RMC
-#  id: CCMMetaInformation
-#  name: cm-guide-entry-rules-Rule 3.2
-#  priority: 9
-#  ruleEntry: true
-#  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMMetaInformation.xml"
+- type: guideEntry
+  parent: RMC
+  id: CCMMetaInformation
+  name: cm-guide-entry-rules-Rule 3.2
+  priority: 9
+  ruleEntry: true
+  text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMMetaInformation.xml"
 
 - type: guideEntry
   parent: RMC
@@ -125,7 +125,7 @@
   priority: 15
   ruleEntry: true
   text: "/ServerInfo/Guidebook/_CCM14/Rules/Core/CCMEndRound.xml"
-
+  
 - type: guideEntry
   parent: RMC
   id: CCMCharacterLogic

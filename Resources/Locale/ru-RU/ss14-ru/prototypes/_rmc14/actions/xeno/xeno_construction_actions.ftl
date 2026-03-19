@@ -38,3 +38,7 @@ ent-RMCGuidebookActionXenoPlantWeeds = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
 ent-ActionXenoExpandWeeds = расширять сорняки (50)
     .desc = расширяет сорняки от других сорняков, или превращает сорняки в узел.
+ent-ActionXenoDesignerSelectedDesign = Selected Design
+    .desc = Toggle whether newly placed design nodes are wall or door nodes.
+ent-ActionXenoDesignerGreaterResinSurge = Greater Resin Surge (250)
+    .desc = Consumes nearby design nodes to create temporary thick resin walls.

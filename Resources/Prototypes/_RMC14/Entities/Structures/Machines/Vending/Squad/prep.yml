@@ -375,6 +375,224 @@
         amount: 4
       - id: RMCVisorSquad
         amount: 15
+# CCM Change - Cosmetics
+    - name: Вспомог. одежда - Маска #Mask - Cigars & other
+      choices: { CCMDripMask: 1 }
+      entries:
+# Mask
+      - id: CMTarbackCigar
+        name: Сигара тарбак
+      - id: RMCShioCigar
+        name: Сигара шио
+      - id: RMCMaskScarfBlack
+      - id: RMCMaskNeckerchiefBlack
+      - id: ClothingMaskNeckGaiter
+      - id: RMCMaskTornScarfBlack
+    - name: Вспомог. одежда - Голова #Head - too many for count
+      choices: { CCMDripHead: 1 }
+      entries:
+# Head
+      - id: RMCHeadFedoraBrown
+        name: Федора (Коричневая) #Fedora brown
+      - id: RMCHeadFedoraGrey
+        name: Федора (Серая) #Fedora grey
+      - id: RMCHeadFedoraTan
+        name: Федора (Смуглый) #Fedora tan
+      - id: RMCHeadCowboyHatDark
+        name: Ковбойская шляпа (Тёмная) #Cowboy dark
+      - id: RMCHeadCowboyHatLight 
+        name: Ковбойская шляпа (Светлая) #Cowboy light
+      - id: RMCBoonie
+      - id: RMCBoonieTan
+        name: армейская панама ККМП (Коричневая) #Boomie tan
+      - id: CMHeadFlapCap
+        name: Кепка ККМП с тканью #Flap cap
+      - id: RMCHeadCapFlippable
+      - id: CMHeadCapPeakedFormal
+        name: служебная фуражка ККМП (Белая) #Cap white
+      - id: CMHeadCapPeakedService
+      - id: RMCArmorHelmetSkullcap
+      - id: RMCHeadUshanka
+        name: Ушанка #Ushanka (RUSSIA MENTIONED)
+      - id: RMCHeadBeretSquad
+        name: Берет #Beret
+      - id: RMCHeadBeretSquadAlpha
+        name: Берет (Альфа) #Beret alpha
+      - id: RMCHeadBeretSquadBravo
+        name: Берет (Браво) #Beret Bravo
+      - id: CMHeadBeret
+      - id: RMCHeadBeretGreen
+        name: Берет (Зелёный) #Beret green
+      - id: RMCHeadBandSquad
+        name: Повязка #Band
+      - id: CMHeadBandRed
+        name: Повязка (Красная) #Band red
+      - id: CMHeadBandBravo
+        name: Повязка (Жёлтая) #Band yellow
+      - id: CMHeadBandGray
+        name: Повязка (Серая) #Band grey
+      - id: RMCHeadUNMCHeadset
+    - name: Вспомог. одежда - Шея #Neck clothing - scarf & other
+      choices: { CCMDripNeck: 2 }
+      entries:
+# Neck 
+      - id: ClothingNeckTieDet
+        name: Чёрный галстук #Black tie
+      - id: ClothingNeckTieSci
+        name: Фиолетовый галстук #Puprle tie
+      - id: ClothingNeckTieRed
+      - id: ClothingNeckScarfStripedLesbianLong
+        name: Длинный разноцветный шарф #Bacon like
+      - id: ClothingNeckScarfStripedAroace
+        name: Полосатый сине-жёлтый шарф #Atmos like
+      - id: ClothingNeckScarfStripedGreen
+      - id: ClothingNeckScarfStripedRed
+      - id: ClothingNeckScarfStripedBrown
+      - id: ClothingNeckScarfStripedOrange
+      - id: ClothingNeckScarfStripedPurple
+      - id: ClothingNeckScarfStripedLightBlue
+      - id: ClothingNeckScarfStripedBlue
+      - id: ClothingNeckScarfStripedBlack
+      - id: ClothingNeckStoleChaplain
+    - name: Вспомог. одежда - Внешняя #Outer clothing - Coats, Jackets, Windbreakers
+      choices: { CCMDripOuter: 1 }
+      entries:
+# Outer clothing
+      - id: RMCJacketWindbreaker
+        name: Ветровка (Зелёная) #Green
+      - id: RMCJacketWindbreakerGrey
+        name: Ветровка (Серая) #Grey
+      - id: RMCJacketWindbreakerFirstResponder
+        name: Ветровка (Наградная) #Rewarded
+      - id: RMCJacketWindbreakerExpedition
+        name: Ветровка (Экспедиционная) #Expedition
+      - id: RMCFancySuitJacketBlack
+        name: Чёрный дорогой джакет #Cool coat tho
+      - id: RMCCoatASOBlack
+        name: Чёрный джакет ОВП #ASO Coat
+      - id: RMCCoatPilot
+        name: Лёгкий джакет пилота #Pilot coat
+      - id: CMUtilityVest
+        name: Вспомогательный жилет безопастности #Engineer vest
+      - id: RMCHazardVestYellow
+      - id: RMCHazardVestBlue
+      - id: RMCHazardVestBlack
+      - id: RMCOuterClothingExternalWebbingBlack
+        name: Внешняя разгрузка (Чёрная) #Black
+      - id: RMCOuterClothingExternalWebbingBrown
+        name: Внешняя разгрузка (Серая) #Grey 
+      - id: RMCOuterClothingExternalWebbing
+        name: Внешняя разгрузка (Коричневая) #Brown
+      - id: RMCArmorVest #Vest
+      - id: RMCArmorBulletproof 
+        name: Пуленепробиваемый жилет #Bulletproof vest
+    - name: Вспомог. одежда - Перчатки #Hands
+      choices: { CCMDripHands: 1 }
+      entries:
+# Перчатки
+      - id: RMCHandsLeatherBlack
+        name: Кожанные перчатки (Чёрные) #Leather Black
+      - id: RMCHandsBrownMarine
+        name: Военные перчатки ККМП (Коричневые) #Brown
+      - id: RMCHandsGreyMarine
+        name: Военные перчатки ККМП (Серые) #Grey
+      - id: RMCHandsPurple
+        name: Военные перчатки ККМП (Фиолетовые) #Purple
+      - id: CMHandsWhite
+        name: Военные перчатки ККМП (Белые) #White
+    - name: Вспомог. одежда - Ботинки #Boots
+      choices: { CCMDripBoots: 1 }
+      entries:
+# Boots
+      - id: CMBootsBrownFilled
+        name: Военные ботинки ККМП (Коричневые) #Brown
+      - id: CMBootsJungleFilled
+        name: Военные ботинки ККМП (Джунгли) #Jungle
+      - id: CMBootsUrbanFilled
+        name: Военные ботинки ККМП (Городские) #Urban
+      - id: RMCBootsPMCFilled
+        name: Подкованные ботинки ККМП #Combat boots
+      - id: RMCBootsRoyalFilled
+        name: Военные ботинки ККМП (Светло-Коричневые) #Light brown
+    - name: Вспомог. одежда - Очки #Glasses & Goggles
+      choices: { CCMDripGlasses: 1 }
+      entries:
+# Glasses
+      - id: RMCSunglassesBigFake
+        name: TriMax персональные очки #Trimax big fake
+      - id: RMCGlassesTriMaxBlack
+        name: TriMax тактические очки (Чёрные) #Trimax black
+      - id: RMCGlassesTriMaxYellow
+        name: TriMax тактические очки (Жёлтые) #Trimax yellow
+      - id: RMCGlassesTriMaxBronze
+        name: TriMax тактические очки (Бронзовые) #Trimax bronze
+      - id: RMCGlassesAviatorsSilver
+        name: затенённые авиаторы (Серебрянные) #Trimax silver
+      - id: RMCGlassesAviators
+      - id: RMCGlassesMarineRpg
+      - id: RMCGlassesMarineRpgOld
+      - id: RMCGogglesBallisticYellow
+      - id: RMCGogglesBallisticRed
+      - id: RMCGogglesBallisticOrange
+      - id: RMCGogglesBallisticBlue
+      - id: RMCGogglesBallisticPurple
+      - id: RMCGogglesBallisticBlack
+      - id: RMCGogglesBallisticPolarizedOrange
+      - id: RMCGogglesBallisticPolarizedBlue
+    - name: Вспомог. одежда - Аксессуары #Patches and Helmet garb
+      choices: { CCMDripGarbages: 8 }
+      entries:
+# Helmet garbage
+      - id: RMCHelmetGarbBuckshot
+      - id: RMCHelmetGarbFlechette
+      - id: RMCHelmetGarbSlug
+      - id: RMCHelmetGarbNightVision
+      - id: RMCHelmetGarbNettingUrban
+      - id: RMCHelmetGarbNightVisionPVE
+      - id: RMCHelmetGarbMovieTicket
+      - id: RMCHelmetGarbWire
+      - id: RMCHelmetGarbPrescription
+      - id: RMCHelmetGarbRosary
+# Patches & Armband
+      - id: RMCPatchPeace
+      - id: RMCAlphaArmband
+      - id: RMCBravoArmband
+      - id: RMCEchoArmband
+      - id: RMCFoxtrotArmband
+      - id: RMCEngiArmband
+      - id: RMCMedArmband
+# Weapons - Just knifes and sidearms
+    - name: Оружие #Weapon
+      choices: { CCMWeapon: 1 }
+      entries:
+      - id: RMCGunCasePistolM1984Custom
+      - id: RMCGunCasePistolM44Custom
+      - id: RMCGunCasePistolHG45Aguila
+      - id: RMCGunCasePistolHG45Marina
+      - id: RMCD18Case
+      - id: RMCSawtoothDaggerB
+        name: Кинжал Фиорина (Тип Б) #Knife Fiorina B
+      - id: RMCSawtoothDaggerA
+        name: Кинжал Фиорина (Тип А) #Knife Fiorina A
+      - id: RMCCombatUtilityKnifeB
+        name: Штык нож Дружина (Тип Б) #Knife USSP B
+      - id: RMCCombatUtilityKnifeA
+        name: Штык нож Дружина (Тип А) #Knife USSP B
+      - id: CMCrowbar
+# Music & Cassetes
+    - name: Музыка #Music
+      choices: { CCMCassetes: 3 }
+      entries:
+      - id: RMCCassettePlayer
+      - id: RMCCassetteTapeCustom
+      - id: RMCCassetteTapeWigWoo1
+      - id: RMCCassetteTapeMendax
+      - id: RMCCassetteTapeNighty
+      - id: RMCCassetteTapeGoodShowOldChap
+      - id: RMCCassetteTapeRedQwesta
+      - id: RMCCassetteTapeBolgarich
+      - id: RMCCassetteTapeQwertyquerty
+      - id: RMCCassetteTapePigeonBeans
 
 - type: entity
   parent: ColMarTechBase

@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2-fix-physics
   forkId: ""
   forkVersion: ""
-  time: 03/11/2026 11:35:45
-  entityCount: 11737
+  time: 03/15/2026 10:56:19
+  entityCount: 11727
 maps:
 - 1
 grids:
@@ -20899,7 +20899,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 618.0327152
     - type: Door
-      secondsUntilStateChange: -31803.24
+      secondsUntilStateChange: -31851.586
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -20913,7 +20913,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 618.0327152
     - type: Door
-      secondsUntilStateChange: -31803.24
+      secondsUntilStateChange: -31851.586
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -24769,16 +24769,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 23.5,14.5
       parent: 1
-  - uid: 2282
-    components:
-    - type: Transform
-      pos: 1.5,-22.5
-      parent: 1
-  - uid: 2283
-    components:
-    - type: Transform
-      pos: 3.5,-22.5
-      parent: 1
   - uid: 2288
     components:
     - type: Transform
@@ -24966,11 +24956,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -5.5,-28.5
       parent: 1
-  - uid: 3139
-    components:
-    - type: Transform
-      pos: 5.5,-22.5
-      parent: 1
   - uid: 3140
     components:
     - type: Transform
@@ -24995,11 +24980,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 5.5,-28.5
       parent: 1
-  - uid: 5470
-    components:
-    - type: Transform
-      pos: 2.5,-22.5
-      parent: 1
   - uid: 5471
     components:
     - type: Transform
@@ -25018,11 +24998,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 0.5,-26.5
       parent: 1
-  - uid: 5479
-    components:
-    - type: Transform
-      pos: 4.5,-22.5
-      parent: 1
   - uid: 5495
     components:
     - type: Transform
@@ -25040,31 +25015,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -1.5,-24.5
-      parent: 1
-  - uid: 6507
-    components:
-    - type: Transform
-      pos: -2.5,-22.5
-      parent: 1
-  - uid: 6511
-    components:
-    - type: Transform
-      pos: -3.5,-22.5
-      parent: 1
-  - uid: 7829
-    components:
-    - type: Transform
-      pos: -5.5,-22.5
-      parent: 1
-  - uid: 7889
-    components:
-    - type: Transform
-      pos: -6.5,-22.5
-      parent: 1
-  - uid: 7890
-    components:
-    - type: Transform
-      pos: -4.5,-22.5
       parent: 1
   - uid: 7894
     components:
@@ -73415,10 +73365,11 @@ entities:
     - type: Transform
       pos: -39.875244,3.6757555
       parent: 1
-    - type: HandheldLight
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot {}
+        actions: !type:Container
+          ents: []
     - type: ActionsContainer
   - uid: 10596
     components:

@@ -749,7 +749,7 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: ready_charge
-    useDelay: 14
+    useDelay: 4 #CCM Change - base is 14
   - type: TargetAction
     range: 9
     checkCanAccess: false
@@ -1437,6 +1437,11 @@
   - type: ActionBlockIfResting
   - type: XenoActionPlasma
     cost: 25
+  - type: ActionSharedCooldown #CCM Change - Linked to Charge
+    id: ActionXenoTumble
+    ids:
+    - ActionXenoCharge
+    cooldown: 4
 
 - type: entity
   parent: ActionXenoBase

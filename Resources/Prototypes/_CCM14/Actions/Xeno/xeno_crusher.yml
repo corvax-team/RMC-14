@@ -1,0 +1,20 @@
+- type: entity
+  id: CCMActionXenoSwap
+  parent: ActionXenoBase
+  name: Swap
+  description: Swap you and your targets places. It just flings back your target back and slows him.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: fling
+    useDelay: 9
+  - type: TargetAction
+    range: 2
+    deselectOnMiss: false
+  - type: EntityTargetAction
+    event: !type:XenoFlingActionEvent
+    toggleOutline: false
+  - type: XenoOffensiveAction
+  - type: RMCDazeableAction

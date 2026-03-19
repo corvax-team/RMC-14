@@ -24,9 +24,7 @@ ent-RMCBulletSmartGun10x30mmirradiated = облучённая пуля (10x30м�
     .desc = { ent-CMBulletBase.desc }
 ent-RMCBulletSmartGun10x30mmHT = пуля HT (10x30 мм)
     .desc = { ent-CMBulletSmartGun10x30mm.desc }
-
 ent-RMCSmartGunPMC = Смартган ML79A
     .desc = Если это у вас в руках, вы, наверное, собираетесь кому-то сильно навредить. Удачи.. вашему врагу..
-
 ent-RMCSmartGunWhiteOut = Смартган ML79A 'Каратель'
     .desc = Специальная усовершенствованная версия смартгана ML79A. Если вы видете это - вы либо мертвы, либо обладатель этого на вашей стороне.

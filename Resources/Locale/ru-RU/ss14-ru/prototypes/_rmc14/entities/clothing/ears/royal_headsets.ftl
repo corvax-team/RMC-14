@@ -1,4 +1,16 @@
 ent-RMCHeadsetRoyalMarine = Гарнитура солдат Империи
     .desc = Элегантная гарнитура, используемая пехотинцами Империи Миртана. Достаточно низкая, чтобы поместиться под их уникальными шлемами.
+ent-RMCHeadsetRoyalMarineLeader = royal marine leader's headset
+    .desc = A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets.
+ent-RMCHeadsetRoyalMarineOfficer = royal marine officer's headset
+    .desc = A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets. This one is heavier with the weight of responsibility.
+ent-RMCHeadsetRoyalMarinePVE = royal marine's headset
+    .desc = A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets.
+    .suffix = PVE
+ent-RMCHeadsetRoyalMarineLeaderPVE = royal marine leader's headset
+    .desc = A sleek headset used by the Royal Crown Marines. Low profile enough to fit under their unique helmets. This one is heavier with the weight of responsibility.
+    .suffix = PVE
 ent-RMCEncryptionKeyRoyalMarine = ключ шифрования радио Империи
     .desc = { ent-CMEncryptionKey.desc }
+ent-RMCEncryptionKeyRoyalMarineCommand = royal marine command radio encryption key
+    .desc = { ent-RMCEncryptionKeyRoyalMarine.desc }

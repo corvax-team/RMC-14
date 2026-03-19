@@ -1,1 +1,1 @@
-rmc-xeno-tumble-not-perpendicular = You can only tumble towards your left or right!
+rmc-xeno-tumble-not-perpendicular = Кувыркаться можно только влево или вправо!

@@ -1,5 +1,7 @@
 ent-RMCCrateMedicalSurgery = ящик хирургического оборудования (лоток, анестетики, экипировка хирурга)
     .desc = { ent-CMCrateSecureSurgery.desc }
+ent-RMCCrateFieldDoctor = field doctor crate (replacement field doctor gear)
+    .desc = { ent-CMCrateSecureSurgery.desc }
 ent-RMCCrateMedicalBodyBag = ящик мешков для тел (x28)
     .desc = { ent-RMCCrateMedical.desc }
 ent-RMCCrateMedicalStasisBag = ящик стазис-мешков (x3)

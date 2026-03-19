@@ -113,3 +113,5 @@ ent-RMCAreaShivaInteriorLz2Habs = Shiva's Snowball - Argentinian Research Headqu
     .desc = { ent-RMCAreaShivaInterior.desc }
 ent-RMCAreaShivaInteriorAuxPower = Shiva's Snowball - Auxiliary Generator Station
     .desc = { ent-RMCAreaShivaInterior.desc }
+ent-RMCAreaShivaInteriorColonyCargoShuttle = Shiva's Snowball - Disabled Cargo Shuttle
+    .desc = { ent-RMCAreaShivaInteriorColony.desc }

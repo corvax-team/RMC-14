@@ -20,6 +20,9 @@ public sealed partial class RMCHardpointItemComponent : Component
 
     [DataField(required: true)]
     public string HardpointType = string.Empty;
+
+    [DataField]
+    public float DamageMultiplier = 1f;
 }
 
 
@@ -31,7 +34,7 @@ public sealed partial class RMCHardpointSlotsComponent : Component
     public List<RMCHardpointSlot> Slots = new();
 
     [DataField]
-    public float HardpointDamageMultiplier = 1f;
+    public float HardpointDamageMultiplier = 0.9f;
 
     [DataField]
     public float FrameDamageFractionWhileIntact = 0.1f;

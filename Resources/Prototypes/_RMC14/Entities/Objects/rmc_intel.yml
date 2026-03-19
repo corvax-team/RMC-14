@@ -164,7 +164,6 @@
   name: intel tech tree
   categories: [ HideSpawnMenu ]
   components:
-  - type: RMCVehicleSupplyTech
   - type: IntelTechTree
     tree:
       options:
@@ -179,6 +178,15 @@
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
       -
+        - name: Humvee ARC
+          description: Unlocks the ARC-configured humvee for vehicle supply.
+          cost: 5
+          events:
+          - !type:TechUnlockVehicleEvent
+            unlock: RMCVehicleHumveeARC
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: humvee
         - name: Requisition Budget Increase
           description: Distributes resources to requisitions for spending.
           cost: 7
@@ -223,15 +231,18 @@
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
       -
-        - name: Humvee ARC
-          description: Unlocks the ARC-configured humvee for vehicle supply.
-          cost: 5
+        - name: Tank
+          description: Authorizes the deployment of a heavy armored tank. Powerhouse of the frontline.
+          cost: 10
           events:
           - !type:TechUnlockVehicleEvent
-            Unlock: RMCVehicleHumveeARC
+            unlock: RMCVehicleTank
+          - !type:TechAnnounceEvent
+            author: ALMAYER SPECIAL ASSETS AUTHORIZED
+            message: Heavy armored vehicle support has been authorized for planet-side operations.
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
-            state: humvee
+            state: tank
         - name: Additional OB projectiles - HE
           description: Highly explosive bombardment ammo, to be loaded into the orbital cannon.
           cost: 5

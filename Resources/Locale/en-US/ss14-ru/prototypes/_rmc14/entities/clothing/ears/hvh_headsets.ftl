@@ -1,0 +1,12 @@
+ent-RMCHeadsetHvHWeYaPMC = WeYa corporate headset
+    .desc = A special headset used by corporate personnel.
+    .suffix = WeYa, PMC, HvH,
+ent-RMCHeadsetHvHWeYaPMCMedic = PMC-MED headset
+    .desc = { ent-RMCHeadsetHvHWeYaPMC.desc }
+ent-RMCHeadsetHvHWeYaPMCEngineer = PMC-CCT headset
+    .desc = { ent-RMCHeadsetHvHWeYaPMC.desc }
+ent-RMCHeadsetHvHWeYaPMCLeader = PMC-CMD headset
+    .desc = { ent-RMCHeadsetHvHWeYaPMC.desc }
+ent-RMCHeadsetHvHWeYaPMCCommando = We-Ya Commando headset
+    .desc = A special headset used by unidentified operatives.
+    .suffix = WeYa, PMC Commando, HvH

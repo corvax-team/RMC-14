@@ -19,6 +19,6 @@
     - CMXenoWarrior
     - CMXenoSpitter
     - CMXenoLurker
-#  - type: Tag
-#    tags:
-#    - CMXenoRoyalLarva
+  - type: Tag
+    tags:
+    - CMXenoRoyalLarva

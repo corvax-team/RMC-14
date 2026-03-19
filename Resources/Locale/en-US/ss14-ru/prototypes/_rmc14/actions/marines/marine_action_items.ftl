@@ -28,3 +28,7 @@ ent-RMCActionToggleLaser = Toggle Laser
     .desc = Toggles your laser on or off
 ent-RMCActionAimedShot = Aimed Shot
     .desc = While in combat mode and hovering your mouse over a target, press the unique action key to begin aiming.
+ent-RMCActionBroiler = Switch Tank
+    .desc = Switch to a different fuel tank.
+ent-RMCActionDismount = Dismount
+    .desc = Stop using the weapon

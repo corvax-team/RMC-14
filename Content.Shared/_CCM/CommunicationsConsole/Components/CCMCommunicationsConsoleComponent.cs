@@ -14,16 +14,7 @@ public sealed partial class CCMCommunicationsConsoleComponent : Component
     public bool ERTCalled { get; set; } = false;
 
     [DataField, AutoNetworkedField]
-    public List<ResPath> MapPaths = new()
-    {
-        new ResPath("/Maps/_CCM14/Shuttle/ert_spp_shuttle_spp.yml"),
-        new ResPath("/Maps/_CCM14/Shuttle/ert_spp_shuttle_spp.yml"),
-        new ResPath("/Maps/_CCM14/Shuttle/ert_spp_shuttle_spp.yml"),
-        new ResPath("/Maps/_CCM14/Shuttle/ert_pmc_shuttle_freelancer.yml"),
-        new ResPath("/Maps/_CCM14/Shuttle/ert_pmc_shuttle_weya.yml"),
-        new ResPath("/Maps/_CCM14/Shuttle/ert_pmc_shuttle_weya.yml")
-        //new ResPath("/Maps/_CCM14/Shuttle/ert_pmc_shuttle_enemies.yml")
-    };
+    public List<ResPath> MapPaths { get; set; } = new();
 
     [DataField, AutoNetworkedField]
     public TimeSpan FTLFlyTime = TimeSpan.FromSeconds(200);

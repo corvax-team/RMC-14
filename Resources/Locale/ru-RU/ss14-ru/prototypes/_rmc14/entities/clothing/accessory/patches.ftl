@@ -1,7 +1,7 @@
 ent-RMCPatchBase = Патч
     .desc = An abstract patch.
 ent-RMCPatchUnitedNations = Патч ОПЗ
-    .desc = Огнеупорный патч джентльменов и леди политического гиганта ОПЗ, самого мощного государства в млечном пути. 
+    .desc = Огнеупорный патч джентльменов и леди политического гиганта ОПЗ, самого мощного государства в млечном пути.
 ent-RMCPatchUnitedNationsSquare = { ent-RMCPatchUnitedNations }
     .suffix = Square
     .desc = { ent-RMCPatchUnitedNations.desc }

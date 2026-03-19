@@ -1,3 +1,5 @@
+reagent-name-rmcgenerictoxin = Generic Toxin
+reagent-desc-rmcgenerictoxin = General identification for many similar toxins, sometimes created as a byproduct through chemical reactions.
 reagent-name-rmcmolecularacid = разбавленная молекулярная кислота
 reagent-desc-rmcmolecularacid = Кислота неизвестного состава, этот образец, похоже, не так опасен, как те, что встречаются в кровеносной системе ксенонидов.
 rmc-body-stings = Ваше тело слегка жжёт.
@@ -9,9 +11,3 @@ reagent-name-rmcblackgoo = Black Goo
 reagent-desc-rmcblackgoo = A strange substance of unknown origin. . .
 reagent-name-rmc-chloral-hydrate = Chloral Hydrate
 reagent-desc-rmc-chloral-hydrate = Chloral hydrate was the first synthetically produced sedative-hypnotic drug. It is a powerful sedative which causes near instant sleepiness, but can be deadly in large quantities. Often used together with other anesthetics for surgical procedures.
-reagent-name-rmcdronejuice = питательный сок дрона
-reagent-desc-rmcdronejuice = Густая субстанция, используемая рабочими особями улья для поддержания сил и строительства.
-reagent-name-rmclightneurotoxin = легкий нейротоксин
-reagent-desc-rmclightneurotoxin = Ослабленная форма нейротоксина, вызывающая дезориентацию и легкое онемение.
-reagent-name-rmcxenoneurotoxin = нейротоксин
-reagent-desc-rmcxenoneurotoxin = Парализующее вещество, вырабатываемое определенными кастами ксеноморфов. Прямое попадание в кровоток вызывает быстрый паралич.

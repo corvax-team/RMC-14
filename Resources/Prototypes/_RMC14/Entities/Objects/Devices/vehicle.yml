@@ -7,6 +7,7 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
+    mobCollisionDamage: 12 # CCM14
     maxSpeed: 8
     acceleration: 5
     deceleration: 12
@@ -104,8 +105,8 @@
       hardpointType: Wheel
       insertDelay: 1.5
       whitelist:
-        components:
-        - RMCVehicleWheelItem
+        tags:
+        - RMCVehicleHardpointVanWheel
     - id: turret-1
       hardpointType: Turret
       required: false
@@ -113,7 +114,7 @@
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
-    maxIntegrity: 300
+    maxIntegrity: 1000
     repairFuelCost: 10
     bypassEntryOnZero: true
     repairTimePerIntegrity: 0.03
@@ -143,7 +144,6 @@
       radius: 0.75
       interiorCoords: 0.25,-1
 
-
 - type: entity
   id: RMCVehicleCLFVan
   name: CLF van
@@ -153,6 +153,7 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
+    mobCollisionDamage: 12 # CCM14
     maxSpeed: 8
     acceleration: 5
     deceleration: 12
@@ -204,7 +205,7 @@
         - LargeMobLayer
   - type: Damageable
     damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine
+    damageModifierSet: RMCVehicleFrameCLFVan
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
@@ -249,8 +250,8 @@
       hardpointType: Wheel
       insertDelay: 1.5
       whitelist:
-        components:
-        - RMCVehicleWheelItem
+        tags:
+        - RMCVehicleHardpointVanWheel
     - id: turret-1
       hardpointType: Turret
       required: false
@@ -258,7 +259,7 @@
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
-    maxIntegrity: 300
+    maxIntegrity: 1000
     repairFuelCost: 10
     bypassEntryOnZero: true
     repairTimePerIntegrity: 0.03
@@ -297,6 +298,7 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
+    mobCollisionDamage: 12 # CCM14
     maxSpeed: 8
     acceleration: 5
     deceleration: 12
@@ -394,8 +396,8 @@
       hardpointType: Wheel
       insertDelay: 1.5
       whitelist:
-        components:
-        - RMCVehicleWheelItem
+        tags:
+        - RMCVehicleHardpointVanWheel
     - id: turret-1
       hardpointType: Turret
       required: false
@@ -403,7 +405,7 @@
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
-    maxIntegrity: 300
+    maxIntegrity: 1000
     repairFuelCost: 10
     bypassEntryOnZero: true
     repairTimePerIntegrity: 0.03
@@ -442,6 +444,7 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
+    mobCollisionDamage: 12 # CCM14
     maxSpeed: 8
     acceleration: 5
     deceleration: 12
@@ -539,8 +542,8 @@
       hardpointType: Wheel
       insertDelay: 1.5
       whitelist:
-        components:
-        - RMCVehicleWheelItem
+        tags:
+        - RMCVehicleHardpointVanWheel
     - id: turret-1
       hardpointType: Turret
       required: false
@@ -548,7 +551,7 @@
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
-    maxIntegrity: 300
+    maxIntegrity: 1000
     repairFuelCost: 10
     bypassEntryOnZero: true
     repairTimePerIntegrity: 0.03
@@ -604,10 +607,12 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
+    mobCollisionDamage: 40 # CCM14
     maxSpeed: 7
     acceleration: 4
     deceleration: 10
     xenoBlockMinimumSize: Immobile
+    xenoMoveMinimumSize: Immobile
   - type: RMCVehicleOvercharge
     speedMultiplier: 1.4
     duration: 3
@@ -653,7 +658,7 @@
         - LargeMobLayer
   - type: Damageable
     damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine
+    damageModifierSet: RMCVehicleFrameAPC
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
@@ -732,7 +737,7 @@
       required: false
       whitelist:
         tags:
-        - RMCVehicleHardpointTurret
+        - RMCVehicleHardpointAPCTurret
     - id: secondary
       hardpointType: Cannon
       visualLayer: secondary
@@ -740,7 +745,7 @@
       required: false
       whitelist:
         tags:
-        - RMCVehicleHardpointCannon
+        - RMCVehicleHardpointAPCCannon
     - id: support
       hardpointType: SupportAttachment
       visualLayer: support
@@ -748,14 +753,17 @@
       required: false
       whitelist:
         tags:
-        - RMCVehicleHardpointSupportAttachment
+        - RMCVehicleHardpointAPCSupportAttachment
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 1.5
+      whitelist:
+        tags:
+        - RMCVehicleHardpointAPCWheel
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
-    maxIntegrity: 500
+    maxIntegrity: 1000
     repairFuelCost: 15
     bypassEntryOnZero: true
   - type: RMCRepairable
@@ -872,7 +880,8 @@
       interiorCoords: 0.25,-1
 
 - type: entity
-  id: RMCVehicleHumvee
+  id: RMCVehicleHumveeBase
+  abstract: true
   name: humvee
   description: A fast armored utility vehicle outfitted for patrols and support.
   components:
@@ -880,6 +889,7 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
+    mobCollisionDamage: 20 # CCM14
     maxSpeed: 9
     acceleration: 6
     deceleration: 12
@@ -910,7 +920,7 @@
       world:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.425,-1.2,0.425,1.2
+          bounds: -0.7,-1.125,0.7,1.125
         density: 1000
         mask:
         - Impassable
@@ -922,7 +932,7 @@
       mob:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.425,-1.2,0.425,1.2
+          bounds: -0.7,-1.125,0.7,1.125
         density: 1000
         mask:
         - MidImpassable
@@ -930,9 +940,6 @@
         - LargeMobLayer
         layer:
         - LargeMobLayer
-  - type: Damageable
-    damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
@@ -1013,14 +1020,11 @@
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 1.5
+      whitelist:
+        tags:
+        - RMCVehicleHardpointHumveeWheel
   - type: RMCVehicleWheelSlots
     slotCount: 1
-  - type: RMCHardpointIntegrity
-    maxIntegrity: 350
-    repairFuelCost: 12
-    bypassEntryOnZero: true
-    repairTimePerIntegrity: 0.03
-    repairTimeMax: 8
   - type: RMCRepairable
     delay: 8
     heal: 150
@@ -1046,13 +1050,35 @@
       radius: 0.45
       interiorCoords: 2.41,-1.35
 
+- type: entity
+  parent: RMCVehicleHumveeBase
+  id: RMCVehicleHumvee
+  components:
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 1000
+    repairFuelCost: 12
+    bypassEntryOnZero: true
+    repairTimePerIntegrity: 0.03
+    repairTimeMax: 8
 
 - type: entity
-  parent: RMCVehicleHumvee
+  parent: RMCVehicleHumveeBase
   id: RMCVehicleHumveeMedical
   name: humvee (medical)
   description: A medical-configured humvee outfitted for field triage.
   components:
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 1000
+    repairFuelCost: 12
+    bypassEntryOnZero: true
+    repairTimePerIntegrity: 0.03
+    repairTimeMax: 8
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/humvee_medical.rsi
     layers:
@@ -1090,6 +1116,9 @@
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 1.5
+      whitelist:
+        tags:
+        - RMCVehicleHardpointHumveeWheel
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/humvee_medical_interior.yml
     enterDoAfter: 1.0
@@ -1097,26 +1126,34 @@
     maxPassengers: 4
     maxXenos: 2
     entryPoints:
-
     - offset: 0.45,1.6
       radius: 0.5
       interiorCoords: 0.89, -0.57
     - offset: -0.45,1.6
       radius: 0.5
       interiorCoords: 0.89,-1.35
-
     - offset: -1,-0.2
       radius: 0.5
       interiorCoords: 3.01, -1.23
     - offset: 1,-0.2
       radius: 0.5
       interiorCoords: 2.94, -0.44
+
 - type: entity
-  parent: RMCVehicleHumvee
+  parent: RMCVehicleHumveeBase
   id: RMCVehicleHumveeTransport
   name: humvee (transport)
   description: A transport humvee configured for passenger movement.
   components:
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 1000
+    repairFuelCost: 12
+    bypassEntryOnZero: true
+    repairTimePerIntegrity: 0.03
+    repairTimeMax: 8
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/humvee_transport.rsi
     layers:
@@ -1154,6 +1191,9 @@
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 1.5
+      whitelist:
+        tags:
+        - RMCVehicleHardpointHumveeWheel
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/humvee_transport_interior.yml
     enterDoAfter: 1.0
@@ -1167,21 +1207,36 @@
     - offset: -0.45,1.6
       radius: 0.5
       interiorCoords: 1.48,-1.17
-
     - offset: -1,-0.1
       radius: 0.45
       interiorCoords: 3.55, -1.36
-
     - offset: 1,-0.1
       radius: 0.45
       interiorCoords: 3.56,-0.36
 
 - type: entity
-  parent: RMCVehicleHumvee
+  parent: RMCVehicleHumveeBase
   id: RMCVehicleHumveeARC
   name: humvee (arc)
   description: A humvee configured for ARC interior layout.
   components:
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: RMCVehicleFrameARC
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 800
+    repairFuelCost: 12
+    bypassEntryOnZero: true
+    repairTimePerIntegrity: 0.03
+    repairTimeMax: 8
+  - type: RMCHardpointSlots
+    slots:
+    - id: wheel-1
+      hardpointType: Wheel
+      insertDelay: 1.5
+      whitelist:
+        tags:
+        - RMCVehicleHardpointHumveeWheel
   - type: RMCVehicleDeployable
     deployTime: 5
     undeployTime: 5
@@ -1205,7 +1260,6 @@
       radius: 0.5
       interiorCoords: 3.56, -0.42
 
-
 - type: entity
   id: RMCVehicleTank
   name: tank
@@ -1215,6 +1269,7 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
+    mobCollisionDamage: 100 # CCM14
     maxSpeed: 3
     acceleration: 1
     deceleration: 8
@@ -1225,7 +1280,7 @@
     turnInPlaceMaxSpeed: 0.5
     pushCooldown: 2
     xenoBlockMinimumSize: Immobile
-    xenoMoveMinimumSize: Immobile
+    allowXenoPush: false
   - type: RMCVehicleOvercharge
     speedMultiplier: 1.3
     duration: 3
@@ -1271,7 +1326,7 @@
         - LargeMobLayer
   - type: Damageable
     damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine
+    damageModifierSet: RMCVehicleFrameTank
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
@@ -1324,7 +1379,7 @@
         startingItem: RMCVehicleTankTurret
         whitelist:
           tags:
-          - RMCVehicleHardpointTurret
+          - RMCVehicleHardpointTankTurret
       wheel-1:
         startingItem: RMCVehicleTankTreads
         whitelist:
@@ -1359,7 +1414,7 @@
       required: false
       whitelist:
         tags:
-        - RMCVehicleHardpointSupportAttachment
+        - RMCVehicleHardpointTankSupportAttachment
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 2.0
@@ -1375,7 +1430,7 @@
   - type: RMCVehicleWheelSlots
     slotCount: 2
   - type: RMCHardpointIntegrity
-    maxIntegrity: 600
+    maxIntegrity: 400
     repairFuelCost: 20
     bypassEntryOnZero: true
     repairTimePerIntegrity: 0.04

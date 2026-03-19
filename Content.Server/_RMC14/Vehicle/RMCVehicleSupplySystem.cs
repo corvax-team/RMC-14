@@ -1545,12 +1545,15 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
 
         return unlocked;
     }
-// CCM edit start
-private static bool IsEntryUnlocked(RMCVehicleSupplyEntry entry, HashSet<string> unlocked)
-{
-    return true;
-} 
-// CCM edit end
+
+    private static bool IsEntryUnlocked(RMCVehicleSupplyEntry entry, HashSet<string> unlocked)
+    {
+        if (string.IsNullOrWhiteSpace(entry.Unlock))
+            return true;
+
+        return unlocked.Contains(Normalize(entry.Unlock));
+    }
+    
     private IReadOnlyList<string> GetHardpointsForVehicle(string vehicleId, IReadOnlyList<RMCVehicleSupplyEntry> entries)
     {
         var key = Normalize(vehicleId);
