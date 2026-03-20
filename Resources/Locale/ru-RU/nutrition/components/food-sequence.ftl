@@ -77,7 +77,7 @@ food-sequence-content-spacemans-trumpet = космической трубкой
 food-sequence-content-cherry = вишней
 food-sequence-content-snail = улиткой
 food-sequence-content-anomaly-berry = аномальной ягодой
-food-sequence-content-friedegg = fried egg
+food-sequence-content-friedegg = жареным яйцом
 
 # BURGERS
 

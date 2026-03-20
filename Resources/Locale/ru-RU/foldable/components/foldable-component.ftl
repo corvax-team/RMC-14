@@ -8,5 +8,5 @@ unfold-verb = Разложить
 fold-flip-verb = Перевернуть
 fold-zip-verb = Застегнуть
 fold-unzip-verb = Расстегнуть
-fold-strap-verb = Strap on
-fold-unstrap-verb = Unstrap
+fold-strap-verb = Закрепить
+fold-unstrap-verb = Отстегнуть
