@@ -1,11 +1,11 @@
 ent-RMCLadder = лестница
     .desc = Прочная металлическая лестница.
 ent-RMCLadderUp = { ent-RMCLadder }
-    .suffix = Up
+    .suffix = Вверх
     .desc = { ent-RMCLadder.desc }
 ent-RMCLadderThrough = { ent-RMCLadder }
-    .suffix = Through
+    .suffix = Сквозная
     .desc = { ent-RMCLadder.desc }
 ent-RMCLadderHatch = { ent-RMCLadder }
-    .suffix = Hatch
+    .suffix = Люк
     .desc = { ent-RMCLadder.desc }

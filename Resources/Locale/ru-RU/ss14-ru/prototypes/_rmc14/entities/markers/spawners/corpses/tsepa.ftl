@@ -1,5 +1,5 @@
-ent-RMCSpawnerCorpseConstable = Corpse Spawner - TSEPA Constable
+ent-RMCSpawnerCorpseConstable = спавнер трупа — констебль TSEPA
     .desc = { ent-RMCSpawnerCorpse.desc }
-ent-RMCSpawnerCorpseConstableBurst = Corpse Spawner - TSEPA Constable
-    .suffix = RMC14, Burst
+ent-RMCSpawnerCorpseConstableBurst = спавнер трупа — констебль TSEPA
+    .suffix = RMC14, Грудолом
     .desc = { ent-RMCSpawnerCorpseConstable.desc }

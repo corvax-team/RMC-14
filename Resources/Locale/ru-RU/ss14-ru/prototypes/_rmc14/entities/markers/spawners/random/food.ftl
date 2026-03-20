@@ -1,4 +1,4 @@
-ent-RMCDrinkSpawner = Random Drink Spawner
+ent-RMCDrinkSpawner = спавнер случайных напитков
     .desc = { ent-MarkerBase.desc }
-ent-RMCFoodSpawner = Random Food Spawner
+ent-RMCFoodSpawner = спавнер случайной еды
     .desc = { ent-MarkerBase.desc }

@@ -1,12 +1,12 @@
 ent-RMCAreaPVE = { ent-RMCAreaBase }
     .desc = { ent-RMCAreaBase.desc }
-ent-RMCAreaPVEOOB = Out Of Bounds
+ent-RMCAreaPVEOOB = За пределами
     .desc = { ent-RMCAreaPVE.desc }
-ent-RMCAreaPVEOutdoors = Outdoors
+ent-RMCAreaPVEOutdoors = Снаружи
     .desc = { ent-RMCAreaPVE.desc }
-ent-RMCAreaPVELZ = Landing Zone
+ent-RMCAreaPVELZ = Зона высадки
     .desc = { ent-RMCAreaPVEOutdoors.desc }
-ent-RMCAreaPVEIndoors = Indoors
+ent-RMCAreaPVEIndoors = Внутри
     .desc = { ent-RMCAreaPVE.desc }
-ent-RMCAreaPVEShuttle = Shuttle
+ent-RMCAreaPVEShuttle = Шаттл
     .desc = { ent-RMCAreaPVEIndoors.desc }

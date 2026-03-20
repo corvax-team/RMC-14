@@ -1,8 +1,8 @@
-ent-RMCHefaDecalBase = strange paint marks
-    .desc = You think you can make out the iconography of a HEFA grenade.
-    .suffix = Floor
+ent-RMCHefaDecalBase = странные следы краски
+    .desc = Кажется, вы можете разобрать иконографию гранаты HEFA.
+    .suffix = Пол
 ent-RMCHefaDecalWallBase = { ent-RMCHefaDecalBase }
-    .suffix = Wall
+    .suffix = Стена
     .desc = { ent-RMCHefaDecalBase.desc }
 ent-RMCHefaDecal1 = { ent-RMCHefaDecalBase }
     .desc = { ent-RMCHefaDecalBase.desc }

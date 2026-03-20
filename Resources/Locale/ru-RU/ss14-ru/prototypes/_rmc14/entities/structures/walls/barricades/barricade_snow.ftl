@@ -1,2 +1,2 @@
-ent-RMCBarricadeSnow = snow barricade
-    .desc = A mound of snow shaped into a sloped wall. Statistically better than thin air as cover.
+ent-RMCBarricadeSnow = снежная баррикада
+    .desc = Насыпь из снега, сложенная в виде наклонной стены. Статистически это лучшее укрытие, чем пустота.

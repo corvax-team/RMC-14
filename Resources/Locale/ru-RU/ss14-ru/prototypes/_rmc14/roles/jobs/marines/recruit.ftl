@@ -1,2 +1,2 @@
-ent-RMCSpawnPointRecruit = recruit spawn point
+ent-RMCSpawnPointRecruit = точка появления новобранца
     .desc = { ent-CMSpawnPointJobBase.desc }

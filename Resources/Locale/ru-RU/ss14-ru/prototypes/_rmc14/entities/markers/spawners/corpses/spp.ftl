@@ -1,2 +1,2 @@
-ent-RMCSpawnerCorpseSPPSoldier = Corpse Spawner - SPP Soldier
+ent-RMCSpawnerCorpseSPPSoldier = спавнер трупа — солдат SPP
     .desc = { ent-RMCSpawnerCorpse.desc }

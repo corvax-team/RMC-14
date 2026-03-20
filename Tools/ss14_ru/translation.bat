@@ -1,9 +1,11 @@
-﻿@echo off
+@echo off
+chcp 65001 >nul
 
-call pip install -r requirements.txt --no-warn-script-location
-call python ./yamlextractor.py
-call python ./keyfinder.py
-call python ./clean_duplicates.py
-call python ./clean_empty.py
+py -m pip install --upgrade typing_extensions pydash PyYAML chardet fluent
 
-PAUSE
+py yamlextractor.py
+py keyfinder.py
+py clean_duplicates.py
+py clean_empty.py
+
+pause

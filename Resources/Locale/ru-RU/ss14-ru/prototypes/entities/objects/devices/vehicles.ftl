@@ -1,6 +1,6 @@
 ent-BaseVehicleStrap = { "" }
     .desc = { "" }
-ent-VehicleJanicart = janicart
-    .desc = The janitor's trusty steed.
-ent-VehicleKeyJanicart = janicart keys
-    .desc = Interesting design.
+ent-VehicleJanicart = уборочная машина
+    .desc = Верный скакун уборщика.
+ent-VehicleKeySecway = ключ от секвея
+    .desc = Ключи к будущему.

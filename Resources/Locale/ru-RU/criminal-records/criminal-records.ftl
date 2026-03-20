@@ -15,20 +15,19 @@ criminal-records-status-wanted = Разыскивается
 criminal-records-status-detained = Под арестом
 criminal-records-status-suspected = Подозревается
 criminal-records-status-discharged = Освобождён
-criminal-records-status-paroled = Освобождён по УДО
-criminal-records-console-wanted-reason = Причина розыска
-criminal-records-console-suspected-reason = Причина подозрения
+criminal-records-console-wanted-reason = [color=gray]Причина розыска[/color]
+criminal-records-console-suspected-reason = [color=gray]Причина подозрения[/color]
 criminal-records-console-reason = Причина
 criminal-records-console-reason-placeholder = Пример: { $placeholder }
 
 ## Crime History
 
 criminal-records-console-crime-history = История преступлений
-criminal-records-history-placeholder = Впишите сюда преступление
-criminal-records-no-history = У этого сотрудника безупречный послужной список.
+criminal-records-history-placeholder = Напишите о преступлении здесь
+criminal-records-no-history = История преступлений данного члена экипажа чиста.
 criminal-records-add-history = Добавить
 criminal-records-delete-history = Удалить
-criminal-records-permission-denied = Отказано в доступе
+criminal-records-permission-denied = В доступе отказано!
 
 ## Security channel notifications
 
@@ -48,8 +47,8 @@ criminal-records-filter-placeholder = Введите текст и нажмит�
 criminal-records-name-filter = Имя
 criminal-records-prints-filter = Отпечатки пальцев
 criminal-records-dna-filter = ДНК
-criminal-records-job-filter = Job
-criminal-records-species-filter = Species
+criminal-records-job-filter = Должность
+criminal-records-species-filter = Раса
 
 ## Arrest auto history lines
 

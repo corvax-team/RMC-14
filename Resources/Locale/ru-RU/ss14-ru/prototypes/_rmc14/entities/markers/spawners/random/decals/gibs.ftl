@@ -1,9 +1,9 @@
 ent-RMCDecalSpawnerGibsBase = { ent-DecalSpawnerBase }
-    .suffix = RMC14, Gibs
+    .suffix = RMC14, Останки
     .desc = { ent-DecalSpawnerBase.desc }
-ent-RMCDecalSpawnerGibsDrone = gibs spawner
-    .suffix = RMC14, Drone
+ent-RMCDecalSpawnerGibsDrone = спавнер останков
+    .suffix = RMC14, Дрон
     .desc = { ent-RMCDecalSpawnerGibsBase.desc }
-ent-RMCDecalSpawnerGibsLesserDrone = gibs spawner
-    .suffix = RMC14, Lesser Drone
+ent-RMCDecalSpawnerGibsLesserDrone = спавнер останков
+    .suffix = RMC14, Малый дрон
     .desc = { ent-RMCDecalSpawnerGibsBase.desc }

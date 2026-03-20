@@ -1,6 +1,6 @@
-ent-RMCItemPoolBase = survivor ammo pool
-    .suffix = Base
+ent-RMCItemPoolBase = пул патронов выживших
+    .suffix = Базовый
     .desc = { ent-MarkerBase.desc }
-ent-RMCItemPoolBuckshot = survivor ammo pool
-    .suffix = Buckshot
+ent-RMCItemPoolBuckshot = пул патронов выживших
+    .suffix = Картечь
     .desc = { ent-RMCItemPoolBase.desc }

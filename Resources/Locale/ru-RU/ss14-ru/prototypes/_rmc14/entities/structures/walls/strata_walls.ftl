@@ -8,5 +8,5 @@ ent-RMCWallStrataIce = ледяные столбы
     .desc = Огромнейшая коллекция колонн изо льда. Чем дольше смотришь, тем глубже кажется лед.
 ent-RMCWallStrataIceDirty = { ent-RMCWallStrataIce }
     .desc = { ent-RMCWallStrataIce.desc }
-ent-RMCWallStrataRock = rock wall
-    .desc = A rough wall of hardened rock.
+ent-RMCWallStrataRock = каменная стена
+    .desc = Грубая стена из твердой породы.

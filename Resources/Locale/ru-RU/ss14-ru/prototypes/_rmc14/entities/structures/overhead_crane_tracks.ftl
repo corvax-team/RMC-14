@@ -1,5 +1,5 @@
-ent-RMCOverheadCraneTracks = cargo crane track
-    .desc = A track for a cargo crane to move along.
+ent-RMCOverheadCraneTracks = рельсы грузового крана
+    .desc = Рельсы, по которым перемещается грузовой кран.
 ent-RMCOverheadCraneTrack1 = { ent-RMCOverheadCraneTracks }
     .desc = { ent-RMCOverheadCraneTracks.desc }
 ent-RMCOverheadCraneTrack2 = { ent-RMCOverheadCraneTracks }
