@@ -34,7 +34,10 @@ highlights-chef = шеф, повар, кухн
 highlights-clown = клоун, клун
 highlights-janitor = уборщик
 highlights-lawyer = адвокат, юрист
+# Station-specific
+highlights-boxer = Boxer
 highlights-librarian = библиотекар, библиотека
+highlights-zookeeper = Zookeeper
 highlights-mime = мим
 highlights-passenger = пассажир, грейтайдер, "тайдер"
 highlights-service-worker = сервисный работник, сервисник
