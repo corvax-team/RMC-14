@@ -337,8 +337,8 @@ rmc-job-name-survivor-shivas-liaison = Корпоративный связной
 rmc-job-name-survivor-shivas-doctor = Доктор Шивы
 rmc-job-name-survivor-shivas-researcher = Учёный Шивы
 rmc-job-name-survivor-shivas-engineer = Инженер Шивы
-rmc-job-name-survivor-shivas-weya-commando = Weston-Yamada Commando
-rmc-job-name-survivor-shivas-assman = Assistant Operations Manager
+rmc-job-name-survivor-shivas-weya-commando = Коммандос Vitezstvi
+rmc-job-name-survivor-shivas-assman = Ассистент Куратора Подразделения
 rmc-job-greeting-shivas-assistant-manager =
     Вы - последний выживший менеджер на колонии!
     
