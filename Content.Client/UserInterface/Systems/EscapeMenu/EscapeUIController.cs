@@ -1,8 +1,6 @@
-﻿using Content.Client._RMC14.LinkAccount;
-using Content.Client._RMC14.Roadmap;
-using Content.Client.Credits;
 using Content.Client.Gameplay;
 using Content.Client._CCM.Achievements;
+using Content.Client._CCM.Sponsorship;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Client.UserInterface.Systems.Info;
@@ -27,12 +25,11 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
     [Dependency] private readonly IClientConsoleHost _console = default!;
     [Dependency] private readonly IUriOpener _uri = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ChangelogUIController _changelog = default!;
     [Dependency] private readonly InfoUIController _info = default!;
     [Dependency] private readonly OptionsUIController _options = default!;
     [Dependency] private readonly GuidebookUIController _guidebook = default!;
     [Dependency] private readonly CCMAchievementsUIController _achievements = default!;
-    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+    [Dependency] private readonly CCMSponsorshipUIController _sponsorship = default!;
     [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
 
     private Options.UI.EscapeMenu? _escapeWindow;
@@ -41,22 +38,13 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
 
     public override void Initialize()
     {
-        // CCM rework lobby - start
         _contentLoc.CultureChanged += OnCultureChanged;
-        // CCM rework lobby - end
-        _linkAccount.Updated += () =>
-        {
-            if (_escapeWindow != null)
-                _escapeWindow.PatronPerksButton.Visible = _linkAccount.CanViewPatronPerks();
-        };
     }
 
     public void UnloadButton()
     {
         if (EscapeButton == null)
-        {
             return;
-        }
 
         EscapeButton.Pressed = false;
         EscapeButton.OnPressed -= EscapeButtonOnOnPressed;
@@ -65,9 +53,7 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
     public void LoadButton()
     {
         if (EscapeButton == null)
-        {
             return;
-        }
 
         EscapeButton.OnPressed += EscapeButtonOnOnPressed;
     }
@@ -81,15 +67,13 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
         CreateEscapeWindow();
 
         CommandBinds.Builder
-            .Bind(EngineKeyFunctions.EscapeMenu,
-                InputCmdHandler.FromDelegate(_ => ToggleWindow()))
+            .Bind(EngineKeyFunctions.EscapeMenu, InputCmdHandler.FromDelegate(_ => ToggleWindow()))
             .Register<EscapeUIController>();
     }
 
     public void OnStateExited(GameplayState state)
     {
         DestroyEscapeWindow();
-
         CommandBinds.Unregister<EscapeUIController>();
     }
 
@@ -103,9 +87,6 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
         _escapeWindow?.Close();
     }
 
-    /// <summary>
-    /// Toggles the game menu.
-    /// </summary>
     public void ToggleWindow()
     {
         if (_escapeWindow == null)
@@ -123,7 +104,6 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
         }
     }
 
-    // CCM rework lobby - start
     private void OnCultureChanged(string _)
     {
         if (_escapeWindow == null)
@@ -145,20 +125,6 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
         _escapeWindow = UIManager.CreateWindow<Options.UI.EscapeMenu>();
         _escapeWindow.OnClose += DeactivateButton;
         _escapeWindow.OnOpen += ActivateButton;
-
-        // Removed Changelog/Credits buttons from EscapeMenu.
-        _escapeWindow.PatronPerksButton.Visible = _linkAccount.CanViewPatronPerks();
-        _escapeWindow.PatronPerksButton.OnPressed += _ =>
-        {
-            CloseEscapeWindow();
-            UIManager.GetUIController<LinkAccountUIController>().TogglePatronPerksWindow();
-        };
-
-        _escapeWindow.RoadmapButton.OnPressed += _ =>
-        {
-            CloseEscapeWindow();
-            UIManager.GetUIController<RoadmapUIController>().ToggleRoadmap();
-        };
 
         _escapeWindow.RulesButton.OnPressed += _ =>
         {
@@ -200,7 +166,14 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
             _achievements.OpenWindow();
         };
 
-        _escapeWindow.WikiButton.Visible = _cfg.GetCVar(CCVars.InfoLinksWiki) != "https://station14.ru/wiki/%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D0%BB:Colonial_Marines";
+        _escapeWindow.SponsorshipButton.OnPressed += _ =>
+        {
+            CloseEscapeWindow();
+            _sponsorship.OpenWindow();
+        };
+
+        _escapeWindow.WikiButton.Visible =
+            _cfg.GetCVar(CCVars.InfoLinksWiki) != "https://station14.ru/wiki/%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D0%BB:Colonial_Marines";
     }
 
     private void DestroyEscapeWindow()
@@ -211,5 +184,4 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
         _escapeWindow.Dispose();
         _escapeWindow = null;
     }
-    // CCM rework lobby - end
 }

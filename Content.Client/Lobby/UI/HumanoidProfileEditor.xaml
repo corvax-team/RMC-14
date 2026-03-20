@@ -118,11 +118,6 @@
                                     <OptionButton Name="SpawnPriorityButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <BoxContainer HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-preferred-armor-label'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <OptionButton Name="ArmorPreferenceButton" HorizontalAlignment="Right" />
-                                </BoxContainer>
-                                <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-enable-playtime-perks'}" />
                                     <Control HorizontalExpand="True"/>
                                     <Button Name="PlaytimePerksButton" Pressed="True" ToggleMode="True"

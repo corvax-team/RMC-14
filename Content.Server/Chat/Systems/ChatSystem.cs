@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using Content.Server._CCM.Sponsorship;
 using Content.Server._RMC14.Admin;
 using Content.Server._RMC14.Chat.Chat;
 using Content.Server._RMC14.Emote;
@@ -74,6 +75,8 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly RMCEmoteSystem _rmcEmote = default!;
     [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
     [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
+    [Dependency] private readonly CCMCustomizationManager _ccmCustomization = default!;
+    [Dependency] private readonly CCMSponsorshipManager _ccmSponsorship = default!;
 
     // RMC14
     [Dependency] private readonly RMCChatBansManager _rmcChatBans = default!;
@@ -799,7 +802,24 @@ public sealed partial class ChatSystem : SharedChatSystem
         string WrapForCurrentCulture() => Loc.GetString("chat-manager-entity-looc-wrap-message",
             ("entityName", name),
             ("message", FormattedMessage.EscapeText(message)));
-        var wrappedMessage = WrapForCurrentCulture();
+        string WrapSponsorForCurrentCulture(string color) => Loc.GetString("chat-manager-entity-looc-sponsor-wrap-message",
+            ("sponsorColor", color),
+            ("entityName", name),
+            ("message", FormattedMessage.EscapeText(message)));
+
+        string WrapForChannel(INetChannel channel)
+        {
+            return WithChannelCulture(channel, () =>
+            {
+                if (_ccmCustomization.TryGetChatColorHex(player.UserId, true, out var customColor))
+                    return WrapSponsorForCurrentCulture(customColor);
+
+                if (_ccmSponsorship.TryGetChatColorHex(player.UserId, true, out var sponsorColor))
+                    return WrapSponsorForCurrentCulture(sponsorColor);
+
+                return WrapForCurrentCulture();
+            });
+        }
 
         SendInVoiceRange(
             ChatChannel.LOOC,
@@ -807,8 +827,8 @@ public sealed partial class ChatSystem : SharedChatSystem
             source,
             hideChat ? ChatTransmitRange.HideChat : ChatTransmitRange.Normal,
             player.UserId,
-            wrappedMessage,
-            channel => WithChannelCulture(channel, WrapForCurrentCulture));
+            WrapForChannel(player.Channel),
+            WrapForChannel);
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"LOOC from {player:Player}: {message}");
     }
 

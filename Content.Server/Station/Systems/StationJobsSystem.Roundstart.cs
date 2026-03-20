@@ -464,9 +464,10 @@ public sealed partial class StationJobsSystem
     }
 
     private const float BaseFirstOrderWeight = 1f;
-    private const float MissedRoundWeight = 1f;
+    private const float MissedRoundWeight = 0.5f;
     private const float RecentRolePenalty = -0.25f;
     private const float SessionMinutesPerBonus = 60f;
+    private const float MaxSessionBonus = 1.5f;
     private const float MinFirstOrderWeight = 0.1f;
 
     private readonly Dictionary<(NetUserId UserId, int Slot, ProtoId<JobPrototype> JobId), FirstOrderWeightOverride>
@@ -596,8 +597,9 @@ public sealed partial class StationJobsSystem
 
         sessionMinutes = GetSessionMinutesOverride(user, sessionMinutes);
         var sessionBonusSteps = (int) MathF.Floor(MathF.Min(sessionMinutes, 360f) / SessionMinutesPerBonus);
-        if (sessionBonusSteps > 0)
-            weight += sessionBonusSteps * (MissedRoundWeight / 3f);
+        var sessionBonus = sessionBonusSteps > 0 ? MathF.Min(sessionBonusSteps * (MissedRoundWeight / 3f), MaxSessionBonus) : 0f;
+        if (sessionBonus > 0f)
+            weight += sessionBonus;
 
         weight += GetExternalWeightModifier(user);
         return MathF.Max(weight, MinFirstOrderWeight);
@@ -617,7 +619,7 @@ public sealed partial class StationJobsSystem
 
         sessionMinutes = GetSessionMinutesOverride(user, sessionMinutes);
         var sessionBonusSteps = (int) MathF.Floor(MathF.Min(sessionMinutes, 360f) / SessionMinutesPerBonus);
-        var sessionBonus = sessionBonusSteps > 0 ? sessionBonusSteps * (MissedRoundWeight / 3f) : 0f;
+        var sessionBonus = sessionBonusSteps > 0 ? MathF.Min(sessionBonusSteps * (MissedRoundWeight / 3f), MaxSessionBonus) : 0f;
 
         var externalBonus = GetExternalWeightModifier(user);
         var total = baseWeight + missedWeight + recentPenalty + sessionBonus + externalBonus;

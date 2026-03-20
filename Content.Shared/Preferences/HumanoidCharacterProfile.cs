@@ -302,7 +302,7 @@ namespace Content.Shared.Preferences
                 Gender.Male,
                 HumanoidCharacterAppearance.DefaultWithSpecies(species),
                 SpawnPriorityPreference.None,
-                ArmorPreference.Random,
+                ArmorPreference.None,
                 null,
                 new() { { SharedGameTicker.FallbackOverflowJob, JobPriority.First } },
                 PreferenceUnavailableMode.SpawnAsOverflow,
@@ -384,7 +384,7 @@ namespace Content.Shared.Preferences
                 gender,
                 HumanoidCharacterAppearance.Random(species, sex),
                 SpawnPriorityPreference.None,
-                ArmorPreference.Random,
+                ArmorPreference.None,
                 null,
                 new() { { SharedGameTicker.FallbackOverflowJob, JobPriority.First } },
                 PreferenceUnavailableMode.SpawnAsOverflow,
@@ -799,14 +799,15 @@ namespace Content.Shared.Preferences
 
             var armorPreference = ArmorPreference switch
             {
-                ArmorPreference.Random => ArmorPreference.Random,
+                ArmorPreference.Random => ArmorPreference.None,
                 ArmorPreference.Padded => ArmorPreference.Padded,
                 ArmorPreference.Padless => ArmorPreference.Padless,
                 ArmorPreference.Ridged => ArmorPreference.Ridged,
                 ArmorPreference.Carrier => ArmorPreference.Carrier,
                 ArmorPreference.Skull => ArmorPreference.Skull,
                 ArmorPreference.Smooth => ArmorPreference.Smooth,
-                _ => ArmorPreference.Random // Invalid enum values.
+                ArmorPreference.None => ArmorPreference.None,
+                _ => ArmorPreference.None // Invalid enum values.
             };
 
             ArmorPreference = armorPreference;

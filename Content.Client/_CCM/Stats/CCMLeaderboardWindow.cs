@@ -60,7 +60,7 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
         WindowTitleLabel.Visible = false;
         HeaderPanel.MinSize = new Vector2(0, 26);
         HeaderPanel.Margin = new Thickness(10, 6, 10, 0);
-        BodyPanel.Margin = new Thickness(10, 0, 10, 10);
+        BodyPanel.Margin = new Thickness(10, -1, 10, 10);
 
         var root = new BoxContainer
         {

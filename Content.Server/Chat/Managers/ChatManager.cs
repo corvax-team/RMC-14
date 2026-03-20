@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System;
 using System.Threading;
 using Content.Server._RMC14.Admin;
+using Content.Server._CCM.Sponsorship;
 using Content.Server._RMC14.Discord;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server._RMC14.Mentor;
@@ -60,6 +61,8 @@ internal sealed partial class ChatManager : IChatManager
 
     // RMC14
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+    [Dependency] private readonly CCMCustomizationManager _ccmCustomization = default!;
+    [Dependency] private readonly CCMSponsorshipManager _ccmSponsorship = default!;
     [Dependency] private readonly RMCDiscordManager _discord = default!;
     [Dependency] private readonly MentorManager _mentor = default!;
     [Dependency] private readonly RMCChatBansManager _rmcChatBans = default!;
@@ -444,13 +447,15 @@ internal sealed partial class ChatManager : IChatManager
         }
 
         Color? colorOverride = null;
+        var displayName = BuildOocDisplayName(player);
+
         string WrapOocForCurrentCulture() => Loc.GetString("chat-manager-send-ooc-wrap-message",
-            ("playerName",player.Name),
+            ("playerName", FormattedMessage.EscapeText(displayName)),
             ("message", FormattedMessage.EscapeText(message)));
 
         string WrapPatronForCurrentCulture(string color) => Loc.GetString("chat-manager-send-ooc-patron-wrap-message",
             ("patronColor", color),
-            ("playerName", player.Name),
+            ("playerName", FormattedMessage.EscapeText(displayName)),
             ("message", FormattedMessage.EscapeText(message)));
 
         var replayWrappedMessage = WrapOocForCurrentCulture();
@@ -463,12 +468,11 @@ internal sealed partial class ChatManager : IChatManager
         {
             var wrappedMessage = WithChannelCulture(session.Channel, () =>
             {
-                if (_netConfigManager.GetClientCVar(session.Channel, CCVars.ShowOocPatronColor) &&
-                    _linkAccount.GetConnectedPatron(player)?.Tier != null)
-                {
-                    var color = _linkAccount.GetPatronOOCHexColor(player.Channel.UserId);
-                    return WrapPatronForCurrentCulture($"{color}");
-                }
+                if (_ccmCustomization.TryGetChatColorHex(player.UserId, false, out var customColor))
+                    return WrapPatronForCurrentCulture(customColor);
+
+                if (_ccmSponsorship.TryGetChatColorHex(player.UserId, false, out var sponsorColor))
+                    return WrapPatronForCurrentCulture(sponsorColor);
 
                 return WrapOocForCurrentCulture();
             });
@@ -487,6 +491,14 @@ internal sealed partial class ChatManager : IChatManager
         _replay.RecordServerMessage(new ChatMessage(ChatChannel.OOC, message, replayWrappedMessage, NetEntity.Invalid, EnsurePlayer(player.UserId)?.Key, false, colorOverride, speechStyleClass: null, repeatCheckSender: true));
         _discordLink.SendMessage(message, player.Name, ChatChannel.OOC);
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"OOC from {player:Player}: {message}");
+    }
+
+    private string BuildOocDisplayName(ICommonSession player)
+    {
+        if (!_ccmCustomization.TryGetOocTagText(player.UserId, out var tagText))
+            return player.Name;
+
+        return $"[{tagText}] {player.Name}";
     }
 
     private void SendAdminChat(ICommonSession player, string message)

@@ -13,6 +13,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Shared.IoC;
 using Robust.Shared.Input;
 using Robust.Shared.Localization;
+using Robust.Shared.Utility;
 
 namespace Content.Client._CCM.Achievements;
 
@@ -57,7 +58,7 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
         WindowTitleLabel.FontOverride = _windowTitleFont;
         HeaderPanel.MinSize = new Vector2(0, 26);
         HeaderPanel.Margin = new Thickness(10, 6, 10, 0);
-        BodyPanel.Margin = new Thickness(10, 0, 10, 10);
+        BodyPanel.Margin = new Thickness(10, -1, 10, 10);
 
         var root = new BoxContainer
         {
@@ -309,14 +310,13 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
         top.AddChild(status);
         content.AddChild(top);
 
-        content.AddChild(new Label
+        var description = new RichTextLabel
         {
-            Text = Loc.GetString(achievement.DescriptionKey),
-            FontOverride = _bodyFont,
-            FontColorOverride = Color.FromHex("#D7E1EB"),
-            ClipText = false,
             HorizontalExpand = true,
-        });
+            MaxWidth = 540,
+        };
+        description.SetMessage(FormattedMessage.FromMarkupOrThrow($"[color=#D7E1EB]{Loc.GetString(achievement.DescriptionKey)}[/color]"));
+        content.AddChild(description);
 
         var progressLabel = new Label
         {

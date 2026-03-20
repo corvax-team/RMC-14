@@ -82,7 +82,7 @@ namespace Content.Client.Chat.UI
                     return new FancyTextSpeechBubble(message, senderEntity, "whisperBox");
 
                 case SpeechType.Looc:
-                    return new TextSpeechBubble(message, senderEntity, "emoteBox", Color.FromHex("#48d1cc"));
+                    return new TextSpeechBubble(message, senderEntity, "emoteBox");
 
                 default:
                     throw new ArgumentOutOfRangeException();

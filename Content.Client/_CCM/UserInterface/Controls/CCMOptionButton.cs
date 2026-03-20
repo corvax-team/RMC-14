@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 using Content.Client.Resources;
 using Content.Client.Stylesheets;
@@ -16,6 +17,8 @@ namespace Content.Client._CCM.UserInterface.Controls;
 public sealed class CCMOptionButton : OptionButton
 {
     private readonly Font _itemFont;
+    private readonly Dictionary<int, Button> _itemButtons = new();
+    private readonly Dictionary<int, Color> _itemColors = new();
     private Label? _selectedLabel;
     private TextureRect? _triangleRect;
     private float _widestItemWidth;
@@ -52,29 +55,32 @@ public sealed class CCMOptionButton : OptionButton
 
     public override void ButtonOverride(Button button)
     {
+        if (ItemCount > 0)
+            _itemButtons[GetItemId(ItemCount - 1)] = button;
+
         button.MinSize = new Vector2(0, 32);
         button.Margin = new Thickness(0, 2, 0, 0);
         button.Label.FontOverride = _itemFont;
         button.Label.FontColorOverride = Color.FromHex("#D7E1EB");
         button.Label.Align = Label.AlignMode.Center;
 
-        ApplyItemStyle(button, false);
+        ApplyButtonColor(button, GetItemColor(ItemCount > 0 ? GetItemId(ItemCount - 1) : -1));
 
-        button.OnMouseEntered += _ => ApplyItemStyle(button, true);
-        button.OnMouseExited += _ => ApplyItemStyle(button, false);
+        button.OnMouseEntered += _ => ApplyButtonColor(button, GetButtonColor(button), hovered: true);
+        button.OnMouseExited += _ => ApplyButtonColor(button, GetButtonColor(button));
         button.OnKeyBindDown += args =>
         {
             if (args.Function != EngineKeyFunctions.UIClick)
                 return;
 
-            ApplyItemStyle(button, true, true);
+            ApplyButtonColor(button, GetButtonColor(button), hovered: true, pressed: true);
         };
         button.OnKeyBindUp += args =>
         {
             if (args.Function != EngineKeyFunctions.UIClick)
                 return;
 
-            ApplyItemStyle(button, false);
+            ApplyButtonColor(button, GetButtonColor(button));
         };
 
         button.Measure(Vector2Helpers.Infinity);
@@ -83,7 +89,17 @@ public sealed class CCMOptionButton : OptionButton
         ApplyCollapsedStyle();
     }
 
-    private static void ApplyItemStyle(Button button, bool hovered, bool pressed = false)
+    public void SetItemTextColor(int id, Color color)
+    {
+        _itemColors[id] = color;
+
+        if (_itemButtons.TryGetValue(id, out var button))
+            ApplyButtonColor(button, color);
+
+        ApplyCollapsedStyle();
+    }
+
+    private static void ApplyButtonColor(Button button, Color? itemColor, bool hovered = false, bool pressed = false)
     {
         var selected = button.Pressed;
         button.StyleBoxOverride = new StyleBoxFlat
@@ -109,21 +125,26 @@ public sealed class CCMOptionButton : OptionButton
 
         button.Label.FontColorOverride = selected || pressed
             ? Color.Black
-            : hovered
+            : itemColor ?? (hovered
                 ? StyleNano.LobbyMenuButtonBase
-                : Color.FromHex("#D7E1EB");
+                : Color.FromHex("#D7E1EB"));
     }
 
     private void ApplyCollapsedStyle(bool hovered = false, bool pressed = false)
     {
+        _itemColors.TryGetValue(SelectedId, out var itemColor);
+        var hasItemColor = _itemColors.ContainsKey(SelectedId);
+
         if (_selectedLabel != null)
         {
             _selectedLabel.FontOverride = _itemFont;
             _selectedLabel.FontColorOverride = pressed
                 ? Color.Black
-                : hovered
-                    ? StyleNano.LobbyMenuButtonBase
-                    : Color.FromHex("#D7E1EB");
+                : hasItemColor
+                    ? itemColor
+                    : hovered
+                        ? StyleNano.LobbyMenuButtonBase
+                        : Color.FromHex("#D7E1EB");
             _selectedLabel.Align = Label.AlignMode.Center;
         }
 
@@ -131,10 +152,36 @@ public sealed class CCMOptionButton : OptionButton
         {
             _triangleRect.ModulateSelfOverride = pressed
                 ? Color.Black
-                : hovered
-                    ? StyleNano.LobbyMenuButtonBase
-                    : Color.FromHex("#D7E1EB");
+                : hasItemColor
+                    ? itemColor
+                    : hovered
+                        ? StyleNano.LobbyMenuButtonBase
+                        : Color.FromHex("#D7E1EB");
         }
+
+        foreach (var (id, button) in _itemButtons)
+        {
+            _itemColors.TryGetValue(id, out var color);
+            ApplyButtonColor(button, _itemColors.ContainsKey(id) ? color : null);
+        }
+    }
+
+    private Color? GetButtonColor(Button button)
+    {
+        foreach (var (id, itemButton) in _itemButtons)
+        {
+            if (itemButton != button)
+                continue;
+
+            return GetItemColor(id);
+        }
+
+        return null;
+    }
+
+    private Color? GetItemColor(int id)
+    {
+        return _itemColors.TryGetValue(id, out var color) ? color : null;
     }
 
     private static T? FindChild<T>(Robust.Client.UserInterface.Control root, Predicate<T> predicate)

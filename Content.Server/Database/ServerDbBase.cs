@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.IP;
 using Content.Shared._CCM.Achievements;
+using Content.Shared._CCM.Sponsorship;
 using Content.Shared._CCM.Stats;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared.Administration.Logs;
@@ -24,6 +26,8 @@ using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
 using Content.Shared.Traits;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.Sqlite;
+using System.Data.Common;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -31,6 +35,10 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Database
 {
+    public sealed record CCMStoredSponsorshipRecord(
+        CCMSponsorshipTier Tier,
+        long ExpirationUnixSeconds);
+
     public abstract class ServerDbBase
     {
         private readonly ISawmill _opsLog;
@@ -2242,6 +2250,55 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             return ToCCMAchievementStatsSnapshot(stats);
         }
 
+        public async Task<CCMCustomizationSnapshot> GetCCMCustomization(Guid player)
+        {
+            await using var db = await GetDb();
+            await EnsureCCMCustomizationCompatibility(db.DbContext);
+            var customization = await db.DbContext.CCMPlayerCustomization
+                .FirstOrDefaultAsync(s => s.PlayerId == player);
+
+            return ToCCMCustomizationSnapshot(customization);
+        }
+
+        public async Task<CCMStoredSponsorshipRecord?> GetCCMStoredSponsorship(Guid player)
+        {
+            await using var db = await GetDb();
+            await EnsureCCMSponsorshipStorage(db.DbContext);
+
+            var connection = db.DbContext.Database.GetDbConnection();
+            var shouldClose = connection.State != System.Data.ConnectionState.Open;
+            if (shouldClose)
+                await connection.OpenAsync();
+
+            try
+            {
+                await using var command = connection.CreateCommand();
+                command.CommandText = @"
+SELECT tier, expiration_unix_seconds
+FROM ccm_player_sponsorship
+WHERE player_id = $player
+LIMIT 1";
+
+                var playerParameter = command.CreateParameter();
+                playerParameter.ParameterName = "$player";
+                playerParameter.Value = player.ToString();
+                command.Parameters.Add(playerParameter);
+
+                await using var reader = await command.ExecuteReaderAsync();
+                if (!await reader.ReadAsync())
+                    return null;
+
+                var tier = (CCMSponsorshipTier) Convert.ToInt32(reader.GetValue(0));
+                var expiration = Convert.ToInt64(reader.GetValue(1));
+                return new CCMStoredSponsorshipRecord(tier, expiration);
+            }
+            finally
+            {
+                if (shouldClose)
+                    await connection.CloseAsync();
+            }
+        }
+
         public async Task AdjustCCMPlayerAchievementStats(
             Guid player,
             int friendlyFireDamageDelta = 0,
@@ -2286,6 +2343,254 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             stats.UnlockedAchievementIds = unlockedAchievementIds;
 
             await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task SaveCCMCustomization(Guid player, CCMCustomizationSnapshot snapshot)
+        {
+            await using var db = await GetDb();
+            await EnsureCCMCustomizationCompatibility(db.DbContext);
+
+            var customization = await db.DbContext.CCMPlayerCustomization
+                .FirstOrDefaultAsync(s => s.PlayerId == player);
+
+            customization ??= db.DbContext.CCMPlayerCustomization
+                .Add(new CCMPlayerCustomization { PlayerId = player })
+                .Entity;
+
+            foreach (var selection in snapshot.Selections)
+            {
+                switch (selection.SlotId)
+                {
+                    case "xeno_defender":
+                        customization.XenoDefenderSkinId = selection.ValueId;
+                        break;
+                    case "xeno_drone":
+                        customization.XenoDroneSkinId = selection.ValueId;
+                        break;
+                    case "xeno_queen":
+                        customization.XenoQueenSkinId = selection.ValueId;
+                        break;
+                    case "xeno_runner":
+                        customization.XenoRunnerSkinId = selection.ValueId;
+                        break;
+                    case "xeno_sentinel":
+                        customization.XenoSentinelSkinId = selection.ValueId;
+                        break;
+                    case "ghost":
+                        customization.GhostSkinId = selection.ValueId;
+                        break;
+                    case "weapon_spray":
+                        customization.WeaponSprayId = selection.ValueId;
+                        break;
+                    case "armor_palette":
+                        customization.ArmorPaletteId = selection.ValueId;
+                        break;
+                    case "armor_variant":
+                        customization.ArmorVariantId = selection.ValueId;
+                        break;
+                    case "armor_paint":
+                        customization.ArmorPaintId = selection.ValueId;
+                        break;
+                }
+            }
+
+            customization.SelectedOocTagId = snapshot.SelectedOocTagId;
+            customization.CustomOocTagText = snapshot.CustomOocTagText;
+            customization.SelectedOocColorId = snapshot.SelectedOocColorId;
+            customization.SelectedLoocColorId = snapshot.SelectedLoocColorId;
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task SaveCCMStoredSponsorship(Guid player, CCMSponsorshipTier tier, long expirationUnixSeconds)
+        {
+            await using var db = await GetDb();
+            await EnsureCCMSponsorshipStorage(db.DbContext);
+
+            var connection = db.DbContext.Database.GetDbConnection();
+            var shouldClose = connection.State != System.Data.ConnectionState.Open;
+            if (shouldClose)
+                await connection.OpenAsync();
+
+            try
+            {
+                await using var command = connection.CreateCommand();
+
+                if (tier == CCMSponsorshipTier.None || expirationUnixSeconds <= 0)
+                {
+                    command.CommandText = "DELETE FROM ccm_player_sponsorship WHERE player_id = $player";
+                    var deletePlayerParameter = command.CreateParameter();
+                    deletePlayerParameter.ParameterName = "$player";
+                    deletePlayerParameter.Value = player.ToString();
+                    command.Parameters.Add(deletePlayerParameter);
+                    await command.ExecuteNonQueryAsync();
+                    return;
+                }
+
+                command.CommandText = @"
+INSERT INTO ccm_player_sponsorship (player_id, tier, expiration_unix_seconds)
+VALUES ($player, $tier, $expiration)
+ON CONFLICT(player_id) DO UPDATE SET
+    tier = excluded.tier,
+    expiration_unix_seconds = excluded.expiration_unix_seconds";
+
+                var playerParameter = command.CreateParameter();
+                playerParameter.ParameterName = "$player";
+                playerParameter.Value = player.ToString();
+                command.Parameters.Add(playerParameter);
+
+                var tierParameter = command.CreateParameter();
+                tierParameter.ParameterName = "$tier";
+                tierParameter.Value = (int) tier;
+                command.Parameters.Add(tierParameter);
+
+                var expirationParameter = command.CreateParameter();
+                expirationParameter.ParameterName = "$expiration";
+                expirationParameter.Value = expirationUnixSeconds;
+                command.Parameters.Add(expirationParameter);
+
+                await command.ExecuteNonQueryAsync();
+            }
+            finally
+            {
+                if (shouldClose)
+                    await connection.CloseAsync();
+            }
+        }
+
+        private static async Task EnsureCCMCustomizationCompatibility(DbContext dbContext)
+        {
+            const string addArmorVariantSqlite =
+                "ALTER TABLE ccm_player_customization ADD COLUMN armor_variant_id TEXT NOT NULL DEFAULT ''";
+            const string addArmorVariantSqliteAlt =
+                "ALTER TABLE ccm_player_customization ADD COLUMN armor_variant_id TEXT DEFAULT ''";
+            const string addArmorVariantPostgres =
+                "ALTER TABLE ccm_player_customization ADD COLUMN IF NOT EXISTS armor_variant_id text NOT NULL DEFAULT ''";
+            const string backfillArmorVariantSqlite =
+                "UPDATE ccm_player_customization SET armor_variant_id = '' WHERE armor_variant_id IS NULL";
+
+            try
+            {
+                var provider = dbContext.Database.ProviderName ?? string.Empty;
+                if (provider.Contains("Sqlite", StringComparison.OrdinalIgnoreCase))
+                {
+                    // Avoid spamming failing ALTER TABLE on every access. Check first, and retry a few times
+                    // in case the sqlite DB is temporarily locked.
+                    for (var attempt = 0; attempt < 5; attempt++)
+                    {
+                        try
+                        {
+                            if (await HasTableColumn(dbContext.Database.GetDbConnection(), "ccm_player_customization", "armor_variant_id"))
+                                return;
+
+                            try
+                            {
+                                await dbContext.Database.ExecuteSqlRawAsync(addArmorVariantSqlite);
+                                return;
+                            }
+                            catch (SqliteException e) when (e.Message.Contains("database is locked", StringComparison.OrdinalIgnoreCase))
+                            {
+                                await Task.Delay(TimeSpan.FromMilliseconds(150 * (attempt + 1)));
+                                continue;
+                            }
+                            catch (SqliteException e) when (e.Message.Contains("no such table", StringComparison.OrdinalIgnoreCase))
+                            {
+                                // If the table truly doesn't exist, migrations should create it.
+                                return;
+                            }
+                            catch (SqliteException e) when (e.Message.Contains("duplicate column name", StringComparison.OrdinalIgnoreCase))
+                            {
+                                return;
+                            }
+                            catch (SqliteException)
+                            {
+                                // Fallback for older/broken sqlite variants: add nullable + backfill.
+                                await dbContext.Database.ExecuteSqlRawAsync(addArmorVariantSqliteAlt);
+                                await dbContext.Database.ExecuteSqlRawAsync(backfillArmorVariantSqlite);
+                                return;
+                            }
+                        }
+                        catch (SqliteException e) when (e.Message.Contains("database is locked", StringComparison.OrdinalIgnoreCase))
+                        {
+                            await Task.Delay(TimeSpan.FromMilliseconds(150 * (attempt + 1)));
+                        }
+                    }
+
+                    return;
+                }
+
+                if (provider.Contains("Npgsql", StringComparison.OrdinalIgnoreCase) ||
+                    provider.Contains("Postgre", StringComparison.OrdinalIgnoreCase))
+                {
+                    await dbContext.Database.ExecuteSqlRawAsync(addArmorVariantPostgres);
+                }
+            }
+            catch (SqliteException e) when (e.Message.Contains("duplicate column name", StringComparison.OrdinalIgnoreCase))
+            {
+            }
+            catch (Exception e) when (e.Message.Contains("already exists", StringComparison.OrdinalIgnoreCase))
+            {
+            }
+        }
+
+        private static async Task EnsureCCMSponsorshipStorage(DbContext dbContext)
+        {
+            const string createTable = @"
+CREATE TABLE IF NOT EXISTS ccm_player_sponsorship (
+    player_id TEXT PRIMARY KEY,
+    tier INTEGER NOT NULL,
+    expiration_unix_seconds BIGINT NOT NULL
+)";
+
+            try
+            {
+                await dbContext.Database.ExecuteSqlRawAsync(createTable);
+            }
+            catch (SqliteException e) when (e.Message.Contains("database is locked", StringComparison.OrdinalIgnoreCase))
+            {
+                await Task.Delay(200);
+                await dbContext.Database.ExecuteSqlRawAsync(createTable);
+            }
+        }
+
+        private static async Task<bool> HasTableColumn(DbConnection connection, string tableName, string columnName)
+        {
+            var shouldClose = connection.State != System.Data.ConnectionState.Open;
+            if (shouldClose)
+                await connection.OpenAsync();
+
+            try
+            {
+                await using (var existsCommand = connection.CreateCommand())
+                {
+                    existsCommand.CommandText =
+                        "SELECT 1 FROM sqlite_master WHERE type='table' AND name=$table LIMIT 1";
+                    var parameter = existsCommand.CreateParameter();
+                    parameter.ParameterName = "$table";
+                    parameter.Value = tableName;
+                    existsCommand.Parameters.Add(parameter);
+
+                    var exists = await existsCommand.ExecuteScalarAsync();
+                    if (exists == null)
+                        return false;
+                }
+
+                await using var command = connection.CreateCommand();
+                command.CommandText = $"PRAGMA table_info('{tableName}')";
+                await using var reader = await command.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                {
+                    if (string.Equals(reader["name"]?.ToString(), columnName, StringComparison.OrdinalIgnoreCase))
+                        return true;
+                }
+
+                return false;
+            }
+            finally
+            {
+                if (shouldClose)
+                    await connection.CloseAsync();
+            }
         }
 
         public async Task SaveCCMRoundStats(
@@ -2701,6 +3006,33 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 stats.QueenWins,
                 stats.QueenKillParticipations,
                 unlocked);
+        }
+
+        private static CCMCustomizationSnapshot ToCCMCustomizationSnapshot(CCMPlayerCustomization? customization)
+        {
+            if (customization == null)
+            {
+                return new CCMCustomizationSnapshot(Array.Empty<CCMCustomizationSelectionData>());
+            }
+
+            return new CCMCustomizationSnapshot(
+                new[]
+                {
+                    new CCMCustomizationSelectionData("xeno_defender", customization.XenoDefenderSkinId),
+                    new CCMCustomizationSelectionData("xeno_drone", customization.XenoDroneSkinId),
+                    new CCMCustomizationSelectionData("xeno_queen", customization.XenoQueenSkinId),
+                    new CCMCustomizationSelectionData("xeno_runner", customization.XenoRunnerSkinId),
+                    new CCMCustomizationSelectionData("xeno_sentinel", customization.XenoSentinelSkinId),
+                    new CCMCustomizationSelectionData("ghost", customization.GhostSkinId),
+                    new CCMCustomizationSelectionData("weapon_spray", customization.WeaponSprayId),
+                    new CCMCustomizationSelectionData("armor_palette", customization.ArmorPaletteId),
+                    new CCMCustomizationSelectionData("armor_variant", customization.ArmorVariantId),
+                    new CCMCustomizationSelectionData("armor_paint", customization.ArmorPaintId),
+                },
+                customization.SelectedOocTagId,
+                customization.CustomOocTagText,
+                customization.SelectedOocColorId,
+                customization.SelectedLoocColorId);
         }
 
         private static int GetLeaderboardScore(CCMPlayerStats stats, CCMLeaderboardCategory category)

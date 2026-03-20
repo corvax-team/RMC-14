@@ -12,5 +12,6 @@ namespace Content.Shared.Preferences
         Carrier,
         Skull,
         Smooth,
+        None,
     }
 }

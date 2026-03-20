@@ -5,6 +5,7 @@ using Content.Server._RMC14.Discord;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server._RMC14.Mentor;
 using Content.Server._RMC14.PlayTimeTracking;
+using Content.Server._CCM.Sponsorship;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -29,6 +30,7 @@ using Content.Server.Players.RateLimiting;
 using Content.Server.Preferences.Managers;
 using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
+using Content.Server.Secrets.CCM.Sponsorship;
 using Content.Server.Voting.Managers;
 using Content.Server.Worldgen.Tools;
 using Content.Shared.Administration.Logs;
@@ -97,6 +99,11 @@ namespace Content.Server.IoC
             IoCManager.Register<CommendationManager>();
             IoCManager.Register<RMCActionsManager>();
             IoCManager.Register<RMCChatBansManager>();
+
+            // CCM
+            IoCManager.Register<ICCMSponsorshipSecretsProvider, CCMSponsorshipSecretsStubProvider>();
+            IoCManager.Register<CCMSponsorshipManager>();
+            IoCManager.Register<CCMCustomizationManager>();
         }
     }
 }

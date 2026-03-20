@@ -1,6 +1,7 @@
 using Content.Client._RMC14.Roadmap;
 using Content.Client._RMC14.RMCPlaytimeStats;
 using Content.Client._CCM.Achievements;
+using Content.Client._CCM.Sponsorship;
 using Content.Client._CCM.Stats;
 using Content.Client.CrewManifest;
 using Content.Client.GameTicking.Managers;
@@ -91,6 +92,8 @@ namespace Content.Client.Lobby.UI
             TaskbarMenuButton.OnPressed += _ => ToggleLeftMenu(!_leftMenuVisible);
             TaskbarRatingButton.OnPressed += _ => OpenLeaderboard();
             TaskbarAchievementsButton.OnPressed += _ => UserInterfaceManager.GetUIController<CCMAchievementsUIController>().OpenWindow();
+            TaskbarDonateButton.OnPressed += _ => UserInterfaceManager.GetUIController<CCMSponsorshipUIController>().OpenWindow();
+            TaskbarCustomizationButton.OnPressed += _ => UserInterfaceManager.GetUIController<CCMCustomizationUIController>().OpenWindow();
 
             TutorialButton.OnPressed += _ => OpenTutorial();
             StatsButton.OnPressed += _ => OpenStats();

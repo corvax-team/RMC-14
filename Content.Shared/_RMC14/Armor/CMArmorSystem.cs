@@ -445,15 +445,11 @@ var immuneToAP = TryComp<CMArmorComponent>(ent, out var armorComp) && armorComp.
         var comp = ent.Comp;
         var equipmentEntityID = comp.DefaultType;
 
+        if (preference is ArmorPreference.None or ArmorPreference.Random)
+            return equipmentEntityID;
+
         if (comp.Types.TryGetValue(preference.ToString(), out var equipment))
             equipmentEntityID = equipment;
-
-        if (preference == ArmorPreference.Random)
-        {
-            var random = new System.Random();
-            var randomType = comp.Types.ElementAt(random.Next(0, comp.Types.Count)).Value;
-            equipmentEntityID = randomType;
-        }
 
         return equipmentEntityID;
     }

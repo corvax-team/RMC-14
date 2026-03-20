@@ -9,19 +9,18 @@
 
     <!-- CCM rework lobby - start -->
     <PanelContainer StyleClasses="CCMEscapeMenuBackground" Margin="1">
-        <BoxContainer Orientation="Vertical" SeparationOverride="4" MinWidth="150" Margin="2">
-            <Button Access="Public" Name="RoadmapButton" Text="{Loc 'ui-escape-updates'}" />
-            <ui:VoteCallMenuButton />
-            <Button Access="Public" Name="RulesButton" Text="{Loc 'ui-escape-rules'}" />
-            <Button Access="Public" Name="GuidebookButton" Text="{Loc 'ui-escape-guidebook'}" />
-            <Button Access="Public" Name="AchievementsButton" Text="{Loc 'ccm-achievements-header'}" />
-            <Button Access="Public" Name="WikiButton" Text="{Loc 'ui-escape-wiki'}" />
-            <Button Access="Public" Name="PatronPerksButton" Text="{Loc 'rmc-ui-patron-perks'}" StyleClasses="Caution" Visible="True" />
+        <BoxContainer Orientation="Vertical" SeparationOverride="6" MinWidth="190" Margin="6">
+            <ui:VoteCallMenuButton StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
+            <Button Access="Public" Name="RulesButton" Text="{Loc 'ui-escape-rules'}" StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
+            <Button Access="Public" Name="GuidebookButton" Text="{Loc 'ui-escape-guidebook'}" StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
+            <Button Access="Public" Name="AchievementsButton" Text="{Loc 'ccm-achievements-header'}" StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
+            <Button Access="Public" Name="SponsorshipButton" Text="{Loc 'ccm-sponsorship-header'}" StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
+            <Button Access="Public" Name="WikiButton" Text="{Loc 'ui-escape-wiki'}" StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
             <PanelContainer StyleClasses="LowDivider" Margin="0 2.5 0 2.5" />
-            <Button Access="Public" Name="OptionsButton" Text="{Loc 'ui-escape-options'}" />
+            <Button Access="Public" Name="OptionsButton" Text="{Loc 'ui-escape-options'}" StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
             <PanelContainer StyleClasses="LowDivider" Margin="0 2.5 0 2.5" />
-            <Button Access="Public" Name="DisconnectButton" Text="{Loc 'ui-escape-disconnect'}" />
-            <Button Access="Public" Name="QuitButton" Text="{Loc 'ui-escape-quit'}" StyleClasses="ButtonColorRed" />
+            <Button Access="Public" Name="DisconnectButton" Text="{Loc 'ui-escape-disconnect'}" StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
+            <Button Access="Public" Name="QuitButton" Text="{Loc 'ui-escape-quit'}" StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
         </BoxContainer>
     </PanelContainer>
     <!-- CCM rework lobby - end -->

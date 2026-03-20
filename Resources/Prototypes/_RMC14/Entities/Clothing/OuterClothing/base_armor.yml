@@ -33,6 +33,7 @@
   - type: Clothing
     equipSound:
       path: /Audio/_RMC14/Machines/armor_equip.ogg
+  - type: Appearance
   - type: MoveOrderArmor
   - type: StoreAfterFailedInteract
 

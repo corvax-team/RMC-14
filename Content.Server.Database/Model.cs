@@ -65,6 +65,7 @@ namespace Content.Server.Database
         public DbSet<CCMPlayerStats> CCMPlayerStats { get; set; } = default!;
         public DbSet<CCMPlayerMonthlyStats> CCMPlayerMonthlyStats { get; set; } = default!;
         public DbSet<CCMPlayerAchievementStats> CCMPlayerAchievementStats { get; set; } = default!;
+        public DbSet<CCMPlayerCustomization> CCMPlayerCustomization { get; set; } = default!;
         public DbSet<CCMRoundWinStats> CCMRoundWinStats { get; set; } = default!;
         public DbSet<RMCPlayerActionOrder> RMCPlayerActionOrder { get; set; } = default!;
         public DbSet<RMCChatBans> RMCPlayerChatBans { get; set; } = default!;
@@ -448,6 +449,13 @@ namespace Content.Server.Database
                 .HasOne(p => p.Player)
                 .WithOne(p => p.Patron)
                 .HasForeignKey<RMCPatron>(p => p.PlayerId)
+                .HasPrincipalKey<Player>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CCMPlayerCustomization>()
+                .HasOne(c => c.Player)
+                .WithOne()
+                .HasForeignKey<CCMPlayerCustomization>(c => c.PlayerId)
                 .HasPrincipalKey<Player>(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 

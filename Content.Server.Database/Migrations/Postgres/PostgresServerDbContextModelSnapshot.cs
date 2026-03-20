@@ -577,6 +577,133 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.ToTable("blacklist", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.CCMPlayerAchievementStats", b =>
+                {
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_id");
+
+                    b.Property<int>("FriendlyFireDamage")
+                        .HasColumnType("integer")
+                        .HasColumnName("friendly_fire_damage");
+
+                    b.Property<int>("OfficerWins")
+                        .HasColumnType("integer")
+                        .HasColumnName("officer_wins");
+
+                    b.Property<int>("QueenKillParticipations")
+                        .HasColumnType("integer")
+                        .HasColumnName("queen_kill_participations");
+
+                    b.Property<int>("QueenKills")
+                        .HasColumnType("integer")
+                        .HasColumnName("queen_kills");
+
+                    b.Property<int>("QueenWins")
+                        .HasColumnType("integer")
+                        .HasColumnName("queen_wins");
+
+                    b.Property<int>("RequisitionOrders")
+                        .HasColumnType("integer")
+                        .HasColumnName("requisition_orders");
+
+                    b.Property<string>("UnlockedAchievementIds")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("unlocked_achievement_ids");
+
+                    b.Property<int>("XenoEvolutions")
+                        .HasColumnType("integer")
+                        .HasColumnName("xeno_evolutions");
+
+                    b.HasKey("PlayerId")
+                        .HasName("PK_ccm_player_achievement_stats");
+
+                    b.ToTable("ccm_player_achievement_stats", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CCMPlayerCustomization", b =>
+                {
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_id");
+
+                    b.Property<string>("ArmorPaintId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("armor_paint_id");
+
+                    b.Property<string>("ArmorPaletteId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("armor_palette_id");
+
+                    b.Property<string>("ArmorVariantId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("armor_variant_id");
+
+                    b.Property<string>("CustomOocTagText")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("custom_ooc_tag_text");
+
+                    b.Property<string>("GhostSkinId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("ghost_skin_id");
+
+                    b.Property<string>("SelectedLoocColorId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("selected_looc_color_id");
+
+                    b.Property<string>("SelectedOocColorId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("selected_ooc_color_id");
+
+                    b.Property<string>("SelectedOocTagId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("selected_ooc_tag_id");
+
+                    b.Property<string>("WeaponSprayId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("weapon_spray_id");
+
+                    b.Property<string>("XenoDefenderSkinId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("xeno_defender_skin_id");
+
+                    b.Property<string>("XenoDroneSkinId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("xeno_drone_skin_id");
+
+                    b.Property<string>("XenoQueenSkinId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("xeno_queen_skin_id");
+
+                    b.Property<string>("XenoRunnerSkinId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("xeno_runner_skin_id");
+
+                    b.Property<string>("XenoSentinelSkinId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("xeno_sentinel_skin_id");
+
+                    b.HasKey("PlayerId")
+                        .HasName("PK_ccm_player_customization");
+
+                    b.ToTable("ccm_player_customization", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.CCMPlayerMonthlyStats", b =>
                 {
                     b.Property<Guid>("PlayerId")
@@ -739,51 +866,6 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasName("PK_ccm_player_monthly_stats");
 
                     b.ToTable("ccm_player_monthly_stats", (string)null);
-                });
-
-            modelBuilder.Entity("Content.Server.Database.CCMPlayerAchievementStats", b =>
-                {
-                    b.Property<Guid>("PlayerId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("player_id");
-
-                    b.Property<int>("FriendlyFireDamage")
-                        .HasColumnType("integer")
-                        .HasColumnName("friendly_fire_damage");
-
-                    b.Property<int>("OfficerWins")
-                        .HasColumnType("integer")
-                        .HasColumnName("officer_wins");
-
-                    b.Property<int>("QueenKillParticipations")
-                        .HasColumnType("integer")
-                        .HasColumnName("queen_kill_participations");
-
-                    b.Property<int>("QueenKills")
-                        .HasColumnType("integer")
-                        .HasColumnName("queen_kills");
-
-                    b.Property<int>("QueenWins")
-                        .HasColumnType("integer")
-                        .HasColumnName("queen_wins");
-
-                    b.Property<int>("RequisitionOrders")
-                        .HasColumnType("integer")
-                        .HasColumnName("requisition_orders");
-
-                    b.Property<string>("UnlockedAchievementIds")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("unlocked_achievement_ids");
-
-                    b.Property<int>("XenoEvolutions")
-                        .HasColumnType("integer")
-                        .HasColumnName("xeno_evolutions");
-
-                    b.HasKey("PlayerId")
-                        .HasName("PK_ccm_player_achievement_stats");
-
-                    b.ToTable("ccm_player_achievement_stats", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.CCMPlayerStats", b =>
@@ -2600,19 +2682,6 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Profile");
                 });
 
-            modelBuilder.Entity("Content.Server.Database.CCMPlayerMonthlyStats", b =>
-                {
-                    b.HasOne("Content.Server.Database.Player", "Player")
-                        .WithMany("CCMMonthlyStats")
-                        .HasForeignKey("PlayerId")
-                        .HasPrincipalKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_ccm_player_monthly_stats_player_player_id1");
-
-                    b.Navigation("Player");
-                });
-
             modelBuilder.Entity("Content.Server.Database.CCMPlayerAchievementStats", b =>
                 {
                     b.HasOne("Content.Server.Database.Player", "Player")
@@ -2622,6 +2691,32 @@ namespace Content.Server.Database.Migrations.Postgres
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_ccm_player_achievement_stats_player_player_id");
+
+                    b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CCMPlayerCustomization", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithOne()
+                        .HasForeignKey("Content.Server.Database.CCMPlayerCustomization", "PlayerId")
+                        .HasPrincipalKey("Content.Server.Database.Player", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_ccm_player_customization_player_player_id");
+
+                    b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CCMPlayerMonthlyStats", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithMany("CCMMonthlyStats")
+                        .HasForeignKey("PlayerId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_ccm_player_monthly_stats_player_player_id1");
 
                     b.Navigation("Player");
                 });
@@ -3332,9 +3427,9 @@ namespace Content.Server.Database.Migrations.Postgres
 
                     b.Navigation("AdminWatchlistsReceived");
 
-                    b.Navigation("CCMMonthlyStats");
-
                     b.Navigation("CCMAchievementStats");
+
+                    b.Navigation("CCMMonthlyStats");
 
                     b.Navigation("CCMStats");
 
