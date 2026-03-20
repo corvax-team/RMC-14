@@ -14615,59 +14615,6 @@ entities:
     - type: ContainedSolution
       containerName: beaker
       container: 80
-- proto: ActionToggleLight
-  entities:
-  - uid: 89
-    components:
-    - type: Transform
-      parent: 88
-  - uid: 91
-    components:
-    - type: Transform
-      parent: 90
-  - uid: 93
-    components:
-    - type: Transform
-      parent: 92
-  - uid: 95
-    components:
-    - type: Transform
-      parent: 94
-  - uid: 97
-    components:
-    - type: Transform
-      parent: 96
-  - uid: 100
-    components:
-    - type: Transform
-      parent: 99
-  - uid: 101
-    components:
-    - type: Transform
-      parent: 99
-  - uid: 108
-    components:
-    - type: Transform
-      parent: 107
-  - uid: 110
-    components:
-    - type: Transform
-      parent: 109
-  - uid: 1566
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 17114
-    - type: Action
-      originalIconColor: '#FFFFFFFF'
-      container: 17114
-  - uid: 7496
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 7495
 - proto: AtmosDeviceFanTiny
   entities:
   - uid: 292
@@ -16295,14 +16242,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: CMActionToggleScope
-  entities:
-  - uid: 16620
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 17029
 - proto: CMAdvFirstAidKit
   entities:
   - uid: 6023
@@ -60683,14 +60622,6 @@ entities:
     - type: Transform
       pos: 101.00252,86.68814
       parent: 1
-    - type: Scope
-      scopingToggleActionEntity: 16620
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 16620
 - proto: RMCBoxDonut
   entities:
   - uid: 17030
@@ -61967,23 +61898,6 @@ entities:
     components:
     - type: Transform
       parent: 98
-    - type: HandheldLight
-      selfToggleActionEntity: 101
-      toggleActionEntity: 100
-    - type: Physics
-      canCollide: False
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          ent: 102
-        actions: !type:Container
-          ents:
-          - 100
-          - 101
-    - type: ActionsContainer
-    - type: Actions
-      actions:
-      - 101
     - type: InsideEntityStorage
   - uid: 14151
     components:
@@ -71581,29 +71495,11 @@ entities:
     - type: Transform
       pos: 32.63181,85.65565
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 91
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 91
-    - type: ActionsContainer
   - uid: 109
     components:
     - type: Transform
       pos: 141.47202,67.67705
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 110
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 110
-    - type: ActionsContainer
   - uid: 17089
     components:
     - type: Transform
@@ -71678,71 +71574,26 @@ entities:
     - type: Transform
       pos: 31.532154,78.63449
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 89
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 89
-    - type: ActionsContainer
   - uid: 92
     components:
     - type: Transform
       pos: 30.495857,90.69798
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 93
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 93
-    - type: ActionsContainer
   - uid: 94
     components:
     - type: Transform
       pos: 33.478474,90.58876
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 95
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 95
-    - type: ActionsContainer
   - uid: 96
     components:
     - type: Transform
       pos: 53.274513,77.64374
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 97
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 97
-    - type: ActionsContainer
   - uid: 107
     components:
     - type: Transform
       pos: 27.507889,46.546158
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 108
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 108
-    - type: ActionsContainer
   - uid: 326
     components:
     - type: Transform
@@ -71788,14 +71639,6 @@ entities:
     - type: Transform
       pos: 102.335526,86.65588
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 7496
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 7496
   - uid: 13644
     components:
     - type: Transform
@@ -71896,14 +71739,6 @@ entities:
     - type: Transform
       pos: 12.362583,64.86391
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 1566
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 1566
   - uid: 17115
     components:
     - type: Transform

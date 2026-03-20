@@ -708,6 +708,7 @@ entities:
           version: 7
     - type: Fixtures
       fixtures: {}
+    - type: Physics
     - type: SpreaderGrid
     - type: Shuttle
     - type: GridPathfinding
@@ -41475,36 +41476,6 @@ entities:
         243,139: CCMAreaNovaClosedArea
         243,140: CCMAreaNovaClosedArea
         243,141: CCMAreaNovaClosedArea
-- proto: ActionToggleLight
-  entities:
-  - uid: 3
-    components:
-    - type: Transform
-      parent: 2
-  - uid: 5
-    components:
-    - type: Transform
-      parent: 4
-  - uid: 7
-    components:
-    - type: Transform
-      parent: 6
-  - uid: 9
-    components:
-    - type: Transform
-      parent: 8
-  - uid: 11
-    components:
-    - type: Transform
-      parent: 10
-  - uid: 13
-    components:
-    - type: Transform
-      parent: 12
-  - uid: 15
-    components:
-    - type: Transform
-      parent: 14
 - proto: ArmorHelmetPMCCorporate
   entities:
   - uid: 16
@@ -109796,70 +109767,16 @@ entities:
     - type: Transform
       pos: 228.65501,82.930916
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 3
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 3
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-    - type: ActionsContainer
   - uid: 4
     components:
     - type: Transform
       pos: 228.38528,82.61695
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 5
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 5
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-    - type: ActionsContainer
   - uid: 12
     components:
     - type: Transform
       pos: 199.30396,89.773254
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 13
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 13
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-    - type: ActionsContainer
   - uid: 12812
     components:
     - type: Transform
@@ -109899,59 +109816,23 @@ entities:
     - type: Transform
       pos: 185.21323,92.07893
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 7
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 7
-    - type: ActionsContainer
   - uid: 8
     components:
     - type: Transform
       rot: 2.1477292599178313 rad
       pos: 52.696255,39.550545
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 9
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 9
-    - type: ActionsContainer
   - uid: 10
     components:
     - type: Transform
       rot: -37.69911184307754 rad
       pos: 52.456036,43.576767
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 11
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 11
-    - type: ActionsContainer
   - uid: 14
     components:
     - type: Transform
       pos: 63.38559,100.10553
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 15
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 15
-    - type: ActionsContainer
   - uid: 12816
     components:
     - type: Transform

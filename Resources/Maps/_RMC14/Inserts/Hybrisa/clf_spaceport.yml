@@ -1037,17 +1037,6 @@ entities:
         -11,6: RMCAreaLv759IndoorsSpaceportDockingBay1
         -12,6: RMCAreaLv759IndoorsSpaceportDockingBay1
         -10,6: RMCAreaLv759IndoorsSpaceportDockingBay1
-- proto: ActionToggleInternals
-  entities:
-  - uid: 623
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 622
-    - type: Action
-      originalIconColor: '#FFFFFFFF'
-      container: 622
 - proto: BedrollFolded
   entities:
   - uid: 630
@@ -1176,14 +1165,6 @@ entities:
     - type: Transform
       pos: 7.490547,12.989077
       parent: 1
-    - type: GasTank
-      toggleActionEntity: 623
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 623
 - proto: CMApcMediumCapacity
   entities:
   - uid: 552

@@ -6700,17 +6700,6 @@ entities:
         -24,-19: RMCAreaPRTMedbay
         -29,-19: RMCAreaPRTMedbay
         -29,-18: RMCAreaPRTMedbay
-- proto: ActionToggleLight
-  entities:
-  - uid: 3
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 2
-    - type: Action
-      originalIconColor: '#FFFFFFFF'
-      container: 2
 - proto: Bedroll
   entities:
   - uid: 4
@@ -34281,14 +34270,6 @@ entities:
     - type: Transform
       pos: -30.115135,-39.294662
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 3
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 3
   - uid: 4594
     components:
     - type: Transform
