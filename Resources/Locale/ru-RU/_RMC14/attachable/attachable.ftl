@@ -22,8 +22,6 @@ attachable-popup-deactivate-collapse = Вы складываете { $attachable
 attachable-popup-activate-lock = Вы блокируете { $attachable }.
 attachable-popup-deactivate-unlock = Вы разблокируете { $attachable }.
 
-# В оригинале lock/unlock часто перепутаны местами в коде, проверь в игре: обычно lock — блокировать.
-
 attachable-popup-switch-to-generic = Вы переключаетесь на { $attachable }.
 attachable-popup-switch-from-generic = Вы перестаёте использовать { $attachable }.
 rmc-attachable-examinable-verb-text = Характеристики приспособлений
