@@ -1,3 +1,3 @@
-ent-RMCRandomHumanoidCLFSpecialist = Призрачная роль Специалиста КФО
-    .suffix = Spawner, Player
+ent-RMCRandomHumanoidCLFSpecialist = роль призрака: специалист КФО
+    .suffix = Спавнер, Игрок
     .desc = { "" }

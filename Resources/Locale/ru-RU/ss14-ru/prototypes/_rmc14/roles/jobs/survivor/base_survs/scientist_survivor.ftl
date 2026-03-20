@@ -1,6 +1,6 @@
-ent-RMCSpawnPointSurvivorScientist = survivor scientist spawn point
+ent-RMCSpawnPointSurvivorScientist = точка появления ученого
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetScientist = scientist colonist preset
+ent-RMCSurvivorPresetScientist = пресет колониста: ученый
     .desc = { ent-RMCSurvivorPresetCivilian.desc }
-ent-RMCRandomHumanoidSurvivorScientist = scientist colonist ghost role
+ent-RMCRandomHumanoidSurvivorScientist = роль призрака: колонист-ученый
     .desc = { ent-MarkerBase.desc }

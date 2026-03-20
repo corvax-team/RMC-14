@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorHybrisaGrindBarista = daily grind barista spawn point
+ent-RMCSpawnPointSurvivorHybrisaGrindBarista = точка появления бариста Daily Grind (Hybrisa)
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetHybrisaGrindBarista = daily grind barista preset
+ent-RMCGearSurvivorPresetHybrisaGrindBarista = пресет колониста: бариста Daily Grind (Hybrisa)
     .desc = { ent-RMCSurvivorPresetCivilian.desc }

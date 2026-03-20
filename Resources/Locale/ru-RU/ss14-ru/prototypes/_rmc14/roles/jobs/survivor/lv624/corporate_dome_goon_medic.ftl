@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorLV624CorporateDomeGoonMedic = special survivor lv624 goon medic spawn point
+ent-RMCSpawnPointSurvivorLV624CorporateDomeGoonMedic = точка появления медика службы безопасности LV-624
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetLV624CorporateDomeGoonMedic = lv624 colonist preset
+ent-RMCGearSurvivorPresetLV624CorporateDomeGoonMedic = пресет колониста: медик службы безопасности LV-624
     .desc = { ent-RMCSurvivorPresetSecurity.desc }

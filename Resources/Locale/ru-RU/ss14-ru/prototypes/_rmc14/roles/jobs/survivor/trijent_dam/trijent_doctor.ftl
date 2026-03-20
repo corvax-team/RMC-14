@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorTrijentDoctor = survivor trijent doctor spawn point
+ent-RMCSpawnPointSurvivorTrijentDoctor = точка появления врача Trijent
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetTrijentDoctor = trijent doctor colonist preset
+ent-RMCGearSurvivorPresetTrijentDoctor = пресет колониста: врач Trijent
     .desc = { ent-RMCSurvivorPresetDoctor.desc }

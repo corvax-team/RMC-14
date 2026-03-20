@@ -1,5 +1,5 @@
 ent-RMCPouchGeneralLargeFilledSurvivorCommanderNewVaradero = { ent-RMCPouchGeneralLarge }
-    .suffix = Filled, Survivor
+    .suffix = Заполненный, Выживший
     .desc = { ent-RMCPouchGeneralLarge.desc }
-ent-CMSpawnPointSurvivorCommanderNewVardero = new varadero commanding officer spawn point
+ent-CMSpawnPointSurvivorCommanderNewVardero = точка появления командующего офицера New Varadero
     .desc = { ent-CMSpawnPointJobBase.desc }

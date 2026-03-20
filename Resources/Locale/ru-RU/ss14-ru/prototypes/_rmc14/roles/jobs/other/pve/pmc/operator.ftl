@@ -1,3 +1,3 @@
-ent-RMCSpawnPointPMCOperatorPVE = Точка спавна оператора ЧВК Vitezstvi
+ent-RMCSpawnPointPMCOperatorPVE = точка появления оператора ЧВК Vitezstvi
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }

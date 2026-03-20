@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorTrijentDamTech = survivor dam maintenance technician spawn point
+ent-RMCSpawnPointSurvivorTrijentDamTech = точка появления техника по обслуживанию плотины Trijent
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetTrijentDamTech = dam maintenance technician colonist preset
+ent-RMCGearSurvivorPresetTrijentDamTech = пресет колониста: техник по обслуживанию плотины Trijent
     .desc = { ent-RMCSurvivorPresetEngineer.desc }

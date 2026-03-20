@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorArmedPoliceOfficer = people's armed police officer spawn point
+ent-RMCSpawnPointSurvivorArmedPoliceOfficer = точка появления офицера народной вооружённой полиции
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetArmedPoliceOfficer = people's armed police officer preset
+ent-RMCGearSurvivorPresetArmedPoliceOfficer = пресет офицера народной вооружённой полиции
     .desc = { ent-RMCSurvivorPresetSecurity.desc }

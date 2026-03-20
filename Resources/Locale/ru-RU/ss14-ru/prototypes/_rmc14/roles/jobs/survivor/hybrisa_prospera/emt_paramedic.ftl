@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorHybrisaEMTParamedic = emt paramedic spawn point
+ent-RMCSpawnPointSurvivorHybrisaEMTParamedic = точка появления парамедика (Hybrisa)
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetHybrisaEMTParamedic = emt paramedic preset
+ent-RMCGearSurvivorPresetHybrisaEMTParamedic = пресет колониста: парамедик (Hybrisa)
     .desc = { ent-RMCSurvivorPresetDoctor.desc }

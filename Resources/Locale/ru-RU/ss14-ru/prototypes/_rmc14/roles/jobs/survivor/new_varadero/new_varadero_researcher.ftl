@@ -1,2 +1,2 @@
-ent-RMCSpawnPointSurvivorNewVaraderoResearcher = survivor new varadero researcher spawn point
+ent-RMCSpawnPointSurvivorNewVaraderoResearcher = точка появления исследователя New Varadero
     .desc = { ent-CMSpawnPointJobBase.desc }

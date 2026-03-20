@@ -34,9 +34,9 @@ rmc-attachable-examine-condition-active = { $attachable } [bold]активиро
 rmc-attachable-examine-condition-inactive = { $attachable } [bold]выключен[/bold]
 rmc-attachable-examine-condition-whitelist-comps = пользователь [bold]имеет { $compNumber }[/bold] из след. компонентов: [bold]{ $comps }[/bold]
 rmc-attachable-examine-condition-whitelist-sizes = пользователь [bold]имеет[/bold] один из след. размеров: [bold]{ $sizes }[/bold]
-rmc-attachable-examine-condition-blacklist-comps = the holder [bold]lacks { $compNumber }[/bold] of the following components: [bold]{ $comps }[/bold]
-rmc-attachable-examine-condition-blacklist-sizes = the holder [bold]is not[/bold] one of the following sizes: [bold]{ $sizes }[/bold]
-rmc-attachable-examine-condition-blacklist-tags = the holder [bold]lacks { $tagNumber }[/bold] of the following tags: [bold]{ $tags }[/bold]
+rmc-attachable-examine-condition-blacklist-comps = у носителя [bold]отсутствует { $compNumber }[/bold] из след. компонентов: [bold]{ $comps }[/bold]
+rmc-attachable-examine-condition-blacklist-sizes = пользователь [bold]не является[/bold] одним из след. размеров: [bold]{ $sizes }[/bold]
+rmc-attachable-examine-condition-blacklist-tags = у носителя [bold]отсутствует { $tagNumber }[/bold] из след. тегов: [bold]{ $tags }[/bold]
 rmc-attachable-examine-condition-whitelist-tags = пользователь [bold]имеет { $tagNumber }[/bold] из след. тегов: [bold]{ $tags }[/bold]
 rmc-attachable-examine-ranged-accuracy = [color={ $colour }]{ $sign }{ $accuracy }[/color] к множителю точности.
 rmc-attachable-examine-ranged-scatter = [color={ $colour }]{ $sign }{ $scatter }[/color] град. к разбросу.
@@ -47,7 +47,7 @@ rmc-attachable-examine-ranged-recoil = [color={ $colour }]{ $sign }{ $recoil }[/
 rmc-attachable-examine-ranged-damage = [color={ $colour }]{ $sign }{ $damage }[/color] к множителю урона.
 rmc-attachable-examine-ranged-projectile-speed = [color={ $colour }]{ $sign }{ $projectileSpeed }[/color] к скорости снаряда.
 rmc-attachable-examine-ranged-damage-falloff = [color={ $colour }]{ $sign }{ $falloff }[/color] к падению урона.
-rmc-attachable-examine-ranged-range = [color={ $colour }]{ $sign }{ $range }[/color] к дальности полета снаряда.
+rmc-attachable-examine-ranged-range = [color={ $colour }]{ $sign }{ $range }[/color] к дальности полёта снаряда.
 rmc-attachable-examine-ranged-projectile-stun-duration = [color={ $colour }]{ $sign }{ $stunDurationMult }[/color] к длительности оглушения.
 rmc-attachable-examine-melee-damage = [color={ $colour }]{ $sign }{ $damage }[/color] к урону в ближнем бою.
 rmc-attachable-examine-size = [color={ $colour }]{ $sign }{ $size }[/color] к размеру предмета.

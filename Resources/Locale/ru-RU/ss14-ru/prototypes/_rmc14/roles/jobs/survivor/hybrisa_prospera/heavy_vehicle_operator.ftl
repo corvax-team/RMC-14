@@ -1,2 +1,2 @@
-ent-RMCGearSurvivorPresetHybrisaHeavyVehicleOperator = hybrisa vehicle operator colonist preset
+ent-RMCGearSurvivorPresetHybrisaHeavyVehicleOperator = пресет колониста: оператор тяжелой техники (Hybrisa)
     .desc = { ent-RMCSurvivorPresetEngineer.desc }

@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorHalcyonDynamicsLiaison = halcyon dynamics liaison spawn point
+ent-RMCSpawnPointSurvivorHalcyonDynamicsLiaison = точка появления представителя Halcyon Dynamics
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetHalcyonDynamicsLiaison = halcyon dynamics liaison preset
+ent-RMCGearSurvivorPresetHalcyonDynamicsLiaison = пресет представителя Halcyon Dynamics
     .desc = { ent-RMCSurvivorPresetCivilian.desc }

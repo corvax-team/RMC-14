@@ -1,6 +1,6 @@
-ent-RMCSpawnPointSurvivorMiner = survivor miner spawn point
+ent-RMCSpawnPointSurvivorMiner = точка появления шахтёра
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetMiner = miner colonist preset
+ent-RMCSurvivorPresetMiner = пресет колониста: шахтёр
     .desc = { ent-RMCSurvivorPresetCivilian.desc }
-ent-RMCRandomHumanoidSurvivorMiner = miner colonist ghost role
+ent-RMCRandomHumanoidSurvivorMiner = гост-роль колониста-шахтёра
     .desc = { ent-MarkerBase.desc }

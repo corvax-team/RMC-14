@@ -1,3 +1,3 @@
-ent-RMCSpawnPointPMCGunnerPVE = Точка спавна Пулемётчик ЧВК Vitezstvi
+ent-RMCSpawnPointPMCGunnerPVE = точка появления пулемётчика ЧВК Vitezstvi
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }

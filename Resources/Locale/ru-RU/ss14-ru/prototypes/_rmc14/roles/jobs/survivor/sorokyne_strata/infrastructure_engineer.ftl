@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorInfrastructureEngineer = survivor infrastructure engineer spawn point
+ent-RMCSpawnPointSurvivorInfrastructureEngineer = точка появления инженера инфраструктуры
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetInfrastructureEngineer = infrastructure engineer preset
+ent-RMCGearSurvivorPresetInfrastructureEngineer = пресет инженера инфраструктуры
     .desc = { ent-RMCSurvivorPresetEngineer.desc }

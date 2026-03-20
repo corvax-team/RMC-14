@@ -4,7 +4,7 @@ rmc-ghost-role-information-clf-rules =
     Вам разрешено знать общие знания об игре, такие как открывание двери, готовка еды, использование предметов и тд.
     Вам абсолютно [color=red]ЗАПРЕЩЕНО[/color] помнить имя, внешность, имя и прочую информацию о вашем прошлом персонаже.
 rmc-ghost-role-information-clf-description = Обеспечьте провал этих грязных продажных крыс из ОПЗ и жалких корпоратов, во славу восстания!
-rmc-ghost-role-information-clf-pve-description = Follow any orders from command and carry them out to the best of your abillity. For the free colonies!
+rmc-ghost-role-information-clf-pve-description = Следуйте любым приказам командования и выполняйте их в меру своих способностей. За свободные колонии!
 rmc-ghost-role-clf-cell-commander = Командир Ячейки КФО (Враждебный)
 rmc-clf-cell-commander = Командир Ячейки КФО
 CMCLFCellCommander = Командир Ячейки КФО

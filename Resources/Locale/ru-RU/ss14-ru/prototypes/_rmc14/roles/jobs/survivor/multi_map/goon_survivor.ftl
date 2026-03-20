@@ -1,2 +1,2 @@
-ent-RMCSpawnPointSurvivorGoon = survivor goon spawn point
+ent-RMCSpawnPointSurvivorGoon = точка появления вышибалы
     .desc = { ent-CMSpawnPointJobBase.desc }

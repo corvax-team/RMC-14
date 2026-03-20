@@ -1,3 +1,3 @@
-ent-RMCSpawnerCorporateExecutiveSpecialist = corporate executive specialist spawner
-    .suffix = Spawner
+ent-RMCSpawnerCorporateExecutiveSpecialist = спавнер: ответственный специалист корпорации
+    .suffix = Спавнер
     .desc = { ent-MarkerBase.desc }

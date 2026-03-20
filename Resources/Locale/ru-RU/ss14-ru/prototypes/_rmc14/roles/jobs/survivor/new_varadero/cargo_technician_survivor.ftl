@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorCargoTechnician = survivor cargo technician spawn point
+ent-RMCSpawnPointSurvivorCargoTechnician = точка появления техника карго
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetCargoTechnician = cargo technician colonist preset
+ent-RMCGearSurvivorPresetCargoTechnician = пресет колониста: техник карго
     .desc = { ent-RMCSurvivorPresetEngineer.desc }

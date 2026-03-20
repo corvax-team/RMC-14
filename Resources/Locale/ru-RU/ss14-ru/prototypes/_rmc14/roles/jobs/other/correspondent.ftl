@@ -1,4 +1,4 @@
-ent-CMSpawnPointCorrespondent = точка появления корреспондент
+ent-CMSpawnPointCorrespondent = точка появления корреспондента
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-CMGuidebookRoleCorrespondent = Correspondent
+ent-CMGuidebookRoleCorrespondent = Корреспондент
     .desc = { ent-CMGuidebookRole.desc }

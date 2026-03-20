@@ -1,7 +1,7 @@
 ent-CMSatchelFillSurvivorPriest = { ent-CMSatchelFillSurvivor }
-    .suffix = Survivor
+    .suffix = Выживший
     .desc = { ent-CMSatchelFillSurvivor.desc }
-ent-RMCSpawnPointSurvivorPriest = survivor priest spawn point
+ent-RMCSpawnPointSurvivorPriest = точка появления священника
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetPriest = priest colonist preset
+ent-RMCGearSurvivorPresetPriest = пресет колониста: священник
     .desc = { ent-RMCSurvivorPresetCivilianRareItem.desc }

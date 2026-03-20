@@ -1,2 +1,2 @@
-ent-RMCSpawnPointSynthColonist = synthetic colonist spawn point
+ent-RMCSpawnPointSynthColonist = точка появления синтетического колониста
     .desc = { ent-CMSpawnPointJobBase.desc }
