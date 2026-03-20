@@ -749,7 +749,7 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: ready_charge
-    useDelay: 4 #CCM Change - base is 14
+    useDelay: 14
   - type: TargetAction
     range: 9
     checkCanAccess: false
