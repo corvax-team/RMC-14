@@ -32,7 +32,6 @@ cmd-rmclistcommendations-help =
       rmclistcommendations id 128
       rmclistcommendations player giver PlayerName 10
       rmclistcommendations player receiver PlayerName 5 jelly
-
 # Errors
 cmd-rmclistcommendations-invalid-arguments = Неверные аргументы!
 cmd-rmclistcommendations-invalid-round-id = Неверный ID раунда!
@@ -42,17 +41,14 @@ cmd-rmclistcommendations-invalid-player-mode = Неверный режим иг�
 cmd-rmclistcommendations-invalid-count = Неверное количество! Должно быть положительным числом.
 cmd-rmclistcommendations-player-not-found = Игрок '{ $player }' не найден.
 cmd-rmclistcommendations-no-results = Похвалы не найдены.
-
 # Headers
 cmd-rmclistcommendations-last-header = Отображение { $count } последних похвал (запрошено: { $total }):
 cmd-rmclistcommendations-round-header = Похвалы для Раунда { $round } (всего { $count }):
 cmd-rmclistcommendations-id-header = Похвала { $id }:
 cmd-rmclistcommendations-giver-header = Отображение { $count } последних выданных похвал (запрошено: { $total }):
 cmd-rmclistcommendations-receiver-header = Отображение { $count } последних полученных похвал (запрошено: { $total }):
-
 # Format
 cmd-rmclistcommendations-format = ID [{ $id }] { $type }: { $name } — { $giverUserName } ({ $giver }) → { $receiverUserName } ({ $receiver }) Раунд { $round }: { $text }
-
 # Completion hints
 cmd-rmclistcommendations-hint-mode = Режим (last, round, id или player)
 cmd-rmclistcommendations-hint-mode-last = Показать последние похвалы

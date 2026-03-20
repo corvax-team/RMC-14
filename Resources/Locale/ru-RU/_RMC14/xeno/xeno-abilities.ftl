@@ -145,11 +145,12 @@ cm-xeno-throw-parasite-stash-parasite = Мы помещаем паразита �
 cm-xeno-throw-parasite-stash-royal = Мы помещаем королевского паразита в надёжное место. Теперь у нас: { $cur_royals }/{ $max_royals } королевских паразитов.
 cm-xeno-throw-parasite-unstash-parasite = Мы достаём паразита из нашего хранилища. Теперь у нас: { $cur_parasites }/{ $max_parasites }.
 cm-xeno-throw-parasite-unstash-royal = Мы достаём королевского паразита из нашего хранилища. Теперь у нас: { $cur_royals }/{ $max_royals } королевских паразитов.
-rmc-xeno-throw-parasite-reserves = У { $xeno } имеется { $rev_paras } { $rev_paras ->
-    [one] доступная роль
-    [few] доступные роли
-   *[other] доступных ролей
-} паразита для призраков.
+rmc-xeno-throw-parasite-reserves =
+    У { $xeno } имеется { $rev_paras } { $rev_paras ->
+        [one] доступная роль
+        [few] доступные роли
+       *[other] доступных ролей
+    } паразита для призраков.
 # Defensive Shield
 rmc-xeno-defensive-shield-end = Мы чувствуем, что наш усиленный щит заканчивается!
 rmc-xeno-defensive-shield-resist-end = Наша невосприимчивость к урону от взрывов заканчивается!

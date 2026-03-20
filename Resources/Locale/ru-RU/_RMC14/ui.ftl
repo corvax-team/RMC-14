@@ -33,6 +33,7 @@ rmc-ui-audio-emotes-vulpkanin = Проигрывать эмоции вульпк
 rmc-ui-audio-emotes-rodentia = Проигрывать эмоции грызунов
 rmc-ui-audio-emotes-feroxi = Проигрывать эмоции ферокси
 rmc-ui-audio-emotes-skrell = Проигрывать эмоции скреллов
+cm-ui-roadmap = Roadmap
 cm-ui-audio-voicelines-arachnid = Воспроизводить голоса арахнидов
 cm-ui-audio-voicelines-diona = Воспроизводить голоса дион
 cm-ui-audio-voicelines-dwarf = Воспроизводить голоса дварфов
@@ -42,7 +43,6 @@ cm-ui-audio-voicelines-moth = Воспроизводить голоса ниан
 cm-ui-audio-voicelines-reptilian = Воспроизводить голоса унатхов
 cm-ui-audio-voicelines-slime = Воспроизводить голоса слаймолюдов
 rmc-ui-roadmap = Дорожная карта
-
 # Фичи Патреона RMC
 rmc-ui-link-discord-account = Привязать аккаунт Discord
 rmc-ui-link-discord-account-text =
@@ -50,7 +50,7 @@ rmc-ui-link-discord-account-text =
         Затем перейдите в канал #account-linking, чтобы связать аккаунты.
 rmc-ui-link-discord-account-copy = Скопировать код
 rmc-ui-link-discord-account-copied = Скопировано!
-rmc-ui-link-discord-account-already-linked = [bold]Ваш аккаунт уже привязан![/bold]
+rmc-ui-link-discord-account-already-linked =  [bold]Ваш аккаунт уже привязан![/bold]
 rmc-ui-link-discord-account-open-channel = Открыть канал
 rmc-ui-named-items = Именные предметы
 rmc-ui-named-items-displayed-as =
@@ -95,21 +95,20 @@ rmc-ui-xeno-night-vision-default-half = В полсилы
 rmc-ui-xeno-night-vision-default-full = Полное
 rmc-night-vision-mode-verb = Установить ПНВ: { $mode }
 rmc-area-info = { $area }{ $restrictions }
-rmc-tacmap-alert-ceiling-level-0 = [color=green]✓[/color] Доступно всё
-rmc-tacmap-alert-ceiling-level-1 = [color=red]✗[/color] установка мортиры, лазерное наведение, медэвак
-rmc-tacmap-alert-ceiling-level-2 = [color=red]✗[/color] поставки, стрельба из мортиры
-rmc-tacmap-alert-ceiling-level-3 = [color=red]✗[/color] КАС
-rmc-tacmap-alert-ceiling-level-4 = [color=red]✗[/color] ОБ
-rmc-tacmap-alert-allowed-actions = [color=green]✓[/color] { $actions }
-rmc-tacmap-alert-restricted-actions = [color=red]✗[/color] { $actions }
-rmc-ui-shoutout-marine = [bold]Операция профинансирована [color=green]{ $name }[/color]![/bold]
-rmc-ui-shoutout-xeno = [bold]Улей основан [color=purple]{ $name }[/color]![/bold]
+rmc-tacmap-alert-ceiling-level-0 =  [color=green]✓[/color] Доступно всё
+rmc-tacmap-alert-ceiling-level-1 =  [color=red]✗[/color] установка мортиры, лазерное наведение, медэвак
+rmc-tacmap-alert-ceiling-level-2 =  [color=red]✗[/color] поставки, стрельба из мортиры
+rmc-tacmap-alert-ceiling-level-3 =  [color=red]✗[/color] КАС
+rmc-tacmap-alert-ceiling-level-4 =  [color=red]✗[/color] ОБ
+rmc-tacmap-alert-allowed-actions =  [color=green]✓[/color] { $actions }
+rmc-tacmap-alert-restricted-actions =  [color=red]✗[/color] { $actions }
+rmc-ui-shoutout-marine =  [bold]Операция профинансирована [color=green]{ $name }[/color]![/bold]
+rmc-ui-shoutout-xeno =  [bold]Улей основан [color=purple]{ $name }[/color]![/bold]
 rmc-ui-options-chat-squad-color-mode = Окрашивать имена в чате в цвета отрядов
 # Dialog input
 rmc-dialog-input-placeholder-default = Введите текст
 rmc-dialog-input-placeholder-smart-check = Более 3 пробелов подряд будут обрезаны
 rmc-ui-options-alternate-sprites = Использовать спрайты без трипофобных элементов
-
 rmc-ui-discord = Discord
 rmc-ui-patreon = Patreon
 rmc-other-credits-tab = Прочее

@@ -10,22 +10,22 @@ cuffable-component-remove-cuffs-push-success-message = Вы успешно сн�
 cuffable-component-remove-cuffs-by-other-success-message = { $otherName } снимает с вас наручники.
 cuffable-component-remove-cuffs-to-other-partial-success-message =
     Вы успешно снимаете наручники. { $cuffedHandCount } { $cuffedHandCount ->
-    [one] рука осталась
-    [few] руки остались
-    *[other] рук остались
-        } у { $otherName } в наручниках.
+        [one] рука осталась
+        [few] руки остались
+       *[other] рук остались
+    } у { $otherName } в наручниках.
 cuffable-component-remove-cuffs-by-other-partial-success-message =
     { $otherName } успешно снимает с вас наручники. { $cuffedHandCount } { $cuffedHandCount ->
-    [one] ваша рука осталась
-    [few] ваших руки остались
-    *[other] ваших рук остались
-        } в наручниках.
+        [one] ваша рука осталась
+        [few] ваших руки остались
+       *[other] ваших рук остались
+    } в наручниках.
 cuffable-component-remove-cuffs-partial-success-message =
     Вы успешно снимаете наручники. { $cuffedHandCount } { $cuffedHandCount ->
-    [one] ваша рука осталась
-    [few] ваших руки остались
-    *[other] ваших рук остались
-        } в наручниках.
+        [one] ваша рука осталась
+        [few] ваших руки остались
+       *[other] ваших рук остались
+    } в наручниках.
 cuffable-component-remove-cuffs-fail-message = Вам не удалось снять наручники.
 # UncuffVerb
 uncuff-verb-get-data-text = Освободить

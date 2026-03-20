@@ -11,7 +11,6 @@ rmc-dropship-pre-hijack =
        *[other] минут
     }.
 rmc-dropship-invalid-hijack = Из терминала вырываются вспышки данных, но их суть за пределами вашего понимания.
-
 rmc-dropship-weapons-title = Консоль управления вооружением
 rmc-dropship-weapons-main-screen-text =
     К.К.М.П.
@@ -24,7 +23,6 @@ rmc-dropship-weapons-weapon-selected-ammo =
     { $weapon }
     { $ammo }
     Снаряды: { $rounds } / { $maxRounds }
-
 rmc-dropship-weapons-target-strike =
     ЗАХВАТ ЦЕЛИ
     
@@ -32,7 +30,6 @@ rmc-dropship-weapons-target-strike =
     Конфиг. удара: { $weapon }
     Выбранная цель: { $target }
     Смещение: { $xOffset }, { $yOffset }
-
 rmc-dropship-weapons-equip-weapon-ammo =
     { $weapon }
     { $rounds } { $rounds ->
@@ -40,7 +37,6 @@ rmc-dropship-weapons-equip-weapon-ammo =
         [few] снаряда
        *[other] снарядов
     }
-
 rmc-dropship-weapons-equip = СНАРЯДИТЬ
 rmc-dropship-weapons-fire-mission = ОГН. ЗАДАЧА
 rmc-dropship-weapons-target = ЦЕЛЬ
@@ -70,28 +66,23 @@ rmc-dropship-weapons-fire-not-flying = Огонь возможен только 
 rmc-dropship-weapons-fire-not-skilled = У вас нет квалификации для стрельбы из этого орудия!
 rmc-dropship-weapons-fire-no-ammo = Боезапас { $weapon } исчерпан.
 rmc-dropship-weapons-fire-cooldown = Перегрев { $weapon }. Ожидайте охлаждения.
-
 rmc-dropship-attached = Установлено: { $attachment }.
 rmc-dropship-weapons-point-gun = Установлено: { $weapon }.
 rmc-dropship-weapons-point-ammo = Заряжено: { $ammo }.
 rmc-dropship-weapons-rounds-left = Заряжено { $current } из { $max } снарядов.
-
 rmc-dropship-utility-activate-not-flying = Вспомогательные системы доступны только в полёте.
 rmc-dropship-utility-not-flyby = { $utility } доступно только при пролёте над зоной.
 rmc-dropship-utility-not-skilled = У вас нет квалификации для использования этой системы!
 rmc-dropship-utility-cooldown = { $utility } на перезарядке. Повторите попытку позже.
 rmc-dropship-flyby-no-skill = У вас нет квалификации для выполнения маневра пролёта.
-
 rmc-dropship-fabricator-title = Фабрикатор компонентов
 rmc-dropship-fabricator-points = Очки: { $points }
 rmc-dropship-fabricator-equipment = [bold]Снаряжение[/bold]
 rmc-dropship-fabricator-ammo = [bold]Боеприпасы[/bold]
 rmc-dropship-fabricator-fabricate = Создать ({ $cost })
 rmc-dropship-fabricator-busy = Фабрикатор занят выполнением операции.
-
 rmc-dropship-firemission-warning = ЯРКИЕ ВСПЫШКИ В НЕБЕ НА { $direction }!
 rmc-dropship-firemission-warning-above = ЗАЛП АРТИЛЛЕРИИ ОБРУШИВАЕТСЯ ПРЯМО НА ВАС!
-
 rmc-dropship-paradrop-target-screen-text =
     HPU-1 Система десантирования
     { $hasTarget }
@@ -103,21 +94,17 @@ rmc-dropship-paradrop-target-screen-target-targeting =
     Десантирование доступно.
 rmc-dropship-paradrop-lock-no-target = Цель не выбрана.
 rmc-dropship-paradrop-lock-target-not-flying = Модуль десантирования доступен только в полёте.
-
 rmc-dropship-medevac-system-screen-text = RMU-4M Система "Медэвак"
 rmc-dropship-fulton-system-screen-text = RMU-19 Система извлечения "Фултон"
-
 rmc-dropship-locked = Доступ к управлению заблокирован на { $minutes } мин.
 rmc-dropship-locked-out = Шаттл не отвечает. Повторите попытку через { $minutes } мин.
 rmc-dropship-locked-out-bypass = Вы частично обошли протоколы блокировки! Продолжайте!
 rmc-dropship-locked-out-bypass-complete = Блокировка успешно снята!
-
 rmc-dropship-equipment-deployer-text = { $deployName }
 rmc-dropship-equipment-deployer-health = Состояние: { $status }
 rmc-dropship-equipment-deployer-ammo = Боезапас: { $ammoCount } / { $totalAmmoCount }
 rmc-dropship-equipment-deployer-status = Статус развертки: { $deployed }
 rmc-dropship-equipment-deployer-auto-deploy = Авто-развертка: { $autoDeploy }
-
 rmc-dropship-equipment-enabled = ВКЛЮЧЕНО
 rmc-dropship-equipment-disabled = ВЫКЛЮЧЕНО
 rmc-dropship-equipment-deployed = РАЗВЕРНУТО

@@ -17,6 +17,7 @@ id-card-access-level-atmospherics = Атмосферный
 id-card-access-level-research-director = Научный руководитель
 id-card-access-level-research = Научный отдел
 id-card-access-level-chief-medical-officer = Главный врач
+id-card-access-level-morgue = Morgue
 id-card-access-level-medical = Медицинский отдел
 id-card-access-level-chemistry = Химия
 id-card-access-level-paramedic = Парамедик

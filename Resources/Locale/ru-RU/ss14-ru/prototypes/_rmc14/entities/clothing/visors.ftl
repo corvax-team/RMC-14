@@ -19,7 +19,6 @@ ent-RMCVisorSquad = тактический визор отряда
 ent-RMCVisorSquadIntegrated = { ent-RMCVisorSquad }
     .suffix = Интегрированный
     .desc = { ent-RMCVisorSquad.desc }
-
 ent-RMCVisorPilotBlack = чёрный лётный визор MK30
     .desc = Стандартный быстросъёмный визор пилотов десантных кораблей ККМП. Поляризован для уменьшения бликов и защиты глаз во время входа в атмосферу или орбитального развёртывания.
 ent-RMCVisorPilotDarkblue = тёмно-синий лётный визор MK30

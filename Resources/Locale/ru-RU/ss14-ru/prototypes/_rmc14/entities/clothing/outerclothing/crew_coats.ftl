@@ -6,7 +6,6 @@ ent-RMCCoatCorrespondentBlack = { ent-RMCCoatCorrespondent }
     .desc = { ent-RMCCoatCorrespondent.desc }
 ent-RMCCoatCorrespondentBlue = { ent-RMCCoatCorrespondent }
     .desc = { ent-RMCCoatCorrespondent.desc }
-
 ent-RMCHazardVest = оранжевый сигнальный жилет
     .desc = Жилет повышенной видимости, обязательный для работы в опасных зонах.
 ent-RMCHazardVestBlue = синий сигнальный жилет
@@ -26,7 +25,6 @@ ent-RMCHazardVestEMT = красный жилет парамедика
     .desc = Красно-белый жилет повышенной видимости для сотрудников экстренной медицинской помощи.
 ent-RMCHazardVestEMTGreen = зелёный жилет парамедика
     .desc = Зелёно-белый жилет повышенной видимости для полевых медиков.
-
 ent-RMCLabcoat = лабораторный халат
     .desc = Белый халат, обеспечивающий базовую защиту от разливов химикатов.
 ent-RMCLabcoatOpened = лабораторный халат
@@ -55,7 +53,6 @@ ent-RMCLabcoatBrown = лабораторный халат (коричневый)
 ent-RMCLabcoatBrownOpened = лабораторный халат (коричневый)
     .desc = { ent-RMCLabcoat.desc }
     .suffix = Коричневый, расстёгнут
-
 ent-RMCLabcoatVirology = халат вирусолога
     .desc = Халат с зелёной полосой на плече. Обладает усиленной защитой от биологических угроз по сравнению со стандартными моделями.
     .suffix = Вирусология
@@ -67,7 +64,6 @@ ent-RMCLabcoatScience = халат учёного
 ent-RMCLabcoatScienceOpened = халат учёного
     .desc = { ent-RMCLabcoatScience.desc }
     .suffix = Расстёгнут
-
 ent-RMCMedicalApron = медицинский фартук
     .desc = Стерильный белый фартук для хирургических операций и работы с «грязными» биоматериалами.
 ent-RMCHydroApron = рабочий фартук
@@ -76,7 +72,6 @@ ent-RMCChefApron = фартук шеф-повара
     .desc = Простой белый фартук, хранящий на себе историю многих приготовленных блюд.
 ent-RMCDailyGrindApron = красный фартук
     .desc = Обычный красный фартук для работников сферы обслуживания.
-
 ent-RMCOuterEngineeringUtilityOversuit = инженерный рабочий комбинезон
     .desc = Износостойкий защитный комбинезон колониальных инженеров. Оснащен множеством петель и карманов для инструментов.
 ent-RMCOuterEngineeringUtilityOversuitAlt = инженерный рабочий комбинезон (альт.)

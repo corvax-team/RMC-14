@@ -9,13 +9,13 @@ set-game-preset-decoy-error = Если третий аргумент предо�
 #set-game-preset-preset-set = Установлен пресет "{ $preset }"
 set-game-preset-preset-set-finite =
     Установлен пресет "{ $preset }" на { $rounds ->
-    [one] следующий раунд
-    [few] следующие { $rounds } раунда
-    *[other] следующие { $rounds } раундов
-        }.
+        [one] следующий раунд
+        [few] следующие { $rounds } раунда
+       *[other] следующие { $rounds } раундов
+    }.
 set-game-preset-preset-set-finite-with-decoy =
     Установлен пресет "{ $preset }" на { $rounds ->
-    [one] следующий раунд
-    [few] следующие { $rounds } раунда
-    *[other] следующие { $rounds } раундов
-        }, отображая в лобби { $decoy }.
+        [one] следующий раунд
+        [few] следующие { $rounds } раунда
+       *[other] следующие { $rounds } раундов
+    }, отображая в лобби { $decoy }.

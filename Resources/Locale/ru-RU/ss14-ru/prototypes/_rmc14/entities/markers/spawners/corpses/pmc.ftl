@@ -1,3 +1,4 @@
+
 ent-RMCSpawnerCorpseWeYaGoonLead = спавнер трупа — лидер головорезов We-Ya
     .desc = { ent-RMCSpawnerCorpse.desc }
 ent-RMCSpawnerCorpseWeYaGoonLeadBurst = спавнер трупа — лидер головорезов We-Ya
@@ -11,3 +12,4 @@ ent-RMCSpawnerCorpseWeYaGoonLeadHybrisaBurst = спавнер трупа — л�
     .desc = { ent-RMCSpawnerCorpseWeYaGoonLead.desc }
 ent-RMCSpawnerCorpseWeYaGoonHybrisa = спавнер трупа — головорез We-Ya (Гибриса)
     .desc = { ent-RMCSpawnerCorpse.desc }
+

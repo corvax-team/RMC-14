@@ -15,18 +15,15 @@ cmd-rmcgivecommendation-help =
       rmcgivecommendation "Верховное командование ККМП" PlayerName "John Doe" medal 1 "За исключительную храбрость"
       rmcgivecommendation "Королева-Мать" XenoPlayer "XX-Alpha" jelly 2 "За защиту улья"
       rmcgivecommendation "Верховное командование ККМП" PlayerName "John Doe" medal 1 "За исключительную храбрость" 42
-
 # Errors
 cmd-rmcgivecommendation-invalid-arguments = Неверное количество аргументов!
 cmd-rmcgivecommendation-invalid-type = Неверный тип! Должно быть 'medal' или 'jelly'.
 cmd-rmcgivecommendation-invalid-award-type = Неверный тип { $type }! Должно быть от 1 до { $max }.
 cmd-rmcgivecommendation-empty-citation = Текст цитаты не может быть пустым!
 cmd-rmcgivecommendation-player-not-found = Игрок '{ $player }' не найден.
-
 # Success
 cmd-rmcgivecommendation-success = Награда { $award } вручена игроку { $player }!
 cmd-rmcgivecommendation-admin-announcement = { $admin } вручил(а) { $type } "{ $award }" игроку { $receiver } (персонаж: { $character }) за Раунд { $round }
-
 # Completion hints
 cmd-rmcgivecommendation-hint-giver = IC имя отправителя (будьте внимательны при вводе)
 cmd-rmcgivecommendation-hint-giver-highcommand = Стандартный отправитель для медалей морпехов

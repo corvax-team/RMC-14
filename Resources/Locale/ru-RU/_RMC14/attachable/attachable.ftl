@@ -1,21 +1,17 @@
 rmc-attachable-holder-strip-ui-title = Снять приспособления
 rmc-attachable-holder-strip-ui-empty-slot = Пусто
 rmc-verb-strip-attachables = Снять приспособления
-
 rmc-aslot-barrel = Ствол
 rmc-bslot-barrel = Ствол Матебы
 rmc-aslot-rail = Крепление (рельса)
 rmc-aslot-stock = Приклад
 rmc-aslot-underbarrel = Подствольное
 rmc-aslot-harness = Крепление (подвес)
-
 rmc-attachable-activation-fail-not-wielded = { CAPITALIZE($holder) } нужно держать в обеих руках, чтобы активировать { $attachable }!
 rmc-attachable-activation-fail-not-held = { CAPITALIZE($holder) } нужно держать в руке, чтобы активировать { $attachable }!
 rmc-attachable-activation-fail-not-owned = { CAPITALIZE($holder) } нужно экипировать или держать в руках, чтобы активировать { $attachable }!
 rmc-attachable-shoot-fail-not-wielded = { CAPITALIZE($holder) } нужно держать в обеих руках, чтобы стрелять из { $attachable }!
-
 rmc-attachable-verb-toggle = Переключить { $attachable }
-
 attachable-popup-activate-generic = Вы активируете { $attachable }.
 attachable-popup-deactivate-generic = Вы деактивируете { $attachable }.
 attachable-popup-activate-deploy-on-generic = Вы устанавливаете { $attachable } на { $surface }.
@@ -25,14 +21,13 @@ attachable-popup-activate-unfold = Вы разворачиваете { $attachab
 attachable-popup-deactivate-collapse = Вы складываете { $attachable }.
 attachable-popup-activate-lock = Вы блокируете { $attachable }.
 attachable-popup-deactivate-unlock = Вы разблокируете { $attachable }.
+
 # В оригинале lock/unlock часто перепутаны местами в коде, проверь в игре: обычно lock — блокировать.
 
 attachable-popup-switch-to-generic = Вы переключаетесь на { $attachable }.
 attachable-popup-switch-from-generic = Вы перестаёте использовать { $attachable }.
-
 rmc-attachable-examinable-verb-text = Характеристики приспособлений
 rmc-attachable-examinable-verb-message = Просмотреть модификаторы, которые накладывает это приспособление.
-
 rmc-attachable-examine-condition-always = [bold]Всегда:[/bold]
 rmc-attachable-examine-condition-when = Когда
 rmc-attachable-examine-condition-wielded = предмет [bold]в обеих руках[/bold]
@@ -41,6 +36,9 @@ rmc-attachable-examine-condition-active = { $attachable } [bold]активиро
 rmc-attachable-examine-condition-inactive = { $attachable } [bold]выключен[/bold]
 rmc-attachable-examine-condition-whitelist-comps = пользователь [bold]имеет { $compNumber }[/bold] из след. компонентов: [bold]{ $comps }[/bold]
 rmc-attachable-examine-condition-whitelist-sizes = пользователь [bold]имеет[/bold] один из след. размеров: [bold]{ $sizes }[/bold]
+rmc-attachable-examine-condition-blacklist-comps = the holder [bold]lacks { $compNumber }[/bold] of the following components: [bold]{ $comps }[/bold]
+rmc-attachable-examine-condition-blacklist-sizes = the holder [bold]is not[/bold] one of the following sizes: [bold]{ $sizes }[/bold]
+rmc-attachable-examine-condition-blacklist-tags = the holder [bold]lacks { $tagNumber }[/bold] of the following tags: [bold]{ $tags }[/bold]
 rmc-attachable-examine-condition-whitelist-tags = пользователь [bold]имеет { $tagNumber }[/bold] из след. тегов: [bold]{ $tags }[/bold]
 rmc-attachable-examine-ranged-accuracy = [color={ $colour }]{ $sign }{ $accuracy }[/color] к множителю точности.
 rmc-attachable-examine-ranged-scatter = [color={ $colour }]{ $sign }{ $scatter }[/color] град. к разбросу.

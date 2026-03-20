@@ -7,21 +7,24 @@ cm-tackle-success-observer = { $user } толкает { $target } на земл�
 rmc-disarm-shove-others = { CAPITALIZE(THE($performerName)) } { $shoveText } { THE($targetName) }!
 rmc-disarm-shove-target = { CAPITALIZE(THE($performerName)) } { $shoveText } вас!
 rmc-disarm-shove-self = Вы { $shoveText } { THE($targetName) }!
-rmc-disarm-text-skilled = { $gender ->
-    [male] повалил
-    [female] повалила
-   *[other] повалил(а)
-}
-rmc-disarm-text-1 = { $gender ->
-    [male] толкнул
-    [female] толкнула
-   *[other] толкнул(а)
-}
-rmc-disarm-text-2 = { $gender ->
-    [male] оттолкнул
-    [female] оттолкнула
-   *[other] оттолкнул(а)
-}
+rmc-disarm-text-skilled =
+    { $gender ->
+        [male] повалил
+        [female] повалила
+       *[other] повалил(а)
+    }
+rmc-disarm-text-1 =
+    { $gender ->
+        [male] толкнул
+        [female] толкнула
+       *[other] толкнул(а)
+    }
+rmc-disarm-text-2 =
+    { $gender ->
+        [male] оттолкнул
+        [female] оттолкнула
+       *[other] оттолкнул(а)
+    }
 rmc-disarm-break-pulls-others = { CAPITALIZE(THE($performerName)) } вырывает { THE($object) } из хватки { THE($targetName) }!
 rmc-disarm-break-pulls-self = Вы вырвали { THE($object) } из захвата { THE($targetName) }!
 rmc-disarm-break-pulls-target = { CAPITALIZE(THE($performerName)) } вырывает { THE($object) } из ваших рук!

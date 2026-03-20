@@ -5,7 +5,16 @@ ent-RMCBaseJacketButtonable = { ent-RMCBaseJacket }
 ent-RMCBaseJacketButtonableOpened = { ent-RMCBaseJacketButtonable }
     .suffix = Расстёгнут
     .desc = { ent-RMCBaseJacketButtonable.desc }
-
+ent-RMCAllowSuitStorageClothingJacket = { "" }
+    .desc = { "" }
+ent-RMCAllowSuitStorageClothingHazardVest = { "" }
+    .desc = { "" }
+ent-RMCAllowSuitStorageClothingJacketMB = { "" }
+    .desc = { "" }
+ent-RMCAllowSuitStorageClothingLabcoat = { "" }
+    .desc = { "" }
+ent-RMCAllowSuitStorageClothingChefApron = { "" }
+    .desc = { "" }
 ent-CMCoatChiefMP = китель начальника военной полиции
     .desc = Форменная куртка ККМП для офицеров ВП. По иронии судьбы, на кораблях от полиции требуют носить полную броню, так что китель пылится в шкафу. Идеально подходит тем, кто хочет необъяснимо пахнуть пончиками.
 ent-CMCoatWarden = китель военного надзирателя
