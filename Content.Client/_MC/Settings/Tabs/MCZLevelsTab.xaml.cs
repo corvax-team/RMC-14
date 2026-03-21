@@ -13,8 +13,6 @@ public sealed partial class MCZLevelsTab : Control
         RobustXamlLoader.Load(this);
 
         Control.AddOptionCheckBox(MCConfigVars.ZLevelsPhysicsClientSimulation, ZLevelsPhysicsClientSimulation);
-        Control.AddOptionSlider(MCConfigVars.ZLevelsPhysicsTickRate, ZLevelsPhysicsFrameRate, 5, 60);
-
         Control.Initialize();
     }
 }

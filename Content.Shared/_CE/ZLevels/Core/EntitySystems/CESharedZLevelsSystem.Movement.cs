@@ -26,7 +26,6 @@ public abstract partial class CESharedZLevelsSystem
 
     private const float ZGravityForce = 9.8f;
     private const float ZVelocityLimit = 20.0f;
-    private const int MaxStepsPerFrame = 10;
 
     /// <summary>
     /// The minimum speed required to trigger LandEvent events.
@@ -34,8 +33,6 @@ public abstract partial class CESharedZLevelsSystem
     private const float ImpactVelocityLimit = 3f;
 
     private EntityQuery<CEZLevelHighGroundComponent> _highgroundQuery;
-
-    private TimeSpan _accumulatedTime = TimeSpan.Zero;
 
     private void InitializeMovement()
     {
@@ -114,20 +111,7 @@ public abstract partial class CESharedZLevelsSystem
 
         if (_net.IsClient && !_clientSimulation)
             return;
-        _accumulatedTime += TimeSpan.FromSeconds(frameTime);
 
-        var steps = 0;
-        while (_accumulatedTime >= _fixedTimestep && steps < MaxStepsPerFrame)
-        {
-            UpdateZPhysics((float) _fixedTimestep.TotalSeconds);
-
-            _accumulatedTime -= _fixedTimestep;
-            steps++;
-        }
-    }
-
-    private void UpdateZPhysics(float frameTime)
-    {
         var query = EntityQueryEnumerator<CEZPhysicsComponent, CEActiveZPhysicsComponent, TransformComponent, PhysicsComponent>();
         while (query.MoveNext(out var uid, out var zPhysicsComponent, out _, out var xform, out var physics))
         {
@@ -154,7 +138,7 @@ public abstract partial class CESharedZLevelsSystem
                 }
             }
 
-            // Movement application
+            //Movement application
             zPhysicsComponent.LocalPosition += zPhysicsComponent.Velocity * frameTime;
 
             var distanceToGround = zPhysicsComponent.LocalPosition - zPhysicsComponent.CachedGroundHeight;
@@ -171,11 +155,10 @@ public abstract partial class CESharedZLevelsSystem
             {
                 if (distanceToGround <= 0.05f) //There`s a ground
                 {
-                    if (float.Abs(zPhysicsComponent.Velocity) >= ImpactVelocityLimit)
+                    if (MathF.Abs(zPhysicsComponent.Velocity) >= ImpactVelocityLimit)
                     {
                         var hitEv = new CEZLevelHitEvent(-zPhysicsComponent.Velocity);
                         RaiseLocalEvent(uid, ref hitEv);
-
                         var land = new LandEvent(null, true);
                         RaiseLocalEvent(uid, ref land);
                     }
@@ -202,11 +185,10 @@ public abstract partial class CESharedZLevelsSystem
             {
                 if (HasTileAbove(uid)) //Hit roof
                 {
-                    if (float.Abs(zPhysicsComponent.Velocity) >= ImpactVelocityLimit)
+                    if (MathF.Abs(zPhysicsComponent.Velocity) >= ImpactVelocityLimit)
                     {
                         var hitEv = new CEZLevelHitEvent(zPhysicsComponent.Velocity);
                         RaiseLocalEvent(uid, ref hitEv);
-
                         var land = new LandEvent(null, true);
                         RaiseLocalEvent(uid, ref land);
                     }
@@ -214,20 +196,20 @@ public abstract partial class CESharedZLevelsSystem
                     zPhysicsComponent.LocalPosition = 1;
                     zPhysicsComponent.Velocity = -zPhysicsComponent.Velocity * zPhysicsComponent.Bounciness;
                 }
-                else
+                else //Move up
                 {
                     if (TryMoveUp(uid))
                         zPhysicsComponent.LocalPosition -= 1;
                 }
             }
 
-            if (float.Abs(zPhysicsComponent.Velocity) > ZVelocityLimit)
-                zPhysicsComponent.Velocity = float.Sign(zPhysicsComponent.Velocity) * ZVelocityLimit;
+            if (Math.Abs(zPhysicsComponent.Velocity) > ZVelocityLimit)
+                zPhysicsComponent.Velocity = MathF.Sign(zPhysicsComponent.Velocity) * ZVelocityLimit;
 
-            if (float.Abs(oldVelocity - zPhysicsComponent.Velocity) > 0.01f)
+            if (Math.Abs(oldVelocity - zPhysicsComponent.Velocity) > 0.01f)
                 DirtyField(uid, zPhysicsComponent, nameof(CEZPhysicsComponent.Velocity));
 
-            if (float.Abs(oldHeight - zPhysicsComponent.LocalPosition) > 0.01f)
+            if (Math.Abs(oldHeight - zPhysicsComponent.LocalPosition) > 0.01f)
                 DirtyField(uid, zPhysicsComponent, nameof(CEZPhysicsComponent.LocalPosition));
         }
     }
