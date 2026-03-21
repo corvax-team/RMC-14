@@ -1,0 +1,10 @@
+ent-RMCVehicleTankHardpointBase = { ent-BaseItem }
+    .desc = { ent-BaseItem.desc }
+ent-RMCVehicleTankTurret = tank turret
+    .desc = A tank turret hardpoint.
+ent-RMCVehicleTankTreads = tank treads
+    .desc = Heavy duty tank treads.
+ent-RMCVehicleTankReinforcedTreads = reinforced tank treads
+    .desc = Heavier tank treads with better durability and acid resistance at the cost of acceleration.
+ent-RMCVehicleTankTires = tank tires
+    .desc = Reinforced tank tires.

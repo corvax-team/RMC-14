@@ -1,0 +1,12 @@
+ent-RMCSkillPresetParamarine = Royal Paramarine Rifleman
+    .desc = { "" }
+ent-RMCSkillPresetParaPilot = Royal Paramarine Pilot
+    .desc = { ent-RMCSkillPresetParamarine.desc }
+ent-RMCSkillPresetParaEngineer = Royal Paramarine Engineer
+    .desc = { ent-RMCSkillPresetParamarine.desc }
+ent-RMCSkillPresetParaMedic = Royal Paramarine Medic
+    .desc = { ent-RMCSkillPresetParamarine.desc }
+ent-RMCSkillPresetParaLeader = Royal Paramarine Squad Leader
+    .desc = { ent-RMCSkillPresetParamarine.desc }
+ent-RMCSkillPresetParaSynth = Royal Paramarine Synthetic
+    .desc = { "" }
