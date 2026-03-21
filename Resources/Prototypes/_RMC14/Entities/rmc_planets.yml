@@ -64,7 +64,7 @@
     map: /Maps/_RMC14/solaris.yml
     camouflage: Desert
     # announcement: "Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada." заменил на анноунсемент ниже
-    announcement: "Пехота! Наши друзья из Витезстви недавно потеряли контакт с своим горнизоном со склада биологических активов на планете LV-1413, и просят разобраться с этим они НАС. Ну.. в общем, собирайтесь и надрите зад тому, кто бы там это не устроил.  Командир эскадры Гранц, отбой."
+    announcement: "Пехота! Наши друзья из Витезстви недавно потеряли контакт с своим горнизоном с базы исследования ксено-биологических активов на планете LV-1413, и просят разобраться с этим они НАС. Ну.. в общем, собирайтесь и надрите зад тому, кто бы там это не устроил.. А. ну и поищите там их помощника менеджера, важная шишка, они потеряли там его корабль, ну или хотябы труп его принесите.  Командир эскадры Гранц, отбой."
     minPlayers: 25 # CCM14-mappool
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingSolaris
