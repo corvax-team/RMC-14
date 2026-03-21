@@ -1,2 +1,2 @@
-ent-RMCSkillPresetPMCCommando = Survivor We-Ya Commando
+ent-RMCSkillPresetPMCCommando = Выживший Коммандос Vi
     .desc = { "" }
