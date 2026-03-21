@@ -1,8 +1,8 @@
 - type: entity
-  name: riot shield
+  name: Vitrage-AT security shield with flash
   parent: CCMBaseShield
   id: CCMShieldSecurityFlash
-  description: A large tower shield. Good for controlling crowds.
+  description: A large shield made for protecting police officers from bullets. Have flash and button for that
   components:
     - type: Blocking
       passiveBlockModifier:
