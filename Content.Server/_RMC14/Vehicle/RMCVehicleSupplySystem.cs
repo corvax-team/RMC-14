@@ -302,8 +302,6 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
 // CCM edit start
 private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapInitEvent args)
 {
-    // Откладываем заполнение до следующего тика,
-    // когда все консоли уже проинициализированы
     Timer.Spawn(TimeSpan.Zero, () =>
     {
         if (!Deleted(ent))
@@ -449,9 +447,6 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
 
     private void TryToggleLift(Entity<RMCVehicleSupplyConsoleComponent> console, Entity<RMCVehicleSupplyLiftComponent> lift, bool raise)
     {
-        if (console.Comp.OrderUsed)
-           return;
-
         var comp = lift.Comp;
         if (comp.NextMode != null || comp.Busy)
             return;
@@ -479,8 +474,6 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
                         {
                             if (TryRemoveStored(comp, key))
                             {
-                                console.Comp.OrderUsed = true;
-                                Dirty(console);
                                 canQueueVehicle = true;
                                 nextVehicle = selected;
                                 comp.PendingVehicleEntity = null;
@@ -1553,7 +1546,7 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
 
         return unlocked.Contains(Normalize(entry.Unlock));
     }
-    
+
     private IReadOnlyList<string> GetHardpointsForVehicle(string vehicleId, IReadOnlyList<RMCVehicleSupplyEntry> entries)
     {
         var key = Normalize(vehicleId);

@@ -6,7 +6,7 @@
   - type: StorageFill
     contents:
     - id: RMCVehicleAmmoBoxLTBCannon
-      amount: 2
+      amount: 6
 
 - type: entity
   parent: RMCCrateAmmo

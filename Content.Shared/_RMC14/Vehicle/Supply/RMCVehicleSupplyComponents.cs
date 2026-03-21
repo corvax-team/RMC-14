@@ -37,9 +37,6 @@ public sealed partial class RMCVehicleSupplyConsoleComponent : Component
 
     [DataField]
     public int SelectedVehicleCopyIndex;
-    
-    [DataField]
-    public bool OrderUsed = false;
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
