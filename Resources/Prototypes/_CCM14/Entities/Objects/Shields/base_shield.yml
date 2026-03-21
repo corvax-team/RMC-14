@@ -70,6 +70,8 @@
             - CCMAttachmentShieldBraceTag
     - type: StaticPrice
       price: 100
+    - type: GunDualWielding
+      weaponGroup: Submachinegun
 
 - type: entity
   parent: RMCStockAttachmentCollapsibleBase
