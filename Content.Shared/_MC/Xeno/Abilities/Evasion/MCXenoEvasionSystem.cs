@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Actions;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Jittering;
 using Content.Shared.Projectiles;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Physics.Events;
@@ -14,9 +15,10 @@ public sealed class MCXenoEvasionSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedJitteringSystem _jittering = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
 
     private EntityQuery<RMCBulletComponent> _bulletQuery;
     private EntityQuery<ProjectileComponent> _projectileQuery;
@@ -100,7 +102,7 @@ public sealed class MCXenoEvasionSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        args.Cancel();
+        // args.Cancel();
     }
 
     private void OnEvaderPreventCollide(Entity<MCXenoEvaderComponent> entity, ref PreventCollideEvent args)
@@ -119,16 +121,15 @@ public sealed class MCXenoEvasionSystem : EntitySystem
 
         if (evasionComponent.EvadeSound is not null)
             _audio.PlayPredicted(evasionComponent.EvadeSound, entity, entity);
+
+        _jittering.DoJitter(entity, TimeSpan.FromSeconds(0.5), true, frequency: 6);
     }
 
     private void RefreshAction(EntityUid uid)
     {
-        foreach (var (actionUid, actionComponent) in _actions.GetActions(uid))
+        foreach (var action in _rmcActions.GetActionsWithEvent<MCXenoEvasionActionEvent>(uid))
         {
-            if (actionComponent.BaseEvent is not MCXenoEvasionActionEvent)
-                continue;
-
-            _actions.ClearCooldown(actionUid);
+            _actions.ClearCooldown((action, action));
         }
     }
 
