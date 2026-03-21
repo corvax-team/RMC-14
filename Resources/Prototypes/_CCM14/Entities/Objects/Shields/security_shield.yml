@@ -1,0 +1,58 @@
+- type: entity
+  name: riot shield
+  parent: CCMBaseShield
+  id: CCMShieldSecurityFlash
+  description: A large tower shield. Good for controlling crowds.
+  components:
+    - type: Blocking
+      passiveBlockModifier:
+        coefficients:
+          Blunt: 2
+          Slash: 2
+          Piercing: 0.3
+          Heat: 1.5
+      activeBlockModifier:
+        coefficients:
+          Blunt: 2
+          Slash: 2
+          Piercing: 0.2
+          Heat: 1.5
+        flatReductions:
+          Blunt: 1
+          Slash: 1
+          Piercing: 1
+          Heat: 1
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 300
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+    - type: Sprite
+      sprite: _CCM14/Objects/Shields/security_shield.rsi
+    - type: Item
+      size: Ginormous
+      sprite: _CCM14/Objects/Shields/security_shield.rsi
+    - type: LimitedCharges
+      maxCharges: 5
+      lastCharges: 5
+    - type: AutoRecharge
+      rechargeDuration: 15
+    - type: UseDelay
+      delay: 0.5
+    - type: Appearance
+    - type: GenericVisualizer
+      visuals:
+        enum.FlashVisuals.Flashing:
+          enum.FlashVisualLayers.LightLayer:
+            True: { visible: true }
+            False: { visible: false }
+    - type: MeleeRequiresSkill
+      skills:
+        RMCSkillPolice: 1
+    - type: Flash
+      slowTo: 0.25
+      meleeStunDuration: 12
+      range: 3
