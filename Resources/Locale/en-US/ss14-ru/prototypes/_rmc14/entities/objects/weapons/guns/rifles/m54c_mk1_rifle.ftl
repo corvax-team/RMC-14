@@ -16,3 +16,6 @@ ent-RMCMagazineRifleM54CMK1Incendiary = M54C MK1 Incendiary magazine (10x24mm)
 ent-RMCMagazineRifleM54CMK1HEAP = M54C MK1 HEAP magazine (10x24mm)
     .suffix = HEAP
     .desc = { ent-CMMagazineRifleM54CMK1.desc }
+ent-RMCMagazineRifleM54CMK1WP = M54C MK1 WP magazine (10x24mm)
+    .suffix = WP
+    .desc = { ent-CMMagazineRifleM54CMK1.desc }
