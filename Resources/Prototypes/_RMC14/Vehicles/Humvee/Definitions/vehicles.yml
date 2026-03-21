@@ -8,6 +8,7 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
+    mobCollisionDamage: 20 # CCM14
     maxSpeed: 9
     acceleration: 6
     deceleration: 12
