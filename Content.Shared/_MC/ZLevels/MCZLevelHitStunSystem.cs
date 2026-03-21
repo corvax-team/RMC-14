@@ -2,7 +2,7 @@ using Content.Shared._CE.ZLevels.Core.EntitySystems;
 
 namespace Content.Shared._MC.ZLevels;
 
-public sealed class MCZLevelHitStunSystem : EntitySystem
+public sealed class MCZLevelFallStunSystem : EntitySystem
 {
     [Dependency] private readonly SharedStunSystem _stun = default!;
 
@@ -10,10 +10,10 @@ public sealed class MCZLevelHitStunSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MCZLevelHitStunComponent, CEZLevelHitEvent>(OnHit);
+        SubscribeLocalEvent<MCZLevelFallStunComponent, CEZLevelHitEvent>(OnHit);
     }
 
-    private void OnHit(Entity<MCZLevelHitStunComponent> entity, ref CEZLevelHitEvent args)
+    private void OnHit(Entity<MCZLevelFallStunComponent> entity, ref CEZLevelHitEvent args)
     {
         _stun.TryStun(target, TimeSpan.FromSeconds(1f), true);
         _stun.TryKnockdown(target, TimeSpan.FromSeconds(1f), true);
