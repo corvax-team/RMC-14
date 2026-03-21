@@ -35,6 +35,13 @@
                 CCMShieldMarineBroken:
                   min: 1
                   max: 1
+    - type: Sprite
+      sprite: _CCM14/Objects/Shields/marine_shield.rsi
+      state: riot-icon
+    - type: Item
+      sprite: _CCM14/Objects/Shields/marine_shield.rsi
+      size: Ginormous
+      heldPrefix: riot
 
 - type: entity
   name: riot shield
@@ -68,3 +75,10 @@
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
+    - type: Sprite
+      sprite: _CCM14/Objects/Shields/broken_marine_shield.rsi
+      state: riot-icon
+    - type: Item
+      sprite: _CCM14/Objects/Shields/broken_marine_shield.rsi
+      size: Ginormous
+      heldPrefix: riot
