@@ -1,0 +1,117 @@
+- type: entity
+  name: riot shield
+  parent: CCMBaseShield
+  id: CCMShieldMarineFlashlight
+  description: A large tower shield. Good for controlling crowds.
+  components:
+    - type: Blocking
+      passiveBlockModifier:
+        coefficients:
+          Blunt: 1.15
+          Slash: 1.15
+          Piercing: 1.15
+          Heat: 1.15
+      activeBlockModifier:
+        coefficients:
+          Blunt: 0.95
+          Slash: 0.95
+          Piercing: 0.95
+          Heat: 0.95
+        flatReductions:
+          Blunt: 1
+          Slash: 1
+          Piercing: 1
+          Heat: 1
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 300
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                CCMShieldMarineBrokenFlashlight:
+                  min: 1
+                  max: 1
+    - type: HandheldLight
+      blinkingBehaviourId: blinking
+      radiatingBehaviourId: radiating
+    - type: LightBehaviour
+      behaviours:
+        - !type:FadeBehaviour
+          id: radiating
+          maxDuration: 2.0
+          startValue: 3.0
+          endValue: 2.0
+          isLooped: true
+          reverseWhenFinished: true
+        - !type:PulseBehaviour
+          id: blinking
+          interpolate: Nearest
+          maxDuration: 1.0
+          minValue: 0.1
+          maxValue: 2.0
+          isLooped: true
+    - type: PointLight
+      enabled: false
+      radius: 5
+      netsync: false
+    - type: Sprite
+      sprite: _CCM14/Objects/Shields/light_shield.rsi
+      layers:
+        - state: flashlight
+        - state: flashlight-on
+          visible: false
+          map: [ "light" ]
+    - type: Item
+      sprite: _CCM14/Objects/Shields/light_shield.rsi
+      size: Ginormous
+
+- type: entity
+  name: riot shield
+  parent: CCMShieldMarine
+  id: CCMShieldMarineBrokenFlashlight
+  description: A large tower shield. Good for controlling crowds.
+  components:
+    - type: Blocking
+      passiveBlockModifier:
+        coefficients:
+          Blunt: 1.40
+          Slash: 1.40
+          Piercing: 1.40
+          Heat: 1.40
+      activeBlockModifier:
+        coefficients:
+          Blunt: 1.20
+          Slash: 1.20
+          Piercing: 1.20
+          Heat: 1.20
+        flatReductions:
+          Blunt: 0
+          Slash: 0
+          Piercing: 0
+          Heat: 0
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 200
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+    - type: PointLight
+      enabled: false
+      radius: 3
+      netsync: false
+    - type: Sprite
+      sprite: _CCM14/Objects/Shields/broken_light_shield.rsi
+      layers:
+        - state: flashlight
+        - state: flashlight-on
+          visible: false
+          map: [ "light" ]
+    - type: Item
+      sprite: _CCM14/Objects/Shields/broken_light_shield.rsi
+      size: Ginormous
