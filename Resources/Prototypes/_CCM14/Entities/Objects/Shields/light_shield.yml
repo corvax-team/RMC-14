@@ -1,8 +1,8 @@
 - type: entity
-  name: riot shield
+  name: Avangard-M-F marine shield with flashlight
   parent: CCMBaseShield
   id: CCMShieldMarineFlashlight
-  description: A large tower shield. Good for controlling crowds.
+  description: "A version of 'Avangard-M Marine shield' with flashlight to light area around shield-user"
   components:
     - type: Blocking
       passiveBlockModifier:
@@ -70,10 +70,10 @@
       size: Ginormous
 
 - type: entity
-  name: riot shield
+  name: Avangard-M-F damaged marine shield with flashlight
   parent: CCMShieldMarine
   id: CCMShieldMarineBrokenFlashlight
-  description: A large tower shield. Good for controlling crowds.
+  description: Flashlight shield that was damaged by someone or somewhat. It can barely block
   components:
     - type: Blocking
       passiveBlockModifier:
