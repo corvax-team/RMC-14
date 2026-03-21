@@ -1,0 +1,16 @@
+- type: entity
+  parent: ActionXenoBase
+  id: MCActionXenoEvasion
+  name: Evasion (75)
+  description: Take evasive action, forcing non-friendly projectiles that would hit you to miss for a short duration so long as you keep moving.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _MC/Interface/Actions/Xeno/runner.rsi
+      state: evasion
+    useDelay: 10
+    event: !type:MCXenoEvasionActionEvent
+      plasmaCost: 75
+  - type: XenoActionPlasma
+    cost: 75
