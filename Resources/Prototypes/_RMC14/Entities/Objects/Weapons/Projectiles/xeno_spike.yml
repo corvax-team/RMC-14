@@ -30,3 +30,4 @@
         Brute: 5
   - type: TimedDespawn
     lifetime: 10
+  - type: CEZPhysics # [z-levels]
