@@ -1,2 +1,14 @@
-
-
+ent-RMCMagazinePistolM13AP = бронебойный магазин M13 (10x20 мм APC)
+    .desc = { ent-RMCMagazinePistolM13.desc }
+ent-RMCMagazinePistolM13ExtAP = бронебойный увеличенный магазин M13 (10x20 мм APC)
+    .desc = { ent-CMBaseMagazinePistol.desc }
+ent-RMCMagazinePistolM13DrumAP = бронебойный барабанный магазин M13 (10x20 мм APC)
+    .desc = { ent-CMBaseMagazinePistol.desc }
+ent-RMCCartridgeAutoPistol = патрон (10x20 мм APC)
+    .desc = { ent-CMCartridgeSMGBase.desc }
+ent-RMCCartridgeAutoPistolAP = бронебойный патрон (10x20 мм APC)
+    .desc = { ent-CMCartridgeSMGBase.desc }
+ent-RMCBulletAutoPistol = { ent-RMCBaseBullet }
+    .desc = { ent-RMCBaseBullet.desc }
+ent-RMCBulletAutoPistolAP = { ent-RMCBulletAutoPistol }
+    .desc = { ent-RMCBulletAutoPistol.desc }

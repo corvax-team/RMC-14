@@ -1,7 +1,10 @@
 ent-RMCResearchThingies = исследовательские штуковины
     .desc = { "" }
+ent-RMCBaseAlienTank = криокамера
+    .desc = { ent-RMCResearchThingies.desc }
 ent-RMCAlienTank = криокамера
     .desc = Внутри что-то большое...
+    .suffix = Инопланетная
 ent-RMCAlienTankBroken = { ent-RMCAlienTank }
     .suffix = Разрушена
     .desc = { ent-RMCAlienTank.desc }
