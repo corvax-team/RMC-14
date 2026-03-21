@@ -374,6 +374,7 @@
   #   damage:
   #     types:
   #       Slash: 5
+  # - type: MCZLevelHitStun # [z-levels]
 
 - type: entity
   abstract: true
