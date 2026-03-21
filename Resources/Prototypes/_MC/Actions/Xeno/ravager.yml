@@ -15,3 +15,24 @@
   - type: XenoActionPlasma
     cost: 200
   - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: MCActionXenoCharge
+  name: Charge (250)
+  description: Charge up to 4 tiles and viciously attack your target
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: charge
+    useDelay: 20
+  - type: TargetAction
+    range: 100
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:MCXenoPounceActionEvent
+  - type: XenoActionPlasma
+    cost: 250
+  - type: ActionBlockIfResting

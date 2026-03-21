@@ -8,5 +8,17 @@ namespace Content.Shared._MC.Xeno.Abilities.Ravage;
 public sealed partial class MCXenoRavageComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public ProtoId<EmotePrototype> Emote = "XenoRoar";
+    public TimeSpan Delay = TimeSpan.Zero; // DoAfter
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan UseDelay = TimeSpan.FromSeconds(6); 
+
+    [ViewVariables] 
+    public TimeSpan NextUse = TimeSpan.Zero; 
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId EffectEntId = "MCEffectXenoSlash";
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<EmotePrototype> EffectEmote = "XenoRoar";
 }

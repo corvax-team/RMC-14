@@ -47,11 +47,11 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    - ActionXenoAssault
     - ActionXenoEmpower
     - ActionXenoScissorCut
     - ActionXenoDevolve
     - MCActionXenoRavage
+    - MCActionXenoCharge
     tier: 3
     hudOffset: 0,0.1
     unlockAt: 900 # 15 minutes
@@ -72,6 +72,23 @@
   - type: XenoClaws
     clawType: VerySharp
   - type: MCXenoRavage # CCM Change
+  # Pounce (Charge) MC-CCM change
+  - type: MCXenoPounceEmote
+    emote: XenoRoar
+  - type: MCXenoPounceEffect
+    entityId: MCEffectXenoCharge
+  # - type: MCXenoEndure
+  #   duration: 10
+  - type: MCXenoPounce
+    maxDistance: 4
+    strength: 45
+    hitSelfParalyzeTime: 0
+    hitKnockdownTime: 2
+    stopOnHit: false
+    hitDamage:
+      types:
+        Slash: 30
+    # MC-CCM change end
   - type: MeleeWeapon
     attackRate: 1.05
     damage:

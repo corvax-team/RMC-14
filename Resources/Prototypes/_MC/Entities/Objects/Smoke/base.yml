@@ -1,5 +1,5 @@
 - type: entity
-  id: MCSmoke
+  id: MCSmokeTile
   name: smoke
   categories: [ MCContent ]
   abstract: true
@@ -11,9 +11,8 @@
   - type: Sprite
     sprite: _RMC14/Effects/smoke.rsi
     state: smoke2
-    color: "#cfcccc"
+    drawdepth: Effects
   - type: MCSmoke
-  - type: MCEdgeSpreader
   - type: Transform
     anchored: true
   - type: Physics
@@ -25,13 +24,19 @@
           bounds: "-0.4,-0.4,0.4,0.4"
         mask:
         - MobMask
+        - MobLayer
+        - BarricadeImpassable
         layer:
         - MidImpassable
-  - type: MCTimedDespawnDisappearanceVisuals
-    maxAlpha: 0.34
-    lifetime: 10
   - type: TimedDespawn
     lifetime: 12
+
+- type: entity
+  parent: MCSmokeTile
+  id: MCSmoke
+  abstract: true
+  components:
+  - type: MCEdgeSpreader
 
 - type: Tag
   id: MCSmoke
