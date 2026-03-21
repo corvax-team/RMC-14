@@ -1,0 +1,70 @@
+- type: entity
+  name: riot shield
+  parent: CCMBaseShield
+  id: CCMShieldMarine
+  description: A large tower shield. Good for controlling crowds.
+  components:
+    - type: Blocking
+      passiveBlockModifier:
+        coefficients:
+          Blunt: 1
+          Slash: 1
+          Piercing: 1
+          Heat: 1
+      activeBlockModifier:
+        coefficients:
+          Blunt: 0.8
+          Slash: 0.8
+          Piercing: 0.8
+          Heat: 0.8
+        flatReductions:
+          Blunt: 1
+          Slash: 1
+          Piercing: 1
+          Heat: 1
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 300
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                CCMShieldMarineBroken:
+                  min: 1
+                  max: 1
+
+- type: entity
+  name: riot shield
+  parent: CCMShieldMarine
+  id: CCMShieldMarineBroken
+  description: A large tower shield. Good for controlling crowds.
+  components:
+    - type: Blocking
+      passiveBlockModifier:
+        coefficients:
+          Blunt: 1.25
+          Slash: 1.25
+          Piercing: 1.25
+          Heat: 1.25
+      activeBlockModifier:
+        coefficients:
+          Blunt: 1.05
+          Slash: 1.05
+          Piercing: 1.05
+          Heat: 1.05
+        flatReductions:
+          Blunt: 0
+          Slash: 0
+          Piercing: 0
+          Heat: 0
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 200
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
