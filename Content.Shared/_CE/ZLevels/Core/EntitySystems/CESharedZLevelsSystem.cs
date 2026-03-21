@@ -8,12 +8,14 @@
 using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Popups;
+using Content.Shared._MC;
 using JetBrains.Annotations;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
+using Robust.Shared.Network;
 
 namespace Content.Shared._CE.ZLevels.Core.EntitySystems;
 
@@ -26,6 +28,8 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IConfigurationManager _config = null!;
+    [Dependency] private readonly INetManager _net = null!;
 
     private EntityQuery<MapComponent> _mapQuery;
     private EntityQuery<MapGridComponent> _gridQuery;
