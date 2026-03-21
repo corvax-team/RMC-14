@@ -1,6 +1,6 @@
-ent-RMCVehicleSPPVanTurret = башня фургона SPP
-    .desc = Башня, установленная на крыше фургона SPP.
-ent-RMCVehicleSPPVanCannon = пушка фургона SPP
-    .desc = Пушка, установленная на башне фургона SPP.
-ent-RMCVehicleSPPVanWheel = колесо фургона SPP
-    .desc = Усиленное колесо для фургона SPP.
+ent-RMCVehicleSPPVanTurret = башня фургона СССП
+    .desc = Башня, установленная на крыше фургона СССП.
+ent-RMCVehicleSPPVanCannon = пушка фургона СССП
+    .desc = Пушка, установленная на башне фургона СССП.
+ent-RMCVehicleSPPVanWheel = колесо фургона СССП
+    .desc = Усиленное колесо для фургона СССП.
