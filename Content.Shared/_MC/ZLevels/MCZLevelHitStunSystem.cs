@@ -1,5 +1,4 @@
 using Content.Shared._CE.ZLevels.Core.EntitySystems;
-using Content.Shared.Stunnable;
 
 namespace Content.Shared._MC.ZLevels;
 
@@ -16,7 +15,7 @@ public sealed class MCZLevelFallStunSystem : EntitySystem
 
     private void OnHit(Entity<MCZLevelFallStunComponent> entity, ref CEZLevelHitEvent args)
     {
-    _stun.TryStun(entity, TimeSpan.FromSeconds(1f), true);
-    _stun.TryKnockdown(entity, TimeSpan.FromSeconds(1f), true);
+        _stun.TryStun(target, TimeSpan.FromSeconds(1f), true);
+        _stun.TryKnockdown(target, TimeSpan.FromSeconds(1f), true);
     }
 }
