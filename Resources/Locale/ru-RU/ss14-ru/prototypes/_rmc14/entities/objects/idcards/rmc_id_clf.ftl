@@ -1,12 +1,12 @@
 ent-RMCIDCardCLFBase = { ent-CMIDCardBase }
     .desc = { ent-CMIDCardBase.desc }
-ent-RMCIDCardCLFSoldier = ИД-карта солдата ФОК
+ent-RMCIDCardCLFSoldier = ID-карта солдата ФОК
     .desc = { ent-RMCIDCardCLFBase.desc }
-ent-RMCIDCardCLFEngineer = ИД-карта инженера ФОК
+ent-RMCIDCardCLFEngineer = ID-карта инженера ФОК
     .desc = { ent-RMCIDCardCLFBase.desc }
-ent-RMCIDCardCLFMedic = ИД-карта медика ФОК
+ent-RMCIDCardCLFMedic = ID-карта медика ФОК
     .desc = { ent-RMCIDCardCLFBase.desc }
-ent-RMCIDCardCLFSpecialist = ИД-карта специалиста ФОК
+ent-RMCIDCardCLFSpecialist = ID-карта специалиста ФОК
     .desc = { ent-RMCIDCardCLFBase.desc }
-ent-RMCIDCardCLFCellCommander = ИД-карта командира ячейки ФОК
+ent-RMCIDCardCLFCellCommander = ID-карта командира ячейки ФОК
     .desc = { ent-RMCIDCardCLFBase.desc }
