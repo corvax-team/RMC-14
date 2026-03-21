@@ -1,8 +1,6 @@
 /*
- * Copyright (c) 2026 TornadgoTechnology
- * Copyright (c) 2026 CrystallEdge (https://github.com/crystallpunk-14/crystall-edge)
- *
- * SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0 AND MIT
+ * This file is sublicensed under MIT License
+ * https://github.com/space-wizards/space-station-14/blob/master/LICENSE.TXT
  */
 
 using Content.Server.GameTicking;
