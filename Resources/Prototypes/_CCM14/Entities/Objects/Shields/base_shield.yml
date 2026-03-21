@@ -1,0 +1,113 @@
+- type: entity
+  name: base shield
+  parent: BaseItem
+  id: CCMBaseShield
+  description: A shield!
+  abstract: true
+  components:
+    - type: Sprite
+      sprite: Objects/Weapons/Melee/shields.rsi
+      state: riot-icon
+    - type: Item
+      sprite: Objects/Weapons/Melee/shields.rsi
+      size: Ginormous
+      heldPrefix: riot
+    - type: Blocking
+      passiveBlockModifier:
+        coefficients:
+          Blunt: 1
+          Slash: 1
+          Piercing: 1
+          Heat: 1
+      activeBlockModifier:
+        coefficients:
+          Blunt: 0.8
+          Slash: 0.8
+          Piercing: 0.8
+          Heat: 0.8
+        flatReductions:
+          Blunt: 1
+          Slash: 1
+          Piercing: 1
+          Heat: 1
+    - type: Damageable
+      damageContainer: Shield
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 140
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                CCMBrokenShield: #PlaceHolder
+                  min: 1
+                  max: 1
+    - type: CMArmorPiercing
+      amount: 20
+    - type: MeleeDamageMultiplier
+      whitelist:
+        components:
+        - Xeno
+    - type: MeleeWeapon
+      damage:
+        types:
+          Blunt: 20
+      soundHit:
+        collection: GenericHit
+      wideAnimationRotation: 90
+    - type: UsableWhileDevoured
+    - type: Repairable
+    - type: AttachableHolder
+      slots:
+        rmc-aslot-stock:
+          locked: true
+          startingAttachable: CCMAttachmentShieldArmBrace
+          whitelist:
+            tags:
+            - CCMAttachmentShieldBraceTag
+    - type: StaticPrice
+      price: 100
+
+- type: entity
+  parent: RMCStockAttachmentCollapsibleBase
+  id: CCMAttachmentShieldArmBrace
+  name: shield arm brace
+  description: A special brace for locking a shield or other item in your hand. 
+  components:
+  - type: Sprite
+    state: smg-brace
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - CCMAttachmentShieldBraceTag
+  - type: AttachableToggleable
+    doAfter: 2.5
+    heldOnlyActivate: true
+    activatePopupText: attachable-popup-activate-lock
+    deactivatePopupText: attachable-popup-deactivate-unlock
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+      state: smg-brace
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+      state: smg-brace-on
+    actionName: Toggle Submachinegun Arm Brace
+    actionDesc: Lock the arm brace to your arm.
+  - type: AttachablePreventDropToggleable
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.6
+
+
+
+
+
+
+
+
+
+
+      
