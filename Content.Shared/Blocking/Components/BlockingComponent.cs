@@ -68,12 +68,14 @@ public sealed partial class BlockingComponent : Component
     /// when not blocking
     /// </summary>
     [DataField]
-    public float PassiveBlockFraction = 0.5f;
+    public float PassiveBlockFraction = 0.3f; 
+    /// CCM Change - Base value - 0.5f
 
     /// <summary>
     /// Fraction of original damage shield will take instead of user
     /// when blocking
     /// </summary>
     [DataField]
-    public float ActiveBlockFraction = 1.0f;
+    public float ActiveBlockFraction = 0.7f;
+    /// CCM Change - Base value - 1.0f
 }
