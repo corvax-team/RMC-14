@@ -1,8 +1,8 @@
 - type: entity
-  name: riot shield
+  name: Avangard-M marine shield
   parent: CCMBaseShield
   id: CCMShieldMarine
-  description: A large tower shield. Good for controlling crowds.
+  description: A special maded shield for Marines, that fights in close quarters with enemy.
   components:
     - type: Blocking
       passiveBlockModifier:
@@ -44,10 +44,10 @@
       heldPrefix: riot
 
 - type: entity
-  name: riot shield
+  name: Avangard-M damaged marine shield
   parent: CCMShieldMarine
   id: CCMShieldMarineBroken
-  description: A large tower shield. Good for controlling crowds.
+  description: A damaged version of marine shield. It can barely block
   components:
     - type: Blocking
       passiveBlockModifier:
