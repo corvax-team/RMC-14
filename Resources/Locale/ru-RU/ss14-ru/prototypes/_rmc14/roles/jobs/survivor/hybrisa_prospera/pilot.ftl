@@ -1,2 +1,2 @@
-ent-RMCSurvivorPresetHybrisaCommercialPilot = hybrisa corporate liaison preset
+ent-RMCSurvivorPresetHybrisaCommercialPilot = пресет колониста: коммерческий пилот (Hybrisa)
     .desc = { ent-RMCSurvivorPresetCorporate.desc }

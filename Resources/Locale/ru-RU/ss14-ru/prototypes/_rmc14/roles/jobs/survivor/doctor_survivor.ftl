@@ -1,4 +1,4 @@
-ent-RMCSurvivorPresetDoctor = doctor colonist preset
+ent-RMCSurvivorPresetDoctor = пресет врача-колониста
     .desc = { ent-RMCSurvivorPresetCivilian.desc }
-ent-RMCRandomHumanoidSurvivorDoctor = doctor colonist ghost role
+ent-RMCRandomHumanoidSurvivorDoctor = роль призрака: врач-колонист
     .desc = { ent-MarkerBase.desc }

@@ -687,6 +687,7 @@ entities:
           version: 7
     - type: Fixtures
       fixtures: {}
+    - type: Physics
     - type: SpreaderGrid
     - type: Shuttle
     - type: GridPathfinding
@@ -14687,26 +14688,6 @@ entities:
     - type: ContainedSolution
       containerName: food
       container: 244
-- proto: ActionToggleLight
-  entities:
-  - uid: 255
-    components:
-    - type: Transform
-      parent: 254
-- proto: ActionToggleSuitPiece
-  entities:
-  - uid: 216
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 215
-  - uid: 247
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 246
 - proto: AirSensor
   entities:
   - uid: 270
@@ -15198,50 +15179,12 @@ entities:
     components:
     - type: Transform
       parent: 187
-    - type: ContainerContainer
-      containers:
-        toggleable-clothing: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 216
-    - type: EmitSoundOnCollide
-      nextSound: -3929.1627375
-    - type: Physics
-      canCollide: False
-    - type: ActionsContainer
-    - type: InsideEntityStorage
-    missingComponents:
-    - ToggleableClothing
   - uid: 246
     mapInit: true
     paused: true
     components:
     - type: Transform
       parent: 218
-    - type: ContainerContainer
-      containers:
-        toggleable-clothing: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 247
-    - type: EmitSoundOnCollide
-      nextSound: -3929.1627375
-    - type: Physics
-      canCollide: False
-    - type: ActionsContainer
-    - type: InsideEntityStorage
-    missingComponents:
-    - ToggleableClothing
 - proto: CMAdvFirstAidKitFilled
   entities:
   - uid: 412
@@ -73365,12 +73308,6 @@ entities:
     - type: Transform
       pos: -39.875244,3.6757555
       parent: 1
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents: []
-    - type: ActionsContainer
   - uid: 10596
     components:
     - type: Transform

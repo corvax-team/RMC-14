@@ -1,18 +1,18 @@
 ent-RMCCrateOpenableBase = { ent-BaseStructureDynamic }
     .desc = { ent-BaseStructureDynamic.desc }
 
-ent-RMCOreBox = ore box
-    .desc = A heavy box used for storing ore.
+ent-RMCOreBox = ящик для руды
+    .desc = Тяжёлый ящик, используемый для хранения руды.
 ent-RMCSecureCase = кейс для хранения
-    .desc = Черный кейс для хранения.
+    .desc = Чёрный кейс для хранения.
 ent-RMCSecureCaseDouble = кейсы
-    .desc = Штабель чёрных ящиков для хранения.
+    .desc = Штабель чёрных кейсов для хранения.
 ent-RMCSecureCaseSmall = маленькие кейсы
     .desc = Два небольших чёрных кейса для хранения.
 ent-RMCSecureCaseChest = сундук
     .desc = Тяжёлый деревянный ящик.
 ent-RMCSecureCaseStrapped = защищённый ящик снабжения
-    .desc = Тяжёлый деревянный ящик.
+    .desc = Тяжёлый деревянный ящик, стянутый ремнями.
 ent-RMCSecureCaseMedicalBig = медицинский ящик
     .desc = Ящик с медицинскими принадлежностями.
 ent-RMCSmallChestYellow = маленький сундук

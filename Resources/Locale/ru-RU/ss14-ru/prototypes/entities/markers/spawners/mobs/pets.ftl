@@ -1,6 +1,6 @@
 
 
-ent-SpawnMobPollyParrot = Polly the parrot Spawner
-    .suffix = CE Pet
+ent-SpawnMobPollyParrot = спавнер попугай Полли
+    .suffix = питомец СИ
     .desc = { ent-MarkerBase.desc }
 

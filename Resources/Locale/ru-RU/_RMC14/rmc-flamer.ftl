@@ -1,24 +1,24 @@
-rmc-flamer-tank-not-potent-enough = Это химическое вещество недостаточно сильно, чтобы его можно было использовать в огнемёте!
-rmc-flamer-tank-not-whitelisted = This chemical can't be used in { THE($tank) }.
-rmc-flamer-ignite-first = Сначала нужно поджечь оружие с помощью { $key }!
-rmc-flamer-ignite-first-with = Сначала нужно поджечь оружие!
-rmc-flamer-ignite-action-examine = [bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default) to toggle the pilot light.[/bold]
-rmc-flamer-refill = Вы дозаправляете { $refilled }
-rmc-flamer-too-close = You are too close to your target!
-rmc-flamer-empty = You are out of fuel!
-rmc-broiler-switch-tank = Now using the tank in slot { $n }.
-rmc-broiler-action-examine = [bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default) to switch to a different broiler tank.[/bold]
-rmc-flamer-tank-examine = Examine incinerator tank properties
-rmc-flamer-tank-examine-short = Tank properties
-rmc-flamer-tank-examine-line-0 = [color=yellow]Max Intensity[/color]: [color=lightblue]{ $value }[/color]
-rmc-flamer-tank-examine-line-1 = [color=yellow]Max Duration[/color]: [color=lightblue]{ $value }[/color]
-rmc-flamer-tank-examine-line-2 = [color=yellow]Max Range[/color]: [color=lightblue]{ $value }[/color]
-rmc-flamer-guidebook-header = Flammability
-rmc-flamer-guidebook-description-base = It burns with an intensity of [bold]{ $intensity }[/bold] for [bold]{ $duration }[/bold] seconds.
+rmc-flamer-tank-not-potent-enough = Это химическое вещество недостаточно горючее, чтобы его можно было использовать в огнемёте!
+rmc-flamer-tank-not-whitelisted = Этот химикат нельзя использовать в { $tank }.
+rmc-flamer-ignite-first = Сначала нужно зажечь запал с помощью { $key }!
+rmc-flamer-ignite-first-with = Сначала нужно зажечь запал!
+rmc-flamer-ignite-action-examine = [bold]Нажмите клавишу [color=cyan]уникального действия[/color] (по умолчанию Пробел), чтобы зажечь или погасить запал.[/bold]
+rmc-flamer-refill = Вы дозаправляете { $refilled }.
+rmc-flamer-too-close = Слишком близко к цели!
+rmc-flamer-empty = Топливо закончилось!
+rmc-broiler-switch-tank = Теперь используется бак в слоте №{ $n }.
+rmc-broiler-action-examine = [bold]Нажмите клавишу [color=cyan]уникального действия[/color] (по умолчанию Пробел), чтобы переключиться на другой бак Broiler.[/bold]
+rmc-flamer-tank-examine = Проверить характеристики бака инсинератора
+rmc-flamer-tank-examine-short = Характеристики бака
+rmc-flamer-tank-examine-line-0 = [color=yellow]Макс. интенсивность[/color]: [color=lightblue]{ $value }[/color]
+rmc-flamer-tank-examine-line-1 = [color=yellow]Макс. длительность[/color]: [color=lightblue]{ $value }[/color]
+rmc-flamer-tank-examine-line-2 = [color=yellow]Макс. дальность[/color]: [color=lightblue]{ $value }[/color]
+rmc-flamer-guidebook-header = Горючесть
+rmc-flamer-guidebook-description-base = Горит с интенсивностью [bold]{ $intensity }[/bold] в течение [bold]{ $duration }[/bold] секунд.
 rmc-flamer-guidebook-description-radius =
-    It can reach up to [bold]{ $radius }[/bold] meters{ $spread ->
-        [true] { " " }and may [bold]spread[/bold] itself
+    Бьёт на расстояние до [bold]{ $radius }[/bold] метров{ $spread ->
+        [true] { " " }и может [bold]распространяться[/bold] само по себе
        *[false] { "" }
     }.
-rmc-flamer-guidebook-description-shred = It [bold]reacts[/bold] with inorganic materials.
-rmc-flamer-guidebook-description-bypass = It [bold]penetrates[/bold] the best fire retardants.
+rmc-flamer-guidebook-description-shred = Оно [bold]вступает в реакцию[/bold] с неорганическими материалами.
+rmc-flamer-guidebook-description-bypass = Оно [bold]проникает[/bold] сквозь лучшие огнеупорные средства.

@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorHybrisaPizzaGalaxy = hybrisa pizza galaxy delivery driver spawn point
+ent-RMCSpawnPointSurvivorHybrisaPizzaGalaxy = точка появления курьера Pizza Galaxy (Hybrisa)
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetHybrisaPizzaGalaxy = hybrisa pizza galaxy delivery driver preset
+ent-RMCGearSurvivorPresetHybrisaPizzaGalaxy = пресет колониста: курьер Pizza Galaxy (Hybrisa)
     .desc = { ent-RMCSurvivorPresetCivilian.desc }

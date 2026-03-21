@@ -1,5 +1,5 @@
-rmc-solution-transfer-whitelist-failed-not-welding-tank = Это должно быть заправлено с помощью бака для топлива.
-rmc-solution-transfer-whitelist-failed-not-reagent-tank = Это должно быть заполнено с помощью бака для реагентов.
-rmc-fuel-cant-mix = Вы не можете смешивать топливные смеси!
-rmc-fuel-examine-cant-mix = [color=cyan]Это не позволяет смешивать различные химические вещества![/color]
-rmc-canister-transfer-out-whitelist = Canisters can only transfer out into reagent tanks.
+rmc-solution-transfer-whitelist-failed-not-welding-tank = Это можно заправить только из бака со сварочным топливом.
+rmc-solution-transfer-whitelist-failed-not-reagent-tank = Это можно заполнить только из бака для реагентов.
+rmc-fuel-cant-mix = Вы не можете смешивать разные виды топлива!
+rmc-fuel-examine-cant-mix = [color=cyan]Конструкция не позволяет смешивать различные химические вещества![/color]
+rmc-canister-transfer-out-whitelist = Канистры могут перекачивать содержимое только в баки для реагентов.

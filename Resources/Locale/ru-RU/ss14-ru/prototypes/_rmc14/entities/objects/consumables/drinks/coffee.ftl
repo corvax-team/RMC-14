@@ -1,8 +1,8 @@
 ent-RMCDrinkCoffee = кофе
-    .desc = Осторожно, напиток, которым вы собираетесь насладиться, очень горячий.
-ent-RMCDrinkCoffeeGrind = Дейли Гринд
-    .desc = Проснись и пой! Пора пить Дейли Гринд!
-ent-RMCDrinkTea = Duke Purple tea
-    .desc = An insult to Duke Purple is an insult to the Space Queen! Any proper gentleman will fight you, if you sully this tea.
-ent-RMCDrinkHotCocoa = dutch hot cocoa
-    .desc = Made in Space South America.
+    .desc = Осторожно! Напиток, которым вы собираетесь насладиться, очень горячий.
+ent-RMCDrinkCoffeeGrind = кофе «Дейли Гринд»
+    .desc = Проснись и пой! Пора выпить чашечку «Дейли Гринд»!
+ent-RMCDrinkTea = чай «Дьюк Пёрпл»
+    .desc = Оскорбление «Дьюк Пёрпл» — это оскорбление самой Космической Королевы! Любой уважающий себя джентльмен вызовет вас на дуэль, если вы посмеете очернить этот чай.
+ent-RMCDrinkHotCocoa = горячее какао «Датч»
+    .desc = Сделано прямиком в Космической Южной Америке.

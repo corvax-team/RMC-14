@@ -5,7 +5,7 @@ cm-gun-use-delay =
         [one] секунду
         [few] секунды
        *[other] секунд
-    }  перед следующим выстрелом!
+    } перед следующим выстрелом!
 cm-gun-pump-examine = [bold]Нажмите вашу клавишу [color=cyan]уникального действия[/color] (Пробел по умолчанию) чтобы передёрнуть цевьё перед выстрелом.[/bold]
 cm-gun-pump-first-with = Сначала вам нужно передёрнуть цевьё при помощи { $key }!
 cm-gun-pump-first = Сначала вам нужно передёрнуть цевьё!
@@ -13,28 +13,28 @@ rmc-breech-loaded-open-shoot-attempt = Сначала вам нужно закр
 rmc-breech-loaded-not-ready-to-shoot = Сначала вам нужно открыть и закрыть затвор!
 rmc-breech-loaded-closed-load-attempt = Сначала вам нужно открыть затвор!
 rmc-breech-loaded-closed-extract-attempt = Сначала вам нужно открыть затвор!
-rmc-breech-loaded-toggle-attempt-cooldown = You must wait before { $action } the chamber again!
-rmc-breech-loaded-open = opening
-rmc-breech-loaded-close = closing
+rmc-breech-loaded-toggle-attempt-cooldown = Вы должны подождать перед тем как снова { $action } затвор!
+rmc-breech-loaded-open = открывать
+rmc-breech-loaded-close = закрывать
 rmc-wield-use-delay =
-    Вам нужно подождать { $seconds }  { $seconds ->
+    Вам нужно подождать { $seconds } { $seconds ->
         [one] секунду
         [few] секунды
        *[other] секунд
     } перед тем, как взять { $wieldable } в две руки!
 rmc-shoot-use-delay =
-    Вам нужно подождать { $seconds }  { $seconds ->
+    Вам нужно подождать { $seconds } { $seconds ->
         [one] секунду
         [few] секунды
        *[other] секунд
     } перед тем, как вы сможете выстрелить из { $wieldable }!
 rmc-shoot-harness-required = Нужна упряжь
 rmc-wear-smart-gun-required = Чтобы надеть их, вы должны быть оснащены смартганом.
-rmc-gun-arc-blocked = You cannot fire outside of the weapon's firing arc.
+rmc-gun-arc-blocked = Вы не можете стрелять за пределами сектора обстрела оружия.
 rmc-shoot-id-lock-unauthorized = Спусковой крючок заблокирован. Неавторизованный пользователь.
 rmc-id-lock-unauthorized = Действие запрещено. Неавторизованный пользователь.
 rmc-id-lock-authorization = Вы подняли { $gun }, зарегистрировав себя в качестве владельца.
-rmc-id-lock-authorization-combat = ( CAPITALIZE{ $gun } ) регистрирует вас в качестве владельца.
+rmc-id-lock-authorization-combat = { CAPITALIZE($gun) } регистрирует вас в качестве владельца.
 rmc-id-lock-toggle-lock = Вы { $action } ID-замок на { $gun }.
 rmc-id-lock-color-unauthorized = красный
 rmc-id-lock-color-authorized = жёлто-зелёный
@@ -52,12 +52,12 @@ rmc-examine-text-shots-to-max-scatter =
         [one] выстрел
         [few] выстрела
        *[other] выстрелов
-    }[/color] .
+    }[/color].
 rmc-examine-text-iff = [color=cyan]Это оружие будет игнорировать и стрелять мимо союзников![/color]
 rmc-examine-text-id-lock-no-user = [color=chartreuse]Оно не зарегистрировано. Поднимите его, чтобы зарегистрировать себя в качестве владельца.[/color]
 rmc-examine-text-id-lock = [color=chartreuse]Оно зарегистрировано на [/color][color={ $colour }]{ $name }[/color][color=chartreuse].[/color]
 rmc-examine-text-id-lock-unlocked = [color=chartreuse]Оно зарегистрировано на [/color][color={ $colour }]{ $name }[/color][color=chartreuse], но ограничения на огонь сняты.[/color]
-rmc-examine-text-execute = [color=red]This gun can be used to execute people with the right skill![/color]
+rmc-examine-text-execute = [color=red]Это оружие можно использовать для казни при наличии должного навыка![/color]
 rmc-gun-rack-examine = [bold]Нажмите вашу клавишу [color=cyan]уникального действия[/color] (Пробел по умолчанию) чтобы передёрнуть затвор перед выстрелом.[/bold]
 rmc-gun-rack-first-with = Сначала вам нужно передёрнуть затвор оружия при помощи { $key }!
 rmc-gun-rack-first = Сначала вам нужно передёрнуть затвор оружия!
@@ -65,22 +65,22 @@ rmc-assisted-reload-fail-angle = Вы должны стоять позади { $
 rmc-assisted-reload-fail-full = { CAPITALIZE(POSS-ADJ($target)) } { $weapon } уже заряжен.
 rmc-assisted-reload-fail-mismatch = { CAPITALIZE($ammo) } нельзя зарядить в { $weapon }!
 rmc-assisted-reload-start-user = Вы начинаете перезаряжать { $weapon } { $target }! Стойте на месте...
-rmc-assisted-reload-start-target = { $reloader } заряжать { $ammo } в ваш { $weapon }! Стойте на месте...
+rmc-assisted-reload-start-target = { $reloader } начинает заряжать { $ammo } в ваш { $weapon }! Стойте на месте...
 rmc-gun-stacks-hit-single = В яблочко!
 rmc-gun-stacks-hit-multiple =
-    В яблочко! { $hits }{ $hits ->
+    В яблочко! { $hits } { $hits ->
         [one] попадание
         [few] попадания
        *[other] попаданий
     } подряд!
-rmc-gun-stacks-reset = { CAPITALIZE($weapon) } издаёт писк, теряя данные о наведении на цель и возвращаесь к обычному режиму стрельбы.
-rmc-gun-shoot-air-self = YOU FIRE YOUR { CAPITALIZE($weapon) } INTO THE AIR!
-rmc-gun-shoot-air-other = { CAPITALIZE(THE($user)) } FIRES { CAPITALIZE(THE($weapon)) } INTO THE AIR!
+rmc-gun-stacks-reset = { CAPITALIZE($weapon) } издаёт писк, теряя данные о наведении на цель и возвращаясь к обычному режиму стрельбы.
+rmc-gun-shoot-air-self = ВЫ СТРЕЛЯЕТЕ ИЗ { CAPITALIZE($weapon) } В ВОЗДУХ!
+rmc-gun-shoot-air-other = { CAPITALIZE($user) } СТРЕЛЯЕТ ИЗ { CAPITALIZE($weapon) } В ВОЗДУХ!
 rmc-gun-shoot-air-blocked = Крыша над вами слишком плотная.
-rmc-gun-shoot-air-examine = [bold]Нажмите [color=cyan]специальное взаимодействие[/color]  (По стандарту Spacebar){ $harm ->
-        [true] { " while in harm mode" }
+rmc-gun-shoot-air-examine = [bold]Нажмите [color=cyan]уникальное действие[/color] (Пробел по умолчанию){ $harm ->
+        [true] { " в боевом режиме" }
        *[false] { "" }
-    } to fire into the air.[/bold]
+    } чтобы выстрелить в воздух.[/bold]
 rmc-flare-gun-examine = Последняя выпущенная сигнальная ракета имеет обозначение: [color=#ad3b98][bold]{ $id }[/bold][/color]
-expendable-light-starshell-ash-empty-name = extinguished star shell ash
-expendable-light-starshell-ash-empty-desc = Burnt out remains of a star shell
+expendable-light-starshell-ash-empty-name = пепел осветительного снаряда
+expendable-light-starshell-ash-empty-desc = Выгоревшие остатки осветительного снаряда.

@@ -112,6 +112,7 @@
     offsetWest: "0,0"
     muzzleOffset: "0,0"
     useAimDirection: true
+
   - type: RMCHardpointVisual
     vehicleState: dualcannon_0
 

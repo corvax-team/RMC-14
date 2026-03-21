@@ -1,3 +1,3 @@
-ent-RMCRandomHumanoidCLFSoldier = Роль Повстанца КФО
-    .suffix = Role
+ent-RMCRandomHumanoidCLFSoldier = роль призрака: повстанец КФО
+    .suffix = Роль
     .desc = { "" }

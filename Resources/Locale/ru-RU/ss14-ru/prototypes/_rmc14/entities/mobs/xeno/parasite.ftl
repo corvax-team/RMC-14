@@ -1,10 +1,10 @@
-ent-CMXenoParasiteBase = Parasite
+ent-CMXenoParasiteBase = Паразит
     .desc = { ent-CMXenoUndeveloped.desc }
 ent-CMXenoParasite = Лицехват
     .desc = { ent-CMXenoUndeveloped.desc }
 ent-RMCXenoParasiteWatcher = { ent-CMXenoParasiteBase }
-    .suffix = Watcher
+    .suffix = Наблюдатель
     .desc = { ent-CMXenoParasiteBase.desc }
 ent-RMCXenoParasitePrimeHiveAssign = { ent-CMXenoParasite }
-    .suffix = Auto-Assign, Prime Hive
+    .suffix = Автоназначение, Прайм-улей
     .desc = { ent-CMXenoParasite.desc }

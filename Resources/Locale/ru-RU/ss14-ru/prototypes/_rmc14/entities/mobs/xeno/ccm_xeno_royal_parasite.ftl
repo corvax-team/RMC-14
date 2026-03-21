@@ -1,2 +1,2 @@
-ent-CCMXenoRoyalParasite = { ent-CMXenoParasite }
-    .desc = A royal parasite that can infect multiple hosts during its lifetime
+ent-CCMXenoRoyalParasite = Королевский паразит
+    .desc = Королевский паразит, способный заразить нескольких носителей за свою жизнь.

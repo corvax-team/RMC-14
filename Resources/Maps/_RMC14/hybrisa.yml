@@ -70237,35 +70237,6 @@ entities:
         -224,-247: RMCAreaLv759Oob
         -224,-248: RMCAreaLv759Oob
         -224,-249: RMCAreaLv759Oob
-- proto: ActionToggleLight
-  entities:
-  - uid: 21642
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 16
-    - type: Action
-      originalIconColor: '#FFFFFFFF'
-      container: 16
-  - uid: 30254
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 20
-    - type: Action
-      originalIconColor: '#FFFFFFFF'
-      container: 20
-  - uid: 50238
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 50237
-    - type: Action
-      originalIconColor: '#FFFFFFFF'
-      container: 50237
 - proto: ArmorHelmetPMCCorporate
   entities:
   - uid: 11
@@ -73415,26 +73386,6 @@ entities:
       rot: -6.283185307179586 rad
       pos: -169.49277,-162.5043
       parent: 1
-- proto: CMActionToggleScope
-  entities:
-  - uid: 5379
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 5378
-    - type: Action
-      originalIconColor: '#FFFFFFFF'
-      container: 5378
-  - uid: 50189
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 12558
-    - type: Action
-      originalIconColor: '#FFFFFFFF'
-      container: 12558
 - proto: CMAdvFirstAidKitFilled
   entities:
   - uid: 715
@@ -76951,39 +76902,11 @@ entities:
     - type: Transform
       pos: -194.51254,-64.40273
       parent: 1
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 21642
-    - type: HandheldLight
-      toggleActionEntity: 21642
-    - type: ActionsContainer
   - uid: 20
     components:
     - type: Transform
       pos: -171.45381,-97.41356
       parent: 1
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 30254
-    - type: HandheldLight
-      toggleActionEntity: 30254
-    - type: ActionsContainer
   - uid: 1246
     components:
     - type: Transform
@@ -138538,14 +138461,6 @@ entities:
       rot: -6.283185307179586 rad
       pos: -62.45463,-148.62123
       parent: 1
-    - type: Scope
-      scopingToggleActionEntity: 50189
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 50189
 - proto: RMCAttachmentSuppressor
   entities:
   - uid: 12559
@@ -150090,14 +150005,6 @@ entities:
       rot: -6.283185307179586 rad
       pos: -67.4734,-144.20021
       parent: 1
-    - type: Scope
-      scopingToggleActionEntity: 5379
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 5379
   - uid: 5380
     components:
     - type: Transform
@@ -182541,20 +182448,6 @@ entities:
       rot: -6.283185307179586 rad
       pos: -7.4843445,-41.486958
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 50238
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 50238
-    - type: ActionsContainer
   - uid: 50267
     components:
     - type: Transform

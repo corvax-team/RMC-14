@@ -17,6 +17,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/spptank.rsi
     state: tank_turret_0
+  - type: RMCHardpointItem
+    compatibilityId: SPPTank
   - type: VehicleTurret
     rotateToCursor: true
     stabilizedRotation: false
@@ -24,11 +26,37 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: tank_turret_0
-    useDirectionalOffsets: false
+    useDirectionalOffsets: true
     pixelOffsetNorth: "0,-10"
-    pixelOffsetEast: "-10,0"
-    pixelOffsetSouth: "0,10"
-    pixelOffsetWest: "10,0"
+    pixelOffsetEast: "-5,0"
+    pixelOffsetSouth: "0,0"
+    pixelOffsetWest: "5,0"
+  - type: ItemSlots
+    slots:
+      turret-cannon:
+        startingItem: RMCVehicleSPPTankRailgun
+        whitelist:
+          components:
+          - RMCHardpointItem
+      turret-launcher:
+        whitelist:
+          components:
+          - RMCHardpointItem
+  - type: RMCHardpointSlots
+    vehicleFamily: Tank
+    slots:
+    - id: turret-cannon
+      hardpointType: Cannon
+      slotType: Cannon
+      compatibilityId: SPPTank
+      required: false
+      insertDelay: 2.0
+    - id: turret-launcher
+      hardpointType: Launcher
+      slotType: Launcher
+      compatibilityId: SPPTank
+      required: false
+      insertDelay: 2.0
 
 - type: entity
   parent: RMCVehicleTankLTAAAPMinigun
@@ -52,8 +80,20 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: p17702_0
+  - type: RMCHardpointItem
+    compatibilityId: SPPTank
   - type: RMCHardpointVisual
     vehicleState: p17702_0
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetNorth: "0,0"
+    offsetEast: "0,0"
+    offsetSouth: "0,0"
+    offsetWest: "0,0"
+    muzzleOffset: "0,0"
+    useAimDirection: true
+    useContainerOwner: false
 
 - type: entity
   parent: RMCVehicleTankLTBCannon
@@ -67,15 +107,27 @@
   - type: VehicleTurret
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
-    pixelOffsetNorth: "0,30"
-    pixelOffsetEast: "30,0"
+    pixelOffsetNorth: "0,20"
+    pixelOffsetEast: "24,10"
     pixelOffsetSouth: "0,-50"
-    pixelOffsetWest: "-30,0"
+    pixelOffsetWest: "-28,14"
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: railgun_0
+  - type: RMCHardpointItem
+    compatibilityId: SPPTank
   - type: RMCHardpointVisual
     vehicleState: railgun_0
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetNorth: "0,-1"
+    offsetEast: "0,-1"
+    offsetSouth: "0,0"
+    offsetWest: "0,-1"
+    muzzleOffset: "0,-1"
+    useAimDirection: true
+    useContainerOwner: false
 
 - type: entity
   parent: RMCVehicleTankTowLauncher
@@ -96,8 +148,20 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: hj35t_0
+  - type: RMCHardpointItem
+    compatibilityId: SPPTank
   - type: RMCHardpointVisual
     vehicleState: hj35t_0
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetNorth: "0,0"
+    offsetEast: "0,0"
+    offsetSouth: "0,0"
+    offsetWest: "0,0"
+    muzzleOffset: "0,0"
+    useAimDirection: true
+    useContainerOwner: false
 
 - type: entity
   parent: RMCVehicleTankM56Cupola
@@ -111,6 +175,8 @@
   - type: UserIFF
     factions:
     - FactionSPP
+  - type: RMCHardpointItem
+    compatibilityId: SPPTank
   - type: VehicleTurret
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
@@ -123,6 +189,16 @@
     overlayState: t60p3m_0
   - type: RMCHardpointVisual
     vehicleState: t60p3m_0
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetNorth: "0,0"
+    offsetEast: "0,0"
+    offsetSouth: "0,0"
+    offsetWest: "0,0"
+    muzzleOffset: "0,0"
+    useAimDirection: true
+    useContainerOwner: false
 
 - type: entity
   parent: RMCVehicleTankArmorBallistic
@@ -133,6 +209,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/hardpoints/spptank.rsi
     state: reactive_armor
+  - type: RMCHardpointItem
+    compatibilityId: SPPTank
   - type: RMCHardpointVisual
     vehicleState: reactive_armor_0
 
@@ -145,6 +223,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/hardpoints/spptank.rsi
     state: turret_slauncher
+  - type: RMCHardpointItem
+    compatibilityId: SPPTank
   - type: RMCHardpointVisual
     vehicleState: slauncher_0
 
@@ -157,6 +237,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/hardpoints/spptank.rsi
     state: turret_slauncher_e
+  - type: RMCHardpointItem
+    compatibilityId: SPPTank
   - type: RMCHardpointVisual
     vehicleState: slauncher_1
 
@@ -169,6 +251,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/spptank.rsi
     state: warray_0
+  - type: RMCHardpointItem
+    compatibilityId: SPPTank
   - type: RMCHardpointVisual
     vehicleState: warray_0
 
@@ -181,6 +265,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/spptank.rsi
     state: odrive_enhancer_0
+  - type: RMCHardpointItem
+    compatibilityId: SPPTank
   - type: RMCHardpointVisual
     vehicleState: odrive_enhancer_0
 
@@ -193,5 +279,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/spptank.rsi
     state: artillerymod_0
+  - type: RMCHardpointItem
+    compatibilityId: SPPTank
   - type: RMCHardpointVisual
     vehicleState: artillerymod_0

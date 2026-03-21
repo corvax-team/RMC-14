@@ -1,2 +1,2 @@
-ent-RMCRandomVendor = random food vendor spawner
+ent-RMCRandomVendor = спавнер случайного автомата с едой
     .desc = { ent-MarkerBase.desc }

@@ -17,5 +17,5 @@ ent-CMSandbagFull25 = { ent-CMSandbagFull }
     .suffix = 25
     .desc = { ent-CMSandbagFull.desc }
 ent-RMCBarricadeSandbagSoro = { ent-CMBarricadeSandbag }
-    .suffix = Brown
+    .suffix = Коричневый
     .desc = { ent-CMBarricadeSandbag.desc }

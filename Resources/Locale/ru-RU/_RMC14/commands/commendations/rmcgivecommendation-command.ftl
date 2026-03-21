@@ -1,41 +1,41 @@
 # Give Commendation Command
-cmd-rmcgivecommendation-desc = Awards a medal or jelly to a player
+cmd-rmcgivecommendation-desc = Награждает игрока медалью или королевским желе.
 cmd-rmcgivecommendation-help =
-    Usage: rmcgivecommendation <giverName> <receiver> <receiverName> <type> <commendationType> <citation> [roundId]
-    Arguments:
-    giverName: who is giving IC the award (MUST use quotes if contains spaces)
-    receiver: player username or UserId
-    receiverName: character name (MUST use quotes if contains spaces)
-    type: medal or jelly
-    commendationType: a number (use tab completion to see available types)
-    citation: the reason for the award (MUST be in quotes)
-    roundId: round number, defaults to current round (optional)
+    Использование: rmcgivecommendation <имя_отправителя> <получатель> <имя_персонажа> <тип> <номер_награды> <текст_цитаты> [ID_раунда]
+    Аргументы:
+    имя_отправителя: кто выдаёт награду в рамках IC (ОБЯЗАТЕЛЬНО используйте кавычки, если есть пробелы)
+    получатель: имя пользователя (username) или UserId игрока
+    имя_персонажа: имя персонажа в игре (ОБЯЗАТЕЛЬНО используйте кавычки, если есть пробелы)
+    тип: medal (медаль) или jelly (желе)
+    номер_награды: число (используйте Tab, чтобы увидеть доступные варианты)
+    текст_цитаты: причина награждения (ОБЯЗАТЕЛЬНО в кавычках)
+    ID_раунда: номер раунда, по умолчанию — текущий (необязательно)
     
-    Examples:
-      rmcgivecommendation "UNMC High Command" PlayerName "John Doe" medal 1 "For exceptional bravery"
-      rmcgivecommendation "The Queen Mother" XenoPlayer "XX-Alpha" jelly 2 "For defending the hive"
-      rmcgivecommendation "UNMC High Command" PlayerName "John Doe" medal 1 "For exceptional bravery" 42
+    Примеры:
+      rmcgivecommendation "Верховное командование ККМП" PlayerName "John Doe" medal 1 "За исключительную храбрость"
+      rmcgivecommendation "Королева-Мать" XenoPlayer "XX-Alpha" jelly 2 "За защиту улья"
+      rmcgivecommendation "Верховное командование ККМП" PlayerName "John Doe" medal 1 "За исключительную храбрость" 42
 # Errors
-cmd-rmcgivecommendation-invalid-arguments = Incorrect number of arguments!
-cmd-rmcgivecommendation-invalid-type = Invalid type! Must be 'medal' or 'jelly'.
-cmd-rmcgivecommendation-invalid-award-type = Invalid '{ $type }' type! Must be 1-{ $max }.
-cmd-rmcgivecommendation-empty-citation = Citation cannot be empty!
-cmd-rmcgivecommendation-player-not-found = Player '{ $player }' not found.
+cmd-rmcgivecommendation-invalid-arguments = Неверное количество аргументов!
+cmd-rmcgivecommendation-invalid-type = Неверный тип! Должно быть 'medal' или 'jelly'.
+cmd-rmcgivecommendation-invalid-award-type = Неверный тип { $type }! Должно быть от 1 до { $max }.
+cmd-rmcgivecommendation-empty-citation = Текст цитаты не может быть пустым!
+cmd-rmcgivecommendation-player-not-found = Игрок '{ $player }' не найден.
 # Success
-cmd-rmcgivecommendation-success = { $award } awarded to { $player }!
-cmd-rmcgivecommendation-admin-announcement = { $admin } awarded { $type } "{ $award }" to { $receiver } (character: { $character }) for Round { $round }
+cmd-rmcgivecommendation-success = Награда { $award } вручена игроку { $player }!
+cmd-rmcgivecommendation-admin-announcement = { $admin } вручил(а) { $type } "{ $award }" игроку { $receiver } (персонаж: { $character }) за Раунд { $round }
 # Completion hints
-cmd-rmcgivecommendation-hint-giver = Giver IC name (be careful when entering the IC name)
-cmd-rmcgivecommendation-hint-giver-highcommand = Standard giver for marine medals
-cmd-rmcgivecommendation-hint-giver-queen-mother = Standard giver for xeno jellies
-cmd-rmcgivecommendation-hint-receiver = Receiver username or UserId
-cmd-rmcgivecommendation-hint-receiver-name = Receiver character name (be careful when entering the IC name)
-cmd-rmcgivecommendation-hint-type = Type (medal or jelly)
-cmd-rmcgivecommendation-hint-type-medal = Award a medal to a marine
-cmd-rmcgivecommendation-hint-type-jelly = Award a royal jelly to a xeno
-cmd-rmcgivecommendation-hint-medal-type = Medal type (1-{ $count })
-cmd-rmcgivecommendation-hint-jelly-type = Jelly type (1-{ $count })
-cmd-rmcgivecommendation-hint-invalid-type = Type must be 'medal' or 'jelly'
-cmd-rmcgivecommendation-hint-citation = Citation text (be careful when entering the IC reason)
-cmd-rmcgivecommendation-hint-round = Round ID (optional)
-cmd-rmcgivecommendation-hint-round-current = Current round
+cmd-rmcgivecommendation-hint-giver = IC имя отправителя (будьте внимательны при вводе)
+cmd-rmcgivecommendation-hint-giver-highcommand = Стандартный отправитель для медалей морпехов
+cmd-rmcgivecommendation-hint-giver-queen-mother = Стандартный отправитель для желе ксеноморфов
+cmd-rmcgivecommendation-hint-receiver = Имя пользователя или UserId получателя
+cmd-rmcgivecommendation-hint-receiver-name = IC имя персонажа получателя (будьте внимательны при вводе)
+cmd-rmcgivecommendation-hint-type = Тип (medal или jelly)
+cmd-rmcgivecommendation-hint-type-medal = Наградить морпеха медалью
+cmd-rmcgivecommendation-hint-type-jelly = Наградить ксеноморфа королевским желе
+cmd-rmcgivecommendation-hint-medal-type = Тип медали (1-{ $count })
+cmd-rmcgivecommendation-hint-jelly-type = Тип желе (1-{ $count })
+cmd-rmcgivecommendation-hint-invalid-type = Тип должен быть 'medal' или 'jelly'
+cmd-rmcgivecommendation-hint-citation = Текст цитаты (будьте внимательны при вводе IC причины)
+cmd-rmcgivecommendation-hint-round = ID раунда (необязательно)
+cmd-rmcgivecommendation-hint-round-current = Текущий раунд

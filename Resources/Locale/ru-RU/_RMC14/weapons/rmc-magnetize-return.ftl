@@ -1,6 +1,6 @@
 rmc-magnetize-return = { CAPITALIZE($item) } притягивается обратно к { $magnetizer }.
-rmc-sling-link = You attach { THE($item) } to { THE($pouch) }.
-rmc-sling-unlink = You detach { THE($item) } from { THE($pouch) }.
-rmc-sling-unlink-verb-sling = Detach item
-rmc-sling-unlink-verb-item = Detach from sling
-rmc-sling-attached = It is currently attached to { THE($pouch) }.
+rmc-sling-link = Вы прикрепляете { $item } к { $pouch }.
+rmc-sling-unlink = Вы отсоединяете { $item } от { $pouch }.
+rmc-sling-unlink-verb-sling = Отсоединить предмет
+rmc-sling-unlink-verb-item = Отсоединить от стропы
+rmc-sling-attached = В данный момент прикреплено к { $pouch }.

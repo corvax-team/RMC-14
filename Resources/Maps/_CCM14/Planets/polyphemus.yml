@@ -1090,6 +1090,7 @@ entities:
           version: 7
     - type: Fixtures
       fixtures: {}
+    - type: Physics
     - type: SpreaderGrid
     - type: Shuttle
     - type: GridPathfinding
@@ -50625,26 +50626,6 @@ entities:
     - type: Transform
       pos: 121.85912,-37.996082
       parent: 1
-- proto: ActionToggleLight
-  entities:
-  - uid: 5
-    components:
-    - type: Transform
-      parent: 4
-  - uid: 7
-    components:
-    - type: Transform
-      parent: 6
-  - uid: 15
-    components:
-    - type: Transform
-      parent: 14
-  - uid: 18
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 17
 - proto: ArmorHelmetM10
   entities:
   - uid: 21
@@ -50995,12 +50976,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: CMActionToggleScope
-  entities:
-  - uid: 531
-    components:
-    - type: Transform
-      parent: 530
 - proto: CMAdvFirstAidKit
   entities:
   - uid: 22275
@@ -141279,44 +141254,17 @@ entities:
     - type: Transform
       pos: 135.55861,-150.26146
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 5
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 5
-    - type: ActionsContainer
   - uid: 6
     components:
     - type: Transform
       pos: 174.56195,-125.15876
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 7
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 7
-    - type: ActionsContainer
   - uid: 14
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 138.82825,-129.53339
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 15
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 15
-    - type: ActionsContainer
   - uid: 31292
     components:
     - type: Transform
@@ -144279,22 +144227,6 @@ entities:
     components:
     - type: Transform
       parent: 16
-    - type: HandheldLight
-      toggleActionEntity: 18
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 18
-    - type: Physics
-      canCollide: False
-    - type: ActionsContainer
     - type: InsideEntityStorage
   - uid: 1844
     components:
@@ -144737,16 +144669,6 @@ entities:
     components:
     - type: Transform
       parent: 529
-    - type: Scope
-      scopingToggleActionEntity: 531
-    - type: Physics
-      canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 531
     - type: InsideEntityStorage
 - proto: RMCLightFixture
   entities:

@@ -1,2 +1,2 @@
-ent-RMCPurpleLightning = Purple Lightning
+ent-RMCPurpleLightning = фиолетовая молния
     .desc = { "" }

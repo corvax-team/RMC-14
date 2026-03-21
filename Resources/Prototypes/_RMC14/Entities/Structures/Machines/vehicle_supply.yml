@@ -169,7 +169,7 @@
     drawdepth: LowFloors
     layers:
     - state: supply_elevator_lowered
-      map: [ "enum.RMCVehicleSupplyLiftLayers.Base" ]
+      map: [ "rmc-vehicle-supply-lift-base" ]
   - type: Physics
     bodyType: static
   - type: Fixtures

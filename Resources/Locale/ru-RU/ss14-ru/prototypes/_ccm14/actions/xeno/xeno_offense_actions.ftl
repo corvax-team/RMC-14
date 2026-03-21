@@ -1,4 +1,4 @@
 
 
-ent-CCMActionXenoMirrorClones = Mirror Clones
-    .desc = Creates three mirror copies that follow you and fake attacks for 10 seconds.
+ent-CCMActionXenoMirrorClones = Зеркальные двойники
+    .desc = Создаёт три зеркальные копии, которые следуют за вами и имитируют атаки в течение 10 секунд.

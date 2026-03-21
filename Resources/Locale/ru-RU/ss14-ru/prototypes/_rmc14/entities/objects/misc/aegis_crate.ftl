@@ -1,2 +1,2 @@
-ent-RMCAegisBox = AEGIS Secure Crate
-    .desc = A secure storage crate for transportation of AEGIS equipment. Seems sturdy enough to withstand any blows outside of an orbital strike. It is locked and requires an AEGIS ID card to open.
+ent-RMCAegisBox = защищённый ящик AEGIS
+    .desc = Защищённый контейнер для транспортировки оборудования системы AEGIS. Кажется достаточно прочным, чтобы выдержать любой удар, за исключением орбитального обстрела. Он заперт и для открытия требует ИД-карту AEGIS.

@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorTrijentCorporate = survivor trijent liaison spawn point
+ent-RMCSpawnPointSurvivorTrijentCorporate = точка появления представителя Trijent
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetTrijentCorporate = trijent liaison preset
+ent-RMCGearSurvivorPresetTrijentCorporate = пресет представителя Trijent
     .desc = { ent-RMCSurvivorPresetCorporate.desc }

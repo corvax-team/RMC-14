@@ -1,4 +1,4 @@
-ent-CCMAreaAlamo = Alamo
+ent-CCMAreaAlamo = Аламо
     .desc = { ent-RMCAreaBase.desc }
-ent-CCMAreaNormandy = Normandy
+ent-CCMAreaNormandy = Нормандия
     .desc = { ent-RMCAreaBase.desc }

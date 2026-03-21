@@ -1,2 +1,2 @@
-ent-RMCXenoNewKing = King
-    .desc = The end of the line.
+ent-RMCXenoNewKing = Король
+    .desc = Тупик эволюции. Конец пути.

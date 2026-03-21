@@ -1,2 +1,2 @@
-ent-RMCGraveCross = wooden cross
-    .desc = A wooden grave marker. Is it more respectful because someone made it by hand, or less, because it's crude and misshapen?
+ent-RMCGraveCross = деревянный крест
+    .desc = Деревянное надгробие. Проявляет ли оно больше уважения, потому что сделано вручную, или меньше, потому что оно грубое и нескладное?

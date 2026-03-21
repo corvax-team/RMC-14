@@ -1,19 +1,19 @@
-emplacement-mount-weapon-unsecured-examine = Use a [color={ $color }]screwdriver[/color] to secure the weapon to the mount, or use a [color={ $color }]crowbar[/color] to remove it.
-emplacement-mount-unanchored-examine = Use a [color={ $color }]screwdriver[/color] to anchor the mount to the floor.
-emplacement-mount-anchored-examine = Attach a [color={ $color }]mountable weapon[/color] to the mount.
-emplacement-mount-weapon-secured-examine = Use a [color={ $color }]screwdriver[/color] to unanchor the weapon for transport.
-emplacement-mount-too-close = This is too close to the nearby { $mount }.
-emplacement-mount-deploy-broken = You can't set up the { $mount }, it's completely broken!
-emplacement-mounted-weapon-overheated = The { $weapon } is damaged by overheating!
-emplacement-mount-broken-examine = [color=red]The gun can't be used in it's current broken state, use a [/color] [color=cyan]welder[/color][color=red] to start repairing it.[/color]
-emplacement-mount-need-hands-free = You need both hands free to grab the handles!
-mountable-weapon-no-free-hands = You need both hands free to operate the weapon.
-emplacement-mount-RMCSmartGunMounted-name = ML66D mount
-emplacement-mount-RMCSmartGunMounted-description = A foldable mount for the ML66D, provides stability to the ML66D.
-emplacement-mount-RMCSmartGunMounted-description-mounted = A deployable, heavy machine gun. It fires specialized tungsten rounds for increased armor penetration.
-emplacement-mount-RMCSmartGunMountedLoaded-name = ML66D mount
-emplacement-mount-RMCSmartGunMountedLoaded-description = A foldable mount for the ML66D, provides stability to the ML66D.
-emplacement-mount-RMCSmartGunMountedLoaded-description-mounted = A deployable, heavy machine gun. It fires specialized tungsten rounds for increased armor penetration.
-emplacement-mount-RMCMachineGunM2C-description = The disassembled M2C HMG, with its telescopic tripods folded up and unable to fire.
-emplacement-mount-RMCMachineGunM2C-description-mounted = A deployable, heavy machine gun. The M2C 'Chimp' HB is a modified M2 HB reconfigured to fire 10x28 Caseless Tungsten rounds for USCM use. It is capable of recoilless fire and fast-rotating. However it has a debilitating overheating issue due to the poor quality of metals used in the parts, forcing it to be used in decisive, crushing engagements as a squad support weapon.
-emplacement-mount-undeploy = Undeploy
+emplacement-mount-weapon-unsecured-examine = Используйте [color={ $color }]отвёртку[/color], чтобы закрепить оружие на установке, или [color={ $color }]ломик[/color], чтобы снять его.
+emplacement-mount-unanchored-examine = Используйте [color={ $color }]отвёртку[/color], чтобы прикрутить установку к полу.
+emplacement-mount-anchored-examine = Установите [color={ $color }]стационарное оружие[/color] на крепление.
+emplacement-mount-weapon-secured-examine = Используйте [color={ $color }]отвёртку[/color], чтобы открепить оружие для транспортировки.
+emplacement-mount-too-close = Это слишком близко к ближайшему объекту: { $mount }.
+emplacement-mount-deploy-broken = Вы не можете развернуть { $mount }, устройство полностью сломано!
+emplacement-mounted-weapon-overheated = { $weapon } повреждено из-за перегрева!
+emplacement-mount-broken-examine = [color=red]Орудие нельзя использовать в текущем сломанном состоянии, используйте [/color] [color=cyan]сварку[/color][color=red], чтобы начать ремонт.[/color]
+emplacement-mount-need-hands-free = Вам нужны обе свободные руки, чтобы взяться за рукоятки!
+mountable-weapon-no-free-hands = Вам нужны обе свободные руки, чтобы управлять оружием.
+emplacement-mount-RMCSmartGunMounted-name = установка ML66D
+emplacement-mount-RMCSmartGunMounted-description = Складная установка для ML66D, обеспечивающая стабильность при стрельбе.
+emplacement-mount-RMCSmartGunMounted-description-mounted = Развёртываемый тяжёлый пулемёт. Ведёт огонь специальными вольфрамовыми патронами для повышенного пробития брони.
+emplacement-mount-RMCSmartGunMountedLoaded-name = установка ML66D
+emplacement-mount-RMCSmartGunMountedLoaded-description = Складная установка для ML66D, обеспечивающая стабильность при стрельбе.
+emplacement-mount-RMCSmartGunMountedLoaded-description-mounted = Развёртываемый тяжёлый пулемёт. Ведёт огонь специальными вольфрамовыми патронами для повышенного пробития брони.
+emplacement-mount-RMCMachineGunM2C-description = Разобранный тяжёлый пулемёт M2C; его телескопические треноги сложены, вести огонь невозможно.
+emplacement-mount-RMCMachineGunM2C-description-mounted = Развёртываемый тяжёлый пулемёт. M2C «Chimp» HB — это модифицированная версия M2 HB, перенастроенная под безгильзовые вольфрамовые патроны 10x28 для нужд ККМП ОПЗ. Способен на стрельбу без отдачи и быстрое вращение. Однако он имеет серьёзную проблему с перегревом из-за низкого качества металлов в деталях, что вынуждает использовать его как орудие поддержки отделения в решительных и сокрушительных столкновениях.
+emplacement-mount-undeploy = Свернуть

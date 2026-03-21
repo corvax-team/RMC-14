@@ -1,2 +1,2 @@
-ent-RMCAegisSpawner = AEGIS crate spawner
+ent-RMCAegisSpawner = спавнер ящика AEGIS
     .desc = { ent-MarkerBase.desc }

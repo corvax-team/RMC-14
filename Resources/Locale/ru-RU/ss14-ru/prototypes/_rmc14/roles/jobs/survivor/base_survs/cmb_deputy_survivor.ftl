@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorCMBDeputy = survivor cmb deputy spawn point
+ent-RMCSpawnPointSurvivorCMBDeputy = точка появления помощника шерифа CMB
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetCMBDeputy = cmb deputy colonist preset
+ent-RMCGearSurvivorPresetCMBDeputy = пресет колониста-помощника шерифа CMB
     .desc = { ent-RMCSurvivorPresetSecurity.desc }

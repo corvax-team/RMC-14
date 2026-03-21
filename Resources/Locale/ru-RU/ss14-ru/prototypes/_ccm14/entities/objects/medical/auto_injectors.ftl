@@ -1,2 +1,2 @@
-ent-CCMDoxarubixadoneAutoInjector = Doxarubixadone autoinjector
-    .desc = An autoinjector loaded with 3 uses of Doxarubixadone, a medicine for treating cellular/genetic damage.
+ent-CCMDoxarubixadoneAutoInjector = Автоинъектор доксарубиксадона
+    .desc = Автоинъектор, содержащий 3 дозы доксарубиксадона — препарата для лечения клеточных и генетических повреждений.

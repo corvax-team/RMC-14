@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorVaraderoICB = survivor icb spawn point
+ent-RMCSpawnPointSurvivorVaraderoICB = точка появления сотрудника ICB
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetICB = icb colonist preset
+ent-RMCGearSurvivorPresetICB = пресет колониста: сотрудник ICB
     .desc = { ent-RMCSurvivorPresetCorporate.desc }

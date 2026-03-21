@@ -1,9 +1,9 @@
-ent-RMCMapInsertShivaSouthCaves = LZ2 Южные пещеры
-    .suffix = Вставьте Шиву
+ent-RMCMapInsertShivaSouthCaves = Южные пещеры LZ2
+    .suffix = Вставка Шива
     .desc = { ent-RMCMapInsertBase.desc }
-ent-RMCMapInsertShivaPanicRoomHold = Panic Room Hold
-    .suffix = Insert Shiva
+ent-RMCMapInsertShivaPanicRoomHold = Укрепление в паник-руме
+    .suffix = Вставка Шива
     .desc = { ent-RMCMapInsertBase.desc }
-ent-RMCMapInsertShivaCLFRaid = CLF Raid
-    .suffix = Insert Shiva
+ent-RMCMapInsertShivaCLFRaid = Рейд CLF
+    .suffix = Вставка Шива
     .desc = { ent-RMCMapInsertBase.desc }

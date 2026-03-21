@@ -1,4 +1,4 @@
-ent-RMCBarricadeStacked = metal Barricades
-    .desc = Two metal barricades stacked ontop of eachother to make a makeshift wall.
+ent-RMCBarricadeStacked = сложенные металлические баррикады
+    .desc = Две металлические баррикады, поставленные друг на друга для создания самодельной стены.
 ent-RMCBarricadeStackedFlipped = { ent-RMCBarricadeStacked }
     .desc = { ent-RMCBarricadeStacked.desc }

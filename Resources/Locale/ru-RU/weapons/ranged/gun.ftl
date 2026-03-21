@@ -1,28 +1,28 @@
-gun-selected-mode-examine = Выбран режим огня [color={ $color }]{ $mode }[/color].
-gun-fire-rate-examine = Скорострельность [color={ $color }]{ $fireRate }[/color] в секунду.
+gun-selected-mode-examine = Выбран режим огня: [color={ $color }]{ $mode }[/color].
+gun-fire-rate-examine = Скорострельность: [color={ $color }]{ $fireRate }[/color] в секунду.
 gun-selector-verb = Изменить на { $mode }
-gun-selected-mode = Выбран { $mode }
+gun-selected-mode = Выбран режим: { $mode }
 gun-disabled = Вы не можете использовать оружие!
 gun-clumsy = Оружие взрывается вам в лицо!
 gun-set-fire-mode = Выбран режим { $mode }
 gun-magazine-whitelist-fail = Это не помещается в оружие!
-gun-magazine-fired-empty = No ammo left!
+gun-magazine-fired-empty = Боеприпасы закончились!
 # SelectiveFire
-gun-SemiAuto = полуавто
-gun-Burst = очередь
-gun-FullAuto = авто
+gun-SemiAuto = полуавтомат
+gun-Burst = отсечка
+gun-FullAuto = автомат
 # BallisticAmmoProvider
 gun-ballistic-cycle = Перезарядка
 gun-ballistic-cycled = Перезаряжено
 gun-ballistic-cycled-empty = Разряжено
-gun-ballistic-cycle-delayed = You begin unloading { CAPITALIZE(THE($entity)) }. Hold still...
-gun-ballistic-cycle-delayed-cancelled = You stop unloading { CAPITALIZE(THE($entity)) }.
-gun-ballistic-cycle-delayed-empty = { CAPITALIZE(THE($entity)) } is already unloaded.
+gun-ballistic-cycle-delayed = Вы начинаете разряжать { $entity }. Стойте смирно...
+gun-ballistic-cycle-delayed-cancelled = Вы прекратили разряжать { $entity }.
+gun-ballistic-cycle-delayed-empty = { $entity } уже разряжен.
 gun-ballistic-transfer-invalid = { CAPITALIZE($ammoEntity) } нельзя поместить в { $targetEntity }!
 gun-ballistic-transfer-empty = В { CAPITALIZE($entity) } пусто.
 gun-ballistic-transfer-target-full = { CAPITALIZE($entity) } уже полностью заряжен.
-gun-ballistic-transfer-cancelled = Your reload was interrupted!
-gun-ballistic-transfer-primed = You can't load a primed { $ammoEntity }!
+gun-ballistic-transfer-cancelled = Ваша перезарядка была прервана!
+gun-ballistic-transfer-primed = Вы не можете зарядить взведённый { $ammoEntity }!
 # CartridgeAmmo
 gun-cartridge-spent = Он [color=red]израсходован[/color].
 gun-cartridge-unspent = Он [color=lime]не израсходован[/color].
@@ -36,12 +36,12 @@ gun-battery-examine =
 # CartridgeAmmoProvider
 gun-chamber-bolt-ammo = Затвор не закрыт
 gun-chamber-bolt = Затвор [color={ $color }]{ $bolt }[/color].
-gun-chamber-bolt-closed = Затвор закрыт
-gun-chamber-bolt-opened = Затвор открыт
+gun-chamber-bolt-closed = затвор закрыт
+gun-chamber-bolt-opened = затвор открыт
 gun-chamber-bolt-close = Закрыть затвор
 gun-chamber-bolt-open = Открыть затвор
-gun-chamber-bolt-closed-state = открыт
-gun-chamber-bolt-open-state = закрыт
+gun-chamber-bolt-closed-state = закрыт
+gun-chamber-bolt-open-state = открыт
 gun-chamber-rack = Передёрнуть затвор
 # MagazineAmmoProvider
 gun-magazine-examine =
@@ -57,6 +57,6 @@ gun-revolver-insert = Заряжен
 gun-revolver-spin = Вращать барабан
 gun-revolver-spun = Барабан вращается
 # GunSpreadModifier
-examine-gun-spread-modifier-reduction = The spread has been reduced by [color=yellow]{ $percentage }%[/color].
-examine-gun-spread-modifier-increase = The spread has been increased by [color=yellow]{ $percentage }%[/color].
+examine-gun-spread-modifier-reduction = Разброс был уменьшен на [color=yellow]{ $percentage }%[/color].
+examine-gun-spread-modifier-increase = Разброс был увеличен на [color=yellow]{ $percentage }%[/color].
 gun-speedloader-empty = Спидлоадер пуст

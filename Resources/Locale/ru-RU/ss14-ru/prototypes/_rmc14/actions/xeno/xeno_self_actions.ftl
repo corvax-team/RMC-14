@@ -1,15 +1,15 @@
 ent-ActionXenoRest = Отдыхать
     .desc = Прилягте, чтобы восстановить здоровье быстрее, пока лежите на сорняках.
-ent-RMCGuidebookActionXenoRest = Rest
-    .desc = Lie down to regenerate health more quickly while on weeds.
+ent-RMCGuidebookActionXenoRest = Отдых
+    .desc = Позволяет лечь, чтобы ускорить регенерацию здоровья на сорняках.
 ent-CMGuidebookActionXenoRest = Отдыхать
     .desc = Прилягте, чтобы восстановить здоровье быстрее, пока лежите на сорняках.
-ent-RMCGuidebookActionXenoWatch = Watch Xenonid
+ent-RMCGuidebookActionXenoWatch = Наблюдать за ксенонидом
     .desc = { ent-CMGuidebookActionXenoBase.desc }
 ent-ActionXenoWatch = Наблюдать за ксено
     .desc = { ent-ActionXenoBase.desc }
-ent-RMCGuidebookActionXenoPheromones = Emit Pheromones
-    .desc = Gives a buff to nearby xenonids.
+ent-RMCGuidebookActionXenoPheromones = Испускать феромоны
+    .desc = Дает усиление союзным ксенонидам поблизости.
 ent-ActionXenoPheromones = Выделять феромоны (35)
     .desc = Усиливает близлежащих ксенонидов. [color=cyan]Тратит 2,5 плазмы в секунду.[/color]
 ent-RMCGuidebookActionXenoHide = { ent-CMGuidebookActionXenoBase }
@@ -32,12 +32,12 @@ ent-ActionXenoResinWalker = Смоляной ходок (50)
     .desc = Бегайте быстрее по сорнякам. [color=cyan]Тратит 30 плазмы в секунду.[/color]
 ent-RMCGuidebookActionXenoToggleLongRangeSight = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
-ent-ActionXenoZoom = Переключить Дальнозоркость
+ent-ActionXenoZoom = Переключить дальнозоркость
     .desc = { ent-ActionXenoBase.desc }
 ent-ActionXenoWordQueen = Слово Королевы (50)
     .desc = Отправляет сообщение всем членам вашего улья.
-ent-RMCGuidebookActionXenoGrowOvipositor = Grow Ovipositor
-    .desc = Become immobile and start laying eggs which will produce parasites.
+ent-RMCGuidebookActionXenoGrowOvipositor = Отрастить яйцеклад
+    .desc = Позволяет стать неподвижной и начать откладывать яйца, из которых появятся паразиты.
 ent-ActionXenoGrowOvipositor = Отрастить яйцеклад (700)
     .desc = Станьте неподвижной и начните откладывать яйца, из которых появляются паразиты. Способность перезаряжается 5 минут. [color=red]Вы должны быть в режиме яйцеклада, чтобы другие ксенониды получали очки эволюции после начала раунда![/color]
 ent-RMCGuidebookActionXenoTurnInvisible = { ent-CMGuidebookActionXenoBase }
@@ -55,7 +55,7 @@ ent-ActionXenoRetrieveEgg = Извлечь яйцо
 ent-RMCGuidebookActionXenoThrowParasite = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
 ent-ActionXenoThrowParasite = Метнуть паразита
-    .desc = Извлекает паразита из вашего хранилища, если у вас есть пустая рука. Если использовать это действие на паразите на земле, оно подберёт всех паразитов поблизости.  Кликнув по тайлу рукой с паразитом, вы метнёте его на расстояние до 4 тайлов, где паразит будет оглушен на 5 секунд. Использование паразита в руке поместит его в ваше хранилище.[color=green]Паразиты не умрут со временем, пока вы держите или носите их.[/color]
+    .desc = Извлекает паразита из вашего хранилища, если у вас есть пустая рука. Если использовать это действие на паразите на земле, оно подберёт всех паразитов поблизости. Кликнув по тайлу рукой с паразитом, вы метнёте его на расстояние до 4 тайлов, где паразит будет оглушен на 5 секунд. Использование паразита в руке поместит его в ваше хранилище.[color=green]Паразиты не умрут со временем, пока вы держите или носите их.[/color]
 ent-RMCGuidebookActionXenoSetParasiteReserve = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
 ent-ActionXenoParasiteReserve = Установить запас паразитов
@@ -77,4 +77,4 @@ ent-ActionXenoEmpower = Усиление (50)
 ent-RMCGuidebookActionXenoGenerateEggs = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
 ent-ActionXenoGenerateEggs = Генерировать яйца (50)
-    .desc = Генерирует яйца каждые 30 секунд, который перемещаются в ваше хранилище, [color=cyan] потребляет 15 плазмы каждые 2 секунды.[/color]
+    .desc = Генерирует яйца каждые 30 секунд, которые перемещаются в ваше хранилище. [color=cyan]Потребляет 15 плазмы каждые 2 секунды.[/color]

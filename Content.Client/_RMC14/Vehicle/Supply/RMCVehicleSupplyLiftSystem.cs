@@ -11,6 +11,7 @@ public sealed class RMCVehicleSupplyLiftSystem : EntitySystem
     [Dependency] private readonly AnimationPlayerSystem _animation = default!;
 
     private const string AnimationKey = "rmc_vehicle_supply_lift";
+    private const string BaseLayerKey = "rmc-vehicle-supply-lift-base";
 
     public override void Initialize()
     {
@@ -21,7 +22,7 @@ public sealed class RMCVehicleSupplyLiftSystem : EntitySystem
     private void OnLiftHandleState(Entity<RMCVehicleSupplyLiftComponent> lift, ref AfterAutoHandleStateEvent args)
     {
         if (!TryComp(lift, out SpriteComponent? sprite) ||
-            !sprite.LayerMapTryGet(RMCVehicleSupplyLiftLayers.Base, out var layer))
+            !sprite.LayerMapTryGet(BaseLayerKey, out var layer))
         {
             return;
         }
@@ -45,7 +46,7 @@ public sealed class RMCVehicleSupplyLiftSystem : EntitySystem
                     {
                         new AnimationTrackSpriteFlick
                         {
-                            LayerKey = RMCVehicleSupplyLiftLayers.Base,
+                            LayerKey = BaseLayerKey,
                             KeyFrames =
                             {
                                 new AnimationTrackSpriteFlick.KeyFrame(lift.Comp.LoweringState, 0)
@@ -64,7 +65,7 @@ public sealed class RMCVehicleSupplyLiftSystem : EntitySystem
                     {
                         new AnimationTrackSpriteFlick
                         {
-                            LayerKey = RMCVehicleSupplyLiftLayers.Base,
+                            LayerKey = BaseLayerKey,
                             KeyFrames =
                             {
                                 new AnimationTrackSpriteFlick.KeyFrame(lift.Comp.RaisingState, 0)

@@ -1,3 +1,3 @@
-ent-RMCSynthBreachingHammer = b5 breaching hammer
-    .desc = This 100-pound monstrosity of a sledgehammer is made of solid tungsten carbide and hits with enough force to level walls like they’re made of paper. It tears through steel and concrete without slowing down, and is completely unusable by anyone without superhuman strength. It’s too heavy for a normal person to even lift.
+ent-RMCSynthBreachingHammer = пробивной молот B5
+    .desc = Это 45-килограммовое чудовище, выполненное из цельного карбида вольфрама, бьёт с силой, достаточной, чтобы сносить стены, будто они бумажные. Он прошибает сталь и бетон, не замедляясь, и абсолютно бесполезен для любого, кто не обладает сверхчеловеческой силой. Обычный человек не сможет его даже поднять.
     .suffix = RMC

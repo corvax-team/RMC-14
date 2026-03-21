@@ -1,5 +1,5 @@
-ent-RMCPintGlass = pint glass
-    .desc = A proper geezer's pint glass. Rarely seen without a frothy head of beer.
+ent-RMCPintGlass = пинтовый стакан
+    .desc = Правильный стакан для настоящего мужика. Редко его можно увидеть без пышной пивной пены.
 ent-RMCPintGlassFull = { ent-RMCPintGlass }
-    .suffix = full
+    .suffix = полный
     .desc = { ent-RMCPintGlass.desc }

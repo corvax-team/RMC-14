@@ -1,4 +1,4 @@
-ent-CCMActionXenoThrowRoyalParasite = Royal Bond
-    .desc = Retrieves a royal child from your storage if you have an empty hand. Using this on a royal child on the ground will pickup it. Targeting a tile with a royal child in hand will throw it up to 6 tiles away, where the child will be stunned for 3 seconds. Using a royal child in hand will add it to your storage. [color=green]Children won't die due to time while you hold or carry them.[/color]
+ent-CCMActionXenoThrowRoyalParasite = Королевская связь
+    .desc = Извлекает королевское дитя из вашего хранилища, если у вас есть пустая рука. Использование этого действия на королевском дитя на земле подберёт его. Клик по тайлу с королевским дитя в руке метнёт его на расстояние до 6 тайлов, где оно будет оглушено на 3 секунды. Использование королевского дитя в руке поместит его в ваше хранилище. [color=green]Дети не умрут со временем, пока вы держите или носите их.[/color]
 ent-CCMGuidebookActionXenoThrowRoyalParasite = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }

@@ -1,8 +1,8 @@
 
 
-ent-RMCSurvivorPresetNoGun = no gun colonist preset
+ent-RMCSurvivorPresetNoGun = пресет колониста без оружия
     .desc = { "" }
 
-ent-RMCSurvivorPresetCivilianRareItem = civilian colonist preset with rare item
+ent-RMCSurvivorPresetCivilianRareItem = пресет гражданского колониста с редким предметом
     .desc = { "" }
 

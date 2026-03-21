@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorTrijentChaplain = survivor trijent chaplain spawn point
+ent-RMCSpawnPointSurvivorTrijentChaplain = точка появления капеллана Trijent
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetTrijentChaplain = trijent chaplain preset
+ent-RMCGearSurvivorPresetTrijentChaplain = пресет капеллана Trijent
     .desc = { ent-RMCSurvivorPresetCivilianRareItem.desc }

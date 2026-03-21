@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorTrijentEngiHydro = survivor hydro electric engineer spawn point
+ent-RMCSpawnPointSurvivorTrijentEngiHydro = точка появления инженера-гидроэлектрика Trijent
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetTrijentEngiHydro = hydro electric engineer colonist preset
+ent-RMCGearSurvivorPresetTrijentEngiHydro = пресет колониста: инженер-гидроэлектрик Trijent
     .desc = { ent-RMCSurvivorPresetEngineer.desc }

@@ -164,6 +164,7 @@
   name: intel tech tree
   categories: [ HideSpawnMenu ]
   components:
+  - type: RMCVehicleSupplyTech
   - type: IntelTechTree
     tree:
       options:

@@ -26,7 +26,7 @@ rmc-job-description-free-press-responder = "Вы - региональный ре
 #CLF fax responder
 rmc-job-name-clf-responder = Информационный Информатор КФО
 rmc-job-description-clf-responder = "Вы член подпольной региональной ячейки КФО. Информируйте и получайте информацию от местных ячеек."
-rmc-job-prefix-clf-responder = INFO
+rmc-job-prefix-clf-responder = ИНФО
 #SPP fax responder
 rmc-job-name-spp-responder = Радист СССП
 rmc-job-description-spp-responder = "Вы дествуете от имени Секториального Командования СССП и отвечаете на факсы, предназначенные для высшего ешелона СССП."

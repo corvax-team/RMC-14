@@ -1,2 +1,2 @@
-ent-CCMMarkerERTCrash = ERT marker crash
+ent-CCMMarkerERTCrash = Маркер крушения ERT
     .desc = { ent-MarkerBase.desc }
