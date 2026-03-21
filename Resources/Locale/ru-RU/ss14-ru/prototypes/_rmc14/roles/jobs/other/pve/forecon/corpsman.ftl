@@ -1,3 +1,3 @@
-ent-RMCSpawnPointFORECONPVECorpsman = forecon corpsman spawn point
+ent-RMCSpawnPointFORECONPVECorpsman = точка спавна медика ФОРЕКОН
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }

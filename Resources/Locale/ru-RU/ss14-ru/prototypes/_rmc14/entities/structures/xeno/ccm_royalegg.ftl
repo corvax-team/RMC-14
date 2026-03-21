@@ -1,2 +1,2 @@
-ent-CCMXenoRoyalEgg = royal egg
-    .desc = A particularly large, unusual egg with a iridescent sheen.
+ent-CCMXenoRoyalEgg = королевское яйцо
+    .desc = Необычайно крупное яйцо с переливающимся блеском.

@@ -1,2 +1,2 @@
-ent-RMCSpawnPointSurvivorFiorinaDoctor = survivor fiorina doctor spawn point
+ent-RMCSpawnPointSurvivorFiorinaDoctor = точка спавна врача Фиорины
     .desc = { ent-CMSpawnPointJobBase.desc }

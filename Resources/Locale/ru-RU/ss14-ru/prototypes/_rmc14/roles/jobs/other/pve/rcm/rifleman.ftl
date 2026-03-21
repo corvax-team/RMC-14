@@ -1,2 +1,2 @@
-ent-CMSpawnPointRCMPVERifleman = RCM rifleman spawn point
+ent-CMSpawnPointRCMPVERifleman = точка спавна стрелка RCM
     .desc = { ent-CMSpawnPointJobBase.desc }

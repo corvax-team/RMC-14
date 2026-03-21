@@ -1,2 +1,2 @@
-ent-CMSpawnPointRCMPVEAssaultEngineer = RCM assault engineer spawn point
+ent-CMSpawnPointRCMPVEAssaultEngineer = точка спавна штурмового инженера RCM
     .desc = { ent-CMSpawnPointJobBase.desc }

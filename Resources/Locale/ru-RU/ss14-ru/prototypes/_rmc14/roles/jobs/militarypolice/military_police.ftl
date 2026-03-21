@@ -1,4 +1,4 @@
-ent-CMSpawnPointMilitaryPolice = точка появления военная полиция
+ent-CMSpawnPointMilitaryPolice = точка появления военной полиции
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGuidebookRoleMP = Military Police
-    .desc = Military Police
+ent-RMCGuidebookRoleMP = Военная полиция
+    .desc = Военная полиция

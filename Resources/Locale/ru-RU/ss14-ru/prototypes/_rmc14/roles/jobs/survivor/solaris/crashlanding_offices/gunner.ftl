@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorSolarisPMCGunner = special survivor crashlanding offices pmc gunner spawn point
+ent-RMCSpawnPointSurvivorSolarisPMCGunner = точка спавна стрелка ЧВК
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetPMCGunner = pmc standard survivor preset
+ent-RMCGearSurvivorPresetPMCGunner = пресет стрелка ЧВК
     .desc = { ent-RMCSurvivorPresetNoGun.desc }

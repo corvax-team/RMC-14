@@ -1,2 +1,2 @@
-ent-RMCCPRDummy = CPR dummy
-    .desc = A CPR dummy, for training all those privates how to save a life! Does not accurately emulate battle wounds, does not simulate rib breaking, plastic toxic to touch, please contact a doctor if skin irritation persists for more than two hours.
+ent-RMCCPRDummy = манекен для СЛР
+    .desc = Манекен для СЛР, чтобы обучать всех этих рядовых спасать жизни! Не имитирует боевые ранения, не симулирует перелом рёбер, пластик токсичен при прикосновении, пожалуйста, обратитесь к врачу, если раздражение кожи не проходит более двух часов.

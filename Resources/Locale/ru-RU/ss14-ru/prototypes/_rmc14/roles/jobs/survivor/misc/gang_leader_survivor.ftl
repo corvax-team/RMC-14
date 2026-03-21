@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorGangLeader = survivor gang leader spawn point
+ent-RMCSpawnPointSurvivorGangLeader = точка спавна лидера банды
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetGangLeader = gang leader survivor preset
+ent-RMCGearSurvivorPresetGangLeader = пресет лидера банды
     .desc = { ent-RMCSurvivorPresetCivilian.desc }

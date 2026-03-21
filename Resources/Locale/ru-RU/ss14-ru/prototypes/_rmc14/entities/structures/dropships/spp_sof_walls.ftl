@@ -1,4 +1,4 @@
-ent-RMCBaseSPPSOFDropshipWall = SPP-DS-3 'Voron' wall
+ent-RMCBaseSPPSOFDropshipWall = стена СССП-ДС-3 «Ворон»
     .desc = { ent-CMBaseWallInvincible.desc }
 ent-RMCSPPSOFDropshipWall1 = { ent-RMCBaseSPPSOFDropshipWall }
     .desc = { ent-RMCBaseSPPSOFDropshipWall.desc }

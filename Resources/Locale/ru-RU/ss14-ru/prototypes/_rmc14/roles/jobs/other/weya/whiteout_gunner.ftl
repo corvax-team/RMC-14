@@ -1,2 +1,2 @@
-ent-RMCRandomHumanoidPMCWhiteoutGunner = DEATHSQUAD pmc ghost role whiteout gunner
+ent-RMCRandomHumanoidPMCWhiteoutGunner = стрелок ЧВК роль призрака
     .desc = { ent-RMCRandomHumanoidPMCWhiteout.desc }

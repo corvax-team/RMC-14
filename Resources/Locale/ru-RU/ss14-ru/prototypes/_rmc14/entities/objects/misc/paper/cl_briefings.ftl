@@ -1,8 +1,8 @@
 ent-RMCPaperWeYaLiaisonBriefingBase = { ent-RMCPaperWeYa }
     .desc = { ent-RMCPaperWeYa.desc }
 ent-RMCPaperWeYaLiaisonBriefingSolaris = { ent-RMCPaperWeYaLiaisonBriefingBase }
-    .suffix = Solaris Briefing
+    .suffix = Брифинг Solaris
     .desc = { ent-RMCPaperWeYaLiaisonBriefingBase.desc }
 ent-RMCPaperWeYaLiaisonBriefingKutjevo = { ent-RMCPaperWeYaLiaisonBriefingBase }
-    .suffix = Kutjevo Briefing
+    .suffix = Брифинг Kutjevo
     .desc = { ent-RMCPaperWeYaLiaisonBriefingBase.desc }

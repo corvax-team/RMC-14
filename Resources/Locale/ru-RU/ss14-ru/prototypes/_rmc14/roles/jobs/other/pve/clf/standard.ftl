@@ -1,3 +1,3 @@
-ent-RMCSpawnPointCLFStandardPVE = clf standard spawn point
+ent-RMCSpawnPointCLFStandardPVE = точка спавна рядового КФО
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }

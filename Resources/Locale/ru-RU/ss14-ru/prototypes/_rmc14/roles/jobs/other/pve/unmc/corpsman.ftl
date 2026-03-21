@@ -1,2 +1,2 @@
-ent-RMCSpawnPointPVECorpsman = PVE corpsman spawn point
+ent-RMCSpawnPointPVECorpsman = точка спавна медика
     .desc = { ent-CMSpawnPointJobBase.desc }

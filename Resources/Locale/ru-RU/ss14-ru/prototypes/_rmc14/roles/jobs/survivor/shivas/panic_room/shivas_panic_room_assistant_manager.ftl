@@ -1,2 +1,2 @@
-ent-RMCSpawnPointSurvivorPanicRoomAssistantManager = special survivor panic room assistant manager spawn point
+ent-RMCSpawnPointSurvivorPanicRoomAssistantManager = точка спавна помощника менеджера
     .desc = { ent-CMSpawnPointJobBase.desc }

@@ -1,2 +1,2 @@
-ent-CMSpawnPointRCMPVEMedicalAssistant = RCM medical assistant spawn point
+ent-CMSpawnPointRCMPVEMedicalAssistant = точка спавна помощника врача RCM
     .desc = { ent-CMSpawnPointJobBase.desc }

@@ -1,2 +1,2 @@
-ent-RMCSpawnPointSurvivorShivasCorporateLiaison = survivor shivas coporate liaison spawn point
+ent-RMCSpawnPointSurvivorShivasCorporateLiaison = точка спавна представителя корпорации Shivas
     .desc = { ent-CMSpawnPointJobBase.desc }

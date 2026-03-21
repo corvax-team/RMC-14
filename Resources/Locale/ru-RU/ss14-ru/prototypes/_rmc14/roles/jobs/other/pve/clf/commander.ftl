@@ -1,3 +1,3 @@
-ent-RMCSpawnPointCLFCommanderPVE = clf commander spawn point
+ent-RMCSpawnPointCLFCommanderPVE = точка спавна командира КФО
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }

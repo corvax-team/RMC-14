@@ -1,2 +1,2 @@
-ent-RMCSpawnPointSurvivorCrashlandingOfficesLeader = special survivor crashlanding offices pmc leader spawn point
+ent-RMCSpawnPointSurvivorCrashlandingOfficesLeader = точка спавна командира ЧВК
     .desc = { ent-CMSpawnPointJobBase.desc }

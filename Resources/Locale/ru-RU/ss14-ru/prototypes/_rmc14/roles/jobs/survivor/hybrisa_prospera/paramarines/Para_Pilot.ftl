@@ -1,2 +1,2 @@
-ent-RMCSpawnPointParaPilot = paramarine dropship pilot spawn point
+ent-RMCSpawnPointParaPilot = точка спавна пилота десантного челнока
     .desc = { ent-CMSpawnPointJobBase.desc }

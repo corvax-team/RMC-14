@@ -1,2 +1,2 @@
-ent-RMCSkillPresetSurvivorSPPPrivate = Survivor SPP Private
+ent-RMCSkillPresetSurvivorSPPPrivate = Выживший рядовой СССП
     .desc = { ent-RMCSkillPresetSurvivor.desc }

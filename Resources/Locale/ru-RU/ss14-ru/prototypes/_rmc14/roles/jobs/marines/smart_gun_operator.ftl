@@ -1,4 +1,4 @@
-ent-CMSpawnPointSmartGunOperator = точка появления оператор смартгана
+ent-CMSpawnPointSmartGunOperator = точка спавна оператора смартгана
     .desc = { ent-CMSpawnPointJobBase.desc }
 ent-CMSpawnPointSmartGunOperatorAlpha = { ent-CMSpawnPointSmartGunOperator }
     .suffix = Альфа
@@ -12,5 +12,5 @@ ent-CMSpawnPointSmartGunOperatorCharlie = { ent-CMSpawnPointSmartGunOperator }
 ent-CMSpawnPointSmartGunOperatorDelta = { ent-CMSpawnPointSmartGunOperator }
     .suffix = Дельта
     .desc = { ent-CMSpawnPointSmartGunOperator.desc }
-ent-RMCGuidebookRoleSGO = Smart Gun Operator
-    .desc = Smart Gun Operator
+ent-RMCGuidebookRoleSGO = Оператор смартгана
+    .desc = Оператор смартгана

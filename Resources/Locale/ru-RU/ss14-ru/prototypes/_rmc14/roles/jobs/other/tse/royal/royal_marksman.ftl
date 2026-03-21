@@ -1,3 +1,3 @@
-ent-RMCRandomHumanoidRoyalMarinesMarksman = royal crown marines ghost role marksman
-    .suffix = Spawner, Player, Friendly
+ent-RMCRandomHumanoidRoyalMarinesMarksman = снайпер Королевской морской пехоты роль призрака
+    .suffix = Спавнер, Игрок, Дружелюбный
     .desc = { "" }

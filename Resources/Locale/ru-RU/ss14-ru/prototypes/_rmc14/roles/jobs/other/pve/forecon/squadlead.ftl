@@ -1,3 +1,3 @@
-ent-RMCSpawnPointFORECONPVESquadLead = forecon squad lead spawn point
+ent-RMCSpawnPointFORECONPVESquadLead = точка спавна командира отряда ФОРЕКОН
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }

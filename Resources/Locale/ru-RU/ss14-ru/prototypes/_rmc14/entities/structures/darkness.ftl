@@ -1,2 +1,2 @@
-ent-RMCPerspectiveDarkness = darkness
+ent-RMCPerspectiveDarkness = темнота
     .desc = { "" }

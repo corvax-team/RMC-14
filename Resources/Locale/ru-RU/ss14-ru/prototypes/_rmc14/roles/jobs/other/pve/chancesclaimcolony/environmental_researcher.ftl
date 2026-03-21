@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorChancesEnvironmentalResearcher = enviromental researcher spawn point
+ent-RMCSpawnPointSurvivorChancesEnvironmentalResearcher = точка спавна исследователя окружающей среды Шанса
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCRandomHumanoidSurvivorChancesEnvironmentalResearcher = chances environmental researcher ghost role
+ent-RMCRandomHumanoidSurvivorChancesEnvironmentalResearcher = исследователь окружающей среды роль призрака Шанса
     .desc = { ent-MarkerBase.desc }

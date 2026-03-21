@@ -1,2 +1,2 @@
-ent-RMCGlowingGoo = glowing goo
-    .desc = You don't think you should be near this.
+ent-RMCGlowingGoo = светящаяся слизь
+    .desc = Вы думаете, что не должны находиться рядом с этим.

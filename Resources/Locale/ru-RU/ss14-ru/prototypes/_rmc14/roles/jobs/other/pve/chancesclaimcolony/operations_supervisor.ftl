@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorOperationsSupervisor = spawn point
+ent-RMCSpawnPointSurvivorOperationsSupervisor = точка появления руководителя операций выживших
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCRandomHumanoidSurvivorOperationsSupervisor = chances operations supervisor ghost role
+ent-RMCRandomHumanoidSurvivorOperationsSupervisor = роль призрака: руководитель операций
     .desc = { ent-MarkerBase.desc }

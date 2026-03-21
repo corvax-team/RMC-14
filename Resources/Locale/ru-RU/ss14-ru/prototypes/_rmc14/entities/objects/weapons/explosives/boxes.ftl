@@ -1,5 +1,5 @@
-ent-RMCBoxSmallBase = packet
+ent-RMCBoxSmallBase = ящик
     .desc = { ent-CMPacketBase.desc }
-ent-RMCBoxClaymoreMineFilled = M20 mine box
-    .desc = A secure box holding five M20 anti-personnel proximity mines.
-    .suffix = Filled
+ent-RMCBoxClaymoreMineFilled = ящик с минами M20
+    .desc = Защищённый ящик с пятью противопехотными минами направленного поражения M20.
+    .suffix = Заполнен

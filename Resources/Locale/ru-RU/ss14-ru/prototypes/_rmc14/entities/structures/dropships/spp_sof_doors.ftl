@@ -1,3 +1,3 @@
 ent-CMSPPSOFCockpit = { ent-RMCDropshipCockpitBase }
-    .suffix = Voron
+    .suffix = Ворон
     .desc = { ent-RMCDropshipCockpitBase.desc }

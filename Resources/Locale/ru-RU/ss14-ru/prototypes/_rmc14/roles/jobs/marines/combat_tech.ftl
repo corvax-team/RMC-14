@@ -1,4 +1,4 @@
-ent-CMSpawnPointCombatTech = точка появления боевой техник
+ent-CMSpawnPointCombatTech = точка спавна боевого техника
     .desc = { ent-CMSpawnPointJobBase.desc }
 ent-CMSpawnPointCombatTechAlpha = { ent-CMSpawnPointCombatTech }
     .suffix = Альфа
@@ -12,5 +12,5 @@ ent-CMSpawnPointCombatTechCharlie = { ent-CMSpawnPointCombatTech }
 ent-CMSpawnPointCombatTechDelta = { ent-CMSpawnPointCombatTech }
     .suffix = Дельта
     .desc = { ent-CMSpawnPointCombatTech.desc }
-ent-RMCGuidebookRoleCT = Combat Technician
-    .desc = Combat Technician
+ent-RMCGuidebookRoleCT = Боевой техник
+    .desc = Боевой техник

@@ -1,2 +1,2 @@
-ent-CMSpawnPointRCMPVETroopCommander = RCM troop commander spawn point
+ent-CMSpawnPointRCMPVETroopCommander = точка спавна командира отряда RCM
     .desc = { ent-CMSpawnPointJobBase.desc }

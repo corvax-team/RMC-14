@@ -1,2 +1,2 @@
-ent-RMCGooeyGreyMass = gooey grey mass
-    .desc = It looks like a melted... something.
+ent-RMCGooeyGreyMass = желеобразная серая масса
+    .desc = Похоже на расплавленное... что-то.

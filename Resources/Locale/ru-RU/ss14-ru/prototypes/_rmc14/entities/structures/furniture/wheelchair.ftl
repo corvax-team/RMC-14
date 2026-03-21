@@ -1,6 +1,6 @@
 ent-RMCWheelchairBase = { "" }
     .desc = { "" }
-ent-RMCWheelchair = wheelchair
-    .desc = Helps those with injuries related to immobility to move freely
-ent-RMCWheelchairBell = wheelchair with bell
-    .desc = Helps those with injuries related to immobility to move freely. Has a bell attached.
+ent-RMCWheelchair = инвалидная коляска
+    .desc = Помогает людям с травмами, ограничивающими подвижность, передвигаться свободно.
+ent-RMCWheelchairBell = инвалидная коляска со звонком
+    .desc = Помогает людям с травмами, ограничивающими подвижность, передвигаться свободно. Прикреплён звонок.

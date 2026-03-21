@@ -1,2 +1,2 @@
-ent-RMCPaperworkLocker = police paperwork
-    .desc = A filing cabinet containing various forms and documents for administrative purposes.
+ent-RMCPaperworkLocker = картотека полиции
+    .desc = Шкаф для бумаг, содержащий различные бланки и документы для административных нужд.

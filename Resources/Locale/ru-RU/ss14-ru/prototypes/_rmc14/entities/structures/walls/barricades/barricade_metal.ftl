@@ -1,18 +1,16 @@
-
-
 ent-RMCBarricadeMetalAltDrawdepth = { ent-CMBarricadeMetal }
-    .suffix = Layers over Platforms
+    .suffix = Поверх платформ
     .desc = { ent-CMBarricadeMetal.desc }
 
 ent-RMCBarricadeHandrailAltDrawdepth = { ent-RMCBarricadeHandrailAlt }
-    .suffix = Layers over Platforms
+    .suffix = Поверх платформ
     .desc = { ent-RMCBarricadeHandrailAlt.desc }
 
 ent-RMCBarricadeHandrailStrataAltDrawdepth = { ent-RMCBarricadeHandrailStrata }
-    .suffix = Layers over Platforms
+    .suffix = Поверх платформ
     .desc = { ent-RMCBarricadeHandrailStrata.desc }
 
 ent-RMCBarricadeWireRailAltDrawdepth = { ent-RMCBarricadeWireRail }
-    .suffix = Layers over Platforms
+    .suffix = Поверх платформ
     .desc = { ent-RMCBarricadeWireRail.desc }
 

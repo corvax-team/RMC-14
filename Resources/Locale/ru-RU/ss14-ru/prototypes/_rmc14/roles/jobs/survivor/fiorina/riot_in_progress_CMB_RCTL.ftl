@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer = special survivor fiorina riot in progress colony marshal bureau riot control team leader spawn point
+ent-RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer = точка спавна командира отряда подавления бунтов CMB
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetRiotInProgressCMBRCTL = riot in progress CMB RCTL preset
+ent-RMCSurvivorPresetRiotInProgressCMBRCTL = пресет командира отряда подавления бунтов CMB
     .desc = { "" }

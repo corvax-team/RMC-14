@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorAdministrativeClerk = spawn point
+ent-RMCSpawnPointSurvivorAdministrativeClerk = точка спавна
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCRandomHumanoidSurvivorAdministrativeClerk = chances administrative clerk ghost role
+ent-RMCRandomHumanoidSurvivorAdministrativeClerk = административный клерк роль призрака
     .desc = { ent-MarkerBase.desc }

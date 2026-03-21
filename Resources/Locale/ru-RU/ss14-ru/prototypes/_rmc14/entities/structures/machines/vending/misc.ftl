@@ -1,2 +1,2 @@
-ent-ColMarTechFOBSupplies = ColMarTech Automated FOB Supplies Vendor
-    .desc = An automated restockable storage vendor for use in organizing FOB supplies.
+ent-ColMarTechFOBSupplies = автоматизированный склад припасов ФОБ ColMarTech
+    .desc = Автоматизированный пополняемый складской автомат, предназначенный для организации снабжения передовых операционных баз.

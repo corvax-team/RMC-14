@@ -1,2 +1,2 @@
-ent-CMSpawnPointRCMPVEGPMGGunner = RCM gpmg gunner spawn point
+ent-CMSpawnPointRCMPVEGPMGGunner = точка спавна пулемётчика RCM
     .desc = { ent-CMSpawnPointJobBase.desc }

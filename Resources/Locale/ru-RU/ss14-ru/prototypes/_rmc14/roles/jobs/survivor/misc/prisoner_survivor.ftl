@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorPrisoner = survivor prisoner spawn point
+ent-RMCSpawnPointSurvivorPrisoner = точка появления выжившего заключённого
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetPrisoner = prisoner survivor preset
+ent-RMCGearSurvivorPresetPrisoner = набор снаряжения выжившего заключённого
     .desc = { ent-RMCSurvivorPresetCivilian.desc }

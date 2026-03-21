@@ -1,4 +1,4 @@
-ent-RMCSpawnPointProvostInspector = Provost Inspector spawn point
+ent-RMCSpawnPointProvostInspector = точка появления инспектора военного приставолитета
     .desc = { ent-CMSpawnPointJobBase.desc }
 ent-RMCSpawnerProvostInspector = спавнер инспектор военного приставолитета
     .suffix = Спавнер, Игрок, Среднее понимание закона

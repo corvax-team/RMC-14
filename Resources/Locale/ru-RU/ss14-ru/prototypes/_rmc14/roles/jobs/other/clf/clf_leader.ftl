@@ -1,3 +1,3 @@
-ent-RMCRandomHumanoidCLFCellLeader = clf ghost role cell leader
-    .suffix = Spawner, Player
+ent-RMCRandomHumanoidCLFCellLeader = командир ячейки КФО роль призрака
+    .suffix = Спавнер, Игрок
     .desc = { "" }

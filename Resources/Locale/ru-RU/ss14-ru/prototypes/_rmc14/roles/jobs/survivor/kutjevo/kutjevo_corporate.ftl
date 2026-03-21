@@ -1,2 +1,2 @@
-ent-RMCSpawnPointSurvivorKutjevoCorporate = survivor kutjevo liaison spawn point
+ent-RMCSpawnPointSurvivorKutjevoCorporate = точка спавна представителя корпорации Kutjevo
     .desc = { ent-CMSpawnPointJobBase.desc }

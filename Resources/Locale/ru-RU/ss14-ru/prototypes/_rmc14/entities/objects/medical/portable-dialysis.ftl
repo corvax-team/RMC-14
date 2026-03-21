@@ -1,2 +1,2 @@
-ent-RMCPortableDialysis = portable dialysis machine
-    .desc = A man-portable dialysis machine, with a small internal battery that can be recharged. Filters out all foreign compounds from the bloodstream of whoever it's attached to, but also typically ends up removing some blood as well.
+ent-RMCPortableDialysis = переносной аппарат для диализа
+    .desc = Компактный переносной аппарат для диализа со встроенным аккумулятором. Выводит все чужеродные соединения из кровотока пациента, к которому он подключён, но при этом обычно удаляет и часть крови.

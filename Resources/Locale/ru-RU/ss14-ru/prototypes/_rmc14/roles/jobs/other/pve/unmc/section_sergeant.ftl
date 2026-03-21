@@ -1,2 +1,2 @@
-ent-RMCSpawnPointPVESectionSergeant = PVE section sergeant spawn point
+ent-RMCSpawnPointPVESectionSergeant = точка спавна сержанта секции
     .desc = { ent-CMSpawnPointJobBase.desc }

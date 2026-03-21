@@ -1,2 +1,2 @@
-ent-RMCSpawnPointParaCommander = paramarine commander spawn point
+ent-RMCSpawnPointParaCommander = точка спавна командира десантников
     .desc = { ent-CMSpawnPointJobBase.desc }

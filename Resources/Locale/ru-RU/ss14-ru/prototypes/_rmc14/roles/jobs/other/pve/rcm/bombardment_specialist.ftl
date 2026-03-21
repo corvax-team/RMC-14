@@ -1,2 +1,2 @@
-ent-CMSpawnPointRCMPVEBombSpec = RCM bombardment specialist spawn point
+ent-CMSpawnPointRCMPVEBombSpec = точка спавна специалиста по бомбардировкам RCM
     .desc = { ent-CMSpawnPointJobBase.desc }

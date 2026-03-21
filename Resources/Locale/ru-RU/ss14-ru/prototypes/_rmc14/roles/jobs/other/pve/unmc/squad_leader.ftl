@@ -1,2 +1,2 @@
-ent-RMCSpawnPointPVESquadLeader = PVE squad leader spawn point
+ent-RMCSpawnPointPVESquadLeader = точка спавна командира отряда
     .desc = { ent-CMSpawnPointJobBase.desc }

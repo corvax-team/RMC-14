@@ -1,2 +1,2 @@
-ent-RMCSpawnPointPVEPlatoonCommander = PVE platoon commander spawn point
+ent-RMCSpawnPointPVEPlatoonCommander = точка появления командира взвода PvE
     .desc = { ent-CMSpawnPointJobBase.desc }

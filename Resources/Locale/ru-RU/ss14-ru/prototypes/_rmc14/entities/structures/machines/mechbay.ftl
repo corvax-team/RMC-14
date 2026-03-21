@@ -1,3 +1,3 @@
-ent-RMCPropPowerPort = mech bay power port
-    .suffix = Prop
+ent-RMCPropPowerPort = порт питания механоотсека
+    .suffix = Проп
     .desc = { ent-CMBaseStructure.desc }

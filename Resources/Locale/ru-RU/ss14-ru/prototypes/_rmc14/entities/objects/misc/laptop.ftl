@@ -1,6 +1,6 @@
-ent-RMCDropshipMaintsComputer = dropship maintenance computer
-    .desc = An opened dropship maintenance computer, it seems to be off however. It's used by technicians and pilots to find damaged or broken systems on a dropship. It has various outlets for different systems.
-    .suffix = Open
-ent-RMCDropshipMaintsComputerOpen = dropship maintenance computer
-    .desc = A closed dropship maintenance computer that technicians and pilots use to find out what's wrong with a dropship. It has various outlets for different systems.
-    .suffix = Closed
+ent-RMCDropshipMaintsComputer = компьютер техобслуживания челнока
+    .desc = Открытый компьютер техобслуживания челнока, но, похоже, он выключен. Используется техниками и пилотами для поиска повреждённых или неисправных систем на челноке. Имеет различные разъёмы для разных систем.
+    .suffix = Открыт
+ent-RMCDropshipMaintsComputerOpen = компьютер техобслуживания челнока
+    .desc = Закрытый компьютер техобслуживания челнока, который техники и пилоты используют, чтобы выяснить, что не так с челноком. Имеет различные разъёмы для разных систем.
+    .suffix = Закрыт

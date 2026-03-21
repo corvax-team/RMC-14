@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorChancesGoon = chances goon spawn point
+ent-RMCSpawnPointSurvivorChancesGoon = точка спавна боевика Шанса
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCRandomHumanoidSurvivorChancesGoon = chances claim corporate security ghost role
+ent-RMCRandomHumanoidSurvivorChancesGoon = корпоративный охранник Шанса роль призрака
     .desc = { ent-MarkerBase.desc }

@@ -1,2 +1,2 @@
-ent-CMSpawnPointPanicRoomSurvivor = special civilian panic room survivor spawn point
+ent-CMSpawnPointPanicRoomSurvivor = точка спавна выжившего
     .desc = { ent-CMSpawnPointSurvivor.desc }

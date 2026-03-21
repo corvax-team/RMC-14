@@ -1,2 +1,2 @@
-ent-RMCSpawnPointSurvivorSolarisEngineer = survivor solaris engineer spawn point
+ent-RMCSpawnPointSurvivorSolarisEngineer = точка спавна инженера Solaris
     .desc = { ent-CMSpawnPointJobBase.desc }

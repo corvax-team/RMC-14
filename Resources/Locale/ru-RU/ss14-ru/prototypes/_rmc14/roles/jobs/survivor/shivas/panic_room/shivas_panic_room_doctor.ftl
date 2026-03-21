@@ -1,2 +1,2 @@
-ent-RMCSpawnPointSurvivorShivasPanicRoomDoctor = special survivor shivas panic room doctor spawn point
+ent-RMCSpawnPointSurvivorShivasPanicRoomDoctor = точка спавна врача
     .desc = { ent-RMCSpawnPointSurvivorShivasDoctor.desc }

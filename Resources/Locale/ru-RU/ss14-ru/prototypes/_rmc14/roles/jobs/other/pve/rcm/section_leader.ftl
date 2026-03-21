@@ -1,2 +1,2 @@
-ent-CMSpawnPointRCMPVESectionLeader = RCM section leader spawn point
+ent-CMSpawnPointRCMPVESectionLeader = точка спавна командира секции RCM
     .desc = { ent-CMSpawnPointJobBase.desc }

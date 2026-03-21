@@ -1,10 +1,10 @@
-ent-RMCPropBodybagPile = bodybag pile
-    .desc = A grim mound of body bags stacked haphazardly.
+ent-RMCPropBodybagPile = куча мешков для тел
+    .desc = Мрачная груда мешков для тел, наваленных как попало.
 ent-RMCPropBodybagPileFlipped = { ent-RMCPropBodybagPile }
-    .suffix = Flipped
+    .suffix = Перевёрнутая
     .desc = { ent-RMCPropBodybagPile.desc }
-ent-RMCPropBodybagPileCharred = charred bodybag pile
-    .desc = A grim mound of body bags stacked haphazardly, their surfaces blackened and blistered from intense heat. The contents are partially burned.
+ent-RMCPropBodybagPileCharred = обгоревшая куча мешков для тел
+    .desc = Мрачная груда мешков для тел, наваленных как попало, их поверхность почернела и покрылась волдырями от сильного жара. Содержимое частично обгорело.
 ent-RMCPropBodybagPileCharredFlipped = { ent-RMCPropBodybagPileCharred }
-    .suffix = Flipped
+    .suffix = Перевёрнутая
     .desc = { ent-RMCPropBodybagPileCharred.desc }

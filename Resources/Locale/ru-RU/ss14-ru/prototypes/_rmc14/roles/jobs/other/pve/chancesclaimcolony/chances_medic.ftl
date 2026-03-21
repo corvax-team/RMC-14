@@ -1,4 +1,4 @@
-ent-RMCSpawnPointSurvivorChancesMedic = chances medic spawn point
+ent-RMCSpawnPointSurvivorChancesMedic = точка спавна медика Шанса
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCRandomHumanoidSurvivorChancesMedic = chances medic ghost role
+ent-RMCRandomHumanoidSurvivorChancesMedic = медик роль призрака Шанса
     .desc = { ent-MarkerBase.desc }

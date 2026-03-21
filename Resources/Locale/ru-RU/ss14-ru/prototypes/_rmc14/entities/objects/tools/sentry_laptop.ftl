@@ -1,2 +1,2 @@
-ent-RMCSentryLaptop = sentry laptop
-    .desc = A ruggedized military laptop used for remote sentry gun control and monitoring. Can be placed on tables for easier access. Use a security access tuner to link sentries to the laptop network.
+ent-RMCSentryLaptop = терминал управления турелями
+    .desc = Защищённый военный ноутбук, используемый для удалённого контроля и мониторинга автоматических турелей. Можно разместить на столе для удобства. Используйте тюнер доступа службы безопасности, чтобы связать турели с сетью терминала.

@@ -1,2 +1,2 @@
-ent-CMMedicalUpgradeKit = medical upgrade kit
-    .desc = This kit holds upgraded trauma and burn kits, for critical injuries.
+ent-CMMedicalUpgradeKit = улучшенный медицинский набор
+    .desc = Этот набор содержит продвинутые средства для лечения травм и ожогов, предназначенные для самых тяжёлых ранений.

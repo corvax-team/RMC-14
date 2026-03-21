@@ -1,9 +1,9 @@
-ent-RMCScoutSniperSniperEquipmentCase = scout-sniper equipment case
+ent-RMCScoutSniperSniperEquipmentCase = кейс со снаряжением скаута-снайпера
     .desc =
-        A large case containing an M96S-B suppressed scoped rifle, its corresponding head-mounted sight, six spare magazines of standard ammo, and a bipod. 
-        
-        NOTE: You cannot put items back inside this case.
-    .suffix = Sniper
-ent-RMCScoutSniperMarksmanEquipmentCase = scout-sniper equipment case
-    .desc = A large case containing an L112A1 designated marksman rifle, its corresponding head-mounted sight, ten spare magazines of squash-head rounds, and a bipod.
-    .suffix = Marksman
+    Большой кейс, содержащий винтовку с глушителем и оптическим прицелом M96S-B, соответствующий наголовный визор, шесть запасных магазинов со стандартными патронами и сошки. 
+            
+    ПРИМЕЧАНИЕ: Вы не можете положить предметы обратно в этот кейс.
+    .suffix = Снайпер
+ent-RMCScoutSniperMarksmanEquipmentCase = кейс со снаряжением скаута-снайпера
+    .desc = Большой кейс, содержащий марксманскую винтовку L112A1, соответствующий наголовный визор, десять запасных магазинов с бронебойно-фугасными (HESH) патронами и сошки.
+    .suffix = Марксман

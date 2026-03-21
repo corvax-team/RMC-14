@@ -1,2 +1,2 @@
-ent-RMCNuke = Nuclear Fission Explosive (PlaceHolder)
+ent-RMCNuke = ядерное взрывное устройство (заглушка)
     .desc = { ent-CMBaseStructure.desc }

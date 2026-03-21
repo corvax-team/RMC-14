@@ -1,2 +1,2 @@
-ent-RMCSpawnPointPVERifleman = PVE rifleman spawn point
+ent-RMCSpawnPointPVERifleman = точка спавна стрелка
     .desc = { ent-CMSpawnPointJobBase.desc }

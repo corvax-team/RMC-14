@@ -14,5 +14,5 @@ ent-CMSpawnPointRiflemanDelta = { ent-CMSpawnPointRifleman }
     .desc = { ent-CMSpawnPointRifleman.desc }
 ent-CMGuidebookRoleYou = Вы?
     .desc = { ent-CMGuidebookRole.desc }
-ent-RMCGuidebookCorpseMarine = Wounded marine
+ent-RMCGuidebookCorpseMarine = Раненый морпех
     .desc = { ent-MobHuman.desc }

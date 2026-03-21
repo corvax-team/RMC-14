@@ -1,2 +1,2 @@
-ent-RMCSpawnPointParaAssaultEngineer = paramarine assault engineer spawn point
+ent-RMCSpawnPointParaAssaultEngineer = точка спавна десантника-штурмового инженера
     .desc = { ent-CMSpawnPointJobBase.desc }

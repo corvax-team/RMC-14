@@ -1,5 +1,5 @@
-ent-HivePlasmaTreeXeno = plasma tree
-    .desc = A tree-shaped node whose "berries" are filled with glowing blue liquid that drips from them.
-ent-HivePlasmaTreeXenoConstructionNode = plasma tree
-    .desc = Making glowing blue "berries", replenishing plasma reserves of the sisters around it.
-    .suffix = Construction
+ent-HivePlasmaTreeXeno = плазменное дерево
+    .desc = Узел в форме дерева, «ягоды» которого наполнены светящейся голубой жидкостью, капающей с них.
+ent-HivePlasmaTreeXenoConstructionNode = плазменное дерево
+    .desc = Производит светящиеся голубые «ягоды», пополняя запасы плазмы у сестёр рядом.
+    .suffix = Строительство

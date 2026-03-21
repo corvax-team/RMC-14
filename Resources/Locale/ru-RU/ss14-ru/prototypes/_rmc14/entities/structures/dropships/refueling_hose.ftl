@@ -1,6 +1,6 @@
-ent-RMCRefuelingHose = refueling hose
-    .desc = A long refueling hose that connects to various types of dropships
-    .suffix = End
+ent-RMCRefuelingHose = заправочный шланг
+    .desc = Длинный заправочный шланг, который подключается к различным типам десантных челноков.
+    .suffix = Конец
 ent-RMCRefuelingHoseAlt = { ent-RMCRefuelingHose }
-    .suffix = Mid
+    .suffix = Середина
     .desc = { ent-RMCRefuelingHose.desc }

@@ -1,2 +1,2 @@
-ent-RMCCoffeeMachine = coffee machine
-    .desc = A coffee machine
+ent-RMCCoffeeMachine = кофемашина
+    .desc = Кофемашина

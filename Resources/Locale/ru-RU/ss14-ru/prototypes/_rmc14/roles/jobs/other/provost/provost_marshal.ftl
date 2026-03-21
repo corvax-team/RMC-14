@@ -1,5 +1,5 @@
-ent-RMCGuidebookRolePvM = Provost Marshal
-    .desc = Provost Marshal
+ent-RMCGuidebookRolePvM = Главный военный пристав
+    .desc = Главный военный пристав
 ent-RMCSpawnerProvostMarshal = спавнер маршал военного приставолитета
     .suffix = Спавнер, Админ, Слабое понимание закона или Низкий ранг
     .desc = { ent-MarkerBase.desc }
