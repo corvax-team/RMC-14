@@ -1,0 +1,10 @@
+ent-RMCVehicleTankFlamer = танковый огнемет
+    .desc = Установка танкового огнемета.
+ent-RMCVehicleTankGrenadeLauncher = танковый гранатомет
+    .desc = Установка танкового гранатомета.
+ent-RMCVehicleTankTowLauncher = танковая пусковая установка TOW
+    .desc = Установка танковой противотанковой управляемой ракеты TOW.
+ent-RMCVehicleTankM56Cupola = турель M56
+    .desc = Установка оружия на командирской турели.
+ent-RMCVehicleTankRERE700 = турель RE-RE700
+    .desc = Установка спаренного оружия на командирской турели со встроенной системой «свой-чужой».
