@@ -4,13 +4,14 @@
   name: Evasion (75)
   description: Take evasive action, forcing non-friendly projectiles that would hit you to miss for a short duration so long as you keep moving.
   components:
-  - type: InstantAction
+  - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _MC/Interface/Actions/Xeno/runner.rsi
-      state: evasion
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: soak
     useDelay: 10
+  - type: InstantAction
     event: !type:MCXenoEvasionActionEvent
-      plasmaCost: 75
   - type: XenoActionPlasma
     cost: 75
+  - type: ActionBlockIfResting

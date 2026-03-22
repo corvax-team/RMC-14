@@ -8,6 +8,7 @@
   - RMCXenoCommendationReceiver
   - RMCXenoMobCollision
   - RMCXenoVentCrawler
+  - MCXenoComponentFixtureRunner
   id: CMXenoRunnerBase
   name: Runner
   description: A small red alien that looks like it could run fairly quickly...
@@ -16,6 +17,32 @@
     name: cm-job-name-xeno-runner
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Runner/runner.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "enum.EvasionLayer.Base" ]
+      sprite: _MC/Interface/Hud/timer.rsi
+      state: "1"
+      offset: 0.5,-0.5
+      visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
+      visible: false
   - type: Eye
     pvsScale: 1.5
   - type: MobState
@@ -63,6 +90,8 @@
     canBeDevolvedByOther: false
   - type: XenoDevour
   - type: XenoHide
+  - type: MCXenoEvasion
+  - type: MCXenoEvader
   - type: XenoPlasma
     plasma: 0
     maxPlasma: 0
@@ -149,6 +178,7 @@
     - ActionXenoBoneChips
     - ActionXenoZoom
     - ActionXenoDevolve
+    - MCActionXenoEvasion
   - type: XenoBoneChips
   - type: XenoLeap
     delay: 0
@@ -268,3 +298,28 @@
     ventCrawlIcon: runner
   - type: RMCActionOrder
     id: RMCXenoRunnerAcider
+
+- type: entity
+  id: MCXenoComponentFixtureRunner
+  abstract: true
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.35
+        density: 85
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        - BarbedBarricade
+        - BarricadeImpassable
+        layer:
+        - MobLayer
+      fix2:
+        shape: !type:PhysShapeCircle
+          radius: 0.40
+        density: 85
+        layer:
+        - BulletImpassable

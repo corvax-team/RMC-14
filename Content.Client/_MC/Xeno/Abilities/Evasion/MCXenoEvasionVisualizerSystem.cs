@@ -1,13 +1,21 @@
 ﻿using Content.Shared._MC.Xeno.Abilities.Evasion;
+using Content.Shared._RMC14.Xenonids;
 using Robust.Client.GameObjects;
+using Robust.Client.Placement;
+using Robust.Client.Player;
 
 namespace Content.Client._MC.Xeno.Abilities.Evasion;
 
 public sealed class MCXenoEvasionVisualizerSystem : VisualizerSystem<MCXenoEvasionComponent>
 {
+    [Dependency] private readonly IPlayerManager _player = default!;
+
     protected override void OnAppearanceChange(EntityUid uid, MCXenoEvasionComponent component, ref AppearanceChangeEvent args)
     {
         base.OnAppearanceChange(uid, component, ref args);
+
+        if (_player.LocalEntity is null || !HasComp<XenoComponent>(_player.LocalEntity))
+            return;
 
         if (args.Sprite is null)
             return;
