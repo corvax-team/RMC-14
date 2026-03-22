@@ -1,5 +1,17 @@
 - type: entity
   parent: MCSmoke
+  id: MCSmokeXeno
+  abstract: true
+  components:
+  - type: MCEdgeSpreader
+    delay: 0.1
+  - type: TimedDespawn
+    lifetime: 6
+  - type: MCTimedDespawnDisappearanceVisuals
+    lifetime: 6
+
+- type: entity
+  parent: MCSmoke
   id: MCSmokeXenoNeurotoxin
   name: smoke xeno neurotoxin
   components:
@@ -52,10 +64,22 @@
     - HideContextMenu
   - type: Sprite
     color: "#86B028"
-  - type: MCSmokeDamage
+  - type: Projectile
+    impactEffect: null
     damage:
       types:
-        MCBurn: 25
+        Heat: 30 # TODO RMC14 damage fall-off and higher at close range
+  - type: ModifyTargetOnHit
+    add:
+    - type: UserAcided
+      armorPiercing: 40
+      damage:
+        types:
+          Heat: 1
+      duration: 20
+    whitelist:
+      components:
+      - Marine
   - type: Occluder
 
 - type: entity
@@ -65,9 +89,21 @@
   components:
   - type: Sprite
     color: "#85b0285e"
-  - type: MCSmokeDamage
+  - type: Projectile
+    impactEffect: null
     damage:
       types:
-        MCBurn: 25
+        Heat: 30 # TODO RMC14 damage fall-off and higher at close range
+  - type: ModifyTargetOnHit
+    add:
+    - type: UserAcided
+      armorPiercing: 40
+      damage:
+        types:
+          Heat: 1
+      duration: 20
+    whitelist:
+      components:
+      - Marine
   - type: MCTimedDespawnDisappearanceVisuals
     maxAlpha: 0.36

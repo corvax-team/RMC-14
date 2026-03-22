@@ -1,14 +1,18 @@
 ﻿using Content.Shared._MC.Xeno.Abilities.Runner.MelterShroud.Events.Action;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Actions;
+using Content.Shared.Actions;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._MC.Xeno.Abilities.Runner.MelterShroud;
 
-public sealed class MCXenoMelterShroudSystem : MCXenoAbilitySystem
+public sealed class MCXenoMelterShroudSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = null!;
     [Dependency] private readonly SharedTransformSystem _transform = null!;
     [Dependency] private readonly SharedXenoHiveSystem _rmcXenoHive = null!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
 
     public override void Initialize()
     {
@@ -22,14 +26,14 @@ public sealed class MCXenoMelterShroudSystem : MCXenoAbilitySystem
         if (args.Handled)
             return;
 
-        if (!TryUseAction(entity, args.Action))
-            return;
+        if (!_rmcActions.TryUseAction(entity, args.Action, entity))
+        return;
 
         args.Handled = true;
 
-        var smokeUid = ServerSpawn(entity.Comp.ShroudId, _transform.GetMapCoordinates(entity));
+        var smokeUid = EntityManager.SpawnEntity(entity.Comp.ShroudId, _transform.GetMapCoordinates(entity));
         if (!smokeUid.Valid)
-            return;
+           return;
 
         _rmcXenoHive.SetSameHive(entity.Owner, smokeUid);
         _audio.PlayPvs(entity.Comp.EffectSound, Transform(smokeUid).Coordinates);
