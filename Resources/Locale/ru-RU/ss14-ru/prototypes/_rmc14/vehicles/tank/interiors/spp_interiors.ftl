@@ -32,3 +32,5 @@ ent-RMCVehicleSPPTankAmmoStorageBase = хранилище боеприпасов
     .desc = Хранилище боеприпасов для внутреннего отсека танка СССП.
 ent-RMCVehicleSPPTankAmmoStorage = хранилище боеприпасов танка СССП
     .desc = { ent-RMCVehicleSPPTankAmmoStorageBase.desc }
+ent-RMCVehicleSPPTankAmmoLoader = SPP tank ammo loader
+    .desc = A loader for SPP tank hardpoint ammunition.

@@ -8,4 +8,3 @@ ent-RMCVehicleAPCCommand = armored personnel carrier (command)
     .desc = A command-configured APC bristling with sensors and comms gear.
 ent-RMCVehicleSPPAPC = SPP armored personnel carrier
     .desc = An armored personnel carrier configured for SPP forces.
-    .suffix = test

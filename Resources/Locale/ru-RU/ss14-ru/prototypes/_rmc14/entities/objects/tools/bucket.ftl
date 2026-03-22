@@ -6,5 +6,3 @@ ent-RMCBucketJanitorial = ведро уборщика
     .desc = Большое ведро, которое устанавливается в тележку уборщика. Вмещает 500 единиц.
 ent-RMCReagentJug = канистра для реагентов
     .desc = Большая канистра из инертного пластика, предназначенная для переноски значительного количества различных химикатов. Вмещает 500 единиц.
-ent-CMBucketJani = { ent-RMCBucketJanitorial }
-    .desc = { ent-RMCBucketJanitorial.desc }

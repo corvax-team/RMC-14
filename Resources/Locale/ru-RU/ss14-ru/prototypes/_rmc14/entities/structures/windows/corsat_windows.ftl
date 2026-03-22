@@ -12,5 +12,3 @@ ent-RMCWindowCorsatHullResearch = { ent-RMCWindowCorsatHull }
     .desc = { ent-RMCWindowCorsatHull.desc }
 ent-RMCWindowCorsatHullSec = { ent-RMCWindowCorsatHull }
     .desc = { ent-RMCWindowCorsatHull.desc }
-ent-RMCWindowCorsatResearchHull = окно корпуса
-    .desc = Стеклянное окно. Что-то подсказывает вам, что оно каким-то образом неразрушимо.

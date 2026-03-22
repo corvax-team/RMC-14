@@ -1,5 +1,13 @@
-
-
+ent-RMCAreaHF = Haurchefant
+    .desc = { ent-RMCAreaBase.desc }
+ent-RMCAreaHFHypersleepStorageA = Hypersleep Storage
+    .desc = { ent-RMCAreaHF.desc }
+ent-RMCAreaHFHypersleepGearLockers = Hypersleep Gear Lockers
+    .desc = { ent-RMCAreaHF.desc }
+ent-RMCAreaHFMessHall = Mess Hall
+    .desc = { ent-RMCAreaHF.desc }
+ent-RMCAreaHFBathroom = Bathroom
+    .desc = { ent-RMCAreaHF.desc }
 ent-RMCAreaHFOffice = Кабинет
     .desc = { ent-RMCAreaHF.desc }
 ent-RMCAreaHFEngineering = Инженерный отсек
@@ -8,7 +16,21 @@ ent-RMCAreaHFSyntheticCloset = Подсобка синтетиков
     .desc = { ent-RMCAreaHFEngineering.desc }
 ent-RMCAreaHFAICore = Ядро ИИ
     .desc = { ent-RMCAreaHFEngineering.desc }
-
+ent-RMCAreaHFDisposals = Disposals
+    .desc = { ent-RMCAreaHF.desc }
+ent-RMCAreaHFMedical = Medical
+    .desc = { ent-RMCAreaHF.desc }
+ent-RMCAreaHFBriefRoom = Briefing Room
+    .desc = { ent-RMCAreaHF.desc }
+ent-RMCAreaHFCommandDeck = Force Command Deck
+    .desc = { ent-RMCAreaHFBriefRoom.desc }
+ent-RMCAreaHFPrep = Force Prep
+    .desc = { ent-RMCAreaHF.desc }
+ent-RMCAreaHFArmoury = Force Armoury
+    .desc = { ent-RMCAreaHFPrep.desc }
+ent-RMCAreaHFHangar = Hangar
+    .desc = { ent-RMCAreaHF.desc }
 ent-RMCAreaHFHangar2 = Нижний ангар
     .desc = { ent-RMCAreaHFHangar.desc }
-
+ent-RMCAreaHFOOB = Out Of Bounds
+    .desc = { ent-RMCAreaHF.desc }

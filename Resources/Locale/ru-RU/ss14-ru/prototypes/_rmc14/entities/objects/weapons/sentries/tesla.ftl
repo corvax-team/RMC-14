@@ -9,4 +9,3 @@ ent-RMCTeslaOverclocked = разогнанная катушка теслы UE 21
 ent-RMCTeslaTSE = катушка теслы L10D
     .suffix = PVE, RCM IFF
     .desc = { ent-RMCTesla.desc }
-    

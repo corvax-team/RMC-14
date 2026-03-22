@@ -1,12 +1,19 @@
-
-
+ent-CMWebbingBase = webbing
+    .desc = { ent-BaseItem.desc }
+ent-CMWebbing = webbing
+    .desc = A sturdy mess of synthcotton belts and buckles, ready to share your burden.
 ent-RMCWebbingLegPouch = набедренный подсумок
     .desc = Набедренная сумка, которую обычно носят охотники, военные и люди, которые мечтают быть военными.
 ent-RMCWebbingLegPouchBlack = черный набедренный подсумок
     .desc = { ent-RMCWebbingLegPouch.desc }
 ent-RMCWebbingBlackSmall = черная разгрузка
     .desc = { ent-CMWebbing.desc }
-
+ent-CMWebbingBlack = black webbing vest
+    .desc = Robust black synthcotton vest with lots of pockets to hold whatever you need, but cannot hold in hands.
+ent-CMWebbingBrown = brown webbing vest
+    .desc = Worn brownish synthcotton vest with lots of pockets to unload your hands.
+ent-CMWebbingHolster = shoulder holster
+    .desc = A handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.
 ent-RMCParaWebbing = разгрузка подразделения «Драккар»
     .desc = Прочная система крепления, используемая в спецподразделении «Драккар» Империи Миртана. Предназначена для равномерного распределения веса, обеспечения комфорта и мобильности. Оснащена усиленными чехлами для переноски необходимого снаряжения.
     .suffix = Парадесант, Выживший
@@ -44,7 +51,11 @@ ent-RMCWebbingClipOnPouch = подсумок на застёжке
     .desc = Маленький подсумок для хранения небольшого набора вещей оператора смартгана.
 ent-RMCWebbingGrenade = подсумок для гранат на застёжке
     .desc = Прочная лента из синтетической кожи, предназначенная для хранения нескольких гранат для операторов ML66A.
-
+ent-RMCToolWebbingSmall = small tool webbing
+    .desc = A brown synthcotton webbing that is similar in function to civilian tool aprons, but is more durable for field usage. This is the small low-budget version.
+ent-RMCToolWebbingSmallFilled = { ent-RMCToolWebbingSmall }
+    .suffix = Filled
+    .desc = { ent-RMCToolWebbingSmall.desc }
 ent-RMCToolWebbingSmallFilledRCMPVEAssaultEngi = { ent-RMCToolWebbingSmall }
     .suffix = Заполненный, RCM, PVE
     .desc = { ent-RMCToolWebbingSmall.desc }
@@ -53,7 +64,9 @@ ent-RMCToolWebbing = разгрузка для инструментов
 ent-RMCToolWebbingFilled = { ent-RMCToolWebbing }
     .suffix = Заполненный
     .desc = { ent-RMCToolWebbing.desc }
-
+ent-RMCWebbingHEFA = { ent-CMWebbing }
+    .suffix = Filled
+    .desc = { ent-CMWebbing.desc }
 ent-RMCWebbingCLFMAR = { ent-CMWebbing }
     .suffix = Заполненный
     .desc = { ent-CMWebbing.desc }
@@ -63,18 +76,38 @@ ent-RMCWebbingCLFMAR50 = { ent-CMWebbingBrown }
 ent-RMCWebbingCLFBuckshot = { ent-CMWebbing }
     .suffix = Заполненный
     .desc = { ent-CMWebbing.desc }
-
+ent-CMWebbingKnives = M272 pattern knife vest
+    .desc = An older generation M272 pattern knife vest once employed by the UNMC. Can hold up to 5 knives. It is made of synthcotton.
+ent-CMWebbingKnivesFilled = { ent-CMWebbingKnives }
+    .suffix = Filled
+    .desc = { ent-CMWebbingKnives.desc }
+ent-RMCWebbingPMC = { ent-CMWebbingBlack }
+    .suffix = PMC, Filled
+    .desc = { ent-CMWebbingBlack.desc }
+ent-RMCWebbingPMCEngineer = { ent-CMWebbingBlack }
+    .suffix = PMC, Engineer, Filled
+    .desc = { ent-CMWebbingBlack.desc }
+ent-RMCWebbingPMCMedic = { ent-CMWebbingBlack }
+    .suffix = PMC, Medic, Filled
+    .desc = { ent-CMWebbingBlack.desc }
+ent-RMCWebbingPMCGunner = { ent-CMWebbingBlack }
+    .suffix = PMC, Gunner, Filled
+    .desc = { ent-CMWebbingBlack.desc }
 ent-RMCWebbingPMCWhiteout = { ent-CMWebbingBlack }
     .suffix = ЧВК, Whiteout, Заполненный
     .desc = { ent-CMWebbingBlack.desc }
-
+ent-RMCWebbingBuckshot = { ent-CMWebbingBlack }
+    .suffix = Buckshot, Filled
+    .desc = { ent-CMWebbingBlack.desc }
 ent-RMCWebbingDropPouchRoyal = { ent-RMCWebbingDropPouch }
     .suffix = Заполненный, Королевский
     .desc = { ent-RMCWebbingDropPouch.desc }
 ent-RMCWebbingDropPouchRoyalTeamlead = { ent-RMCWebbingDropPouch }
     .suffix = Заполненный, Лидер королевского отряда
     .desc = { ent-RMCWebbingDropPouch.desc }
-
+ent-RMCWebbingPouchForecon = { ent-RMCWebbingDropPouch }
+    .suffix = Filled, Forecon
+    .desc = { ent-RMCWebbingDropPouch.desc }
 ent-CMWebbingSurgicalGreen = хирургическая разгрузка
     .desc = Крепкая разгрузка, содержимого которой достаточно, чтобы вывернуть вас наизнанку, но оставить в живых. Обычно используется синтетиками и полевыми медиками.
     .suffix = Медицинская, Заполненная

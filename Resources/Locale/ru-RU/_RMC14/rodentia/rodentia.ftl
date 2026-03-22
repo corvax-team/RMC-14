@@ -2,6 +2,7 @@ species-name-rodentia = Грызлит
 
 # head markings
 
+
 ## patterns
 
 marking-RodentiaHeadBlaze = Голова - Пламя
@@ -84,6 +85,7 @@ marking-RodentiaCheeksWhiskers = Усики
 marking-RodentiaCheeksWhiskers-whiskers = Усики
 
 # body markings
+
 
 ## tail
 

@@ -4,7 +4,6 @@ ent-RMCRandomHumanoidCorporateExecutiveSupervisorLegal = руководител�
 ent-RMCRandomHumanoidCorporateExecutiveSpecialistLegal = юрисконсульт корпорации роль призрака
     .suffix = Спавнер, Игрок, Нейтрал
     .desc = { "" }
-
 ent-RMCRandomHumanoidCorporateAssistantManager = помощник менеджера корпорации роль призрака
     .suffix = Спавнер, Игрок, Нейтрал
     .desc = { "" }
