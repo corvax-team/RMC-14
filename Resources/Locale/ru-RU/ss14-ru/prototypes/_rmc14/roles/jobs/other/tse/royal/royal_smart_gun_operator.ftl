@@ -1,3 +1,3 @@
-ent-RMCRandomHumanoidRoyalMarinesSGO = роль призрака оператора смартгана Королевской морской пехоты
-    .suffix = Спавнер, Игрок, Дружественный
+ent-RMCRandomHumanoidRoyalMarinesSGO = Имперский смартганнер роль призрака
+    .suffix = Спавнер, Игрок, Дружелюбный
     .desc = { "" }

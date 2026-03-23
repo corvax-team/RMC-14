@@ -1,7 +1,6 @@
-ent-RMCSpawnPointSurvivorEngineer = спавнер выжившего инженера
+ent-RMCSpawnPointSurvivorEngineer = точка появления выжившего инженера
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Спавнер роли, Основной
-ent-RMCSurvivorPresetEngineer = пресет колониста-инженера
+ent-RMCSurvivorPresetEngineer = пресет инженера-колониста
     .desc = { ent-RMCSurvivorPresetCivilian.desc }
-ent-RMCRandomHumanoidSurvivorEngineer = роль призрака колониста-инженера
+ent-RMCRandomHumanoidSurvivorEngineer = роль призрака: инженер-колонист
     .desc = { ent-MarkerBase.desc }

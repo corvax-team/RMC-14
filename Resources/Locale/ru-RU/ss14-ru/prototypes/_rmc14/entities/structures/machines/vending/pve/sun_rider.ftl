@@ -1,6 +1,6 @@
 ent-RMCColMarTechSurplusPVE = { ent-ColMarTechSurplus }
-    .suffix = PVE, Морпехи
+    .suffix = PvE, Морпех
     .desc = { ent-ColMarTechSurplus.desc }
 ent-RMCColMarTechUtilitiesPVE = { ent-ColMarTechUtilities }
-    .suffix = PVE, Морпехи
+    .suffix = PvE, Морпех
     .desc = { ent-ColMarTechUtilities.desc }

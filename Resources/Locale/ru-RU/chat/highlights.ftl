@@ -88,7 +88,6 @@ highlights-station-ai = Station AI, Silicon, "AI", "sAI"
 #highlights-scientist = учёный, наука, "рнд", "нио"
 #highlights-research-assistant = научный ассистент, наука, "рнд", "нио"
 
-
 # Civilian
 
 #highlights-bartender = бармен, "бар"

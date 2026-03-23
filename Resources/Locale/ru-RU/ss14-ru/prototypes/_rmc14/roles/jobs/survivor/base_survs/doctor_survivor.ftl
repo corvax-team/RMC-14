@@ -1,7 +1,6 @@
-ent-RMCSpawnPointSurvivorDoctor = спавнер выжившего врача
+ent-RMCSpawnPointSurvivorDoctor = точка появления выжившего врача
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Спавнер роли, Основной
-ent-RMCSurvivorPresetDoctor = пресет колониста-врача
+ent-RMCSurvivorPresetDoctor = пресет врача-колониста
     .desc = { ent-RMCSurvivorPresetCivilian.desc }
-ent-RMCRandomHumanoidSurvivorDoctor = роль призрака колониста-врача
+ent-RMCRandomHumanoidSurvivorDoctor = роль призрака: врач-колонист
     .desc = { ent-MarkerBase.desc }
