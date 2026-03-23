@@ -1,3 +1,3 @@
-ent-RMCSpawnPointFORECONPVERadioTelephoneOperator = точка спавна радиотелефониста ФОРЕКОН
+ent-RMCSpawnPointFORECONPVERadioTelephoneOperator = точка спавна радиотелефониста СОиС
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }
