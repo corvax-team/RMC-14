@@ -1,7 +1,7 @@
 ent-BoxFolderNuclearCodes = папка с кодами ядерной аутентификации
     .desc = { ent-BaseItem.desc }
-ent-BoxFolderBase = { ent-BoxFolderBaseEmpty }
-    .desc = { ent-BoxFolderBaseEmpty.desc }
+ent-BoxFolderBase = папка
+    .desc = Папка, заполненная совершенно секретными документами.
 ent-BoxFolderRed = { ent-BoxFolderBase }
     .suffix = Красный
     .desc = { ent-BoxFolderBase.desc }
