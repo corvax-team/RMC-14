@@ -1,4 +1,4 @@
-ent-RMCGearSurvivorPresetPMCGun = пресет оружия выжившего ПСОПЗ
+ent-RMCGearSurvivorPresetPMCGun = пресет оружия выжившего ЧВК
     .desc = { "" }
-ent-RMCGearSurvivorPresetPMCBase = базовый пресет выжившего ПСОПЗ
+ent-RMCGearSurvivorPresetPMCBase = базовый пресет выжившего ЧВК
     .desc = { ent-RMCSurvivorPresetNoGun.desc }

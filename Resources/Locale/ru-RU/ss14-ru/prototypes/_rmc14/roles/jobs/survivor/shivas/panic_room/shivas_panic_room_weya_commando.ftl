@@ -19,6 +19,6 @@ ent-RMCBeltPMCFilledCommando = { ent-RMCBeltPMC }
 ent-RMCSatchelPMCCommandoFilled = { ent-RMCSatchelPMCCommando }
     .suffix = Заполненная
     .desc = { ent-RMCSatchelPMCCommando.desc }
-ent-RMCSpawnPointSurvivorPanicRoomCommando = спавнер выжившего коммандос ПСОПЗ
+ent-RMCSpawnPointSurvivorPanicRoomCommando = спавнер выжившего коммандос Vi
     .desc = { ent-CMSpawnPointJobBase.desc }
     .suffix = Снежный шар Шивы, Убежище

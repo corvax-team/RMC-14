@@ -1,2 +1,2 @@
-ent-RMCSpawnPointParaTeamLeader = спавнер командира группы парамаринов
+ent-RMCSpawnPointParaTeamLeader = спавнер командира группы Драккара
     .desc = { ent-CMSpawnPointJobBase.desc }

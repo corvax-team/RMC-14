@@ -1,2 +1,2 @@
-ent-RMCSpawnPointParaPilot = спавнер пилота десантного челнока парамаринов
+ent-RMCSpawnPointParaPilot = спавнер пилота десантного челнока Драккара
     .desc = { ent-CMSpawnPointJobBase.desc }

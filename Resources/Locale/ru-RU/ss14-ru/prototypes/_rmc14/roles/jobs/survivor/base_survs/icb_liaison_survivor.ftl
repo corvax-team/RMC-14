@@ -1,3 +1,3 @@
-ent-RMCSpawnPointSurvivorICB = спавнер выжившего ПАБ
+ent-RMCSpawnPointSurvivorICB = спавнер выжившего СЗПРС
     .desc = { ent-CMSpawnPointJobBase.desc }
     .suffix = Базовый

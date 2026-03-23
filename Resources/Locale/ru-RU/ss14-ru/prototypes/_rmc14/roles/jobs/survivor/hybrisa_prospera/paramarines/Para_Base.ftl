@@ -1,2 +1,2 @@
-ent-RMCGearSurvivorPresetPara = пресет парамарина
+ent-RMCGearSurvivorPresetPara = пресет рейдера Драккара
     .desc = { "" }

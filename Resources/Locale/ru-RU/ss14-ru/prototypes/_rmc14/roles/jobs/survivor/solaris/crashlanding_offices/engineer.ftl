@@ -1,3 +1,3 @@
-ent-RMCSpawnPointSurvivorCrashlandingOfficesEngineer = спавнер выжившего инженера ПСОПЗ
+ent-RMCSpawnPointSurvivorCrashlandingOfficesEngineer = спавнер выжившего инженера ЧВК
     .desc = { ent-CMSpawnPointJobBase.desc }
     .suffix = Соларис Ридж, Крушение

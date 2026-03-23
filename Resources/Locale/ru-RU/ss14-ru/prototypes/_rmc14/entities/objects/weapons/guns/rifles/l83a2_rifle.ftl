@@ -1,5 +1,5 @@
 ent-RMCWeaponRifleL83A2 = винтовка L83A2
-    .desc = Гражданская бесгильзовая винтовка, используемая офицерами TSEPA.
+    .desc = Гражданская бесгильзовая винтовка, используемая офицерами ПСОПЗ.
     .suffix = Снаряжена
 ent-RMCWeaponRifleL83A2Stripped = { ent-RMCWeaponRifleL83A2 }
     .suffix = Разобрана
