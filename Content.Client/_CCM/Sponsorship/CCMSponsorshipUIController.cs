@@ -20,7 +20,7 @@ public sealed class CCMSponsorshipUIController : UIController
     {
         EnsureSystem();
         EnsureWindow();
-        _window?.OpenCentered();
+        _window?.OpenCenteredAnimated();
         _system?.RequestStatus();
     }
 
@@ -31,7 +31,7 @@ public sealed class CCMSponsorshipUIController : UIController
             return;
 
         if (_window.IsOpen)
-            _window.Close();
+            _window.CloseAnimated();
         else
             OpenWindow();
     }

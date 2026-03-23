@@ -114,9 +114,13 @@ public sealed class CCMCustomizationManager : IPostInjectInit
 
         var selectedTagId = NormalizeTagId(snapshot.SelectedOocTagId);
         var customTagText = string.Empty;
-        if (selectedTagId == CCMOocTags.Custom && status.Tier == CCMSponsorshipTier.SponsorIII)
+        if (selectedTagId == CCMOocTags.Custom && status.Tier >= CCMSponsorshipTier.SponsorIII)
         {
             customTagText = NormalizeCustomTag(snapshot.CustomOocTagText);
+        }
+        else if (selectedTagId == CCMOocTags.Custom)
+        {
+            selectedTagId = CCMOocTags.None;
         }
 
         var selectedOocColorId = NormalizeChatColorId(snapshot.SelectedOocColorId, status.Tier);
@@ -134,7 +138,8 @@ public sealed class CCMCustomizationManager : IPostInjectInit
     {
         if (!customizationUnlocked &&
             slotId is not "armor_palette" &&
-            slotId is not "armor_variant")
+            slotId is not "armor_variant" &&
+            slotId is not "weapon_spray")
         {
             return "default";
         }
@@ -146,7 +151,9 @@ public sealed class CCMCustomizationManager : IPostInjectInit
             "xeno_queen" => valueId == "ccm_queen_skin" ? valueId : "default",
             "xeno_runner" => valueId == "ccm_runner_skin" ? valueId : "default",
             "xeno_sentinel" => valueId == "ccm_sentinel_skin" ? valueId : "default",
-            "ghost" => valueId is "holo_green" or "holo_blue" ? valueId : "default",
+            "ghost" => valueId is "holo_green" or "holo_blue" or "holo_violet" or "holo_amber" or "holo_crimson" or "holo_teal"
+                ? valueId
+                : "default",
             "weapon_spray" => valueId is
                 CCMCustomizationCamouflageIds.Jungle or
                 CCMCustomizationCamouflageIds.Desert or

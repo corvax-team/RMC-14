@@ -719,6 +719,12 @@ namespace Content.Client.Lobby.UI
             var tabsPanelBorder = theme == StyleNano.UiColorTheme.Blue
                 ? Color.FromHex("#1B5CA7").WithAlpha(0.92f)
                 : Color.FromHex("#2F8A51").WithAlpha(0.9f);
+            var backgroundInfoPanelColor = theme == StyleNano.UiColorTheme.Blue
+                ? Color.FromHex("#17365F").WithAlpha(0.98f)
+                : Color.FromHex("#17442A").WithAlpha(0.97f);
+            var backgroundInfoBorderColor = theme == StyleNano.UiColorTheme.Blue
+                ? Color.FromHex("#2F72C7").WithAlpha(0.98f)
+                : Color.FromHex("#46B96E").WithAlpha(0.97f);
 
             StyleBoxFlat BuildSectionBox()
             {
@@ -742,6 +748,16 @@ namespace Content.Client.Lobby.UI
             CharacterBlockDivider.PanelOverride = new StyleBoxFlat { BackgroundColor = dividerColor };
             AppearanceBlockDivider.PanelOverride = new StyleBoxFlat { BackgroundColor = dividerColor };
             BackgroundBlockDivider.PanelOverride = new StyleBoxFlat { BackgroundColor = dividerColor };
+            BackgroundInfoInlineContainer.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = backgroundInfoPanelColor,
+                BorderColor = backgroundInfoBorderColor,
+                BorderThickness = new Thickness(1f),
+                ContentMarginTopOverride = 8f,
+                ContentMarginBottomOverride = 8f,
+                ContentMarginLeftOverride = 8f,
+                ContentMarginRightOverride = 8f,
+            };
 
             TabContainer.PanelStyleBoxOverride = new StyleBoxFlat
             {
@@ -1771,10 +1787,14 @@ namespace Content.Client.Lobby.UI
                 _flavorText.OnFlavorTextChanged += OnFlavorTextChange;
                 _flavorTextEdit = _flavorText.CFlavorTextInput;
                 _flavorText.HorizontalExpand = true;
+                _flavorText.VerticalExpand = true;
+                _flavorText.MinHeight = 200;
             }
             else
             {
                 _flavorText.HorizontalExpand = true;
+                _flavorText.VerticalExpand = true;
+                _flavorText.MinHeight = 200;
             }
 
             if (_flavorText.Parent != BackgroundInfoInlineContainer)

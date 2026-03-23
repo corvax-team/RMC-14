@@ -76,7 +76,7 @@
                                 <!-- CCM barks - end -->
                             </BoxContainer>
                         </ui:HighlightedContainer>
-                        <ui:HighlightedContainer Name="AppearanceBlockContainer" HorizontalExpand="True" SizeFlagsStretchRatio="1.25">
+                        <ui:HighlightedContainer Name="AppearanceBlockContainer" HorizontalExpand="True" SizeFlagsStretchRatio="1.16">
                             <BoxContainer Orientation="Vertical" SeparationOverride="6" MinSize="320 0" HorizontalExpand="True">
                                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-appearance-title'}" StyleClasses="CharacterEditorSectionTitle" />
@@ -154,8 +154,8 @@
                                 </BoxContainer>
                             </BoxContainer>
                         </ui:HighlightedContainer>
-                        <ui:HighlightedContainer Name="BackgroundBlockContainer" HorizontalExpand="True" SizeFlagsStretchRatio="1.05">
-                            <BoxContainer Orientation="Vertical" SeparationOverride="6" MinSize="280 0" HorizontalExpand="True">
+                        <ui:HighlightedContainer Name="BackgroundBlockContainer" HorizontalExpand="True" SizeFlagsStretchRatio="1.22">
+                            <BoxContainer Orientation="Vertical" SeparationOverride="6" MinSize="320 0" HorizontalExpand="True">
                                 <Label Text="{Loc 'humanoid-profile-editor-background-title'}" StyleClasses="CharacterEditorSectionTitle" />
                                 <PanelContainer Name="BackgroundBlockDivider" MinHeight="2" HorizontalExpand="True">
                                     <PanelContainer.PanelOverride>
@@ -187,7 +187,7 @@
                                     <Control HorizontalExpand="True"/>
                                     <Button Name="BackgroundInfoButton" Text="{Loc 'humanoid-profile-editor-background-info-open'}" />
                                 </BoxContainer>
-                                <BoxContainer Name="BackgroundInfoInlineContainer" Visible="False" Orientation="Vertical" HorizontalExpand="True" MinHeight="160" />
+                                <PanelContainer Name="BackgroundInfoInlineContainer" Visible="False" HorizontalExpand="True" MinHeight="220" Margin="0 6 0 0" />
                             </BoxContainer>
                         </ui:HighlightedContainer>
                     </BoxContainer>

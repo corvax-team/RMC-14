@@ -59,7 +59,7 @@ public sealed class CCMOptionButton : OptionButton
             _itemButtons[GetItemId(ItemCount - 1)] = button;
 
         button.MinSize = new Vector2(0, 32);
-        button.Margin = new Thickness(0, 2, 0, 0);
+        button.Margin = new Thickness(0);
         button.Label.FontOverride = _itemFont;
         button.Label.FontColorOverride = Color.FromHex("#D7E1EB");
         button.Label.Align = Label.AlignMode.Center;
@@ -102,20 +102,26 @@ public sealed class CCMOptionButton : OptionButton
     private static void ApplyButtonColor(Button button, Color? itemColor, bool hovered = false, bool pressed = false)
     {
         var selected = button.Pressed;
+        var normalBackground = BlendTowards(StyleNano.ButtonColorContext, Color.White, 0.10f).WithAlpha(0.98f);
+        var hoverBackground = BlendTowards(StyleNano.ButtonColorContextHover, Color.White, 0.16f).WithAlpha(0.99f);
+        var selectedBackground = BlendTowards(StyleNano.LobbyMenuButtonBase, Color.Black, 0.24f).WithAlpha(0.995f);
+        var pressedBackground = BlendTowards(StyleNano.LobbyMenuButtonBase, Color.Black, 0.12f).WithAlpha(0.995f);
+        var selectedBorder = BlendTowards(StyleNano.LobbyMenuButtonBase, Color.White, 0.06f);
+
         button.StyleBoxOverride = new StyleBoxFlat
         {
             BackgroundColor = selected
-                ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.94f)
+                ? selectedBackground
                 : pressed
-                    ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.88f)
+                    ? pressedBackground
                     : hovered
-                        ? StyleNano.ButtonColorContextHover.WithAlpha(0.98f)
-                        : StyleNano.ButtonColorContext.WithAlpha(0.96f),
+                        ? hoverBackground
+                        : normalBackground,
             BorderColor = selected || pressed
-                ? StyleNano.LobbyMenuButtonBase
+                ? selectedBorder
                 : hovered
-                    ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.78f)
-                    : StyleNano.LobbyMenuButtonBase.WithAlpha(0.42f),
+                    ? selectedBorder.WithAlpha(0.86f)
+                    : selectedBorder.WithAlpha(0.56f),
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = 10,
             ContentMarginTopOverride = 4,
@@ -124,16 +130,18 @@ public sealed class CCMOptionButton : OptionButton
         };
 
         button.Label.FontColorOverride = selected || pressed
-            ? Color.Black
+            ? Color.White
             : itemColor ?? (hovered
-                ? StyleNano.LobbyMenuButtonBase
-                : Color.FromHex("#D7E1EB"));
+                ? BlendTowards(StyleNano.LobbyMenuButtonBase, Color.White, 0.22f)
+                : Color.FromHex("#EEF4FB"));
     }
 
     private void ApplyCollapsedStyle(bool hovered = false, bool pressed = false)
     {
         _itemColors.TryGetValue(SelectedId, out var itemColor);
         var hasItemColor = _itemColors.ContainsKey(SelectedId);
+        var accentText = BlendTowards(StyleNano.LobbyMenuButtonBase, Color.White, 0.18f);
+        var neutralText = Color.FromHex("#EEF4FB");
 
         if (_selectedLabel != null)
         {
@@ -143,8 +151,8 @@ public sealed class CCMOptionButton : OptionButton
                 : hasItemColor
                     ? itemColor
                     : hovered
-                        ? StyleNano.LobbyMenuButtonBase
-                        : Color.FromHex("#D7E1EB");
+                        ? accentText
+                        : neutralText;
             _selectedLabel.Align = Label.AlignMode.Center;
         }
 
@@ -155,8 +163,8 @@ public sealed class CCMOptionButton : OptionButton
                 : hasItemColor
                     ? itemColor
                     : hovered
-                        ? StyleNano.LobbyMenuButtonBase
-                        : Color.FromHex("#D7E1EB");
+                        ? accentText
+                        : neutralText;
         }
 
         foreach (var (id, button) in _itemButtons)
@@ -182,6 +190,16 @@ public sealed class CCMOptionButton : OptionButton
     private Color? GetItemColor(int id)
     {
         return _itemColors.TryGetValue(id, out var color) ? color : null;
+    }
+
+    private static Color BlendTowards(Color source, Color target, float factor)
+    {
+        factor = Math.Clamp(factor, 0f, 1f);
+        return new Color(
+            source.R + (target.R - source.R) * factor,
+            source.G + (target.G - source.G) * factor,
+            source.B + (target.B - source.B) * factor,
+            source.A + (target.A - source.A) * factor);
     }
 
     private static T? FindChild<T>(Robust.Client.UserInterface.Control root, Predicate<T> predicate)

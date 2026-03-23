@@ -5,7 +5,9 @@ using System.Numerics;
 using Content.Client._CCM.UserInterface.Controls;
 using Content.Client.Resources;
 using Content.Client.Stylesheets;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._CCM.Achievements;
+using Robust.Shared.Configuration;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
@@ -19,6 +21,7 @@ namespace Content.Client._CCM.Achievements;
 
 public sealed class CCMAchievementsWindow : DefaultCMWindow
 {
+    [Dependency] private readonly IConfigurationManager _config = default!;
     private readonly Font _windowTitleFont;
     private readonly Font _headerFont;
     private readonly Font _sectionFont;
@@ -35,6 +38,8 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
     private readonly Button _xenosButton;
     private readonly Button[] _tabButtons;
     private readonly BoxContainer _content;
+    private readonly PanelContainer _heroPanel;
+    private readonly PanelContainer _heroAccentLine;
 
     private CCMAchievementsSnapshot _snapshot = new(0, 0, Array.Empty<CCMAchievementProgressData>());
     private CCMAchievementCategory _category = CCMAchievementCategory.General;
@@ -44,6 +49,8 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
 
     public CCMAchievementsWindow()
     {
+        IoCManager.InjectDependencies(this);
+
         var cache = IoCManager.Resolve<IResourceCache>();
         _windowTitleFont = cache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 16);
         _headerFont = cache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 22);
@@ -74,9 +81,8 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
             Text = Loc.GetString("ccm-achievements-header"),
             FontColorOverride = StyleNano.LobbyMenuButtonBase,
             FontOverride = _headerFont,
-            HorizontalAlignment = HAlignment.Center,
+            HorizontalAlignment = HAlignment.Left,
         };
-        root.AddChild(_headerLabel);
 
         var summaryRow = new BoxContainer
         {
@@ -89,7 +95,7 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
         {
             HorizontalExpand = true,
             FontOverride = _sectionFont,
-            FontColorOverride = StyleNano.LobbyMenuButtonBase,
+            FontColorOverride = GetWindowAccent(),
             VerticalAlignment = VAlignment.Center,
         };
 
@@ -107,7 +113,8 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
 
         summaryRow.AddChild(_summaryLabel);
         summaryRow.AddChild(_hideCompletedButton);
-        root.AddChild(summaryRow);
+        (_heroPanel, _heroAccentLine) = BuildHeroPanel(summaryRow);
+        root.AddChild(_heroPanel);
 
         var tabBar = new BoxContainer
         {
@@ -140,7 +147,7 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
             Orientation = BoxContainer.LayoutOrientation.Vertical,
             SeparationOverride = 8,
             HorizontalExpand = true,
-            Margin = new Thickness(0, 0, 10, 0),
+            Margin = new Thickness(0, 0, 18, 0),
         };
         scroll.AddChild(_content);
         root.AddChild(scroll);
@@ -153,9 +160,21 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
         {
             OnKeyBindDown -= StartDrag;
             OnKeyBindUp -= StopDrag;
+            _config.UnsubValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged);
         };
 
         ApplyWindowTheme();
+        _headerLabel.FontColorOverride = StyleNano.LobbyMenuButtonBase;
+        _summaryLabel.FontColorOverride = GetWindowAccent();
+        Rebuild();
+        _config.OnValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged, false);
+    }
+
+    private void OnThemeChanged(string _)
+    {
+        ApplyWindowTheme();
+        _headerLabel.FontColorOverride = StyleNano.LobbyMenuButtonBase;
+        _summaryLabel.FontColorOverride = GetWindowAccent();
         Rebuild();
     }
 
@@ -216,6 +235,45 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
         }
     }
 
+    private (PanelContainer Panel, PanelContainer AccentLine) BuildHeroPanel(Control summaryRow)
+    {
+        var panel = new PanelContainer
+        {
+            PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Black.WithAlpha(0.24f),
+                BorderColor = GetWindowAccent().WithAlpha(0.40f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 14,
+                ContentMarginTopOverride = 14,
+                ContentMarginRightOverride = 14,
+                ContentMarginBottomOverride = 14,
+            },
+        };
+
+        var stack = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            SeparationOverride = 10,
+        };
+
+        var accentLine = new PanelContainer
+        {
+            MinSize = new Vector2(0, 4),
+            HorizontalExpand = true,
+            PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = GetWindowAccent().WithAlpha(0.92f),
+            },
+        };
+        stack.AddChild(accentLine);
+
+        stack.AddChild(_headerLabel);
+        stack.AddChild(summaryRow);
+        panel.AddChild(stack);
+        return (panel, accentLine);
+    }
+
     private Control BuildEmptyLabel()
     {
         var panel = new PanelContainer
@@ -223,7 +281,7 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
             PanelOverride = new StyleBoxFlat
             {
                 BackgroundColor = Color.Black.WithAlpha(0.16f),
-                BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.2f),
+                BorderColor = GetWindowAccent().WithAlpha(0.2f),
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 10,
                 ContentMarginTopOverride = 10,
@@ -244,9 +302,11 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
 
     private Control BuildAchievementCard(CCMAchievementProgressData achievement)
     {
+        var activeAccent = GetWindowAccent();
+        var brightAccent = BlendTowards(activeAccent, Color.White, 0.35f);
         var accent = achievement.Completed
-            ? StyleNano.LobbyMenuButtonBase
-            : Color.FromHex("#D9E0E8");
+            ? brightAccent
+            : BlendTowards(activeAccent, Color.White, 0.62f);
         var completion = achievement.Goal <= 0
             ? 1f
             : Math.Clamp(achievement.Progress / (float) achievement.Goal, 0f, 1f);
@@ -256,11 +316,11 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
             PanelOverride = new StyleBoxFlat
             {
                 BackgroundColor = achievement.Completed
-                    ? StyleNano.ButtonColorContextHover.WithAlpha(0.72f)
-                    : Color.Black.WithAlpha(0.18f),
+                    ? GetCardBackgroundColor().WithAlpha(0.88f)
+                    : GetCardBackgroundColor().WithAlpha(0.72f),
                 BorderColor = achievement.Completed
-                    ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.7f)
-                    : StyleNano.LobbyMenuButtonBase.WithAlpha(0.24f),
+                    ? brightAccent.WithAlpha(0.86f)
+                    : activeAccent.WithAlpha(0.42f),
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 10,
                 ContentMarginTopOverride = 10,
@@ -298,8 +358,8 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
                 : Loc.GetString("ccm-achievements-in-progress"),
             FontOverride = _smallFont,
             FontColorOverride = achievement.Completed
-                ? StyleNano.LobbyMenuButtonBase
-                : Color.FromHex("#AAB6C3"),
+                ? brightAccent
+                : BlendTowards(activeAccent, Color.White, 0.38f),
             HorizontalAlignment = HAlignment.Right,
             VerticalAlignment = VAlignment.Top,
             MinSize = new Vector2(96, 0),
@@ -313,7 +373,8 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
         var description = new RichTextLabel
         {
             HorizontalExpand = true,
-            MaxWidth = 540,
+            HorizontalAlignment = HAlignment.Left,
+            MaxWidth = 610,
         };
         description.SetMessage(FormattedMessage.FromMarkupOrThrow($"[color=#D7E1EB]{Loc.GetString(achievement.DescriptionKey)}[/color]"));
         content.AddChild(description);
@@ -325,8 +386,8 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
                 ("goal", achievement.Goal)),
             FontOverride = _smallFont,
             FontColorOverride = achievement.Completed
-                ? StyleNano.LobbyMenuButtonBase
-                : Color.FromHex("#C7D4E0"),
+                ? brightAccent
+                : BlendTowards(activeAccent, Color.White, 0.46f),
             HorizontalAlignment = HAlignment.Right,
         };
         content.AddChild(progressLabel);
@@ -341,13 +402,13 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
             ForegroundStyleBoxOverride = new StyleBoxFlat
             {
                 BackgroundColor = achievement.Completed
-                    ? StyleNano.LobbyMenuButtonBase
-                    : StyleNano.LobbyMenuButtonBase.WithAlpha(0.72f),
+                    ? brightAccent
+                    : activeAccent.WithAlpha(0.88f),
             },
             BackgroundStyleBoxOverride = new StyleBoxFlat
             {
                 BackgroundColor = Color.Black.WithAlpha(0.34f),
-                BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.24f),
+                BorderColor = activeAccent.WithAlpha(0.30f),
                 BorderThickness = new Thickness(1),
             },
         };
@@ -390,10 +451,10 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
 
     private void ApplyWindowTheme()
     {
-        var bodyColor = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+        var bodyColor = IsBlueTheme()
             ? Color.FromHex("#102A56").WithAlpha(0.94f)
             : Color.FromHex("#05180A").WithAlpha(0.94f);
-        var borderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.65f);
+        var borderColor = GetWindowAccent().WithAlpha(0.65f);
 
         HeaderPanel.PanelOverride = new StyleBoxFlat
         {
@@ -408,6 +469,51 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
             BorderColor = borderColor,
             BorderThickness = new Thickness(1, 0, 1, 1),
         };
+
+        _heroPanel.PanelOverride = new StyleBoxFlat
+        {
+            BackgroundColor = Color.Black.WithAlpha(0.24f),
+            BorderColor = GetWindowAccent().WithAlpha(0.40f),
+            BorderThickness = new Thickness(1),
+            ContentMarginLeftOverride = 14,
+            ContentMarginTopOverride = 14,
+            ContentMarginRightOverride = 14,
+            ContentMarginBottomOverride = 14,
+        };
+
+        _heroAccentLine.PanelOverride = new StyleBoxFlat
+        {
+            BackgroundColor = GetWindowAccent().WithAlpha(0.92f),
+        };
+    }
+
+    private bool IsBlueTheme()
+    {
+        return _config.GetCVar(RMCCVars.RMCUIColorTheme).Equals("blue", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private Color GetWindowAccent()
+    {
+        return IsBlueTheme()
+            ? StyleNano.LobbyMenuButtonBase
+            : StyleNano.LobbyMenuButtonBase;
+    }
+
+    private Color GetCardBackgroundColor()
+    {
+        return IsBlueTheme()
+            ? Color.FromHex("#0B2247")
+            : Color.FromHex("#0A1C0D");
+    }
+
+    private static Color BlendTowards(Color source, Color target, float factor)
+    {
+        factor = Math.Clamp(factor, 0f, 1f);
+        return new Color(
+            source.R + (target.R - source.R) * factor,
+            source.G + (target.G - source.G) * factor,
+            source.B + (target.B - source.B) * factor,
+            source.A + (target.A - source.A) * factor);
     }
 
     private void AttachInteractiveStyle(Button button, Func<bool> selected)
@@ -438,8 +544,8 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
                 ? StyleNano.ButtonColorContextHover.WithAlpha(0.96f)
                 : StyleNano.ButtonColorContext.WithAlpha(0.92f),
             BorderColor = selected
-                ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.82f)
-                : StyleNano.LobbyMenuButtonBase.WithAlpha(0.55f),
+                ? GetWindowAccent().WithAlpha(0.82f)
+                : GetWindowAccent().WithAlpha(0.55f),
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = 8,
             ContentMarginTopOverride = 4,
@@ -459,7 +565,7 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
             button.StyleBoxOverride = new StyleBoxFlat
             {
                 BackgroundColor = Color.Black.WithAlpha(0.18f),
-                BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.24f),
+                BorderColor = GetWindowAccent().WithAlpha(0.24f),
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 8,
                 ContentMarginTopOverride = 4,
@@ -475,14 +581,14 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
         {
             BackgroundColor = selected
                 ? (pressed
-                    ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.30f)
+                    ? GetWindowAccent().WithAlpha(0.30f)
                     : StyleNano.ButtonColorContextHover.WithAlpha(0.96f))
                 : pressed
-                    ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.20f)
+                    ? GetWindowAccent().WithAlpha(0.20f)
                     : StyleNano.ButtonColorContextHover.WithAlpha(0.95f),
             BorderColor = selected || pressed
-                ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.86f)
-                : StyleNano.LobbyMenuButtonBase.WithAlpha(0.75f),
+                ? GetWindowAccent().WithAlpha(0.86f)
+                : GetWindowAccent().WithAlpha(0.75f),
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = 8,
             ContentMarginTopOverride = 4,
@@ -492,7 +598,7 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
         button.Label.FontOverride = _sectionFont;
         button.Label.FontColorOverride = selected || pressed
             ? Color.FromHex("#F0FFF4")
-            : StyleNano.LobbyMenuButtonBase;
+            : GetWindowAccent();
     }
 
     protected override void MouseMove(GUIMouseMoveEventArgs args)

@@ -1,7 +1,9 @@
 using System;
 using System.Linq;
 using System.Numerics;
+using Content.Client._CCM.Sponsorship;
 using Content.Client._RMC14.LinkAccount;
+using Content.Client.Clothing;
 using Content.Client.Guidebook;
 using Content.Client.Humanoid;
 using Content.Client.Inventory;
@@ -10,19 +12,24 @@ using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Station;
 using Content.Client.Stylesheets;
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Item;
 using Content.Shared._CCM.Preferences;
+using Content.Shared._CCM.Sponsorship;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Inventory;
+using Content.Shared.Item;
 using Content.Shared.Localizations;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
 using Content.Shared.Traits;
 using Content.Shared._RMC14.CCVar;
+using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
 using Robust.Client.State;
@@ -30,6 +37,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Shared.Configuration;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
@@ -61,12 +69,15 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     private Control? _characterSetupHost;
     private bool _pendingShowCharacterSetup;
     [UISystemDependency] private readonly CMArmorSystem _armorSystem = default!;
+    [UISystemDependency] private readonly SharedItemSystem _item = default!;
 
     private CharacterSetupGui? _characterSetup;
     private HumanoidProfileEditor? _profileEditor;
     private CharacterSetupGuiSavePanel? _savePanel;
     private EntityUid? _lobbyHeaderPreviewDummy;
     private readonly Dictionary<int, Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo>> _jobPriorityChancesBySlot = new();
+    private CCMCustomizationSystem? _ccmCustomizationSystem;
+    private bool _ccmCustomizationSubscribed;
 
     /// <summary>
     /// This is the modified profile currently being edited.
@@ -98,6 +109,21 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         // CCM rework lobby - start
         _contentLoc.CultureChanged += OnCultureChanged;
         // CCM rework lobby - end
+
+    }
+
+    private CCMCustomizationSystem? EnsureCustomizationSystem()
+    {
+        if (_ccmCustomizationSystem == null)
+            _ccmCustomizationSystem = EntityManager.SystemOrNull<CCMCustomizationSystem>();
+
+        if (_ccmCustomizationSystem != null && !_ccmCustomizationSubscribed)
+        {
+            _ccmCustomizationSystem.CustomizationReceived += OnCustomizationReceived;
+            _ccmCustomizationSubscribed = true;
+        }
+
+        return _ccmCustomizationSystem;
     }
 
 
@@ -149,18 +175,27 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         if (_stateManager.CurrentState is not LobbyState)
             return;
 
+        EnsureCustomizationSystem()?.RequestCustomization();
         ReloadCharacterSetup();
         UpdateLobbyHeader();
     }
 
     public void OnStateEntered(LobbyState state)
     {
+        EnsureCustomizationSystem()?.RequestCustomization();
         ReloadCharacterSetup();
         UpdateLobbyHeader();
     }
 
     public void OnStateExited(LobbyState state)
     {
+        if (_ccmCustomizationSystem != null && _ccmCustomizationSubscribed)
+        {
+            _ccmCustomizationSystem.CustomizationReceived -= OnCustomizationReceived;
+            _ccmCustomizationSubscribed = false;
+            _ccmCustomizationSystem = null;
+        }
+
         ClearLobbyHeaderPreview();
         _profileEditor?.Dispose();
         _characterSetup?.Dispose();
@@ -174,6 +209,15 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
             _characterSetupHost = null;
         }
         _characterSetupLayoutHooked = false;
+    }
+
+    private void OnCustomizationReceived(CCMCustomizationSnapshot _)
+    {
+        if (_stateManager.CurrentState is not LobbyState)
+            return;
+
+        ReloadCharacterSetup();
+        UpdateLobbyHeader();
     }
 
     // CCM rework lobby - start
@@ -406,7 +450,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         return (_characterSetup, _profileEditor);
     }
 
-    private const float CharacterSetupWidthFactor = 0.66f;
+    private const float CharacterSetupWidthFactor = 0.69f;
     private const float CharacterSetupHeightFactor = 0.68f;
 
     private void UpdateCharacterSetupLayout()
@@ -629,6 +673,8 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     /// </summary>
     public void GiveDummyJobClothes(EntityUid dummy, HumanoidCharacterProfile profile, JobPrototype job)
     {
+        var armorPreference = GetPreviewArmorPreference(profile);
+
         if (!_inventory.TryGetSlots(dummy, out var slots))
             return;
 
@@ -704,7 +750,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
                 if (EntityManager.TryGetComponent<RMCArmorVariantComponent>(item, out var variantComponent))
                 {
-                    var variantItemProtoId = _armorSystem.GetArmorVariant((item, variantComponent), profile.ArmorPreference);
+                    var variantItemProtoId = _armorSystem.GetArmorVariant((item, variantComponent), armorPreference);
                     var variantItem = EntityManager.SpawnEntity(variantItemProtoId, MapCoordinates.Nullspace);
                     _inventory.TryEquip(dummy, variantItem, slot.Name, true, true);
                     EntityManager.QueueDeleteEntity(item);
@@ -715,6 +761,136 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
                 _inventory.TryEquip(dummy, item, slot.Name, true, true);
             }
         }
+    }
+
+    private ArmorPreference GetPreviewArmorPreference(HumanoidCharacterProfile profile)
+    {
+        var snapshot = EnsureCustomizationSystem()?.LatestSnapshot;
+        if (snapshot == null)
+            return profile.ArmorPreference;
+
+        var selected = GetCustomizationSelection(snapshot, "armor_variant");
+        return selected switch
+        {
+            CCMCustomizationArmorVariantIds.Padded => ArmorPreference.Padded,
+            CCMCustomizationArmorVariantIds.Padless => ArmorPreference.Padless,
+            CCMCustomizationArmorVariantIds.Ridged => ArmorPreference.Ridged,
+            CCMCustomizationArmorVariantIds.Carrier => ArmorPreference.Carrier,
+            CCMCustomizationArmorVariantIds.Skull => ArmorPreference.Skull,
+            CCMCustomizationArmorVariantIds.Smooth => ArmorPreference.Smooth,
+            CCMCustomizationArmorVariantIds.None => ArmorPreference.None,
+            _ => profile.ArmorPreference,
+        };
+    }
+
+    private void ApplyPreviewCustomization(EntityUid dummy)
+    {
+        var snapshot = EnsureCustomizationSystem()?.LatestSnapshot;
+        if (snapshot == null)
+            return;
+
+        var appearanceSystem = EntityManager.System<AppearanceSystem>();
+        var sharedAppearanceSystem = EntityManager.System<SharedAppearanceSystem>();
+
+        ApplyWearablePreviewCamouflage(dummy, snapshot, sharedAppearanceSystem, appearanceSystem);
+        ApplyHeldPreviewWeaponCamouflage(dummy, snapshot, sharedAppearanceSystem, appearanceSystem);
+    }
+
+    private void ApplyWearablePreviewCamouflage(
+        EntityUid dummy,
+        CCMCustomizationSnapshot snapshot,
+        SharedAppearanceSystem sharedAppearanceSystem,
+        AppearanceSystem appearanceSystem)
+    {
+        var camouflage = ParsePreviewCamouflage(GetCustomizationSelection(snapshot, "armor_palette"));
+        var slots = new[] { "outerClothing", "jumpsuit", "head" };
+        var changed = false;
+
+        foreach (var slot in slots)
+        {
+            if (!_inventory.TryGetSlotEntity(dummy, slot, out var equipped) ||
+                !EntityManager.TryGetComponent<ItemCamouflageComponent>(equipped, out _))
+            {
+                continue;
+            }
+
+            changed |= ApplyPreviewCamouflage(
+                equipped.Value,
+                camouflage,
+                sharedAppearanceSystem,
+                appearanceSystem,
+                propagateVisuals: false);
+        }
+
+        if (changed && EntityManager.TryGetComponent<InventoryComponent>(dummy, out var inventory))
+        {
+            EntityManager.System<ClientClothingSystem>().InitClothing(dummy, inventory);
+        }
+    }
+
+    private void ApplyHeldPreviewWeaponCamouflage(
+        EntityUid dummy,
+        CCMCustomizationSnapshot snapshot,
+        SharedAppearanceSystem sharedAppearanceSystem,
+        AppearanceSystem appearanceSystem)
+    {
+        var camouflage = ParsePreviewCamouflage(GetCustomizationSelection(snapshot, "weapon_spray"));
+
+        foreach (var item in _inventory.GetHandOrInventoryEntities(dummy))
+        {
+            if (!EntityManager.HasComponent<ItemCamouflageComponent>(item))
+                continue;
+
+            ApplyPreviewCamouflage(
+                item,
+                camouflage,
+                sharedAppearanceSystem,
+                appearanceSystem,
+                propagateVisuals: false);
+        }
+    }
+
+    private bool ApplyPreviewCamouflage(
+        EntityUid item,
+        CamouflageType camouflage,
+        SharedAppearanceSystem sharedAppearanceSystem,
+        AppearanceSystem appearanceSystem,
+        bool propagateVisuals)
+    {
+        if (!EntityManager.TryGetComponent<AppearanceComponent>(item, out var appearance))
+            return false;
+
+        EntityManager.TryGetComponent<SpriteComponent>(item, out var sprite);
+        sharedAppearanceSystem.SetData(item, ItemCamouflageVisuals.Camo, camouflage);
+        appearanceSystem.OnChangeData(item, sprite, appearance);
+
+        if (propagateVisuals && EntityManager.HasComponent<ItemComponent>(item) && EntityManager.TryGetNetEntity(item, out _))
+            _item.VisualsChanged(item);
+
+        return true;
+    }
+
+    private static CamouflageType ParsePreviewCamouflage(string selected)
+    {
+        return selected switch
+        {
+            CCMCustomizationCamouflageIds.Desert => CamouflageType.Desert,
+            CCMCustomizationCamouflageIds.Snow => CamouflageType.Snow,
+            CCMCustomizationCamouflageIds.Classic => CamouflageType.Classic,
+            CCMCustomizationCamouflageIds.Urban => CamouflageType.Urban,
+            _ => CamouflageType.Jungle,
+        };
+    }
+
+    private static string GetCustomizationSelection(CCMCustomizationSnapshot snapshot, string slotId)
+    {
+        foreach (var selection in snapshot.Selections)
+        {
+            if (selection.SlotId == slotId && !string.IsNullOrWhiteSpace(selection.ValueId))
+                return selection.ValueId;
+        }
+
+        return "default";
     }
 
     /// <summary>
@@ -761,6 +937,8 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
                 var loadout = humanoid.GetLoadoutOrDefault(LoadoutSystem.GetJobPrototype(job.ID), _playerManager.LocalSession, humanoid.Species, EntityManager, _prototypeManager);
                 GiveDummyLoadout(dummyEnt, loadout);
             }
+
+            ApplyPreviewCustomization(dummyEnt);
         }
 
         return dummyEnt;

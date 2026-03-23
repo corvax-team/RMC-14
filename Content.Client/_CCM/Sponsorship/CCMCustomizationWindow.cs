@@ -5,7 +5,9 @@ using System.Numerics;
 using Content.Client._CCM.UserInterface.Controls;
 using Content.Client.Resources;
 using Content.Client.Stylesheets;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._CCM.Sponsorship;
+using Robust.Shared.Configuration;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
@@ -19,6 +21,7 @@ namespace Content.Client._CCM.Sponsorship;
 
 public sealed partial class CCMCustomizationWindow : DefaultCMWindow
 {
+
     private enum CustomizationPage : byte
     {
         Xeno,
@@ -29,6 +32,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
     private readonly record struct CustomOption(string Id, string NameKey, string? PreviewTexturePath = null);
 
     [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
 
     private readonly Dictionary<string, CCMOptionButton> _selectors = new();
     private readonly Dictionary<string, TextureRect> _xenoPreviewTextures = new();
@@ -36,8 +40,12 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
     private readonly Dictionary<string, Label> _camoPreviewLabels = new();
     private readonly List<(Control Overlay, Func<bool> Visible)> _availabilityOverlays = new();
     private readonly Dictionary<CustomizationPage, Button> _pageButtons = new();
+    private readonly List<Action> _themeRefreshActions = new();
     private readonly Label _statusLabel;
     private readonly Label _statusHintLabel;
+    private readonly Label _heroTitleLabel;
+    private readonly Label _heroDescriptionLabel;
+    private readonly Label _heroWipLabel;
     private readonly Label _saveStateLabel;
     private readonly Label _tagPreviewLabel;
     private readonly Label _oocColorPreviewLabel;
@@ -89,6 +97,10 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             new("default", "ccm-customization-default"),
             new("holo_green", "ccm-customization-ghost-holo-green", "/Textures/Mobs/Ghosts/ghost_human.rsi/icon.png"),
             new("holo_blue", "ccm-customization-ghost-holo-blue", "/Textures/Mobs/Ghosts/ghost_human.rsi/icon.png"),
+            new("holo_violet", "ccm-customization-ghost-holo-violet", "/Textures/Mobs/Ghosts/ghost_human.rsi/icon.png"),
+            new("holo_amber", "ccm-customization-ghost-holo-amber", "/Textures/Mobs/Ghosts/ghost_human.rsi/icon.png"),
+            new("holo_crimson", "ccm-customization-ghost-holo-crimson", "/Textures/Mobs/Ghosts/ghost_human.rsi/icon.png"),
+            new("holo_teal", "ccm-customization-ghost-holo-teal", "/Textures/Mobs/Ghosts/ghost_human.rsi/icon.png"),
         ],
         ["weapon_spray"] =
         [
@@ -172,7 +184,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         IoCManager.InjectDependencies(this);
 
         Title = string.Empty;
-        MinSize = new Vector2(872, 780);
+        MinSize = new Vector2(980, 780);
         WindowTitleLabel.Visible = false;
         HeaderPanel.MinSize = new Vector2(0, 26);
         HeaderPanel.Margin = new Thickness(10, 6, 10, 0);
@@ -182,7 +194,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
 
         _statusLabel = new Label
         {
-            FontColorOverride = StyleNano.LobbyMenuButtonBase,
+            FontColorOverride = GetWindowAccent(),
             FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 12),
         };
         _statusHintLabel = new Label
@@ -190,6 +202,24 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             FontColorOverride = Color.FromHex("#B7C3CE"),
             FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 11),
             HorizontalExpand = true,
+        };
+        _heroTitleLabel = new Label
+        {
+            Text = Loc.GetString("ccm-customization-header"),
+            FontColorOverride = GetWindowAccent(),
+            FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 24),
+        };
+        _heroDescriptionLabel = new Label
+        {
+            Text = Loc.GetString("ccm-customization-status-locked"),
+            FontColorOverride = Color.FromHex("#A8B5C1"),
+            FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 11),
+        };
+        _heroWipLabel = new Label
+        {
+            Text = Loc.GetString("ccm-customization-wip"),
+            FontColorOverride = GetThemeAccent(0.22f),
+            FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 10),
         };
         _saveStateLabel = new Label
         {
@@ -293,6 +323,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         root.AddChild(BuildBottomActionBar());
 
         Contents.AddChild(root);
+        ApplyThemeRefreshActions();
         UpdateStatusText();
         UpdateOocTagControls();
         UpdateTagPreview();
@@ -300,6 +331,27 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         UpdateAllXenoPreviewSelections();
         UpdateDynamicPreviews();
         _savedSnapshot = BuildSnapshot();
+        UpdateSaveState();
+        _config.OnValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged, false);
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+
+        if (disposing)
+            _config.UnsubValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged);
+    }
+
+    private void OnThemeChanged(string _)
+    {
+        ApplyWindowTheme();
+        ApplyThemeRefreshActions();
+        _statusLabel.FontColorOverride = GetWindowAccent();
+        _statusHintLabel.FontColorOverride = Color.FromHex("#B7C3CE");
+        _heroTitleLabel.FontColorOverride = GetWindowAccent();
+        _heroWipLabel.FontColorOverride = GetThemeAccent(0.22f);
+        UpdatePageState();
         UpdateSaveState();
     }
 
@@ -347,7 +399,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             PanelOverride = new StyleBoxFlat
             {
                 BackgroundColor = Color.Black.WithAlpha(0.24f),
-                BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.40f),
+                BorderColor = GetWindowAccent().WithAlpha(0.40f),
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 14,
                 ContentMarginTopOverride = 14,
@@ -362,15 +414,16 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             SeparationOverride = 12,
         };
 
-        stack.AddChild(new PanelContainer
+        var heroAccentLine = new PanelContainer
         {
             MinSize = new Vector2(0, 5),
             HorizontalExpand = true,
             PanelOverride = new StyleBoxFlat
             {
-                BackgroundColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.90f),
+                BackgroundColor = GetWindowAccent().WithAlpha(0.90f),
             },
-        });
+        };
+        stack.AddChild(heroAccentLine);
 
         var titleRow = new BoxContainer
         {
@@ -385,24 +438,9 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             SeparationOverride = 4,
             HorizontalExpand = true,
         };
-        titleStack.AddChild(new Label
-        {
-            Text = Loc.GetString("ccm-customization-header"),
-            FontColorOverride = StyleNano.LobbyMenuButtonBase,
-            FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 24),
-        });
-        titleStack.AddChild(new Label
-        {
-            Text = Loc.GetString("ccm-customization-status-locked"),
-            FontColorOverride = Color.FromHex("#A8B5C1"),
-            FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 11),
-        });
-        titleStack.AddChild(new Label
-        {
-            Text = Loc.GetString("ccm-customization-wip"),
-            FontColorOverride = Color.FromHex("#8FD4FF"),
-            FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 10),
-        });
+        titleStack.AddChild(_heroTitleLabel);
+        titleStack.AddChild(_heroDescriptionLabel);
+        titleStack.AddChild(_heroWipLabel);
 
         titleRow.AddChild(titleStack);
         stack.AddChild(titleRow);
@@ -413,11 +451,30 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             HSeparationOverride = 12,
             VSeparationOverride = 12,
         };
-        infoGrid.AddChild(BuildHeroInfoCard(_statusLabel, StyleNano.LobbyMenuButtonBase));
-        infoGrid.AddChild(BuildHeroInfoCard(_statusHintLabel, Color.FromHex("#77E3FF")));
+        infoGrid.AddChild(BuildHeroInfoCard(_statusLabel, () => GetWindowAccent()));
+        infoGrid.AddChild(BuildHeroInfoCard(_statusHintLabel, () => GetThemeAccent(0.18f)));
         stack.AddChild(infoGrid);
 
         hero.AddChild(stack);
+        _themeRefreshActions.Add(() =>
+        {
+            hero.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Black.WithAlpha(0.24f),
+                BorderColor = GetWindowAccent().WithAlpha(0.40f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 14,
+                ContentMarginTopOverride = 14,
+                ContentMarginRightOverride = 14,
+                ContentMarginBottomOverride = 14,
+            };
+            heroAccentLine.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = GetWindowAccent().WithAlpha(0.90f),
+            };
+            _heroTitleLabel.FontColorOverride = GetWindowAccent();
+            _heroWipLabel.FontColorOverride = GetThemeAccent(0.22f);
+        });
         return hero;
     }
 
@@ -428,7 +485,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             PanelOverride = new StyleBoxFlat
             {
                 BackgroundColor = Color.Black.WithAlpha(0.18f),
-                BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.28f),
+                BorderColor = GetWindowAccent().WithAlpha(0.28f),
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 10,
                 ContentMarginTopOverride = 8,
@@ -447,11 +504,25 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         row.AddChild(_saveStateLabel);
         row.AddChild(_saveButton);
         bar.AddChild(row);
+        _themeRefreshActions.Add(() =>
+        {
+            bar.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Black.WithAlpha(0.18f),
+                BorderColor = GetWindowAccent().WithAlpha(0.28f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 10,
+                ContentMarginTopOverride = 8,
+                ContentMarginRightOverride = 10,
+                ContentMarginBottomOverride = 8,
+            };
+        });
         return bar;
     }
 
-    private Control BuildHeroInfoCard(Control content, Color accent)
+    private Control BuildHeroInfoCard(Control content, Func<Color> accentProvider)
     {
+        var accent = accentProvider();
         var panel = new PanelContainer
         {
             MinSize = new Vector2(0, 64),
@@ -467,22 +538,37 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             },
         };
 
+        var line = new PanelContainer
+        {
+            MinSize = new Vector2(34, 3),
+            MaxSize = new Vector2(34, 3),
+        };
         var stack = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
             SeparationOverride = 6,
         };
-        stack.AddChild(new PanelContainer
-        {
-            MinSize = new Vector2(34, 3),
-            MaxSize = new Vector2(34, 3),
-            PanelOverride = new StyleBoxFlat
-            {
-                BackgroundColor = accent.WithAlpha(0.96f),
-            },
-        });
+        stack.AddChild(line);
         stack.AddChild(content);
         panel.AddChild(stack);
+        _themeRefreshActions.Add(() =>
+        {
+            var liveAccent = accentProvider();
+            panel.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = liveAccent.WithAlpha(0.09f),
+                BorderColor = liveAccent.WithAlpha(0.28f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 12,
+                ContentMarginTopOverride = 10,
+                ContentMarginRightOverride = 12,
+                ContentMarginBottomOverride = 10,
+            };
+            line.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = liveAccent.WithAlpha(0.96f),
+            };
+        });
         return panel;
     }
 
@@ -604,7 +690,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             PanelOverride = new StyleBoxFlat
             {
                 BackgroundColor = Color.Black.WithAlpha(0.16f),
-                BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.32f),
+                BorderColor = GetWindowAccent().WithAlpha(0.32f),
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 12,
                 ContentMarginTopOverride = 12,
@@ -624,28 +710,44 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             Orientation = BoxContainer.LayoutOrientation.Horizontal,
             SeparationOverride = 10,
         };
-        titleRow.AddChild(new PanelContainer
+        var icon = new PanelContainer
         {
             MinSize = new Vector2(24, 24),
             MaxSize = new Vector2(24, 24),
-            PanelOverride = new StyleBoxFlat
-            {
-                BackgroundColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.14f),
-                BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.34f),
-                BorderThickness = new Thickness(1),
-            },
-        });
-        titleRow.AddChild(new Label
+        };
+        titleRow.AddChild(icon);
+        var titleLabel = new Label
         {
             Text = Loc.GetString(titleKey),
-            FontColorOverride = StyleNano.LobbyMenuButtonBase,
+            FontColorOverride = GetWindowAccent(),
             FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 16),
             VerticalAlignment = VAlignment.Center,
-        });
+        };
+        titleRow.AddChild(titleLabel);
 
         stack.AddChild(titleRow);
         stack.AddChild(body);
         panel.AddChild(stack);
+        _themeRefreshActions.Add(() =>
+        {
+            panel.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Black.WithAlpha(0.16f),
+                BorderColor = GetWindowAccent().WithAlpha(0.32f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 12,
+                ContentMarginTopOverride = 12,
+                ContentMarginRightOverride = 12,
+                ContentMarginBottomOverride = 12,
+            };
+            icon.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = GetWindowAccent().WithAlpha(0.14f),
+                BorderColor = GetWindowAccent().WithAlpha(0.34f),
+                BorderThickness = new Thickness(1),
+            };
+            titleLabel.FontColorOverride = GetWindowAccent();
+        });
         return panel;
     }
 
@@ -707,13 +809,14 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
 
     private Control BuildXenoSkinCard(string slotId, string titleKey)
     {
-        var accent = GetSlotAccent(slotId);
+        Func<Color> accentProvider = () => GetSlotAccent(slotId);
+        var accent = accentProvider();
         var selector = MakeSelector(slotId, 0);
         selector.OnItemSelected += _ => UpdateXenoPreviewSelection(slotId);
         selector.HorizontalExpand = true;
 
-        var card = BuildDecoratedCard(accent, 196,
-            BuildCardHeader(Loc.GetString(titleKey), "Xeno", accent),
+        var card = BuildDecoratedCard(accentProvider, 196,
+            BuildCardHeader(Loc.GetString(titleKey), "Xeno", accentProvider),
             BuildXenoCurrentPreview(slotId, accent),
             selector);
         return WrapWithAvailabilityOverlay(card, () => !(_status?.CustomizationUnlocked ?? false));
@@ -749,52 +852,69 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         _xenoPreviewTextures[slotId] = texture;
         frame.AddChild(texture);
         UpdateXenoPreviewSelection(slotId);
+        _themeRefreshActions.Add(() =>
+        {
+            var liveAccent = GetSlotAccent(slotId);
+            frame.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Black.WithAlpha(0.12f),
+                BorderColor = liveAccent.WithAlpha(0.28f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 6,
+                ContentMarginTopOverride = 6,
+                ContentMarginRightOverride = 6,
+                ContentMarginBottomOverride = 6,
+            };
+        });
         return frame;
     }
 
     private Control BuildArmorCard()
     {
-        var accent = GetSlotAccent("armor_paint");
+        Func<Color> accentProvider = () => GetSlotAccent("armor_paint");
         var selector = MakeSelector("armor_paint", 0);
         selector.HorizontalExpand = true;
         selector.OnItemSelected += _ => UpdateDynamicPreviews();
 
-        return BuildDecoratedCard(accent, 228,
-            BuildCardHeader(Loc.GetString("ccm-customization-slot-armor"), "Marine", accent),
+        return BuildDecoratedCard(accentProvider, 228,
+            BuildCardHeader(Loc.GetString("ccm-customization-slot-armor"), "Marine", accentProvider),
             BuildArmorPreview(),
             selector);
     }
 
     private Control BuildCamouflageCard(string slotId, string titleKey, string badgeText, Control preview)
     {
-        var accent = GetSlotAccent(slotId);
+        Func<Color> accentProvider = () => GetSlotAccent(slotId);
+        var accent = accentProvider();
         var selector = MakeSelector(slotId, 0);
         selector.HorizontalExpand = true;
         selector.OnItemSelected += _ => UpdateDynamicPreviews();
         var hintKey = slotId == "armor_variant"
             ? "ccm-customization-armor-variant-hint"
             : "ccm-customization-camo-hint";
+        var hintMaxWidth = slotId == "armor_variant" ? 820f : 420f;
 
-        var card = BuildDecoratedCard(accent, 228,
-            BuildCardHeader(Loc.GetString(titleKey), badgeText, accent),
-            MakeWrappedText(Loc.GetString(hintKey), Color.FromHex("#B4BFCA"), 11, 392),
+        var card = BuildDecoratedCard(accentProvider, 228,
+            BuildCardHeader(Loc.GetString(titleKey), badgeText, accentProvider),
+            MakeWrappedText(Loc.GetString(hintKey), Color.FromHex("#B4BFCA"), 11, hintMaxWidth),
             preview,
             selector);
 
-        return slotId is "armor_palette" or "armor_variant"
+        return slotId is "armor_palette" or "armor_variant" or "weapon_spray"
             ? card
             : WrapWithAvailabilityOverlay(card, () => !(_status?.CustomizationUnlocked ?? false));
     }
 
     private Control BuildGhostCard()
     {
-        var accent = GetSlotAccent("ghost");
+        Func<Color> accentProvider = () => GetSlotAccent("ghost");
+        var accent = accentProvider();
         var selector = MakeSelector("ghost", 0);
         selector.HorizontalExpand = true;
         selector.OnItemSelected += _ => UpdateDynamicPreviews();
 
-        var card = BuildDecoratedCard(accent, 200,
-            BuildCardHeader(Loc.GetString("ccm-customization-slot-ghost"), "Misc", accent),
+        var card = BuildDecoratedCard(accentProvider, 200,
+            BuildCardHeader(Loc.GetString("ccm-customization-slot-ghost"), "Misc", accentProvider),
             BuildGhostPreview(),
             selector);
         return WrapWithAvailabilityOverlay(card, () => !(_status?.CustomizationUnlocked ?? false));
@@ -802,7 +922,8 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
 
     private Control BuildTagCard()
     {
-        var accent = GetSlotAccent("ooc");
+        Func<Color> accentProvider = () => GetSlotAccent("ooc");
+        var accent = accentProvider();
 
         var customTagPanel = new PanelContainer
         {
@@ -832,21 +953,45 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         customTagStack.AddChild(_customTagEdit);
         customTagPanel.AddChild(customTagStack);
 
-        var customTagGuard = WrapWithAvailabilityOverlay(customTagPanel, () => _status?.Tier != CCMSponsorshipTier.SponsorIII);
+        var customTagContainer = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            HorizontalExpand = true,
+        };
+        customTagContainer.AddChild(customTagPanel);
 
-        var card = BuildDecoratedCard(accent, 332,
-            BuildCardHeader(Loc.GetString("ccm-customization-slot-ooc-tag"), "OOC", accent),
-            MakeWrappedText(Loc.GetString("ccm-customization-tag-hint"), Color.FromHex("#B4BFCA"), 11),
+        var customTagGuard = WrapWithAvailabilityOverlay(
+            customTagContainer,
+            () => (_status?.Tier ?? CCMSponsorshipTier.None) < CCMSponsorshipTier.SponsorIII);
+
+        var card = BuildDecoratedCard(accentProvider, 332,
+            BuildCardHeader(Loc.GetString("ccm-customization-slot-ooc-tag"), "OOC", accentProvider),
+            MakeWrappedText(Loc.GetString("ccm-customization-tag-hint"), Color.FromHex("#B4BFCA"), 11, 420f),
             _oocTagSelector,
             customTagGuard,
-            BuildPreviewBubble(_tagPreviewLabel, Color.FromHex("#77E3FF").WithAlpha(0.30f), minHeight: 60));
+            BuildPreviewBubble(_tagPreviewLabel, () => GetThemeAccent(0.18f).WithAlpha(0.30f), minHeight: 44));
+
+        _themeRefreshActions.Add(() =>
+        {
+            var liveAccent = accentProvider();
+            customTagPanel.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Black.WithAlpha(0.18f),
+                BorderColor = liveAccent.WithAlpha(0.2f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 8,
+                ContentMarginTopOverride = 8,
+                ContentMarginRightOverride = 8,
+                ContentMarginBottomOverride = 8,
+            };
+        });
 
         return card;
     }
 
     private Control BuildChatColorCard(string titleKey, CCMOptionButton selector, Label previewLabel, string previewChannel)
     {
-        var card = BuildDecoratedCard(Color.FromHex("#77E3FF"), 170,
+        var card = BuildDecoratedCard(() => GetThemeAccent(0.18f), 170,
             new Label
             {
                 Text = Loc.GetString(titleKey),
@@ -854,12 +999,13 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
                 FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 13),
             },
             selector,
-            BuildPreviewBubble(previewLabel, Color.FromHex("#77E3FF").WithAlpha(0.26f), previewChannel));
+            BuildPreviewBubble(previewLabel, () => GetThemeAccent(0.18f).WithAlpha(0.26f), previewChannel));
         return WrapWithAvailabilityOverlay(card, () => !(_status?.CustomizationUnlocked ?? false));
     }
 
-    private Control BuildPreviewBubble(Label content, Color borderColor, string? prefix = null, float minHeight = 82)
+    private Control BuildPreviewBubble(Label content, Func<Color> borderColorProvider, string? prefix = null, float minHeight = 82)
     {
+        var borderColor = borderColorProvider();
         var bubble = new PanelContainer
         {
             MinSize = new Vector2(0, minHeight),
@@ -878,6 +1024,19 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
 
         if (string.IsNullOrWhiteSpace(prefix))
         {
+            _themeRefreshActions.Add(() =>
+            {
+                bubble.PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = Color.Black.WithAlpha(0.30f),
+                    BorderColor = borderColorProvider(),
+                    BorderThickness = new Thickness(1),
+                    ContentMarginLeftOverride = 12,
+                    ContentMarginTopOverride = 10,
+                    ContentMarginRightOverride = 12,
+                    ContentMarginBottomOverride = 10,
+                };
+            });
             bubble.AddChild(content);
             return bubble;
         }
@@ -887,15 +1046,30 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             Orientation = BoxContainer.LayoutOrientation.Horizontal,
             SeparationOverride = 8,
         };
-        row.AddChild(new Label
+        var prefixLabel = new Label
         {
             Text = prefix,
             FontColorOverride = Color.FromHex("#9DB6C5"),
             FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 11),
             VerticalAlignment = VAlignment.Center,
-        });
+        };
+        row.AddChild(prefixLabel);
         row.AddChild(content);
         bubble.AddChild(row);
+        _themeRefreshActions.Add(() =>
+        {
+            bubble.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Black.WithAlpha(0.30f),
+                BorderColor = borderColorProvider(),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 12,
+                ContentMarginTopOverride = 10,
+                ContentMarginRightOverride = 12,
+                ContentMarginBottomOverride = 10,
+            };
+            prefixLabel.FontColorOverride = GetThemeAccent(0.30f);
+        });
         return bubble;
     }
 
@@ -932,6 +1106,19 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         };
         _dynamicPreviewTextures["armor_paint"] = texture;
         preview.AddChild(texture);
+        _themeRefreshActions.Add(() =>
+        {
+            preview.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Black.WithAlpha(0.22f),
+                BorderColor = GetSlotAccent("armor_paint").WithAlpha(0.32f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 8,
+                ContentMarginTopOverride = 8,
+                ContentMarginRightOverride = 8,
+                ContentMarginBottomOverride = 8,
+            };
+        });
         return preview;
     }
 
@@ -964,10 +1151,24 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         };
         _camoPreviewLabels[slotId] = label;
         preview.AddChild(label);
+        _themeRefreshActions.Add(() =>
+        {
+            preview.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Black.WithAlpha(0.22f),
+                BorderColor = GetSlotAccent(slotId).WithAlpha(0.32f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 12,
+                ContentMarginTopOverride = 10,
+                ContentMarginRightOverride = 12,
+                ContentMarginBottomOverride = 10,
+            };
+            label.FontColorOverride = GetSlotAccent(slotId);
+        });
         return preview;
     }
 
-    private Control BuildCardHeader(string title, string badgeText, Color accent)
+    private Control BuildCardHeader(string title, string badgeText, Func<Color> accentProvider)
     {
         var row = new BoxContainer
         {
@@ -981,21 +1182,25 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 14),
             HorizontalExpand = true,
         });
-        row.AddChild(new Label
+        var badgeLabel = new Label
         {
             Text = badgeText,
-            FontColorOverride = accent,
+            FontColorOverride = accentProvider(),
             FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 11),
             HorizontalAlignment = HAlignment.Right,
-        });
+        };
+        row.AddChild(badgeLabel);
+        _themeRefreshActions.Add(() => badgeLabel.FontColorOverride = accentProvider());
         return row;
     }
 
-    private Control BuildDecoratedCard(Color accent, float minHeight, params Control[] body)
+    private Control BuildDecoratedCard(Func<Color> accentProvider, float minHeight, params Control[] body)
     {
+        var accent = accentProvider();
         var panel = new PanelContainer
         {
             MinSize = new Vector2(0, minHeight),
+            HorizontalExpand = true,
             PanelOverride = new StyleBoxFlat
             {
                 BackgroundColor = Color.Black.WithAlpha(0.17f),
@@ -1013,15 +1218,12 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             Orientation = BoxContainer.LayoutOrientation.Vertical,
             SeparationOverride = 10,
         };
-        stack.AddChild(new PanelContainer
+        var accentLine = new PanelContainer
         {
             MinSize = new Vector2(0, 4),
             HorizontalExpand = true,
-            PanelOverride = new StyleBoxFlat
-            {
-                BackgroundColor = accent.WithAlpha(0.90f),
-            },
-        });
+        };
+        stack.AddChild(accentLine);
 
         foreach (var child in body)
         {
@@ -1029,6 +1231,24 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         }
 
         panel.AddChild(stack);
+        _themeRefreshActions.Add(() =>
+        {
+            var liveAccent = accentProvider();
+            panel.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Black.WithAlpha(0.17f),
+                BorderColor = liveAccent.WithAlpha(0.24f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 11,
+                ContentMarginTopOverride = 11,
+                ContentMarginRightOverride = 11,
+                ContentMarginBottomOverride = 11,
+            };
+            accentLine.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = liveAccent.WithAlpha(0.90f),
+            };
+        });
         return panel;
     }
 
@@ -1051,17 +1271,35 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             },
         };
 
+        var layout = new LayoutContainer
+        {
+            HorizontalExpand = true,
+            VerticalExpand = true,
+        };
+
         var texture = new TextureRect
         {
             Texture = _resourceCache.GetTexture("/Textures/Mobs/Ghosts/ghost_human.rsi/icon.png"),
-            Stretch = TextureRect.StretchMode.KeepCentered,
             TextureScale = new Vector2(2.8f, 2.8f),
-            HorizontalExpand = true,
-            VerticalExpand = true,
             ModulateSelfOverride = color,
         };
         _dynamicPreviewTextures[$"ghost:{key}"] = texture;
-        panel.AddChild(texture);
+        LayoutContainer.SetAnchorPreset(texture, LayoutContainer.LayoutPreset.Center);
+        layout.AddChild(texture);
+        panel.AddChild(layout);
+        _themeRefreshActions.Add(() =>
+        {
+            panel.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = color.WithAlpha(0.08f),
+                BorderColor = color.WithAlpha(0.24f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 8,
+                ContentMarginTopOverride = 8,
+                ContentMarginRightOverride = 8,
+                ContentMarginBottomOverride = 8,
+            };
+        });
         return panel;
     }
 
@@ -1189,7 +1427,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             StyleBoxOverride = new StyleBoxFlat
             {
                 BackgroundColor = Color.Black.WithAlpha(0.28f),
-                BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.50f),
+                BorderColor = GetWindowAccent().WithAlpha(0.50f),
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 11,
                 ContentMarginTopOverride = 7,
@@ -1206,6 +1444,19 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             UpdateTagPreview();
             UpdateSaveState();
         };
+        _themeRefreshActions.Add(() =>
+        {
+            edit.StyleBoxOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Black.WithAlpha(0.28f),
+                BorderColor = GetWindowAccent().WithAlpha(0.50f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 11,
+                ContentMarginTopOverride = 7,
+                ContentMarginRightOverride = 11,
+                ContentMarginBottomOverride = 7,
+            };
+        });
         return edit;
     }
 
@@ -1240,6 +1491,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         {
             HorizontalExpand = true,
             VerticalExpand = false,
+            HorizontalAlignment = HAlignment.Left,
         };
 
         if (maxWidth.HasValue)
@@ -1276,7 +1528,14 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
     private void UpdateOocTagControls()
     {
         var customSelected = OocTagOptions[Math.Clamp(_oocTagSelector.SelectedId, 0, OocTagOptions.Length - 1)].Id == CCMOocTags.Custom;
-        var canUseCustomTag = _status?.Tier == CCMSponsorshipTier.SponsorIII;
+        var canUseCustomTag = (_status?.Tier ?? CCMSponsorshipTier.None) >= CCMSponsorshipTier.SponsorIII;
+
+        if (customSelected && !canUseCustomTag)
+        {
+            _oocTagSelector.SelectId(0);
+            customSelected = false;
+        }
+
         _customTagEdit.Editable = customSelected && canUseCustomTag;
         _customTagEdit.ModulateSelfOverride = (!customSelected || canUseCustomTag)
             ? null
@@ -1345,6 +1604,10 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             {
                 "holo_green" => Color.FromHex("#7CFF9A"),
                 "holo_blue" => Color.FromHex("#77E3FF"),
+                "holo_violet" => Color.FromHex("#C695FF"),
+                "holo_amber" => Color.FromHex("#FFC76A"),
+                "holo_crimson" => Color.FromHex("#FF7C9C"),
+                "holo_teal" => Color.FromHex("#6FF2E8"),
                 _ => Color.White.WithAlpha(0.90f),
             };
         }
@@ -1425,9 +1688,9 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
 
         var accent = page switch
         {
-            CustomizationPage.Xeno => Color.FromHex("#8BE39E"),
-            CustomizationPage.Marines => Color.FromHex("#FFB36F"),
-            _ => Color.FromHex("#77E3FF"),
+            CustomizationPage.Xeno => GetThemeAccent(0.22f),
+            CustomizationPage.Marines => GetThemeAccent(0.10f),
+            _ => GetThemeAccent(0.16f),
         };
         var active = _currentPage == page;
         var background = active
@@ -1502,21 +1765,24 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
     private void ApplySaveButtonStyle(bool hovered = false, bool pressed = false)
     {
         var enabled = !_saveButton.Disabled;
+        var accent = GetWindowAccent();
+        var disabledTextColor = Color.FromHex("#D6E9FF");
+        var activeTextColor = Color.FromHex("#F2FAFF");
         _saveButton.ModulateSelfOverride = Color.White;
         _saveButton.StyleBoxOverride = new StyleBoxFlat
         {
             BackgroundColor = !enabled
-                ? Color.Black.WithAlpha(0.18f)
+                ? Color.FromHex("#15325A").WithAlpha(0.90f)
                 : pressed
-                    ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.92f)
+                    ? accent.WithAlpha(0.92f)
                     : hovered
-                        ? StyleNano.ButtonColorContextHover.WithAlpha(0.96f)
-                        : StyleNano.ButtonColorContext.WithAlpha(0.92f),
+                        ? GetThemeAccent(0.12f).WithAlpha(0.96f)
+                        : GetThemeAccent(0.06f).WithAlpha(0.92f),
             BorderColor = !enabled
-                ? Color.FromHex("#546372").WithAlpha(0.42f)
+                ? Color.FromHex("#78AEE8").WithAlpha(0.62f)
                 : pressed
-                    ? StyleNano.LobbyMenuButtonBase
-                    : StyleNano.LobbyMenuButtonBase.WithAlpha(0.76f),
+                    ? accent
+                    : accent.WithAlpha(0.76f),
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = 10,
             ContentMarginTopOverride = 3,
@@ -1525,10 +1791,10 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         };
         _saveButton.Label.FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 12);
         _saveButton.Label.FontColorOverride = !enabled
-            ? Color.FromHex("#7A8794")
+            ? disabledTextColor
             : pressed
                 ? Color.Black
-                : StyleNano.LobbyMenuButtonBase;
+                : activeTextColor;
     }
 
     private void UpdateSaveState()
@@ -1542,7 +1808,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             ? "Unsaved changes"
             : "No changes";
         _saveStateLabel.FontColorOverride = pendingChanges
-            ? StyleNano.LobbyMenuButtonBase
+            ? GetWindowAccent()
             : Color.FromHex("#8FA2B5");
         ApplySaveButtonStyle();
     }
@@ -1576,14 +1842,21 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
 
     private void ApplyWindowTheme()
     {
-        var bodyColor = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-            ? Color.FromHex("#102A56").WithAlpha(0.94f)
-            : Color.FromHex("#05180A").WithAlpha(0.94f);
-        var borderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.65f);
+        var theme = _config.GetCVar(RMCCVars.RMCUIColorTheme);
+        var isBlueTheme = theme.Equals("blue", StringComparison.OrdinalIgnoreCase);
+        var headerColor = isBlueTheme
+            ? Color.FromHex("#06142F").WithAlpha(0.995f)
+            : Color.FromHex("#041105").WithAlpha(0.995f);
+        var bodyColor = isBlueTheme
+            ? Color.FromHex("#081B3F").WithAlpha(0.995f)
+            : Color.FromHex("#061507").WithAlpha(0.995f);
+        var borderColor = isBlueTheme
+            ? Color.FromHex("#2F78FF").WithAlpha(0.88f)
+            : StyleNano.LobbyMenuButtonBase.WithAlpha(0.82f);
 
         HeaderPanel.PanelOverride = new StyleBoxFlat
         {
-            BackgroundColor = bodyColor,
+            BackgroundColor = headerColor,
             BorderColor = borderColor,
             BorderThickness = new Thickness(1, 1, 1, 0),
         };
@@ -1594,6 +1867,14 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             BorderColor = borderColor,
             BorderThickness = new Thickness(1, 0, 1, 1),
         };
+    }
+
+    private void ApplyThemeRefreshActions()
+    {
+        foreach (var action in _themeRefreshActions)
+        {
+            action();
+        }
     }
 
     private string GetTierTitleKey(CCMSponsorshipTier tier)
@@ -1607,23 +1888,46 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         };
     }
 
-    private static Color GetSlotAccent(string slotId)
+    private Color GetSlotAccent(string slotId)
     {
         return slotId switch
         {
-            "xeno_defender" => Color.FromHex("#7BE18C"),
-            "xeno_drone" => Color.FromHex("#66D9FF"),
-            "xeno_queen" => Color.FromHex("#D88BFF"),
-            "xeno_runner" => Color.FromHex("#FFB36F"),
-            "xeno_sentinel" => Color.FromHex("#FFD45F"),
-            "ghost" => Color.FromHex("#9BE9FF"),
-            "weapon_spray" => Color.FromHex("#7FC9FF"),
-            "armor_palette" => Color.FromHex("#F5C46F"),
-            "armor_variant" => Color.FromHex("#B4C6FF"),
-            "armor_paint" => Color.FromHex("#FF9D6B"),
-            "ooc" => Color.FromHex("#8FF0C4"),
-            _ => StyleNano.LobbyMenuButtonBase,
+            "xeno_defender" => GetThemeAccent(0.14f),
+            "xeno_drone" => GetThemeAccent(0.18f),
+            "xeno_queen" => GetThemeAccent(0.28f),
+            "xeno_runner" => GetThemeAccent(0.22f),
+            "xeno_sentinel" => GetThemeAccent(0.24f),
+            "ghost" => GetThemeAccent(0.16f),
+            "weapon_spray" => GetThemeAccent(0.14f),
+            "armor_palette" => GetThemeAccent(0.24f),
+            "armor_variant" => GetThemeAccent(0.12f),
+            "armor_paint" => GetThemeAccent(0.20f),
+            "ooc" => GetThemeAccent(0.18f),
+            _ => GetWindowAccent(),
         };
+    }
+
+    private Color GetThemeAccent(float amount)
+    {
+        return BlendTowards(GetWindowAccent(), Color.White, amount);
+    }
+
+    private Color GetWindowAccent()
+    {
+        var theme = _config.GetCVar(RMCCVars.RMCUIColorTheme);
+        return theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
+            ? StyleNano.LobbyMenuButtonBase
+            : StyleNano.LobbyMenuButtonBase;
+    }
+
+    private static Color BlendTowards(Color source, Color target, float factor)
+    {
+        factor = Math.Clamp(factor, 0f, 1f);
+        return new Color(
+            source.R + (target.R - source.R) * factor,
+            source.G + (target.G - source.G) * factor,
+            source.B + (target.B - source.B) * factor,
+            source.A + (target.A - source.A) * factor);
     }
 
     private static bool TryGetOptionTextColor(string slotId, string optionId, out Color color)

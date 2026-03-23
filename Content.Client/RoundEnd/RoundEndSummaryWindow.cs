@@ -1,11 +1,14 @@
 using System.Linq;
+using System.Collections.Generic;
 using System.Numerics;
+using System.Text.RegularExpressions;
 using Content.Client.Administration.UI.CustomControls;
 using Content.Client._CCM.Stats;
 using Content.Client.Message;
 using Content.Client.Resources;
 using Robust.Client.ResourceManagement;
 using Content.Client.Stylesheets;
+using Content.Shared._CCM.Sponsorship;
 using Content.Shared._CCM.Stats;
 using Content.Shared.GameTicking;
 using Robust.Client.Graphics;
@@ -25,6 +28,12 @@ namespace Content.Client.RoundEnd
         private readonly CCMStatsSystem _ccmStatsSystem;
         private readonly Font _mvpTitleFont;
         private readonly Font _mvpSubtitleFont;
+        private readonly Font _sponsorTierThreeFont;
+        private readonly Font _sponsorTierTwoFont;
+        private readonly Font _sponsorTierOneFont;
+        private readonly Font _sponsorTierThreeNameFont;
+        private readonly Font _sponsorTierTwoNameFont;
+        private readonly Font _sponsorTierOneNameFont;
         public int RoundId;
 
         public RoundEndSummaryWindow(string gm, string roundEnd, TimeSpan roundTimeSpan, int roundId,
@@ -35,6 +44,12 @@ namespace Content.Client.RoundEnd
             var resourceCache = IoCManager.Resolve<IResourceCache>();
             _mvpTitleFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 14);
             _mvpSubtitleFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 12);
+            _sponsorTierThreeFont = resourceCache.GetFont("/Fonts/Bedstead/bedstead.otf", 22);
+            _sponsorTierTwoFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 18);
+            _sponsorTierOneFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 16);
+            _sponsorTierThreeNameFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 14);
+            _sponsorTierTwoNameFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 13);
+            _sponsorTierOneNameFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 12);
 
             MinSize = new Vector2(400, 580);
             SetSize = new Vector2(400, 580);
@@ -90,16 +105,21 @@ namespace Content.Client.RoundEnd
                                                    ("seconds", roundDuration.Seconds)));
             roundEndSummaryContainer.AddChild(roundTimeLabel);
 
+            var sponsorCredits = ExtractSponsorCredits(roundEnd, out var roundEndWithoutSponsors);
+
             //Round end text
-            if (!string.IsNullOrEmpty(roundEnd))
+            if (!string.IsNullOrEmpty(roundEndWithoutSponsors))
             {
                 var roundEndLabel = new RichTextLabel
                 {
                     HorizontalExpand = true,
                 };
-                roundEndLabel.SetMarkup(roundEnd);
+                roundEndLabel.SetMarkup(roundEndWithoutSponsors);
                 roundEndSummaryContainer.AddChild(roundEndLabel);
             }
+
+            if (sponsorCredits.Count > 0)
+                roundEndSummaryContainer.AddChild(BuildSponsorCreditsBlock(sponsorCredits));
 
             var roundStats = _ccmStatsSystem.LatestRoundEndStats;
             if (roundStats != null)
@@ -519,6 +539,178 @@ namespace Content.Client.RoundEnd
             panel.AddChild(root);
             return panel;
         }
+
+        private Control BuildSponsorCreditsBlock(List<SponsorCreditEntry> sponsors)
+        {
+            var panel = new PanelContainer
+            {
+                Margin = new Thickness(0, 12, 0, 0),
+                HorizontalExpand = true,
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = Color.FromHex("#091A11").WithAlpha(0.96f),
+                    BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.75f),
+                    BorderThickness = new Thickness(1),
+                    ContentMarginLeftOverride = 10,
+                    ContentMarginTopOverride = 10,
+                    ContentMarginRightOverride = 10,
+                    ContentMarginBottomOverride = 10,
+                },
+            };
+
+            var root = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                SeparationOverride = 8,
+                HorizontalExpand = true,
+            };
+
+            root.AddChild(new Label
+            {
+                Text = Loc.GetString("ccm-sponsorship-endgame-header"),
+                FontColorOverride = Color.FromHex("#DCE7F2"),
+                HorizontalAlignment = HAlignment.Center,
+                HorizontalExpand = true,
+            });
+
+            AddSponsorTierSection(root, sponsors, CCMSponsorshipTier.SponsorIII);
+            AddSponsorTierSection(root, sponsors, CCMSponsorshipTier.SponsorII);
+            AddSponsorTierSection(root, sponsors, CCMSponsorshipTier.SponsorI);
+
+            panel.AddChild(root);
+            return panel;
+        }
+
+        private void AddSponsorTierSection(BoxContainer root, List<SponsorCreditEntry> sponsors, CCMSponsorshipTier tier)
+        {
+            var tierEntries = sponsors.Where(entry => entry.Tier == tier).Select(entry => entry.Ckey).ToList();
+            if (tierEntries.Count == 0)
+                return;
+
+            var accent = GetSponsorTierColor(tier);
+            var tierTitle = new Label
+            {
+                Text = Loc.GetString(GetSponsorTierLocKey(tier)),
+                FontColorOverride = accent,
+                HorizontalAlignment = HAlignment.Center,
+                HorizontalExpand = true,
+                FontOverride = GetSponsorTierFont(tier),
+                Margin = new Thickness(0, tier == CCMSponsorshipTier.SponsorIII ? 6 : 4, 0, 0),
+            };
+
+            root.AddChild(tierTitle);
+
+            foreach (var ckey in tierEntries)
+            {
+                root.AddChild(new Label
+                {
+                    Text = ckey,
+                    FontColorOverride = accent.WithAlpha(0.96f),
+                    HorizontalAlignment = HAlignment.Center,
+                    HorizontalExpand = true,
+                    FontOverride = GetSponsorTierNameFont(tier),
+                });
+            }
+        }
+
+        private List<SponsorCreditEntry> ExtractSponsorCredits(string roundEnd, out string cleanedRoundEnd)
+        {
+            var result = new List<SponsorCreditEntry>();
+            cleanedRoundEnd = roundEnd;
+
+            if (string.IsNullOrWhiteSpace(roundEnd))
+                return result;
+
+            var sponsorHeader = Loc.GetString("ccm-sponsorship-endgame-header");
+            var tierOneTitle = Loc.GetString("ccm-sponsorship-tier-1-title");
+            var tierTwoTitle = Loc.GetString("ccm-sponsorship-tier-2-title");
+            var tierThreeTitle = Loc.GetString("ccm-sponsorship-tier-3-title");
+            var sponsorRegex = new Regex(@"\[color=[^\]]+\](?<ckey>[^\[]+)\[/color\]\s+\[color=[^\]]+\]\((?<tier>[^)]+)\)\[/color\]",
+                RegexOptions.Compiled);
+
+            var lines = roundEnd.Split('\n').ToList();
+            var cleanedLines = new List<string>();
+            var inSponsorBlock = false;
+
+            foreach (var rawLine in lines)
+            {
+                var line = rawLine.TrimEnd();
+
+                if (line.Contains(sponsorHeader))
+                {
+                    inSponsorBlock = true;
+                    continue;
+                }
+
+                if (inSponsorBlock)
+                {
+                    var match = sponsorRegex.Match(line);
+                    if (match.Success)
+                    {
+                        var ckey = match.Groups["ckey"].Value.Trim();
+                        var tierText = match.Groups["tier"].Value.Trim();
+                        var tier = tierText switch
+                        {
+                            var t when t == tierThreeTitle => CCMSponsorshipTier.SponsorIII,
+                            var t when t == tierTwoTitle => CCMSponsorshipTier.SponsorII,
+                            _ => CCMSponsorshipTier.SponsorI,
+                        };
+
+                        result.Add(new SponsorCreditEntry(ckey, tier));
+                        continue;
+                    }
+
+                    inSponsorBlock = false;
+                }
+
+                cleanedLines.Add(line);
+            }
+
+            cleanedRoundEnd = string.Join('\n', cleanedLines.Where(line => !string.IsNullOrWhiteSpace(line)));
+            return result;
+        }
+
+        private Font GetSponsorTierFont(CCMSponsorshipTier tier)
+        {
+            return tier switch
+            {
+                CCMSponsorshipTier.SponsorIII => _sponsorTierThreeFont,
+                CCMSponsorshipTier.SponsorII => _sponsorTierTwoFont,
+                _ => _sponsorTierOneFont,
+            };
+        }
+
+        private Font GetSponsorTierNameFont(CCMSponsorshipTier tier)
+        {
+            return tier switch
+            {
+                CCMSponsorshipTier.SponsorIII => _sponsorTierThreeNameFont,
+                CCMSponsorshipTier.SponsorII => _sponsorTierTwoNameFont,
+                _ => _sponsorTierOneNameFont,
+            };
+        }
+
+        private static string GetSponsorTierLocKey(CCMSponsorshipTier tier)
+        {
+            return tier switch
+            {
+                CCMSponsorshipTier.SponsorIII => "ccm-sponsorship-tier-3-title",
+                CCMSponsorshipTier.SponsorII => "ccm-sponsorship-tier-2-title",
+                _ => "ccm-sponsorship-tier-1-title",
+            };
+        }
+
+        private static Color GetSponsorTierColor(CCMSponsorshipTier tier)
+        {
+            return tier switch
+            {
+                CCMSponsorshipTier.SponsorIII => Color.FromHex("#F6C453"),
+                CCMSponsorshipTier.SponsorII => Color.FromHex("#D96CFF"),
+                _ => Color.FromHex("#61C9FF"),
+            };
+        }
+
+        private sealed record SponsorCreditEntry(string Ckey, CCMSponsorshipTier Tier);
 
         private static Control BuildCampaignScoreSide(string title, string score, Color accent)
         {

@@ -1,27 +1,30 @@
 <ui1:EscapeMenu xmlns="https://spacestation14.io"
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-            xmlns:changelog="clr-namespace:Content.Client.Changelog"
             xmlns:ui="clr-namespace:Content.Client.Voting.UI"
             xmlns:ui1="clr-namespace:Content.Client.Options.UI"
             x:Class="Content.Client.Options.UI.EscapeMenu"
-            Title="{Loc 'ui-escape-title'}"
-            Resizable="False">
+            Title=""
+            Resizable="False"
+            MinSize="300 500">
 
-    <!-- CCM rework lobby - start -->
     <PanelContainer StyleClasses="CCMEscapeMenuBackground" Margin="1">
-        <BoxContainer Orientation="Vertical" SeparationOverride="6" MinWidth="190" Margin="6">
-            <ui:VoteCallMenuButton StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
-            <Button Access="Public" Name="RulesButton" Text="{Loc 'ui-escape-rules'}" StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
-            <Button Access="Public" Name="GuidebookButton" Text="{Loc 'ui-escape-guidebook'}" StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
-            <Button Access="Public" Name="AchievementsButton" Text="{Loc 'ccm-achievements-header'}" StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
-            <Button Access="Public" Name="SponsorshipButton" Text="{Loc 'ccm-sponsorship-header'}" StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
-            <Button Access="Public" Name="WikiButton" Text="{Loc 'ui-escape-wiki'}" StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
-            <PanelContainer StyleClasses="LowDivider" Margin="0 2.5 0 2.5" />
-            <Button Access="Public" Name="OptionsButton" Text="{Loc 'ui-escape-options'}" StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
-            <PanelContainer StyleClasses="LowDivider" Margin="0 2.5 0 2.5" />
-            <Button Access="Public" Name="DisconnectButton" Text="{Loc 'ui-escape-disconnect'}" StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
-            <Button Access="Public" Name="QuitButton" Text="{Loc 'ui-escape-quit'}" StyleClasses="LobbyMenuButton LobbyThemeCrt" MinHeight="40" />
+        <BoxContainer Orientation="Vertical" SeparationOverride="8" MinWidth="260" Margin="10">
+            <BoxContainer Orientation="Vertical" SeparationOverride="8" HorizontalExpand="True">
+                <ui:VoteCallMenuButton Access="Public" Name="VoteCallButton" MinHeight="40" HorizontalExpand="True" />
+                <Button Access="Public" Name="RulesButton" Text="{Loc 'ui-escape-rules'}" MinHeight="40" HorizontalExpand="True" />
+                <Button Access="Public" Name="GuidebookButton" Text="{Loc 'ui-escape-guidebook'}" MinHeight="40" HorizontalExpand="True" />
+                <Button Access="Public" Name="AchievementsButton" Text="{Loc 'ccm-achievements-header'}" MinHeight="40" HorizontalExpand="True" />
+                <Button Access="Public" Name="SponsorshipButton" Text="{Loc 'ccm-sponsorship-header'}" MinHeight="40" HorizontalExpand="True" />
+                <Button Access="Public" Name="WikiButton" Text="{Loc 'ui-escape-wiki'}" MinHeight="40" HorizontalExpand="True" />
+            </BoxContainer>
+
+            <PanelContainer StyleClasses="LobbyMenuDivider LobbyThemeCrt" MinSize="0 2" Margin="0 2" />
+
+            <BoxContainer Orientation="Vertical" SeparationOverride="8" HorizontalExpand="True">
+                <Button Access="Public" Name="OptionsButton" Text="{Loc 'ui-escape-options'}" MinHeight="40" HorizontalExpand="True" />
+                <Button Access="Public" Name="DisconnectButton" Text="{Loc 'ui-escape-disconnect'}" MinHeight="40" HorizontalExpand="True" />
+                <Button Access="Public" Name="QuitButton" Text="{Loc 'ui-escape-quit'}" MinHeight="40" HorizontalExpand="True" />
+            </BoxContainer>
         </BoxContainer>
     </PanelContainer>
-    <!-- CCM rework lobby - end -->
 </ui1:EscapeMenu>

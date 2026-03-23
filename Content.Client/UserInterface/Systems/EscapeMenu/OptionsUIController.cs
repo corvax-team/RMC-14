@@ -16,7 +16,7 @@ public sealed class OptionsUIController : UIController
     [Dependency] private readonly IConsoleHost _con = default!;
     [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
     private const float OptionsBaseWidth = 950f;
-    private const float OptionsBaseHeight = 710f;
+    private const float OptionsBaseHeight = 760f;
     private Control? _optionsHost;
     private bool _optionsHostHooked;
 

@@ -220,7 +220,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.job_slot_scaling", true, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<float> RMCEmoteCooldownSeconds =
-        CVarDef.Create("rmc.emote_cooldown_seconds", 20f, CVar.SERVER | CVar.REPLICATED);
+        CVarDef.Create("rmc.emote_cooldown_seconds", 8f, CVar.SERVER | CVar.REPLICATED);
 
     public static readonly CVarDef<float> RMCPowerUpdateEverySeconds =
         CVarDef.Create("rmc.power_update_every_seconds", 1f, CVar.SERVER | CVar.SERVERONLY);

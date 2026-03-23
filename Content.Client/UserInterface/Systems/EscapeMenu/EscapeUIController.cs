@@ -1,3 +1,4 @@
+using System;
 using Content.Client.Gameplay;
 using Content.Client._CCM.Achievements;
 using Content.Client._CCM.Sponsorship;
@@ -150,9 +151,14 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
             _console.ExecuteCommand("quit");
         };
 
+        var wikiUrl = NormalizeAbsoluteHttpUri(_cfg.GetCVar(CCVars.InfoLinksWiki));
+
         _escapeWindow.WikiButton.OnPressed += _ =>
         {
-            _uri.OpenUri(_cfg.GetCVar(CCVars.InfoLinksWiki));
+            if (wikiUrl == null)
+                return;
+
+            _uri.OpenUri(wikiUrl);
         };
 
         _escapeWindow.GuidebookButton.OnPressed += _ =>
@@ -173,7 +179,8 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
         };
 
         _escapeWindow.WikiButton.Visible =
-            _cfg.GetCVar(CCVars.InfoLinksWiki) != "https://station14.ru/wiki/%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D0%BB:Colonial_Marines";
+            wikiUrl != null &&
+            wikiUrl != "https://station14.ru/wiki/%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D0%BB:Colonial_Marines";
     }
 
     private void DestroyEscapeWindow()
@@ -183,5 +190,28 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
 
         _escapeWindow.Dispose();
         _escapeWindow = null;
+    }
+
+    private static string? NormalizeAbsoluteHttpUri(string? raw)
+    {
+        if (string.IsNullOrWhiteSpace(raw))
+            return null;
+
+        raw = raw.Trim();
+
+        if (Uri.TryCreate(raw, UriKind.Absolute, out var absolute) &&
+            (absolute.Scheme == Uri.UriSchemeHttp || absolute.Scheme == Uri.UriSchemeHttps))
+        {
+            return absolute.ToString();
+        }
+
+        if (raw.Contains("://", StringComparison.Ordinal))
+            return null;
+
+        var prefixed = $"https://{raw.TrimStart('/')}";
+        return Uri.TryCreate(prefixed, UriKind.Absolute, out absolute) &&
+               (absolute.Scheme == Uri.UriSchemeHttp || absolute.Scheme == Uri.UriSchemeHttps)
+            ? absolute.ToString()
+            : null;
     }
 }

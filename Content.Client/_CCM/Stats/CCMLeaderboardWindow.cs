@@ -4,7 +4,9 @@ using System.Numerics;
 using Content.Client._CCM.UserInterface.Controls;
 using Content.Client.Resources;
 using Content.Client.Stylesheets;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._CCM.Stats;
+using Robust.Shared.Configuration;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
@@ -18,6 +20,7 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
 {
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
 
     private readonly CCMStatsSystem _statsSystem;
     private readonly CCMOptionButton _categoryButton;
@@ -74,11 +77,10 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
         _headerLabel = new Label
         {
             Text = Loc.GetString("ccm-leaderboard-header"),
-            FontColorOverride = StyleNano.LobbyMenuButtonBase,
+            FontColorOverride = GetWindowAccent(),
             FontOverride = _headerFont,
-            HorizontalAlignment = HAlignment.Center,
+            HorizontalAlignment = HAlignment.Left,
         };
-        root.AddChild(_headerLabel);
 
         var controls = new BoxContainer
         {
@@ -124,7 +126,7 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
 
         controls.AddChild(_categoryButton);
         controls.AddChild(_timeframeButton);
-        root.AddChild(controls);
+        root.AddChild(BuildHeroPanel(controls));
 
         root.AddChild(BuildColumnsHeader());
 
@@ -148,7 +150,7 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
         _viewerHeader = new Label
         {
             Text = Loc.GetString("ccm-leaderboard-your-position"),
-            FontColorOverride = StyleNano.LobbyMenuButtonBase,
+            FontColorOverride = GetWindowAccent(),
             FontOverride = _columnFont,
             Visible = false,
         };
@@ -241,15 +243,60 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
             _statsSystem.LeaderboardReceived -= OnLeaderboardReceived;
             OnKeyBindDown -= StartDrag;
             OnKeyBindUp -= StopDrag;
+            _config.UnsubValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged);
         };
 
         AttachInteractionState();
+        ApplyWindowTheme();
+        _config.OnValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged, false);
+    }
+
+    private void OnThemeChanged(string _)
+    {
         ApplyWindowTheme();
     }
 
     public void RefreshData()
     {
         RequestPage();
+    }
+
+    private Control BuildHeroPanel(Control controls)
+    {
+        var panel = new PanelContainer
+        {
+            PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Black.WithAlpha(0.24f),
+                BorderColor = GetWindowAccent().WithAlpha(0.40f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 14,
+                ContentMarginTopOverride = 14,
+                ContentMarginRightOverride = 14,
+                ContentMarginBottomOverride = 14,
+            },
+        };
+
+        var stack = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            SeparationOverride = 10,
+        };
+
+        stack.AddChild(new PanelContainer
+        {
+            MinSize = new Vector2(0, 4),
+            HorizontalExpand = true,
+            PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = GetWindowAccent().WithAlpha(0.92f),
+            },
+        });
+
+        stack.AddChild(_headerLabel);
+        stack.AddChild(controls);
+        panel.AddChild(stack);
+        return panel;
     }
 
     private void OnLeaderboardReceived(CCMLeaderboardPage data)
@@ -339,7 +386,7 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
 
     private PanelContainer BuildRow(string rank, string player, string score, bool highlight)
     {
-        var accent = highlight ? StyleNano.LobbyMenuButtonBase : Color.White;
+        var accent = highlight ? GetWindowAccent() : Color.White;
         var panel = new PanelContainer
         {
             PanelOverride = MakeRowPanel(false, highlight),
@@ -371,10 +418,10 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
                     ? StyleNano.ButtonColorContextHover.WithAlpha(0.55f)
                     : Color.Black.WithAlpha(0.24f),
             BorderColor = header
-                ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.75f)
+                ? GetWindowAccent().WithAlpha(0.75f)
                 : highlight
-                    ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.8f)
-                    : StyleNano.LobbyMenuButtonBase.WithAlpha(0.22f),
+                    ? GetWindowAccent().WithAlpha(0.8f)
+                    : GetWindowAccent().WithAlpha(0.22f),
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = 8,
             ContentMarginTopOverride = 6,
@@ -397,7 +444,7 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
                 _ => Label.AlignMode.Left,
             },
             FontOverride = _columnFont,
-            FontColorOverride = StyleNano.LobbyMenuButtonBase,
+            FontColorOverride = GetWindowAccent(),
             VerticalAlignment = VAlignment.Center,
             HorizontalExpand = true,
         };
@@ -424,7 +471,7 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
         };
     }
 
-    private static PanelContainer WrapColumn(Control child, bool expand)
+    private PanelContainer WrapColumn(Control child, bool expand)
     {
         var panel = new PanelContainer
         {
@@ -432,7 +479,7 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
             PanelOverride = new StyleBoxFlat
             {
                 BackgroundColor = Color.Transparent,
-                BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.18f),
+                BorderColor = GetWindowAccent().WithAlpha(0.18f),
                 BorderThickness = new Thickness(0, 0, 1, 0),
                 ContentMarginLeftOverride = 4,
                 ContentMarginTopOverride = 0,
@@ -451,7 +498,7 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
         button.StyleBoxOverride = new StyleBoxFlat
         {
             BackgroundColor = StyleNano.ButtonColorContext.WithAlpha(0.92f),
-            BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.55f),
+            BorderColor = GetWindowAccent().WithAlpha(0.55f),
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = 6,
             ContentMarginTopOverride = 4,
@@ -469,8 +516,8 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
                 ? Color.Black.WithAlpha(0.18f)
                 : StyleNano.ButtonColorContext.WithAlpha(0.92f),
             BorderColor = button.Disabled
-                ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.24f)
-                : StyleNano.LobbyMenuButtonBase.WithAlpha(0.55f),
+                ? GetWindowAccent().WithAlpha(0.24f)
+                : GetWindowAccent().WithAlpha(0.55f),
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = 6,
             ContentMarginTopOverride = 4,
@@ -535,11 +582,11 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
         button.StyleBoxOverride = new StyleBoxFlat
         {
             BackgroundColor = pressed
-                ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.92f)
+                ? GetWindowAccent().WithAlpha(0.92f)
                 : StyleNano.ButtonColorContextHover.WithAlpha(0.95f),
             BorderColor = pressed
-                ? StyleNano.LobbyMenuButtonBase
-                : StyleNano.LobbyMenuButtonBase.WithAlpha(0.75f),
+                ? GetWindowAccent()
+                : GetWindowAccent().WithAlpha(0.75f),
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = 6,
             ContentMarginTopOverride = 4,
@@ -547,7 +594,7 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
             ContentMarginBottomOverride = 4,
         };
         button.Label.FontOverride = _columnFont;
-        button.Label.FontColorOverride = pressed ? Color.Black : StyleNano.LobbyMenuButtonBase;
+        button.Label.FontColorOverride = pressed ? Color.Black : GetWindowAccent();
     }
 
     private void ApplyFilterState(OptionButton button, bool pressed)
@@ -555,11 +602,11 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
         button.StyleBoxOverride = new StyleBoxFlat
         {
             BackgroundColor = pressed
-                ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.92f)
+                ? GetWindowAccent().WithAlpha(0.92f)
                 : StyleNano.ButtonColorContextHover.WithAlpha(0.95f),
             BorderColor = pressed
-                ? StyleNano.LobbyMenuButtonBase
-                : StyleNano.LobbyMenuButtonBase.WithAlpha(0.75f),
+                ? GetWindowAccent()
+                : GetWindowAccent().WithAlpha(0.75f),
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = 6,
             ContentMarginTopOverride = 4,
@@ -573,7 +620,7 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
         var bodyColor = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
             ? Color.FromHex("#102A56").WithAlpha(0.94f)
             : Color.FromHex("#05180A").WithAlpha(0.94f);
-        var borderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.65f);
+        var borderColor = GetWindowAccent().WithAlpha(0.65f);
 
         HeaderPanel.PanelOverride = new StyleBoxFlat
         {
@@ -592,7 +639,7 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
         _pageEdit.StyleBoxOverride = new StyleBoxFlat
         {
             BackgroundColor = Color.Black.WithAlpha(0.28f),
-            BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.5f),
+            BorderColor = GetWindowAccent().WithAlpha(0.5f),
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = 10,
             ContentMarginTopOverride = 6,
@@ -601,8 +648,8 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
         };
 
         WindowTitleLabel.FontColorOverride = Color.White;
-        _headerLabel.FontColorOverride = StyleNano.LobbyMenuButtonBase;
-        _viewerHeader.FontColorOverride = StyleNano.LobbyMenuButtonBase;
+        _headerLabel.FontColorOverride = GetWindowAccent();
+        _viewerHeader.FontColorOverride = GetWindowAccent();
         foreach (var button in _navButtons)
         {
             StyleNavButton(button);
@@ -612,6 +659,14 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
         {
             StyleOptionButton(button);
         }
+    }
+
+    private Color GetWindowAccent()
+    {
+        var theme = _config.GetCVar(RMCCVars.RMCUIColorTheme);
+        return theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
+            ? StyleNano.LobbyMenuButtonBase
+            : StyleNano.LobbyMenuButtonBase;
     }
 
     private static string GetCategoryLocKey(CCMLeaderboardCategory category)

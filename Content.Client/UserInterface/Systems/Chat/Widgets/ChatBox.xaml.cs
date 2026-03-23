@@ -77,6 +77,11 @@ public partial class ChatBox : UIWidget
         var color = msg.MessageColorOverride ?? msg.Channel.TextColor();
 
         AddLine(msg.WrappedMessage, color, msg.SenderEntity, msg.Message, msg.Channel, msg.RepeatCheckSender);
+
+        if (_controller.TryGetTranslatedMessage(msg, out var translated))
+            AddTranslatedLine(translated);
+        else
+            _controller.QueueChatTranslation(msg);
     }
 
     private void OnHighlightsUpdated(string highlights)
@@ -140,6 +145,13 @@ public partial class ChatBox : UIWidget
         if (_entManager.SystemOrNull<CMChatSystem>()?.TryRepetition(this, Contents, formatted, sender, unwrapped, channel, repeatCheckSender) ?? false)
             return;
 
+        Contents.AddMessage(formatted);
+    }
+
+    private void AddTranslatedLine(string translated)
+    {
+        var formatted = new FormattedMessage(1);
+        formatted.AddMarkupOrThrow($"[color=#8FA1AF][italic]LT: {FormattedMessage.EscapeText(translated)}[/italic][/color]");
         Contents.AddMessage(formatted);
     }
 

@@ -16,6 +16,7 @@ using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Input.Binding;
+using Robust.Shared.Localization;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -507,14 +508,14 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             return;
 
         _mentorWindow.ClaimButton.Visible = _mentorWindow.SelectedPlayer != default;
-        _mentorWindow.ClaimButton.Text = "Claim";
+        _mentorWindow.ClaimButton.Text = Loc.GetString("rmc-mentor-window-claim");
 
         _claims.TryGetValue(destination, out var claims);
         if (claims != null &&
             _player.LocalSession != null &&
             claims.Contains(_player.LocalSession.Name))
         {
-            _mentorWindow.ClaimButton.Text = "Unclaim";
+            _mentorWindow.ClaimButton.Text = Loc.GetString("rmc-mentor-window-unclaim");
         }
 
         if (_mentorWindow.SelectedPlayer != destination)
@@ -526,7 +527,7 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
             return;
         }
 
-        _mentorWindow.ClaimIndicator.Text = $"Claimed by {string.Join(", ", claims)}";
+        _mentorWindow.ClaimIndicator.Text = Loc.GetString("rmc-mentor-window-claimed-by", ("claims", string.Join(", ", claims)));
     }
 }
 

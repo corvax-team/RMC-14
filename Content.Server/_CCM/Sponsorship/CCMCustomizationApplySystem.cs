@@ -31,6 +31,10 @@ public sealed class CCMCustomizationApplySystem : EntitySystem
         ["default"] = null,
         ["holo_green"] = Color.FromHex("#7CFF9A88"),
         ["holo_blue"] = Color.FromHex("#77E3FF88"),
+        ["holo_violet"] = Color.FromHex("#C695FF88"),
+        ["holo_amber"] = Color.FromHex("#FFC76A88"),
+        ["holo_crimson"] = Color.FromHex("#FF7C9C88"),
+        ["holo_teal"] = Color.FromHex("#6FF2E888"),
     };
 
     private static readonly Dictionary<string, string> XenoSkinPaths = new()

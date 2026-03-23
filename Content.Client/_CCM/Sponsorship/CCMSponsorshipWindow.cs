@@ -5,7 +5,9 @@ using System.Numerics;
 using Content.Client._CCM.UserInterface.Controls;
 using Content.Client.Resources;
 using Content.Client.Stylesheets;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._CCM.Sponsorship;
+using Robust.Shared.Configuration;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
@@ -19,11 +21,20 @@ namespace Content.Client._CCM.Sponsorship;
 public sealed class CCMSponsorshipWindow : DefaultCMWindow
 {
     [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
+    private static readonly Color SponsorshipBlueAccent = Color.FromHex("#62C7FF");
+    private static readonly Color SponsorshipGoldAccent = Color.FromHex("#FFC54D");
+    private static readonly Color SponsorshipPurpleAccent = Color.FromHex("#E16BFF");
 
     private readonly Label _statusLabel;
     private readonly Label _expirationLabel;
     private readonly Button _websiteButton;
     private readonly BoxContainer _tiersContainer;
+    private PanelContainer _heroPanel = default!;
+    private PanelContainer _heroAccentLine = default!;
+    private Label _heroTitleLabel = default!;
+    private PanelContainer _infoPanel = default!;
+    private Label _infoTitleLabel = default!;
     private string _donateUrl = string.Empty;
     private CCMSponsorshipTier _currentTier = CCMSponsorshipTier.None;
 
@@ -34,7 +45,7 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
         IoCManager.InjectDependencies(this);
 
         Title = string.Empty;
-        MinSize = new Vector2(1140, 730);
+        MinSize = new Vector2(1240, 930);
         WindowTitleLabel.Visible = false;
         HeaderPanel.MinSize = new Vector2(0, 26);
         HeaderPanel.Margin = new Thickness(10, 6, 10, 0);
@@ -50,14 +61,6 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
             HorizontalExpand = true,
             VerticalExpand = true,
         };
-
-        root.AddChild(new Label
-        {
-            Text = Loc.GetString("ccm-sponsorship-header"),
-            HorizontalAlignment = HAlignment.Center,
-            FontColorOverride = StyleNano.LobbyMenuButtonBase,
-            FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 24),
-        });
 
         var topSection = new BoxContainer
         {
@@ -119,26 +122,21 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
         topRow.AddChild(_websiteButton);
         topSection.AddChild(topRow);
         topSection.AddChild(_expirationLabel);
-        root.AddChild(topSection);
-
-        root.AddChild(new Label
-        {
-            Text = Loc.GetString("ccm-sponsorship-intro"),
-            FontColorOverride = Color.FromHex("#BAC7D4"),
-            FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 13),
-        });
+        _heroPanel = BuildHeroPanel(topSection);
+        root.AddChild(_heroPanel);
 
         var scroll = new ScrollContainer
         {
             HorizontalExpand = true,
             VerticalExpand = true,
             HScrollEnabled = false,
+            MinSize = new Vector2(0, 560),
         };
 
         _tiersContainer = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Horizontal,
-            SeparationOverride = 16,
+            SeparationOverride = 22,
             HorizontalAlignment = HAlignment.Center,
             HorizontalExpand = true,
             VerticalExpand = false,
@@ -146,11 +144,27 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
 
         scroll.AddChild(_tiersContainer);
         root.AddChild(scroll);
-        root.AddChild(BuildSponsorInfoBlock());
+        _infoPanel = BuildSponsorInfoBlock();
+        root.AddChild(_infoPanel);
         Contents.AddChild(root);
 
+        ApplyWindowTheme();
         BuildTierCards(CCMSponsorshipTier.None);
         StyleWebsiteButton();
+        _config.OnValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged, false);
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+
+        if (disposing)
+            _config.UnsubValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged);
+    }
+
+    private void OnThemeChanged(string _)
+    {
+        ApplyWindowTheme();
     }
 
     public void SetStatus(CCMSponsorshipStatusSnapshot snapshot)
@@ -180,6 +194,61 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
         }
     }
 
+    private PanelContainer BuildHeroPanel(Control topSection)
+    {
+        var hero = new PanelContainer
+        {
+            PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Black.WithAlpha(0.24f),
+                BorderColor = GetWindowAccent().WithAlpha(0.40f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 14,
+                ContentMarginTopOverride = 14,
+                ContentMarginRightOverride = 14,
+                ContentMarginBottomOverride = 14,
+            },
+        };
+
+        var stack = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            SeparationOverride = 12,
+        };
+
+        _heroAccentLine = new PanelContainer
+        {
+            MinSize = new Vector2(0, 5),
+            HorizontalExpand = true,
+            PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = GetWindowAccent().WithAlpha(0.90f),
+            },
+        };
+        stack.AddChild(_heroAccentLine);
+
+        _heroTitleLabel = new Label
+        {
+            Text = Loc.GetString("ccm-sponsorship-header"),
+            HorizontalAlignment = HAlignment.Left,
+            FontColorOverride = StyleNano.LobbyMenuButtonBase,
+            FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 24),
+            HorizontalExpand = true,
+        };
+        stack.AddChild(_heroTitleLabel);
+
+        stack.AddChild(topSection);
+        stack.AddChild(new Label
+        {
+            Text = Loc.GetString("ccm-sponsorship-intro"),
+            FontColorOverride = Color.FromHex("#BAC7D4"),
+            FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 13),
+        });
+
+        hero.AddChild(stack);
+        return hero;
+    }
+
     private Control BuildTierCard(CCMSponsorshipTier tier, bool current, bool featured)
     {
         var accent = GetTierAccent(tier);
@@ -196,12 +265,8 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
             MaxSize = new Vector2(cardWidth, cardHeight),
             PanelOverride = new StyleBoxFlat
             {
-                BackgroundColor = current
-                    ? baseBackground.WithAlpha(0.96f)
-                    : baseBackground.WithAlpha(0.86f),
-                BorderColor = current
-                    ? accent.WithAlpha(0.95f)
-                    : StyleNano.LobbyMenuButtonBase.WithAlpha(0.32f),
+                BackgroundColor = baseBackground.WithAlpha(1.00f),
+                BorderColor = accent.WithAlpha(current ? 0.98f : 0.94f),
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 12,
                 ContentMarginTopOverride = 12,
@@ -222,7 +287,7 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
             HorizontalExpand = true,
             PanelOverride = new StyleBoxFlat
             {
-                BackgroundColor = accent.WithAlpha(current ? 0.95f : 0.78f),
+                BackgroundColor = accent.WithAlpha(0.96f),
             },
         });
 
@@ -241,8 +306,8 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
                 HorizontalAlignment = HAlignment.Center,
                 PanelOverride = new StyleBoxFlat
                 {
-                    BackgroundColor = accent.WithAlpha(0.16f),
-                    BorderColor = accent.WithAlpha(0.45f),
+                    BackgroundColor = accent.WithAlpha(0.22f),
+                    BorderColor = accent.WithAlpha(0.62f),
                     BorderThickness = new Thickness(1),
                     ContentMarginLeftOverride = 7,
                     ContentMarginTopOverride = 2,
@@ -267,8 +332,8 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
             HorizontalExpand = true,
             PanelOverride = new StyleBoxFlat
             {
-                BackgroundColor = imageBackground,
-                BorderColor = accent.WithAlpha(0.42f),
+                BackgroundColor = imageBackground.WithAlpha(1.00f),
+                BorderColor = accent.WithAlpha(0.62f),
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 4,
                 ContentMarginTopOverride = 4,
@@ -302,10 +367,10 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
     {
         return tier switch
         {
-            CCMSponsorshipTier.SponsorIII => Color.FromHex("#F6C453"),
-            CCMSponsorshipTier.SponsorII => Color.FromHex("#D96CFF"),
-            CCMSponsorshipTier.SponsorI => Color.FromHex("#61C9FF"),
-            _ => Color.FromHex("#8FA0AE"),
+            CCMSponsorshipTier.SponsorIII => SponsorshipGoldAccent,
+            CCMSponsorshipTier.SponsorII => SponsorshipPurpleAccent,
+            CCMSponsorshipTier.SponsorI => SponsorshipBlueAccent,
+            _ => SponsorshipBlueAccent,
         };
     }
 
@@ -313,9 +378,10 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
     {
         return tier switch
         {
-            CCMSponsorshipTier.SponsorIII => Color.FromHex("#241E0E"),
-            CCMSponsorshipTier.SponsorII => Color.FromHex("#241129"),
-            _ => Color.FromHex("#0C1D27"),
+            CCMSponsorshipTier.SponsorIII => Color.FromHex("#3A311A"),
+            CCMSponsorshipTier.SponsorII => Color.FromHex("#39244A"),
+            CCMSponsorshipTier.SponsorI => Color.FromHex("#233E60"),
+            _ => Color.FromHex("#233E60"),
         };
     }
 
@@ -323,9 +389,10 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
     {
         return tier switch
         {
-            CCMSponsorshipTier.SponsorIII => Color.FromHex("#8B6F24").WithAlpha(0.88f),
-            CCMSponsorshipTier.SponsorII => Color.FromHex("#6C3B7D").WithAlpha(0.88f),
-            _ => Color.FromHex("#356F8C").WithAlpha(0.88f),
+            CCMSponsorshipTier.SponsorIII => Color.FromHex("#5C4B1D"),
+            CCMSponsorshipTier.SponsorII => Color.FromHex("#6A3B8A"),
+            CCMSponsorshipTier.SponsorI => Color.FromHex("#447CB1"),
+            _ => Color.FromHex("#447CB1"),
         };
     }
 
@@ -363,7 +430,7 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
                 "ccm-sponsorship-perk-role-weight-3",
                 "ccm-sponsorship-perk-endgame-credits",
                 "ccm-sponsorship-perk-customization",
-                "ccm-sponsorship-perk-queue"
+                "ccm-sponsorship-perk-thanks"
             ],
             CCMSponsorshipTier.SponsorII =>
             [
@@ -371,28 +438,28 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
                 "ccm-sponsorship-perk-role-weight-2",
                 "ccm-sponsorship-perk-endgame-credits",
                 "ccm-sponsorship-perk-customization",
-                "ccm-sponsorship-perk-queue"
+                "ccm-sponsorship-perk-thanks"
             ],
             _ =>
             [
                 "ccm-sponsorship-perk-chat-color",
                 "ccm-sponsorship-perk-endgame-credits",
-                "ccm-sponsorship-perk-customization",
+                "ccm-sponsorship-perk-thanks",
                 "ccm-sponsorship-perk-queue"
             ],
         };
     }
 
-    private Control BuildSponsorInfoBlock()
+    private PanelContainer BuildSponsorInfoBlock()
     {
         var panel = new PanelContainer
         {
-            MinSize = new Vector2(0, 86),
+            MinSize = new Vector2(0, 90),
             HorizontalExpand = true,
             PanelOverride = new StyleBoxFlat
             {
                 BackgroundColor = Color.Black.WithAlpha(0.20f),
-                BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.34f),
+                BorderColor = GetWindowAccent().WithAlpha(0.34f),
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 12,
                 ContentMarginTopOverride = 10,
@@ -407,12 +474,13 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
             SeparationOverride = 6,
         };
 
-        stack.AddChild(new Label
+        _infoTitleLabel = new Label
         {
             Text = Loc.GetString("ccm-sponsorship-info-title"),
-            FontColorOverride = StyleNano.LobbyMenuButtonBase,
+            FontColorOverride = GetWindowAccent(),
             FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 13),
-        });
+        };
+        stack.AddChild(_infoTitleLabel);
 
         var notes = new RichTextLabel
         {
@@ -439,7 +507,7 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
                 ? Color.Black.WithAlpha(0.18f)
                 : MakeButtonBackground(accent, 0.20f, 0.96f),
             BorderColor = _websiteButton.Disabled
-                ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.24f)
+                ? GetWindowAccent().WithAlpha(0.24f)
                 : accent.WithAlpha(0.86f),
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = 12,
@@ -478,7 +546,7 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
     private Color GetWebsiteAccent()
     {
         return _currentTier == CCMSponsorshipTier.None
-            ? StyleNano.LobbyMenuButtonBase
+            ? GetWindowAccent()
             : GetTierAccent(_currentTier);
     }
 
@@ -487,16 +555,34 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
         return new Color(accent.R * scale, accent.G * scale, accent.B * scale, alpha);
     }
 
+    private static Color BlendTowards(Color source, Color target, float factor)
+    {
+        factor = Math.Clamp(factor, 0f, 1f);
+        return new Color(
+            source.R + (target.R - source.R) * factor,
+            source.G + (target.G - source.G) * factor,
+            source.B + (target.B - source.B) * factor,
+            source.A + (target.A - source.A) * factor);
+    }
+
     private void ApplyWindowTheme()
     {
-        var bodyColor = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-            ? Color.FromHex("#102A56").WithAlpha(0.94f)
-            : Color.FromHex("#05180A").WithAlpha(0.94f);
-        var borderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.65f);
+        var theme = _config.GetCVar(RMCCVars.RMCUIColorTheme);
+        var isBlueTheme = theme.Equals("blue", StringComparison.OrdinalIgnoreCase);
+        var windowAccent = GetWindowAccent();
+        var headerColor = isBlueTheme
+            ? Color.FromHex("#06142F").WithAlpha(0.995f)
+            : Color.FromHex("#041105").WithAlpha(0.995f);
+        var bodyColor = isBlueTheme
+            ? Color.FromHex("#081B3F").WithAlpha(0.995f)
+            : Color.FromHex("#061507").WithAlpha(0.995f);
+        var borderColor = isBlueTheme
+            ? Color.FromHex("#2F78FF").WithAlpha(0.88f)
+            : StyleNano.LobbyMenuButtonBase.WithAlpha(0.82f);
 
         HeaderPanel.PanelOverride = new StyleBoxFlat
         {
-            BackgroundColor = bodyColor,
+            BackgroundColor = headerColor,
             BorderColor = borderColor,
             BorderThickness = new Thickness(1, 1, 1, 0),
         };
@@ -507,5 +593,55 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
             BorderColor = borderColor,
             BorderThickness = new Thickness(1, 0, 1, 1),
         };
+
+        if (_heroPanel != null)
+        {
+            _heroPanel.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Black.WithAlpha(0.24f),
+                BorderColor = windowAccent.WithAlpha(0.46f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 14,
+                ContentMarginTopOverride = 14,
+                ContentMarginRightOverride = 14,
+                ContentMarginBottomOverride = 14,
+            };
+        }
+
+        if (_heroAccentLine != null)
+        {
+            _heroAccentLine.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = windowAccent.WithAlpha(0.96f),
+            };
+        }
+
+        if (_heroTitleLabel != null)
+            _heroTitleLabel.FontColorOverride = StyleNano.LobbyMenuButtonBase;
+
+        if (_infoPanel != null)
+        {
+            _infoPanel.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.Black.WithAlpha(0.20f),
+                BorderColor = windowAccent.WithAlpha(0.40f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 12,
+                ContentMarginTopOverride = 10,
+                ContentMarginRightOverride = 12,
+                ContentMarginBottomOverride = 10,
+            };
+        }
+
+        if (_infoTitleLabel != null)
+            _infoTitleLabel.FontColorOverride = windowAccent;
+    }
+
+    private Color GetWindowAccent()
+    {
+        var theme = _config.GetCVar(RMCCVars.RMCUIColorTheme);
+        return theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
+            ? StyleNano.LobbyMenuButtonBase
+            : StyleNano.LobbyMenuButtonBase;
     }
 }

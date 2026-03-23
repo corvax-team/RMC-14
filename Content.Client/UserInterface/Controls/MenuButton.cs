@@ -1,5 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Client.Resources;
+using Content.Client.Stylesheets;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.UserInterface.Controls;
@@ -15,15 +17,12 @@ public sealed class MenuButton : ContainerButton
     public const string StyleClassLabelTopButton = "topButtonLabel";
     public const string StyleClassRedTopButton = "topButtonLabel";
 
-    private static readonly Color ColorNormal = Color.FromHex("#7b7e9e");
-    private static readonly Color ColorRedNormal = Color.FromHex("#FEFEFE");
-    private static readonly Color ColorHovered = Color.FromHex("#9699bb");
-    private static readonly Color ColorRedHovered = Color.FromHex("#FFFFFF");
-    private static readonly Color ColorPressed = Color.FromHex("#789B8C");
+    private static readonly Color ColorNormal = Color.Black;
+    private static readonly Color ColorRedNormal = Color.Black;
+    private static readonly Color ColorPressed = Color.Black;
 
-    private const float VertPad = 8f;
+    private const float VertPad = 4f;
     private Color NormalColor => HasStyleClass(StyleClassRedTopButton) ? ColorRedNormal : ColorNormal;
-    private Color HoveredColor => HasStyleClass(StyleClassRedTopButton) ? ColorRedHovered : ColorHovered;
 
     private BoundKeyFunction _function;
     private readonly BoxContainer _root;
@@ -107,27 +106,46 @@ public sealed class MenuButton : ContainerButton
     {
         // colors of children depend on style, so ensure we update when style is changed
         base.StylePropertiesChanged();
-        UpdateChildColors();
+        UpdateVisualState();
     }
 
-    private void UpdateChildColors()
+    private void UpdateVisualState()
     {
         if (_buttonIcon == null || _buttonLabel == null) return;
+
+        ModulateSelfOverride = Color.White;
+
+        if (Disabled)
+        {
+            StyleBoxOverride = BuildStyleBox(StyleNano.LobbyMenuButtonDisabledCrt, StyleNano.LobbyMenuButtonDisabledCrt);
+            _buttonIcon.ModulateSelfOverride = Color.Black.WithAlpha(0.55f);
+            _buttonLabel.ModulateSelfOverride = Color.Black.WithAlpha(0.55f);
+            return;
+        }
+
+        var accent = StyleNano.LobbyMenuButtonBase;
+        var pressedAccent = StyleNano.LobbyMenuButtonPressed;
+        var normalIconColor = TintIcon(accent, 0.28f);
+        var pressedIconColor = TintIcon(pressedAccent, 0.34f);
+
         switch (DrawMode)
         {
             case DrawModeEnum.Normal:
-                _buttonIcon.ModulateSelfOverride = NormalColor;
+                StyleBoxOverride = BuildStyleBox(accent, accent);
+                _buttonIcon.ModulateSelfOverride = normalIconColor;
                 _buttonLabel.ModulateSelfOverride = NormalColor;
                 break;
 
             case DrawModeEnum.Pressed:
-                _buttonIcon.ModulateSelfOverride = ColorPressed;
+                StyleBoxOverride = BuildStyleBox(pressedAccent, pressedAccent);
+                _buttonIcon.ModulateSelfOverride = pressedIconColor;
                 _buttonLabel.ModulateSelfOverride = ColorPressed;
                 break;
 
             case DrawModeEnum.Hover:
-                _buttonIcon.ModulateSelfOverride = HoveredColor;
-                _buttonLabel.ModulateSelfOverride = HoveredColor;
+                StyleBoxOverride = BuildStyleBox(Color.Transparent, accent);
+                _buttonIcon.ModulateSelfOverride = accent;
+                _buttonLabel.ModulateSelfOverride = accent;
                 break;
 
             case DrawModeEnum.Disabled:
@@ -135,10 +153,28 @@ public sealed class MenuButton : ContainerButton
         }
     }
 
+    private static Color TintIcon(Color accent, float strength)
+    {
+        return new Color(accent.R * strength, accent.G * strength, accent.B * strength, 1f);
+    }
+
+    private static StyleBoxFlat BuildStyleBox(Color background, Color border)
+    {
+        return new StyleBoxFlat
+        {
+            BackgroundColor = background,
+            BorderColor = border,
+            BorderThickness = new Thickness(1),
+            ContentMarginLeftOverride = 2,
+            ContentMarginTopOverride = 1,
+            ContentMarginRightOverride = 2,
+            ContentMarginBottomOverride = 1,
+        };
+    }
 
     protected override void DrawModeChanged()
     {
         base.DrawModeChanged();
-        UpdateChildColors();
+        UpdateVisualState();
     }
 }

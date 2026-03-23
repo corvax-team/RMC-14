@@ -225,7 +225,7 @@ namespace Content.Client.Verbs.UI
             }
 
             var localVerbs = CurrentVerbs.ToList();
-            var merged = new SortedSet<Verb>();
+            var merged = new SortedSet<Verb>(localVerbs.Where(v => v.ClientExclusive));
 
             _verbDisplayText.Clear();
             _verbDisplayMessage.Clear();

@@ -15,11 +15,23 @@ public sealed class CCMCustomizationUIController : UIController
     private CCMCustomizationSystem? _customizationSystem;
     private bool _subscribed;
 
+    public void ToggleWindow()
+    {
+        EnsureWindow();
+        if (_window == null)
+            return;
+
+        if (_window.IsOpen)
+            _window.CloseAnimated();
+        else
+            OpenWindow();
+    }
+
     public void OpenWindow()
     {
         EnsureSystems();
         EnsureWindow();
-        _window?.OpenCentered();
+        _window?.OpenCenteredAnimated();
         _sponsorshipSystem?.RequestStatus();
         _customizationSystem?.RequestCustomization();
     }

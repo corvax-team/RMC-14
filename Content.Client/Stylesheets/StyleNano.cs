@@ -98,6 +98,7 @@ namespace Content.Client.Stylesheets
         public const string StyleClassLobbyTaskbarMenuIcon = "LobbyTaskbarMenuIcon";
         public const string StyleClassLobbyTaskbarLabelSmall = "TaskbarLabelSmall";
         public const string StyleClassLobbyMenuButton = "LobbyMenuButton";
+        public const string StyleClassEscapeMenuButton = "EscapeMenuButton";
         public const string StyleClassLobbyReadyButton = "LobbyReadyButton";
         public const string StyleClassLobbyMenuDivider = "LobbyMenuDivider";
         public const string StyleClassLobbyMenuIconButton = "LobbyMenuIconButton";
@@ -145,33 +146,33 @@ namespace Content.Client.Stylesheets
         public static Color DangerousRedFore = Color.FromHex("#48FF6A");
         public static Color DisabledFore = Color.FromHex("#284b32");
 
-        public static Color ButtonColorDefault = Color.FromHex("#127E2B");
-        public static Color ButtonColorDefaultRed = Color.FromHex("#127E2B");
-        public static Color ButtonColorHovered = Color.FromHex("#24903A");
-        public static Color ButtonColorHoveredRed = Color.FromHex("#24903A");
-        public static Color ButtonColorPressed = Color.FromHex("#1A5E27");
-        public static Color ButtonColorDisabled = Color.FromHex("#1C682F"); // CCM 10 > 15: lobby rework
+        public static Color ButtonColorDefault = Color.FromHex("#1BE628");
+        public static Color ButtonColorDefaultRed = Color.FromHex("#1BE628");
+        public static Color ButtonColorHovered = Color.FromHex("#35F341");
+        public static Color ButtonColorHoveredRed = Color.FromHex("#35F341");
+        public static Color ButtonColorPressed = Color.FromHex("#12B91D");
+        public static Color ButtonColorDisabled = Color.FromHex("#10911A"); // CCM 10 > 15: lobby rework
 
-        public static Color ButtonColorCautionDefault = Color.FromHex("#1F7A31");
-        public static Color ButtonColorCautionHovered = Color.FromHex("#24903A");
-        public static Color ButtonColorCautionPressed = Color.FromHex("#1A5E27");
-        public static Color ButtonColorCautionDisabled = Color.FromHex("#1f5e2e");
+        public static Color ButtonColorCautionDefault = Color.FromHex("#1BE628");
+        public static Color ButtonColorCautionHovered = Color.FromHex("#35F341");
+        public static Color ButtonColorCautionPressed = Color.FromHex("#12B91D");
+        public static Color ButtonColorCautionDisabled = Color.FromHex("#10911A");
 
-        public static Color ButtonColorGoodDefault = Color.FromHex("#1F7A31");
-        public static Color ButtonColorGoodHovered = Color.FromHex("#24903A");
-        public static Color ButtonColorGoodDisabled = Color.FromHex("#164722");
+        public static Color ButtonColorGoodDefault = Color.FromHex("#1BE628");
+        public static Color ButtonColorGoodHovered = Color.FromHex("#35F341");
+        public static Color ButtonColorGoodDisabled = Color.FromHex("#10911A");
 
-        public static Color LobbyCrtAccent = Color.FromHex("#2EF241");
-        public static Color LobbyCrtText = Color.FromHex("#0AE14A");
+        public static Color LobbyCrtAccent = Color.FromHex("#1BE628");
+        public static Color LobbyCrtText = Color.FromHex("#1BE628");
         public static Color LobbyCrtMutedText = Color.FromHex("#A0C7B1");
         public static Color LobbyCleanAccent = Color.FromHex("#2F6B46");
         public static Color LobbyCleanText = Color.FromHex("#D5FFE0");
         public static Color LobbyCleanMutedText = Color.FromHex("#9BC9A8");
-        public static Color LobbyCrtGlow = Color.FromHex("#3AFF7899");
-        public static Color LobbyMenuButtonBase = Color.FromHex("#26F239");
-        public static Color LobbyMenuButtonPressed = Color.FromHex("#00BD1A");
-        public static Color LobbyMenuButtonReadyPressed = Color.FromHex("#00BD1A");
-        public static Color LobbyMenuButtonDisabledCrt = Color.FromHex("#00611F");
+        public static Color LobbyCrtGlow = Color.FromHex("#1BE628AA");
+        public static Color LobbyMenuButtonBase = Color.FromHex("#1BE628");
+        public static Color LobbyMenuButtonPressed = Color.FromHex("#12B91D");
+        public static Color LobbyMenuButtonReadyPressed = Color.FromHex("#12B91D");
+        public static Color LobbyMenuButtonDisabledCrt = Color.FromHex("#10911A");
         public static Color LobbyMenuButtonDisabledClean = Color.FromHex("#009430");
 
         //NavMap
@@ -180,16 +181,16 @@ namespace Content.Client.Stylesheets
         public static Color PointMagenta = Color.FromHex("#00EB4C");
 
         // Context menu button colors
-        public static Color ButtonColorContext = Color.FromHex("#0B2E15");
-        public static Color ButtonColorContextHover = Color.FromHex("#0F381B");
-        public static Color ButtonColorContextPressed = Color.FromHex("#082310");
-        public static Color ButtonColorContextDisabled = Color.FromHex("#082310");
+        public static Color ButtonColorContext = Color.FromHex("#155124");
+        public static Color ButtonColorContextHover = Color.FromHex("#1D6630");
+        public static Color ButtonColorContextPressed = Color.FromHex("#103E1C");
+        public static Color ButtonColorContextDisabled = Color.FromHex("#103E1C");
 
         // Examine button colors
-        public static Color ExamineButtonColorContext = Color.FromHex("#0B2E15");
-        public static Color ExamineButtonColorContextHover = Color.FromHex("#0F381B");
-        public static Color ExamineButtonColorContextPressed = Color.FromHex("#082310");
-        public static Color ExamineButtonColorContextDisabled = Color.FromHex("#082310");
+        public static Color ExamineButtonColorContext = Color.FromHex("#155124");
+        public static Color ExamineButtonColorContextHover = Color.FromHex("#1D6630");
+        public static Color ExamineButtonColorContextPressed = Color.FromHex("#103E1C");
+        public static Color ExamineButtonColorContextDisabled = Color.FromHex("#103E1C");
 
         // Fancy Tree elements
         public static Color FancyTreeEvenRowColor = Color.FromHex("#0E1A11");
@@ -231,60 +232,60 @@ namespace Content.Client.Stylesheets
             CurrentTheme = theme;
             if (theme == UiColorTheme.Blue)
             {
-                PanelDark = Color.FromHex("#072F6A");
-                NanoGold = Color.FromHex("#6CB4FF");
-                GoodGreenFore = Color.FromHex("#3A8CFF");
-                ConcerningOrangeFore = Color.FromHex("#78B6FF");
-                DangerousRedFore = Color.FromHex("#489CFF");
-                DisabledFore = Color.FromHex("#1E3348");
+                PanelDark = Color.FromHex("#031633");
+                NanoGold = Color.FromHex("#4E84DC");
+                GoodGreenFore = Color.FromHex("#3469C7");
+                ConcerningOrangeFore = Color.FromHex("#5A86D4");
+                DangerousRedFore = Color.FromHex("#4278CC");
+                DisabledFore = Color.FromHex("#263F5A");
 
-                ButtonColorDefault = Color.FromHex("#18408A");
-                ButtonColorDefaultRed = Color.FromHex("#18408A");
-                ButtonColorHovered = Color.FromHex("#2A5FA0");
-                ButtonColorHoveredRed = Color.FromHex("#2A5FA0");
-                ButtonColorPressed = Color.FromHex("#1B4063");
-                ButtonColorDisabled = Color.FromHex("#123044");
+                ButtonColorDefault = Color.FromHex("#1D54D9");
+                ButtonColorDefaultRed = Color.FromHex("#1D54D9");
+                ButtonColorHovered = Color.FromHex("#2B65F0");
+                ButtonColorHoveredRed = Color.FromHex("#2B65F0");
+                ButtonColorPressed = Color.FromHex("#143FA8");
+                ButtonColorDisabled = Color.FromHex("#10327F");
 
-                ButtonColorCautionDefault = Color.FromHex("#1F4D7A");
-                ButtonColorCautionHovered = Color.FromHex("#2A5FA0");
-                ButtonColorCautionPressed = Color.FromHex("#1B4063");
-                ButtonColorCautionDisabled = Color.FromHex("#123044");
+                ButtonColorCautionDefault = Color.FromHex("#1D54D9");
+                ButtonColorCautionHovered = Color.FromHex("#2B65F0");
+                ButtonColorCautionPressed = Color.FromHex("#143FA8");
+                ButtonColorCautionDisabled = Color.FromHex("#10327F");
 
-                ButtonColorGoodDefault = Color.FromHex("#1F4D7A");
-                ButtonColorGoodHovered = Color.FromHex("#2A5FA0");
-                ButtonColorGoodDisabled = Color.FromHex("#123044");
+                ButtonColorGoodDefault = Color.FromHex("#1D54D9");
+                ButtonColorGoodHovered = Color.FromHex("#2B65F0");
+                ButtonColorGoodDisabled = Color.FromHex("#10327F");
 
-                LobbyCrtAccent = Color.FromHex("#2E6BFF");
-                LobbyCrtText = Color.FromHex("#0A70E1");
-                LobbyCrtMutedText = Color.FromHex("#A0B7C7");
-                LobbyCleanAccent = Color.FromHex("#2F4E6B");
+                LobbyCrtAccent = Color.FromHex("#1D54D9");
+                LobbyCrtText = Color.FromHex("#1D54D9");
+                LobbyCrtMutedText = Color.FromHex("#A8B9D3");
+                LobbyCleanAccent = Color.FromHex("#29466E");
                 LobbyCleanText = Color.FromHex("#D5E8FF");
-                LobbyCleanMutedText = Color.FromHex("#9BB3C9");
-                LobbyCrtGlow = Color.FromHex("#3A7DFF99");
-                LobbyMenuButtonBase = Color.FromHex("#0872F0");
-                LobbyMenuButtonPressed = Color.FromHex("#074CC4");
-                LobbyMenuButtonReadyPressed = Color.FromHex("#074CC4");
-                LobbyMenuButtonDisabledCrt = Color.FromHex("#053A8F");
-                LobbyMenuButtonDisabledClean = Color.FromHex("#053A8F");
+                LobbyCleanMutedText = Color.FromHex("#90A7C5");
+                LobbyCrtGlow = Color.FromHex("#1D54D999");
+                LobbyMenuButtonBase = Color.FromHex("#1D54D9");
+                LobbyMenuButtonPressed = Color.FromHex("#143FA8");
+                LobbyMenuButtonReadyPressed = Color.FromHex("#143FA8");
+                LobbyMenuButtonDisabledCrt = Color.FromHex("#10327F");
+                LobbyMenuButtonDisabledClean = Color.FromHex("#14365F");
 
-                PointRed = Color.FromHex("#2F4B6A");
-                PointGreen = Color.FromHex("#2F7ED6");
-                PointMagenta = Color.FromHex("#00B0EB");
+                PointRed = Color.FromHex("#254164");
+                PointGreen = Color.FromHex("#235AAD");
+                PointMagenta = Color.FromHex("#2968C4");
 
-                ButtonColorContext = Color.FromHex("#08243A");
-                ButtonColorContextHover = Color.FromHex("#0B2C47");
-                ButtonColorContextPressed = Color.FromHex("#061B2F");
-                ButtonColorContextDisabled = Color.FromHex("#061B2F");
+                ButtonColorContext = Color.FromHex("#091B38");
+                ButtonColorContextHover = Color.FromHex("#102A52");
+                ButtonColorContextPressed = Color.FromHex("#081A35");
+                ButtonColorContextDisabled = Color.FromHex("#081A35");
 
-                ExamineButtonColorContext = Color.FromHex("#08243A");
-                ExamineButtonColorContextHover = Color.FromHex("#0B2C47");
-                ExamineButtonColorContextPressed = Color.FromHex("#061B2F");
-                ExamineButtonColorContextDisabled = Color.FromHex("#061B2F");
+                ExamineButtonColorContext = Color.FromHex("#091B38");
+                ExamineButtonColorContextHover = Color.FromHex("#102A52");
+                ExamineButtonColorContextPressed = Color.FromHex("#081A35");
+                ExamineButtonColorContextDisabled = Color.FromHex("#081A35");
 
-                FancyTreeEvenRowColor = Color.FromHex("#0E141A");
-                FancyTreeSelectedRowColor = Color.FromHex("#132033");
-                ItemStatusNotHeldColor = Color.FromHex("#2D3A4A");
-                ChatBackgroundColor = Color.FromHex("#0A0F14");
+                FancyTreeEvenRowColor = Color.FromHex("#0D131C");
+                FancyTreeSelectedRowColor = Color.FromHex("#122240");
+                ItemStatusNotHeldColor = Color.FromHex("#2A3950");
+                ChatBackgroundColor = Color.FromHex("#070C16");
             }
             else
             {
@@ -295,48 +296,48 @@ namespace Content.Client.Stylesheets
                 DangerousRedFore = Color.FromHex("#48FF6A");
                 DisabledFore = Color.FromHex("#23402B");
 
-                ButtonColorDefault = Color.FromHex("#127E2B");
-                ButtonColorDefaultRed = Color.FromHex("#127E2B");
-                ButtonColorHovered = Color.FromHex("#24903A");
-                ButtonColorHoveredRed = Color.FromHex("#24903A");
-                ButtonColorPressed = Color.FromHex("#1A5E27");
-                ButtonColorDisabled = Color.FromHex("#123A1C");
+                ButtonColorDefault = Color.FromHex("#1BE628");
+                ButtonColorDefaultRed = Color.FromHex("#1BE628");
+                ButtonColorHovered = Color.FromHex("#35F341");
+                ButtonColorHoveredRed = Color.FromHex("#35F341");
+                ButtonColorPressed = Color.FromHex("#12B91D");
+                ButtonColorDisabled = Color.FromHex("#10911A");
 
-                ButtonColorCautionDefault = Color.FromHex("#1F7A31");
-                ButtonColorCautionHovered = Color.FromHex("#24903A");
-                ButtonColorCautionPressed = Color.FromHex("#1A5E27");
-                ButtonColorCautionDisabled = Color.FromHex("#123A1C");
+                ButtonColorCautionDefault = Color.FromHex("#1BE628");
+                ButtonColorCautionHovered = Color.FromHex("#35F341");
+                ButtonColorCautionPressed = Color.FromHex("#12B91D");
+                ButtonColorCautionDisabled = Color.FromHex("#10911A");
 
-                ButtonColorGoodDefault = Color.FromHex("#1F7A31");
-                ButtonColorGoodHovered = Color.FromHex("#24903A");
-                ButtonColorGoodDisabled = Color.FromHex("#123A1C");
+                ButtonColorGoodDefault = Color.FromHex("#1BE628");
+                ButtonColorGoodHovered = Color.FromHex("#35F341");
+                ButtonColorGoodDisabled = Color.FromHex("#10911A");
 
-                LobbyCrtAccent = Color.FromHex("#2EF241");
-                LobbyCrtText = Color.FromHex("#0AE14A");
+                LobbyCrtAccent = Color.FromHex("#1BE628");
+                LobbyCrtText = Color.FromHex("#1BE628");
                 LobbyCrtMutedText = Color.FromHex("#A0C7B1");
                 LobbyCleanAccent = Color.FromHex("#2F6B46");
                 LobbyCleanText = Color.FromHex("#D5FFE0");
                 LobbyCleanMutedText = Color.FromHex("#9BC9A8");
-                LobbyCrtGlow = Color.FromHex("#3AFF7899");
-                LobbyMenuButtonBase = Color.FromHex("#26F239");
-                LobbyMenuButtonPressed = Color.FromHex("#00BD1A");
-                LobbyMenuButtonReadyPressed = Color.FromHex("#00BD1A");
-                LobbyMenuButtonDisabledCrt = Color.FromHex("#00611F");
+                LobbyCrtGlow = Color.FromHex("#1BE628AA");
+                LobbyMenuButtonBase = Color.FromHex("#1BE628");
+                LobbyMenuButtonPressed = Color.FromHex("#12B91D");
+                LobbyMenuButtonReadyPressed = Color.FromHex("#12B91D");
+                LobbyMenuButtonDisabledCrt = Color.FromHex("#10911A");
                 LobbyMenuButtonDisabledClean = Color.FromHex("#009430");
 
                 PointRed = Color.FromHex("#2F6A3B");
                 PointGreen = Color.FromHex("#38b026");
                 PointMagenta = Color.FromHex("#00EB4C");
 
-                ButtonColorContext = Color.FromHex("#0B2E15");
-                ButtonColorContextHover = Color.FromHex("#0F381B");
-                ButtonColorContextPressed = Color.FromHex("#082310");
-                ButtonColorContextDisabled = Color.FromHex("#082310");
+                ButtonColorContext = Color.FromHex("#155124");
+                ButtonColorContextHover = Color.FromHex("#1D6630");
+                ButtonColorContextPressed = Color.FromHex("#103E1C");
+                ButtonColorContextDisabled = Color.FromHex("#103E1C");
 
-                ExamineButtonColorContext = Color.FromHex("#0B2E15");
-                ExamineButtonColorContextHover = Color.FromHex("#0F381B");
-                ExamineButtonColorContextPressed = Color.FromHex("#082310");
-                ExamineButtonColorContextDisabled = Color.FromHex("#082310");
+                ExamineButtonColorContext = Color.FromHex("#155124");
+                ExamineButtonColorContextHover = Color.FromHex("#1D6630");
+                ExamineButtonColorContextPressed = Color.FromHex("#103E1C");
+                ExamineButtonColorContextDisabled = Color.FromHex("#103E1C");
 
                 FancyTreeEvenRowColor = Color.FromHex("#0E1A11");
                 FancyTreeSelectedRowColor = Color.FromHex("#13261A");
@@ -385,14 +386,14 @@ namespace Content.Client.Stylesheets
             {
                 BackgroundColor = (CurrentTheme == UiColorTheme.Blue
                     ? Color.FromHex("#1A3678")
-                    : Color.FromHex("#0E2A16")).WithAlpha(CurrentTheme == UiColorTheme.Blue ? 1f : 0.4f),
+                    : Color.FromHex("#0E2A16")).WithAlpha(0.08f),
                 ContentMarginBottomOverride = 0
             };
             var windowHeaderAlert = new StyleBoxFlat
             {
                 BackgroundColor = (CurrentTheme == UiColorTheme.Blue
                     ? Color.FromHex("#1A3678")
-                    : Color.FromHex("#0E2A16")).WithAlpha(CurrentTheme == UiColorTheme.Blue ? 1f : 0.4f),
+                    : Color.FromHex("#0E2A16")).WithAlpha(0.08f),
                 ContentMarginBottomOverride = 0
             };
             var uiWindowBackgroundTint = CurrentTheme == UiColorTheme.Blue
@@ -537,21 +538,60 @@ namespace Content.Client.Stylesheets
                 Texture = buttonTex,
             };
 
-            var chatChannelButtonTex = resCache.GetTexture("/Textures/Interface/Nano/rounded_button.svg.96dpi.png");
-            var chatChannelButton = new StyleBoxTexture
+            var chatChannelButton = new StyleBoxFlat
             {
-                Texture = chatChannelButtonTex,
+                BackgroundColor = ButtonColorDefault,
+                BorderColor = ButtonColorPressed,
+                BorderThickness = new Thickness(1),
             };
-            chatChannelButton.SetPatchMargin(StyleBox.Margin.All, 5);
-            chatChannelButton.SetPadding(StyleBox.Margin.All, 1);
+            chatChannelButton.ContentMarginLeftOverride = 6;
+            chatChannelButton.ContentMarginRightOverride = 6;
+            chatChannelButton.ContentMarginTopOverride = 2;
+            chatChannelButton.ContentMarginBottomOverride = 2;
 
-            var chatFilterButtonTex = resCache.GetTexture("/Textures/Interface/Nano/rounded_button_bordered.svg.96dpi.png");
-            var chatFilterButton = new StyleBoxTexture
+            var chatChannelButtonHover = new StyleBoxFlat
             {
-                Texture = chatFilterButtonTex,
+                BackgroundColor = ButtonColorHovered,
+                BorderColor = ButtonColorPressed,
+                BorderThickness = new Thickness(1),
             };
-            chatFilterButton.SetPatchMargin(StyleBox.Margin.All, 5);
-            chatFilterButton.SetPadding(StyleBox.Margin.All, 2);
+            chatChannelButtonHover.ContentMarginLeftOverride = 6;
+            chatChannelButtonHover.ContentMarginRightOverride = 6;
+            chatChannelButtonHover.ContentMarginTopOverride = 2;
+            chatChannelButtonHover.ContentMarginBottomOverride = 2;
+
+            var chatChannelButtonPressed = new StyleBoxFlat
+            {
+                BackgroundColor = ButtonColorPressed,
+                BorderColor = ButtonColorPressed,
+                BorderThickness = new Thickness(1),
+            };
+            chatChannelButtonPressed.ContentMarginLeftOverride = 6;
+            chatChannelButtonPressed.ContentMarginRightOverride = 6;
+            chatChannelButtonPressed.ContentMarginTopOverride = 2;
+            chatChannelButtonPressed.ContentMarginBottomOverride = 2;
+
+            var chatChannelButtonDisabled = new StyleBoxFlat
+            {
+                BackgroundColor = ButtonColorDisabled,
+                BorderColor = ButtonColorPressed,
+                BorderThickness = new Thickness(1),
+            };
+            chatChannelButtonDisabled.ContentMarginLeftOverride = 6;
+            chatChannelButtonDisabled.ContentMarginRightOverride = 6;
+            chatChannelButtonDisabled.ContentMarginTopOverride = 2;
+            chatChannelButtonDisabled.ContentMarginBottomOverride = 2;
+
+            var chatFilterButton = new StyleBoxFlat
+            {
+                BackgroundColor = Color.White,
+                BorderColor = Color.White,
+                BorderThickness = new Thickness(1),
+            };
+            chatFilterButton.ContentMarginLeftOverride = 3;
+            chatFilterButton.ContentMarginRightOverride = 3;
+            chatFilterButton.ContentMarginTopOverride = 3;
+            chatFilterButton.ContentMarginBottomOverride = 3;
 
             var outputPanelScrollDownButtonTex = resCache.GetTexture("/Textures/Interface/Nano/rounded_button_half_bordered.svg.96dpi.png");
             var outputPanelScrollDownButton = new StyleBoxTexture
@@ -1081,20 +1121,21 @@ namespace Content.Client.Stylesheets
             var optionsSliderBack = new StyleBoxFlat
             {
                 BackgroundColor = optionsSliderBackColor,
-                BorderThickness = new Thickness(2),
+                BorderThickness = new Thickness(1),
                 BorderColor = optionsSliderBorderColor,
             };
 
             var optionsSliderFore = new StyleBoxFlat
             {
                 BackgroundColor = Color.Transparent,
-                BorderThickness = new Thickness(2),
+                BorderThickness = new Thickness(1),
                 BorderColor = optionsSliderBorderColor,
             };
 
             var optionsSliderFill = new StyleBoxFlat
             {
                 BackgroundColor = optionsSliderFillColor,
+                BorderThickness = new Thickness(0),
             };
 
             var optionsSliderGrab = new StyleBoxFlat
@@ -1905,6 +1946,208 @@ namespace Content.Client.Stylesheets
                     new[]
                     {
                         new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#000000"))
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassEscapeMenuButton, StyleClassLobbyThemeCrt}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(0)),
+                        new StyleProperty(Label.StylePropertyFont, bedstead15),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.Black)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassEscapeMenuButton, StyleClassLobbyThemeClean}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(0)),
+                        new StyleProperty(Label.StylePropertyFont, bedstead15),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.Black)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassEscapeMenuButton, StyleClassLobbyThemeCrt}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, LobbyCrtAccent)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassEscapeMenuButton, StyleClassLobbyThemeClean}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, LobbyCrtAccent)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassEscapeMenuButton, StyleClassLobbyThemeCrt}, null, new[] {ContainerButton.StylePseudoClassPressed}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.Black)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassEscapeMenuButton, StyleClassLobbyThemeClean}, null, new[] {ContainerButton.StylePseudoClassPressed}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.Black)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassEscapeMenuButton, StyleClassLobbyThemeCrt}, null, new[] {ContainerButton.StylePseudoClassDisabled}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.Black)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyMenuButton, StyleClassEscapeMenuButton, StyleClassLobbyThemeClean}, null, new[] {ContainerButton.StylePseudoClassDisabled}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.Black)
+                    }),
+
+                Element<Button>().Class(StyleClassEscapeMenuButton).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCrt),
+
+                Element<Button>().Class(StyleClassEscapeMenuButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCrtHover),
+
+                Element<Button>().Class(StyleClassEscapeMenuButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCrtPressed),
+
+                Element<Button>().Class(StyleClassEscapeMenuButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCrtDisabled),
+
+                Element<Button>().Class(StyleClassEscapeMenuButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassNormal)
+                    .Prop(Button.StylePropertyModulateSelf, Color.White),
+
+                Element<Button>().Class(StyleClassEscapeMenuButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyModulateSelf, Color.White),
+
+                Element<Button>().Class(StyleClassEscapeMenuButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyModulateSelf, Color.White),
+
+                Element<Button>().Class(StyleClassEscapeMenuButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(Button.StylePropertyModulateSelf, Color.White),
+
+                Element<Button>().Class(StyleClassEscapeMenuButton).Class(StyleClassLobbyThemeClean)
+                    .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonClean),
+
+                Element<Button>().Class(StyleClassEscapeMenuButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCleanHover),
+
+                Element<Button>().Class(StyleClassEscapeMenuButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCleanPressed),
+
+                Element<Button>().Class(StyleClassEscapeMenuButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCleanDisabled),
+
+                Element<Button>().Class(StyleClassEscapeMenuButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassNormal)
+                    .Prop(Button.StylePropertyModulateSelf, Color.White),
+
+                Element<Button>().Class(StyleClassEscapeMenuButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyModulateSelf, Color.White),
+
+                Element<Button>().Class(StyleClassEscapeMenuButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyModulateSelf, Color.White),
+
+                Element<Button>().Class(StyleClassEscapeMenuButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(Button.StylePropertyModulateSelf, Color.White),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassEscapeMenuButton, StyleClassLobbyThemeCrt}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(0)),
+                        new StyleProperty(Label.StylePropertyFont, bedstead15),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.Black)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassEscapeMenuButton, StyleClassLobbyThemeClean}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(0)),
+                        new StyleProperty(Label.StylePropertyFont, bedstead15),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.Black)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassEscapeMenuButton, StyleClassLobbyThemeCrt}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, LobbyCrtAccent)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassEscapeMenuButton, StyleClassLobbyThemeClean}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, LobbyCrtAccent)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassEscapeMenuButton, StyleClassLobbyThemeCrt}, null, new[] {ContainerButton.StylePseudoClassPressed}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.Black)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassEscapeMenuButton, StyleClassLobbyThemeClean}, null, new[] {ContainerButton.StylePseudoClassPressed}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.Black)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassEscapeMenuButton, StyleClassLobbyThemeCrt}, null, new[] {ContainerButton.StylePseudoClassDisabled}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.Black)
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassEscapeMenuButton, StyleClassLobbyThemeClean}, null, new[] {ContainerButton.StylePseudoClassDisabled}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.Black)
                     }),
 
                 Element<ContainerButton>().Class(StyleClassLobbyMenuIconButton).Class(StyleClassLobbyThemeCrt)

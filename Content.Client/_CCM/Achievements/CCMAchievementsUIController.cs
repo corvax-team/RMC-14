@@ -70,7 +70,7 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
             return;
 
         if (_window.IsOpen)
-            _window.Close();
+            _window.CloseAnimated();
         else
             OpenWindow();
     }
@@ -82,7 +82,7 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
         if (_window == null || _system == null)
             return;
 
-        _window.OpenCentered();
+        _window.OpenCenteredAnimated();
         if (_system.LatestSnapshot != null)
             _window.SetSnapshot(_system.LatestSnapshot);
 

@@ -90,10 +90,10 @@ namespace Content.Client.Lobby.UI
             UpdatesButton.OnPressed += _ => UserInterfaceManager.GetUIController<RoadmapUIController>().ToggleRoadmap();
 
             TaskbarMenuButton.OnPressed += _ => ToggleLeftMenu(!_leftMenuVisible);
-            TaskbarRatingButton.OnPressed += _ => OpenLeaderboard();
-            TaskbarAchievementsButton.OnPressed += _ => UserInterfaceManager.GetUIController<CCMAchievementsUIController>().OpenWindow();
-            TaskbarDonateButton.OnPressed += _ => UserInterfaceManager.GetUIController<CCMSponsorshipUIController>().OpenWindow();
-            TaskbarCustomizationButton.OnPressed += _ => UserInterfaceManager.GetUIController<CCMCustomizationUIController>().OpenWindow();
+            TaskbarRatingButton.OnPressed += _ => ToggleLeaderboard();
+            TaskbarAchievementsButton.OnPressed += _ => UserInterfaceManager.GetUIController<CCMAchievementsUIController>().ToggleWindow();
+            TaskbarDonateButton.OnPressed += _ => UserInterfaceManager.GetUIController<CCMSponsorshipUIController>().ToggleWindow();
+            TaskbarCustomizationButton.OnPressed += _ => UserInterfaceManager.GetUIController<CCMCustomizationUIController>().ToggleWindow();
 
             TutorialButton.OnPressed += _ => OpenTutorial();
             StatsButton.OnPressed += _ => OpenStats();
@@ -658,7 +658,18 @@ namespace Content.Client.Lobby.UI
             }
 
             _statsWindow.RefreshData();
-            _statsWindow.OpenCentered();
+            _statsWindow.OpenCenteredAnimated();
+        }
+
+        private void ToggleStats()
+        {
+            if (_statsWindow != null && !_statsWindow.Disposed && _statsWindow.IsOpen)
+            {
+                _statsWindow.CloseAnimated();
+                return;
+            }
+
+            OpenStats();
         }
 
         private void OpenLeaderboard()
@@ -670,7 +681,18 @@ namespace Content.Client.Lobby.UI
             }
 
             _leaderboardWindow.RefreshData();
-            _leaderboardWindow.OpenCentered();
+            _leaderboardWindow.OpenCenteredAnimated();
+        }
+
+        private void ToggleLeaderboard()
+        {
+            if (_leaderboardWindow != null && !_leaderboardWindow.Disposed && _leaderboardWindow.IsOpen)
+            {
+                _leaderboardWindow.CloseAnimated();
+                return;
+            }
+
+            OpenLeaderboard();
         }
 
         private void OpenCharacterSetup()
