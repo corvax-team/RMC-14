@@ -66,6 +66,8 @@
         amount: 4
       - id: RMCLightReplacer
         amount: 4
+      - id: ToolboxDroneMarine
+        amount: 5
 
 # Circuits
 - type: entity

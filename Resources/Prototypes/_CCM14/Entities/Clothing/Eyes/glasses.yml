@@ -1,0 +1,11 @@
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesFpv
+  name: fpv goggles
+  description: Green-tinted goggles using a proprietary polymer that provides protection from eye damage of all types.
+  components:
+  - type: Sprite
+    sprite: _CM/Clothing/Eyes/Drone/goggles.rsi
+  - type: Clothing
+    sprite: _CM/Clothing/Eyes/Drone/goggles.rsi
+  - type: FpvDroneGoggles

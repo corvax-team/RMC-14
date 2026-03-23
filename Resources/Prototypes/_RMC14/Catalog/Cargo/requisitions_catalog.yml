@@ -190,6 +190,12 @@
         crate: RMCCrateHighCapacityPowerCell
     - name: Explosives
       entries:
+      - name: Ящик дронов(2x дронов)
+        cost: 17000
+        crate: CrateEngineeringSecure
+        entities:
+        - ToolboxDroneMarine
+        - ToolboxDroneMarine
       - cost: 3000
         crate: RMCCrateGrenadesHighExplosive
       - cost: 4000

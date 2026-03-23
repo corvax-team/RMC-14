@@ -1,0 +1,20 @@
+shader FPVDrone
+{
+    uniform float time;          // для анимации шума
+    uniform vec3 colorTint = vec3(0.0, 1.0, 0.0); // зелёный по умолчанию
+
+    vec4 fragment(vec2 uv, vec4 texColor)
+    {
+        // монохром
+        float gray = dot(texColor.rgb, vec3(0.299, 0.587, 0.114));
+
+        // простой шум
+        float noise = fract(sin(dot(uv.xy , vec2(12.9898,78.233)) + time) * 43758.5453) * 0.2;
+        gray += noise;
+
+        // применяем цвет FPV
+        vec3 finalColor = gray * colorTint;
+
+        return vec4(finalColor, texColor.a);
+    }
+}

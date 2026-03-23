@@ -1,0 +1,5 @@
+- type: entity
+  parent: AdminObserver
+  id: RaptorObserver
+  name: raptor observer
+  noSpawn: true

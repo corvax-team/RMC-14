@@ -1,12 +1,10 @@
 - type: entity
-  parent: [BaseMob, ClothingOuterArmorUnpoweredFlashlight]
+  parent: BaseMob
   id: FpvDroneObserver
   name: Fpv drone
   noSpawn: true
   components:
   - type: InteractionOutline
-  - type: TagInteraction
-    whitelistTag: InteractionCAS
   - type: Sprite
     sprite: Mobs/Silicon/fpv.rsi
     state: marker
@@ -38,7 +36,8 @@
   - type: Alerts
   - type: ShowJobIcons
   - type: Xeno
-    actions:
+    role: FpvDrone
+    actionIds:
       - ActionFpvDroneExplosive
   - type: FpvDroneExplosive
     damage:

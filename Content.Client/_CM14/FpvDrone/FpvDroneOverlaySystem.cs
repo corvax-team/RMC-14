@@ -48,7 +48,7 @@ namespace Content.Client.FpvDrone
 
         public FpvDroneOverlay(IPrototypeManager protoMan)
         {
-            var shaderPrototype = protoMan.Index<ShaderPrototype>("FlashedEffect");
+            var shaderPrototype = protoMan.Index<ShaderPrototype>("FpvDroneShader");
             _shader = shaderPrototype?.Instance() ?? throw new InvalidOperationException("Shader not found");
         }
 
