@@ -1,2 +1,3 @@
-ent-RMCSpawnPointSurvivorShivasEngineer = точка спавна инженера Shivas
+ent-RMCSpawnPointSurvivorShivasEngineer = спавнер выжившего инженера
     .desc = { ent-CMSpawnPointJobBase.desc }
+    .suffix = Снежный шар Шивы

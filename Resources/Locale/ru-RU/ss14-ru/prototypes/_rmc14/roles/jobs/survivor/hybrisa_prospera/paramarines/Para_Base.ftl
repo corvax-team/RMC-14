@@ -1,2 +1,2 @@
-ent-RMCGearSurvivorPresetPara = пресет выжившего десантника
+ent-RMCGearSurvivorPresetPara = пресет парамарина
     .desc = { "" }

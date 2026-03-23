@@ -1,2 +1,3 @@
-ent-RMCSpawnPointSurvivorShivasCorporateLiaison = точка спавна представителя корпорации Shivas
+ent-RMCSpawnPointSurvivorShivasCorporateLiaison = спавнер выжившего представителя корпорации
     .desc = { ent-CMSpawnPointJobBase.desc }
+    .suffix = Снежный шар Шивы

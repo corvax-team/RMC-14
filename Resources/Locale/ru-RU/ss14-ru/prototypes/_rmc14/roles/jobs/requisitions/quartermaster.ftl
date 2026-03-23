@@ -1,4 +1,4 @@
-ent-CMSpawnPointQuartermaster = точка появления квартермейстер
+ent-CMSpawnPointQuartermaster = спавнер офицера материально-технического обеспечения
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGuidebookRoleQM = квартермейстер
-    .desc = Квартирмастер.
+ent-RMCGuidebookRoleQM = ОМТО
+    .desc = Офицер материально-технического обеспечения.

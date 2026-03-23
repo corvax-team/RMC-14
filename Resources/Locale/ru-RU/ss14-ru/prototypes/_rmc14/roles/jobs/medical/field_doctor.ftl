@@ -1,2 +1,2 @@
-ent-RMCSpawnPointFieldDoctor = точка спавна полевого врача
+ent-RMCSpawnPointFieldDoctor = спавнер полевого врача
     .desc = { ent-CMSpawnPointJobBase.desc }

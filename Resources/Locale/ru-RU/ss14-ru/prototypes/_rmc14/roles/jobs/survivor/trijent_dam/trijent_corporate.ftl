@@ -1,2 +1,3 @@
-ent-RMCSpawnPointSurvivorTrijentCorporate = точка появления представителя Trijent
+ent-RMCSpawnPointSurvivorTrijentCorporate = спавнер выжившего представителя корпорации
     .desc = { ent-CMSpawnPointJobBase.desc }
+    .suffix = Дамба Триджент

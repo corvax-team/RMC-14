@@ -1,4 +1,4 @@
-ent-CMSpawnPointSquadLeader = точка появления командир отряда
+ent-CMSpawnPointSquadLeader = спавнер командира отряда
     .desc = { ent-CMSpawnPointJobBase.desc }
 ent-CMSpawnPointSquadLeaderAlpha = { ent-CMSpawnPointSquadLeader }
     .suffix = Альфа

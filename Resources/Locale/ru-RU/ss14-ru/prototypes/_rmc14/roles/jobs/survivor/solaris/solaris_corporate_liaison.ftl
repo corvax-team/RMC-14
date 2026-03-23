@@ -1,2 +1,3 @@
-ent-RMCSpawnPointSurvivorSolarisCorporateLiaison = точка спавна представителя корпорации Solaris
+ent-RMCSpawnPointSurvivorSolarisCorporateLiaison = спавнер выжившего представителя корпорации
     .desc = { ent-CMSpawnPointJobBase.desc }
+    .suffix = Соларис Ридж

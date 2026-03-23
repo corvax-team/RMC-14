@@ -1,5 +1,5 @@
 ent-RMCAreaBigred = { ent-RMCAreaBase }
-    .suffix = Утратившая актуальность область Solaris
+    .suffix = Утратившая актуальность область Соларис Ридж
     .desc = { ent-RMCAreaBase.desc }
 ent-RMCAreaBigredGround = Поверхность
     .desc = { ent-RMCAreaBigred.desc }

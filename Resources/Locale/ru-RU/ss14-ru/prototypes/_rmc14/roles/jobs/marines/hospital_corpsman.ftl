@@ -1,4 +1,4 @@
-ent-CMSpawnPointHospitalCorpsman = точка спавна полевого санитара
+ent-CMSpawnPointHospitalCorpsman = спавнер полевого санитара
     .desc = { ent-CMSpawnPointJobBase.desc }
 ent-CMSpawnPointHospitalCorpsmanAlpha = { ent-CMSpawnPointHospitalCorpsman }
     .suffix = Альфа

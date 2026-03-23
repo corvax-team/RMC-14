@@ -1,2 +1,3 @@
-ent-RMCSpawnPointSurvivorShivasPanicRoomDoctor = точка спавна врача
+ent-RMCSpawnPointSurvivorShivasPanicRoomDoctor = спавнер выжившего врача
     .desc = { ent-RMCSpawnPointSurvivorShivasDoctor.desc }
+    .suffix = Снежный шар Шивы, Убежище

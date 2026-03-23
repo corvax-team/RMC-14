@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorKutjevoEngineer = точка спавна инженера Kutjevo
+ent-RMCSpawnPointSurvivorKutjevoEngineer = спавнер выжившего инженера
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetKutjevoEngineer = пресет инженера Kutjevo
+    .suffix = Кутьево
+ent-RMCGearSurvivorPresetKutjevoEngineer = пресет инженера Кутьево
     .desc = { ent-RMCSurvivorPresetEngineer.desc }

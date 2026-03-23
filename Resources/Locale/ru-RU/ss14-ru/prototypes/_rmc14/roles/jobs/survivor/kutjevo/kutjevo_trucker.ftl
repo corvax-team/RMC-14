@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorKutjevoTrucker = точка спавна водителя грузовика Kutjevo
+ent-RMCSpawnPointSurvivorKutjevoTrucker = спавнер выжившего дальнобойщика
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetKutjevoTrucker = пресет водителя грузовика Kutjevo
+    .suffix = Кутьево
+ent-RMCGearSurvivorPresetKutjevoTrucker = пресет дальнобойщика Кутьево
     .desc = { ent-RMCSurvivorPresetTrucker.desc }

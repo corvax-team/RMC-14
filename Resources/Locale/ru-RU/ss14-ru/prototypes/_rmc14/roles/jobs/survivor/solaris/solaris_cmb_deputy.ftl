@@ -1,2 +1,3 @@
-ent-RMCSpawnPointSurvivorSolarisCMBDeputy = точка спавна заместителя маршала CMB Solaris
+ent-RMCSpawnPointSurvivorSolarisCMBDeputy = спавнер помощника колониального маршала
     .desc = { ent-CMSpawnPointJobBase.desc }
+    .suffix = Соларис Ридж

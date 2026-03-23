@@ -1,2 +1,3 @@
-ent-RMCSpawnPointSurvivorSolarisEngineer = точка спавна инженера Solaris
+ent-RMCSpawnPointSurvivorSolarisEngineer = спавнер выжившего инженера
     .desc = { ent-CMSpawnPointJobBase.desc }
+    .suffix = Соларис Ридж

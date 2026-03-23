@@ -1,2 +1,2 @@
-ent-CMSpawnPointCrewman = точка спавна члена экипажа бронетехники
+ent-CMSpawnPointCrewman = спавнер экипажа бронетехники
     .desc = { ent-CMSpawnPointJobBase.desc }

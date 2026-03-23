@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorHybrisaGrindBarista = точка появления бариста Daily Grind (Hybrisa)
+ent-RMCSpawnPointSurvivorHybrisaGrindBarista = спавнер выжившего бариста Daily Grind
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetHybrisaGrindBarista = пресет колониста: бариста Daily Grind (Hybrisa)
+    .suffix = Гибриса
+ent-RMCGearSurvivorPresetHybrisaGrindBarista = пресет бариста Daily Grind Гибриса
     .desc = { ent-RMCSurvivorPresetCivilian.desc }

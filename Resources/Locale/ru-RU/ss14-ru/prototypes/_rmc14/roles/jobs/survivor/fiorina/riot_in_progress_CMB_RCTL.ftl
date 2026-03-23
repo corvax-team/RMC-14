@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer = точка спавна командира отряда подавления бунтов CMB
+ent-RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer = спавнер выжившего командира группы подавления бунтов CMB
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetRiotInProgressCMBRCTL = пресет командира отряда подавления бунтов CMB
+    .suffix = Фиорина
+ent-RMCSurvivorPresetRiotInProgressCMBRCTL = пресет командира группы подавления бунтов CMB
     .desc = { "" }

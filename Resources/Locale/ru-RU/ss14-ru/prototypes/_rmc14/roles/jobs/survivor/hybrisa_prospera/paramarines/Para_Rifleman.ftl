@@ -1,2 +1,2 @@
-ent-RMCSpawnPointParamarine = точка спавна стрелка-десантника
+ent-RMCSpawnPointParamarine = спавнер стрелка-парамарина
     .desc = { ent-CMSpawnPointJobBase.desc }

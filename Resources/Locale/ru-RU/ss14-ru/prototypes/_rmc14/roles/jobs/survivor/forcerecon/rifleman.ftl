@@ -1,2 +1,2 @@
-ent-CMSpawnPointForeconRifleman = Точка спавна Солдат СОиС
+ent-CMSpawnPointForeconRifleman = спавнер стрелка ФОРЕКОН
     .desc = { ent-CMSpawnPointJobBase.desc }

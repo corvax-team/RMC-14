@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorCECResearcher = точка появления исследователя корпуса исследования космоса
+ent-RMCSpawnPointSurvivorCECResearcher = спавнер выжившего исследователя Корпуса Исследования Космоса
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetCECResearcher = пресет исследователя корпуса исследования космоса
+    .suffix = Сорокина Страта
+ent-RMCGearSurvivorPresetCECResearcher = пресет выжившего исследователя Корпуса Исследования Космоса Сорокиной Страты
     .desc = { ent-RMCSurvivorPresetScientist.desc }

@@ -1,2 +1,3 @@
-ent-RMCSpawnPointSurvivorPanicRoomAssistantManager = точка спавна помощника менеджера
+ent-RMCSpawnPointSurvivorPanicRoomAssistantManager = спавнер выжившего помощника управляющего
     .desc = { ent-CMSpawnPointJobBase.desc }
+    .suffix = Снежный шар Шивы, Убежище

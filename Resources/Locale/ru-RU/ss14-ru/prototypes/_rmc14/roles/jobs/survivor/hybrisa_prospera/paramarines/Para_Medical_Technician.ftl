@@ -1,2 +1,2 @@
-ent-RMCSpawnPointParaMedicalTechnician = точка спавна медика-десантника
+ent-RMCSpawnPointParaMedicalTechnician = спавнер боевого медика парамаринов
     .desc = { ent-CMSpawnPointJobBase.desc }

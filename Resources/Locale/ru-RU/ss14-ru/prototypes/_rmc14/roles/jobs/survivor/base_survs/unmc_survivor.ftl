@@ -1,2 +1,3 @@
-ent-RMCSpawnPointSurvivorUNMC = точка спавна выжившего ККМП
+ent-RMCSpawnPointSurvivorUNMC = спавнер выжившего ККМП
     .desc = { ent-CMSpawnPointJobBase.desc }
+    .suffix = Базовый

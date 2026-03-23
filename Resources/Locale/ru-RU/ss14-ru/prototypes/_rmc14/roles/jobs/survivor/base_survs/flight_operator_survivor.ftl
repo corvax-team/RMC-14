@@ -1,6 +1,7 @@
-ent-RMCSpawnPointSurvivorFlightOperator = точка спавна диспетчера полётов
+ent-RMCSpawnPointSurvivorFlightOperator = спавнер выжившего оператора полетов
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCRandomHumanoidSurvivorFlightOperator = диспетчер полётов роль призрака
+    .suffix = Базовый
+ent-RMCRandomHumanoidSurvivorFlightOperator = роль призрака оператора полетов
     .desc = { ent-MarkerBase.desc }
-ent-RMCGearSurvivorPresetFlightOperator = пресет диспетчера полётов
+ent-RMCGearSurvivorPresetFlightOperator = пресет оператора полетов
     .desc = { ent-RMCSurvivorPresetCivilianRareItem.desc }

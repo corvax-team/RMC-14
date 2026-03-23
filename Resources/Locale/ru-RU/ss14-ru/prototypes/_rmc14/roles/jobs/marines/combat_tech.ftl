@@ -1,4 +1,4 @@
-ent-CMSpawnPointCombatTech = точка спавна боевого техника
+ent-CMSpawnPointCombatTech = спавнер боевого техника
     .desc = { ent-CMSpawnPointJobBase.desc }
 ent-CMSpawnPointCombatTechAlpha = { ent-CMSpawnPointCombatTech }
     .suffix = Альфа

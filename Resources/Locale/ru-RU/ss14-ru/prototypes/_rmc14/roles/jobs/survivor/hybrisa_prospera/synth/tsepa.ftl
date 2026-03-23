@@ -1,2 +1,2 @@
-ent-RMCSurvivorPresetHybrisaSynthTSEPA = пресет выжившего синтетика TSEPA
+ent-RMCSurvivorPresetHybrisaSynthTSEPA = пресет синтетика ПСОПЗ Гибриса
     .desc = { "" }

@@ -1,2 +1,3 @@
-ent-RMCSpawnPointSurvivorShivasILRCPeacekeeper = точка спавна миротворца ILRC Shivas
+ent-RMCSpawnPointSurvivorShivasILRCPeacekeeper = спавнер выжившего миротворца ГИОР
     .desc = { ent-CMSpawnPointJobBase.desc }
+    .suffix = Снежный шар Шивы

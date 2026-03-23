@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorKutjevoDoctor = точка спавна врача Kutjevo
+ent-RMCSpawnPointSurvivorKutjevoDoctor = спавнер выжившего врача
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetKutjevoDoctor = пресет врача Kutjevo
+    .suffix = Кутьево
+ent-RMCGearSurvivorPresetKutjevoDoctor = пресет врача Кутьево
     .desc = { ent-RMCSurvivorPresetDoctor.desc }

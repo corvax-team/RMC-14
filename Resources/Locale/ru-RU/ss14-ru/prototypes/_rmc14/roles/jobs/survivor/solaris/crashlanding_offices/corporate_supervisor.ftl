@@ -1,2 +1,3 @@
-ent-RMCSpawnPointSurvivorSolarisCorporateSupervisor = точка спавна руководителя корпорации
+ent-RMCSpawnPointSurvivorSolarisCorporateSupervisor = спавнер выжившего корпоративного инспектора
     .desc = { ent-CMSpawnPointJobBase.desc }
+    .suffix = Соларис Ридж, Крушение

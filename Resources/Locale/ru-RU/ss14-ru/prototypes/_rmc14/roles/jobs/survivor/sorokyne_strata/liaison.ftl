@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorHalcyonDynamicsLiaison = точка появления представителя Halcyon Dynamics
+ent-RMCSpawnPointSurvivorHalcyonDynamicsLiaison = спавнер выжившего представителя Halcyon Dynamics
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetHalcyonDynamicsLiaison = пресет представителя Halcyon Dynamics
+    .suffix = Сорокина Страта
+ent-RMCGearSurvivorPresetHalcyonDynamicsLiaison = пресет выжившего представителя Halcyon Dynamics Сорокиной Страты
     .desc = { ent-RMCSurvivorPresetCivilian.desc }

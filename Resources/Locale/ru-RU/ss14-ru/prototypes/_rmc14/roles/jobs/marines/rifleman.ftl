@@ -1,4 +1,4 @@
-ent-CMSpawnPointRifleman = точка появления стрелок
+ent-CMSpawnPointRifleman = спавнер стрелка
     .desc = { ent-CMSpawnPointJobBase.desc }
 ent-CMSpawnPointRiflemanAlpha = { ent-CMSpawnPointRifleman }
     .suffix = Альфа

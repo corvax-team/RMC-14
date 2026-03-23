@@ -1,2 +1,3 @@
-ent-RMCSpawnPointSurvivorKutjevoGoon = точка спавна боевика Kutjevo
+ent-RMCSpawnPointSurvivorKutjevoGoon = спавнер выжившего громилы
     .desc = { ent-CMSpawnPointJobBase.desc }
+    .suffix = Кутьево

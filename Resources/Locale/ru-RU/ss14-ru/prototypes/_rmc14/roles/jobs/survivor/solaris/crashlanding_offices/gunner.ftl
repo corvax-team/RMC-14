@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorSolarisPMCGunner = точка спавна стрелка ЧВК
+ent-RMCSpawnPointSurvivorSolarisPMCGunner = спавнер выжившего стрелка ПСОПЗ
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetPMCGunner = пресет стрелка ЧВК
+    .suffix = Соларис Ридж, Крушение
+ent-RMCGearSurvivorPresetPMCGunner = стандартный пресет выжившего ПСОПЗ
     .desc = { ent-RMCSurvivorPresetNoGun.desc }

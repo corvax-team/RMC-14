@@ -1,2 +1,2 @@
-ent-RMCSpawnPointParaSupportSynthetic = точка спавна синтетика поддержки десантников
+ent-RMCSpawnPointParaSupportSynthetic = спавнер синтетика поддержки парамаринов
     .desc = { ent-CMSpawnPointJobBase.desc }

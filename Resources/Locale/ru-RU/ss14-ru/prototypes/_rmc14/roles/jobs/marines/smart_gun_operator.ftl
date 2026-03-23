@@ -1,4 +1,4 @@
-ent-CMSpawnPointSmartGunOperator = точка спавна оператора смартгана
+ent-CMSpawnPointSmartGunOperator = спавнер оператора смартгана
     .desc = { ent-CMSpawnPointJobBase.desc }
 ent-CMSpawnPointSmartGunOperatorAlpha = { ent-CMSpawnPointSmartGunOperator }
     .suffix = Альфа

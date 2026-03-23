@@ -1,2 +1,3 @@
-ent-RMCSpawnPointSurvivorFiorinaEngineer = точка спавна инженера Фиорины
+ent-RMCSpawnPointSurvivorFiorinaEngineer = спавнер выжившего инженера
     .desc = { ent-CMSpawnPointJobBase.desc }
+    .suffix = Фиорина

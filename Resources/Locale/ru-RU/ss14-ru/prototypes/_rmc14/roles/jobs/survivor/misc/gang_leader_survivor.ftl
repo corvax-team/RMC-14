@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorGangLeader = точка спавна лидера банды
+ent-RMCSpawnPointSurvivorGangLeader = спавнер выжившего лидера банды
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetGangLeader = пресет лидера банды
+    .suffix = Любые карты
+ent-RMCGearSurvivorPresetGangLeader = пресет выжившего лидера банды
     .desc = { ent-RMCSurvivorPresetCivilian.desc }

@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorKutjevoCMBDeputy = точка спавна заместителя маршала CMB kutjevo
+ent-RMCSpawnPointSurvivorKutjevoCMBDeputy = спавнер выжившего помощника маршала
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetKutjevoCMBDeputy = пресет боевика kutjevo
+    .suffix = Кутьево
+ent-RMCGearSurvivorPresetKutjevoCMBDeputy = пресет помощника маршала Кутьево
     .desc = { ent-RMCSurvivorPresetSecurity.desc }
