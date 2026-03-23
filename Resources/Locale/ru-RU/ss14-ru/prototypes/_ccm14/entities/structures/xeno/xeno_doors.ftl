@@ -1,4 +1,4 @@
-ent-DoorXenoWeedBoundResin = weed bound resin
-    .desc = A thick resin door, which is more durable.
-ent-DoorXenoThickWeedBoundResin = thick weed bound resin
-    .desc = A thick resin door, which is more durable.
+ent-DoorXenoWeedBoundResin = связанная сорняком смоляная дверь
+    .desc = Толстая смоляная дверь повышенной прочности.
+ent-DoorXenoThickWeedBoundResin = толстая связанная сорняком смоляная дверь
+    .desc = Толстая смоляная дверь повышенной прочности.

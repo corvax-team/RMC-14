@@ -1,10 +1,10 @@
 ent-RMCBarricadeUpgradeBase = { "" }
     .desc = { "" }
-ent-RMCExplosiveUpgrade = composite upgrade (++Explosive, ++Projectile, ++Fire)
+ent-RMCExplosiveUpgrade = композитное усиление (++Взрывы, ++Снаряды, ++Огонь)
     .desc = { ent-RMCBarricadeUpgradeBase.desc }
-ent-RMCBiohazardUpgrade = biohazard upgrade (+Burn)
+ent-RMCBiohazardUpgrade = биологическое усиление (+Ожоги)
     .desc = { ent-RMCBarricadeUpgradeBase.desc }
-ent-RMCBruteUpgrade = reinforced upgrade (+Brute)
+ent-RMCBruteUpgrade = армированное усиление (+Ушибы)
     .desc = { ent-RMCBarricadeUpgradeBase.desc }
 ent-RMCExplosiveUpgradePlasteel = { ent-RMCExplosiveUpgrade }
     .desc = { ent-RMCExplosiveUpgrade.desc }

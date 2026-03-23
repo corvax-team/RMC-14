@@ -1,4 +1,4 @@
-ent-CCMWallXenoWeedBoundResin = weed bound resin
-    .desc = Weird slime solidified into a wall.
-ent-CCMWallXenoThickWeedBoundResin = thick weed bound resin
-    .desc = Weird slime solidified into a wall.
+ent-CCMWallXenoWeedBoundResin = связанная сорняком смола
+    .desc = Странная слизь, затвердевшая в стену.
+ent-CCMWallXenoThickWeedBoundResin = толстая связанная сорняком смола
+    .desc = Странная слизь, затвердевшая в стену.

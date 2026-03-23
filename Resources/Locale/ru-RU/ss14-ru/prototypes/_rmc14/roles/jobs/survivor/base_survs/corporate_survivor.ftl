@@ -1,6 +1,7 @@
-ent-RMCSpawnPointSurvivorCorporate = survivor corporate spawn point
+ent-RMCSpawnPointSurvivorCorporate = спавнер корпоративного выжившего
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetCorporate = corporate colonist preset
+    .suffix = Спавнер роли, Основной
+ent-RMCSurvivorPresetCorporate = пресет корпоративного колониста
     .desc = { ent-RMCSurvivorPresetCivilian.desc }
-ent-RMCRandomHumanoidSurvivorCorporate = corporate colonist ghost role
+ent-RMCRandomHumanoidSurvivorCorporate = роль призрака корпоративного колониста
     .desc = { ent-MarkerBase.desc }

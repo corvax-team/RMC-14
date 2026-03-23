@@ -1,6 +1,6 @@
-ent-RMCSPPSurplusPVE = H-Tech Surplus Uniform Vendor
-    .desc = An automated supply rack hooked up to a small storage of standard UPP uniforms.
-    .suffix = PVE, SPP
-ent-RMCSPPUtilitiesPVE = H-Tech Automated Utilities Squad Vendor
-    .desc = An automated supply rack hooked up to a small storage of various utilities and tools.
-    .suffix = PVE, SPP
+ent-RMCSPPSurplusPVE = торговый автомат униформы H-Tech
+    .desc = Автоматизированный стеллаж снабжения, подключенный к небольшому хранилищу стандартной униформы СССП.
+    .suffix = PVE, СССП
+ent-RMCSPPUtilitiesPVE = торговый автомат оснащения отряда H-Tech
+    .desc = Автоматизированный стеллаж снабжения, подключенный к небольшому хранилищу различных принадлежностей и инструментов.
+    .suffix = PVE, СССП

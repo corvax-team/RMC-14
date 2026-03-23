@@ -1,4 +1,4 @@
-ent-CCMNukeCodePaper = nuclear authentication codes
+ent-CCMNukeCodePaper = коды ядерной аутентификации
     .desc = { ent-CCMBaseNukeCodePaper.desc }
 ent-CCMFolderNuclearCodes = папка с ядерными кодами
     .desc = { ent-BaseItem.desc }

@@ -1,2 +1,2 @@
-ent-CCMBaseNukeCodePaper = nuclear authentication codes
+ent-CCMBaseNukeCodePaper = коды ядерной аутентификации
     .desc = { ent-Paper.desc }

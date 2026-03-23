@@ -1,5 +1,5 @@
-ent-NewYearTree0 = big tree
-    .desc = A tree that radiates a magical aura.
-ent-NewYearTree1 = new year tree
-    .desc = Have you been a good boy?
-    .suffix = PresentsGiver
+ent-NewYearTree0 = большая ель
+    .desc = Ель, излучающая волшебную ауру.
+ent-NewYearTree1 = новогодняя ёлка
+    .desc = Ты был хорошим мальчиком?
+    .suffix = Даёт подарки

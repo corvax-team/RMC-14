@@ -34,5 +34,5 @@ ent-RMCVehicleSPPVanStorageBase = шкафчик фургона СССП
     .desc = Небольшой ящик для хранения вещей внутри фургона СССП.
 ent-RMCVehicleSPPVanSmallStorage = малый шкафчик фургона СССП
     .desc = { ent-RMCVehicleSPPVanStorageBase.desc }
-ent-RMCVehicleSPPVanAmmoLoader = зарядчик боеприпасов фургона СССП
+ent-RMCVehicleSPPVanAmmoLoader = механизм заряжания фургона СССП
     .desc = Устройство для заряжания боекомплекта в оружейные точки техники СССП.

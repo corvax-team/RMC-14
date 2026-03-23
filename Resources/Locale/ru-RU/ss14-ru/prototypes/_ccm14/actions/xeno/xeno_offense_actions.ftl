@@ -1,8 +1,8 @@
-ent-ActionXenoTailWhirlwind = Tail wirlwind (350)
-    .desc = Knock down any enemies close to you.
-ent-ActionXenoDashFlight = Dash flight (400)
-    .desc = Dash a short distance towards a given location.
-ent-ActionXenoPlantHiveWeeds = Plant hive Weeds (150)
-    .desc = Plant a weed node that will spread more weeds.
+ent-ActionXenoTailWhirlwind = Вихрь хвостом (350)
+    .desc = Сбивает с ног всех врагов, находящихся рядом с вами.
+ent-ActionXenoDashFlight = Рывок в полете (400)
+    .desc = Совершает быстрый рывок на короткое дистанцию в указанном направлении.
+ent-ActionXenoPlantHiveWeeds = Посадить сорняки улья (150)
+    .desc = Высаживает узел сорняков, который будет распространять растительность улья дальше.
 ent-CCMActionXenoMirrorClones = Зеркальные двойники
     .desc = Создаёт три зеркальные копии, которые следуют за вами и имитируют атаки в течение 10 секунд.

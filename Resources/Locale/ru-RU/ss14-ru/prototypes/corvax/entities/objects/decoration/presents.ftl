@@ -1,11 +1,11 @@
-ent-BasePresentBox = decoration present
-    .desc = Beautiful wrapper, disappointing emptiness inside.
+ent-BasePresentBox = декоративный подарок
+    .desc = Красивая обёртка, разочаровывающая пустота внутри.
 ent-BigPresentBox = { ent-BasePresentBox }
-    .suffix = Big
+    .suffix = Большой
     .desc = { ent-BasePresentBox.desc }
 ent-MediumPresentBox = { ent-BasePresentBox }
-    .suffix = Medium
+    .suffix = Средний
     .desc = { ent-BasePresentBox.desc }
 ent-SmallPresentBox = { ent-BasePresentBox }
-    .suffix = Small
+    .suffix = Маленький
     .desc = { ent-BasePresentBox.desc }

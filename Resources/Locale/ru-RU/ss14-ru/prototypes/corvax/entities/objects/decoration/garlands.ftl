@@ -1,6 +1,6 @@
-ent-GarlandsOff = garlands
-    .desc = Non-working danglers. Maybe they will turn on when something happens?
-    .suffix = Off
+ent-GarlandsOff = гирлянды
+    .desc = Неработающие висюльки. Может, они включатся, когда что-то произойдёт?
+    .suffix = Выключены
 ent-Garlands = { ent-GarlandsOff }
-    .desc = Beautiful... Looking at this, you are filled with a New Year's mood.
-    .suffix = On
+    .desc = Красивое... Смотря на это, вы чувствуете, как наполняетесь новогодним духом.
+    .suffix = Включены

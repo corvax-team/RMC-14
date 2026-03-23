@@ -34,5 +34,5 @@ ent-RMCVehicleSPPAPCLockerBase = шкаф БТР СССП
     .desc = Шкаф для хранения вещей в интерьере БТР СССП.
 ent-RMCVehicleSPPAPCLocker = шкаф БТР СССП
     .desc = { ent-RMCVehicleSPPAPCLockerBase.desc }
-ent-RMCVehicleSPPAPCAmmoLoader = автомат заряжания БТР СССП
-    .desc = Устройство для автоматической зарядки боеприпасов установок БТР СССП.
+ent-RMCVehicleSPPAPCAmmoLoader = механизм заряжания БТР СССП
+    .desc = Устройство для зарядки боеприпасов установок БТР СССП.

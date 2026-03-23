@@ -1,2 +1,2 @@
-ent-FloorDeathEntity = death
+ent-FloorDeathEntity = смерть
     .desc = { "" }

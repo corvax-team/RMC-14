@@ -1,2 +1,2 @@
-ent-SignNewYear = new year sign
-    .desc = Neon sign. Face in salad and wake up in February.
+ent-SignNewYear = новогодний знак
+    .desc = Неоновый знак. Лицом в салат, и проснуться в Феврале.
