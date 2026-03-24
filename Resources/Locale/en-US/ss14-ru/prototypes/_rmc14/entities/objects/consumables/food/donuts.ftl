@@ -1,8 +1,5 @@
-ent-RMCBoxDonutEmpty = Yum! donuts
+ent-RMCBoxDonut = Yum! donuts
     .desc = A box of mouth-watering "Yum!" brand donuts
-    .suffix = Empty
-ent-RMCBoxDonut = { ent-RMCBoxDonutEmpty }
-    .desc = { ent-RMCBoxDonutEmpty.desc }
 ent-RMCFoodDonut = donut
     .desc = A donut. Rare on the frontier, so take care of it.
 ent-RMCFoodDonutFrosted = frosted donut

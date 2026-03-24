@@ -1,5 +1,4 @@
-ent-RMCSpawnPointSurvivorHybrisaWeyamartEmployee = спавнер выжившего сотрудника Вей-Март
+ent-RMCSpawnPointSurvivorHybrisaWeyamartEmployee = точка появления сотрудника Weyamart (Hybrisa)
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Гибриса
-ent-RMCGearSurvivorPresetHybrisaWeyamartEmployee = пресет сотрудника Вей-Март Гибриса
+ent-RMCGearSurvivorPresetHybrisaWeyamartEmployee = пресет колониста: сотрудник Weyamart (Hybrisa)
     .desc = { ent-RMCSurvivorPresetCivilianRareItem.desc }

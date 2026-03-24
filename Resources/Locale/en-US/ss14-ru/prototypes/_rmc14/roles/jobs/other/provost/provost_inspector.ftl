@@ -1,2 +1,3 @@
-ent-RMCSpawnPointProvostInspector = Provost Inspector spawn point
-    .desc = { ent-CMSpawnPointJobBase.desc }
+ent-RMCRandomHumanoidProvostInspector = provost ghost role inspector
+    .suffix = Spawner, Player, Friendly, Medium Law Understanding
+    .desc = { "" }

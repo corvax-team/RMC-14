@@ -1,2 +1,2 @@
-ent-RMCSurvivorPresetHybrisaCorporateSecurity = пресет сотрудника корпоративной охраны Гибриса
+ent-RMCSurvivorPresetHybrisaCorporateSecurity = пресет колониста: сотрудник корпбезопасности (Hybrisa)
     .desc = { ent-RMCSurvivorPresetSecurity.desc }

@@ -1,11 +1,11 @@
 ent-RMCMapInsertSorokyneBase = { ent-RMCMapInsertBase }
     .suffix = Вставка Сорокина
     .desc = { ent-RMCMapInsertBase.desc }
-ent-RMCMapInsertSorokyneSPPSOF = Дропшип ССО СССП
+ent-RMCMapInsertSorokyneSPPSOF = Дропшип ССО SPP
     .desc = { ent-RMCMapInsertSorokyneBase.desc }
-ent-RMCMapInsertSorokyneSPPSOFAlt = Судно снабжения ССО СССП
+ent-RMCMapInsertSorokyneSPPSOFAlt = Судно снабжения ССО SPP
     .desc = { ent-RMCMapInsertSorokyneBase.desc }
-ent-RMCMapInsertSorokyneMedbay = Лагерь КФО
+ent-RMCMapInsertSorokyneMedbay = Лагерь CLF
     .desc = { ent-RMCMapInsertSorokyneBase.desc }
 ent-RMCMapInsertSorokyneFlamerBodypile = Груда сожжённых тел
     .desc = { ent-RMCMapInsertSorokyneBase.desc }

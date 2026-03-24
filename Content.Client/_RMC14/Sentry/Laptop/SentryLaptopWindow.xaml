@@ -4,7 +4,7 @@
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     xmlns:vp="clr-namespace:Content.Client.Viewport"
-    Title="Управление сетью турелей"
+    Title="Sentry Network Control"
     MinSize="800 700">
     <BoxContainer Orientation="Horizontal">
         <PanelContainer MinWidth="600" HorizontalExpand="True">
@@ -19,15 +19,15 @@
                         <controls:SentryButton Name="GlobalIFFButton" Access="Public"
                                              Margin="1" BackgroundColor="#1A3D5C"
                                              BorderColor="#88C7FA" BorderThickness="1"
-                                             Text="ОБЩИЙ IFF" />
+                                             Text="GLOBAL IFF" />
                         <controls:SentryButton Name="RefreshButton" Access="Public"
                                              Margin="1" BackgroundColor="#1A3D5C"
                                              BorderColor="#88C7FA" BorderThickness="1"
-                                             Text="ОБНОВИТЬ" />
+                                             Text="REFRESH" />
                         <controls:SentryButton Name="UnlinkAllButton" Access="Public"
                                              Margin="1" BackgroundColor="#5C1A1A"
                                              BorderColor="#A42625" BorderThickness="1"
-                                             Text="ОТКЛЮЧИТЬ ВСЕ" />
+                                             Text="UNLINK ALL" />
                     </BoxContainer>
                 </BoxContainer>
 
@@ -35,7 +35,7 @@
 
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="8 5 8 5">
                     <Label Name="StatusLabel" Access="Public"
-                           Text="Статус: Нет подключенных турелей"
+                           Text="Status: No sentries linked"
                            VerticalAlignment="Center"
                            FontColorOverride="#88C7FA"
                            HorizontalExpand="True"/>
@@ -44,10 +44,10 @@
                 <cc:HSeparator Color="#88C7FA" />
 
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="8 5 8 5">
-                    <Label Text="ПОИСК:" FontColorOverride="#88C7FA" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                    <Label Text="SEARCH:" FontColorOverride="#88C7FA" VerticalAlignment="Center" Margin="0 0 5 0"/>
                     <LineEdit Name="SearchBar" Access="Public"
                              HorizontalExpand="True"
-                             PlaceHolder="Поиск по названию или локации..."/>
+                             PlaceHolder="Search sentries by name or location..."/>
                 </BoxContainer>
 
                 <cc:HSeparator Color="#88C7FA" />
@@ -59,16 +59,16 @@
                     </PanelContainer.PanelOverride>
                     <BoxContainer Orientation="Vertical" Margin="10">
                         <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
-                            <Label Text="ОБЩЕЕ УПРАВЛЕНИЕ СИСТЕМОЙ IFF" FontColorOverride="#88C7FA" VerticalAlignment="Center" HorizontalExpand="True"/>
+                            <Label Text="GLOBAL IFF TARGETING CONTROLS" FontColorOverride="#88C7FA" VerticalAlignment="Center" HorizontalExpand="True"/>
                             <controls:SentryButton Name="GlobalApplyIFFButton" Access="Public"
                                                  Margin="0 0 5 0"
                                                  BackgroundColor="#1A3D5C"
                                                  BorderColor="#88C7FA" BorderThickness="1"
-                                                 Text="ПРИМЕНИТЬ КО ВСЕМ" />
+                                                 Text="APPLY TO ALL" />
                             <controls:SentryButton Name="GlobalResetTargetingButton" Access="Public"
                                                  BackgroundColor="#1A3D5C"
                                                  BorderColor="#88C7FA" BorderThickness="1"
-                                                 Text="СБРОСИТЬ ВСЕ" />
+                                                 Text="RESET ALL TO DEFAULT" />
                         </BoxContainer>
                         <cc:HSeparator Color="#4AA3E8" Margin="0 5"/>
                         <ScrollContainer MaxHeight="200" MinHeight="140" HorizontalExpand="True">
@@ -84,11 +84,11 @@
                                                  Margin="0 0 5 0"
                                                  BackgroundColor="#1A3D5C"
                                                  BorderColor="#88C7FA" BorderThickness="1"
-                                                 Text="ВКЛЮЧИТЬ ВСЕ" />
+                                                 Text="POWER ALL ON" />
                             <controls:SentryButton Name="GlobalPowerOffButton" Access="Public"
                                                  BackgroundColor="#5C1A1A"
                                                  BorderColor="#A42625" BorderThickness="1"
-                                                 Text="ВЫКЛЮЧИТЬ ВСЕ" />
+                                                 Text="POWER ALL OFF" />
                         </BoxContainer>
                     </BoxContainer>
                 </PanelContainer>
@@ -111,13 +111,13 @@
             <BoxContainer Orientation="Vertical" Margin="5">
                 <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
                     <RichTextLabel Name="CameraTitle" Access="Public"
-                                 Text="[color=#88C7FA][bold]ОБЗОР КАМЕРЫ[/bold][/color]"
+                                 Text="[color=#88C7FA][bold]CAMERA VIEW[/bold][/color]"
                                  VerticalAlignment="Center"
                                  HorizontalExpand="True"/>
                     <controls:SentryButton Name="CloseCameraButton" Access="Public"
                                          BackgroundColor="#5C1A1A"
                                          BorderColor="#A42625" BorderThickness="1"
-                                         Text="ЗАКРЫТЬ" />
+                                         Text="CLOSE" />
                 </BoxContainer>
                 <cc:HSeparator Color="#88C7FA" Margin="0 0 0 5"/>
                 <Control HorizontalExpand="True" VerticalExpand="True">

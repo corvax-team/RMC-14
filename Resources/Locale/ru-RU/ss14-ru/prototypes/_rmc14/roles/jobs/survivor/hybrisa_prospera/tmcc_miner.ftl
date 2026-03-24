@@ -1,5 +1,4 @@
-ent-RMCSpawnPointSurvivorHybrisaTMCCMiner = спавнер выжившего шахтёра HRC
+ent-RMCSpawnPointSurvivorHybrisaTMCCMiner = точка появления шахтёра TMCC
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Гибриса
-ent-RMCGearSurvivorPresetHybrisaTMCCMiner = пресет шахтёра HRC Гибриса
+ent-RMCGearSurvivorPresetHybrisaTMCCMiner = пресет колониста: шахтёр TMCC
     .desc = { ent-RMCSurvivorPresetCivilian.desc }

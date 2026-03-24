@@ -10,20 +10,20 @@ highlights-commanding-officer = Командующий Офицер, "КО", М�
 highlights-executive-officer = Исполнительный Офицер, "ИО", Капитан, "Кэп", Combat Information Center, "ЦИК", Командование, Оверватч, "ОВ", Обжалование, Королева, "OБ", Корды, Координаты, Поставки, Loose, Burst, "ФОБ", Комы, Тактическая карта, Карта, "Разведка", Телефон, "ТЕХ ДОКЛАД", "СЛ", Командир
 highlights-staff-officer = Офицер Штаба, "ОШ", Combat Information Center, "ЦИК", Командование, Оверватч, "ОВ", Обжаловать, Королева, "ОБ", Корды, Координаты, Поставки, Loose, Burst, "ФОБ", Комы, Тактическая карта, Карта, Телефон, "ТЕХ ДОКЛАД", "СЛ", Командир
 # Requisitions
-highlights-logistics-officer = Офицер логистики, "ОЛ", Снабжение, "Рек", Командование, Поставки, "Дроп", Ящик, Бюджет, Патроны
-highlights-requisitions-technician = Техник снабжения, Рек-тех, "ТС", Снабжение, "Рек", Поставки, "Дроп", Ящик, Бюджет, Патроны
+highlights-logistics-officer = Logistics Officer, "LO", Requisitions, "Req", Command, Supply, "Drop", Crate, Budget, Ammo
+highlights-requisitions-technician = Requisitions Technician, Req Technician, Requisitions Tech, Req Tech, "RT", Requisitions, "Req", Supply, "Drop", Crate, Budget, Ammo
 # Requisitions
 highlights-quartermaster = Квартирмейстер, "КМ", Поставки, "Карго", Командование, Поставки, "Drop", Crate, Бюджет, патроны
 highlights-cargo-technician = Техник снабжения, Карготех, "ТС" Поставки, "Карго", Поставки, "Drop", Crate, Бюджет, Патроны
 # Engineering
 highlights-chief-engineer = Главный инженер, "ГИ", Инженерный отдел, Инженер, "Инж", Командование, "ОБ", "OT"
 highlights-maintenance-technician = Техник по обслуживанию, "ТПО", Инженерный отдел, Инженер, "Инж", "ОБ"
-highlights-ordnance-technician = Техник по вооружению, "ТВ", "ОТ", Инженерный отдел, "Инж", "ОБ"
+highlights-ordnance-technician = Ordnance Technician, "OT", Инженерный отдел, "Инж", "ОБ"
 # Medical
 highlights-chief-medical-officer = Старший Медицинский Офицер, "СМО", Медицинский отдел, МедБей, "Мед", Заражён, Операция, "Хим", "Химикаты", Таблетка, Командование
 highlights-doctor = Доктор, "Док", Медицинский отдел, МедБей, "Мед", Заражён, Операция, "Хим", "Химикаты", Таблетка
 # Military Police
-highlights-chief-mp = Начальник военной полиции, "НВП", "ВП", "Тревога", Бриг, "Перма", Loose, Burst, Колонист, Выживший, "SOP", Арест, Задержать, Обжаловать, "Командование", Казнь, Казнён
+highlights-chief-mp = Chief MP, "CMP", "MP", "MPs", "MW", "Alert", Brig, "Perma", Loose, Burst, Colonist, Survivor, "SOP", Arrest, Detain, Appeal, "Command", Execution, Executed
 highlights-nurse = Интерн, Медицинский отдел, МедБей, "Мед", Заражён, Операция, "Хим", "Химикаты", Таблетка
 highlights-researcher = Ученый, Исследование, Наука, "НИИ", "Хим", "Химикаты"
 highlights-provost-inspector = Provost Inspector, Inspector, @"PvI", "CMP", "MP", "MPs", "MW", "Alert", Brig, "Perma", Loose, Burst, Colonist, Survivor, "SOP", "Mlaw", Marine Law, Arrest, Detain, Appeal, Execution, Executed

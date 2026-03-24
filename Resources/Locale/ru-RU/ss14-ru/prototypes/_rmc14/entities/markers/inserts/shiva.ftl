@@ -4,6 +4,6 @@ ent-RMCMapInsertShivaSouthCaves = Южные пещеры LZ2
 ent-RMCMapInsertShivaPanicRoomHold = Укрепление в паник-руме
     .suffix = Вставка Шива
     .desc = { ent-RMCMapInsertBase.desc }
-ent-RMCMapInsertShivaCLFRaid = Рейд КФО
+ent-RMCMapInsertShivaCLFRaid = Рейд CLF
     .suffix = Вставка Шива
     .desc = { ent-RMCMapInsertBase.desc }

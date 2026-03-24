@@ -11,6 +11,3 @@ ent-CMFilingCabinetChest = chest drawer
     .desc = { ent-CMFilingCabinetBase.desc }
 ent-CMFilingCabinetChestWood = wooden chest drawer
     .desc = { ent-CMFilingCabinetChest.desc }
-ent-CMFilingCabinetChestAngled = chest drawer
-    .suffix = Angled
-    .desc = { ent-CMFilingCabinetBase.desc }

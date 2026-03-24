@@ -1,4 +1,4 @@
-ent-CMSpawnPointHospitalCorpsman = спавнер полевого санитара
+ent-CMSpawnPointHospitalCorpsman = точка появления полевой санитар
     .desc = { ent-CMSpawnPointJobBase.desc }
 ent-CMSpawnPointHospitalCorpsmanAlpha = { ent-CMSpawnPointHospitalCorpsman }
     .suffix = Альфа
@@ -12,5 +12,3 @@ ent-CMSpawnPointHospitalCorpsmanCharlie = { ent-CMSpawnPointHospitalCorpsman }
 ent-CMSpawnPointHospitalCorpsmanDelta = { ent-CMSpawnPointHospitalCorpsman }
     .suffix = Дельта
     .desc = { ent-CMSpawnPointHospitalCorpsman.desc }
-ent-RMCGuidebookRoleHM = Полевой санитар
-    .desc = Полевой санитар

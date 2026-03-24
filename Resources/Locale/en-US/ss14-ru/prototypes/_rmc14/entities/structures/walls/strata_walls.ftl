@@ -10,6 +10,3 @@ ent-RMCWallStrataIceDirty = { ent-RMCWallStrataIce }
     .desc = { ent-RMCWallStrataIce.desc }
 ent-RMCWallStrataRock = rock wall
     .desc = A rough wall of hardened rock.
-ent-RMCWallStrataRockTimed = { ent-RMCWallStrataRock }
-    .suffix = Timed
-    .desc = { ent-RMCWallStrataRock.desc }

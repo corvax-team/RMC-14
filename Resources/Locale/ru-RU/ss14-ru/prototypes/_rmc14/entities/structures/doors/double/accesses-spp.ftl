@@ -1,12 +1,12 @@
 ent-RMCDoubleDoorSecuritySPPGlassLocked = { ent-CMDoubleDoorSecurityGlassLocked }
-    .suffix = СССП, Стеклянный, Закрыто
+    .suffix = SPP, Стеклянный, Закрыто
     .desc = { ent-CMDoubleDoorSecurityGlassLocked.desc }
 ent-RMCAirlockSecuritySPPLocked = { ent-CMAirlockSecurityLocked }
-    .suffix = СССП, Прочный, Закрыто
+    .suffix = SPP, Прочный, Закрыто
     .desc = { ent-CMAirlockSecurityLocked.desc }
 ent-RMCAirlockSecuritySPPSecLocked = { ent-CMAirlockSecurityLocked }
-    .suffix = СССП Охрана, Прочный, Закрыто
+    .suffix = SPP Охрана, Прочный, Закрыто
     .desc = { ent-CMAirlockSecurityLocked.desc }
 ent-RMCAirlockSecureSPPSecLocked = { ent-CMAirlockSecure }
-    .suffix = СССП Охрана, Закрыто
+    .suffix = SPP Охрана, Закрыто
     .desc = { ent-CMAirlockSecure.desc }

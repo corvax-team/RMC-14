@@ -1,3 +1,5 @@
+ent-BaseRoofMarker = { "" }
+    .desc = { "" }
 ent-RoofMarker = Крыша
     .suffix = Включён
     .desc = { ent-MarkerBase.desc }

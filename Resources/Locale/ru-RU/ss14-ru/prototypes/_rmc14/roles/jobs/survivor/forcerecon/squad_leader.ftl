@@ -1,4 +1,4 @@
-ent-CMSpawnPointForeconSquadLeader = спавнер лидера отряда СОиС
+ent-CMSpawnPointForeconSquadLeader = Точка появления Лидера Отряда СОиС
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetForeconSquadLead = пресет выжившего лидера отряда СОиС
+ent-RMCSurvivorPresetForeconSquadLead = Шаблон роли Лидер Отряда СОиС
     .desc = { ent-RMCSurvivorPresetForecon.desc }

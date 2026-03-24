@@ -12,5 +12,3 @@ ent-CMSpawnPointHospitalCorpsmanCharlie = { ent-CMSpawnPointHospitalCorpsman }
 ent-CMSpawnPointHospitalCorpsmanDelta = { ent-CMSpawnPointHospitalCorpsman }
     .suffix = Delta
     .desc = { ent-CMSpawnPointHospitalCorpsman.desc }
-ent-RMCGuidebookRoleHM = Hospital Corpsman
-    .desc = Hospital Corpsman

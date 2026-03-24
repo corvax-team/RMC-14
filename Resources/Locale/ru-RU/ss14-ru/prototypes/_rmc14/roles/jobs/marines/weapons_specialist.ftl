@@ -1,4 +1,4 @@
-ent-CMSpawnPointWeaponsSpecialist = спавнер специалиста по вооружению
+ent-CMSpawnPointWeaponsSpecialist = точка появления специалист по вооружению
     .desc = { ent-CMSpawnPointJobBase.desc }
 ent-CMSpawnPointWeaponsSpecialistAlpha = { ent-CMSpawnPointWeaponsSpecialist }
     .suffix = Альфа

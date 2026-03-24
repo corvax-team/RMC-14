@@ -1,8 +1,6 @@
-ent-RMCSpawnPointSurvivorTrucker = спавнер выжившего дальнобойщика
+ent-RMCSpawnPointSurvivorTrucker = точка появления дальнобойщика
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Любые карты
-ent-RMCSurvivorPresetTrucker = пресет колониста-дальнобойщика
+ent-RMCSurvivorPresetTrucker = пресет колониста: дальнобойщик
     .desc = { ent-RMCSurvivorPresetCivilian.desc }
 ent-RMCRandomHumanoidSurvivorTrucker = гост-роль колониста-дальнобойщика
     .desc = { ent-MarkerBase.desc }
-    .suffix = Любые карты

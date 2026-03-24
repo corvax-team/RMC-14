@@ -6,11 +6,11 @@
     MinSize="400 400">
     <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="0 0 0 10">
-            <Button Name="PartsButton" Access="Public" Text="&lt; Части тела"
+            <Button Name="PartsButton" Access="Public" Text="&lt; Parts"
                     HorizontalExpand="True" StyleClasses="OpenBoth" />
-            <Button Name="SurgeriesButton" Access="Public" Text="&lt; Операции"
+            <Button Name="SurgeriesButton" Access="Public" Text="&lt; Surgeries"
                     HorizontalExpand="True" StyleClasses="OpenBoth" />
-            <Button Name="StepsButton" Access="Public" Text="&lt; Шаги"
+            <Button Name="StepsButton" Access="Public" Text="&lt; Steps"
                     HorizontalExpand="True" StyleClasses="OpenBoth" />
         </BoxContainer>
         <cc:HSeparator Color="#4972A1" />

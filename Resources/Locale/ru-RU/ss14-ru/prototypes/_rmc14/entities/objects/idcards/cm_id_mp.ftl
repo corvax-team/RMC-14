@@ -1,6 +1,6 @@
-ent-CMIDCardChiefMP = ID-карта начальника ВП
+ent-CMIDCardChiefMP = ИД-карта начальника ВП
     .desc = { ent-CMIDCardSilver.desc }
-ent-CMIDCardMilitaryWarden = ID-карта надзиратель ВП
+ent-CMIDCardMilitaryWarden = ИД-карта надзиратель ВП
     .desc = { ent-CMIDCardBase.desc }
-ent-CMIDCardMilitaryPolice = ID-карта военного полицейского
+ent-CMIDCardMilitaryPolice = ИД-карта военного полицейского
     .desc = { ent-CMIDCardBase.desc }

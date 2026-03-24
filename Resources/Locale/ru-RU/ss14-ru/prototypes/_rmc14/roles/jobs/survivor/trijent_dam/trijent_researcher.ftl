@@ -1,5 +1,4 @@
-ent-RMCSpawnPointSurvivorTrijentResearcher = спавнер выжившего исследователя
+ent-RMCSpawnPointSurvivorTrijentResearcher = точка появления исследователя Trijent
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Дамба Триджент
-ent-RMCSurvivorPresetTrijentResearcher = пресет выжившего исследователя Дамбы Триджент
+ent-RMCSurvivorPresetTrijentResearcher = пресет колониста: исследователь Trijent
     .desc = { ent-RMCSurvivorPresetScientist.desc }

@@ -4,6 +4,3 @@ ent-CMLinenBin = linen bin
 ent-CMLinenBinFilled = { ent-CMLinenBin }
     .suffix = Filled
     .desc = { ent-CMLinenBin.desc }
-ent-CMLinenBinFilledUnanchored = { ent-CMLinenBinFilled }
-    .suffix = Filled, Unanchored
-    .desc = { ent-CMLinenBinFilled.desc }

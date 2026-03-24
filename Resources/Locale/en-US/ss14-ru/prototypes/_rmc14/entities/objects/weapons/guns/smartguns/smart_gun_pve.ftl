@@ -1,14 +1,6 @@
-ent-RMCSmartGunPVENoCamo = ML66A heavy support gun
+ent-RMCSmartGunPVE = ML66A heavy support gun
     .desc = The actual firearm in the Support Gun System. Essentially a heavy, mobile machinegun.
     .suffix = PVE
-ent-RMCSmartGunPVE = { ent-RMCSmartGunPVENoCamo }
-    .desc = { ent-RMCSmartGunPVENoCamo.desc }
-ent-RMCSmartGunPMCPVE = ML79A heavy support gun
-    .desc = The actual firearm in the Support Gun System, modified for We-Ya PMCs. Essentially a heavy, mobile machinegun.
-    .suffix = PVE, PMC
 ent-RMCAttachmentSmartgunHarness = ML66A heavy support gun harness
     .desc = A specialized harness for the ML66A heavy support gun, assisting with recoil control and stability, while also allowing for easy manuvering of the weapon and even suspending it without a grip.
-    .suffix = PVE
-ent-RMCSmartGunRCMPVE = ML66C general purpose machine gun
-    .desc = A heavy, mobile machinegun used by the Royal Crown Marines. Heavily modified from the UN's ML66A platform, it fires 10x30mm holotargeting rounds.
-    .suffix = PVE, RCM
+    .suffix = PVE, DO NOT MAP FOR PVP.

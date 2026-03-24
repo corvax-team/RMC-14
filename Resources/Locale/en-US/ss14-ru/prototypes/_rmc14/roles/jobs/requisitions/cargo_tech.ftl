@@ -1,2 +1,2 @@
-ent-CMSpawnPointCargoTech = req tech spawn point
+ent-CMSpawnPointCargoTech = cargo tech spawn point
     .desc = { ent-CMSpawnPointJobBase.desc }

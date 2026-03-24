@@ -1,2 +1,2 @@
-ent-hoverentity = парящая сущность
+ent-hoverentity = hover entity
     .desc = { "" }

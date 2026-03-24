@@ -13,7 +13,3 @@ ent-RMCSpawnerCommunicationsTowerTwo = { ent-RMCSpawnerCommunicationsTowerBase }
     .desc = { ent-RMCSpawnerCommunicationsTowerBase.desc }
 ent-RMCCommunicationsTowerProp = destroyed comms tower
     .desc = An old company comms tower used to transmit communications between subspace bodies. Looks like this one has seen better days.
-ent-RMCCommunicationsTowerPropAlt0 = destroyed comms tower
-    .desc = An old company comms tower used to transmit communications between subspace bodies. Looks like this one has seen better days.
-ent-RMCCommunicationsTowerPropAlt1 = destroyed comms tower
-    .desc = An old company comms tower used to transmit communications between subspace bodies. Looks like this one has seen better days.

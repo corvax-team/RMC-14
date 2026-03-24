@@ -1,5 +1,4 @@
-ent-RMCSpawnPointSurvivorTrijentDoctor = спавнер выжившего врача
+ent-RMCSpawnPointSurvivorTrijentDoctor = точка появления врача Trijent
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Дамба Триджент
-ent-RMCGearSurvivorPresetTrijentDoctor = пресет выжившего врача Дамбы Триджент
+ent-RMCGearSurvivorPresetTrijentDoctor = пресет колониста: врач Trijent
     .desc = { ent-RMCSurvivorPresetDoctor.desc }

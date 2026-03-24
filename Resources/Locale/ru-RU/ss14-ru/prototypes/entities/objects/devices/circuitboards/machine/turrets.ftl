@@ -6,3 +6,6 @@ ent-WeaponEnergyTurretAIMachineCircuitboard = { ent-WeaponEnergyTurretStationMac
 ent-WeaponEnergyTurretSecurityMachineCircuitboard = { ent-WeaponEnergyTurretStationMachineCircuitboardBase }
     .suffix = Служба безопасности
     .desc = { ent-WeaponEnergyTurretStationMachineCircuitboardBase.desc }
+ent-WeaponEnergyTurretCommandMachineCircuitboard = { ent-WeaponEnergyTurretStationMachineCircuitboardBase }
+    .suffix = Командование
+    .desc = { ent-WeaponEnergyTurretStationMachineCircuitboardBase.desc }

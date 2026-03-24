@@ -254,7 +254,6 @@ cm-chatsan-replacement-ammo = spits
 
 # TODO RMC14 rouny > runner but only if no rouny was spawned in the round
 
-
 # cm-chatsan-word-#tank = #tank
 # cm-chatsan-replacement-#tank = turtle
 
@@ -269,7 +268,6 @@ cm-chatsan-replacement-flamethrower = fire spitter
 
 # cm-chatsan-word-# flamer = # flamer
 # cm-chatsan-replacement-# flamer = fire spitter
-
 
 # cm-chatsan-word-# flamethrower = # flamethrower
 # cm-chatsan-replacement-# flamethrower =  fire spitter

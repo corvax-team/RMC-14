@@ -15,5 +15,3 @@ ent-RMCSpawnerEvacuationPodEastLiaison = { ent-RMCSpawnerEvacuationPodSouth }
     .desc = { ent-RMCSpawnerEvacuationPodSouth.desc }
 ent-RMCSpawnerLifeboat = lifeboat spawner
     .desc = Defines a location to spawn a lifeboat.
-ent-RMCSpawnerLifeboatAthena = lifeboat spawner
-    .desc = Defines a location to spawn a lifeboat.

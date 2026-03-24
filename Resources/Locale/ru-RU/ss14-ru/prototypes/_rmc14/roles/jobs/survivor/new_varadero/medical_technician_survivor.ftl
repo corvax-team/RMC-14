@@ -1,5 +1,4 @@
-ent-RMCSpawnPointSurvivorMedicalTechnician = спавнер выжившего медицинского техника
+ent-RMCSpawnPointSurvivorMedicalTechnician = точка появления медицинского техника
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = UENB Нью-Варадеро
-ent-RMCGearSurvivorPresetMedicalTechnician = пресет колониста-медтехника
+ent-RMCGearSurvivorPresetMedicalTechnician = пресет колониста: медицинский техник
     .desc = { ent-RMCSurvivorPresetDoctor.desc }

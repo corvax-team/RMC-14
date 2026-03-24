@@ -1,5 +1,4 @@
-ent-RMCSpawnPointSurvivorVaraderoICB = спавнер выжившего представителя СПРС
+ent-RMCSpawnPointSurvivorVaraderoICB = точка появления сотрудника ICB
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = UENB Нью-Варадеро
-ent-RMCGearSurvivorPresetICB = пресет колониста СПРС
+ent-RMCGearSurvivorPresetICB = пресет колониста: сотрудник ICB
     .desc = { ent-RMCSurvivorPresetCorporate.desc }

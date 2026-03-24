@@ -1,5 +1,4 @@
-ent-RMCSpawnPointSurvivorMoHDoctor = спавнер выжившего врача министерства здравоохранения
+ent-RMCSpawnPointSurvivorMoHDoctor = точка появления врача министерства здравоохранения
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Сорокина Страта
-ent-RMCGearSurvivorPresetMoHDoctor = пресет выжившего врача министерства здравоохранения Сорокиной Страты
+ent-RMCGearSurvivorPresetMoHDoctor = пресет врача министерства здравоохранения
     .desc = { ent-RMCSurvivorPresetDoctor.desc }

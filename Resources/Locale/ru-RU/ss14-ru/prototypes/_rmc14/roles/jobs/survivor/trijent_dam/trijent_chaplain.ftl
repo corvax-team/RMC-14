@@ -1,5 +1,4 @@
-ent-RMCSpawnPointSurvivorTrijentChaplain = спавнер выжившего капеллана
+ent-RMCSpawnPointSurvivorTrijentChaplain = точка появления капеллана Trijent
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Дамба Триджент
-ent-RMCGearSurvivorPresetTrijentChaplain = пресет выжившего капеллана Дамбы Триджент
+ent-RMCGearSurvivorPresetTrijentChaplain = пресет капеллана Trijent
     .desc = { ent-RMCSurvivorPresetCivilianRareItem.desc }

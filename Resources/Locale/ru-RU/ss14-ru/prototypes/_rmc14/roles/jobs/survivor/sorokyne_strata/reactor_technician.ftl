@@ -1,5 +1,4 @@
-ent-RMCSpawnPointSurvivorReactorTechnician = спавнер выжившего техника реактора
+ent-RMCSpawnPointSurvivorReactorTechnician = точка появления техника реактора
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Сорокина Страта
-ent-RMCGearSurvivorPresetReactorTechnician = пресет выжившего техника реактора Сорокиной Страты
+ent-RMCGearSurvivorPresetReactorTechnician = пресет техника реактора
     .desc = { ent-RMCSurvivorPresetEngineer.desc }

@@ -1,5 +1,4 @@
-ent-RMCSpawnPointSurvivorArmedPoliceOfficer = спавнер выжившего офицера народной вооруженной полиции
+ent-RMCSpawnPointSurvivorArmedPoliceOfficer = точка появления офицера народной вооружённой полиции
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Сорокина Страта
-ent-RMCGearSurvivorPresetArmedPoliceOfficer = пресет выжившего офицера народной вооруженной полиции Сорокиной Страты
+ent-RMCGearSurvivorPresetArmedPoliceOfficer = пресет офицера народной вооружённой полиции
     .desc = { ent-RMCSurvivorPresetSecurity.desc }

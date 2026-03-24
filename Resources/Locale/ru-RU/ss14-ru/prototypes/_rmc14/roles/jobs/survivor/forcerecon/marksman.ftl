@@ -1,4 +1,4 @@
-ent-CMSpawnPointForeconMarksman = спавнер марксмана СОиС
+ent-CMSpawnPointForeconMarksman = Точка спавна Марксмана СоИС
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetForeconMarksman = пресет выжившего марксмана СОиС
+ent-RMCSurvivorPresetForeconMarksman = Шаблон Марксман СОиС
     .desc = { ent-RMCSurvivorPresetForecon.desc }

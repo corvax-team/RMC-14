@@ -1,5 +1,4 @@
-ent-RMCSpawnPointSurvivorHybrisaPizzaGalaxy = спавнер выжившего курьера Pizza Galaxy
+ent-RMCSpawnPointSurvivorHybrisaPizzaGalaxy = точка появления курьера Pizza Galaxy (Hybrisa)
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Гибриса
-ent-RMCGearSurvivorPresetHybrisaPizzaGalaxy = пресет курьера Pizza Galaxy Гибриса
+ent-RMCGearSurvivorPresetHybrisaPizzaGalaxy = пресет колониста: курьер Pizza Galaxy (Hybrisa)
     .desc = { ent-RMCSurvivorPresetCivilian.desc }

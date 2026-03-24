@@ -1,9 +1,4 @@
-ent-RMCPinpointerBase = Pinpointer
+ent-RMCPinpointerBase = RMCPinpointer
     .desc = A rugged military-grade tracking device. Changes colors based on the distance from the target. Keep upright to retain accuracy.
-    .suffix = RMC
-ent-RMCPinpointerUniversal = { ent-RMCPinpointerBase }
-    .suffix = Universal
-    .desc = { ent-RMCPinpointerBase.desc }
-ent-RMCPinpointerAegisID = { ent-RMCPinpointerBase }
-    .suffix = AEGIS
+ent-RMCPinpointerAegisID = Pinpointer
     .desc = { ent-RMCPinpointerBase.desc }

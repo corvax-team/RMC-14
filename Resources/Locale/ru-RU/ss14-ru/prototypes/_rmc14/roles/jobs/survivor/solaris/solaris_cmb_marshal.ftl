@@ -1,9 +1,0 @@
-ent-RMCMarshalCMBUniformSurvivorMarshal = { ent-RMCMarshalCMBUniform }
-    .suffix = Разгрузка
-    .desc = { ent-RMCMarshalCMBUniform.desc }
-ent-RMCWebbingSurvivorCMBMarshal = { ent-CMWebbingHolster }
-    .suffix = Маршал, Выживший, Заполненный
-    .desc = { ent-CMWebbingHolster.desc }
-ent-CMSpawnPointSolarisCMBMarshal = спавнер колониального маршала
-    .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Соларис Ридж

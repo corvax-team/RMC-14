@@ -1,2 +1,2 @@
-ent-RMCSurvivorPresetHybrisaSynthXenoarch = пресет синтетика-ксеноархеолога Гибриса
+ent-RMCSurvivorPresetHybrisaSynthXenoarch = пресет выжившего: синтетик-ксеноархеолог (Hybrisa)
     .desc = { "" }

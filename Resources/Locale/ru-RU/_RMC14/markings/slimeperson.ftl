@@ -20,7 +20,6 @@ marking-SlimeBrain-brain = Мозг
 
 # Snout
 
-
 # Eyes
 
 marking-SlimeEyesDefault = Глаза
@@ -52,9 +51,7 @@ marking-SlimeBonelegleft-bone = Парящие кости (левая нога)
 
 # UndergarmentBottom
 
-
 # UndergarmentTop
-
 
 # LFoot
 
@@ -78,18 +75,13 @@ marking-SlimeBonehandright-bone = Парящие кости (правая кис
 
 # FacialHair
 
-
 # Hair
-
 
 # HeadSide
 
-
 # HeadTop
 
-
 # Tail
-
 
 # RArmExtension
 

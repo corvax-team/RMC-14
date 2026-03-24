@@ -1,10 +1,10 @@
-ent-RMCPelletHeavyShotgunBuckshot = heavy buckshot
+ent-RMCPelletHeavyShotgunBuckshot = Heavy buckshot
     .desc = { ent-CMPelletShotgunBase.desc }
-ent-RMCPelletHeavyShotgunSlug = heavy slug
+ent-RMCPelletHeavyShotgunSlug = Heavy slug
     .desc = { ent-CMPelletShotgunBase.desc }
-ent-RMCPelletHeavyShotgunBeanbag = heavy beanbag slug
+ent-RMCPelletHeavyShotgunBeanbag = Heavy beanbag slug
     .desc = { ent-CMPelletShotgunBase.desc }
-ent-RMCPelletHeavyShotgunFlechette = heavy flechette shell
+ent-RMCPelletHeavyShotgunFlechette = Heavy flechette shell
     .desc = { ent-CMPelletShotgunBase.desc }
 ent-RMCPelletHeavyShotgunIncendiaryBuckshot = dragon's breath buckshot shell
     .desc = { ent-RMCPelletHeavyShotgunBuckshot.desc }

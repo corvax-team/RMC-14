@@ -1,5 +1,5 @@
 ent-CMGirder = girder
-    .desc = { ent-BaseStructure.desc }
+    .desc = { ent-Girder.desc }
 ent-CMGirderReinforced = reinforced girder
     .desc = { ent-CMGirder.desc }
 ent-RMCGirderDisplaced = displaced

@@ -1,4 +1,4 @@
-ent-CMSpawnPointQuartermaster = Logistics Officer spawn point
+ent-CMSpawnPointQuartermaster = quartermaster spawn point
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGuidebookRoleQM = The LO
-    .desc = The Logistics Officer.
+ent-RMCGuidebookRoleQM = The QM
+    .desc = The Quartermaster.

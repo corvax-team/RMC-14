@@ -1,5 +1,4 @@
-ent-RMCSpawnPointSurvivorTrijentTrucker = спавнер выжившего дальнобойщика
+ent-RMCSpawnPointSurvivorTrijentTrucker = точка появления дальнобойщика Trijent
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Дамба Триджент
-ent-RMCGearSurvivorPresetTrijentTrucker = пресет выжившего дальнобойщика Дамбы Триджент
+ent-RMCGearSurvivorPresetTrijentTrucker = пресет колониста: дальнобойщик Trijent
     .desc = { ent-RMCSurvivorPresetTrucker.desc }

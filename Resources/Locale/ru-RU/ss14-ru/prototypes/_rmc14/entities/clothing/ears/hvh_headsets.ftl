@@ -1,6 +1,6 @@
 ent-RMCHeadsetHvHWeYaPMC = гарнитура Vitezstvi
     .desc = Специальная гарнитура, используемая персоналом компании.
-    .suffix = Vi, ЧВК, HvH
+    .suffix = WeYa, ЧВК, HvH
 ent-RMCHeadsetHvHWeYaPMCMedic = гарнитура ЧВК (МЕД)
     .desc = { ent-RMCHeadsetHvHWeYaPMC.desc }
 ent-RMCHeadsetHvHWeYaPMCEngineer = гарнитура ЧВК (ИНЖ)
@@ -9,4 +9,4 @@ ent-RMCHeadsetHvHWeYaPMCLeader = гарнитура ЧВК (КМД)
     .desc = { ent-RMCHeadsetHvHWeYaPMC.desc }
 ent-RMCHeadsetHvHWeYaPMCCommando = гарнитура коммандос VI
     .desc = Специальная гарнитура тех, о ком не напишут в газетах.
-    .suffix = Vi, Коммандос ЧВК, HvH
+    .suffix = WeYa, Коммандос ЧВК, HvH

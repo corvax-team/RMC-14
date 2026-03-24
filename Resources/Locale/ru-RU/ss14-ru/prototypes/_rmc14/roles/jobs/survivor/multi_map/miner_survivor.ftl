@@ -1,8 +1,6 @@
-ent-RMCSpawnPointSurvivorMiner = спавнер выжившего шахтёра
+ent-RMCSpawnPointSurvivorMiner = точка появления шахтёра
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Любые карты
-ent-RMCSurvivorPresetMiner = пресет колониста-шахтёра
-    .desc = { ent-RMCSurvivorPresetCivilianRareItem.desc }
+ent-RMCSurvivorPresetMiner = пресет колониста: шахтёр
+    .desc = { ent-RMCSurvivorPresetCivilian.desc }
 ent-RMCRandomHumanoidSurvivorMiner = гост-роль колониста-шахтёра
     .desc = { ent-MarkerBase.desc }
-    .suffix = Любые карты

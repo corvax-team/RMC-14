@@ -1,21 +1,15 @@
-ent-RMCSpawnerCorpseWeYaGoon = спавнер трупа — головорез VI
+
+ent-RMCSpawnerCorpseWeYaGoonLead = спавнер трупа — лидер головорезов We-Ya
     .desc = { ent-RMCSpawnerCorpse.desc }
-ent-RMCSpawnerCorpseWeYaGoonLead = спавнер трупа — лидер головорезов Vi
-    .desc = { ent-RMCSpawnerCorpse.desc }
-ent-RMCSpawnerCorpseWeYaGoonLeadBurst = спавнер трупа — лидер головорезов Vi
+ent-RMCSpawnerCorpseWeYaGoonLeadBurst = спавнер трупа — лидер головорезов We-Ya
     .suffix = RMC14, Грудолом
     .desc = { ent-RMCSpawnerCorpseWeYaGoonLead.desc }
-ent-RMCSpawnerCorpseWeYaPMC = спавнер трупа — оперативник ЧВК VI
-    .desc = { ent-RMCSpawnerCorpse.desc }
-ent-RMCSpawnerCorpseWeYaPMCStandardBurst = спавнер трупа — оперативник ЧВК VI
-    .suffix = RMC14, Грудолом
-    .desc = { ent-RMCSpawnerCorpseWeYaPMC.desc }
-ent-RMCSpawnerCorpseWeYaGoonLeadHybrisa = спавнер трупа — лидер головорезов Vi (Гибриса)
+
+ent-RMCSpawnerCorpseWeYaGoonLeadHybrisa = спавнер трупа — лидер головорезов We-Ya (Гибриса)
     .desc = { ent-RMCSpawnerCorpseWeYaGoonLead.desc }
-ent-RMCSpawnerCorpseWeYaGoonLeadHybrisaBurst = спавнер трупа — лидер головорезов Vi (Гибриса)
+ent-RMCSpawnerCorpseWeYaGoonLeadHybrisaBurst = спавнер трупа — лидер головорезов We-Ya (Гибриса)
     .suffix = RMC14, Грудолом
     .desc = { ent-RMCSpawnerCorpseWeYaGoonLead.desc }
-ent-RMCSpawnerCorpseWeYaGoonHybrisa = спавнер трупа — головорез Vi (Гибриса)
+ent-RMCSpawnerCorpseWeYaGoonHybrisa = спавнер трупа — головорез We-Ya (Гибриса)
     .desc = { ent-RMCSpawnerCorpse.desc }
-ent-RMCSpawnerCorpseWeYaGoonKutjevo = спавнер трупа — головорез VI (Кутьево)
-    .desc = { ent-RMCSpawnerCorpse.desc }
+

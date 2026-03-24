@@ -1,3 +1,4 @@
-ent-RMCSpawnPointSurvivorSoroMiner = спавнер выжившего шахтёра
+ent-RMCSpawnPointSurvivorSoroMiner = точка появления шахтёра Sorokyne
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Сорокина Страта
+ent-RMCGearSurvivorPresetSoroMiner = пресет шахтёра Sorokyne
+    .desc = { ent-RMCSurvivorPresetCivilian.desc }

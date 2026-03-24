@@ -1,3 +1,2 @@
-ent-RMCSpawnPointSurvivorNewVaraderoResearcher = спавнер выжившего исследователя
+ent-RMCSpawnPointSurvivorNewVaraderoResearcher = точка появления исследователя New Varadero
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = UENB Нью-Варадеро

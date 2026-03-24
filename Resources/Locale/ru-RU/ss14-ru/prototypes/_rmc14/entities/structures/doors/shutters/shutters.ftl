@@ -32,6 +32,3 @@ ent-RMCShutterHybrisa = { ent-RMCShutterAlmayer }
     .desc = { ent-RMCShutterAlmayer.desc }
 ent-RMCShutterHybrisaWindow = { ent-RMCShutterAlmayer }
     .desc = { ent-RMCShutterAlmayer.desc }
-ent-RMCShutterHybrisaWindowOpen = { ent-RMCShutterHybrisaWindow }
-    .suffix = Открыто
-    .desc = { ent-RMCShutterHybrisaWindow.desc }

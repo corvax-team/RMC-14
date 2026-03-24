@@ -1,2 +1,2 @@
-ent-RMCIDCardFreePressResponder = ID-карта свободной прессы
+ent-RMCIDCardFreePressResponder = ИД-карта свободной прессы
     .desc = Обычная идентификационная карта. Кажется, эта много путешествовала.

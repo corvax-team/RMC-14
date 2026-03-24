@@ -1,5 +1,4 @@
-ent-RMCSpawnPointSurvivorCargoTechnician = спавнер выжившего техника снабжения
+ent-RMCSpawnPointSurvivorCargoTechnician = точка появления техника карго
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = UENB Нью-Варадеро
-ent-RMCGearSurvivorPresetCargoTechnician = пресет колониста-техника снабжения
+ent-RMCGearSurvivorPresetCargoTechnician = пресет колониста: техник карго
     .desc = { ent-RMCSurvivorPresetEngineer.desc }

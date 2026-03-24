@@ -1,3 +1,2 @@
 ent-RMCWeaponShotgunM890Riot = M890 riot shotgun
-    .desc = The Weston-Yamada M890 Shotgun, a semi-automatic shotgun with a quick fire rate. Equipped with a steel blue finish to signify use in riot control. It has been modified to only fire 20G beanbags.
-    .suffix = Riot, Beanbags
+    .desc = A Weston-Yamada semi-automatic riot shotgun with a rapid fire rate. Holds 8 Beanbag shells in the chamber. Specially made for crowd control during tough situations.

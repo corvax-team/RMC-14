@@ -1,5 +1,3 @@
-ent-ColMarTechCargo = { ent-ColMarTechBase }
-    .desc = { ent-ColMarTechBase.desc }
 ent-ColMarTechCargoGuns = КолМарТех автоматическая стойка оружия
     .desc = Автоматизированная стойка, подключенная к большому хранилищу различного вооружения и взрывчатки. Доступ к нему имеют офицер снабжения и техники снабжения.
 ent-ColMarTechCargoAmmo = КолМарТех автоматическая стойка боеприпасов

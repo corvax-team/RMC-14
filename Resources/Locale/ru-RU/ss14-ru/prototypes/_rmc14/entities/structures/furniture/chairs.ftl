@@ -1,6 +1,5 @@
 ent-CMSeatBase = абстрактное сиденье
     .desc = { ent-SeatBase.desc }
-    .suffix = RMC
 ent-CMChair = стул
     .desc = Прямоугольный металлический каркас на четырех ножках с задней стенкой. Предназначен для более или менее удобного сидения.
 ent-CMChairFolded = { ent-CMChair }

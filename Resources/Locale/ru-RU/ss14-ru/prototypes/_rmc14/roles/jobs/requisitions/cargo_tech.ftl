@@ -1,2 +1,2 @@
-ent-CMSpawnPointCargoTech = спавнер техника снабжения
+ent-CMSpawnPointCargoTech = точка появления техник снабжения
     .desc = { ent-CMSpawnPointJobBase.desc }

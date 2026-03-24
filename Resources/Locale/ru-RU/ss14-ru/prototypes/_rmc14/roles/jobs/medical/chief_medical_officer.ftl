@@ -1,4 +1,4 @@
-ent-CMSpawnPointCMO = спавнер главного врача
+ent-CMSpawnPointCMO = точка появления старший медицинский офицер
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGuidebookRoleCMO = Главный врач
-    .desc = Главный врач
+ent-RMCGuidebookRoleCMO = Старший медицинский офицер
+    .desc = Старший медицинский офицер.

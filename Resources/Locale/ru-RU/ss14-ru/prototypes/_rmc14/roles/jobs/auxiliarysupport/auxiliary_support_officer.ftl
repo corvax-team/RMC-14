@@ -1,4 +1,6 @@
-ent-CMSpawnPointASO = спавнер офицера вспомогательной поддержки
+ent-CMSpawnPointASO = точка появления офицер вспомогательной поддержки
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGuidebookRoleASO = Офицер вспомогательной поддержки
+ent-RMCGuidebookRoleASO = Сотрудник вспомогательной поддержки
+    .desc = { ent-CMGuidebookRole.desc }
+ent-CMGuidebookRoleASO = Сотрудник вспомогательной поддержки
     .desc = { ent-CMGuidebookRole.desc }

@@ -1,5 +1,4 @@
-ent-RMCSpawnPointSurvivorCMBDeputy = спавнер выжившего помощника маршала БКМ
+ent-RMCSpawnPointSurvivorCMBDeputy = точка появления помощника шерифа CMB
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = Базовый
-ent-RMCGearSurvivorPresetCMBDeputy = пресет помощника маршала БКМ
+ent-RMCGearSurvivorPresetCMBDeputy = пресет колониста-помощника шерифа CMB
     .desc = { ent-RMCSurvivorPresetSecurity.desc }

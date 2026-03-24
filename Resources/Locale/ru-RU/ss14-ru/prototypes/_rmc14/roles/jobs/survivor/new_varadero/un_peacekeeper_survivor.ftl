@@ -1,5 +1,4 @@
-ent-RMCSpawnPointSurvivorUNPeacekeeper = спавнер выжившего миротворца ГИОР
+ent-RMCSpawnPointSurvivorUNPeacekeeper = точка появления миротворца ГИОР
     .desc = { ent-CMSpawnPointJobBase.desc }
-    .suffix = UENB Нью-Варадеро
-ent-RMCGearSurvivorPresetUNPeacekeeper = пресет колониста-миротворца ГИОР
+ent-RMCGearSurvivorPresetUNPeacekeeper = пресет колониста: миротворец ГИОР
     .desc = { ent-RMCSurvivorPresetSecurity.desc }

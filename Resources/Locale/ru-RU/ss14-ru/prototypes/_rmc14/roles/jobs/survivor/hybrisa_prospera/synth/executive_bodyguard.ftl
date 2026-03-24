@@ -1,2 +1,2 @@
-ent-RMCSurvivorPresetHybrisaSynthExecBodyguard = пресет синтетика-телохранителя исполнительного лица Гибриса
+ent-RMCSurvivorPresetHybrisaSynthExecBodyguard = пресет выжившего: синтетик-телохранитель (Hybrisa)
     .desc = { "" }

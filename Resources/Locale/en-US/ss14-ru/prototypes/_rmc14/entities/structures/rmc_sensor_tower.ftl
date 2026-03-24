@@ -3,6 +3,3 @@ ent-RMCSensorTower = experimental sensor tower
 ent-RMCSensorTowerOn = { ent-RMCSensorTower }
     .suffix = On, No break chance
     .desc = { ent-RMCSensorTower.desc }
-ent-RMCSensorTowerOffset = { ent-RMCSensorTower }
-    .suffix = Offset
-    .desc = { ent-RMCSensorTower.desc }

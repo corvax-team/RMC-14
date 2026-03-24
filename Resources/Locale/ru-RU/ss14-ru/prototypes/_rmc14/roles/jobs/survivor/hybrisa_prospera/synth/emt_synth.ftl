@@ -1,2 +1,2 @@
-ent-RMCSurvivorPresetHybrisaSynthEMT = пресет синтетика-парамедика СМП Гибриса
+ent-RMCSurvivorPresetHybrisaSynthEMT = пресет выжившего: синтетик-парамедик (Hybrisa)
     .desc = { "" }

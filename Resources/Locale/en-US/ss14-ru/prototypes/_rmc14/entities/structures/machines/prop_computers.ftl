@@ -20,5 +20,3 @@ ent-RMCIdentificationComputer = identification computer
     .desc = { ent-RMCPropComputerBase.desc }
 ent-RMCStationAlertComputer = station alert computer
     .desc = { ent-RMCPropComputerBase.desc }
-ent-RMCSystemsComputer = systems computer
-    .desc = { ent-RMCPropComputerBase.desc }

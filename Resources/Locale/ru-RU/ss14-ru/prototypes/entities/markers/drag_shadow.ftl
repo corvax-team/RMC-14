@@ -1,2 +1,2 @@
-ent-dragshadow = тень перетаскивания
+ent-dragshadow = drag shadow
     .desc = { "" }

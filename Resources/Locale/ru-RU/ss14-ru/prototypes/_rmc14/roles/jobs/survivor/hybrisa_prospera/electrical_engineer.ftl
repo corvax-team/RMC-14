@@ -1,2 +1,2 @@
-ent-RMCGearSurvivorPresetHybrisaEngineer = пресет инженера Гибриса
+ent-RMCGearSurvivorPresetHybrisaEngineer = пресет колониста: инженер (Hybrisa)
     .desc = { ent-RMCSurvivorPresetEngineer.desc }
