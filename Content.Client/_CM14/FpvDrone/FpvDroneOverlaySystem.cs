@@ -18,6 +18,7 @@ public sealed class FpvDroneOverlaySystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private FpvDroneOverlay? _overlay;
+    private bool _overlayEnabled;
 
     public override void Initialize()
     {
@@ -30,13 +31,18 @@ public sealed class FpvDroneOverlaySystem : EntitySystem
 
     private void UpdateOverlay(bool enable)
     {
+        if (_overlayEnabled == enable)
+            return;
+
+        _overlayEnabled = enable;
+
         if (enable)
         {
-            if (_overlay != null)
-                return;
-
-            _overlay = new FpvDroneOverlay(_protoMan, _timing);
-            _overlays.AddOverlay(_overlay);
+            if (_overlay == null)
+            {
+                _overlay = new FpvDroneOverlay(_protoMan, _timing);
+                _overlays.AddOverlay(_overlay);
+            }
 
             _light.DrawLighting = false;
         }
@@ -57,23 +63,14 @@ public sealed class FpvDroneOverlaySystem : EntitySystem
         base.FrameUpdate(frameTime);
 
         var player = _player.LocalEntity;
-
         if (player == null)
         {
             UpdateOverlay(false);
             return;
         }
 
-        if (!_entManager.HasComponent<FpvDroneScreenOverlayComponent>(player))
-        {
-            if (_overlay != null)
-                UpdateOverlay(false);
-
-            return;
-        }
-
-        if (_overlay == null)
-            UpdateOverlay(true);
+        var hasOverlayComp = _entManager.HasComponent<FpvDroneScreenOverlayComponent>(player);
+        UpdateOverlay(hasOverlayComp);
     }
 
     private sealed class FpvDroneOverlay(IPrototypeManager protoMan, IGameTiming timing) : Overlay
@@ -90,7 +87,6 @@ public sealed class FpvDroneOverlaySystem : EntitySystem
                 return;
 
             var handle = args.WorldHandle;
-
             _shader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
             _shader.SetParameter("time", (float)timing.CurTime.TotalSeconds);
 

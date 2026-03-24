@@ -42,19 +42,20 @@ public sealed class FpvDroneSystem : EntitySystem
         var query = EntityQueryEnumerator<FpvDroneObserverComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var comp, out var xform))
         {
-            if (TerminatingOrDeleted(uid) || !Exists(comp.Control))
+            if (comp.Pilot == null || TerminatingOrDeleted(uid) || !Exists(comp.Control))
                 continue;
 
             if (!TryComp<FpvDroneScreenOverlayComponent>(uid, out var screen))
                 continue;
 
+            var droneXform = Transform(uid);
             var controlXform = Transform(comp.Control);
-            var dronePos = _transform.GetWorldPosition(uid);
-            var controlPos = _transform.GetWorldPosition(comp.Control);
+            var dronePos = _transform.GetWorldPosition(droneXform);
+            var controlPos = _transform.GetWorldPosition(controlXform);
             var distSq = (dronePos - controlPos).LengthSquared();
             var maxRangeSq = comp.MaxRange * comp.MaxRange;
 
-            var shouldHaveSignalLoss = distSq > maxRangeSq || xform.MapID != controlXform.MapID;
+            var shouldHaveSignalLoss = distSq > maxRangeSq || droneXform.MapID != controlXform.MapID;
 
             if (screen.SignalLost != shouldHaveSignalLoss)
             {
@@ -147,7 +148,13 @@ public sealed class FpvDroneSystem : EntitySystem
     {
         component.FlyingStream = _audio.Stop(component.FlyingStream);
 
-        RemoveOverlayAndTransfer(uid, component);
+        if (component.Pilot is { } pilot && !TerminatingOrDeleted(pilot))
+        {
+            if (_mind.TryGetMind(uid, out var mindId, out var mind))
+                _mind.TransferTo(mindId, pilot, mind: mind);
+        }
+
+        component.Pilot = null;
     }
 
     private void OnControlTerminating(EntityUid uid, FpvDroneControlComponent component, EntityTerminatingEvent args)
