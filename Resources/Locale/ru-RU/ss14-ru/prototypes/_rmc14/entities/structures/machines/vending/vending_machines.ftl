@@ -66,5 +66,5 @@ ent-CMVendorIngredientsLockedPowered = { ent-CMVendorIngredients }
     .suffix = Закрыт, Запитан
     .desc = { ent-CMVendorIngredients.desc }
 ent-RMCVendorSecTSEPA = { ent-CMVendorSec }
-    .suffix = TSEPA
+    .suffix = ПСОПЗ
     .desc = { ent-CMVendorSec.desc }
