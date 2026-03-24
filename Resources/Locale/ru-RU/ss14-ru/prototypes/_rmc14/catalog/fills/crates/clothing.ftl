@@ -18,7 +18,5 @@ ent-RMCCrateClothingDropPouch = ящик подсумков для сброса 
     .desc = { ent-RMCCrateBase.desc }
 ent-RMCCrateClothingDropPouchBlack = ящик чёрных подсумков для сброса (x4)
     .desc = { ent-RMCCrateBase.desc }
-ent-RMCCrateClothingWebbingPouch = ящик подсумков сброса (x4)
-    .desc = { ent-RMCCrateWeldable.desc }
 ent-RMCCrateClothingOfficerOutfit = ящик офицерского обмундирования
     .desc = { ent-RMCCrateWeldable.desc }

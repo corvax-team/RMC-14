@@ -1,2 +1,2 @@
-ent-CMSpawnPointPilotGunship = точка появления пилот штурмового корабля
+ent-CMSpawnPointPilotGunship = спавнер пилота штурмового корабля
     .desc = { ent-CMSpawnPointJobBase.desc }

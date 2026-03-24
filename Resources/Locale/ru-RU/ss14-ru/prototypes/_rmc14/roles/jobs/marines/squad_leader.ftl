@@ -1,4 +1,4 @@
-ent-CMSpawnPointSquadLeader = точка появления командир отряда
+ent-CMSpawnPointSquadLeader = спавнер командира отряда
     .desc = { ent-CMSpawnPointJobBase.desc }
 ent-CMSpawnPointSquadLeaderAlpha = { ent-CMSpawnPointSquadLeader }
     .suffix = Альфа
@@ -12,3 +12,11 @@ ent-CMSpawnPointSquadLeaderCharlie = { ent-CMSpawnPointSquadLeader }
 ent-CMSpawnPointSquadLeaderDelta = { ent-CMSpawnPointSquadLeader }
     .suffix = Дельта
     .desc = { ent-CMSpawnPointSquadLeader.desc }
+ent-RMCGuidebookRoleSL = Командир отряда
+    .desc = Командир отряда
+ent-RMCGuidebookActionMove = приказ «Двигаться»
+    .desc = { "" }
+ent-RMCGuidebookActionHold = приказ «Удерживать»
+    .desc = { "" }
+ent-RMCGuidebookActionFocus = приказ «Фокус»
+    .desc = { "" }

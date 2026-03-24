@@ -1,6 +1,6 @@
-ent-RMCSurvivorPresetForeconNoPrimary = Шаблон выживший из СОиС
+ent-RMCSurvivorPresetForeconNoPrimary = пресет выжившего СОиС без основного оружия
     .desc = { "" }
-ent-RMCSurvivorPresetForecon = Шаблон выживший из СОиС
+ent-RMCSurvivorPresetForecon = пресет выжившего СОиС
     .desc = { ent-RMCSurvivorPresetForeconNoPrimary.desc }
-ent-RMCSurvivorPresetForeconNoPistol = Шаблон выживший из СОиС
+ent-RMCSurvivorPresetForeconNoPistol = пресет выжившего СОиС без пистолета
     .desc = { ent-RMCSurvivorPresetForecon.desc }

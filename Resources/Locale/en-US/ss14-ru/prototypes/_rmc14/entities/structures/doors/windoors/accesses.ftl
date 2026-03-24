@@ -19,3 +19,6 @@ ent-CMWindoorSecureCommand = { ent-CMWindoorSecure }
 ent-RMCWindoorSecureTSEPABrig = { ent-CMWindoorSecure }
     .suffix = TSEPA, Brig, Locked
     .desc = { ent-CMWindoorSecure.desc }
+ent-CMWindoorSecureBrigPowered = { ent-CMWindoorSecure }
+    .suffix = Brig, Locked, Powered
+    .desc = { ent-CMWindoorSecure.desc }

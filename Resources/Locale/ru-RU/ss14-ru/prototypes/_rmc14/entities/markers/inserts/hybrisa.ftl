@@ -1,9 +1,9 @@
 ent-RMCMapInsertHybrisaBase = { ent-RMCMapInsertBase }
     .suffix = Вставка Гибриса
     .desc = { ent-RMCMapInsertBase.desc }
-ent-RMCMapInsertHybrisaCLFSpaceport = Космопорт CLF
+ent-RMCMapInsertHybrisaCLFSpaceport = Космопорт КФО
     .suffix = Вставка Гибриса
     .desc = { ent-RMCMapInsertHybrisaBase.desc }
-ent-RMCMapInsertHybrisaTSEAirbase = Авиабаза TSE
+ent-RMCMapInsertHybrisaTSEAirbase = Авиабаза Империи Миртана
     .suffix = Вставка Гибриса
     .desc = { ent-RMCMapInsertHybrisaBase.desc }

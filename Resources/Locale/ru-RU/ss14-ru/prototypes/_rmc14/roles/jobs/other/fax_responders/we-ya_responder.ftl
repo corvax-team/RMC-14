@@ -1,2 +1,2 @@
-ent-RMCIDCardWeYaResponder = ИД-карта Связиста VItezstvi
+ent-RMCIDCardWeYaResponder = ID-карта Связиста VItezstvi
     .desc = Изысканное, покрытое позолотой удостоверение личности. Одно из многих, выданных армии операторов факса.

@@ -1,2 +1,2 @@
-ent-RMCSurvivorPresetHybrisaSynthDetective = пресет выжившего: синтетик-детектив (Hybrisa)
+ent-RMCSurvivorPresetHybrisaSynthDetective = пресет синтетика-детектива Гибриса
     .desc = { "" }

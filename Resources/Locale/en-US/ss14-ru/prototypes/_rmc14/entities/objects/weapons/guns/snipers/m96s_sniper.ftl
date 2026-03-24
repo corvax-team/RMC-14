@@ -1,5 +1,5 @@
 ent-CMM96SSniperRifle = M96S scoped rifle
-    .desc = A heavy sniper rifle manufactured by Aegis Armaments. It has a scope system and fires armor penetrating rounds out of a 15-round magazine. 'Peace Through Superior Firepower'
+    .desc = A heavy sniper rifle manufactured by AEGIS Armaments. It has a scope system and fires armor penetrating rounds out of a 15-round magazine. 'Peace Through Superior Firepower'
 ent-CMMagazineSniperM96S = M96S marksman magazine (10x28mm)
     .desc = A magazine of sniper rifle ammo. An aimed shot with it will deal significant damage.
 ent-CMMagazineSniperM96SIncendiary = M96S incendiary magazine (10x28mm)

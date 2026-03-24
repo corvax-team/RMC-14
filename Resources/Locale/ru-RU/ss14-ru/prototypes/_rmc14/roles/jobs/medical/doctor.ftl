@@ -1,4 +1,4 @@
-ent-CMSpawnPointDoctor = точка появления доктор
+ent-CMSpawnPointDoctor = спавнер врача
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-CMGuidebookRoleDoctor = Доктор
+ent-CMGuidebookRoleDoctor = Врач
     .desc = { ent-CMGuidebookRole.desc }

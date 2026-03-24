@@ -1,0 +1,12 @@
+ent-RMCVehicleSPPAPCHardpointBase = { ent-BaseItem }
+    .desc = { ent-BaseItem.desc }
+ent-RMCVehicleSPPAPCWheel = SPP APC wheel
+    .desc = A reinforced APC wheel produced for SPP vehicles.
+ent-RMCVehicleSPPAPCMinigun = SPP APC minigun turret
+    .desc = A roof-mounted minigun turret for an SPP APC.
+ent-RMCVehicleSPPAPCAutocannon = SPP APC autocannon
+    .desc = A frontal autocannon hardpoint for an SPP APC.
+ent-RMCVehicleSPPAPCHJ35Launcher = HJ35 APC launcher
+    .desc = A missile launcher fitted to the secondary mount of an SPP APC.
+ent-RMCVehicleSPPAPCFlareLauncher = SPP APC flare launcher
+    .desc = A flare launcher hardpoint for SPP APC support slots.

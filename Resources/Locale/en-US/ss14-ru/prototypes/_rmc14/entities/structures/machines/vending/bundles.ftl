@@ -1,4 +1,4 @@
-ent-CMVendorBundleRiflemanApparel = standard marine apparel
+ent-CMVendorBundleRiflemanApparel = Uniform, helmet, headset, gloves, boots
     .desc = Contains a marine jumpsuit, a M10 helmet, a headset, combat gloves and combat boots.
 ent-CMVendorBundleFireteamLeaderApparel = standard marine apparel
     .desc = Contains a marine jumpsuit, a M12 helmet, a headset, and combat boots.
@@ -22,3 +22,9 @@ ent-RMCVendorBundleCrewMedicalEssentialsDoctor = essential medical set
     .desc = Contains a defibrillator, a first-aid kit, medical tools and a flashlight.
 ent-RMCCommandingOfficerEssentialsBundle = Commanding Officer Essentials kit
     .desc = Contains a laser designator, whistle, and a disabler.
+ent-RMCVendorBundleRCMPVEAssaultEngi = Essential Engineering Set
+    .desc = Contains an engineer kit, tool pouch, and webbing with a variety of items to engineer and/or assault with.
+ent-RMCVendorBundleRCMPVEMedic = Essential Medical Set
+    .desc = Contains a surgical case, stethoscope, penlight, and assortment of medical tools to put people back together. Make use of that Navy training.
+ent-RMCVendorBundleRCMPVEMGL = Multiple Grenade Launcher Set
+    .desc = Contains the L989A2 Multiple Grenade Launcher and the L79 pattern load-bearing rig.

@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorLV624CorporateDomeGoonEngineer = точка появления техника службы безопасности LV-624
+ent-RMCSpawnPointSurvivorLV624CorporateDomeGoonEngineer = спавнер особого выжившего инженера-громилы LV-624
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetLV624CorporateDomeGoonEngineer = пресет колониста: техник службы безопасности LV-624
+    .suffix = LV-624
+ent-RMCGearSurvivorPresetLV624CorporateDomeGoonEngineer = пресет инженера-громилы LV-624
     .desc = { ent-RMCSurvivorPresetSecurity.desc }

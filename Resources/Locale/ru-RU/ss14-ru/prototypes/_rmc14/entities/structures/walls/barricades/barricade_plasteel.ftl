@@ -1,0 +1,13 @@
+ent-RMCBarricadePlasteel = пласталевая баррикада
+    .desc = Прочная и быстровозводимая баррикада из листов пластали. Вершина фортификационного искусства. Для ремонта используйте сварочный аппарат.
+ent-RMCBarricadeBurnPlasteel = { ent-RMCBarricadePlasteel }
+    .suffix = Биозащитная
+    .desc = { ent-RMCBarricadePlasteel.desc }
+ent-RMCBarricadeBrutePlasteel = { ent-RMCBarricadePlasteel }
+    .suffix = Укреплённая
+    .desc = { ent-RMCBarricadePlasteel.desc }
+ent-RMCBarricadeExplosivePlasteel = { ent-RMCBarricadePlasteel }
+    .suffix = Композитная
+    .desc = { ent-RMCBarricadePlasteel.desc }
+ent-CMBarricadePlasteelDoor = складная пласталевая баррикада
+    .desc = Прочная складная пласталевая баррикада крепче своего металлического аналога. Можно закрыть и открыть в любой момент. Для ремонта используйте сварочный аппарат.

@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorHybrisaFireProtectionSpecialist = точка появления специалиста по пожарной безопасности (Hybrisa)
+ent-RMCSpawnPointSurvivorHybrisaFireProtectionSpecialist = спавнер выжившего специалиста по пожарной безопасности
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetHybrisaFireProtectionSpecialist = пресет колониста: специалист по пожарной безопасности (Hybrisa)
+    .suffix = Гибриса
+ent-RMCGearSurvivorPresetHybrisaFireProtectionSpecialist = пресет специалиста по пожарной безопасности Гибриса
     .desc = { ent-RMCSurvivorPresetCivilian.desc }

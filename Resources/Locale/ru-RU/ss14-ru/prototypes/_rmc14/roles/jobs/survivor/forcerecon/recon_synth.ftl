@@ -1,2 +1,2 @@
-ent-CMSpawnPointForeconSynth = Точка спавна Синтетика СОиС
+ent-CMSpawnPointForeconSynth = спавнер синтетика СОиС
     .desc = { ent-CMSpawnPointJobBase.desc }

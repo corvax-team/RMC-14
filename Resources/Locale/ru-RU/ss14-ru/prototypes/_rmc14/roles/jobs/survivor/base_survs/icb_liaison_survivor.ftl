@@ -1,2 +1,3 @@
-ent-RMCSpawnPointSurvivorICB = точка появления выжившего ICB
+ent-RMCSpawnPointSurvivorICB = спавнер выжившего СЗПРС
     .desc = { ent-CMSpawnPointJobBase.desc }
+    .suffix = Базовый

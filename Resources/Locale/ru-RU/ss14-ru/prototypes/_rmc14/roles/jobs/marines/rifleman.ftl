@@ -1,4 +1,4 @@
-ent-CMSpawnPointRifleman = точка появления стрелок
+ent-CMSpawnPointRifleman = спавнер стрелка
     .desc = { ent-CMSpawnPointJobBase.desc }
 ent-CMSpawnPointRiflemanAlpha = { ent-CMSpawnPointRifleman }
     .suffix = Альфа
@@ -14,3 +14,5 @@ ent-CMSpawnPointRiflemanDelta = { ent-CMSpawnPointRifleman }
     .desc = { ent-CMSpawnPointRifleman.desc }
 ent-CMGuidebookRoleYou = Вы?
     .desc = { ent-CMGuidebookRole.desc }
+ent-RMCGuidebookCorpseMarine = Раненый морпех
+    .desc = { ent-MobHuman.desc }

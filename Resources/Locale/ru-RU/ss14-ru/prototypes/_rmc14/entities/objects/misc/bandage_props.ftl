@@ -14,3 +14,5 @@ ent-RMCDirtBandageProp7 = { ent-RMCDirtBandageProp }
     .desc = { ent-RMCDirtBandageProp.desc }
 ent-RMCDirtBandageProp8 = { ent-RMCDirtBandageProp }
     .desc = { ent-RMCDirtBandageProp.desc }
+ent-RMCPaperScrapProp = обрывок бумаги
+    .desc = { ent-RMCDirtBandageProp5.desc }
