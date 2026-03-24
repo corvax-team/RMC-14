@@ -20,7 +20,7 @@ void fragment()
     highp float noise = fract(sin(dot(uv * 12.0 + vec2(time * 2.0), vec2(12.9898, 78.233))) * 43758.5453);
     col += (noise - 0.5) * noiseStrength;
 
-    highp float scan = sin(uv.y * 700.0 + time * 12.0) * 0.5 + 0.5;
+    highp float scan = sin(uv.y * 250.0 + time * 12.0) * 0.5 + 0.5;
     col *= 1.0 - (scan * scanStrength);
 
     highp float dist = distance(uv, vec2(0.5));

@@ -27,6 +27,7 @@ public sealed partial class FpvDroneObserverComponent : Component
     [DataField] public EntityUid? EjectAction;
     [DataField] public string EjectActionPrototypeId = "ActionFpvDroneEject";
     [DataField] [AutoNetworkedField] public float MaxRange = 50f;
+    [DataField] public EntityUid? Pilot;
 }
 
 [RegisterComponent]
@@ -50,8 +51,6 @@ public sealed partial class FpvDroneExplosiveComponent : Component
 {
     [DataField] public EntityUid? ExplodeActionEntity;
     [DataField] public EntProtoId? ExplodeActionId = "ActionFpvDroneExplosive";
-    [DataField] [AutoNetworkedField] public EntProtoId ExplosionType = "Default";
-    [DataField] [AutoNetworkedField] public float MaxTileIntensity = 10f;
     [DataField] [AutoNetworkedField] public float Radius = 5f;
     [DataField] [AutoNetworkedField] public float TotalIntensity = 100f;
 }

@@ -2,6 +2,7 @@ using Content.Shared._CM14.FpvDrone;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -22,6 +23,9 @@ public sealed class FpvDroneOverlaySystem : EntitySystem
     {
         base.Initialize();
         SubscribeNetworkEvent<FpvDroneSetOverlayEvent>(ev => UpdateOverlay(ev.Enable));
+        SubscribeLocalEvent<FpvDroneScreenOverlayComponent, ComponentRemove>((_, _, _) => UpdateOverlay(false));
+        SubscribeLocalEvent<FpvDroneScreenOverlayComponent, LocalPlayerDetachedEvent>((_, _, _) =>
+            UpdateOverlay(false));
     }
 
     private void UpdateOverlay(bool enable)
