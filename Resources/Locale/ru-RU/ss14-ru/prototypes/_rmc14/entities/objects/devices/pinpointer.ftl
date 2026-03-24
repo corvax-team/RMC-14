@@ -6,4 +6,4 @@ ent-RMCPinpointerUniversal = { ent-RMCPinpointerBase }
     .desc = { ent-RMCPinpointerBase.desc }
 ent-RMCPinpointerAegisID = { ent-RMCPinpointerBase }
     .desc = { ent-RMCPinpointerBase.desc }
-    .suffix = AEGIS
+    .suffix = WarTech
