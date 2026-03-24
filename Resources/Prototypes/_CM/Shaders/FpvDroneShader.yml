@@ -1,6 +1,11 @@
 - type: shader
-  id: FlashedEffect
+  id: FpvDroneShader
   kind: source
-  path: "/Textures/_CM14/Shaders/fpv_drone.swsl"
+  path: "/Textures/_CM/Shaders/fpv_drone.swsl"
   params:
-    nv_color: 0.1, 0.75, 0.1 
+    noiseStrength: 0.3
+    scanStrength: 0.15
+    aberration: 0.002
+    vignetteStrength: 0.5
+    intensity: 1.0
+    colorShift: 0.01, 0.02, 0.01

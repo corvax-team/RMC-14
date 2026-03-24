@@ -7,20 +7,23 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-        sprite: _CM/Actions/drone.rsi
-        state: blast
+      sprite: _CM/Actions/drone.rsi
+      state: blast
   - type: InstantAction
     useDelay: 0
     priority: 7
     event: !type:FpvDroneExplosiveEvent
     checkCanInteract: false
 
-# - type: entity
-#   id: ActionFpvDroneExplosiveDrone
-#   name: "Explosive Detonation"
-#   description: "Detonate the FPV Drone's explosive charge."
-#   noSpawn: true
-#   components:
-#     - type: InstantAction
-#       event: !type:FpvDroneExplosiveEvent
-#       checkCanInteract: false
+- type: entity
+  id: ActionFpvDroneEject
+  name: "Eject from Drone"
+  description: "Stop controlling the drone and return to your body."
+  noSpawn: true
+  components:
+  - type: Action
+    icon:
+      sprite: Objects/Magic/magicactions.rsi
+      state: item_recall
+  - type: InstantAction
+    event: !type:FpvDroneEjectEvent

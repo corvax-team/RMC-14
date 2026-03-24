@@ -34,16 +34,18 @@
   - type: Visibility
     layer: 1
   - type: Alerts
-  - type: ShowJobIcons
-  - type: Xeno
-    role: FpvDrone
-    actionIds:
-      - ActionFpvDroneExplosive
+  - type: FpvDroneObserver
+    ejectActionId: ActionFpvDroneEject
+  - type: FpvDroneScreenOverlay
   - type: FpvDroneExplosive
-    damage:
-      types:
-        Brute: 400
-
+    totalIntensity: 250
+    radius: 6
+    maxTileIntensity: 15
+    explodeActionId: ActionFpvDroneExplosive
+  - type: Explosive
+    explosionType: RMC
+  - type: CMExplosionEffect
+  - type: RMCScorchEffect
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong

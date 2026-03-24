@@ -27,8 +27,8 @@
   - type: DeviceNetworkRequiresPower
   - type: FpvDroneControl
     observerId: FpvDroneObserver
-  - type: AccessReader
-    access: [[ "PilotRaptor" ]]
+  #- type: AccessReader
+  #  access: [[ "PilotRaptor" ]]
   - type: Transform
     anchored: true
   - type: Appearance

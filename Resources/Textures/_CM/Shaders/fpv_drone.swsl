@@ -1,20 +1,40 @@
-shader FPVDrone
+uniform sampler2D SCREEN_TEXTURE;
+uniform highp float time;
+uniform highp float noiseStrength;
+uniform highp float scanStrength;
+uniform highp float vignetteStrength;
+uniform highp float aberration;
+uniform highp float intensity;
+uniform highp float signalLoss;
+uniform highp vec3 colorShift;
+
+void fragment()
 {
-    uniform float time;          // для анимации шума
-    uniform vec3 colorTint = vec3(0.0, 1.0, 0.0); // зелёный по умолчанию
+    highp vec2 uv = UV;
+    highp vec3 col;
 
-    vec4 fragment(vec2 uv, vec4 texColor)
+    col.r = texture(SCREEN_TEXTURE, clamp(uv + vec2(aberration, 0.0), 0.0, 1.0)).r;
+    col.g = texture(SCREEN_TEXTURE, uv).g;
+    col.b = texture(SCREEN_TEXTURE, clamp(uv - vec2(aberration, 0.0), 0.0, 1.0)).b;
+
+    highp float noise = fract(sin(dot(uv * 12.0 + vec2(time * 2.0), vec2(12.9898, 78.233))) * 43758.5453);
+    col += (noise - 0.5) * noiseStrength;
+
+    highp float scan = sin(uv.y * 700.0 + time * 12.0) * 0.5 + 0.5;
+    col *= 1.0 - (scan * scanStrength);
+
+    highp float dist = distance(uv, vec2(0.5));
+    highp float vignette = clamp(1.0 - dist * 1.5, 0.0, 1.0);
+    col *= mix(1.0, vignette * vignette, vignetteStrength);
+
+    col += colorShift;
+    col *= intensity;
+
+    if (signalLoss > 0.05)
     {
-        // монохром
-        float gray = dot(texColor.rgb, vec3(0.299, 0.587, 0.114));
-
-        // простой шум
-        float noise = fract(sin(dot(uv.xy , vec2(12.9898,78.233)) + time) * 43758.5453) * 0.2;
-        gray += noise;
-
-        // применяем цвет FPV
-        vec3 finalColor = gray * colorTint;
-
-        return vec4(finalColor, texColor.a);
+        highp float staticNoise = fract(sin(dot(uv + vec2(time * 5.0), vec2(12.9898, 78.233))) * 43758.5453);
+        col = mix(col, vec3(staticNoise), clamp(signalLoss, 0.0, 1.0));
     }
+
+    COLOR = vec4(clamp(col, 0.0, 1.0), 1.0);
 }
