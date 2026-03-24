@@ -7,7 +7,6 @@ using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Player;
 
 namespace Content.Server._CM14.FpvDrone;
 
@@ -40,40 +39,38 @@ public sealed class FpvDroneSystem : EntitySystem
         base.Update(frameTime);
 
         var query = EntityQueryEnumerator<FpvDroneObserverComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var comp, out var xform))
+        while (query.MoveNext(out var uid, out var observer, out var droneXform))
         {
-            if (comp.Pilot == null || TerminatingOrDeleted(uid) || !Exists(comp.Control))
+            if (observer.Pilot == null || TerminatingOrDeleted(uid) || !Exists(observer.Control))
                 continue;
 
-            if (!TryComp<FpvDroneScreenOverlayComponent>(uid, out var screen))
-                continue;
-
-            var droneXform = Transform(uid);
-            var controlXform = Transform(comp.Control);
+            var controlXform = Transform(observer.Control);
             var dronePos = _transform.GetWorldPosition(droneXform);
             var controlPos = _transform.GetWorldPosition(controlXform);
             var distSq = (dronePos - controlPos).LengthSquared();
-            var maxRangeSq = comp.MaxRange * comp.MaxRange;
+            var maxRangeSq = observer.MaxRange * observer.MaxRange;
+            var signalLost = distSq > maxRangeSq || droneXform.MapID != controlXform.MapID;
 
-            var shouldHaveSignalLoss = distSq > maxRangeSq || droneXform.MapID != controlXform.MapID;
-
-            if (screen.SignalLost != shouldHaveSignalLoss)
+            if (observer.SignalLost != signalLost)
             {
-                screen.SignalLost = shouldHaveSignalLoss;
+                observer.SignalLost = signalLost;
 
-                if (screen.SignalLost)
-                    screen.TimeUntilExplosion = 0.8f;
+                if (signalLost)
+                    observer.TimeUntilExplosion = 0.8f;
 
-                Dirty(uid, screen);
+                Dirty(uid, observer);
             }
 
-            if (!screen.SignalLost)
+            if (!observer.SignalLost)
                 continue;
 
-            screen.TimeUntilExplosion -= frameTime;
+            observer.TimeUntilExplosion -= frameTime;
 
-            if (screen.TimeUntilExplosion <= 0)
+            if (observer.TimeUntilExplosion <= 0f)
+            {
+                observer.TimeUntilExplosion = float.MaxValue; // защита от повторного вызова
                 RaiseLocalEvent(uid, new FpvDroneExplosiveEvent());
+            }
         }
     }
 
@@ -119,13 +116,11 @@ public sealed class FpvDroneSystem : EntitySystem
             return;
         }
 
-        if (_mind.TryGetMind(uid, out var mindId, out var mind)) _mind.TransferTo(mindId, pilot.Value, mind: mind);
+        if (_mind.TryGetMind(uid, out var mindId, out var mind))
+            _mind.TransferTo(mindId, pilot.Value, mind: mind);
 
         if (component.SignalLostSound != null)
             _audio.PlayEntity(component.SignalLostSound, pilot.Value, pilot.Value, AudioParams.Default.WithVolume(-2f));
-
-        if (TryComp<ActorComponent>(pilot.Value, out var actor))
-            RaiseNetworkEvent(new FpvDroneSetOverlayEvent(false), actor.PlayerSession);
 
         _popup.PopupEntity(Loc.GetString("fpv-drone-ui-connection-lost"), pilot.Value, pilot.Value,
             PopupType.LargeCaution);
@@ -139,9 +134,6 @@ public sealed class FpvDroneSystem : EntitySystem
 
         component.FlyingStream = _audio.PlayPvs(component.FlyingLoopSound, uid,
             AudioParams.Default.WithLoop(true).WithVolume(-5f))?.Entity;
-
-        if (TryComp<ActorComponent>(uid, out var actor))
-            RaiseNetworkEvent(new FpvDroneSetOverlayEvent(true), actor.PlayerSession);
     }
 
     private void OnObserverTerminating(EntityUid uid, FpvDroneObserverComponent component, EntityTerminatingEvent args)

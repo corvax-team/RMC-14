@@ -1,6 +1,5 @@
 using Content.Shared._CM14.FpvDrone;
 using Robust.Client.Graphics;
-using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -10,10 +9,8 @@ namespace Content.Client._CM14.FpvDrone;
 
 public sealed class FpvDroneOverlaySystem : EntitySystem
 {
-    [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly ILightManager _light = default!;
     [Dependency] private readonly IOverlayManager _overlays = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -23,9 +20,11 @@ public sealed class FpvDroneOverlaySystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeNetworkEvent<FpvDroneSetOverlayEvent>(ev => UpdateOverlay(ev.Enable));
-        SubscribeLocalEvent<FpvDroneScreenOverlayComponent, ComponentRemove>((_, _, _) => UpdateOverlay(false));
-        SubscribeLocalEvent<FpvDroneScreenOverlayComponent, LocalPlayerDetachedEvent>((_, _, _) =>
+        SubscribeLocalEvent<FpvDroneObserverComponent, LocalPlayerAttachedEvent>((_, _, _) =>
+            UpdateOverlay(true));
+        SubscribeLocalEvent<FpvDroneObserverComponent, ComponentRemove>((_, _, _) =>
+            UpdateOverlay(false));
+        SubscribeLocalEvent<FpvDroneObserverComponent, LocalPlayerDetachedEvent>((_, _, _) =>
             UpdateOverlay(false));
     }
 
@@ -58,21 +57,6 @@ public sealed class FpvDroneOverlaySystem : EntitySystem
         }
     }
 
-    public override void FrameUpdate(float frameTime)
-    {
-        base.FrameUpdate(frameTime);
-
-        var player = _player.LocalEntity;
-        if (player == null)
-        {
-            UpdateOverlay(false);
-            return;
-        }
-
-        var hasOverlayComp = _entManager.HasComponent<FpvDroneScreenOverlayComponent>(player);
-        UpdateOverlay(hasOverlayComp);
-    }
-
     private sealed class FpvDroneOverlay(IPrototypeManager protoMan, IGameTiming timing) : Overlay
     {
         private readonly ShaderInstance _shader =
@@ -87,6 +71,7 @@ public sealed class FpvDroneOverlaySystem : EntitySystem
                 return;
 
             var handle = args.WorldHandle;
+
             _shader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
             _shader.SetParameter("time", (float)timing.CurTime.TotalSeconds);
 

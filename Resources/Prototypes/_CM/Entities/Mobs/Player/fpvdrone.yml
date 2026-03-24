@@ -35,8 +35,6 @@
     layer: 1
   - type: Alerts
   - type: FpvDroneObserver
-    ejectActionId: ActionFpvDroneEject
-  - type: FpvDroneScreenOverlay
   - type: FpvDroneExplosive
     totalIntensity: 250
     radius: 6

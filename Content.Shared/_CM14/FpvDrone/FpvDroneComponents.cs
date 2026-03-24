@@ -34,23 +34,17 @@ public sealed partial class FpvDroneObserverComponent : Component
     public EntityUid? FlyingStream;
     [DataField] [AutoNetworkedField] public float MaxRange = 50f;
     [DataField] public EntityUid? Pilot;
+    [DataField] [AutoNetworkedField] public bool SignalLost;
 
     [DataField] public SoundSpecifier? SignalLostSound =
         new SoundPathSpecifier("/Audio/_CCM14/FpvDrone/drone_signal_lost.ogg");
+
+    [DataField] public float TimeUntilExplosion = 1.0f;
 }
 
 [RegisterComponent]
 public sealed partial class FpvDroneGogglesComponent : Component
 {
-}
-
-[RegisterComponent]
-[NetworkedComponent]
-[AutoGenerateComponentState]
-public sealed partial class FpvDroneScreenOverlayComponent : Component
-{
-    [DataField] [AutoNetworkedField] public bool SignalLost;
-    [DataField] public float TimeUntilExplosion = 1.0f;
 }
 
 [RegisterComponent]
