@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._CM14.FpvDrone;
@@ -26,8 +27,16 @@ public sealed partial class FpvDroneObserverComponent : Component
     [DataField] public EntityUid Control;
     [DataField] public EntityUid? EjectAction;
     [DataField] public string EjectActionPrototypeId = "ActionFpvDroneEject";
+
+    [DataField] public SoundSpecifier? FlyingLoopSound =
+        new SoundPathSpecifier("/Audio/_CCM14/FpvDrone/drone_fly_loop.ogg");
+
+    public EntityUid? FlyingStream;
     [DataField] [AutoNetworkedField] public float MaxRange = 50f;
     [DataField] public EntityUid? Pilot;
+
+    [DataField] public SoundSpecifier? SignalLostSound =
+        new SoundPathSpecifier("/Audio/_CCM14/FpvDrone/drone_signal_lost.ogg");
 }
 
 [RegisterComponent]

@@ -5,6 +5,8 @@ using Content.Shared._RMC14.Explosion;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 
 namespace Content.Server._CM14.FpvDrone;
@@ -12,6 +14,7 @@ namespace Content.Server._CM14.FpvDrone;
 public sealed class FpvDroneSystem : EntitySystem
 {
     [Dependency] private readonly ActionsSystem _action = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -24,12 +27,9 @@ public sealed class FpvDroneSystem : EntitySystem
 
         SubscribeLocalEvent<FpvDroneControlComponent, InteractHandEvent>(OnControlInteract);
         SubscribeLocalEvent<FpvDroneObserverComponent, ComponentStartup>(OnObserverStartup);
-
         SubscribeLocalEvent<FpvDroneObserverComponent, FpvDroneEjectEvent>((uid, comp, _) =>
             RemoveOverlayAndTransfer(uid, comp));
-        SubscribeLocalEvent<FpvDroneObserverComponent, EntityTerminatingEvent>((uid, comp, _) =>
-            RemoveOverlayAndTransfer(uid, comp));
-
+        SubscribeLocalEvent<FpvDroneObserverComponent, EntityTerminatingEvent>(OnObserverTerminating);
         SubscribeLocalEvent<FpvDroneControlComponent, EntityTerminatingEvent>(OnControlTerminating);
         SubscribeLocalEvent<FpvDroneExplosiveComponent, ComponentInit>(OnExplosiveInit);
         SubscribeLocalEvent<FpvDroneExplosiveComponent, FpvDroneExplosiveEvent>(OnExplosiveAction);
@@ -45,10 +45,7 @@ public sealed class FpvDroneSystem : EntitySystem
             if (TerminatingOrDeleted(uid) || !Exists(comp.Control))
                 continue;
 
-            if (!TryComp<FpvDroneControlComponent>(comp.Control, out var control))
-                continue;
-
-            if (control.Pilot is not { } pilot || !TryComp<FpvDroneScreenOverlayComponent>(pilot, out var screen))
+            if (!TryComp<FpvDroneScreenOverlayComponent>(uid, out var screen))
                 continue;
 
             var controlXform = Transform(comp.Control);
@@ -66,10 +63,12 @@ public sealed class FpvDroneSystem : EntitySystem
                 if (screen.SignalLost)
                     screen.TimeUntilExplosion = 0.8f;
 
-                Dirty(pilot, screen);
+                Dirty(uid, screen);
             }
 
-            if (!screen.SignalLost) continue;
+            if (!screen.SignalLost)
+                continue;
+
             screen.TimeUntilExplosion -= frameTime;
 
             if (screen.TimeUntilExplosion <= 0)
@@ -99,10 +98,6 @@ public sealed class FpvDroneSystem : EntitySystem
         component.Observer = observer;
         component.Pilot = args.User;
 
-        var screen = EnsureComp<FpvDroneScreenOverlayComponent>(args.User);
-        screen.SignalLost = false;
-        Dirty(args.User, screen);
-
         _mind.TransferTo(mindId, observer, mind: mind);
     }
 
@@ -118,15 +113,18 @@ public sealed class FpvDroneSystem : EntitySystem
         }
 
         if (pilot == null || TerminatingOrDeleted(pilot.Value))
+        {
+            component.Pilot = null;
             return;
+        }
+
+        if (_mind.TryGetMind(uid, out var mindId, out var mind)) _mind.TransferTo(mindId, pilot.Value, mind: mind);
+
+        if (component.SignalLostSound != null)
+            _audio.PlayEntity(component.SignalLostSound, pilot.Value, pilot.Value, AudioParams.Default.WithVolume(-2f));
 
         if (TryComp<ActorComponent>(pilot.Value, out var actor))
             RaiseNetworkEvent(new FpvDroneSetOverlayEvent(false), actor.PlayerSession);
-
-        RemComp<FpvDroneScreenOverlayComponent>(pilot.Value);
-
-        if (_mind.TryGetMind(uid, out var mindId, out var mind))
-            _mind.TransferTo(mindId, pilot.Value, mind: mind);
 
         _popup.PopupEntity(Loc.GetString("fpv-drone-ui-connection-lost"), pilot.Value, pilot.Value,
             PopupType.LargeCaution);
@@ -138,8 +136,18 @@ public sealed class FpvDroneSystem : EntitySystem
     {
         component.EjectAction = _action.AddAction(uid, component.EjectActionPrototypeId);
 
+        component.FlyingStream = _audio.PlayPvs(component.FlyingLoopSound, uid,
+            AudioParams.Default.WithLoop(true).WithVolume(-5f))?.Entity;
+
         if (TryComp<ActorComponent>(uid, out var actor))
             RaiseNetworkEvent(new FpvDroneSetOverlayEvent(true), actor.PlayerSession);
+    }
+
+    private void OnObserverTerminating(EntityUid uid, FpvDroneObserverComponent component, EntityTerminatingEvent args)
+    {
+        component.FlyingStream = _audio.Stop(component.FlyingStream);
+
+        RemoveOverlayAndTransfer(uid, component);
     }
 
     private void OnControlTerminating(EntityUid uid, FpvDroneControlComponent component, EntityTerminatingEvent args)
