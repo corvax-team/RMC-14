@@ -1,39 +1,46 @@
 - type: entity
-  parent: BaseMob
-  id: FpvDroneObserver
-  name: Fpv drone
-  noSpawn: true
+  parent: BaseItem
+  id: FpvDroneFolded
+  name: fpv drone
+  description: A compact foldable FPV drone.
+  suffix: folded
   components:
-  - type: InteractionOutline
   - type: Sprite
-    sprite: Mobs/Silicon/fpv.rsi
+    sprite: _CCM14/Mobs/Silicon/fpv.rsi
     state: marker
-    drawdepth: Mobs
-  - type: Input
-    context: "aghost"
+  - type: Item
+    size: Normal
   - type: Physics
-    bodyType: KinematicController
-  - type: Stripping
-  - type: CargoSellBlacklist
-  - type: DoAfter
+    bodyType: Dynamic
   - type: Fixtures
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeCircle
-          radius: 0.35
-        density: 15
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.2,0.2,0.2"
+        density: 10
         mask:
-        - FlyingMobMask
-  - type: MovementSpeedModifier
-    baseSprintSpeed: 8
-    baseWalkSpeed: 4
+        - ItemMask
+  - type: FpvDroneFoldable
+    unfoldEntity: FpvDroneObserver
+    unfoldDelay: 1.5
+
+- type: entity
+  parent: [ BaseMob, FlyingMobBase ]
+  id: FpvDroneObserver
+  name: fpv drone
+  description: A deployed FPV drone.
+  noSpawn: true
+  components:
+  - type: Sprite
+    sprite: _CCM14/Mobs/Silicon/fpv.rsi
+    state: marker
+  - type: Input
+    context: "aghost"
   - type: MovementIgnoreGravity
     globalReceive: true
-  - type: CanMoveInAir
   - type: Visibility
     layer: 1
-  - type: Alerts
   - type: FpvDroneObserver
   - type: FpvDroneExplosive
     totalIntensity: 250

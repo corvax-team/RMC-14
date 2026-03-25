@@ -1,7 +1,7 @@
 - type: shader
   id: FpvDroneShader
   kind: source
-  path: "/Textures/_CM/Shaders/fpv_drone.swsl"
+  path: "/Textures/_CCM14/Shaders/fpv_drone.swsl"
   params:
     noiseStrength: 0.3
     scanStrength: 0.15

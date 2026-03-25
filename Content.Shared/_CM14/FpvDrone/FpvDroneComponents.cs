@@ -38,8 +38,6 @@ public sealed partial class FpvDroneObserverComponent : Component
 
     [DataField] public SoundSpecifier? SignalLostSound =
         new SoundPathSpecifier("/Audio/_CCM14/FpvDrone/drone_signal_lost.ogg");
-
-    [DataField] public float TimeUntilExplosion = 1.0f;
 }
 
 [RegisterComponent]
@@ -56,4 +54,14 @@ public sealed partial class FpvDroneExplosiveComponent : Component
     [DataField] public EntProtoId? ExplodeActionId = "ActionFpvDroneExplosive";
     [DataField] [AutoNetworkedField] public float Radius = 5f;
     [DataField] [AutoNetworkedField] public float TotalIntensity = 100f;
+}
+
+[RegisterComponent]
+[NetworkedComponent]
+[AutoGenerateComponentState]
+public sealed partial class FpvDroneFoldableComponent : Component
+{
+    [DataField] [AutoNetworkedField] public float UnfoldDelay = 1.5f;
+
+    [DataField] [AutoNetworkedField] public EntProtoId UnfoldEntity = "FpvDroneObserver";
 }

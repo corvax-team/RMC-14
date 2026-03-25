@@ -2,11 +2,13 @@
 using Content.Server.Mind;
 using Content.Shared._CM14.FpvDrone;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 
 namespace Content.Server._CM14.FpvDrone;
 
@@ -14,6 +16,8 @@ public sealed class FpvDroneSystem : EntitySystem
 {
     [Dependency] private readonly ActionsSystem _action = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -24,7 +28,8 @@ public sealed class FpvDroneSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<FpvDroneControlComponent, InteractHandEvent>(OnControlInteract);
+        SubscribeLocalEvent<FpvDroneControlComponent, AfterInteractEvent>(OnControlAfterInteract);
+        SubscribeLocalEvent<FpvDroneControlComponent, ActivateInWorldEvent>(OnControlActivate);
         SubscribeLocalEvent<FpvDroneObserverComponent, ComponentStartup>(OnObserverStartup);
         SubscribeLocalEvent<FpvDroneObserverComponent, FpvDroneEjectEvent>((uid, comp, _) =>
             RemoveOverlayAndTransfer(uid, comp));
@@ -32,6 +37,59 @@ public sealed class FpvDroneSystem : EntitySystem
         SubscribeLocalEvent<FpvDroneControlComponent, EntityTerminatingEvent>(OnControlTerminating);
         SubscribeLocalEvent<FpvDroneExplosiveComponent, ComponentInit>(OnExplosiveInit);
         SubscribeLocalEvent<FpvDroneExplosiveComponent, FpvDroneExplosiveEvent>(OnExplosiveAction);
+        SubscribeLocalEvent<FpvDroneFoldableComponent, ActivateInWorldEvent>(OnFoldableActivate);
+        SubscribeLocalEvent<FpvDroneFoldableComponent, FpvDroneFoldableDoAfterEvent>(OnFoldableDoAfter);
+    }
+
+    private void OnControlAfterInteract(EntityUid uid, FpvDroneControlComponent component, AfterInteractEvent args)
+    {
+        if (args.Target == null || !args.CanReach)
+            return;
+
+        if (!TryComp<FpvDroneObserverComponent>(args.Target, out var observer))
+            return;
+
+        var target = args.Target.Value;
+
+        component.Observer = target;
+        observer.Control = uid;
+
+        _popup.PopupEntity(Loc.GetString("cm-fpv-drone-control-linked"), target, args.User);
+        args.Handled = true;
+    }
+
+    private void OnControlActivate(EntityUid uid, FpvDroneControlComponent component, ActivateInWorldEvent args)
+    {
+        if (args.Handled) return;
+
+        var user = args.User;
+
+        if (component.Observer == null || TerminatingOrDeleted(component.Observer.Value))
+        {
+            _popup.PopupEntity(Loc.GetString("cm-fpv-drone-no-connection"), user, user);
+            return;
+        }
+
+        if (!_inventory.TryGetSlotEntity(user, "eyes", out var eyesUid) ||
+            !HasComp<FpvDroneGogglesComponent>(eyesUid))
+        {
+            _popup.PopupEntity(Loc.GetString("cm-fpv-drone-no-goggles"), user, user);
+            return;
+        }
+
+        if (_mind.TryGetMind(user, out var mindId, out var mind))
+        {
+            var drone = component.Observer.Value;
+            var obsComp = Comp<FpvDroneObserverComponent>(drone);
+
+            obsComp.Pilot = user;
+            component.Pilot = user;
+            component.Used = true;
+
+            _mind.TransferTo(mindId, drone, mind: mind);
+        }
+
+        args.Handled = true;
     }
 
     public override void Update(float frameTime)
@@ -49,54 +107,36 @@ public sealed class FpvDroneSystem : EntitySystem
             var controlPos = _transform.GetWorldPosition(controlXform);
             var distSq = (dronePos - controlPos).LengthSquared();
             var maxRangeSq = observer.MaxRange * observer.MaxRange;
-            var signalLost = distSq > maxRangeSq || droneXform.MapID != controlXform.MapID;
 
-            if (observer.SignalLost != signalLost)
-            {
-                observer.SignalLost = signalLost;
-
-                if (signalLost)
-                    observer.TimeUntilExplosion = 0.8f;
-
-                Dirty(uid, observer);
-            }
-
-            if (!observer.SignalLost)
-                continue;
-
-            observer.TimeUntilExplosion -= frameTime;
-
-            if (observer.TimeUntilExplosion <= 0f)
-            {
-                observer.TimeUntilExplosion = float.MaxValue; // защита от повторного вызова
-                RaiseLocalEvent(uid, new FpvDroneExplosiveEvent());
-            }
+            observer.SignalLost = distSq > maxRangeSq || droneXform.MapID != controlXform.MapID;
         }
     }
 
-    private void OnControlInteract(EntityUid uid, FpvDroneControlComponent component, InteractHandEvent args)
+    private void OnFoldableActivate(EntityUid uid, FpvDroneFoldableComponent component, ActivateInWorldEvent args)
     {
-        if (component.Used || !args.User.IsValid()) return;
-        if (!_mind.TryGetMind(args.User, out var mindId, out var mind)) return;
+        if (args.Handled) return;
+        if (_container.IsEntityInContainer(uid)) return;
 
-        if (!_inventory.TryGetSlotEntity(args.User, "eyes", out var eyesUid) ||
-            !HasComp<FpvDroneGogglesComponent>(eyesUid))
+        var ev = new FpvDroneFoldableDoAfterEvent();
+        var doAfterArgs = new DoAfterArgs(EntityManager, args.User, component.UnfoldDelay, ev, uid)
         {
-            _popup.PopupEntity(Loc.GetString("cm-fpv-drone-no-goggles"), args.User, args.User);
-            return;
-        }
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            NeedHand = true
+        };
 
-        component.Used = true;
+        if (_doAfter.TryStartDoAfter(doAfterArgs))
+            args.Handled = true;
+    }
 
-        var observer = Spawn(component.ObserverPrototypeId, _transform.GetMoverCoordinates(uid));
-        var obsComp = EnsureComp<FpvDroneObserverComponent>(observer);
-        obsComp.Control = uid;
-        obsComp.Pilot = args.User;
-
-        component.Observer = observer;
-        component.Pilot = args.User;
-
-        _mind.TransferTo(mindId, observer, mind: mind);
+    private void OnFoldableDoAfter(EntityUid uid, FpvDroneFoldableComponent component,
+        FpvDroneFoldableDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled) return;
+        var coords = _transform.GetMoverCoordinates(uid);
+        Spawn(component.UnfoldEntity, coords);
+        QueueDel(uid);
+        args.Handled = true;
     }
 
     private void RemoveOverlayAndTransfer(EntityUid uid, FpvDroneObserverComponent component)
@@ -131,7 +171,6 @@ public sealed class FpvDroneSystem : EntitySystem
     private void OnObserverStartup(EntityUid uid, FpvDroneObserverComponent component, ComponentStartup args)
     {
         component.EjectAction = _action.AddAction(uid, component.EjectActionPrototypeId);
-
         component.FlyingStream = _audio.PlayPvs(component.FlyingLoopSound, uid,
             AudioParams.Default.WithLoop(true).WithVolume(-5f))?.Entity;
     }
@@ -139,7 +178,6 @@ public sealed class FpvDroneSystem : EntitySystem
     private void OnObserverTerminating(EntityUid uid, FpvDroneObserverComponent component, EntityTerminatingEvent args)
     {
         component.FlyingStream = _audio.Stop(component.FlyingStream);
-
         if (component.Pilot is { } pilot && !TerminatingOrDeleted(pilot))
         {
             if (_mind.TryGetMind(uid, out var mindId, out var mind))
@@ -165,18 +203,11 @@ public sealed class FpvDroneSystem : EntitySystem
     {
         if (args.Handled) return;
         args.Handled = true;
-
         if (TryComp<FpvDroneObserverComponent>(uid, out var observer))
             RemoveOverlayAndTransfer(uid, observer);
 
         var triggeredEv = new CMExplosiveTriggeredEvent();
         RaiseLocalEvent(uid, ref triggeredEv);
-
-        _rmcExplosion.TriggerExplosive(
-            uid,
-            true,
-            comp.TotalIntensity,
-            comp.Radius
-        );
+        _rmcExplosion.TriggerExplosive(uid, true, comp.TotalIntensity, comp.Radius);
     }
 }
