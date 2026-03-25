@@ -23,7 +23,7 @@
   components:
   - type: Action
     icon:
-      sprite: Objects/Magic/magicactions.rsi
-      state: item_recall
+      sprite: Interface/Actions/actions_mecha.rsi
+      state: mech_eject
   - type: InstantAction
     event: !type:FpvDroneEjectEvent
