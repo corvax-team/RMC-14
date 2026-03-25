@@ -86,10 +86,52 @@ public sealed class FpvDroneSystem : EntitySystem
             component.Pilot = user;
             component.Used = true;
 
+            if (obsComp is { FlyingLoopSound: not null, FlyingStream: null })
+            {
+                obsComp.FlyingStream = _audio.PlayPvs(obsComp.FlyingLoopSound, drone,
+                    AudioParams.Default.WithLoop(true).WithVolume(-5f))?.Entity;
+            }
+
             _mind.TransferTo(mindId, drone, mind: mind);
         }
 
         args.Handled = true;
+    }
+
+    private void RemoveOverlayAndTransfer(EntityUid uid, FpvDroneObserverComponent component, bool isSignalLost = false)
+    {
+        var pilot = component.Pilot;
+
+        component.FlyingStream = _audio.Stop(component.FlyingStream);
+
+        if (TryComp<FpvDroneControlComponent>(component.Control, out var control))
+        {
+            control.Pilot = null;
+            control.Used = false;
+        }
+
+        if (pilot == null || TerminatingOrDeleted(pilot.Value))
+        {
+            component.Pilot = null;
+            return;
+        }
+
+        if (_mind.TryGetMind(uid, out var mindId, out var mind))
+            _mind.TransferTo(mindId, pilot.Value, mind: mind);
+
+        if (isSignalLost)
+        {
+            if (component.SignalLostSound != null)
+            {
+                _audio.PlayEntity(component.SignalLostSound, pilot.Value, pilot.Value,
+                    AudioParams.Default.WithVolume(-2f));
+            }
+
+            _popup.PopupEntity(Loc.GetString("fpv-drone-ui-connection-lost"), pilot.Value, pilot.Value,
+                PopupType.LargeCaution);
+        }
+
+        component.Pilot = null;
     }
 
     public override void Update(float frameTime)
@@ -108,7 +150,13 @@ public sealed class FpvDroneSystem : EntitySystem
             var distSq = (dronePos - controlPos).LengthSquared();
             var maxRangeSq = observer.MaxRange * observer.MaxRange;
 
-            observer.SignalLost = distSq > maxRangeSq || droneXform.MapID != controlXform.MapID;
+            if (distSq > maxRangeSq || droneXform.MapID != controlXform.MapID)
+            {
+                observer.SignalLost = true;
+                RemoveOverlayAndTransfer(uid, observer, true);
+            }
+            else
+                observer.SignalLost = false;
         }
     }
 
@@ -139,40 +187,9 @@ public sealed class FpvDroneSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void RemoveOverlayAndTransfer(EntityUid uid, FpvDroneObserverComponent component)
-    {
-        var pilot = component.Pilot;
-
-        if (TryComp<FpvDroneControlComponent>(component.Control, out var control))
-        {
-            control.Pilot = null;
-            control.Observer = null;
-            control.Used = false;
-        }
-
-        if (pilot == null || TerminatingOrDeleted(pilot.Value))
-        {
-            component.Pilot = null;
-            return;
-        }
-
-        if (_mind.TryGetMind(uid, out var mindId, out var mind))
-            _mind.TransferTo(mindId, pilot.Value, mind: mind);
-
-        if (component.SignalLostSound != null)
-            _audio.PlayEntity(component.SignalLostSound, pilot.Value, pilot.Value, AudioParams.Default.WithVolume(-2f));
-
-        _popup.PopupEntity(Loc.GetString("fpv-drone-ui-connection-lost"), pilot.Value, pilot.Value,
-            PopupType.LargeCaution);
-
-        component.Pilot = null;
-    }
-
     private void OnObserverStartup(EntityUid uid, FpvDroneObserverComponent component, ComponentStartup args)
     {
         component.EjectAction = _action.AddAction(uid, component.EjectActionPrototypeId);
-        component.FlyingStream = _audio.PlayPvs(component.FlyingLoopSound, uid,
-            AudioParams.Default.WithLoop(true).WithVolume(-5f))?.Entity;
     }
 
     private void OnObserverTerminating(EntityUid uid, FpvDroneObserverComponent component, EntityTerminatingEvent args)
@@ -204,7 +221,7 @@ public sealed class FpvDroneSystem : EntitySystem
         if (args.Handled) return;
         args.Handled = true;
         if (TryComp<FpvDroneObserverComponent>(uid, out var observer))
-            RemoveOverlayAndTransfer(uid, observer);
+            RemoveOverlayAndTransfer(uid, observer, true);
 
         var triggeredEv = new CMExplosiveTriggeredEvent();
         RaiseLocalEvent(uid, ref triggeredEv);
