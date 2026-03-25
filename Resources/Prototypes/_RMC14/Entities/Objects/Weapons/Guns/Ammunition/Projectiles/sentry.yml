@@ -6,7 +6,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
-    drawdepth: OverMobs
+    drawdepth: Effects
     layers:
     - state: bullet
       shader: unshaded
@@ -16,6 +16,7 @@
         Piercing: 20
   - type: CMArmorPiercing
     amount: 100
+  - type: DeleteXenoResinOnHit
   - type: RMCProjectileAccuracy
     accuracy: 110
     thresholds:
