@@ -1,4 +1,4 @@
-ent-CMSpawnPointForeconSupportTech = Точка появления Техника СОиС
+ent-CMSpawnPointForeconSupportTech = спавнер техника поддержки СОиС
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetForeconSupportTech = Шаблон роли Техни СОиС
+ent-RMCSurvivorPresetForeconSupportTech = пресет выжившего техника поддержки СОиС
     .desc = { ent-RMCSurvivorPresetForeconNoPistol.desc }

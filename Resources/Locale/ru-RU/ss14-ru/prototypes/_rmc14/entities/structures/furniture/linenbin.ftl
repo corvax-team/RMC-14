@@ -4,3 +4,6 @@ ent-CMLinenBin = бельевая корзина
 ent-CMLinenBinFilled = { ent-CMLinenBin }
     .suffix = Полный
     .desc = { ent-CMLinenBin.desc }
+ent-CMLinenBinFilledUnanchored = { ent-CMLinenBinFilled }
+    .suffix = Полный, Незакреплённый
+    .desc = { ent-CMLinenBinFilled.desc }

@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorTrijentEngiHydro = точка появления инженера-гидроэлектрика Trijent
+ent-RMCSpawnPointSurvivorTrijentEngiHydro = спавнер выжившего инженера ГЭС
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetTrijentEngiHydro = пресет колониста: инженер-гидроэлектрик Trijent
+    .suffix = Дамба Триджент
+ent-RMCGearSurvivorPresetTrijentEngiHydro = пресет выжившего инженера ГЭС Дамбы Триджент
     .desc = { ent-RMCSurvivorPresetEngineer.desc }

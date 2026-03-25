@@ -6,5 +6,3 @@ ent-XenoEggDestroyedFragile = fragile egg
     .desc = { ent-XenoEggDestroyed.desc }
 ent-XenoEggDestroyedFragileSustained = fragile egg
     .desc = { ent-XenoEggDestroyed.desc }
-ent-CCMXenoRoyalEgg = royal egg
-    .desc = A particularly large, unusual egg with a iridescent sheen.

@@ -8,5 +8,5 @@ ent-RMCCrateSupplyJanitor = ассортимент уборочных припа
     .desc = { ent-RMCCrateSupply.desc }
 ent-RMCCrateSuppliesCrayons = коробка мелков
     .desc = { ent-RMCCrateSupply.desc }
-ent-RMCCrateAegisLobby = ящик оборудования отслеживания AEGIS (x3 пинпоинтера, x1 буклет)
-    .desc = Ящик снабжения, содержащий оборудование для отслеживания ID AEGIS и документацию.
+ent-RMCCrateAegisLobby = ящик оборудования отслеживания WarTech (x3 пинпоинтера, x1 буклет)
+    .desc = Ящик снабжения, содержащий оборудование для отслеживания ID WarTech и документацию.

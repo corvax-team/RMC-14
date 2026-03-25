@@ -1,2 +1,2 @@
-ent-CMSpawnPointDCC = точка появления экипаж десантного корабля
+ent-CMSpawnPointDCC = спавнер экипаж десантного корабля
     .desc = { ent-CMSpawnPointJobBase.desc }

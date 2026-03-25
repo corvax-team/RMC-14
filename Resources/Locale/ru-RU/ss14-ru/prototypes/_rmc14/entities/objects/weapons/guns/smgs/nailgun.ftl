@@ -7,5 +7,3 @@ ent-RMCCartridge7x45mm = гвоздь (7x45мм)
     .desc = { ent-CMCartridgeSMGBase.desc }
 ent-RMCNail7x45mm = { ent-RMCBaseBullet }
     .desc = { ent-RMCBaseBullet.desc }
-ent-Nail7x45mm = { ent-RMCBaseBullet }
-    .desc = { ent-RMCBaseBullet.desc }

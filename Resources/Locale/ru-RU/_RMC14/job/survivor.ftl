@@ -261,11 +261,11 @@ rmc-job-name-survivor-kutjevo-trucker = Оператор тяжёлой техн
 
 # Solaris Ridge Survs
 
-rmc-job-name-survivor-solaris-chaplain = Капеллан Соляриса
+rmc-job-name-survivor-solaris-chaplain = Капеллан Соларис Ридж
 rmc-job-name-survivor-solaris-corporate-liaison = Корпоративный связной
-rmc-job-name-survivor-solaris-doctor = Доктор Соляриса
-rmc-job-name-survivor-solaris-engineer = Инженер Соляриса
-rmc-job-name-survivor-solaris-scientist = Учённый Соляриса
+rmc-job-name-survivor-solaris-doctor = Доктор Соларис Ридж
+rmc-job-name-survivor-solaris-engineer = Инженер Соларис Ридж
+rmc-job-name-survivor-solaris-scientist = Учённый Соларис Ридж
 rmc-job-name-survivor-solaris-trucker = Оператор тяжёлой техники
 rmc-job-name-survivor-unmc-recruiter = Рекрутёр ККМП
 rmc-job-name-survivor-solaris-corporate-supervisor = Корпоративный наблюдатель

@@ -3,7 +3,3 @@ ent-RMCWeaponSMGP90 = пистолет-пулемёт FN P90
     .suffix = Заполненный
 ent-RMCMagazineSMGP90 = магазин FN P90 (5.7×28мм)
     .desc = 5.7×28-мм магазин для пистолета-пулемёта FN P90.
-ent-RMCCartridge57x28mm = патрон (5.7×28мм ПП)
-    .desc = 5.7×28-мм патрон для пистолета-пулемёта FN P90.
-ent-RMCBullet57x28mm = { ent-Bullet10x20mm }
-    .desc = { ent-Bullet10x20mm.desc }

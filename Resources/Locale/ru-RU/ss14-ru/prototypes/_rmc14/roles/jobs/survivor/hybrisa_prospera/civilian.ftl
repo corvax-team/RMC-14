@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorHybrisaCivilian = точка появления гражданского (Hybrisa)
+ent-RMCSpawnPointSurvivorHybrisaCivilian = спавнер выжившего гражданского
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetHybrisaCivilian = пресет колониста: гражданский (Hybrisa)
+    .suffix = Гибриса
+ent-RMCGearSurvivorPresetHybrisaCivilian = пресет гражданского Гибриса
     .desc = { ent-RMCSurvivorPresetCivilianRareItem.desc }

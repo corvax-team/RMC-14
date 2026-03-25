@@ -1,2 +1,28 @@
-
-
+ent-RMCPlatformStrata = приподнятый металлический край
+    .desc = Приподнятый металлический край, часто используемый для возвышения областей над другими или строительства мостов. Вы могли бы подняться на это.
+ent-RMCPlatformStrataBroken = { ent-CMPlatformBroken }
+    .desc = { ent-CMPlatformBroken.desc }
+ent-RMCPlatformStrataStair = { ent-RMCPlatformStrata }
+    .desc = { ent-RMCPlatformStrata.desc }
+ent-RMCPlatformStrataStairAlt = { ent-RMCPlatformStrata }
+    .desc = { ent-RMCPlatformStrata.desc }
+ent-RMCPlatformStrataCornerSmall = приподнятый металлический угол
+    .desc = Приподнятый металлический край, часто используемый для возвышения областей над другими. Это угол.
+ent-RMCPlatformStrataTwo = приподнятый металлический край
+    .desc = Приподнятый металлический край, часто используемый для возвышения областей над другими. Вы могли бы подняться на это.
+ent-RMCPlatformStrata2Broken = { ent-CMPlatformBroken }
+    .desc = { ent-CMPlatformBroken.desc }
+ent-RMCPlatformStrataTwoCornerSmall = приподнятый металлический угол
+    .desc = Приподнятый металлический край, часто используемый для возвышения областей над другими. Это угол.
+ent-RMCPlatformStrataThree = приподнятый металлический край
+    .desc = Приподнятый металлический край, часто используемый для возвышения областей над другими. Вы могли бы подняться на это.
+ent-RMCPlatformStrata3Broken = { ent-CMPlatformBroken }
+    .desc = { ent-CMPlatformBroken.desc }
+ent-RMCPlatformStrataThreeCornerSmall = приподнятый металлический угол
+    .desc = Приподнятый металлический край, часто используемый для возвышения областей над другими. Это угол.
+ent-RMCPlatformStrataRock = ледяной край
+    .desc = Сплошной кусок камней и льда. Кажется, на него можно было бы забраться с некоторым трудом.
+ent-RMCPlatformStrataRockBroken = разрушенный ледяной край
+    .desc = Сплошной кусок камней и льда. Кажется, на него можно было бы забраться с некоторым трудом. Это было уничтожено.
+ent-RMCPlatformStrataRockCornerSmall = ледяной край
+    .desc = Сплошной кусок камней и льда.

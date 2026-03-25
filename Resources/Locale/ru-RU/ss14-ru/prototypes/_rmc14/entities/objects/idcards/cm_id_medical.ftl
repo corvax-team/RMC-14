@@ -1,8 +1,8 @@
-ent-CMIDCardCMO = ИД-карта старшего медицинского офицера
+ent-CMIDCardCMO = ID-карта старшего медицинского офицера
     .desc = { ent-CMIDCardSilver.desc }
-ent-CMIDCardDoctor = ИД-карта доктора
+ent-CMIDCardDoctor = ID-карта доктора
     .desc = { ent-CMIDCardBase.desc }
-ent-CMIDCardNurse = ИД-карта корабельного санитара
+ent-CMIDCardNurse = ID-карта корабельного санитара
     .desc = { ent-CMIDCardBase.desc }
-ent-CMIDCardResearcher = ИД-карта исследователя
+ent-CMIDCardResearcher = ID-карта исследователя
     .desc = { ent-CMIDCardBase.desc }

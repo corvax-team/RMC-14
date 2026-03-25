@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorHybrisaCorporateLiaison = точка появления представителя корпорации (Hybrisa)
+ent-RMCSpawnPointSurvivorHybrisaCorporateLiaison = спавнер выжившего представителя корпорации
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetHybrisaCorporateLiaison = пресет выжившего: представитель корпорации (Hybrisa)
+    .suffix = Гибриса
+ent-RMCSurvivorPresetHybrisaCorporateLiaison = пресет представителя корпорации Гибриса
     .desc = { ent-RMCSurvivorPresetCorporate.desc }

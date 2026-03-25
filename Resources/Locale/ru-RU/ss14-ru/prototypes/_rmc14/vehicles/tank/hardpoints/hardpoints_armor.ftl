@@ -1,0 +1,10 @@
+ent-RMCVehicleTankArmorBallistic = баллистическая броня
+    .desc = Баллистическая броня для танка.
+ent-RMCVehicleTankArmorConcussive = ударная броня
+    .desc = Ударная броня для танка.
+ent-RMCVehicleTankArmorCaustic = коррозионная броня
+    .desc = Каустическая броня для танка.
+ent-RMCVehicleTankArmorPaladin = броня «паладин»
+    .desc = Броня «паладин» для танка.
+ent-RMCVehicleTankSnowplow = снегоуборочный отвал для танка
+    .desc = Усиленный снегоуборочный отвал для танка.

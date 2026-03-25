@@ -1,5 +1,5 @@
 ent-RMCWeaponRifleSSG45NoLock = SSG-45 Assault Rifle
-    .desc = Developed by Weston-Yamada as a modern successor to the aging M5 platform, the SpezialSturmGewehr is engineered for precision mid-to-long range combat. The primary rifle of the Weston-Yamada PMCs.
+    .desc = A hard-hitting, prototype assault rifle typically found in the hands of Weston-Yamada’s PMC teams. Exclusively produced in corporate white.
     .suffix = No ID Lock
 ent-RMCWeaponRifleSSG45 = { ent-RMCWeaponRifleSSG45NoLock }
     .suffix = Has ID Lock
@@ -18,5 +18,8 @@ ent-RMCMagazineRifleSSG45AP = SSG45 AP magazine (7x62mm)
     .desc = { ent-RMCMagazineRifleSSG45.desc }
 ent-RMCMagazineRifleSSG45HEAP = SSG45 HEAP magazine (7x62mm)
     .desc = { ent-RMCMagazineRifleSSG45.desc }
+ent-RMCMagazineRifleSSG45HEAPEmpty = { ent-RMCMagazineRifleSSG45HEAP }
+    .suffix = HEAP, Empty
+    .desc = { ent-RMCMagazineRifleSSG45HEAP.desc }
 ent-RMCMagazineRifleSSG45Incend = SSG45 Incendiary magazine (7x62mm)
     .desc = { ent-RMCMagazineRifleSSG45.desc }

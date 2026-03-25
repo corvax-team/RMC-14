@@ -1,5 +1,13 @@
-
-
+ent-RMCAreaHF = Орсшефан
+    .desc = { ent-RMCAreaBase.desc }
+ent-RMCAreaHFHypersleepStorageA = Отсек криосна
+    .desc = { ent-RMCAreaHF.desc }
+ent-RMCAreaHFHypersleepGearLockers = Раздевалка отсека криосна
+    .desc = { ent-RMCAreaHF.desc }
+ent-RMCAreaHFMessHall = Столовая
+    .desc = { ent-RMCAreaHF.desc }
+ent-RMCAreaHFBathroom = Санузел
+    .desc = { ent-RMCAreaHF.desc }
 ent-RMCAreaHFOffice = Кабинет
     .desc = { ent-RMCAreaHF.desc }
 ent-RMCAreaHFEngineering = Инженерный отсек
@@ -8,7 +16,21 @@ ent-RMCAreaHFSyntheticCloset = Подсобка синтетиков
     .desc = { ent-RMCAreaHFEngineering.desc }
 ent-RMCAreaHFAICore = Ядро ИИ
     .desc = { ent-RMCAreaHFEngineering.desc }
-
+ent-RMCAreaHFDisposals = Утилизация отходов
+    .desc = { ent-RMCAreaHF.desc }
+ent-RMCAreaHFMedical = Медблок
+    .desc = { ent-RMCAreaHF.desc }
+ent-RMCAreaHFBriefRoom = Брифинг-зал
+    .desc = { ent-RMCAreaHF.desc }
+ent-RMCAreaHFCommandDeck = Командная палуба
+    .desc = { ent-RMCAreaHFBriefRoom.desc }
+ent-RMCAreaHFPrep = Зона подготовки состава
+    .desc = { ent-RMCAreaHF.desc }
+ent-RMCAreaHFArmoury = Оружейная комната
+    .desc = { ent-RMCAreaHFPrep.desc }
+ent-RMCAreaHFHangar = Ангар
+    .desc = { ent-RMCAreaHF.desc }
 ent-RMCAreaHFHangar2 = Нижний ангар
     .desc = { ent-RMCAreaHFHangar.desc }
-
+ent-RMCAreaHFOOB = За пределами карты
+    .desc = { ent-RMCAreaHF.desc }

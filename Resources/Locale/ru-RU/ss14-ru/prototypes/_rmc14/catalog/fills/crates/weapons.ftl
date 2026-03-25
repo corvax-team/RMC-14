@@ -22,5 +22,3 @@ ent-RMCCrateML66D = ящик пулемёта ML66D (x1)
     .desc = { ent-RMCCrateWeapons.desc }
 ent-RMCCrateM2C = ящик пулемёта M2C (x1)
     .desc = { ent-RMCCrateWeapons.desc }
-ent-RMCCrateM79 = ящик гранатомёта M79 (x2)
-    .desc = { ent-RMCCrateWeapons.desc }

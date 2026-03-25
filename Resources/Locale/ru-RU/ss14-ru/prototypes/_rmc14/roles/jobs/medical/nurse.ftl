@@ -1,2 +1,2 @@
-ent-CMSpawnPointNurse = точка появления корабельный санитар
+ent-CMSpawnPointNurse = спавнер корабельный санитар
     .desc = { ent-CMSpawnPointJobBase.desc }

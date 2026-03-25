@@ -1,5 +1,6 @@
-ent-RMCWallSPPReinforced = reinforced walls
+ent-RMCWallSPPReinforced = reinforced wall
     .desc = A thick and chunky metal wall. The surface is barren and imposing.
+    .suffix = SPP
 ent-RMCWallSPPGreyReinforced = { ent-RMCWallSPPReinforced }
     .suffix = Grey
     .desc = { ent-RMCWallSPPReinforced.desc }

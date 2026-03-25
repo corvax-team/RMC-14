@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorHybrisaOfficeWorker = точка появления офисного работника (Hybrisa)
+ent-RMCSpawnPointSurvivorHybrisaOfficeWorker = спавнер выжившего офисного работника
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetHybrisaOfficeWorker = пресет колониста: офисный работник (Hybrisa)
+    .suffix = Гибриса
+ent-RMCGearSurvivorPresetHybrisaOfficeWorker = пресет офисного работника Гибриса
     .desc = { ent-RMCSurvivorPresetCivilianRareItem.desc }
