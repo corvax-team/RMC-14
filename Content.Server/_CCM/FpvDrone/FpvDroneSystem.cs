@@ -1,6 +1,6 @@
 ﻿using Content.Server.Actions;
 using Content.Server.Mind;
-using Content.Shared._CM14.FpvDrone;
+using Content.Shared._CCM.FpvDrone;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -11,7 +11,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 
-namespace Content.Server._CM14.FpvDrone;
+namespace Content.Server._CCM.FpvDrone;
 
 public sealed class FpvDroneSystem : EntitySystem
 {

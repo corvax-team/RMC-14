@@ -2,7 +2,7 @@
 using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._CM14.FpvDrone;
+namespace Content.Shared._CCM.FpvDrone;
 
 public sealed partial class FpvDroneExplosiveEvent : InstantActionEvent;
 

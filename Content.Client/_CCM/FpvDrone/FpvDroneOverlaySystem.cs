@@ -1,11 +1,11 @@
-using Content.Shared._CM14.FpvDrone;
+using Content.Shared._CCM.FpvDrone;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-namespace Content.Client._CM14.FpvDrone;
+namespace Content.Client._CCM.FpvDrone;
 
 public sealed class FpvDroneOverlaySystem : EntitySystem
 {

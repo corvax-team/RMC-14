@@ -2,12 +2,11 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._CM14.FpvDrone;
+namespace Content.Shared._CCM.FpvDrone;
 
 public static class FpvDroneConstants
 {
     public const string ShaderId = "FpvDroneShader";
-    public const string FontPath = "/Fonts/NotoSans/NotoSans-Bold.ttf";
 }
 
 [RegisterComponent]
