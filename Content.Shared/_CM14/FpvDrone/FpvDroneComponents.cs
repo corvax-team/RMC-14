@@ -13,6 +13,12 @@ public static class FpvDroneConstants
 [RegisterComponent]
 public sealed partial class FpvDroneControlComponent : Component
 {
+    [DataField] public SoundSpecifier ConnectedSound =
+        new SoundPathSpecifier("/Audio/Machines/anomaly_sync_connect.ogg");
+
+    [DataField] public SoundSpecifier DisconnectedSound =
+        new SoundPathSpecifier("/Audio/Machines/anomaly_sync_connect.ogg");
+
     [DataField] public EntityUid? Observer;
     [DataField] public string ObserverPrototypeId = "FpvDroneObserver";
     [DataField] public EntityUid? Pilot;

@@ -6,6 +6,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
+using Content.Shared.Verbs;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -39,6 +40,34 @@ public sealed class FpvDroneSystem : EntitySystem
         SubscribeLocalEvent<FpvDroneExplosiveComponent, FpvDroneExplosiveEvent>(OnExplosiveAction);
         SubscribeLocalEvent<FpvDroneFoldableComponent, ActivateInWorldEvent>(OnFoldableActivate);
         SubscribeLocalEvent<FpvDroneFoldableComponent, FpvDroneFoldableDoAfterEvent>(OnFoldableDoAfter);
+        SubscribeLocalEvent<FpvDroneControlComponent, GetVerbsEvent<InteractionVerb>>(OnGetInteractionVerbs);
+    }
+
+    private void OnGetInteractionVerbs(EntityUid uid, FpvDroneControlComponent component,
+        GetVerbsEvent<InteractionVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract || component.Observer is not { Valid: true } droneUid)
+            return;
+
+        args.Verbs.Add(new InteractionVerb
+        {
+            Text = Loc.GetString("cm-fpv-drone-verb-unbind"),
+            Act = () =>
+            {
+                if (TryComp<FpvDroneObserverComponent>(droneUid, out var observer))
+                {
+                    RemoveOverlayAndTransfer(droneUid, observer);
+                    observer.Control = default;
+                }
+
+                _audio.PlayPvs(component.DisconnectedSound, uid);
+
+                component.Observer = null;
+                component.Used = false;
+
+                _popup.PopupEntity(Loc.GetString("cm-fpv-drone-control-unlinked"), args.User, args.User);
+            }
+        });
     }
 
     private void OnControlAfterInteract(EntityUid uid, FpvDroneControlComponent component, AfterInteractEvent args)
@@ -50,10 +79,10 @@ public sealed class FpvDroneSystem : EntitySystem
             return;
 
         var target = args.Target.Value;
-
         component.Observer = target;
         observer.Control = uid;
 
+        _audio.PlayPvs(component.ConnectedSound, uid);
         _popup.PopupEntity(Loc.GetString("cm-fpv-drone-control-linked"), target, args.User);
         args.Handled = true;
     }

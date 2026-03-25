@@ -39,6 +39,9 @@
     context: "aghost"
   - type: MovementIgnoreGravity
     globalReceive: true
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 8
+    baseWalkSpeed: 4
   - type: Visibility
     layer: 1
   - type: FpvDroneObserver
