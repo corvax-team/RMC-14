@@ -31,10 +31,12 @@
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
     - type: Sprite
-      sprite: _CCM14/Objects/Shields/security_shield.rsi
+      sprite: Objects/Weapons/Melee/shields.rsi
+      state: riot-icon
     - type: Item
+      sprite: Objects/Weapons/Melee/shields.rsi
       size: Ginormous
-      sprite: _CCM14/Objects/Shields/security_shield.rsi
+      heldPrefix: riot
     - type: LimitedCharges
       maxCharges: 5
       lastCharges: 5
@@ -43,12 +45,6 @@
     - type: UseDelay
       delay: 0.5
     - type: Appearance
-    - type: GenericVisualizer
-      visuals:
-        enum.FlashVisuals.Flashing:
-          enum.FlashVisualLayers.LightLayer:
-            True: { visible: true }
-            False: { visible: false }
     - type: MeleeRequiresSkill
       skills:
         RMCSkillPolice: 1
