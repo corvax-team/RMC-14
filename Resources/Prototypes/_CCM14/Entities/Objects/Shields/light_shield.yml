@@ -59,15 +59,12 @@
       radius: 5
       netsync: false
     - type: Sprite
-      sprite: _CCM14/Objects/Shields/light_shield.rsi
-      layers:
-        - state: flashlight
-        - state: flashlight-on
-          visible: false
-          map: [ "light" ]
+      sprite: Objects/Weapons/Melee/shields.rsi
+      state: riot-icon
     - type: Item
-      sprite: _CCM14/Objects/Shields/light_shield.rsi
+      sprite: Objects/Weapons/Melee/shields.rsi
       size: Ginormous
+      heldPrefix: riot
 
 - type: entity
   name: Avangard-M-F damaged marine shield with flashlight
@@ -106,12 +103,9 @@
       radius: 3
       netsync: false
     - type: Sprite
-      sprite: _CCM14/Objects/Shields/broken_light_shield.rsi
-      layers:
-        - state: flashlight
-        - state: flashlight-on
-          visible: false
-          map: [ "light" ]
+      sprite: Objects/Weapons/Melee/shields.rsi
+      state: riot-icon
     - type: Item
-      sprite: _CCM14/Objects/Shields/broken_light_shield.rsi
+      sprite: Objects/Weapons/Melee/shields.rsi
       size: Ginormous
+      heldPrefix: riot
