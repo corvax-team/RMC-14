@@ -19,7 +19,6 @@
     baseWalkSpeed: 2.4
     baseSprintSpeed: 4.5
   - type: AcidBloodSplash
-    baseGibSplashProbability: 0.75
     damage:
       types:
         Heat: 10

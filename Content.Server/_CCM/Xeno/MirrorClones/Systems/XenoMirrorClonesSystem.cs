@@ -3,19 +3,18 @@ using Content.Server._CCM.Xeno.MirrorClones.Components;
 using Content.Shared._CCM.Actions.Events;
 using Content.Shared._CCM.Xenonids.MirrorClones;
 using Content.Shared._RMC14.Actions;
-using Robust.Shared.Maths;
-using Robust.Shared.Random;
+using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Plasma;
 
 namespace Content.Server._CCM.Xeno.MirrorClones.Systems;
 
 public sealed class XenoMirrorClonesSystem : EntitySystem
 {
-    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
-    [Dependency] private readonly IRobustRandom _random = default!; 
-
-    
     private const float ActiveSeconds = 10f;
     private const int ExtraDamage = 5;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     public override void Initialize()
     {
@@ -27,18 +26,17 @@ public sealed class XenoMirrorClonesSystem : EntitySystem
         if (args.Handled)
             return;
 
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
+            return;
+
         if (!_rmcActions.TryUseAction(args))
             return;
 
-        
         var active = EnsureComp<MirrorClonesActiveComponent>(xeno.Owner);
         active.TimeLeft = ActiveSeconds;
         active.GeneticDamage = ExtraDamage;
-        Dirty(xeno.Owner, active);
-        
 
-        
-        SpawnClones(xeno.Owner, "CCMXenoHunterMirrorClone");
+        SpawnClones(xeno.Owner, xeno.Comp.ClonePrototype);
 
         args.Handled = true;
     }
@@ -50,34 +48,29 @@ public sealed class XenoMirrorClonesSystem : EntitySystem
 
         var baseCoords = xform.Coordinates;
 
-        
-        const float side = 0.60f;   
-        const float back = -0.10f;  
+        const float side = 0.60f;
+        const float back = -0.10f;
 
-var offsets = new[]
-{
-    new Vector2(+side, back), 
-    new Vector2(-side, back), 
-};
+        var offsets = new[]
+        {
+            new Vector2(+side, back),
+            new Vector2(-side, back)
+        };
 
-foreach (var off in offsets)
-{
-    var clone = Spawn(clonePrototype, baseCoords.Offset(off));
+        foreach (var off in offsets)
+        {
+            var clone = Spawn(clonePrototype, baseCoords.Offset(off));
 
-    EnsureComp<MirrorCloneComponent>(clone).Original = original;
+            _hive.SetSameHive(original, clone);
 
-    var follow = EnsureComp<FollowEntityComponent>(clone);
-    follow.Target = original;
+            EnsureComp<MirrorCloneComponent>(clone).Original = original;
 
-    follow.RotateWithTarget = false;   
-    follow.Offset = off;               
-
-    follow.FollowStrength = 45f;
-    follow.TeleportDistance = 1.0f;
-
-    Dirty(clone, follow);
+            var follow = EnsureComp<FollowEntityComponent>(clone);
+            follow.Target = original;
+            follow.RotateWithTarget = false;
+            follow.Offset = off;
+            follow.FollowStrength = 45f;
+            follow.TeleportDistance = 1.0f;
         }
-
     }
 }
-

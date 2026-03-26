@@ -1,6 +1,7 @@
 using Content.Server._CCM.Xeno.MirrorClones.Components;
+using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared._RMC14.Xenonids;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 
 namespace Content.Server._CCM.Xeno.MirrorClones.Systems;
@@ -8,6 +9,9 @@ namespace Content.Server._CCM.Xeno.MirrorClones.Systems;
 public sealed class FakeAttackerSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Update(float frameTime)
     {
@@ -22,61 +26,51 @@ public sealed class FakeAttackerSystem : EntitySystem
             if (fake.Accumulator < fake.AttackInterval)
                 continue;
 
-            fake.Accumulator = 0f;
-
-            if (!TryComp<TransformComponent>(clone.Original, out var origXform))
-                continue;
-
-            var origin = origXform.MapPosition;
-            var target = FindNearestTarget(origin, fake.SearchRange, exclude: uid, exclude2: clone.Original);
+            var target = FindNearestTarget(uid, fake.SearchRange, clone.Original);
 
             if (target == null)
                 continue;
 
-            if (TryComp<TransformComponent>(target.Value, out var targetXform))
-            {
-                var dir = targetXform.MapPosition.Position - xform.MapPosition.Position;
-                if (dir.LengthSquared() > 0.001f)
-                    xform.LocalRotation = dir.ToAngle();
-            }
+            fake.Accumulator = 0f;
+
+            if (!TryComp<TransformComponent>(target.Value, out var targetXform))
+                continue;
+
+            var dir = _transform.GetWorldPosition(target.Value) - _transform.GetWorldPosition(uid);
+
+            if (dir.LengthSquared() > 0.01f)
+                xform.LocalRotation = dir.ToAngle();
+
+            if (!(dir.LengthSquared() <= 2.25f)) continue;
+            _rmcMelee.DoLunge(uid, target.Value);
 
             if (fake.SwingSound != null)
                 _audio.PlayPvs(fake.SwingSound, uid);
         }
     }
 
-    private EntityUid? FindNearestTarget(MapCoordinates origin, float range, EntityUid exclude, EntityUid exclude2)
+    private EntityUid? FindNearestTarget(EntityUid clone, float range, EntityUid original)
     {
+        var xform = Transform(clone);
         var rangeSqr = range * range;
         EntityUid? best = null;
-        var bestDist = float.MaxValue;
+        var bestDist = rangeSqr;
 
-        var query = EntityQueryEnumerator<TransformComponent>();
-
-        while (query.MoveNext(out var uid, out var xform))
+        foreach (var ent in _lookup.GetEntitiesInRange(xform.MapPosition, range))
         {
-            if (uid == exclude || uid == exclude2)
+            if (ent == clone || ent == original || HasComp<MirrorCloneComponent>(ent))
                 continue;
 
-            if (HasComp<MirrorCloneComponent>(uid))
+            if (HasComp<XenoComponent>(ent))
                 continue;
 
-            var mp = xform.MapPosition;
-            if (mp.MapId != origin.MapId)
+            if (!HasComp<PhysicsComponent>(ent))
                 continue;
 
-            if (!HasComp<PhysicsComponent>(uid))
-                continue;
-
-            var d = (mp.Position - origin.Position).LengthSquared();
-            if (d > rangeSqr)
-                continue;
-
-            if (d < bestDist)
-            {
-                bestDist = d;
-                best = uid;
-            }
+            var distSqr = (_transform.GetWorldPosition(ent) - _transform.GetWorldPosition(clone)).LengthSquared();
+            if (!(distSqr < bestDist)) continue;
+            bestDist = distSqr;
+            best = ent;
         }
 
         return best;
