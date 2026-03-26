@@ -21,7 +21,7 @@
   - type: Vocal
     sounds:
       Male: RMCUnisexArachnid
-      Female: RMCUnisexArachnid
+      Female: CCMFemaleArachnid # CCM14
       Unsexed: RMCUnisexArachnid
   - type: TypingIndicator
     proto: spider
