@@ -1,5 +1,7 @@
 ent-RMCVehicleSPPAPCInteriorBase = элемент интерьера БТР СССП
     .desc = Декоративный элемент интерьера БТР СССП.
+ent-RMCVehicleSPPAPCRoofBase = боковая дверь БТР СССП
+    .desc = Боковая дверь, ведущая в десантный отсек БТР СССП.
 ent-RMCVehicleSPPAPCChassisBase = секция шасси БТР СССП
     .desc = Секция шасси для внутреннего отсека БТР СССП.
 ent-RMCVehicleSPPAPCChassis = { ent-RMCVehicleSPPAPCChassisBase }
