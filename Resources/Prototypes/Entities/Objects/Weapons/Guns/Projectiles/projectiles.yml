@@ -781,10 +781,10 @@
     maxVelocity: 1.5
     fillPrototype: RMCShrapnelJagged
     rebounds: true
-    capacity: 8
+    capacity: 4 # CCM14
     spreadAngle: 25
   - type: RMCProjectileAccuracy
-    accuracy: 110
+    accuracy: 90 # CCM14
     thresholds:
     - range: 8
       falloff: 10

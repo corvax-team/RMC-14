@@ -53,6 +53,7 @@
   - type: XenoDevour
 # Corvax-CM Mirror actions - start
   - type: MirrorClones
+    clonePrototype: CCMXenoHunterMirrorClone
   - type: MirrorClone
 # Corvax-CM Mirror actions - end
   - type: XenoPlasma

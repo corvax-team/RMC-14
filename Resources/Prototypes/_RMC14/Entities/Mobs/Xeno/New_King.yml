@@ -67,8 +67,7 @@
     tailDamage:
       groups:
         Brute: 70
-    stunTime: 1.5
-    range: 2.5
+    tailRange: 2.5
   - type: Tackle
     stunMin: 6
     stunMax: 10

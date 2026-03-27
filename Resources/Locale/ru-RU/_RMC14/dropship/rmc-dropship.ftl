@@ -25,7 +25,7 @@ rmc-dropship-weapons-weapon-selected-ammo =
     Снаряды: { $rounds } / { $maxRounds }
 rmc-dropship-weapons-target-strike =
     ЗАХВАТ ЦЕЛИ
-    
+
     Режим удара: { $mode }
     Конфиг. удара: { $weapon }
     Выбранная цель: { $target }

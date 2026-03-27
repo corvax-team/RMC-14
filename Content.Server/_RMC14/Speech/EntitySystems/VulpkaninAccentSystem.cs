@@ -8,6 +8,13 @@ namespace Content.Server._RMC14.Speech.EntitySystems;
 public sealed class VulpkaninAccentSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
+    // CCM-Localization-Start
+    private static readonly Regex RegexLowerR = new("r+", RegexOptions.Compiled);
+    private static readonly Regex RegexUpperR = new("R+", RegexOptions.Compiled);
+    
+    private static readonly string[] RrrVariants = { "rr", "rrr" };
+    private static readonly string[] RrrUpperVariants = { "RR", "RRR" };
+    // CCM-Localization-End
     
     public override void Initialize()
     {
@@ -19,8 +26,10 @@ public sealed class VulpkaninAccentSystem : EntitySystem
     {
         var message = args.Message;
         
-        message = Regex.Replace(message, "r+", _random.Pick(new List<string> { "rr", "rrr" }));
-        message = Regex.Replace(message, "R+", _random.Pick(new List<string> { "RR", "RRR" }));
+        // CCM-Localization-Start
+        message = RegexLowerR.Replace(message, _ => _random.Pick(RrrVariants));
+        message = RegexUpperR.Replace(message, _ => _random.Pick(RrrUpperVariants));
+        // CCM-Localization-End
         
         args.Message = message;
     }

@@ -185,6 +185,9 @@
           events:
           - !type:TechUnlockVehicleEvent
             unlock: RMCVehicleHumveeARC
+          - !type:TechAnnounceEvent
+            author: УПРАВЛЕНИЕ АКТИВАМИ «ДАВИДА»
+            message: Для данной операции санкционировано развёртывание системы БРК.
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: humvee
