@@ -10,10 +10,6 @@
     department: CMSquad
     time: 36000 # 10 hours. CCM14 role timers. RMC: 72000 # 20 hours
   ranks:
-    RMCRankMP5:
-    - !type:RoleTimeRequirement
-      role: CMJobMilitaryPolice
-      time: 630000 # 175 hours CCM14
     RMCRankMP4:
     - !type:RoleTimeRequirement
       role: CMJobMilitaryPolice
