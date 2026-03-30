@@ -369,12 +369,11 @@
   - type: RMCMesonsNonviewable
     xenoVisible: true
   - type: CEZPhysics # [z-levels]
-  # - type: MCZLevelFallStun # [z-levels]
-  # - type: MCZLevelFallDamage
-  #   damage:
-  #     types:
-  #       Slash: 5
-  # - type: MCZLevelHitStun # [z-levels]
+  - type: MCZLevelFallStun # [z-levels]
+  - type: MCZLevelFallDamage
+    damage:
+      types:
+        Slash: 5
 
 - type: entity
   abstract: true
