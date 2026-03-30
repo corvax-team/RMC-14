@@ -1,5 +1,5 @@
-ent-ActionXenoTailWhirlwind = Tail wirlwind (350)
-    .desc = Knock down any enemies close to you.
+ent-ActionXenoTailVortex = Tail vortex (250)
+    .desc = Creates a vortex that pushes back your enemies.
 ent-ActionXenoDashFlight = Dash flight (400)
     .desc = Dash a short distance towards a given location.
 ent-ActionXenoPlantHiveWeeds = Plant hive Weeds (150)

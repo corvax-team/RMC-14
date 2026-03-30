@@ -1,22 +1,4 @@
 - type: entity
-  id: ActionXenoTailWhirlwind
-  parent: ActionXenoBase
-  name: Tail wirlwind (350)
-  description: Knock down any enemies close to you.
-  components:
-  - type: Action
-    itemIconStyle: NoItem
-    icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: tail_sweep
-    useDelay: 20
-  - type: InstantAction
-    event: !type:TailWhirlwindActionEvent
-  - type: RMCDazeableAction
-  - type: XenoActionPlasma
-    cost: 350
-
-- type: entity
   parent: ActionXenoLeap
   id: ActionXenoDashFlight
   name: Dash flight (400)

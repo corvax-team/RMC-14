@@ -1,5 +1,5 @@
-ent-ActionXenoTailWhirlwind = Хвостовой вихрь (350)
-    .desc = Сбивайте с ног всех врагов, находящихся рядом с вами.
+ent-ActionXenoTailVortex = Tail vortex (250)
+    .desc = Creates a vortex that pushes back your enemies.
 ent-ActionXenoDashFlight = Рывок (400)
     .desc = Пробежать небольшое расстояние в направлении заданного места.
 ent-ActionXenoPlantHiveWeeds = Сорняки Улья (150)
