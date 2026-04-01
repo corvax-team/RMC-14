@@ -158,7 +158,7 @@
   description: A type of body armor designed for protection against internal threats. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against cuts, explosions or bio-threats. Not recommended for direct combat or for deployment use against hostiles.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/mp.rsi
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/m3/extra-light/mp.rsi
 
 # Officers
 
