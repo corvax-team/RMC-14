@@ -16,7 +16,7 @@ public sealed class MCZLevelFallStunSystem : EntitySystem
 
     private void OnHit(Entity<MCZLevelFallStunComponent> entity, ref CEZLevelHitEvent args)
     {
-        _stun.TryStun(entity, TimeSpan.FromSeconds(1f), true);
-        _stun.TryKnockdown(entity, TimeSpan.FromSeconds(1f), true);
+        _stun.TrySlowdown(entity, entity.Comp.SlowTime, true);
+        _stun.TryStun(entity, entity.Comp.StunTime, true);
     }
 }

@@ -1,7 +1,7 @@
 - type: entity
   id: MCSmokeTile
   name: smoke
-  categories: [ MCContent ]
+  #categories: [ MCContent ]
   abstract: true
   components:
   - type: Tag
