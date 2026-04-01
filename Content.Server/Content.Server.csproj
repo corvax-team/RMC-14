@@ -15,7 +15,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Discord.Net" />
-    <PackageReference Include="Serilog" />
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
     <PackageReference Include="NetCord" />
     <PackageReference Include="QRCoder" />
@@ -35,9 +34,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Content.Analyzers\Content.Analyzers.csproj" Condition="'$(SkipRobustAnalyzer)' != 'true'" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="_Lua\Networking\" />
   </ItemGroup>
 </Project>

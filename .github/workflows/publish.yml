@@ -33,9 +33,6 @@ jobs:
       with:
         submodules: 'recursive'
 
-    - name: Apply RobustToolbox Patch
-      run: git apply --directory=RobustToolbox dos_fix.patch || true
-
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4.1.0
       with:

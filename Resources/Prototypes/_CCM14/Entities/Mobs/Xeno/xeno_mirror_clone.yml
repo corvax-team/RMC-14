@@ -23,7 +23,5 @@
   - type: MirrorClone
   - type: FollowEntity
   - type: FakeAttacker
-    swingSound:
-      path: /Audio/_RMC14/Weapons/alien_claw_swipe.ogg
   - type: MirrorCloneSwing
   - type: MirrorClonesActive
