@@ -10,21 +10,21 @@ on:
 
 jobs:
   build:
+    name: Build and Test
     if: github.actor != 'RounyBot' && github.event.pull_request.draft == false
-    strategy:
-      fail-fast: true
-      matrix:
-        os: [ubuntu-latest]
-
     runs-on: self-hosted
+    env:
+      DOTNET_ROOT: ${{ runner.temp }}/.dotnet
+      PUBLISHTRIMMED: "false"
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+      DOTNET_gcServer: 1
 
     steps:
     - name: Checkout Master
       uses: actions/checkout@v4.2.2
 
     - name: Setup Submodule
-      run: |
-        git submodule update --init --recursive
+      run: git submodule update --init --recursive
 
     - name: Pull engine updates
       uses: space-wizards/submodule-dependency@v0.1.5
@@ -38,13 +38,10 @@ jobs:
       uses: actions/setup-dotnet@v4.1.0
       with:
         dotnet-version: 9.0.x
-      env:
-        DOTNET_INSTALL_DIR: ${{ runner.temp }}/.dotnet
+        dotnet-install-dir: ${{ runner.temp }}/.dotnet
 
-    - name: Set DOTNET_ROOT and PATH
-      run: |
-        echo "DOTNET_ROOT=${{ runner.temp }}/.dotnet" >> $GITHUB_ENV
-        echo "${{ runner.temp }}/.dotnet" >> $GITHUB_PATH
+    - name: Add .NET to PATH
+      run: echo "${{ runner.temp }}/.dotnet" >> $GITHUB_PATH
 
     - name: Install dependencies
       run: dotnet restore
@@ -56,14 +53,12 @@ jobs:
       run: dotnet test --no-build --configuration DebugOpt Content.Tests/Content.Tests.csproj -- NUnit.ConsoleOut=0
 
     - name: Run Content.IntegrationTests
-      run: |
-        export DOTNET_gcServer=1
-        dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed
+      run: dotnet test --no-build --configuration DebugOpt Content.IntegrationTests/Content.IntegrationTests.csproj -- NUnit.ConsoleOut=0 NUnit.MapWarningTo=Failed
+
   ci-success:
     name: Build & Test Debug
-    needs:
-      - build
-    runs-on: ubuntu-latest
+    needs: build
+    runs-on: self-hosted
     steps:
       - name: CI succeeded
         run: exit 0

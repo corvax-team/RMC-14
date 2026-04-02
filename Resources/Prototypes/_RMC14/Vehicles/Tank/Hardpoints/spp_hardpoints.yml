@@ -19,6 +19,7 @@
     state: tank_turret_0
   - type: RMCHardpointItem
     compatibilityId: SPPTank
+    repairRate: 0.01
   - type: VehicleTurret
     rotateToCursor: true
     stabilizedRotation: false

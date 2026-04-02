@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
+using Content.Shared.Tools;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameObjects;
@@ -13,7 +14,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Vehicle;
 
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(RMCHardpointSystem))]
+[Access(typeof(RMCHardpointSystem), typeof(RMCHardpointSlotSystem))]
 public sealed partial class RMCHardpointItemComponent : Component
 {
     public const string ComponentId = "RMCHardpointItem";
@@ -32,11 +33,14 @@ public sealed partial class RMCHardpointItemComponent : Component
 
     [DataField]
     public float DamageMultiplier = 1f;
+
+    [DataField]
+    public float RepairRate = 0.01f;
 }
 
 
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(RMCHardpointSystem))]
+[Access(typeof(RMCHardpointSystem), typeof(RMCHardpointSlotSystem))]
 public sealed partial class RMCHardpointSlotsComponent : Component
 {
     [DataField]
@@ -46,10 +50,10 @@ public sealed partial class RMCHardpointSlotsComponent : Component
     public List<RMCHardpointSlot> Slots = new();
 
     [DataField]
-    public float HardpointDamageMultiplier = 0.9f;
+    public float FrameDamageFractionWhileIntact = 0.1f;
 
     [DataField]
-    public float FrameDamageFractionWhileIntact = 0.1f;
+    public ProtoId<ToolQualityPrototype> RemoveToolQuality = "Prying";
 
     [NonSerialized]
     public HashSet<string> PendingInserts = new();
@@ -113,17 +117,29 @@ public sealed partial class RMCHardpointIntegrityComponent : Component
     [DataField]
     public SoundSpecifier? RepairSound;
 
+    [DataField]
+    public ProtoId<ToolQualityPrototype> RepairToolQuality = "Welding";
+
+    [DataField]
+    public ProtoId<ToolQualityPrototype> FrameFinishToolQuality = "Anchoring";
+
+    [DataField]
+    public float FrameWeldCapFraction = 0.75f;
+
+    [DataField]
+    public float FrameRepairEpsilon = 0.01f;
+
+    [DataField]
+    public float RepairChunkFraction = 0.05f;
+
+    [DataField]
+    public float RepairChunkMinimum = 0.01f;
+
+    [DataField]
+    public float FrameRepairChunkSeconds = 2f;
+
     [DataField, AutoNetworkedField]
     public bool BypassEntryOnZero;
-
-    [DataField]
-    public float RepairTimePerIntegrity = 0.01f;
-
-    [DataField]
-    public float RepairTimeMin = 0.25f;
-
-    [DataField]
-    public float RepairTimeMax = 3f;
 
     [NonSerialized]
     public bool Repairing;
