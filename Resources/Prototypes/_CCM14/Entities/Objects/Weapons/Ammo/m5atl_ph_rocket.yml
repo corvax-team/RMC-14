@@ -1,0 +1,186 @@
+- type: entity
+  id: CCMRocket84mmPhosphorus
+  name: 84mm phosphorus rocket
+  parent: BaseItem
+  description: A rocket tube compatible with the M5-ATL loaded with a HE warhead. Deals low damage but spreads a large amount of weak fire, in land point spawns a strong fire thats... quite have long duration
+  components:
+  - type: Tag
+    tags:
+    - RMCRocketAmmo84mm
+  - type: CartridgeAmmo
+    proto: CCMProjectile84mmPhosphorus
+    deleteOnSpawn: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/m5spec.rsi
+    layers:
+    - state: m5_84mm_wp
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Item
+    size: Normal
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: m5_84mm_he
+    suffix: false
+  - type: IgnorePredictionHide
+  - type: AssistedReloadAmmo
+
+- type: entity
+  id: CCMProjectile84mmPhosphorus
+  name: 84mm phosphorus rocket
+  categories: [ HideSpawnMenu ]
+  description: Uh oh.
+  components:
+  - type: TriggerOnCollide
+    # TODO RMC14 Make TriggerOnCollide spawn the explosion on the OtherEntity tile more consistently, so the explosion is centered properly
+    fixtureID: projectile # no parent entity from BaseBulletTrigger because it has Clickable
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.15,0.15,0.15"
+          # Bigger than bullets. Rectangle won't work since AABB shapes don't rotate. This should help significantly with explosion consistency.
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+        restitution: 0.0
+        density: 20
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Blunt: 15
+    maxFixedRange: 6 # 7 tiles
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/m5spec_projectiles.rsi
+    layers:
+    - state: m5_84mm_wp
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: RMC
+    maxIntensity: 10
+    intensitySlope: 5
+    totalIntensity: 30
+    maxTileBreak: 0
+  - type: CMExplosionEffect
+  - type: RMCScorchEffect
+  - type: PointLight
+    radius: 3.5
+    color: orange
+    energy: 0.5
+  - type: IgnorePredictionHide
+  - type: RMCProjectileAccuracy
+    accuracy: 95
+    thresholds:
+    - range: 7
+      falloff: 10
+  - type: DirectionalTileFireOnTrigger
+    range: 4
+    spawn: CCMTileFireWeakPhosphorus84mm
+  - type: SpawnOnTerminate
+    spawn: CCMTileFireStrongPhosphorus84mm
+
+# Fire tiles
+
+- type: entity
+  parent: RMCTileFire
+  id: CCMTileFireStrongPhosphorus84mm
+  components:
+  - type: Sprite
+    scale: 1.2, 1.2
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+    color: "#FFFFE0"
+  - type: PointLight
+    color: "#FFFFE0"
+  - type: RMCIgniteOnCollide
+    intensity: 80
+    duration: 600
+    maxStacks: 15
+    tileDamage:
+      types:
+        Heat: 1
+    armorMultiplier: 0.5
+    armorWhitelist:
+      components:
+      - Xeno
+    burnColor: "#FFFFE0"
+  - type: TileFire
+    duration: 600
+    id: RMCTileFireGreen
+    extinguishInstantly: false
+    patExtinguishMultiplier: 20
+    sprayExtinguishMultiplier: -1
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.666
+    sprintSpeedModifier: 0.666
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }
+  - type: SpriteColor
+    color: "#FFFFE0"
+
+- type: entity
+  parent: RMCTileFire
+  id: CCMTileFireWeakPhosphorus84mm
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+    color: "#FFE4B5FF"
+  - type: PointLight
+    color: "#FFE4B5FF"
+  - type: RMCIgniteOnCollide
+    maxStacks: 20
+    intensity: 50
+    duration: 20
+    tileDamage:
+      types:
+        Heat: 1
+    armorMultiplier: 0.8
+    armorWhitelist:
+      components:
+      - Xeno
+    burnColor: "#FFE4B5FF"
+  - type: TileFire
+    duration: 15
+    id: RMCTileFireGreen
+    extinguishInstantly: false
+    patExtinguishMultiplier: 2
+    sprayExtinguishMultiplier: -1
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.8
+    sprintSpeedModifier: 0.8
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }
+  - type: SpriteColor
+    color: "#FFFFE0"
+
+# Crate
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: CCMCrateM5DemoSpecWhitePhosphorous
+  name: M5-ATL White Phosphorous Crate (FI x3)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMRocket84mmPhosphorus
+      amount: 3
