@@ -18,10 +18,10 @@
     - ActionXenoTailStab
     - ActionXenoPunch
     - CCMActionXenoBoxerAdvance
-    - CCMActionXenoBoxerWidePunch
-    - CCMActionXenoBoxerTailKnock
+    - CCMActionXenoFuryOfThousandPunches
     - ActionXenoDevolve
   - type: XenoLeap
+    strength: 50
     delay: 0
     range: 2
     moveDelayTime: 0
@@ -32,35 +32,77 @@
     targetCameraShakeStrength: 1
     damage:
       groups:
-        Brute: 25
+        Brute: 20
   - type: XenoPunch
+    effect: RMCEffectSlam
     damage:
       types:
         Blunt: 35
-  - type: XenoTailSweep
-    plasmaCost: 0
-    paralyzeTime: 0
-    damage:
-      types:
-        Slash: 35
-  - type: XenoScissorCut
-    range: 1
-    attackEffect: RMCEffectSlam
-    telegraphEffectEdge: RMCEffectXenoTelegraphRed
-    damage:
-      types:
-        Slash: 30
-    slashSound:
-        collection: Punch
-        params:
-          variation: 0.15
+  - type: XenoRage
+    armorPerRage: 0
+    speedBuffPerRage: 0
+    attackSpeedPerRage: 0.08
+    maxRage: 20 
+    healAmount: 0
+  - type: XenoEviscerate
+    hitSound:
+      collection: Punch
+    stunTime: 0
+    maxLifeSteal: 0
+    lifeStealPerMarine: 0
+    damageAtRageLevels:
+    - groups:
+        Brute: 8
+    - groups:
+        Brute: 16
+    - groups:
+        Brute: 24
+    - groups:
+        Brute: 32
+    - groups:
+        Brute: 40
+# 5- rage stacks ↑ // 6+ rage stacks ↓
+    - groups:
+        Brute: 48
+    - groups:
+        Brute: 56
+    - groups:
+        Brute: 64
+    - groups:
+        Brute: 72
+    - groups:
+        Brute: 80
+# 10- rage stacks ↑ // 11+ rage stacks ↓
+    - groups:
+        Brute: 88
+    - groups:
+        Brute: 96
+    - groups:
+        Brute: 104
+    - groups:
+        Brute: 112
+    - groups:
+        Brute: 120
+# 15- rage stacks ↑ // 16+ rage stacks ↓
+    - groups:
+        Brute: 128
+    - groups:
+        Brute: 136
+    - groups:
+        Brute: 144
+    - groups:
+        Brute: 152
+    - groups:
+        Brute: 160
+    rangeAtRageLevels: [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
+    windupReductionAtRageLevels: [0, -0.1, -0.1, -0.2, -0.2, -0.3, -0.3, -0.4, -0.4, -0.5, -0.5, -0.6, -0.6, -0.7, -0.7, -0.8, -0.8, -0.9, -0.9, -1] # + 0.1 every 2 rage stacks
   - type: MeleeWeapon
     soundHit:
       collection: Punch
     animation: CCMWeaponArcXenoPunch
     damage:
       groups:
-        Brute: 35
+        Brute: 20
   - type: XenoEvolution
     max: 500
     evolvesTo:
@@ -69,8 +111,8 @@
     strains: []
   - type: XenoHidden
   - type: XenoLifesteal
-    maxHeal: 80
-    minHeal: 40
+    maxHeal: 30
+    minHeal: 15
 
 # // CCM Xeno Punch Attack Effect
 - type: entity
