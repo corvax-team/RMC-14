@@ -33,7 +33,10 @@
     damage:
       groups:
         Brute: 20
+  - type: XenoMeleeSlow
+    slowTime: 0.5
   - type: XenoPunch
+    slowDuration: 7.25
     effect: RMCEffectSlam
     damage:
       types:
