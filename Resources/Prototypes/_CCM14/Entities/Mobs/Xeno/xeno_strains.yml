@@ -41,7 +41,7 @@
   - type: XenoRage
     armorPerRage: 0
     speedBuffPerRage: 0
-    attackSpeedPerRage: 0.08
+    attackSpeedPerRage: 0.1
     maxRage: 20 
     healAmount: 0
   - type: XenoEviscerate
@@ -112,7 +112,7 @@
   - type: XenoHidden
   - type: XenoLifesteal
     maxHeal: 30
-    minHeal: 15
+    minHeal: 20
 
 # // CCM Xeno Punch Attack Effect
 - type: entity
