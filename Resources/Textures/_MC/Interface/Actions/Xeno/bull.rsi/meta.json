@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/tgstation/TerraGov-Marine-Corps/commit/53646c40415a2b0c70926011011d96fd41d6c1fe, modified by TornadoTechnology (GitHub)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bull_ready_charge"
+    },
+    {
+      "name": "bull_charge"
+    },
+    {
+      "name": "bull_headbutt"
+    },
+    {
+      "name": "bull_gore"
+    }
+  ]
+}

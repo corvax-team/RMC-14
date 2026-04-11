@@ -1,0 +1,75 @@
+- type: entity
+  parent:
+  - CMXenoDeveloped
+  - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  id: MCXenoBull
+  name: bull
+  description: A well defended hit-and-runner.
+  components:
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Critical
+    - Dead
+  # Name
+  - type: FixedIdentity
+    name: mc-job-name-xeno-bull
+  - type: GhostRole
+    name: mc-job-name-xeno-bull
+  - type: RMCActionOrder
+    id: MCXenoBull
+  # Visuals
+  - type: Sprite
+    sprite: _MC/Mobs/Xenos/bull.rsi
+    offset: 0, 0.35
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_MC/Interface/MapIcons/Xeno/xeno.rsi
+      state: bull
+  # Abilities
+  - type: Xeno
+    role: MCXenoBull
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoDevolve
+    # Main
+    - MCActionXenoGoreCharge
+    - MCActionXenoHeadbuttCharge
+    - MCActionXenoAcidCharge
+    tier: 2
+    hudOffset: -0.15, 0.25
+  # Statistics
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      325: Critical
+      425: Dead
+  - type: XenoPlasma
+    plasma: 270
+    maxPlasma: 270
+    plasmaRegenOnWeeds: 20
+  # - type: MCArmor
+  #   soft:
+  #     melee: 40
+  #     bullet: 50
+  #     laser: 40
+  #     energy: 40
+  #     bomb: 20
+  #     bio: 35
+  #     fire: 20
+  #     acid: 35
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 25
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.125
+    baseSprintSpeed: 4.545
+  # Abilities
+  - type: MCXenoHeadbuttCharge
+  # Passive
+  # - type: MCXenoSunder
+  #   multiplier: 0.8

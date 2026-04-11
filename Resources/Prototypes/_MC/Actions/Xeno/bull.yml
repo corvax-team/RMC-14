@@ -1,0 +1,91 @@
+- type: entity
+  parent: ActionXenoBase
+  id: MCActionXenoToggleChargingBull
+  name: Toggle Charging
+  description: Toggles the movement-based charge on and off.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _MC/Interface/Actions/Xeno/bull.rsi
+      state: bull_ready_charge
+    useDelay: 0.1
+  - type: InstantAction
+    event: !type:MCXenoChargeActionEvent
+
+- type: entity
+  parent: ActionXenoBase
+  id: MCActionXenoGoreCharge
+  name: Gore Charge (40)
+  description: The gore charge, when it hits a host, stops your charge while dealing a large amount of damage.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _MC/Interface/Actions/Xeno/bull.rsi
+      state: bull_gore
+    useDelay: 4
+  - type: InstantAction
+    event: !type:MCXenoHeadbuttChargeActionEvent
+      duration: 2
+      damageMultiplier: 2.6
+      speedMultiplier: 1.75
+      activationEmote: XenoRoar
+      hitSound:
+        path: /Audio/_MC/Effects/alien_tail_attack.ogg
+  - type: XenoActionPlasma
+    cost: 40
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: MCActionXenoHeadbuttCharge
+  name: Headbutt Charge (40)
+  description: The headbutt charge, when it hits a host, stops your charge while push them away.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _MC/Interface/Actions/Xeno/bull.rsi
+      state: bull_headbutt
+    useDelay: 15
+  - type: InstantAction
+    event: !type:MCXenoHeadbuttChargeActionEvent
+      knockback: 6
+      knockbackSpeed: 15
+      paralyze: 1
+      duration: 3
+      speedMultiplier: 1.75
+      activationEmote: XenoRoar
+      hitSound:
+        path: /Audio/_MC/Effects/alien_knockdown.ogg
+  - type: XenoActionPlasma
+    cost: 40
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: MCActionXenoAcidCharge
+  name: Acid Charge (40)
+  description: The acid charge, deal small damage to yourself and start leaving acid puddles after your steps.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _MC/Interface/Actions/Xeno/bull.rsi
+      state: bull_charge
+    useDelay: 30
+  - type: InstantAction
+    event: !type:MCXenoHeadbuttChargeActionEvent
+      collide: false
+      duration: 2
+      turfSpawnEntityId: MCXenoAcidSprayBull
+      speedMultiplier: 1.75
+      activationEmote: Hiss
+      footstepSound:
+        path: /Audio/_RMC14/Xeno/alien_footstep_charge1.ogg
+        params:
+          volume: -4
+  - type: XenoActionPlasma
+    cost: 40
+  - type: ActionBlockIfResting
