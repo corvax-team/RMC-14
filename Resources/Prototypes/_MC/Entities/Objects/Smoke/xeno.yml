@@ -60,7 +60,6 @@
   - type: Tag
     tags:
     - MCSmoke
-    - MCDamageAcid
     - HideContextMenu
   - type: Sprite
     color: "#86B028"

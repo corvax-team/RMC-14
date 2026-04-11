@@ -52,12 +52,6 @@
     useDelay: 30
   - type: InstantAction
     event: !type:MCXenoMelterShroudActionEvent
-  - type: ActionSharedCooldown
-    id: ActionXenoAcidShroud
-    ids:
-    - ActionXenoAcidShroud
-    cooldown: 30
-    onPerform: false
 
 - type: entity
   parent: ActionXenoAcidWeak
@@ -98,7 +92,6 @@
   - type: Tag
     tags:
     - MCSmoke
-    - MCDamageAcid
     - HideContextMenu
   - type: Sprite
     color: "#85b028"
