@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Audio;
+﻿using Content.Shared.Damage;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -28,6 +29,9 @@ public sealed partial class MCXenoHeadbuttChargeActiveComponent : Component
     public SoundSpecifier? FootstepSound;
 
     [DataField, AutoNetworkedField]
+    public DamageSpecifier? Damage;
+
+    [DataField, AutoNetworkedField]
     public float DamageMultiplier;
 
     [DataField, AutoNetworkedField]
@@ -35,6 +39,12 @@ public sealed partial class MCXenoHeadbuttChargeActiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId? TurfSpawnEntityId;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan? Duration;
+
+    [DataField, AutoNetworkedField]
+    public float DurationElapsed;
 
     /*
      * Cache data

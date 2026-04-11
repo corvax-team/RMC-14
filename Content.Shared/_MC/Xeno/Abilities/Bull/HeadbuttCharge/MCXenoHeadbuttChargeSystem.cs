@@ -1,10 +1,8 @@
-﻿using Content.Shared._RMC14.Actions;
-using Content.Shared._RMC14.Emote;
+﻿using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Actions;
-using Content.Shared.Actions.Components;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Components;
@@ -12,12 +10,12 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
+using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._MC.Xeno.Abilities.Bull.HeadbuttCharge;
 
@@ -40,10 +38,13 @@ public sealed class MCXenoHeadbuttChargeSystem : MCXenoAbilitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private readonly ThrowingSystem _throwing = default!;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        SubscribeLocalEvent<MCXenoHeadbuttChargeComponent, MCXenoHeadbuttChargeActionEvent>(OnUse);
 
         SubscribeLocalEvent<MCXenoHeadbuttChargeActiveComponent, ComponentStartup>(OnActiveStartup);
         SubscribeLocalEvent<MCXenoHeadbuttChargeActiveComponent, ComponentRemove>(OnActiveRemove);
@@ -55,9 +56,25 @@ public sealed class MCXenoHeadbuttChargeSystem : MCXenoAbilitySystem
         SubscribeLocalEvent<MCXenoHeadbuttChargeComponent, MCXenoHeadbuttChargeDoAfterEvent>(OnUseDoAfter);
     }
 
-    protected bool CanUse(Entity<MCXenoHeadbuttChargeComponent> entity, EntityUid actionUid)
+    public override void Update(float frameTime)
     {
-        return !HasComp<MCXenoHeadbuttChargeActiveComponent>(entity);
+        var query = EntityQueryEnumerator<MCXenoHeadbuttChargeActiveComponent>();
+        while (query.MoveNext(out var uid, out var active))
+        {
+            if (active.Duration is not { } duration)
+                continue;
+
+            active.DurationElapsed += frameTime;
+
+            if (active.DurationElapsed >= duration.TotalSeconds)
+            {
+                RemCompDeferred<MCXenoHeadbuttChargeActiveComponent>(uid);
+            }
+            else
+            {
+                Dirty(uid, active);
+            }
+        }
     }
 
     private void OnActiveStartup(Entity<MCXenoHeadbuttChargeActiveComponent> entity, ref ComponentStartup args)
@@ -86,10 +103,9 @@ public sealed class MCXenoHeadbuttChargeSystem : MCXenoAbilitySystem
         if (_hive.FromSameHive(entity.Owner, args.OtherEntity))
             return;
 
-        if (entity.Comp.DamageMultiplier != 0)
+        if (entity.Comp.Damage is { } dmg && entity.Comp.DamageMultiplier != 0)
         {
-            var damage = new DamageSpecifier() * entity.Comp.DamageMultiplier;
-            _damageable.TryChangeDamage(args.OtherEntity, damage, tool: entity);
+            _damageable.TryChangeDamage(args.OtherEntity, dmg * entity.Comp.DamageMultiplier, tool: entity);
         }
 
         if (entity.Comp.Knockback != 0)
@@ -146,10 +162,13 @@ public sealed class MCXenoHeadbuttChargeSystem : MCXenoAbilitySystem
         RemCompDeferred<MCXenoHeadbuttChargeActiveComponent>(ent);
     }
 
-    protected void OnUse(Entity<MCXenoHeadbuttChargeComponent> entity, ref MCXenoHeadbuttChargeActionEvent args)
+    private void OnUse(Entity<MCXenoHeadbuttChargeComponent> entity, ref MCXenoHeadbuttChargeActionEvent args)
     {
-        var ev = new MCXenoHeadbuttChargeDoAfterEvent(GetNetEntity(args.Action));
-        var doAfter = new DoAfterArgs(EntityManager, entity, entity.Comp.ActivationDelay, ev, entity);
+        var ev = new MCXenoHeadbuttChargeDoAfterEvent(GetNetEntity(args.Action), GetNetCoordinates(args.Target));
+        var doAfter = new DoAfterArgs(EntityManager, entity, entity.Comp.ActivationDelay, ev, entity)
+        {
+            BreakOnMove = false,
+        };
 
         _doAfter.TryStartDoAfter(doAfter);
     }
@@ -157,15 +176,24 @@ public sealed class MCXenoHeadbuttChargeSystem : MCXenoAbilitySystem
     private void OnUseDoAfter(Entity<MCXenoHeadbuttChargeComponent> entity, ref MCXenoHeadbuttChargeDoAfterEvent args)
     {
         var actionUid = GetEntity(args.Action);
-        if (args.Handled || args.Cancelled)
+        if (args.Cancelled)
             return;
 
-        if (!TryComp<InstantActionComponent>(actionUid, out var instantActionComponent) || instantActionComponent.Event is not MCXenoHeadbuttChargeActionEvent ev)
+        if (!TryComp<Actions.Components.WorldTargetActionComponent>(actionUid, out var worldTargetActionComponent) || worldTargetActionComponent.Event is not MCXenoHeadbuttChargeActionEvent ev)
             return;
 
         _actions.StartUseDelay(actionUid);
 
         _emote.TryEmoteWithChat(entity, ev.ActivationEmote, forceEmote: true);
+
+        var targetCoordinates = GetCoordinates(args.TargetCoordinates);
+        var origin = _transform.GetMapCoordinates(entity);
+        var targetMapCoords = _transform.ToMapCoordinates(targetCoordinates);
+        var direction = (targetMapCoords.Position - origin.Position).Normalized();
+
+        var throwStrength = (float)ev.Duration.TotalSeconds * 10f;
+
+        _throwing.TryThrow(entity, direction * throwStrength, animated: false);
 
         var component = new MCXenoHeadbuttChargeActiveComponent
         {
@@ -174,15 +202,15 @@ public sealed class MCXenoHeadbuttChargeSystem : MCXenoAbilitySystem
             KnockbackSpeed = ev.KnockbackSpeed,
             Paralyze = ev.Paralyze,
             HitSound = ev.HitSound,
+            Damage = ev.Damage,
             DamageMultiplier = ev.DamageMultiplier,
             SpeedMultiplier = ev.SpeedMultiplier,
             TurfSpawnEntityId = ev.TurfSpawnEntityId,
             FootstepSound = ev.FootstepSound,
+            Duration = ev.Duration,
         };
 
         AddComp(entity, component, true);
         Dirty(entity, component);
-
-        RemCompDeferred<MCXenoHeadbuttChargeActiveComponent>(entity);
     }
 }

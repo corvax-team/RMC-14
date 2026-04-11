@@ -1,11 +1,12 @@
 ﻿using Content.Shared.Actions;
 using Content.Shared.Chat.Prototypes;
+using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._MC.Xeno.Abilities.Bull.HeadbuttCharge;
 
-public sealed partial class MCXenoHeadbuttChargeActionEvent : InstantActionEvent
+public sealed partial class MCXenoHeadbuttChargeActionEvent : WorldTargetActionEvent
 {
     [DataField]
     public bool Collide = true;
@@ -21,6 +22,9 @@ public sealed partial class MCXenoHeadbuttChargeActionEvent : InstantActionEvent
 
     [DataField]
     public TimeSpan Duration = TimeSpan.FromSeconds(2);
+
+    [DataField]
+    public DamageSpecifier? Damage;
 
     [DataField]
     public float DamageMultiplier;
