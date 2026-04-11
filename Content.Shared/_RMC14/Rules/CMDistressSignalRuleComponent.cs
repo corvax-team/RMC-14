@@ -195,7 +195,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public bool DoJobSlotScaling = true;
 
     [DataField]
-    public bool AutoEnd = true;
+    public bool AutoEnd = true; // CCM14
 
     [DataField]
     public bool StartARESAnnouncements = true;

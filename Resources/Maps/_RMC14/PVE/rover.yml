@@ -2484,17 +2484,6 @@ entities:
         -24,12: RMCAreaRover
         -24,11: RMCAreaRover
         -23,15: RMCAreaRover
-- proto: ActionToggleLight
-  entities:
-  - uid: 1384
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 1383
-    - type: Action
-      originalIconColor: '#FFFFFFFF'
-      container: 1383
 - proto: Bedroll
   entities:
   - uid: 1370
@@ -7792,28 +7781,6 @@ entities:
     - type: Transform
       pos: -9.822228,7.727341
       parent: 1
-- proto: RMCActionTelephone
-  entities:
-  - uid: 438
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 437
-    - type: Action
-      originalIconColor: '#FFFFFFFF'
-      container: 437
-- proto: RMCActionWhistle
-  entities:
-  - uid: 444
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 443
-    - type: Action
-      originalIconColor: '#FFFFFFFF'
-      container: 443
 - proto: RMCAshtray
   entities:
   - uid: 368
@@ -7860,20 +7827,6 @@ entities:
     - type: Transform
       pos: -19.719471,-4.3476696
       parent: 1
-    - type: RotaryPhoneBackpack
-      action: 438
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 438
-    - type: ActionsContainer
 - proto: RMCBannerCMWorn
   entities:
   - uid: 101
@@ -8949,14 +8902,6 @@ entities:
     - type: Transform
       pos: -33.51421,22.316713
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 1384
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 1384
 - proto: RMCLampGreen
   entities:
   - uid: 1411
@@ -10940,14 +10885,6 @@ entities:
     - type: Transform
       pos: -9.724949,-3.4571612
       parent: 1
-    - type: RMCWhistle
-      action: 444
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 444
 - proto: RMCWhiteSensorComputer
   entities:
   - uid: 1158

@@ -1,4 +1,4 @@
-cm-vending-machine-wrong-card = Обнаружен неправильный владелец ИД-карты.
+cm-vending-machine-wrong-card = Обнаружен неправильный владелец ID-карты.
 cm-vending-machine-access-denied = В доступе отказано.
 cm-vending-machine-specialist-max = Этот набор уже забрали.
 rmc-vending-machine-can-hack = Вы уверены, что сможете взломать это с помощью [color=cyan]тюнера доступа[/color], чтобы убрать требования к доступу.

@@ -2,6 +2,6 @@
 <customControls:DefaultWindow xmlns="clr-namespace:Robust.Client.UserInterface.Controls;assembly=Robust.Client"
                               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                               xmlns:customControls="clr-namespace:Robust.Client.UserInterface.CustomControls;assembly=Robust.Client"
-                              Title="Reserve Parasites"
+                              Title="Резерв паразитов"
                               MinSize="300 200">
 </customControls:DefaultWindow>

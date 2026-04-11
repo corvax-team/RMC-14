@@ -1,11 +1,11 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: RMCCLFCellLeader
   name: rmc-clf-cell-leader
   description: rmc-ghost-role-information-clf-description
   playTimeTracker: CMJobCLFCellLeader
   ranks:
-    RMCRankCLFRebelCommander: [ ]
+    RMCRankCLFRebel4: [ ]
   startingGear: RMCGearCLFCellLeader
   icon: RMCJobIconCLFCellLeader
   joinNotifyCrew: false

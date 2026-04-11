@@ -37106,21 +37106,6 @@ entities:
     - type: Transform
       pos: 77.640785,19.586163
       parent: 1
-- proto: ActionToggleLight
-  entities:
-  - uid: 45
-    components:
-    - type: Transform
-      parent: 44
-  - uid: 5892
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 350
-    - type: Action
-      originalIconColor: '#FFFFFFFF'
-      container: 350
 - proto: AltarChaos
   entities:
   - uid: 48
@@ -37167,22 +37152,6 @@ entities:
     components:
     - type: Transform
       parent: 27
-    - type: CycleableVisor
-      action: 50
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 50
-    - type: Physics
-      canCollide: False
-    - type: ActionsContainer
     - type: InsideEntityStorage
   - uid: 15857
     components:
@@ -38283,20 +38252,6 @@ entities:
     - type: Transform
       pos: 52.9846,22.894531
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 5892
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 5892
-    - type: ActionsContainer
 - proto: CMArmorM3Light
   entities:
   - uid: 44
@@ -38304,20 +38259,6 @@ entities:
     - type: Transform
       pos: 109.27015,88.9084
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 45
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 45
-    - type: ActionsContainer
 - proto: CMArmorM3VLBallistics
   entities:
   - uid: 351
@@ -70064,14 +70005,6 @@ entities:
     - type: Transform
       pos: 84.5,26.5
       parent: 1
-- proto: RMCActionCycleVisor
-  entities:
-  - uid: 50
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 49
 - proto: RMCArmorSPP
   entities:
   - uid: 9

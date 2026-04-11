@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Map;
 using Robust.Shared.Maths;
 
 namespace Content.Shared._RMC14.Vehicle;
@@ -22,14 +23,7 @@ public sealed class VehicleTurretMuzzleSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        var baseCoords = args.FromCoordinates;
-        var baseRotation = _transform.GetWorldRotation(ent.Owner);
-        var useRight = ent.Comp.Alternate && ent.Comp.UseRightNext;
-        var offset = GetOffset(ent.Comp, baseRotation, useRight);
-        if (offset == Vector2.Zero)
-            return;
-
-        args.FromCoordinates = baseCoords.Offset(baseRotation.RotateVec(offset));
+        args.FromCoordinates = GetMuzzleCoordinates(ent.Owner, ent.Comp, args.FromCoordinates);
     }
 
     private void OnGunShot(Entity<VehicleTurretMuzzleComponent> ent, ref GunShotEvent args)
@@ -41,6 +35,26 @@ public sealed class VehicleTurretMuzzleSystem : EntitySystem
             ent.Comp.UseRightNext = !ent.Comp.UseRightNext;
 
         Dirty(ent);
+    }
+
+    public EntityCoordinates GetMuzzleCoordinates(
+        EntityUid uid,
+        VehicleTurretMuzzleComponent muzzle,
+        EntityCoordinates baseCoords)
+    {
+        var offset = GetWorldOffset(uid, muzzle);
+        return offset == Vector2.Zero ? baseCoords : baseCoords.Offset(offset);
+    }
+
+    public Vector2 GetWorldOffset(
+        EntityUid uid,
+        VehicleTurretMuzzleComponent muzzle,
+        bool? useRightOverride = null)
+    {
+        var baseRotation = _transform.GetWorldRotation(uid);
+        var useRight = useRightOverride ?? (muzzle.Alternate && muzzle.UseRightNext);
+        var offset = GetOffset(muzzle, baseRotation, useRight);
+        return offset == Vector2.Zero ? Vector2.Zero : baseRotation.RotateVec(offset);
     }
 
     private Vector2 GetOffset(VehicleTurretMuzzleComponent muzzle, Angle baseRotation, bool useRight)

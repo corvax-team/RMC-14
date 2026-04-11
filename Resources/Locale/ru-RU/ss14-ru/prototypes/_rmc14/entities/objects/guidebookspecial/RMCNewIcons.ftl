@@ -1,0 +1,12 @@
+ent-RMCNewIconGuidebookPurple = фиолетовый значок «новичок»
+    .suffix = (Сущность руководства)
+    .desc = { ent-BaseItem.desc }
+ent-RMCNewIconGuidebookRed = красный значок «новичок»
+    .suffix = (Сущность руководства)
+    .desc = { ent-BaseItem.desc }
+ent-RMCNewIconGuidebookYellow = жёлтый значок «новичок»
+    .suffix = (Сущность руководства)
+    .desc = { ent-BaseItem.desc }
+ent-RMCNewIconGuidebookGreen = зелёный значок «новичок»
+    .suffix = (Сущность руководства)
+    .desc = { ent-BaseItem.desc }

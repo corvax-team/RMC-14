@@ -1,6 +1,10 @@
-ent-CMXenoParasiteBase = Parasite
+ent-CMXenoParasiteBase = Паразит
     .desc = { ent-CMXenoUndeveloped.desc }
 ent-CMXenoParasite = Лицехват
     .desc = { ent-CMXenoUndeveloped.desc }
-ent-CCMXenoRoyalParasite = Королевский лицехват
-    .desc = Королевский паразит, способный заражать нескольких носителей в течение своей жизни.
+ent-RMCXenoParasiteWatcher = { ent-CMXenoParasiteBase }
+    .suffix = Наблюдатель
+    .desc = { ent-CMXenoParasiteBase.desc }
+ent-RMCXenoParasitePrimeHiveAssign = { ent-CMXenoParasite }
+    .suffix = Автоназначение, Прайм-улей
+    .desc = { ent-CMXenoParasite.desc }

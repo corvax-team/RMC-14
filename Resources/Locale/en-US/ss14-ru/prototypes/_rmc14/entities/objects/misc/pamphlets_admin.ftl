@@ -133,3 +133,5 @@ ent-RMCPamphletAdminVehicles2 = vehicles 2 instructional pamphlet
     .desc = { ent-RMCPamphletAdmin.desc }
 ent-RMCPamphletAdminVehicles3 = vehicles 3 instructional pamphlet
     .desc = { ent-RMCPamphletAdmin.desc }
+ent-RMCPamphletAdminVulture1 = vulture 1 instructional pamphlet
+    .desc = { ent-RMCPamphletAdmin.desc }

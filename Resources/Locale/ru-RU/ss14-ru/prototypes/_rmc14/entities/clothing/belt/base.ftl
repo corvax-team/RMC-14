@@ -1,4 +1,4 @@
-ent-CMBeltBase = Пояс
+ent-CMBeltBase = пояс
     .desc = В нём можно хранить вещи.
 ent-RMCBeltBaseStorageNoVisuals = { ent-CMBeltBase }
     .desc = { ent-CMBeltBase.desc }

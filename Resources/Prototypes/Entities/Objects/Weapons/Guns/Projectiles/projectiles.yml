@@ -52,7 +52,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    drawdepth: OverMobs
+    drawdepth: Effects
     offset: 0, 0
 
 - type: entity
@@ -61,7 +61,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    drawdepth: OverMobs
+    drawdepth: Effects
     offset: 0.2, 0
     scale: "1.6, 1.6"
 
@@ -781,10 +781,10 @@
     maxVelocity: 1.5
     fillPrototype: RMCShrapnelJagged
     rebounds: true
-    capacity: 4
+    capacity: 4 # CCM14
     spreadAngle: 25
   - type: RMCProjectileAccuracy
-    accuracy: 90
+    accuracy: 90 # CCM14
     thresholds:
     - range: 8
       falloff: 10

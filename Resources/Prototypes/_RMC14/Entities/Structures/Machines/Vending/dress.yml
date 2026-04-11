@@ -108,7 +108,7 @@
       - RMCRankColonel
       entries:
       - id: CMHeadBeretCOCol
-    - name: Ceremonial Weapon
+    - name: Церемониальное оружие # CCM14
       choices: { CMCeremonial: 1 }
       jobs:
       - CMCommandingOfficer
@@ -425,7 +425,7 @@
       - id: RMCHeadBandSquad
       - id: RMCMaskScarfSquad
     # Service
-    - name: Service Uniform
+    - name: Служебная форма # CCM14
       takeAll: RMCDresser
       ranks:
       - RMCRankRecruit

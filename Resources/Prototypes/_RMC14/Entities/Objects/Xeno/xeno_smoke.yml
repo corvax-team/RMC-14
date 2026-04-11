@@ -1,5 +1,5 @@
 - type: entity
-  parent: MCSmokeXenoTransvitox
+  parent: MCSmokeXenoTransvitox # CCM14
   id: RMCSmokeAcid
   name: acid gas
   categories: [ HideSpawnMenu ]
@@ -28,7 +28,7 @@
     tags:
     - HideContextMenu
   - type: Appearance
-  - type: MCEdgeSpreader
+  - type: MCEdgeSpreader # CCM14
     delay: 0.1
     id: RMCSmokeAcid
   - type: MCTimedDespawnDisappearanceVisuals
@@ -52,10 +52,12 @@
     whitelist:
       components:
       - Marine
+      - Xeno
+      - Vehicle
   - type: DeleteOnExplosion # so this is supposed to be random depending on the explosion severity but uhhh hahAHAHA help
 
 - type: entity
-  parent: MCSmokeXenoNeurotoxin
+  parent: MCSmokeXenoNeurotoxin # CCM14
   id: RMCSmokeNeurotoxin
   name: neurotoxin gas
   categories: [ HideSpawnMenu ]
@@ -85,10 +87,10 @@
     - HideContextMenu
   - type: Appearance
   - type: ActiveEdgeSpreader
-  - type: MCEdgeSpreader
+  - type: MCEdgeSpreader # CCM14
     delay: 0.1
     id: RMCSmokeNeurotoxin
-  - type: MCTimedDespawnDisappearanceVisuals
+  - type: MCTimedDespawnDisappearanceVisuals # CCM14
     lifetime: 12
   - type: EvenSmoke
     spawn: RMCSmokeNeurotoxin
@@ -178,10 +180,10 @@
     - HideContextMenu
   - type: Appearance
   - type: DeleteOnExplosion
-  - type: MCEdgeSpreader
+  - type: MCEdgeSpreader # CCM14
     delay: 0.1
     id: RMCSmokeKingDoom
-  - type: MCTimedDespawnDisappearanceVisuals
+  - type: MCTimedDespawnDisappearanceVisuals # CCM14
     lifetime: 12
 
 

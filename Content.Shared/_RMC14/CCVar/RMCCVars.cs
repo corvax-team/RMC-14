@@ -38,7 +38,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.bleed_time_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> CMMarinesPerXeno =
-        CVarDef.Create("rmc.marines_per_xeno", 6f, CVar.SERVER | CVar.SERVER); // CCM-cvars-permission
+        CVarDef.Create("rmc.marines_per_xeno", 6f, CVar.SERVER | CVar.SERVERONLY); // CCM-cvars-permission
 
     public static readonly CVarDef<bool> RMCAutoBalance =
         CVarDef.Create("rmc.auto_balance", true, CVar.SERVER | CVar.SERVERONLY);
@@ -159,7 +159,13 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCDropshipFabricatorGainEverySeconds =
         CVarDef.Create("rmc.dropship_fabricator_gain_every_seconds", 3.33333f, CVar.REPLICATED | CVar.SERVER);
+    // CCM14-start
+    public static readonly CVarDef<int> RMCVehicleFabricatorStartingPoints =
+        CVarDef.Create("rmc.vehicle_fabricator_starting_points", 5000, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<float> RMCVehicleFabricatorGainEverySeconds =
+        CVarDef.Create("rmc.vehicle_fabricator_gain_every_seconds", 5f, CVar.REPLICATED | CVar.SERVER);
+    // CCM14-end
     public static readonly CVarDef<bool> RMCDropshipCASDebug =
         CVarDef.Create("rmc.dropship_cas_debug", false, CVar.REPLICATED | CVar.SERVER);
 
@@ -199,6 +205,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCTacticalMapShowAreaLabels =
         CVarDef.Create("rmc.tactical_map_show_area_labels", true, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
+    public static readonly CVarDef<bool> RMCTacticalMapReplayPublicAfterRound =
+        CVarDef.Create("rmc.tactical_map_replay_public_after_round", true, CVar.SERVER | CVar.SERVERONLY);
+
     public static readonly CVarDef<bool> RMCGunPrediction =
         CVarDef.Create("rmc.gun_prediction", true, CVar.SERVER | CVar.REPLICATED);
 
@@ -230,7 +239,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.power_load_multiplier", 0.01f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCMarinesPerSurvivor =
-        CVarDef.Create("rmc.marines_per_survivor", 18, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.marines_per_survivor", 8, CVar.REPLICATED | CVar.SERVER); // CCM14
 
     public static readonly CVarDef<int> RMCSurvivorsMinimum =
         CVarDef.Create("rmc.survivors_minimum", 2, CVar.REPLICATED | CVar.SERVER);
@@ -516,6 +525,9 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCXenoAbilityPreviews =
         CVarDef.Create("rmc.xeno_ability_previews", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> RMCShowPings =
+        CVarDef.Create("rmc.show_pings", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     public static readonly CVarDef<int> RMCXenoDefaultNightVision =
         CVarDef.Create("rmc.xeno_default_night_vision", (int) NightVisionState.Half, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);

@@ -49,7 +49,7 @@
       CMIntelOfficer:
         factor: 30
         c: 1
-        min: 1
+        min: 2 # CCM14
         max: 3
       CMWeaponsSpecialist:
         factor: 20

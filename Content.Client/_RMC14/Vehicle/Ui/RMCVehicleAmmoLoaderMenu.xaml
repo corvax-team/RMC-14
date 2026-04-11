@@ -2,7 +2,7 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Vehicle.Ui"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-    Title="Ammo Loader"
+    Title="Загрузчик боеприпасов"
     MinSize="680 500">
 
     <PanelContainer HorizontalExpand="True" VerticalExpand="True">
@@ -34,9 +34,9 @@
                 </PanelContainer>
 
                 <BoxContainer Orientation="Vertical" SeparationOverride="6" HorizontalExpand="True">
-                    <Label Text="Ammo Loader" StyleClasses="LabelHeading"/>
-                    <Label Text="Select a hardpoint to load." FontColorOverride="#9DB5D1"/>
-                    <Label Name="AmmoCountLabel" Access="Public" Text="Ammo: --/--" FontColorOverride="#6BC7FF"/>
+                    <Label Text="Загрузчик боеприпасов" StyleClasses="LabelHeading"/>
+                    <Label Text="Выберите модуль для зарядки." FontColorOverride="#9DB5D1"/>
+                    <Label Name="AmmoCountLabel" Access="Public" Text="Боезапас: --/--" FontColorOverride="#6BC7FF"/>
                 </BoxContainer>
             </BoxContainer>
 

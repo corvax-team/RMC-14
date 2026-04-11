@@ -5,8 +5,10 @@ nuke-component-announcement-armed = Внимание! Механизм само�
 nuke-component-announcement-unarmed = Механизм самоуничтожение станции деактивирован! Хорошего дня!
 nuke-component-announcement-send-codes = Внимание! Запрошенные коды самоуничтожения были отправлены на факс капитана.
 nuke-component-doafter-warning = Вы начинаете перебирать провода и кнопки, в попытке обезвредить ядерную бомбу. Это может занять некоторое время.
-nuke-disk-component-microwave = The disk sparks and fizzles a bit, but seems mostly unharmed?
+nuke-disk-component-microwave = Диск искрит и немного шипит, но в целом кажется неповреждённым?
+
 # Nuke UI
+
 nuke-user-interface-title = Ядерная боеголовка
 nuke-user-interface-arm-button = ВЗВЕСТИ
 nuke-user-interface-disarm-button = ОБЕЗВРЕДИТЬ
@@ -36,11 +38,15 @@ nuke-label-nanotrasen = NT-{ $serial }
 # do you even need this one? It's more funnier to say that
 # the Syndicate stole a NT nuke
 nuke-label-syndicate = SYN-{ $serial }
+
 # Codes
-nuke-codes-message =  [color=red]СОВЕРШЕННО СЕКРЕТНО![/color]
+
+nuke-codes-message = [color=red]СОВЕРШЕННО СЕКРЕТНО![/color]
 nuke-codes-list = Код { $name }: { $code }
 nuke-codes-fax-paper-name = коды ядерной аутентификации
+
 # Nuke disk slot
+
 nuke-slot-component-slot-name-disk = Диск
 
 ## Examine

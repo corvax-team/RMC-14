@@ -541,6 +541,14 @@ public sealed class VehicleTurretSystem : EntitySystem
             return;
         }
 
+        // CCM14-start
+        if (TryComp<RMCHardpointIntegrityComponent>(turretUid, out var integrity) && integrity.Integrity <= 0f)
+            return;
+
+        if (TryComp<RMCHardpointIntegrityComponent>(vehicle, out var frameIntegrity) && frameIntegrity.Integrity <= 0f)
+            return;
+        // CCM14-end
+
         var target = turret.StabilizedRotation
             ? (turret.TargetRotation - vehicleRot).Reduced()
             : turret.TargetRotation;
@@ -584,6 +592,22 @@ public sealed class VehicleTurretSystem : EntitySystem
 
         if (args.Cancelled)
             return;
+
+        // CCM14-start
+        if (TryComp<RMCHardpointIntegrityComponent>(ent, out var integrity) && integrity.Integrity <= 0f)
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (TryGetVehicle(ent.Owner, out var vehicleUid) &&
+            TryComp<RMCHardpointIntegrityComponent>(vehicleUid, out var frameIntegrity) &&
+            frameIntegrity.Integrity <= 0f)
+        {
+            args.Cancelled = true;
+            return;
+        }
+        // CCM14-end
 
         if (!CanOperatorUseTurret(ent.Owner, args.User))
         {

@@ -48,4 +48,3 @@ marking-RMCUnderwearTangaSnow = Танга (Снег)
 marking-RMCUnderwearTangaSnow-snow_tanga = Танга
 marking-RMCUnderwearTangaUrban = Танга (Город)
 marking-RMCUnderwearTangaUrban-urban_tanga = Танга
-marking-RMCUnderwearTanga-c_tanga = Танга

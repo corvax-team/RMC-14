@@ -66,6 +66,9 @@
     - CMXenoSpitter
     evolvesToWithoutPoints:
     - CMXenoQueen
+    strains: #CCM Change
+    - CCMXenoMeleeSentinel #CCM Change
+    - CCMXenoRangerSentinel #CCM Change
   - type: XenoAcid
   - type: XenoParalyzingSlash
   - type: XenoSlowingSpit

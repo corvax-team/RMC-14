@@ -21,4 +21,4 @@ ent-RMCBulletPistolHandcannon = bullet (.50)
 ent-RMCBulletPistolHandcannonHI = bullet (High Impact .50)
     .desc = { ent-CMBulletBase.desc }
 ent-RMCBulletPistolHandcannonHIAP = bullet (High Impact Armor Piercing .50)
-    .desc = { ent-CMBulletBase.desc }
+    .desc = { ent-RMCBulletPistolHandcannonHI.desc }

@@ -1,5 +1,5 @@
 ent-RMCCustomGrenade = custom grenade
-    .desc = A custom chemical grenade with an M40 casing. This one is made to fit into underslung grenade launchers, but can also be thrown by hand.
+    .desc = A custom chemical grenade with an 30mm casing. This one is made to fit into underslung grenade launchers, but can also be thrown by hand.
 ent-RMCGrenadeCustomMetalFoam = metal-foam grenade
     .desc = Used for emergency sealing of air breaches.
     .suffix = RMC

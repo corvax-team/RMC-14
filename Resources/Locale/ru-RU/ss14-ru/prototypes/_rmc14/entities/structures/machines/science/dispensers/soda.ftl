@@ -3,6 +3,3 @@ ent-CMDispenserSoda = раздатчик безалкоголя
 ent-RMCChemStorageDrinks = { ent-RMCChemStorageBase }
     .suffix = Напитки
     .desc = { ent-RMCChemStorageBase.desc }
-ent-CMDispenserSodaEmpty = { ent-CMDispenserSoda }
-    .suffix = Пустой
-    .desc = { ent-CMDispenserSoda.desc }

@@ -25,6 +25,7 @@ public sealed class VehicleTurretInputSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly Dictionary<EntityUid, (Angle Angle, TimeSpan Time)> _lastAims = new();
+    private readonly Dictionary<EntityUid, MapCoordinates> _lastAimCoordinates = new();
 
     public override void Update(float frameTime)
     {
@@ -48,7 +49,8 @@ public sealed class VehicleTurretInputSystem : EntitySystem
             return;
         }
 
-        if (!_turrets.TryResolveRotationTarget(turretUid, out var targetUid, out var targetTurret))
+        if (!TryComp(turretUid, out VehicleTurretComponent? sourceTurret) ||
+            !_turrets.TryResolveRotationTarget(turretUid, out var targetUid, out var targetTurret))
             return;
 
         if (!targetTurret.RotateToCursor)
@@ -60,6 +62,8 @@ public sealed class VehicleTurretInputSystem : EntitySystem
         var mousePos = _eye.PixelToMap(_input.MouseScreenPosition);
         if (mousePos.MapId == MapId.Nullspace)
             return;
+
+        _lastAimCoordinates[turretUid] = mousePos;
 
         var originMap = _transform.ToMapCoordinates(originCoords);
         var direction = mousePos.Position - originMap.Position;
@@ -85,5 +89,10 @@ public sealed class VehicleTurretInputSystem : EntitySystem
             Turret = GetNetEntity(turretUid),
             Coordinates = GetNetCoordinates(mouseCoords)
         });
+    }
+
+    public bool TryGetLastAimCoordinates(EntityUid turretUid, out MapCoordinates coordinates)
+    {
+        return _lastAimCoordinates.TryGetValue(turretUid, out coordinates);
     }
 }

@@ -1,2 +1,2 @@
-ent-CMSpawnPointForeconSniper = Точка спавна Снайпера СОиС
+ent-CMSpawnPointForeconSniper = спавнер снайпера СОиС
     .desc = { ent-CMSpawnPointJobBase.desc }

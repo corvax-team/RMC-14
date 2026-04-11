@@ -63,6 +63,10 @@
           0.05
         ]
       ]
+    },
+    {
+      "name": "equipped-MASK",
+      "directions": 4
     }
   ]
 }

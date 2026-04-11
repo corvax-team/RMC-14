@@ -18,8 +18,6 @@ CMJobExecutiveOfficer = Исполнительный офицер
 # Special operation capable
 rmc-job-prefix-forecon-marksman = МАРКС
 rmc-job-prefix-forecon-support-tech = ТЕХ
-# Special forces
-rmc-job-prefix-forecon = СОиС
 rmc-job-prefix-forecon-co = Кмд СОиС
 # Admin only right now.
 cm-job-name-high-command = Верховное командование

@@ -1,0 +1,75 @@
+- type: entity
+  id: CCMActionXenoBoxerAdvance
+  parent: ActionXenoBase
+  name: Advance
+  description: Do a small jump/dash toward enemy and deal small amount of damage.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tumble
+    useDelay: 1.5
+  - type: TargetAction
+    range: 15
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:XenoLeapActionEvent
+  - type: RMCDazeableAction
+
+- type: entity
+  id: CCMActionXenoBoxerTailKnock
+  parent: ActionXenoTailSweep
+  name: Tail Knock # TODO RMC14 proper plasma costs
+  description: Use your yail to smash ground and enemies around you, and deal damage, a lil fling them
+  
+- type: entity
+  parent: ActionXenoScissorCut
+  id: CCMActionXenoBoxerWidePunch
+  name: Wide weak punch
+  description: Punch in 1x1 area (or bigger) and deal damage to enemy in that area
+  components:
+  - type: XenoActionPlasma
+    cost: 0
+
+- type: entity
+  parent: ActionXenoSpit
+  id: CCMActionXenoSniperSnipe
+  name: Snipe (300)
+  description: After a short delay fire a strong spit that deal a lot of damage
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: bombard
+    useDelay: 8
+  - type: ActionSharedCooldown
+    id: CCMActionXenoSniperSnipe
+    ids:
+    - CCMActionXenoSniperWalker
+    cooldown: 8
+
+- type: entity
+  id: CCMActionXenoSniperWalker
+  parent: ActionXenoResinWalker
+  name: Walk Recover (150) # TODO RMC14 proper plasma costs
+  description: Recover to your normal speed. [color=cyan]Consumes 30 plasma per second.[/color]
+  components:
+  - type: ActionSharedCooldown
+    id: CCMActionXenoSniperWalker
+    ids:
+    - CCMActionXenoSniperSnipe
+    cooldown: 8
+
+- type: entity
+  id: CCMActionXenoGreaterParalyzingSlash
+  parent: ActionXenoParalyzingSlash
+  name: Greater Paralyzing Slash (50) # TODO RMC14 proper plasma costs
+  description: Temporarily charge up a melee attack that will stun a short time enemy after very shor delay
+
+- type: entity
+  parent: ActionXenoApprehend
+  id: CCMActionXenoLightNeuroEmpower
+  name: Light Neuro Empower
+  description: Increases your movement speed and applies a slow on the next target you slash.

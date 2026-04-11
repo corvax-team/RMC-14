@@ -1,5 +1,5 @@
-ent-RMCHeadsetMarine = { ent-RMCHeadsetShip }
-    .desc = { ent-RMCHeadsetShip.desc }
+ent-RMCHeadsetMarine = marine squad radio headset
+    .desc = A standard military radio headset.
 ent-CMHeadsetAlpha = marine alpha radio headset
     .desc = This is used by Alpha squad members.
 ent-CMHeadsetAlphaLeader = marine alpha leader radio headset

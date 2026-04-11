@@ -1,0 +1,15 @@
+ent-RMCRandomHumanoidSPPKommissarNeutral = Kommissar ghost role
+    .suffix = Spawner, Player, Neutral
+    .desc = { "" }
+ent-RMCRandomHumanoidSPPBattalionKommissarNeutral = Battalion Kommissar ghost role
+    .suffix = Spawner, Player, Neutral
+    .desc = { "" }
+ent-RMCRandomHumanoidSPPSrBattalionKommissarNeutral = Sr. Battalion. Kommissar ghost role
+    .suffix = Spawner, Player, Neutral
+    .desc = { "" }
+ent-RMCRandomHumanoidSPPRegimentalKommissarNeutral = Regimental Kommissar ghost role
+    .suffix = Spawner, Player, Neutral
+    .desc = { "" }
+ent-RMCRandomHumanoidSPPBrigadeKommissarNeutral = Brigade Kommissar ghost role
+    .suffix = Spawner, Player, Neutral
+    .desc = { "" }

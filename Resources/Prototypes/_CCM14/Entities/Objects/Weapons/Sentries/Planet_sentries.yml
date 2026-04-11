@@ -48,4 +48,5 @@
       AggroVisionRadius: !type:Single
         7.5
   - type: UserIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine

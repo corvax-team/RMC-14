@@ -16,8 +16,8 @@
   parent: CMJobIconBase
   id: CMJobIconPilotGunship
   icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudsquad_po
+    sprite: _CCM14/Interface/cm_job_icons.rsi # CCM14
+    state: hudsquad_pg # CCM14
 
 - type: jobIcon
   parent: CMJobIconBase

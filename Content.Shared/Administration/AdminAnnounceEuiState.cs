@@ -23,6 +23,9 @@ namespace Content.Shared.Administration
             public string Announcer = default!;
             public string Announcement = default!;
             public AdminAnnounceType AnnounceType;
+            public string ColorHex = "1d8bad"; // CCM14
+            public string SoundPath = "/Audio/_RMC14/Announcements/Marine/notice2.ogg"; // CCM14
+            public string Sender = ""; // CCM14
         }
     }
 }

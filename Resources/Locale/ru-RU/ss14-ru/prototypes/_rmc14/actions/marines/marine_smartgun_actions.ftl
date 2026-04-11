@@ -1,5 +1,7 @@
 ent-ActionMarineToggleable = { ent-ActionMarineBase }
     .desc = { ent-ActionMarineBase.desc }
+ent-RMCGuidebookActionSmartGunBase = { "" }
+    .desc = { "" }
 ent-RMCActionToggleAmmo = Переключить тип боеприпасов
     .desc = Переключает тип патронов, которыми стреляет это оружие.
 ent-RMCActionToggleRecoil = Переключить компенсацию отдачи
@@ -10,3 +12,7 @@ ent-RMCActionToggleFarSight = Переключить приближающий п
     .desc = Позволяет видеть чуть дальше.
 ent-RMCActionToggleMotionDetector = Переключить детектор движения
     .desc = Периодически оповещает о неизвестных движениях около вас.
+ent-RMCGuidebookActionIFF = { ent-RMCGuidebookActionSmartGunBase }
+    .desc = { ent-RMCGuidebookActionSmartGunBase.desc }
+ent-RMCGuidebookActionMotionDetector = { ent-RMCGuidebookActionSmartGunBase }
+    .desc = { ent-RMCGuidebookActionSmartGunBase.desc }

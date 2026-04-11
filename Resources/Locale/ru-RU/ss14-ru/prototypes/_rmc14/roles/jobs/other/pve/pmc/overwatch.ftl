@@ -1,3 +1,3 @@
-ent-RMCSpawnPointPMCForceCommandPVE = Точка спавна Командование Силами ЧВК Vitezstvi
+ent-RMCSpawnPointPMCForceCommandPVE = точка появления командования ЧВК Vitezstvi
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }

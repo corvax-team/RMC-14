@@ -23,6 +23,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+      # CCM14-start
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetMarine]
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
+      # CCM14-end
     - type: Skills
       skills:
         RMCSkillEndurance: 1
@@ -51,11 +58,11 @@
 - type: startingGear
   id: CMGearVC
   equipment:
-    jumpsuit: RMCJumpsuitNormCivilianBlackWebbing
+    jumpsuit: CMJumpsuitMarineTanker
     shoes: CMBootsBlackFilled
     id: CMDogtagCrewman
-    ears: RMCHeadCapTruckerBlue
-    outerClothing: RMCCoatBomberGrey
+    ears: RMCHeadsetCrewman
+    outerClothing: RMCCoatTanker
 
 - type: entity
   parent: CMSpawnPointJobBase

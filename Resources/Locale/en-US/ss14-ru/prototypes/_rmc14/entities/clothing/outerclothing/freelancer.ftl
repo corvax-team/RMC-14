@@ -1,0 +1,14 @@
+ent-CMArmorFreelancer = freelancer cuirass
+    .desc = An armored protective chestplate scrapped together from various plates. It keeps up remarkably well, as the craftsmanship is solid, and the design mirrors such armors in the SPP and the UNMC. The many skilled craftsmen in the freelancers ranks produce these vests at a rate about one a month.
+ent-RMCArmorFreelancerVestBlack = black plate carrier vest
+    .desc = A standard plate carrier produced by virtually every armour manufacturer in the galaxy, and sold to both governments, mercenaries and civilians alike. As the name implies, it carries a series of armoured plates for protection, and has two pouches on the front.
+    .suffix = No lamp
+ent-RMCArmorFreelancerVestBlackLamp = { ent-RMCArmorFreelancerVestBlack }
+    .desc = A standard plate carrier produced by virtually every armour manufacturer in the galaxy, and sold to both governments, mercenaries and civilians alike. As the name implies, it carries a series of armoured plates for protection, two pouches on the front. This one has had a lamp attached to the back.
+    .suffix = Lamp
+ent-RMCArmorFreelancerVestBeige = beige plate carrier vest
+    .desc = A standard plate carrier produced by virtually every armour manufacturer in the galaxy, and sold to both governments, mercenaries and civilians alike. As the name implies, it carries a series of armoured plates for protection, and has two pouches on the front.
+    .suffix = No lamp
+ent-RMCArmorFreelancerVestBeigeLamp = beige plate carrier vest
+    .suffix = Lamp
+    .desc = { ent-RMCArmorFreelancerVestBlackLamp.desc }

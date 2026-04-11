@@ -4249,20 +4249,6 @@ entities:
     - type: Transform
       pos: -2.2830489,-19.280334
       parent: 1
-    - type: CycleableVisor
-      action: 2588
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 2588
-    - type: ActionsContainer
 - proto: CigaretteSpent
   entities:
   - uid: 766
@@ -8707,17 +8693,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 29.5,1.5
       parent: 1
-- proto: RMCActionCycleVisor
-  entities:
-  - uid: 2588
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 2587
-    - type: Action
-      originalIconColor: '#FFFFFFFF'
-      container: 2587
 - proto: RMCAshtray
   entities:
   - uid: 762

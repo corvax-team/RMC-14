@@ -133,7 +133,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
             if (collisionClass == VehicleCollisionClass.Breakable || isUnpoweredDoor)
             {
-                if (TrySmash(other, uid, ref playedCollisionSound) || TryBreakDoor(other, uid, ref playedCollisionSound))
+                if (TrySmash(other, uid, mover, ref playedCollisionSound) || TryBreakDoor(other, uid, mover, ref playedCollisionSound)) // CCM14
                     continue;
                 continue;
             }
@@ -148,7 +148,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             }
 
             if (_net.IsClient && isMob && !isXeno && mob != null && ShouldPredictVehicleInteractions(uid))
-                PredictRunover(uid, other, mob);
+                PredictRunover(uid, other, mob, mover); // CCM14
 
             if (!_net.IsClient && isMob && mob != null)
                 mobHits.Add(other);
@@ -164,7 +164,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 if (!TryComp(mobUid, out MobStateComponent? mob))
                     continue;
 
-                HandleMobCollision(uid, mobUid, mob, ref playedCollisionSound);
+                HandleMobCollision(uid, mobUid, mob, mover, ref playedCollisionSound); // CCM14
             }
         }
 
@@ -182,7 +182,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return false;
     }
 
-    private bool TryBreakDoor(EntityUid target, EntityUid vehicle, ref bool playedCollisionSound)
+    private bool TryBreakDoor(EntityUid target, EntityUid vehicle, GridVehicleMoverComponent mover, ref bool playedCollisionSound) // CCM14
     {
         if (!HasComp<DoorComponent>(target))
             return false;
@@ -196,7 +196,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         {
             DamageDict =
             {
-                [CollisionDamageType] = UnpoweredDoorCollisionDamage,
+                [mover.CollisionDamageType] = mover.UnpoweredDoorCollisionDamage, // CCM14
             },
         };
 
@@ -268,14 +268,14 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return !first;
     }
 
-    private bool TrySmash(EntityUid target, EntityUid vehicle, ref bool playedCollisionSound)
+    private bool TrySmash(EntityUid target, EntityUid vehicle, GridVehicleMoverComponent mover, ref bool playedCollisionSound) // CCM14
     {
         if (!TryComp(target, out RMCVehicleSmashableComponent? smashable))
             return false;
 
         PlayCollisionSound(vehicle, ref playedCollisionSound);
 
-        if (TryComp(vehicle, out GridVehicleMoverComponent? mover))
+        if (mover != null) // CCM14
             ApplySmashSlowdown(vehicle, mover, smashable);
 
         if (_net.IsClient)
@@ -347,13 +347,13 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         played = true;
     }
 
-    private void HandleMobCollision(EntityUid vehicle, EntityUid target, MobStateComponent mobState, ref bool playedCollisionSound)
+    private void HandleMobCollision(EntityUid vehicle, EntityUid target, MobStateComponent mobState, GridVehicleMoverComponent mover, ref bool playedCollisionSound) // CCM14
     {
         if (_net.IsClient || _mobState.IsDead(target, mobState))
             return;
 
         var now = _timing.CurTime;
-        if (_lastMobCollision.TryGetValue(target, out var last) && now < last + MobCollisionCooldown)
+        if (_lastMobCollision.TryGetValue(target, out var last) && now < last + mover.MobCollisionCooldown) // CCM14
             return;
 
         _lastMobCollision[target] = now;
@@ -364,7 +364,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         {
             DamageDict =
             {
-                [CollisionDamageType] = MobCollisionDamage,
+                [mover.CollisionDamageType] = mover.MobCollisionDamage, // CCM14
             },
         };
 
@@ -373,10 +373,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (HasComp<XenoComponent>(target))
             return;
 
-        _stun.TryKnockdown(target, MobCollisionKnockdown, true);
+        _stun.TryKnockdown(target, mover.MobCollisionKnockdown, true); // CCM14
         var runover = EnsureComp<RMCVehicleRunoverComponent>(target);
         runover.Vehicle = vehicle;
-        runover.Duration = MobCollisionKnockdown;
+        runover.Duration = mover.MobCollisionKnockdown; // CCM14
         runover.ExpiresAt = now + runover.Duration + RMCVehicleRunoverSystem.StandUpGrace;
         Dirty(target, runover);
 
@@ -459,7 +459,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return vehicleComp.Operator != null && vehicleComp.Operator == _player.LocalEntity;
     }
 
-    private void PredictRunover(EntityUid vehicle, EntityUid mob, MobStateComponent mobState)
+    private void PredictRunover(EntityUid vehicle, EntityUid mob, MobStateComponent mobState, GridVehicleMoverComponent mover) // CCM14
     {
         if (!ShouldPredictVehicleInteractions(vehicle))
             return;
@@ -467,11 +467,11 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (_mobState.IsDead(mob, mobState) || _standing.IsDown(mob))
             return;
 
-        _stun.TryKnockdown(mob, MobCollisionKnockdown, true);
+        _stun.TryKnockdown(mob, mover.MobCollisionKnockdown, true); // CCM14
 
         var runover = EnsureComp<RMCVehicleRunoverComponent>(mob);
         runover.Vehicle = vehicle;
-        runover.Duration = MobCollisionKnockdown;
+        runover.Duration = mover.MobCollisionKnockdown; // CCM14
         runover.ExpiresAt = _timing.CurTime + runover.Duration + RMCVehicleRunoverSystem.StandUpGrace;
         Dirty(mob, runover);
 

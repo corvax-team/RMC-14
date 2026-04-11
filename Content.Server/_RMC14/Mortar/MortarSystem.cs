@@ -13,6 +13,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using static Content.Shared.Popups.PopupType;
 using Content.Server.Chat.Systems;
+using Content.Shared.GameTicking;
 
 namespace Content.Server._RMC14.Mortar;
 
@@ -28,7 +29,21 @@ public sealed class MortarSystem : SharedMortarSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
+    // CCM14-start
+    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
 
+    private static readonly TimeSpan UnlockTime = TimeSpan.FromMinutes(25);
+
+    private bool CheckFog(EntityUid user)
+    {
+        var timeSinceStart = _gameTicker.RoundDuration();
+        if (timeSinceStart >= UnlockTime) return false;
+        var remaining = UnlockTime - timeSinceStart;
+        var minutesLeft = Math.Ceiling(remaining.TotalMinutes);
+        _popup.PopupEntity(Loc.GetString("rmc-mortar-fog-active", ("minutes", minutesLeft)), user, user, SmallCaution);
+        return true;
+    }
+    // CCM14-end
     protected override bool CanLoadPopup(
         Entity<MortarComponent> mortar,
         Entity<MortarShellComponent> shell,
@@ -126,7 +141,12 @@ public sealed class MortarSystem : SharedMortarSystem
     protected override bool ValidateTargetCoordinates(Entity<MortarComponent> mortar, Entity<MortarShellComponent>? shell, MapCoordinates coordinates, MapCoordinates mortarCoordinates, EntityUid? user, out TimeSpan travelTime)
     {
         travelTime = default;
-
+        // CCM14-start
+        if (user != null && CheckFog(user.Value))
+        {
+            return false;
+        }
+        // CCM14-end
         // Check if target is on planet or in space
         if (_rmcPlanet.IsOnPlanet(coordinates))
         {

@@ -19,6 +19,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorWeYaPMCStandard
     - type: RMCSurvivor
@@ -50,7 +55,7 @@
     randomWeapon:
     - [ RMCWeaponRifleM54CWhiteNoLock, CMMagazineRifleM54C, CMMagazineRifleM54C]
     - [ RMCWeaponRifleSSG45NoLockStripped, RMCMagazineRifleSSG45, RMCMagazineRifleSSG45 ]
-    - [ WeaponSMGM63, CMMagazineSMGM63, CMMagazineSMGM63 ]
+    - [ RMCWeaponSMGM63WhiteNoLock, CMMagazineSMGM63, CMMagazineSMGM63 ]
     - [ RMCWeaponSMGFP9000PMC, RMCMagazineSMGFP9000, RMCMagazineSMGFP9000 ]
     - [ WeaponShotgunM890, CMShellShotgunBuckshot, CMShellShotgunBuckshot, CMShellShotgunBuckshot ]
     tryEquipRandomWeapon: true
@@ -60,3 +65,5 @@
   id: RMCGearSurvivorPresetPMCBase
   name: pmc base survivor preset
   categories: [ HideSpawnMenu ]
+
+

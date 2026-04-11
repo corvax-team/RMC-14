@@ -1,0 +1,10 @@
+ent-RMCVehicleTankFlamer = tank flamer
+    .desc = A tank-mounted flamethrower hardpoint.
+ent-RMCVehicleTankGrenadeLauncher = tank grenade launcher
+    .desc = A tank-mounted grenade launcher hardpoint.
+ent-RMCVehicleTankTowLauncher = tank TOW launcher
+    .desc = A tank-mounted TOW launcher hardpoint.
+ent-RMCVehicleTankM56Cupola = M56 cupola
+    .desc = A cupola-mounted weapon hardpoint.
+ent-RMCVehicleTankRERE700 = RE-RE700 cupola
+    .desc = A dual-barrel cupola-mounted weapon hardpoint with integrated IFF.

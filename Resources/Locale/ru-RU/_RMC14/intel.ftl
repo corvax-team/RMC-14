@@ -12,10 +12,15 @@ rmc-intel-clue-progress-report = Доклад о ходе работ в лока
 rmc-intel-clue-folder = { $intel } в локации { $area }.
 rmc-intel-clue-technical-manual = { $intel } в локации { $area }.
 rmc-intel-clue-experimental-device = Найти { $intel } в локации { $area }.
-rmc-intel-not-intel-jumpsuit = Вы не можете носить это, не надев форму офицера разведки ККМП.
 rmc-intel-survivor-pickup =
     { CAPITALIZE($thing) } вам ничем не поможет.
     Сначала постарайтесь выбраться живыми.
+rmc-intel-survivor-xeno-pull =
+    Попытка тащить { $thing } с собой только замедлит меня.
+        Сначала мне нужно сосредоточиться на поиске помощи.
+rmc-intel-survivor-corpse-pull =
+    Я не могу спасти { $thing }, это только замедлит меня.
+        Сначала мне нужно сосредоточиться на поиске помощи.
 rmc-intel-survivor-read =
     Вам незачем читать { $thing }.
     Сначала постарайтесь выбраться живыми.
@@ -33,7 +38,7 @@ rmc-ui-intel-rescue-survivors = [color=#5B88B0]Спасено выживших:[
 rmc-ui-intel-recover-corpses = [color=#5B88B0]Забрано тел:[/color]
 rmc-ui-intel-colony-comms = [color=#5B88B0]Связь колонии:[/color]
 rmc-ui-intel-colony-power = [color=#5B88B0]Энергия колонии:[/color]
-rmc-ui-intel-clues = [bold]Clues[/bold]
+rmc-ui-intel-clues = [bold]Подсказки[/bold]
 rmc-ui-intel-points-value = { $value }
 rmc-ui-intel-tier-value = { $value }
 rmc-ui-intel-total-credits = Всего заработано кредитов: { $value }
@@ -46,6 +51,7 @@ rmc-ui-intel-colony-status =
     }
 rmc-ui-tech-tier-header = [font size=14][bold]Уровень: { $tier }[/bold][/font]
 rmc-ui-tech-points-value = Технические очки: { $value }
+rmc-ui-tech-points = [font size=14][bold]Очки: { $points }[/bold][/font]
 rmc-ui-tech-repurchasable = Выкупить
 rmc-ui-tech-incremental-price = Увеличивающаяся цена: +{ $increase } за покупку
 rmc-ui-tech-purchase-button = Купить

@@ -6,9 +6,9 @@
   description: It's a helmet specifically designed to protect against close range attacks. It covers your ears.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/riot.rsi
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/riot.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/riot.rsi
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/riot.rsi
   - type: CMArmor
     melee: 30
     bullet: 10

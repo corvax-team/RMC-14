@@ -15,11 +15,11 @@
     jobs:
     - CMHospitalCorpsman
     sections:
-    - name: Medical Set (Mandatory)
+    - name: Меднабор (Обязательно) # CCM14
       takeAll: CMMedicalSet
       entries:
       - id: CMVendorBundleSquadMedicalEssentials
-    - name: Field Supplies
+    - name: Полевые медикаменты # CCM14
       entries:
       - id: CMBurnKit10
         points: 2
@@ -30,9 +30,9 @@
     #    CMMedicalSplints: 1P
 #        recommended: true
       - id: CMBloodPackFull # TODO RMC14 O-
-        name: blood bag (O-)
+        name: пакет крови (O-) # CCM14
         points: 4
-    - name: Firstaid Kits
+    - name: Аптечки # CCM14
       entries:
       - id: CMAdvFirstAidKitFilled
         points: 12
@@ -47,7 +47,7 @@
         points: 6
       - id: RMCRadiationAidKitFilled
         points: 6
-    - name: Pill Bottles
+    - name: Таблетки # CCM14
       entries:
       - id: CMPillCanisterBicaridine
         points: 5
@@ -66,7 +66,7 @@
 #      - id: CMPillCanisterTramadol
 #        points: 5
 #        recommended: true
-    - name: Autoinjectors
+    - name: Автоинъекторы # CCM14
       entries:
       - id: CMBicaridineAutoInjector
         points: 1
@@ -86,7 +86,7 @@
 #        points: 1
       - id: CMTricordrazineAutoInjector
         points: 1
-    - name: Medical Utilities
+    - name: Мединструменты # CCM14
       entries:
       - id: CMMiniTank
         points: 6
@@ -97,7 +97,7 @@
         points: 4
       - id: CMStasisBagFolded
         points: 6
-    - name: Explosives
+    - name: Взрывчатка  # CCM14
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
         points: 18
@@ -118,7 +118,7 @@
         points: 20
     # - id: RMCElectroshockGrenadex3
     #   points: 16
-    - name: Primary Ammunition
+    - name: Основные боеприпасы # CCM14
       entries:
       - id: CMMagazineRifleM4SPRAP
         points: 6
@@ -136,7 +136,7 @@
         points: 6
       - id: CMMagazineRifleM54CExt
         points: 6
-    - name: Sidearm Ammunition
+    - name: Вторичные боеприпасы # CCM14
       entries:
       - id: RMCMagazinePistolM13Ext
         points: 6
@@ -152,29 +152,29 @@
         points: 3
       - id: RMCMagazinePistolSU6
         points: 6
-    - name: Armors
+    - name: Броня # CCM14
       entries:
       - id: CMArmorB12
         points: 24
       - id: CMArmorM4
         points: 16
-    - name: Restricted Firearms
+    - name: Ограниченное вооружение # CCM14
       entries:
       - id: RMCGunCasePistolMK80
         points: 8
       - id: RMCGunCasePistolSmart
         points: 12
-    - name: Clothing Items
+    - name: Элементы одежды # CCM14
       entries:
       - id: RMCPouchMacheteFilled
-        name: machete pouch (Full)
+        name: ножны H6B для мачете M2132 (Заполненные) # CCM14
         points: 8
       - id: RMCBackpackRTO
         replaceSlot: back
         points: 15
       - id: RMCWeldingGoggles
         points: 3
-    - name: Utilities
+    - name: Утилиты # CCM14
       entries:
       - id: CMFireExtinguisherPortable
         points: 3
@@ -182,7 +182,7 @@
         points: 8
       - id: RMCWhistle
         points: 3
-    - name: Binoculars
+    - name: Бинокли # CCM14
       entries:
       - id: RMCBinoculars
         points: 5
@@ -190,15 +190,15 @@
         points: 10
       - id: RMCLaserDesignator
         points: 15
-    - name: Helmet Optics
+    - name: Визоры для шлема # CCM14
       entries:
       - id: RMCVisorWelding
         points: 5
-    - name: Pamphlets
+    - name: Инструктивные брошюры # CCM14
       entries:
       - id: CMPamphletEngineer
         points: 15
-    - name: Radio Keys
+    - name: Ключи шифрования # CCM14
       entries:
       - id: CMEncryptionKeyEngineer
         points: 3
@@ -225,32 +225,32 @@
     - CMHospitalCorpsman
     - CMPVEHospitalCorpsman
     sections:
-    - name: Standard Equipment
+    - name: Стандартное снаряжение # CCM14
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleSquadMedicalApparel
       - id: RMCHandsLatexMarine
-        name: combat sterile gloves
+        name: медицинские боевые перчатки # CCM14
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
-    - name: Armor
+    - name: Броня # CCM14
       choices: { CMArmor: 1 }
       entries:
       - id: RMCArmorVestSquad
       - id: RMCArmorM3LightVariants
-        name: light armor
+        name: лёгкая броня # CCM14
       - id: RMCArmorM3MediumVariants
-        name: medium armor
+        name: средняя броня # CCM14
         recommended: true
       - id: RMCArmorM3HeavyVariants
-        name: heavy armor
-    - name: Helmet
+        name: тяжёлая броня # CCM14
+    - name: Шлемы # CCM14
       choices: { CMHelmet: 1 }
       entries:
       - id: CMArmorHelmetM10Medic
       - id: RMCArmorHelmetM10MedicWhite
         recommended: true
-    - name: Backpack
+    - name: Рюкзаки # CCM14
       choices: { CMBackpack: 1 }
       entries:
       - id: CMBackpackMarineMedic
@@ -258,18 +258,18 @@
       - id: CMSatchelMarineMedic
         replaceSlot: back
         recommended: true
-    - name: Belt
+    - name: Пояса # CCM14
       choices: { CMBelt: 1 }
       entries:
       - id: CMBeltMedicBagFilled
-        name: M276 lifesaver bag (Full)
+        name: медицинский пояс M276 (Заполненный) # CCM14
       - id: CMBeltMedicalFilled
-        name: M276 medical storage rig (Full)
-    - name: Pouches
+        name: пояс для медэкипировки M276 (Заполненный) # CCM14
+    - name: Подсумки # CCM14
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchReagentCanisterTricordrazineRevival
-        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+        name: подсумок канистры сжатых реагентов\n(Реанимационная смесь - Трикордразин) # CCM14
         recommended: true
       - id: RMCPouchMedkit
         recommended: true
@@ -279,31 +279,31 @@
       - id: RMCPouchAutoinjector
       - id: RMCPouchFirstResponder
       - id: RMCPouchReagentCanisterBicaridine
-        name: Pressurized Reagent Canister Pouch\n(Bicaridine)
+        name: подсумок канистры сжатых реагентов\n(Бикаридин) # CCM14
       - id: RMCPouchReagentCanisterKelotane
-        name: Pressurized Reagent Canister Pouch\n(Kelotane)
+        name: подсумок канистры сжатых реагентов\n(Келотан) # CCM14
       - id: RMCPouchReagentCanisterTricordrazine
-        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+        name: подсумок канистры сжатых реагентов\n(Трикордразин) # CCM14
       - id: RMCPouchReagentCanister
-        name: Pressurized Reagent Canister Pouch\n(EMPTY)
+        name: подсумок канистры сжатых реагентов\n(ПУСТОЙ) # CCM14
       - id: RMCPouchVialFill
-        name: vial pouch (Full)
+        name: подсумок для ампул (Заполненный) # CCM14
       - id: RMCPouchMedical
       - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
+        name: подсумок первой помощи (инъекторы) # CCM14
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: подсумок первой помощи (бинт, мазь) # CCM14 # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
+        name: подсумок первой помощи (таблетки) # CCM14
       - id: RMCPouchFlareFilled
-        name: Flare pouch (Full)
+        name: подсумок для фальшфейеров (Полный) # CCM14
       - id: RMCPouchGeneralLarge
       - id: RMCPouchSling
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMagazine
       - id: RMCPouchShotgun
       - id: RMCPouchPistol
-    - name: Accessories
+    - name: Аксессуары # CCM14
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBrown
@@ -318,7 +318,7 @@
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
       - id: RMCWebbingHolsterBlack
-    - name: Mask
+    - name: Маски # CCM14
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskSterile
@@ -349,42 +349,42 @@
     - RMCFORECONPVECorpsman
     - RMCCLFDoctorPVE
     sections:
-    - name: Standard Equipment
+    - name: Стандартное снаряжение # CCM14
       takeAll: CMStandard
       entries:
       - id: RMCHandsLatexMarine
-        name: combat sterile gloves
+        name: медицинские боевые перчатки # CCM14
       - id: CMMaskSterile
-    - name: Helmet
+    - name: Шлемы # CCM14
       choices: { CMHelmet: 1 }
       entries:
       - id: CMArmorHelmetM10Medic
       - id: RMCArmorHelmetM10MedicWhite
         recommended: true
-    - name: Backpack
+    - name: Рюкзаки # CCM14
       choices: { CMBackpack: 1 }
       entries:
       - id: CMBackpackMarineMedic
       - id: CMSatchelMarineMedic
         recommended: true
-    - name: Belt
+    - name: Пояса # CCM14
       choices: { CMBelt: 1 }
       entries:
       - id: CMBeltMedicBagFilled
-        name: M276 lifesaver bag (Full)
+        name: медицинский пояс M276 (Заполненный) # CCM14
       - id: CMBeltMedicalFilled
-        name: M276 medical storage rig (Full)
-    - name: Pouches
+        name: пояс для медэкипировки M276 (Заполненный) # CCM14
+    - name: Подсумки # CCM14
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchReagentCanisterMeraBic
-        name: Pressurized Reagent Canister Pouch\n(Meralyne-Bicaridine)
+        name: подсумок канистры сжатых реагентов\n(Мералин-Бикаридин) # CCM14
         recommended: true
       - id: RMCPouchReagentCanisterKeloDerm
-        name: Pressurized Reagent Canister Pouch\n(Kelotane-Dermaline)
+        name: подсумок канистры сжатых реагентов\n(Келотан-Дермалин) # CCM14
         recommended: true
       - id: RMCPouchReagentCanisterTricordrazineRevival
-        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+        name: подсумок канистры сжатых реагентов\n(Реанимационная смесь - Трикордразин) # CCM14
         recommended: true
 #     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
 #       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
@@ -394,18 +394,18 @@
       - id: RMCPouchAutoinjector
       - id: RMCPouchFirstResponder
       - id: RMCPouchReagentCanisterTricordrazine
-        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+        name: подсумок канистры сжатых реагентов\n(Трикордразин) # CCM14
       - id: RMCPouchReagentCanister
-        name: Pressurized Reagent Canister Pouch\n(EMPTY)
+        name: подсумок канистры сжатых реагентов\n(ПУСТОЙ) # CCM14
       - id: RMCPouchVialFill
-        name: vial pouch (Full)
+        name: подсумок для ампул (Заполненный) # CCM14
       - id: RMCPouchMedical
       - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
+        name: подсумок первой помощи (инъекторы) # CCM14
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: подсумок первой помощи (бинт, мазь) # CCM14 # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
+        name: подсумок первой помощи (таблетки) # CCM14
 
 - type: entity
   parent: RMCColMarTechMedicalEquipmentPVE
@@ -416,32 +416,32 @@
   components:
   - type: CMAutomatedVendor
     sections:
-    - name: Standard Equipment
+    - name: Стандартное снаряжение # CCM14
       takeAll: CMStandard
       entries:
       - id: RMCHandsLatexMarine
-        name: combat sterile gloves
+        name: медицинские боевые перчатки # CCM14
       - id: CMMaskSterile
       - id: RMCSatchelPMCMedic
         recommended: true
       - id: ArmorHelmetPMC
         recommended: true
-    - name: Belt
+    - name: Пояса # CCM14
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltMedicBagPMCFilled
-        name: M276 medical storage rig (Full)
-    - name: Pouches
+        name: пояс для медэкипировки M276 (Заполненный) # CCM14
+    - name: Подсумки # CCM14
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchReagentCanisterMeraBic
-        name: Pressurized Reagent Canister Pouch\n(Meralyne-Bicaridine)
+        name: подсумок канистры сжатых реагентов\n(Мералин-Бикаридин) # CCM14
         recommended: true
       - id: RMCPouchReagentCanisterKeloDerm
-        name: Pressurized Reagent Canister Pouch\n(Kelotane-Dermaline)
+        name: подсумок канистры сжатых реагентов\n(Келотан-Дермалин) # CCM14
         recommended: true
       - id: RMCPouchReagentCanisterTricordrazineRevival
-        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+        name: подсумок канистры сжатых реагентов\n(Реанимационная смесь - Трикордразин) # CCM14
         recommended: true
 #     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
 #       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
@@ -451,18 +451,18 @@
       - id: RMCPouchAutoinjector
       - id: RMCPouchFirstResponder
       - id: RMCPouchReagentCanisterTricordrazine
-        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+        name: подсумок канистры сжатых реагентов\n(Трикордразин) # CCM14
       - id: RMCPouchReagentCanister
-        name: Pressurized Reagent Canister Pouch\n(EMPTY)
+        name: подсумок канистры сжатых реагентов\n(ПУСТОЙ) # CCM14
       - id: RMCPouchVialFill
-        name: vial pouch (Full)
+        name: подсумок для ампул (Заполненный) # CCM14
       - id: RMCPouchMedical
       - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
+        name: подсумок первой помощи (инъекторы) # CCM14
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: подсумок первой помощи (бинт, мазь) # CCM14 # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
+        name: подсумок первой помощи (таблетки) # CCM14
 
 - type: entity
   parent: RMCColMarTechMedicalEquipmentPVE
@@ -473,36 +473,36 @@
   components:
   - type: CMAutomatedVendor
     sections:
-    - name: Standard Equipment
+    - name: Стандартное снаряжение # CCM14
       takeAll: CMStandard
       entries:
       - id: RMCHandsLatexMarine
-        name: combat sterile gloves
+        name: медицинские боевые перчатки # CCM14
       - id: CMMaskSterile
-    - name: Backpack
+    - name: Рюкзаки # CCM14
       choices: { CMBackpack: 1 }
       entries:
       - id: CMBackpackMarine # RMC14 TODO: SPP Medic Backpack
       - id: RMCSatchelSPP # RMC14 TODO: SPP Medic Satchel
         recommended: true
-    - name: Belt
+    - name: Пояса # CCM14
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltMedicBagSPPFilled
-        name: Type 41 pattern lifesaver bag (Full)
+        name: медицинский пояс Тип 41 (Заполненный) # CCM14
       - id: CMBeltMedicalFilled
-        name: M276 medical storage rig (Full) # RMC14 TODO: SPP Medical Storage Rig
-    - name: Pouches
+        name: пояс для медэкипировки M276 (Заполненный) # CCM14 # RMC14 TODO: SPP Medical Storage Rig
+    - name: Подсумки # CCM14
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchReagentCanisterMeraBic
-        name: Pressurized Reagent Canister Pouch\n(Meralyne-Bicaridine)
+        name: подсумок канистры сжатых реагентов\n(Мералин-Бикаридин) # CCM14
         recommended: true
       - id: RMCPouchReagentCanisterKeloDerm
-        name: Pressurized Reagent Canister Pouch\n(Kelotane-Dermaline)
+        name: подсумок канистры сжатых реагентов\n(Келотан-Дермалин) # CCM14
         recommended: true
       - id: RMCPouchReagentCanisterTricordrazineRevival
-        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+        name: подсумок канистры сжатых реагентов\n(Реанимационная смесь - Трикордразин) # CCM14
         recommended: true
 #     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
 #       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
@@ -512,18 +512,18 @@
       - id: RMCPouchAutoinjector
       - id: RMCPouchFirstResponder
       - id: RMCPouchReagentCanisterTricordrazine
-        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+        name: подсумок канистры сжатых реагентов\n(Трикордразин) # CCM14
       - id: RMCPouchReagentCanister
-        name: Pressurized Reagent Canister Pouch\n(EMPTY)
+        name: подсумок канистры сжатых реагентов\n(ПУСТОЙ) # CCM14
       - id: RMCPouchVialFill
-        name: vial pouch (Full)
+        name: подсумок для ампул (Заполненный) # CCM14
       - id: RMCPouchMedical
       - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
+        name: подсумок первой помощи (инъекторы) # CCM14
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: подсумок первой помощи (бинт, мазь) # CCM14 # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
+        name: подсумок первой помощи (таблетки) # CCM14
 
 - type: entity
   parent: RMCColMarTechMedicalEquipmentPVE
@@ -545,7 +545,7 @@
     #     recommended: true
     #   - id: RMCLargeBottleImidazolineAlkysine
     #     recommended: true
-    - name: Pill Bottles
+    - name: Таблетки # CCM14
       entries:
       - id: RMCPillCanisterMeralyneBicaridine
         points: 60
@@ -558,7 +558,7 @@
         points: 30
       - id: RMCPillCanisterIron
         points: 30
-    - name: Liquid Bottles
+    - name: Растворы # CCM14
       entries:
       - id: RMCLargeBottleMeralyneBicaridine
         points: 40
@@ -592,7 +592,7 @@
     #     recommended: true
     #   - id: RMCLargeBottleImidazolineAlkysine
     #     recommended: true
-    - name: Pill Bottles
+    - name: Таблетки # CCM14
       entries:
       - id: RMCPillCanisterMeralyneBicaridine
         points: 60
@@ -605,7 +605,7 @@
         points: 30
       - id: RMCPillCanisterIron
         points: 30
-    - name: Liquid Bottles
+    - name: Растворы # CCM14
       entries:
       - id: RMCLargeBottleMeralyneBicaridine
         points: 40

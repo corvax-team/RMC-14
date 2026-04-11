@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorArmyReservist = army reservist spawn point
+ent-RMCSpawnPointSurvivorArmyReservist = спавнер выжившего армейского резервиста
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetArmyReservist = people's armed police officer preset
+    .suffix = Сорокина Страта
+ent-RMCGearSurvivorPresetArmyReservist = пресет выжившего армейского резервиста Сорокиной Страты
     .desc = { "" }

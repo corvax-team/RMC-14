@@ -3,7 +3,7 @@
   id: RMCSurvivorForeconSquadLeader
   name: cm-job-name-squad-leader
   ranks:
-    RMCRankSecondLT: []
+    RMCRankSergeant: []
   icon: "CMJobIconSquadLeader"
   roleWeight: 1
   requirements:
@@ -17,6 +17,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetForecon]
+    - type: TacticalMapLayerTracked
+      layers: [SquadFORECON]
     - type: Skills
       skills:
         RMCSkillEngineer: 1

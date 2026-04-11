@@ -69,7 +69,14 @@ public sealed class RMCVehiclePortGunSystem : EntitySystem
     {
         if (args.Handled || _net.IsClient)
             return;
-
+        // CCM14-start
+        if (TryComp<VehiclePortGunSeatComponent>(ent, out var seat) && 
+            !_skills.HasSkills(args.User, seat.Skills))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-skills-cant-operate", ("target", ent.Owner)), args.User, args.User);
+            return;
+        }
+        // CCM14-end
         if (!TryGetPortGun(ent, args.User, out var vehicle, out var gunUid, out var portGun))
             return;
 

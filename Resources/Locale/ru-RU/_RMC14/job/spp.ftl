@@ -1,74 +1,79 @@
-﻿rmc-ghost-role-information-spp-rules = Вы являетесь [color=red][bold]солдатом ГРУ СССП[/bold][/color]. Вы нейтральны/дружественны к морпехам, особые отбстоятельства и администрация могут это поменять.
+rmc-ghost-role-information-spp-rules =
+    Вы являетесь [color=red][bold]солдатом ГРУ СССП[/bold][/color]. Вы нейтральны/дружественны к морпехам, особые отбстоятельства и администрация могут это поменять.
     Вы не помните ничего из своей предыдущей жизни и не помните ничего из того, что узнали, будучи призраком.
     Вам разрешается помнить знания об игре в целом, например, как готовить, как использовать предметы и т.д.
     Вам абсолютно [color=red]НЕ[/color] разрешено помнить, скажем, имя, внешность и т. д. вашего предыдущего персонажа.
-
 rmc-ghost-role-information-spp-friendly-description = Вы откликнулись на зов о помощи корабля ККМП. Окажите услугу и вытащите своих 'Земных' товарищей из трудной ситуации, прислушивайтесь к указаниям своего сержанта. Во имя революции!
 rmc-ghost-role-information-spp-hostile-description = Вы откликнулись на зов о помощи корабля ККМП. Окажите услугу и вытащите своих 'Земных' товарищей из трудной ситуации, прислушивайтесь к указаниям своего сержанта. Во имя революции!
 rmc-ghost-role-information-spp-pve-description = Выполняйте все приказы командования и исполняйте их наилучшим образом. Во славу народа!
-
 rmc-ghost-name-spp-hostile-leader = СССП Командир Отряда (Нейтр/друж)
 rmc-ghost-name-spp-friendly-leader = СССП Командир Отряда (Нейтр/друж)
 rmc-job-name-spp-leader = Старший Сержант
 rmc-job-prefix-spp-leader = КомОт
-
 rmc-ghost-name-spp-hostile-specialist = СССП Специалист по вооружению (Нейтр/друж)
 rmc-ghost-name-spp-friendly-specialist = СССП Специалист по вооружению (Нейтр/друж)
 rmc-job-name-spp-specialist = Сержант
 rmc-job-prefix-spp-specialist = Спец.
-
 rmc-ghost-name-spp-hostile-rifleman = СССП Стрелок (Нейтр/друж)
 rmc-ghost-name-spp-friendly-rifleman = СССП Стрелок (Нейтр/друж)
 rmc-job-name-spp-rifleman = Призывник
 rmc-job-prefix-spp-rifleman = Стр
-
 rmc-ghost-name-spp-hostile-engineer = СССП Саппёр (Нейтр/друж)
 rmc-ghost-name-spp-friendly-engineer = СССП Саппёр (Нейтр/друж)
 rmc-job-name-spp-engineer = Сапёр
 rmc-job-prefix-spp-engineer = Сап.
-
 rmc-ghost-name-spp-hostile-medic = СССП Медик отряда (Нейтр/друж)
 rmc-ghost-name-spp-friendly-medic = СССП Медик отряда (Нейтр/друж)
 rmc-job-name-spp-medic = Медик
 rmc-job-prefix-spp-medic = МО
-
 rmc-ghost-name-spp-hostile-mp = СССП Военная полиция (Нейтр/друж)
 rmc-ghost-name-spp-friendly-mp = СССП Военная Полиция (Нейтр/друж)
 rmc-job-name-spp-mp = Полиция
 rmc-job-prefix-spp-mp = ВП
-
-rmc-ghost-name-spp-commando-leader = "Флагман" СССП (!DEATHSQUAD!)
+rmc-ghost-name-spp-commando-leader = "Флагман" Коммандо СССП (!DEATHSQUAD!)
 rmc-job-name-spp-commando-leader = Лидер Отряда
 rmc-job-prefix-spp-commando-leader = Паст.
-
 rmc-ghost-name-spp-commando-medic = Санитар Коммандо СССП (!DEATHSQUAD!)
 rmc-job-name-spp-commando-medic = Санитар Коммандо
 rmc-job-prefix-spp-commando-medic = Сан. Комман.
-
 rmc-ghost-name-spp-commando = Коммандо СССП (!DEATHSQUAD!)
 rmc-job-name-spp-commando = Коммандо
 rmc-job-prefix-spp-commando = Комман.
-
 rmc-job-name-spp-gunner = Тяжёлый пулемётчик
 rmc-job-prefix-spp-gunner = Тяж. Пул.
 rmc-ghost-name-spp-gunner = СССП Тяжёлый пулемётчик
-
+rmc-job-description-spp-gunner-pve = Поддерживайте ваш отряд тяжёлым вооружением и обеспеыивайте заградительный огонь.
 rmc-job-name-spp-rifleman-pve = Стрелок
 rmc-job-prefix-spp-rifleman-pve = Стр
 rmc-ghost-name-spp-rifleman-pve = СССП Стрелок
-
+rmc-job-description-spp-rifleman-pve = Следуйте приказам своего сержанта. Выполняйте вашу работу и стреляйте во всё, во что вам говорят стрелять.
 rmc-job-name-spp-corpsman = Санитар
 rmc-job-prefix-spp-corpsman = Сан
 rmc-ghost-name-spp-corpsman = Санитар СССП
-
+rmc-job-description-spp-corpsman-pve = Держите ваше отделение в боеспособном состоянии, или как можно ближе к этому состоянию.
 rmc-job-name-spp-overwatch = Взводный Командир
 rmc-job-prefix-spp-overwatch = Вз. Ком.
 rmc-ghost-name-spp-overwatch = Взводный Командир СССП
-
+rmc-job-description-spp-overwatch = Командуйте вашим взводом. Следуйте приказам командования.
 rmc-job-name-spp-sectionsergeant = Сержант отделения
 rmc-job-prefix-spp-sectionsergeant = Сжт. Отд.
 rmc-ghost-name-spp-sectionsergeant = Сержант Отделения СССП
-
+rmc-job-description-spp-sectionsergeant = Ведите в бой одно из взводных подразделений. Раздавайте ващим солдатам распоряжения и следуйте приказам вашего взводного командира.
 rmc-job-name-spp-squadlead = Командир Отряда
 rmc-job-prefix-spp-squadlead = КомОт
 rmc-ghost-name-spp-squadlead = СССП Командир Отряда
+rmc-job-description-spp-squadlead = Следуйте приказам Сержанта вашего отделения и командуйте своим отрядом.
+rmc-job-name-spp-synth = Вспомогательный синтетик
+rmc-job-prefix-spp-synth = СИНТ.
+rmc-job-name-spp-so = Офицер Штаба
+rmc-job-prefix-spp-so = ОШ
+rmc-ghost-name-spp-so = ОШ СССП
+rmc-job-description-spp-so = Штаб-Офицер армии СССП. Вы отвечаете напрямую Командующему и Исполнительному Офицеру.
+rmc-job-name-spp-xo = Исполнительный Офицер
+rmc-job-prefix-spp-xo = ИО
+rmc-ghost-name-spp-xo = ИО СССП
+rmc-job-description-spp-xo = Исполнительный Офицер армии СССП. Вы отвечаете напрямую Командующему Офицеру.
+rmc-job-name-spp-co = Командующий Офицер
+rmc-job-prefix-spp-co = КО
+rmc-ghost-name-spp-co = КО СССП
+rmc-job-description-spp-co = Командующий Офицер армии СССП. Вы отвечаете только перед Высшим Командованием СССП.

@@ -1,5 +1,6 @@
 ### for technical and/or system messages
 
+
 ## General
 
 shell-command-success = Команда выполнена.
@@ -8,7 +9,7 @@ shell-invalid-command-specific = Неверная команда { $commandName 
 shell-cannot-run-command-from-server = Вы не можете выполнить эту команду с сервера.
 shell-only-players-can-run-this-command = Только игроки могут выполнять эту команду.
 shell-must-be-attached-to-entity = Для выполнения этой команды вы должны быть прикреплены к сущности.
-shell-must-have-body = You must have a body to run this command.
+shell-must-have-body = У вас должно быть тело для выполнения этой команды.
 
 ## Arguments
 
@@ -29,12 +30,12 @@ shell-wrong-arguments-number = Неправильное количество а�
 shell-need-between-arguments = Нужно от { $lower } до { $upper } аргументов!
 shell-need-minimum-arguments = Нужно не менее { $minimum } аргументов!
 shell-need-minimum-one-argument = Нужен хотя бы один аргумент!
-shell-need-exactly-zero-arguments = This command takes zero arguments.
+shell-need-exactly-zero-arguments = Эта команда принимает ноль аргументов.
 shell-argument-uid = EntityUid
 
 ## Guards
 
-shell-missing-required-permission = You need { $perm } for this command!
+shell-missing-required-permission = Вам нужен { $perm } для этой команды!
 shell-entity-is-not-mob = Целевая сущность не является мобом!
 shell-invalid-entity-id = Недопустимый ID сущности.
 shell-invalid-grid-id = Недопустимый ID сетки.
@@ -45,7 +46,7 @@ shell-entity-uid-must-be-number = EntityUid должен быть числом.
 shell-could-not-find-entity = Не удалось найти сущность { $entity }.
 shell-could-not-find-entity-with-uid = Не удалось найти сущность с uid { $uid }.
 shell-entity-with-uid-lacks-component = Сущность с uid { $uid } не имеет компонента { $componentName }.
-shell-entity-target-lacks-component = Target entity doesn't have { INDEFINITE($componentName) } { $componentName } component
+shell-entity-target-lacks-component = Целевая сущность не имеет компонента { $componentName }
 shell-invalid-color-hex = Недопустимый HEX-цвет!
 shell-target-player-does-not-exist = Целевой игрок не существует!
 shell-target-entity-does-not-have-message = Целевая сущность не имеет { $missing }!

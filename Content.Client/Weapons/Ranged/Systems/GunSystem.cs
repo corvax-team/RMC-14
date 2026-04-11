@@ -2,6 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Client._RMC14.ItemPickup;
 using Content.Client._RMC14.Movement;
+using Content.Client._RMC14.Vehicle;
 using Content.Client._RMC14.Weapons.Ranged.Prediction;
 using Content.Client.Animations;
 using Content.Client.Gameplay;
@@ -46,6 +47,7 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly ItemPickupSystem _itemPickup = default!;
     [Dependency] private readonly GunPredictionSystem _gunPrediction = default!;
     [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
+    [Dependency] private readonly VehicleTurretMuzzleOffsetSystem _vehicleTurretMuzzleOffset = default!;
 
     public static readonly EntProtoId HitscanProto = "HitscanEffect";
 
@@ -271,7 +273,21 @@ public sealed partial class GunSystem : SharedGunSystem
         var ent = Spawn(message.Prototype, coordinates);
         TransformSystem.SetWorldRotationNoLerp(ent, message.Angle);
 
-        if (tracked != null)
+        if (_vehicleTurretMuzzleOffset.TryGetGunPose(gunUid, null, out var origin, out var rotation))
+        {
+            var renderedMap = TransformSystem.ToMapCoordinates(origin);
+            var effectXform = Transform(ent);
+            effectXform.ActivelyLerping = false;
+            var rotationOffset = (message.Angle - rotation).Reduced();
+            TransformSystem.SetWorldRotationNoLerp((ent, effectXform), rotation + rotationOffset);
+            TransformSystem.SetWorldPosition((ent, effectXform), renderedMap.Position + (rotation + rotationOffset).RotateVec(offset));
+
+            var track = EnsureComp<VehicleTurretTrackedMuzzleFlashComponent>(ent);
+            track.Weapon = gunUid;
+            track.Offset = offset;
+            track.RotationOffset = rotationOffset;
+        }
+        else if (tracked != null)
         {
             var track = EnsureComp<TrackUserComponent>(ent);
             track.User = tracked;

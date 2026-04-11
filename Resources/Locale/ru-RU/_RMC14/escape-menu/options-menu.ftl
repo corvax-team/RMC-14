@@ -14,5 +14,6 @@ ui-options-function-rmc-pick-up-dropped-items = Поднять оброненн�
 ui-options-function-rmc-interact-with-other-hand = Взаимодействать другой рукой
 ui-options-function-rmc-rest = Лечь
 ui-options-header-rmc-xeno = Ксено
+ui-options-function-cm-xeno-ping = Ксено Пинг
 ui-options-function-cm-xeno-wide-swing = Широкий удар ксено
 ui-options-function-rmc-xeno-rest = Лечь

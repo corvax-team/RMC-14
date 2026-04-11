@@ -12,53 +12,53 @@
     - "RMCAccessWeYa"
     hackable: true
     sections:
-    - name: Standard Equipment
+    - name: Стандартное снаряжение # CCM14
       entries:
       - id: CMBootsBlack
-        name: Combat Boots
+        name: берцы # CCM14
         amount: 15
       - id: RMCJumpsuitVeteranPMCNoWebbing
-        name: PMC Uniform
+        name: комбинезон ЧВК # CCM14
         amount: 15
       - id: RMCHandsVeteran
-        name: Combat Gloves
+        name: боевые перчатки # CCM14
         amount: 15
       - id: RMCHeadsetDistressPMCPVE
-        name: PMC Radio Headset
+        name: гарнитура ЧВК # CCM14
         amount: 15
       - id: RMCCameraGearPMC
-        name: Mk3 TOCU headcam
+        name: нашлемная камера Mk3 TOCU # CCM14
         amount: 15
-    - name: Webbings
+    - name: Разгрузки # CCM14
       entries:
       - id: CMWebbingBlack
-        name: Webbing, Black
+#        name: Webbing, Black
         amount: 10
       - id: RMCWebbingLegPouchBlack
-        name: Leg Pouch, Black
+#        name: Leg Pouch, Black
         amount: 10
       - id: RMCWebbingDropPouch
         amount: 5
-    - name: Armor
+    - name: Броня # CCM14
       entries:
       - id: RMCArmorHelmetPMCTactical
         amount: 15
-        name: tactical helmet (Helmet Light)
+        name: тактический шлем (с фонарём) # CCM14
       - id: RMCArmorM4PMCNoLight
-        name: M4 pattern PMC armor (No Suitlight)
+        name: броня ЧВК M4 (без фонаря) # CCM14
         amount: 15
       - id: CMArmorM4PMCLight
-        name: M4 pattern light PMC armor (Suitlight)
+        name: легкая броня ЧВК M4 (с фонарём) # CCM14
         amount: 15
-    - name: Backpack
+    - name: Рюкзаки # CCM14
       entries:
       - id: RMCSatchelPMC
         amount: 30
-    - name: Restricted Backpack
+    - name: Ограниченные рюкзаки # CCM14
       entries:
       - id: RMCBackpackRTOPMC
         amount: 1
-    - name: Belts
+    - name: Пояса # CCM14
       entries:
       - id: CMBeltMarine
         amount: 15
@@ -72,12 +72,12 @@
         amount: 5
       - id: RMCBeltUtilityGeneral
         amount: 5
-    - name: Pouches
+    - name: Подсумки # CCM14
       entries:
       - id: RMCPouchFirstAid
         amount: 15
       - id: RMCPouchFlareFilled
-        name: flare pouch (Full)
+        name: подсумок для фальшфейеров (Полный) # CCM14
         amount: 15
       - id: RMCPouchMagazine
         amount: 15
@@ -87,7 +87,7 @@
         amount: 15
       - id: RMCPouchPistol
         amount: 15
-    - name: Restricted Pouches
+    - name: Специальные подсумки # CCM14
       entries:
       - id: RMCPouchConstruction
         amount: 1
@@ -101,17 +101,17 @@
         amount: 1
       - id: RMCPouchFuelTank
         amount: 1
-    - name: Mask
+    - name: Маски # CCM14
       entries:
       - id: RMCMaskCoifPMC
         amount: 15
-    - name: Miscellaneous
+    - name: Разное # CCM14
       entries:
       - id: RMCGogglesBallistic
-        name: Ballistic Goggles
+        name: баллистические очки # CCM14
         amount: 10
       - id: RMCHelmetGarbGunOil
-        name: firearm lubricant
+        name: оружейная смазка # CCM14
         amount: 15
       - id: ArmorHelmetPMC
         amount: 15
@@ -130,22 +130,22 @@
     - "RMCAccessWeYa"
     hackable: true
     sections:
-    - name: Food
+    - name: Рационы # CCM14
       entries:
       - id: RMCMREWeYaPMC
-        name: MRE
+        name: сухой паёк # CCM14
         amount: 5
       - id: RMCBoxMRE  # TODO RMC14 - PMC rations
-        name: MRE Box
+        name: коробка сухих пайков # CCM14
         amount: 1
-    - name: Medical
+    - name: Медикаменты # CCM14
       entries:
       - id: CMGauze10
         amount: 15
       - id: CMOintment10
         amount: 15
       - id: CMEmergencyAutoInjector
-        name: Emergency Autoinjector
+        name: экстренный автоинъектор # CCM14
         amount: 15
       - id: CMBicaridineAutoInjector
         amount: 15
@@ -153,7 +153,7 @@
         amount: 15
       - id: CMTricordrazineAutoInjector
         amount: 15
-    - name: Tools
+    - name: Инструменты # CCM14
       entries:
       - id: CMEntrenchingTool
         amount: 2
@@ -166,31 +166,31 @@
       - id: CMWrench
         amount: 5
       - id: CMMultitool
-        name: Multitool
+#        name: Multitool
         amount: 5
       - id: RMCWelderPVE
         amount: 1
-    - name: Explosives
+    - name: Взрывчатка  # CCM14
       entries:
       - id: RMCExplosivePlastic
         amount: 2
       - id: RMCExplosiveBreachingCharge
         amount: 2
-    - name: Flare and Light
+    - name: Освещение # CCM14
       entries:
       - id: RMCFlashlight
         amount: 5
       - id: RMCBoxFlashlights
-        name: Box of Flashlights
+#        name: Box of Flashlights
         amount: 1
       - id: RMCBoxPackFlare
-        name: Box of Flares
+#        name: Box of Flares
         amount: 1
       - id: CMPackFlare
         amount: 10
       - id: RMCBoxPackFlareCAS
         amount: 1
-    - name: Sidearms
+    - name: Пистолеты # CCM14
       entries:
       - id: RMCWeaponPistolM77
         amount: 2
@@ -198,18 +198,18 @@
         amount: 2
       - id: RMCWeaponPistolM82F
         amount: 1
-    - name: Miscellaneous
+    - name: Разное # CCM14
       entries:
       - id: CMFireExtinguisher
-        name: Extinguisher
+#        name: Extinguisher
         amount: 5
       - id: CMFireExtinguisherPortable
-        name: Fire Extinguisher (Portable)
+#        name: Fire Extinguisher (Portable)
         amount: 1
       - id: CMRollerBedSpawnFolded
         amount: 2
       - id: RMCScabbardMacheteFilled
-        name: Machete Scabbard (Full)
+        name: ножны H5 для мачете M2132 (Заполненные) # CCM14
         amount: 5
       - id: RMCAttachmentRailFlashlight
         amount: 5

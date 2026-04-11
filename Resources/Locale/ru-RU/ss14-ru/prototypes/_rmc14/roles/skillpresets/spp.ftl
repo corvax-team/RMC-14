@@ -1,0 +1,10 @@
+ent-RMCSkillPresetSurvivorSPPPrivate = Выживший рядовой СССП
+    .desc = { ent-RMCSkillPresetSurvivor.desc }
+ent-RMCSkillPresetSurvivorSPPSapper = Выживший сапёр СССП
+    .desc = { ent-RMCSkillPresetSurvivorSPPPrivate.desc }
+ent-RMCSkillPresetSurvivorSPPMedic = Выживший медик СССП
+    .desc = { ent-RMCSkillPresetSurvivorSPPPrivate.desc }
+ent-RMCSkillPresetSurvivorSPPSpecialist = Выживший специалист СССП
+    .desc = { ent-RMCSkillPresetSurvivorSPPPrivate.desc }
+ent-RMCSkillPresetSurvivorSPPLeader = Выживший лидер СССП
+    .desc = { ent-RMCSkillPresetSurvivorSPPPrivate.desc }

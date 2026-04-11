@@ -15,8 +15,7 @@ rmc-job-name-researcher = Исследователь
 rmc-job-description-researcher = Проводите исследования того, что вам присылают. Создавайте и анализируйте новые химические вещества, инструменты и предметы.
 rmc-job-prefix-researcher = Исс
 CMJobResearcher = Исследователь
-
 rmc-job-name-field-doctor = Полевой доктор
 rmc-job-description-field-doctor = Залечите раны морпехов на планете, иногда хирургическими операциями.
 rmc-job-prefix-field-doctor = ПД
-RMCJobFieldDoctor  = Полевой доктор
+RMCJobFieldDoctor = Полевой доктор

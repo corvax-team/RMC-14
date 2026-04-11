@@ -6,5 +6,4 @@ item-recall-item-mark-empty = Вы должны держать предмет!
 item-recall-item-summon-self = { CAPITALIZE(THE($item)) } appears in your hand!
 item-recall-item-summon-others = { CAPITALIZE(THE($item)) } appears in { THE($name) }'s hand!
 item-recall-item-disappear = { CAPITALIZE(THE($item)) } disappears!
-item-recall-item-summon = { CAPITALIZE($item) } появляется в вашей руке!
 item-recall-item-unmark = Вы чувствуете, что ваша связь с { $item } разорвана.

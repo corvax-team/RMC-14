@@ -330,27 +330,21 @@ namespace Content.Shared.Preferences
 
             var name = GetName(species, gender);
 
-            return new(
-                name,
-                string.Empty,
-                species,
-                age,
-                sex,
-                gender,
-                HumanoidCharacterAppearance.Random(species, sex),
-                SpawnPriorityPreference.None,
-                ArmorPreference.Random,
-                null,
-                new() { { SharedGameTicker.FallbackOverflowJob, JobPriority.High } },
-                PreferenceUnavailableMode.SpawnAsOverflow,
-                new(),
-                new(),
-                new(),
-                new SharedRMCNamedItems(),
-                false,
-                string.Empty,
-                string.Empty
-            );
+            return new HumanoidCharacterProfile()
+            {
+                Name = name,
+                Sex = sex,
+                Age = age,
+                Gender = gender,
+                Species = species,
+                Appearance = HumanoidCharacterAppearance.Random(species, sex),
+                SpawnPriority = SpawnPriorityPreference.None,
+                ArmorPreference = ArmorPreference.Random,
+                NamedItems = new SharedRMCNamedItems(),
+                PreferenceUnavailable = PreferenceUnavailableMode.SpawnAsOverflow,
+                PlaytimePerks = false,
+                FlavorText = string.Empty
+            };
         }
 
         public HumanoidCharacterProfile WithName(string name)

@@ -1,4 +1,4 @@
-ent-RMCFlowerVase = vase of red and white flowers
-    .desc = A flower vase filled with red and white roses.
-ent-RMCFlowerVaseBlue = vase of blue and white flowers
-    .desc = A flower vase filled with blue and white roses.
+ent-RMCFlowerVase = ваза с красно-белыми цветами
+    .desc = Цветочная ваза, наполненная красными и белыми розами.
+ent-RMCFlowerVaseBlue = ваза с сине-белыми цветами
+    .desc = Цветочная ваза, наполненная синими и белыми розами.

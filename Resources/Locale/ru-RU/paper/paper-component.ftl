@@ -5,17 +5,17 @@ paper-ui-blank-page-message = Данная страница оставлена �
 paper-component-examine-detail-has-words = На листе что-то написано.
 # Shown when paper with stamps examined
 paper-component-examine-detail-stamped-by = На { CAPITALIZE($paper) } имеются следующие печати: { $stamps }.
-paper-component-illiterate = You are unable to write.
-paper-component-illiterate-mime = Your vow forbids you from writing.
+paper-component-illiterate = Вы не можете писать.
+paper-component-illiterate-mime = Ваш обет запрещает вам писать.
 paper-component-action-stamp-paper-other = { CAPITALIZE($user) } ставит печать на { $target } с помощью { $stamp }.
 paper-component-action-stamp-paper-self = Вы ставите печать на { $target } с помощью { $stamp }.
 # Indicator to show how full a paper is
 paper-ui-fill-level = { $currentLength }/{ $maxLength }
 paper-ui-save-button = Сохранить ({ $keybind })
 # Form and signature buttons
-paper-form-fill-button = Fill
-paper-signature-sign-button = Sign
-paper-form-dialog-ok = OK
-paper-form-dialog-cancel = Cancel
-paper-signature-unknown = Unknown
+paper-form-fill-button = Заполнить
+paper-signature-sign-button = Подписать
+paper-form-dialog-ok = ОК
+paper-form-dialog-cancel = Отмена
+paper-signature-unknown = Неизвестно
 paper-tamper-proof-modified-message = Текст на странице был написан с использованием нефальсицицируемых чернил.

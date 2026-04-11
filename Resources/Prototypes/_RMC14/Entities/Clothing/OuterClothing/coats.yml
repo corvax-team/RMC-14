@@ -106,6 +106,7 @@
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
       - RMCBeltHolsterM13
+      - CCMGuitarBag # CCM14
 
 - type: entity
   id: RMCAllowSuitStorageClothingHazardVest
@@ -145,6 +146,7 @@
       - RMCMacheteScabbard
       - RMCScabbardKatana
       - RMCDetector
+      - CCMGuitarBag # CCM14
 
 
 - type: entity
@@ -180,6 +182,7 @@
       - RMCMacheteScabbard
       - RMCScabbardKatana
       - RMCDetector
+      - CCMGuitarBag # CCM14
 
 - type: entity
   abstract: true
@@ -226,6 +229,7 @@
       - Crowbar
       - Radio
       - RMCDetector
+      - CCMGuitarBag # CCM14
 
 - type: entity
   abstract: true
@@ -242,6 +246,7 @@
       - GasTank
       - DiscreteHealthAnalyzer
       - Flashlight
+      - CCMGuitarBag # CCM14
 
 
 
@@ -317,11 +322,10 @@
   - type: CMArmor
     melee: 10
 
-# CCM-14-start
 # Tanker
 - type: entity
   parent: [RMCBaseJacketButtonable, RMCBaseJacket]
-  id: RMCCoatTanker # why it's not in our folder?
+  id: RMCCoatTanker
   name: tanker jacket
   description: A comfortable jacket provided to anyone expected to operate near or inside heavy machinery. Special material within the arms jams up any machinery it gets caught up in, protecting the wearer from injury.
   components:
@@ -331,7 +335,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/tanker.rsi
   - type: CMArmor
     melee: 10
-# CCM-14-end
 
 # Auxiliary Supply Officer
 - type: entity
@@ -760,7 +763,7 @@
   - type: Appearance
 
 - type: entity
-  parent: [RMCOuterClothingExternalWebbing, BaseFoldable]
+  parent: [ClothingOuterStorageBase, RMCAllowSuitStorageClothingJacket, BaseFoldable, RMCBaseUniformAccessoryItemOuterClothing]
   id: RMCJacketWindbreaker
   name: green windbreaker
   description: A green windbreaker.
@@ -867,7 +870,7 @@
 # Hybrisa
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatSnow
   id: RMCCoatHoboBlue
   name: dark blue worn parka
   description: An old worn blue Parka, has seen better days...
@@ -878,7 +881,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_blue.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatSnow
   id: RMCCoatHoboGreen
   name: dark green worn parka
   description: An old worn green Parka, has seen better days...
@@ -889,7 +892,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_green.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatSnow
   id: RMCCoatHoboBrown
   name: dark brown worn polyester jacket
   description: An old worn brown polyester jacket, has seen better days...
@@ -900,7 +903,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_brown.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatSnow
   id: RMCCoatHoboDarkBlue
   name: dark blue worn polyester jacket
   description: An old worn blue polyester jacket, has seen better days...
@@ -911,7 +914,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_dark_blue.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatSnow
   id: RMCCoatHoboRed
   name: dark red worn polyester jacket
   description: An old worn blue polyester jacket, has seen better days...
@@ -978,7 +981,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/ChancesClaim/brown_iconcoat.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCJacketWindbreaker
   id: RMCWEYARainCoat
   name: WEYA rain coat
   description: A bright, yellow raincoat with the Company logo. It's gaudy, sure, but it keeps the rain off well. Typically distributed to frontier colonies with heavy rain.

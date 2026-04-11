@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: CMDepartmentsHuman
   categories: [ HideSpawnMenu ]
   components:
@@ -88,7 +88,7 @@
     name: role-timer-survivor-roles
     color: "#00b7ff"
     jobs:
-    - RMCJobSyntheticColony
+    - RMCSyntheticColony
     - CMSurvivor
     - CMSurvivorDoctor
     - CMSurvivorEngineer

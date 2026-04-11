@@ -72,28 +72,38 @@
 - type: damageModifierSet
   id: RMCVehicleArmorBallistic
   coefficients:
-    Blunt: 0.75
-    Slash: 0.75
-    Piercing: 0.75
+    Blunt: 0.9
+    Slash: 0.603
+    Piercing: 0.603
+    Structural: 0.9
+    Caustic: 0.9
 
 - type: damageModifierSet
   id: RMCVehicleArmorCaustic
   coefficients:
-    Heat: 0.75
-    Shock: 0.75
-    Cold: 0.75
-    Caustic: 0.75
+    Blunt: 0.9
+    Slash: 0.9
+    Piercing: 0.9
+    Structural: 0.9
+    Caustic: 0.603
+
+- type: damageModifierSet
+  id: RMCVehicleArmorConcussive
+  coefficients:
+    Blunt: 0.603
+    Slash: 0.9
+    Piercing: 0.9
+    Structural: 0.9
+    Caustic: 0.9
 
 - type: damageModifierSet
   id: RMCVehicleArmorPaladin
   coefficients:
-    Blunt: 0.75
-    Slash: 0.75
-    Piercing: 0.75
-    Heat: 0.75
-    Shock: 0.75
-    Cold: 0.75
-    Caustic: 0.75
+    Blunt: 0.9
+    Slash: 0.9
+    Piercing: 0.9
+    Structural: 0.603
+    Caustic: 0.9
 
 - type: damageModifierSet
   id: RMCVehicleFrameTank
@@ -102,7 +112,7 @@
     Slash: 0.7
     Piercing: 0.4
     Structural: 0.8
-    Caustic: 1
+    Caustic: 1.5
 
 - type: damageModifierSet
   id: RMCVehicleFrameAPC

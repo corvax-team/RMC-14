@@ -46,12 +46,24 @@
   prefix: ComOff.
   paygrade: O2
 
-# Any player with low law understanding, with guidance
+# Any player with low law understanding, with guidance | CCM14
 - type: rank
   id: RMCRankProvostAdvisor
-  name: Сержант-майор
-  prefix: СержМайр.
-  paygrade: E9E
+  name: Младший Советник Юстиции
+  prefix: МСовЮс.
+  paygrade: U4MP
+
+- type: rank
+  id: RMCRankProvostAdvisor1
+  name: Советник Юстиции
+  prefix: СовЮс.
+  paygrade: U5MP
+
+- type: rank
+  id: RMCRankProvostAdvisor2
+  name: Старший Советник Юстиции
+  prefix: ССовЮс.
+  paygrade: U6MP
 
 # Any player with given objective, possible team leader
 - type: rank

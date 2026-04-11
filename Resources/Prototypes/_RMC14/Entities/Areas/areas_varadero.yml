@@ -155,6 +155,8 @@
     noTunnel: true
     unweedable: true
     alwaysPowered: true
+    excludeFromTacMapBounds: true
+    excludeFromTacMapRender: true
 
 - type: entity
   parent: RMCAreaVaraderoExterior
@@ -263,16 +265,13 @@
     minimapColor: '#0603C4EE'
 
 - type: entity
-  parent: RMCAreaVaraderoExterior
+  parent: RMCAreaVaraderoInteriorOob
   id: RMCAreaVaraderoExteriorFarocean
   name: New Varadero - Far Ocean
   components:
   - type: Sprite
     state: varadero3
   - type: Area
-    avoidBioscan: false
-    noTunnel: true
-    unweedable: false
     minimapColor: '#0603C4EE'
 
 - type: entity
@@ -650,6 +649,8 @@
     state: predship
   - type: Area
     minimapColor: '#885A04E7'
+    excludeFromTacMapBounds: true
+    excludeFromTacMapRender: true
 
 - type: entity
   parent: RMCAreaVaraderoInterior

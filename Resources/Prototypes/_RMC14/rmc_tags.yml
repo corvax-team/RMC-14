@@ -65,6 +65,9 @@
   id: CMFlarePack
 
 - type: Tag
+  id: CMXenoRoyalLarva
+
+- type: Tag
   id: RMCSmartPistol
 
 - type: Tag
@@ -126,36 +129,6 @@
 
 - type: Tag
   id: RMCXenoLarva
-
-- type: Tag
-  id: RMCVehicleHardpointWheel
-
-- type: Tag
-  id: RMCVehicleHardpointTreads
-
-- type: Tag
-  id: RMCVehicleHardpointTires
-
-- type: Tag
-  id: RMCVehicleHardpointTurret
-
-- type: Tag
-  id: RMCVehicleHardpointHumveeTurret
-
-- type: Tag
-  id: RMCVehicleHardpointCannon
-
-- type: Tag
-  id: RMCVehicleHardpointLauncher
-
-- type: Tag
-  id: RMCVehicleHardpointFrontAttachment
-
-- type: Tag
-  id: RMCVehicleHardpointRoofAttachment
-
-- type: Tag
-  id: RMCVehicleHardpointSupportAttachment
 
 - type: Tag
   id: RipOffOnInfection

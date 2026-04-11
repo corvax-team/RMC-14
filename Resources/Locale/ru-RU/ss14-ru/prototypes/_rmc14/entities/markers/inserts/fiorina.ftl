@@ -1,0 +1,12 @@
+ent-RMCMapInsertFiorinaBase = { ent-RMCMapInsertBase }
+    .suffix = Вставка Фиорина
+    .desc = { ent-RMCMapInsertBase.desc }
+ent-RMCMapInsertFiorinaPodholder = Держатель капсул
+    .suffix = Вставка Фиорина
+    .desc = { ent-RMCMapInsertFiorinaBase.desc }
+ent-RMCMapInsertFiorinaRocinanteCLF = Росинант — CLF
+    .suffix = Вставка Фиорина
+    .desc = { ent-RMCMapInsertFiorinaBase.desc }
+ent-RMCMapInsertFiorinaRiotInProgress = Бунт в процессе
+    .suffix = Вставка Фиорина
+    .desc = { ent-RMCMapInsertFiorinaBase.desc }

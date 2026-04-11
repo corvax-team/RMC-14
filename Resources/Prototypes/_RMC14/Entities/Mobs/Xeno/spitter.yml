@@ -62,6 +62,8 @@
     evolvesTo:
     - CMXenoBoiler
     - CMXenoPraetorian
+    strains: # CCM Change
+    - CCMXenoSniperSpitter # CCM Change
   - type: XenoSpit
   - type: XenoChargeSpit
   - type: XenoScatteredSpit

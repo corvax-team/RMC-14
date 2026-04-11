@@ -154,3 +154,5 @@ ent-VendingMachineChemicals = ChemVend
     .desc = Probably not the coffee machine.
 ent-VendingMachineChemicalsSyndicate = SyndieJuice
     .desc = Not made with freshly squeezed syndies I hope.
+ent-RMCVehicleHardpointVendor = vehicle hardpoint printer
+    .desc = A machine for printing vehicle hardpoints.

@@ -32,8 +32,8 @@ public sealed partial class NewToJobPopup : FancyWindow
         if (string.IsNullOrWhiteSpace(info))
             return;
 
-        NewToJobName.SetMessage(Loc.GetString("rmc-new-to-job-popup-job-name", ("name", Loc.GetString(name))));
-        NewToJobLabel.SetMessage(Loc.GetString(info));
+        NewToJobName.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString("rmc-new-to-job-popup-job-name", ("name", Loc.GetString(name))))); // CCM14
+        NewToJobLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString(info))); // CCM14
         NewToJobAdditional.SetMessage(FormattedMessage.FromMarkupOrThrow(Loc.GetString("rmc-new-to-job-additional")));
     }
 

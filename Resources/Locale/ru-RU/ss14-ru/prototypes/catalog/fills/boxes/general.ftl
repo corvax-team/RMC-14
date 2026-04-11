@@ -58,7 +58,7 @@ ent-BoxEncryptionKeySyndie = коробка ключей шифрования
 # Corvax-HiddenDesc-End
 ent-BoxLeadLined = освинцованная коробка
     .desc = Эта коробка препятствует распространению радиации.
-    .suffix = DEBUG
+    .suffix = ДЕБАГ
 ent-BoxCandle = коробка свечей
     .desc = Эта коробка изготовлена специально для хранения свечей.
 ent-BoxCandleSmall = коробка маленьких свечей
@@ -67,5 +67,5 @@ ent-BoxDarts = коробка дротиков
     .desc = Коробка, наполненная разноцветными дротиками.
 ent-BoxEnvelope = коробка конвертов
     .desc = Коробка, наполненная конвертами.
-ent-BoxUtensil = utensil box
-    .desc = A box filled with forks and spoons.
+ent-BoxUtensil = коробка столовых приборов
+    .desc = Коробка, наполненная вилками и ложками.

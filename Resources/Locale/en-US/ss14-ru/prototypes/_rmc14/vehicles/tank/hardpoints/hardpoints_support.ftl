@@ -1,0 +1,10 @@
+ent-RMCVehicleTankWarningArray = integrated weapons sensor array
+    .desc = An integrated sensor array that improves accuracy and fire rate of onboard weapons.
+ent-RMCVehicleTankOverdriveEnhancer = overdrive enhancer
+    .desc = An overdrive enhancer support attachment for a tank.
+ent-RMCVehicleTankRocketLauncher = smoke launcher
+    .desc = A smoke launcher support attachment for a tank.
+ent-RMCVehicleTankFlareModule = flare module
+    .desc = A flare launcher support attachment for a tank.
+ent-RMCVehicleTankArtilleryModule = artillery module
+    .desc = An artillery support module for a tank.

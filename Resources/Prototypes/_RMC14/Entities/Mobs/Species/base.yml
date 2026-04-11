@@ -38,6 +38,7 @@
   - type: InjectableSolution
     solution: chemicals
   - type: RMCStamina
+  - type: RMCPulse
   - type: Bloodstream
     bloodReagent: Blood
     bloodMaxVolume: 560
@@ -85,6 +86,7 @@
     - DoorBumpOpener
   - type: Marine
   - type: RMCSuitLight
+  - type: RMCLastBodyScanResult
   - type: HolocardState
   - type: Hunger
     baseDecayRate: 0.025
@@ -309,9 +311,6 @@
   - type: UserBlockShootingInsideContainers
   - type: TacticalMapTracked
     trackDead: true
-  - type: TacticalMapUser
-    actionId: RMCActionOpenTacticalMapMarine
-    marines: true
   - type: EmoteCooldown
   - type: FiremanCarriable
   - type: CanFiremanCarry
@@ -326,7 +325,6 @@
       components:
       - CanBeSupplyDropped
   - type: NewPlayerLabel
-  - type: MarineMapTracked
   - type: RMCSetPose
   - type: Evasion
   - type: CanBeFirePatted

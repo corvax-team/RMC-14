@@ -14,7 +14,6 @@ chat-radio-marine-delta = Дельта
 chat-radio-marine-echo = Эхо
 chat-radio-marine-foxtrot = Фокстрот
 chat-radio-marine-sof = СпецОпер
-chat-radio-forecon = СОиС
 chat-radio-colony = Колония
 chat-radio-WY = Vitezstvi
 chat-radio-CMB = БКМ

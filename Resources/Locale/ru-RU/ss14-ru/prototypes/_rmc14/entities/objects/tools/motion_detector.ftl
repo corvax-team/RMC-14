@@ -1,4 +1,4 @@
 ent-RMCMotionDetector = детектор движения
     .desc = Устройство, которое засекает движение, но игнорирует колониальных морпехов.
-ent-RMCMotionDetectorCompact = M717 pocket motion detector
-    .desc = This prototype motion detector sacrifices versatility, having only the long-range mode, for size, being so small it can even fit in pockets.
+ent-RMCMotionDetectorCompact = карманный детектор движения M717
+    .desc = Этот прототип детектора движения жертвует универсальностью (имеет только режим дальнего обнаружения) ради размера — он настолько мал, что помещается даже в карман.

@@ -1,11 +1,11 @@
-﻿- type: job
+- type: job
   parent: RMCSurvivorForeconBase
   id: RMCSurvivorForeconCommander
   name: rmc-job-name-forecon-commander
   description: cm-job-description-commanding-officer
   playTimeTracker: RMCJobSurvivorCO
   ranks:
-    RMCRankMajor: []
+    RMCRankSecondLT: []
   accessGroups:
   - ColonistEngi
   startingGear: RMCGearForeconCommander
@@ -16,6 +16,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetForecon]
+    - type: TacticalMapLayerTracked
+      layers: [SquadFORECON]
     - type: Skills
       preset: RMCSkillPresetCommander
     - type: MarineOrders

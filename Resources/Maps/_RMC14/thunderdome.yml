@@ -23855,17 +23855,6 @@ entities:
         - 0
         - 0
         - 0
-- proto: ActionToggleLight
-  entities:
-  - uid: 4397
-    mapInit: true
-    paused: true
-    components:
-    - type: Transform
-      parent: 4396
-    - type: Action
-      originalIconColor: '#FFFFFFFF'
-      container: 4396
 - proto: BedrollFolded
   entities:
   - uid: 9298
@@ -61114,14 +61103,6 @@ entities:
     - type: Transform
       pos: -69.34844,-46.239693
       parent: 1
-    - type: HandheldLight
-      toggleActionEntity: 4397
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 4397
   - uid: 4446
     components:
     - type: Transform

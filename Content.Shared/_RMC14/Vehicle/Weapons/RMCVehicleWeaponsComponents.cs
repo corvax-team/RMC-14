@@ -18,10 +18,10 @@ public sealed partial class RMCVehicleWeaponsComponent : Component
     public EntityUid? SelectedWeapon;
 
     [NonSerialized]
-    public Dictionary<string, EntityUid> HardpointOperators = new();
+    public Dictionary<EntityUid, EntityUid> HardpointOperators = new();
 
     [NonSerialized]
-    public Dictionary<EntityUid, string> OperatorSelections = new();
+    public Dictionary<EntityUid, EntityUid> OperatorSelections = new();
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
@@ -35,7 +35,7 @@ public sealed partial class VehicleWeaponsOperatorComponent : Component
     public EntityUid? SelectedWeapon;
 
     [NonSerialized]
-    public Dictionary<string, EntityUid> HardpointActions = new();
+    public Dictionary<EntityUid, EntityUid> HardpointActions = new();
 
     [NonSerialized]
     public TimeSpan NextCooldownFeedbackAt = TimeSpan.Zero;
@@ -59,6 +59,18 @@ public sealed partial class VehicleWeaponsSeatComponent : Component
 
     [DataField]
     public List<string> AllowedHardpointTypes = new();
+
+    [DataField]
+    public float BaseViewPvsScale;
+
+    [DataField]
+    public float BaseViewCursorMaxOffset;
+
+    [DataField]
+    public float BaseViewCursorOffsetSpeed = 0.5f;
+
+    [DataField]
+    public float BaseViewCursorPvsIncrease;
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]

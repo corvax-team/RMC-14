@@ -116,3 +116,7 @@ ent-RMCMaskNeckerchiefWhite = { ent-RMCMaskNeckerchiefAlpha }
     .desc = { ent-RMCMaskNeckerchiefAlpha.desc }
 ent-RMCMaskNeckerchiefWhiteDown = neckerchief
     .desc = { ent-RMCBaseScarfDown.desc }
+ent-RMCMaskNeckerchiefRed = neckerchief
+    .desc = A simple cloth worn around the neck, adjustable between a loose fit or a more tightly secured style.
+ent-RMCMaskNeckerchiefRedDown = neckerchief
+    .desc = { ent-RMCBaseScarfDown.desc }

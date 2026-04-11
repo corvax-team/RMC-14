@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorLV624CorporateDomeGoonEngineer = special survivor lv624 goon engineer spawn point
+ent-RMCSpawnPointSurvivorLV624CorporateDomeGoonEngineer = спавнер особого выжившего инженера-громилы LV-624
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetLV624CorporateDomeGoonEngineer = lv624 colonist preset
+    .suffix = LV-624
+ent-RMCGearSurvivorPresetLV624CorporateDomeGoonEngineer = пресет инженера-громилы LV-624
     .desc = { ent-RMCSurvivorPresetSecurity.desc }

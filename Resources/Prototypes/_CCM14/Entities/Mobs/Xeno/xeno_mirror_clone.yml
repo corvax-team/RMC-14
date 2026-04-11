@@ -1,18 +1,16 @@
 - type: entity
   id: CCMXenoHunterMirrorClone
-  name: "Clone"
-  description: "A shimmering copy."
+  name: Clone
+  description: A shimmering copy.
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Lurker/lurker.rsi
     state: alive
-
+    noRot: true
   - type: TimedDespawn
     lifetime: 10
-
   - type: Physics
     bodyType: KinematicController
-
   - type: Fixtures
     fixtures:
       fix1:
@@ -22,7 +20,6 @@
         hard: false
         mask: []
         layer: []
-
   - type: MirrorClone
   - type: FollowEntity
   - type: FakeAttacker

@@ -1,5 +1,5 @@
 reagent-name-toxin = токсин
-reagent-desc-toxin = Как ни странно, токсичный химикат. Доступен в емагнутом химическом раздатчике.
+reagent-desc-toxin = Как ни странно, токсичный химикат. Доступен в взломанном (емагнутом) химическом раздатчике.
 reagent-name-carpotoxin = карпотоксин
 reagent-desc-carpotoxin = Высокотоксичный химикат, содержащийся в космических карпах. Вызывает болезненное чувство жжения.
 reagent-name-mold = плесень
@@ -54,5 +54,5 @@ reagent-name-lipolicide = липолицид
 reagent-desc-lipolicide = Мощный токсин, разрушающий жировые клетки и способствующий снижению массы тела в сжатые сроки. Смертельно опасен для тех, у кого в организме нет питательных веществ.
 reagent-name-mechanotoxin = механотоксин
 reagent-desc-mechanotoxin = Нейротоксин, используемый в качестве яда некоторыми видами пауков. При накоплении в организме затрудняет передвижение.
-reagent-name-toxintrash = trash
-reagent-desc-toxintrash = An awful-smelling fluid. Deadly to non-vox.
+reagent-name-toxintrash = мусор
+reagent-desc-toxintrash = Жидкость с ужасным запахом. Смертельна для всех, кроме воксов.

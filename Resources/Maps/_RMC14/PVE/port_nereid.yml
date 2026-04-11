@@ -143026,20 +143026,6 @@ entities:
     components:
     - type: Transform
       parent: 2475
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents: []
-    - type: Physics
-      canCollide: False
-    - type: ActionsContainer
-    - type: InsideEntityStorage
 - proto: RMCAshtray
   entities:
   - uid: 295
@@ -181576,10 +181562,6 @@ entities:
     components:
     - type: Transform
       parent: 18490
-    - type: Physics
-      canCollide: False
-    - type: ActionsContainer
-    - type: InsideEntityStorage
   - uid: 206
     components:
     - type: Transform
@@ -182502,11 +182484,6 @@ entities:
     - type: Transform
       pos: 48.548317,42.796577
       parent: 1
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents: []
   - uid: 3169
     components:
     - type: Transform
@@ -182527,11 +182504,6 @@ entities:
     - type: Transform
       pos: 33.032574,91.66887
       parent: 1
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents: []
   - uid: 18794
     components:
     - type: Transform
@@ -182594,11 +182566,6 @@ entities:
     - type: Transform
       pos: 48.545593,66.756615
       parent: 1
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents: []
   - uid: 2328
     components:
     - type: Transform
@@ -182629,11 +182596,6 @@ entities:
     - type: Transform
       pos: 3.2077608,93.49979
       parent: 1
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents: []
 - proto: RMCLighter
   entities:
   - uid: 743

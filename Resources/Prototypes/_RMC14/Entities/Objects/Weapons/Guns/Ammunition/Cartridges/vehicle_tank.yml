@@ -26,7 +26,6 @@
   - type: CartridgeAmmo
     proto: RMCProjectileAceAutocannonFlak
     muzzleFlash: MuzzleFlashEffectVehicleOver
-    muzzleFlashOffset: 1.2, 0
 
 - type: entity
   parent: CMBaseCartridgeRifle
@@ -41,7 +40,6 @@
   - type: CartridgeAmmo
     proto: RMCVehicleProjectileDragonFlame
     muzzleFlash: MuzzleFlashEffectVehicleOver
-    muzzleFlashOffset: 1.2, 0
 
 - type: entity
   parent: CMBaseCartridgeRifle
@@ -56,7 +54,6 @@
   - type: CartridgeAmmo
     proto: RMCVehicleProjectileTankFlamer
     muzzleFlash: MuzzleFlashEffectVehicleOver
-    muzzleFlashOffset: 1.2, 0
 
 - type: entity
   parent: CMCartridge10x20mmAP
@@ -76,17 +73,17 @@
   - type: ExplodeOnTrigger
   - type: DeleteOnTrigger
   - type: CMExplosionEffect
-    minShrapnel: 20
-    maxShrapnel: 50
+    minShrapnel: 20 # CCM14
+    maxShrapnel: 50 # CCM14
     shrapnelSpeed: 8
   - type: RMCScorchEffect
     radius: 3
     centerRadius: 1
   - type: Explosive
     explosionType: RMCLTBCannon
-    maxIntensity: 25
+    maxIntensity: 40
     intensitySlope: 18
-    totalIntensity: 500
+    totalIntensity: 650
     tileBreakScale: 4
     maxTileBreak: 12
 
@@ -98,6 +95,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    drawdepth: Effects
     layers:
     - state: bullet
       shader: unshaded
@@ -148,6 +146,7 @@
   - type: RMCFireProjectile
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
+    drawdepth: Effects
     layers:
     - state: pulse0
       shader: unshaded
@@ -215,6 +214,7 @@
   - type: RMCFireProjectile
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
+    drawdepth: Effects
     layers:
     - state: pulse0
       shader: unshaded
@@ -254,6 +254,7 @@
   - type: RMCFireProjectile
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
+    drawdepth: Effects
     layers:
     - state: pulse0
       shader: unshaded

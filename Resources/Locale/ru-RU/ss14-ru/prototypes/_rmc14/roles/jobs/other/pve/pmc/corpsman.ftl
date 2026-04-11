@@ -1,3 +1,3 @@
-ent-RMCSpawnPointPMCCorpsmanPVE = Точка спавна медика ЧВК Vitezstvi
+ent-RMCSpawnPointPMCCorpsmanPVE = точка появления медика ЧВК Vitezstvi
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }

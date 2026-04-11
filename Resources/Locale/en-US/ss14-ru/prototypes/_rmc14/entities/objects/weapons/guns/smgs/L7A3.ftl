@@ -1,0 +1,9 @@
+ent-RMCWeaponSMGL7A3 = L7A3 submachine gun
+    .desc = RCM adopted variant of the M63 SMG, re-engineered for better weight, handling and accuracy. Typically used in CQB engagements such as building-clearing, where the L24A1 proved a tad too unwieldy for such tasks.
+    .suffix = PVE, Filled, Royal
+ent-RMCMagazineSMGL7A3SquashHead = L7A3 squash-head magazine (9mm)
+    .desc = { ent-CMMagazineRifleBase.desc }
+ent-RMCCartridgeSMG9mmSquashHead = squash-head cartridge (9mm)
+    .desc = { ent-CMCartridgeSMGBase.desc }
+ent-RMCBulletSMG9mmSquashHead = squash-head bullet (9mm)
+    .desc = { ent-CMBulletBase.desc }

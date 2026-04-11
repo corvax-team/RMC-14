@@ -3,7 +3,8 @@ using Content.Server._CCM.Xeno.MirrorClones.Components;
 using Content.Shared._CCM.Actions.Events;
 using Content.Shared._CCM.Xenonids.MirrorClones;
 using Content.Shared._RMC14.Actions;
-using Robust.Shared.Maths;
+using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Robust.Shared.Random;
 
 namespace Content.Server._CCM.Xeno.MirrorClones.Systems;
@@ -12,7 +13,8 @@ public sealed class XenoMirrorClonesSystem : EntitySystem
 {
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly IRobustRandom _random = default!; 
-
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     
     private const float ActiveSeconds = 10f;
     private const int ExtraDamage = 5;
@@ -25,6 +27,9 @@ public sealed class XenoMirrorClonesSystem : EntitySystem
     private void OnMirrorClonesAction(Entity<MirrorClonesComponent> xeno, ref XenoMirrorClonesActionEvent args)
     {
         if (args.Handled)
+            return;
+
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
             return;
 
         if (!_rmcActions.TryUseAction(args))
@@ -80,4 +85,3 @@ foreach (var off in offsets)
 
     }
 }
-

@@ -1,11 +1,11 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: RMCCLFSpecialist
   name: rmc-clf-specialist
   description: rmc-ghost-role-information-clf-description
   playTimeTracker: RMCJobCLFSpecialist
   ranks:
-    RMCRankCLFRebel: [ ]
+    RMCRankCLFRebel3: [ ]
   startingGear: RMCGearCLFSpecialist
   icon: RMCJobIconCLFSpecialist
   joinNotifyCrew: false

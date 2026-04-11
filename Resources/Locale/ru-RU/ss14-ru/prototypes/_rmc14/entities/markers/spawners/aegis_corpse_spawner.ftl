@@ -1,2 +1,2 @@
-ent-RMCAegisCorpseSpawner = AEGIS corpse spawner - Scientist
+ent-RMCAegisCorpseSpawner = спавнер трупа WarTech — учёный
     .desc = { ent-MarkerBase.desc }

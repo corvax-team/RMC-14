@@ -23,7 +23,7 @@ public sealed partial class RMCVehicleSupplyEntry
     public List<EntProtoId> Hardpoints = new();
 }
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class RMCVehicleSupplyConsoleComponent : Component
 {
     [DataField(required: true)]
@@ -37,9 +37,6 @@ public sealed partial class RMCVehicleSupplyConsoleComponent : Component
 
     [DataField]
     public int SelectedVehicleCopyIndex;
-    
-    [DataField]
-    public bool OrderUsed = false;
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
@@ -48,7 +45,7 @@ public sealed partial class RMCVehicleSupplyTechComponent : Component
     [DataField, AutoNetworkedField]
     public List<string> Unlocked = new();
 }
-
+#if false // CCM14-start
 [RegisterComponent]
 public sealed partial class RMCVehicleHardpointVendorComponent : Component
 {
@@ -61,3 +58,4 @@ public sealed partial class RMCVehicleHardpointVendorComponent : Component
     [NonSerialized]
     public readonly Dictionary<string, int> RemainingGroupAmounts = new();
 }
+#endif // CCM14-end

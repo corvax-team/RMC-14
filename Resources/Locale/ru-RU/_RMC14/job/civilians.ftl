@@ -21,3 +21,5 @@ rmc-job-description-hybrisa-civilian = Живите свою колонистс�
 cm-job-description-liaison = Будьте прямым связующим звеном между кораблём и Vitezstvi путём отправки факсов. Не опозорьте компанию.
 cm-job-prefix-liaison = КС
 CMJobLiaison = Корпоративный связной
+rmc-job-name-corp-synthetic = Корпоративный синтетик
+rmc-job-description-corp-synthetic = Поддерживайте интересы Vitezstvi.
