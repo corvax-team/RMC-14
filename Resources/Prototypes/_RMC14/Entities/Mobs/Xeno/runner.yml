@@ -190,6 +190,7 @@
   - type: XenoEvolution
     strains:
     - RMCXenoRunnerAcider
+    - MCXenoRunnerMelter
   - type: VentCrawler
     ventCrawlIcon: runner
   - type: RMCActionOrder
