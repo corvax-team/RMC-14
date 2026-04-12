@@ -5,9 +5,13 @@
   - type: TimedDespawn
     lifetime: 5
   - type: DamageOnCollide
+    paralyze: 2
     damage:
       types:
-        Burn: 30
+        Heat: 18
     chainDamage:
       types:
-        Burn: 30
+        Heat: 15
+    whitelist:
+      components:
+      - Marine

@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Jittering;
@@ -19,6 +20,7 @@ public sealed class MCXenoEvasionSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private EntityQuery<RMCBulletComponent> _bulletQuery;
     private EntityQuery<ProjectileComponent> _projectileQuery;
@@ -61,6 +63,10 @@ public sealed class MCXenoEvasionSystem : EntitySystem
 
     private void OnAction(Entity<MCXenoEvasionComponent> entity, ref MCXenoEvasionActionEvent args)
     {
+        var xeno = entity.Owner;
+        if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno, args.PlasmaCost))
+            return;
+
         if (args.Handled)
             return;
 

@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stamina;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared.Damage;
@@ -31,6 +32,7 @@ public sealed class MCXenoRavageSystem : MCXenoAbilitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _rmcEmote = default!;
     [Dependency] private readonly SharedXenoHiveSystem _rmcHive = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
@@ -49,6 +51,10 @@ public override void Initialize()
 
 private void OnUse(Entity<MCXenoRavageComponent> entity, ref MCXenoRavageActionEvent args)
 {
+    var xeno = entity.Owner;
+    if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno, args.PlasmaCost))
+        return;
+
     if (args.Handled)
         return;
 

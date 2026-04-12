@@ -1,7 +1,9 @@
 ﻿using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared.Actions.Components;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -33,6 +35,7 @@ public sealed class MCXenoHeadbuttChargeSystem : MCXenoAbilitySystem
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -67,13 +70,9 @@ public sealed class MCXenoHeadbuttChargeSystem : MCXenoAbilitySystem
             active.DurationElapsed += frameTime;
 
             if (active.DurationElapsed >= duration.TotalSeconds)
-            {
                 RemCompDeferred<MCXenoHeadbuttChargeActiveComponent>(uid);
-            }
             else
-            {
                 Dirty(uid, active);
-            }
         }
     }
 
@@ -104,12 +103,11 @@ public sealed class MCXenoHeadbuttChargeSystem : MCXenoAbilitySystem
             return;
 
         if (entity.Comp.Damage is { } dmg && entity.Comp.DamageMultiplier != 0)
-        {
             _damageable.TryChangeDamage(args.OtherEntity, dmg * entity.Comp.DamageMultiplier, tool: entity);
-        }
 
         if (entity.Comp.Knockback != 0)
-            _sizeStun.KnockBack(args.OtherEntity, _transform.GetMapCoordinates(entity), entity.Comp.Knockback, entity.Comp.Knockback, entity.Comp.KnockbackSpeed);
+            _sizeStun.KnockBack(args.OtherEntity, _transform.GetMapCoordinates(entity),
+                entity.Comp.Knockback, entity.Comp.Knockback, entity.Comp.KnockbackSpeed);
 
         if (entity.Comp.Paralyze != TimeSpan.Zero)
             _stun.TryParalyze(args.OtherEntity, entity.Comp.Paralyze, true);
@@ -164,7 +162,10 @@ public sealed class MCXenoHeadbuttChargeSystem : MCXenoAbilitySystem
 
     private void OnUse(Entity<MCXenoHeadbuttChargeComponent> entity, ref MCXenoHeadbuttChargeActionEvent args)
     {
-        var ev = new MCXenoHeadbuttChargeDoAfterEvent(GetNetEntity(args.Action), GetNetCoordinates(args.Target));
+        var xeno = entity.Owner;
+        if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno, args.PlasmaCost))
+            return;
+        var ev = new MCXenoHeadbuttChargeDoAfterEvent(GetNetEntity(args.Action));
         var doAfter = new DoAfterArgs(EntityManager, entity, entity.Comp.ActivationDelay, ev, entity)
         {
             BreakOnMove = false,
@@ -179,21 +180,13 @@ public sealed class MCXenoHeadbuttChargeSystem : MCXenoAbilitySystem
         if (args.Cancelled)
             return;
 
-        if (!TryComp<Actions.Components.WorldTargetActionComponent>(actionUid, out var worldTargetActionComponent) || worldTargetActionComponent.Event is not MCXenoHeadbuttChargeActionEvent ev)
+        if (!TryComp<InstantActionComponent>(actionUid, out var comp) ||
+            comp.Event is not MCXenoHeadbuttChargeActionEvent ev)
             return;
 
         _actions.StartUseDelay(actionUid);
 
         _emote.TryEmoteWithChat(entity, ev.ActivationEmote, forceEmote: true);
-
-        var targetCoordinates = GetCoordinates(args.TargetCoordinates);
-        var origin = _transform.GetMapCoordinates(entity);
-        var targetMapCoords = _transform.ToMapCoordinates(targetCoordinates);
-        var direction = (targetMapCoords.Position - origin.Position).Normalized();
-
-        var throwStrength = (float)ev.Duration.TotalSeconds * 10f;
-
-        _throwing.TryThrow(entity, direction * throwStrength, animated: false);
 
         var component = new MCXenoHeadbuttChargeActiveComponent
         {

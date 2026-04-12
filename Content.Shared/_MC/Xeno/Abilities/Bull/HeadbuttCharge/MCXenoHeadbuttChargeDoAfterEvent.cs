@@ -8,16 +8,14 @@ namespace Content.Shared._MC.Xeno.Abilities.Bull.HeadbuttCharge;
 public sealed partial class MCXenoHeadbuttChargeDoAfterEvent : DoAfterEvent
 {
     public NetEntity Action { get; }
-    public NetCoordinates TargetCoordinates { get; }
 
-    public MCXenoHeadbuttChargeDoAfterEvent(NetEntity action, NetCoordinates targetCoordinates)
+    public MCXenoHeadbuttChargeDoAfterEvent(NetEntity action)
     {
         Action = action;
-        TargetCoordinates = targetCoordinates;
     }
 
     public override DoAfterEvent Clone()
     {
-        return this;
+        return new MCXenoHeadbuttChargeDoAfterEvent(Action);
     }
 }

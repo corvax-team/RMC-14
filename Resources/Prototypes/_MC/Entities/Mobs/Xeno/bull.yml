@@ -36,9 +36,6 @@
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoPunch
-    - ActionXenoLunge
-    - ActionXenoFling
     - ActionXenoDevolve
     # Main
     - MCActionXenoGoreCharge
@@ -70,12 +67,6 @@
     damage:
       groups:
         Brute: 25
-  - type: XenoPunch
-    damage:
-      types:
-        Blunt: 25
-  - type: XenoFling
-  - type: XenoLunge
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.125
     baseSprintSpeed: 4.545

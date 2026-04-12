@@ -12,6 +12,7 @@
     useDelay: 6
   - type: InstantAction
     event: !type:MCXenoRavageActionEvent
+      plasmaCost: 200
   - type: XenoActionPlasma
     cost: 200
   - type: ActionBlockIfResting
@@ -33,6 +34,7 @@
     checkCanAccess: false
   - type: WorldTargetAction
     event: !type:MCXenoPounceActionEvent
+      plasmaCost: 250
   - type: XenoActionPlasma
     cost: 250
   - type: ActionBlockIfResting

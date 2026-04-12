@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
@@ -28,6 +29,7 @@ public sealed class MCXenoPounceSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = null!;
     [Dependency] private readonly SharedPhysicsSystem _physics = null!;
     [Dependency] private readonly SharedTransformSystem _transform = null!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedStunSystem _stun = null!;
     [Dependency] private readonly DamageableSystem _damageable = null!;
     [Dependency] private readonly TagSystem _tag = null!;
@@ -65,6 +67,10 @@ public sealed class MCXenoPounceSystem : EntitySystem
 
 private void OnAction(Entity<MCXenoPounceComponent> entity, ref MCXenoPounceActionEvent args)
 {
+    var xeno = entity.Owner;
+    if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno, args.PlasmaCost))
+         return;
+
     if (args.Handled)
         return;
 
