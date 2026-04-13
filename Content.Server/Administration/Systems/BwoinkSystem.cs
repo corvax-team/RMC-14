@@ -856,6 +856,8 @@ private readonly HashSet<NetUserId> _ahelpCounted = new();
                 AhelpFirstResponsesTotal.WithLabels(adminName).Inc();
 
                 _ahelpCounted.Add(userId);
+
+                _ahelpStartTime.Remove(userId);
             }
         }
        // CCM-14 end (metrics)
