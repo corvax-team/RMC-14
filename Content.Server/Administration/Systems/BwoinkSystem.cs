@@ -1,3 +1,4 @@
+using Prometheus; // # CCM14 (add metrics)
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -85,6 +86,30 @@ namespace Content.Server.Administration.Systems
         // RMC14
         public Dictionary<NetUserId, DiscordRelayInteraction> RMCRelayMessages => _relayMessages;
 
+// # CCM14 start (add metrics)
+
+private static readonly Histogram AhelpFirstResponseTime = Metrics
+    .CreateHistogram("ahelp_first_response_seconds",
+        "Time until first admin response",
+        new HistogramConfiguration
+        {
+            Buckets = Histogram.LinearBuckets(0, 5, 20)
+        });
+
+private static readonly Counter AhelpFirstResponsesTotal = Metrics
+    .CreateCounter("ahelp_first_responses_total",
+        "Total number of first responses by admins",
+        new CounterConfiguration
+        {
+            LabelNames = new[] { "admin" }
+        });
+
+private readonly Dictionary<NetUserId, DateTime> _ahelpStartTime = new();
+
+private readonly HashSet<NetUserId> _ahelpCounted = new();
+
+// # CCM14 end (add metrics)
+
         public override void Initialize()
         {
             base.Initialize();
@@ -111,7 +136,14 @@ namespace Content.Server.Administration.Systems
 
             SubscribeLocalEvent<GameRunLevelChangedEvent>(OnGameRunLevelChanged);
             SubscribeNetworkEvent<BwoinkClientTypingUpdated>(OnClientTypingUpdated);
-            SubscribeLocalEvent<RoundRestartCleanupEvent>(_ => _activeConversations.Clear());
+            // # CCM14 start (add metrics)
+            SubscribeLocalEvent<RoundRestartCleanupEvent>(_ =>
+            {
+                _activeConversations.Clear();
+                _ahelpStartTime.Clear();
+                _ahelpCounted.Clear();
+            });
+            // # CCM14 end (add metrics)
 
         	_rateLimit.Register(
                 RateLimitKey,
@@ -641,8 +673,29 @@ namespace Content.Server.Administration.Systems
             // TODO: Sanitize text?
             // Confirm that this person is actually allowed to send a message here.
             var personalChannel = senderSession.UserId == message.UserId;
+            // # CCM14 start (add metrics)
+            if (personalChannel && !_ahelpStartTime.ContainsKey(message.UserId))
+            {
+             _ahelpStartTime[message.UserId] = DateTime.UtcNow;
+            }
+            // # CCM14 end (add metrics)
             var senderAdmin = _adminManager.GetAdminData(senderSession);
             var senderAHelpAdmin = senderAdmin?.HasFlag(AdminFlags.Adminhelp) ?? false;
+            // # CCM14 start (add metrics)
+            if (senderAHelpAdmin &&
+                !personalChannel &&
+                !_ahelpCounted.Contains(message.UserId) &&
+                _ahelpStartTime.TryGetValue(message.UserId, out var startTime))
+            {
+                var seconds = (DateTime.UtcNow - startTime).TotalSeconds;
+
+                AhelpFirstResponseTime.Observe(seconds);
+                AhelpFirstResponsesTotal.WithLabels(senderSession.Name).Inc();
+
+                _ahelpCounted.Add(message.UserId);
+                _ahelpStartTime.Remove(message.UserId);
+            }
+            // # CCM14 start (add metrics)
             var authorized = personalChannel && !message.AdminOnly || senderAHelpAdmin;
             if (!authorized)
             {
