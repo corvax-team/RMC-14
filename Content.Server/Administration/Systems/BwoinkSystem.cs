@@ -93,7 +93,7 @@ private static readonly Histogram AhelpFirstResponseTime = Metrics
         "Time until first admin response",
         new HistogramConfiguration
         {
-            Buckets = Histogram.ExponentialBuckets(1, 1.5, 18)
+            Buckets = Histogram.LinearBuckets(0, 5, 20)
         });
 
 private static readonly Counter AhelpFirstResponsesTotal = Metrics
@@ -673,13 +673,29 @@ private readonly HashSet<NetUserId> _ahelpCounted = new();
             // TODO: Sanitize text?
             // Confirm that this person is actually allowed to send a message here.
             var personalChannel = senderSession.UserId == message.UserId;
+            // # CCM14 start (add metrics)
+            if (personalChannel && !_ahelpStartTime.ContainsKey(message.UserId))
+            {
+             _ahelpStartTime[message.UserId] = DateTime.UtcNow;
+            }
+            // # CCM14 end (add metrics)
             var senderAdmin = _adminManager.GetAdminData(senderSession);
             var senderAHelpAdmin = senderAdmin?.HasFlag(AdminFlags.Adminhelp) ?? false;
-            HandleAhelpMetrics(
-            message.UserId,
-            personalChannel,
-            senderAHelpAdmin && !personalChannel,
-            senderSession.Name);
+            // # CCM14 start (add metrics)
+            if (senderAHelpAdmin &&
+                !personalChannel &&
+                !_ahelpCounted.Contains(message.UserId) &&
+                _ahelpStartTime.TryGetValue(message.UserId, out var startTime))
+            {
+                var seconds = (DateTime.UtcNow - startTime).TotalSeconds;
+
+                AhelpFirstResponseTime.Observe(seconds);
+                AhelpFirstResponsesTotal.WithLabels(senderSession.Name).Inc();
+
+                _ahelpCounted.Add(message.UserId);
+                _ahelpStartTime.Remove(message.UserId);
+            }
+            // # CCM14 start (add metrics)
             var authorized = personalChannel && !message.AdminOnly || senderAHelpAdmin;
             if (!authorized)
             {
@@ -829,32 +845,6 @@ private readonly HashSet<NetUserId> _ahelpCounted = new();
                 .Where(p => _adminManager.GetAdminData(p)?.HasFlag(AdminFlags.Adminhelp) ?? false)
                 .Select(p => p.Channel)
                 .ToList();
-        }
-
-
-        private void HandleAhelpMetrics(
-            NetUserId userId,
-            bool isPlayerMessage,
-            bool isAdminResponse,
-            string adminName)
-        {
-            if (isPlayerMessage && !_ahelpStartTime.ContainsKey(userId))
-            {
-                _ahelpStartTime[userId] = DateTime.UtcNow;
-                return;
-            }
-
-            if (isAdminResponse &&
-                !_ahelpCounted.Contains(userId) &&
-                _ahelpStartTime.TryGetValue(userId, out var startTime))
-            {
-                var seconds = (DateTime.UtcNow - startTime).TotalSeconds;
-
-                AhelpFirstResponseTime.Observe(seconds);
-                AhelpFirstResponsesTotal.WithLabels(adminName).Inc();
-
-                _ahelpCounted.Add(userId);
-            }
         }
 
         private DiscordRelayedData GenerateAHelpMessage(AHelpMessageParams parameters)
