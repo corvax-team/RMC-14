@@ -675,11 +675,13 @@ private readonly HashSet<NetUserId> _ahelpCounted = new();
             var personalChannel = senderSession.UserId == message.UserId;
             var senderAdmin = _adminManager.GetAdminData(senderSession);
             var senderAHelpAdmin = senderAdmin?.HasFlag(AdminFlags.Adminhelp) ?? false;
+            // CCM-14 start (metrics)
             HandleAhelpMetrics(
             message.UserId,
             personalChannel,
             senderAHelpAdmin && !personalChannel,
             senderSession.Name);
+            // CCM-14 end (metrics)
             var authorized = personalChannel && !message.AdminOnly || senderAHelpAdmin;
             if (!authorized)
             {
@@ -831,7 +833,7 @@ private readonly HashSet<NetUserId> _ahelpCounted = new();
                 .ToList();
         }
 
-
+       // CCM-14 start (metrics)
         private void HandleAhelpMetrics(
             NetUserId userId,
             bool isPlayerMessage,
@@ -856,7 +858,7 @@ private readonly HashSet<NetUserId> _ahelpCounted = new();
                 _ahelpCounted.Add(userId);
             }
         }
-
+       // CCM-14 end (metrics)
         private DiscordRelayedData GenerateAHelpMessage(AHelpMessageParams parameters)
         {
             var stringbuilder = new StringBuilder();
