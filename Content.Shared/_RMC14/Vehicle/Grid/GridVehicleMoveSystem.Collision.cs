@@ -453,8 +453,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (smashable.SmashSound != null)
             _audio.PlayPvs(smashable.SmashSound, Transform(target).Coordinates);
 
-        if (smashable.DeleteOnHit && !TerminatingOrDeleted(target))
-            SmashTarget(target, vehicle, smashable);
+        SmashTarget(target, vehicle, smashable);
 
         return true;
     }
@@ -470,6 +469,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         };
 
         _damageable.TryChangeDamage(target, damage, true, origin: vehicle, tool: vehicle);
+
+        if (!smashable.DeleteOnHit)
+            return;
 
         if (TerminatingOrDeleted(target))
             return;
