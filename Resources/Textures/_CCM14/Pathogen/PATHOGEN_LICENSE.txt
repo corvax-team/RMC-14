@@ -1,0 +1,92 @@
+© Denlero, 2026. Все права защищены.
+© Denlero, 2026. All rights reserved.
+
+Название проекта: Режим "Патоген" / "Pathogen Mode"
+
+==================== RU ====================
+
+Данный проект "Патоген", включая (но не ограничиваясь):
+- концепцию режима
+- игровые механики
+- структуру геймплея
+- логику заражения
+- поведение сущностей
+- спрайты и графические материалы
+- звуковые эффекты и аудио
+- программный код
+- текстовые материалы
+
+является интеллектуальной собственностью автора Denlero.
+
+ЗАПРЕЩАЕТСЯ без предварительного письменного разрешения автора:
+- копирование проекта полностью или частично
+- использование спрайтов, звуков или кода
+- изменение и переработка материалов
+- распространение и публикация
+- использование в других проектах или серверах
+- создание аналогичных режимов на основе данного проекта
+- коммерческое использование
+
+РАЗРЕШЕНИЕ:
+Любое использование допускается только с личного разрешения автора.
+
+ОТЗЫВ РАЗРЕШЕНИЯ:
+Автор оставляет за собой право в любой момент отозвать ранее выданное разрешение.
+После отзыва пользователь обязан немедленно прекратить использование
+и удалить все материалы.
+
+ОСОБОЕ УСЛОВИЕ:
+Даже при изменении названия, визуала или отдельных механик,
+если сохраняется основная структура или идея режима "Патоген",
+это считается производной работой и запрещено без разрешения.
+
+ПРИМЕЧАНИЕ:
+Идеи как абстрактные понятия не защищаются напрямую законом,
+однако их конкретная реализация, структура и оформление защищены.
+
+ОТВЕТСТВЕННОСТЬ:
+Нарушение данных условий считается нарушением авторских прав.
+
+==================== EN ====================
+
+The "Pathogen" project, including (but not limited to):
+- game mode concept
+- gameplay mechanics
+- gameplay structure
+- infection systems
+- entity behavior
+- sprites and graphical assets
+- sound effects and audio
+- source code
+- text materials
+
+is the intellectual property of the author Denlero.
+
+WITHOUT PRIOR WRITTEN PERMISSION FROM THE AUTHOR, THE FOLLOWING IS PROHIBITED:
+- copying the project in whole or in part
+- using sprites, sounds, or code
+- modifying or adapting materials
+- distribution or publication
+- use in other projects or servers
+- creating similar modes based on this project
+- commercial use
+
+PERMISSION:
+Any use is allowed only with explicit permission from the author.
+
+REVOCATION:
+The author reserves the right to revoke permission at any time.
+Upon revocation, the user must immediately cease usage
+and delete all related materials.
+
+SPECIAL CONDITION:
+Even if the name, visuals, or mechanics are changed,
+if the core structure or idea of the "Pathogen" mode remains,
+it is considered a derivative work and is prohibited without permission.
+
+NOTE:
+Abstract ideas are not directly protected by law,
+but their specific implementation, structure, and presentation are protected.
+
+LIABILITY:
+Violation of these terms is considered copyright infringement.
