@@ -1,0 +1,61 @@
+© Denlero, 2026. Все права защищены.
+© Denlero, 2026. All rights reserved.
+
+==================== RU ====================
+
+Данный проект, включая (но не ограничиваясь):
+- спрайты
+- графику
+- код
+- текстовые материалы
+- игровые концепции и механики
+
+является интеллектуальной собственностью автора.
+
+ЗАПРЕЩАЕТСЯ без предварительного письменного разрешения автора:
+- копирование
+- распространение
+- публикация
+- изменение
+- использование в других проектах
+- коммерческое использование
+
+РАЗРЕШЕНИЕ:
+Использование материалов возможно только при личном разрешении автора.
+
+ОТЗЫВ РАЗРЕШЕНИЯ:
+Автор оставляет за собой право в любой момент отозвать ранее выданное разрешение.
+После отзыва разрешения пользователь обязан немедленно прекратить использование
+и удалить все материалы.
+
+ОТВЕТСТВЕННОСТЬ:
+Любое нарушение условий считается нарушением авторских прав.
+
+==================== EN ====================
+
+This project, including (but not limited to):
+- sprites
+- graphics
+- code
+- text materials
+- game concepts and mechanics
+
+is the intellectual property of the author.
+
+WITHOUT PRIOR WRITTEN PERMISSION FROM THE AUTHOR, THE FOLLOWING IS PROHIBITED:
+- copying
+- distribution
+- publication
+- modification
+- use in other projects
+- commercial use
+
+PERMISSION:
+Use of the materials is allowed only with explicit permission from the author.
+
+REVOCATION:
+The author reserves the right to revoke permission at any time.
+Upon revocation, the user must immediately cease usage and delete all materials.
+
+LIABILITY:
+Any violation of these terms is considered a copyright infringement.
