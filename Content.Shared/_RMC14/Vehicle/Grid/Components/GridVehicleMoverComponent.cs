@@ -113,6 +113,9 @@ public sealed partial class GridVehicleMoverComponent : Component
     [DataField, AutoNetworkedField]
     public RMCSizes? XenoPushMinimumSize;
 
+    [DataField, AutoNetworkedField]
+    public bool CanPushVehicles = false;
+
     [NonSerialized]
     public EntityUid? SyncedGrid;
 
