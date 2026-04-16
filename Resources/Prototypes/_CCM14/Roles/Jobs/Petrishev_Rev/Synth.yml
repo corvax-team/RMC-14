@@ -1,0 +1,130 @@
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CCMJobIconREVSynth
+  icon:
+    sprite: _CCM14/Interface/cm_job_icons.rsi
+    state: petrishev_synth
+
+- type: playTimeTracker
+  id: CCMJobREVSynth
+
+- type: job
+  parent: CMJobBase
+  id: CCMREVSynth
+  name: rmc-job-name-rev-synth
+  description: rmc-job-description-rev-synth
+  playTimeTracker: CCMJobREVSynth
+  startingGear: CCMGearREVSynth
+  icon: "CCMJobIconREVSynth"
+  supervisors: cm-job-supervisors-sl
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  - Synth
+  spawnMenuRoleName: Petrishevtsi Synth
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Petrishev
+    - type: Skills
+      skills:
+        RMCSkillCqc: 5
+        RMCSkillEndurance: 1
+        RMCSkillEngineer: 4
+        RMCSkillConstruction: 3
+        RMCSkillFirearms: 2
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 4
+        RMCSkillSurgery: 3
+        RMCSkillResearch: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillPilot: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 3
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 2
+        RMCSkillJtac: 3
+        RMCSkillIntel: 2
+        RMCSkillDomestics: 2
+        RMCSkillNavigations: 1
+    - type: RMCTrackable
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+      canUseGuns: true
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rev-synth
+  hidden: true
+
+- type: entity
+  id: CCMRandomHumanoidREVSynthHostile
+  name: rev synth ghost role
+  suffix: Spawner, Player, Hostile
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: CCMREVSynth
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: CCMREVSynth
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-rev-hostile-synth
+    description: rmc-ghost-role-information-rev-hostile-description
+    rules: rmc-ghost-role-information-rev-rules
+    reregister: false
+    job: CCMREVSynth
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadREV
+
+- type: startingGear
+  id: CCMGearREVSynth
+  equipment:
+    head: CCMREVPilotka
+    ears: CCMHeadsetREV
+    eyes: RMCSunglasses
+    jumpsuit: CCMJumpsuitRevolutionary
+    outerClothing: CCMArmorREV
+    shoes: CMBootsBlack
+    suitstorage: RMCScabbardMacheteFilled
+    id: RMCIDSPP
+    belt: RMCBeltHolsterPistolSPP
+    back: RMCSynthBreachingHammer
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    pocket2: RMCPouchConstructionFillLowGrade
+  storage:
+    belt:
+    - RMCWeaponPistolM13
+    - RMCMagazinePistolM13
+    - RMCMagazinePistolM13
+    - RMCMagazinePistolM13
+    - RMCMagazinePistolM13Drum
+    - RMCMagazinePistolM13Drum
+    outerClothing:
+    - RMCSynthResetKey

@@ -1,0 +1,96 @@
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CCMJobIconREVDemo
+  icon:
+    sprite: _CCM14/Interface/cm_job_icons.rsi
+    state: petrishev_demo
+
+- type: playTimeTracker
+  id: CCMJobREVDemo
+
+- type: job
+  parent: CMJobBase
+  id: CCMREVDemo
+  name: rmc-job-name-rev-demo
+  description: rmc-job-description-rev-demo
+  playTimeTracker: CCMJobREVDemo
+  startingGear: CCMGearREVDemo
+  icon: "CCMJobIconREVDemo"
+  supervisors: cm-job-supervisors-sl
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  spawnMenuRoleName: Petrishevtsi Demolitionist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Petrishev
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 3
+        RMCSkillEndurance: 1
+        RMCSkillEngineer: 3
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 2
+        RMCSkillJtac: 2
+        RMCSkillVehicles: 2
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rev-demo
+  hidden: true
+
+- type: entity
+  id: CCMRandomHumanoidREVDemoHostile
+  name: rev engineer ghost role
+  suffix: Spawner, Player, Hostile
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: CCMREVDemo
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: CCMREVDemo
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-rev-hostile-demo
+    description: rmc-ghost-role-information-rev-hostile-description
+    rules: rmc-ghost-role-information-rev-rules
+    reregister: false
+    job: CCMREVDemo
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadREV
+
+- type: startingGear
+  id: CCMGearREVDemo
+  equipment:
+    head: ArmorHelmetREV
+    ears: CCMHeadsetREV
+    eyes: RMCWeldingGoggles
+    jumpsuit: CCMJumpsuitRevolutionary
+    outerClothing: CCMArmorREVHeavyDemo
+    gloves: RMCHandsVeteranInsulated
+    shoes: CMBootsBlack
+    suitstorage: RMCWeaponRifleType71Flamer
+    id: RMCIDSPP
+    belt: RMCType71BeltFilled
+    back: CCMSatchelREVSoldatFilled
+    pocket1: RMCPouchConstructionFillFull
+    pocket2: RMCPouchExplosiveFilledPlasticExplosives
+  inhand:
+    - RMCToolWebbingSmallFilled
+  storage:
+    back:
+    - RMCWeaponRevolverZHNK72
+    - RMCMagazineSMGNailgun
+    - WeaponNailgun

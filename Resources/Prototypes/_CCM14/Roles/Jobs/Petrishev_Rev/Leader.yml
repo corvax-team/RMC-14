@@ -1,0 +1,103 @@
+- type: job
+  parent: CMJobBase
+  id: CCMREVLeader
+  name: rmc-job-name-rev-leader
+  description: rmc-job-description-rev-leader
+  playTimeTracker: CCMJobREVLeader
+  startingGear: CCMGearREVLeader
+  icon: "CCMJobIconREVLeader"
+  supervisors: cm-job-supervisors-nobody
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  - HospitalCorpsman
+  spawnMenuRoleName: Petrishev squad leader
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RMCTrackable
+    - type: NpcFactionMember
+      factions:
+      - Petrishev
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 1
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 3
+        RMCSkillFireman: 3
+        RMCSkillIntel: 1
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
+        RMCSkillPolice: 1
+    - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: SquadLeader
+      icon:
+        sprite: _CCM14/Interface/cm_job_icons.rsi
+        state: petrishev_leader
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rev-leader
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidREVLeaderHostile
+  name: rev ghost role leader
+  suffix: Spawner, Player, Hostile
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: CCMREVLeaderHostile
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: CCMREVLeaderHostile
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-rev-hostile-leader
+    description: rmc-ghost-role-information-rev-hostile-description
+    rules: rmc-ghost-role-information-rev-rules
+    reregister: false
+    job: CCMREVLeader
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 18000 # 5 Hours
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadREV
+
+- type: startingGear
+  id: CCMGearREVLeader
+  equipment:
+    head: CCMHeadCapREVPeaked
+    ears: CCMHeadsetREV
+    ears2: RMCM5CameraGear
+    jumpsuit: CCMJumpsuitRevolutionary
+    outerClothing: CCMArmorREVLeaderRevolver
+    gloves: CMHandsBlackMarine
+    shoes: CMBootsBlack
+    suitstorage: CCMWeaponLMGTovarish
+    id: RMCIDSPP
+    belt: RMCBeltHolsterRevolverZHNK72Fill
+    back: CCMSatchelREVLeaderFilled
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: CCMBookCommunism
+
+- type: playTimeTracker
+  id: CCMJobREVLeader
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CCMJobIconREVLeader
+  icon:
+    sprite: _CCM14/Interface/cm_job_icons.rsi
+    state: petrishev_leader
