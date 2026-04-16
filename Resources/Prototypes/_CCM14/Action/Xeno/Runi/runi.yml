@@ -1,0 +1,17 @@
+- type: entity
+  id: CCMXenoZigZagPounce
+  parent: ActionXenoBase
+  name: ZigZag Pounce
+  description: Leap at your target in a zigzag pattern, making you harder to hit.
+  components:
+  - type: Action
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: pounce
+    useDelay: 15
+  - type: TargetAction
+    range: 100
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:CCMZigZagPounceActionEvent
+  - type: CCMZigZagPounce

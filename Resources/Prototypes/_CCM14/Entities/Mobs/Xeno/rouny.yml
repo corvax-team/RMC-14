@@ -20,6 +20,7 @@
     - ActionXenoBoneChips
     - ActionXenoZoom
     - ActionXenoDevolve
+    - CCMXenoZigZagPounce
     tier: 3
     hudOffset: 0,0.63
     unlockAt: 900 # 15 minutes
