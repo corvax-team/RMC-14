@@ -362,9 +362,9 @@ public sealed class CMGunSystem : EntitySystem
             if (!TryComp(args.FiredProjectiles[t], out RMCProjectileAccuracyComponent? accuracyComponent))
                 continue;
 
-            accuracyComponent.Accuracy *= MathF.Max(0.05f, weapon.Comp.ModifiedAccuracyMultiplier.Float());
+            accuracyComponent.Accuracy *= MathF.Max(0.05f, weapon.Comp.ModifiedAccuracyMultiplier.Float()); // CCM14
             accuracyComponent.Accuracy += orderAccuracy;
-            accuracyComponent.Accuracy += screechAccuracy;
+            accuracyComponent.Accuracy += screechAccuracy; // CCM14
 
             var count = 0;
             while (accuracyComponent.Thresholds.Count > count)
@@ -377,8 +377,8 @@ public sealed class CMGunSystem : EntitySystem
             if (orderAccuracyPerTile != 0)
                 accuracyComponent.Thresholds.Add(new AccuracyFalloffThreshold(0f, -orderAccuracyPerTile, false));
             
-            if (screechAccuracyPerTile != 0)
-                accuracyComponent.Thresholds.Add(new AccuracyFalloffThreshold(0f, -screechAccuracyPerTile, false));
+            if (screechAccuracyPerTile != 0) // CCM14
+                accuracyComponent.Thresholds.Add(new AccuracyFalloffThreshold(0f, -screechAccuracyPerTile, false)); // CCM14
 
             accuracyComponent.GunSeed = (long) t << 32 | netId;
             Dirty<RMCProjectileAccuracyComponent>((args.FiredProjectiles[t], accuracyComponent));
