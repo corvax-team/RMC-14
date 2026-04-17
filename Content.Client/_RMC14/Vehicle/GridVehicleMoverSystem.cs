@@ -27,6 +27,8 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         _overlay.DebugEnabled = _cfg.GetCVar(RMCCVars.RMCVehicleDebugOverlay);
         _overlay.CollisionsEnabled = _cfg.GetCVar(RMCCVars.RMCVehicleCollisionOverlay);
         _overlay.MovementEnabled = _cfg.GetCVar(RMCCVars.RMCVehicleMovementOverlay);
+        Content.Shared.Vehicle.GridVehicleMoverSystem.CollisionDebugEnabled = _overlay.CollisionsEnabled;
+        Content.Shared.Vehicle.GridVehicleMoverSystem.MovementDebugEnabled = _overlay.MovementEnabled;
         _hardpointOverlay = new VehicleHardpointDebugOverlay(EntityManager)
         {
             Enabled = _cfg.GetCVar(RMCCVars.RMCVehicleHardpointOverlay)
@@ -48,12 +50,16 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         {
             if (_overlay != null)
                 _overlay.CollisionsEnabled = val;
+
+            Content.Shared.Vehicle.GridVehicleMoverSystem.CollisionDebugEnabled = val;
         }, true);
 
         _cfg.OnValueChanged(RMCCVars.RMCVehicleMovementOverlay, val =>
         {
             if (_overlay != null)
                 _overlay.MovementEnabled = val;
+
+            Content.Shared.Vehicle.GridVehicleMoverSystem.MovementDebugEnabled = val;
         }, true);
 
         SubscribeLocalEvent<GridVehicleMoverComponent, UpdateIsPredictedEvent>(OnUpdateIsPredicted);
