@@ -133,3 +133,8 @@
   id: SentryControl
   name: port-sentry-control
   description: port-sentry-control
+
+- type: sinkPort
+  id: FpvDroneControl
+  name: port-fpv-drone-control
+  description: port-fpv-drone-control

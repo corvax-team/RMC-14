@@ -169,3 +169,9 @@
   name: port-sentry-control
   description: port-sentry-control
   defaultLinks: [ SentryControl ]
+
+- type: sourcePort
+  id: FpvDroneControl
+  name: port-fpv-drone-control
+  description: port-fpv-drone-control
+  defaultLinks: [ FpvDroneControl ]

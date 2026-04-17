@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Audio;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -10,24 +10,9 @@ public static class FpvDroneConstants
 }
 
 [RegisterComponent]
-public sealed partial class FpvDroneControlComponent : Component
-{
-    [DataField] public SoundSpecifier ConnectedSound =
-        new SoundPathSpecifier("/Audio/Machines/anomaly_sync_connect.ogg");
-
-    [DataField] public SoundSpecifier DisconnectedSound =
-        new SoundPathSpecifier("/Audio/Machines/anomaly_sync_connect.ogg");
-
-    [DataField] public EntityUid? Observer;
-    [DataField] public string ObserverPrototypeId = "FpvDroneObserver";
-    [DataField] public EntityUid? Pilot;
-    [DataField] public bool Used;
-}
-
-[RegisterComponent]
 [NetworkedComponent]
 [AutoGenerateComponentState]
-public sealed partial class FpvDroneObserverComponent : Component
+public sealed partial class FpvDroneComponent : Component
 {
     [DataField] public EntityUid Control;
     [DataField] public EntityUid? EjectAction;

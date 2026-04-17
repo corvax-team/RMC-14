@@ -1,0 +1,53 @@
+- type: entity
+  parent: BaseItem
+  id: CMFpvDroneLaptop
+  name: FPV drone laptop
+  description: A rugged military laptop for controlling FPV drones. Place on a table to operate.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/sentrycomp.rsi
+    layers:
+    - state: sentrycomp_cl
+      map: ["enum.FpvDroneLaptopVisualLayers.Base"]
+  - type: Item
+    size: Huge
+    sprite: _RMC14/Objects/Devices/sentrycomp.rsi
+  - type: Clickable
+  - type: InteractionOutline
+  - type: CollisionWake
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.2,0.25,0.2"
+        density: 20
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.FpvDroneLaptopVisuals.State:
+        enum.FpvDroneLaptopVisualLayers.Base:
+          Closed: { state: sentrycomp_cl }
+          Open: { state: sentrycomp_op }
+          Active: { state: sentrycomp_on }
+  - type: UserInterface
+    interfaces:
+      enum.FpvDroneLaptopUiKey.Key:
+        type: FpvDroneLaptopBui
+  - type: ActivatableUI
+    key: enum.FpvDroneLaptopUiKey.Key
+    closeOnHandDeselect: false
+    inHandsOnly: false
+  - type: DeviceNetwork
+  - type: DeviceLinkSource
+    ports: [ FpvDroneControl ]
+  - type: FpvDroneLaptop
+    maxLinkedDrones: 6
+  - type: UseDelay
+    delay: 0.5

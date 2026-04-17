@@ -1,9 +1,10 @@
 - type: entity
   parent: BaseItem
-  id: FpvDroneFolded
+  id: FpvDroneFoldedBase
   name: fpv drone
   description: A compact foldable FPV drone.
-  suffix: folded
+  suffix: folded, base
+  abstract: true
   components:
   - type: Sprite
     sprite: _CCM14/Mobs/Silicon/fpv.rsi
@@ -22,14 +23,15 @@
         mask:
         - ItemMask
   - type: FpvDroneFoldable
-    unfoldEntity: FpvDroneObserver
     unfoldDelay: 1.5
 
 - type: entity
   parent: [ BaseMob, FlyingMobBase ]
-  id: FpvDroneObserver
+  id: FpvDroneBase
   name: fpv drone
   description: A deployed FPV drone.
+  suffix: base
+  abstract: true
   noSpawn: true
   components:
   - type: Sprite
@@ -44,16 +46,10 @@
     baseWalkSpeed: 4
   - type: Visibility
     layer: 1
-  - type: FpvDroneObserver
-  - type: FpvDroneExplosive
-    totalIntensity: 250
-    radius: 6
-    maxTileIntensity: 15
-    explodeActionId: ActionFpvDroneExplosive
-  - type: Explosive
-    explosionType: RMC
-  - type: CMExplosionEffect
-  - type: RMCScorchEffect
+  - type: Eye
+  - type: FpvDrone
+  - type: DeviceLinkSink
+    ports: [ FpvDroneControl ]
   - type: Damageable
     damageContainer: StructuralInorganic
     damageModifierSet: StructuralMetallicStrong
@@ -70,3 +66,43 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+
+- type: entity
+  parent: FpvDroneFoldedBase
+  id: FpvDroneFolded
+  name: observation fpv drone
+  description: A foldable FPV drone optimized for observation.
+  components:
+  - type: FpvDroneFoldable
+    unfoldEntity: FpvDroneObserver
+
+- type: entity
+  parent: FpvDroneFoldedBase
+  id: FpvDroneFoldedExplosive
+  name: explosive fpv drone
+  description: A foldable FPV drone carrying an explosive charge.
+  components:
+  - type: FpvDroneFoldable
+    unfoldEntity: FpvDroneExplosive
+
+- type: entity
+  parent: FpvDroneBase
+  id: FpvDroneObserver
+  name: observation fpv drone
+  description: A deployed FPV drone configured for reconnaissance.
+
+- type: entity
+  parent: FpvDroneBase
+  id: FpvDroneExplosive
+  name: explosive fpv drone
+  description: A deployed FPV drone carrying an explosive charge.
+  components:
+  - type: FpvDroneExplosive
+    totalIntensity: 250
+    radius: 6
+    explodeActionId: ActionFpvDroneExplosive
+  - type: Explosive
+    explosionType: RMC
+    maxTileIntensity: 15
+  - type: CMExplosionEffect
+  - type: RMCScorchEffect

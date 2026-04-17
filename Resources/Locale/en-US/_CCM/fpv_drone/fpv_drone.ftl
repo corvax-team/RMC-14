@@ -1,0 +1,25 @@
+fpv-drone-ui-connection-lost = >>> CONNECTION LOST <<<
+
+cm-fpv-drone-laptop-title = FPV DRONE TERMINAL
+cm-fpv-drone-laptop-place-first = Place the laptop on a table first!
+cm-fpv-drone-laptop-linked = Drone linked to laptop.
+cm-fpv-drone-laptop-unlinked = Drone unlinked from laptop.
+cm-fpv-drone-laptop-no-signal = No signal from drone.
+cm-fpv-drone-laptop-control-busy = Drone is already controlled by another operator.
+cm-fpv-drone-laptop-capacity = Laptop cannot link more drones.
+cm-fpv-drone-laptop-already-linked = This drone is already linked to another laptop.
+cm-fpv-drone-laptop-no-linked = No linked drones
+cm-fpv-drone-laptop-linked-count = Linked drones: { count }
+cm-fpv-drone-laptop-no-selection = No drone selected
+cm-fpv-drone-laptop-select-drone = Select a drone from the list
+cm-fpv-drone-laptop-no-operator = No operator
+cm-fpv-drone-laptop-take-control = TAKE CONTROL
+cm-fpv-drone-laptop-release-control = RELEASE CONTROL
+cm-fpv-drone-laptop-feed-idle = Select a drone to open its feed.
+cm-fpv-drone-laptop-feed-live = VIDEO FEED LIVE
+cm-fpv-drone-laptop-control-active = CONTROL ACTIVE - use WASD to fly
+cm-fpv-drone-laptop-signal-lost = SIGNAL LOST
+cm-fpv-drone-laptop-status-controlled = CONTROLLED
+cm-fpv-drone-laptop-status-standby = STANDBY
+cm-fpv-drone-role-explosive = Explosive
+cm-fpv-drone-role-observer = Observer
