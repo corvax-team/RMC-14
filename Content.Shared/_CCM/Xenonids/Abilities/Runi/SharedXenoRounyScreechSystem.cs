@@ -29,8 +29,6 @@ public sealed class XenoRounyScreechSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityManager _ent = default!;
-    // [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
-    // [Dependency] private readonly EvasionSystem _evasion = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
     private readonly HashSet<Entity<MobStateComponent>> _closeMobs = new();
@@ -64,9 +62,6 @@ public sealed class XenoRounyScreechSystem : EntitySystem
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
-        // =========================
-        // CLOSE RANGE (strong panic)
-        // =========================
         _closeMobs.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _closeMobs);
 
@@ -75,8 +70,8 @@ public sealed class XenoRounyScreechSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno, receiver))
                 continue;
 
-            // ApplyConfusion(receiver);
             ApplyDeaf(xeno, receiver, xeno.Comp.CloseDeafTime);
+            ApplyDizzy(receiver, TimeSpan.FromSeconds(6));
 
             ApplyAccuracyDebuff(
                 receiver,
@@ -84,9 +79,6 @@ public sealed class XenoRounyScreechSystem : EntitySystem
                 TimeSpan.FromSeconds(8));
         }
 
-        // =========================
-        // FAR RANGE (medium panic)
-        // =========================
         _mobs.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.StunRange, _mobs);
 
@@ -98,8 +90,8 @@ public sealed class XenoRounyScreechSystem : EntitySystem
             if (_closeMobs.Contains(receiver))
                 continue;
 
-            // ApplyConfusion(receiver);
             ApplyDeaf(xeno, receiver, xeno.Comp.FarDeafTime);
+            ApplyDizzy(receiver, TimeSpan.FromSeconds(4));
 
             ApplyAccuracyDebuff(
                 receiver,
@@ -107,30 +99,14 @@ public sealed class XenoRounyScreechSystem : EntitySystem
                 TimeSpan.FromSeconds(5));
         }
 
-        // =========================
-        // PARASITES (max chaos)
-        // =========================
         _parasites.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParasiteStunRange, _parasites);
 
-        // foreach (var receiver in _parasites)
-        // {
-        //     ApplyConfusion(receiver);
-        // }
 
         if (_net.IsServer)
             SpawnAttachedTo(xeno.Comp.Effect, xeno.Owner.ToCoordinates());
     }
 
-    // private void ApplyConfusion(EntityUid target)
-    // {
-    //     if (_mobState.IsDead(target))
-    //         return;
-
-    //     var comp = _ent.EnsureComponent<XenoScreechConfusionComponent>(target);
-
-    //     comp.ExpireAt = _timing.CurTime + TimeSpan.FromSeconds(10);
-    // }
 
     private void ApplyDeaf(EntityUid xeno, EntityUid receiver, TimeSpan time)
     {
@@ -158,12 +134,15 @@ public sealed class XenoRounyScreechSystem : EntitySystem
         comp.AccuracyModifier = -0.8f; // или -1f
         comp.AccuracyPerTileModifier = -10f;
 
-        // важно: обновить системы, которые читают модификаторы
-        // _movement.RefreshMovementSpeedModifiers(target);
-        // _evasion.RefreshEvasionModifiers(target);
+    }
 
-        // RaiseLocalEvent(target, ref new RefreshMovementModifiersEvent());
-        // RaiseLocalEvent(target, ref new RefreshEvasionModifiersEvent());
+    private void ApplyDizzy(EntityUid target, TimeSpan duration)
+    {
+        if (_mobState.IsDead(target))
+            return;
+
+        var comp = _ent.EnsureComponent<ScreechDizzyComponent>(target);
+        comp.EndTime = _timing.CurTime + duration;
     }
 
     public override void Update(float frameTime)
@@ -177,6 +156,14 @@ public sealed class XenoRounyScreechSystem : EntitySystem
     {
         var query = EntityQueryEnumerator<XenoScreechAccuracyDebuffComponent>();
         var time = _timing.CurTime;
+
+        var dizzyQuery = EntityQueryEnumerator<ScreechDizzyComponent>();
+
+        while (dizzyQuery.MoveNext(out var uid, out var comp))
+        {
+            if (comp.EndTime < time)
+                RemCompDeferred<ScreechDizzyComponent>(uid);
+        }
 
         while (query.MoveNext(out var uid, out var comp))
         {

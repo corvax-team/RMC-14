@@ -1,0 +1,34 @@
+uniform sampler2D SCREEN_TEXTURE;
+
+uniform highp float time;
+uniform highp float intensity;
+
+void fragment()
+{
+    vec2 uv = UV;
+    vec2 center = uv - 0.5;
+
+    highp float shake = 0.003 * intensity;
+
+    uv.x += sin(time * 60.0) * shake;
+    uv.y += cos(time * 52.0) * shake;
+
+    uv.x += sin(time * 120.0) * shake * 0.5;
+    uv.y += cos(time * 110.0) * shake * 0.5;
+
+    highp float dist = length(center);
+
+    highp float vignette = smoothstep(0.6, 0.0, dist);
+    vignette = mix(1.0, vignette, intensity * 5.5);
+    vignette = vignette * vignette * vignette;
+
+    vec3 col = texture(SCREEN_TEXTURE, uv).rgb;
+
+    vec3 blueTint = vec3(0.02, 0.04, 0.12);
+    col = mix(col, col * blueTint, 1.0 * intensity);
+
+    col *= vignette;
+    col *= (1.0 - 0.6 * intensity);
+
+    COLOR = vec4(col, 1.0);
+}

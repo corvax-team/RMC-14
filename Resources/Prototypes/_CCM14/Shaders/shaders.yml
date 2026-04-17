@@ -2,3 +2,8 @@
   id: CCMVignetteMech
   kind: source
   path: "/Textures/_CCM14/Shaders/vignette.swsl"
+
+- type: shader
+  id: ScreechDizzyShader
+  kind: source
+  path: "/Textures/_CCM14/Shaders/screech_dizzy.swsl"
