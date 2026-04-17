@@ -80,7 +80,7 @@
   suffix: WP
   components:
   - type: Sprite
-    sprite: _CCM14\Objects\Weapons\Ammunition\Magazines\Zhupel.rsi
+    sprite: _CCM14\Objects\Weapons\Ammunition\Magazines\zhupel.rsi
   - type: Tag
     tags:
     - RMCMagazineLMGBase
