@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Xenonids.Egg.EggRetriever;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
@@ -96,7 +97,6 @@ public sealed class XenoEggSystem : EntitySystem
 
         SubscribeLocalEvent<XenoComponent, XenoGrowOvipositorActionEvent>(OnXenoGrowOvipositorAction);
         SubscribeLocalEvent<XenoComponent, XenoGrowOvipositorDoAfterEvent>(OnXenoGrowOvipositorDoAfter);
-
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, MapInitEvent>(OnXenoAttachedMapInit);
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, ComponentRemove>(OnXenoAttachedRemove);
         SubscribeLocalEvent<XenoAttachedOvipositorComponent, MobStateChangedEvent>(OnXenoMobStateChanged);
@@ -113,7 +113,6 @@ public sealed class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoEggComponent, StepTriggerAttemptEvent>(OnXenoEggStepTriggerAttempt);
         SubscribeLocalEvent<XenoEggComponent, StepTriggeredOffEvent>(OnXenoEggStepTriggered);
         SubscribeLocalEvent<XenoEggComponent, BeforeDamageChangedEvent>(OnXenoEggBeforeDamageChanged);
-        SubscribeLocalEvent<XenoEggComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
         SubscribeLocalEvent<XenoEggComponent, DestructionEventArgs>(OnDestruction);
 
         SubscribeLocalEvent<XenoFragileEggComponent, ComponentShutdown>(OnFragileConvert);
@@ -406,6 +405,9 @@ public sealed class XenoEggSystem : EntitySystem
         if (!CanReturnParasitePopup(args.User, used, egg))
             return;
 
+        var isRoyal = HasComp<CCMRoyalParasiteComponent>(used);
+        egg.Comp.Spawn = isRoyal ? "CCMXenoRoyalParasite" : "CMXenoParasite";
+
         _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return-user"), args.User, args.User);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return", ("user", args.User), ("parasite", args.Used)), egg, Filter.PvsExcept(args.User), true);
 
@@ -422,34 +424,6 @@ public sealed class XenoEggSystem : EntitySystem
     private void OnXenoEggStepTriggered(Entity<XenoEggComponent> egg, ref StepTriggeredOffEvent args)
     {
         TryTrigger(egg, args.Tripper);
-    }
-
-    private void OnGetVerbs(Entity<XenoEggComponent> ent, ref GetVerbsEvent<ActivationVerb> args)
-    {
-        var uid = args.User;
-
-        // if it doesn't have an actor and we can't reach it then don't add the verb
-        if (!HasComp<ActorComponent>(uid) || !HasComp<GhostComponent>(uid))
-            return;
-
-        if (ent.Comp.State != XenoEggState.Grown)
-            return;
-
-        if (TryComp<XenoFragileEggComponent>(ent, out var fragile) && fragile.SustainedBy != null)
-            return;
-
-        var parasiteVerb = new ActivationVerb
-        {
-            Text = Loc.GetString("rmc-xeno-egg-ghost-verb"),
-            Act = () =>
-            {
-                _ui.TryOpenUi(ent.Owner, XenoParasiteGhostUI.Key, uid);
-            },
-
-            Impact = LogImpact.High,
-        };
-
-        args.Verbs.Add(parasiteVerb);
     }
 
     private bool CanTrigger(EntityUid user)
@@ -623,6 +597,12 @@ public sealed class XenoEggSystem : EntitySystem
                 if (_actions.AddAction(xeno, actionId) is { } action)
                     capable.Actions[actionId] = action;
             }
+
+            if (capable.CanLayRoyalEggs)
+            {
+                var producer = EnsureComp<CCMXenoRoyalEggProducerComponent>(xeno);
+                producer.NextRoyalEggAt = _timing.CurTime + producer.RoyalEggInterval;
+            }
         }
 
         EnsureComp<EggPlantingDistanceComponent>(xeno).Distance = 3.5f;
@@ -645,6 +625,7 @@ public sealed class XenoEggSystem : EntitySystem
         RemoveOvipositorActions(xeno.Owner);
         _popup.PopupClient(Loc.GetString("cm-xeno-ovipositor-detach"), xeno, xeno);
         RemCompDeferred<EggPlantingDistanceComponent>(xeno);
+        RemCompDeferred<CCMXenoRoyalEggProducerComponent>(xeno);
     }
 
     private bool TryTrigger(Entity<XenoEggComponent> egg, EntityUid tripper)
@@ -756,6 +737,17 @@ public sealed class XenoEggSystem : EntitySystem
         if (!HasComp<ParasiteAIComponent>(used))
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-awake-child", ("parasite", used)), user, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        var isRoyal = HasComp<CCMRoyalParasiteComponent>(used);
+        var isRoyalEgg = egg.Comp.Spawn == "CCMXenoRoyalParasite";
+
+        if (isRoyal != isRoyalEgg)
+        {
+            _popup.PopupEntity(Loc.GetString(isRoyal
+                ? "rmc-xeno-egg-wrong-type-royal"
+                : "rmc-xeno-egg-wrong-type-regular"), user, user, PopupType.SmallCaution);
             return false;
         }
 
@@ -874,10 +866,28 @@ public sealed class XenoEggSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        base.Update(frameTime);
+
         if (_net.IsClient)
             return;
 
         var time = _timing.CurTime;
+
+        var royalQuery = EntityQueryEnumerator<CCMXenoRoyalEggProducerComponent, TransformComponent>();
+        while (royalQuery.MoveNext(out var uid, out var producer, out var xform))
+        {
+            if (producer.NextRoyalEggAt == null || producer.NextRoyalEggAt > time)
+                continue;
+
+            var spawnCoords = xform.Coordinates.Offset(producer.RoyalEggOffset);
+            var egg = Spawn(producer.RoyalEggPrototype, spawnCoords);
+            producer.NextRoyalEggAt = time + producer.RoyalEggInterval;
+            Dirty(uid, producer);
+
+            _popup.PopupEntity("A royal egg emerges!", uid);
+        }
+
+        // Handle ovipositor queries
         var oviQuery = EntityQueryEnumerator<XenoOvipositorCapableComponent, XenoAttachedOvipositorComponent, TransformComponent>();
         while (oviQuery.MoveNext(out var uid, out var capable, out var attached, out var xform))
         {
@@ -1048,10 +1058,4 @@ public sealed class XenoEggSystem : EntitySystem
 public enum XenoParasiteGhostUI
 {
     Key
-}
-
-[Serializable, NetSerializable]
-public sealed class XenoParasiteGhostBuiMsg() : BoundUserInterfaceMessage
-{
-
 }

@@ -718,10 +718,7 @@ namespace Content.Client.Lobby.UI
             _species.Clear();
             var userId = _playerManager.LocalUser;
 
-            // Only allow specific species
-            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Moth", "Felinid", "Dwarf" };
-            _species.AddRange(_prototypeManager.EnumeratePrototypes<SpeciesPrototype>()
-                .Where(o => o.RoundStart && allowedSpecies.Contains(o.ID)));
+            _species.AddRange(_prototypeManager.EnumeratePrototypes<SpeciesPrototype>().Where(o => o.RoundStart));
             var speciesIds = _species.Select(o => o.ID).ToList();
 
             for (var i = 0; i < _species.Count; i++)

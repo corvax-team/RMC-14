@@ -1,10 +1,15 @@
-using System.Linq;
+﻿using System.Linq;
 using System.Numerics;
 using Content.Server.Hands.Systems;
+using Content.Server.Players;
 using Content.Server.Mind;
+using Content.Server.Ghost.Roles;
+using Content.Server.GameTicking;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Hands.Components;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -16,11 +21,21 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Ghost;
+using Content.Shared.GameTicking;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Robust.Shared.Random;
+using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Configuration;
+using Robust.Shared.Timing;
+using Robust.Server.Player;
+using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Xenonids.Parasite;
 
-public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
+public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
 {
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly HandsSystem _hands = default!;
@@ -28,6 +43,7 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly ThrowingSystem _throw = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -36,20 +52,65 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
+    [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly ActorSystem _actor = default!;
 
-    public override void Initialize()
+    private void InitializeParasiteThrower()
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoThrowParasiteActionEvent>(OnToggleParasiteThrow);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoThrowParasiteActionEvent>(OnThrowParasite);
+        SubscribeLocalEvent<XenoParasiteThrowerComponent, CCMXenoThrowRoyalParasiteActionEvent>(OnThrowRoyalParasite);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, MobStateChangedEvent>(OnMobStateChanged);
-
         SubscribeLocalEvent<XenoParasiteThrowerComponent, UserActivateInWorldEvent>(OnXenoParasiteThrowerUseInHand);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
         SubscribeLocalEvent<XenoParasiteThrowerComponent, XenoDevolveBuiMsg>(OnXenoDevolveDoAfter);
     }
 
-    private void OnToggleParasiteThrow(Entity<XenoParasiteThrowerComponent> xeno, ref XenoThrowParasiteActionEvent args)
+    public override void Initialize()
+    {
+        base.Initialize();
+        InitializeParasiteThrower();
+    }
+
+    private void OnThrowParasite(Entity<XenoParasiteThrowerComponent> xeno, ref XenoThrowParasiteActionEvent args)
+    {
+        args.Handled = true;
+
+        if (TryComp<HandsComponent>(xeno.Owner, out var handsComp) &&
+            _hands.TryGetActiveItem(new Entity<HandsComponent?>(xeno.Owner, handsComp), out var heldEntity))
+        {
+            if (HasComp<CCMRoyalParasiteComponent>(heldEntity.Value))
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-wrong-parasite-type-royal"), xeno, xeno);
+                return;
+            }
+        }
+
+        OnToggleParasiteThrow(xeno, ref args, false);
+    }
+
+    private void OnThrowRoyalParasite(Entity<XenoParasiteThrowerComponent> xeno, ref CCMXenoThrowRoyalParasiteActionEvent args)
+    {
+        args.Handled = true;
+
+        if (TryComp<HandsComponent>(xeno.Owner, out var handsComp) &&
+            _hands.TryGetActiveItem(new Entity<HandsComponent?>(xeno.Owner, handsComp), out var heldEntity))
+        {
+            if (HasComp<XenoParasiteComponent>(heldEntity.Value) && !HasComp<CCMRoyalParasiteComponent>(heldEntity.Value))
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-wrong-parasite-type-regular"), xeno, xeno);
+                return;
+            }
+        }
+
+        var parasiteArgs = new XenoThrowParasiteActionEvent { Target = args.Target, Action = args.Action };
+        OnToggleParasiteThrow(xeno, ref parasiteArgs, true);
+    }
+
+    private void OnToggleParasiteThrow(Entity<XenoParasiteThrowerComponent> xeno, ref XenoThrowParasiteActionEvent args, bool isRoyal = false)
     {
         var target = args.Target;
 
@@ -57,14 +118,13 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
 
         _action.SetUseDelay((args.Action, args.Action), TimeSpan.Zero);
 
-        // If none of the entities on the selected, in-range tile are parasites, try to pull out a
-        // parasite OR try to throw a held parasite
         if (_interact.InRangeUnobstructed(xeno, target))
         {
-            var clickedEntities = _lookup.GetEntitiesIntersecting(target);
-            var tileHasParasites = false;
+            var pickupRange = isRoyal ? xeno.Comp.RoyalParasitePickupRange : xeno.Comp.ParasitePickupRange;
 
-            foreach (var possibleParasite in clickedEntities)
+            var entitiesInRange = _lookup.GetEntitiesInRange(target, pickupRange);
+
+            foreach (var possibleParasite in entitiesInRange)
             {
                 if (_mobState.IsDead(possibleParasite))
                     continue;
@@ -75,58 +135,110 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
                 if (!HasComp<ParasiteAIComponent>(possibleParasite))
                     continue;
 
-                tileHasParasites = true;
+                if (Transform(possibleParasite).ParentUid.IsValid() &&
+                    TryComp<ContainerManagerComponent>(Transform(possibleParasite).ParentUid, out _))
+                    continue;
 
-                if (xeno.Comp.CurParasites >= xeno.Comp.MaxParasites)
+                var parasiteIsRoyal = HasComp<CCMRoyalParasiteComponent>(possibleParasite);
+
+                if (parasiteIsRoyal != isRoyal)
+                    continue;
+                if (parasiteIsRoyal)
                 {
-                    _popup.PopupEntity(Loc.GetString("cm-xeno-throw-parasite-too-many-parasites"), xeno, xeno);
-                    return;
+                    if (xeno.Comp.CurRoyalParasites >= xeno.Comp.MaxRoyalParasites)
+                    {
+                        if (!_hands.TryGetEmptyHand(xeno.Owner, out _))
+                        {
+                            _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-parasite-too-many-royals", ("current", xeno.Comp.CurRoyalParasites), ("max", xeno.Comp.MaxRoyalParasites)), xeno, xeno);
+                            return;
+                        }
+                        _hands.TryPickupAnyHand(xeno, possibleParasite);
+                        xeno.Comp.CurRoyalParasitesInHands++;
+                        Dirty(xeno);
+                        return;
+                    }
+                }
+                else
+                {
+                    if (xeno.Comp.CurParasites >= xeno.Comp.MaxParasites)
+                    {
+                        if (!_hands.TryGetEmptyHand(xeno.Owner, out _))
+                        {
+                            _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-parasite-too-many-parasites", ("current", xeno.Comp.CurParasites), ("max", xeno.Comp.MaxParasites)), xeno, xeno);
+                            return;
+                        }
+                        _hands.TryPickupAnyHand(xeno, possibleParasite);
+                        xeno.Comp.CurParasitesInHands++;
+                        Dirty(xeno);
+                        return;
+                    }
                 }
 
-                AddParasite(possibleParasite, xeno);
-            }
-
-            if (tileHasParasites)
-            {
-                var stashMsg = Loc.GetString("cm-xeno-throw-parasite-stash-parasite", ("cur_parasites", xeno.Comp.CurParasites), ("max_parasites", xeno.Comp.MaxParasites));
-                _popup.PopupEntity(stashMsg, xeno, xeno);
+                AddParasite(possibleParasite, xeno, isRoyal);
+                if (isRoyal)
+                    _popup.PopupEntity(Loc.GetString("cm-xeno-throw-parasite-stash-royal", ("cur_royals", xeno.Comp.CurRoyalParasites), ("max_royals", xeno.Comp.MaxRoyalParasites)), xeno, xeno);
+                else
+                    _popup.PopupEntity(Loc.GetString("cm-xeno-throw-parasite-stash-parasite", ("cur_parasites", xeno.Comp.CurParasites), ("max_parasites", xeno.Comp.MaxParasites)), xeno, xeno);
                 return;
             }
         }
 
-        if (_hands.GetActiveItem((xeno, null)) is { } heldEntity &&
+        if (TryComp<HandsComponent>(xeno.Owner, out var handsComp) &&
+            _hands.GetActiveItem(new Entity<HandsComponent?>(xeno.Owner, handsComp)) is { } heldEntity &&
             HasComp<XenoParasiteComponent>(heldEntity))
         {
+            var parasiteIsRoyal = HasComp<CCMRoyalParasiteComponent>(heldEntity);
+
             _hands.TryDrop(xeno.Owner);
+
+            if (parasiteIsRoyal)
+                xeno.Comp.CurRoyalParasitesInHands = Math.Max(0, xeno.Comp.CurRoyalParasitesInHands - 1);
+            else
+                xeno.Comp.CurParasitesInHands = Math.Max(0, xeno.Comp.CurParasitesInHands - 1);
+
             var coords = _transform.GetMoverCoordinates(xeno);
-            // If throw distance would be more than 4, fix it to be exactly 4
-            if (coords.TryDistance(EntityManager, target, out var dis) && dis > xeno.Comp.ParasiteThrowDistance)
+            var maxThrowDistance = parasiteIsRoyal ? xeno.Comp.RoyalParasiteThrowDistance : xeno.Comp.ParasiteThrowDistance;
+
+            if (coords.TryDistance(EntityManager, target, out var dis) && dis > maxThrowDistance)
             {
-                var fixedTrajectory = (target.Position - coords.Position).Normalized() * xeno.Comp.ParasiteThrowDistance;
+                var fixedTrajectory = (target.Position - coords.Position).Normalized() * maxThrowDistance;
                 target = coords.WithPosition(coords.Position + fixedTrajectory);
             }
 
             _rmcObstacleSlamming.MakeImmune(heldEntity);
             _throw.TryThrow(heldEntity, target, user: xeno);
 
-            // Not parity but should help the ability be more consistent/not look weird since para AI goes rest on idle.
-            // Should amount to about 10 seconds before they attempt a leap (10 seconds stunned)
-            // Average in parity is waiting 7.5 if you're lucky on idle time which would take 10 seconds still
             if (TryComp<ParasiteAIComponent>(heldEntity, out var ai) && !_mobState.IsDead(heldEntity))
             {
-                _stun.TryStun(heldEntity, xeno.Comp.ThrownParasiteStunDuration * 2, true);
+                var stunDuration = parasiteIsRoyal ? xeno.Comp.ThrownRoyalParasiteStunDuration : xeno.Comp.ThrownParasiteStunDuration;
+                _stun.TryStun(heldEntity, stunDuration * (parasiteIsRoyal ? 1.5f : 2f), true);
                 _parasite.GoActive((heldEntity, ai));
             }
 
-            _action.SetUseDelay((args.Action, args.Action), xeno.Comp.ThrownParasiteCooldown);
+            var cooldown = parasiteIsRoyal ? xeno.Comp.ThrownRoyalParasiteCooldown : xeno.Comp.ThrownParasiteCooldown;
+            _action.SetUseDelay((args.Action, args.Action), cooldown);
 
+            Dirty(xeno);
             return;
         }
 
-        if (xeno.Comp.CurParasites == 0)
+        if (isRoyal)
         {
-            _popup.PopupEntity(Loc.GetString("cm-xeno-throw-parasite-no-parasites"), xeno, xeno);
-            return;
+            var totalRoyalParasites = xeno.Comp.CurRoyalParasites + xeno.Comp.CurRoyalParasitesInHands;
+            if (totalRoyalParasites <= 0)
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-no-royal-parasites"), xeno, xeno);
+                return;
+            }
+        }
+        else
+        {
+            var totalRegularParasites = xeno.Comp.CurParasites + xeno.Comp.CurParasitesInHands;
+            if (totalRegularParasites <= 0)
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-no-parasites"), xeno, xeno);
+                return;
+            }
         }
 
         if (!_hands.TryGetEmptyHand(xeno.Owner, out _))
@@ -138,14 +250,18 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
             return;
         }
 
-        if (RemoveParasite(xeno) is not { } newParasite)
+        if (RemoveParasite(xeno, isRoyal) is not { } newParasite)
             return;
 
         _hive.SetSameHive(xeno.Owner, newParasite);
 
         _hands.TryPickupAnyHand(xeno, newParasite);
 
-        var msg = Loc.GetString("cm-xeno-throw-parasite-unstash-parasite", ("cur_parasites", xeno.Comp.CurParasites), ("max_parasites", xeno.Comp.MaxParasites));
+        string msg;
+        if (isRoyal)
+            msg = Loc.GetString("cm-xeno-throw-parasite-unstash-royal", ("cur_royals", xeno.Comp.CurRoyalParasites), ("max_royals", xeno.Comp.MaxRoyalParasites));
+        else
+            msg = Loc.GetString("cm-xeno-throw-parasite-unstash-parasite", ("cur_parasites", xeno.Comp.CurParasites), ("max_parasites", xeno.Comp.MaxParasites));
         _popup.PopupEntity(msg, xeno, xeno);
     }
 
@@ -165,10 +281,47 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
         if (args.Handled)
             return;
 
-        if (xeno.Comp.CurParasites >= xeno.Comp.MaxParasites)
+        var isRoyal = HasComp<CCMRoyalParasiteComponent>(target);
+
+        bool storageFull = false;
+        if (isRoyal)
         {
-            _popup.PopupEntity(Loc.GetString("cm-xeno-throw-parasite-too-many-parasites"), xeno, xeno);
-            return;
+            storageFull = xeno.Comp.CurRoyalParasites >= xeno.Comp.MaxRoyalParasites;
+        }
+        else
+        {
+            storageFull = xeno.Comp.CurParasites >= xeno.Comp.MaxParasites;
+        }
+
+        if (storageFull)
+        {
+            if (!_hands.TryGetEmptyHand(xeno.Owner, out _))
+            {
+                if (isRoyal)
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-parasite-too-many-royals", ("current", xeno.Comp.CurRoyalParasites), ("max", xeno.Comp.MaxRoyalParasites)), xeno, xeno);
+                else
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-parasite-too-many-parasites", ("current", xeno.Comp.CurParasites), ("max", xeno.Comp.MaxParasites)), xeno, xeno);
+                return;
+            }
+
+            if (_hands.TryPickupAnyHand(xeno, target))
+            {
+                if (isRoyal)
+                    xeno.Comp.CurRoyalParasitesInHands++;
+                else
+                    xeno.Comp.CurParasitesInHands++;
+                Dirty(xeno);
+                args.Handled = true;
+                return;
+            }
+            else
+            {
+                if (isRoyal)
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-parasite-too-many-royals", ("current", xeno.Comp.CurRoyalParasites), ("max", xeno.Comp.MaxRoyalParasites)), xeno, xeno);
+                else
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-throw-parasite-too-many-parasites", ("current", xeno.Comp.CurParasites), ("max", xeno.Comp.MaxParasites)), xeno, xeno);
+                return;
+            }
         }
 
         if (_mind.TryGetMind(target, out _, out _))
@@ -177,9 +330,14 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
             return;
         }
 
-        AddParasite(target, xeno);
+        AddParasite(target, xeno, isRoyal);
 
-        var msg = Loc.GetString("cm-xeno-throw-parasite-stash-parasite", ("cur_parasites", xeno.Comp.CurParasites), ("max_parasites", xeno.Comp.MaxParasites));
+        string msg;
+        if (isRoyal)
+            msg = Loc.GetString("cm-xeno-throw-parasite-stash-royal", ("cur_royals", xeno.Comp.CurRoyalParasites), ("max_royals", xeno.Comp.MaxRoyalParasites));
+        else
+            msg = Loc.GetString("cm-xeno-throw-parasite-stash-parasite", ("cur_parasites", xeno.Comp.CurParasites), ("max_parasites", xeno.Comp.MaxParasites));
+
         _popup.PopupEntity(msg, xeno, xeno);
 
         args.Handled = true;
@@ -207,7 +365,7 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
     {
         TryComp(xeno, out XenoComponent? _);
 
-        if (chance != 1.0 && xeno.Comp.CurParasites > 0)
+        if (chance != 1.0 && (xeno.Comp.CurParasites > 0 || xeno.Comp.CurRoyalParasites > 0 || xeno.Comp.CurParasitesInHands > 0 || xeno.Comp.CurRoyalParasitesInHands > 0))
             _popup.PopupEntity(Loc.GetString("rmc-xeno-parasite-carrier-death", ("xeno", xeno)), xeno, PopupType.MediumCaution);
 
         var hive = _hive.GetHive(xeno.Owner);
@@ -219,41 +377,85 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
             var newParasite = Spawn(xeno.Comp.ParasitePrototype);
             _hive.SetHive(newParasite, hive);
             _transform.DropNextTo(newParasite, xeno.Owner);
-            //So they don't eat eachother before they gloriously fly into the sunset
             _stun.TryStun(newParasite, xeno.Comp.ThrownParasiteStunDuration, true);
             _throw.TryThrow(newParasite, _random.NextAngle().RotateVec(Vector2.One) * _random.NextFloat(0.15f, 0.7f), 3);
         }
 
-        xeno.Comp.CurParasites = 0; // Just in case
+        for (var i = 0; i < xeno.Comp.CurRoyalParasites; ++i)
+        {
+            if (chance != 1.0 && !_random.Prob(chance))
+                continue;
+            var newParasite = Spawn(xeno.Comp.RoyalParasitePrototype);
+            _hive.SetHive(newParasite, hive);
+            _transform.DropNextTo(newParasite, xeno.Owner);
+            _stun.TryStun(newParasite, xeno.Comp.ThrownParasiteStunDuration, true);
+            _throw.TryThrow(newParasite, _random.NextAngle().RotateVec(Vector2.One) * _random.NextFloat(0.15f, 0.7f), 3);
+        }
+
+        for (var i = 0; i < xeno.Comp.CurParasitesInHands; ++i)
+        {
+            if (chance != 1.0 && !_random.Prob(chance))
+                continue;
+            var newParasite = Spawn(xeno.Comp.ParasitePrototype);
+            _hive.SetHive(newParasite, hive);
+            _transform.DropNextTo(newParasite, xeno.Owner);
+            _stun.TryStun(newParasite, xeno.Comp.ThrownParasiteStunDuration, true);
+            _throw.TryThrow(newParasite, _random.NextAngle().RotateVec(Vector2.One) * _random.NextFloat(0.15f, 0.7f), 3);
+        }
+
+        for (var i = 0; i < xeno.Comp.CurRoyalParasitesInHands; ++i)
+        {
+            if (chance != 1.0 && !_random.Prob(chance))
+                continue;
+            var newParasite = Spawn(xeno.Comp.RoyalParasitePrototype);
+            _hive.SetHive(newParasite, hive);
+            _transform.DropNextTo(newParasite, xeno.Owner);
+            _stun.TryStun(newParasite, xeno.Comp.ThrownParasiteStunDuration, true);
+            _throw.TryThrow(newParasite, _random.NextAngle().RotateVec(Vector2.One) * _random.NextFloat(0.15f, 0.7f), 3);
+        }
+
+        xeno.Comp.CurParasites = 0;
+        xeno.Comp.CurRoyalParasites = 0;
+        xeno.Comp.CurParasitesInHands = 0;
+        xeno.Comp.CurRoyalParasitesInHands = 0;
 
         UpdateParasiteClingers(xeno);
         return true;
     }
 
-    /// <summary>
-    /// Delete the parasite provided, increment XenoParasiteThrower Component's CurParasites
-    /// Does not peform any checks.
-    /// </summary>
-    private void AddParasite(EntityUid parasite, Entity<XenoParasiteThrowerComponent> xeno)
+    private void AddParasite(EntityUid parasite, Entity<XenoParasiteThrowerComponent> xeno, bool isRoyal = false)
     {
-        xeno.Comp.CurParasites++;
+        if (isRoyal)
+            xeno.Comp.CurRoyalParasites++;
+        else
+            xeno.Comp.CurParasites++;
 
         UpdateParasiteClingers(xeno);
 
         QueueDel(parasite);
     }
 
-    /// <summary>
-    /// Spawn a parasite, decrement XenoParasiteThrower Component's CurParasites, and return the new parasite.
-    /// Does not peform any checks.
-    /// </summary>
-    private EntityUid? RemoveParasite(Entity<XenoParasiteThrowerComponent> xeno)
+    private EntityUid? RemoveParasite(Entity<XenoParasiteThrowerComponent> xeno, bool isRoyal = false)
     {
-        xeno.Comp.CurParasites--;
+        if (isRoyal)
+        {
+            if (xeno.Comp.CurRoyalParasites <= 0)
+                return null;
+            xeno.Comp.CurRoyalParasites--;
+        }
+        else
+        {
+            if (xeno.Comp.CurParasites <= 0)
+                return null;
+            xeno.Comp.CurParasites--;
+        }
+
+        var prototype = isRoyal ? xeno.Comp.RoyalParasitePrototype : xeno.Comp.ParasitePrototype;
+        var parasite = Spawn(prototype);
 
         UpdateParasiteClingers(xeno);
-
-        return Spawn(xeno.Comp.ParasitePrototype);
+        Dirty(xeno);
+        return parasite;
     }
 
     private void UpdateParasiteClingers(Entity<XenoParasiteThrowerComponent> xeno)
@@ -298,16 +500,25 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
         return visualIndexes;
     }
 
+    public bool HasRoyalParasites(Entity<XenoParasiteThrowerComponent> xeno)
+    {
+        return xeno.Comp.CurRoyalParasites > xeno.Comp.ReservedRoyalParasites;
+    }
+
     public EntityUid? TryRemoveGhostParasite(Entity<XenoParasiteThrowerComponent> xeno, out string message)
     {
         message = "";
-        if (xeno.Comp.CurParasites <= 0)
+        var regularParasites = xeno.Comp.CurParasites - xeno.Comp.CurRoyalParasites;
+        var regularInHands = xeno.Comp.CurParasitesInHands - xeno.Comp.CurRoyalParasitesInHands;
+        var totalRegularParasites = regularParasites + regularInHands;
+
+        if (totalRegularParasites <= 0)
         {
             message = Loc.GetString("rmc-xeno-parasite-ghost-carrier-none", ("xeno", xeno));
             return null;
         }
 
-        if (xeno.Comp.ReservedParasites >= xeno.Comp.CurParasites)
+        if (xeno.Comp.ReservedParasites >= totalRegularParasites)
         {
             message = Loc.GetString("rmc-xeno-parasite-ghost-carrier-reserved", ("xeno", xeno));
             return null;
@@ -319,17 +530,125 @@ public sealed class XenoParasiteThrowerSystem : SharedXenoParasiteThrowerSystem
             return null;
         }
 
-        var para = RemoveParasite(xeno);
-        if (para == null)
+        var spawnedParasite = RemoveParasite(xeno);
+        if (spawnedParasite == null)
             return null;
 
-        _hive.SetSameHive(xeno.Owner, para.Value);
-        _rmcObstacleSlamming.MakeImmune(para.Value);
-        _transform.DropNextTo(para.Value, xeno.Owner);
-        // Small throw
+        var parasite = spawnedParasite.Value;
+        _hive.SetSameHive(xeno.Owner, parasite);
+        _rmcObstacleSlamming.MakeImmune(parasite);
+        _transform.DropNextTo(parasite, xeno.Owner);
+        _throw.TryThrow(parasite, _random.NextAngle().RotateVec(Vector2.One), 3);
 
-        _throw.TryThrow(para.Value, _random.NextAngle().RotateVec(Vector2.One), 3);
+        return parasite;
+    }
 
-        return para;
+    public EntityUid? TryRemoveGhostRoyalParasite(Entity<XenoParasiteThrowerComponent> xeno, out string message)
+    {
+        message = "";
+        var totalRoyalParasites = xeno.Comp.CurRoyalParasites + xeno.Comp.CurRoyalParasitesInHands;
+        if (totalRoyalParasites <= 0)
+        {
+            message = Loc.GetString("rmc-xeno-parasite-ghost-carrier-royal-none", ("xeno", xeno));
+            return null;
+        }
+
+        if (xeno.Comp.ReservedRoyalParasites >= totalRoyalParasites)
+        {
+            message = Loc.GetString("rmc-xeno-parasite-ghost-carrier-reserved", ("xeno", xeno));
+            return null;
+        }
+
+        if (_mobState.IsDead(xeno))
+        {
+            message = Loc.GetString("rmc-xeno-parasite-ghost-carrier-dead", ("xeno", xeno));
+            return null;
+        }
+
+        var container = _container.EnsureContainer<Container>(xeno.Owner, "royal_storage");
+        var para = container.ContainedEntities.FirstOrDefault(uid => HasComp<CCMRoyalParasiteComponent>(uid));
+
+        EntityUid parasite;
+        if (para == default)
+        {
+            var newParasite = RemoveParasite(xeno, true);
+            if (newParasite == null)
+                return null;
+            parasite = newParasite.Value;
+        }
+        else
+        {
+            parasite = para;
+            _container.Remove(para, container);
+            xeno.Comp.CurRoyalParasites--;
+            Dirty(xeno);
+        }
+
+        _hive.SetSameHive(xeno.Owner, parasite);
+        _rmcObstacleSlamming.MakeImmune(parasite);
+        _transform.DropNextTo(parasite, xeno.Owner);
+        _throw.TryThrow(parasite, _random.NextAngle().RotateVec(Vector2.One), 3);
+
+        return parasite;
+    }
+
+    public void HandleGhostParasitePossession(Entity<XenoParasiteThrowerComponent> xeno, EntityUid ghost, bool isRoyal)
+    {
+        if (!TryComp(ghost, out GhostComponent? ghostComp))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-parasite-ghost-invalid"), xeno, ghost, PopupType.MediumCaution);
+            return;
+        }
+
+        var roundTime = _gameTicker.RoundDuration();
+        var parasiteSpawnDelay = TimeSpan.FromMinutes(_config.GetCVar(RMCCVars.RMCParasiteSpawnInitialDelayMinutes));
+
+        if (roundTime <= parasiteSpawnDelay)
+        {
+            var secondsNeeded = (int)(parasiteSpawnDelay.TotalSeconds - roundTime.TotalSeconds);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-ghost-need-time-round", ("seconds", secondsNeeded)), ghost, ghost, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!HasComp<InfectionSuccessComponent>(ghost))
+        {
+            var timeSinceDeath = _gameTiming.CurTime.Subtract(ghostComp.TimeOfDeath);
+            if (timeSinceDeath < TimeSpan.FromMinutes(3))
+            {
+                var secondsNeeded = 180 - (int)timeSinceDeath.TotalSeconds;
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-ghost-need-time", ("seconds", secondsNeeded)), ghost, ghost, PopupType.MediumCaution);
+                return;
+            }
+        }
+
+        EntityUid? parasiteUid = null;
+        string errorMessage = "";
+
+        if (isRoyal)
+        {
+            parasiteUid = TryRemoveGhostRoyalParasite(xeno, out errorMessage);
+        }
+        else
+        {
+            parasiteUid = TryRemoveGhostParasite(xeno, out errorMessage);
+        }
+
+        if (parasiteUid == null)
+        {
+            if (!string.IsNullOrEmpty(errorMessage))
+                _popup.PopupEntity(errorMessage, xeno, ghost, PopupType.MediumCaution);
+            else
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-parasite-ghost-take-failed"), xeno, ghost, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!_actor.TryGetSession(ghost, out var session) || session == null)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-parasite-ghost-no-session"), xeno, ghost, PopupType.MediumCaution);
+            return;
+        }
+
+        _ghostRole.GhostRoleInternalCreateMindAndTransfer(session, parasiteUid.Value, parasiteUid.Value);
     }
 }
+

@@ -105,11 +105,6 @@ namespace Content.Client.Lobby.UI
 
             foreach (var (slot, character) in _preferencesManager.Preferences!.Characters)
             {
-                // Only show characters with allowed species
-                var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Moth", "Felinid", "Dwarf" };
-                if (character is HumanoidCharacterProfile humanoidProfile && !((IList<string>)allowedSpecies).Contains(humanoidProfile.Species.Id))
-                    continue;
-
                 numberOfFullSlots++;
                 var characterPickerButton = new CharacterPickerButton(_entManager,
                     _protomanager,

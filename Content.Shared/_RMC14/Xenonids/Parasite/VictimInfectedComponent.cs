@@ -77,6 +77,9 @@ public sealed partial class VictimInfectedComponent : Component
     [DataField, AutoNetworkedField, Access(typeof(SharedCMSurgerySystem))]
     public bool RootsCut;
 
+    [DataField, AutoNetworkedField]
+    public EntityUid? InfectingParasite;
+
     /// <summary>
     ///     What hive the larva is from.
     /// </summary>

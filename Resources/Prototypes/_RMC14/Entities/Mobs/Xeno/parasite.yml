@@ -5,8 +5,7 @@
   - CMXenoFlammable
   - RMCXenoVentCrawler
   id: CMXenoParasiteBase
-  name: Child
-  suffix: Parasite
+  name: Parasite
   components:
   - type: GuideHelp
     guides:
@@ -22,9 +21,6 @@
     allowedStates:
     - Alive
     - Dead
-  - type: Tag
-    tags:
-    - RMCSynthGrabbable
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -53,7 +49,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.25
+          radius: 0.2
         density: 185
         mask:
         - SmallMobMask
@@ -98,7 +94,11 @@
   - type: Clothing
     quickEquip: false
     slots: [mask]
-    sprite: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
+    sprite: _RMC14/Mobs/Xenonids/Parasite/parasite_mask.rsi
+  - type: CCMParasiteSprite
+    mobRsi: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
+    inventoryRsi: _RMC14/Mobs/Xenonids/Parasite/parasite_inventory.rsi
+    inventoryState: icon
   - type: HideLayerClothing
     slots:
     - Snout
@@ -137,7 +137,10 @@
       4: rmc-xeno-ancient-parasite
       5: rmc-xeno-prime-parasite
   - type: FixedIdentity
-    name: cm-job-name-xeno-parasite
+    name: cm-job-name-xeno-parasite-xeno
+    whitelist:
+      components:
+      - Xeno
   - type: VentCrawler
     ventCrawlIcon: parasite
   - type: Unshieldable
@@ -146,6 +149,7 @@
 - type: entity
   parent: CMXenoParasiteBase
   id: CMXenoParasite
+  description: A parasite whose only goal is to spread the power of the hive.
   components:
   - type: SleepNPC
   - type: ParasiteAI
@@ -158,7 +162,7 @@
 - type: entity
   parent: CMXenoParasiteBase
   id: RMCXenoParasiteWatcher
-  suffix: Parasite, Watcher
+  suffix: Watcher
   components:
   - type: Xeno
     actionIds:
@@ -170,8 +174,6 @@
     name: rmc-xeno-watcher-name
     description: rmc-xeno-watcher-description
     popup: rmc-xeno-watcher-popup
-  - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Parasite/watcher_parasite.rsi
   - type: XenoZoom
     zoom: 1.3, 1.3
     blockLeaps: true
@@ -179,10 +181,3 @@
   - type: XenoHidden
   - type: RMCActionOrder
     id: RMCXenoParasiteWatcher
-
-- type: entity
-  parent: CMXenoParasite
-  id: RMCXenoParasitePrimeHiveAssign
-  suffix: Parasite, Auto-Assign, Prime Hive
-  components:
-  - type: AutoAssignHive

@@ -1,9 +1,4 @@
 using Robust.Shared.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Roles.FindParasite;
 
@@ -20,10 +15,14 @@ public sealed partial class FollowParasiteSpawnerMessage : BoundUserInterfaceMes
 [Serializable, NetSerializable]
 public sealed partial class TakeParasiteRoleMessage : BoundUserInterfaceMessage
 {
+    public NetEntity Entity;
     public NetEntity Spawner;
-    public TakeParasiteRoleMessage(NetEntity spawner)
+    public bool IsRoyalParasite;
+    public TakeParasiteRoleMessage(NetEntity entity, NetEntity spawner, bool isRoyalParasite = false)
     {
+        Entity = entity;
         Spawner = spawner;
+        IsRoyalParasite = isRoyalParasite;
     }
 }
 
@@ -43,11 +42,13 @@ public sealed partial class SpawnerData
 {
     public string Name;
     public NetEntity Spawner;
+    public bool IsRoyalParasite;
 
-    public SpawnerData(string name, NetEntity spawner)
+    public SpawnerData(string name, NetEntity spawner, bool isRoyalParasite = false)
     {
         Name = name;
         Spawner = spawner;
+        IsRoyalParasite = isRoyalParasite;
     }
 }
 

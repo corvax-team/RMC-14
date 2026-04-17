@@ -173,9 +173,7 @@ namespace Content.Shared.Preferences
         {
             Name = name;
             FlavorText = flavortext;
-            // Only allow specific species
-            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Moth", "Felinid", "Dwarf" };
-            Species = allowedSpecies.Contains(species) ? species : "Human";
+            Species = species;
             Age = age;
             Sex = sex;
             Gender = gender;
@@ -251,32 +249,10 @@ namespace Content.Shared.Preferences
         {
             species ??= SharedHumanoidAppearanceSystem.DefaultSpecies;
 
-            // Only allow specific species
-            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Moth", "Felinid", "Dwarf" };
-            if (!allowedSpecies.Contains(species))
-                species = SharedHumanoidAppearanceSystem.DefaultSpecies;
-
-            return new(
-                string.Empty,
-                string.Empty,
-                species,
-                18,
-                Sex.Male,
-                Gender.Male,
-                HumanoidCharacterAppearance.DefaultWithSpecies(species),
-                SpawnPriorityPreference.None,
-                ArmorPreference.Random,
-                null,
-                new() { { SharedGameTicker.FallbackOverflowJob, JobPriority.High } },
-                PreferenceUnavailableMode.SpawnAsOverflow,
-                new(),
-                new(),
-                new(),
-                new SharedRMCNamedItems(),
-                false,
-                string.Empty,
-                string.Empty
-            );
+            return new()
+            {
+                Species = species,
+            };
         }
 
         // TODO: This should eventually not be a visual change only.
@@ -285,11 +261,9 @@ namespace Content.Shared.Preferences
             var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
             var random = IoCManager.Resolve<IRobustRandom>();
 
-            // Only allow specific species
-            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Moth", "Felinid", "Dwarf" };
             var species = random.Pick(prototypeManager
                 .EnumeratePrototypes<SpeciesPrototype>()
-                .Where(x => allowedSpecies.Contains(x.ID) && x.RoundStart)
+                .Where(x => ignoredSpecies == null ? x.RoundStart : x.RoundStart && !ignoredSpecies.Contains(x.ID))
                 .ToArray()
             ).ID;
 
@@ -299,11 +273,6 @@ namespace Content.Shared.Preferences
         public static HumanoidCharacterProfile RandomWithSpecies(string? species = null)
         {
             species ??= SharedHumanoidAppearanceSystem.DefaultSpecies;
-
-            // Only allow specific species
-            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Moth", "Felinid", "Dwarf" };
-            if (!allowedSpecies.Contains(species))
-                species = "Human";
 
             var prototypeManager = IoCManager.Resolve<IPrototypeManager>();
             var random = IoCManager.Resolve<IRobustRandom>();
@@ -338,12 +307,6 @@ namespace Content.Shared.Preferences
                 Gender = gender,
                 Species = species,
                 Appearance = HumanoidCharacterAppearance.Random(species, sex),
-                SpawnPriority = SpawnPriorityPreference.None,
-                ArmorPreference = ArmorPreference.Random,
-                NamedItems = new SharedRMCNamedItems(),
-                PreferenceUnavailable = PreferenceUnavailableMode.SpawnAsOverflow,
-                PlaytimePerks = false,
-                FlavorText = string.Empty
             };
         }
 
@@ -374,10 +337,6 @@ namespace Content.Shared.Preferences
 
         public HumanoidCharacterProfile WithSpecies(string species)
         {
-            // Only allow specific species
-            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Moth", "Felinid", "Dwarf" };
-            if (!allowedSpecies.Contains(species))
-                species = "Human";
             return new(this) { Species = species };
         }
 
@@ -598,11 +557,9 @@ namespace Content.Shared.Preferences
             var prototypeManager = collection.Resolve<IPrototypeManager>();
             var compFactory = collection.Resolve<IComponentFactory>();
 
-            // Only allow specific species - convert any disallowed species to Human
-            var allowedSpecies = new[] { "Human", "Avali", "Arachnid", "Moth", "Felinid", "Dwarf" };
-            if (!allowedSpecies.Contains(Species.Id) || !prototypeManager.TryIndex(Species, out var speciesPrototype) || speciesPrototype.RoundStart == false)
+            if (!prototypeManager.TryIndex(Species, out var speciesPrototype) || speciesPrototype.RoundStart == false)
             {
-                Species = SharedHumanoidAppearanceSystem.DefaultSpecies; // Defaults to Human
+                Species = SharedHumanoidAppearanceSystem.DefaultSpecies;
                 speciesPrototype = prototypeManager.Index(Species);
             }
 // Corvax-frontier-blacklistrace

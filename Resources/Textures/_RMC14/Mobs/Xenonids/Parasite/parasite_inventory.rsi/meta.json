@@ -8,14 +8,11 @@
   },
   "states": [
     {
-      "name": "equipped-MASK",
+      "name": "alive",
       "directions": 4
     },
     {
-      "name": "alive"
-    },
-    {
-      "name": "impregnated"
+      "name": "icon"
     }
   ]
 }
