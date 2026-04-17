@@ -10,6 +10,7 @@ public sealed partial class GridVehicleMoverComponent : Component
 {
     /// <summary>
     /// current tile occupied by the vehicle on its grid.
+    /// </summary>
     [AutoNetworkedField]
     public Vector2i CurrentTile;
 
@@ -44,13 +45,13 @@ public sealed partial class GridVehicleMoverComponent : Component
     public Vector2i PushDirection;
 
     /// <summary>
-    /// current signed movement speed in grid / second
+    /// current signed movement speed in grid units / second
     /// </summary>
     [AutoNetworkedField]
     public float CurrentSpeed;
 
     /// <summary>
-    /// maximum forward driving speed in grid / second
+    /// maximum forward driving speed in grid units / second
     /// </summary>
     [DataField, AutoNetworkedField]
     public float MaxSpeed = 11f;
@@ -62,13 +63,13 @@ public sealed partial class GridVehicleMoverComponent : Component
     public float Acceleration = 7f;
 
     /// <summary>
-    /// speed loss per second when slowing down or stoppin
+    /// speed loss per second when slowing down or stoping
     /// </summary>
     [DataField, AutoNetworkedField]
     public float Deceleration = 12f;
 
     /// <summary>
-    /// maximum reverse driving speed in grid /  second
+    /// maximum reverse driving speed in grid units / second
     /// </summary>
     [DataField, AutoNetworkedField]
     public float MaxReverseSpeed = 4f;
