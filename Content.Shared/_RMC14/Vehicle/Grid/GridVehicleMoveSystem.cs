@@ -87,6 +87,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     private readonly Dictionary<EntityUid, bool> _hardState = new();
     private readonly Dictionary<EntityUid, bool> _lastMobPushAxis = new();
     private readonly Dictionary<EntityUid, float> _movementAccumulator = new();
+    private readonly Dictionary<EntityUid, EntityUid> _activeXenoPushers = new();
     private readonly HashSet<EntityUid> _directMoveBlockers = new();
 
     private enum VehicleCollisionClass : byte
@@ -161,6 +162,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     {
         _hardState.Remove(ent.Owner);
         _movementAccumulator.Remove(ent.Owner);
+        _activeXenoPushers.Remove(ent.Owner);
     }
 
     private void OnMoverMove(Entity<GridVehicleMoverComponent> ent, ref MoveEvent args)
