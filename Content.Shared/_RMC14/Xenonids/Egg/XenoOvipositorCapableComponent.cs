@@ -28,8 +28,5 @@ public sealed partial class XenoOvipositorCapableComponent : Component
     ];
 
     [DataField, AutoNetworkedField]
-    public bool CanLayRoyalEggs = true;
-
-    [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId, EntityUid> Actions = new();
 }

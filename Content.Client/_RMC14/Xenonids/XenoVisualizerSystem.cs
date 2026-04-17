@@ -16,8 +16,6 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Client.GameObjects;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Utility;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client._RMC14.Xenonids;
@@ -26,7 +24,6 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     private EntityQuery<XenoAnimateMovementComponent> _animateQuery;
 
@@ -84,22 +81,6 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         if (sprite is not { BaseRSI: { } rsi } ||
             !sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer))
         {
-            return;
-        }
-
-        var inMask = false;
-        if (_appearance.TryGetData(entity, CCMXenoParasiteMaskVisuals.InMask, out bool maskData))
-            inMask = maskData;
-
-        if (inMask)
-        {
-            var isRoyal = HasComp<CCMRoyalParasiteComponent>(entity);
-
-            var maskRsi = new ResPath(isRoyal
-                ? "_RMC14/Mobs/Xenonids/RoyalParasite/royal_parasite_mask.rsi"
-                : "_RMC14/Mobs/Xenonids/Parasite/parasite_mask.rsi");
-            sprite.LayerSetRSI(layer, maskRsi);
-            sprite.LayerSetState(layer, "equipped-MASK");
             return;
         }
 

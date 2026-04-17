@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Medical.Autodoc;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared.Damage;
@@ -75,14 +74,8 @@ public sealed partial class VictimInfectedComponent : Component
     /// <summary>
     ///     Used by larva removal surgery.
     /// </summary>
-    [DataField, AutoNetworkedField, Access(typeof(SharedCMSurgerySystem), typeof(SharedAutodocSystem))]
+    [DataField, AutoNetworkedField, Access(typeof(SharedCMSurgerySystem))]
     public bool RootsCut;
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? InfectingParasite;
-
-    [DataField, AutoNetworkedField]
-    public bool IsRoyalLarva = false;
 
     /// <summary>
     ///     What hive the larva is from.

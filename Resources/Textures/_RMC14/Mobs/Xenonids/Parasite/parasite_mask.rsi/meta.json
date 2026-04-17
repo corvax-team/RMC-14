@@ -10,18 +10,6 @@
     {
       "name": "equipped-MASK",
       "directions": 4
-    },
-    {
-      "name": "alive"
-    },
-    {
-      "name": "impregnated"
-    },
-    {
-      "name": "icon"
-    },
-    {
-      "name": "sleeping"
     }
   ]
 }

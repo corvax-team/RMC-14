@@ -33,7 +33,4 @@ public sealed partial class XenoParasiteComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool FellOff;
-
-    [DataField, AutoNetworkedField]
-    public bool HasSuccessfullyInfected;
 }

@@ -1,13 +1,11 @@
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Roles;
-using Content.Server.Ghost.Roles.Components;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Ghost;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
@@ -31,18 +29,12 @@ public sealed class XenoEggRoleSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly MobStateSystem _mob = default!;
 
     public override void Initialize()
     {
         Subs.BuiEvents<XenoEggComponent>(XenoParasiteGhostUI.Key, subs =>
         {
             subs.Event<XenoParasiteGhostBuiMsg>(OnXenoEggGhostBuiChosen);
-        });
-
-        Subs.BuiEvents<CCMXenoRoyalEggComponent>(XenoParasiteGhostUI.Key, subs =>
-        {
-            subs.Event<XenoParasiteGhostBuiMsg>(OnRoyalEggGhostBuiChosen);
         });
 
         Subs.BuiEvents<XenoParasiteThrowerComponent>(XenoParasiteGhostUI.Key, subs =>
@@ -58,11 +50,6 @@ public sealed class XenoEggRoleSystem : EntitySystem
         Subs.BuiEvents<ParasiteAIComponent>(XenoParasiteGhostUI.Key, subs =>
         {
             subs.Event<XenoParasiteGhostBuiMsg>(OnParasiteGhostBuiChosen);
-        });
-
-        Subs.BuiEvents<CCMRoyalParasiteComponent>(XenoParasiteGhostUI.Key, subs =>
-        {
-            subs.Event<XenoParasiteGhostBuiMsg>(OnRoyalParasiteGhostBuiChosen);
         });
 
         Subs.CVar(_config, RMCCVars.RMCParasiteSpawnInitialDelayMinutes, v => _parasiteSpawnDelay = TimeSpan.FromMinutes(v), true);
@@ -110,13 +97,8 @@ public sealed class XenoEggRoleSystem : EntitySystem
         if (!SharedChecks(ent, user))
             return;
 
-        if (ent.Comp.CurParasites <= ent.Comp.ReservedParasites || ent.Comp.CurParasites <= 0)
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-parasite-ghost-carrier-none", ("xeno", ent)), user, user, PopupType.MediumCaution);
-            return;
-        }
-
-        if (_eggMorpherSystem.TryCreateParasiteFromEggMorpher(ent, out var parasite) &&
+        if (ent.Comp.CurParasites > ent.Comp.ReservedParasites &&
+            _eggMorpherSystem.TryCreateParasiteFromEggMorpher(ent, out var parasite) &&
             parasite != null &&
             _actor.TryGetSession(user, out var session) &&
             session != null)
@@ -132,18 +114,8 @@ public sealed class XenoEggRoleSystem : EntitySystem
         if (!SharedChecks(ent, user))
             return;
 
-        if (HasComp<CCMRoyalParasiteComponent>(ent))
-            return;
-
-        if (!_mob.IsAlive(ent))
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-parasite-ghost-dead"), user, user, PopupType.MediumCaution);
-            return;
-        }
-
         if (_actor.TryGetSession(user, out var session) && session != null)
         {
-            EnsureComp<GhostRoleComponent>(ent);
             _ghostRole.GhostRoleInternalCreateMindAndTransfer(session, ent.Owner, ent.Owner);
         }
     }
@@ -189,47 +161,5 @@ public sealed class XenoEggRoleSystem : EntitySystem
         _ui.CloseUi(ent, XenoParasiteGhostUI.Key);
 
         return UserCheck(user);
-    }
-
-    private void OnRoyalEggGhostBuiChosen(Entity<CCMXenoRoyalEggComponent> ent, ref XenoParasiteGhostBuiMsg args)
-    {
-        var user = args.Actor;
-
-        if (!SharedChecks(ent, user))
-            return;
-
-        if (TryComp<XenoEggComponent>(ent, out var royalEgg))
-        {
-            if (_eggSystem.Open((ent.Owner, royalEgg), null, out var spawned))
-            {
-                Dirty(ent);
-
-                if (spawned == null)
-                    return;
-
-                if (_actor.TryGetSession(user, out var session) && session != null)
-                    _ghostRole.GhostRoleInternalCreateMindAndTransfer(session, spawned.Value, spawned.Value);
-            }
-        }
-    }
-
-    private void OnRoyalParasiteGhostBuiChosen(Entity<CCMRoyalParasiteComponent> ent, ref XenoParasiteGhostBuiMsg args)
-    {
-        var user = args.Actor;
-
-        if (!SharedChecks(ent, user))
-            return;
-
-        if (!_mob.IsAlive(ent))
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-parasite-ghost-dead"), user, user, PopupType.MediumCaution);
-            return;
-        }
-
-        if (_actor.TryGetSession(user, out var session) && session != null)
-        {
-            EnsureComp<GhostRoleComponent>(ent);
-            _ghostRole.GhostRoleInternalCreateMindAndTransfer(session, ent.Owner, ent.Owner);
-        }
     }
 }

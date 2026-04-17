@@ -80,7 +80,6 @@
       - XenoParasite
       - XenoEgg
       - XenoFruit
-      - CCMRoyalParasite
   - type: MultiHandedHolder
     items:
     - hands: 2

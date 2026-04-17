@@ -48,18 +48,13 @@ public sealed partial class FindParasiteSystem : EntitySystem
         var uiState = new FindParasiteUIState();
 
         var eggs = EntityQueryEnumerator<XenoEggComponent>();
-        var royalEggs = EntityQueryEnumerator<CCMXenoRoyalEggComponent>();
         var eggMorphers = EntityQueryEnumerator<EggMorpherComponent>();
         var parasiteThrowers = EntityQueryEnumerator<XenoParasiteThrowerComponent>();
         var parasites = EntityQueryEnumerator<ParasiteAIComponent>();
-        var royalParasites = EntityQueryEnumerator<CCMRoyalParasiteComponent>();
 
         var spawners = new List<NetEntity>();
         while (eggs.MoveNext(out var eggEnt, out var egg))
         {
-            if (HasComp<CCMXenoRoyalEggComponent>(eggEnt))
-                continue;
-
             if (egg.State != XenoEggState.Grown || (TryComp<XenoFragileEggComponent>(eggEnt, out var fragile) && fragile.SustainedBy != null))
             {
                 continue;
@@ -67,19 +62,6 @@ public sealed partial class FindParasiteSystem : EntitySystem
 
             var netEnt = _entities.GetNetEntity(eggEnt);
             spawners.Add(netEnt);
-        }
-
-        while (royalEggs.MoveNext(out var royalEggEnt, out _))
-        {
-            if (TryComp<XenoEggComponent>(royalEggEnt, out var royalEgg))
-            {
-                if (royalEgg.State != XenoEggState.Grown || (TryComp<XenoFragileEggComponent>(royalEggEnt, out var fragile) && fragile.SustainedBy != null))
-                {
-                    continue;
-                }
-            }
-
-            spawners.Add(_entities.GetNetEntity(royalEggEnt));
         }
 
         while (eggMorphers.MoveNext(out var eggMorpherEnt, out var eggMorpherComp))
@@ -94,12 +76,8 @@ public sealed partial class FindParasiteSystem : EntitySystem
 
         while (parasiteThrowers.MoveNext(out var throwerEnt, out var parasiteThrower))
         {
-            var regularParasites = parasiteThrower.CurParasites;
-            var regularInHands = parasiteThrower.CurParasitesInHands;
-            var totalRegular = regularParasites + regularInHands;
-
-            if (totalRegular <= parasiteThrower.ReservedParasites ||
-                totalRegular == 0 ||
+            if (parasiteThrower.CurParasites <= parasiteThrower.ReservedParasites ||
+                parasiteThrower.CurParasites == 0 ||
                 _mob.IsDead(throwerEnt))
             {
                 continue;
@@ -107,25 +85,25 @@ public sealed partial class FindParasiteSystem : EntitySystem
             spawners.Add(_entities.GetNetEntity(throwerEnt));
         }
 
+        while (parasiteThrowers.MoveNext(out var throwerEnt, out var parasiteThrower))
+        {
+            if (parasiteThrower.CurParasites <= parasiteThrower.ReservedParasites ||
+                parasiteThrower.CurParasites == 0 ||
+                _mob.IsDead(throwerEnt))
+            {
+                continue;
+            }
+            spawners.Add(_entities.GetNetEntity(throwerEnt));
+        }
+
+
         while (parasites.MoveNext(out var paraEnt, out var parasite))
         {
-            if (HasComp<CCMRoyalParasiteComponent>(paraEnt))
-                continue;
-
             if (!_mob.IsAlive(paraEnt))
             {
                 continue;
             }
             spawners.Add(_entities.GetNetEntity(paraEnt));
-        }
-
-        while (royalParasites.MoveNext(out var royalParasiteEnt, out _))
-        {
-            if (!_mob.IsAlive(royalParasiteEnt))
-            {
-                continue;
-            }
-            spawners.Add(_entities.GetNetEntity(royalParasiteEnt));
         }
 
         foreach (var spawner in spawners)
@@ -177,12 +155,9 @@ public sealed partial class FindParasiteSystem : EntitySystem
         var ev = new GetVerbsEvent<ActivationVerb>(ent, spawner, null, null, false, false, false, new());
         RaiseLocalEvent(spawner, ev);
 
-        var regularVerbText = Loc.GetString("rmc-xeno-egg-ghost-verb");
-        var royalVerbText = Loc.GetString("rmc-xeno-egg-royal-ghost-verb");
-
         foreach (var action in ev.Verbs)
         {
-            if ((action.Text != regularVerbText && action.Text != royalVerbText) || action.Act is null)
+            if (action.Text != Loc.GetString("rmc-xeno-egg-ghost-verb") || action.Act is null)
             {
                 continue;
             }

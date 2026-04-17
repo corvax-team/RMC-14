@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<customControls:DefaultWindow xmlns="clr-namespace:Robust.Client.UserInterface.Controls;assembly=Robust.Client"
-                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                              xmlns:customControls="clr-namespace:Robust.Client.UserInterface.CustomControls;assembly=Robust.Client"
-                              Title="Резерв паразитов"
-                              MinSize="300 200">
-</customControls:DefaultWindow>
+<DefaultWindow
+    xmlns="https://spacestation14.io"
+    SetSize="250 120"
+    Margin="4 0">
+    <BoxContainer Orientation="Vertical">
+        <SpinBox Name="ReserveBar" Access="Public" HorizontalExpand="True" Margin ="0 4"/>
+        <Button Name="ApplyButton" Access="Public" HorizontalExpand="True" Margin ="0 4" />
+    </BoxContainer>
+</DefaultWindow>

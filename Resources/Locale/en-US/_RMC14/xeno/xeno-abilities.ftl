@@ -163,13 +163,12 @@ cm-xeno-retrieve-egg-unstash-egg = We grab an egg from our storage. Now holding:
 rmc-xeno-retrieve-egg-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} holding: {$cur_eggs}/{$max_eggs} eggs.
 
 # Throw Parasite
-cm-xeno-throw-parasite-no-parasites = We don't have any regular parasites stored!
+cm-xeno-throw-parasite-no-parasites = We don't have any children stored!
 cm-xeno-throw-parasite-too-many-parasites = We can't carry more children!
 cm-xeno-throw-parasite-stash-parasite = We store the child for safekeeping. Now sheltering: {$cur_parasites}/{$max_parasites}.
 cm-xeno-throw-parasite-unstash-parasite = We grab a child from our storage. Now sheltering: {$cur_parasites}/{$max_parasites}.
-cm-xeno-throw-parasite-stash-royal = We store the royal child for safekeeping. Now sheltering: {$cur_royals}/{$max_royals} royal parasites.
-cm-xeno-throw-parasite-unstash-royal = We grab a royal child from our storage. Now sheltering: {$cur_royals}/{$max_royals} royal parasites.
-rmc-xeno-throw-parasite-reserves = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-HAVE($xeno)} {$rev_paras} regular and {$rev_royals} royal parasite ghost {$rev_paras ->
+rmc-xeno-throw-parasite-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} sheltering: {$cur_paras}/{$max_paras} children.
+rmc-xeno-throw-parasite-reserves = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-HAVE($xeno)} {$rev_paras} parasite ghost {$rev_paras ->
    [one] role
    *[other] roles
 } available.

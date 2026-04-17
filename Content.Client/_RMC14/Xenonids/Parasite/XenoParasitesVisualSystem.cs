@@ -8,23 +8,26 @@ public sealed class XenoParasitesVisualSystem : VisualizerSystem<XenoParasiteThr
 {
     protected override void OnAppearanceChange(EntityUid uid, XenoParasiteThrowerComponent component, ref AppearanceChangeEvent args)
     {
-        if (args.Sprite == null || !AppearanceSystem.TryGetData(uid, ParasiteOverlayVisuals.States, out bool[] states))
+        var sprite = args.Sprite;
+
+        if (sprite == null || !AppearanceSystem.TryGetData(uid, ParasiteOverlayVisuals.States, out bool[] states))
             return;
 
-        var layerState = "para_";
+        string layerState = "para_";
 
-        if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Downed, out var downed) && (bool)downed)
+        if(AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Downed, out bool downed) && downed)
             layerState = "para_downed_";
-        else if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Resting, out var resting) && (bool)resting)
+        else if(AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Resting, out bool resting) && resting)
             layerState = "para_rest_";
 
-        foreach (var layer in Enum.GetValues<ParasiteOverlayLayers>())
+        foreach(var layer in Enum.GetValues<ParasiteOverlayLayers>())
         {
-            if (!args.Sprite.LayerMapTryGet(layer, out _))
+            if (!sprite.LayerMapTryGet(layer, out var paraLayer))
                 continue;
 
-            args.Sprite.LayerSetVisible(layer, states[(int)layer]);
-            args.Sprite.LayerSetState(layer, $"{layerState}{(int)layer}");
+            sprite.LayerSetVisible(layer, states[(int)layer]);
+
+            sprite.LayerSetState(layer, $"{layerState}{(int)layer}");
         }
     }
 }
