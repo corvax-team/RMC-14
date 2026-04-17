@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Shared._CCM14.Xenonids.Screech; // CCM14
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Evasion;
@@ -332,6 +333,9 @@ public sealed class CMGunSystem : EntitySystem
         FixedPoint2 orderAccuracy = 0;
         FixedPoint2 orderAccuracyPerTile = 0;
 
+        FixedPoint2 screechAccuracy = 0; // CCM14
+        FixedPoint2 screechAccuracyPerTile = 0; // CCM14
+
         if (TryComp(weapon.Owner, out TransformComponent? transformComponent) &&
             transformComponent.ParentUid.Valid &&
             TryComp(transformComponent.ParentUid, out FocusOrderComponent? orderComponent) &&
@@ -340,14 +344,27 @@ public sealed class CMGunSystem : EntitySystem
             orderAccuracy = orderComponent.Received[0].Multiplier * orderComponent.AccuracyModifier;
             orderAccuracyPerTile = orderComponent.Received[0].Multiplier * orderComponent.AccuracyPerTileModifier;
         }
+// CCM14 start
+        if (transformComponent is not null &&
+            transformComponent.ParentUid.Valid &&
+            TryComp(transformComponent.ParentUid, out XenoScreechAccuracyDebuffComponent? screechComp) &&
+            screechComp.Received.Count != 0)
+        {
+            screechAccuracy =
+                screechComp.Received[0].Multiplier * screechComp.AccuracyModifier;
 
+            screechAccuracyPerTile =
+                screechComp.Received[0].Multiplier * screechComp.AccuracyPerTileModifier;
+        }
+// CCM14 end
         for (var t = 0; t < args.FiredProjectiles.Count; ++t)
         {
             if (!TryComp(args.FiredProjectiles[t], out RMCProjectileAccuracyComponent? accuracyComponent))
                 continue;
 
-            accuracyComponent.Accuracy *= weapon.Comp.ModifiedAccuracyMultiplier;
+            accuracyComponent.Accuracy *= MathF.Max(0.05f, weapon.Comp.ModifiedAccuracyMultiplier.Float());
             accuracyComponent.Accuracy += orderAccuracy;
+            accuracyComponent.Accuracy += screechAccuracy;
 
             var count = 0;
             while (accuracyComponent.Thresholds.Count > count)
@@ -359,6 +376,9 @@ public sealed class CMGunSystem : EntitySystem
 
             if (orderAccuracyPerTile != 0)
                 accuracyComponent.Thresholds.Add(new AccuracyFalloffThreshold(0f, -orderAccuracyPerTile, false));
+            
+            if (screechAccuracyPerTile != 0)
+                accuracyComponent.Thresholds.Add(new AccuracyFalloffThreshold(0f, -screechAccuracyPerTile, false));
 
             accuracyComponent.GunSeed = (long) t << 32 | netId;
             Dirty<RMCProjectileAccuracyComponent>((args.FiredProjectiles[t], accuracyComponent));

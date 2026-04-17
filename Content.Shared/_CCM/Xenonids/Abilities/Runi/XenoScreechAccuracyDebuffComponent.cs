@@ -1,14 +1,17 @@
-using Robust.Shared.GameObjects;
-using Robust.Shared.Serialization;
+using Content.Shared.FixedPoint;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._CCM14.Xenonids.Screech;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class XenoScreechAccuracyDebuffComponent : Component
 {
-    [DataField]
-    public float Multiplier = 1f;
+    [DataField, AutoNetworkedField]
+    public List<(FixedPoint2 Multiplier, TimeSpan ExpiresAt)> Received = new();
 
     [DataField]
-    public TimeSpan ExpireAt;
+    public FixedPoint2 AccuracyModifier = -1.0; // негатив = ухудшение точности
+
+    [DataField]
+    public FixedPoint2 AccuracyPerTileModifier = -1.0;
 }

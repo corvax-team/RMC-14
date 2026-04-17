@@ -29,6 +29,8 @@ public sealed class XenoRounyScreechSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityManager _ent = default!;
+    // [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
+    // [Dependency] private readonly EvasionSystem _evasion = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
     private readonly HashSet<Entity<MobStateComponent>> _closeMobs = new();
@@ -73,8 +75,13 @@ public sealed class XenoRounyScreechSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno, receiver))
                 continue;
 
-            ApplyConfusion(receiver);
+            // ApplyConfusion(receiver);
             ApplyDeaf(xeno, receiver, xeno.Comp.CloseDeafTime);
+
+            ApplyAccuracyDebuff(
+                receiver,
+                -10,
+                TimeSpan.FromSeconds(8));
         }
 
         // =========================
@@ -91,8 +98,13 @@ public sealed class XenoRounyScreechSystem : EntitySystem
             if (_closeMobs.Contains(receiver))
                 continue;
 
-            ApplyConfusion(receiver);
+            // ApplyConfusion(receiver);
             ApplyDeaf(xeno, receiver, xeno.Comp.FarDeafTime);
+
+            ApplyAccuracyDebuff(
+                receiver,
+                -10,
+                TimeSpan.FromSeconds(5));
         }
 
         // =========================
@@ -101,24 +113,24 @@ public sealed class XenoRounyScreechSystem : EntitySystem
         _parasites.Clear();
         _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParasiteStunRange, _parasites);
 
-        foreach (var receiver in _parasites)
-        {
-            ApplyConfusion(receiver);
-        }
+        // foreach (var receiver in _parasites)
+        // {
+        //     ApplyConfusion(receiver);
+        // }
 
         if (_net.IsServer)
             SpawnAttachedTo(xeno.Comp.Effect, xeno.Owner.ToCoordinates());
     }
 
-    private void ApplyConfusion(EntityUid target)
-    {
-        if (_mobState.IsDead(target))
-            return;
+    // private void ApplyConfusion(EntityUid target)
+    // {
+    //     if (_mobState.IsDead(target))
+    //         return;
 
-        var comp = _ent.EnsureComponent<XenoScreechConfusionComponent>(target);
+    //     var comp = _ent.EnsureComponent<XenoScreechConfusionComponent>(target);
 
-        comp.ExpireAt = _timing.CurTime + TimeSpan.FromSeconds(10);
-    }
+    //     comp.ExpireAt = _timing.CurTime + TimeSpan.FromSeconds(10);
+    // }
 
     private void ApplyDeaf(EntityUid xeno, EntityUid receiver, TimeSpan time)
     {
@@ -129,5 +141,53 @@ public sealed class XenoRounyScreechSystem : EntitySystem
             return;
 
         _deaf.TryDeafen(receiver, time, false);
+    }
+
+    private void ApplyAccuracyDebuff(EntityUid target, int multiplier, TimeSpan duration)
+    {
+        if (_mobState.IsDead(target))
+            return;
+
+        var comp = _ent.EnsureComponent<XenoScreechAccuracyDebuffComponent>(target);
+        
+
+        var time = _timing.CurTime;
+        comp.Received.Add((multiplier, time + duration));
+        comp.Received.Sort((a, b) => a.CompareTo(b));
+        
+        comp.AccuracyModifier = -0.8f; // или -1f
+        comp.AccuracyPerTileModifier = -10f;
+
+        // важно: обновить системы, которые читают модификаторы
+        // _movement.RefreshMovementSpeedModifiers(target);
+        // _evasion.RefreshEvasionModifiers(target);
+
+        // RaiseLocalEvent(target, ref new RefreshMovementModifiersEvent());
+        // RaiseLocalEvent(target, ref new RefreshEvasionModifiersEvent());
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        RemoveExpired();
+    }
+
+    private void RemoveExpired()
+    {
+        var query = EntityQueryEnumerator<XenoScreechAccuracyDebuffComponent>();
+        var time = _timing.CurTime;
+
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            for (var i = comp.Received.Count - 1; i >= 0; i--)
+            {
+                if (comp.Received[i].ExpiresAt < time)
+                    comp.Received.RemoveAt(i);
+            }
+
+            if (comp.Received.Count == 0)
+                RemCompDeferred<XenoScreechAccuracyDebuffComponent>(uid);
+        }
     }
 }

@@ -175,13 +175,13 @@ public sealed class RMCProjectileSystem : EntitySystem
         accuracy -= evasionComponent.ModifiedEvasion;
 
         // Xeno Screech inaccuracy debuff
-        if (TryComp<RMCProjectileAccuracyComponent>(projectile.Owner, out var ownerAcc))
-        {
-            if (TryComp<XenoScreechAccuracyDebuffComponent>(projectile.Owner, out var comp))
-            {
-                accuracy = (int)(accuracy * comp.Multiplier);
-            }
-        }
+        // if (TryComp<RMCProjectileAccuracyComponent>(projectile.Owner, out var ownerAcc))
+        // {
+        //     if (TryComp<XenoScreechAccuracyDebuffComponent>(projectile.Owner, out var comp))
+        //     {
+        //         accuracy = (int)(accuracy * comp.Multiplier);
+        //     }
+        // }
 
         accuracy = accuracy > projectile.Comp.MinAccuracy ? accuracy : projectile.Comp.MinAccuracy;
 
