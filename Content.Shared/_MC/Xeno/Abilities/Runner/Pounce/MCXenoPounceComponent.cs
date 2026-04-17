@@ -1,6 +1,7 @@
 ﻿using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using System.Numerics;
 
 namespace Content.Shared._MC.Xeno.Abilities.Runner.Pounce;
 

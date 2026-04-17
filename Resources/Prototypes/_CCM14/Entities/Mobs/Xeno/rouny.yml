@@ -20,6 +20,8 @@
     - ActionXenoBoneChips
     - ActionXenoZoom
     - ActionXenoDevolve
+    - CCMActionXenoRuniLeap
+    - ActionXenoRounyScreech
     tier: 3
     hudOffset: 0,0.63
     unlockAt: 900 # 15 minutes
@@ -38,3 +40,14 @@
     delay: 900 # 15 minutes
   - type: RMCXenoDamageVisuals
     prefix: rouny
+  # - type: MCXenoPouncing
+  - type: MCXenoPounce
+    delay: 0.2
+    maxDistance: 13
+    strength: 45
+    zigZag: true
+    zigZagAmplitude: 3.5
+    zigZagFrequency: 10
+    stopOnHit: true
+    hitKnockdownTime: 2
+  - type: XenoRounyScreech

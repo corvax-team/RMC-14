@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._CCM14.Xenonids.Screech;
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -172,6 +173,15 @@ public sealed class RMCProjectileSystem : EntitySystem
             accuracy -= evasionComponent.ModifiedEvasionFriendly;
 
         accuracy -= evasionComponent.ModifiedEvasion;
+
+        // Xeno Screech inaccuracy debuff
+        if (TryComp<RMCProjectileAccuracyComponent>(projectile.Owner, out var ownerAcc))
+        {
+            if (TryComp<XenoScreechAccuracyDebuffComponent>(projectile.Owner, out var comp))
+            {
+                accuracy = (int)(accuracy * comp.Multiplier);
+            }
+        }
 
         accuracy = accuracy > projectile.Comp.MinAccuracy ? accuracy : projectile.Comp.MinAccuracy;
 

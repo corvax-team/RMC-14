@@ -55,45 +55,76 @@ public sealed class MCXenoPounceSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<MCXenoPouncingComponent>();
-        while (query.MoveNext(out var entityUid, out var pouncingComponent))
+        var query = EntityQueryEnumerator<MCXenoPouncingComponent, PhysicsComponent>();
+
+        while (query.MoveNext(out var uid, out var pounce, out var physics))
         {
-            if (_timing.CurTime < pouncingComponent.End)
+            if (_timing.CurTime >= pounce.End)
+            {
+                Stop(uid);
+                continue;
+            }
+
+            if (!pounce.ZigZag)
                 continue;
 
-            Stop(entityUid);
+            if (pounce.Direction == Vector2.Zero)
+                continue;
+
+
+            var forward = pounce.Direction;
+
+            var perp = new Vector2(-forward.Y, forward.X);
+
+            var time = (float)(_timing.CurTime - pounce.StartTime).TotalSeconds;
+
+            var offset = MathF.Sin(time * pounce.ZigZagFrequency) * pounce.ZigZagAmplitude;
+
+            var baseSpeed = pounce.Strength;
+
+            var baseVelocity = forward * baseSpeed;
+
+            var sideVelocity = perp * offset * baseSpeed * 3.5f;
+
+            var finalVelocity = baseVelocity + sideVelocity;
+
+            _physics.SetLinearVelocity(uid, finalVelocity, body: physics);
         }
     }
 
-private void OnAction(Entity<MCXenoPounceComponent> entity, ref MCXenoPounceActionEvent args)
-{
-    var xeno = entity.Owner;
-    if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno, args.PlasmaCost))
-         return;
-
-    if (args.Handled)
-        return;
-
-    if (entity.Comp.Delay == TimeSpan.Zero)
+    private void OnAction(Entity<MCXenoPounceComponent> entity, ref MCXenoPounceActionEvent args)
     {
-        if (UseAbility(entity, args.Target.ToMap(EntityManager, _transform)))
-            args.Handled = true;
+        var xeno = entity.Owner;
 
-        return;
+        if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno, args.PlasmaCost))
+            return;
+
+        if (args.Handled)
+            return;
+
+        var targetMap = args.Target.ToMap(EntityManager, _transform);
+
+        if (entity.Comp.Delay == TimeSpan.Zero)
+        {
+            if (UseAbility(entity, targetMap))
+                args.Handled = true;
+
+            return;
+        }
+
+        _doAfter.TryStartDoAfter(new DoAfterArgs(
+            EntityManager,
+            entity,
+            entity.Comp.Delay,
+            new MCXenoPounceDoAfterEvent(targetMap),
+            entity)
+        {
+            BreakOnMove = true,
+            BreakOnRest = true,
+        });
+
+        args.Handled = true;
     }
-
-    // Преобразуем EntityCoordinates в MapCoordinates сразу перед DoAfter
-    var targetMap = args.Target.ToMap(EntityManager, _transform);
-
-    _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, entity, entity.Comp.Delay,
-        new MCXenoPounceDoAfterEvent(targetMap), entity)
-    {
-        BreakOnMove = true,
-        BreakOnRest = true,
-    });
-
-    args.Handled = true;
-}
 
     private void OnDoAfter(Entity<MCXenoPounceComponent> entity, ref MCXenoPounceDoAfterEvent args)
     {
@@ -101,51 +132,57 @@ private void OnAction(Entity<MCXenoPounceComponent> entity, ref MCXenoPounceActi
             return;
 
         args.Handled = true;
-
         UseAbility(entity, args.TargetCoordinates);
     }
 
-private bool UseAbility(Entity<MCXenoPounceComponent> entity, MapCoordinates target)
-{
-    if (!_physicsQuery.TryGetComponent(entity, out var physicsComponent))
-        return false;
+    private bool UseAbility(Entity<MCXenoPounceComponent> entity, MapCoordinates target)
+    {
+        if (!_physicsQuery.TryGetComponent(entity, out var physicsComponent))
+            return false;
 
-    if (EnsureComp<MCXenoPouncingComponent>(entity, out var pouncingComponent))
-        return false;
+        if (EnsureComp<MCXenoPouncingComponent>(entity, out var pouncing))
+            return false;
 
-    var origin = _transform.GetMapCoordinates(entity);
-    var direction = target.Position - origin.Position;
+        var origin = _transform.GetMapCoordinates(entity);
 
-    if (direction == Vector2.Zero)
-        return false;
+        var raw = target.Position - origin.Position;
 
-    var length = direction.Length();
-    var distance = Math.Clamp(length, 0.1f, entity.Comp.MaxDistance);
+        if (raw == Vector2.Zero)
+            return false;
 
-    var impulse = direction.Normalized() * entity.Comp.Strength * physicsComponent.Mass;
+        var length = raw.Length();
+        var distance = Math.Clamp(length, 0.1f, entity.Comp.MaxDistance);
 
-    _rmcPulling.TryStopAllPullsFromAndOn(entity);
+        var direction = Vector2.Normalize(raw);
 
-    _physics.ApplyLinearImpulse(entity, impulse, body: physicsComponent);
-    _physics.SetBodyStatus(entity, physicsComponent, BodyStatus.InAir);
+        var impulse = direction * entity.Comp.Strength * physicsComponent.Mass;
 
-    var duration = _timing.CurTime + TimeSpan.FromSeconds(distance / entity.Comp.Strength);
-    pouncingComponent.End = duration;
-    Dirty(entity, pouncingComponent);
+        _rmcPulling.TryStopAllPullsFromAndOn(entity);
 
-    // событие для эффекта
-    var ev = new MCXenoPounceStartEvent(entity, origin, target, direction.Normalized(), distance);
-    RaiseLocalEvent(entity, ref ev);
+        pouncing.Direction = direction;
+        pouncing.StartTime = _timing.CurTime;
+        Dirty(entity, pouncing);
 
-    return true;
-}
+        _physics.ApplyLinearImpulse(entity, impulse, body: physicsComponent);
+        _physics.SetBodyStatus(entity, physicsComponent, BodyStatus.InAir);
+
+        pouncing.End = _timing.CurTime + TimeSpan.FromSeconds(distance / entity.Comp.Strength);
+
+        var ev = new MCXenoPounceStartEvent(
+            entity,
+            origin,
+            target,
+            direction,
+            distance);
+
+        RaiseLocalEvent(entity, ref ev);
+
+        return true;
+    }
 
     private void OnHit(Entity<MCXenoPouncingComponent> entity, ref PreventCollideEvent args)
     {
         if (args.OtherFixture.CollisionLayer == (int)CollisionGroup.SlipLayer)
-            return;
-
-        if (_tag.HasTag(args.OtherEntity, AcidSprayTag))
             return;
 
         if (_tag.HasTag(args.OtherEntity, AcidSprayTag))
@@ -158,12 +195,11 @@ private bool UseAbility(Entity<MCXenoPounceComponent> entity, MapCoordinates tar
         }
 
         entity.Comp.Hit.Add(args.OtherEntity);
+
         Hit(entity, args.OtherEntity);
 
-        if (!HasComp<Shared.Mobs.Components.MobStateComponent>(args.OtherEntity))
-            return;
-
-        args.Cancelled = true;
+        if (HasComp<Shared.Mobs.Components.MobStateComponent>(args.OtherEntity))
+            args.Cancelled = true;
     }
 
     private void Hit(Entity<MCXenoPouncingComponent> entity, EntityUid target)
@@ -183,22 +219,23 @@ private bool UseAbility(Entity<MCXenoPounceComponent> entity, MapCoordinates tar
             return;
         }
 
-        if (!TryComp<MCXenoPounceComponent>(entity, out var pounceComponent))
+        if (!TryComp<MCXenoPounceComponent>(entity, out var config))
             return;
 
-        if (pounceComponent.StopOnHit)
+        if (config.StopOnHit)
+        {
             Stop(entity);
+            return;
+        }
 
-        _stun.TrySlowdown(entity, pounceComponent.HitSelfParalyzeTime, true, 0f, 0f);
-        _stun.TryParalyze(target, pounceComponent.HitKnockdownTime, true);
+        _stun.TrySlowdown(entity, config.HitSelfParalyzeTime, true, 0f, 0f);
+        _stun.TryParalyze(target, config.HitKnockdownTime, true);
 
-        if (pounceComponent.HitDamage is { } damage)
+        if (config.HitDamage is { } damage)
             _damageable.TryChangeDamage(target, damage, origin: entity, tool: entity);
 
-        var first = entity.Comp.Hit.Count == 1;
-
-        if (pounceComponent.HitSound is not null && first)
-            _audio.PlayPredicted(pounceComponent.HitSound, entity, entity);
+        if (config.HitSound != null && entity.Comp.Hit.Count == 1)
+            _audio.PlayPredicted(config.HitSound, entity, entity);
     }
 
     private void Stop(EntityUid entityUid)
@@ -206,8 +243,11 @@ private bool UseAbility(Entity<MCXenoPounceComponent> entity, MapCoordinates tar
         if (!_physicsQuery.TryGetComponent(entityUid, out var physics))
             return;
 
-        _physics.SetLinearVelocity(entityUid, Vector2.Zero, body: physics);
+        _physics.SetLinearVelocity(entityUid, Vector2.Zero);
         _physics.SetBodyStatus(entityUid, physics, BodyStatus.OnGround);
+
+        if (TryComp<MCXenoPouncingComponent>(entityUid, out var comp))
+            comp.Hit.Clear();
 
         RemCompDeferred<MCXenoPouncingComponent>(entityUid);
     }
