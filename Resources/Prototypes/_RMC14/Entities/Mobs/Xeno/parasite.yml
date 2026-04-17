@@ -5,7 +5,8 @@
   - CMXenoFlammable
   - RMCXenoVentCrawler
   id: CMXenoParasiteBase
-  name: Parasite
+  name: Child
+  suffix: Parasite
   components:
   - type: GuideHelp
     guides:
@@ -52,7 +53,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.2
+          radius: 0.25
         density: 185
         mask:
         - SmallMobMask
@@ -98,11 +99,6 @@
     quickEquip: false
     slots: [mask]
     sprite: _RMC14/Mobs/Xenonids/Parasite/parasite_mask.rsi
-  - type: CCMParasiteSprite
-    maskRsi: _RMC14/Mobs/Xenonids/Parasite/parasite_mask.rsi
-    maskInventoryState: icon
-    normalRsi: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
-    normalState: alive
   - type: HideLayerClothing
     slots:
     - Snout
@@ -141,10 +137,7 @@
       4: rmc-xeno-ancient-parasite
       5: rmc-xeno-prime-parasite
   - type: FixedIdentity
-    name: cm-job-name-xeno-parasite-xeno
-    whitelist:
-      components:
-      - Xeno
+    name: cm-job-name-xeno-parasite
   - type: VentCrawler
     ventCrawlIcon: parasite
   - type: Unshieldable
@@ -166,7 +159,7 @@
 - type: entity
   parent: CMXenoParasiteBase
   id: RMCXenoParasiteWatcher
-  suffix: Watcher
+  suffix: Parasite, Watcher
   components:
   - type: Xeno
     actionIds:
@@ -191,6 +184,6 @@
 - type: entity
   parent: CMXenoParasite
   id: RMCXenoParasitePrimeHiveAssign
-  suffix: Auto-Assign, Prime Hive
+  suffix: Parasite, Auto-Assign, Prime Hive
   components:
   - type: AutoAssignHive

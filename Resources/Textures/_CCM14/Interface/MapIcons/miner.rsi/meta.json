@@ -11,29 +11,13 @@
       "name": "phoron"
     },
     {
-      "name": "phoron-on",
-      "delays": [
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ]
-      ]
+      "name": "phoron-on"
     },
     {
       "name": "platinum"
     },
     {
-      "name": "platinum-on",
-      "delays": [
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ]
-      ]
+      "name": "platinum-on"
     }
   ]
 }

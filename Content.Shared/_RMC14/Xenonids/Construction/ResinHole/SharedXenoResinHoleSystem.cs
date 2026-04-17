@@ -43,17 +43,11 @@ public abstract class SharedXenoResinHoleSystem : EntitySystem
 			args.Cancelled = true;
 	}
 
-    protected bool CanPlaceInHole(EntityUid uid, Entity<XenoResinHoleComponent> resinHole, EntityUid user)
+	protected bool CanPlaceInHole(EntityUid uid, Entity<XenoResinHoleComponent> resinHole, EntityUid user)
     {
         if (!HasComp<XenoParasiteComponent>(uid) ||
             _mobState.IsDead(uid))
         {
-            return false;
-        }
-
-        if (HasComp<CCMRoyalParasiteComponent>(uid))
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-queen-displeased"), resinHole, user, PopupType.MediumCaution);
             return false;
         }
 
@@ -134,7 +128,7 @@ public abstract class SharedXenoResinHoleSystem : EntitySystem
         if (_areas.TryGetArea(ent, out _, out var areaProto))
             locationName = areaProto.Name;
 
-        var msg = Loc.GetString(args.Message, ("location", locationName), ("type", GetTrapTypeName(ent)));
+        var msg = Loc.GetString(args.message, ("location", locationName), ("type", GetTrapTypeName(ent)));
         _announce.AnnounceToHive(ent.Owner, hive, msg, color: ent.Comp.MessageColor);
     }
 
@@ -170,11 +164,11 @@ public abstract class SharedXenoResinHoleSystem : EntitySystem
 [Serializable, NetSerializable]
 public sealed partial class XenoResinHoleActivationEvent : EntityEventArgs
 {
-    public LocId Message;
+    public LocId message;
 
     public XenoResinHoleActivationEvent(LocId msg)
     {
-        Message = msg;
+        message = msg;
     }
 }
 

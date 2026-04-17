@@ -284,8 +284,8 @@
         points: 15
       - id: CMPacketGrenadeFragFilled
         points: 15
-      #- id: CMPacketGrenadeWPFilled # TODO RMC14 White Phosphorus (WP) Grenades
-      #  points: 15
+      - id: RMCPacketGrenadeWhitePhosphorusFilled
+        points: 15
     - name: Направл. планки # CCM14
       entries:
       - id: RMCAttachmentMagneticHarness
@@ -639,7 +639,8 @@
         points: 15
       - id: CMPacketGrenadeFragFilled
         points: 15
-      #- id: CMPacketGrenadesWPFilled # TODO RMC14 Port White Phosphorus (WP) Grenades
+      - id: RMCPacketGrenadeWhitePhosphorusFilled
+        points: 15
       #- id: CMPacketGrenadesG2Filled (x3) # TODO RMC14 Port Electroshock (G2) Grenades
     - name: Направл. планки # CCM14
       entries:

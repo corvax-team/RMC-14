@@ -88,7 +88,6 @@
       - XenoParasite
       - XenoEgg
       - XenoFruit
-      - CCMRoyalParasite
   - type: XenoEggRetriever
   - type: XenoNurturing
   - type: RMCSize
@@ -148,7 +147,6 @@
     - ActionXenoRetrieveEgg
     - ActionXenoParasiteReserve
     - ActionXenoDevolve
-    - CCMActionXenoThrowRoyalParasite
   - type: XenoParasiteThrower
   - type: XenoEvolution
     strains:
