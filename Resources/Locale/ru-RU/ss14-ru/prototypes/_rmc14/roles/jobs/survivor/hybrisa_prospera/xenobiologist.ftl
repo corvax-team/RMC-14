@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorHybrisaXenobiologist = точка появления ксенобиолога Hybrisa
+ent-RMCSpawnPointSurvivorHybrisaXenobiologist = спавнер выжившего ксенобиолога
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetHybrisaXenobiologist = пресет колониста: ксенобиолог Hybrisa
+    .suffix = Гибриса
+ent-RMCGearSurvivorPresetHybrisaXenobiologist = пресет ксенобиолога Гибриса
     .desc = { ent-RMCSurvivorPresetScientist.desc }

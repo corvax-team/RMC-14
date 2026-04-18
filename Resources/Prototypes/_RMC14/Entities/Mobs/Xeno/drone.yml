@@ -64,7 +64,6 @@
       - XenoParasite
       - XenoEgg
       - XenoFruit
-      - CCMRoyalParasite
   - type: TunnelRenamer
   - type: EggPlantTime
     plantTime: 2.5
@@ -147,6 +146,7 @@
     - DoorXenoResin
     - XenoStickyResin
     - XenoFastResin
+    - XenoResinSpikes
   - type: VentCrawler
     ventCrawlIcon: drone
   - type: RMCActionOrder

@@ -1,66 +1,67 @@
 # Auxiliary Support
 highlights-auxiliary-support-officer = Офицер Вспомогательной Поддержки, "ОВП", Вспомогательная Поддержка, "ОР", Пилоты
 highlights-dropship-crew-chief = Экипаж десантного корабля, "ЭДК", Аламо, Нормандия, Вспомогательная поддержка, Десантный корабль, "Эвак", Эвакуация, Медэвак, Фултон, "JTAC"
-highlights-dropship-pilot = Пилот транспортного корабля, "ПТК", Пилот, Аламо, Вспомогательная поддержка, Демантный корабль, "Эвак", Эвакуация, Медэвак, Фултон, "JTAC"
+highlights-dropship-pilot = Пилот транспортного корабля, "ПТК", Пилот, Аламо, Вспомогательная поддержка, Десантный корабль, "Эвак", Эвакуация, Медэвак, Фултон, "JTAC"
 highlights-gunship-pilot = Пилот штурмового корабля, "ПШК", Пилот, Нормандия, Вспомогательная поддержка, Ганшип, "КАС", Медэвак, Фултон, "JTAC"
 highlights-intelligence-officer = Офицер Разведки, "ОР", "Интел", Разведка, Выжившие
 highlights-senior-enlisted-advisor = Старший Сержантский Советник, "ССС", Рекрут, E1, Новичок, Тренировка, Ментор
+
 # Command
 highlights-commanding-officer = Командующий Офицер, "КО", Майор, Лейтенант-полковник, Полковник, Combat Information Center, "ЦИК", Командование, Оверватч, "ОБ", Обжаловать, Королева, "ОБ", Корды, Координаты, Поставки, Loose, Burst, "ФОБ", Комы, Тактическая карта, Карта, "Разведка", Телефон, "ТЕХ ДОКЛАД", "СЛ", Командир
 highlights-executive-officer = Исполнительный Офицер, "ИО", Капитан, "Кэп", Combat Information Center, "ЦИК", Командование, Оверватч, "ОВ", Обжалование, Королева, "OБ", Корды, Координаты, Поставки, Loose, Burst, "ФОБ", Комы, Тактическая карта, Карта, "Разведка", Телефон, "ТЕХ ДОКЛАД", "СЛ", Командир
 highlights-staff-officer = Офицер Штаба, "ОШ", Combat Information Center, "ЦИК", Командование, Оверватч, "ОВ", Обжаловать, Королева, "ОБ", Корды, Координаты, Поставки, Loose, Burst, "ФОБ", Комы, Тактическая карта, Карта, Телефон, "ТЕХ ДОКЛАД", "СЛ", Командир
+
 # Requisitions
-highlights-logistics-officer = Logistics Officer, "LO", Requisitions, "Req", Command, Supply, "Drop", Crate, Budget, Ammo
-highlights-requisitions-technician = Requisitions Technician, Req Technician, Requisitions Tech, Req Tech, "RT", Requisitions, "Req", Supply, "Drop", Crate, Budget, Ammo
-# Requisitions
-highlights-quartermaster = Квартирмейстер, "КМ", Поставки, "Карго", Командование, Поставки, "Drop", Crate, Бюджет, патроны
-highlights-cargo-technician = Техник снабжения, Карготех, "ТС" Поставки, "Карго", Поставки, "Drop", Crate, Бюджет, Патроны
+highlights-logistics-officer = Офицер логистики, "ОЛ", Снабжение, "Рек", Командование, Поставки, "Дроп", Ящик, Бюджет, Патроны
+highlights-requisitions-technician = Техник снабжения, Рек-тех, "ТС", Снабжение, "Рек", Поставки, "Дроп", Ящик, Бюджет, Патроны
+
 # Engineering
 highlights-chief-engineer = Главный инженер, "ГИ", Инженерный отдел, Инженер, "Инж", Командование, "ОБ", "OT"
 highlights-maintenance-technician = Техник по обслуживанию, "ТПО", Инженерный отдел, Инженер, "Инж", "ОБ"
-highlights-ordnance-technician = Ordnance Technician, "OT", Инженерный отдел, "Инж", "ОБ"
+highlights-ordnance-technician = Техник по вооружению, "ТВ", "ОТ", Инженерный отдел, "Инж", "ОБ"
+
 # Medical
 highlights-chief-medical-officer = Старший Медицинский Офицер, "СМО", Медицинский отдел, МедБей, "Мед", Заражён, Операция, "Хим", "Химикаты", Таблетка, Командование
 highlights-doctor = Доктор, "Док", Медицинский отдел, МедБей, "Мед", Заражён, Операция, "Хим", "Химикаты", Таблетка
-# Military Police
-highlights-chief-mp = Chief MP, "CMP", "MP", "MPs", "MW", "Alert", Brig, "Perma", Loose, Burst, Colonist, Survivor, "SOP", Arrest, Detain, Appeal, "Command", Execution, Executed
 highlights-nurse = Интерн, Медицинский отдел, МедБей, "Мед", Заражён, Операция, "Хим", "Химикаты", Таблетка
 highlights-researcher = Ученый, Исследование, Наука, "НИИ", "Хим", "Химикаты"
-highlights-provost-inspector = Provost Inspector, Inspector, @"PvI", "CMP", "MP", "MPs", "MW", "Alert", Brig, "Perma", Loose, Burst, Colonist, Survivor, "SOP", "Mlaw", Marine Law, Arrest, Detain, Appeal, Execution, Executed
+
 # Military Police
-highlights-chief-MP = Начальник военной полиции, "НВП", "ВП", "Тревога", Бриг, "Перма", Loose, Колонист, Выживший, "SOP", Аррест, Задержать, Обжаловать, "Командование"
+highlights-chief-mp = Начальник военной полиции, "НВП", "ВП", "Тревога", Бриг, "Перма", Loose, Burst, Колонист, Выживший, "SOP", Арест, Задержать, Обжаловать, "Командование", Казнь, Казнён
+highlights-provost-inspector = Пристав, Инспектор, "Инсп", "НВП", "ВП", "MPs", "ВН", "Тревога", Бриг, "Перма", побег, Burst, Колонист, Выживший, "SOP", "Mlaw", Военный закон, Арест, Задержать, Обжаловать, Казнь, Казнён
 highlights-military-warden = Военный надзиратель, Варден, "ВП", "Тревога", Бриг, "Перма", Loose, Колонист, Выживший, "SOP", Аррест, Задержать, Обжаловать
 highlights-military-police = Офицер военной полиции, "ВП", "Тревога", Бриг, "Перма", Loose, Колонист, Выживший, "SOP", Аррест, Задержать, Обжаловать
-# Other
-highlights-corporate-liaison = Корпоративный связной, "КС", Связной, Витезстви, Vitezstvi, "Ви", Vi
-highlights-correspondent = Корреспондент, "CC", Новости
-highlights-mess-technician = Техник камбуза, "ТК", Тех Обс, "Обслуживание", Кухня, Еда, Голоден
+
 # Marines
 highlights-squad-leader = Командир отряда, "СЛ", Командование, Королева, "ОБ", Корды, Координаты, Поставки, Тактическая карта, Комы, Карта, "FT", Группа, Отряд
-highlights-fireteam-leader = Командир огнеовй группы, "КОГ", "JTAC", "КАС", Нормандия, "FT", Группа, Корды, Координаты, "СЛ", Командование
+highlights-fireteam-leader = Командир огневой группы, "КОГ", "JTAC", "КАС", Нормандия, "FT", Группа, Корды, Координаты, "СЛ", Командование
 highlights-smart-gun-operator = Оператор смартгана, "ОСГ", "СГ", "СЛ", Командование
 highlights-weapons-specialist = Специалист по вооружению, "СПВ", "САДАР", Гренадёр, Скаут, Пиро, "АМР", Снайпер, "СЛ", Командование
 highlights-combat-technician = Боевой техник, "БТ", "БоеТех", Инженер, Баррикады, Кады, "СЛ", Командование
 highlights-hospital-corpsman = Полевой санитар, "ПС", Санитар, "Медик", Ранен, Заражён, Hugged, "СЛ", Командование
 highlights-rifleman = Стрелок, "Стр", "СЛ", Командование
 
-# Xenonids
+# Other
+highlights-corporate-liaison = Корпоративный связной, "КС", Связной, Витезстви, Vitezstvi, "Ви", Vi
+highlights-correspondent = Корреспондент, "CC", Новости
+highlights-mess-technician = Техник камбуза, "ТК", Тех Обс, "Обслуживание", Кухня, Еда, Голоден
 
-highlights-boiler = Бойлер, "Сестра"
-highlights-burrower = Burrower, "Сестра", Тунель, "Трава", Ловушка
-highlights-carrier = Носитель, "Сестра", Паразит, "Трава", Кластер, Морфер, "Заражён", Ловушка, Захват
-highlights-crusher = Крушитель, "Сестра"
-highlights-defender = Защитник, "Сестра"
-highlights-drone = "Дрон", "Сестра", "Трава", Кластер, Лечить, Захват
-highlights-hivelord = Лорд улья, "Сестра", "Трава", кластер
-highlights-larva = Лярва, "Сестра"
+# Xenonids
+highlights-boiler = Бойлер, "Сородич"
+highlights-burrower = Burrower, "Сородич", Тунель, "Трава", Ловушка
+highlights-carrier = Носитель, "Сородич", Паразит, "Трава", Кластер, Морфер, "Заражён", Ловушка, Захват
+highlights-crusher = Крушитель, "Сородич"
+highlights-defender = Защитник, "Сородич"
+highlights-drone = "Дрон", "Сородич", "Трава", Кластер, Лечить, Захват
+highlights-hivelord = Лорд улья, "Сородич", "Трава", кластер
+highlights-larva = Лярва, "Сородич"
 highlights-lesser-drone = "Меньший дрон", "Pat", "Меньший", "Трава"
-highlights-lurker = Охотник, "Сестра"
+highlights-lurker = Охотник, "Сородич"
 highlights-parasite = Паразит, "Заражён"
-highlights-praetorian = Преторианец, "Сестра"
+highlights-praetorian = Преторианец, "Сородич"
 highlights-queen = "Королева", "Мама", "Квина", "Tall Lurker", "Tuber"
-highlights-ravager = Ravager, "Сестра"
-highlights-runner = Бегун, "Сестра", Захват
-highlights-sentinel = Страж, "Сестра"
-highlights-spitter = Плевальщик, "Сестра"
-highlights-warrior = Воин, "Сестра"
+highlights-ravager = Ravager, "Сородич"
+highlights-runner = Бегун, "Сородич", Захват
+highlights-sentinel = Страж, "Сородич"
+highlights-spitter = Плевальщик, "Сородич"
+highlights-warrior = Воин, "Сородич"

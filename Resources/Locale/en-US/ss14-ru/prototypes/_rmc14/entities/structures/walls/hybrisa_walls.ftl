@@ -1,5 +1,5 @@
 ent-RMCWallHybrisaRock = rock wall
-    .desc = Massive columns comprised of anicent sedimentary rocks loom before you.
+    .desc = Massive columns comprised of ancient sedimentary rocks loom before you.
 ent-RMCWallHybrisaRockBorder = { ent-RMCWallHybrisaRock }
     .suffix = border
     .desc = { ent-RMCWallHybrisaRock.desc }

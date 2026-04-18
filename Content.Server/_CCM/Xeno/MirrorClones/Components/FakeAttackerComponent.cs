@@ -9,7 +9,7 @@ public sealed partial class FakeAttackerComponent : Component
     public float AttackInterval = 0.8f;
 
     [DataField]
-    public float Accumulator = 0f;
+    public float Accumulator;
 
     [DataField]
     public float SearchRange = 2.25f;

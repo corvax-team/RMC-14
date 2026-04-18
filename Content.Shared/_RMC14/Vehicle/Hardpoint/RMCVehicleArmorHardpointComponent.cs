@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Content.Shared.Damage.Prototypes;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;

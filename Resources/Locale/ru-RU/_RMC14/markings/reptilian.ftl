@@ -15,6 +15,3 @@ marking-RMCLizardSnakeTailStripeAlt-m_tail_snakestripealt_secondary = Полос
 marking-RMCLizardSnakeTailUnder = Змеиный хвост (с подбрюшьем)
 marking-RMCLizardSnakeTailUnder-m_tail_snakeunder_primary = Основной цвет
 marking-RMCLizardSnakeTailUnder-m_tail_snakeunder_secondary = Нижняя часть
-marking-LizardChestDragonwings = Драконьи крылья
-marking-LizardChestDragonwings-body_dragonwings = Крылья (основа)
-marking-LizardChestDragonwings-body_dragonwings_membrane = Перепонки крыльев

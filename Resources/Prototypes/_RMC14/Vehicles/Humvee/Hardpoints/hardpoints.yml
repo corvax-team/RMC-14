@@ -21,9 +21,14 @@
     vehicleFamily: Humvee
     slotType: Wheel
     damageMultiplier: 0.15
+    repairRate: 0.0165
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: RMCVehicleWheelItem
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 100
+    category: Chassis
+    vehicle: Humvee
 
 - type: entity
   parent: RMCVehicleHumveeHardpointBase
@@ -38,6 +43,7 @@
     vehicleFamily: Humvee
     slotType: Turret
     damageMultiplier: 0.15
+    repairRate: 0.008
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
   - type: VehicleTurret
@@ -65,6 +71,10 @@
       slotType: Launcher
       required: false
       insertDelay: 2.0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 400
+    category: Primary
+    vehicle: Humvee
 
 - type: entity
   parent: RMCVehicleHumveeHardpointBase
@@ -79,6 +89,7 @@
     vehicleFamily: Humvee
     slotType: Cannon
     damageMultiplier: 0.1
+    repairRate: 0.01
   - type: RMCHardpointIntegrity
     maxIntegrity: 125
   - type: VehicleTurretAttachment
@@ -125,6 +136,10 @@
     useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: humveecannon_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 600
+    category: Primary
+    vehicle: Humvee
 
 - type: entity
   parent: RMCVehicleHumveeCannon
@@ -139,6 +154,10 @@
     selectedMode: Burst
     availableModes:
     - Burst
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 700
+    category: Primary
+    vehicle: Humvee
 
 - type: entity
   parent: RMCVehicleHumveeHardpointBase
@@ -153,6 +172,7 @@
     vehicleFamily: Humvee
     slotType: Launcher
     damageMultiplier: 0.0
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
   - type: VehicleTurretAttachment
@@ -190,6 +210,10 @@
     arc: 120
   - type: RefillableByBulletBox
     bulletType: RMCVehicleAmmoBoxGrenadeLauncher
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 500
+    category: Secondary
+    vehicle: Humvee
 
 - type: entity
   parent: RMCVehicleHumveeHardpointBase
@@ -204,10 +228,15 @@
     vehicleFamily: Humvee
     slotType: FrontAttachment
     damageMultiplier: 0.075
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
   - type: RMCHardpointVisual
     vehicleState: snowplow_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 200
+    category: Armor
+    vehicle: Humvee
 
 - type: entity
   parent: RMCVehicleHumveeHardpointBase
@@ -222,12 +251,17 @@
     vehicleFamily: Humvee
     slotType: RoofAttachment
     damageMultiplier: 0.1
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: RMCVehicleSpotlightModifier
     radiusMultiplier: 2.0
   - type: RMCHardpointVisual
     vehicleState: overlight_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 300
+    category: Support
+    vehicle: Humvee
 
 - type: entity
   parent: RMCVehicleHumveeHardpointBase
@@ -242,7 +276,12 @@
     vehicleFamily: Humvee
     slotType: RoofAttachment
     damageMultiplier: 0.075
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
   - type: RMCHardpointVisual
     vehicleState: humveehatch_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 150
+    category: Support
+    vehicle: Humvee

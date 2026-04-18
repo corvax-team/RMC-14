@@ -15,15 +15,15 @@
     jobs:
     - CMCorrespondent
     sections:
-    - name: Standard Equipment
+    - name: Стандартное снаряжение # CCM14
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleCrewCombatCorrespondent
-        name: Essential Reporter's Set
+        name: незаменимый набор репортёра # CCM14
       - id: CMSatchel
-        name: Leather Satchel
+        name: кожаный ранец # CCM14
       - id: RMCCameraBroadcasting
-        name: Press Broadcasting Camera
+        name: вещательная камера # CCM14
         recommended: true
     #- name: Civilian Equipment TODO - Some way to ensure only the civilian correspondent can buy this
     #  takeAll: CMStandard
@@ -31,40 +31,40 @@
     #  - id: PortableFaxMachine
     #    name: Portable Press Fax Machine
     #    recommended: true
-    - name: Uniform
+    - name: Униформа # CCM14
       choices: { CMUniform: 1 }
       entries:
       - id: RMCJumpsuitCorrespondentBlack
-        name: Black Uniform
+        name: чёрная униформа корреспондента # CCM14
       - id: RMCJumpsuitCorrespondentOrange
-        name: Orange Uniform
+        name: оранжевая униформа корреспондента # CCM14
       - id: RMCJumpsuitCorrespondentRed
-        name: Red Uniform
-    - name: Armor
+        name: красная униформа корреспондента # CCM14
+    - name: Броня # CCM14
       choices: { CMArmor: 1 }
       entries:
       - id: CMArmorPress
-        name: Combat Correspondent's Armor
+        name: бронежилет прессы # CCM14
         recommended: true
       - id: RMCCoatCorrespondentBlue
-        name: Blue Vest
+        name: синяя куртка военного корреспондента # CCM14
       - id: RMCHazardVestBlack
-        name: Black Vest
+        name: чёрный сигнальный жилет # CCM14
       - id: RMCCoatCorrespondentBlack
-        name: Black Coat
+        name: чёрная куртка военного корреспондента # CCM14
       - id: RMCCoatCorrespondentGreen
-        name: Green Coat
-    - name: Helmet
+        name: зелёная куртка военного корреспондента # CCM14
+    - name: Шлемы # CCM14
       choices: { CMHelmet: 1 }
       entries:
       - id: CMArmorHelmetPress
-        name: Combat Correspondent's Helmet
+        name: шлем прессы # CCM14
         recommended: true
       - id: RMCHeadCapCorrespondent
-        name: Combat Correspondent's Cap
+        name: кепка корреспондента # CCM14
       - id: RMCHeadCapFedoraGrey
-        name: Fedora
-    - name: Refills
+        name: серая федора # CCM14
+    - name: Расходники # CCM14
       entries:
       #- id: /obj/item/device/camera
       #  name: Camera
@@ -79,7 +79,7 @@
       #  name: Regulation Tapes
       #  points: 15
       - id: CMPaperBin30
-        name: Paper Bin
+        name: корзина для бумаг # CCM14
         points: 10
 
 - type: entity

@@ -28,7 +28,7 @@
     key: enum.RMCVehicleSupplyUIKey.Key
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
-    access: [ [ "CMAccessRequisitions" ] ]
+    access: [ [ "CMAccessCrewman" ] ] # CCM14
   - type: UserInterface
     interfaces:
       enum.RMCVehicleSupplyUIKey.Key:
@@ -96,10 +96,6 @@
       vehicle: RMCVehicleTank
       unlock: RMCVehicleTank
       hardpoints:
-      - RMCVehicleTankTurret
-      - RMCVehicleTankTreads
-      - RMCVehicleTankReinforcedTreads
-      - RMCVehicleTankTires
       - RMCVehicleTankArmorBallistic
       - RMCVehicleTankArmorConcussive
       - RMCVehicleTankArmorCaustic
@@ -118,6 +114,8 @@
       - RMCVehicleTankTowLauncher
       - RMCVehicleTankFlareModule
       - RMCVehicleTankArtilleryModule
+      - RMCVehicleTankReinforcedTreads
+      - RMCVehicleTankTreads
     - name: humvee (arc)
       vehicle: RMCVehicleHumveeARC
       unlock: RMCVehicleHumveeARC

@@ -1,6 +1,6 @@
-﻿
+
 - type: job
-  parent: CMJobBase
+  parent: RMCJobMarineBase
   id: CMCommandingOfficer
   name: cm-job-name-commanding-officer
   description: cm-job-description-commanding-officer
@@ -66,6 +66,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetMarine]
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
     - type: Skills
       preset: RMCSkillPresetCommander
     - type: MarineOrders

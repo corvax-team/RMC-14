@@ -10,3 +10,5 @@ ent-RMCPVEArmorShinGuardKestrel = Kestrel Greaves
     .desc = Attachable supplementary armor for L3 Kestrel modular vests. Protects against bruised shins.
 ent-RMCPVEArmorKneeGuardKestrel = Kestrel Kneepads
     .desc = Attachable supplementary armor for L3 Kestrel modular vests. Protects against grazed knees.
+ent-RMCPVEArmorPaintTSE = TSE flag armor paint
+    .desc = A set of paint tones to etch the Three Suns into a Marine's armor.

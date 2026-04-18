@@ -25,6 +25,11 @@ namespace Content.Client.Administration.UI
                 Announcer =  _window.Announcer.Text,
                 AnnounceType =  (AdminAnnounceType) (_window.AnnounceMethod.SelectedMetadata ?? AdminAnnounceType.Station),
                 CloseAfter = !_window.KeepWindowOpen.Pressed,
+                // CCM14-start
+                ColorHex = _window.ColorHexText,
+                SoundPath = _window.SoundPathText,
+                Sender = _window.SenderText,
+                // CCM14-end
             });
 
         }

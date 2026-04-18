@@ -64,10 +64,10 @@
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
+    - ActionXenoMarkResin
     - ActionXenoGrowOvipositor
     - ActionXenoManageHive
 #    - ActionXenoRoyalJelly
-#    - ActionXenoMarkResin
     tier: 0
     bypassTierCount: true
     unlockAt: 0
@@ -78,10 +78,12 @@
     buildDelay: 2
     canBuild:
     - WallXenoResin
+    - WallXenoResinReflective #TODO should only be available while in ovipositor mode
     - WallXenoMembrane
     - DoorXenoResin
     - XenoStickyResin
     - XenoFastResin
+    - XenoResinSpikes
     - HiveAcidPillarXeno
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
@@ -102,6 +104,7 @@
     xenoArmor: 25
     explosionArmor: 100
   - type: XenoWordQueen
+  - type: XenoResinMark
   - type: InnateCommandSpeech
   - type: RMCInnateRadioTextIncrease
     radioTextIncrease: 3
@@ -218,7 +221,7 @@
     - Stun
     - KnockedDown
   - type: TacticalMapUser
-    xenos: true
+    layerSets: [TacticalMapSetXeno]
     canDraw: true
     liveUpdate: true
   - type: TacticalMapIcon

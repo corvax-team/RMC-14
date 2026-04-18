@@ -14,27 +14,27 @@
     hackable: false
     ejectContentsOnDestruction: true # Players should not be afraid that everything they put into vending machines for storage will disappear when the tent is destroyed
     sections:
-    - name: Building materials
+    - name: Строительные материалы # CCM14
       entries:
       - id: RMCSheetCardboard10
-        name: Cardboard x10
+        name: картон (10 шт.) # CCM14
         amount: 1
       - id: BarbedWire10
-        name: Barbed Wire x10
+        name: колючая проволока (10 шт.) # CCM14
         amount: 0
       - id: CMSheetMetal10
-        name: Metal x10
+        name: листы металла (10 шт.) # CCM14
         amount: 0
       - id: CMSheetPlasteel10
-        name: Plasteel x10
+        name: листы пластали (10 шт.) # CCM14
         amount: 0
       - id: CMSandbagEmpty10
-        name: Sandbags (empty) x10
+        name: мешки с песком (пустые, 10 шт.) # CCM14
         amount: 0
       - id: CMSandbagFull5
-        name: Sandbags (full) x5
+        name: мешки с песком (полные, 5 шт.) # CCM14
         amount: 0
-    - name: Ammunition
+    - name: Боеприпасы # CCM14
       entries:
       - id: RMCBoxShotgunBuckshot
         amount: 0
@@ -56,7 +56,7 @@
 #        amount: 0
 #      - id: M2C Box Magazine
 #        amount: 0
-    - name: Armor
+    - name: Броня # CCM14
       entries:
       - id: ArmorHelmetM10
         amount: 0
@@ -76,7 +76,7 @@
         amount: 0
       - id: RMCArmorM3LightPadded
         amount: 0
-    - name: Miscellaneous
+    - name: Разное # CCM14
       entries:
       - id: RMCBoxMRE
         amount: 0
@@ -105,50 +105,50 @@
         amount: 4
       - id: CMChairFolded
         amount: 2
-    - name: Ammunition boxes
+    - name: Коробки с патронами # CCM14
       hasBoxes: true
       entries:
       - id: RMCBoxShellsBuckshot
-        name: Magazine Box (Buckshot x 100)
+#        name: Magazine Box (Buckshot x 100)
         box: RMCBoxShotgunBuckshot
         boxAmount: 4
       - id: RMCBoxShellsFlechette
-        name: Magazine Box (Flechette x 100)
+#        name: Magazine Box (Flechette x 100)
         box: RMCBoxShotgunFlechette
         boxAmount: 4
       - id: RMCBoxShellsSlugs
-        name: Magazine Box (Slugs x 100)
+#        name: Magazine Box (Slugs x 100)
         box: RMCBoxShotgunSlugs
         boxAmount: 4
       - id: RMCBoxBulletsRifle
-        name: rifle ammunition box (10x24mm) (M4SPR)
+        name: коробка винтовочных патронов (10x24мм) (M4SPR) # CCM14
         box: CMMagazineRifleM4SPR
         boxSlots: 24 # 600 / 25
       - id: RMCBoxBulletsRifle
-        name: rifle ammunition box (10x24mm) (M54C)
+        name: коробка винтовочных патронов (10x24мм) (M54C) # CCM14
         box: CMMagazineRifleM54C
         boxSlots: 15 # 600 / 40
       - id: RMCBoxBulletsSMG
-        name: SMG HV ammunition box (10x20mm) (M63)
+        name: коробка патронов ПП (10x20мм) (M63) # CCM14
         box: CMMagazineSMGM63
         boxSlots: 13 # 600 / 48, yes we lose half a mag to the void
-    - name: Boxes
+    - name: Коробки с магазинами # CCM14
       hasBoxes: true
       entries:
       - id: RMCBoxMagazineRifleM4SPR
-        name: Magazine Box (M4SPR x 16)
+#        name: Magazine Box (M4SPR x 16)
         box: CMMagazineRifleM4SPR
       - id: RMCBoxMagazineRifleM54C
-        name: Magazine Box (M54C x 10)
+#        name: Magazine Box (M54C x 10)
         box: CMMagazineRifleM54C
       - id: RMCBoxMagazineSMGM63
-        name: Magazine Box (M63 x 12)
+#        name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63
       - id: RMCBoxMagazineRevolverM44
-        name: Magazine Box (M44 x 16)
+#        name: Magazine Box (M44 x 16)
         box: RMCSpeedLoaderM44
       - id: RMCBoxMagazinePistolM1984
-        name: Magazine Box (M1984 x 16)
+#        name: Magazine Box (M1984 x 16)
         box: CMMagazinePistolM1984
 #      - name: Magazine Box (M56D x 8)
 #        box: CMMagazineSMGM63

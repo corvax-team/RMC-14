@@ -72,6 +72,7 @@
       - RMCXM51Holster
       - RMCDetector
       - RMCMatebaHolster
+      - CCMGuitarBag # CCM14
 
 - type: entity
   abstract: true
@@ -91,6 +92,7 @@
       - Binoculars
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - CCMGuitarBag # CCM14
 
 - type: entity
   abstract: true
@@ -118,6 +120,7 @@
       - RMCMacheteScabbard
       - RMCScabbardKatana
       - RMCDetector
+      - CCMGuitarBag # CCM14
 
 - type: entity
   abstract: true
@@ -141,6 +144,7 @@
       - CMMagazineRifle
       - RMCMagazineShotgun
       - CMMagazineSniper
+      - CCMGuitarBag # CCM14
 
 - type: entity
   abstract: true
@@ -174,6 +178,7 @@
       - RMCMatebaHolster
       - RMCCeremonialSword
       - RMCDetector
+      - CCMGuitarBag # CCM14
 
 - type: entity
   abstract: true
@@ -197,6 +202,7 @@
       - Flashlight
       - Machete
       - RMCDetector
+      - CCMGuitarBag # CCM14
 
 # TODO: Add separate whitelists for 'safari jacket' and 'bureau deputy jacket'
 

@@ -1,13 +1,20 @@
-﻿- type: job
+- type: job
   parent: CMSurvivor
   id: CMSurvivorTrucker
   name: cm-job-name-survivor-trucker
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorTrucker
   playTimeTracker: CMJobSurvivorEngineer
+  accessGroups:
+  - ColonistEngi
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorTrucker
     - type: EquipSurvivorPreset
@@ -68,4 +75,6 @@
   components:
   - type: RMCJobSpawner
     job: CMSurvivorTrucker
+
+
 

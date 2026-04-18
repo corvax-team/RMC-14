@@ -88,8 +88,8 @@
         requireInputValidation: false
   - type: TacticalMapUser
     actionId: RMCActionOpenTacticalMapGhost
-    marines: true
-    xenos: true
+    layerSets: [TacticalMapSetGhost]
+    liveUpdate: true
   - type: ViewIntelObjectives
   - type: VentSight
   - type: IgnoreInteractionRange
@@ -107,6 +107,11 @@
   - type: Tag
     tags:
     - AllowGhostShownByEvent
+    # CCM14-start
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 12
+    baseWalkSpeed: 24
+    # CCM14-end
 
 - type: entity
   parent: BaseMentalAction

@@ -1,2 +1,2 @@
-ent-RMCSurvivorPresetHybrisaCommercialPilot = пресет колониста: коммерческий пилот (Hybrisa)
+ent-RMCSurvivorPresetHybrisaCommercialPilot = пресет коммерческого пилота Гибриса
     .desc = { ent-RMCSurvivorPresetCorporate.desc }

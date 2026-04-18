@@ -1,6 +1,8 @@
 ent-RMCKatana = katana
     .desc = A finely made Japanese sword, with a well sharpened blade. The blade has been filed to a molecular edge, and is extremely deadly. Commonly found in the hands of mercenaries and yakuza.
     .suffix = RMC14
+ent-RMCKatanaDull = replica katana
+    .desc = A cheap knock-off commonly found in regular knife stores. Can still do some damage.
 ent-RMCKatanaSharp = absurdly sharp katana
     .desc =
         That's it. I'm sick of all this "Masterwork Bastard Sword" bullshit that's going on in RMC-14 right now. Katanas deserve much better than that. Much, much better than that.

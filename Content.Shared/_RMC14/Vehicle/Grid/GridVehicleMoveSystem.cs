@@ -1,21 +1,20 @@
-using System;
 using System.Numerics;
-using System.Collections.Generic;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
-using Content.Shared.Doors.Systems;
-using Content.Shared.Mobs.Systems;
-using Content.Shared.Standing;
-using Content.Shared.Stunnable;
-using Content.Shared.Vehicle.Components;
+using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.Destructible;
+using Content.Shared.Doors.Systems;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Physics;
+using Content.Shared.Standing;
+using Content.Shared.Stunnable;
+using Content.Shared.Vehicle.Components;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Maths;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -24,7 +23,6 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Content.Shared.Physics;
 
 namespace Content.Shared.Vehicle;
 
@@ -45,19 +43,18 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly RMCVehicleWheelSystem _wheels = default!;
+    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
 
     private EntityQuery<MapGridComponent> gridQ;
     private EntityQuery<PhysicsComponent> physicsQ;
     private EntityQuery<FixturesComponent> fixtureQ;
 
     private const float Clearance = PhysicsConstants.PolygonRadius * 0.75f;
-    // CCM14-start
     // private const double MobCollisionDamage = 8;
-    // private const double UnpoweredDoorCollisionDamage = 1000;
-    // private static readonly TimeSpan MobCollisionKnockdown = TimeSpan.FromSeconds(1.5);
-    // private static readonly TimeSpan MobCollisionCooldown = TimeSpan.FromSeconds(0.75);
-    // private static readonly ProtoId<DamageTypePrototype> CollisionDamageType = "Blunt";
-    // CCM14-end
+    private static readonly TimeSpan MobCollisionKnockdown = TimeSpan.FromSeconds(1.5);
+    private static readonly TimeSpan MobCollisionCooldown = TimeSpan.FromSeconds(0.75);
+    private static readonly ProtoId<DamageTypePrototype> CollisionDamageType = "Blunt";
     private const int GridVehicleStaticBlockerMask =
         (int) (CollisionGroup.Impassable |
                CollisionGroup.HighImpassable |
@@ -83,7 +80,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
 
     public static readonly List<(EntityUid grid, Vector2i tile)> DebugTestedTiles = new();
+    public static readonly List<DebugCollisionProbe> DebugCollisionProbes = new();
     public static readonly List<DebugCollision> DebugCollisions = new();
+    public static readonly List<DebugMovementDecision> DebugMovementDecisions = new();
     private readonly Dictionary<EntityUid, TimeSpan> _lastMobCollision = new();
     private readonly Dictionary<EntityUid, bool> _hardState = new();
     private readonly Dictionary<EntityUid, bool> _lastMobPushAxis = new();
@@ -97,6 +96,16 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         Hard = 3,
     }
 
+    public enum DebugMovementDecisionKind : byte
+    {
+        DirectClear = 0,
+        DirectBlocked = 1,
+        LaneCorrection = 2,
+        LaneCorrectionFailed = 3,
+        ForwardAfterCorrection = 4,
+        ForwardBlocked = 5,
+    }
+
     public readonly record struct DebugCollision(
         EntityUid Tested,
         EntityUid Blocker,
@@ -106,6 +115,27 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         float Skin,
         float Clearance,
         MapId Map);
+
+    public readonly record struct DebugCollisionProbe(
+        EntityUid Tested,
+        Box2 TestedAabb,
+        Box2 MovementAabb,
+        Box2Rotated FixtureBounds,
+        Box2Rotated MovementBounds,
+        Vector2 Position,
+        Angle Rotation,
+        bool Blocked,
+        bool ApplyEffects,
+        MapId Map);
+
+    public readonly record struct DebugMovementDecision(
+        EntityUid Vehicle,
+        EntityUid Grid,
+        Vector2 Start,
+        Vector2 End,
+        Vector2 MoveDirection,
+        DebugMovementDecisionKind Kind,
+        bool Success);
 
     public override void Initialize()
     {
@@ -162,6 +192,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
             ent.Comp.SyncedGrid = null;
             ent.Comp.CurrentSpeed = 0f;
+            ent.Comp.PushDirection = Vector2i.Zero;
             ent.Comp.IsCommittedToMove = false;
             ent.Comp.IsPushMove = false;
             ent.Comp.IsMoving = false;
@@ -183,7 +214,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         ent.Comp.Position = centerOnTile
             ? new Vector2(tile.X + 0.5f, tile.Y + 0.5f)
             : coords.Position;
+        ent.Comp.TargetPosition = ent.Comp.Position;
         ent.Comp.CurrentSpeed = 0f;
+        ent.Comp.PushDirection = Vector2i.Zero;
         ent.Comp.NextPushTime = TimeSpan.Zero;
         ent.Comp.NextTurnTime = TimeSpan.Zero;
         ent.Comp.InPlaceTurnBlockUntil = TimeSpan.Zero;
@@ -225,6 +258,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (args.OtherBody.BodyType != BodyType.Static)
             return;
 
+        if (IsNormallyMobPassable(args.OtherFixture))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
         if ((args.OtherFixture.CollisionLayer & GridVehicleStaticBlockerMask) == 0)
             return;
 
@@ -236,7 +275,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         base.Update(frameTime);
 
         DebugTestedTiles.Clear();
+        DebugCollisionProbes.Clear();
         DebugCollisions.Clear();
+        DebugMovementDecisions.Clear();
 
         var q = EntityQueryEnumerator<GridVehicleMoverComponent, VehicleComponent, TransformComponent>();
 

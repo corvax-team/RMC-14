@@ -1,2 +1,2 @@
-ent-RMCSurvivorPresetHybrisaCorporateSecurity = constable colonist preset
+ent-RMCSurvivorPresetHybrisaCorporateSecurity = hybrisa corporate security colonist preset
     .desc = { ent-RMCSurvivorPresetSecurity.desc }

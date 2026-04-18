@@ -28,7 +28,7 @@ public sealed partial class TailWhirlwindComponent : Component
     public float ThrowDistance = 2.75f;
 
     [DataField, AutoNetworkedField]
-    public DamageSpecifier? Damage = new();
+    public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundCollectionSpecifier("XenoTailSwipe")

@@ -1,4 +1,4 @@
-ent-CMSpawnPointSeniorEnlistedAdvisor = точка появления старший сержантский советник
+ent-CMSpawnPointSeniorEnlistedAdvisor = спавнер старшего сержантского советника
     .desc = { ent-CMSpawnPointJobBase.desc }
 ent-CMGuidebookRoleSEA = Старший сержантский советник
-    .desc = Наставник морских пехотинцев!
+    .desc = Наставник для морпехов!

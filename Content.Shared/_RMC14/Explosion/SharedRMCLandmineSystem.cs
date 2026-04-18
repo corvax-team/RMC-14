@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Projectile;
@@ -38,6 +39,7 @@ public abstract partial class SharedRMCLandmineSystem : EntitySystem
     [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCVehicleSystem _rmcVehicleSystem = default!; // CCM14
 
     public override void Initialize()
     {
@@ -168,7 +170,16 @@ public abstract partial class SharedRMCLandmineSystem : EntitySystem
             _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
             return false;
         }
-
+        // CCM14-start
+        // Can't deploy a mine inside a vehicle interior
+        if (_transform.GetGrid(coordinates) is { } gridId &&
+            _rmcVehicleSystem.TryGetVehicleFromInterior(gridId, out _))
+        {
+            var msg = Loc.GetString("rmc-vehicle-cannot-place-inside", ("object", ent));
+            _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
+            return false;
+        }
+        // CCM14-end
         // Can't deploy a mine on a tile that already has a mine on it
         var query = _rmcMap.GetAnchoredEntitiesEnumerator(moverCoordinates.Coords);
         while (query.MoveNext(out var anchoredUid))

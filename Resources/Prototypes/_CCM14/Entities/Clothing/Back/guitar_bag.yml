@@ -1,0 +1,38 @@
+﻿- type: entity
+  parent: CMPersonalStorageBase
+  id: CCMGuitarBag
+  name: guitar bag
+  description: A soft bag for carrying an acoustic guitar. Perfect for musicians on the go.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Back/Backpacks/guitar_bag.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Back/Backpacks/guitar_bag.rsi
+    quickEquip: false
+    slots:
+    - back
+    - suitStorage
+    clothingVisuals:
+      back:
+      - state: equipped-BACKPACK
+      suitStorage:
+      - state: equipped-SUITSTORAGE
+  - type: Storage
+    maxItemSize: Large
+    grid:
+    - 0,0,2,1
+    whitelist:
+      tags:
+      - StringInstrument
+  - type: Tag
+    tags:
+    - CCMGuitarBag
+
+- type: entity
+  parent: CCMGuitarBag
+  id: CCMGuitarBagFilled
+  suffix: Acoustic guitar, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: AcousticGuitarInstrument

@@ -23,11 +23,6 @@ contraband-examine-text-GrandTheft =
        *[item] [color=red]Этот предмет является очень ценной целью для агентов Синдиката![/color]
         [reagent] [color=red]Этот реагент является очень ценной целью для агентов Синдиката![/color]
     }
-contraband-examine-text-Highly-Illegal =
-    { $type ->
-       *[item] [color=crimson]Этот предмет является крайне незаконной контрабандой![/color]
-        [reagent] [color=crimson]Этот реагент является крайне незаконной контрабандой![/color]
-    }
 contraband-examine-text-Syndicate =
     { $type ->
        *[item] [color=crimson]Этот предмет является крайне незаконной контрабандой Синдиката![/color]

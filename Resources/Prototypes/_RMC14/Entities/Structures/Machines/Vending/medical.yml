@@ -57,7 +57,7 @@
     randomUnstockAmount: -1 # -1 is between 1 and the original amount
     randomEmptyChance: 0.25 # 25% chance
     sections:
-    - name: Field supplies
+    - name: Полевые медикаменты # CCM14
       entries:
       - id: CMBurnKit10
         amount: 10
@@ -69,7 +69,7 @@
         amount: 10
 #      - id: CMSplints10 # TODO RMC14
 #        amount: 10
-    - name: Autoinjectors
+    - name: Автоинъекторы # CCM14
       entries:
       - id: CMBicaridineAutoInjector
         amount: 5
@@ -93,7 +93,7 @@
 #        amount: 5
       - id: CMTricordrazineAutoInjector
         amount: 5
-    - name: Liquid bottles
+    - name: Растворы # CCM14
       entries:
       - id: CMBottleBicaridine
         amount: 3
@@ -111,7 +111,7 @@
 #        amount: 3
 #      - id: CMBottleTramadol # TODO RMC14
 #        amount: 3
-    - name: Pill bottles
+    - name: Таблетки # CCM14
       entries:
       - id: CMPillCanisterBicaridine
         amount: 4
@@ -129,7 +129,7 @@
 #        amount: 3
 #      - id: CMPillCanisterTramadol # TODO RMC14
 #        amount: 4
-    - name: Medical utilities
+    - name: Мединструменты # CCM14
       entries:
       - id: CMDefibrillator
         amount: 3
@@ -137,7 +137,9 @@
         amount: 2
       - id: CMSynthGraft
         amount: 2
-      - id: CMHyposprayFilledTricord
+      - id: CMHyposprayWithVial
+        amount: 3
+      - id: RMCVialTricordrazine
         amount: 3
       - id: CMHealthAnalyzer
         amount: 5
@@ -165,7 +167,7 @@
   components:
   - type: CMAutomatedVendor # TODO RMC14 different ui style
     sections:
-    - name: Field supplies
+    - name: Полевые медикаменты # CCM14
       entries:
       - id: CMBurnKit10
         amount: 10
@@ -177,7 +179,7 @@
         amount: 10
 #      - id: CMSplints10 # TODO RMC14
 #        amount: 10
-    - name: Autoinjectors
+    - name: Автоинъекторы # CCM14
       entries:
       - id: CMBicaridineAutoInjector
         amount: 5
@@ -199,7 +201,7 @@
 #        amount: 5
       - id: CMTricordrazineAutoInjector
         amount: 5
-    - name: Liquid bottles
+    - name: Растворы # CCM14
       entries:
       - id: CMBottleBicaridine
         amount: 3
@@ -217,7 +219,7 @@
 #        amount: 3
 #      - id: CMBottleTramadol # TODO RMC14
 #        amount: 3
-    - name: Pill bottles
+    - name: Таблетки # CCM14
       entries:
       - id: RMCPillCanisterMeralyneBicaridine
         amount: 4
@@ -241,7 +243,7 @@
 #        amount: 3
 #      - id: CMPillCanisterTramadol # TODO RMC14
 #        amount: 4
-    - name: Medical utilities
+    - name: Мединструменты # CCM14
       entries:
       - id: CMSurgicalLine
         amount: 2
@@ -281,7 +283,7 @@
       - Bottle
   - type: CMAutomatedVendor # TODO RMC14 different ui style
     sections:
-    - name: Liquid bottles
+    - name: Растворы # CCM14
       entries:
       - id: CMBottleBicaridine
         amount: 6
@@ -299,13 +301,13 @@
 #        amount: 6
 #      - id: CMBottleTramadol # TODO RMC14
 #        amount: 6
-    - name: Miscellaneous
+    - name: Разное # CCM14
       entries:
       - id: CMBeaker
-        name: Beaker (60 units)
+        name: мензурка (60u)
         amount: 3
       - id: CMBeakerLarge
-        name: Beaker, Large (120 units)
+        name: большая мензурка (120u)
         amount: 3
       - id: RMCBoxPillCanister
         amount: 2
@@ -352,17 +354,17 @@
       - Hypospray
   - type: CMAutomatedVendor
     sections:
-    - name: Autoinjectors
+    - name: Автоинъекторы # CCM14
       entries:
       - id: CMTricordrazineAutoInjectorNoSkill
         amount: 5
 #      - id: CMPainStopAutoinjector
 #        amount: 5
-    - name: Devices
+    - name: Мединструменты # CCM14
       entries:
       - id: CMHealthAnalyzer
         amount: 3
-    - name: Field Supplies
+    - name: Полевые медикаменты # CCM14
       entries:
       - id: CMFireExtinguisherPortable
         amount: 5
@@ -422,7 +424,7 @@
   - type: CMAutomatedVendor
     hackable: true
     sections:
-    - name: Supplies
+    - name: Медикаменты # CCM14
       entries:
       - id: CMTricordrazineAutoInjectorNoSkill
         amount: 2
@@ -434,7 +436,7 @@
         amount: 4
 #      - id: CMMedicalSplints5
 #        amount: 4
-    - name: Utility
+    - name: Утилиты # CCM14
       entries:
       - id: CMHealthAnalyzer
         amount: 2
@@ -472,44 +474,44 @@
     - name: Supplies
       entries:
       - id: CMTricordrazineAutoInjectorNoSkill
-        name: First-Aid Autoinjector
+        name: автоинъектор первой помощи # CCM14
         amount: 2
 #      - id: CMPainStopAutoinjector
 #        name: Pain-Stop Autoinjector
 #        amount: 2
       - id: CMGauze10
-        name: Roll of Gauze
+        name: рулон бинта # CCM14
         amount: 4
       - id: CMOintment10
-        name: Ointment
+        name: мазь # CCM14
         amount: 4
       #- id: CMMedicalSplints5
       #  name: Medical Splints
       #  amount: 4
-    - name: Utility
+    - name: Утилиты # CCM14
       entries:
       - id: CMHealthAnalyzer
-        name: HF2 Health Analyzer
+#        name: HF2 Health Analyzer
         amount: 2
-    - name: Bobda
+    - name: Бобда
       entries:
       - id: CMDrinkCanBobdaClassic
-        name: Bobda Classic
+        name: Бобда классик # CCM14
         amount: 1
       - id: CMDrinkCanBobdaClassicDiet
-        name: Diet Bobda Classic
+        name: диетическая Бобда Классик # CCM14
         amount: 1
       - id: CMDrinkCanBobdaCranberry
-        name: Bobda Cranberry
+        name: Бобда Клюква # CCM14
         amount: 1
       - id: CMDrinkCanBobdaCranberryDiet
-        name: Diet Bobda Cranberry
+        name: диетическая Бобда Клюква # CCM14
         amount: 1
       - id: CMDrinkCanBobdaGrape
-        name: Bobda Grape
+        name: Бобда Виноград # CCM14
         amount: 1
       - id: CMDrinkCanBobdaGrapeDiet
-        name: Diet Bobda Grape
+        name: диетическая Бобда Виноград # CCM14
         amount: 1
 
 - type: entity
@@ -543,8 +545,8 @@
       entries:
       - id: CMBloodPackFull
         amount: 30 # 6 blood types, 5 each
-    - name: Miscellaneous
+    - name: Разное # CCM14
       entries:
       - id: CMBloodPack
         amount: 5
-        name: empty blood pack
+        name: пустой пакет крови # CCM14

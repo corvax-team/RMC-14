@@ -157,12 +157,9 @@
   - type: RMCVehicleWheelSlots
     slotCount: 1
   - type: RMCHardpointIntegrity
-    maxIntegrity: 1000
+    maxIntegrity: 600 # CCM14
     repairFuelCost: 15
     bypassEntryOnZero: true
-  - type: RMCRepairable
-    heal: 200
-    fuelUsed: 6
   - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/apc_transport_interior.yml
@@ -173,13 +170,10 @@
     entryPoints:
     - offset: 1.5,0
       radius: 0.7
-      interiorCoords: 1.6,2.6
+      interiorCoords: 1.55,2.65
     - offset: -1.5,0
       radius: 0.7
-      interiorCoords: 1.6,-1.5
-    - offset: 0,2
-      radius: 0.85
-      interiorCoords: 0.25,-1
+      interiorCoords: 1.55,-1.2
 
 - type: entity
   parent: RMCVehicleAPCBase
@@ -273,6 +267,15 @@
   name: SPP armored personnel carrier
   description: An armored personnel carrier configured for SPP forces.
   components:
+  - type: GridVehicleMover
+    mobCollisionDamage: 40 # CCM14
+    maxSpeed: 6.5
+    acceleration: 2.0
+    deceleration: 7.5
+    maxReverseSpeed: 2.5
+    reverseAcceleration: 2.0
+    turnDelay: 0.25
+    turnInPlace: false
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/sppapc.rsi
     layers:
@@ -292,6 +295,24 @@
       visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
+  - type: ItemSlots
+    slots:
+      port-gun-north:
+        startingItem: null
+      port-gun-south:
+        startingItem: null
+      primary:
+        startingItem: RMCVehicleSPPAPCTurret
+        whitelist:
+          components:
+          - RMCHardpointItem
+        disableEject: true
+      wheel-1:
+        startingItem: RMCVehicleSPPAPCWheel
+        whitelist:
+          components:
+          - RMCVehicleWheelItem
+        disableEject: true
   - type: RMCHardpointSlots
     vehicleFamily: APC
     slots:
@@ -321,3 +342,5 @@
       slotType: Wheel
       compatibilityId: SPPAPC
       insertDelay: 1.5
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/spp_apc_interior.yml

@@ -27,9 +27,6 @@ ent-ClothingBackpackDuffelSyndicateFilledCarbine = { ent-ClothingBackpackDuffelS
 ent-ClothingBackpackDuffelSyndicateAmmoFilled = { ent-ClothingBackpackDuffelSyndicate }
     .suffix = набор боеприпасов, Синдикат
     .desc = { ent-ClothingBackpackDuffelSyndicate.desc }
-
-# Corvax-HiddenDesc-End
-
 ent-ClothingBackpackDuffelSyndicateCostumeClown = { ent-ClothingBackpackDuffelClown }
     .desc = { ent-ClothingBackpackDuffelClown.desc }
     .suffix = Синдикат
@@ -46,8 +43,6 @@ ent-ClothingBackpackDuffelSyndicateC4tBundle = { ent-ClothingBackpackDuffelSyndi
 ent-ClothingBackpackChameleonFill = { ent-ClothingBackpackDuffelSyndicate }
     .suffix = Заполненный, Хамелеон
     .desc = { ent-ClothingBackpackDuffelSyndicate.desc }
-ent-ClothingBackpackDuffelSyndicateRaidBundle = набор рейдерского костюма Синдиката
-    .desc = Содержит прочный рейдерский бронекостюм Синдиката.
 ent-ClothingBackpackDuffelSyndicateEVABundle = { ent-ClothingBackpackDuffelSyndicate }
     .suffix = набор ВКД Синдиката
     .desc = { ent-ClothingBackpackDuffelSyndicate.desc }
@@ -63,15 +58,12 @@ ent-ClothingBackpackDuffelSyndicateHardsuitExtrasBundle = { ent-ClothingBackpack
 ent-ClothingBackpackDuffelZombieBundle = { ent-ClothingBackpackDuffelSyndicate }
     .suffix = зомби набор Синдиката
     .desc = { ent-ClothingBackpackDuffelSyndicate.desc }
-ent-ClothingBackpackDuffelSyndicateFilledStarterKit = { ent-ClothingBackpackDuffelSyndicate }
-    .desc = Содержит оружие, медицинские принадлежности, инструменты для взлома, запасные боеприпасы и несколько простых приспособлений.
-    .suffix = Базовый набор оперативника
 ent-ClothingBackpackDuffelSyndicateMedicalBundleFilled = { ent-ClothingBackpackDuffelSyndicate }
     .suffix = набор медикаментов
     .desc = { ent-ClothingBackpackDuffelSyndicate.desc }
 ent-ClothingBackpackDuffelSyndicateDecoyKitFilled = { ent-ClothingBackpackDuffelSyndicate }
     .suffix = набор обманок
     .desc = { ent-ClothingBackpackDuffelSyndicate.desc }
-
-# Corvax-HiddenDesc-End
-
+ent-ClothingBackpackDuffelSyndicateFilledStarterKit = { ent-ClothingBackpackDuffelSyndicate }
+    .desc = Содержит оружие, медицинские принадлежности, инструменты для взлома, запасные боеприпасы и несколько простых приспособлений.
+    .suffix = Базовый набор оперативника

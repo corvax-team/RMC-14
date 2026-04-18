@@ -1,0 +1,9 @@
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: CCMPouchGeneralLargeFilledAdvancedMedical
+  suffix: CCM, Filled, Advanced Medical
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMAdvancedBurnToolHealer
+    - id: CCMAdvancedBruteToolHealer

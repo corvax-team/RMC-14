@@ -1,8 +1,3 @@
-# Medal Types
-rmc-medal-1 = Медаль за выдающиеся заслуги
-rmc-medal-2 = Медаль бронзовое сердце
-rmc-medal-3 = Медаль за доблесть
-rmc-medal-4 = Медаль за исключительный героизм
 # Medal UI
 rmc-medal-recipient = Обладатель медали
 rmc-medal-recipient-prompt = Кому вы хотите вручить медаль?

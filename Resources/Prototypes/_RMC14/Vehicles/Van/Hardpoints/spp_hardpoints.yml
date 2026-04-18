@@ -15,6 +15,7 @@
     slotType: Launcher
     compatibilityId: SPPVan
     damageMultiplier: 0.15
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
   - type: VehicleTurret
@@ -57,6 +58,7 @@
     slotType: Cannon
     compatibilityId: SPPVan
     damageMultiplier: 0.0
+    repairRate: 0.01
   - type: RMCHardpointIntegrity
     maxIntegrity: 350
   - type: VehicleTurret
@@ -92,6 +94,8 @@
     useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: t60p3m_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    enabled: false
 
 - type: entity
   parent: RMCVanWheel

@@ -1,20 +1,17 @@
-using System;
 using System.Numerics;
-using System.Collections.Generic;
+using Content.Shared._RMC14.Entrenching;
+using Content.Shared._RMC14.Power;
+using Content.Shared._RMC14.Vehicle;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Doors.Components;
 using Content.Shared.Foldable;
 using Content.Shared.Item;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Vehicle.Components;
-using Content.Shared._RMC14.Entrenching;
-using Content.Shared._RMC14.Vehicle;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Physics;
-using Robust.Shared.GameObjects;
+using Content.Shared.Vehicle.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Maths;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
@@ -29,7 +26,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         EntityUid grid,
         Vector2 gridPos,
         Angle? overrideRotation,
-        float clearance)
+        float clearance,
+        bool applyEffects,
+        bool debug = true,
+        HashSet<EntityUid>? blockers = null)
     {
         if (!physicsQ.TryComp(uid, out var body) || !fixtureQ.TryComp(uid, out var fixtures))
             return true;
@@ -48,9 +48,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         var world = coords.ToMap(EntityManager, transform);
 
         var tileIndices = map.TileIndicesFor(grid, gridComp, coords);
-        DebugTestedTiles.Add((grid, tileIndices));
+        if (debug)
+            DebugTestedTiles.Add((grid, tileIndices));
 
-        var rotation = overrideRotation ?? transform.GetWorldRotation(uid);
+        var rotation = GetCollisionWorldRotation(uid, grid, overrideRotation);
         var tx = new Transform(world.Position, rotation);
 
         var wheelDamage = _net.IsClient ? 0f : GetWheelCollisionDamage(uid, mover);
@@ -58,10 +59,19 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (!TryGetFixtureAabb(fixtures, tx, out var aabb))
             return true;
 
+        var movementAabb = GetMovementAabb(aabb, mover);
         var hits = lookup.GetEntitiesIntersecting(world.MapId, aabb, LookupFlags.Dynamic | LookupFlags.Static);
         var playedCollisionSound = false;
         var blocked = false;
         var mobHits = new HashSet<EntityUid>();
+
+        void AddProbe(bool probeBlocked)
+        {
+            if (!debug)
+                return;
+
+            AddDebugCollisionProbe(uid, mover, fixtures, tx, aabb, movementAabb, world.MapId, probeBlocked, applyEffects);
+        }
 
         foreach (var other in hits)
         {
@@ -89,8 +99,16 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             var isFoldable = HasComp<FoldableComponent>(other);
             var isMob = TryComp(other, out MobStateComponent? mob);
             var isXeno = HasComp<XenoComponent>(other);
-            var collisionClass = ClassifyCollisionCandidate(other, otherXform, otherBody, hardCollidable, isMob, isBarricade, isFoldable, hasDoor, isXeno);
-            var isUnpoweredDoor = hasDoor && IsDoorUnpowered(other);
+            var collisionClass = ClassifyCollisionCandidate(other, otherXform, otherBody, otherFixtures, hardCollidable, isMob, isBarricade, isFoldable, hasDoor, isXeno);
+            var doorPowerKnown = TryGetDoorPowered(other, out var doorPowered);
+            var isUnpoweredDoor = hasDoor && doorPowerKnown && !doorPowered;
+            if (hasDoor && doorPowerKnown && doorPowered && door != null && _door.CanOpen(other, door, operatorUid))
+                collisionClass = VehicleCollisionClass.Ignore;
+
+            var collisionAabb = GetCollisionAabb(collisionClass, aabb, movementAabb);
+
+            if (!HasCollisionOverlap(collisionAabb, otherAabb))
+                continue;
 
             if (collisionClass == VehicleCollisionClass.SoftMob && isXeno)
             {
@@ -98,27 +116,55 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
                 if (blocksXeno)
                 {
-                    PlayMobCollisionSound(uid, ref playedCollisionSound);
-                    ApplyWheelCollisionDamage(uid, mover, wheelDamage);
-                    DebugCollisions.Add(new DebugCollision(uid, other, aabb, otherAabb, 0f, 0f, clearance, world.MapId));
+                    if (applyEffects)
+                    {
+                        PlayMobCollisionSound(uid, ref playedCollisionSound);
+                        ApplyWheelCollisionDamage(uid, mover, wheelDamage);
+                        // CCM14-start
+                        if (!_net.IsClient)
+                            HandleMobCollision(uid, other, mob!, mover, ref playedCollisionSound);
+                        // CCM14-end
+                    }
+
+                    blockers?.Add(other);
+                    if (debug)
+                        DebugCollisions.Add(new DebugCollision(uid, other, collisionAabb, otherAabb, 0f, 0f, clearance, world.MapId));
+
+                    AddProbe(true);
                     return false;
                 }
+
+                if (!applyEffects)
+                    continue;
 
                 PlayMobCollisionSound(uid, ref playedCollisionSound);
                 if (!PushMobOutOfVehicle(uid, other, aabb, otherAabb))
                 {
                     ApplyWheelCollisionDamage(uid, mover, wheelDamage);
-                    DebugCollisions.Add(new DebugCollision(uid, other, aabb, otherAabb, 0f, 0f, clearance, world.MapId));
+                    blockers?.Add(other);
+                    if (debug)
+                        DebugCollisions.Add(new DebugCollision(uid, other, collisionAabb, otherAabb, 0f, 0f, clearance, world.MapId));
+
+                    AddProbe(true);
                     return false;
                 }
-
+                // CCM14-start
+                if (!_net.IsClient && isMob)
+                    HandleMobCollision(uid, other, mob!, mover, ref playedCollisionSound);
+                // CCM14-end
                 continue;
             }
 
             if (collisionClass == VehicleCollisionClass.SoftMob && isMob && _standing.IsDown(other))
-                continue;
+            // CCM14-start
+            {
+                if (applyEffects && !_net.IsClient && mob != null)
+                    HandleMobCollision(uid, other, mob, mover, ref playedCollisionSound);
 
-            if (hasDoor && !_net.IsClient)
+                continue;
+            }
+            // CCM14-end
+            if (applyEffects && hasDoor && !_net.IsClient)
             {
                 if (!isUnpoweredDoor)
                 {
@@ -131,31 +177,64 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             if (collisionClass == VehicleCollisionClass.Ignore)
                 continue;
 
-            if (collisionClass == VehicleCollisionClass.Breakable || isUnpoweredDoor)
+            if (collisionClass == VehicleCollisionClass.Breakable)
             {
-                if (TrySmash(other, uid, mover, ref playedCollisionSound) || TryBreakDoor(other, uid, mover, ref playedCollisionSound)) // CCM14
+                if (TryComp(other, out RMCVehicleSmashableComponent? smashable) &&
+                    smashable.RequiresDoorUnpowered &&
+                    hasDoor &&
+                    !isUnpoweredDoor)
+                {
+                    if (applyEffects)
+                    {
+                        PlayCollisionSound(uid, ref playedCollisionSound);
+                        ApplyWheelCollisionDamage(uid, mover, wheelDamage);
+                    }
+
+                    blockers?.Add(other);
+                    if (debug)
+                        DebugCollisions.Add(new DebugCollision(uid, other, collisionAabb, otherAabb, 0f, 0f, clearance, world.MapId));
+
+                    blocked = true;
+                    break;
+                }
+
+                if (!applyEffects)
                     continue;
+
+                if (TrySmash(other, uid, ref playedCollisionSound))
+                    continue;
+
                 continue;
             }
 
             if (collisionClass == VehicleCollisionClass.Hard)
             {
-                PlayCollisionSound(uid, ref playedCollisionSound);
-                ApplyWheelCollisionDamage(uid, mover, wheelDamage);
-                DebugCollisions.Add(new DebugCollision(uid, other, aabb, otherAabb, 0f, 0f, clearance, world.MapId));
+                if (applyEffects)
+                {
+                    PlayCollisionSound(uid, ref playedCollisionSound);
+                    ApplyWheelCollisionDamage(uid, mover, wheelDamage);
+                }
+
+                blockers?.Add(other);
+                if (debug)
+                    DebugCollisions.Add(new DebugCollision(uid, other, collisionAabb, otherAabb, 0f, 0f, clearance, world.MapId));
+
                 blocked = true;
                 break;
             }
 
-            if (_net.IsClient && isMob && !isXeno && mob != null && ShouldPredictVehicleInteractions(uid))
-                PredictRunover(uid, other, mob, mover); // CCM14
+            if (applyEffects && _net.IsClient && isMob && !isXeno && mob != null && ShouldPredictVehicleInteractions(uid))
+                PredictRunover(uid, other, mob);
 
-            if (!_net.IsClient && isMob && mob != null)
+            if (applyEffects && !_net.IsClient && isMob && mob != null)
                 mobHits.Add(other);
         }
 
         if (blocked)
+        {
+            AddProbe(true);
             return false;
+        }
 
         if (!_net.IsClient)
         {
@@ -168,39 +247,99 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             }
         }
 
+        AddProbe(false);
         return true;
     }
 
-    private bool IsDoorUnpowered(EntityUid target)
+    private static void AddDebugCollisionProbe(
+        EntityUid uid,
+        GridVehicleMoverComponent mover,
+        FixturesComponent fixtures,
+        Transform transformData,
+        Box2 aabb,
+        Box2 movementAabb,
+        MapId map,
+        bool blocked,
+        bool applyEffects)
     {
-        if (TryComp(target, out AirlockComponent? airlock))
-            return !airlock.Powered;
+        if (!TryGetFixtureLocalAabb(fixtures, out var localAabb))
+            return;
 
-        if (TryComp(target, out FirelockComponent? firelock))
-            return !firelock.Powered;
+        var localMovementAabb = GetMovementAabb(localAabb, mover);
+        var rotation = new Angle(transformData.Quaternion2D.Angle);
+        var fixtureBounds = new Box2Rotated(localAabb.Translated(transformData.Position), rotation, transformData.Position);
+        var movementBounds = new Box2Rotated(localMovementAabb.Translated(transformData.Position), rotation, transformData.Position);
 
-        return false;
+        DebugCollisionProbes.Add(new DebugCollisionProbe(
+            uid,
+            aabb,
+            movementAabb,
+            fixtureBounds,
+            movementBounds,
+            transformData.Position,
+            rotation,
+            blocked,
+            applyEffects,
+            map));
     }
 
-    private bool TryBreakDoor(EntityUid target, EntityUid vehicle, GridVehicleMoverComponent mover, ref bool playedCollisionSound) // CCM14
+    private static Box2 GetCollisionAabb(VehicleCollisionClass collisionClass, Box2 fullAabb, Box2 movementAabb)
     {
-        if (!HasComp<DoorComponent>(target))
-            return false;
+        return collisionClass == VehicleCollisionClass.SoftMob
+            ? fullAabb
+            : movementAabb;
+    }
 
-        PlayCollisionSound(vehicle, ref playedCollisionSound);
+    private static bool HasCollisionOverlap(Box2 vehicleAabb, Box2 otherAabb)
+    {
+        var intersection = vehicleAabb.Intersect(otherAabb);
+        return intersection.Width > 0f && intersection.Height > 0f;
+    }
 
-        if (_net.IsClient)
-            return true;
+    private static Box2 GetMovementAabb(Box2 aabb, GridVehicleMoverComponent mover)
+    {
+        var inset = Math.Clamp(mover.MovementCollisionInset, 0f, 0.45f);
+        if (inset <= 0f)
+            return aabb;
 
-        var damage = new DamageSpecifier
+        var adjusted = aabb.Enlarged(-inset);
+        return adjusted.IsValid() ? adjusted : aabb;
+    }
+
+    private Angle GetCollisionWorldRotation(EntityUid uid, EntityUid grid, Angle? overrideRotation)
+    {
+        if (overrideRotation is not { } localRotation)
+            return transform.GetWorldRotation(uid);
+
+        var xform = Transform(uid);
+        if (xform.ParentUid.IsValid())
+            return transform.GetWorldRotation(xform.ParentUid) + localRotation;
+
+        return transform.GetWorldRotation(grid) + localRotation;
+    }
+
+    private bool TryGetDoorPowered(EntityUid target, out bool powered)
+    {
+        if (TryComp(target, out AirlockComponent? airlock))
         {
-            DamageDict =
-            {
-                [mover.CollisionDamageType] = mover.UnpoweredDoorCollisionDamage, // CCM14
-            },
-        };
+            powered = airlock.Powered;
+            return true;
+        }
 
-        return _damageable.TryChangeDamage(target, damage, true, origin: vehicle, tool: vehicle) != null;
+        if (TryComp(target, out FirelockComponent? firelock))
+        {
+            powered = firelock.Powered;
+            return true;
+        }
+
+        if (HasComp<RMCPowerReceiverComponent>(target))
+        {
+            powered = _rmcPower.IsPowered(target);
+            return true;
+        }
+
+        powered = false;
+        return false;
     }
 
     private void ApplyWheelCollisionDamage(EntityUid vehicle, GridVehicleMoverComponent mover, float damage)
@@ -268,34 +407,76 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return !first;
     }
 
-    private bool TrySmash(EntityUid target, EntityUid vehicle, GridVehicleMoverComponent mover, ref bool playedCollisionSound) // CCM14
+    private static bool TryGetFixtureLocalAabb(FixturesComponent fixtures, out Box2 aabb)
+    {
+        var first = true;
+        aabb = default;
+        var transformData = Robust.Shared.Physics.Transform.Empty;
+
+        foreach (var fixture in fixtures.Fixtures.Values)
+        {
+            if (!fixture.Hard)
+                continue;
+
+            for (var i = 0; i < fixture.Shape.ChildCount; i++)
+            {
+                var child = fixture.Shape.ComputeAABB(transformData, i);
+
+                if (first)
+                {
+                    aabb = child;
+                    first = false;
+                }
+                else
+                {
+                    aabb = aabb.Union(child);
+                }
+            }
+        }
+
+        return !first;
+    }
+
+    private bool TrySmash(EntityUid target, EntityUid vehicle, ref bool playedCollisionSound)
     {
         if (!TryComp(target, out RMCVehicleSmashableComponent? smashable))
             return false;
 
         PlayCollisionSound(vehicle, ref playedCollisionSound);
 
-        if (mover != null) // CCM14
+        if (TryComp(vehicle, out GridVehicleMoverComponent? mover))
             ApplySmashSlowdown(vehicle, mover, smashable);
 
         if (_net.IsClient)
-        {
-            if (smashable.DeleteOnHit && physicsQ.TryComp(vehicle, out var vehicleBody) && vehicleBody.Predict)
-                PredictedQueueDel(target);
-
             return true;
-        }
 
-        if (!_net.IsClient)
-        {
-            if (smashable.SmashSound != null)
-                _audio.PlayPvs(smashable.SmashSound, vehicle);
+        if (smashable.SmashSound != null)
+            _audio.PlayPvs(smashable.SmashSound, Transform(target).Coordinates);
 
-            if (smashable.DeleteOnHit && !TerminatingOrDeleted(target))
-                Del(target);
-        }
+        SmashTarget(target, vehicle, smashable);
 
         return true;
+    }
+
+    private void SmashTarget(EntityUid target, EntityUid vehicle, RMCVehicleSmashableComponent smashable)
+    {
+        var damage = new DamageSpecifier
+        {
+            DamageDict =
+            {
+                [CollisionDamageType] = smashable.DamageOnHit,
+            },
+        };
+
+        _damageable.TryChangeDamage(target, damage, true, origin: vehicle, tool: vehicle);
+
+        if (!smashable.DeleteOnHit)
+            return;
+
+        if (TerminatingOrDeleted(target))
+            return;
+
+        _destructible.DestroyEntity(target);
     }
 
     private void PlayCollisionSound(EntityUid uid, ref bool played)
@@ -347,13 +528,13 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         played = true;
     }
 
-    private void HandleMobCollision(EntityUid vehicle, EntityUid target, MobStateComponent mobState, GridVehicleMoverComponent mover, ref bool playedCollisionSound) // CCM14
+    private void HandleMobCollision(EntityUid vehicle, EntityUid target, MobStateComponent mobState, GridVehicleMoverComponent mover, ref bool playedCollisionSound)
     {
         if (_net.IsClient || _mobState.IsDead(target, mobState))
             return;
 
         var now = _timing.CurTime;
-        if (_lastMobCollision.TryGetValue(target, out var last) && now < last + mover.MobCollisionCooldown) // CCM14
+        if (_lastMobCollision.TryGetValue(target, out var last) && now < last + MobCollisionCooldown)
             return;
 
         _lastMobCollision[target] = now;
@@ -364,7 +545,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         {
             DamageDict =
             {
-                [mover.CollisionDamageType] = mover.MobCollisionDamage, // CCM14
+                [CollisionDamageType] = mover.MobCollisionDamage, // CCM14
             },
         };
 
@@ -373,10 +554,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (HasComp<XenoComponent>(target))
             return;
 
-        _stun.TryKnockdown(target, mover.MobCollisionKnockdown, true); // CCM14
+        _stun.TryKnockdown(target, MobCollisionKnockdown, true);
         var runover = EnsureComp<RMCVehicleRunoverComponent>(target);
         runover.Vehicle = vehicle;
-        runover.Duration = mover.MobCollisionKnockdown; // CCM14
+        runover.Duration = MobCollisionKnockdown;
         runover.ExpiresAt = now + runover.Duration + RMCVehicleRunoverSystem.StandUpGrace;
         Dirty(target, runover);
 
@@ -459,7 +640,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return vehicleComp.Operator != null && vehicleComp.Operator == _player.LocalEntity;
     }
 
-    private void PredictRunover(EntityUid vehicle, EntityUid mob, MobStateComponent mobState, GridVehicleMoverComponent mover) // CCM14
+    private void PredictRunover(EntityUid vehicle, EntityUid mob, MobStateComponent mobState)
     {
         if (!ShouldPredictVehicleInteractions(vehicle))
             return;
@@ -467,11 +648,11 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (_mobState.IsDead(mob, mobState) || _standing.IsDown(mob))
             return;
 
-        _stun.TryKnockdown(mob, mover.MobCollisionKnockdown, true); // CCM14
+        _stun.TryKnockdown(mob, MobCollisionKnockdown, true);
 
         var runover = EnsureComp<RMCVehicleRunoverComponent>(mob);
         runover.Vehicle = vehicle;
-        runover.Duration = mover.MobCollisionKnockdown; // CCM14
+        runover.Duration = MobCollisionKnockdown;
         runover.ExpiresAt = _timing.CurTime + runover.Duration + RMCVehicleRunoverSystem.StandUpGrace;
         Dirty(mob, runover);
 
@@ -669,6 +850,13 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             if (!fixtureQ.TryComp(ent, out var fixtures))
                 continue;
 
+            if (physicsQ.TryComp(mob, out var mobBody) &&
+                fixtureQ.TryComp(mob, out var mobFixtures) &&
+                !physics.IsHardCollidable((mob, mobFixtures, mobBody), (ent, fixtures, otherBody)))
+            {
+                continue;
+            }
+
             var (pos, rot) = transform.GetWorldPositionRotation(entXformComp, xformQuery);
             rot -= gridRot;
             pos = (-gridRot).RotateVec(pos - gridPos);
@@ -809,6 +997,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         EntityUid other,
         TransformComponent otherXform,
         PhysicsComponent otherBody,
+        FixturesComponent otherFixtures,
         bool hardCollidable,
         bool isMob,
         bool isBarricade,
@@ -820,6 +1009,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         var isSmashable = HasComp<RMCVehicleSmashableComponent>(other);
 
         if (!otherXform.Anchored && HasComp<ItemComponent>(other))
+            return VehicleCollisionClass.Ignore;
+
+        if (isMob || isXeno)
+            return VehicleCollisionClass.SoftMob;
+
+        if (IsNormallyMobPassable(otherFixtures))
             return VehicleCollisionClass.Ignore;
 
         var isLooseDynamic =
@@ -834,9 +1029,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (isLooseDynamic)
             return VehicleCollisionClass.Ignore;
 
-        if (isMob || isXeno)
-            return VehicleCollisionClass.SoftMob;
-
         if (isSmashable)
             return VehicleCollisionClass.Breakable;
 
@@ -849,5 +1041,26 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return hardCollidable
             ? VehicleCollisionClass.Hard
             : VehicleCollisionClass.Ignore;
+    }
+
+    private static bool IsNormallyMobPassable(FixturesComponent fixtures)
+    {
+        foreach (var fixture in fixtures.Fixtures.Values)
+        {
+            if (!IsNormallyMobPassable(fixture))
+                return false;
+        }
+
+        return true;
+    }
+
+    private static bool IsNormallyMobPassable(Fixture fixture)
+    {
+        const int mobMask = (int) CollisionGroup.MobMask;
+        const int mobLayer = (int) CollisionGroup.MobLayer;
+
+        return !fixture.Hard ||
+               ((fixture.CollisionMask & mobLayer) == 0 &&
+                (fixture.CollisionLayer & mobMask) == 0);
     }
 }

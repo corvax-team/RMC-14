@@ -12,12 +12,58 @@ namespace Content.Client.Administration.UI
     public sealed partial class AdminAnnounceWindow : DefaultWindow
     {
         [Dependency] private readonly ILocalizationManager _localization = default!;
+        
+        // CCM14-start
+        private const int MaxSenderLength = 32;
+        private const string DefaultColor = "1d8bad";
+        private const string DefaultSound = "/Audio/_RMC14/Announcements/Marine/notice2.ogg";
+
+        private static string NormalizeHex(string text)
+            => text.Trim().TrimStart('#');
+
+        private void UpdateColorPreview()
+        {
+            var hex = NormalizeHex(ColorHex.Text);
+
+            if (hex.Length != 3 && hex.Length != 6)
+            {
+                ColorPreview.ModulateSelfOverride = null;
+                return;
+            }
+
+            try
+            {
+                ColorPreview.ModulateSelfOverride = Color.FromHex("#" + hex);
+            }
+            catch
+            {
+                ColorPreview.ModulateSelfOverride = null;
+            }
+        }
+
+        public string ColorHexText => NormalizeHex(ColorHex.Text);
+        public string SoundPathText => SoundPath.Text.Trim();
+        public string SenderText
+        {
+            get
+            {
+                var t = Sender.Text.Trim();
+                return t[..Math.Min(t.Length, MaxSenderLength)];
+            }
+        }
+        // CCM14-end
 
         public AdminAnnounceWindow()
         {
             RobustXamlLoader.Load(this);
             IoCManager.InjectDependencies(this);
 
+            // CCM14-start
+            ColorHex.Text = DefaultColor;
+            ColorHex.OnTextChanged += _ => UpdateColorPreview();
+            SoundPath.Text = DefaultSound;
+            UpdateColorPreview();
+            // CCM14-end
             Announcement.Placeholder = new Rope.Leaf(_localization.GetString("admin-announce-announcement-placeholder"));
             AnnounceMethod.AddItem(_localization.GetString("admin-announce-type-station"));
             AnnounceMethod.SetItemMetadata(0, AdminAnnounceType.Station);

@@ -243,7 +243,7 @@
                                                 </BoxContainer>
                                                 <BoxContainer Orientation="Vertical">
                                                     <RichTextLabel Name="CrateStatus" Access="Public"
-                                                                   Text="[color=red][bold][ NO CRATE LOADED ][/bold][/color]" />
+                                                                   Text="[color=red][bold][ ЯЩИК НЕ ЗАГРУЖЕН ][/bold][/color]" />
                                                     <Label Text="{Loc rmc-overwatch-console-status}" HorizontalAlignment="Center" />
                                                 </BoxContainer>
                                             </BoxContainer>
@@ -300,7 +300,7 @@
                                                 </BoxContainer>
                                                 <BoxContainer Orientation="Vertical">
                                                     <RichTextLabel Name="OrbitalStatus" Access="Public"
-                                                                   Text="[color=red][bold]No warhead loaded[/bold][/color]" />
+                                                                   Text="[color=red][bold]Боеголовка не загружена[/bold][/color]" />
                                                     <Label Text="{Loc rmc-overwatch-console-status}" HorizontalAlignment="Center" />
                                                 </BoxContainer>
                                             </BoxContainer>

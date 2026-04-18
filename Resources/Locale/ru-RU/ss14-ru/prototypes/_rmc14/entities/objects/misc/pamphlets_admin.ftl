@@ -133,3 +133,5 @@ ent-RMCPamphletAdminVehicles2 = брошюра: транспорт 2
     .desc = { ent-RMCPamphletAdmin.desc }
 ent-RMCPamphletAdminVehicles3 = брошюра: транспорт 3
     .desc = { ent-RMCPamphletAdmin.desc }
+ent-RMCPamphletAdminVulture1 = инструктивная брошюра «Стервятник» 1
+    .desc = { ent-RMCPamphletAdmin.desc }

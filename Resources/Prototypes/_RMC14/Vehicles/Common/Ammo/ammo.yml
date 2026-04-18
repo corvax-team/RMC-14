@@ -30,6 +30,9 @@
   - type: Tag
     tags:
     - RMCAmmoBox
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 100
+    category: Ammo
 
 - type: entity
   parent: RMCVehicleAmmoBoxBase
@@ -54,6 +57,10 @@
     amount: 500
     max: 500
     bulletType: RMCVehicleAmmoBoxFrontal
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 100
+    category: Ammo
+    vehicle: APC
 
 - type: entity
   parent: RMCVehicleAmmoBoxBase
@@ -79,6 +86,10 @@
     max: 500
     bulletType: RMCVehicleAmmoBoxCupola
     usedIn: Tank cupola
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 150
+    category: Ammo
+    vehicle: Tank
 
 - type: entity
   parent: RMCVehicleAmmoBoxBase
@@ -104,6 +115,10 @@
     max: 10
     bulletType: RMCVehicleAmmoBoxGrenadeLauncher
     usedIn: Tank grenade launcher, Humvee launcher
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 100
+    category: Ammo
+    vehicle: Tank, Humvee
 
 - type: entity
   parent: RMCVehicleAmmoBoxBase
@@ -129,6 +144,10 @@
     max: 6
     bulletType: RMCVehicleAmmoBoxSmokeLauncher
     usedIn: Tank smoke launcher
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 75
+    category: Ammo
+    vehicle: Tank
 
 - type: entity
   parent: RMCVehicleAmmoBoxBase
@@ -154,6 +173,10 @@
     max: 10
     bulletType: RMCVehicleAmmoBoxFlareLauncher
     usedIn: Tank flare launcher, APC flare launcher
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 50
+    category: Ammo
+    vehicle: Tank, APC
 
 - type: entity
   parent: RMCVehicleAmmoBoxBase
@@ -179,6 +202,10 @@
     max: 4
     bulletType: RMCVehicleAmmoBoxLTBCannon
     usedIn: Tank LTB cannon
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 150
+    category: Ammo
+    vehicle: Tank
 
 - type: entity
   parent: RMCVehicleAmmoBoxBase
@@ -204,6 +231,10 @@
     max: 5
     bulletType: RMCVehicleAmmoBoxRocketLauncher
     usedIn: Tank TOW launcher
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 200
+    category: Ammo
+    vehicle: Tank
 
 - type: entity
   parent: RMCVehicleAmmoBoxBase
@@ -229,6 +260,10 @@
     max: 40
     bulletType: RMCVehicleAmmoBoxAceAutocannon
     usedIn: Tank ACE autocannon, APC Boyars dualcannon
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 120
+    category: Ammo
+    vehicle: Tank, APC
 
 - type: entity
   parent: RMCVehicleAmmoBoxBase
@@ -254,6 +289,10 @@
     max: 500
     bulletType: RMCVehicleAmmoBoxRERotaryCannon
     usedIn: Humvee RE700 rotary cannon
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 150
+    category: Ammo
+    vehicle: Humvee
 
 - type: entity
   parent: RMCVehicleAmmoBoxBase
@@ -279,6 +318,10 @@
     max: 60
     bulletType: RMCVehicleAmmoBoxDragonFlameTank
     usedIn: Tank DRG-N offensive flamer
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 100
+    category: Ammo
+    vehicle: Tank
 
 - type: entity
   parent: RMCVehicleAmmoBoxBase
@@ -304,6 +347,10 @@
     max: 500
     bulletType: RMCVehicleAmmoBoxLTAA
     usedIn: Tank LTAA-AP minigun
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 150
+    category: Ammo
+    vehicle: Tank
 
 - type: entity
   parent: CMCartridgeSentry10x50mm

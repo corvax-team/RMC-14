@@ -1,13 +1,14 @@
-using System.Collections.Generic;
 using System.Numerics;
 using Content.Client.Movement.Systems;
-using Content.Shared.Camera;
+using Content.Client.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Vehicle;
-using Content.Shared.Movement.Components;
+using Content.Shared.Camera;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Shared.Map;
+using Quaternion = System.Numerics.Quaternion;
+using Vector3 = System.Numerics.Vector3;
 
 namespace Content.Client._RMC14.Vehicle.Hardpoint;
 
@@ -24,8 +25,8 @@ public sealed class RMCVehicleGunnerCursorOffsetSystem : EntitySystem
 
     public override void Initialize()
     {
-        UpdatesBefore.Add(typeof(Content.Client._RMC14.Vehicle.VehicleTurretInputSystem));
-        UpdatesBefore.Add(typeof(Content.Client.Weapons.Ranged.Systems.GunSystem));
+        UpdatesBefore.Add(typeof(VehicleTurretInputSystem));
+        UpdatesBefore.Add(typeof(GunSystem));
         SubscribeLocalEvent<RMCVehicleGunnerViewUserComponent, GetEyeOffsetEvent>(OnGetEyeOffset);
     }
 
@@ -77,7 +78,7 @@ public sealed class RMCVehicleGunnerCursorOffsetSystem : EntitySystem
         var eyeRotation = _eyeManager.CurrentEye.Rotation;
         var mouseActualRelativePos = Vector2.Transform(
             mouseNormalizedPos,
-            System.Numerics.Quaternion.CreateFromAxisAngle(-System.Numerics.Vector3.UnitZ, (float) eyeRotation.Opposite().Theta));
+            Quaternion.CreateFromAxisAngle(-Vector3.UnitZ, (float) eyeRotation.Opposite().Theta));
 
         mouseActualRelativePos *= component.CursorMaxOffset;
         if (mouseActualRelativePos.Length() > component.CursorMaxOffset)

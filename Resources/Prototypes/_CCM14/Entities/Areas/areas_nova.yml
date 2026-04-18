@@ -122,7 +122,7 @@
   - type: Sprite
     state: head_quarters
   - type: Area
-    minimapColor: '#6C6767D8'
+    minimapColor: '#6798A3D8'
     CAS: true
     fulton: true
     mortarPlacement: true
@@ -233,7 +233,7 @@
   - type: Sprite
     state: hydro_north
   - type: Area
-    minimapColor: '#6C6767D8'
+    minimapColor: '#69A367D8'
     CAS: true
     fulton: false
     mortarPlacement: false
@@ -255,13 +255,13 @@
   - type: Sprite
     state: anolab
   - type: Area
-    minimapColor: '#6C6767D8'
+    minimapColor: '#8B7A5DD8'
     CAS: true
     fulton: false
     mortarPlacement: false
-    mortarFire: true
+    mortarFire: false
     lasing: true
-    medevac: true
+    medevac: false
     OB: true
     supplyDrop: false
     paradropping: false
@@ -277,13 +277,13 @@
   - type: Sprite
     state: bunker01_caves_outpost
   - type: Area
-    minimapColor: '#6C6767D8'
+    minimapColor: '#9C2307D8'
     CAS: true
     fulton: false
     mortarPlacement: false
-    mortarFire: true
+    mortarFire: false
     lasing: true
-    medevac: true
+    medevac: false
     OB: true
     supplyDrop: false
     paradropping: false

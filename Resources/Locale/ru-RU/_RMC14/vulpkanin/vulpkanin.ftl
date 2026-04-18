@@ -55,6 +55,7 @@ marking-VulpSnoutSwift-vulpine-lines = Свифт
 marking-VulpSnoutSwift = Вульпканин, Свифт
 marking-VulpSnoutBlaze-blaze = Блейз
 marking-VulpSnoutBlaze = Вульпканин, Блейз
+marking-VulpSnoutBlaze-nose_blaze = Нос
 marking-VulpSnoutPatch-patch = Патч
 marking-VulpSnoutPatch = Вульпканин, Патч
 marking-VulpSnoutShort-m_snout_fscanid_FRONT_primary = Основной

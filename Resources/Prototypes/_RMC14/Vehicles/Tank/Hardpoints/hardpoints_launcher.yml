@@ -11,6 +11,7 @@
     vehicleFamily: Tank
     slotType: Launcher
     damageMultiplier: 0.0
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 300
   - type: VehicleTurretAttachment
@@ -67,6 +68,10 @@
     useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: flamer_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 800
+    category: Secondary
+    vehicle: Tank
 
 - type: entity
   parent: RMCVehicleTankHardpointBase
@@ -81,6 +86,7 @@
     vehicleFamily: Tank
     slotType: Launcher
     damageMultiplier: 0.0
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurretAttachment
@@ -135,6 +141,10 @@
     useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: glauncher_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 1000
+    category: Secondary
+    vehicle: Tank
 
 - type: entity
   parent: RMCVehicleTankHardpointBase
@@ -149,6 +159,7 @@
     vehicleFamily: Tank
     slotType: Launcher
     damageMultiplier: 0.0
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurretAttachment
@@ -199,6 +210,10 @@
     useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: towlauncher_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 1200
+    category: Secondary
+    vehicle: Tank
 
 - type: entity
   parent: RMCVehicleTankHardpointBase
@@ -213,6 +228,7 @@
     vehicleFamily: Tank
     slotType: Launcher
     damageMultiplier: 0.0
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 350
   - type: VehicleTurretAttachment
@@ -266,6 +282,10 @@
     useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: m56cupola_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 1000
+    category: Secondary
+    vehicle: Tank
 
 - type: entity
   parent: RMCVehicleTankHardpointBase
@@ -280,6 +300,7 @@
     vehicleFamily: Tank
     slotType: Launcher
     damageMultiplier: 0.0
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 350
   - type: VehicleTurretAttachment
@@ -331,3 +352,7 @@
     useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: m56cupola_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 1500
+    category: Secondary
+    vehicle: Tank

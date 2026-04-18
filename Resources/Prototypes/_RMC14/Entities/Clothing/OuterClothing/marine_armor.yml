@@ -277,14 +277,14 @@
   description: A well-crafted suit of M3 Pattern Armor typically distributed to Wardens. Useful for letting your men know who is in charge.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/jungle.rsi
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/m3/warden/jungle.rsi
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/jungle.rsi
-      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/desert.rsi
-      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/snow.rsi
-      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/classic.rsi
-      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/urban.rsi
+      Jungle: _CCM14/Objects/Clothing/OuterClothing/Armor/m3/warden/jungle.rsi
+      Desert: _CCM14/Objects/Clothing/OuterClothing/Armor/m3/warden/desert.rsi
+      Snow: _CCM14/Objects/Clothing/OuterClothing/Armor/m3/warden/snow.rsi
+      Classic: _CCM14/Objects/Clothing/OuterClothing/Armor/m3/warden/classic.rsi
+      Urban: _CCM14/Objects/Clothing/OuterClothing/Armor/m3/warden/urban.rsi
   - type: ClothingRequireEquipped
     autoUnequip: true
     denyReason: rmc-armor-not-warden-jumpsuit
@@ -299,14 +299,14 @@
   description: A well-crafted suit of M3 Pattern Armor typically distributed to Chief MPs. Useful for letting your men know who is in charge.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/jungle.rsi
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/m3/wo/jungle.rsi
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/jungle.rsi
-      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/desert.rsi
-      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/snow.rsi
-      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/classic.rsi
-      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/urban.rsi
+      Jungle: _CCM14/Objects/Clothing/OuterClothing/Armor/m3/wo/jungle.rsi
+      Desert: _CCM14/Objects/Clothing/OuterClothing/Armor/m3/wo/desert.rsi
+      Snow: _CCM14/Objects/Clothing/OuterClothing/Armor/m3/wo/snow.rsi
+      Classic: _CCM14/Objects/Clothing/OuterClothing/Armor/m3/wo/classic.rsi
+      Urban: _CCM14/Objects/Clothing/OuterClothing/Armor/m3/wo/urban.rsi
   - type: ClothingRequireEquipped
     autoUnequip: true
     denyReason: rmc-armor-not-cmp-jumpsuit
@@ -905,7 +905,7 @@
   description: A standard UNMC M2 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/jungle.rsi
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/m2/mp/jungle.rsi
   - type: CMArmor
     melee: 25
     bullet: 20
@@ -921,11 +921,11 @@
     - 0,0,3,1 # 2 slots
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/jungle.rsi
-      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/desert.rsi
-      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/snow.rsi
-      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/classic.rsi
-      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/urban.rsi
+      Jungle: _CCM14/Objects/Clothing/OuterClothing/Armor/m2/mp/jungle.rsi
+      Desert: _CCM14/Objects/Clothing/OuterClothing/Armor/m2/mp/desert.rsi
+      Snow: _CCM14/Objects/Clothing/OuterClothing/Armor/m2/mp/snow.rsi
+      Classic: _CCM14/Objects/Clothing/OuterClothing/Armor/m2/mp/classic.rsi
+      Urban: _CCM14/Objects/Clothing/OuterClothing/Armor/m2/mp/urban.rsi
   - type: ClothingRequireEquipped
     autoUnequip: true
     denyReason: rmc-armor-not-mp-jumpsuit

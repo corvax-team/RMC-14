@@ -12,53 +12,53 @@
     - "CMAccessMarinePrep"
     hackable: true
     sections:
-    - name: Standard Equipment
+    - name: Стандартное снаряжение # CCM14
       entries:
       - id: CMBootsBlack
-        name: SPP Combat Boots
+        name: военные ботинки СССП # CCM14
         amount: 15
       - id: CMJumpsuitSPP
-        name: SPP Uniform
+        name: комбинезон СССП # CCM14
         amount: 15
       - id: CMHandsBlackMarine
-        name: SPP Combat Gloves
+        name: боевые перчатки СССП # CCM14
         amount: 15
       - id: RMCHeadsetSPP
-        name: SPP Radio Headset
+        name: гарнитура СССП # CCM14
         amount: 15
       - id: RMCM5CameraGear #todo, spp cam headsets
-        name: M5 Pattern Camera Headset
+        name: камера M5 # CCM14
         amount: 15
       - id: CMHeadCapSPP
-        name: UL2 Cap
+        name: кепка СЛ2 # CCM14
         amount: 15
       - id: CMHeadCapSPPUshanka
-        name: Ushanka
+        name: Ушанка # CCM14
         amount: 15
-    - name: Webbings
+    - name: Разгрузки # CCM14
       entries:
       - id: CMWebbingBlack
-        name: Webbing, Black
+#        name: Webbing, Black
         amount: 5
       - id: CMWebbingBrown
-        name: Webbing, Brown
+#        name: Webbing, Brown
         amount: 5
       - id: RMCWebbingLegPouch
-        name: Leg Pouch, Camo Conforming
+#        name: Leg Pouch, Camo Conforming
         amount: 5
       - id: RMCWebbingLegPouchBlack
-        name: Leg Pouch, Black
+#        name: Leg Pouch, Black
         amount: 5
       - id: RMCWebbingDropPouch
         amount: 5
-    - name: Armor
+    - name: Броня # CCM14
       entries:
       - id: ArmorHelmetSPP
         amount: 15
       - id: RMCArmorSPP
-        name: Standard UM5 Pattern Armor Set
+        name: стандартный комплект брони СС5 # CCM14
         amount: 15
-    - name: Backpack
+    - name: Рюкзаки # CCM14
       entries:
       - id: CMBackpackMarine #todo, spp backpacks
         amount: 15
@@ -68,11 +68,11 @@
         amount: 15
       - id: RMCSatchelSPPWelder
         amount: 15
-    - name: Restricted Backpack
+    - name: Ограниченные рюкзаки # CCM14
       entries:
       - id: RMCBackpackRTOSPP
         amount: 1
-    - name: Belts
+    - name: Пояса # CCM14
       entries:
       - id: RMCBeltSPPBrown
         amount: 15
@@ -86,12 +86,12 @@
         amount: 5
       - id: RMCBeltUtilityGeneral #todo spp gen pouch belts
         amount: 5
-    - name: Pouches
+    - name: Подсумки # CCM14
       entries:
       - id: RMCPouchFirstAid
         amount: 15
       - id: RMCPouchFlareFilled
-        name: flare pouch (Full)
+        name: подсумок для фальшфейеров (Полный) # CCM14
         amount: 15
       - id: RMCPouchMagazine
         amount: 15
@@ -101,7 +101,7 @@
         amount: 15
       - id: RMCPouchPistol
         amount: 15
-    - name: Restricted Pouches
+    - name: Специальные подсумки # CCM14
       entries:
       - id: RMCPouchConstruction
         amount: 1
@@ -117,7 +117,7 @@
         amount: 1
       - id: RMCPouchShotgun
         amount: 1
-    - name: Mask
+    - name: Маски # CCM14
       entries:
       - id: RMCMaskGasSPP
         amount: 15
@@ -125,16 +125,16 @@
         amount: 10
       - id: CMMaskCoif
         amount: 10
-    - name: Miscellaneous
+    - name: Разное # CCM14
       entries:
       - id: RMCGogglesBallistic
-        name: Ballistic Goggles
+        name: баллистические очки # CCM14
         amount: 10
       - id: RMCGogglesBallisticBlack
-        name: Ballistic Goggles, sun shaded
+        name: черные баллические очки # CCM14
         amount: 10
       - id: RMCGogglesM1A1Ballistic
-        name: Ballistic Goggles, laser-shaded (brown)
+        name: баллистические очки M1A1 # CCM14
         amount: 10
       - id: RMCPatchSPPVDV
         amount: 15
@@ -155,22 +155,22 @@
     - "CMAccessMarinePrep"
     hackable: true
     sections:
-    - name: Food
+    - name: Рационы # CCM14
       entries:
       - id: RMCMRESPP
-        name: MRE
+        name: сухой паёк # CCM14
         amount: 5
       - id: RMCBoxMRE # TODO RMC14 - SPP MRE
-        name: MRE Box
+        name: коробка сухих пайков # CCM14
         amount: 1
-    - name: Medical
+    - name: Медикаменты # CCM14
       entries:
       - id: CMGauze10
         amount: 15
       - id: CMOintment10
         amount: 15
       - id: CMEmergencyAutoInjector
-        name: Emergency Autoinjector
+        name: экстренный автоинъектор # CCM14
         amount: 15
       - id: CMBicaridineAutoInjector
         amount: 15
@@ -178,7 +178,7 @@
         amount: 15
       - id: CMTricordrazineAutoInjector
         amount: 15
-    - name: Tools
+    - name: Инструменты # CCM14
       entries:
       - id: CMEntrenchingTool
         amount: 2
@@ -191,31 +191,31 @@
       - id: CMWrench
         amount: 5
       - id: CMMultitool
-        name: Multitool
+#        name: Multitool
         amount: 5
       - id: RMCWelderPVE
         amount: 1
-    - name: Explosives
+    - name: Взрывчатка # CCM14
       entries:
       - id: RMCExplosivePlastic
         amount: 2
       - id: RMCExplosiveBreachingCharge
         amount: 2
-    - name: Flare and Light
+    - name: Освещение # CCM14
       entries:
       - id: RMCFlashlight
         amount: 5
       - id: RMCBoxFlashlights
-        name: Box of Flashlights
+#        name: Box of Flashlights
         amount: 1
       - id: RMCBoxPackFlare #todo spp flares
-        name: Box of Flares
+#        name: Box of Flares
         amount: 1
       - id: CMPackFlare
         amount: 10
       - id: RMCBoxPackFlareCAS
         amount: 1
-    - name: Sidearms
+    - name: Пистолеты # CCM14
       entries:
       - id: RMCWeaponPistolNP92
         amount: 2
@@ -223,18 +223,18 @@
         amount: 2
       - id: RMCWeaponPistolM82F #todo spp flare gun
         amount: 1
-    - name: Miscellaneous
+    - name: Разное # CCM14
       entries:
       - id: CMFireExtinguisher
         name: Extinguisher
         amount: 5
       - id: CMFireExtinguisherPortable
-        name: Fire Extinguisher (Portable)
+#        name: Fire Extinguisher (Portable)
         amount: 1
       - id: CMRollerBedSpawnFolded
         amount: 2
       - id: RMCScabbardMacheteFilled #todo spp machete scabbard
-        name: Machete Scabbard (Full)
+        name: ножны H5 для мачете M2132 (Заполненные) # CCM14
         amount: 5
       - id: RMCAttachmentRailFlashlight
         amount: 5

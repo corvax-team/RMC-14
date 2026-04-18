@@ -18,6 +18,11 @@
   prefix: Стар.
   paygrade: СТАРШ
 
+- type: rank
+  id: RMCRankSPPSynthetic
+  name: Synthetic
+  prefix: Syn.
+
 # Military
 
 - type: rank

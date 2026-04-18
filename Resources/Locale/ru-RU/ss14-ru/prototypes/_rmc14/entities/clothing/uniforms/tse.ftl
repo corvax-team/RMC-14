@@ -1,6 +1,8 @@
 ent-RMCJumpsuitTSEPA = униформа ПС ОПЗ
     .desc = Стандартная форма офицера Полицейских Сил Объединённого Правительства Земли.
-
+ent-RMCJumpsuitMarineRoyal = { ent-JumpsuitMarine }
+    .suffix = Заполнена, Имперская
+    .desc = { ent-JumpsuitMarine.desc }
 ent-RMCJumpsuitMarineRoyalMK80 = { ent-RMCJumpsuitMarineRoyal }
     .suffix = Заполнена, Имперская, MK80
     .desc = { ent-RMCJumpsuitMarineRoyal.desc }
@@ -16,6 +18,9 @@ ent-RMCJumpsuitMarineRoyalTeamlead = униформа лидера имперс�
 ent-RMCJumpsuitMarineRoyalPVE = полевая форма имперской пехоты
     .desc = Стандартная полевая униформа солдат Империи Миртана. Оснащена вшитыми элементами лёгкого кевлара для защиты от когтей и зубов фауны.
     .suffix = Имперская, PVE
+ent-RMCJumpsuitMarineRoyalService = парадная форма имперской пехоты
+    .desc = Форменная парадная одежда, которую носят офицеры Королевской Крон-морпехоты. Выдаётся для инспекций, церемоний или при выполнении задач в качестве военных советников.
+    .suffix = Имперская, Парадная
 ent-RMCJumpsuitMarinePara = боевая униформа «Драккара»
     .desc = Стандартная полевая форма бойцов спецподразделения «Драккар» Империи Миртана. Выполнена в лесном камуфляже и усилена кевларовой сеткой для защиты в ближнем бою.
     .suffix = Выживший, Парадесант

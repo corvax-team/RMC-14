@@ -34,6 +34,8 @@ ent-RMCGuidebookActionXenoToggleLongRangeSight = { ent-CMGuidebookActionXenoBase
     .desc = { ent-CMGuidebookActionXenoBase.desc }
 ent-ActionXenoWordQueen = Word of the Queen (50)
     .desc = Sends a message to all members of your hive.
+ent-ActionXenoMarkResin = Mark Resin Menu
+    .desc = Open the resin mark menu and select a marker type.
 ent-ActionXenoGrowOvipositor = Grow Ovipositor (700)
     .desc = Become immobile and start laying eggs which will produce children. Has a 5 minute cooldown. [color=red]You must be in ovipositor mode for other xenonids to gain evolution points after round-start![/color]
 ent-RMCGuidebookActionXenoGrowOvipositor = Grow Ovipositor

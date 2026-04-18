@@ -1,28 +1,23 @@
-using System;
+using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Sentry;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Chat;
 using Content.Shared.CombatMode;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Chat;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
-using Content.Shared._RMC14.Chat;
-using Content.Shared._RMC14.Sentry;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Localization;
-using Robust.Shared.Map;
-using Robust.Shared.Maths;
 using Robust.Shared.Network;
-using Robust.Shared.Timing;
-using Robust.Shared.Containers;
-using Content.Shared.Mobs;
 using Robust.Shared.Player;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Vehicle;
@@ -43,6 +38,7 @@ public sealed class RMCVehicleDeploySystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {
@@ -290,8 +286,16 @@ public sealed class RMCVehicleDeploySystem : EntitySystem
             return;
 
         if (args.Cancelled)
+        // CCM14-start
             return;
 
+        if (_hands.IsHolding(args.User, ent.Owner))
+        {
+            args.Cancelled = true;
+            args.ResetCooldown = true;
+            return;
+        }
+        // CCM14-end
         if (!string.Equals(ent.Comp.HardpointType, "Cannon", StringComparison.OrdinalIgnoreCase))
             return;
 

@@ -1,2 +1,2 @@
-ent-RMCSurvivorPresetHybrisaConstable = пресет колониста: констебль
+ent-RMCSurvivorPresetHybrisaConstable = пресет констебля Гибриса
     .desc = { ent-RMCSurvivorPresetSecurity.desc }

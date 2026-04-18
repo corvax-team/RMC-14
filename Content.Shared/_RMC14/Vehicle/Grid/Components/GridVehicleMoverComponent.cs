@@ -1,16 +1,11 @@
-using System;
 using System.Numerics;
 using Content.Shared._RMC14.Stun;
-using Content.Shared.Damage.Prototypes;
 using Robust.Shared.GameStates;
-using Robust.Shared.Map;
-using Robust.Shared.Maths;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Vehicle.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(Content.Shared.Vehicle.GridVehicleMoverSystem), Other = AccessPermissions.ReadWrite)]
+[Access(typeof(GridVehicleMoverSystem), Other = AccessPermissions.ReadWrite)]
 public sealed partial class GridVehicleMoverComponent : Component
 {
     [AutoNetworkedField]
@@ -23,7 +18,13 @@ public sealed partial class GridVehicleMoverComponent : Component
     public Vector2 Position;
 
     [AutoNetworkedField]
+    public Vector2 TargetPosition;
+
+    [AutoNetworkedField]
     public Vector2i CurrentDirection;
+
+    [AutoNetworkedField]
+    public Vector2i PushDirection;
 
     [AutoNetworkedField]
     public float CurrentSpeed;
@@ -47,6 +48,24 @@ public sealed partial class GridVehicleMoverComponent : Component
     public float FrontOffset = 0f;
 
     [DataField, AutoNetworkedField]
+    public float TileOffsetLimit = 1f;
+
+    [DataField, AutoNetworkedField]
+    public float TileOffsetStep = 0.05f;
+
+    [DataField, AutoNetworkedField]
+    public int TileOffsetLookahead = 3;
+
+    [DataField, AutoNetworkedField]
+    public float LaneCorrectionSpeed = 4f;
+
+    [DataField, AutoNetworkedField]
+    public float MovementProbeStep = 0.1f;
+
+    [DataField, AutoNetworkedField]
+    public float MovementCollisionInset = 0.05f;
+
+    [DataField, AutoNetworkedField]
     public float PushCooldown = 0f;
 
     [DataField, AutoNetworkedField]
@@ -57,6 +76,15 @@ public sealed partial class GridVehicleMoverComponent : Component
 
     [DataField, AutoNetworkedField]
     public float TurnInPlaceMaxSpeed = 0.35f;
+
+    [DataField, AutoNetworkedField]
+    public float TurnNudgeLimit = 0.45f;
+
+    [DataField, AutoNetworkedField]
+    public float TurnNudgeStep = 0.1f;
+
+    [DataField, AutoNetworkedField]
+    public float TurnCollisionGraceDistance = 1f;
 
     [AutoNetworkedField]
     public TimeSpan NextPushTime;
@@ -96,17 +124,5 @@ public sealed partial class GridVehicleMoverComponent : Component
     // CCM14-start
     [DataField, AutoNetworkedField]
     public double MobCollisionDamage = 8;
-
-    [DataField, AutoNetworkedField]
-    public double UnpoweredDoorCollisionDamage = 1000;
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan MobCollisionKnockdown = TimeSpan.FromSeconds(1.5);
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan MobCollisionCooldown = TimeSpan.FromSeconds(0.75);
-
-    [DataField, AutoNetworkedField]
-    public ProtoId<DamageTypePrototype> CollisionDamageType = "Blunt";
     // CCM14-end
 }

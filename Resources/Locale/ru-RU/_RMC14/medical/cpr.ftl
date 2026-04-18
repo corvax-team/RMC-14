@@ -9,10 +9,6 @@ rmc-cpr-dummy-verb-pickup = Подобрать
 rmc-cpr-dummy-verb-reset = Сбросить счётчик СЛР
 rmc-cpr-dummy-deploy-self = Вы устанавливаете манекен для СЛР.
 rmc-cpr-dummy-deploy-others = { $user } устанавливает манекен для СЛР!
-rmc-cpr-dummy-success-self = Вы проводите СЛР на манекене.
-rmc-cpr-dummy-success-others = { $user } проводит СЛР на манекене.
-rmc-cpr-dummy-fail-self = Вам не удалось провести СЛР на манекене. Неправильный ритм. Делайте это медленнее.
-rmc-cpr-dummy-fail-others = { $user } не удаётся провести СЛР на манекене.
 rmc-cpr-dummy-examine-successful = [color=green]Успешных СЛР: { $count }.[/color]
 rmc-cpr-dummy-examine-failed = [color=red]Неудачных СЛР: { $count }.[/color]
 rmc-cpr-dummy-reset-denied = Сброс счётчика разрешён только для: { $jobs }

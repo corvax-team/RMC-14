@@ -60641,8 +60641,7 @@ entities:
       pos: 53.5,-143.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 3535
@@ -60651,8 +60650,7 @@ entities:
       pos: 130.5,-91.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 3536
@@ -60661,8 +60659,7 @@ entities:
       pos: 130.5,-93.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 3539
@@ -60671,8 +60668,7 @@ entities:
       pos: 50.5,-143.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 3540
@@ -60681,8 +60677,7 @@ entities:
       pos: 51.5,-143.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 3544
@@ -60691,8 +60686,7 @@ entities:
       pos: 37.5,-112.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 3545
@@ -60701,8 +60695,7 @@ entities:
       pos: 35.5,-112.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 26315
@@ -60711,8 +60704,7 @@ entities:
       pos: 36.5,-112.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 26316
@@ -60721,8 +60713,7 @@ entities:
       pos: 37.5,-106.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 26569
@@ -60731,8 +60722,7 @@ entities:
       pos: 35.5,-106.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
 - proto: RMCGogglesKutjevo

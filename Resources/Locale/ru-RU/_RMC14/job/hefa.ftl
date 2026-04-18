@@ -13,7 +13,3 @@ rmc-ghost-name-hefa-hostile-shrapnelsworn = Шрапнелеклятвенник
 rmc-ghost-name-hefa-friendly-shrapnelsworn = Шрапнелеклятвенник HEFA (Friendly)
 rmc-job-name-hefa-shrapnelsworn = Шрапнелеклятвенник HEFA
 rmc-job-prefix-hefa-shrapnelsworn = OHEFA
-cm-job-name-hefa-shrapnelsworn = Шрапнелеклятвенник HEFA
-cm-job-description-hefa-shrapnelsworn = ""
-cm-job-prefix-hefa-shrapnelsworn = OHEFA
-CMHEFAShrapnelsworn = Шрапнелеклятвенник HEFA

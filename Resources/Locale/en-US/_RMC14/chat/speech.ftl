@@ -1,4 +1,5 @@
 ﻿chat-speech-verb-name-xeno = Xeno
+chat-speech-verb-xeno-1 = hisses
 
 chat-speech-verb-name-vulpkanin = Vulpkanin
 chat-speech-verb-vulpkanin-1 = yips

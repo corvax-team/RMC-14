@@ -1,4 +1,4 @@
-rmc-xeno-strain-specialized-into = Её специализация — { $strain }.
+rmc-xeno-strain-specialized-into = Его специализация — { $strain }.
 rmc-xeno-dancer-name = Танцор
 rmc-xeno-dancer-description =
     Вы обмениваете ваш Плевок, Кислотный шар, Кислотные брызги, Рывок и небольшое количество брони на высокий урон по одной цели.

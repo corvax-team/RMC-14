@@ -5,16 +5,10 @@ using Robust.Client.UserInterface;
 namespace Content.Client._CCM.CommunicationsConsole.UI;
 
 [UsedImplicitly]
-public sealed class CCMCommunicationsConsoleBui : BoundUserInterface
+public sealed class CCMCommunicationsConsoleBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
-
     [ViewVariables]
     private CCMCommunicationsConsoleWindow? _window;
-
-    public CCMCommunicationsConsoleBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-    {
-    }
 
     protected override void Open()
     {
@@ -25,4 +19,3 @@ public sealed class CCMCommunicationsConsoleBui : BoundUserInterface
     }
 }
 // thanks to _gadmin1 (discord) for the provided code
-// Бля чё это? Чисто насрал для паблиша сорянчик уберу скоро наверное

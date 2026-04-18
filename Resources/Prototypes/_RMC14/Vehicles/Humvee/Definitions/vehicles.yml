@@ -25,8 +25,8 @@
     runningSoundCooldown: 2
     hornSound: /Audio/_RMC14/Vehicle/sound_vehicles_humvee_horn.ogg
     hornCooldown: 1
-#    collisionSound: /Audio/_RMC14/Structures/metalhit.ogg
-#    collisionSoundCooldown: 0.4
+    #    collisionSound: /Audio/_RMC14/Structures/metalhit.ogg
+    #    collisionSoundCooldown: 0.4
     mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
   - type: RMCVehicleSpotlight
     radius: 6
@@ -137,10 +137,6 @@
       insertDelay: 1.5
   - type: RMCVehicleWheelSlots
     slotCount: 1
-  - type: RMCRepairable
-    delay: 8
-    heal: 150
-    fuelUsed: 5
   - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/humvee_interior.yml
@@ -170,11 +166,9 @@
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
   - type: RMCHardpointIntegrity
-    maxIntegrity: 1000
+    maxIntegrity: 400 # CCM14
     repairFuelCost: 12
     bypassEntryOnZero: true
-    repairTimePerIntegrity: 0.03
-    repairTimeMax: 8
 
 - type: entity
   parent: RMCVehicleHumveeBase
@@ -186,11 +180,9 @@
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
   - type: RMCHardpointIntegrity
-    maxIntegrity: 1000
+    maxIntegrity: 400 # CCM14
     repairFuelCost: 12
     bypassEntryOnZero: true
-    repairTimePerIntegrity: 0.03
-    repairTimeMax: 8
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/humvee_medical.rsi
     layers:
@@ -256,11 +248,9 @@
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
   - type: RMCHardpointIntegrity
-    maxIntegrity: 1000
+    maxIntegrity: 400 # CCM14
     repairFuelCost: 12
     bypassEntryOnZero: true
-    repairTimePerIntegrity: 0.03
-    repairTimeMax: 8
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/humvee_transport.rsi
     layers:
@@ -326,11 +316,9 @@
     damageContainer: StructuralMarine
     damageModifierSet: RMCVehicleFrameARC
   - type: RMCHardpointIntegrity
-    maxIntegrity: 800
+    maxIntegrity: 300 # CCM14
     repairFuelCost: 12
     bypassEntryOnZero: true
-    repairTimePerIntegrity: 0.03
-    repairTimeMax: 8
   - type: RMCVehicleDeployable
     deployTime: 5
     undeployTime: 5

@@ -52,3 +52,5 @@ ent-RMCHeadsetMarineDistress = UNMC headset
 ent-RMCHeadsetMARSOC = UNMC SOF headset
     .desc = Issued exclusively to Marine Raiders and members of the UNMC's Force Reconnaissance.
     .suffix = ERT
+ent-RMCHeadsetSPPCrashland = SPP 173/Airborne headset
+    .desc = A headset used by members of the 173rd Airborne Reconnaissance unit.

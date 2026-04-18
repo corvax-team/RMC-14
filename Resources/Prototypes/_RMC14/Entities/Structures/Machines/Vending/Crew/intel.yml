@@ -13,11 +13,11 @@
     jobs:
     - CMIntelOfficer
     sections:
-    - name: Intelligence Set (Mandatory)
+    - name: Набор разведчика (Обязательно) # CCM14
       takeAll: RMCIntelSet
       entries:
       - id: RMCVendorBundleIntel
-    - name: Engineering Supplies
+    - name: Инженерное снаряжение # CCM14
       entries:
       - id: CMAPCElectronics
         points: 5
@@ -25,7 +25,7 @@
         points: 10
       - id: RMCWeldingGoggles
         points: 5
-    - name: Primary Ammunition
+    - name: Основные боеприпасы # CCM14
       entries:
       - id: CMMagazineRifleM4SPRAP
         points: 10
@@ -37,7 +37,7 @@
         points: 10
       - id: CMMagazineRifleM54CExt
         points: 10
-    - name: Sidearm Ammunition
+    - name: Вторичные боеприпасы # CCM14
       entries:
       - id: RMCSpeedLoader44Marksman
         points: 10 # TODO RMC14 heavy speed revolver
@@ -49,17 +49,17 @@
         points: 10
       - id: RMCMagazinePistolSU6
         points: 10
-    - name: Restricted Firearms
+    - name: Ограниченное вооружение # CCM14
       entries:
       - id: RMCGunCasePistolMK80
         points: 15
       - id: RMCGunCasePistolSmart
         points: 15
-    - name: Restricted Gear
+    - name: Особое снаряжение # CCM14
       entries:
       - id: CMBeltUtilityCombatFilled
         points: 15
-    - name: Pouches
+    - name: Подсумки # CCM14
       entries:
       - id: RMCPouchMagazineLarge
         points: 10
@@ -69,9 +69,9 @@
         points: 15
         recommended: true
       - id: RMCPouchMacheteFilled
-        name: machete pouch (Full)
+        name: ножны H6B для мачете M2132 (Заполненные) # CCM14
         points: 10
-    - name: Utilities
+    - name: Утилиты # CCM14
       entries:
       - id: CMFireExtinguisherPortable
         points: 5
@@ -82,7 +82,7 @@
         recommended: true
       - id: RMCIntelDetector
         points: 5
-    - name: Binoculars
+    - name: Бинокли # CCM14
       entries:
       - id: RMCBinoculars
         points: 5
@@ -90,7 +90,7 @@
         points: 10
       - id: RMCLaserDesignator
         points: 15
-    - name: Helmet Optics
+    - name: Визоры для шлема # CCM14
       entries:
       - id: RMCVisorMedical
         points: 5
@@ -99,14 +99,14 @@
       - id: RMCVisorNightVision
         points: 25
         recommended: true
-    - name: Radio Keys
+    - name: Ключи шифрования # CCM14
       entries:
       - id: CMEncryptionKeyIntel
         points: 5
-    - name: Spare Intel Kit
+    - name: Запасной комплект разведки # CCM14
       entries:
       - id: RMCKitIntel
-        name: field intelligence support kit (for untrained personnel)
+        name: набор полевой поддержки разведчика (для необученного персонала) # CCM14
         points: 20
 
 - type: entity
@@ -124,27 +124,27 @@
     jobs:
     - CMIntelOfficer
     sections:
-    - name: Standard Equipment
+    - name: Стандартное снаряжение # CCM14
       takeAll: RMCIntelEquipment
       entries:
       - id: CMHeadsetIntel
       - id: CMMRE
-    - name: Gloves
+    - name: Перчатки # CCM14
       choices: { CMHands: 1 }
       entries:
       - id: CMHandsInsulated
       - id: CMHandsBlackInsulated
-    - name: Armor
+    - name: Броня # CCM14
       takeOne: CMArmor
       entries:
       - id: RMCArmorXM4
       - id: RMCArmorM3LightVariants
       - id: RMCArmorVestIntel
-    - name: Jacket
+    - name: Верхняя одежда # CCM14
       choices: { CMCoat: 1 }
       entries:
       - id: RMCCoatService
-    - name: Backpack
+    - name: Рюкзаки # CCM14
       choices: { CMBag: 1 }
       entries:
       - id: CMSatchelMarineIntel
@@ -158,18 +158,18 @@
         recommended: true
       - id: RMCBackpackRTO
         replaceSlot: back
-    - name: Helmet
+    - name: Шлемы # CCM14
       choices: { CMHelmet: 1 }
       entries:
       - id: RMCArmorHelmetM12Intel
         recommended: true
-    - name: Hat
+    - name: Головные уборы # CCM14
       choices: { CMHat: 1 }
       entries:
       - id: RMCHeadBeretGreen
       - id: CMHeadBeretTan
       - id: CMHeadCapOfficer
-    - name: Belt
+    - name: Пояса # CCM14
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltUtilityGeneral
@@ -180,21 +180,21 @@
       - id: RMCBeltHolsterRevolver
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
-        name: M276 pattern toolbelt rig (Full)
+        name: пояс для инструментов M276 (Заполненный) # CCM14
         recommended: true
-    - name: Pouches
+    - name: Подсумки # CCM14
       choices: { CMPouches: 2 }
       entries:
       - id: RMCPouchDocument
         recommended: true
       - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
+        name: подсумок первой помощи (инъекторы) # CCM14
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: подсумок первой помощи (бинт, мазь) # CCM14 # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pill packets)
+        name: подсумок первой помощи (таблетки) # CCM14
       - id: RMCPouchFlareFilled
-        name: flare pouch (Full)
+        name: подсумок для фальшфейеров (Полный) # CCM14
       - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazinePistolLarge
@@ -202,10 +202,10 @@
       - id: RMCPouchShotgun
       - id: RMCPouchPistol
       - id: RMCPouchToolsFill
-        name: tools pouch (Full)
+        name: подсумок для инструментов (Полный) # CCM14
         recommended: true
       - id: RMCPouchSling
-    - name: Accessories
+    - name: Аксессуары # CCM14
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack
@@ -219,7 +219,7 @@
       - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
-    - name: Mask
+    - name: Маски # CCM14
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
@@ -240,7 +240,7 @@
     jobs:
     - CMIntelOfficer
     sections:
-    - name: Primary Firearms
+    - name: Основное вооружение # CCM14
       entries:
       - id: WeaponRifleM4SPR
         amount: 4
@@ -250,7 +250,7 @@
         amount: 4
       - id: RMCWeaponRifleM54C
         amount: 4
-    - name: Primary Ammunition
+    - name: Основные боеприпасы # CCM14
       entries:
       - id: RMCBoxShotgunBuckshot
         amount: 12
@@ -264,7 +264,7 @@
         amount: 24
       - id: CMMagazineRifleM54C
         amount: 24
-    - name: Sidearms
+    - name: Пистолеты # CCM14
       entries:
       - id: RMCWeaponPistolM77Empty
         amount: 4
@@ -272,7 +272,7 @@
         amount: 4
       - id: CMWeaponPistolM1984Empty
         amount: 4
-    - name: Sidearm Ammunition
+    - name: Вторичные боеприпасы # CCM14
       entries:
       - id: CMMagazinePistolM77AP
         amount: 20
@@ -286,14 +286,14 @@
         amount: 8
       - id: CMMagazinePistolMK80
         amount: 20
-    - name: Attachments
+    - name: Обвесы # CCM14
       entries:
       - id: RMCAttachmentRailFlashlight
         amount: 8
       - id: RMCAttachmentFlashlightGrip
         amount: 4
         recommended: true
-    - name: Utilities
+    - name: Утилиты # CCM14
       entries:
       - id: CMM11Knife
         amount: 18

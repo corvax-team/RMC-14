@@ -1,8 +1,6 @@
-using System;
 using Content.Shared._RMC14.Vehicle.Supply;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
-using static Robust.Client.GameObjects.SpriteComponent;
 
 namespace Content.Client._RMC14.Vehicle.Supply;
 

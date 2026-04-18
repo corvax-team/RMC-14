@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
 using Content.Client.CombatMode;
 using Content.Shared._RMC14.Vehicle;
+using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
-using Robust.Client.Graphics;
 using Robust.Shared.Map;
-using Robust.Shared.Maths;
 using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Vehicle;

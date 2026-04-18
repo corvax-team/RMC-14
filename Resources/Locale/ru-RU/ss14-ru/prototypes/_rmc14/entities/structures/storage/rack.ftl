@@ -3,3 +3,6 @@ ent-CMRack = стойка
 ent-RMCRackSoro = { ent-CMRack }
     .suffix = Синий
     .desc = { ent-CMRack.desc }
+ent-RMCRackBrown = { ent-CMRack }
+    .suffix = Коричневый
+    .desc = { ent-CMRack.desc }

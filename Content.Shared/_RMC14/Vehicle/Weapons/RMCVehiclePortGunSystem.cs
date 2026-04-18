@@ -1,19 +1,16 @@
 using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Examine;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Localization;
-using Robust.Shared.Network;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -69,7 +66,14 @@ public sealed class RMCVehiclePortGunSystem : EntitySystem
     {
         if (args.Handled || _net.IsClient)
             return;
-
+        // CCM14-start
+        if (TryComp<VehiclePortGunSeatComponent>(ent, out var seat) && 
+            !_skills.HasSkills(args.User, seat.Skills))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-skills-cant-operate", ("target", ent.Owner)), args.User, args.User);
+            return;
+        }
+        // CCM14-end
         if (!TryGetPortGun(ent, args.User, out var vehicle, out var gunUid, out var portGun))
             return;
 

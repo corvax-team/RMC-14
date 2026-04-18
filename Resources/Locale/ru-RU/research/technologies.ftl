@@ -18,7 +18,6 @@ research-technology-advanced-tools = Продвинутые инструмент
 research-technology-super-powercells = Супербатареи
 research-technology-bluespace-storage = Блюспейс-хранилище
 research-technology-optimized-microgalvanism = Оптимизированный микрогальванизм
-research-technology-portable-fission = Портативный распад
 research-technology-space-scanning = Сканирование космоса
 research-technology-excavation = Массовые раскопки
 research-technology-biochemical-stasis = Биохимический стазис

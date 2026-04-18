@@ -7,5 +7,5 @@ public sealed partial class CCMTimedDespawnComponent : Component
     public float Lifetime = 10f;
 
     [DataField]
-    public float Accumulator = 0f;
+    public float Accumulator;
 }

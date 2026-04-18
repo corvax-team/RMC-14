@@ -1,13 +1,10 @@
 rmc-xeno-words-of-the-queen-header = Слова Королевы раздаются в нашей голове...
-xeno-ui-reserve-parasites-title = Запас паразитов
-xeno-ui-reserve-parasites-apply-button-text = Применить
 xeno-reserve-parasites-verb = Запасные паразиты
 xeno-ui-find-parasite-title = Найти паразита
 xeno-ui-find-parasite-spawn-button = Взять паразита
 xeno-ui-find-parasite-item = { $itemName } ({ $areaName })
 xeno-ui-default-area-name = Неизвестно
 xeno-ui-find-parasite-regular = лицехват
-xeno-ui-find-parasite-royal = королевский лицехват
 xeno-ui-name-tunnel-title = Назвать туннель
 xeno-ui-name-tunnel-submit-text = Применить название
 xeno-ui-rename-tunnel-verb = Переименовать туннель

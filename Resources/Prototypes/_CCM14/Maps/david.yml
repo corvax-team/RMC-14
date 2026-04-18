@@ -1,6 +1,6 @@
 - type: gameMap
   id: David
-  mapName: David
+  mapName: UEG "Давид"
   mapPath: /Maps/_CCM14/david.yml
   minPlayers: 0
   maxRandomOffset: 0
@@ -24,8 +24,8 @@
             CMMilitaryPolice: [2, 2]
             # Auxiliary
             CMAuxiliarySupportOfficer: [1, 1]
-            CMIntelOfficer: [2, 2]
-            CMVehicleCrewman: [4, 4]
+            CMIntelOfficer: [3, 3]
+            CMVehicleCrewman: [2, 2]
             CMPilotDropship: [1, 1]
             CMPilotGunship: [1, 1]
             CMDropshipCrewChief: [1, 1]

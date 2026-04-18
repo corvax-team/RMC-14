@@ -11,13 +11,18 @@
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
+    repairRate: 0.007
   - type: RMCHardpointIntegrity
-    maxIntegrity: 1000
+    maxIntegrity: 400 # RMC14
   - type: RMCVehicleArmorHardpoint
     modifierSets:
     - RMCVehicleArmorBallistic
   - type: RMCHardpointVisual
     vehicleState: ballistic_armor_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 500
+    category: Armor
+    vehicle: Tank
 
 - type: entity
   parent: RMCVehicleTankHardpointBase
@@ -32,14 +37,19 @@
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
+    repairRate: 0.007
   - type: RMCHardpointIntegrity
-    maxIntegrity: 1000
+    maxIntegrity: 400 # RMC14
   - type: RMCVehicleArmorHardpoint
     modifierSets:
     - RMCVehicleArmorConcussive
     explosionCoefficient: 0.5
   - type: RMCHardpointVisual
     vehicleState: concussive_armor_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 500
+    category: Armor
+    vehicle: Tank
 
 - type: entity
   parent: RMCVehicleTankHardpointBase
@@ -54,13 +64,18 @@
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
+    repairRate: 0.007
   - type: RMCHardpointIntegrity
-    maxIntegrity: 1000
+    maxIntegrity: 400 # RMC14
   - type: RMCVehicleArmorHardpoint
     modifierSets:
     - RMCVehicleArmorCaustic
   - type: RMCHardpointVisual
     vehicleState: caustic_armor_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 500
+    category: Armor
+    vehicle: Tank
 
 - type: entity
   parent: RMCVehicleTankHardpointBase
@@ -75,14 +90,19 @@
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
+    repairRate: 0.007
   - type: RMCHardpointIntegrity
-    maxIntegrity: 1000
+    maxIntegrity: 400 # RMC14
   - type: RMCVehicleArmorHardpoint
     modifierSets:
     - RMCVehicleArmorPaladin
     explosionCoefficient: 0.5
   - type: RMCHardpointVisual
     vehicleState: paladin_armor_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 800
+    category: Armor
+    vehicle: Tank
 
 - type: entity
   parent: RMCVehicleTankHardpointBase
@@ -97,7 +117,12 @@
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
+    repairRate: 0.007
   - type: RMCHardpointIntegrity
     maxIntegrity: 150
   - type: RMCHardpointVisual
     vehicleState: snowplow_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 300
+    category: Armor
+    vehicle: Tank

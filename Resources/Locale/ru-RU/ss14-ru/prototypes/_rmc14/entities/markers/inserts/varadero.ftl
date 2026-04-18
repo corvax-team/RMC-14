@@ -1,7 +1,7 @@
 ent-RMCMapInsertVaraderoBase = { ent-RMCMapInsertBase }
     .suffix = Вставка Варадеро
     .desc = { ent-RMCMapInsertBase.desc }
-ent-RMCMapInsertVaraderoCLFRaid = Рейд CLF
+ent-RMCMapInsertVaraderoCLFRaid = Рейд КФО
     .suffix = Вставка Варадеро
     .desc = { ent-RMCMapInsertVaraderoBase.desc }
 ent-RMCMapInsertVaraderoResturant = Ресторан

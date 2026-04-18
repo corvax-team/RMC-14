@@ -473,7 +473,10 @@ public sealed partial class ExplosionSystem
                 }
 
                 // TODO EXPLOSIONS turn explosions into entities, and pass the the entity in as the damage origin.
-                _damageableSystem.TryChangeDamage(entity, damage * _damageableSystem.UniversalExplosionDamageModifier, ignoreResistances: true);
+                // CCM14-start
+                var ignoreResistances = !HasComp<VehicleComponent>(entity);
+                _damageableSystem.TryChangeDamage(entity, damage * _damageableSystem.UniversalExplosionDamageModifier, ignoreResistances: ignoreResistances, origin: _activeExplosion?.VisualEnt);
+                // CCM14-end
                 var ev = new ExplosionReceivedEvent(id, epicenter, damage);
                 RaiseLocalEvent(entity, ref ev);
             }
@@ -643,6 +646,8 @@ sealed class Explosion
     private Entity<BroadphaseComponent> _currentLookup = default!;
     private Entity<MapGridComponent>? _currentGrid;
     private float _currentIntensity;
+
+    public float CurrentIntensity => _currentIntensity; // CCM14
     private float _currentThrowForce;
     private List<Vector2i>.Enumerator _currentEnumerator;
     private int _currentDataIndex;

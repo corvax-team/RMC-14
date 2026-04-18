@@ -22,3 +22,7 @@ ent-RMCShoesSandals = sandals
     .suffix = RMC
 ent-RMCShoesSnow = snow boots
     .desc = When your feet are as cold as your heart.
+ent-RMCShoesSlippers = bunny slippers
+    .desc = Fluffy!
+ent-RMCShoesSlippersWorn = worn bunny slippers
+    .desc = Fluffy...

@@ -4,9 +4,12 @@ emplacement-mount-anchored-examine = Установите [color={ $color }]ст
 emplacement-mount-weapon-secured-examine = Используйте [color={ $color }]отвёртку[/color], чтобы открепить оружие для транспортировки.
 emplacement-mount-too-close = Это слишком близко к ближайшему объекту: { $mount }.
 emplacement-mount-deploy-broken = Вы не можете развернуть { $mount }, устройство полностью сломано!
+emplacement-mount-deploy-invisible = Вы не можете установить это, находясь в невидимости!
 emplacement-mounted-weapon-overheated = { $weapon } повреждено из-за перегрева!
 emplacement-mount-broken-examine = [color=red]Орудие нельзя использовать в текущем сломанном состоянии, используйте [/color] [color=cyan]сварку[/color][color=red], чтобы начать ремонт.[/color]
 emplacement-mount-need-hands-free = Вам нужны обе свободные руки, чтобы взяться за рукоятки!
+emplacement-mount-too-far = Вы слишком далеко от рукояток, чтобы управлять { $mount }!
+emplacement-mount-rotate-fail = Вы не можете повернуть его в ту сторону!
 mountable-weapon-no-free-hands = Вам нужны обе свободные руки, чтобы управлять оружием.
 emplacement-mount-RMCSmartGunMounted-name = установка ML66D
 emplacement-mount-RMCSmartGunMounted-description = Складная установка для ML66D, обеспечивающая стабильность при стрельбе.

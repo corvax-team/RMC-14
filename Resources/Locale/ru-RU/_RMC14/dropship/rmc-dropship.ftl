@@ -25,7 +25,7 @@ rmc-dropship-weapons-weapon-selected-ammo =
     Снаряды: { $rounds } / { $maxRounds }
 rmc-dropship-weapons-target-strike =
     ЗАХВАТ ЦЕЛИ
-    
+
     Режим удара: { $mode }
     Конфиг. удара: { $weapon }
     Выбранная цель: { $target }
@@ -67,7 +67,6 @@ rmc-dropship-weapons-fire-not-skilled = У вас нет квалификаци�
 rmc-dropship-weapons-fire-no-ammo = Боезапас { $weapon } исчерпан.
 rmc-dropship-weapons-fire-cooldown = Перегрев { $weapon }. Ожидайте охлаждения.
 rmc-dropship-attached = Установлено: { $attachment }.
-rmc-dropship-weapons-point-gun = Установлено: { $weapon }.
 rmc-dropship-weapons-point-ammo = Заряжено: { $ammo }.
 rmc-dropship-weapons-rounds-left = Заряжено { $current } из { $max } снарядов.
 rmc-dropship-utility-activate-not-flying = Вспомогательные системы доступны только в полёте.
@@ -96,6 +95,7 @@ rmc-dropship-paradrop-lock-no-target = Цель не выбрана.
 rmc-dropship-paradrop-lock-target-not-flying = Модуль десантирования доступен только в полёте.
 rmc-dropship-medevac-system-screen-text = RMU-4M Система "Медэвак"
 rmc-dropship-fulton-system-screen-text = RMU-19 Система извлечения "Фултон"
+rmc-dropship-paradrop-failed = Ваши страховочные ремни заклинило, не давая вам спрыгнуть!
 rmc-dropship-locked = Доступ к управлению заблокирован на { $minutes } мин.
 rmc-dropship-locked-out = Шаттл не отвечает. Повторите попытку через { $minutes } мин.
 rmc-dropship-locked-out-bypass = Вы частично обошли протоколы блокировки! Продолжайте!
@@ -112,3 +112,11 @@ rmc-dropship-equipment-undeployed = СВЕРНУТО
 rmc-dropship-equipment-operational = ИСПРАВНО
 rmc-dropship-equipment-damaged = ПОВРЕЖДЕНО
 rmc-dropship-equipment-destroyed = УНИЧТОЖЕНО
+rmc-dropship-launch-bay-screen-text = LAG-14 Внутренняя пусковая установка турелей
+rmc-dropship-launch-bay-screen-text-loaded =
+    LAG-14 Внутренняя пусковая установка турелей
+
+    Загружено: { $loaded }
+
+    Боеприпасы: { $current } / { $max }
+rmc-dropship-launch-alarm-xeno-shutdown = Мы кромсаем {$console}, заставляя его замолкнуть!

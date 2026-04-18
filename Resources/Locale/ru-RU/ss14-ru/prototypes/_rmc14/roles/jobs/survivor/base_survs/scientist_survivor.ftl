@@ -1,6 +1,7 @@
-ent-RMCSpawnPointSurvivorScientist = точка появления ученого
+ent-RMCSpawnPointSurvivorScientist = спавнер выжившего учёного
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetScientist = пресет колониста: ученый
+    .suffix = Базовый
+ent-RMCSurvivorPresetScientist = пресет учёного-колониста
     .desc = { ent-RMCSurvivorPresetCivilian.desc }
-ent-RMCRandomHumanoidSurvivorScientist = роль призрака: колонист-ученый
+ent-RMCRandomHumanoidSurvivorScientist = роль призрака учёного-колониста
     .desc = { ent-MarkerBase.desc }

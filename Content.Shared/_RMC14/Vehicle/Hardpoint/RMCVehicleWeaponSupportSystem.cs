@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Weapons.Ranged;
-using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 

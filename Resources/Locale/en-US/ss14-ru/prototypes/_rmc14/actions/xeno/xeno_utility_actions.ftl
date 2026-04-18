@@ -16,6 +16,8 @@ ent-ActionXenoAidHeal = Aid Xenonid Healing (100 plasma, 100+ health reserves)
     .desc = Heals a nearby ally Xeno. Healing another Xeno will also heal you, and half your remaining health reserves will be consumed for extra healing. [color=red]This can't heal ignited xenonids![/color]
 ent-ActionXenoAidRejuvenate = Aid Xenonid Rejuvenate (100 plasma, 100 health reserves)
     .desc = Remove ailments and stuns from a far away ally Xeno.
+ent-ActionXenoHiveLeaderSquad = View Hive Squad
+    .desc = Opens your hive squad panel, showing your team members and allowing you to send announcements to them.
 ent-ActionXenoLeader = Choose/Follow Xenonid Leaders
     .desc = Promotes and demotes xenonid leaders, or watches them. Promoting a xeno to leader will make them emit your pheromones around themselves.
 ent-RMCGuidebookActionXenoLeader = Choose Leaders

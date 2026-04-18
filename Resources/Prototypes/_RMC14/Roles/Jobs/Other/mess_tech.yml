@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: RMCJobMarineBase
   id: CMMessTech
   name: cm-job-name-messtech
   description: cm-job-description-messtech
@@ -28,6 +28,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetMarine]
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -44,6 +49,10 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: mst
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_shipside
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearMessTech

@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.NPC;
 using Content.Shared._RMC14.Tools;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged.Homing;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Damage;
@@ -56,6 +57,7 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly SharedSentryTargetingSystem _targeting = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
+    [Dependency] private readonly RMCVehicleSystem _rmcVehicleSystem = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 
@@ -415,6 +417,16 @@ public sealed class SentrySystem : EntitySystem
             _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
             return false;
         }
+        // CCM14-start
+        // Can't deploy a sentry inside a vehicle interior
+        if (_transform.GetGrid(coordinates) is { } gridId &&
+            _rmcVehicleSystem.TryGetVehicleFromInterior(gridId, out _))
+        {
+            var msg = Loc.GetString("rmc-vehicle-cannot-place-inside", ("object", sentry));
+            _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
+            return false;
+        }
+        // CCM14-end
 
         return true;
     }

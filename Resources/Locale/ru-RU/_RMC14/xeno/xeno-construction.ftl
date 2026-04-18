@@ -19,7 +19,6 @@ rmc-xeno-construction-dead-body = Тело мешает нам!
 rmc-xeno-construction-structure-destroyed = { $structureName } был { $destructionVerb } в локации { $location }!
 rmc-xeno-construction-resin-hole-destroyed = Мы чувствуем, как одна из { $structureName } ловушек нашего Улья в локации { $location } была { $destructionVerb }!
 cm-xeno-construction-resin-hole-burned-down = Мы чувствуем, как одна из { $type } ловушек нашего Улья сгорела в локации { $location }!
-cm-xeno-construction-resin-hole-destroyed = Мы чувствуем, как одна из { $type } ловушек нашего Улья была уничтожена в локации { $location }!
 rmc-xeno-construction-resin-hole-activate = Мы чувствуем, как одна из { $type } ловушек нашего Улья была активирована в локации { $location }!
 rmc-xeno-construction-resin-hole-no-acid = Мы не можем выделить кислоту в смоляную яму!
 rmc-xeno-construction-resin-hole-good-acid = В ней уже есть хорошая кислота.

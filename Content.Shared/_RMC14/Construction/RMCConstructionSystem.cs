@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Ladder;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Vehicle; // CCM14
 using Content.Shared.Construction.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
@@ -43,6 +44,7 @@ public sealed class RMCConstructionSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly RMCVehicleSystem _rmcVehicleSystem = default!; // CCM14
 
     private static readonly EntProtoId Blocker = "RMCDropshipDoorBlocker";
 
@@ -444,6 +446,14 @@ public sealed class RMCConstructionSystem : EntitySystem
             popup = Loc.GetString("rmc-construction-not-proper-surface", ("construction", prototypeName));
             return false;
         }
+
+        // CCM14-start
+        if (_rmcVehicleSystem.TryGetVehicleFromInterior(gridId, out _))
+        {
+            popup = Loc.GetString("rmc-construction-not-proper-surface", ("construction", prototypeName));
+            return false;
+        }
+        // CCM14-end
 
         if (!TryComp(gridId, out MapGridComponent? grid))
             return true;

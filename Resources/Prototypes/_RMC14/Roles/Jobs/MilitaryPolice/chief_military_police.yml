@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: RMCJobMarineBase
   id: CMChiefMP
   name: cm-job-name-chief-mp
   description: cm-job-description-chief-mp
@@ -36,13 +36,18 @@
   requireAdminNotify: true
   joinNotifyCrew: false
   marineAuthorityLevel: 11
-  supervisors: rmc-job-supervisors-commander
+  supervisors: ccm-job-supervisors-provost  # CCM14
   accessGroups:
   - CMP
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetMarine]
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillConstruction: 2

@@ -87480,8 +87480,7 @@ entities:
       pos: 78.5,66.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 5697
@@ -87490,8 +87489,7 @@ entities:
       pos: 80.5,66.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 5698
@@ -87500,8 +87498,7 @@ entities:
       pos: 104.5,104.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 5700
@@ -87510,8 +87507,7 @@ entities:
       pos: 106.5,104.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 5702
@@ -87520,8 +87516,7 @@ entities:
       pos: 108.5,104.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 5704
@@ -87530,8 +87525,7 @@ entities:
       pos: 110.5,104.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 5705
@@ -87540,8 +87534,7 @@ entities:
       pos: 109.5,104.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
 - proto: RMCGrassd2

@@ -18,8 +18,8 @@
 
 - type: rank
   id: RMCRankLieutenantColonel
-  name: Лейтенант-полковник
-  prefix: ЛтПолк.
+  name: Подполковник
+  prefix: ПодПол.
   paygrade: O5
 
 - type: rank

@@ -1,8 +1,6 @@
-using Content.Shared.Actions;
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 
-namespace Content.Shared.Actions.Components;
+namespace Content.Shared._CCM.Actions;
 
 /// <summary>
 /// CCM: When present on a controlled entity, indicates that its HUD should also display actions
@@ -25,5 +23,5 @@ public sealed partial class CCMActionsDisplayRelayComponent : Component
     /// as if it was initiated by <see cref="Source"/>.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool InteractAsSource = false;
+    public bool InteractAsSource;
 }

@@ -3,19 +3,19 @@ cmd-rmcdeletecommendations-help =
     Использование:
     rmcdeletecommendations id <ID_похвалы>
       - Удаляет одну похвалу по её ID
-    
+
     rmcdeletecommendations round <ID_раунда> <тип>
       - Удаляет все похвалы указанного типа за конкретный раунд
       - тип: фильтр типа похвалы
-    
+
     rmcdeletecommendations round <ID_раунда> <тип> giver <имя_или_ID_пользователя>
       - Удаляет похвалы в раунде, выданные конкретным игроком
       - тип: фильтр типа похвалы
-    
+
     rmcdeletecommendations round <ID_раунда> <тип> receiver <имя_или_ID_пользователя>
       - Удаляет похвалы в раунде, полученные конкретным игроком
       - тип: фильтр типа похвалы
-    
+
     Примеры:
       rmcdeletecommendations id 128
       rmcdeletecommendations round 42 medal

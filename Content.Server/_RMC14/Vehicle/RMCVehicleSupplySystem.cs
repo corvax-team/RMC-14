@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Intel.Tech;
@@ -15,8 +12,6 @@ using Content.Shared.Tag;
 using Content.Shared.UserInterface;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -51,6 +46,7 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
         Vector2 East,
         Vector2 South,
         Vector2 West);
+#if false // CCM14-start
     private readonly record struct VendorHardpointEntry(
         string Id,
         string SharedKey,
@@ -58,13 +54,16 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
         string DisplayName,
         string SectionName,
         int SectionOrder);
+#endif // CCM14-end
 
     public override void Initialize()
     {
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<RMCVehicleSupplyConsoleComponent, BeforeActivatableUIOpenEvent>(OnConsoleBeforeUiOpen);
+#if false // CCM14-start
         SubscribeLocalEvent<RMCVehicleHardpointVendorComponent, MapInitEvent>(OnVendorMapInit);
         SubscribeLocalEvent<RMCVehicleHardpointVendorComponent, BeforeActivatableUIOpenEvent>(OnVendorBeforeUiOpen);
+#endif // CCM14-end
         SubscribeLocalEvent<RMCVehicleSupplyLiftComponent, MapInitEvent>(OnLiftMapInit);
         SubscribeLocalEvent<ActorComponent, RMCAutomatedVendedUserEvent>(OnAutomatedVendorVended);
 
@@ -88,7 +87,7 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
     {
         return lift.Stored.TryGetValue(key, out var count) ? count : 0;
     }
-
+#if false // CCM14-start
     private static int GetVendorAvailableVehicleCount(RMCVehicleSupplyLiftComponent lift, string key)
     {
         var count = GetStoredCount(lift, key);
@@ -104,7 +103,7 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
 
         return count;
     }
-
+#endif // CCM14-end
     private static void AddStored(RMCVehicleSupplyLiftComponent lift, string key, int amount = 1)
     {
         if (amount <= 0)
@@ -291,7 +290,7 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
         }
 
         SendConsoleStateAll();
-        UpdateVendorSectionsAll();
+        // UpdateVendorSectionsAll(); // CCM14
     }
 
     private void OnConsoleBeforeUiOpen(Entity<RMCVehicleSupplyConsoleComponent> ent, ref BeforeActivatableUIOpenEvent args)
@@ -342,6 +341,7 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
         }
     }
 
+#if false // CCM14-start
     private void OnVendorBeforeUiOpen(Entity<RMCVehicleHardpointVendorComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
         UpdateVendorSections(ent.Owner, ent.Comp);
@@ -351,6 +351,7 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
     {
         UpdateVendorSections(ent.Owner, ent.Comp);
     }
+#endif // CCM14-end
 
     private void OnAutomatedVendorVended(Entity<ActorComponent> ent, ref RMCAutomatedVendedUserEvent args)
     {
@@ -358,7 +359,7 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
             return;
 
         TrySpawnVendedHardpointAmmo(ent.Owner, args.Item);
-        UpdateVendorSectionsAll();
+        // UpdateVendorSectionsAll(); // CCM14
     }
 
     private void TrySpawnVendedHardpointAmmo(EntityUid user, EntityUid hardpointItem)
@@ -498,7 +499,7 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
                 comp.PendingVehicleEntity = null;
             }
 
-            UpdateVendorSectionsAll();
+            // UpdateVendorSectionsAll(); // CCM14
         }
         else
         {
@@ -703,7 +704,7 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
         {
             AddStored(comp, key);
             comp.PendingVehicle = string.Empty;
-            UpdateVendorSectionsAll();
+            // UpdateVendorSectionsAll(); // CCM14
             return;
         }
 
@@ -737,7 +738,7 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
         _transform.SetParent(active, EntityUid.Invalid);
         comp.ActiveVehicle = null;
         comp.ActiveVehicleId = string.Empty;
-        UpdateVendorSectionsAll();
+        // UpdateVendorSectionsAll(); // CCM14
     }
 
     private bool IsOnLift(Entity<RMCVehicleSupplyLiftComponent> lift, EntityUid entity)
@@ -826,6 +827,7 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
         _ui.SetUiState(uid, RMCVehicleSupplyUIKey.Key, state);
     }
 
+#if false // CCM14-start
     private void UpdateVendorSectionsAll()
     {
         var query = EntityQueryEnumerator<RMCVehicleHardpointVendorComponent>();
@@ -1124,6 +1126,7 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
 
         return found;
     }
+#endif // CCM14-end
 
     public bool TryGetAnyLift(out Entity<RMCVehicleSupplyLiftComponent> lift)
     {
@@ -1176,7 +1179,7 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
 
         Dirty(liftUid, lift);
         SendConsoleStateAll();
-        UpdateVendorSectionsAll();
+        // UpdateVendorSectionsAll(); // CCM14
         return true;
     }
 
@@ -1205,7 +1208,7 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
             SendConsoleState(uid, console);
         }
 
-        UpdateVendorSectionsAll();
+        // UpdateVendorSectionsAll(); // CCM14
     }
 
     private bool TryGetLift(EntityUid consoleUid, RMCVehicleSupplyConsoleComponent console, out Entity<RMCVehicleSupplyLiftComponent> lift)
@@ -1238,7 +1241,7 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
         return found;
     }
 
-
+#if false // CCM14-start
     private List<RMCVehicleSupplyEntry> BuildVendorCatalog(EntityUid vendorUid, RMCVehicleHardpointVendorComponent vendor)
     {
         var vendorCoords = _transform.GetMapCoordinates(vendorUid);
@@ -1277,6 +1280,7 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
 
         return list;
     }
+#endif // CCM14-end
 
     private bool TryGetEntry(RMCVehicleSupplyConsoleComponent console, string vehicleId, out RMCVehicleSupplyEntry entry)
     {
@@ -1547,6 +1551,7 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
         return unlocked.Contains(Normalize(entry.Unlock));
     }
 
+#if false // CCM14-start
     private IReadOnlyList<string> GetHardpointsForVehicle(string vehicleId, IReadOnlyList<RMCVehicleSupplyEntry> entries)
     {
         var key = Normalize(vehicleId);
@@ -1633,4 +1638,5 @@ private void OnLiftMapInit(Entity<RMCVehicleSupplyLiftComponent> ent, ref MapIni
 
         return null;
     }
+#endif // CCM14-end
 }

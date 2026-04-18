@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorHybrisaXenoarchaeologist = точка появления ксеноархеолога Hybrisa
+ent-RMCSpawnPointSurvivorHybrisaXenoarchaeologist = спавнер выжившего ксеноархеолога
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetHybrisaXenoarchaeologist = пресет колониста: ксеноархеолог Hybrisa
+    .suffix = Гибриса
+ent-RMCGearSurvivorPresetHybrisaXenoarchaeologist = пресет ксеноархеолога Гибриса
     .desc = { ent-RMCSurvivorPresetScientist.desc }

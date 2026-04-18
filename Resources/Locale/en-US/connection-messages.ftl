@@ -32,6 +32,7 @@ whitelist-playtime = You do not have enough playtime to join this server. You ne
 whitelist-player-count = This server is currently not accepting players. Please try again later.
 whitelist-notes = You currently have too many admin notes to join this server. You can check your notes by typing /adminremarks in chat.
 whitelist-manual = You are not whitelisted on this server.
+whitelist-sponsor = Additional slots are available to project sponsors.
 whitelist-blacklisted = You are blacklisted from this server.
 whitelist-always-deny = You are not allowed to join this server.
 whitelist-fail-prefix = Not whitelisted: {$msg}

@@ -1,7 +1,8 @@
 ent-CMSatchelFillSurvivorPriest = { ent-CMSatchelFillSurvivor }
     .suffix = Выживший
     .desc = { ent-CMSatchelFillSurvivor.desc }
-ent-RMCSpawnPointSurvivorPriest = точка появления священника
+ent-RMCSpawnPointSurvivorPriest = спавнер выжившего священника
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetPriest = пресет колониста: священник
+    .suffix = Любые карты
+ent-RMCGearSurvivorPresetPriest = пресет колониста-священника
     .desc = { ent-RMCSurvivorPresetCivilianRareItem.desc }

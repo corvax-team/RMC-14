@@ -175,6 +175,7 @@
   - type: Xeno
   - type: XenoRegen
   - type: XenoStateVisuals
+  - type: XenoPing
   - type: UserInterface
     interfaces:
       enum.CMSurgeryUIKey.Key:
@@ -195,6 +196,12 @@
         type: XenoFruitChooseBui
       enum.XenoWordQueenUI.Key:
         type: XenoWordQueenBui
+      enum.HiveTeamUIKey.Key:
+        type: HiveTeamBui
+      enum.HiveLeaderSquadUIKey.Key:
+        type: HiveLeaderSquadBui
+      enum.XenoResinMarkUIKey.Key:
+        type: XenoResinMarkBui
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
       enum.XenoReserveParasiteChangeUI.Key:
@@ -308,13 +315,14 @@
     - HiveLeader
     - Tunnel
     - HiveCore
+  - type: ResinMarkerTracker
   - type: RequireProjectileTarget
     active: false
   - type: TacticalMapTracked
   - type: TacMapXenoAlert
   - type: TacticalMapUser
     actionId: RMCActionOpenTacticalMapXeno
-    xenos: true
+    layerSets: [TacticalMapSetXeno]
   - type: TacticalMapLiveUpdateOnOvi
     enabled: true
   - type: MotionDetectorTracked
@@ -325,7 +333,8 @@
     background:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_xeno
-  - type: XenoMapTracked
+  - type: TacticalMapLayerTracked
+    layers: [Xenos]
   - type: Evasion
   - type: RMCWeaponAccuracy # This is so projectiles fired by xenos get a correctly-generated seed for RNG.
   - type: StunOnExplosionReceived
@@ -519,6 +528,6 @@
 
 - type: speechVerb
   id: Xeno
-  name: chat-speech-verb-name-default
+  name: chat-speech-verb-name-xeno # CCM14
   speechVerbStrings:
-  - hisses
+  - chat-speech-verb-xeno-1 # CCM14

@@ -1,5 +1,8 @@
 ent-RMCWeaponRifleType71 = Type 71 assault rifle
     .desc = The primary service rifle of the SPP space forces, the Type 71 is an ergonomic, lightweight assault rifle chambered in 5.45x39mm. In accordance with doctrinal principles of overmatch and suppression, the rifle has a high rate of fire and a high-capacity casket magazine. Despite lackluster precision, an integrated recoil-dampening mechanism makes the rifle surprisingly controllable in bursts.
+ent-RMCWeaponRifleType71PVE = { ent-RMCWeaponRifleType71 }
+    .suffix = PVE
+    .desc = { ent-RMCWeaponRifleType71.desc }
 ent-RMCWeaponRifleType71Flamer = Type 71-F assault rifle
     .desc = This appears to be a less common variant of the Type 71 with an integrated flamethrower that seems especially powerful.
 ent-RMCMagazineRifleType71 = Type 71 magazine (5.45x39mm)

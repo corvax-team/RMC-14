@@ -15,6 +15,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorWeYaPMCLeader
     - type: MarineOrders
@@ -36,9 +41,7 @@
       - WeYa
       - Civilian
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadPMC
+      squad: SquadPMC
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-leader
     - type: TacticalMapIcon
@@ -83,3 +86,5 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv_wy
+
+

@@ -1,11 +1,8 @@
-using System.Collections.Generic;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.Vehicle;
 
 [RegisterComponent]
-[Access(typeof(RMCVehicleSystem))]
 public sealed partial class RMCVehicleInteriorComponent : Component
 {
     public EntityUid Map = EntityUid.Invalid;

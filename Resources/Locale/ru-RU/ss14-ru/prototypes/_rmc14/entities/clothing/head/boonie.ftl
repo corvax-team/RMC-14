@@ -3,3 +3,6 @@ ent-RMCBoonie = армейская панама ККМП
 ent-RMCBoonieTan = { ent-RMCBoonie }
     .suffix = Коричневый
     .desc = { ent-RMCBoonie.desc }
+ent-RMCBoonieFisherman = панама рыбака
+    .desc = Мягкая панама с крючками, леской и грузилами, закреплёнными на ленте — очевидный выбор опытного рыболова. Обеспечивает тень от солнца и некоторую защиту от дождя.
+    .suffix = Рыбак

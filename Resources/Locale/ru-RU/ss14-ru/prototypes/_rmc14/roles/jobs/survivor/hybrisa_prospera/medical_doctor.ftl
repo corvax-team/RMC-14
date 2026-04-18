@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorHybrisaMedicalDoctor = точка появления врача (Hybrisa)
+ent-RMCSpawnPointSurvivorHybrisaMedicalDoctor = спавнер выжившего врача
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetHybrisaMedicalDoctor = пресет колониста: врач (Hybrisa)
+    .suffix = Гибриса
+ent-RMCGearSurvivorPresetHybrisaMedicalDoctor = пресет врача Гибриса
     .desc = { ent-RMCSurvivorPresetDoctor.desc }

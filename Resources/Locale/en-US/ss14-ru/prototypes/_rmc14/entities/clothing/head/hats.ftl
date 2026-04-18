@@ -176,3 +176,5 @@ ent-RMCHeadCapFedoraGrey = grey fedora
     .desc = A classic grey fedora.
 ent-RMCHeadHorizonsWreath = new horizons day wreath
     .desc = A wreath of blue and white flowers, traditionally worn on New Horizons Day.
+ent-RMCHeadFoil = foil hat
+    .desc = Keeps the government, aliens, and your in-laws from reading your thoughts. Probably.

@@ -1,4 +1,5 @@
 chat-speech-verb-name-xeno = Ксено
+chat-speech-verb-xeno-1 = шипит
 chat-speech-verb-name-vulpkanin = Вульпканин
 chat-speech-verb-vulpkanin-1 = лает
 chat-speech-verb-vulpkanin-2 = гавкает

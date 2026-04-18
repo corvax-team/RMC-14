@@ -28,7 +28,6 @@ rmc-xeno-construction-hive-limit-met = Мы достигли лимита { $cho
 rmc-xeno-construction-requires-hive-weeds = { $choice } должен быть построен на сорняках улья!
 rmc-xeno-construction-requires-hive-core = Чтобы построить { $choice }, улей должен иметь Ядро улья!
 rmc-xeno-construction-requires-space = Для постройки здесь нужно больше открытого пространства
-cm-xeno-unique-exists = Здесь уже стоит { $choice }!
 rmc-xeno-cant-build-new-yet = Мы пока не можем построить новый { $choice }!
 # Evolve
 cm-xeno-available-evolutions = Доступные эволюции
@@ -51,6 +50,8 @@ rmc-xeno-evolution-cant-evolve-caste-cooldown = Мы пока не можем э
 rmc-xeno-evolution-failed-bad-location = Мы не можем эволюционировать здесь.
 rmc-xeno-evolution-start-self = Мы начинаем извиваться и деформироваться.
 rmc-xeno-evolution-start-others = { $xeno } начинает извиваться и деформироваться.
+rmc-xeno-evolution-queen = Время пришло. Улью нужно, чтобы Королева откладывала яйца для начала эволюции.
+
 # Fortify
 cm-xeno-fortify-cant-headbutt = Мы не можем совершить Удар головой пока мы в Укреплении!
 cm-xeno-fortify-cant-rest = Мы не можем отдыхать пока мы в Укреплении!
@@ -82,11 +83,11 @@ cm-xeno-crippling-strike-hit = Мы значительно усилили наш
 # Pheromones
 rmc-xeno-pheromones-help =
     Феромоны дают усиление всем ксено в радиусе действия за счет расхода плазмы каждую секунду. Доступные усиления:
-    
+
     Неистовство (Красное) - Повышенная скорость бега и урон.
-    
+
     Защита (Зелёное) - Когда ксено находится в критическом состоянии, его запас критического здоровья повышен, а умирание из-за нахождения не на сорняках замедлено.
-    
+
     Восстановления (Синее) - Повышенное восстановление плазмы и здоровья.
 cm-xeno-choose-pheromones = Выбрать феромоны
 cm-pheromones-recovery = Восстановления
@@ -162,7 +163,7 @@ rmc-xeno-praetorian-acid-spit-hit-self = Вы чувствуете, как ки�
 # Retrieve
 rmc-xeno-not-same-hive = Мы должны выбрать одну из наших сестер!
 rmc-xeno-retrieve-self = Мы не можем притянуть себя!
-rmc-xeno-retrieve-anchored = Эта сестра не может двигаться!
+rmc-xeno-retrieve-anchored = Этот сородич не может двигаться!
 rmc-xeno-retrieve-too-big = { $target } слишком большая, чтобы достать её стоя!
 rmc-xeno-retrieve-dead = { $target } уже мертва!
 rmc-xeno-retrieve-blocked = Мы не можем дотянуться до { $target } нашим смоляным притягивающим крюком!
@@ -238,13 +239,13 @@ rmc-xeno-apply-salve-target = { $healer_xeno } покрывает наши ра�
 rmc-xeno-sacrifice-heal-will-respawn = Мы накопили достаточно энергии! Пожертвовав собой, мы возродимся!
 rmc-xeno-sacrifice-heal-target-not-xeno-failure = Цель нельзя вылечить!
 rmc-xeno-sacrifice-heal-target-self-failure = Мы не можем лечить сами себя!
-rmc-xeno-sacrifice-heal-target-hostile-failure = { $target_xeno } враждебна к нашему улью!
+rmc-xeno-sacrifice-heal-target-hostile-failure = { $target_xeno } враждебен к нашему улью!
 rmc-xeno-sacrifice-heal-target-low-level-failure = Это было бы пустой тратой...
 rmc-xeno-sacrifice-heal-target-too-far-away-failure = Мы должны быть ближе к { $target_xeno }.
-rmc-xeno-sacrifice-heal-target-dead-failure = { $target_xeno } мертва!
-rmc-xeno-sacrifice-heal-target-full-health-failure = { $target_xeno } уже полностью здорова!
+rmc-xeno-sacrifice-heal-target-dead-failure = { $target_xeno } мёртв!
+rmc-xeno-sacrifice-heal-target-full-health-failure = { $target_xeno } уже полностью здоров!
 rmc-xeno-sacrifice-heal-target-announcement = { $healer_xeno } жертвует собой, чтобы излечить { $target_xeno }!
-rmc-xeno-sacrifice-heal-announce = ;НАША СЕСТРА НЕ УМРЕТ!!!
+rmc-xeno-sacrifice-heal-announce = ;НАШ СОРОДИЧ НЕ УМРЕТ!!!
 rmc-xeno-sacrifice-heal-target-enviorment = { $healer_xeno } взрывается потоком восстанавливающей смоляной мази, покрывая ей { $target_xeno }!
 # Dodge
 rmc-xeno-dodge-self = Теперь мы можем пробираться сквозь врагов!
@@ -267,11 +268,11 @@ rmc-xeno-tail-fountain-others = { CAPITALIZE($user) } обливает кисл�
 rmc-xeno-tail-fountain-fail = Мы не можем потушить это!
 rmc-xeno-tail-fountain-fail-self = Мы не можем потушить себя!
 # Tantrum
-rmc-xeno-tantrum-fail-self = Мы должны разъярить сестру!
+rmc-xeno-tantrum-fail-self = Мы должны разъярить сородича!
 rmc-xeno-tantrum-fail-raging-self = Мы уже полны ярости!
-rmc-xeno-tantrum-fail-not-xeno = Это не сестра!
+rmc-xeno-tantrum-fail-not-xeno = Это не сородич!
 rmc-xeno-tantrum-fail-wrong-hive = Зачем нам помогать нашим врагам?!
-rmc-xeno-tantrum-fail-dead = Никакая ярость не поможет вернуть нашу сестру.
+rmc-xeno-tantrum-fail-dead = Никакая ярость не поможет вернуть нашего сородича.
 rmc-xeno-tantrum-fail-valkyrie = Мы не можем приказывать другой Валькирии с нашей яростью.
 rmc-xeno-tantrum-fail-raging = { CAPITALIZE($target) } уже в ярости!
 rmc-xeno-tantrum-self = Наша ярость ведёт нас вперед, наше исцеление и броня усиливаются!
@@ -333,11 +334,9 @@ rmc-xeno-fling-too-big = { CAPITALIZE($target) } слишком большой, 
 rmc-gut-start-self = Мы вонзаем когти в тело этого несчастного носителя, начиная разрывать его пополам!
 rmc-gut-start-xenos = { $user } вонзает свои когти в тело этого несчастного носителя, начиная разрывать его пополам!
 rmc-gut-start-marines = Королева вонзает когти в тело { $target }, начиная разрывать его пополам!
-rmc-gut-start-others = { $user } вонзает когти в тело { $target }, начиная разрывать его пополам!
 rmc-gut-finish-xenos = { $user } разрывает жалкого носителя пополам!!
 rmc-gut-finish-marines = Королева разрывает { $target } пополам!!
 rmc-gut-finish-self = Мы разрываем этого жалкого носителя пополам!!
-rmc-gut-finish-others = { $user } разрывает { $target } пополам!!
 rmc-xeno-soak-end-others = { CAPITALIZE($xeno) } приходит в ярость, получив достаточно урона!
 # Shed Spikes
 rmc-shed-spikes = Мы сбросили наши шипы и не можем получать новые в течение 30 секунд!

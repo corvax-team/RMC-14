@@ -3,7 +3,3 @@ ent-RMCWeaponSMGP90 = FN P90 submachinegun
     .suffix = Filled
 ent-RMCMagazineSMGP90 = FN P90 magazine (5.7×28mm)
     .desc = A 5.7×28mm magazine for the FN P90.
-ent-RMCCartridge57x28mm = cartridge (57×28mm SMG)
-    .desc = A 5.7×28mm magazine for the FN P90.
-ent-RMCBullet57x28mm = { ent-Bullet10x20mm }
-    .desc = { ent-Bullet10x20mm.desc }

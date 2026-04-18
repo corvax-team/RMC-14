@@ -1,14 +1,11 @@
-using System.Collections.Generic;
 using System.Numerics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared.Vehicle.Components;
-using ClientPhysicsSystem = Robust.Client.Physics.PhysicsSystem;
-using Robust.Client.Player;
 using Robust.Client.Graphics;
-using Robust.Shared.Configuration;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Map;
 using Robust.Client.Physics;
+using Robust.Client.Player;
+using Robust.Shared.Configuration;
+using ClientPhysicsSystem = Robust.Client.Physics.PhysicsSystem;
 
 namespace Content.Client.Vehicle;
 
@@ -29,6 +26,7 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         _overlay = new GridVehicleMoverOverlay(EntityManager);
         _overlay.DebugEnabled = _cfg.GetCVar(RMCCVars.RMCVehicleDebugOverlay);
         _overlay.CollisionsEnabled = _cfg.GetCVar(RMCCVars.RMCVehicleCollisionOverlay);
+        _overlay.MovementEnabled = _cfg.GetCVar(RMCCVars.RMCVehicleMovementOverlay);
         _hardpointOverlay = new VehicleHardpointDebugOverlay(EntityManager)
         {
             Enabled = _cfg.GetCVar(RMCCVars.RMCVehicleHardpointOverlay)
@@ -50,6 +48,12 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         {
             if (_overlay != null)
                 _overlay.CollisionsEnabled = val;
+        }, true);
+
+        _cfg.OnValueChanged(RMCCVars.RMCVehicleMovementOverlay, val =>
+        {
+            if (_overlay != null)
+                _overlay.MovementEnabled = val;
         }, true);
 
         SubscribeLocalEvent<GridVehicleMoverComponent, UpdateIsPredictedEvent>(OnUpdateIsPredicted);
@@ -102,7 +106,6 @@ public sealed class GridVehicleMoverSystem : EntitySystem
                 _lastPredictedVehicle = vehicle;
                 _physics.UpdateIsPredicted(vehicle);
             }
-
             return;
         }
 

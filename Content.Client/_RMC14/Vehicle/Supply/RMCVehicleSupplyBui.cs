@@ -1,12 +1,8 @@
 using System.Numerics;
 using Content.Client._RMC14.Vehicle.Ui;
 using Content.Shared._RMC14.Vehicle.Supply;
-using Robust.Client.Graphics;
-using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.Vehicle.Supply;
 

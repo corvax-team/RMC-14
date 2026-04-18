@@ -127,7 +127,6 @@ cm-chatsan-replacement-engineer = tall builder
 cm-chatsan-word-comtech = comtech
 cm-chatsan-replacement-comtech = tall builder
 cm-chatsan-word-combat-technician = combat technician
-cm-chatsan-word-combat-technitian = combat technician
 cm-chatsan-replacement-combat-technician = tall builder
 cm-chatsan-word-corpsman = corpsman
 cm-chatsan-replacement-corpsman = tall healer
@@ -254,6 +253,7 @@ cm-chatsan-replacement-ammo = spits
 
 # TODO RMC14 rouny > runner but only if no rouny was spawned in the round
 
+
 # cm-chatsan-word-#tank = #tank
 # cm-chatsan-replacement-#tank = turtle
 
@@ -268,6 +268,7 @@ cm-chatsan-replacement-flamethrower = fire spitter
 
 # cm-chatsan-word-# flamer = # flamer
 # cm-chatsan-replacement-# flamer = fire spitter
+
 
 # cm-chatsan-word-# flamethrower = # flamethrower
 # cm-chatsan-replacement-# flamethrower =  fire spitter
@@ -544,6 +545,8 @@ cm-chatsan-word-replacement-batonged = daze spitted
 cm-chatsan-word-xover = xover
 cm-chatsan-word-xenoover = xenover
 cm-chatsan-word-replacement-xover = over
+cm-chatsan-word-m2c = m2c
+cm-chatsan-word-replacement-m2c = heavy mounted spitter
 cm-chatsan-word-m13 = m13
 cm-chatsan-word-replacement-m13 = fast spitter
 cm-chatsan-word-m63 = m63

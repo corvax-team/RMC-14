@@ -6,6 +6,7 @@ public sealed class TimedDespawnSystem : EntitySystem
 {
     public override void Update(float frameTime)
     {
+        base.Update(frameTime);
         var query = EntityQueryEnumerator<CCMTimedDespawnComponent>();
 
         while (query.MoveNext(out var uid, out var td))

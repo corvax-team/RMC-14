@@ -10,45 +10,45 @@
     - "CMAccessMarinePrep"
     hackable: true
     sections:
-    - name: Standard Equipment
+    - name: Стандартное снаряжение # CCM14
       entries:
       - id: CMBootsBlack
-        name: Marine Combat Boots
+        name: военные ботинки # CCM14
         amount: 15
       - id: RMCJumpsuitSunRiders
-        name: Marine Uniform
+        name: униформа морпеха # CCM14
         amount: 15
       - id: CMHandsBlackMarine
-        name: Marine Combat Gloves
+        name: чёрные боевые перчатки # CCM14
         amount: 15
       - id: CMHandsBrown
-        name: Brown Combat Gloves
+        name: коричневые боевые перчатки # CCM14
         amount: 15
       - id: RMCHeadsetGoldenArrow
-        name: Marine Radio Headset
+        name: гарнитура морпеха # CCM14
         amount: 15
       - id: RMCM5CameraGear
-        name: M5 Pattern Camera Headset
+        name: нашлемная камера M5 # CCM14
         amount: 15
       - id: RMCHeadCapPatrol
-        name: Patrol Cap
+        name: патрульная кепка # CCM14
         amount: 15
       - id: RMCBoonie
-        name: Boonie Hat
+        name: панама # CCM14
         amount: 15
-    - name: Webbings #todo, m3-r webbings
+    - name: Разгрузки # CCM14 #todo, m3-r webbings
       entries:
       - id: CMWebbingBlack
-        name: Webbing, Black
+#        name: Webbing, Black
         amount: 5
       - id: CMWebbingBrown
-        name: Webbing, Brown
+#        name: Webbing, Brown
         amount: 5
       - id: RMCWebbingLegPouch
-        name: Leg Pouch, Camo Conforming
+#        name: Leg Pouch, Camo Conforming
         amount: 5
       - id: RMCWebbingLegPouchBlack
-        name: Leg Pouch, Black
+#        name: Leg Pouch, Black
         amount: 5
       - id: RMCWebbingDropPouch
         amount: 5
@@ -56,14 +56,14 @@
         amount: 5
       - id: RMCWebbingHolsterBlack
         amount: 5
-    - name: Armor #todo m3-r armor
+    - name: Броня # CCM14 #todo m3-r armor
       entries:
       - id: ArmorHelmetM10
         amount: 15
       - id: RMCArmorM3MediumVariants
-        name: Standard M3 Pattern Armor Set
+        name: стандартный комплект брони M3 # CCM14
         amount: 15
-    - name: Backpack
+    - name: Рюкзаки # CCM14
       entries:
       - id: CMBackpackMarine
         amount: 15
@@ -73,7 +73,7 @@
         amount: 15
       - id: RMCSatchelWelder
         amount: 15
-    - name: Belts
+    - name: Пояса # CCM14
       entries:
       - id: CMBeltMarine
         amount: 15
@@ -87,12 +87,12 @@
         amount: 5
       - id: RMCBeltUtilityGeneral
         amount: 5
-    - name: Pouches
+    - name: Подсумки # CCM14
       entries:
       - id: RMCPouchFirstAid
         amount: 15
       - id: RMCPouchFlareFilled
-        name: flare pouch (Full)
+        name: подсумок для фальшфейеров (Полный) # CCM14
         amount: 15
       - id: RMCPouchMagazine
         amount: 15
@@ -102,7 +102,7 @@
         amount: 15
       - id: RMCPouchPistol
         amount: 15
-    - name: Restricted Pouches
+    - name: Специальные подсумки # CCM14
       entries:
       - id: RMCPouchConstruction
         amount: 1
@@ -118,7 +118,7 @@
         amount: 1
       - id: RMCPouchShotgun
         amount: 1
-    - name: Mask
+    - name: Маски # CCM14
       entries:
       - id: CMMaskGas
         amount: 15
@@ -126,7 +126,7 @@
         amount: 10
       - id: CMMaskCoif
         amount: 10
-    - name: Additional Clothing #todo, ponchos
+    - name: Дополнительная одежда # CCM14 #todo, ponchos
       entries:
       - id: RMCHeadBeanie
         amount: 5
@@ -146,21 +146,21 @@
         amount: 5
       - id: CMHeadBandTan
         amount: 5
-    - name: Miscellaneous #todo, marine compass
+    - name: Разное # CCM14 #todo, marine compass
       entries:
       - id: RMCGogglesBallistic
-        name: Ballistic Goggles
+        name: баллистические очки # CCM14
         amount: 10
       - id: RMCGogglesBallisticBlack
-        name: Ballistic Goggles, sun shaded
+        name: черные баллические очки # CCM14
         amount: 10
       - id: RMCGogglesM1A1Ballistic
-        name: Ballistic Goggles, laser-shaded (brown)
+        name: баллистические очки M1A1 # CCM14
         amount: 10
       - id: RMCPatchSolarDevils #todo, forecon patch
         amount: 15
       - id: RMCPatchUNMC
         amount: 15
       - id: BedrollFolded
-        name: LRRP Bedroll
+        name: спальный мешок LRRP # CCM14
         amount: 15

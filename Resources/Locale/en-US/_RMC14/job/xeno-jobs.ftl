@@ -53,6 +53,9 @@ CMJobXenoSpitter = Spitter
 cm-job-name-xeno-warrior = Warrior
 CMJobXenoWarrior = Warrior
 
+ccm-job-name-xeno-swarmer = Swarmer
+CCMXenoSwarmer = Swarmer
+
 rmc-job-name-xeno-king = King
 RMCJobXenoKing = King
 

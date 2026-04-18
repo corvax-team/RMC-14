@@ -1,2 +1,3 @@
-ent-RMCSpawnPointSynthColonist = точка появления синтетического колониста
+ent-RMCSpawnPointSynthColonist = спавнер синтетика-колониста
     .desc = { ent-CMSpawnPointJobBase.desc }
+    .suffix = Базовый

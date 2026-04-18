@@ -1,23 +1,16 @@
-using System.Collections.Generic;
 using System.Linq;
-using Content.Shared.Actions;
-using Content.Shared.Actions.Components;
 using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared.Buckle;
+using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
-using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Movement.Systems;
-using Content.Shared._RMC14.Weapons.Ranged;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameObjects;
-using Robust.Shared.Localization;
-using Robust.Shared.Network;
 using Content.Shared.Weapons.Ranged.Systems;
-using Content.Shared.Vehicle.Components;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Vehicle;
@@ -79,7 +72,13 @@ public sealed partial class RMCVehicleWeaponsSystem : EntitySystem
     {
         if (_net.IsClient)
             return;
-
+        // CCM14-start
+        if (!_skills.HasSkills(args.Buckle.Owner, ent.Comp.Skills))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-skills-cant-operate", ("target", ent.Owner)), args.Buckle.Owner, args.Buckle.Owner);
+            return; 
+        }
+        // CCM14-end
         if (!_vehicleSystem.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle == null)
         {
             return;
@@ -176,8 +175,18 @@ public sealed partial class RMCVehicleWeaponsSystem : EntitySystem
         if (args.User != ent.Owner)
             return;
 
-        if (ent.Comp.Vehicle is not { } vehicle ||
-            !TryComp(vehicle, out RMCVehicleWeaponsComponent? weapons) ||
+        if (ent.Comp.Vehicle is not { } vehicle)
+            return;
+
+        if (TryComp(vehicle, out RMCHardpointIntegrityComponent? frameIntegrity) &&
+            frameIntegrity.Integrity <= 0f)
+        {
+            args.Cancel();
+            _popup.PopupEntity(Loc.GetString("rmc-vehicle-hull-destroyed"), ent.Owner, ent.Owner, PopupType.SmallCaution);
+            return;
+        }
+
+        if (!TryComp(vehicle, out RMCVehicleWeaponsComponent? weapons) ||
             !TryComp(vehicle, out ItemSlotsComponent? itemSlots) ||
             !CanUseHardpointActions(ent.Owner) ||
             !weapons.OperatorSelections.TryGetValue(ent.Owner, out var selectedWeapon) ||
@@ -708,4 +717,3 @@ public sealed partial class RMCVehicleWeaponsSystem : EntitySystem
                _topology.TryGetMountedSlotByItem(vehicle, mountedWeapon, out _, hardpoints, itemSlots);
     }
 }
-

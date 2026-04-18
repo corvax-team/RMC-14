@@ -12,7 +12,6 @@ rmc-intel-clue-progress-report = Доклад о ходе работ в лока
 rmc-intel-clue-folder = { $intel } в локации { $area }.
 rmc-intel-clue-technical-manual = { $intel } в локации { $area }.
 rmc-intel-clue-experimental-device = Найти { $intel } в локации { $area }.
-rmc-intel-not-intel-jumpsuit = Вы не можете носить это, не надев форму офицера разведки ККМП.
 rmc-intel-survivor-pickup =
     { CAPITALIZE($thing) } вам ничем не поможет.
     Сначала постарайтесь выбраться живыми.

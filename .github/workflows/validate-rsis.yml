@@ -8,6 +8,10 @@ on:
     paths:
       - '**.rsi/**'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   validate_rsis:
     name: Validate RSIs
@@ -20,7 +24,8 @@ jobs:
         uses: space-wizards/submodule-dependency@v0.1.5
       - name: Install Python dependencies
         run: |
-          pip3 install --ignore-installed --user pillow jsonschema
+          python3 -m venv venv
+          ./venv/bin/pip install pillow jsonschema
       - name: Validate RSIs
         run: |
-          python3 RobustToolbox/Schemas/validate_rsis.py Resources/
+          ./venv/bin/python3 RobustToolbox/Schemas/validate_rsis.py Resources/

@@ -21,9 +21,14 @@
     vehicleFamily: APC
     slotType: Wheel
     damageMultiplier: 0.15
+    repairRate: 0.0165
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: RMCVehicleWheelItem
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 200
+    category: Chassis
+    vehicle: APC
 
 - type: entity
   parent: RMCAPCHardpointBase
@@ -38,6 +43,7 @@
     vehicleFamily: APC
     slotType: Cannon
     damageMultiplier: 0.11
+    repairRate: 0.01
   - type: RMCHardpointIntegrity
     maxIntegrity: 350
   - type: VehicleTurret
@@ -67,6 +73,10 @@
     useAimDirection: true
   - type: RMCHardpointVisual
     vehicleState: frontalcannon_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 600
+    category: Primary
+    vehicle: APC
 
 - type: entity
   parent: RMCAPCHardpointBase
@@ -81,6 +91,7 @@
     vehicleFamily: APC
     slotType: Turret
     damageMultiplier: 0.2
+    repairRate: 0.008
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurret
@@ -93,6 +104,9 @@
     - FullAuto
     soundGunshot: /Audio/_RMC14/Vehicle/weapons/dual_autocannon_fire.ogg #TODO change to mono
     cameraRecoilScalar: 0
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 6
+    accuracyMultiplierUnwielded: 6
   - type: BallisticAmmoProvider
     cycleable: false
     proto: RMCVehicleCartridgeBoyarsDualCannon10x50mm
@@ -115,6 +129,10 @@
 
   - type: RMCHardpointVisual
     vehicleState: dualcannon_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 800
+    category: Primary
+    vehicle: APC
 
 - type: entity
   parent: RMCAPCHardpointBase
@@ -129,10 +147,15 @@
     vehicleFamily: APC
     slotType: SupportAttachment
     damageMultiplier: 0.075
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
   - type: RMCHardpointVisual
     vehicleState: comms_relay_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 300
+    category: Support
+    vehicle: APC
 
 - type: entity
   parent: RMCAPCHardpointBase
@@ -147,6 +170,7 @@
     vehicleFamily: APC
     slotType: SupportAttachment
     damageMultiplier: 0.1
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurret
@@ -184,6 +208,10 @@
     useAimDirection: true
   - type: RMCHardpointVisual
     vehicleState: flare_launcher_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 300
+    category: Support
+    vehicle: APC
 
 - type: entity
   parent: RMCAPCHardpointBase
@@ -198,10 +226,15 @@
     vehicleFamily: APC
     slotType: SupportAttachment
     damageMultiplier: 0.075
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
   - type: RMCHardpointVisual
     vehicleState: freight_0
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 150
+    category: Support
+    vehicle: APC
 
 - type: entity
   parent: BaseItem
@@ -258,6 +291,10 @@
     muzzleOffset: "0,0"
     angleOffset: 90
     useAimDirection: true
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 400
+    category: Secondary
+    vehicle: APC
 
 - type: entity
   parent: RMCVehicleAPCM56FPWPortGunBase
@@ -272,3 +309,7 @@
     muzzleOffset: "0,0"
     angleOffset: -90
     useAimDirection: true
+  - type: RMCVehicleFabricatorPrintable # CCM14
+    cost: 400
+    category: Secondary
+    vehicle: APC

@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: RMCJobMarineBase
   id: RMCJobSynthetic
   name: rmc-job-name-synth
   description: rmc-job-description-synth
@@ -34,6 +34,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetMarine]
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillCqc: 5
@@ -59,7 +64,7 @@
       id: RMCJobSynthetic
       points: 45
       extraPoints:
-        ExperimentalTools: 30
+        ExperimentalTools: 35 # // CCM Changed - Base is 30
     - type: DemoSpecWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-synth

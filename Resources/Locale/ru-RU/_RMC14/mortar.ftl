@@ -68,3 +68,4 @@ rmc-mortar-dial-coordinates = { CAPITALIZE($mortar) } в режиме лазер
 rmc-mortar-beeping = пищит!
 rmc-mortar-beeping-warning = издаёт тревожный писк!
 rmc-mortar-targeting = { CAPITALIZE($mortar) } всё ещё наводится.
+rmc-mortar-fog-active = Туман слишком густой, чтобы вести огонь! Он рассеется через { $minutes } мин.

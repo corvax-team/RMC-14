@@ -10,6 +10,10 @@ on:
     - ".github/map_checker/**"
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   CARGO_TERM_COLOR: always
   RUST_LOG: Info # Avoid spamming the console.
@@ -23,7 +27,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Setup Rust
-      run: rustup update stable && rustup default stable
+      uses: dtolnay/rust-toolchain@stable
 
     - name: Cache Cargo registry
       uses: actions/cache@v4.2.0

@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorTrijentDamTech = точка появления техника по обслуживанию плотины Trijent
+ent-RMCSpawnPointSurvivorTrijentDamTech = спавнер выжившего техника по обслуживанию дамбы
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetTrijentDamTech = пресет колониста: техник по обслуживанию плотины Trijent
+    .suffix = Дамба Триджент
+ent-RMCGearSurvivorPresetTrijentDamTech = пресет выжившего техника по обслуживанию дамбы
     .desc = { ent-RMCSurvivorPresetEngineer.desc }

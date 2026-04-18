@@ -48,7 +48,7 @@ namespace Content.Client.Instruments.UI
             PlaybackSlider.OnValueChanged += PlaybackSliderSeek;
             PlaybackSlider.OnKeyBindUp += PlaybackSliderKeyUp;
 
-            MinSize = SetSize = new Vector2(400, 150);
+            MinSize = SetSize = new Vector2(500, 200); // CCM14
         }
 
         public void SetInstrument(Entity<InstrumentComponent> entity)

@@ -1,8 +1,9 @@
-﻿- type: job
+- type: job
   parent: RMCJobNametagBase
   id: CMLiaison
   name: cm-job-name-liaison
   description: cm-job-description-liaison
+  newToJobInfo: rmc-new-to-job-cl
   requirements:
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
