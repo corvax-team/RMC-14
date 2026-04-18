@@ -5,7 +5,7 @@
   description: A suprisingly well made leather satchel. In use of Petrishev Revolutionary combatants.
   components:
   - type: Sprite
-    sprite: _CCM14\Objects\Clothing\Back\Backpacks\petrishev_backpack.rsi
+    sprite: _CCM14/Objects/Clothing/Back/Backpacks/petrishev_backpack.rsi
 
 - type: entity
   parent: CCMSatchelRev
