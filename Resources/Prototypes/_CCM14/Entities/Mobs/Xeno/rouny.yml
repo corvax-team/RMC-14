@@ -22,12 +22,13 @@
     - ActionXenoDevolve
     - CCMActionXenoRuniLeap
     - ActionXenoRounyScreech
+    - ActionCCMXenoChargeLine
     tier: 3
     hudOffset: 0,0.63
     unlockAt: 900 # 15 minutes
   - type: XenoDevolve
     devolvesTo:
-    - RMCXenoLurkerBase
+    - CMXenoLurker
   - type: XenoEvolutionCapped
     id: CCMXenoRouny
     max: 1
@@ -51,3 +52,17 @@
     stopOnHit: true
     hitKnockdownTime: 2
   - type: XenoRounyScreech
+  # - type: MCXenoPounceEmote
+  #   emote: XenoRoar
+  # - type: MCXenoPounceEffect
+    # entityId: MCEffectXenoCharge
+  # - type: MCXenoEndure
+  #   duration: 10
+  - type: CCMXenoChargeLine
+    damage:
+      types:
+        Blunt: 40
+    speedMultiplier: 2.5
+    maxTiles: 10
+    hitSound:
+      path: /Audio/_MC/Effects/alien_tail_attack.ogg

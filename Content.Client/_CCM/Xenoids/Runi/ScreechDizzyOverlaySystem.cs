@@ -31,8 +31,6 @@ public sealed class ScreechDizzyOverlaySystem : EntitySystem
             return;
         }
 
-        // DEBUG (можешь убрать потом)
-        Log.Info($"HasDizzy: {_ent.HasComponent<ScreechDizzyComponent>(local.Value)}");
 
         if (!_ent.TryGetComponent<ScreechDizzyComponent>(local.Value, out var comp))
         {

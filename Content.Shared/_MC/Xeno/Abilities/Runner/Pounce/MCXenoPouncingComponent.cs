@@ -13,7 +13,7 @@ public sealed partial class MCXenoPouncingComponent : Component
     public TimeSpan End;
 
     [DataField, AutoNetworkedField]
-    public bool ZigZag = true;
+    public bool ZigZag = false;
 
     [DataField, AutoNetworkedField]
     public float ZigZagAmplitude = 1.0f;

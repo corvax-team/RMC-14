@@ -34,3 +34,24 @@
   - type: InstantAction
     event: !type:XenoRounyScreechActionEvent
   - type: RMCDazeableAction
+
+- type: entity
+  id: ActionCCMXenoChargeLine
+  parent: ActionXenoBase
+  name: Charge Line
+  description: A wide area of effect stun, screeches upon activation. [color=red]This will also stun parasites, and is blocked by solid walls, smoke, and boiler gas, but not windows![/color]
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _MC/Interface/Actions/Xeno/bull.rsi
+      state: bull_gore
+    useDelay: 15
+  - type: InstantAction
+    event: !type:CCMXenoChargeLineActionEvent
+      speedMultiplier: 2.5
+      maxTiles: 10
+      damage:
+        types:
+          Blunt: 40
+  # - type: RMCDazeableAction
