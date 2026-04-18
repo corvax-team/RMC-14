@@ -4,6 +4,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._CCM.FpvDrone;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SharedFpvDroneLaptopSystem))]
 public sealed partial class FpvDroneLaptopComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -20,6 +21,7 @@ public sealed partial class FpvDroneLaptopComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SharedFpvDroneLaptopSystem))]
 public sealed partial class FpvDroneLaptopLinkedComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -27,6 +29,7 @@ public sealed partial class FpvDroneLaptopLinkedComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SharedFpvDroneLaptopSystem))]
 public sealed partial class FpvDroneLaptopWatcherComponent : Component
 {
     [DataField, AutoNetworkedField]

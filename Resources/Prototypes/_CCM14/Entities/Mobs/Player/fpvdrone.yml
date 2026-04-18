@@ -3,7 +3,7 @@
   id: FpvDroneFoldedBase
   name: fpv drone
   description: A compact foldable FPV drone.
-  suffix: folded, base
+  suffix: Folded
   abstract: true
   components:
   - type: Sprite
@@ -30,7 +30,6 @@
   id: FpvDroneBase
   name: fpv drone
   description: A deployed FPV drone.
-  suffix: base
   abstract: true
   noSpawn: true
   components:

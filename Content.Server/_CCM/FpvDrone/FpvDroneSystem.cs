@@ -17,7 +17,6 @@ public sealed class FpvDroneSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -82,7 +81,8 @@ public sealed class FpvDroneSystem : EntitySystem
 
     private void OnDroneTerminating(EntityUid uid, FpvDroneComponent component, EntityTerminatingEvent args)
     {
-        ReturnPilotToBody(uid, component);
+        component.FlyingStream = _audio.Stop(component.FlyingStream);
+        ReturnPilotToBody(uid, component, true);
     }
 
     private void OnExplosiveInit(EntityUid uid, FpvDroneExplosiveComponent component, ComponentInit args)
@@ -143,38 +143,30 @@ public sealed class FpvDroneSystem : EntitySystem
             Dirty(uid, component);
         }
 
-        if (pilot == null || TerminatingOrDeleted(pilot.Value))
+        if (pilot != null && !TerminatingOrDeleted(pilot.Value))
         {
-            component.Pilot = null;
-            Dirty(uid, component);
-            return;
-        }
-
-        if (_mind.TryGetMind(uid, out var mindId, out var mind))
-            _mind.TransferTo(mindId, pilot.Value, mind: mind);
-
-        if (isSignalLost)
-        {
-            if (component.SignalLostSound != null)
+            if (isSignalLost)
             {
-                _audio.PlayEntity(component.SignalLostSound, pilot.Value, pilot.Value,
-                    AudioParams.Default.WithVolume(-2f));
-            }
+                if (component.SignalLostSound != null)
+                {
+                    _audio.PlayEntity(component.SignalLostSound, pilot.Value, pilot.Value,
+                        AudioParams.Default.WithVolume(-2f));
+                }
 
-            _popup.PopupEntity(Loc.GetString("fpv-drone-ui-connection-lost"), pilot.Value, pilot.Value,
-                PopupType.LargeCaution);
+                _popup.PopupEntity(Loc.GetString("fpv-drone-ui-connection-lost"), pilot.Value, pilot.Value,
+                    PopupType.LargeCaution);
+            }
         }
 
         component.Pilot = null;
+        component.Control = default;
+        component.SignalLost = false;
         Dirty(uid, component);
     }
 
     private void DisconnectDrone(EntityUid uid, FpvDroneComponent component)
     {
         ReturnPilotToBody(uid, component);
-        component.Control = default;
-        component.SignalLost = false;
-        Dirty(uid, component);
     }
 
     public bool IsControlLinkInRange(EntityUid control, EntityUid drone, FpvDroneComponent? component = null)
@@ -221,9 +213,12 @@ public sealed class FpvDroneSystem : EntitySystem
         return true;
     }
 
-    public bool StopRemoteControl(EntityUid drone, bool isSignalLost = false, FpvDroneComponent? component = null)
+    public bool StopRemoteControl(EntityUid drone, EntityUid? expectedPilot = null, bool isSignalLost = false, FpvDroneComponent? component = null)
     {
         if (!Resolve(drone, ref component, false) || component.Pilot == null)
+            return false;
+
+        if (expectedPilot != null && component.Pilot != expectedPilot)
             return false;
 
         ReturnPilotToBody(drone, component, isSignalLost);

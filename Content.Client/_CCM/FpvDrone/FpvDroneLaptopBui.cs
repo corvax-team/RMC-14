@@ -66,19 +66,8 @@ public sealed class FpvDroneLaptopBui : BoundUserInterface
         if (_selectedDrone == null && state.Drones.Count > 0)
             SelectDrone(state.Drones[0].Id, true);
 
-        UpdateHeader(state);
         RebuildDroneList(state);
         UpdateSelectedPanel(state);
-    }
-
-    private void UpdateHeader(FpvDroneLaptopBuiState state)
-    {
-        if (_window == null)
-            return;
-
-        _window.StatusLabel.Text = state.Drones.Count == 0
-            ? Loc.GetString("cm-fpv-drone-laptop-no-linked")
-            : Loc.GetString("cm-fpv-drone-laptop-linked-count", ("count", state.Drones.Count));
     }
 
     private void RebuildDroneList(FpvDroneLaptopBuiState state)
@@ -87,16 +76,27 @@ public sealed class FpvDroneLaptopBui : BoundUserInterface
             return;
 
         _window.DroneListContainer.DisposeAllChildren();
+        
+        if (state.Drones.Count == 0)
+        {
+            _window.DroneListContainer.AddChild(new Label 
+            { 
+                Text = Loc.GetString("cm-fpv-drone-laptop-no-linked"),
+                FontColorOverride = Color.FromHex("#8EA9C4"),
+                Margin = new Thickness(0, 4)
+            });
+            return;
+        }
+
         foreach (var drone in state.Drones)
         {
             var button = new Button
             {
                 HorizontalExpand = true,
                 Margin = new Thickness(0, 0, 0, 4),
-                Text = $"{drone.Name} [{drone.Role}] {MathF.Round(drone.Health)}/{MathF.Round(drone.MaxHealth)}"
+                Text = $"{drone.Name}" 
             };
 
-            button.Disabled = false;
             button.ModulateSelfOverride = drone.Connected
                 ? (_selectedDrone == drone.Id ? Color.FromHex("#315980") : Color.FromHex("#1B2A36"))
                 : Color.FromHex("#3A1F1F");
@@ -142,7 +142,6 @@ public sealed class FpvDroneLaptopBui : BoundUserInterface
         _window.HealthBar.MaxValue = Math.Max(1f, selected.MaxHealth);
         _window.HealthBar.Value = selected.Health;
         _window.HealthLabel.Text = $"{MathF.Round(selected.Health)}/{MathF.Round(selected.MaxHealth)}";
-
         _window.ControlButton.Disabled = !selected.Connected && !_controlEnabled;
         _window.ControlButton.Text = _controlEnabled
             ? Loc.GetString("cm-fpv-drone-laptop-release-control")
@@ -188,6 +187,9 @@ public sealed class FpvDroneLaptopBui : BoundUserInterface
             return;
         }
 
-        _window.CameraViewport.Eye = eye.Eye;
+        var droneEye = eye.Eye;
+        droneEye.DrawLight = false;
+        droneEye.DrawFov = false;
+        _window.CameraViewport.Eye = droneEye;
     }
 }

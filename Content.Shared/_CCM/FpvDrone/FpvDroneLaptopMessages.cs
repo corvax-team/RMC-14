@@ -42,3 +42,6 @@ public sealed class FpvDroneLaptopUnlinkBuiMsg(NetEntity drone) : BoundUserInter
 {
     public NetEntity Drone = drone;
 }
+
+[Serializable, NetSerializable]
+public sealed class FpvDroneLaptopUnlinkAllBuiMsg : BoundUserInterfaceMessage;

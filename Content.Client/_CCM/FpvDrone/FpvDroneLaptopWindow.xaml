@@ -4,86 +4,59 @@
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:vp="clr-namespace:Content.Client.Viewport"
     xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
-    Title="FPV Drone Terminal"
-    MinSize="1100 720">
-    <BoxContainer Orientation="Horizontal">
-        <PanelContainer MinWidth="320">
-            <PanelContainer.PanelOverride>
-                <graphics:StyleBoxFlat BackgroundColor="#0A0F14" BorderColor="#5AA8FF" BorderThickness="2" />
-            </PanelContainer.PanelOverride>
-            <BoxContainer Orientation="Vertical" Margin="8">
-                <RichTextLabel Name="HeaderLabel" Access="Public"
-                               Text="[color=#5AA8FF][font size=16][bold]FPV DRONE TERMINAL[/bold][/font][/color]" />
+    Title="{Loc 'cm-fpv-drone-laptop-title'}"
+    MinSize="850 540">
+    <PanelContainer Margin="4">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#05080C" BorderColor="#5AA8FF" BorderThickness="2" />
+        </PanelContainer.PanelOverride>
+
+        <BoxContainer Orientation="Horizontal" Margin="8">
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                <RichTextLabel Name="SelectedDroneLabel" Access="Public" />
                 <customControls:HSeparator Margin="0 6" />
-                <Label Name="StatusLabel" Access="Public" Text="No linked drones." FontColorOverride="#B0CBE7" />
-                <customControls:HSeparator Margin="0 6" />
-                <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
-                    <BoxContainer Name="DroneListContainer"
-                                  Access="Public"
-                                  Orientation="Vertical"
-                                  HorizontalExpand="True"
-                                  VerticalExpand="True" />
-                </ScrollContainer>
+
+                <Control HorizontalExpand="True" VerticalExpand="True">
+                    <vp:ScalingViewport Name="CameraViewport"
+                                        Access="Public"
+                                        MouseFilter="Ignore"
+                                        MinSize="480 360"
+                                        HorizontalExpand="True"
+                                        VerticalExpand="True" />
+                </Control>
+                <RichTextLabel Name="CameraHintLabel" Access="Public"
+                               Margin="0 6 0 0" />
             </BoxContainer>
-        </PanelContainer>
-
-        <PanelContainer HorizontalExpand="True" VerticalExpand="True" Margin="6 0 0 0">
-            <PanelContainer.PanelOverride>
-                <graphics:StyleBoxFlat BackgroundColor="#05080C" BorderColor="#5AA8FF" BorderThickness="2" />
-            </PanelContainer.PanelOverride>
-            <BoxContainer Orientation="Vertical" Margin="8" HorizontalExpand="True" VerticalExpand="True">
-                <RichTextLabel Name="SelectedDroneLabel" Access="Public"
-                               Text="[color=#5AA8FF][bold]No drone selected[/bold][/color]" />
-                <customControls:HSeparator Margin="0 6" />
-
-                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
-                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
-                        <Control HorizontalExpand="True" VerticalExpand="True">
-                            <vp:ScalingViewport Name="CameraViewport"
-                                                Access="Public"
-                                                MouseFilter="Ignore"
-                                                MinSize="640 480"
-                                                HorizontalExpand="True"
-                                                VerticalExpand="True" />
-                        </Control>
-                        <RichTextLabel Name="CameraHintLabel" Access="Public"
-                                       Margin="0 6 0 0"
-                                       Text="[color=#8EA9C4]Select a drone to open its feed.[/color]" />
-                    </BoxContainer>
-
-                    <PanelContainer MinWidth="300" Margin="8 0 0 0">
-                        <PanelContainer.PanelOverride>
-                            <graphics:StyleBoxFlat BackgroundColor="#0B1218" BorderColor="#355D86" BorderThickness="1" />
-                        </PanelContainer.PanelOverride>
-                        <BoxContainer Orientation="Vertical" Margin="8" HorizontalExpand="True" VerticalExpand="True">
-                            <Label Text="ROLE" FontColorOverride="#5AA8FF" />
-                            <Label Name="RoleValueLabel" Access="Public" Text="-" Margin="0 0 0 6" />
-
-                            <Label Text="STATUS" FontColorOverride="#5AA8FF" />
-                            <RichTextLabel Name="ConnectionValueLabel" Access="Public" Margin="0 0 0 6" />
-
-                            <Label Text="OPERATOR" FontColorOverride="#5AA8FF" />
-                            <Label Name="PilotValueLabel" Access="Public" Text="-" Margin="0 0 0 6" />
-
-                            <Label Text="HEALTH" FontColorOverride="#5AA8FF" />
-                            <ProgressBar Name="HealthBar" Access="Public" HorizontalExpand="True" Margin="0 2 0 0">
-                                <Label Name="HealthLabel" Access="Public" Align="Center" />
-                            </ProgressBar>
-
-                            <customControls:HSeparator Margin="0 8" />
-
-                            <Button Name="ControlButton" Access="Public" Text="TAKE CONTROL" Margin="0 0 0 4" />
-                            <Button Name="DetonateButton" Access="Public" Text="DETONATE" Margin="0 0 0 4" />
-                            <Button Name="UnlinkButton" Access="Public" Text="UNLINK" />
-
-                            <customControls:HSeparator Margin="0 8" />
-
-                            <RichTextLabel Name="ControlHintLabel" Access="Public"
-                                           Text="[color=#8EA9C4]When control is active, use movement keys to steer the drone while staying at the laptop.[/color]" />
-                        </BoxContainer>
-                    </PanelContainer>
+            <PanelContainer MinWidth="300" Margin="8 0 0 0">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#0B1218" BorderColor="#355D86" BorderThickness="1" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Vertical" Margin="8">
+                    <Label Text="{Loc 'cm-fpv-drone-laptop-available'}" FontColorOverride="#5AA8FF" />
+                    <ScrollContainer MinHeight="140" VerticalExpand="False" Margin="0 4">
+                        <BoxContainer Name="DroneListContainer"
+                                      Access="Public"
+                                      Orientation="Vertical"
+                                      HorizontalExpand="True" />
+                    </ScrollContainer>
+                    <customControls:HSeparator Margin="0 8" />
+                    <Label Text="{Loc 'cm-fpv-drone-laptop-role'}" FontColorOverride="#5AA8FF" />
+                    <Label Name="RoleValueLabel" Access="Public" Text="-" Margin="0 0 0 6" />
+                    <Label Text="{Loc 'cm-fpv-drone-laptop-status'}" FontColorOverride="#5AA8FF" />
+                    <RichTextLabel Name="ConnectionValueLabel" Access="Public" Margin="0 0 0 6" />
+                    <Label Text="{Loc 'cm-fpv-drone-laptop-operator'}" FontColorOverride="#5AA8FF" />
+                    <Label Name="PilotValueLabel" Access="Public" Text="-" Margin="0 0 0 6" />
+                    <Label Text="{Loc 'cm-fpv-drone-laptop-health'}" FontColorOverride="#5AA8FF" />
+                    <ProgressBar Name="HealthBar" Access="Public" HorizontalExpand="True" Margin="0 2 0 4">
+                        <Label Name="HealthLabel" Access="Public" Align="Center" />
+                    </ProgressBar>
+                    <customControls:HSeparator Margin="0 8" />
+                    <Button Name="ControlButton" Access="Public" Margin="0 0 0 4" />
+                    <Button Name="DetonateButton" Access="Public" Text="{Loc 'cm-fpv-drone-laptop-detonate'}" Margin="0 0 0 4" />
+                    <Button Name="UnlinkButton" Access="Public" Text="{Loc 'cm-fpv-drone-laptop-unlink'}" />
+                    <Control VerticalExpand="True" />
                 </BoxContainer>
-            </BoxContainer>
-        </PanelContainer>
-    </BoxContainer>
+            </PanelContainer>
+        </BoxContainer>
+    </PanelContainer>
 </controls:FpvDroneLaptopWindow>

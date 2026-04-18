@@ -1,38 +1,26 @@
-using System.Linq;
 using Content.Server.Destructible;
 using Content.Server.Destructible.Thresholds.Triggers;
 using Content.Shared._CCM.FpvDrone;
 using Content.Shared.Damage;
-using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Interaction;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Placeable;
 using Content.Shared.Popups;
-using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 
 namespace Content.Server._CCM.FpvDrone;
 
-public sealed class FpvDroneLaptopSystem : EntitySystem
+public sealed class FpvDroneLaptopSystem : SharedFpvDroneLaptopSystem
 {
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly SharedDeviceLinkSystem _deviceLink = default!;
     [Dependency] private readonly FpvDroneSystem _drone = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedMoverController _mover = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscribers = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
-
-    private float _updateAccumulator;
-    private const float UpdateInterval = 0.5f;
 
     public override void Initialize()
     {
@@ -40,15 +28,8 @@ public sealed class FpvDroneLaptopSystem : EntitySystem
 
         _actorQuery = GetEntityQuery<ActorComponent>();
 
-        SubscribeLocalEvent<FpvDroneLaptopComponent, AfterInteractEvent>(OnAfterInteract);
-        SubscribeLocalEvent<FpvDroneLaptopComponent, EntParentChangedMessage>(OnParentChanged);
-        SubscribeLocalEvent<FpvDroneLaptopComponent, ComponentShutdown>(OnLaptopShutdown);
-        SubscribeLocalEvent<FpvDroneLaptopComponent, ActivatableUIOpenAttemptEvent>(OnUiOpenAttempt);
-
-        SubscribeLocalEvent<FpvDroneLaptopLinkedComponent, ComponentShutdown>(OnLinkedShutdown);
         SubscribeLocalEvent<FpvDroneLaptopWatcherComponent, ComponentShutdown>(OnWatcherShutdown);
         SubscribeLocalEvent<FpvDroneLaptopWatcherComponent, PlayerDetachedEvent>(OnWatcherDetached);
-
         SubscribeLocalEvent<NewLinkEvent>(OnNewLink);
 
         Subs.BuiEvents<FpvDroneLaptopComponent>(FpvDroneLaptopUiKey.Key, subs =>
@@ -58,37 +39,13 @@ public sealed class FpvDroneLaptopSystem : EntitySystem
             subs.Event<FpvDroneLaptopSelectDroneBuiMsg>(OnSelectDrone);
             subs.Event<FpvDroneLaptopToggleControlBuiMsg>(OnToggleControl);
             subs.Event<FpvDroneLaptopDetonateBuiMsg>(OnDetonateDrone);
-            subs.Event<FpvDroneLaptopUnlinkBuiMsg>(OnUnlinkDrone);
         });
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-
-        _updateAccumulator += frameTime;
-        if (_updateAccumulator < UpdateInterval)
-            return;
-
-        _updateAccumulator = 0f;
-
-        UpdateAllOpenUis();
         CleanupWatchers();
-    }
-
-    private void OnAfterInteract(Entity<FpvDroneLaptopComponent> ent, ref AfterInteractEvent args)
-    {
-        if (args.Handled || !args.CanReach || args.Target == null)
-            return;
-
-        if (!HasComp<PlaceableSurfaceComponent>(args.Target.Value))
-            return;
-
-        args.Handled = true;
-        if (!_hands.TryDrop(args.User, ent.Owner, checkActionBlocker: false))
-            return;
-
-        PlaceLaptopOnSurface(ent, args.Target.Value);
     }
 
     private void OnNewLink(NewLinkEvent args)
@@ -102,6 +59,20 @@ public sealed class FpvDroneLaptopSystem : EntitySystem
         if (args.SourcePort != "FpvDroneControl")
             return;
 
+        if (TryComp<FpvDroneLaptopLinkedComponent>(args.Sink, out var existingLink) && existingLink.LinkedLaptop != null)
+        {
+            if (args.User != null)
+                _popup.PopupEntity(Loc.GetString("cm-fpv-drone-laptop-already-linked"), args.Source, args.User.Value);
+            return;
+        }
+
+        if (laptop.LinkedDrones.Count >= laptop.MaxLinkedDrones)
+        {
+            if (args.User != null)
+                _popup.PopupEntity(Loc.GetString("cm-fpv-drone-laptop-capacity"), args.Source, args.User.Value);
+            return;
+        }
+
         var link = EnsureComp<FpvDroneLaptopLinkedComponent>(args.Sink);
         link.LinkedLaptop = args.Source;
         drone.Control = args.Source;
@@ -114,21 +85,16 @@ public sealed class FpvDroneLaptopSystem : EntitySystem
         if (args.User != null)
             _popup.PopupEntity(Loc.GetString("cm-fpv-drone-laptop-linked"), args.Source, args.User.Value);
 
-        UpdateUi((args.Source, laptop));
-    }
-
-    private void OnUiOpenAttempt(Entity<FpvDroneLaptopComponent> ent, ref ActivatableUIOpenAttemptEvent args)
-    {
-        if (IsOnSurface(ent.Owner))
-            return;
-
-        _popup.PopupClient(Loc.GetString("cm-fpv-drone-laptop-place-first"), ent, args.User);
-        args.Cancel();
+        UpdateUI((args.Source, laptop));
     }
 
     private void OnUiOpened(Entity<FpvDroneLaptopComponent> ent, ref BoundUIOpenedEvent args)
     {
-        UpdateUi(ent);
+        var watcher = EnsureComp<FpvDroneLaptopWatcherComponent>(args.Actor);
+        watcher.Laptop = ent.Owner;
+        Dirty(args.Actor, watcher);
+
+        UpdateUI(ent);
     }
 
     private void OnUiClosed(Entity<FpvDroneLaptopComponent> ent, ref BoundUIClosedEvent args)
@@ -138,35 +104,6 @@ public sealed class FpvDroneLaptopSystem : EntitySystem
         {
             ClearWatcher(args.Actor, watcher);
         }
-    }
-
-    private void OnParentChanged(Entity<FpvDroneLaptopComponent> ent, ref EntParentChangedMessage args)
-    {
-        var onSurface = IsOnSurface(ent.Owner);
-        ent.Comp.IsOpen = onSurface;
-        ent.Comp.IsPowered = onSurface;
-        UpdateVisuals(ent);
-        Dirty(ent);
-
-        if (!onSurface)
-        {
-            _ui.CloseUi(ent.Owner, FpvDroneLaptopUiKey.Key);
-            ClearAllWatchersForLaptop(ent.Owner);
-        }
-    }
-
-    private void OnLaptopShutdown(Entity<FpvDroneLaptopComponent> ent, ref ComponentShutdown args)
-    {
-        UnlinkAll(ent);
-        ClearAllWatchersForLaptop(ent.Owner);
-    }
-
-    private void OnLinkedShutdown(Entity<FpvDroneLaptopLinkedComponent> ent, ref ComponentShutdown args)
-    {
-        if (ent.Comp.LinkedLaptop is not { } laptopUid || !TryComp<FpvDroneLaptopComponent>(laptopUid, out var laptop))
-            return;
-
-        UnlinkDrone((laptopUid, laptop), ent.Owner);
     }
 
     private void OnSelectDrone(Entity<FpvDroneLaptopComponent> ent, ref FpvDroneLaptopSelectDroneBuiMsg args)
@@ -223,10 +160,13 @@ public sealed class FpvDroneLaptopSystem : EntitySystem
             return;
         }
 
-        _mover.SetRelay(args.Actor, droneUid.Value);
         watcher.ControlEnabled = true;
+        _mover.SetRelay(args.Actor, droneUid.Value);
+        
+        _popup.PopupEntity(Loc.GetString("cm-fpv-drone-laptop-control-active"), args.Actor, args.Actor);
+
         Dirty(args.Actor, watcher);
-        UpdateUi(ent);
+        UpdateUI(ent);
     }
 
     private void OnDetonateDrone(Entity<FpvDroneLaptopComponent> ent, ref FpvDroneLaptopDetonateBuiMsg args)
@@ -245,16 +185,7 @@ public sealed class FpvDroneLaptopSystem : EntitySystem
         }
 
         _drone.TryTriggerExplosive(droneUid.Value, explosive);
-        UpdateUi(ent);
-    }
-
-    private void OnUnlinkDrone(Entity<FpvDroneLaptopComponent> ent, ref FpvDroneLaptopUnlinkBuiMsg args)
-    {
-        if (!TryGetEntity(args.Drone, out var droneUid))
-            return;
-
-        UnlinkDrone(ent, droneUid.Value);
-        UpdateUi(ent);
+        UpdateUI(ent);
     }
 
     private void OnWatcherShutdown(Entity<FpvDroneLaptopWatcherComponent> ent, ref ComponentShutdown args)
@@ -277,74 +208,19 @@ public sealed class FpvDroneLaptopSystem : EntitySystem
         ent.Comp.ControlEnabled = false;
     }
 
-    private void PlaceLaptopOnSurface(Entity<FpvDroneLaptopComponent> laptop, EntityUid surface)
+    protected override void UnlinkDrone(Entity<FpvDroneLaptopComponent> laptop, EntityUid droneUid)
     {
-        var xform = Transform(surface);
-        _transform.SetCoordinates(laptop.Owner, xform.Coordinates);
-        _transform.SetParent(laptop.Owner, surface);
-
-        laptop.Comp.IsOpen = true;
-        laptop.Comp.IsPowered = true;
-        UpdateVisuals(laptop);
-        Dirty(laptop);
-    }
-
-    private void UnlinkDrone(Entity<FpvDroneLaptopComponent> laptop, EntityUid droneUid)
-    {
-        if (!laptop.Comp.LinkedDrones.Remove(droneUid))
-            return;
-
-        ClearWatchersForDrone(droneUid);
+        base.UnlinkDrone(laptop, droneUid);
+        ClearWatchersForDroneImpl(droneUid);
         _drone.TryDisconnectDrone(droneUid);
-
-        if (TryComp<DeviceLinkSinkComponent>(droneUid, out var sink))
-            _deviceLink.RemoveAllFromSink(droneUid, sink);
-
-        if (TryComp<FpvDroneLaptopLinkedComponent>(droneUid, out var linked))
-            RemComp(droneUid, linked);
-
-        Dirty(laptop);
     }
 
-    private void UnlinkAll(Entity<FpvDroneLaptopComponent> laptop)
+    protected override void ClearWatchersForDrone(EntityUid drone)
     {
-        foreach (var drone in laptop.Comp.LinkedDrones)
-        {
-            UnlinkDrone(laptop, drone);
-        }
+        ClearWatchersForDroneImpl(drone);
     }
 
-    private List<EntityUid> GetLinkedDrones(Entity<FpvDroneLaptopComponent> laptop)
-    {
-        var linked = new List<EntityUid>();
-
-        if (TryComp<DeviceLinkSourceComponent>(laptop, out var source))
-        {
-            foreach (var sink in source.LinkedPorts.Keys)
-            {
-                if (HasComp<FpvDroneComponent>(sink))
-                    linked.Add(sink);
-            }
-
-            laptop.Comp.LinkedDrones = linked.ToHashSet();
-            return linked;
-        }
-
-        linked.AddRange(laptop.Comp.LinkedDrones);
-        return linked;
-    }
-
-    private void UpdateAllOpenUis()
-    {
-        var query = EntityQueryEnumerator<FpvDroneLaptopComponent>();
-        while (query.MoveNext(out var uid, out var laptop))
-        {
-            if (_ui.IsUiOpen(uid, FpvDroneLaptopUiKey.Key))
-                UpdateUi((uid, laptop));
-        }
-    }
-
-    private void UpdateUi(Entity<FpvDroneLaptopComponent> laptop)
+    protected override void UpdateUI(Entity<FpvDroneLaptopComponent> laptop)
     {
         if (!_ui.IsUiOpen(laptop.Owner, FpvDroneLaptopUiKey.Key))
             return;
@@ -462,7 +338,9 @@ public sealed class FpvDroneLaptopSystem : EntitySystem
     private void StopRemoteControl(EntityUid user, FpvDroneLaptopWatcherComponent watcher)
     {
         if (watcher.CurrentDrone is { } current && TryGetEntity(current, out var droneUid))
-            _drone.StopRemoteControl(droneUid.Value);
+        {
+            _drone.StopRemoteControl(droneUid.Value, user);
+        }
 
         if (TryComp<RelayInputMoverComponent>(user, out var relay) &&
             watcher.CurrentDrone is { } currentDrone &&
@@ -490,17 +368,7 @@ public sealed class FpvDroneLaptopSystem : EntitySystem
         RemCompDeferred<FpvDroneLaptopWatcherComponent>(user);
     }
 
-    private void ClearAllWatchersForLaptop(EntityUid laptop)
-    {
-        var query = EntityQueryEnumerator<FpvDroneLaptopWatcherComponent>();
-        while (query.MoveNext(out var uid, out var watcher))
-        {
-            if (watcher.Laptop == laptop)
-                ClearWatcher(uid, watcher);
-        }
-    }
-
-    private void ClearWatchersForDrone(EntityUid drone)
+    private void ClearWatchersForDroneImpl(EntityUid drone)
     {
         var droneNet = GetNetEntity(drone);
         var query = EntityQueryEnumerator<FpvDroneLaptopWatcherComponent>();
@@ -513,10 +381,18 @@ public sealed class FpvDroneLaptopSystem : EntitySystem
 
     private void CleanupWatchers()
     {
-        var query = EntityQueryEnumerator<FpvDroneLaptopWatcherComponent>();
-        while (query.MoveNext(out var uid, out var watcher))
+        var query = EntityQueryEnumerator<FpvDroneLaptopWatcherComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var watcher, out var xform))
         {
             if (watcher.Laptop is not { } laptopUid || !TryComp<FpvDroneLaptopComponent>(laptopUid, out _))
+            {
+                ClearWatcher(uid, watcher);
+                continue;
+            }
+
+            var laptopXform = Transform(laptopUid);
+            if (xform.MapID != laptopXform.MapID || 
+                (_transform.GetWorldPosition(xform) - _transform.GetWorldPosition(laptopXform)).LengthSquared() > 4f)
             {
                 ClearWatcher(uid, watcher);
                 continue;
@@ -536,18 +412,4 @@ public sealed class FpvDroneLaptopSystem : EntitySystem
         }
     }
 
-    private bool IsOnSurface(EntityUid laptop)
-    {
-        var parent = Transform(laptop).ParentUid;
-        return HasComp<PlaceableSurfaceComponent>(parent);
-    }
-
-    private void UpdateVisuals(Entity<FpvDroneLaptopComponent> laptop)
-    {
-        var state = FpvDroneLaptopState.Closed;
-        if (laptop.Comp.IsOpen)
-            state = laptop.Comp.IsPowered ? FpvDroneLaptopState.Active : FpvDroneLaptopState.Open;
-
-        _appearance.SetData(laptop, FpvDroneLaptopVisuals.State, state);
-    }
 }

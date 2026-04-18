@@ -12,6 +12,8 @@ public sealed class FpvDroneOverlaySystem : EntitySystem
     [Dependency] private readonly IOverlayManager _overlays = default!;
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private readonly IPlayerManager _playerMan = default!;
 
     private FpvDroneOverlay? _overlay;
 
@@ -19,11 +21,11 @@ public sealed class FpvDroneOverlaySystem : EntitySystem
     {
         base.Initialize();
 
-        _overlay = new FpvDroneOverlay(_protoMan, _timing);
+        _overlay = new FpvDroneOverlay(_protoMan, _timing, _entMan, _playerMan);
         _overlays.AddOverlay(_overlay);
     }
 
-    private sealed class FpvDroneOverlay(IPrototypeManager protoMan, IGameTiming timing) : Overlay
+    private sealed class FpvDroneOverlay(IPrototypeManager protoMan, IGameTiming timing, IEntityManager entMan, IPlayerManager playerMan) : Overlay
     {
         private readonly ShaderInstance _shader =
             protoMan.Index<ShaderPrototype>(FpvDroneConstants.ShaderId).InstanceUnique();
@@ -33,13 +35,7 @@ public sealed class FpvDroneOverlaySystem : EntitySystem
 
         protected override bool BeforeDraw(in OverlayDrawArgs args)
         {
-            var entMan = IoCManager.Resolve<IEntityManager>();
-            var playerMan = IoCManager.Resolve<IPlayerManager>();
-
             if (playerMan.LocalEntity is not { } player)
-                return false;
-
-            if (!entMan.HasComponent<FpvDroneLaptopWatcherComponent>(player))
                 return false;
 
             if (!entMan.TryGetComponent<FpvDroneLaptopWatcherComponent>(player, out var watcher))
@@ -70,6 +66,7 @@ public sealed class FpvDroneOverlaySystem : EntitySystem
             _shader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
             _shader.SetParameter("time", (float)timing.CurTime.TotalSeconds);
             _shader.SetParameter("renderScale", args.Viewport.RenderScale * args.Viewport.Eye.Scale);
+            _shader.SetParameter("active", true);
 
             handle.UseShader(_shader);
             handle.DrawRect(args.WorldBounds, Color.White);

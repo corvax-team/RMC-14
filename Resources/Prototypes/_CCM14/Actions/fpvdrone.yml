@@ -1,13 +1,13 @@
 - type: entity
   id: ActionFpvDroneExplosive
-  name: "Explosive Detonation"
-  description: "Detonate the FPV Drone's explosive charge."
+  name: Explosive Detonation
+  description: Detonate the FPV Drone's explosive charge.
   noSpawn: true
   components:
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _CM/Actions/drone.rsi
+      sprite: _CCM14/Actions/drone.rsi
       state: blast
   - type: InstantAction
     useDelay: 0
@@ -17,8 +17,8 @@
 
 - type: entity
   id: ActionFpvDroneEject
-  name: "Eject from Drone"
-  description: "Stop controlling the drone and return to your body."
+  name: Eject from Drone
+  description: Stop controlling the drone and return to your body.
   noSpawn: true
   components:
   - type: Action
