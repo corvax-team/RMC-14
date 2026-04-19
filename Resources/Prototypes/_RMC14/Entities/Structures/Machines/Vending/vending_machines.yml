@@ -27,6 +27,7 @@
         - MachineMask
         layer:
         - MachineLayer
+        - BulletImpassable #TODO Remove this after vendor tipping is added
         density: 200
   - type: Repairable
     doAfterDelay: 8
@@ -86,6 +87,9 @@
   - type: Corrodible
     timeToApply: 4
     structure: true
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
   - type: ActivatableUIBlacklist
     blacklist:
       components:
@@ -94,14 +98,14 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 50
       behaviors:
       - !type:DoActsBehavior
         acts: ["Breakage"]
       - !type:EjectVendorItems
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 100
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -126,6 +130,7 @@
   name: Hot Drinks machine
   description: A vending machine which dispenses hot drinks.
   components:
+  - type: RMCVehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/coffee.rsi
   - type: VendingMachine
@@ -176,6 +181,7 @@
   name: Hot Foods Machine
   description: A vending machine full of ready to cook meals, mhmmmm taste the nutritional goodness!
   components:
+  - type: RMCVehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/snack.rsi
   - type: VendingMachine
@@ -226,6 +232,7 @@
   name: Bobda Softdrinks
   description: A softdrink vendor provided by Bobda Soda Company, Havana.
   components:
+  - type: RMCVehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/cola.rsi
   - type: VendingMachine
@@ -297,6 +304,43 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/spp_cola.rsi
+
+- type: entity
+  parent: RMCVendorColaSPP
+  id: RMCVendorNutriCoDrinkSPP
+  name: drink dispenser
+  suffix: SPP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/NutriCo/drink.rsi
+    offset: 0, 0.5
+
+- type: entity
+  parent: CMVendor
+  id: RMCVendorSoda
+  name: Cold Drinks machine
+  description: A vending machine that contains cold drinks. This one appears to be produced by Tsumetai-Umi, a subsidairy of Neterai Foods International, which itself is subsidiary of Weston-Yamada.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/sodavend.rsi
+  - type: VendingMachine
+    pack: RMCVendorSoda
+
+- type: vendingMachineInventory
+  id: RMCVendorSoda
+  startingInventory: # TODO RMC14
+    CMDrinkCanCola: 10
+    CMDrinkCanMountainWind: 10
+    CMDrinkCanThirteenLoko: 10
+    CMDrinkCanDrGibb: 10
+    CMDrinkCanStarkist: 10
+    CMDrinkCanSpaceUp: 10
+    CMDrinkCanLemonLime: 10
+    CMDrinkCanIcedTea: 10
+    CMDrinkCanGrape: 10
+    CMDrinkCanTonic: 10
+    CMDrinkCanSoda: 10
+    CMDrinkCanFruitBeer: 10
 
 # Cigarettes
 - type: entity
@@ -492,6 +536,7 @@
     RMCMagazinePistolM1984Rubber: 40
     RMCMagazinePistolM77Rubber: 40
     RMCMagazineRifleM54CRubber: 40
+    RMCMagazineRifleM54CMK1Rubber: 10
     RMCMagazineRifleM4SPRRubber: 40
     CMArmorHelmetM10MP: 8
     RMCExplosiveBreachingChargeRubber: 6
@@ -630,6 +675,7 @@
   name: Dinnerware
   description: A kitchen and restaurant equipment vendor.
   components:
+  - type: RMCVehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/dinnerware.rsi
     snapCardinals: true
@@ -651,10 +697,13 @@
     layoutId: Vending
   - type: WiresPanel
   - type: WiresVisuals
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: CMAutomatedVendor
     scaling: false
     sections:
-    - name: Products
+    - name: Продукты # CCM14
       entries:
       - id: RMCFork
         amount: 6
@@ -768,7 +817,7 @@
   - type: CMAutomatedVendor
     scaling: false
     sections:
-    - name: Products
+    - name: Продукты # CCM14
       entries:
       - id: FoodContainerEgg
         amount: 12

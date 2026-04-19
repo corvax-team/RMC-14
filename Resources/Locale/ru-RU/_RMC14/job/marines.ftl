@@ -49,31 +49,24 @@ rmc-job-name-forecon-spotter = Разведчик
 rmc-job-name-recruit = Рекрут
 rmc-job-description-recruit = Следуй приказам и учись у старших. Получай по шапке от инструктора. Выпустишься — и станешь морпехом.
 rmc-job-prefix-recruit = РЕКР
-cm-job-name-section-sergeant = Section Sergeant
-cm-job-description-section-sergeant = Leader of one of the platoon's sections. Give your section and squads objectives and follow orders from the Plat CO. Keep your section in one piece.
-cm-job-prefix-section-sergeant = SctSgt
-CMPVESectionSergeant = Section Sergeant
-
+cm-job-name-section-sergeant = Отрядный Сержант
+cm-job-description-section-sergeant = Лидер одного из взодных отделения. Раздавайте команды вашим подчинённым и следуйте приказал командира взвода. Не давайте своему отряду разбежаться, как стадо баранов.
+cm-job-prefix-section-sergeant = От. Сжт.
+CMPVESectionSergeant = Отрядный Сержант
 cm-job-name-platoon-commander = Командир Взвода
 cm-job-description-platoon-commander = Координируйте и руководите своим взводом, подчиняйтесь командованию роты и приведите солдат к победе.
 cm-job-prefix-platoon-commander = ВзводКОМ
 CMPVEPlatoonCommander = Командир Взвода
-
 rmc-job-name-pve-forecon-rifleman = Стрелок
 rmc-job-prefix-pve-forecon-rifleman = СТР
-
 rmc-job-name-pve-forecon-smartgunner = Оператор смартгана
 rmc-job-prefix-pve-forecon-smartgunner = ОСг
-
 rmc-job-name-pve-forecon-corpsman = Санитар
 rmc-job-prefix-pve-forecon-corpsman = ПС
-
 rmc-job-name-pve-forecon-rto = Оператор радио-связи
 rmc-job-description-pve-forecon-rto = Вы — оператор радио связи. Обеспечьте стабильную связь между вашим отрядом и командованием.
 rmc-job-prefix-pve-forecon-rto = ОРС
-
 rmc-job-name-pve-forecon-assistant-lead = Помощник командира отряда
 rmc-job-prefix-pve-forecon-assistant-lead = АКО
-
 rmc-job-name-pve-forecon-squad-lead = Командир Отряда
 rmc-job-prefix-pve-forecon-squad-lead = КО

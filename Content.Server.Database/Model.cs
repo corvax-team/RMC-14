@@ -519,6 +519,13 @@ namespace Content.Server.Database
                 .HasPrincipalKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<RMCCommendation>()
+                .HasOne(r => r.DeletedBy)
+                .WithMany(p => p.CommendationsDeleted)
+                .HasForeignKey(r => r.DeletedById)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
             modelBuilder.Entity<RMCPlayerStats>()
                 .HasOne(s => s.Player)
                 .WithOne(p => p.Stats)
@@ -855,6 +862,7 @@ namespace Content.Server.Database
         public List<RMCRoleTimerExclude> RoleTimerExcludes { get; set; } = default!;
         public List<RMCCommendation> CommendationsGiven { get; set; } = default!;
         public List<RMCCommendation> CommendationsReceived { get; set; } = default!;
+        public List<RMCCommendation> CommendationsDeleted { get; set; } = default!;
         public RMCPlayerStats Stats { get; set; } = default!;
         public CCMPlayerStats? CCMStats { get; set; }
         public CCMPlayerAchievementStats? CCMAchievementStats { get; set; }

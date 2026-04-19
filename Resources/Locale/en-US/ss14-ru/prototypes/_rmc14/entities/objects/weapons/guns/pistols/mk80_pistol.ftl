@@ -1,7 +1,13 @@
 ent-RMCMK80 = MK80 pistol
     .desc = A massive, formidable semi-automatic handgun chambered in 9mm squash-head rounds. A common sight throughout both UN and TSE space, often held by both We-Ya PMC units and corporate executives. This weapon is also undergoing limited field testing as part of the Marines' next generation pistol program. The slide is engraved with the We-Ya logo reminding you who's really in charge.
+ent-RMCMK80RCM = L189 offensive handgun
+    .desc = A large-frame, semi-automatic 9mm offensive handgun in limited use by members of the TSE's military. Although commercially produced by We-Ya and sold as the MK80, this handgun has been produced under contract specifically for the TSE's military and designated the L189 offensive handgun. The slide is engraved with the Three Suns flag, location of manufacture, and serial number.
+    .suffix = PVE, Filled, Royal
 ent-CMMagazinePistolMK80 = MK80 magazine (9mm Squash-Head)
     .desc = { ent-CMBaseMagazinePistol.desc }
+ent-RMCMagazinePistolMK80Empty = { ent-CMMagazinePistolMK80 }
+    .suffix = Empty
+    .desc = { ent-CMMagazinePistolMK80.desc }
 ent-RMCCartridgePistol9mmSquashHead = cartridge (9mm Squash-Head)
     .desc = { ent-CMCartridgePistolBase.desc }
 ent-RCMBulletPistol9mmSquashHead = bullet (9mm Squash-Head)

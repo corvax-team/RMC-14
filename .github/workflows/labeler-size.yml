@@ -10,7 +10,7 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
           # Custom size configuration
-          sizes: >
+          размер: >
             {
               "0": "XS",
               "10": "S",

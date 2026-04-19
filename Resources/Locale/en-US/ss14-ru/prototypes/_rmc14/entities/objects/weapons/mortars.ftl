@@ -1,5 +1,5 @@
 ent-RMCMortarKit = M402 mortar portable kit
-    .desc = A manual, crew-operated mortar system intended to rain down 80mm goodness on anything it's aimed at. Needs to be set down first.
+    .desc = A manual, crew-operated mortar system intended to rain down 80mm goodness on anything it's aimed at. Uses an advanced targeting computer, which can toggle between coordinate and laser targeting. Needs to be set down first.
     .suffix = Classic
 ent-RMCMortarShellBase = 80mm mortar shell
     .desc = An unlabeled 80mm mortar shell, probably a casing.

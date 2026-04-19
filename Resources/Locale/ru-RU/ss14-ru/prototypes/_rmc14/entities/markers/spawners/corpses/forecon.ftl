@@ -1,2 +1,2 @@
-ent-RMCSpawnerCorpseFORECONSpotter = Corpse Spawner - UNMC Reconnaissance Spotter
+ent-RMCSpawnerCorpseFORECONSpotter = Спавнер тела - Разведчик СОиС
     .desc = { ent-RMCSpawnerCorpse.desc }

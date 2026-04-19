@@ -32,9 +32,6 @@ public enum CollisionGroup
     XenoProjectileImpassable = 1 << 27,
     DropshipImpassable = 1 << 28,
 
-    // Corvax
-    Transport = 1 << 29, 
-
     MapGrid = MapGridHelpers.CollisionGroup, // Map grids, like shuttles. This is the actual grid itself, not the walls or other entities connected to the grid.
 
     // 32 possible groups
@@ -59,7 +56,7 @@ public enum CollisionGroup
 
     // Machines, computers
     MachineMask = Impassable | MidImpassable | LowImpassable,
-    MachineLayer = Opaque | MidImpassable | LowImpassable | BulletImpassable,
+    MachineLayer = Opaque | MidImpassable | LowImpassable, // RMC14 removed BulletImpassable
     ConveyorMask = Impassable | MidImpassable | LowImpassable | DoorPassable,
 
     // Crates

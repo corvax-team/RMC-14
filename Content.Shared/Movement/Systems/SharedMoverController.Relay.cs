@@ -1,6 +1,6 @@
-//using Content.Shared.ActionBlocker; // CCM-change
+using Content.Shared.ActionBlocker;
 using Content.Shared.Movement.Components;
-using Content.Shared.Movement.Events; // CCM-change
+using Content.Shared.Movement.Events;
 
 namespace Content.Shared.Movement.Systems;
 
@@ -18,6 +18,7 @@ public abstract partial class SharedMoverController
     private void OnAfterRelayTargetState(Entity<MovementRelayTargetComponent> entity, ref AfterAutoHandleStateEvent args)
     {
         PhysicsSystem.UpdateIsPredicted(entity.Owner);
+        EnsureValidRelayTarget(entity.Owner, entity.Comp);
     }
 
     private void OnAfterRelayState(Entity<RelayInputMoverComponent> entity, ref AfterAutoHandleStateEvent args)
@@ -25,7 +26,6 @@ public abstract partial class SharedMoverController
         PhysicsSystem.UpdateIsPredicted(entity.Owner);
     }
 
-    // CCM-change-start
     private void OnRelayCanMoveUpdated(Entity<RelayInputMoverComponent> ent, ref CanMoveUpdatedEvent args)
     {
         if (args.CanMove)
@@ -34,7 +34,6 @@ public abstract partial class SharedMoverController
         if (MoverQuery.TryComp(ent.Comp.RelayEntity, out var inputMoverComponent))
             SetMoveInput((ent.Comp.RelayEntity, inputMoverComponent), MoveButtons.None);
     }
-    // CCM-change-end
 
     /// <summary>
     ///     Sets the relay entity and marks the component as dirty. This only exists because people have previously
@@ -103,5 +102,25 @@ public abstract partial class SharedMoverController
 
         if (TryComp(entity.Comp.Source, out RelayInputMoverComponent? relay) && relay.LifeStage <= ComponentLifeStage.Running)
             RemComp(entity.Comp.Source, relay);
+    }
+
+    private bool EnsureValidRelayTarget(EntityUid uid, MovementRelayTargetComponent relayTarget)
+    {
+        var source = relayTarget.Source;
+        var valid =
+            source.IsValid() &&
+            RelayQuery.TryComp(source, out var sourceRelay) &&
+            sourceRelay.RelayEntity == uid;
+
+        if (valid)
+            return true;
+
+        if (MoverQuery.TryComp(uid, out var mover))
+            SetMoveInput((uid, mover), MoveButtons.None);
+
+        if (!Timing.ApplyingState)
+            RemCompDeferred<MovementRelayTargetComponent>(uid);
+
+        return false;
     }
 }

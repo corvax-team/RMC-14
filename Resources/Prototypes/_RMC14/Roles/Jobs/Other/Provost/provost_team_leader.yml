@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: CMProvostTeamLeader
   name: rmc-job-name-corp-provost-team-leader
@@ -79,7 +79,7 @@
   equipment:
     head: RMCHeadBeretProvostSenior
     eyes: CMGlassesSecurity
-    ears: RMCHeadsetHighCommandProvostLead
+    ears: RMCHeadsetProvostLead
     jumpsuit: CMJumpsuitProvostSenior
     outerClothing: RMCArmorProvostSeniorFilled
     gloves: CMHandsBlackMarine # TODO RMC14 black gloves

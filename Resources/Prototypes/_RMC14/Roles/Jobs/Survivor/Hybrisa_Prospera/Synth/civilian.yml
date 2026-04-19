@@ -1,11 +1,16 @@
 - type: job
-  parent: RMCJobSyntheticColony
+  parent: RMCSyntheticColony
   id: RMCSyntheticColonyHybrisaCivilian
   startingGear: RMCGearSyntheticColonistHybrisaCivilian
   spawnMenuRoleName: Civilian Synth (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillCqc: 3
@@ -56,7 +61,7 @@
       preset: RMCSurvivorPresetHybrisaSynthCivilian
     - type: Synth
       generation: rmc-species-synth-generation-second
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistBase
@@ -85,3 +90,5 @@
     - [ RMCJumpsuitCivilianYellow, RMCHeadCapFlippable, RMCSatchelNorm, CMBootsBlackFilled, CMPackFlare, RMCHazardVest, RMCBinoculars, RMCBeltUtilityGeneral, RMCHandsVeteran, RMCScabbardMacheteFilled, RMCEarmuffs ]
     # Bartender
     - [ RMCSatchelBlackBartenderSynthFill, CMHandsBlackMarine, RMCCigarette, CMBootsBlackFilled, RMCCoatWaistcoat, ClothingUniformJumpsuitDetectiveGrey, ClothingHeadHatBowlerHat ]
+
+

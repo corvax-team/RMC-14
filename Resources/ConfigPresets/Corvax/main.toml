@@ -107,6 +107,7 @@ discord_oauth_state_lifetime_seconds = 300
 emote_cooldown_seconds = 1
 chat_translate_api = ""
 chat_translate_source = "auto"
+enable_suicide = false
 
 [gateway]
 generator_enabled = false
@@ -122,3 +123,6 @@ engine_version = "264.0.2-fix-physics"
 
 [movement]
 mob_pushing = true
+
+[jerry]
+discord_auth_enabled = true

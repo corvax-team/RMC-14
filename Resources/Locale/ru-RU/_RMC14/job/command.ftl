@@ -16,17 +16,15 @@ cm-job-description-executive-officer = Вы являетесь заместит�
 cm-job-prefix-executive-officer = ИО
 CMJobExecutiveOfficer = Исполнительный офицер
 # Special operation capable
-rmc-job-prefix-forecon-marksman = MKSMN
-rmc-job-prefix-forecon-support-tech = SPT
-# Special forces
-rmc-job-prefix-forecon = FORECON
-rmc-job-prefix-forecon-co = FORECON CO
+rmc-job-prefix-forecon-marksman = МАРКС
+rmc-job-prefix-forecon-support-tech = ТЕХ
+rmc-job-prefix-forecon-co = Кмд СОиС
 # Admin only right now.
 cm-job-name-high-command = Верховное командование
 # Admin only brig gen.
-rmc-job-name-unmc-brigadier-general = High Command
-rmc-job-description-unmc-brigadier-general = "High Command. Congrats, you're a Brigadier General!"
+rmc-job-name-unmc-brigadier-general = Верховное командование
+rmc-job-description-unmc-brigadier-general = "Поздравляю! Вы теперь Генерал!"
 # admin spawn only high comm Adjutant
-rmc-job-name-unmc-adjutant = High Command Adjutant
-rmc-job-description-unmc-adjutant = "You're the Adjutant to a high ranked officer. They must be important!"
-rmc-job-prefix-unmc-adjutant = ADJ
+rmc-job-name-unmc-adjutant = Адъютант верховного командования
+rmc-job-description-unmc-adjutant = "Вы теперь адъютант высокопоставленного офицера. Он, наверное, очень важный!"
+rmc-job-prefix-unmc-adjutant = АДЪ

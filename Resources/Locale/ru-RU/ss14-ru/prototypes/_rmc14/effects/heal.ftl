@@ -16,5 +16,3 @@ ent-RMCEffectHealFlurry = { ent-RMCEffectHeal }
     .desc = { ent-RMCEffectHeal.desc }
 ent-RMCEffectHealHeadbite = { ent-RMCEffectHeal }
     .desc = { ent-RMCEffectHeal.desc }
-ent-RMCEffectHealSoak = { ent-RMCEffectHeal }
-    .desc = { ent-RMCEffectHeal.desc }

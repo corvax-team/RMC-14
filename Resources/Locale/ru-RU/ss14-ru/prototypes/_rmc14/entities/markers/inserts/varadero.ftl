@@ -1,0 +1,15 @@
+ent-RMCMapInsertVaraderoBase = { ent-RMCMapInsertBase }
+    .suffix = Вставка Варадеро
+    .desc = { ent-RMCMapInsertBase.desc }
+ent-RMCMapInsertVaraderoCLFRaid = Рейд КФО
+    .suffix = Вставка Варадеро
+    .desc = { ent-RMCMapInsertVaraderoBase.desc }
+ent-RMCMapInsertVaraderoResturant = Ресторан
+    .suffix = Вставка Варадеро
+    .desc = { ent-RMCMapInsertVaraderoBase.desc }
+ent-RMCMapInsertVaraderoAltHospital = Альт. госпиталь
+    .suffix = Вставка Варадеро
+    .desc = { ent-RMCMapInsertVaraderoBase.desc }
+ent-RMCMapInsertVaraderoEngiHold = Укрепление инженеров
+    .suffix = Вставка Варадеро
+    .desc = { ent-RMCMapInsertVaraderoBase.desc }

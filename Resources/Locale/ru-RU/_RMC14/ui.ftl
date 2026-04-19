@@ -52,60 +52,66 @@ rmc-ui-link-discord-account-already-linked = [bold]Ваш аккаунт уже 
 rmc-ui-link-discord-account-open-channel = Открыть канал
 rmc-ui-named-items = Именные предметы
 rmc-ui-named-items-displayed-as =
-    Будет отображаться как 'Ваше пользовательское имя' M54C Assault Rifle, например.
-    Убедитесь, что выбранное имя не нарушает правила.
-    Если не уверены, спросите в AHelp! (F1)
+    Будет отображаться как, например, штурмовая винтовка M54C «Ваше Имя».
+        Убедитесь, что выбранное имя не нарушает правила сервера.
+        Если не уверены — спросите в AHelp! (F1)
 rmc-ui-named-primary-gun = Название основного оружия
 rmc-ui-named-sidearm = Название пистолета
 rmc-ui-named-helmet = Название шлема
 rmc-ui-named-armor = Название брони
 rmc-ui-named-sentry = Название турели
-rmc-ui-patron-perks = Привилегии патрона
+rmc-ui-patron-perks = Награды спонсоров
 rmc-ui-lobby-message = Сообщение в лобби
 rmc-ui-lobby-message-description =
-    Отображается игрокам перед стартом игры.
-    Одно выбирается случайно среди всех патронов этого уровня.
-    Убедитесь, что сообщение не нарушает правила.
-    Если не уверены, спросите в AHelp! (F1)
-rmc-ui-shoutout = Упоминание в конце раунда
-rmc-ui-shoutout-marine-title = Имя для упоминания морпехов в конце раунда.
-rmc-ui-shoutout-marine-description = Отображается в конце раунда как спонсор.
-rmc-ui-shoutout-xeno-title = Имя для упоминания ксено в конце раунда.
-rmc-ui-shoutout-xeno-description = Отображается в конце раунда как основатель улья.
+    Отображается игрокам перед началом раунда.
+        Одно выбирается случайным образом среди всех спонсоров этого уровня.
+        Убедитесь, что сообщение не нарушает правила.
+        Если не уверены — спросите в AHelp! (F1)
+rmc-ui-shoutout = Благодарность в конце раунда
+rmc-ui-shoutout-marine-title = Имя для упоминания в благодарности морпехам.
+rmc-ui-shoutout-marine-description = Отображается в конце раунда как имя спонсора операции.
+rmc-ui-shoutout-xeno-title = Имя для упоминания в благодарности ксеноморфам.
+rmc-ui-shoutout-xeno-description = Отображается в конце раунда как имя основателя улья.
 rmc-ui-shoutout-example = Пример:
 rmc-ui-shoutout-info =
-    Каждое имя выбирается случайно среди всех патронов этого уровня.
-    Убедитесь, что имена соответствуют роли и не нарушают правила.
-    Если не уверены, спросите в AHelp! (F1)
-rmc-ui-named-items-in-preferences = Вы можете менять имена предметов для каждого персонажа в настройке персонажа.
+    Имя выбирается случайно среди всех спонсоров этого уровня.
+        Убедитесь, что имена соответствуют атмосфере игры (in-character) и не нарушают правила.
+        Если не уверены — спросите в AHelp! (F1)
+rmc-ui-named-items-in-preferences = Вы можете изменить названия своих предметов для каждого персонажа в настройках персонажа.
 rmc-ui-figurine = Фигурка персонажа
 rmc-ui-figurine-in-preferences =
-    Вы можете экспортировать персонажа для изготовления фигурки в настройке персонажа.
-    Ограничено одной активной фигуркой на человека!
-    Если хотите изменить, напишите нам в Discord.
+    Вы можете экспортировать своего персонажа для создания фигурки в настройках персонажа.
+        Ограничение: одна активная фигурка на человека!
+        Если хотите изменить её — напишите нам в Discord.
 rmc-ui-ghost-color = Цвет призрака
-rmc-ui-ghost-color-clear = Очистить
+rmc-ui-ghost-color-clear = Сбросить
 rmc-ui-ghost-color-save = Сохранить
+rmc-ui-show-new-player-icons = Показывать иконки новых игроков для менторов и глав отделов
+rmc-ui-xeno-night-vision-default = ПНВ ксеноморфов по умолчанию
+rmc-ui-xeno-night-vision-default-off = Выкл.
+rmc-ui-xeno-night-vision-default-half = В полсилы
+rmc-ui-xeno-night-vision-default-full = Полное
+rmc-night-vision-mode-verb = Установить ПНВ: { $mode }
 rmc-area-info = { $area }{ $restrictions }
-rmc-tacmap-alert-ceiling-level-0 = [color=green]✓[/color] Все действия разрешены
-rmc-tacmap-alert-ceiling-level-1 = [color=red]✗[/color] Размещение миномета, лазерное наведение, эвакуация
-rmc-tacmap-alert-ceiling-level-2 = [color=red]✗[/color] Сброс припасов, минометный огонь
-rmc-tacmap-alert-ceiling-level-3 = [color=red]✗[/color] CAS
-rmc-tacmap-alert-ceiling-level-4 = [color=red]✗[/color] OB
+rmc-tacmap-alert-ceiling-level-0 = [color=green]✓[/color] Доступно всё
+rmc-tacmap-alert-ceiling-level-1 = [color=red]✗[/color] установка мортиры, лазерное наведение, медэвак
+rmc-tacmap-alert-ceiling-level-2 = [color=red]✗[/color] поставки, стрельба из мортиры
+rmc-tacmap-alert-ceiling-level-3 = [color=red]✗[/color] КАС
+rmc-tacmap-alert-ceiling-level-4 = [color=red]✗[/color] ОБ
 rmc-tacmap-alert-allowed-actions = [color=green]✓[/color] { $actions }
 rmc-tacmap-alert-restricted-actions = [color=red]✗[/color] { $actions }
-rmc-ui-shoutout-marine = [bold]Операцию профинансировал [color=green]{ $name }[/color]![/bold]
+rmc-ui-shoutout-marine = [bold]Операция профинансирована [color=green]{ $name }[/color]![/bold]
 rmc-ui-shoutout-xeno = [bold]Улей основан [color=purple]{ $name }[/color]![/bold]
-rmc-ui-options-alternate-sprites = Использовать спрайты без трипофобии
-
-# Фичи Патреона RMC нет смысла переводить - Finish
-
+rmc-ui-options-chat-squad-color-mode = Окрашивать имена в чате в цвета отрядов
+# Dialog input
+rmc-dialog-input-placeholder-default = Введите текст
+rmc-dialog-input-placeholder-smart-check = Более 3 пробелов подряд будут обрезаны
+rmc-ui-options-alternate-sprites = Использовать спрайты без трипофобных элементов
 rmc-ui-discord = Discord
 rmc-ui-patreon = Patreon
 rmc-other-credits-tab = Прочее
 rmc-ui-auto-punctuate = Автоматически расставлять знаки препинания в IC-сообщениях
-rmc-ui-damage-yourself = Включить возможность наносить себе повреждения ударами и выстрелами
-rmc-tacmap-alert-area = Местоположение: { $area }
+rmc-ui-damage-yourself = Возможность наносить себе урон ударами и выстрелами
 rmc-tacmap-alert-no-area = Неизвестно
 rmc-ui-auto-eject-magazines = Автоматическое извлечение магазинов из оружия
 # CCM priority rework

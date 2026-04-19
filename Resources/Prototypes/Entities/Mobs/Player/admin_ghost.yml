@@ -125,10 +125,13 @@
   - type: BypassSkillChecks
   - type: SeeNewPlayers
   - type: TacticalMapUser
-    marines: true
-    xenos: true
+    visibleLayers: [Marines, Xenos, FactionSurvivor, FactionWeYa, FactionTSE, FactionRoyalMarines, FactionSPP, FactionHalcyon]
     liveUpdate: true
-  
+    # CCM14-start
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 12
+    baseWalkSpeed: 36
+    # CCM14-end
 
 - type: entity
   abstract: true

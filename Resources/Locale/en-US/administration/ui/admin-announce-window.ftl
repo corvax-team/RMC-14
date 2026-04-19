@@ -1,11 +1,15 @@
 admin-announce-title = Make Announcement
 admin-announce-announcement-placeholder = Announcement text...
 admin-announce-announcer-placeholder = Announcer
-admin-announce-announcer-default = Central Command
+admin-announce-announcer-default = The United Nations
 admin-announce-button = Announce
 admin-announce-type-station = Station
 admin-announce-type-server = Server
 admin-announce-keep-open = Keep open
+admin-announce-color-placeholder = Color (HEX)
+admin-announce-sound-placeholder = Audio Path
+admin-announce-sender-placeholder = Signature (Sent by...)
+admin-announce-sender-default = UNMC High Command
 
 cmd-announceui-desc = Opens the announcement UI.
 cmd-announceui-help = Usage: announceui

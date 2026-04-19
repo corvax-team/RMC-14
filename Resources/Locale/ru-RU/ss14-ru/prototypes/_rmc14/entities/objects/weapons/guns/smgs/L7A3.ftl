@@ -1,0 +1,10 @@
+ent-RMCWeaponSMGL7A3 = пистолет-пулемёт L7A3
+    .desc = Лёгкий, надёжный и точный ПП, состоящий на вооружении Империи Миртана. Создан с применением блюспейс-технологий для ускорения пуль. Идеально подходит для боя в замкнутом пространстве: при штурме ульев или зачистке пещер.
+    .suffix = PvE, Снаряжен
+ent-RMCMagazineSMGL7A3SquashHead = магазин L7A3 (9 мм SH)
+    .desc = Магазин с деформирующимися патронами (Squash-Head) калибра 9 мм для пистолета-пулемёта L7A3.
+    .suffix = SH
+ent-RMCCartridgeSMG9mmSquashHead = патрон (9 мм SH)
+    .desc = Деформирующийся патрон (Squash-Head) калибра 9 мм.
+ent-RMCBulletSMG9mmSquashHead = пуля (9 мм SH)
+    .desc = { ent-CMBulletBase.desc }

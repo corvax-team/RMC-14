@@ -1,11 +1,16 @@
 - type: job
-  parent: RMCJobSyntheticColony
+  parent: RMCSyntheticColony
   id: RMCSyntheticColonyHybrisaExecBodyguard
   startingGear: RMCGearSyntheticColonistHybrisaExecBodyguard
-  spawnMenuRoleName: Executive Bodyguard (Hybrisa Survivor)
+  spawnMenuRoleName: Executive Bodyguard Synth (Hybrisa Survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillCqc: 3
@@ -18,7 +23,7 @@
         RMCSkillResearch: 1
         RMCSkillMeleeWeapons: 2
         RMCSkillPilot: 2
-        RMCSkillPolice: 2
+        RMCSkillPolice: 0 # RMC14 Survivors do not have police skill.
         RMCSkillFireman: 3
         RMCSkillPowerLoader: 2
         RMCSkillVehicles: 2
@@ -56,7 +61,7 @@
       preset: RMCSurvivorPresetHybrisaSynthExecBodyguard
     - type: Synth
       generation: rmc-species-synth-generation-second
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
 
 - type: startingGear
   parent: RMCGearSyntheticColonistBase
@@ -82,3 +87,5 @@
       eyes:
       - CMGlassesSecurity
       - RMCGlassesSecurityBlue
+
+

@@ -1,0 +1,12 @@
+ent-RMCSkillPresetParamarine = Стрелок Драккара
+    .desc = { "" }
+ent-RMCSkillPresetParaPilot = Пилот Драккара
+    .desc = { ent-RMCSkillPresetParamarine.desc }
+ent-RMCSkillPresetParaEngineer = Инженер Драккара
+    .desc = { ent-RMCSkillPresetParamarine.desc }
+ent-RMCSkillPresetParaMedic = Медик Драккара
+    .desc = { ent-RMCSkillPresetParamarine.desc }
+ent-RMCSkillPresetParaLeader = Лидер отряда Драккара
+    .desc = { ent-RMCSkillPresetParamarine.desc }
+ent-RMCSkillPresetParaSynth = Синтетик Драккара
+    .desc = { "" }

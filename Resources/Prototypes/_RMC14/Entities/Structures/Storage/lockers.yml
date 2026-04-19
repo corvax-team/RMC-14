@@ -5,6 +5,7 @@
   name: secure locker
   description: It's an immobile card-locked storage unit.
   components:
+  - type: RMCVehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/standard.rsi
     layers:
@@ -33,6 +34,18 @@
   - type: Lock
   - type: XenoCrusherChargable
     instantDestroy: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.48,0.25,0.48"
+        density: 75
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable
 
 - type: entity
   parent: CMLockerBase

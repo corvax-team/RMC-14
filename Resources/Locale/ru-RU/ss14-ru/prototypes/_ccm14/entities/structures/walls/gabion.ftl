@@ -1,4 +1,4 @@
-ent-CCMBaseGabion = gabion
+ent-CCMBaseGabion = габион
     .desc = { ent-CMBaseStructure.desc }
 ent-CCMGabion = габион
     .desc = Быстровозводимое укрепление, заполненное песком или землей.

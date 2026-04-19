@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._CCM.CommunicationsConsole;
+namespace Content.Shared._CCM.CommunicationsConsole.ERT;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class CCMERTCrashMarkerComponent : Component

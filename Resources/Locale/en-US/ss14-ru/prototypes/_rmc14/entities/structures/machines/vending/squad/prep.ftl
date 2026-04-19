@@ -6,5 +6,5 @@ ent-ColMarTechMunitions = ColMarTech automated munition squad vendor
     .desc = An automated supply rack hooked up to a small storage of various ammunition types. Can be accessed by any Marine Rifleman.
 ent-ColMarTechUtilities = ColMarTech automated utilities squad vendor
     .desc = An automated supply rack hooked up to a small storage of various utilities and tools. Can be accessed by any Marine Rifleman.
-ent-CMVendorAttachments = Aegis Armaments squad attachments vendor
+ent-CMVendorAttachments = AEGIS Armaments squad attachments vendor
     .desc = An automated supply rack hooked up to a small storage of weapons attachments. Can be accessed by any Marine Rifleman.

@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorLV624Engineer = survivor icb spawn point
+ent-RMCSpawnPointSurvivorLV624Engineer = спавнер выжившего инженера
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetLV624Engineer = LV624Engineer colonist preset
+    .suffix = LV-624
+ent-RMCGearSurvivorPresetLV624Engineer = пресет колониста-инженера LV-624
     .desc = { ent-RMCSurvivorPresetEngineer.desc }

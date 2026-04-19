@@ -1,2 +1,2 @@
-ent-RMCSurvivorPresetHybrisaSynthDetective = survivor synth hybrisa detective colonist preset
+ent-RMCSurvivorPresetHybrisaSynthDetective = пресет синтетика-детектива Гибриса
     .desc = { "" }

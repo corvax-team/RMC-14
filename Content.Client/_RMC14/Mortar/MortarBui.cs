@@ -5,12 +5,6 @@ using Content.Client.GameTicking.Managers;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-// CCM start
-using Robust.Client.UserInterface.CustomControls;
-using Robust.Shared.Maths;
-using Robust.Shared.Timing;
-using System.Numerics;
-// CCM end
 
 namespace Content.Client._RMC14.Mortar;
 
@@ -18,12 +12,6 @@ namespace Content.Client._RMC14.Mortar;
 public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     private MortarWindow? _window;
-
-    // CCM start
-    private static readonly TimeSpan MortarUnlockTime = TimeSpan.FromMinutes(25);
-
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly IEntityManager _entMan = default!;
 
     protected override void Open()
     {
@@ -37,7 +25,7 @@ public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         {
             var remaining = MortarUnlockTime - timeSinceStart;
             var minutesLeft = Math.Ceiling(remaining.TotalMinutes);
-            ShowNotReadyWindow($"Пока туман не развеется, система управления неактивна. Подождите ещё {minutesLeft} минут.");
+            ShowNotReadyWindow($"пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ {minutesLeft} пїЅпїЅпїЅпїЅпїЅ.");
             Close();
             return;
         }
@@ -83,7 +71,7 @@ public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
     {
         var popup = new DefaultCMWindow
         {
-            Title = "Миномёт",
+            Title = "пїЅпїЅпїЅпїЅпїЅпїЅ",
             MinSize = new Vector2(300, 100)
         };
 

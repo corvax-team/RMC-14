@@ -1,23 +1,28 @@
 - type: job
-  parent: CMJobBase
+  parent: RMCJobMarineBase
   id: CMMilitaryPolice
   name: cm-job-name-militarypolice
   description: cm-job-description-militarypolice
+  newToJobInfo: rmc-new-to-job-military-police
   playTimeTracker: CMJobMilitaryPolice
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
-    time: 10800 # 3 hours. CCM14 role timers. RMC: 72000 # 20 hours
+    time: 36000 # 10 hours. CCM14 role timers. RMC: 72000 # 20 hours
   ranks:
-    RMCRankStaffSergeant:
+    RMCRankMP4:
     - !type:RoleTimeRequirement
       role: CMJobMilitaryPolice
-      time: 252000 # 70 hours
-    RMCRankSergeant:
+      time: 270000 # 75 hours CCM14
+    RMCRankMP3:
     - !type:RoleTimeRequirement
       role: CMJobMilitaryPolice
-      time: 36000 # 10 hours
-    RMCRankCorporal: []
+      time: 90000 # 25 hours CCM14
+    RMCRankMP2:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryPolice
+      time: 36000 # 10 hours CCM14
+    RMCRankMP1: []
   weight: 5
   startingGear: CMGearMilitaryPolice
   icon: "CMJobIconMilitaryPolice"
@@ -30,6 +35,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetMarine]
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillCqc: 2

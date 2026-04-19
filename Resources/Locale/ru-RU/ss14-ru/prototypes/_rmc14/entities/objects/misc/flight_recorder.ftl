@@ -1,4 +1,4 @@
-ent-RMCFlightRecorderProp = FR-112 flight recorder
-    .desc = A small red box that contains flight data from a dropship while it's on mission. Usually referred to as the black box, although this one comes in bloody red.
-ent-RMCFlightRecorderColonyProp = CIR-60 colony information recorder
-    .desc = A small red box that records colony announcements, colonist flatlines and other key readouts. Usually refered to the black box, although this one comes in bloody red.
+ent-RMCFlightRecorderProp = бортовой самописец FR-112
+    .desc = Небольшой красный ящик, содержащий данные о полёте десантного корабля во время выполнения задания. Обычно его называют «чёрным ящиком», хотя этот выкрашен в кроваво-красный.
+ent-RMCFlightRecorderColonyProp = регистратор данных колонии CIR-60
+    .desc = Небольшой красный ящик, записывающий объявления колонии, сигналы о смерти колонистов и другие ключевые показатели. Обычно его называют «чёрным ящиком», хотя этот выкрашен в кроваво-красный.

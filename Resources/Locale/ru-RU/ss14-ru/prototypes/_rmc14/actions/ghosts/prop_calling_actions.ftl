@@ -1,4 +1,4 @@
-ent-ActionTogglePropCalling = Toggle Prop Calling
-    .desc = Join or leave the prop calling list.
-ent-ActionCallProps = Call Props
-    .desc = Calls over all entities who have signed up for prop calling.
+ent-ActionTogglePropCalling = Режим отклика
+    .desc = Включить или выключить возможность подавать сигнал по команде.
+ent-ActionCallProps = Подать сигнал пропам
+    .desc = Заставляет всех игроков, превращенных в объекты, подать звуковой или визуальный сигнал.

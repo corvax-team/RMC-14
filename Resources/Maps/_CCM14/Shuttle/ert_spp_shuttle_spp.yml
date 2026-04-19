@@ -552,28 +552,28 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -0.5,-4.5
       parent: 2
-- proto: RMCRandomHumanoidSPPEngineerHostile
+- proto: RMCRandomHumanoidSPPEngineerFriendly
   entities:
   - uid: 63
     components:
     - type: Transform
       pos: -1.5,0.5
       parent: 2
-- proto: RMCRandomHumanoidSPPLeaderHostile
+- proto: RMCRandomHumanoidSPPLeaderFriendly
   entities:
   - uid: 64
     components:
     - type: Transform
       pos: 0.5,3.5
       parent: 2
-- proto: RMCRandomHumanoidSPPMedicHostile
+- proto: RMCRandomHumanoidSPPMedicFriendly
   entities:
   - uid: 65
     components:
     - type: Transform
       pos: -1.5,1.5
       parent: 2
-- proto: RMCRandomHumanoidSPPRiflemanHostile
+- proto: RMCRandomHumanoidSPPRiflemanFriendly
   entities:
   - uid: 66
     components:
@@ -590,7 +590,7 @@ entities:
     - type: Transform
       pos: 2.5,-0.5
       parent: 2
-- proto: RMCRandomHumanoidSPPSpecialistHostile
+- proto: RMCRandomHumanoidSPPSpecialistFriendly
   entities:
   - uid: 69
     components:

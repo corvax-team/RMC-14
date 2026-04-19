@@ -1,2 +1,2 @@
-ent-RMCWeaponPistolHG45Aguila = HG-45 'Aguila' pistol
-    .desc = A version of the MK-45 sold on the civilian firearms market, commonly purchased by newly commissioned officers in a desperate bid to impress their comrades. Must be cocked after loading a fresh magazine, chambered in .45 Automagnum.
+ent-RMCWeaponPistolHG45Aguila = Пистолет HG-45 'Агвила'
+    .desc = Версия MK-45, продаваемая на гражданском рынке огнестрельного оружия, обычно приобретается офицерами-новичками в отчаянной попытке произвести впечатление на своих товарищей. Взводится после загрузки нового магазина, заряжается патронами 45-го калибра.

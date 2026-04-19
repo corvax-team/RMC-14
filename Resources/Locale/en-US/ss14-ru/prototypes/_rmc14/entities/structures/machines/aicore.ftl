@@ -1,4 +1,4 @@
-ent-RMCAICore = ARES v3.2.
+ent-RMCAICore = ARES v3.2
     .desc = This is the artificial intelligence system for the UNS Almayer. Like many other military-grade AI systems, this one was manufactured by We-Ya.
 ent-RMCAICoreProcessor = ARES Processor
     .desc = An external processor for ARES, used to process vast amounts of information.
@@ -16,5 +16,5 @@ ent-RMCAIConsoleARES = ARES Interface
     .desc = A console built to interface with ARES, allowing for 1:1 communication.
 ent-RMCAIConsoleInterface = AI interface console
     .desc = A large, bulky computer intended to allow the user to interface with the ship's AI.
-ent-RMCAIConsoleHERMES = HERMES Maintenance Controller.
+ent-RMCAIConsoleHERMES = HERMES Maintenance Controller
     .desc = A console built to facilitate Average Joes and their operation, allowing for simple allocation of resources.

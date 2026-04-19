@@ -1,0 +1,16 @@
+ent-RMCSkillPresetPVEPlatoonCommander = Platoon Commander
+    .desc = { "" }
+ent-RMCSkillPresetPVESectionSergeant = Section Sergeant
+    .desc = { "" }
+ent-RMCSkillPresetPVESquadLeader = Squad Leader
+    .desc = { "" }
+ent-RMCSkillPresetPVECorpsman = Corpsman
+    .desc = { "" }
+ent-RMCSkillPresetPVESGO = Smartgun Operator
+    .desc = { "" }
+ent-RMCSkillPresetPVERifleman = Rifleman
+    .desc = { "" }
+ent-RMCSkillPresetPVECLFDoctor = CLF Doctor
+    .desc = { ent-RMCSkillPresetPVECorpsman.desc }
+ent-RMCSkillPresetPVEForeconRTO = Forecon RTO
+    .desc = { ent-RMCSkillPresetPVERifleman.desc }

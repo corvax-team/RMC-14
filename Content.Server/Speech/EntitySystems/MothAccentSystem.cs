@@ -11,6 +11,18 @@ public sealed class MothAccentSystem : EntitySystem
     private static readonly Regex RegexLowerBuzz = new Regex("z{1,3}");
     private static readonly Regex RegexUpperBuzz = new Regex("Z{1,3}");
 
+    // CCM-Localization-Start
+    private static readonly Regex RegexRusLowerZh = new("ж+", RegexOptions.Compiled);
+    private static readonly Regex RegexRusUpperZh = new("Ж+", RegexOptions.Compiled);
+    private static readonly Regex RegexRusLowerZ = new("з+", RegexOptions.Compiled);
+    private static readonly Regex RegexRusUpperZ = new("З+", RegexOptions.Compiled);
+
+    private static readonly string[] ZhVariants = ["жж", "жжж"];
+    private static readonly string[] ZhUpperVariants = ["ЖЖ", "ЖЖЖ"];
+    private static readonly string[] ZzzVariants = ["зз", "ззз"];
+    private static readonly string[] ZzzUpperVariants = ["ЗЗ", "ЗЗЗ"];
+    // CCM-Localization-End
+
     public override void Initialize()
     {
         base.Initialize();
@@ -28,29 +40,13 @@ public sealed class MothAccentSystem : EntitySystem
 
         // CCM-Localization-Start
         // ж => жжж
-        message = Regex.Replace(
-            message,
-            "ж+",
-            _random.Pick(new List<string>() { "жж", "жжж" })
-        );
+        message = RegexRusLowerZh.Replace(message, _ => _random.Pick(ZhVariants));
         // Ж => ЖЖЖ
-        message = Regex.Replace(
-            message,
-            "Ж+",
-            _random.Pick(new List<string>() { "ЖЖ", "ЖЖЖ" })
-        );
-        // з => ссс
-        message = Regex.Replace(
-            message,
-            "з+",
-            _random.Pick(new List<string>() { "зз", "ззз" })
-        );
-        // З => CCC
-        message = Regex.Replace(
-            message,
-            "З+",
-            _random.Pick(new List<string>() { "ЗЗ", "ЗЗЗ" })
-        );
+        message = RegexRusUpperZh.Replace(message, _ => _random.Pick(ZhUpperVariants));
+        // з => ззз
+        message = RegexRusLowerZ.Replace(message, _ => _random.Pick(ZzzVariants));
+        // З => ЗЗЗ
+        message = RegexRusUpperZ.Replace(message, _ => _random.Pick(ZzzUpperVariants));
         // CCM-Localization-End
 
         args.Message = message;

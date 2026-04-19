@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorHybrisaMaterialReprocessingTechnician = hybrisa material reprocessing technician spawn point
+ent-RMCSpawnPointSurvivorHybrisaMaterialReprocessingTechnician = спавнер выжившего техника по переработке материалов
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetHybrisaMaterialReprocessingTechnician = hybrisa material reprocessing technician preset
+    .suffix = Гибриса
+ent-RMCGearSurvivorPresetHybrisaMaterialReprocessingTechnician = пресет техника по переработке материалов Гибриса
     .desc = { ent-RMCSurvivorPresetCivilian.desc }

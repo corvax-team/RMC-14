@@ -1,3 +1,3 @@
-ent-RMCSpawnPointPMCGunnerPVE = weya pmc gunner spawn point
+ent-RMCSpawnPointPMCGunnerPVE = точка появления пулемётчика ЧВК Vitezstvi
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }

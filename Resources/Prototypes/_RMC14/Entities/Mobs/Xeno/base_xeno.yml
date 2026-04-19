@@ -33,6 +33,7 @@
   abstract: true
   save: false
   components: # TODO RMC14 camera recoil from large explosions? check 13
+  - type: ZombieImmune
   - type: BlockEntityStorage
     whitelist:
       components:
@@ -139,48 +140,6 @@
     - map: [ "enum.RMCShieldVisuals.Base" ]
       sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
-    - map: [ "focused" ]
-      sprite: _RMC14/Interface/xeno_hud.rsi
-      state: hudeye
-      visible: false
-    - map: [ "targetedDirection" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_direction
-      visible: false
-    - map: [ "targetedDirectionIntense" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_intense_direction
-      visible: false
-  - type: GenericVisualizer
-    visuals:
-      enum.TargetedVisuals.Targeted:
-        targeted:
-          None:
-            visible: false
-          Spotted:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: spotter_lockon
-            visible: true
-          Targeted:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: sniper_lockon
-            visible: true
-          TargetedIntense:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: sniper_lockon_intense
-            visible: true
-      enum.TargetedVisuals.TargetedDirection:
-        targetedDirection:
-          True: { visible: true}
-          False: { visible: false}
-      enum.TargetedVisuals.TargetedDirectionIntense:
-        targetedDirectionIntense:
-          True: { visible: true }
-          False: { visible: false }
-      enum.FocusedVisuals.Focused:
-        focused:
-          True: { visible: true}
-          False: { visible: false}
   - type: Spottable
   - type: Physics
     bodyType: KinematicController
@@ -216,6 +175,7 @@
   - type: Xeno
   - type: XenoRegen
   - type: XenoStateVisuals
+  - type: XenoPing
   - type: UserInterface
     interfaces:
       enum.CMSurgeryUIKey.Key:
@@ -236,6 +196,12 @@
         type: XenoFruitChooseBui
       enum.XenoWordQueenUI.Key:
         type: XenoWordQueenBui
+      enum.HiveTeamUIKey.Key:
+        type: HiveTeamBui
+      enum.HiveLeaderSquadUIKey.Key:
+        type: HiveLeaderSquadBui
+      enum.XenoResinMarkUIKey.Key:
+        type: XenoResinMarkBui
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
       enum.XenoReserveParasiteChangeUI.Key:
@@ -349,13 +315,14 @@
     - HiveLeader
     - Tunnel
     - HiveCore
+  - type: ResinMarkerTracker
   - type: RequireProjectileTarget
     active: false
   - type: TacticalMapTracked
   - type: TacMapXenoAlert
   - type: TacticalMapUser
     actionId: RMCActionOpenTacticalMapXeno
-    xenos: true
+    layerSets: [TacticalMapSetXeno]
   - type: TacticalMapLiveUpdateOnOvi
     enabled: true
   - type: MotionDetectorTracked
@@ -366,7 +333,8 @@
     background:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_xeno
-  - type: XenoMapTracked
+  - type: TacticalMapLayerTracked
+    layers: [Xenos]
   - type: Evasion
   - type: RMCWeaponAccuracy # This is so projectiles fired by xenos get a correctly-generated seed for RNG.
   - type: StunOnExplosionReceived
@@ -560,6 +528,6 @@
 
 - type: speechVerb
   id: Xeno
-  name: chat-speech-verb-name-default
+  name: chat-speech-verb-name-xeno # CCM14
   speechVerbStrings:
-  - hisses
+  - chat-speech-verb-xeno-1 # CCM14

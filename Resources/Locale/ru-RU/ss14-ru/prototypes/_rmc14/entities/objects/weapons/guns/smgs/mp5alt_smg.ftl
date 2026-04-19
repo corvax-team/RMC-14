@@ -1,3 +1,3 @@
-ent-RMCWeaponSMGMP5Alt = MP5A5 submachinegun
-    .desc = A German design, this was one of the most widely used submachine guns in the world. Modernized design for limited use by colonial security and Office of the Colony Marshals.
-    .suffix = Filled
+ent-RMCWeaponSMGMP5Alt = MP5A5
+    .desc = Разработанный на Земле, этот пистолет-пулемёт когда-то был одним из самых распространённых в мире. Данная модернизированная версия предназначена для ограниченного использования службами безопасности колоний и Бюро колониальных маршалов.
+    .suffix = Заполненный

@@ -16,7 +16,7 @@
     jobs:
     - CMVehicleCrewman
     sections:
-    - name: Primary Firearms
+    - name: Основное вооружение # CCM14
       entries:
       - id: WeaponRifleM4SPR
         amount: 2
@@ -26,7 +26,7 @@
         amount: 2
       - id: RMCWeaponRifleM54C
         amount: 2
-    - name: Primary Ammunition
+    - name: Основные боеприпасы # CCM14
       entries:
       - id: RMCBoxShotgunBuckshot
         amount: 6
@@ -40,7 +40,7 @@
         amount: 12
       - id: CMMagazineRifleM54C
         amount: 12
-    - name: Sidearms
+    - name: Пистолеты # CCM14
       entries:
       - id: RMCWeaponPistolM77
         amount: 2
@@ -52,7 +52,7 @@
         amount: 2
       - id: RMCWeaponPistolM82F
         amount: 2
-    - name: Sidearm Ammunition
+    - name: Вторичные боеприпасы # CCM14
       entries:
       - id: CMMagazinePistolM77AP
         amount: 10
@@ -66,7 +66,7 @@
         amount: 8
       - id: RMCMagazinePistolM13
         amount: 10
-    - name: Attachments
+    - name: Обвесы # CCM14
       entries:
       - id: RMCAttachmentRailFlashlight
         amount: 4
@@ -74,7 +74,7 @@
         amount: 4
       - id: RMCAttachmentMagneticHarness
         amount: 2
-    - name: Utilities
+    - name: Утилиты # CCM14
       entries:
       - id: RMCFlashlight
         amount: 2
@@ -103,7 +103,7 @@
     jobs:
     - CMVehicleCrewman
     sections:
-    - name: Standard Equipment
+    - name: Стандартное снаряжение # CCM14
       takeAll: CMEquipment
       entries:
       - id: CMHandsInsulated
@@ -112,12 +112,12 @@
       - id: RMCVisorMedical
       - id: RMCWeldingKit
       - id: CMMRE
-    - name: Personal Sidearm
+    - name: Личное оружие # CCM14
       choices: { CMSidearm: 1 }
       entries:
       - id: RMCWeaponPistolM77
       - id: RMCMK80
-    - name: Belts
+    - name: Пояса # CCM14
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltUtilityGeneral
@@ -130,20 +130,20 @@
       - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
-    - name: Pouches
+    - name: Подсумки # CCM14
       choices: { CMPouches: 2 }
       entries:
       - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
+        name: подсумок первой помощи (инъекторы) # CCM14
         recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment)
+        name: подсумок первой помощи (бинт, мазь) # CCM14
         recommended: true
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
+        name: подсумок первой помощи (таблетки) # CCM14
         recommended: true
       - id: RMCPouchFlareFilled
-        name: flare pouch (Full)
+        name: подсумок для фальшфейеров (Полный) # CCM14
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazineLarge
       - id: RMCPouchMagazinePistolLarge
@@ -151,7 +151,7 @@
       - id: RMCPouchPistol
         #- id: RMCPouchSling # TODO RMC14 Sling Pouch
       - id: RMCPouchToolsFill
-    - name: Accessories
+    - name: Аксессуары # CCM14
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBrown
@@ -163,13 +163,13 @@
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
-    - name: Masks
+    - name: Маски # CCM14
       choices: { CMMasks: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
       - id: RMCMaskRebreather
-    - name: Attachments
+    - name: Обвесы # CCM14
       entries:
       - id: RMCAttachmentAngledGrip
         points: 10
@@ -197,7 +197,7 @@
         points: 10
       - id: RMCAttachmentVerticalGrip
         points: 10
-    - name: Ammunition
+    - name: Боеприпасы # CCM14
       entries:
       - id: CMMagazineRifleM4SPRAP
         points: 10
@@ -215,12 +215,12 @@
         points: 10
       - id: RMCSpeedLoaderM44
         points: 10
-    - name: Utilities
+    - name: Утилиты # CCM14
       entries:
       - id: RMCBinoculars
         points: 10
       - id: CMFireExtinguisherPortable
-        name: Fire Extinguisher (Portable)
+#        name: Fire Extinguisher (Portable)
         points: 5
       - id: RMCPouchFuelTank
         points: 5

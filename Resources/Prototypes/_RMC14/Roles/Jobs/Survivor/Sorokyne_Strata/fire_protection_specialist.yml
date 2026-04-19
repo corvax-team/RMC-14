@@ -9,6 +9,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -37,6 +42,7 @@
     shoes: RMCBootsSPP
     gloves: RMCHandsVeteranSPP
     back: RMCSatchelLightpack
+    mask: RMCMaskGasSPP
     head: RMCArmorHelmetSPPFirefighter
     outerClothing: RMCArmorSPPFirefighter
     ears: RMCHeadsetDistressSPP
@@ -58,7 +64,7 @@
       state: surv
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
   id: RMCGearSurvivorPresetFireProtectionSpecialist
   name: fire protection specialist preset
   categories: [ HideSpawnMenu ]
@@ -67,5 +73,3 @@
     randomOutfits:
     - [ RMCFireAxe ]
     - [ CMFireExtinguisherPortable ]
-
-

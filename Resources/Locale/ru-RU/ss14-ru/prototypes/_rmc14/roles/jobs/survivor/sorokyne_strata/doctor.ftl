@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorMoHDoctor = ministry of health doctor spawn point
+ent-RMCSpawnPointSurvivorMoHDoctor = спавнер выжившего врача министерства здравоохранения
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetMoHDoctor = ministry of health doctor preset
+    .suffix = Сорокина Страта
+ent-RMCGearSurvivorPresetMoHDoctor = пресет выжившего врача министерства здравоохранения Сорокиной Страты
     .desc = { ent-RMCSurvivorPresetDoctor.desc }

@@ -1,4 +1,6 @@
-ent-RMCUtilityBase = utility accessory
-    .desc = An abstract utility accessory.
-ent-RMCStethoscope = stethoscope
-    .desc = An outdated, but still useful medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing.
+ent-RMCUtilityBase = утилита
+    .desc = Утилитный аксессуар.
+ent-RMCStethoscope = стетоскоп
+    .desc = Устаревшее, но не менее полезное приспособление для прослушивания тела человека. Так же придает вам профессиональный вид.
+ent-RMCHorizonFlower = цветок голубого горизонта
+    .desc = Прекрасный синий цветок, символизирующий веру и воспоминание.

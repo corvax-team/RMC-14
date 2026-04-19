@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorFireProtectionSpecialist = fire protection specialist spawn point
+ent-RMCSpawnPointSurvivorFireProtectionSpecialist = спавнер выжившего специалиста по пожарной безопасности
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetFireProtectionSpecialist = fire protection specialist preset
-    .desc = { ent-RMCSurvivorPresetCivilian.desc }
+    .suffix = Сорокина Страта
+ent-RMCGearSurvivorPresetFireProtectionSpecialist = пресет выжившего специалиста по пожарной безопасности Сорокиной Страты
+    .desc = { ent-RMCSurvivorPresetCivilianRareItem.desc }

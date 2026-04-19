@@ -1,5 +1,5 @@
-ent-RMCRandomHumanoidPMCSniper = снайпер отряда ЧВК роль призрака
+ent-RMCRandomHumanoidPMCSniper = снайпер отряда ЧВК Vitezstvi роль призрака
     .suffix = Спавнер, Игрок
     .desc = { "" }
-ent-RMCSpawnPointPMCSniper = weya pmc sniper spawn point
+ent-RMCSpawnPointPMCSniper = Точка спавна Снайпера ЧВК Vitezstvi
     .desc = { ent-CMSpawnPointJobBase.desc }

@@ -1,5 +1,5 @@
-ent-RMCBaseRockNonCollide = rocks
-    .desc = A solidified collection of local minerals. When melted, becomes a substance best known as lava.
+ent-RMCBaseRockNonCollide = камни
+    .desc = Застывшая смесь местных минералов. При плавлении превращается в субстанцию, более известную как лава.
     .suffix = RMCBaseRockNonCollide
 ent-RMCBaseRockNonCollideStrata = { ent-RMCBaseRockNonCollide }
     .desc = { ent-RMCBaseRockNonCollide.desc }

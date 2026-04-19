@@ -1,4 +1,4 @@
-ent-CCMMarinePreparedMealPastaWithMeat = UNMC prepared meal (pasta with meat)
-    .desc = Hello VIT.
-ent-CCMMarinePreparedMealVegetableSalad = UNMC prepared meal (vegetable salad)
-    .desc = Vegetable salad with garlic croutons.
+ent-CCMMarinePreparedMealPastaWithMeat = Готовая пища ККМП (Паста с фрикадельками)
+    .desc = Привет, VIT.
+ent-CCMMarinePreparedMealVegetableSalad = Готовая пища ККМП (Овощной салад)
+    .desc = Овощной салат с чесночными гренками.

@@ -1,5 +1,5 @@
-ent-RMCConcreteStatue = concrete statue
-    .desc = A decorative statue with the Weston-Yamada 'Wings' adorned on it, A corporate brutalist piece of art.
+ent-RMCConcreteStatue = бетонная статуя
+    .desc = Декоративная статуэтка с «крыльями» компании — фирменное произведение искусства в стиле брутализма.
 ent-RMCConcreteStatueOffset = { ent-RMCConcreteStatue }
-    .suffix = Offset
+    .suffix = Смещённая
     .desc = { ent-RMCConcreteStatue.desc }

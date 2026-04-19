@@ -8,3 +8,6 @@ ent-RMCOuterClothingExternalWebbingBrown = { ent-RMCOuterClothingExternalWebbing
 ent-RMCOuterClothingExternalWebbingBlack = { ent-RMCOuterClothingExternalWebbing }
     .suffix = Black
     .desc = { ent-RMCOuterClothingExternalWebbing.desc }
+ent-RMCOuterClothingExternalWebbingSPPSurvivor = { ent-RMCOuterClothingExternalWebbing }
+    .suffix = SPP, Survivor, Filled
+    .desc = { ent-RMCOuterClothingExternalWebbing.desc }

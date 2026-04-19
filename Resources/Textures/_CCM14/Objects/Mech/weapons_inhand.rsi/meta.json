@@ -1,0 +1,53 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright" : "Made for Corvax RMC-14",
+    "size": {
+        "x": 96,
+        "y": 96
+    },
+    "states": [
+        {
+            "name": "shotgun_right"
+        },
+        {
+            "name": "smg_left"
+        },
+        {
+            "name": "smg_right"
+        },
+        {
+            "name": "firetow_right"
+        },
+        {
+            "name": "assaultrifle_left"
+        },
+        {
+            "name": "assaultrifle_right"
+        },
+        {
+            "name": "firetow_left"
+        },
+        {
+            "name": "flamer_left"
+        },
+        {
+            "name": "flamer_right"
+        },
+        {
+            "name": "rocketlauncher_left"
+        },
+        {
+            "name": "rocketlauncher_right"
+        },
+        {
+            "name": "rpg_left"
+        },
+        {
+            "name": "rpg_right"
+        },
+        {
+            "name": "shotgun_left"
+        }
+    ]
+}

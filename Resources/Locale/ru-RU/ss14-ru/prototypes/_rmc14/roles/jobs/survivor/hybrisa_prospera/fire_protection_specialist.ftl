@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorHybrisaFireProtectionSpecialist = hybrisa fire protection specialist spawn point
+ent-RMCSpawnPointSurvivorHybrisaFireProtectionSpecialist = спавнер выжившего специалиста по пожарной безопасности
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetHybrisaFireProtectionSpecialist = hybrisa fire protection specialist preset
+    .suffix = Гибриса
+ent-RMCGearSurvivorPresetHybrisaFireProtectionSpecialist = пресет специалиста по пожарной безопасности Гибриса
     .desc = { ent-RMCSurvivorPresetCivilian.desc }

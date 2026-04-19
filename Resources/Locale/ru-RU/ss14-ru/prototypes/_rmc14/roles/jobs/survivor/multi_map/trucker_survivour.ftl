@@ -1,6 +1,8 @@
-ent-RMCSpawnPointSurvivorTrucker = survivor trucker spawn point
+ent-RMCSpawnPointSurvivorTrucker = спавнер выжившего дальнобойщика
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetTrucker = trucker colonist preset
+    .suffix = Любые карты
+ent-RMCSurvivorPresetTrucker = пресет колониста-дальнобойщика
     .desc = { ent-RMCSurvivorPresetCivilian.desc }
-ent-RMCRandomHumanoidSurvivorTrucker = trucker colonist ghost role
+ent-RMCRandomHumanoidSurvivorTrucker = гост-роль колониста-дальнобойщика
     .desc = { ent-MarkerBase.desc }
+    .suffix = Любые карты

@@ -1,7 +1,7 @@
-ent-RMCRandomHumanoidMarineRaiderLead = DEATHSQUAD marine raider team leader ghost role
-    .suffix = Role
+ent-RMCRandomHumanoidMarineRaiderLead = роль призрака: лидер рейдеров (ОТРЯД СМЕРТИ)
+    .suffix = Роль
     .desc = { "" }
-ent-RMCDogtagMarineRaiderLeader = Marine Raider Team Leader's dogtags
+ent-RMCDogtagMarineRaiderLeader = жетон лидера рейдеров
     .desc = { ent-CMIDCardStandardDogtag.desc }
 ent-RMCDogtagMarineRaiderLeaderHidden = { ent-RMCIDCardStandardDogtagHidden }
     .desc = { ent-RMCIDCardStandardDogtagHidden.desc }

@@ -3,6 +3,7 @@ using Content.Client._RMC14.LinkAccount;
 using Content.Client.Options.UI;
 using Content.Client.UserInterface.Screens;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.NightVision;
 using Content.Shared.CCVar;
 using Content.Shared.HUD;
 using Content.Shared.Localizations;
@@ -83,6 +84,13 @@ public sealed partial class MiscTab : Control
             new("rmca", Loc.GetString("ui-options-lobby-background-preset-rmca")),
         };
 
+        var xenoNightVisionEntries = new List<OptionDropDownCVar<int>.ValueOption>
+        {
+            new((int) NightVisionState.Off, Loc.GetString("rmc-ui-xeno-night-vision-default-off")),
+            new((int) NightVisionState.Half, Loc.GetString("rmc-ui-xeno-night-vision-default-half")),
+            new((int) NightVisionState.Full, Loc.GetString("rmc-ui-xeno-night-vision-default-full")),
+        };
+
         // Channel can be null in replays so.
         // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
         ShowOocPatronColor.Visible = _linkAccount.Tier != null;
@@ -109,6 +117,8 @@ public sealed partial class MiscTab : Control
         Control.AddOptionCheckBox(RMCCVars.RMCAutoPunctuate, RMCAutoPunctuate);
         Control.AddOptionCheckBox(RMCCVars.RMCAutoEjectMagazines, RMCAutoEjectMagazines);
         Control.AddOptionCheckBox(RMCCVars.RMCDamageYourself, RMCDamageYourself);
+        Control.AddOptionCheckBox(RMCCVars.RMCShowNewPlayerIcons, RMCShowNewPlayerIcons);
+        Control.AddOptionDropDown(RMCCVars.RMCXenoDefaultNightVision, RMCXenoNightVisionDefault, xenoNightVisionEntries);
 
         Control.Initialize();
     }

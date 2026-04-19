@@ -3,6 +3,7 @@
   id: CMRifleman
   name: cm-job-name-rifleman
   description: cm-job-description-rifleman
+  newToJobInfo: rmc-new-to-job-rifleman
   playTimeTracker: CMJobRifleman
   startingGear: CMGearRifleman
   dummyStartingGear: CMGearRiflemanEquipped
@@ -28,6 +29,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetMarine]
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillEndurance: 1

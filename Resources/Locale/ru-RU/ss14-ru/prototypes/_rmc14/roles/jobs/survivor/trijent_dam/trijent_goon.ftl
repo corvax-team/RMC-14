@@ -1,4 +1,2 @@
-ent-RMCSpawnPointSurvivorTrijentGoon = trijent goon spawn point
-    .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetTrijentGoon = trijent goon colonist preset
+ent-RMCGearSurvivorPresetTrijentGoon = пресет колониста: наёмник Trijent
     .desc = { ent-RMCSurvivorPresetSecurity.desc }

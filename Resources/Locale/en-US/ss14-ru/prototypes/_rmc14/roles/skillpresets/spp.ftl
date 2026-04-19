@@ -1,0 +1,10 @@
+ent-RMCSkillPresetSurvivorSPPPrivate = Survivor SPP Private
+    .desc = { ent-RMCSkillPresetSurvivor.desc }
+ent-RMCSkillPresetSurvivorSPPSapper = Survivor SPP Sapper
+    .desc = { ent-RMCSkillPresetSurvivorSPPPrivate.desc }
+ent-RMCSkillPresetSurvivorSPPMedic = Survivor SPP Medic
+    .desc = { ent-RMCSkillPresetSurvivorSPPPrivate.desc }
+ent-RMCSkillPresetSurvivorSPPSpecialist = Survivor SPP Specialist
+    .desc = { ent-RMCSkillPresetSurvivorSPPPrivate.desc }
+ent-RMCSkillPresetSurvivorSPPLeader = Survivor SPP Leader
+    .desc = { ent-RMCSkillPresetSurvivorSPPPrivate.desc }

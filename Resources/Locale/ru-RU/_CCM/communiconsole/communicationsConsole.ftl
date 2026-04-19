@@ -1,6 +1,6 @@
-communications-console-title = Communications Console
-communications-console-tittle-text = COMMUNICATIONS CONSOLE
-communications-console-choose-option = Choose an option:
-communications-console-status-text = Status:
-communications-console-status =  SYSTEM ACTIVE
-communications-console-button-ERTCall = Send Distress Beacon
+communications-console-title = Консоль коммуникации
+communications-console-tittle-text = КОНСОЛЬ КОММУНИКАЦИИ
+communications-console-choose-option = Выберите вариант:
+communications-console-status-text = Статус:
+communications-console-status = СИСТЕМА АКТИВНА
+communications-console-button-ERTCall = Отправить сигнал бедствия

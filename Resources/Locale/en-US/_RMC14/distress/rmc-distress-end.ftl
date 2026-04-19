@@ -1,2 +1,13 @@
 ﻿rmc-discord-round-notifications-started = Round #{$id} started: Operation "{$operation}" on "{$planet}" aboard "{$ship}".
-rmc-discord-round-notifications-end = Operation #{$id} "{$operation}" on "{$planet}" aboard "{$ship}" has ended. It lasted for {$hours} hours, {$minutes} minutes, and {$seconds} seconds.
+rmc-discord-round-notifications-end = Operation #{$id} "{$operation}" on "{$planet}" has ended with {$result}.
+rmc-discord-round-notifications-end-duration = It lasted for {$hours} hours, {$minutes} minutes, and {$seconds} seconds.
+rmc-discord-round-notifications-end-stats = Total deployed: {$marines} marines, {$xenos} xenomorphs, {$survivors} survivors.
+rmc-discord-round-notifications-end-hijack = Aboard "{$ship}": hijack {$hijack}.
+rmc-discord-round-notifications-hijack-yes = confirmed
+rmc-discord-round-notifications-hijack-no = not confirmed
+rmc-discord-round-notifications-major-marine = a major marine victory
+rmc-discord-round-notifications-minor-marine = a marine victory
+rmc-discord-round-notifications-major-xeno = a major xeno victory
+rmc-discord-round-notifications-minor-xeno = a xeno victory
+rmc-discord-round-notifications-all-died = all participants perishing
+rmc-discord-round-notifications-unknown-result = an unknown result

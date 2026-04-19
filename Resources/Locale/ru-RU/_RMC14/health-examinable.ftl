@@ -1,0 +1,8 @@
+rmc-health-examinable-Brute-25 = [color=red]На теле { $target } видны небольшие ушибы.[/color]
+rmc-health-examinable-Brute-50 = [color=crimson]На теле { $target } видны серьезные травмы и кровоподтеки![/color]
+rmc-health-examinable-Brute-75 = [color=crimson]Тело { $target } полностью покрыто глубокими ранами![/color]
+rmc-health-examinable-Burn-25 = [color=yellow]На теле { $target } видны небольшие ожоги.[/color]
+rmc-health-examinable-Burn-50 = [color=orange]На теле { $target } видны серьезные ожоги.[/color]
+rmc-health-examinable-Burn-75 = [color=orange]На теле { $target } видны тяжелые ожоги третьей степени![/color]
+rmc-health-examinable-Airloss-25 = [color=lightblue]Губы { $target } синеют.[/color]
+rmc-health-examinable-Airloss-75 = [color=lightblue]Лицо { $target } посинело.[/color]

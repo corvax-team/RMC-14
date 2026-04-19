@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorTrijentTrucker = trijent trucker spawn point
+ent-RMCSpawnPointSurvivorTrijentTrucker = спавнер выжившего дальнобойщика
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetTrijentTrucker = trijent trucker colonist preset
+    .suffix = Дамба Триджент
+ent-RMCGearSurvivorPresetTrijentTrucker = пресет выжившего дальнобойщика Дамбы Триджент
     .desc = { ent-RMCSurvivorPresetTrucker.desc }

@@ -1,4 +1,5 @@
 using Content.Shared.Access;
+using Content.Shared._RMC14.TacticalMap;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -40,6 +41,14 @@ public sealed class IdModificationConsoleIFFChangeBuiMsg(bool revoke)
 }
 
 [Serializable] [NetSerializable]
+public sealed class IdModificationConsoleTacMapLayerChangeBuiMsg(ProtoId<TacticalMapLayerPrototype> layer, bool revoke)
+    : BoundUserInterfaceMessage
+{
+    public readonly ProtoId<TacticalMapLayerPrototype> Layer = layer;
+    public readonly bool Revoke = revoke;
+}
+
+[Serializable] [NetSerializable]
 public sealed class IdModificationConsoleJobChangeBuiMsg(ProtoId<AccessGroupPrototype> accessGroup)
     : BoundUserInterfaceMessage
 {
@@ -48,3 +57,9 @@ public sealed class IdModificationConsoleJobChangeBuiMsg(ProtoId<AccessGroupProt
 
 [Serializable] [NetSerializable]
 public sealed class IdModificationConsoleTerminateConfirmBuiMsg : BoundUserInterfaceMessage;
+
+[Serializable] [NetSerializable]
+public sealed class IdModificationConsoleAssignSquadMsg(NetEntity? squad) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity? Squad = squad;
+}

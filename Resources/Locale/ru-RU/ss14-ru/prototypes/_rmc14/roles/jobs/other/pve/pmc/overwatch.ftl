@@ -1,3 +1,3 @@
-ent-RMCSpawnPointPMCForceCommandPVE = weya pmc force command spawn point
+ent-RMCSpawnPointPMCForceCommandPVE = точка появления командования ЧВК Vitezstvi
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }

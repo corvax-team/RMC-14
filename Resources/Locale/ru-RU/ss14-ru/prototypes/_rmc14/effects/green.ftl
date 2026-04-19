@@ -14,3 +14,5 @@ ent-RMCEffectXenoTelegraphLash = { "" }
     .desc = { "" }
 ent-RMCEffectXenoTelegraphLashAnim = { ent-RMCEffectXenoTelegraphLash }
     .desc = { ent-RMCEffectXenoTelegraphLash.desc }
+ent-RMCEffectXenoTelegraphKing = { ent-RMCEffectXenoTelegraphGreen }
+    .desc = { ent-RMCEffectXenoTelegraphGreen.desc }

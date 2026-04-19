@@ -1,0 +1,26 @@
+﻿rmc-hivemanagement-manage-teams = Управление командами Улья
+rmc-hivemanagement-my-squad = Мой отряд Улья
+rmc-hivemanagement-squad-announce-placeholder = Отправить объявление вашему отряду...
+rmc-hivemanagement-squad-announce-send = Отправить
+
+rmc-hive-squad-leader = Лидер Улья
+rmc-hive-squad-no-leader = Лидер не назначен
+rmc-hive-squad-members = Члены отряда
+rmc-hive-squad-no-members = В отряде нет участников
+rmc-hive-squad-add-member = Добавить участника
+rmc-hive-squad-remove-tooltip = Нажмите, чтобы исключить из команды
+rmc-hive-squad-announce-to = Объявить для { $role }:
+rmc-hive-teams-team-name = Группа Улья { $index }
+rmc-hive-teams-remove-leader-tooltip = Нажмите, чтобы снять лидера
+rmc-hive-teams-remove-member-tooltip = Нажмите, чтобы исключить из группы
+rmc-hive-xeno-picker-title = Выбрать ксеноморфа
+rmc-hive-xeno-picker-search = Поиск...
+
+rmc-hive-role-maim = Бой: Калечить
+rmc-hive-role-rip = Бой: Рвать
+rmc-hive-role-tear = Бой: Терзать
+rmc-hive-role-follow-queen = Следовать за Королевой
+rmc-hive-role-build = Строительство
+rmc-hive-role-backline = Тыл
+rmc-hive-role-capture = Захват
+rmc-hive-role-stall = Задержка

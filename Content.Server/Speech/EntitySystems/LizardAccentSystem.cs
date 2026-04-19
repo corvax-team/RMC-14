@@ -6,13 +6,31 @@ namespace Content.Server.Speech.EntitySystems;
 
 public sealed class LizardAccentSystem : EntitySystem
 {
+    [Dependency] private readonly IRobustRandom _random = default!; // CCM-Localization
+
     private static readonly Regex RegexLowerS = new("s+");
     private static readonly Regex RegexUpperS = new("S+");
     private static readonly Regex RegexInternalX = new(@"(\w)x");
     private static readonly Regex RegexLowerEndX = new(@"\bx([\-|r|R]|\b)");
     private static readonly Regex RegexUpperEndX = new(@"\bX([\-|r|R]|\b)");
 
-    [Dependency] private readonly IRobustRandom _random = default!; // CCM-Localization
+    // CCM-Localization-Start
+    private static readonly Regex RegexRusLowerS = new("с+", RegexOptions.Compiled);
+    private static readonly Regex RegexRusUpperS = new("С+", RegexOptions.Compiled);
+    private static readonly Regex RegexRusLowerZ = new("з+", RegexOptions.Compiled);
+    private static readonly Regex RegexRusUpperZ = new("З+", RegexOptions.Compiled);
+    private static readonly Regex RegexRusLowerSh = new("ш+", RegexOptions.Compiled);
+    private static readonly Regex RegexRusUpperSh = new("Ш+", RegexOptions.Compiled);
+    private static readonly Regex RegexRusLowerCh = new("ч+", RegexOptions.Compiled);
+    private static readonly Regex RegexRusUpperCh = new("Ч+", RegexOptions.Compiled);
+
+    private static readonly string[] SssVariants = ["сс", "ссс"];
+    private static readonly string[] SssUpperVariants = ["СС", "ССС"];
+    private static readonly string[] ShhhVariants = ["шш", "шшш"];
+    private static readonly string[] ShhhUpperVariants = ["ШШ", "ШШШ"];
+    private static readonly string[] SchVariants = ["щщ", "щщш"];
+    private static readonly string[] SchUpperVariants = ["ЩЩ", "ЩЩШ"];
+    // CCM-Localization-End
 
     public override void Initialize()
     {
@@ -36,54 +54,22 @@ public sealed class LizardAccentSystem : EntitySystem
         message = RegexUpperEndX.Replace(message, "ECKS$1");
 
         // CCM-Localization-Start
-        // c => ссс
-        message = Regex.Replace(
-            message,
-            "с+",
-            _random.Pick(new List<string>() { "сс", "ссс" })
-        );
+        // с => ссс
+        message = RegexRusLowerS.Replace(message, _ => _random.Pick(SssVariants));
         // С => CCC
-        message = Regex.Replace(
-            message,
-            "С+",
-            _random.Pick(new List<string>() { "СС", "ССС" })
-        );
+        message = RegexRusUpperS.Replace(message, _ => _random.Pick(SssUpperVariants));
         // з => ссс
-        message = Regex.Replace(
-            message,
-            "з+",
-            _random.Pick(new List<string>() { "сс", "ссс" })
-        );
+        message = RegexRusLowerZ.Replace(message, _ => _random.Pick(SssVariants));
         // З => CCC
-        message = Regex.Replace(
-            message,
-            "З+",
-            _random.Pick(new List<string>() { "СС", "ССС" })
-        );
+        message = RegexRusUpperZ.Replace(message, _ => _random.Pick(SssUpperVariants));
         // ш => шшш
-        message = Regex.Replace(
-            message,
-            "ш+",
-            _random.Pick(new List<string>() { "шш", "шшш" })
-        );
+        message = RegexRusLowerSh.Replace(message, _ => _random.Pick(ShhhVariants));
         // Ш => ШШШ
-        message = Regex.Replace(
-            message,
-            "Ш+",
-            _random.Pick(new List<string>() { "ШШ", "ШШШ" })
-        );
+        message = RegexRusUpperSh.Replace(message, _ => _random.Pick(ShhhUpperVariants));
         // ч => щщщ
-        message = Regex.Replace(
-            message,
-            "ч+",
-            _random.Pick(new List<string>() { "щщ", "щщщ" })
-        );
+        message = RegexRusLowerCh.Replace(message, _ => _random.Pick(SchVariants));
         // Ч => ЩЩЩ
-        message = Regex.Replace(
-            message,
-            "Ч+",
-            _random.Pick(new List<string>() { "ЩЩ", "ЩЩЩ" })
-        );
+        message = RegexRusUpperCh.Replace(message, _ => _random.Pick(SchUpperVariants));
         // CCM-Localization-End
         args.Message = message;
     }

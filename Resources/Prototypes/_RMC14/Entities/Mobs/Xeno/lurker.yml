@@ -20,6 +20,10 @@
     - Alive
     - Critical
     - Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - RMCSynthGrabbable
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -36,6 +40,7 @@
     - ActionXenoTurnInvisible
     - ActionXenoCripplingStrike
     - ActionXenoDevolve
+    - CCMActionXenoMirrorClones # Corvax-CM Mirror actions
     tier: 2
     hudOffset: -0.15,0.05
     unlockAt: 540 # 9 minutes
@@ -46,6 +51,10 @@
     devolvesTo:
     - CMXenoRunner
   - type: XenoDevour
+# Corvax-CM Mirror actions - start
+  - type: MirrorClones
+  - type: MirrorClone
+# Corvax-CM Mirror actions - end
   - type: XenoPlasma
     plasma: 400
     maxPlasma: 400

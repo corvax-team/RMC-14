@@ -37,6 +37,9 @@ public sealed class BulletBoxSystem : EntitySystem
         using (args.PushGroup(nameof(BulletBoxComponent)))
         {
             args.PushText(Loc.GetString("rmc-bullet-box-amount", ("amount", ent.Comp.Amount)));
+
+            if (!string.IsNullOrWhiteSpace(ent.Comp.UsedIn))
+                args.PushText(Loc.GetString("rmc-bullet-box-used-in", ("vehicle", ent.Comp.UsedIn)));
         }
     }
 
@@ -191,5 +194,16 @@ public sealed class BulletBoxSystem : EntitySystem
         };
 
         _appearance.SetData(ent, BulletBoxLayers.Fill, visual);
+    }
+
+    public bool TryConsume(Entity<BulletBoxComponent> ent, int amount)
+    {
+        if (amount <= 0 || ent.Comp.Amount < amount)
+            return false;
+
+        ent.Comp.Amount -= amount;
+        Dirty(ent);
+        UpdateAppearance(ent);
+        return true;
     }
 }
