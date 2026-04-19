@@ -90,7 +90,7 @@ public sealed class CCMStatsSystem : EntitySystem
         SubscribeLocalEvent<XenoConstructionAddPlasmaDoAfterEvent>(OnXenoConstructionCompleted,
             after: [typeof(Content.Shared._RMC14.Xenonids.Construction.SharedXenoConstructionSystem)]);
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndTextAppend,
-            after: [typeof(Content.Server._RMC14.Rules.CMDistressSignalRuleSystem), typeof(CCMRoundWinTrackerSystem)]);
+            after: [typeof(Content.Server._RMC14.Rules.DistressSignal.CMDistressSignalRuleSystem), typeof(CCMRoundWinTrackerSystem)]);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)

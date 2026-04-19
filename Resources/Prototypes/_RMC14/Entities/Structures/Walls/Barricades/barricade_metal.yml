@@ -181,10 +181,6 @@
     tags:
     - RMCMetalBarricade
 
-<<<<<<< HEAD
-=======
-
->>>>>>> old-fork/master
 - type: entity
   parent: CMBarricadeMetal
   id: RMCBarricadeMetalAltDrawdepth

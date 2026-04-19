@@ -7,10 +7,7 @@
     sprite: _CCM14/Structures/Doors/Airlocks/Double/cargo_solid.rsi
   - type: Occluder
   - type: PaintableAirlock
-<<<<<<< HEAD
-=======
     department: CMRequisitions
->>>>>>> old-fork/master
   - type: AccessReader
     access: [["CMAccessRequisitions"]]
 
@@ -22,9 +19,6 @@
   - type: Sprite
     sprite: _CCM14/Structures/Doors/Airlocks/Double/cargo_glass.rsi
   - type: PaintableAirlock
-<<<<<<< HEAD
-=======
     department: CMRequisitions
->>>>>>> old-fork/master
   - type: AccessReader
     access: [["CMAccessRequisitions"]]

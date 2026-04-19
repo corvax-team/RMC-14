@@ -149,19 +149,19 @@ namespace Content.Client.Stylesheets
         public static Color DangerousRedFore = Color.FromHex("#48FF6A");
         public static Color DisabledFore = Color.FromHex("#284b32");
 
-        public static Color ButtonColorDefault = Color.FromHex("#1BE628");
-        public static Color ButtonColorDefaultRed = Color.FromHex("#1BE628");
+        public static Color ButtonColorDefault = Color.FromHex("#0C9111");
+        public static Color ButtonColorDefaultRed = Color.FromHex("#0C9111");
         public static Color ButtonColorHovered = Color.FromHex("#35F341");
         public static Color ButtonColorHoveredRed = Color.FromHex("#35F341");
         public static Color ButtonColorPressed = Color.FromHex("#12B91D");
         public static Color ButtonColorDisabled = Color.FromHex("#10911A"); // CCM 10 > 15: lobby rework
 
-        public static Color ButtonColorCautionDefault = Color.FromHex("#1BE628");
+        public static Color ButtonColorCautionDefault = Color.FromHex("#0C9111");
         public static Color ButtonColorCautionHovered = Color.FromHex("#35F341");
         public static Color ButtonColorCautionPressed = Color.FromHex("#12B91D");
         public static Color ButtonColorCautionDisabled = Color.FromHex("#10911A");
 
-        public static Color ButtonColorGoodDefault = Color.FromHex("#1BE628");
+        public static Color ButtonColorGoodDefault = Color.FromHex("#0C9111");
         public static Color ButtonColorGoodHovered = Color.FromHex("#35F341");
         public static Color ButtonColorGoodDisabled = Color.FromHex("#10911A");
 
@@ -188,9 +188,9 @@ namespace Content.Client.Stylesheets
         public static Color ButtonColorContextHover = Color.FromHex("#1D6630");
         public static Color ButtonColorContextPressed = Color.FromHex("#103E1C");
         public static Color ButtonColorContextDisabled = Color.FromHex("#103E1C");
-        public static Color DropdownButtonColorContext = Color.FromHex("#155124");
-        public static Color DropdownButtonColorContextHover = Color.FromHex("#1D6630");
-        public static Color DropdownButtonColorContextPressed = Color.FromHex("#1BE628");
+        public static Color DropdownButtonColorContext = Color.FromHex("#1B7320");
+        public static Color DropdownButtonColorContextHover = Color.FromHex("#23942A");
+        public static Color DropdownButtonColorContextPressed = Color.FromHex("#2AB633");
         public static Color DropdownButtonColorContextDisabled = Color.FromHex("#103E1C");
 
         // Examine button colors
@@ -283,9 +283,9 @@ namespace Content.Client.Stylesheets
                 ButtonColorContextHover = Color.FromHex("#102A52");
                 ButtonColorContextPressed = Color.FromHex("#081A35");
                 ButtonColorContextDisabled = Color.FromHex("#081A35");
-                DropdownButtonColorContext = Color.FromHex("#091B38");
-                DropdownButtonColorContextHover = Color.FromHex("#102A52");
-                DropdownButtonColorContextPressed = Color.FromHex("#1D54D9");
+                DropdownButtonColorContext = Color.FromHex("#0F2966");
+                DropdownButtonColorContextHover = Color.FromHex("#183A82");
+                DropdownButtonColorContextPressed = Color.FromHex("#2555B8");
                 DropdownButtonColorContextDisabled = Color.FromHex("#081A35");
 
                 ExamineButtonColorContext = Color.FromHex("#091B38");
@@ -307,19 +307,19 @@ namespace Content.Client.Stylesheets
                 DangerousRedFore = Color.FromHex("#48FF6A");
                 DisabledFore = Color.FromHex("#23402B");
 
-                ButtonColorDefault = Color.FromHex("#0C9510");
-                ButtonColorDefaultRed = Color.FromHex("#0C9510");
+                ButtonColorDefault = Color.FromHex("#0C9111");
+                ButtonColorDefaultRed = Color.FromHex("#0C9111");
                 ButtonColorHovered = Color.FromHex("#12A916");
                 ButtonColorHoveredRed = Color.FromHex("#12A916");
                 ButtonColorPressed = Color.FromHex("#08790B");
                 ButtonColorDisabled = Color.FromHex("#065F08");
 
-                ButtonColorCautionDefault = Color.FromHex("#0C9510");
+                ButtonColorCautionDefault = Color.FromHex("#0C9111");
                 ButtonColorCautionHovered = Color.FromHex("#12A916");
                 ButtonColorCautionPressed = Color.FromHex("#08790B");
                 ButtonColorCautionDisabled = Color.FromHex("#065F08");
 
-                ButtonColorGoodDefault = Color.FromHex("#0C9510");
+                ButtonColorGoodDefault = Color.FromHex("#0C9111");
                 ButtonColorGoodHovered = Color.FromHex("#12A916");
                 ButtonColorGoodDisabled = Color.FromHex("#065F08");
 
@@ -344,9 +344,9 @@ namespace Content.Client.Stylesheets
                 ButtonColorContextHover = Color.FromHex("#1D6630");
                 ButtonColorContextPressed = Color.FromHex("#103E1C");
                 ButtonColorContextDisabled = Color.FromHex("#103E1C");
-                DropdownButtonColorContext = Color.FromHex("#155124");
-                DropdownButtonColorContextHover = Color.FromHex("#1D6630");
-                DropdownButtonColorContextPressed = Color.FromHex("#1BE628");
+                DropdownButtonColorContext = Color.FromHex("#1B7320");
+                DropdownButtonColorContextHover = Color.FromHex("#23942A");
+                DropdownButtonColorContextPressed = Color.FromHex("#2AB633");
                 DropdownButtonColorContextDisabled = Color.FromHex("#103E1C");
 
                 ExamineButtonColorContext = Color.FromHex("#155124");
@@ -393,8 +393,8 @@ namespace Content.Client.Stylesheets
             var dropdownButtonTextDisabled = dropdownButtonText.WithAlpha(0.72f);
             var dropdownButtonNormal = new StyleBoxFlat
             {
-                BackgroundColor = DropdownButtonColorContext.WithAlpha(0.92f),
-                BorderColor = LobbyMenuButtonBase.WithAlpha(0.55f),
+                BackgroundColor = DropdownButtonColorContext,
+                BorderColor = LobbyMenuButtonBase,
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 6,
                 ContentMarginTopOverride = 4,
@@ -403,8 +403,8 @@ namespace Content.Client.Stylesheets
             };
             var dropdownButtonHover = new StyleBoxFlat
             {
-                BackgroundColor = DropdownButtonColorContextHover.WithAlpha(0.95f),
-                BorderColor = LobbyMenuButtonBase.WithAlpha(0.75f),
+                BackgroundColor = DropdownButtonColorContextHover,
+                BorderColor = LobbyMenuButtonBase,
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 6,
                 ContentMarginTopOverride = 4,
@@ -413,7 +413,7 @@ namespace Content.Client.Stylesheets
             };
             var dropdownButtonPressed = new StyleBoxFlat
             {
-                BackgroundColor = DropdownButtonColorContextPressed.WithAlpha(0.97f),
+                BackgroundColor = DropdownButtonColorContextPressed,
                 BorderColor = LobbyMenuButtonBase,
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 6,
@@ -423,8 +423,8 @@ namespace Content.Client.Stylesheets
             };
             var dropdownButtonDisabled = new StyleBoxFlat
             {
-                BackgroundColor = DropdownButtonColorContextDisabled.WithAlpha(0.92f),
-                BorderColor = LobbyMenuButtonBase.WithAlpha(0.32f),
+                BackgroundColor = DropdownButtonColorContextDisabled,
+                BorderColor = LobbyMenuButtonBase,
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 6,
                 ContentMarginTopOverride = 4,
@@ -433,9 +433,9 @@ namespace Content.Client.Stylesheets
             };
             var dropdownOptionsBackground = new StyleBoxFlat
             {
-                BackgroundColor = DropdownButtonColorContext.WithAlpha(0.92f),
+                BackgroundColor = DropdownButtonColorContext,
                 BorderThickness = new Thickness(1),
-                BorderColor = LobbyMenuButtonBase.WithAlpha(0.55f),
+                BorderColor = LobbyMenuButtonBase,
                 ContentMarginLeftOverride = 0,
                 ContentMarginTopOverride = 0,
                 ContentMarginRightOverride = 0,

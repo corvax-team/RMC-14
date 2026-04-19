@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server._RMC14.Rules;
+using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Shared._RMC14.Rules;

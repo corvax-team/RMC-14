@@ -6,9 +6,9 @@ using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.GhostColor;
 using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Marines;
-using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Ghost;
+using Content.Shared.Hands;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
@@ -55,9 +55,9 @@ public sealed class CCMCustomizationApplySystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<ActorComponent, RMCAutomatedVendedUserEvent>(OnActorVendedItem);
         SubscribeLocalEvent<ActorComponent, RMCArmorVariantCreatedEvent>(OnArmorVariantCreated);
         SubscribeLocalEvent<ItemCamouflageComponent, GotEquippedEvent>(OnItemGotEquipped);
+        SubscribeLocalEvent<ItemCamouflageComponent, GotEquippedHandEvent>(OnItemGotEquippedHand);
     }
 
     public void ApplyCustomization(EntityUid entity, CCMCustomizationSnapshot snapshot)
@@ -78,20 +78,6 @@ public sealed class CCMCustomizationApplySystem : EntitySystem
         ApplyCustomization(ev.Entity, snapshot);
     }
 
-    private void OnActorVendedItem(Entity<ActorComponent> ent, ref RMCAutomatedVendedUserEvent args)
-    {
-        if (!TryComp<ItemCamouflageComponent>(args.Item, out var camouflage))
-            return;
-
-        if (HasComp<GunComponent>(args.Item))
-        {
-            _ = ApplyWeaponCamouflageAsync((args.Item, camouflage), ent.Comp.PlayerSession.UserId);
-            return;
-        }
-
-        _ = ApplyArmorCamouflageAsync((args.Item, camouflage), ent.Comp.PlayerSession.UserId);
-    }
-
     private void OnArmorVariantCreated(Entity<ActorComponent> ent, ref RMCArmorVariantCreatedEvent args)
     {
         if (TryComp<ItemCamouflageComponent>(args.New, out var camouflage))
@@ -110,6 +96,17 @@ public sealed class CCMCustomizationApplySystem : EntitySystem
 
         if (SupportsWearableCamouflage(args.Slot))
             _ = ApplyArmorCamouflageAsync(item, actor.PlayerSession.UserId);
+    }
+
+    private void OnItemGotEquippedHand(Entity<ItemCamouflageComponent> item, ref GotEquippedHandEvent args)
+    {
+        if (!HasComp<GunComponent>(item) ||
+            !TryComp<ActorComponent>(args.User, out var actor))
+        {
+            return;
+        }
+
+        _ = ApplyWeaponCamouflageAsync(item, actor.PlayerSession.UserId);
     }
 
     private async Task ApplyArmorCamouflageAsync(Entity<ItemCamouflageComponent> item, NetUserId userId)

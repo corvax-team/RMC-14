@@ -484,21 +484,6 @@ namespace Content.Client.Lobby.UI
 
             #endregion Hair
 
-            #region SpawnPriority
-
-            foreach (var value in Enum.GetValues<SpawnPriorityPreference>())
-            {
-                SpawnPriorityButton.AddItem(Loc.GetString($"humanoid-profile-editor-preference-spawn-priority-{value.ToString().ToLower()}"), (int) value);
-            }
-
-            SpawnPriorityButton.OnItemSelected += args =>
-            {
-                SpawnPriorityButton.SelectId(args.Id);
-                SetSpawnPriority((SpawnPriorityPreference) args.Id);
-            };
-
-            #endregion SpawnPriority
-
             #region SquadPreference
 
             SquadPreferenceButton.AddItem(Loc.GetString("loadout-none"), 0);
@@ -1091,7 +1076,6 @@ namespace Content.Client.Lobby.UI
             UpdateSexControls();
             UpdateGenderControls();
             UpdateSkinColor();
-            UpdateSpawnPriorityControls();
             UpdateSquadPreferenceControls();
             UpdateAgeEdit();
             UpdateEyePickers();
@@ -1846,12 +1830,6 @@ namespace Content.Client.Lobby.UI
         }
         // CCM rework lobby - end
 
-        private void SetSpawnPriority(SpawnPriorityPreference newSpawnPriority)
-        {
-            Profile = Profile?.WithSpawnPriorityPreference(newSpawnPriority);
-            SetDirty();
-        }
-
         private void SetSquadPreference(EntProtoId<SquadTeamComponent>? newSquadPreference)
         {
             Profile = Profile?.WithSquadPreference(newSquadPreference);
@@ -2158,16 +2136,6 @@ namespace Content.Client.Lobby.UI
             PronounsButton.SelectId((int) Profile.Gender);
         }
 
-        private void UpdateSpawnPriorityControls()
-        {
-            if (Profile == null)
-            {
-                return;
-            }
-
-            SpawnPriorityButton.SelectId((int) Profile.SpawnPriority);
-        }
-
         private void UpdateSquadPreferenceControls()
         {
             if (Profile == null)
@@ -2298,7 +2266,6 @@ namespace Content.Client.Lobby.UI
             ConfigureCompactCustomizationDropdown(SpeciesButton);
             ConfigureCompactCustomizationDropdown(SexButton);
             ConfigureCompactCustomizationDropdown(PronounsButton);
-            ConfigureCompactCustomizationDropdown(SpawnPriorityButton);
             ConfigureCompactCustomizationDropdown(ReligionButton);
             ConfigureCompactCustomizationDropdown(CorporateRelationButton);
             ConfigureCompactCustomizationDropdown(SquadPreferenceButton);

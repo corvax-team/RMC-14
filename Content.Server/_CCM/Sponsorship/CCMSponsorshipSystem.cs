@@ -21,7 +21,6 @@ public sealed class CCMSponsorshipSystem : EntitySystem
 
     [Dependency] private readonly CCMSponsorshipManager _sponsorship = default!;
     [Dependency] private readonly CCMCustomizationManager _customization = default!;
-    [Dependency] private readonly CCMCustomizationApplySystem _customizationApply = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
 
     public override void Initialize()
@@ -43,7 +42,7 @@ public sealed class CCMSponsorshipSystem : EntitySystem
     {
         var snapshot = await _customization.GetSnapshot(session.UserId);
         if (session.AttachedEntity is { Valid: true } attached)
-            _customizationApply.ApplyCustomization(attached, snapshot);
+            EntityManager.System<CCMCustomizationApplySystem>().ApplyCustomization(attached, snapshot);
 
         RaiseNetworkEvent(new CCMCustomizationResponseEvent(snapshot), session.Channel);
     }
@@ -111,7 +110,7 @@ public sealed class CCMSponsorshipSystem : EntitySystem
                 ev.SelectedLoocColorId));
 
         if (args.SenderSession.AttachedEntity is { Valid: true } attached)
-            _customizationApply.ApplyCustomization(attached, snapshot);
+            EntityManager.System<CCMCustomizationApplySystem>().ApplyCustomization(attached, snapshot);
 
         RaiseNetworkEvent(new CCMCustomizationResponseEvent(snapshot), args.SenderSession.Channel);
     }

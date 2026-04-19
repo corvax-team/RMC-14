@@ -498,8 +498,8 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
         button.ModulateSelfOverride = Color.White;
         button.StyleBoxOverride = new StyleBoxFlat
         {
-            BackgroundColor = StyleNano.ButtonColorContext.WithAlpha(0.92f),
-            BorderColor = GetWindowAccent().WithAlpha(0.55f),
+            BackgroundColor = StyleNano.DropdownButtonColorContext,
+            BorderColor = GetWindowAccent(),
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = 6,
             ContentMarginTopOverride = 4,
@@ -603,11 +603,11 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
         button.StyleBoxOverride = new StyleBoxFlat
         {
             BackgroundColor = pressed
-                ? GetWindowAccent().WithAlpha(0.92f)
-                : StyleNano.ButtonColorContextHover.WithAlpha(0.95f),
+                ? StyleNano.DropdownButtonColorContextPressed
+                : StyleNano.DropdownButtonColorContextHover,
             BorderColor = pressed
                 ? GetWindowAccent()
-                : GetWindowAccent().WithAlpha(0.75f),
+                : GetWindowAccent(),
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = 6,
             ContentMarginTopOverride = 4,

@@ -119,11 +119,11 @@ public sealed class CCMOptionButton : OptionButton
 
     private void ApplyButtonColor(Button button, Color? itemColor, bool hovered = false, bool pressed = false)
     {
-        var normalBackground = StyleNano.DropdownButtonColorContext.WithAlpha(0.92f);
-        var hoverBackground = StyleNano.DropdownButtonColorContextHover.WithAlpha(0.95f);
-        var pressedBackground = StyleNano.DropdownButtonColorContextPressed.WithAlpha(0.97f);
-        var normalBorder = StyleNano.LobbyMenuButtonBase.WithAlpha(0.55f);
-        var hoverBorder = StyleNano.LobbyMenuButtonBase.WithAlpha(0.75f);
+        var normalBackground = StyleNano.DropdownButtonColorContext;
+        var hoverBackground = StyleNano.DropdownButtonColorContextHover;
+        var pressedBackground = StyleNano.DropdownButtonColorContextPressed;
+        var normalBorder = StyleNano.LobbyMenuButtonBase;
+        var hoverBorder = StyleNano.LobbyMenuButtonBase;
         var pressedBorder = StyleNano.LobbyMenuButtonBase;
 
         button.StyleBoxOverride = new StyleBoxFlat
@@ -162,15 +162,15 @@ public sealed class CCMOptionButton : OptionButton
         StyleBoxOverride = new StyleBoxFlat
         {
             BackgroundColor = pressed
-                    ? StyleNano.DropdownButtonColorContextPressed.WithAlpha(0.97f)
+                    ? StyleNano.DropdownButtonColorContextPressed
                 : hovered
-                    ? StyleNano.DropdownButtonColorContextHover.WithAlpha(0.95f)
-                    : StyleNano.DropdownButtonColorContext.WithAlpha(0.92f),
+                    ? StyleNano.DropdownButtonColorContextHover
+                    : StyleNano.DropdownButtonColorContext,
             BorderColor = pressed
                 ? StyleNano.LobbyMenuButtonBase
                 : hovered
-                ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.75f)
-                    : StyleNano.LobbyMenuButtonBase.WithAlpha(0.55f),
+                ? StyleNano.LobbyMenuButtonBase
+                    : StyleNano.LobbyMenuButtonBase,
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = ContentPadding.Left,
             ContentMarginTopOverride = ContentPadding.Top,

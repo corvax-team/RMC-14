@@ -114,11 +114,6 @@
                                     <ccm:CCMOptionButton Name="PronounsButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <BoxContainer HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-spawn-priority-label'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <ccm:CCMOptionButton Name="SpawnPriorityButton" HorizontalAlignment="Right" />
-                                </BoxContainer>
-                                <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-enable-playtime-perks'}" />
                                     <Control HorizontalExpand="True"/>
                                     <CheckBox Name="PlaytimePerksButton" Pressed="True"

@@ -137,8 +137,9 @@ namespace Content.Client.Lobby.UI
             var frameColor = theme == StyleNano.UiColorTheme.Blue
                 ? Color.FromHex("#0B3578")
                 : Color.FromHex("#16301F");
-            var carouselFloorTexture = _resourceCache.GetTexture("/Textures/_CCM14/Tiles/Vehicle/Base_Interior/floor_2.png");
-            var carouselTint = frameColor.WithAlpha(0.22f);
+            var carouselBackgroundColor = theme == StyleNano.UiColorTheme.Blue
+                ? Color.FromHex("#06152A").WithAlpha(0.94f)
+                : Color.FromHex("#06150C").WithAlpha(0.94f);
             var carouselSideShadeColor = Color.Transparent;
             var dividerColor = theme == StyleNano.UiColorTheme.Blue
                 ? Color.FromHex("#165197").WithAlpha(0.95f)
@@ -157,15 +158,10 @@ namespace Content.Client.Lobby.UI
                 BorderColor = dividerColor,
                 BorderThickness = new Thickness(1)
             };
-            var carouselTileBack = new StyleBoxTexture
+            CarouselBackgroundPanel.PanelOverride = new StyleBoxFlat
             {
-                Texture = carouselFloorTexture,
-                Mode = StyleBoxTexture.StretchMode.Tile,
-                TextureScale = new Vector2(2f, 2f),
-                Modulate = carouselTint
+                BackgroundColor = carouselBackgroundColor
             };
-            carouselTileBack.SetPatchMargin(StyleBox.Margin.All, 0);
-            CarouselBackgroundPanel.PanelOverride = carouselTileBack;
             CarouselBorderPanel.PanelOverride = new StyleBoxFlat
             {
                 BackgroundColor = Color.Transparent,

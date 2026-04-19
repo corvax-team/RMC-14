@@ -5,7 +5,6 @@ using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Robust.Server.ServerStatus;
 using Robust.Shared.Configuration;
-using Content.Corvax.Interfaces.Server; // Corvax-Queue
 
 namespace Content.Server.GameTicking
 {

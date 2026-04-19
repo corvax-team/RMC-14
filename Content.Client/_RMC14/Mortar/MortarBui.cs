@@ -1,7 +1,4 @@
 using Content.Shared._RMC14.Mortar;
-// CCM start
-using Content.Client.GameTicking.Managers;
-// CCM end
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -15,22 +12,6 @@ public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
     protected override void Open()
     {
-        var ticker = _entMan.System<ClientGameTicker>();
-
-        var roundStart = ticker.RoundStartTimeSpan;
-        var curTime = _gameTiming.CurTime;
-        var timeSinceStart = curTime - roundStart;
-
-        if (timeSinceStart < MortarUnlockTime)
-        {
-            var remaining = MortarUnlockTime - timeSinceStart;
-            var minutesLeft = Math.Ceiling(remaining.TotalMinutes);
-            ShowNotReadyWindow($"���� ����� �� ���������, ������� ���������� ���������. ��������� ��� {minutesLeft} �����.");
-            Close();
-            return;
-        }
-
-        // CCM end
         base.Open();
         _window = this.CreateWindow<MortarWindow>();
 
@@ -46,8 +27,8 @@ public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
             spinBox.Value = value;
             spinBox.OnValueChanged += args =>
             {
-                var value = Math.Clamp(args.Value, -limit, limit);
-                spinBox.Value = value;
+                var clamped = Math.Clamp(args.Value, -limit, limit);
+                spinBox.Value = clamped;
             };
         }
 
@@ -57,6 +38,7 @@ public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
             SetSpinBox(_window.TargetY, mortar.MaxTarget, mortar.Target.Y);
             SetSpinBox(_window.DialX, mortar.MaxDial, mortar.Dial.X);
             SetSpinBox(_window.DialY, mortar.MaxDial, mortar.Dial.Y);
+
             _window.SetTargetButton.OnPressed += _ =>
                 SendPredictedMessage(new MortarTargetBuiMsg((Parse(_window.TargetX), Parse(_window.TargetY))));
 
@@ -66,26 +48,6 @@ public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
         _window.ViewCameraButton.OnPressed += _ => SendPredictedMessage(new MortarViewCamerasMsg());
     }
-    // CCM start
-    private void ShowNotReadyWindow(string message)
-    {
-        var popup = new DefaultCMWindow
-        {
-            Title = "������",
-            MinSize = new Vector2(300, 100)
-        };
-
-        var label = new Label
-        {
-            Text = message,
-            HorizontalAlignment = Control.HAlignment.Center,
-            VerticalAlignment = Control.VAlignment.Center
-        };
-
-        popup.Contents.AddChild(label);
-        popup.OpenCentered();
-    }
-    // CCM end
 
     public void Refresh()
     {
