@@ -1,7 +1,12 @@
+﻿// CM14 rework: non-RMC edit marker.
+using System;
+using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.GameTicking;
 using Content.Shared._CCM.Sponsorship;
+using Robust.Server.Player;
 using Robust.Shared.IoC;
 using Robust.Shared.Localization;
 using Robust.Shared.Player;
@@ -10,9 +15,14 @@ namespace Content.Server._CCM.Sponsorship;
 
 public sealed class CCMSponsorshipSystem : EntitySystem
 {
+    private const float SponsorshipRefreshIntervalSeconds = 60f;
+    private float _sponsorshipRefreshAccumulator;
+    private bool _refreshingSponsorships;
+
     [Dependency] private readonly CCMSponsorshipManager _sponsorship = default!;
     [Dependency] private readonly CCMCustomizationManager _customization = default!;
     [Dependency] private readonly CCMCustomizationApplySystem _customizationApply = default!;
+    [Dependency] private readonly IPlayerManager _players = default!;
 
     public override void Initialize()
     {
@@ -32,7 +42,50 @@ public sealed class CCMSponsorshipSystem : EntitySystem
     public async Task PushCustomization(ICommonSession session)
     {
         var snapshot = await _customization.GetSnapshot(session.UserId);
+        if (session.AttachedEntity is { Valid: true } attached)
+            _customizationApply.ApplyCustomization(attached, snapshot);
+
         RaiseNetworkEvent(new CCMCustomizationResponseEvent(snapshot), session.Channel);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        _sponsorshipRefreshAccumulator += frameTime;
+        if (_sponsorshipRefreshAccumulator < SponsorshipRefreshIntervalSeconds || _refreshingSponsorships)
+            return;
+
+        _sponsorshipRefreshAccumulator = 0f;
+        _ = RefreshOnlineSponsorships();
+    }
+
+    private async Task RefreshOnlineSponsorships()
+    {
+        if (_refreshingSponsorships)
+            return;
+
+        _refreshingSponsorships = true;
+        try
+        {
+            foreach (var session in _players.Sessions.ToArray())
+            {
+                var changed = await _sponsorship.RefreshSession(session, CancellationToken.None);
+                if (!changed)
+                    continue;
+
+                PushStatus(session);
+                await PushCustomization(session);
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Failed to refresh CCM sponsorship status:\n{e}");
+        }
+        finally
+        {
+            _refreshingSponsorships = false;
+        }
     }
 
     private void OnRequestStatus(RequestCCMSponsorshipStatusEvent ev, EntitySessionEventArgs args)

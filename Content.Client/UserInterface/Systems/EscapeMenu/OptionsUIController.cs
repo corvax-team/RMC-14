@@ -84,7 +84,7 @@ public sealed class OptionsUIController : UIController
         _optionsWindow.UpdateTabs();
         UpdateOptionsWindowLayout();
 
-        _optionsWindow.OpenCentered();
+        _optionsWindow.OpenCenteredAnimated();
         _optionsWindow.MoveToFront();
     }
 
@@ -94,7 +94,7 @@ public sealed class OptionsUIController : UIController
 
         if (_optionsWindow.IsOpen)
         {
-            _optionsWindow.Close();
+            _optionsWindow.CloseAnimated();
         }
         else
         {

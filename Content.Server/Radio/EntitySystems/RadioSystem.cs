@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
@@ -31,7 +32,6 @@ namespace Content.Server.Radio.EntitySystems;
 /// </summary>
 public sealed class RadioSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -76,7 +76,7 @@ public sealed class RadioSystem : EntitySystem
     private void OnIntrinsicReceive(EntityUid uid, IntrinsicRadioReceiverComponent component, ref RadioReceiveEvent args)
     {
         if (TryComp(uid, out ActorComponent? actor))
-            _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
+            _chatManager.ChatMessageToOne(args.ChatMsg.Message, actor.PlayerSession.Channel);
     }
 
     /// <summary>

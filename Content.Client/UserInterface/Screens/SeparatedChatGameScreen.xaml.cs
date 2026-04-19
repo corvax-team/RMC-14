@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Numerics;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Actions.Widgets;
@@ -48,6 +49,7 @@ public sealed partial class SeparatedChatGameScreen : InGameScreen
         SetAnchorPreset(MainViewport, LayoutPreset.Wide);
         SetAnchorAndMarginPreset(Inventory, LayoutPreset.BottomLeft, margin: 5);
         SetAnchorAndMarginPreset(TopLeftContainer, LayoutPreset.TopLeft, margin: 10);
+        SetAnchorAndMarginPreset(VoteMenu, LayoutPreset.CenterTop, margin: 10);
         SetAnchorAndMarginPreset(Ghost, LayoutPreset.BottomWide, margin: 80);
         SetAnchorAndMarginPreset(Hotbar, LayoutPreset.BottomWide, margin: 5);
         SetAnchorAndMarginPreset(Alerts, LayoutPreset.CenterRight, margin: 10);
@@ -136,11 +138,12 @@ public sealed partial class SeparatedChatGameScreen : InGameScreen
         VoteMenu = new BoxContainer
         {
             Name = "VoteMenu",
+            Margin = new Thickness(0, 10, 0, 0),
             Orientation = BoxContainer.LayoutOrientation.Vertical,
         };
         TopLeftContainer.AddChild(Actions);
-        TopLeftContainer.AddChild(VoteMenu);
         ViewportContainer.AddChild(TopLeftContainer);
+        ViewportContainer.AddChild(VoteMenu);
 
         Alerts = new AlertsUI
         {

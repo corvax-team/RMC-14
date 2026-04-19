@@ -1,8 +1,10 @@
-﻿<widgets:ChatBox
+﻿<!-- CM14 rework: non-RMC edit marker. -->
+<widgets:ChatBox
     xmlns="https://spacestation14.io"
-    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Chat.Widgets"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Systems.Chat.Controls"
+    x:Class="Content.Client.UserInterface.Systems.Chat.Widgets.ChatBox"
     MouseFilter="Stop"
     HorizontalExpand="True"
     VerticalExpand="True"

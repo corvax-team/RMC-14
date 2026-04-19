@@ -1,4 +1,4 @@
-humanoid-profile-editor-randomize-everything-button = Randomize everything
+﻿humanoid-profile-editor-randomize-everything-button = Randomize everything
 humanoid-profile-editor-name-label = Name:
 humanoid-profile-editor-name-random-button = Randomize
 humanoid-profile-editor-appearance-tab = Appearance
@@ -31,6 +31,8 @@ humanoid-profile-editor-xeno-prefix-tooltip = 2 letters, or 3 if you have 124 ho
 humanoid-profile-editor-xeno-postfix = Xeno postfix:
 humanoid-profile-editor-xeno-postfix-tooltip = 1 letter if you have 24 hours in xeno roles. 2 letters or 1 letter and 1 digit if you have 300 hours in xeno roles. You cannot have a postfix with a 3 letter prefix.
 humanoid-profile-editor-enable = Enable
+humanoid-profile-editor-enabled = Enabled
+humanoid-profile-editor-disabled = Disabled
 humanoid-profile-editor-eyes-label = Eye color:
 humanoid-profile-editor-jobs-tab = Jobs
 humanoid-profile-editor-preference-unavailable-stay-in-lobby-button = Stay in lobby if preference unavailable.

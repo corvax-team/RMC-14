@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Collections;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;

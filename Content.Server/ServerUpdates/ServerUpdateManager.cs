@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿// CM14 rework: non-RMC edit marker.
+using System.Linq;
 using Content.Server.Chat.Managers;
 using Content.Shared.CCVar;
 using Robust.Server;

@@ -1,4 +1,5 @@
-﻿ui-lobby-title = Лобби: { $serverName }
+﻿# CM14 rework: non-RMC edit marker.
+ui-lobby-title = Лобби: { $serverName }
 ui-lobby-ahelp-button = АХелп
 ui-lobby-options-button = Настройки
 ui-lobby-leave-button = Выйти
@@ -10,6 +11,9 @@ ui-lobby-updates-button = Обновления
 ui-lobby-guides-button = Руководства
 ui-lobby-tutorial-button = Правила
 ui-lobby-polls-button = Голосования
+ui-lobby-link-discord-button = Привязать Discord
+ui-lobby-discord-linked-button = Discord привязан
+ui-lobby-link-discord-warning = [bold]Привяжите Discord к аккаунту.[/bold] Это нужно для ролей, привилегий и уведомлений по аккаунту.
 ui-lobby-join-uscm-button = Присоединиться к USMC
 ui-lobby-join-hive-button = Присоединиться к Улью
 ui-lobby-not-ready-button = Не готов

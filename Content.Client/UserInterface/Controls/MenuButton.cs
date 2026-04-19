@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Client.Resources;
@@ -21,7 +22,7 @@ public sealed class MenuButton : ContainerButton
     private static readonly Color ColorRedNormal = Color.Black;
     private static readonly Color ColorPressed = Color.Black;
 
-    private const float VertPad = 4f;
+    private const float VertPad = 5f;
     private Color NormalColor => HasStyleClass(StyleClassRedTopButton) ? ColorRedNormal : ColorNormal;
 
     private BoundKeyFunction _function;
@@ -67,6 +68,7 @@ public sealed class MenuButton : ContainerButton
         _root = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
+            SeparationOverride = 2,
             Children =
             {
                 _buttonIcon,
@@ -120,6 +122,7 @@ public sealed class MenuButton : ContainerButton
             StyleBoxOverride = BuildStyleBox(StyleNano.LobbyMenuButtonDisabledCrt, StyleNano.LobbyMenuButtonDisabledCrt);
             _buttonIcon.ModulateSelfOverride = Color.Black.WithAlpha(0.55f);
             _buttonLabel.ModulateSelfOverride = Color.Black.WithAlpha(0.55f);
+            _buttonLabel.FontColorShadowOverride = null;
             return;
         }
 
@@ -134,18 +137,21 @@ public sealed class MenuButton : ContainerButton
                 StyleBoxOverride = BuildStyleBox(accent, accent);
                 _buttonIcon.ModulateSelfOverride = normalIconColor;
                 _buttonLabel.ModulateSelfOverride = NormalColor;
+                _buttonLabel.FontColorShadowOverride = null;
                 break;
 
             case DrawModeEnum.Pressed:
                 StyleBoxOverride = BuildStyleBox(pressedAccent, pressedAccent);
                 _buttonIcon.ModulateSelfOverride = pressedIconColor;
                 _buttonLabel.ModulateSelfOverride = ColorPressed;
+                _buttonLabel.FontColorShadowOverride = null;
                 break;
 
             case DrawModeEnum.Hover:
                 StyleBoxOverride = BuildStyleBox(Color.Transparent, accent);
                 _buttonIcon.ModulateSelfOverride = accent;
                 _buttonLabel.ModulateSelfOverride = accent;
+                _buttonLabel.FontColorShadowOverride = null;
                 break;
 
             case DrawModeEnum.Disabled:
@@ -165,10 +171,10 @@ public sealed class MenuButton : ContainerButton
             BackgroundColor = background,
             BorderColor = border,
             BorderThickness = new Thickness(1),
-            ContentMarginLeftOverride = 2,
-            ContentMarginTopOverride = 1,
-            ContentMarginRightOverride = 2,
-            ContentMarginBottomOverride = 1,
+            ContentMarginLeftOverride = 3,
+            ContentMarginTopOverride = 2,
+            ContentMarginRightOverride = 3,
+            ContentMarginBottomOverride = 2,
         };
     }
 

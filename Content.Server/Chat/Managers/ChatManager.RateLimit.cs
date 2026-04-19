@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Players.RateLimiting;

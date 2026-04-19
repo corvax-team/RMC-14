@@ -150,6 +150,7 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
 
         ApplyWindowTheme();
         BuildTierCards(CCMSponsorshipTier.None);
+        UpdateStatusHeader(CCMSponsorshipTier.None, 0);
         StyleWebsiteButton();
         _config.OnValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged, false);
     }
@@ -172,16 +173,21 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
         _donateUrl = snapshot.DonateUrl;
         _currentTier = snapshot.Tier;
         _websiteButton.Disabled = string.IsNullOrWhiteSpace(snapshot.DonateUrl);
+        UpdateStatusHeader(snapshot.Tier, snapshot.ExpirationUnixSeconds);
+        BuildTierCards(snapshot.Tier);
+        StyleWebsiteButton();
+    }
+
+    private void UpdateStatusHeader(CCMSponsorshipTier tier, long expirationUnixSeconds)
+    {
         _statusLabel.Text = Loc.GetString("ccm-sponsorship-current-tier",
-            ("tier", Loc.GetString(GetTierTitleKey(snapshot.Tier))));
-        _expirationLabel.Text = snapshot.ExpirationUnixSeconds > 0
+            ("tier", Loc.GetString(GetTierTitleKey(tier))));
+        _expirationLabel.Text = expirationUnixSeconds > 0
             ? Loc.GetString("ccm-sponsorship-expires",
-                ("date", DateTimeOffset.FromUnixTimeSeconds(snapshot.ExpirationUnixSeconds)
+                ("date", DateTimeOffset.FromUnixTimeSeconds(expirationUnixSeconds)
                     .ToLocalTime()
                     .ToString("dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture)))
             : Loc.GetString("ccm-sponsorship-expires-none");
-        BuildTierCards(snapshot.Tier);
-        StyleWebsiteButton();
     }
 
     private void BuildTierCards(CCMSponsorshipTier currentTier)
@@ -200,7 +206,7 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
         {
             PanelOverride = new StyleBoxFlat
             {
-                BackgroundColor = Color.Black.WithAlpha(0.24f),
+                BackgroundColor = Color.Black.WithAlpha(0.36f),
                 BorderColor = GetWindowAccent().WithAlpha(0.40f),
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 14,
@@ -252,8 +258,8 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
     private Control BuildTierCard(CCMSponsorshipTier tier, bool current, bool featured)
     {
         var accent = GetTierAccent(tier);
-        var baseBackground = GetTierCardBackground(tier);
-        var imageBackground = GetTierImageBackground(tier);
+        var baseBackground = BlendTowards(GetTierCardBackground(tier), Color.Black, 0.10f);
+        var imageBackground = BlendTowards(GetTierImageBackground(tier), Color.Black, 0.08f);
         var cardWidth = featured ? 376 : 316;
         var cardHeight = featured ? 496 : 454;
         var imageHeight = featured ? 184 : 162;
@@ -306,8 +312,8 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
                 HorizontalAlignment = HAlignment.Center,
                 PanelOverride = new StyleBoxFlat
                 {
-                    BackgroundColor = accent.WithAlpha(0.22f),
-                    BorderColor = accent.WithAlpha(0.62f),
+                    BackgroundColor = accent.WithAlpha(0.32f),
+                    BorderColor = accent.WithAlpha(0.74f),
                     BorderThickness = new Thickness(1),
                     ContentMarginLeftOverride = 7,
                     ContentMarginTopOverride = 2,
@@ -429,7 +435,8 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
                 "ccm-sponsorship-perk-chat-color",
                 "ccm-sponsorship-perk-role-weight-3",
                 "ccm-sponsorship-perk-endgame-credits",
-                "ccm-sponsorship-perk-customization",
+                "ccm-sponsorship-extended-perk-customization",
+                "ccm-sponsorship-perk-job-whitelist",
                 "ccm-sponsorship-perk-thanks"
             ],
             CCMSponsorshipTier.SponsorII =>
@@ -438,14 +445,15 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
                 "ccm-sponsorship-perk-role-weight-2",
                 "ccm-sponsorship-perk-endgame-credits",
                 "ccm-sponsorship-perk-customization",
+                "ccm-sponsorship-perk-role-timers",
                 "ccm-sponsorship-perk-thanks"
             ],
             _ =>
             [
                 "ccm-sponsorship-perk-chat-color",
                 "ccm-sponsorship-perk-endgame-credits",
-                "ccm-sponsorship-perk-thanks",
-                "ccm-sponsorship-perk-queue"
+                "ccm-sponsorship-perk-queue",
+                "ccm-sponsorship-perk-thanks"
             ],
         };
     }
@@ -458,7 +466,7 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
             HorizontalExpand = true,
             PanelOverride = new StyleBoxFlat
             {
-                BackgroundColor = Color.Black.WithAlpha(0.20f),
+                BackgroundColor = Color.Black.WithAlpha(0.30f),
                 BorderColor = GetWindowAccent().WithAlpha(0.34f),
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 12,
@@ -598,7 +606,7 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
         {
             _heroPanel.PanelOverride = new StyleBoxFlat
             {
-                BackgroundColor = Color.Black.WithAlpha(0.24f),
+                BackgroundColor = Color.Black.WithAlpha(0.36f),
                 BorderColor = windowAccent.WithAlpha(0.46f),
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 14,
@@ -623,7 +631,7 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
         {
             _infoPanel.PanelOverride = new StyleBoxFlat
             {
-                BackgroundColor = Color.Black.WithAlpha(0.20f),
+                BackgroundColor = Color.Black.WithAlpha(0.30f),
                 BorderColor = windowAccent.WithAlpha(0.40f),
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 12,

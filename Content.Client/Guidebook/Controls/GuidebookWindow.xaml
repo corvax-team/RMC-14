@@ -1,3 +1,4 @@
+﻿<!-- CM14 rework: non-RMC edit marker. -->
 <controls:FancyWindow xmlns="https://spacestation14.io"
                 xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
                 xmlns:fancyTree="clr-namespace:Content.Client.UserInterface.Controls.FancyTree"
@@ -8,8 +9,8 @@
                 Title="{Loc 'guidebook-window-title'}">
     <SplitContainer Orientation="Horizontal" HorizontalExpand="True" Name="Split">
         <!-- Guide select -->
-        <BoxContainer Orientation="Horizontal" Name="TreeBox">
-            <fancyTree:FancyTree Name="Tree" VerticalExpand="True" HorizontalExpand="True" Access="Public"/>
+        <BoxContainer Orientation="Horizontal" Name="TreeBox" MinWidth="320">
+            <fancyTree:FancyTree Name="Tree" VerticalExpand="True" HorizontalExpand="True" MinWidth="315" Access="Public"/>
             <cc:VSeparator StyleClasses="LowDivider" Margin="0 -2"/>
         </BoxContainer>
         <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">

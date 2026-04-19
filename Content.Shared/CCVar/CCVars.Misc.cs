@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Configuration;
+﻿// CM14 rework: non-RMC edit marker.
+using Robust.Shared.Configuration;
 
 namespace Content.Shared.CCVar;
 

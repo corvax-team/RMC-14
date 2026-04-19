@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
@@ -358,6 +359,7 @@ public sealed class CCMRoundEndStatsEvent : EntityEventArgs
     public int PersonalScore { get; }
     public int MarineCampaignWins { get; }
     public int XenoCampaignWins { get; }
+    public CCMStatsSide WinningSide { get; }
     public CCMRoundPersonalStatsData? PersonalStats { get; }
     public CCMRoundMvpData? MarineMvp { get; }
     public CCMRoundMvpData? XenoMvp { get; }
@@ -366,6 +368,7 @@ public sealed class CCMRoundEndStatsEvent : EntityEventArgs
         int personalScore,
         int marineCampaignWins,
         int xenoCampaignWins,
+        CCMStatsSide winningSide,
         CCMRoundPersonalStatsData? personalStats,
         CCMRoundMvpData? marineMvp,
         CCMRoundMvpData? xenoMvp)
@@ -373,6 +376,7 @@ public sealed class CCMRoundEndStatsEvent : EntityEventArgs
         PersonalScore = personalScore;
         MarineCampaignWins = marineCampaignWins;
         XenoCampaignWins = xenoCampaignWins;
+        WinningSide = winningSide;
         PersonalStats = personalStats;
         MarineMvp = marineMvp;
         XenoMvp = xenoMvp;

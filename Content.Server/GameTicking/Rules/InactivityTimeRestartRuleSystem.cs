@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Threading;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking.Rules.Components;

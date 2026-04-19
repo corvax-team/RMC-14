@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,26 @@ public sealed class CCMSponsorshipManager : IPostInjectInit
             0f,
             false,
             false);
+    }
+
+    public bool HasRoleTimerBypass(NetUserId userId)
+    {
+        return GetStatus(userId).Tier >= CCMSponsorshipTier.SponsorII;
+    }
+
+    public bool HasRoleTimerBypass(ICommonSession session)
+    {
+        return HasRoleTimerBypass(session.UserId);
+    }
+
+    public bool HasWhitelistBypass(NetUserId userId)
+    {
+        return GetStatus(userId).Tier >= CCMSponsorshipTier.SponsorIII;
+    }
+
+    public bool HasWhitelistBypass(ICommonSession session)
+    {
+        return HasWhitelistBypass(session.UserId);
     }
 
     public void SetManualTierOverride(NetUserId userId, CCMSponsorshipTier tier, long? expirationUnixSeconds = null)
@@ -90,6 +111,14 @@ public sealed class CCMSponsorshipManager : IPostInjectInit
             .ThenBy(entry => entry.Name, StringComparer.OrdinalIgnoreCase)
             .Select(entry => (entry.Name, entry.Tier))
             .ToList();
+    }
+
+    public async Task<bool> RefreshSession(ICommonSession session, CancellationToken cancel)
+    {
+        var before = GetStatus(session.UserId);
+        await LoadData(session, cancel);
+        var after = GetStatus(session.UserId);
+        return !StatusEquals(before, after);
     }
 
     private async Task LoadData(ICommonSession session, CancellationToken cancel)
@@ -216,6 +245,18 @@ public sealed class CCMSponsorshipManager : IPostInjectInit
             return expirationUnixSeconds;
 
         return DateTimeOffset.UtcNow.Add(DefaultManualSponsorshipDuration).ToUnixTimeSeconds();
+    }
+
+    private static bool StatusEquals(CCMSponsorshipStatusSnapshot left, CCMSponsorshipStatusSnapshot right)
+    {
+        return left.Tier == right.Tier &&
+               left.DonateUrl == right.DonateUrl &&
+               left.ExpirationUnixSeconds == right.ExpirationUnixSeconds &&
+               left.OocColorHex == right.OocColorHex &&
+               left.LoocColorHex == right.LoocColorHex &&
+               Math.Abs(left.RoleWeightBonus - right.RoleWeightBonus) < 0.001f &&
+               left.QueueBypass == right.QueueBypass &&
+               left.CustomizationUnlocked == right.CustomizationUnlocked;
     }
 
     void IPostInjectInit.PostInject()

@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System;
 using Content.Client.Gameplay;
 using Content.Client._CCM.Achievements;
@@ -199,19 +200,17 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
 
         raw = raw.Trim();
 
-        if (Uri.TryCreate(raw, UriKind.Absolute, out var absolute) &&
-            (absolute.Scheme == Uri.UriSchemeHttp || absolute.Scheme == Uri.UriSchemeHttps))
-        {
-            return absolute.ToString();
-        }
+        if (raw.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+            raw.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+            return raw;
 
         if (raw.Contains("://", StringComparison.Ordinal))
             return null;
 
-        var prefixed = $"https://{raw.TrimStart('/')}";
-        return Uri.TryCreate(prefixed, UriKind.Absolute, out absolute) &&
-               (absolute.Scheme == Uri.UriSchemeHttp || absolute.Scheme == Uri.UriSchemeHttps)
-            ? absolute.ToString()
-            : null;
+        var trimmed = raw.TrimStart('/');
+        if (string.IsNullOrWhiteSpace(trimmed))
+            return null;
+
+        return $"https://{trimmed}";
     }
 }

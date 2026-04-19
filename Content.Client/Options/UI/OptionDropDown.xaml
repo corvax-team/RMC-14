@@ -1,6 +1,8 @@
-<Control xmlns="https://spacestation14.io">
+﻿<!-- CM14 rework: non-RMC edit marker. -->
+<Control xmlns="https://spacestation14.io"
+         xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls">
     <BoxContainer Orientation="Vertical" SeparationOverride="4">
         <Label Name="NameLabel" StyleClasses="OptionSettingLabel" />
-        <OptionButton Name="Button" Access="Public" HorizontalExpand="True" MinHeight="32" />
+        <ccm:CCMOptionButton Name="Button" Access="Public" HorizontalExpand="True" MinHeight="32" />
     </BoxContainer>
 </Control>

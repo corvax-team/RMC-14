@@ -1,6 +1,7 @@
 <ui:VoteCallMenu xmlns="https://spacestation14.io"
                  xmlns:ui="clr-namespace:Content.Client.Voting.UI"
                  xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                 xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
                  MouseFilter="Stop" MinSize="350 200">
     <PanelContainer StyleClasses="AngleRect" />
     <BoxContainer Orientation="Vertical">
@@ -14,7 +15,7 @@
 
         <BoxContainer Orientation="Vertical" Margin="8 2 8 0" VerticalExpand="True" VerticalAlignment="Top">
             <BoxContainer Orientation="Vertical">
-                <OptionButton Margin="2 1" Name="VoteTypeButton" HorizontalExpand="False" StyleClasses="VoteButton" />
+                <ccm:CCMOptionButton Margin="2 1" Name="VoteTypeButton" HorizontalExpand="False" />
                 <BoxContainer Name="VoteOptionsButtonContainer" HorizontalExpand="False" Orientation="Vertical"> 
                 </BoxContainer>
                 <Button Margin="64 4" Name="FollowButton" Text="{Loc 'ui-vote-follow-button'}" Visible="False"

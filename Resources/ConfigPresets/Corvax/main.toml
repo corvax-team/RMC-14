@@ -1,11 +1,12 @@
+﻿# CM14 rework: non-RMC edit marker.
 [net]
 tickrate = 30
 max_connections = 1024
 
 [game]
-hostname = "🛰️ Corvax — Colonial Marines 🌍"
+hostname = "[EN/RU]🌍 Colonial Marine Corps 🌍"
 desc = "Corvax первый русскоязычный проект в Space Station 14.\nПервый русскоязычный проект на тему колониальных морпехов.\nНа сервере средние требования к RP."
-soft_max_players = 100
+soft_max_players = 250
 map_rotation = true
 lobbyduration = 180
 round_end_pvs_overrides = false
@@ -41,7 +42,6 @@ max_process_time = 1
 
 [ic]
 flavor_text = true
-enable_suicide = false
 
 [shuttle]
 auto_call_time = 0
@@ -55,6 +55,10 @@ arrival_time = 10
 cooldown = 120
 mass_limit = -1
 emergency = false
+
+[database]
+engine = "sqlite"
+sqlite_dbpath = "preferences.db"
 
 [discord]
 rich_main_icon_id = "corvax"
@@ -97,6 +101,12 @@ auto_balance_step = 0.5
 auto_balance_min = 2.5
 auto_balance_max = 4.5
 distress_xenos_minimum = 1
+discord_oauth_base_url = "http://127.0.0.1:2424"
+discord_oauth_state_secret = "replace-me"
+discord_oauth_state_lifetime_seconds = 300
+emote_cooldown_seconds = 1
+chat_translate_api = ""
+chat_translate_source = "auto"
 
 [gateway]
 generator_enabled = false
@@ -108,7 +118,7 @@ screen_shake_intensity = 1
 enabled = false
 
 [build]
-engine_version = "264.0.2-fix-physics" #and remember to remove it next update...xd
+engine_version = "264.0.2-fix-physics"
 
 [movement]
 mob_pushing = true

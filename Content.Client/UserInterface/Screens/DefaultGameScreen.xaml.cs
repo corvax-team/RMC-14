@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Numerics;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Actions.Widgets;
@@ -44,6 +45,7 @@ public sealed partial class DefaultGameScreen : InGameScreen
         SetAnchorPreset(MainViewport, LayoutPreset.Wide);
         SetAnchorPreset(ViewportContainer, LayoutPreset.Wide);
         SetAnchorAndMarginPreset(TopLeft, LayoutPreset.TopLeft, margin: 10);
+        SetAnchorAndMarginPreset(VoteMenu, LayoutPreset.CenterTop, margin: 10);
         SetAnchorAndMarginPreset(Ghost, LayoutPreset.BottomWide, margin: 80);
         SetAnchorAndMarginPreset(Inventory, LayoutPreset.BottomLeft, margin: 5);
         SetAnchorAndMarginPreset(Hotbar, LayoutPreset.BottomWide, margin: 5);
@@ -126,9 +128,9 @@ public sealed partial class DefaultGameScreen : InGameScreen
         };
 
         TopLeft.AddChild(topRow);
-        TopLeft.AddChild(VoteMenu);
         TopLeft.AddChild(Actions);
         root.AddChild(TopLeft);
+        root.AddChild(VoteMenu);
 
         Ghost = new GhostGui
         {

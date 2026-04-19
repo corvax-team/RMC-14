@@ -1,3 +1,4 @@
+﻿<!-- CM14 rework: non-RMC edit marker. -->
 <BoxContainer xmlns="https://spacestation14.io"
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:humanoid="clr-namespace:Content.Client.Humanoid"
@@ -53,7 +54,7 @@
                                     <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                                         <Label Text="{Loc 'ccm-humanoid-profile-editor-bark-voice-label'}" />
                                         <Control HorizontalExpand="True" />
-                                        <OptionButton Name="BarkVoiceButton" HorizontalAlignment="Right" />
+                                        <ccm:CCMOptionButton Name="BarkVoiceButton" HorizontalAlignment="Right" />
                                     </BoxContainer>
                                     <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                                         <Label Name="BarkVoiceTypeLabel" Text="{Loc 'ccm-humanoid-profile-editor-bark-type-normal'}" />
@@ -81,7 +82,7 @@
                                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-appearance-title'}" StyleClasses="CharacterEditorSectionTitle" />
                                     <Control HorizontalExpand="True"/>
-                                    <Button Name="ShowClothes" Pressed="True" ToggleMode="True"
+                                    <Button Name="ShowClothes" ToggleMode="True"
                                             Text="{Loc 'humanoid-profile-editor-clothing-show'}" MinSize="120 0" HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <PanelContainer Name="AppearanceBlockDivider" MinHeight="2" HorizontalExpand="True">
@@ -95,7 +96,7 @@
                                     <TextureButton Name="SpeciesInfoButton" Scale="0.3 0.3"
                                                    VerticalAlignment="Center"
                                                    ToolTip="{Loc 'humanoid-profile-editor-guidebook-button-tooltip'}"/>
-                                    <OptionButton Name="SpeciesButton" HorizontalAlignment="Right" />
+                                    <ccm:CCMOptionButton Name="SpeciesButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-age-label'}" />
@@ -105,23 +106,23 @@
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-sex-label'}" />
                                     <Control HorizontalExpand="True"/>
-                                    <OptionButton Name="SexButton" HorizontalAlignment="Right" />
+                                    <ccm:CCMOptionButton Name="SexButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-pronouns-label'}" />
                                     <Control HorizontalExpand="True"/>
-                                    <OptionButton Name="PronounsButton" HorizontalAlignment="Right" />
+                                    <ccm:CCMOptionButton Name="PronounsButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-spawn-priority-label'}" />
                                     <Control HorizontalExpand="True"/>
-                                    <OptionButton Name="SpawnPriorityButton" HorizontalAlignment="Right" />
+                                    <ccm:CCMOptionButton Name="SpawnPriorityButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-enable-playtime-perks'}" />
                                     <Control HorizontalExpand="True"/>
-                                    <Button Name="PlaytimePerksButton" Pressed="True" ToggleMode="True"
-                                            Text="{Loc 'humanoid-profile-editor-enable'}" HorizontalAlignment="Right" />
+                                    <CheckBox Name="PlaytimePerksButton" Pressed="True"
+                                              HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <BoxContainer Margin="4 0 0 0" Orientation="Vertical">
                                     <Label Text="{Loc 'humanoid-profile-editor-skin-color-label'}" />
@@ -170,17 +171,17 @@
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-religion-label'}" />
                                     <Control HorizontalExpand="True"/>
-                                    <OptionButton Name="ReligionButton" HorizontalAlignment="Right" />
+                                    <ccm:CCMOptionButton Name="ReligionButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-corporate-relation-label'}" />
                                     <Control HorizontalExpand="True"/>
-                                    <OptionButton Name="CorporateRelationButton" HorizontalAlignment="Right" />
+                                    <ccm:CCMOptionButton Name="CorporateRelationButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-preferred-squad-label'}" />
                                     <Control HorizontalExpand="True"/>
-                                    <OptionButton Name="SquadPreferenceButton" HorizontalAlignment="Right" />
+                                    <ccm:CCMOptionButton Name="SquadPreferenceButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-background-info-label'}" />

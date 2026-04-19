@@ -30,7 +30,9 @@ humanoid-profile-editor-xeno-prefix = Ксено префикс:
 humanoid-profile-editor-xeno-prefix-tooltip = 2 буквы, или 3 если вы наиграли 124 часа на ксено ролях.
 humanoid-profile-editor-xeno-postfix = Ксено постфикс:
 humanoid-profile-editor-xeno-postfix-tooltip = 1 буква если вы наиграли 24 часа на ксено ролях. 2 буквы или 1 буква и 1 цифра если вы наиграли 300 часов на ксено ролях.
-humanoid-profile-editor-enable = Включить
+
+humanoid-profile-editor-enabled = ��������
+humanoid-profile-editor-disabled = ���������
 humanoid-profile-editor-eyes-label = Цвет глаз:
 humanoid-profile-editor-jobs-tab = Должности
 humanoid-profile-editor-preference-unavailable-stay-in-lobby-button = Остаться в лобби, если должность недоступна.

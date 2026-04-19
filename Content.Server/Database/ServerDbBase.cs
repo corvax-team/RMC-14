@@ -2276,11 +2276,11 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 command.CommandText = @"
 SELECT tier, expiration_unix_seconds
 FROM ccm_player_sponsorship
-WHERE player_id = $player
+WHERE player_id = @player
 LIMIT 1";
 
                 var playerParameter = command.CreateParameter();
-                playerParameter.ParameterName = "$player";
+                playerParameter.ParameterName = "player";
                 playerParameter.Value = player.ToString();
                 command.Parameters.Add(playerParameter);
 
@@ -2418,9 +2418,9 @@ LIMIT 1";
 
                 if (tier == CCMSponsorshipTier.None || expirationUnixSeconds <= 0)
                 {
-                    command.CommandText = "DELETE FROM ccm_player_sponsorship WHERE player_id = $player";
+                    command.CommandText = "DELETE FROM ccm_player_sponsorship WHERE player_id = @player";
                     var deletePlayerParameter = command.CreateParameter();
-                    deletePlayerParameter.ParameterName = "$player";
+                    deletePlayerParameter.ParameterName = "player";
                     deletePlayerParameter.Value = player.ToString();
                     command.Parameters.Add(deletePlayerParameter);
                     await command.ExecuteNonQueryAsync();
@@ -2429,23 +2429,23 @@ LIMIT 1";
 
                 command.CommandText = @"
 INSERT INTO ccm_player_sponsorship (player_id, tier, expiration_unix_seconds)
-VALUES ($player, $tier, $expiration)
+VALUES (@player, @tier, @expiration)
 ON CONFLICT(player_id) DO UPDATE SET
     tier = excluded.tier,
     expiration_unix_seconds = excluded.expiration_unix_seconds";
 
                 var playerParameter = command.CreateParameter();
-                playerParameter.ParameterName = "$player";
+                playerParameter.ParameterName = "player";
                 playerParameter.Value = player.ToString();
                 command.Parameters.Add(playerParameter);
 
                 var tierParameter = command.CreateParameter();
-                tierParameter.ParameterName = "$tier";
+                tierParameter.ParameterName = "tier";
                 tierParameter.Value = (int) tier;
                 command.Parameters.Add(tierParameter);
 
                 var expirationParameter = command.CreateParameter();
-                expirationParameter.ParameterName = "$expiration";
+                expirationParameter.ParameterName = "expiration";
                 expirationParameter.Value = expirationUnixSeconds;
                 command.Parameters.Add(expirationParameter);
 
@@ -3124,6 +3124,10 @@ CREATE TABLE IF NOT EXISTS ccm_player_sponsorship (
                 if (connection.State != System.Data.ConnectionState.Open)
                     await connection.OpenAsync();
 
+                var provider = db.DbContext.Database.ProviderName ?? string.Empty;
+                if (!await HasDatabaseTable(connection, provider, "rmc_round_win_stats"))
+                    return null;
+
                 await using var command = connection.CreateCommand();
                 command.CommandText = "SELECT marine_wins, xeno_wins FROM rmc_round_win_stats LIMIT 1";
 
@@ -3146,6 +3150,53 @@ CREATE TABLE IF NOT EXISTS ccm_player_sponsorship (
             catch
             {
                 return null;
+            }
+        }
+
+        private static async Task<bool> HasDatabaseTable(DbConnection connection, string provider, string tableName)
+        {
+            var shouldClose = connection.State != System.Data.ConnectionState.Open;
+            if (shouldClose)
+                await connection.OpenAsync();
+
+            try
+            {
+                await using var command = connection.CreateCommand();
+                if (provider.Contains("Sqlite", StringComparison.OrdinalIgnoreCase))
+                {
+                    command.CommandText = "SELECT 1 FROM sqlite_master WHERE type='table' AND name=@table LIMIT 1";
+                    var parameter = command.CreateParameter();
+                    parameter.ParameterName = "table";
+                    parameter.Value = tableName;
+                    command.Parameters.Add(parameter);
+
+                    return await command.ExecuteScalarAsync() != null;
+                }
+
+                if (provider.Contains("Npgsql", StringComparison.OrdinalIgnoreCase) ||
+                    provider.Contains("Postgre", StringComparison.OrdinalIgnoreCase))
+                {
+                    command.CommandText = @"
+                        SELECT EXISTS (
+                            SELECT 1
+                            FROM information_schema.tables
+                            WHERE table_schema = 'public'
+                              AND table_name = @table
+                        )";
+                    var parameter = command.CreateParameter();
+                    parameter.ParameterName = "table";
+                    parameter.Value = tableName;
+                    command.Parameters.Add(parameter);
+
+                    return await command.ExecuteScalarAsync() is true;
+                }
+
+                return false;
+            }
+            finally
+            {
+                if (shouldClose)
+                    await connection.CloseAsync();
             }
         }
 

@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -216,6 +217,17 @@ public sealed class CCMStatsSystem : EntitySystem
 
     private void OnKillReported(ref KillReportedEvent args)
     {
+        if (HasComp<XenoComponent>(args.Entity))
+        {
+            if (TryComp(args.Entity, out ActorComponent? actor))
+                GetOrCreateRoundStats(actor.PlayerSession.UserId).XenoDeaths += 1;
+        }
+        else if (HasComp<MarineComponent>(args.Entity))
+        {
+            if (TryComp(args.Entity, out ActorComponent? actor))
+                GetOrCreateRoundStats(actor.PlayerSession.UserId).MarineDeaths += 1;
+        }
+
         if (args.Primary is not KillPlayerSource player || args.Suicide)
             return;
 
@@ -298,7 +310,7 @@ public sealed class CCMStatsSystem : EntitySystem
         else if (winningSide == CCMStatsSide.Xenos)
             xenoMvp = BuildMvp(CCMStatsSide.Xenos);
 
-        SendRoundEndStats(marineMvp, xenoMvp);
+        SendRoundEndStats(winningSide, marineMvp, xenoMvp);
         PersistRoundStats();
     }
 
@@ -355,7 +367,7 @@ public sealed class CCMStatsSystem : EntitySystem
         }
     }
 
-    private void SendRoundEndStats(CCMRoundMvpData? marineMvp, CCMRoundMvpData? xenoMvp)
+    private void SendRoundEndStats(CCMStatsSide winningSide, CCMRoundMvpData? marineMvp, CCMRoundMvpData? xenoMvp)
     {
         foreach (var session in _players.Sessions)
         {
@@ -368,6 +380,7 @@ public sealed class CCMStatsSystem : EntitySystem
                     score,
                     _campaignScore.MarineWins,
                     _campaignScore.XenoWins,
+                    winningSide,
                     personalStats,
                     marineMvp,
                     xenoMvp),

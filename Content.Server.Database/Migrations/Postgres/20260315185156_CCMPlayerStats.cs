@@ -1,4 +1,5 @@
-﻿using System;
+﻿// CM14 rework: non-RMC edit marker.
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable

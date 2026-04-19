@@ -1,6 +1,6 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Content.Server.Administration;
 using Content.Server._CCM.Sponsorship;
 using Content.Shared._CCM.Sponsorship;
@@ -18,10 +18,11 @@ public sealed class CCMSponsorshipCommand : LocalizedCommands
     [Dependency] private readonly ISharedPlayerManager _players = default!;
     [Dependency] private readonly CCMSponsorshipManager _sponsorship = default!;
     [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private readonly IPlayerLocator _locator = default!;
 
     public override string Command => "ccmsponsor";
-    public override string Description => "Sets or clears a persisted sponsorship tier for an online player.";
-    public override string Help => "ccmsponsor <ckey> <none|1|2|3|sponsor1|sponsor2|sponsor3> [days]";
+    public override string Description => "Sets or clears a persisted sponsorship tier for a player.";
+    public override string Help => "ccmsponsor <ckey|netuserid> <none|1|2|3|sponsor1|sponsor2|sponsor3> [days]";
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {
@@ -30,12 +31,6 @@ public sealed class CCMSponsorshipCommand : LocalizedCommands
             if (args.Length is < 2 or > 3)
             {
                 shell.WriteError($"Usage: {Help}");
-                return;
-            }
-
-            if (!_players.TryGetSessionByUsername(args[0], out var session))
-            {
-                shell.WriteError("Target player is not online.");
                 return;
             }
 
@@ -52,32 +47,30 @@ public sealed class CCMSponsorshipCommand : LocalizedCommands
                 return;
             }
 
-            var expiration = tier == CCMSponsorshipTier.None
-                ? 0
-                : DateTimeOffset.UtcNow.AddDays(Math.Max(1, days)).ToUnixTimeSeconds();
-
-            _sponsorship.SetManualTierOverride(session.UserId, tier, expiration);
-            var sponsorshipSystem = _entities.System<CCMSponsorshipSystem>();
-            sponsorshipSystem.PushStatus(session);
-            _ = Task.Run(async () =>
+            var player = _locator.LookupIdByNameOrIdAsync(args[0]).GetAwaiter().GetResult();
+            if (player == null)
             {
-                try
-                {
-                    await _sponsorship.PersistTier(session.UserId, tier, days);
-                }
-                catch (Exception e)
-                {
-                    Logger.ErrorS("ccm.sponsor", $"Failed to persist sponsorship for {session.Name}: {e}");
-                }
-            });
-
-            if (tier == CCMSponsorshipTier.None)
-            {
-                shell.WriteLine($"Cleared sponsorship for {session.Name}. Runtime override applied immediately, database update queued.");
+                shell.WriteError("Target player was not found.");
                 return;
             }
 
-            shell.WriteLine($"Set sponsorship for {session.Name} to {tier} for {days} day(s). Runtime override applied immediately, database update queued.");
+            _sponsorship.SetPersistentTier(player.UserId, tier, days).GetAwaiter().GetResult();
+
+            if (_players.TryGetSessionById(player.UserId, out var session))
+            {
+                var sponsorshipSystem = _entities.System<CCMSponsorshipSystem>();
+                sponsorshipSystem.PushStatus(session);
+            }
+
+            var name = session?.Name ?? player.Username;
+
+            if (tier == CCMSponsorshipTier.None)
+            {
+                shell.WriteLine($"Cleared sponsorship for {name}. Database updated.");
+                return;
+            }
+
+            shell.WriteLine($"Set sponsorship for {name} to {tier} for {days} day(s). Database updated.");
         }
         catch (Exception e)
         {

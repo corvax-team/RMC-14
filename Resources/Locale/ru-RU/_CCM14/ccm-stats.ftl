@@ -1,4 +1,5 @@
-﻿ccm-leaderboard-title = Рейтинг
+﻿# CM14 rework: non-RMC edit marker.
+ccm-leaderboard-title = Рейтинг
 ccm-leaderboard-header = Топ игроков
 ccm-leaderboard-empty = [color=gray]Пока нет игроков с ненулевым результатом.[/color]
 ccm-leaderboard-your-position = Ваша позиция

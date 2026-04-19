@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 

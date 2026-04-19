@@ -30,6 +30,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCLobbyCrtEnabled =
         CVarDef.Create("rmc.lobby_crt_enabled", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    public static readonly CVarDef<int> CCMLobbyWelcomeSeenCount =
+        CVarDef.Create("ccm.lobby_welcome_seen_count", 0, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     public static readonly CVarDef<string> RMCLobbyXenoName =
         CVarDef.Create("rmc.lobby_xeno_name", string.Empty, CVar.CLIENTONLY | CVar.ARCHIVE);
 
@@ -68,6 +71,15 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<string> RMCDiscordAccountLinkingMessageLink =
         CVarDef.Create("rmc.discord_account_linking_message_link", "", CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<string> RMCDiscordOAuthBaseUrl =
+        CVarDef.Create("rmc.discord_oauth_base_url", "", CVar.SERVER | CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    public static readonly CVarDef<string> RMCDiscordOAuthStateSecret =
+        CVarDef.Create("rmc.discord_oauth_state_secret", "", CVar.SERVER | CVar.SERVERONLY | CVar.CONFIDENTIAL);
+
+    public static readonly CVarDef<int> RMCDiscordOAuthStateLifetimeSeconds =
+        CVarDef.Create("rmc.discord_oauth_state_lifetime_seconds", 300, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<int> RMCRequisitionsStartingBalance =
         CVarDef.Create("rmc.requisitions_starting_balance", 0, CVar.REPLICATED | CVar.SERVER);

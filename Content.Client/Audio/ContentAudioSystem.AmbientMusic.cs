@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
 using Content.Client.Gameplay;
 using Content.Shared.Audio;

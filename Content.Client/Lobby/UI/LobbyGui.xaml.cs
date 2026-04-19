@@ -1,5 +1,6 @@
 using Content.Client._RMC14.Roadmap;
 using Content.Client._RMC14.RMCPlaytimeStats;
+using Content.Client._RMC14.LinkAccount;
 using Content.Client._CCM.Achievements;
 using Content.Client._CCM.Sponsorship;
 using Content.Client._CCM.Stats;
@@ -41,6 +42,7 @@ namespace Content.Client.Lobby.UI
         [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
+        [Dependency] private readonly LinkAccountManager _linkAccount = default!;
         [Dependency] private readonly IStateManager _stateManager = default!;
 
         private RulesAndInfoWindow? _tutorialWindow;
@@ -88,6 +90,7 @@ namespace Content.Client.Lobby.UI
             OptionsButton.OnPressed += _ => UserInterfaceManager.GetUIController<OptionsUIController>().ToggleWindow();
             GuidesButton.OnPressed += _ => UserInterfaceManager.GetUIController<GuidebookUIController>().ToggleGuidebook();
             UpdatesButton.OnPressed += _ => UserInterfaceManager.GetUIController<RoadmapUIController>().ToggleRoadmap();
+            LinkDiscordButton.OnPressed += _ => UserInterfaceManager.GetUIController<DiscordOAuthUIController>().OpenLink();
 
             TaskbarMenuButton.OnPressed += _ => ToggleLeftMenu(!_leftMenuVisible);
             TaskbarRatingButton.OnPressed += _ => ToggleLeaderboard();
@@ -110,6 +113,8 @@ namespace Content.Client.Lobby.UI
             _cfg.OnValueChanged(RMCCVars.RMCLobbyCrtEnabled, ApplyLobbyTheme);
             _cfg.OnValueChanged(RMCCVars.RMCUIColorTheme,
                 _ => ApplyLobbyTheme(_cfg.GetCVar(RMCCVars.RMCLobbyCrtEnabled)));
+            _linkAccount.Updated += UpdateDiscordLinkState;
+            UpdateDiscordLinkState();
         }
 
         public void SwitchState(LobbyGuiState state)
@@ -278,6 +283,7 @@ namespace Content.Client.Lobby.UI
             SetThemeClass(ReadyDivider, crtEnabled);
             SetThemeClass(ObserveDivider, crtEnabled);
             SetThemeClass(ServerInfoTitle, crtEnabled);
+            SetThemeClass(LinkDiscordButton, crtEnabled);
             SetThemeClass(StationTime, crtEnabled);
             SetThemeClass(LobbyMusicPanel, crtEnabled);
             SetThemeClass(LobbyMusicHeader, crtEnabled);
@@ -332,6 +338,7 @@ namespace Content.Client.Lobby.UI
             ApplyButtonGlow(UpdatesButton, crtEnabled);
             ApplyButtonGlow(GuidesButton, crtEnabled);
             ApplyButtonGlow(AHelpButton, crtEnabled);
+            ApplyButtonGlow(LinkDiscordButton, crtEnabled);
             ApplyButtonGlow(OptionsButton, crtEnabled);
             ApplyButtonGlow(LeaveButton, crtEnabled);
             ApplyButtonGlow(TutorialButton, crtEnabled);
@@ -344,6 +351,12 @@ namespace Content.Client.Lobby.UI
             ApplyButtonGlow(JoinHiveButton, crtEnabled);
 
             Chat.SetLobbyTheme(true, crtEnabled);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _linkAccount.Updated -= UpdateDiscordLinkState;
+            base.Dispose(disposing);
         }
 
         private static void SetThemeClass(Control control, bool crtEnabled)
@@ -379,6 +392,15 @@ namespace Content.Client.Lobby.UI
         private static void ApplyButtonGlow(Button button, bool crtEnabled)
         {
             ApplyGlow(button.Label, crtEnabled);
+        }
+
+        private void UpdateDiscordLinkState()
+        {
+            var linked = _linkAccount.Linked;
+            LinkDiscordButton.Visible = !linked;
+            LinkDiscordButton.Text = Loc.GetString(linked
+                ? "ui-lobby-discord-linked-button"
+                : "ui-lobby-link-discord-button");
         }
 
         private void ToggleLeftMenu(bool show)

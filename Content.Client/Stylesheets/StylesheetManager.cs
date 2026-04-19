@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using Content.Shared._RMC14.CCVar;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;

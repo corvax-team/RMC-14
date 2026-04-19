@@ -1,3 +1,4 @@
+﻿# CM14 rework: non-RMC edit marker.
 ccm-ui-options-barks-volume = Bark voice volume:
 
 ccm-humanoid-profile-editor-bark-title = Bark Voice

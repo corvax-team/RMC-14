@@ -1,3 +1,4 @@
+﻿# CM14 rework: non-RMC edit marker.
 ccm-achievements-header = Достижения
 ccm-achievements-tab-general = Общий
 ccm-achievements-tab-misc = Прочее

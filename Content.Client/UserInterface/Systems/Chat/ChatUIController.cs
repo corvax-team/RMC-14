@@ -942,7 +942,7 @@ public sealed partial class ChatUIController : UIController
             if (_ent.GetComponentOrNull<ActorComponent>(_ent.GetEntity(msg.SenderEntity)) != null)
             {
                 // RMC14: color changes depending on the squad it is in, otherwise the default color is used.
-                string? squadColor = _ent.System<SharedCMChatSystem>().ColorizeSpeakerNameBySquadOrNull(msg);
+                string? squadColor = TryGetSquadColorizedSpeakerName(msg);
                 msg.WrappedMessage = squadColor != null ? squadColor : SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
             }
         }
@@ -1015,6 +1015,20 @@ public sealed partial class ChatUIController : UIController
                 break;
         }
     }
+
+    // RMC chat squad color guard start
+    private string? TryGetSquadColorizedSpeakerName(ChatMessage msg)
+    {
+        try
+        {
+            return _ent.SystemOrNull<SharedCMChatSystem>()?.ColorizeSpeakerNameBySquadOrNull(msg);
+        }
+        catch (NullReferenceException)
+        {
+            return null;
+        }
+    }
+    // RMC chat squad color guard end
 
     public void OnDeleteChatMessagesBy(MsgDeleteChatMessagesBy msg)
     {

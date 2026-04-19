@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;

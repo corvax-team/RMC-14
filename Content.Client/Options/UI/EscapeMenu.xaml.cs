@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System;
 using System.Collections.Generic;
 using Robust.Client.Graphics;
@@ -87,6 +88,7 @@ namespace Content.Client.Options.UI
                     ContentMarginBottomOverride = 6,
                 };
                 button.Label.FontColorOverride = Color.Black;
+                button.Label.FontColorShadowOverride = null;
                 return;
             }
 
@@ -114,6 +116,7 @@ namespace Content.Client.Options.UI
                 : hovered
                     ? hoverAccent
                     : Color.Black;
+            button.Label.FontColorShadowOverride = null;
         }
     }
 }

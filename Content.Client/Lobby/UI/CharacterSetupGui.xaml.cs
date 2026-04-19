@@ -54,7 +54,6 @@ namespace Content.Client.Lobby.UI
         private StyleNano.UiColorTheme _appliedTheme;
         private float _lastCarouselWidth = -1f;
         private CarouselLayoutMode _carouselLayoutMode = CarouselLayoutMode.Five;
-
         private enum CarouselLayoutMode
         {
             One,
@@ -182,7 +181,6 @@ namespace Content.Client.Lobby.UI
                 ContentMarginTopOverride = 2
             };
         }
-
         // CCM rework lobby - end
 
         /// <summary>

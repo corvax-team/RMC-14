@@ -1,8 +1,10 @@
+﻿<!-- CM14 rework: non-RMC edit marker. -->
 <ccm:DefaultCMWindow xmlns="https://spacestation14.io"
                      xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
                      Title="{Loc 'ui-options-language-restart-title'}"
                      SetSize="460 160"
                      MinSize="460 160"
+                     StyleClasses="OptionsMenuRoot"
                      Resizable="False">
     <BoxContainer Orientation="Vertical" SeparationOverride="10" Margin="10">
         <Label Name="MessageLabel"
@@ -15,7 +17,6 @@
                       SeparationOverride="8">
             <Button Name="ConfirmButton"
                     MinWidth="160"
-                    StyleClasses="ButtonColorRed"
                     Text="{Loc 'ui-options-language-restart-confirm'}" />
             <Button Name="CancelButton"
                     MinWidth="140"

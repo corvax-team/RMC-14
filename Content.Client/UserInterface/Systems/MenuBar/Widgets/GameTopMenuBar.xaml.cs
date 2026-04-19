@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Numerics;
 using Content.Client.Resources;
 using Content.Client.Stylesheets;
@@ -13,7 +14,7 @@ namespace Content.Client.UserInterface.Systems.MenuBar.Widgets;
 public sealed partial class GameTopMenuBar : UIWidget
 {
     [Dependency] private readonly IResourceCache _resourceCache = default!;
-    private const float TopButtonSize = 54f;
+    private const float TopButtonSize = 68f;
 
     public MenuButton EscapeButton { get; }
     public MenuButton? GuidebookButton { get; }
@@ -35,6 +36,7 @@ public sealed partial class GameTopMenuBar : UIWidget
         HorizontalAlignment = HAlignment.Stretch;
         VerticalAlignment = VAlignment.Top;
         SeparationOverride = 5;
+        MinSize = new Vector2(0f, TopButtonSize);
 
         EscapeButton = CreateButton(
             "EscapeButton",

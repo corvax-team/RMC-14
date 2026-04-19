@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 

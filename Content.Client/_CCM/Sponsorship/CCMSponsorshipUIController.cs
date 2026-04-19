@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using Content.Shared._CCM.Sponsorship;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;

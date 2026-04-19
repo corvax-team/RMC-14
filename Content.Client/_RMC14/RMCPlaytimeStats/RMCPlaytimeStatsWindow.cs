@@ -74,7 +74,22 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         PopulateDepartmentButtons();
         ApplyThemeColors(true);
         ShowGeneralTab();
+
+        // CCM sponsorship stats refresh start
+        _jobRequirementsManager.Updated += OnRequirementsUpdated;
+        _jobRequirementsManager.RequestSponsorshipStatus();
         _config.OnValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged, false);
+        OnClose += () =>
+        {
+            _jobRequirementsManager.Updated -= OnRequirementsUpdated;
+        };
+        // CCM sponsorship stats refresh end
+    }
+
+    // CCM sponsorship stats refresh: rebuild view when sponsorship changes available roles.
+    private void OnRequirementsUpdated()
+    {
+        ShowGeneralTab();
     }
 
     private void LoadMedalTimes()

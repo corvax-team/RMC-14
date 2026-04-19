@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 namespace Content.Shared.Preferences
 {
     /// <summary>

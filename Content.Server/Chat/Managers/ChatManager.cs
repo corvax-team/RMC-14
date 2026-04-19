@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -601,16 +602,13 @@ internal sealed partial class ChatManager : IChatManager
         user?.AddEntity(netSource);
 
         var msg = new ChatMessage(channel, message, wrappedMessage, netSource, user?.Key, hideChat, colorOverride, audioPath, audioVolume, hidePopup, speechStyleClass: _entityManager.GetComponentOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass, repeatCheckSender: !_entityManager.HasComponent<ChatRepeatIgnoreSenderComponent>(source));
-        _netManager.ServerSendMessage(new MsgChatMessage() { Message = msg }, client);
+        ChatMessageToOne(msg, client, recordReplay);
+    }
 
-        if (!recordReplay)
-            return;
-
-        if ((channel & ChatChannel.AdminRelated) == 0 ||
-            _configurationManager.GetCVar(CCVars.ReplayRecordAdminChat))
-        {
-            _replay.RecordServerMessage(msg);
-        }
+    public void ChatMessageToOne(ChatMessage message, INetChannel client, bool recordReplay = false)
+    {
+        DispatchChatMessageToClient(client, message);
+        RecordReplayIfNeeded(message, recordReplay);
     }
 
     public void ChatMessageToMany(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat, bool recordReplay, IEnumerable<INetChannel> clients, Color? colorOverride = null, string? audioPath = null, float audioVolume = 0, NetUserId? author = null)
@@ -623,16 +621,12 @@ internal sealed partial class ChatManager : IChatManager
         user?.AddEntity(netSource);
 
         var msg = new ChatMessage(channel, message, wrappedMessage, netSource, user?.Key, hideChat, colorOverride, audioPath, audioVolume, speechStyleClass: _entityManager.GetComponentOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass, repeatCheckSender: !_entityManager.HasComponent<ChatRepeatIgnoreSenderComponent>(source));
-        _netManager.ServerSendToMany(new MsgChatMessage() { Message = msg }, clients);
-
-        if (!recordReplay)
-            return;
-
-        if ((channel & ChatChannel.AdminRelated) == 0 ||
-            _configurationManager.GetCVar(CCVars.ReplayRecordAdminChat))
+        foreach (var client in clients)
         {
-            _replay.RecordServerMessage(msg);
+            DispatchChatMessageToClient(client, msg);
         }
+
+        RecordReplayIfNeeded(msg, recordReplay);
     }
 
     public void ChatMessageToManyFiltered(Filter filter, ChatChannel channel, string message, string wrappedMessage, EntityUid source,
@@ -657,16 +651,12 @@ internal sealed partial class ChatManager : IChatManager
         user?.AddEntity(netSource);
 
         var msg = new ChatMessage(channel, message, wrappedMessage, netSource, user?.Key, hideChat, colorOverride, audioPath, audioVolume, speechStyleClass: _entityManager.GetComponentOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass, repeatCheckSender: !_entityManager.HasComponent<ChatRepeatIgnoreSenderComponent>(source));
-        _netManager.ServerSendToAll(new MsgChatMessage() { Message = msg });
-
-        if (!recordReplay)
-            return;
-
-        if ((channel & ChatChannel.AdminRelated) == 0 ||
-            _configurationManager.GetCVar(CCVars.ReplayRecordAdminChat))
+        foreach (var session in _player.Sessions)
         {
-            _replay.RecordServerMessage(msg);
+            DispatchChatMessageToClient(session.Channel, msg);
         }
+
+        RecordReplayIfNeeded(msg, recordReplay);
     }
 
     public bool MessageCharacterLimit(ICommonSession? player, string message)

@@ -44,7 +44,7 @@
                                     <TextureRect Name="CenterFacehuggerPortrait" MinSize="96 96"
                                                  VerticalAlignment="Center"
                                                  Stretch="KeepAspectCentered"
-                                                 TexturePath="/Textures/_RMC14/Mobs/Xenonids/Parasite/parasite.rsi/sleeping.png" />
+                                                 TexturePath="/Textures/_RMC14/Mobs/Xenonids/Larva/larva.rsi/larva.png" />
                                 </BoxContainer>
                                 <PanelContainer Name="ReadyDivider" StyleClasses="LobbyMenuDivider"
                                                 MinSize="0 2" HorizontalExpand="True" Margin="0 6" />
@@ -214,6 +214,8 @@
                          VerticalExpand="True" />
             <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" SeparationOverride="6"
                           Margin="8 8 8 8">
+                <Button Name="LinkDiscordButton" Access="Public" Text="{Loc 'ui-lobby-link-discord-button'}"
+                        StyleClasses="LobbyTopButton" MinHeight="40" HorizontalExpand="True" />
                 <BoxContainer Orientation="Horizontal" MinSize="0 32" Name="TopButtonBar"
                               SeparationOverride="6" HorizontalAlignment="Stretch" HorizontalExpand="True">
                     <Button Name="AHelpButton" Access="Public" Text="{Loc 'ui-lobby-ahelp-button'}"

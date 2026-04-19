@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -159,9 +160,11 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
         OnKeyBindUp += StopDrag;
 
         _statsSystem.PlayerStatsReceived += OnPlayerStatsReceived;
+        _jobRequirementsManager.Updated += OnJobRequirementsUpdated;
         OnClose += () =>
         {
             _statsSystem.PlayerStatsReceived -= OnPlayerStatsReceived;
+            _jobRequirementsManager.Updated -= OnJobRequirementsUpdated;
             OnKeyBindDown -= StartDrag;
             OnKeyBindUp -= StopDrag;
         };
@@ -171,12 +174,18 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
 
     public void RefreshData()
     {
+        _jobRequirementsManager.RequestSponsorshipStatus();
         _statsSystem.RequestPlayerStats();
     }
 
     private void OnPlayerStatsReceived(CCMPlayerStatsSnapshot stats)
     {
         _stats = stats;
+        Rebuild();
+    }
+
+    private void OnJobRequirementsUpdated()
+    {
         Rebuild();
     }
 
@@ -208,9 +217,11 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
         {
             _content.AddChild(BuildSectionHeader(section.Title));
 
+            var rowIndex = 0;
             foreach (var (name, value) in section.Rows)
             {
-                _content.AddChild(BuildStatRow(name, value));
+                _content.AddChild(BuildStatRow(name, value, rowIndex % 2 == 0));
+                rowIndex++;
             }
         }
     }
@@ -440,13 +451,14 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
 
     private IEnumerable<StatsSection> BuildPlaytimeSections()
     {
+        var showAllRoleTimers = _jobRequirementsManager.HasUnlockedAllRoleTimers();
         var rolePlaytimes = FilterRolePlaytimes(_jobRequirementsManager.FetchPlaytimeJobIdByRoles())
-            .Where(kvp => kvp.Value > TimeSpan.Zero)
+            .Where(kvp => showAllRoleTimers || kvp.Value > TimeSpan.Zero)
             .OrderByDescending(kvp => kvp.Value)
             .ToList();
 
         var totalPlaytime = rolePlaytimes.Aggregate(TimeSpan.Zero, (acc, next) => acc + next.Value);
-        var topRole = rolePlaytimes.FirstOrDefault();
+        var topRole = rolePlaytimes.FirstOrDefault(kvp => kvp.Value > TimeSpan.Zero);
 
         yield return new StatsSection(
             Loc.GetString("ccm-stats-section-playtime-overview"),
@@ -454,8 +466,8 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
             {
                 (Loc.GetString("ccm-stats-playtime-total"), ContentLocalizationManager.FormatPlaytime(totalPlaytime)),
                 (Loc.GetString("ccm-stats-playtime-tracked-roles"), rolePlaytimes.Count.ToString()),
-                (Loc.GetString("ccm-stats-playtime-top-role"), topRole.Key == null ? "-" : GetLocalizedJobName(topRole.Key)),
-                (Loc.GetString("ccm-stats-playtime-top-role-time"), topRole.Key == null ? "0m 0s" : ContentLocalizationManager.FormatPlaytime(topRole.Value)),
+                (Loc.GetString("ccm-stats-playtime-top-role"), string.IsNullOrEmpty(topRole.Key) ? "-" : GetLocalizedJobName(topRole.Key)),
+                (Loc.GetString("ccm-stats-playtime-top-role-time"), string.IsNullOrEmpty(topRole.Key) ? "0m 0s" : ContentLocalizationManager.FormatPlaytime(topRole.Value)),
             });
 
         var rows = new List<(string, string)>();
@@ -543,15 +555,22 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
         return panel;
     }
 
-    private static Control BuildStatRow(string name, string value)
+    private static Control BuildStatRow(string name, string value, bool evenRow)
     {
+        var backgroundColor = evenRow
+            ? Color.Black.WithAlpha(0.18f)
+            : StyleNano.ButtonColorContext.WithAlpha(0.22f);
+        var borderColor = evenRow
+            ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.22f)
+            : StyleNano.LobbyMenuButtonBase.WithAlpha(0.30f);
+
         var panel = new PanelContainer
         {
             MouseFilter = MouseFilterMode.Stop,
             PanelOverride = new StyleBoxFlat
             {
-                BackgroundColor = Color.Black.WithAlpha(0.12f),
-                BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.18f),
+                BackgroundColor = backgroundColor,
+                BorderColor = borderColor,
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 8,
                 ContentMarginTopOverride = 5,

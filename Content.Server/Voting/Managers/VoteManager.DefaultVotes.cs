@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -43,6 +44,9 @@ namespace Content.Server.Voting.Managers
 
         public void CreateStandardVote(ICommonSession? initiator, StandardVoteType voteType, string[]? args = null)
         {
+            if (voteType == StandardVoteType.Votekick)
+                return;
+
             if (initiator != null && args == null)
                 _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"{initiator} initiated a {voteType.ToString()} vote");
             else if (initiator != null && args != null)

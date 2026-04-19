@@ -1,4 +1,5 @@
-﻿using Content.Client._RMC14.LinkAccount;
+﻿// CM14 rework: non-RMC edit marker.
+using Content.Client._RMC14.LinkAccount;
 using Content.Client._RMC14.Roadmap;
 using Content.Client.Changelog;
 using Content.Client.Stylesheets;
@@ -59,12 +60,12 @@ namespace Content.Client.Info
             roadmapButton.OnPressed += _ => UserInterfaceManager.GetUIController<RoadmapUIController>().ToggleRoadmap();
             buttons.AddChild(roadmapButton);
 
-            var linkAccount = UserInterfaceManager.GetUIController<LinkAccountUIController>();
+            var linkAccount = UserInterfaceManager.GetUIController<DiscordOAuthUIController>();
             var linkAccountButton = new Button
             {
                 Text = Loc.GetString("rmc-ui-link-discord-account"),
             };
-            linkAccountButton.OnPressed += _ => linkAccount.ToggleWindow();
+            linkAccountButton.OnPressed += _ => linkAccount.OpenLink();
             buttons.AddChild(linkAccountButton);
 
             AddInfoButton("rmc-ui-patreon", CCVars.InfoLinksPatreon);

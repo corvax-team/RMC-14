@@ -1,5 +1,8 @@
+﻿<!-- CM14 rework: non-RMC edit marker. -->
 <ccm:DefaultCMWindow xmlns="https://spacestation14.io"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
+                     x:Class="Content.Client._CCM.UserInterface.Controls.DefaultCMWindow"
                      MinWidth="100" MinHeight="50">
     <PanelContainer StyleClasses="CMWindowFrame" />
     <BoxContainer Orientation="Vertical" SeparationOverride="0">

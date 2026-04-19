@@ -1,4 +1,5 @@
-﻿ccm-leaderboard-title = Leaderboard
+﻿# CM14 rework: non-RMC edit marker.
+ccm-leaderboard-title = Leaderboard
 ccm-leaderboard-header = Top Players
 ccm-leaderboard-empty = [color=gray]No players with a non-zero score yet.[/color]
 ccm-leaderboard-your-position = Your position

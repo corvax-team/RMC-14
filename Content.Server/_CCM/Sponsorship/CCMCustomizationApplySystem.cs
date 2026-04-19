@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Content.Shared._CCM.Sponsorship;

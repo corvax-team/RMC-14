@@ -1,3 +1,4 @@
+﻿# CM14 rework: non-RMC edit marker.
 ### UI
 
 chat-manager-max-message-length = Ваше сообщение превышает лимит в { $maxMessageLength } символов

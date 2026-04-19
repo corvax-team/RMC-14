@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Net;
 using System.Net.Sockets;
 using Content.Server.Administration.Managers;

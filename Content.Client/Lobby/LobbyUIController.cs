@@ -838,6 +838,9 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
         foreach (var item in _inventory.GetHandOrInventoryEntities(dummy))
         {
+            if (_inventory.TryGetContainingSlot(item, out _))
+                continue;
+
             if (!EntityManager.HasComponent<ItemCamouflageComponent>(item))
                 continue;
 
@@ -899,12 +902,11 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     public EntityUid LoadProfileEntity(HumanoidCharacterProfile? humanoid, JobPrototype? job, bool jobClothes)
     {
         EntityUid dummyEnt;
+        var effectiveJob = job;
 
         EntProtoId? previewEntity = null;
-        if (humanoid != null && jobClothes)
+        if (humanoid != null && jobClothes && job != null)
         {
-            job ??= GetPreferredJob(humanoid);
-
             previewEntity = job.JobPreviewEntity ?? (EntProtoId?)job?.JobEntity;
         }
 
@@ -928,13 +930,15 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
         if (humanoid != null && jobClothes)
         {
-            DebugTools.Assert(job != null);
+            effectiveJob ??= GetPreferredJob(humanoid);
+            if (effectiveJob == null)
+                return dummyEnt;
 
-            GiveDummyJobClothes(dummyEnt, humanoid, job);
+            GiveDummyJobClothes(dummyEnt, humanoid, effectiveJob);
 
-            if (_prototypeManager.HasIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(job.ID)))
+            if (_prototypeManager.HasIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(effectiveJob.ID)))
             {
-                var loadout = humanoid.GetLoadoutOrDefault(LoadoutSystem.GetJobPrototype(job.ID), _playerManager.LocalSession, humanoid.Species, EntityManager, _prototypeManager);
+                var loadout = humanoid.GetLoadoutOrDefault(LoadoutSystem.GetJobPrototype(effectiveJob.ID), _playerManager.LocalSession, humanoid.Species, EntityManager, _prototypeManager);
                 GiveDummyLoadout(dummyEnt, loadout);
             }
 

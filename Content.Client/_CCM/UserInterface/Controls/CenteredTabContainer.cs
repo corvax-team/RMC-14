@@ -19,11 +19,14 @@ namespace Content.Client._CCM.UserInterface.Controls
 
         public const string StylePropertyTabStyleBox = TabContainer.StylePropertyTabStyleBox;
         public const string StylePropertyTabStyleBoxInactive = TabContainer.StylePropertyTabStyleBoxInactive;
+        public const string StylePropertyTabStyleBoxHover = "tabStyleBoxHover";
         public const string stylePropertyTabFontColor = TabContainer.stylePropertyTabFontColor;
         public const string StylePropertyTabFontColorInactive = TabContainer.StylePropertyTabFontColorInactive;
+        public const string StylePropertyTabFontColorHover = "tabFontColorHover";
         public const string StylePropertyPanelStyleBox = TabContainer.StylePropertyPanelStyleBox;
 
         private int _currentTab;
+        private int? _hoveredTab;
         private bool _tabsVisible = true;
         private readonly List<float> _tabRight = new();
         private readonly List<float> _tabLeft = new();
@@ -152,8 +155,10 @@ namespace Content.Client._CCM.UserInterface.Controls
             var font = _getFont();
             var boxActive = _getTabBoxActive();
             var boxInactive = _getTabBoxInactive();
+            var boxHover = _getTabBoxHover();
             var fontColorActive = _getTabFontColorActive();
             var fontColorInactive = _getTabFontColorInactive();
+            var fontColorHover = _getTabFontColorHover();
 
             var totalWidth = GetTotalHeaderWidth(font, boxActive, boxInactive);
             _headerOffsetStart = MathF.Max(0f, (PixelWidth - totalWidth) / 2f);
@@ -182,7 +187,8 @@ namespace Content.Client._CCM.UserInterface.Controls
                 }
 
                 var active = _currentTab == i;
-                var box = active ? boxActive : boxInactive;
+                var hovered = _hoveredTab == i && !active;
+                var box = active ? boxActive : hovered ? boxHover ?? boxInactive : boxInactive;
 
                 UIBox2 contentBox;
                 var topLeft = new Vector2(headerOffset, 0);
@@ -208,7 +214,11 @@ namespace Content.Client._CCM.UserInterface.Controls
                     if (!font.TryGetCharMetrics(rune, UIScale, out var metrics))
                         continue;
 
-                    font.DrawChar(handle, rune, baseLine, UIScale, active ? fontColorActive : fontColorInactive);
+                    font.DrawChar(handle, rune, baseLine, UIScale, active
+                        ? fontColorActive
+                        : hovered
+                            ? fontColorHover
+                            : fontColorInactive);
                     baseLine += new Vector2(metrics.Advance, 0);
                 }
 
@@ -272,15 +282,50 @@ namespace Content.Client._CCM.UserInterface.Controls
 
             args.Handle();
 
-            var relX = args.RelativePixelPosition.X;
+            if (GetTabAtPixelPosition(args.RelativePixelPosition) is { } tab)
+            {
+                CurrentTab = tab;
+                return;
+            }
+        }
+
+        protected override void MouseMove(GUIMouseMoveEventArgs args)
+        {
+            base.MouseMove(args);
+
+            var hovered = GetTabAtPixelPosition(args.RelativePixelPosition);
+            if (_hoveredTab == hovered)
+                return;
+
+            _hoveredTab = hovered;
+            if (hovered != null)
+                UserInterfaceManager.HoverSound();
+        }
+
+        protected override void MouseExited()
+        {
+            base.MouseExited();
+            _hoveredTab = null;
+        }
+
+        private int? GetTabAtPixelPosition(Vector2 position)
+        {
+            if (!TabsVisible || position.Y < 0 || position.Y > _getHeaderSize())
+                return null;
+
+            if (_tabLeft.Count != ChildCount || _tabRight.Count != ChildCount)
+                return null;
+
             for (var i = 0; i < ChildCount; i++)
             {
-                if (relX >= _tabLeft[i] && relX <= _tabRight[i])
-                {
-                    CurrentTab = i;
-                    return;
-                }
+                if (!GetTabVisible(i))
+                    continue;
+
+                if (position.X >= _tabLeft[i] && position.X <= _tabRight[i])
+                    return i;
             }
+
+            return null;
         }
 
         private float GetTotalHeaderWidth(Font font, StyleBox? boxActive, StyleBox? boxInactive)
@@ -349,6 +394,12 @@ namespace Content.Client._CCM.UserInterface.Controls
             return box;
         }
 
+        private StyleBox? _getTabBoxHover()
+        {
+            TryGetStyleProperty<StyleBox>(StylePropertyTabStyleBoxHover, out var box);
+            return box;
+        }
+
         private Color _getTabFontColorActive()
         {
             if (TabFontColorOverride != null)
@@ -369,6 +420,14 @@ namespace Content.Client._CCM.UserInterface.Controls
                 return color;
 
             return Color.Gray;
+        }
+
+        private Color _getTabFontColorHover()
+        {
+            if (TryGetStyleProperty(StylePropertyTabFontColorHover, out Color color))
+                return color;
+
+            return _getTabFontColorActive();
         }
 
         private StyleBox? _getPanel()

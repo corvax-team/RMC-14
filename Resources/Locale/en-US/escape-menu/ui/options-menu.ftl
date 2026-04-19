@@ -30,8 +30,15 @@ ui-options-general-lobby = Lobby
 ui-options-general-discord = Discord
 ui-options-general-cursor = Cursor
 ui-options-general-speech = Speech
+ui-options-general-chat-translation = Chat translation
 ui-options-general-storage = Storage
 ui-options-general-accessibility = Accessibility
+ui-options-chat-translate-enabled = Enable automatic chat translation
+ui-options-chat-translate-language = Translate chat to:
+ui-options-chat-translate-language-off = Do not translate
+ui-options-chat-translate-api = LibreTranslate API:
+ui-options-chat-translate-api-placeholder = http://127.0.0.1:5500/translate
+ui-options-chat-translate-api-help = Run your local LibreTranslate service and leave the default endpoint unless you changed its port.
 # CCM priority rework
 
 ## Audio menu

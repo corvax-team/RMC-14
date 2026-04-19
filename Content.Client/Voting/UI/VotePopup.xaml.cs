@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System;
 using Content.Client.Stylesheets;
 using Content.Shared.Ghost;
@@ -41,6 +42,9 @@ namespace Content.Client.Voting.UI
             TimeLeftBar.ForegroundStyleBoxOverride = new StyleBoxFlat((StyleNano.LobbyMenuButtonBase * new Color(0.48f, 0.48f, 0.48f, 1f)).WithAlpha(0.95f));
             TimeLeftBar.BackgroundStyleBoxOverride = new StyleBoxFlat((StyleNano.LobbyMenuButtonDisabledCrt * new Color(0.60f, 0.60f, 0.60f, 1f)).WithAlpha(0.88f));
             TimeLeftText.FontColorOverride = Color.FromHex("#D9DDE3");
+            // CCM vote popup layout rework: add explicit close button for the compact popup layout.
+            HideButton.OnPressed += _ => Visible = false;
+
             _voteButtons = new Button[vote.Entries.Length];
             var group = new ButtonGroup();
 

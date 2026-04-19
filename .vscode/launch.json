@@ -27,7 +27,10 @@
             "type": "coreclr",
             "request": "launch",
             "program": "${workspaceFolder}/bin/Content.Server/Content.Server.dll",
-            "args": [],
+            "args": [
+                "--cvar",
+                "config.presets=Corvax/main"
+            ],
             "console": "integratedTerminal",
             "stopAtEntry": false
         },

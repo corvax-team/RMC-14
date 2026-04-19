@@ -103,6 +103,9 @@ namespace Content.Client.Stylesheets
         public const string StyleClassLobbyMenuDivider = "LobbyMenuDivider";
         public const string StyleClassLobbyMenuIconButton = "LobbyMenuIconButton";
         public const string StyleClassLobbyTopButton = "LobbyTopButton";
+        public const string StyleClassLobbyDiscordLinkButton = "LobbyDiscordLinkButton";
+        public const string StyleClassLobbyDiscordLinkWarningPanel = "LobbyDiscordLinkWarningPanel";
+        public const string StyleClassLobbyDiscordLinkWarningText = "LobbyDiscordLinkWarningText";
         public const string StyleClassLobbyChatPanel = "LobbyChatPanel";
         public const string StyleClassLobbyMusicPanel = "LobbyMusicPanel";
         public const string StyleClassLobbyChatPanelInner = "LobbyChatPanelInner";
@@ -185,6 +188,10 @@ namespace Content.Client.Stylesheets
         public static Color ButtonColorContextHover = Color.FromHex("#1D6630");
         public static Color ButtonColorContextPressed = Color.FromHex("#103E1C");
         public static Color ButtonColorContextDisabled = Color.FromHex("#103E1C");
+        public static Color DropdownButtonColorContext = Color.FromHex("#155124");
+        public static Color DropdownButtonColorContextHover = Color.FromHex("#1D6630");
+        public static Color DropdownButtonColorContextPressed = Color.FromHex("#1BE628");
+        public static Color DropdownButtonColorContextDisabled = Color.FromHex("#103E1C");
 
         // Examine button colors
         public static Color ExamineButtonColorContext = Color.FromHex("#155124");
@@ -276,6 +283,10 @@ namespace Content.Client.Stylesheets
                 ButtonColorContextHover = Color.FromHex("#102A52");
                 ButtonColorContextPressed = Color.FromHex("#081A35");
                 ButtonColorContextDisabled = Color.FromHex("#081A35");
+                DropdownButtonColorContext = Color.FromHex("#091B38");
+                DropdownButtonColorContextHover = Color.FromHex("#102A52");
+                DropdownButtonColorContextPressed = Color.FromHex("#1D54D9");
+                DropdownButtonColorContextDisabled = Color.FromHex("#081A35");
 
                 ExamineButtonColorContext = Color.FromHex("#091B38");
                 ExamineButtonColorContextHover = Color.FromHex("#102A52");
@@ -296,21 +307,21 @@ namespace Content.Client.Stylesheets
                 DangerousRedFore = Color.FromHex("#48FF6A");
                 DisabledFore = Color.FromHex("#23402B");
 
-                ButtonColorDefault = Color.FromHex("#1BE628");
-                ButtonColorDefaultRed = Color.FromHex("#1BE628");
-                ButtonColorHovered = Color.FromHex("#35F341");
-                ButtonColorHoveredRed = Color.FromHex("#35F341");
-                ButtonColorPressed = Color.FromHex("#12B91D");
-                ButtonColorDisabled = Color.FromHex("#10911A");
+                ButtonColorDefault = Color.FromHex("#0C9510");
+                ButtonColorDefaultRed = Color.FromHex("#0C9510");
+                ButtonColorHovered = Color.FromHex("#12A916");
+                ButtonColorHoveredRed = Color.FromHex("#12A916");
+                ButtonColorPressed = Color.FromHex("#08790B");
+                ButtonColorDisabled = Color.FromHex("#065F08");
 
-                ButtonColorCautionDefault = Color.FromHex("#1BE628");
-                ButtonColorCautionHovered = Color.FromHex("#35F341");
-                ButtonColorCautionPressed = Color.FromHex("#12B91D");
-                ButtonColorCautionDisabled = Color.FromHex("#10911A");
+                ButtonColorCautionDefault = Color.FromHex("#0C9510");
+                ButtonColorCautionHovered = Color.FromHex("#12A916");
+                ButtonColorCautionPressed = Color.FromHex("#08790B");
+                ButtonColorCautionDisabled = Color.FromHex("#065F08");
 
-                ButtonColorGoodDefault = Color.FromHex("#1BE628");
-                ButtonColorGoodHovered = Color.FromHex("#35F341");
-                ButtonColorGoodDisabled = Color.FromHex("#10911A");
+                ButtonColorGoodDefault = Color.FromHex("#0C9510");
+                ButtonColorGoodHovered = Color.FromHex("#12A916");
+                ButtonColorGoodDisabled = Color.FromHex("#065F08");
 
                 LobbyCrtAccent = Color.FromHex("#1BE628");
                 LobbyCrtText = Color.FromHex("#1BE628");
@@ -333,6 +344,10 @@ namespace Content.Client.Stylesheets
                 ButtonColorContextHover = Color.FromHex("#1D6630");
                 ButtonColorContextPressed = Color.FromHex("#103E1C");
                 ButtonColorContextDisabled = Color.FromHex("#103E1C");
+                DropdownButtonColorContext = Color.FromHex("#155124");
+                DropdownButtonColorContextHover = Color.FromHex("#1D6630");
+                DropdownButtonColorContextPressed = Color.FromHex("#1BE628");
+                DropdownButtonColorContextDisabled = Color.FromHex("#103E1C");
 
                 ExamineButtonColorContext = Color.FromHex("#155124");
                 ExamineButtonColorContextHover = Color.FromHex("#1D6630");
@@ -354,6 +369,96 @@ namespace Content.Client.Stylesheets
         public StyleNano(IResourceCache resCache, string theme) : base(resCache)
         {
             ApplyPalette(ParseTheme(theme));
+            static Color BlendTowards(Color source, Color target, float factor)
+            {
+                factor = Math.Clamp(factor, 0f, 1f);
+                return new Color(
+                    source.R + (target.R - source.R) * factor,
+                    source.G + (target.G - source.G) * factor,
+                    source.B + (target.B - source.B) * factor,
+                    source.A + (target.A - source.A) * factor);
+            }
+
+            var optionsButtonBase = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#0938A8")
+                : Color.FromHex("#018502");
+            var optionsButtonHover = BlendTowards(optionsButtonBase, Color.White, 0.10f);
+            var optionsButtonPressed = BlendTowards(optionsButtonBase, Color.Black, 0.16f);
+            var optionsButtonDisabled = BlendTowards(optionsButtonBase, Color.Black, 0.30f);
+            var optionsButtonText = Color.FromHex("#EEF4FB");
+            var optionsButtonTextDisabled = optionsButtonText.WithAlpha(0.72f);
+            var optionsOptionsBackground = BlendTowards(optionsButtonBase, Color.Black, 0.72f).WithAlpha(0.94f);
+            var optionsOptionsBorder = BlendTowards(optionsButtonBase, Color.White, 0.08f).WithAlpha(0.82f);
+            var dropdownButtonText = Color.FromHex("#C5CED8");
+            var dropdownButtonTextDisabled = dropdownButtonText.WithAlpha(0.72f);
+            var dropdownButtonNormal = new StyleBoxFlat
+            {
+                BackgroundColor = DropdownButtonColorContext.WithAlpha(0.92f),
+                BorderColor = LobbyMenuButtonBase.WithAlpha(0.55f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 6,
+                ContentMarginTopOverride = 4,
+                ContentMarginRightOverride = 6,
+                ContentMarginBottomOverride = 4,
+            };
+            var dropdownButtonHover = new StyleBoxFlat
+            {
+                BackgroundColor = DropdownButtonColorContextHover.WithAlpha(0.95f),
+                BorderColor = LobbyMenuButtonBase.WithAlpha(0.75f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 6,
+                ContentMarginTopOverride = 4,
+                ContentMarginRightOverride = 6,
+                ContentMarginBottomOverride = 4,
+            };
+            var dropdownButtonPressed = new StyleBoxFlat
+            {
+                BackgroundColor = DropdownButtonColorContextPressed.WithAlpha(0.97f),
+                BorderColor = LobbyMenuButtonBase,
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 6,
+                ContentMarginTopOverride = 4,
+                ContentMarginRightOverride = 6,
+                ContentMarginBottomOverride = 4,
+            };
+            var dropdownButtonDisabled = new StyleBoxFlat
+            {
+                BackgroundColor = DropdownButtonColorContextDisabled.WithAlpha(0.92f),
+                BorderColor = LobbyMenuButtonBase.WithAlpha(0.32f),
+                BorderThickness = new Thickness(1),
+                ContentMarginLeftOverride = 6,
+                ContentMarginTopOverride = 4,
+                ContentMarginRightOverride = 6,
+                ContentMarginBottomOverride = 4,
+            };
+            var dropdownOptionsBackground = new StyleBoxFlat
+            {
+                BackgroundColor = DropdownButtonColorContext.WithAlpha(0.92f),
+                BorderThickness = new Thickness(1),
+                BorderColor = LobbyMenuButtonBase.WithAlpha(0.55f),
+                ContentMarginLeftOverride = 0,
+                ContentMarginTopOverride = 0,
+                ContentMarginRightOverride = 0,
+                ContentMarginBottomOverride = 0,
+            };
+            var optionsCategoryListBackground = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#051B38").WithAlpha(0.92f)
+                : PanelDark.WithAlpha(0.75f);
+            var optionsCategoryListBorder = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#0E4AAE").WithAlpha(0.95f)
+                : LobbyMenuButtonBase.WithAlpha(0.95f);
+            var optionsCategoryButtonNormal = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#0B1E4A")
+                : Color.FromHex("#0A2C18");
+            var optionsCategoryButtonHover = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#10275C")
+                : Color.FromHex("#0D3A20");
+            var optionsCategoryButtonPressed = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#09183D")
+                : Color.FromHex("#082414");
+            var optionsCategoryButtonText = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#86BBF2")
+                : Color.FromHex("#9DFFB2");
             var notoSans8 = resCache.NotoStack(size: 8);
             var notoSans10 = resCache.NotoStack(size: 10);
             var notoSansItalic10 = resCache.NotoStack(variation: "Italic", size: 10);
@@ -386,14 +491,14 @@ namespace Content.Client.Stylesheets
             {
                 BackgroundColor = (CurrentTheme == UiColorTheme.Blue
                     ? Color.FromHex("#1A3678")
-                    : Color.FromHex("#0E2A16")).WithAlpha(0.08f),
+                    : Color.FromHex("#0E2A16")).WithAlpha(0.16f),
                 ContentMarginBottomOverride = 0
             };
             var windowHeaderAlert = new StyleBoxFlat
             {
                 BackgroundColor = (CurrentTheme == UiColorTheme.Blue
                     ? Color.FromHex("#1A3678")
-                    : Color.FromHex("#0E2A16")).WithAlpha(0.08f),
+                    : Color.FromHex("#0E2A16")).WithAlpha(0.16f),
                 ContentMarginBottomOverride = 0
             };
             var uiWindowBackgroundTint = CurrentTheme == UiColorTheme.Blue
@@ -444,7 +549,7 @@ namespace Content.Client.Stylesheets
             var borderedTransparentWindowBackgroundTex = resCache.GetTexture("/Textures/Interface/Nano/transparent_window_background_bordered.png");
             var borderedTransparentWindowBackground = new StyleBoxFlat
             {
-                BackgroundColor = uiWindowBackgroundTint.WithAlpha(0.85f),
+                BackgroundColor = uiWindowBackgroundTint.WithAlpha(0.93f),
                 BorderThickness = new Thickness(1),
                 BorderColor = uiWindowBackgroundTint.WithAlpha(1f),
             };
@@ -765,6 +870,35 @@ namespace Content.Client.Stylesheets
                 BorderThickness = new Thickness(1)
             };
 
+            var lobbyDiscordButton = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#5865F2").WithAlpha(0.92f),
+                BorderColor = Color.FromHex("#AEB8FF"),
+                BorderThickness = new Thickness(1)
+            };
+
+            var lobbyDiscordButtonHover = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#6C78FF").WithAlpha(0.96f),
+                BorderColor = Color.FromHex("#D8DDFF"),
+                BorderThickness = new Thickness(1)
+            };
+
+            var lobbyDiscordButtonPressed = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#3F4CC8").WithAlpha(0.98f),
+                BorderColor = Color.FromHex("#AEB8FF"),
+                BorderThickness = new Thickness(1)
+            };
+
+            var lobbyDiscordWarningPanel = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#101846").WithAlpha(0.86f),
+                BorderColor = Color.FromHex("#6C78FF").WithAlpha(0.9f),
+                BorderThickness = new Thickness(1)
+            };
+            lobbyDiscordWarningPanel.SetContentMarginOverride(StyleBox.Margin.All, 2);
+
             var lobbyMenuButtonCrt = new StyleBoxFlat
             {
                 BackgroundColor = LobbyMenuButtonBase,
@@ -892,13 +1026,18 @@ namespace Content.Client.Stylesheets
 
             var tabContainerPanel = new StyleBoxFlat
             {
-                BackgroundColor = PanelDark.WithAlpha(0.95f),
+                BackgroundColor = PanelDark.WithAlpha(0.985f),
             };
 
             var tabContainerBoxActive = new StyleBoxFlat { BackgroundColor = PanelDark.WithAlpha(0.98f) };
             tabContainerBoxActive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 8);
             tabContainerBoxActive.SetContentMarginOverride(StyleBox.Margin.Vertical, 3);
-            var tabContainerBoxInactive = new StyleBoxFlat { BackgroundColor = PanelDark.WithAlpha(0.9f) };
+            var tabContainerBoxInactive = new StyleBoxFlat
+            {
+                BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                    ? Color.FromHex("#071532").WithAlpha(0.985f)
+                    : Color.FromHex("#031005").WithAlpha(0.985f)
+            };
             tabContainerBoxInactive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 8);
             tabContainerBoxInactive.SetContentMarginOverride(StyleBox.Margin.Vertical, 3);
 
@@ -1215,8 +1354,8 @@ namespace Content.Client.Stylesheets
                     .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
                     {
                         BackgroundColor = CurrentTheme == UiColorTheme.Blue
-                            ? Color.FromHex("#061223").WithAlpha(0.9f)
-                            : Color.FromHex("#071B0D").WithAlpha(0.9f),
+                            ? Color.FromHex("#061223").WithAlpha(0.96f)
+                            : Color.FromHex("#071B0D").WithAlpha(0.96f),
                     }),
                 // CCM rework ui - end
                 // bordered window background
@@ -2237,6 +2376,45 @@ namespace Content.Client.Stylesheets
                 Element<Button>().Class(StyleClassLobbyTopButton)
                     .Prop(nameof(Control.Margin), new Thickness(4, 0, 4, 0)),
 
+                Element<Button>().Class(StyleClassLobbyDiscordLinkButton).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Button.StylePropertyStyleBox, lobbyDiscordButton),
+
+                Element<Button>().Class(StyleClassLobbyDiscordLinkButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, lobbyDiscordButtonHover),
+
+                Element<Button>().Class(StyleClassLobbyDiscordLinkButton).Class(StyleClassLobbyThemeCrt)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, lobbyDiscordButtonPressed),
+
+                Element<Button>().Class(StyleClassLobbyDiscordLinkButton).Class(StyleClassLobbyThemeClean)
+                    .Prop(Button.StylePropertyStyleBox, lobbyDiscordButton),
+
+                Element<Button>().Class(StyleClassLobbyDiscordLinkButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, lobbyDiscordButtonHover),
+
+                Element<Button>().Class(StyleClassLobbyDiscordLinkButton).Class(StyleClassLobbyThemeClean)
+                    .Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, lobbyDiscordButtonPressed),
+
+                Element<Button>().Class(StyleClassLobbyDiscordLinkButton)
+                    .Prop(nameof(Control.Margin), new Thickness(4, 0, 4, 0)),
+
+                Element<PanelContainer>().Class(StyleClassLobbyDiscordLinkWarningPanel).Class(StyleClassLobbyThemeCrt)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyDiscordWarningPanel),
+
+                Element<PanelContainer>().Class(StyleClassLobbyDiscordLinkWarningPanel).Class(StyleClassLobbyThemeClean)
+                    .Prop(PanelContainer.StylePropertyPanel, lobbyDiscordWarningPanel),
+
+                Element<RichTextLabel>().Class(StyleClassLobbyDiscordLinkWarningText).Class(StyleClassLobbyThemeCrt)
+                    .Prop(Label.StylePropertyFont, notoSansBold12)
+                    .Prop("font-color", Color.FromHex("#E6EAFF")),
+
+                Element<RichTextLabel>().Class(StyleClassLobbyDiscordLinkWarningText).Class(StyleClassLobbyThemeClean)
+                    .Prop(Label.StylePropertyFont, notoSansBold12)
+                    .Prop("font-color", Color.FromHex("#E6EAFF")),
+
                 new StyleRule(new SelectorChild(
                     new SelectorElement(typeof(Button), new[] {StyleClassLobbyTopButton, StyleClassLobbyThemeCrt}, null, null),
                     new SelectorElement(typeof(Label), null, null, null)),
@@ -2254,6 +2432,17 @@ namespace Content.Client.Stylesheets
                     {
                         new StyleProperty(Label.StylePropertyFont, notoSansBold12),
                         new StyleProperty(Label.StylePropertyFontColor, LobbyCleanText),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(8, 0, 8, 0))
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassLobbyDiscordLinkButton}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, notoSansBold12),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#FFFFFF")),
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
                         new StyleProperty(nameof(Control.Margin), new Thickness(8, 0, 8, 0))
                     }),
 
@@ -3104,51 +3293,293 @@ namespace Content.Client.Stylesheets
                 // OptionButton
                 new StyleRule(new SelectorElement(typeof(OptionButton), null, null, null), new[]
                 {
-                    new StyleProperty(ContainerButton.StylePropertyStyleBox, BaseButton),
+                    new StyleProperty(ContainerButton.StylePropertyStyleBox, dropdownButtonNormal),
                 }),
                 new StyleRule(new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassNormal}), new[]
                 {
-                    new StyleProperty(Control.StylePropertyModulateSelf,
-                        CurrentTheme == UiColorTheme.Blue ? ButtonColorDefault : Color.FromHex("#15A31E")),
+                    new StyleProperty(ContainerButton.StylePropertyStyleBox, dropdownButtonNormal),
                 }),
                 new StyleRule(new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassHover}), new[]
                 {
-                    new StyleProperty(Control.StylePropertyModulateSelf,
-                        CurrentTheme == UiColorTheme.Blue ? ButtonColorHovered : Color.FromHex("#138A1A")),
+                    new StyleProperty(ContainerButton.StylePropertyStyleBox, dropdownButtonHover),
                 }),
                 new StyleRule(new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassPressed}), new[]
                 {
-                    new StyleProperty(Control.StylePropertyModulateSelf,
-                        CurrentTheme == UiColorTheme.Blue ? ButtonColorPressed : Color.FromHex("#0F7116")),
+                    new StyleProperty(ContainerButton.StylePropertyStyleBox, dropdownButtonPressed),
                 }),
                 new StyleRule(new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassDisabled}), new[]
                 {
-                    new StyleProperty(Control.StylePropertyModulateSelf, ButtonColorDisabled),
+                    new StyleProperty(ContainerButton.StylePropertyStyleBox, dropdownButtonDisabled),
                 }),
 
                 new StyleRule(new SelectorElement(typeof(TextureRect), new[] {OptionButton.StyleClassOptionTriangle}, null, null), new[]
                 {
                     new StyleProperty(TextureRect.StylePropertyTexture, textureInvertedTriangle),
-                    //new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#FFFFFF")),
+                }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassNormal}),
+                    new SelectorElement(typeof(TextureRect), new[] {OptionButton.StyleClassOptionTriangle}, null, null)), new[]
+                {
+                    new StyleProperty(Control.StylePropertyModulateSelf, dropdownButtonText),
+                }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassHover}),
+                    new SelectorElement(typeof(TextureRect), new[] {OptionButton.StyleClassOptionTriangle}, null, null)), new[]
+                {
+                    new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
+                }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassPressed}),
+                    new SelectorElement(typeof(TextureRect), new[] {OptionButton.StyleClassOptionTriangle}, null, null)), new[]
+                {
+                    new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
+                }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassDisabled}),
+                    new SelectorElement(typeof(TextureRect), new[] {OptionButton.StyleClassOptionTriangle}, null, null)), new[]
+                {
+                    new StyleProperty(Control.StylePropertyModulateSelf, dropdownButtonTextDisabled),
                 }),
 
                 new StyleRule(new SelectorElement(typeof(Label), new[] { OptionButton.StyleClassOptionButton }, null, null), new[]
                 {
                     new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
                 }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassNormal}),
+                    new SelectorElement(typeof(Label), new[] {OptionButton.StyleClassOptionButton}, null, null)), new[]
+                {
+                    new StyleProperty(Label.StylePropertyFontColor, dropdownButtonText),
+                }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassHover}),
+                    new SelectorElement(typeof(Label), new[] {OptionButton.StyleClassOptionButton}, null, null)), new[]
+                {
+                    new StyleProperty(Label.StylePropertyFontColor, Color.White),
+                }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassPressed}),
+                    new SelectorElement(typeof(Label), new[] {OptionButton.StyleClassOptionButton}, null, null)), new[]
+                {
+                    new StyleProperty(Label.StylePropertyFontColor, Color.White),
+                }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassDisabled}),
+                    new SelectorElement(typeof(Label), new[] {OptionButton.StyleClassOptionButton}, null, null)), new[]
+                {
+                    new StyleProperty(Label.StylePropertyFontColor, dropdownButtonTextDisabled),
+                }),
+
+                new StyleRule(new SelectorElement(typeof(Button), new[] {"optionButtonPopupItem"}, null, null), new[]
+                {
+                    new StyleProperty(Button.StylePropertyStyleBox, dropdownButtonNormal),
+                }),
+                new StyleRule(new SelectorElement(typeof(Button), new[] {"optionButtonPopupItem"}, null, new[] {ContainerButton.StylePseudoClassNormal}), new[]
+                {
+                    new StyleProperty(Button.StylePropertyStyleBox, dropdownButtonNormal),
+                }),
+                new StyleRule(new SelectorElement(typeof(Button), new[] {"optionButtonPopupItem"}, null, new[] {ContainerButton.StylePseudoClassHover}), new[]
+                {
+                    new StyleProperty(Button.StylePropertyStyleBox, dropdownButtonHover),
+                }),
+                new StyleRule(new SelectorElement(typeof(Button), new[] {"optionButtonPopupItem"}, null, new[] {ContainerButton.StylePseudoClassPressed}), new[]
+                {
+                    new StyleProperty(Button.StylePropertyStyleBox, dropdownButtonPressed),
+                }),
+                new StyleRule(new SelectorElement(typeof(Button), new[] {"optionButtonPopupItem"}, null, new[] {ContainerButton.StylePseudoClassDisabled}), new[]
+                {
+                    new StyleProperty(Button.StylePropertyStyleBox, dropdownButtonDisabled),
+                }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {"optionButtonPopupItem"}, null, new[] {ContainerButton.StylePseudoClassNormal}),
+                    new SelectorElement(typeof(Label), null, null, null)), new[]
+                {
+                    new StyleProperty(Label.StylePropertyFontColor, dropdownButtonText),
+                }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {"optionButtonPopupItem"}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                    new SelectorElement(typeof(Label), null, null, null)), new[]
+                {
+                    new StyleProperty(Label.StylePropertyFontColor, Color.White),
+                }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {"optionButtonPopupItem"}, null, new[] {ContainerButton.StylePseudoClassPressed}),
+                    new SelectorElement(typeof(Label), null, null, null)), new[]
+                {
+                    new StyleProperty(Label.StylePropertyFontColor, Color.White),
+                }),
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {"optionButtonPopupItem"}, null, new[] {ContainerButton.StylePseudoClassDisabled}),
+                    new SelectorElement(typeof(Label), null, null, null)), new[]
+                {
+                    new StyleProperty(Label.StylePropertyFontColor, dropdownButtonTextDisabled),
+                }),
 
                 Element<PanelContainer>().Class(OptionButton.StyleClassOptionsBackground)
-                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    .Prop(PanelContainer.StylePropertyPanel, dropdownOptionsBackground),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(Button), null, null, new[] {ContainerButton.StylePseudoClassNormal})),
+                    new[]
                     {
-                        BackgroundColor = CurrentTheme == UiColorTheme.Blue
-                            ? Color.FromHex("#0E2349").WithAlpha(0.97f)
-                            : Color.FromHex("#07180A").WithAlpha(0.97f),
-                        BorderThickness = new Thickness(1),
-                        BorderColor = LobbyMenuButtonBase.WithAlpha(0.6f),
-                        ContentMarginLeftOverride = 4,
-                        ContentMarginTopOverride = 4,
-                        ContentMarginRightOverride = 4,
-                        ContentMarginBottomOverride = 4,
+                        new StyleProperty(Control.StylePropertyModulateSelf, optionsButtonBase),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(Button), null, null, new[] {ContainerButton.StylePseudoClassHover})),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, optionsButtonHover),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(Button), null, null, new[] {ContainerButton.StylePseudoClassPressed})),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, optionsButtonPressed),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(Button), null, null, new[] {ContainerButton.StylePseudoClassDisabled})),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, optionsButtonDisabled),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassNormal})),
+                    new[]
+                    {
+                        new StyleProperty(ContainerButton.StylePropertyStyleBox, dropdownButtonNormal),
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassHover})),
+                    new[]
+                    {
+                        new StyleProperty(ContainerButton.StylePropertyStyleBox, dropdownButtonHover),
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassPressed})),
+                    new[]
+                    {
+                        new StyleProperty(ContainerButton.StylePropertyStyleBox, dropdownButtonPressed),
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassDisabled})),
+                    new[]
+                    {
+                        new StyleProperty(ContainerButton.StylePropertyStyleBox, dropdownButtonDisabled),
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassNormal})),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorChild(
+                        new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                        new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassNormal})),
+                    new SelectorElement(typeof(TextureRect), new[] {OptionButton.StyleClassOptionTriangle}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, dropdownButtonText),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorChild(
+                        new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                        new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassHover})),
+                    new SelectorElement(typeof(TextureRect), new[] {OptionButton.StyleClassOptionTriangle}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorChild(
+                        new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                        new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassPressed})),
+                    new SelectorElement(typeof(TextureRect), new[] {OptionButton.StyleClassOptionTriangle}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassDisabled})),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorChild(
+                        new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                        new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassDisabled})),
+                    new SelectorElement(typeof(TextureRect), new[] {OptionButton.StyleClassOptionTriangle}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, dropdownButtonTextDisabled),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorChild(
+                        new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                        new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassNormal})),
+                    new SelectorElement(typeof(Label), new[] {OptionButton.StyleClassOptionButton}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, dropdownButtonText),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorChild(
+                        new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                        new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassHover})),
+                    new SelectorElement(typeof(Label), new[] {OptionButton.StyleClassOptionButton}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.White),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorChild(
+                        new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                        new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassPressed})),
+                    new SelectorElement(typeof(Label), new[] {OptionButton.StyleClassOptionButton}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, Color.White),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorChild(
+                        new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                        new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassDisabled})),
+                    new SelectorElement(typeof(Label), new[] {OptionButton.StyleClassOptionButton}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, dropdownButtonTextDisabled),
                     }),
 
                 new StyleRule(new SelectorElement(typeof(PanelContainer), new []{ ClassHighDivider}, null, null), new []
@@ -3188,16 +3619,25 @@ namespace Content.Client.Stylesheets
                     }),
 
                 Element<Label>().Class("LauncherConnectingTitle")
-                    .Prop(Label.StylePropertyFont, bedstead20)
+                    .Prop(Label.StylePropertyFont, resCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 22))
                     .Prop(Label.StylePropertyFontColor, CurrentTheme == UiColorTheme.Blue
                         ? Color.FromHex("#8FC4F6")
                         : Color.FromHex("#AFFFBD")),
 
                 Element<Label>().Class("LauncherConnectingStateLabel")
-                    .Prop(Label.StylePropertyFont, bedstead15)
+                    .Prop(Label.StylePropertyFont, resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 13))
                     .Prop(Label.StylePropertyFontColor, CurrentTheme == UiColorTheme.Blue
                         ? Color.FromHex("#A8CCF2")
                         : Color.FromHex("#BCEFC7")),
+
+                Element<Label>().Class("LauncherConnectingReasonSmallLabel")
+                    .Prop(Label.StylePropertyFont, resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 13))
+                    .Prop(Label.StylePropertyFontColor, CurrentTheme == UiColorTheme.Blue
+                        ? Color.FromHex("#CAD9F7")
+                        : Color.FromHex("#D7F0D8")),
+
+                Element<RichTextLabel>().Class("LauncherConnectingReasonSmallLabel")
+                    .Prop("font", resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 13)),
 
                 Element<Button>().Class("LauncherConnectingButton")
                     .Prop(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
@@ -3479,13 +3919,13 @@ namespace Content.Client.Stylesheets
 
                 Element<Button>().Class("CharacterSetupActionButton").Pseudo(ContainerButton.StylePseudoClassHover)
                     .Prop(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
-                        ? Color.FromHex("#0F2A52")
-                        : Color.FromHex("#0A2C18")),
+                        ? Color.FromHex("#143765")
+                        : Color.FromHex("#0D3A20")),
 
                 Element<Button>().Class("CharacterSetupActionButton").Pseudo(ContainerButton.StylePseudoClassPressed)
                     .Prop(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
-                        ? Color.FromHex("#0E2548")
-                        : Color.FromHex("#0A2C18")),
+                        ? Color.FromHex("#0D2447")
+                        : Color.FromHex("#082414")),
 
                 Element<Button>().Class("CharacterSetupActionButton").Pseudo(ContainerButton.StylePseudoClassDisabled)
                     .Prop(Control.StylePropertyModulateSelf, ButtonColorDisabled),
@@ -3625,6 +4065,68 @@ namespace Content.Client.Stylesheets
                         BorderColor = LobbyMenuButtonPressed.WithAlpha(0.9f),
                     }),
 
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(PanelContainer), new[] {"VerticalTabListBackground"}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                        {
+                            BackgroundColor = optionsCategoryListBackground,
+                            BorderThickness = new Thickness(2, 0, 0, 0),
+                            BorderColor = optionsCategoryListBorder,
+                        }),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(Button), new[] {StyleBase.StyleClassVerticalTabButton}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Button.StylePropertyStyleBox, new StyleBoxFlat
+                        {
+                            BackgroundColor = optionsCategoryButtonNormal,
+                            BorderThickness = new Thickness(1),
+                            BorderColor = PanelDark.WithAlpha(1f),
+                        }),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(Button), new[] {StyleBase.StyleClassVerticalTabButton}, null, new[] {ContainerButton.StylePseudoClassHover})),
+                    new[]
+                    {
+                        new StyleProperty(Button.StylePropertyStyleBox, new StyleBoxFlat
+                        {
+                            BackgroundColor = optionsCategoryButtonHover,
+                            BorderThickness = new Thickness(1),
+                            BorderColor = optionsCategoryButtonHover.WithAlpha(0.9f),
+                        }),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(Button), new[] {StyleBase.StyleClassVerticalTabButton}, null, new[] {ContainerButton.StylePseudoClassPressed})),
+                    new[]
+                    {
+                        new StyleProperty(Button.StylePropertyStyleBox, new StyleBoxFlat
+                        {
+                            BackgroundColor = optionsCategoryButtonPressed,
+                            BorderThickness = new Thickness(1),
+                            BorderColor = optionsCategoryButtonPressed.WithAlpha(0.9f),
+                        }),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorChild(
+                        new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                        new SelectorElement(typeof(Button), new[] {StyleBase.StyleClassVerticalTabButton}, null, null)),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, optionsCategoryButtonText),
+                    }),
+
 
                 //PDA - Buttons
                 Element<PdaSettingsButton>().Pseudo(ContainerButton.StylePseudoClassNormal)
@@ -3705,8 +4207,8 @@ namespace Content.Client.Stylesheets
                                 : Color.FromHex("#0A2C18").WithAlpha(0.9f),
                             BorderColor = Color.Transparent,
                             BorderThickness = new Thickness(0f),
-                            ContentMarginLeftOverride = 10f,
-                            ContentMarginRightOverride = 10f,
+                            ContentMarginLeftOverride = 16f,
+                            ContentMarginRightOverride = 16f,
                             ContentMarginTopOverride = 3f,
                             ContentMarginBottomOverride = 3f
                         }),
@@ -3717,11 +4219,26 @@ namespace Content.Client.Stylesheets
                                 : Color.FromHex("#0A2C18").WithAlpha(0.82f),
                             BorderColor = Color.Transparent,
                             BorderThickness = new Thickness(0f),
-                            ContentMarginLeftOverride = 10f,
-                            ContentMarginRightOverride = 10f,
+                            ContentMarginLeftOverride = 16f,
+                            ContentMarginRightOverride = 16f,
                             ContentMarginTopOverride = 3f,
                             ContentMarginBottomOverride = 3f
                         }),
+                        new StyleProperty(Content.Client._CCM.UserInterface.Controls.CenteredTabContainer.StylePropertyTabStyleBoxHover, new StyleBoxFlat
+                        {
+                            BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                                ? Color.FromHex("#0F2A52").WithAlpha(0.89f)
+                                : Color.FromHex("#0A2C18").WithAlpha(0.86f),
+                            BorderColor = Color.Transparent,
+                            BorderThickness = new Thickness(0f),
+                            ContentMarginLeftOverride = 16f,
+                            ContentMarginRightOverride = 16f,
+                            ContentMarginTopOverride = 3f,
+                            ContentMarginBottomOverride = 3f
+                        }),
+                        new StyleProperty(Content.Client._CCM.UserInterface.Controls.CenteredTabContainer.StylePropertyTabFontColorHover, CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#78B1E1")
+                            : Color.FromHex("#A7EDB5")),
                     }),
 
                 new StyleRule(new SelectorChild(
@@ -3730,8 +4247,8 @@ namespace Content.Client.Stylesheets
                     new[]
                     {
                         new StyleProperty(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
-                            ? Color.FromHex("#0D2C57")
-                            : Color.FromHex("#0A2C18")),
+                            ? LobbyMenuButtonBase
+                            : LobbyMenuButtonBase),
                     }),
 
                 new StyleRule(new SelectorChild(
@@ -3740,8 +4257,8 @@ namespace Content.Client.Stylesheets
                     new[]
                     {
                         new StyleProperty(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
-                            ? Color.FromHex("#113468")
-                            : Color.FromHex("#0C341D")),
+                            ? ButtonColorHovered
+                            : ButtonColorHovered),
                     }),
 
                 new StyleRule(new SelectorChild(
@@ -3750,8 +4267,8 @@ namespace Content.Client.Stylesheets
                     new[]
                     {
                         new StyleProperty(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
-                            ? Color.FromHex("#0B2549")
-                            : Color.FromHex("#082715")),
+                            ? ButtonColorPressed
+                            : ButtonColorPressed),
                     }),
 
                 new StyleRule(new SelectorChild(
@@ -3759,9 +4276,7 @@ namespace Content.Client.Stylesheets
                     new SelectorElement(typeof(OptionButton), null, null, null)),
                     new[]
                     {
-                        new StyleProperty(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
-                            ? Color.FromHex("#0D2C57")
-                            : Color.FromHex("#0A2C18")),
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
                     }),
 
                 new StyleRule(new SelectorChild(
@@ -3769,9 +4284,7 @@ namespace Content.Client.Stylesheets
                     new SelectorElement(typeof(OptionButton), null, null, new[] { ContainerButton.StylePseudoClassHover })),
                     new[]
                     {
-                        new StyleProperty(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
-                            ? Color.FromHex("#113468")
-                            : Color.FromHex("#0C341D")),
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
                     }),
 
                 new StyleRule(new SelectorChild(
@@ -3779,9 +4292,7 @@ namespace Content.Client.Stylesheets
                     new SelectorElement(typeof(OptionButton), null, null, new[] { ContainerButton.StylePseudoClassPressed })),
                     new[]
                     {
-                        new StyleProperty(Control.StylePropertyModulateSelf, CurrentTheme == UiColorTheme.Blue
-                            ? Color.FromHex("#0B2549")
-                            : Color.FromHex("#082715")),
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
                     }),
                 // CCM rework lobby - end
 

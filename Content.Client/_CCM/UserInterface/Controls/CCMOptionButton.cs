@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System;
 using System.Collections.Generic;
 using System.Numerics;
@@ -22,6 +23,11 @@ public sealed class CCMOptionButton : OptionButton
     private Label? _selectedLabel;
     private TextureRect? _triangleRect;
     private float _widestItemWidth;
+
+    public Font? TextFontOverride { get; set; }
+    public float ItemMinHeight { get; set; } = 32f;
+    public float ControlMinHeight { get; set; } = 34f;
+    public Thickness ContentPadding { get; set; } = new(6, 4, 6, 4);
 
     public CCMOptionButton()
     {
@@ -58,10 +64,11 @@ public sealed class CCMOptionButton : OptionButton
         if (ItemCount > 0)
             _itemButtons[GetItemId(ItemCount - 1)] = button;
 
-        button.MinSize = new Vector2(0, 32);
-        button.Margin = new Thickness(0);
-        button.Label.FontOverride = _itemFont;
+        button.MinSize = new Vector2(0, ItemMinHeight);
+        button.Margin = new Thickness(-1, 0, 0, 0);
+        button.Label.FontOverride = TextFontOverride ?? _itemFont;
         button.Label.FontColorOverride = Color.FromHex("#D7E1EB");
+        button.Label.FontColorShadowOverride = Color.Black.WithAlpha(0.72f);
         button.Label.Align = Label.AlignMode.Center;
 
         ApplyButtonColor(button, GetItemColor(ItemCount > 0 ? GetItemId(ItemCount - 1) : -1));
@@ -85,7 +92,18 @@ public sealed class CCMOptionButton : OptionButton
 
         button.Measure(Vector2Helpers.Infinity);
         _widestItemWidth = MathF.Max(_widestItemWidth, button.DesiredSize.X);
-        MinSize = new Vector2(MathF.Max(MinSize.X, _widestItemWidth + 36f), MathF.Max(MinSize.Y, 34f));
+        MinSize = new Vector2(MathF.Max(MinSize.X, _widestItemWidth + 36f), MathF.Max(MinSize.Y, ControlMinHeight));
+        ApplyCollapsedStyle();
+    }
+
+    public void RefreshVisualStyle()
+    {
+        foreach (var button in _itemButtons.Values)
+        {
+            button.MinSize = new Vector2(0, ItemMinHeight);
+            button.Label.FontOverride = TextFontOverride ?? _itemFont;
+        }
+
         ApplyCollapsedStyle();
     }
 
@@ -99,72 +117,89 @@ public sealed class CCMOptionButton : OptionButton
         ApplyCollapsedStyle();
     }
 
-    private static void ApplyButtonColor(Button button, Color? itemColor, bool hovered = false, bool pressed = false)
+    private void ApplyButtonColor(Button button, Color? itemColor, bool hovered = false, bool pressed = false)
     {
-        var selected = button.Pressed;
-        var normalBackground = BlendTowards(StyleNano.ButtonColorContext, Color.White, 0.10f).WithAlpha(0.98f);
-        var hoverBackground = BlendTowards(StyleNano.ButtonColorContextHover, Color.White, 0.16f).WithAlpha(0.99f);
-        var selectedBackground = BlendTowards(StyleNano.LobbyMenuButtonBase, Color.Black, 0.24f).WithAlpha(0.995f);
-        var pressedBackground = BlendTowards(StyleNano.LobbyMenuButtonBase, Color.Black, 0.12f).WithAlpha(0.995f);
-        var selectedBorder = BlendTowards(StyleNano.LobbyMenuButtonBase, Color.White, 0.06f);
+        var normalBackground = StyleNano.DropdownButtonColorContext.WithAlpha(0.92f);
+        var hoverBackground = StyleNano.DropdownButtonColorContextHover.WithAlpha(0.95f);
+        var pressedBackground = StyleNano.DropdownButtonColorContextPressed.WithAlpha(0.97f);
+        var normalBorder = StyleNano.LobbyMenuButtonBase.WithAlpha(0.55f);
+        var hoverBorder = StyleNano.LobbyMenuButtonBase.WithAlpha(0.75f);
+        var pressedBorder = StyleNano.LobbyMenuButtonBase;
 
         button.StyleBoxOverride = new StyleBoxFlat
         {
-            BackgroundColor = selected
-                ? selectedBackground
-                : pressed
-                    ? pressedBackground
-                    : hovered
-                        ? hoverBackground
-                        : normalBackground,
-            BorderColor = selected || pressed
-                ? selectedBorder
+            BackgroundColor = pressed
+                ? pressedBackground
                 : hovered
-                    ? selectedBorder.WithAlpha(0.86f)
-                    : selectedBorder.WithAlpha(0.56f),
+                    ? hoverBackground
+                    : normalBackground,
+            BorderColor = pressed
+                ? pressedBorder
+                : hovered
+                    ? hoverBorder
+                    : normalBorder,
             BorderThickness = new Thickness(1),
-            ContentMarginLeftOverride = 10,
-            ContentMarginTopOverride = 4,
-            ContentMarginRightOverride = 10,
-            ContentMarginBottomOverride = 4,
+            ContentMarginLeftOverride = ContentPadding.Left,
+            ContentMarginTopOverride = ContentPadding.Top,
+            ContentMarginRightOverride = ContentPadding.Right,
+            ContentMarginBottomOverride = ContentPadding.Bottom,
         };
 
-        button.Label.FontColorOverride = selected || pressed
+        button.Label.FontColorOverride = pressed
             ? Color.White
             : itemColor ?? (hovered
-                ? BlendTowards(StyleNano.LobbyMenuButtonBase, Color.White, 0.22f)
-                : Color.FromHex("#EEF4FB"));
+                ? Color.White
+                : Color.FromHex("#C5CED8"));
     }
 
     private void ApplyCollapsedStyle(bool hovered = false, bool pressed = false)
     {
         _itemColors.TryGetValue(SelectedId, out var itemColor);
         var hasItemColor = _itemColors.ContainsKey(SelectedId);
-        var accentText = BlendTowards(StyleNano.LobbyMenuButtonBase, Color.White, 0.18f);
         var neutralText = Color.FromHex("#EEF4FB");
+        var accentText = Color.White;
+
+        StyleBoxOverride = new StyleBoxFlat
+        {
+            BackgroundColor = pressed
+                    ? StyleNano.DropdownButtonColorContextPressed.WithAlpha(0.97f)
+                : hovered
+                    ? StyleNano.DropdownButtonColorContextHover.WithAlpha(0.95f)
+                    : StyleNano.DropdownButtonColorContext.WithAlpha(0.92f),
+            BorderColor = pressed
+                ? StyleNano.LobbyMenuButtonBase
+                : hovered
+                ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.75f)
+                    : StyleNano.LobbyMenuButtonBase.WithAlpha(0.55f),
+            BorderThickness = new Thickness(1),
+            ContentMarginLeftOverride = ContentPadding.Left,
+            ContentMarginTopOverride = ContentPadding.Top,
+            ContentMarginRightOverride = ContentPadding.Right,
+            ContentMarginBottomOverride = ContentPadding.Bottom,
+        };
 
         if (_selectedLabel != null)
         {
-            _selectedLabel.FontOverride = _itemFont;
+            _selectedLabel.FontOverride = TextFontOverride ?? _itemFont;
             _selectedLabel.FontColorOverride = pressed
-                ? Color.Black
+                ? Color.White
                 : hasItemColor
                     ? itemColor
                     : hovered
                         ? accentText
-                        : neutralText;
+                        : Color.FromHex("#C5CED8");
             _selectedLabel.Align = Label.AlignMode.Center;
         }
 
         if (_triangleRect != null)
         {
             _triangleRect.ModulateSelfOverride = pressed
-                ? Color.Black
+                ? Color.White
                 : hasItemColor
                     ? itemColor
                     : hovered
                         ? accentText
-                        : neutralText;
+                        : Color.FromHex("#C5CED8");
         }
 
         foreach (var (id, button) in _itemButtons)
@@ -190,16 +225,6 @@ public sealed class CCMOptionButton : OptionButton
     private Color? GetItemColor(int id)
     {
         return _itemColors.TryGetValue(id, out var color) ? color : null;
-    }
-
-    private static Color BlendTowards(Color source, Color target, float factor)
-    {
-        factor = Math.Clamp(factor, 0f, 1f);
-        return new Color(
-            source.R + (target.R - source.R) * factor,
-            source.G + (target.G - source.G) * factor,
-            source.B + (target.B - source.B) * factor,
-            source.A + (target.A - source.A) * factor);
     }
 
     private static T? FindChild<T>(Robust.Client.UserInterface.Control root, Predicate<T> predicate)

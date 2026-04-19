@@ -1,3 +1,4 @@
+﻿# CM14 rework: non-RMC edit marker.
 ui-lobby-title = Lobby: {$serverName}
 ui-lobby-welcome = Welcome,
 ui-lobby-menu-toggle = Menu
@@ -17,6 +18,9 @@ ui-lobby-updates-button = Updates
 ui-lobby-guides-button = Guides
 ui-lobby-tutorial-button = Rules
 ui-lobby-polls-button = Polls
+ui-lobby-link-discord-button = Link Discord
+ui-lobby-discord-linked-button = Discord Linked
+ui-lobby-link-discord-warning = [bold]Link your Discord account.[/bold] This helps receive roles, perks, and account notices.
 ui-lobby-join-uscm-button = Join the USMC
 ui-lobby-join-hive-button = Join the Hive
 ui-lobby-not-ready-button = Not Ready

@@ -1,4 +1,5 @@
-﻿<Control xmlns="https://spacestation14.io"
+﻿<!-- CM14 rework: non-RMC edit marker. -->
+<Control xmlns="https://spacestation14.io"
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:ui="clr-namespace:Content.Client.Options.UI"
          xmlns:s="clr-namespace:Content.Client.Stylesheets">

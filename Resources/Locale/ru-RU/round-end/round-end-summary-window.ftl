@@ -1,3 +1,4 @@
+﻿# CM14 rework: non-RMC edit marker.
 round-end-summary-window-title = Итоги раунда
 round-end-summary-window-round-end-summary-tab-title = Информация
 round-end-summary-window-player-manifest-tab-title = Манифест игроков

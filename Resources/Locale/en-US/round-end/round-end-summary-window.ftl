@@ -1,3 +1,4 @@
+﻿# CM14 rework: non-RMC edit marker.
 round-end-summary-window-title = Round End Summary
 round-end-summary-window-round-end-summary-tab-title = Round Information
 round-end-summary-window-player-manifest-tab-title = Player Manifest

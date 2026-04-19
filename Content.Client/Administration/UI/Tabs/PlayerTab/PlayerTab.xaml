@@ -1,4 +1,5 @@
-﻿<Control xmlns="https://spacestation14.io"
+﻿<!-- CM14 rework: non-RMC edit marker. -->
+<Control xmlns="https://spacestation14.io"
          xmlns:pt="clr-namespace:Content.Client.Administration.UI.Tabs.PlayerTab"
          xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
          xmlns:co="clr-namespace:Content.Client.UserInterface.Controls">
