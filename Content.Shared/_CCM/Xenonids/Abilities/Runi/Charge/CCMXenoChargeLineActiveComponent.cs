@@ -24,4 +24,7 @@ public sealed partial class CCMXenoChargeLineActiveComponent : Component
     public int TilesTraveled;
 
     public HashSet<EntityUid> HitEntities = new();
+
+    [DataField]
+    public bool HealTriggered = false;
 }

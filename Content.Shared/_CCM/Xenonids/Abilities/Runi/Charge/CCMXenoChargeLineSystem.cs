@@ -6,6 +6,13 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.Audio.Systems;
+using Content.Shared.Effects;
+using Content.Shared.Interaction;
+using Content.Shared._RMC14.Emote;
+using Content.Shared._RMC14.Xenonids.Heal;
+using Content.Shared.Maps;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
 
 namespace Content.Shared._CCM.Xenonids.Abilities.Runi.Charge;
 
@@ -19,6 +26,13 @@ public sealed class CCMXenoChargeLineSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private readonly SharedXenoHealSystem _xenoHeal = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -38,7 +52,7 @@ public sealed class CCMXenoChargeLineSystem : EntitySystem
             BreakOnMove = false
         };
 
-        var xeno = entity.Owner;
+        var xeno = ent.Owner;
         if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno, args.PlasmaCost))
             return;
 
@@ -62,6 +76,9 @@ public sealed class CCMXenoChargeLineSystem : EntitySystem
         };
 
         AddComp(ent, active, true);
+
+        if (ent.Comp.Emote != null)
+            _emote.TryEmoteWithChat(ent, ent.Comp.Emote, cooldown: ent.Comp.EmoteDelay);
     }
 
     private void OnSpeed(Entity<CCMXenoChargeLineActiveComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
@@ -86,6 +103,9 @@ public sealed class CCMXenoChargeLineSystem : EntitySystem
 
         var hitCount = 0;
 
+        var baseComp = CompOrNull<CCMXenoChargeLineComponent>(ent.Owner);
+
+
         foreach (var target in _lookup.GetEntitiesInRange(coords, ent.Comp.HitRadius))
         {
             if (target == ent.Owner)
@@ -94,24 +114,34 @@ public sealed class CCMXenoChargeLineSystem : EntitySystem
             if (!HasComp<MobStateComponent>(target) || _mobState.IsDead(target))
                 continue;
 
-            // направление к цели
             var targetCoords = Transform(target).Coordinates;
             var dir = (targetCoords.Position - coords.Position).Normalized();
 
-            // только вперед
             if (Vector2.Dot(dir, forward) < 0.3f)
                 continue;
 
-            // уже били
             if (!ent.Comp.HitEntities.Add(target))
                 continue;
 
             _damageable.TryChangeDamage(target, ent.Comp.Damage, tool: ent);
             hitCount++;
+
+            if (baseComp?.AttackEffect != null)
+                SpawnAttachedTo(baseComp.AttackEffect, targetCoords);
+
+            if (!_net.IsClient)
+            {
+                var filter = Filter.Pvs(target, entityManager: EntityManager)
+                    .RemoveWhereAttachedEntity(o => o == ent.Owner);
+
+                _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { target }, filter);
+            }
         }
 
-        if (hitCount > 0)
+        if (hitCount > 0 && !ent.Comp.HealTriggered)
         {
+            ent.Comp.HealTriggered = true;
+
             var healAmount = ent.Comp.HealPerHit * hitCount;
 
             var heal = new DamageSpecifier();
@@ -124,7 +154,20 @@ public sealed class CCMXenoChargeLineSystem : EntitySystem
 
             _damageable.TryChangeDamage(ent, heal);
 
-            var baseComp = CompOrNull<CCMXenoChargeLineComponent>(ent.Owner);
+            if (baseComp?.HealEffect != null)
+            {
+                var effect = Spawn(baseComp.HealEffect, Transform(ent).Coordinates);
+                _transform.SetParent(effect, ent);
+            }
+
+            _xenoHeal.CreateHealStacks(
+                ent,
+                healAmount,
+                TimeSpan.FromSeconds(0.5),
+                1,
+                TimeSpan.FromSeconds(0.5)
+            );
+
             if (baseComp?.HitSound != null)
                 _audio.PlayPredicted(baseComp.HitSound, ent, ent);
         }
