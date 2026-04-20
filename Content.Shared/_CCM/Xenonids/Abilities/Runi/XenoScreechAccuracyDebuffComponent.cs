@@ -10,7 +10,7 @@ public sealed partial class XenoScreechAccuracyDebuffComponent : Component
     public List<(FixedPoint2 Multiplier, TimeSpan ExpiresAt)> Received = new();
 
     [DataField]
-    public FixedPoint2 AccuracyModifier = -1.0; // негатив = ухудшение точности
+    public FixedPoint2 AccuracyModifier = -1.0;
 
     [DataField]
     public FixedPoint2 AccuracyPerTileModifier = -1.0;

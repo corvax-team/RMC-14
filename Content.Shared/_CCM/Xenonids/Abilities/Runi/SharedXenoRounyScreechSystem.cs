@@ -1,6 +1,5 @@
 using Content.Shared._RMC14.Deafness;
 using Content.Shared._RMC14.Xenonids.Screech;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids;
@@ -10,10 +9,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Timing;
-using System;
-using System.Collections.Generic;
 
 namespace Content.Shared._CCM14.Xenonids.Screech;
 
@@ -125,12 +121,12 @@ public sealed class XenoRounyScreechSystem : EntitySystem
             return;
 
         var comp = _ent.EnsureComponent<XenoScreechAccuracyDebuffComponent>(target);
-        
+
 
         var time = _timing.CurTime;
         comp.Received.Add((multiplier, time + duration));
         comp.Received.Sort((a, b) => a.CompareTo(b));
-        
+
         comp.AccuracyModifier = -0.8f; // или -1f
         comp.AccuracyPerTileModifier = -10f;
 

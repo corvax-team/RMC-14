@@ -9,6 +9,15 @@
   "states": [
     {
       "name": "mirage"
+    },
+    {
+      "name": "terrifying_scream"
+    },
+    {
+      "name": "furious_dash"
+    },
+    {
+      "name": "double_jump"
     }
   ]
 }

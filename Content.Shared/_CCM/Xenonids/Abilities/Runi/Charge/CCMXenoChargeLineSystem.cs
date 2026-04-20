@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Components;
@@ -17,6 +18,7 @@ public sealed class CCMXenoChargeLineSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     public override void Initialize()
     {
@@ -35,6 +37,10 @@ public sealed class CCMXenoChargeLineSystem : EntitySystem
         {
             BreakOnMove = false
         };
+
+        var xeno = entity.Owner;
+        if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno, args.PlasmaCost))
+            return;
 
         _doAfter.TryStartDoAfter(doAfter);
         args.Handled = true;

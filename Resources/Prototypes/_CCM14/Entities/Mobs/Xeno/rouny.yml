@@ -66,3 +66,6 @@
     maxTiles: 10
     hitSound:
       path: /Audio/_MC/Effects/alien_tail_attack.ogg
+  - type: XenoPlasma
+    plasma: 250
+    maxPlasma: 250

@@ -10,7 +10,7 @@ namespace Content.Shared._CCM14.Xenonids.Screech;
 public sealed partial class XenoRounyScreechComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public FixedPoint2 PlasmaCost = 250;
+    public FixedPoint2 PlasmaCost = 100;
 
     [DataField, AutoNetworkedField]
     public TimeSpan StunTime = TimeSpan.FromSeconds(6);

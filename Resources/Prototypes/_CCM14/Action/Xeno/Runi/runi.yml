@@ -7,8 +7,8 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: pounce
+      sprite: _CCM14/Actions/xeno_actions.rsi
+      state: double_jump
     useDelay: 15
   - type: TargetAction
     range: 100
@@ -28,8 +28,8 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: screech
+      sprite: _CCM14/Actions/xeno_actions.rsi
+      state: furious_dash
     useDelay: 50
   - type: InstantAction
     event: !type:XenoRounyScreechActionEvent
@@ -44,8 +44,8 @@
   - type: Action
     itemIconStyle: NoItem
     icon:
-      sprite: _MC/Interface/Actions/Xeno/bull.rsi
-      state: bull_gore
+      sprite: _CCM14/Actions/xeno_actions.rsi
+      state: terrifying_scream
     useDelay: 15
   - type: InstantAction
     event: !type:CCMXenoChargeLineActionEvent
