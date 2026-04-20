@@ -13,15 +13,15 @@
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-ce
   ranks:
-    RMCRankLanceCorporal:
+    RMCRankNavySeaman: #CCM14
     - !type:RoleTimeRequirement
       role: CMJobOrdnanceTech
       time: 252000 # 70 hours
-    RMCRankPrivateFirstClass:
+    RMCRankNavySeamanApprentice: #CCM14
     - !type:RoleTimeRequirement
       role: CMJobOrdnanceTech
       time: 36000 # 10 hours
-    RMCRankPrivate: []
+    RMCRankNavySeamanRecruit: [] #CCM14
   accessGroups:
   - OT
   roleWeight: 0.25
