@@ -13,6 +13,10 @@ using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared.Maps;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared.Standing;
+using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.Leap;
 
 namespace Content.Shared._CCM.Xenonids.Abilities.Runi.Charge;
 
@@ -30,9 +34,10 @@ public sealed class CCMXenoChargeLineSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedXenoHealSystem _xenoHeal = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
     public override void Initialize()
     {
@@ -41,6 +46,45 @@ public sealed class CCMXenoChargeLineSystem : EntitySystem
 
         SubscribeLocalEvent<CCMXenoChargeLineActiveComponent, RefreshMovementSpeedModifiersEvent>(OnSpeed);
         SubscribeLocalEvent<CCMXenoChargeLineActiveComponent, MoveEvent>(OnMove);
+    }
+
+    private bool IsValidChargeTarget(EntityUid attacker, EntityUid target)
+    {
+        if (target == attacker)
+            return false;
+
+        if (!HasComp<MobStateComponent>(target))
+            return false;
+
+        if (_mobState.IsDead(target))
+            return false;
+
+        if (_hive.FromSameHive(attacker, target))
+            return false;
+
+        if (_standing.IsDown(target))
+            return false;
+
+        if (HasComp<LeapIncapacitatedComponent>(target))
+            return false;
+
+        if (_size.TryGetSize(target, out var size))
+        {
+            if (size >= RMCSizes.Big)
+                return false;
+
+            if (size == RMCSizes.VerySmallXeno)
+                return false;
+        }
+
+        // защита от блоков / баррикад / спец-защит
+        var attempt = new XenoLeapHitAttempt(attacker);
+        RaiseLocalEvent(target, ref attempt);
+
+        if (attempt.Cancelled)
+            return false;
+
+        return true;
     }
 
     private void OnUse(Entity<CCMXenoChargeLineComponent> ent, ref CCMXenoChargeLineActionEvent args)
@@ -53,6 +97,7 @@ public sealed class CCMXenoChargeLineSystem : EntitySystem
         };
 
         var xeno = ent.Owner;
+
         if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno, args.PlasmaCost))
             return;
 
@@ -102,16 +147,14 @@ public sealed class CCMXenoChargeLineSystem : EntitySystem
         var forward = xform.LocalRotation.ToWorldVec();
 
         var hitCount = 0;
-
         var baseComp = CompOrNull<CCMXenoChargeLineComponent>(ent.Owner);
-
 
         foreach (var target in _lookup.GetEntitiesInRange(coords, ent.Comp.HitRadius))
         {
             if (target == ent.Owner)
                 continue;
 
-            if (!HasComp<MobStateComponent>(target) || _mobState.IsDead(target))
+            if (!IsValidChargeTarget(ent.Owner, target))
                 continue;
 
             var targetCoords = Transform(target).Coordinates;

@@ -7,6 +7,10 @@ using Content.Shared.Coordinates;
 using Content.Shared.Examine;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared.Standing;
+using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.Leap;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -25,6 +29,9 @@ public sealed class XenoRounyScreechSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityManager _ent = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
     private readonly HashSet<Entity<MobStateComponent>> _closeMobs = new();
@@ -34,6 +41,40 @@ public sealed class XenoRounyScreechSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<XenoRounyScreechComponent, XenoRounyScreechActionEvent>(OnXenoScreechAction);
+    }
+
+    private bool IsValidScreechTarget(EntityUid source, EntityUid target)
+    {
+        if (target == source)
+            return false;
+
+        if (!HasComp<MobStateComponent>(target))
+            return false;
+
+        if (_mobState.IsDead(target))
+            return false;
+
+        if (_hive.FromSameHive(source, target))
+            return false;
+
+        if (_standing.IsDown(target))
+            return false;
+
+        // размер
+        if (_size.TryGetSize(target, out var size))
+        {
+            if (size >= RMCSizes.Big)
+                return false;
+        }
+
+        // защита от способностей (баррикады / щиты / блоки)
+        var attempt = new XenoLeapHitAttempt(source);
+        RaiseLocalEvent(target, ref attempt);
+
+        if (attempt.Cancelled)
+            return false;
+
+        return true;
     }
 
     private void OnXenoScreechAction(Entity<XenoRounyScreechComponent> xeno, ref XenoRounyScreechActionEvent args)
@@ -63,7 +104,7 @@ public sealed class XenoRounyScreechSystem : EntitySystem
 
         foreach (var receiver in _closeMobs)
         {
-            if (!_xeno.CanAbilityAttackTarget(xeno, receiver))
+            if (!IsValidScreechTarget(xeno.Owner, receiver))
                 continue;
 
             ApplyDeaf(xeno, receiver, xeno.Comp.CloseDeafTime);
@@ -80,7 +121,7 @@ public sealed class XenoRounyScreechSystem : EntitySystem
 
         foreach (var receiver in _mobs)
         {
-            if (!_xeno.CanAbilityAttackTarget(xeno, receiver))
+            if (!IsValidScreechTarget(xeno.Owner, receiver))
                 continue;
 
             if (_closeMobs.Contains(receiver))
