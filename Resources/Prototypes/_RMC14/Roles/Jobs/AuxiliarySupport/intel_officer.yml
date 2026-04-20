@@ -15,7 +15,7 @@
     time: 10800 # 3 hour
 # CCM14 role timers [add/start]
   ranks:
-    RMCRankNavyEnsign: [] #CCM14
+    RMCRankSecondLT: []
   startingGear: CMGearIntelOfficer
   dummyStartingGear: RMCGearIntelOfficerEquipped
   icon: "CMJobIconIntelOfficer"
