@@ -5,18 +5,18 @@
   description: A heavy rifle used by the veterans of Petrishev Revolutionaries. Only takes Wall Piercing rounds.
   components:
   - type: Sprite
-    sprite: _CCM14/Objects/Weapons/Guns/Rifles/Zhupel/zhupel_inhands.rsi
+    sprite: _CCM14/Objects/Weapons/Guns/Rifles/Zhupel/zhupelr_inhands.rsi
     layers:
     - state: base
-      sprite: _CCM14/Objects/Weapons/Guns/Rifles/Zhupel/zhupel_icon.rsi
+      sprite: _CCM14/Objects/Weapons/Guns/Rifles/Zhupel/zhupelr_icon.rsi
     - state: bolt-open
-      sprite: _CCM14/Objects/Weapons/Guns/Rifles/Zhupel/zhupel_icon.rsi
+      sprite: _CCM14/Objects/Weapons/Guns/Rifles/Zhupel/zhupelr_icon.rsi
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
-      sprite: _CCM14/Objects/Weapons/Guns/Rifles/Zhupel/zhupel_icon.rsi
+      sprite: _CCM14/Objects/Weapons/Guns/Rifles/Zhupel/zhupelr_icon.rsi
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _CCM14/Objects/Weapons/Guns/Rifles/Zhupel/zhupel_inhands.rsi
+    sprite: _CCM14/Objects/Weapons/Guns/Rifles/Zhupel/zhupelr_inhands.rsi
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -80,7 +80,7 @@
   suffix: WP
   components:
   - type: Sprite
-    sprite: _CCM14/Objects/Weapons/Ammunition/Magazines/zhupel.rsi
+    sprite: _CCM14/Objects/Weapons/Ammunition/Magazines/zhupel_mag.rsi
   - type: Tag
     tags:
     - RMCMagazineLMGBase

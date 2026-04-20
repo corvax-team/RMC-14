@@ -5,9 +5,9 @@
   description: A piece of probably stolen from USSP equipment. This one lacks of a famous chin guard of a standart helmet and has a noticibly red hammer and sickle on forehead part.
   components:
   - type: Sprite
-    sprite: _CCM14/Objects/Clothing/Head/Helmets/petrishev.rsi
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/petrishev_helmet.rsi
   - type: Clothing
-    sprite: _CCM14/Objects/Clothing/Head/Helmets/petrishev.rsi
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/petrishev_helmet.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: CMArmor
