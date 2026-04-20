@@ -1,17 +1,12 @@
-using Content.Shared.Actions;
-using Content.Shared.Actions.Components;
+﻿using System.Numerics;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
-using Robust.Shared.Map;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Physics.Systems;
-using Robust.Shared.Timing;
-using System.Numerics;
 
-namespace Content.Shared._CCM14.Xeno.Abilities.ChargeLine;
+namespace Content.Shared._CCM.Xenonids.Abilities.Runi.Charge;
 
 public sealed class CCMXenoChargeLineSystem : EntitySystem
 {
@@ -42,6 +37,7 @@ public sealed class CCMXenoChargeLineSystem : EntitySystem
         };
 
         _doAfter.TryStartDoAfter(doAfter);
+        args.Handled = true;
     }
 
     private void OnDoAfter(Entity<CCMXenoChargeLineComponent> ent, ref CCMXenoChargeLineDoAfterEvent args)
@@ -110,7 +106,6 @@ public sealed class CCMXenoChargeLineSystem : EntitySystem
 
         if (hitCount > 0)
         {
-
             var healAmount = ent.Comp.HealPerHit * hitCount;
 
             var heal = new DamageSpecifier();

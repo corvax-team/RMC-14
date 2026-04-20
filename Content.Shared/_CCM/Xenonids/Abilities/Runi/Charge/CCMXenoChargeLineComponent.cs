@@ -1,8 +1,8 @@
 using Content.Shared.Damage;
-using Robust.Shared.GameStates;
 using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 
-namespace Content.Shared._CCM14.Xeno.Abilities.ChargeLine;
+namespace Content.Shared._CCM.Xenonids.Abilities.Runi.Charge;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class CCMXenoChargeLineComponent : Component

@@ -1,7 +1,6 @@
 using Content.Shared.Actions;
-using Robust.Shared.Serialization;
 
-namespace Content.Shared._CCM14.Xeno.Abilities.ChargeLine;
+namespace Content.Shared._CCM.Xenonids.Abilities.Runi.Charge;
 
 public sealed partial class CCMXenoChargeLineActionEvent : InstantActionEvent
 {
