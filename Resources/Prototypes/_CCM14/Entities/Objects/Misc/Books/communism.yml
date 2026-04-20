@@ -5,7 +5,7 @@
   description: A book writted by Petrishev himself, contains a huge wariety of theories about universal equality. Illegal in literally every country.
   components:
     - type: Sprite
-      sprite: _CCM14\Objects\Misc\Books\communismbook_rsi
+      sprite: _CCM14/Objects/Misc/Books/communismbook_rsi
       state: icon
     - type: Paper
       content: book-text-petrishev
