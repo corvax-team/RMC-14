@@ -139,6 +139,6 @@
 
 - type: rank
   id: RMCRankNavyChiefOfNavalOperations
-  name: Chief of Naval Operations
-  prefix: CNO.
+  name: Верховный Адмирал ВКС
+  prefix: Верх. Адмирал
   paygrade: O10
