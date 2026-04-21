@@ -38,6 +38,14 @@ public sealed class CCMCustomizationApplySystem : EntitySystem
         ["holo_teal"] = Color.FromHex("#6FF2E888"),
     };
 
+    private static readonly Dictionary<string, string> GhostSkinPaths = new()
+    {
+        ["sponsor_pretor"] = "_CCM14/Mobs/Ghost/sponsorGhostPretor.rsi",
+        ["sponsor_runi"] = "_CCM14/Mobs/Ghost/sponsorGhostRuni.rsi",
+        ["sponsor_queen"] = "_CCM14/Mobs/Ghost/sponsorGhostQueen.rsi",
+        ["sponsor_facehugger"] = "_CCM14/Mobs/Ghost/sponsorGhostFacehugger.rsi",
+    };
+
     private static readonly Dictionary<string, string> XenoSkinPaths = new()
     {
         ["xeno_defender:ccm_defender_skin"] = "_CCM14/Mobs/Xenonids/Skins/Defender",
@@ -124,14 +132,10 @@ public sealed class CCMCustomizationApplySystem : EntitySystem
     private void ApplyGhostCustomization(EntityUid ghost, CCMCustomizationSnapshot snapshot)
     {
         var selected = GetSelection(snapshot, "ghost");
-        if (!GhostColors.TryGetValue(selected, out var color) || color == null)
-        {
-            RemCompDeferred<GhostColorComponent>(ghost);
-            return;
-        }
-
         var component = EnsureComp<GhostColorComponent>(ghost);
+        GhostColors.TryGetValue(selected, out var color);
         component.Color = color;
+        component.RsiPath = GhostSkinPaths.GetValueOrDefault(selected, string.Empty);
         Dirty(ghost, component);
     }
 

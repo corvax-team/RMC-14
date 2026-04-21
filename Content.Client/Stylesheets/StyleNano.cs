@@ -129,6 +129,29 @@ namespace Content.Client.Stylesheets
         public const string StyleClassLabelSecondaryColor = "LabelSecondaryColor";
         public const string StyleClassLabelBig = "LabelBig";
         public const string StyleClassLabelSmall = "LabelSmall";
+        public const string StyleClassLoadoutNamePanel = "LoadoutNamePanel";
+        public const string StyleClassLoadoutSectionPanel = "LoadoutSectionPanel";
+        public const string StyleClassLoadoutItemButton = "LoadoutItemButton";
+        public const string StyleClassLoadoutItemButtonAlt = "LoadoutItemButtonAlt";
+        public const string StyleClassLoadoutSpriteFrame = "LoadoutSpriteFrame";
+        public const string StyleClassLoadoutSubgroupPanel = "LoadoutSubgroupPanel";
+        public const string StyleClassLoadoutToggleButton = "LoadoutToggleButton";
+        public const string StyleClassGuidebookTreePanel = "GuidebookTreePanel";
+        public const string StyleClassGuidebookContentPanel = "GuidebookContentPanel";
+        public const string StyleClassGuidebookSearchPanel = "GuidebookSearchPanel";
+        public const string StyleClassGuidebookSearchBar = "GuidebookSearchBar";
+        public const string StyleClassGuidebookPlaceholderPanel = "GuidebookPlaceholderPanel";
+        public const string StyleClassGuidebookEmbedCard = "GuidebookEmbedCard";
+        public const string StyleClassGuidebookEmbedHeader = "GuidebookEmbedHeader";
+        public const string StyleClassGuidebookEmbedSectionHeading = "GuidebookEmbedSectionHeading";
+        public const string StyleClassGuidebookEmbedSectionBody = "GuidebookEmbedSectionBody";
+        public const string StyleClassVotePanel = "VotePanel";
+        public const string StyleClassVoteSectionPanel = "VoteSectionPanel";
+        public const string StyleClassVoteActionButton = "VoteActionButton";
+        public const string StyleClassVoteProgressBar = "VoteProgressBar";
+        public const string StyleClassVoteTimerText = "VoteTimerText";
+        public const string StyleClassOptionsFooterPanel = "OptionsFooterPanel";
+        public const string StyleClassOptionsFooterButton = "OptionsFooterButton";
         public const string StyleClassCMProfileFont = "CMProfileFont";
         public const string StyleClassButtonBig = "ButtonBig";
 
@@ -149,21 +172,21 @@ namespace Content.Client.Stylesheets
         public static Color DangerousRedFore = Color.FromHex("#48FF6A");
         public static Color DisabledFore = Color.FromHex("#284b32");
 
-        public static Color ButtonColorDefault = Color.FromHex("#0C9111");
-        public static Color ButtonColorDefaultRed = Color.FromHex("#0C9111");
-        public static Color ButtonColorHovered = Color.FromHex("#35F341");
-        public static Color ButtonColorHoveredRed = Color.FromHex("#35F341");
-        public static Color ButtonColorPressed = Color.FromHex("#12B91D");
-        public static Color ButtonColorDisabled = Color.FromHex("#10911A"); // CCM 10 > 15: lobby rework
+        public static Color ButtonColorDefault = Color.FromHex("#176924");
+        public static Color ButtonColorDefaultRed = Color.FromHex("#176924");
+        public static Color ButtonColorHovered = Color.FromHex("#1F7F2B");
+        public static Color ButtonColorHoveredRed = Color.FromHex("#1F7F2B");
+        public static Color ButtonColorPressed = Color.FromHex("#0A360F");
+        public static Color ButtonColorDisabled = Color.FromHex("#103814"); // CCM 10 > 15: lobby rework
 
-        public static Color ButtonColorCautionDefault = Color.FromHex("#0C9111");
-        public static Color ButtonColorCautionHovered = Color.FromHex("#35F341");
-        public static Color ButtonColorCautionPressed = Color.FromHex("#12B91D");
-        public static Color ButtonColorCautionDisabled = Color.FromHex("#10911A");
+        public static Color ButtonColorCautionDefault = Color.FromHex("#176924");
+        public static Color ButtonColorCautionHovered = Color.FromHex("#1F7F2B");
+        public static Color ButtonColorCautionPressed = Color.FromHex("#0A360F");
+        public static Color ButtonColorCautionDisabled = Color.FromHex("#103814");
 
-        public static Color ButtonColorGoodDefault = Color.FromHex("#0C9111");
-        public static Color ButtonColorGoodHovered = Color.FromHex("#35F341");
-        public static Color ButtonColorGoodDisabled = Color.FromHex("#10911A");
+        public static Color ButtonColorGoodDefault = Color.FromHex("#176924");
+        public static Color ButtonColorGoodHovered = Color.FromHex("#1F7F2B");
+        public static Color ButtonColorGoodDisabled = Color.FromHex("#103814");
 
         public static Color LobbyCrtAccent = Color.FromHex("#1BE628");
         public static Color LobbyCrtText = Color.FromHex("#1BE628");
@@ -184,20 +207,20 @@ namespace Content.Client.Stylesheets
         public static Color PointMagenta = Color.FromHex("#00EB4C");
 
         // Context menu button colors
-        public static Color ButtonColorContext = Color.FromHex("#155124");
-        public static Color ButtonColorContextHover = Color.FromHex("#1D6630");
-        public static Color ButtonColorContextPressed = Color.FromHex("#103E1C");
-        public static Color ButtonColorContextDisabled = Color.FromHex("#103E1C");
-        public static Color DropdownButtonColorContext = Color.FromHex("#1B7320");
-        public static Color DropdownButtonColorContextHover = Color.FromHex("#23942A");
-        public static Color DropdownButtonColorContextPressed = Color.FromHex("#2AB633");
-        public static Color DropdownButtonColorContextDisabled = Color.FromHex("#103E1C");
+        public static Color ButtonColorContext = Color.FromHex("#176924");
+        public static Color ButtonColorContextHover = Color.FromHex("#1F7F2B");
+        public static Color ButtonColorContextPressed = Color.FromHex("#0A360F");
+        public static Color ButtonColorContextDisabled = Color.FromHex("#103814");
+        public static Color DropdownButtonColorContext = Color.FromHex("#176924");
+        public static Color DropdownButtonColorContextHover = Color.FromHex("#208A2D");
+        public static Color DropdownButtonColorContextPressed = Color.FromHex("#0A360F");
+        public static Color DropdownButtonColorContextDisabled = Color.FromHex("#103814");
 
         // Examine button colors
-        public static Color ExamineButtonColorContext = Color.FromHex("#155124");
-        public static Color ExamineButtonColorContextHover = Color.FromHex("#1D6630");
-        public static Color ExamineButtonColorContextPressed = Color.FromHex("#103E1C");
-        public static Color ExamineButtonColorContextDisabled = Color.FromHex("#103E1C");
+        public static Color ExamineButtonColorContext = Color.FromHex("#176924");
+        public static Color ExamineButtonColorContextHover = Color.FromHex("#1F7F2B");
+        public static Color ExamineButtonColorContextPressed = Color.FromHex("#0A360F");
+        public static Color ExamineButtonColorContextDisabled = Color.FromHex("#103814");
 
         // Fancy Tree elements
         public static Color FancyTreeEvenRowColor = Color.FromHex("#0E1A11");
@@ -246,21 +269,21 @@ namespace Content.Client.Stylesheets
                 DangerousRedFore = Color.FromHex("#4278CC");
                 DisabledFore = Color.FromHex("#263F5A");
 
-                ButtonColorDefault = Color.FromHex("#1D54D9");
-                ButtonColorDefaultRed = Color.FromHex("#1D54D9");
-                ButtonColorHovered = Color.FromHex("#2B65F0");
-                ButtonColorHoveredRed = Color.FromHex("#2B65F0");
-                ButtonColorPressed = Color.FromHex("#143FA8");
-                ButtonColorDisabled = Color.FromHex("#10327F");
+                ButtonColorDefault = Color.FromHex("#12367D");
+                ButtonColorDefaultRed = Color.FromHex("#12367D");
+                ButtonColorHovered = Color.FromHex("#194796");
+                ButtonColorHoveredRed = Color.FromHex("#194796");
+                ButtonColorPressed = Color.FromHex("#0D285E");
+                ButtonColorDisabled = Color.FromHex("#10264F");
 
-                ButtonColorCautionDefault = Color.FromHex("#1D54D9");
-                ButtonColorCautionHovered = Color.FromHex("#2B65F0");
-                ButtonColorCautionPressed = Color.FromHex("#143FA8");
-                ButtonColorCautionDisabled = Color.FromHex("#10327F");
+                ButtonColorCautionDefault = Color.FromHex("#12367D");
+                ButtonColorCautionHovered = Color.FromHex("#194796");
+                ButtonColorCautionPressed = Color.FromHex("#0D285E");
+                ButtonColorCautionDisabled = Color.FromHex("#10264F");
 
-                ButtonColorGoodDefault = Color.FromHex("#1D54D9");
-                ButtonColorGoodHovered = Color.FromHex("#2B65F0");
-                ButtonColorGoodDisabled = Color.FromHex("#10327F");
+                ButtonColorGoodDefault = Color.FromHex("#12367D");
+                ButtonColorGoodHovered = Color.FromHex("#194796");
+                ButtonColorGoodDisabled = Color.FromHex("#10264F");
 
                 LobbyCrtAccent = Color.FromHex("#1D54D9");
                 LobbyCrtText = Color.FromHex("#1D54D9");
@@ -279,19 +302,19 @@ namespace Content.Client.Stylesheets
                 PointGreen = Color.FromHex("#235AAD");
                 PointMagenta = Color.FromHex("#2968C4");
 
-                ButtonColorContext = Color.FromHex("#091B38");
-                ButtonColorContextHover = Color.FromHex("#102A52");
-                ButtonColorContextPressed = Color.FromHex("#081A35");
-                ButtonColorContextDisabled = Color.FromHex("#081A35");
-                DropdownButtonColorContext = Color.FromHex("#0F2966");
-                DropdownButtonColorContextHover = Color.FromHex("#183A82");
-                DropdownButtonColorContextPressed = Color.FromHex("#2555B8");
-                DropdownButtonColorContextDisabled = Color.FromHex("#081A35");
+                ButtonColorContext = Color.FromHex("#12367D");
+                ButtonColorContextHover = Color.FromHex("#194796");
+                ButtonColorContextPressed = Color.FromHex("#0D285E");
+                ButtonColorContextDisabled = Color.FromHex("#10264F");
+                DropdownButtonColorContext = Color.FromHex("#12367D");
+                DropdownButtonColorContextHover = Color.FromHex("#194796");
+                DropdownButtonColorContextPressed = Color.FromHex("#0D285E");
+                DropdownButtonColorContextDisabled = Color.FromHex("#10264F");
 
-                ExamineButtonColorContext = Color.FromHex("#091B38");
-                ExamineButtonColorContextHover = Color.FromHex("#102A52");
-                ExamineButtonColorContextPressed = Color.FromHex("#081A35");
-                ExamineButtonColorContextDisabled = Color.FromHex("#081A35");
+                ExamineButtonColorContext = Color.FromHex("#12367D");
+                ExamineButtonColorContextHover = Color.FromHex("#194796");
+                ExamineButtonColorContextPressed = Color.FromHex("#0D285E");
+                ExamineButtonColorContextDisabled = Color.FromHex("#10264F");
 
                 FancyTreeEvenRowColor = Color.FromHex("#0D131C");
                 FancyTreeSelectedRowColor = Color.FromHex("#122240");
@@ -307,21 +330,21 @@ namespace Content.Client.Stylesheets
                 DangerousRedFore = Color.FromHex("#48FF6A");
                 DisabledFore = Color.FromHex("#23402B");
 
-                ButtonColorDefault = Color.FromHex("#0C9111");
-                ButtonColorDefaultRed = Color.FromHex("#0C9111");
-                ButtonColorHovered = Color.FromHex("#12A916");
-                ButtonColorHoveredRed = Color.FromHex("#12A916");
-                ButtonColorPressed = Color.FromHex("#08790B");
-                ButtonColorDisabled = Color.FromHex("#065F08");
+                ButtonColorDefault = Color.FromHex("#176924");
+                ButtonColorDefaultRed = Color.FromHex("#176924");
+                ButtonColorHovered = Color.FromHex("#1F7F2B");
+                ButtonColorHoveredRed = Color.FromHex("#1F7F2B");
+                ButtonColorPressed = Color.FromHex("#0A360F");
+                ButtonColorDisabled = Color.FromHex("#103814");
 
-                ButtonColorCautionDefault = Color.FromHex("#0C9111");
-                ButtonColorCautionHovered = Color.FromHex("#12A916");
-                ButtonColorCautionPressed = Color.FromHex("#08790B");
-                ButtonColorCautionDisabled = Color.FromHex("#065F08");
+                ButtonColorCautionDefault = Color.FromHex("#176924");
+                ButtonColorCautionHovered = Color.FromHex("#1F7F2B");
+                ButtonColorCautionPressed = Color.FromHex("#0A360F");
+                ButtonColorCautionDisabled = Color.FromHex("#103814");
 
-                ButtonColorGoodDefault = Color.FromHex("#0C9111");
-                ButtonColorGoodHovered = Color.FromHex("#12A916");
-                ButtonColorGoodDisabled = Color.FromHex("#065F08");
+                ButtonColorGoodDefault = Color.FromHex("#176924");
+                ButtonColorGoodHovered = Color.FromHex("#1F7F2B");
+                ButtonColorGoodDisabled = Color.FromHex("#103814");
 
                 LobbyCrtAccent = Color.FromHex("#1BE628");
                 LobbyCrtText = Color.FromHex("#1BE628");
@@ -340,19 +363,19 @@ namespace Content.Client.Stylesheets
                 PointGreen = Color.FromHex("#38b026");
                 PointMagenta = Color.FromHex("#00EB4C");
 
-                ButtonColorContext = Color.FromHex("#155124");
-                ButtonColorContextHover = Color.FromHex("#1D6630");
-                ButtonColorContextPressed = Color.FromHex("#103E1C");
-                ButtonColorContextDisabled = Color.FromHex("#103E1C");
-                DropdownButtonColorContext = Color.FromHex("#1B7320");
-                DropdownButtonColorContextHover = Color.FromHex("#23942A");
-                DropdownButtonColorContextPressed = Color.FromHex("#2AB633");
-                DropdownButtonColorContextDisabled = Color.FromHex("#103E1C");
+                ButtonColorContext = Color.FromHex("#176924");
+                ButtonColorContextHover = Color.FromHex("#1F7F2B");
+                ButtonColorContextPressed = Color.FromHex("#0A360F");
+                ButtonColorContextDisabled = Color.FromHex("#103814");
+                DropdownButtonColorContext = Color.FromHex("#176924");
+                DropdownButtonColorContextHover = Color.FromHex("#208A2D");
+                DropdownButtonColorContextPressed = Color.FromHex("#0A360F");
+                DropdownButtonColorContextDisabled = Color.FromHex("#103814");
 
-                ExamineButtonColorContext = Color.FromHex("#155124");
-                ExamineButtonColorContextHover = Color.FromHex("#1D6630");
-                ExamineButtonColorContextPressed = Color.FromHex("#103E1C");
-                ExamineButtonColorContextDisabled = Color.FromHex("#103E1C");
+                ExamineButtonColorContext = Color.FromHex("#176924");
+                ExamineButtonColorContextHover = Color.FromHex("#1F7F2B");
+                ExamineButtonColorContextPressed = Color.FromHex("#0A360F");
+                ExamineButtonColorContextDisabled = Color.FromHex("#103814");
 
                 FancyTreeEvenRowColor = Color.FromHex("#0E1A11");
                 FancyTreeSelectedRowColor = Color.FromHex("#13261A");
@@ -380,8 +403,8 @@ namespace Content.Client.Stylesheets
             }
 
             var optionsButtonBase = CurrentTheme == UiColorTheme.Blue
-                ? Color.FromHex("#0938A8")
-                : Color.FromHex("#018502");
+                ? Color.FromHex("#12367D")
+                : Color.FromHex("#176924");
             var optionsButtonHover = BlendTowards(optionsButtonBase, Color.White, 0.10f);
             var optionsButtonPressed = BlendTowards(optionsButtonBase, Color.Black, 0.16f);
             var optionsButtonDisabled = BlendTowards(optionsButtonBase, Color.Black, 0.30f);
@@ -389,6 +412,54 @@ namespace Content.Client.Stylesheets
             var optionsButtonTextDisabled = optionsButtonText.WithAlpha(0.72f);
             var optionsOptionsBackground = BlendTowards(optionsButtonBase, Color.Black, 0.72f).WithAlpha(0.94f);
             var optionsOptionsBorder = BlendTowards(optionsButtonBase, Color.White, 0.08f).WithAlpha(0.82f);
+            var themedPanel = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#091E3C").WithAlpha(0.94f)
+                : Color.FromHex("#07170B").WithAlpha(0.94f);
+            var themedPanelAlt = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#102A52").WithAlpha(0.92f)
+                : Color.FromHex("#0D2513").WithAlpha(0.92f);
+            var themedPanelRaised = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#12367D").WithAlpha(0.90f)
+                : Color.FromHex("#12371A").WithAlpha(0.90f);
+            var themedBorder = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#2A67B8").WithAlpha(0.95f)
+                : Color.FromHex("#39A852").WithAlpha(0.95f);
+            var themedBorderSoft = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#194A86").WithAlpha(0.88f)
+                : Color.FromHex("#1D6A2D").WithAlpha(0.88f);
+            var themedText = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#E7F2FF")
+                : Color.FromHex("#E4F4E8");
+            var themedTextMuted = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#BCD4F5")
+                : Color.FromHex("#C7E6CC");
+            var loadoutButtonBase = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#12367D")
+                : Color.FromHex("#0E4714");
+            var loadoutButtonAlt = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#12367D")
+                : Color.FromHex("#12551A");
+            var loadoutButtonHover = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#194796")
+                : Color.FromHex("#176924");
+            var loadoutButtonPressed = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#0D285E")
+                : Color.FromHex("#0A360F");
+            var voteButtonBase = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#12367D")
+                : Color.FromHex("#145C21");
+            var voteButtonHover = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#194796")
+                : Color.FromHex("#1B7320");
+            var voteButtonPressed = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#0D285E")
+                : Color.FromHex("#0D4616");
+            var voteProgressBackground = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#08162B").WithAlpha(0.95f)
+                : Color.FromHex("#051008").WithAlpha(0.95f);
+            var voteProgressForeground = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#3178D7").WithAlpha(0.95f)
+                : Color.FromHex("#30B53C").WithAlpha(0.95f);
             var dropdownButtonText = Color.FromHex("#C5CED8");
             var dropdownButtonTextDisabled = dropdownButtonText.WithAlpha(0.72f);
             var dropdownButtonNormal = new StyleBoxFlat
@@ -1348,6 +1419,18 @@ namespace Content.Client.Stylesheets
                     {
                         Texture = resCache.GetTexture("/Textures/_CCM14/Lobby/rightside_chat_bg.png"),
                         Modulate = PanelDark.WithAlpha(1f),
+                    }),
+
+                Element<PanelContainer>().Class(StyleClassOptionsFooterPanel)
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#091630").WithAlpha(0.88f)
+                            : PanelDark.WithAlpha(0.80f),
+                        BorderThickness = new Thickness(0, 1, 0, 0),
+                        BorderColor = CurrentTheme == UiColorTheme.Blue
+                            ? Color.FromHex("#1D4D96").WithAlpha(0.85f)
+                            : LobbyMenuButtonBase.WithAlpha(0.70f),
                     }),
                 // CCM rework ui - start
                 Element<PanelContainer>().Class("CCMEscapeMenuBackground")
@@ -3452,6 +3535,38 @@ namespace Content.Client.Stylesheets
 
                 new StyleRule(new SelectorChild(
                     new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(Button), new[] {StyleClassOptionsFooterButton}, null, new[] {ContainerButton.StylePseudoClassNormal})),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, optionsButtonBase),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(Button), new[] {StyleClassOptionsFooterButton}, null, new[] {ContainerButton.StylePseudoClassHover})),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, optionsButtonHover),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(Button), new[] {StyleClassOptionsFooterButton}, null, new[] {ContainerButton.StylePseudoClassPressed})),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, optionsButtonPressed),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
+                    new SelectorElement(typeof(Button), new[] {StyleClassOptionsFooterButton}, null, new[] {ContainerButton.StylePseudoClassDisabled})),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, optionsButtonDisabled),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(null, new[] {StyleBase.StyleClassOptionsMenuRoot}, null, null),
                     new SelectorElement(typeof(OptionButton), null, null, new[] {ContainerButton.StylePseudoClassNormal})),
                     new[]
                     {
@@ -4353,6 +4468,497 @@ namespace Content.Client.Stylesheets
                 {
                     new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Left),
                 }),
+
+                Element<PanelContainer>().Class(StyleClassLoadoutNamePanel)
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = themedPanelAlt,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorderSoft,
+                    }),
+
+                Element<PanelContainer>().Class(StyleClassLoadoutSectionPanel)
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = themedPanel,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorderSoft,
+                    }),
+
+                Element<PanelContainer>().Class(StyleClassLoadoutSpriteFrame)
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = themedPanelAlt,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorderSoft,
+                    }),
+
+                Element<PanelContainer>().Class(StyleClassLoadoutSubgroupPanel)
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = themedPanelAlt.WithAlpha(0.90f),
+                        BorderThickness = new Thickness(1, 0, 0, 0),
+                        BorderColor = themedBorderSoft.WithAlpha(0.72f),
+                        ContentMarginLeftOverride = 10,
+                        ContentMarginTopOverride = 4,
+                        ContentMarginRightOverride = 0,
+                        ContentMarginBottomOverride = 4,
+                    }),
+
+                Element<Label>().Class("LoadoutSectionTitle")
+                    .Prop(Label.StylePropertyFont, notoSansBold12)
+                    .Prop(Label.StylePropertyFontColor, themedText),
+
+                Element<Button>().Class(StyleClassLoadoutItemButton)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = loadoutButtonBase,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorderSoft,
+                        ContentMarginLeftOverride = 8,
+                        ContentMarginTopOverride = 6,
+                        ContentMarginRightOverride = 8,
+                        ContentMarginBottomOverride = 6,
+                    }),
+
+                Element<Button>().Class(StyleClassLoadoutItemButton).Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = loadoutButtonHover,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorder,
+                        ContentMarginLeftOverride = 8,
+                        ContentMarginTopOverride = 6,
+                        ContentMarginRightOverride = 8,
+                        ContentMarginBottomOverride = 6,
+                    }),
+
+                Element<Button>().Class(StyleClassLoadoutItemButton).Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = loadoutButtonPressed,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorder,
+                        ContentMarginLeftOverride = 8,
+                        ContentMarginTopOverride = 6,
+                        ContentMarginRightOverride = 8,
+                        ContentMarginBottomOverride = 6,
+                    }),
+
+                Element<Button>().Class(StyleClassLoadoutItemButton).Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = BlendTowards(loadoutButtonBase, Color.Black, 0.24f),
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorderSoft.WithAlpha(0.50f),
+                        ContentMarginLeftOverride = 8,
+                        ContentMarginTopOverride = 6,
+                        ContentMarginRightOverride = 8,
+                        ContentMarginBottomOverride = 6,
+                    }),
+
+                Element<Button>().Class(StyleClassLoadoutItemButtonAlt)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = loadoutButtonAlt,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorderSoft,
+                        ContentMarginLeftOverride = 8,
+                        ContentMarginTopOverride = 6,
+                        ContentMarginRightOverride = 8,
+                        ContentMarginBottomOverride = 6,
+                    }),
+
+                Element<Button>().Class(StyleClassLoadoutItemButtonAlt).Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = loadoutButtonHover,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorder,
+                        ContentMarginLeftOverride = 8,
+                        ContentMarginTopOverride = 6,
+                        ContentMarginRightOverride = 8,
+                        ContentMarginBottomOverride = 6,
+                    }),
+
+                Element<Button>().Class(StyleClassLoadoutItemButtonAlt).Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = loadoutButtonPressed,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorder,
+                        ContentMarginLeftOverride = 8,
+                        ContentMarginTopOverride = 6,
+                        ContentMarginRightOverride = 8,
+                        ContentMarginBottomOverride = 6,
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] { StyleClassLoadoutItemButton }, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, notoSansBold12),
+                        new StyleProperty(Label.StylePropertyFontColor, themedTextMuted),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] { StyleClassLoadoutItemButton }, null, new[] { ContainerButton.StylePseudoClassHover }),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, themedText),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] { StyleClassLoadoutItemButton }, null, new[] { ContainerButton.StylePseudoClassPressed }),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, themedText),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] { StyleClassLoadoutItemButton }, null, new[] { ContainerButton.StylePseudoClassDisabled }),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, themedTextMuted.WithAlpha(0.55f)),
+                    }),
+
+                Element<Button>().Class(StyleClassLoadoutToggleButton)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = themedPanelRaised,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorderSoft,
+                        ContentMarginLeftOverride = 4,
+                        ContentMarginTopOverride = 2,
+                        ContentMarginRightOverride = 4,
+                        ContentMarginBottomOverride = 2,
+                    }),
+
+                Element<Button>().Class(StyleClassLoadoutToggleButton).Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = loadoutButtonHover,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorder,
+                        ContentMarginLeftOverride = 4,
+                        ContentMarginTopOverride = 2,
+                        ContentMarginRightOverride = 4,
+                        ContentMarginBottomOverride = 2,
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] { StyleClassLoadoutToggleButton }, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, notoSansBold12),
+                        new StyleProperty(Label.StylePropertyFontColor, themedText),
+                    }),
+
+                Element<PanelContainer>().Class(StyleClassGuidebookTreePanel)
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = themedPanel,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorderSoft,
+                    }),
+
+                Element<PanelContainer>().Class(StyleClassGuidebookContentPanel)
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = themedPanel,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorderSoft,
+                    }),
+
+                Element<PanelContainer>().Class(StyleClassGuidebookSearchPanel)
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = themedPanelAlt,
+                        BorderThickness = new Thickness(0, 0, 0, 1),
+                        BorderColor = themedBorderSoft.WithAlpha(0.70f),
+                        ContentMarginLeftOverride = 6,
+                        ContentMarginTopOverride = 6,
+                        ContentMarginRightOverride = 6,
+                        ContentMarginBottomOverride = 6,
+                    }),
+
+                new StyleRule(new SelectorElement(typeof(LineEdit), new[] { StyleClassGuidebookSearchBar }, null, null), new[]
+                {
+                    new StyleProperty(LineEdit.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = themedPanelRaised,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorderSoft,
+                        ContentMarginLeftOverride = 8,
+                        ContentMarginTopOverride = 4,
+                        ContentMarginRightOverride = 8,
+                        ContentMarginBottomOverride = 4,
+                    }),
+                    new StyleProperty(LineEdit.StylePropertyCursorColor, themedText),
+                    new StyleProperty(LineEdit.StylePropertySelectionColor, themedBorder.WithAlpha(0.30f)),
+                }),
+
+                Element<PanelContainer>().Class(StyleClassGuidebookPlaceholderPanel)
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = themedPanelAlt,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorder,
+                    }),
+
+                Element<Label>().Class("GuidebookPlaceholderTitle")
+                    .Prop(Label.StylePropertyFont, notoSansBold14)
+                    .Prop(Label.StylePropertyFontColor, themedText),
+
+                Element<Label>().Class("GuidebookPlaceholderText")
+                    .Prop(Label.StylePropertyFontColor, themedTextMuted),
+
+                Element<PanelContainer>().Class(StyleClassGuidebookEmbedCard)
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = themedPanelAlt,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorderSoft,
+                    }),
+
+                Element<Label>().Class(StyleClassGuidebookEmbedHeader)
+                    .Prop(Label.StylePropertyFont, notoSansBold12)
+                    .Prop(Label.StylePropertyFontColor, themedText),
+
+                Element<RichTextLabel>().Class(StyleClassGuidebookEmbedHeader)
+                    .Prop("font", notoSansBold12),
+
+                Element<CollapsibleHeading>().Class(StyleClassGuidebookEmbedSectionHeading)
+                    .Prop(ContainerButton.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = themedPanelRaised,
+                        BorderThickness = new Thickness(1, 1, 1, 0),
+                        BorderColor = themedBorderSoft,
+                        ContentMarginLeftOverride = 6,
+                        ContentMarginTopOverride = 4,
+                        ContentMarginRightOverride = 6,
+                        ContentMarginBottomOverride = 4,
+                    }),
+
+                Element<CollapsibleHeading>().Class(StyleClassGuidebookEmbedSectionHeading).Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(ContainerButton.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = voteButtonHover,
+                        BorderThickness = new Thickness(1, 1, 1, 0),
+                        BorderColor = themedBorder,
+                        ContentMarginLeftOverride = 6,
+                        ContentMarginTopOverride = 4,
+                        ContentMarginRightOverride = 6,
+                        ContentMarginBottomOverride = 4,
+                    }),
+
+                Element<CollapsibleHeading>().Class(StyleClassGuidebookEmbedSectionHeading).Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(ContainerButton.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = voteButtonPressed,
+                        BorderThickness = new Thickness(1, 1, 1, 0),
+                        BorderColor = themedBorder,
+                        ContentMarginLeftOverride = 6,
+                        ContentMarginTopOverride = 4,
+                        ContentMarginRightOverride = 6,
+                        ContentMarginBottomOverride = 4,
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(CollapsibleHeading), new[] { StyleClassGuidebookEmbedSectionHeading }, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, notoSansBold12),
+                        new StyleProperty(Label.StylePropertyFontColor, themedText),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(CollapsibleHeading), new[] { StyleClassGuidebookEmbedSectionHeading }, null, null),
+                    new SelectorElement(typeof(TextureRect), new[] { OptionButton.StyleClassOptionTriangle }, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, themedTextMuted),
+                    }),
+
+                Element<CollapsibleBody>().Class(StyleClassGuidebookEmbedSectionBody)
+                    .Prop(Control.StylePropertyModulateSelf, Color.White)
+                    .Prop(nameof(Control.Margin), new Thickness(0, 0, 0, 4)),
+
+                Element<PanelContainer>().Class(StyleClassVotePanel)
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = themedPanel,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorder,
+                    }),
+
+                Element<PanelContainer>().Class(StyleClassVoteSectionPanel)
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = themedPanelAlt,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorderSoft,
+                        ContentMarginLeftOverride = 6,
+                        ContentMarginTopOverride = 6,
+                        ContentMarginRightOverride = 6,
+                        ContentMarginBottomOverride = 6,
+                    }),
+
+                Element<Button>().Class(StyleClassVoteActionButton)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = voteButtonBase,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorderSoft,
+                        ContentMarginLeftOverride = 8,
+                        ContentMarginTopOverride = 5,
+                        ContentMarginRightOverride = 8,
+                        ContentMarginBottomOverride = 5,
+                    }),
+
+                Element<Button>().Class(StyleClassVoteActionButton).Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = voteButtonHover,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorder,
+                        ContentMarginLeftOverride = 8,
+                        ContentMarginTopOverride = 5,
+                        ContentMarginRightOverride = 8,
+                        ContentMarginBottomOverride = 5,
+                    }),
+
+                Element<Button>().Class(StyleClassVoteActionButton).Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = voteButtonPressed,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorder,
+                        ContentMarginLeftOverride = 8,
+                        ContentMarginTopOverride = 5,
+                        ContentMarginRightOverride = 8,
+                        ContentMarginBottomOverride = 5,
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] { StyleClassVoteActionButton }, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, notoSansBold12),
+                        new StyleProperty(Label.StylePropertyFontColor, themedText),
+                    }),
+
+                Element<Button>().Class(StyleBase.StyleClassVoteButton)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = themedPanelRaised,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorderSoft,
+                        ContentMarginLeftOverride = 6,
+                        ContentMarginTopOverride = 4,
+                        ContentMarginRightOverride = 6,
+                        ContentMarginBottomOverride = 4,
+                    }),
+
+                Element<Button>().Class(StyleBase.StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = voteButtonHover,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorder,
+                        ContentMarginLeftOverride = 6,
+                        ContentMarginTopOverride = 4,
+                        ContentMarginRightOverride = 6,
+                        ContentMarginBottomOverride = 4,
+                    }),
+
+                Element<Button>().Class(StyleBase.StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = voteButtonPressed,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = themedBorder,
+                        ContentMarginLeftOverride = 6,
+                        ContentMarginTopOverride = 4,
+                        ContentMarginRightOverride = 6,
+                        ContentMarginBottomOverride = 4,
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] { StyleBase.StyleClassVoteButton }, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, notoSansBold12),
+                        new StyleProperty(Label.StylePropertyFontColor, themedTextMuted),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] { StyleBase.StyleClassVoteButton }, null, new[] { ContainerButton.StylePseudoClassHover }),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, themedText),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] { StyleBase.StyleClassVoteButton }, null, new[] { ContainerButton.StylePseudoClassPressed }),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFontColor, themedText),
+                    }),
+
+                Element<Label>().Class("VoteTitleText")
+                    .Prop(Label.StylePropertyFont, notoSansBold14)
+                    .Prop(Label.StylePropertyFontColor, themedText),
+
+                Element<RichTextLabel>().Class("VoteTitleText")
+                    .Prop("font", notoSansBold14)
+                    .Prop(Label.StylePropertyFontColor, themedText),
+
+                Element<Label>().Class("VoteCallerText")
+                    .Prop(Label.StylePropertyFont, notoSansBold12)
+                    .Prop(Label.StylePropertyFontColor, themedTextMuted),
+
+                Element<Label>().Class("VoteMenuTitle")
+                    .Prop(Label.StylePropertyFont, notoSansBold14)
+                    .Prop(Label.StylePropertyFontColor, themedText),
+
+                Element<PanelContainer>().Class("VoteMenuDivider")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = themedBorderSoft,
+                        ContentMarginLeftOverride = 2,
+                        ContentMarginBottomOverride = 2,
+                    }),
+
+                Element<TextureButton>().Class("VoteMenuCloseButton")
+                    .Prop(TextureButton.StylePropertyTexture, resCache.GetTexture("/Textures/Interface/Nano/cross.svg.png"))
+                    .Prop(Control.StylePropertyModulateSelf, themedTextMuted),
+
+                Element<TextureButton>().Class("VoteMenuCloseButton").Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Control.StylePropertyModulateSelf, themedText),
+
+                Element<TextureButton>().Class("VoteMenuCloseButton").Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Control.StylePropertyModulateSelf, themedTextMuted.WithAlpha(0.75f)),
+
+                new StyleRule(new SelectorElement(typeof(ProgressBar), new[] { StyleClassVoteProgressBar }, null, null), new[]
+                {
+                    new StyleProperty(ProgressBar.StylePropertyBackground, new StyleBoxFlat(voteProgressBackground)),
+                    new StyleProperty(ProgressBar.StylePropertyForeground, new StyleBoxFlat(voteProgressForeground)),
+                }),
+
+                Element<Label>().Class(StyleClassVoteTimerText)
+                    .Prop(Label.StylePropertyFont, notoSansBold12)
+                    .Prop(Label.StylePropertyFontColor, themedTextMuted),
             }).ToList());
         }
     }

@@ -57,7 +57,6 @@ public sealed partial class CreditsWindow : DefaultCMWindow
         RobustXamlLoader.Load(this);
 
         TabContainer.SetTabTitle(Ss14ContributorsTab, Loc.GetString("credits-window-ss14contributorslist-tab"));
-        TabContainer.SetTabTitle(PatronsTab, Loc.GetString("credits-window-patrons-tab"));
         TabContainer.SetTabTitle(LicensesTab, Loc.GetString("credits-window-licenses-tab"));
         TabContainer.SetTabTitle(AttributionsTab, Loc.GetString("credits-window-attributions-tab"));
         TabContainer.SetTabTitle(OtherTab, Loc.GetString("rmc-other-credits-tab"));

@@ -1,19 +1,21 @@
 ﻿<!-- CM14 rework: non-RMC edit marker. -->
 <Control xmlns="https://spacestation14.io" MinWidth="360" MaxWidth="900" HorizontalAlignment="Center">
     <!-- CCM vote popup layout rework start -->
-    <PanelContainer StyleClasses="AngleRect" />
+    <PanelContainer StyleClasses="VotePanel" />
     <BoxContainer Margin="8 4 32 4" Orientation="Vertical">
         <Label Name="VoteCaller" HorizontalAlignment="Center" StyleClasses="VoteCallerText" />
         <RichTextLabel Name="VoteTitle" HorizontalAlignment="Center" StyleClasses="VoteTitleText" />
         <Button Margin="4 4" Name="FollowVoteTarget" Text="{Loc 'ui-vote-follow-button-popup'}" Visible="False"
-                StyleClasses="VoteButton"></Button>
+                StyleClasses="VoteActionButton"></Button>
 
         <GridContainer Columns="3" Name="VoteOptionsContainer" HorizontalExpand="True" Margin="0 6 0 0" />
-        <ProgressBar HorizontalExpand="True" Name="TimeLeftBar" MinValue="0" MaxValue="1" MinHeight="20" MaxHeight="20" Margin="4 4 4 0" />
+        <ProgressBar HorizontalExpand="True" Name="TimeLeftBar" MinValue="0" MaxValue="1" MinHeight="20" MaxHeight="20" Margin="4 4 4 0"
+                     StyleClasses="VoteProgressBar" />
     </BoxContainer>
     <TextureButton Name="HideButton" HorizontalAlignment="Right" VerticalAlignment="Top"
                    Margin="0 5 8 0" MinSize="16 16" MaxSize="16 16"
                    StyleClasses="VoteMenuCloseButton" />
-    <Label Name="TimeLeftText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 8 4" />
+    <Label Name="TimeLeftText" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 8 4"
+           StyleClasses="VoteTimerText" />
     <!-- CCM vote popup layout rework end -->
 </Control>

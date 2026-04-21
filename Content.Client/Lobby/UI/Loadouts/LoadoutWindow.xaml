@@ -8,11 +8,8 @@
          MinSize="800 128">
     <BoxContainer Orientation="Vertical" VerticalExpand="True">
         <BoxContainer Name="RoleNameBox" Orientation="Vertical" Margin="10">
-            <Label Name="LoadoutNameLabel"/>
-            <PanelContainer HorizontalExpand="True" SetHeight="24">
-                <PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat BackgroundColor="{x:Static style:StyleNano.PanelDark}" />
-                </PanelContainer.PanelOverride>
+            <Label Name="LoadoutNameLabel" StyleClasses="LoadoutSectionTitle"/>
+            <PanelContainer HorizontalExpand="True" SetHeight="24" StyleClasses="LoadoutNamePanel">
                 <LineEdit Name="RoleNameEdit" VerticalExpand="True" HorizontalExpand="True"/>
             </PanelContainer>
         </BoxContainer>

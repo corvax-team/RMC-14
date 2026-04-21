@@ -102,6 +102,10 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             new("holo_amber", "ccm-customization-ghost-holo-amber", "/Textures/Mobs/Ghosts/ghost_human.rsi/icon.png"),
             new("holo_crimson", "ccm-customization-ghost-holo-crimson", "/Textures/Mobs/Ghosts/ghost_human.rsi/icon.png"),
             new("holo_teal", "ccm-customization-ghost-holo-teal", "/Textures/Mobs/Ghosts/ghost_human.rsi/icon.png"),
+            new("sponsor_pretor", "ccm-customization-ghost-sponsor-pretor", "/Textures/_CCM14/Mobs/Ghost/sponsorGhostPretor.rsi/animated.png"),
+            new("sponsor_runi", "ccm-customization-ghost-sponsor-runi", "/Textures/_CCM14/Mobs/Ghost/sponsorGhostRuni.rsi/animated.png"),
+            new("sponsor_queen", "ccm-customization-ghost-sponsor-queen", "/Textures/_CCM14/Mobs/Ghost/sponsorGhostQueen.rsi/animated.png"),
+            new("sponsor_facehugger", "ccm-customization-ghost-sponsor-facehugger", "/Textures/_CCM14/Mobs/Ghost/sponsorGhostFacehugger.rsi/animated.png"),
         ],
         ["weapon_spray"] =
         [
@@ -179,6 +183,14 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         new("violet", "ccm-customization-color-violet"),
         new("crimson", "ccm-customization-color-crimson"),
     ];
+
+    private static readonly Dictionary<string, int> GhostPreviewFrameSizes = new()
+    {
+        ["sponsor_pretor"] = 64,
+        ["sponsor_runi"] = 64,
+        ["sponsor_queen"] = 64,
+        ["sponsor_facehugger"] = 48,
+    };
 
     public CCMCustomizationWindow()
     {
@@ -1653,10 +1665,13 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         if (!_selectors.TryGetValue("ghost", out var selector))
             return;
 
-        var selected = SlotOptions["ghost"][Math.Clamp(selector.SelectedId, 0, SlotOptions["ghost"].Length - 1)].Id;
+        var option = SlotOptions["ghost"][Math.Clamp(selector.SelectedId, 0, SlotOptions["ghost"].Length - 1)];
+        var selected = option.Id;
 
         if (_dynamicPreviewTextures.TryGetValue("ghost:current", out var currentTexture))
         {
+            currentTexture.Texture = GetGhostPreviewTexture(option);
+            currentTexture.TextureScale = GetGhostPreviewScale(option);
             currentTexture.ModulateSelfOverride = TryGetGhostSkinColor(selected, out var color)
                 ? color
                 : Color.White.WithAlpha(0.90f);
@@ -1775,6 +1790,26 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             : option.PreviewTexturePath;
         texture.Texture = GetXenoPreviewTexture(texturePath);
         texture.TextureScale = GetXenoPreviewScale(texture.Texture);
+    }
+
+    private Texture GetGhostPreviewTexture(CustomOption option)
+    {
+        var texturePath = string.IsNullOrWhiteSpace(option.PreviewTexturePath)
+            ? "/Textures/Mobs/Ghosts/ghost_human.rsi/icon.png"
+            : option.PreviewTexturePath;
+        var texture = _resourceCache.GetTexture(texturePath);
+
+        if (GhostPreviewFrameSizes.TryGetValue(option.Id, out var frameSize))
+            return new AtlasTexture(texture, UIBox2.FromDimensions(0, 0, frameSize, frameSize));
+
+        return texture;
+    }
+
+    private static Vector2 GetGhostPreviewScale(CustomOption option)
+    {
+        return GhostPreviewFrameSizes.TryGetValue(option.Id, out var frameSize)
+            ? new Vector2(82f / frameSize, 82f / frameSize)
+            : new Vector2(2.8f, 2.8f);
     }
 
     private Texture GetXenoPreviewTexture(string texturePath)
@@ -1997,7 +2032,13 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             _ => default,
         };
 
-        return optionId != "default";
+        return optionId is
+            "holo_green" or
+            "holo_blue" or
+            "holo_violet" or
+            "holo_amber" or
+            "holo_crimson" or
+            "holo_teal";
     }
 
     private static bool TryGetCamouflageColor(string optionId, out Color color)

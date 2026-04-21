@@ -29,7 +29,7 @@ namespace Content.Client.Voting.UI
             IoCManager.InjectDependencies(this);
             RobustXamlLoader.Load(this);
 
-            Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetSpace;
+            Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
 
             if (_vote.TargetEntity != null && _vote.TargetEntity != 0)
             {
@@ -39,9 +39,6 @@ namespace Content.Client.Voting.UI
             }
 
             Modulate = Color.White;
-            TimeLeftBar.ForegroundStyleBoxOverride = new StyleBoxFlat((StyleNano.LobbyMenuButtonBase * new Color(0.48f, 0.48f, 0.48f, 1f)).WithAlpha(0.95f));
-            TimeLeftBar.BackgroundStyleBoxOverride = new StyleBoxFlat((StyleNano.LobbyMenuButtonDisabledCrt * new Color(0.60f, 0.60f, 0.60f, 1f)).WithAlpha(0.88f));
-            TimeLeftText.FontColorOverride = Color.FromHex("#D9DDE3");
             // CCM vote popup layout rework: add explicit close button for the compact popup layout.
             HideButton.OnPressed += _ => Visible = false;
 

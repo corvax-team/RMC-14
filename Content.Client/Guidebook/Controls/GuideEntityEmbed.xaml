@@ -1,6 +1,11 @@
-﻿<BoxContainer xmlns="https://spacestation14.io"
+<BoxContainer xmlns="https://spacestation14.io"
               Orientation="Vertical"
               Margin="5 5 5 5">
-    <SpriteView Name="View"/>
-    <Label Name="Caption" HorizontalAlignment="Center"/>
+    <PanelContainer StyleClasses="GuidebookEmbedCard">
+        <BoxContainer Orientation="Vertical"
+                      Margin="8 8 8 6">
+            <SpriteView Name="View"/>
+            <Label Name="Caption" HorizontalAlignment="Center" StyleClasses="GuidebookEmbedHeader"/>
+        </BoxContainer>
+    </PanelContainer>
 </BoxContainer>

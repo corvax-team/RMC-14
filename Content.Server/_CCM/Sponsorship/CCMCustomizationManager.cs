@@ -152,7 +152,17 @@ public sealed class CCMCustomizationManager : IPostInjectInit
             "xeno_queen" => valueId == "ccm_queen_skin" ? valueId : "default",
             "xeno_runner" => valueId == "ccm_runner_skin" ? valueId : "default",
             "xeno_sentinel" => valueId == "ccm_sentinel_skin" ? valueId : "default",
-            "ghost" => valueId is "holo_green" or "holo_blue" or "holo_violet" or "holo_amber" or "holo_crimson" or "holo_teal"
+            "ghost" => valueId is
+                "holo_green" or
+                "holo_blue" or
+                "holo_violet" or
+                "holo_amber" or
+                "holo_crimson" or
+                "holo_teal" or
+                "sponsor_pretor" or
+                "sponsor_runi" or
+                "sponsor_queen" or
+                "sponsor_facehugger"
                 ? valueId
                 : "default",
             "weapon_spray" => valueId is
