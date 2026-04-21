@@ -13,7 +13,7 @@
           mapNameTemplate: 'UEG-141 Herfjoetur'
         - type: StationJobs
           availableJobs:
-            # Command
+           # Command
             CMCommandingOfficer: [1, 1]
             CMExecutiveOfficer: [1, 1]
             CMStaffOfficer: [1, 1]
@@ -23,12 +23,11 @@
             CMMilitaryWarden: [1, 1]
             CMMilitaryPolice: [2, 2]
             # Auxiliary
-#            CMAuxiliarySupportOfficer: [1, 1]
-            CMIntelOfficer: [2, 2]
+            CMAuxiliarySupportOfficer: [1, 1]
+            CMIntelOfficer: [3, 3]
+            CMVehicleCrewman: [2, 2]
             CMPilotDropship: [1, 1]
             CMPilotGunship: [1, 1]
-            CMVehicleCrewman: [2, 2]
-#            CMPilotGunship: [1, 1]
             CMDropshipCrewChief: [1, 1]
             # Engineering
             CMChiefEngineer: [1, 1]
@@ -43,17 +42,17 @@
             # Requisition
             CMQuartermaster: [1, 1]
             CMCargoTech: [2, 2]
-            CMMessTech: [1, 1]
             # Marines
             CMSquadLeader: [2, 2]
             CMFireteamLeader: [2, 2]
             CMSmartGunOperator: [2, 2]
             CMWeaponsSpecialist: [2, 2]
-            CMCombatTech: [4, 4]
-            CMHospitalCorpsman: [4, 4]
+            CMCombatTech: [2, 2]
+            CMHospitalCorpsman: [2, 2]
             CMRifleman: [ -1, -1 ]
             # Civilians
             CMCorrespondent: [1, 1]
             # Other
-#            CMLiaison: [1, 1]
+            CMMessTech: [1,1]
+            CMLiaison: [1, 1]
             RMCJobSynthetic: [1, 1]
