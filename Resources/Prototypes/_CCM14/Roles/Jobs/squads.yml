@@ -20,5 +20,5 @@
     canSupplyDrop: false
     group: REV
     leaderIcon:
-      sprite: _CCM14/Interface/ccm_job_icons.rsi
+      sprite: _CCM14/Interface/cm_job_icons.rsi
       state: petrishev_leader

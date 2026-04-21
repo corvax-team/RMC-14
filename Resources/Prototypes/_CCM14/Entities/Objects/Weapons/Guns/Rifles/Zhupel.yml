@@ -83,7 +83,7 @@
     sprite: _CCM14/Objects/Weapons/Ammunition/Magazines/zhupel_mag.rsi
   - type: Tag
     tags:
-    - RMCMagazineLMGBase
+    - RMCMagazineRifleBase
     - CCMMagazineRifleZhupel
   - type: BallisticAmmoProvider
     whitelist:
