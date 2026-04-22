@@ -83,12 +83,7 @@
       - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
-    - name: Инструменты обучения # CCM14
-      takeAll: RMCSEATrainingTools
-      entries:
-      - id: RMCCPRDummy
-        amount: 5
-    - name: Уставы и пособия # CCM14
+    - name: Книги # CCM14
       takeAll: RMCBook
       entries:
       - id: RMCGuidebookLawMarine

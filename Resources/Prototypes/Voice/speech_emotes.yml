@@ -474,12 +474,13 @@
     - SiliconEmotes
   chatMessages: ["chat-emote-msg-chirp"]
   chatTriggers:
-    - chirp
-    - chirps
-    - chirped
-    - chirping
+    - placeholderEmoteTrigger #RMC14  chat triggers conflict with RMCAvaliChirp
+    #- chirp
+    #- chirps
+    #- chirped
+    #- chirping
     # CCM-Localization-Start
-    - чирикает
+    #- чирикает
     # CCM-Localization-End
 
 # Machine Emotes
