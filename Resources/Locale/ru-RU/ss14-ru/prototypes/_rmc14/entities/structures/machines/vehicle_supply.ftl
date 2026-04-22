@@ -1,5 +1,5 @@
-ent-RMCVehicleSupplyConsole = консоль снабжения техники
+ent-VehicleSupplyConsole = консоль снабжения техники
     .desc = Консоль для заказа техники и её вооружения.
-ent-RMCVehicleLift = подъёмник техники
+ent-VehicleLift = подъёмник техники
     .suffix = Опущен, Снабжение техники
     .desc = { "" }

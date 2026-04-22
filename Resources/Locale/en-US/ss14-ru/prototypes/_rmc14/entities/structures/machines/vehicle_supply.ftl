@@ -1,5 +1,5 @@
-ent-RMCVehicleSupplyConsole = vehicle supply console
+ent-VehicleSupplyConsole = vehicle supply console
     .desc = A console for ordering vehicles and their hardpoints.
-ent-RMCVehicleLift = vehicle lift
+ent-VehicleLift = vehicle lift
     .suffix = Lowered, Vehicle Supply
     .desc = { "" }

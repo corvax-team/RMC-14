@@ -1,2 +1,2 @@
-ent-RMCVehicleTurretVisual = vehicle turret visual
+ent-VehicleTurretVisual = vehicle turret visual
     .desc = { "" }

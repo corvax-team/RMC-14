@@ -94,7 +94,7 @@
       - RMCAPCWheel
     - name: tank
       vehicle: VehicleTank
-      unlock: VehicleTank
+      locked: VehicleTank
       hardpoints:
       - VehicleTankArmorBallistic
       - VehicleTankArmorConcussive
@@ -118,7 +118,7 @@
       - VehicleTankTreads
     - name: humvee (arc)
       vehicle: VehicleHumveeARC
-      unlock: VehicleHumveeARC
+      locked: VehicleHumveeARC
       hardpoints:
       - VehicleHumveeTurret
       - VehicleHumveeARCCannon

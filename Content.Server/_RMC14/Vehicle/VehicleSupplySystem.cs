@@ -1023,11 +1023,11 @@ public sealed class VehicleSupplySystem : EntitySystem
         categoryLabel = string.Empty;
         categoryOrder = int.MaxValue;
 
-        if (!string.Equals(Normalize(vehicleId), "rmcvehicletank", StringComparison.Ordinal))
+        if (!string.Equals(Normalize(vehicleId), "Vehicletank", StringComparison.Ordinal))
             return false;
 
         var hardpointKey = Normalize(hardpointId);
-        if (hardpointKey == "rmcvehicletanksnowplow")
+        if (hardpointKey == "Vehicletanksnowplow")
         {
             categoryKey = "tank-general";
             categoryLabel = "General";
@@ -1538,14 +1538,18 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         return unlocked;
     }
-
+    // CCM14-start
     private static bool IsEntryUnlocked(VehicleSupplyEntry entry, HashSet<string> unlocked)
     {
-        if (string.IsNullOrWhiteSpace(entry.Unlock))
+        if (!string.IsNullOrWhiteSpace(entry.Unlock))
             return true;
 
-        return unlocked.Contains(Normalize(entry.Unlock));
+        if (!string.IsNullOrWhiteSpace(entry.Locked))
+            return unlocked.Contains(Normalize(entry.Locked));
+
+        return true;
     }
+    // CCM14-end
 #if false // CCM14-start
     private IReadOnlyList<string> GetHardpointsForVehicle(string vehicleId, IReadOnlyList<VehicleSupplyEntry> entries)
     {

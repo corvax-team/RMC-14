@@ -1,8 +1,8 @@
 # Команды снабжения техники RMC
-command-description-rmcvehiclesupply-addstorage = Добавляет указанную технику в хранилище первого найденного лифта.
-command-help-rmcvehiclesupply-addstorage = Использование: rmcvehiclesupply:addstorage <vehicleId>
-command-description-rmcvehiclesupply-addstoragelift = Добавляет указанную технику в хранилище конкретного лифта.
-command-help-rmcvehiclesupply-addstoragelift = Использование: rmcvehiclesupply:addstoragelift <vehicleId> <lift_uid>
+command-description-vehiclesupply-addstorage = Добавляет указанную технику в хранилище первого найденного лифта.
+command-help-vehiclesupply-addstorage = Использование: vehiclesupply:addstorage <vehicleId>
+command-description-vehiclesupply-addstoragelift = Добавляет указанную технику в хранилище конкретного лифта.
+command-help-vehiclesupply-addstoragelift = Использование: vehiclesupply:addstoragelift <vehicleId> <lift_uid>
 rmc-vehicle-fabricator-window-title = Фабрикатор модулей техники
 rmc-vehicle-fabricator-points-label = Доступно очков:
 rmc-vehicle-fabricator-points = Очки: { $points }

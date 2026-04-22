@@ -1,10 +1,10 @@
-ent-RMCVehicleAPCBase = бронетранспортер
+ent-VehicleAPCBase = бронетранспортер
     .desc = Прочный бронетранспортер, предназначенный для поддержки на поле боя.
-ent-RMCVehicleAPC = { ent-RMCVehicleAPCBase }
-    .desc = { ent-RMCVehicleAPCBase.desc }
-ent-RMCVehicleAPCMed = бронетранспортер (медицинский)
+ent-VehicleAPC = { ent-VehicleAPCBase }
+    .desc = { ent-VehicleAPCBase.desc }
+ent-VehicleAPCMed = бронетранспортер (медицинский)
     .desc = Бронетранспортер, сконфигурированный как медицинская машина с маркировкой для сортировки раненых.
-ent-RMCVehicleAPCCommand = бронетранспортер (командный)
+ent-VehicleAPCCommand = бронетранспортер (командный)
     .desc = Командный бронетранспортер, оснащенный многочисленными датчиками и средствами связи.
-ent-RMCVehicleSPPAPC = бронетранспортер СССП
+ent-VehicleSPPAPC = бронетранспортер СССП
     .desc = Бронетранспортер, сконфигурированный для сил СССП.

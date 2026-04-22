@@ -1,8 +1,8 @@
-ent-RMCVehicleTankHardpointBase = { ent-BaseItem }
+ent-VehicleTankHardpointBase = { ent-BaseItem }
     .desc = { ent-BaseItem.desc }
-ent-RMCVehicleTankTurret = башня танка
+ent-VehicleTankTurret = башня танка
     .desc = Точка крепления башни танка.
-ent-RMCVehicleTankTreads = гусеницы танка
+ent-VehicleTankTreads = гусеницы танка
     .desc = Гусеницы танка для тяжелых условий эксплуатации.
-ent-RMCVehicleTankReinforcedTreads = усиленные гусеницы танка
+ent-VehicleTankReinforcedTreads = усиленные гусеницы танка
     .desc = Более тяжелые гусеницы танка с повышенной прочностью и кислотостойкостью за счет снижения ускорения.

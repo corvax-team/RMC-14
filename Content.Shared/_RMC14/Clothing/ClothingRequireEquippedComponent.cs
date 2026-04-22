@@ -1,4 +1,4 @@
-﻿using Content.Shared.Whitelist;
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Clothing;
@@ -7,6 +7,10 @@ namespace Content.Shared._RMC14.Clothing;
 [Access(typeof(RMCClothingSystem))]
 public sealed partial class ClothingRequireEquippedComponent : Component
 {
+    // CCM14-start
+    [DataField, AutoNetworkedField]
+    public bool Enabled = false;
+    // CCM14-end
     [DataField, AutoNetworkedField]
     public EntityWhitelist? Whitelist;
 

@@ -13,11 +13,11 @@ namespace Content.Client._CCM.Vehicle.Fabricator.Fabricator;
 public sealed class VehicleFabricatorWindow : DefaultWindow
 {
     public event Action<VehicleFabricatorCategory>? OnCategorySelected;
-    public event Action<RMCVehicleType>? OnVehicleSelected;
+    public event Action<VehicleType>? OnVehicleSelected;
     public event Action<EntProtoId>? OnPrint;
 
     public VehicleFabricatorCategory SelectedCategory { get; private set; } = VehicleFabricatorCategory.Primary;
-    public RMCVehicleType SelectedVehicle { get; private set; } = RMCVehicleType.Tank;
+    public VehicleType SelectedVehicle { get; private set; } = VehicleType.Tank;
 
     private Label PointsLabel => FindControl<Label>("PointsLabel");
     private Label PrintingLabel => FindControl<Label>("PrintingLabel");
@@ -54,9 +54,9 @@ public sealed class VehicleFabricatorWindow : DefaultWindow
         chassisBtn.OnPressed += _ => { SelectedCategory = VehicleFabricatorCategory.Chassis; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(chassisBtn); };
         ammoBtn.OnPressed += _ => { SelectedCategory = VehicleFabricatorCategory.Ammo; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(ammoBtn); };
 
-        tankBtn.OnPressed += _ => { SelectedVehicle = RMCVehicleType.Tank; OnVehicleSelected?.Invoke(SelectedVehicle); UpdateVehicleButtons(tankBtn); };
-        apcBtn.OnPressed += _ => { SelectedVehicle = RMCVehicleType.APC; OnVehicleSelected?.Invoke(SelectedVehicle); UpdateVehicleButtons(apcBtn); };
-        humveeBtn.OnPressed += _ => { SelectedVehicle = RMCVehicleType.Humvee; OnVehicleSelected?.Invoke(SelectedVehicle); UpdateVehicleButtons(humveeBtn); };
+        tankBtn.OnPressed += _ => { SelectedVehicle = VehicleType.Tank; OnVehicleSelected?.Invoke(SelectedVehicle); UpdateVehicleButtons(tankBtn); };
+        apcBtn.OnPressed += _ => { SelectedVehicle = VehicleType.APC; OnVehicleSelected?.Invoke(SelectedVehicle); UpdateVehicleButtons(apcBtn); };
+        humveeBtn.OnPressed += _ => { SelectedVehicle = VehicleType.Humvee; OnVehicleSelected?.Invoke(SelectedVehicle); UpdateVehicleButtons(humveeBtn); };
 
         tankBtn.Pressed = true;
         primaryBtn.Pressed = true;
@@ -96,20 +96,20 @@ public sealed class VehicleFabricatorWindow : DefaultWindow
         CategoryTitleLabel.SetMarkupPermissive($"[bold]{vehicleLoc} - {categoryLoc}[/bold]");
     }
 
-    private static string GetVehicleKey(RMCVehicleType type) => type switch
+    private static string GetVehicleKey(VehicleType type) => type switch
     {
-        RMCVehicleType.Tank => "tank",
-        RMCVehicleType.APC => "apc",
-        RMCVehicleType.Humvee => "humvee",
+        VehicleType.Tank => "tank",
+        VehicleType.APC => "apc",
+        VehicleType.Humvee => "humvee",
         _ => type.ToString().ToLowerInvariant(),
     };
 
-    private static string GetVehicleProtoId(RMCVehicleType type) => type switch
+    private static string GetVehicleProtoId(VehicleType type) => type switch
     {
-        RMCVehicleType.Tank => "RMCVehicleTank",
-        RMCVehicleType.APC => "RMCVehicleAPC",
-        RMCVehicleType.Humvee => "RMCVehicleHumvee",
-        _ => "RMCVehicleTank",
+        VehicleType.Tank => "VehicleTank",
+        VehicleType.APC => "VehicleAPC",
+        VehicleType.Humvee => "VehicleHumvee",
+        _ => "VehicleTank",
     };
 
     private void UpdateVehiclePreview()
@@ -188,7 +188,7 @@ public sealed class VehicleFabricatorWindow : DefaultWindow
         UpdateCategoryTitle();
     }
 
-    public void SetVehicle(RMCVehicleType vehicle)
+    public void SetVehicle(VehicleType vehicle)
     {
         SelectedVehicle = vehicle;
         var vehicleNames = new[] { "Tank", "APC", "Humvee" };

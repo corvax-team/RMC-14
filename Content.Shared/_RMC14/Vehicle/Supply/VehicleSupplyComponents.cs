@@ -16,7 +16,10 @@ public sealed partial class VehicleSupplyEntry
 
     [DataField]
     public string? Unlock;
-
+    // CCM14-start
+    [DataField]
+    public string? Locked;
+    // CCM14-end
     [DataField]
     public List<EntProtoId> Hardpoints = new();
 }

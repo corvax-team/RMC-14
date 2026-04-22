@@ -56,7 +56,7 @@ public sealed partial class VehicleFabricatorPrintableComponent : Component
     public VehicleFabricatorCategory Category;
 
     [DataField, AutoNetworkedField]
-    public RMCVehicleType Vehicle = RMCVehicleType.None;
+    public VehicleType Vehicle = VehicleType.None;
 }
 
 [Serializable, NetSerializable]
@@ -71,7 +71,7 @@ public enum VehicleFabricatorCategory : byte
 }
 
 [Flags, Serializable, NetSerializable]
-public enum RMCVehicleType : byte
+public enum VehicleType : byte
 {
     None = 0,
     Tank = 1 << 0,

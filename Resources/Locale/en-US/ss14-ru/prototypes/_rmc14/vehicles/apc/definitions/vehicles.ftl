@@ -1,10 +1,10 @@
-ent-RMCVehicleAPCBase = armored personnel carrier
+ent-VehicleAPCBase = armored personnel carrier
     .desc = A rugged armored personnel carrier outfitted for battlefield support.
-ent-RMCVehicleAPC = { ent-RMCVehicleAPCBase }
-    .desc = { ent-RMCVehicleAPCBase.desc }
-ent-RMCVehicleAPCMed = armored personnel carrier (medical)
+ent-VehicleAPC = { ent-VehicleAPCBase }
+    .desc = { ent-VehicleAPCBase.desc }
+ent-VehicleAPCMed = armored personnel carrier (medical)
     .desc = A medical-configured APC outfitted with triage markings.
-ent-RMCVehicleAPCCommand = armored personnel carrier (command)
+ent-VehicleAPCCommand = armored personnel carrier (command)
     .desc = A command-configured APC bristling with sensors and comms gear.
-ent-RMCVehicleSPPAPC = SPP armored personnel carrier
+ent-VehicleSPPAPC = SPP armored personnel carrier
     .desc = An armored personnel carrier configured for SPP forces.

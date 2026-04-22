@@ -64,7 +64,7 @@ public sealed class VehicleFabricatorBui : BoundUserInterface
         UpdatePrintables();
     }
 
-    private void OnVehicleSelected(RMCVehicleType vehicle)
+    private void OnVehicleSelected(VehicleType vehicle)
     {
         _window?.SetVehicle(vehicle);
         UpdatePrintables();
@@ -93,7 +93,7 @@ public sealed class VehicleFabricatorBui : BoundUserInterface
             if (printable.Category != _window.SelectedCategory)
                 continue;
 
-            if (printable.Vehicle != RMCVehicleType.None &&
+            if (printable.Vehicle != VehicleType.None &&
                 (printable.Vehicle & _window.SelectedVehicle) == 0)
                 continue;
 
