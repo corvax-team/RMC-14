@@ -3,7 +3,6 @@ command-description-rmcvehiclesupply-addstorage = Добавляет указа�
 command-help-rmcvehiclesupply-addstorage = Использование: rmcvehiclesupply:addstorage <vehicleId>
 command-description-rmcvehiclesupply-addstoragelift = Добавляет указанную технику в хранилище конкретного лифта.
 command-help-rmcvehiclesupply-addstoragelift = Использование: rmcvehiclesupply:addstoragelift <vehicleId> <lift_uid>
-
 rmc-vehicle-fabricator-window-title = Фабрикатор модулей техники
 rmc-vehicle-fabricator-points-label = Доступно очков:
 rmc-vehicle-fabricator-points = Очки: { $points }
@@ -15,7 +14,6 @@ rmc-vehicle-fabricator-category-armor = Броня
 rmc-vehicle-fabricator-category-support = Поддержка
 rmc-vehicle-fabricator-category-chassis = Ходовая
 rmc-vehicle-fabricator-category-ammo = Боеприпасы
-
 rmc-vehicle-fabricator-vehicle-selection = ТЕХНИКА
 rmc-vehicle-fabricator-category-selection = КАТЕГОРИЯ
 rmc-vehicle-fabricator-vehicle-tank = ТАНК

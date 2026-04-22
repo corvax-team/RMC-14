@@ -39,6 +39,7 @@ chatsan-replacement-19 = уставший мужчина
 chatsan-word-20 = чсв
 chatsan-replacement-20 = чувство собственной важности
 chatsan-word-21 = чсвшник
+chatsan-replacement-please = please
 chatsan-replacement-21 = важный персона
 chatsan-word-22 = имба
 chatsan-replacement-22 = дисбаланс
@@ -57,6 +58,10 @@ chatsan-replacement-28 = собираю
 chatsan-word-29 = катка
 chatsan-replacement-29 = игра
 chatsan-word-30 = каточка
+#RMC14: Disabled for grenade launcher
+#chatsan-word-33 = gl
+#chatsan-replacement-33 = good luck
+
 chatsan-replacement-30 = игра
 chatsan-word-31 = сюр
 chatsan-replacement-31 = абсурд
@@ -69,6 +74,7 @@ chatsan-replacement-34 = доказательство
 chatsan-word-35 = пруфы
 chatsan-replacement-35 = доказательства
 chatsan-word-36 = рофл
+chatsan-replacement-etcetera = etcetera
 chatsan-replacement-36 = шутка
 chatsan-word-37 = рофлю
 chatsan-replacement-37 = шучу

@@ -3,13 +3,23 @@ ent-RMCBaseWeaponLauncher = { ent-BaseWeaponLauncher }
 ent-RMCWeaponLauncherM5ATL = M5-ATL
     .desc =
         Пусковая установка M5-ATL - мощное противотанковое пехотное орудие, широко состоящее на вооружении ККМП. Используемый для поражения лёгких танков и вражеских сооружений, M5-ATL является опасным оружием с широким спектром возможностей боевого применения в зависимости от заряженного боеприпаса и способен стрелять как снарядами, так и ракетами.
-
+        
         У этого полностью отсутствует смарт-оптика, и, кажется, он повреждён, что значительно ограничивает его дальность...
 ent-RMCRocket84mm = 84-мм фугасная ракета
     .desc = Совместимый с M5-ATL тубус с ракетой, снаряженной фугасной боевой частью. Наносит высокий урон по мягким целям при прямом попадании и задевает другие цели в радиусе 5 метров. По тяжелобронированным целям действует слабо.
+ent-RMCBaseProjectileRocket84mm = 84mm high-explosive rocket
+    .desc = Uh oh.
 ent-RMCProjectileRocket84mm = 84-мм фугасная ракета
     .desc = Ох.
 ent-RMCRocket84mmAntiArmor = 84-мм бронебойная ракета
     .desc = Совместимый с M5-ATL тубус с ракетой, снаряженной бронебойной боевой частью. Способна пробивать и уничтожать тяжелобронированные цели. Практически не наносит урона взрывной волной. Гарантированно оглушает большинство целей. Обладает высокой точностью в пределах 7 метров.
 ent-RMCProjectileRocket84mmAntiArmor = 84-мм бронебойная ракета
     .desc = { ent-RMCProjectileRocket84mm.desc }
+ent-RMCRocket84mmWhitePhosphorus = 84mm white phosphorus rocket
+    .desc = A rocket tube loaded with a white phosphorus incendiary warhead. Has two damaging factors. On hit disperses X-Variant Napthal (blue flames) in a 4-meter radius circle, ignoring cover, while simultaneously bursting into highly heated shrapnel that ignites targets within slightly bigger area.
+ent-RMCProjectileRocket84mmWhitePhosphorus = 84mm white phosphorus rocket
+    .desc = { ent-RMCBaseProjectileRocket84mm.desc }
+ent-RMCSmokeWhitePhosphorusNoSpread = { ent-Smoke }
+    .desc = { ent-Smoke.desc }
+ent-RMCSmokeWhitePhosphorus = { ent-RMCSmokeWhitePhosphorusNoSpread }
+    .desc = { ent-RMCSmokeWhitePhosphorusNoSpread.desc }

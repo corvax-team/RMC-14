@@ -58,6 +58,8 @@ highlights-station-ai = Station AI, Silicon, "AI", "sAI"
 #highlights-quartermaster = квартирмейстер, "км" "кма", карго, снабжени, мостик, командовани
 #highlights-research-director = научный руководитель, научрук, "нр", наука, "рнд", "нио", мостик, командовани
 
+
+
 # Security
 
 #highlights-detective = детектив, "дек", служб, "сб"
@@ -65,16 +67,22 @@ highlights-station-ai = Station AI, Silicon, "AI", "sAI"
 #highlights-security-officer = офицер, служба безопасности, "сб"
 #highlights-warden = смотрител, варден, служба безопасности, "сб"
 
+
+
 # Cargo
 
 #highlights-cargo-technician = грузчик, карго, снабжени
 #highlights-salvage-specialist = утилизатор, "утиль", карго, снабжени, шахтёр
+
+
 
 # Engineering
 
 #highlights-atmospheric-technician = атмосферный техник, атмосферник, атмос, инженер, "атмос", "инж"
 #highlights-station-engineer = инженер, "инж"
 #highlights-technical-assistant = технический ассистент, тех асист, инженер, "инж"
+
+
 
 # Medical
 
@@ -83,10 +91,14 @@ highlights-station-ai = Station AI, Silicon, "AI", "sAI"
 #highlights-medical-intern = интерн "док", медблок, медбей, "мед"
 #highlights-paramedic = парамед, медблок, медбей, "мед"
 
+
+
 # Science
 
 #highlights-scientist = учёный, наука, "рнд", "нио"
 #highlights-research-assistant = научный ассистент, наука, "рнд", "нио"
+
+
 
 # Civilian
 
@@ -98,6 +110,8 @@ highlights-station-ai = Station AI, Silicon, "AI", "sAI"
 #highlights-janitor = уборщик
 #highlights-lawyer = адвокат, юрист
 
+
+
 # Station-specific
 
 #highlights-boxer = Boxer
@@ -107,10 +121,14 @@ highlights-station-ai = Station AI, Silicon, "AI", "sAI"
 #highlights-passenger = пассажир, грейтайдер, "тайдер"
 #highlights-service-worker = сервисный работник, сервисник
 
+
+
 # Station-specific
 
 #highlights-reporter = репортёр, репортер, журналист
 #highlights-psychologist = психолог
+
+
 
 # Silicon
 
