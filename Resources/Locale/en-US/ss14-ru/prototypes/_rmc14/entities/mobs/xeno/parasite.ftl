@@ -1,10 +1,11 @@
-ent-CMXenoParasiteBase = Parasite
+ent-CMXenoParasiteBase = Child
+    .suffix = Parasite
     .desc = { ent-CMXenoUndeveloped.desc }
 ent-CMXenoParasite = { ent-CMXenoParasiteBase }
     .desc = A parasite whose only goal is to spread the power of the hive.
 ent-RMCXenoParasiteWatcher = { ent-CMXenoParasiteBase }
-    .suffix = Watcher
+    .suffix = Parasite, Watcher
     .desc = { ent-CMXenoParasiteBase.desc }
 ent-RMCXenoParasitePrimeHiveAssign = { ent-CMXenoParasite }
-    .suffix = Auto-Assign, Prime Hive
+    .suffix = Parasite, Auto-Assign, Prime Hive
     .desc = { ent-CMXenoParasite.desc }

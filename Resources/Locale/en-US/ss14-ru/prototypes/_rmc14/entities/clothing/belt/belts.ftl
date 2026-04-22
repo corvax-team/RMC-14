@@ -88,3 +88,8 @@ ent-RMCBeltHolsterPistolPara = paramarine load bearing rig
 ent-RMCBeltUtilityGeneralRCMPVE = { ent-RMCBeltUtilityGeneralRCM }
     .suffix = PVE, RCM
     .desc = { ent-RMCBeltUtilityGeneralRCM.desc }
+ent-RMCBeltL49 = L28-pattern shotgun shell rig
+    .desc =
+        An L28-pattern shotgun holster rig, equipped with loops to hold loose 12ga shells and featuring a holster on the back capable of holding an L49 assault shotgun.
+        Shotguns equipped with magnetic harnesses or slings can be strapped directly to the belt, preventing them from being dropped.
+    .suffix = PVE, RCM

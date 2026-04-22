@@ -1,9 +1,7 @@
 ent-CCMActionXenoBoxerAdvance = Advance
     .desc = Do a small jump/dash toward enemy and deal small amount of damage.
-ent-CCMActionXenoBoxerTailKnock = Tail Knock
-    .desc = Use your yail to smash ground and enemies around you, and deal damage, a lil fling them
-ent-CCMActionXenoBoxerWidePunch = Wide weak punch
-    .desc = Punch in 1x1 area (or bigger) and deal damage to enemy in that area
+ent-CCMActionXenoBoxerKnockout = Knockout!
+    .desc = Use your stack of boxing, and deal massive damage and little stun
 ent-CCMActionXenoSniperSnipe = Snipe (300)
     .desc = After a short delay fire a strong spit that deal a lot of damage
 ent-CCMActionXenoSniperWalker = Walk Recover (150)

@@ -32,3 +32,5 @@ ent-RMCActionBroiler = Switch Tank
     .desc = Switch to a different fuel tank.
 ent-RMCActionDismount = Dismount
     .desc = Stop using the weapon
+ent-ActionToggleCBRNHelmet = Toggle CBRN Mask
+    .desc = Raise or lower the integrated MOPP mask to toggle full fire protection.

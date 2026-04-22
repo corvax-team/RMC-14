@@ -41,4 +41,4 @@ ent-ActionXenoExpandWeeds = Expand Weeds (50)
 ent-ActionXenoDesignerSelectedDesign = Selected Design
     .desc = Toggle whether newly placed design nodes are wall or door nodes.
 ent-ActionXenoDesignerGreaterResinSurge = Greater Resin Surge (250)
-    .desc = Consumes nearby design nodes to create temporary thick resin walls.
+    .desc = Consumes nearby design nodes to create temporary reflective resin walls.

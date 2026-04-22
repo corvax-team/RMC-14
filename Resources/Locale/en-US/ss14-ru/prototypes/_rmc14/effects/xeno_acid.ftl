@@ -18,3 +18,5 @@ ent-XenoAcidSprayTrapStrong = strong splatter
     .desc = It burns a lot!
 ent-XenoAcidExtinguishEffect = { ent-RMCBaseEffect }
     .desc = It's cold...
+ent-RMCAcidHole = acid hole
+    .desc = A corroded opening in the wall.
