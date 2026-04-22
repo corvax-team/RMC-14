@@ -239,7 +239,7 @@
           cost: 10
           events:
           - !type:TechUnlockVehicleEvent
-            unlock: RMCVehicleTank
+            unlock: VehicleTank
           - !type:TechAnnounceEvent
             author: УПРАВЛЕНИЕ АКТИВАМИ «ДАВИДА»
             message: Для наземных операций разрешена поддержка тяжелой бронетехникой.
