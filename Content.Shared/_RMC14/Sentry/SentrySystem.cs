@@ -57,7 +57,7 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly SharedSentryTargetingSystem _targeting = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
-    [Dependency] private readonly RMCVehicleSystem _rmcVehicleSystem = default!;
+    [Dependency] private readonly VehicleSystem _rmcVehicleSystem = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 

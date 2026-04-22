@@ -1,0 +1,139 @@
+- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  name: Zhupel of revolution
+  id: CCMWeaponRifleZhupel
+  description: A heavy rifle used by the veterans of Petrishev Revolutionaries. Only takes Wall Piercing rounds.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Guns/Rifles/Zhupel/zhupelr_inhands.rsi
+    layers:
+    - state: base
+      sprite: _CCM14/Objects/Weapons/Guns/Rifles/Zhupel/zhupelr_icon.rsi
+    - state: bolt-open
+      sprite: _CCM14/Objects/Weapons/Guns/Rifles/Zhupel/zhupelr_icon.rsi
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      sprite: _CCM14/Objects/Weapons/Guns/Rifles/Zhupel/zhupelr_icon.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _CCM14/Objects/Weapons/Guns/Rifles/Zhupel/zhupelr_inhands.rsi
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: RMCType71Shoot
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilUnwielded: 3
+    scatterWielded: 2
+    scatterUnwielded: 14
+    baseFireRate: 1
+    burstScatterMult: 1
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+    accuracyMultiplierUnwielded: 0.65
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CCMMagazineRifleZhupel
+        startingItem: CCMMagazineRifleZhupel
+  - type: GunDamageModifier
+    multiplier: 2
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: -0.03125, 0
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: Tag
+    tags:
+    - CCMWeaponRifleZhupel
+  - type: Wieldable
+  - type: GunRequiresWield
+  - type: RMCMagneticItem
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: CCMMagazineRifleZhupel
+  name: "Zhupel WP magazine (8x68mmR)"
+  suffix: WP
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Ammunition/Magazines/zhupel_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CCMMagazineRifleZhupel
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CCMCartridgeRifleZhupel
+    proto: CCMCartridgeRifleZhupel
+    capacity: 20
+  - type: Appearance
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: CCMCartridgeRifleZhupel
+  name: cartridge (8.68mmR)
+  description: A 8.68mmR cartridge
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CCMCartridgeRifleZhupel
+  - type: CartridgeAmmo
+    proto: CCMBulletRifle8x68mmWP
+
+- type: entity
+  parent: RMCBaseBullet
+  id: CCMBulletRifle8x68mmWP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    deleteOnCollide: false
+    damage:
+      types:
+        Piercing: 35
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 30
+      falloff: 9999
+      ignoreModifiers: false
+  - type: RMCProjectileAccuracy
+    accuracy: 95
+    thresholds:
+    - range: 20
+      falloff: 10
+  - type: CMArmorPiercing
+    amount: 20
+  - type: RMCPenetratingProjectile
+  - type: TimedDespawn
+    lifetime: 0.2

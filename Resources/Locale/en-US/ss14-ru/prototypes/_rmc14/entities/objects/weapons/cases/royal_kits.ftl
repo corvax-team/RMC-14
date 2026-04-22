@@ -7,3 +7,6 @@ ent-RMCScoutSniperSniperEquipmentCase = scout-sniper equipment case
 ent-RMCScoutSniperMarksmanEquipmentCase = scout-sniper equipment case
     .desc = A large case containing an L112A1 designated marksman rifle, its corresponding head-mounted sight, ten spare magazines of squash-head rounds, and a bipod.
     .suffix = Marksman
+ent-RMCL49Case = L49 assault shotgun case
+    .desc = A gun case containing the L49 assault shotgun. Contains the L49 weapon, two boxes of L49B breaching ammunition, and an L28-pattern shotgun shell rig.
+    .suffix = PVE, RCM

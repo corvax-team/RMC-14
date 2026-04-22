@@ -1,8 +1,8 @@
-ent-RMCVehicleTankBase = tank
+ent-VehicleTankBase = tank
     .desc = A heavy armored tank built for battlefield dominance.
-ent-RMCVehicleTank = { ent-RMCVehicleTankBase }
-    .desc = { ent-RMCVehicleTankBase.desc }
-ent-RMCVehicleSPPTank = SPP tank
+ent-VehicleTank = { ent-VehicleTankBase }
+    .desc = { ent-VehicleTankBase.desc }
+ent-VehicleSPPTank = SPP tank
     .desc = A heavy SPP battle tank.
-ent-RMCVehicleSPPTankCommand = SPP command tank
+ent-VehicleSPPTankCommand = SPP command tank
     .desc = A heavy SPP command tank.

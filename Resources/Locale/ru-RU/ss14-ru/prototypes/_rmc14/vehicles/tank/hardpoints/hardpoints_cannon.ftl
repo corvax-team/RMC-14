@@ -1,8 +1,8 @@
-ent-RMCVehicleTankLTBCannon = пушка LTB
+ent-VehicleTankLTBCannon = пушка LTB
     .desc = Установка легкой танковой пушки.
-ent-RMCVehicleTankLTAAAPMinigun = миниган LTAAAP
+ent-VehicleTankLTAAAPMinigun = миниган LTAAAP
     .desc = Установка легкой зенитной минигановой установки.
-ent-RMCVehicleTankAceAutocannon = автоматическая пушка ACE
+ent-VehicleTankAceAutocannon = автоматическая пушка ACE
     .desc = Установка автоматической пушки ACE.
-ent-RMCVehicleTankDragonFlamer = огнемет DRGN
+ent-VehicleTankDragonFlamer = огнемет DRGN
     .desc = Установка огнемета DRGN.

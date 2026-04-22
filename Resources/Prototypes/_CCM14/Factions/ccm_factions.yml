@@ -1,0 +1,10 @@
+- type: npcFaction
+  id: Petrishev
+  hostile:
+  - UNMC
+  - RMCXeno
+  - SPP
+  - Halcyon
+  - WeYa
+  - TSE
+

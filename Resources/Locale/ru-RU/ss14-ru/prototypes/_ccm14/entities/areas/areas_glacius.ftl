@@ -1,29 +1,53 @@
 ent-CCMAreaGlacius = Глациус
+    .suffix = Глациус
+    .desc = { ent-RMCAreaBase.desc }
 ent-CCMAreaGlaciusInteriorOob = Глациус — Вне границ
+    .suffix = Глациус
+    .desc = { ent-RMCAreaMax.desc }
 ent-CCMAreaGlaciusGround = Поверхность
+    .suffix = Без маппинга
+    .desc = { ent-RMCAreaProtectionZero.desc }
 ent-CCMAreaGlaciusClosedArea = Закрытая зона
-
+    .desc = { ent-RMCAreaProtectionOne.desc }
 ent-CCMAreaGlaciusFullProtection = Глациус (полная защита)
+    .suffix = Глациус
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusZeroProtection = Глациус (без защиты)
-
+    .suffix = Глациус
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusLandingHeadquarters = Зона высадки и штаб
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusNorthwestCaves = Северо-запад — пещеры
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusSouthwestCaves = Юго-запад — пещеры
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusNortheastCaves = Северо-восток — пещеры
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusSoutheastCaves = Юго-восток — пещеры
-
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusSecurity = Служба безопасности
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusSouthEastComplex = Юго-восточный научный комплекс
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusCentralComplex = Центральный научный комплекс
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusResidentialComplex = Жилой комплекс
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusEngineeringDepartment = Инженерный отдел
-
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusServerRoom = Серверная
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusWarehouse = Склад
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusRunway = Взлётная полоса
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusRestRoom = Комната отдыха
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusOffice = Офис
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusBunker = Бункер
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusStreet = Улица
-
+    .desc = { ent-CCMAreaGlacius.desc }
 ent-CCMAreaGlaciusLandingZone = Зона высадки
+    .desc = { ent-CCMAreaGlacius.desc }

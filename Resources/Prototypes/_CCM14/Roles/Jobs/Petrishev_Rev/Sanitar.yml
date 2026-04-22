@@ -1,0 +1,87 @@
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CCMJobIconREVSanitar
+  icon:
+    sprite: _CCM14/Interface/cm_job_icons.rsi
+    state: petrishev_medic
+
+- type: playTimeTracker
+  id: CCMJobREVSanitar
+
+- type: job
+  parent: CMJobBase
+  id: CCMREVSanitar
+  name: rmc-job-name-rev-sanitar
+  description: rmc-job-description-rev-sanitar
+  playTimeTracker: CCMJobREVSanitar
+  startingGear: CCMGearREVSanitar
+  icon: "CCMJobIconREVSanitar"
+  supervisors: cm-job-supervisors-sl
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  spawnMenuRoleName: Petrishevtsi Sanitar
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Petrishev
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 2
+        RMCSkillMedical: 3
+        RMCSkillFireman: 1
+        RMCSkillSurgery: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rev-sanitar
+  hidden: true
+
+- type: entity
+  id: CCMRandomHumanoidREVSanitarHostile
+  name: rev sanitar ghost role rifleman
+  suffix: Spawner, Player, Hostile
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: CCMREVSanitar
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: CCMREVSanitar
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-rev-hostile-sanitar
+    description: rmc-ghost-role-information-rev-hostile-description
+    rules: rmc-ghost-role-information-rev-rules
+    reregister: false
+    job: CCMREVSanitar
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadREV
+
+- type: startingGear
+  id: CCMGearREVSanitar
+  equipment:
+    head: CCMREVPilotka
+    ears: CCMHeadsetREV
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: CCMJumpsuitRevolutionary
+    outerClothing: CCMArmorREV
+    gloves: CMHandsBlackMarine
+    shoes: CMBootsBlack
+    suitstorage: RMCWeaponShotgunType23
+    id: RMCIDSPP
+    belt: CCMBeltSPPBrownFill
+    back: CCMSatchelREVSanitarFilled
+    pocket1: RMCPouchMedkitFillSPP
+    pocket2: RMCPouchShotgunLargeHeavyBuchshotFilled

@@ -1,0 +1,43 @@
+- type: entity
+  parent: RMCWeaponLMGQYJ72
+  name: Tovarish Petrishev
+  id: CCMWeaponLMGTovarish
+  description: An unique piece of underground terrorism armory. Chambered in 7.62x54mmR, this Frankenstein is, unlike any NORMAL LMG, designed for a direct frontline combat. Despite being an abomination of a handmade forge factory, it can deliver death as effective as any other machine gun.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Guns/LMGs/Tovarish/tovarishp_inhands.rsi
+    layers:
+    - state: base
+      sprite: _CCM14/Objects/Weapons/Guns/LMGs/Tovarish/tovarishp_icon.rsi
+    - state: bolt-open
+      sprite: _CCM14/Objects/Weapons/Guns/LMGs/Tovarish/tovarishp_icon.rsi
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      sprite: _CCM14/Objects/Weapons/Guns/LMGs/Tovarish/tovarishp_icon.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: cover-closed
+      sprite: _CCM14/Objects/Weapons/Guns/LMGs/Tovarish/tovarishp_icon.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Weapons/Guns/LMGs/Tovarish/tovarishp_inhands.rsi
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 1
+    recoilUnwielded: 1
+    scatterWielded: 21
+    scatterUnwielded: 27
+    baseFireRate: 7
+    burstScatterMult: 3
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+  - type: GunDamageModifier
+    multiplier: 0.8
+
+
+

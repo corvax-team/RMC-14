@@ -1,0 +1,8 @@
+- type: entity
+  parent: RMCPouchShotgun
+  id: RMCPouchShotgunLargeHeavyBuchshotFilled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCShellShotgunHeavyBuckshot
+      amount: 7

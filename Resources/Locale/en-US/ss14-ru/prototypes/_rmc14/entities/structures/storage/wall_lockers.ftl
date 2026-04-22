@@ -8,5 +8,5 @@ ent-RMCEmergencySurgicalCabinet = emergency surgical equipment cabinet
     .desc = A hyper-safe, self-sterilizing, wall-mounted cabinet containing extra surgical beds, surgical webbing vests, and portable dialysis machines. It unlocks and opens itself when the ship is threatened by a hostile force.
     .suffix = Empty
 ent-RMCEmergencySurgicalCabinetFilled = { ent-RMCEmergencySurgicalCabinet }
-    .suffix = Filled, Hijack
+    .suffix = Fills on Hijack
     .desc = { ent-RMCEmergencySurgicalCabinet.desc }

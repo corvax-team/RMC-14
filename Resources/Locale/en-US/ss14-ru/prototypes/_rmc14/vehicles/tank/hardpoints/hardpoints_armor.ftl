@@ -1,10 +1,10 @@
-ent-RMCVehicleTankArmorBallistic = ballistic armor plating
+ent-VehicleTankArmorBallistic = ballistic armor plating
     .desc = Ballistic armor plating for a tank.
-ent-RMCVehicleTankArmorConcussive = concussive armor plating
+ent-VehicleTankArmorConcussive = concussive armor plating
     .desc = Concussive armor plating for a tank.
-ent-RMCVehicleTankArmorCaustic = caustic armor plating
+ent-VehicleTankArmorCaustic = caustic armor plating
     .desc = Caustic armor plating for a tank.
-ent-RMCVehicleTankArmorPaladin = paladin armor plating
+ent-VehicleTankArmorPaladin = paladin armor plating
     .desc = Paladin armor plating for a tank.
-ent-RMCVehicleTankSnowplow = tank snowplow
+ent-VehicleTankSnowplow = tank snowplow
     .desc = A reinforced snowplow attachment for a tank.

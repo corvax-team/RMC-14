@@ -1,0 +1,84 @@
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CCMJobIconREVSoldat
+  icon:
+    sprite: _CCM14/Interface/cm_job_icons.rsi
+    state: petrishev_soldat
+
+- type: playTimeTracker
+  id: CCMJobREVSoldat
+
+- type: job
+  parent: CMJobBase
+  id: CCMREVSoldat
+  name: rmc-job-name-rev-soldat
+  description: rmc-job-description-rev-soldat
+  playTimeTracker: CCMJobREVSoldat
+  startingGear: CCMGearREVSoldat
+  icon: "CCMJobIconREVSoldat"
+  supervisors: cm-job-supervisors-sl
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  spawnMenuRoleName: Petrishevtsi Soldat
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Petrishev
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 2
+        RMCSkillMedical: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rev-soldat
+  hidden: true
+
+- type: entity
+  id: CCMRandomHumanoidREVSoldatHostile
+  name: rev soldat ghost role rifleman
+  suffix: Spawner, Player, Hostile
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: CCMREVSoldat
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: CCMREVSoldat
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-rev-hostile-soldat
+    description: rmc-ghost-role-information-rev-hostile-description
+    rules: rmc-ghost-role-information-rev-rules
+    reregister: false
+    job: CCMREVSoldat
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadREV
+
+- type: startingGear
+  id: CCMGearREVSoldat
+  equipment:
+    head: ArmorHelmetREV
+    ears: CCMHeadsetREV
+    jumpsuit: CCMJumpsuitRevolutionary
+    outerClothing: CCMArmorREV
+    gloves: CMHandsBlackMarine
+    shoes: CMBootsBlack
+    suitstorage: RMCWeaponRifleAK4047
+    id: RMCIDSPP
+    belt: CCMBeltSPPBrownFill
+    back: CCMSatchelREVSoldatFilled
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchExplosiveFilledSPP

@@ -19,3 +19,6 @@ ent-RMCLockerSecureSafeLiaisonFilled = { ent-RMCLockerSecureSafeLiaison }
 ent-RMCLockerFieldDoctor = { ent-CMLockerBase }
     .suffix = Filled, Field Doctor
     .desc = { ent-CMLockerBase.desc }
+ent-RMCLockerMinerFilled = { ent-RMCLockerMiner }
+    .suffix = Filled, Secure
+    .desc = { ent-RMCLockerMiner.desc }

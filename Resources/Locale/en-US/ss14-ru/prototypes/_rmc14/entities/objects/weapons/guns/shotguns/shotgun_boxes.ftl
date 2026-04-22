@@ -27,3 +27,6 @@ ent-RMCBoxShotgunHeavyFlechette = box of heavy flechette shells
     .desc = A box filled with heavy flechette shotgun shells. 8 Gauge.
 ent-RMCBoxShotgunHeavyDragonbreath = box of dragonbreath buckshot shells
     .desc = A box filled with dragonbreath buckshot shotgun shells. 8 Gauge.
+ent-RMCBoxShotgunL49B = box of L49B shells
+    .desc = A box filled with breaching shells, compatible with the L49 assault shotgun. 12 Gauge.
+    .suffix = PVE, RCM

@@ -119,7 +119,7 @@ public sealed class VehicleTurretSystem : EntitySystem
             if (session.SenderSession.AttachedEntity is not { } user)
                 return;
 
-            if (TryComp(user, out RMCVehicleViewToggleComponent? viewToggle) && !viewToggle.IsOutside)
+            if (TryComp(user, out VehicleViewToggleComponent? viewToggle) && !viewToggle.IsOutside)
                 return;
 
             if (!TryComp(user, out VehicleWeaponsOperatorComponent? operatorComp) ||
@@ -163,7 +163,7 @@ public sealed class VehicleTurretSystem : EntitySystem
         if (turret.VisualEntity is { } existing && Exists(existing))
             return;
 
-        var visual = Spawn("RMCVehicleTurretVisual", Transform(vehicle).Coordinates);
+        var visual = Spawn("VehicleTurretVisual", Transform(vehicle).Coordinates);
         var visualComp = EnsureComp<VehicleTurretVisualComponent>(visual);
         visualComp.Turret = GetNetEntity(turretUid);
         Dirty(visual, visualComp);
@@ -538,10 +538,10 @@ public sealed class VehicleTurretSystem : EntitySystem
         }
 
         // CCM14-start
-        if (TryComp<RMCHardpointIntegrityComponent>(turretUid, out var integrity) && integrity.Integrity <= 0f)
+        if (TryComp<HardpointIntegrityComponent>(turretUid, out var integrity) && integrity.Integrity <= 0f)
             return;
 
-        if (TryComp<RMCHardpointIntegrityComponent>(vehicle, out var frameIntegrity) && frameIntegrity.Integrity <= 0f)
+        if (TryComp<HardpointIntegrityComponent>(vehicle, out var frameIntegrity) && frameIntegrity.Integrity <= 0f)
             return;
         // CCM14-end
 
@@ -590,14 +590,14 @@ public sealed class VehicleTurretSystem : EntitySystem
             return;
 
         // CCM14-start
-        if (TryComp<RMCHardpointIntegrityComponent>(ent, out var integrity) && integrity.Integrity <= 0f)
+        if (TryComp<HardpointIntegrityComponent>(ent, out var integrity) && integrity.Integrity <= 0f)
         {
             args.Cancelled = true;
             return;
         }
 
         if (TryGetVehicle(ent.Owner, out var vehicleUid) &&
-            TryComp<RMCHardpointIntegrityComponent>(vehicleUid, out var frameIntegrity) &&
+            TryComp<HardpointIntegrityComponent>(vehicleUid, out var frameIntegrity) &&
             frameIntegrity.Integrity <= 0f)
         {
             args.Cancelled = true;
@@ -805,7 +805,7 @@ public sealed class VehicleTurretSystem : EntitySystem
         if (operatorComp.SelectedWeapon != turretUid)
             return false;
 
-        if (TryComp(user, out RMCVehicleViewToggleComponent? viewToggle) && !viewToggle.IsOutside)
+        if (TryComp(user, out VehicleViewToggleComponent? viewToggle) && !viewToggle.IsOutside)
             return false;
 
         return true;

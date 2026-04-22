@@ -18,3 +18,5 @@ ent-XenoAcidSprayTrapStrong = сильные брызги
     .desc = Оно сильно жжётся!
 ent-XenoAcidExtinguishEffect = { "" }
     .desc = Оно холодное...
+ent-RMCAcidHole = кислотная дыра
+    .desc = Разъеденное отверстие в стене.

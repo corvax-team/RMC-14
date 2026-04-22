@@ -122,8 +122,8 @@ ui-tactical-map-follow-player-active = Стоп
 ui-tactical-map-follow-player-inactive = Центр
 ui-tactical-map-cooldown-seconds = { $seconds }
 ui-tactical-map-tunnel-info = Туннель: { $name }
-
-ui-tactical-map-objectives-toggle = { $visible ->
-    [true] Скрыть
-    *[false] Показать
-}
+ui-tactical-map-objectives-toggle =
+    { $visible ->
+        [true] Скрыть
+       *[false] Показать
+    }

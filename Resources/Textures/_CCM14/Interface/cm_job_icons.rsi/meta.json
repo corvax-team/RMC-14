@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "hudsquad_pg made by assasin4ik",
+  "copyright": "hudsquad_pg made by assasin4ik, petrishev made by superman1223, base off the USSP pin by @no_mad#0260",
   "size": {
     "x": 16,
     "y": 16
@@ -9,6 +9,24 @@
     "states": [
         {
             "name": "hudsquad_pg"
+        },
+        {
+            "name": "petrishev_soldat"
+        },
+        {
+            "name": "petrishev_demo"
+        },
+        {
+            "name": "petrishev_leader"
+        },
+        {
+            "name": "petrishev_medic"
+        },
+        {
+            "name": "petrishev_spec"
+        },
+        {
+            "name": "petrishev_synth"
         }
     ]
 }

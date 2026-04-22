@@ -7,3 +7,6 @@
     Heat: 0.9
     Shock: 0.9
     Cold: 0.9
+    Cellular: 0 # // CCM Changed
+    Poison: 0 # // CCM Changed
+    Radiation: 0 # // CCM Changed

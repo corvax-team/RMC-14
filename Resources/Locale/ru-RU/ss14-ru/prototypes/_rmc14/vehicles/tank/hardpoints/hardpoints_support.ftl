@@ -1,10 +1,10 @@
-ent-RMCVehicleTankWarningArray = интегрированная матрица датчиков вооружения
+ent-VehicleTankWarningArray = интегрированная матрица датчиков вооружения
     .desc = Интегрированная матрица датчиков, повышающая точность и скорострельность бортового вооружения.
-ent-RMCVehicleTankOverdriveEnhancer = усилитель форсажа
+ent-VehicleTankOverdriveEnhancer = усилитель форсажа
     .desc = Вспомогательное устройство — усилитель форсажа для танка.
-ent-RMCVehicleTankRocketLauncher = дымовой гранатомет
+ent-VehicleTankRocketLauncher = дымовой гранатомет
     .desc = Вспомогательное устройство — дымовой гранатомет для танка.
-ent-RMCVehicleTankFlareModule = модуль фальшфейеров
+ent-VehicleTankFlareModule = модуль фальшфейеров
     .desc = Вспомогательное устройство — пусковая установка фальшфейеров для танка.
-ent-RMCVehicleTankArtilleryModule = артиллерийский модуль
+ent-VehicleTankArtilleryModule = артиллерийский модуль
     .desc = Вспомогательный артиллерийский модуль для танка.

@@ -79,3 +79,5 @@ ent-RMCAttachmentL83A3Stock = L83A3 solid stock
     .desc = Integrated into the L83A3. You shouldn't have this.
 ent-RMCAttachmentAK4047StockCollapsible = AK-4047 folding stock
     .desc = The standard back end of any gun starting with 'AK'. Compatible with the AK-4047 series, this stock reduces recoil and improves accuracy, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle, just like its ancestors.
+ent-RMCAttachmentL49Stock = L49 stock
+    .desc = A fixed stock for the L49 combat shotgun. Adds a bit of heft to the weapon, making it easier to make follow-up shots when shouldered - as well improving its performance as a melee weapon.

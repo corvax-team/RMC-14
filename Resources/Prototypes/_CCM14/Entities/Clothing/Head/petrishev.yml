@@ -1,0 +1,52 @@
+- type: entity
+  parent: ArmorHelmetM10
+  id: ArmorHelmetREV
+  name: Petrishev Revolutionary helmet
+  description: A piece of probably stolen from USSP equipment. This one lacks of a famous chin guard of a standart helmet and has a noticibly red hammer and sickle on forehead part.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/petrishev_helmet.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/petrishev_helmet.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: CMArmor
+    bullet: 25
+    bio: 15
+    explosionArmor: 15
+    # armor_energy = 20
+    # armor_rad = 15
+    # armor_internaldamage = 30
+
+- type: entity
+  parent: CMHeadCap
+  id: CCMREVPilotka
+  name: Petrishev Revolutionaries pilotka
+  description: A fancy pilotka with a crossed red sicle and a dark red hammer at the forehead part. You probably shouldn't wear that on public, unless you are... you know.. a heavy armored militant..
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Hats/petrishev_pilotka.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Hats/petrishev_pilotka.rsi
+
+- type: entity
+  parent: RMCHeadCapSPPPolBlack
+  id: CCMHeadCapREVPeaked
+  name: Petrishev Revolutionary peaked cap
+  description: A black officer peaked cap. Used by the officers of Petrishev Revolutionaries.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Hats/petrishev_peaked.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Hats/petrishev_peaked.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: CCMREVBeret
+  name: Petrishev Revolutionaries beret
+  description: A black beret with a red and dark red colored hammer and sicle. A favorite attribute of Petrishev Revolutionaries veterans.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Hats/petrishev_beret.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Hats/petrishev_beret.rsi

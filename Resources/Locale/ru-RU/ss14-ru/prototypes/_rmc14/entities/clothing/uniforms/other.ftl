@@ -120,3 +120,5 @@ ent-RMCJumpsuitCLFWebbingSurgical = { ent-RMCJumpsuitCLFSoldier }
     .desc = { ent-RMCJumpsuitCLFSoldier.desc }
 ent-RMCJumpsuitCivilianFrontier = исследовательский комбинезон
     .desc = Технологичный костюм с идеальной терморегуляцией для разведчиков пограничных миров.
+ent-CCMJumpsuitRevolutionary = Униформа Революционеров-Петрищевцев
+    .desc = Комплект униформы Петрищевцев чёрного цвета. Рукава выкрашены в кроваво-красный цвет, символизирующий готовность революционеров окунуть руки в кровь ради достижения цели.
