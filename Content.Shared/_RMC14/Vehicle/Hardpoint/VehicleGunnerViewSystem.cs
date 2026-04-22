@@ -1,4 +1,5 @@
 using Content.Shared.Camera;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
@@ -29,11 +30,13 @@ public sealed class VehicleGunnerViewSystem : EntitySystem
 
     private void OnStartup(Entity<VehicleGunnerViewUserComponent> ent, ref ComponentStartup args)
     {
-        _eye.UpdatePvsScale(ent.Owner);
+        if (HasComp<ContentEyeComponent>(ent)) // CCM14
+            _eye.UpdatePvsScale(ent.Owner);
     }
 
     private void OnShutdown(Entity<VehicleGunnerViewUserComponent> ent, ref ComponentShutdown args)
     {
-        _eye.UpdatePvsScale(ent.Owner);
+        if (HasComp<ContentEyeComponent>(ent)) // CCM14
+            _eye.UpdatePvsScale(ent.Owner);
     }
 }
