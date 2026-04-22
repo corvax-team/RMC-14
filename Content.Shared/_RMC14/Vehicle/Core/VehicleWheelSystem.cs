@@ -48,9 +48,9 @@ public sealed class VehicleWheelSystem : EntitySystem
         UpdateAppearance(ent.Owner, ent.Comp);
     }
     // CCM14-start
-    private void OnWheelEjectAttempt(Entity<RMCVehicleWheelSlotsComponent> ent, ref ItemSlotEjectAttemptEvent args)
+    private void OnWheelEjectAttempt(Entity<VehicleWheelSlotsComponent> ent, ref ItemSlotEjectAttemptEvent args)
     {
-        if (TryComp<RMCHardpointSlotsComponent>(ent.Owner, out var hardpoints) &&
+        if (TryComp<HardpointSlotsComponent>(ent.Owner, out var hardpoints) &&
             TryComp<ItemSlotsComponent>(ent.Owner, out var itemSlots))
         {
             string? slotId = null;

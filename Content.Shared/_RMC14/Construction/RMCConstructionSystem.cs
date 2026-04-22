@@ -44,7 +44,7 @@ public sealed class RMCConstructionSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly RMCVehicleSystem _rmcVehicleSystem = default!; // CCM14
+    [Dependency] private readonly VehicleSystem _rmcVehicleSystem = default!; // CCM14
 
     private static readonly EntProtoId Blocker = "RMCDropshipDoorBlocker";
 

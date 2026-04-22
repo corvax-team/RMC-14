@@ -39,7 +39,7 @@ public abstract partial class SharedRMCLandmineSystem : EntitySystem
     [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly RMCVehicleSystem _rmcVehicleSystem = default!; // CCM14
+    [Dependency] private readonly VehicleSystem _rmcVehicleSystem = default!; // CCM14
 
     public override void Initialize()
     {

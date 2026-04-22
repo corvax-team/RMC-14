@@ -93,7 +93,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly RMCSharedWeaponControllerSystem _weaponController = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly RMCVehicleSystem _rmcVehicleSystem = default!;
+    [Dependency] private readonly VehicleSystem _rmcVehicleSystem = default!;
 
     private const string AmmoExamineColor = "yellow";
     private const string FireRateExamineColor = "yellow";

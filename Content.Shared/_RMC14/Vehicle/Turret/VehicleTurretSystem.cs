@@ -538,10 +538,10 @@ public sealed class VehicleTurretSystem : EntitySystem
         }
 
         // CCM14-start
-        if (TryComp<RMCHardpointIntegrityComponent>(turretUid, out var integrity) && integrity.Integrity <= 0f)
+        if (TryComp<HardpointIntegrityComponent>(turretUid, out var integrity) && integrity.Integrity <= 0f)
             return;
 
-        if (TryComp<RMCHardpointIntegrityComponent>(vehicle, out var frameIntegrity) && frameIntegrity.Integrity <= 0f)
+        if (TryComp<HardpointIntegrityComponent>(vehicle, out var frameIntegrity) && frameIntegrity.Integrity <= 0f)
             return;
         // CCM14-end
 
@@ -590,14 +590,14 @@ public sealed class VehicleTurretSystem : EntitySystem
             return;
 
         // CCM14-start
-        if (TryComp<RMCHardpointIntegrityComponent>(ent, out var integrity) && integrity.Integrity <= 0f)
+        if (TryComp<HardpointIntegrityComponent>(ent, out var integrity) && integrity.Integrity <= 0f)
         {
             args.Cancelled = true;
             return;
         }
 
         if (TryGetVehicle(ent.Owner, out var vehicleUid) &&
-            TryComp<RMCHardpointIntegrityComponent>(vehicleUid, out var frameIntegrity) &&
+            TryComp<HardpointIntegrityComponent>(vehicleUid, out var frameIntegrity) &&
             frameIntegrity.Integrity <= 0f)
         {
             args.Cancelled = true;

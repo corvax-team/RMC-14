@@ -579,7 +579,7 @@ public sealed class HardpointSystem : EntitySystem
     /// </summary>
     private void DamageVehicleInteriorOccupants(EntityUid vehicle, DamageSpecifier damage)
     {
-        if (!TryComp(vehicle, out RMCVehicleInteriorComponent? interior))
+        if (!TryComp(vehicle, out VehicleInteriorComponent? interior))
             return;
 
         var occupants = interior.Passengers.Count + interior.Xenos.Count;

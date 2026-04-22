@@ -65,6 +65,9 @@ public sealed partial class HardpointSlotsComponent : Component
     public HashSet<string> PendingRemovals = new();
 
     [NonSerialized]
+    public HashSet<string> CompletingRemovals = new();
+
+    [NonSerialized]
     public HashSet<EntityUid> PendingInsertUsers = new();
 
     [NonSerialized]

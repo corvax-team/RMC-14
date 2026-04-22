@@ -1,6 +1,4 @@
-using System;
 using System.Numerics;
-using System.Collections.Generic;
 using Content.Shared.Damage;
 using Content.Shared.Doors.Components;
 using Content.Shared.Foldable;
@@ -12,10 +10,8 @@ using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Physics;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Maths;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
@@ -243,7 +239,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 if (!TryComp(mobUid, out MobStateComponent? mob))
                     continue;
 
-                HandleMobCollision(uid, mobUid, mob, ref playedCollisionSound);
+                HandleMobCollision(uid, mover, mobUid, mob, ref playedCollisionSound); // CCM14
             }
         }
 
@@ -824,7 +820,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         played = true;
     }
 
-    private void HandleMobCollision(EntityUid vehicle, EntityUid target, MobStateComponent mobState, ref bool playedCollisionSound)
+    private void HandleMobCollision(EntityUid vehicle, GridVehicleMoverComponent mover, EntityUid target, MobStateComponent mobState, ref bool playedCollisionSound)
     {
         if (_net.IsClient || _mobState.IsDead(target, mobState))
             return;

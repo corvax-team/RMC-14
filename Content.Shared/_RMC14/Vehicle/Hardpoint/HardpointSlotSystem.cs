@@ -35,7 +35,7 @@ public sealed class HardpointSlotSystem : EntitySystem
         SubscribeLocalEvent<HardpointSlotsComponent, HardpointRemoveDoAfterEvent>(OnHardpointRemoveDoAfter);
     }
     // CCM14-start
-    private void OnEjectAttempt(Entity<RMCHardpointSlotsComponent> ent, ref ItemSlotEjectAttemptEvent args)
+    private void OnEjectAttempt(Entity<HardpointSlotsComponent> ent, ref ItemSlotEjectAttemptEvent args)
     {
         if (!TryComp(ent.Owner, out ItemSlotsComponent? itemSlots))
         {
