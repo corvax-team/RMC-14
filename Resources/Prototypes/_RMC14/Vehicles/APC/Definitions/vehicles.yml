@@ -156,7 +156,7 @@
       insertDelay: 1.5
   - type: VehicleWheelSlots
     slotCount: 1
-  - type: RMCHardpointIntegrity
+  - type: HardpointIntegrity
     maxIntegrity: 600 # CCM14
     repairFuelCost: 15
     bypassEntryOnZero: true
