@@ -809,8 +809,8 @@ public sealed class VehicleSupplySystem : EntitySystem
             {
                 var key = Normalize(entry.Vehicle.Id);
                 var count = GetStoredCount(lift.Comp, key);
-                if (count <= 0)
-                    continue;
+                // if (count <= 0)
+                //     continue;
 
                 available.Add(new VehicleSupplyEntryState(entry.Vehicle.Id, GetEntryName(entry), count));
                 continue;
