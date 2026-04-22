@@ -40,7 +40,7 @@ public sealed partial class HardpointItemComponent : Component
 
 
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(HardpointSystem), typeof(HardpointSlotSystem))]
+[Access(typeof(HardpointSystem), typeof(HardpointSlotSystem), typeof(VehicleWheelSystem))] // CCM14
 public sealed partial class HardpointSlotsComponent : Component
 {
     [DataField]
