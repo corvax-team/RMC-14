@@ -4,24 +4,24 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._CCM.Vehicle.Fabricator.Fabricator;
 
-public sealed class RMCVehicleFabricatorBui : BoundUserInterface
+public sealed class VehicleFabricatorBui : BoundUserInterface
 {
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    private readonly RMCVehicleFabricatorSystem _system;
+    private readonly VehicleFabricatorSystem _system;
 
-    private RMCVehicleFabricatorWindow? _window;
+    private VehicleFabricatorWindow? _window;
 
-    public RMCVehicleFabricatorBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    public VehicleFabricatorBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         IoCManager.InjectDependencies(this);
-        _system = EntMan.System<RMCVehicleFabricatorSystem>();
+        _system = EntMan.System<VehicleFabricatorSystem>();
     }
 
     protected override void Open()
     {
         base.Open();
-        _window = this.CreateWindow<RMCVehicleFabricatorWindow>();
+        _window = this.CreateWindow<VehicleFabricatorWindow>();
         _window.OnClose += Close;
         _window.OnCategorySelected += OnCategorySelected;
         _window.OnVehicleSelected += OnVehicleSelected;
@@ -33,7 +33,7 @@ public sealed class RMCVehicleFabricatorBui : BoundUserInterface
 
     public void Refresh()
     {
-        if (_window == null || !EntMan.TryGetComponent(Owner, out RMCVehicleFabricatorComponent? fabricator))
+        if (_window == null || !EntMan.TryGetComponent(Owner, out VehicleFabricatorComponent? fabricator))
             return;
 
         _window.SetPoints(fabricator.Points);
@@ -47,7 +47,7 @@ public sealed class RMCVehicleFabricatorBui : BoundUserInterface
             printingName = proto.Name;
             printAt = fabricator.PrintAt;
 
-            if (proto.TryGetComponent(out RMCVehicleFabricatorPrintableComponent? printable, _compFactory))
+            if (proto.TryGetComponent(out VehicleFabricatorPrintableComponent? printable, _compFactory))
             {
                 printDelay = printable.Delay;
             }
@@ -58,7 +58,7 @@ public sealed class RMCVehicleFabricatorBui : BoundUserInterface
         UpdatePrintables();
     }
 
-    private void OnCategorySelected(RMCVehicleFabricatorCategory category)
+    private void OnCategorySelected(VehicleFabricatorCategory category)
     {
         _window?.SetCategory(category);
         UpdatePrintables();
@@ -72,7 +72,7 @@ public sealed class RMCVehicleFabricatorBui : BoundUserInterface
 
     private void OnPrint(EntProtoId id)
     {
-        SendMessage(new RMCVehicleFabricatorPrintMsg(id));
+        SendMessage(new VehicleFabricatorPrintMsg(id));
     }
 
     private void UpdatePrintables()
@@ -80,7 +80,7 @@ public sealed class RMCVehicleFabricatorBui : BoundUserInterface
         if (_window == null)
             return;
 
-        var printables = new List<RMCVehicleFabricatorPrintableDisplayData>();
+        var printables = new List<VehicleFabricatorPrintableDisplayData>();
         foreach (var printableId in _system.Printables)
         {
             if (!_prototype.TryIndex(printableId, out var proto) ||
@@ -97,7 +97,7 @@ public sealed class RMCVehicleFabricatorBui : BoundUserInterface
                 (printable.Vehicle & _window.SelectedVehicle) == 0)
                 continue;
 
-            printables.Add(new RMCVehicleFabricatorPrintableDisplayData(
+            printables.Add(new VehicleFabricatorPrintableDisplayData(
                 printableId,
                 proto.Name,
                 proto.Description,

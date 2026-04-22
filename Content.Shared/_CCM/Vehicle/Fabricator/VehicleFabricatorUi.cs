@@ -5,21 +5,21 @@ namespace Content.Shared._CCM.Vehicle.Fabricator;
 
 [Serializable]
 [NetSerializable]
-public enum RMCVehicleFabricatorUi
+public enum VehicleFabricatorUi
 {
     Key
 }
 
 [Serializable]
 [NetSerializable]
-public sealed class RMCVehicleFabricatorPrintMsg(EntProtoId id) : BoundUserInterfaceMessage
+public sealed class VehicleFabricatorPrintMsg(EntProtoId id) : BoundUserInterfaceMessage
 {
     public readonly EntProtoId Id = id;
 }
 
 [Serializable]
 [NetSerializable]
-public sealed record RMCVehicleFabricatorPrintableDisplayData(
+public sealed record VehicleFabricatorPrintableDisplayData(
     EntProtoId Id,
     string Name,
     string Description,

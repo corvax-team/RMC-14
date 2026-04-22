@@ -7,8 +7,8 @@ namespace Content.Shared._CCM.Vehicle.Fabricator;
 [NetworkedComponent]
 [AutoGenerateComponentState]
 [AutoGenerateComponentPause]
-[Access(typeof(RMCVehicleFabricatorSystem))]
-public sealed partial class RMCVehicleFabricatorPointsComponent : Component
+[Access(typeof(VehicleFabricatorSystem))]
+public sealed partial class VehicleFabricatorPointsComponent : Component
 {
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))] [AutoNetworkedField] [AutoPausedField]
     public TimeSpan NextPointsAt;

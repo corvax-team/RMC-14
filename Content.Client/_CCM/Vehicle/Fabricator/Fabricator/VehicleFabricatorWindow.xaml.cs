@@ -10,13 +10,13 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._CCM.Vehicle.Fabricator.Fabricator;
 
-public sealed class RMCVehicleFabricatorWindow : DefaultWindow
+public sealed class VehicleFabricatorWindow : DefaultWindow
 {
-    public event Action<RMCVehicleFabricatorCategory>? OnCategorySelected;
+    public event Action<VehicleFabricatorCategory>? OnCategorySelected;
     public event Action<RMCVehicleType>? OnVehicleSelected;
     public event Action<EntProtoId>? OnPrint;
 
-    public RMCVehicleFabricatorCategory SelectedCategory { get; private set; } = RMCVehicleFabricatorCategory.Primary;
+    public VehicleFabricatorCategory SelectedCategory { get; private set; } = VehicleFabricatorCategory.Primary;
     public RMCVehicleType SelectedVehicle { get; private set; } = RMCVehicleType.Tank;
 
     private Label PointsLabel => FindControl<Label>("PointsLabel");
@@ -31,7 +31,7 @@ public sealed class RMCVehicleFabricatorWindow : DefaultWindow
     private TimeSpan _printDelay;
     private IGameTiming _timing = default!;
 
-    public RMCVehicleFabricatorWindow()
+    public VehicleFabricatorWindow()
     {
         RobustXamlLoader.Load(this);
         IoCManager.Resolve(ref _timing);
@@ -47,12 +47,12 @@ public sealed class RMCVehicleFabricatorWindow : DefaultWindow
         var apcBtn = FindControl<Button>("APCVehicleButton");
         var humveeBtn = FindControl<Button>("HumveeVehicleButton");
 
-        primaryBtn.OnPressed += _ => { SelectedCategory = RMCVehicleFabricatorCategory.Primary; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(primaryBtn); };
-        secondaryBtn.OnPressed += _ => { SelectedCategory = RMCVehicleFabricatorCategory.Secondary; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(secondaryBtn); };
-        armorBtn.OnPressed += _ => { SelectedCategory = RMCVehicleFabricatorCategory.Armor; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(armorBtn); };
-        supportBtn.OnPressed += _ => { SelectedCategory = RMCVehicleFabricatorCategory.Support; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(supportBtn); };
-        chassisBtn.OnPressed += _ => { SelectedCategory = RMCVehicleFabricatorCategory.Chassis; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(chassisBtn); };
-        ammoBtn.OnPressed += _ => { SelectedCategory = RMCVehicleFabricatorCategory.Ammo; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(ammoBtn); };
+        primaryBtn.OnPressed += _ => { SelectedCategory = VehicleFabricatorCategory.Primary; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(primaryBtn); };
+        secondaryBtn.OnPressed += _ => { SelectedCategory = VehicleFabricatorCategory.Secondary; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(secondaryBtn); };
+        armorBtn.OnPressed += _ => { SelectedCategory = VehicleFabricatorCategory.Armor; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(armorBtn); };
+        supportBtn.OnPressed += _ => { SelectedCategory = VehicleFabricatorCategory.Support; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(supportBtn); };
+        chassisBtn.OnPressed += _ => { SelectedCategory = VehicleFabricatorCategory.Chassis; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(chassisBtn); };
+        ammoBtn.OnPressed += _ => { SelectedCategory = VehicleFabricatorCategory.Ammo; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(ammoBtn); };
 
         tankBtn.OnPressed += _ => { SelectedVehicle = RMCVehicleType.Tank; OnVehicleSelected?.Invoke(SelectedVehicle); UpdateVehicleButtons(tankBtn); };
         apcBtn.OnPressed += _ => { SelectedVehicle = RMCVehicleType.APC; OnVehicleSelected?.Invoke(SelectedVehicle); UpdateVehicleButtons(apcBtn); };
@@ -118,14 +118,14 @@ public sealed class RMCVehicleFabricatorWindow : DefaultWindow
         VehiclePreview.SetPrototype(protoId);
     }
 
-    private static string GetCategoryKey(RMCVehicleFabricatorCategory category) => category switch
+    private static string GetCategoryKey(VehicleFabricatorCategory category) => category switch
     {
-        RMCVehicleFabricatorCategory.Primary => "primary",
-        RMCVehicleFabricatorCategory.Secondary => "secondary",
-        RMCVehicleFabricatorCategory.Armor => "armor",
-        RMCVehicleFabricatorCategory.Support => "support",
-        RMCVehicleFabricatorCategory.Chassis => "chassis",
-        RMCVehicleFabricatorCategory.Ammo => "ammo",
+        VehicleFabricatorCategory.Primary => "primary",
+        VehicleFabricatorCategory.Secondary => "secondary",
+        VehicleFabricatorCategory.Armor => "armor",
+        VehicleFabricatorCategory.Support => "support",
+        VehicleFabricatorCategory.Chassis => "chassis",
+        VehicleFabricatorCategory.Ammo => "ammo",
         _ => category.ToString().ToLowerInvariant(),
     };
 
@@ -176,7 +176,7 @@ public sealed class RMCVehicleFabricatorWindow : DefaultWindow
         UpdatePrintingDisplay(progress);
     }
 
-    public void SetCategory(RMCVehicleFabricatorCategory category)
+    public void SetCategory(VehicleFabricatorCategory category)
     {
         SelectedCategory = category;
         var categoryNames = new[] { "Primary", "Secondary", "Armor", "Support", "Chassis", "Ammo" };
@@ -201,7 +201,7 @@ public sealed class RMCVehicleFabricatorWindow : DefaultWindow
         UpdateVehiclePreview();
     }
 
-    public void SetPrintables(List<RMCVehicleFabricatorPrintableDisplayData> printables)
+    public void SetPrintables(List<VehicleFabricatorPrintableDisplayData> printables)
     {
         PrintablesContainer.DisposeAllChildren();
 

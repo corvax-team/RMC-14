@@ -8,8 +8,8 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._CCM.Vehicle.Fabricator;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
-[Access(typeof(RMCVehicleFabricatorSystem))]
-public sealed partial class RMCVehicleFabricatorComponent : Component
+[Access(typeof(VehicleFabricatorSystem))]
+public sealed partial class VehicleFabricatorComponent : Component
 {
     [DataField]
     public EntityUid? Account;
@@ -34,8 +34,8 @@ public sealed partial class RMCVehicleFabricatorComponent : Component
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(RMCVehicleFabricatorSystem))]
-public sealed partial class RMCVehicleFabricatorPrintableComponent : Component
+[Access(typeof(VehicleFabricatorSystem))]
+public sealed partial class VehicleFabricatorPrintableComponent : Component
 {
     [DataField, AutoNetworkedField]
     public bool Enabled = true;
@@ -53,14 +53,14 @@ public sealed partial class RMCVehicleFabricatorPrintableComponent : Component
     public TimeSpan Delay = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
-    public RMCVehicleFabricatorCategory Category;
+    public VehicleFabricatorCategory Category;
 
     [DataField, AutoNetworkedField]
     public RMCVehicleType Vehicle = RMCVehicleType.None;
 }
 
 [Serializable, NetSerializable]
-public enum RMCVehicleFabricatorCategory : byte
+public enum VehicleFabricatorCategory : byte
 {
     Primary,
     Secondary,

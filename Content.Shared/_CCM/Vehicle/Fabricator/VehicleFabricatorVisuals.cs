@@ -4,14 +4,14 @@ namespace Content.Shared._CCM.Vehicle.Fabricator;
 
 [Serializable]
 [NetSerializable]
-public enum RMCVehicleFabricatorVisuals
+public enum VehicleFabricatorVisuals
 {
     State
 }
 
 [Serializable]
 [NetSerializable]
-public enum RMCVehicleFabricatorState
+public enum VehicleFabricatorState
 {
     Idle,
     Fabricating

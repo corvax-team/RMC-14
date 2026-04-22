@@ -94,7 +94,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: t60p3m_0
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     enabled: false
 
 - type: entity

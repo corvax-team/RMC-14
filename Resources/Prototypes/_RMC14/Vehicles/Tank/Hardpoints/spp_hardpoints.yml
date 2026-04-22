@@ -7,7 +7,7 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/spptank.rsi
   - type: Item
     size: Large
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     enabled: false
 
 - type: entity
@@ -61,7 +61,7 @@
       compatibilityId: SPPTank
       required: false
       insertDelay: 2.0
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     enabled: false
 
 - type: entity
@@ -101,7 +101,7 @@
     offsetNorth: "0, -1.8"
     useAimDirection: true
     useContainerOwner: false
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     enabled: false
 
 - type: entity
@@ -137,7 +137,7 @@
     muzzleOffset: "0,-1"
     useAimDirection: true
     useContainerOwner: false
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     enabled: false
 
 - type: entity
@@ -174,7 +174,7 @@
     muzzleOffset: "0,0"
     useAimDirection: true
     useContainerOwner: false
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     enabled: false
 
 - type: entity
@@ -214,7 +214,7 @@
     muzzleOffset: "0,0"
     useAimDirection: true
     useContainerOwner: false
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     enabled: false
 
 - type: entity
@@ -230,7 +230,7 @@
     compatibilityId: SPPTank
   - type: HardpointVisual
     vehicleState: reactive_armor_0
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     enabled: false
 
 - type: entity
@@ -246,7 +246,7 @@
     compatibilityId: SPPTank
   - type: HardpointVisual
     vehicleState: slauncher_0
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     enabled: false
 
 - type: entity
@@ -262,7 +262,7 @@
     compatibilityId: SPPTank
   - type: HardpointVisual
     vehicleState: slauncher_1
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     enabled: false
 
 - type: entity
@@ -278,7 +278,7 @@
     compatibilityId: SPPTank
   - type: HardpointVisual
     vehicleState: warray_0
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     enabled: false
 
 - type: entity
@@ -294,7 +294,7 @@
     compatibilityId: SPPTank
   - type: HardpointVisual
     vehicleState: odrive_enhancer_0
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     enabled: false
 
 - type: entity
@@ -310,5 +310,5 @@
     compatibilityId: SPPTank
   - type: HardpointVisual
     vehicleState: artillerymod_0
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     enabled: false

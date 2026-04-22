@@ -17,7 +17,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._CCM.Vehicle.Fabricator;
 
-public sealed class RMCVehicleFabricatorSystem : EntitySystem
+public sealed class VehicleFabricatorSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -33,25 +33,25 @@ public sealed class RMCVehicleFabricatorSystem : EntitySystem
     private int _startingPoints;
     private TimeSpan _gainEvery;
 
-    public ImmutableArray<EntProtoId<RMCVehicleFabricatorPrintableComponent>> Printables { get; private set; }
+    public ImmutableArray<EntProtoId<VehicleFabricatorPrintableComponent>> Printables { get; private set; }
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
-        SubscribeLocalEvent<RMCVehicleFabricatorComponent, MapInitEvent>(OnFabricatorMapInit);
-        SubscribeLocalEvent<RMCVehicleFabricatorComponent, InteractUsingEvent>(OnInteractUsing);
-        SubscribeLocalEvent<RMCVehicleFabricatorComponent, RMCVehicleFabricatoreRecycleDoafterEvent>(OnVehiclePartRecycled);
+        SubscribeLocalEvent<VehicleFabricatorComponent, MapInitEvent>(OnFabricatorMapInit);
+        SubscribeLocalEvent<VehicleFabricatorComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<VehicleFabricatorComponent, VehicleFabricatoreRecycleDoafterEvent>(OnVehiclePartRecycled);
 
-        Subs.BuiEvents<RMCVehicleFabricatorComponent>(RMCVehicleFabricatorUi.Key,
+        Subs.BuiEvents<VehicleFabricatorComponent>(VehicleFabricatorUi.Key,
             subs =>
             {
-                subs.Event<RMCVehicleFabricatorPrintMsg>(OnPrintMsg);
+                subs.Event<VehicleFabricatorPrintMsg>(OnPrintMsg);
             });
 
-        Subs.CVar(_config, RMCCVars.RMCVehicleFabricatorStartingPoints, v => _startingPoints = v, true);
-        Subs.CVar(_config, RMCCVars.RMCVehicleFabricatorGainEverySeconds, v => _gainEvery = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.VehicleFabricatorStartingPoints, v => _startingPoints = v, true);
+        Subs.CVar(_config, RMCCVars.VehicleFabricatorGainEverySeconds, v => _gainEvery = TimeSpan.FromSeconds(v), true);
 
         ReloadPrototypes();
     }
@@ -62,18 +62,18 @@ public sealed class RMCVehicleFabricatorSystem : EntitySystem
             ReloadPrototypes();
     }
 
-    private void OnFabricatorMapInit(Entity<RMCVehicleFabricatorComponent> ent, ref MapInitEvent args)
+    private void OnFabricatorMapInit(Entity<VehicleFabricatorComponent> ent, ref MapInitEvent args)
     {
         if (_net.IsServer)
             ent.Comp.Account = EnsurePoints();
     }
 
-    private void OnInteractUsing(Entity<RMCVehicleFabricatorComponent> ent, ref InteractUsingEvent args)
+    private void OnInteractUsing(Entity<VehicleFabricatorComponent> ent, ref InteractUsingEvent args)
     {
         if (args.Handled)
             return;
 
-        if (!TryComp(args.Used, out RMCVehicleFabricatorPrintableComponent? printable))
+        if (!TryComp(args.Used, out VehicleFabricatorPrintableComponent? printable))
             return;
 
         args.Handled = true;
@@ -82,7 +82,7 @@ public sealed class RMCVehicleFabricatorSystem : EntitySystem
         var multiplier = _skills.GetSkillDelayMultiplier(args.User, printable.RecycleSkill);
         delay *= multiplier;
 
-        var ev = new RMCVehicleFabricatoreRecycleDoafterEvent();
+        var ev = new VehicleFabricatoreRecycleDoafterEvent();
         var doAfterArgs = new DoAfterArgs(EntityManager, args.User, delay, ev, ent, ent, args.Used)
         {
             BreakOnMove = true,
@@ -93,13 +93,13 @@ public sealed class RMCVehicleFabricatorSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfterArgs);
     }
 
-    private void OnVehiclePartRecycled(Entity<RMCVehicleFabricatorComponent> ent, ref RMCVehicleFabricatoreRecycleDoafterEvent args)
+    private void OnVehiclePartRecycled(Entity<VehicleFabricatorComponent> ent, ref VehicleFabricatoreRecycleDoafterEvent args)
     {
         if (args.Cancelled || args.Handled || args.Used == null)
             return;
 
-        if (!TryComp(args.Used, out RMCVehicleFabricatorPrintableComponent? printable) ||
-            !TryComp(ent.Comp.Account, out RMCVehicleFabricatorPointsComponent? points))
+        if (!TryComp(args.Used, out VehicleFabricatorPrintableComponent? printable) ||
+            !TryComp(ent.Comp.Account, out VehicleFabricatorPointsComponent? points))
         {
             return;
         }
@@ -115,12 +115,12 @@ public sealed class RMCVehicleFabricatorSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("rmc-vehicle-fabricator-points", ("points", points.Points)), ent, args.User);
     }
 
-    private void OnPrintMsg(Entity<RMCVehicleFabricatorComponent> ent, ref RMCVehicleFabricatorPrintMsg args)
+    private void OnPrintMsg(Entity<VehicleFabricatorComponent> ent, ref VehicleFabricatorPrintMsg args)
     {
         if (args.Id == default || !_prototypes.TryIndex(args.Id, out var proto))
             return;
 
-        if (!proto.TryGetComponent(out RMCVehicleFabricatorPrintableComponent? printable, _compFactory))
+        if (!proto.TryGetComponent(out VehicleFabricatorPrintableComponent? printable, _compFactory))
             return;
 
         var actor = args.Actor;
@@ -130,7 +130,7 @@ public sealed class RMCVehicleFabricatorSystem : EntitySystem
             return;
         }
 
-        if (!TryComp(ent.Comp.Account, out RMCVehicleFabricatorPointsComponent? points))
+        if (!TryComp(ent.Comp.Account, out VehicleFabricatorPointsComponent? points))
             return;
 
         if (printable.Cost > points.Points)
@@ -147,20 +147,20 @@ public sealed class RMCVehicleFabricatorSystem : EntitySystem
         ent.Comp.PrintAt = _timing.CurTime + printable.Delay;
         Dirty(ent);
 
-        _appearance.SetData(ent, RMCVehicleFabricatorVisuals.State, RMCVehicleFabricatorState.Fabricating);
+        _appearance.SetData(ent, VehicleFabricatorVisuals.State, VehicleFabricatorState.Fabricating);
         _audio.PlayPvs(ent.Comp.ClickSound, ent);
     }
 
-    private Entity<RMCVehicleFabricatorPointsComponent> EnsurePoints()
+    private Entity<VehicleFabricatorPointsComponent> EnsurePoints()
     {
-        var query = EntityQueryEnumerator<RMCVehicleFabricatorPointsComponent>();
+        var query = EntityQueryEnumerator<VehicleFabricatorPointsComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
             return (uid, comp);
         }
 
         var points = Spawn(null, MapCoordinates.Nullspace);
-        var pointsComp = EnsureComp<RMCVehicleFabricatorPointsComponent>(points);
+        var pointsComp = EnsureComp<VehicleFabricatorPointsComponent>(points);
         pointsComp.Points = _startingPoints;
         return (points, pointsComp);
     }
@@ -171,17 +171,17 @@ public sealed class RMCVehicleFabricatorSystem : EntitySystem
         var prototypes = _prototypes.EnumeratePrototypes<EntityPrototype>();
         foreach (var prototype in prototypes)
         {
-            if (prototype.HasComponent<RMCVehicleFabricatorPrintableComponent>(_compFactory))
+            if (prototype.HasComponent<VehicleFabricatorPrintableComponent>(_compFactory))
                 printables.Add(prototype);
         }
 
         printables.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase));
-        Printables = printables.Select(e => new EntProtoId<RMCVehicleFabricatorPrintableComponent>(e.ID)).ToImmutableArray();
+        Printables = printables.Select(e => new EntProtoId<VehicleFabricatorPrintableComponent>(e.ID)).ToImmutableArray();
     }
 
     private void SendUIStateAll(int points)
     {
-        var fabricatorQuery = EntityQueryEnumerator<RMCVehicleFabricatorComponent>();
+        var fabricatorQuery = EntityQueryEnumerator<VehicleFabricatorComponent>();
         while (fabricatorQuery.MoveNext(out var fabricatorId, out var fabricator))
         {
             if (fabricator.Points == points)
@@ -199,7 +199,7 @@ public sealed class RMCVehicleFabricatorSystem : EntitySystem
             return;
 
         var time = _timing.CurTime;
-        var allFabricatorQuery = EntityQueryEnumerator<RMCVehicleFabricatorComponent>();
+        var allFabricatorQuery = EntityQueryEnumerator<VehicleFabricatorComponent>();
         while (allFabricatorQuery.MoveNext(out var uid, out var comp))
         {
             if (comp.Printing == null || time < comp.PrintAt)
@@ -212,10 +212,10 @@ public sealed class RMCVehicleFabricatorSystem : EntitySystem
             comp.Printing = null;
             Dirty(uid, comp);
 
-            _appearance.SetData(uid, RMCVehicleFabricatorVisuals.State, RMCVehicleFabricatorState.Idle);
+            _appearance.SetData(uid, VehicleFabricatorVisuals.State, VehicleFabricatorState.Idle);
         }
 
-        var pointsQuery = EntityQueryEnumerator<RMCVehicleFabricatorPointsComponent>();
+        var pointsQuery = EntityQueryEnumerator<VehicleFabricatorPointsComponent>();
         while (pointsQuery.MoveNext(out var pointsId, out var points))
         {
             if (_gainEvery <= TimeSpan.Zero)
@@ -234,6 +234,6 @@ public sealed class RMCVehicleFabricatorSystem : EntitySystem
 }
 
 [Serializable, NetSerializable]
-public sealed partial class RMCVehicleFabricatoreRecycleDoafterEvent : SimpleDoAfterEvent
+public sealed partial class VehicleFabricatoreRecycleDoafterEvent : SimpleDoAfterEvent
 {
 }

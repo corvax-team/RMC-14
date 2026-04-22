@@ -1,4 +1,4 @@
-﻿<fabricator:RMCVehicleFabricatorWindow
+﻿<fabricator:VehicleFabricatorWindow
     xmlns="https://spacestation14.io"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:fabricator="clr-namespace:Content.Client._CCM.Vehicle.Fabricator.Fabricator"
@@ -118,4 +118,4 @@
             </BoxContainer>
         </BoxContainer>
     </PanelContainer>
-</fabricator:RMCVehicleFabricatorWindow>
+</fabricator:VehicleFabricatorWindow>

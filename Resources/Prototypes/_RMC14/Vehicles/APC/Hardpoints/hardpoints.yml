@@ -25,7 +25,7 @@
   - type: HardpointIntegrity
     maxIntegrity: 500
   - type: VehicleWheelItem
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     cost: 200
     category: Chassis
     vehicle: APC
@@ -73,7 +73,7 @@
     useAimDirection: true
   - type: HardpointVisual
     vehicleState: frontalcannon_0
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     cost: 600
     category: Primary
     vehicle: APC
@@ -129,7 +129,7 @@
 
   - type: HardpointVisual
     vehicleState: dualcannon_0
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     cost: 800
     category: Primary
     vehicle: APC
@@ -152,7 +152,7 @@
     maxIntegrity: 100
   - type: HardpointVisual
     vehicleState: comms_relay_0
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     cost: 300
     category: Support
     vehicle: APC
@@ -208,7 +208,7 @@
     useAimDirection: true
   - type: HardpointVisual
     vehicleState: flare_launcher_0
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     cost: 300
     category: Support
     vehicle: APC
@@ -231,7 +231,7 @@
     maxIntegrity: 100
   - type: HardpointVisual
     vehicleState: freight_0
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     cost: 150
     category: Support
     vehicle: APC
@@ -291,7 +291,7 @@
     muzzleOffset: "0,0"
     angleOffset: 90
     useAimDirection: true
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     cost: 400
     category: Secondary
     vehicle: APC
@@ -309,7 +309,7 @@
     muzzleOffset: "0,0"
     angleOffset: -90
     useAimDirection: true
-  - type: RMCVehicleFabricatorPrintable # CCM14
+  - type: VehicleFabricatorPrintable # CCM14
     cost: 400
     category: Secondary
     vehicle: APC

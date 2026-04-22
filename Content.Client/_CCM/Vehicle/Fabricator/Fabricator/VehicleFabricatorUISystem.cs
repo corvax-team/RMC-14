@@ -2,22 +2,22 @@
 
 namespace Content.Client._CCM.Vehicle.Fabricator.Fabricator;
 
-public sealed class RMCVehicleFabricatorUISystem : EntitySystem
+public sealed class VehicleFabricatorUISystem : EntitySystem
 {
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<RMCVehicleFabricatorComponent, AfterAutoHandleStateEvent>(OnFabricatorState);
+        SubscribeLocalEvent<VehicleFabricatorComponent, AfterAutoHandleStateEvent>(OnFabricatorState);
     }
 
-    private void OnFabricatorState(Entity<RMCVehicleFabricatorComponent> ent, ref AfterAutoHandleStateEvent args)
+    private void OnFabricatorState(Entity<VehicleFabricatorComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         if (!TryComp(ent, out UserInterfaceComponent? ui))
             return;
 
         foreach (var open in ui.ClientOpenInterfaces.Values)
         {
-            if (open is RMCVehicleFabricatorBui bui)
+            if (open is VehicleFabricatorBui bui)
                 bui.Refresh();
         }
     }
