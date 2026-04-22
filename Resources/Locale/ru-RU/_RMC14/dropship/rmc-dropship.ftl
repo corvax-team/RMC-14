@@ -25,7 +25,7 @@ rmc-dropship-weapons-weapon-selected-ammo =
     Снаряды: { $rounds } / { $maxRounds }
 rmc-dropship-weapons-target-strike =
     ЗАХВАТ ЦЕЛИ
-
+    
     Режим удара: { $mode }
     Конфиг. удара: { $weapon }
     Выбранная цель: { $target }
@@ -115,8 +115,8 @@ rmc-dropship-equipment-destroyed = УНИЧТОЖЕНО
 rmc-dropship-launch-bay-screen-text = LAG-14 Внутренняя пусковая установка турелей
 rmc-dropship-launch-bay-screen-text-loaded =
     LAG-14 Внутренняя пусковая установка турелей
-
+    
     Загружено: { $loaded }
-
+    
     Боеприпасы: { $current } / { $max }
-rmc-dropship-launch-alarm-xeno-shutdown = Мы кромсаем {$console}, заставляя его замолкнуть!
+rmc-dropship-launch-alarm-xeno-shutdown = Мы кромсаем { $console }, заставляя его замолкнуть!

@@ -9,11 +9,11 @@
     group: CMJobsEngineering
     time: 32400 # 9 hours. CCM14 role timers. RMC: 72000 # 20 hours
   ranks:
-    RMCRankFirstLT:
+    RMCRankNavyLieutenantJuniorGrade: #CCM14
     - !type:RoleTimeRequirement
       role: CMJobChiefEngineer
       time: 252000 # 70 hours
-    RMCRankSecondLT: []
+    RMCRankNavyEnsign: [] #CCM14
   weight: 5
   startingGear: CMGearChiefEngineer
   icon: "CMJobIconChiefEngineer"

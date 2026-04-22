@@ -176,6 +176,8 @@
     nightmareScenarios:
     - scenarioName: panic_room_hold
       scenarioProbability: 0.1
+    - scenarioName: none # 90% chance of regular surv. Reduce to 80% (0.8) once CLF survs are in.
+      scenarioProbability: 0.9
     survivorJobVariants: # Civ survivor is default one
       CMSurvivorCorporate:
       - RMCSurvivorShivasCorporateLiaison: -1
@@ -372,6 +374,9 @@
     
      Авторизовано: капитан Леон Гранц."
     minPlayers: 30 # CCM14-mappool
+    nightmareScenarios: # 100% chance of regular survivors, reduce to 0.9 once CLF survs are in
+    - scenarioName: none
+      scenarioProbability: 1
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
     - CMSurvivor: -1
@@ -412,6 +417,9 @@
     
      Авторизовано: капитан Леон Гранц."
     minPlayers: 25 # CCM14-mappool
+    nightmareScenarios:
+    - scenarioName: none # Reduce this to 0.9 once CLF survivors are in at 0.1
+      scenarioProbability: 1
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingKutjevo
     survivorJobVariants:

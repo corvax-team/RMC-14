@@ -27,3 +27,6 @@ ent-RMCBoxMRETSEEmpty = коробка ОРП (x12)
 ent-RMCBoxMRETSE = { ent-RMCBoxMRETSEEmpty }
     .desc = Коробка пайков. Питательно, но не вкусно.
     .suffix = Заполненная, Империя Миртана
+ent-RMCBoxMREWEYA = box of WEYA-brand Ration Packs (x12)
+    .desc = A box of Weston-Yamada Ration Packs. Often found on Company-owned colonies.
+    .suffix = Filled, WEYA

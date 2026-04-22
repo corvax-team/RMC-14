@@ -40,3 +40,4 @@ wizard-role-greeting =
 wizard-round-end-name = маг
 
 ## TODO: Wizard Apprentice (Coming sometime post-wizard release)
+

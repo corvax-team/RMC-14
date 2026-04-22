@@ -37,3 +37,5 @@ ent-RMCSpawnerCorpseWeYaManager = Corpse Spawner - Corporate Supervisor
     .desc = { ent-RMCSpawnerCorpse.desc }
 ent-RMCSpawnerCorpseCLF = Corpse Spawner - CLF Soldier
     .desc = { ent-RMCSpawnerCorpse.desc }
+ent-RMCSpawnerCorpseRussian = Corpse Spawner - Russian
+    .desc = { ent-RMCSpawnerCorpse.desc }

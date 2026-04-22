@@ -1,5 +1,6 @@
 ent-CMXenoParasiteBase = Паразит
     .desc = { ent-CMXenoUndeveloped.desc }
+    .suffix = Паразит
 ent-CMXenoParasite = Лицехват
     .desc = { ent-CMXenoUndeveloped.desc }
 ent-RMCXenoParasiteWatcher = { ent-CMXenoParasiteBase }

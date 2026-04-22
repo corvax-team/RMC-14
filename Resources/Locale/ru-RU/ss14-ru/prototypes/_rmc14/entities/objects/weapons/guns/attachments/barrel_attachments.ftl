@@ -40,3 +40,5 @@ ent-RMCAttachmentMatebaMarksmanGolden = { ent-RMCAttachmentMatebaStandard }
     .desc = { ent-RMCAttachmentMatebaStandard.desc }
 ent-RMCAttachmentMatebaSnubNoseGolden = { ent-RMCAttachmentMatebaSnubNose }
     .desc = { ent-RMCAttachmentMatebaSnubNose.desc }
+ent-RMCAttachmentL49Barrel = L49 standoff device
+    .desc = How are you even seeing this?

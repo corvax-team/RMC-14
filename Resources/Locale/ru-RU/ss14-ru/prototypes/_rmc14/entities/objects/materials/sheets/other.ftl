@@ -1,4 +1,4 @@
-ent-CMSheetPhoron = форон
+ent-CMSheetPhoron = плазма
     .suffix = Полный
     .desc = { ent-SheetOtherBase.desc }
 ent-CMSheetPhoron15 = { ent-CMSheetPhoron }

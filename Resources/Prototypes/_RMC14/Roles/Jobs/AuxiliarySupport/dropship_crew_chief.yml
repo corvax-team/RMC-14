@@ -15,19 +15,19 @@
 #    time: 3600 # 1 hours
 # CCM14 role timers [remove/end]
   ranks:
-    RMCRankWarrantOfficer:
+    RMCRankNavyChiefPettyOfficer: #CCM14
     - !type:RoleTimeRequirement
       role: CMJobDropshipCrewChief
       time: 630000 # 175 hours
-    RMCRankStaffSergeant:
+    RMCRankNavyPettyOfficer1stClass: #CCM14
     - !type:RoleTimeRequirement
       role: CMJobDropshipCrewChief
       time: 252000 # 70 hours
-    RMCRankSergeant:
+    RMCRankNavyPettyOfficer2ndClass: #CCM14
     - !type:RoleTimeRequirement
       role: CMJobDropshipCrewChief
       time: 90000 # 25 hours
-    RMCRankCorporal: []
+    RMCRankNavyPettyOfficer3rdClass: [] #CCM14
   startingGear: CMGearDCC
   icon: "CMJobIconDCC"
   joinNotifyCrew: false

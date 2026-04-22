@@ -18,6 +18,3 @@ ent-RMCBeltMedicBagPMC = WY-TM625 pattern medical bag
 ent-RMCBeltMedicBagPMCFilled = { ent-RMCBeltMedicBagPMC }
     .suffix = Filled
     .desc = { ent-RMCBeltMedicBagPMC.desc }
-ent-RMCBeltMedicBagRoyal = { ent-CMBeltMedicBag }
-    .suffix = Filled, Royal
-    .desc = { ent-CMBeltMedicBag.desc }

@@ -1,8 +1,11 @@
-ent-RMCJumpsuitTSEPA = униформа ПС ОПЗ
-    .desc = Стандартная форма офицера Полицейских Сил Объединённого Правительства Земли.
+ent-RMCJumpsuitTSEPA = униформа МВД
+    .desc = Стандартная форма офицера Министерства Внутренних Дел Объединённого Правительства Земли.
 ent-RMCJumpsuitMarineRoyal = { ent-JumpsuitMarine }
     .suffix = Заполнена, Имперская
     .desc = { ent-JumpsuitMarine.desc }
+ent-RMCJumpsuitMarineRoyalL189 = { ent-RMCJumpsuitMarineRoyal }
+    .suffix = Заполнена, Имперская, L189
+    .desc = { ent-RMCJumpsuitMarineRoyal.desc }
 ent-RMCJumpsuitMarineRoyalMK80 = { ent-RMCJumpsuitMarineRoyal }
     .suffix = Заполнена, Имперская, MK80
     .desc = { ent-RMCJumpsuitMarineRoyal.desc }

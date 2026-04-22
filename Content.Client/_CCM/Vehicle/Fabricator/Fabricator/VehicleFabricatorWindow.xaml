@@ -1,0 +1,121 @@
+﻿<fabricator:VehicleFabricatorWindow
+    xmlns="https://spacestation14.io"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:fabricator="clr-namespace:Content.Client._CCM.Vehicle.Fabricator.Fabricator"
+    Title="{Loc 'rmc-vehicle-fabricator-window-title'}"
+    MinSize="1100 600">
+    <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat
+                BorderColor="#6BC7FF"
+                BorderThickness="2"
+                BackgroundColor="#070E18" />
+        </PanelContainer.PanelOverride>
+
+        <BoxContainer Orientation="Vertical" Margin="14" SeparationOverride="12" HorizontalExpand="True" VerticalExpand="True">
+            <!-- Header: vehicle preview (left) + points/printing (right) -->
+            <BoxContainer Orientation="Horizontal" MinSize="0 100" SeparationOverride="12" HorizontalExpand="True">
+                <!-- Left: Vehicle preview -->
+                <PanelContainer MinSize="100 0">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat
+                            BorderColor="#2D5E8E"
+                            BorderThickness="2"
+                            BackgroundColor="#0D2235" />
+                    </PanelContainer.PanelOverride>
+                    <EntityPrototypeView
+                        Name="VehiclePreview"
+                        Access="Public"
+                        MinSize="96 96"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="2"/>
+                </PanelContainer>
+                <!-- Right: Points + Printing status -->
+                <PanelContainer HorizontalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat
+                            BorderColor="#2D5E8E"
+                            BorderThickness="2"
+                            BackgroundColor="#0D2235" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" Margin="10" SeparationOverride="4" HorizontalExpand="True" VerticalExpand="True">
+                        <Label Name="PointsLabel" Access="Public" HorizontalAlignment="Center"
+                               FontColorOverride="#6BC7FF" StyleClasses="LabelHeading"/>
+                        <Label Name="PrintingLabel" Access="Public" HorizontalAlignment="Center"
+                               FontColorOverride="#FF8C7A"/>
+                        <ProgressBar Name="PrintingBar" Access="Public"
+                                     MinValue="0" MaxValue="1" Value="0"
+                                     MinSize="0 8"
+                                     HorizontalExpand="True"
+                                     Visible="False">
+                            <ProgressBar.ForegroundStyleBoxOverride>
+                                <graphics:StyleBoxFlat BackgroundColor="#53D188"/>
+                            </ProgressBar.ForegroundStyleBoxOverride>
+                        </ProgressBar>
+                    </BoxContainer>
+                </PanelContainer>
+            </BoxContainer>
+
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True" SeparationOverride="12">
+                <!-- Left: Vehicle & Category Selection -->
+                <PanelContainer MinSize="220 0">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat
+                            BorderColor="#2D5E8E"
+                            BorderThickness="2"
+                            BackgroundColor="#0D2235" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" Margin="10" SeparationOverride="6">
+                        <Label Text="{Loc 'rmc-vehicle-fabricator-vehicle-selection'}"
+                               HorizontalAlignment="Center" StyleClasses="LabelHeading"
+                               FontColorOverride="#C7D7EA"/>
+
+                        <Button Name="TankVehicleButton" Access="Public"
+                                Text="{Loc 'rmc-vehicle-fabricator-vehicle-tank'}" ToggleMode="True" />
+                        <Button Name="APCVehicleButton" Access="Public"
+                                Text="{Loc 'rmc-vehicle-fabricator-vehicle-apc'}" ToggleMode="True" />
+                        <Button Name="HumveeVehicleButton" Access="Public"
+                                Text="{Loc 'rmc-vehicle-fabricator-vehicle-humvee'}" ToggleMode="True" />
+
+                        <Control MinSize="0 6" />
+
+                        <Label Text="{Loc 'rmc-vehicle-fabricator-category-selection'}"
+                               HorizontalAlignment="Center" StyleClasses="LabelHeading"
+                               FontColorOverride="#C7D7EA"/>
+
+                        <Button Name="PrimaryCategoryButton" Access="Public"
+                                Text="{Loc 'rmc-vehicle-fabricator-category-primary'}" ToggleMode="True" />
+                        <Button Name="SecondaryCategoryButton" Access="Public"
+                                Text="{Loc 'rmc-vehicle-fabricator-category-secondary'}" ToggleMode="True" />
+                        <Button Name="ArmorCategoryButton" Access="Public"
+                                Text="{Loc 'rmc-vehicle-fabricator-category-armor'}" ToggleMode="True" />
+                        <Button Name="SupportCategoryButton" Access="Public"
+                                Text="{Loc 'rmc-vehicle-fabricator-category-support'}" ToggleMode="True" />
+                        <Button Name="ChassisCategoryButton" Access="Public"
+                                Text="{Loc 'rmc-vehicle-fabricator-category-chassis'}" ToggleMode="True" />
+                        <Button Name="AmmoCategoryButton" Access="Public"
+                                Text="{Loc 'rmc-vehicle-fabricator-category-ammo'}" ToggleMode="True" />
+                    </BoxContainer>
+                </PanelContainer>
+                <!-- Right: Printables List -->
+                <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat
+                            BorderColor="#1E3450"
+                            BorderThickness="1"
+                            BackgroundColor="#0B131F" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" Margin="10" SeparationOverride="6" HorizontalExpand="True" VerticalExpand="True">
+                        <RichTextLabel Name="CategoryTitleLabel" Access="Public"/>
+
+                        <ScrollContainer VerticalExpand="True" HorizontalExpand="True" Margin="4" HScrollEnabled="False">
+                            <BoxContainer Name="PrintablesContainer" Access="Public" Orientation="Vertical"
+                                          SeparationOverride="6" HorizontalExpand="True" Margin="4"/>
+                        </ScrollContainer>
+                    </BoxContainer>
+                </PanelContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </PanelContainer>
+</fabricator:VehicleFabricatorWindow>

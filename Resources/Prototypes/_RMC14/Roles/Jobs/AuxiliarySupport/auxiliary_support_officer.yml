@@ -25,11 +25,11 @@
 #    time: 3600 # 1 hour
 # CCM14 role timers [remove/end]
   ranks:
-    RMCRankCaptain:
+    RMCRankNavyLieutenant: #CCM14
     - !type:RoleTimeRequirement
       role: CMJobAuxiliarySupportOfficer
       time: 252000 # 70 hours
-    RMCRankFirstLT: []
+    RMCRankNavyLieutenantJuniorGrade: [] #CCM14
   weight: 5
   startingGear: CMGearASO
   icon: "CMJobIconASO"

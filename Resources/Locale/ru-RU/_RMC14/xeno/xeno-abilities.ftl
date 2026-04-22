@@ -51,7 +51,6 @@ rmc-xeno-evolution-failed-bad-location = Мы не можем эволюцион
 rmc-xeno-evolution-start-self = Мы начинаем извиваться и деформироваться.
 rmc-xeno-evolution-start-others = { $xeno } начинает извиваться и деформироваться.
 rmc-xeno-evolution-queen = Время пришло. Улью нужно, чтобы Королева откладывала яйца для начала эволюции.
-
 # Fortify
 cm-xeno-fortify-cant-headbutt = Мы не можем совершить Удар головой пока мы в Укреплении!
 cm-xeno-fortify-cant-rest = Мы не можем отдыхать пока мы в Укреплении!
@@ -71,6 +70,14 @@ cm-xeno-acid-not-corrodible = Мы не можем расплавить { $targe
 cm-xeno-acid-already-corroding = Едкая кислота уже нанесена на { $target }!
 rmc-xeno-acid-too-weak = { CAPITALIZE($target) } слишком прочен, чтобы наша слабая кислота могла его расплавить.
 rmc-xeno-acid-structure-unmeltable = Мы можем плавить только баррикады и предметы!
+rmc-acid-pickup-blocked = { CAPITALIZE(THE($target)) } покрыта едкой кислотой!
+rmc-acid-hole-already-weakened = Уже ослаблено.
+rmc-acid-hole-only-small-xenos = Только маленькие ксено могут пролезть через эту дыру.
+rmc-acid-hole-too-large = Мы слишком большие, чтобы протиснуться через эту дыру.
+rmc-acid-hole-wrong-side = Нам нужно подойти к дыре со стороны входа!
+rmc-acid-hole-no-exit = Там нет места, чтобы проползти.
+rmc-acid-hole-blocked = Что-то блокирует другую сторону.
+rmc-acid-hole-repair-blocked = Стена пробита и должна быть сначала залатана.
 # Paralyzing Slash
 cm-xeno-paralyzing-slash-activate = Наш следующий удар когтями введёт нейротоксин!
 cm-xeno-paralyzing-slash-expire = Мы ждали слишком долго, наш удар когтями больше не вводит нейротоксин!
@@ -83,11 +90,11 @@ cm-xeno-crippling-strike-hit = Мы значительно усилили наш
 # Pheromones
 rmc-xeno-pheromones-help =
     Феромоны дают усиление всем ксено в радиусе действия за счет расхода плазмы каждую секунду. Доступные усиления:
-
+    
     Неистовство (Красное) - Повышенная скорость бега и урон.
-
+    
     Защита (Зелёное) - Когда ксено находится в критическом состоянии, его запас критического здоровья повышен, а умирание из-за нахождения не на сорняках замедлено.
-
+    
     Восстановления (Синее) - Повышенное восстановление плазмы и здоровья.
 cm-xeno-choose-pheromones = Выбрать феромоны
 cm-pheromones-recovery = Восстановления

@@ -1,5 +1,5 @@
 ent-ActionRMCVehicleToggleView = Переключение вида
-    .desc = Переключение между вида снаружи и внутри транспорта.
+    .desc = Переключение между видами снаружи и внутри транспорта.
 ent-ActionRMCVehicleDeploy = Развёртывание транспорта
     .desc = Развёрнуть или свернуть транспорт.
 ent-ActionRMCVehicleLock = Закрыть транспорт

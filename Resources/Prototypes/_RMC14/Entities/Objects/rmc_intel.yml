@@ -183,7 +183,7 @@
           cost: 5
           events:
           - !type:TechUnlockVehicleEvent
-            unlock: RMCVehicleHumveeARC
+            unlock: VehicleHumveeARC
           - !type:TechAnnounceEvent
             author: УПРАВЛЕНИЕ АКТИВАМИ «ДАВИДА»
             message: Для данной операции санкционировано развёртывание системы БРК.
@@ -239,7 +239,7 @@
           cost: 10
           events:
           - !type:TechUnlockVehicleEvent
-            unlock: RMCVehicleTank
+            unlock: VehicleTank
           - !type:TechAnnounceEvent
             author: УПРАВЛЕНИЕ АКТИВАМИ «ДАВИДА»
             message: Для наземных операций разрешена поддержка тяжелой бронетехникой.
@@ -357,7 +357,7 @@
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: nuke
-  - type: RMCVehicleSupplyTech
+  - type: VehicleSupplyTech
 - type: Tag
   id: RMCIntelItem
 

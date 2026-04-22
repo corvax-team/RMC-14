@@ -1,8 +1,12 @@
+using System;
+using System.Collections.Generic;
 using System.Numerics;
-using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Vehicle.Components;
+using Content.Shared._RMC14.Vehicle;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Maths;
 
 namespace Content.Shared.Vehicle;
 
@@ -81,8 +85,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         {
             mover.IsPushMove = true;
             mover.PushDirection = inputDir;
-            if (mover.PushCooldown > 0f)
-                mover.NextPushTime = _timing.CurTime + TimeSpan.FromSeconds(mover.PushCooldown);
         }
 
         if (!hasInput && !mover.IsPushMove)
@@ -96,6 +98,13 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         var maxSpeed = GetModifiedMaxSpeed(uid, mover);
         var accelModifier = GetAccelerationModifier(uid);
+        if (hasInput && mover.PushImpulseSpeed > 0f)
+        {
+            var impulseSpeed = MathF.Min(mover.PushImpulseSpeed, maxSpeed);
+            if (mover.CurrentSpeed < impulseSpeed)
+                mover.CurrentSpeed = impulseSpeed;
+        }
+
         mover.CurrentSpeed = GridVehicleMotionSimulator.StepPushSpeed(
             MathF.Max(0f, mover.CurrentSpeed),
             maxSpeed,
@@ -122,6 +131,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             out var blocked);
         if (blocked)
             mover.CurrentSpeed = 0f;
+
+        if (moved && hasInput && mover.PushCooldown > 0f)
+            mover.NextPushTime = _timing.CurTime + TimeSpan.FromSeconds(mover.PushCooldown);
 
         return moved;
     }
@@ -361,14 +373,34 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         var forward = new Vector2(moveDir.X, moveDir.Y);
         var directTarget = mover.Position + forward * travel;
         var moved = false;
+        _directMoveBlockers.Clear();
+        var ignoredEntities = GetPushIgnoredEntities(uid, mover);
 
-        if (CanMoveContinuous(uid, mover, grid, directTarget, rotation, debugProbes: true))
+        if (CanMoveContinuous(uid, mover, grid, directTarget, rotation, debugProbes: CollisionDebugEnabled, blockers: _directMoveBlockers, ignoredEntities: ignoredEntities))
         {
             AddDebugMovementDecision(uid, grid, mover.Position, directTarget, forward, DebugMovementDecisionKind.DirectClear, true);
-            return TryMoveContinuous(uid, mover, grid, directTarget, rotation, out blocked);
+            return TryMoveKnownClear(uid, mover, grid, directTarget, rotation, out blocked, ignoredEntities: ignoredEntities);
         }
 
         AddDebugMovementDecision(uid, grid, mover.Position, directTarget, forward, DebugMovementDecisionKind.DirectBlocked, false);
+
+        if (TryGetBlockingMobBypassCorrection(
+                uid,
+                mover,
+                grid,
+                gridComp,
+                moveDir,
+                rotation,
+                directTarget,
+                frameTime,
+                _directMoveBlockers,
+                ignoredEntities,
+                out var mobBypassCorrection))
+        {
+            moved = TryApplyLateralCorrection(uid, mover, grid, moveDir, rotation, mobBypassCorrection, ignoredEntities);
+            if (moved)
+                return true;
+        }
 
         if (TryGetLaneCorrection(
                 uid,
@@ -379,32 +411,16 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 rotation,
                 directTarget,
                 frameTime,
+                ignoredEntities,
                 out var correction))
         {
-            var lateralTarget = SetLateralCoordinate(
-                mover.Position,
-                moveDir,
-                GetLateralCoordinate(mover.Position, moveDir) + correction);
-
-            if ((lateralTarget - mover.Position).LengthSquared() > MinMoveDistance * MinMoveDistance)
-            {
-                var lateralStart = mover.Position;
-                var lateralDirection = lateralTarget - lateralStart;
-                moved = TryMoveContinuous(uid, mover, grid, lateralTarget, rotation, out _, applyBlockEffects: false, debugProbes: false);
-                AddDebugMovementDecision(
-                    uid,
-                    grid,
-                    lateralStart,
-                    lateralTarget,
-                    lateralDirection,
-                    moved ? DebugMovementDecisionKind.LaneCorrection : DebugMovementDecisionKind.LaneCorrectionFailed,
-                    moved);
-            }
+            moved = TryApplyLateralCorrection(uid, mover, grid, moveDir, rotation, correction, ignoredEntities);
         }
 
         var forwardStart = mover.Position;
         var forwardTarget = mover.Position + forward * travel;
-        var forwardMoved = TryMoveContinuous(uid, mover, grid, forwardTarget, rotation, out blocked);
+        var forwardMoved = TryMoveContinuous(uid, mover, grid, forwardTarget, rotation, out blocked, ignoredEntities: ignoredEntities);
+
         AddDebugMovementDecision(
             uid,
             grid,
@@ -416,6 +432,38 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return moved || forwardMoved;
     }
 
+    private bool TryApplyLateralCorrection(
+        EntityUid uid,
+        GridVehicleMoverComponent mover,
+        EntityUid grid,
+        Vector2i moveDir,
+        Angle? rotation,
+        float correction,
+        HashSet<EntityUid>? ignoredEntities)
+    {
+        var lateralTarget = SetLateralCoordinate(
+            mover.Position,
+            moveDir,
+            GetLateralCoordinate(mover.Position, moveDir) + correction);
+
+        if ((lateralTarget - mover.Position).LengthSquared() <= MinMoveDistance * MinMoveDistance)
+            return false;
+
+        var lateralStart = mover.Position;
+        var lateralDirection = lateralTarget - lateralStart;
+        var moved = TryMoveContinuous(uid, mover, grid, lateralTarget, rotation, out _, applyBlockEffects: false, debugProbes: false, ignoredEntities: ignoredEntities);
+        AddDebugMovementDecision(
+            uid,
+            grid,
+            lateralStart,
+            lateralTarget,
+            lateralDirection,
+            moved ? DebugMovementDecisionKind.LaneCorrection : DebugMovementDecisionKind.LaneCorrectionFailed,
+            moved);
+
+        return moved;
+    }
+
     private static void AddDebugMovementDecision(
         EntityUid uid,
         EntityUid grid,
@@ -425,6 +473,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         DebugMovementDecisionKind kind,
         bool success)
     {
+        if (!MovementDebugEnabled)
+            return;
+
         if (moveDirection.LengthSquared() > 0.0001f)
             moveDirection = Vector2.Normalize(moveDirection);
         else
@@ -440,6 +491,17 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         Vector2 target,
         Angle? rotation,
         bool debugProbes)
+        => CanMoveContinuous(uid, mover, grid, target, rotation, debugProbes, blockers: null, ignoredEntities: null);
+
+    private bool CanMoveContinuous(
+        EntityUid uid,
+        GridVehicleMoverComponent mover,
+        EntityUid grid,
+        Vector2 target,
+        Angle? rotation,
+        bool debugProbes,
+        HashSet<EntityUid>? blockers,
+        HashSet<EntityUid>? ignoredEntities = null)
     {
         var start = mover.Position;
         var delta = target - start;
@@ -453,11 +515,111 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         for (var i = 1; i <= steps; i++)
         {
             var candidate = start + delta * (i / (float) steps);
-            if (!CanOccupyTransform(uid, mover, grid, candidate, rotation, Clearance, applyEffects: false, debug: debugProbes))
+            if (!CanOccupyTransform(uid, mover, grid, candidate, rotation, Clearance, applyEffects: false, debug: debugProbes, blockers: blockers, ignoredEntities: ignoredEntities))
                 return false;
         }
 
         return true;
+    }
+
+    private bool TryGetBlockingMobBypassCorrection(
+        EntityUid uid,
+        GridVehicleMoverComponent mover,
+        EntityUid grid,
+        MapGridComponent gridComp,
+        Vector2i moveDir,
+        Angle? rotation,
+        Vector2 target,
+        float frameTime,
+        HashSet<EntityUid> directBlockers,
+        HashSet<EntityUid>? ignoredEntities,
+        out float correction)
+    {
+        correction = 0f;
+
+        if (!HasBlockingVehicleMob(mover, directBlockers))
+            return false;
+
+        if (!TryFindBlockingMobBypassOffset(uid, mover, grid, gridComp, moveDir, rotation, target, ignoredEntities, out var laneOffset))
+            return false;
+
+        return TryGetLateralCorrection(mover, grid, gridComp, moveDir, target, laneOffset, frameTime, out correction);
+    }
+
+    private bool TryFindBlockingMobBypassOffset(
+        EntityUid uid,
+        GridVehicleMoverComponent mover,
+        EntityUid grid,
+        MapGridComponent gridComp,
+        Vector2i moveDir,
+        Angle? rotation,
+        Vector2 target,
+        HashSet<EntityUid>? ignoredEntities,
+        out float laneOffset)
+    {
+        laneOffset = 0f;
+        var limit = Math.Clamp(MathF.Max(mover.TileOffsetLimit, mover.BlockingMobBypassNudgeLimit), 0f, 3f);
+        if (limit <= 0f || moveDir == Vector2i.Zero)
+            return false;
+
+        var configuredStep = mover.BlockingMobBypassNudgeStep > 0f
+            ? mover.BlockingMobBypassNudgeStep
+            : mover.TileOffsetStep;
+        var step = Math.Clamp(configuredStep, 0.01f, limit);
+        var targetTile = GetTile(grid, gridComp, target);
+        var center = GetTileCenter(targetTile);
+        var centerLateral = GetLateralCoordinate(center, moveDir);
+        var baseOffset = Math.Clamp(GetLateralCoordinate(target, moveDir) - centerLateral, -limit, limit);
+        var lookahead = Math.Max(1, mover.TileOffsetLookahead);
+        var sampleSteps = (int) MathF.Ceiling(limit / step);
+        var lastPositiveOffset = float.NaN;
+        var lastNegativeOffset = float.NaN;
+
+        for (var i = 1; i <= sampleSteps; i++)
+        {
+            var distance = MathF.Min(i * step, limit);
+
+            if (TryBlockingMobBypassOffset(uid, mover, grid, gridComp, moveDir, rotation, target, baseOffset + distance, limit, centerLateral, lookahead, ignoredEntities, ref lastPositiveOffset, out laneOffset))
+                return true;
+
+            if (TryBlockingMobBypassOffset(uid, mover, grid, gridComp, moveDir, rotation, target, baseOffset - distance, limit, centerLateral, lookahead, ignoredEntities, ref lastNegativeOffset, out laneOffset))
+                return true;
+        }
+
+        return false;
+    }
+
+    private bool TryBlockingMobBypassOffset(
+        EntityUid uid,
+        GridVehicleMoverComponent mover,
+        EntityUid grid,
+        MapGridComponent gridComp,
+        Vector2i moveDir,
+        Angle? rotation,
+        Vector2 target,
+        float offset,
+        float limit,
+        float centerLateral,
+        int lookahead,
+        HashSet<EntityUid>? ignoredEntities,
+        ref float lastOffset,
+        out float laneOffset)
+    {
+        laneOffset = Math.Clamp(offset, -limit, limit);
+        if (MathF.Abs(laneOffset - lastOffset) <= 0.001f)
+            return false;
+
+        lastOffset = laneOffset;
+
+        var desiredLateral = centerLateral + laneOffset;
+        var lateralTarget = SetLateralCoordinate(mover.Position, moveDir, desiredLateral);
+        if ((lateralTarget - mover.Position).LengthSquared() <= MinMoveDistance * MinMoveDistance)
+            return false;
+
+        if (!CanMoveContinuous(uid, mover, grid, lateralTarget, rotation, debugProbes: false, blockers: null, ignoredEntities: ignoredEntities))
+            return false;
+
+        return CanOccupyMoveLane(uid, mover, grid, gridComp, moveDir, rotation, target, laneOffset, lookahead, ignoredEntities);
     }
 
     private bool TryGetLaneCorrection(
@@ -469,20 +631,37 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         Angle? rotation,
         Vector2 target,
         float frameTime,
+        HashSet<EntityUid>? ignoredEntities,
         out float correction)
     {
         correction = 0f;
 
-        if (!TryFindBestLaneOffset(uid, mover, grid, gridComp, moveDir, rotation, target, out var laneOffset))
+        if (!TryFindBestLaneOffset(uid, mover, grid, gridComp, moveDir, rotation, target, ignoredEntities, out var laneOffset))
             return false;
 
+        return TryGetLateralCorrection(mover, grid, gridComp, moveDir, target, laneOffset, frameTime, out correction);
+    }
+
+    private bool TryGetLateralCorrection(
+        GridVehicleMoverComponent mover,
+        EntityUid grid,
+        MapGridComponent gridComp,
+        Vector2i moveDir,
+        Vector2 target,
+        float laneOffset,
+        float frameTime,
+        out float correction)
+    {
         var targetTile = GetTile(grid, gridComp, target);
         var center = GetTileCenter(targetTile);
         var currentLateral = GetLateralCoordinate(mover.Position, moveDir);
         var desiredLateral = GetLateralCoordinate(center, moveDir) + laneOffset;
         var correctionSpeed = MathF.Max(0f, mover.LaneCorrectionSpeed);
         if (correctionSpeed <= 0f)
+        {
+            correction = 0f;
             return false;
+        }
 
         var maxCorrection = correctionSpeed * frameTime;
         correction = Math.Clamp(desiredLateral - currentLateral, -maxCorrection, maxCorrection);
@@ -497,6 +676,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         Vector2i moveDir,
         Angle? rotation,
         Vector2 target,
+        HashSet<EntityUid>? ignoredEntities,
         out float laneOffset)
     {
         laneOffset = 0f;
@@ -523,7 +703,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         for (var i = -sampleSteps; i <= sampleSteps; i++)
         {
             var offset = Math.Clamp(i * step, -limit, limit);
-            var valid = CanOccupyMoveLane(uid, mover, grid, gridComp, moveDir, rotation, target, offset, lookahead);
+            var valid = CanOccupyMoveLane(uid, mover, grid, gridComp, moveDir, rotation, target, offset, lookahead, ignoredEntities);
             if (valid)
             {
                 if (!inLane)
@@ -566,7 +746,8 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         Angle? rotation,
         Vector2 target,
         float offset,
-        int lookahead)
+        int lookahead,
+        HashSet<EntityUid>? ignoredEntities)
     {
         var forward = new Vector2(moveDir.X, moveDir.Y);
         var tileSize = MathF.Max(1f, gridComp.TileSize);
@@ -579,7 +760,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             var lateral = GetLateralCoordinate(center, moveDir) + offset;
             sample = SetLateralCoordinate(sample, moveDir, lateral);
 
-            if (!CanOccupyTransform(uid, mover, grid, sample, rotation, Clearance, applyEffects: false, debug: false))
+            if (!CanOccupyTransform(uid, mover, grid, sample, rotation, Clearance, applyEffects: false, debug: false, ignoredEntities: ignoredEntities))
                 return false;
         }
 
@@ -594,7 +775,8 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         Angle? rotation,
         out bool blocked,
         bool applyBlockEffects = true,
-        bool debugProbes = true)
+        bool debugProbes = true,
+        HashSet<EntityUid>? ignoredEntities = null)
     {
         blocked = false;
         var start = mover.Position;
@@ -610,19 +792,11 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         for (var i = 1; i <= steps; i++)
         {
             var candidate = start + delta * (i / (float) steps);
-
-            if (!CanOccupyTransform(uid, mover, grid, candidate, rotation, Clearance, applyEffects: false, debug: debugProbes))
+            if (!CanOccupyTransform(uid, mover, grid, candidate, rotation, Clearance, applyEffects: false, debug: debugProbes, ignoredEntities: ignoredEntities))
             {
                 if (applyBlockEffects)
-                    CanOccupyTransform(uid, mover, grid, candidate, rotation, Clearance, applyEffects: true, debug: false);
+                    CanOccupyTransform(uid, mover, grid, candidate, rotation, Clearance, applyEffects: true, debug: false, ignoredEntities: ignoredEntities);
 
-                mover.Position = lastGood;
-                blocked = true;
-                return lastGood != start;
-            }
-
-            if (!CanOccupyTransform(uid, mover, grid, candidate, rotation, Clearance, applyEffects: true, debug: false))
-            {
                 mover.Position = lastGood;
                 blocked = true;
                 return lastGood != start;
@@ -631,7 +805,38 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             lastGood = candidate;
         }
 
+        if (applyBlockEffects &&
+            !CanOccupyTransform(uid, mover, grid, lastGood, rotation, Clearance, applyEffects: true, debug: false, ignoredEntities: ignoredEntities))
+        {
+            mover.Position = start;
+            blocked = true;
+            return false;
+        }
+
         mover.Position = lastGood;
+        return true;
+    }
+
+    private bool TryMoveKnownClear(
+        EntityUid uid,
+        GridVehicleMoverComponent mover,
+        EntityUid grid,
+        Vector2 target,
+        Angle? rotation,
+        out bool blocked,
+        bool applyBlockEffects = true,
+        HashSet<EntityUid>? ignoredEntities = null)
+    {
+        blocked = false;
+
+        if (applyBlockEffects &&
+            !CanOccupyTransform(uid, mover, grid, target, rotation, Clearance, applyEffects: true, debug: false, ignoredEntities: ignoredEntities))
+        {
+            blocked = true;
+            return false;
+        }
+
+        mover.Position = target;
         return true;
     }
 
@@ -762,9 +967,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     {
         var maxSpeed = mover.MaxSpeed * GetSmashSlowdownMultiplier(mover);
 
-        if (TryComp<RMCVehicleOverchargeComponent>(uid, out var overcharge) && _timing.CurTime < overcharge.ActiveUntil)
+        if (TryComp<VehicleOverchargeComponent>(uid, out var overcharge) && _timing.CurTime < overcharge.ActiveUntil)
             maxSpeed *= overcharge.SpeedMultiplier;
-        if (TryComp<RMCVehicleSpeedModifierComponent>(uid, out var speedMod))
+        if (TryComp<VehicleSpeedModifierComponent>(uid, out var speedMod))
             maxSpeed *= speedMod.SpeedMultiplier;
 
         return maxSpeed;
@@ -774,9 +979,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     {
         var maxSpeed = mover.MaxReverseSpeed * GetSmashSlowdownMultiplier(mover);
 
-        if (TryComp<RMCVehicleOverchargeComponent>(uid, out var overcharge) && _timing.CurTime < overcharge.ActiveUntil)
+        if (TryComp<VehicleOverchargeComponent>(uid, out var overcharge) && _timing.CurTime < overcharge.ActiveUntil)
             maxSpeed *= overcharge.SpeedMultiplier;
-        if (TryComp<RMCVehicleSpeedModifierComponent>(uid, out var speedMod))
+        if (TryComp<VehicleSpeedModifierComponent>(uid, out var speedMod))
             maxSpeed *= speedMod.SpeedMultiplier;
 
         return maxSpeed;
@@ -784,7 +989,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
     private float GetAccelerationModifier(EntityUid uid)
     {
-        if (TryComp<RMCVehicleAccelerationModifierComponent>(uid, out var accelMod))
+        if (TryComp<VehicleAccelerationModifierComponent>(uid, out var accelMod))
             return MathF.Max(0.05f, accelMod.AccelerationMultiplier);
 
         return 1f;
@@ -834,6 +1039,25 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return new Vector2(tile.X + 0.5f, tile.Y + 0.5f);
     }
 
+    private HashSet<EntityUid>? GetPushIgnoredEntities(EntityUid uid, GridVehicleMoverComponent mover)
+    {
+        if (!mover.IsPushMove)
+            return null;
+
+        if (!_activeXenoPushers.TryGetValue(uid, out var pusher))
+            return null;
+
+        if (!pusher.IsValid() || TerminatingOrDeleted(pusher))
+        {
+            _activeXenoPushers.Remove(uid);
+            return null;
+        }
+
+        _pushIgnoredEntities.Clear();
+        _pushIgnoredEntities.Add(pusher);
+        return _pushIgnoredEntities;
+    }
+
     private bool CanApplyTurn(GridVehicleMoverComponent mover)
     {
         if (mover.TurnDelay <= 0f)
@@ -870,7 +1094,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
     private void PlayRunningSound(EntityUid uid)
     {
-        if (!TryComp<RMCVehicleSoundComponent>(uid, out var sound))
+        if (!TryComp<VehicleSoundComponent>(uid, out var sound))
             return;
 
         if (sound.RunningSound == null)
@@ -904,7 +1128,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         return Math.Clamp(mover.SmashSlowdownMultiplier, 0f, 1f);
     }
 
-    private void ApplySmashSlowdown(EntityUid vehicle, GridVehicleMoverComponent mover, RMCVehicleSmashableComponent smashable)
+    private void ApplySmashSlowdown(EntityUid vehicle, GridVehicleMoverComponent mover, VehicleSmashableComponent smashable)
     {
         if (smashable.SlowdownDuration <= 0f || smashable.SlowdownMultiplier >= 1f)
             return;
