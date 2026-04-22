@@ -1294,13 +1294,12 @@ public sealed class VehicleSupplySystem : EntitySystem
         return false;
     }
 
+    // CCM14-start: Always use localized name from prototype
     private string GetEntryName(VehicleSupplyEntry entry)
     {
-        if (!string.IsNullOrWhiteSpace(entry.Name))
-            return entry.Name;
-
         return GetPrototypeName(entry.Vehicle.Id);
     }
+    // CCM14-end
 
     private string GetPrototypeName(string protoId)
     {

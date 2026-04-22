@@ -30,7 +30,7 @@
                 </PanelContainer.PanelOverride>
 
                 <BoxContainer Orientation="Vertical" SeparationOverride="6" Margin="10" HorizontalExpand="True" VerticalExpand="True">
-                    <Label Text="Доступная техника" FontColorOverride="#C7D7EA"/>
+                    <Label Text="{Loc 'rmc-vehicle-supply-available'}" FontColorOverride="#C7D7EA"/>
                     <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
                         <BoxContainer Name="AvailableRows" Access="Public" Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True" />
                     </ScrollContainer>
@@ -46,7 +46,7 @@
                     </PanelContainer.PanelOverride>
 
                     <BoxContainer Orientation="Vertical" SeparationOverride="4" Margin="8" HorizontalExpand="True" VerticalExpand="True">
-                        <Label Name="PreviewTitle" Access="Public" Text="Транспорт" FontColorOverride="#C7D7EA"/>
+                        <Label Name="PreviewTitle" Access="Public" Text="{Loc 'rmc-vehicle-supply-transport'}" FontColorOverride="#C7D7EA"/>
                         <PanelContainer Name="VehiclePreviewContainer" HorizontalExpand="True" VerticalExpand="True">
                             <ui:EntityPrototypeView Name="VehiclePreview"
                                                     MinSize="120 120"
@@ -61,8 +61,8 @@
             </BoxContainer>
 
             <BoxContainer Orientation="Horizontal" SeparationOverride="6">
-                <rmcui:HardpointButton Name="RaiseButton" Access="Public" LabelText="Поднять" MinSize="98 26" />
-                <rmcui:HardpointButton Name="LowerButton" Access="Public" LabelText="Опустить" MinSize="98 26" />
+                <rmcui:HardpointButton Name="RaiseButton" Access="Public" LabelText="{Loc 'rmc-vehicle-supply-raise'}" MinSize="98 26" />
+                <rmcui:HardpointButton Name="LowerButton" Access="Public" LabelText="{Loc 'rmc-vehicle-supply-lower'}" MinSize="98 26" />
                 <BoxContainer Name="LiftActivity" Access="Public" Orientation="Horizontal" SeparationOverride="4" VerticalAlignment="Center" Margin="6,0,0,0">
                     <PanelContainer Name="LiftDot1" Access="Public" MinSize="8 8" MaxSize="8 8" />
                     <PanelContainer Name="LiftDot2" Access="Public" MinSize="8 8" MaxSize="8 8" />

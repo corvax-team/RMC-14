@@ -59,7 +59,7 @@
     useAimDirection: true
   - type: HardpointVisual
     vehicleState: ltb_cannon_0
-  - type: VehicleFabricatorPrintable
+  - type: VehicleFabricatorPrintable # CCM14
     cost: 1000
     category: Primary
     vehicle: Tank
@@ -146,7 +146,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: ltaaap_minigun_0
-  - type: VehicleFabricatorPrintable
+  - type: VehicleFabricatorPrintable # CCM14
     cost: 800
     category: Primary
     vehicle: Tank
@@ -214,7 +214,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: ace_autocannon_0
-  - type: VehicleFabricatorPrintable
+  - type: VehicleFabricatorPrintable # CCM14
     cost: 800
     category: Primary
     vehicle: Tank
@@ -284,7 +284,7 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: drgn_flamer_0
-  - type: VehicleFabricatorPrintable
+  - type: VehicleFabricatorPrintable # CCM14
     cost: 600
     category: Primary
     vehicle: Tank

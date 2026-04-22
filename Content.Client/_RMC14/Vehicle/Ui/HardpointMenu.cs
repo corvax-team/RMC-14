@@ -226,9 +226,11 @@ public sealed partial class HardpointMenu : FancyWindow
                 FontColorOverride = Color.FromHex("#E1EEFF")
             });
 
-            var slotLine = hardpoint.HasItem ? header : $"Slot: {header}";
+            // CCM14-start
+            var slotLine = hardpoint.HasItem ? header : $"{Loc.GetString("rmc-hardpoint-menu-slot-prefix")} {header}";
             if (parentSlot != null)
-                slotLine += $" | Turret: {parentSlot}";
+                slotLine += $" | {Loc.GetString("rmc-hardpoint-menu-turret-prefix")} {parentSlot}";
+            // CCM14-end
 
             centerColumn.AddChild(new Label
             {

@@ -184,6 +184,7 @@
     - back
   - type: ClothingIgnoreBlockBackpack
   - type: ClothingRequireEquipped
+    enabled: true
     whitelist:
       components:
       - SmartGun

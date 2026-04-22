@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Skills;
