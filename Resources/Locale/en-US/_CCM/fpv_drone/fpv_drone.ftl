@@ -17,7 +17,6 @@ cm-fpv-drone-laptop-take-control = TAKE CONTROL
 cm-fpv-drone-laptop-release-control = RELEASE CONTROL
 cm-fpv-drone-laptop-feed-idle = Select a drone to open its feed.
 cm-fpv-drone-laptop-feed-live = VIDEO FEED LIVE
-cm-fpv-drone-laptop-control-active = CONTROL ACTIVE - use WASD to fly
 cm-fpv-drone-laptop-signal-lost = SIGNAL LOST
 cm-fpv-drone-laptop-status-controlled = CONTROLLED
 cm-fpv-drone-laptop-status-standby = STANDBY

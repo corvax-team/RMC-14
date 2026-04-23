@@ -1,13 +1,14 @@
 using Content.Server.Actions;
-using Content.Server.Mind;
 using Content.Shared._CCM.FpvDrone;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.Physics.Systems;
 
 namespace Content.Server._CCM.FpvDrone;
 
@@ -17,9 +18,12 @@ public sealed class FpvDroneSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+    private readonly HashSet<EntityUid> _contacts = [];
 
     public override void Initialize()
     {
@@ -128,6 +132,25 @@ public sealed class FpvDroneSystem : EntitySystem
             {
                 drone.SignalLost = false;
                 Dirty(uid, drone);
+            }
+        }
+
+        var explosiveQuery = EntityQueryEnumerator<FpvDroneExplosiveComponent, TransformComponent>();
+        while (explosiveQuery.MoveNext(out var uid, out var explosive, out _))
+        {
+            if (TerminatingOrDeleted(uid))
+                continue;
+
+            _contacts.Clear();
+            _physics.GetContactingEntities(uid, _contacts);
+
+            foreach (var contact in _contacts)
+            {
+                if (HasComp<XenoComponent>(contact))
+                {
+                    TryTriggerExplosive(uid, explosive);
+                    break;
+                }
             }
         }
     }

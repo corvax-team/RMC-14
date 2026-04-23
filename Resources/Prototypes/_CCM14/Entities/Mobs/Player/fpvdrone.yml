@@ -8,7 +8,7 @@
   components:
   - type: Sprite
     sprite: _CCM14/Mobs/Silicon/fpv.rsi
-    state: marker
+    state: drone_folded
   - type: Item
     size: Normal
   - type: Physics
@@ -35,17 +35,10 @@
   components:
   - type: Sprite
     sprite: _CCM14/Mobs/Silicon/fpv.rsi
-    state: marker
-  - type: Input
-    context: "aghost"
-  - type: MovementIgnoreGravity
-    globalReceive: true
+    state: drone_off
   - type: MovementSpeedModifier
     baseSprintSpeed: 8
     baseWalkSpeed: 4
-  - type: Visibility
-    layer: 1
-  - type: Eye
   - type: FpvDrone
   - type: DeviceLinkSink
     ports: [ FpvDroneControl ]
@@ -89,6 +82,13 @@
   id: FpvDroneObserver
   name: observation fpv drone
   description: A deployed FPV drone configured for reconnaissance.
+  components:
+  - type: SensorTower
+    state: Off
+    breakChance: 0
+    revealForLayers: [Marines]
+    revealLayers: [Xenos]
+    revealRange: 5
 
 - type: entity
   parent: FpvDroneBase

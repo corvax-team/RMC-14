@@ -148,9 +148,7 @@ public sealed class FpvDroneLaptopBui : BoundUserInterface
             : Loc.GetString("cm-fpv-drone-laptop-take-control");
         _window.DetonateButton.Disabled = !selected.CanDetonate || !selected.Connected;
         _window.UnlinkButton.Disabled = false;
-        _window.CameraHintLabel.SetMarkupPermissive(_controlEnabled
-            ? $"[color=#B7D5F7]{Loc.GetString("cm-fpv-drone-laptop-control-active") }[/color]"
-            : $"[color=#8EA9C4]{Loc.GetString("cm-fpv-drone-laptop-feed-live") }[/color]");
+        _window.CameraHintLabel.SetMarkupPermissive($"[color=#8EA9C4]{Loc.GetString("cm-fpv-drone-laptop-feed-live") }[/color]");
 
         RefreshCamera();
     }

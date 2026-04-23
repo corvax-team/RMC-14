@@ -17,7 +17,6 @@ cm-fpv-drone-laptop-take-control = ЗАНЯТЬ УПРАВЛЕНИЕ
 cm-fpv-drone-laptop-release-control = ОСВОБОДИТЬ УПРАВЛЕНИЕ
 cm-fpv-drone-laptop-feed-idle = Выберите дрон для открытия видеопотока.
 cm-fpv-drone-laptop-feed-live = ВИДЕОПОТОК АКТИВЕН
-cm-fpv-drone-laptop-control-active = УПРАВЛЕНИЕ АКТИВНО - используйте WASD для полёта
 cm-fpv-drone-laptop-signal-lost = СВЯЗЬ ПОТЕРЯНА
 cm-fpv-drone-laptop-status-controlled = ПОД УПРАВЛЕНИЕМ
 cm-fpv-drone-laptop-status-standby = В РЕЖИМЕ ОЖИДАНИЯ
