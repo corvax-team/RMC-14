@@ -95570,7 +95570,7 @@ entities:
               state: humvee
             events:
             - !type:TechUnlockVehicleEvent
-              unlock: RMCVehicleHumveeARC
+              unlock: VehicleHumveeARC
             - !type:TechAnnounceEvent
               sound: null
               message: Для данной операции санкционировано развёртывание системы БРК.
@@ -95655,7 +95655,7 @@ entities:
               state: tank
             events:
             - !type:TechUnlockVehicleEvent
-              unlock: RMCVehicleTank
+              unlock: VehicleTank
             - !type:TechAnnounceEvent
               sound: null
               message: Для наземных операций разрешена поддержка тяжелой бронетехникой.
@@ -96138,21 +96138,21 @@ entities:
       parent: 1
     - type: RMCTeleporter
       adjust: 0,156
-- proto: RMCVehicleHardpointVendor
+- proto: VehicleHardpointVendor
   entities:
   - uid: 5357
     components:
     - type: Transform
       pos: 101.5,210.5
       parent: 1
-- proto: RMCVehicleLift
+- proto: VehicleLift
   entities:
   - uid: 4790
     components:
     - type: Transform
       pos: 101.5,217.5
       parent: 1
-- proto: RMCVehicleSupplyConsole
+- proto: VehicleSupplyConsole
   entities:
   - uid: 5356
     components:
