@@ -75,6 +75,7 @@ public sealed class FpvDroneLaptopSystem : SharedFpvDroneLaptopSystem
 
         var link = EnsureComp<FpvDroneLaptopLinkedComponent>(args.Sink);
         link.LinkedLaptop = args.Source;
+        _drone.StopRemoteControl(args.Sink, drone.Pilot, false, drone);
         drone.Control = args.Source;
         laptop.LinkedDrones.Add(args.Sink);
 
@@ -102,6 +103,10 @@ public sealed class FpvDroneLaptopSystem : SharedFpvDroneLaptopSystem
         if (TryComp<FpvDroneLaptopWatcherComponent>(args.Actor, out var watcher) &&
             watcher.Laptop == ent.Owner)
         {
+            if (watcher.ControlEnabled && watcher.CurrentDrone is { } droneNet && TryGetEntity(droneNet, out var droneUid))
+            {
+                _drone.StopRemoteControl(droneUid.Value, args.Actor);
+            }
             ClearWatcher(args.Actor, watcher);
         }
     }
@@ -162,8 +167,6 @@ public sealed class FpvDroneLaptopSystem : SharedFpvDroneLaptopSystem
 
         watcher.ControlEnabled = true;
         _mover.SetRelay(args.Actor, droneUid.Value);
-        
-        _popup.PopupEntity(Loc.GetString("cm-fpv-drone-laptop-control-active"), args.Actor, args.Actor);
 
         Dirty(args.Actor, watcher);
         UpdateUI(ent);
@@ -212,7 +215,10 @@ public sealed class FpvDroneLaptopSystem : SharedFpvDroneLaptopSystem
     {
         base.UnlinkDrone(laptop, droneUid);
         ClearWatchersForDroneImpl(droneUid);
-        _drone.TryDisconnectDrone(droneUid);
+        if (TryComp<FpvDroneComponent>(droneUid, out var drone))
+        {
+            _drone.StopRemoteControl(droneUid, drone.Pilot, false, drone);
+        }
     }
 
     protected override void ClearWatchersForDrone(EntityUid drone)

@@ -82,13 +82,6 @@
   id: FpvDroneObserver
   name: observation fpv drone
   description: A deployed FPV drone configured for reconnaissance.
-  components:
-  - type: SensorTower
-    state: Off
-    breakChance: 0
-    revealForLayers: [Marines]
-    revealLayers: [Xenos]
-    revealRange: 5
 
 - type: entity
   parent: FpvDroneBase
