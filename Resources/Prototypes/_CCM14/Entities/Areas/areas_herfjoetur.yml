@@ -1,4 +1,4 @@
-Z- type: entity
+- type: entity
   parent:
   - RMCAreaProtectionMetal
   - RMCAreaBase
