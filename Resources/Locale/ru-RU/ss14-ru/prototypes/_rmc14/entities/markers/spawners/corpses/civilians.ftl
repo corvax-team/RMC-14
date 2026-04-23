@@ -37,3 +37,5 @@ ent-RMCSpawnerCorpseWeYaManager = спавнер трупа — менеджер
     .desc = { ent-RMCSpawnerCorpse.desc }
 ent-RMCSpawnerCorpseCLF = спавнер трупа — солдат КФО
     .desc = { ent-RMCSpawnerCorpse.desc }
+ent-RMCSpawnerCorpseRussian = спавнер трупа — русский
+    .desc = { ent-RMCSpawnerCorpse.desc }

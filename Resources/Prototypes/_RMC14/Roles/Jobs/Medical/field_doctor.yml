@@ -9,7 +9,7 @@
     role: CMJobDoctor
     time: 36000 # 10 hours
   ranks:
-    RMCRankSecondLT: []
+    RMCRankNavyPettyOfficer3rdClass: [] #CCM14
   startingGear: CMGearFieldDoctor
   icon: "CMJobIconFieldDoctor"
   joinNotifyCrew: false

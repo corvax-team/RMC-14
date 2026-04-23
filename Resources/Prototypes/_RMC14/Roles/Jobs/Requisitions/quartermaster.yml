@@ -9,11 +9,11 @@
     department: CMRequisitions
     time: 10800 # 3 hours. CCM14 role timers. RMC: 36000 # 10 hours
   ranks:
-    RMCRankFirstLT:
+    RMCRankNavyLieutenantJuniorGrade: #CCM14
     - !type:RoleTimeRequirement
       role: CMJobQuartermaster
       time: 252000 # 70 hours
-    RMCRankSecondLT: []
+    RMCRankNavyEnsign: [] #CCM14
   weight: 5
   startingGear: CMGearQuartermaster
   icon: "CMJobIconQuartermaster"

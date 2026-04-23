@@ -1,6 +1,6 @@
 rmc-job-greeting-chances-colonist =
     Вы — колонист, живущий на LV-522. Ваш работодатель поручил вам выполнение ваших прямых обязанностей.
-
+    
     Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ к ККМП![/font][/color][/bold]
 rmc-job-name-colonist-chances-trucker = Оператор тяжелой техники
 rmc-job-description-colonist-chances-trucker = Управляйте тяжелым оборудованием в колонии и за её пределами.

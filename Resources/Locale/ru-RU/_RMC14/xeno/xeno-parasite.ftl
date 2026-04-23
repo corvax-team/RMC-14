@@ -1,4 +1,4 @@
-﻿# General parasite messages
+# General parasite messages
 rmc-xeno-failed-cant-infect = Мы не можем заразить { $target }!
 rmc-xeno-failed-cant-reach = Мы не можем дотянуться до { $target }, цель должна лежать!
 rmc-xeno-failed-target-dead = Мы не можем заражать мёртвых!

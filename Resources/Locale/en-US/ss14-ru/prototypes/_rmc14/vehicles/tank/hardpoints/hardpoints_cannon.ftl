@@ -1,8 +1,8 @@
-ent-RMCVehicleTankLTBCannon = LTB cannon
+ent-VehicleTankLTBCannon = LTB cannon
     .desc = A light tank cannon hardpoint.
-ent-RMCVehicleTankLTAAAPMinigun = LTAAAP minigun
+ent-VehicleTankLTAAAPMinigun = LTAAAP minigun
     .desc = A light anti-air minigun hardpoint.
-ent-RMCVehicleTankAceAutocannon = ACE autocannon
+ent-VehicleTankAceAutocannon = ACE autocannon
     .desc = An ACE autocannon hardpoint.
-ent-RMCVehicleTankDragonFlamer = DRGN flamer
+ent-VehicleTankDragonFlamer = DRGN flamer
     .desc = A DRGN flamer hardpoint.

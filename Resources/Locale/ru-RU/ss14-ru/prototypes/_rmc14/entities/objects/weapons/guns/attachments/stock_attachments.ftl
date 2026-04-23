@@ -79,3 +79,5 @@ ent-RMCAttachmentL83A3Stock = цельный приклад L83A3
     .desc = Интегрирован в L83A3. У вас не должно быть этого предмета отдельно.
 ent-RMCAttachmentAK4047StockCollapsible = складной приклад AK-4047
     .desc = Стандарт для серии AK. Уменьшает отдачу и повышает точность, сохраняя манёвренность. Как и у предшественников, отлично подходит для ударов прикладом.
+ent-RMCAttachmentL49Stock = L49 stock
+    .desc = A fixed stock for the L49 combat shotgun. Adds a bit of heft to the weapon, making it easier to make follow-up shots when shouldered - as well improving its performance as a melee weapon.

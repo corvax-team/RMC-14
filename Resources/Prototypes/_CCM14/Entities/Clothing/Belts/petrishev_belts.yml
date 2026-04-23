@@ -1,0 +1,19 @@
+- type: entity
+  parent: RMCBeltSPPBrown
+  id: CCMBeltSPPBrownFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleAK4047
+      amount: 5
+
+- type: entity
+  parent: RMCBeltSPPBrown
+  id: CCMBeltSPPBrownFillSpec
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMMagazineRifleZhupel
+      amount: 5

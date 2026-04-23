@@ -5,3 +5,5 @@ ent-CMGirderReinforced = reinforced girder
 ent-RMCGirderDisplaced = displaced
     .suffix = Girder
     .desc = { ent-CMGirder.desc }
+ent-RMCGirderDamaged = damaged girder
+    .desc = A twisted girder that no longer blocks passage.

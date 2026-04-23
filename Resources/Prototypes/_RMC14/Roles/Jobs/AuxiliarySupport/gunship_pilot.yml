@@ -15,15 +15,15 @@
     time: 10800 # 3 hours
 # CCM14 role timers [add/end]
   ranks:
-    RMCRankSecondLT:
+    RMCRankNavyEnsign: #CCM14
     - !type:RoleTimeRequirement
       role: CMJobPilotGunship
       time: 252000 # 70 hours
-    RMCRankChiefWarrantOfficer:
+    RMCRankNavyCommandMasterChiefPettyOfficer: #CCM14
     - !type:RoleTimeRequirement
       role: CMJobPilotGunship
       time: 90000 # 25 hours
-    RMCRankWarrantOfficer: []
+    RMCRankNavyMasterChiefPettyOfficer: [] #CCM14
   startingGear: CMGearPilotGunship
   icon: "CMJobIconPilotGunship"
   joinNotifyCrew: false

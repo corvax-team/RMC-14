@@ -87,7 +87,10 @@ public sealed class RMCClothingSystem : EntitySystem
     {
         if (args.Cancelled)
             return;
-
+        // CCM14-start
+        if (!ent.Comp.Enabled)
+            return;
+        // CCM14-end
         if (HasEquippedItemsWithinWhitelist(args.EquipTarget, ent.Comp.Whitelist))
             return;
 
@@ -105,7 +108,7 @@ public sealed class RMCClothingSystem : EntitySystem
             if (slot.ContainedEntity is not { } contained)
                 continue;
 
-            if (TryComp<ClothingRequireEquippedComponent>(contained, out var requiresEquipped) && requiresEquipped.AutoUnequip && _whitelist.IsWhitelistPassOrNull(requiresEquipped.Whitelist, ent.Owner))
+            if (TryComp<ClothingRequireEquippedComponent>(contained, out var requiresEquipped) && requiresEquipped.Enabled && requiresEquipped.AutoUnequip && _whitelist.IsWhitelistPassOrNull(requiresEquipped.Whitelist, ent.Owner)) // CCM14
             {
                 if (HasEquippedItemsWithinWhitelist(args.User, requiresEquipped.Whitelist))
                     continue;

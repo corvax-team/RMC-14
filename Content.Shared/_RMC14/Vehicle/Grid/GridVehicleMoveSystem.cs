@@ -42,7 +42,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly RMCVehicleWheelSystem _wheels = default!;
+    [Dependency] private readonly VehicleWheelSystem _wheels = default!;
     [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
 
@@ -83,10 +83,16 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     public static readonly List<DebugCollisionProbe> DebugCollisionProbes = new();
     public static readonly List<DebugCollision> DebugCollisions = new();
     public static readonly List<DebugMovementDecision> DebugMovementDecisions = new();
+    public static bool CollisionDebugEnabled { get; set; }
+    public static bool MovementDebugEnabled { get; set; }
+
     private readonly Dictionary<EntityUid, TimeSpan> _lastMobCollision = new();
     private readonly Dictionary<EntityUid, bool> _hardState = new();
     private readonly Dictionary<EntityUid, bool> _lastMobPushAxis = new();
     private readonly Dictionary<EntityUid, float> _movementAccumulator = new();
+    private readonly Dictionary<EntityUid, EntityUid> _activeXenoPushers = new();
+    private readonly HashSet<EntityUid> _directMoveBlockers = new();
+    private readonly HashSet<EntityUid> _pushIgnoredEntities = new();
 
     private enum VehicleCollisionClass : byte
     {
@@ -160,6 +166,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     {
         _hardState.Remove(ent.Owner);
         _movementAccumulator.Remove(ent.Owner);
+        _activeXenoPushers.Remove(ent.Owner);
     }
 
     private void OnMoverMove(Entity<GridVehicleMoverComponent> ent, ref MoveEvent args)
@@ -274,10 +281,15 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        DebugTestedTiles.Clear();
-        DebugCollisionProbes.Clear();
-        DebugCollisions.Clear();
-        DebugMovementDecisions.Clear();
+        if (CollisionDebugEnabled)
+        {
+            DebugTestedTiles.Clear();
+            DebugCollisionProbes.Clear();
+            DebugCollisions.Clear();
+        }
+
+        if (MovementDebugEnabled)
+            DebugMovementDecisions.Clear();
 
         var q = EntityQueryEnumerator<GridVehicleMoverComponent, VehicleComponent, TransformComponent>();
 

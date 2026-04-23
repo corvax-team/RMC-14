@@ -3,10 +3,7 @@ ent-CMMRE = UNMC MRE
 ent-RMCMRESPP = SPP IRP ration pack
     .desc = An Individual Meal Ration, mainly composed of a selection of canned food, despite being heavier, it has proven to be a lot more reliable.
 ent-RMCMREWeYa = We-Ya brand ration pack
-    .desc =
-        A more or less cohesive ration, intended for colonist and corporate security, packed with a medium quality foods with a long shelf life.
-        On the box is the Weston-Yamada logo, with a slogan surrounding it:
-        WESTON-YAMADA. FEEDING BETTER WORLDS.
+    .desc = A more or less cohesive ration, intended for colonist and corporate security, packed with a medium quality foods with a long shelf life. On the box is the Weston-Yamada logo, with a slogan surrounding it: WESTON-YAMADA. FEEDING THE FUTURE.
 ent-RMCMREWeYaPMC = PMC CFR ration
     .desc = A Combat Field Ration. Uses similar to UNMC MRE format, but utilizes expensive preserving materials and methods and not less expensive foods, not much different from going to a restaurant. Eating better worlds.
 ent-RMCMRETSE = TSE ORP ration
@@ -30,3 +27,6 @@ ent-RMCBoxMRETSEEmpty = box of ORPs (x12)
 ent-RMCBoxMRETSE = { ent-RMCBoxMRETSEEmpty }
     .suffix = Filled, TSE
     .desc = { ent-RMCBoxMRETSEEmpty.desc }
+ent-RMCBoxMREWEYA = box of WEYA-brand Ration Packs (x12)
+    .desc = A box of Weston-Yamada Ration Packs. Often found on Company-owned colonies.
+    .suffix = Filled, WEYA

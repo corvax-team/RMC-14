@@ -1,2 +1,2 @@
-ent-RMCVehicleTurretVisual = визуальный элемент турели
+ent-VehicleTurretVisual = визуальный элемент турели
     .desc = { "" }
