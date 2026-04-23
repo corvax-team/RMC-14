@@ -283,7 +283,7 @@
     soundHit:
       path: /Audio/Effects/gen_hit.ogg
   - type: SpawnOnTerminate
-    spawn: RMCSmoke
+    spawn: MCSmokeM5 # CCM edit
     projectileAdjust: false
   - type: SoundOnTrigger
     sound: /Audio/Effects/smoke.ogg

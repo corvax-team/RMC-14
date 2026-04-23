@@ -1,0 +1,282 @@
+# Rocket shells
+- type: Tag
+  id: MCRocketShell
+
+- type: entity
+  parent: BaseItem
+  id: MCRocketShell
+  name: 67mm high-explosive shell
+  description: A high explosive shell for the RL-160 recoilless rifle. Causes a heavy explosion over a small area. Requires specialized storage to carry.
+  components:
+  - type: Tag
+    tags:
+    - MCRocketShell
+  - type: Appearance
+  - type: Sprite
+    sprite: _MC/Objects/Weapons/Guns/Ammunition/Rockets/rl160_shell.rsi
+    layers:
+    - state: shell
+      map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: MCProjectileRocketShell
+    deleteOnSpawn: true
+  - type: Item
+    size: Normal
+  - type: AssistedReloadAmmo
+  - type: IgnorePredictionHide
+
+- type: entity
+  parent: MCRocketShell
+  id: MCRocketShellCloak
+  name: 67mm Chemical (Cloak) shell
+  description: A chemical shell for the RL-160 recoilless rifle. Fires a low velocity shell for close quarters application of chemical gas, friendlies will be able to easily dodge it due to low velocity. This warhead contains advanced cloaking smoke. Requires specialized storage to carry.
+  components:
+  - type: Sprite
+    layers:
+    - state: shell_cloak
+      map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: MCProjectileRocketShellCloak
+
+- type: entity
+  parent: MCRocketShell
+  id: MCRocketShellHeat
+  name: 67mm HEAT shell
+  description: A high explosive-anti tank shell for the RL-160 recoilless rifle. Fires a penetrating shot with no explosion. It will do moderate damage to all types of enemies, sundering their armor. Requires specialized storage to carry.
+  components:
+  - type: Sprite
+    layers:
+    - state: shell_heat
+      map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: MCProjectileRocketShellHeat
+
+- type: entity
+  parent: MCRocketShell
+  id: MCRocketShellLight
+  name: 67mm light-explosive shell
+  description: A light explosive shell for the RL-160 recoilless rifle. Causes a light explosion over a large area. Can go farther than other shells of its type due to the light payload. Requires specialized storage to carry.
+  components:
+  - type: Sprite
+    layers:
+    - state: shell_le
+      map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: MCProjectileRocketShellLe
+
+- type: entity
+  parent: MCRocketShell
+  id: MCRocketShellSmoke
+  name: 67mm Chemical (Smoke) shell
+  description: A chemical shell for the RL-160 recoilless rifle. Fires a low velocity shell for close quarters application of chemical gas, friendlies will be able to easily dodge it due to low velocity. This warhead contains thick concealing smoke. Requires specialized storage to carry.
+  components:
+  - type: Sprite
+    layers:
+    - state: shell_smoke
+      map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: MCProjectileRocketShellSmoke
+
+- type: entity
+  parent: MCRocketShell
+  id: MCRocketShellTanglefoot
+  name: 67mm Chemical (Tanglefoot) shell
+  description: A chemical shell for the RL-160 recoilless rifle. Fires a low velocity shell for close quarters application of chemical gas, friendlies will be able to easily dodge it due to low velocity. This warhead contains plasma-draining Tanglefoot smoke. Requires specialized storage to carry.
+  components:
+  - type: Sprite
+    layers:
+    - state: shell_tanglefoot
+      map: [ "enum.AmmoVisualLayers.Base" ]
+  - type: CartridgeAmmo
+    proto: MCProjectileRocketShellTanglefoot
+
+# Rocket projectiles
+- type: entity
+  id: MCProjectileRocketShell
+  name: 67mm high-explosive shell
+  description: Uh oh.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Tag
+    tags:
+    - MCDamageBomb
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        MCBrute: 50
+    maxFixedRange: 30
+  - type: CMArmorPiercing
+    amount: 50
+  - type: Sprite
+    sprite: _MC/Objects/Weapons/Guns/Ammunition/Rockets/rl160_shell.rsi
+    rotation: 270
+    layers:
+    - state: shell
+  - type: CMExplosionEffect
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: MC
+    maxIntensity: 200
+    intensitySlope: 70
+    totalIntensity: 200
+    maxTileBreak: 0
+  - type: RMCScorchEffect
+  - type: PointLight
+    radius: 3.5
+    color: orange
+    energy: 0.5
+  - type: IgnorePredictionHide
+  - type: TriggerOnCollide
+    # TODO RMC14 Make TriggerOnCollide spawn the explosion on the OtherEntity tile more consistently, so the explosion is centered properly
+    fixtureID: projectile # no parent entity from BaseBulletTrigger because it has Clickable
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape: !type:PhysShapeAabb
+          bounds: "-0.15, -0.15, 0.15, 0.15"
+          # Bigger than bullets. Rectangle won't work since AABB shapes don't rotate. This should help significantly with explosion consistency.
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+        restitution: 0.0
+        density: 20
+
+- type: entity
+  parent: MCProjectileRocketShell
+  id: MCProjectileRocketShellHeat
+  name: 67mm HEAT shell
+  components:
+  - type: Sprite
+    layers:
+    - state: shell_heat
+  - type: Projectile
+    damage:
+      types:
+        MCBrute: 200
+  - type: CMArmorPiercing
+    amount: 100
+  - type: Explosive
+    maxIntensity: 50
+    intensitySlope: 25
+    totalIntensity: 50
+
+- type: entity
+  parent: MCProjectileRocketShell
+  id: MCProjectileRocketShellLe
+  name: 67mm light-explosive shell
+  components:
+  - type: Sprite
+    layers:
+    - state: shell_le
+  - type: CMArmorPiercing
+    amount: 50
+  - type: Explosive
+    maxIntensity: 150
+    intensitySlope: 50
+    totalIntensity: 150
+
+- type: entity
+  parent: MCProjectileRocketShell
+  id: MCProjectileRocketShellSmoke
+  name: 67mm Chemical (Smoke) shell
+  components:
+  - type: Sprite
+    layers:
+    - state: shell_smoke
+  - type: Projectile
+    damage:
+      types:
+        MCBrute: 10
+  - type: CMArmorPiercing
+    amount: 0
+  - type: SpawnOnTerminate
+    spawn: MCSmokeRL160Smoke
+    projectileAdjust: false
+
+- type: entity
+  parent: MCProjectileRocketShellSmoke
+  id: MCProjectileRocketShellCloak
+  name: 67mm Chemical (Cloak) shell
+  components:
+  - type: Sprite
+    layers:
+    - state: shell_cloak
+  - type: SpawnOnTerminate
+    spawn: MCSmokeRL160Cloak
+
+- type: entity
+  parent: MCProjectileRocketShellSmoke
+  id: MCProjectileRocketShellTanglefoot
+  name: 67mm Chemical (Tanglefoot) shell
+  components:
+  - type: Sprite
+    layers:
+    - state: shell_tanglefoot
+  - type: SpawnOnTerminate
+    spawn: MCSmokeRL160Tanglefoot
+
+# Smokes
+- type: entity
+  parent: MCSmoke
+  id: MCSmokeRL160Smoke
+  components:
+  - type: Occluder
+  - type: MCEdgeSpreader
+    delay: 0.05
+    range: 7
+  - type: TimedDespawn
+    lifetime: 9
+  - type: MCTimedDespawnDisappearanceVisuals
+    lifetime: 9
+
+- type: entity
+  parent: MCSmoke
+  id: MCSmokeRL160Cloak
+  components:
+  - type: Sprite
+    color: "#ffffff3C"
+  - type: MCEdgeSpreader
+    delay: 0.05
+    range: 7
+  - type: TimedDespawn
+    lifetime: 9
+  - type: MCTimedDespawnDisappearanceVisuals
+    maxAlpha: 0.2
+    lifetime: 9
+
+- type: entity
+  parent: MCSmoke
+  id: MCSmokeRL160Tanglefoot
+  components:
+  - type: Sprite
+    color: "#7916973C"
+  - type: MCEdgeSpreader
+    delay: 0.05
+    range: 5
+  - type: MCSmokePlasma
+    multiplier: 0.2
+  - type: TimedDespawn
+    lifetime: 9
+  - type: MCTimedDespawnDisappearanceVisuals
+    maxAlpha: 0.2
+    lifetime: 9
+
+- type: entity
+  parent: MCSmoke
+  id: MCSmokeM5
+  components:
+  - type: MCEdgeSpreader
+    delay: 0.05
+    range: 4
+  - type: MCSmokePlasma
+    multiplier: 0.2
+  - type: TimedDespawn
+    lifetime: 9
+  - type: MCTimedDespawnDisappearanceVisuals
+    maxAlpha: 0.6
+    lifetime: 9

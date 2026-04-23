@@ -24,6 +24,7 @@
     whitelist:
       tags:
         - RMCRocketAmmo84mm
+        - MCRocketShell #CCM edit
     capacity: 1
     cycleable: true
     mayTransfer: false
@@ -288,7 +289,7 @@
       path: /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower3.ogg
   - type: DeleteOnTrigger
   - type: SpawnOnTerminate
-    spawn: RMCSmokeWhitePhosphorus
+    spawn: MCSmokeM5 #CCM edit
   - type: RMCAreaDamage
     damageArea: 3.5
     falloffDistance: 3.5
