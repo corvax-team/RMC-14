@@ -3,12 +3,9 @@ using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Leap;
-using Content.Shared.GameTicking;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared._RMC14.Xenonids.Rest;
-using Content.Shared.GameTicking;
-using Robust.Shared.Timing;
 using Content.Shared.Actions.Components;
 using Content.Shared.Database;
 using Content.Shared.Examine;
@@ -42,12 +39,17 @@ public abstract partial class SharedXenoParasiteSystem
         SubscribeLocalEvent<ParasiteAIComponent, ExaminedEvent>(OnAIExamined);
         SubscribeLocalEvent<ParasiteAIComponent, DroppedEvent>(OnAIDropPickup);
         SubscribeLocalEvent<ParasiteAIComponent, EntGotInsertedIntoContainerMessage>(OnAIDropPickup);
+        SubscribeLocalEvent<ParasiteAIComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
 
         SubscribeLocalEvent<TrapParasiteComponent, ComponentStartup>(OnTrapAdded);
         SubscribeLocalEvent<TrapParasiteComponent, PlayerAttachedEvent>(OnStopTrap);
         SubscribeLocalEvent<TrapParasiteComponent, EntGotInsertedIntoContainerMessage>(OnStopTrap);
         SubscribeLocalEvent<TrapParasiteComponent, XenoLeapHitEvent>(OnLeapEndTrap);
         SubscribeLocalEvent<TrapParasiteComponent, ComponentShutdown>(OnTrapEnd);
+
+        SubscribeLocalEvent<ParasiteTiredOutComponent, MapInitEvent>(OnParasiteAIMapInit);
+        SubscribeLocalEvent<ParasiteTiredOutComponent, UpdateMobStateEvent>(OnParasiteAIUpdateMobState,
+            after: [typeof(MobThresholdSystem), typeof(SharedXenoPheromonesSystem)]);
     }
 
     private void OnTrapAdded(Entity<TrapParasiteComponent> para, ref ComponentStartup args)
@@ -102,7 +104,7 @@ public abstract partial class SharedXenoParasiteSystem
 
     private void OnPlayerRemoved(Entity<XenoParasiteComponent> para, ref PlayerDetachedEvent args)
     {
-        if (!TerminatingOrDeleted(para))
+        if(!TerminatingOrDeleted(para))
             EnsureComp<ParasiteAIDelayAddComponent>(para);
     }
 
@@ -168,55 +170,7 @@ public abstract partial class SharedXenoParasiteSystem
     public void UpdateAI(Entity<ParasiteAIComponent> para, TimeSpan currentTime)
     {
         CheckCannibalize(para);
-
-        if (TryComp<CCMRoyalParasiteComponent>(para.Owner, out var royal))
-        {
-            if (royal.InfectionCount >= royal.MaxInfections && currentTime >= royal.NextInfectionTime)
-            {
-                if (!HasComp<ParasiteSpentComponent>(para))
-                {
-                    EnsureComp<ParasiteSpentComponent>(para);
-                }
-
-                if (para.Comp.Mode != ParasiteMode.Dying)
-                {
-                    if (HasComp<XenoRestingComponent>(para))
-                        RemComp<XenoRestingComponent>(para);
-
-                    para.Comp.Mode = ParasiteMode.Dying;
-                    para.Comp.DeathTime = currentTime;
-                    Dirty(para);
-                }
-            }
-            else if (HasComp<ParasiteTiredOutComponent>(para) && currentTime >= royal.NextInfectionTime)
-            {
-                RemComp<ParasiteTiredOutComponent>(para);
-                if (para.Comp.Mode != ParasiteMode.Active)
-                {
-                    para.Comp.Mode = ParasiteMode.Active;
-                    para.Comp.NextActiveTime = currentTime;
-                    Dirty(para);
-                }
-            }
-
-            if (para.Comp.Mode == ParasiteMode.Active &&
-                currentTime >= para.Comp.NextJump &&
-                !_container.IsEntityInContainer(para) &&
-                !HasComp<ParasiteTiredOutComponent>(para) &&
-                royal.InfectionCount < royal.MaxInfections)
-            {
-                if (!HasComp<StunnedComponent>(para))
-                {
-                    var trap = EnsureComp<TrapParasiteComponent>(para);
-                    trap.JumpTime = TimeSpan.Zero;
-                }
-                para.Comp.NextJump = currentTime + para.Comp.JumpTime;
-            }
-            return;
-        }
-
-        if (HasComp<ParasiteSpentComponent>(para) &&
-            (para.Comp.DeathTime != null && currentTime > para.Comp.DeathTime || para.Comp.JumpsLeft <= 0))
+        if (para.Comp.DeathTime != null && currentTime > para.Comp.DeathTime || para.Comp.JumpsLeft <= 0)
         {
             if (para.Comp.Mode != ParasiteMode.Dying)
             {
@@ -362,4 +316,40 @@ public abstract partial class SharedXenoParasiteSystem
         EnsureComp<ParasiteTiredOutComponent>(para);
     }
 
+    private void OnParasiteAIMapInit(Entity<ParasiteTiredOutComponent> dead, ref MapInitEvent args)
+    {
+        if (TryComp(dead, out MobStateComponent? mobState))
+            _mobState.UpdateMobState(dead, mobState);
+    }
+
+    private void OnParasiteAIUpdateMobState(Entity<ParasiteTiredOutComponent> dead, ref UpdateMobStateEvent args)
+    {
+        args.State = MobState.Dead;
+    }
+
+    private void OnGetVerbs(Entity<ParasiteAIComponent> ent, ref GetVerbsEvent<ActivationVerb> args)
+    {
+        var uid = args.User;
+
+        // if it doesn't have an actor and we can't reach it then don't add the verb
+        if (!HasComp<ActorComponent>(uid) || !HasComp<GhostComponent>(uid))
+            return;
+
+        if (!_mobState.IsAlive(ent))
+            return;
+
+
+        var parasiteVerb = new ActivationVerb
+        {
+            Text = Loc.GetString("rmc-xeno-egg-ghost-verb"),
+            Act = () =>
+            {
+                _ui.TryOpenUi(ent.Owner, XenoParasiteGhostUI.Key, uid);
+            },
+
+            Impact = LogImpact.High,
+        };
+
+        args.Verbs.Add(parasiteVerb);
+    }
 }

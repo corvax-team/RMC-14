@@ -9,20 +9,19 @@ void fragment()
 
     highp float dist = distance(uv, center);
 
-    highp float baseVignette = 1.0 - dist * 1.8;
+    highp float baseVignette = max(0.0, 1.0 - dist * 1.8);
     baseVignette = pow(baseVignette, 2.0);
 
-    highp float animVignette = 1.0 - dist * 3.0; // Более сильный эффект
+    highp float animVignette = max(0.0, 1.0 - dist * 3.0);
     animVignette = pow(animVignette, 3.0);
 
     highp float permanentAlpha = (1.0 - baseVignette) * intensity * 0.5;
-    
-    highp float animatedAlpha = (1.0 - animVignette) * intensity * 1;
+
+    highp float animatedAlpha = (1.0 - animVignette) * intensity;
     animatedAlpha *= (1.0 - transitionProgress);
 
-    highp float finalAlpha = permanentAlpha + animatedAlpha;
-    finalAlpha = clamp(finalAlpha, 0.0, 1.0);
+    highp float finalAlpha = clamp(permanentAlpha + animatedAlpha, 0.0, 1.0);
 
-    vec4 screenColor = texture(SCREEN_TEXTURE, UV);
+    highp vec4 screenColor = texture(SCREEN_TEXTURE, UV);
     COLOR = mix(screenColor, vec4(0.0, 0.0, 0.0, 1.0), finalAlpha);
 }

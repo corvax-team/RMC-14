@@ -1,10 +1,10 @@
-ent-RMCVehicleHumveeBase = humvee
+ent-VehicleHumveeBase = humvee
     .desc = A fast armored utility vehicle outfitted for patrols and support.
-ent-RMCVehicleHumvee = { ent-RMCVehicleHumveeBase }
-    .desc = { ent-RMCVehicleHumveeBase.desc }
-ent-RMCVehicleHumveeMedical = humvee (medical)
+ent-VehicleHumvee = { ent-VehicleHumveeBase }
+    .desc = { ent-VehicleHumveeBase.desc }
+ent-VehicleHumveeMedical = humvee (medical)
     .desc = A medical-configured humvee outfitted for field triage.
-ent-RMCVehicleHumveeTransport = humvee (transport)
+ent-VehicleHumveeTransport = humvee (transport)
     .desc = A transport humvee configured for passenger movement.
-ent-RMCVehicleHumveeARC = humvee (arc)
+ent-VehicleHumveeARC = humvee (arc)
     .desc = A humvee configured for ARC interior layout.

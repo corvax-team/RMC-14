@@ -10,11 +10,11 @@
     group: CMDepartmentsHuman
     time: 3600 # 1 hour
   ranks:
-    RMCRankSergeant:
+    RMCRankNavySeaman: #CCM14
     - !type:RoleTimeRequirement
       role: CMJobNurse
       time: 36000 # 10 hours
-    RMCRankCorporal: []
+    RMCRankNavySeamanApprentice: [] #CCM14
   startingGear: CMGearNurse
   icon: "CMJobIconNurse"
   joinNotifyCrew: false

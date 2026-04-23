@@ -11,7 +11,7 @@ public sealed partial class CCMCommunicationsConsoleComponent : Component
     public EntProtoId CrasherMarkerForERT = "CCMMarkerERTCrash";
 
     [DataField, AutoNetworkedField]
-    public bool ERTCalled { get; set; } = false;
+    public bool ERTCalled { get; set; }
 
     [DataField, AutoNetworkedField]
     public List<ResPath> MapPaths { get; set; } = new();

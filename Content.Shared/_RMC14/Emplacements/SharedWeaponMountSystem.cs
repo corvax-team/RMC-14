@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Scoping;
 using Content.Shared._RMC14.Stealth;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Weapons.Ranged.Overheat;
 using Content.Shared._RMC14.Xenonids;
@@ -92,6 +93,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly RMCSharedWeaponControllerSystem _weaponController = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly VehicleSystem _rmcVehicleSystem = default!;
 
     private const string AmmoExamineColor = "yellow";
     private const string FireRateExamineColor = "yellow";
@@ -509,7 +511,16 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
             return false;
         }
-
+        // CCM14-start
+        // Can't deploy a weapon mount inside a vehicle interior
+        if (_transform.GetGrid(coordinates) is { } gridId &&
+            _rmcVehicleSystem.TryGetVehicleFromInterior(gridId, out _))
+        {
+            var msg = Loc.GetString("rmc-vehicle-cannot-place-inside", ("object", ent));
+            _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
+            return false;
+        }
+        // CCN14-start
         var grid = _transform.GetGrid((user, Transform(user)));
         if (TryComp(grid, out MapGridComponent? mapGrid))
         {

@@ -1,5 +1,39 @@
-ent-RMCVehicleSupplyConsole = vehicle supply console
+ent-VehicleSupplyConsole = vehicle supply console
     .desc = A console for ordering vehicles and their hardpoints.
-ent-RMCVehicleLift = vehicle lift
+ent-VehicleLift = vehicle lift
     .suffix = Lowered, Vehicle Supply
     .desc = { "" }
+
+# CCM14-start: UI localization
+rmc-vehicle-supply-lift-none = No lift
+rmc-vehicle-supply-vehicle-none = none
+rmc-vehicle-supply-status-busy = busy
+rmc-vehicle-supply-status-idle = idle
+rmc-vehicle-supply-status = Lift: { $mode } | Status: { $status } | Active: { $active }
+rmc-vehicle-supply-copies-expanded = Copies v
+rmc-vehicle-supply-copies-collapsed = Copies >
+rmc-vehicle-supply-copy-number =     #{ $number }
+rmc-vehicle-supply-available = Available Vehicles
+rmc-vehicle-supply-transport = Vehicle
+rmc-vehicle-supply-raise = Raise
+rmc-vehicle-supply-lower = Lower
+rmc-hardpoint-menu-title = Vehicle Equipment
+rmc-hardpoint-menu-slots-header = Equipment Slots
+rmc-hardpoint-menu-frame-integrity = Frame Integrity
+rmc-hardpoint-menu-slot-prefix = Slot:
+rmc-hardpoint-menu-turret-prefix = Turret:
+rmc-vehicle-vendor-vehicles = Vehicle
+rmc-vehicle-vendor-equipment = Equipment
+rmc-vehicle-vendor-print = Print
+rmc-vehicle-weapons-title = Weapons Control
+rmc-vehicle-weapons-auto-turret = Auto-turret
+rmc-vehicle-weapons-stabilization = Stabilization
+rmc-vehicle-weapons-ammo = Ammo: { $current }/{ $max }
+rmc-vehicle-weapons-stored = Stored: { $current }/{ $max }
+rmc-vehicle-ammo-loader-title = Ammo Loader
+rmc-vehicle-lift-mode-lowered = Lowered
+rmc-vehicle-lift-mode-raised = Raised
+rmc-vehicle-lift-mode-lowering = Lowering
+rmc-vehicle-lift-mode-raising = Raising
+rmc-vehicle-lift-mode-preparing = Preparing
+# CCM14-end

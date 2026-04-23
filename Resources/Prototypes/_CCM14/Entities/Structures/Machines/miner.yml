@@ -1,0 +1,188 @@
+﻿# Miners
+- type: entity
+  abstract: true
+  parent: CMBaseStructureCorrodible
+  id: CCMMinerBase
+  name: mining drill
+  description: A heavy-duty autonomous drill designed to extract valuable minerals from deep beneath the planet's surface.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Machines/mining_drill.rsi
+    offset: 0, 0.25
+    layers:
+    - map: [ "enum.MinerLayers.Base" ]
+      state: mining_drill_error
+    - map: [ "enum.MinerLayers.AutomationOverlay" ]
+      state: mining_drill_automation
+      visible: false
+    - map: [ "enum.MinerLayers.SpeedOverlay" ]
+      state: mining_drill_speed
+      visible: false
+    - map: [ "enum.MinerLayers.ReinforcedOverlay" ]
+      state: mining_drill_reinforced
+      visible: false
+  - type: Corrodible
+    isCorrodible: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Miner
+    state: Destroyed
+  - type: Appearance
+  - type: AmbientSound
+    enabled: false
+    volume: -8
+    range: 4
+    sound:
+      path: /Audio/_RMC14/Machines/fuel_pump_active.ogg
+  - type: Speech
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: TacticalMapTracked
+  - type: TacticalMapLayerTracked
+    layers: [Marines, Xenos]
+
+- type: entity
+  parent: CCMMinerBase
+  id: CCMMinerPhoron
+  name: phoron mining drill
+  description: A heavy-duty autonomous drill tuned to extract phoron crystals.
+  components:
+  - type: Miner
+    oreCratePrototype: CCMOreCratePhoron
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_CCM14/Interface/MapIcons/miner.rsi
+      state: phoron
+
+- type: entity
+  parent: CCMMinerBase
+  id: CCMMinerPlatinum
+  name: platinum mining drill
+  description: A heavy-duty autonomous drill tuned to extract platinum nuggets.
+  components:
+  - type: Miner
+    oreCratePrototype: CCMOreCratePlatinum
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_CCM14/Interface/MapIcons/miner.rsi
+      state: platinum
+
+- type: entity
+  parent: CCMMinerPhoron
+  id: CCMMinerDebug
+  name: debug drill
+  suffix: DEBUG, FAST
+  components:
+  - type: Miner
+    state: Running
+    mineralProductionTime: 5
+
+# Modules
+- type: entity
+  parent: BaseItem
+  id: CCMMinerModuleAutomation
+  name: miner automation module
+  description: A control module that automates logistics, once storage is full, mined ore is sold directly to requisitions budget while the drill remains operational.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Machines/mining_drill.rsi
+    state: mining_drill_automaticdisplay
+  - type: MinerModule
+    moduleType: Automation
+
+- type: entity
+  parent: BaseItem
+  id: CCMMinerModuleSpeed
+  name: miner overclocking module
+  description: Overclocks the drill's motor for significantly faster mineral production.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Machines/mining_drill.rsi
+    state: mining_drill_overclockeddisplay
+  - type: MinerModule
+    moduleType: Speed
+
+- type: entity
+  parent: BaseItem
+  id: CCMMinerModuleReinforced
+  name: miner reinforcement module
+  description: Reinforces the drill's structural integrity, allowing it to withstand much more damage before failing.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Machines/mining_drill.rsi
+    state: mining_drill_reinforceddisplay
+  - type: MinerModule
+    moduleType: Reinforced
+
+# Crates
+- type: entity
+  abstract: true
+  id: CCMOreCrateBase
+  name: ore crate
+  description: A small crate filled with processed ore. Deliver this to the supply elevator.
+  components:
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    sprite: _CCM14/Structures/Storage/Crates/minebox.rsi
+    noRot: true
+    layers:
+    - state: base
+    - state: closed
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 50
+        mask:
+        - CrateMask
+        layer:
+        - MachineLayer
+  - type: Pullable
+  - type: RMCCanBeFultoned
+  - type: RequisitionsCrate
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Appearance
+
+- type: entity
+  parent: CCMOreCrateBase
+  id: CCMOreCratePhoron
+  name: phoron ore crate
+  components:
+  - type: RequisitionsCrate
+    reward: 600
+  - type: Sprite
+    layers:
+    - state: base
+    - state: closed
+    - state: phoron
+
+- type: entity
+  parent: CCMOreCrateBase
+  id: CCMOreCratePlatinum
+  name: platinum ore crate
+  components:
+  - type: RequisitionsCrate
+    reward: 1000
+  - type: Sprite
+    layers:
+    - state: base
+    - state: closed
+    - state: platinum

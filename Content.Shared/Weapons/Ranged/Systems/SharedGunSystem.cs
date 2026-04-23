@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using Content.Shared._CCM.Weapons.Ranged;
 using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Emplacements;
@@ -95,7 +96,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     // RMC14
     [Dependency] private readonly AttachableHolderSystem _attachableHolder = default!;
     [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
-    [Dependency] private readonly RMCVehicleWeaponsSystem _rmcVehicleWeapons = default!;
+    [Dependency] private readonly VehicleWeaponsSystem _rmcVehicleWeapons = default!;
     [Dependency] private readonly RMCSharedWeaponControllerSystem _rmcSharedWeaponController = default!;
 
     private const float InteractNextFire = 0.3f;

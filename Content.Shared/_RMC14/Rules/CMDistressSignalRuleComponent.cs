@@ -214,4 +214,14 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public bool RecalculatedPower;
+    // CCM14-start
+    [DataField]
+    public int MarinesSpawned;
+
+    [DataField]
+    public int XenosSpawned;
+
+    [DataField]
+    public int SurvivorsSpawned;
+    // CCM14-end
 }

@@ -24,3 +24,4 @@ cm-job-supervisors-royal-troop-sergeant = Сотнику
 cm-job-supervisors-royal-troop-commander = Командеру
 cm-job-supervisors-squadron-command = командованию эскадрильи
 cm-job-supervisors-royal-major = Полемарху и Императору
+ccm-job-supervisors-provost = Военному Приставолитету

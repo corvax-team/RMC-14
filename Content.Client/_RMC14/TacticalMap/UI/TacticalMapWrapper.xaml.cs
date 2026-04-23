@@ -8,7 +8,6 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.OrbitalCannon;
 using Content.Shared._RMC14.Mortar;
 using Content.Shared._RMC14.TacticalMap;
-using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared.Ghost;
 using Content.Shared.Administration;
 using Content.Shared.Explosion.Components;
@@ -74,9 +73,9 @@ public sealed partial class TacticalMapWrapper : Control
     private const int DefaultMortarMaxRange = 65;
     private const float DefaultHiveCoreRangeTiles = 11.848f;
     private const float DefaultHivePylonRangeTiles = 8.463f;
-    private const float BlipStaleFadeStartSeconds = 60f;
-    private const float BlipStaleFadeEndSeconds = 300f;
-    private const float BlipStaleMinAlpha = 0.35f;
+    private const float BlipStaleFadeStartSeconds = 300f;
+    private const float BlipStaleFadeEndSeconds = 1200f;
+    private const float BlipStaleMinAlpha = 0.5f;
     private const float UpdateFeedbackSeconds = 1.2f;
     private const float LayerVisibilityButtonMinWidth = 80f;
     private const float CompactTopButtonThreshold = 500f;
@@ -420,6 +419,7 @@ public sealed partial class TacticalMapWrapper : Control
 
     public void UpdateMapList(IReadOnlyList<TacticalMapMapInfo> maps, NetEntity activeMap)
     {
+        // rebuild server-owned map options without echoing selection events.
         _suppressMapSelection = true;
         MapSelectButton.Clear();
 
@@ -492,7 +492,7 @@ public sealed partial class TacticalMapWrapper : Control
 
     private void SetObjectivesToggleText()
     {
-        var text = Loc.GetString("ui-tactical-map-objectives-toggle", ("visible", _objectivesVisible));
+        var text = Loc.GetString("ui-tactical-map-objectives-toggle", ("visible", _objectivesVisible)); // CCM14
         SetButtonText(ObjectivesToggleButton, text, DefaultButtonTextColor);
     }
 
@@ -503,7 +503,10 @@ public sealed partial class TacticalMapWrapper : Control
         var activeChanged = _lastActiveLayer != activeLayer;
         _lastActiveLayer = activeLayer;
         if (activeChanged)
+        {
+            // active layer changes replace the editable canvas snapshot.
             MarkCanvasSynced();
+        }
 
         _suppressLayerSelection = true;
         LayerSelectButton.Clear();
@@ -576,6 +579,7 @@ public sealed partial class TacticalMapWrapper : Control
 
     public void UpdateLayerVisibilityList(IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> layers, IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> visibleLayers)
     {
+        // layer visibility is server-owned, local clicks request changes.
         var incomingLayers = layers.ToList();
         var wasExpanded = _layerVisibilityExpanded || LayerVisibilityGrid.Visible;
         var sameLayerList = _availableLayers.Count == incomingLayers.Count;
@@ -718,6 +722,7 @@ public sealed partial class TacticalMapWrapper : Control
 
     public void UpdateCanvasBackground()
     {
+        // canvas background shows visible-layer context behind the active layer.
         Canvas.BackgroundLines.Clear();
         if (Map.Lines.Count > 0)
         {
@@ -756,6 +761,8 @@ public sealed partial class TacticalMapWrapper : Control
     {
         _blipStaleEnabled = enabled;
         _blipStaleSince = lastUpdateAt;
+        _blipStaleAlpha = -1f;
+        UpdateBlipStaleAlpha();
     }
 
     public void SetCanvasAccess(bool canDraw)
@@ -1067,6 +1074,7 @@ public sealed partial class TacticalMapWrapper : Control
         if (!_canDraw)
             return;
 
+        // dirty canvas is protected from server snapshots until submitted.
         if (_canvasDirty)
             return;
 
@@ -1085,6 +1093,7 @@ public sealed partial class TacticalMapWrapper : Control
 
     public bool CanApplyCanvasSnapshot()
     {
+        // open edits win over replicated active-layer snapshots.
         return !_canvasDirty;
     }
 
@@ -2280,6 +2289,7 @@ public sealed partial class TacticalMapWrapper : Control
         if (_blipStaleEnabled)
         {
             IGameTiming time = IoCManager.Resolve<IGameTiming>();
+            // older snapshots fade down slowly.
             var ageSeconds = MathF.Max(0f, (float)(time.CurTime - _blipStaleSince).TotalSeconds);
 
             if (ageSeconds <= BlipStaleFadeStartSeconds)
@@ -2343,19 +2353,13 @@ public sealed partial class TacticalMapWrapper : Control
 
     private bool IsInQueenEyeMode()
     {
-        IEntityManager entMan = IoCManager.Resolve<IEntityManager>();
         EntityUid? player = _player.LocalEntity;
 
         if (player == null)
             return false;
 
-        if (entMan.HasComponent<GhostComponent>(player.Value))
-            return true;
-
-        if (!entMan.TryGetComponent<QueenEyeActionComponent>(player.Value, out QueenEyeActionComponent? queenEyeComp))
-            return false;
-
-        return queenEyeComp.Eye != null;
+        IEntityManager entMan = IoCManager.Resolve<IEntityManager>();
+        return entMan.HasComponent<GhostComponent>(player.Value);
     }
 
     private void InvalidatePlayerCache()

@@ -1,14 +1,12 @@
-using System;
 using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Vehicle.Components;
-using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
-using Robust.Shared.Maths;
+using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client._RMC14.Vehicle;
 

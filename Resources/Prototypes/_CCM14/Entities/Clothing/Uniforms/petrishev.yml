@@ -1,0 +1,19 @@
+- type: entity
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: CCMJumpsuitRevolutionary
+  name: Petrishev Revolutionary fatigues
+  description: A set of an Petrishev Revolutionary fatigues, seems like it was an USSP uniform before, but got remade, in the name of communism.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Uniforms/petrishev_fatigues.rsi
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchRev
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: sleeves
+  - type: Tag
+    tags:
+    - CCMJumpsuitRevolutionary

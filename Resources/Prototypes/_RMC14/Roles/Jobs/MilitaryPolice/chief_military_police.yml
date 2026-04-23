@@ -36,7 +36,7 @@
   requireAdminNotify: true
   joinNotifyCrew: false
   marineAuthorityLevel: 11
-  supervisors: rmc-job-supervisors-commander
+  supervisors: ccm-job-supervisors-provost  # CCM14
   accessGroups:
   - CMP
   roleWeight: 0.25

@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using Content.Server.Shuttles.Components;
+﻿using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._CCM.CommunicationsConsole;
 using Content.Shared._CCM.CommunicationsConsole.Components;
+using Content.Shared._CCM.CommunicationsConsole.ERT;
 using Content.Shared._CCM.CommunicationsConsole.UI;
 using Content.Shared._RMC14.Marines.Announce;
 using Robust.Shared.EntitySerialization.Systems;
@@ -18,6 +18,7 @@ public sealed class CCMCommunicationsConsoleSystem : CCMSharedCommunicationsCons
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
+    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
 
     protected override void OnRunMessage(Entity<CCMCommunicationsConsoleComponent> entity,
         ref CCMCommunicationsConsoleERTCallBuiMessage args)
@@ -36,23 +37,26 @@ public sealed class CCMCommunicationsConsoleSystem : CCMSharedCommunicationsCons
 
     private void CrashERTShuttle(TimeSpan flyTime)
     {
-        var points = EntityQuery<CCMERTCrashMarkerComponent>().ToList();
+        var points = new List<(EntityUid Uid, CCMERTCrashMarkerComponent Comp)>();
+        var pointQuery = EntityQueryEnumerator<CCMERTCrashMarkerComponent>();
+        while (pointQuery.MoveNext(out var uid, out var comp))
+        {
+            points.Add((uid, comp));
+        }
+
         if (points.Count == 0)
             return;
 
         var point = _random.Pick(points);
-        var pointUid = point.Owner;
-
-        if (!TryComp<CCMERTCrashMarkerComponent>(pointUid, out var crashMarker))
-            return;
+        var pointUid = point.Uid;
 
         var query = EntityQueryEnumerator<CCMERTShuttleComponent, ShuttleComponent>();
-        while (query.MoveNext(out var uid, out var ertShuttle, out var shuttle))
+        while (query.MoveNext(out var uid, out _, out var shuttle))
         {
             _shuttle.FTLToCoordinates(
                 uid,
                 shuttle,
-                Transform(pointUid).Coordinates.Offset(crashMarker.Offset),
+                Transform(pointUid).Coordinates.Offset(point.Comp.Offset),
                 Angle.Zero,
                 hyperspaceTime: (float)flyTime.TotalSeconds
             );
@@ -67,12 +71,10 @@ public sealed class CCMCommunicationsConsoleSystem : CCMSharedCommunicationsCons
 
         var selectedMapPath = _random.Pick(mapPaths);
 
-        var mapLoader = Get<MapLoaderSystem>();
-
-        if (!mapLoader.TryLoadMap(selectedMapPath, out var mapUid, out _))
+        if (!_mapLoader.TryLoadMap(selectedMapPath, out var mapUid, out _))
             return;
 
-        if (!TryComp<MapComponent>(mapUid, out var mapComp))
+        if (!TryComp(mapUid.Value, out MapComponent? mapComp))
             return;
 
         _mapSystem.InitializeMap(mapComp.MapId);

@@ -1,4 +1,4 @@
-namespace Content.Shared._CCM.Repairable.Events;
+namespace Content.Shared._CCM.Repairable;
 
 /// <summary>
 /// Raised when repair is attempted to check if it should be allowed.

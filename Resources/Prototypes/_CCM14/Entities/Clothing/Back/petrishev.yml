@@ -1,0 +1,42 @@
+- type: entity
+  parent: CMSatchel
+  id: CCMSatchelRev
+  name: Petrishev Revolutionary satchel
+  description: A suprisingly well made leather satchel. In use of Petrishev Revolutionary combatants.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Back/Backpacks/petrishev_satchel.rsi
+
+- type: entity
+  parent: CCMSatchelRev
+  id: CCMSatchelREVSanitarFilled
+  suffix: Filled, Medic
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMDefibrillator
+    - id: CMAdvFirstAidKitFilled
+    - id: CMRollerBedSpawnFolded
+
+- type: entity
+  parent: CCMSatchelRev
+  id: CCMSatchelREVSoldatFilled
+  suffix: Filled, Rifleman
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFireExtinguisherPortable
+    - id: CMPackFlare
+    - id: CMPackFlare
+
+- type: entity
+  parent: CCMSatchelRev
+  id: CCMSatchelREVLeaderFilled
+  suffix: Filled, Leader
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPackFlare
+    - id: RMCBoxZiptie
+    - id: RMCMagazineLMGQYJ72
+    - id: RMCMagazineLMGQYJ72

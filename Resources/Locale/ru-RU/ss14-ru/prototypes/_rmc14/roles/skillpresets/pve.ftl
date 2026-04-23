@@ -12,5 +12,5 @@ ent-RMCSkillPresetPVERifleman = Стрелок
     .desc = { "" }
 ent-RMCSkillPresetPVECLFDoctor = Врач КФО
     .desc = { ent-RMCSkillPresetPVECorpsman.desc }
-ent-RMCSkillPresetPVEForeconRTO = Радист ФОРЕКОН
+ent-RMCSkillPresetPVEForeconRTO = Радист СОиС
     .desc = { ent-RMCSkillPresetPVERifleman.desc }

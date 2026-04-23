@@ -14,3 +14,5 @@ ent-CMPelletShotgunIncendiaryBuckshot = incendiary buckshot shell
     .desc = { ent-CMPelletShotgunBuckshot.desc }
 ent-RMCPelletShotgunBreaching = light breaching shell
     .desc = { ent-CMPelletShotgunBase.desc }
+ent-RMCPelletShotgunL49B = L49B pellets
+    .desc = { ent-CMPelletShotgunBase.desc }

@@ -589,8 +589,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         {
             foreach (var entity in entities)
             {
-                if (!HasComp<ClimbableComponent>(entity) && !HasComp<RMCReactorPoweredLightComponent>(entity) ||
-                    HasComp<BarricadeComponent>(entity))
+                if (!HasComp<ClimbableComponent>(entity) && !HasComp<RMCReactorPoweredLightComponent>(entity)) // CCM14
                     continue;
 
                 _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-blocked"), xeno, xeno, PopupType.SmallCaution);

@@ -1,6 +1,6 @@
 - type: gameMap
   id: David
-  mapName: David
+  mapName: UEG "Давид"
   mapPath: /Maps/_CCM14/david.yml
   minPlayers: 0
   maxRandomOffset: 0

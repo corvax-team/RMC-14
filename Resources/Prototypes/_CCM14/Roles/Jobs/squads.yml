@@ -1,0 +1,24 @@
+- type: entity
+  parent: SquadBase
+  id: SquadREV
+  name: Petrishev
+  components:
+  - type: SquadTeam
+    color: "#8B0000"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: REV
+    minimapBackground:
+      sprite: /Textures/_CCM14/Interface/map_blips.rsi
+      state: background_rev
+    canSupplyDrop: false
+    group: REV
+    leaderIcon:
+      sprite: _CCM14/Interface/cm_job_icons.rsi
+      state: petrishev_leader

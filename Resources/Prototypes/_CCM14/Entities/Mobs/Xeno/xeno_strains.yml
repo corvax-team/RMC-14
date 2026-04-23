@@ -2,7 +2,7 @@
 - type: entity
   parent: CMXenoWarrior
   id: CCMXenoWarriorBoxer
-  suffix: Boxer
+  suffix: CCM-Boxer
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Warrior/boxer.rsi
@@ -18,8 +18,7 @@
     - ActionXenoTailStab
     - ActionXenoPunch
     - CCMActionXenoBoxerAdvance
-    - CCMActionXenoBoxerWidePunch
-    - CCMActionXenoBoxerTailKnock
+    - CCMActionXenoBoxerKnockout
     - ActionXenoDevolve
   - type: XenoLeap
     delay: 0
@@ -28,7 +27,7 @@
     knockdownTime: 0
     leapSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
     hitEffect: CMEffectPunch
-    targetJitterTime: 1
+    targetJitterTime: 0
     targetCameraShakeStrength: 1
     damage:
       groups:
@@ -37,30 +36,51 @@
     damage:
       types:
         Blunt: 35
-  - type: XenoTailSweep
-    plasmaCost: 0
-    paralyzeTime: 0
-    damage:
-      types:
-        Slash: 35
-  - type: XenoScissorCut
-    range: 1
-    attackEffect: RMCEffectSlam
-    telegraphEffectEdge: RMCEffectXenoTelegraphRed
-    damage:
-      types:
-        Slash: 30
-    slashSound:
-        collection: Punch
-        params:
-          variation: 0.15
   - type: MeleeWeapon
     soundHit:
       collection: Punch
     animation: CCMWeaponArcXenoPunch
     damage:
       groups:
-        Brute: 35
+        Brute: 28
+  - type: Tackle
+    max: 6
+    min: 3
+  - type: XenoRage
+    maxRage: 10
+    armorPerRage: 0
+    speedBuffPerRage: 0
+    attackSpeedPerRage: 0.05
+    healAmount: 0
+  - type: XenoEviscerate
+    stunTime: 0.25
+    lifeStealPerMarine: 175
+    maxLifeSteal: 175
+    rageHitSound: 
+      collection: CCMBoxingBell
+    damageAtRageLevels:
+    - groups:
+        Brute: 16
+    - groups:
+        Brute: 32
+    - groups:
+        Brute: 48
+    - groups:
+        Brute: 64
+    - groups:
+        Brute: 80
+    - groups:
+        Brute: 96
+    - groups:
+        Brute: 112
+    - groups:
+        Brute: 128
+    - groups:
+        Brute: 144
+    - groups:
+        Brute: 160
+    rangeAtRageLevels: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0,]
+    windupReductionAtRageLevels: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.9, 1]
   - type: XenoEvolution
     max: 500
     evolvesTo:
@@ -69,7 +89,7 @@
     strains: []
   - type: XenoHidden
   - type: XenoLifesteal
-    maxHeal: 80
+    maxHeal: 60
     minHeal: 40
 
 # // CCM Xeno Punch Attack Effect
@@ -85,12 +105,19 @@
     state: punch
     noRot: true
 # // CCM Xeno Punch Attack Effect
+# // CCM Boxing bell sound collection
+- type: soundCollection
+  id: CCMBoxingBell
+  files:
+  - /Audio/Weapons/boxingbell.ogg # Need that because eviscarate need collection
+# // CCM Boxing bell sound collection
 # // CCM Xeno Strain - Boxer Warrior
 
 # // CCM Xeno Strain - Melee & Ranger Sentinels
 - type: entity
   parent: CMXenoSentinel
   id: CCMXenoMeleeSentinel
+  suffix: CCM-Melee
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Sentinel/melee.rsi
@@ -151,6 +178,7 @@
 - type: entity
   parent: CMXenoSentinel
   id: CCMXenoRangerSentinel
+  suffix: CCM-Ranger
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Sentinel/ranger.rsi
@@ -200,6 +228,7 @@
 - type: entity
   parent: CMXenoSpitter
   id: CCMXenoSniperSpitter
+  suffix: CCM-Sniper
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Spitter/sniper.rsi

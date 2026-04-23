@@ -65,9 +65,6 @@
   id: CMFlarePack
 
 - type: Tag
-  id: CMXenoRoyalLarva
-
-- type: Tag
   id: RMCSmartPistol
 
 - type: Tag
@@ -117,6 +114,9 @@
 
 - type: Tag
   id: RMCScrewdriver
+
+- type: Tag
+  id: LightReplacer
 
 - type: Tag
   id: ThrowingKnife

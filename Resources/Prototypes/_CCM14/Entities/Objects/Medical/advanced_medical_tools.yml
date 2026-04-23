@@ -1,0 +1,86 @@
+- type: entity
+  parent: CMSurgicalLine
+  id: CCMAdvancedBruteToolHealer
+  suffix: CCM - Healing Brute
+  name: advanced surgical tool
+  description: A roll of military-grade surgical line, able to seamlessly sew up any wound. Also works as a robust fishing line for maritime deployments.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
+    state: scalpel_manager
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Medical/Surgery/scalpel.rsi
+    heldPrefix: manager
+  - type: WoundTreater
+    wound: Brute
+    treats: false
+    group: Brute
+    consumable: false
+    scalingDoAfter: 0.1
+    damage: -20
+    canUseUnskilled: false
+    skills:
+      RMCSkillMedical: 3
+    treatBeginSound:
+      path: "/Audio/_RMC14/Medical/splint.ogg"
+    treatEndSound:
+      path: "/Audio/_RMC14/Medical/Surgery/cautery2.ogg"
+    userPopup: cm-surgical-line-user-popup
+    targetPopup: cm-surgical-line-target-popup
+    othersPopup: cm-surgical-line-others-popup
+    targetStartPopup: cm-surgical-line-start-target-popup
+    userFinishPopup: cm-surgical-line-finish-user-popup
+    targetFinishPopup: cm-surgical-line-finish-target-popup
+    othersFinishPopup: cm-surgical-line-finish-others-popup
+    noneSelfPopup: cm-surgical-line-none-self-popup
+    noneOtherPopup: cm-surgical-line-none-other-popup
+    noWoundsOnUserPopup: cm-wounds-already-treated-self-popup
+    noWoundsOnTargetPopup: cm-wounds-already-treated-target-popup
+  - type: MedicallyUnskilledDoAfter
+    min: 3
+    doAfter: 3
+  - type: StackPrice
+    price: 10
+
+- type: entity
+  parent: CMSynthGraft
+  id: CCMAdvancedBurnToolHealer
+  name: advanced synth graft-tool
+  suffix: CCM - Healing Burn
+  description: An applicator for silicon skin field grafts. The stuff reeks, itches like the dickens, hurts going on, and the color is a perfectly averaged multiethnic tone that doesn't blend with anyone's complexion. But at least you don't have to stay in sickbay.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/cautery.rsi
+    state: predator_cautery
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Medical/Surgery/cautery.rsi
+  - type: WoundTreater
+    wound: Burn
+    treats: false
+    group: Burn
+    consumable: false
+    scalingDoAfter: 0.1
+    damage: -20
+    canUseUnskilled: false
+    skills:
+      RMCSkillMedical: 3
+    treatBeginSound:
+      path: "/Audio/_RMC14/Medical/splint.ogg"
+    treatEndSound:
+      path: "/Audio/_RMC14/Medical/Surgery/scalpel1.ogg"
+    userPopup: cm-synthgraft-user-popup
+    targetPopup: cm-synthgraft-target-popup
+    othersPopup: cm-synthgraft-others-popup
+    targetStartPopup: cm-synthgraft-start-target-popup
+    userFinishPopup: cm-synthgraft-finish-user-popup
+    targetFinishPopup: cm-synthgraft-finish-target-popup
+    othersFinishPopup: cm-synthgraft-finish-others-popup
+    noneSelfPopup: cm-synthgraft-none-self-popup
+    noneOtherPopup: cm-synthgraft-none-other-popup
+    noWoundsOnUserPopup: cm-burns-already-treated-self-popup
+    noWoundsOnTargetPopup: cm-burns-already-treated-target-popup
+  - type: MedicallyUnskilledDoAfter
+    min: 3
+    doAfter: 3

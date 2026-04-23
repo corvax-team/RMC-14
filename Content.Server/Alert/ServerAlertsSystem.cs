@@ -1,3 +1,4 @@
+using Content.Shared._CCM.Alert;
 using Content.Shared.Alert;
 using Robust.Shared.GameStates;
 
@@ -22,7 +23,9 @@ internal sealed class ServerAlertsSystem : AlertsSystem
             TryComp<AlertsComponent>(src, out var srcAlerts))
         {
             foreach (var (key, state) in srcAlerts.Alerts)
+            {
                 display[key] = state;
+            }
         }
         //CCM-change-end
 

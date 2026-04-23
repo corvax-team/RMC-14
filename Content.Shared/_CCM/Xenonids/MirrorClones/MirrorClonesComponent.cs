@@ -4,8 +4,8 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._CCM.Xenonids.MirrorClones;
 
 [RegisterComponent]
-[NetworkedComponent]
+[NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class MirrorClonesComponent : Component
 {
-    [DataField] public EntProtoId ClonePrototype = "CCMXenoHunterMirrorClone";
+    [DataField, AutoNetworkedField] public EntProtoId ClonePrototype = "CCMXenoHunterMirrorClone";
 }

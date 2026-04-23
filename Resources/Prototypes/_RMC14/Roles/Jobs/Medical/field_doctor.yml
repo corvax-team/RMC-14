@@ -9,7 +9,7 @@
     role: CMJobDoctor
     time: 36000 # 10 hours
   ranks:
-    RMCRankSecondLT: []
+    RMCRankNavyPettyOfficer3rdClass: [] #CCM14
   startingGear: CMGearFieldDoctor
   icon: "CMJobIconFieldDoctor"
   joinNotifyCrew: false
@@ -30,6 +30,11 @@
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
       prefix: rmc-job-prefix-field-doctor
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetMarine]
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi

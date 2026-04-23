@@ -176,7 +176,8 @@ public sealed partial class EggMorpherSystem : EntitySystem
             args.Verbs.Add(changeReserveVerb);
         }
 
-        if (HasComp<ActorComponent>(user) && HasComp<GhostComponent>(user))
+        if (HasComp<ActorComponent>(user) && HasComp<GhostComponent>(user) &&
+            comp.CurParasites > comp.ReservedParasites && comp.CurParasites > 0)
         {
             var parasiteVerb = new ActivationVerb
             {

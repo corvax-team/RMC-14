@@ -23,9 +23,9 @@ ui-tactical-map-layer-squad-intel = Отряд Разведки
 ui-tactical-map-layer-squad-spp = Отряд СССП
 ui-tactical-map-layer-squad-pmc = Отряд ЧВК
 ui-tactical-map-layer-squad-freelancer = Отряд Фрилансеров
-ui-tactical-map-layer-squad-royal-marines = Королевская морская пехота
-ui-tactical-map-layer-squad-provost = Отряд Провост
-ui-tactical-map-layer-squad-forecon = Отряд Форекон
+ui-tactical-map-layer-squad-royal-marines = Пехота Империи
+ui-tactical-map-layer-squad-provost = Отряд Приставолитета
+ui-tactical-map-layer-squad-forecon = Отряд СОиС
 ui-tactical-map-layer-squad-sof = Отряд ССОМП
 ui-tactical-map-layer-squad-clf = Отряд КФО
 ui-tactical-map-layer-squad-unassigned = Без отряда
@@ -122,8 +122,8 @@ ui-tactical-map-follow-player-active = Стоп
 ui-tactical-map-follow-player-inactive = Центр
 ui-tactical-map-cooldown-seconds = { $seconds }
 ui-tactical-map-tunnel-info = Туннель: { $name }
-
-ui-tactical-map-objectives-toggle = { $visible ->
-    [true] Скрыть
-    *[false] Показать
-}
+ui-tactical-map-objectives-toggle =
+    { $visible ->
+        [true] Скрыть
+       *[false] Показать
+    }

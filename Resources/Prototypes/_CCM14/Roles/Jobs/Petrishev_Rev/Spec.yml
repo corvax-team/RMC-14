@@ -1,0 +1,98 @@
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CCMJobIconREVSpec
+  icon:
+    sprite: _CCM14/Interface/cm_job_icons.rsi
+    state: petrishev_spec
+
+- type: playTimeTracker
+  id: CCMJobREVSpec
+
+- type: job
+  parent: CMJobBase
+  id: CCMREVSpec
+  name: rmc-job-name-rev-spec
+  description: rmc-job-description-rev-spec
+  playTimeTracker: CCMJobREVSpec
+  startingGear: CCMGearREVSpec
+  icon: "CCMJobIconREVSpec"
+  supervisors: cm-job-supervisors-sl
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  spawnMenuRoleName: Petrishevtsi Specialist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Petrishev
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillCqc: 3
+        RMCSkillEndurance: 5
+        RMCSkillFirearms: 4
+        RMCSkillFireman: 3
+        RMCSkillJtac: 1
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillPolice: 1
+
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rev-spec
+  hidden: true
+
+- type: entity
+  id: CCMRandomHumanoidREVSpecHostile
+  name: rev specialist ghost role
+  suffix: Spawner, Player, Hostile
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
+  - type: RandomHumanoidSpawner
+    settings: CCMREVSpec
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: CCMREVSpec
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-rev-hostile-spec
+    description: rmc-ghost-role-information-rev-hostile-description
+    rules: rmc-ghost-role-information-rev-rules
+    reregister: false
+    job: CCMREVSpec
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadREV
+
+- type: startingGear
+  id: CCMGearREVSpec
+  equipment:
+    head: CCMREVBeret
+    mask: RMCMaskBalaclavaSkullBlack
+    ears: CCMHeadsetREV
+    eyes: RMCGlassesSPPCommandoNightVision
+    jumpsuit: CCMJumpsuitRevolutionary
+    outerClothing: CCMArmorREVSpecWP
+    gloves: CMHandsBlackMarine
+    shoes: CMBootsBlack
+    suitstorage: CCMWeaponRifleZhupel
+    id: RMCIDSPP
+    belt: CCMBeltSPPBrownFillSpec
+    back: CCMSatchelREVSoldatFilled
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchExplosiveFilledSPP
+  storage:
+    back:
+    - CCMMagazineRifleZhupel
+    - CCMMagazineRifleZhupel
+

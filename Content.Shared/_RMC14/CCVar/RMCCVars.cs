@@ -115,6 +115,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCCorrosiveAcidDamageTimeSeconds =
         CVarDef.Create("rmc.corrosive_acid_damage_time_seconds", 40, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<bool> RMCCorrosiveAcidInstant =
+        CVarDef.Create("rmc.corrosive_acid_instant", false, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<int> RMCEvolutionPointsRequireOvipositorMinutes =
         CVarDef.Create("rmc.evolution_points_require_ovipositor_minutes", 5, CVar.REPLICATED | CVar.SERVER);
 
@@ -124,14 +127,17 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCAtmosTileEqualize =
         CVarDef.Create("rmc.atmos_tile_equalize", false, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<bool> RMCVehicleDebugOverlay =
+    public static readonly CVarDef<bool> VehicleDebugOverlay =
         CVarDef.Create("rmc.vehicle.debug_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
 
-    public static readonly CVarDef<bool> RMCVehicleHardpointOverlay =
+    public static readonly CVarDef<bool> VehicleHardpointOverlay =
         CVarDef.Create("rmc.vehicle.hardpoint_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
 
-    public static readonly CVarDef<bool> RMCVehicleCollisionOverlay =
-        CVarDef.Create("rmc.vehicle.collision_overlay", true, CVar.CLIENT | CVar.ARCHIVE);
+    public static readonly CVarDef<bool> VehicleCollisionOverlay =
+        CVarDef.Create("rmc.vehicle.collision_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<bool> VehicleMovementOverlay =
+        CVarDef.Create("rmc.vehicle.movement_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
 
     public static readonly CVarDef<bool> RMCGasTileOverlayUpdate =
         CVarDef.Create("rmc.gas_tile_overlay_update", false, CVar.REPLICATED | CVar.SERVER);
@@ -160,10 +166,10 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<float> RMCDropshipFabricatorGainEverySeconds =
         CVarDef.Create("rmc.dropship_fabricator_gain_every_seconds", 3.33333f, CVar.REPLICATED | CVar.SERVER);
     // CCM14-start
-    public static readonly CVarDef<int> RMCVehicleFabricatorStartingPoints =
+    public static readonly CVarDef<int> VehicleFabricatorStartingPoints =
         CVarDef.Create("rmc.vehicle_fabricator_starting_points", 5000, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<float> RMCVehicleFabricatorGainEverySeconds =
+    public static readonly CVarDef<float> VehicleFabricatorGainEverySeconds =
         CVarDef.Create("rmc.vehicle_fabricator_gain_every_seconds", 5f, CVar.REPLICATED | CVar.SERVER);
     // CCM14-end
     public static readonly CVarDef<bool> RMCDropshipCASDebug =
@@ -430,7 +436,7 @@ public sealed partial class RMCCVars : CVars
     CVarDef.Create("rmc.tacmap_alert_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCParasiteSpawnInitialDelayMinutes =
-        CVarDef.Create("rmc.parasite_spawn_initial_delay_minutes", 5f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.parasite_spawn_initial_delay_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCXenoSpawnInitialMuteDurationSeconds =
         CVarDef.Create("rmc.xeno_spawn_initial_mute_duration_seconds", 180f, CVar.REPLICATED | CVar.SERVER);

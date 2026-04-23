@@ -1,0 +1,39 @@
+- type: radioChannel
+  id: REV
+  name: chat-radio-petrishevtsi
+  keycode: "]"
+  frequency: 2913
+  color: "#8B0000"
+  longRange: true
+  tower: true
+
+- type: entity
+  parent: RMCEncryptionKeySPP
+  id: CCMEncryptionKeyRev
+  name: Petrishev radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - REV
+    defaultChannel: REV
+
+- type: entity
+  abstract: true
+  parent: RMCHeadsetIconsPetr
+  id: RMCHeadsetPetrAbstract
+  components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: LeaderREV
+    trackerModes:
+    - LeaderREV
+  - type: GrantTacMapAlert
+
+- type: entity
+  parent: RMCHeadsetPetrAbstract
+  id: CCMHeadsetREV
+  name: Petrishev Revolutionary headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CCMEncryptionKeyRev
