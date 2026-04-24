@@ -1,28 +1,7 @@
 - type: entity
-  parent: ActionXenoBase
-  id: CCMActionXenoRuniLeap
-  name: Pounce (50)
-  description: Leap at your target, tackling and disarming them.
-  components:
-  - type: Action
-    itemIconStyle: NoItem
-    icon:
-      sprite: _CCM14/Actions/xeno_actions.rsi
-      state: double_jump
-    useDelay: 15
-  - type: TargetAction
-    range: 100
-    checkCanAccess: false
-  - type: WorldTargetAction
-    event: !type:MCXenoPounceActionEvent
-      plasmaCost: 20
-  - type: XenoActionPlasma
-    cost: 50
-
-- type: entity
   id: ActionXenoRounyScreech
   parent: ActionXenoBase
-  name: Screech (250)
+  name: Screech (100)
   description: A wide area of effect stun, screeches upon activation. [color=red]This will also stun parasites, and is blocked by solid walls, smoke, and boiler gas, but not windows![/color]
   components:
   - type: Action

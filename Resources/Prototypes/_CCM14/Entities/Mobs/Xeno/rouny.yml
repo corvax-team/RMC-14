@@ -20,7 +20,6 @@
     - ActionXenoBoneChips
     - ActionXenoZoom
     - ActionXenoDevolve
-    - CCMActionXenoRuniLeap
     - ActionXenoRounyScreech
     - ActionCCMXenoChargeLine
     tier: 3
@@ -74,3 +73,5 @@
   - type: XenoPlasma
     plasma: 250
     maxPlasma: 250
+  - type: XenoLeap
+    moveDelayTime: 1.5
