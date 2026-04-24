@@ -158,4 +158,9 @@ public sealed partial class VictimInfectedComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan LarvaInvincibilityTime = TimeSpan.FromSeconds(1);
+
+    // CCM start
+    [DataField]
+    public EntityUid? Parasite;
+    // CCM end
 }

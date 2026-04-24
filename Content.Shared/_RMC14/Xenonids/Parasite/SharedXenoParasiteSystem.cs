@@ -42,6 +42,7 @@ using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
+using Content.Shared._CCM.Xenonids.Parasite; // CCM add
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -689,6 +690,10 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 _inventory.TryUnequip(infectedVictim, "mask", true, true, true);
 
                 var victimComp = EnsureComp<VictimInfectedComponent>(infectedVictim);
+                // CCM start
+                victimComp.Parasite = uid;
+                Dirty(infectedVictim, victimComp);
+                // CCM end
                 SetHive((infectedVictim, victimComp), _hive.GetHive(uid)?.Owner);
 
                 // TODO RMC14 also do damage to the parasite
@@ -959,42 +964,62 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     /// <returns>
     ///     If target should be infected.
     /// </returns>
-    private bool TryRipOffClothing(EntityUid victim, SlotFlags slotFlags, bool doPopup = true)
+    private bool TryRipOffClothing(EntityUid victim, SlotFlags slotFlags, bool doPopup = true) // CCM changed royal parasite
     {
-        if (!_inventory.TryGetContainerSlotEnumerator(victim, out var slots))
+        if (!_inventory.TryGetSlots(victim, out var slots)) // CCM changed royal parasite
             return true;
 
         EntityUid? rippedOffItem = null;
-        while (slots.NextItem(out var containedEntity, out var inventorySlot))
+
+        foreach (var slot in slots) // CCM changed royal parasite
         {
-            if ((inventorySlot.SlotFlags & slotFlags) != 0 || _tagSystem.HasTag(containedEntity, "RipOffOnInfection"))
+            // CCM changed royal parasite start
+            if (!_inventory.TryGetSlotEntity(victim, slot.Name, out var containedEntity))
+                continue;
+
+            if ((slot.SlotFlags & slotFlags) != 0 ||
+                _tagSystem.HasTag(containedEntity.Value, "RipOffOnInfection"))
+             // CCM changed royal parasite end
             {
                 TryComp(containedEntity, out ParasiteResistanceComponent? resistance);
 
                 if (resistance != null && resistance.Count < resistance.MaxCount)
                 {
                     resistance.Count += 1;
-                    Dirty(containedEntity, resistance);
+                    Dirty(containedEntity.Value, resistance); // CCM changed royal parasite
 
                     if (_net.IsServer && doPopup)
                     {
-                        var popupMessage = Loc.GetString("rmc-xeno-infect-fail", ("target", victim), ("clothing", containedEntity));
+                        // CCM changed royal parasite start
+                        var popupMessage = Loc.GetString(
+                            "rmc-xeno-infect-fail",
+                            ("target", (object)victim),
+                            ("clothing", (object)containedEntity)
+                        );
+                        // CCM changed royal parasite end
+
                         _popup.PopupEntity(popupMessage, victim, PopupType.SmallCaution);
                     }
 
                     return false;
                 }
-                else
-                {
-                    _inventory.TryUnequip(victim, victim, inventorySlot.Name, force: true);
-                    rippedOffItem = containedEntity;
-                }
+               // CCM changed royal parasite start
+                _inventory.TryUnequip(victim, victim, slot.Name, force: true);
+                rippedOffItem = containedEntity;
+               // CCM changed royal parasite end
             }
         }
 
         if (_net.IsServer && doPopup && rippedOffItem != null)
         {
-            var popupMessage = Loc.GetString("rmc-xeno-infect-success", ("target", victim), ("clothing", rippedOffItem));
+            // CCM changed royal parasite start
+            var popupMessage = Loc.GetString(
+                "rmc-xeno-infect-success",
+                ("target", (object)victim),
+                ("clothing", (object)rippedOffItem)
+            );
+            // CCM changed royal parasite end
+
             _popup.PopupEntity(popupMessage, victim, PopupType.MediumCaution);
         }
 
@@ -1030,17 +1055,36 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         burst.Comp.Hive = hive;
         Dirty(burst);
     }
+// CCM changed royal parasite start
+public void SpawnLarva(Entity<VictimInfectedComponent> victim, out EntityUid spawned)
+{
+    var larvaContainer = _container.EnsureContainer<Container>(victim.Owner, victim.Comp.LarvaContainerId);
 
-    public void SpawnLarva(Entity<VictimInfectedComponent> victim, out EntityUid spawned)
+    int count = 1;
+
+    if (victim.Comp.Parasite != null &&
+        TryComp<CCMParasiteMultiLarvaComponent>(victim.Comp.Parasite.Value, out var multi))
     {
-        var larvaContainer = _container.EnsureContainer<ContainerSlot>(victim.Owner, victim.Comp.LarvaContainerId);
-        spawned = SpawnInContainerOrDrop(victim.Comp.BurstSpawn, victim.Owner, larvaContainer.ID);
-        LinkLarvaToVictim(victim, spawned);
+        count = Math.Max(1, multi.LarvaCount);
     }
 
+    EntityUid? first = null;
+
+    for (int i = 0; i < count; i++)
+    {
+        var larva = SpawnInContainerOrDrop(victim.Comp.BurstSpawn, victim.Owner, larvaContainer.ID);
+        LinkLarvaToVictim(victim, larva);
+
+        if (first == null)
+            first = larva;
+    }
+
+    spawned = first ?? EntityUid.Invalid;
+}
+// CCM changed royal parasite end
     public void InsertLarva(Entity<VictimInfectedComponent> victim, EntityUid spawned)
     {
-        var larvaContainer = _container.EnsureContainer<ContainerSlot>(victim.Owner, victim.Comp.LarvaContainerId);
+        var larvaContainer = _container.EnsureContainer<Container>(victim.Owner, victim.Comp.LarvaContainerId); // CCM changed royal parasite
         _container.InsertOrDrop(spawned, larvaContainer);
         LinkLarvaToVictim(victim, spawned);
     }
