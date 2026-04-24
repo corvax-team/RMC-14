@@ -21,6 +21,8 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Medical;
 using Content.Shared.Mobs;
+using Content.Shared.Projectiles;
+using Robust.Shared.Log;
 using Robust.Server.Player;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -29,6 +31,9 @@ namespace Content.Server._CCM.Achievements;
 
 public sealed class CCMAchievementSystem : EntitySystem
 {
+    private const string LogCategory = "ccm.achievements";
+    private const float LiveProgressFlushIntervalSeconds = 10f;
+
     private static readonly HashSet<string> OfficerJobs =
     [
         "CMCommandingOfficer",
@@ -95,7 +100,87 @@ public sealed class CCMAchievementSystem : EntitySystem
     private readonly Dictionary<NetUserId, CachedAchievementState> _cache = new();
     private readonly Dictionary<NetUserId, RoundAchievementState> _round = new();
     private bool _roundFinalized;
+    private bool _flushingLiveProgress;
+    private float _liveProgressFlushAccumulator;
     private CCMStatsSide _winningSide = CCMStatsSide.None;
+
+    public IReadOnlyList<string> GetAchievementIds()
+    {
+        return Definitions.Select(def => def.Id).ToArray();
+    }
+
+    public bool TryNormalizeAchievementId(string input, out string achievementId)
+    {
+        achievementId = string.Empty;
+        var match = Definitions.FirstOrDefault(def => def.Id.Equals(input, StringComparison.OrdinalIgnoreCase));
+        if (string.IsNullOrWhiteSpace(match.Id))
+            return false;
+
+        achievementId = match.Id;
+        return true;
+    }
+
+    public async Task<bool> GrantAchievementAsync(NetUserId userId, string achievementId, bool notify = true)
+    {
+        try
+        {
+            if (!TryNormalizeAchievementId(achievementId, out var normalizedId))
+                return false;
+
+            Logger.InfoS(LogCategory, $"GrantAchievementAsync started for user {userId} achievement '{normalizedId}' (notify={notify}).");
+
+            var state = await EnsureStateLoadedAsync(userId);
+            if (state == null || !state.UnlockedIds.Add(normalizedId))
+                return false;
+
+            await PersistUnlockedIdsAsync(userId, state);
+
+            if (notify && _players.TryGetSessionById(userId, out var session))
+            {
+                var context = BuildContext(userId, state);
+                var def = Definitions.First(definition => definition.Id == normalizedId);
+                var completedCount = CountCompleted(context, state.UnlockedIds);
+
+                RaiseNetworkEvent(
+                    new CCMAchievementUnlockedEvent(def.ToProgress(def.Goal, true), completedCount, Definitions.Count),
+                    session.Channel);
+            }
+
+            await PushSnapshotAsync(userId, state);
+            Logger.InfoS(LogCategory, $"GrantAchievementAsync finished for user {userId} achievement '{normalizedId}'.");
+            return true;
+        }
+        catch (Exception e)
+        {
+            Logger.ErrorS(LogCategory, $"GrantAchievementAsync failed for user {userId} achievement '{achievementId}': {e}");
+            return false;
+        }
+    }
+
+    public async Task<bool> RevokeAchievementAsync(NetUserId userId, string achievementId)
+    {
+        try
+        {
+            if (!TryNormalizeAchievementId(achievementId, out var normalizedId))
+                return false;
+
+            Logger.InfoS(LogCategory, $"RevokeAchievementAsync started for user {userId} achievement '{normalizedId}'.");
+
+            var state = await EnsureStateLoadedAsync(userId);
+            if (state == null || !state.UnlockedIds.Remove(normalizedId))
+                return false;
+
+            await PersistUnlockedIdsAsync(userId, state);
+            await PushSnapshotAsync(userId, state);
+            Logger.InfoS(LogCategory, $"RevokeAchievementAsync finished for user {userId} achievement '{normalizedId}'.");
+            return true;
+        }
+        catch (Exception e)
+        {
+            Logger.ErrorS(LogCategory, $"RevokeAchievementAsync failed for user {userId} achievement '{achievementId}': {e}");
+            return false;
+        }
+    }
 
     public override void Initialize()
     {
@@ -119,22 +204,46 @@ public sealed class CCMAchievementSystem : EntitySystem
             after: [typeof(CCMStatsSystem)]);
     }
 
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (_roundFinalized || _flushingLiveProgress || _round.Count == 0)
+            return;
+
+        _liveProgressFlushAccumulator += frameTime;
+        if (_liveProgressFlushAccumulator < LiveProgressFlushIntervalSeconds)
+            return;
+
+        _liveProgressFlushAccumulator = 0f;
+        _ = FlushLiveProgressAsync();
+    }
+
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _round.Clear();
         _cache.Clear();
         _roundFinalized = false;
+        _flushingLiveProgress = false;
+        _liveProgressFlushAccumulator = 0f;
         _winningSide = CCMStatsSide.None;
     }
 
     private async void OnRequestAchievements(RequestCCMAchievementsEvent ev, EntitySessionEventArgs args)
     {
-        var state = await EnsureStateLoadedAsync(args.SenderSession.UserId);
-        if (state == null)
-            return;
+        try
+        {
+            var state = await EnsureStateLoadedAsync(args.SenderSession.UserId);
+            if (state == null)
+                return;
 
-        var snapshot = BuildSnapshot(args.SenderSession.UserId, state);
-        RaiseNetworkEvent(new CCMAchievementsResponseEvent(snapshot), args.SenderSession.Channel);
+            var snapshot = BuildSnapshot(args.SenderSession.UserId, state);
+            RaiseNetworkEvent(new CCMAchievementsResponseEvent(snapshot), args.SenderSession.Channel);
+        }
+        catch (Exception e)
+        {
+            Logger.ErrorS(LogCategory, $"OnRequestAchievements failed for user {args.SenderSession.UserId}: {e}");
+        }
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
@@ -252,32 +361,107 @@ public sealed class CCMAchievementSystem : EntitySystem
             return;
 
         _roundFinalized = true;
+        var roundEntries = _round.ToArray();
 
-        foreach (var (userId, round) in _round)
+        try
         {
-            if (_winningSide == CCMStatsSide.Marines && round.OfficerParticipated)
-                round.OfficerWins += 1;
+            foreach (var (userId, round) in roundEntries)
+            {
+                if (_winningSide == CCMStatsSide.Marines && round.OfficerParticipated)
+                    round.OfficerWins += 1;
 
-            if (_winningSide == CCMStatsSide.Xenos && round.QueenParticipated)
-                round.QueenWins += 1;
+                if (_winningSide == CCMStatsSide.Xenos && round.QueenParticipated)
+                    round.QueenWins += 1;
 
-            if (!round.HasAnyProgress)
-                continue;
+                if (!round.HasAnyProgress)
+                    continue;
 
-            await _db.AdjustCCMPlayerAchievementStats(
-                userId.UserId,
-                round.FriendlyFireDamage,
-                round.RequisitionOrders,
-                round.XenoEvolutions,
-                round.OfficerWins,
-                round.QueenKills,
-                round.QueenWins,
-                round.QueenKillParticipations);
+                var friendlyFireDamage = Math.Max(0, round.FriendlyFireDamage - round.PersistedFriendlyFireDamage);
+                var requisitionOrders = Math.Max(0, round.RequisitionOrders - round.PersistedRequisitionOrders);
+                var xenoEvolutions = Math.Max(0, round.XenoEvolutions - round.PersistedXenoEvolutions);
+                var officerWins = Math.Max(0, round.OfficerWins - round.PersistedOfficerWins);
+                var queenKills = Math.Max(0, round.QueenKills - round.PersistedQueenKills);
+                var queenWins = Math.Max(0, round.QueenWins - round.PersistedQueenWins);
+                var queenKillParticipations = Math.Max(0, round.QueenKillParticipations - round.PersistedQueenKillParticipations);
+
+                await _db.AdjustCCMPlayerAchievementStats(
+                    userId.UserId,
+                    friendlyFireDamage,
+                    requisitionOrders,
+                    xenoEvolutions,
+                    officerWins,
+                    queenKills,
+                    queenWins,
+                    queenKillParticipations);
+            }
+
+            foreach (var (userId, _) in roundEntries)
+            {
+                _ = EvaluatePlayerAsync(userId, notify: true);
+            }
         }
-
-        foreach (var userId in _round.Keys.ToArray())
+        catch (Exception e)
         {
-            _ = EvaluatePlayerAsync(userId, notify: true);
+            Log.Error($"Failed to finalize CCM achievements:\n{e}");
+        }
+    }
+
+    private async Task FlushLiveProgressAsync()
+    {
+        if (_flushingLiveProgress || _roundFinalized)
+            return;
+
+        _flushingLiveProgress = true;
+
+        try
+        {
+            foreach (var (userId, round) in _round)
+            {
+                var friendlyFireDamage = Math.Max(0, round.FriendlyFireDamage - round.PersistedFriendlyFireDamage);
+                var requisitionOrders = Math.Max(0, round.RequisitionOrders - round.PersistedRequisitionOrders);
+                var xenoEvolutions = Math.Max(0, round.XenoEvolutions - round.PersistedXenoEvolutions);
+                var officerWins = Math.Max(0, round.OfficerWins - round.PersistedOfficerWins);
+                var queenKills = Math.Max(0, round.QueenKills - round.PersistedQueenKills);
+                var queenWins = Math.Max(0, round.QueenWins - round.PersistedQueenWins);
+                var queenKillParticipations = Math.Max(0, round.QueenKillParticipations - round.PersistedQueenKillParticipations);
+
+                var hasProgress = friendlyFireDamage > 0 ||
+                                  requisitionOrders > 0 ||
+                                  xenoEvolutions > 0 ||
+                                  officerWins > 0 ||
+                                  queenKills > 0 ||
+                                  queenWins > 0 ||
+                                  queenKillParticipations > 0;
+
+                if (!hasProgress)
+                    continue;
+
+                await _db.AdjustCCMPlayerAchievementStats(
+                    userId.UserId,
+                    friendlyFireDamage,
+                    requisitionOrders,
+                    xenoEvolutions,
+                    officerWins,
+                    queenKills,
+                    queenWins,
+                    queenKillParticipations);
+
+                round.PersistedFriendlyFireDamage += friendlyFireDamage;
+                round.PersistedRequisitionOrders += requisitionOrders;
+                round.PersistedXenoEvolutions += xenoEvolutions;
+                round.PersistedOfficerWins += officerWins;
+                round.PersistedQueenKills += queenKills;
+                round.PersistedQueenWins += queenWins;
+                round.PersistedQueenKillParticipations += queenKillParticipations;
+            }
+        }
+        catch (Exception e)
+        {
+            Logger.ErrorS(LogCategory, $"FlushLiveProgressAsync failed: {e}");
+        }
+        finally
+        {
+            _flushingLiveProgress = false;
         }
     }
 
@@ -298,12 +482,19 @@ public sealed class CCMAchievementSystem : EntitySystem
         state.Loading = true;
         try
         {
+            Logger.InfoS(LogCategory, $"Loading achievement state for user {userId}.");
             state.BaseStats = await _db.GetCCMPlayerStats(userId.UserId);
             state.BaseSpecialStats = await _db.GetCCMPlayerAchievementStats(userId.UserId);
             state.UnlockedIds = new HashSet<string>(state.BaseSpecialStats.UnlockedIds);
             state.Loaded = true;
             await SyncUnlocksAsync(userId, state, notify: false);
+            Logger.InfoS(LogCategory, $"Achievement state loaded for user {userId}. Unlocked count: {state.UnlockedIds.Count}.");
             return state;
+        }
+        catch (Exception e)
+        {
+            Logger.ErrorS(LogCategory, $"EnsureStateLoadedAsync failed for user {userId}: {e}");
+            return null;
         }
         finally
         {
@@ -313,11 +504,18 @@ public sealed class CCMAchievementSystem : EntitySystem
 
     private async Task EvaluatePlayerAsync(NetUserId userId, bool notify)
     {
-        var state = await EnsureStateLoadedAsync(userId);
-        if (state == null)
-            return;
+        try
+        {
+            var state = await EnsureStateLoadedAsync(userId);
+            if (state == null)
+                return;
 
-        await SyncUnlocksAsync(userId, state, notify);
+            await SyncUnlocksAsync(userId, state, notify);
+        }
+        catch (Exception e)
+        {
+            Logger.ErrorS(LogCategory, $"EvaluatePlayerAsync failed for user {userId}: {e}");
+        }
     }
 
     private async Task SyncUnlocksAsync(NetUserId userId, CachedAchievementState state, bool notify)
@@ -337,12 +535,12 @@ public sealed class CCMAchievementSystem : EntitySystem
         if (unlockedNow.Count == 0)
             return;
 
-        await _db.SetCCMUnlockedAchievementIds(userId.UserId, SerializeUnlockedIds(state.UnlockedIds));
+        await PersistUnlockedIdsAsync(userId, state);
 
         if (!notify || !_players.TryGetSessionById(userId, out var session))
             return;
 
-        var completedCount = CountCompleted(BuildContext(userId, state));
+        var completedCount = CountCompleted(BuildContext(userId, state), state.UnlockedIds);
         foreach (var unlocked in unlockedNow)
         {
             RaiseNetworkEvent(
@@ -357,13 +555,14 @@ public sealed class CCMAchievementSystem : EntitySystem
         var achievements = Definitions
             .Select(def =>
             {
-                var progress = Math.Clamp(def.GetProgress(context), 0, def.Goal);
-                return def.ToProgress(progress, progress >= def.Goal);
+                var completed = IsCompleted(def, context, state.UnlockedIds);
+                var progress = GetDisplayProgress(def, context, state.UnlockedIds);
+                return def.ToProgress(progress, completed);
             })
             .ToArray();
 
         return new CCMAchievementsSnapshot(
-            achievements.Count(a => a.Completed),
+            CountCompleted(context, state.UnlockedIds),
             achievements.Length,
             achievements);
     }
@@ -393,9 +592,26 @@ public sealed class CCMAchievementSystem : EntitySystem
             round.XenoParticipated);
     }
 
-    private static int CountCompleted(CCMAchievementProgressContext context)
+    private static int CountCompleted(CCMAchievementProgressContext context, HashSet<string> unlockedIds)
     {
-        return Definitions.Count(def => def.GetProgress(context) >= def.Goal);
+        return Definitions.Count(def => IsCompleted(def, context, unlockedIds));
+    }
+
+    private static bool IsCompleted(
+        CCMAchievementDefinition definition,
+        CCMAchievementProgressContext context,
+        HashSet<string> unlockedIds)
+    {
+        return unlockedIds.Contains(definition.Id) || definition.GetProgress(context) >= definition.Goal;
+    }
+
+    private static int GetDisplayProgress(
+        CCMAchievementDefinition definition,
+        CCMAchievementProgressContext context,
+        HashSet<string> unlockedIds)
+    {
+        var progress = Math.Clamp(definition.GetProgress(context), 0, definition.Goal);
+        return unlockedIds.Contains(definition.Id) ? definition.Goal : progress;
     }
 
     private RoundAchievementState GetOrCreateRoundState(NetUserId userId)
@@ -411,6 +627,38 @@ public sealed class CCMAchievementSystem : EntitySystem
     private static string SerializeUnlockedIds(HashSet<string> unlockedIds)
     {
         return string.Join(',', unlockedIds.OrderBy(id => id));
+    }
+
+    private async Task PersistUnlockedIdsAsync(NetUserId userId, CachedAchievementState state)
+    {
+        var unlocked = state.UnlockedIds.OrderBy(id => id).ToArray();
+        Logger.InfoS(LogCategory, $"Persisting {unlocked.Length} unlocked achievements for user {userId}.");
+        await _db.SetCCMUnlockedAchievementIds(userId.UserId, string.Join(',', unlocked));
+        state.BaseSpecialStats = ReplaceUnlockedIds(state.BaseSpecialStats, unlocked);
+    }
+
+    private async Task PushSnapshotAsync(NetUserId userId, CachedAchievementState state)
+    {
+        if (!_players.TryGetSessionById(userId, out var session))
+            return;
+
+        RaiseNetworkEvent(new CCMAchievementsResponseEvent(BuildSnapshot(userId, state)), session.Channel);
+        await Task.CompletedTask;
+    }
+
+    private static CCMPlayerAchievementStatsSnapshot ReplaceUnlockedIds(
+        CCMPlayerAchievementStatsSnapshot snapshot,
+        string[] unlockedIds)
+    {
+        return new CCMPlayerAchievementStatsSnapshot(
+            snapshot.FriendlyFireDamage,
+            snapshot.RequisitionOrders,
+            snapshot.XenoEvolutions,
+            snapshot.OfficerWins,
+            snapshot.QueenKills,
+            snapshot.QueenWins,
+            snapshot.QueenKillParticipations,
+            unlockedIds);
     }
 
     private bool TryGetWinningSide(out CCMStatsSide side)
@@ -479,6 +727,9 @@ public sealed class CCMAchievementSystem : EntitySystem
                 if (side != CCMStatsSide.None)
                 {
                     userId = actor.PlayerSession.UserId;
+                    var round = GetOrCreateRoundState(userId);
+                    round.MarineParticipated |= side == CCMStatsSide.Marines;
+                    round.XenoParticipated |= side == CCMStatsSide.Xenos;
                     return true;
                 }
             }
@@ -491,6 +742,13 @@ public sealed class CCMAchievementSystem : EntitySystem
             }
 
             current = xform.ParentUid;
+        }
+
+        if (TryComp(entity.Value, out ProjectileComponent? projectile) &&
+            projectile.Shooter is { } shooter &&
+            shooter != entity.Value)
+        {
+            return TryGetPlayerAndSide(shooter, out userId, out side);
         }
 
         return false;
@@ -529,6 +787,13 @@ public sealed class CCMAchievementSystem : EntitySystem
         public int QueenKills;
         public int QueenWins;
         public int QueenKillParticipations;
+        public int PersistedFriendlyFireDamage;
+        public int PersistedRequisitionOrders;
+        public int PersistedXenoEvolutions;
+        public int PersistedOfficerWins;
+        public int PersistedQueenKills;
+        public int PersistedQueenWins;
+        public int PersistedQueenKillParticipations;
 
         public bool HasAnyProgress =>
             FriendlyFireDamage > 0 ||

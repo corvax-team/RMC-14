@@ -1837,9 +1837,11 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
     private void ApplySaveButtonStyle(bool hovered = false, bool pressed = false)
     {
         var enabled = !_saveButton.Disabled;
-        var accent = GetWindowAccent();
-        var disabledBackground = GetThemeAccent(0.11f).WithAlpha(0.82f);
-        var disabledBorder = accent.WithAlpha(0.54f);
+        var normalBackground = StyleNano.ButtonColorContext;
+        var hoverBackground = StyleNano.ButtonColorContextHover;
+        var pressedBackground = StyleNano.ButtonColorContextPressed;
+        var disabledBackground = StyleNano.ButtonColorContextDisabled;
+        var borderColor = StyleNano.UiButtonBorder;
         var disabledTextColor = Color.FromHex("#E7F4FF");
         var activeTextColor = Color.FromHex("#F2FAFF");
         _saveButton.ModulateSelfOverride = Color.White;
@@ -1848,15 +1850,15 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             BackgroundColor = !enabled
                 ? disabledBackground
                 : pressed
-                    ? accent.WithAlpha(0.92f)
+                    ? pressedBackground
                     : hovered
-                        ? GetThemeAccent(0.12f).WithAlpha(0.96f)
-                        : GetThemeAccent(0.06f).WithAlpha(0.92f),
+                        ? hoverBackground
+                        : normalBackground,
             BorderColor = !enabled
-                ? disabledBorder
+                ? borderColor
                 : pressed
-                    ? accent
-                    : accent.WithAlpha(0.76f),
+                    ? borderColor
+                    : borderColor,
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = 10,
             ContentMarginTopOverride = 3,

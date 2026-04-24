@@ -30,6 +30,46 @@ public sealed class CCMAchievementsSystem : EntitySystem
 
     private void OnAchievementUnlocked(CCMAchievementUnlockedEvent ev)
     {
+        if (LatestSnapshot != null)
+        {
+            LatestSnapshot = MergeSnapshot(LatestSnapshot, ev);
+            AchievementsReceived?.Invoke(LatestSnapshot);
+        }
+
         AchievementUnlocked?.Invoke(ev);
+    }
+
+    private static CCMAchievementsSnapshot MergeSnapshot(CCMAchievementsSnapshot snapshot, CCMAchievementUnlockedEvent ev)
+    {
+        var updated = new CCMAchievementProgressData[snapshot.Achievements.Length];
+        var found = false;
+
+        for (var i = 0; i < snapshot.Achievements.Length; i++)
+        {
+            var achievement = snapshot.Achievements[i];
+            if (!achievement.Id.Equals(ev.Achievement.Id, StringComparison.Ordinal))
+            {
+                updated[i] = achievement;
+                continue;
+            }
+
+            found = true;
+            updated[i] = new CCMAchievementProgressData(
+                achievement.Id,
+                achievement.Category,
+                achievement.TitleKey,
+                achievement.DescriptionKey,
+                ev.Achievement.Progress,
+                achievement.Goal,
+                true);
+        }
+
+        if (found)
+            return new CCMAchievementsSnapshot(ev.CompletedCount, ev.TotalCount, updated);
+
+        var expanded = new CCMAchievementProgressData[snapshot.Achievements.Length + 1];
+        Array.Copy(updated, expanded, updated.Length);
+        expanded[^1] = ev.Achievement;
+        return new CCMAchievementsSnapshot(ev.CompletedCount, ev.TotalCount, expanded);
     }
 }

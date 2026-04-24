@@ -16,6 +16,8 @@ namespace Content.Client.UserInterface.Screens;
 
 public sealed partial class DefaultGameScreen : InGameScreen
 {
+    private const float VoteMenuLeftOffset = 148f;
+
     protected LayoutContainer ViewportContainer = default!;
     protected MainViewport MainViewport = default!;
     protected BoxContainer TopLeft = default!;
@@ -46,6 +48,8 @@ public sealed partial class DefaultGameScreen : InGameScreen
         SetAnchorPreset(ViewportContainer, LayoutPreset.Wide);
         SetAnchorAndMarginPreset(TopLeft, LayoutPreset.TopLeft, margin: 10);
         SetAnchorAndMarginPreset(VoteMenu, LayoutPreset.CenterTop, margin: 10);
+        SetMarginLeft(VoteMenu, VoteMenu.GetValue<float>(LayoutContainer.MarginLeftProperty) - VoteMenuLeftOffset);
+        SetMarginRight(VoteMenu, VoteMenu.GetValue<float>(LayoutContainer.MarginRightProperty) - VoteMenuLeftOffset);
         SetAnchorAndMarginPreset(Ghost, LayoutPreset.BottomWide, margin: 80);
         SetAnchorAndMarginPreset(Inventory, LayoutPreset.BottomLeft, margin: 5);
         SetAnchorAndMarginPreset(Hotbar, LayoutPreset.BottomWide, margin: 5);
@@ -101,6 +105,7 @@ public sealed partial class DefaultGameScreen : InGameScreen
         {
             Name = "TopLeft",
             Orientation = BoxContainer.LayoutOrientation.Vertical,
+            SeparationOverride = 18,
         };
 
         var topRow = new BoxContainer

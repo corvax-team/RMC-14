@@ -122,9 +122,9 @@ public sealed class CCMOptionButton : OptionButton
         var normalBackground = StyleNano.DropdownButtonColorContext;
         var hoverBackground = StyleNano.DropdownButtonColorContextHover;
         var pressedBackground = StyleNano.DropdownButtonColorContextPressed;
-        var normalBorder = StyleNano.LobbyMenuButtonBase;
-        var hoverBorder = StyleNano.LobbyMenuButtonBase;
-        var pressedBorder = StyleNano.LobbyMenuButtonBase;
+        var normalBorder = StyleNano.UiButtonBorder;
+        var hoverBorder = StyleNano.UiButtonBorder;
+        var pressedBorder = StyleNano.UiButtonBorder;
 
         button.StyleBoxOverride = new StyleBoxFlat
         {
@@ -167,10 +167,10 @@ public sealed class CCMOptionButton : OptionButton
                     ? StyleNano.DropdownButtonColorContextHover
                     : StyleNano.DropdownButtonColorContext,
             BorderColor = pressed
-                ? StyleNano.LobbyMenuButtonBase
+                ? StyleNano.UiButtonBorder
                 : hovered
-                ? StyleNano.LobbyMenuButtonBase
-                    : StyleNano.LobbyMenuButtonBase,
+                ? StyleNano.UiButtonBorder
+                    : StyleNano.UiButtonBorder,
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = ContentPadding.Left,
             ContentMarginTopOverride = ContentPadding.Top,

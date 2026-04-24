@@ -59,7 +59,8 @@ public sealed class JobPriorityWeightManager : IPostInjectInit
         int slot,
         IEnumerable<ProtoId<JobPrototype>> firstOrderJobs,
         ProtoId<JobPrototype>? assignedJob,
-        int roundId)
+        int roundId,
+        IReadOnlyDictionary<ProtoId<JobPrototype>, int> roundstartJobSlotCounts)
     {
         if (!_storedUsers.Contains(userId))
             return;
@@ -69,6 +70,9 @@ public sealed class JobPriorityWeightManager : IPostInjectInit
 
         foreach (var jobId in firstOrderJobs)
         {
+            if (!roundstartJobSlotCounts.TryGetValue(jobId, out var slotCount) || slotCount <= 0)
+                continue;
+
             var record = GetOrCreateWeight(userId, slot, jobId);
             if (assignedFirstOrder && jobId == assignedJob)
             {

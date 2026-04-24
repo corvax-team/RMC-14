@@ -22,7 +22,7 @@ public sealed class MenuButton : ContainerButton
     private static readonly Color ColorRedNormal = Color.Black;
     private static readonly Color ColorPressed = Color.Black;
 
-    private const float VertPad = 5f;
+    private const float VertPad = 4f;
     private Color NormalColor => HasStyleClass(StyleClassRedTopButton) ? ColorRedNormal : ColorNormal;
 
     private BoundKeyFunction _function;
@@ -50,7 +50,7 @@ public sealed class MenuButton : ContainerButton
         IoCManager.InjectDependencies(this);
         _buttonIcon = new TextureRect()
         {
-            TextureScale = new Vector2(0.5f, 0.5f),
+            TextureScale = new Vector2(0.42f, 0.42f),
             HorizontalAlignment = HAlignment.Center,
             VerticalAlignment = VAlignment.Center,
             VerticalExpand = true,
@@ -68,7 +68,7 @@ public sealed class MenuButton : ContainerButton
         _root = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
-            SeparationOverride = 2,
+            SeparationOverride = 1,
             Children =
             {
                 _buttonIcon,

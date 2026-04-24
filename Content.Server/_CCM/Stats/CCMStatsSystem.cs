@@ -2,12 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Content.Server._CCM.RoundEnd;
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.KillTracking;
 using Content.Shared._CCM.Stats;
 using Content.Shared._RMC14.Construction;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids;
@@ -18,7 +20,11 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Medical;
 using Content.Shared.Mobs;
+using Content.Shared.Projectiles;
+using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Log;
 using Robust.Server.Player;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -31,6 +37,7 @@ public sealed class CCMStatsSystem : EntitySystem
     private const int RoundStartWinPoints = 20;
     private const int LateJoinWinPoints = 10;
     private const int GhostWinPoints = 5;
+    private const float LiveProgressFlushIntervalSeconds = 10f;
     private const float DamageImpactFactor = 0.02f;
     private const float HealingImpactFactor = 0.03f;
     private const int KillImpactPoints = 5;
@@ -45,6 +52,8 @@ public sealed class CCMStatsSystem : EntitySystem
 
     private readonly Dictionary<NetUserId, RoundPlayerStats> _roundStats = new();
     private bool _roundFinalized;
+    private bool _flushingLiveProgress;
+    private float _liveProgressFlushAccumulator;
 
     public bool TryGetLiveAchievementMetrics(NetUserId player, out CCMLiveAchievementMetrics metrics)
     {
@@ -82,6 +91,8 @@ public sealed class CCMStatsSystem : EntitySystem
         SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
         SubscribeLocalEvent<DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<KillReportedEvent>(OnKillReported);
+        SubscribeLocalEvent<GunShotEvent>(OnGunShot);
+        SubscribeLocalEvent<ProjectileComponent, ProjectileShotEvent>(OnProjectileShot);
         SubscribeLocalEvent<TargetDefibrillatedEvent>(OnTargetDefibrillated);
         SubscribeLocalEvent<RMCConstructionBuildDoAfterEvent>(OnMarineConstructionBuilt,
             after: [typeof(Content.Shared._RMC14.Construction.RMCConstructionSystem)]);
@@ -93,10 +104,27 @@ public sealed class CCMStatsSystem : EntitySystem
             after: [typeof(Content.Server._RMC14.Rules.DistressSignal.CMDistressSignalRuleSystem), typeof(CCMRoundWinTrackerSystem)]);
     }
 
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (_roundFinalized || _flushingLiveProgress || _roundStats.Count == 0)
+            return;
+
+        _liveProgressFlushAccumulator += frameTime;
+        if (_liveProgressFlushAccumulator < LiveProgressFlushIntervalSeconds)
+            return;
+
+        _liveProgressFlushAccumulator = 0f;
+        _ = FlushLiveProgressAsync();
+    }
+
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _roundStats.Clear();
         _roundFinalized = false;
+        _flushingLiveProgress = false;
+        _liveProgressFlushAccumulator = 0f;
     }
 
     private async void OnRequestPlayerStats(RequestCCMPlayerStatsEvent msg, EntitySessionEventArgs args)
@@ -163,6 +191,19 @@ public sealed class CCMStatsSystem : EntitySystem
 
         if (HasComp<MarineComponent>(target))
             OnMarineDamaged(target, args);
+    }
+
+    private void OnGunShot(ref GunShotEvent args)
+    {
+        var side = GetSide(args.User);
+        if (side == CCMStatsSide.None || !TryGetEntityStats(args.User, side, out var stats))
+            return;
+
+        var fired = Math.Max(1, args.Ammo.Count);
+        if (side == CCMStatsSide.Marines)
+            stats.MarineShotsFired += fired;
+        else if (side == CCMStatsSide.Xenos)
+            stats.XenoShotsFired += fired;
     }
 
     private void OnXenoDamaged(EntityUid target, DamageChangedEvent args)
@@ -245,6 +286,18 @@ public sealed class CCMStatsSystem : EntitySystem
         }
     }
 
+    private void OnProjectileShot(Entity<ProjectileComponent> ent, ref ProjectileShotEvent args)
+    {
+        if (args.Shooter is not { } shooter)
+            return;
+
+        var side = GetSide(shooter);
+        if (side != CCMStatsSide.Xenos || !TryGetEntityStats(shooter, side, out var stats))
+            return;
+
+        stats.XenoShotsFired += 1;
+    }
+
     private void OnTargetDefibrillated(ref TargetDefibrillatedEvent ev)
     {
         if (!TryGetEntityStats(ev.User, CCMStatsSide.Marines, out var stats))
@@ -282,16 +335,24 @@ public sealed class CCMStatsSystem : EntitySystem
         stats.XenoImpact += StructureImpactPoints;
     }
 
-    private void OnRoundEndTextAppend(RoundEndTextAppendEvent ev)
+    private async void OnRoundEndTextAppend(RoundEndTextAppendEvent ev)
     {
         if (_roundFinalized)
             return;
 
         _roundFinalized = true;
-        FinalizeRound();
+
+        try
+        {
+            await FinalizeRoundAsync();
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Failed to finalize CCM round stats:\n{e}");
+        }
     }
 
-    private void FinalizeRound()
+    private async Task FinalizeRoundAsync()
     {
         if (!TryGetWinningSide(out var winningSide))
             return;
@@ -311,12 +372,14 @@ public sealed class CCMStatsSystem : EntitySystem
             xenoMvp = BuildMvp(CCMStatsSide.Xenos);
 
         SendRoundEndStats(winningSide, marineMvp, xenoMvp);
-        PersistRoundStats();
+        await PersistRoundStatsAsync();
     }
 
-    private void PersistRoundStats()
+    private async Task PersistRoundStatsAsync()
     {
         var now = DateTime.UtcNow;
+        var saveTasks = new List<Task>();
+
         foreach (var pair in _roundStats)
         {
             var player = pair.Key.UserId;
@@ -324,7 +387,19 @@ public sealed class CCMStatsSystem : EntitySystem
             if (!stats.HadAnyParticipation)
                 continue;
 
-            _ = _db.SaveCCMRoundStats(
+            var marineKills = Math.Max(0, stats.MarineKills - stats.PersistedMarineKills);
+            var xenoKills = Math.Max(0, stats.XenoKills - stats.PersistedXenoKills);
+            var marineRevives = Math.Max(0, stats.MarineRevives - stats.PersistedMarineRevives);
+            var marineHealingDone = Math.Max(0, stats.MarineHealingDone - stats.PersistedMarineHealingDone);
+            var xenoHealingDone = Math.Max(0, stats.XenoHealingDone - stats.PersistedXenoHealingDone);
+            var marineStructuresBuilt = Math.Max(0, stats.MarineStructuresBuilt - stats.PersistedMarineStructuresBuilt);
+            var xenoStructuresBuilt = Math.Max(0, stats.XenoStructuresBuilt - stats.PersistedXenoStructuresBuilt);
+            var totalKills = marineKills + xenoKills;
+            var totalRevives = marineRevives;
+            var totalHealingDone = marineHealingDone + xenoHealingDone;
+            var totalStructuresBuilt = marineStructuresBuilt + xenoStructuresBuilt;
+
+            saveTasks.Add(_db.SaveCCMRoundStats(
                 player,
                 now.Year,
                 now.Month,
@@ -333,37 +408,139 @@ public sealed class CCMStatsSystem : EntitySystem
                 stats.GeneralRoundsLost,
                 (int) stats.RoundSecondsPlayed,
                 (int) MathF.Round(stats.TotalDamage),
-                stats.TotalKills,
+                totalKills,
                 stats.VictoryPointsEarned,
                 stats.TotalImpactPoints,
-                stats.TotalRevives,
-                stats.TotalHealingDone,
-                stats.TotalStructuresBuilt,
+                totalRevives,
+                totalHealingDone,
+                totalStructuresBuilt,
                 stats.TotalDeaths,
                 stats.TotalShotsFired,
                 stats.MarineRoundsPlayed,
                 stats.MarineRoundsWon,
                 stats.MarineRoundsLost,
                 (int) MathF.Round(stats.MarineDamage),
-                stats.MarineKills,
+                marineKills,
                 stats.MarineVictoryPointsEarned,
                 stats.MarineImpactPoints,
-                stats.MarineRevives,
-                stats.MarineHealingDone,
-                stats.MarineStructuresBuilt,
+                marineRevives,
+                marineHealingDone,
+                marineStructuresBuilt,
                 stats.MarineDeaths,
                 stats.MarineShotsFired,
                 stats.XenoRoundsPlayed,
                 stats.XenoRoundsWon,
                 stats.XenoRoundsLost,
                 (int) MathF.Round(stats.XenoDamage),
-                stats.XenoKills,
+                xenoKills,
                 stats.XenoVictoryPointsEarned,
                 stats.XenoImpactPoints,
-                stats.XenoHealingDone,
-                stats.XenoStructuresBuilt,
+                xenoHealingDone,
+                xenoStructuresBuilt,
                 stats.XenoDeaths,
-                stats.XenoShotsFired);
+                stats.XenoShotsFired));
+        }
+
+        if (saveTasks.Count > 0)
+            await Task.WhenAll(saveTasks);
+    }
+
+    private async Task FlushLiveProgressAsync()
+    {
+        if (_flushingLiveProgress || _roundFinalized)
+            return;
+
+        _flushingLiveProgress = true;
+
+        try
+        {
+            var now = DateTime.UtcNow;
+            var saveTasks = new List<Task>();
+
+            foreach (var pair in _roundStats)
+            {
+                var player = pair.Key.UserId;
+                var stats = pair.Value;
+
+                var marineKills = Math.Max(0, stats.MarineKills - stats.PersistedMarineKills);
+                var xenoKills = Math.Max(0, stats.XenoKills - stats.PersistedXenoKills);
+                var marineRevives = Math.Max(0, stats.MarineRevives - stats.PersistedMarineRevives);
+                var marineHealingDone = Math.Max(0, stats.MarineHealingDone - stats.PersistedMarineHealingDone);
+                var xenoHealingDone = Math.Max(0, stats.XenoHealingDone - stats.PersistedXenoHealingDone);
+                var marineStructuresBuilt = Math.Max(0, stats.MarineStructuresBuilt - stats.PersistedMarineStructuresBuilt);
+                var xenoStructuresBuilt = Math.Max(0, stats.XenoStructuresBuilt - stats.PersistedXenoStructuresBuilt);
+
+                var hasProgress = marineKills > 0 ||
+                                  xenoKills > 0 ||
+                                  marineRevives > 0 ||
+                                  marineHealingDone > 0 ||
+                                  xenoHealingDone > 0 ||
+                                  marineStructuresBuilt > 0 ||
+                                  xenoStructuresBuilt > 0;
+
+                if (!hasProgress)
+                    continue;
+
+                saveTasks.Add(_db.SaveCCMRoundStats(
+                    player,
+                    now.Year,
+                    now.Month,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    marineKills + xenoKills,
+                    0,
+                    0,
+                    marineRevives,
+                    marineHealingDone + xenoHealingDone,
+                    marineStructuresBuilt + xenoStructuresBuilt,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    marineKills,
+                    0,
+                    0,
+                    marineRevives,
+                    marineHealingDone,
+                    marineStructuresBuilt,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    xenoKills,
+                    0,
+                    0,
+                    xenoHealingDone,
+                    xenoStructuresBuilt,
+                    0,
+                    0));
+
+                stats.PersistedMarineKills += marineKills;
+                stats.PersistedXenoKills += xenoKills;
+                stats.PersistedMarineRevives += marineRevives;
+                stats.PersistedMarineHealingDone += marineHealingDone;
+                stats.PersistedXenoHealingDone += xenoHealingDone;
+                stats.PersistedMarineStructuresBuilt += marineStructuresBuilt;
+                stats.PersistedXenoStructuresBuilt += xenoStructuresBuilt;
+            }
+
+            if (saveTasks.Count > 0)
+                await Task.WhenAll(saveTasks);
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Failed to flush live CCM progress:\n{e}");
+        }
+        finally
+        {
+            _flushingLiveProgress = false;
         }
     }
 
@@ -658,6 +835,7 @@ public sealed class CCMStatsSystem : EntitySystem
         {
             if (TryComp(current, out ActorComponent? actor) && GetSide(current) == expectedSide)
             {
+                MarkParticipation(actor.PlayerSession.UserId, expectedSide, roundStart: false);
                 stats = GetOrCreateRoundStats(actor.PlayerSession.UserId);
                 return true;
             }
@@ -670,6 +848,13 @@ public sealed class CCMStatsSystem : EntitySystem
             }
 
             current = xform.ParentUid;
+        }
+
+        if (TryComp(entity.Value, out ProjectileComponent? projectile) &&
+            projectile.Shooter is { } shooter &&
+            shooter != entity.Value)
+        {
+            return TryGetEntityStats(shooter, expectedSide, out stats);
         }
 
         return false;
@@ -730,6 +915,13 @@ public sealed class CCMStatsSystem : EntitySystem
         public int XenoHealingDone;
         public int MarineStructuresBuilt;
         public int XenoStructuresBuilt;
+        public int PersistedMarineKills;
+        public int PersistedXenoKills;
+        public int PersistedMarineRevives;
+        public int PersistedMarineHealingDone;
+        public int PersistedXenoHealingDone;
+        public int PersistedMarineStructuresBuilt;
+        public int PersistedXenoStructuresBuilt;
         public int MarineDeaths;
         public int XenoDeaths;
         public int MarineShotsFired;

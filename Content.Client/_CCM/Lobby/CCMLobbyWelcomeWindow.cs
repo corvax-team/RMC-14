@@ -15,6 +15,7 @@ using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Client._CCM.Lobby;
@@ -37,9 +38,12 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
     private readonly Label _titleLabel;
     private readonly RichTextLabel _subtitleLabel;
     private readonly RichTextLabel _supportLabel;
+    private readonly BoxContainer _root;
+    private readonly ScrollContainer _pageScroll;
     private readonly BoxContainer _pageRoot;
     private readonly BoxContainer _welcomePage;
     private readonly BoxContainer _rulesPage;
+    private BoxContainer _welcomeRightColumn = default!;
     private RichTextLabel _welcomeBody = default!;
     private RichTextLabel _projectBody = default!;
     private PanelContainer _welcomeInfoCard = default!;
@@ -66,6 +70,8 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
 
     private const int LanguageRussian = 0;
     private const int LanguageEnglish = 1;
+    private const float WelcomeMinWidth = 760f;
+    private const float WelcomeMinHeight = 620f;
     public event Action? OnFinished;
 
     public CCMLobbyWelcomeWindow()
@@ -74,14 +80,14 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         _sawmill = _logManager.GetSawmill("language-restart");
 
         Title = string.Empty;
-        SetSize = new Vector2(980, 780);
-        MinSize = new Vector2(900, 720);
+        SetSize = new Vector2(900, 720);
+        MinSize = new Vector2(WelcomeMinWidth, WelcomeMinHeight);
 
         _titleFont = _cache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 28);
         _sectionFont = _cache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 18);
         _smallFont = _cache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 11);
 
-        var root = new BoxContainer
+        _root = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
             SeparationOverride = 10,
@@ -89,14 +95,14 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
             HorizontalExpand = true,
             VerticalExpand = true,
         };
-        Contents.AddChild(root);
+        Contents.AddChild(_root);
 
         _heroPanel = new PanelContainer
         {
             HorizontalExpand = true,
             MinSize = new Vector2(0, 170),
         };
-        root.AddChild(_heroPanel);
+        _root.AddChild(_heroPanel);
 
         var heroContent = new BoxContainer
         {
@@ -136,13 +142,21 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         };
         heroContent.AddChild(_supportLabel);
 
+        _pageScroll = new ScrollContainer
+        {
+            HorizontalExpand = true,
+            VerticalExpand = true,
+            HScrollEnabled = false,
+        };
+        _root.AddChild(_pageScroll);
+
         _pageRoot = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
             HorizontalExpand = true,
             VerticalExpand = true,
         };
-        root.AddChild(_pageRoot);
+        _pageScroll.AddChild(_pageRoot);
 
         _welcomePage = BuildWelcomePage();
         _rulesPage = BuildRulesPage();
@@ -155,7 +169,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
             SeparationOverride = 8,
             HorizontalExpand = true,
         };
-        root.AddChild(footer);
+        _root.AddChild(footer);
 
         _backButton = CreateMenuButton();
         _nextButton = CreateMenuButton();
@@ -210,6 +224,71 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         _languageRestartWindow?.Dispose();
     }
 
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        UpdateResponsiveLayout();
+        base.FrameUpdate(args);
+    }
+
+    private void UpdateResponsiveLayout()
+    {
+        var viewport = Parent?.Size ?? Vector2.Zero;
+        if (viewport.X <= 1f || viewport.Y <= 1f)
+            return;
+
+        var maxWidth = viewport.X * 0.88f;
+        var maxHeight = viewport.Y * 0.90f;
+        var minWidth = MathF.Min(WelcomeMinWidth, maxWidth);
+        var minHeight = MathF.Min(WelcomeMinHeight, maxHeight);
+        var targetSize = new Vector2(
+            Math.Clamp(viewport.X * 0.80f, minWidth, maxWidth),
+            Math.Clamp(viewport.Y * 0.84f, minHeight, maxHeight));
+
+        if (Vector2.DistanceSquared(SetSize, targetSize) > 1f)
+            SetSize = targetSize;
+
+        var lowHeight = viewport.Y <= 800f;
+        var compact = viewport.Y <= 900f;
+        var outerMargin = lowHeight ? 10f : compact ? 11f : 12f;
+        var rootGap = lowHeight ? 8 : 10;
+        _root.Margin = new Thickness(outerMargin);
+        _root.SeparationOverride = rootGap;
+
+        var heroHeight = lowHeight ? 132f : compact ? 148f : 170f;
+        _heroPanel.MinSize = new Vector2(0f, heroHeight);
+        _heroPanel.SetHeight = heroHeight;
+
+        _welcomePage.SeparationOverride = lowHeight ? 8 : 12;
+        _welcomeRightColumn.SeparationOverride = lowHeight ? 10 : 12;
+        var buttonHeight = lowHeight ? 34f : 36f;
+        var buttonWidth = lowHeight ? 132f : 150f;
+        _backButton.MinSize = new Vector2(buttonWidth, buttonHeight);
+        _nextButton.MinSize = new Vector2(buttonWidth, buttonHeight);
+        _finishButton.MinSize = new Vector2(buttonWidth, buttonHeight);
+
+        var innerWidth = MathF.Max(0f, targetSize.X - outerMargin * 2f);
+        var gap = lowHeight ? 8f : 12f;
+        var minRightWidth = lowHeight ? 240f : 280f;
+        var minLeftWidth = lowHeight ? 280f : 320f;
+        var rightWidth = Math.Clamp(innerWidth * 0.34f, minRightWidth, 360f);
+        var leftWidth = innerWidth - rightWidth - gap;
+        if (leftWidth < minLeftWidth)
+        {
+            leftWidth = minLeftWidth;
+            rightWidth = MathF.Max(minRightWidth, innerWidth - leftWidth - gap);
+        }
+
+        leftWidth = MathF.Max(220f, leftWidth);
+        rightWidth = MathF.Max(200f, rightWidth);
+
+        _welcomeInfoCard.SetWidth = leftWidth;
+        _welcomeInfoCard.MinSize = new Vector2(leftWidth, 0f);
+        _welcomeInfoCard.MaxSize = new Vector2(leftWidth, float.MaxValue);
+        _welcomeRightColumn.SetWidth = rightWidth;
+        _welcomeRightColumn.MinSize = new Vector2(rightWidth, 0f);
+        _welcomeRightColumn.MaxSize = new Vector2(rightWidth, float.MaxValue);
+    }
+
     public void RefreshLocalization()
     {
         _titleLabel.Text = Loc.GetString("ccm-lobby-welcome-title");
@@ -260,11 +339,11 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         leftContent.AddChild(_welcomeBody);
         leftContent.AddChild(_projectBody);
 
-        var rightSide = new BoxContainer
+        _welcomeRightColumn = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
             SeparationOverride = 12,
-            HorizontalExpand = true,
+            HorizontalExpand = false,
             SizeFlagsStretchRatio = 1f,
             MinSize = new Vector2(360, 0),
         };
@@ -276,11 +355,11 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         var themeContent = BuildSettingsCardContent(_themeCard, out _themeHeader, out _themeHint);
         themeContent.AddChild(BuildThemeButtons());
 
-        rightSide.AddChild(_languageCard);
-        rightSide.AddChild(_themeCard);
+        _welcomeRightColumn.AddChild(_languageCard);
+        _welcomeRightColumn.AddChild(_themeCard);
 
         page.AddChild(_welcomeInfoCard);
-        page.AddChild(rightSide);
+        page.AddChild(_welcomeRightColumn);
         return page;
     }
 

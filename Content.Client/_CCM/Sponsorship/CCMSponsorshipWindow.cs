@@ -20,6 +20,8 @@ namespace Content.Client._CCM.Sponsorship;
 
 public sealed class CCMSponsorshipWindow : DefaultCMWindow
 {
+    private const string DefaultDonateUrl = "https://boosty.to/cmc14";
+
     [Dependency] private readonly IResourceCache _resourceCache = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     private static readonly Color SponsorshipBlueAccent = Color.FromHex("#62C7FF");
@@ -35,7 +37,7 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
     private Label _heroTitleLabel = default!;
     private PanelContainer _infoPanel = default!;
     private Label _infoTitleLabel = default!;
-    private string _donateUrl = string.Empty;
+    private string _donateUrl = DefaultDonateUrl;
     private CCMSponsorshipTier _currentTier = CCMSponsorshipTier.None;
 
     public event Action<string>? OpenDonateRequested;
@@ -170,9 +172,11 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
 
     public void SetStatus(CCMSponsorshipStatusSnapshot snapshot)
     {
-        _donateUrl = snapshot.DonateUrl;
+        _donateUrl = string.IsNullOrWhiteSpace(snapshot.DonateUrl)
+            ? DefaultDonateUrl
+            : snapshot.DonateUrl;
         _currentTier = snapshot.Tier;
-        _websiteButton.Disabled = string.IsNullOrWhiteSpace(snapshot.DonateUrl);
+        _websiteButton.Disabled = false;
         UpdateStatusHeader(snapshot.Tier, snapshot.ExpirationUnixSeconds);
         BuildTierCards(snapshot.Tier);
         StyleWebsiteButton();
@@ -432,18 +436,14 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
         {
             CCMSponsorshipTier.SponsorIII =>
             [
-                "ccm-sponsorship-perk-chat-color",
                 "ccm-sponsorship-perk-role-weight-3",
-                "ccm-sponsorship-perk-endgame-credits",
                 "ccm-sponsorship-extended-perk-customization",
                 "ccm-sponsorship-perk-job-whitelist",
                 "ccm-sponsorship-perk-thanks"
             ],
             CCMSponsorshipTier.SponsorII =>
             [
-                "ccm-sponsorship-perk-chat-color",
                 "ccm-sponsorship-perk-role-weight-2",
-                "ccm-sponsorship-perk-endgame-credits",
                 "ccm-sponsorship-perk-customization",
                 "ccm-sponsorship-perk-role-timers",
                 "ccm-sponsorship-perk-thanks"

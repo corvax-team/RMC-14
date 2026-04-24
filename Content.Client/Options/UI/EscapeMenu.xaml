@@ -11,20 +11,20 @@
     <PanelContainer StyleClasses="CCMEscapeMenuBackground" Margin="1">
         <BoxContainer Orientation="Vertical" SeparationOverride="8" MinWidth="260" Margin="10">
             <BoxContainer Orientation="Vertical" SeparationOverride="8" HorizontalExpand="True">
-                <ui:VoteCallMenuButton Access="Public" Name="VoteCallButton" MinHeight="40" HorizontalExpand="True" />
-                <Button Access="Public" Name="RulesButton" Text="{Loc 'ui-escape-rules'}" MinHeight="40" HorizontalExpand="True" />
-                <Button Access="Public" Name="GuidebookButton" Text="{Loc 'ui-escape-guidebook'}" MinHeight="40" HorizontalExpand="True" />
-                <Button Access="Public" Name="AchievementsButton" Text="{Loc 'ccm-achievements-header'}" MinHeight="40" HorizontalExpand="True" />
-                <Button Access="Public" Name="SponsorshipButton" Text="{Loc 'ccm-sponsorship-header'}" MinHeight="40" HorizontalExpand="True" />
-                <Button Access="Public" Name="WikiButton" Text="{Loc 'ui-escape-wiki'}" MinHeight="40" HorizontalExpand="True" />
+                <ui:VoteCallMenuButton Access="Public" Name="VoteCallButton" StyleClasses="EscapeMenuButton" MinHeight="40" HorizontalExpand="True" />
+                <Button Access="Public" Name="RulesButton" StyleClasses="EscapeMenuButton" Text="{Loc 'ui-escape-rules'}" MinHeight="40" HorizontalExpand="True" />
+                <Button Access="Public" Name="GuidebookButton" StyleClasses="EscapeMenuButton" Text="{Loc 'ui-escape-guidebook'}" MinHeight="40" HorizontalExpand="True" />
+                <Button Access="Public" Name="AchievementsButton" StyleClasses="EscapeMenuButton" Text="{Loc 'ccm-achievements-header'}" MinHeight="40" HorizontalExpand="True" />
+                <Button Access="Public" Name="SponsorshipButton" StyleClasses="EscapeMenuButton" Text="{Loc 'ccm-sponsorship-header'}" MinHeight="40" HorizontalExpand="True" />
+                <Button Access="Public" Name="WikiButton" StyleClasses="EscapeMenuButton" Text="{Loc 'ui-escape-wiki'}" MinHeight="40" HorizontalExpand="True" />
             </BoxContainer>
 
-            <PanelContainer StyleClasses="LobbyMenuDivider LobbyThemeCrt" MinSize="0 2" Margin="0 2" />
+            <PanelContainer Access="Public" Name="MenuDivider" StyleClasses="LobbyMenuDivider" MinSize="0 2" Margin="0 2" />
 
             <BoxContainer Orientation="Vertical" SeparationOverride="8" HorizontalExpand="True">
-                <Button Access="Public" Name="OptionsButton" Text="{Loc 'ui-escape-options'}" MinHeight="40" HorizontalExpand="True" />
-                <Button Access="Public" Name="DisconnectButton" Text="{Loc 'ui-escape-disconnect'}" MinHeight="40" HorizontalExpand="True" />
-                <Button Access="Public" Name="QuitButton" Text="{Loc 'ui-escape-quit'}" MinHeight="40" HorizontalExpand="True" />
+                <Button Access="Public" Name="OptionsButton" StyleClasses="EscapeMenuButton" Text="{Loc 'ui-escape-options'}" MinHeight="40" HorizontalExpand="True" />
+                <Button Access="Public" Name="DisconnectButton" StyleClasses="EscapeMenuButton" Text="{Loc 'ui-escape-disconnect'}" MinHeight="40" HorizontalExpand="True" />
+                <Button Access="Public" Name="QuitButton" StyleClasses="EscapeMenuButton" Text="{Loc 'ui-escape-quit'}" MinHeight="40" HorizontalExpand="True" />
             </BoxContainer>
         </BoxContainer>
     </PanelContainer>

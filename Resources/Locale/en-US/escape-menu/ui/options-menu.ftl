@@ -98,6 +98,7 @@ ui-options-lobby-background-preset = Lobby background preset:
 ui-options-lobby-background-preset-console = Console
 ui-options-lobby-background-preset-community = Community
 ui-options-lobby-background-preset-rmca = RMCA
+ui-options-lobby-invert-sides = Invert lobby sides
 ui-options-hud-theme-default = Default
 ui-options-hud-theme-plasmafire = Plasmafire
 ui-options-hud-theme-slimecore = Slimecore

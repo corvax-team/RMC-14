@@ -19,7 +19,7 @@
     <LayoutContainer Name="ViewportContainer" HorizontalExpand="True" VerticalExpand="True">
         <controls:MainViewport Name="MainViewport"/>
     </LayoutContainer>
-    <BoxContainer Name="TopLeft" Access="Protected" Orientation="Vertical">
+    <BoxContainer Name="TopLeft" Access="Protected" Orientation="Vertical" SeparationOverride="18">
         <BoxContainer Orientation="Horizontal">
             <menuBar:GameTopMenuBar Name="TopBar" Access="Protected" />
             <Control/>

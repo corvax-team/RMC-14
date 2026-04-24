@@ -31,6 +31,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCLobbyCrtEnabled =
         CVarDef.Create("rmc.lobby_crt_enabled", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    public static readonly CVarDef<bool> RMCLobbyInvertSides =
+        CVarDef.Create("rmc.lobby_invert_sides", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     public static readonly CVarDef<int> CCMLobbyWelcomeSeenCount =
         CVarDef.Create("ccm.lobby_welcome_seen_count", 0, CVar.CLIENTONLY | CVar.ARCHIVE);
 

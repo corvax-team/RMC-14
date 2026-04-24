@@ -597,7 +597,7 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
         {
             Text = value,
             HorizontalAlignment = HAlignment.Right,
-            FontColorOverride = StyleNano.LobbyMenuButtonBase,
+            FontColorOverride = Color.White,
             FontOverride = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 12),
         });
 

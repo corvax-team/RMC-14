@@ -28,6 +28,7 @@
                            StyleClasses="LabelKeyText"/>
                     <ui:OptionDropDown Name="DropDownUiColorTheme" Title="{Loc 'ui-options-ui-color-theme'}" />
                     <ui:OptionDropDown Name="DropDownLobbyBackgroundPreset" Title="{Loc 'ui-options-lobby-background-preset'}" />
+                    <CheckBox Name="RMCLobbyInvertSides" Text="{Loc 'ui-options-lobby-invert-sides'}" Margin="0 0 0 5" />
                     <!-- # CCM priority rework -->
                     <Label Text="{Loc 'ui-options-general-discord'}"
                            StyleClasses="LabelKeyText"/>

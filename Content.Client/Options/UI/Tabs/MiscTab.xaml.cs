@@ -100,6 +100,7 @@ public sealed partial class MiscTab : Control
         Control.AddOptionDropDown(CVars.InterfaceTheme, DropDownHudTheme, themeEntries);
         Control.AddOptionDropDown(RMCCVars.RMCUIColorTheme, DropDownUiColorTheme, colorThemeEntries);
         Control.AddOptionDropDown(RMCCVars.RMCLobbyBackgroundPreset, DropDownLobbyBackgroundPreset, lobbyBackgroundPresetEntries);
+        Control.AddOptionCheckBox(RMCCVars.RMCLobbyInvertSides, RMCLobbyInvertSides);
         Control.AddOptionDropDown(CCVars.UILayout, DropDownHudLayout, layoutEntries);
 
         Control.AddOptionCheckBox(CVars.DiscordEnabled, DiscordRich);

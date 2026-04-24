@@ -8,7 +8,7 @@ namespace Content.Server.Secrets.CCM.Sponsorship;
 
 public sealed class CCMSponsorshipSecretsStubProvider : ICCMSponsorshipSecretsProvider
 {
-    public string DonateUrl => "https://example.com/donate";
+    public string DonateUrl => "https://boosty.to/cmc14";
 
     public ValueTask<CCMSponsorshipSecretsRecord> GetStatusAsync(Guid playerId, string ckey, CancellationToken cancel)
     {

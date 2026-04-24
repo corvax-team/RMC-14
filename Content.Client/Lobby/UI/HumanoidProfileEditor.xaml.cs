@@ -2337,17 +2337,17 @@ namespace Content.Client.Lobby.UI
             button.StyleBoxOverride = new StyleBoxFlat
             {
                 BackgroundColor = selected
-                    ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.92f)
+                    ? StyleNano.ButtonColorContextPressed
                     : pressed
-                        ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.95f)
+                        ? StyleNano.ButtonColorContextPressed
                         : hovered
-                            ? StyleNano.ButtonColorContextHover.WithAlpha(0.95f)
-                            : StyleNano.ButtonColorContext.WithAlpha(0.92f),
+                            ? StyleNano.ButtonColorContextHover
+                            : StyleNano.ButtonColorContext,
                 BorderColor = selected || pressed
-                    ? StyleNano.LobbyMenuButtonBase
+                    ? StyleNano.UiButtonBorder
                     : hovered
-                        ? StyleNano.LobbyMenuButtonBase.WithAlpha(0.75f)
-                        : StyleNano.LobbyMenuButtonBase.WithAlpha(0.55f),
+                        ? StyleNano.UiButtonBorder
+                        : StyleNano.UiButtonBorder,
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 5,
                 ContentMarginTopOverride = 3,

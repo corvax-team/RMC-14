@@ -105,7 +105,7 @@ discord_oauth_base_url = "http://127.0.0.1:2424"
 discord_oauth_state_secret = "replace-me"
 discord_oauth_state_lifetime_seconds = 300
 emote_cooldown_seconds = 1
-chat_translate_api = ""
+chat_translate_api = "http://127.0.0.1:5500/translate"
 chat_translate_source = "auto"
 enable_suicide = false
 

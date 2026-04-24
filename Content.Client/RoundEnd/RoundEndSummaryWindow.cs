@@ -52,8 +52,8 @@ namespace Content.Client.RoundEnd
             _sponsorTierTwoNameFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 13);
             _sponsorTierOneNameFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 12);
 
-            MinSize = new Vector2(520, 700);
-            SetSize = new Vector2(520, 700);
+            MinSize = new Vector2(660, 720);
+            SetSize = new Vector2(660, 720);
 
             Title = Loc.GetString("round-end-summary-window-title");
 
@@ -112,7 +112,6 @@ namespace Content.Client.RoundEnd
                     roundStats.XenoCampaignWins,
                     winningSide));
 
-                roundEndSummaryContainer.AddChild(BuildSectionHeader("ccm-round-end-content-title"));
                 roundEndSummaryContainer.AddChild(BuildRoundScoreLabel(roundStats.PersonalScore));
 
                 if (roundStats.PersonalStats != null)
@@ -229,7 +228,7 @@ namespace Content.Client.RoundEnd
                 HorizontalExpand = true,
                 PanelOverride = new StyleBoxFlat
                 {
-                    BackgroundColor = Color.FromHex("#08150D").WithAlpha(0.97f),
+                    BackgroundColor = GetSummaryPanelBackground(),
                     BorderColor = winnerAccent.WithAlpha(0.82f),
                     BorderThickness = new Thickness(1),
                     ContentMarginLeftOverride = 12,
@@ -277,6 +276,16 @@ namespace Content.Client.RoundEnd
                 },
             });
 
+            if (!string.IsNullOrWhiteSpace(roundEnd))
+            {
+                var roundEndLabel = new RichTextLabel
+                {
+                    HorizontalExpand = true,
+                };
+                roundEndLabel.SetMarkup(roundEnd);
+                root.AddChild(roundEndLabel);
+            }
+
             root.AddChild(BuildInfoRow(
                 Loc.GetString("ccm-round-end-info-mode"),
                 gamemode,
@@ -302,22 +311,6 @@ namespace Content.Client.RoundEnd
             metaRow.AddChild(BuildRoundMetaChip(roundTimeLabel, winnerAccent));
 
             root.AddChild(metaRow);
-
-            if (!string.IsNullOrWhiteSpace(roundEnd))
-            {
-                root.AddChild(new Label
-                {
-                    Text = Loc.GetString("ccm-round-end-info-summary"),
-                    FontColorOverride = Color.White.WithAlpha(0.82f),
-                });
-
-                var roundEndLabel = new RichTextLabel
-                {
-                    HorizontalExpand = true,
-                };
-                roundEndLabel.SetMarkup(roundEnd);
-                root.AddChild(roundEndLabel);
-            }
 
             panel.AddChild(root);
             return panel;
@@ -361,7 +354,7 @@ namespace Content.Client.RoundEnd
                 HorizontalExpand = true,
                 PanelOverride = new StyleBoxFlat
                 {
-                    BackgroundColor = Color.Black.WithAlpha(0.18f),
+                    BackgroundColor = GetSummaryInsetBackground(),
                     BorderColor = accent.WithAlpha(0.65f),
                     BorderThickness = new Thickness(1),
                     ContentMarginLeftOverride = 8,
@@ -535,7 +528,7 @@ namespace Content.Client.RoundEnd
                 VerticalAlignment = VAlignment.Top,
                 PanelOverride = new StyleBoxFlat
                 {
-                    BackgroundColor = Color.Black.WithAlpha(0.35f),
+                    BackgroundColor = GetSummaryInsetBackground(0.35f),
                     BorderColor = accent.WithAlpha(0.55f),
                     BorderThickness = new Thickness(1),
                 },
@@ -595,7 +588,7 @@ namespace Content.Client.RoundEnd
         private Control BuildPersonalStatsBlock(CCMRoundPersonalStatsData data)
         {
             var accent = StyleNano.LobbyMenuButtonBase;
-            var background = Color.FromHex("#08150D");
+            var background = GetSummaryPanelBackground();
 
             var panel = new PanelContainer
             {
@@ -694,7 +687,7 @@ namespace Content.Client.RoundEnd
         private Control BuildCampaignScoreBlock(int marineWins, int xenoWins, CCMStatsSide winningSide)
         {
             var marineAccent = StyleNano.LobbyMenuButtonBase;
-            var xenoAccent = new Color(0.79f, 0.56f, 0.97f);
+            var xenoAccent = GetXenoAccentColor();
             var neutral = Color.FromHex("#D9DDE3");
 
             var panel = new PanelContainer
@@ -703,7 +696,7 @@ namespace Content.Client.RoundEnd
                 HorizontalExpand = true,
                 PanelOverride = new StyleBoxFlat
                 {
-                    BackgroundColor = Color.FromHex("#08150D"),
+                    BackgroundColor = GetSummaryPanelBackground(),
                     BorderColor = marineAccent.WithAlpha(0.85f),
                     BorderThickness = new Thickness(1),
                     ContentMarginLeftOverride = 10,
@@ -782,7 +775,7 @@ namespace Content.Client.RoundEnd
                 HorizontalExpand = true,
                 PanelOverride = new StyleBoxFlat
                 {
-                    BackgroundColor = Color.FromHex("#091A11").WithAlpha(0.96f),
+                    BackgroundColor = GetSponsorPanelBackground(),
                     BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.75f),
                     BorderThickness = new Thickness(1),
                     ContentMarginLeftOverride = 10,
@@ -798,14 +791,6 @@ namespace Content.Client.RoundEnd
                 SeparationOverride = 8,
                 HorizontalExpand = true,
             };
-
-            root.AddChild(new Label
-            {
-                Text = Loc.GetString("ccm-sponsorship-endgame-header"),
-                FontColorOverride = Color.FromHex("#DCE7F2"),
-                HorizontalAlignment = HAlignment.Center,
-                HorizontalExpand = true,
-            });
 
             AddSponsorTierSection(root, sponsors, CCMSponsorshipTier.SponsorIII);
             AddSponsorTierSection(root, sponsors, CCMSponsorshipTier.SponsorII);
@@ -955,7 +940,7 @@ namespace Content.Client.RoundEnd
                 {
                     BackgroundColor = highlighted
                         ? accent.WithAlpha(0.16f)
-                        : Color.Black.WithAlpha(0.18f),
+                        : GetSummaryInsetBackground(),
                     BorderColor = accent.WithAlpha(highlighted ? 0.95f : 0.55f),
                     BorderThickness = new Thickness(1),
                     ContentMarginLeftOverride = 10,
@@ -1060,14 +1045,47 @@ namespace Content.Client.RoundEnd
         {
             return side == CCMStatsSide.Marines
                 ? StyleNano.LobbyMenuButtonBase
-                : new Color(0.79f, 0.56f, 0.97f);
+                : GetXenoAccentColor();
+        }
+
+        private static Color GetXenoAccentColor()
+        {
+            return Color.FromHex("#D96CFF");
         }
 
         private static Color GetMvpBackgroundColor(CCMStatsSide side)
         {
             return side == CCMStatsSide.Marines
-                ? Color.FromHex("#07150A").WithAlpha(0.92f)
+                ? GetMarineMvpBackground()
                 : Color.FromHex("#13081A").WithAlpha(0.92f);
+        }
+
+        private static Color GetSummaryPanelBackground()
+        {
+            return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                ? Color.FromHex("#0E2950").WithAlpha(0.97f)
+                : Color.FromHex("#08150D").WithAlpha(0.97f);
+        }
+
+        private static Color GetSponsorPanelBackground()
+        {
+            return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                ? Color.FromHex("#102A52").WithAlpha(0.96f)
+                : Color.FromHex("#091A11").WithAlpha(0.96f);
+        }
+
+        private static Color GetSummaryInsetBackground(float alpha = 0.18f)
+        {
+            return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                ? Color.FromHex("#081936").WithAlpha(alpha)
+                : Color.Black.WithAlpha(alpha);
+        }
+
+        private static Color GetMarineMvpBackground()
+        {
+            return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                ? Color.FromHex("#0C2344").WithAlpha(0.92f)
+                : Color.FromHex("#07150A").WithAlpha(0.92f);
         }
     }
 

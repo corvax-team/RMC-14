@@ -53,12 +53,20 @@ namespace Content.Client.Lobby.UI
         private readonly HashSet<SpriteView> _hoveredViews = new();
         private StyleNano.UiColorTheme _appliedTheme;
         private float _lastCarouselWidth = -1f;
+        private float _lastResponsiveHeight = -1f;
         private CarouselLayoutMode _carouselLayoutMode = CarouselLayoutMode.Five;
+        private CompactLayoutTier _compactTier = CompactLayoutTier.Normal;
         private enum CarouselLayoutMode
         {
             One,
             Three,
             Five
+        }
+
+        private enum CompactLayoutTier
+        {
+            Normal,
+            Compact
         }
 
         public event Action<int>? SelectCharacter;
@@ -119,6 +127,7 @@ namespace Content.Client.Lobby.UI
         {
             base.FrameUpdate(args);
             ApplyThemeColors();
+            UpdateCompactLayout();
             UpdateCarouselLayoutIfNeeded();
             UpdateRotation(args.DeltaSeconds);
             UpdateDeleteCountdown(args.DeltaSeconds);
@@ -138,8 +147,8 @@ namespace Content.Client.Lobby.UI
                 ? Color.FromHex("#0B3578")
                 : Color.FromHex("#16301F");
             var carouselBackgroundColor = theme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#06152A").WithAlpha(0.94f)
-                : Color.FromHex("#06150C").WithAlpha(0.94f);
+                ? Color.FromHex("#0E2950").WithAlpha(0.93f)
+                : Color.FromHex("#0A2C18").WithAlpha(0.90f);
             var carouselSideShadeColor = Color.Transparent;
             var dividerColor = theme == StyleNano.UiColorTheme.Blue
                 ? Color.FromHex("#165197").WithAlpha(0.95f)
@@ -617,6 +626,43 @@ namespace Content.Client.Lobby.UI
             // CCM rework lobby - end
         }
 
+        private void UpdateCompactLayout()
+        {
+            var height = Size.Y > 1f
+                ? Size.Y
+                : Parent?.Size.Y ?? 0f;
+            if (height <= 0f)
+                return;
+
+            var tier = height <= 700f
+                ? CompactLayoutTier.Compact
+                : CompactLayoutTier.Normal;
+
+            if (tier == _compactTier && Math.Abs(height - _lastResponsiveHeight) < 1f)
+                return;
+
+            _compactTier = tier;
+            _lastResponsiveHeight = height;
+
+            var compact = tier == CompactLayoutTier.Compact;
+            ContentRoot.Margin = compact ? new Thickness(6) : new Thickness(8);
+            ContentRoot.SeparationOverride = compact ? 6 : 8;
+            BodyStack.SeparationOverride = compact ? 6 : 8;
+            CarouselPanel.MinSize = new Vector2(CarouselPanel.MinSize.X, compact ? 168f : 200f);
+            CarouselPreviewRow.Margin = compact ? new Thickness(8) : new Thickness(12);
+            CarouselLeftShade.MinWidth = compact ? 96f : 140f;
+            CarouselRightShade.MinWidth = compact ? 96f : 140f;
+            ActionButtonRow.SeparationOverride = compact ? 6 : 10;
+
+            var actionButtonHeight = compact ? 32f : 36f;
+            NewCharacterButton.MinSize = new Vector2(NewCharacterButton.MinSize.X, actionButtonHeight);
+            SaveCharacterButton.MinSize = new Vector2(SaveCharacterButton.MinSize.X, actionButtonHeight);
+            ResetCharacterButton.MinSize = new Vector2(ResetCharacterButton.MinSize.X, actionButtonHeight);
+            DeleteCharacterButton.MinSize = new Vector2(DeleteCharacterButton.MinSize.X, actionButtonHeight);
+
+            _lastCarouselWidth = -1f;
+        }
+
         private CarouselLayoutMode ResolveCarouselLayoutMode()
         {
             // CCM rework lobby - start
@@ -643,46 +689,49 @@ namespace Content.Client.Lobby.UI
         private void ApplyCarouselLayoutMode(CarouselLayoutMode mode)
         {
             // CCM rework lobby - start
+            var compactFactor = _compactTier == CompactLayoutTier.Compact ? 0.9f : 1f;
+            var compactSpriteFactor = _compactTier == CompactLayoutTier.Compact ? 0.92f : 1f;
+
             switch (mode)
             {
                 case CarouselLayoutMode.One:
-                    CarouselPreviewRow.SeparationOverride = 8;
-                    CenterPreviewContainer.MinSize = new Vector2(200f, 170f);
-                    CenterPreview.Scale = new Vector2(6.4f, 6.4f);
-                    LeftPreviewContainer.MinSize = new Vector2(140f, 130f);
-                    RightPreviewContainer.MinSize = new Vector2(140f, 130f);
-                    LeftFarPreviewContainer.MinSize = new Vector2(120f, 120f);
-                    RightFarPreviewContainer.MinSize = new Vector2(120f, 120f);
-                    LeftPreview.Scale = new Vector2(5.2f, 5.2f);
-                    RightPreview.Scale = new Vector2(5.2f, 5.2f);
-                    LeftFarPreview.Scale = new Vector2(4.6f, 4.6f);
-                    RightFarPreview.Scale = new Vector2(4.6f, 4.6f);
+                    CarouselPreviewRow.SeparationOverride = _compactTier == CompactLayoutTier.Compact ? 6 : 8;
+                    CenterPreviewContainer.MinSize = new Vector2(200f, 170f) * compactFactor;
+                    CenterPreview.Scale = new Vector2(6.4f, 6.4f) * compactSpriteFactor;
+                    LeftPreviewContainer.MinSize = new Vector2(140f, 130f) * compactFactor;
+                    RightPreviewContainer.MinSize = new Vector2(140f, 130f) * compactFactor;
+                    LeftFarPreviewContainer.MinSize = new Vector2(120f, 120f) * compactFactor;
+                    RightFarPreviewContainer.MinSize = new Vector2(120f, 120f) * compactFactor;
+                    LeftPreview.Scale = new Vector2(5.2f, 5.2f) * compactSpriteFactor;
+                    RightPreview.Scale = new Vector2(5.2f, 5.2f) * compactSpriteFactor;
+                    LeftFarPreview.Scale = new Vector2(4.6f, 4.6f) * compactSpriteFactor;
+                    RightFarPreview.Scale = new Vector2(4.6f, 4.6f) * compactSpriteFactor;
                     break;
                 case CarouselLayoutMode.Three:
-                    CarouselPreviewRow.SeparationOverride = 10;
-                    CenterPreviewContainer.MinSize = new Vector2(200f, 170f);
-                    CenterPreview.Scale = new Vector2(6.6f, 6.6f);
-                    LeftPreviewContainer.MinSize = new Vector2(150f, 140f);
-                    RightPreviewContainer.MinSize = new Vector2(150f, 140f);
-                    LeftFarPreviewContainer.MinSize = new Vector2(120f, 120f);
-                    RightFarPreviewContainer.MinSize = new Vector2(120f, 120f);
-                    LeftPreview.Scale = new Vector2(5.6f, 5.6f);
-                    RightPreview.Scale = new Vector2(5.6f, 5.6f);
-                    LeftFarPreview.Scale = new Vector2(4.8f, 4.8f);
-                    RightFarPreview.Scale = new Vector2(4.8f, 4.8f);
+                    CarouselPreviewRow.SeparationOverride = _compactTier == CompactLayoutTier.Compact ? 8 : 10;
+                    CenterPreviewContainer.MinSize = new Vector2(200f, 170f) * compactFactor;
+                    CenterPreview.Scale = new Vector2(6.6f, 6.6f) * compactSpriteFactor;
+                    LeftPreviewContainer.MinSize = new Vector2(150f, 140f) * compactFactor;
+                    RightPreviewContainer.MinSize = new Vector2(150f, 140f) * compactFactor;
+                    LeftFarPreviewContainer.MinSize = new Vector2(120f, 120f) * compactFactor;
+                    RightFarPreviewContainer.MinSize = new Vector2(120f, 120f) * compactFactor;
+                    LeftPreview.Scale = new Vector2(5.6f, 5.6f) * compactSpriteFactor;
+                    RightPreview.Scale = new Vector2(5.6f, 5.6f) * compactSpriteFactor;
+                    LeftFarPreview.Scale = new Vector2(4.8f, 4.8f) * compactSpriteFactor;
+                    RightFarPreview.Scale = new Vector2(4.8f, 4.8f) * compactSpriteFactor;
                     break;
                 default:
-                    CarouselPreviewRow.SeparationOverride = 12;
-                    CenterPreviewContainer.MinSize = new Vector2(220f, 180f);
-                    CenterPreview.Scale = new Vector2(7f, 7f);
-                    LeftPreviewContainer.MinSize = new Vector2(180f, 160f);
-                    RightPreviewContainer.MinSize = new Vector2(180f, 160f);
-                    LeftFarPreviewContainer.MinSize = new Vector2(160f, 140f);
-                    RightFarPreviewContainer.MinSize = new Vector2(160f, 140f);
-                    LeftPreview.Scale = new Vector2(6.4f, 6.4f);
-                    RightPreview.Scale = new Vector2(6.4f, 6.4f);
-                    LeftFarPreview.Scale = new Vector2(5.1f, 5.1f);
-                    RightFarPreview.Scale = new Vector2(5.1f, 5.1f);
+                    CarouselPreviewRow.SeparationOverride = _compactTier == CompactLayoutTier.Compact ? 10 : 12;
+                    CenterPreviewContainer.MinSize = new Vector2(220f, 180f) * compactFactor;
+                    CenterPreview.Scale = new Vector2(7f, 7f) * compactSpriteFactor;
+                    LeftPreviewContainer.MinSize = new Vector2(180f, 160f) * compactFactor;
+                    RightPreviewContainer.MinSize = new Vector2(180f, 160f) * compactFactor;
+                    LeftFarPreviewContainer.MinSize = new Vector2(160f, 140f) * compactFactor;
+                    RightFarPreviewContainer.MinSize = new Vector2(160f, 140f) * compactFactor;
+                    LeftPreview.Scale = new Vector2(6.4f, 6.4f) * compactSpriteFactor;
+                    RightPreview.Scale = new Vector2(6.4f, 6.4f) * compactSpriteFactor;
+                    LeftFarPreview.Scale = new Vector2(5.1f, 5.1f) * compactSpriteFactor;
+                    RightFarPreview.Scale = new Vector2(5.1f, 5.1f) * compactSpriteFactor;
                     break;
             }
             // CCM rework lobby - end

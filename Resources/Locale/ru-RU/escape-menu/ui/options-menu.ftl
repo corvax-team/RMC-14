@@ -87,6 +87,7 @@ ui-options-lobby-background-preset = Пресет фона лобби:
 ui-options-lobby-background-preset-console = Консоль
 ui-options-lobby-background-preset-community = Сообщество
 ui-options-lobby-background-preset-rmca = RMCA
+ui-options-lobby-invert-sides = Инвертировать стороны лобби
 ui-options-hud-theme-default = По умолчанию
 ui-options-hud-theme-plasmafire = Плазма
 ui-options-hud-theme-slimecore = Слаймкор

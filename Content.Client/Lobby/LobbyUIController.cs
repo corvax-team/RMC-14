@@ -450,8 +450,10 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         return (_characterSetup, _profileEditor);
     }
 
-    private const float CharacterSetupWidthFactor = 0.69f;
-    private const float CharacterSetupHeightFactor = 0.68f;
+    private const float CharacterSetupMinWidth = 940f;
+    private const float CharacterSetupMinHeight = 700f;
+    private const float CharacterSetupMaxWidthFactor = 0.80f;
+    private const float CharacterSetupMaxHeightFactor = 0.82f;
 
     private void UpdateCharacterSetupLayout()
     {
@@ -467,9 +469,27 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         if (baseSize.X <= 1f || baseSize.Y <= 1f)
             return;
 
-        var size = new Vector2(baseSize.X * CharacterSetupWidthFactor, baseSize.Y * CharacterSetupHeightFactor);
+        var scale = baseSize.Y switch
+        {
+            <= 800f => new Vector2(0.66f, 0.84f),
+            <= 900f => new Vector2(0.63f, 0.79f),
+            _ => new Vector2(0.58f, 0.72f),
+        };
+
+        var maxWidth = baseSize.X * CharacterSetupMaxWidthFactor;
+        var maxHeight = baseSize.Y * CharacterSetupMaxHeightFactor;
+        var minWidth = MathF.Min(CharacterSetupMinWidth, maxWidth);
+        var minHeight = MathF.Min(CharacterSetupMinHeight, maxHeight);
+
+        var size = new Vector2(baseSize.X * scale.X, baseSize.Y * scale.Y);
+        size = new Vector2(
+            Math.Clamp(size.X, minWidth, maxWidth),
+            Math.Clamp(size.Y, minHeight, maxHeight));
+
+        var xBias = baseSize.Y <= 900f ? baseSize.X * 0.03f : baseSize.X * 0.05f;
+        var yBias = baseSize.Y <= 900f ? baseSize.Y * 0.01f : baseSize.Y * 0.02f;
         var pos = (baseSize - size) / 2f;
-        pos = new Vector2(pos.X + baseSize.X * 0.05f, MathF.Max(0f, pos.Y - baseSize.Y * 0.02f));
+        pos = new Vector2(pos.X + xBias, MathF.Max(0f, pos.Y - yBias));
 
         // CCM rework lobby - start
         if (_characterSetup.HasManualPosition)
@@ -482,6 +502,10 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
                 MathF.Min(MathF.Max(0f, _characterSetup.ManualPosition.Y), maxPos.Y));
         }
         // CCM rework lobby - end
+
+        pos = new Vector2(
+            MathF.Min(MathF.Max(0f, pos.X), MathF.Max(0f, baseSize.X - size.X)),
+            MathF.Min(MathF.Max(0f, pos.Y), MathF.Max(0f, baseSize.Y - size.Y)));
 
         LayoutContainer.SetAnchorPreset(_characterSetup, LayoutContainer.LayoutPreset.TopLeft);
         _characterSetup.SetSize = size;

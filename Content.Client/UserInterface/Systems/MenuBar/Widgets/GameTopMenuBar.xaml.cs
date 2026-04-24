@@ -14,7 +14,7 @@ namespace Content.Client.UserInterface.Systems.MenuBar.Widgets;
 public sealed partial class GameTopMenuBar : UIWidget
 {
     [Dependency] private readonly IResourceCache _resourceCache = default!;
-    private const float TopButtonSize = 68f;
+    private const float TopButtonSize = 60f;
 
     public MenuButton EscapeButton { get; }
     public MenuButton? GuidebookButton { get; }
@@ -35,7 +35,7 @@ public sealed partial class GameTopMenuBar : UIWidget
         VerticalExpand = false;
         HorizontalAlignment = HAlignment.Stretch;
         VerticalAlignment = VAlignment.Top;
-        SeparationOverride = 5;
+        SeparationOverride = 4;
         MinSize = new Vector2(0f, TopButtonSize);
 
         EscapeButton = CreateButton(

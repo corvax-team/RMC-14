@@ -45,6 +45,7 @@ namespace Content.Client.Lobby.UI
         [Dependency] private readonly LinkAccountManager _linkAccount = default!;
         [Dependency] private readonly IStateManager _stateManager = default!;
 
+        private readonly Action<bool> _onLobbyInvertSidesChanged;
         private RulesAndInfoWindow? _tutorialWindow;
         private LateJoinGui? _lateJoinWindow;
         private VoteCallMenu? _voteMenu;
@@ -60,18 +61,30 @@ namespace Content.Client.Lobby.UI
         private bool _leftMenuAutoCenter = true;
         private Vector2 _leftMenuLastGlobal;
         private Vector2 _voteLastSize;
+        private Vector2 _lastResponsiveMainSize;
+        private Vector2 _lastResponsiveLeftSize;
+        private bool _compactLobbyLayout;
 
         private const string LeftMenuHideAnimationKey = "lobby-left-menu-hide";
         private const string LeftMenuShowAnimationKey = "lobby-left-menu-show";
         private const float LeftMenuCenterYOffsetPercent = 0.06f;
+        private const float LobbyCenterWidthMin = 400f;
+        private const float LobbyCenterWidthMax = 440f;
+        private const float LobbyTaskbarWidthMin = 560f;
+        private const float LobbyTaskbarWidthMax = 880f;
+        private const float LobbyTaskbarHeightDefault = 84f;
+        private const float LobbyTaskbarHeightCompact = 72f;
+        private const float LobbyEdgePaddingDefault = 12f;
+        private const float LobbyEdgePaddingCompact = 8f;
 
         public LobbyGui()
         {
+            _onLobbyInvertSidesChanged = ApplyLobbyColumnLayout;
             RobustXamlLoader.Load(this);
             IoCManager.InjectDependencies(this);
             _leftMenuDragHelper = new DragDropHelper<Control>(OnBeginLeftMenuDrag, OnContinueLeftMenuDrag, OnEndLeftMenuDrag);
+            LayoutContainer.SetAnchorPreset(RootContainer, LayoutPreset.Wide);
             LayoutContainer.SetAnchorPreset(MainContainer, LayoutPreset.Wide);
-            LayoutContainer.SetAnchorPreset(LeftColumn, LayoutPreset.Wide);
             LayoutContainer.SetAnchorPreset(DefaultState, LayoutPreset.Wide);
             LayoutContainer.SetAnchorPreset(CharacterSetupState, LayoutPreset.Wide);
             LayoutContainer.SetAnchorPreset(BackgroundViewportArea, LayoutPreset.Wide);
@@ -98,7 +111,6 @@ namespace Content.Client.Lobby.UI
             TaskbarDonateButton.OnPressed += _ => UserInterfaceManager.GetUIController<CCMSponsorshipUIController>().ToggleWindow();
             TaskbarCustomizationButton.OnPressed += _ => UserInterfaceManager.GetUIController<CCMCustomizationUIController>().ToggleWindow();
 
-            TutorialButton.OnPressed += _ => OpenTutorial();
             StatsButton.OnPressed += _ => OpenStats();
             SetupCharacterButton.OnPressed += _ => OpenCharacterSetup();
             PollsButton.OnPressed += _ => OpenPolls();
@@ -113,13 +125,16 @@ namespace Content.Client.Lobby.UI
             _cfg.OnValueChanged(RMCCVars.RMCLobbyCrtEnabled, ApplyLobbyTheme);
             _cfg.OnValueChanged(RMCCVars.RMCUIColorTheme,
                 _ => ApplyLobbyTheme(_cfg.GetCVar(RMCCVars.RMCLobbyCrtEnabled)));
+            _cfg.OnValueChanged(RMCCVars.RMCLobbyInvertSides, _onLobbyInvertSidesChanged, true);
             _linkAccount.Updated += UpdateDiscordLinkState;
             UpdateDiscordLinkState();
+            UpdateLobbyLayering();
         }
 
         public void SwitchState(LobbyGuiState state)
         {
             CharacterSetupState.Visible = false;
+            UpdateLobbyLayering();
 
             switch (state)
             {
@@ -136,6 +151,30 @@ namespace Content.Client.Lobby.UI
 
                     break;
             }
+        }
+
+        private void UpdateLobbyLayering()
+        {
+            MainContainer.SetPositionFirst();
+            CharacterSetupState.SetPositionLast();
+        }
+
+        private void ApplyLobbyColumnLayout(bool invertSides)
+        {
+            if (invertSides)
+            {
+                RightSide.SetPositionFirst();
+                LeftColumn.SetPositionLast();
+            }
+            else
+            {
+                LeftColumn.SetPositionFirst();
+                RightSide.SetPositionLast();
+            }
+
+            _lastResponsiveMainSize = Vector2.Zero;
+            _lastResponsiveLeftSize = Vector2.Zero;
+            _leftMenuAnchorInitialized = false;
         }
 
 
@@ -294,7 +333,6 @@ namespace Content.Client.Lobby.UI
             SetThemeClass(AHelpButton, crtEnabled);
             SetThemeClass(OptionsButton, crtEnabled);
             SetThemeClass(LeaveButton, crtEnabled);
-            SetThemeClass(TutorialButton, crtEnabled);
             SetThemeClass(SetupCharacterButton, crtEnabled);
             SetThemeClass(PollsButton, crtEnabled);
             SetThemeClass(ObserveButton, crtEnabled);
@@ -341,7 +379,6 @@ namespace Content.Client.Lobby.UI
             ApplyButtonGlow(LinkDiscordButton, crtEnabled);
             ApplyButtonGlow(OptionsButton, crtEnabled);
             ApplyButtonGlow(LeaveButton, crtEnabled);
-            ApplyButtonGlow(TutorialButton, crtEnabled);
             ApplyButtonGlow(SetupCharacterButton, crtEnabled);
             ApplyButtonGlow(PollsButton, crtEnabled);
             ApplyButtonGlow(ObserveButton, crtEnabled);
@@ -356,6 +393,7 @@ namespace Content.Client.Lobby.UI
         protected override void Dispose(bool disposing)
         {
             _linkAccount.Updated -= UpdateDiscordLinkState;
+            _cfg.UnsubValueChanged(RMCCVars.RMCLobbyInvertSides, _onLobbyInvertSidesChanged);
             base.Dispose(disposing);
         }
 
@@ -461,6 +499,8 @@ namespace Content.Client.Lobby.UI
             base.FrameUpdate(args);
             _leftMenuDragHelper.Update(args.DeltaSeconds);
 
+            UpdateResponsiveLayout();
+
             if (CenterMenuGlow.Visible)
                 _leftMenuLastGlobal = CenterMenuGlow.GlobalPosition;
 
@@ -472,6 +512,74 @@ namespace Content.Client.Lobby.UI
             UpdateVoteContainerAnchor();
             UpdateLeftMenuAnchor();
             UpdateTaskbarAnchor();
+        }
+
+        private void UpdateResponsiveLayout()
+        {
+            var mainSize = MainContainer.Size;
+            var leftSize = LeftColumn.Size;
+            if (mainSize.X <= 1f || mainSize.Y <= 1f || leftSize.X <= 1f || leftSize.Y <= 1f)
+                return;
+
+            if (Math.Abs(mainSize.X - _lastResponsiveMainSize.X) < 1f &&
+                Math.Abs(mainSize.Y - _lastResponsiveMainSize.Y) < 1f &&
+                Math.Abs(leftSize.X - _lastResponsiveLeftSize.X) < 1f &&
+                Math.Abs(leftSize.Y - _lastResponsiveLeftSize.Y) < 1f)
+            {
+                return;
+            }
+
+            _lastResponsiveMainSize = mainSize;
+            _lastResponsiveLeftSize = leftSize;
+
+            _compactLobbyLayout = mainSize.Y <= 820f;
+            var shortHeightLayout = mainSize.Y <= 920f;
+
+            var centerFactor = _compactLobbyLayout
+                ? 0.36f
+                : shortHeightLayout
+                    ? 0.34f
+                    : 0.32f;
+            var centerWidth = Math.Clamp(leftSize.X * centerFactor, LobbyCenterWidthMin, LobbyCenterWidthMax);
+            CenterMenuGlow.SetWidth = centerWidth;
+            CenterMenuPanel.SetWidth = centerWidth;
+            CenterMenuGlow.MinSize = new Vector2(centerWidth, CenterMenuGlow.MinSize.Y);
+            CenterMenuPanel.MinSize = new Vector2(centerWidth, CenterMenuPanel.MinSize.Y);
+
+            var taskbarFactor = _compactLobbyLayout
+                ? 0.78f
+                : shortHeightLayout
+                    ? 0.74f
+                    : 0.70f;
+            var taskbarWidth = Math.Clamp(leftSize.X * taskbarFactor, LobbyTaskbarWidthMin, LobbyTaskbarWidthMax);
+            var taskbarHeight = _compactLobbyLayout ? LobbyTaskbarHeightCompact : LobbyTaskbarHeightDefault;
+            LeftTaskbarPanel.SetWidth = taskbarWidth;
+            LeftTaskbarPanel.SetHeight = taskbarHeight;
+            LeftTaskbarPanel.MinSize = new Vector2(taskbarWidth, taskbarHeight);
+            LeftTaskbarPanel.MaxSize = new Vector2(taskbarWidth, taskbarHeight);
+
+            MainContainer.SeparationOverride = _compactLobbyLayout ? 6 : 8;
+            TopButtonBar.SeparationOverride = _compactLobbyLayout ? 4 : 6;
+
+            var topButtonHeight = _compactLobbyLayout ? 36f : 40f;
+            LinkDiscordButton.MinSize = new Vector2(0f, topButtonHeight);
+            AHelpButton.MinSize = new Vector2(0f, topButtonHeight);
+            UpdatesButton.MinSize = new Vector2(0f, topButtonHeight);
+            GuidesButton.MinSize = new Vector2(0f, topButtonHeight);
+            PollsButton.MinSize = new Vector2(0f, topButtonHeight);
+            LeaveButton.MinSize = new Vector2(0f, topButtonHeight);
+            TopButtonBar.MinSize = new Vector2(0f, topButtonHeight);
+
+            TaskbarRatingButton.MinSize = _compactLobbyLayout ? new Vector2(60f, 40f) : new Vector2(68f, 48f);
+            TaskbarDonateButton.MinSize = _compactLobbyLayout ? new Vector2(104f, 48f) : new Vector2(118f, 56f);
+            TaskbarMenuButton.MinSize = _compactLobbyLayout ? new Vector2(82f, 40f) : new Vector2(92f, 48f);
+            TaskbarCustomizationButton.MinSize = _compactLobbyLayout ? new Vector2(104f, 48f) : new Vector2(118f, 56f);
+            TaskbarAchievementsButton.MinSize = _compactLobbyLayout ? new Vector2(60f, 40f) : new Vector2(68f, 48f);
+        }
+
+        private float GetLobbySafePadding()
+        {
+            return _compactLobbyLayout ? LobbyEdgePaddingCompact : LobbyEdgePaddingDefault;
         }
 
         private void UpdateLeftMenuAnchor()
@@ -489,9 +597,19 @@ namespace Content.Client.Lobby.UI
 
             var parentGlobal = CenterMenuGlow.Parent.GlobalPosition;
             var leftGlobal = LeftColumn.GlobalPosition;
+            var padding = GetLobbySafePadding();
 
             var x = leftGlobal.X - parentGlobal.X + (leftSize.X - menuSize.X) * 0.5f;
             var y = leftGlobal.Y - parentGlobal.Y + (leftSize.Y - menuSize.Y) * 0.5f + leftSize.Y * LeftMenuCenterYOffsetPercent;
+
+            var minX = leftGlobal.X - parentGlobal.X + padding;
+            var maxX = leftGlobal.X - parentGlobal.X + leftSize.X - menuSize.X - padding;
+            var minY = leftGlobal.Y - parentGlobal.Y + padding;
+            var maxY = leftGlobal.Y - parentGlobal.Y + leftSize.Y - menuSize.Y - padding;
+            if (maxX >= minX)
+                x = Math.Clamp(x, minX, maxX);
+            if (maxY >= minY)
+                y = Math.Clamp(y, minY, maxY);
 
             LayoutContainer.SetAnchorPreset(CenterMenuGlow, LayoutPreset.TopLeft);
             LayoutContainer.SetPosition(CenterMenuGlow, new Vector2(x, y));
@@ -516,8 +634,9 @@ namespace Content.Client.Lobby.UI
                 return;
 
             var menuGlobal = CenterMenuGlow.GlobalPosition;
+            var padding = GetLobbySafePadding();
             var voteX = menuGlobal.X + (menuSize.X - voteSize.X) * 0.5f - parentGlobal.X;
-            var voteY = -parentGlobal.Y + 6f;
+            var voteY = -parentGlobal.Y + (_compactLobbyLayout ? 4f : 6f);
             // CCM rework lobby - end
 
             // CCM rework lobby - start
@@ -525,10 +644,10 @@ namespace Content.Client.Lobby.UI
             var leftSize = LeftColumn.Size;
             if (leftSize.X > 1f && leftSize.Y > 1f)
             {
-                var minX = leftGlobal.X - parentGlobal.X;
-                var maxX = minX + leftSize.X - voteSize.X;
-                var minY = leftGlobal.Y - parentGlobal.Y;
-                var maxY = minY + leftSize.Y - voteSize.Y;
+                var minX = leftGlobal.X - parentGlobal.X + padding;
+                var maxX = leftGlobal.X - parentGlobal.X + leftSize.X - voteSize.X - padding;
+                var minY = leftGlobal.Y - parentGlobal.Y + padding * 0.5f;
+                var maxY = leftGlobal.Y - parentGlobal.Y + leftSize.Y - voteSize.Y - padding;
                 if (maxX >= minX)
                     voteX = Math.Clamp(voteX, minX, maxX);
                 if (maxY >= minY)
@@ -555,8 +674,14 @@ namespace Content.Client.Lobby.UI
             if (leftSize.X <= 1f || leftSize.Y <= 1f)
                 return;
 
+            var padding = GetLobbySafePadding();
             var x = leftGlobal.X - parentGlobal.X + (leftSize.X - panelSize.X) * 0.5f;
-            var y = leftGlobal.Y - parentGlobal.Y + leftSize.Y - panelSize.Y - 2f;
+            var y = leftGlobal.Y - parentGlobal.Y + leftSize.Y - panelSize.Y - padding;
+
+            var minX = leftGlobal.X - parentGlobal.X + padding;
+            var maxX = leftGlobal.X - parentGlobal.X + leftSize.X - panelSize.X - padding;
+            if (maxX >= minX)
+                x = Math.Clamp(x, minX, maxX);
 
             LayoutContainer.SetAnchorPreset(LeftTaskbarPanel, LayoutPreset.TopLeft);
             LayoutContainer.SetPosition(LeftTaskbarPanel, new Vector2(x, y));
@@ -610,12 +735,13 @@ namespace Content.Client.Lobby.UI
             var menuSize = CenterMenuGlow.Size;
             var leftGlobal = LeftColumn.GlobalPosition;
             var leftSize = LeftColumn.Size;
+            var padding = GetLobbySafePadding();
             if (leftSize.X > 1f && leftSize.Y > 1f && menuSize.X > 1f && menuSize.Y > 1f)
             {
-                var minX = leftGlobal.X - parentGlobal.X;
-                var maxX = minX + leftSize.X - menuSize.X;
-                var minY = leftGlobal.Y - parentGlobal.Y;
-                var maxY = minY + leftSize.Y - menuSize.Y;
+                var minX = leftGlobal.X - parentGlobal.X + padding;
+                var maxX = leftGlobal.X - parentGlobal.X + leftSize.X - menuSize.X - padding;
+                var minY = leftGlobal.Y - parentGlobal.Y + padding;
+                var maxY = leftGlobal.Y - parentGlobal.Y + leftSize.Y - menuSize.Y - padding;
                 if (maxX >= minX)
                     newPos.X = Math.Clamp(newPos.X, minX, maxX);
                 if (maxY >= minY)
@@ -669,6 +795,7 @@ namespace Content.Client.Lobby.UI
             }
 
             _tutorialWindow.OpenCentered();
+            _tutorialWindow.MoveToFront();
         }
 
         private void OpenStats()
@@ -681,6 +808,7 @@ namespace Content.Client.Lobby.UI
 
             _statsWindow.RefreshData();
             _statsWindow.OpenCenteredAnimated();
+            _statsWindow.MoveToFront();
         }
 
         private void ToggleStats()
@@ -704,6 +832,7 @@ namespace Content.Client.Lobby.UI
 
             _leaderboardWindow.RefreshData();
             _leaderboardWindow.OpenCenteredAnimated();
+            _leaderboardWindow.MoveToFront();
         }
 
         private void ToggleLeaderboard()
@@ -732,6 +861,7 @@ namespace Content.Client.Lobby.UI
             }
 
             _voteMenu.OpenCentered();
+            _voteMenu.MoveToFront();
         }
 
         private void OpenObserve()
@@ -743,6 +873,7 @@ namespace Content.Client.Lobby.UI
             }
 
             _observeWindow.OpenCentered();
+            _observeWindow.MoveToFront();
         }
 
         private void OpenLateJoin()
@@ -754,6 +885,7 @@ namespace Content.Client.Lobby.UI
             }
 
             _lateJoinWindow.OpenCentered();
+            _lateJoinWindow.MoveToFront();
         }
 
         private void OpenCrewManifest()

@@ -2,6 +2,7 @@
 using Content.Client.Audio;
 using Content.Client.GameTicking.Managers;
 using Content.Client.Lobby.UI;
+using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Chat;
 using Content.Client.TextScreen;
 using Content.Client.Voting;
@@ -47,8 +48,8 @@ namespace Content.Client.Lobby
         private ContentAudioSystem _audioSystem = default!;
         private float _lastRightPanelWidth = -1f;
 
-        private const float LobbyRightPanelMinRatio = 0.216f;
-        private const float LobbyRightPanelMaxRatio = 0.336f;
+        private const float LobbyRightPanelMinRatio = 0.20f;
+        private const float LobbyRightPanelMaxRatio = 0.30f;
 
         protected override Type? LinkedScreenType { get; } = typeof(LobbyGui);
         public LobbyGui? Lobby;
@@ -64,8 +65,8 @@ namespace Content.Client.Lobby
                 "console",
                 new[]
                 {
-                    "/Textures/_CCM14/Lobby/lobbytgmc.png",
-                    "/Textures/_CCM14/Lobby/lobbyweyland.png",
+                    "/Textures/_CCM14/Lobby/lobbytgmc_green.png",
+                    "/Textures/_CCM14/Lobby/lobbyweyland_green.png",
                 }
             },
             {
@@ -132,7 +133,8 @@ namespace Content.Client.Lobby
             UpdateRightPanelLayout();
 
             UpdateLobbyUi();
-            _cfg.OnValueChanged(RMCCVars.RMCLobbyBackgroundPreset, _ => UpdateLobbyBackground(true), true);
+            _cfg.OnValueChanged(RMCCVars.RMCLobbyBackgroundPreset, OnLobbyBackgroundPresetChanged, true);
+            _cfg.OnValueChanged(RMCCVars.RMCUIColorTheme, OnUiColorThemeChanged, false);
 
             _gameTicker.InfoBlobUpdated += UpdateLobbyUi;
             _gameTicker.LobbyStatusUpdated += LobbyStatusUpdated;
@@ -148,6 +150,8 @@ namespace Content.Client.Lobby
             _gameTicker.InfoBlobUpdated -= UpdateLobbyUi;
             _gameTicker.LobbyStatusUpdated -= LobbyStatusUpdated;
             _audioSystem.LobbySoundtrackChanged -= UpdateLobbySoundtrackInfo;
+            _cfg.UnsubValueChanged(RMCCVars.RMCLobbyBackgroundPreset, OnLobbyBackgroundPresetChanged);
+            _cfg.UnsubValueChanged(RMCCVars.RMCUIColorTheme, OnUiColorThemeChanged);
 
             _voteManager.ClearPopupContainer();
 
@@ -188,9 +192,8 @@ namespace Content.Client.Lobby
             if (uiScale <= 0f)
                 uiScale = 1f;
 
-            // Keep right panel visually stable across UI scales and different monitor sizes.
             var basePanelWidth = _cfg.GetCVar(CCVars.ServerLobbyRightPanelWidth);
-            var desiredWidth = (basePanelWidth / uiScale) / 1.25f;
+            var desiredWidth = (basePanelWidth / uiScale) * 0.88f;
             desiredWidth = Math.Clamp(
                 desiredWidth,
                 hostWidth * LobbyRightPanelMinRatio,
@@ -231,6 +234,16 @@ namespace Content.Client.Lobby
         {
             UpdateLobbyBackground();
             UpdateLobbyUi();
+        }
+
+        private void OnLobbyBackgroundPresetChanged(string _preset)
+        {
+            UpdateLobbyBackground(true);
+        }
+
+        private void OnUiColorThemeChanged(string _theme)
+        {
+            UpdateLobbyBackground(true);
         }
 
         private void UpdateLobbyUi()
@@ -374,6 +387,12 @@ namespace Content.Client.Lobby
 
         private static bool TryGetPresetBackgrounds(string preset, out string[] backgrounds)
         {
+            if (string.Equals(preset, "console", StringComparison.Ordinal))
+            {
+                backgrounds = GetConsoleBackgroundsForTheme();
+                return true;
+            }
+
             if (LobbyBackgroundPresets.TryGetValue(preset, out var value))
             {
                 backgrounds = value;
@@ -382,6 +401,21 @@ namespace Content.Client.Lobby
 
             backgrounds = Array.Empty<string>();
             return false;
+        }
+
+        private static string[] GetConsoleBackgroundsForTheme()
+        {
+            return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                ? new[]
+                {
+                    "/Textures/_CCM14/Lobby/lobbytgmc_blue.png",
+                    "/Textures/_CCM14/Lobby/lobbyweyland_blue.png",
+                }
+                : new[]
+                {
+                    "/Textures/_CCM14/Lobby/lobbytgmc_green.png",
+                    "/Textures/_CCM14/Lobby/lobbyweyland_green.png",
+                };
         }
 
     }

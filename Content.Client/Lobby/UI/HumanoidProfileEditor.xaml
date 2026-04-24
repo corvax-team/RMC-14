@@ -163,30 +163,30 @@
                                     <Control HorizontalExpand="True"/>
                                     <Button Name="OriginButton"
                                             Text="{Loc 'humanoid-profile-editor-origin-select'}"
-                                            MinWidth="128"
+                                            MinWidth="156"
                                             HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-religion-label'}" />
                                     <Control HorizontalExpand="True"/>
-                                    <ccm:CCMOptionButton Name="ReligionButton" HorizontalAlignment="Right" MinWidth="128" />
+                                    <ccm:CCMOptionButton Name="ReligionButton" HorizontalAlignment="Right" MinWidth="156" />
                                 </BoxContainer>
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-corporate-relation-label'}" />
                                     <Control HorizontalExpand="True"/>
-                                    <ccm:CCMOptionButton Name="CorporateRelationButton" HorizontalAlignment="Right" MinWidth="128" />
+                                    <ccm:CCMOptionButton Name="CorporateRelationButton" HorizontalAlignment="Right" MinWidth="156" />
                                 </BoxContainer>
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-preferred-squad-label'}" />
                                     <Control HorizontalExpand="True"/>
-                                    <ccm:CCMOptionButton Name="SquadPreferenceButton" HorizontalAlignment="Right" MinWidth="128" />
+                                    <ccm:CCMOptionButton Name="SquadPreferenceButton" HorizontalAlignment="Right" MinWidth="156" />
                                 </BoxContainer>
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-background-info-label'}" />
                                     <Control HorizontalExpand="True"/>
                                     <Button Name="BackgroundInfoButton"
                                             Text="{Loc 'humanoid-profile-editor-background-info-open'}"
-                                            MinWidth="128"
+                                            MinWidth="156"
                                             HorizontalAlignment="Right" />
                                 </BoxContainer>
                                 <PanelContainer Name="BackgroundInfoInlineContainer" Visible="False" HorizontalExpand="True" MinHeight="220" Margin="0 6 0 0" />

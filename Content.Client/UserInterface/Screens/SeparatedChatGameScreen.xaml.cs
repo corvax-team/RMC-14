@@ -16,6 +16,8 @@ namespace Content.Client.UserInterface.Screens;
 
 public sealed partial class SeparatedChatGameScreen : InGameScreen
 {
+    private const float VoteMenuLeftOffset = 148f;
+
     protected SplitContainer ScreenContainer = default!;
     protected LayoutContainer ViewportContainer = default!;
     protected MainViewport MainViewport = default!;
@@ -50,6 +52,8 @@ public sealed partial class SeparatedChatGameScreen : InGameScreen
         SetAnchorAndMarginPreset(Inventory, LayoutPreset.BottomLeft, margin: 5);
         SetAnchorAndMarginPreset(TopLeftContainer, LayoutPreset.TopLeft, margin: 10);
         SetAnchorAndMarginPreset(VoteMenu, LayoutPreset.CenterTop, margin: 10);
+        SetMarginLeft(VoteMenu, VoteMenu.GetValue<float>(LayoutContainer.MarginLeftProperty) - VoteMenuLeftOffset);
+        SetMarginRight(VoteMenu, VoteMenu.GetValue<float>(LayoutContainer.MarginRightProperty) - VoteMenuLeftOffset);
         SetAnchorAndMarginPreset(Ghost, LayoutPreset.BottomWide, margin: 80);
         SetAnchorAndMarginPreset(Hotbar, LayoutPreset.BottomWide, margin: 5);
         SetAnchorAndMarginPreset(Alerts, LayoutPreset.CenterRight, margin: 10);
