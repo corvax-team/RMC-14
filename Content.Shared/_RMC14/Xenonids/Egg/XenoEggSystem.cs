@@ -85,11 +85,20 @@ public sealed class XenoEggSystem : EntitySystem
 
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
+    // CCM royal egg start
+    private static readonly EntProtoId QueenEggPrototype = "CCMXenoRoyalEgg";
+
+    private TimeSpan _nextQueenEggTime;
+
+    private static readonly TimeSpan QueenEggInterval = TimeSpan.FromMinutes(5);
+    // CCM royal egg end
 
     private EntityQuery<StepTriggerComponent> _stepTriggerQuery;
 
     public override void Initialize()
     {
+        _nextQueenEggTime = _timing.CurTime + QueenEggInterval;     // CCM royal egg
+
         _stepTriggerQuery = GetEntityQuery<StepTriggerComponent>();
 
         SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
@@ -874,10 +883,18 @@ public sealed class XenoEggSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        // CCM royal egg start
+        var time = _timing.CurTime;
+
+        if (time >= _nextQueenEggTime)
+        {
+            _nextQueenEggTime = time + QueenEggInterval;
+            SpawnQueenEggs();
+        }
+        // CCM royal egg end
         if (_net.IsClient)
             return;
 
-        var time = _timing.CurTime;
         var oviQuery = EntityQueryEnumerator<XenoOvipositorCapableComponent, XenoAttachedOvipositorComponent, TransformComponent>();
         while (oviQuery.MoveNext(out var uid, out var capable, out var attached, out var xform))
         {
@@ -1042,6 +1059,26 @@ public sealed class XenoEggSystem : EntitySystem
             _jitter.DoJitter(uid, fragile.BurstDelay / 2, true, 40, 8, true);
         }
     }
+    // CCM royal egg start
+    private void SpawnQueenEggs()
+    {
+        var query = EntityQueryEnumerator<XenoOvipositorCapableComponent, XenoAttachedOvipositorComponent, TransformComponent>();
+
+        while (query.MoveNext(out var uid, out var capable, out var attached, out var xform))
+        {
+            if (TryComp(uid, out MobStateComponent? state) &&
+                _mobState.IsIncapacitated(uid, state))
+            {
+                continue;
+            }
+
+            var egg = SpawnAtPosition(QueenEggPrototype, xform.Coordinates.Offset(capable.Offset));
+
+            _hive.SetSameHive(uid, egg);
+            _transform.SetLocalRotation(egg, Angle.Zero);
+        }
+    }
+    // CCM royal egg end
 }
 
 [Serializable, NetSerializable]

@@ -88,6 +88,7 @@
       - XenoParasite
       - XenoEgg
       - XenoFruit
+      - CCMXenoRoyalParasite # CCM add
   - type: XenoEggRetriever
   - type: XenoNurturing
   - type: RMCSize

@@ -8,4 +8,8 @@ public sealed partial class XenoAttachedOvipositorComponent : Component
 {
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? NextEgg;
+    // CCM changed royal parasite start
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan NextSpawnTime;
+    // CCM changed royal parasite end
 }

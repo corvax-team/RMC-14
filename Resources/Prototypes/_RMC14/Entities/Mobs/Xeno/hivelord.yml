@@ -80,6 +80,7 @@
       - XenoParasite
       - XenoEgg
       - XenoFruit
+      - CCMXenoRoyalParasite # CCM add
   - type: MultiHandedHolder
     items:
     - hands: 2
