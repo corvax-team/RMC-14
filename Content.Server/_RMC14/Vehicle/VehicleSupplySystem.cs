@@ -1529,7 +1529,9 @@ public sealed class VehicleSupplySystem : EntitySystem
     private HashSet<string> BuildUnlockedSet()
     {
         var unlocked = new HashSet<string>();
-        var tech = EnsureSupplyTech();
+        if (!TryGetSupplyTech(out var tech))
+            return unlocked;
+
         foreach (var id in tech.Comp.Unlocked)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -1539,6 +1541,19 @@ public sealed class VehicleSupplySystem : EntitySystem
         }
 
         return unlocked;
+    }
+
+    private bool TryGetSupplyTech(out Entity<VehicleSupplyTechComponent> tech)
+    {
+        var query = EntityQueryEnumerator<VehicleSupplyTechComponent>();
+        if (query.MoveNext(out var uid, out var comp))
+        {
+            tech = (uid, comp);
+            return true;
+        }
+
+        tech = default;
+        return false;
     }
 
     private static bool IsEntryUnlocked(VehicleSupplyEntry entry, HashSet<string> unlocked)
