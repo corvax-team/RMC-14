@@ -11,7 +11,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._CCM.Vehicle.Fabricator.Fabricator;
 
-public sealed class VehicleFabricatorWindow : DefaultWindow
+public sealed partial class VehicleFabricatorWindow : DefaultWindow
 {
     public event Action<VehicleFabricatorCategory>? OnCategorySelected;
     public event Action<VehicleType>? OnVehicleSelected;
@@ -21,10 +21,11 @@ public sealed class VehicleFabricatorWindow : DefaultWindow
     public VehicleType SelectedVehicle { get; private set; } = VehicleType.Tank;
 
     private Label PrintingLabel => FindControl<Label>("PrintingLabel");
-    private ProgressBar PrintingBar => FindControl<ProgressBar>("ProgressBar");
+    private ProgressBar PrintingBar => FindControl<ProgressBar>("PrintingBar");
     private EntityPrototypeView VehiclePreview => FindControl<EntityPrototypeView>("VehiclePreview");
     private BoxContainer PrintablesContainer => FindControl<BoxContainer>("PrintablesContainer");
     private RichTextLabel CategoryTitleLabel => FindControl<RichTextLabel>("CategoryTitleLabel");
+
 
     private readonly Dictionary<VehicleFabricatorCategory, Button> _categoryButtons = new();
     private readonly Dictionary<VehicleType, Button> _vehicleButtons = new();
