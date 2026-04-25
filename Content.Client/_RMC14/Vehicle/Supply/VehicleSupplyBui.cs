@@ -66,7 +66,7 @@ public sealed class VehicleSupplyBui : BoundUserInterface
             VehicleSupplyLiftMode.Preparing => Loc.GetString("rmc-vehicle-lift-mode-preparing"),
             _ => Loc.GetString("rmc-vehicle-supply-lift-none")
         };
-        var activeText = string.IsNullOrWhiteSpace(state.ActiveVehicleId) ? Loc.GetString("rmc-vehicle-supply-vehicle-none") : state.ActiveVehicleId;
+        var activeText = string.IsNullOrWhiteSpace(state.ActiveVehicleName) ? Loc.GetString("rmc-vehicle-supply-vehicle-none") : state.ActiveVehicleName; // CCM14
         var busyText = state.Busy ? Loc.GetString("rmc-vehicle-supply-status-busy") : Loc.GetString("rmc-vehicle-supply-status-idle");
 
         _window.StatusLabel.Text = Loc.GetString("rmc-vehicle-supply-status", ("mode", modeText), ("status", busyText), ("active", activeText));

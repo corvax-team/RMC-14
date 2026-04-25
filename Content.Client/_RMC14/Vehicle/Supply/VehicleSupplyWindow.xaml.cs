@@ -64,7 +64,7 @@ public sealed partial class VehicleSupplyWindow : FancyWindow
     {
         if (preview == null || string.IsNullOrWhiteSpace(preview.VehicleId))
         {
-            PreviewTitle.Text = "Vehicle Preview";
+            PreviewTitle.Text = Loc.GetString("rmc-vehicle-supply-preview-none"); // CCM14
             VehiclePreview.SetPrototype(null);
             _previewLayers.Clear();
             _previewDirty = false;
@@ -76,7 +76,7 @@ public sealed partial class VehicleSupplyWindow : FancyWindow
             return;
         }
 
-        PreviewTitle.Text = preview.VehicleId;
+        PreviewTitle.Text = string.IsNullOrWhiteSpace(preview.VehicleName) ? preview.VehicleId : preview.VehicleName; // CCM14
         VehiclePreview.SetPrototype(preview.VehicleId);
         VehiclePreview.OverrideDirection = Direction.South;
 

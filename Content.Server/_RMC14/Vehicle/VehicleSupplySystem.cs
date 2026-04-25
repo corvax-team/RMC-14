@@ -65,6 +65,7 @@ public sealed class VehicleSupplySystem : EntitySystem
     {
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<VehicleSupplyConsoleComponent, BeforeActivatableUIOpenEvent>(OnConsoleBeforeUiOpen);
+        SubscribeLocalEvent<VehicleSupplyConsoleComponent, MapInitEvent>(OnConsoleMapInit); // CCM14
 #if false // CCM14-start
         SubscribeLocalEvent<VehicleHardpointVendorComponent, MapInitEvent>(OnVendorMapInit);
         SubscribeLocalEvent<VehicleHardpointVendorComponent, BeforeActivatableUIOpenEvent>(OnVendorBeforeUiOpen);
@@ -301,6 +302,22 @@ public sealed class VehicleSupplySystem : EntitySystem
     private void OnConsoleBeforeUiOpen(Entity<VehicleSupplyConsoleComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
         SendConsoleState(ent.Owner, ent.Comp);
+    }
+
+    private void OnConsoleMapInit(Entity<VehicleSupplyConsoleComponent> ent, ref MapInitEvent args)
+    {
+        var mapId = _transform.GetMapId(ent.Owner);
+        var liftQuery = EntityQueryEnumerator<VehicleSupplyLiftComponent, TransformComponent>();
+        while (liftQuery.MoveNext(out var uid, out var lift, out var xform))
+        {
+            if (xform.MapID != mapId)
+                continue;
+
+            SeedStoredFromConsoles((uid, lift));
+            Dirty(uid, lift);
+        }
+
+        SendConsoleStateAll();
     }
 
     private void OnLiftMapInit(Entity<VehicleSupplyLiftComponent> ent, ref MapInitEvent args)
@@ -774,6 +791,7 @@ public sealed class VehicleSupplySystem : EntitySystem
         VehicleSupplyLiftMode? mode = null;
         var busy = false;
         string? activeId = null;
+        string? activeName = null; // CCM14
         string? selectedId = string.IsNullOrWhiteSpace(console.SelectedVehicle) ? null : console.SelectedVehicle;
         var selectedCopyIndex = console.SelectedVehicleCopyIndex;
         VehicleSupplyPreviewState? preview = null;
@@ -784,6 +802,7 @@ public sealed class VehicleSupplySystem : EntitySystem
             mode = lift.Comp.Mode;
             busy = lift.Comp.Busy;
             activeId = string.IsNullOrWhiteSpace(lift.Comp.ActiveVehicleId) ? null : lift.Comp.ActiveVehicleId;
+            activeName = string.IsNullOrWhiteSpace(activeId) ? null : GetVehicleName(activeId); // CCM14
 
             if (!string.IsNullOrWhiteSpace(selectedId))
             {
@@ -796,7 +815,8 @@ public sealed class VehicleSupplySystem : EntitySystem
                     overlays = BuildPreviewOverlays(stored);
                 }
 
-                preview = new VehicleSupplyPreviewState(selectedId, selectedCopyIndex, layers, overlays);
+                var selectedName = GetVehicleName(selectedId); // CCM14
+                preview = new VehicleSupplyPreviewState(selectedId, selectedName, selectedCopyIndex, layers, overlays); // CCM14
             }
         }
 
@@ -819,7 +839,7 @@ public sealed class VehicleSupplySystem : EntitySystem
             available.Add(new VehicleSupplyEntryState(entry.Vehicle.Id, GetEntryName(entry), 1));
         }
 
-        var state = new VehicleSupplyBuiState(mode, busy, activeId, selectedId, selectedCopyIndex, preview, available);
+        var state = new VehicleSupplyBuiState(mode, busy, activeId, activeName, selectedId, selectedCopyIndex, preview, available); // CCM14
         _ui.SetUiState(uid, VehicleSupplyUIKey.Key, state);
     }
 
@@ -1298,6 +1318,11 @@ public sealed class VehicleSupplySystem : EntitySystem
     private string GetEntryName(VehicleSupplyEntry entry)
     {
         return GetPrototypeName(entry.Vehicle.Id);
+    }
+
+    private string GetVehicleName(string vehicleId)
+    {
+        return GetPrototypeName(vehicleId);
     }
     // CCM14-end
 

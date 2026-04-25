@@ -30,6 +30,7 @@ public sealed class VehicleSupplyBuiState : BoundUserInterfaceState
     public VehicleSupplyLiftMode? LiftMode;
     public bool Busy;
     public string? ActiveVehicleId;
+    public string? ActiveVehicleName; // CCM14
     public string? SelectedVehicleId;
     public int SelectedCopyIndex;
     public VehicleSupplyPreviewState? Preview;
@@ -39,6 +40,7 @@ public sealed class VehicleSupplyBuiState : BoundUserInterfaceState
         VehicleSupplyLiftMode? liftMode,
         bool busy,
         string? activeVehicleId,
+        string? activeVehicleName, // CCM14
         string? selectedVehicleId,
         int selectedCopyIndex,
         VehicleSupplyPreviewState? preview,
@@ -47,6 +49,7 @@ public sealed class VehicleSupplyBuiState : BoundUserInterfaceState
         LiftMode = liftMode;
         Busy = busy;
         ActiveVehicleId = activeVehicleId;
+        ActiveVehicleName = activeVehicleName; // CCM14
         SelectedVehicleId = selectedVehicleId;
         SelectedCopyIndex = selectedCopyIndex;
         Preview = preview;
@@ -58,17 +61,20 @@ public sealed class VehicleSupplyBuiState : BoundUserInterfaceState
 public sealed class VehicleSupplyPreviewState
 {
     public string VehicleId;
+    public string? VehicleName; // CCM14
     public int CopyIndex;
     public List<VehicleHardpointLayerState> Layers;
     public List<VehicleSupplyPreviewOverlay> Overlays;
 
     public VehicleSupplyPreviewState(
         string vehicleId,
+        string? vehicleName, // CCM14
         int copyIndex,
         List<VehicleHardpointLayerState> layers,
         List<VehicleSupplyPreviewOverlay> overlays)
     {
         VehicleId = vehicleId;
+        VehicleName = vehicleName; // CCM14
         CopyIndex = copyIndex;
         Layers = layers;
         Overlays = overlays;
