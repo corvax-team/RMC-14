@@ -68,10 +68,7 @@ public sealed partial class HardpointStateComponent : Component
 
     [NonSerialized]
     public HashSet<string> PendingRemovals = new();
-    // CCM14-start
-    [NonSerialized]
-    public HashSet<string> CompletingRemovals = new();
-    // CCM14-end
+
     [NonSerialized]
     public HashSet<EntityUid> PendingInsertUsers = new();
 

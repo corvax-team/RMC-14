@@ -59,6 +59,7 @@ public sealed partial class HardpointSystem : EntitySystem
     [Dependency] private readonly SharedExplosionSystem _explosion = default!;
     [Dependency] private readonly VehicleTopologySystem _topology = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!; // CCM14
 
     public override void Initialize()
     {
@@ -570,6 +571,36 @@ public sealed partial class HardpointSystem : EntitySystem
         }
 
         args.Damage = ScaleDamage(args.Damage, hullFraction);
+
+        // CCM14: After vehicle absorbs explosion damage, remaining damage passes to interior occupants.
+        // Only for explosions (origin has ExplosionVisualsComponent).
+        if (args.Origin != null && HasComp<ExplosionVisualsComponent>(args.Origin.Value))
+        {
+            DamageVehicleInteriorOccupants(ent.Owner, args.Damage);
+        }
+    }
+
+    /// <summary>
+    /// CCM14: Applies remaining explosion damage to all occupants inside a vehicle's interior
+    /// after the vehicle's hardpoints and hull have absorbed their share.
+    /// </summary>
+    private void DamageVehicleInteriorOccupants(EntityUid vehicle, DamageSpecifier damage)
+    {
+        if (!TryComp(vehicle, out VehicleInteriorComponent? interior))
+            return;
+
+        var occupants = interior.Passengers.Count + interior.Xenos.Count;
+        if (occupants == 0)
+            return;
+
+        var toDamage = new List<EntityUid>(occupants);
+        toDamage.AddRange(interior.Passengers);
+        toDamage.AddRange(interior.Xenos);
+
+        foreach (var occupant in toDamage)
+        {
+            _damageable.TryChangeDamage(occupant, damage * _damageable.UniversalExplosionDamageModifier, ignoreResistances: true);
+        }
     }
 
     private float GetVehicleIncomingDamageMultiplier(EntityUid? origin, EntityUid? tool)
