@@ -239,14 +239,11 @@ public sealed class VehicleFabricatorSystem : EntitySystem
         if (!proto.TryGetComponent(out HardpointSlotsComponent? moduleSlots, _compFactory))
             return ImmutableArray<VehicleFabricatorCategory>.Empty;
 
-        var categories = new List<VehicleFabricatorCategory>();
+        var categories = new HashSet<VehicleFabricatorCategory>();
         foreach (var subSlot in moduleSlots.Slots)
         {
             var category = VehicleFabricatorUtils.GetCategoryFromHardpointType(subSlot.HardpointType);
-            if (!categories.Contains(category))
-            {
-                categories.Add(category);
-            }
+            categories.Add(category);
         }
         return categories.ToImmutableArray();
     }

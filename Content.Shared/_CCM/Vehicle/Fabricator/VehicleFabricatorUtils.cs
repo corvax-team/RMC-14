@@ -11,9 +11,7 @@ public static class VehicleFabricatorUtils
 
     public static string GetLimitKey(VehicleFabricatorCategory category, VehicleType vehicle)
     {
-        var categoryStr = category.ToString();
-        var vehicleStr = vehicle == VehicleType.None ? "None" : vehicle.ToString();
-        return $"{categoryStr}-{vehicleStr}";
+        return $"{category}-{vehicle}";
     }
 
     public static EntProtoId? GetVehicleProtoId(VehicleType vehicle) => vehicle switch
@@ -25,20 +23,24 @@ public static class VehicleFabricatorUtils
         _ => null
     };
 
-    public static VehicleFabricatorCategory GetCategoryFromHardpointType(string hardpointType)
+    public static VehicleFabricatorCategory GetCategoryFromHardpointType(string? hardpointType)
     {
-        return hardpointType switch
+        if (string.IsNullOrWhiteSpace(hardpointType))
+            return VehicleFabricatorCategory.Support;
+
+        var type = hardpointType.Trim().ToLowerInvariant();
+        
+        return type switch
         {
-            "wheel" => VehicleFabricatorCategory.Chassis,
-            "turret" => VehicleFabricatorCategory.Primary,
+            "wheel" or "chassis" => VehicleFabricatorCategory.Chassis,
+            "turret" or "primary" => VehicleFabricatorCategory.Primary,
             "secondary" => VehicleFabricatorCategory.Secondary,
             "cannon" => VehicleFabricatorCategory.Cannon,
             "launcher" => VehicleFabricatorCategory.Launcher,
             "armor" => VehicleFabricatorCategory.Armor,
-            "support" => VehicleFabricatorCategory.Support,
-            "supportattachment" => VehicleFabricatorCategory.Support,
-            "roofattachment" => VehicleFabricatorCategory.RoofAttachment,
-            "frontattachment" => VehicleFabricatorCategory.FrontAttachment,
+            "support" or "supportattachment" => VehicleFabricatorCategory.Support,
+            "roof" or "roofattachment" => VehicleFabricatorCategory.RoofAttachment,
+            "front" or "frontattachment" => VehicleFabricatorCategory.FrontAttachment,
             _ => VehicleFabricatorCategory.Support
         };
     }
