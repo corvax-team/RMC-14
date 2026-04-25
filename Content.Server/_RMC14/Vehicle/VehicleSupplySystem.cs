@@ -51,7 +51,6 @@ public sealed class VehicleSupplySystem : EntitySystem
         Vector2 East,
         Vector2 South,
         Vector2 West);
-#if false // CCM14-start
     private readonly record struct VendorHardpointEntry(
         string Id,
         string SharedKey,
@@ -59,17 +58,13 @@ public sealed class VehicleSupplySystem : EntitySystem
         string DisplayName,
         string SectionName,
         int SectionOrder);
-#endif // CCM14-end
 
     public override void Initialize()
     {
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<VehicleSupplyConsoleComponent, BeforeActivatableUIOpenEvent>(OnConsoleBeforeUiOpen);
-        SubscribeLocalEvent<VehicleSupplyConsoleComponent, MapInitEvent>(OnConsoleMapInit); // CCM14
-#if false // CCM14-start
         SubscribeLocalEvent<VehicleHardpointVendorComponent, MapInitEvent>(OnVendorMapInit);
         SubscribeLocalEvent<VehicleHardpointVendorComponent, BeforeActivatableUIOpenEvent>(OnVendorBeforeUiOpen);
-#endif // CCM14-end
         SubscribeLocalEvent<VehicleSupplyLiftComponent, MapInitEvent>(OnLiftMapInit);
         SubscribeLocalEvent<ActorComponent, RMCAutomatedVendedUserEvent>(OnAutomatedVendorVended);
 
@@ -93,7 +88,6 @@ public sealed class VehicleSupplySystem : EntitySystem
     {
         return lift.Stored.TryGetValue(key, out var count) ? count : 0;
     }
-#if false // CCM14-start
     private static int GetVendorAvailableVehicleCount(VehicleSupplyLiftComponent lift, string key)
     {
         var count = GetStoredCount(lift, key);
@@ -109,7 +103,6 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         return count;
     }
-#endif // CCM14-end
     private static void AddStored(VehicleSupplyLiftComponent lift, string key, int amount = 1)
     {
         if (amount <= 0)
@@ -296,28 +289,12 @@ public sealed class VehicleSupplySystem : EntitySystem
         }
 
         SendConsoleStateAll();
-        // UpdateVendorSectionsAll(); // CCM14
+        UpdateVendorSectionsAll();
     }
 
     private void OnConsoleBeforeUiOpen(Entity<VehicleSupplyConsoleComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
         SendConsoleState(ent.Owner, ent.Comp);
-    }
-    // CCM14?
-    private void OnConsoleMapInit(Entity<VehicleSupplyConsoleComponent> ent, ref MapInitEvent args)
-    {
-        var mapId = _transform.GetMapId(ent.Owner);
-        var liftQuery = EntityQueryEnumerator<VehicleSupplyLiftComponent, TransformComponent>();
-        while (liftQuery.MoveNext(out var uid, out var lift, out var xform))
-        {
-            if (xform.MapID != mapId)
-                continue;
-
-            SeedStoredFromConsoles((uid, lift));
-            Dirty(uid, lift);
-        }
-
-        SendConsoleStateAll();
     }
 
     private void OnLiftMapInit(Entity<VehicleSupplyLiftComponent> ent, ref MapInitEvent args)
@@ -354,7 +331,6 @@ public sealed class VehicleSupplySystem : EntitySystem
             }
         }
     }
-#if false // CCM14-start
     private void OnVendorBeforeUiOpen(Entity<VehicleHardpointVendorComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
         UpdateVendorSections(ent.Owner, ent.Comp);
@@ -364,7 +340,6 @@ public sealed class VehicleSupplySystem : EntitySystem
     {
         UpdateVendorSections(ent.Owner, ent.Comp);
     }
-#endif // CCM14-end
 
     private void OnAutomatedVendorVended(Entity<ActorComponent> ent, ref RMCAutomatedVendedUserEvent args)
     {
@@ -372,7 +347,7 @@ public sealed class VehicleSupplySystem : EntitySystem
             return;
 
         TrySpawnVendedHardpointAmmo(ent.Owner, args.Item);
-        // UpdateVendorSectionsAll(); // CCM14
+        UpdateVendorSectionsAll();
     }
 
     private void TrySpawnVendedHardpointAmmo(EntityUid user, EntityUid hardpointItem)
@@ -512,7 +487,7 @@ public sealed class VehicleSupplySystem : EntitySystem
                 comp.PendingVehicleEntity = null;
             }
 
-            // UpdateVendorSectionsAll(); // CCM14
+            UpdateVendorSectionsAll();
         }
         else
         {
@@ -717,7 +692,7 @@ public sealed class VehicleSupplySystem : EntitySystem
         {
             AddStored(comp, key);
             comp.PendingVehicle = string.Empty;
-            // UpdateVendorSectionsAll(); // CCM14
+            UpdateVendorSectionsAll();
             return;
         }
 
@@ -751,7 +726,7 @@ public sealed class VehicleSupplySystem : EntitySystem
         _transform.SetParent(active, EntityUid.Invalid);
         comp.ActiveVehicle = null;
         comp.ActiveVehicleId = string.Empty;
-        // UpdateVendorSectionsAll(); // CCM14
+        UpdateVendorSectionsAll();
     }
 
     private bool IsOnLift(Entity<VehicleSupplyLiftComponent> lift, EntityUid entity)
@@ -843,7 +818,6 @@ public sealed class VehicleSupplySystem : EntitySystem
         _ui.SetUiState(uid, VehicleSupplyUIKey.Key, state);
     }
 
-#if false // CCM14-start
     private void UpdateVendorSectionsAll()
     {
         var query = EntityQueryEnumerator<VehicleHardpointVendorComponent>();
@@ -1142,7 +1116,6 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         return found;
     }
-#endif // CCM14-end
 
     public bool TryGetAnyLift(out Entity<VehicleSupplyLiftComponent> lift)
     {
@@ -1195,7 +1168,7 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         Dirty(liftUid, lift);
         SendConsoleStateAll();
-        // UpdateVendorSectionsAll(); // CCM14
+        UpdateVendorSectionsAll();
         return true;
     }
 
@@ -1224,7 +1197,7 @@ public sealed class VehicleSupplySystem : EntitySystem
             SendConsoleState(uid, console);
         }
 
-        // UpdateVendorSectionsAll(); // CCM14
+        UpdateVendorSectionsAll();
     }
 
     private bool TryGetLift(EntityUid consoleUid, VehicleSupplyConsoleComponent console, out Entity<VehicleSupplyLiftComponent> lift)
@@ -1257,7 +1230,7 @@ public sealed class VehicleSupplySystem : EntitySystem
         return found;
     }
 
-#if false // CCM14-start
+
     private List<VehicleSupplyEntry> BuildVendorCatalog(EntityUid vendorUid, VehicleHardpointVendorComponent vendor)
     {
         var vendorCoords = _transform.GetMapCoordinates(vendorUid);
@@ -1296,7 +1269,7 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         return list;
     }
-#endif // CCM14-end
+
 
     private bool TryGetEntry(VehicleSupplyConsoleComponent console, string vehicleId, out VehicleSupplyEntry entry)
     {
@@ -1577,7 +1550,7 @@ public sealed class VehicleSupplySystem : EntitySystem
         return true;
     }
     // CCM14-end
-#if false // CCM14-start
+
     private IReadOnlyList<string> GetHardpointsForVehicle(string vehicleId, IReadOnlyList<VehicleSupplyEntry> entries)
     {
         var key = Normalize(vehicleId);
@@ -1664,5 +1637,5 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         return null;
     }
-#endif // CCM14-end
+
 }
