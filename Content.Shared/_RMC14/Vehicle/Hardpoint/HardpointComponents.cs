@@ -54,7 +54,12 @@ public sealed partial class HardpointSlotsComponent : Component
 
     [DataField]
     public ProtoId<ToolQualityPrototype> RemoveToolQuality = "Prying";
+}
 
+[RegisterComponent]
+[Access(typeof(HardpointSystem), typeof(HardpointSlotSystem))]
+public sealed partial class HardpointStateComponent : Component
+{
     [NonSerialized]
     public HashSet<string> PendingInserts = new();
 
@@ -63,10 +68,10 @@ public sealed partial class HardpointSlotsComponent : Component
 
     [NonSerialized]
     public HashSet<string> PendingRemovals = new();
-
+    // CCM14-start
     [NonSerialized]
     public HashSet<string> CompletingRemovals = new();
-
+    // CCM14-end
     [NonSerialized]
     public HashSet<EntityUid> PendingInsertUsers = new();
 
@@ -178,10 +183,7 @@ public sealed partial class HardpointInsertDoAfterEvent : DoAfterEvent
     public override bool IsDuplicate(DoAfterEvent other)
     {
         return other is HardpointInsertDoAfterEvent hardpoint
-               && hardpoint.SlotId == SlotId
-               && other.User == User
-               && other.Target == Target
-               && other.Used == Used;
+               && hardpoint.SlotId == SlotId;
     }
 }
 
@@ -208,10 +210,7 @@ public sealed partial class HardpointRemoveDoAfterEvent : DoAfterEvent
     public override bool IsDuplicate(DoAfterEvent other)
     {
         return other is HardpointRemoveDoAfterEvent remove
-               && remove.SlotId == SlotId
-               && other.User == User
-               && other.Target == Target
-               && other.Used == Used;
+               && remove.SlotId == SlotId;
     }
 }
 

@@ -303,7 +303,7 @@ public sealed class VehicleSupplySystem : EntitySystem
     {
         SendConsoleState(ent.Owner, ent.Comp);
     }
-
+    // CCM14?
     private void OnConsoleMapInit(Entity<VehicleSupplyConsoleComponent> ent, ref MapInitEvent args)
     {
         var mapId = _transform.GetMapId(ent.Owner);
@@ -1043,11 +1043,11 @@ public sealed class VehicleSupplySystem : EntitySystem
         categoryLabel = string.Empty;
         categoryOrder = int.MaxValue;
 
-        if (!string.Equals(Normalize(vehicleId), "Vehicletank", StringComparison.Ordinal))
+        if (!string.Equals(Normalize(vehicleId), "rmcvehicletank", StringComparison.Ordinal))
             return false;
 
         var hardpointKey = Normalize(hardpointId);
-        if (hardpointKey == "Vehicletanksnowplow")
+        if (hardpointKey == "rmcvehicletanksnowplow")
         {
             categoryKey = "tank-general";
             categoryLabel = "General";
@@ -1317,6 +1317,9 @@ public sealed class VehicleSupplySystem : EntitySystem
     // CCM14-start: Always use localized name from prototype
     private string GetEntryName(VehicleSupplyEntry entry)
     {
+        // if (!string.IsNullOrWhiteSpace(entry.Name))
+        //     return entry.Name;
+
         return GetPrototypeName(entry.Vehicle.Id);
     }
 

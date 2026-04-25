@@ -1,3 +1,6 @@
+using System;
+using Robust.Shared.Maths;
+
 namespace Content.Shared._RMC14.Vehicle;
 
 public static class VehicleTurretDirectionHelpers

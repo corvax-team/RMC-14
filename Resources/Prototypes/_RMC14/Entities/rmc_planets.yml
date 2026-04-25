@@ -246,8 +246,8 @@
       - CMSurvivorFiorinaResearcher: 2
     survivorJobScenarios:
       riot_in_progress: # Riot In Progress CMB Team. One as the main CMB RCTL, the rest as supporting officers.
-      - CMSurvivorSecurity: 1
-      - CMSurvivor: -1
+        - CMSurvivorSecurity: 1
+        - CMSurvivor: -1
     survivorJobVariantScenarios:
       riot_in_progress: # Riot In Progress Riot Control team
         CMSurvivorSecurity:
@@ -485,6 +485,8 @@
     nightmareScenarios:
     - scenarioName: tse_airbase
       scenarioProbability: 0.3
+    - scenarioName: none
+      scenarioProbability: 0.7
     minPlayers: 55 # CCM14-mappool
     survivorJobVariants:
       CMSurvivor:

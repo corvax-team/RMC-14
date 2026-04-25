@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Vehicle.Viewport;
 using Content.Shared.Movement.Events;
+using Robust.Shared.GameObjects;
 
 namespace Content.Client._RMC14.Vehicle.Viewport;
 

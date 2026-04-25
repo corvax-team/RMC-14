@@ -1,9 +1,13 @@
+using System;
 using System.Numerics;
 using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Maths;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
@@ -537,14 +541,6 @@ public sealed class VehicleTurretSystem : EntitySystem
             return;
         }
 
-        // CCM14-start
-        if (TryComp<HardpointIntegrityComponent>(turretUid, out var integrity) && integrity.Integrity <= 0f)
-            return;
-
-        if (TryComp<HardpointIntegrityComponent>(vehicle, out var frameIntegrity) && frameIntegrity.Integrity <= 0f)
-            return;
-        // CCM14-end
-
         var target = turret.StabilizedRotation
             ? (turret.TargetRotation - vehicleRot).Reduced()
             : turret.TargetRotation;
@@ -588,22 +584,6 @@ public sealed class VehicleTurretSystem : EntitySystem
 
         if (args.Cancelled)
             return;
-
-        // CCM14-start
-        if (TryComp<HardpointIntegrityComponent>(ent, out var integrity) && integrity.Integrity <= 0f)
-        {
-            args.Cancelled = true;
-            return;
-        }
-
-        if (TryGetVehicle(ent.Owner, out var vehicleUid) &&
-            TryComp<HardpointIntegrityComponent>(vehicleUid, out var frameIntegrity) &&
-            frameIntegrity.Integrity <= 0f)
-        {
-            args.Cancelled = true;
-            return;
-        }
-        // CCM14-end
 
         if (!CanOperatorUseTurret(ent.Owner, args.User))
         {

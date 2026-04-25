@@ -40,6 +40,12 @@
   - type: ItemSlots
     slots:
       turret-cannon:
+        disableEject: true
+        whitelist:
+          components:
+          - HardpointItem
+      turret-launcher:
+        disableEject: true
         whitelist:
           components:
           - HardpointItem
@@ -104,8 +110,9 @@
     modifierSets:
     - VehicleArmorCaustic
   - type: VehicleAccelerationModifierAttachment
-    accelerationMultiplier: 0.9
+    accelerationMultiplier: 0.6
   - type: VehicleFabricatorPrintable # CCM14
     cost: 300
     category: Chassis
     vehicle: Tank
+

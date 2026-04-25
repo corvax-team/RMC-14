@@ -1,16 +1,23 @@
+using System.Collections.Generic;
 using System.Linq;
-using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
+using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Movement.Systems;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Localization;
 using Robust.Shared.Network;
+using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Vehicle.Components;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Vehicle;
@@ -718,3 +725,4 @@ public sealed partial class VehicleWeaponsSystem : EntitySystem
                _topology.TryGetMountedSlotByItem(vehicle, mountedWeapon, out _, hardpoints, itemSlots);
     }
 }
+

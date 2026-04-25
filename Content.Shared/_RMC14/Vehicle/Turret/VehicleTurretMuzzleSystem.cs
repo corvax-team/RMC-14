@@ -1,7 +1,10 @@
 using System.Numerics;
 using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
+using Robust.Shared.Maths;
 
 namespace Content.Shared._RMC14.Vehicle;
 
