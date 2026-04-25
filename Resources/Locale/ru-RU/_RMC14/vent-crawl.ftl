@@ -1,7 +1,7 @@
-rmc-vent-crawling-welded = It's welded shut!
-rmc-vent-crawling-devoured = We're too full carrying a host to vent crawl!
-rmc-vent-crawling-primed = We're going to explode!!
-rmc-vent-crawling-full = It's full!
-rmc-vent-crawling-moving = Something squeezes though the ducts...
-rmc-vent-crawling-entrance = [color=yellow]You can vent crawl into this.[/color]
-rmc-vent-crawling-entrance-xeno = [color=yellow]We can vent crawl into this.[/color]
+rmc-vent-crawling-welded = Оно заварено!
+rmc-vent-crawling-devoured = Мы не сможем залезть в вентиляцию с носителем!
+rmc-vent-crawling-primed = Мы взорвёмся!!
+rmc-vent-crawling-full = Оно полное!
+rmc-vent-crawling-moving = Что-то ползёт по трубам...
+rmc-vent-crawling-entrance = [color=yellow]Можно пролезть в вентиляцию.[/color]
+rmc-vent-crawling-entrance-xeno = [color=yellow]Мы можем пролезть в вентиляцию.[/color]

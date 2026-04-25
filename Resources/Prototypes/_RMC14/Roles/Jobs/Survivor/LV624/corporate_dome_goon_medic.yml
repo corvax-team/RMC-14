@@ -7,11 +7,18 @@
   startingGear: RMCGearSurvivorGoon
   icon: "RMCJobIconPMCGoonMedic"
   hasIcon: true
+  ranks:
+    RMCRankCivilianOfficer: []
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
-      preset: SurvivorGoonMedic
+      preset: RMCSkillPresetSurvivorGoonMedic
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -20,6 +27,13 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: goon_med
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   greeting: rmc-job-greeting-corporate-dome-goon-medic
 
 - type: entity
@@ -47,3 +61,5 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: weya_goon_medic
+
+

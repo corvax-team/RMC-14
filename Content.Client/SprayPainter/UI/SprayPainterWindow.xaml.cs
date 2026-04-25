@@ -8,7 +8,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.SprayPainter.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class SprayPainterWindow : DefaultWindow
+public sealed partial class SprayPainterWindow : DefaultCMWindow
 {
     [Dependency] private readonly IEntitySystemManager _sysMan = default!;
     [Dependency] private readonly ILocalizationManager _loc = default!;
@@ -96,3 +96,4 @@ public sealed partial class SprayPainterWindow : DefaultWindow
         SpriteList.OnItemSelected += OnSpritePicked;
     }
 }
+

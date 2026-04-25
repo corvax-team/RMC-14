@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
@@ -63,10 +64,12 @@ public sealed partial class GameTicker
 
                 if (!startAttempt.Cancelled)
                 {
-                    _chatManager.SendAdminAnnouncement(
-                        Loc.GetString("game-ticker-start-round-cannot-start-game-mode-fallback",
-                            ("failedGameMode", presetTitle),
-                            ("fallbackMode", Loc.GetString(preset))));
+                    _chatManager.SendAdminAnnouncementLoc("game-ticker-start-round-cannot-start-game-mode-fallback",
+                        new[]
+                        {
+                            ("failedGameMode", (object) presetTitle),
+                            ("fallbackMode", (object) Loc.GetString(preset))
+                        });
                     RefreshLateJoinAllowed();
                     startFailed = false;
                     break;

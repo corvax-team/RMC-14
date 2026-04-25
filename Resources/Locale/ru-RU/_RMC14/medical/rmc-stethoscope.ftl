@@ -1,20 +1,20 @@
-rmc-stethoscope-heart-healthy = You hear [color=green]normal heart beating patterns[/color], { POSS-PRONOUN($target) } heart is surely [color=green]healthy[/color].
-rmc-stethoscope-heart-littlebruised = You hear [color=yellow]small murmurs with each heart beat[/color], it is possible that { POSS-PRONOUN($target) } heart is [color=yellow]subtly damaged[/color].
-rmc-stethoscope-heart-bruised = You hear [color=orange]deviant heart beating patterns[/color], result of probable [color=orange]heart damage[/color].
-rmc-stethoscope-heart-broken = You hear [color=red]irregular and additional heart beating patterns[/color], probably caused by impaired blood pumping, { POSS-PRONOUN($target) } heart is certainly [color=red]failing[/color].
-rmc-stethoscope-lungs-healthy = You also hear [color=green]normal respiration sounds[/color] as well, { POSS-PRONOUN($target) } lungs are [color=green]healthy[/color], probably.
-rmc-stethoscope-lungs-littlebruised = You also hear [color=yellow]some crackles when { SUBJECT($target) } breath[/color], { SUBJECT($target) } are possibly suffering from [color=yellow]a small damage to the lungs[/color].
-rmc-stethoscope-lungs-bruised = You also hear [color=orange]unusual respiration sounds[/color] and noticeable difficulty to breath, possibly signalling [color=orange]ruptured lungs[/color].
-rmc-stethoscope-lungs-broken = You also [color=red]barely hear any respiration sounds[/color] and a lot of difficulty to breath, { POSS-PRONOUN($target) } lungs are [color=red]heavily failing[/color].
-rmc-stethoscope-unskilled = You hear a lot of sounds... it's quite hard to distinguish, really.
-rmc-stethoscope-eyes-mouth = You can't hear anything. Maybe that isn't the smartest idea.
-rmc-stethoscope-other-limbs = You hear a sound here and there, but none of them give you any good information.
-rmc-stethoscope-nothing = You can't hear. Really, anything at all, how weird.
-rmc-stethoscope-dead = You can't hear anything at all, they must have kicked the bucket.
-rmc-stethoscope-verb-text = Stethoscope
-rmc-stethoscope-verb-message = Listen using the stethoscope.
+rmc-stethoscope-heart-healthy = Вы слышите [color=green]нормальный ритм сердцебиения[/color], { POSS-ADJ($target) } сердце определённо [color=green]здорово[/color].
+rmc-stethoscope-heart-littlebruised = Вы слышите [color=yellow]небольшие шумы при каждом ударе[/color], возможно, { POSS-ADJ($target) } сердце [color=yellow]слегка повреждено[/color].
+rmc-stethoscope-heart-bruised = Вы слышите [color=orange]отклонения в ритме сердцебиения[/color], вероятно, это результат [color=orange]повреждения сердца[/color].
+rmc-stethoscope-heart-broken = Вы слышите [color=red]прерывистые и лишние удары[/color], вероятно, вызванные нарушением перекачки крови. { CAPITALIZE(POSS-ADJ($target)) } сердце явно [color=red]отказывает[/color].
+rmc-stethoscope-lungs-healthy = Вы также слышите [color=green]нормальные звуки дыхания[/color], { POSS-ADJ($target) } лёгкие, скорее всего, [color=green]здоровы[/color].
+rmc-stethoscope-lungs-littlebruised = Вы также слышите [color=yellow]небольшие хрипы[/color] при вдохе. { CAPITALIZE(SUBJECT($target)) }, возможно, страдает от [color=yellow]лёгкого повреждения лёгких[/color].
+rmc-stethoscope-lungs-bruised = Вы также слышите [color=orange]необычные дыхательные шумы[/color] и заметную одышку, что может сигнализировать о [color=orange]разрыве лёгких[/color].
+rmc-stethoscope-lungs-broken = Вы [color=red]едва слышите звуки дыхания[/color], { SUBJECT($target) } дышит с огромным трудом. { CAPITALIZE(POSS-ADJ($target)) } лёгкие [color=red]серьёзно поражены[/color].
+rmc-stethoscope-unskilled = Вы слышите много звуков... но разобрать что-либо действительно трудно.
+rmc-stethoscope-eyes-mouth = Вы ничего не слышите. Наверное, это была не самая умная идея.
+rmc-stethoscope-other-limbs = Вы слышите какой-то шум то тут, то там, но это не дает вам никакой полезной информации.
+rmc-stethoscope-nothing = Вы ничего не слышите. Вообще ничего. Как странно.
+rmc-stethoscope-dead = Вы совсем ничего не слышите. Похоже, пациент протянул ноги.
+rmc-stethoscope-verb-text = Стетоскоп
+rmc-stethoscope-verb-message = Прослушать стетоскопом.
 # Temporary until real organs are implemented. Delete when fully implemented.
-rmc-stethoscope-normal = You hear [color=green]normal heart beating patterns[/color] and [color=green]normal respiration sounds[/color] as well, { POSS-PRONOUN($target) } heart and lungs are [color=green]healthy[/color], probably.
-rmc-stethoscope-raggedy = You hear [color=yellow]small murmurs with each heart beat[/color] and [color=yellow]some crackles when { SUBJECT($target) } breath[/color].
-rmc-stethoscope-hyper = You hear [color=orange]deviant heart beating patterns[/color] and [color=orange]unusual respiration sounds[/color].
-rmc-stethoscope-irregular = You hear [color=red]irregular and additional heart beating patterns[/color] and [color=red]barely hear any respiration sounds[/color], { SUBJECT($target) } is having a lot of difficulty breathing.
+rmc-stethoscope-normal = Вы слышите [color=green]нормальный ритм сердцебиения[/color] и [color=green]здоровое дыхание[/color]. { CAPITALIZE(POSS-ADJ($target)) } сердце и лёгкие, вероятно, в [color=green]норме[/color].
+rmc-stethoscope-raggedy = Вы слышите [color=yellow]небольшие шумы при сердцебиении[/color] и [color=yellow]хрипы при вдохе[/color].
+rmc-stethoscope-hyper = Вы слышите [color=orange]отклонения в ритме сердца[/color] и [color=orange]необычные звуки дыхания[/color].
+rmc-stethoscope-irregular = Вы слышите [color=red]прерывистые удары сердца[/color] и [color=red]едва уловимое дыхание[/color]. { CAPITALIZE(SUBJECT($target)) } испытывает огромные трудности с дыханием.

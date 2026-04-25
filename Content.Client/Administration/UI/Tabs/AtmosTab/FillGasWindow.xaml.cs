@@ -17,7 +17,7 @@ namespace Content.Client.Administration.UI.Tabs.AtmosTab
 {
     [GenerateTypedNameReferences]
     [UsedImplicitly]
-    public sealed partial class FillGasWindow : DefaultWindow
+    public sealed partial class FillGasWindow : DefaultCMWindow
     {
         private List<NetEntity>? _gridData;
         private IEnumerable<GasPrototype>? _gasData;
@@ -71,3 +71,4 @@ namespace Content.Client.Administration.UI.Tabs.AtmosTab
         }
     }
 }
+

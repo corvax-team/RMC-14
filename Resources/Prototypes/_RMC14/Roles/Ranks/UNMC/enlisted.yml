@@ -48,8 +48,8 @@
 
 - type: rank
   id: RMCRankLanceCorporal
-  name: Лэнс-капрал
-  prefix: ЛнКпр.
+  name: Младший капрал
+  prefix: Мл. Кпр.
   paygrade: E3
 
 - type: rank
@@ -66,6 +66,6 @@
 
 - type: rank
   id: RMCRankRecruit
-  name: Recruit
-  prefix: Rct.
+  name: Новобранец
+  prefix: Нов.
   paygrade: E0

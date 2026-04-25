@@ -15,13 +15,13 @@ ent-ActionXenoTailStab = Удар хвостом
 ent-ActionXenoTailSlam = Шлепок хвостом
     .desc = { ent-ActionXenoTailStab.desc }
 ent-ActionXenoTailStabCorrosive = Едкий удар хвостом
-    .desc = Нанесите атаку в заданном направлении. При промахе перезарядка быстрее. [color=red]Атака также впрыснет в цель разбавленную молекулярную кислоту, наносящую урон с течением времени..[/color]
+    .desc = Нанесите атаку в заданном направлении. При промахе перезарядка быстрее. [color=red]Атака также впрыснет в цель разбавленную молекулярную кислоту, наносящую урон с течением времени.[/color]
 ent-ActionXenoTailStabBoiler = Едкий удар хвостом
     .desc = Нанесите атаку в заданном направлении. При промахе перезарядка быстрее. [color=red]Атака также впрыснет в цель разбавленную молекулярную кислоту либо нейротоксин, наносящие урон с течением времени. Тип урона зависит от выбранного газа.[/color]
 ent-ActionXenoLeap = Прыжок
     .desc = Прыгните в выбранную точку и повалите на землю первого попавшегося врага.
-ent-ActionXenoRush = Rush
-    .desc = Jump towards a given location and slash the enemy you hit, shaking their screen.
+ent-ActionXenoRush = Натиск
+    .desc = Прыгните в указанном направлении и ударьте врага, вызвав у него тряску экрана.
 ent-ActionXenoPounce = Наскок (20)
     .desc = Прыгните в выбранную точку и повалите на землю первого попавшегося врага, [color=red]если вы невидимы.[/color]
 ent-RMCGuidebookActionXenoPounce = { ent-CMGuidebookActionXenoBase }
@@ -34,7 +34,7 @@ ent-ActionXenoDash = Рывок (40)
     .desc = Стремительно переместитесь в указанное место на небольшом расстоянии.
 ent-RMCGuidebookActionXenoDash = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
-ent-ActionXenoHeadbutt = Удар головой (10)
+ent-ActionXenoHeadbutt = Удар головой
     .desc = Стремительно направьтесь к выбранному врагу и отбросьте назад первого задетого врага, пробив некоторое количество брони. Когда гребень опущен, урон меньше, но сила отбрасывания выше.
 ent-RMCGuidebookActionXenoHeadbutt = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
@@ -97,20 +97,20 @@ ent-RMCGuidebookActionXenoLunge = { ent-CMGuidebookActionXenoBase }
 ent-ActionXenoScreech = Крик (250)
     .desc = При активации издайте крик, оглушая всех в большой зоне действия. [color=red]Это так же оглушает паразитов, блокируется твёрдыми стенами, дымом и газом бойлеров, но не окнами![/color]
 ent-ActionXenoGut = Потрошение (200)
-    .desc = Гибните врага, которого вы решили выпотрошить.
+    .desc = Выпотрошите врага, которого вы решили схватить.
 ent-ActionXenoStomp = Топот (30)
     .desc = Ударьте по земле с эффектом по области 5x5, замедляя и обезоруживая всех врагов в зоне поражения. Цель, на которой вы непосредственно стоите, получит сильный урон.
 ent-RMCGuidebookActionXenoStomp = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
-ent-ActionXenoCrush = Crush (25)
-    .desc = Slam the ground with a 7x7 AOE, slowing down and disarming all enemies in range. Deals heavy damage to targets you are on top of.
+ent-ActionXenoCrush = Сокрушение (25)
+    .desc = Ударьте по земле с эффектом по области 7x7, замедляя и обезоруживая всех врагов в радиусе действия. Наносит тяжелый урон целям, находящимся непосредственно под вами.
 ent-ActionXenoCharge = Наступление (20)
-    .desc = Кликните на плитку, в которую вы хотите ударить. Навык сработает после короткой, неотмеяняемой подготовки. В области удара вы замедлитесь. [color=green]Перезарядка частично компенсируется при атаке врага и зависит от количества врагов, которых вы заденете с помощью пассивного навыка.[/color]
+    .desc = Кликните на плитку, в которую вы хотите ударить. Навык сработает после короткой, неотменяемой подготовки. В области удара вы замедлитесь. [color=green]Перезарядка частично компенсируется при атаке врага и зависит от количества врагов, которых вы заденете с помощью пассивного навыка.[/color]
 ent-RMCGuidebookActionXenoCharge = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
-ent-ActionXenoToggleCharging = Toggle Charging
-    .desc = Enable charging when moving in a straight line, which increases your speed and impact damage depending on the total distance travelled.
-ent-ActionXenoRam = Ram (10)
+ent-ActionXenoToggleCharging = Переключить разгон
+    .desc = Включает режим разгона при движении по прямой, что увеличивает вашу скорость и урон от столкновения в зависимости от пройденного расстояния.
+ent-ActionXenoRam = Таран (10)
     .desc = { ent-ActionXenoFling.desc }
 ent-ActionXenoBombard = Бомбарда (200)
     .desc = После задержки выстрелите кислотным или нейротоксичным шаром.
@@ -178,7 +178,7 @@ ent-RMCGuidebookActionXenoDislocate = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
 ent-ActionXenoTailJab = Хвостовой удар
     .desc = Ударьте врага на расстоянии 2.5 плитки, нанося высокий урон и замедляя его.
-ent-ActionXenoFlurry = Щквал ударов 
+ent-ActionXenoFlurry = Щквал ударов
     .desc = Атака с радиусом 1x3 плитки, наносящая урон каждой цели и исцеляющая вас за каждую цель.
 ent-RMCGuidebookActionXenoFlurry = { ent-CMGuidebookActionXenoBase }
     .desc = { ent-CMGuidebookActionXenoBase.desc }
@@ -194,3 +194,11 @@ ent-ActionXenoClothesline = Удар берсерка
     .desc = Швыряет цель, нанося минимальный урон и исцеляя вас. Количество исцеления выше при большем числе зарядов ярости.
 ent-ActionXenoTumble = Кувырок (25)
     .desc = Совершает рывок в сторону и отталкивает первого врага на пути. Может использоваться только в сторону от направления взгляда.
+ent-ActionXenoFireSpikes = Выстрел шипами (75 осколков)
+    .desc = Выпустите 8 небольших костяных осколков в указанном направлении.
+ent-ActionXenoSpikeShed = Сброс шипов (все осколки)
+    .desc = Разрушьте все свои шипы, чтобы выпустить их во всех направлениях вокруг себя. Вы теряете бонусную броню, но получаете ускорение. Это лишит вас возможности накапливать шипы на 30 секунд. Требуется минимум 50 осколков.
+ent-ActionXenoRend = Раздирание (25)
+    .desc = Ударьте когтями всех врагов вокруг вас.
+ent-ActionXenoDestroy = Разрушение
+    .desc = После небольшой подготовки прыгните в указанное место, разрушая постройки и расчленяя врагов в радиусе 3x3. Работает через баррикады и другие невысокие препятствия.

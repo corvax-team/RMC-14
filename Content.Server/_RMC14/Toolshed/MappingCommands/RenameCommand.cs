@@ -5,7 +5,7 @@ using Robust.Shared.Toolshed;
 
 namespace Content.Server._RMC14.Toolshed.MappingCommands;
 
-[ToolshedCommand, AdminCommand(AdminFlags.Query)]
+[ToolshedCommand(Name = "rmc_rename"), AdminCommand(AdminFlags.Query)]
 internal sealed class RenameCommand : ToolshedCommand
 {
     private MetaDataSystem? _metaData;

@@ -1,5 +1,5 @@
 ent-RMCBasePhotocopier = Photocopier
-    .desc = A photocopier used for copying... you know, photos! Also useful for copying documents on paper. This specific model has been manufactured by Aegis Armaments in a cheaper frame than most modern photocopiers. It uses more primitive copying technology resulting in more toner waste and less printing capabilities. Nonetheless, its cheap construction means cheaper costs, and for people that only need to print a paper or two most of the time, it becomes cost-effective.
+    .desc = A photocopier used for copying... you know, photos! Also useful for copying documents on paper. This specific model has been manufactured by AEGIS Armaments in a cheaper frame than most modern photocopiers. It uses more primitive copying technology resulting in more toner waste and less printing capabilities. Nonetheless, its cheap construction means cheaper costs, and for people that only need to print a paper or two most of the time, it becomes cost-effective.
 ent-RMCPhotocopier = Photocopier
     .desc = { ent-RMCBasePhotocopier.desc }
 ent-RMCPhotocopierSmallHitbox = { ent-RMCPhotocopier }

@@ -13,7 +13,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client.Administration.UI.SetOutfit
 {
     [GenerateTypedNameReferences]
-    public sealed partial class SetOutfitMenu : DefaultWindow
+    public sealed partial class SetOutfitMenu : DefaultCMWindow
     {
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
@@ -105,3 +105,4 @@ namespace Content.Client.Administration.UI.SetOutfit
         }
     }
 }
+

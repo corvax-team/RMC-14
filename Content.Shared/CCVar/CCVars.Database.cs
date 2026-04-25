@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Configuration;
+﻿// CM14 rework: non-RMC edit marker.
+using Robust.Shared.Configuration;
 
 namespace Content.Shared.CCVar;
 
@@ -11,7 +12,7 @@ public sealed partial class CCVars
 #endif
 
     public static readonly CVarDef<string> DatabaseEngine =
-        CVarDef.Create("database.engine", "sqlite", CVar.SERVERONLY);
+        CVarDef.Create("database.engine", "postgres", CVar.SERVERONLY);
 
     public static readonly CVarDef<string> DatabaseSqliteDbPath =
         CVarDef.Create("database.sqlite_dbpath", "preferences.db", CVar.SERVERONLY);
@@ -42,16 +43,16 @@ public sealed partial class CCVars
         CVarDef.Create("database.pg_host", "localhost", CVar.SERVERONLY);
 
     public static readonly CVarDef<int> DatabasePgPort =
-        CVarDef.Create("database.pg_port", 5432, CVar.SERVERONLY);
+        CVarDef.Create("database.pg_port", 54333, CVar.SERVERONLY);
 
     public static readonly CVarDef<string> DatabasePgDatabase =
-        CVarDef.Create("database.pg_database", "ss14", CVar.SERVERONLY);
+        CVarDef.Create("database.pg_database", "cm14", CVar.SERVERONLY);
 
     public static readonly CVarDef<string> DatabasePgUsername =
-        CVarDef.Create("database.pg_username", "postgres", CVar.SERVERONLY);
+        CVarDef.Create("database.pg_username", "ss14", CVar.SERVERONLY);
 
     public static readonly CVarDef<string> DatabasePgPassword =
-        CVarDef.Create("database.pg_password", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
+        CVarDef.Create("database.pg_password", "ss14password", CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
     /// <summary>
     ///     Max amount of concurrent Postgres database operations.

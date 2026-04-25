@@ -1,4 +1,3 @@
-ent-RMCSpawnPointSurvivorLV624SecurityGuard = survivor lv624 security guard spawn point
+ent-RMCSpawnPointSurvivorLV624SecurityGuard = спавнер выжившего охранника Витезтви LV-624
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetLV624SecurityGuard = lv624 security guard colonist preset
-    .desc = { ent-RMCSurvivorPresetSecurity.desc }
+    .suffix = LV-624

@@ -1,3 +1,3 @@
-ent-RMCSpawnPointSPPPlatCoPVE = spp platoon commander spawn point
+ent-RMCSpawnPointSPPPlatCoPVE = Точка спавна Взводного Командира СССП
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }

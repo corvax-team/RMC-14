@@ -1,8 +1,8 @@
-﻿- type: job
-  parent: CMJobBase
+- type: job
+  parent: RMCJobMarineBase
   id: CMCMO
-  name: cm-job-name-cmo
-  description: cm-job-description-cmo
+  name: rmc-job-name-cmo
+  description: rmc-job-description-cmo
   playTimeTracker: CMJobCMO
   requirements:
 # CCM14 role timers [remove/start]
@@ -32,6 +32,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetMarine]
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillEndurance: 1
@@ -50,7 +55,7 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: cm-job-prefix-cmo
+      prefix: rmc-job-prefix-cmo
     - type: ViewIntelObjectives
     - type: CommandAccent
     - type: TacticalMapIcon
@@ -61,6 +66,8 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
     - type: RMCTrackable
+    - type: RMCAwardRecommendation
+    - type: SeeNewPlayers
 
 - type: startingGear
   id: CMGearCMO
@@ -68,6 +75,7 @@
     jumpsuit: CMJumpsuitCMO
     shoes: ClothingShoesColorWhite
     id: CMIDCardCMO
+    ears: CMHeadsetCMO
     # TODO RMC14 random chemical synthesis note
 
 - type: startingGear

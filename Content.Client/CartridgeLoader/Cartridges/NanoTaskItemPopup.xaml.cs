@@ -11,7 +11,7 @@ namespace Content.Client.CartridgeLoader.Cartridges;
 ///     Popup displayed to edit a NanoTask item
 /// </summary>
 [GenerateTypedNameReferences]
-public sealed partial class NanoTaskItemPopup : DefaultWindow
+public sealed partial class NanoTaskItemPopup : DefaultCMWindow
 {
     private readonly ButtonGroup _priorityGroup = new();
     private int? _editingTaskId = null;
@@ -109,3 +109,4 @@ public sealed partial class NanoTaskItemPopup : DefaultWindow
         }
     }
 }
+

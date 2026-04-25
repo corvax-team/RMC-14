@@ -26,19 +26,12 @@ public sealed class RoadmapUIController : UIController, IOnStateEntered<LobbySta
 
     public void OnStateEntered(LobbyState state)
     {
-        if (_shown || _window != null)
-            return;
-
-        if (_infoUIController.RulesPopup != null)
-            return;
-
-        ToggleRoadmap();
+        // Do not auto-open roadmap on state entry.
     }
 
     private void OnAccepted()
     {
-        if (!_shown)
-            ToggleRoadmap();
+        // Do not auto-open roadmap after accepting rules.
     }
 
     public void ToggleRoadmap()
@@ -53,20 +46,6 @@ public sealed class RoadmapUIController : UIController, IOnStateEntered<LobbySta
         _shown = true;
         _window = new RoadmapWindow();
         _window.OnClose += () => _window = null;
-
-        if (_config.GetCVar(CCVars.InfoLinksDiscord) is { Length: > 0 } discordLink)
-        {
-            _window.DiscordButton.StyleClasses.Add(StyleBase.ButtonCaution);
-            _window.DiscordButton.Visible = true;
-            _window.DiscordButton.OnPressed += _ => _uriOpener.OpenUri(discordLink);
-        }
-
-        if (_config.GetCVar(CCVars.InfoLinksPatreon) is { Length: > 0 } patreonLink)
-        {
-            _window.PatreonButton.StyleClasses.Add(StyleBase.ButtonCaution);
-            _window.PatreonButton.Visible = true;
-            _window.PatreonButton.OnPressed += _ => _uriOpener.OpenUri(patreonLink);
-        }
 
         _window.CreditsButton.StyleClasses.Add(StyleBase.ButtonCaution);
         _window.CreditsButton.OnPressed += _ => new CreditsWindow().OpenCentered();

@@ -1,0 +1,15 @@
+ent-RMCMapInsertVaraderoBase = { ent-RMCMapInsertBase }
+    .suffix = Insert Varadero
+    .desc = { ent-RMCMapInsertBase.desc }
+ent-RMCMapInsertVaraderoCLFRaid = CLF Raid
+    .suffix = Insert Varadero
+    .desc = { ent-RMCMapInsertVaraderoBase.desc }
+ent-RMCMapInsertVaraderoResturant = Resturant
+    .suffix = Insert Varadero
+    .desc = { ent-RMCMapInsertVaraderoBase.desc }
+ent-RMCMapInsertVaraderoAltHospital = Alt. Hospital
+    .suffix = Insert Varadero
+    .desc = { ent-RMCMapInsertVaraderoBase.desc }
+ent-RMCMapInsertVaraderoEngiHold = Engi Hold
+    .suffix = Insert Varadero
+    .desc = { ent-RMCMapInsertVaraderoBase.desc }

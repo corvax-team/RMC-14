@@ -49,3 +49,6 @@
         Blunt: 3
     soundHit:
       collection: MetalThud
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50

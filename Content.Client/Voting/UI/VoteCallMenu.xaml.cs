@@ -1,5 +1,7 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
 using System.Numerics;
+using Content.Client._CCM.UserInterface.Controls;
 using Content.Client.Gameplay;
 using Content.Client.Stylesheets;
 using Content.Shared.Administration;
@@ -40,8 +42,7 @@ namespace Content.Client.Voting.UI
         {
             { StandardVoteType.Restart, new CreateVoteOption("ui-vote-type-restart", new(), false, null) },
             { StandardVoteType.Preset, new CreateVoteOption("ui-vote-type-gamemode", new(), false, null) },
-            { StandardVoteType.Map, new CreateVoteOption("ui-vote-type-map", new(), false, null) },
-            { StandardVoteType.Votekick, new CreateVoteOption("ui-vote-type-votekick", new(), true, 0) }
+            { StandardVoteType.Map, new CreateVoteOption("ui-vote-type-map", new(), false, null) }
         };
 
         public Dictionary<string, string> VotekickReasons = new Dictionary<string, string>()
@@ -63,12 +64,15 @@ namespace Content.Client.Voting.UI
             RobustXamlLoader.Load(this);
             _votingSystem = _entityManager.System<VotingSystem>();
 
-            Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetSpace;
+            Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
             CloseButton.OnPressed += _ => Close();
             VoteNotTrustedLabel.Text = Loc.GetString("ui-vote-trusted-users-notice", ("timeReq", _cfg.GetCVar(CCVars.VotekickEligibleVoterDeathtime)));
 
             foreach (StandardVoteType voteType in Enum.GetValues<StandardVoteType>())
             {
+                if (voteType == StandardVoteType.Votekick)
+                    continue;
+
                 var option = AvailableVoteOptions[voteType];
                 VoteTypeButton.AddItem(Loc.GetString(option.Name), (int)voteType);
             }
@@ -86,8 +90,6 @@ namespace Content.Client.Voting.UI
             _netManager.ClientSendMessage(new MsgVoteMenu());
 
             _voteManager.CanCallVoteChanged += CanCallVoteChanged;
-            _votingSystem.VotePlayerListResponse += UpdateVotePlayerList;
-            _votingSystem.RequestVotePlayerList();
         }
 
         public override void Close()
@@ -95,7 +97,6 @@ namespace Content.Client.Voting.UI
             base.Close();
 
             _voteManager.CanCallVoteChanged -= CanCallVoteChanged;
-            _votingSystem.VotePlayerListResponse -= UpdateVotePlayerList;
         }
 
         protected override void FrameUpdate(FrameEventArgs args)
@@ -246,7 +247,8 @@ namespace Content.Client.Voting.UI
                 int i = 0;
                 foreach (var voteDropdown in voteList)
                 {
-                    var optionButton = new OptionButton();
+                    // CCM vote menu dropdown style: use the same custom dropdown family as CCM menus.
+                    var optionButton = new CCMOptionButton();
                     int j = 0;
                     foreach (var (key, value) in voteDropdown)
                     {
@@ -255,6 +257,7 @@ namespace Content.Client.Voting.UI
                     }
                     VoteOptionsButtonContainer.AddChild(optionButton);
                     optionButton.Visible = true;
+                    optionButton.SelectId(0);
                     optionButton.OnItemSelected += ButtonSelected;
                     optionButton.Margin = new Thickness(2, 1);
                     if (AvailableVoteOptions[(StandardVoteType)obj.Id].FollowDropdownId != null && AvailableVoteOptions[(StandardVoteType)obj.Id].FollowDropdownId == i)

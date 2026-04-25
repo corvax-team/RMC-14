@@ -10,7 +10,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.Fax.AdminUI;
 
 [GenerateTypedNameReferences]
-public sealed partial class AdminFaxWindow : DefaultWindow
+public sealed partial class AdminFaxWindow : DefaultCMWindow
 {
     private const string StampsRsiPath = "/Textures/Objects/Misc/bureaucracy.rsi";
 
@@ -102,3 +102,4 @@ public sealed partial class AdminFaxWindow : DefaultWindow
         OnMessageSend?.Invoke((faxEntity.Value, title, from, message, stamp, stampColor, locked));
     }
 }
+

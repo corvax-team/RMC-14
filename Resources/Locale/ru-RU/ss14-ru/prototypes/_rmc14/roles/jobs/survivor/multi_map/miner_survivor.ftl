@@ -1,6 +1,8 @@
-ent-RMCSpawnPointSurvivorMiner = survivor miner spawn point
+ent-RMCSpawnPointSurvivorMiner = спавнер выжившего шахтёра
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCSurvivorPresetMiner = miner colonist preset
-    .desc = { ent-RMCSurvivorPresetCivilian.desc }
-ent-RMCRandomHumanoidSurvivorMiner = miner colonist ghost role
+    .suffix = Любые карты
+ent-RMCSurvivorPresetMiner = пресет колониста-шахтёра
+    .desc = { ent-RMCSurvivorPresetCivilianRareItem.desc }
+ent-RMCRandomHumanoidSurvivorMiner = гост-роль колониста-шахтёра
     .desc = { ent-MarkerBase.desc }
+    .suffix = Любые карты

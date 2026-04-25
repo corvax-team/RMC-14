@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorHybrisaOfficeWorker = hybrisa office worker spawn point
+ent-RMCSpawnPointSurvivorHybrisaOfficeWorker = спавнер выжившего офисного работника
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetHybrisaOfficeWorker = hybrisa office worker preset
+    .suffix = Гибриса
+ent-RMCGearSurvivorPresetHybrisaOfficeWorker = пресет офисного работника Гибриса
     .desc = { ent-RMCSurvivorPresetCivilianRareItem.desc }

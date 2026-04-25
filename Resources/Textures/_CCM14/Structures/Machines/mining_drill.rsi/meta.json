@@ -1,0 +1,140 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from https://github.com/ttmc14/ttmc14",
+    "size": {
+        "x": 32,
+        "y": 48
+    },
+    "states": [
+        {
+            "name": "mining_drill",
+            "delays": [
+                [
+                    0.5,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "mining_drill_reinforced",
+            "delays": [
+                [
+                    0.5,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "mining_drill_braced"
+        },
+        {
+            "name": "mining_drill_braced_reinforced"
+        },
+        {
+            "name": "mining_drill_active_reinforced",
+            "delays": [
+                [
+                    0.15,
+                    0.15
+                ]
+            ]
+        },
+        {
+            "name": "mining_drill_active",
+            "delays": [
+                [
+                    0.15,
+                    0.15
+                ]
+            ]
+        },
+        {
+            "name": "mining_drill_reinforceddisplay"
+        },
+        {
+            "name": "mining_drill_error_reinforced",
+            "delays": [
+                [
+                    0.5,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "mining_drill_automation",
+            "delays": [
+                [
+                    0.5,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "mining_drill_braced_automation"
+        },
+        {
+            "name": "mining_drill_active_automation",
+            "delays": [
+                [
+                    0.15,
+                    0.15
+                ]
+            ]
+        },
+        {
+            "name": "mining_drill_error_automation",
+            "delays": [
+                [
+                    0.5,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "mining_drill_automaticdisplay"
+        },
+        {
+            "name": "mining_drill_speed",
+            "delays": [
+                [
+                    0.5,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "mining_drill_braced_speed"
+        },
+        {
+            "name": "mining_drill_active_speed",
+            "delays": [
+                [
+                    0.15,
+                    0.15
+                ]
+            ]
+        },
+        {
+            "name": "mining_drill_overclockeddisplay"
+        },
+        {
+            "name": "mining_drill_error_speed",
+            "delays": [
+                [
+                    0.5,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "mining_drill_error",
+            "delays": [
+                [
+                    0.5,
+                    0.5
+                ]
+            ]
+        }
+    ]
+}

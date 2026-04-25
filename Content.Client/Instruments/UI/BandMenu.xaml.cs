@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 namespace Content.Client.Instruments.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class BandMenu : DefaultWindow
+public sealed partial class BandMenu : DefaultCMWindow
 {
     private readonly InstrumentBoundUserInterface _owner;
 
@@ -46,3 +46,4 @@ public sealed partial class BandMenu : DefaultWindow
         }
     }
 }
+

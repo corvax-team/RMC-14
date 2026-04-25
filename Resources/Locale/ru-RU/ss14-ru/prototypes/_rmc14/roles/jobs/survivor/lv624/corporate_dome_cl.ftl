@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorLV624CorporateDomeCL = special survivor lv624 coporate liaison spawn point
+ent-RMCSpawnPointSurvivorLV624CorporateDomeCL = спавнер особого выжившего представителя корпорации LV-624
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetLV624CorporateDomeCL = lv624 colonist preset
+    .suffix = LV-624
+ent-RMCGearSurvivorPresetLV624CorporateDomeCL = пресет представителя корпорации LV-624
     .desc = { ent-RMCSurvivorPresetCorporate.desc }

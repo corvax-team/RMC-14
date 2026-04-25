@@ -16,7 +16,7 @@
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded", "enum.VendingMachineVisualLayers.Base" ]
   - type: CMAutomatedVendor
     sections:
-    - name: Suits
+    - name: Спецодежда # CCM14
       entries:
       - id: CMJumpsuitLiaisonBlack
         amount: 1
@@ -94,7 +94,7 @@
         amount: 1
       - id: RMCJumpsuitLiaisonDisco
         amount: 1
-    - name: Coat
+    - name: Пиджаки и пальто # CCM14
       entries:
       - id: RMCJacketCorporateBlack
         amount: 1
@@ -167,7 +167,7 @@
       - id: RMCJacketWindbreakerExpedition
         amount: 1
       - id: RMCCoatSnowLiaison
-        name: liaison's winter coat
+#        name: liaison's winter coat
         amount: 1
       - id: RMCLabcoat
         amount: 1
@@ -179,7 +179,7 @@
         amount: 1
       - id: RMCVestTan
         amount: 1
-    - name: Hats
+    - name: Головные уборы # CCM14
       entries:
       - id: RMCHeadCapWestonYamadaDark
         amount: 1
@@ -193,7 +193,7 @@
         amount: 1
       - id: RMCHeadCowboyHatDark
         amount: 1
-    - name: Glasses
+    - name: Очки # CCM14
       entries:
       - id: RMCGlassesMarineRpg #Placeholder
         amount: 1
@@ -213,7 +213,7 @@
         amount: 1
       - id: RMCGlassesMonocle
         amount: 1
-    - name: Gloves
+    - name: Перчатки # CCM14
       entries:
       - id: CMHandsBrown
         amount: 1
@@ -223,7 +223,7 @@
         amount: 1
       - id: RMCHandsLeatherBlack
         amount: 1
-    - name: Shoes
+    - name: Обувь # CCM14
       entries:
       - id: RMCShoesLaceup
         amount: 1
@@ -235,7 +235,7 @@
         amount: 1
       - id: RMCBootsCorporate
         amount: 1
-    - name: Ties
+    - name: Галстуки # CCM14
       entries:
       - id: RMCTieBlack
         amount: 1

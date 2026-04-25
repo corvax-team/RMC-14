@@ -15,7 +15,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client.Lathe.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class LatheMenu : DefaultWindow
+public sealed partial class LatheMenu : DefaultCMWindow
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -291,3 +291,4 @@ public sealed partial class LatheMenu : DefaultWindow
         PopulateRecipes();
     }
 }
+

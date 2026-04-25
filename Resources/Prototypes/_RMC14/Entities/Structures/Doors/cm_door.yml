@@ -144,7 +144,8 @@
           "/Audio/Weapons/smash.ogg"
   - type: AirlockReceiverXenoClaws
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
   - type: Destructible
     thresholds:
     - trigger:
@@ -153,6 +154,11 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: RMCVehicleSmashable
+    damageOnHit: 1000
+    requiresDoorUnpowered: true
+    smashSound:
+      path: /Audio/_RMC14/Effects/metal_crash.ogg
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
   - type: DamageMultiplierFlags
@@ -171,7 +177,7 @@
   id: CMBaseDoorConstructible
   components:
   - type: Construction
-    graph: Airlock
+    graph: CMAirlock
     node: airlock
     containers:
     - board

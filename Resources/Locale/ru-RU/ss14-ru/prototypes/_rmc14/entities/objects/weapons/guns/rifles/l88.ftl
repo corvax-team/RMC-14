@@ -1,0 +1,15 @@
+ent-RMCWeaponRifleL88A1 = булл-пап винтовка L88A1
+    .desc = Стандартная винтовка когорт спецподразделения «Драккар» Империи Миртана, созданная с использованием блюспейс-технологий. Лёгкая, надёжная и точная винтовка в компоновке булл-пап, каждый день продлевающая жизнь рейдеров в далёких мирах.
+ent-RMCWeaponRifleL88A2 = булл-пап винтовка L88A2
+    .desc = Вторая итерация винтовок модели L88, оснащённая креплениями для подствольных модификаций.
+ent-RMCWeaponRifleL88A1Filled = { ent-RMCWeaponRifleL88A1 }
+    .suffix = Снаряжена
+    .desc = { ent-RMCWeaponRifleL88A1.desc }
+ent-RMCWeaponRifleL88A2Filled = { ent-RMCWeaponRifleL88A2 }
+    .suffix = Снаряжена
+    .desc = { ent-RMCWeaponRifleL88A2.desc }
+ent-RMCMagazineRifleL88 = магазин L88 (10x24 мм)
+    .desc = Магазин под патрон калибра 10x24 мм для винтовок серии L88.
+ent-RMCMagazineRifleL88AP = бронебойный магазин L88 (10x24 мм)
+    .desc = Магазин с бронебойными патронами калибра 10x24 мм для винтовок серии L88.
+    .suffix = ББ

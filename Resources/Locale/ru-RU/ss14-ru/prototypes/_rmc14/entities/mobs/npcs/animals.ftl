@@ -1,4 +1,4 @@
-ent-RMCSimpleMob = abstract simple mob
+ent-RMCSimpleMob = абстрактный простой моб
     .desc = { "" }
 ent-RMCSmallHost = абстрактный маленький носитель
     .desc = { "" }

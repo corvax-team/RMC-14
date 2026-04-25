@@ -4,12 +4,12 @@
     <BoxContainer Orientation="Horizontal">
         <Button Name="Button" Access="Public"
                 HorizontalExpand="True" VerticalExpand="False"
-                StyleClasses="ButtonSquare" Margin="0">
-            <BoxContainer Orientation="Horizontal" Margin="0">
+                StyleClasses="ButtonSquare" Margin="0 0 0 4" MinHeight="42">
+            <BoxContainer Orientation="Horizontal" Margin="4 2">
                 <TextureRect Name="Texture" Access="Public"
                              HorizontalExpand="False" VerticalExpand="False"
-                             Margin="1"/>
-                <Control MinWidth="5"/>
+                             Margin="3" MinSize="28 28"/>
+                <Control MinWidth="8"/>
                 <RichTextLabel Name="NameLabel" Access="Public" VerticalAlignment="Center"/>
             </BoxContainer>
         </Button>

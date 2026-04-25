@@ -8,3 +8,5 @@ ent-CMIDCardDCC = dropship crew chief's ID card
     .desc = { ent-CMIDCardBase.desc }
 ent-CMIDCardIntelOfficer = intel officer's ID card
     .desc = { ent-CMIDCardSilver.desc }
+ent-CMDogtagCrewman = vehicle crewman's ID card
+    .desc = { ent-CMIDCardSilver.desc }

@@ -1,5 +1,5 @@
-﻿- type: job
-  parent: CMJobBase
+- type: job
+  parent: RMCJobMarineBase
   id: CMExecutiveOfficer
   name: cm-job-name-executive-officer
   description: cm-job-description-executive-officer
@@ -38,6 +38,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetMarine]
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillCqc: 2
@@ -76,6 +81,9 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
     - type: RMCTrackable
+    - type: RMCAwardRecommendation
+      maxRecommendations: 4
+    - type: SeeNewPlayers
 
 - type: startingGear
   id: CMGearExecutiveOfficer

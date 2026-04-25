@@ -1,4 +1,4 @@
-ent-RMCPlanetLV624 = LV-624
+ent-RMCPlanetLV624 = LV-624 Lazarus Landing
     .desc = { "" }
 ent-RMCPlanetSolaris = Solaris Ridge
     .desc = { "" }
@@ -19,6 +19,8 @@ ent-RMCPlanetHybrisa = LV-759 Hybrisa Prospera
 ent-RMCPlanetSorokyne = LV-976 Sorokyne Strata
     .desc = { "" }
 ent-RMCPlanetArcticValley = Arctic Valley
+    .desc = { "" }
+ent-RMCPlanetJungleDelta = Jungle Delta
     .desc = { "" }
 ent-RMCPlanetCorsat = CORSAT
     .desc = { "" }

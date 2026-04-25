@@ -18,6 +18,8 @@
     interfaces:
       enum.MarineCommunicationsComputerUI.Key:
         type: MarineCommunicationsComputerBui
+      enum.MarineControlComputerUi.MedalsPanel:
+        type: MedalsPanelBui
       enum.TacticalMapComputerUi.Key:
         type: TacticalMapComputerBui
       enum.DialogUiKey.Key:
@@ -27,7 +29,9 @@
     canGiveMedals: true
     canInitiateEvac: true
   - type: TacticalMapComputer
+    allowedSquadGroups: [UNMC]
   - type: MarineControlComputer
+    canPrintCommendations: false
   - type: Tag
     tags:
     - CommandTablet

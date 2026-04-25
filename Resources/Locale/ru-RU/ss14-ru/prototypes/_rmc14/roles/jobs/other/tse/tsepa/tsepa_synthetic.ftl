@@ -1,2 +1,2 @@
-ent-RMCSpawnPointTSEPASynthetic = tsepa synthetic spawn point
+ent-RMCSpawnPointTSEPASynthetic = Точка спавна Синтетика ПСОПЗ
     .desc = { ent-CMSpawnPointJobBase.desc }

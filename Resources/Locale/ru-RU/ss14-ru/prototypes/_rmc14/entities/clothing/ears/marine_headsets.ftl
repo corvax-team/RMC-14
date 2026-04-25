@@ -60,5 +60,5 @@ ent-CMHeadsetFoxtrotEngineer = радиогарнитура ККМП техни�
     .desc = Она используется боевыми инженерами отряда Фокстрот.
 ent-CMHeadsetFoxtrotMedic = радиогарнитура ККМП санитара Фокстрот
     .desc = Она используется боевыми медиками отряда Фокстрот.
-ent-RMCHeadsetGoldenArrow = sun riders radio headset
-    .desc = This is used by the UNMC Sun Riders Platoon.
+ent-RMCHeadsetGoldenArrow = радиогарнитура Солнценаездников
+    .desc = Используется ротой Солнценаездников ККМП.

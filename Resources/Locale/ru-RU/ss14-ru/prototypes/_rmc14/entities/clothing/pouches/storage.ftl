@@ -1,64 +1,81 @@
 ent-RMCPouchGeneral = лёгкий универсальный подсумок
-    .desc = Подсумок общего назначения, используемый для переноски маленького, или двух крошечных предметов.
+    .desc = Подсумок общего назначения, предназначенный для переноски одного небольшого или двух крошечных предметов.
 ent-RMCPouchGeneralMedium = средний универсальный подсумок
-    .desc = Подсумок общего назначения, используемый для переноски предметов разных размеров.
-
+    .desc = Подсумок общего назначения, подходящий для хранения предметов различных габаритов.
+ent-RMCPouchSurvival = аварийный подсумок
+    .desc = Подсумок с набором выживания, выдаваемый колонистам на случай чрезвычайных ситуаций.
 ent-RMCPouchSurvivalBlack = { ent-RMCPouchSurvival }
     .desc = { ent-RMCPouchSurvival.desc }
-
-ent-RMCPouchSurvival = аварийный подсумок
-    .desc = Подсумок, выдаваемый колонистам на случай чрезвычайной ситуации.
-
 ent-RMCPouchSurvivalSynth = аварийный подсумок синтетика
-    .desc = Подсумок, выдаваемый синтетикам на случай чрезвычайной ситуации.
-ent-RMCPouchCommandFill = { ent-RMCPouchCommand }
-    .suffix = Filled
-    .desc = { ent-RMCPouchCommand.desc }
-ent-RMCPouchMagazineLargeMAR40 = { ent-RMCPouchMagazineLarge }
-    .suffix = Filled, MAR40
-    .desc = { ent-RMCPouchMagazineLarge.desc }
-
+    .desc = Специализированный набор выживания, адаптированный под нужды синтетических единиц.
 ent-RMCPouchCommand = командирский подсумок
-    .desc = Специализированный прочный подсумок, выдаваемый командующим офицерам. В нем можно хранить оружие, командный планшет и бинокль.
-
+    .desc = Прочный специализированный подсумок для офицерского состава. Вмещает личное оружие, планшет и бинокль.
+ent-RMCPouchCommandFill = { ent-RMCPouchCommand }
+    .suffix = Заполненный
+    .desc = { ent-RMCPouchCommand.desc }
 ent-RMCPouchMagazine = подсумок для магазинов
-    .desc = В нём можно хранить магазины.
-ent-RMCPouchShotgunLargeBuckshot = { ent-RMCPouchShotgunLarge }
-    .desc = { ent-RMCPouchShotgunLarge.desc }
+    .desc = Стандартный подсумок для хранения запасных магазинов к стрелковому оружию.
 ent-RMCPouchMagazineLarge = большой подсумок для магазинов
-    .desc = В нём можно хранить много магазинов.
+    .desc = Вместительный подсумок, позволяющий носить значительный запас магазинов.
+ent-RMCPouchMagazineLargeMAR40 = { ent-RMCPouchMagazineLarge }
+    .suffix = Заполненный, MAR40
+    .desc = { ent-RMCPouchMagazineLarge.desc }
+ent-RMCPouchMagazineLargePMC = { ent-RMCPouchMagazineLarge }
+    .suffix = ЧВК
+    .desc = { ent-RMCPouchMagazineLarge.desc }
 ent-RMCPouchMagazinePistol = подсумок для пистолетных магазинов
-    .desc = В нём можно хранить пистолетные магазины и револьверные спидлоадеры.
-
+    .desc = Предназначен для хранения пистолетных магазинов и ускорителей заряжания (спидлоадеров) для револьверов.
 ent-RMCPouchMagazinePistolLarge = большой подсумок для пистолетных магазинов
-    .desc = В нём можно хранить много пистолетных магазинов и револьверных спидлоадеров.
-ent-RMCPouchShotgun = подсумок для ружейных патронов
-    .desc = В нем можно хранить горсти патронов.
-ent-RMCPouchShotgunLarge = большой подсумок для ружейных патронов
-    .desc = В нем можно хранить много горстей патронов.
-
+    .desc = Увеличенный подсумок для размещения большого количества пистолетных магазинов или спидлоадеров.
+ent-RMCPouchMagazinePistolLargeFilledHighCommand = { ent-RMCPouchMagazinePistolLarge }
+    .suffix = Заполненный, Высшее командование
+    .desc = { ent-RMCPouchMagazinePistolLarge.desc }
+ent-RMCPouchShotgun = подсумок для патронов
+    .desc = Компактный подсумок для хранения россыпи ружейных патронов.
+ent-RMCPouchShotgunLarge = большой подсумок для патронов
+    .desc = Вместительный подсумок для хранения большого запаса ружейных патронов.
+ent-RMCPouchShotgunLargeBuckshot = { ent-RMCPouchShotgunLarge }
+    .suffix = Заполненный, Картечь
+    .desc = { ent-RMCPouchShotgunLarge.desc }
 ent-RMCPouchDocument = большой подсумок для документов
-    .desc = В нём можно хранить бумаги, папки, диски, технические руководства и планшеты.
+    .desc = Предназначен для хранения бумаг, папок, дискет, технических руководств и планшетов.
 ent-RMCPouchDocumentSmall = маленький подсумок для документов
-    .desc = Уменьшенная версия подсумка для документов. В нём можно хранить бумаги, папки, диски, технические руководства и планшеты.
+    .desc = Компактная версия подсумка для документов. Подходит для хранения бумаг, карт доступа и небольших планшетов.
 ent-RMCPouchFlare = подсумок для фальшфейеров
-    .desc = Подсумок, предназначенный для хранения фальшфейеров. Можно пополнить коробкой фальшфейеров M94.
-
-ent-RMCPouchRadio = подсумок для радио
-    .desc = В нём можно хранить две ручные рации.
-ent-RMCPouchEngineerKit = подсумок-инженерный набор
-    .desc = Он предназначен для хранения инженерных предметов. Для эффективного использования требуются инженерные навыки.
+    .desc = Предназначен для хранения сигнальных шашек. Совместим с коробками фальшфейеров M94.
+ent-RMCPouchFlareL96 = подсумок для фальшфейеров L96
+    .desc = Подсумок для сигнальных средств пехоты Империи Миртана. Совместим с наборами фальшфейеров L96.
+ent-RMCPouchRadio = подсумок для раций
+    .desc = Позволяет удобно разместить две переносные радиостанции.
 ent-RMCPouchElectronics = подсумок для электроники
-    .desc = Он предназначен для хранения большинства электронных устройств, батарей и печатных плат.
-
+    .desc = Предназначен для хранения электронных компонентов, батарей и печатных плат.
+ent-RMCPouchEngineerKit = инженерный подсумок
+    .desc = Содержит инструменты, необходимые для полевых инженерных работ. Требует соответствующих навыков для эффективного использования.
 ent-RMCPouchTools = подсумок для инструментов
-    .desc = Он предназначен для хранения инструментов для технического обслуживания - отвёртки, гаечного ключа, мотка кабеля и т.д. В нём также предусмотрены два крепления, для сапёрной лопатки и лампозаменителя.
-
-ent-RMCPouchDrumPMC = smartgun drum pouch
-    .desc = A heavy pouch designed for carrying a surplus of smargun drums.
-
-ent-RMCPouchToolsSoc = тактический подсумок для инструментов
-    .desc = Этот набор инструментов полон острых и тяжёлых предметов и предназначен скорее для взлома, чем для ремонта. Впрочем, с последним он справляется довольно неплохо.
-
+    .desc = Вмещает базовый набор: отвёртку, гаечный ключ, мотки провода и прочее. Снабжён креплениями для лопаты и устройства замены ламп.
+ent-RMCPouchToolsSoc = тактический инструментальный подсумок
+    .desc = Набор инструментов, больше подходящий для взлома и демонтажа, чем для созидания. Впрочем, с мелким ремонтом он тоже справляется.
+ent-RMCPouchToolsSocFilledSynthetic = { ent-RMCPouchToolsSoc }
+    .suffix = Заполненный, Синтетик
+    .desc = { ent-RMCPouchToolsSoc.desc }
+ent-RMCPouchToolsSocFilledSPPSynthetic = { ent-RMCPouchToolsSoc }
+    .suffix = Заполненный, Синтетик СССП
+    .desc = { ent-RMCPouchToolsSoc.desc }
+ent-RMCPouchToolsFilledRCM = { ent-RMCPouchTools }
+    .suffix = Заполненный, КМП
+    .desc = { ent-RMCPouchTools.desc }
+ent-RMCPouchToolsSocFilledSOF = { ent-RMCPouchToolsSoc }
+    .suffix = Заполненный, ССО
+    .desc = { ent-RMCPouchToolsSoc.desc }
+ent-RMCPouchToolsSocFilledTactical = { ent-RMCPouchToolsSoc }
+    .suffix = Заполненный, Тактический
+    .desc = { ent-RMCPouchToolsSoc.desc }
 ent-RMCPouchSling = ремень-стропа
-    .desc = Хранит один предмет, прикреплённый к ремню.
+    .desc = Позволяет закрепить один предмет на поясном ремне для быстрого доступа.
+ent-RMCPouchCassette = подсумок для кассет
+    .desc = Качественно изготовленный подсумок для защиты аудиокассет от повреждений в условиях боевых действий.
+ent-RMCPouchDrumPMC = подсумок для коробов смартгана
+    .desc = Утяжелённый подсумок, разработанный для переноски запасных барабанных магазинов к смартгану.
+ent-RMCPouchToolsSocRCMPVEAssaultEngi = { ent-RMCPouchToolsSoc }
+    .suffix = Заполненный, КМП, PVE
+    .desc = { ent-RMCPouchToolsSoc.desc }

@@ -1,2 +1,2 @@
-rmc-helmetgarbs-off = Pull up headgear
-rmc-helmetgarbs-on = Pull down headgear
+rmc-helmetgarbs-off = Откинуть головной убор
+rmc-helmetgarbs-on = Надвинуть головной убор

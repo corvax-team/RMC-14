@@ -1,0 +1,16 @@
+ent-RMCSkillPresetPVEPlatoonCommander = Командир взвода
+    .desc = { "" }
+ent-RMCSkillPresetPVESectionSergeant = Сержант секции
+    .desc = { "" }
+ent-RMCSkillPresetPVESquadLeader = Командир отряда
+    .desc = { "" }
+ent-RMCSkillPresetPVECorpsman = Санитар
+    .desc = { "" }
+ent-RMCSkillPresetPVESGO = Оператор смартгана
+    .desc = { "" }
+ent-RMCSkillPresetPVERifleman = Стрелок
+    .desc = { "" }
+ent-RMCSkillPresetPVECLFDoctor = Врач КФО
+    .desc = { ent-RMCSkillPresetPVECorpsman.desc }
+ent-RMCSkillPresetPVEForeconRTO = Радист СОиС
+    .desc = { ent-RMCSkillPresetPVERifleman.desc }

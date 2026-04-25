@@ -38,6 +38,7 @@
             CMCMO: [1, 1]
             CMDoctor: [2, 2]
             CMNurse: [2, 2]
+            RMCFieldDoctor: [1, 1]
 #            CMResearcher: [2, 2]
             # Requisition
             CMQuartermaster: [1, 1]
@@ -55,3 +56,4 @@
             CMCorrespondent: [1, 1]
             # Other
 #            CMLiaison: [1, 1]
+            RMCJobSynthetic: [1, 1]

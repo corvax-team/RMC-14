@@ -1,9 +1,11 @@
 ﻿using Content.Shared._RMC14.Construction.Prototypes;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Emplacements;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Ladder;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Vehicle; // CCM14
 using Content.Shared.Construction.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
@@ -27,6 +29,7 @@ namespace Content.Shared._RMC14.Construction;
 
 public sealed class RMCConstructionSystem : EntitySystem
 {
+    [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
@@ -36,10 +39,12 @@ public sealed class RMCConstructionSystem : EntitySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
+    [Dependency] private readonly SharedWeaponMountSystem _weaponMount = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly RMCVehicleSystem _rmcVehicleSystem = default!; // CCM14
 
     private static readonly EntProtoId Blocker = "RMCDropshipDoorBlocker";
 
@@ -128,7 +133,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         var direction = transform.LocalRotation.GetCardinalDir();
         var coordinates = transform.Coordinates;
 
-        if (!proto.IgnoreBuildRestrictions && !CanBuildAt(coordinates, proto.Name, out var popup, direction: direction, collision: proto.RestrictedCollisionGroup))
+        if (!proto.IgnoreBuildRestrictions && !CanBuildAt(coordinates, proto.Prototype, out var popup, direction: direction, collision: proto.RestrictedCollisionGroup, user: user))
         {
             _popup.PopupEntity(popup, ent, user, PopupType.SmallCaution);
             return false;
@@ -326,7 +331,16 @@ public sealed class RMCConstructionSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
-        if (!CanBuildAt(ev.Location, ev.PrototypeName, out var popup))
+        var graph = _prototype.Index(ev.Prototype.Graph);
+        var node = graph.Nodes[ev.Prototype.TargetNode];
+        var entProtoId = node.Entity.GetId(null, null, new(EntityManager));
+
+        if (entProtoId == null)
+            return;
+
+        var entProto = _prototype.Index<EntityPrototype>(entProtoId);
+
+        if (!CanBuildAt(ev.Location, entProto, out var popup, user: ev.User))
         {
             ev.Popup = popup;
             ev.Cancelled = true;
@@ -393,6 +407,30 @@ public sealed class RMCConstructionSystem : EntitySystem
         return !HasComp<DisableConstructionComponent>(user);
     }
 
+    public bool CanBuildAt(EntityCoordinates coordinates, EntProtoId prototype, out string? popup, bool anchoring = false, Direction direction = Direction.Invalid, CollisionGroup? collision = null, EntityUid? user = null)
+    {
+        popup = default;
+        if (!_prototype.TryIndex<EntityPrototype>(prototype, out var proto))
+            return false;
+
+        var canBuild = CanBuildAt(coordinates, proto.Name, out popup, anchoring, direction, collision);
+        if (!canBuild)
+            return false;
+
+        if (_transform.GetGrid(coordinates) is not { } gridId)
+            return true;
+
+        if (!TryComp(gridId, out MapGridComponent? grid))
+            return true;
+
+        if (proto.TryGetComponent(out BarricadeComponent? barricade, _componentFactory))
+        {
+            return !_weaponMount.HasWeaponMountNearbyPopup((gridId, grid), coordinates, proto, user: user);
+        }
+
+        return canBuild;
+    }
+
     public bool CanBuildAt(EntityCoordinates coordinates, string? prototypeName, out string? popup, bool anchoring = false, Direction direction = Direction.Invalid, CollisionGroup? collision = null)
     {
         popup = default;
@@ -408,6 +446,14 @@ public sealed class RMCConstructionSystem : EntitySystem
             popup = Loc.GetString("rmc-construction-not-proper-surface", ("construction", prototypeName));
             return false;
         }
+
+        // CCM14-start
+        if (_rmcVehicleSystem.TryGetVehicleFromInterior(gridId, out _))
+        {
+            popup = Loc.GetString("rmc-construction-not-proper-surface", ("construction", prototypeName));
+            return false;
+        }
+        // CCM14-end
 
         if (!TryComp(gridId, out MapGridComponent? grid))
             return true;

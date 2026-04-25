@@ -7,7 +7,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client.UserInterface
 {
     [GenerateTypedNameReferences]
-    public sealed partial class StatsWindow : DefaultWindow
+    public sealed partial class StatsWindow : DefaultCMWindow
     {
         public StatsWindow()
         {
@@ -46,3 +46,4 @@ namespace Content.Client.UserInterface
         }
     }
 }
+

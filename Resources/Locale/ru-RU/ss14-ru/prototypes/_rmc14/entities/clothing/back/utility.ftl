@@ -1,4 +1,6 @@
-ent-RMCParachute = parachute
-    .desc = A surprisingly small yet bulky pack with just enough safety straps to make RnD pass health and safety. The label says the pack comes with two parachutes - main and reserve, but you doubt the pack can fit even one.
-ent-RMCParachuteDeployed = deployed parachute
+ent-RMCParachute = парашют
+    .desc = Удивительно маленький парашют с ровно таки количеством ремней безопасности, сколько требуется для того чтобы пройти проверку на безопасность. Надпись гласит, что он содержит два парашюта - основной и резервный, но вы сомневаетесь, что он сможет вместить даже один.
+ent-RMCParachuteDeployed = Выпущенный парашют
     .desc = { "" }
+ent-RMCWeldingKit = сварочный набор
+    .desc = Сверхпрочный портативный балон сварочного топлива.

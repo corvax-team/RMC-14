@@ -20,6 +20,10 @@
     allowedStates:
     - Alive
     - Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - RMCSynthGrabbable
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -84,7 +88,6 @@
       - XenoParasite
       - XenoEgg
       - XenoFruit
-      - CCMRoyalParasite
   - type: TunnelRenamer
   - type: MultiHandedHolder
     items:

@@ -1,4 +1,4 @@
-﻿<DefaultWindow xmlns="https://spacestation14.io"
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls" xmlns="https://spacestation14.io"
             Title="{Loc 'crayon-window-title'}"
             MinSize="450 500"
             SetSize="450 500">
@@ -10,4 +10,5 @@
             </BoxContainer>
         </ScrollContainer>
     </BoxContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

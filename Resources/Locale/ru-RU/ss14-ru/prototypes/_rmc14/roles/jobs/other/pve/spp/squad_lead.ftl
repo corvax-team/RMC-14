@@ -1,3 +1,3 @@
-ent-RMCSpawnPointSPPSquadLeadPVE = weya pmc team lead spawn point
+ent-RMCSpawnPointSPPSquadLeadPVE = Точка спавна Лидер Отряда СССП
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }

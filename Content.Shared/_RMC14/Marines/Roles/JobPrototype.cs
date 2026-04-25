@@ -44,6 +44,9 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     public readonly string? SpawnMenuRoleName;
 
     [DataField]
+    public readonly string? NewToJobInfo;
+
+    [DataField]
     public readonly Dictionary<ProtoId<RankPrototype>, HashSet<JobRequirement>?>? Ranks;
 
     [DataField]
@@ -80,13 +83,10 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
 
     [DataField]
     public ProtoId<JobPrototype>? WhitelistParent;
-    
+
     /// <summary>
     /// Starting gear that is given when the map has a certain camoflage enabled.
     /// </summary>
     [DataField]
     public readonly Dictionary<CamouflageType, ProtoId<StartingGearPrototype>>? CamouflageStartingGear;
-
-    [DataField]
-    public int MinPlayers = 0; // Corvax-Vehicle-Crewman-Content
 }

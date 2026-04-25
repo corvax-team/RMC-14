@@ -22,15 +22,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetMarine]
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
     - type: Skills
-      skills:
-        RMCSkillFireman: 3
-        RMCSkillJtac: 1
-        RMCSkillEndurance: 2
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 1
-        RMCSkillFirearms: 1
-        RMCSkillVehicles: 1
+      preset: RMCSkillPresetPVECorpsman
     - type: CMVendorUser
       id: CMPVEHospitalCorpsman
       points: 0

@@ -1,0 +1,283 @@
+# // CCM Xeno Strain - Boxer Warrior
+- type: entity
+  parent: CMXenoWarrior
+  id: CCMXenoWarriorBoxer
+  suffix: CCM-Boxer
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Warrior/boxer.rsi
+  - type: XenoStrain
+    name: ccm-xeno-boxer-name
+    description: ccm-xeno-boxer-description
+    popup: ccm-xeno-boxer-popup
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoPunch
+    - CCMActionXenoBoxerAdvance
+    - CCMActionXenoBoxerKnockout
+    - ActionXenoDevolve
+  - type: XenoLeap
+    delay: 0
+    range: 2
+    moveDelayTime: 0
+    knockdownTime: 0
+    leapSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
+    hitEffect: CMEffectPunch
+    targetJitterTime: 0
+    targetCameraShakeStrength: 1
+    damage:
+      groups:
+        Brute: 25
+  - type: XenoPunch
+    damage:
+      types:
+        Blunt: 35
+  - type: MeleeWeapon
+    soundHit:
+      collection: Punch
+    animation: CCMWeaponArcXenoPunch
+    damage:
+      groups:
+        Brute: 28
+  - type: Tackle
+    max: 6
+    min: 3
+  - type: XenoRage
+    maxRage: 10
+    armorPerRage: 0
+    speedBuffPerRage: 0
+    attackSpeedPerRage: 0.05
+    healAmount: 0
+  - type: XenoEviscerate
+    stunTime: 0.25
+    lifeStealPerMarine: 175
+    maxLifeSteal: 175
+    rageHitSound: 
+      collection: CCMBoxingBell
+    damageAtRageLevels:
+    - groups:
+        Brute: 16
+    - groups:
+        Brute: 32
+    - groups:
+        Brute: 48
+    - groups:
+        Brute: 64
+    - groups:
+        Brute: 80
+    - groups:
+        Brute: 96
+    - groups:
+        Brute: 112
+    - groups:
+        Brute: 128
+    - groups:
+        Brute: 144
+    - groups:
+        Brute: 160
+    rangeAtRageLevels: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0,]
+    windupReductionAtRageLevels: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.9, 1]
+  - type: XenoEvolution
+    max: 500
+    evolvesTo:
+    - RMCXenoCrusher
+    - CMXenoPraetorian
+    strains: []
+  - type: XenoHidden
+  - type: XenoLifesteal
+    maxHeal: 60
+    minHeal: 40
+
+# // CCM Xeno Punch Attack Effect
+- type: entity
+  parent: [WeaponArcClaw, RMCBaseEffect]
+  id: CCMWeaponArcXenoPunch
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    sprite: _RMC14/Effects/attacks.rsi
+    state: punch
+    noRot: true
+# // CCM Xeno Punch Attack Effect
+# // CCM Boxing bell sound collection
+- type: soundCollection
+  id: CCMBoxingBell
+  files:
+  - /Audio/Weapons/boxingbell.ogg # Need that because eviscarate need collection
+# // CCM Boxing bell sound collection
+# // CCM Xeno Strain - Boxer Warrior
+
+# // CCM Xeno Strain - Melee & Ranger Sentinels
+- type: entity
+  parent: CMXenoSentinel
+  id: CCMXenoMeleeSentinel
+  suffix: CCM-Melee
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Sentinel/melee.rsi
+  - type: XenoStrain
+    name: ccm-xeno-meleesent-name
+    description: ccm-xeno-meleesent-description
+    popup: ccm-xeno-meleesent-popup
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidWeak
+    - ActionXenoPunch
+    - CCMActionXenoLightNeuroEmpower
+    - CCMActionXenoGreaterParalyzingSlash
+    - ActionXenoDevolve
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 27.5
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 35
+  - type: XenoPunch
+    range: 3
+    damage:
+      types:
+        Blunt: 27.5
+  - type: XenoParalyzingSlash
+    stunDelay: 1
+    stunDuration: 2
+  - type: XenoCripplingStrike
+    activateText: rmc-xeno-apprehend-activate
+    deactivateText: rmc-xeno-apprehend-deactivate
+    expireText: rmc-xeno-apprehend-expire
+    removeOnHit: true
+    preventTackle: true
+    resetMeleeCooldown: true
+    auraColor: "#9ACD32FF"
+    damageMult: 1
+    speed: 1.2
+  - type: CMArmor
+    xenoArmor: 15
+    explosionArmor: 35
+  - type: XenoEvolution
+    canEvolveWithoutGranter: true
+    max: 200
+    evolvesTo:
+    - CMXenoSpitter
+    evolvesToWithoutPoints:
+    - CMXenoQueen
+    strains: []
+  - type: XenoHidden
+
+- type: entity
+  parent: CMXenoSentinel
+  id: CCMXenoRangerSentinel
+  suffix: CCM-Ranger
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Sentinel/ranger.rsi
+  - type: XenoStrain
+    name: ccm-xeno-rangersent-name
+    description: ccm-xeno-rangersent-description
+    popup: ccm-xeno-rangersent-popup
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidWeak
+    - ActionXenoSlowingSpit
+    - ActionXenoScatteredSpit
+    - ActionXenoSprayAcid
+    - ActionXenoDevolve
+  - type: XenoSlowingSpit
+    projectileId: CCMXenoGreatSlowingSpitProjectile
+  - type: XenoScatteredSpit
+    maxDeviation: 60
+    maxProjectiles: 12
+    projectileId: CCMXenoGreatScatteredSpitProjectile
+  - type: XenoSprayAcid
+    acid: CCMXenoAcidSprayRanger
+    barricadeDamage:
+      types:
+        Heat: 5
+  - type: XenoEvolution
+    canEvolveWithoutGranter: true
+    max: 200
+    evolvesTo:
+    - CMXenoSpitter
+    evolvesToWithoutPoints:
+    - CMXenoQueen
+    strains: []
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      380: Critical
+      480: Dead
+  - type: XenoHidden
+# // CCM Xeno Strain - Melee & Ranger Sentinels
+
+# // CCM Xeno Strain - Sniper Spitter
+- type: entity
+  parent: CMXenoSpitter
+  id: CCMXenoSniperSpitter
+  suffix: CCM-Sniper
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Spitter/sniper.rsi
+  - type: XenoStrain
+    name: ccm-xeno-sniper-name
+    description: ccm-xeno-sniper-description
+    popup: ccm-xeno-sniper-popup
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStabCorrosive
+    - ActionXenoAcidNormal
+    - CCMActionXenoSniperSnipe
+    - ActionXenoZoom
+    - ActionXenoSprayAcid
+    - CCMActionXenoSniperWalker
+    - ActionXenoDevolve
+  - type: XenoSpit
+    plasmaCost: 300
+    projectileId: CCMXenoSniperSpitProjectile
+    speed: 33
+  - type: XenoResinWalker
+    plasmaCost: 100
+    speedMultiplier: 5
+  - type: XenoSprayAcid
+    acid: CCMXenoAcidSpraySniper
+    barricadeDamage:
+      types:
+        Heat: 5
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1
+    baseSprintSpeed: 1.4
+  - type: XenoZoom
+    zoom: 2, 2
+    offsetLength: 3
+    speed: 0.8
+    doAfter: 0.5
+  - type: XenoEvolution
+    max: 500
+    evolvesTo:
+    - CMXenoBoiler
+    - CMXenoPraetorian
+    strains: []
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      350: Critical
+      450: Dead
+  - type: XenoHidden
+# // CCM Xeno Strain - Sniper Spitter

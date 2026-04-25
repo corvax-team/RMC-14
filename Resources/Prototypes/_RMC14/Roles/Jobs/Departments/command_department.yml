@@ -1,4 +1,4 @@
-﻿- type: department
+- type: department
   parent: CMDepartmentBase
   id: CMCommand
   name: department-CMCommand
@@ -9,6 +9,7 @@
   - CMExecutiveOfficer
   - CMStaffOfficer
   - CMPVEPlatoonCommander
+  - CMRoyalMarinesTroopCommanderPVE
   primary: false
   departmentRadio: MarineCommand
   headOfDepartment: CMCommandingOfficer

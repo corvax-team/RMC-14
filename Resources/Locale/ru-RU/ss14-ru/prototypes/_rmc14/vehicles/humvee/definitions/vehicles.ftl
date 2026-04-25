@@ -1,0 +1,10 @@
+ent-RMCVehicleHumveeBase = хамви
+    .desc = Быстрая бронированная машина общего назначения, предназначенная для патрулирования и поддержки.
+ent-RMCVehicleHumvee = { ent-RMCVehicleHumveeBase }
+    .desc = { ent-RMCVehicleHumveeBase.desc }
+ent-RMCVehicleHumveeMedical = хамви (медицинский)
+    .desc = Хамви, сконфигурированный как медицинская машина для полевой сортировки раненых.
+ent-RMCVehicleHumveeTransport = хамви (транспортный)
+    .desc = Транспортный хамви, сконфигурированный для перевозки личного состава.
+ent-RMCVehicleHumveeARC = хамви БРК
+    .desc = Хамви, сконфигурированный с внутренней компоновкой БРК.

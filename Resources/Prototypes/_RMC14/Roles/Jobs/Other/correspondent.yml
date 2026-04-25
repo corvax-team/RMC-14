@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: RMCJobRibbonBase
   id: CMCorrespondent
   name: cm-job-name-correspondent
@@ -35,6 +35,9 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: correspondent
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_civillian
   hasIcon: false
 
 - type: startingGear

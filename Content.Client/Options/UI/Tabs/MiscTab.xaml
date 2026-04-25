@@ -1,41 +1,56 @@
-﻿<tabs:MiscTab xmlns="https://spacestation14.io"
-              xmlns:tabs="clr-namespace:Content.Client.Options.UI.Tabs"
+<tabs:MiscTab xmlns="https://spacestation14.io"
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:tabs="clr-namespace:Content.Client.Options.UI.Tabs"
               xmlns:ui="clr-namespace:Content.Client.Options.UI"
               xmlns:s="clr-namespace:Content.Client.Stylesheets">
-    <BoxContainer Orientation="Vertical">
-        <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
-            <BoxContainer Orientation="Vertical" Margin="8 8 8 8" VerticalExpand="True">
-                <Label Text="{Loc 'cm-ui-rmc14'}"
-                       FontColorOverride="{x:Static s:StyleNano.NanoGold}"
-                       StyleClasses="LabelKeyText"/>
-                <CheckBox Name="RMCAutoPunctuate" Text="{Loc 'rmc-ui-auto-punctuate'}" Margin="0 0 0 5" />
-                <CheckBox Name="RMCAutoEjectMagazines" Text="{Loc 'rmc-ui-auto-eject-magazines'}" Margin="0 0 0 5" />
-                <CheckBox Name="RMCDamageYourself" Text="{Loc 'rmc-ui-damage-yourself'}" Margin="0 0 0 5" />
-                <Label Text="{Loc 'ui-options-general-ui-style'}"
-                       StyleClasses="LabelKeyText"/>
-                <ui:OptionDropDown Name="DropDownHudTheme" Title="{Loc 'ui-options-hud-theme'}" />
-                <ui:OptionDropDown Name="DropDownHudLayout" Title="{Loc 'ui-options-hud-layout'}" />
-                <Label Text="{Loc 'ui-options-general-discord'}"
-                       StyleClasses="LabelKeyText"/>
-                <CheckBox Name="DiscordRich" Text="{Loc 'ui-options-discordrich'}" />
-                <Label Text="{Loc 'ui-options-general-speech'}"
-                       StyleClasses="LabelKeyText"/>
-                <CheckBox Name="ShowOocPatronColor" Text="{Loc 'ui-options-show-ooc-patron-color'}" />
-                <CheckBox Name="ShowLoocAboveHeadCheckBox" Text="{Loc 'ui-options-show-looc-on-head'}" />
-                <CheckBox Name="FancySpeechBubblesCheckBox" Text="{Loc 'ui-options-fancy-speech'}" />
-                <CheckBox Name="FancyNameBackgroundsCheckBox" Text="{Loc 'ui-options-fancy-name-background'}" />
-                <Label Text="{Loc 'ui-options-general-cursor'}"
-                       StyleClasses="LabelKeyText"/>
-                <CheckBox Name="ShowHeldItemCheckBox" Text="{Loc 'ui-options-show-held-item'}" />
-                <CheckBox Name="ShowCombatModeIndicatorsCheckBox" Text="{Loc 'ui-options-show-combat-mode-indicators'}" />
-                <Label Text="{Loc 'ui-options-general-storage'}"
-                       StyleClasses="LabelKeyText"/>
-                <CheckBox Name="OpaqueStorageWindowCheckBox" Text="{Loc 'ui-options-opaque-storage-window'}" />
-                <CheckBox Name="StaticStorageUI" Text="{Loc 'ui-options-static-storage-ui'}" />
-                <!-- <CheckBox Name="ToggleWalk" Text="{Loc 'ui-options-hotkey-toggle-walk'}" /> -->
-            </BoxContainer>
-        </ScrollContainer>
-        <ui:OptionsTabControlRow Name="Control" Access="Public" />
-    </BoxContainer>
+    <PanelContainer StyleClasses="OptionsGeneralBackground">
+        <BoxContainer Orientation="Vertical">
+            <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
+                <BoxContainer Orientation="Vertical" Margin="8 8 8 8" VerticalExpand="True">
+                    <Label Text="{Loc 'cm-ui-rmc14'}"
+                           FontColorOverride="{x:Static s:StyleNano.NanoGold}"
+                           StyleClasses="LabelKeyText"/>
+                    <CheckBox Name="RMCAutoPunctuate" Text="{Loc 'rmc-ui-auto-punctuate'}" Margin="0 0 0 5" />
+                    <CheckBox Name="RMCAutoEjectMagazines" Text="{Loc 'rmc-ui-auto-eject-magazines'}" Margin="0 0 0 5" />
+                    <CheckBox Name="RMCDamageYourself" Text="{Loc 'rmc-ui-damage-yourself'}" Margin="0 0 0 5" />
+                    <CheckBox Name="RMCShowNewPlayerIcons" Text="{Loc 'rmc-ui-show-new-player-icons'}" Margin="0 0 0 5" />
+                    <ui:OptionDropDown Name="RMCXenoNightVisionDefault" Title="{Loc 'rmc-ui-xeno-night-vision-default'}" />
+                    <Label Text="{Loc 'ui-options-general-chat-translation'}"
+                           StyleClasses="LabelKeyText"/>
+                    <CheckBox Name="ChatTranslationEnabledCheckBox" Text="{Loc 'ui-options-chat-translate-enabled'}" Margin="0 0 0 5" />
+                    <ui:OptionDropDown Name="DropDownChatTranslationLanguage" Title="{Loc 'ui-options-chat-translate-language'}" />
+                    <Label Text="{Loc 'ui-options-general-ui-style'}"
+                           StyleClasses="LabelKeyText"/>
+                    <ui:OptionDropDown Name="DropDownClientLanguage" Title="{Loc 'ui-options-client-language'}" />
+                    <ui:OptionDropDown Name="DropDownHudTheme" Title="{Loc 'ui-options-hud-theme'}" />
+                    <ui:OptionDropDown Name="DropDownHudLayout" Title="{Loc 'ui-options-hud-layout'}" />
+                    <Label Text="{Loc 'ui-options-general-lobby'}"
+                           StyleClasses="LabelKeyText"/>
+                    <ui:OptionDropDown Name="DropDownUiColorTheme" Title="{Loc 'ui-options-ui-color-theme'}" />
+                    <ui:OptionDropDown Name="DropDownLobbyBackgroundPreset" Title="{Loc 'ui-options-lobby-background-preset'}" />
+                    <CheckBox Name="RMCLobbyInvertSides" Text="{Loc 'ui-options-lobby-invert-sides'}" Margin="0 0 0 5" />
+                    <!-- # CCM priority rework -->
+                    <Label Text="{Loc 'ui-options-general-discord'}"
+                           StyleClasses="LabelKeyText"/>
+                    <CheckBox Name="DiscordRich" Text="{Loc 'ui-options-discordrich'}" />
+                    <Label Text="{Loc 'ui-options-general-speech'}"
+                           StyleClasses="LabelKeyText"/>
+                    <CheckBox Name="ShowOocPatronColor" Text="{Loc 'ui-options-show-ooc-patron-color'}" Margin="0 0 0 5" />
+                    <CheckBox Name="ShowLoocAboveHeadCheckBox" Text="{Loc 'ui-options-show-looc-on-head'}" Margin="0 0 0 5" />
+                    <CheckBox Name="FancySpeechBubblesCheckBox" Text="{Loc 'ui-options-fancy-speech'}" Margin="0 0 0 5" />
+                    <CheckBox Name="FancyNameBackgroundsCheckBox" Text="{Loc 'ui-options-fancy-name-background'}" Margin="0 0 0 5" />
+                    <Label Text="{Loc 'ui-options-general-cursor'}"
+                           StyleClasses="LabelKeyText"/>
+                    <CheckBox Name="ShowHeldItemCheckBox" Text="{Loc 'ui-options-show-held-item'}" Margin="0 0 0 5" />
+                    <CheckBox Name="ShowCombatModeIndicatorsCheckBox" Text="{Loc 'ui-options-show-combat-mode-indicators'}" Margin="0 0 0 5" />
+                    <Label Text="{Loc 'ui-options-general-storage'}"
+                           StyleClasses="LabelKeyText"/>
+                    <CheckBox Name="OpaqueStorageWindowCheckBox" Text="{Loc 'ui-options-opaque-storage-window'}" Margin="0 0 0 5" />
+                    <CheckBox Name="StaticStorageUI" Text="{Loc 'ui-options-static-storage-ui'}" Margin="0 0 0 5" />
+                    <!-- <CheckBox Name="ToggleWalk" Text="{Loc 'ui-options-hotkey-toggle-walk'}" /> -->
+                </BoxContainer>
+            </ScrollContainer>
+            <ui:OptionsTabControlRow Name="Control" Access="Public" />
+        </BoxContainer>
+    </PanelContainer>
 </tabs:MiscTab>

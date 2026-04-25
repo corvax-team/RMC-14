@@ -15,7 +15,7 @@ namespace Content.Client.Administration.UI.Tabs.AtmosTab
 {
     [GenerateTypedNameReferences]
     [UsedImplicitly]
-    public sealed partial class SetTemperatureWindow : DefaultWindow
+    public sealed partial class SetTemperatureWindow : DefaultCMWindow
     {
         private List<NetEntity>? _data;
 
@@ -51,3 +51,4 @@ namespace Content.Client.Administration.UI.Tabs.AtmosTab
         }
     }
 }
+

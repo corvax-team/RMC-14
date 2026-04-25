@@ -1,0 +1,41 @@
+- type: rMCHardpointVehicleFamily
+  id: Van
+
+- type: rMCHardpointVehicleFamily
+  id: APC
+
+- type: rMCHardpointVehicleFamily
+  id: Humvee
+
+- type: rMCHardpointVehicleFamily
+  id: Tank
+
+- type: rMCHardpointSlotType
+  id: Wheel
+
+- type: rMCHardpointSlotType
+  id: Turret
+
+- type: rMCHardpointSlotType
+  id: Cannon
+
+- type: rMCHardpointSlotType
+  id: Launcher
+
+- type: rMCHardpointSlotType
+  id: RoofAttachment
+
+- type: rMCHardpointSlotType
+  id: FrontAttachment
+
+- type: rMCHardpointSlotType
+  id: SupportAttachment
+
+- type: rMCHardpointSlotType
+  id: Armor
+
+- type: rMCHardpointSlotType
+  id: Treads
+
+- type: rMCHardpointSlotType
+  id: Tires

@@ -1,11 +1,13 @@
+﻿<!-- CM14 rework: non-RMC edit marker. -->
 <BoxContainer xmlns="https://spacestation14.io"
+              xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
               Orientation="Vertical"
               HorizontalExpand="True"
               VerticalExpand="True">
     <!-- "Slot" selection -->
     <Label Name="CategoryName" />
     <BoxContainer Name="SlotSelectorContainer" HorizontalExpand="True">
-        <OptionButton Name="SlotSelector" HorizontalExpand="True" StyleClasses="OpenBoth" />
+        <ccm:CCMOptionButton Name="SlotSelector" HorizontalExpand="True" StyleClasses="OpenBoth" />
         <Button Name="AddButton" Text="{Loc 'marking-slot-add'}" StyleClasses="OpenBoth" />
         <Button Name="RemoveButton" Text="{Loc 'marking-slot-remove'}" StyleClasses="OpenLeft" />
     </BoxContainer>

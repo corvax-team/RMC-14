@@ -1,2 +1,2 @@
-ent-RMCSurvivorPresetHybrisaSynthXenoarch = survivor synth hybrisa Xenoarch preset
+ent-RMCSurvivorPresetHybrisaSynthXenoarch = пресет синтетика-ксеноархеолога Гибриса
     .desc = { "" }

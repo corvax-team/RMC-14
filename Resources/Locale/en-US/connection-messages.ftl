@@ -32,6 +32,7 @@ whitelist-playtime = You do not have enough playtime to join this server. You ne
 whitelist-player-count = This server is currently not accepting players. Please try again later.
 whitelist-notes = You currently have too many admin notes to join this server. You can check your notes by typing /adminremarks in chat.
 whitelist-manual = You are not whitelisted on this server.
+whitelist-sponsor = Additional slots are available to project sponsors.
 whitelist-blacklisted = You are blacklisted from this server.
 whitelist-always-deny = You are not allowed to join this server.
 whitelist-fail-prefix = Not whitelisted: {$msg}
@@ -57,7 +58,8 @@ baby-jail-account-reason-overall = Your overall playtime on the server must be y
 
 generic-misconfigured = The server is misconfigured and is not accepting players. Please contact the server owner and try again later.
 
-ipintel-server-ratelimited = This server uses a security system with external verification, which has reached its maximum verification limit. Please contact the administration team of the server for assistance and try again later.
+# RMC14 Change
+ipintel-server-ratelimited = You are not banned. This game uses external verification, which has reached its maximum verification limit on new connections. Wait a minute or two, and connect again; no appeal required. If this does not work, rejoin another day or make a ticket.
 ipintel-unknown = This server uses a security system with external verification, but it encountered an error. Please contact the administration team of the server for assistance and try again later.
 ipintel-suspicious = You are connecting through a datacenter or VPN. This is not a ban against your account, turning off your VPN is sufficient. If you are still having a technical issue or need a VPN to be able to play, you can request an exemption at appeal.rouny-ss14.com
 

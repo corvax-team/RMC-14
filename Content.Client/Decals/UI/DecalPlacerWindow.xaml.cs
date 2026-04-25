@@ -14,7 +14,7 @@ using static Robust.Client.UserInterface.Controls.BaseButton;
 namespace Content.Client.Decals.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class DecalPlacerWindow : DefaultWindow
+public sealed partial class DecalPlacerWindow : DefaultCMWindow
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IEntityManager _e = default!;
@@ -232,3 +232,4 @@ public sealed partial class DecalPlacerWindow : DefaultWindow
         _decalPlacementSystem.SetActive(false);
     }
 }
+

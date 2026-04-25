@@ -1,0 +1,11 @@
+ent-RMCMapInsertSorokyneBase = { ent-RMCMapInsertBase }
+    .suffix = Insert Sorokyne
+    .desc = { ent-RMCMapInsertBase.desc }
+ent-RMCMapInsertSorokyneSPPSOF = SPP SOF Dropship
+    .desc = { ent-RMCMapInsertSorokyneBase.desc }
+ent-RMCMapInsertSorokyneSPPSOFAlt = SPP SOF Supply Ship
+    .desc = { ent-RMCMapInsertSorokyneBase.desc }
+ent-RMCMapInsertSorokyneMedbay = CLF Camp
+    .desc = { ent-RMCMapInsertSorokyneBase.desc }
+ent-RMCMapInsertSorokyneFlamerBodypile = Flamer Bodypile
+    .desc = { ent-RMCMapInsertSorokyneBase.desc }

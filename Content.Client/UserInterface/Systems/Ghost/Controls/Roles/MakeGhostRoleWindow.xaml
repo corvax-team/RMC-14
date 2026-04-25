@@ -1,4 +1,4 @@
-﻿<DefaultWindow Title="{Loc Make Ghost Role}"
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls" Title="{Loc Make Ghost Role}"
             xmlns="https://spacestation14.io">
 
     <BoxContainer Orientation="Vertical">
@@ -45,4 +45,5 @@
         </BoxContainer>
     </BoxContainer>
 
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

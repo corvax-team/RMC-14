@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorHybrisaMedicalDoctor = medical doctor spawn point
+ent-RMCSpawnPointSurvivorHybrisaMedicalDoctor = спавнер выжившего врача
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetHybrisaMedicalDoctor = medical doctor preset
+    .suffix = Гибриса
+ent-RMCGearSurvivorPresetHybrisaMedicalDoctor = пресет врача Гибриса
     .desc = { ent-RMCSurvivorPresetDoctor.desc }

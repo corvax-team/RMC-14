@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Net;
 using Content.Server.Database;
 using Content.Shared.CCVar;
@@ -34,7 +35,7 @@ public sealed class RulesManager
         {
             PopupTime = _cfg.GetCVar(CCVars.RulesWaitTime),
             CoreRules = _cfg.GetCVar(CCVars.RulesFile),
-            ShouldShowRules = !isLocalhost && !hasCooldown,
+            ShouldShowRules = false,
         };
         _netManager.ServerSendMessage(showRulesMessage, e.Channel);
     }

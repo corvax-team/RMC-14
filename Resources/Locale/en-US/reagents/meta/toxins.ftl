@@ -79,6 +79,15 @@ reagent-desc-tazinide = A highly dangerous metallic mixture which can interfere 
 reagent-name-lipolicide = lipolicide
 reagent-desc-lipolicide = A powerful toxin that will destroy fat cells, massively reducing body weight in a short time. Deadly to those without nutriment in their body.
 
+reagent-name-rmclightneurotoxin = light neurotoxin
+reagent-desc-rmclightneurotoxin = A weaker variant of neurotoxin that impairs the nervous system.
+
+reagent-name-rmcxenoneurotoxin = xeno neurotoxin
+reagent-desc-rmcxenoneurotoxin = A potent neurotoxin derived from xenonid biology.
+
+reagent-name-rmcdronejuice = drone juice
+reagent-desc-rmcdronejuice = A viscous toxic secretion from a xenonid drone.
+
 reagent-name-mechanotoxin = mechanotoxin
 reagent-desc-mechanotoxin = A neurotoxin used as venom by some species of spider. Degrades movement when built up.
 

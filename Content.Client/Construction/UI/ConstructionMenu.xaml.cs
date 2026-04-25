@@ -58,7 +58,7 @@ namespace Content.Client.Construction.UI
     }
 
     [GenerateTypedNameReferences]
-    public sealed partial class ConstructionMenu : DefaultWindow, IConstructionMenuView
+    public sealed partial class ConstructionMenu : DefaultCMWindow, IConstructionMenuView
     {
         public bool BuildButtonPressed
         {
@@ -195,3 +195,4 @@ namespace Content.Client.Construction.UI
         public sealed record ConstructionMenuListData(ConstructionPrototype Prototype, EntityPrototype TargetPrototype) : ListData;
     }
 }
+

@@ -15,7 +15,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client.SurveillanceCamera.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class SurveillanceCameraMonitorWindow : DefaultWindow
+public sealed partial class SurveillanceCameraMonitorWindow : DefaultCMWindow
 {
     private static readonly ProtoId<ShaderPrototype> CameraStaticShader = "CameraStatic";
 
@@ -192,3 +192,4 @@ public sealed partial class SurveillanceCameraMonitorWindow : DefaultWindow
         CameraSelected!((string) SubnetList[args.ItemIndex].Metadata!);
     }
 }
+

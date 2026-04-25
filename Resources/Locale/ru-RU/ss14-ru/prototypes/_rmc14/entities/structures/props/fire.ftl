@@ -1,3 +1,3 @@
-ent-RMCFireProp = fire
-    .desc = That isn't going out any time soon.
-    .suffix = Prop
+ent-RMCFireProp = огонь
+    .desc = Он не погаснет в ближайшее время.
+    .suffix = Проп

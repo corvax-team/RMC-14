@@ -1,9 +1,20 @@
 - type: job
-  parent: CMJobBase
+  parent: RMCJobMarineBase
   id: RMCJobSynthetic
   name: rmc-job-name-synth
   description: rmc-job-description-synth
   playTimeTracker: RMCJobSynthetic
+  requirements:
+#  CCM14 role timers [remove/start]
+   - !type:TotalJobsTimeRequirement
+     group: CMJobsMedical
+     time: 36000 # 10 hours
+   - !type:TotalJobsTimeRequirement
+     group: CMJobsEngineering
+     time: 32400 # 9 hours. CCM14 role timers. RMC: 72000 # 20 hours
+   - !type:OverallPlaytimeRequirement
+     time: 72000 # 10 hours
+#  CCM14 role timers [remove/end]
   ranks:
     RMCRankChiefWarrantOfficer:
     - !type:RoleTimeRequirement
@@ -14,8 +25,8 @@
   dummyStartingGear: RMCGearSyntheticEquipped
   icon: "RMCJobIconSynth"
   joinNotifyCrew: true
-  whitelisted: true
-  supervisors: rmc-job-supervisors-commander
+  whitelisted: false
+  supervisors: cm-job-supervisors-co
   accessGroups:
   - ShipMasterAccess
   - Synth
@@ -23,6 +34,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetMarine]
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillCqc: 5
@@ -48,12 +64,8 @@
       id: RMCJobSynthetic
       points: 45
       extraPoints:
-        ExperimentalTools: 30
+        ExperimentalTools: 35 # // CCM Changed - Base is 30
     - type: DemoSpecWhitelist
-    - type: GrenadeSpecWhitelist
-    - type: ScoutWhitelist
-    - type: SniperWhitelist
-    - type: PyroWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-synth
     - type: TacticalMapIcon
@@ -73,7 +85,7 @@
         types:
           Blunt: 35
     - type: Synth
-  hidden: true
+  hidden: false
 
 - type: startingGear
   id: RMCGearSyntheticEquipped
@@ -113,6 +125,10 @@
   - type: RMCLeapProtection
     inherentStunDuration: 3
   - type: ZombieImmune
+  - type: ParalyzeImmuneFrom
+    whitelist:
+      tags:
+      - RMCSynthGrabbable
 
 - type: entity
   id: RMCSynthRemoveComponents

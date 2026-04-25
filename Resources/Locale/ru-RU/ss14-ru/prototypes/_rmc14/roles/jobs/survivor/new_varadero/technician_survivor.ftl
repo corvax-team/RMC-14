@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorTechnician = survivor engineering technician spawn point
+ent-RMCSpawnPointSurvivorTechnician = спавнер выжившего техника
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetTechnician = technician colonist preset
+    .suffix = UENB Нью-Варадеро
+ent-RMCGearSurvivorPresetTechnician = пресет колониста-техника
     .desc = { ent-RMCSurvivorPresetEngineer.desc }

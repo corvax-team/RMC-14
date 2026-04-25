@@ -1,11 +1,11 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: RMCCLFMedic
   name: rmc-clf-medic
   description: rmc-ghost-role-information-clf-description
   playTimeTracker: RMCJobCLFMedic
   ranks:
-    RMCRankCLFRebel: [ ]
+    RMCRankCLFRebel2: [ ]
   startingGear: RMCGearCLFMedic
   icon: RMCJobIconCLFMedic
   joinNotifyCrew: false
@@ -52,6 +52,10 @@
     job: RMCCLFMedic
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadCLF
 

@@ -38,6 +38,8 @@ namespace Content.Server.Preferences.Managers
 
         private int MaxCharacterSlots => _cfg.GetCVar(CCVars.GameMaxCharacterSlots);
 
+        public event Action<NetUserId>? PreferencesUpdated;
+
         public void Init()
         {
             _netManager.RegisterNetMessage<MsgPreferencesAndSettings>();
@@ -78,6 +80,8 @@ namespace Content.Server.Preferences.Managers
             {
                 await _db.SaveSelectedCharacterIndexAsync(message.MsgChannel.UserId, message.SelectedCharacterIndex);
             }
+
+            PreferencesUpdated?.Invoke(userId);
         }
 
         private async void HandleUpdateCharacterMessage(MsgUpdateCharacter message)
@@ -116,6 +120,8 @@ namespace Content.Server.Preferences.Managers
 
             if (ShouldStorePrefs(session.Channel.AuthType))
                 await _db.SaveCharacterSlotAsync(userId, profile, slot);
+
+            PreferencesUpdated?.Invoke(userId);
         }
 
         public async Task SetConstructionFavorites(NetUserId userId, List<ProtoId<ConstructionPrototype>> favorites)
@@ -184,6 +190,8 @@ namespace Content.Server.Preferences.Managers
                     await _db.SaveCharacterSlotAsync(userId, null, slot);
                 }
             }
+
+            PreferencesUpdated?.Invoke(userId);
         }
 
         private async void HandleUpdateConstructionFavoritesMessage(MsgUpdateConstructionFavorites message)
@@ -379,3 +387,5 @@ namespace Content.Server.Preferences.Managers
         }
     }
 }
+
+// # CCM priority rework

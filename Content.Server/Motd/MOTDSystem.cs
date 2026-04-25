@@ -1,9 +1,13 @@
+﻿// CM14 rework: non-RMC edit marker.
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
+using System;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
+using Content.Shared.Localizations;
 using Robust.Shared.Console;
 using Robust.Shared.Configuration;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 
 namespace Content.Server.Motd;
@@ -15,6 +19,9 @@ public sealed class MOTDSystem : EntitySystem
 {
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private readonly INetConfigurationManager _netConfig = default!;
+    [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
 
     /// <summary>
     /// The cached value of the Message of the Day. Used for fast access.
@@ -36,8 +43,10 @@ public sealed class MOTDSystem : EntitySystem
         if (string.IsNullOrEmpty(_messageOfTheDay))
             return;
 
-        var wrappedMessage = Loc.GetString("motd-wrap-message", ("motd", _messageOfTheDay));
-        _chatManager.ChatMessageToAll(ChatChannel.Server, _messageOfTheDay, wrappedMessage, source: EntityUid.Invalid, hideChat: false, recordReplay: true);
+        foreach (var session in _playerManager.Sessions)
+        {
+            TrySendMOTD(session);
+        }
     }
 
     /// <summary>
@@ -48,7 +57,7 @@ public sealed class MOTDSystem : EntitySystem
         if (string.IsNullOrEmpty(_messageOfTheDay))
             return;
 
-        var wrappedMessage = Loc.GetString("motd-wrap-message", ("motd", _messageOfTheDay));
+        var wrappedMessage = WithChannelCulture(player.Channel, () => Loc.GetString("motd-wrap-message", ("motd", _messageOfTheDay)));
         _chatManager.ChatMessageToOne(ChatChannel.Server, _messageOfTheDay, wrappedMessage, source: EntityUid.Invalid, hideChat: false, client: player.Channel);
     }
 
@@ -66,7 +75,37 @@ public sealed class MOTDSystem : EntitySystem
         var wrappedMessage = Loc.GetString("motd-wrap-message", ("motd", _messageOfTheDay));
         shell.WriteLine(wrappedMessage);
         if (shell.Player is { } player)
-            _chatManager.ChatMessageToOne(ChatChannel.Server, _messageOfTheDay, wrappedMessage, source: EntityUid.Invalid, hideChat: false, client: player.Channel);
+            _chatManager.ChatMessageToOne(
+                ChatChannel.Server,
+                _messageOfTheDay,
+                WithChannelCulture(player.Channel, () => Loc.GetString("motd-wrap-message", ("motd", _messageOfTheDay))),
+                source: EntityUid.Invalid,
+                hideChat: false,
+                client: player.Channel);
+    }
+
+    private string GetClientLocaleCode(INetChannel channel)
+    {
+        var locale = _netConfig.GetClientCVar(channel, CCVars.ClientLocale);
+        return string.IsNullOrWhiteSpace(locale) ? "ru-RU" : locale;
+    }
+
+    private T WithChannelCulture<T>(INetChannel channel, Func<T> action)
+    {
+        var locale = GetClientLocaleCode(channel);
+        var oldCulture = _contentLoc.CurrentCultureCode;
+        if (oldCulture.Equals(locale, StringComparison.OrdinalIgnoreCase))
+            return action();
+
+        _contentLoc.SetCulture(locale);
+        try
+        {
+            return action();
+        }
+        finally
+        {
+            _contentLoc.SetCulture(oldCulture);
+        }
     }
 
     #region Event Handlers

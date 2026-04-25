@@ -21,7 +21,7 @@ public sealed class RMCCalendarSystem : EntitySystem
     private void OnExamined(Entity<RMCCalendarComponent> ent, ref ExaminedEvent args)
     {
         var owner = ent.Owner;
-        var worldDate = EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault()?.DateOffset ?? DateTime.Today.AddYears(100);
+        var worldDate = EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault()?.DateOffset ?? DateTime.Today.AddYears(1000); // CCM14
         var time = worldDate.ToString("dd MMMM, yyyy");
 
         var todayHolidays = _customHolidaySystem.GetCustomHolidays()

@@ -1,9 +1,12 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System;
 using System.Threading;
 using Content.Server._RMC14.Admin;
+using Content.Server._CCM.Sponsorship;
 using Content.Server._RMC14.Discord;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server._RMC14.Mentor;
@@ -21,6 +24,7 @@ using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Mind;
 using Content.Shared.Players.RateLimiting;
+using Content.Shared.Localizations;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -54,9 +58,12 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private readonly PlayerRateLimitManager _rateLimitManager = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly DiscordChatLink _discordLink = default!;
+    [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
 
     // RMC14
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+    [Dependency] private readonly CCMCustomizationManager _ccmCustomization = default!;
+    [Dependency] private readonly CCMSponsorshipManager _ccmSponsorship = default!;
     [Dependency] private readonly RMCDiscordManager _discord = default!;
     [Dependency] private readonly MentorManager _mentor = default!;
     [Dependency] private readonly RMCChatBansManager _rmcChatBans = default!;
@@ -87,7 +94,7 @@ internal sealed partial class ChatManager : IChatManager
         if (_oocEnabled == val) return;
 
         _oocEnabled = val;
-        DispatchServerAnnouncement(Loc.GetString(val ? "chat-manager-ooc-chat-enabled-message" : "chat-manager-ooc-chat-disabled-message"));
+        DispatchServerAnnouncementLoc(val ? "chat-manager-ooc-chat-enabled-message" : "chat-manager-ooc-chat-disabled-message");
     }
 
     private void OnAdminOocEnabledChanged(bool val)
@@ -95,7 +102,7 @@ internal sealed partial class ChatManager : IChatManager
         if (_adminOocEnabled == val) return;
 
         _adminOocEnabled = val;
-        DispatchServerAnnouncement(Loc.GetString(val ? "chat-manager-admin-ooc-chat-enabled-message" : "chat-manager-admin-ooc-chat-disabled-message"));
+        DispatchServerAnnouncementLoc(val ? "chat-manager-admin-ooc-chat-enabled-message" : "chat-manager-admin-ooc-chat-disabled-message");
     }
 
         public void DeleteMessagesBy(NetUserId uid)
@@ -124,20 +131,72 @@ internal sealed partial class ChatManager : IChatManager
 
     public void DispatchServerAnnouncement(string message, Color? colorOverride = null)
     {
-        var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", FormattedMessage.EscapeText(message)));
-        ChatMessageToAll(ChatChannel.Server, message, wrappedMessage, EntityUid.Invalid, hideChat: false, recordReplay: true, colorOverride: colorOverride);
+        string WrapForCurrentCulture() => Loc.GetString("chat-manager-server-wrap-message", ("message", FormattedMessage.EscapeText(message)));
+        var wrappedMessage = WrapForCurrentCulture();
+
+        foreach (var session in _player.Sessions)
+        {
+            ChatMessageToOne(
+                ChatChannel.Server,
+                message,
+                WithChannelCulture(session.Channel, WrapForCurrentCulture),
+                EntityUid.Invalid,
+                hideChat: false,
+                session.Channel,
+                colorOverride);
+        }
+
+        _replay.RecordServerMessage(new ChatMessage(ChatChannel.Server, message, wrappedMessage, NetEntity.Invalid, null, false, colorOverride));
         Logger.InfoS("SERVER", message);
 
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Server announcement: {message}");
     }
 
+    public void DispatchServerAnnouncementLoc(string messageLocId, (string, object)[]? args = null, Color? colorOverride = null)
+    {
+        args ??= Array.Empty<(string, object)>();
+
+        var replayMessage = Loc.GetString(messageLocId, args);
+        string WrapForCurrentCulture(string message) => Loc.GetString("chat-manager-server-wrap-message", ("message", FormattedMessage.EscapeText(message)));
+        var replayWrappedMessage = WrapForCurrentCulture(replayMessage);
+
+        foreach (var session in _player.Sessions)
+        {
+            var localizedMessage = WithChannelCulture(session.Channel, () => Loc.GetString(messageLocId, args));
+            var localizedWrapped = WithChannelCulture(session.Channel, () => WrapForCurrentCulture(localizedMessage));
+            ChatMessageToOne(
+                ChatChannel.Server,
+                localizedMessage,
+                localizedWrapped,
+                EntityUid.Invalid,
+                hideChat: false,
+                session.Channel,
+                colorOverride);
+        }
+
+        _replay.RecordServerMessage(new ChatMessage(ChatChannel.Server, replayMessage, replayWrappedMessage, NetEntity.Invalid, null, false, colorOverride));
+        Logger.InfoS("SERVER", replayMessage);
+        _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Server announcement loc: {messageLocId}");
+    }
+
     public void DispatchServerMessage(ICommonSession player, string message, bool suppressLog = false)
     {
-        var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", FormattedMessage.EscapeText(message)));
+        var wrappedMessage = WithChannelCulture(player.Channel, () => Loc.GetString("chat-manager-server-wrap-message", ("message", FormattedMessage.EscapeText(message))));
         ChatMessageToOne(ChatChannel.Server, message, wrappedMessage, default, false, player.Channel);
 
         if (!suppressLog)
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Server message to {player:Player}: {message}");
+    }
+
+    public void DispatchServerMessageLoc(ICommonSession player, string messageLocId, (string, object)[]? args = null, bool suppressLog = false)
+    {
+        args ??= Array.Empty<(string, object)>();
+        var message = WithChannelCulture(player.Channel, () => Loc.GetString(messageLocId, args));
+        var wrappedMessage = WithChannelCulture(player.Channel, () => Loc.GetString("chat-manager-server-wrap-message", ("message", FormattedMessage.EscapeText(message))));
+        ChatMessageToOne(ChatChannel.Server, message, wrappedMessage, default, false, player.Channel);
+
+        if (!suppressLog)
+            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Server message loc to {player:Player}: {messageLocId}");
     }
 
     public void SendAdminAnnouncement(string message, AdminFlags? flagBlacklist, AdminFlags? flagWhitelist)
@@ -158,18 +217,75 @@ internal sealed partial class ChatManager : IChatManager
 
         }).Select(p => p.Channel);
 
-        var wrappedMessage = Loc.GetString("chat-manager-send-admin-announcement-wrap-message",
-            ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")), ("message", FormattedMessage.EscapeText(message)));
+        string WrapForCurrentCulture() => Loc.GetString("chat-manager-send-admin-announcement-wrap-message",
+            ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
+            ("message", FormattedMessage.EscapeText(message)));
+        var wrappedMessage = WrapForCurrentCulture();
 
-        ChatMessageToMany(ChatChannel.Admin, message, wrappedMessage, default, false, true, clients);
+        foreach (var client in clients)
+        {
+            ChatMessageToOne(
+                ChatChannel.Admin,
+                message,
+                WithChannelCulture(client, WrapForCurrentCulture),
+                default,
+                false,
+                client);
+        }
+
+        if (_configurationManager.GetCVar(CCVars.ReplayRecordAdminChat))
+            _replay.RecordServerMessage(new ChatMessage(ChatChannel.Admin, message, wrappedMessage, NetEntity.Invalid, null, false));
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Admin announcement: {message}");
+    }
+
+    public void SendAdminAnnouncementLoc(string messageLocId, (string, object)[]? args = null, AdminFlags? flagBlacklist = null, AdminFlags? flagWhitelist = null)
+    {
+        args ??= Array.Empty<(string, object)>();
+        var clients = _adminManager.ActiveAdmins.Where(p =>
+        {
+            var adminData = _adminManager.GetAdminData(p);
+
+            DebugTools.AssertNotNull(adminData);
+
+            if (adminData == null)
+                return false;
+
+            if (flagBlacklist != null && adminData.HasFlag(flagBlacklist.Value))
+                return false;
+
+            return flagWhitelist == null || adminData.HasFlag(flagWhitelist.Value);
+
+        }).Select(p => p.Channel);
+
+        var replayMessage = Loc.GetString(messageLocId, args);
+        string WrapForCurrentCulture(string message) => Loc.GetString("chat-manager-send-admin-announcement-wrap-message",
+            ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
+            ("message", FormattedMessage.EscapeText(message)));
+        var replayWrappedMessage = WrapForCurrentCulture(replayMessage);
+
+        foreach (var client in clients)
+        {
+            var localizedMessage = WithChannelCulture(client, () => Loc.GetString(messageLocId, args));
+            var localizedWrappedMessage = WithChannelCulture(client, () => WrapForCurrentCulture(localizedMessage));
+            ChatMessageToOne(
+                ChatChannel.Admin,
+                localizedMessage,
+                localizedWrappedMessage,
+                default,
+                false,
+                client);
+        }
+
+        if (_configurationManager.GetCVar(CCVars.ReplayRecordAdminChat))
+            _replay.RecordServerMessage(new ChatMessage(ChatChannel.Admin, replayMessage, replayWrappedMessage, NetEntity.Invalid, null, false));
+        _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Admin announcement loc: {messageLocId}");
     }
 
     public void SendAdminAnnouncementMessage(ICommonSession player, string message, bool suppressLog = true)
     {
-        var wrappedMessage = Loc.GetString("chat-manager-send-admin-announcement-wrap-message",
+        var wrappedMessage = WithChannelCulture(player.Channel, () => Loc.GetString("chat-manager-send-admin-announcement-wrap-message",
             ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
-            ("message", FormattedMessage.EscapeText(message)));
+            ("message", FormattedMessage.EscapeText(message))));
         ChatMessageToOne(ChatChannel.Admin, message, wrappedMessage, default, false, player.Channel);
     }
 
@@ -179,10 +295,24 @@ internal sealed partial class ChatManager : IChatManager
             .Where(p => _adminManager.HasAdminFlag(p, AdminFlags.EditNotes)) // RMC14
             .Select(p => p.Channel);
 
-        var wrappedMessage = Loc.GetString("chat-manager-send-admin-announcement-wrap-message",
-            ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")), ("message", FormattedMessage.EscapeText(message)));
+        string WrapForCurrentCulture() => Loc.GetString("chat-manager-send-admin-announcement-wrap-message",
+            ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
+            ("message", FormattedMessage.EscapeText(message)));
+        var wrappedMessage = WrapForCurrentCulture();
 
-        ChatMessageToMany(ChatChannel.AdminAlert, message, wrappedMessage, default, false, true, clients);
+        foreach (var client in clients)
+        {
+            ChatMessageToOne(
+                ChatChannel.AdminAlert,
+                message,
+                WithChannelCulture(client, WrapForCurrentCulture),
+                default,
+                false,
+                client);
+        }
+
+        if (_configurationManager.GetCVar(CCVars.ReplayRecordAdminChat))
+            _replay.RecordServerMessage(new ChatMessage(ChatChannel.AdminAlert, message, wrappedMessage, NetEntity.Invalid, null, false));
     }
 
     public void SendAdminAlert(EntityUid player, string message)
@@ -211,8 +341,22 @@ internal sealed partial class ChatManager : IChatManager
         {
             return;
         }
-        var wrappedMessage = Loc.GetString("chat-manager-send-hook-ooc-wrap-message", ("senderName", sender), ("message", FormattedMessage.EscapeText(message)));
-        ChatMessageToAll(ChatChannel.OOC, message, wrappedMessage, source: EntityUid.Invalid, hideChat: false, recordReplay: true);
+        string WrapForCurrentCulture() => Loc.GetString("chat-manager-send-hook-ooc-wrap-message",
+            ("senderName", sender),
+            ("message", FormattedMessage.EscapeText(message)));
+        var wrappedMessage = WrapForCurrentCulture();
+        foreach (var session in _player.Sessions)
+        {
+            ChatMessageToOne(
+                ChatChannel.OOC,
+                message,
+                WithChannelCulture(session.Channel, WrapForCurrentCulture),
+                source: EntityUid.Invalid,
+                hideChat: false,
+                session.Channel);
+        }
+
+        _replay.RecordServerMessage(new ChatMessage(ChatChannel.OOC, message, wrappedMessage, NetEntity.Invalid, null, false));
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Hook OOC from {sender}: {message}");
     }
 
@@ -220,9 +364,11 @@ internal sealed partial class ChatManager : IChatManager
     {
         var clients = _adminManager.ActiveAdmins.Select(p => p.Channel);
 
-        var wrappedMessage = Loc.GetString("chat-manager-send-hook-admin-wrap-message", ("senderName", sender), ("message", FormattedMessage.EscapeText(message)));
         foreach (var client in clients)
         {
+            var wrappedMessage = WithChannelCulture(client, () => Loc.GetString("chat-manager-send-hook-admin-wrap-message",
+                ("senderName", sender),
+                ("message", FormattedMessage.EscapeText(message))));
             ChatMessageToOne(
                 ChatChannel.AdminChat,
                 message,
@@ -256,7 +402,8 @@ internal sealed partial class ChatManager : IChatManager
         // Check if message exceeds the character limit
         if (message.Length > MaxMessageLength)
         {
-            DispatchServerMessage(player, Loc.GetString("chat-manager-max-message-length-exceeded-message", ("limit", MaxMessageLength)));
+            DispatchServerMessageLoc(player, "chat-manager-max-message-length-exceeded-message",
+                new[] { ("limit", (object) MaxMessageLength) });
             return;
         }
 
@@ -301,23 +448,58 @@ internal sealed partial class ChatManager : IChatManager
         }
 
         Color? colorOverride = null;
-        var wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message", ("playerName",player.Name), ("message", FormattedMessage.EscapeText(message)));
+        var displayName = BuildOocDisplayName(player);
+
+        string WrapOocForCurrentCulture() => Loc.GetString("chat-manager-send-ooc-wrap-message",
+            ("playerName", FormattedMessage.EscapeText(displayName)),
+            ("message", FormattedMessage.EscapeText(message)));
+
+        string WrapPatronForCurrentCulture(string color) => Loc.GetString("chat-manager-send-ooc-patron-wrap-message",
+            ("patronColor", color),
+            ("playerName", FormattedMessage.EscapeText(displayName)),
+            ("message", FormattedMessage.EscapeText(message)));
+
+        var replayWrappedMessage = WrapOocForCurrentCulture();
         if (_adminManager.HasAdminFlag(player, AdminFlags.NameColor))
         {
             var prefs = _preferencesManager.GetPreferences(player.UserId);
             colorOverride = prefs.AdminOOCColor;
         }
-        if (_netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) &&
-            _linkAccount.GetConnectedPatron(player)?.Tier != null)
+        foreach (var session in _player.Sessions)
         {
-            var color = _linkAccount.GetPatronOOCHexColor(player.Channel.UserId);
-            wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", $"{color}"),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+            var wrappedMessage = WithChannelCulture(session.Channel, () =>
+            {
+                if (_ccmCustomization.TryGetChatColorHex(player.UserId, false, out var customColor))
+                    return WrapPatronForCurrentCulture(customColor);
+
+                if (_ccmSponsorship.TryGetChatColorHex(player.UserId, false, out var sponsorColor))
+                    return WrapPatronForCurrentCulture(sponsorColor);
+
+                return WrapOocForCurrentCulture();
+            });
+
+            ChatMessageToOne(
+                ChatChannel.OOC,
+                message,
+                wrappedMessage,
+                EntityUid.Invalid,
+                hideChat: false,
+                session.Channel,
+                colorOverride: colorOverride,
+                author: player.UserId);
         }
 
-        //TODO: player.Name color, this will need to change the structure of the MsgChatMessage
-        ChatMessageToAll(ChatChannel.OOC, message, wrappedMessage, EntityUid.Invalid, hideChat: false, recordReplay: true, colorOverride: colorOverride, author: player.UserId);
+        _replay.RecordServerMessage(new ChatMessage(ChatChannel.OOC, message, replayWrappedMessage, NetEntity.Invalid, EnsurePlayer(player.UserId)?.Key, false, colorOverride, speechStyleClass: null, repeatCheckSender: true));
         _discordLink.SendMessage(message, player.Name, ChatChannel.OOC);
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"OOC from {player:Player}: {message}");
+    }
+
+    private string BuildOocDisplayName(ICommonSession player)
+    {
+        if (!_ccmCustomization.TryGetOocTagText(player.UserId, out var tagText))
+            return player.Name;
+
+        return $"[{tagText}] {player.Name}";
     }
 
     private void SendAdminChat(ICommonSession player, string message)
@@ -329,7 +511,7 @@ internal sealed partial class ChatManager : IChatManager
         }
 
         var clients = _adminManager.ActiveAdmins.Select(p => p.Channel);
-        var wrappedMessage = Loc.GetString("chat-manager-send-admin-chat-wrap-message",
+        string WrapForCurrentCulture() => Loc.GetString("chat-manager-send-admin-chat-wrap-message",
                                         ("adminChannelName", Loc.GetString("chat-manager-admin-channel-name")),
                                         ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
 
@@ -340,7 +522,7 @@ internal sealed partial class ChatManager : IChatManager
             var isSource = client != player.Channel;
             ChatMessageToOne(ChatChannel.AdminChat,
                 message,
-                wrappedMessage,
+                WithChannelCulture(client, WrapForCurrentCulture),
                 default,
                 false,
                 client,
@@ -362,7 +544,7 @@ internal sealed partial class ChatManager : IChatManager
         }
 
         var clients = _mentor.GetActiveMentors().Select(p => p.Channel);
-        var wrappedMessage = Loc.GetString("chat-manager-send-admin-chat-wrap-message",
+        string WrapForCurrentCulture() => Loc.GetString("chat-manager-send-admin-chat-wrap-message",
                                         ("adminChannelName", "MENTOR"),
                                         ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
 
@@ -373,7 +555,7 @@ internal sealed partial class ChatManager : IChatManager
             var isSource = client != player.Channel;
             ChatMessageToOne(ChatChannel.MentorChat,
                 message,
-                wrappedMessage,
+                WithChannelCulture(client, WrapForCurrentCulture),
                 default,
                 false,
                 client,
@@ -389,6 +571,30 @@ internal sealed partial class ChatManager : IChatManager
 
     #region Utility
 
+    private string GetClientLocaleCode(INetChannel channel)
+    {
+        var locale = _netConfigManager.GetClientCVar(channel, CCVars.ClientLocale);
+        return string.IsNullOrWhiteSpace(locale) ? "ru-RU" : locale;
+    }
+
+    private T WithChannelCulture<T>(INetChannel channel, Func<T> action)
+    {
+        var locale = GetClientLocaleCode(channel);
+        var oldCulture = _contentLoc.CurrentCultureCode;
+        if (oldCulture.Equals(locale, StringComparison.OrdinalIgnoreCase))
+            return action();
+
+        _contentLoc.SetCulture(locale);
+        try
+        {
+            return action();
+        }
+        finally
+        {
+            _contentLoc.SetCulture(oldCulture);
+        }
+    }
+
     public void ChatMessageToOne(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat, INetChannel client, Color? colorOverride = null, bool recordReplay = false, string? audioPath = null, float audioVolume = 0, NetUserId? author = null, bool hidePopup = false)
     {
         var user = author == null ? null : EnsurePlayer(author);
@@ -396,16 +602,13 @@ internal sealed partial class ChatManager : IChatManager
         user?.AddEntity(netSource);
 
         var msg = new ChatMessage(channel, message, wrappedMessage, netSource, user?.Key, hideChat, colorOverride, audioPath, audioVolume, hidePopup, speechStyleClass: _entityManager.GetComponentOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass, repeatCheckSender: !_entityManager.HasComponent<ChatRepeatIgnoreSenderComponent>(source));
-        _netManager.ServerSendMessage(new MsgChatMessage() { Message = msg }, client);
+        ChatMessageToOne(msg, client, recordReplay);
+    }
 
-        if (!recordReplay)
-            return;
-
-        if ((channel & ChatChannel.AdminRelated) == 0 ||
-            _configurationManager.GetCVar(CCVars.ReplayRecordAdminChat))
-        {
-            _replay.RecordServerMessage(msg);
-        }
+    public void ChatMessageToOne(ChatMessage message, INetChannel client, bool recordReplay = false)
+    {
+        DispatchChatMessageToClient(client, message);
+        RecordReplayIfNeeded(message, recordReplay);
     }
 
     public void ChatMessageToMany(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat, bool recordReplay, IEnumerable<INetChannel> clients, Color? colorOverride = null, string? audioPath = null, float audioVolume = 0, NetUserId? author = null)
@@ -418,16 +621,12 @@ internal sealed partial class ChatManager : IChatManager
         user?.AddEntity(netSource);
 
         var msg = new ChatMessage(channel, message, wrappedMessage, netSource, user?.Key, hideChat, colorOverride, audioPath, audioVolume, speechStyleClass: _entityManager.GetComponentOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass, repeatCheckSender: !_entityManager.HasComponent<ChatRepeatIgnoreSenderComponent>(source));
-        _netManager.ServerSendToMany(new MsgChatMessage() { Message = msg }, clients);
-
-        if (!recordReplay)
-            return;
-
-        if ((channel & ChatChannel.AdminRelated) == 0 ||
-            _configurationManager.GetCVar(CCVars.ReplayRecordAdminChat))
+        foreach (var client in clients)
         {
-            _replay.RecordServerMessage(msg);
+            DispatchChatMessageToClient(client, msg);
         }
+
+        RecordReplayIfNeeded(msg, recordReplay);
     }
 
     public void ChatMessageToManyFiltered(Filter filter, ChatChannel channel, string message, string wrappedMessage, EntityUid source,
@@ -452,16 +651,12 @@ internal sealed partial class ChatManager : IChatManager
         user?.AddEntity(netSource);
 
         var msg = new ChatMessage(channel, message, wrappedMessage, netSource, user?.Key, hideChat, colorOverride, audioPath, audioVolume, speechStyleClass: _entityManager.GetComponentOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass, repeatCheckSender: !_entityManager.HasComponent<ChatRepeatIgnoreSenderComponent>(source));
-        _netManager.ServerSendToAll(new MsgChatMessage() { Message = msg });
-
-        if (!recordReplay)
-            return;
-
-        if ((channel & ChatChannel.AdminRelated) == 0 ||
-            _configurationManager.GetCVar(CCVars.ReplayRecordAdminChat))
+        foreach (var session in _player.Sessions)
         {
-            _replay.RecordServerMessage(msg);
+            DispatchChatMessageToClient(session.Channel, msg);
         }
+
+        RecordReplayIfNeeded(msg, recordReplay);
     }
 
     public bool MessageCharacterLimit(ICommonSession? player, string message)
@@ -475,9 +670,8 @@ internal sealed partial class ChatManager : IChatManager
         // Check if message exceeds the character limit if the sender is a player
         if (message.Length > MaxMessageLength)
         {
-            var feedback = Loc.GetString("chat-manager-max-message-length-exceeded-message", ("limit", MaxMessageLength));
-
-            DispatchServerMessage(player, feedback);
+            DispatchServerMessageLoc(player, "chat-manager-max-message-length-exceeded-message",
+                new[] { ("limit", (object) MaxMessageLength) });
 
             isOverLength = true;
         }

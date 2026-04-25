@@ -6,7 +6,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client.Administration.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class AdminMenuWindow : DefaultWindow
+public sealed partial class AdminMenuWindow : DefaultCMWindow
 {
     public event Action? OnDisposed;
 
@@ -52,3 +52,4 @@ public sealed partial class AdminMenuWindow : DefaultWindow
         Objects,
     }
 }
+

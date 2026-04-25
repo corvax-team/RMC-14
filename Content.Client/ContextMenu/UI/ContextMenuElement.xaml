@@ -1,13 +1,19 @@
+﻿<!-- CM14 rework: non-RMC edit marker. -->
 <ContainerButton
     xmlns="https://spacestation14.io"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ui="clr-namespace:Content.Client.ContextMenu.UI"
     MinHeight="{x:Static ui:ContextMenuElement.ElementHeight}">
-    <BoxContainer Orientation="Horizontal">
+    <BoxContainer
+        Orientation="Horizontal"
+        HorizontalExpand="True"
+        VerticalExpand="True">
         <SpriteView
             Name="Icon"
             SetWidth="{x:Static ui:ContextMenuElement.ElementHeight}"
             SetHeight="{x:Static ui:ContextMenuElement.ElementHeight}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
             OverrideDirection="South">
             <Label
                 Name="IconLabel"
@@ -25,6 +31,7 @@
         <TextureRect
             Name="ExpansionIndicator"
             HorizontalAlignment="Right"
+            VerticalAlignment="Center"
             Stretch="KeepCentered"
             StyleClasses="contextMenuExpansionTexture"
             TextureScale="0.5 0.5"

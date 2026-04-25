@@ -1,3 +1,3 @@
 ent-RMCRandomHumanoidBureauDeputy = представитель бюро роль призрака
-    .suffix = Спаунер, игрок, дружелюбный
+    .suffix = Спаунер, Игрок, Дружелюбный
     .desc = { "" }

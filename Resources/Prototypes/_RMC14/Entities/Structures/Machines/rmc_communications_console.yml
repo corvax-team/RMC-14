@@ -52,6 +52,7 @@
   - type: OverwatchConsole
     canMessageSquad: false
   - type: TacticalMapComputer
+    allowedSquadGroups: [UNMC]
   - type: GuideHelp
     guides:
     - RMCGuideMarineCommunications
@@ -75,6 +76,8 @@
     interfaces:
       enum.MarineControlComputerUi.Key:
         type: MarineControlComputerBui
+      enum.MarineControlComputerUi.MedalsPanel:
+        type: MedalsPanelBui
       enum.DialogUiKey.Key:
         type: DialogBui
   - type: MarineControlComputer
@@ -113,6 +116,7 @@
       RMCSkillOverwatch: 1
   - type: OverwatchConsole
   - type: TacticalMapComputer
+    allowedSquadGroups: [UNMC]
   - type: SupplyDropComputer
   - type: GuideHelp
     guides:
@@ -160,6 +164,7 @@
       enum.TacticalMapComputerUi.Key:
         type: TacticalMapComputerBui
   - type: TacticalMapComputer
+    allowedSquadGroups: [UNMC]
   - type: EmitSoundOnUIOpen
     sound: null
   - type: GuideHelp
@@ -194,6 +199,7 @@
       enum.TacticalMapComputerUi.Key:
         type: TacticalMapComputerBui
   - type: TacticalMapComputer
+    allowedSquadGroups: [UNMC]
   - type: EmitSoundOnUIOpen
     sound: null
   - type: ApcPowerReceiver
@@ -294,6 +300,9 @@
   components:
   - type: EvacuationComputer
     earlyCrashChance: 0
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "RMCAccessWeYa" ] ]
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
@@ -312,6 +321,7 @@
       enum.LifeboatComputerUi.Key:
         type: LifeboatComputerBui
   - type: LifeboatComputer
+  - type: ActivatableUIRequiresAccess
   - type: AccessReader
     access: [ [ "CMAccessDropship" ], [ "RMCAccessSeniorCommand" ] ]
   - type: ActivatableUIBlacklist

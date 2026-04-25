@@ -8,3 +8,5 @@ ent-RMCEffectTailswipe = { ent-RMCEffectEmoteBase }
     .desc = { ent-RMCEffectEmoteBase.desc }
 ent-RMCEffectHug = { ent-RMCEffectEmoteBase }
     .desc = { ent-RMCEffectEmoteBase.desc }
+ent-RMCEffectHandshake = { ent-RMCEffectEmoteBase }
+    .desc = { ent-RMCEffectEmoteBase.desc }

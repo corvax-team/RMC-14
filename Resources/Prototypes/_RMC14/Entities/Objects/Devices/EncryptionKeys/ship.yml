@@ -517,6 +517,14 @@
     - MarineEngineer
     - MarineMedical
     - MarineRequisition
+    # CCM14-start
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    # CCM14-end
     defaultChannel: MarineCommand
   - type: Sprite
     state: cap_key

@@ -1,1 +1,1 @@
-rmc-low-power = низкий заряд
+rmc-low-power = Низкий заряд

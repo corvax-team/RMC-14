@@ -24,7 +24,7 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 namespace Content.Client.Credits;
 
 [GenerateTypedNameReferences]
-public sealed partial class CreditsWindow : DefaultWindow
+public sealed partial class CreditsWindow : DefaultCMWindow
 {
     [Dependency] private readonly IResourceManager _resourceManager = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
@@ -57,7 +57,6 @@ public sealed partial class CreditsWindow : DefaultWindow
         RobustXamlLoader.Load(this);
 
         TabContainer.SetTabTitle(Ss14ContributorsTab, Loc.GetString("credits-window-ss14contributorslist-tab"));
-        TabContainer.SetTabTitle(PatronsTab, Loc.GetString("credits-window-patrons-tab"));
         TabContainer.SetTabTitle(LicensesTab, Loc.GetString("credits-window-licenses-tab"));
         TabContainer.SetTabTitle(AttributionsTab, Loc.GetString("credits-window-attributions-tab"));
         TabContainer.SetTabTitle(OtherTab, Loc.GetString("rmc-other-credits-tab"));
@@ -374,7 +373,9 @@ public sealed partial class CreditsWindow : DefaultWindow
         }
 
         AddSection(Loc.GetString("credits-window-contributors-section-title"), "GitHub.txt");
-        AddSection(Loc.GetString("credits-window-cm-ss13-section-title"), "_RMC14/CM-SS13.txt");
+        AddSection(Loc.GetString("credits-window-boon"), "_RMC14/Boone.txt");  // RMC14
+        AddSection(Loc.GetString("credits-window-avali"), "_RMC14/Avali.txt"); // RMC14
+        AddSection(Loc.GetString("credits-window-cm-ss13-section-title"), "_RMC14/CM-SS13.txt"); // RMC14
         AddSection(Loc.GetString("credits-window-codebases-section-title"), "SpaceStation13.txt");
         AddSection(Loc.GetString("credits-window-original-remake-team-section-title"), "OriginalRemake.txt");
         AddSection(Loc.GetString("credits-window-special-thanks-section-title"), "SpecialThanks.txt", true);
@@ -400,3 +401,4 @@ public sealed partial class CreditsWindow : DefaultWindow
         }
     }
 }
+

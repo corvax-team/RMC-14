@@ -23,6 +23,7 @@ namespace Content.Server.Database
         public DbSet<Profile> Profile { get; set; } = null!;
         public DbSet<AssignedUserId> AssignedUserId { get; set; } = null!;
         public DbSet<Player> Player { get; set; } = default!;
+        public DbSet<ProfileJobPriorityWeight> ProfileJobPriorityWeights { get; set; } = null!;
         public DbSet<Admin> Admin { get; set; } = null!;
         public DbSet<AdminRank> AdminRank { get; set; } = null!;
         public DbSet<Round> Round { get; set; } = null!;
@@ -61,6 +62,11 @@ namespace Content.Server.Database
         public DbSet<RMCSquadPreference> RMCSquadPreferences { get; set; } = default!;
         public DbSet<RMCCommendation> RMCCommendations { get; set; } = default!;
         public DbSet<RMCPlayerStats> RMCPlayerStats { get; set; } = default!;
+        public DbSet<CCMPlayerStats> CCMPlayerStats { get; set; } = default!;
+        public DbSet<CCMPlayerMonthlyStats> CCMPlayerMonthlyStats { get; set; } = default!;
+        public DbSet<CCMPlayerAchievementStats> CCMPlayerAchievementStats { get; set; } = default!;
+        public DbSet<CCMPlayerCustomization> CCMPlayerCustomization { get; set; } = default!;
+        public DbSet<CCMRoundWinStats> CCMRoundWinStats { get; set; } = default!;
         public DbSet<RMCPlayerActionOrder> RMCPlayerActionOrder { get; set; } = default!;
         public DbSet<RMCChatBans> RMCPlayerChatBans { get; set; } = default!;
 
@@ -85,6 +91,34 @@ namespace Content.Server.Database
             modelBuilder.Entity<Profile>()
                 .Property(p => p.XenoPostfix)
                 .HasDefaultValue(string.Empty);
+
+            // CCM barks - start
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.BarkVoice)
+                .HasDefaultValue("BarkMaleVoice01");
+
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.BarkPitch)
+                .HasDefaultValue(1f);
+
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.BarkSpeed)
+                .HasDefaultValue(1f);
+            // CCM barks - end
+
+            // CCM profile background - start
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.OriginId)
+                .HasDefaultValue(string.Empty);
+
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.ReligionId)
+                .HasDefaultValue("agnostic");
+
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.CorporateRelationId)
+                .HasDefaultValue("neutral");
+            // CCM profile background - end
 
             modelBuilder.Entity<Antag>()
                 .HasIndex(p => new {HumanoidProfileId = p.ProfileId, p.AntagName})
@@ -114,11 +148,6 @@ namespace Content.Server.Database
 
             modelBuilder.Entity<Job>()
                 .HasIndex(j => j.ProfileId);
-
-            modelBuilder.Entity<Job>()
-                .HasIndex(j => j.ProfileId, "IX_job_one_high_priority")
-                .IsUnique()
-                .HasFilter("priority = 3");
 
             modelBuilder.Entity<Job>()
                 .HasIndex(j => new { j.ProfileId, j.JobName })
@@ -423,6 +452,13 @@ namespace Content.Server.Database
                 .HasPrincipalKey<Player>(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<CCMPlayerCustomization>()
+                .HasOne(c => c.Player)
+                .WithOne()
+                .HasForeignKey<CCMPlayerCustomization>(c => c.PlayerId)
+                .HasPrincipalKey<Player>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<RMCPatron>()
                 .HasOne(p => p.Tier)
                 .WithMany(t => t.Patrons)
@@ -483,10 +519,41 @@ namespace Content.Server.Database
                 .HasPrincipalKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<RMCCommendation>()
+                .HasOne(r => r.DeletedBy)
+                .WithMany(p => p.CommendationsDeleted)
+                .HasForeignKey(r => r.DeletedById)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
             modelBuilder.Entity<RMCPlayerStats>()
                 .HasOne(s => s.Player)
                 .WithOne(p => p.Stats)
                 .HasForeignKey<RMCPlayerStats>(p => p.PlayerId)
+                .HasPrincipalKey<Player>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CCMPlayerStats>()
+                .HasOne(s => s.Player)
+                .WithOne(p => p.CCMStats)
+                .HasForeignKey<CCMPlayerStats>(p => p.PlayerId)
+                .HasPrincipalKey<Player>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CCMPlayerMonthlyStats>()
+                .HasKey(s => new { s.PlayerId, s.Year, s.Month });
+
+            modelBuilder.Entity<CCMPlayerMonthlyStats>()
+                .HasOne(s => s.Player)
+                .WithMany(p => p.CCMMonthlyStats)
+                .HasForeignKey(s => s.PlayerId)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CCMPlayerAchievementStats>()
+                .HasOne(s => s.Player)
+                .WithOne(p => p.CCMAchievementStats)
+                .HasForeignKey<CCMPlayerAchievementStats>(p => p.PlayerId)
                 .HasPrincipalKey<Player>(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -593,6 +660,12 @@ namespace Content.Server.Database
         public bool PlaytimePerks { get; set; } = true;
         public string XenoPrefix { get; set; } = string.Empty;
         public string XenoPostfix { get; set; } = string.Empty;
+        public string BarkVoice { get; set; } = "BarkMaleVoice01";
+        public float BarkPitch { get; set; } = 1f;
+        public float BarkSpeed { get; set; } = 1f;
+        public string OriginId { get; set; } = string.Empty;
+        public string ReligionId { get; set; } = "agnostic";
+        public string CorporateRelationId { get; set; } = "neutral";
     }
 
     public class Job
@@ -605,13 +678,29 @@ namespace Content.Server.Database
         public DbJobPriority Priority { get; set; }
     }
 
+    [PrimaryKey(nameof(PlayerUserId), nameof(Slot), nameof(JobName))]
+    public class ProfileJobPriorityWeight
+    {
+        [Required]
+        public Guid PlayerUserId { get; set; }
+
+        public int Slot { get; set; }
+
+        [Required]
+        public string JobName { get; set; } = null!;
+
+        public int MissedRounds { get; set; }
+
+        public int? LastAssignedRoundId { get; set; }
+    }
+
     public enum DbJobPriority
     {
         // These enum values HAVE to match the ones in JobPriority in Content.Shared
         Never = 0,
-        Low = 1,
-        Medium = 2,
-        High = 3
+        Second = 1,
+        SecondFallback = 2,
+        First = 3
     }
 
     public class Antag
@@ -773,7 +862,11 @@ namespace Content.Server.Database
         public List<RMCRoleTimerExclude> RoleTimerExcludes { get; set; } = default!;
         public List<RMCCommendation> CommendationsGiven { get; set; } = default!;
         public List<RMCCommendation> CommendationsReceived { get; set; } = default!;
+        public List<RMCCommendation> CommendationsDeleted { get; set; } = default!;
         public RMCPlayerStats Stats { get; set; } = default!;
+        public CCMPlayerStats? CCMStats { get; set; }
+        public CCMPlayerAchievementStats? CCMAchievementStats { get; set; }
+        public List<CCMPlayerMonthlyStats> CCMMonthlyStats { get; set; } = default!;
         public List<RMCPlayerActionOrder> ActionOrder { get; set; } = default!;
         public List<RMCChatBans> ChatBans { get; set; } = default!;
         public List<RMCChatBans> AdminChatBansCreated { get; set; } = default!;
@@ -1517,3 +1610,5 @@ namespace Content.Server.Database
         public float Score { get; set; }
     }
 }
+
+// # CCM priority rework

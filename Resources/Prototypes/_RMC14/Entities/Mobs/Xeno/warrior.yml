@@ -63,6 +63,8 @@
     evolvesTo:
     - RMCXenoCrusher
     - CMXenoPraetorian
+    strains: # CCM Change
+    - CCMXenoWarriorBoxer # CCM Change
   - type: CMArmor
     xenoArmor: 20
     explosionArmor: 40

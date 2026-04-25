@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
 using System.Numerics;
 using Content.Server.Administration.Logs;
@@ -542,8 +543,8 @@ namespace Content.Server.Ghost
             {
                 if (_player.TryGetSessionById(mind.UserId, out var session)) // Logging is suppressed to prevent spam from ghost attempts caused by movement attempts
                 {
-                    _chatManager.DispatchServerMessage(session, Loc.GetString("comp-mind-ghosting-prevented"),
-                        true);
+                    _chatManager.DispatchServerMessageLoc(session, "comp-mind-ghosting-prevented",
+                        suppressLog: true);
                 }
 
                 return false;

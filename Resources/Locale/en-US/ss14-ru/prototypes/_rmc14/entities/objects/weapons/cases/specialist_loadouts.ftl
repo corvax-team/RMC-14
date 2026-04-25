@@ -10,7 +10,7 @@ ent-RMCAntiMaterielEquipmentCase = anti-materiel sniper equipment case
         NOTE: You cannot put items back inside this case.
 ent-RMCGrenadeSpecEquipmentCase = heavy grenadier equipment case
     .desc =
-        A large case containing a heavy-duty multi-shot M83 grenade launcher, M3-G4 grenadier armor and helmet, significant amount of various M40 grenades and additional pieces of equipment.
+        A large case containing a heavy-duty multi-shot M83 grenade launcher, M3-G4 grenadier armor and helmet, significant amount of various 30mm grenades and additional pieces of equipment.
         
         NOTE: You cannot put items back inside this case.
 ent-RMCDemoSpecEquipmentCase = demolitionist equipment case
@@ -21,6 +21,10 @@ ent-RMCDemoSpecEquipmentCase = demolitionist equipment case
 ent-RMCScoutSpecEquipmentCase = scout equipment case
     .desc =
         A large case containing an M4SPR custom battle rifle, M3-S light armor and helmet, M4SPR battle sight, M68 thermal cloak, V3 reactive thermal tarp, ammunition and additional pieces of equipment.
+        NOTE: You cannot put items back inside this case.
+ent-RMCPyroSpecEquipmentCase = pyrotechnician equipment case
+    .desc =
+        A large case containing M34-T incinerator unit, M35 pyrotechnician armor and helmet, Broiler-T flexible refueling system and additional pieces of equipment.
         NOTE: You cannot put items back inside this case.
 ent-RMCKitLoader = loader kit
     .desc =

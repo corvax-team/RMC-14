@@ -1,0 +1,513 @@
+- type: entity
+  parent: RMCAreaBase
+  id: CCMAreaGlacius
+  suffix: Glacius
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas.rsi
+    state: blank
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#6C6767D8'
+    landingZone: false
+
+- type: entity
+  parent:
+  - RMCAreaMax
+  - CCMAreaGlacius
+  id: CCMAreaGlaciusInteriorOob
+  name: Glacius - Out Of Bounds
+  suffix: Glacius
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: oob
+  - type: Area
+    resinAllowed: false
+    avoidBioscan: False
+    noTunnel: True
+    unweedable: False
+
+- type: entity
+  parent:
+  - RMCAreaProtectionZero
+  - CCMAreaGlacius
+  id: CCMAreaGlaciusGround
+  suffix: No mapping
+  name: Ground
+  components:
+  - type: Sprite
+    state: yellow
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent:
+  - RMCAreaProtectionOne
+  - CCMAreaPolyphemus
+  id: CCMAreaGlaciusClosedArea
+  name: Closed area
+  components:
+  - type: Sprite
+    sprite: _CCM14/Areas/areas.rsi
+    state: red
+  - type: Area
+    buildSpecial: true
+    CAS: false
+    fulton: true
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  id: CCMAreaGlaciusFullProtection
+  abstract: true
+  name: GlaciusFullProtection
+  suffix: Glacius
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: oob
+  - type: Area
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  id: CCMAreaGlaciusZeroProtection
+  abstract: true
+  name: GlaciusZeroProtection
+  suffix: Glacius
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: oob
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusLandingHeadquarters
+  name: Glacius Landing Area and Headquarters
+  components:
+  - type: Sprite
+    state: head_quarters
+  - type: Area
+    minimapColor: '#6798A3D8'
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz1
+    paradropping: true
+    weatherEnabled: true
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusNorthwestCaves
+  name: Northwest - Caves
+  components:
+  - type: Sprite
+    state: northwest
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    paradropping: true
+    weatherEnabled: true
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusSouthwestCaves
+  name: Southwest - Caves
+  components:
+  - type: Sprite
+    state: southwest
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    paradropping: true
+    weatherEnabled: true
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusNortheastCaves
+  name: Northeast - Caves
+  components:
+  - type: Sprite
+    state: northeast
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    paradropping: true
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusSoutheastCaves
+  name: Southeast - Caves
+  components:
+  - type: Sprite
+    state: southeast
+  - type: Area
+    minimapColor: '#6C6767D8'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusSecurity
+  name: Security Service
+  components:
+  - type: Sprite
+    state: anolab
+  - type: Area
+    minimapColor: '#8D1826'
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusSouthEastComplex
+  name: South-East Scientific Complex
+  components:
+  - type: Sprite
+    state: anolab
+  - type: Area
+    minimapColor: '#67289E'
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusCentralComplex
+  name: Central Scientific Complex
+  components:
+  - type: Sprite
+    state: bunker01_caves_outpost
+  - type: Area
+    minimapColor: '#67289E'
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusResidentialComplex
+  name: Residential complex
+  components:
+  - type: Sprite
+    state: bunker01_caves_outpost
+  - type: Area
+    minimapColor: '#67289E'
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusEngineeringDepartment
+  name: Engineering department
+  components:
+  - type: Sprite
+    state: bunker01_caves_outpost
+  - type: Area
+    minimapColor: '#67289E'
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusServerRoom
+  name: Server room
+  components:
+  - type: Sprite
+    state: bunker01_caves_outpost
+  - type: Area
+    minimapColor: '#67289E'
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusWarehouse
+  name: Warehouse
+  components:
+  - type: Sprite
+    state: bunker01_caves_outpost
+  - type: Area
+    minimapColor: '#67289E'
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusRunway
+  name: Runway
+  components:
+  - type: Sprite
+    state: bunker01_caves_outpost
+  - type: Area
+    minimapColor: '#67289E'
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusRestRoom
+  name: Rest room
+  components:
+  - type: Sprite
+    state: bunker01_caves_outpost
+  - type: Area
+    minimapColor: '#67289E'
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusOffice
+  name: Office
+  components:
+  - type: Sprite
+    state: bunker01_caves_outpost
+  - type: Area
+    minimapColor: '#67289E'
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusBunker
+  name: Bunker
+  components:
+  - type: Sprite
+    state: bunker01_caves_outpost
+  - type: Area
+    minimapColor: '#67289E'
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusStreet
+  name: Street
+  components:
+  - type: Sprite
+    state: bunker01_caves_outpost
+  - type: Area
+    minimapColor: '#555555'
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    paradropping: true
+    weatherEnabled: true
+
+- type: entity
+  parent:
+  - CCMAreaGlacius
+  - CCMAreaGlaciusZeroProtection
+  id: CCMAreaGlaciusLandingZone
+  name: Landing zone
+  components:
+  - type: Sprite
+    state: red2
+  - type: Area
+    minimapColor: '#6C6767D8'
+    noTunnel: True
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    landingZone: true
+    linkedLz: dropship_lz1
+    paradropping: false
+    weatherEnabled: true

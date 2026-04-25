@@ -1,3 +1,5 @@
+// CM14 rework: non-RMC edit marker.
+using Prometheus; // # CCM14 (add metrics)
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -85,6 +87,30 @@ namespace Content.Server.Administration.Systems
         // RMC14
         public Dictionary<NetUserId, DiscordRelayInteraction> RMCRelayMessages => _relayMessages;
 
+// # CCM14 start (add metrics)
+
+private static readonly Histogram AhelpFirstResponseTime = Metrics
+    .CreateHistogram("ahelp_first_response_seconds",
+        "Time until first admin response",
+        new HistogramConfiguration
+        {
+            Buckets = Histogram.ExponentialBuckets(1, 1.5, 18)
+        });
+
+private static readonly Counter AhelpFirstResponsesTotal = Metrics
+    .CreateCounter("ahelp_first_responses_total",
+        "Total number of first responses by admins",
+        new CounterConfiguration
+        {
+            LabelNames = new[] { "admin" }
+        });
+
+private readonly Dictionary<NetUserId, DateTime> _ahelpStartTime = new();
+
+private readonly HashSet<NetUserId> _ahelpCounted = new();
+
+// # CCM14 end (add metrics)
+
         public override void Initialize()
         {
             base.Initialize();
@@ -111,7 +137,14 @@ namespace Content.Server.Administration.Systems
 
             SubscribeLocalEvent<GameRunLevelChangedEvent>(OnGameRunLevelChanged);
             SubscribeNetworkEvent<BwoinkClientTypingUpdated>(OnClientTypingUpdated);
-            SubscribeLocalEvent<RoundRestartCleanupEvent>(_ => _activeConversations.Clear());
+            // # CCM14 start (add metrics)
+            SubscribeLocalEvent<RoundRestartCleanupEvent>(_ =>
+            {
+                _activeConversations.Clear();
+                _ahelpStartTime.Clear();
+                _ahelpCounted.Clear();
+            });
+            // # CCM14 end (add metrics)
 
         	_rateLimit.Register(
                 RateLimitKey,
@@ -150,9 +183,9 @@ namespace Content.Server.Administration.Systems
 
         private void PlayerRateLimitedAction(ICommonSession obj)
         {
-            RaiseNetworkEvent(
-                new BwoinkTextMessage(obj.UserId, default, Loc.GetString("bwoink-system-rate-limited"), playSound: false),
-                obj.Channel);
+                SendBwoinkMessage(
+                obj.Channel,
+                new BwoinkTextMessage(obj.UserId, default, Loc.GetString("bwoink-system-rate-limited"), playSound: false));
         }
 
         private void OnOverrideChanged(string obj)
@@ -260,7 +293,7 @@ namespace Content.Server.Administration.Systems
             var admins = GetTargetAdmins();
             foreach (var admin in admins)
             {
-                RaiseNetworkEvent(bwoinkMessage, admin);
+                SendBwoinkMessage(admin, bwoinkMessage);
             }
 
             // Enqueue the message for Discord relay
@@ -643,6 +676,13 @@ namespace Content.Server.Administration.Systems
             var personalChannel = senderSession.UserId == message.UserId;
             var senderAdmin = _adminManager.GetAdminData(senderSession);
             var senderAHelpAdmin = senderAdmin?.HasFlag(AdminFlags.Adminhelp) ?? false;
+            // CCM-14 start (metrics)
+            HandleAhelpMetrics(
+            message.UserId,
+            personalChannel,
+            senderAHelpAdmin && !personalChannel,
+            senderSession.Name);
+            // CCM-14 end (metrics)
             var authorized = personalChannel && !message.AdminOnly || senderAHelpAdmin;
             if (!authorized)
             {
@@ -692,7 +732,7 @@ namespace Content.Server.Administration.Systems
             // Notify all admins
             foreach (var channel in admins)
             {
-                RaiseNetworkEvent(msg, channel);
+                SendBwoinkMessage(channel, msg);
             }
 
             string adminPrefixWebhook = "";
@@ -729,14 +769,14 @@ namespace Content.Server.Administration.Systems
 
                         overrideMsgText = $"{(message.PlaySound ? "" : "(S) ")}{overrideMsgText}: {escapedText}";
 
-                        RaiseNetworkEvent(new BwoinkTextMessage(message.UserId,
+                        SendBwoinkMessage(session.Channel,
+                            new BwoinkTextMessage(message.UserId,
                                 senderSession.UserId,
                                 overrideMsgText,
-                                playSound: playSound),
-                            session.Channel);
+                                playSound: playSound));
                     }
                     else
-                        RaiseNetworkEvent(msg, session.Channel);
+                        SendBwoinkMessage(session.Channel, msg);
                 }
             }
 
@@ -774,7 +814,7 @@ namespace Content.Server.Administration.Systems
             // No admin online, let the player know
             var systemText = Loc.GetString("bwoink-system-starmute-message-no-other-users");
             var starMuteMsg = new BwoinkTextMessage(message.UserId, SystemUserId, systemText);
-            RaiseNetworkEvent(starMuteMsg, senderSession.Channel);
+            SendBwoinkMessage(senderSession.Channel, starMuteMsg);
         }
 
         private IList<INetChannel> GetNonAfkAdmins()
@@ -794,6 +834,34 @@ namespace Content.Server.Administration.Systems
                 .ToList();
         }
 
+       // CCM-14 start (metrics)
+        private void HandleAhelpMetrics(
+            NetUserId userId,
+            bool isPlayerMessage,
+            bool isAdminResponse,
+            string adminName)
+        {
+            if (isPlayerMessage && !_ahelpStartTime.ContainsKey(userId))
+            {
+                _ahelpStartTime[userId] = DateTime.UtcNow;
+                return;
+            }
+
+            if (isAdminResponse &&
+                !_ahelpCounted.Contains(userId) &&
+                _ahelpStartTime.TryGetValue(userId, out var startTime))
+            {
+                var seconds = (DateTime.UtcNow - startTime).TotalSeconds;
+
+                AhelpFirstResponseTime.Observe(seconds);
+                AhelpFirstResponsesTotal.WithLabels(adminName).Inc();
+
+                _ahelpCounted.Add(userId);
+
+                _ahelpStartTime.Remove(userId);
+            }
+        }
+       // CCM-14 end (metrics)
         private DiscordRelayedData GenerateAHelpMessage(AHelpMessageParams parameters)
         {
             var stringbuilder = new StringBuilder();

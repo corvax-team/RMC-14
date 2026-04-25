@@ -46,6 +46,8 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => !p.Components.ContainsKey("RoomFill")) // This comp can delete all entities, and spawn others
                     .Where(p => !p.Components.ContainsKey("HiveKingCocoon")) // Spawns an (audio) announcement.
                     .Where(p => !p.Components.ContainsKey("HivePylon")) // Spawn an (audio) announcement on deletion.
+                    .Where(p => !p.Components.ContainsKey("SpawnOnTerminate")) // CCM14
+                    .Where(p => !p.Components.ContainsKey("RMCMesonsNonviewable")) // CCM14
                     .Select(p => p.ID)
                     .ToList();
             });
@@ -192,6 +194,7 @@ namespace Content.IntegrationTests.Tests
                 .Where(p => !p.Components.ContainsKey("MapGrid")) // This will smash stuff otherwise.
                 .Where(p => !p.Components.ContainsKey("HiveKingCocoon")) // Spawns an (audio) announcement.
                 .Where(p => !p.Components.ContainsKey("HivePylon")) // Spawn an (audio) announcement on deletion.
+                .Where(p => !p.Components.ContainsKey("SpawnOnTerminate")) // CCM14
                 .Select(p => p.ID)
                 .ToList();
 

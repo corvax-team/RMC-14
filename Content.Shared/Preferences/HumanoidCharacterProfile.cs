@@ -1,5 +1,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
+using Content.Shared._CCM.Barks;
+using Content.Shared._CCM.Preferences;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared._RMC14.Xenonids.Name;
@@ -38,7 +40,7 @@ namespace Content.Shared.Preferences
         private Dictionary<ProtoId<JobPrototype>, JobPriority> _jobPriorities = new()
         {
             {
-                SharedGameTicker.FallbackOverflowJob, JobPriority.High
+                SharedGameTicker.FallbackOverflowJob, JobPriority.First
             }
         };
 
@@ -101,7 +103,7 @@ namespace Content.Shared.Preferences
         /// When spawning into a round what's the preferred spot to spawn.
         /// </summary>
         [DataField]
-        public SpawnPriorityPreference SpawnPriority { get; private set; } = SpawnPriorityPreference.None;
+        public SpawnPriorityPreference SpawnPriority { get; private set; } = SpawnPriorityPreference.Cryosleep;
 
         /// <summary>
         /// When selecting armor from a vendor, what armor is preferred.
@@ -149,6 +151,30 @@ namespace Content.Shared.Preferences
         [DataField]
         public string XenoPostfix { get; private set; } = string.Empty;
 
+        [DataField]
+        public bool AlwaysRandomName { get; private set; }
+
+        [DataField]
+        public bool AlwaysRandomAppearance { get; private set; }
+
+        [DataField]
+        public string OriginId { get; private set; } = string.Empty;
+
+        [DataField]
+        public string ReligionId { get; private set; } = "agnostic";
+
+        [DataField]
+        public string CorporateRelationId { get; private set; } = "neutral";
+
+        [DataField]
+        public string BarkVoice { get; private set; } = BarkPrototype.Default;
+
+        [DataField]
+        public float BarkPitch { get; private set; } = 1f;
+
+        [DataField]
+        public float BarkSpeed { get; private set; } = 1f;
+
         public HumanoidCharacterProfile(
             string name,
             string flavortext,
@@ -168,7 +194,15 @@ namespace Content.Shared.Preferences
             SharedRMCNamedItems namedItems,
             bool playtimePerks,
             string xenoPrefix,
-            string xenoPostfix)
+            string xenoPostfix,
+            bool alwaysRandomName,
+            bool alwaysRandomAppearance,
+            string originId,
+            string religionId,
+            string corporateRelationId,
+            string barkVoice,
+            float barkPitch,
+            float barkSpeed)
         {
             Name = name;
             FlavorText = flavortext;
@@ -188,24 +222,20 @@ namespace Content.Shared.Preferences
             _traitPreferences = traitPreferences;
             _loadouts = loadouts;
 
-            var hasHighPrority = false;
-            foreach (var (key, value) in _jobPriorities)
-            {
-                if (value == JobPriority.Never)
-                    _jobPriorities.Remove(key);
-                else if (value != JobPriority.High)
-                    continue;
-
-                if (hasHighPrority)
-                    _jobPriorities[key] = JobPriority.Medium;
-
-                hasHighPrority = true;
-            }
+            _jobPriorities = NormalizeJobPriorities(_jobPriorities);
 
             NamedItems = namedItems;
             PlaytimePerks = playtimePerks;
             XenoPrefix = xenoPrefix;
             XenoPostfix = xenoPostfix;
+            AlwaysRandomName = alwaysRandomName;
+            AlwaysRandomAppearance = alwaysRandomAppearance;
+            OriginId = originId;
+            ReligionId = religionId;
+            CorporateRelationId = corporateRelationId;
+            BarkVoice = barkVoice;
+            BarkPitch = barkPitch;
+            BarkSpeed = barkSpeed;
         }
 
         /// <summary>Copy constructor</summary>
@@ -228,7 +258,15 @@ namespace Content.Shared.Preferences
                 other.NamedItems,
                 other.PlaytimePerks,
                 other.XenoPrefix,
-                other.XenoPostfix)
+                other.XenoPostfix,
+                other.AlwaysRandomName,
+                other.AlwaysRandomAppearance,
+                other.OriginId,
+                other.ReligionId,
+                other.CorporateRelationId,
+                other.BarkVoice,
+                other.BarkPitch,
+                other.BarkSpeed)
         {
         }
 
@@ -263,10 +301,10 @@ namespace Content.Shared.Preferences
                 Sex.Male,
                 Gender.Male,
                 HumanoidCharacterAppearance.DefaultWithSpecies(species),
-                SpawnPriorityPreference.None,
-                ArmorPreference.Random,
+                SpawnPriorityPreference.Cryosleep,
+                ArmorPreference.None,
                 null,
-                new() { { SharedGameTicker.FallbackOverflowJob, JobPriority.High } },
+                new() { { SharedGameTicker.FallbackOverflowJob, JobPriority.First } },
                 PreferenceUnavailableMode.SpawnAsOverflow,
                 new(),
                 new(),
@@ -274,7 +312,15 @@ namespace Content.Shared.Preferences
                 new SharedRMCNamedItems(),
                 false,
                 string.Empty,
-                string.Empty
+                string.Empty,
+                false,
+                false,
+                string.Empty,
+                "agnostic",
+                "neutral",
+                BarkPrototype.Default,
+                1f,
+                1f
             );
         }
 
@@ -337,10 +383,10 @@ namespace Content.Shared.Preferences
                 sex,
                 gender,
                 HumanoidCharacterAppearance.Random(species, sex),
-                SpawnPriorityPreference.None,
-                ArmorPreference.Random,
+                SpawnPriorityPreference.Cryosleep,
+                ArmorPreference.None,
                 null,
-                new() { { SharedGameTicker.FallbackOverflowJob, JobPriority.High } },
+                new() { { SharedGameTicker.FallbackOverflowJob, JobPriority.First } },
                 PreferenceUnavailableMode.SpawnAsOverflow,
                 new(),
                 new(),
@@ -348,7 +394,15 @@ namespace Content.Shared.Preferences
                 new SharedRMCNamedItems(),
                 false,
                 string.Empty,
-                string.Empty
+                string.Empty,
+                false,
+                false,
+                string.Empty,
+                "agnostic",
+                "neutral",
+                BarkPrototype.Default,
+                1f,
+                1f
             );
         }
 
@@ -422,23 +476,50 @@ namespace Content.Shared.Preferences
             return new(this) { XenoPostfix = postfix };
         }
 
+        public HumanoidCharacterProfile WithAlwaysRandomName(bool value)
+        {
+            return new(this) { AlwaysRandomName = value };
+        }
+
+        public HumanoidCharacterProfile WithAlwaysRandomAppearance(bool value)
+        {
+            return new(this) { AlwaysRandomAppearance = value };
+        }
+
+        public HumanoidCharacterProfile WithOriginId(string originId)
+        {
+            return new(this) { OriginId = originId };
+        }
+
+        public HumanoidCharacterProfile WithReligionId(string religionId)
+        {
+            return new(this) { ReligionId = religionId };
+        }
+
+        public HumanoidCharacterProfile WithCorporateRelationId(string corporateRelationId)
+        {
+            return new(this) { CorporateRelationId = corporateRelationId };
+        }
+
+        public HumanoidCharacterProfile WithBarkVoice(string barkVoice)
+        {
+            return new(this) { BarkVoice = barkVoice };
+        }
+
+        public HumanoidCharacterProfile WithBarkPitch(float barkPitch)
+        {
+            return new(this) { BarkPitch = barkPitch };
+        }
+
+        public HumanoidCharacterProfile WithBarkSpeed(float barkSpeed)
+        {
+            return new(this) { BarkSpeed = barkSpeed };
+        }
+
         public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<ProtoId<JobPrototype>, JobPriority>> jobPriorities)
         {
             var dictionary = new Dictionary<ProtoId<JobPrototype>, JobPriority>(jobPriorities);
-            var hasHighPrority = false;
-
-            foreach (var (key, value) in dictionary)
-            {
-                if (value == JobPriority.Never)
-                    dictionary.Remove(key);
-                else if (value != JobPriority.High)
-                    continue;
-
-                if (hasHighPrority)
-                    dictionary[key] = JobPriority.Medium;
-
-                hasHighPrority = true;
-            }
+            dictionary = NormalizeJobPriorities(dictionary);
 
             return new(this)
             {
@@ -453,20 +534,10 @@ namespace Content.Shared.Preferences
             {
                 dictionary.Remove(jobId);
             }
-            else if (priority == JobPriority.High)
-            {
-                // There can only ever be one high priority job.
-                foreach (var (job, value) in dictionary)
-                {
-                    if (value == JobPriority.High)
-                        dictionary[job] = JobPriority.Medium;
-                }
-
-                dictionary[jobId] = priority;
-            }
             else
             {
-                dictionary[jobId] = priority;
+                dictionary[jobId] = priority.NormalizeSecond();
+                EnforceFirstPriorityLimit(dictionary, jobId);
             }
 
             return new(this)
@@ -594,6 +665,9 @@ namespace Content.Shared.Preferences
             if (PlaytimePerks != other.PlaytimePerks) return false;
             if (XenoPrefix != other.XenoPrefix) return false;
             if (XenoPostfix != other.XenoPostfix) return false;
+            if (BarkVoice != other.BarkVoice) return false;
+            if (Math.Abs(BarkPitch - other.BarkPitch) > 0.0001f) return false;
+            if (Math.Abs(BarkSpeed - other.BarkSpeed) > 0.0001f) return false;
             return Appearance.MemberwiseEquals(other.Appearance);
         }
 
@@ -687,34 +761,19 @@ namespace Content.Shared.Preferences
                 _ => PreferenceUnavailableMode.StayInLobby // Invalid enum values.
             };
 
-            var spawnPriority = SpawnPriority switch
-            {
-                SpawnPriorityPreference.None => SpawnPriorityPreference.None,
-                SpawnPriorityPreference.Arrivals => SpawnPriorityPreference.Arrivals,
-                SpawnPriorityPreference.Cryosleep => SpawnPriorityPreference.Cryosleep,
-                _ => SpawnPriorityPreference.None // Invalid enum values.
-            };
+            var spawnPriority = SpawnPriorityPreference.Cryosleep;
 
             var priorities = new Dictionary<ProtoId<JobPrototype>, JobPriority>(JobPriorities
                 .Where(p => prototypeManager.TryIndex<JobPrototype>(p.Key, out var job) && job.SetPreference && p.Value switch
                 {
                     JobPriority.Never => false, // Drop never since that's assumed default.
-                    JobPriority.Low => true,
-                    JobPriority.Medium => true,
-                    JobPriority.High => true,
+                    JobPriority.Second => true,
+                    JobPriority.SecondFallback => true,
+                    JobPriority.First => true,
                     _ => false
                 }));
 
-            var hasHighPrio = false;
-            foreach (var (key, value) in priorities)
-            {
-                if (value != JobPriority.High)
-                    continue;
-
-                if (hasHighPrio)
-                    priorities[key] = JobPriority.Medium;
-                hasHighPrio = true;
-            }
+            priorities = NormalizeJobPriorities(priorities);
 
             var antags = AntagPreferences
                 .Where(id => prototypeManager.TryIndex(id, out var antag) && antag.SetPreference)
@@ -734,14 +793,15 @@ namespace Content.Shared.Preferences
 
             var armorPreference = ArmorPreference switch
             {
-                ArmorPreference.Random => ArmorPreference.Random,
+                ArmorPreference.Random => ArmorPreference.None,
                 ArmorPreference.Padded => ArmorPreference.Padded,
                 ArmorPreference.Padless => ArmorPreference.Padless,
                 ArmorPreference.Ridged => ArmorPreference.Ridged,
                 ArmorPreference.Carrier => ArmorPreference.Carrier,
                 ArmorPreference.Skull => ArmorPreference.Skull,
                 ArmorPreference.Smooth => ArmorPreference.Smooth,
-                _ => ArmorPreference.Random // Invalid enum values.
+                ArmorPreference.None => ArmorPreference.None,
+                _ => ArmorPreference.None // Invalid enum values.
             };
 
             ArmorPreference = armorPreference;
@@ -839,6 +899,17 @@ namespace Content.Shared.Preferences
 
                 XenoPostfix = ValidateXenoName(XenoPostfix, true);
             }
+
+            // CCM barks - start
+            if (!prototypeManager.TryIndex<BarkPrototype>(BarkVoice, out var barkPrototype) ||
+                !barkPrototype.RoundStart)
+            {
+                BarkVoice = BarkPrototype.Default;
+            }
+
+            BarkPitch = Math.Clamp(BarkPitch, 0.7f, 1.4f);
+            BarkSpeed = Math.Clamp(BarkSpeed, 0.7f, 1.4f);
+            // CCM barks - end
         }
 
         /// <summary>
@@ -922,6 +993,9 @@ namespace Content.Shared.Preferences
             hashCode.Add(PlaytimePerks);
             hashCode.Add(XenoPrefix);
             hashCode.Add(XenoPostfix);
+            hashCode.Add(BarkVoice);
+            hashCode.Add(BarkPitch);
+            hashCode.Add(BarkSpeed);
             return hashCode.ToHashCode();
         }
 
@@ -972,5 +1046,58 @@ namespace Content.Shared.Preferences
         {
             return new HumanoidCharacterProfile(this);
         }
+
+        private static Dictionary<ProtoId<JobPrototype>, JobPriority> NormalizeJobPriorities(
+            Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities)
+        {
+            var normalized = new Dictionary<ProtoId<JobPrototype>, JobPriority>(jobPriorities.Count);
+            foreach (var (key, value) in jobPriorities)
+            {
+                if (value == JobPriority.Never)
+                    continue;
+
+                normalized[key] = value.NormalizeSecond();
+            }
+
+            EnforceFirstPriorityLimit(normalized, null);
+            return normalized;
+        }
+
+        private static void EnforceFirstPriorityLimit(
+            Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities,
+            ProtoId<JobPrototype>? preferredJob)
+        {
+            var firstJobs = jobPriorities
+                .Where(kvp => kvp.Value.IsFirst())
+                .Select(kvp => kvp.Key)
+                .ToList();
+
+            if (firstJobs.Count <= 2)
+                return;
+
+            var keep = new HashSet<ProtoId<JobPrototype>>();
+            if (preferredJob is { } preferred &&
+                jobPriorities.TryGetValue(preferred, out var preferredPriority) &&
+                preferredPriority.IsFirst())
+            {
+                keep.Add(preferred);
+            }
+
+            foreach (var job in firstJobs)
+            {
+                if (keep.Count >= 2)
+                    break;
+
+                keep.Add(job);
+            }
+
+            foreach (var job in firstJobs)
+            {
+                if (!keep.Contains(job))
+                    jobPriorities[job] = JobPriority.Second;
+            }
+        }
     }
 }
+
+// # CCM priority rework

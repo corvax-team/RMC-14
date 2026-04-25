@@ -2,11 +2,11 @@
 
 - type: reaction
   id: RMCCherryJelly
-  minTemp: 342
+#  minTemp: 342 # CCM14
   reactants:
     JuiceCherry:
       amount: 1
-    Sugar:
+    RMCSugar: # CCM14
       amount: 1
   products:
     RMCCherryJelly: 2
@@ -94,7 +94,7 @@
       amount: 0.5
     Coffee:
       amount: 1
-    Sugar:
+    RMCSugar: # CCM14
       amount: 1
   products:
     CoffeeLiqueur: 2
@@ -142,7 +142,7 @@
   reactants:
     Water:
       amount: 2
-    Sugar:
+    RMCSugar: # CCM14
       amount: 1
     RMCJuiceMango:
       amount: 2
@@ -245,8 +245,8 @@
       amount: 1
     Blackpepper:
       amount: 1
-    EggCooked:
-      amount: 5
+    Egg:
+      amount: 6 # CCM14
   effects:
   - !type:CreateEntityReactionEffect
     entity: FoodMealFriedegg

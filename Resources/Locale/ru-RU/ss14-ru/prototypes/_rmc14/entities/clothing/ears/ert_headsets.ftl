@@ -1,6 +1,7 @@
-ent-RMCHeadsetDistressWeYaColony = { ent-RMCHeadsetLiaison }
-    .suffix = Ве-Я, Колония
-    .desc = { ent-RMCHeadsetLiaison.desc }
 ent-RMCHeadsetDistressICBLiaison = гарнитура связного БМТ
-    .suffix = Ве-Я, Колония
+    .suffix = Vi, Колония
     .desc = { ent-RMCHeadsetLiaison.desc }
+ent-CMHeadsetCBRN = гарнитура РХБЗ
+    .desc = Гарнитура, выдаваемая морпехам подразделений РХБЗ.
+ent-CMHeadsetCBRNLeader = гарнитура лидера РХБЗ
+    .desc = Гарнитура, выдаваемая лидерам групп РХБЗ.

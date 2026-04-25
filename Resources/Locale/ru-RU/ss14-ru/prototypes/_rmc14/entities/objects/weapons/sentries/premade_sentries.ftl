@@ -1,2 +1,5 @@
-ent-RMCSentryPremade = turret
-    .desc = A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
+ent-RMCSentryPremade = турель
+    .desc = Развёртываемая полуавтоматическая турель с системой наведения под управлением ИИ. Вооружена автопушкой M30 и барабанным магазином на 500 патронов.
+ent-RMCSentryDropship = всенаправленная турель UE 571-D
+    .desc = Развёртываемая полуавтоматическая турель с системой наведения ИИ с углом обзора 360 градусов. Вооружена автопушкой M30 и барабанным магазином на 500 патронов.
+    .suffix = Развёрнута

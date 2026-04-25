@@ -99,6 +99,10 @@
     },
     {
       "name": "defender_downed_3"
+    },
+    {
+      "name": "thrown",
+      "directions": 4
     }
   ]
 }

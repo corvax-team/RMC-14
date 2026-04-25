@@ -1,3 +1,5 @@
+ent-RMCMagazineRifleM54CMK1Rubber = M54C MK1 rubber magazine (10x24mm)
+    .desc = A magazine of less-lethal rubber 10x24mm rounds for use in the M54C battle rifle.
 ent-RMCMagazineRifleM54CRubber = M54C rubber magazine (10x24mm)
     .desc = A magazine of less-lethal rubber 10x24mm rounds for use in the M54C battle rifle.
 ent-RMCMagazineRifleM4SPRRubber = M4SPR rubber magazine (10x24mm)

@@ -1,4 +1,4 @@
-<DefaultWindow xmlns="https://spacestation14.io"
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls" xmlns="https://spacestation14.io"
             Title="{Loc 'forensic-scanner-interface-title'}"
             MinSize="350 200"
             SetSize="350 500">
@@ -24,4 +24,5 @@
             Name="Diagnostics"
             Text="{Loc forensic-scanner-interface-no-data}"/>
     </BoxContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

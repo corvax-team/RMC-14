@@ -1,6 +1,6 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
 using System.Numerics;
-using Content.Client.CrewManifest;
 using Content.Client.GameTicking.Managers;
 using Content.Client.Lobby;
 using Content.Client.UserInterface.Controls;
@@ -23,7 +23,7 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client.LateJoin
 {
-    public sealed class LateJoinGui : DefaultWindow
+    public sealed class LateJoinGui : DefaultCMWindow
     {
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
@@ -37,7 +37,6 @@ namespace Content.Client.LateJoin
 
         private readonly ClientGameTicker _gameTicker;
         private readonly SpriteSystem _sprites;
-        private readonly CrewManifestSystem _crewManifest;
         private readonly ISawmill _sawmill;
 
         private readonly Dictionary<NetEntity, Dictionary<string, List<JobButton>>> _jobButtons = new();
@@ -48,10 +47,10 @@ namespace Content.Client.LateJoin
 
         public LateJoinGui()
         {
-            MinSize = SetSize = new Vector2(360, 560);
+            // CCM latejoin layout tweak: widen the window for expanded role rows.
+            MinSize = SetSize = new Vector2(540, 620);
             IoCManager.InjectDependencies(this);
             _sprites = _entitySystem.GetEntitySystem<SpriteSystem>();
-            _crewManifest = _entitySystem.GetEntitySystem<CrewManifestSystem>();
             _gameTicker = _entitySystem.GetEntitySystem<ClientGameTicker>();
             _sawmill = _logManager.GetSawmill("latejoin.panel");
 
@@ -133,17 +132,6 @@ namespace Content.Client.LateJoin
                     }
                 });
 
-                if (_configManager.GetCVar(CCVars.CrewManifestWithoutEntity))
-                {
-                    var crewManifestButton = new Button()
-                    {
-                        Text = Loc.GetString("crew-manifest-button-label")
-                    };
-                    crewManifestButton.OnPressed += _ => _crewManifest.RequestCrewManifest(id);
-
-                    _base.AddChild(crewManifestButton);
-                }
-
                 var jobListScroll = new ScrollContainer()
                 {
                     VerticalExpand = true,
@@ -170,6 +158,14 @@ namespace Content.Client.LateJoin
                 var firstCategory = true;
                 var departments = _prototypeManager.EnumerateCM<DepartmentPrototype>().ToArray();
                 Array.Sort(departments, DepartmentUIComparer.Instance);
+
+                // Keep the main marine department at the top of the late-join list.
+                var marineDepartmentIndex = Array.FindIndex(departments, department => department.ID == "CMSquad");
+                if (marineDepartmentIndex > 0)
+                {
+                    (departments[0], departments[marineDepartmentIndex]) =
+                        (departments[marineDepartmentIndex], departments[0]);
+                }
 
                 _jobButtons[id] = new Dictionary<string, List<JobButton>>();
 
@@ -239,6 +235,10 @@ namespace Content.Client.LateJoin
                         };
 
                         var jobButton = new JobButton(jobLabel, prototype.ID, prototype.LocalizedName, value);
+                        // CCM latejoin layout tweak start
+                        jobButton.MinSize = new Vector2(0, 32);
+                        jobButton.HorizontalExpand = true;
+                        // CCM latejoin layout tweak end
 
                         var jobSelector = new BoxContainer
                         {
@@ -249,7 +249,9 @@ namespace Content.Client.LateJoin
                         var icon = new TextureRect
                         {
                             TextureScale = new Vector2(2, 2),
-                            VerticalAlignment = VAlignment.Center
+                            VerticalAlignment = VAlignment.Center,
+                            // CCM latejoin layout tweak: keep icon/text spacing stable in wider rows.
+                            Margin = new Thickness(2, 0, 6, 0),
                         };
 
                         var jobIcon = _prototypeManager.Index(prototype.Icon);
@@ -350,9 +352,13 @@ namespace Content.Client.LateJoin
 
         public JobButton(Label jobLabel, ProtoId<JobPrototype> jobId, string jobLocalisedName, int? amount)
         {
+            // CCM latejoin layout tweak start
             JobLabel = jobLabel;
             JobId = jobId;
             JobLocalisedName = jobLocalisedName;
+            JobLabel.HorizontalExpand = true;
+            JobLabel.ClipText = true;
+            // CCM latejoin layout tweak end
             RefreshLabel(amount);
             AddStyleClass(StyleClassButton);
             _initialised = true;
@@ -372,3 +378,4 @@ namespace Content.Client.LateJoin
         }
     }
 }
+

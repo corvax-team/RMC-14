@@ -1,7 +1,6 @@
 using Robust.Shared.GameStates;
-using Robust.Shared.Serialization;
 
-namespace Content.Shared.Alert;
+namespace Content.Shared._CCM.Alert;
 
 /// <summary>
 /// When present on a controlled entity, indicates that its HUD should display alerts
@@ -24,5 +23,5 @@ public sealed partial class CCMAlertsDisplayRelayComponent : Component
     /// as if the click originated from <see cref="Source"/>.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool InteractAsSource = false;
+    public bool InteractAsSource;
 }

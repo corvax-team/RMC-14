@@ -5,7 +5,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client.Weapons.Melee.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class MeleeSpeechWindow : DefaultWindow
+public sealed partial class MeleeSpeechWindow : DefaultCMWindow
 {
 
     public event Action<string>? OnBattlecryEntered;
@@ -24,5 +24,6 @@ public sealed partial class MeleeSpeechWindow : DefaultWindow
 	}
 
 }
+
 
 

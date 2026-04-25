@@ -6,3 +6,4 @@ rmc-cloak-forced-deactivate-self = Ваш плащ гаснет!
 rmc-cloak-forced-deactivate-others = Плащ { $user } гаснет!
 rmc-cloak-attempt-shoot = Ваш плащ не позволяет вам стрелять!
 rmc-cloak-attempt-prime = Ваш плащ не позволяет вам активировать гранату!
+rmc-cloak-attempt-mount-weapon = Ваш плащ не позволяет вам закрепить оружие!

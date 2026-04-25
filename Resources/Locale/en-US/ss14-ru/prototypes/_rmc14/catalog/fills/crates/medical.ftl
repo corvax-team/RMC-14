@@ -1,5 +1,7 @@
 ent-RMCCrateMedicalSurgery = surgery crate (tray,anesthetics,surgeon gear)
     .desc = { ent-CMCrateSecureSurgery.desc }
+ent-RMCCrateFieldDoctor = field doctor crate (replacement field doctor gear)
+    .desc = { ent-CMCrateSecureSurgery.desc }
 ent-RMCCrateMedicalBodyBag = body bag crate (x28)
     .desc = { ent-RMCCrateMedical.desc }
 ent-RMCCrateMedicalStasisBag = stasis bag crate (x3)

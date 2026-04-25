@@ -1,7 +1,10 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Diagnostics.CodeAnalysis;
+using Content.Client._CCM.Sponsorship;
 using System.Linq;
 using Content.Client._RMC14.PlayTimeTracking;
 using Content.Shared.CCVar;
+using Content.Shared._CCM.Sponsorship;
 using Content.Shared.Localizations;
 using Content.Shared.Players;
 using Content.Shared.Players.JobWhitelist;
@@ -34,6 +37,10 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
     private readonly List<string> _jobWhitelists = new();
 
     private ISawmill _sawmill = default!;
+    private bool _ccmSponsorshipHooked;
+    private bool _ccmSponsorshipStatusRequested;
+    private bool _ccmSponsorshipStatusReady;
+    private CCMSponsorshipSystem? _sponsorshipSystem;
 
     public event Action? Updated;
 
@@ -58,6 +65,10 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
             _roles.Clear();
             _jobWhitelists.Clear();
             _roleBans.Clear();
+            _ccmSponsorshipHooked = false;
+            _ccmSponsorshipStatusRequested = false;
+            _ccmSponsorshipStatusReady = false;
+            _sponsorshipSystem = null;
         }
     }
 
@@ -152,14 +163,20 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         if (requirements == null || !_cfg.GetCVar(CCVars.GameRoleTimers))
             return true;
 
+        // CCM sponsorship playtime bypass start
+        var ignorePlaytimeRequirements = HasUnlockedAllRoleTimers();
         var reasons = new List<string>();
         foreach (var requirement in requirements)
         {
+            if (ignorePlaytimeRequirements && JobRequirements.IsPlaytimeRequirement(requirement))
+                continue;
+
             if (requirement.Check(_entManager, _prototypes, profile, _roles, out var jobReason))
                 continue;
 
             reasons.Add(jobReason.ToMarkup());
         }
+        // CCM sponsorship playtime bypass end
 
         reason = reasons.Count == 0 ? null : FormattedMessage.FromMarkupOrThrow(string.Join('\n', reasons));
         return reason == null;
@@ -174,6 +191,10 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         // RMC14-Whitelist-Tweak-Start
         if (job.Whitelisted)
         {
+            // CCM sponsorship whitelist bypass: Sponsor III ignores job whitelist restrictions.
+            if (HasUnlockedWhitelistedRoles())
+                return true;
+
             if (IsWhitelistedInternal(job.ID))
                 return true;
         // RMC14-Whitelist-Tweak-Start
@@ -243,6 +264,23 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
 
     public IEnumerable<KeyValuePair<string, TimeSpan>> FetchPlaytimeJobIdByRoles()
     {
+        // CCM sponsorship playtime stats unlock start
+        if (HasUnlockedAllRoleTimers())
+        {
+            foreach (var job in _prototypes.EnumeratePrototypes<JobPrototype>())
+            {
+                if (!job.IsCM || job.Abstract || job.Hidden)
+                    continue;
+
+                yield return new KeyValuePair<string, TimeSpan>(
+                    job.ID,
+                    _roles.GetValueOrDefault(job.PlayTimeTracker, TimeSpan.Zero));
+            }
+
+            yield break;
+        }
+        // CCM sponsorship playtime stats unlock end
+
         // RMC14
         var jobsToMap = _prototypes.EnumeratePrototypes<JobPrototype>().ToArray();
         var trackers = new HashSet<ProtoId<PlayTimeTrackerPrototype>>();
@@ -265,6 +303,74 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
             }
         }
     }
+
+    // CCM sponsorship helpers start
+    public bool HasUnlockedAllRoleTimers()
+    {
+        var _ = EnsureCCMSponsorshipHook();
+        return _ccmSponsorshipStatusReady &&
+               _sponsorshipSystem?.LatestStatus?.Tier >= CCMSponsorshipTier.SponsorII;
+    }
+
+    public bool HasUnlockedWhitelistedRoles()
+    {
+        var _ = EnsureCCMSponsorshipHook();
+        return _ccmSponsorshipStatusReady &&
+               _sponsorshipSystem?.LatestStatus?.Tier >= CCMSponsorshipTier.SponsorIII;
+    }
+
+    public void RequestSponsorshipStatus()
+    {
+        var _ = EnsureCCMSponsorshipHook();
+        TryRequestCCMSponsorshipStatus();
+    }
+    // CCM sponsorship helpers end
+
+    // CCM sponsorship sync helpers start
+    private CCMSponsorshipSystem? EnsureCCMSponsorshipHook()
+    {
+        try
+        {
+            if (_sponsorshipSystem == null && !_entManager.TrySystem(out _sponsorshipSystem))
+                return null;
+        }
+        catch (NullReferenceException)
+        {
+            return null;
+        }
+        catch (InvalidOperationException)
+        {
+            return null;
+        }
+
+        if (_ccmSponsorshipHooked || _sponsorshipSystem == null)
+        {
+            TryRequestCCMSponsorshipStatus();
+            return _sponsorshipSystem;
+        }
+
+        _sponsorshipSystem.StatusReceived += OnCCMSponsorshipStatusReceived;
+        _ccmSponsorshipHooked = true;
+        TryRequestCCMSponsorshipStatus();
+        return _sponsorshipSystem;
+    }
+
+    // CCM sponsorship sync: refresh role availability after sponsorship status updates.
+    private void OnCCMSponsorshipStatusReceived(CCMSponsorshipStatusSnapshot _)
+    {
+        _ccmSponsorshipStatusReady = true;
+        Updated?.Invoke();
+    }
+
+    private void TryRequestCCMSponsorshipStatus()
+    {
+        if (_ccmSponsorshipStatusRequested || _sponsorshipSystem == null)
+            return;
+
+        _ccmSponsorshipStatusRequested = true;
+        _sponsorshipSystem.RequestStatus();
+    }
+    // CCM sponsorship sync helpers end
 
     public IReadOnlyDictionary<string, TimeSpan> GetPlayTimes(ICommonSession session)
     {

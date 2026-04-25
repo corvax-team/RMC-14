@@ -15,3 +15,5 @@ ent-RMCSpawnerEvacuationPodEastLiaison = { ent-RMCSpawnerEvacuationPodSouth }
     .desc = { ent-RMCSpawnerEvacuationPodSouth.desc }
 ent-RMCSpawnerLifeboat = спавнер спасательной шлюпки
     .desc = Определяет место спавна спасательной шлюпки.
+ent-RMCSpawnerLifeboatAthena = спавнер спасательной шлюпки
+    .desc = Определяет место спавна спасательной шлюпки.

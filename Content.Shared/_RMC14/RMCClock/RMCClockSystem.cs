@@ -18,7 +18,7 @@ public sealed class RMCClockSystem : EntitySystem
     {
         var owner = ent.Owner;
         var worldTime = (EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault()?.TimeOffset ?? TimeSpan.Zero) + _ticker.RoundDuration();
-        var worldDate = (EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault()?.DateOffset ?? DateTime.Today.AddYears(100))
+        var worldDate = (EntityQuery<GlobalTimeManagerComponent>().FirstOrDefault()?.DateOffset ?? DateTime.Today.AddYears(1000)) // CCM14
                         + worldTime;
         var time = worldDate.ToString("dd MMMM, yyyy - HH:mm");
 

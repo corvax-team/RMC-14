@@ -8,6 +8,8 @@ namespace Content.Client.UserInterface.Systems.Chat.Controls;
 [Virtual]
 public class ChatInputBox : PanelContainer
 {
+    private const float ChatInputHeight = 38f;
+
     public readonly ChannelSelectorButton ChannelSelector;
     public readonly HistoryLineEdit Input;
     public readonly ChannelFilterButton FilterButton;
@@ -16,10 +18,13 @@ public class ChatInputBox : PanelContainer
 
     public ChatInputBox()
     {
+        MinHeight = ChatInputHeight;
+
         Container = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Horizontal,
-            SeparationOverride = 4
+            SeparationOverride = 4,
+            MinHeight = ChatInputHeight,
         };
         AddChild(Container);
 
@@ -28,7 +33,8 @@ public class ChatInputBox : PanelContainer
             Name = "ChannelSelector",
             ToggleMode = true,
             StyleClasses = {"chatSelectorOptionButton"},
-            MinWidth = 75
+            MinWidth = 75,
+            MinHeight = ChatInputHeight,
         };
         Container.AddChild(ChannelSelector);
         Input = new HistoryLineEdit
@@ -36,13 +42,15 @@ public class ChatInputBox : PanelContainer
             Name = "Input",
             PlaceHolder = GetChatboxInfoPlaceholder(),
             HorizontalExpand = true,
-            StyleClasses = {"chatLineEdit"}
+            StyleClasses = {"chatLineEdit"},
+            MinHeight = ChatInputHeight,
         };
         Container.AddChild(Input);
         FilterButton = new ChannelFilterButton
         {
             Name = "FilterButton",
-            StyleClasses = {"chatFilterOptionButton"}
+            StyleClasses = {"chatFilterOptionButton"},
+            MinHeight = ChatInputHeight,
         };
         Container.AddChild(FilterButton);
         AddStyleClass(StyleNano.StyleClassChatSubPanel);
@@ -64,4 +72,13 @@ public class ChatInputBox : PanelContainer
             (false, false) => Loc.GetString("hud-chatbox-info-unbound")
         };
     }
+
+    // CCM rework lobby - start
+    public void RefreshLocalization()
+    {
+        Input.PlaceHolder = GetChatboxInfoPlaceholder();
+        ChannelSelector.RefreshLocalization();
+        FilterButton.Popup.RefreshLocalization();
+    }
+    // CCM rework lobby - end
 }

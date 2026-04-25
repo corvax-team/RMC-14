@@ -2,8 +2,9 @@
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.Evolution"
     xmlns:controls="clr-namespace:Robust.Client.UserInterface.Controls;assembly=Robust.Client"
-    Title="Strain Info"
-    MinSize="300 400">
+    Title="Информация о штамме"
+    MinSize="320 420"
+    SetSize="340 450">
     <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="8" Access="Public" >
         <controls:Label
             Name="NameLabel"

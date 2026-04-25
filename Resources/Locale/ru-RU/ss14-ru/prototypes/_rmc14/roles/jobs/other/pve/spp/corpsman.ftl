@@ -1,3 +1,3 @@
-ent-RMCSpawnPointSPPCorpsmanPVE = spp corpsman spawn point
+ent-RMCSpawnPointSPPCorpsmanPVE = точка спавна Санитара СССП
     .suffix = PVE
     .desc = { ent-CMSpawnPointJobBase.desc }

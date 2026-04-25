@@ -12,7 +12,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server.Mapping
 {
-    [AdminCommand(AdminFlags.Server | AdminFlags.Mapping)]
+    [AdminCommand(AdminFlags.Server | AdminFlags.Mapping)] // CCM14
     public sealed class MappingCommand : LocalizedEntityCommands
     {
         [Dependency] private readonly IResourceManager _resourceMgr = default!;

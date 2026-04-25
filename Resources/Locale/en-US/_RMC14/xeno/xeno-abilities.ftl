@@ -44,7 +44,7 @@ cm-xeno-evolution-ready = Our carapace crackles and our tendons strengthen. We a
 cm-xeno-evolution-failed-already-have = There already is a living {$prototype}!
 cm-xeno-evolution-failed-hive-shaken = The Hive is shaken by the death of the last Queen. We can't find the strength to evolve.
 cm-xeno-evolution-failed-cannot-support = The Hive cannot support this caste yet!
-cm-xeno-evolution-failed-hive-full = The hive cannot support another Tier {$tier}, wait for either more aliens to be born or someone to die.
+cm-xeno-evolution-failed-hive-full = The hive cannot support another Tier {$tier}, wait for either more sisters to be born or someone to die.
 rmc-xeno-evolution-devolve-title = De-Evolve To
 rmc-xeno-evolution-devolve = You devolve to {$xeno}!
 rmc-xeno-evolution-cant-evolve-damaged = We must be at full health to evolve.
@@ -57,6 +57,7 @@ rmc-xeno-evolution-failed-early-weeds = The hive hasn't developed enough yet for
 rmc-xeno-evolution-failed-bad-location = We can't evolve here.
 rmc-xeno-evolution-start-self = We begin to twist and contort.
 rmc-xeno-evolution-start-others = {$xeno} begins to twist and contort.
+rmc-xeno-evolution-queen = Enough time has passed, we require the Queen in oviposition for evolution.
 
 # Fortify
 cm-xeno-fortify-cant-headbutt = We can't headbutt while fortifying!
@@ -385,10 +386,12 @@ rmc-xeno-fling-too-big = {CAPITALIZE(THE($target))} is too big for us to fling!
 
 # Gut
 rmc-gut-start-self = We plunge our claws into the body of this unfortunate host, starting to tear them in half!
-rmc-gut-start-others = {$user} plunges their claws into the body of {$target}, starting to tear them in half!
+rmc-gut-start-xenos = {$user} plunges their claws into the body of this unfortunate host, starting to tear them in half!
+rmc-gut-start-marines = The Queen plunges their claws into the body of {$target}, starting to tear them in half!
 
 rmc-gut-finish-self = We tear this pathetic host in half!!
-rmc-gut-finish-others = {$user} tears {$target} in half!!
+rmc-gut-finish-xenos = {$user} tears the pathetic host in half!!
+rmc-gut-finish-marines = The Queen tears {$target} in half!!
 
 # Shed Spikes
 rmc-shed-spikes = We have shed our shards and cannot gain any more for 30 seconds!

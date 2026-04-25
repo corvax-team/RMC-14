@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
 using System.Numerics;
 using Content.Server.Announcements;
@@ -8,6 +9,7 @@ using Content.Server.Maps;
 using Content.Server.Roles;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Prototypes;
+using Content.Shared._RMC14.Rules;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
@@ -370,7 +372,7 @@ namespace Content.Server.GameTicking
             DebugTools.Assert(RunLevel == GameRunLevel.PreRoundLobby);
             _sawmill.Info("Starting round!");
 
-            SendServerMessage(Loc.GetString("game-ticker-start-round"));
+            _chatManager.DispatchServerAnnouncementLoc("game-ticker-start-round");
 
             var readyPlayers = new List<ICommonSession>();
             var readyPlayerProfiles = new Dictionary<NetUserId, HumanoidCharacterProfile>();
@@ -392,7 +394,7 @@ namespace Content.Server.GameTicking
                 HumanoidCharacterProfile profile;
                 if (_prefsManager.TryGetCachedPreferences(userId, out var preferences))
                 {
-                    profile = (HumanoidCharacterProfile)preferences.SelectedCharacter;
+                    profile = GetPlayerProfile(session);
                 }
                 else
                 {
@@ -624,14 +626,21 @@ namespace Content.Server.GameTicking
                 {
                     var mapName = _gameMapManager.GetSelectedMap()?.MapName;
                     mapName ??= Loc.GetString("discord-round-notifications-unknown-map");
-                    content = Loc.GetString("rmc-discord-round-notifications-end",
-                        ("id", RoundId),
-                        ("operation", operation),
-                        ("planet", planet),
-                        ("ship", mapName),
-                        ("hours", Math.Truncate(duration.TotalHours)),
-                        ("minutes", duration.Minutes),
-                        ("seconds", duration.Seconds));
+                    // CCM14-start
+                    var (result, hijack, marinesTotal, xenosTotal, survivorsTotal) = _distressSignal.GetRoundEndInfo();
+
+                    content = BuildRoundEndDiscordMessage(
+                        RoundId,
+                        operation,
+                        planet,
+                        mapName,
+                        duration,
+                        result,
+                        hijack,
+                        marinesTotal,
+                        xenosTotal,
+                        survivorsTotal);
+                    // CCM14-end
                 }
 
                 var payload = new WebhookPayload { Content = content };
@@ -652,7 +661,64 @@ namespace Content.Server.GameTicking
                 Log.Error($"Error while sending discord round end message:\n{e}");
             }
         }
+        // CCM14-start
+        private string GetRoundResultText(DistressSignalRuleResult? result)
+        {
+            return result switch
+            {
+                DistressSignalRuleResult.MajorMarineVictory => Loc.GetString("rmc-discord-round-notifications-major-marine"),
+                DistressSignalRuleResult.MinorMarineVictory => Loc.GetString("rmc-discord-round-notifications-minor-marine"),
+                DistressSignalRuleResult.MajorXenoVictory => Loc.GetString("rmc-discord-round-notifications-major-xeno"),
+                DistressSignalRuleResult.MinorXenoVictory => Loc.GetString("rmc-discord-round-notifications-minor-xeno"),
+                DistressSignalRuleResult.AllDied => Loc.GetString("rmc-discord-round-notifications-all-died"),
+                _ => Loc.GetString("rmc-discord-round-notifications-unknown-result"),
+            };
+        }
 
+        private string BuildRoundEndDiscordMessage(
+            int roundId,
+            string operation,
+            string planet,
+            string ship,
+            TimeSpan duration,
+            DistressSignalRuleResult? result,
+            bool hijack,
+            int marinesTotal,
+            int xenosTotal,
+            int survivorsTotal)
+        {
+            var resultText = GetRoundResultText(result);
+            var hijackText = hijack
+                ? Loc.GetString("rmc-discord-round-notifications-hijack-yes")
+                : Loc.GetString("rmc-discord-round-notifications-hijack-no");
+
+            var hours = Math.Truncate(duration.TotalHours);
+            var minutes = duration.Minutes;
+            var seconds = duration.Seconds;
+
+            var message = Loc.GetString("rmc-discord-round-notifications-end",
+                ("id", roundId),
+                ("operation", operation),
+                ("planet", planet),
+                ("result", resultText));
+
+            var durationLine = Loc.GetString("rmc-discord-round-notifications-end-duration",
+                ("hours", hours),
+                ("minutes", minutes),
+                ("seconds", seconds));
+
+            var statsLine = Loc.GetString("rmc-discord-round-notifications-end-stats",
+                ("marines", marinesTotal),
+                ("xenos", xenosTotal),
+                ("survivors", survivorsTotal));
+
+            var hijackLine = Loc.GetString("rmc-discord-round-notifications-end-hijack",
+                ("ship", ship),
+                ("hijack", hijackText));
+
+            return $"{message}\n{durationLine}\n{statsLine}\n{hijackLine}";
+        }
+        // CCM14-end
         public void RestartRound()
         {
             // If this game ticker is a dummy, do nothing!
@@ -670,7 +736,7 @@ namespace Content.Server.GameTicking
 
             _sawmill.Info("Restarting round!");
 
-            SendServerMessage(Loc.GetString("game-ticker-restart-round"));
+            _chatManager.DispatchServerAnnouncementLoc("game-ticker-restart-round");
 
             RoundNumberMetric.Inc();
 
@@ -778,7 +844,8 @@ namespace Content.Server.GameTicking
 
             RaiseNetworkEvent(new TickerLobbyCountdownEvent(_roundStartTime, Paused));
 
-            _chatManager.DispatchServerAnnouncement(Loc.GetString("game-ticker-delay-start", ("seconds", time.TotalSeconds)));
+            _chatManager.DispatchServerAnnouncementLoc("game-ticker-delay-start",
+                new[] { ("seconds", (object) time.TotalSeconds) });
 
             return true;
         }

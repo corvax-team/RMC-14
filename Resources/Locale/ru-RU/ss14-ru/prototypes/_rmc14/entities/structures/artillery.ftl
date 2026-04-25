@@ -1,0 +1,17 @@
+ent-RMCAntiAirProp = пушка IX-50 MGAD
+    .desc = IX-50 — это современная система микрогравитационной и противовоздушной обороны, способная самостоятельно отслеживать и нейтрализовать угрозы с помощью ракет, закреплённых на ней.
+    .suffix = Проп
+ent-RMCAntiAirPropFlipped = { ent-RMCAntiAirProp }
+    .suffix = Проп, Перевёрнутая
+    .desc = { ent-RMCAntiAirProp.desc }
+ent-RMCRailgunProp = планетарная батарея «BURST» MAC
+    .desc = Планетарная батарея «BURST» MAC — это усовершенствованный магнитный ускоритель масс, использующий длинную линейную систему магнитных катушек для разгона металлических снарядов до невероятных скоростей.
+ent-RMCRailgunPropFlipped = { ent-RMCRailgunProp }
+    .suffix = Проп, Перевёрнутая
+    .desc = { ent-RMCRailgunProp.desc }
+ent-RMCMissileTubeProp = пусковая установка ПКА Mk 33
+    .desc = Трубы холодного пуска, способные вести огонь различными типами ракет, наиболее распространенными из которых являются противоспутниковые ASAT-21 Rapier IV и ракеты BGM-227 Sledgehammer, используемые для ударов по наземным целям.
+    .suffix = Проп
+ent-RMCMissileTubePropFlipped = { ent-RMCMissileTubeProp }
+    .suffix = Проп, Перевёрнутая
+    .desc = { ent-RMCMissileTubeProp.desc }

@@ -1,6 +1,8 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using Content.Shared._CCM.Barks;
 using Content.Shared.CCVar;
 using Content.Shared.Decals;
 using Content.Shared.Examine;
@@ -455,6 +457,20 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         }
 
         humanoid.Age = profile.Age;
+
+        // CCM barks - start
+        var synthesis = EnsureComp<SpeechSynthesisComponent>(uid);
+        synthesis.VoicePrototypeId = profile.BarkVoice;
+        synthesis.Pitch = profile.BarkPitch;
+        synthesis.PlaybackSpeed = profile.BarkSpeed;
+        synthesis.PitchPreset = profile.BarkPitch switch
+        {
+            <= 0.82f => VoicePitchPreset.Low,
+            >= 1.25f => VoicePitchPreset.High,
+            _ => VoicePitchPreset.Medium
+        };
+        Dirty(uid, synthesis);
+        // CCM barks - end
 
         Dirty(uid, humanoid);
     }

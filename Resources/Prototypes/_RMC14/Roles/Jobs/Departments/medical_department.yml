@@ -1,4 +1,4 @@
-﻿- type: department
+- type: department
   parent: CMDepartmentBase
   id: CMMedbay
   name: department-CMMedbay
@@ -9,5 +9,6 @@
   - CMDoctor
   - CMResearcher
   - CMNurse
+  - RMCFieldDoctor
   departmentRadio: MarineMedical
   headOfDepartment: CMCMO

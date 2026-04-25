@@ -3,6 +3,8 @@ character-setup-gui-character-setup-adminremarks-button = Admin Remarks
 character-setup-gui-character-setup-stats-button = Stats
 character-setup-gui-character-setup-rules-button = Rules
 character-setup-gui-character-setup-close-button = Close
+character-setup-gui-commendations-received = Awards received
+character-setup-gui-commendations-given = Awards given
 character-setup-gui-create-new-character-button = Create new slot...
 character-setup-gui-create-new-character-button-tooltip = A maximum of {$maxCharacters} characters are allowed.
 character-setup-gui-character-picker-button-delete-button = Delete
@@ -12,3 +14,12 @@ character-setup-gui-save-panel-title = Unsaved character changes
 character-setup-gui-save-panel-save = Save
 character-setup-gui-save-panel-nosave = Don't save
 character-setup-gui-save-panel-cancel = Cancel
+
+# CCM priority rework
+character-setup-gui-title = Character setup
+character-setup-gui-new-character = New character
+character-setup-gui-save-character = Save
+character-setup-gui-reset-character = Reset
+character-setup-gui-delete-character = Delete character
+character-setup-gui-delete-confirm = Confirm
+character-setup-gui-delete-confirm-countdown = Confirm ({$seconds})

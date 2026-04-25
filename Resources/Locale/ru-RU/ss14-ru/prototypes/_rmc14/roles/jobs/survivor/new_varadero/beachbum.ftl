@@ -1,7 +1,8 @@
 ent-CMSatchelFillSurvivorBeachBum = { ent-CMSatchelFillSurvivor }
-    .suffix = Survivor
+    .suffix = Выживший
     .desc = { ent-CMSatchelFillSurvivor.desc }
-ent-RMCSpawnPointSurvivorBeachBum = survivor beach bum spawn point
+ent-RMCSpawnPointSurvivorBeachBum = спавнер выжившего пляжного бездельника
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetBeachBum = beach bum colonist preset
+    .suffix = UENB Нью-Варадеро
+ent-RMCGearSurvivorPresetBeachBum = пресет колониста-пляжного бездельника
     .desc = { ent-RMCSurvivorPresetCivilian.desc }

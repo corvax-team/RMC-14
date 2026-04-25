@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Configuration;
+﻿// CM14 rework: non-RMC edit marker.
+using Robust.Shared.Configuration;
 
 namespace Content.Shared.CCVar;
 
@@ -7,6 +8,7 @@ public sealed partial class CCVars
     public static readonly CVarDef<bool> HolidaysEnabled = CVarDef.Create("holidays.enabled", true, CVar.SERVERONLY);
     public static readonly CVarDef<bool> BrandingSteam = CVarDef.Create("branding.steam", false, CVar.CLIENTONLY);
     public static readonly CVarDef<int> EntityMenuGroupingType = CVarDef.Create("entity_menu", 0, CVar.CLIENTONLY);
+    public static readonly CVarDef<string> ClientLocale = CVarDef.Create("ccm.client_locale", "ru-RU", CVar.CLIENT | CVar.REPLICATED | CVar.ARCHIVE);
 
     /// <summary>
     ///     Should we pre-load all of the procgen atlasses.

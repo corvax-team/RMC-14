@@ -1,0 +1,11 @@
+ent-CCMXenoWarriorBoxer = { ent-CMXenoWarrior }
+    .suffix = Boxer
+    .desc = { ent-CMXenoWarrior.desc }
+ent-CCMWeaponArcXenoPunch = { ent-WeaponArcClaw }
+    .desc = { ent-WeaponArcClaw.desc }
+ent-CCMXenoMeleeSentinel = { ent-CMXenoSentinel }
+    .desc = { ent-CMXenoSentinel.desc }
+ent-CCMXenoRangerSentinel = { ent-CMXenoSentinel }
+    .desc = { ent-CMXenoSentinel.desc }
+ent-CCMXenoSniperSpitter = { ent-CMXenoSpitter }
+    .desc = { ent-CMXenoSpitter.desc }

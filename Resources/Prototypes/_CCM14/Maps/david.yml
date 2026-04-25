@@ -1,6 +1,6 @@
 - type: gameMap
   id: David
-  mapName: David
+  mapName: UEG "Давид"
   mapPath: /Maps/_CCM14/david.yml
   minPlayers: 0
   maxRandomOffset: 0
@@ -10,7 +10,7 @@
       stationProto: StandardUNMCWarship
       components:
         - type: StationNameSetup
-          mapNameTemplate: 'LCS-14 DAVID'
+          mapNameTemplate: 'UEG "Давид"'
         - type: StationJobs
           availableJobs:
             # Command
@@ -23,8 +23,8 @@
             CMMilitaryWarden: [1, 1]
             CMMilitaryPolice: [2, 2]
             # Auxiliary
-#            CMAuxiliarySupportOfficer: [1, 1]
-            CMIntelOfficer: [2, 2]
+            CMAuxiliarySupportOfficer: [1, 1]
+            CMIntelOfficer: [3, 3]
             CMVehicleCrewman: [2, 2]
             CMPilotDropship: [1, 1]
             CMPilotGunship: [1, 1]
@@ -37,11 +37,11 @@
             CMCMO: [1, 1]
             CMDoctor: [2, 2]
             CMNurse: [2, 2]
+            RMCFieldDoctor: [1, 1]
 #            CMResearcher: [2, 2]
             # Requisition
             CMQuartermaster: [1, 1]
             CMCargoTech: [2, 2]
-#            CMMessTech: [1, 1]
             # Marines
             CMSquadLeader: [2, 2]
             CMFireteamLeader: [2, 2]
@@ -53,4 +53,6 @@
             # Civilians
             CMCorrespondent: [1, 1]
             # Other
+            CMMessTech: [1,1]
             CMLiaison: [1, 1]
+            RMCJobSynthetic: [1, 1]

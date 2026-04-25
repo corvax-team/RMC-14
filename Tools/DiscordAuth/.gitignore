@@ -1,0 +1,9 @@
+dist/
+node_modules/
+.env
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+.venv/
+__pycache__/
+.pytest_cache/

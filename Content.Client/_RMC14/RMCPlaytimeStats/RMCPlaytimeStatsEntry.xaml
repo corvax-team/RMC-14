@@ -16,7 +16,7 @@
                HorizontalExpand="True"
                ClipText="True"
                Margin="5,5,5,5"/>
-        <customControls1:VSeparator/>
+        <customControls1:VSeparator Name="EntrySeparator"/>
         <Label Name="PlaytimeLabel"
                SizeFlagsStretchRatio="3"
                HorizontalExpand="True"

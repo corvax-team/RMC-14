@@ -1,4 +1,4 @@
-<DefaultWindow xmlns="https://spacestation14.io"
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls" xmlns="https://spacestation14.io"
                xmlns:viewport="clr-namespace:Content.Client.Viewport"
                Title="{Loc 'surveillance-camera-monitor-ui-window'}">
     <BoxContainer Orientation="Horizontal">
@@ -22,4 +22,5 @@
             <TextureRect VerticalExpand="True" HorizontalExpand="True" MinSize="500 500" Name="CameraViewBackground" />
         </Control>
     </BoxContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

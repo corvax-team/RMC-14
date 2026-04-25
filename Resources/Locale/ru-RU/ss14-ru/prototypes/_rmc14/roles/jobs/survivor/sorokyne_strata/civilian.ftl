@@ -1,4 +1,5 @@
-ent-RMCSpawnPointSurvivorSoroCivilian = sorokyne civilian spawn point
+ent-RMCSpawnPointSurvivorSoroCivilian = спавнер выжившего гражданского
     .desc = { ent-CMSpawnPointJobBase.desc }
-ent-RMCGearSurvivorPresetSoroCivilian = sorokyne civilian preset
+    .suffix = Сорокина Страта
+ent-RMCGearSurvivorPresetSoroCivilian = пресет выжившего гражданского Сорокиной Страты
     .desc = { ent-RMCSurvivorPresetCivilianRareItem.desc }

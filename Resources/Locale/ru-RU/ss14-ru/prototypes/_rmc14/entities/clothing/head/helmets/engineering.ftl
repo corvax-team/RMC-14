@@ -1,3 +1,5 @@
-ent-RMCHelmetWelding = welding helmet
-    .desc = A head-mounted face cover designed to protect the wearer completely from space-arc eye.
+ent-RMCHelmetWelding = шлем для сварки
+    .desc = Защитная маска для лица, устанавливаемая на голове и предназначенная для полной защиты пользователя от яркого света при сварке.
     .suffix = RMC
+ent-RMCHelmetWeldingPainted = индивидуальный шлем для сварки
+    .desc = Защитная маска для лица, окрашенная в красный цвет с яркими белыми полосами, обеспечивающая надежную защиту и капельку стиля.

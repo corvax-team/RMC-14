@@ -15,6 +15,9 @@
     - state: "normal-unshaded"
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
       shader: unshaded
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: AccessReader
     access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
   - type: CMAutomatedVendor
@@ -24,9 +27,11 @@
     - "CMAccessColonyEngineering"
     hackable: true
     sections:
-    - name: Equipment
+    - name: Снаряжение # CCM14
       entries:
       - id: RMCFlashlight
+        amount: 4
+      - id: RMCSentryLaptop
         amount: 4
       - id: RMCHardhatBlue
         amount: 4
@@ -40,7 +45,7 @@
         amount: 4
       - id: RMCEngineerKit
         amount: 2
-    - name: Scanners
+    - name: Сканеры # CCM14
       entries:
       #Atmos scanner
       #Demo scanner
@@ -48,7 +53,7 @@
       #Reagent scanner
       - id: CMTRayScanner
         amount: 2
-    - name: Tools
+    - name: Инструменты # CCM14
       entries:
       - id: CMWelder
         amount: 4
@@ -77,7 +82,7 @@
   - type: CMAutomatedVendor
     hackable: true
     sections:
-    - name: Circuitboards
+    - name: Машинные платы # CCM14
       entries:
 #     - id: RMCFireAlarmCircuitboard
 #       amount: 5
@@ -127,19 +132,19 @@
   - type: CMAutomatedVendor
     hackable: true
     sections:
-    - name: Tools
+    - name: Инструменты # CCM14
       entries:
       - id: RMCCableCoil
         amount: 6
       - id: CMMultitool
         amount: 6
-    - name: Circuitboards
+    - name: Машинные платы # CCM14
       entries:
       - id: DoorElectronics
         amount: 8
       - id: CMAPCElectronics
         amount: 8
-    - name: Batteries
+    - name: Батареи # CCM14
       entries:
       - id: RMCPowerCellHigh
         amount: 6
@@ -159,7 +164,7 @@
   - type: CMAutomatedVendor
     hackable: true
     sections:
-    - name: Assembly Components
+    - name: Детали для сборки # CCM14
       entries:
       - id: Igniter
         amount: 8
@@ -169,13 +174,13 @@
         amount: 4
       - id: RemoteSignaller
         amount: 4
-    - name: Container
+    - name: Емкости # CCM14
       entries:
       - id: RMCBucket
         amount: 6
       - id: CMBucketMop
         amount: 2
-    - name: Stock Parts
+    - name: Компоненты # CCM14
       entries:
       - id: CMStockPartMatterBin
         amount: 8
@@ -208,7 +213,7 @@
     - "CMAccessResearch"
     hackable: true
     sections:
-    - name: Equipment
+    - name: Снаряжение # CCM14
       entries:
       - id: RMCHoodBioGeneral # TODO scientist bio hood
         amount: 2
@@ -216,7 +221,7 @@
         amount: 2
       - id: CMJumpsuitResearch
         amount: 2
-    - name: Assembly Components
+    - name: Детали для сборки # CCM14
       entries:
       - id: Igniter
         amount: 8
@@ -238,13 +243,13 @@
   - type: CMAutomatedVendor
     hackable: true
     sections:
-    - name: Equipment
+    - name: Снаряжение # CCM14
       entries:
       # Labcoat
       - id: CMMaskGasMedical
         amount: 2
       # Roboticist Jumpsuit
-    - name: Tools
+    - name: Инструменты # CCM14
       entries:
       - id: RMCCableCoil
         amount: 4
@@ -256,7 +261,7 @@
         amount: 2
       - id: CMScrewdriver
         amount: 2
-    - name: Assembly Components
+    - name: Детали для сборки # CCM14
       entries:
       - id: CMFlash
         amount: 4
@@ -266,7 +271,7 @@
         amount: 4
       - id: RemoteSignaller
         amount: 4
-    - name: Miscellaneous
+    - name: Разное # CCM14
       entries:
       - id: NitrousOxideTankFilled
         amount: 2

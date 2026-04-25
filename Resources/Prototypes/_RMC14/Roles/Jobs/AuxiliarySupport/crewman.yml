@@ -23,6 +23,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+      # CCM14-start
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetMarine]
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
+      # CCM14-end
     - type: Skills
       skills:
         RMCSkillEndurance: 1

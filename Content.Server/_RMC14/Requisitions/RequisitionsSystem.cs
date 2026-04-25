@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using System.Runtime.InteropServices;
+using Content.Server._CCM.Achievements;
 using Content.Server.Administration.Logs;
 using Content.Server.Cargo.Components;
 using Content.Server.Chat.Systems;
@@ -22,6 +23,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Dynamics;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -121,6 +123,12 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         elevator.Comp.Orders.Add(order);
         SendUIStateAll();
         _adminLogs.Add(LogType.RMCRequisitionsBuy, $"{ToPrettyString(args.Actor):actor} bought requisitions crate {order.Name} with crate {order.Crate} for {order.Cost}");
+
+        if (TryComp<ActorComponent>(actor, out var actorComp))
+        {
+            var ordered = new CCMRequisitionOrderedEvent(actorComp.PlayerSession.UserId);
+            RaiseLocalEvent(ordered);
+        }
     }
 
     private void OnPlatform(Entity<RequisitionsComputerComponent> computer, ref RequisitionsPlatformMsg args)

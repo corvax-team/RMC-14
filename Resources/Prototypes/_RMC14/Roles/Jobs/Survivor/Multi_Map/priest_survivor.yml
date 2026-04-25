@@ -6,17 +6,17 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivor
   startingGear: RMCGearSurvivorPriest
-  spawnMenuRoleName: Priest (Survivor)
+  spawnMenuRoleName: Chaplain (Survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 2
-        RMCSkillFirearms: 1
-        RMCSkillLeadership: 1
+      preset: RMCSkillPresetSurvivorChaplain
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetPriest
     - type: MarineOrders
@@ -46,6 +46,7 @@
   - type: StorageFill
     contents:
     - id: RMCBible
+    - id: CMSheetMetal20
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -53,7 +54,7 @@
   name: survivor priest spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivor
+    job_id: CMSurvivorPriest
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
@@ -64,3 +65,5 @@
   id: RMCGearSurvivorPresetPriest
   name: priest colonist preset
   categories: [ HideSpawnMenu ]
+
+

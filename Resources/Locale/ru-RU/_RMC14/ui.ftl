@@ -1,37 +1,37 @@
-cm-ui-rmc14 = RMC14 \ ККМ
-rmc-ui-options-cassettes-volume = Cassette volume:
-rmc-ui-options-hijack-song-volume = Hijack song volume:
-rmc-ui-voicelines = Voicelines
-rmc-ui-options-tab-voicelines = Voicelines
-rmc-ui-audio-voicelines-yourself = Play voicelines from yourself
-rmc-ui-audio-voicelines-arachnid = Play voicelines for arachnids
-rmc-ui-audio-voicelines-diona = Play voicelines for dionae
-rmc-ui-audio-voicelines-dwarf = Play voicelines for dwarves
-rmc-ui-audio-voicelines-felinid = Play voicelines for felinids
-rmc-ui-audio-voicelines-human = Play voicelines for humans
-rmc-ui-audio-voicelines-moth = Play voicelines for moths
-rmc-ui-audio-voicelines-reptilian = Play voicelines for reptilians
-rmc-ui-audio-voicelines-slime = Play voicelines for slimes
-rmc-ui-audio-voicelines-avali = Play voicelines for avalis
-rmc-ui-audio-voicelines-vulpkanin = Play voicelines for vulpkanins
-rmc-ui-audio-voicelines-rodentia = Play voicelines for rodentias
-rmc-ui-audio-voicelines-feroxi = Play voicelines for feroxis
-rmc-ui-audio-voicelines-skrell = Play voicelines for skrells
-rmc-ui-emotes = Emotes
-rmc-ui-audio-emotes-yourself = Play emotes from yourself
-rmc-ui-audio-emotes-arachnid = Play emotes for arachnids
-rmc-ui-audio-emotes-diona = Play emotes for dionae
-rmc-ui-audio-emotes-dwarf = Play emotes for dwarves
-rmc-ui-audio-emotes-felinid = Play emotes for felinids
-rmc-ui-audio-emotes-human = Play emotes for humans
-rmc-ui-audio-emotes-moth = Play emotes for moths
-rmc-ui-audio-emotes-reptilian = Play emotes for reptilians
-rmc-ui-audio-emotes-slime = Play emotes for slimes
-rmc-ui-audio-emotes-avali = Play emotes for avalis
-rmc-ui-audio-emotes-vulpkanin = Play emotes for vulpkanins
-rmc-ui-audio-emotes-rodentia = Play emotes for rodentias
-rmc-ui-audio-emotes-feroxi = Play emotes for feroxis
-rmc-ui-audio-emotes-skrell = Play emotes for skrells
+cm-ui-rmc14 = CM14
+rmc-ui-options-cassettes-volume = Громкость кассет:
+rmc-ui-options-hijack-song-volume = Громкость песни перехвата:
+rmc-ui-voicelines = Реплики
+rmc-ui-options-tab-voicelines = Реплики
+rmc-ui-audio-voicelines-yourself = Воспроизводить свои голосовые реплики
+rmc-ui-audio-voicelines-arachnid = Воспроизводить голосовые реплики арахнидов
+rmc-ui-audio-voicelines-diona = Воспроизводить голосовые реплики дион
+rmc-ui-audio-voicelines-dwarf = Воспроизводить голосовые реплики дварфов
+rmc-ui-audio-voicelines-felinid = Воспроизводить голосовые реплики фелинидов
+rmc-ui-audio-voicelines-human = Воспроизводить голосовые реплики людей
+rmc-ui-audio-voicelines-moth = Воспроизводить голосовые реплики ниан
+rmc-ui-audio-voicelines-reptilian = Воспроизводить голосовые реплики унатхов
+rmc-ui-audio-voicelines-slime = Воспроизводить голосовые реплики слаймолюдов
+rmc-ui-audio-voicelines-avali = Воспроизводить голосовые реплики авали
+rmc-ui-audio-voicelines-vulpkanin = Воспроизводить голосовые реплики вульпканинов
+rmc-ui-audio-voicelines-rodentia = Воспроизводить голосовые реплики родентий
+rmc-ui-audio-voicelines-feroxi = Воспроизводить голосовые реплики ферокси
+rmc-ui-audio-voicelines-skrell = Воспроизводить голосовые реплики скреллов
+rmc-ui-emotes = Эмоции
+rmc-ui-audio-emotes-yourself = Воспроизводить свои эмоции
+rmc-ui-audio-emotes-arachnid = Воспроизводить эмоции арахнидов
+rmc-ui-audio-emotes-diona = Воспроизводить эмоции дион
+rmc-ui-audio-emotes-dwarf = Воспроизводить эмоции дварфов
+rmc-ui-audio-emotes-felinid = Воспроизводить эмоции фелинидов
+rmc-ui-audio-emotes-human = Воспроизводить эмоции людей
+rmc-ui-audio-emotes-moth = Воспроизводить эмоции ниан
+rmc-ui-audio-emotes-reptilian = Воспроизводить эмоции унатхов
+rmc-ui-audio-emotes-slime = Воспроизводить эмоции слаймолюдов
+rmc-ui-audio-emotes-avali = Воспроизводить эмоции авали
+rmc-ui-audio-emotes-vulpkanin = Воспроизводить эмоции вульпканинов
+rmc-ui-audio-emotes-rodentia = Воспроизводить эмоции родентий
+rmc-ui-audio-emotes-feroxi = Воспроизводить эмоции ферокси
+rmc-ui-audio-emotes-skrell = Воспроизводить эмоции скреллов
 cm-ui-audio-voicelines-arachnid = Воспроизводить голоса арахнидов
 cm-ui-audio-voicelines-diona = Воспроизводить голоса дион
 cm-ui-audio-voicelines-dwarf = Воспроизводить голоса дварфов
@@ -42,69 +42,77 @@ cm-ui-audio-voicelines-reptilian = Воспроизводить голоса у�
 cm-ui-audio-voicelines-slime = Воспроизводить голоса слаймолюдов
 cm-ui-roadmap = Дорожная карта
 # Фичи Патреона RMC нет смысла переводить - Start
-rmc-ui-link-discord-account = Link Discord Account
+rmc-ui-link-discord-account = Привязать аккаунт Discord
 rmc-ui-link-discord-account-text =
-    Click the button below to copy your code.
-    Then go to the #account-linking channel to link your accounts.
-rmc-ui-link-discord-account-copy = Copy code
-rmc-ui-link-discord-account-copied = Copied!
-rmc-ui-link-discord-account-already-linked = [bold]Your account is already linked![/bold]
-rmc-ui-link-discord-account-open-channel = Open channel
-rmc-ui-named-items = Named Items
+    Нажмите кнопку ниже, чтобы скопировать код.
+    Затем перейдите в канал #account-linking, чтобы связать аккаунты.
+rmc-ui-link-discord-account-copy = Скопировать код
+rmc-ui-link-discord-account-copied = Скопировано!
+rmc-ui-link-discord-account-already-linked = [bold]Ваш аккаунт уже привязан![/bold]
+rmc-ui-link-discord-account-open-channel = Открыть канал
+rmc-ui-named-items = Именные предметы
 rmc-ui-named-items-displayed-as =
-    Will be displayed as 'Your Custom Name' M54C Assault Rifle, for example.
-    Make sure the name you choose doesn't violate the rules.
-    If you aren't sure, ask in AHelp! (F1)
-rmc-ui-named-primary-gun = Primary Gun Name
-rmc-ui-named-sidearm = Sidearm Name
-rmc-ui-named-helmet = Helmet Name
-rmc-ui-named-armor = Armor Name
-rmc-ui-named-sentry = Sentry Name
-rmc-ui-patron-perks = Patron Perks
-rmc-ui-lobby-message = Lobby Message
+    Будет отображаться как, например, штурмовая винтовка M54C «Ваше Имя».
+        Убедитесь, что выбранное имя не нарушает правила сервера.
+        Если не уверены — спросите в AHelp! (F1)
+rmc-ui-named-primary-gun = Название основного оружия
+rmc-ui-named-sidearm = Название пистолета
+rmc-ui-named-helmet = Название шлема
+rmc-ui-named-armor = Название брони
+rmc-ui-named-sentry = Название турели
+rmc-ui-patron-perks = Награды спонсоров
+rmc-ui-lobby-message = Сообщение в лобби
 rmc-ui-lobby-message-description =
-    Displayed to players before the game starts.
-    One is randomly chosen between all the Patrons of this tier.
-    Make sure the message you choose doesn't break the rules.
-    If you aren't sure, ask in AHelp! (F1)
-rmc-ui-shoutout = Round-end shoutout
-rmc-ui-shoutout-marine-title = Name to use for the round-end marine shoutout.
-rmc-ui-shoutout-marine-description = Displayed at round end as the funder.
-rmc-ui-shoutout-xeno-title = Name to use for the round-end xeno shoutout.
-rmc-ui-shoutout-xeno-description = Displayed at round end as the establisher of the hive.
-rmc-ui-shoutout-example = Example:
+    Отображается игрокам перед началом раунда.
+        Одно выбирается случайным образом среди всех спонсоров этого уровня.
+        Убедитесь, что сообщение не нарушает правила.
+        Если не уверены — спросите в AHelp! (F1)
+rmc-ui-shoutout = Благодарность в конце раунда
+rmc-ui-shoutout-marine-title = Имя для упоминания в благодарности морпехам.
+rmc-ui-shoutout-marine-description = Отображается в конце раунда как имя спонсора операции.
+rmc-ui-shoutout-xeno-title = Имя для упоминания в благодарности ксеноморфам.
+rmc-ui-shoutout-xeno-description = Отображается в конце раунда как имя основателя улья.
+rmc-ui-shoutout-example = Пример:
 rmc-ui-shoutout-info =
-    Each name is randomly chosen between all the Patrons of this tier.
-    Make sure the names you choose are in-character and don't break the rules.
-    If you aren't sure, ask in AHelp! (F1)
-rmc-ui-named-items-in-preferences = You can change the names of your items per-character in Character Setup.
-rmc-ui-figurine = Character Figurine
+    Имя выбирается случайно среди всех спонсоров этого уровня.
+        Убедитесь, что имена соответствуют атмосфере игры (in-character) и не нарушают правила.
+        Если не уверены — спросите в AHelp! (F1)
+rmc-ui-named-items-in-preferences = Вы можете изменить названия своих предметов для каждого персонажа в настройках персонажа.
+rmc-ui-figurine = Фигурка персонажа
 rmc-ui-figurine-in-preferences =
-    You can export your character to be made into a figurine in Character Setup.
-    Limited to one active figurine per person!
-    If you want to change yours, tell us on Discord.
-rmc-ui-ghost-color = Ghost Color
-rmc-ui-ghost-color-clear = Clear
-rmc-ui-ghost-color-save = Save
+    Вы можете экспортировать своего персонажа для создания фигурки в настройках персонажа.
+        Ограничение: одна активная фигурка на человека!
+        Если хотите изменить её — напишите нам в Discord.
+rmc-ui-ghost-color = Цвет призрака
+rmc-ui-ghost-color-clear = Сбросить
+rmc-ui-ghost-color-save = Сохранить
+rmc-ui-show-new-player-icons = Показывать иконки новых игроков для менторов и глав отделов
+rmc-ui-xeno-night-vision-default = ПНВ ксеноморфов по умолчанию
+rmc-ui-xeno-night-vision-default-off = Выкл.
+rmc-ui-xeno-night-vision-default-half = В полсилы
+rmc-ui-xeno-night-vision-default-full = Полное
+rmc-night-vision-mode-verb = Установить ПНВ: { $mode }
 rmc-area-info = { $area }{ $restrictions }
-rmc-tacmap-alert-ceiling-level-0 = [color=green]✓[/color] All actions allowed
-rmc-tacmap-alert-ceiling-level-1 = [color=red]✗[/color] Mortar Placement, Lasing, Medevac
-rmc-tacmap-alert-ceiling-level-2 = [color=red]✗[/color] Supply Drops, Mortar Fire
-rmc-tacmap-alert-ceiling-level-3 = [color=red]✗[/color] CAS
-rmc-tacmap-alert-ceiling-level-4 = [color=red]✗[/color] OB
+rmc-tacmap-alert-ceiling-level-0 = [color=green]✓[/color] Доступно всё
+rmc-tacmap-alert-ceiling-level-1 = [color=red]✗[/color] установка мортиры, лазерное наведение, медэвак
+rmc-tacmap-alert-ceiling-level-2 = [color=red]✗[/color] поставки, стрельба из мортиры
+rmc-tacmap-alert-ceiling-level-3 = [color=red]✗[/color] КАС
+rmc-tacmap-alert-ceiling-level-4 = [color=red]✗[/color] ОБ
 rmc-tacmap-alert-allowed-actions = [color=green]✓[/color] { $actions }
 rmc-tacmap-alert-restricted-actions = [color=red]✗[/color] { $actions }
-rmc-ui-shoutout-marine = [bold]Operation funded by [color=green]{ $name }[/color]![/bold]
-rmc-ui-shoutout-xeno = [bold]Hive established by [color=purple]{ $name }[/color]![/bold]
-rmc-ui-options-alternate-sprites = Use non-trypophobia inducing sprites
-
-# Фичи Патреона RMC нет смысла переводить - Finish
-
+rmc-ui-shoutout-marine = [bold]Операция профинансирована [color=green]{ $name }[/color]![/bold]
+rmc-ui-shoutout-xeno = [bold]Улей основан [color=purple]{ $name }[/color]![/bold]
+rmc-ui-options-chat-squad-color-mode = Окрашивать имена в чате в цвета отрядов
+# Dialog input
+rmc-dialog-input-placeholder-default = Введите текст
+rmc-dialog-input-placeholder-smart-check = Более 3 пробелов подряд будут обрезаны
+rmc-ui-options-alternate-sprites = Использовать спрайты без трипофобных элементов
 rmc-ui-discord = Discord
 rmc-ui-patreon = Patreon
 rmc-other-credits-tab = Прочее
 rmc-ui-auto-punctuate = Автоматически расставлять знаки препинания в IC-сообщениях
-rmc-ui-damage-yourself = Включить возможность наносить себе повреждения ударами и выстрелами
-rmc-tacmap-alert-area = Местоположение: { $area }
+rmc-ui-damage-yourself = Возможность наносить себе урон ударами и выстрелами
 rmc-tacmap-alert-no-area = Неизвестно
 rmc-ui-auto-eject-magazines = Автоматическое извлечение магазинов из оружия
+# CCM priority rework
+rmc-ui-options-barks-volume = ��������� bark-������:

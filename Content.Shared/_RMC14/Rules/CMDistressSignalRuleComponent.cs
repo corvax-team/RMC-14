@@ -116,13 +116,13 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public List<ProtoId<JobPrototype>> IgnoreMaximumSurvivorJobs = new() { "RMCSurvivorCommandingOfficer" };
 
     [DataField]
-    public Dictionary<ProtoId<JobPrototype>, List<(ProtoId<JobPrototype> Insert, int Amount)>>? SurvivorJobInserts;
+    public Dictionary<ProtoId<JobPrototype>, List<(ProtoId<JobPrototype> Variant, int Amount)>>? SurvivorJobVariants;
 
     [DataField]
     public Dictionary<ProtoId<JobPrototype>, ProtoId<JobPrototype>>? SurvivorJobOverrides;
 
     [DataField]
-    public Dictionary<ProtoId<JobPrototype>, List<(ProtoId<JobPrototype> Special, int Amount)>>? SurvivorJobScenarios;
+    public Dictionary<ProtoId<JobPrototype>, List<(ProtoId<JobPrototype> Special, int Amount)>>? SurvivorJobVariantScenarios;
 
     [DataField]
     public TimeSpan AresGreetingDelay = TimeSpan.FromSeconds(5);
@@ -195,7 +195,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public bool DoJobSlotScaling = true;
 
     [DataField]
-    public bool AutoEnd = true;
+    public bool AutoEnd = true; // CCM14
 
     [DataField]
     public bool StartARESAnnouncements = true;
@@ -214,4 +214,14 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public bool RecalculatedPower;
+    // CCM14-start
+    [DataField]
+    public int MarinesSpawned;
+
+    [DataField]
+    public int XenosSpawned;
+
+    [DataField]
+    public int SurvivorsSpawned;
+    // CCM14-end
 }
