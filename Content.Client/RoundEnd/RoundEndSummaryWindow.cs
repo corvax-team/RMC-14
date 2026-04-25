@@ -1,25 +1,59 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
+using System.Collections.Generic;
 using System.Numerics;
+using System.Text.RegularExpressions;
+using Content.Client.Administration.UI.CustomControls;
+using Content.Client._CCM.Stats;
 using Content.Client.Message;
+using Content.Client.Resources;
+using Robust.Client.ResourceManagement;
+using Content.Client.Stylesheets;
+using Content.Shared._CCM.Sponsorship;
+using Content.Shared._CCM.Stats;
 using Content.Shared.GameTicking;
+using Robust.Client.Graphics;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
+using Robust.Shared.IoC;
+using Robust.Shared.Maths;
 using Robust.Shared.Utility;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client.RoundEnd
 {
-    public sealed class RoundEndSummaryWindow : DefaultWindow
+    public sealed class RoundEndSummaryWindow : DefaultCMWindow
     {
         private readonly IEntityManager _entityManager;
+        private readonly CCMStatsSystem _ccmStatsSystem;
+        private readonly Font _mvpTitleFont;
+        private readonly Font _mvpSubtitleFont;
+        private readonly Font _sponsorTierThreeFont;
+        private readonly Font _sponsorTierTwoFont;
+        private readonly Font _sponsorTierOneFont;
+        private readonly Font _sponsorTierThreeNameFont;
+        private readonly Font _sponsorTierTwoNameFont;
+        private readonly Font _sponsorTierOneNameFont;
         public int RoundId;
 
         public RoundEndSummaryWindow(string gm, string roundEnd, TimeSpan roundTimeSpan, int roundId,
             RoundEndMessageEvent.RoundEndPlayerInfo[] info, IEntityManager entityManager)
         {
             _entityManager = entityManager;
+            _ccmStatsSystem = _entityManager.System<CCMStatsSystem>();
+            var resourceCache = IoCManager.Resolve<IResourceCache>();
+            _mvpTitleFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 14);
+            _mvpSubtitleFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 12);
+            _sponsorTierThreeFont = resourceCache.GetFont("/Fonts/Bedstead/bedstead.otf", 22);
+            _sponsorTierTwoFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 18);
+            _sponsorTierOneFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 16);
+            _sponsorTierThreeNameFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 14);
+            _sponsorTierTwoNameFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 13);
+            _sponsorTierOneNameFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 12);
 
-            MinSize = new Vector2(520, 580);
+            MinSize = new Vector2(660, 720);
+            SetSize = new Vector2(660, 720);
 
             Title = Loc.GetString("round-end-summary-window-title");
 
@@ -56,33 +90,42 @@ namespace Content.Client.RoundEnd
             };
             var roundEndSummaryContainer = new BoxContainer
             {
-                Orientation = LayoutOrientation.Vertical
+                Orientation = LayoutOrientation.Vertical,
+                SeparationOverride = 10,
             };
 
-            //Gamemode Name
-            var gamemodeLabel = new RichTextLabel();
-            var gamemodeMessage = new FormattedMessage();
-            gamemodeMessage.AddMarkupOrThrow(Loc.GetString("round-end-summary-window-round-id-label", ("roundId", roundId)));
-            gamemodeMessage.AddText(" ");
-            gamemodeMessage.AddMarkupOrThrow(Loc.GetString("round-end-summary-window-gamemode-name-label", ("gamemode", gamemode)));
-            gamemodeLabel.SetMessage(gamemodeMessage);
-            roundEndSummaryContainer.AddChild(gamemodeLabel);
+            var sponsorCredits = ExtractSponsorCredits(roundEnd, out var roundEndWithoutSponsors);
+            var roundStats = _ccmStatsSystem.LatestRoundEndStats;
+            var winningSide = roundStats?.WinningSide ?? CCMStatsSide.None;
 
-            //Duration
-            var roundTimeLabel = new RichTextLabel();
-            roundTimeLabel.SetMarkup(Loc.GetString("round-end-summary-window-duration-label",
-                                                   ("hours", roundDuration.Hours),
-                                                   ("minutes", roundDuration.Minutes),
-                                                   ("seconds", roundDuration.Seconds)));
-            roundEndSummaryContainer.AddChild(roundTimeLabel);
+            roundEndSummaryContainer.AddChild(BuildRoundInfoBlock(
+                gamemode,
+                roundEndWithoutSponsors,
+                roundDuration,
+                roundId,
+                winningSide));
 
-            //Round end text
-            if (!string.IsNullOrEmpty(roundEnd))
+            if (roundStats != null)
             {
-                var roundEndLabel = new RichTextLabel();
-                roundEndLabel.SetMarkup(roundEnd);
-                roundEndSummaryContainer.AddChild(roundEndLabel);
+                roundEndSummaryContainer.AddChild(BuildCampaignScoreBlock(
+                    roundStats.MarineCampaignWins,
+                    roundStats.XenoCampaignWins,
+                    winningSide));
+
+                roundEndSummaryContainer.AddChild(BuildRoundScoreLabel(roundStats.PersonalScore));
+
+                if (roundStats.PersonalStats != null)
+                    roundEndSummaryContainer.AddChild(BuildPersonalStatsBlock(roundStats.PersonalStats));
+
+                if (roundStats.MarineMvp != null)
+                    roundEndSummaryContainer.AddChild(BuildMvpBlock(roundStats.MarineMvp));
+
+                if (roundStats.XenoMvp != null)
+                    roundEndSummaryContainer.AddChild(BuildMvpBlock(roundStats.XenoMvp));
             }
+
+            if (sponsorCredits.Count > 0)
+                roundEndSummaryContainer.AddChild(BuildSponsorCreditsBlock(sponsorCredits));
 
             roundEndSummaryContainerScrollbox.AddChild(roundEndSummaryContainer);
             roundEndSummaryTab.AddChild(roundEndSummaryContainerScrollbox);
@@ -167,6 +210,884 @@ namespace Content.Client.RoundEnd
 
             return playerManifestTab;
         }
+
+        private Control BuildRoundInfoBlock(
+            string gamemode,
+            string roundEnd,
+            TimeSpan roundDuration,
+            int roundId,
+            CCMStatsSide winningSide)
+        {
+            var accent = StyleNano.LobbyMenuButtonBase;
+            var winnerAccent = winningSide == CCMStatsSide.None
+                ? accent
+                : GetMvpAccentColor(winningSide);
+
+            var panel = new PanelContainer
+            {
+                HorizontalExpand = true,
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = GetSummaryPanelBackground(),
+                    BorderColor = winnerAccent.WithAlpha(0.82f),
+                    BorderThickness = new Thickness(1),
+                    ContentMarginLeftOverride = 12,
+                    ContentMarginTopOverride = 12,
+                    ContentMarginRightOverride = 12,
+                    ContentMarginBottomOverride = 12,
+                },
+            };
+
+            var root = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                SeparationOverride = 8,
+                HorizontalExpand = true,
+            };
+
+            var header = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Horizontal,
+                SeparationOverride = 8,
+                HorizontalExpand = true,
+            };
+
+            header.AddChild(new Label
+            {
+                Text = Loc.GetString("ccm-round-end-info-title"),
+                FontColorOverride = accent,
+                FontOverride = _mvpTitleFont,
+                HorizontalExpand = true,
+            });
+
+            if (winningSide != CCMStatsSide.None)
+                header.AddChild(BuildWinnerBadge(winningSide));
+
+            root.AddChild(header);
+
+            root.AddChild(new PanelContainer
+            {
+                MinSize = new Vector2(0, 1),
+                MaxSize = new Vector2(float.MaxValue, 1),
+                HorizontalExpand = true,
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = winnerAccent.WithAlpha(0.55f),
+                },
+            });
+
+            if (!string.IsNullOrWhiteSpace(roundEnd))
+            {
+                var roundEndLabel = new RichTextLabel
+                {
+                    HorizontalExpand = true,
+                };
+                roundEndLabel.SetMarkup(roundEnd);
+                root.AddChild(roundEndLabel);
+            }
+
+            root.AddChild(BuildInfoRow(
+                Loc.GetString("ccm-round-end-info-mode"),
+                gamemode,
+                accent));
+
+            var metaRow = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Horizontal,
+                SeparationOverride = 8,
+                HorizontalExpand = true,
+            };
+
+            var roundIdLabel = new RichTextLabel();
+            roundIdLabel.SetMarkup(Loc.GetString("round-end-summary-window-round-id-label", ("roundId", roundId)));
+            metaRow.AddChild(BuildRoundMetaChip(roundIdLabel, accent));
+
+            var roundTimeLabel = new RichTextLabel();
+            roundTimeLabel.SetMarkup(Loc.GetString(
+                "round-end-summary-window-duration-label",
+                ("hours", roundDuration.Hours),
+                ("minutes", roundDuration.Minutes),
+                ("seconds", roundDuration.Seconds)));
+            metaRow.AddChild(BuildRoundMetaChip(roundTimeLabel, winnerAccent));
+
+            root.AddChild(metaRow);
+
+            panel.AddChild(root);
+            return panel;
+        }
+
+        private Control BuildWinnerBadge(CCMStatsSide winningSide)
+        {
+            var accent = GetMvpAccentColor(winningSide);
+            var key = winningSide == CCMStatsSide.Marines
+                ? "ccm-round-end-round-winner-marines"
+                : "ccm-round-end-round-winner-xenos";
+
+            var panel = new PanelContainer
+            {
+                VerticalAlignment = VAlignment.Center,
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = accent.WithAlpha(0.18f),
+                    BorderColor = accent.WithAlpha(0.9f),
+                    BorderThickness = new Thickness(1),
+                    ContentMarginLeftOverride = 8,
+                    ContentMarginTopOverride = 4,
+                    ContentMarginRightOverride = 8,
+                    ContentMarginBottomOverride = 4,
+                },
+            };
+
+            panel.AddChild(new Label
+            {
+                Text = Loc.GetString(key),
+                FontColorOverride = accent,
+            });
+
+            return panel;
+        }
+
+        private static Control BuildRoundMetaChip(Control child, Color accent)
+        {
+            var panel = new PanelContainer
+            {
+                HorizontalExpand = true,
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = GetSummaryInsetBackground(),
+                    BorderColor = accent.WithAlpha(0.65f),
+                    BorderThickness = new Thickness(1),
+                    ContentMarginLeftOverride = 8,
+                    ContentMarginTopOverride = 6,
+                    ContentMarginRightOverride = 8,
+                    ContentMarginBottomOverride = 6,
+                },
+            };
+
+            panel.AddChild(child);
+            return panel;
+        }
+
+        private static Control BuildInfoRow(string label, string value, Color accent)
+        {
+            var row = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Horizontal,
+                SeparationOverride = 8,
+                HorizontalExpand = true,
+            };
+
+            row.AddChild(new Label
+            {
+                Text = label,
+                FontColorOverride = accent,
+                MinSize = new Vector2(60, 0),
+            });
+
+            row.AddChild(new Label
+            {
+                Text = value,
+                FontColorOverride = Color.White,
+                HorizontalExpand = true,
+                ClipText = true,
+            });
+
+            return row;
+        }
+
+        private Control BuildSectionHeader(string locKey)
+        {
+            var panel = new PanelContainer
+            {
+                HorizontalExpand = true,
+                Margin = new Thickness(0, 4, 0, 0),
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = StyleNano.ButtonColorContext.WithAlpha(0.12f),
+                    BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.6f),
+                    BorderThickness = new Thickness(1),
+                    ContentMarginLeftOverride = 10,
+                    ContentMarginTopOverride = 7,
+                    ContentMarginRightOverride = 10,
+                    ContentMarginBottomOverride = 7,
+                },
+            };
+
+            panel.AddChild(new Label
+            {
+                Text = Loc.GetString(locKey),
+                FontColorOverride = StyleNano.LobbyMenuButtonBase,
+                HorizontalAlignment = HAlignment.Center,
+                HorizontalExpand = true,
+            });
+
+            return panel;
+        }
+
+        private Control BuildRoundScoreLabel(int score)
+        {
+            var panel = new PanelContainer
+            {
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = StyleNano.ButtonColorContext.WithAlpha(0.15f),
+                    BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.7f),
+                    BorderThickness = new Thickness(1),
+                    ContentMarginLeftOverride = 10,
+                    ContentMarginTopOverride = 8,
+                    ContentMarginRightOverride = 10,
+                    ContentMarginBottomOverride = 8,
+                },
+            };
+
+            var label = new RichTextLabel
+            {
+                HorizontalExpand = true,
+            };
+            label.SetMarkup(Loc.GetString("ccm-round-end-personal-score", ("score", score)));
+            panel.AddChild(label);
+            return panel;
+        }
+
+        private Control BuildMvpBlock(CCMRoundMvpData data)
+        {
+            var accent = GetMvpAccentColor(data.Side);
+            var background = GetMvpBackgroundColor(data.Side);
+
+            var panel = new PanelContainer
+            {
+                Margin = new Thickness(0, 10, 0, 0),
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = background,
+                    BorderColor = accent.WithAlpha(0.9f),
+                    BorderThickness = new Thickness(1),
+                    ContentMarginLeftOverride = 10,
+                    ContentMarginTopOverride = 10,
+                    ContentMarginRightOverride = 10,
+                    ContentMarginBottomOverride = 10,
+                },
+            };
+
+            var block = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                SeparationOverride = 8,
+            };
+
+            var titleRow = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Horizontal,
+                SeparationOverride = 8,
+                HorizontalExpand = true,
+            };
+
+            var title = new Label
+            {
+                Text = Loc.GetString(
+                    data.Side == CCMStatsSide.Marines
+                        ? "ccm-round-end-mvp-marines"
+                        : "ccm-round-end-mvp-xenos"),
+                FontColorOverride = accent,
+                FontOverride = _mvpTitleFont,
+            };
+
+            var subtitle = new Label
+            {
+                Text = Loc.GetString("ccm-round-end-mvp-subtitle"),
+                FontColorOverride = Color.White.WithAlpha(0.75f),
+                HorizontalExpand = true,
+                HorizontalAlignment = HAlignment.Right,
+                FontOverride = _mvpSubtitleFont,
+            };
+
+            titleRow.AddChild(title);
+            titleRow.AddChild(subtitle);
+            block.AddChild(titleRow);
+            block.AddChild(new PanelContainer
+            {
+                MinSize = new Vector2(0, 1),
+                MaxSize = new Vector2(float.MaxValue, 1),
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = accent.WithAlpha(0.55f),
+                },
+            });
+
+            var row = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Horizontal,
+                SeparationOverride = 12,
+                HorizontalExpand = true,
+            };
+
+            var portraitHolder = new PanelContainer
+            {
+                MinSize = new Vector2(116, 116),
+                MaxSize = new Vector2(116, 116),
+                VerticalAlignment = VAlignment.Top,
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = GetSummaryInsetBackground(0.35f),
+                    BorderColor = accent.WithAlpha(0.55f),
+                    BorderThickness = new Thickness(1),
+                },
+            };
+
+            if (data.NetEntity != null)
+            {
+                portraitHolder.AddChild(new SpriteView(data.NetEntity.Value, _entityManager)
+                {
+                    OverrideDirection = Direction.South,
+                    SetSize = new Vector2(108, 108),
+                    VerticalAlignment = VAlignment.Center,
+                    HorizontalAlignment = HAlignment.Center,
+                });
+            }
+
+            row.AddChild(portraitHolder);
+
+            var details = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                SeparationOverride = 4,
+                HorizontalExpand = true,
+            };
+
+            details.AddChild(new Label
+            {
+                Text = data.Name,
+                FontColorOverride = Color.White,
+                ClipText = true,
+            });
+            details.AddChild(new Label
+            {
+                Text = data.Ckey,
+                FontColorOverride = Color.White.WithAlpha(0.7f),
+                ClipText = true,
+                Margin = new Thickness(0, 0, 0, 4),
+            });
+
+            details.AddChild(BuildMvpMetricRow("ccm-round-end-mvp-impact", data.ImpactPoints.ToString(), accent, accent));
+            details.AddChild(BuildMvpMetricRow("ccm-round-end-mvp-damage", data.DamageDone.ToString(), accent, Color.White));
+            details.AddChild(BuildMvpMetricRow("ccm-round-end-mvp-kills", data.Kills.ToString(), accent, Color.White));
+            details.AddChild(BuildMvpMetricRow("ccm-round-end-mvp-healing", data.HealingDone.ToString(), accent, Color.White));
+
+            if (data.Side == CCMStatsSide.Marines)
+                details.AddChild(BuildMvpMetricRow("ccm-round-end-mvp-revives", data.Revives.ToString(), accent, Color.White));
+
+            details.AddChild(BuildMvpMetricRow("ccm-round-end-mvp-structures", data.StructuresBuilt.ToString(), accent, Color.White));
+
+            row.AddChild(details);
+
+            block.AddChild(row);
+            panel.AddChild(block);
+            return panel;
+        }
+
+        private Control BuildPersonalStatsBlock(CCMRoundPersonalStatsData data)
+        {
+            var accent = StyleNano.LobbyMenuButtonBase;
+            var background = GetSummaryPanelBackground();
+
+            var panel = new PanelContainer
+            {
+                Margin = new Thickness(0, 10, 0, 0),
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = background,
+                    BorderColor = accent.WithAlpha(0.85f),
+                    BorderThickness = new Thickness(1),
+                    ContentMarginLeftOverride = 10,
+                    ContentMarginTopOverride = 10,
+                    ContentMarginRightOverride = 10,
+                    ContentMarginBottomOverride = 10,
+                },
+            };
+
+            var root = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                SeparationOverride = 8,
+            };
+
+            root.AddChild(new Label
+            {
+                Text = Loc.GetString("ccm-round-end-personal-title"),
+                FontColorOverride = accent,
+            });
+
+            root.AddChild(new PanelContainer
+            {
+                MinSize = new Vector2(0, 1),
+                MaxSize = new Vector2(float.MaxValue, 1),
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = accent.WithAlpha(0.55f),
+                },
+            });
+
+            var time = TimeSpan.FromSeconds(data.RoundSecondsPlayed);
+
+            root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-victory-points", data.VictoryPoints.ToString(), accent, Color.White));
+            root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-impact-points", data.ImpactPoints.ToString(), accent, accent));
+            root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-damage", data.DamageDone.ToString(), accent, Color.White));
+            root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-kills", data.Kills.ToString(), accent, Color.White));
+            root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-healing", data.HealingDone.ToString(), accent, Color.White));
+            root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-revives", data.Revives.ToString(), accent, Color.White));
+            root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-structures", data.StructuresBuilt.ToString(), accent, Color.White));
+            root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-time", Loc.GetString("round-end-summary-window-duration-label",
+                ("hours", time.Hours),
+                ("minutes", time.Minutes),
+                ("seconds", time.Seconds)), accent, Color.White));
+
+            if (data.MarineVictoryPoints > 0 ||
+                data.MarineImpactPoints > 0 ||
+                data.MarineDamageDone > 0 ||
+                data.MarineKills > 0 ||
+                data.MarineHealingDone > 0 ||
+                data.MarineRevives > 0 ||
+                data.MarineStructuresBuilt > 0)
+            {
+                root.AddChild(BuildSideSummary(
+                    Loc.GetString("ccm-round-end-personal-marines"),
+                    accent,
+                    data.MarineVictoryPoints,
+                    data.MarineImpactPoints,
+                    data.MarineDamageDone,
+                    data.MarineKills,
+                    data.MarineHealingDone,
+                    data.MarineRevives,
+                    data.MarineStructuresBuilt));
+            }
+
+            if (data.XenoVictoryPoints > 0 ||
+                data.XenoImpactPoints > 0 ||
+                data.XenoDamageDone > 0 ||
+                data.XenoKills > 0 ||
+                data.XenoHealingDone > 0 ||
+                data.XenoStructuresBuilt > 0)
+            {
+                root.AddChild(BuildSideSummary(
+                    Loc.GetString("ccm-round-end-personal-xenos"),
+                    accent,
+                    data.XenoVictoryPoints,
+                    data.XenoImpactPoints,
+                    data.XenoDamageDone,
+                    data.XenoKills,
+                    data.XenoHealingDone,
+                    0,
+                    data.XenoStructuresBuilt));
+            }
+
+            panel.AddChild(root);
+            return panel;
+        }
+
+        private Control BuildCampaignScoreBlock(int marineWins, int xenoWins, CCMStatsSide winningSide)
+        {
+            var marineAccent = StyleNano.LobbyMenuButtonBase;
+            var xenoAccent = GetXenoAccentColor();
+            var neutral = Color.FromHex("#D9DDE3");
+
+            var panel = new PanelContainer
+            {
+                Margin = new Thickness(0, 10, 0, 0),
+                HorizontalExpand = true,
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = GetSummaryPanelBackground(),
+                    BorderColor = marineAccent.WithAlpha(0.85f),
+                    BorderThickness = new Thickness(1),
+                    ContentMarginLeftOverride = 10,
+                    ContentMarginTopOverride = 10,
+                    ContentMarginRightOverride = 10,
+                    ContentMarginBottomOverride = 10,
+                },
+            };
+
+            var root = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                SeparationOverride = 8,
+                HorizontalExpand = true,
+            };
+
+            var titleRow = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Horizontal,
+                SeparationOverride = 8,
+                HorizontalExpand = true,
+            };
+
+            titleRow.AddChild(new Label
+            {
+                Text = Loc.GetString("ccm-round-wins-title"),
+                HorizontalExpand = true,
+                FontColorOverride = neutral,
+                FontOverride = _mvpSubtitleFont,
+            });
+
+            if (winningSide != CCMStatsSide.None)
+                titleRow.AddChild(BuildWinnerBadge(winningSide));
+
+            root.AddChild(titleRow);
+
+            root.AddChild(new PanelContainer
+            {
+                MinSize = new Vector2(0, 1),
+                MaxSize = new Vector2(float.MaxValue, 1),
+                HorizontalExpand = true,
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = marineAccent.WithAlpha(0.55f),
+                },
+            });
+
+            var row = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Horizontal,
+                SeparationOverride = 12,
+                HorizontalExpand = true,
+            };
+
+            row.AddChild(BuildCampaignScoreSide(
+                Loc.GetString("ccm-round-wins-marines"),
+                marineWins.ToString(),
+                marineAccent,
+                winningSide == CCMStatsSide.Marines));
+            row.AddChild(BuildCampaignScoreSide(
+                Loc.GetString("ccm-round-wins-xenos"),
+                xenoWins.ToString(),
+                xenoAccent,
+                winningSide == CCMStatsSide.Xenos));
+
+            root.AddChild(row);
+            panel.AddChild(root);
+            return panel;
+        }
+
+        private Control BuildSponsorCreditsBlock(List<SponsorCreditEntry> sponsors)
+        {
+            var panel = new PanelContainer
+            {
+                Margin = new Thickness(0, 12, 0, 0),
+                HorizontalExpand = true,
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = GetSponsorPanelBackground(),
+                    BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.75f),
+                    BorderThickness = new Thickness(1),
+                    ContentMarginLeftOverride = 10,
+                    ContentMarginTopOverride = 10,
+                    ContentMarginRightOverride = 10,
+                    ContentMarginBottomOverride = 10,
+                },
+            };
+
+            var root = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                SeparationOverride = 8,
+                HorizontalExpand = true,
+            };
+
+            AddSponsorTierSection(root, sponsors, CCMSponsorshipTier.SponsorIII);
+            AddSponsorTierSection(root, sponsors, CCMSponsorshipTier.SponsorII);
+            AddSponsorTierSection(root, sponsors, CCMSponsorshipTier.SponsorI);
+
+            panel.AddChild(root);
+            return panel;
+        }
+
+        private void AddSponsorTierSection(BoxContainer root, List<SponsorCreditEntry> sponsors, CCMSponsorshipTier tier)
+        {
+            var tierEntries = sponsors.Where(entry => entry.Tier == tier).Select(entry => entry.Ckey).ToList();
+            if (tierEntries.Count == 0)
+                return;
+
+            var accent = GetSponsorTierColor(tier);
+            var tierTitle = new Label
+            {
+                Text = Loc.GetString(GetSponsorTierLocKey(tier)),
+                FontColorOverride = accent,
+                HorizontalAlignment = HAlignment.Center,
+                HorizontalExpand = true,
+                FontOverride = GetSponsorTierFont(tier),
+                Margin = new Thickness(0, tier == CCMSponsorshipTier.SponsorIII ? 6 : 4, 0, 0),
+            };
+
+            root.AddChild(tierTitle);
+
+            foreach (var ckey in tierEntries)
+            {
+                root.AddChild(new Label
+                {
+                    Text = ckey,
+                    FontColorOverride = accent.WithAlpha(0.96f),
+                    HorizontalAlignment = HAlignment.Center,
+                    HorizontalExpand = true,
+                    FontOverride = GetSponsorTierNameFont(tier),
+                });
+            }
+        }
+
+        private List<SponsorCreditEntry> ExtractSponsorCredits(string roundEnd, out string cleanedRoundEnd)
+        {
+            var result = new List<SponsorCreditEntry>();
+            cleanedRoundEnd = roundEnd;
+
+            if (string.IsNullOrWhiteSpace(roundEnd))
+                return result;
+
+            var sponsorHeader = Loc.GetString("ccm-sponsorship-endgame-header");
+            var tierOneTitle = Loc.GetString("ccm-sponsorship-tier-1-title");
+            var tierTwoTitle = Loc.GetString("ccm-sponsorship-tier-2-title");
+            var tierThreeTitle = Loc.GetString("ccm-sponsorship-tier-3-title");
+            var sponsorRegex = new Regex(@"\[color=[^\]]+\](?<ckey>[^\[]+)\[/color\]\s+\[color=[^\]]+\]\((?<tier>[^)]+)\)\[/color\]",
+                RegexOptions.Compiled);
+
+            var lines = roundEnd.Split('\n').ToList();
+            var cleanedLines = new List<string>();
+            var inSponsorBlock = false;
+
+            foreach (var rawLine in lines)
+            {
+                var line = rawLine.TrimEnd();
+
+                if (line.Contains(sponsorHeader))
+                {
+                    inSponsorBlock = true;
+                    continue;
+                }
+
+                if (inSponsorBlock)
+                {
+                    var match = sponsorRegex.Match(line);
+                    if (match.Success)
+                    {
+                        var ckey = match.Groups["ckey"].Value.Trim();
+                        var tierText = match.Groups["tier"].Value.Trim();
+                        var tier = tierText switch
+                        {
+                            var t when t == tierThreeTitle => CCMSponsorshipTier.SponsorIII,
+                            var t when t == tierTwoTitle => CCMSponsorshipTier.SponsorII,
+                            _ => CCMSponsorshipTier.SponsorI,
+                        };
+
+                        result.Add(new SponsorCreditEntry(ckey, tier));
+                        continue;
+                    }
+
+                    inSponsorBlock = false;
+                }
+
+                cleanedLines.Add(line);
+            }
+
+            cleanedRoundEnd = string.Join('\n', cleanedLines.Where(line => !string.IsNullOrWhiteSpace(line)));
+            return result;
+        }
+
+        private Font GetSponsorTierFont(CCMSponsorshipTier tier)
+        {
+            return tier switch
+            {
+                CCMSponsorshipTier.SponsorIII => _sponsorTierThreeFont,
+                CCMSponsorshipTier.SponsorII => _sponsorTierTwoFont,
+                _ => _sponsorTierOneFont,
+            };
+        }
+
+        private Font GetSponsorTierNameFont(CCMSponsorshipTier tier)
+        {
+            return tier switch
+            {
+                CCMSponsorshipTier.SponsorIII => _sponsorTierThreeNameFont,
+                CCMSponsorshipTier.SponsorII => _sponsorTierTwoNameFont,
+                _ => _sponsorTierOneNameFont,
+            };
+        }
+
+        private static string GetSponsorTierLocKey(CCMSponsorshipTier tier)
+        {
+            return tier switch
+            {
+                CCMSponsorshipTier.SponsorIII => "ccm-sponsorship-tier-3-title",
+                CCMSponsorshipTier.SponsorII => "ccm-sponsorship-tier-2-title",
+                _ => "ccm-sponsorship-tier-1-title",
+            };
+        }
+
+        private static Color GetSponsorTierColor(CCMSponsorshipTier tier)
+        {
+            return tier switch
+            {
+                CCMSponsorshipTier.SponsorIII => Color.FromHex("#F6C453"),
+                CCMSponsorshipTier.SponsorII => Color.FromHex("#D96CFF"),
+                _ => Color.FromHex("#61C9FF"),
+            };
+        }
+
+        private sealed record SponsorCreditEntry(string Ckey, CCMSponsorshipTier Tier);
+
+        private Control BuildCampaignScoreSide(string title, string score, Color accent, bool highlighted)
+        {
+            var panel = new PanelContainer
+            {
+                HorizontalExpand = true,
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = highlighted
+                        ? accent.WithAlpha(0.16f)
+                        : GetSummaryInsetBackground(),
+                    BorderColor = accent.WithAlpha(highlighted ? 0.95f : 0.55f),
+                    BorderThickness = new Thickness(1),
+                    ContentMarginLeftOverride = 10,
+                    ContentMarginTopOverride = 10,
+                    ContentMarginRightOverride = 10,
+                    ContentMarginBottomOverride = 10,
+                },
+            };
+
+            var column = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                HorizontalExpand = true,
+                SeparationOverride = 4,
+            };
+
+            column.AddChild(new Label
+            {
+                Text = title,
+                HorizontalAlignment = HAlignment.Center,
+                HorizontalExpand = true,
+                FontColorOverride = accent,
+                FontOverride = _mvpSubtitleFont,
+            });
+            column.AddChild(new Label
+            {
+                Text = score,
+                HorizontalAlignment = HAlignment.Center,
+                HorizontalExpand = true,
+                FontColorOverride = Color.White,
+                FontOverride = _mvpTitleFont,
+            });
+
+            panel.AddChild(column);
+            return panel;
+        }
+
+        private static BoxContainer BuildMvpMetricRow(string locKey, string value, Color accent, Color valueColor)
+        {
+            var row = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Horizontal,
+                SeparationOverride = 8,
+                HorizontalExpand = true,
+            };
+
+            row.AddChild(new Label
+            {
+                Text = Loc.GetString(locKey),
+                HorizontalExpand = true,
+                FontColorOverride = Color.White.WithAlpha(0.78f),
+            });
+
+            row.AddChild(new Label
+            {
+                Text = value,
+                FontColorOverride = valueColor,
+                HorizontalAlignment = HAlignment.Right,
+            });
+
+            return row;
+        }
+
+        private static Control BuildSideSummary(
+            string title,
+            Color accent,
+            int victoryPoints,
+            int impactPoints,
+            int damage,
+            int kills,
+            int healing,
+            int revives,
+            int structures)
+        {
+            var container = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                SeparationOverride = 4,
+                Margin = new Thickness(0, 6, 0, 0),
+            };
+
+            container.AddChild(new Label
+            {
+                Text = title,
+                FontColorOverride = accent.WithAlpha(0.9f),
+            });
+
+            container.AddChild(BuildMvpMetricRow("ccm-round-end-personal-victory-points", victoryPoints.ToString(), accent, Color.White));
+            container.AddChild(BuildMvpMetricRow("ccm-round-end-personal-impact-points", impactPoints.ToString(), accent, accent));
+            container.AddChild(BuildMvpMetricRow("ccm-round-end-personal-damage", damage.ToString(), accent, Color.White));
+            container.AddChild(BuildMvpMetricRow("ccm-round-end-personal-kills", kills.ToString(), accent, Color.White));
+            container.AddChild(BuildMvpMetricRow("ccm-round-end-personal-healing", healing.ToString(), accent, Color.White));
+
+            if (revives > 0)
+                container.AddChild(BuildMvpMetricRow("ccm-round-end-personal-revives", revives.ToString(), accent, Color.White));
+
+            container.AddChild(BuildMvpMetricRow("ccm-round-end-personal-structures", structures.ToString(), accent, Color.White));
+            return container;
+        }
+
+        private static Color GetMvpAccentColor(CCMStatsSide side)
+        {
+            return side == CCMStatsSide.Marines
+                ? StyleNano.LobbyMenuButtonBase
+                : GetXenoAccentColor();
+        }
+
+        private static Color GetXenoAccentColor()
+        {
+            return Color.FromHex("#D96CFF");
+        }
+
+        private static Color GetMvpBackgroundColor(CCMStatsSide side)
+        {
+            return side == CCMStatsSide.Marines
+                ? GetMarineMvpBackground()
+                : Color.FromHex("#13081A").WithAlpha(0.92f);
+        }
+
+        private static Color GetSummaryPanelBackground()
+        {
+            return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                ? Color.FromHex("#0E2950").WithAlpha(0.97f)
+                : Color.FromHex("#08150D").WithAlpha(0.97f);
+        }
+
+        private static Color GetSponsorPanelBackground()
+        {
+            return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                ? Color.FromHex("#102A52").WithAlpha(0.96f)
+                : Color.FromHex("#091A11").WithAlpha(0.96f);
+        }
+
+        private static Color GetSummaryInsetBackground(float alpha = 0.18f)
+        {
+            return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                ? Color.FromHex("#081936").WithAlpha(alpha)
+                : Color.Black.WithAlpha(alpha);
+        }
+
+        private static Color GetMarineMvpBackground()
+        {
+            return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                ? Color.FromHex("#0C2344").WithAlpha(0.92f)
+                : Color.FromHex("#07150A").WithAlpha(0.92f);
+        }
     }
 
 }
+

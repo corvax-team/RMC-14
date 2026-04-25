@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using Content.Shared.Audio;
 using Content.Shared.CCVar;
 using Robust.Client.Graphics;
@@ -26,6 +27,9 @@ namespace Content.Client.Audio;
 /// </summary>
 public sealed class AmbientSoundSystem : SharedAmbientSoundSystem
 {
+    // CCM 23 > 24: increase local ambience hearing distance.
+    private const float CcmAmbientRangeMultiplier = 1.4f;
+
     [Dependency] private readonly AmbientSoundTreeSystem _treeSys = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
@@ -41,7 +45,7 @@ public sealed class AmbientSoundSystem : SharedAmbientSoundSystem
     private int _maxAmbientCount;
     private bool _overlayEnabled;
     private float _maxAmbientRange;
-    private Vector2 MaxAmbientVector => new(_maxAmbientRange, _maxAmbientRange);
+    private Vector2 MaxAmbientVector => new(_maxAmbientRange * CcmAmbientRangeMultiplier, _maxAmbientRange * CcmAmbientRangeMultiplier);
 
     private float _cooldown;
     private TimeSpan _targetTime = TimeSpan.Zero;
@@ -216,7 +220,8 @@ public sealed class AmbientSoundSystem : SharedAmbientSoundSystem
             : state.TransformSystem.GetWorldPosition(xform) - state.MapPos;
 
         var range = delta.Length();
-        if (range >= ambientComp.Range)
+        var effectiveRange = ambientComp.Range * CcmAmbientRangeMultiplier;
+        if (range >= effectiveRange)
             return true;
 
         string key;
@@ -260,7 +265,8 @@ public sealed class AmbientSoundSystem : SharedAmbientSoundSystem
                     ? xform.LocalPosition - playerXform.LocalPosition
                     : _xformSystem.GetWorldPosition(xform) - mapPos.Position;
 
-                if (distance.LengthSquared() < comp.Range * comp.Range)
+                var effectiveRange = comp.Range * CcmAmbientRangeMultiplier;
+                if (distance.LengthSquared() < effectiveRange * effectiveRange)
                     continue;
             }
 
@@ -303,7 +309,7 @@ public sealed class AmbientSoundSystem : SharedAmbientSoundSystem
                     .AddVolume(comp.Volume + _ambienceVolume)
                     // Randomise start so 2 sources don't increase their volume.
                     .WithPlayOffset(_random.NextFloat(0.0f, 100.0f))
-                    .WithMaxDistance(comp.Range);
+                    .WithMaxDistance(comp.Range * CcmAmbientRangeMultiplier);
 
                 var stream = _audio.PlayEntity(comp.Sound, Filter.Local(), uid, false, audioParams);
                 if (stream == null)

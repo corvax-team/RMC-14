@@ -8,7 +8,7 @@ namespace Content.Client.Administration.UI.Bwoink
     /// This window connects to a BwoinkSystem channel. BwoinkSystem manages the rest.
     /// </summary>
     [GenerateTypedNameReferences]
-    public sealed partial class BwoinkWindow : DefaultWindow
+    public sealed partial class BwoinkWindow : DefaultCMWindow
     {
         public BwoinkWindow()
         {
@@ -35,3 +35,4 @@ namespace Content.Client.Administration.UI.Bwoink
         }
     }
 }
+

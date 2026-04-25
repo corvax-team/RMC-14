@@ -18,7 +18,7 @@ using Range = Robust.Client.UserInterface.Controls.Range;
 namespace Content.Client.Instruments.UI
 {
     [GenerateTypedNameReferences]
-    public sealed partial class InstrumentMenu : DefaultWindow
+    public sealed partial class InstrumentMenu : DefaultCMWindow
     {
         [Dependency] private readonly IEntityManager _entManager = default!;
         [Dependency] private readonly IFileDialogManager _dialogs = default!;
@@ -281,3 +281,4 @@ namespace Content.Client.Instruments.UI
         }
     }
 }
+

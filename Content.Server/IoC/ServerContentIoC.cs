@@ -5,8 +5,7 @@ using Content.Server._RMC14.Discord;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server._RMC14.Mentor;
 using Content.Server._RMC14.PlayTimeTracking;
-using Content.Server._Forge.Discord; // Forge-Change
-using Content.Server._Forge.Sponsors; // Forge-Change
+using Content.Server._CCM.Sponsorship;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -14,6 +13,7 @@ using Content.Server.Administration.Notes;
 using Content.Server.Afk;
 using Content.Server.Chat.Managers;
 using Content.Server.Connection;
+using Content.Server._CCM.Station.Jobs;
 using Content.Server.Database;
 using Content.Server.Discord;
 using Content.Server.Discord.DiscordLink;
@@ -30,9 +30,9 @@ using Content.Server.Players.RateLimiting;
 using Content.Server.Preferences.Managers;
 using Content.Server.ServerInfo;
 using Content.Server.ServerUpdates;
+using Content.Server.Secrets.CCM.Sponsorship;
 using Content.Server.Voting.Managers;
 using Content.Server.Worldgen.Tools;
-using Content.Shared._Forge.Sponsors; // Forge-Change
 using Content.Shared.Administration.Logs;
 using Content.Shared.Administration.Managers;
 using Content.Shared.Chat;
@@ -79,6 +79,7 @@ namespace Content.Server.IoC
             IoCManager.Register<ISharedPlaytimeManager, PlayTimeTrackingManager>();
             IoCManager.Register<ServerApi>();
             IoCManager.Register<JobWhitelistManager>();
+            IoCManager.Register<JobPriorityWeightManager>();
             IoCManager.Register<PlayerRateLimitManager>();
             IoCManager.Register<SharedPlayerRateLimitManager, PlayerRateLimitManager>();
             IoCManager.Register<MappingManager>();
@@ -86,9 +87,6 @@ namespace Content.Server.IoC
             IoCManager.Register<ConnectionManager>();
             IoCManager.Register<MultiServerKickManager>();
             IoCManager.Register<CVarControlManager>();
-            IoCManager.Register<DiscordAuthManager>(); // Forge-Change
-            IoCManager.Register<SponsorManager>(); // Forge-Change
-            IoCManager.Register<ISharedSponsorManager, SponsorManager>(); // Forge-Change
 
             IoCManager.Register<DiscordLink>();
             IoCManager.Register<DiscordChatLink>();
@@ -101,6 +99,13 @@ namespace Content.Server.IoC
             IoCManager.Register<CommendationManager>();
             IoCManager.Register<RMCActionsManager>();
             IoCManager.Register<RMCChatBansManager>();
+
+            // CCM
+            IoCManager.Register<ICCMSponsorshipSecretsProvider, CCMSponsorshipSecretsStubProvider>();
+            IoCManager.Register<CCMSponsorshipManager>();
+            IoCManager.Register<CCMCustomizationManager>();
         }
     }
 }
+
+// # CCM priority rework

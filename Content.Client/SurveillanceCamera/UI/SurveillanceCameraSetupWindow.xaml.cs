@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client.SurveillanceCamera.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class SurveillanceCameraSetupWindow : DefaultWindow
+public sealed partial class SurveillanceCameraSetupWindow : DefaultCMWindow
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
@@ -76,3 +76,4 @@ public sealed partial class SurveillanceCameraSetupWindow : DefaultWindow
         }
     }
 }
+

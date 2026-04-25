@@ -25,7 +25,7 @@ public sealed class RadiationDebugOverlay : Overlay
         _mapSystem = _entityManager.System<SharedMapSystem>();
 
         var cache = IoCManager.Resolve<IResourceCache>();
-        _font = new VectorFont(cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Regular.ttf"), 8);
+        _font = new VectorFont(cache.GetResource<FontResource>("/Fonts/Exo2/Exo2-Regular.ttf"), 8);
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -137,3 +137,5 @@ public sealed class RadiationDebugOverlay : Overlay
         }
     }
 }
+
+

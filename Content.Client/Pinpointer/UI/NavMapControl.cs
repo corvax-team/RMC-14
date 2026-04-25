@@ -436,7 +436,7 @@ public partial class NavMapControl : MapGridControl
 
             // Calculate font size for current zoom level
             var fontSize = (int)Math.Round(1 / WorldRange * DefaultDisplayedRange * UIScale * _targetFontsize, 0);
-            var font = new VectorFont(_cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Bold.ttf"), fontSize);
+            var font = new VectorFont(_cache.GetResource<FontResource>("/Fonts/Exo2/Exo2-Regular.ttf"), fontSize);
 
             foreach (var beacon in _navMap.Beacons.Values)
             {
@@ -754,3 +754,5 @@ public struct NavMapBlip
         Scale = scale;
     }
 }
+
+

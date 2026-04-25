@@ -5,10 +5,11 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._RMC14.Telephone;
 
 [GenerateTypedNameReferences]
-public sealed partial class TelephoneWindow : DefaultWindow
+public sealed partial class TelephoneWindow : DefaultCMWindow
 {
     public TelephoneWindow()
     {
         RobustXamlLoader.Load(this);
     }
 }
+

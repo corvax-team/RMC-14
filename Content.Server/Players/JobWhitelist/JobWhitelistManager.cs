@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿// CM14 rework: non-RMC edit marker.
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server._CCM.Sponsorship;
 using Content.Server.Database;
 using Content.Shared.CCVar;
 using Content.Shared.Players.JobWhitelist;
@@ -22,6 +24,8 @@ public sealed class JobWhitelistManager : IPostInjectInit
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly UserDbDataManager _userDb = default!;
+    // CCM sponsorship whitelist bypass context.
+    [Dependency] private readonly CCMSponsorshipManager _ccmSponsorship = default!;
 
     private readonly Dictionary<NetUserId, HashSet<string>> _whitelists = new();
 
@@ -67,6 +71,10 @@ public sealed class JobWhitelistManager : IPostInjectInit
             return true;
 
         if (!jobPrototype.Whitelisted)
+            return true;
+
+        // CCM sponsorship whitelist bypass: Sponsor III ignores job whitelist restrictions.
+        if (_ccmSponsorship.HasWhitelistBypass(session))
             return true;
 
         if (IsWhitelisted(session.UserId, job))

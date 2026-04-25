@@ -22,7 +22,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.Administration.UI.BanPanel;
 
 [GenerateTypedNameReferences]
-public sealed partial class BanPanel : DefaultWindow
+public sealed partial class BanPanel : DefaultCMWindow
 {
     public event Action<string?, (IPAddress, int)?, bool, ImmutableTypedHwid?, bool, uint, string, NoteSeverity, string[]?, bool>? BanSubmitted;
     public event Action<string>? PlayerChanged;
@@ -616,3 +616,4 @@ public sealed partial class BanPanel : DefaultWindow
         }
     }
 }
+

@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
 using System.Numerics;
 using Content.Server.Administration;
@@ -306,7 +307,7 @@ public sealed class ArrivalsSystem : EntitySystem
             _transform.SetWorldRotation(ent, args.FromRotation + rotation);
             if (_actor.TryGetSession(ent, out var session))
             {
-                _chat.DispatchServerMessage(session!, Loc.GetString("latejoin-arrivals-dumped-from-shuttle"));
+                _chat.DispatchServerMessageLoc(session!, "latejoin-arrivals-dumped-from-shuttle");
             }
         }
     }
@@ -387,11 +388,15 @@ public sealed class ArrivalsSystem : EntitySystem
 
         var arrival = NextShuttleArrival();
 
-        var message = arrival is not null
-            ? Loc.GetString("latejoin-arrivals-direction-time", ("time", $"{arrival:mm\\:ss}"))
-            : Loc.GetString("latejoin-arrivals-direction");
-
-        _chat.DispatchServerMessage(ev.Player, message);
+        if (arrival is not null)
+        {
+            _chat.DispatchServerMessageLoc(ev.Player, "latejoin-arrivals-direction-time",
+                new[] { ("time", (object) $"{arrival:mm\\:ss}") });
+        }
+        else
+        {
+            _chat.DispatchServerMessageLoc(ev.Player, "latejoin-arrivals-direction");
+        }
     }
 
     private bool TryTeleportToMapSpawn(EntityUid player, EntityUid stationId, TransformComponent? transform = null)
@@ -419,7 +424,7 @@ public sealed class ArrivalsSystem : EntitySystem
             _transform.SetCoordinates(player, transform, _random.Pick(possiblePositions));
             if (_actor.TryGetSession(player, out var session))
             {
-                _chat.DispatchServerMessage(session!, Loc.GetString("latejoin-arrivals-teleport-to-spawn"));
+                _chat.DispatchServerMessageLoc(session!, "latejoin-arrivals-teleport-to-spawn");
             }
             return true;
         }

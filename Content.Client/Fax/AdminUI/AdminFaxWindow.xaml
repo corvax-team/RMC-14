@@ -1,4 +1,4 @@
-<DefaultWindow xmlns="https://spacestation14.io"
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls" xmlns="https://spacestation14.io"
                Title="{Loc admin-fax-title}"
                MinWidth="400">
     <BoxContainer Orientation="Vertical" VerticalExpand="True">
@@ -26,4 +26,5 @@
         <CheckBox Name="LockPageCheckbox" Text="{Loc admin-fax-lock-page}" ToolTip="{Loc admin-fax-lock-page-tooltip}"/>
         <Button Name="SendButton" Text="{Loc admin-fax-send}" Margin="0 10 0 0" />
     </BoxContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

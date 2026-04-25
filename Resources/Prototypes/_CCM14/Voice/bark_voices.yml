@@ -1,0 +1,128 @@
+﻿# CM14 rework: non-RMC edit marker.
+- type: bark
+  id: BarkMaleVoice01
+  name: ccm-bark-voice-01
+  roundStart: true
+  voiceType: Normal
+  soundFiles:
+    - /Audio/_CCM14/Barks/Male/voice01.ogg
+
+- type: bark
+  id: BarkMaleVoice02
+  name: ccm-bark-voice-02
+  roundStart: true
+  voiceType: Normal
+  soundFiles:
+    - /Audio/_CCM14/Barks/Male/voice02.ogg
+
+- type: bark
+  id: BarkMaleVoice03
+  name: ccm-bark-voice-03
+  roundStart: true
+  voiceType: Normal
+  soundFiles:
+    - /Audio/_CCM14/Barks/Male/voice03.ogg
+
+- type: bark
+  id: BarkMaleVoice04
+  name: ccm-bark-voice-04
+  roundStart: true
+  voiceType: Normal
+  soundFiles:
+    - /Audio/_CCM14/Barks/Male/voice04.ogg
+
+- type: bark
+  id: BarkMaleVoice05
+  name: ccm-bark-voice-05
+  roundStart: true
+  voiceType: Normal
+  soundFiles:
+    - /Audio/_CCM14/Barks/Male/voice05.ogg
+
+- type: bark
+  id: BarkMaleVoice06
+  name: ccm-bark-voice-06
+  roundStart: true
+  voiceType: Normal
+  soundFiles:
+    - /Audio/_CCM14/Barks/Male/voice06.ogg
+
+- type: bark
+  id: BarkFemaleVoice01
+  name: ccm-bark-voice-f-01
+  roundStart: true
+  voiceType: Normal
+  soundFiles:
+    - /Audio/_CCM14/Barks/Female/voice01.ogg
+
+- type: bark
+  id: BarkFemaleVoice02
+  name: ccm-bark-voice-f-02
+  roundStart: true
+  voiceType: Normal
+  soundFiles:
+    - /Audio/_CCM14/Barks/Female/voice02.ogg
+
+- type: bark
+  id: BarkFemaleVoice03
+  name: ccm-bark-voice-f-03
+  roundStart: true
+  voiceType: Normal
+  soundFiles:
+    - /Audio/_CCM14/Barks/Female/voice03.ogg
+
+- type: bark
+  id: BarkFemaleVoice04
+  name: ccm-bark-voice-f-04
+  roundStart: true
+  voiceType: Normal
+  soundFiles:
+    - /Audio/_CCM14/Barks/Female/voice04.ogg
+
+- type: bark
+  id: BarkFemaleVoice05
+  name: ccm-bark-voice-f-05
+  roundStart: true
+  voiceType: Normal
+  soundFiles:
+    - /Audio/_CCM14/Barks/Female/voice05.ogg
+
+- type: bark
+  id: BarkFemaleVoice06
+  name: ccm-bark-voice-f-06
+  roundStart: true
+  voiceType: Normal
+  soundFiles:
+    - /Audio/_CCM14/Barks/Female/voice06.ogg
+
+- type: bark
+  id: BarkNeutralVoice01
+  name: ccm-bark-voice-n-01
+  roundStart: true
+  voiceType: Normal
+  soundFiles:
+    - /Audio/_CCM14/Barks/Neutral/voice01.ogg
+
+- type: bark
+  id: BarkNeutralVoice02
+  name: ccm-bark-voice-n-02
+  roundStart: true
+  voiceType: Normal
+  soundFiles:
+    - /Audio/_CCM14/Barks/Neutral/voice02.ogg
+
+- type: bark
+  id: BarkNeutralVoice03
+  name: ccm-bark-voice-n-03
+  roundStart: true
+  voiceType: Normal
+  soundFiles:
+    - /Audio/_CCM14/Barks/Neutral/voice03.ogg
+
+- type: bark
+  id: BarkNeutralVoice04
+  name: ccm-bark-voice-n-04
+  roundStart: true
+  voiceType: Normal
+  soundFiles:
+    - /Audio/_CCM14/Barks/Neutral/voice04.ogg

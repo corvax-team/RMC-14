@@ -1,5 +1,7 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
 using System.Numerics;
+using Content.Client.Stylesheets;
 using Content.Shared.Input;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
@@ -502,6 +504,18 @@ public class RadialMenuTextureButtonWithSector : RadialMenuTextureButton, IRadia
     /// </summary>
     public RadialMenuTextureButtonWithSector()
     {
+        var accent = StyleNano.LobbyCrtAccent;
+        var baseBackground = new Color(70, 73, 102, 128);
+        var hoverBackground = new Color(87, 91, 127, 128);
+        var baseBorder = new Color(173, 216, 230, 70);
+        var hoverBorder = new Color(87, 91, 127, 128);
+        var separator = new Color(128, 128, 128, 128);
+
+        BackgroundColor = BlendColor(baseBackground, accent.WithAlpha(baseBackground.A), 0.26f);
+        HoverBackgroundColor = BlendColor(hoverBackground, accent.WithAlpha(hoverBackground.A), 0.34f);
+        BorderColor = BlendColor(baseBorder, accent.WithAlpha(baseBorder.A), 0.30f);
+        HoverBorderColor = BlendColor(hoverBorder, accent.WithAlpha(hoverBorder.A), 0.42f);
+        SeparatorColor = BlendColor(separator, accent.WithAlpha(separator.A), 0.24f);
     }
 
     /// <inheritdoc />
@@ -666,5 +680,15 @@ public class RadialMenuTextureButtonWithSector : RadialMenuTextureButton, IRadia
     private static bool IsWholeCircle(float angleSectorFrom, float angleSectorTo)
     {
         return new Angle(angleSectorFrom).EqualsApprox(new Angle(angleSectorTo));
+    }
+
+    private static Color BlendColor(Color from, Color to, float amount)
+    {
+        amount = Math.Clamp(amount, 0f, 1f);
+        return new Color(
+            from.R + (to.R - from.R) * amount,
+            from.G + (to.G - from.G) * amount,
+            from.B + (to.B - from.B) * amount,
+            from.A + (to.A - from.A) * amount);
     }
 }

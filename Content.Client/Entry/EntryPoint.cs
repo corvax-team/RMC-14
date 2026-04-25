@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using Content.Client._RMC14.Explosion;
 using Content.Client._RMC14.Xenonids.Screech;
 using Content.Client.Administration.Managers;
@@ -25,6 +26,7 @@ using Content.Client.Stylesheets;
 using Content.Client.UserInterface;
 using Content.Client.Viewport;
 using Content.Client.Voting;
+using Content.Shared.CCVar;
 using Content.Shared.Ame.Components;
 using Content.Shared.Gravity;
 using Content.Shared.Localizations;
@@ -40,8 +42,6 @@ using Robust.Shared.ContentPack;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Replays;
 using Robust.Shared.Timing;
-using Content.Client._Forge.DiscordAuth; // Forge-Change
-using Content.Client._Forge.Sponsors; // Forge-Change
 
 namespace Content.Client.Entry
 {
@@ -80,8 +80,6 @@ namespace Content.Client.Entry
         [Dependency] private readonly TitleWindowManager _titleWindowManager = default!;
         [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
         [Dependency] private readonly ClientsidePlaytimeTrackingManager _clientsidePlaytimeManager = default!;
-        [Dependency] private readonly DiscordAuthManager _discordAuth = default!; // Forge-Change
-        [Dependency] private readonly SponsorManager _sponsorMan = default!; // Forge-Change
 
         public override void Init()
         {
@@ -89,7 +87,7 @@ namespace Content.Client.Entry
 
             foreach (var callback in TestingCallbacks)
             {
-                var cast = (ClientModuleTestingCallbacks)callback;
+                var cast = (ClientModuleTestingCallbacks) callback;
                 cast.ClientBeforeIoC?.Invoke();
             }
 
@@ -97,6 +95,7 @@ namespace Content.Client.Entry
             IoCManager.InjectDependencies(this);
 
             _contentLoc.Initialize();
+            _configManager.OnValueChanged(CCVars.ClientLocale, cultureCode => _contentLoc.SetCulture(cultureCode), true);
             _componentFactory.DoAutoRegistrations();
             _componentFactory.IgnoreMissingComponents();
 
@@ -145,7 +144,6 @@ namespace Content.Client.Entry
             _jobRequirements.Initialize();
             _playbackMan.Initialize();
             _clientsidePlaytimeManager.Initialize();
-            _sponsorMan.Initialize(); // Forge-Change
 
             //AUTOSCALING default Setup!
             _configManager.SetCVar("interface.resolutionAutoScaleUpperCutoffX", 1080);
@@ -184,7 +182,6 @@ namespace Content.Client.Entry
             _userInterfaceManager.SetActiveTheme(_configManager.GetCVar(CVars.InterfaceTheme));
             _documentParsingManager.Initialize();
             _titleWindowManager.Initialize();
-            _discordAuth.Initialize(); // Forge-Change
 
             _baseClient.RunLevelChanged += (_, args) =>
             {

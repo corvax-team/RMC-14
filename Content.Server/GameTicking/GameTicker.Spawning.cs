@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
@@ -106,7 +107,7 @@ namespace Content.Server.GameTicking
                     var evNoJobs = new NoJobsAvailableSpawningEvent(playerSession); // Used by gamerules to wipe their antag slot, if they got one
                     RaiseLocalEvent(evNoJobs);
 
-                    _chatManager.DispatchServerMessage(playerSession, Loc.GetString("job-not-available-wait-in-lobby"));
+                    _chatManager.DispatchServerMessageLoc(playerSession, "job-not-available-wait-in-lobby");
                 }
                 else
                 {
@@ -250,8 +251,7 @@ namespace Content.Server.GameTicking
                 var evNoJobs = new NoJobsAvailableSpawningEvent(player); // Used by gamerules to wipe their antag slot, if they got one
                 RaiseLocalEvent(evNoJobs);
 
-                _chatManager.DispatchServerMessage(player,
-                    Loc.GetString("game-ticker-player-no-jobs-available-when-joining"));
+                _chatManager.DispatchServerMessageLoc(player, "game-ticker-player-no-jobs-available-when-joining");
                 return;
             }
 
@@ -327,19 +327,19 @@ namespace Content.Server.GameTicking
             if (Comp<StationJobsComponent>(station).ExtendedAccess
                 && (jobPrototype.ExtendedAccess.Count > 0 || jobPrototype.ExtendedAccessGroups.Count > 0))
             {
-                _chatManager.DispatchServerMessage(player, Loc.GetString("job-greet-crew-shortages"));
+                _chatManager.DispatchServerMessageLoc(player, "job-greet-crew-shortages");
             }
 
             if (!silent && TryComp(station, out MetaDataComponent? metaData))
             {
-                _chatManager.DispatchServerMessage(player,
-                    Loc.GetString("job-greet-station-name", ("stationName", metaData.EntityName)));
+                _chatManager.DispatchServerMessageLoc(player, "job-greet-station-name",
+                    new[] { ("stationName", (object) metaData.EntityName) });
             }
 
             if (_distressSignal?.SelectedPlanetMapName != null)
             {
-                _chatManager.DispatchServerMessage(player,
-                    Loc.GetString("job-greet-planet-name", ("planetName",_distressSignal.SelectedPlanetMapName)));
+                _chatManager.DispatchServerMessageLoc(player, "job-greet-planet-name",
+                    new[] { ("planetName", (object) _distressSignal.SelectedPlanetMapName!) });
             }
 
             // We raise this event directed to the mob, but also broadcast it so game rules can do something now.

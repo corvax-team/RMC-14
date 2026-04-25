@@ -10,7 +10,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
 {
     [GenerateTypedNameReferences]
-    public sealed partial class GhostRoleRulesWindow : DefaultWindow
+    public sealed partial class GhostRoleRulesWindow : DefaultCMWindow
     {
         [Dependency] private readonly IConfigurationManager _cfg = IoCManager.Resolve<IConfigurationManager>();
         private float _timer;
@@ -53,3 +53,4 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
         }
     }
 }
+

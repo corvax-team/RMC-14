@@ -24,7 +24,7 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 namespace Content.Client.Credits;
 
 [GenerateTypedNameReferences]
-public sealed partial class CreditsWindow : DefaultWindow
+public sealed partial class CreditsWindow : DefaultCMWindow
 {
     [Dependency] private readonly IResourceManager _resourceManager = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
@@ -57,7 +57,6 @@ public sealed partial class CreditsWindow : DefaultWindow
         RobustXamlLoader.Load(this);
 
         TabContainer.SetTabTitle(Ss14ContributorsTab, Loc.GetString("credits-window-ss14contributorslist-tab"));
-        TabContainer.SetTabTitle(PatronsTab, Loc.GetString("credits-window-patrons-tab"));
         TabContainer.SetTabTitle(LicensesTab, Loc.GetString("credits-window-licenses-tab"));
         TabContainer.SetTabTitle(AttributionsTab, Loc.GetString("credits-window-attributions-tab"));
         TabContainer.SetTabTitle(OtherTab, Loc.GetString("rmc-other-credits-tab"));
@@ -402,3 +401,4 @@ public sealed partial class CreditsWindow : DefaultWindow
         }
     }
 }
+

@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Numerics;
 using Content.Client.Chat.Managers;
 using Content.Shared._RMC14.Marines.Squads;
@@ -82,7 +83,7 @@ namespace Content.Client.Chat.UI
                     return new FancyTextSpeechBubble(message, senderEntity, "whisperBox");
 
                 case SpeechType.Looc:
-                    return new TextSpeechBubble(message, senderEntity, "emoteBox", Color.FromHex("#48d1cc"));
+                    return new TextSpeechBubble(message, senderEntity, "emoteBox");
 
                 default:
                     throw new ArgumentOutOfRangeException();

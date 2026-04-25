@@ -1,4 +1,4 @@
-﻿<DefaultWindow
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
     xmlns="https://spacestation14.io" Title="{Loc admin-ui-atmos-add-gas}">
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Horizontal">
@@ -28,4 +28,5 @@
         </BoxContainer>
         <Button Name="SubmitButton" Text="{Loc admin-ui-atmos-add-gas}" />
     </BoxContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

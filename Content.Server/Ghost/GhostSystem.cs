@@ -1,6 +1,6 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
 using System.Numerics;
-using Content.Server._Forge.Sponsors; // Forge-Change
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
@@ -71,7 +71,6 @@ namespace Content.Server.Ghost
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly TagSystem _tag = default!;
         [Dependency] private readonly NameModifierSystem _nameMod = default!;
-        [Dependency] private readonly SponsorManager _sponsors = default!; // Forge-Change
 
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -488,34 +487,7 @@ namespace Content.Server.Ghost
                 return null;
             }
 
-            // Forge-Change-Start
-            var user = mind.Comp.UserId;
-            EntityUid ghost;
-            try
-            {
-                if (user != null && _sponsors.TryGetSponsor(user.Value, out var level)
-                                 && _sponsors.TryGetSponsorGhost(level, out var sponsorGhost))
-                {
-                    ghost = Spawn(sponsorGhost, spawnPosition.Value);
-                }
-                else
-                {
-                    ghost = Spawn(GameTicker.ObserverPrototypeName, spawnPosition.Value);
-                }
-
-                if (!HasComp<GhostComponent>(ghost))
-                {
-                    AddComp<GhostComponent>(ghost);
-                    Log.Warning($"Added missing GhostComponent to {ToPrettyString(ghost)}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"Failed to spawn ghost: {ex}");
-                return null;
-            }
-            // Forge-Change-End
-
+            var ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
             var ghostComponent = Comp<GhostComponent>(ghost);
 
             // Try setting the ghost entity name to either the character name or the player name.
@@ -571,8 +543,8 @@ namespace Content.Server.Ghost
             {
                 if (_player.TryGetSessionById(mind.UserId, out var session)) // Logging is suppressed to prevent spam from ghost attempts caused by movement attempts
                 {
-                    _chatManager.DispatchServerMessage(session, Loc.GetString("comp-mind-ghosting-prevented"),
-                        true);
+                    _chatManager.DispatchServerMessageLoc(session, "comp-mind-ghosting-prevented",
+                        suppressLog: true);
                 }
 
                 return false;

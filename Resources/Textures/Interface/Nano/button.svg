@@ -56,14 +56,36 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-79.848503,-133.93878)">
-    <path
+    <rect
        style="opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.6723063;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 79.848503,133.93878 v 3.70416 l 2.645833,2.64584 h 3.704167 v -3.70417 l -2.645833,-2.64583 z"
+       x="79.848503"
+       y="133.93878"
+       width="6.35"
+       height="6.35"
        id="rect1684"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccccc"
        inkscape:export-filename="/ssdhome/pj/Projects/space-station-14-content/Resources/Textures/Interface/Nano/button.svg.96dpi.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:0.7;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       x="80.248503"
+       y="134.33878"
+       width="5.55"
+       height="0.8"
+       id="rect1684-highlight" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#000000;fill-opacity:0.7;fill-rule:nonzero;stroke:none;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       x="80.248503"
+       y="139.08878"
+       width="5.55"
+       height="0.8"
+       id="rect1684-shadow" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#1f1f1f;stroke-width:0.8;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       x="80.248503"
+       y="134.33878"
+       width="5.55"
+       height="5.55"
+       id="rect1684-border" />
   </g>
 </svg>

@@ -19,11 +19,27 @@ ui-options-value-percent = { TOSTRING($value, "P0") }
 
 ui-options-discordrich = Enable Discord Rich Presence
 ui-options-general-ui-style = UI Style
+ui-options-client-language = Client language:
+ui-options-language-russian = Russian
+ui-options-language-english = English
+ui-options-language-restart-title = Restart Required
+ui-options-language-restart-warning = To change the language, the game must be restarted. Restart now?
+ui-options-language-restart-confirm = Confirm
+ui-options-language-restart-cancel = Cancel
+ui-options-general-lobby = Lobby
 ui-options-general-discord = Discord
 ui-options-general-cursor = Cursor
 ui-options-general-speech = Speech
+ui-options-general-chat-translation = Chat translation
 ui-options-general-storage = Storage
 ui-options-general-accessibility = Accessibility
+ui-options-chat-translate-enabled = Enable automatic chat translation
+ui-options-chat-translate-language = Translate chat to:
+ui-options-chat-translate-language-off = Do not translate
+ui-options-chat-translate-api = LibreTranslate API:
+ui-options-chat-translate-api-placeholder = http://127.0.0.1:5500/translate
+ui-options-chat-translate-api-help = Run your local LibreTranslate service and leave the default endpoint unless you changed its port.
+# CCM priority rework
 
 ## Audio menu
 
@@ -75,6 +91,14 @@ ui-options-scale-150 = 150%
 ui-options-scale-175 = 175%
 ui-options-scale-200 = 200%
 ui-options-hud-theme = HUD theme:
+ui-options-ui-color-theme = UI color:
+ui-options-ui-color-theme-green = Green
+ui-options-ui-color-theme-blue = Blue
+ui-options-lobby-background-preset = Lobby background preset:
+ui-options-lobby-background-preset-console = Console
+ui-options-lobby-background-preset-community = Community
+ui-options-lobby-background-preset-rmca = RMCA
+ui-options-lobby-invert-sides = Invert lobby sides
 ui-options-hud-theme-default = Default
 ui-options-hud-theme-plasmafire = Plasmafire
 ui-options-hud-theme-slimecore = Slimecore

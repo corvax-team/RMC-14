@@ -5,10 +5,11 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._RMC14.Chemistry;
 
 [GenerateTypedNameReferences]
-public sealed partial class RMCChemicalDispenserWindow : DefaultWindow
+public sealed partial class RMCChemicalDispenserWindow : DefaultCMWindow
 {
     public RMCChemicalDispenserWindow()
     {
         RobustXamlLoader.Load(this);
     }
 }
+

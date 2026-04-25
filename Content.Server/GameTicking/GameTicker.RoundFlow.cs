@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
 using System.Numerics;
 using Content.Server.Announcements;
@@ -371,7 +372,7 @@ namespace Content.Server.GameTicking
             DebugTools.Assert(RunLevel == GameRunLevel.PreRoundLobby);
             _sawmill.Info("Starting round!");
 
-            SendServerMessage(Loc.GetString("game-ticker-start-round"));
+            _chatManager.DispatchServerAnnouncementLoc("game-ticker-start-round");
 
             var readyPlayers = new List<ICommonSession>();
             var readyPlayerProfiles = new Dictionary<NetUserId, HumanoidCharacterProfile>();
@@ -393,7 +394,7 @@ namespace Content.Server.GameTicking
                 HumanoidCharacterProfile profile;
                 if (_prefsManager.TryGetCachedPreferences(userId, out var preferences))
                 {
-                    profile = (HumanoidCharacterProfile)preferences.SelectedCharacter;
+                    profile = GetPlayerProfile(session);
                 }
                 else
                 {
@@ -735,7 +736,7 @@ namespace Content.Server.GameTicking
 
             _sawmill.Info("Restarting round!");
 
-            SendServerMessage(Loc.GetString("game-ticker-restart-round"));
+            _chatManager.DispatchServerAnnouncementLoc("game-ticker-restart-round");
 
             RoundNumberMetric.Inc();
 
@@ -843,7 +844,8 @@ namespace Content.Server.GameTicking
 
             RaiseNetworkEvent(new TickerLobbyCountdownEvent(_roundStartTime, Paused));
 
-            _chatManager.DispatchServerAnnouncement(Loc.GetString("game-ticker-delay-start", ("seconds", time.TotalSeconds)));
+            _chatManager.DispatchServerAnnouncementLoc("game-ticker-delay-start",
+                new[] { ("seconds", (object) time.TotalSeconds) });
 
             return true;
         }

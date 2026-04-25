@@ -1,3 +1,4 @@
+﻿# CM14 rework: non-RMC edit marker.
 ui-vote-type-restart = Перезапуск раунда
 ui-vote-type-gamemode = Следующий режим игры
 ui-vote-type-map = Следующая карта

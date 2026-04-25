@@ -1,9 +1,10 @@
-<DefaultWindow
+<ccm:DefaultCMWindow
     xmlns="https://spacestation14.io"
+    xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
     SetSize="250 120"
     Margin="4 0">
     <BoxContainer Orientation="Vertical">
         <SpinBox Name="ReserveBar" Access="Public" HorizontalExpand="True" Margin ="0 4"/>
         <Button Name="ApplyButton" Access="Public" HorizontalExpand="True" Margin ="0 4" />
     </BoxContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>

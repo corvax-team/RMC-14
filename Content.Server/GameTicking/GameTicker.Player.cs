@@ -1,7 +1,7 @@
-using Content.Corvax.Interfaces.Server; // Corvax-Queue
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
+using Content.Shared.Humanoid;
 using Content.Shared.GameWindow;
 using Content.Shared.Players;
 using Content.Shared.Preferences;
@@ -55,18 +55,16 @@ namespace Content.Server.GameTicking
 
                     // Make the player actually join the game.
                     // timer time must be > tick length
-                    // Corvax-Queue-Start
-                    if (!IoCManager.Instance!.TryResolveType<IServerJoinQueueManager>(out _))
-                        Timer.Spawn(0, () => _playerManager.JoinGame(args.Session));
-                    // Corvax-Queue-End
+                    Timer.Spawn(0, () => _playerManager.JoinGame(args.Session));
 
                     var record = await _db.GetPlayerRecordByUserId(args.Session.UserId);
                     var firstConnection = record != null &&
                                           Math.Abs((record.FirstSeenTime - record.LastSeenTime).TotalMinutes) < 1;
 
-                    _chatManager.SendAdminAnnouncement(firstConnection
-                        ? Loc.GetString("player-first-join-message", ("name", args.Session.Name))
-                        : Loc.GetString("player-join-message", ("name", args.Session.Name)));
+                    _chatManager.SendAdminAnnouncementLoc(firstConnection
+                            ? "player-first-join-message"
+                            : "player-join-message",
+                        new[] { ("name", (object) args.Session.Name) });
 
                     RaiseNetworkEvent(GetConnectionStatusMsg(), session.Channel);
 
@@ -126,7 +124,7 @@ namespace Content.Server.GameTicking
 
                 case SessionStatus.Disconnected:
                 {
-                    _chatManager.SendAdminAnnouncement(Loc.GetString("player-leave-message", ("name", args.Session.Name)));
+                    _chatManager.SendAdminAnnouncementLoc("player-leave-message", new[] { ("name", (object) args.Session.Name) });
                     if (mindId != null)
                     {
                         _pvsOverride.RemoveSessionOverride(mindId.Value, session);
@@ -182,13 +180,32 @@ namespace Content.Server.GameTicking
 
         public HumanoidCharacterProfile GetPlayerProfile(ICommonSession p)
         {
-            return (HumanoidCharacterProfile) _prefsManager.GetPreferences(p.UserId).SelectedCharacter;
+            var profile = (HumanoidCharacterProfile) _prefsManager.GetPreferences(p.UserId).SelectedCharacter;
+
+            if (!profile.AlwaysRandomName && !profile.AlwaysRandomAppearance)
+                return profile;
+
+            // CCM rework lobby - start
+            var randomized = new HumanoidCharacterProfile(profile);
+            if (randomized.AlwaysRandomName)
+            {
+                randomized = randomized.WithName(HumanoidCharacterProfile.GetName(randomized.Species, randomized.Gender));
+            }
+
+            if (randomized.AlwaysRandomAppearance)
+            {
+                var appearance = HumanoidCharacterAppearance.Random(randomized.Species, randomized.Sex);
+                randomized = randomized.WithCharacterAppearance(appearance);
+            }
+
+            return randomized;
+            // CCM rework lobby - end
         }
 
         public void PlayerJoinGame(ICommonSession session, bool silent = false)
         {
             if (!silent)
-                _chatManager.DispatchServerMessage(session, Loc.GetString("game-ticker-player-join-game-message"));
+                _chatManager.DispatchServerMessageLoc(session, "game-ticker-player-join-game-message");
 
             _playerGameStatuses[session.UserId] = PlayerGameStatus.JoinedGame;
             _db.AddRoundPlayers(RoundId, session.UserId);
@@ -213,7 +230,7 @@ namespace Content.Server.GameTicking
             var client = session.Channel;
             RaiseNetworkEvent(new TickerJoinLobbyEvent(), client);
             RaiseNetworkEvent(GetStatusMsg(session), client);
-            RaiseNetworkEvent(GetInfoMsg(), client);
+            RaiseNetworkEvent(GetInfoMsg(client), client);
             RaiseLocalEvent(new PlayerJoinedLobbyEvent(session));
         }
 

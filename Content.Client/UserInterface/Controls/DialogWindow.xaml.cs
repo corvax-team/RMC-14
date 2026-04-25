@@ -102,7 +102,10 @@ public sealed partial class DialogWindow : FancyWindow
                 OnCancelled?.Invoke();
         };
 
-        MinWidth *= 2; // Just double it.
+        // CCM rework lobby - start
+        MinWidth *= 2.5f;
+        MinHeight = MathF.Max(MinHeight, 140f);
+        // CCM rework lobby - end
 
         OpenCentered();
     }
@@ -153,3 +156,4 @@ public sealed partial class DialogWindow : FancyWindow
 
     #endregion
 }
+

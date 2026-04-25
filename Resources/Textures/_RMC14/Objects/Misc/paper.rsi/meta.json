@@ -86,6 +86,9 @@
       "name": "paper_stamp-approve"
     },
     {
+      "name": "paper_stamp-generic"
+    },
+    {
       "name": "paper_talisman"
     },
     {
@@ -326,9 +329,6 @@
     {
       "name": "stamp-inhand-right",
       "directions": 4
-    },
-    {
-        "name": "paper_stamp-generic"
     }
   ]
 }

@@ -1,3 +1,5 @@
+﻿// CM14 rework: non-RMC edit marker.
+using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Emp;
 using Content.Server.Radio.Components;
@@ -13,7 +15,7 @@ namespace Content.Server.Radio.EntitySystems;
 
 public sealed class HeadsetSystem : SharedHeadsetSystem
 {
-    [Dependency] private readonly INetManager _netMan = default!;
+    [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
 
     //RMC14
@@ -123,7 +125,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
         }
 
         if (TryComp(parent, out ActorComponent? actor))
-            _netMan.ServerSendMessage(args.ChatMsg, actor.PlayerSession.Channel);
+            _chat.ChatMessageToOne(args.ChatMsg.Message, actor.PlayerSession.Channel);
     }
 
     private void OnEmpPulse(EntityUid uid, HeadsetComponent component, ref EmpPulseEvent args)

@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Mortar;
+using Content.Shared._RMC14.Mortar;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -27,8 +27,8 @@ public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
             spinBox.Value = value;
             spinBox.OnValueChanged += args =>
             {
-                var value = Math.Clamp(args.Value, -limit, limit);
-                spinBox.Value = value;
+                var clamped = Math.Clamp(args.Value, -limit, limit);
+                spinBox.Value = clamped;
             };
         }
 
@@ -38,6 +38,7 @@ public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
             SetSpinBox(_window.TargetY, mortar.MaxTarget, mortar.Target.Y);
             SetSpinBox(_window.DialX, mortar.MaxDial, mortar.Dial.X);
             SetSpinBox(_window.DialY, mortar.MaxDial, mortar.Dial.Y);
+
             _window.SetTargetButton.OnPressed += _ =>
                 SendPredictedMessage(new MortarTargetBuiMsg((Parse(_window.TargetX), Parse(_window.TargetY))));
 

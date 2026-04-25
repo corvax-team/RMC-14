@@ -15,7 +15,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Client.Store.Ui;
 
 [GenerateTypedNameReferences]
-public sealed partial class StoreMenu : DefaultWindow
+public sealed partial class StoreMenu : DefaultCMWindow
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -291,3 +291,4 @@ public sealed partial class StoreMenu : DefaultWindow
         public string? Id;
     }
 }
+

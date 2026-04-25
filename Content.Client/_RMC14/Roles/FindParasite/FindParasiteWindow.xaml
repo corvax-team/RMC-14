@@ -1,4 +1,4 @@
-<DefaultWindow
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
     SetSize="300 400"
     Margin="4 0"
     xmlns="https://spacestation14.io">
@@ -6,4 +6,5 @@
         <ItemList Name="ParasiteSpawners" Access="Public" SelectMode="Multiple" VerticalExpand="True"  Margin ="0 4"/>
         <Button Name="SpawnButton" Access="Public" Margin ="0 4"/>
     </BoxContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

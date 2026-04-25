@@ -1,11 +1,17 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Collections.Frozen;
 using Content.Shared._RMC14.Voicelines;
+using Content.Shared.Chat;
 using Content.Shared.Chat.Prototypes;
+using Content.Shared.Database;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Speech;
 using Robust.Shared.Audio;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Chat.Systems;
 
@@ -96,9 +102,8 @@ public partial class ChatSystem
         // check if proto has valid message for chat
         if (emote.ChatMessages.Count != 0)
         {
-            // not all emotes are loc'd, but for the ones that are we pass in entity
-            var action = Loc.GetString(_random.Pick(emote.ChatMessages), ("entity", source));
-            SendEntityEmote(source, action, range, nameOverride, hideLog: hideLog, checkEmote: false, ignoreActionBlocker: ignoreActionBlocker);
+            var actionLocId = _random.Pick(emote.ChatMessages);
+            SendEntityEmoteLocalized(source, actionLocId, range, nameOverride, hideLog: hideLog, ignoreActionBlocker: ignoreActionBlocker);
         }
 
         // do the rest of emote event logic here
@@ -166,6 +171,60 @@ public partial class ChatSystem
         // RMC14
 
         return true;
+    }
+
+    private void SendEntityEmoteLocalized(
+        EntityUid source,
+        string actionLocId,
+        ChatTransmitRange range,
+        string? nameOverride,
+        bool hideLog = false,
+        bool ignoreActionBlocker = false,
+        NetUserId? author = null)
+    {
+        if (!_actionBlocker.CanEmote(source) && !ignoreActionBlocker)
+            return;
+
+        var ent = Identity.Entity(source, EntityManager);
+        var name = FormattedMessage.EscapeText(nameOverride ?? Name(ent));
+
+        string GetLocalizedAction(INetChannel channel)
+        {
+            return WithChannelCulture(channel, () => Loc.GetString(actionLocId, ("entity", source)));
+        }
+
+        string WrapForCurrentCulture(INetChannel channel)
+        {
+            var action = GetLocalizedAction(channel);
+            return WithChannelCulture(channel, () => Loc.GetString("chat-manager-entity-me-wrap-message",
+                ("entityName", name),
+                ("entity", ent),
+                ("message", FormattedMessage.RemoveMarkupOrThrow(action))));
+        }
+
+        var replayAction = Loc.GetString(actionLocId, ("entity", source));
+        var replayWrappedMessage = Loc.GetString("chat-manager-entity-me-wrap-message",
+            ("entityName", name),
+            ("entity", ent),
+            ("message", FormattedMessage.RemoveMarkupOrThrow(replayAction)));
+
+        SendInVoiceRange(
+            ChatChannel.Emotes,
+            replayAction,
+            source,
+            range,
+            author,
+            replayWrappedMessage,
+            WrapForCurrentCulture,
+            GetLocalizedAction);
+
+        if (!hideLog)
+        {
+            if (name != Name(source))
+                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user} as {name}: {replayAction}");
+            else
+                _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Emote from {ToPrettyString(source):user}: {replayAction}");
+        }
     }
     /// <summary>
     /// Checks if a valid emote was typed, to play sounds and etc and invokes an event.

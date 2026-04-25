@@ -1,8 +1,14 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
+using System;
+using Content.Shared.CCVar;
 using Content.Server.Verbs;
 using Content.Shared.Examine;
+using Content.Shared.Localizations;
 using Content.Shared.Verbs;
 using JetBrains.Annotations;
+using Robust.Shared.Configuration;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
@@ -12,16 +18,12 @@ namespace Content.Server.Examine
     public sealed class ExamineSystem : ExamineSystemShared
     {
         [Dependency] private readonly VerbSystem _verbSystem = default!;
-
-        private readonly FormattedMessage _entityNotFoundMessage = new();
-        private readonly FormattedMessage _entityOutOfRangeMessage = new();
+        [Dependency] private readonly INetConfigurationManager _netConfig = default!;
+        [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
 
         public override void Initialize()
         {
             base.Initialize();
-            _entityNotFoundMessage.AddText(Loc.GetString("examine-system-entity-does-not-exist"));
-            _entityOutOfRangeMessage.AddText(Loc.GetString("examine-system-cant-see-entity"));
-
             SubscribeNetworkEvent<ExamineSystemMessages.RequestExamineInfoMessage>(ExamineInfoRequest);
         }
 
@@ -53,15 +55,19 @@ namespace Content.Server.Examine
             if (session.AttachedEntity is not {Valid: true} playerEnt
                 || !Exists(entity))
             {
+                var notFound = new FormattedMessage();
+                notFound.AddText(WithChannelCulture(channel, () => Loc.GetString("examine-system-entity-does-not-exist"), request.Locale));
                 RaiseNetworkEvent(new ExamineSystemMessages.ExamineInfoResponseMessage(
-                    request.NetEntity, request.Id, _entityNotFoundMessage), channel);
+                    request.NetEntity, request.Id, notFound), channel);
                 return;
             }
 
             if (!CanExamine(playerEnt, entity))
             {
+                var outOfRange = new FormattedMessage();
+                outOfRange.AddText(WithChannelCulture(channel, () => Loc.GetString("examine-system-cant-see-entity"), request.Locale));
                 RaiseNetworkEvent(new ExamineSystemMessages.ExamineInfoResponseMessage(
-                    request.NetEntity, request.Id, _entityOutOfRangeMessage, knowTarget: false), channel);
+                    request.NetEntity, request.Id, outOfRange, knowTarget: false), channel);
                 return;
             }
 
@@ -69,9 +75,36 @@ namespace Content.Server.Examine
             if (request.GetVerbs)
                 verbs = _verbSystem.GetLocalVerbs(entity, playerEnt, typeof(ExamineVerb));
 
-            var text = GetExamineText(entity, player.AttachedEntity);
+            var text = WithChannelCulture(channel, () => GetExamineText(entity, player.AttachedEntity), request.Locale);
             RaiseNetworkEvent(new ExamineSystemMessages.ExamineInfoResponseMessage(
                 request.NetEntity, request.Id, text, verbs?.ToList()), channel);
+        }
+
+        private string GetClientLocaleCode(INetChannel channel, string? requestedLocale = null)
+        {
+            if (!string.IsNullOrWhiteSpace(requestedLocale))
+                return requestedLocale;
+
+            var locale = _netConfig.GetClientCVar(channel, CCVars.ClientLocale);
+            return string.IsNullOrWhiteSpace(locale) ? "ru-RU" : locale;
+        }
+
+        private T WithChannelCulture<T>(INetChannel channel, Func<T> action, string? requestedLocale = null)
+        {
+            var locale = GetClientLocaleCode(channel, requestedLocale);
+            var oldCulture = _contentLoc.CurrentCultureCode;
+            if (oldCulture.Equals(locale, StringComparison.OrdinalIgnoreCase))
+                return action();
+
+            _contentLoc.SetCulture(locale);
+            try
+            {
+                return action();
+            }
+            finally
+            {
+                _contentLoc.SetCulture(oldCulture);
+            }
         }
     }
 }

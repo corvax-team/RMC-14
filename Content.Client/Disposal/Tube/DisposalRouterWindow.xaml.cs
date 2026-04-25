@@ -10,7 +10,7 @@ namespace Content.Client.Disposal.Tube
     /// Client-side UI used to control a <see cref="SharedDisposalRouterComponent"/>
     /// </summary>
     [GenerateTypedNameReferences]
-    public sealed partial class DisposalRouterWindow : DefaultWindow
+    public sealed partial class DisposalRouterWindow : DefaultCMWindow
     {
         public DisposalRouterWindow()
         {
@@ -26,3 +26,4 @@ namespace Content.Client.Disposal.Tube
         }
     }
 }
+

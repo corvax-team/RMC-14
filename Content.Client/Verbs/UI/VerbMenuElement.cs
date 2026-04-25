@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Numerics;
 using Content.Client.ContextMenu.UI;
 using Content.Shared.Verbs;
@@ -27,12 +28,12 @@ namespace Content.Client.Verbs.UI
         // Top quality variable naming
         public readonly Verb? Verb;
 
-        public VerbMenuElement(Verb verb) : base(verb.Text)
+        public VerbMenuElement(Verb verb, string? displayTextOverride = null, string? displayMessageOverride = null) : base(displayTextOverride ?? verb.Text)
         {
             TooltipSupplier = sender =>
             {
                 var label = new RichTextLabel();
-                label.SetMessage(FormattedMessage.FromMarkupOrThrow(verb.Message ?? verb.Text));
+                label.SetMessage(FormattedMessage.FromMarkupOrThrow(displayMessageOverride ?? verb.Message ?? displayTextOverride ?? verb.Text));
 
                 var tooltip = new Tooltip();
                 tooltip.GetChild(0).Children.Clear();
@@ -76,7 +77,7 @@ namespace Content.Client.Verbs.UI
             });
         }
 
-        public VerbMenuElement(VerbCategory category, string styleClass) : base(category.Text)
+        public VerbMenuElement(VerbCategory category, string styleClass, string? displayTextOverride = null) : base(displayTextOverride ?? category.Text)
         {
             Label.SetOnlyStyleClass(styleClass);
 

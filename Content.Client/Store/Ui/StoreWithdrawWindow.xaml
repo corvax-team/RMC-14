@@ -1,4 +1,4 @@
-<DefaultWindow
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
     xmlns="https://spacestation14.io"
     Title="{Loc 'store-ui-default-withdraw-text'}"
     MinSize="256 128">
@@ -13,4 +13,5 @@
             Orientation="Vertical"
             VerticalExpand="True" />
     </BoxContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

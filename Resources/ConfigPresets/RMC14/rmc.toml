@@ -65,12 +65,12 @@ id_job_length = 50
 [infolinks]
 #appeal = "https://appeal.rouny-ss14.com"
 bug_report = "https://github.com/RMC-14/RMC-14/issues/new?assignees=&labels=&projects=&template=issue_report.md&title="
-discord = "https://discord.gg/rouny"
+discord = ""
 #forum = "https://forum.rouny-ss14.com"
-github = "https://github.com/RMC-14/RMC-14"
-patreon = "https://www.patreon.com/RMC14"
+github = ""
+patreon = ""
 #website = ""
-wiki = "https://wiki.rouny-ss14.com"
+wiki = ""
 
 [net]
 tickrate = 25
@@ -96,7 +96,13 @@ auto_record_temp_dir = "recording"
 auto_record_name = "done/{year}_{month}_{day}-{hour}_{minute}-round_{round}.zip"
 
 [rmc]
-discord_account_linking_message_link = "https://discord.com/channels/1168210010233376858/1256765329002991679/1256767294839980132"
+discord_account_linking_message_link = ""
+discord_oauth_base_url = ""
+discord_oauth_state_secret = ""
+discord_oauth_state_lifetime_seconds = 300
+emote_cooldown_seconds = 1
+chat_translate_api = "http://127.0.0.1:5500/translate"
+chat_translate_source = "auto"
 
 [server]
 rules_file = "RMCOverview"
@@ -118,7 +124,7 @@ auto_call_time = 0
 # The status server is the TCP side, used by the launcher to determine engine version, etc.
 # To be clear: Disabling it makes the launcher unable to connect!
 enabled = true
-privacy_policy_link = "https://wiki.rouny-ss14.com/wiki/Privacy_Policy"
+privacy_policy_link = ""
 privacy_policy_identifier = "rmc14"
 privacy_policy_version = "2025-04-12"
 

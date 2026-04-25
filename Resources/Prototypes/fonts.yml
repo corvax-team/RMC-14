@@ -1,38 +1,38 @@
 - type: font
   id: Default
-  path: /Fonts/NotoSans/NotoSans-Regular.ttf
+  path: /Fonts/Exo2/Exo2-Regular.ttf
 
 - type: font
   id: DefaultItalic
-  path: /Fonts/NotoSans/NotoSans-Italic.ttf
+  path: /Fonts/Exo2/Exo2-Italic.ttf
 
 - type: font
   id: DefaultBold
-  path: /Fonts/NotoSans/NotoSans-Bold.ttf
+  path: /Fonts/Exo2/Exo2-Bold.ttf
 
 - type: font
   id: DefaultBoldItalic
-  path: /Fonts/NotoSans/NotoSans-BoldItalic.ttf
+  path: /Fonts/Exo2/Exo2-BoldItalic.ttf
 
 - type: font
   id: NotoSansDisplay
-  path: /Fonts/NotoSansDisplay/NotoSansDisplay-Regular.ttf
+  path: /Fonts/Exo2/Exo2-Regular.ttf
 
 - type: font
   id: NotoSansDisplayItalic
-  path: /Fonts/NotoSansDisplay/NotoSansDisplay-Italic.ttf
+  path: /Fonts/Exo2/Exo2-Italic.ttf
 
 - type: font
   id: NotoSansDisplayBold
-  path: /Fonts/NotoSansDisplay/NotoSansDisplay-Bold.ttf
+  path: /Fonts/Exo2/Exo2-Bold.ttf
 
 - type: font
   id: NotoSansDisplayBoldItalic
-  path: /Fonts/NotoSansDisplay/NotoSansDisplay-BoldItalic.ttf
+  path: /Fonts/Exo2/Exo2-BoldItalic.ttf
 
 - type: font
   id: BoxRound
-  path: /Fonts/Boxfont-round/Boxfont Round.ttf
+  path: /Fonts/Exo2/Exo2-Regular.ttf
 
 - type: font
   id: AnimalSilence
@@ -40,8 +40,10 @@
 
 - type: font
   id: Monospace
-  path: /EngineFonts/NotoSans/NotoSansMono-Regular.ttf
+  path: /Fonts/Exo2/Exo2-Regular.ttf
 
 - type: font
   id: Emoji
-  path: /Fonts/NotoEmoji.ttf
+  path: /Fonts/Exo2/Exo2-Regular.ttf
+
+

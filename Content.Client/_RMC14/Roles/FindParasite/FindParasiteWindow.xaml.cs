@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Content.Client._RMC14.Roles.FindParasite;
 
 [GenerateTypedNameReferences]
-public sealed partial class FindParasiteWindow : DefaultWindow
+public sealed partial class FindParasiteWindow : DefaultCMWindow
 {
     public FindParasiteWindow()
     {
@@ -20,3 +20,4 @@ public sealed partial class FindParasiteWindow : DefaultWindow
         Title = Loc.GetString("xeno-ui-find-parasite-title");
     }
 }
+

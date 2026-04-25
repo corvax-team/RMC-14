@@ -1,5 +1,7 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
 using System.Numerics;
+using System.Collections.Generic;
 using Content.Client.CombatMode;
 using Content.Client.ContextMenu.UI;
 using Content.Client.Gameplay;
@@ -36,6 +38,9 @@ namespace Content.Client.Verbs.UI
         public NetEntity CurrentTarget;
         public SortedSet<Verb> CurrentVerbs = new();
         public List<VerbCategory> ExtraCategories = new();
+        private readonly Dictionary<Verb, string> _verbDisplayText = new();
+        private readonly Dictionary<Verb, string> _verbDisplayMessage = new();
+        private readonly Dictionary<string, string> _categoryDisplayText = new();
 
         /// <summary>
         ///     Separate from <see cref="ContextMenuUIController.RootMenu"/>, since we can open a verb menu as a submenu
@@ -110,6 +115,9 @@ namespace Content.Client.Verbs.UI
 
             var menu = popup ?? _context.RootMenu;
             menu.MenuBody.DisposeAllChildren();
+            _verbDisplayText.Clear();
+            _verbDisplayMessage.Clear();
+            _categoryDisplayText.Clear();
 
             CurrentTarget = target;
             CurrentVerbs = _verbSystem.GetVerbs(target, user, Verb.VerbTypes, out ExtraCategories, force);
@@ -146,7 +154,7 @@ namespace Content.Client.Verbs.UI
             {
                 if (verb.Category == null)
                 {
-                    var element = new VerbMenuElement(verb);
+                    var element = new VerbMenuElement(verb, GetVerbDisplayText(verb), GetVerbDisplayMessage(verb));
                     _context.AddElement(popup, element);
                 }
                 // Add the category if it's not an extra (this is to avoid shuffling if we're filling from server verbs response).
@@ -184,14 +192,14 @@ namespace Content.Client.Verbs.UI
                 return;
 
             var style = verbsInCategory.FirstOrDefault()?.TextStyleClass ?? Verb.DefaultTextStyleClass;
-            var element = new VerbMenuElement(category, style);
+            var element = new VerbMenuElement(category, style, GetCategoryDisplayText(category));
             _context.AddElement(popup, element);
 
             // Create the pop-up that appears when hovering over this element
             element.SubMenu = new ContextMenuPopup(_context, element);
             foreach (var verb in verbsInCategory)
             {
-                var subElement = new VerbMenuElement(verb)
+                var subElement = new VerbMenuElement(verb, GetVerbDisplayText(verb), GetVerbDisplayMessage(verb))
                 {
                     IconVisible = drawIcons,
                     TextVisible = !category.IconsOnly
@@ -217,7 +225,37 @@ namespace Content.Client.Verbs.UI
                 return;
             }
 
-            CurrentVerbs.UnionWith(verbs);
+            var localVerbs = CurrentVerbs.ToList();
+            var merged = new SortedSet<Verb>(localVerbs.Where(v => v.ClientExclusive));
+
+            _verbDisplayText.Clear();
+            _verbDisplayMessage.Clear();
+            _categoryDisplayText.Clear();
+
+            var localGroups = GroupVerbs(localVerbs.Where(v => !v.ClientExclusive));
+            var serverSorted = verbs.OrderBy(v => v).ToList();
+
+            foreach (var serverVerb in serverSorted)
+            {
+                var key = GetVerbMatchKey(serverVerb);
+                if (localGroups.TryGetValue(key, out var queue) && queue.Count > 0)
+                {
+                    var localVerb = queue.Dequeue();
+                    _verbDisplayText[serverVerb] = localVerb.Text;
+                    _verbDisplayMessage[serverVerb] = localVerb.Message ?? localVerb.Text;
+
+                    if (serverVerb.Category != null && localVerb.Category != null)
+                        _categoryDisplayText[serverVerb.Category.Text] = localVerb.Category.Text;
+                }
+
+                merged.Add(serverVerb);
+            }
+
+            CurrentVerbs = merged;
+            // ExtraCategories are only useful as a pre-server placeholder.
+            // After server verbs arrive they can become stale (different locale text),
+            // which creates empty "phantom" category buttons.
+            ExtraCategories.Clear();
             FillVerbPopup(popup);
         }
 
@@ -289,6 +327,9 @@ namespace Content.Client.Verbs.UI
 
             OpenMenu.Close();
             OpenMenu = null;
+            _verbDisplayText.Clear();
+            _verbDisplayMessage.Clear();
+            _categoryDisplayText.Clear();
         }
 
         private void HandleVerbsResponse(VerbsResponseEvent msg)
@@ -306,6 +347,70 @@ namespace Content.Client.Verbs.UI
 
             if (verb.CloseMenu ?? verb.CloseMenuDefault)
                 _context.Close();
+        }
+
+        private string GetVerbDisplayText(Verb verb)
+        {
+            return _verbDisplayText.TryGetValue(verb, out var text)
+                ? text
+                : verb.Text;
+        }
+
+        private string GetVerbDisplayMessage(Verb verb)
+        {
+            return _verbDisplayMessage.TryGetValue(verb, out var message)
+                ? message
+                : verb.Message ?? verb.Text;
+        }
+
+        private string GetCategoryDisplayText(VerbCategory category)
+        {
+            return _categoryDisplayText.TryGetValue(category.Text, out var text)
+                ? text
+                : category.Text;
+        }
+
+        private static string GetVerbMatchKey(Verb verb)
+        {
+            var category = verb.Category;
+            var categoryIcon = category?.Icon?.ToString() ?? string.Empty;
+            var icon = verb.Icon?.ToString() ?? string.Empty;
+            var iconEntity = verb.IconEntity?.ToString() ?? string.Empty;
+            var categoryCols = category?.Columns.ToString() ?? "0";
+            var categoryIconsOnly = category?.IconsOnly.ToString() ?? "False";
+
+            return string.Join("|",
+                verb.GetType().FullName ?? string.Empty,
+                verb.TypePriority,
+                verb.Priority,
+                verb.TextStyleClass ?? string.Empty,
+                icon,
+                iconEntity,
+                categoryIcon,
+                categoryCols,
+                categoryIconsOnly,
+                verb.ConfirmationPopup,
+                verb.CloseMenu?.ToString() ?? string.Empty,
+                verb.Impact);
+        }
+
+        private static Dictionary<string, Queue<Verb>> GroupVerbs(IEnumerable<Verb> verbs)
+        {
+            var groups = new Dictionary<string, Queue<Verb>>();
+
+            foreach (var verb in verbs.OrderBy(v => v))
+            {
+                var key = GetVerbMatchKey(verb);
+                if (!groups.TryGetValue(key, out var queue))
+                {
+                    queue = new Queue<Verb>();
+                    groups[key] = queue;
+                }
+
+                queue.Enqueue(verb);
+            }
+
+            return groups;
         }
     }
 }

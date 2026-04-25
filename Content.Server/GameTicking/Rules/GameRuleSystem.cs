@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Chat.Managers;
 using Content.Shared.GameTicking.Components;
@@ -46,10 +47,13 @@ public abstract partial class GameRuleSystem<T> : EntitySystem where T : ICompon
 
             if (gameRule.CancelPresetOnTooFewPlayers)
             {
-                ChatManager.SendAdminAnnouncement(Loc.GetString("preset-not-enough-ready-players",
-                    ("readyPlayersCount", args.Players.Length),
-                    ("minimumPlayers", minPlayers),
-                    ("presetName", ToPrettyString(uid))));
+                ChatManager.SendAdminAnnouncementLoc("preset-not-enough-ready-players",
+                    new[]
+                    {
+                        ("readyPlayersCount", (object) args.Players.Length),
+                        ("minimumPlayers", (object) minPlayers),
+                        ("presetName", (object) ToPrettyString(uid))
+                    });
                 args.Cancel();
             }
             else

@@ -117,7 +117,7 @@ public sealed class JobTest
         Assert.That(ticker.RunLevel, Is.EqualTo(GameRunLevel.PreRoundLobby));
         Assert.That(pair.Client.AttachedEntity, Is.Null);
 
-        await pair.SetJobPriorities((Passenger, JobPriority.Medium), (Engineer, JobPriority.High));
+        await pair.SetJobPriorities((Passenger, JobPriority.Second), (Engineer, JobPriority.First));
         ticker.ToggleReadyAll(true);
         await pair.Server.WaitPost(() => ticker.StartRound());
         await pair.RunTicksSync(10);
@@ -126,7 +126,7 @@ public sealed class JobTest
 
         await pair.Server.WaitPost(() => ticker.RestartRound());
         Assert.That(ticker.RunLevel, Is.EqualTo(GameRunLevel.PreRoundLobby));
-        await pair.SetJobPriorities((Passenger, JobPriority.High), (Engineer, JobPriority.Medium));
+        await pair.SetJobPriorities((Passenger, JobPriority.First), (Engineer, JobPriority.Second));
         ticker.ToggleReadyAll(true);
         await pair.Server.WaitPost(() => ticker.StartRound());
         await pair.RunTicksSync(10);
@@ -162,7 +162,7 @@ public sealed class JobTest
         Assert.That(captain.Weight, Is.GreaterThan(engineer.Weight));
         Assert.That(engineer.Weight, Is.EqualTo(passenger.Weight));
 
-        await pair.SetJobPriorities((Passenger, JobPriority.Medium), (Engineer, JobPriority.High), (Captain, JobPriority.Low));
+        await pair.SetJobPriorities((Passenger, JobPriority.Second), (Engineer, JobPriority.First), (Captain, JobPriority.Second));
         ticker.ToggleReadyAll(true);
         await pair.Server.WaitPost(() => ticker.StartRound());
         await pair.RunTicksSync(10);
@@ -198,10 +198,10 @@ public sealed class JobTest
         var captain = engineers[3];
         engineers.RemoveAt(3);
 
-        await pair.SetJobPriorities(captain, (Captain, JobPriority.High), (Engineer, JobPriority.Medium));
+        await pair.SetJobPriorities(captain, (Captain, JobPriority.First), (Engineer, JobPriority.Second));
         foreach (var engi in engineers)
         {
-            await pair.SetJobPriorities(engi, (Captain, JobPriority.Medium), (Engineer, JobPriority.High));
+            await pair.SetJobPriorities(engi, (Captain, JobPriority.Second), (Engineer, JobPriority.First));
         }
 
         ticker.ToggleReadyAll(true);
@@ -221,3 +221,5 @@ public sealed class JobTest
         await pair.CleanReturnAsync();
     }
 }
+
+// # CCM priority rework

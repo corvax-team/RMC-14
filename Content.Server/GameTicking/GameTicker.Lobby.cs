@@ -1,14 +1,22 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
 using Content.Shared.GameTicking;
+using Content.Shared.CCVar;
+using Content.Shared.Localizations;
 using Content.Server.Station.Components;
+using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using System.Text;
+using System;
 
 namespace Content.Server.GameTicking
 {
     public sealed partial class GameTicker
     {
+        [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
+        [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
+
         [ViewVariables]
         private readonly Dictionary<NetUserId, PlayerGameStatus> _playerGameStatuses = new();
 
@@ -37,7 +45,10 @@ namespace Content.Server.GameTicking
 
         public void UpdateInfoText()
         {
-            RaiseNetworkEvent(GetInfoMsg(), Filter.Empty().AddPlayers(_playerManager.NetworkedSessions));
+            foreach (var session in _playerManager.NetworkedSessions)
+            {
+                RaiseNetworkEvent(GetInfoMsg(session.Channel), session.Channel);
+            }
         }
 
         private string GetInfoText()
@@ -108,9 +119,36 @@ namespace Content.Server.GameTicking
             }
         }
 
-        private TickerLobbyInfoEvent GetInfoMsg()
+        private TickerLobbyInfoEvent GetInfoMsg(INetChannel? channel = null)
         {
-            return new (GetInfoText());
+            if (channel == null)
+                return new(GetInfoText());
+
+            return new(WithChannelCulture(channel, GetInfoText));
+        }
+
+        private string GetClientLocaleCode(INetChannel channel)
+        {
+            var locale = _netConfigManager.GetClientCVar(channel, CCVars.ClientLocale);
+            return string.IsNullOrWhiteSpace(locale) ? "ru-RU" : locale;
+        }
+
+        private T WithChannelCulture<T>(INetChannel channel, Func<T> action)
+        {
+            var locale = GetClientLocaleCode(channel);
+            var oldCulture = _contentLoc.CurrentCultureCode;
+            if (oldCulture.Equals(locale, StringComparison.OrdinalIgnoreCase))
+                return action();
+
+            _contentLoc.SetCulture(locale);
+            try
+            {
+                return action();
+            }
+            finally
+            {
+                _contentLoc.SetCulture(oldCulture);
+            }
         }
 
         private void UpdateLateJoinStatus()
@@ -138,9 +176,9 @@ namespace Content.Server.GameTicking
 
             RaiseNetworkEvent(new TickerLobbyCountdownEvent(_roundStartTime, Paused));
 
-            _chatManager.DispatchServerAnnouncement(Loc.GetString(Paused
+            _chatManager.DispatchServerAnnouncementLoc(Paused
                 ? "game-ticker-pause-start"
-                : "game-ticker-pause-start-resumed"));
+                : "game-ticker-pause-start-resumed");
 
             return true;
         }

@@ -22,6 +22,9 @@ void fragment()
 
     highp float finalAlpha = clamp(permanentAlpha + animatedAlpha, 0.0, 1.0);
 
+    // CCM rework lobby - start
     highp vec4 screenColor = texture(SCREEN_TEXTURE, UV);
+    highp vec4 vignetteColor = vec4(0.0, 0.0, 0.0, 1.0);
     COLOR = mix(screenColor, vec4(0.0, 0.0, 0.0, 1.0), finalAlpha);
+    // CCM rework lobby - end
 }

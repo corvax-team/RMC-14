@@ -1,5 +1,5 @@
 using System.Linq;
-using Content.Corvax.Interfaces.Shared; // Corvax-Loadouts
+using Content.Client.Stylesheets;
 using Content.Shared.Clothing;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
@@ -8,15 +8,14 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using System.Linq;
 
 namespace Content.Client.Lobby.UI.Loadouts;
 
 [GenerateTypedNameReferences]
 public sealed partial class LoadoutGroupContainer : BoxContainer
 {
-    private const string ClosedGroupMark = "▶";
-    private const string OpenedGroupMark = "▼";
+    private const string ClosedGroupMark = ">";
+    private const string OpenedGroupMark = "v";
 
     /// <summary>
     /// A dictionary that stores open groups
@@ -75,14 +74,7 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
 
         LoadoutsContainer.DisposeAllChildren();
 
-        // Corvax-Loadouts-Start
         IEnumerable<ProtoId<LoadoutPrototype>> groupLoadoutIds = _groupProto.Loadouts;
-        
-        if (collection.TryResolveType<ISharedLoadoutsManager>(out var loadoutsManager) && _groupProto.ID == "Inventory")
-        {
-            groupLoadoutIds = loadoutsManager.GetClientPrototypes().Select(id => (ProtoId<LoadoutPrototype>)id).ToList();
-        }
-        // Corvax-Loadouts-End
 
         // Get all loadout prototypes using the potentially modified list
         var validProtos = groupLoadoutIds.Select(id => protoMan.Index(id));
@@ -97,10 +89,12 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
          * This allows grouping loadouts into sub-categories within the group.
          */
         var groups = validProtos
-        .GroupBy(p => string.IsNullOrEmpty(p.GroupBy)
-                         ? p.ID
-                         : p.GroupBy)
-        .ToDictionary(g => g.Key, g => g.ToList());
+            .GroupBy(p => string.IsNullOrEmpty(p.GroupBy)
+                ? p.ID
+                : p.GroupBy)
+            .ToDictionary(g => g.Key, g => g.ToList());
+
+        var rowIndex = 0;
 
         foreach (var kvp in groups)
         {
@@ -117,7 +111,8 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
                 var uiElements = protos
                     .Select(proto =>
                     {
-                        var elem = CreateLoadoutUI(proto, profile, loadout, session, collection, loadoutSystem);
+                        var elem = CreateLoadoutUI(proto, profile, loadout, session, collection, loadoutSystem, rowIndex % 2 == 1);
+                        rowIndex++;
                         elem.HorizontalExpand = true;
                         return elem;
                     })
@@ -160,9 +155,9 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
             }
             else
             {
-                LoadoutsContainer.AddChild(
-                    CreateLoadoutUI(protos[0], profile, loadout, session, collection, loadoutSystem)
-                );
+                var single = CreateLoadoutUI(protos[0], profile, loadout, session, collection, loadoutSystem, rowIndex % 2 == 1);
+                rowIndex++;
+                LoadoutsContainer.AddChild(single);
             }
         }
     }
@@ -222,8 +217,9 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
     /// <param name="session">The user's session.</param>
     /// <param name="collection">The dependency injection container.</param>
     /// <param name="loadoutSystem">The loadout system instance.</param>
+    /// <param name="alternate">Whether this row should use the alternate card tone.</param>
     /// <returns>A fully initialized LoadoutContainer for UI display.</returns>
-    private LoadoutContainer CreateLoadoutUI(LoadoutPrototype proto, HumanoidCharacterProfile profile, RoleLoadout loadout, ICommonSession session, IDependencyCollection collection, LoadoutSystem loadoutSystem)
+    private LoadoutContainer CreateLoadoutUI(LoadoutPrototype proto, HumanoidCharacterProfile profile, RoleLoadout loadout, ICommonSession session, IDependencyCollection collection, LoadoutSystem loadoutSystem, bool alternate)
     {
         var selected = loadout.SelectedLoadouts[_groupProto.ID];
 
@@ -241,6 +237,8 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
         }
 
         var cont = new LoadoutContainer(proto, !enabled, reason);
+        if (alternate)
+            cont.Select.AddStyleClass(StyleNano.StyleClassLoadoutItemButtonAlt);
 
         cont.Text = loadoutSystem.GetName(proto);
 

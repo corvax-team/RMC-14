@@ -1,0 +1,97 @@
+﻿# CM14 rework: non-RMC edit marker.
+ccm-achievements-header = Achievements
+ccm-achievements-tab-general = General
+ccm-achievements-tab-misc = Misc
+ccm-achievements-tab-marines = Marines
+ccm-achievements-tab-xenos = Xenos
+ccm-achievements-progress-summary = Completed: { $completed } / { $total }
+ccm-achievements-hide-completed-on = Hide completed: Yes
+ccm-achievements-hide-completed-off = Hide completed: No
+ccm-achievements-completed = Completed
+ccm-achievements-in-progress = In progress
+ccm-achievements-progress-label = { $current } / { $goal }
+ccm-achievements-empty = Nothing to show in this category yet.
+ccm-achievements-toast-header = Achievement complete
+
+ccm-achievement-general-veteran-title = Veteran
+ccm-achievement-general-veteran-desc = You have seen a lot. And survived even more. Requirement: play 50 rounds.
+ccm-achievement-general-living-legend-title = Living Legend
+ccm-achievement-general-living-legend-desc = They tell stories about you in the barracks. Requirement: play 200 rounds.
+ccm-achievement-general-campaign-veteran-title = Campaign Veteran
+ccm-achievement-general-campaign-veteran-desc = You have fought through many battles. Requirement: win 50 rounds overall.
+ccm-achievement-general-war-legend-title = War Legend
+ccm-achievement-general-war-legend-desc = Both marines and the hive know your name. Requirement: win 200 rounds overall.
+
+ccm-achievement-misc-logistician-title = Logistician
+ccm-achievement-misc-logistician-desc = Ammunition does not appear out of thin air. Requirement: order 20 requisition deliveries.
+ccm-achievement-misc-friendly-fire-title = Friendly Fire
+ccm-achievement-misc-friendly-fire-desc = Sometimes mistakes happen in the heat of battle. Requirement: deal 500 damage to allies.
+ccm-achievement-misc-queen-slayer-title = Queen's Nightmare
+ccm-achievement-misc-queen-slayer-desc = The queen knows your name. And hates it. Requirement: participate in killing the xeno queen.
+
+ccm-achievement-marine-field-medic-title = Field Medic
+ccm-achievement-marine-field-medic-desc = A few bandages never hurt anyone. Requirement: heal 5,000 damage on allies.
+ccm-achievement-marine-combat-surgeon-title = Combat Surgeon
+ccm-achievement-marine-combat-surgeon-desc = Treating wounds under fire is harder. Requirement: heal 25,000 damage on allies.
+ccm-achievement-marine-guardian-angel-title = Guardian Angel
+ccm-achievement-marine-guardian-angel-desc = You saved more lives than you can count. Requirement: heal 100,000 damage on allies.
+ccm-achievement-marine-legendary-medic-title = Legendary Medic
+ccm-achievement-marine-legendary-medic-desc = Without you, half the drop would never come back. Requirement: heal 250,000 damage on allies.
+
+ccm-achievement-marine-corpsman-title = Corpsman
+ccm-achievement-marine-corpsman-desc = Dragging wounded marines is part of the job. Requirement: revive 25 marines.
+ccm-achievement-marine-paramedic-title = Paramedic
+ccm-achievement-marine-paramedic-desc = You always arrive just in time. Requirement: revive 100 marines.
+ccm-achievement-marine-savior-title = Savior
+ccm-achievement-marine-savior-desc = You pulled more people out of hell than anyone else. Requirement: revive 300 marines.
+
+ccm-achievement-marine-mechanic-title = Mechanic
+ccm-achievement-marine-mechanic-desc = Without fortifications, the line would already be gone. Requirement: build 50 fortifications.
+ccm-achievement-marine-fortifier-title = Fortifier
+ccm-achievement-marine-fortifier-desc = Now this is a fortress. Requirement: build 500 fortifications.
+ccm-achievement-marine-defense-architect-title = Defense Architect
+ccm-achievement-marine-defense-architect-desc = No bug is getting through. Requirement: build 2,000 fortifications.
+
+ccm-achievement-marine-victory-title = Marine Victory
+ccm-achievement-marine-victory-desc = The planet has been purged. Requirement: win 10 rounds as marines.
+ccm-achievement-marine-campaigns-veteran-title = Corps Campaign Veteran
+ccm-achievement-marine-campaigns-veteran-desc = The marines already count you among their veterans. Requirement: win 50 rounds as marines.
+ccm-achievement-marine-corps-legend-title = Corps Legend
+ccm-achievement-marine-corps-legend-desc = Every marine knows your name. Requirement: win 200 rounds as marines.
+ccm-achievement-marine-commander-title = Commander
+ccm-achievement-marine-commander-desc = Someone has to give the orders. Requirement: win a round while playing an officer or commander.
+
+ccm-achievement-marine-recruit-title = Recruit
+ccm-achievement-marine-recruit-desc = Every marine starts with their first bug. Requirement: kill 100 xenomorphs.
+ccm-achievement-marine-bug-hunter-title = Bug Hunter
+ccm-achievement-marine-bug-hunter-desc = At this point it is a habit. Requirement: kill 500 xenomorphs.
+ccm-achievement-marine-exterminator-title = Exterminator
+ccm-achievement-marine-exterminator-desc = The hive already knows about you. Requirement: kill 1,000 xenomorphs.
+ccm-achievement-marine-hive-nightmare-title = Hive Nightmare
+ccm-achievement-marine-hive-nightmare-desc = Xenomorphs are starting to avoid you. Requirement: kill 2,500 xenomorphs.
+ccm-achievement-marine-hive-genocide-title = Hive Genocide
+ccm-achievement-marine-hive-genocide-desc = This is no longer war. This is extermination. Requirement: kill 5,000 xenomorphs.
+
+ccm-achievement-xeno-hive-growth-title = Hive Growth
+ccm-achievement-xeno-hive-growth-desc = The hive begins to dominate. Requirement: win 10 rounds as xenomorphs.
+ccm-achievement-xeno-domination-title = Domination
+ccm-achievement-xeno-domination-desc = Humans no longer control the planet. Requirement: win 50 rounds as xenomorphs.
+ccm-achievement-xeno-hive-empire-title = Hive Empire
+ccm-achievement-xeno-hive-empire-desc = The planet belongs to the xenomorphs. Requirement: win 150 rounds as xenomorphs.
+
+ccm-achievement-xeno-hive-birth-title = Birth of the Hive
+ccm-achievement-xeno-hive-birth-desc = The hive starts to grow. Requirement: evolve into a new caste.
+ccm-achievement-xeno-young-hunter-title = Young Hunter
+ccm-achievement-xeno-young-hunter-desc = Humans make excellent prey. Requirement: kill 50 marines.
+ccm-achievement-xeno-predator-title = Predator
+ccm-achievement-xeno-predator-desc = The marines already know your name. Requirement: kill 250 marines.
+ccm-achievement-xeno-drop-horror-title = Drop Horror
+ccm-achievement-xeno-drop-horror-desc = Every new drop gets harder. Requirement: kill 500 marines.
+ccm-achievement-xeno-marine-nightmare-title = Marine Nightmare
+ccm-achievement-xeno-marine-nightmare-desc = Humans are afraid to make planetfall. Requirement: kill 1,000 marines.
+ccm-achievement-xeno-apex-predator-title = Apex Predator
+ccm-achievement-xeno-apex-predator-desc = You are the top of the food chain. Requirement: kill 3,000 marines.
+ccm-achievement-xeno-queen-wrath-title = Queen's Wrath
+ccm-achievement-xeno-queen-wrath-desc = Even marines fear the queen. Requirement: kill 10 marines while playing as the queen.
+ccm-achievement-xeno-planet-mistress-title = Mistress of the Planet
+ccm-achievement-xeno-planet-mistress-desc = The planet now belongs to the hive. Requirement: win a round while playing as the queen.
