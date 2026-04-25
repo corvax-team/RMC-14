@@ -7,6 +7,7 @@
 
 using System.Numerics;
 using Robust.Shared.GameStates;
+using Content.Shared._CE.ZLevels.Core.EntitySystems;
 
 namespace Content.Shared._CE.ZLevels.Core.Components;
 
@@ -46,6 +47,9 @@ public sealed partial class CEZPhysicsComponent : Component
 
     [DataField, AutoNetworkedField]
     public float GravityMultiplier = 1f;
+
+    [DataField, AutoNetworkedField]
+    public bool Fallable = true;
 
     // Visuals
 
