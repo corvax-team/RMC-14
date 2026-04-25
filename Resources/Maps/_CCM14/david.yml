@@ -78501,7 +78501,7 @@ entities:
     - type: Transform
       pos: 20.5,3.5
       parent: 1
-- proto: VehicleHardpointVendor
+- proto: VehicleHardpointFabricator
   entities:
   - uid: 2304
     components:

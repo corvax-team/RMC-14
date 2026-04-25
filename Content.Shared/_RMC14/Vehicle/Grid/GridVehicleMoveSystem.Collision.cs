@@ -249,7 +249,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 if (!TryComp(mobUid, out MobStateComponent? mob))
                     continue;
 
-                HandleMobCollision(uid, mobUid, mob, ref playedCollisionSound);
+                HandleMobCollision(uid, mover, mobUid, mob, ref playedCollisionSound); // CCM14
             }
         }
 

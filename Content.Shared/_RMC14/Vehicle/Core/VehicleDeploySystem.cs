@@ -14,7 +14,6 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Sentry;
-using Content.Shared._RMC14.Vehicle.Content.Shared._RMC14.Vehicle;
 using Content.Shared.Hands.EntitySystems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
