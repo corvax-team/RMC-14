@@ -1,7 +1,10 @@
+﻿<!-- CM14 rework: non-RMC edit marker. -->
 <controls:ItemStatusPanel
     xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Systems.Inventory.Controls"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    x:Class="Content.Client.UserInterface.Systems.Inventory.Controls.ItemStatusPanel"
     VerticalAlignment="Bottom"
     HorizontalAlignment="Center">
     <PanelContainer Name="Panel">

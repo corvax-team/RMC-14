@@ -14,7 +14,7 @@ namespace Content.Client.Atmos.UI
     /// Client-side UI used to control a gas filter.
     /// </summary>
     [GenerateTypedNameReferences]
-    public sealed partial class GasFilterWindow : DefaultWindow
+    public sealed partial class GasFilterWindow : DefaultCMWindow
     {
         private readonly ButtonGroup _buttonGroup = new();
 
@@ -109,3 +109,4 @@ namespace Content.Client.Atmos.UI
         }
     }
 }
+

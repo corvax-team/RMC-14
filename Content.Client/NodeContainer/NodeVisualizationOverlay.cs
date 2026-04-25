@@ -51,7 +51,7 @@ namespace Content.Client.NodeContainer
             _transformSystem = _entityManager.System<SharedTransformSystem>();
             _mapSystem = _entityManager.System<SharedMapSystem>();
 
-            _font = cache.GetFont("/Fonts/NotoSans/NotoSans-Regular.ttf", 12);
+            _font = cache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 12);
         }
 
         protected override void Draw(in OverlayDrawArgs args)
@@ -246,3 +246,5 @@ namespace Content.Client.NodeContainer
         }
     }
 }
+
+

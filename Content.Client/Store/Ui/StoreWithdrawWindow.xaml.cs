@@ -14,7 +14,7 @@ namespace Content.Client.Store.Ui;
 ///     Used as sub-window in Uplink UI
 /// </summary>
 [GenerateTypedNameReferences]
-public sealed partial class StoreWithdrawWindow : DefaultWindow
+public sealed partial class StoreWithdrawWindow : DefaultCMWindow
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
@@ -92,3 +92,4 @@ public sealed partial class StoreWithdrawWindow : DefaultWindow
         public FixedPoint2 Amount = FixedPoint2.Zero;
     }
 }
+

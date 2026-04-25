@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Players.RateLimiting;
@@ -23,7 +24,7 @@ internal sealed partial class ChatManager
 
     private void RateLimitPlayerLimited(ICommonSession player)
     {
-        DispatchServerMessage(player, Loc.GetString("chat-manager-rate-limited"), suppressLog: true);
+        DispatchServerMessageLoc(player, "chat-manager-rate-limited", suppressLog: true);
     }
 
     private void RateLimitAlertAdmins(ICommonSession player)

@@ -41,4 +41,12 @@ public sealed partial class ChatWindow : FancyWindow
             filter.SetActive(channel, isAdminInterest);
         }
     }
+
+    // CCM rework lobby - start
+    public void RefreshLocalization()
+    {
+        Title = Loc.GetString("chat-window-title");
+        Chatbox.RefreshLocalization();
+    }
+    // CCM rework lobby - end
 }

@@ -75,4 +75,12 @@ public sealed class ChannelSelectorButton : ChatPopupButton<ChannelSelectorPopup
         Text = radio != null ? Loc.GetString(radio.Name) : ChannelSelectorName(channel);
         Modulate = radio?.Color ?? ChannelSelectColor(channel);
     }
+
+    // CCM rework lobby - start
+    public void RefreshLocalization()
+    {
+        Popup.RefreshLocalization();
+        UpdateChannelSelectButton(SelectedChannel, null);
+    }
+    // CCM rework lobby - end
 }

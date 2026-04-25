@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -43,6 +44,9 @@ namespace Content.Server.Voting.Managers
 
         public void CreateStandardVote(ICommonSession? initiator, StandardVoteType voteType, string[]? args = null)
         {
+            if (voteType == StandardVoteType.Votekick)
+                return;
+
             if (initiator != null && args == null)
                 _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"{initiator} initiated a {voteType.ToString()} vote");
             else if (initiator != null && args != null)
@@ -141,12 +145,12 @@ namespace Content.Server.Voting.Managers
             var alone = _playerManager.PlayerCount == 1 && initiator != null;
             var options = new VoteOptions
             {
-                Title = Loc.GetString("ui-vote-restart-title"),
+                Title = "ui-vote-restart-title",
                 Options =
                 {
-                    (Loc.GetString("ui-vote-restart-yes"), "yes"),
-                    (Loc.GetString("ui-vote-restart-no"), "no"),
-                    (Loc.GetString("ui-vote-restart-abstain"), "abstain")
+                    ("ui-vote-restart-yes", "yes"),
+                    ("ui-vote-restart-no", "no"),
+                    ("ui-vote-restart-abstain", "abstain")
                 },
                 Duration = alone
                     ? TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VoteTimerAlone))
@@ -178,7 +182,7 @@ namespace Content.Server.Voting.Managers
                     else // If the cvar is disabled or there's no admins on, proceed as normal
                     {
                         _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Restart vote succeeded: {votesYes}/{votesNo}");
-                        _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-restart-succeeded"));
+                        _chatManager.DispatchServerAnnouncementLoc("ui-vote-restart-succeeded");
                         var roundEnd = _entityManager.EntitySysManager.GetEntitySystem<RoundEndSystem>();
                         roundEnd.EndRound();
                     }
@@ -186,8 +190,8 @@ namespace Content.Server.Voting.Managers
                 else
                 {
                     _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Restart vote failed: {votesYes}/{votesNo}");
-                    _chatManager.DispatchServerAnnouncement(
-                        Loc.GetString("ui-vote-restart-failed", ("ratio", ratioRequired)));
+                    _chatManager.DispatchServerAnnouncementLoc("ui-vote-restart-failed",
+                        new[] { ("ratio", (object) ratioRequired) });
                 }
             };
 
@@ -212,11 +216,12 @@ namespace Content.Server.Voting.Managers
             // Logic to notify that there are not enough ghost players to start a vote
             _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Restart vote failed: Current Ghost player percentage:{roundedGhostPercentage.ToString()}% does not meet {ghostPercentageRequirement.ToString()}%");
 
-            var msg = Loc.GetString("ui-vote-restart-fail-not-enough-ghost-players", ("ghostPlayerRequirement", ghostPercentageRequirement));
             if (session == null)
-                _chatManager.DispatchServerAnnouncement(msg);
+                _chatManager.DispatchServerAnnouncementLoc("ui-vote-restart-fail-not-enough-ghost-players",
+                    new[] { ("ghostPlayerRequirement", (object) ghostPercentageRequirement) });
             else
-                _chatManager.DispatchServerMessage(session, msg);
+                _chatManager.DispatchServerMessageLoc(session, "ui-vote-restart-fail-not-enough-ghost-players",
+                    new[] { ("ghostPlayerRequirement", (object) ghostPercentageRequirement) });
         }
 
         private void CreatePresetVote(ICommonSession? initiator)
@@ -226,7 +231,7 @@ namespace Content.Server.Voting.Managers
             var alone = _playerManager.PlayerCount == 1 && initiator != null;
             var options = new VoteOptions
             {
-                Title = Loc.GetString("ui-vote-gamemode-title"),
+                Title = "ui-vote-gamemode-title",
                 Duration = alone
                     ? TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VoteTimerAlone))
                     : TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VoteTimerPreset))
@@ -237,7 +242,7 @@ namespace Content.Server.Voting.Managers
 
             foreach (var (k, v) in presets)
             {
-                options.Options.Add((Loc.GetString(v), k));
+                options.Options.Add((v, k));
             }
 
             WirePresetVoteInitiator(options, initiator);
@@ -250,14 +255,14 @@ namespace Content.Server.Voting.Managers
                 if (args.Winner == null)
                 {
                     picked = (string) _random.Pick(args.Winners);
-                    _chatManager.DispatchServerAnnouncement(
-                        Loc.GetString("ui-vote-gamemode-tie", ("picked", Loc.GetString(presets[picked]))));
+                    _chatManager.DispatchServerAnnouncementLoc("ui-vote-gamemode-tie",
+                        new[] { ("picked", (object) Loc.GetString(presets[picked])) });
                 }
                 else
                 {
                     picked = (string) args.Winner;
-                    _chatManager.DispatchServerAnnouncement(
-                        Loc.GetString("ui-vote-gamemode-win", ("winner", Loc.GetString(presets[picked]))));
+                    _chatManager.DispatchServerAnnouncementLoc("ui-vote-gamemode-win",
+                        new[] { ("winner", (object) Loc.GetString(presets[picked])) });
                 }
                 _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Preset vote finished: {picked}");
                 var ticker = _entityManager.EntitySysManager.GetEntitySystem<GameTicker>();
@@ -272,7 +277,7 @@ namespace Content.Server.Voting.Managers
             var alone = _playerManager.PlayerCount == 1 && initiator != null;
             var options = new VoteOptions
             {
-                Title = Loc.GetString("ui-vote-map-title"),
+                Title = "ui-vote-map-title",
                 Duration = alone
                     ? TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VoteTimerAlone))
                     : TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VoteTimerMap))
@@ -296,14 +301,14 @@ namespace Content.Server.Voting.Managers
                 if (args.Winner == null)
                 {
                     picked = (GameMapPrototype) _random.Pick(args.Winners);
-                    _chatManager.DispatchServerAnnouncement(
-                        Loc.GetString("ui-vote-map-tie", ("picked", maps[picked])));
+                    _chatManager.DispatchServerAnnouncementLoc("ui-vote-map-tie",
+                        new[] { ("picked", (object) maps[picked]) });
                 }
                 else
                 {
                     picked = (GameMapPrototype) args.Winner;
-                    _chatManager.DispatchServerAnnouncement(
-                        Loc.GetString("ui-vote-map-win", ("winner", maps[picked])));
+                    _chatManager.DispatchServerAnnouncementLoc("ui-vote-map-win",
+                        new[] { ("winner", (object) maps[picked]) });
                 }
 
                 _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Map vote finished: {picked.MapName}");
@@ -319,12 +324,13 @@ namespace Content.Server.Voting.Managers
                 {
                     if (ticker.RoundPreloadTime <= TimeSpan.Zero)
                     {
-                        _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-map-notlobby"));
+                        _chatManager.DispatchServerAnnouncementLoc("ui-vote-map-notlobby");
                     }
                     else
                     {
                         var timeString = $"{ticker.RoundPreloadTime.Minutes:0}:{ticker.RoundPreloadTime.Seconds:00}";
-                        _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-map-notlobby-time", ("time", timeString)));
+                        _chatManager.DispatchServerAnnouncementLoc("ui-vote-map-notlobby-time",
+                            new[] { ("time", (object) timeString) });
                     }
                 }
             };
@@ -426,9 +432,12 @@ namespace Content.Server.Voting.Managers
                 _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick attempted by {initiator} for player {targetSession}, but there were not enough ghost roles! {eligibleVoterNumberRequirement} required, {eligibleVoterNumber} found.");
                 if (initiator != null)
                 {
-                    var message = Loc.GetString("ui-vote-votekick-not-enough-eligible", ("voters", eligibleVoterNumber.ToString()), ("requirement", eligibleVoterNumberRequirement.ToString()));
-                    var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", message));
-                    _chatManager.ChatMessageToOne(ChatChannel.Server, message, wrappedMessage, default, false, initiator.Channel);
+                    _chatManager.DispatchServerMessageLoc(initiator, "ui-vote-votekick-not-enough-eligible",
+                        new[]
+                        {
+                            ("voters", (object) eligibleVoterNumber.ToString()),
+                            ("requirement", (object) eligibleVoterNumberRequirement.ToString())
+                        });
                 }
                 DirtyCanCallVoteAll();
                 return;
@@ -455,9 +464,9 @@ namespace Content.Server.Voting.Managers
                 Title = voteTitle,
                 Options =
                 {
-                    (Loc.GetString("ui-vote-votekick-yes"), "yes"),
-                    (Loc.GetString("ui-vote-votekick-no"), "no"),
-                    (Loc.GetString("ui-vote-votekick-abstain"), "abstain")
+                    ("ui-vote-votekick-yes", "yes"),
+                    ("ui-vote-votekick-no", "no"),
+                    ("ui-vote-votekick-abstain", "abstain")
                 },
                 Duration = TimeSpan.FromSeconds(_cfg.GetCVar(CCVars.VotekickTimer)),
                 InitiatorTimeout = TimeSpan.FromMinutes(_cfg.GetCVar(CCVars.VotekickTimeout)),
@@ -534,7 +543,8 @@ namespace Content.Server.Voting.Managers
                     else
                     {
                         _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick for {located.Username} succeeded:  Yes: {votesYes} / No: {votesNo}. Yes: {yesVotersString} / No: {noVotersString}");
-                        _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-votekick-success", ("target", targetEntityName), ("reason", reason)));
+                        _chatManager.DispatchServerAnnouncementLoc("ui-vote-votekick-success",
+                            new[] { ("target", (object) targetEntityName), ("reason", (object) reason) });
 
                         if (!Enum.TryParse(_cfg.GetCVar(CCVars.VotekickBanDefaultSeverity), out NoteSeverity severity))
                         {
@@ -558,7 +568,8 @@ namespace Content.Server.Voting.Managers
                     _voteWebhooks.UpdateWebhookIfConfigured(webhookState, eventArgs);
 
                     _adminLogger.Add(LogType.Vote, LogImpact.Extreme, $"Votekick failed: Yes: {votesYes} / No: {votesNo}. Yes: {yesVotersString} / No: {noVotersString}");
-                    _chatManager.DispatchServerAnnouncement(Loc.GetString("ui-vote-votekick-failure", ("target", targetEntityName), ("reason", reason)));
+                    _chatManager.DispatchServerAnnouncementLoc("ui-vote-votekick-failure",
+                        new[] { ("target", (object) targetEntityName), ("reason", (object) reason) });
                 }
             };
 
@@ -575,9 +586,8 @@ namespace Content.Server.Voting.Managers
             {
                 if (CheckVoterEligibility(player, VoterEligibility.GhostMinimumPlaytime))
                 {
-                    var message = Loc.GetString("ui-vote-votekick-server-cancelled", ("target", target));
-                    var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", message));
-                    _chatManager.ChatMessageToOne(ChatChannel.Server, message, wrappedMessage, default, false, player.Channel);
+                    _chatManager.DispatchServerMessageLoc(player, "ui-vote-votekick-server-cancelled",
+                        new[] { ("target", (object) target) });
                 }
             }
         }

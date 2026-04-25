@@ -10,7 +10,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
 {
     [GenerateTypedNameReferences]
-    public sealed partial class GhostRolesWindow : DefaultWindow
+    public sealed partial class GhostRolesWindow : DefaultCMWindow
     {
         public event Action<GhostRoleInfo>? OnRoleRequestButtonClicked;
         public event Action<GhostRoleInfo>? OnRoleFollow;
@@ -99,3 +99,4 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls.Roles
         }
     }
 }
+

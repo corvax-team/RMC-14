@@ -5,7 +5,7 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client.Strip
 {
-    public sealed class StrippingMenu : DefaultWindow
+    public sealed class StrippingMenu : DefaultCMWindow
     {
         public LayoutContainer InventoryContainer = new();
         public LayoutContainer HandsContainer = new();
@@ -40,3 +40,4 @@ namespace Content.Client.Strip
         }
     }
 }
+

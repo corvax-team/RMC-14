@@ -10,3 +10,6 @@ global using Robust.Shared.IoC;
 global using Robust.Shared.Maths;
 global using Robust.Shared.ViewVariables;
 global using Robust.Shared.Serialization.Manager.Attributes;
+// CCM rework lobby - start
+global using Content.Client._CCM.UserInterface.Controls;
+// CCM rework lobby - end

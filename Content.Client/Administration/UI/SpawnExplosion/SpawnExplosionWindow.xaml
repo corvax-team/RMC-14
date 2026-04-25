@@ -1,4 +1,4 @@
-<DefaultWindow
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
     xmlns="https://spacestation14.io"
     Title="{Loc 'admin-explosion-eui-title'}"
     SetHeight="380">
@@ -43,4 +43,5 @@
 
         <Button Name="Spawn" Text="{Loc 'admin-explosion-eui-label-spawn'}" />
     </BoxContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

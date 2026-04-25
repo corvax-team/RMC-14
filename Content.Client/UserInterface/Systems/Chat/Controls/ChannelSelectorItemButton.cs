@@ -14,12 +14,19 @@ public sealed class ChannelSelectorItemButton : Button
     {
         Channel = selector;
         AddStyleClass(StyleNano.StyleClassChatChannelSelectorButton);
+        RefreshLocalization();
+    }
 
-        Text = ChannelSelectorButton.ChannelSelectorName(selector);
-
-        var prefix = ChatUIController.ChannelPrefixes[selector];
+    // CCM rework lobby - start
+    public void RefreshLocalization()
+    {
+        var text = ChannelSelectorButton.ChannelSelectorName(Channel);
+        var prefix = ChatUIController.ChannelPrefixes[Channel];
 
         if (prefix != default)
-            Text = Loc.GetString("hud-chatbox-select-name-prefixed", ("name", Text), ("prefix", prefix));
+            text = Loc.GetString("hud-chatbox-select-name-prefixed", ("name", text), ("prefix", prefix));
+
+        Text = text;
     }
+    // CCM rework lobby - end
 }

@@ -10,7 +10,7 @@ using Content.Client._RMC14.TacticalMap.Controls;
 namespace Content.Client._RMC14.TacticalMap.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class LabelTextDialog : DefaultWindow
+public sealed partial class LabelTextDialog : DefaultCMWindow
 {
     public event Action<string>? OnLabelConfirmed;
     public event Action? OnLabelDeleted;
@@ -97,3 +97,4 @@ public sealed partial class LabelTextDialog : DefaultWindow
         dialog.OpenCentered();
     }
 }
+

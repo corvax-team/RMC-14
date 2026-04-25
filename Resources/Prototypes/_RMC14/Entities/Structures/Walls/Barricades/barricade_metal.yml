@@ -108,7 +108,6 @@
 #     upgradedEntity: CMBarricadeBrute
 #   - type: Sprite
 #     state: brute
-
 - type: Tag
   id: RMCMetalBarricade
 
@@ -182,7 +181,6 @@
   - type: Tag
     tags:
     - RMCMetalBarricade
-
 
 - type: entity
   parent: CMBarricadeMetal

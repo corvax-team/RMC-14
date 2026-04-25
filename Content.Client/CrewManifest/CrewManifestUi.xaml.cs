@@ -7,7 +7,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client.CrewManifest;
 
 [GenerateTypedNameReferences]
-public sealed partial class CrewManifestUi : DefaultWindow
+public sealed partial class CrewManifestUi : DefaultCMWindow
 {
     public CrewManifestUi()
     {
@@ -30,3 +30,4 @@ public sealed partial class CrewManifestUi : DefaultWindow
         CrewManifestListing.AddCrewManifestEntries(entries);
     }
 }
+

@@ -23,6 +23,14 @@ public sealed partial class RMCPlaytimeStatsHeader : Control
         UpdateLabels();
     }
 
+    public void ApplyTheme(Color textColor, Color separatorColor)
+    {
+        RoleLabel.FontColorOverride = textColor;
+        PlaytimeLabel.FontColorOverride = textColor;
+        HeaderVerticalSeparator.ModulateSelfOverride = separatorColor;
+        HeaderBottomSeparator.ModulateSelfOverride = separatorColor;
+    }
+
     public enum Header : byte
     {
         Role,

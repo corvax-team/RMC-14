@@ -22,7 +22,7 @@ public sealed partial class ReplayMainMenuControl : Control
         LayoutContainer.SetMarginTop(VBox, 30);
         LayoutContainer.SetGrowHorizontal(VBox, LayoutContainer.GrowDirection.Begin);
 
-        Subtext.FontOverride = resCache.GetFont("/Fonts/NotoSansDisplay/NotoSansDisplay-Bold.ttf", 24);
+        Subtext.FontOverride = resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 24);
         var logoTexture = resCache.GetResource<TextureResource>("/Textures/Logo/logo.png");
         Logo.Texture = logoTexture;
 
@@ -37,3 +37,5 @@ public sealed partial class ReplayMainMenuControl : Control
         };
     }
 }
+
+

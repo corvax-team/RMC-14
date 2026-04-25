@@ -157,7 +157,6 @@ public sealed partial class GuidebookWindow : FancyWindow, ILinkClickHandler, IA
         RepopulateTree(rootEntries, forceRoot);
         ClearSelectedGuide();
 
-        Split.State = SplitContainer.SplitState.Auto;
         if (entries.Count == 1)
         {
             TreeBox.Visible = false;
@@ -168,6 +167,7 @@ public sealed partial class GuidebookWindow : FancyWindow, ILinkClickHandler, IA
         {
             TreeBox.Visible = true;
             Split.ResizeMode = SplitContainer.SplitResizeMode.RespectChildrenMinSize;
+            Split.State = SplitContainer.SplitState.Auto;
         }
 
         if (selected != null)

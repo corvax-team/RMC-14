@@ -3,7 +3,7 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Mentor"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     SetSize="900 500"
-    Title="Помощь менторов">
+    Title="{Loc 'rmc-mentor-window-title'}">
     <BoxContainer Orientation="Horizontal">
         <PanelContainer HorizontalExpand="True" VerticalExpand="True">
             <PanelContainer.PanelOverride>
@@ -16,7 +16,7 @@
                         <BoxContainer Name="Players" Access="Public" Orientation="Vertical"
                                       VerticalExpand="True" />
                     </ScrollContainer>
-                    <Button Name="DeMentorButton" Access="Public" Text="Снять статус ментора"
+                    <Button Name="DeMentorButton" Access="Public" Text="{Loc 'rmc-mentor-window-dementor'}"
                             StyleClasses="OpenBoth" />
                 </BoxContainer>
         </PanelContainer>
@@ -29,7 +29,7 @@
             <BoxContainer Orientation="Horizontal">
                 <LineEdit Name="Chat" Access="Public" HorizontalExpand="True"
                           Editable="False" />
-                <Button Name="ClaimButton" Access="Public" Text="Взять тикет"
+                <Button Name="ClaimButton" Access="Public" Text="{Loc 'rmc-mentor-window-claim'}"
                         StyleClasses="OpenBoth" Visible="False" />
             </BoxContainer>
         </BoxContainer>

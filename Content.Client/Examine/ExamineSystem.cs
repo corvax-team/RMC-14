@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
 using System.Numerics;
 using System.Threading;
@@ -7,6 +8,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Input;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
+using Content.Shared.Localizations;
 using Content.Shared.Verbs;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
@@ -31,6 +33,7 @@ namespace Content.Client.Examine
         [Dependency] private readonly IEyeManager _eyeManager = default!;
         [Dependency] private readonly VerbSystem _verbSystem = default!;
         [Dependency] private readonly SpriteSystem _sprite = default!;
+        [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
 
         private List<Verb> _verbList = new();
 
@@ -402,15 +405,13 @@ namespace Content.Client.Examine
             if (playerEnt == null)
                 return;
 
-            FormattedMessage message;
-
             OpenTooltip(playerEnt.Value, entity, centeredOnCursor, false);
 
-            // Always update tooltip info from client first.
-            // If we get it wrong, server will correct us later anyway.
-            // This will usually be correct (barring server-only components, which generally only adds, not replaces text)
-            message = GetExamineText(entity, playerEnt);
-            UpdateTooltipInfo(playerEnt.Value, entity, message);
+            if (IsClientSide(entity))
+            {
+                var message = GetExamineText(entity, playerEnt);
+                UpdateTooltipInfo(playerEnt.Value, entity, message);
+            }
 
             if (!IsClientSide(entity))
             {
@@ -419,7 +420,11 @@ namespace Content.Client.Examine
                 {
                     _idCounter += 1;
                 }
-                RaiseNetworkEvent(new ExamineSystemMessages.RequestExamineInfoMessage(GetNetEntity(entity), _idCounter, true));
+                RaiseNetworkEvent(new ExamineSystemMessages.RequestExamineInfoMessage(
+                    GetNetEntity(entity),
+                    _idCounter,
+                    true,
+                    _contentLoc.CurrentCultureCode));
             }
 
             RaiseLocalEvent(entity, new ClientExaminedEvent(entity, playerEnt.Value));

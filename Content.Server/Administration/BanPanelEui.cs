@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Net;
 using System.Net.Sockets;
 using Content.Server.Administration.Managers;
@@ -69,7 +70,7 @@ public sealed class BanPanelEui : BaseEui
         }
         if (target == null && string.IsNullOrWhiteSpace(ipAddressString) && hwid == null)
         {
-            _chat.DispatchServerMessage(Player, Loc.GetString("ban-panel-no-data"));
+            _chat.DispatchServerMessageLoc(Player, "ban-panel-no-data");
             return;
         }
 
@@ -84,7 +85,7 @@ public sealed class BanPanelEui : BaseEui
 
             if (!IPAddress.TryParse(ipAddressString, out var ipAddress) || !uint.TryParse(hid, out var hidInt) || hidInt > Ipv6_CIDR || hidInt > Ipv4_CIDR && ipAddress.AddressFamily == AddressFamily.InterNetwork)
             {
-                _chat.DispatchServerMessage(Player, Loc.GetString("ban-panel-invalid-ip"));
+                _chat.DispatchServerMessageLoc(Player, "ban-panel-invalid-ip");
                 return;
             }
 
@@ -102,7 +103,7 @@ public sealed class BanPanelEui : BaseEui
             var located = await _playerLocator.LookupIdByNameOrIdAsync(target);
             if (located == null)
             {
-                _chat.DispatchServerMessage(Player, Loc.GetString("cmd-ban-player"));
+                _chat.DispatchServerMessageLoc(Player, "cmd-ban-player");
                 return;
             }
             targetUid = located.UserId;

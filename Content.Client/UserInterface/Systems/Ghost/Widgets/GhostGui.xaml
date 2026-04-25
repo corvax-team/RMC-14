@@ -1,5 +1,8 @@
-﻿<widgets:GhostGui xmlns="https://spacestation14.io"
+﻿<!-- CM14 rework: non-RMC edit marker. -->
+<widgets:GhostGui xmlns="https://spacestation14.io"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Ghost.Widgets"
+                  x:Class="Content.Client.UserInterface.Systems.Ghost.Widgets.GhostGui"
                   HorizontalAlignment="Center">
     <BoxContainer Orientation="Horizontal">
         <Button Name="ReturnToBodyButton" Text="{Loc ghost-gui-return-to-body-button}" />

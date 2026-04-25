@@ -3,7 +3,9 @@
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                       MouseFilter="Stop"
                       MinWidth="200" MinHeight="150">
-    <PanelContainer StyleClasses="AngleRect" />
+    <!-- CCM rework lobby - start -->
+    <PanelContainer StyleClasses="FancyWindowFrame" />
+    <!-- CCM rework lobby - end -->
 
     <BoxContainer Orientation="Vertical">
         <Control>
@@ -17,6 +19,10 @@
             </BoxContainer>
         </Control>
         <PanelContainer StyleClasses="LowDivider" />
-        <Control Access="Public" Name="ContentsContainer" Margin="0 2" RectClipContent="True" VerticalExpand="true" />
+        <!-- CCM rework lobby - start -->
+        <PanelContainer StyleClasses="FancyWindowBodyBackground" Margin="0 2" RectClipContent="True" VerticalExpand="true">
+            <Control Access="Public" Name="ContentsContainer" />
+        </PanelContainer>
+        <!-- CCM rework lobby - end -->
     </BoxContainer>
 </controls:FancyWindow>

@@ -1,4 +1,4 @@
-﻿- type: lobbyBackground
+- type: lobbyBackground
   id: CCMLogo
   background: /Textures/_CCM14/Lobby/CCM_logo_lobby.png
 
@@ -9,11 +9,11 @@
 - type: lobbyBackground
   id: CCMLogoNew
   background: /Textures/_CCM14/Lobby/CCM_New.png
-  
+
 - type: lobbyBackground
   id: LobbyArt1
   background: /Textures/_CCM14/Lobby/LobbyArt1.png
-  
+
 - type: lobbyBackground
   id: LobbyArt3
   background: /Textures/_CCM14/Lobby/LobbyArt3.png
@@ -37,3 +37,11 @@
 - type: lobbyBackground
   id: LobbyArt14
   background: /Textures/_CCM14/Lobby/LobbyArt14.png
+
+- type: lobbyBackground
+  id: 1CMLogo
+  background: /Textures/_CCM14/Lobby/lobbytgmc.png
+
+- type: lobbyBackground
+  id: 2CMLogo
+  background: /Textures/_CCM14/Lobby/lobbyweyland.png

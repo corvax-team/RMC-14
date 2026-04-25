@@ -113,7 +113,13 @@ public sealed class RMCTelephoneSystem : SharedRMCTelephoneSystem
 
         if (TryComp<RotaryPhoneComponent>(ev.Receiving, out var phone) && phone.NotifyAdmins)
         {
-            _chatManager.SendAdminAnnouncement(Loc.GetString("admin-call-incoming", ("actor", Name(ev.Actor)), ("from", Name(ev.Calling)), ("to", Name(ev.Receiving))));
+            _chatManager.SendAdminAnnouncementLoc("admin-call-incoming",
+                new[]
+                {
+                    ("actor", (object) Name(ev.Actor)),
+                    ("from", (object) Name(ev.Calling)),
+                    ("to", (object) Name(ev.Receiving)),
+                });
         }
     }
 

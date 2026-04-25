@@ -11,7 +11,7 @@ using Robust.Shared.Localization;
 namespace Content.Client._RMC14.Commendations;
 
 [GenerateTypedNameReferences]
-public sealed partial class CommendationsWindow : DefaultWindow
+public sealed partial class CommendationsWindow : DefaultCMWindow
 {
     private readonly Dictionary<CommendationType, ScrollContainer> _tabContainers = new();
 

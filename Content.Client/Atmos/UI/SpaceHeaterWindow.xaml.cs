@@ -11,7 +11,7 @@ namespace Content.Client.Atmos.UI;
 ///     Client-side UI used to control a space heater.
 /// </summary>
 [GenerateTypedNameReferences]
-public sealed partial class SpaceHeaterWindow : DefaultWindow
+public sealed partial class SpaceHeaterWindow : DefaultCMWindow
 {
     // To account for a minimum delta temperature for atmos equalization to trigger we use a fixed step for target temperature increment/decrement
     public int TemperatureChangeDelta = 5;
@@ -70,4 +70,5 @@ public sealed partial class SpaceHeaterWindow : DefaultWindow
         DecreaseTempRange.Disabled = targetTemperature - TemperatureChangeDelta < MinTemp;
     }
 }
+
 

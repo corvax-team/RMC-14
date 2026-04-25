@@ -16,7 +16,7 @@ namespace Content.Client.Administration.UI.SpawnExplosion;
 
 [GenerateTypedNameReferences]
 [UsedImplicitly]
-public sealed partial class SpawnExplosionWindow : DefaultWindow
+public sealed partial class SpawnExplosionWindow : DefaultCMWindow
 {
     [Dependency] private readonly IClientConsoleHost _conHost = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
@@ -144,3 +144,4 @@ public sealed partial class SpawnExplosionWindow : DefaultWindow
         _conHost.ExecuteCommand(cmd);
     }
 }
+

@@ -1,3 +1,4 @@
+﻿# CM14 rework: non-RMC edit marker.
 ### Connecting dialog when you start up the game
 
 connecting-title = Space Station 14
@@ -9,6 +10,7 @@ connecting-redial = Relaunch
 connecting-redial-wait = Please wait: { TOSTRING($time, "G3") }
 connecting-in-progress = Connecting to server...
 connecting-disconnected = Disconnected from server:
+connecting-fail-header = Connection failed
 connecting-tip = Don't die!
 connecting-window-tip = Tip { $numberTip }
 connecting-version = ver 0.1

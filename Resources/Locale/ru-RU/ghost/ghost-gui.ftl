@@ -34,3 +34,4 @@ ghost-roles-window-no-roles-available-label = В настоящее время �
 ghost-roles-window-rules-footer = Кнопка станет доступна через { $time } секунд (эта задержка нужна, чтобы убедиться, что вы прочитали правила).
 ghost-return-to-body-title = Вернуться в тело
 ghost-return-to-body-text = Вас воскрешают! Вернуться в своё тело?
+ghost-roles-window-xeno-join-hint = [bold]Используйте «Войти за ксеноморфа» или найдите действия паразита слева сверху, если хотите зайти за ксенонида![/bold]

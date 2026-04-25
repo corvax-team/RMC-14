@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using Content.Shared.Verbs;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
@@ -15,11 +16,14 @@ namespace Content.Shared.Examine
 
             public readonly bool GetVerbs;
 
-            public RequestExamineInfoMessage(NetEntity netEntity, int id, bool getVerbs=false)
+            public readonly string? Locale;
+
+            public RequestExamineInfoMessage(NetEntity netEntity, int id, bool getVerbs = false, string? locale = null)
             {
                 NetEntity = netEntity;
                 Id = id;
                 GetVerbs = getVerbs;
+                Locale = locale;
             }
         }
 

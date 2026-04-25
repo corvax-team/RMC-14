@@ -40,8 +40,9 @@ public sealed partial class ChannelFilterPopup : Popup
         RobustXamlLoader.Load(this);
 
         HighlightButton.OnPressed += HighlightsEntered;
-        // Add a placeholder text to the highlights TextEdit.
-        HighlightEdit.Placeholder = new Rope.Leaf(Loc.GetString("hud-chatbox-highlights-placeholder"));
+        // CCM rework lobby - start
+        RefreshLocalization();
+        // CCM rework lobby - end
 
         // Load highlights if any were saved.
         var cfg = IoCManager.Resolve<IConfigurationManager>();
@@ -131,4 +132,19 @@ public sealed partial class ChannelFilterPopup : Popup
         if (_filterStates.TryGetValue(channel, out var checkbox))
             checkbox.UpdateUnreadCount(unread);
     }
+
+    // CCM rework lobby - start
+    public void RefreshLocalization()
+    {
+        HighlightLabel.Text = Loc.GetString("hud-chatbox-highlights");
+        HighlightButton.Text = Loc.GetString("hud-chatbox-highlights-button");
+        HighlightButton.ToolTip = Loc.GetString("hud-chatbox-highlights-tooltip");
+        HighlightEdit.Placeholder = new Rope.Leaf(Loc.GetString("hud-chatbox-highlights-placeholder"));
+
+        foreach (var checkbox in _filterStates.Values)
+        {
+            checkbox.RefreshLocalization();
+        }
+    }
+    // CCM rework lobby - end
 }

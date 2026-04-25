@@ -1,4 +1,4 @@
-<DefaultWindow
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
     Margin="4 0"
     xmlns="https://spacestation14.io"
     xmlns:ui="clr-namespace:Content.Client._RMC14.TacticalMap.UI">
@@ -36,4 +36,5 @@
                                         Margin="0 4"/>
         </BoxContainer>
     </BoxContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

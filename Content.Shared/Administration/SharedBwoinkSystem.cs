@@ -1,4 +1,5 @@
-﻿#nullable enable
+﻿// CM14 rework: non-RMC edit marker.
+#nullable enable
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
@@ -37,12 +38,13 @@ namespace Content.Shared.Administration
             // This could be a boolean "Incoming", but that would require making a second instance.
             public NetUserId TrueSender { get; }
             public string Text { get; }
+            public string? TranslatedText { get; }
 
             public bool PlaySound { get; }
 
             public readonly bool AdminOnly;
 
-            public BwoinkTextMessage(NetUserId userId, NetUserId trueSender, string text, DateTime? sentAt = default, bool playSound = true, bool adminOnly = false)
+            public BwoinkTextMessage(NetUserId userId, NetUserId trueSender, string text, DateTime? sentAt = default, bool playSound = true, bool adminOnly = false, string? translatedText = null)
             {
                 SentAt = sentAt ?? DateTime.Now;
                 UserId = userId;
@@ -50,6 +52,7 @@ namespace Content.Shared.Administration
                 Text = text;
                 PlaySound = playSound;
                 AdminOnly = adminOnly;
+                TranslatedText = translatedText;
             }
         }
     }

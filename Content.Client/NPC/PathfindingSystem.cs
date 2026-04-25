@@ -165,7 +165,7 @@ namespace Content.Client.NPC
             _system = system;
             _mapSystem = mapSystem;
             _transformSystem = transformSystem;
-            _font = new VectorFont(cache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Regular.ttf"), 10);
+            _font = new VectorFont(cache.GetResource<FontResource>("/Fonts/Exo2/Exo2-Regular.ttf"), 10);
         }
 
         protected override void Draw(in OverlayDrawArgs args)
@@ -580,3 +580,5 @@ namespace Content.Client.NPC
         }
     }
 }
+
+

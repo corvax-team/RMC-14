@@ -1,4 +1,5 @@
-﻿<Control xmlns="https://spacestation14.io"
+﻿<!-- CM14 rework: non-RMC edit marker. -->
+<Control xmlns="https://spacestation14.io"
          xmlns:pllax="clr-namespace:Content.Client.Parallax"
          xmlns:clog="clr-namespace:Content.Client.Changelog">
     <pllax:ParallaxControl
@@ -47,6 +48,8 @@
                 StyleIdentifier="mainMenu"/>
         <clog:ChangelogButton
             Name="ChangelogButton"
-            Access="Public"/>
+            Access="Public"
+            TextAlign="Center"
+            StyleIdentifier="mainMenu"/>
     </BoxContainer>
 </Control>

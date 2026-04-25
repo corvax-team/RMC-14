@@ -90,7 +90,7 @@ public sealed class GasTankWindow
 
         LayoutContainer.SetAnchorPreset(topContainerWrap, LayoutContainer.LayoutPreset.Wide);
 
-        var font = _cache.GetFont("/Fonts/Boxfont-round/Boxfont Round.ttf", 13);
+        var font = _cache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 13);
 
         _topLabel = new Label
         {
@@ -111,7 +111,7 @@ public sealed class GasTankWindow
                 _topLabel,
                 (btnClose = new TextureButton
                 {
-                    StyleClasses = {DefaultWindow.StyleClassWindowCloseButton},
+                    StyleClasses = {DefaultCMWindow.StyleClassWindowCloseButton},
                     VerticalAlignment = VAlignment.Center
                 })
             }
@@ -239,3 +239,6 @@ public sealed class GasTankWindow
         return false;
     }
 }
+
+
+

@@ -4,8 +4,12 @@ using System.Net;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server._CCM.Database;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server.Administration.Logs;
+using Content.Shared._CCM.Achievements;
+using Content.Shared._CCM.Sponsorship;
+using Content.Shared._CCM.Stats;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Construction.Prototypes;
@@ -49,6 +53,8 @@ namespace Content.Server.Database
         // Single method for two operations for transaction.
         Task DeleteSlotAndSetSelectedIndex(NetUserId userId, int deleteSlot, int newSlot);
         Task<PlayerPreferences?> GetPlayerPreferencesAsync(NetUserId userId, CancellationToken cancel);
+        Task<List<ProfileJobPriorityWeight>> GetJobPriorityWeights(Guid userId, CancellationToken cancel = default);
+        Task UpsertJobPriorityWeights(Guid userId, int slot, IReadOnlyList<JobPriorityWeightUpdate> updates, CancellationToken cancel = default);
         #endregion
 
         #region User Ids
@@ -406,6 +412,80 @@ namespace Content.Server.Database
 
         Task IncreaseInfects(Guid player);
 
+        Task<CCMPlayerStatsSnapshot> GetCCMPlayerStats(Guid player);
+
+        Task<CCMPlayerAchievementStatsSnapshot> GetCCMPlayerAchievementStats(Guid player);
+
+        Task<CCMCustomizationSnapshot> GetCCMCustomization(Guid player);
+        Task<CCMStoredSponsorshipRecord?> GetCCMStoredSponsorship(Guid player);
+
+        Task AdjustCCMPlayerAchievementStats(
+            Guid player,
+            int friendlyFireDamageDelta = 0,
+            int requisitionOrdersDelta = 0,
+            int xenoEvolutionsDelta = 0,
+            int officerWinsDelta = 0,
+            int queenKillsDelta = 0,
+            int queenWinsDelta = 0,
+            int queenKillParticipationsDelta = 0);
+
+        Task SetCCMUnlockedAchievementIds(Guid player, string unlockedAchievementIds);
+
+        Task SaveCCMCustomization(Guid player, CCMCustomizationSnapshot snapshot);
+        Task SaveCCMStoredSponsorship(Guid player, CCMSponsorshipTier tier, long expirationUnixSeconds);
+
+        Task SaveCCMRoundStats(
+            Guid player,
+            int year,
+            int month,
+            int roundsPlayed,
+            int roundsWon,
+            int roundsLost,
+            int roundSecondsPlayed,
+            int totalDamageDealt,
+            int totalKills,
+            int victoryPoints,
+            int impactPoints,
+            int revives,
+            int healingDone,
+            int structuresBuilt,
+            int deaths,
+            int shotsFired,
+            int marineRoundsPlayed,
+            int marineRoundsWon,
+            int marineRoundsLost,
+            int marineDamageDealt,
+            int marineKills,
+            int marineVictoryPoints,
+            int marineImpactPoints,
+            int marineRevives,
+            int marineHealingDone,
+            int marineStructuresBuilt,
+            int marineDeaths,
+            int marineShotsFired,
+            int xenoRoundsPlayed,
+            int xenoRoundsWon,
+            int xenoRoundsLost,
+            int xenoDamageDealt,
+            int xenoKills,
+            int xenoVictoryPoints,
+            int xenoImpactPoints,
+            int xenoHealingDone,
+            int xenoStructuresBuilt,
+            int xenoDeaths,
+            int xenoShotsFired);
+
+        Task<CCMLeaderboardPage> GetCCMLeaderboard(
+            Guid viewer,
+            CCMLeaderboardCategory category,
+            CCMLeaderboardTimeframe timeframe,
+            int page,
+            int pageSize);
+
+        Task<(int MarineWins, int XenoWins)> GetCCMRoundWinStats();
+
+        Task<(int MarineWins, int XenoWins)> AdjustCCMRoundWinStats(int marineDelta, int xenoDelta);
+
         Task<Dictionary<string, List<string>>?> GetAllActionOrders(Guid player);
 
         Task SetActionOrder(Guid player, string id, List<string> actions);
@@ -588,6 +668,18 @@ namespace Content.Server.Database
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetPlayerPreferencesAsync(userId, cancel));
+        }
+
+        public Task<List<ProfileJobPriorityWeight>> GetJobPriorityWeights(Guid userId, CancellationToken cancel = default)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetJobPriorityWeights(userId, cancel));
+        }
+
+        public Task UpsertJobPriorityWeights(Guid userId, int slot, IReadOnlyList<JobPriorityWeightUpdate> updates, CancellationToken cancel = default)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpsertJobPriorityWeights(userId, slot, updates, cancel));
         }
 
         public Task AssignUserIdAsync(string name, NetUserId userId)
@@ -1320,6 +1412,177 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.IncreaseInfects(player));
         }
 
+        public Task<CCMPlayerStatsSnapshot> GetCCMPlayerStats(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCCMPlayerStats(player));
+        }
+
+        public Task<CCMPlayerAchievementStatsSnapshot> GetCCMPlayerAchievementStats(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCCMPlayerAchievementStats(player));
+        }
+
+        public Task<CCMCustomizationSnapshot> GetCCMCustomization(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCCMCustomization(player));
+        }
+
+        public Task<CCMStoredSponsorshipRecord?> GetCCMStoredSponsorship(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCCMStoredSponsorship(player));
+        }
+
+        public Task AdjustCCMPlayerAchievementStats(
+            Guid player,
+            int friendlyFireDamageDelta = 0,
+            int requisitionOrdersDelta = 0,
+            int xenoEvolutionsDelta = 0,
+            int officerWinsDelta = 0,
+            int queenKillsDelta = 0,
+            int queenWinsDelta = 0,
+            int queenKillParticipationsDelta = 0)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AdjustCCMPlayerAchievementStats(
+                player,
+                friendlyFireDamageDelta,
+                requisitionOrdersDelta,
+                xenoEvolutionsDelta,
+                officerWinsDelta,
+                queenKillsDelta,
+                queenWinsDelta,
+                queenKillParticipationsDelta));
+        }
+
+        public Task SetCCMUnlockedAchievementIds(Guid player, string unlockedAchievementIds)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetCCMUnlockedAchievementIds(player, unlockedAchievementIds));
+        }
+
+        public Task SaveCCMCustomization(Guid player, CCMCustomizationSnapshot snapshot)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SaveCCMCustomization(player, snapshot));
+        }
+
+        public Task SaveCCMStoredSponsorship(Guid player, CCMSponsorshipTier tier, long expirationUnixSeconds)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SaveCCMStoredSponsorship(player, tier, expirationUnixSeconds));
+        }
+
+        public Task SaveCCMRoundStats(
+            Guid player,
+            int year,
+            int month,
+            int roundsPlayed,
+            int roundsWon,
+            int roundsLost,
+            int roundSecondsPlayed,
+            int totalDamageDealt,
+            int totalKills,
+            int victoryPoints,
+            int impactPoints,
+            int revives,
+            int healingDone,
+            int structuresBuilt,
+            int deaths,
+            int shotsFired,
+            int marineRoundsPlayed,
+            int marineRoundsWon,
+            int marineRoundsLost,
+            int marineDamageDealt,
+            int marineKills,
+            int marineVictoryPoints,
+            int marineImpactPoints,
+            int marineRevives,
+            int marineHealingDone,
+            int marineStructuresBuilt,
+            int marineDeaths,
+            int marineShotsFired,
+            int xenoRoundsPlayed,
+            int xenoRoundsWon,
+            int xenoRoundsLost,
+            int xenoDamageDealt,
+            int xenoKills,
+            int xenoVictoryPoints,
+            int xenoImpactPoints,
+            int xenoHealingDone,
+            int xenoStructuresBuilt,
+            int xenoDeaths,
+            int xenoShotsFired)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SaveCCMRoundStats(
+                player,
+                year,
+                month,
+                roundsPlayed,
+                roundsWon,
+                roundsLost,
+                roundSecondsPlayed,
+                totalDamageDealt,
+                totalKills,
+                victoryPoints,
+                impactPoints,
+                revives,
+                healingDone,
+                structuresBuilt,
+                deaths,
+                shotsFired,
+                marineRoundsPlayed,
+                marineRoundsWon,
+                marineRoundsLost,
+                marineDamageDealt,
+                marineKills,
+                marineVictoryPoints,
+                marineImpactPoints,
+                marineRevives,
+                marineHealingDone,
+                marineStructuresBuilt,
+                marineDeaths,
+                marineShotsFired,
+                xenoRoundsPlayed,
+                xenoRoundsWon,
+                xenoRoundsLost,
+                xenoDamageDealt,
+                xenoKills,
+                xenoVictoryPoints,
+                xenoImpactPoints,
+                xenoHealingDone,
+                xenoStructuresBuilt,
+                xenoDeaths,
+                xenoShotsFired));
+        }
+
+        public Task<CCMLeaderboardPage> GetCCMLeaderboard(
+            Guid viewer,
+            CCMLeaderboardCategory category,
+            CCMLeaderboardTimeframe timeframe,
+            int page,
+            int pageSize)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCCMLeaderboard(viewer, category, timeframe, page, pageSize));
+        }
+
+        public Task<(int MarineWins, int XenoWins)> GetCCMRoundWinStats()
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCCMRoundWinStats());
+        }
+
+        public Task<(int MarineWins, int XenoWins)> AdjustCCMRoundWinStats(int marineDelta, int xenoDelta)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AdjustCCMRoundWinStats(marineDelta, xenoDelta));
+        }
+
         public Task<Dictionary<string, List<string>>?> GetAllActionOrders(Guid player)
         {
             DbReadOpsMetric.Inc();
@@ -1594,3 +1857,5 @@ namespace Content.Server.Database
         }
     }
 }
+
+// # CCM priority rework

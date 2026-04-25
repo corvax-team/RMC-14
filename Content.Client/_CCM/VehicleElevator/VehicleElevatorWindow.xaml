@@ -1,0 +1,9 @@
+<ccm:DefaultCMWindow
+    xmlns="https://spacestation14.io"
+    xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
+    Title="Vehicle Elevator"
+    SetSize="320 160">
+    <BoxContainer Orientation="Vertical" Margin="8">
+        <Label HorizontalAlignment="Center" Text="Vehicle elevator window" />
+    </BoxContainer>
+</ccm:DefaultCMWindow>

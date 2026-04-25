@@ -1,7 +1,9 @@
 <Control xmlns="https://spacestation14.io">
-    <BoxContainer Orientation="Horizontal">
-        <Label Name="NameLabel" MinWidth="400" />
-        <Slider Name="Slider" Access="Public" HorizontalExpand="True" />
-        <Label Name="ValueLabel" Access="Public" Margin="8 0 4 0" MinWidth="48" Align="Right" />
+    <BoxContainer Orientation="Vertical" SeparationOverride="4">
+        <Label Name="NameLabel" StyleClasses="OptionSettingLabel" />
+        <BoxContainer Orientation="Horizontal">
+            <Slider Name="Slider" Access="Public" HorizontalExpand="True" />
+            <Label Name="ValueLabel" Access="Public" Margin="8 0 4 0" MinWidth="48" Align="Right" StyleClasses="OptionSettingLabel" />
+        </BoxContainer>
     </BoxContainer>
 </Control>

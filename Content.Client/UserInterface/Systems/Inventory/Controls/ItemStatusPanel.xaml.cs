@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using Content.Client.Items;
 using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
@@ -16,14 +17,10 @@ namespace Content.Client.UserInterface.Systems.Inventory.Controls;
 public sealed partial class ItemStatusPanel : Control
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
-
-    // RMC14
     [Dependency] private readonly IPlayerManager _player = default!;
-
 
     [ViewVariables] private EntityUid? _entity;
 
-    // Tracked so we can re-run SetSide() if the theme changes.
     private HandUILocation _side;
 
     public ItemStatusPanel()
@@ -34,10 +31,6 @@ public sealed partial class ItemStatusPanel : Control
 
     public void SetSide(HandUILocation location)
     {
-        // AN IMPORTANT REMINDER ABOUT THIS CODE:
-        // In the UI, the RIGHT hand is on the LEFT on the screen.
-        // So that a character facing DOWN matches the hand positions.
-
         Texture? texture;
         Texture? textureHighlight;
         StyleBox.Margin cutOut;
@@ -67,8 +60,6 @@ public sealed partial class ItemStatusPanel : Control
 
         Contents.Margin = contentMargin;
 
-        //Important to note for patchMargin!
-        //Because of hand ui flipping, left and right instead correspond to outside and inside respectively.
         patchMargin = MarginFromThemeColor("_itemstatus_patch_margin");
 
         var panel = (StyleBoxTexture) Panel.PanelOverride!;
@@ -90,10 +81,6 @@ public sealed partial class ItemStatusPanel : Control
 
     private Thickness MarginFromThemeColor(string itemName)
     {
-        // This is the worst thing I've ever programmed
-        // (can you tell I'm a graphics programmer?)
-        // (the margin needs to change depending on the UI theme, so we use a fake color entry to store the value)
-
         var color = Theme.ResolveColorOrSpecified(itemName);
         return new Thickness(color.RByte, color.GByte, color.BByte, color.AByte);
     }
@@ -126,7 +113,6 @@ public sealed partial class ItemStatusPanel : Control
         {
             _entity = entity.Value;
             BuildNewEntityStatus();
-
             UpdateItemName();
         }
     }
@@ -150,7 +136,6 @@ public sealed partial class ItemStatusPanel : Control
         if (_entityManager.TryGetComponent(_entity, out VirtualItemComponent? virtualItem)
             && _entityManager.EntityExists(virtualItem.BlockingEntity))
         {
-            // Uses identity because we can be blocked by pulling someone
             ItemNameLabel.Text = Identity.Name(virtualItem.BlockingEntity, _entityManager, _player.LocalEntity);
         }
         else

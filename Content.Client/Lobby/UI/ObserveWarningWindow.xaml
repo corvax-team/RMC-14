@@ -1,4 +1,4 @@
-<DefaultWindow
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls">
     <BoxContainer Orientation="Vertical">
@@ -11,4 +11,5 @@
             <cc:CommandButton Command="observe admin" Name="ObserveAsAdminButton" Text="{Loc 'observe-as-admin'}" SizeFlagsStretchRatio="1" Visible="False"/>
         </BoxContainer>
     </BoxContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

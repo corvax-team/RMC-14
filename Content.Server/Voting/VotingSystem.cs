@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using Content.Server.Administration.Managers;
 using Content.Server.Database;
 using Content.Server.GameTicking;
@@ -19,7 +20,6 @@ namespace Content.Server.Voting;
 
 public sealed class VotingSystem : EntitySystem
 {
-
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IAdminManager _adminManager = default!;
     [Dependency] private readonly IServerDbManager _dbManager = default!;
@@ -38,38 +38,9 @@ public sealed class VotingSystem : EntitySystem
 
     private async void OnVotePlayerListRequestEvent(VotePlayerListRequestEvent msg, EntitySessionEventArgs args)
     {
-        if (!await CheckVotekickInitEligibility(args.SenderSession))
-        {
-            var deniedResponse = new VotePlayerListResponseEvent(new (NetUserId, NetEntity, string)[0], true);
-            RaiseNetworkEvent(deniedResponse, args.SenderSession.Channel);
-            return;
-        }
-
-        List<(NetUserId, NetEntity, string)> players = new();
-
-        foreach (var player in _playerManager.Sessions)
-        {
-            if (args.SenderSession == player) continue;
-
-            if (_adminManager.IsAdmin(player, false)) continue;
-
-            if (player.AttachedEntity is not { Valid: true } attached)
-            {
-                var playerName = player.Name;
-                var netEntity = NetEntity.Invalid;
-                players.Add((player.UserId, netEntity, playerName));
-            }
-            else
-            {
-                var playerName = GetPlayerVoteListName(attached);
-                var netEntity = GetNetEntity(attached);
-
-                players.Add((player.UserId, netEntity, playerName));
-            }
-        }
-
-        var response = new VotePlayerListResponseEvent(players.ToArray(), false);
-        RaiseNetworkEvent(response, args.SenderSession.Channel);
+        // CCM-context change: votekick player list is disabled for ordinary clients.
+        var deniedResponse = new VotePlayerListResponseEvent(Array.Empty<(NetUserId, NetEntity, string)>(), true);
+        RaiseNetworkEvent(deniedResponse, args.SenderSession.Channel);
     }
 
     public string GetPlayerVoteListName(EntityUid attached)

@@ -7,7 +7,7 @@ using Robust.Shared.ContentPack;
 
 namespace Content.Client.Info
 {
-    public sealed class RulesAndInfoWindow : DefaultWindow
+    public sealed class RulesAndInfoWindow : DefaultCMWindow
     {
         [Dependency] private readonly IResourceManager _resourceManager = default!;
 
@@ -47,7 +47,6 @@ namespace Content.Client.Info
             var infoControlSection = new InfoControlsSection();
             tutorialList.InfoContainer.AddChild(infoControlSection);
             AddSection(tutorialList, Loc.GetString("ui-info-header-gameplay"), "Gameplay.txt", true);
-            AddSection(tutorialList, Loc.GetString("ui-info-header-sandbox"), "Sandbox.txt", true);
 
             infoControlSection.ControlsButton.OnPressed += _ => UserInterfaceManager.GetUIController<OptionsUIController>().OpenWindow();
         }
@@ -69,3 +68,4 @@ namespace Content.Client.Info
 
     }
 }
+

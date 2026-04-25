@@ -1,9 +1,10 @@
 ﻿<tabs:GraphicsTab xmlns="https://spacestation14.io"
           xmlns:tabs="clr-namespace:Content.Client.Options.UI.Tabs"
           xmlns:ui="clr-namespace:Content.Client.Options.UI">
-    <BoxContainer Orientation="Vertical">
-        <ScrollContainer VerticalExpand="True">
-            <BoxContainer Orientation="Vertical" Margin="8 8 8 8">
+    <PanelContainer StyleClasses="OptionsGeneralBackground">
+        <BoxContainer Orientation="Vertical">
+            <ScrollContainer VerticalExpand="True">
+                <BoxContainer Orientation="Vertical" Margin="8 8 8 8">
                 <!-- Display -->
                 <Label Text="{Loc 'ui-options-display-label'}" StyleClasses="LabelKeyText"/>
                 <CheckBox Name="VSyncCheckBox" Text="{Loc 'ui-options-vsync'}" />
@@ -32,8 +33,9 @@
                 <!-- Misc -->
                 <Label Text="{Loc 'ui-options-misc-label'}" StyleClasses="LabelKeyText"/>
                 <CheckBox Name="FpsCounterCheckBox" Text="{Loc 'ui-options-fps-counter'}" />
-            </BoxContainer>
-        </ScrollContainer>
-        <ui:OptionsTabControlRow Name="Control" Access="Public" />
-    </BoxContainer>
+                </BoxContainer>
+            </ScrollContainer>
+            <ui:OptionsTabControlRow Name="Control" Access="Public" />
+        </BoxContainer>
+    </PanelContainer>
 </tabs:GraphicsTab>

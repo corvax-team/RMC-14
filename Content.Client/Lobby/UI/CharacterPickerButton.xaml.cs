@@ -3,6 +3,7 @@ using Content.Client.Humanoid;
 using Content.Shared.Clothing;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared._CCM.Preferences;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
@@ -52,10 +53,10 @@ public sealed partial class CharacterPickerButton : ContainerButton
             _previewDummy = UserInterfaceManager.GetUIController<LobbyUIController>()
                 .LoadProfileEntity(humanoid, null, true);
 
-            var highPriorityJob = humanoid.JobPriorities.SingleOrDefault(p => p.Value == JobPriority.High).Key;
-            if (highPriorityJob != default)
+            var firstPriorityJob = humanoid.JobPriorities.FirstOrDefault(p => p.Value.IsFirst()).Key;
+            if (firstPriorityJob != default)
             {
-                var jobName = prototypeManager.Index(highPriorityJob).LocalizedName;
+                var jobName = prototypeManager.Index(firstPriorityJob).LocalizedName;
                 description = $"{description}\n{jobName}";
             }
         }
@@ -90,3 +91,5 @@ public sealed partial class CharacterPickerButton : ContainerButton
         _previewDummy = default;
     }
 }
+
+// # CCM priority rework

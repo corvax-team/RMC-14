@@ -6,7 +6,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client.StationRecords;
 
 [GenerateTypedNameReferences]
-public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
+public sealed partial class GeneralStationRecordConsoleWindow : DefaultCMWindow
 {
     public Action<uint?>? OnKeySelected;
 
@@ -159,3 +159,4 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
     }
 
 }
+

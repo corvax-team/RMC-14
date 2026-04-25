@@ -36,7 +36,6 @@ public sealed partial class GraphicsTab : Control
                 new OptionDropDownCVar<float>.ValueOption(1.25f, Loc.GetString("ui-options-scale-125")),
                 new OptionDropDownCVar<float>.ValueOption(1.50f, Loc.GetString("ui-options-scale-150")),
                 new OptionDropDownCVar<float>.ValueOption(1.75f, Loc.GetString("ui-options-scale-175")),
-                new OptionDropDownCVar<float>.ValueOption(2.00f, Loc.GetString("ui-options-scale-200")),
             ]);
 
         var vpStretch = Control.AddOptionCheckBox(CCVars.ViewportStretch, ViewportStretchCheckBox);

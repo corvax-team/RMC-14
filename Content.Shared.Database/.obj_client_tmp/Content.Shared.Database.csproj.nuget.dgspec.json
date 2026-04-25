@@ -1,0 +1,143 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\admin\\Documents\\GitHub\\TGMC-14\\Content.Shared.Database\\Content.Shared.Database.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\admin\\Documents\\GitHub\\TGMC-14\\Content.Shared.Database\\Content.Shared.Database.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\admin\\Documents\\GitHub\\TGMC-14\\Content.Shared.Database\\Content.Shared.Database.csproj",
+        "projectName": "Content.Shared.Database",
+        "projectPath": "C:\\Users\\admin\\Documents\\GitHub\\TGMC-14\\Content.Shared.Database\\Content.Shared.Database.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Documents\\GitHub\\TGMC-14\\Content.Shared.Database\\.obj_client_tmp\\",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "configFilePaths": [
+          "C:\\Users\\admin\\Documents\\GitHub\\TGMC-14\\NuGet.Config",
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "centralPackageVersions": {
+            "BenchmarkDotNet": "0.14.0",
+            "CsvHelper": "33.0.1",
+            "Discord.Net": "3.15.2",
+            "DiscordRichPresence": "1.2.1.24",
+            "ImGui.NET": "1.87.3",
+            "JetBrains.Annotations": "2024.3.0",
+            "JetBrains.Profiler.Api": "1.4.8",
+            "Linguini.Bundle": "0.8.1",
+            "Microsoft.CodeAnalysis.Analyzer.Testing": "1.1.2",
+            "Microsoft.CodeAnalysis.Analyzers": "3.11.0",
+            "Microsoft.CodeAnalysis.Common": "4.12.0",
+            "Microsoft.CodeAnalysis.CSharp": "4.12.0",
+            "Microsoft.CodeAnalysis.CSharp.Analyzer.Testing": "1.1.2",
+            "Microsoft.CodeAnalysis.CSharp.CodeFix.Testing": "1.1.2",
+            "Microsoft.CodeAnalysis.CSharp.Features": "4.12.0",
+            "Microsoft.CodeAnalysis.CSharp.Scripting": "4.12.0",
+            "Microsoft.CodeAnalysis.CSharp.Workspaces": "4.12.0",
+            "Microsoft.CodeAnalysis.Workspaces.Common": "4.12.0",
+            "Microsoft.CodeAnalysis.Workspaces.MSBuild": "4.12.0",
+            "Microsoft.CodeCoverage": "17.12.0",
+            "Microsoft.Data.Sqlite.Core": "9.0.0",
+            "Microsoft.DotNet.RemoteExecutor": "8.0.0-beta.24059.4",
+            "Microsoft.EntityFrameworkCore.Design": "9.0.1",
+            "Microsoft.EntityFrameworkCore.Sqlite.Core": "9.0.1",
+            "Microsoft.Extensions.DependencyInjection": "9.0.0",
+            "Microsoft.Extensions.Logging": "9.0.0",
+            "Microsoft.Extensions.ObjectPool": "9.0.0",
+            "Microsoft.Extensions.Primitives": "9.0.0",
+            "Microsoft.ILVerification": "9.0.0",
+            "Microsoft.IO.RecyclableMemoryStream": "3.0.1",
+            "Microsoft.NET.ILLink.Tasks": "9.0.0",
+            "Microsoft.NET.Test.Sdk": "17.12.0",
+            "Microsoft.Win32.Registry": "5.0.0",
+            "Moq": "4.20.72",
+            "NetCord": "1.0.0-alpha.388",
+            "Nett": "0.15.0",
+            "Newtonsoft.Json": "13.0.3",
+            "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.3",
+            "NUnit": "4.3.2",
+            "NUnit.Analyzers": "4.5.0",
+            "NUnit3TestAdapter": "4.6.0",
+            "OpenTK": "4.7.2",
+            "OpenTK.OpenAL": "4.7.7",
+            "OpenToolkit.Graphics": "4.0.0-pre9.1",
+            "Pidgin": "3.3.0",
+            "PolySharp": "1.15.0",
+            "prometheus-net": "8.2.1",
+            "prometheus-net.DotNetRuntime": "4.4.0",
+            "Robust.Natives": "0.1.1",
+            "Robust.Natives.Cef": "131.3.5",
+            "Robust.Shared.AuthLib": "0.1.2",
+            "Serilog": "4.2.0",
+            "Serilog.Sinks.Loki": "4.0.0-beta3",
+            "SharpZstd.Interop": "1.5.2-beta2",
+            "SixLabors.ImageSharp": "3.1.7",
+            "SpaceWizards.HttpListener": "0.1.1",
+            "SpaceWizards.NFluidsynth": "0.1.1",
+            "SpaceWizards.SharpFont": "1.0.2",
+            "SpaceWizards.Sodium": "0.2.1",
+            "SQLitePCLRaw.bundle_e_sqlite3": "2.1.10",
+            "SQLitePCLRaw.provider.sqlite3": "2.1.10",
+            "System.Formats.Asn1": "9.0.0",
+            "System.Reflection.Metadata": "9.0.0",
+            "System.Text.Json": "9.0.0",
+            "TerraFX.Interop.Windows": "10.0.26100.1",
+            "TerraFX.Interop.Xlib": "6.4.0",
+            "Veldrid": "4.8.0",
+            "Veldrid.SPIRV": "1.0.15",
+            "VorbisPizza": "1.3.0",
+            "YamlDotNet": "16.3.0"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

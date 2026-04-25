@@ -17,11 +17,20 @@ ui-options-value-percent = { TOSTRING($value, "P0") }
 
 ui-options-discordrich = Включить Discord Rich Presence
 ui-options-general-ui-style = Стиль UI
+ui-options-general-lobby = Лобби
 ui-options-general-discord = Discord
 ui-options-general-cursor = Курсор
 ui-options-general-speech = Речь
+ui-options-general-chat-translation = Перевод чата
 ui-options-general-storage = Инвентарь
 ui-options-general-accessibility = Доступность
+ui-options-chat-translate-enabled = Включить автоматический перевод чата
+ui-options-chat-translate-language = Переводить чат на:
+ui-options-chat-translate-language-off = Не переводить
+ui-options-chat-translate-api = LibreTranslate API:
+ui-options-chat-translate-api-placeholder = http://127.0.0.1:5500/translate
+ui-options-chat-translate-api-help = Запустите локальный LibreTranslate и оставьте этот endpoint по умолчанию, если не меняли порт.
+# CCM priority rework
 
 ## Audio menu
 
@@ -71,6 +80,14 @@ ui-options-scale-150 = 150%
 ui-options-scale-175 = 175%
 ui-options-scale-200 = 200%
 ui-options-hud-theme = Тема HUD:
+ui-options-ui-color-theme = Цвет интерфейса:
+ui-options-ui-color-theme-green = Зеленый
+ui-options-ui-color-theme-blue = Синий
+ui-options-lobby-background-preset = Пресет фона лобби:
+ui-options-lobby-background-preset-console = Консоль
+ui-options-lobby-background-preset-community = Сообщество
+ui-options-lobby-background-preset-rmca = RMCA
+ui-options-lobby-invert-sides = Инвертировать стороны лобби
 ui-options-hud-theme-default = По умолчанию
 ui-options-hud-theme-plasmafire = Плазма
 ui-options-hud-theme-slimecore = Слаймкор
@@ -83,7 +100,7 @@ ui-options-hud-layout-separated = Разделённый
 ui-options-vp-stretch = Растянуть изображение для соответствия окну игры
 ui-options-vp-scale = Фиксированный масштаб окна игры:
 ui-options-vp-scale-value = x{ $scale }
-ui-options-vp-integer-scaling = Использовать целочисленное масштабирование (может вызывать появление чёрных полос/обрезания)
+ui-options-vp-integer-scaling = Использовать целочисленное масштабирование
 ui-options-vp-integer-scaling-tooltip =
     Если эта опция включена, область просмотра будет масштабироваться,
     используя целочисленное значение при определённых разрешениях. Хотя это и
@@ -148,7 +165,7 @@ ui-options-function-alt-activate-item-in-world = Альтернативно ис
 ui-options-function-drop = Положить предмет
 ui-options-function-examine-entity = Осмотреть
 ui-options-function-swap-hands = Поменять руки
-ui-options-function-swap-hands-reverse = Поменять руки (противоположное направление)
+ui-options-function-swap-hands-reverse = Поменять руки (в другую сторону)
 ui-options-function-move-stored-item = Переместить хранящийся объект
 ui-options-function-rotate-stored-item = Повернуть хранящийся объект
 ui-options-function-save-item-location = Сохранить расположение объекта
