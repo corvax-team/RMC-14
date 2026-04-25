@@ -375,7 +375,7 @@
   - type: BulletBox
     amount: 8
     max: 8
-    bulletType: RMCFlareR44 # CCM14
+    bulletType: RMCFlareBullet
   - type: Sprite
     sprite: _RMC14/Objects/Storage/boxes.rsi
     layers:
