@@ -10,6 +10,7 @@
   - type: RMCIgnoreGhostInteractionLimits
   - type: RequireProjectileTarget
   - type: GridVehicleMover
+    mobCollisionDamage: 100 # CCM14
     maxSpeed: 3
     acceleration: 1.154
     deceleration: 8
@@ -182,7 +183,7 @@
   - type: VehicleWheelSlots
     slotCount: 1
   - type: HardpointIntegrity
-    maxIntegrity: 1000
+    maxIntegrity: 800 # CCM14
     repairFuelCost: 20
     bypassEntryOnZero: true
   - type: Appearance

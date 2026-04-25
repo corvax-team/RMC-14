@@ -115,7 +115,7 @@
   - type: VehicleWheelSlots
     slotCount: 1
   - type: HardpointIntegrity
-    maxIntegrity: 1000
+    maxIntegrity: 250 # CCM14
     repairFuelCost: 10
     bypassEntryOnZero: true
   - type: Appearance
@@ -294,7 +294,7 @@
   - type: VehicleWheelSlots
     slotCount: 1
   - type: HardpointIntegrity
-    maxIntegrity: 1000
+    maxIntegrity: 250 # CCM14
     repairFuelCost: 10
     bypassEntryOnZero: true
   - type: Appearance

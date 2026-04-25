@@ -10,6 +10,7 @@
   - type: RMCIgnoreGhostInteractionLimits
   - type: RequireProjectileTarget
   - type: GridVehicleMover
+    mobCollisionDamage: 40 # CCM14
     maxSpeed: 5
     acceleration: 4
     deceleration: 10
@@ -159,7 +160,7 @@
   - type: VehicleWheelSlots
     slotCount: 1
   - type: HardpointIntegrity
-    maxIntegrity: 1000
+    maxIntegrity: 600 # CCM14
     repairFuelCost: 15
     bypassEntryOnZero: true
   - type: Appearance
@@ -270,6 +271,7 @@
   description: An armored personnel carrier configured for SPP forces.
   components:
   - type: GridVehicleMover
+    mobCollisionDamage: 40 # CCM14
     maxSpeed: 5
     acceleration: 2.0
     deceleration: 7.5

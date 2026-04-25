@@ -7,6 +7,8 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/sppapc.rsi
   - type: Item
     size: Large
+  - type: VehicleFabricatorPrintable # CCM14
+    enabled: false
 
 - type: entity
   parent: VehicleSPPAPCHardpointBase
@@ -114,6 +116,8 @@
     useAimDirection: true
   - type: HardpointVisual
     vehicleState: apc_minigun_0
+  - type: VehicleFabricatorPrintable # CCM14
+    enabled: false
 
 - type: entity
   parent: RMCAPCFrontCannon
@@ -137,6 +141,8 @@
     useAimDirection: true
   - type: HardpointVisual
     vehicleState: apc_autocannon_0
+  - type: VehicleFabricatorPrintable # CCM14
+    enabled: false
 
 - type: entity
   parent: VehicleTankTowLauncher
@@ -157,6 +163,8 @@
     maxIntegrity: 350
   - type: HardpointVisual
     vehicleState: apc_hj35_0
+  - type: VehicleFabricatorPrintable # CCM14
+    enabled: false
 
 - type: entity
   parent: RMCAPCFlareLauncher
@@ -171,4 +179,5 @@
     compatibilityId: SPPAPC
   - type: HardpointVisual
     vehicleState: spp_flare_launcher_0
-
+  - type: VehicleFabricatorPrintable # CCM14
+    enabled: false

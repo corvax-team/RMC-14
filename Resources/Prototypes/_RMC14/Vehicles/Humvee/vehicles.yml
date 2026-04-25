@@ -10,6 +10,7 @@
   - type: RMCIgnoreGhostInteractionLimits
   - type: RequireProjectileTarget
   - type: GridVehicleMover
+    mobCollisionDamage: 20 # CCM14
     maxSpeed: 6
     acceleration: 5
     deceleration: 12
@@ -181,7 +182,7 @@
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
   - type: HardpointIntegrity
-    maxIntegrity: 1000
+    maxIntegrity: 400 # CCM14
     repairFuelCost: 12
     bypassEntryOnZero: true
 
@@ -195,7 +196,7 @@
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
   - type: HardpointIntegrity
-    maxIntegrity: 1000
+    maxIntegrity: 400 # CCM14
     repairFuelCost: 12
     bypassEntryOnZero: true
   - type: Sprite
@@ -263,7 +264,7 @@
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
   - type: HardpointIntegrity
-    maxIntegrity: 1000
+    maxIntegrity: 400 # CCM14
     repairFuelCost: 12
     bypassEntryOnZero: true
   - type: Sprite
@@ -338,7 +339,7 @@
     damageContainer: StructuralMarine
     damageModifierSet: VehicleFrameARC
   - type: HardpointIntegrity
-    maxIntegrity: 800
+    maxIntegrity: 300 # CCM14
     repairFuelCost: 12
     bypassEntryOnZero: true
   - type: VehicleDeployable
