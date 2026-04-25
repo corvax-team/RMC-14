@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 04/18/2026 01:52:57
-  entityCount: 54346
+  time: 04/20/2026 23:41:12
+  entityCount: 54266
 maps:
 - 1
 grids:
@@ -70282,6 +70282,35 @@ entities:
         -224,-247: RMCAreaLv759Oob
         -224,-248: RMCAreaLv759Oob
         -224,-249: RMCAreaLv759Oob
+- proto: ActionToggleLight
+  entities:
+  - uid: 21642
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 16
+    - type: Action
+      originalIconColor: '#FFFFFFFF'
+      container: 16
+  - uid: 30254
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 20
+    - type: Action
+      originalIconColor: '#FFFFFFFF'
+      container: 20
+  - uid: 50238
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 50237
+    - type: Action
+      originalIconColor: '#FFFFFFFF'
+      container: 50237
 - proto: ArmorHelmetPMCCorporate
   entities:
   - uid: 11
@@ -73437,6 +73466,26 @@ entities:
       rot: -6.283185307179586 rad
       pos: -169.49277,-162.5043
       parent: 1
+- proto: CMActionToggleScope
+  entities:
+  - uid: 5379
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 5378
+    - type: Action
+      originalIconColor: '#FFFFFFFF'
+      container: 5378
+  - uid: 50189
+    mapInit: true
+    paused: true
+    components:
+    - type: Transform
+      parent: 12558
+    - type: Action
+      originalIconColor: '#FFFFFFFF'
+      container: 12558
 - proto: CMAdvFirstAidKitFilled
   entities:
   - uid: 715
@@ -76955,11 +77004,39 @@ entities:
     - type: Transform
       pos: -194.51254,-64.40273
       parent: 1
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        actions: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 21642
+    - type: HandheldLight
+      toggleActionEntity: 21642
+    - type: ActionsContainer
   - uid: 20
     components:
     - type: Transform
       pos: -171.45381,-97.41356
       parent: 1
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        actions: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 30254
+    - type: HandheldLight
+      toggleActionEntity: 30254
+    - type: ActionsContainer
   - uid: 1246
     components:
     - type: Transform
@@ -113763,398 +113840,6 @@ entities:
     - type: Transform
       pos: -118.5,-69.5
       parent: 1
-- proto: CMSpawnPointSurvivor
-  entities:
-  - uid: 8199
-    components:
-    - type: Transform
-      pos: -38.5,-21.5
-      parent: 1
-  - uid: 8200
-    components:
-    - type: Transform
-      pos: -16.5,-49.5
-      parent: 1
-  - uid: 8201
-    components:
-    - type: Transform
-      pos: -46.5,-30.5
-      parent: 1
-  - uid: 8202
-    components:
-    - type: Transform
-      pos: -28.5,-27.5
-      parent: 1
-  - uid: 8203
-    components:
-    - type: Transform
-      pos: -38.5,-43.5
-      parent: 1
-  - uid: 8204
-    components:
-    - type: Transform
-      pos: -38.5,-45.5
-      parent: 1
-  - uid: 8205
-    components:
-    - type: Transform
-      pos: -44.5,-52.5
-      parent: 1
-  - uid: 8206
-    components:
-    - type: Transform
-      pos: -20.5,-73.5
-      parent: 1
-  - uid: 8207
-    components:
-    - type: Transform
-      pos: -56.5,-65.5
-      parent: 1
-  - uid: 8208
-    components:
-    - type: Transform
-      pos: -29.5,-107.5
-      parent: 1
-  - uid: 8210
-    components:
-    - type: Transform
-      pos: -43.5,-154.5
-      parent: 1
-  - uid: 8211
-    components:
-    - type: Transform
-      pos: -49.5,-151.5
-      parent: 1
-  - uid: 8212
-    components:
-    - type: Transform
-      pos: -50.5,-108.5
-      parent: 1
-  - uid: 8213
-    components:
-    - type: Transform
-      pos: -60.5,-115.5
-      parent: 1
-  - uid: 8214
-    components:
-    - type: Transform
-      pos: -82.5,-106.5
-      parent: 1
-  - uid: 8215
-    components:
-    - type: Transform
-      pos: -76.5,-144.5
-      parent: 1
-  - uid: 8216
-    components:
-    - type: Transform
-      pos: -73.5,-145.5
-      parent: 1
-  - uid: 8217
-    components:
-    - type: Transform
-      pos: -84.5,-146.5
-      parent: 1
-  - uid: 8218
-    components:
-    - type: Transform
-      pos: -50.5,-96.5
-      parent: 1
-  - uid: 8219
-    components:
-    - type: Transform
-      pos: -54.5,-82.5
-      parent: 1
-  - uid: 8220
-    components:
-    - type: Transform
-      pos: -70.5,-90.5
-      parent: 1
-  - uid: 8221
-    components:
-    - type: Transform
-      pos: -63.5,-51.5
-      parent: 1
-  - uid: 8222
-    components:
-    - type: Transform
-      pos: -70.5,-40.5
-      parent: 1
-  - uid: 8223
-    components:
-    - type: Transform
-      pos: -66.5,-23.5
-      parent: 1
-  - uid: 8224
-    components:
-    - type: Transform
-      pos: -78.5,-27.5
-      parent: 1
-  - uid: 8225
-    components:
-    - type: Transform
-      pos: -83.5,-100.5
-      parent: 1
-  - uid: 8226
-    components:
-    - type: Transform
-      pos: -113.5,-110.5
-      parent: 1
-  - uid: 8227
-    components:
-    - type: Transform
-      pos: -96.5,-99.5
-      parent: 1
-  - uid: 8228
-    components:
-    - type: Transform
-      pos: -103.5,-106.5
-      parent: 1
-  - uid: 8229
-    components:
-    - type: Transform
-      pos: -111.5,-98.5
-      parent: 1
-  - uid: 8230
-    components:
-    - type: Transform
-      pos: -121.5,-98.5
-      parent: 1
-  - uid: 8231
-    components:
-    - type: Transform
-      pos: -130.5,-100.5
-      parent: 1
-  - uid: 8232
-    components:
-    - type: Transform
-      pos: -128.5,-109.5
-      parent: 1
-  - uid: 8233
-    components:
-    - type: Transform
-      pos: -84.5,-14.5
-      parent: 1
-  - uid: 8234
-    components:
-    - type: Transform
-      pos: -97.5,-17.5
-      parent: 1
-  - uid: 8235
-    components:
-    - type: Transform
-      pos: -85.5,-22.5
-      parent: 1
-  - uid: 8236
-    components:
-    - type: Transform
-      pos: -97.5,-50.5
-      parent: 1
-  - uid: 8237
-    components:
-    - type: Transform
-      pos: -102.5,-41.5
-      parent: 1
-  - uid: 8238
-    components:
-    - type: Transform
-      pos: -96.5,-25.5
-      parent: 1
-  - uid: 8239
-    components:
-    - type: Transform
-      pos: -101.5,-28.5
-      parent: 1
-  - uid: 8240
-    components:
-    - type: Transform
-      pos: -102.5,-16.5
-      parent: 1
-  - uid: 8241
-    components:
-    - type: Transform
-      pos: -109.5,-16.5
-      parent: 1
-  - uid: 8242
-    components:
-    - type: Transform
-      pos: -126.5,-34.5
-      parent: 1
-  - uid: 8243
-    components:
-    - type: Transform
-      pos: -121.5,-35.5
-      parent: 1
-  - uid: 8244
-    components:
-    - type: Transform
-      pos: -129.5,-43.5
-      parent: 1
-  - uid: 8245
-    components:
-    - type: Transform
-      pos: -126.5,-64.5
-      parent: 1
-  - uid: 8246
-    components:
-    - type: Transform
-      pos: -133.5,-56.5
-      parent: 1
-  - uid: 8247
-    components:
-    - type: Transform
-      pos: -117.5,-76.5
-      parent: 1
-  - uid: 8248
-    components:
-    - type: Transform
-      pos: -125.5,-79.5
-      parent: 1
-  - uid: 8249
-    components:
-    - type: Transform
-      pos: -163.5,-96.5
-      parent: 1
-  - uid: 8250
-    components:
-    - type: Transform
-      pos: -149.5,-101.5
-      parent: 1
-  - uid: 8251
-    components:
-    - type: Transform
-      pos: -140.5,-15.5
-      parent: 1
-  - uid: 8252
-    components:
-    - type: Transform
-      pos: -127.5,-70.5
-      parent: 1
-  - uid: 8253
-    components:
-    - type: Transform
-      pos: -137.5,-62.5
-      parent: 1
-  - uid: 8254
-    components:
-    - type: Transform
-      pos: -139.5,-68.5
-      parent: 1
-  - uid: 8255
-    components:
-    - type: Transform
-      pos: -141.5,-71.5
-      parent: 1
-  - uid: 8256
-    components:
-    - type: Transform
-      pos: -143.5,-76.5
-      parent: 1
-  - uid: 8257
-    components:
-    - type: Transform
-      pos: -139.5,-77.5
-      parent: 1
-  - uid: 8258
-    components:
-    - type: Transform
-      pos: -150.5,-72.5
-      parent: 1
-  - uid: 8259
-    components:
-    - type: Transform
-      pos: -152.5,-63.5
-      parent: 1
-  - uid: 8260
-    components:
-    - type: Transform
-      pos: -159.5,-66.5
-      parent: 1
-  - uid: 8261
-    components:
-    - type: Transform
-      pos: -159.5,-72.5
-      parent: 1
-  - uid: 8262
-    components:
-    - type: Transform
-      pos: -173.5,-18.5
-      parent: 1
-  - uid: 8263
-    components:
-    - type: Transform
-      pos: -158.5,-51.5
-      parent: 1
-  - uid: 8264
-    components:
-    - type: Transform
-      pos: -138.5,-33.5
-      parent: 1
-  - uid: 8265
-    components:
-    - type: Transform
-      pos: -147.5,-39.5
-      parent: 1
-  - uid: 8266
-    components:
-    - type: Transform
-      pos: -155.5,-35.5
-      parent: 1
-  - uid: 8267
-    components:
-    - type: Transform
-      pos: -184.5,-44.5
-      parent: 1
-  - uid: 8268
-    components:
-    - type: Transform
-      pos: -174.5,-143.5
-      parent: 1
-  - uid: 50367
-    components:
-    - type: Transform
-      pos: -61.5,-128.5
-      parent: 1
-  - uid: 51084
-    components:
-    - type: Transform
-      pos: -24.5,-65.5
-      parent: 1
-  - uid: 51099
-    components:
-    - type: Transform
-      pos: -28.5,-86.5
-      parent: 1
-  - uid: 51496
-    components:
-    - type: Transform
-      pos: -47.5,-15.5
-      parent: 1
-  - uid: 51659
-    components:
-    - type: Transform
-      pos: -57.5,-92.5
-      parent: 1
-  - uid: 52038
-    components:
-    - type: Transform
-      pos: -139.5,-108.5
-      parent: 1
-  - uid: 52039
-    components:
-    - type: Transform
-      pos: -146.5,-108.5
-      parent: 1
-  - uid: 52165
-    components:
-    - type: Transform
-      pos: -148.5,-114.5
-      parent: 1
-  - uid: 52166
-    components:
-    - type: Transform
-      pos: -115.5,-105.5
-      parent: 1
 - proto: CMSpawnPointXeno
   entities:
   - uid: 8269
@@ -138891,6 +138576,14 @@ entities:
       rot: -6.283185307179586 rad
       pos: -62.45463,-148.62123
       parent: 1
+    - type: Scope
+      scopingToggleActionEntity: 50189
+    - type: ActionsContainer
+    - type: ContainerContainer
+      containers:
+        actions: !type:Container
+          ents:
+          - 50189
 - proto: RMCAttachmentSuppressor
   entities:
   - uid: 12559
@@ -150444,6 +150137,14 @@ entities:
       rot: -6.283185307179586 rad
       pos: -67.4734,-144.20021
       parent: 1
+    - type: Scope
+      scopingToggleActionEntity: 5379
+    - type: ActionsContainer
+    - type: ContainerContainer
+      containers:
+        actions: !type:Container
+          ents:
+          - 5379
   - uid: 5380
     components:
     - type: Transform
@@ -201995,7 +201696,8 @@ entities:
       pos: -9.5,-173.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19671
@@ -202004,7 +201706,8 @@ entities:
       pos: -7.5,-173.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19672
@@ -202013,7 +201716,8 @@ entities:
       pos: -7.5,-174.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19673
@@ -202022,7 +201726,8 @@ entities:
       pos: -78.5,-81.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19674
@@ -202031,7 +201736,8 @@ entities:
       pos: -78.5,-83.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19675
@@ -202040,7 +201746,8 @@ entities:
       pos: -78.5,-82.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19676
@@ -202049,7 +201756,8 @@ entities:
       pos: -80.5,-82.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19677
@@ -202058,7 +201766,8 @@ entities:
       pos: -80.5,-81.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19678
@@ -202067,7 +201776,8 @@ entities:
       pos: -80.5,-83.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19679
@@ -202076,7 +201786,8 @@ entities:
       pos: -83.5,-83.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19681
@@ -202085,7 +201796,8 @@ entities:
       pos: -83.5,-82.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19682
@@ -202094,7 +201806,8 @@ entities:
       pos: -85.5,-82.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19683
@@ -202103,7 +201816,8 @@ entities:
       pos: -85.5,-81.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19684
@@ -202112,7 +201826,8 @@ entities:
       pos: -85.5,-83.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19685
@@ -202121,7 +201836,8 @@ entities:
       pos: -88.5,-82.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19686
@@ -202130,7 +201846,8 @@ entities:
       pos: -88.5,-81.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19687
@@ -202139,7 +201856,8 @@ entities:
       pos: -90.5,-82.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19688
@@ -202148,7 +201866,8 @@ entities:
       pos: -90.5,-81.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19689
@@ -202157,7 +201876,8 @@ entities:
       pos: -88.5,-83.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 19690
@@ -202166,7 +201886,8 @@ entities:
       pos: -90.5,-83.5
       parent: 1
     missingComponents:
-    - TacticalMapLayerTracked
+    - MarineMapTracked
+    - XenoMapTracked
     - TacticalMapTracked
     - TacticalMapIcon
 - proto: RMCGeneratorFusionFake
@@ -203283,6 +203004,20 @@ entities:
       rot: -6.283185307179586 rad
       pos: -7.4843445,-41.486958
       parent: 1
+    - type: HandheldLight
+      toggleActionEntity: 50238
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
+        actions: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 50238
+    - type: ActionsContainer
   - uid: 50267
     components:
     - type: Transform
@@ -216928,12 +216663,26 @@ entities:
     - type: Transform
       pos: -194.5,-22.5
       parent: 1
+- proto: RMCMapInsertHybrisaSurvivorSpawns
+  entities:
+  - uid: 8199
+    components:
+    - type: Transform
+      pos: -119.5,-80.5
+      parent: 1
 - proto: RMCMapInsertHybrisaTSEAirbase
   entities:
   - uid: 20791
     components:
     - type: Transform
       pos: -166.5,-58.5
+      parent: 1
+- proto: RMCMapInsertHybrisaTSEAirbaseIntact
+  entities:
+  - uid: 54347
+    components:
+    - type: Transform
+      pos: -166.5,-59.5
       parent: 1
 - proto: RMCMarkerAreaLabel
   entities:
@@ -262193,30 +261942,6 @@ entities:
     components:
     - type: Transform
       pos: -12.5,-61.5
-      parent: 1
-- proto: RMCSpawnPointSurvivorDoctor
-  entities:
-  - uid: 29474
-    components:
-    - type: Transform
-      pos: -171.5,-69.5
-      parent: 1
-  - uid: 29475
-    components:
-    - type: Transform
-      pos: -173.5,-76.5
-      parent: 1
-  - uid: 29476
-    components:
-    - type: Transform
-      pos: -178.5,-75.5
-      parent: 1
-- proto: RMCSpawnPointSurvivorSecurity
-  entities:
-  - uid: 29477
-    components:
-    - type: Transform
-      pos: -90.5,-14.5
       parent: 1
 - proto: RMCSpawnRatBlack
   entities:

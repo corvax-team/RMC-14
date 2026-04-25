@@ -1,4 +1,6 @@
+using System;
 using System.Numerics;
+using System.Collections.Generic;
 using Content.Shared.Damage;
 using Content.Shared.Doors.Components;
 using Content.Shared.Foldable;
@@ -10,11 +12,14 @@ using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Physics;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Maths;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
+using Robust.Shared.Collections;
 
 namespace Content.Shared.Vehicle;
 
@@ -66,10 +71,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         var coords = new EntityCoordinates(grid, gridPos);
         var world = coords.ToMap(EntityManager, transform);
 
-        var tileIndices = map.TileIndicesFor(grid, gridComp, coords);
         var debugEnabled = debug && CollisionDebugEnabled;
         if (debugEnabled)
+        {
+            var tileIndices = map.TileIndicesFor(grid, gridComp, coords);
             DebugTestedTiles.Add((grid, tileIndices));
+        }
 
         var rotation = GetCollisionWorldRotation(uid, grid, overrideRotation);
         var tx = new Transform(world.Position, rotation);
@@ -82,7 +89,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         var movementAabb = GetMovementAabb(aabb, mover);
         var hits = lookup.GetEntitiesIntersecting(world.MapId, aabb, LookupFlags.Dynamic | LookupFlags.Static);
         var playedCollisionSound = false;
-        HashSet<EntityUid>? mobHits = null;
+        var mobHits = new ValueList<EntityUid>(0);
 
         void AddProbe(bool probeBlocked)
         {
@@ -95,6 +102,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         foreach (var other in hits)
         {
             if (other == uid)
+                continue;
+
+            if (TryComp(other, out VehicleRideSurfaceRiderComponent? rider) && rider.Vehicle == uid)
                 continue;
 
             if (ignoredEntities != null && ignoredEntities.Contains(other))
@@ -227,12 +237,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
             if (applyEffects && !_net.IsClient && candidate.MobState != null)
             {
-                mobHits ??= new HashSet<EntityUid>();
-                mobHits.Add(candidate.Entity);
+                if (!mobHits.Contains(candidate.Entity))
+                    mobHits.Add(candidate.Entity);
             }
         }
 
-        if (!_net.IsClient && mobHits != null)
+        if (!_net.IsClient && mobHits.Count > 0)
         {
             foreach (var mobUid in mobHits)
             {

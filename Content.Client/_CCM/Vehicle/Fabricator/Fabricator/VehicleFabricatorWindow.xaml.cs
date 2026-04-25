@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+using System.Linq;
+using System.Numerics;
 using Content.Client.Message;
 using Content.Shared._CCM.Vehicle.Fabricator;
 using Robust.Client.Graphics;
@@ -19,127 +20,113 @@ public sealed class VehicleFabricatorWindow : DefaultWindow
     public VehicleFabricatorCategory SelectedCategory { get; private set; } = VehicleFabricatorCategory.Primary;
     public VehicleType SelectedVehicle { get; private set; } = VehicleType.Tank;
 
-    private Label PointsLabel => FindControl<Label>("PointsLabel");
     private Label PrintingLabel => FindControl<Label>("PrintingLabel");
     private ProgressBar PrintingBar => FindControl<ProgressBar>("PrintingBar");
     private EntityPrototypeView VehiclePreview => FindControl<EntityPrototypeView>("VehiclePreview");
     private BoxContainer PrintablesContainer => FindControl<BoxContainer>("PrintablesContainer");
     private RichTextLabel CategoryTitleLabel => FindControl<RichTextLabel>("CategoryTitleLabel");
 
+    private readonly Dictionary<VehicleFabricatorCategory, Button> _categoryButtons = new();
+    private readonly Dictionary<VehicleType, Button> _vehicleButtons = new();
+
     private string? _printingItemName;
     private TimeSpan? _printAt;
     private TimeSpan _printDelay;
-    private IGameTiming _timing = default!;
+    private Dictionary<string, int> _printedModules = new();
+    private Dictionary<VehicleType, HashSet<VehicleFabricatorCategory>> _availableCategories = new();
+    private readonly IGameTiming _timing = default!;
 
     public VehicleFabricatorWindow()
     {
         RobustXamlLoader.Load(this);
         IoCManager.Resolve(ref _timing);
 
-        var primaryBtn = FindControl<Button>("PrimaryCategoryButton");
-        var secondaryBtn = FindControl<Button>("SecondaryCategoryButton");
-        var armorBtn = FindControl<Button>("ArmorCategoryButton");
-        var supportBtn = FindControl<Button>("SupportCategoryButton");
-        var chassisBtn = FindControl<Button>("ChassisCategoryButton");
-        var ammoBtn = FindControl<Button>("AmmoCategoryButton");
+        foreach (var category in Enum.GetValues<VehicleFabricatorCategory>())
+        {
+            var buttonName = $"{category}CategoryButton";
+            var button = FindControl<Button>(buttonName);
+            _categoryButtons[category] = button;
+            button.OnPressed += _ =>
+            {
+                SelectedCategory = category;
+                OnCategorySelected?.Invoke(SelectedCategory);
+                UpdateCategoryButtonsState();
+            };
+        }
 
-        var tankBtn = FindControl<Button>("TankVehicleButton");
-        var apcBtn = FindControl<Button>("APCVehicleButton");
-        var humveeBtn = FindControl<Button>("HumveeVehicleButton");
+        foreach (var vehicle in Enum.GetValues<VehicleType>())
+        {
+            if (vehicle == VehicleType.None)
+                continue;
 
-        primaryBtn.OnPressed += _ => { SelectedCategory = VehicleFabricatorCategory.Primary; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(primaryBtn); };
-        secondaryBtn.OnPressed += _ => { SelectedCategory = VehicleFabricatorCategory.Secondary; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(secondaryBtn); };
-        armorBtn.OnPressed += _ => { SelectedCategory = VehicleFabricatorCategory.Armor; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(armorBtn); };
-        supportBtn.OnPressed += _ => { SelectedCategory = VehicleFabricatorCategory.Support; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(supportBtn); };
-        chassisBtn.OnPressed += _ => { SelectedCategory = VehicleFabricatorCategory.Chassis; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(chassisBtn); };
-        ammoBtn.OnPressed += _ => { SelectedCategory = VehicleFabricatorCategory.Ammo; OnCategorySelected?.Invoke(SelectedCategory); UpdateCategoryButtons(ammoBtn); };
+            var buttonName = $"{vehicle}VehicleButton";
+            var button = FindControl<Button>(buttonName);
+            _vehicleButtons[vehicle] = button;
+            button.OnPressed += _ =>
+            {
+                SelectedVehicle = vehicle;
+                OnVehicleSelected?.Invoke(SelectedVehicle);
+                UpdateVehicleButtonsState();
+            };
+        }
 
-        tankBtn.OnPressed += _ => { SelectedVehicle = VehicleType.Tank; OnVehicleSelected?.Invoke(SelectedVehicle); UpdateVehicleButtons(tankBtn); };
-        apcBtn.OnPressed += _ => { SelectedVehicle = VehicleType.APC; OnVehicleSelected?.Invoke(SelectedVehicle); UpdateVehicleButtons(apcBtn); };
-        humveeBtn.OnPressed += _ => { SelectedVehicle = VehicleType.Humvee; OnVehicleSelected?.Invoke(SelectedVehicle); UpdateVehicleButtons(humveeBtn); };
+        _vehicleButtons[VehicleType.Tank].Pressed = true;
+        _categoryButtons[VehicleFabricatorCategory.Primary].Pressed = true;
 
-        tankBtn.Pressed = true;
-        primaryBtn.Pressed = true;
+        UpdateCategoryButtonsVisibility();
         UpdateVehiclePreview();
         UpdateCategoryTitle();
     }
 
-    private void UpdateCategoryButtons(Button pressed)
+    private void UpdateCategoryButtonsState()
     {
-        var categories = new[] { "Primary", "Secondary", "Armor", "Support", "Chassis", "Ammo" };
-        foreach (var name in categories)
+        foreach (var (category, btn) in _categoryButtons)
         {
-            var btn = FindControl<Button>($"{name}CategoryButton");
-            btn.Pressed = btn == pressed;
+            btn.Pressed = category == SelectedCategory;
         }
         UpdateCategoryTitle();
     }
 
-    private void UpdateVehicleButtons(Button pressed)
+    private void UpdateCategoryButtonsVisibility()
     {
-        var vehicles = new[] { "Tank", "APC", "Humvee" };
-        foreach (var name in vehicles)
+        var available = _availableCategories.GetValueOrDefault(SelectedVehicle, new HashSet<VehicleFabricatorCategory>());
+        foreach (var (category, btn) in _categoryButtons)
         {
-            var btn = FindControl<Button>($"{name}VehicleButton");
-            btn.Pressed = btn == pressed;
+            btn.Visible = available.Contains(category);
         }
+
+        if (!available.Contains(SelectedCategory))
+        {
+            SelectedCategory = available.FirstOrDefault(VehicleFabricatorCategory.Primary);
+            UpdateCategoryButtonsState();
+        }
+    }
+
+    private void UpdateVehicleButtonsState()
+    {
+        foreach (var (vehicle, btn) in _vehicleButtons)
+        {
+            btn.Pressed = vehicle == SelectedVehicle;
+        }
+        UpdateCategoryButtonsVisibility();
         UpdateCategoryTitle();
         UpdateVehiclePreview();
     }
 
     private void UpdateCategoryTitle()
     {
-        var vehicle = GetVehicleKey(SelectedVehicle);
-        var category = GetCategoryKey(SelectedCategory);
+        var vehicle = SelectedVehicle.ToString().ToLowerInvariant();
+        var category = SelectedCategory.ToString().ToLowerInvariant();
         var vehicleLoc = Loc.GetString($"rmc-vehicle-fabricator-vehicle-{vehicle}");
         var categoryLoc = Loc.GetString($"rmc-vehicle-fabricator-category-{category}");
         CategoryTitleLabel.SetMarkupPermissive($"[bold]{vehicleLoc} - {categoryLoc}[/bold]");
     }
 
-    private static string GetVehicleKey(VehicleType type) => type switch
-    {
-        VehicleType.Tank => "tank",
-        VehicleType.APC => "apc",
-        VehicleType.Humvee => "humvee",
-        _ => type.ToString().ToLowerInvariant(),
-    };
-
-    private static string GetVehicleProtoId(VehicleType type) => type switch
-    {
-        VehicleType.Tank => "VehicleTank",
-        VehicleType.APC => "VehicleAPC",
-        VehicleType.Humvee => "VehicleHumvee",
-        _ => "VehicleTank",
-    };
-
     private void UpdateVehiclePreview()
     {
-        var protoId = GetVehicleProtoId(SelectedVehicle);
-        VehiclePreview.SetPrototype(protoId);
-    }
-
-    private static string GetCategoryKey(VehicleFabricatorCategory category) => category switch
-    {
-        VehicleFabricatorCategory.Primary => "primary",
-        VehicleFabricatorCategory.Secondary => "secondary",
-        VehicleFabricatorCategory.Armor => "armor",
-        VehicleFabricatorCategory.Support => "support",
-        VehicleFabricatorCategory.Chassis => "chassis",
-        VehicleFabricatorCategory.Ammo => "ammo",
-        _ => category.ToString().ToLowerInvariant(),
-    };
-
-    public void SetPoints(int points)
-    {
-        PointsLabel.Text = Loc.GetString("rmc-vehicle-fabricator-points", ("points", points));
-    }
-
-    public void SetPrinting(string? itemName, float progress = 0f)
-    {
-        _printingItemName = itemName;
-        _printAt = null;
-        _printDelay = TimeSpan.Zero;
-        UpdatePrintingDisplay(progress);
+        var protoId = VehicleFabricatorUtils.GetVehicleProtoId(SelectedVehicle);
+        if (protoId != null)
+            VehiclePreview.SetPrototype(protoId);
     }
 
     public void SetPrinting(string? itemName, TimeSpan? printAt, TimeSpan printDelay)
@@ -179,29 +166,27 @@ public sealed class VehicleFabricatorWindow : DefaultWindow
     public void SetCategory(VehicleFabricatorCategory category)
     {
         SelectedCategory = category;
-        var categoryNames = new[] { "Primary", "Secondary", "Armor", "Support", "Chassis", "Ammo" };
-        foreach (var name in categoryNames)
-        {
-            var btn = FindControl<Button>($"{name}CategoryButton");
-            btn.Pressed = GetCategoryKey(category) == name.ToLowerInvariant();
-        }
-        UpdateCategoryTitle();
+        UpdateCategoryButtonsState();
     }
 
     public void SetVehicle(VehicleType vehicle)
     {
         SelectedVehicle = vehicle;
-        var vehicleNames = new[] { "Tank", "APC", "Humvee" };
-        foreach (var name in vehicleNames)
-        {
-            var btn = FindControl<Button>($"{name}VehicleButton");
-            btn.Pressed = GetVehicleKey(vehicle) == name.ToLowerInvariant();
-        }
-        UpdateCategoryTitle();
-        UpdateVehiclePreview();
+        UpdateVehicleButtonsState();
     }
 
-    public void SetPrintables(List<VehicleFabricatorPrintableDisplayData> printables)
+    public void SetPrintedModules(Dictionary<string, int> printedModules)
+    {
+        _printedModules = printedModules;
+    }
+
+    public void SetAvailableCategories(Dictionary<VehicleType, HashSet<VehicleFabricatorCategory>> availableCategories)
+    {
+        _availableCategories = availableCategories;
+        UpdateCategoryButtonsVisibility();
+    }
+
+    public void SetPrintables(List<VehicleFabricatorPrintableEntry> printables)
     {
         PrintablesContainer.DisposeAllChildren();
 
@@ -258,14 +243,21 @@ public sealed class VehicleFabricatorWindow : DefaultWindow
 
             box.AddChild(labelBox);
 
+            var limitKey = VehicleFabricatorUtils.GetLimitKey(printable.Category, printable.Vehicle);
+            var isLimited = _printedModules.GetValueOrDefault(limitKey, 0) >= 1;
+
             var button = new Button
             {
-                Text = Loc.GetString("rmc-vehicle-fabricator-print", ("cost", printable.Cost)),
+                Text = Loc.GetString("rmc-vehicle-fabricator-print"),
                 MinWidth = 150,
                 VerticalAlignment = VAlignment.Center,
-                StyleClasses = { "OpenBoth" }
+                StyleClasses = { "OpenBoth" },
+                Disabled = isLimited
             };
-            button.OnPressed += _ => OnPrint?.Invoke(printable.Id);
+            if (!isLimited)
+            {
+                button.OnPressed += _ => OnPrint?.Invoke(printable.Id);
+            }
             box.AddChild(button);
 
             card.AddChild(box);

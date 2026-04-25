@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server.Database;
 using Content.Server.Players.JobWhitelist;
 using Content.Shared.Administration;
@@ -9,7 +9,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.Administration.Commands;
 
-[AdminCommand(AdminFlags.Ban)]
+[AdminCommand(AdminFlags.Whitelist)] // CCM14
 public sealed class JobWhitelistAddCommand : LocalizedCommands
 {
     [Dependency] private readonly IServerDbManager _db = default!;
@@ -85,7 +85,7 @@ public sealed class JobWhitelistAddCommand : LocalizedCommands
     }
 }
 
-[AdminCommand(AdminFlags.Ban)]
+[AdminCommand(AdminFlags.Whitelist)] // CCM14
 public sealed class GetJobWhitelistCommand : LocalizedCommands
 {
     [Dependency] private readonly IServerDbManager _db = default!;
@@ -137,7 +137,7 @@ public sealed class GetJobWhitelistCommand : LocalizedCommands
     }
 }
 
-[AdminCommand(AdminFlags.Ban)]
+[AdminCommand(AdminFlags.Whitelist)] // CCM14
 public sealed class RemoveJobWhitelistCommand : LocalizedCommands
 {
     [Dependency] private readonly IServerDbManager _db = default!;

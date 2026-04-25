@@ -16,6 +16,7 @@
   roleWeight: 0.25
   icon: "RMCJobIconReconSynthetic"
   whitelisted: true
+  whitelistParent: RMCJobSynthetic # CCM14
   special:
   - !type:AddComponentSpecial
     components:
