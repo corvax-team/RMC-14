@@ -9,7 +9,8 @@
   startingGear: RMCGearSyntheticColonist
   icon: "RMCJobIconSynth"
   joinNotifyCrew: true
-  whitelisted: true
+#  whitelisted: true # CCM14
+  whitelistParent: RMCJobSynthetic # CCM14
   supervisors: cm-job-supervisors-colonists
   accessGroups:
   - Colony # Colony All Access
