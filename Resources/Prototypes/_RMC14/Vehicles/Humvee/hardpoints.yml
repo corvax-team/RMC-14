@@ -25,10 +25,6 @@
   - type: HardpointIntegrity
     maxIntegrity: 500
   - type: VehicleWheelItem
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 100
-    category: Chassis
-    vehicle: Humvee
 
 - type: entity
   parent: VehicleHumveeHardpointBase
@@ -83,10 +79,6 @@
       slotType: Launcher
       required: false
       insertDelay: 2.0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 400
-    category: Primary
-    vehicle: Humvee
 
 - type: entity
   parent: VehicleHumveeTurret
@@ -188,10 +180,6 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: humveecannon_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 600
-    category: Primary
-    vehicle: Humvee
 
 - type: entity
   parent: VehicleHumveeCannon
@@ -206,10 +194,6 @@
     selectedMode: Burst
     availableModes:
     - Burst
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 700
-    category: Primary
-    vehicle: Humvee
 
 - type: entity
   parent: VehicleHumveeHardpointBase
@@ -262,10 +246,6 @@
     arc: 120
   - type: RefillableByBulletBox
     bulletType: VehicleAmmoBoxGrenadeLauncher
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 500
-    category: Secondary
-    vehicle: Humvee
 
 - type: entity
   parent: VehicleHumveeHardpointBase
@@ -285,10 +265,6 @@
     maxIntegrity: 100
   - type: HardpointVisual
     vehicleState: snowplow_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 200
-    category: Armor
-    vehicle: Humvee
 
 - type: entity
   parent: VehicleHumveeHardpointBase
@@ -310,10 +286,6 @@
     radiusMultiplier: 2.0
   - type: HardpointVisual
     vehicleState: overlight_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 300
-    category: Support
-    vehicle: Humvee
 
 - type: entity
   parent: VehicleHumveeHardpointBase
@@ -333,8 +305,4 @@
     maxIntegrity: 100
   - type: HardpointVisual
     vehicleState: humveehatch_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 150
-    category: Support
-    vehicle: Humvee
 

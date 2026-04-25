@@ -35,6 +35,11 @@
       enum.VehicleFabricatorUi.Key:
         type: VehicleFabricatorBui
   - type: VehicleFabricator
+    hiddenCompatibilityIds:
+    - SPPAPC
+    - SPPAPCTurret
+    - SPPTank
+    - SPPVan
   - type: Appearance
   - type: GenericVisualizer
     visuals:

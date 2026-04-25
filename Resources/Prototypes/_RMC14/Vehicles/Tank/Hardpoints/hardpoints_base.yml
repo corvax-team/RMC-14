@@ -62,10 +62,6 @@
       slotType: Launcher
       required: false
       insertDelay: 2.0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 500
-    category: Primary
-    vehicle: Tank
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -84,10 +80,6 @@
   - type: HardpointIntegrity
     maxIntegrity: 300
   - type: VehicleWheelItem
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 150
-    category: Chassis
-    vehicle: Tank
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -111,8 +103,4 @@
     - VehicleArmorCaustic
   - type: VehicleAccelerationModifierAttachment
     accelerationMultiplier: 0.6
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 300
-    category: Chassis
-    vehicle: Tank
 

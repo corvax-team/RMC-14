@@ -88,6 +88,7 @@ public sealed class VehicleSupplySystem : EntitySystem
     {
         return lift.Stored.TryGetValue(key, out var count) ? count : 0;
     }
+
     private static int GetVendorAvailableVehicleCount(VehicleSupplyLiftComponent lift, string key)
     {
         var count = GetStoredCount(lift, key);
@@ -103,6 +104,7 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         return count;
     }
+
     private static void AddStored(VehicleSupplyLiftComponent lift, string key, int amount = 1)
     {
         if (amount <= 0)
@@ -331,6 +333,7 @@ public sealed class VehicleSupplySystem : EntitySystem
             }
         }
     }
+
     private void OnVendorBeforeUiOpen(Entity<VehicleHardpointVendorComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
         UpdateVendorSections(ent.Owner, ent.Comp);
@@ -1270,7 +1273,6 @@ public sealed class VehicleSupplySystem : EntitySystem
         return list;
     }
 
-
     private bool TryGetEntry(VehicleSupplyConsoleComponent console, string vehicleId, out VehicleSupplyEntry entry)
     {
         var key = Normalize(vehicleId);
@@ -1287,7 +1289,7 @@ public sealed class VehicleSupplySystem : EntitySystem
         return false;
     }
 
-    // CCM14-start: Always use localized name from prototype
+    // CCM14-start
     private string GetEntryName(VehicleSupplyEntry entry)
     {
         // if (!string.IsNullOrWhiteSpace(entry.Name))
@@ -1538,18 +1540,14 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         return unlocked;
     }
-    // CCM14-start
+
     private static bool IsEntryUnlocked(VehicleSupplyEntry entry, HashSet<string> unlocked)
     {
-        if (!string.IsNullOrWhiteSpace(entry.Unlock))
+        if (string.IsNullOrWhiteSpace(entry.Unlock))
             return true;
 
-        if (!string.IsNullOrWhiteSpace(entry.Locked))
-            return unlocked.Contains(Normalize(entry.Locked));
-
-        return true;
+        return unlocked.Contains(Normalize(entry.Unlock));
     }
-    // CCM14-end
 
     private IReadOnlyList<string> GetHardpointsForVehicle(string vehicleId, IReadOnlyList<VehicleSupplyEntry> entries)
     {
@@ -1637,5 +1635,4 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         return null;
     }
-
 }
