@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
@@ -41,6 +42,13 @@ namespace Content.Server.Voting
                 return;
             }
 
+            if (type == StandardVoteType.Votekick)
+            {
+                // CCM-context change: votekick is disabled.
+                shell.WriteError("Votekick disabled.");
+                return;
+            }
+
             if (shell.Player != null && !_voteManager.CanCallVote(shell.Player, type))
             {
                 _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"{shell.Player} failed to start {type.ToString()} vote");
@@ -55,7 +63,8 @@ namespace Content.Server.Voting
         {
             if (args.Length == 1)
             {
-                var options = Enum.GetNames<StandardVoteType>();
+                var options = Enum.GetNames<StandardVoteType>()
+                    .Where(name => !string.Equals(name, StandardVoteType.Votekick.ToString(), StringComparison.Ordinal));
                 return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-createvote-arg-vote-type"));
             }
 
@@ -114,12 +123,14 @@ namespace Content.Server.Voting
                 {
                     var ties = string.Join(", ", eventArgs.Winners.Select(c => args[(int) c]));
                     _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Custom vote {options.Title} finished as tie: {ties}");
-                    _chatManager.DispatchServerAnnouncement(Loc.GetString("cmd-customvote-on-finished-tie", ("ties", ties)));
+                    _chatManager.DispatchServerAnnouncementLoc("cmd-customvote-on-finished-tie",
+                        new[] { ("ties", (object) ties) });
                 }
                 else
                 {
                     _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Custom vote {options.Title} finished: {args[(int) eventArgs.Winner]}");
-                    _chatManager.DispatchServerAnnouncement(Loc.GetString("cmd-customvote-on-finished-win", ("winner", args[(int) eventArgs.Winner])));
+                    _chatManager.DispatchServerAnnouncementLoc("cmd-customvote-on-finished-win",
+                        new[] { ("winner", (object) args[(int) eventArgs.Winner] ) });
                 }
 
                 _voteWebhooks.UpdateWebhookIfConfigured(webhookState, eventArgs);

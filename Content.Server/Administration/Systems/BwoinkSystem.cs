@@ -1,3 +1,4 @@
+// CM14 rework: non-RMC edit marker.
 using Prometheus; // # CCM14 (add metrics)
 using System.Linq;
 using System.Net.Http;
@@ -182,9 +183,9 @@ private readonly HashSet<NetUserId> _ahelpCounted = new();
 
         private void PlayerRateLimitedAction(ICommonSession obj)
         {
-            RaiseNetworkEvent(
-                new BwoinkTextMessage(obj.UserId, default, Loc.GetString("bwoink-system-rate-limited"), playSound: false),
-                obj.Channel);
+                SendBwoinkMessage(
+                obj.Channel,
+                new BwoinkTextMessage(obj.UserId, default, Loc.GetString("bwoink-system-rate-limited"), playSound: false));
         }
 
         private void OnOverrideChanged(string obj)
@@ -292,7 +293,7 @@ private readonly HashSet<NetUserId> _ahelpCounted = new();
             var admins = GetTargetAdmins();
             foreach (var admin in admins)
             {
-                RaiseNetworkEvent(bwoinkMessage, admin);
+                SendBwoinkMessage(admin, bwoinkMessage);
             }
 
             // Enqueue the message for Discord relay
@@ -731,7 +732,7 @@ private readonly HashSet<NetUserId> _ahelpCounted = new();
             // Notify all admins
             foreach (var channel in admins)
             {
-                RaiseNetworkEvent(msg, channel);
+                SendBwoinkMessage(channel, msg);
             }
 
             string adminPrefixWebhook = "";
@@ -768,14 +769,14 @@ private readonly HashSet<NetUserId> _ahelpCounted = new();
 
                         overrideMsgText = $"{(message.PlaySound ? "" : "(S) ")}{overrideMsgText}: {escapedText}";
 
-                        RaiseNetworkEvent(new BwoinkTextMessage(message.UserId,
+                        SendBwoinkMessage(session.Channel,
+                            new BwoinkTextMessage(message.UserId,
                                 senderSession.UserId,
                                 overrideMsgText,
-                                playSound: playSound),
-                            session.Channel);
+                                playSound: playSound));
                     }
                     else
-                        RaiseNetworkEvent(msg, session.Channel);
+                        SendBwoinkMessage(session.Channel, msg);
                 }
             }
 
@@ -813,7 +814,7 @@ private readonly HashSet<NetUserId> _ahelpCounted = new();
             // No admin online, let the player know
             var systemText = Loc.GetString("bwoink-system-starmute-message-no-other-users");
             var starMuteMsg = new BwoinkTextMessage(message.UserId, SystemUserId, systemText);
-            RaiseNetworkEvent(starMuteMsg, senderSession.Channel);
+            SendBwoinkMessage(senderSession.Channel, starMuteMsg);
         }
 
         private IList<INetChannel> GetNonAfkAdmins()

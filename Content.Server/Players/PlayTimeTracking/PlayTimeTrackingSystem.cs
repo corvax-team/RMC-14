@@ -1,4 +1,6 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Linq;
+using Content.Server._CCM.Sponsorship;
 using Content.Server._RMC14.PlayTimeTracking;
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
@@ -39,6 +41,8 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
     [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly PlayTimeTrackingManager _tracking = default!;
     [Dependency] private readonly RMCPlayTimeManager _rmcPlayTime = default!;
+    // CCM sponsorship playtime bypass context.
+    [Dependency] private readonly CCMSponsorshipManager _ccmSponsorship = default!;
 
     public override void Initialize()
     {
@@ -191,6 +195,9 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
             !_cfg.GetCVar(CCVars.GameRoleTimers))
             return true;
 
+        // CCM sponsorship playtime bypass: Sponsor II+ ignores role timer requirements.
+        var ignorePlaytimeRequirements = _ccmSponsorship.HasRoleTimerBypass(player);
+
         if (_rmcPlayTime.IsExcluded(player, role))
             return true;
 
@@ -200,7 +207,14 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
             playTimes = new Dictionary<string, TimeSpan>();
         }
 
-        return JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(player.UserId).SelectedCharacter);
+        return JobRequirements.TryRequirementsMet(
+            job,
+            playTimes,
+            out _,
+            EntityManager,
+            _prototypes,
+            (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(player.UserId).SelectedCharacter,
+            ignorePlaytimeRequirements);
     }
 
     public HashSet<ProtoId<JobPrototype>> GetDisallowedJobs(ICommonSession player)
@@ -208,6 +222,9 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
         var roles = new HashSet<ProtoId<JobPrototype>>();
         if (!_cfg.GetCVar(CCVars.GameRoleTimers))
             return roles;
+
+        // CCM sponsorship playtime bypass start
+        var ignorePlaytimeRequirements = _ccmSponsorship.HasRoleTimerBypass(player);
 
         if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
         {
@@ -217,9 +234,17 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
 
         foreach (var job in _prototypes.EnumeratePrototypes<JobPrototype>())
         {
-            if (JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(player.UserId).SelectedCharacter))
+            if (JobRequirements.TryRequirementsMet(
+                    job,
+                    playTimes,
+                    out _,
+                    EntityManager,
+                    _prototypes,
+                    (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(player.UserId).SelectedCharacter,
+                    ignorePlaytimeRequirements))
                 roles.Add(job.ID);
         }
+        // CCM sponsorship playtime bypass end
 
         _rmcPlayTime.RemoveWhereExcluded(player, roles);
         return roles;
@@ -231,6 +256,8 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
             return;
 
         var player = _playerManager.GetSessionById(userId);
+        // CCM sponsorship playtime bypass: keep roundstart candidate pruning aligned with sponsor role access.
+        var ignorePlaytimeRequirements = _ccmSponsorship.HasRoleTimerBypass(userId);
         if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
         {
             // Sorry mate but your playtimes haven't loaded.
@@ -242,7 +269,14 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
         for (var i = 0; i < jobs.Count; i++)
         {
             if (_prototypes.TryIndex(jobs[i], out var job)
-                && JobRequirements.TryRequirementsMet(job, playTimes, out _, EntityManager, _prototypes, (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(userId).SelectedCharacter))
+                && JobRequirements.TryRequirementsMet(
+                    job,
+                    playTimes,
+                    out _,
+                    EntityManager,
+                    _prototypes,
+                    (HumanoidCharacterProfile?) _preferencesManager.GetPreferences(userId).SelectedCharacter,
+                    ignorePlaytimeRequirements))
             {
                 continue;
             }

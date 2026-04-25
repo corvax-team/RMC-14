@@ -7,4 +7,7 @@ public sealed partial class GhostColorComponent : Component
 {
     [DataField, AutoNetworkedField]
     public Color? Color;
+
+    [DataField, AutoNetworkedField]
+    public string RsiPath = string.Empty;
 }

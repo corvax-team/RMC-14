@@ -13,7 +13,7 @@ namespace Content.Client.Atmos.UI
     /// Client-side UI used to control a canister.
     /// </summary>
     [GenerateTypedNameReferences]
-    public sealed partial class GasCanisterWindow : DefaultWindow
+    public sealed partial class GasCanisterWindow : DefaultCMWindow
     {
         private readonly ButtonGroup _buttonGroup = new();
 
@@ -124,3 +124,4 @@ namespace Content.Client.Atmos.UI
         }
     }
 }
+

@@ -7,7 +7,7 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client._RMC14.Marines.Mutiny;
 
-public sealed class MutineerInviteWindow : DefaultWindow
+public sealed class MutineerInviteWindow : DefaultCMWindow
 {
     public Button DenyButton { get; }
     public Button AcceptButton { get; }
@@ -61,3 +61,4 @@ public sealed class MutineerInviteWindow : DefaultWindow
         Contents.AddChild(layout);
     }
 }
+

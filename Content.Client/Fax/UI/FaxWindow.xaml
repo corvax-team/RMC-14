@@ -1,4 +1,4 @@
-<DefaultWindow
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
     xmlns="https://spacestation14.io"
     Title="{Loc 'fax-machine-ui-window'}"
     MinSize="380 220">
@@ -113,4 +113,5 @@
         </PanelContainer>
 
     </BoxContainer>
-</DefaultWindow>
+</ccm:DefaultCMWindow>
+

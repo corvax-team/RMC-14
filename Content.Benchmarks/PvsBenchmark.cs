@@ -1,4 +1,5 @@
-﻿#nullable enable
+﻿// CM14 rework: non-RMC edit marker.
+#nullable enable
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,9 +47,6 @@ public class PvsBenchmark
     [GlobalSetup]
     public void Setup()
     {
-#if !DEBUG
-        ProgramShared.PathOffset = "../../../../";
-#endif
         PoolManager.Startup();
 
         _pair = PoolManager.GetServerClient().GetAwaiter().GetResult();

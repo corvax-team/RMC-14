@@ -1,7 +1,7 @@
 <Control xmlns="https://spacestation14.io">
-    <BoxContainer Orientation="Vertical">
-        <Label Name="TitleLabel" Access="Public" />
-        <Label Name="ExampleLabel" Access="Public" />
+    <BoxContainer Orientation="Vertical" SeparationOverride="4">
+        <Label Name="TitleLabel" Access="Public" StyleClasses="OptionSettingLabel" />
+        <Label Name="ExampleLabel" Access="Public" StyleClasses="OptionSettingLabel" />
         <ColorSelectorSliders Name="Slider" Access="Public" HorizontalExpand="True" />
     </BoxContainer>
 </Control>

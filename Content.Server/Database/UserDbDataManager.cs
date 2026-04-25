@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿// CM14 rework: non-RMC edit marker.
+using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Preferences.Managers;
 using Robust.Shared.Network;
@@ -45,7 +46,10 @@ public sealed class UserDbDataManager : IPostInjectInit
     {
         _users.Remove(session.UserId, out var data);
         if (data == null)
-            throw new InvalidOperationException("Did not have cached data in ClientDisconnect!");
+        {
+            _sawmill.Warning($"Did not have cached data in ClientDisconnect for {session}.");
+            return;
+        }
 
         data.Cancel.Cancel();
         data.Cancel.Dispose();

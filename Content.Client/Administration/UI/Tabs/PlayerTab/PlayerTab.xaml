@@ -1,11 +1,12 @@
-﻿<Control xmlns="https://spacestation14.io"
+﻿<!-- CM14 rework: non-RMC edit marker. -->
+<Control xmlns="https://spacestation14.io"
          xmlns:pt="clr-namespace:Content.Client.Administration.UI.Tabs.PlayerTab"
          xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
          xmlns:co="clr-namespace:Content.Client.UserInterface.Controls">
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Horizontal">
             <Label Name="PlayerCount" HorizontalExpand="True" Text="{Loc player-tab-player-count}" />
-            <LineEdit Name="SearchLineEdit" HorizontalExpand="True"
+            <LineEdit Name="SearchLineEdit" HorizontalExpand="True" StyleClasses="actionSearchBox"
                       PlaceHolder="{Loc player-tab-filter-line-edit-placeholder}" />
             <Button Name="ShowDisconnectedButton" HorizontalExpand="True"
                     Text="{Loc player-tab-show-disconnected}" ToggleMode="True" />

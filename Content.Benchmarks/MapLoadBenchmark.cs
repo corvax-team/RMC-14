@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,6 @@ public class MapLoadBenchmark
     [GlobalSetup]
     public void Setup()
     {
-        ProgramShared.PathOffset = "../../../../";
         PoolManager.Startup();
 
         _pair = PoolManager.GetServerClient().GetAwaiter().GetResult();

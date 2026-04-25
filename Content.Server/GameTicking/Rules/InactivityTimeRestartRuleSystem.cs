@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Threading;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking.Rules.Components;
@@ -59,7 +60,8 @@ public sealed class InactivityTimeRestartRuleSystem : GameRuleSystem<InactivityR
 
         GameTicker.EndRound(Loc.GetString("rule-time-has-run-out"));
 
-        _chatManager.DispatchServerAnnouncement(Loc.GetString("rule-restarting-in-seconds", ("seconds",(int) component.RoundEndDelay.TotalSeconds)));
+        _chatManager.DispatchServerAnnouncementLoc("rule-restarting-in-seconds",
+            new[] { ("seconds", (object) (int) component.RoundEndDelay.TotalSeconds) });
 
         Timer.Spawn(component.RoundEndDelay, () => GameTicker.RestartRound());
     }

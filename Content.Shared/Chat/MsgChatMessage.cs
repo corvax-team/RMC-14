@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.IO;
 using JetBrains.Annotations;
 using Lidgren.Network;
@@ -42,11 +43,12 @@ namespace Content.Shared.Chat
         public bool HidePopup;
         public string? SpeechStyleClass;
         public bool RepeatCheckSender;
+        public string? TranslatedMessage;
 
         [NonSerialized]
         public bool Read;
 
-        public ChatMessage(ChatChannel channel, string message, string wrappedMessage, NetEntity source, int? senderKey, bool hideChat = false, Color? colorOverride = null, string? audioPath = null, float audioVolume = 0, bool hidePopup = false, string? speechStyleClass = null, bool repeatCheckSender = true)
+        public ChatMessage(ChatChannel channel, string message, string wrappedMessage, NetEntity source, int? senderKey, bool hideChat = false, Color? colorOverride = null, string? audioPath = null, float audioVolume = 0, bool hidePopup = false, string? speechStyleClass = null, bool repeatCheckSender = true, string? translatedMessage = null)
         {
             Channel = channel;
             Message = message;
@@ -60,6 +62,7 @@ namespace Content.Shared.Chat
             HidePopup = hidePopup;
             SpeechStyleClass = speechStyleClass;
             RepeatCheckSender = repeatCheckSender;
+            TranslatedMessage = translatedMessage;
         }
     }
 

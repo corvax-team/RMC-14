@@ -1,0 +1,7 @@
+- type: entity
+  id: CCMERTCrashMarkerComponent
+  name: ERT crash marker
+  components:
+  - type: CCMERTCrashMarker
+  - type: Transform
+  - type: MapGrid

@@ -2,8 +2,6 @@ using Content.Client._RMC14.Commendations;
 using Content.Client._RMC14.LinkAccount;
 using Content.Client._RMC14.PlayTimeTracking;
 using Content.Client._RMC14.TacticalMap;
-using Content.Client._Forge.Sponsors; // Forge-Change
-using Content.Corvax.Interfaces.Client;
 using Content.Client.Administration.Managers;
 using Content.Client.Changelog;
 using Content.Client.Chat.Managers;
@@ -27,14 +25,10 @@ using Content.Client.Stylesheets;
 using Content.Client.Viewport;
 using Content.Client.Voting;
 using Content.Shared.Administration.Logs;
-using Content.Client.Lobby;
-using Content.Client.Players.RateLimiting;
-using Content.Shared._Forge.Sponsors; // Forge-Change
 using Content.Shared.Administration.Managers;
 using Content.Shared.Chat;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
-using Content.Client._Forge.DiscordAuth; // Forge-Change
 
 namespace Content.Client.IoC
 {
@@ -78,9 +72,6 @@ namespace Content.Client.IoC
             collection.Register<RMCPlayTimeManager>();
             collection.Register<CommendationsManager>();
             collection.Register<TacticalMapSettingsManager>();
-            collection.Register<SponsorManager>(); // Forge-Change
-            collection.Register<ISharedSponsorManager, SponsorManager>(); // Forge-Change
-            collection.Register<DiscordAuthManager>(); // Forge-Change
         }
     }
 }

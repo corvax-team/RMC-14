@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using System.Collections;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
@@ -485,7 +486,7 @@ namespace Content.Server.Voting.Managers
             }
             else
             {
-                options.InitiatorText = Loc.GetString("ui-vote-initiator-server");
+                options.InitiatorText = "ui-vote-initiator-server";
             }
         }
 

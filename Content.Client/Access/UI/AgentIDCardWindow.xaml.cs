@@ -13,7 +13,7 @@ using System.Linq;
 namespace Content.Client.Access.UI
 {
     [GenerateTypedNameReferences]
-    public sealed partial class AgentIDCardWindow : DefaultWindow
+    public sealed partial class AgentIDCardWindow : DefaultCMWindow
     {
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly IEntitySystemManager _entitySystem = default!;
@@ -94,3 +94,4 @@ namespace Content.Client.Access.UI
         }
     }
 }
+

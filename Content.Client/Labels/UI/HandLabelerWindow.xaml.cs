@@ -5,7 +5,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client.Labels.UI
 {
     [GenerateTypedNameReferences]
-    public sealed partial class HandLabelerWindow : DefaultWindow
+    public sealed partial class HandLabelerWindow : DefaultCMWindow
     {
         public event Action<string>? OnLabelChanged;
 
@@ -60,3 +60,4 @@ namespace Content.Client.Labels.UI
         }
     }
 }
+

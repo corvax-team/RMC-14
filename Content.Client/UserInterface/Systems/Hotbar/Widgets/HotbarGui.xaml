@@ -1,8 +1,11 @@
-﻿<widgets:HotbarGui
+﻿<!-- CM14 rework: non-RMC edit marker. -->
+<widgets:HotbarGui
     xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:inventory="clr-namespace:Content.Client.UserInterface.Systems.Inventory.Controls"
     xmlns:hands="clr-namespace:Content.Client.UserInterface.Systems.Hands.Controls"
     xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Hotbar.Widgets"
+    x:Class="Content.Client.UserInterface.Systems.Hotbar.Widgets.HotbarGui"
     Name="HotbarInterface"
     VerticalExpand="True"
     VerticalAlignment="Bottom"

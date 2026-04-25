@@ -1,8 +1,11 @@
+﻿// CM14 rework: non-RMC edit marker.
 using Robust.Shared.Audio;
 using Content.Server.Chat;
 using Content.Server.Chat.Systems;
+using Content.Shared.CCVar;
 using Content.Shared.Speech;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -16,6 +19,7 @@ namespace Content.Server.Speech
         [Dependency] private readonly IPrototypeManager _protoManager = default!;
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly SharedAudioSystem _audio = default!;
+        [Dependency] private readonly IConfigurationManager _cfg = default!;
 
         public override void Initialize()
         {
@@ -26,6 +30,9 @@ namespace Content.Server.Speech
 
         public SoundSpecifier? GetSpeechSound(Entity<SpeechComponent> ent, string message)
         {
+            if (_cfg.GetCVar(CCVars.BarksEnabled))
+                return null;
+
             if (ent.Comp.SpeechSounds == null)
                 return null;
 
@@ -60,6 +67,9 @@ namespace Content.Server.Speech
 
         private void OnEntitySpoke(EntityUid uid, SpeechComponent component, EntitySpokeEvent args)
         {
+            if (_cfg.GetCVar(CCVars.BarksEnabled))
+                return;
+
             if (component.SpeechSounds == null)
                 return;
 

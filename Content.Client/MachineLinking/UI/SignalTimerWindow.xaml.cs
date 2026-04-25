@@ -8,7 +8,7 @@ using Robust.Client.UserInterface.Controls;
 namespace Content.Client.MachineLinking.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class SignalTimerWindow : DefaultWindow
+public sealed partial class SignalTimerWindow : DefaultCMWindow
 {
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -193,3 +193,4 @@ public sealed partial class SignalTimerWindow : DefaultWindow
         return TimeSpan.FromMinutes(minutes) + TimeSpan.FromSeconds(seconds);
     }
 }
+

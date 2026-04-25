@@ -1,6 +1,6 @@
-using Content.Server.GameTicking;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
+using Content.Server.Preferences.Managers;
 using Content.Server.Roles;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids;
@@ -23,12 +23,12 @@ namespace Content.Server._RMC14.Xenonids;
 public sealed class XenoRoleSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTime = default!;
     [Dependency] private readonly PlayTimeTrackingManager _playTimeManager = default!;
+    [Dependency] private readonly IServerPreferencesManager _preferences = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
     [Dependency] private readonly RoleSystem _role = default!;
@@ -69,7 +69,7 @@ public sealed class XenoRoleSystem : EntitySystem
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
         if (ev.JobId is { } job)
-            UpdateRank(ev.Mob, ev.Player, job, ev.Profile);
+            UpdateRank(ev.Mob, ev.Player, job, ev.Profile.PlaytimePerks);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -123,7 +123,7 @@ public sealed class XenoRoleSystem : EntitySystem
         args.AddModifier(rank.Value);
     }
 
-    private void UpdateRank(EntityUid xeno, ICommonSession player, string jobId, HumanoidCharacterProfile profile)
+    private void UpdateRank(EntityUid xeno, ICommonSession player, string jobId, bool playtimePerks)
     {
         if (!HasComp<XenoComponent>(xeno))
             return;
@@ -136,7 +136,7 @@ public sealed class XenoRoleSystem : EntitySystem
         }
 
         int rank;
-        if (!profile.PlaytimePerks)
+        if (!playtimePerks)
             rank = 1;
         else if (time > _rankSixTime)
             rank = 6;
@@ -190,15 +190,15 @@ public sealed class XenoRoleSystem : EntitySystem
                     _role.MindAddJobRole(mind.Value, jobPrototype: xeno.Comp.Role);
                     _playTime.PlayerRolesChanged(player);
 
-                    try
+                    // Preferences may still be loading right after attach, so use cached prefs when available.
+                    var playtimePerks = true;
+                    if (_preferences.TryGetCachedPreferences(player.UserId, out var prefs) &&
+                        prefs.SelectedCharacter is HumanoidCharacterProfile profile)
                     {
-                        var profile = _gameTicker.GetPlayerProfile(player);
-                        UpdateRank(xeno, player, xeno.Comp.Role, profile);
+                        playtimePerks = profile.PlaytimePerks;
                     }
-                    catch (Exception e)
-                    {
-                        Log.Error($"Error setting xeno rank for {ToPrettyString(xeno)}:\n{e}");
-                    }
+
+                    UpdateRank(xeno, player, xeno.Comp.Role, playtimePerks);
                 }
                 finally
                 {

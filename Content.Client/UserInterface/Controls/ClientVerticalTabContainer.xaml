@@ -1,0 +1,28 @@
+<!-- Organised with tabs in a vertical list to the left and the contents to the right -->
+<controls:ClientVerticalTabContainer xmlns="https://spacestation14.io"
+                                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                                     Orientation="Horizontal"
+                                     MouseFilter="Pass">
+    <ScrollContainer VerticalExpand="True"
+                     ReturnMeasure="True"
+                     HScrollEnabled="False"
+                     Margin="5 5 0 5">
+        <PanelContainer Margin="5" VerticalExpand="True"
+                        VerticalAlignment="Stretch"
+                        StyleClasses="VerticalTabListBackground">
+            <BoxContainer Name="TabContainer" Margin="5" Orientation="Vertical" SeparationOverride="18"/>
+        </PanelContainer>
+    </ScrollContainer>
+    <PanelContainer Margin="0 5 5 5"
+                    VerticalExpand="True"
+                    HorizontalExpand="True"
+                    HorizontalAlignment="Stretch"
+                    StyleClasses="VerticalTabContentBackground">
+        <BoxContainer Margin="5"
+                      VerticalExpand="True"
+                      HorizontalExpand="True"
+                      Orientation="Vertical"
+                      Name="ContentsContainer"/>
+    </PanelContainer>
+</controls:ClientVerticalTabContainer>

@@ -11,7 +11,7 @@ namespace Content.Client._RMC14.UserInterface;
 
 [GenerateTypedNameReferences]
 [Virtual]
-public partial class RMCPopOutWindow : DefaultWindow
+public partial class RMCPopOutWindow : DefaultCMWindow
 {
     protected virtual Control Control { get; } = default!;
 
@@ -78,3 +78,4 @@ public partial class RMCPopOutWindow : DefaultWindow
         _popOutWindow?.Close();
     }
 }
+

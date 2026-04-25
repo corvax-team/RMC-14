@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿// CM14 rework: non-RMC edit marker.
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using Content.IntegrationTests;
@@ -58,7 +59,6 @@ public class DeviceNetworkingBenchmark
     [GlobalSetup]
     public async Task SetupAsync()
     {
-        ProgramShared.PathOffset = "../../../../";
         PoolManager.Startup(typeof(DeviceNetworkingBenchmark).Assembly);
         _pair = await PoolManager.GetServerClient();
         var server = _pair.Server;

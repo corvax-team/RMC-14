@@ -5,10 +5,11 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._RMC14.Lobby;
 
 [GenerateTypedNameReferences]
-public sealed partial class JoinXenoWindow : DefaultWindow
+public sealed partial class JoinXenoWindow : DefaultCMWindow
 {
     public JoinXenoWindow()
     {
         RobustXamlLoader.Load(this);
     }
 }
+

@@ -10,7 +10,7 @@ namespace Content.Client.Disposal.Tube
     /// Client-side UI used to control a <see cref="SharedDisposalTaggerComponent"/>
     /// </summary>
     [GenerateTypedNameReferences]
-    public sealed partial class DisposalTaggerWindow : DefaultWindow
+    public sealed partial class DisposalTaggerWindow : DefaultCMWindow
     {
         public DisposalTaggerWindow()
         {
@@ -26,3 +26,4 @@ namespace Content.Client.Disposal.Tube
         }
     }
 }
+

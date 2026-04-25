@@ -1,3 +1,4 @@
+﻿// CM14 rework: non-RMC edit marker.
 using Content.Server.Atmos.Components;
 using Content.Server.Body.Components;
 using Content.Server.Chat;
@@ -247,7 +248,7 @@ public sealed partial class ZombieSystem
             _role.MindAddRole(mindId, "MindRoleZombie", mind: null, silent: true);
 
             //Greeting message for new bebe zombers
-            _chatMan.DispatchServerMessage(session, Loc.GetString("zombie-infection-greeting"));
+            _chatMan.DispatchServerMessageLoc(session, "zombie-infection-greeting");
 
             // Notificate player about new role assignment
             _audio.PlayGlobal(zombiecomp.GreetSoundNotification, session);

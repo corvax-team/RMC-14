@@ -1,4 +1,6 @@
-<Control xmlns="https://spacestation14.io">
+﻿<!-- CM14 rework: non-RMC edit marker. -->
+<Control xmlns="https://spacestation14.io"
+         xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls">
     <!-- Primary container -->
     <BoxContainer Orientation="Vertical" HorizontalExpand="True">
         <!-- Marking lists -->
@@ -10,7 +12,7 @@
                     <Label Name="CMarkingPoints" Text="uwu" HorizontalAlignment="Right" />
                 </BoxContainer>
 
-                <OptionButton Name="CMarkingCategoryButton" StyleClasses="OpenLeft" />
+                <ccm:CCMOptionButton Name="CMarkingCategoryButton" StyleClasses="OpenLeft" />
                 <LineEdit Name="CMarkingSearch" PlaceHolder="{Loc 'markings-search'}" />
 
                 <ItemList Name="CMarkingsUnused" VerticalExpand="True" MinSize="300 250" />

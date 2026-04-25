@@ -1,7 +1,10 @@
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Shared._RMC14.Localizations;
+using Content.Shared.CCVar;
+using Robust.Shared.Configuration;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Localizations
@@ -9,10 +12,19 @@ namespace Content.Shared.Localizations
     public sealed class ContentLocalizationManager
     {
         [Dependency] private readonly ILocalizationManager _loc = default!;
+        [Dependency] private readonly IConfigurationManager _cfg = default!;
 
-        // If you want to change your codebase's language, do it here.
-        private const string Culture = "ru-RU"; // CCM-Localization
-        private const string FallbackCulture = "en-US"; // CCM-Localization
+        private static readonly CultureInfo RussianCulture = new("ru-RU");
+        private static readonly CultureInfo EnglishCulture = new("en-US");
+
+        private CultureInfo _numberCulture = RussianCulture;
+        private CultureInfo _currentCulture = RussianCulture;
+        private bool _functionsRegistered;
+
+        // CCM rework lobby - start
+        public event Action<string>? CultureChanged;
+        public string CurrentCultureCode => _currentCulture.Name;
+        // CCM rework lobby - end
 
         /// <summary>
         /// Custom format strings used for parsing and displaying minutes:seconds timespans.
@@ -27,13 +39,78 @@ namespace Content.Shared.Localizations
 
         public void Initialize()
         {
-            var culture = new CultureInfo(Culture);
-            var fallbackCulture = new CultureInfo(FallbackCulture); // CCM-Localization
+            EnsureConfiguredCulturesLoaded();
+            try
+            {
+                SetCulture(_cfg.GetCVar(CCVars.ClientLocale));
+            }
+            catch
+            {
+                SetCulture(RussianCulture.Name);
+            }
+        }
 
-            _loc.LoadCulture(culture);
-            _loc.LoadCulture(fallbackCulture); // CCM-Localization
-            _loc.SetFallbackCluture(fallbackCulture); // CCM-Localization
-            _loc.AddFunction(culture, "MANY", FormatMany); // CCM-Localization: To prevent problems in auto-generated locale files
+        public void SetCulture(string cultureCode)
+        {
+            EnsureConfiguredCulturesLoaded();
+
+            CultureInfo requestedCulture;
+            try
+            {
+                requestedCulture = new CultureInfo(cultureCode);
+            }
+            catch
+            {
+                requestedCulture = RussianCulture;
+            }
+
+            var targetCulture = ResolveSupportedCulture(requestedCulture);
+            var fallbackCulture = targetCulture.Name.Equals(RussianCulture.Name, StringComparison.OrdinalIgnoreCase)
+                ? EnglishCulture
+                : RussianCulture;
+
+            var changed = !_currentCulture.Name.Equals(targetCulture.Name, StringComparison.OrdinalIgnoreCase);
+
+            _numberCulture = targetCulture;
+            _currentCulture = targetCulture;
+            _loc.SetCulture(targetCulture);
+            _loc.SetFallbackCluture(fallbackCulture);
+
+            // CCM rework lobby - start
+            if (changed)
+                CultureChanged?.Invoke(targetCulture.Name);
+            // CCM rework lobby - end
+        }
+
+        private void EnsureConfiguredCulturesLoaded()
+        {
+            LoadCultureIfNeeded(RussianCulture);
+            LoadCultureIfNeeded(EnglishCulture);
+
+            if (_functionsRegistered)
+                return;
+
+            RegisterLocalizationFunctions(RussianCulture);
+            RegisterLocalizationFunctions(EnglishCulture);
+
+            // RMC14 grammar functions.
+            var rmcLocalization = IoCManager.Resolve<RMCLocalizationManager>();
+            rmcLocalization.Initialize(RussianCulture);
+            rmcLocalization.Initialize(EnglishCulture);
+
+            /*
+             * The following language functions are specific to the english localization. When working on your own
+             * localization you should NOT modify these, instead add new functions specific to your language/culture.
+             * This ensures the english translations continue to work as expected when fallbacks are needed.
+             */
+            _loc.AddFunction(EnglishCulture, "MAKEPLURAL", FormatMakePlural);
+
+            _functionsRegistered = true;
+        }
+
+        private void RegisterLocalizationFunctions(CultureInfo culture)
+        {
+            _loc.AddFunction(culture, "MANY", FormatMany);
             _loc.AddFunction(culture, "PRESSURE", FormatPressure);
             _loc.AddFunction(culture, "POWERWATTS", FormatPowerWatts);
             _loc.AddFunction(culture, "POWERJOULES", FormatPowerJoules);
@@ -45,19 +122,27 @@ namespace Content.Shared.Localizations
             _loc.AddFunction(culture, "NATURALFIXED", FormatNaturalFixed);
             _loc.AddFunction(culture, "NATURALPERCENT", FormatNaturalPercent);
             _loc.AddFunction(culture, "PLAYTIME", FormatPlaytime);
+        }
 
-            // RMC14
-            IoCManager.Resolve<RMCLocalizationManager>().Initialize(culture);
+        private void LoadCultureIfNeeded(CultureInfo culture)
+        {
+            if (_loc.HasCulture(culture))
+                return;
 
-            /*
-             * The following language functions are specific to the english localization. When working on your own
-             * localization you should NOT modify these, instead add new functions specific to your language/culture.
-             * This ensures the english translations continue to work as expected when fallbacks are needed.
-             */
-            var cultureEn = new CultureInfo("en-US");
+            _loc.LoadCulture(culture);
+        }
 
-            _loc.AddFunction(cultureEn, "MAKEPLURAL", FormatMakePlural);
-            _loc.AddFunction(cultureEn, "MANY", FormatMany);
+        private static CultureInfo ResolveSupportedCulture(CultureInfo culture)
+        {
+            if (culture.Name.Equals(RussianCulture.Name, StringComparison.OrdinalIgnoreCase))
+                return RussianCulture;
+
+            if (culture.Name.Equals(EnglishCulture.Name, StringComparison.OrdinalIgnoreCase))
+                return EnglishCulture;
+
+            return culture.TwoLetterISOLanguageName.Equals("ru", StringComparison.OrdinalIgnoreCase)
+                ? RussianCulture
+                : EnglishCulture;
         }
 
         private ILocValue FormatMany(LocArgs args)
@@ -78,7 +163,7 @@ namespace Content.Shared.Localizations
         {
             var number = ((LocValueNumber) args.Args[0]).Value * 100;
             var maxDecimals = (int)Math.Floor(((LocValueNumber) args.Args[1]).Value);
-            var formatter = (NumberFormatInfo)NumberFormatInfo.GetInstance(CultureInfo.GetCultureInfo(Culture)).Clone();
+            var formatter = (NumberFormatInfo) NumberFormatInfo.GetInstance(_numberCulture).Clone();
             formatter.NumberDecimalDigits = maxDecimals;
             return new LocValueString(string.Format(formatter, "{0:N}", number).TrimEnd('0').TrimEnd(char.Parse(formatter.NumberDecimalSeparator)) + "%");
         }
@@ -87,7 +172,7 @@ namespace Content.Shared.Localizations
         {
             var number = ((LocValueNumber) args.Args[0]).Value;
             var maxDecimals = (int)Math.Floor(((LocValueNumber) args.Args[1]).Value);
-            var formatter = (NumberFormatInfo)NumberFormatInfo.GetInstance(CultureInfo.GetCultureInfo(Culture)).Clone();
+            var formatter = (NumberFormatInfo) NumberFormatInfo.GetInstance(_numberCulture).Clone();
             formatter.NumberDecimalDigits = maxDecimals;
             return new LocValueString(string.Format(formatter, "{0:N}", number).TrimEnd('0').TrimEnd(char.Parse(formatter.NumberDecimalSeparator)));
         }

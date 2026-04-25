@@ -99,7 +99,7 @@ public sealed class MutinySystem : SharedMutinySystem
 
         if (TryComp<ActorComponent>(ent, out var actor))
         {
-            _chatManager.DispatchServerMessage(actor.PlayerSession, Loc.GetString("mutineer-status-added"));
+            _chatManager.DispatchServerMessageLoc(actor.PlayerSession, "mutineer-status-added");
             _chatManager.SendAdminAnnouncement($"Player {actor.PlayerSession.Name} was made a mutineer.");
         }
 
@@ -113,7 +113,7 @@ public sealed class MutinySystem : SharedMutinySystem
 
         if (TryComp<ActorComponent>(ent, out var actorComponent))
         {
-            _chatManager.DispatchServerMessage(actorComponent.PlayerSession, Loc.GetString("mutineer-status-removed"));
+            _chatManager.DispatchServerMessageLoc(actorComponent.PlayerSession, "mutineer-status-removed");
             _chatManager.SendAdminAnnouncement($"Player {actorComponent.PlayerSession.Name} is no longer a mutineer.");
         }
 
@@ -136,7 +136,7 @@ public sealed class MutinySystem : SharedMutinySystem
     {
         if (TryComp<ActorComponent>(ent, out var actor))
         {
-            _chatManager.DispatchServerMessage(actor.PlayerSession, Loc.GetString("mutineer-leader-status-added"));
+            _chatManager.DispatchServerMessageLoc(actor.PlayerSession, "mutineer-leader-status-added");
             _chatManager.SendAdminAnnouncement($"Player {actor.PlayerSession.Name} was made a mutineer leader.");
         }
         Dirty(ent);
@@ -146,7 +146,7 @@ public sealed class MutinySystem : SharedMutinySystem
     {
         if (TryComp<ActorComponent>(ent, out var actor))
         {
-            _chatManager.DispatchServerMessage(actor.PlayerSession, Loc.GetString("mutineer-leader-status-removed"));
+            _chatManager.DispatchServerMessageLoc(actor.PlayerSession, "mutineer-leader-status-removed");
             _chatManager.SendAdminAnnouncement($"Player {actor.PlayerSession.Name} is no longer a mutineer leader.");
         }
         _actions.RemoveAction(ent.Owner, ent.Comp.RecruitActionEntity);

@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Client.Administration.Systems;
+using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -23,8 +24,9 @@ public sealed partial class PlayerTab : Control
 
     private const string ArrowUp = "↑";
     private const string ArrowDown = "↓";
-    private readonly Color _altColor = Color.FromHex("#292B38");
-    private readonly Color _defaultColor = Color.FromHex("#2F2F3B");
+    private Color _altColor = Color.FromHex("#1B4074");
+    private Color _defaultColor = Color.FromHex("#163764");
+    private Color _headerColor = Color.FromHex("#214B86");
     private readonly AdminSystem _adminSystem;
     private IReadOnlyList<PlayerInfo> _players = new List<PlayerInfo>();
 
@@ -52,11 +54,12 @@ public sealed partial class PlayerTab : Control
         _config.OnValueChanged(CCVars.AdminPlayerTabColorSetting, ColorSettingChanged, true);
         _config.OnValueChanged(CCVars.AdminPlayerTabSymbolSetting, SymbolSettingChanged, true);
 
+        ApplyThemeColors();
 
         OverlayButton.OnPressed += OverlayButtonPressed;
         ShowDisconnectedButton.OnPressed += ShowDisconnectedPressed;
 
-        ListHeader.BackgroundColorPanel.PanelOverride = new StyleBoxFlat(_altColor);
+        ListHeader.BackgroundColorPanel.PanelOverride = new StyleBoxFlat(_headerColor);
         ListHeader.OnHeaderClicked += HeaderClicked;
 
         SearchList.SearchBar = SearchLineEdit;
@@ -67,6 +70,24 @@ public sealed partial class PlayerTab : Control
         RefreshPlayerList(_adminSystem.PlayerList);
 
     }
+
+    // CCM rework lobby - start
+    private void ApplyThemeColors()
+    {
+        if (StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue)
+        {
+            _defaultColor = Color.FromHex("#163764").WithAlpha(0.92f);
+            _altColor = Color.FromHex("#1B4074").WithAlpha(0.92f);
+            _headerColor = Color.FromHex("#214B86").WithAlpha(0.96f);
+        }
+        else
+        {
+            _defaultColor = Color.FromHex("#0D3518").WithAlpha(0.92f);
+            _altColor = Color.FromHex("#124120").WithAlpha(0.92f);
+            _headerColor = Color.FromHex("#185B2B").WithAlpha(0.96f);
+        }
+    }
+    // CCM rework lobby - end
 
     #region Antag Overlay
 

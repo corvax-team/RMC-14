@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿// CM14 rework: non-RMC edit marker.
+using System.Globalization;
 using Content.Server.Chat.Managers;
 using Content.Server.Mind;
 using Content.Shared.Chat;
@@ -50,11 +51,11 @@ public sealed class JobSystem : SharedJobSystem
         if (!MindTryGetJob(mindId, out var prototype))
             return;
 
-        _chat.DispatchServerMessage(session, Loc.GetString("job-greet-introduce-job-name",
-            ("jobName", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(prototype.LocalizedName))));
+        _chat.DispatchServerMessageLoc(session, "job-greet-introduce-job-name",
+            new[] { ("jobName", (object) CultureInfo.CurrentCulture.TextInfo.ToTitleCase(prototype.LocalizedName)) });
 
         if (prototype.RequireAdminNotify)
-            _chat.DispatchServerMessage(session, Loc.GetString("job-greet-important-disconnect-admin-notify"));
+            _chat.DispatchServerMessageLoc(session, "job-greet-important-disconnect-admin-notify");
 
         if (prototype.Greeting is { } greeting)
         {
@@ -63,7 +64,8 @@ public sealed class JobSystem : SharedJobSystem
             return;
         }
 
-        _chat.DispatchServerMessage(session, Loc.GetString("job-greet-supervisors-warning", ("jobName", prototype.LocalizedName), ("supervisors", Loc.GetString(prototype.Supervisors))));
+        _chat.DispatchServerMessageLoc(session, "job-greet-supervisors-warning",
+            new[] { ("jobName", (object) prototype.LocalizedName), ("supervisors", (object) Loc.GetString(prototype.Supervisors)) });
     }
 
     public void MindAddJob(EntityUid mindId, string jobPrototypeId)

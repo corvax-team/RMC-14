@@ -11,7 +11,7 @@ using static Content.Shared.Access.Components.AccessOverriderComponent;
 namespace Content.Client.Access.UI
 {
     [GenerateTypedNameReferences]
-    public sealed partial class AccessOverriderWindow : DefaultWindow
+    public sealed partial class AccessOverriderWindow : DefaultCMWindow
     {
         private readonly Dictionary<string, Button> _accessButtons = new();
 
@@ -96,3 +96,4 @@ namespace Content.Client.Access.UI
         }
     }
 }
+

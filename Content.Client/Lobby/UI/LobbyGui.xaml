@@ -1,152 +1,250 @@
 <lobbyUi:LobbyGui
     xmlns="https://spacestation14.io"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:maths="clr-namespace:Robust.Shared.Maths;assembly=Robust.Shared.Maths"
-    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-    xmlns:vote="clr-namespace:Content.Client.Voting.UI"
-    xmlns:style="clr-namespace:Content.Client.Stylesheets"
     xmlns:lobbyUi="clr-namespace:Content.Client.Lobby.UI"
     xmlns:info="clr-namespace:Content.Client.Info"
     xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Chat.Widgets">
-    <!-- Background -->
-    <TextureRect Access="Public" VerticalExpand="True" HorizontalExpand="True" Name="Background"
-                 Stretch="KeepAspectCovered" />
-    <BoxContainer Name="MainContainer" VerticalExpand="True" HorizontalExpand="True" Orientation="Horizontal"
-                  Margin="10 10 10 10" SeparationOverride="2">
-        <SplitContainer State="Auto" ResizeMode="NotResizable" HorizontalExpand="True">
-            <!-- LHS Controls -->
-            <BoxContainer Name="LeftSide" Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
-                <Control Name="DefaultState" VerticalExpand="True">
-                    <BoxContainer Name="TopLeft" Orientation="Vertical">
-                        <!-- Left Top Panel -->
-                        <PanelContainer StyleClasses="AngleRect" HorizontalAlignment="Left" Name="LeftSideTop"
-                                        VerticalAlignment="Top">
-                            <BoxContainer Orientation="Vertical" HorizontalAlignment="Center" MaxWidth="800">
-                                <info:LinkBanner Name="LinkBanner" VerticalExpand="false" HorizontalAlignment="Center"
-                                                 Margin="3 3 3 3" />
-                                <controls:StripeBack>
-                                    <BoxContainer Orientation="Horizontal" SeparationOverride="6" Margin="3 3 3 3">
-                                        <cc:UICommandButton Command="observe" Name="ObserveButton" Access="Public"
-                                                            Text="{Loc 'ui-lobby-observe-button'}"
-                                                            StyleClasses="ButtonBig"
-                                                            WindowType="{x:Type lobbyUi:ObserveWarningWindow}" />
-                                        <Label Name="StartTime"
-                                               Access="Public"
-                                               Align="Left"
-                                               FontColorOverride="{x:Static maths:Color.DarkGray}"
-                                               StyleClasses="LabelBig" HorizontalExpand="True" />
-                                        <!-- RMC14 -->
-                                        <Button Name="JoinXenoButton" Access="Public"
-                                                Text="{Loc 'rmc-lobby-join-xeno'}"
-                                                StyleClasses="ButtonBig" MinWidth="137" Visible="False" />
-                                        <Button Name="ReadyButton" Access="Public" ToggleMode="True"
-                                                Text="{Loc 'ui-lobby-ready-up-button'}"
-                                                StyleClasses="ButtonBig" MinWidth="137" />
+    <LayoutContainer Name="RootContainer" VerticalExpand="True" HorizontalExpand="True">
+        <BoxContainer Name="MainContainer" VerticalExpand="True" HorizontalExpand="True" Orientation="Horizontal"
+                      SeparationOverride="8">
+            <!-- Left column -->
+            <LayoutContainer Name="LeftColumn" HorizontalExpand="True" VerticalExpand="True" SizeFlagsStretchRatio="3.3">
+                <Control Name="DefaultState" VerticalExpand="True" HorizontalExpand="True">
+                    <LayoutContainer Name="BackgroundViewportArea" HorizontalExpand="True" VerticalExpand="True"
+                                     RectClipContent="True">
+                        <TextureRect Access="Public" VerticalExpand="True" HorizontalExpand="True" Name="Background"
+                                     Stretch="KeepAspectCentered" CanShrink="True" />
+                        <PanelContainer Name="CenterMenuGlow" StyleClasses="LobbyCenterGlow"
+                                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                                        Margin="0 0 0 0">
+                            <PanelContainer Name="CenterMenuPanel" StyleClasses="LobbyCenterPanel"
+                                            HorizontalAlignment="Center" VerticalAlignment="Center"
+                                            HorizontalExpand="True">
+                                <BoxContainer Orientation="Vertical" SeparationOverride="10" Margin="12 12 12 12">
+                                    <BoxContainer Orientation="Horizontal" SeparationOverride="16" HorizontalAlignment="Center">
+                                        <PanelContainer MinSize="88 88" VerticalAlignment="Center">
+                                            <SpriteView Name="CenterCharacterSprite"
+                                                        Access="Public"
+                                                        MinSize="88 88"
+                                                        SetSize="88 88"
+                                                        OverrideDirection="South"
+                                                        Scale="2.8 2.8"
+                                                        Stretch="Fill" />
+                                        </PanelContainer>
+                                        <BoxContainer Orientation="Vertical" SeparationOverride="2" VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center">
+                                            <Label Name="WelcomeLine1" Text="{Loc 'ui-lobby-welcome'}"
+                                                   StyleClasses="LobbyWelcomeLine1" HorizontalAlignment="Center" />
+                                            <Label Name="WelcomeCharacterName" Access="Public"
+                                                   StyleClasses="LobbyWelcomeLine2" HorizontalAlignment="Center" />
+                                            <Label Name="WelcomeXenoName" Access="Public"
+                                                   StyleClasses="LobbyWelcomeLine3" HorizontalAlignment="Center" />
+                                        </BoxContainer>
+                                        <TextureRect Name="CenterFacehuggerPortrait" MinSize="96 96"
+                                                     VerticalAlignment="Center"
+                                                     Stretch="KeepAspectCentered"
+                                                     TexturePath="/Textures/_RMC14/Mobs/Xenonids/Larva/larva.rsi/larva.png" />
                                     </BoxContainer>
-                                </controls:StripeBack>
-                                <RichTextLabel Name="PlaytimeComment" Visible="False" Access="Public" HorizontalAlignment="Center" />
+                                    <PanelContainer Name="ReadyDivider" StyleClasses="LobbyMenuDivider"
+                                                    MinSize="0 2" HorizontalExpand="True" Margin="0 6" />
+                                    <BoxContainer Name="CenterMenuButtons" Orientation="Vertical" SeparationOverride="12">
+                                        <Button Name="ReadyButton" Access="Public" Text="{Loc 'ui-lobby-ready-up-button'}"
+                                                StyleClasses="LobbyMenuButton" MinHeight="40" HorizontalExpand="True"
+                                                ToggleMode="True">
+                                            <TextureRect MinSize="20 20"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Center"
+                                                         Stretch="KeepAspectCentered"
+                                                         CanShrink="True"
+                                                         Margin="8 0 0 0"
+                                                         TexturePath="/Textures/_CCM14/Logo/icon/ready.png" />
+                                        </Button>
+                                        <Button Name="SetupCharacterButton" Access="Public"
+                                                Text="{Loc 'lobby-character-preview-panel-character-setup-button'}"
+                                                StyleClasses="LobbyMenuButton" MinHeight="40" HorizontalExpand="True">
+                                            <TextureRect MinSize="20 20"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Center"
+                                                         Stretch="KeepAspectCentered"
+                                                         CanShrink="True"
+                                                         Margin="8 0 0 0"
+                                                         TexturePath="/Textures/_CCM14/Logo/icon/custom.png" />
+                                        </Button>
+                                        <Button Name="StatsButton" Access="Public"
+                                                Text="{Loc 'character-setup-gui-character-setup-stats-button'}"
+                                                StyleClasses="LobbyMenuButton" MinHeight="40" HorizontalExpand="True">
+                                            <TextureRect MinSize="20 20"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Center"
+                                                         Stretch="KeepAspectCentered"
+                                                         CanShrink="True"
+                                                         Margin="8 0 0 0"
+                                                         TexturePath="/Textures/_CCM14/Logo/icon/book.png" />
+                                        </Button>
+                                        <Button Name="OptionsButton" Access="Public"
+                                                Text="{Loc 'ui-lobby-options-button'}"
+                                                StyleClasses="LobbyMenuButton" MinHeight="40">
+                                            <TextureRect MinSize="20 20"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Center"
+                                                         Stretch="KeepAspectCentered"
+                                                         CanShrink="True"
+                                                         Margin="8 0 0 0"
+                                                         TexturePath="/Textures/_CCM14/Logo/icon/settings.png" />
+                                        </Button>
+                                        <PanelContainer Name="ObserveDivider" StyleClasses="LobbyMenuDivider"
+                                                        MinSize="0 2" HorizontalExpand="True" Margin="0 6" />
+                                        <BoxContainer Orientation="Horizontal" SeparationOverride="6" HorizontalExpand="True">
+                                            <Button Name="JoinUsmcButton" Access="Public" Text="{Loc 'ui-lobby-join-uscm-button'}"
+                                                    StyleClasses="LobbyMenuButton" MinHeight="40" HorizontalExpand="True">
+                                                <TextureRect MinSize="20 20"
+                                                             HorizontalAlignment="Left"
+                                                             VerticalAlignment="Center"
+                                                             Stretch="KeepAspectCentered"
+                                                             CanShrink="True"
+                                                             Margin="8 0 0 0"
+                                                             TexturePath="/Textures/_CCM14/Logo/icon/jointouscm.png" />
+                                            </Button>
+                                            <ContainerButton Name="CrewManifestButton" Access="Public"
+                                                             StyleClasses="LobbyMenuIconButton"
+                                                             MinSize="40 40">
+                                                <TextureRect MinSize="20 20"
+                                                             HorizontalAlignment="Center"
+                                                             VerticalAlignment="Center"
+                                                             Stretch="KeepAspectCentered"
+                                                             CanShrink="True"
+                                                             TexturePath="/Textures/_CCM14/Logo/icon/manifest.png" />
+                                            </ContainerButton>
+                                        </BoxContainer>
+                                        <Button Name="JoinHiveButton" Access="Public" Text="{Loc 'ui-lobby-join-hive-button'}"
+                                                StyleClasses="LobbyMenuButton" MinHeight="40" HorizontalExpand="True">
+                                            <TextureRect MinSize="20 20"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Center"
+                                                         Stretch="KeepAspectCentered"
+                                                         CanShrink="True"
+                                                         Margin="8 0 0 0"
+                                                         TexturePath="/Textures/_CCM14/Logo/icon/jointoxeno.png" />
+                                        </Button>
+                                        <Button Name="ObserveButton" Access="Public" Text="{Loc 'ui-lobby-observe-button'}"
+                                                StyleClasses="LobbyMenuButton" MinHeight="40" HorizontalExpand="True">
+                                            <TextureRect MinSize="20 20"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Center"
+                                                         Stretch="KeepAspectCentered"
+                                                         CanShrink="True"
+                                                         Margin="8 0 0 0"
+                                                         TexturePath="/Textures/_CCM14/Logo/icon/observe.png" />
+                                        </Button>
+                                    </BoxContainer>
+                                </BoxContainer>
+                            </PanelContainer>
+                        </PanelContainer>
+                        <BoxContainer Orientation="Vertical" SeparationOverride="4" Name="VoteContainer"
+                                      Access="Public" HorizontalAlignment="Center"
+                                      VerticalAlignment="Top" Margin="0 8" />
+                        <PanelContainer Name="LeftTaskbarPanel" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                                        Margin="0 0 0 8"
+                                        StyleClasses="LobbyMusicPanel">
+                            <BoxContainer Orientation="Horizontal" SeparationOverride="8" Margin="8 8 8 8"
+                                          HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalExpand="True">
+                                <ContainerButton Name="TaskbarRatingButton" MinSize="72 52" Margin="4 0 4 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="0.9">
+                                    <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextureRect MinSize="32 32" MaxSize="32 32" Stretch="KeepAspectCentered"
+                                                     TexturePath="/Textures/_CCM14/Logo/icon/rating.png" />
+                                        <Label Name="TaskbarRatingLabel" Text="{Loc 'ui-lobby-taskbar-rating'}"
+                                               StyleClasses="LobbyTaskbarLabel" HorizontalAlignment="Center" Visible="False" />
+                                    </BoxContainer>
+                                </ContainerButton>
+                                <ContainerButton Name="TaskbarDonateButton" MinSize="126 60" Margin="4 0 4 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="1.8">
+                                    <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Label Name="TaskbarDonateLabel" Text="{Loc 'ui-lobby-taskbar-donate'}"
+                                               StyleClasses="TaskbarLabelSmall" HorizontalAlignment="Center" />
+                                    </BoxContainer>
+                                </ContainerButton>
+                                <ContainerButton Name="TaskbarMenuButton" MinSize="98 52" Margin="4 0 4 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="1">
+                                    <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Label Name="TaskbarMenuLabel" Text="{Loc 'ui-lobby-taskbar-menu'}"
+                                               StyleClasses="TaskbarLabelSmall" HorizontalAlignment="Center" />
+                                    </BoxContainer>
+                                </ContainerButton>
+                                <ContainerButton Name="TaskbarCustomizationButton" MinSize="126 60" Margin="4 0 4 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="1.8">
+                                    <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Label Name="TaskbarCustomizationLabel" Text="{Loc 'ui-lobby-taskbar-customization'}"
+                                               StyleClasses="TaskbarLabelSmall" HorizontalAlignment="Center" />
+                                    </BoxContainer>
+                                </ContainerButton>
+                                <ContainerButton Name="TaskbarAchievementsButton" MinSize="72 52" Margin="4 0 4 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="0.9">
+                                    <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextureRect MinSize="32 32" MaxSize="32 32" Stretch="KeepAspectCentered"
+                                                     TexturePath="/Textures/_CCM14/Logo/icon/achievement.png" />
+                                        <Label Name="TaskbarAchievementsLabel" Text="{Loc 'ui-lobby-taskbar-achievements'}"
+                                               StyleClasses="LobbyTaskbarLabel" HorizontalAlignment="Center" Visible="False" />
+                                    </BoxContainer>
+                                </ContainerButton>
                             </BoxContainer>
                         </PanelContainer>
-                        <!-- Voting Popups -->
-                        <BoxContainer Orientation="Vertical" SeparationOverride="4" Name="VoteContainer"
-                                      Access="Public" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 8" />
-                    </BoxContainer>
-                    <!-- Vertical Padding-->
-                    <Control VerticalExpand="True" />
-                    <!-- Left Bot Panel -->
-                    <PanelContainer VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                                    Margin="0 75" StyleClasses="AngleRect">
-                        <RichTextLabel Name="LobbyMessageLabel" Access="Public" Margin="5" />
-                    </PanelContainer>
-                    <BoxContainer Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                        <info:DevInfoBanner Name="DevInfoBanner" VerticalExpand="false" Margin="3 3 3 3" />
-                        <PanelContainer StyleClasses="AngleRect">
-                            <RichTextLabel Name="LobbySong" Access="Public" HorizontalAlignment="Center" />
+                        <PanelContainer Name="LobbyMusicPanel" StyleClasses="LobbyMusicPanel"
+                                        MinHeight="64" MaxWidth="408">
+                            <BoxContainer Name="LobbyMusicInfo" Orientation="Vertical"
+                                          SeparationOverride="4" Margin="6 6 6 6">
+                                <Label Name="LobbyMusicHeader" Text="{Loc 'ui-lobby-music-header'}"
+                                       StyleClasses="LobbyMusicHeader" />
+                                <Label Name="LobbyMusicText" Access="Public"
+                                       StyleClasses="LobbyInfoLine" />
+                            </BoxContainer>
                         </PanelContainer>
-                    </BoxContainer>
+                    </LayoutContainer>
                 </Control>
-                <!-- Character setup state -->
-                <!-- This is injected on startup. Funky! -->
-                <Control Access="Public" Visible="False" Name="CharacterSetupState" VerticalExpand="True" />
-            </BoxContainer>
-            <!-- Right Panel -->
-            <PanelContainer Name="RightSide" Access="Public" StyleClasses="AngleRect" HorizontalAlignment="Right" VerticalExpand="True"
-                            VerticalAlignment="Stretch">
-                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                    <!-- Top row -->
-                    <BoxContainer Orientation="Horizontal" MinSize="0 40" Name="HeaderContainer" Access="Public"
-                                  SeparationOverride="4">
-                        <Label Name="ServerName" Access="Public" StyleClasses="LabelHeadingBigger" VAlign="Center"
-                               HorizontalExpand="True" HorizontalAlignment="Center" />
+            </LayoutContainer>
+            <!-- Right column -->
+            <PanelContainer Name="RightSide" Access="Public" HorizontalAlignment="Right"
+                            VerticalExpand="True" HorizontalExpand="False"
+                            StyleClasses="LobbyChatPanel">
+                <TextureRect Name="RightSideBackground"
+                             TexturePath="/Textures/_CCM14/Lobby/rightside_chat_bg.png"
+                             Stretch="Scale"
+                             MouseFilter="Ignore"
+                             HorizontalExpand="True"
+                             VerticalExpand="True" />
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" SeparationOverride="6"
+                              Margin="8 8 8 8">
+                    <Button Name="LinkDiscordButton" Access="Public" Text="{Loc 'ui-lobby-link-discord-button'}"
+                            StyleClasses="LobbyTopButton" MinHeight="40" HorizontalExpand="True" />
+                    <BoxContainer Orientation="Horizontal" MinSize="0 32" Name="TopButtonBar"
+                                  SeparationOverride="6" HorizontalAlignment="Stretch" HorizontalExpand="True">
+                        <Button Name="AHelpButton" Access="Public" Text="{Loc 'ui-lobby-ahelp-button'}"
+                                StyleClasses="LobbyTopButton" MinHeight="40" HorizontalExpand="True" SizeFlagsStretchRatio="0.86" />
+                        <Button Name="UpdatesButton" Access="Public" Text="{Loc 'ui-lobby-updates-button'}"
+                                StyleClasses="LobbyTopButton" MinHeight="40" HorizontalExpand="True" SizeFlagsStretchRatio="1" />
+                        <Button Name="GuidesButton" Access="Public" Text="{Loc 'ui-lobby-guides-button'}"
+                                StyleClasses="LobbyTopButton" MinHeight="40" HorizontalExpand="True" SizeFlagsStretchRatio="1" />
+                        <Button Name="PollsButton" Access="Public" Text="{Loc 'ui-lobby-polls-button'}"
+                                StyleClasses="LobbyTopButton" MinHeight="40" HorizontalExpand="True" SizeFlagsStretchRatio="1" />
+                        <Button Name="LeaveButton" Access="Public" Text="{Loc 'ui-lobby-leave-button'}"
+                                StyleClasses="LobbyTopButton" MinHeight="40" HorizontalExpand="True" SizeFlagsStretchRatio="0.86" />
+
                     </BoxContainer>
-                    <!-- Gold line -->
-                    <controls:HLine Color="{x:Static style:StyleNano.NanoGold}" Thickness="2" />
-                    <controls:HSpacer Spacing="10" />
-<!-- Верхний ряд кнопок -->
-<BoxContainer Orientation="Horizontal"
-              MinSize="0 40"
-              HorizontalAlignment="Right"
-              SeparationOverride="6"
-              Margin="0 0 10 0">
-    <Button Name="AHelpButton" Access="Public"
-            Text="{Loc 'ui-lobby-ahelp-button'}"
-            StyleClasses="ButtonBig" />
-    <vote:VoteCallMenuButton Name="CallVoteButton" StyleClasses="ButtonBig" />
-    <Button Name="OptionsButton" Access="Public"
-            StyleClasses="ButtonBig"
-            Text="{Loc 'ui-lobby-options-button'}" />
-    <Button Name="LeaveButton" Access="Public"
-            StyleClasses="ButtonBigRed"
-            Text="{Loc 'ui-lobby-leave-button'}" />
-</BoxContainer>
-
-<!-- Отступ и кнопка авторизации -->
-<controls:HSpacer Spacing="6" />
-<Button Name="DiscordAuthButton" Access="Public"
-        Text="Авторизация Discord"
-        StyleClasses="ButtonBig"
-        HorizontalAlignment="Right"
-        Margin="0 0 10 0"
-        MinWidth="200" />
-
-                    <controls:HSpacer Spacing="10" />
-                    <!-- Server info -->
-                    <controls:NanoHeading Text="{Loc 'ui-lobby-server-info-block'}" />
-                    <info:ServerInfo Name="ServerInfo" Access="Public" MinSize="0 30" VerticalExpand="false"
-                                     Margin="3 3 3 3" MaxWidth="400" HorizontalAlignment="Left" />
-                    <Label Name="StationTime" Access="Public" FontColorOverride="{x:Static maths:Color.LightGray}"
-                           Margin="3 3 3 3" HorizontalAlignment="Left" />
-                    <controls:HSpacer Spacing="5" />
-                    <lobbyUi:LobbyCharacterPreviewPanel Name="CharacterPreview" Access="Public" />
-                    <controls:HSpacer Spacing="5" />
-                    <BoxContainer MinHeight="10" />
-                    <!-- Gold line -->
-                    <controls:HLine Color="{x:Static style:StyleNano.NanoGold}" Thickness="2" Access="Public" />
-                    <controls:HSpacer Spacing="10" />
-                    <widgets:ChatBox Name="Chat" Access="Public" VerticalExpand="True" Margin="3 3 3 3" MinHeight="50" />
+                    <PanelContainer Name="ServerInfoPanel" StyleClasses="LobbyInfoPanel">
+                        <BoxContainer Orientation="Vertical" SeparationOverride="4" Margin="8 8 8 8">
+                            <Label Name="ServerInfoTitle" Text="{Loc 'ui-lobby-server-info-block'}"
+                                   StyleClasses="LobbyInfoTitle" />
+                            <PanelContainer Name="ServerInfoDivider" StyleClasses="LobbyInfoDivider" MinSize="0 1" />
+                            <info:ServerInfo Name="ServerInfo" Access="Public" HorizontalExpand="True"
+                                             StyleClasses="LobbyInfoText" />
+                            <Label Name="StationTime" Access="Public" StyleClasses="LobbyInfoLine" />
+                            <Label Name="RoundStartTimer" Access="Public" Text=""
+                                   StyleClasses="LobbyCountdown" />
+                        </BoxContainer>
+                    </PanelContainer>
+                    <widgets:ChatBox Name="Chat" Access="Public" VerticalExpand="True" MinSize="0 240" />
                 </BoxContainer>
-                <TextureButton Name="CollapseButton"
-                                TexturePath="filled_right_arrow.svg.192dpi"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Top"
-                                Margin="0 2 2 0"
-                                ModulateSelfOverride="#DEDEDE"
-                                Scale="0.5 0.5"/>
             </PanelContainer>
-        </SplitContainer>
-        <PanelContainer Name="ExpandPanel"
-                        StyleClasses="AngleRect" 
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Top"
-                        Margin="0 2 2 0"
-                        Visible="False">
-            <TextureButton Name="ExpandButton"
-                        TexturePath="filled_left_arrow.svg.192dpi"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        ModulateSelfOverride="#DEDEDE"
-                        Scale="0.5 0.5"/>
-        </PanelContainer>
-    </BoxContainer>
+        </BoxContainer>
+        <!-- Character setup state -->
+        <!-- This is injected on startup. Funky! -->
+        <LayoutContainer Access="Public" Visible="False" Name="CharacterSetupState" VerticalExpand="True" HorizontalExpand="True" />
+    </LayoutContainer>
+    <!-- # CCM priority rework -->
 </lobbyUi:LobbyGui>

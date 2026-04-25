@@ -34,6 +34,13 @@ public sealed partial class RMCPlaytimeStatsEntry : ContainerButton
         }
     }
 
+    public void ApplyTheme(Color textColor, Color separatorColor)
+    {
+        RoleLabel.FontColorOverride = textColor;
+        PlaytimeLabel.FontColorOverride = textColor;
+        EntrySeparator.ModulateSelfOverride = separatorColor;
+    }
+
     public void UpdateShading(StyleBox styleBox)
     {
         BackgroundColorPanel.PanelOverride = styleBox;

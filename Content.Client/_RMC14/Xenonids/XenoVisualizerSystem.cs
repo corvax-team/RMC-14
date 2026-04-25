@@ -1,4 +1,5 @@
 using Content.Client._RMC14.Sprite;
+using Content.Shared._CCM.Sponsorship;
 using Content.Shared._RMC14.Sprite;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Charge;
@@ -16,6 +17,10 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Client.GameObjects;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Log;
+using Robust.Shared.Utility;
 using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client._RMC14.Xenonids;
@@ -34,6 +39,8 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
         SubscribeLocalEvent<XenoComponent, KnockedDownEvent>(OnXenoKnockedDown);
         SubscribeLocalEvent<XenoComponent, StatusEffectEndedEvent>(OnXenoStatusEffectEnded);
         SubscribeLocalEvent<XenoComponent, GetDrawDepthEvent>(OnXenoGetDrawDepth);
+        SubscribeLocalEvent<CCMXenoSkinComponent, ComponentStartup>(OnXenoSkinUpdated);
+        SubscribeLocalEvent<CCMXenoSkinComponent, AfterAutoHandleStateEvent>(OnXenoSkinUpdated);
 
         _animateQuery = GetEntityQuery<XenoAnimateMovementComponent>();
     }
@@ -57,16 +64,26 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
             args.DrawDepth = DrawDepth.DeadMobs;
     }
 
+    private void OnXenoSkinUpdated(Entity<CCMXenoSkinComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        UpdateSprite((ent.Owner, null, null, null, null, null, null, null, ent.Comp));
+    }
+
+    private void OnXenoSkinUpdated(Entity<CCMXenoSkinComponent> ent, ref ComponentStartup args)
+    {
+        UpdateSprite((ent.Owner, null, null, null, null, null, null, null, ent.Comp));
+    }
+
     protected override void OnAppearanceChange(EntityUid uid, XenoComponent component, ref AppearanceChangeEvent args)
     {
         var sprite = args.Sprite;
-        UpdateSprite((uid, sprite, null, args.Component, null, null));
+        UpdateSprite((uid, sprite, null, args.Component, null, null, null, null));
         _rmcSprite.UpdateDrawDepth(uid);
     }
 
-    public void UpdateSprite(Entity<SpriteComponent?, MobStateComponent?, AppearanceComponent?, InputMoverComponent?, ThrownItemComponent?, XenoLeapingComponent?, KnockedDownComponent?> entity)
+    public void UpdateSprite(Entity<SpriteComponent?, MobStateComponent?, AppearanceComponent?, InputMoverComponent?, ThrownItemComponent?, XenoLeapingComponent?, KnockedDownComponent?, CCMXenoSkinComponent?> entity)
     {
-        var (_, sprite, mobState, appearance, input, thrown, leaping, knocked) = entity;
+        var (_, sprite, mobState, appearance, input, thrown, leaping, knocked, customSkin) = entity;
         if (!Resolve(entity, ref sprite, ref appearance, false))
             return;
 
@@ -75,11 +92,34 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
             state = mobState.CurrentState;
 
         Resolve(entity, ref input, ref thrown, ref leaping, ref knocked, false);
+        Resolve(entity, ref customSkin, false);
         if (knocked != null && state != MobState.Dead)
             state = MobState.Critical;
 
-        if (sprite is not { BaseRSI: { } rsi } ||
-            !sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer))
+        if (!sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer))
+        {
+            return;
+        }
+
+        var customRsiPath = customSkin != null && !string.IsNullOrWhiteSpace(customSkin.RsiPath)
+            ? new ResPath(customSkin.RsiPath)
+            : (ResPath?) null;
+
+        if (customRsiPath != null)
+        {
+            try
+            {
+                sprite.LayerSetRSI(layer, customRsiPath.Value);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Failed to apply custom xeno skin RSI '{customRsiPath}' to entity {ToPrettyString(entity.Owner)}. Falling back to default RSI.\n{e}");
+                sprite.LayerSetRSI(layer, sprite.BaseRSI);
+            }
+        }
+
+        if (sprite[layer] is not SpriteComponent.Layer baseLayer ||
+            (baseLayer.ActualRsi ?? sprite.BaseRSI) is not { } rsi)
         {
             return;
         }

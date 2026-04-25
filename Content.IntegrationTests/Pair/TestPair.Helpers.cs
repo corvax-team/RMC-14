@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Preferences.Managers;
+using Content.Shared._CCM.Preferences;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Robust.Shared.GameObjects;
@@ -206,8 +207,8 @@ public sealed partial class TestPair
     /// <inheritdoc cref="SetJobPriority"/>
     public async Task SetJobPriorities(NetUserId user, params (ProtoId<JobPrototype>, JobPriority)[] priorities)
     {
-        var highCount = priorities.Count(x => x.Item2 == JobPriority.High);
-        Assert.That(highCount, Is.LessThanOrEqualTo(1), "Cannot have more than one high priority job");
+        var highCount = priorities.Count(x => x.Item2.IsFirst());
+        Assert.That(highCount, Is.LessThanOrEqualTo(2), "Cannot have more than two first-order jobs");
 
         var prefMan = Server.ResolveDependency<IServerPreferencesManager>();
         var prefs = prefMan.GetPreferences(user);
@@ -221,8 +222,8 @@ public sealed partial class TestPair
         {
             foreach (var (key, priority) in dictionary)
             {
-                if (priority == JobPriority.High)
-                    dictionary[key] = JobPriority.Medium;
+                if (priority.IsFirst())
+                    dictionary[key] = JobPriority.Second;
             }
         }
 
@@ -239,3 +240,5 @@ public sealed partial class TestPair
         await Server.WaitPost(() => prefMan.SetProfile(user, 0, newProfile).Wait());
     }
 }
+
+// # CCM priority rework

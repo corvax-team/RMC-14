@@ -1,15 +1,17 @@
-﻿<widgets:InventoryGui
+﻿<!-- CM14 rework: non-RMC edit marker. -->
+<widgets:InventoryGui
     xmlns="https://spacestation14.io"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:inventory="clr-namespace:Content.Client.UserInterface.Systems.Inventory.Controls"
     xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Inventory.Widgets"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+    x:Class="Content.Client.UserInterface.Systems.Inventory.Widgets.InventoryGui"
     Name="InventoryInterface"
     VerticalExpand="True"
     VerticalAlignment="Bottom"
     Orientation="Horizontal"
     HorizontalAlignment="Center">
     <Control HorizontalAlignment="Center">
-        <!-- Needs to default to invisible because if we attach to a non-slots entity this will never get unset -->
         <controls:SlotButton
             Name="InventoryButton"
             Access="Public"

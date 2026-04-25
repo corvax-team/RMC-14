@@ -122,14 +122,28 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
         {
             if (args.Sprite != null)
             {
-                if (args.Sprite.LayerMapTryGet(ItemCamouflageLayers.Layer, out var layer))
+                var variationPaths = component.CamouflageVariations.Values.ToHashSet();
+
+                if (_resource.TryGetResource(SpriteSpecifierSerializer.TextureRoot / rsi, out RSIResource? targetRsi))
                 {
-                    args.Sprite.LayerSetRSI(layer, rsi);
-                }
-                else if (args.Sprite.BaseRSI != null &&
-                         _resource.TryGetResource(SpriteSpecifierSerializer.TextureRoot / rsi, out RSIResource? baseRsi))
-                {
-                    args.Sprite.BaseRSI = baseRsi.RSI;
+                    args.Sprite.BaseRSI = targetRsi.RSI;
+
+                    if (args.Sprite.LayerMapTryGet(ItemCamouflageLayers.Layer, out var layer))
+                    {
+                        args.Sprite.LayerSetRSI(layer, rsi);
+                    }
+                    else
+                    {
+                        var layerCount = args.Sprite.AllLayers.Count();
+                        for (var i = 0; i < layerCount; i++)
+                        {
+                            var layerRsi = args.Sprite[i].Rsi;
+                            if (layerRsi == null || !variationPaths.Contains(layerRsi.Path))
+                                continue;
+
+                            args.Sprite.LayerSetRSI(i, rsi);
+                        }
+                    }
                 }
             }
 

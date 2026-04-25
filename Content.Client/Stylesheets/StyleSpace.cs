@@ -1,4 +1,5 @@
-﻿using System.Linq;
+using System;
+using System.Linq;
 using Content.Client.Resources;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
@@ -24,15 +25,43 @@ namespace Content.Client.Stylesheets
 
         public override Stylesheet Stylesheet { get; }
 
-        public StyleSpace(IResourceCache resCache) : base(resCache)
+        public StyleSpace(IResourceCache resCache, string theme = "green") : base(resCache)
         {
+            var isBlueTheme = theme.Equals("blue", StringComparison.OrdinalIgnoreCase);
+
+            var launcherFrameBackground = (isBlueTheme
+                ? Color.FromHex("#070E1B")
+                : Color.FromHex("#0B150D")).WithAlpha(0.96f);
+            var launcherFrameBorder = (isBlueTheme
+                ? Color.FromHex("#1C5CA8")
+                : Color.FromHex("#2B7E45")).WithAlpha(0.98f);
+            var launcherDivider = Color.FromHex("#545A66");
+            var launcherTitleColor = isBlueTheme
+                ? Color.FromHex("#58A6FF")
+                : Color.FromHex("#95E7B1");
+            var launcherStateColor = isBlueTheme
+                ? Color.FromHex("#C4DAF8")
+                : Color.FromHex("#D1EBDD");
+            var launcherButtonNormal = isBlueTheme
+                ? Color.FromHex("#1B2F56")
+                : Color.FromHex("#2B4433");
+            var launcherButtonHover = isBlueTheme
+                ? Color.FromHex("#23406F")
+                : Color.FromHex("#365B43");
+            var launcherButtonPressed = isBlueTheme
+                ? Color.FromHex("#152544")
+                : Color.FromHex("#1F3528");
+            var launcherButtonText = isBlueTheme
+                ? Color.FromHex("#D5E4F9")
+                : Color.FromHex("#D8F0E2");
+
             var notoSans10 = resCache.GetFont
             (
                 new []
                 {
-                    "/Fonts/NotoSans/NotoSans-Regular.ttf",
-                    "/Fonts/NotoSans/NotoSansSymbols-Regular.ttf",
-                    "/Fonts/NotoSans/NotoSansSymbols2-Regular.ttf"
+                    "/Fonts/Exo2/Exo2-Regular.ttf",
+                    "/Fonts/Exo2/Exo2-Regular.ttf",
+                    "/Fonts/Exo2/Exo2-Regular.ttf"
                 },
                 10
             );
@@ -40,12 +69,19 @@ namespace Content.Client.Stylesheets
             (
                 new []
                 {
-                    "/Fonts/NotoSans/NotoSans-Bold.ttf",
-                    "/Fonts/NotoSans/NotoSansSymbols-Regular.ttf",
-                    "/Fonts/NotoSans/NotoSansSymbols2-Regular.ttf"
+                    "/Fonts/Exo2/Exo2-Regular.ttf",
+                    "/Fonts/Exo2/Exo2-Regular.ttf",
+                    "/Fonts/Exo2/Exo2-Regular.ttf"
                 },
                 16
             );
+            var exo2Regular12 = resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 12);
+            var exo2Bold12 = resCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 12);
+            var bedstead12 = resCache.GetFont("/Fonts/Bedstead/bedstead.otf", 12);
+            var bedstead13 = resCache.GetFont("/Fonts/Bedstead/bedstead.otf", 13);
+            var bedstead15 = resCache.GetFont("/Fonts/Bedstead/bedstead.otf", 15);
+            var bedstead20 = resCache.GetFont("/Fonts/Bedstead/bedstead.otf", 20);
+            var exo2Bold14 = resCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 14);
 
             var progressBarBackground = new StyleBoxFlat
             {
@@ -61,13 +97,21 @@ namespace Content.Client.Stylesheets
 
             var textureInvertedTriangle = resCache.GetTexture("/Textures/Interface/Nano/inverted_triangle.svg.png");
 
-            var tabContainerPanel = new StyleBoxTexture();
-            tabContainerPanel.SetPatchMargin(StyleBox.Margin.All, 2);
+            var tabContainerPanel = new StyleBoxFlat
+            {
+                BackgroundColor = StyleNano.PanelDark.WithAlpha(0.95f),
+            };
 
-            var tabContainerBoxActive = new StyleBoxFlat {BackgroundColor = new Color(64, 64, 64)};
+            var tabContainerBoxActive = new StyleBoxFlat {BackgroundColor = StyleNano.PanelDark.WithAlpha(0.98f)};
             tabContainerBoxActive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
-            var tabContainerBoxInactive = new StyleBoxFlat {BackgroundColor = new Color(32, 32, 32)};
+            var tabContainerBoxInactive = new StyleBoxFlat {BackgroundColor = StyleNano.PanelDark.WithAlpha(0.9f)};
             tabContainerBoxInactive.SetContentMarginOverride(StyleBox.Margin.Horizontal, 5);
+
+            var voteButtonBox = new StyleBoxTexture(BaseAngleRect);
+            voteButtonBox.SetPadding(StyleBox.Margin.All, 1);
+            voteButtonBox.SetContentMarginOverride(StyleBox.Margin.Vertical, 2);
+            voteButtonBox.SetContentMarginOverride(StyleBox.Margin.Horizontal, 12);
+            var voteButtonBase = StyleNano.ButtonColorDefault;
 
             Stylesheet = new Stylesheet(BaseRules.Concat(new StyleRule[]
             {
@@ -152,8 +196,82 @@ namespace Content.Client.Stylesheets
                     .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center),
 
                 Element<PanelContainer>().Class(ClassAngleRect)
-                    .Prop(PanelContainer.StylePropertyPanel, BaseAngleRect)
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#202030")),
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = StyleNano.PanelDark.WithAlpha(0.95f),
+                        BorderThickness = new Thickness(1),
+                        BorderColor = StyleNano.PanelDark.WithAlpha(1f),
+                    }),
+
+                Element<PanelContainer>().Class("LauncherConnectingFrame")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = launcherFrameBackground,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = launcherFrameBorder,
+                    }),
+
+                Element<PanelContainer>().Class("LauncherConnectingDivider")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = launcherDivider,
+                        ContentMarginLeftOverride = 2,
+                        ContentMarginBottomOverride = 1,
+                    }),
+
+                Element<Label>().Class("LauncherConnectingTitle")
+                    .Prop(Label.StylePropertyFont, bedstead15)
+                    .Prop(Label.StylePropertyFontColor, launcherTitleColor),
+
+                Element<Label>().Class("LauncherConnectingStateLabel")
+                    .Prop(Label.StylePropertyFont, bedstead13)
+                    .Prop(Label.StylePropertyFontColor, launcherStateColor),
+
+                Element<Label>().Class("LauncherConnectingReasonLabel")
+                    .Prop(Label.StylePropertyFont, bedstead13)
+                    .Prop(Label.StylePropertyFontColor, launcherStateColor),
+
+                Element<RichTextLabel>().Class("LauncherConnectingReasonLabel")
+                    .Prop(Label.StylePropertyFont, bedstead13),
+
+                Element<Label>().Class("LauncherConnectingReasonSmallLabel")
+                    .Prop(Label.StylePropertyFont, bedstead12)
+                    .Prop(Label.StylePropertyFontColor, launcherStateColor),
+
+                Element<RichTextLabel>().Class("LauncherConnectingReasonSmallLabel")
+                    .Prop(Label.StylePropertyFont, bedstead12),
+
+                Element<Button>().Class("LauncherConnectingButton")
+                    .Prop(Control.StylePropertyModulateSelf, launcherButtonNormal),
+
+                Element<Button>().Class("LauncherConnectingButton").Pseudo(ContainerButton.StylePseudoClassNormal)
+                    .Prop(Control.StylePropertyModulateSelf, launcherButtonNormal),
+
+                Element<Button>().Class("LauncherConnectingButton").Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Control.StylePropertyModulateSelf, launcherButtonHover),
+
+                Element<Button>().Class("LauncherConnectingButton").Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Control.StylePropertyModulateSelf, launcherButtonPressed),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {"LauncherConnectingButton"}, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, bedstead15),
+                        new StyleProperty(Label.StylePropertyFontColor, launcherButtonText),
+                    }),
+
+                Element<PanelContainer>().Class("VerticalTabListBackground")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = StyleNano.PanelDark.WithAlpha(0.6f),
+                        BorderThickness = new Thickness(2, 0, 0, 0),
+                        BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.6f),
+                    }),
+
+                Element<PanelContainer>().Class("VerticalTabContentBackground")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(StyleNano.PanelDark.WithAlpha(0.95f))),
 
                 Child()
                     .Parent(Element<Button>().Class(ContainerButton.StylePseudoClassDisabled))
@@ -180,11 +298,131 @@ namespace Content.Client.Stylesheets
                 Element<OptionButton>().Pseudo(ContainerButton.StylePseudoClassDisabled)
                     .Prop(Control.StylePropertyModulateSelf, ButtonColorDisabled),
 
+                Element<Button>().Class(StyleClassVoteButton)
+                    .Prop(Button.StylePropertyStyleBox, voteButtonBox),
+
+                Element<Button>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassNormal)
+                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonBase * new Color(0.48f, 0.48f, 0.48f, 1f)),
+
+                Element<Button>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonPressed * new Color(0.58f, 0.58f, 0.58f, 1f)),
+
+                Element<Button>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonPressed * new Color(0.44f, 0.44f, 0.44f, 1f)),
+
+                Element<Button>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonDisabledCrt * new Color(0.60f, 0.60f, 0.60f, 1f)),
+
+                Element<OptionButton>().Class(StyleClassVoteButton)
+                    .Prop(ContainerButton.StylePropertyStyleBox, voteButtonBox),
+
+                Element<OptionButton>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassNormal)
+                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonBase * new Color(0.48f, 0.48f, 0.48f, 1f)),
+
+                Element<OptionButton>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonPressed * new Color(0.58f, 0.58f, 0.58f, 1f)),
+
+                Element<OptionButton>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonPressed * new Color(0.44f, 0.44f, 0.44f, 1f)),
+
+                Element<OptionButton>().Class(StyleClassVoteButton).Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(Control.StylePropertyModulateSelf, StyleNano.LobbyMenuButtonDisabledCrt * new Color(0.60f, 0.60f, 0.60f, 1f)),
+
+                  new StyleRule(new SelectorChild(
+                      new SelectorElement(typeof(Button), new[] {StyleClassVoteButton}, null, null),
+                      new SelectorElement(typeof(Label), null, null, null)),
+                      new[]
+                      {
+                          new StyleProperty(Label.StylePropertyFont, exo2Bold12),
+                          new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#D9DDE3")),
+                      }),
+                  new StyleRule(new SelectorChild(
+                      new SelectorElement(typeof(Button), new[] {StyleClassVoteButton}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                      new SelectorElement(typeof(Label), null, null, null)),
+                      new[]
+                      {
+                          new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#D9DDE3")),
+                      }),
+
+                  new StyleRule(new SelectorChild(
+                      new SelectorElement(typeof(OptionButton), new[] {StyleClassVoteButton}, null, null),
+                      new SelectorElement(typeof(Label), null, null, null)),
+                      new[]
+                      {
+                          new StyleProperty(Label.StylePropertyFont, exo2Bold12),
+                          new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#D9DDE3")),
+                      }),
+                  new StyleRule(new SelectorChild(
+                      new SelectorElement(typeof(OptionButton), new[] {StyleClassVoteButton}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                      new SelectorElement(typeof(Label), null, null, null)),
+                      new[]
+                      {
+                          new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#D9DDE3")),
+                      }),
+
+                  new StyleRule(new SelectorChild(
+                      new SelectorElement(typeof(OptionButton), new[] {StyleClassVoteButton}, null, null),
+                      new SelectorElement(typeof(Label), new[] {OptionButton.StyleClassOptionButton}, null, null)),
+                      new[]
+                      {
+                          new StyleProperty(Label.StylePropertyFont, exo2Bold12),
+                          new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#D9DDE3")),
+                      }),
+                  new StyleRule(new SelectorChild(
+                      new SelectorElement(typeof(OptionButton), new[] {StyleClassVoteButton}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                      new SelectorElement(typeof(Label), new[] {OptionButton.StyleClassOptionButton}, null, null)),
+                      new[]
+                      {
+                          new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#D9DDE3")),
+                      }),
+
                 Element<TextureRect>().Class(OptionButton.StyleClassOptionTriangle)
                     .Prop(TextureRect.StylePropertyTexture, textureInvertedTriangle),
 
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(OptionButton), new[] {StyleClassVoteButton}, null, null),
+                    new SelectorElement(typeof(TextureRect), new[] {OptionButton.StyleClassOptionTriangle}, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.FromHex("#D9DDE3")),
+                    }),
+
                 Element<Label>().Class(OptionButton.StyleClassOptionButton)
                     .Prop(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+
+                Element<Label>().Class("VoteTitleText")
+                    .Prop(Label.StylePropertyFont, exo2Bold14)
+                    .Prop(Label.StylePropertyFontColor, Color.FromHex("#D9DDE3")),
+
+                Element<RichTextLabel>().Class("VoteTitleText")
+                    .Prop("font", exo2Bold14)
+                    .Prop(Label.StylePropertyFontColor, Color.FromHex("#D9DDE3")),
+
+                Element<Label>().Class("VoteCallerText")
+                    .Prop(Label.StylePropertyFont, exo2Bold14)
+                    .Prop(Label.StylePropertyFontColor, Color.FromHex("#D9DDE3")),
+
+                Element<Label>().Class("VoteMenuTitle")
+                    .Prop(Label.StylePropertyFont, exo2Bold14)
+                    .Prop(Label.StylePropertyFontColor, StyleNano.LobbyMenuButtonBase),
+
+                Element<PanelContainer>().Class("VoteMenuDivider")
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
+                    {
+                        BackgroundColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.95f),
+                        ContentMarginLeftOverride = 2,
+                        ContentMarginBottomOverride = 2,
+                    }),
+
+                Element<TextureButton>().Class("VoteMenuCloseButton")
+                    .Prop(TextureButton.StylePropertyTexture, resCache.GetTexture("/Textures/Interface/Nano/cross.svg.png"))
+                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#A9AFB8")),
+
+                Element<TextureButton>().Class("VoteMenuCloseButton").Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#C2C7CE")),
+
+                Element<TextureButton>().Class("VoteMenuCloseButton").Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#8F959E")),
 
                 // TabContainer
                 new StyleRule(new SelectorElement(typeof(TabContainer), null, null, null),
@@ -199,3 +437,6 @@ namespace Content.Client.Stylesheets
         }
     }
 }
+// # CCM priority rework
+
+

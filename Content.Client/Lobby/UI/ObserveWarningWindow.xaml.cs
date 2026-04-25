@@ -9,7 +9,7 @@ namespace Content.Client.Lobby.UI;
 
 [GenerateTypedNameReferences]
 [UsedImplicitly]
-public sealed partial class ObserveWarningWindow : DefaultWindow
+public sealed partial class ObserveWarningWindow : DefaultCMWindow
 {
     [Dependency] private readonly ISharedAdminManager _adminManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
@@ -32,3 +32,4 @@ public sealed partial class ObserveWarningWindow : DefaultWindow
         NevermindButton.OnPressed += _ => { this.Close(); };
     }
 }
+

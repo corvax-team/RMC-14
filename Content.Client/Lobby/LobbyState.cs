@@ -1,45 +1,117 @@
-using Content.Client._RMC14.LinkAccount;
-using Content.Client._RMC14.Lobby;
+﻿// CM14 rework: non-RMC edit marker.
 using Content.Client.Audio;
 using Content.Client.GameTicking.Managers;
-using Content.Client.LateJoin;
 using Content.Client.Lobby.UI;
-using Content.Client.Message;
-using Content.Client.Playtime;
+using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Chat;
+using Content.Client.TextScreen;
 using Content.Client.Voting;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.CCVar;
-using Robust.Client;
-using Robust.Client.Console;
 using Robust.Client.ResourceManagement;
 using Robust.Client.State;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Content.Client.Lobby
 {
     public sealed class LobbyState : State
     {
-        [Dependency] private readonly IBaseClient _baseClient = default!;
+        private readonly record struct LobbyTrackInfo(string Title, string Author);
+
+        private static readonly Dictionary<string, LobbyTrackInfo> LobbyTrackInfoMap = new()
+        {
+            ["/audio/_rmc14/lobby/super_nova_in_the_catacombs.ogg"] = new("Super Nova In The Catacombs", "WigWoo1"),
+            ["/audio/_rmc14/lobby/shadowinthesilvernebula.ogg"] = new("Shadow in the Silver Nebula", "Mendax"),
+            ["/audio/_rmc14/lobby/the_fallen_queen.ogg"] = new("The Fallen Queen", "Bolgarich"),
+            ["/audio/_rmc14/lobby/enemy_is_unknown.ogg"] = new("Enemy Is Unknown", "Nighty"),
+            ["/audio/_rmc14/lobby/dire_situation.ogg"] = new("Dire Situation", "GoodShowOldChap"),
+            ["/audio/_rmc14/lobby/time_is_running_out.ogg"] = new("Time Is Running Out", "Nighty"),
+            ["/audio/_rmc14/lobby/dropzone.ogg"] = new("Dropzone", "Qwesta"),
+        };
+
         [Dependency] private readonly IConfigurationManager _cfg = default!;
-        [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
         [Dependency] private readonly IResourceCache _resourceCache = default!;
         [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly IVoteManager _voteManager = default!;
-        [Dependency] private readonly ClientsidePlaytimeTrackingManager _playtimeTracking = default!;
-
-        // RMC14
-        [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+        [Dependency] private readonly IRobustRandom _random = default!;
 
         private ClientGameTicker _gameTicker = default!;
-        private ContentAudioSystem _contentAudioSystem = default!;
+        private ContentAudioSystem _audioSystem = default!;
+        private float _lastRightPanelWidth = -1f;
+
+        private const float LobbyRightPanelMinRatio = 0.20f;
+        private const float LobbyRightPanelMaxRatio = 0.30f;
 
         protected override Type? LinkedScreenType { get; } = typeof(LobbyGui);
         public LobbyGui? Lobby;
+        private const float LobbyBackgroundRotationSeconds = 30f;
+        private string? _activeLobbyBackgroundPreset;
+        private string? _currentLobbyBackgroundPath;
+        private IReadOnlyList<string>? _presetBackgrounds;
+        private TimeSpan _nextLobbyBackgroundChange = TimeSpan.Zero;
+
+        private static readonly Dictionary<string, string[]> LobbyBackgroundPresets = new()
+        {
+            {
+                "console",
+                new[]
+                {
+                    "/Textures/_CCM14/Lobby/lobbytgmc_green.png",
+                    "/Textures/_CCM14/Lobby/lobbyweyland_green.png",
+                }
+            },
+            {
+                "community",
+                new[]
+                {
+                    "/Textures/_CCM14/Lobby/CCM_logo_lobby.png",
+                    "/Textures/_CCM14/Lobby/Letni_CCM.png",
+                    "/Textures/_CCM14/Lobby/CCM_New.png",
+                    "/Textures/_CCM14/Lobby/LobbyArt1.png",
+                    "/Textures/_CCM14/Lobby/LobbyArt3.png",
+                    "/Textures/_CCM14/Lobby/LobbyArt5.png",
+                    "/Textures/_CCM14/Lobby/LobbyArt6.png",
+                    "/Textures/_CCM14/Lobby/LobbyArt8.png",
+                    "/Textures/_CCM14/Lobby/LobbyArt9.png",
+                    "/Textures/_CCM14/Lobby/LobbyArt14.png",
+                }
+            },
+            {
+                "rmca",
+                new[]
+                {
+                    "/Textures/_RMC14/Lobby/good_hits.png",
+                    "/Textures/_RMC14/Lobby/running_from_ravager.png",
+                    "/Textures/_RMC14/Lobby/Judgment_Day.png",
+                    "/Textures/_RMC14/Lobby/WEYALobby.png",
+                    "/Textures/_RMC14/Lobby/APushTooFar.png",
+                    "/Textures/_RMC14/Lobby/LiquorCabinetsLastStand.png",
+                    "/Textures/_RMC14/Lobby/Intelligence.png",
+                    "/Textures/_RMC14/Lobby/Focus_Fire.png",
+                    "/Textures/_RMC14/Lobby/Eyes_Up.png",
+                    "/Textures/_RMC14/Lobby/Cornered.png",
+                    "/Textures/_RMC14/Lobby/Move_Out.png",
+                    "/Textures/_RMC14/Lobby/Lone_Medevac.png",
+                    "/Textures/_RMC14/Lobby/Fly_the_Friendly_Skies.png",
+                    "/Textures/_RMC14/Lobby/Battered.png",
+                    "/Textures/_RMC14/Lobby/MarineMajor.png",
+                    "/Textures/_RMC14/Lobby/smart_gun.png",
+                    "/Textures/_RMC14/Lobby/sisters.png",
+                    "/Textures/_RMC14/Lobby/only_you_shnee.png",
+                    "/Textures/_RMC14/Lobby/from_fobbiton_with_love.png",
+                    "/Textures/_RMC14/Lobby/PyrotechnicianXeno.png",
+                }
+            },
+        };
 
         protected override void Startup()
         {
@@ -52,39 +124,23 @@ namespace Content.Client.Lobby
 
             var chatController = _userInterfaceManager.GetUIController<ChatUIController>();
             _gameTicker = _entityManager.System<ClientGameTicker>();
-            _contentAudioSystem = _entityManager.System<ContentAudioSystem>();
-            _contentAudioSystem.LobbySoundtrackChanged += UpdateLobbySoundtrackInfo;
+            _audioSystem = _entityManager.System<ContentAudioSystem>();
 
             chatController.SetMainChat(true);
 
             _voteManager.SetPopupContainer(Lobby.VoteContainer);
             LayoutContainer.SetAnchorPreset(Lobby, LayoutContainer.LayoutPreset.Wide);
-
-            var lobbyNameCvar = _cfg.GetCVar(CCVars.ServerLobbyName);
-            var serverName = _baseClient.GameInfo?.ServerName ?? string.Empty;
-
-            Lobby.ServerName.Text = string.IsNullOrEmpty(lobbyNameCvar)
-                ? Loc.GetString("ui-lobby-title", ("serverName", serverName))
-                : lobbyNameCvar;
-
-            var width = _cfg.GetCVar(CCVars.ServerLobbyRightPanelWidth);
-            Lobby.RightSide.SetWidth = width;
+            UpdateRightPanelLayout();
 
             UpdateLobbyUi();
-
-            Lobby.CharacterPreview.CharacterSetupButton.OnPressed += OnSetupPressed;
-            Lobby.CharacterPreview.PatronPerks.OnPressed += OnPatronPerksPressed;
-            Lobby.ReadyButton.OnPressed += OnReadyPressed;
-            Lobby.ReadyButton.OnToggled += OnReadyToggled;
+            _cfg.OnValueChanged(RMCCVars.RMCLobbyBackgroundPreset, OnLobbyBackgroundPresetChanged, true);
+            _cfg.OnValueChanged(RMCCVars.RMCUIColorTheme, OnUiColorThemeChanged, false);
 
             _gameTicker.InfoBlobUpdated += UpdateLobbyUi;
             _gameTicker.LobbyStatusUpdated += LobbyStatusUpdated;
-            _gameTicker.LobbyLateJoinStatusUpdated += LobbyLateJoinStatusUpdated;
 
-            // RMC14
-            Lobby.JoinXenoButton.OnPressed += _ =>
-                _userInterfaceManager.GetUIController<RMCLobbyUIController>().OpenJoinXenoWindow();
-            Lobby.JoinXenoButton.AddStyleClass("OpenRight");
+            _audioSystem.LobbySoundtrackChanged += UpdateLobbySoundtrackInfo;
+            UpdateLobbySoundtrackInfo(new LobbySoundtrackChangedEvent(null));
         }
 
         protected override void Shutdown()
@@ -93,15 +149,11 @@ namespace Content.Client.Lobby
             chatController.SetMainChat(false);
             _gameTicker.InfoBlobUpdated -= UpdateLobbyUi;
             _gameTicker.LobbyStatusUpdated -= LobbyStatusUpdated;
-            _gameTicker.LobbyLateJoinStatusUpdated -= LobbyLateJoinStatusUpdated;
-            _contentAudioSystem.LobbySoundtrackChanged -= UpdateLobbySoundtrackInfo;
+            _audioSystem.LobbySoundtrackChanged -= UpdateLobbySoundtrackInfo;
+            _cfg.UnsubValueChanged(RMCCVars.RMCLobbyBackgroundPreset, OnLobbyBackgroundPresetChanged);
+            _cfg.UnsubValueChanged(RMCCVars.RMCUIColorTheme, OnUiColorThemeChanged);
 
             _voteManager.ClearPopupContainer();
-
-            Lobby!.CharacterPreview.CharacterSetupButton.OnPressed -= OnSetupPressed;
-            Lobby.CharacterPreview.PatronPerks.OnPressed -= OnPatronPerksPressed;
-            Lobby!.ReadyButton.OnPressed -= OnReadyPressed;
-            Lobby!.ReadyButton.OnToggled -= OnReadyToggled;
 
             Lobby = null;
         }
@@ -112,73 +164,70 @@ namespace Content.Client.Lobby
             Lobby?.SwitchState(state);
         }
 
-        private void OnSetupPressed(BaseButton.ButtonEventArgs args)
-        {
-            SetReady(false);
-            Lobby?.SwitchState(LobbyGui.LobbyGuiState.CharacterSetup);
-        }
-
-        private void OnPatronPerksPressed(BaseButton.ButtonEventArgs obj)
-        {
-            _userInterfaceManager.GetUIController<LinkAccountUIController>().TogglePatronPerksWindow();
-        }
-
-        private void OnReadyPressed(BaseButton.ButtonEventArgs args)
-        {
-            if (!_gameTicker.IsGameStarted)
-            {
-                return;
-            }
-
-            new LateJoinGui().OpenCentered();
-        }
-
-        private void OnReadyToggled(BaseButton.ButtonToggledEventArgs args)
-        {
-            SetReady(args.Pressed);
-        }
-
         public override void FrameUpdate(FrameEventArgs e)
         {
+            UpdateRightPanelLayout();
+            UpdateRoundCountdown();
+            UpdateLobbyBackgroundRotation();
             if (_gameTicker.IsGameStarted)
             {
-                Lobby!.StartTime.Text = string.Empty;
                 var roundTime = _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan);
                 Lobby!.StationTime.Text = Loc.GetString("lobby-state-player-status-round-time", ("hours", roundTime.Hours), ("minutes", roundTime.Minutes));
                 return;
             }
 
             Lobby!.StationTime.Text = Loc.GetString("lobby-state-player-status-round-not-started");
-            string text;
+        }
 
-            if (_gameTicker.Paused)
+        private void UpdateRightPanelLayout()
+        {
+            if (Lobby == null)
+                return;
+
+            var hostWidth = Lobby.Size.X;
+            if (hostWidth <= 1f)
+                return;
+
+            var uiScale = Lobby.RightSide.UIScale;
+            if (uiScale <= 0f)
+                uiScale = 1f;
+
+            var basePanelWidth = _cfg.GetCVar(CCVars.ServerLobbyRightPanelWidth);
+            var desiredWidth = (basePanelWidth / uiScale) * 0.88f;
+            desiredWidth = Math.Clamp(
+                desiredWidth,
+                hostWidth * LobbyRightPanelMinRatio,
+                hostWidth * LobbyRightPanelMaxRatio);
+            desiredWidth = MathF.Round(desiredWidth);
+
+            if (MathF.Abs(_lastRightPanelWidth - desiredWidth) < 0.5f)
+                return;
+
+            Lobby.RightSide.SetWidth = desiredWidth;
+            _lastRightPanelWidth = desiredWidth;
+        }
+
+        private void UpdateRoundCountdown()
+        {
+            if (Lobby == null)
+                return;
+
+            if (_gameTicker.IsGameStarted || _gameTicker.StartTime <= TimeSpan.Zero)
             {
-                text = Loc.GetString("lobby-state-paused");
-            }
-            else if (_gameTicker.StartTime < _gameTiming.CurTime)
-            {
-                Lobby!.StartTime.Text = Loc.GetString("lobby-state-soon");
+                Lobby.RoundStartTimer.Visible = false;
+                Lobby.RoundStartTimer.Text = string.Empty;
                 return;
             }
-            else
-            {
-                var difference = _gameTicker.StartTime - _gameTiming.CurTime;
-                var seconds = difference.TotalSeconds;
-                if (seconds < 0)
-                {
-                    text = Loc.GetString(seconds < -5 ? "lobby-state-right-now-question" : "lobby-state-right-now-confirmation");
-                }
-                else if (difference.TotalHours >= 1)
-                {
-                    text = $"{Math.Floor(difference.TotalHours)}:{difference.Minutes:D2}:{difference.Seconds:D2}";
-                }
-                else
-                {
-                    text = $"{difference.Minutes}:{difference.Seconds:D2}";
-                }
-            }
 
-            Lobby!.StartTime.Text = Loc.GetString("lobby-state-round-start-countdown-text", ("timeLeft", text));
+            var timeLeft = _gameTicker.StartTime - _gameTiming.CurTime;
+            if (timeLeft < TimeSpan.Zero)
+                timeLeft = TimeSpan.Zero;
+
+            var timeText = TextScreenSystem.TimeToString(timeLeft, getMilliseconds: false);
+            Lobby.RoundStartTimer.Text = _gameTicker.Paused
+                ? Loc.GetString("ui-lobby-round-start-paused")
+                : Loc.GetString("ui-lobby-round-start-timer", ("time", timeText));
+            Lobby.RoundStartTimer.Visible = true;
         }
 
         private void LobbyStatusUpdated()
@@ -187,116 +236,187 @@ namespace Content.Client.Lobby
             UpdateLobbyUi();
         }
 
-        private void LobbyLateJoinStatusUpdated()
+        private void OnLobbyBackgroundPresetChanged(string _preset)
         {
-            Lobby!.ReadyButton.Disabled = _gameTicker.DisallowedLateJoin;
+            UpdateLobbyBackground(true);
+        }
+
+        private void OnUiColorThemeChanged(string _theme)
+        {
+            UpdateLobbyBackground(true);
         }
 
         private void UpdateLobbyUi()
         {
-            Lobby!.CharacterPreview.PatronPerks.Visible = _linkAccount.CanViewPatronPerks();
-
-            if (_gameTicker.IsGameStarted)
-            {
-                Lobby!.ReadyButton.Text = Loc.GetString("lobby-state-ready-button-join-state");
-                Lobby!.ReadyButton.ToggleMode = false;
-                Lobby!.ReadyButton.Pressed = false;
-                Lobby!.ObserveButton.Disabled = false;
-
-                // RMC14
-                Lobby.ReadyButton.AddStyleClass("OpenLeft");
-                Lobby.JoinXenoButton.Visible = true;
-            }
-            else
-            {
-                Lobby!.StartTime.Text = string.Empty;
-                Lobby!.ReadyButton.Text = Loc.GetString(Lobby!.ReadyButton.Pressed ? "lobby-state-player-status-ready": "lobby-state-player-status-not-ready");
-                Lobby!.ReadyButton.ToggleMode = true;
-                Lobby!.ReadyButton.Disabled = false;
-                Lobby!.ReadyButton.Pressed = _gameTicker.AreWeReady;
-                Lobby!.ObserveButton.Disabled = true;
-
-                // RMC14
-                Lobby.ReadyButton.RemoveStyleClass("OpenLeft");
-                Lobby.JoinXenoButton.Visible = false;
-            }
-
             if (_gameTicker.ServerInfoBlob != null)
             {
                 Lobby!.ServerInfo.SetInfoBlob(_gameTicker.ServerInfoBlob);
             }
 
-            var minutesToday = _playtimeTracking.PlaytimeMinutesToday;
-            if (minutesToday > 60)
-            {
-                Lobby!.PlaytimeComment.Visible = false; // RMC14
-
-                var hoursToday = Math.Round(minutesToday / 60f, 1);
-
-                var chosenString = minutesToday switch
-                {
-                    < 180 => "lobby-state-playtime-comment-normal",
-                    < 360 => "lobby-state-playtime-comment-concerning",
-                    < 720 => "lobby-state-playtime-comment-grasstouchless",
-                    _ => "lobby-state-playtime-comment-selfdestructive"
-                };
-
-                Lobby.PlaytimeComment.SetMarkup(Loc.GetString(chosenString, ("hours", hoursToday)));
-            }
-            else
-                Lobby!.PlaytimeComment.Visible = false;
+            Lobby!.SetReadyState(_gameTicker.AreWeReady);
+            Lobby!.SetRoundState(_gameTicker.IsGameStarted);
         }
 
         private void UpdateLobbySoundtrackInfo(LobbySoundtrackChangedEvent ev)
         {
+            if (Lobby == null)
+                return;
+
             if (ev.SoundtrackFilename == null)
             {
-                Lobby!.LobbySong.SetMarkup(Loc.GetString("lobby-state-song-no-song-text"));
+                Lobby.LobbyMusicText.Text = Loc.GetString("ui-lobby-music-none");
+                return;
             }
-            else if (
-                ev.SoundtrackFilename != null
-                && _resourceCache.TryGetResource<AudioResource>(ev.SoundtrackFilename, out var lobbySongResource)
-                )
+
+            if (!TryGetLobbyTrackInfo(ev.SoundtrackFilename, out var track))
             {
-                var lobbyStream = lobbySongResource.AudioStream;
-
-                var title = string.IsNullOrEmpty(lobbyStream.Title)
-                    ? Loc.GetString("lobby-state-song-unknown-title")
-                    : lobbyStream.Title;
-
-                var artist = string.IsNullOrEmpty(lobbyStream.Artist)
-                    ? Loc.GetString("lobby-state-song-unknown-artist")
-                    : lobbyStream.Artist;
-
-                var markup = Loc.GetString("lobby-state-song-text",
-                    ("songTitle", title),
-                    ("songArtist", artist));
-
-                Lobby!.LobbySong.SetMarkup(markup);
+                var title = GetTrackTitleFromFilename(ev.SoundtrackFilename);
+                var author = Loc.GetString("ui-lobby-music-unknown");
+                Lobby.LobbyMusicText.Text = FormatLobbyMusicLine(title, author);
+                return;
             }
+
+            Lobby.LobbyMusicText.Text = FormatLobbyMusicLine(track.Title, track.Author);
+        }
+
+        private static bool TryGetLobbyTrackInfo(string filename, out LobbyTrackInfo info)
+        {
+            return LobbyTrackInfoMap.TryGetValue(filename.ToLowerInvariant(), out info);
+        }
+
+        private static string GetTrackTitleFromFilename(string filename)
+        {
+            var start = filename.LastIndexOf('/') + 1;
+            if (start < 0)
+                start = 0;
+            var end = filename.LastIndexOf('.');
+            if (end <= start)
+                end = filename.Length;
+            var name = filename.Substring(start, end - start);
+            return name.Replace('_', ' ');
+        }
+
+        private static string FormatLobbyMusicLine(string title, string author)
+        {
+            var line = Loc.GetString("ui-lobby-music-line", ("title", title), ("author", author));
+            if (line.Length <= 36 && title.Length <= 24 && author.Length <= 20)
+                return line;
+
+            return $"{title}{Environment.NewLine}— {author}";
         }
 
         private void UpdateLobbyBackground()
         {
-            if (_gameTicker.LobbyBackground != null)
-            {
-                Lobby!.Background.Texture = _resourceCache.GetResource<TextureResource>(_gameTicker.LobbyBackground );
-            }
-            else
-            {
-                Lobby!.Background.Texture = null;
-            }
-
+            UpdateLobbyBackground(false);
         }
 
-        private void SetReady(bool newReady)
+        private void UpdateLobbyBackground(bool force)
         {
-            if (_gameTicker.IsGameStarted)
+            if (Lobby == null)
+                return;
+
+            var preset = _cfg.GetCVar(RMCCVars.RMCLobbyBackgroundPreset);
+            var normalizedPreset = preset.ToLowerInvariant();
+            if (!string.Equals(_activeLobbyBackgroundPreset, normalizedPreset, StringComparison.Ordinal))
             {
+                _activeLobbyBackgroundPreset = normalizedPreset;
+                force = true;
+            }
+
+            if (TryGetPresetBackgrounds(normalizedPreset, out var backgrounds))
+            {
+                _presetBackgrounds = backgrounds;
+                if (force || _currentLobbyBackgroundPath == null)
+                    SetLobbyBackground(PickRandomPresetBackground());
+                ScheduleNextLobbyBackgroundChange();
                 return;
             }
 
-            _consoleHost.ExecuteCommand($"toggleready {newReady}");
+            _presetBackgrounds = null;
+            var serverBackground = _gameTicker.LobbyBackground;
+            if (force || !string.Equals(_currentLobbyBackgroundPath, serverBackground, StringComparison.OrdinalIgnoreCase))
+                SetLobbyBackground(serverBackground);
         }
+
+        private void UpdateLobbyBackgroundRotation()
+        {
+            if (Lobby == null || _presetBackgrounds == null)
+                return;
+
+            if (_gameTiming.CurTime < _nextLobbyBackgroundChange)
+                return;
+
+            SetLobbyBackground(PickRandomPresetBackground());
+            ScheduleNextLobbyBackgroundChange();
+        }
+
+        private void ScheduleNextLobbyBackgroundChange()
+        {
+            _nextLobbyBackgroundChange = _gameTiming.CurTime + TimeSpan.FromSeconds(LobbyBackgroundRotationSeconds);
+        }
+
+        private string? PickRandomPresetBackground()
+        {
+            var backgrounds = _presetBackgrounds;
+            if (backgrounds == null || backgrounds.Count == 0)
+                return null;
+
+            if (backgrounds.Count == 1)
+                return backgrounds[0];
+
+            var current = _currentLobbyBackgroundPath;
+            var candidates = backgrounds.Where(path => !string.Equals(path, current, StringComparison.OrdinalIgnoreCase)).ToArray();
+            return _random.Pick(candidates.Length > 0 ? candidates : backgrounds);
+        }
+
+        private void SetLobbyBackground(string? path)
+        {
+            if (Lobby == null)
+                return;
+
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                Lobby.Background.Texture = null;
+                _currentLobbyBackgroundPath = null;
+                return;
+            }
+
+            Lobby.Background.Texture = _resourceCache.GetResource<TextureResource>(path);
+            _currentLobbyBackgroundPath = path;
+        }
+
+        private static bool TryGetPresetBackgrounds(string preset, out string[] backgrounds)
+        {
+            if (string.Equals(preset, "console", StringComparison.Ordinal))
+            {
+                backgrounds = GetConsoleBackgroundsForTheme();
+                return true;
+            }
+
+            if (LobbyBackgroundPresets.TryGetValue(preset, out var value))
+            {
+                backgrounds = value;
+                return true;
+            }
+
+            backgrounds = Array.Empty<string>();
+            return false;
+        }
+
+        private static string[] GetConsoleBackgroundsForTheme()
+        {
+            return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                ? new[]
+                {
+                    "/Textures/_CCM14/Lobby/lobbytgmc_blue.png",
+                    "/Textures/_CCM14/Lobby/lobbyweyland_blue.png",
+                }
+                : new[]
+                {
+                    "/Textures/_CCM14/Lobby/lobbytgmc_green.png",
+                    "/Textures/_CCM14/Lobby/lobbyweyland_green.png",
+                };
+        }
+
     }
 }

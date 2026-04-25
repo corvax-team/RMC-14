@@ -9,7 +9,7 @@ using Robust.Shared.Utility;
 namespace Content.Client.Instruments.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class ChannelsMenu : DefaultWindow
+public sealed partial class ChannelsMenu : DefaultCMWindow
 {
     [Dependency] private readonly IEntityManager _entityManager = null!;
 
@@ -151,3 +151,4 @@ public sealed partial class ChannelsMenu : DefaultWindow
         }
     }
 }
+

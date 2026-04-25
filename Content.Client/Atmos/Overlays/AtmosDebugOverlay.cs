@@ -40,7 +40,7 @@ public sealed class AtmosDebugOverlay : Overlay
         _system = system;
         _transform = _entManager.System<SharedTransformSystem>();
         _map = _entManager.System<SharedMapSystem>();
-        _font = _cache.GetFont("/Fonts/NotoSans/NotoSans-Regular.ttf", 12);
+        _font = _cache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 12);
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -276,3 +276,5 @@ public sealed class AtmosDebugOverlay : Overlay
         });
     }
 }
+
+

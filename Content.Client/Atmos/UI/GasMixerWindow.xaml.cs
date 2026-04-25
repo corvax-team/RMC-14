@@ -19,7 +19,7 @@ namespace Content.Client.Atmos.UI
     /// Client-side UI used to control a gas mixer.
     /// </summary>
     [GenerateTypedNameReferences]
-    public sealed partial class GasMixerWindow : DefaultWindow
+    public sealed partial class GasMixerWindow : DefaultCMWindow
     {
         public bool MixerStatus = true;
 
@@ -95,3 +95,4 @@ namespace Content.Client.Atmos.UI
         }
     }
 }
+

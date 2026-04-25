@@ -1,71 +1,48 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json;
 using Content.Server.Database;
+using Content.Shared.CCVar;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.LinkAccount;
 using Robust.Server.Player;
+using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Color = System.Drawing.Color;
 
 namespace Content.Server._RMC14.LinkAccount;
 
 public sealed class LinkAccountManager : IPostInjectInit
 {
-    [Dependency] private readonly IServerDbManager _db = default!;
+    [Dependency] private readonly ILogManager _log = default!;
+    [Dependency] private readonly INetConfigurationManager _config = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserDbDataManager _userDb = default!;
 
+    private ISawmill _sawmill = default!;
     private readonly Dictionary<NetUserId, TimeSpan> _lastRequest = new();
     private readonly TimeSpan _minimumWait = TimeSpan.FromSeconds(0.5);
     private readonly Dictionary<NetUserId, SharedRMCPatronFull> _connected = new();
     private readonly Dictionary<NetUserId, SharedRMCPatron> _allPatrons = [];
     private readonly HashSet<Guid> _figurines = [];
+    private static readonly JsonSerializerOptions StateJsonOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+    };
 
     public event Action? PatronsReloaded;
     public event Action<(NetUserId Id, SharedRMCPatronFull Patron)>? PatronUpdated;
 
     private async Task LoadData(ICommonSession player, CancellationToken cancel)
     {
-        var patron = await _db.GetPatron(player.UserId, cancel);
-        var linked = await _db.HasLinkedAccount(player.UserId, cancel);
         cancel.ThrowIfCancellationRequested();
-
-        var tier = patron?.Tier;
-        var sharedTier = tier == null
-            ? null
-            : new SharedRMCPatronTier(
-                tier.ShowOnCredits,
-                tier.GhostColor,
-                tier.NamedItems,
-                tier.Figurines,
-                tier.LobbyMessage,
-                tier.RoundEndShoutout,
-                tier.Name
-            );
-
-        SharedRMCLobbyMessage? lobbyMessage = null;
-        if (patron?.LobbyMessage is { Message.Length: > 0 } patronMsg)
-            lobbyMessage = new SharedRMCLobbyMessage(patronMsg.Message);
-
-        var marineName = patron?.RoundEndMarineShoutout?.Name;
-        var xenoName = patron?.RoundEndXenoShoutout?.Name;
-        SharedRMCRoundEndShoutouts? shoutouts = null;
-        if (marineName != null || xenoName != null)
-            shoutouts = new SharedRMCRoundEndShoutouts(marineName, xenoName);
-
-        Robust.Shared.Maths.Color? ghostColor = null;
-        if (patron?.GhostColor is { } patronColor)
-        {
-            var sysColor = Color.FromArgb(patronColor);
-            ghostColor = new Robust.Shared.Maths.Color(sysColor.R, sysColor.G, sysColor.B, sysColor.A);
-        }
-
-        _connected[player.UserId] = new SharedRMCPatronFull(sharedTier, linked, ghostColor, lobbyMessage, shoutouts);
+        await RefreshConnected(player.UserId, cancel);
     }
 
     private void FinishLoad(ICommonSession player)
@@ -81,8 +58,7 @@ public sealed class LinkAccountManager : IPostInjectInit
     private void SendPatronStatus(ICommonSession player)
     {
         var connected = _connected.GetValueOrDefault(player.UserId);
-        var msg = new LinkAccountStatusMsg { Patron = connected, };
-        _net.ServerSendMessage(msg, player.Channel);
+        _net.ServerSendMessage(new LinkAccountStatusMsg { Patron = connected }, player.Channel);
         SendPatrons(player);
     }
 
@@ -94,115 +70,98 @@ public sealed class LinkAccountManager : IPostInjectInit
 
     private void OnRequest(LinkAccountRequestMsg message)
     {
-        var user = message.MsgChannel.UserId;
+        _net.ServerSendMessage(new LinkAccountCodeMsg { Code = Guid.Empty }, message.MsgChannel);
+    }
+
+    private void OnDiscordOAuthLinkRequest(RMCDiscordOAuthLinkRequestMsg message)
+    {
         var time = _timing.RealTime;
-        if (_lastRequest.TryGetValue(user, out var last) &&
+        var userId = message.MsgChannel.UserId;
+        if (_lastRequest.TryGetValue(userId, out var last) &&
             last + _minimumWait > time)
         {
             return;
         }
 
-        _lastRequest[user] = time;
+        _lastRequest[userId] = time;
 
-        var code = Guid.NewGuid();
-        _db.SetLinkingCode(user, code);
-
-        var response = new LinkAccountCodeMsg { Code = code };
-        _net.ServerSendMessage(response, message.MsgChannel);
+        try
+        {
+            var url = BuildDiscordOAuthLink(message);
+            _net.ServerSendMessage(new RMCDiscordOAuthLinkMsg { Url = url }, message.MsgChannel);
+        }
+        catch (Exception e)
+        {
+            _sawmill.Error($"Failed to generate Discord OAuth link:\n{e}");
+            _net.ServerSendMessage(new RMCDiscordOAuthLinkMsg { Error = "oauth-link-failed" }, message.MsgChannel);
+        }
     }
 
-    private void OnClearGhostColor(RMCClearGhostColorMsg message)
+    private async void OnClearGhostColor(RMCClearGhostColorMsg message)
     {
-        SetGhostColor(message.MsgChannel.UserId, null);
+        await RunLogged(async () =>
+        {
+            await _db.SetGhostColor(message.MsgChannel.UserId.UserId, null);
+            await RefreshAndSend(message.MsgChannel.UserId);
+        });
     }
 
-    private void OnChangeGhostColor(RMCChangeGhostColorMsg message)
+    private async void OnChangeGhostColor(RMCChangeGhostColorMsg message)
     {
-        SetGhostColor(message.MsgChannel.UserId, message.Color);
+        await RunLogged(async () =>
+        {
+            await _db.SetGhostColor(message.MsgChannel.UserId.UserId, System.Drawing.Color.FromArgb(message.Color.ToArgb()));
+            await RefreshAndSend(message.MsgChannel.UserId);
+        });
     }
 
-    private void OnChangeLobbyMessage(RMCChangeLobbyMessageMsg message)
+    private async void OnChangeLobbyMessage(RMCChangeLobbyMessageMsg message)
     {
-        var text = message.Text;
-        if (text == null)
-            return;
+        await RunLogged(async () =>
+        {
+            var text = message.Text ?? string.Empty;
+            if (text.Length > SharedRMCLobbyMessage.CharacterLimit)
+                text = text[..SharedRMCLobbyMessage.CharacterLimit];
 
-        var user = message.MsgChannel.UserId;
-        if (GetConnectedPatron(user)?.Tier is not { LobbyMessage: true })
-            return;
-
-        if (text.Length > SharedRMCLobbyMessage.CharacterLimit)
-            text = text[..SharedRMCLobbyMessage.CharacterLimit];
-
-        _db.SetLobbyMessage(user, text);
-        OnPatronUpdated(user, p => p with { LobbyMessage = new SharedRMCLobbyMessage(text) });
+            await _db.SetLobbyMessage(message.MsgChannel.UserId.UserId, text);
+            await RefreshAndSend(message.MsgChannel.UserId);
+        });
     }
 
-    private void OnChangeMarineShoutout(RMCChangeMarineShoutoutMsg message)
+    private async void OnChangeMarineShoutout(RMCChangeMarineShoutoutMsg message)
     {
-        var name = message.Name;
-        if (name == null)
-            return;
+        await RunLogged(async () =>
+        {
+            var name = message.Name ?? string.Empty;
+            if (name.Length > SharedRMCRoundEndShoutouts.CharacterLimit)
+                name = name[..SharedRMCRoundEndShoutouts.CharacterLimit];
 
-        var user = message.MsgChannel.UserId;
-        if (GetConnectedPatron(user)?.Tier is not { RoundEndShoutout: true })
-            return;
-
-        if (name.Length > SharedRMCRoundEndShoutouts.CharacterLimit)
-            name = name[..SharedRMCRoundEndShoutouts.CharacterLimit];
-
-        _db.SetMarineShoutout(user, name);
-        OnPatronUpdated(user, p => p with { RoundEndShoutout = new SharedRMCRoundEndShoutouts(name, p.RoundEndShoutout?.Xeno) });
+            await _db.SetMarineShoutout(message.MsgChannel.UserId.UserId, name);
+            await RefreshAndSend(message.MsgChannel.UserId);
+        });
     }
 
-    private void OnChangeXenoShoutout(RMCChangeXenoShoutoutMsg message)
+    private async void OnChangeXenoShoutout(RMCChangeXenoShoutoutMsg message)
     {
-        var name = message.Name;
-        if (name == null)
-            return;
+        await RunLogged(async () =>
+        {
+            var name = message.Name ?? string.Empty;
+            if (name.Length > SharedRMCRoundEndShoutouts.CharacterLimit)
+                name = name[..SharedRMCRoundEndShoutouts.CharacterLimit];
 
-        var user = message.MsgChannel.UserId;
-        if (GetConnectedPatron(user)?.Tier is not { RoundEndShoutout: true })
-            return;
-
-        if (name.Length > SharedRMCRoundEndShoutouts.CharacterLimit)
-            name = name[..SharedRMCRoundEndShoutouts.CharacterLimit];
-
-        _db.SetXenoShoutout(user, name);
-        OnPatronUpdated(user, p => p with { RoundEndShoutout = new SharedRMCRoundEndShoutouts(p.RoundEndShoutout?.Marine, name) });
-    }
-
-    private void SetGhostColor(NetUserId user, Robust.Shared.Maths.Color? color)
-    {
-        if (GetConnectedPatron(user)?.Tier is not { GhostColor: true })
-            return;
-
-        Color? sysColor = color == null ? null : Color.FromArgb(color.Value.ToArgb());
-        _db.SetGhostColor(user, sysColor);
-        OnPatronUpdated(user, p => p with { GhostColor = color });
-    }
-
-    private void OnPatronUpdated(NetUserId user, Func<SharedRMCPatronFull, SharedRMCPatronFull> action)
-    {
-        if (!_connected.TryGetValue(user, out var connected))
-            return;
-
-        connected = action(connected);
-        _connected[user] = connected;
-        PatronUpdated?.Invoke((user, connected));
-        SendPatronStatus(user);
+            await _db.SetXenoShoutout(message.MsgChannel.UserId.UserId, name);
+            await RefreshAndSend(message.MsgChannel.UserId);
+        });
     }
 
     public async Task RefreshAllPatrons()
     {
-        var patrons = await _db.GetAllPatrons();
-
         _allPatrons.Clear();
         _figurines.Clear();
+        var patrons = await _db.GetAllPatrons();
         foreach (var patron in patrons)
         {
-            _allPatrons[new NetUserId(patron.PlayerId)] = new SharedRMCPatron(patron.Player.LastSeenUserName, patron.Tier.Name);
-
+            _allPatrons[new NetUserId(patron.PlayerId)] = ToSharedPatron(patron);
             if (patron.Tier.Figurines)
                 _figurines.Add(patron.PlayerId);
         }
@@ -212,14 +171,12 @@ public sealed class LinkAccountManager : IPostInjectInit
 
     public void SendPatronsToAll()
     {
-        var msg = new RMCPatronListMsg { Patrons = _allPatrons.Values.ToList() };
-        _net.ServerSendToAll(msg);
+        _net.ServerSendToAll(new RMCPatronListMsg { Patrons = [.. _allPatrons.Values] });
     }
 
     private void SendPatrons(ICommonSession player)
     {
-        var msg = new RMCPatronListMsg { Patrons = _allPatrons.Values.ToList() };
-        _net.ServerSendMessage(msg, player.Channel);
+        _net.ServerSendMessage(new RMCPatronListMsg { Patrons = [.. _allPatrons.Values] }, player.Channel);
     }
 
     public SharedRMCPatronFull? GetConnectedPatron(ICommonSession player)
@@ -232,7 +189,7 @@ public sealed class LinkAccountManager : IPostInjectInit
         return _connected.GetValueOrDefault(userId);
     }
 
-    public bool TryGetPatron(NetUserId userId, [NotNullWhen(true)] out SharedRMCPatron? tier)
+    public bool TryGetPatron(NetUserId userId, out SharedRMCPatron? tier)
     {
         return _allPatrons.TryGetValue(userId, out tier);
     }
@@ -244,18 +201,119 @@ public sealed class LinkAccountManager : IPostInjectInit
 
     public string GetPatronOOCHexColor(NetUserId userId)
     {
-        // TODO RMC14 move this to the database
-        if (userId.UserId == Guid.Parse("518fe396-b199-4757-92ff-697fc527bbf1"))
-            return "#FFFFFF";
-
-        return "#aa00ff";
+        return "#FFFFFF";
     }
+
+    private async Task RefreshAndSend(NetUserId userId)
+    {
+        await RefreshConnected(userId, CancellationToken.None);
+        SendPatronStatus(userId);
+    }
+
+    private async Task RunLogged(Func<Task> task)
+    {
+        try
+        {
+            await task();
+        }
+        catch (Exception e)
+        {
+            _sawmill.Error($"Failed to update Discord account data:\n{e}");
+        }
+    }
+
+    private async Task RefreshConnected(NetUserId userId, CancellationToken cancel)
+    {
+        var linked = await _db.HasLinkedAccount(userId.UserId, cancel);
+        var patron = await _db.GetPatron(userId.UserId, cancel);
+        _connected[userId] = ToSharedPatronFull(linked, patron);
+    }
+
+    private static SharedRMCPatronFull ToSharedPatronFull(bool linked, RMCPatron? patron)
+    {
+        var tier = patron?.Tier == null
+            ? null
+            : new SharedRMCPatronTier(
+                patron.Tier.ShowOnCredits,
+                patron.Tier.GhostColor,
+                patron.Tier.NamedItems,
+                patron.Tier.Figurines,
+                patron.Tier.LobbyMessage,
+                patron.Tier.RoundEndShoutout,
+                patron.Tier.Name);
+
+        Color? ghostColor = patron?.GhostColor == null
+            ? null
+            : System.Drawing.Color.FromArgb(patron.GhostColor.Value);
+
+        var lobbyMessage = patron?.LobbyMessage?.Message == null
+            ? null
+            : new SharedRMCLobbyMessage(patron.LobbyMessage.Message);
+
+        SharedRMCRoundEndShoutouts? shoutouts = null;
+        if (patron?.RoundEndMarineShoutout != null || patron?.RoundEndXenoShoutout != null)
+        {
+            shoutouts = new SharedRMCRoundEndShoutouts(
+                patron.RoundEndMarineShoutout?.Name,
+                patron.RoundEndXenoShoutout?.Name);
+        }
+
+        return new SharedRMCPatronFull(tier, linked, ghostColor, lobbyMessage, shoutouts);
+    }
+
+    private static SharedRMCPatron ToSharedPatron(RMCPatron patron)
+    {
+        return new SharedRMCPatron(patron.Player.LastSeenUserName, patron.Tier.Name);
+    }
+
+    private string BuildDiscordOAuthLink(RMCDiscordOAuthLinkRequestMsg message)
+    {
+        var baseUrl = _config.GetCVar(RMCCVars.RMCDiscordOAuthBaseUrl).Trim().TrimEnd('/');
+        if (string.IsNullOrWhiteSpace(baseUrl))
+            throw new InvalidOperationException($"{RMCCVars.RMCDiscordOAuthBaseUrl.Name} is not configured.");
+
+        var secret = _config.GetCVar(RMCCVars.RMCDiscordOAuthStateSecret);
+        if (string.IsNullOrWhiteSpace(secret))
+            throw new InvalidOperationException($"{RMCCVars.RMCDiscordOAuthStateSecret.Name} is not configured.");
+
+        var lifetime = Math.Max(30, _config.GetCVar(RMCCVars.RMCDiscordOAuthStateLifetimeSeconds));
+        var locale = _config.GetClientCVar(message.MsgChannel, CCVars.ClientLocale);
+        var payload = new DiscordOAuthStatePayload(
+            message.MsgChannel.UserId.UserId,
+            DateTimeOffset.UtcNow.AddSeconds(lifetime).ToUnixTimeSeconds(),
+            Base64UrlEncode(RandomNumberGenerator.GetBytes(16)),
+            locale);
+
+        var payloadJson = JsonSerializer.Serialize(payload, StateJsonOptions);
+        var payloadBase64 = Base64UrlEncode(Encoding.UTF8.GetBytes(payloadJson));
+        byte[] signature;
+        using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(secret)))
+        {
+            signature = hmac.ComputeHash(Encoding.UTF8.GetBytes(payloadBase64));
+        }
+
+        var state = $"{payloadBase64}.{Base64UrlEncode(signature)}";
+        return $"{baseUrl}/auth/login?state={Uri.EscapeDataString(state)}";
+    }
+
+    private static string Base64UrlEncode(byte[] bytes)
+    {
+        return Convert.ToBase64String(bytes)
+            .TrimEnd('=')
+            .Replace('+', '-')
+            .Replace('/', '_');
+    }
+
+    private sealed record DiscordOAuthStatePayload(Guid PlayerId, long Expires, string Nonce, string Locale);
 
     void IPostInjectInit.PostInject()
     {
+        _sawmill = _log.GetSawmill("rmc.link_account");
         _net.RegisterNetMessage<LinkAccountRequestMsg>(OnRequest);
         _net.RegisterNetMessage<LinkAccountCodeMsg>();
         _net.RegisterNetMessage<LinkAccountStatusMsg>();
+        _net.RegisterNetMessage<RMCDiscordOAuthLinkRequestMsg>(OnDiscordOAuthLinkRequest);
+        _net.RegisterNetMessage<RMCDiscordOAuthLinkMsg>();
         _net.RegisterNetMessage<RMCPatronListMsg>();
         _net.RegisterNetMessage<RMCClearGhostColorMsg>(OnClearGhostColor);
         _net.RegisterNetMessage<RMCChangeGhostColorMsg>(OnChangeGhostColor);

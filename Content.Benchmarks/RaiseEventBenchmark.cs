@@ -1,4 +1,5 @@
-﻿#nullable enable
+﻿// CM14 rework: non-RMC edit marker.
+#nullable enable
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
@@ -19,7 +20,6 @@ public class RaiseEventBenchmark
     [GlobalSetup]
     public void Setup()
     {
-        ProgramShared.PathOffset = "../../../../";
         PoolManager.Startup(typeof(BenchSystem).Assembly);
         _pair = PoolManager.GetServerClient().GetAwaiter().GetResult();
         var entMan = _pair.Server.EntMan;

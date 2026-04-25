@@ -107,12 +107,12 @@ public sealed class StationJobsTest
         await server.WaitAssertion(() =>
         {
             var fakePlayers = new Dictionary<NetUserId, HumanoidCharacterProfile>()
-                .AddJob("TAssistant", JobPriority.Medium, PlayerCount)
-                .AddPreference("TClown", JobPriority.Low)
-                .AddPreference("TMime", JobPriority.High)
+                .AddJob("TAssistant", JobPriority.Second, PlayerCount)
+                .AddPreference("TClown", JobPriority.Second)
+                .AddPreference("TMime", JobPriority.First)
                 .WithPlayers(
                     new Dictionary<NetUserId, HumanoidCharacterProfile>()
-                    .AddJob("TCaptain", JobPriority.High, CaptainCount)
+                    .AddJob("TCaptain", JobPriority.First, CaptainCount)
                 );
             Assert.That(fakePlayers, Is.Not.Empty);
 
@@ -254,7 +254,7 @@ public sealed class StationJobsTest
 internal static class JobExtensions
 {
     public static Dictionary<NetUserId, HumanoidCharacterProfile> AddJob(
-        this Dictionary<NetUserId, HumanoidCharacterProfile> inp, string jobId, JobPriority prio = JobPriority.Medium,
+        this Dictionary<NetUserId, HumanoidCharacterProfile> inp, string jobId, JobPriority prio = JobPriority.Second,
         int amount = 1)
     {
         for (var i = 0; i < amount; i++)
@@ -266,7 +266,7 @@ internal static class JobExtensions
     }
 
     public static Dictionary<NetUserId, HumanoidCharacterProfile> AddPreference(
-        this Dictionary<NetUserId, HumanoidCharacterProfile> inp, string jobId, JobPriority prio = JobPriority.Medium)
+        this Dictionary<NetUserId, HumanoidCharacterProfile> inp, string jobId, JobPriority prio = JobPriority.Second)
     {
         return inp.ToDictionary(x => x.Key, x => x.Value.WithJobPriority(jobId, prio));
     }
@@ -278,3 +278,5 @@ internal static class JobExtensions
         return new[] { inp, second }.SelectMany(x => x).ToDictionary(x => x.Key, x => x.Value);
     }
 }
+
+// # CCM priority rework

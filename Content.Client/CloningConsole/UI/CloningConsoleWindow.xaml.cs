@@ -7,7 +7,7 @@ using Content.Shared.Cloning.CloningConsole;
 namespace Content.Client.CloningConsole.UI
 {
     [GenerateTypedNameReferences]
-    public sealed partial class CloningConsoleWindow : DefaultWindow
+    public sealed partial class CloningConsoleWindow : DefaultCMWindow
     {
         public CloningConsoleWindow()
         {
@@ -104,3 +104,4 @@ namespace Content.Client.CloningConsole.UI
         }
     }
 }
+

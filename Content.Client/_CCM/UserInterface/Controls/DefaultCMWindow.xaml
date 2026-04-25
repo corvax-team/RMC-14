@@ -1,0 +1,22 @@
+﻿<!-- CM14 rework: non-RMC edit marker. -->
+<ccm:DefaultCMWindow xmlns="https://spacestation14.io"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
+                     x:Class="Content.Client._CCM.UserInterface.Controls.DefaultCMWindow"
+                     MinWidth="100" MinHeight="50">
+    <PanelContainer StyleClasses="CMWindowFrame" />
+    <BoxContainer Orientation="Vertical" SeparationOverride="0">
+        <PanelContainer Name="WindowHeader" StyleClasses="windowHeader" Margin="10 10 10 0">
+            <BoxContainer Orientation="Horizontal" Margin="0 0 0 0">
+                <Control HorizontalExpand="True">
+                    <Label Margin="5 0 0 0" HorizontalExpand="true" Name="TitleLabel" ClipText="True"
+                           Text="{Loc 'defaultwindow-placeholder-title'}" VAlign="Center" StyleClasses="windowTitle" />
+                </Control>
+                <TextureButton Name="CloseButton" StyleClasses="windowCloseButton" VerticalAlignment="Center" />
+            </BoxContainer>
+        </PanelContainer>
+        <PanelContainer Name="ContentsBackground" StyleClasses="CMWindowBodyBackground" Margin="10" RectClipContent="True" VerticalExpand="true">
+            <Control Name="ContentsContainer" />
+        </PanelContainer>
+    </BoxContainer>
+</ccm:DefaultCMWindow>
