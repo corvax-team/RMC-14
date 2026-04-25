@@ -37,10 +37,9 @@ using Content.Shared._RMC14.Marines.Skills;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-public sealed class HardpointSystem : EntitySystem
+public sealed partial class HardpointSystem : EntitySystem
 {
     private static readonly EntProtoId<SkillDefinitionComponent> EngineerSkill = "RMCSkillEngineer";
-
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly Content.Shared.Vehicle.VehicleSystem _vehicles = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -60,7 +59,7 @@ public sealed class HardpointSystem : EntitySystem
     [Dependency] private readonly SharedExplosionSystem _explosion = default!;
     [Dependency] private readonly VehicleTopologySystem _topology = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!; // CCM14
 
     public override void Initialize()
     {
@@ -95,7 +94,8 @@ public sealed class HardpointSystem : EntitySystem
         if (!TryGetSlot(ent.Comp, args.Container.ID, out var slot))
             return;
 
-        ent.Comp.PendingRemovals.Clear();
+        var state = EnsureState(ent.Owner);
+        state.PendingRemovals.Clear();
 
         if (!IsValidHardpoint(args.Entity, ent.Comp, slot))
         {
@@ -105,7 +105,7 @@ public sealed class HardpointSystem : EntitySystem
             return;
         }
 
-        ent.Comp.LastUiError = null;
+        state.LastUiError = null;
 
         if (TryComp(args.Entity, out GunComponent? gun))
             _guns.RefreshModifiers((args.Entity, gun));
@@ -114,7 +114,7 @@ public sealed class HardpointSystem : EntitySystem
         RefreshSupportModifiers(ent.Owner);
 
         RefreshCanRun(ent.Owner);
-        UpdateHardpointUi(ent.Owner, ent.Comp);
+        UpdateHardpointUi(ent.Owner, ent.Comp, state: state);
         UpdateContainingVehicleUi(ent.Owner);
         RaiseHardpointSlotsChanged(ent.Owner);
         RaiseVehicleSlotsChanged(ent.Owner);
@@ -125,13 +125,14 @@ public sealed class HardpointSystem : EntitySystem
         if (!TryGetSlot(ent.Comp, args.Container.ID, out _))
             return;
 
+        var state = EnsureState(ent.Owner);
         ApplyArmorHardpointModifiers(ent.Owner, args.Entity, adding: false);
         RefreshSupportModifiers(ent.Owner);
 
-        ent.Comp.LastUiError = null;
+        state.LastUiError = null;
         RefreshCanRun(ent.Owner);
-        ent.Comp.PendingRemovals.Remove(args.Container.ID);
-        UpdateHardpointUi(ent.Owner, ent.Comp);
+        state.PendingRemovals.Remove(args.Container.ID);
+        UpdateHardpointUi(ent.Owner, ent.Comp, state: state);
         UpdateContainingVehicleUi(ent.Owner);
         RaiseHardpointSlotsChanged(ent.Owner);
         RaiseVehicleSlotsChanged(ent.Owner);
@@ -398,6 +399,7 @@ public sealed class HardpointSystem : EntitySystem
         if (component.Slots.Count == 0)
             return;
 
+        EnsureState(uid);
         itemSlots ??= EnsureComp<ItemSlotsComponent>(uid);
 
         foreach (var slot in component.Slots)
@@ -533,6 +535,10 @@ public sealed class HardpointSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        var incomingMultiplier = GetVehicleIncomingDamageMultiplier(args.Origin, args.Tool);
+        if (incomingMultiplier > 1f)
+            args.Damage = ScaleDamage(args.Damage, incomingMultiplier);
+
         var totalDamage = args.Damage.GetTotal().Float();
         if (totalDamage <= 0f)
             return;
@@ -559,6 +565,7 @@ public sealed class HardpointSystem : EntitySystem
         {
             var frameDamage = ScaleDamage(args.Damage, hullFraction);
             var frameAmount = GetVehicleFrameDamageAmount(ent.Owner, frameDamage);
+
             if (frameAmount > 0f)
                 DamageHardpoint(ent.Owner, ent.Owner, frameAmount, frameIntegrity);
         }
@@ -592,11 +599,32 @@ public sealed class HardpointSystem : EntitySystem
 
         foreach (var occupant in toDamage)
         {
-            if (TerminatingOrDeleted(occupant))
-                continue;
-
             _damageable.TryChangeDamage(occupant, damage * _damageable.UniversalExplosionDamageModifier, ignoreResistances: true);
         }
+    }
+
+    private float GetVehicleIncomingDamageMultiplier(EntityUid? origin, EntityUid? tool)
+    {
+        var multiplier = 1f;
+
+        if (TryGetVehicleDamageMultiplier(origin, out var originMultiplier))
+            multiplier = MathF.Max(multiplier, originMultiplier);
+
+        if (TryGetVehicleDamageMultiplier(tool, out var toolMultiplier))
+            multiplier = MathF.Max(multiplier, toolMultiplier);
+
+        return multiplier;
+    }
+
+    private bool TryGetVehicleDamageMultiplier(EntityUid? source, out float multiplier)
+    {
+        multiplier = 1f;
+
+        if (source == null || !TryComp<VehicleDamageMultiplierComponent>(source.Value, out var vehicleDamage))
+            return false;
+
+        multiplier = MathF.Max(vehicleDamage.Multiplier, 0f);
+        return multiplier > 0f;
     }
 
     private void CollectIntactTopLevelHardpoints(
@@ -677,6 +705,7 @@ public sealed class HardpointSystem : EntitySystem
     private void ApplyDamageToHardpoint(EntityUid vehicle, EntityUid hardpoint, HardpointIntegrityComponent integrity, DamageSpecifier damage)
     {
         var amount = GetHardpointDamageAmount(hardpoint, damage);
+
         if (amount <= 0f)
             return;
 
@@ -685,18 +714,23 @@ public sealed class HardpointSystem : EntitySystem
 
     private float GetHardpointDamageAmount(EntityUid hardpoint, DamageSpecifier damage)
     {
-        var total = MathF.Max(damage.GetTotal().Float(), 0f);
+        var modifiedTotal = MathF.Max(damage.GetTotal().Float(), 0f);
         var modifierSets = new List<DamageModifierSet>();
         CollectHardpointDamageModifierSets(hardpoint, modifierSets);
 
         if (modifierSets.Count > 0)
         {
             var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage, modifierSets);
-            total = MathF.Max(modifiedDamage.GetTotal().Float(), 0f);
+            modifiedTotal = MathF.Max(modifiedDamage.GetTotal().Float(), 0f);
         }
 
+        var total = modifiedTotal;
+        var damageMultiplier = 1f;
         if (TryComp<HardpointItemComponent>(hardpoint, out var hardpointItem))
-            total *= MathF.Max(hardpointItem.DamageMultiplier, 0f);
+        {
+            damageMultiplier = MathF.Max(hardpointItem.DamageMultiplier, 0f);
+            total *= damageMultiplier;
+        }
 
         return total;
     }
@@ -752,6 +786,15 @@ public sealed class HardpointSystem : EntitySystem
     {
         var current = ent.Comp.Integrity;
         var max = ent.Comp.MaxIntegrity;
+        if (TryComp(ent.Owner, out VehicleComponent? _) &&
+            TryComp(ent.Owner, out HardpointSlotsComponent? slots) &&
+            TryComp(ent.Owner, out ItemSlotsComponent? itemSlots) &&
+            TryGetVehicleEffectiveIntegrity(ent.Owner, ent.Comp, slots, itemSlots, out var effectiveCurrent, out var effectiveMax))
+        {
+            current = effectiveCurrent;
+            max = effectiveMax;
+        }
+
         var percent = max > 0f ? current / max : 0f;
 
         if (HasComp<XenoComponent>(args.Examiner))
@@ -811,6 +854,66 @@ public sealed class HardpointSystem : EntitySystem
         }
 
         return true;
+    }
+
+    private bool TryGetVehicleEffectiveIntegrity(
+        EntityUid vehicle,
+        HardpointIntegrityComponent frame,
+        HardpointSlotsComponent slots,
+        ItemSlotsComponent itemSlots,
+        out float current,
+        out float max)
+    {
+        current = frame.Integrity;
+        max = frame.MaxIntegrity;
+        var maxTopLevelCurrent = 0f;
+        var maxTopLevelMax = 0f;
+        var intactTopLevelHardpoints = 0;
+
+        foreach (var slot in slots.Slots)
+        {
+            if (string.IsNullOrWhiteSpace(slot.Id))
+                continue;
+
+            if (!_itemSlots.TryGetSlot(vehicle, slot.Id, out var itemSlot, itemSlots) ||
+                itemSlot.Item is not { } item ||
+                !TryComp(item, out HardpointIntegrityComponent? integrity))
+            {
+                continue;
+            }
+
+            if (integrity.Integrity > 0f)
+            {
+                intactTopLevelHardpoints++;
+                maxTopLevelCurrent = MathF.Max(maxTopLevelCurrent, integrity.Integrity);
+            }
+
+            maxTopLevelMax = MathF.Max(maxTopLevelMax, integrity.MaxIntegrity);
+        }
+
+        if (maxTopLevelMax <= 0f)
+            return false;
+
+        var hullFraction = intactTopLevelHardpoints > 0 ? slots.FrameDamageFractionWhileIntact : 1f;
+        current = GetVehicleEffectiveIntegrity(frame.Integrity, maxTopLevelCurrent, hullFraction);
+        max = GetVehicleEffectiveIntegrity(frame.MaxIntegrity, maxTopLevelMax, slots.FrameDamageFractionWhileIntact);
+        return true;
+    }
+
+    private static float GetVehicleEffectiveIntegrity(float frameIntegrity, float topLevelHardpointIntegrity, float hullFraction)
+    {
+        frameIntegrity = MathF.Max(0f, frameIntegrity);
+        topLevelHardpointIntegrity = MathF.Max(0f, topLevelHardpointIntegrity);
+        hullFraction = Math.Clamp(hullFraction, 0f, 1f);
+
+        if (topLevelHardpointIntegrity <= 0f)
+            return frameIntegrity;
+
+        var protectedHullRemaining = frameIntegrity - topLevelHardpointIntegrity * hullFraction;
+        if (protectedHullRemaining <= 0f)
+            return topLevelHardpointIntegrity;
+
+        return topLevelHardpointIntegrity + protectedHullRemaining;
     }
 
     private static void ApplyDamageModifierCoefficients(
@@ -1129,12 +1232,19 @@ public sealed class HardpointSystem : EntitySystem
         return container.Owner;
     }
 
-    internal void UpdateHardpointUi(EntityUid uid, HardpointSlotsComponent? component = null, ItemSlotsComponent? itemSlots = null)
+    internal void UpdateHardpointUi(
+        EntityUid uid,
+        HardpointSlotsComponent? component = null,
+        ItemSlotsComponent? itemSlots = null,
+        HardpointStateComponent? state = null)
     {
         if (_net.IsClient)
             return;
 
         if (!Resolve(uid, ref component, logMissing: false))
+            return;
+
+        if (!Resolve(uid, ref state, logMissing: false))
             return;
 
         if (!Resolve(uid, ref itemSlots, logMissing: false))
@@ -1187,7 +1297,7 @@ public sealed class HardpointSystem : EntitySystem
                 hasIntegrity,
                 hasItem,
                 slot.Required,
-                component.PendingRemovals.Contains(slot.Id)));
+                state.PendingRemovals.Contains(slot.Id)));
 
             if (hasItem && itemSlot?.Item is { } turretItem &&
                 TryComp(turretItem, out HardpointSlotsComponent? turretSlots) &&
@@ -1204,7 +1314,7 @@ public sealed class HardpointSystem : EntitySystem
                 frameIntegrity,
                 frameMaxIntegrity,
                 hasFrameIntegrity,
-                component.LastUiError));
+                state.LastUiError));
     }
 
     internal bool HasAttachedHardpoints(EntityUid owner, HardpointSlotsComponent slots, ItemSlotsComponent itemSlots)
@@ -1255,6 +1365,8 @@ public sealed class HardpointSystem : EntitySystem
                 }
             }
 
+            var turretState = EnsureState(turretUid);
+
             entries.Add(new HardpointUiEntry(
                 compositeId,
                 turretSlot.HardpointType,
@@ -1265,7 +1377,7 @@ public sealed class HardpointSystem : EntitySystem
                 hasIntegrity,
                 hasItem,
                 turretSlot.Required,
-                turretSlots.PendingRemovals.Contains(turretSlot.Id)));
+                turretState.PendingRemovals.Contains(turretSlot.Id)));
         }
     }
 
@@ -1282,10 +1394,7 @@ public sealed class HardpointSystem : EntitySystem
         if (!TryGetContainingVehicleFrame(owner, out var vehicle))
             return;
 
-        if (!TryComp(vehicle, out HardpointSlotsComponent? slots))
-            return;
-
-        slots.LastUiError = error;
+        EnsureState(vehicle).LastUiError = error;
     }
 
     internal bool TryGetContainingVehicleFrame(EntityUid owner, out EntityUid vehicle)

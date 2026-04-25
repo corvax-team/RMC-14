@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Medical.HUD.Components;
+using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Medical.HUD.Components;
 using Content.Shared.Body.Organ;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
@@ -80,7 +81,7 @@ public sealed partial class SynthComponent : Component
     /// The time it takes to repair the synth.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan RepairTime = TimeSpan.FromSeconds(0);
+    public TimeSpan RepairTime = TimeSpan.FromSeconds(15); // CCM14
 
     /// <summary>
     /// The time it takes to repair the synth, if you are the synth.
@@ -126,7 +127,13 @@ public sealed partial class SynthComponent : Component
 
     [DataField, AutoNetworkedField]
     public string DamageVisualsColor = "#EEEEEE";
+    // CCM14-start
+    [DataField, AutoNetworkedField]
+    public EntProtoId<SkillDefinitionComponent>? RepairSkill = "RMCSkillEngineer";
 
+    [DataField, AutoNetworkedField]
+    public int RepairSkillRequired = 1;
+    // CCM14-end
     [DataField]
     public TimeSpan NextUnableUsePopup;
 

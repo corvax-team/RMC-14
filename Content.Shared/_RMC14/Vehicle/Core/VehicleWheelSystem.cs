@@ -47,29 +47,7 @@ public sealed class VehicleWheelSystem : EntitySystem
         EnsureSlots(ent.Owner, ent.Comp);
         UpdateAppearance(ent.Owner, ent.Comp);
     }
-    // CCM14-start
-    private void OnWheelEjectAttempt(Entity<VehicleWheelSlotsComponent> ent, ref ItemSlotEjectAttemptEvent args)
-    {
-        if (TryComp<HardpointSlotsComponent>(ent.Owner, out var hardpoints) &&
-            TryComp<ItemSlotsComponent>(ent.Owner, out var itemSlots))
-        {
-            string? slotId = null;
-            foreach (var (id, slot) in itemSlots.Slots)
-            {
-                if (slot == args.Slot)
-                {
-                    slotId = id;
-                    break;
-                }
-            }
 
-            if (slotId != null && hardpoints.CompletingRemovals.Contains(slotId))
-                return;
-        }
-
-        args.Cancelled = true;
-    }
-    // CCM14-end
     private void OnWheelInserted(Entity<VehicleWheelSlotsComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         if (!IsWheelSlot(ent.Comp, args.Container.ID))

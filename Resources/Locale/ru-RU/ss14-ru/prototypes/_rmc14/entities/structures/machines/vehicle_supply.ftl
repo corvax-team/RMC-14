@@ -17,6 +17,7 @@ rmc-vehicle-supply-available = Доступная техника
 rmc-vehicle-supply-transport = Транспорт
 rmc-vehicle-supply-raise = Поднять
 rmc-vehicle-supply-lower = Опустить
+rmc-vehicle-supply-preview-none = Предпросмотр техники
 rmc-hardpoint-menu-title = Оборудование техники
 rmc-hardpoint-menu-slots-header = Слоты оборудования
 rmc-hardpoint-menu-frame-integrity = Целостность корпуса

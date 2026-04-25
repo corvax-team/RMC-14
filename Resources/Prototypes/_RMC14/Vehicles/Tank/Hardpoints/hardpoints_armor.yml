@@ -19,10 +19,6 @@
     - VehicleArmorBallistic
   - type: HardpointVisual
     vehicleState: ballistic_armor_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 500
-    category: Armor
-    vehicle: Tank
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -46,10 +42,6 @@
     explosionCoefficient: 0.5
   - type: HardpointVisual
     vehicleState: concussive_armor_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 500
-    category: Armor
-    vehicle: Tank
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -72,10 +64,6 @@
     - VehicleArmorCaustic
   - type: HardpointVisual
     vehicleState: caustic_armor_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 500
-    category: Armor
-    vehicle: Tank
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -99,10 +87,6 @@
     explosionCoefficient: 0.5
   - type: HardpointVisual
     vehicleState: paladin_armor_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 800
-    category: Armor
-    vehicle: Tank
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -122,7 +106,4 @@
     maxIntegrity: 150
   - type: HardpointVisual
     vehicleState: snowplow_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 300
-    category: Armor
-    vehicle: Tank
+

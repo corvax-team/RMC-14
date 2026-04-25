@@ -165,13 +165,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCDropshipFabricatorGainEverySeconds =
         CVarDef.Create("rmc.dropship_fabricator_gain_every_seconds", 3.33333f, CVar.REPLICATED | CVar.SERVER);
-    // CCM14-start
-    public static readonly CVarDef<int> VehicleFabricatorStartingPoints =
-        CVarDef.Create("rmc.vehicle_fabricator_starting_points", 5000, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<float> VehicleFabricatorGainEverySeconds =
-        CVarDef.Create("rmc.vehicle_fabricator_gain_every_seconds", 5f, CVar.REPLICATED | CVar.SERVER);
-    // CCM14-end
     public static readonly CVarDef<bool> RMCDropshipCASDebug =
         CVarDef.Create("rmc.dropship_cas_debug", false, CVar.REPLICATED | CVar.SERVER);
 

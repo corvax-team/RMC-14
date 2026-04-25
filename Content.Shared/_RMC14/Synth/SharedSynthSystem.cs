@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.IdentityManagement;
+using Content.Shared._RMC14.IdentityManagement;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.HUD.Components;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Repairable;
@@ -44,6 +45,7 @@ public abstract class SharedSynthSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!; // CCM14
 
     public override void Initialize()
     {
@@ -156,7 +158,15 @@ public abstract class SharedSynthSystem : EntitySystem
                 _popup.PopupClient(Loc.GetString("rmc-repairable-not-damaged", ("target", synth)), user, user, PopupType.SmallCaution);
                 return;
             }
-
+            // CCM14-start
+            if (synth.Comp.RepairSkill != null &&
+                synth.Comp.RepairSkillRequired > 0 &&
+                !_skills.HasSkill(user, synth.Comp.RepairSkill.Value, synth.Comp.RepairSkillRequired))
+            {
+                _popup.PopupClient(Loc.GetString("rmc-repairable-not-trained", ("target", synth)), user, user, PopupType.SmallCaution);
+                return;
+            }
+            // CCM14-end
             if (!_repairable.UseFuel(args.Used, args.User, 5, true))
                 return;
 
@@ -185,6 +195,15 @@ public abstract class SharedSynthSystem : EntitySystem
 
             if (HasDamage(synth, synth.Comp.CableCoilDamageGroup))
             {
+                // CCM14-start
+                if (synth.Comp.RepairSkill != null &&
+                    synth.Comp.RepairSkillRequired > 0 &&
+                    !_skills.HasSkill(user, synth.Comp.RepairSkill.Value, synth.Comp.RepairSkillRequired))
+                {
+                    _popup.PopupClient(Loc.GetString("rmc-repairable-not-trained", ("target", synth)), user, user, PopupType.SmallCaution);
+                    return;
+                }
+                // CCM14-end
                 if (_doAfter.TryStartDoAfter(doAfter))
                 {
                     var selfMsg = Loc.GetString(selfRepair ? "rmc-synth-repair-burn-start-self" : "rmc-synth-repair-burn-start-target-self",

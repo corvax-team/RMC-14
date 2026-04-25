@@ -68,10 +68,6 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: flamer_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 800
-    category: Secondary
-    vehicle: Tank
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -141,10 +137,6 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: glauncher_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 1000
-    category: Secondary
-    vehicle: Tank
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -210,10 +202,6 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: towlauncher_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 1200
-    category: Secondary
-    vehicle: Tank
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -282,10 +270,6 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: m56cupola_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 1000
-    category: Secondary
-    vehicle: Tank
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -352,7 +336,4 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: m56cupola_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 1500
-    category: Secondary
-    vehicle: Tank
+

@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Content.Shared._RMC14.Vehicle;
 using Robust.Client.GameObjects;
+using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
 
 namespace Content.Client._RMC14.Vehicle;

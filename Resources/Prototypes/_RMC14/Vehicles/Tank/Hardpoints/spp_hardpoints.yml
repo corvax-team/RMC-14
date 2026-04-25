@@ -7,8 +7,6 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/spptank.rsi
   - type: Item
     size: Large
-  - type: VehicleFabricatorPrintable # CCM14
-    enabled: false
 
 - type: entity
   parent: VehicleTankTurret
@@ -38,11 +36,13 @@
     slots:
       turret-cannon:
         startingItem: VehicleSPPTankP17702
+        disableEject: true
         whitelist:
           components:
           - HardpointItem
       turret-launcher:
         startingItem: VehicleSPPTankCupola
+        disableEject: true
         whitelist:
           components:
           - HardpointItem
@@ -61,8 +61,6 @@
       compatibilityId: SPPTank
       required: false
       insertDelay: 2.0
-  - type: VehicleFabricatorPrintable # CCM14
-    enabled: false
 
 - type: entity
   parent: VehicleTankLTAAAPMinigun
@@ -101,8 +99,6 @@
     offsetNorth: "0, -1.8"
     useAimDirection: true
     useContainerOwner: false
-  - type: VehicleFabricatorPrintable # CCM14
-    enabled: false
 
 - type: entity
   parent: VehicleTankLTBCannon
@@ -137,8 +133,6 @@
     muzzleOffset: "0,-1"
     useAimDirection: true
     useContainerOwner: false
-  - type: VehicleFabricatorPrintable # CCM14
-    enabled: false
 
 - type: entity
   parent: VehicleTankTowLauncher
@@ -174,8 +168,6 @@
     muzzleOffset: "0,0"
     useAimDirection: true
     useContainerOwner: false
-  - type: VehicleFabricatorPrintable # CCM14
-    enabled: false
 
 - type: entity
   parent: VehicleTankM56Cupola
@@ -214,8 +206,6 @@
     muzzleOffset: "0,0"
     useAimDirection: true
     useContainerOwner: false
-  - type: VehicleFabricatorPrintable # CCM14
-    enabled: false
 
 - type: entity
   parent: VehicleTankArmorBallistic
@@ -230,8 +220,6 @@
     compatibilityId: SPPTank
   - type: HardpointVisual
     vehicleState: reactive_armor_0
-  - type: VehicleFabricatorPrintable # CCM14
-    enabled: false
 
 - type: entity
   parent: VehicleTankRocketLauncher
@@ -246,8 +234,6 @@
     compatibilityId: SPPTank
   - type: HardpointVisual
     vehicleState: slauncher_0
-  - type: VehicleFabricatorPrintable # CCM14
-    enabled: false
 
 - type: entity
   parent: VehicleTankFlareModule
@@ -262,8 +248,6 @@
     compatibilityId: SPPTank
   - type: HardpointVisual
     vehicleState: slauncher_1
-  - type: VehicleFabricatorPrintable # CCM14
-    enabled: false
 
 - type: entity
   parent: VehicleTankWarningArray
@@ -278,8 +262,6 @@
     compatibilityId: SPPTank
   - type: HardpointVisual
     vehicleState: warray_0
-  - type: VehicleFabricatorPrintable # CCM14
-    enabled: false
 
 - type: entity
   parent: VehicleTankOverdriveEnhancer
@@ -294,8 +276,6 @@
     compatibilityId: SPPTank
   - type: HardpointVisual
     vehicleState: odrive_enhancer_0
-  - type: VehicleFabricatorPrintable # CCM14
-    enabled: false
 
 - type: entity
   parent: VehicleTankArtilleryModule
@@ -310,5 +290,4 @@
     compatibilityId: SPPTank
   - type: HardpointVisual
     vehicleState: artillerymod_0
-  - type: VehicleFabricatorPrintable # CCM14
-    enabled: false
+

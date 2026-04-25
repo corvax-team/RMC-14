@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Vehicle;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;

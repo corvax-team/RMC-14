@@ -25,7 +25,7 @@
   dummyStartingGear: RMCGearSyntheticEquipped
   icon: "RMCJobIconSynth"
   joinNotifyCrew: true
-  whitelisted: false
+  whitelisted: true
   supervisors: cm-job-supervisors-co
   accessGroups:
   - ShipMasterAccess

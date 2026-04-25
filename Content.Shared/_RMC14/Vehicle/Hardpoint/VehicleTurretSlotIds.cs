@@ -1,3 +1,5 @@
+using System;
+
 namespace Content.Shared._RMC14.Vehicle;
 
 public static class VehicleTurretSlotIds
