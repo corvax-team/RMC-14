@@ -4,8 +4,8 @@ tickrate = 30
 max_connections = 1024
 
 [game]
-hostname = "[EN/RU]🌍 Colonial Marine Corps 🌍"
-desc = "Corvax первый русскоязычный проект в Space Station 14.\nПервый русскоязычный проект на тему колониальных морпехов.\nНа сервере средние требования к RP."
+hostname = "[RU]🌍 Colonial Marine Corps 🌍"
+desc = "Colonial Marine Corps (ex-Corvax CM) — the first multilingual Space Station 14 build focused on Colonial Marines and based on the RMC-14. \n The server maintains Medium RP requirements."
 soft_max_players = 250
 map_rotation = true
 lobbyduration = 180

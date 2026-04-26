@@ -25,7 +25,7 @@ namespace Content.Client.Stylesheets
 
         public override Stylesheet Stylesheet { get; }
 
-        public StyleSpace(IResourceCache resCache, string theme = "green") : base(resCache)
+        public StyleSpace(IResourceCache resCache, string theme = "blue") : base(resCache)
         {
             var isBlueTheme = theme.Equals("blue", StringComparison.OrdinalIgnoreCase);
 

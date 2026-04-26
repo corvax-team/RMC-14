@@ -1,18 +1,20 @@
 <Control xmlns="https://spacestation14.io"
          xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls">
     <PanelContainer StyleClasses="OptionsFooterPanel">
-        <BoxContainer Orientation="Horizontal" Align="End" Margin="2">
+        <BoxContainer Orientation="Horizontal" Align="End" Margin="2" SeparationOverride="6">
             <Button Name="DefaultButton"
                     Text="{Loc 'ui-options-default'}"
                     TextAlign="Center"
-                    Margin="8 0"
+                    Margin="3 0"
                     StyleClasses="OptionsFooterButton" />
 
             <Button Name="ResetButton"
                     Text="{Loc 'ui-options-reset-all'}"
+                    Margin="3 0"
                     StyleClasses="Caution OptionsFooterButton" />
             <Button Name="ApplyButton"
                     Text="{Loc 'ui-options-apply'}"
+                    Margin="3 0"
                     StyleClasses="OpenLeft OptionsFooterButton" />
         </BoxContainer>
     </PanelContainer>

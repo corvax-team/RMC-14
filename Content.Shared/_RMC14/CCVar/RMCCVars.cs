@@ -23,7 +23,7 @@ public sealed partial class RMCCVars : CVars
         CVarDef.Create("rmc.auto_eject_magazines", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
 
     public static readonly CVarDef<string> RMCUIColorTheme =
-        CVarDef.Create("rmc.ui_color_theme", "green", CVar.CLIENTONLY | CVar.ARCHIVE);   // ccm
+        CVarDef.Create("rmc.ui_color_theme", "blue", CVar.CLIENTONLY | CVar.ARCHIVE);   // ccm
 
     public static readonly CVarDef<string> RMCLobbyBackgroundPreset =
         CVarDef.Create("rmc.lobby_background_preset", "console", CVar.CLIENTONLY | CVar.ARCHIVE); // ccm

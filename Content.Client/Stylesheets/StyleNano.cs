@@ -52,7 +52,7 @@ namespace Content.Client.Stylesheets
             Blue
         }
 
-        public static UiColorTheme CurrentTheme { get; private set; } = UiColorTheme.Green;
+        public static UiColorTheme CurrentTheme { get; private set; } = UiColorTheme.Blue;
         public const string StyleClassBorderedWindowPanel = "BorderedWindowPanel";
         public const string StyleClassInventorySlotBackground = "InventorySlotBackground";
         public const string StyleClassHandSlotHighlight = "HandSlotHighlight";
