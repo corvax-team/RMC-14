@@ -20,6 +20,11 @@ class AccountCommandsCog(commands.Cog):
         self.db = db
         self.sync_service = sync_service
 
+    @app_commands.command(name="ping", description="Check whether the Discord bot is responding.")
+    @app_commands.guild_only()
+    async def ping(self, interaction: discord.Interaction) -> None:
+        await interaction.response.send_message("pong", ephemeral=True)
+
     @app_commands.command(name="bind-account", description="Manually bind a Discord account to an SS14 ckey.")
     @app_commands.guild_only()
     @app_commands.checks.has_permissions(manage_roles=True)
@@ -120,7 +125,11 @@ class DiscordBot(commands.Bot):
     async def setup_hook(self) -> None:
         self.account_commands = AccountCommandsCog(self, self.config, self.db, self.sync_service)
         await self.add_cog(self.account_commands)
-        await self.tree.sync(guild=discord.Object(id=int(self.config.discord_guild_id)))
+        guild = discord.Object(id=int(self.config.discord_guild_id))
+        self.tree.clear_commands(guild=guild)
+        self.tree.copy_global_to(guild=guild)
+        synced = await self.tree.sync(guild=guild)
+        print(f"Synced {len(synced)} Discord slash commands to guild {self.config.discord_guild_id}.")
         self._sync_task = asyncio.create_task(self.sync_service.run_forever())
 
     async def close(self) -> None:
