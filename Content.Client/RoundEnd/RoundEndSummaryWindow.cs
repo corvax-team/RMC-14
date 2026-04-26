@@ -276,20 +276,22 @@ namespace Content.Client.RoundEnd
                 },
             });
 
-            if (!string.IsNullOrWhiteSpace(roundEnd))
-            {
-                var roundEndLabel = new RichTextLabel
-                {
-                    HorizontalExpand = true,
-                };
-                roundEndLabel.SetMarkup(roundEnd);
-                root.AddChild(roundEndLabel);
-            }
-
             root.AddChild(BuildInfoRow(
                 Loc.GetString("ccm-round-end-info-mode"),
                 gamemode,
                 accent));
+
+            if (!string.IsNullOrWhiteSpace(roundEnd))
+            {
+                var (summaryMarkup, detailsMarkup) = SplitRoundEndSummary(roundEnd);
+                root.AddChild(BuildRoundSummaryBlock(summaryMarkup, winnerAccent));
+
+                if (!string.IsNullOrWhiteSpace(detailsMarkup))
+                {
+                    root.AddChild(BuildSectionHeader("ccm-round-end-content-title"));
+                    root.AddChild(BuildRoundDetailsBlock(detailsMarkup));
+                }
+            }
 
             var metaRow = new BoxContainer
             {
@@ -366,6 +368,85 @@ namespace Content.Client.RoundEnd
 
             panel.AddChild(child);
             return panel;
+        }
+
+        private Control BuildRoundSummaryBlock(string summaryMarkup, Color accent)
+        {
+            var panel = new PanelContainer
+            {
+                HorizontalExpand = true,
+                Margin = new Thickness(0, 2, 0, 0),
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = GetSummaryInsetBackground(0.32f),
+                    BorderColor = accent.WithAlpha(0.78f),
+                    BorderThickness = new Thickness(1),
+                    ContentMarginLeftOverride = 10,
+                    ContentMarginTopOverride = 10,
+                    ContentMarginRightOverride = 10,
+                    ContentMarginBottomOverride = 10,
+                },
+            };
+
+            var row = new BoxContainer
+            {
+                Orientation = LayoutOrientation.Horizontal,
+                SeparationOverride = 10,
+                HorizontalExpand = true,
+            };
+
+            row.AddChild(new Label
+            {
+                Text = Loc.GetString("ccm-round-end-info-summary"),
+                FontColorOverride = accent,
+                MinSize = new Vector2(60, 0),
+            });
+
+            var summary = new RichTextLabel
+            {
+                HorizontalExpand = true,
+            };
+            summary.SetMarkup(summaryMarkup);
+            row.AddChild(summary);
+
+            panel.AddChild(row);
+            return panel;
+        }
+
+        private static Control BuildRoundDetailsBlock(string detailsMarkup)
+        {
+            var details = new RichTextLabel
+            {
+                HorizontalExpand = true,
+            };
+            details.SetMarkup(detailsMarkup);
+            return details;
+        }
+
+        private static (string SummaryMarkup, string DetailsMarkup) SplitRoundEndSummary(string roundEnd)
+        {
+            var normalized = roundEnd
+                .Replace("\r\n", "\n")
+                .Trim();
+
+            if (string.IsNullOrWhiteSpace(normalized))
+                return (string.Empty, string.Empty);
+
+            var lines = normalized
+                .Split('\n')
+                .Select(line => line.Trim())
+                .Where(line => !string.IsNullOrWhiteSpace(line))
+                .ToList();
+
+            if (lines.Count == 0)
+                return (string.Empty, string.Empty);
+
+            var summary = lines[0];
+            var details = lines.Count > 1
+                ? string.Join('\n', lines.Skip(1))
+                : string.Empty;
+
+            return (summary, details);
         }
 
         private static Control BuildInfoRow(string label, string value, Color accent)
