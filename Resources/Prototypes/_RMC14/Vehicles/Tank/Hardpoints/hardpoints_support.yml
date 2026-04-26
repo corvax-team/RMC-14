@@ -19,10 +19,6 @@
     fireRateMultiplier: 1.15
   - type: HardpointVisual
     vehicleState: warray_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 400
-    category: Support
-    vehicle: Tank
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -44,10 +40,6 @@
     speedMultiplier: 1.2
   - type: HardpointVisual
     vehicleState: odrive_enhancer_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 600
-    category: Support
-    vehicle: Tank
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -105,10 +97,6 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: slauncher_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 400
-    category: Support
-    vehicle: Tank
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -169,10 +157,6 @@
     useContainerOwner: false
   - type: HardpointVisual
     vehicleState: slauncher_1
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 300
-    category: Support
-    vehicle: Tank
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -196,7 +180,4 @@
     cursorPvsIncrease: 0.5
   - type: HardpointVisual
     vehicleState: artillerymod_0
-  - type: VehicleFabricatorPrintable # CCM14
-    cost: 1000
-    category: Support
-    vehicle: Tank
+

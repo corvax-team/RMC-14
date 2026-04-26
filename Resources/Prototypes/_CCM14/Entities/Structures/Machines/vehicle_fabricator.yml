@@ -1,0 +1,51 @@
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: VehicleHardpointFabricator
+  name: vehicle hardpoint fabricator
+  description: A large automated 3D printer for producing vehicle parts. You can recycle parts in it, and get 80% of your points back, by clicking it while holding them.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/vending_64x32.rsi
+    layers:
+    - state: "vehicle_gear_off"
+    - state: "vehicle_gear"
+      map: [ "rmc_flick_animation" ]
+      shader: unshaded
+    - state: vehicle_gear_panel
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.625,0.0,1.0,0.625"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        density: 200
+  - type: ActivatableUI
+    key: enum.VehicleFabricatorUi.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [["CMAccessCrewman"]]
+  - type: UserInterface
+    interfaces:
+      enum.VehicleFabricatorUi.Key:
+        type: VehicleFabricatorBui
+  - type: VehicleFabricator
+    hiddenCompatibilityIds:
+    - SPPAPC
+    - SPPAPCTurret
+    - SPPTank
+    - SPPVan
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.VehicleFabricatorVisuals.State:
+        rmc_flick_animation:
+          enum.VehicleFabricatorState.Idle: { state: vehicle_gear }
+          enum.VehicleFabricatorState.Fabricating: { state: vehicle_gear_vend }
+  - type: InteractionOutline
+  - type: RequireProjectileTarget

@@ -1,5 +1,7 @@
+using System;
 using System.Numerics;
 using Content.Shared._RMC14.Vehicle;
+using Robust.Client.UserInterface;
 
 namespace Content.Client._RMC14.Vehicle.Ui;
 

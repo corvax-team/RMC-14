@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -11,12 +11,6 @@ namespace Content.Shared._CCM.Vehicle.Fabricator;
 [Access(typeof(VehicleFabricatorSystem))]
 public sealed partial class VehicleFabricatorComponent : Component
 {
-    [DataField]
-    public EntityUid? Account;
-
-    [DataField, AutoNetworkedField]
-    public int Points;
-
     [DataField, AutoNetworkedField]
     public EntProtoId? Printing;
 
@@ -31,32 +25,18 @@ public sealed partial class VehicleFabricatorComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier RecycleSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/fax.ogg");
-}
-
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(VehicleFabricatorSystem))]
-public sealed partial class VehicleFabricatorPrintableComponent : Component
-{
-    [DataField, AutoNetworkedField]
-    public bool Enabled = true;
 
     [DataField, AutoNetworkedField]
-    public int Cost = 50;
+    public List<string> HiddenCompatibilityIds = new();
 
     [DataField, AutoNetworkedField]
-    public float RecycleMultiplier = 0.8f;
+    public Dictionary<string, int> PrintedModules = new();
 
     [DataField, AutoNetworkedField]
-    public EntProtoId<SkillDefinitionComponent> RecycleSkill = "RMCSkillEngineer";
+    public TimeSpan DefaultPrintDelay = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Delay = TimeSpan.FromSeconds(3);
-
-    [DataField, AutoNetworkedField]
-    public VehicleFabricatorCategory Category;
-
-    [DataField, AutoNetworkedField]
-    public VehicleType Vehicle = VehicleType.None;
+    public EntProtoId<SkillDefinitionComponent> RecycleSkillId = new("RMCSkillEngineer");
 }
 
 [Serializable, NetSerializable]
@@ -67,14 +47,18 @@ public enum VehicleFabricatorCategory : byte
     Armor,
     Support,
     Chassis,
-    Ammo,
+    RoofAttachment,
+    FrontAttachment,
+    Cannon,
+    Launcher
 }
 
-[Flags, Serializable, NetSerializable]
+[Serializable, NetSerializable]
 public enum VehicleType : byte
 {
-    None = 0,
-    Tank = 1 << 0,
-    APC = 1 << 1,
-    Humvee = 1 << 2,
+    None,
+    Tank,
+    APC,
+    Humvee,
+    Van
 }

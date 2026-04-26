@@ -96138,7 +96138,7 @@ entities:
       parent: 1
     - type: RMCTeleporter
       adjust: 0,156
-- proto: VehicleHardpointVendor
+- proto: VehicleHardpointFabricator
   entities:
   - uid: 5357
     components:
