@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Client.GameTicking.Managers;
 using Content.Client.Lobby;
+using Content.Shared.Audio;
 using Content.Shared.Audio.Events;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
@@ -105,9 +106,12 @@ public sealed partial class ContentAudioSystem
     {
         if (_lobbySoundtrackInfo != null)
         {
+            var sanitizedVolume = AudioHelpers.SanitizeVolume(
+                _lobbySoundtrackParams.Volume + AudioHelpers.SafeGainToVolume(volume, CCVars.LobbyMusicVolume.DefaultValue),
+                _lobbySoundtrackParams.Volume);
             _audio.SetVolume(
                 _lobbySoundtrackInfo.MusicStreamEntityUid,
-                _lobbySoundtrackParams.Volume + SharedAudioSystem.GainToVolume(_configManager.GetCVar(CCVars.LobbyMusicVolume))
+                sanitizedVolume
             );
         }
     }
@@ -182,7 +186,9 @@ public sealed partial class ContentAudioSystem
             soundtrackFilename,
             Filter.Local(),
             false,
-            _lobbySoundtrackParams.WithVolume(_lobbySoundtrackParams.Volume + SharedAudioSystem.GainToVolume(_configManager.GetCVar(CCVars.LobbyMusicVolume)))
+            _lobbySoundtrackParams.WithVolume(AudioHelpers.SanitizeVolume(
+                _lobbySoundtrackParams.Volume + AudioHelpers.SafeGainToVolume(_configManager.GetCVar(CCVars.LobbyMusicVolume), CCVars.LobbyMusicVolume.DefaultValue),
+                _lobbySoundtrackParams.Volume))
         );
         if (playResult == null)
         {
@@ -227,7 +233,9 @@ public sealed partial class ContentAudioSystem
             file,
             Filter.Local(),
             false,
-            _roundEndSoundEffectParams.WithVolume(_roundEndSoundEffectParams.Volume + SharedAudioSystem.GainToVolume(_configManager.GetCVar(CCVars.LobbyMusicVolume)))
+            _roundEndSoundEffectParams.WithVolume(AudioHelpers.SanitizeVolume(
+                _roundEndSoundEffectParams.Volume + AudioHelpers.SafeGainToVolume(_configManager.GetCVar(CCVars.LobbyMusicVolume), CCVars.LobbyMusicVolume.DefaultValue),
+                _roundEndSoundEffectParams.Volume))
         )?.Entity;
     }
 

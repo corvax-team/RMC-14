@@ -306,3 +306,7 @@ Resources/MapImages
 
 # Direnv stuff
 .direnv/
+
+# Shared tool configs
+/Tools/.env
+/Tools/.env.local

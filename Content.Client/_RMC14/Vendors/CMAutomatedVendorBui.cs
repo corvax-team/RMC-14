@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Client.Stylesheets;
 using Content.Shared._RMC14.Holiday;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Medical.Refill;
@@ -102,31 +103,59 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                     if (entity.TryGetComponent<SpriteComponent>("Sprite", out var entitySprites))
                         uiEntry.Texture.Modulate = entitySprites.AllLayers.First().Color;
 
-                    uiEntry.Panel.Button.Label.Text = entry.Name?.Replace("\\n", "\n") ?? entity.Name;
+                    var displayName = entry.Name?.Replace("\\n", "\n") ?? entity.Name;
+                    uiEntry.Panel.Button.Label.Text = displayName;
 
                     var name = entity.Name;
                     var color = CMAutomatedVendorPanel.DefaultColor;
                     var borderColor = CMAutomatedVendorPanel.DefaultBorderColor;
-                    var hoverColor = CMAutomatedVendorPanel.DefaultBorderColor;
+                    var hoverColor = CMAutomatedVendorPanel.DefaultHoveredColor;
+                    var pressedColor = hoverColor;
+                    var useDefaultPalette = true;
                     if (section.TakeAll != null || section.TakeOne != null)
                     {
+                        useDefaultPalette = false;
                         name = $"Mandatory: {name}";
-                        color = Color.FromHex("#251A0C");
-                        borderColor = Color.FromHex("#805300");
-                        hoverColor = Color.FromHex("#805300");
+                        color = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                            ? Color.FromHex("#2A2010")
+                            : Color.FromHex("#251A0C");
+                        borderColor = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                            ? Color.FromHex("#C58C36")
+                            : Color.FromHex("#A86C18");
+                        hoverColor = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                            ? Color.FromHex("#382814")
+                            : Color.FromHex("#312111");
+                        pressedColor = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                            ? Color.FromHex("#47331A")
+                            : Color.FromHex("#422A12");
+                        uiEntry.Panel.Button.Label.FontColorOverride = Color.FromHex("#F2D39A");
                     }
                     else if (entry.Recommended)
                     {
                         uiEntry.Panel.Button.Label.Text = $"★ {uiEntry.Panel.Button.Label.Text}";
+                        uiEntry.Panel.Button.Label.Text = $"★ {displayName}";
+                        useDefaultPalette = false;
+                        uiEntry.Panel.Button.Label.Text = $"[REC] {displayName}";
                         name = $"Recommended: {name}";
-                        color = Color.FromHex("#102919");
-                        borderColor = Color.FromHex("#3A9B52");
-                        hoverColor = Color.FromHex("#3A9B52");
+                        color = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                            ? Color.FromHex("#2C2413")
+                            : Color.FromHex("#2E2411");
+                        borderColor = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                            ? Color.FromHex("#E0B55A")
+                            : Color.FromHex("#D3A13B");
+                        hoverColor = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                            ? Color.FromHex("#3A2E17")
+                            : Color.FromHex("#3A2D14");
+                        pressedColor = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
+                            ? Color.FromHex("#4A391B")
+                            : Color.FromHex("#4A3818");
+                        uiEntry.Panel.Button.Label.FontColorOverride = Color.FromHex("#FFE8B0");
                     }
 
-                    uiEntry.Panel.Color = color;
-                    uiEntry.Panel.BorderColor = borderColor;
-                    uiEntry.Panel.HoveredColor = hoverColor;
+                    if (useDefaultPalette)
+                        uiEntry.Panel.UseDefaultPalette();
+                    else
+                        uiEntry.Panel.SetPalette(color, borderColor, hoverColor, pressedColor);
 
                     var msg = new FormattedMessage();
                     msg.AddText(name);

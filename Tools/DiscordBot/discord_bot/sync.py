@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import asyncio
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from enum import IntEnum
 
 from .config import AppConfig
@@ -58,53 +58,60 @@ class RoleSyncService:
             await asyncio.sleep(self._config.sync_interval_seconds)
 
     async def run_cycle(self) -> CycleResult:
-        state = self._db.load_sync_state()
+        state = await asyncio.to_thread(self._db.load_sync_state)
         if not self._role_to_tier:
             print("No CCM sponsor role mapping configured; skipping sync cycle.")
             return CycleResult(scanned=0, skipped=0, actions=0, db=ApplyResult(0, 0, 0))
 
-        lookups = await asyncio.gather(
-            *(self._lookup_member(record.discord_id) for record in state.linked_accounts)
-        )
-        lookup_by_discord_id = {lookup.discord_id: lookup for lookup in lookups}
-
         actions: list[SyncAction] = []
         skipped = 0
-        for record in state.linked_accounts:
-            lookup = lookup_by_discord_id[record.discord_id]
-            if lookup.error is not None:
-                skipped += 1
-                print(f"Skipping {record.discord_id} ({record.player_id}): {lookup.error}")
-                continue
+        batch_size = max(1, self._config.max_concurrency * 4)
+        for offset in range(0, len(state.linked_accounts), batch_size):
+            batch = state.linked_accounts[offset : offset + batch_size]
+            lookups = await asyncio.gather(*(self._lookup_member(record.discord_id) for record in batch))
+            role_sync_tasks: list[asyncio.Task[None]] = []
 
-            target_tier = _select_tier(lookup.role_ids or frozenset(), self._role_to_tier)
-            target_tier_id = int(target_tier)
-            expiration_unix_seconds = (
-                None
-                if target_tier == CCMSponsorshipTier.None_
-                else _resolve_expiration_unix_seconds(self._config)
-            )
-            if (
-                record.current_tier_id == target_tier_id and
-                expiration_unix_seconds is not None and
-                record.current_expiration_unix_seconds is not None and
-                record.current_expiration_unix_seconds >= expiration_unix_seconds - 3600
-            ):
-                continue
+            for record, lookup in zip(batch, lookups, strict=True):
+                if lookup.error is not None:
+                    skipped += 1
+                    continue
 
-            if record.current_tier_id == target_tier_id and target_tier == CCMSponsorshipTier.None_:
-                continue
-
-            actions.append(
-                SyncAction(
-                    player_id=record.player_id,
-                    current_tier_id=record.current_tier_id,
-                    target_tier_id=None if target_tier == CCMSponsorshipTier.None_ else target_tier_id,
-                    expiration_unix_seconds=expiration_unix_seconds,
+                member_roles = lookup.role_ids or frozenset()
+                target_tier = _select_tier(member_roles, self._role_to_tier)
+                expiration_unix_seconds = (
+                    None
+                    if target_tier == CCMSponsorshipTier.None_
+                    else _resolve_expiration_unix_seconds(self._config)
                 )
-            )
+                if lookup.found:
+                    role_sync_tasks.append(
+                        asyncio.create_task(self._sync_linked_role(record.discord_id, linked=True, member_roles=member_roles))
+                    )
 
-        db_result = self._db.apply_actions(actions) if actions else ApplyResult(0, 0, 0)
+                if (
+                    record.current_tier_id == int(target_tier)
+                    and expiration_unix_seconds is not None
+                    and record.current_expiration_unix_seconds is not None
+                    and record.current_expiration_unix_seconds >= expiration_unix_seconds - 3600
+                ):
+                    continue
+
+                if record.current_tier_id == int(target_tier) and target_tier == CCMSponsorshipTier.None_:
+                    continue
+
+                actions.append(
+                    SyncAction(
+                        player_id=record.player_id,
+                        current_tier_id=record.current_tier_id,
+                        target_tier_id=None if target_tier == CCMSponsorshipTier.None_ else int(target_tier),
+                        expiration_unix_seconds=expiration_unix_seconds,
+                    )
+                )
+
+            if role_sync_tasks:
+                await asyncio.gather(*role_sync_tasks)
+
+        db_result = await asyncio.to_thread(self._db.apply_actions, actions) if actions else ApplyResult(0, 0, 0)
         return CycleResult(
             scanned=len(state.linked_accounts),
             skipped=skipped,
@@ -112,19 +119,100 @@ class RoleSyncService:
             db=db_result,
         )
 
+    async def sync_player(self, player_id: str) -> None:
+        record = await asyncio.to_thread(self._db.find_linked_account_by_player, player_id)
+        if record is None:
+            actions = [
+                SyncAction(
+                    player_id=player_id,
+                    current_tier_id=None,
+                    target_tier_id=None,
+                    expiration_unix_seconds=None,
+                )
+            ]
+            await asyncio.to_thread(self._db.apply_actions, actions)
+            return
+
+        lookup = await self._lookup_member(record.discord_id)
+        if lookup.error is not None:
+            print(f"Skipping immediate sync for {record.discord_id}: {lookup.error}")
+            return
+
+        member_roles = lookup.role_ids or frozenset()
+        if not lookup.found:
+            await asyncio.to_thread(
+                self._db.apply_actions,
+                [
+                    SyncAction(
+                        player_id=player_id,
+                        current_tier_id=record.current_tier_id,
+                        target_tier_id=None,
+                        expiration_unix_seconds=None,
+                    )
+                ],
+            )
+            return
+
+        target_tier = _select_tier(member_roles, self._role_to_tier)
+        expiration_unix_seconds = (
+            None
+            if target_tier == CCMSponsorshipTier.None_
+            else _resolve_expiration_unix_seconds(self._config)
+        )
+        await asyncio.to_thread(
+            self._db.apply_actions,
+            [
+                SyncAction(
+                    player_id=player_id,
+                    current_tier_id=record.current_tier_id,
+                    target_tier_id=None if target_tier == CCMSponsorshipTier.None_ else int(target_tier),
+                    expiration_unix_seconds=expiration_unix_seconds,
+                )
+            ],
+        )
+        await self._sync_linked_role(record.discord_id, linked=True, member_roles=member_roles)
+
+    async def remove_linked_role(self, discord_id: str) -> None:
+        await self._sync_linked_role(discord_id, linked=False)
+
     async def _lookup_member(self, discord_id: str) -> MemberLookup:
-        async with self._semaphore:
-            try:
-                member = await self._discord.get_member(discord_id)
-            except DiscordApiError as error:
-                return MemberLookup(discord_id=discord_id, role_ids=None, found=False, error=str(error))
-            except Exception as error:
-                return MemberLookup(discord_id=discord_id, role_ids=None, found=False, error=repr(error))
+        for attempt in range(3):
+            async with self._semaphore:
+                try:
+                    member = await self._discord.get_member(discord_id)
+                except DiscordApiError as error:
+                    if error.retryable and attempt < 2:
+                        await asyncio.sleep(1 << attempt)
+                        continue
+                    print(f"Skipping {discord_id}: {error}")
+                    return MemberLookup(discord_id=discord_id, role_ids=None, found=False, error=str(error))
+                except Exception as error:
+                    print(f"Skipping {discord_id}: {error}")
+                    return MemberLookup(discord_id=discord_id, role_ids=None, found=False, error=repr(error))
 
-        if member is None:
-            return MemberLookup(discord_id=discord_id, role_ids=frozenset(), found=False)
+                if member is None:
+                    return MemberLookup(discord_id=discord_id, role_ids=frozenset(), found=False)
 
-        return MemberLookup(discord_id=discord_id, role_ids=member.role_ids, found=True)
+                return MemberLookup(discord_id=discord_id, role_ids=member.role_ids, found=True)
+
+        return MemberLookup(discord_id=discord_id, role_ids=None, found=False, error="retry-exhausted")
+
+    async def _sync_linked_role(
+        self,
+        discord_id: str,
+        linked: bool,
+        member_roles: frozenset[str] | None = None,
+    ) -> None:
+        for attempt in range(3):
+            async with self._semaphore:
+                try:
+                    await self._discord.sync_linked_role(discord_id, linked, member_roles)
+                    return
+                except DiscordApiError as error:
+                    if error.retryable and attempt < 2:
+                        await asyncio.sleep(1 << attempt)
+                        continue
+                    return
 
 
 def _build_role_mapping(config: AppConfig) -> dict[str, CCMSponsorshipTier]:
@@ -135,7 +223,6 @@ def _build_role_mapping(config: AppConfig) -> dict[str, CCMSponsorshipTier]:
         mapping[config.sponsor_ii_role_id] = CCMSponsorshipTier.SponsorII
     if config.sponsor_iii_role_id:
         mapping[config.sponsor_iii_role_id] = CCMSponsorshipTier.SponsorIII
-
     return mapping
 
 
@@ -149,5 +236,5 @@ def _select_tier(role_ids: frozenset[str], role_to_tier: dict[str, CCMSponsorshi
 
 
 def _resolve_expiration_unix_seconds(config: AppConfig) -> int:
-    expiration = datetime.now(UTC).timestamp() + (config.sponsorship_rolling_days * 24 * 60 * 60)
-    return int(expiration)
+    expiration = datetime.now(UTC) + timedelta(days=config.sponsorship_rolling_days)
+    return int(expiration.timestamp())

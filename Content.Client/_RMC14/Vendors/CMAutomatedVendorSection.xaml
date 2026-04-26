@@ -1,12 +1,14 @@
-﻿<controls:CMAutomatedVendorSection
+<controls:CMAutomatedVendorSection
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Vendors"
-    xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls"
-    Margin="0 15 0 0">
-    <BoxContainer Orientation="Vertical">
-        <RichTextLabel Name="Label" Access="Public" />
-        <customControls:HSeparator Name="SectionSeparator" Access="Public" Color="#2F6B46" />
-        <BoxContainer Orientation="Vertical" Name="Entries" Access="Public" SeparationOverride="2" Margin="0 10 0 0" />
-    </BoxContainer>
+    xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls">
+    <!-- CCM: vendor UI refresh -->
+    <PanelContainer Name="SectionPanel" Access="Public" Margin="0 2 0 0">
+        <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6">
+            <RichTextLabel Name="Label" Access="Public" />
+            <customControls:HSeparator Name="SectionSeparator" Access="Public" Color="#2F6B46" />
+            <BoxContainer Orientation="Vertical" Name="Entries" Access="Public" SeparationOverride="4" Margin="0 4 0 0" />
+        </BoxContainer>
+    </PanelContainer>
 </controls:CMAutomatedVendorSection>
 <!-- # CCM priority rework -->

@@ -20,7 +20,8 @@ namespace Content.Client._CCM.Achievements;
 public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
     private const float LiveRefreshInterval = 2.5f;
-    private const float ToastSafeMargin = 20f;
+    private const float ToastSafeMarginHorizontal = 68f;
+    private const float ToastSafeMarginVertical = 44f;
     private const float ToastWidthMax = 390f;
     private const float ToastHeightMax = 214f;
 
@@ -52,8 +53,8 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
         LayoutContainer.SetAnchorPreset(_toastRoot, LayoutContainer.LayoutPreset.BottomRight);
         LayoutContainer.SetGrowHorizontal(_toastRoot, LayoutContainer.GrowDirection.Begin);
         LayoutContainer.SetGrowVertical(_toastRoot, LayoutContainer.GrowDirection.Begin);
-        LayoutContainer.SetMarginRight(_toastRoot, ToastSafeMargin);
-        LayoutContainer.SetMarginBottom(_toastRoot, ToastSafeMargin);
+        LayoutContainer.SetMarginRight(_toastRoot, ToastSafeMarginHorizontal);
+        LayoutContainer.SetMarginBottom(_toastRoot, ToastSafeMarginVertical);
         UIManager.PopupRoot.AddChild(_toastRoot);
     }
 
@@ -154,8 +155,8 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
         var headerFont = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 13);
         var titleFont = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 17);
         var bodyFont = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 11);
-        var toastWidth = Math.Clamp(UIManager.PopupRoot.Size.X - ToastSafeMargin * 2f, 220f, ToastWidthMax);
-        var toastMaxHeight = Math.Clamp(UIManager.PopupRoot.Size.Y - ToastSafeMargin * 2f, 160f, ToastHeightMax);
+        var toastWidth = Math.Clamp(UIManager.PopupRoot.Size.X - ToastSafeMarginHorizontal * 2f, 220f, ToastWidthMax);
+        var toastMaxHeight = Math.Clamp(UIManager.PopupRoot.Size.Y - ToastSafeMarginVertical * 2f, 160f, ToastHeightMax);
         var accent = GetToastAccent();
         var accentSoft = accent.WithAlpha(0.28f);
         var baseBackground = GetToastBackground();

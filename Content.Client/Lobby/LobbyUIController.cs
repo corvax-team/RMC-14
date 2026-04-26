@@ -450,10 +450,12 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         return (_characterSetup, _profileEditor);
     }
 
-    private const float CharacterSetupMinWidth = 960f;
-    private const float CharacterSetupMinHeight = 720f;
-    private const float CharacterSetupMaxWidthFactor = 0.76f;
-    private const float CharacterSetupMaxHeightFactor = 0.78f;
+    private const float CharacterSetupMinWidth = 1080f;
+    private const float CharacterSetupMinHeight = 680f;
+    private const float CharacterSetupDefaultMaxWidth = 1840f;
+    private const float CharacterSetupDefaultMinOpenHeight = 840f;
+    private const float CharacterSetupSmallScreenDefaultHeightFactor = 0.8f;
+    private static readonly Vector2 CharacterSetupViewportMargin = new(8f, 8f);
 
     private void UpdateCharacterSetupLayout()
     {
@@ -469,27 +471,40 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         if (baseSize.X <= 1f || baseSize.Y <= 1f)
             return;
 
-        var scale = baseSize.Y switch
+        var availableSize = new Vector2(
+            MathF.Max(1f, baseSize.X - CharacterSetupViewportMargin.X * 2f),
+            MathF.Max(1f, baseSize.Y - CharacterSetupViewportMargin.Y * 2f));
+        var minWidth = MathF.Min(CharacterSetupMinWidth, availableSize.X);
+        var minHeight = MathF.Min(CharacterSetupMinHeight, availableSize.Y);
+        var preferredSize = _characterSetup.MeasurePreferredSize(availableSize);
+        preferredSize = new Vector2(
+            Math.Clamp(preferredSize.X, minWidth, MathF.Min(availableSize.X, CharacterSetupDefaultMaxWidth)),
+            Math.Clamp(preferredSize.Y, minHeight, availableSize.Y));
+        preferredSize.Y = Math.Clamp(
+            MathF.Max(preferredSize.Y, MathF.Min(availableSize.Y, CharacterSetupDefaultMinOpenHeight)),
+            minHeight,
+            availableSize.Y);
+        if (baseSize.Y <= 900f)
         {
-            <= 800f => new Vector2(0.66f, 0.84f),
-            <= 900f => new Vector2(0.63f, 0.79f),
-            _ => new Vector2(0.58f, 0.72f),
-        };
+            preferredSize.Y = Math.Clamp(
+                MathF.Max(preferredSize.Y, availableSize.Y * CharacterSetupSmallScreenDefaultHeightFactor),
+                minHeight,
+                availableSize.Y);
+        }
 
-        var maxWidth = baseSize.X * CharacterSetupMaxWidthFactor;
-        var maxHeight = baseSize.Y * CharacterSetupMaxHeightFactor;
-        var minWidth = MathF.Min(CharacterSetupMinWidth, maxWidth);
-        var minHeight = MathF.Min(CharacterSetupMinHeight, maxHeight);
+        _characterSetup.UpdateLayoutBounds(
+            baseSize,
+            new Vector2(minWidth, minHeight),
+            availableSize);
 
-        var size = new Vector2(baseSize.X * scale.X, baseSize.Y * scale.Y);
+        var size = _characterSetup.HasManualSize
+            ? _characterSetup.ManualSize
+            : preferredSize;
         size = new Vector2(
-            Math.Clamp(size.X, minWidth, maxWidth),
-            Math.Clamp(size.Y, minHeight, maxHeight));
+            Math.Clamp(size.X, minWidth, availableSize.X),
+            Math.Clamp(size.Y, minHeight, availableSize.Y));
 
-        var xBias = baseSize.Y <= 900f ? baseSize.X * 0.03f : baseSize.X * 0.05f;
-        var yBias = baseSize.Y <= 900f ? baseSize.Y * 0.01f : baseSize.Y * 0.02f;
         var pos = (baseSize - size) / 2f;
-        pos = new Vector2(pos.X + xBias, MathF.Max(0f, pos.Y - yBias));
 
         // CCM rework lobby - start
         if (_characterSetup.HasManualPosition)

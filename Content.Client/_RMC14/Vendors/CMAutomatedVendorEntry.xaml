@@ -1,13 +1,22 @@
-﻿<cc:CMAutomatedVendorEntry
+<cc:CMAutomatedVendorEntry
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client._RMC14.Vendors"
     HorizontalExpand="True">
-    <BoxContainer Orientation="Horizontal">
-        <LayeredTextureRect Name="Texture" Access="Public"
-                            HorizontalExpand="False" VerticalExpand="False" />
-        <Label Name="Amount" Access="Public" MinWidth="30" Align="Left" Margin="5 0 0 0" />
-        <Control MinWidth="5" />
+    <!-- CCM: vendor UI refresh -->
+    <BoxContainer Orientation="Horizontal" SeparationOverride="6" VerticalAlignment="Center">
+        <PanelContainer Name="IconFrame" Access="Public" SetSize="42 42">
+            <LayeredTextureRect Name="Texture" Access="Public"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                HorizontalExpand="False"
+                                VerticalExpand="False" />
+        </PanelContainer>
+        <PanelContainer Name="AmountFrame" Access="Public" MinWidth="34">
+            <Label Name="Amount" Access="Public" Align="Center" Margin="6 3" />
+        </PanelContainer>
         <cc:CMAutomatedVendorPanel Name="Panel" Access="Public" />
-        <Button Text="?" Name="TooltipLabel" Access="Public" ModulateSelfOverride="#00000000" />
+        <PanelContainer Name="TooltipFrame" Access="Public" SetSize="20 20">
+            <Label Name="TooltipLabel" Access="Public" Text="?" Align="Center" />
+        </PanelContainer>
     </BoxContainer>
 </cc:CMAutomatedVendorEntry>

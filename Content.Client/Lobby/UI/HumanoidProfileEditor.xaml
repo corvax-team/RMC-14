@@ -108,17 +108,6 @@
                                     <Control HorizontalExpand="True"/>
                                     <ccm:CCMOptionButton Name="SexButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
-                                <BoxContainer HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-pronouns-label'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <ccm:CCMOptionButton Name="PronounsButton" HorizontalAlignment="Right" />
-                                </BoxContainer>
-                                <BoxContainer HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-enable-playtime-perks'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <CheckBox Name="PlaytimePerksButton" Pressed="True"
-                                              HorizontalAlignment="Right" />
-                                </BoxContainer>
                                 <BoxContainer Margin="4 0 0 0" Orientation="Vertical">
                                     <Label Text="{Loc 'humanoid-profile-editor-skin-color-label'}" />
                                     <Slider HorizontalExpand="True" Name="Skin" MinValue="0" MaxValue="100" Value="20" />
@@ -159,6 +148,17 @@
                                     </PanelContainer.PanelOverride>
                                 </PanelContainer>
                                 <BoxContainer HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-pronouns-label'}" />
+                                    <Control HorizontalExpand="True"/>
+                                    <ccm:CCMOptionButton Name="PronounsButton" HorizontalAlignment="Right" />
+                                </BoxContainer>
+                                <BoxContainer HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-enable-playtime-perks'}" />
+                                    <Control HorizontalExpand="True"/>
+                                    <CheckBox Name="PlaytimePerksButton" Pressed="True"
+                                              HorizontalAlignment="Right" />
+                                </BoxContainer>
+                                <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-origin-label'}" />
                                     <Control HorizontalExpand="True"/>
                                     <Button Name="OriginButton"
@@ -170,11 +170,6 @@
                                     <Label Text="{Loc 'humanoid-profile-editor-religion-label'}" />
                                     <Control HorizontalExpand="True"/>
                                     <ccm:CCMOptionButton Name="ReligionButton" HorizontalAlignment="Right" MinWidth="156" />
-                                </BoxContainer>
-                                <BoxContainer HorizontalExpand="True">
-                                    <Label Text="{Loc 'humanoid-profile-editor-corporate-relation-label'}" />
-                                    <Control HorizontalExpand="True"/>
-                                    <ccm:CCMOptionButton Name="CorporateRelationButton" HorizontalAlignment="Right" MinWidth="156" />
                                 </BoxContainer>
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-preferred-squad-label'}" />

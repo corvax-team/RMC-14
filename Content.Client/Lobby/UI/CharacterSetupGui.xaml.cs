@@ -9,6 +9,7 @@ using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
+using Robust.Client.Graphics;
 using Robust.Shared.Input;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -45,10 +46,17 @@ namespace Content.Client.Lobby.UI
         private bool _deleteCounting;
         private bool _deleteReady;
         private float _deleteCountdown;
-        private bool _dragging;
-        private Vector2 _dragOffset;
+        private DragMode _dragMode;
+        private Vector2 _interactionStartMouseGlobal;
+        private Vector2 _interactionStartPosition;
+        private Vector2 _interactionStartSize;
         private Vector2 _manualPosition;
         private bool _hasManualPosition;
+        private Vector2 _manualSize;
+        private bool _hasManualSize;
+        private Vector2 _resizeMinSize = new(960f, 720f);
+        private Vector2 _resizeMaxSize = new(float.PositiveInfinity, float.PositiveInfinity);
+        private Vector2 _resizeHostSize;
         private readonly Dictionary<SpriteView, float> _hoverRotationTimes = new();
         private readonly HashSet<SpriteView> _hoveredViews = new();
         private StyleNano.UiColorTheme _appliedTheme;
@@ -69,11 +77,27 @@ namespace Content.Client.Lobby.UI
             Compact
         }
 
+        [Flags]
+        private enum DragMode : byte
+        {
+            None = 0,
+            Move = 1 << 0,
+            Top = 1 << 1,
+            Bottom = 1 << 2,
+            Left = 1 << 3,
+            Right = 1 << 4,
+        }
+
+        private const float ResizeMarginSize = 7f;
+        private const float HeaderDragHeight = 24f;
+
         public event Action<int>? SelectCharacter;
         public event Action<int>? DeleteCharacter;
         public TextureButton CloseButtonControl => CloseButton;
         public bool HasManualPosition => _hasManualPosition;
         public Vector2 ManualPosition => _manualPosition;
+        public bool HasManualSize => _hasManualSize;
+        public Vector2 ManualSize => _manualSize;
 
         public CharacterSetupGui(HumanoidProfileEditor profileEditor)
         {
@@ -111,8 +135,8 @@ namespace Content.Client.Lobby.UI
             LeftPreviewContainer.OnKeyBindDown += args => PreviewClicked(args, -1);
             RightPreviewContainer.OnKeyBindDown += args => PreviewClicked(args, 1);
             RightFarPreviewContainer.OnKeyBindDown += args => PreviewClicked(args, 2);
-            OnKeyBindDown += StartDrag;
-            OnKeyBindUp += StopDrag;
+            OnKeyBindDown += StartInteraction;
+            OnKeyBindUp += StopInteraction;
             HookPreviewRotation(LeftFarPreviewContainer, LeftFarPreview);
             HookPreviewRotation(LeftPreviewContainer, LeftPreview);
             HookPreviewRotation(CenterPreviewContainer, CenterPreview, true);
@@ -228,6 +252,60 @@ namespace Content.Client.Lobby.UI
             // CCM rework lobby - end
         }
 
+        public void UpdateLayoutBounds(Vector2 hostSize, Vector2 minSize, Vector2 maxSize)
+        {
+            _resizeHostSize = hostSize;
+            _resizeMaxSize = new Vector2(
+                MathF.Max(1f, MathF.Min(hostSize.X, maxSize.X)),
+                MathF.Max(1f, MathF.Min(hostSize.Y, maxSize.Y)));
+            _resizeMinSize = new Vector2(
+                MathF.Min(minSize.X, _resizeMaxSize.X),
+                MathF.Min(minSize.Y, _resizeMaxSize.Y));
+
+            MinSize = _resizeMinSize;
+            MaxSize = _resizeMaxSize;
+
+            if (_hasManualSize)
+                _manualSize = ClampSize(_manualSize);
+
+            if (_hasManualPosition)
+                _manualPosition = ClampPosition(_manualPosition, _hasManualSize ? _manualSize : Size);
+        }
+
+        public Vector2 MeasurePreferredSize(Vector2 availableSize)
+        {
+            var constrained = Vector2.Max(Vector2.One, availableSize);
+            var previousMinSize = MinSize;
+            var previousMaxSize = MaxSize;
+            var previousSetSize = SetSize;
+            var previousCompactTier = _compactTier;
+            var previousResponsiveHeight = _lastResponsiveHeight;
+            var previousCarouselMode = _carouselLayoutMode;
+            var previousCarouselWidth = _lastCarouselWidth;
+
+            try
+            {
+                ApplyCompactLayoutTier(ResolveCompactLayoutTier(constrained.Y));
+                ApplyCarouselLayoutMode(ResolveCarouselLayoutMode(constrained.X));
+
+                MinSize = Vector2.Zero;
+                MaxSize = constrained;
+                SetSize = new Vector2(float.NaN, float.NaN);
+                Measure(constrained);
+                return Vector2.Min(DesiredSize, constrained);
+            }
+            finally
+            {
+                MinSize = previousMinSize;
+                MaxSize = previousMaxSize;
+                SetSize = previousSetSize;
+                ApplyCompactLayoutTier(previousCompactTier);
+                _lastResponsiveHeight = previousResponsiveHeight;
+                ApplyCarouselLayoutMode(previousCarouselMode);
+                _lastCarouselWidth = previousCarouselWidth;
+            }
+        }
+
         private void CreateCharacter()
         {
             // CCM rework lobby - start
@@ -278,7 +356,7 @@ namespace Content.Client.Lobby.UI
         {
             // CCM rework lobby - start
             DeletePreviewEntities();
-            _carouselLayoutMode = ResolveCarouselLayoutMode();
+            _carouselLayoutMode = ResolveCarouselLayoutMode(CarouselPanel.Size.X);
             ApplyCarouselLayoutMode(_carouselLayoutMode);
 
             if (_carouselProfiles.Count == 0)
@@ -556,36 +634,39 @@ namespace Content.Client.Lobby.UI
             // CCM rework lobby - end
         }
 
-        private void StartDrag(GUIBoundKeyEventArgs args)
+        private void StartInteraction(GUIBoundKeyEventArgs args)
         {
             // CCM rework lobby - start
             if (args.Function != EngineKeyFunctions.UIClick)
                 return;
 
-            var headerHeight = WindowHeader.Size.Y > 0 ? WindowHeader.Size.Y : 24f;
-            if (args.RelativePosition.Y > headerHeight)
+            _dragMode = GetDragModeFor(args.RelativePosition);
+            if (_dragMode == DragMode.None)
                 return;
 
             var global = args.PointerLocation.Position / UIScale;
-            var closeMin = CloseButton.GlobalPosition;
-            var closeMax = closeMin + CloseButton.Size;
-            if (global.X >= closeMin.X && global.X <= closeMax.X &&
-                global.Y >= closeMin.Y && global.Y <= closeMax.Y)
+            if (_dragMode == DragMode.Move && IsPointOverCloseButton(global))
+            {
+                _dragMode = DragMode.None;
                 return;
+            }
 
-            _dragging = true;
-            _dragOffset = args.PointerLocation.Position / UIScale - GlobalPosition;
+            _interactionStartMouseGlobal = args.PointerLocation.Position / UIScale;
+            _interactionStartPosition = Position;
+            _interactionStartSize = Size;
+
             args.Handle();
             // CCM rework lobby - end
         }
 
-        private void StopDrag(GUIBoundKeyEventArgs args)
+        private void StopInteraction(GUIBoundKeyEventArgs args)
         {
             // CCM rework lobby - start
             if (args.Function != EngineKeyFunctions.UIClick)
                 return;
 
-            _dragging = false;
+            _dragMode = DragMode.None;
+            DefaultCursorShape = CursorShape.Arrow;
             args.Handle();
             // CCM rework lobby - end
         }
@@ -593,22 +674,162 @@ namespace Content.Client.Lobby.UI
         protected override void MouseMove(GUIMouseMoveEventArgs args)
         {
             base.MouseMove(args);
-            DragMove(args);
+            UpdateDragOrResize(args);
         }
 
-        private void DragMove(GUIMouseMoveEventArgs args)
+        protected override void MouseExited()
         {
-            // CCM rework lobby - start
-            if (!_dragging)
+            base.MouseExited();
+
+            if (_dragMode == DragMode.None)
+                DefaultCursorShape = CursorShape.Arrow;
+        }
+
+        private void UpdateDragOrResize(GUIMouseMoveEventArgs args)
+        {
+            if (Parent == null)
                 return;
 
-            var topLeftGlobal = args.GlobalPosition - _dragOffset;
-            var parentGlobal = Parent?.GlobalPosition ?? Vector2.Zero;
-            var newPos = topLeftGlobal - parentGlobal;
-            LayoutContainer.SetPosition(this, newPos);
-            _manualPosition = newPos;
+            if (_dragMode == DragMode.None)
+            {
+                UpdateResizeCursor(args.RelativePosition);
+                return;
+            }
+
+            var delta = args.GlobalPosition - _interactionStartMouseGlobal;
+            if (_dragMode == DragMode.Move)
+            {
+                var newPos = ClampPosition(_interactionStartPosition + delta, _interactionStartSize);
+                LayoutContainer.SetPosition(this, newPos);
+                _manualPosition = newPos;
+                _hasManualPosition = true;
+                return;
+            }
+
+            var minSize = _resizeMinSize;
+            var maxSize = _resizeMaxSize;
+            var hostSize = _resizeHostSize.X > 0f && _resizeHostSize.Y > 0f
+                ? _resizeHostSize
+                : Parent.Size;
+
+            var left = _interactionStartPosition.X;
+            var top = _interactionStartPosition.Y;
+            var right = _interactionStartPosition.X + _interactionStartSize.X;
+            var bottom = _interactionStartPosition.Y + _interactionStartSize.Y;
+
+            if ((_dragMode & DragMode.Top) != 0)
+            {
+                top = Math.Clamp(
+                    _interactionStartPosition.Y + delta.Y,
+                    MathF.Max(0f, bottom - maxSize.Y),
+                    bottom - minSize.Y);
+            }
+            else if ((_dragMode & DragMode.Bottom) != 0)
+            {
+                bottom = Math.Clamp(
+                    _interactionStartPosition.Y + _interactionStartSize.Y + delta.Y,
+                    _interactionStartPosition.Y + minSize.Y,
+                    MathF.Min(hostSize.Y, _interactionStartPosition.Y + maxSize.Y));
+            }
+
+            if ((_dragMode & DragMode.Left) != 0)
+            {
+                left = Math.Clamp(
+                    _interactionStartPosition.X + delta.X,
+                    MathF.Max(0f, right - maxSize.X),
+                    right - minSize.X);
+            }
+            else if ((_dragMode & DragMode.Right) != 0)
+            {
+                right = Math.Clamp(
+                    _interactionStartPosition.X + _interactionStartSize.X + delta.X,
+                    _interactionStartPosition.X + minSize.X,
+                    MathF.Min(hostSize.X, _interactionStartPosition.X + maxSize.X));
+            }
+
+            var resizedPos = new Vector2(left, top);
+            var newSize = new Vector2(right - left, bottom - top);
+
+            LayoutContainer.SetPosition(this, resizedPos);
+            SetSize = newSize;
+            _manualPosition = resizedPos;
+            _manualSize = newSize;
             _hasManualPosition = true;
-            // CCM rework lobby - end
+            _hasManualSize = true;
+        }
+
+        private DragMode GetDragModeFor(Vector2 relativeMousePos)
+        {
+            var mode = DragMode.None;
+
+            if (_resizeHostSize.X > 0f && _resizeHostSize.Y > 0f)
+            {
+                if (relativeMousePos.Y < ResizeMarginSize)
+                    mode |= DragMode.Top;
+                else if (relativeMousePos.Y > Size.Y - ResizeMarginSize)
+                    mode |= DragMode.Bottom;
+
+                if (relativeMousePos.X < ResizeMarginSize)
+                    mode |= DragMode.Left;
+                else if (relativeMousePos.X > Size.X - ResizeMarginSize)
+                    mode |= DragMode.Right;
+            }
+
+            if (mode == DragMode.None && relativeMousePos.Y < MathF.Max(HeaderDragHeight, WindowHeader.Size.Y))
+                mode = DragMode.Move;
+
+            return mode;
+        }
+
+        private bool IsPointOverCloseButton(Vector2 globalPoint)
+        {
+            var closeMin = CloseButton.GlobalPosition;
+            var closeMax = closeMin + CloseButton.Size;
+            return globalPoint.X >= closeMin.X && globalPoint.X <= closeMax.X &&
+                   globalPoint.Y >= closeMin.Y && globalPoint.Y <= closeMax.Y;
+        }
+
+        private void UpdateResizeCursor(Vector2 relativeMousePos)
+        {
+            var previewDragMode = GetDragModeFor(relativeMousePos) & ~DragMode.Move;
+            DefaultCursorShape = previewDragMode switch
+            {
+                DragMode.Top or DragMode.Bottom => CursorShape.VResize,
+                DragMode.Left or DragMode.Right => CursorShape.HResize,
+                DragMode.Top | DragMode.Left or
+                DragMode.Top | DragMode.Right or
+                DragMode.Bottom | DragMode.Left or
+                DragMode.Bottom | DragMode.Right => CursorShape.Crosshair,
+                _ => CursorShape.Arrow,
+            };
+        }
+
+        private Vector2 ClampSize(Vector2 size)
+        {
+            var hostSize = _resizeHostSize.X > 0f && _resizeHostSize.Y > 0f
+                ? _resizeHostSize
+                : Parent?.Size ?? size;
+            var maxSize = new Vector2(
+                MathF.Max(_resizeMinSize.X, MathF.Min(_resizeMaxSize.X, hostSize.X)),
+                MathF.Max(_resizeMinSize.Y, MathF.Min(_resizeMaxSize.Y, hostSize.Y)));
+
+            return new Vector2(
+                Math.Clamp(size.X, _resizeMinSize.X, maxSize.X),
+                Math.Clamp(size.Y, _resizeMinSize.Y, maxSize.Y));
+        }
+
+        private Vector2 ClampPosition(Vector2 position, Vector2 size)
+        {
+            var hostSize = _resizeHostSize.X > 0f && _resizeHostSize.Y > 0f
+                ? _resizeHostSize
+                : Parent?.Size ?? Vector2.Zero;
+            var maxPosition = new Vector2(
+                MathF.Max(0f, hostSize.X - size.X),
+                MathF.Max(0f, hostSize.Y - size.Y));
+
+            return new Vector2(
+                Math.Clamp(position.X, 0f, maxPosition.X),
+                Math.Clamp(position.Y, 0f, maxPosition.Y));
         }
 
         private void UpdateCarouselLayoutIfNeeded()
@@ -634,16 +855,25 @@ namespace Content.Client.Lobby.UI
             if (height <= 0f)
                 return;
 
-            var tier = height <= 700f
-                ? CompactLayoutTier.Compact
-                : CompactLayoutTier.Normal;
+            var tier = ResolveCompactLayoutTier(height);
 
             if (tier == _compactTier && Math.Abs(height - _lastResponsiveHeight) < 1f)
                 return;
 
-            _compactTier = tier;
             _lastResponsiveHeight = height;
+            ApplyCompactLayoutTier(tier);
+        }
 
+        private CompactLayoutTier ResolveCompactLayoutTier(float height)
+        {
+            return height <= 700f
+                ? CompactLayoutTier.Compact
+                : CompactLayoutTier.Normal;
+        }
+
+        private void ApplyCompactLayoutTier(CompactLayoutTier tier)
+        {
+            _compactTier = tier;
             var compact = tier == CompactLayoutTier.Compact;
             ContentRoot.Margin = compact ? new Thickness(6) : new Thickness(8);
             ContentRoot.SeparationOverride = compact ? 6 : 8;
@@ -663,13 +893,12 @@ namespace Content.Client.Lobby.UI
             _lastCarouselWidth = -1f;
         }
 
-        private CarouselLayoutMode ResolveCarouselLayoutMode()
+        private CarouselLayoutMode ResolveCarouselLayoutMode(float width)
         {
             // CCM rework lobby - start
             if (_carouselProfiles.Count <= 1)
                 return CarouselLayoutMode.One;
 
-            var width = CarouselPanel.Size.X;
             if (width <= 0f)
                 return _carouselProfiles.Count >= 4 ? CarouselLayoutMode.Five : CarouselLayoutMode.Three;
 
@@ -689,6 +918,7 @@ namespace Content.Client.Lobby.UI
         private void ApplyCarouselLayoutMode(CarouselLayoutMode mode)
         {
             // CCM rework lobby - start
+            _carouselLayoutMode = mode;
             var compactFactor = _compactTier == CompactLayoutTier.Compact ? 0.9f : 1f;
             var compactSpriteFactor = _compactTier == CompactLayoutTier.Compact ? 0.92f : 1f;
 

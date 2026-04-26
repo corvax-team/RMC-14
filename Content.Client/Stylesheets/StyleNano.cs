@@ -148,6 +148,7 @@ namespace Content.Client.Stylesheets
         public const string StyleClassVotePanel = "VotePanel";
         public const string StyleClassVoteSectionPanel = "VoteSectionPanel";
         public const string StyleClassVoteActionButton = "VoteActionButton";
+        public const string StyleClassVoteCreateButton = "VoteCreateButton";
         public const string StyleClassVoteProgressBar = "VoteProgressBar";
         public const string StyleClassVoteTimerText = "VoteTimerText";
         public const string StyleClassOptionsFooterPanel = "OptionsFooterPanel";
@@ -304,19 +305,19 @@ namespace Content.Client.Stylesheets
                 PointGreen = Color.FromHex("#235AAD");
                 PointMagenta = Color.FromHex("#2968C4");
 
-                ButtonColorContext = Color.FromHex("#1F4EA3");
-                ButtonColorContextHover = Color.FromHex("#285FBE");
-                ButtonColorContextPressed = Color.FromHex("#163A78");
-                ButtonColorContextDisabled = Color.FromHex("#153053");
-                DropdownButtonColorContext = Color.FromHex("#1F4EA3");
-                DropdownButtonColorContextHover = Color.FromHex("#285FBE");
-                DropdownButtonColorContextPressed = Color.FromHex("#163A78");
-                DropdownButtonColorContextDisabled = Color.FromHex("#153053");
+                ButtonColorContext = Color.FromHex("#2B67C7");
+                ButtonColorContextHover = Color.FromHex("#3A7BE2");
+                ButtonColorContextPressed = Color.FromHex("#2154A8");
+                ButtonColorContextDisabled = Color.FromHex("#1A3D6B");
+                DropdownButtonColorContext = Color.FromHex("#2B67C7");
+                DropdownButtonColorContextHover = Color.FromHex("#3A7BE2");
+                DropdownButtonColorContextPressed = Color.FromHex("#2154A8");
+                DropdownButtonColorContextDisabled = Color.FromHex("#1A3D6B");
 
-                ExamineButtonColorContext = Color.FromHex("#1F4EA3");
-                ExamineButtonColorContextHover = Color.FromHex("#285FBE");
-                ExamineButtonColorContextPressed = Color.FromHex("#163A78");
-                ExamineButtonColorContextDisabled = Color.FromHex("#153053");
+                ExamineButtonColorContext = Color.FromHex("#2B67C7");
+                ExamineButtonColorContextHover = Color.FromHex("#3A7BE2");
+                ExamineButtonColorContextPressed = Color.FromHex("#2154A8");
+                ExamineButtonColorContextDisabled = Color.FromHex("#1A3D6B");
 
                 FancyTreeEvenRowColor = Color.FromHex("#0D131C");
                 FancyTreeSelectedRowColor = Color.FromHex("#122240");
@@ -531,14 +532,17 @@ namespace Content.Client.Stylesheets
             var optionsCategoryListBorder = CurrentTheme == UiColorTheme.Blue
                 ? Color.FromHex("#0E4AAE").WithAlpha(0.95f)
                 : UiButtonBorder.WithAlpha(0.95f);
+            var optionsCategoryButtonBorder = CurrentTheme == UiColorTheme.Blue
+                ? Color.FromHex("#102A56")
+                : UiButtonBorder.WithAlpha(0.95f);
             var optionsCategoryButtonNormal = CurrentTheme == UiColorTheme.Blue
-                ? Color.FromHex("#0B1E4A")
+                ? Color.FromHex("#4A8EFF").WithAlpha(0.96f)
                 : Color.FromHex("#033D09");
             var optionsCategoryButtonHover = CurrentTheme == UiColorTheme.Blue
-                ? Color.FromHex("#10275C")
+                ? ButtonColorContextHover.WithAlpha(0.88f)
                 : Color.FromHex("#04480B");
             var optionsCategoryButtonPressed = CurrentTheme == UiColorTheme.Blue
-                ? Color.FromHex("#09183D")
+                ? ButtonColorContext.WithAlpha(0.78f)
                 : Color.FromHex("#03340A");
             var optionsCategoryButtonText = CurrentTheme == UiColorTheme.Blue
                 ? Color.FromHex("#86BBF2")
@@ -604,6 +608,7 @@ namespace Content.Client.Stylesheets
             var notoSansBold18 = resCache.NotoStack(variation: "Bold", size: 18);
             var notoSansBold20 = resCache.NotoStack(variation: "Bold", size: 20);
             var exo2Regular12 = resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 12);
+            var exo2Bold13 = resCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 13);
             var bedstead12 = resCache.GetFont("/Fonts/Bedstead/bedstead.otf", 12);
             var bedstead14 = resCache.GetFont("/Fonts/Bedstead/bedstead.otf", 14);
             var bedstead15 = resCache.GetFont("/Fonts/Bedstead/bedstead.otf", 15);
@@ -4124,8 +4129,8 @@ namespace Content.Client.Stylesheets
                     .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
                     {
                         BackgroundColor = CurrentTheme == UiColorTheme.Blue
-                            ? Color.FromHex("#0F2A52").WithAlpha(0.89f)
-                            : Color.FromHex("#0A2C18").WithAlpha(0.86f),
+                            ? Color.FromHex("#1A3A69").WithAlpha(0.94f)
+                            : Color.FromHex("#134726").WithAlpha(0.92f),
                         BorderColor = Color.Transparent,
                         BorderThickness = new Thickness(0f),
                         ContentMarginLeftOverride = 12f,
@@ -4322,7 +4327,7 @@ namespace Content.Client.Stylesheets
                         {
                             BackgroundColor = optionsCategoryButtonNormal,
                             BorderThickness = new Thickness(1),
-                            BorderColor = PanelDark.WithAlpha(1f),
+                            BorderColor = optionsCategoryButtonBorder,
                         }),
                     }),
 
@@ -4335,7 +4340,7 @@ namespace Content.Client.Stylesheets
                         {
                             BackgroundColor = optionsCategoryButtonHover,
                             BorderThickness = new Thickness(1),
-                            BorderColor = optionsCategoryButtonHover.WithAlpha(0.9f),
+                            BorderColor = optionsCategoryButtonBorder,
                         }),
                     }),
 
@@ -4348,7 +4353,7 @@ namespace Content.Client.Stylesheets
                         {
                             BackgroundColor = optionsCategoryButtonPressed,
                             BorderThickness = new Thickness(1),
-                            BorderColor = optionsCategoryButtonPressed.WithAlpha(0.9f),
+                            BorderColor = optionsCategoryButtonBorder,
                         }),
                     }),
 
@@ -4973,6 +4978,90 @@ namespace Content.Client.Stylesheets
                     {
                         new StyleProperty(Label.StylePropertyFont, notoSansBold12),
                         new StyleProperty(Label.StylePropertyFontColor, themedText),
+                    }),
+
+                Element<Button>().Class(StyleClassVoteCreateButton)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = DropdownButtonColorContext,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = UiButtonBorder,
+                        ContentMarginLeftOverride = 6,
+                        ContentMarginTopOverride = 4,
+                        ContentMarginRightOverride = 6,
+                        ContentMarginBottomOverride = 4,
+                    }),
+
+                Element<Button>().Class(StyleClassVoteCreateButton).Pseudo(ContainerButton.StylePseudoClassHover)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = DropdownButtonColorContextHover,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = UiButtonBorder,
+                        ContentMarginLeftOverride = 6,
+                        ContentMarginTopOverride = 4,
+                        ContentMarginRightOverride = 6,
+                        ContentMarginBottomOverride = 4,
+                    }),
+
+                Element<Button>().Class(StyleClassVoteCreateButton).Pseudo(ContainerButton.StylePseudoClassPressed)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = DropdownButtonColorContextPressed,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = UiButtonBorder,
+                        ContentMarginLeftOverride = 6,
+                        ContentMarginTopOverride = 4,
+                        ContentMarginRightOverride = 6,
+                        ContentMarginBottomOverride = 4,
+                    }),
+
+                Element<Button>().Class(StyleClassVoteCreateButton).Pseudo(ContainerButton.StylePseudoClassDisabled)
+                    .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
+                    {
+                        BackgroundColor = DropdownButtonColorContextDisabled,
+                        BorderThickness = new Thickness(1),
+                        BorderColor = UiButtonBorder,
+                        ContentMarginLeftOverride = 6,
+                        ContentMarginTopOverride = 4,
+                        ContentMarginRightOverride = 6,
+                        ContentMarginBottomOverride = 4,
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] { StyleClassVoteCreateButton }, null, null),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, exo2Bold13),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#C5CED8")),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] { StyleClassVoteCreateButton }, null, new[] { ContainerButton.StylePseudoClassHover }),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, exo2Bold13),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.White),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] { StyleClassVoteCreateButton }, null, new[] { ContainerButton.StylePseudoClassPressed }),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, exo2Bold13),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.White),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] { StyleClassVoteCreateButton }, null, new[] { ContainerButton.StylePseudoClassDisabled }),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyFont, exo2Bold13),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.FromHex("#C5CED8").WithAlpha(0.72f)),
                     }),
 
                 Element<Button>().Class(StyleBase.StyleClassVoteButton)

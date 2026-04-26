@@ -1,1 +1,1 @@
-"""Discord role sync worker for TGMC patron subscriptions."""
+"""Discord bot package for role sync and account linking."""

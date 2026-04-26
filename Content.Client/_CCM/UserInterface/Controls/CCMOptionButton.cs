@@ -12,6 +12,7 @@ using Robust.Shared.Graphics;
 using Robust.Shared.IoC;
 using Robust.Shared.Input;
 using Robust.Shared.Maths;
+using Robust.Shared.Timing;
 
 namespace Content.Client._CCM.UserInterface.Controls;
 
@@ -20,6 +21,7 @@ public sealed class CCMOptionButton : OptionButton
     private readonly Font _itemFont;
     private readonly Dictionary<int, Button> _itemButtons = new();
     private readonly Dictionary<int, Color> _itemColors = new();
+    private StyleNano.UiColorTheme _appliedTheme;
     private Label? _selectedLabel;
     private TextureRect? _triangleRect;
     private float _widestItemWidth;
@@ -33,6 +35,7 @@ public sealed class CCMOptionButton : OptionButton
     {
         var cache = IoCManager.Resolve<IResourceCache>();
         _itemFont = cache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 13);
+        _appliedTheme = StyleNano.CurrentTheme;
         _selectedLabel = FindChild<Label>(this, label =>
             label.StyleClasses.Contains(OptionButton.StyleClassOptionButton));
         _triangleRect = FindChild<TextureRect>(this, triangle =>
@@ -57,6 +60,17 @@ public sealed class CCMOptionButton : OptionButton
             ApplyCollapsedStyle();
         };
         OnItemSelected += _ => ApplyCollapsedStyle();
+    }
+
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        base.FrameUpdate(args);
+
+        if (_appliedTheme == StyleNano.CurrentTheme)
+            return;
+
+        _appliedTheme = StyleNano.CurrentTheme;
+        RefreshVisualStyle();
     }
 
     public override void ButtonOverride(Button button)

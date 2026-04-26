@@ -627,8 +627,6 @@ namespace Content.Client.RoundEnd
                 },
             });
 
-            var time = TimeSpan.FromSeconds(data.RoundSecondsPlayed);
-
             root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-victory-points", data.VictoryPoints.ToString(), accent, Color.White));
             root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-impact-points", data.ImpactPoints.ToString(), accent, accent));
             root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-damage", data.DamageDone.ToString(), accent, Color.White));
@@ -636,10 +634,6 @@ namespace Content.Client.RoundEnd
             root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-healing", data.HealingDone.ToString(), accent, Color.White));
             root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-revives", data.Revives.ToString(), accent, Color.White));
             root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-structures", data.StructuresBuilt.ToString(), accent, Color.White));
-            root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-time", Loc.GetString("round-end-summary-window-duration-label",
-                ("hours", time.Hours),
-                ("minutes", time.Minutes),
-                ("seconds", time.Seconds)), accent, Color.White));
 
             if (data.MarineVictoryPoints > 0 ||
                 data.MarineImpactPoints > 0 ||

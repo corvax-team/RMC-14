@@ -147,9 +147,9 @@
                         <PanelContainer Name="LeftTaskbarPanel" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                                         Margin="0 0 0 8"
                                         StyleClasses="LobbyMusicPanel">
-                            <BoxContainer Orientation="Horizontal" SeparationOverride="8" Margin="8 8 8 8"
+                            <BoxContainer Orientation="Horizontal" SeparationOverride="6" Margin="6 8 6 8"
                                           HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalExpand="True">
-                                <ContainerButton Name="TaskbarRatingButton" MinSize="72 52" Margin="4 0 4 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="0.9">
+                                <ContainerButton Name="TaskbarRatingButton" MinSize="64 52" Margin="3 0 3 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="0.9">
                                     <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <TextureRect MinSize="32 32" MaxSize="32 32" Stretch="KeepAspectCentered"
                                                      TexturePath="/Textures/_CCM14/Logo/icon/rating.png" />
@@ -157,25 +157,25 @@
                                                StyleClasses="LobbyTaskbarLabel" HorizontalAlignment="Center" Visible="False" />
                                     </BoxContainer>
                                 </ContainerButton>
-                                <ContainerButton Name="TaskbarDonateButton" MinSize="126 60" Margin="4 0 4 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="1.8">
+                                <ContainerButton Name="TaskbarDonateButton" MinSize="110 60" Margin="3 0 3 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="1.8">
                                     <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <Label Name="TaskbarDonateLabel" Text="{Loc 'ui-lobby-taskbar-donate'}"
                                                StyleClasses="TaskbarLabelSmall" HorizontalAlignment="Center" />
                                     </BoxContainer>
                                 </ContainerButton>
-                                <ContainerButton Name="TaskbarMenuButton" MinSize="98 52" Margin="4 0 4 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="1">
+                                <ContainerButton Name="TaskbarMenuButton" MinSize="88 52" Margin="3 0 3 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="1">
                                     <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <Label Name="TaskbarMenuLabel" Text="{Loc 'ui-lobby-taskbar-menu'}"
                                                StyleClasses="TaskbarLabelSmall" HorizontalAlignment="Center" />
                                     </BoxContainer>
                                 </ContainerButton>
-                                <ContainerButton Name="TaskbarCustomizationButton" MinSize="126 60" Margin="4 0 4 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="1.8">
+                                <ContainerButton Name="TaskbarCustomizationButton" MinSize="110 60" Margin="3 0 3 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="1.8">
                                     <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <Label Name="TaskbarCustomizationLabel" Text="{Loc 'ui-lobby-taskbar-customization'}"
                                                StyleClasses="TaskbarLabelSmall" HorizontalAlignment="Center" />
                                     </BoxContainer>
                                 </ContainerButton>
-                                <ContainerButton Name="TaskbarAchievementsButton" MinSize="72 52" Margin="4 0 4 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="0.9">
+                                <ContainerButton Name="TaskbarAchievementsButton" MinSize="64 52" Margin="3 0 3 0" StyleClasses="LobbyMenuIconButton" HorizontalExpand="True" SizeFlagsStretchRatio="0.9">
                                     <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <TextureRect MinSize="32 32" MaxSize="32 32" Stretch="KeepAspectCentered"
                                                      TexturePath="/Textures/_CCM14/Logo/icon/achievement.png" />

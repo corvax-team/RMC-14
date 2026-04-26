@@ -39,6 +39,9 @@ public sealed partial class ClientVerticalTabContainer : BoxContainer
         {
             Text = title,
             Group = _tabGroup,
+            HorizontalExpand = true,
+            HorizontalAlignment = HAlignment.Stretch,
+            MinHeight = 34,
         };
         button.AddStyleClass(StyleBase.StyleClassVerticalTabButton);
 
@@ -64,6 +67,18 @@ public sealed partial class ClientVerticalTabContainer : BoxContainer
         }
 
         return index;
+    }
+
+    public void RefreshTabStyles()
+    {
+        RefreshStylesRecursive(this);
+
+        foreach (var (control, button) in _tabs)
+        {
+            var shouldBePressed = control == _currentControl;
+            if (button.Pressed != shouldBePressed)
+                button.Pressed = shouldBePressed;
+        }
     }
 
     public void RemoveTab(Control control)
@@ -131,6 +146,17 @@ public sealed partial class ClientVerticalTabContainer : BoxContainer
         button.Pressed = true;
         control.Visible = true;
         _currentControl = control;
+    }
+
+    private static void RefreshStylesRecursive(Control control)
+    {
+        control.InvalidateStyleSheet();
+        control.DoStyleUpdate();
+
+        foreach (var child in control.Children)
+        {
+            RefreshStylesRecursive(child);
+        }
     }
 }
 // # CCM priority rework

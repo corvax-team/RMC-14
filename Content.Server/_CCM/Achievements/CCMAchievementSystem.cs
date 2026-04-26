@@ -21,6 +21,8 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Medical;
 using Content.Shared.Mobs;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Projectiles;
 using Robust.Shared.Log;
 using Robust.Server.Player;
@@ -362,6 +364,10 @@ public sealed class CCMAchievementSystem : EntitySystem
 
         _roundFinalized = true;
         var roundEntries = _round.ToArray();
+        var evaluationUsers = _round.Keys
+            .Concat(_stats.GetTrackedPlayers())
+            .Distinct()
+            .ToArray();
 
         try
         {
@@ -395,7 +401,7 @@ public sealed class CCMAchievementSystem : EntitySystem
                     queenKillParticipations);
             }
 
-            foreach (var (userId, _) in roundEntries)
+            foreach (var userId in evaluationUsers)
             {
                 _ = EvaluatePlayerAsync(userId, notify: true);
             }
@@ -569,8 +575,23 @@ public sealed class CCMAchievementSystem : EntitySystem
 
     private CCMAchievementProgressContext BuildContext(NetUserId userId, CachedAchievementState state)
     {
-        _stats.TryGetLiveAchievementMetrics(userId, out var live);
         var round = GetOrCreateRoundState(userId);
+        var marineParticipated = round.MarineParticipated;
+        var xenoParticipated = round.XenoParticipated;
+
+        if (!_stats.TryGetLiveAchievementState(
+                userId,
+                out var live,
+                out var statsMarineParticipated,
+                out var statsXenoParticipated))
+        {
+            live = default;
+        }
+        else
+        {
+            marineParticipated |= statsMarineParticipated;
+            xenoParticipated |= statsXenoParticipated;
+        }
 
         var effectiveSpecial = new CCMPlayerAchievementStatsSnapshot(
             state.BaseSpecialStats.FriendlyFireDamage + round.FriendlyFireDamage,
@@ -588,8 +609,8 @@ public sealed class CCMAchievementSystem : EntitySystem
             effectiveSpecial,
             _roundFinalized,
             _winningSide,
-            round.MarineParticipated,
-            round.XenoParticipated);
+            marineParticipated,
+            xenoParticipated);
     }
 
     private static int CountCompleted(CCMAchievementProgressContext context, HashSet<string> unlockedIds)
@@ -704,13 +725,13 @@ public sealed class CCMAchievementSystem : EntitySystem
 
     private bool TryGetSourcePlayerAndSide(EntityUid? origin, EntityUid? tool, out NetUserId userId, out CCMStatsSide side)
     {
-        if (TryGetPlayerAndSide(origin, out userId, out side))
+        if (TryResolvePlayerAndSide(origin, out userId, out side))
             return true;
 
-        return TryGetPlayerAndSide(tool, out userId, out side);
+        return TryResolvePlayerAndSide(tool, out userId, out side);
     }
 
-    private bool TryGetPlayerAndSide(EntityUid? entity, out NetUserId userId, out CCMStatsSide side)
+    private bool TryResolvePlayerAndSide(EntityUid? entity, out NetUserId userId, out CCMStatsSide side)
     {
         userId = default;
         side = CCMStatsSide.None;
@@ -718,21 +739,46 @@ public sealed class CCMAchievementSystem : EntitySystem
         if (entity == null)
             return false;
 
-        var current = entity.Value;
+        var visited = new HashSet<EntityUid>();
+        if (!TryResolvePlayerAndSide(entity.Value, visited, ref userId, ref side))
+            return false;
+
+        var round = GetOrCreateRoundState(userId);
+        round.MarineParticipated |= side == CCMStatsSide.Marines;
+        round.XenoParticipated |= side == CCMStatsSide.Xenos;
+        return true;
+    }
+
+    private bool TryResolvePlayerAndSide(EntityUid entity, HashSet<EntityUid> visited, ref NetUserId userId, ref CCMStatsSide side)
+    {
+        if (!visited.Add(entity))
+            return false;
+
+        var current = entity;
         for (var depth = 0; depth < 8; depth++)
         {
-            if (TryComp(current, out ActorComponent? actor))
+            if (userId == default &&
+                TryComp(current, out ActorComponent? actor))
+            {
+                userId = actor.PlayerSession.UserId;
+            }
+
+            if (userId == default &&
+                TryComp(current, out MindContainerComponent? mindContainer) &&
+                mindContainer.Mind is { } mindId &&
+                TryComp(mindId, out MindComponent? mind) &&
+                mind.UserId is { } mindUserId)
+            {
+                userId = mindUserId;
+            }
+
+            if (side == CCMStatsSide.None)
             {
                 side = GetSide(current);
-                if (side != CCMStatsSide.None)
-                {
-                    userId = actor.PlayerSession.UserId;
-                    var round = GetOrCreateRoundState(userId);
-                    round.MarineParticipated |= side == CCMStatsSide.Marines;
-                    round.XenoParticipated |= side == CCMStatsSide.Xenos;
-                    return true;
-                }
             }
+
+            if (userId != default && side != CCMStatsSide.None)
+                return true;
 
             if (!TryComp(current, out TransformComponent? xform) ||
                 xform.ParentUid == EntityUid.Invalid ||
@@ -744,14 +790,24 @@ public sealed class CCMAchievementSystem : EntitySystem
             current = xform.ParentUid;
         }
 
-        if (TryComp(entity.Value, out ProjectileComponent? projectile) &&
-            projectile.Shooter is { } shooter &&
-            shooter != entity.Value)
+        if (TryComp(entity, out ProjectileComponent? projectile))
         {
-            return TryGetPlayerAndSide(shooter, out userId, out side);
+            if (projectile.Shooter is { } shooter &&
+                shooter != entity &&
+                TryResolvePlayerAndSide(shooter, visited, ref userId, ref side))
+            {
+                return true;
+            }
+
+            if (projectile.Weapon is { } weapon &&
+                weapon != entity &&
+                TryResolvePlayerAndSide(weapon, visited, ref userId, ref side))
+            {
+                return true;
+            }
         }
 
-        return false;
+        return userId != default && side != CCMStatsSide.None;
     }
 
     private CCMStatsSide GetSide(EntityUid uid)

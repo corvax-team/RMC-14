@@ -70,8 +70,8 @@ namespace Content.Client.Lobby.UI
         private const float LeftMenuCenterYOffsetPercent = 0.06f;
         private const float LobbyCenterWidthMin = 400f;
         private const float LobbyCenterWidthMax = 440f;
-        private const float LobbyTaskbarWidthMin = 560f;
-        private const float LobbyTaskbarWidthMax = 880f;
+        private const float LobbyTaskbarWidthMin = 500f;
+        private const float LobbyTaskbarWidthMax = 760f;
         private const float LobbyTaskbarHeightDefault = 84f;
         private const float LobbyTaskbarHeightCompact = 72f;
         private const float LobbyEdgePaddingDefault = 12f;
@@ -547,10 +547,10 @@ namespace Content.Client.Lobby.UI
             CenterMenuPanel.MinSize = new Vector2(centerWidth, CenterMenuPanel.MinSize.Y);
 
             var taskbarFactor = _compactLobbyLayout
-                ? 0.78f
+                ? 0.72f
                 : shortHeightLayout
-                    ? 0.74f
-                    : 0.70f;
+                    ? 0.68f
+                    : 0.64f;
             var taskbarWidth = Math.Clamp(leftSize.X * taskbarFactor, LobbyTaskbarWidthMin, LobbyTaskbarWidthMax);
             var taskbarHeight = _compactLobbyLayout ? LobbyTaskbarHeightCompact : LobbyTaskbarHeightDefault;
             LeftTaskbarPanel.SetWidth = taskbarWidth;
@@ -570,11 +570,11 @@ namespace Content.Client.Lobby.UI
             LeaveButton.MinSize = new Vector2(0f, topButtonHeight);
             TopButtonBar.MinSize = new Vector2(0f, topButtonHeight);
 
-            TaskbarRatingButton.MinSize = _compactLobbyLayout ? new Vector2(60f, 40f) : new Vector2(68f, 48f);
-            TaskbarDonateButton.MinSize = _compactLobbyLayout ? new Vector2(104f, 48f) : new Vector2(118f, 56f);
-            TaskbarMenuButton.MinSize = _compactLobbyLayout ? new Vector2(82f, 40f) : new Vector2(92f, 48f);
-            TaskbarCustomizationButton.MinSize = _compactLobbyLayout ? new Vector2(104f, 48f) : new Vector2(118f, 56f);
-            TaskbarAchievementsButton.MinSize = _compactLobbyLayout ? new Vector2(60f, 40f) : new Vector2(68f, 48f);
+            TaskbarRatingButton.MinSize = _compactLobbyLayout ? new Vector2(54f, 40f) : new Vector2(64f, 48f);
+            TaskbarDonateButton.MinSize = _compactLobbyLayout ? new Vector2(96f, 48f) : new Vector2(108f, 56f);
+            TaskbarMenuButton.MinSize = _compactLobbyLayout ? new Vector2(76f, 40f) : new Vector2(86f, 48f);
+            TaskbarCustomizationButton.MinSize = _compactLobbyLayout ? new Vector2(96f, 48f) : new Vector2(108f, 56f);
+            TaskbarAchievementsButton.MinSize = _compactLobbyLayout ? new Vector2(54f, 40f) : new Vector2(64f, 48f);
         }
 
         private float GetLobbySafePadding()

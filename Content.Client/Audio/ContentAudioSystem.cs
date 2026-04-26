@@ -57,12 +57,12 @@ public sealed partial class ContentAudioSystem : SharedContentAudioSystem
 
         if (oldMusicGain != null)
         {
-            Audio.SetGain(lobbyMusic, oldMusicGain.Value, lobbyMusicComp);
+            Audio.SetGain(lobbyMusic, AudioHelpers.SanitizeGain(oldMusicGain.Value, 0f), lobbyMusicComp);
         }
 
         if (oldAudioGain != null)
         {
-            Audio.SetGain(restartAudio, oldAudioGain.Value, restartComp);
+            Audio.SetGain(restartAudio, AudioHelpers.SanitizeGain(oldAudioGain.Value, 0f), restartComp);
         }
         PlayRestartSound(ev);
     }

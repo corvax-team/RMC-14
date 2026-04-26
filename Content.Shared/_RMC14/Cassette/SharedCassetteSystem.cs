@@ -181,7 +181,7 @@ public abstract class SharedCassetteSystem : EntitySystem
             if (TryComp(actor, out ActorComponent? actorComp))
             {
                 var gain = _netConfig.GetClientCVar(actorComp.PlayerSession.Channel, RMCCVars.VolumeGainCassettes);
-                audioParams = audioParams.WithVolume(SharedAudioSystem.GainToVolume(gain));
+                audioParams = audioParams.WithVolume(Content.Shared.Audio.AudioHelpers.SafeGainToVolume(gain, RMCCVars.VolumeGainCassettes.DefaultValue));
             }
 
             player.Comp.AudioStream = _audio.PlayGlobal(song, actor, audioParams)?.Entity;

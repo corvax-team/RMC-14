@@ -1,3 +1,4 @@
+using Content.Shared.Audio;
 using Content.Shared.CCVar;
 using Robust.Client.Audio;
 using Robust.Client.ResourceManagement;
@@ -37,16 +38,16 @@ public sealed class AudioUIController : UIController
 
     private void SetInterfaceVolume(float obj)
     {
-        _interfaceGain = obj;
+        _interfaceGain = AudioHelpers.SanitizeGain(obj, CCVars.InterfaceVolume.DefaultValue);
 
         if (_clickSource != null)
         {
-            _clickSource.Gain = ClickGain * _interfaceGain;
+            _clickSource.Gain = AudioHelpers.SanitizeGain(ClickGain * _interfaceGain, 0f);
         }
 
         if (_hoverSource != null)
         {
-            _hoverSource.Gain = HoverGain * _interfaceGain;
+            _hoverSource.Gain = AudioHelpers.SanitizeGain(HoverGain * _interfaceGain, 0f);
         }
     }
 
@@ -60,7 +61,7 @@ public sealed class AudioUIController : UIController
 
             if (source != null)
             {
-                source.Gain = ClickGain * _interfaceGain;
+                source.Gain = AudioHelpers.SanitizeGain(ClickGain * _interfaceGain, 0f);
                 source.Global = true;
             }
 
@@ -83,7 +84,7 @@ public sealed class AudioUIController : UIController
 
             if (hoverSource != null)
             {
-                hoverSource.Gain = HoverGain * _interfaceGain;
+                hoverSource.Gain = AudioHelpers.SanitizeGain(HoverGain * _interfaceGain, 0f);
                 hoverSource.Global = true;
             }
 

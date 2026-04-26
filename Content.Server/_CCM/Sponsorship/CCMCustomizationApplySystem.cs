@@ -58,6 +58,7 @@ public sealed class CCMCustomizationApplySystem : EntitySystem
     [Dependency] private readonly CCMCustomizationManager _customization = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly ItemCamouflageSystem _camouflage = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
 
     public override void Initialize()
@@ -219,7 +220,7 @@ public sealed class CCMCustomizationApplySystem : EntitySystem
         _item.VisualsChanged(item);
     }
 
-    private static CamouflageType ParseCamouflageSelection(string selected)
+    private CamouflageType ParseCamouflageSelection(string selected)
     {
         return selected switch
         {
@@ -227,7 +228,8 @@ public sealed class CCMCustomizationApplySystem : EntitySystem
             CCMCustomizationCamouflageIds.Snow => CamouflageType.Snow,
             CCMCustomizationCamouflageIds.Classic => CamouflageType.Classic,
             CCMCustomizationCamouflageIds.Urban => CamouflageType.Urban,
-            _ => CamouflageType.Jungle,
+            CCMCustomizationCamouflageIds.Default => _camouflage.CurrentMapCamouflage,
+            _ => _camouflage.CurrentMapCamouflage,
         };
     }
 

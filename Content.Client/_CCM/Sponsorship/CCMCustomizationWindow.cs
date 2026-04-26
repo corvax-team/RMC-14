@@ -45,7 +45,6 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
     private readonly Label _statusLabel;
     private readonly Label _statusHintLabel;
     private readonly Label _heroTitleLabel;
-    private readonly Label _heroDescriptionLabel;
     private readonly Label _heroWipLabel;
     private readonly Label _saveStateLabel;
     private readonly Label _tagPreviewLabel;
@@ -221,12 +220,6 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             Text = Loc.GetString("ccm-customization-header"),
             FontColorOverride = GetWindowAccent(),
             FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 24),
-        };
-        _heroDescriptionLabel = new Label
-        {
-            Text = Loc.GetString("ccm-customization-status-locked"),
-            FontColorOverride = Color.FromHex("#A8B5C1"),
-            FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 11),
         };
         _heroWipLabel = new Label
         {
@@ -456,8 +449,6 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             HorizontalExpand = true,
         };
         titleStack.AddChild(_heroTitleLabel);
-        titleStack.AddChild(_heroDescriptionLabel);
-        titleStack.AddChild(_heroWipLabel);
 
         titleRow.AddChild(titleStack);
         stack.AddChild(titleRow);
@@ -471,6 +462,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         infoGrid.AddChild(BuildHeroInfoCard(_statusLabel, () => GetWindowAccent()));
         infoGrid.AddChild(BuildHeroInfoCard(_statusHintLabel, () => GetThemeAccent(0.18f)));
         stack.AddChild(infoGrid);
+        stack.AddChild(_heroWipLabel);
 
         hero.AddChild(stack);
         _themeRefreshActions.Add(() =>

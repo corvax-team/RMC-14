@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared.Audio;
 using Content.Shared.Light.Components;
 using Content.Shared.Weather;
 using Robust.Client.Audio;
@@ -116,8 +117,9 @@ public sealed class WeatherSystem : SharedWeatherSystem
             }
         }
 
-        var alpha = GetPercent(weather, uid);
-        alpha *= SharedAudioSystem.VolumeToGain(weatherProto.Sound.Params.Volume);
+        var alpha = Math.Clamp(GetPercent(weather, uid), 0f, 1f);
+        alpha *= AudioHelpers.SafeVolumeToGain(weatherProto.Sound.Params.Volume, 0f);
+        alpha = AudioHelpers.SanitizeGain(alpha, 0f);
         _audio.SetGain(weather.Stream, alpha, comp);
         comp.Occlusion = occlusion;
     }

@@ -97,7 +97,7 @@ public sealed class CassetteSystem : SharedCassetteSystem
         if (!_names.TryGetValue(stream, out var name))
             return null;
 
-        var audioParams = player.Comp.AudioParams.WithVolume(SharedAudioSystem.GainToVolume(_gain));
+        var audioParams = player.Comp.AudioParams.WithVolume(Content.Shared.Audio.AudioHelpers.SafeGainToVolume(_gain, RMCCVars.VolumeGainCassettes.DefaultValue));
         return _audio.PlayGlobal(stream, new ResolvedPathSpecifier(name), audioParams)?.Entity;
     }
 
@@ -132,7 +132,7 @@ public sealed class CassetteSystem : SharedCassetteSystem
             return;
 
 #pragma warning disable RA0002
-        audioComp.Params = audioComp.Params with { Volume = SharedAudioSystem.GainToVolume(_gain) };
+        audioComp.Params = audioComp.Params with { Volume = Content.Shared.Audio.AudioHelpers.SafeGainToVolume(_gain, RMCCVars.VolumeGainCassettes.DefaultValue) };
 #pragma warning restore RA0002
     }
 }

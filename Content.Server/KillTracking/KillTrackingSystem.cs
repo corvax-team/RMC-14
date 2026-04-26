@@ -3,6 +3,7 @@ using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Projectiles;
 using Robust.Shared.Player;
 
 namespace Content.Server.KillTracking;
@@ -35,7 +36,7 @@ public sealed class KillTrackingSystem : EntitySystem
             return;
         }
 
-        var source = GetKillSource(args.Origin);
+        var source = GetKillSource(args.Origin, args.Tool);
         var damage = component.LifetimeDamage.GetValueOrDefault(source);
         component.LifetimeDamage[source] = damage + args.DamageDelta.GetTotal();
     }
@@ -95,13 +96,75 @@ public sealed class KillTrackingSystem : EntitySystem
         RaiseLocalEvent(uid, ref ev, true);
     }
 
-    private KillSource GetKillSource(EntityUid? sourceEntity)
+    private KillSource GetKillSource(EntityUid? sourceEntity, EntityUid? toolEntity = null)
     {
-        if (TryComp<ActorComponent>(sourceEntity, out var actor))
-            return new KillPlayerSource(actor.PlayerSession.UserId);
-        if (HasComp<HTNComponent>(sourceEntity))
-            return new KillNpcSource(sourceEntity.Value);
+        if (TryResolveKillSource(sourceEntity, out var source))
+            return source;
+        if (TryResolveKillSource(toolEntity, out source))
+            return source;
+
         return new KillEnvironmentSource();
+    }
+
+    private bool TryResolveKillSource(EntityUid? sourceEntity, out KillSource source)
+    {
+        source = default!;
+        if (sourceEntity == null)
+            return false;
+
+        var visited = new HashSet<EntityUid>();
+        return TryResolveKillSource(sourceEntity.Value, visited, out source);
+    }
+
+    private bool TryResolveKillSource(EntityUid sourceEntity, HashSet<EntityUid> visited, out KillSource source)
+    {
+        source = default!;
+        if (!visited.Add(sourceEntity))
+            return false;
+
+        var current = sourceEntity;
+        for (var depth = 0; depth < 8; depth++)
+        {
+            if (TryComp<ActorComponent>(current, out var actor))
+            {
+                source = new KillPlayerSource(actor.PlayerSession.UserId);
+                return true;
+            }
+
+            if (HasComp<HTNComponent>(current))
+            {
+                source = new KillNpcSource(current);
+                return true;
+            }
+
+            if (!TryComp(current, out TransformComponent? xform) ||
+                xform.ParentUid == EntityUid.Invalid ||
+                xform.ParentUid == current)
+            {
+                break;
+            }
+
+            current = xform.ParentUid;
+        }
+
+        if (TryComp(sourceEntity, out ProjectileComponent? projectile))
+        {
+            if (projectile.Shooter is { } shooter &&
+                shooter != sourceEntity &&
+                TryResolveKillSource(shooter, visited, out source))
+            {
+                return true;
+            }
+
+            if (projectile.Weapon is { } weapon &&
+                weapon != sourceEntity &&
+                TryResolveKillSource(weapon, visited, out source))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private KillSource? GetLargestSource(Dictionary<KillSource, FixedPoint2> lifetimeDamages)

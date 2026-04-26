@@ -122,7 +122,7 @@ public sealed class AmbientSoundSystem : SharedAmbientSoundSystem
 
     private void SetAmbienceGain(float value)
     {
-        _ambienceVolume = SharedAudioSystem.GainToVolume(value);
+        _ambienceVolume = AudioHelpers.SafeGainToVolume(value, CCVars.AmbienceVolume.DefaultValue);
 
         foreach (var (ent, values) in _playingSounds)
         {
@@ -130,7 +130,8 @@ public sealed class AmbientSoundSystem : SharedAmbientSoundSystem
                 continue;
 
             var stream = values.Stream;
-            _audio.SetVolume(stream, _params.Volume + ent.Comp.Volume + _ambienceVolume);
+            _audio.SetVolume(stream,
+                AudioHelpers.SanitizeVolume(_params.Volume + ent.Comp.Volume + _ambienceVolume, _params.Volume + ent.Comp.Volume));
         }
     }
     private void SetCooldown(float value) => _cooldown = value;
@@ -306,7 +307,7 @@ public sealed class AmbientSoundSystem : SharedAmbientSoundSystem
                     continue;
 
                 var audioParams = _params
-                    .AddVolume(comp.Volume + _ambienceVolume)
+                    .WithVolume(AudioHelpers.SanitizeVolume(_params.Volume + comp.Volume + _ambienceVolume, _params.Volume + comp.Volume))
                     // Randomise start so 2 sources don't increase their volume.
                     .WithPlayOffset(_random.NextFloat(0.0f, 100.0f))
                     .WithMaxDistance(comp.Range * CcmAmbientRangeMultiplier);

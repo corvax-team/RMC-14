@@ -92,7 +92,6 @@ namespace Content.Client.Lobby.UI
         // CCM rework lobby - end
         private readonly List<(string Id, string LocId)> _originOptions = new();
         private readonly List<(string Id, string LocId)> _religionOptions = new();
-        private readonly List<(string Id, string LocId)> _corporateRelationOptions = new();
 
         // One at a time.
         private LoadoutWindow? _loadoutWindow;
@@ -290,11 +289,6 @@ namespace Content.Client.Lobby.UI
             _religionOptions.Add(("judaism", "humanoid-profile-editor-religion-judaism"));
             _religionOptions.Add(("other", "humanoid-profile-editor-religion-other"));
 
-            _corporateRelationOptions.Add(("loyal", "humanoid-profile-editor-corporate-loyal"));
-            _corporateRelationOptions.Add(("neutral", "humanoid-profile-editor-corporate-neutral"));
-            _corporateRelationOptions.Add(("distant", "humanoid-profile-editor-corporate-distant"));
-            _corporateRelationOptions.Add(("hostile", "humanoid-profile-editor-corporate-hostile"));
-
             OriginButton.OnPressed += _ => OpenOriginSelectWindow();
 
             for (var i = 0; i < _religionOptions.Count; i++)
@@ -304,15 +298,6 @@ namespace Content.Client.Lobby.UI
             {
                 ReligionButton.SelectId(args.Id);
                 SetReligion(_religionOptions[args.Id].Id);
-            };
-
-            for (var i = 0; i < _corporateRelationOptions.Count; i++)
-                CorporateRelationButton.AddItem(Loc.GetString(_corporateRelationOptions[i].LocId), i);
-
-            CorporateRelationButton.OnItemSelected += args =>
-            {
-                CorporateRelationButton.SelectId(args.Id);
-                SetCorporateRelation(_corporateRelationOptions[args.Id].Id);
             };
 
             BackgroundInfoButton.OnPressed += _ => OpenBackgroundInfoWindow();
@@ -1093,7 +1078,6 @@ namespace Content.Client.Lobby.UI
             UpdateBarkSettings();
             UpdateOriginButton();
             UpdateReligionButton();
-            UpdateCorporateRelationButton();
             BackgroundInfoButton.Disabled = false;
             SetBackgroundInfoExpanded(false);
 
@@ -1249,9 +1233,9 @@ namespace Content.Client.Lobby.UI
 
             var items = new[]
             {
-                ("humanoid-profile-editor-job-priority-first-button", (int) JobPriority.First),
-                ("humanoid-profile-editor-job-priority-second-button", (int) JobPriority.Second),
                 ("humanoid-profile-editor-job-priority-never-button", (int) JobPriority.Never),
+                ("humanoid-profile-editor-job-priority-second-button", (int) JobPriority.Second),
+                ("humanoid-profile-editor-job-priority-first-button", (int) JobPriority.First),
             };
 
             foreach (var department in departments)
@@ -1736,12 +1720,6 @@ namespace Content.Client.Lobby.UI
         private void SetReligion(string id)
         {
             Profile = Profile?.WithReligionId(id);
-            SetDirty();
-        }
-
-        private void SetCorporateRelation(string id)
-        {
-            Profile = Profile?.WithCorporateRelationId(id);
             SetDirty();
         }
 
@@ -2267,7 +2245,6 @@ namespace Content.Client.Lobby.UI
             ConfigureCompactCustomizationDropdown(SexButton);
             ConfigureCompactCustomizationDropdown(PronounsButton);
             ConfigureCompactCustomizationDropdown(ReligionButton);
-            ConfigureCompactCustomizationDropdown(CorporateRelationButton);
             ConfigureCompactCustomizationDropdown(SquadPreferenceButton);
         }
 
@@ -2601,17 +2578,6 @@ namespace Content.Client.Lobby.UI
 
             if (index >= 0)
                 ReligionButton.SelectId(index);
-        }
-
-        private void UpdateCorporateRelationButton()
-        {
-            var relationId = Profile?.CorporateRelationId ?? string.Empty;
-            var index = FindOptionIndex(_corporateRelationOptions, relationId);
-            if (index < 0 && _corporateRelationOptions.Count > 0)
-                index = 0;
-
-            if (index >= 0)
-                CorporateRelationButton.SelectId(index);
         }
 
         private int FindOptionIndex(List<(string Id, string LocId)> options, string id)

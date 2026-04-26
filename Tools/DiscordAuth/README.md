@@ -1,59 +1,52 @@
-# TGMC Discord Auth
+# Discord Auth
 
-Standalone Python service for Discord OAuth2 account linking.
+Автономный Python-сервис для OAuth-привязки Discord-аккаунта к игровому аккаунту.
 
-This tool only handles the player link flow:
+Это отдельный сервис. Он не зависит от старого C#-бота и не требует C#-проекта.
 
-```text
-game server -> /auth/login?state=... -> Discord OAuth2 -> /auth/callback -> game database
-```
+## Что делает
 
-Discord role sync and admin slash commands live separately in `Tools/DiscordBot`.
+- Отдаёт страницу входа через Discord OAuth2.
+- После успешного callback пишет привязку в БД.
+- Сразу выдаёт роль `Привязан` конкретному пользователю в Discord.
 
-## Configuration
+## Конфиг
 
-Copy `.env.example` to `.env` and fill real values:
+Используется общий `Tools/.env`:
 
 ```powershell
-Copy-Item .env.example .env
+Copy-Item ..\..\Tools\.env.example ..\..\Tools\.env
 ```
+
+Основные переменные:
 
 ```text
 DISCORD_CLIENT_ID=
 DISCORD_CLIENT_SECRET=
-DISCORD_REDIRECT_URI=https://auth.example.org/auth/callback
-PUBLIC_BASE_URL=https://auth.example.org
-DATABASE_PROVIDER=sqlite
-SQLITE_PATH=discord_auth.sqlite
+DISCORD_REDIRECT_URI=http://127.0.0.1:2424/auth/callback
+PUBLIC_BASE_URL=http://127.0.0.1:2424
+OAUTH_STATE_SECRET=
+DISCORD_BOT_TOKEN=
+DISCORD_GUILD_ID=
+DISCORD_LINKED_ROLE_ID=
+DISCORD_LINKED_ROLE_NAME=Привязан
+DATABASE_PROVIDER=postgres
 DATABASE_URL=
-OAUTH_STATE_SECRET=same-secret-as-rmc.discord_oauth_state_secret
+SQLITE_PATH=
 PORT=2424
 ```
 
-For a simple local setup, `sqlite` is enough and does not require Docker or a separate database service.
-Switch to `postgres` only if you specifically need the auth service to write into a shared PostgreSQL game database.
-
-The game server must use the same state secret:
-
-```text
-rmc.discord_oauth_base_url=https://auth.example.org
-rmc.discord_oauth_state_secret=<same OAUTH_STATE_SECRET>
-```
-
-If local Discord auth is not needed, keep these values empty in the server preset and the linking button flow will stay disabled.
-
-## Run
+## Запуск
 
 ```powershell
-cd C:\Users\admin\Documents\GitHub\TGMC-14\Tools\DiscordAuth
+cd C:\Users\admin\Documents\GitHub\RMC-14\Tools\DiscordAuth
 python -m venv .venv
 .\.venv\Scripts\python -m pip install -r requirements.txt
 .\.venv\Scripts\python -m uvicorn discord_auth.main:app --host 0.0.0.0 --port 2424
 ```
 
-## Check
+## Примечания
 
-```powershell
-.\.venv\Scripts\python -m pytest
-.\.venv\Scripts\python -m compileall .
-```
+- Если роль `Привязан` не задана по `DISCORD_LINKED_ROLE_ID`, сервис попробует найти её по имени.
+- Если выдача роли временно не удалась, сама привязка в БД всё равно сохранится.
+- Для локальной разработки можно оставить `DATABASE_PROVIDER=sqlite`.

@@ -27,7 +27,7 @@
         </PanelContainer>
         
         <Button Margin="8 32 8 2" Name="CreateButton" Text="{Loc 'ui-vote-create-button'}"
-                StyleClasses="VoteActionButton" />
+                StyleClasses="VoteCreateButton" />
 
         <PanelContainer StyleClasses="LowDivider" />
         <!-- CCM rework lobby - start -->

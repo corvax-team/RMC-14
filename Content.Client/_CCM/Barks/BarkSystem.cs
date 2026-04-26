@@ -1,5 +1,6 @@
 ﻿// CM14 rework: non-RMC edit marker.
 using Content.Shared._CCM.Barks;
+using Content.Shared.Audio;
 using Content.Shared.CCVar;
 using Robust.Client.Player;
 using Robust.Shared.Audio;
@@ -71,7 +72,7 @@ public sealed class BarkSystem : EntitySystem
 
             var distance = delta.Length();
             var distanceFactor = Math.Clamp(1f - (distance / maxRange), 0.15f, 1f);
-            distanceAttenuation = SharedAudioSystem.GainToVolume(distanceFactor);
+            distanceAttenuation = AudioHelpers.SafeGainToVolume(distanceFactor, 1f);
         }
 
         var speed = Math.Clamp(ev.PlaybackSpeed, 0.7f, 1.4f);
@@ -85,10 +86,10 @@ public sealed class BarkSystem : EntitySystem
             expression = Math.Clamp(synthesis.Expression, 0.25f, 2f);
         }
 
-        var localGain = Math.Max(_cfg.GetCVar(CCVars.BarksVolume), 0f);
-        var volume = SharedAudioSystem.GainToVolume(localGain);
+        var localGain = AudioHelpers.SanitizeGain(_cfg.GetCVar(CCVars.BarksVolume), CCVars.BarksVolume.DefaultValue);
+        var volume = AudioHelpers.SafeGainToVolume(localGain, CCVars.BarksVolume.DefaultValue);
         if (ev.VolumeOverride >= 0f)
-            volume = ev.VolumeOverride;
+            volume = AudioHelpers.SanitizeVolume(ev.VolumeOverride, 0f);
 
         if (ev.IsWhisper)
             volume -= 4f;
@@ -99,10 +100,10 @@ public sealed class BarkSystem : EntitySystem
         if (!ev.Preview && !ev.FromRadio)
             volume += distanceAttenuation;
 
-        volume += SharedAudioSystem.GainToVolume(BarkVolumeMultiplier);
+        volume += AudioHelpers.SafeGainToVolume(BarkVolumeMultiplier, BarkVolumeMultiplier);
 
         var paramsBase = AudioParams.Default
-            .WithVolume(volume)
+            .WithVolume(AudioHelpers.SanitizeVolume(volume, 0f))
             .WithPitchScale(pitch)
             .WithVariation(0.125f * expression)
             .WithMaxDistance(maxRange);

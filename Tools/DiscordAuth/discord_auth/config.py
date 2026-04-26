@@ -8,6 +8,9 @@ from typing import Mapping
 from dotenv import load_dotenv
 
 
+DEFAULT_LINKED_ROLE_NAME = "\u041f\u0440\u0438\u0432\u044f\u0437\u0430\u043d"
+
+
 @dataclass(frozen=True)
 class AppConfig:
     port: int
@@ -19,11 +22,15 @@ class AppConfig:
     database_url: str | None
     sqlite_path: str | None
     oauth_state_secret: str
+    discord_bot_token: str
+    discord_guild_id: str
+    discord_linked_role_id: str | None
+    discord_linked_role_name: str
 
 
 def load_config(env: Mapping[str, str] | None = None) -> AppConfig:
     if env is None:
-        load_dotenv(Path(__file__).resolve().parents[1] / ".env", override=False)
+        load_dotenv(Path(__file__).resolve().parents[2] / ".env", override=False)
         env = environ
 
     provider = env.get("DATABASE_PROVIDER", "postgres").lower()
@@ -51,6 +58,10 @@ def load_config(env: Mapping[str, str] | None = None) -> AppConfig:
         database_url=database_url,
         sqlite_path=sqlite_path,
         oauth_state_secret=_require(env, "OAUTH_STATE_SECRET"),
+        discord_bot_token=_require(env, "DISCORD_BOT_TOKEN"),
+        discord_guild_id=_require(env, "DISCORD_GUILD_ID"),
+        discord_linked_role_id=_optional(env, "DISCORD_LINKED_ROLE_ID"),
+        discord_linked_role_name=env.get("DISCORD_LINKED_ROLE_NAME", DEFAULT_LINKED_ROLE_NAME).strip() or DEFAULT_LINKED_ROLE_NAME,
     )
 
 
@@ -60,3 +71,7 @@ def _require(env: Mapping[str, str], key: str) -> str:
         raise ValueError(f"{key} is required.")
     return value
 
+
+def _optional(env: Mapping[str, str], key: str) -> str | None:
+    value = env.get(key, "").strip()
+    return value or None

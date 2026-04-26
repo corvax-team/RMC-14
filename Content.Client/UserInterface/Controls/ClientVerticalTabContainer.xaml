@@ -5,13 +5,25 @@
                                      Orientation="Horizontal"
                                      MouseFilter="Pass">
     <ScrollContainer VerticalExpand="True"
+                     HorizontalExpand="False"
+                     HorizontalAlignment="Left"
                      ReturnMeasure="True"
                      HScrollEnabled="False"
                      Margin="5 5 0 5">
-        <PanelContainer Margin="5" VerticalExpand="True"
+        <PanelContainer Margin="4"
+                        VerticalExpand="True"
+                        HorizontalExpand="False"
+                        HorizontalAlignment="Left"
                         VerticalAlignment="Stretch"
                         StyleClasses="VerticalTabListBackground">
-            <BoxContainer Name="TabContainer" Margin="5" Orientation="Vertical" SeparationOverride="18"/>
+            <BoxContainer Name="TabContainer"
+                          Margin="4"
+                          Orientation="Vertical"
+                          SeparationOverride="14"
+                          HorizontalExpand="False"
+                          HorizontalAlignment="Stretch"
+                          MinWidth="136"
+                          MaxWidth="136"/>
         </PanelContainer>
     </ScrollContainer>
     <PanelContainer Margin="0 5 5 5"

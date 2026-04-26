@@ -16,6 +16,7 @@ public sealed partial class CMAutomatedVendorButton : Button
 
     protected override void DrawModeChanged()
     {
+        base.DrawModeChanged();
         OnDrawModeChanged?.Invoke();
     }
 }

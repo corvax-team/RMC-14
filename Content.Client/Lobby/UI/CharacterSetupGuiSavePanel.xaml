@@ -1,11 +1,26 @@
-<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls" xmlns="https://spacestation14.io"
+<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
+            xmlns="https://spacestation14.io"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+            xmlns:style="clr-namespace:Content.Client.Stylesheets"
             Title="{Loc 'character-setup-gui-save-panel-title'}"
             Resizable="False">
 
-    <BoxContainer Orientation="Horizontal" SeparationOverride="4" MinSize="200 40">
-        <Button Name="SaveButton" Access="Public" Text="{Loc 'character-setup-gui-save-panel-save'}" StyleClasses="ButtonBig"/>
-        <Button Name="NoSaveButton" Access="Public" Text="{Loc 'character-setup-gui-save-panel-nosave'}" StyleClasses="ButtonBig"/>
-        <Button Name="CancelButton" Access="Public" Text="{Loc 'character-setup-gui-save-panel-cancel'}" StyleClasses="ButtonBig"/>
-    </BoxContainer>
+    <PanelContainer MinSize="360 58" Margin="4 4 4 4">
+        <PanelContainer.PanelOverride>
+            <gfx:StyleBoxFlat BackgroundColor="{x:Static style:StyleNano.PanelDark}"
+                              BorderColor="{x:Static style:StyleNano.UiButtonBorder}"
+                              BorderThickness="1"
+                              ContentMarginLeftOverride="8"
+                              ContentMarginTopOverride="8"
+                              ContentMarginRightOverride="8"
+                              ContentMarginBottomOverride="8" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+            <Button Name="SaveButton" Access="Public" Text="{Loc 'character-setup-gui-save-panel-save'}" StyleClasses="CharacterSetupActionButton" HorizontalExpand="True" MinWidth="108"/>
+            <Button Name="NoSaveButton" Access="Public" Text="{Loc 'character-setup-gui-save-panel-nosave'}" StyleClasses="CharacterSetupActionButton" HorizontalExpand="True" MinWidth="108"/>
+            <Button Name="CancelButton" Access="Public" Text="{Loc 'character-setup-gui-save-panel-cancel'}" StyleClasses="CharacterSetupActionButton" HorizontalExpand="True" MinWidth="108"/>
+        </BoxContainer>
+    </PanelContainer>
 </ccm:DefaultCMWindow>
 

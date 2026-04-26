@@ -1,7 +1,8 @@
-﻿<controls:CMAutomatedVendorButton
+<controls:CMAutomatedVendorButton
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Vendors">
-    <BoxContainer Orientation="Horizontal">
-        <Label Name="Label" Access="Public" Align="Left" />
+    <!-- CCM: vendor row content refresh -->
+    <BoxContainer Orientation="Horizontal" Margin="10 6" HorizontalExpand="True">
+        <Label Name="Label" Access="Public" Align="Left" HorizontalExpand="True" ClipText="True" />
     </BoxContainer>
 </controls:CMAutomatedVendorButton>

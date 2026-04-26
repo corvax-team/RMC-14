@@ -22,9 +22,9 @@ public sealed class CCMSponsorshipCommand : LocalizedCommands
 
     public override string Command => "ccmsponsor";
     public override string Description => "Sets or clears a persisted sponsorship tier for a player.";
-    public override string Help => "ccmsponsor <ckey|netuserid> <none|1|2|3|sponsor1|sponsor2|sponsor3> [days]";
+    public override string Help => "ccmsponsor <ckey|netuserid> <none|1|2|3|sponsor1|sponsor2|sponsor3> [days=30]";
 
-    public override void Execute(IConsoleShell shell, string argStr, string[] args)
+    public override async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         try
         {
@@ -47,14 +47,14 @@ public sealed class CCMSponsorshipCommand : LocalizedCommands
                 return;
             }
 
-            var player = _locator.LookupIdByNameOrIdAsync(args[0]).GetAwaiter().GetResult();
+            var player = await _locator.LookupIdByNameOrIdAsync(args[0]);
             if (player == null)
             {
                 shell.WriteError("Target player was not found.");
                 return;
             }
 
-            _sponsorship.SetPersistentTier(player.UserId, tier, days).GetAwaiter().GetResult();
+            await _sponsorship.SetPersistentTier(player.UserId, tier, days);
 
             if (_players.TryGetSessionById(player.UserId, out var session))
             {
@@ -87,6 +87,7 @@ public sealed class CCMSponsorshipCommand : LocalizedCommands
                 _players.Sessions.Select(s => s.Name).OrderBy(n => n).ToArray(),
                 "ckey"),
             2 => CompletionResult.FromOptions(["none", "1", "2", "3", "sponsor1", "sponsor2", "sponsor3"]),
+            3 => CompletionResult.FromHintOptions(["7", "14", "30", "60", "90", "180", "365"], "days"),
             _ => CompletionResult.Empty,
         };
     }

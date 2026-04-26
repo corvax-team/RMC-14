@@ -79,11 +79,12 @@ public sealed partial class ContentAudioSystem
 
     private void AmbienceCVarChanged(float obj)
     {
-        _volumeSlider = SharedAudioSystem.GainToVolume(obj);
+        _volumeSlider = AudioHelpers.SafeGainToVolume(obj, CCVars.AmbientMusicVolume.DefaultValue);
 
         if (_ambientMusicStream != null && _musicProto != null)
         {
-            _audio.SetVolume(_ambientMusicStream, _musicProto.Sound.Params.Volume + _volumeSlider);
+            _audio.SetVolume(_ambientMusicStream,
+                AudioHelpers.SanitizeVolume(_musicProto.Sound.Params.Volume + _volumeSlider, _musicProto.Sound.Params.Volume));
         }
     }
 
@@ -222,7 +223,8 @@ public sealed partial class ContentAudioSystem
             track.ToString(),
             Filter.Local(),
             false,
-            AudioParams.Default.WithVolume(_musicProto.Sound.Params.Volume + _volumeSlider));
+            AudioParams.Default.WithVolume(
+                AudioHelpers.SanitizeVolume(_musicProto.Sound.Params.Volume + _volumeSlider, _musicProto.Sound.Params.Volume)));
 
         _ambientMusicStream = strim?.Entity;
 

@@ -20,6 +20,8 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Ghost;
 using Content.Shared.Medical;
 using Content.Shared.Mobs;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -78,6 +80,44 @@ public sealed class CCMStatsSystem : EntitySystem
             stats.XenoHealingDone,
             stats.XenoStructuresBuilt);
         return true;
+    }
+
+    public bool TryGetLiveAchievementState(
+        NetUserId player,
+        out CCMLiveAchievementMetrics metrics,
+        out bool marineParticipated,
+        out bool xenoParticipated)
+    {
+        metrics = default;
+        marineParticipated = false;
+        xenoParticipated = false;
+
+        if (!_roundStats.TryGetValue(player, out var stats))
+            return false;
+
+        metrics = new CCMLiveAchievementMetrics(
+            (int) MathF.Round(stats.MarineDamage + stats.XenoDamage),
+            stats.MarineKills + stats.XenoKills,
+            stats.MarineRevives,
+            stats.MarineHealingDone + stats.XenoHealingDone,
+            stats.MarineStructuresBuilt + stats.XenoStructuresBuilt,
+            (int) MathF.Round(stats.MarineDamage),
+            stats.MarineKills,
+            stats.MarineRevives,
+            stats.MarineHealingDone,
+            stats.MarineStructuresBuilt,
+            (int) MathF.Round(stats.XenoDamage),
+            stats.XenoKills,
+            stats.XenoHealingDone,
+            stats.XenoStructuresBuilt);
+        marineParticipated = stats.MarineParticipated;
+        xenoParticipated = stats.XenoParticipated;
+        return true;
+    }
+
+    public NetUserId[] GetTrackedPlayers()
+    {
+        return _roundStats.Keys.ToArray();
     }
 
     public override void Initialize()
@@ -394,10 +434,22 @@ public sealed class CCMStatsSystem : EntitySystem
             var xenoHealingDone = Math.Max(0, stats.XenoHealingDone - stats.PersistedXenoHealingDone);
             var marineStructuresBuilt = Math.Max(0, stats.MarineStructuresBuilt - stats.PersistedMarineStructuresBuilt);
             var xenoStructuresBuilt = Math.Max(0, stats.XenoStructuresBuilt - stats.PersistedXenoStructuresBuilt);
+            var marineDamage = Math.Max(0, (int) MathF.Round(stats.MarineDamage) - stats.PersistedMarineDamage);
+            var xenoDamage = Math.Max(0, (int) MathF.Round(stats.XenoDamage) - stats.PersistedXenoDamage);
+            var marineDeaths = Math.Max(0, stats.MarineDeaths - stats.PersistedMarineDeaths);
+            var xenoDeaths = Math.Max(0, stats.XenoDeaths - stats.PersistedXenoDeaths);
+            var marineShots = Math.Max(0, stats.MarineShotsFired - stats.PersistedMarineShotsFired);
+            var xenoShots = Math.Max(0, stats.XenoShotsFired - stats.PersistedXenoShotsFired);
+            var marineImpact = Math.Max(0, (int) MathF.Round(stats.MarineImpact) - stats.PersistedMarineImpactPoints);
+            var xenoImpact = Math.Max(0, (int) MathF.Round(stats.XenoImpact) - stats.PersistedXenoImpactPoints);
             var totalKills = marineKills + xenoKills;
             var totalRevives = marineRevives;
             var totalHealingDone = marineHealingDone + xenoHealingDone;
             var totalStructuresBuilt = marineStructuresBuilt + xenoStructuresBuilt;
+            var totalDamage = marineDamage + xenoDamage;
+            var totalDeaths = marineDeaths + xenoDeaths;
+            var totalShots = marineShots + xenoShots;
+            var totalImpact = marineImpact + xenoImpact;
 
             saveTasks.Add(_db.SaveCCMRoundStats(
                 player,
@@ -407,38 +459,54 @@ public sealed class CCMStatsSystem : EntitySystem
                 stats.GeneralRoundsWon,
                 stats.GeneralRoundsLost,
                 (int) stats.RoundSecondsPlayed,
-                (int) MathF.Round(stats.TotalDamage),
+                totalDamage,
                 totalKills,
                 stats.VictoryPointsEarned,
-                stats.TotalImpactPoints,
+                totalImpact,
                 totalRevives,
                 totalHealingDone,
                 totalStructuresBuilt,
-                stats.TotalDeaths,
-                stats.TotalShotsFired,
+                totalDeaths,
+                totalShots,
                 stats.MarineRoundsPlayed,
                 stats.MarineRoundsWon,
                 stats.MarineRoundsLost,
-                (int) MathF.Round(stats.MarineDamage),
+                marineDamage,
                 marineKills,
                 stats.MarineVictoryPointsEarned,
-                stats.MarineImpactPoints,
+                marineImpact,
                 marineRevives,
                 marineHealingDone,
                 marineStructuresBuilt,
-                stats.MarineDeaths,
-                stats.MarineShotsFired,
+                marineDeaths,
+                marineShots,
                 stats.XenoRoundsPlayed,
                 stats.XenoRoundsWon,
                 stats.XenoRoundsLost,
-                (int) MathF.Round(stats.XenoDamage),
+                xenoDamage,
                 xenoKills,
                 stats.XenoVictoryPointsEarned,
-                stats.XenoImpactPoints,
+                xenoImpact,
                 xenoHealingDone,
                 xenoStructuresBuilt,
-                stats.XenoDeaths,
-                stats.XenoShotsFired));
+                xenoDeaths,
+                xenoShots));
+
+            stats.PersistedMarineKills += marineKills;
+            stats.PersistedXenoKills += xenoKills;
+            stats.PersistedMarineRevives += marineRevives;
+            stats.PersistedMarineHealingDone += marineHealingDone;
+            stats.PersistedXenoHealingDone += xenoHealingDone;
+            stats.PersistedMarineStructuresBuilt += marineStructuresBuilt;
+            stats.PersistedXenoStructuresBuilt += xenoStructuresBuilt;
+            stats.PersistedMarineDamage += marineDamage;
+            stats.PersistedXenoDamage += xenoDamage;
+            stats.PersistedMarineDeaths += marineDeaths;
+            stats.PersistedXenoDeaths += xenoDeaths;
+            stats.PersistedMarineShotsFired += marineShots;
+            stats.PersistedXenoShotsFired += xenoShots;
+            stats.PersistedMarineImpactPoints += marineImpact;
+            stats.PersistedXenoImpactPoints += xenoImpact;
         }
 
         if (saveTasks.Count > 0)
@@ -469,6 +537,14 @@ public sealed class CCMStatsSystem : EntitySystem
                 var xenoHealingDone = Math.Max(0, stats.XenoHealingDone - stats.PersistedXenoHealingDone);
                 var marineStructuresBuilt = Math.Max(0, stats.MarineStructuresBuilt - stats.PersistedMarineStructuresBuilt);
                 var xenoStructuresBuilt = Math.Max(0, stats.XenoStructuresBuilt - stats.PersistedXenoStructuresBuilt);
+                var marineDamage = Math.Max(0, (int) MathF.Round(stats.MarineDamage) - stats.PersistedMarineDamage);
+                var xenoDamage = Math.Max(0, (int) MathF.Round(stats.XenoDamage) - stats.PersistedXenoDamage);
+                var marineDeaths = Math.Max(0, stats.MarineDeaths - stats.PersistedMarineDeaths);
+                var xenoDeaths = Math.Max(0, stats.XenoDeaths - stats.PersistedXenoDeaths);
+                var marineShots = Math.Max(0, stats.MarineShotsFired - stats.PersistedMarineShotsFired);
+                var xenoShots = Math.Max(0, stats.XenoShotsFired - stats.PersistedXenoShotsFired);
+                var marineImpact = Math.Max(0, (int) MathF.Round(stats.MarineImpact) - stats.PersistedMarineImpactPoints);
+                var xenoImpact = Math.Max(0, (int) MathF.Round(stats.XenoImpact) - stats.PersistedXenoImpactPoints);
 
                 var hasProgress = marineKills > 0 ||
                                   xenoKills > 0 ||
@@ -476,7 +552,15 @@ public sealed class CCMStatsSystem : EntitySystem
                                   marineHealingDone > 0 ||
                                   xenoHealingDone > 0 ||
                                   marineStructuresBuilt > 0 ||
-                                  xenoStructuresBuilt > 0;
+                                  xenoStructuresBuilt > 0 ||
+                                  marineDamage > 0 ||
+                                  xenoDamage > 0 ||
+                                  marineDeaths > 0 ||
+                                  xenoDeaths > 0 ||
+                                  marineShots > 0 ||
+                                  xenoShots > 0 ||
+                                  marineImpact > 0 ||
+                                  xenoImpact > 0;
 
                 if (!hasProgress)
                     continue;
@@ -489,38 +573,38 @@ public sealed class CCMStatsSystem : EntitySystem
                     0,
                     0,
                     0,
-                    0,
+                    marineDamage + xenoDamage,
                     marineKills + xenoKills,
                     0,
-                    0,
+                    marineImpact + xenoImpact,
                     marineRevives,
                     marineHealingDone + xenoHealingDone,
                     marineStructuresBuilt + xenoStructuresBuilt,
+                    marineDeaths + xenoDeaths,
+                    marineShots + xenoShots,
                     0,
                     0,
                     0,
-                    0,
-                    0,
-                    0,
+                    marineDamage,
                     marineKills,
                     0,
-                    0,
+                    marineImpact,
                     marineRevives,
                     marineHealingDone,
                     marineStructuresBuilt,
+                    marineDeaths,
+                    marineShots,
                     0,
                     0,
                     0,
-                    0,
-                    0,
-                    0,
+                    xenoDamage,
                     xenoKills,
                     0,
-                    0,
+                    xenoImpact,
                     xenoHealingDone,
                     xenoStructuresBuilt,
-                    0,
-                    0));
+                    xenoDeaths,
+                    xenoShots));
 
                 stats.PersistedMarineKills += marineKills;
                 stats.PersistedXenoKills += xenoKills;
@@ -529,6 +613,14 @@ public sealed class CCMStatsSystem : EntitySystem
                 stats.PersistedXenoHealingDone += xenoHealingDone;
                 stats.PersistedMarineStructuresBuilt += marineStructuresBuilt;
                 stats.PersistedXenoStructuresBuilt += xenoStructuresBuilt;
+                stats.PersistedMarineDamage += marineDamage;
+                stats.PersistedXenoDamage += xenoDamage;
+                stats.PersistedMarineDeaths += marineDeaths;
+                stats.PersistedXenoDeaths += xenoDeaths;
+                stats.PersistedMarineShotsFired += marineShots;
+                stats.PersistedXenoShotsFired += xenoShots;
+                stats.PersistedMarineImpactPoints += marineImpact;
+                stats.PersistedXenoImpactPoints += xenoImpact;
             }
 
             if (saveTasks.Count > 0)
@@ -830,15 +922,56 @@ public sealed class CCMStatsSystem : EntitySystem
         if (entity == null)
             return false;
 
-        var current = entity.Value;
+        if (!TryResolvePlayerAndSide(entity.Value, out var userId, out var side))
+            return false;
+
+        if (side != expectedSide)
+            return false;
+
+        MarkParticipation(userId, expectedSide, roundStart: false);
+        stats = GetOrCreateRoundStats(userId);
+        return true;
+    }
+
+    private bool TryResolvePlayerAndSide(EntityUid entity, out NetUserId userId, out CCMStatsSide side)
+    {
+        userId = default;
+        side = CCMStatsSide.None;
+
+        var visited = new HashSet<EntityUid>();
+        return TryResolvePlayerAndSide(entity, visited, ref userId, ref side);
+    }
+
+    private bool TryResolvePlayerAndSide(EntityUid entity, HashSet<EntityUid> visited, ref NetUserId userId, ref CCMStatsSide side)
+    {
+        if (!visited.Add(entity))
+            return false;
+
+        var current = entity;
         for (var depth = 0; depth < 8; depth++)
         {
-            if (TryComp(current, out ActorComponent? actor) && GetSide(current) == expectedSide)
+            if (userId == default &&
+                TryComp(current, out ActorComponent? actor))
             {
-                MarkParticipation(actor.PlayerSession.UserId, expectedSide, roundStart: false);
-                stats = GetOrCreateRoundStats(actor.PlayerSession.UserId);
-                return true;
+                userId = actor.PlayerSession.UserId;
             }
+
+            if (userId == default &&
+                TryComp(current, out MindContainerComponent? mindContainer) &&
+                mindContainer.Mind is { } mindId &&
+                TryComp(mindId, out MindComponent? mind) &&
+                mind.UserId is { } mindUserId)
+            {
+                userId = mindUserId;
+            }
+
+            if (side == CCMStatsSide.None)
+            {
+                side = GetSide(current);
+            }
+
+            if (userId != default && side != CCMStatsSide.None)
+                return true;
 
             if (!TryComp(current, out TransformComponent? xform) ||
                 xform.ParentUid == EntityUid.Invalid ||
@@ -850,14 +983,24 @@ public sealed class CCMStatsSystem : EntitySystem
             current = xform.ParentUid;
         }
 
-        if (TryComp(entity.Value, out ProjectileComponent? projectile) &&
-            projectile.Shooter is { } shooter &&
-            shooter != entity.Value)
+        if (TryComp(entity, out ProjectileComponent? projectile))
         {
-            return TryGetEntityStats(shooter, expectedSide, out stats);
+            if (projectile.Shooter is { } shooter &&
+                shooter != entity &&
+                TryResolvePlayerAndSide(shooter, visited, ref userId, ref side))
+            {
+                return true;
+            }
+
+            if (projectile.Weapon is { } weapon &&
+                weapon != entity &&
+                TryResolvePlayerAndSide(weapon, visited, ref userId, ref side))
+            {
+                return true;
+            }
         }
 
-        return false;
+        return userId != default && side != CCMStatsSide.None;
     }
 
     private static float GetPositiveDamage(DamageChangedEvent args)
@@ -922,6 +1065,14 @@ public sealed class CCMStatsSystem : EntitySystem
         public int PersistedXenoHealingDone;
         public int PersistedMarineStructuresBuilt;
         public int PersistedXenoStructuresBuilt;
+        public int PersistedMarineDamage;
+        public int PersistedXenoDamage;
+        public int PersistedMarineDeaths;
+        public int PersistedXenoDeaths;
+        public int PersistedMarineShotsFired;
+        public int PersistedXenoShotsFired;
+        public int PersistedMarineImpactPoints;
+        public int PersistedXenoImpactPoints;
         public int MarineDeaths;
         public int XenoDeaths;
         public int MarineShotsFired;

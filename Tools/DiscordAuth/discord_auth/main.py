@@ -10,7 +10,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse, Response
 
 from .config import AppConfig, load_config
 from .db import GameDb, LinkResult, create_game_db
-from .discord import DiscordClient, HttpDiscordClient
+from .discord import DiscordClient, DiscordGuildClient, HttpDiscordClient
 from .state import verify_state
 
 
@@ -22,6 +22,7 @@ def create_app(
     resolved_config = config or load_config()
     resolved_db = db or create_game_db(resolved_config)
     resolved_discord = discord or HttpDiscordClient(resolved_config)
+    resolved_guild = DiscordGuildClient(resolved_config)
 
     @asynccontextmanager
     async def lifespan(_service: FastAPI):
@@ -33,6 +34,7 @@ def create_app(
                 maybe_awaitable = close()
                 if hasattr(maybe_awaitable, "__await__"):
                     await maybe_awaitable
+            await resolved_guild.close()
             resolved_db.close()
 
     service = FastAPI(lifespan=lifespan)
@@ -77,6 +79,10 @@ def create_app(
             token = await resolved_discord.exchange_code(code)
             user = await resolved_discord.get_current_user(token.access_token)
             result = resolved_db.link_account(verified.payload.playerId, user.id)
+            try:
+                await resolved_guild.sync_linked_role(user.id, linked=True)
+            except Exception as error:
+                print("Discord role sync after OAuth link failed.", error)
             return send_link_result(result, user.global_name or user.username or user.id)
         except Exception as error:
             print("Discord OAuth callback failed.", error)
