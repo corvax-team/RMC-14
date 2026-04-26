@@ -50,19 +50,13 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_CCM14/Planets/westernforest.yml
     camouflage: Snow
-    survivorJobVariants:
-      CMSurvivor:
-      - CMJobSurvivorSoroCivilian: 1
-      - CMJobSurvivorSoroMiner: 1
-      CMSurvivorDoctor:
-      - CMJobSurvivorMoHDoctor: 1
-      CMSurvivorEngineer:
-      - CMJobSurvivorInfrastructureEngineer: 1
-      CMSurvivorSecurity:
-      - CMJobSurvivorArmyReservist: 1
-      - CMJobSurvivorArmedPoliceOfficer: 1
     survivorJobs:
-      - CMSurvivorScientist: 1
+    - CMSurvivor: 1
+    - CMSurvivorCorporate: 1
+    - CMSurvivorDoctor: 1
+    - CMSurvivorEngineer: 1
+    - CMSurvivorSecurity: 1
+    - CMSurvivorScientist: 1
     announcement: "Пехота! Был получен сигнал бедствия с горнодобывающей колонии СССП неподалеку отсюда. Поможем нашим товарищам избавиться от заразы.
       Для общего понимания,
       Обозначение колонии - островная исследовательская станция и горнодобывающее предприятие.
