@@ -1,6 +1,6 @@
 ﻿# CM14 rework: non-RMC edit marker.
-defaultWindowTitle: Colonial Marines
-windowIconSet: /Textures/_CCM14/Logo/logo
+defaultWindowTitle: Colonial Marine Corps
+windowIconSet: /Textures/_CCM14/Logo/logo/logo.png
 splashLogo: /Textures/_CCM14/Logo/load_logo.png
 multiWindow: true
 
