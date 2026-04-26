@@ -45,7 +45,6 @@ namespace Content.Client.Lobby.UI
         [Dependency] private readonly LinkAccountManager _linkAccount = default!;
         [Dependency] private readonly IStateManager _stateManager = default!;
 
-        private readonly Action<bool> _onLobbyInvertSidesChanged;
         private RulesAndInfoWindow? _tutorialWindow;
         private LateJoinGui? _lateJoinWindow;
         private VoteCallMenu? _voteMenu;
@@ -76,12 +75,14 @@ namespace Content.Client.Lobby.UI
         private const float LobbyTaskbarHeightCompact = 72f;
         private const float LobbyEdgePaddingDefault = 12f;
         private const float LobbyEdgePaddingCompact = 8f;
+        private const string LobbyUiStyleNewClass = "LobbyUiStyleNew";
+        private const string LobbyUiStyleOldClass = "LobbyUiStyleOld";
 
         public LobbyGui()
         {
-            _onLobbyInvertSidesChanged = ApplyLobbyColumnLayout;
             RobustXamlLoader.Load(this);
             IoCManager.InjectDependencies(this);
+            Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
             _leftMenuDragHelper = new DragDropHelper<Control>(OnBeginLeftMenuDrag, OnContinueLeftMenuDrag, OnEndLeftMenuDrag);
             LayoutContainer.SetAnchorPreset(RootContainer, LayoutPreset.Wide);
             LayoutContainer.SetAnchorPreset(MainContainer, LayoutPreset.Wide);
@@ -104,7 +105,6 @@ namespace Content.Client.Lobby.UI
             GuidesButton.OnPressed += _ => UserInterfaceManager.GetUIController<GuidebookUIController>().ToggleGuidebook();
             UpdatesButton.OnPressed += _ => UserInterfaceManager.GetUIController<RoadmapUIController>().ToggleRoadmap();
             LinkDiscordButton.OnPressed += _ => UserInterfaceManager.GetUIController<DiscordOAuthUIController>().OpenLink();
-
             TaskbarMenuButton.OnPressed += _ => ToggleLeftMenu(!_leftMenuVisible);
             TaskbarRatingButton.OnPressed += _ => ToggleLeaderboard();
             TaskbarAchievementsButton.OnPressed += _ => UserInterfaceManager.GetUIController<CCMAchievementsUIController>().ToggleWindow();
@@ -125,9 +125,12 @@ namespace Content.Client.Lobby.UI
             _cfg.OnValueChanged(RMCCVars.RMCLobbyCrtEnabled, ApplyLobbyTheme);
             _cfg.OnValueChanged(RMCCVars.RMCUIColorTheme,
                 _ => ApplyLobbyTheme(_cfg.GetCVar(RMCCVars.RMCLobbyCrtEnabled)));
-            _cfg.OnValueChanged(RMCCVars.RMCLobbyInvertSides, _onLobbyInvertSidesChanged, true);
+            _cfg.OnValueChanged(RMCCVars.RMCLobbyUiStyle, ApplyLobbyUiStyleClasses, true);
+            if (_cfg.GetCVar(RMCCVars.RMCLobbyInvertSides))
+                _cfg.SetCVar(RMCCVars.RMCLobbyInvertSides, false);
             _linkAccount.Updated += UpdateDiscordLinkState;
             UpdateDiscordLinkState();
+            ApplyLobbyColumnLayout();
             UpdateLobbyLayering();
         }
 
@@ -159,18 +162,10 @@ namespace Content.Client.Lobby.UI
             CharacterSetupState.SetPositionLast();
         }
 
-        private void ApplyLobbyColumnLayout(bool invertSides)
+        private void ApplyLobbyColumnLayout()
         {
-            if (invertSides)
-            {
-                RightSide.SetPositionFirst();
-                LeftColumn.SetPositionLast();
-            }
-            else
-            {
-                LeftColumn.SetPositionFirst();
-                RightSide.SetPositionLast();
-            }
+            LeftColumn.SetPositionFirst();
+            RightSide.SetPositionLast();
 
             _lastResponsiveMainSize = Vector2.Zero;
             _lastResponsiveLeftSize = Vector2.Zero;
@@ -393,8 +388,31 @@ namespace Content.Client.Lobby.UI
         protected override void Dispose(bool disposing)
         {
             _linkAccount.Updated -= UpdateDiscordLinkState;
-            _cfg.UnsubValueChanged(RMCCVars.RMCLobbyInvertSides, _onLobbyInvertSidesChanged);
+            _cfg.UnsubValueChanged(RMCCVars.RMCLobbyUiStyle, ApplyLobbyUiStyleClasses);
             base.Dispose(disposing);
+        }
+
+        private void ApplyLobbyUiStyleClasses(string style)
+        {
+            var oldStyle = style.Equals("old", StringComparison.OrdinalIgnoreCase);
+            ApplyExclusiveStyleClass(RootContainer, oldStyle);
+            ApplyExclusiveStyleClass(MainContainer, oldStyle);
+            ApplyExclusiveStyleClass(DefaultState, oldStyle);
+            ApplyExclusiveStyleClass(CharacterSetupState, oldStyle);
+        }
+
+        private static void ApplyExclusiveStyleClass(Control control, bool oldStyle)
+        {
+            if (oldStyle)
+            {
+                control.AddStyleClass(LobbyUiStyleOldClass);
+                control.RemoveStyleClass(LobbyUiStyleNewClass);
+            }
+            else
+            {
+                control.AddStyleClass(LobbyUiStyleNewClass);
+                control.RemoveStyleClass(LobbyUiStyleOldClass);
+            }
         }
 
         private static void SetThemeClass(Control control, bool crtEnabled)
@@ -621,42 +639,27 @@ namespace Content.Client.Lobby.UI
             if (VoteContainer.Parent == null)
                 return;
 
-            // CCM rework lobby - start
             var voteSize = VoteContainer.Size;
             if (voteSize.X <= 1f || voteSize.Y <= 1f)
                 voteSize = _voteLastSize;
             if (voteSize.X <= 1f || voteSize.Y <= 1f)
                 return;
 
-            var parentGlobal = VoteContainer.Parent.GlobalPosition;
-            var menuSize = CenterMenuGlow.Size;
-            if (menuSize.X <= 1f || menuSize.Y <= 1f)
+            var parentSize = VoteContainer.Parent.Size;
+            if (parentSize.X <= 1f || parentSize.Y <= 1f)
                 return;
 
-            var menuGlobal = CenterMenuGlow.GlobalPosition;
             var padding = GetLobbySafePadding();
-            var voteX = menuGlobal.X + (menuSize.X - voteSize.X) * 0.5f - parentGlobal.X;
-            var voteY = -parentGlobal.Y + (_compactLobbyLayout ? 4f : 6f);
-            // CCM rework lobby - end
+            var voteX = (parentSize.X - voteSize.X) * 0.5f;
+            var voteY = _compactLobbyLayout ? 4f : 6f;
 
-            // CCM rework lobby - start
-            var leftGlobal = LeftColumn.GlobalPosition;
-            var leftSize = LeftColumn.Size;
-            if (leftSize.X > 1f && leftSize.Y > 1f)
-            {
-                var minX = leftGlobal.X - parentGlobal.X + padding;
-                var maxX = leftGlobal.X - parentGlobal.X + leftSize.X - voteSize.X - padding;
-                var minY = leftGlobal.Y - parentGlobal.Y + padding * 0.5f;
-                var maxY = leftGlobal.Y - parentGlobal.Y + leftSize.Y - voteSize.Y - padding;
-                if (maxX >= minX)
-                    voteX = Math.Clamp(voteX, minX, maxX);
-                if (maxY >= minY)
-                    voteY = Math.Clamp(voteY, minY, maxY);
-            }
+            var minX = padding;
+            var maxX = parentSize.X - voteSize.X - padding;
+            if (maxX >= minX)
+                voteX = Math.Clamp(voteX, minX, maxX);
 
             LayoutContainer.SetAnchorPreset(VoteContainer, LayoutPreset.TopLeft);
             LayoutContainer.SetPosition(VoteContainer, new Vector2(voteX, voteY));
-            // CCM rework lobby - end
         }
 
         private void UpdateTaskbarAnchor()

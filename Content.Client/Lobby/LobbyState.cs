@@ -405,17 +405,19 @@ namespace Content.Client.Lobby
 
         private static string[] GetConsoleBackgroundsForTheme()
         {
-            return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-                ? new[]
+            return StyleNano.CurrentTheme switch
+            {
+                StyleNano.UiColorTheme.Blue or StyleNano.UiColorTheme.Gray => new[]
                 {
                     "/Textures/_CCM14/Lobby/lobbytgmc_blue.png",
                     "/Textures/_CCM14/Lobby/lobbyweyland_blue.png",
-                }
-                : new[]
+                },
+                _ => new[]
                 {
                     "/Textures/_CCM14/Lobby/lobbytgmc_green.png",
                     "/Textures/_CCM14/Lobby/lobbyweyland_green.png",
-                };
+                },
+            };
         }
 
     }

@@ -22,6 +22,7 @@ namespace Content.Client.Options.UI
             _onThemeColorChanged = _ => ApplyLobbyTheme(_cfg.GetCVar(RMCCVars.RMCLobbyCrtEnabled));
             IoCManager.InjectDependencies(this);
             RobustXamlLoader.Load(this);
+            Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
 
             ApplyLobbyTheme(_cfg.GetCVar(RMCCVars.RMCLobbyCrtEnabled));
             _cfg.OnValueChanged(RMCCVars.RMCLobbyCrtEnabled, ApplyLobbyTheme);

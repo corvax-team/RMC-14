@@ -64,7 +64,8 @@ namespace Content.Client.Voting.UI
             RobustXamlLoader.Load(this);
             _votingSystem = _entityManager.System<VotingSystem>();
 
-            Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
+            Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNanoNeutral;
+            VoteTypeButton.UseNeutralPalette = true;
             CloseButton.OnPressed += _ => Close();
             VoteNotTrustedLabel.Text = Loc.GetString("ui-vote-trusted-users-notice", ("timeReq", _cfg.GetCVar(CCVars.VotekickEligibleVoterDeathtime)));
 
@@ -248,7 +249,10 @@ namespace Content.Client.Voting.UI
                 foreach (var voteDropdown in voteList)
                 {
                     // CCM vote menu dropdown style: use the same custom dropdown family as CCM menus.
-                    var optionButton = new CCMOptionButton();
+                    var optionButton = new CCMOptionButton
+                    {
+                        UseNeutralPalette = true
+                    };
                     int j = 0;
                     foreach (var (key, value) in voteDropdown)
                     {

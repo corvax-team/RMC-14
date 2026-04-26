@@ -95,6 +95,7 @@ guide-entry-newplayer = Новичок? Вам сюда!
 guide-entry-charactercreation = Создание персонажа
 guide-entry-species = Расы
 guide-entry-yourfirstcharacter = Ваш первый персонаж
+guide-entry-jobpriorityweighting = Распределение ролей и вес
 guide-entry-controls = Управление
 guide-entry-radio = Радиосвязь
 guide-entry-references = Таблицы и референсы

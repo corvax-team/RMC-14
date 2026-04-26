@@ -5,7 +5,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._RMC14.Xenonids.Parasite;
 
 [GenerateTypedNameReferences]
-public sealed partial class XenoParasiteGhostWindow : DefaultCMWindow
+public sealed partial class XenoParasiteGhostWindow : DefaultWindow
 {
     public XenoParasiteGhostWindow()
     {

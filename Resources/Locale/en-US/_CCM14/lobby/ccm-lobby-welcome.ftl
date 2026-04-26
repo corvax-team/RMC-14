@@ -21,6 +21,12 @@ ccm-lobby-welcome-theme-title = Interface Theme
 ccm-lobby-welcome-theme-text = Personalize your UI accent color. This affects buttons, windows, decorative elements, and the general lobby aesthetic.
 ccm-lobby-welcome-theme-green = Green
 ccm-lobby-welcome-theme-blue = Blue
+ccm-lobby-welcome-theme-gray = Gray
+
+ccm-lobby-welcome-lobby-style-title = Lobby Style
+ccm-lobby-welcome-lobby-style-text = Choose which lobby layout branch to use. This prepares the UI for switching between the current CCM layout and the legacy RMCA-based layout.
+ccm-lobby-welcome-lobby-style-new = New
+ccm-lobby-welcome-lobby-style-old = Old
 
 ccm-lobby-welcome-rules-title = Rules
 ccm-lobby-welcome-rules-body = The current server rules are provided below.

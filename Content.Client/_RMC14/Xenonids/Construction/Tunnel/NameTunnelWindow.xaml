@@ -1,4 +1,4 @@
-<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls"
+<DefaultWindow
     MinSize="200 125"
     Margin="4 0"
     xmlns="https://spacestation14.io">
@@ -6,5 +6,4 @@
         <LineEdit Name="TunnelName" Access="Public"  Margin ="0 4" />
         <Button Name="SubmitButton"  Access="Public" Margin ="0 4" StyleClasses="OpenBoth" />
     </BoxContainer>
-</ccm:DefaultCMWindow>
-
+</DefaultWindow>

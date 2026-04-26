@@ -124,6 +124,7 @@ namespace Content.Client.Voting
 
                 _votePopups.Add(vId, popup);
                 _popupContainer.AddChild(popup);
+                popup.SetPositionFirst();
                 popup.UpdateData();
             }
         }
@@ -200,6 +201,7 @@ namespace Content.Client.Voting
 
                 _votePopups.Add(voteId, popup);
                 _popupContainer.AddChild(popup);
+                popup.SetPositionFirst();
             }
 
             if (_votePopups.TryGetValue(voteId, out var ePopup))

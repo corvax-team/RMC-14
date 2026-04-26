@@ -7,6 +7,9 @@ namespace Content.Shared._RMC14.Xenonids.Projectile.Spit.Stacks;
 [Access(typeof(XenoSpitSystem))]
 public sealed partial class VictimXenoAcidStacksComponent : Component
 {
+    public EntityUid? Source;
+    public EntityUid? Tool;
+
     [DataField, AutoNetworkedField]
     public int Current;
 

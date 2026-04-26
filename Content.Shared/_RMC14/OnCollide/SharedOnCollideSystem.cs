@@ -87,7 +87,11 @@ public abstract class SharedOnCollideSystem : EntitySystem
             var damage = ent.Comp.Damage;
             if (ent.Comp.Acidic)
                 damage = _xeno.TryApplyXenoAcidDamageMultiplier(other, damage);
-            _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances, armorPiercing: ent.Comp.ArmorPenetration);
+            _damageable.TryChangeDamage(other,
+                damage,
+                ent.Comp.IgnoreResistances,
+                origin: ent.Owner,
+                armorPiercing: ent.Comp.ArmorPenetration);
             DoEmote(ent, other);
             didEmote = true;
         }
@@ -96,10 +100,15 @@ public abstract class SharedOnCollideSystem : EntitySystem
             var damage = ent.Comp.ChainDamage;
             if (ent.Comp.Acidic)
                 damage = _xeno.TryApplyXenoAcidDamageMultiplier(other, damage);
-            _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances);
+            _damageable.TryChangeDamage(other, damage, ent.Comp.IgnoreResistances, origin: ent.Owner);
         }
 
-        _xenoSpit.SetAcidCombo(other, ent.Comp.AcidComboDuration, ent.Comp.AcidComboDamage, ent.Comp.AcidComboParalyze, ent.Comp.AcidComboResists);
+        _xenoSpit.SetAcidCombo(other,
+            ent.Comp.AcidComboDuration,
+            ent.Comp.AcidComboDamage,
+            ent.Comp.AcidComboParalyze,
+            ent.Comp.AcidComboResists,
+            ent.Owner);
 
         if (ent.Comp.Paralyze > TimeSpan.Zero && !_standing.IsDown(other) && (!_size.TryGetSize(other, out var size) || size < RMCSizes.Big))
         {

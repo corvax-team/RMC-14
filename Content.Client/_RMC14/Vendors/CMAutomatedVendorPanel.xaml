@@ -3,14 +3,12 @@
     xmlns:cc="clr-namespace:Content.Client._RMC14.Vendors"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     HorizontalExpand="True">
-    <!-- CCM: vendor row card refresh -->
     <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="0" Name="Panel">
         <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BackgroundColor="#0F1A13" BorderColor="#2F6B46"
-                                   BorderThickness="1" />
+            <graphics:StyleBoxFlat BackgroundColor="#162031" BorderColor="#4972A1"
+                                   BorderThickness="2" />
         </PanelContainer.PanelOverride>
         <cc:CMAutomatedVendorButton Name="Button" Access="Public"
                                     ModulateSelfOverride="#00000000" HorizontalExpand="True" />
     </PanelContainer>
 </cc:CMAutomatedVendorPanel>
-<!-- # CCM priority rework -->

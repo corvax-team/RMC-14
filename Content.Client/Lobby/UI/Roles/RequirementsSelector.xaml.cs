@@ -72,9 +72,12 @@ public sealed partial class RequirementsSelector : BoxContainer
             Margin = new Thickness(0f),
             PanelOverride = new StyleBoxFlat
             {
-                BackgroundColor = (StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-                    ? Color.FromHex("#0A1E34")
-                    : Color.FromHex("#07210E")).WithAlpha(0.82f),
+                BackgroundColor = (StyleNano.CurrentTheme switch
+                {
+                    StyleNano.UiColorTheme.Blue => Color.FromHex("#0A1E34"),
+                    StyleNano.UiColorTheme.Gray => Color.FromHex("#1B222A"),
+                    _ => Color.FromHex("#07210E"),
+                }).WithAlpha(0.82f),
                 BorderThickness = new Thickness(0f),
             },
             MouseFilter = MouseFilterMode.Stop,

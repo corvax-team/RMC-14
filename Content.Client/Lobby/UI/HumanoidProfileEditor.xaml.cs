@@ -40,6 +40,7 @@ using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Client.Utility;
 using Robust.Shared.Configuration;
@@ -149,6 +150,8 @@ namespace Content.Client.Lobby.UI
         private readonly Font _compactCustomizationButtonFont;
 
         private static readonly ProtoId<GuideEntryPrototype> DefaultSpeciesGuidebook = "Species";
+        private static readonly ProtoId<GuideEntryPrototype> CharacterCreationGuidebook = "CharacterCreation";
+        private static readonly ProtoId<GuideEntryPrototype> JobPriorityWeightingGuidebook = "JobPriorityWeighting";
 
         public event Action<List<ProtoId<GuideEntryPrototype>>>? OnOpenGuidebook;
 
@@ -685,25 +688,43 @@ namespace Content.Client.Lobby.UI
 
             _appliedTheme = theme;
 
-            var sectionBackground = theme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#0E2950").WithAlpha(0.93f)
-                : Color.FromHex("#0A2C18").WithAlpha(0.9f);
-            var sectionBorder = theme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#165197").WithAlpha(0.95f)
-                : Color.FromHex("#2B7E45").WithAlpha(0.95f);
+            var sectionBackground = theme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#0E2950").WithAlpha(0.93f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#1B222B").WithAlpha(0.92f),
+                _ => Color.FromHex("#0A2C18").WithAlpha(0.9f),
+            };
+            var sectionBorder = theme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#165197").WithAlpha(0.95f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#667487").WithAlpha(0.95f),
+                _ => Color.FromHex("#2B7E45").WithAlpha(0.95f),
+            };
             var dividerColor = sectionBorder;
-            var tabsPanelBackground = theme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#0D2242").WithAlpha(0.95f)
-                : Color.FromHex("#142B1C").WithAlpha(0.94f);
-            var tabsPanelBorder = theme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#1B5CA7").WithAlpha(0.92f)
-                : Color.FromHex("#2F8A51").WithAlpha(0.9f);
-            var backgroundInfoPanelColor = theme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#17365F").WithAlpha(0.98f)
-                : Color.FromHex("#17442A").WithAlpha(0.97f);
-            var backgroundInfoBorderColor = theme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#2F72C7").WithAlpha(0.98f)
-                : Color.FromHex("#46B96E").WithAlpha(0.97f);
+            var tabsPanelBackground = theme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#0D2242").WithAlpha(0.95f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#171E27").WithAlpha(0.95f),
+                _ => Color.FromHex("#142B1C").WithAlpha(0.94f),
+            };
+            var tabsPanelBorder = theme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#1B5CA7").WithAlpha(0.92f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#6B788A").WithAlpha(0.92f),
+                _ => Color.FromHex("#2F8A51").WithAlpha(0.9f),
+            };
+            var backgroundInfoPanelColor = theme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#17365F").WithAlpha(0.98f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#29333F").WithAlpha(0.97f),
+                _ => Color.FromHex("#17442A").WithAlpha(0.97f),
+            };
+            var backgroundInfoBorderColor = theme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#2F72C7").WithAlpha(0.98f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#8B97A6").WithAlpha(0.97f),
+                _ => Color.FromHex("#46B96E").WithAlpha(0.97f),
+            };
 
             StyleBoxFlat BuildSectionBox()
             {
@@ -1167,11 +1188,30 @@ namespace Content.Client.Lobby.UI
             var xenoNextLightStripe = true;
 
             // CCM rework lobby - start
-            var isBlueTheme = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue;
-            var rowLightColor = (isBlueTheme ? Color.FromHex("#14355F") : Color.FromHex("#134F27")).WithAlpha(0.74f);
-            var rowDarkColor = (isBlueTheme ? Color.FromHex("#0D2340") : Color.FromHex("#0D351A")).WithAlpha(0.74f);
-            var headerLightColor = (isBlueTheme ? Color.FromHex("#184472") : Color.FromHex("#1A6432")).WithAlpha(0.80f);
-            var headerDarkColor = (isBlueTheme ? Color.FromHex("#113257") : Color.FromHex("#124926")).WithAlpha(0.80f);
+            var rowLightColor = StyleNano.CurrentTheme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#14355F").WithAlpha(0.74f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#2D3641").WithAlpha(0.74f),
+                _ => Color.FromHex("#134F27").WithAlpha(0.74f),
+            };
+            var rowDarkColor = StyleNano.CurrentTheme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#0D2340").WithAlpha(0.74f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#20272F").WithAlpha(0.74f),
+                _ => Color.FromHex("#0D351A").WithAlpha(0.74f),
+            };
+            var headerLightColor = StyleNano.CurrentTheme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#184472").WithAlpha(0.80f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#37424F").WithAlpha(0.80f),
+                _ => Color.FromHex("#1A6432").WithAlpha(0.80f),
+            };
+            var headerDarkColor = StyleNano.CurrentTheme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#113257").WithAlpha(0.80f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#2A333F").WithAlpha(0.80f),
+                _ => Color.FromHex("#124926").WithAlpha(0.80f),
+            };
             var stripeBorderColor = StyleNano.NanoGold.WithAlpha(0.75f);
 
             bool ConsumeStripeLight(bool isXenoDepartment)
@@ -1421,6 +1461,7 @@ namespace Content.Client.Lobby.UI
                     chanceLabel.Margin = new Thickness(0f, 2f, 0f, 0f);
                     chanceLabel.Visible = false;
                     chanceLabel.MouseFilter = MouseFilterMode.Stop;
+                    chanceLabel.DefaultCursorShape = Control.CursorShape.Hand;
                     chanceLabel.StyleClasses.Add(StyleBase.StyleClassLabelSubText);
                     selector.SubtitleUnderlineControl.Visible = false;
                     selector.SubtitleSpinnerControl.Visible = false;
@@ -1431,6 +1472,7 @@ namespace Content.Client.Lobby.UI
 
                     chanceLabel.OnMouseEntered += _ => StartChanceHover(job.ID);
                     chanceLabel.OnMouseExited += _ => StopChanceHover(job.ID);
+                    chanceLabel.OnKeyBindDown += args => OnChanceLabelKeyBindDown(args);
 
                     _jobPriorities.Add((job.ID, selector));
                     jobStack.AddChild(selector);
@@ -1912,29 +1954,114 @@ namespace Content.Client.Lobby.UI
                 var chanceRounded = MathF.Round(info.ChancePercent, 2, MidpointRounding.AwayFromZero);
                 var chanceText = chanceRounded.ToString("0.00", CultureInfo.CurrentCulture);
                 label.SetMarkup(Loc.GetString("humanoid-profile-editor-job-chance", ("chance", chanceText)));
-                label.TooltipDelay = 1.2f;
-                label.ToolTip = BuildChanceFormula(info);
+                label.TooltipDelay = 0.25f;
+                var tooltip = new Tooltip();
+                tooltip.SetMessage(BuildChanceFormula(jobId, info));
+                label.TooltipSupplier = _ => tooltip;
                 label.Visible = true;
                 if (_jobChanceUnderlines.TryGetValue(jobId, out var underlineVisible))
-                    underlineVisible.Visible = false;
+                    underlineVisible.Visible = true;
                 if (_jobChanceSpinners.TryGetValue(jobId, out var spinnerVisible))
                     spinnerVisible.Visible = false;
             }
         }
 
-        private static string BuildChanceFormula(JobPriorityChanceInfo info)
+        private FormattedMessage BuildChanceFormula(string jobId, JobPriorityChanceInfo info)
         {
+            var isGuaranteedRole = jobId == "CMRifleman" || jobId == "CMXenoSelectableXeno";
             var baseWeight = MathF.Round(info.BaseWeight, 2);
             var missedWeight = MathF.Round(info.MissedWeight, 2);
             var recentPenalty = MathF.Round(MathF.Abs(info.RecentPenalty), 2);
-            var sessionHours = (int) MathF.Floor(info.SessionHours);
+            var sessionBonus = MathF.Round(info.SessionBonus, 2);
+            var sessionHours = MathF.Round(info.SessionHours, 1);
+            var externalBonus = MathF.Round(info.ExternalBonus, 2);
+            var weight = MathF.Round(info.Weight, 2);
+            var totalWeight = MathF.Round(info.TotalWeight, 2);
+            var chance = MathF.Round(info.ChancePercent, 2);
+            var message = new FormattedMessage();
 
-            return Loc.GetString(
-                "ccm-job-chance-formula",
-                ("base", baseWeight),
-                ("missed", missedWeight),
-                ("recent", recentPenalty),
-                ("sessionHours", sessionHours));
+            message.AddMarkupPermissive(Loc.GetString("humanoid-profile-editor-job-chance-tooltip-title"));
+            message.PushNewline();
+            message.PushNewline();
+
+            message.AddMarkupPermissive(Loc.GetString(
+                "humanoid-profile-editor-job-chance-tooltip-formula",
+                ("base", baseWeight.ToString("0.00", CultureInfo.CurrentCulture)),
+                ("missed", missedWeight.ToString("0.00", CultureInfo.CurrentCulture)),
+                ("recent", recentPenalty.ToString("0.00", CultureInfo.CurrentCulture)),
+                ("session", sessionBonus.ToString("0.00", CultureInfo.CurrentCulture)),
+                ("external", externalBonus.ToString("0.00", CultureInfo.CurrentCulture)),
+                ("result", weight.ToString("0.00", CultureInfo.CurrentCulture))));
+            message.PushNewline();
+            message.PushNewline();
+
+            message.AddMarkupPermissive(Loc.GetString("humanoid-profile-editor-job-chance-tooltip-breakdown-title"));
+            message.PushNewline();
+            message.AddMarkupPermissive(Loc.GetString(
+                "humanoid-profile-editor-job-chance-tooltip-base",
+                ("base", baseWeight.ToString("0.00", CultureInfo.CurrentCulture))));
+            message.PushNewline();
+            message.AddMarkupPermissive(Loc.GetString(
+                "humanoid-profile-editor-job-chance-tooltip-missed",
+                ("missedRounds", info.MissedRounds),
+                ("missedWeight", missedWeight.ToString("0.00", CultureInfo.CurrentCulture))));
+            message.PushNewline();
+            message.AddMarkupPermissive(Loc.GetString(
+                "humanoid-profile-editor-job-chance-tooltip-recent",
+                ("recent", recentPenalty.ToString("0.00", CultureInfo.CurrentCulture))));
+            message.PushNewline();
+            message.AddMarkupPermissive(Loc.GetString(
+                "humanoid-profile-editor-job-chance-tooltip-session",
+                ("steps", info.SessionBonusSteps),
+                ("sessionHours", sessionHours.ToString("0.0", CultureInfo.CurrentCulture)),
+                ("sessionBonus", sessionBonus.ToString("0.00", CultureInfo.CurrentCulture))));
+            message.PushNewline();
+            message.AddMarkupPermissive(Loc.GetString(
+                "humanoid-profile-editor-job-chance-tooltip-external",
+                ("external", externalBonus.ToString("0.00", CultureInfo.CurrentCulture))));
+            message.PushNewline();
+            message.PushNewline();
+
+            if (isGuaranteedRole)
+            {
+                message.AddMarkupPermissive(Loc.GetString(
+                    "humanoid-profile-editor-job-chance-tooltip-guaranteed",
+                    ("chance", chance.ToString("0.00", CultureInfo.CurrentCulture))));
+            }
+            else
+            {
+                message.AddMarkupPermissive(Loc.GetString(
+                    "humanoid-profile-editor-job-chance-tooltip-result",
+                    ("weight", weight.ToString("0.00", CultureInfo.CurrentCulture)),
+                    ("total", totalWeight.ToString("0.00", CultureInfo.CurrentCulture)),
+                    ("slots", info.SlotCount),
+                    ("chance", chance.ToString("0.00", CultureInfo.CurrentCulture))));
+            }
+
+            message.PushNewline();
+            message.PushNewline();
+            message.AddMarkupPermissive(Loc.GetString("humanoid-profile-editor-job-chance-tooltip-guidebook-hint"));
+            return message;
+        }
+
+        private void OnChanceLabelKeyBindDown(GUIBoundKeyEventArgs args)
+        {
+            if (args.Function != EngineKeyFunctions.UIClick)
+                return;
+
+            args.Handle();
+            OpenJobPriorityWeightGuidebook();
+        }
+
+        private void OpenJobPriorityWeightGuidebook()
+        {
+            var guidebookController = UserInterfaceManager.GetUIController<GuidebookUIController>();
+            guidebookController.OpenGuidebook(
+                new List<ProtoId<GuideEntryPrototype>> { CharacterCreationGuidebook },
+                rootEntries: new List<ProtoId<GuideEntryPrototype>> { CharacterCreationGuidebook },
+                forceRoot: CharacterCreationGuidebook,
+                includeChildren: true,
+                selected: JobPriorityWeightingGuidebook);
         }
 
         private void StartChanceHover(string jobId)
@@ -2304,9 +2431,12 @@ namespace Content.Client.Lobby.UI
         private void ApplyCustomizationButtonStyle(Button button, bool hovered = false, bool pressed = false)
         {
             var selected = button.Pressed;
-            var selectedText = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#86BBF2")
-                : Color.FromHex("#9DFFB2");
+            var selectedText = StyleNano.CurrentTheme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#86BBF2"),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#D5DDE7"),
+                _ => Color.FromHex("#9DFFB2"),
+            };
 
             if (button.MinSize.Y <= 0f || button.MinSize.Y > 30f)
                 button.MinSize = new Vector2(button.MinSize.X, 30f);

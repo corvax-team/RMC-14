@@ -67,6 +67,7 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
     public CCMStatisticsWindow()
     {
         IoCManager.InjectDependencies(this);
+        Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
         _statsSystem = _entManager.System<CCMStatsSystem>();
         _windowTitleFont = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 16);
         _headerFont = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 20);
@@ -730,9 +731,12 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
 
     private void ApplyWindowTheme()
     {
-        var bodyColor = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-            ? Color.FromHex("#102A56").WithAlpha(0.94f)
-            : Color.FromHex("#05180A").WithAlpha(0.94f);
+        var bodyColor = StyleNano.CurrentTheme switch
+        {
+            StyleNano.UiColorTheme.Blue => Color.FromHex("#102A56").WithAlpha(0.94f),
+            StyleNano.UiColorTheme.Gray => Color.FromHex("#1A2028").WithAlpha(0.94f),
+            _ => Color.FromHex("#05180A").WithAlpha(0.94f),
+        };
         var borderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.65f);
 
         HeaderPanel.PanelOverride = new StyleBoxFlat

@@ -52,11 +52,16 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
     private PanelContainer _rulesContentCard = default!;
     private Label _languageHeader = default!;
     private Label _themeHeader = default!;
+    private Label _lobbyStyleHeader = default!;
     private RichTextLabel _languageHint = default!;
     private RichTextLabel _themeHint = default!;
+    private RichTextLabel _lobbyStyleHint = default!;
     private CCMOptionButton _languageSelector = default!;
     private Button _greenThemeButton = default!;
     private Button _blueThemeButton = default!;
+    private Button _grayThemeButton = default!;
+    private Button _newLobbyStyleButton = default!;
+    private Button _oldLobbyStyleButton = default!;
     private RulesControl _rulesControl = default!;
     private readonly Button _backButton;
     private readonly Button _nextButton;
@@ -72,11 +77,14 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
     private const int LanguageEnglish = 1;
     private const float WelcomeMinWidth = 760f;
     private const float WelcomeMinHeight = 620f;
+    private const string LobbyUiStyleNewClass = "LobbyUiStyleNew";
+    private const string LobbyUiStyleOldClass = "LobbyUiStyleOld";
     public event Action? OnFinished;
 
     public CCMLobbyWelcomeWindow()
     {
         IoCManager.InjectDependencies(this);
+        Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
         _sawmill = _logManager.GetSawmill("language-restart");
 
         Title = string.Empty;
@@ -206,6 +214,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         };
 
         _config.OnValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged, false);
+        _config.OnValueChanged(RMCCVars.RMCLobbyUiStyle, OnLobbyStyleChanged, false);
 
         PopulateSelectors();
         RefreshLocalization();
@@ -221,6 +230,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
             return;
 
         _config.UnsubValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged);
+        _config.UnsubValueChanged(RMCCVars.RMCLobbyUiStyle, OnLobbyStyleChanged);
         _languageRestartWindow?.Dispose();
     }
 
@@ -303,6 +313,9 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
             $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=12][color=#D7E1EB]{Loc.GetString("ccm-lobby-welcome-language-text") }[/color][/font]"));
         _themeHint.SetMessage(FormattedMessage.FromMarkupOrThrow(
             $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=12][color=#D7E1EB]{Loc.GetString("ccm-lobby-welcome-theme-text") }[/color][/font]"));
+        _lobbyStyleHeader.Text = Loc.GetString("ccm-lobby-welcome-lobby-style-title");
+        _lobbyStyleHint.SetMessage(FormattedMessage.FromMarkupOrThrow(
+            $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=12][color=#D7E1EB]{Loc.GetString("ccm-lobby-welcome-lobby-style-text")}[/color][/font]"));
 
         PopulateSelectors();
         ApplyTheme();
@@ -354,6 +367,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         _themeCard = BuildCard();
         var themeContent = BuildSettingsCardContent(_themeCard, out _themeHeader, out _themeHint);
         themeContent.AddChild(BuildThemeButtons());
+        themeContent.AddChild(BuildLobbyStyleSection());
 
         _welcomeRightColumn.AddChild(_languageCard);
         _welcomeRightColumn.AddChild(_themeCard);
@@ -455,9 +469,59 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         _greenThemeButton.OnPressed += _ => SetTheme("green");
         _blueThemeButton = CreateThemeButton();
         _blueThemeButton.OnPressed += _ => SetTheme("blue");
+        _grayThemeButton = CreateThemeButton();
+        _grayThemeButton.OnPressed += _ => SetTheme("gray");
 
         buttonRow.AddChild(_greenThemeButton);
         buttonRow.AddChild(_blueThemeButton);
+        buttonRow.AddChild(_grayThemeButton);
+        return buttonRow;
+    }
+
+    private Control BuildLobbyStyleSection()
+    {
+        var section = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            SeparationOverride = 8,
+            Margin = new Thickness(0, 6, 0, 0),
+            HorizontalExpand = true,
+        };
+
+        _lobbyStyleHeader = new Label
+        {
+            FontOverride = _sectionFont,
+            HorizontalExpand = true,
+        };
+
+        _lobbyStyleHint = new RichTextLabel
+        {
+            HorizontalExpand = true,
+            VerticalExpand = false,
+        };
+
+        section.AddChild(_lobbyStyleHeader);
+        section.AddChild(_lobbyStyleHint);
+        section.AddChild(BuildLobbyStyleButtons());
+        return section;
+    }
+
+    private Control BuildLobbyStyleButtons()
+    {
+        var buttonRow = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Horizontal,
+            SeparationOverride = 8,
+            HorizontalExpand = true,
+        };
+
+        _newLobbyStyleButton = CreateThemeButton();
+        _newLobbyStyleButton.OnPressed += _ => SetLobbyUiStyle("new");
+        _oldLobbyStyleButton = CreateThemeButton();
+        _oldLobbyStyleButton.OnPressed += _ => SetLobbyUiStyle("old");
+
+        buttonRow.AddChild(_newLobbyStyleButton);
+        buttonRow.AddChild(_oldLobbyStyleButton);
         return buttonRow;
     }
 
@@ -505,7 +569,8 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
     private void PopulateSelectors()
     {
         var currentLocale = _config.GetCVar(CCVars.ClientLocale) ?? "ru-RU";
-        var currentTheme = _config.GetCVar(RMCCVars.RMCUIColorTheme) ?? "green";
+        var currentTheme = _config.GetCVar(RMCCVars.RMCUIColorTheme) ?? "blue";
+        var currentLobbyStyle = _config.GetCVar(RMCCVars.RMCLobbyUiStyle) ?? "new";
 
         _languageSelector.Clear();
         _languageSelector.AddItem(Loc.GetString("ccm-lobby-welcome-language-russian"), LanguageRussian);
@@ -516,7 +581,11 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
 
         _greenThemeButton.Text = Loc.GetString("ccm-lobby-welcome-theme-green");
         _blueThemeButton.Text = Loc.GetString("ccm-lobby-welcome-theme-blue");
+        _grayThemeButton.Text = Loc.GetString("ccm-lobby-welcome-theme-gray");
+        _newLobbyStyleButton.Text = Loc.GetString("ccm-lobby-welcome-lobby-style-new");
+        _oldLobbyStyleButton.Text = Loc.GetString("ccm-lobby-welcome-lobby-style-old");
         ApplyThemeSwatchSelection(currentTheme);
+        ApplyLobbyStyleSelection(currentLobbyStyle);
     }
 
     private void SetPage(WelcomePage page)
@@ -533,15 +602,27 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
     private void ApplyTheme()
     {
         var accent = StyleNano.LobbyMenuButtonBase;
-        var body = (StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-            ? Color.FromHex("#081A36")
-            : Color.FromHex("#06170B")).WithAlpha(0.97f);
-        var panel = (StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-            ? Color.FromHex("#0B2144")
-            : Color.FromHex("#0A1B0C")).WithAlpha(0.97f);
-        var subpanel = (StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-            ? Color.FromHex("#10284F")
-            : Color.FromHex("#0D220F")).WithAlpha(0.97f);
+        var bodyText = "#D7E1EB";
+        var secondaryText = "#B4C2D2";
+        var welcomeBodyText = "#E2EAF3";
+        var body = (StyleNano.CurrentTheme switch
+        {
+            StyleNano.UiColorTheme.Blue => Color.FromHex("#081A36"),
+            StyleNano.UiColorTheme.Gray => Color.FromHex("#171D24"),
+            _ => Color.FromHex("#06170B"),
+        }).WithAlpha(0.97f);
+        var panel = (StyleNano.CurrentTheme switch
+        {
+            StyleNano.UiColorTheme.Blue => Color.FromHex("#0B2144"),
+            StyleNano.UiColorTheme.Gray => Color.FromHex("#1D252E"),
+            _ => Color.FromHex("#0A1B0C"),
+        }).WithAlpha(0.97f);
+        var subpanel = (StyleNano.CurrentTheme switch
+        {
+            StyleNano.UiColorTheme.Blue => Color.FromHex("#10284F"),
+            StyleNano.UiColorTheme.Gray => Color.FromHex("#232D38"),
+            _ => Color.FromHex("#0D220F"),
+        }).WithAlpha(0.97f);
 
         BodyPanel.PanelOverride = new StyleBoxFlat
         {
@@ -583,22 +664,33 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         }
 
         _subtitleLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(
-            $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=13][color=#D7E1EB]{Loc.GetString("ccm-lobby-welcome-subtitle")}[/color][/font]"));
+            $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=13][color={bodyText}]{Loc.GetString("ccm-lobby-welcome-subtitle")}[/color][/font]"));
+        _languageHint.SetMessage(FormattedMessage.FromMarkupOrThrow(
+            $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=12][color={bodyText}]{Loc.GetString("ccm-lobby-welcome-language-text")}[/color][/font]"));
+        _themeHint.SetMessage(FormattedMessage.FromMarkupOrThrow(
+            $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=12][color={bodyText}]{Loc.GetString("ccm-lobby-welcome-theme-text")}[/color][/font]"));
+        _lobbyStyleHint.SetMessage(FormattedMessage.FromMarkupOrThrow(
+            $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=12][color={bodyText}]{Loc.GetString("ccm-lobby-welcome-lobby-style-text")}[/color][/font]"));
         _supportLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(
             $"[font=\"/Fonts/Exo2/Exo2-Bold.ttf\" size=12][color={accent.ToHex()}]{Loc.GetString("ccm-lobby-welcome-support")}[/color][/font]"));
         _welcomeBody.SetMessage(FormattedMessage.FromMarkupOrThrow(
             $"[font=\"/Fonts/Exo2/Exo2-Bold.ttf\" size=18][color={accent.ToHex()}]{Loc.GetString("ccm-lobby-welcome-page1-title")}[/color][/font]\n\n" +
-            $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=13][color=#E2EAF3]{Loc.GetString("ccm-lobby-welcome-page1-body")}[/color][/font]"));
+            $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=13][color={welcomeBodyText}]{Loc.GetString("ccm-lobby-welcome-page1-body")}[/color][/font]"));
         _projectBody.SetMessage(FormattedMessage.FromMarkupOrThrow(
-            $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=13][color=#D7E1EB]{Loc.GetString("ccm-lobby-welcome-page1-project-body")}[/color][/font]\n" +
-            $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=12][color=#B4C2D2]{Loc.GetString("ccm-lobby-welcome-page1-command", ("command", "welcome"))}[/color][/font]"));
+            $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=13][color={bodyText}]{Loc.GetString("ccm-lobby-welcome-page1-project-body")}[/color][/font]\n" +
+            $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=12][color={secondaryText}]{Loc.GetString("ccm-lobby-welcome-page1-command", ("command", "welcome"))}[/color][/font]"));
 
-        ApplyThemeSwatchSelection(_config.GetCVar(RMCCVars.RMCUIColorTheme) ?? "green");
+        ApplyThemeSwatchSelection(_config.GetCVar(RMCCVars.RMCUIColorTheme) ?? "blue");
     }
 
     private void OnThemeChanged(string _)
     {
         ApplyTheme();
+    }
+
+    private void OnLobbyStyleChanged(string style)
+    {
+        ApplyLobbyStyleSelection(style);
     }
 
     private void SetTheme(string theme)
@@ -607,6 +699,15 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
             return;
 
         _config.SetCVar(RMCCVars.RMCUIColorTheme, theme);
+    }
+
+    private void SetLobbyUiStyle(string style)
+    {
+        var current = _config.GetCVar(RMCCVars.RMCLobbyUiStyle) ?? "new";
+        if (current.Equals(style, StringComparison.OrdinalIgnoreCase))
+            return;
+
+        _config.SetCVar(RMCCVars.RMCLobbyUiStyle, style);
     }
 
     private void OpenLanguageRestartConfirm()
@@ -736,6 +837,32 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
     {
         _greenThemeButton.Pressed = theme.Equals("green", StringComparison.OrdinalIgnoreCase);
         _blueThemeButton.Pressed = theme.Equals("blue", StringComparison.OrdinalIgnoreCase);
+        _grayThemeButton.Pressed = theme.Equals("gray", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private void ApplyLobbyStyleSelection(string style)
+    {
+        var oldStyle = style.Equals("old", StringComparison.OrdinalIgnoreCase);
+        _newLobbyStyleButton.Pressed = !oldStyle;
+        _oldLobbyStyleButton.Pressed = oldStyle;
+        ApplyExclusiveStyleClass(_root, oldStyle);
+        ApplyExclusiveStyleClass(_welcomePage, oldStyle);
+        ApplyExclusiveStyleClass(_rulesPage, oldStyle);
+        ApplyExclusiveStyleClass(_heroPanel, oldStyle);
+    }
+
+    private static void ApplyExclusiveStyleClass(Control control, bool oldStyle)
+    {
+        if (oldStyle)
+        {
+            control.AddStyleClass(LobbyUiStyleOldClass);
+            control.RemoveStyleClass(LobbyUiStyleNewClass);
+        }
+        else
+        {
+            control.AddStyleClass(LobbyUiStyleNewClass);
+            control.RemoveStyleClass(LobbyUiStyleOldClass);
+        }
     }
 
     private enum WelcomePage

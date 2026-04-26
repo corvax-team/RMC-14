@@ -26,8 +26,14 @@
   children:
   - YourFirstCharacter
   - Species
+  - JobPriorityWeighting
 
 - type: guideEntry
   id: YourFirstCharacter
   name: guide-entry-yourfirstcharacter
   text: "/ServerInfo/Guidebook/NewPlayer/YourFirstCharacter.xml"
+
+- type: guideEntry
+  id: JobPriorityWeighting
+  name: guide-entry-jobpriorityweighting
+  text: "/ServerInfo/Guidebook/NewPlayer/JobPriorityWeighting.xml"

@@ -191,10 +191,6 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         // RMC14-Whitelist-Tweak-Start
         if (job.Whitelisted)
         {
-            // CCM sponsorship whitelist bypass: Sponsor III ignores job whitelist restrictions.
-            if (HasUnlockedWhitelistedRoles())
-                return true;
-
             if (IsWhitelistedInternal(job.ID))
                 return true;
         // RMC14-Whitelist-Tweak-Start
@@ -310,13 +306,6 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         var _ = EnsureCCMSponsorshipHook();
         return _ccmSponsorshipStatusReady &&
                _sponsorshipSystem?.LatestStatus?.Tier >= CCMSponsorshipTier.SponsorII;
-    }
-
-    public bool HasUnlockedWhitelistedRoles()
-    {
-        var _ = EnsureCCMSponsorshipHook();
-        return _ccmSponsorshipStatusReady &&
-               _sponsorshipSystem?.LatestStatus?.Tier >= CCMSponsorshipTier.SponsorIII;
     }
 
     public void RequestSponsorshipStatus()

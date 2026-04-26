@@ -24,6 +24,8 @@ using Content.Shared.Mobs;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Projectiles;
+using Content.Shared.Vehicle.Components;
+using Content.Shared._RMC14.Vehicle;
 using Robust.Shared.Log;
 using Robust.Server.Player;
 using Robust.Shared.Network;
@@ -54,8 +56,8 @@ public sealed class CCMAchievementSystem : EntitySystem
         new("general_war_legend", CCMAchievementCategory.General, "ccm-achievement-general-war-legend-title", "ccm-achievement-general-war-legend-desc", 200, ctx => ctx.RoundsWon),
 
         new("misc_logistician", CCMAchievementCategory.Misc, "ccm-achievement-misc-logistician-title", "ccm-achievement-misc-logistician-desc", 20, ctx => ctx.Special.RequisitionOrders),
-        new("misc_friendly_fire", CCMAchievementCategory.Misc, "ccm-achievement-misc-friendly-fire-title", "ccm-achievement-misc-friendly-fire-desc", 500, ctx => ctx.Special.FriendlyFireDamage),
         new("misc_queen_slayer", CCMAchievementCategory.Misc, "ccm-achievement-misc-queen-slayer-title", "ccm-achievement-misc-queen-slayer-desc", 1, ctx => ctx.Special.QueenKillParticipations),
+        new("misc_friendly_fire", CCMAchievementCategory.Misc, "ccm-achievement-misc-friendly-fire-title", "ccm-achievement-misc-friendly-fire-desc", 500, ctx => ctx.Special.FriendlyFireDamage),
 
         new("marine_field_medic", CCMAchievementCategory.Marines, "ccm-achievement-marine-field-medic-title", "ccm-achievement-marine-field-medic-desc", 5000, ctx => ctx.MarineHealingDone),
         new("marine_combat_surgeon", CCMAchievementCategory.Marines, "ccm-achievement-marine-combat-surgeon-title", "ccm-achievement-marine-combat-surgeon-desc", 25000, ctx => ctx.MarineHealingDone),
@@ -775,6 +777,24 @@ public sealed class CCMAchievementSystem : EntitySystem
             if (side == CCMStatsSide.None)
             {
                 side = GetSide(current);
+            }
+
+            if (userId == default &&
+                TryComp(current, out VehicleWeaponsComponent? vehicleWeapons) &&
+                vehicleWeapons.Operator is { } weaponOperator &&
+                weaponOperator != current &&
+                TryResolvePlayerAndSide(weaponOperator, visited, ref userId, ref side))
+            {
+                return true;
+            }
+
+            if (userId == default &&
+                TryComp(current, out VehicleComponent? vehicle) &&
+                vehicle.Operator is { } vehicleOperator &&
+                vehicleOperator != current &&
+                TryResolvePlayerAndSide(vehicleOperator, visited, ref userId, ref side))
+            {
+                return true;
             }
 
             if (userId != default && side != CCMStatsSide.None)

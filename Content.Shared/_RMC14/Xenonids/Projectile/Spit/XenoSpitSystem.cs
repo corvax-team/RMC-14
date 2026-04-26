@@ -333,12 +333,12 @@ public sealed class XenoSpitSystem : EntitySystem
         if (args.Handled)
             return;
 
-        ApplyAcidStacks(args.Target, ent.Comp.Amount, ent.Comp.Max, ent.Comp.Damage, ent.Comp.Whitelist);
+        ApplyAcidStacks(args.Target, ent.Comp.Amount, ent.Comp.Max, ent.Comp.Damage, ent.Comp.Whitelist, ent.Owner);
     }
 
     private void OnApplyAcidStacksDamageCollide(Entity<ApplyAcidStacksComponent> ent, ref DamageCollideEvent args)
     {
-        ApplyAcidStacks(args.Target, ent.Comp.Amount, ent.Comp.Max, ent.Comp.Damage, ent.Comp.Whitelist);
+        ApplyAcidStacks(args.Target, ent.Comp.Amount, ent.Comp.Max, ent.Comp.Damage, ent.Comp.Whitelist, ent.Owner);
     }
 
     private void OnShieldOnHit(Entity<XenoProjectileShieldOnHitComponent> ent, ref ProjectileHitEvent args)
@@ -418,7 +418,13 @@ public sealed class XenoSpitSystem : EntitySystem
             RemCompDeferred<UserAcidedComponent>(ent);
     }
 
-    public void SetAcidCombo(Entity<UserAcidedComponent?> acided, TimeSpan duration, DamageSpecifier? damage, TimeSpan paralyze, int resists)
+    public void SetAcidCombo(Entity<UserAcidedComponent?> acided,
+        TimeSpan duration,
+        DamageSpecifier? damage,
+        TimeSpan paralyze,
+        int resists,
+        EntityUid? source = null,
+        EntityUid? tool = null)
     {
         if (!Resolve(acided, ref acided.Comp, false))
             return;
@@ -430,6 +436,12 @@ public sealed class XenoSpitSystem : EntitySystem
 
         if (damage != null)
             acided.Comp.Damage = damage;
+
+        if (source != null)
+            acided.Comp.Source = source;
+
+        if (tool != null)
+            acided.Comp.Tool = tool;
 
         if (duration != default)
         {
@@ -472,7 +484,13 @@ public sealed class XenoSpitSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("rmc-acid-resist-partial"), player, player);
     }
 
-    private void ApplyAcidStacks(EntityUid target, int amount, int max, DamageSpecifier? damage, EntityWhitelist? whitelist)
+    private void ApplyAcidStacks(EntityUid target,
+        int amount,
+        int max,
+        DamageSpecifier? damage,
+        EntityWhitelist? whitelist,
+        EntityUid? source = null,
+        EntityUid? tool = null)
     {
         if (!_entityWhitelist.IsWhitelistPassOrNull(whitelist, target))
             return;
@@ -483,13 +501,17 @@ public sealed class XenoSpitSystem : EntitySystem
         var victim = EnsureComp<VictimXenoAcidStacksComponent>(target);
         victim.Current = Math.Min(max, victim.Current + amount);
         victim.LastIncrement = _timing.CurTime;
+        if (source != null)
+            victim.Source = source;
+        if (tool != null)
+            victim.Tool = tool;
         Dirty(target, victim);
 
         if (victim.Current >= max)
         {
             if (damage != null)
             {
-                _damageable.TryChangeDamage(target, damage);
+                _damageable.TryChangeDamage(target, damage, origin: victim.Source ?? source, tool: victim.Tool ?? tool);
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-praetorian-acid-spit-hit-self"), target, target, PopupType.SmallCaution);
             }
 
@@ -550,7 +572,11 @@ public sealed class XenoSpitSystem : EntitySystem
                 continue;
 
             acided.NextDamageAt = time + acided.DamageEvery;
-            _damageable.TryChangeDamage(uid, acided.Damage, armorPiercing: acided.ArmorPiercing);
+            _damageable.TryChangeDamage(uid,
+                acided.Damage,
+                origin: acided.Source,
+                tool: acided.Tool,
+                armorPiercing: acided.ArmorPiercing);
         }
 
         var stacks = EntityQueryEnumerator<VictimXenoAcidStacksComponent>();

@@ -22,20 +22,27 @@ public sealed class CCMOptionButton : OptionButton
     private readonly Dictionary<int, Button> _itemButtons = new();
     private readonly Dictionary<int, Color> _itemColors = new();
     private StyleNano.UiColorTheme _appliedTheme;
+    private bool _appliedNeutralPalette;
     private Label? _selectedLabel;
     private TextureRect? _triangleRect;
     private float _widestItemWidth;
+    private static readonly Color NeutralBackground = Color.FromHex("#464966");
+    private static readonly Color NeutralHoverBackground = Color.FromHex("#575B7F");
+    private static readonly Color NeutralPressedBackground = Color.FromHex("#3E6C45");
+    private static readonly Color NeutralBorder = Color.FromHex("#A88B5E");
 
     public Font? TextFontOverride { get; set; }
     public float ItemMinHeight { get; set; } = 32f;
     public float ControlMinHeight { get; set; } = 34f;
     public Thickness ContentPadding { get; set; } = new(6, 4, 6, 4);
+    public bool UseNeutralPalette { get; set; }
 
     public CCMOptionButton()
     {
         var cache = IoCManager.Resolve<IResourceCache>();
         _itemFont = cache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 13);
         _appliedTheme = StyleNano.CurrentTheme;
+        _appliedNeutralPalette = UseNeutralPalette;
         _selectedLabel = FindChild<Label>(this, label =>
             label.StyleClasses.Contains(OptionButton.StyleClassOptionButton));
         _triangleRect = FindChild<TextureRect>(this, triangle =>
@@ -66,10 +73,11 @@ public sealed class CCMOptionButton : OptionButton
     {
         base.FrameUpdate(args);
 
-        if (_appliedTheme == StyleNano.CurrentTheme)
+        if (_appliedTheme == StyleNano.CurrentTheme && _appliedNeutralPalette == UseNeutralPalette)
             return;
 
         _appliedTheme = StyleNano.CurrentTheme;
+        _appliedNeutralPalette = UseNeutralPalette;
         RefreshVisualStyle();
     }
 
@@ -133,12 +141,12 @@ public sealed class CCMOptionButton : OptionButton
 
     private void ApplyButtonColor(Button button, Color? itemColor, bool hovered = false, bool pressed = false)
     {
-        var normalBackground = StyleNano.DropdownButtonColorContext;
-        var hoverBackground = StyleNano.DropdownButtonColorContextHover;
-        var pressedBackground = StyleNano.DropdownButtonColorContextPressed;
-        var normalBorder = StyleNano.UiButtonBorder;
-        var hoverBorder = StyleNano.UiButtonBorder;
-        var pressedBorder = StyleNano.UiButtonBorder;
+        var normalBackground = GetNormalBackground();
+        var hoverBackground = GetHoverBackground();
+        var pressedBackground = GetPressedBackground();
+        var normalBorder = GetBorderColor();
+        var hoverBorder = GetBorderColor();
+        var pressedBorder = GetBorderColor();
 
         button.StyleBoxOverride = new StyleBoxFlat
         {
@@ -176,15 +184,15 @@ public sealed class CCMOptionButton : OptionButton
         StyleBoxOverride = new StyleBoxFlat
         {
             BackgroundColor = pressed
-                    ? StyleNano.DropdownButtonColorContextPressed
+                    ? GetPressedBackground()
                 : hovered
-                    ? StyleNano.DropdownButtonColorContextHover
-                    : StyleNano.DropdownButtonColorContext,
+                    ? GetHoverBackground()
+                    : GetNormalBackground(),
             BorderColor = pressed
-                ? StyleNano.UiButtonBorder
+                ? GetBorderColor()
                 : hovered
-                ? StyleNano.UiButtonBorder
-                    : StyleNano.UiButtonBorder,
+                ? GetBorderColor()
+                    : GetBorderColor(),
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = ContentPadding.Left,
             ContentMarginTopOverride = ContentPadding.Top,
@@ -239,6 +247,26 @@ public sealed class CCMOptionButton : OptionButton
     private Color? GetItemColor(int id)
     {
         return _itemColors.TryGetValue(id, out var color) ? color : null;
+    }
+
+    private Color GetNormalBackground()
+    {
+        return UseNeutralPalette ? NeutralBackground : StyleNano.DropdownButtonColorContext;
+    }
+
+    private Color GetHoverBackground()
+    {
+        return UseNeutralPalette ? NeutralHoverBackground : StyleNano.DropdownButtonColorContextHover;
+    }
+
+    private Color GetPressedBackground()
+    {
+        return UseNeutralPalette ? NeutralPressedBackground : StyleNano.DropdownButtonColorContextPressed;
+    }
+
+    private Color GetBorderColor()
+    {
+        return UseNeutralPalette ? NeutralBorder : StyleNano.UiButtonBorder;
     }
 
     private static T? FindChild<T>(Robust.Client.UserInterface.Control root, Predicate<T> predicate)

@@ -73,13 +73,21 @@ public sealed class HomingProjectileSystem : EntitySystem
         var query = EntityQueryEnumerator<HomingProjectileComponent>();
         while (query.MoveNext(out var projectile, out var component))
         {
-            if(!TryComp(projectile, out PhysicsComponent? physics))
+            var target = component.Target;
+
+            if (TerminatingOrDeleted(projectile) ||
+                TerminatingOrDeleted(target) ||
+                !TryComp(projectile, out PhysicsComponent? physics) ||
+                !TryComp(projectile, out TransformComponent? projectileXform) ||
+                !TryComp(target, out TransformComponent? targetXform))
+            {
+                _toRemove.Add(projectile);
                 continue;
+            }
 
             // Get the map coordinates and the direction
-            var target = component.Target;
-            var targetCoords = _transform.GetMapCoordinates(target, Transform(target));
-            var projectileCoords = _transform.GetMapCoordinates(projectile, Transform(projectile));
+            var targetCoords = _transform.GetMapCoordinates(target, xform: targetXform);
+            var projectileCoords = _transform.GetMapCoordinates(projectile, xform: projectileXform);
             if (targetCoords.MapId != projectileCoords.MapId)
             {
                 _toRemove.Add(projectile);
@@ -89,7 +97,7 @@ public sealed class HomingProjectileSystem : EntitySystem
             var direction = targetCoords.Position - projectileCoords.Position;
 
             // Remove the homing component once the projectile gets close to it's target.
-            if (_transform.InRange(Transform(projectile).Coordinates, Transform(target).Coordinates, 1f))
+            if (_transform.InRange(projectileXform.Coordinates, targetXform.Coordinates, 1f))
             {
                 _toRemove.Add(projectile);
                 continue;

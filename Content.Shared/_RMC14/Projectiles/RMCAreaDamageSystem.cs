@@ -76,7 +76,7 @@ public sealed class RMCAreaDamageSystem : EntitySystem
             if (size >= RMCSizes.SmallXeno)
                 newDamage *= areaDamage.XenoDamageMultiplier;
 
-            var damageDealt = _damage.TryChangeDamage(entity, newDamage, armorPiercing: armorPiercing);
+            var damageDealt = _damage.TryChangeDamage(entity, newDamage, origin: uid, armorPiercing: armorPiercing);
 
             if (!(damageDealt?.GetTotal() > FixedPoint2.Zero) || !_net.IsClient)
                 continue;

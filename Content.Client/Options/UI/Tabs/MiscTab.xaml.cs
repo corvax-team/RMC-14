@@ -67,6 +67,7 @@ public sealed partial class MiscTab : Control
         {
             new("green", Loc.GetString("ui-options-ui-color-theme-green")),
             new("blue", Loc.GetString("ui-options-ui-color-theme-blue")),
+            new("gray", Loc.GetString("ui-options-ui-color-theme-gray")),
         };
 
         NormalizeChatTranslationTarget();
@@ -84,6 +85,12 @@ public sealed partial class MiscTab : Control
             new("rmca", Loc.GetString("ui-options-lobby-background-preset-rmca")),
         };
 
+        var lobbyUiStyleEntries = new List<OptionDropDownCVar<string>.ValueOption>
+        {
+            new("new", Loc.GetString("ui-options-lobby-ui-style-new")),
+            new("old", Loc.GetString("ui-options-lobby-ui-style-old")),
+        };
+
         var xenoNightVisionEntries = new List<OptionDropDownCVar<int>.ValueOption>
         {
             new((int) NightVisionState.Off, Loc.GetString("rmc-ui-xeno-night-vision-default-off")),
@@ -99,8 +106,8 @@ public sealed partial class MiscTab : Control
         _clientLanguageOption.ImmediateValueChanged += OnClientLanguageChanged;
         Control.AddOptionDropDown(CVars.InterfaceTheme, DropDownHudTheme, themeEntries);
         Control.AddOptionDropDown(RMCCVars.RMCUIColorTheme, DropDownUiColorTheme, colorThemeEntries);
+        Control.AddOptionDropDown(RMCCVars.RMCLobbyUiStyle, DropDownLobbyUiStyle, lobbyUiStyleEntries);
         Control.AddOptionDropDown(RMCCVars.RMCLobbyBackgroundPreset, DropDownLobbyBackgroundPreset, lobbyBackgroundPresetEntries);
-        Control.AddOptionCheckBox(RMCCVars.RMCLobbyInvertSides, RMCLobbyInvertSides);
         Control.AddOptionDropDown(CCVars.UILayout, DropDownHudLayout, layoutEntries);
 
         Control.AddOptionCheckBox(CVars.DiscordEnabled, DiscordRich);

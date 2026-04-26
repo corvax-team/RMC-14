@@ -174,7 +174,7 @@ public sealed class RMCBattleExecuteSystem : EntitySystem
         }
 
         //ToDo RMC14 Make this head damage.
-        _damageable.TryChangeDamage(target, args.BattleExecuteDamage, true);
+        _damageable.TryChangeDamage(target, args.BattleExecuteDamage, true, origin: user, tool: args.Used.Value);
         _mobState.ChangeMobState(target, MobState.Dead);
         _unrevivable.MakeUnrevivable(target);
 

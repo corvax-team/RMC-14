@@ -466,14 +466,14 @@ public sealed partial class StationJobsSystem
     }
 
     private const float BaseFirstOrderWeight = 1f;
-    private const int MaxMissedRoundsForWeight = 7;
-    private const float EarlyMissedRoundWeight = 0.30f;
-    private const float MidMissedRoundWeight = 0.35f;
-    private const float LateMissedRoundWeight = 0.45f;
+    private const float EarlyMissedRoundWeight = 0.35f;
+    private const float MidMissedRoundWeight = 0.30f;
+    private const float LateMissedRoundWeight = 0.25f;
+    private const float EndlessMissedRoundWeight = 0.15f;
     private const float RecentRolePenalty = -0.5f;
-    private const float SessionMinutesPerBonus = 45f;
-    private const float SessionBonusPerStep = 0.25f;
-    private const float MaxSessionBonus = 1f;
+    private const float SessionMinutesPerBonus = 30f;
+    private const float SessionBonusPerStep = 0.15f;
+    private const float MaxSessionBonus = 1.8f;
     private const float MinFirstOrderWeight = 0.25f;
 
     private readonly Dictionary<(NetUserId UserId, int Slot, ProtoId<JobPrototype> JobId), FirstOrderWeightOverride>
@@ -645,7 +645,7 @@ public sealed partial class StationJobsSystem
 
     private float CalculateMissedRoundsWeight(int missedRounds)
     {
-        var effectiveMissedRounds = Math.Clamp(missedRounds, 0, MaxMissedRoundsForWeight);
+        var effectiveMissedRounds = Math.Max(missedRounds, 0);
         var weight = 0f;
 
         for (var i = 0; i < effectiveMissedRounds; i++)
@@ -654,7 +654,8 @@ public sealed partial class StationJobsSystem
             {
                 < 3 => EarlyMissedRoundWeight,
                 < 6 => MidMissedRoundWeight,
-                _ => LateMissedRoundWeight,
+                < 15 => LateMissedRoundWeight,
+                _ => EndlessMissedRoundWeight,
             };
         }
 

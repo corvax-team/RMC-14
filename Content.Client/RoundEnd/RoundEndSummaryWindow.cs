@@ -42,6 +42,7 @@ namespace Content.Client.RoundEnd
         {
             _entityManager = entityManager;
             _ccmStatsSystem = _entityManager.System<CCMStatsSystem>();
+            Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
             var resourceCache = IoCManager.Resolve<IResourceCache>();
             _mvpTitleFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 14);
             _mvpSubtitleFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 12);
@@ -1137,30 +1138,42 @@ namespace Content.Client.RoundEnd
 
         private static Color GetSummaryPanelBackground()
         {
-            return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#0E2950").WithAlpha(0.97f)
-                : Color.FromHex("#08150D").WithAlpha(0.97f);
+            return StyleNano.CurrentTheme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#0E2950").WithAlpha(0.97f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#1A2028").WithAlpha(0.97f),
+                _ => Color.FromHex("#08150D").WithAlpha(0.97f),
+            };
         }
 
         private static Color GetSponsorPanelBackground()
         {
-            return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#102A52").WithAlpha(0.96f)
-                : Color.FromHex("#091A11").WithAlpha(0.96f);
+            return StyleNano.CurrentTheme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#102A52").WithAlpha(0.96f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#202730").WithAlpha(0.96f),
+                _ => Color.FromHex("#091A11").WithAlpha(0.96f),
+            };
         }
 
         private static Color GetSummaryInsetBackground(float alpha = 0.18f)
         {
-            return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#081936").WithAlpha(alpha)
-                : Color.Black.WithAlpha(alpha);
+            return StyleNano.CurrentTheme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#081936").WithAlpha(alpha),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#0F1318").WithAlpha(MathF.Min(0.98f, alpha + 0.16f)),
+                _ => Color.Black.WithAlpha(alpha),
+            };
         }
 
         private static Color GetMarineMvpBackground()
         {
-            return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#0C2344").WithAlpha(0.92f)
-                : Color.FromHex("#07150A").WithAlpha(0.92f);
+            return StyleNano.CurrentTheme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#0C2344").WithAlpha(0.92f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#171D24").WithAlpha(0.92f),
+                _ => Color.FromHex("#07150A").WithAlpha(0.92f),
+            };
         }
     }
 

@@ -94,7 +94,7 @@ public sealed class XenoHeadbiteSystem : EntitySystem
         _xenoHeal.CreateHealStacks(xeno, xeno.Comp.HealAmount, xeno.Comp.HealDelay, 1, xeno.Comp.HealDelay);
         _jitter.DoJitter(xeno, xeno.Comp.JitterTime, true, 80, 8, true);
 
-        var change = _damage.TryChangeDamage(target, xeno.Comp.Damage); // TODO target head
+        var change = _damage.TryChangeDamage(target, xeno.Comp.Damage, origin: xeno); // TODO target head
         if (change?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(target, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);

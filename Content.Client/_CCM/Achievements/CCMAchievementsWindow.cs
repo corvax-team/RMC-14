@@ -51,6 +51,7 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
     public CCMAchievementsWindow()
     {
         IoCManager.InjectDependencies(this);
+        Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
 
         var cache = IoCManager.Resolve<IResourceCache>();
         _windowTitleFont = cache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 16);
@@ -452,9 +453,12 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
 
     private void ApplyWindowTheme()
     {
-        var bodyColor = IsBlueTheme()
-            ? Color.FromHex("#102A56").WithAlpha(0.94f)
-            : Color.FromHex("#05180A").WithAlpha(0.94f);
+        var bodyColor = GetTheme() switch
+        {
+            StyleNano.UiColorTheme.Blue => Color.FromHex("#102A56").WithAlpha(0.94f),
+            StyleNano.UiColorTheme.Gray => Color.FromHex("#1A2028").WithAlpha(0.94f),
+            _ => Color.FromHex("#05180A").WithAlpha(0.94f),
+        };
         var borderColor = GetWindowAccent().WithAlpha(0.65f);
 
         HeaderPanel.PanelOverride = new StyleBoxFlat
@@ -488,23 +492,32 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
         };
     }
 
-    private bool IsBlueTheme()
+    private StyleNano.UiColorTheme GetTheme()
     {
-        return _config.GetCVar(RMCCVars.RMCUIColorTheme).Equals("blue", StringComparison.OrdinalIgnoreCase);
+        var theme = _config.GetCVar(RMCCVars.RMCUIColorTheme);
+
+        if (theme.Equals("blue", StringComparison.OrdinalIgnoreCase))
+            return StyleNano.UiColorTheme.Blue;
+
+        if (theme.Equals("gray", StringComparison.OrdinalIgnoreCase))
+            return StyleNano.UiColorTheme.Gray;
+
+        return StyleNano.UiColorTheme.Green;
     }
 
     private Color GetWindowAccent()
     {
-        return IsBlueTheme()
-            ? StyleNano.LobbyMenuButtonBase
-            : StyleNano.LobbyMenuButtonBase;
+        return StyleNano.LobbyMenuButtonBase;
     }
 
     private Color GetCardBackgroundColor()
     {
-        return IsBlueTheme()
-            ? Color.FromHex("#0B2247")
-            : Color.FromHex("#0A1C0D");
+        return GetTheme() switch
+        {
+            StyleNano.UiColorTheme.Blue => Color.FromHex("#0B2247"),
+            StyleNano.UiColorTheme.Gray => Color.FromHex("#202730"),
+            _ => Color.FromHex("#0A1C0D"),
+        };
     }
 
     private static Color BlendTowards(Color source, Color target, float factor)

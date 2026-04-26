@@ -54,16 +54,6 @@ public sealed class CCMSponsorshipManager : IPostInjectInit
         return HasRoleTimerBypass(session.UserId);
     }
 
-    public bool HasWhitelistBypass(NetUserId userId)
-    {
-        return GetStatus(userId).Tier >= CCMSponsorshipTier.SponsorIII;
-    }
-
-    public bool HasWhitelistBypass(ICommonSession session)
-    {
-        return HasWhitelistBypass(session.UserId);
-    }
-
     public void SetManualTierOverride(NetUserId userId, CCMSponsorshipTier tier, long? expirationUnixSeconds = null)
     {
         if (tier == CCMSponsorshipTier.None)
@@ -219,8 +209,8 @@ public sealed class CCMSponsorshipManager : IPostInjectInit
     {
         return tier switch
         {
-            CCMSponsorshipTier.SponsorII => 0.75f,
-            CCMSponsorshipTier.SponsorIII => 1.75f,
+            CCMSponsorshipTier.SponsorII => 0.5f,
+            CCMSponsorshipTier.SponsorIII => 1f,
             _ => 0f,
         };
     }

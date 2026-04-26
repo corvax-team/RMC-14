@@ -13,6 +13,7 @@ using JetBrains.Annotations;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared.Interaction.SharedInteractionSystem;
 
@@ -24,6 +25,7 @@ namespace Content.Shared.Examine
         [Dependency] private readonly SharedTransformSystem _transform = default!;
         [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
         [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
+        [Dependency] private readonly IGameTiming _timing = default!;
         [Dependency] protected readonly MobStateSystem MobStateSystem = default!;
         [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
 
@@ -51,6 +53,7 @@ namespace Content.Shared.Examine
         protected const float ExamineDetailsRange = 8f;
 
         protected const float ExamineBlurrinessMult = 2.5f;
+        private TimeSpan _nextExtremeRangeWarningAt;
 
         private EntityQuery<GhostComponent> _ghostQuery;
 
@@ -227,7 +230,12 @@ namespace Content.Shared.Examine
 
             if (length > MaxRaycastRange)
             {
-                Log.Warning("InRangeUnOccluded check performed over extreme range. Limiting CollisionRay size.");
+                if (_timing.RealTime >= _nextExtremeRangeWarningAt)
+                {
+                    Log.Warning("InRangeUnOccluded check performed over extreme range. Limiting CollisionRay size.");
+                    _nextExtremeRangeWarningAt = _timing.RealTime + TimeSpan.FromSeconds(10);
+                }
+
                 length = MaxRaycastRange;
             }
 

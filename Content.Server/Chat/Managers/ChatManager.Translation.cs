@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Shared._RMC14.CCVar;
@@ -19,6 +20,9 @@ namespace Content.Server.Chat.Managers;
 
 internal sealed partial class ChatManager
 {
+    [GeneratedRegex(@"\[(\/)?[a-z]+(?:[ =][^\]]+)?\]", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
+    private static partial Regex RichTextTagRegex();
+
     [Dependency] private readonly IHttpClientHolder _http = default!;
     [Dependency] private readonly ITaskManager _taskManager = default!;
 
@@ -101,6 +105,20 @@ internal sealed partial class ChatManager
         if (!_netConfigManager.GetClientCVar(client, RMCCVars.RMCChatTranslateEnabled))
         {
             Logger.InfoS("chat.translate", $"Skip chat translation for {client}: rmc.chat_translate_enabled = false.");
+            return false;
+        }
+
+        if (ShouldSkipAdministrativeSystemTranslation(message))
+        {
+            Logger.InfoS("chat.translate",
+                $"Skip chat translation for {client}: administrative system message should not be translated. Channel={message.Channel}, Message='{message.Message}'");
+            return false;
+        }
+
+        if (ContainsRichMarkup(message.Message))
+        {
+            Logger.InfoS("chat.translate",
+                $"Skip chat translation for {client}: message contains rich markup tags. Message='{message.Message}'");
             return false;
         }
 
@@ -277,6 +295,18 @@ internal sealed partial class ChatManager
                 : $"{path}/translate";
 
         return builder.Uri.ToString();
+    }
+
+    private static bool ContainsRichMarkup(string text)
+    {
+        return !string.IsNullOrWhiteSpace(text) && RichTextTagRegex().IsMatch(text);
+    }
+
+    private static bool ShouldSkipAdministrativeSystemTranslation(ChatMessage message)
+    {
+        return (message.Channel & ChatChannel.AdminRelated) != 0 &&
+               message.SenderEntity == NetEntity.Invalid &&
+               message.SenderKey == null;
     }
 
     private static string? NormalizeLanguageCode(string raw, bool allowAuto)

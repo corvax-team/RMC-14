@@ -112,7 +112,7 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
                 armorPiercing = armorPiercingComp.Amount;
 
             projectileCount = Math.Max(newProjectileCount, 0);
-            _damage.TryChangeDamage(entity, damage, armorPiercing: armorPiercing);
+            _damage.TryChangeDamage(entity, damage, origin: payloadUid, armorPiercing: armorPiercing);
 
             // Make sure the leftover projectiles don't hit the entity that was hit directly
             if (!TryComp(entity, out UserLimitHitsComponent? limit))

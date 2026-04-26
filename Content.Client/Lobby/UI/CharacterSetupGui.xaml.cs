@@ -167,16 +167,25 @@ namespace Content.Client.Lobby.UI
             _appliedTheme = theme;
 
             var panelTex = _resourceCache.GetTexture("/Textures/Interface/Nano/button.svg.96dpi.png");
-            var frameColor = theme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#0B3578")
-                : Color.FromHex("#16301F");
-            var carouselBackgroundColor = theme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#0E2950").WithAlpha(0.93f)
-                : Color.FromHex("#0A2C18").WithAlpha(0.90f);
+            var frameColor = theme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#0B3578"),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#384553"),
+                _ => Color.FromHex("#16301F"),
+            };
+            var carouselBackgroundColor = theme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#0E2950").WithAlpha(0.93f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#1C232C").WithAlpha(0.92f),
+                _ => Color.FromHex("#0A2C18").WithAlpha(0.90f),
+            };
             var carouselSideShadeColor = Color.Transparent;
-            var dividerColor = theme == StyleNano.UiColorTheme.Blue
-                ? Color.FromHex("#165197").WithAlpha(0.95f)
-                : Color.FromHex("#2B7E45").WithAlpha(0.95f);
+            var dividerColor = theme switch
+            {
+                StyleNano.UiColorTheme.Blue => Color.FromHex("#165197").WithAlpha(0.95f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#667487").WithAlpha(0.95f),
+                _ => Color.FromHex("#2B7E45").WithAlpha(0.95f),
+            };
 
             var back = new StyleBoxTexture
             {

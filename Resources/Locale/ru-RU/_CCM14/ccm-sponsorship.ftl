@@ -18,11 +18,11 @@ ccm-sponsorship-tier-3-title = Спонсор III
 ccm-sponsorship-tier-none-title = Игрок
 
 ccm-sponsorship-perk-chat-color = Цветные сообщения в OOC и LOOC.
-ccm-sponsorship-perk-role-weight-2 = Небольшой бонус к весу распределения ролей.
-ccm-sponsorship-perk-role-weight-3 = Повышенный бонус к весу распределения ролей.
+ccm-sponsorship-perk-role-weight-2 = Небольшой бонус к весу распределения ролей(+0.5).
+ccm-sponsorship-perk-role-weight-3 = Повышенный бонус к весу распределения ролей(+1).
 ccm-sponsorship-perk-endgame-credits = Ваш ckey будет показан в списке спонсоров в конце раунда.
-ccm-sponsorship-perk-customization = Открывает кастомизацию и выбор скинов.
-ccm-sponsorship-extended-perk-customization = Открывает расширенную кастомизацию и выбор скинов.
+ccm-sponsorship-perk-customization = Открывает кастомизацию.
+ccm-sponsorship-extended-perk-customization = Открывает расширенную кастомизацию.
 ccm-sponsorship-perk-role-timers = Открывает таймеры для всех ролей.
 ccm-sponsorship-perk-job-whitelist = Открывает доступ к ролям с вайтлистом.
 ccm-sponsorship-perk-discord-role = Спонсорская роль и доступ в спонсорский канал в Discord.

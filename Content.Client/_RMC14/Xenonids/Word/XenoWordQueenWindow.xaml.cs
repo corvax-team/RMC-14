@@ -5,7 +5,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._RMC14.Xenonids.Word;
 
 [GenerateTypedNameReferences]
-public sealed partial class XenoWordQueenWindow : DefaultCMWindow
+public sealed partial class XenoWordQueenWindow : DefaultWindow
 {
     public XenoWordQueenWindow()
     {

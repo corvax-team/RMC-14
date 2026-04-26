@@ -23,9 +23,16 @@ public sealed class JobPriorityChancesEvent : EntityEventArgs
 [Serializable, NetSerializable]
 public readonly record struct JobPriorityChanceInfo(
     float ChancePercent,
+    int SlotCount,
+    float Weight,
+    float TotalWeight,
     float BaseWeight,
+    int MissedRounds,
     float MissedWeight,
     float RecentPenalty,
-    float SessionHours);
+    int SessionBonusSteps,
+    float SessionBonus,
+    float SessionHours,
+    float ExternalBonus);
 
 // # CCM priority rework

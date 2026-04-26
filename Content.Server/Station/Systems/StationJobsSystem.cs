@@ -666,13 +666,13 @@ public sealed partial class StationJobsSystem : EntitySystem
             var slotCount = jobSlotCounts.GetValueOrDefault(jobProtoId, 1);
             if (slotCount <= 0)
             {
-                chances[jobId] = new JobPriorityChanceInfo(0f, 0f, 0f, 0f, 0f);
+                chances[jobId] = new JobPriorityChanceInfo(0f, 0, 0f, 0f, 0f, 0, 0f, 0f, 0, 0f, 0f, 0f);
                 continue;
             }
 
             if (total <= 0f)
             {
-                chances[jobId] = new JobPriorityChanceInfo(0f, 0f, 0f, 0f, 0f);
+                chances[jobId] = new JobPriorityChanceInfo(0f, slotCount, 0f, 0f, 0f, 0, 0f, 0f, 0, 0f, 0f, 0f);
                 continue;
             }
 
@@ -688,10 +688,17 @@ public sealed partial class StationJobsSystem : EntitySystem
             var sessionHours = MathF.Min(6f, sessionMinutes.GetValueOrDefault(userId) / 60f);
             chances[jobId] = new JobPriorityChanceInfo(
                 MathF.Min(100f, chance),
+                slotCount,
+                breakdown.TotalWeight,
+                total,
                 breakdown.BaseWeight,
+                breakdown.MissedRounds,
                 breakdown.MissedWeight,
                 breakdown.RecentPenalty,
-                sessionHours);
+                breakdown.SessionBonusSteps,
+                breakdown.SessionBonus,
+                sessionHours,
+                breakdown.ExternalBonus);
         }
 
         return chances;

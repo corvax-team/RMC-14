@@ -45,6 +45,7 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
     public CCMSponsorshipWindow()
     {
         IoCManager.InjectDependencies(this);
+        Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
 
         Title = string.Empty;
         MinSize = new Vector2(1240, 930);
@@ -438,7 +439,7 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
             [
                 "ccm-sponsorship-perk-role-weight-3",
                 "ccm-sponsorship-extended-perk-customization",
-                "ccm-sponsorship-perk-job-whitelist",
+                "ccm-sponsorship-perk-role-timers",
                 "ccm-sponsorship-perk-thanks"
             ],
             CCMSponsorshipTier.SponsorII =>
@@ -576,17 +577,22 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
     private void ApplyWindowTheme()
     {
         var theme = _config.GetCVar(RMCCVars.RMCUIColorTheme);
-        var isBlueTheme = theme.Equals("blue", StringComparison.OrdinalIgnoreCase);
         var windowAccent = GetWindowAccent();
-        var headerColor = isBlueTheme
+        var headerColor = theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
             ? Color.FromHex("#06142F").WithAlpha(0.995f)
-            : Color.FromHex("#041105").WithAlpha(0.995f);
-        var bodyColor = isBlueTheme
+            : theme.Equals("gray", StringComparison.OrdinalIgnoreCase)
+                ? Color.FromHex("#171D24").WithAlpha(0.995f)
+                : Color.FromHex("#041105").WithAlpha(0.995f);
+        var bodyColor = theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
             ? Color.FromHex("#081B3F").WithAlpha(0.995f)
-            : Color.FromHex("#061507").WithAlpha(0.995f);
-        var borderColor = isBlueTheme
+            : theme.Equals("gray", StringComparison.OrdinalIgnoreCase)
+                ? Color.FromHex("#1C232C").WithAlpha(0.995f)
+                : Color.FromHex("#061507").WithAlpha(0.995f);
+        var borderColor = theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
             ? Color.FromHex("#2F78FF").WithAlpha(0.88f)
-            : StyleNano.LobbyMenuButtonBase.WithAlpha(0.82f);
+            : theme.Equals("gray", StringComparison.OrdinalIgnoreCase)
+                ? Color.FromHex("#7B8898").WithAlpha(0.86f)
+                : StyleNano.LobbyMenuButtonBase.WithAlpha(0.82f);
 
         HeaderPanel.PanelOverride = new StyleBoxFlat
         {
@@ -647,9 +653,6 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
 
     private Color GetWindowAccent()
     {
-        var theme = _config.GetCVar(RMCCVars.RMCUIColorTheme);
-        return theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
-            ? StyleNano.LobbyMenuButtonBase
-            : StyleNano.LobbyMenuButtonBase;
+        return StyleNano.LobbyMenuButtonBase;
     }
 }

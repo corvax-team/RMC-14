@@ -15,6 +15,7 @@ namespace Content.Client.Stylesheets
         [Dependency] private readonly IConfigurationManager _configManager = default!;
 
         public Stylesheet SheetNano { get; private set; } = default!;
+        public Stylesheet SheetNanoNeutral { get; private set; } = default!;
         public Stylesheet SheetSpace { get; private set; } = default!;
 
         public void Initialize()
@@ -26,9 +27,12 @@ namespace Content.Client.Stylesheets
         {
             var oldNano = SheetNano;
             var oldSpace = SheetSpace;
+            if (ReferenceEquals(SheetNanoNeutral, null))
+                SheetNanoNeutral = new StyleNano(_resourceCache, theme, useNeutralPalette: true).Stylesheet;
+
             SheetNano = new StyleNano(_resourceCache, theme).Stylesheet;
             SheetSpace = new StyleSpace(_resourceCache, theme).Stylesheet;
-            _userInterfaceManager.Stylesheet = SheetNano;
+            _userInterfaceManager.Stylesheet = SheetNanoNeutral;
 
             foreach (var root in _userInterfaceManager.AllRoots)
             {

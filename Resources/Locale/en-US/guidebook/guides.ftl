@@ -94,6 +94,7 @@ guide-entry-newplayer = New? Start here!
 guide-entry-charactercreation = Creating Characters
 guide-entry-species = Species
 guide-entry-yourfirstcharacter = Your First Character
+guide-entry-jobpriorityweighting = Role Distribution and Weight
 guide-entry-controls = Controls
 guide-entry-radio = Radio and Speech
 

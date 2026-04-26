@@ -5,7 +5,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Xenonids.Construction.Tunnel;
 [GenerateTypedNameReferences]
-public sealed partial class SelectDestinationTunnelWindow : DefaultCMWindow
+public sealed partial class SelectDestinationTunnelWindow : DefaultWindow
 {
     private const float BlipUpdateInterval = 1.0f;
     private float _timeSinceLastUpdate;

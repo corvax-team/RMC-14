@@ -21,6 +21,12 @@ ccm-lobby-welcome-theme-title = Тема интерфейса
 ccm-lobby-welcome-theme-text = Выберите основную цветовую схему. Это изменит вид кнопок, окон, декоративных элементов и общего стиля лобби.
 ccm-lobby-welcome-theme-green = Зеленая
 ccm-lobby-welcome-theme-blue = Синяя
+ccm-lobby-welcome-theme-gray = Серая
+
+ccm-lobby-welcome-lobby-style-title = Стиль лобби
+ccm-lobby-welcome-lobby-style-text = Выберите ветку оформления лобби. Это подготавливает UI к переключению между текущим CCM-видом и старым RMCA-стилем.
+ccm-lobby-welcome-lobby-style-new = Новый
+ccm-lobby-welcome-lobby-style-old = Старый
 
 ccm-lobby-welcome-rules-title = Правила
 ccm-lobby-welcome-rules-body = Пожалуйста, ознакомьтесь с актуальным сводом правил сервера ниже.

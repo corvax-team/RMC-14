@@ -381,37 +381,52 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
 
     private static Color GetToastAccent()
     {
-        return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-            ? Color.FromHex("#4A8FFF")
-            : Color.FromHex("#6CFF6C");
+        return StyleNano.CurrentTheme switch
+        {
+            StyleNano.UiColorTheme.Blue => Color.FromHex("#4A8FFF"),
+            StyleNano.UiColorTheme.Gray => Color.FromHex("#A7B3C0"),
+            _ => Color.FromHex("#6CFF6C"),
+        };
     }
 
     private static Color GetToastBackground()
     {
-        return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-            ? Color.FromHex("#0D2344").WithAlpha(0.985f)
-            : Color.FromHex("#082110").WithAlpha(0.985f);
+        return StyleNano.CurrentTheme switch
+        {
+            StyleNano.UiColorTheme.Blue => Color.FromHex("#0D2344").WithAlpha(0.985f),
+            StyleNano.UiColorTheme.Gray => Color.FromHex("#1A2028").WithAlpha(0.985f),
+            _ => Color.FromHex("#082110").WithAlpha(0.985f),
+        };
     }
 
     private static Color GetToastInsetBackground()
     {
-        return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-            ? Color.FromHex("#14335E").WithAlpha(0.95f)
-            : Color.FromHex("#12371C").WithAlpha(0.95f);
+        return StyleNano.CurrentTheme switch
+        {
+            StyleNano.UiColorTheme.Blue => Color.FromHex("#14335E").WithAlpha(0.95f),
+            StyleNano.UiColorTheme.Gray => Color.FromHex("#252E39").WithAlpha(0.95f),
+            _ => Color.FromHex("#12371C").WithAlpha(0.95f),
+        };
     }
 
     private static Color GetToastAccentText()
     {
-        return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-            ? Color.FromHex("#D8E9FF")
-            : Color.FromHex("#E7FFE8");
+        return StyleNano.CurrentTheme switch
+        {
+            StyleNano.UiColorTheme.Blue => Color.FromHex("#D8E9FF"),
+            StyleNano.UiColorTheme.Gray => Color.FromHex("#F0F3F6"),
+            _ => Color.FromHex("#E7FFE8"),
+        };
     }
 
     private static Color GetToastBodyText()
     {
-        return StyleNano.CurrentTheme == StyleNano.UiColorTheme.Blue
-            ? Color.FromHex("#D1E1F5")
-            : Color.FromHex("#D3EAD7");
+        return StyleNano.CurrentTheme switch
+        {
+            StyleNano.UiColorTheme.Blue => Color.FromHex("#D1E1F5"),
+            StyleNano.UiColorTheme.Gray => Color.FromHex("#D5DCE4"),
+            _ => Color.FromHex("#D3EAD7"),
+        };
     }
 
     private void EnsureSystem()

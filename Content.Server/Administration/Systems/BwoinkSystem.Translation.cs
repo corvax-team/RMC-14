@@ -29,14 +29,7 @@ public sealed partial class BwoinkSystem
 
     private void SendBwoinkMessage(INetChannel channel, BwoinkTextMessage message)
     {
-        var outgoing = CloneBwoinkMessage(message);
-        if (!TryBuildTranslationRequest(channel, outgoing.Text, out var request))
-        {
-            RaiseNetworkEvent(outgoing, channel);
-            return;
-        }
-
-        SendTranslatedBwoinkMessage(channel, outgoing, request);
+        RaiseNetworkEvent(CloneBwoinkMessage(message), channel);
     }
 
     private async void SendTranslatedBwoinkMessage(INetChannel channel, BwoinkTextMessage message, TranslationRequest request)

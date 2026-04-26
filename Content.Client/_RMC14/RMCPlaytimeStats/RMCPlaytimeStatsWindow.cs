@@ -64,6 +64,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
+        Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
 
         SetupOverallCategorySelector();
         LayoutContainer.SetAnchorPreset(BackgroundImage, LayoutContainer.LayoutPreset.Wide);
@@ -501,31 +502,44 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
 
         _appliedTheme = theme;
 
-        if (theme == StyleNano.UiColorTheme.Blue)
+        switch (theme)
         {
-            _defaultColor = Color.FromHex("#163764").WithAlpha(0.92f);
-            _altColor = Color.FromHex("#1B4074").WithAlpha(0.92f);
-            _headerColor = Color.FromHex("#214B86").WithAlpha(0.96f);
-            _panelColor = Color.FromHex("#102A56").WithAlpha(0.84f);
-            _textColor = Color.FromHex("#E3EEFF");
-            _mutedTextColor = Color.FromHex("#B5D1F3");
-            _separatorColor = Color.FromHex("#2D5F9E").WithAlpha(0.95f);
-            _buttonNormalColor = Color.FromHex("#1A4A8C");
-            _buttonSelectedColor = Color.FromHex("#1F58A5");
-            BackgroundImage.ModulateSelfOverride = Color.FromHex("#5D84BA").WithAlpha(0.22f);
-        }
-        else
-        {
-            _defaultColor = Color.FromHex("#0D3518").WithAlpha(0.92f);
-            _altColor = Color.FromHex("#124120").WithAlpha(0.92f);
-            _headerColor = Color.FromHex("#185B2B").WithAlpha(0.96f);
-            _panelColor = Color.FromHex("#05180A").WithAlpha(0.84f);
-            _textColor = Color.FromHex("#ECFFF0");
-            _mutedTextColor = Color.FromHex("#C6EACB");
-            _separatorColor = Color.FromHex("#2B7E45").WithAlpha(0.95f);
-            _buttonNormalColor = Color.FromHex("#138C2F");
-            _buttonSelectedColor = Color.FromHex("#15A31E");
-            BackgroundImage.ModulateSelfOverride = Color.FromHex("#5B9A6A").WithAlpha(0.18f);
+            case StyleNano.UiColorTheme.Blue:
+                _defaultColor = Color.FromHex("#163764").WithAlpha(0.92f);
+                _altColor = Color.FromHex("#1B4074").WithAlpha(0.92f);
+                _headerColor = Color.FromHex("#214B86").WithAlpha(0.96f);
+                _panelColor = Color.FromHex("#102A56").WithAlpha(0.84f);
+                _textColor = Color.FromHex("#E3EEFF");
+                _mutedTextColor = Color.FromHex("#B5D1F3");
+                _separatorColor = Color.FromHex("#2D5F9E").WithAlpha(0.95f);
+                _buttonNormalColor = Color.FromHex("#1A4A8C");
+                _buttonSelectedColor = Color.FromHex("#1F58A5");
+                BackgroundImage.ModulateSelfOverride = Color.FromHex("#5D84BA").WithAlpha(0.22f);
+                break;
+            case StyleNano.UiColorTheme.Gray:
+                _defaultColor = Color.FromHex("#26303B").WithAlpha(0.92f);
+                _altColor = Color.FromHex("#2D3743").WithAlpha(0.92f);
+                _headerColor = Color.FromHex("#394552").WithAlpha(0.96f);
+                _panelColor = Color.FromHex("#1A2028").WithAlpha(0.84f);
+                _textColor = Color.FromHex("#EEF2F6");
+                _mutedTextColor = Color.FromHex("#C7CFD8");
+                _separatorColor = Color.FromHex("#718092").WithAlpha(0.95f);
+                _buttonNormalColor = Color.FromHex("#566577");
+                _buttonSelectedColor = Color.FromHex("#66788E");
+                BackgroundImage.ModulateSelfOverride = Color.FromHex("#A0ACB8").WithAlpha(0.14f);
+                break;
+            default:
+                _defaultColor = Color.FromHex("#0D3518").WithAlpha(0.92f);
+                _altColor = Color.FromHex("#124120").WithAlpha(0.92f);
+                _headerColor = Color.FromHex("#185B2B").WithAlpha(0.96f);
+                _panelColor = Color.FromHex("#05180A").WithAlpha(0.84f);
+                _textColor = Color.FromHex("#ECFFF0");
+                _mutedTextColor = Color.FromHex("#C6EACB");
+                _separatorColor = Color.FromHex("#2B7E45").WithAlpha(0.95f);
+                _buttonNormalColor = Color.FromHex("#138C2F");
+                _buttonSelectedColor = Color.FromHex("#15A31E");
+                BackgroundImage.ModulateSelfOverride = Color.FromHex("#5B9A6A").WithAlpha(0.18f);
+                break;
         }
 
         ContentBackdrop.PanelOverride = new StyleBoxFlat

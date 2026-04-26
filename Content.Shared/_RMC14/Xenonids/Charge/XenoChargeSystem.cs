@@ -179,7 +179,7 @@ public sealed class XenoChargeSystem : EntitySystem
             }
 
             if (damage.Comp.Damage != null)
-                _damageable.TryChangeDamage(damage, damage.Comp.Damage * stage, damageable: damageable);
+                _damageable.TryChangeDamage(damage, damage.Comp.Damage * stage, damageable: damageable, origin: ent.Owner);
 
             if (damage.Comp.ArmorPiercingDamage != null)
             {
@@ -187,6 +187,7 @@ public sealed class XenoChargeSystem : EntitySystem
                     damage,
                     damage.Comp.ArmorPiercingDamage * stage,
                     damageable: damageable,
+                    origin: ent.Owner,
                     armorPiercing: damage.Comp.ArmorPiercing
                 );
             }
@@ -196,7 +197,7 @@ public sealed class XenoChargeSystem : EntitySystem
             {
                 var bluntDamage = new DamageSpecifier();
                 bluntDamage.DamageDict[_blunt] = destroyed.Value * damage.Comp.PercentageDamage * stage;
-                _damageable.TryChangeDamage(damage, bluntDamage, damageable: damageable);
+                _damageable.TryChangeDamage(damage, bluntDamage, damageable: damageable, origin: ent.Owner);
             }
         }
 

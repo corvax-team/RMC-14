@@ -6,7 +6,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._RMC14.Xenonids.Construction;
 
 [GenerateTypedNameReferences]
-public sealed partial class XenoChooseStructureWindow : DefaultCMWindow
+public sealed partial class XenoChooseStructureWindow : DefaultWindow
 {
     public XenoChooseStructureWindow()
     {

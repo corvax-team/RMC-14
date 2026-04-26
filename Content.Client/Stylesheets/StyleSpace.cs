@@ -27,33 +27,55 @@ namespace Content.Client.Stylesheets
 
         public StyleSpace(IResourceCache resCache, string theme = "blue") : base(resCache)
         {
-            var isBlueTheme = theme.Equals("blue", StringComparison.OrdinalIgnoreCase);
+            var colorTheme = theme.Equals("gray", StringComparison.OrdinalIgnoreCase)
+                ? StyleNano.UiColorTheme.Gray
+                : theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
+                    ? StyleNano.UiColorTheme.Blue
+                    : StyleNano.UiColorTheme.Green;
 
-            var launcherFrameBackground = (isBlueTheme
-                ? Color.FromHex("#070E1B")
-                : Color.FromHex("#0B150D")).WithAlpha(0.96f);
-            var launcherFrameBorder = (isBlueTheme
-                ? Color.FromHex("#1C5CA8")
-                : Color.FromHex("#2B7E45")).WithAlpha(0.98f);
+            Color ThemeColor(Color blue, Color gray, Color green)
+            {
+                return colorTheme switch
+                {
+                    StyleNano.UiColorTheme.Blue => blue,
+                    StyleNano.UiColorTheme.Gray => gray,
+                    _ => green,
+                };
+            }
+
+            var launcherFrameBackground = ThemeColor(
+                Color.FromHex("#070E1B"),
+                Color.FromHex("#12171D"),
+                Color.FromHex("#0B150D")).WithAlpha(0.96f);
+            var launcherFrameBorder = ThemeColor(
+                Color.FromHex("#1C5CA8"),
+                Color.FromHex("#667485"),
+                Color.FromHex("#2B7E45")).WithAlpha(0.98f);
             var launcherDivider = Color.FromHex("#545A66");
-            var launcherTitleColor = isBlueTheme
-                ? Color.FromHex("#58A6FF")
-                : Color.FromHex("#95E7B1");
-            var launcherStateColor = isBlueTheme
-                ? Color.FromHex("#C4DAF8")
-                : Color.FromHex("#D1EBDD");
-            var launcherButtonNormal = isBlueTheme
-                ? Color.FromHex("#1B2F56")
-                : Color.FromHex("#2B4433");
-            var launcherButtonHover = isBlueTheme
-                ? Color.FromHex("#23406F")
-                : Color.FromHex("#365B43");
-            var launcherButtonPressed = isBlueTheme
-                ? Color.FromHex("#152544")
-                : Color.FromHex("#1F3528");
-            var launcherButtonText = isBlueTheme
-                ? Color.FromHex("#D5E4F9")
-                : Color.FromHex("#D8F0E2");
+            var launcherTitleColor = ThemeColor(
+                Color.FromHex("#58A6FF"),
+                Color.FromHex("#D5DCE5"),
+                Color.FromHex("#95E7B1"));
+            var launcherStateColor = ThemeColor(
+                Color.FromHex("#C4DAF8"),
+                Color.FromHex("#DEE4EB"),
+                Color.FromHex("#D1EBDD"));
+            var launcherButtonNormal = ThemeColor(
+                Color.FromHex("#1B2F56"),
+                Color.FromHex("#36404C"),
+                Color.FromHex("#2B4433"));
+            var launcherButtonHover = ThemeColor(
+                Color.FromHex("#23406F"),
+                Color.FromHex("#45515F"),
+                Color.FromHex("#365B43"));
+            var launcherButtonPressed = ThemeColor(
+                Color.FromHex("#152544"),
+                Color.FromHex("#2B3440"),
+                Color.FromHex("#1F3528"));
+            var launcherButtonText = ThemeColor(
+                Color.FromHex("#D5E4F9"),
+                Color.FromHex("#EDF1F5"),
+                Color.FromHex("#D8F0E2"));
 
             var notoSans10 = resCache.GetFont
             (

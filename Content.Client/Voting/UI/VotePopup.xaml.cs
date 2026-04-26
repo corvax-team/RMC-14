@@ -23,7 +23,6 @@ namespace Content.Client.Voting.UI
         private readonly VoteManager.ActiveVote _vote;
         private readonly Button[] _voteButtons;
         private readonly NetEntity? _targetEntity;
-        private bool _buttonWidthsLocked;
         private bool _popupWidthLocked;
 
         public VotePopup(VoteManager.ActiveVote vote)
@@ -32,7 +31,7 @@ namespace Content.Client.Voting.UI
             IoCManager.InjectDependencies(this);
             RobustXamlLoader.Load(this);
 
-            Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
+            Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNanoNeutral;
 
             if (_vote.TargetEntity != null && _vote.TargetEntity != 0)
             {
@@ -70,10 +69,13 @@ namespace Content.Client.Voting.UI
             VoteTitle.SetMessage(FormattedMessage.FromUnformatted(LocalizeVoteText(_vote.Title)));
             VoteCaller.Text = Loc.GetString("ui-vote-created", ("initiator", LocalizeVoteText(_vote.Initiator)));
 
+            var longestEntryLength = 0;
+
             for (var i = 0; i < _voteButtons.Length; i++)
             {
                 var entry = _vote.Entries[i];
                 var entryText = LocalizeVoteText(entry.Text);
+                longestEntryLength = Math.Max(longestEntryLength, entryText.Length);
                 if (_vote.DisplayVotes)
                 {
                     _voteButtons[i].Text = Loc.GetString("ui-vote-button", ("text", entryText), ("votes", entry.Votes));
@@ -86,6 +88,47 @@ namespace Content.Client.Voting.UI
                 if (_vote.OurVote == i)
                     _voteButtons[i].Pressed = true;
             }
+
+            var columns = CalculateColumnCount(_voteButtons.Length, longestEntryLength);
+            VoteOptionsContainer.Columns = columns;
+
+            var minButtonWidth = columns switch
+            {
+                1 => longestEntryLength >= 34 ? 760f : 680f,
+                2 => longestEntryLength >= 24 ? 320f : 280f,
+                _ => longestEntryLength >= 16 ? 240f : 210f,
+            };
+
+            var minPopupWidth = columns switch
+            {
+                1 => minButtonWidth + 40f,
+                2 => minButtonWidth * 2f + 52f,
+                _ => minButtonWidth * 3f + 64f,
+            };
+
+            foreach (var button in _voteButtons)
+            {
+                button.MinWidth = minButtonWidth;
+                button.MaxWidth = float.MaxValue;
+            }
+
+            MinWidth = minPopupWidth;
+            MaxWidth = 1500f;
+            _popupWidthLocked = false;
+        }
+
+        private static int CalculateColumnCount(int buttonCount, int longestEntryLength)
+        {
+            if (buttonCount <= 1)
+                return 1;
+
+            if (longestEntryLength >= 40)
+                return 1;
+
+            if (longestEntryLength >= 22 || buttonCount <= 4)
+                return Math.Min(2, buttonCount);
+
+            return Math.Min(3, buttonCount);
         }
 
         private void AttemptFollowVoteEntity()
@@ -106,25 +149,6 @@ namespace Content.Client.Voting.UI
 
         protected override void FrameUpdate(FrameEventArgs args)
         {
-            if (!_buttonWidthsLocked)
-            {
-                var allMeasured = true;
-                foreach (var button in _voteButtons)
-                {
-                    if (button.Size.X <= 1f)
-                    {
-                        allMeasured = false;
-                        continue;
-                    }
-
-                    button.MinWidth = button.Size.X;
-                    button.MaxWidth = button.Size.X;
-                }
-
-                if (allMeasured)
-                    _buttonWidthsLocked = true;
-            }
-
             if (!_popupWidthLocked && Size.X > 1f)
             {
                 MinWidth = Size.X;

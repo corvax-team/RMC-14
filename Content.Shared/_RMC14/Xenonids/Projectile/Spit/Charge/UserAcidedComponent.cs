@@ -9,6 +9,9 @@ namespace Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
 [Access(typeof(XenoSpitSystem))]
 public sealed partial class UserAcidedComponent : Component
 {
+    public EntityUid? Source;
+    public EntityUid? Tool;
+
     [DataField, AutoNetworkedField]
     public DamageSpecifier Damage = new();
 

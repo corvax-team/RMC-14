@@ -23,8 +23,10 @@ using Content.Shared.Mobs;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Projectiles;
+using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared._RMC14.Vehicle;
 using Robust.Shared.Network;
 using Robust.Shared.Log;
 using Robust.Server.Player;
@@ -968,6 +970,24 @@ public sealed class CCMStatsSystem : EntitySystem
             if (side == CCMStatsSide.None)
             {
                 side = GetSide(current);
+            }
+
+            if (userId == default &&
+                TryComp(current, out VehicleWeaponsComponent? vehicleWeapons) &&
+                vehicleWeapons.Operator is { } weaponOperator &&
+                weaponOperator != current &&
+                TryResolvePlayerAndSide(weaponOperator, visited, ref userId, ref side))
+            {
+                return true;
+            }
+
+            if (userId == default &&
+                TryComp(current, out VehicleComponent? vehicle) &&
+                vehicle.Operator is { } vehicleOperator &&
+                vehicleOperator != current &&
+                TryResolvePlayerAndSide(vehicleOperator, visited, ref userId, ref side))
+            {
+                return true;
             }
 
             if (userId != default && side != CCMStatsSide.None)

@@ -851,7 +851,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             },
         };
 
-        _damageable.TryChangeDamage(target, damage);
+        _damageable.TryChangeDamage(target, damage, origin: vehicle);
 
         if (HasComp<XenoComponent>(target))
             return;

@@ -5,7 +5,7 @@ using Robust.Client.UserInterface.XAML;
 namespace Content.Client._RMC14.Xenonids.Watch;
 
 [GenerateTypedNameReferences]
-public sealed partial class XenoWatchWindow : DefaultCMWindow
+public sealed partial class XenoWatchWindow : DefaultWindow
 {
     public XenoWatchWindow()
     {

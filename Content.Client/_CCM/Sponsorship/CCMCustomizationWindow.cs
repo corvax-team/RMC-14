@@ -194,6 +194,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
     public CCMCustomizationWindow()
     {
         IoCManager.InjectDependencies(this);
+        Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
 
         Title = string.Empty;
         MinSize = SetSize = new Vector2(1100, 970);
@@ -1914,16 +1915,21 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
     private void ApplyWindowTheme()
     {
         var theme = _config.GetCVar(RMCCVars.RMCUIColorTheme);
-        var isBlueTheme = theme.Equals("blue", StringComparison.OrdinalIgnoreCase);
-        var headerColor = isBlueTheme
+        var headerColor = theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
             ? Color.FromHex("#06142F").WithAlpha(0.995f)
-            : Color.FromHex("#041105").WithAlpha(0.995f);
-        var bodyColor = isBlueTheme
+            : theme.Equals("gray", StringComparison.OrdinalIgnoreCase)
+                ? Color.FromHex("#171D24").WithAlpha(0.995f)
+                : Color.FromHex("#041105").WithAlpha(0.995f);
+        var bodyColor = theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
             ? Color.FromHex("#081B3F").WithAlpha(0.995f)
-            : Color.FromHex("#061507").WithAlpha(0.995f);
-        var borderColor = isBlueTheme
+            : theme.Equals("gray", StringComparison.OrdinalIgnoreCase)
+                ? Color.FromHex("#1C232C").WithAlpha(0.995f)
+                : Color.FromHex("#061507").WithAlpha(0.995f);
+        var borderColor = theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
             ? Color.FromHex("#2F78FF").WithAlpha(0.88f)
-            : StyleNano.LobbyMenuButtonBase.WithAlpha(0.82f);
+            : theme.Equals("gray", StringComparison.OrdinalIgnoreCase)
+                ? Color.FromHex("#7B8898").WithAlpha(0.86f)
+                : StyleNano.LobbyMenuButtonBase.WithAlpha(0.82f);
 
         HeaderPanel.PanelOverride = new StyleBoxFlat
         {
@@ -1985,10 +1991,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
 
     private Color GetWindowAccent()
     {
-        var theme = _config.GetCVar(RMCCVars.RMCUIColorTheme);
-        return theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
-            ? StyleNano.LobbyMenuButtonBase
-            : StyleNano.LobbyMenuButtonBase;
+        return StyleNano.LobbyMenuButtonBase;
     }
 
     private static Color BlendTowards(Color source, Color target, float factor)

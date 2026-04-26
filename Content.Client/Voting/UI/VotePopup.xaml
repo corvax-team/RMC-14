@@ -1,5 +1,5 @@
 ﻿<!-- CM14 rework: non-RMC edit marker. -->
-<Control xmlns="https://spacestation14.io" MinWidth="360" MaxWidth="900" HorizontalAlignment="Center">
+<Control xmlns="https://spacestation14.io" MinWidth="360" MaxWidth="1200" HorizontalAlignment="Center">
     <!-- CCM vote popup layout rework start -->
     <PanelContainer StyleClasses="VotePanel" />
     <BoxContainer Margin="8 4 32 4" Orientation="Vertical">

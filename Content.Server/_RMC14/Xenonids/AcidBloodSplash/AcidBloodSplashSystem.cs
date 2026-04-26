@@ -89,7 +89,9 @@ public sealed class AcidBloodSplashSystem : EntitySystem
                 continue;
 
             ent.Comp.NextSplashAvailable = _timing.CurTime + ent.Comp.SplashCooldown;
-            _damageable.TryChangeDamage(target, _xeno.TryApplyXenoAcidDamageMultiplier(target, ent.Comp.Damage));
+            _damageable.TryChangeDamage(target,
+                _xeno.TryApplyXenoAcidDamageMultiplier(target, ent.Comp.Damage),
+                origin: ent.Owner);
             i++;
 
             _audio.PlayPvs(ent.Comp.AcidSplashSound, target);

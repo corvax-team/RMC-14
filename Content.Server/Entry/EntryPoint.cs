@@ -63,9 +63,6 @@ namespace Content.Server.Entry
 
             LoadConfigPresets(cfg, res, logManager.GetSawmill("configpreset"));
 
-            if (string.IsNullOrWhiteSpace(cfg.GetCVar(Robust.Shared.CVars.BuildForkId)))
-                cfg.SetCVar(Robust.Shared.CVars.BuildForkId, "tgmc14-local-ccm-fixmsg");
-
             var aczProvider = new ContentMagicAczProvider(IoCManager.Resolve<IDependencyCollection>());
             IoCManager.Resolve<IStatusHost>().SetMagicAczProvider(aczProvider);
 
