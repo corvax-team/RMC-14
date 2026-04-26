@@ -14,6 +14,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.IoC;
 using Robust.Shared.Input;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Client._CCM.Sponsorship;
@@ -21,6 +22,11 @@ namespace Content.Client._CCM.Sponsorship;
 public sealed class CCMSponsorshipWindow : DefaultCMWindow
 {
     private const string DefaultDonateUrl = "https://boosty.to/cmc14";
+    private const float DefaultWindowWidth = 1240f;
+    private const float DefaultWindowHeight = 930f;
+    private const float CompactMinWidth = 760f;
+    private const float CompactMinHeight = 620f;
+    private const float CompactViewportWidthThreshold = 1180f;
 
     [Dependency] private readonly IResourceCache _resourceCache = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
@@ -48,7 +54,7 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
         Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
 
         Title = string.Empty;
-        MinSize = new Vector2(1240, 930);
+        MinSize = new Vector2(DefaultWindowWidth, DefaultWindowHeight);
         WindowTitleLabel.Visible = false;
         HeaderPanel.MinSize = new Vector2(0, 26);
         HeaderPanel.Margin = new Thickness(10, 6, 10, 0);
@@ -158,6 +164,12 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
         _config.OnValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged, false);
     }
 
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        UpdateResponsiveLayout();
+        base.FrameUpdate(args);
+    }
+
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
@@ -169,6 +181,36 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
     private void OnThemeChanged(string _)
     {
         ApplyWindowTheme();
+    }
+
+    private void UpdateResponsiveLayout()
+    {
+        var viewport = Parent?.Size ?? Vector2.Zero;
+        if (viewport.X <= 1f || viewport.Y <= 1f)
+            return;
+
+        var maxWidth = MathF.Min(DefaultWindowWidth, viewport.X * 0.92f);
+        var maxHeight = MathF.Min(DefaultWindowHeight, viewport.Y * 0.88f);
+        var minWidth = MathF.Min(CompactMinWidth, maxWidth);
+        var minHeight = MathF.Min(CompactMinHeight, maxHeight);
+        var responsiveMin = new Vector2(minWidth, minHeight);
+
+        if (Vector2.DistanceSquared(MinSize, responsiveMin) > 1f)
+            MinSize = responsiveMin;
+
+        var clampedSize = new Vector2(
+            Math.Clamp(SetSize.X, minWidth, maxWidth),
+            Math.Clamp(SetSize.Y, minHeight, maxHeight));
+
+        if (Vector2.DistanceSquared(SetSize, clampedSize) > 1f)
+            SetSize = clampedSize;
+
+        var compactWidth = maxWidth <= CompactViewportWidthThreshold;
+        _tiersContainer.Orientation = compactWidth
+            ? BoxContainer.LayoutOrientation.Vertical
+            : BoxContainer.LayoutOrientation.Horizontal;
+        _tiersContainer.SeparationOverride = compactWidth ? 14 : 22;
+        _tiersContainer.HorizontalAlignment = HAlignment.Center;
     }
 
     public void SetStatus(CCMSponsorshipStatusSnapshot snapshot)

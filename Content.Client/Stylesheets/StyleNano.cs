@@ -289,52 +289,52 @@ namespace Content.Client.Stylesheets
                 DangerousRedFore = Color.FromHex("#AFC4DA");
                 DisabledFore = Color.FromHex("#6A7784");
 
-                ButtonColorDefault = Color.FromHex("#5471A2");
-                ButtonColorDefaultRed = Color.FromHex("#5471A2");
-                ButtonColorHovered = Color.FromHex("#6888BC");
-                ButtonColorHoveredRed = Color.FromHex("#6888BC");
-                ButtonColorPressed = Color.FromHex("#45618F");
+                ButtonColorDefault = Color.FromHex("#4E79B8");
+                ButtonColorDefaultRed = Color.FromHex("#4E79B8");
+                ButtonColorHovered = Color.FromHex("#6292D3");
+                ButtonColorHoveredRed = Color.FromHex("#6292D3");
+                ButtonColorPressed = Color.FromHex("#3E659E");
                 ButtonColorDisabled = Color.FromHex("#2A3643");
 
-                ButtonColorCautionDefault = Color.FromHex("#5471A2");
-                ButtonColorCautionHovered = Color.FromHex("#6888BC");
-                ButtonColorCautionPressed = Color.FromHex("#45618F");
+                ButtonColorCautionDefault = Color.FromHex("#4E79B8");
+                ButtonColorCautionHovered = Color.FromHex("#6292D3");
+                ButtonColorCautionPressed = Color.FromHex("#3E659E");
                 ButtonColorCautionDisabled = Color.FromHex("#2A3643");
 
-                ButtonColorGoodDefault = Color.FromHex("#5471A2");
-                ButtonColorGoodHovered = Color.FromHex("#6888BC");
+                ButtonColorGoodDefault = Color.FromHex("#4E79B8");
+                ButtonColorGoodHovered = Color.FromHex("#6292D3");
                 ButtonColorGoodDisabled = Color.FromHex("#2A3643");
 
-                LobbyCrtAccent = Color.FromHex("#95B9E6");
-                LobbyCrtText = Color.FromHex("#95B9E6");
-                LobbyCrtMutedText = Color.FromHex("#C3D4E4");
-                LobbyCleanAccent = Color.FromHex("#7594BC");
+                LobbyCrtAccent = Color.FromHex("#7DB8FF");
+                LobbyCrtText = Color.FromHex("#7DB8FF");
+                LobbyCrtMutedText = Color.FromHex("#C0D8F2");
+                LobbyCleanAccent = Color.FromHex("#5E97D6");
                 LobbyCleanText = Color.FromHex("#EDF3F8");
-                LobbyCleanMutedText = Color.FromHex("#CCD9E5");
-                LobbyCrtGlow = Color.FromHex("#95B9E688");
-                LobbyMenuButtonBase = Color.FromHex("#7EA4D1");
-                LobbyMenuButtonPressed = Color.FromHex("#6588B0");
-                LobbyMenuButtonReadyPressed = Color.FromHex("#6588B0");
-                LobbyMenuButtonDisabledCrt = Color.FromHex("#4E6784");
-                LobbyMenuButtonDisabledClean = Color.FromHex("#404F60");
+                LobbyCleanMutedText = Color.FromHex("#C9DCF0");
+                LobbyCrtGlow = Color.FromHex("#7DB8FF88");
+                LobbyMenuButtonBase = Color.FromHex("#72A8E8");
+                LobbyMenuButtonPressed = Color.FromHex("#5987BE");
+                LobbyMenuButtonReadyPressed = Color.FromHex("#5987BE");
+                LobbyMenuButtonDisabledCrt = Color.FromHex("#456789");
+                LobbyMenuButtonDisabledClean = Color.FromHex("#394F68");
                 UiButtonBorder = Color.FromHex("#32404D");
 
-                PointRed = Color.FromHex("#647A92");
-                PointGreen = Color.FromHex("#84A7CC");
-                PointMagenta = Color.FromHex("#B5CCE5");
+                PointRed = Color.FromHex("#5F7FA4");
+                PointGreen = Color.FromHex("#74A8E8");
+                PointMagenta = Color.FromHex("#A6D0FF");
 
-                ButtonColorContext = Color.FromHex("#6280AC");
-                ButtonColorContextHover = Color.FromHex("#7697C5");
-                ButtonColorContextPressed = Color.FromHex("#4E6990");
+                ButtonColorContext = Color.FromHex("#5A86C2");
+                ButtonColorContextHover = Color.FromHex("#70A0DE");
+                ButtonColorContextPressed = Color.FromHex("#486D9E");
                 ButtonColorContextDisabled = Color.FromHex("#313E4C");
-                DropdownButtonColorContext = Color.FromHex("#6280AC");
-                DropdownButtonColorContextHover = Color.FromHex("#7697C5");
-                DropdownButtonColorContextPressed = Color.FromHex("#4E6990");
+                DropdownButtonColorContext = Color.FromHex("#5A86C2");
+                DropdownButtonColorContextHover = Color.FromHex("#70A0DE");
+                DropdownButtonColorContextPressed = Color.FromHex("#486D9E");
                 DropdownButtonColorContextDisabled = Color.FromHex("#313E4C");
 
-                ExamineButtonColorContext = Color.FromHex("#6280AC");
-                ExamineButtonColorContextHover = Color.FromHex("#7697C5");
-                ExamineButtonColorContextPressed = Color.FromHex("#4E6990");
+                ExamineButtonColorContext = Color.FromHex("#5A86C2");
+                ExamineButtonColorContextHover = Color.FromHex("#70A0DE");
+                ExamineButtonColorContextPressed = Color.FromHex("#486D9E");
                 ExamineButtonColorContextDisabled = Color.FromHex("#313E4C");
 
                 FancyTreeEvenRowColor = Color.FromHex("#131A22");
@@ -514,19 +514,19 @@ namespace Content.Client.Stylesheets
             PointGreen = Color.FromHex("#38B026");
             PointMagenta = Color.FromHex("#FF00FF");
 
-            ButtonColorContext = Color.FromHex("#1119");
-            ButtonColorContextHover = Color.DarkSlateGray;
-            ButtonColorContextPressed = Color.LightSlateGray;
-            ButtonColorContextDisabled = Color.Black;
-            DropdownButtonColorContext = Color.FromHex("#464966");
-            DropdownButtonColorContextHover = Color.FromHex("#575B7F");
-            DropdownButtonColorContextPressed = Color.FromHex("#3E6C45");
-            DropdownButtonColorContextDisabled = Color.FromHex("#30313C");
+            ButtonColorContext = Color.FromHex("#3A5A45");
+            ButtonColorContextHover = Color.FromHex("#4B7056");
+            ButtonColorContextPressed = Color.FromHex("#2E4737");
+            ButtonColorContextDisabled = Color.FromHex("#242D28");
+            DropdownButtonColorContext = Color.FromHex("#465A4B");
+            DropdownButtonColorContextHover = Color.FromHex("#587160");
+            DropdownButtonColorContextPressed = Color.FromHex("#38483D");
+            DropdownButtonColorContextDisabled = Color.FromHex("#2B332E");
 
-            ExamineButtonColorContext = Color.Transparent;
-            ExamineButtonColorContextHover = Color.DarkSlateGray;
-            ExamineButtonColorContextPressed = Color.LightSlateGray;
-            ExamineButtonColorContextDisabled = Color.FromHex("#5A5A5A");
+            ExamineButtonColorContext = Color.FromHex("#3A5A45");
+            ExamineButtonColorContextHover = Color.FromHex("#4B7056");
+            ExamineButtonColorContextPressed = Color.FromHex("#2E4737");
+            ExamineButtonColorContextDisabled = Color.FromHex("#2B332E");
 
             FancyTreeEvenRowColor = Color.FromHex("#25252A");
             FancyTreeSelectedRowColor = new Color(55, 55, 68);
@@ -644,6 +644,12 @@ namespace Content.Client.Stylesheets
                 Color.FromHex("#3178D7").WithAlpha(0.95f),
                 Color.FromHex("#7C8EA4").WithAlpha(0.95f),
                 Color.FromHex("#30B53C").WithAlpha(0.95f));
+            var contextMenuText = useNeutralPalette
+                ? Color.FromHex("#E7EEE8")
+                : ThemeValue(
+                    Color.FromHex("#E8F2FF"),
+                    Color.FromHex("#EEF2F6"),
+                    Color.FromHex("#E6F3E9"));
             var dropdownButtonText = Color.FromHex("#C5CED8");
             var dropdownButtonTextDisabled = dropdownButtonText.WithAlpha(0.72f);
             var dropdownButtonNormal = new StyleBoxFlat
@@ -1904,16 +1910,20 @@ namespace Content.Client.Stylesheets
 
                 // Context Menu Labels
                 Element<RichTextLabel>().Class(InteractionVerb.DefaultTextStyleClass)
-                    .Prop(Label.StylePropertyFont, notoSansBoldItalic12),
+                    .Prop(Label.StylePropertyFont, notoSansBoldItalic12)
+                    .Prop(Label.StylePropertyFontColor, contextMenuText),
 
                 Element<RichTextLabel>().Class(ActivationVerb.DefaultTextStyleClass)
-                    .Prop(Label.StylePropertyFont, notoSansBold12),
+                    .Prop(Label.StylePropertyFont, notoSansBold12)
+                    .Prop(Label.StylePropertyFontColor, contextMenuText),
 
                 Element<RichTextLabel>().Class(AlternativeVerb.DefaultTextStyleClass)
-                    .Prop(Label.StylePropertyFont, notoSansItalic12),
+                    .Prop(Label.StylePropertyFont, notoSansItalic12)
+                    .Prop(Label.StylePropertyFontColor, contextMenuText),
 
                 Element<RichTextLabel>().Class(Verb.DefaultTextStyleClass)
-                    .Prop(Label.StylePropertyFont, notoSans12),
+                    .Prop(Label.StylePropertyFont, notoSans12)
+                    .Prop(Label.StylePropertyFontColor, contextMenuText),
 
                 Element<TextureRect>().Class(ContextMenuElement.StyleClassContextMenuExpansionTexture)
                     .Prop(TextureRect.StylePropertyTexture, contextMenuExpansionTexture),

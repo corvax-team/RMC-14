@@ -4,6 +4,7 @@ using System.Numerics;
 using Content.Client.Gameplay;
 using Content.Client.Resources;
 using Content.Client.Stylesheets;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._CCM.Achievements;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
@@ -11,6 +12,7 @@ using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Configuration;
 using Robust.Shared.Localization;
 using Robust.Shared.Timing;
 
@@ -27,6 +29,7 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
 
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
 
     private CCMAchievementsWindow? _window;
     private BoxContainer? _toastRoot;
@@ -53,8 +56,9 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
         LayoutContainer.SetAnchorPreset(_toastRoot, LayoutContainer.LayoutPreset.BottomRight);
         LayoutContainer.SetGrowHorizontal(_toastRoot, LayoutContainer.GrowDirection.Begin);
         LayoutContainer.SetGrowVertical(_toastRoot, LayoutContainer.GrowDirection.Begin);
-        LayoutContainer.SetMarginRight(_toastRoot, ToastSafeMarginHorizontal);
-        LayoutContainer.SetMarginBottom(_toastRoot, ToastSafeMarginVertical);
+        // BottomRight anchors expect negative right/bottom margins to keep the control inside the screen.
+        LayoutContainer.SetMarginRight(_toastRoot, -ToastSafeMarginHorizontal);
+        LayoutContainer.SetMarginBottom(_toastRoot, -ToastSafeMarginVertical);
         UIManager.PopupRoot.AddChild(_toastRoot);
     }
 
@@ -157,11 +161,12 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
         var bodyFont = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 11);
         var toastWidth = Math.Clamp(UIManager.PopupRoot.Size.X - ToastSafeMarginHorizontal * 2f, 220f, ToastWidthMax);
         var toastMaxHeight = Math.Clamp(UIManager.PopupRoot.Size.Y - ToastSafeMarginVertical * 2f, 160f, ToastHeightMax);
-        var accent = GetToastAccent();
+        var theme = GetTheme();
+        var accent = GetToastAccent(theme);
         var accentSoft = accent.WithAlpha(0.28f);
-        var baseBackground = GetToastBackground();
-        var insetBackground = GetToastInsetBackground();
-        var accentText = GetToastAccentText();
+        var baseBackground = GetToastBackground(theme);
+        var insetBackground = GetToastInsetBackground(theme);
+        var accentText = GetToastAccentText(theme);
 
         var panel = new PanelContainer
         {
@@ -296,7 +301,7 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
         {
             Text = Loc.GetString(ev.Achievement.DescriptionKey),
             FontOverride = bodyFont,
-            FontColorOverride = GetToastBodyText(),
+            FontColorOverride = GetToastBodyText(theme),
             ClipText = true,
             HorizontalExpand = true,
         });
@@ -379,9 +384,22 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
         return panel;
     }
 
-    private static Color GetToastAccent()
+    private StyleNano.UiColorTheme GetTheme()
     {
-        return StyleNano.CurrentTheme switch
+        var theme = _config.GetCVar(RMCCVars.RMCUIColorTheme);
+
+        if (theme.Equals("blue", StringComparison.OrdinalIgnoreCase))
+            return StyleNano.UiColorTheme.Blue;
+
+        if (theme.Equals("gray", StringComparison.OrdinalIgnoreCase))
+            return StyleNano.UiColorTheme.Gray;
+
+        return StyleNano.UiColorTheme.Green;
+    }
+
+    private static Color GetToastAccent(StyleNano.UiColorTheme theme)
+    {
+        return theme switch
         {
             StyleNano.UiColorTheme.Blue => Color.FromHex("#4A8FFF"),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#A7B3C0"),
@@ -389,9 +407,9 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
         };
     }
 
-    private static Color GetToastBackground()
+    private static Color GetToastBackground(StyleNano.UiColorTheme theme)
     {
-        return StyleNano.CurrentTheme switch
+        return theme switch
         {
             StyleNano.UiColorTheme.Blue => Color.FromHex("#0D2344").WithAlpha(0.985f),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#1A2028").WithAlpha(0.985f),
@@ -399,9 +417,9 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
         };
     }
 
-    private static Color GetToastInsetBackground()
+    private static Color GetToastInsetBackground(StyleNano.UiColorTheme theme)
     {
-        return StyleNano.CurrentTheme switch
+        return theme switch
         {
             StyleNano.UiColorTheme.Blue => Color.FromHex("#14335E").WithAlpha(0.95f),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#252E39").WithAlpha(0.95f),
@@ -409,9 +427,9 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
         };
     }
 
-    private static Color GetToastAccentText()
+    private static Color GetToastAccentText(StyleNano.UiColorTheme theme)
     {
-        return StyleNano.CurrentTheme switch
+        return theme switch
         {
             StyleNano.UiColorTheme.Blue => Color.FromHex("#D8E9FF"),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#F0F3F6"),
@@ -419,9 +437,9 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
         };
     }
 
-    private static Color GetToastBodyText()
+    private static Color GetToastBodyText(StyleNano.UiColorTheme theme)
     {
-        return StyleNano.CurrentTheme switch
+        return theme switch
         {
             StyleNano.UiColorTheme.Blue => Color.FromHex("#D1E1F5"),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#D5DCE4"),

@@ -16,12 +16,17 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Shared.IoC;
 using Robust.Shared.Input;
 using Robust.Shared.Maths;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Client._CCM.Sponsorship;
 
 public sealed partial class CCMCustomizationWindow : DefaultCMWindow
 {
+    private const float DefaultWindowWidth = 1100f;
+    private const float DefaultWindowHeight = 970f;
+    private const float CompactMinWidth = 780f;
+    private const float CompactMinHeight = 640f;
 
     private enum CustomizationPage : byte
     {
@@ -197,7 +202,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
 
         Title = string.Empty;
-        MinSize = SetSize = new Vector2(1100, 970);
+        MinSize = SetSize = new Vector2(DefaultWindowWidth, DefaultWindowHeight);
         WindowTitleLabel.Visible = false;
         HeaderPanel.MinSize = new Vector2(0, 26);
         HeaderPanel.Margin = new Thickness(10, 6, 10, 0);
@@ -342,6 +347,12 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         _config.OnValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged, false);
     }
 
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        UpdateResponsiveLayout();
+        base.FrameUpdate(args);
+    }
+
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
@@ -360,6 +371,29 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         _heroWipLabel.FontColorOverride = GetThemeAccent(0.22f);
         UpdatePageState();
         UpdateSaveState();
+    }
+
+    private void UpdateResponsiveLayout()
+    {
+        var viewport = Parent?.Size ?? Vector2.Zero;
+        if (viewport.X <= 1f || viewport.Y <= 1f)
+            return;
+
+        var maxWidth = MathF.Min(DefaultWindowWidth, viewport.X * 0.90f);
+        var maxHeight = MathF.Min(DefaultWindowHeight, viewport.Y * 0.88f);
+        var minWidth = MathF.Min(CompactMinWidth, maxWidth);
+        var minHeight = MathF.Min(CompactMinHeight, maxHeight);
+        var responsiveMin = new Vector2(minWidth, minHeight);
+
+        if (Vector2.DistanceSquared(MinSize, responsiveMin) > 1f)
+            MinSize = responsiveMin;
+
+        var clampedSize = new Vector2(
+            Math.Clamp(SetSize.X, minWidth, maxWidth),
+            Math.Clamp(SetSize.Y, minHeight, maxHeight));
+
+        if (Vector2.DistanceSquared(SetSize, clampedSize) > 1f)
+            SetSize = clampedSize;
     }
 
     public void SetStatus(CCMSponsorshipStatusSnapshot snapshot)

@@ -15,14 +15,15 @@ namespace Content.Client.Options.UI
     public sealed partial class EscapeMenu : DefaultCMWindow
     {
         [Dependency] private readonly IConfigurationManager _cfg = default!;
+        [Dependency] private readonly IStylesheetManager _stylesheets = default!;
         private readonly Action<string> _onThemeColorChanged;
 
         public EscapeMenu()
         {
-            _onThemeColorChanged = _ => ApplyLobbyTheme(_cfg.GetCVar(RMCCVars.RMCLobbyCrtEnabled));
+            _onThemeColorChanged = _ => RefreshTheme();
             IoCManager.InjectDependencies(this);
             RobustXamlLoader.Load(this);
-            Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
+            Stylesheet = _stylesheets.SheetNano;
 
             ApplyLobbyTheme(_cfg.GetCVar(RMCCVars.RMCLobbyCrtEnabled));
             _cfg.OnValueChanged(RMCCVars.RMCLobbyCrtEnabled, ApplyLobbyTheme);
@@ -48,6 +49,14 @@ namespace Content.Client.Options.UI
             }
 
             SetThemeClass(MenuDivider, crtEnabled);
+        }
+
+        private void RefreshTheme()
+        {
+            Stylesheet = _stylesheets.SheetNano;
+            ApplyLobbyTheme(_cfg.GetCVar(RMCCVars.RMCLobbyCrtEnabled));
+            InvalidateStyleSheet();
+            DoStyleUpdate();
         }
 
         private Button[] EnumerateMenuButtons()

@@ -29,6 +29,10 @@ public sealed class MenuButton : ContainerButton
     private readonly BoxContainer _root;
     private readonly TextureRect? _buttonIcon;
     private readonly Label? _buttonLabel;
+    private readonly StyleBoxFlat _styleNormal;
+    private readonly StyleBoxFlat _styleHover;
+    private readonly StyleBoxFlat _stylePressed;
+    private readonly StyleBoxFlat _styleDisabled;
 
     public string AppendStyleClass { set => AddStyleClass(value); }
     public Texture? Icon { get => _buttonIcon!.Texture; set => _buttonIcon!.Texture = value; }
@@ -48,6 +52,30 @@ public sealed class MenuButton : ContainerButton
     public MenuButton()
     {
         IoCManager.InjectDependencies(this);
+        _styleNormal = new StyleBoxFlat
+        {
+            BackgroundColor = Color.FromHex("#8B8FAE").WithAlpha(0.92f),
+            BorderColor = Color.FromHex("#8B8FAE").WithAlpha(0.96f),
+            BorderThickness = new Thickness(1),
+        };
+        _styleHover = new StyleBoxFlat
+        {
+            BackgroundColor = Color.Transparent,
+            BorderColor = Color.FromHex("#8B8FAE").WithAlpha(0.96f),
+            BorderThickness = new Thickness(1),
+        };
+        _stylePressed = new StyleBoxFlat
+        {
+            BackgroundColor = Color.FromHex("#707494").WithAlpha(0.28f),
+            BorderColor = Color.FromHex("#707494").WithAlpha(0.96f),
+            BorderThickness = new Thickness(1),
+        };
+        _styleDisabled = new StyleBoxFlat
+        {
+            BackgroundColor = Color.FromHex("#5D6075").WithAlpha(0.82f),
+            BorderColor = Color.FromHex("#5D6075").WithAlpha(0.90f),
+            BorderThickness = new Thickness(1),
+        };
         _buttonIcon = new TextureRect()
         {
             TextureScale = new Vector2(0.5f, 0.5f),
@@ -76,6 +104,7 @@ public sealed class MenuButton : ContainerButton
         };
         AddChild(_root);
         ToggleMode = true;
+        StyleBoxOverride = _styleNormal;
     }
 
     protected override void EnteredTree()
@@ -116,21 +145,27 @@ public sealed class MenuButton : ContainerButton
         switch (DrawMode)
         {
             case DrawModeEnum.Normal:
+                StyleBoxOverride = _styleNormal;
+                _buttonIcon.ModulateSelfOverride = Color.Black;
+                _buttonLabel.ModulateSelfOverride = Color.Black;
+                break;
+
+            case DrawModeEnum.Pressed:
+                StyleBoxOverride = _stylePressed;
                 _buttonIcon.ModulateSelfOverride = NormalColor;
                 _buttonLabel.ModulateSelfOverride = NormalColor;
                 break;
 
-            case DrawModeEnum.Pressed:
-                _buttonIcon.ModulateSelfOverride = ColorPressed;
-                _buttonLabel.ModulateSelfOverride = ColorPressed;
-                break;
-
             case DrawModeEnum.Hover:
+                StyleBoxOverride = _styleHover;
                 _buttonIcon.ModulateSelfOverride = HoveredColor;
                 _buttonLabel.ModulateSelfOverride = HoveredColor;
                 break;
 
             case DrawModeEnum.Disabled:
+                StyleBoxOverride = _styleDisabled;
+                _buttonIcon.ModulateSelfOverride = Color.Black.WithAlpha(0.68f);
+                _buttonLabel.ModulateSelfOverride = Color.Black.WithAlpha(0.68f);
                 break;
         }
     }

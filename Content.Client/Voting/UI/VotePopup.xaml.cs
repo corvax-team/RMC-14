@@ -31,7 +31,7 @@ namespace Content.Client.Voting.UI
             IoCManager.InjectDependencies(this);
             RobustXamlLoader.Load(this);
 
-            Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNanoNeutral;
+            Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
 
             if (_vote.TargetEntity != null && _vote.TargetEntity != 0)
             {
