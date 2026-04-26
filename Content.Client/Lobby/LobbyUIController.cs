@@ -450,9 +450,9 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         return (_characterSetup, _profileEditor);
     }
 
-    private const float CharacterSetupMinWidth = 1080f;
+    private const float CharacterSetupMinWidth = 1180f;
     private const float CharacterSetupMinHeight = 680f;
-    private const float CharacterSetupDefaultMaxWidth = 1840f;
+    private const float CharacterSetupDefaultMaxWidth = 1960f;
     private const float CharacterSetupDefaultMinOpenHeight = 840f;
     private const float CharacterSetupSmallScreenDefaultHeightFactor = 0.8f;
     private static readonly Vector2 CharacterSetupViewportMargin = new(8f, 8f);

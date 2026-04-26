@@ -158,7 +158,7 @@
                                     <CheckBox Name="PlaytimePerksButton" Pressed="True"
                                               HorizontalAlignment="Right" />
                                 </BoxContainer>
-                                <BoxContainer HorizontalExpand="True">
+                                <BoxContainer HorizontalExpand="True" Visible="False">
                                     <Label Text="{Loc 'humanoid-profile-editor-origin-label'}" />
                                     <Control HorizontalExpand="True"/>
                                     <Button Name="OriginButton"
