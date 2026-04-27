@@ -86,6 +86,65 @@ public sealed partial class CEZLevelsSystem
         return success;
     }
 
+    /// <summary>
+    /// Attempts to remove the specified map from the zNetwork network
+    /// </summary>
+    [PublicAPI]
+    public bool TryRemoveMapFromZNetwork(Entity<CEZLevelsNetworkComponent> network, EntityUid mapUid)
+    {
+        if (!TryComp<CEZLevelMapComponent>(mapUid, out var zLevelMapComponent))
+        {
+            Log.Error($"Failed to remove map {mapUid} from ZLevelNetwork {network}: Map does not have CEZLevelMapComponent.");
+            return false;
+        }
+
+        if (zLevelMapComponent.NetworkUid != network.Owner)
+        {
+            Log.Error($"Failed to remove map {mapUid} from ZLevelNetwork {network}: Map is not in this network.");
+            return false;
+        }
+
+        var depth = zLevelMapComponent.Depth;
+
+        // Remove from dictionary
+        if (!network.Comp.ZLevels.Remove(depth))
+        {
+            Log.Error($"Failed to remove map {mapUid} from ZLevelNetwork {network}: Depth {depth} not found in dictionary.");
+            return false;
+        }
+
+        Dirty(network);
+
+        // Update cache
+        QuickApiCacheRemove(network, depth);
+
+        // Update neighbors
+        if (zLevelMapComponent.MapAbove.HasValue)
+        {
+            if (TryComp<CEZLevelMapComponent>(zLevelMapComponent.MapAbove.Value, out var aboveMap))
+            {
+                aboveMap.MapBelow = null;
+                Dirty(zLevelMapComponent.MapAbove.Value, aboveMap);
+            }
+        }
+
+        if (zLevelMapComponent.MapBelow.HasValue)
+        {
+            if (TryComp<CEZLevelMapComponent>(zLevelMapComponent.MapBelow.Value, out var belowMap))
+            {
+                belowMap.MapAbove = null;
+                Dirty(zLevelMapComponent.MapBelow.Value, belowMap);
+            }
+        }
+
+        // Remove component from map
+        RemComp<CEZLevelMapComponent>(mapUid);
+
+        RaiseLocalEvent(network, new CEZLevelNetworkUpdatedEvent());
+
+        return true;
+    }
+
     private void QuickApiCache(Entity<CEZLevelsNetworkComponent> network, EntityUid value, int depth)
     {
         var comp = network.Comp;
@@ -142,6 +201,61 @@ public sealed partial class CEZLevelsSystem
         }
 
         list[depth - min] = value;
+    }
+
+    private void QuickApiCacheRemove(Entity<CEZLevelsNetworkComponent> network, int depth)
+    {
+        var comp = network.Comp;
+        var list = comp.SortedZLevels;
+
+        var index = depth - comp.SortedMin;
+
+        if (index < 0 || index >= list.Count)
+        {
+            Log.Error($"QuickApiCacheRemove: depth {depth} is out of range for network {network}. Min: {comp.SortedMin}, Max: {comp.SortedMax}");
+            return;
+        }
+
+        list[index] = EntityUid.Invalid;
+
+        // Update min/max if needed
+        if (depth == comp.SortedMin)
+        {
+            // Find new min
+            var newMin = comp.SortedMin;
+            for (var i = 0; i < list.Count; i++)
+            {
+                if (list[i] != EntityUid.Invalid)
+                {
+                    newMin = comp.SortedMin + i;
+                    break;
+                }
+            }
+            if (newMin != comp.SortedMin)
+            {
+                comp.SortedMin = newMin;
+                Dirty(network);
+            }
+        }
+
+        if (depth == comp.SortedMax)
+        {
+            // Find new max
+            var newMax = comp.SortedMax;
+            for (var i = list.Count - 1; i >= 0; i--)
+            {
+                if (list[i] != EntityUid.Invalid)
+                {
+                    newMax = comp.SortedMin + i;
+                    break;
+                }
+            }
+            if (newMax != comp.SortedMax)
+            {
+                comp.SortedMax = newMax;
+                Dirty(network);
+            }
+        }
     }
 }
 

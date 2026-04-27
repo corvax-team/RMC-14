@@ -25,7 +25,7 @@ public sealed partial class CEZLevelsSystem
 
     private readonly EntProtoId _zEyeProto = "CEZLevelEye";
 
-    private readonly TimeSpan _zLevelViewerUpdateRate = TimeSpan.FromSeconds(1f);
+    private readonly TimeSpan _zLevelViewerUpdateRate = TimeSpan.FromSeconds(0.15f);
     private TimeSpan _nextZLevelViewerUpdate = TimeSpan.Zero;
 
     private void InitView()

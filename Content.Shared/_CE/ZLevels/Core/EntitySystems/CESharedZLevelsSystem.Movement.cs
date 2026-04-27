@@ -159,12 +159,16 @@ public abstract partial class CESharedZLevelsSystem
 
             var distanceToGround = zPhysicsComponent.LocalPosition - zPhysicsComponent.CachedGroundHeight;
 
-            // AutoStep: lift entity up if floor is higher
+            // AutoStep: lift entity up if floor is higher, but prevent getting stuck on ceilings
             if (zPhysicsComponent.AutoStep && distanceToGround < 0)
-                zPhysicsComponent.LocalPosition -= distanceToGround; //Lift up
+            {
+                // Only lift up if we're not too close to the ceiling (0.95f threshold)
+                if (zPhysicsComponent.LocalPosition < 0.95f)
+                    zPhysicsComponent.LocalPosition -= distanceToGround; //Lift up
+            }
 
             // Sticky ground: only pull down when slowly falling on sticky surfaces (ladders)
-            if (zPhysicsComponent.CachedStickyGround)
+            if (zPhysicsComponent.CachedStickyGround && zPhysicsComponent.Velocity < 0 && zPhysicsComponent.Velocity > -2f)
                 zPhysicsComponent.LocalPosition -= distanceToGround; //Sticky move down
 
             if (zPhysicsComponent is { Velocity: < 0, Fallable: true }) //Falling down
@@ -181,6 +185,9 @@ public abstract partial class CESharedZLevelsSystem
                     }
 
                     zPhysicsComponent.Velocity = -zPhysicsComponent.Velocity * zPhysicsComponent.Bounciness;
+                    // Clamp velocity after bounce to prevent exceeding ZVelocityLimit
+                    if (float.Abs(zPhysicsComponent.Velocity) > ZVelocityLimit)
+                        zPhysicsComponent.Velocity = float.Sign(zPhysicsComponent.Velocity) * ZVelocityLimit;
                 }
             }
 
@@ -213,6 +220,9 @@ public abstract partial class CESharedZLevelsSystem
 
                     zPhysicsComponent.LocalPosition = 1;
                     zPhysicsComponent.Velocity = -zPhysicsComponent.Velocity * zPhysicsComponent.Bounciness;
+                    // Clamp velocity after bounce to prevent exceeding ZVelocityLimit
+                    if (float.Abs(zPhysicsComponent.Velocity) > ZVelocityLimit)
+                        zPhysicsComponent.Velocity = float.Sign(zPhysicsComponent.Velocity) * ZVelocityLimit;
                 }
                 else
                 {
