@@ -91,12 +91,12 @@ public sealed partial class CEZLevelsSystem
 
     private void UpdateViewer(Entity<CEZLevelViewerComponent> ent)
     {
-        var eyes = ent.Comp.Eyes;
-        foreach (var eye in ent.Comp.Eyes)
+        var eyesToDelete = new List<EntityUid>(ent.Comp.Eyes);
+        foreach (var eye in eyesToDelete)
         {
             QueueDel(eye);
         }
-        eyes.Clear();
+        ent.Comp.Eyes.Clear();
 
         if (!TryComp<ActorComponent>(ent, out var actor))
             return;
@@ -118,7 +118,7 @@ public sealed partial class CEZLevelsSystem
 
             Transform(newEye).GridTraversal = false;
             _viewSubscriber.AddViewSubscriber(newEye, actor.PlayerSession);
-            eyes.Add(newEye);
+            ent.Comp.Eyes.Add(newEye);
         }
 
         // We constantly load the upper z-level for the client so that you can quickly look up and climb stairs without PVS lag.
@@ -128,7 +128,7 @@ public sealed partial class CEZLevelsSystem
 
             Transform(newEye).GridTraversal = false;
             _viewSubscriber.AddViewSubscriber(newEye, actor.PlayerSession);
-            eyes.Add(newEye);
+            ent.Comp.Eyes.Add(newEye);
         }
     }
 

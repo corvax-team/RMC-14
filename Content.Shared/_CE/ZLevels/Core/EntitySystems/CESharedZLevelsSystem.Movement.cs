@@ -284,6 +284,10 @@ public abstract partial class CESharedZLevelsSystem
                 checkingGrid = tempCheckingGrid;
             }
 
+            // Validate map and grid before using enumerator
+            if (checkingMap.Owner == EntityUid.Invalid || checkingGrid == null)
+                continue;
+
             //Check all types of ZHeight entities
             var query = _map.GetAnchoredEntitiesEnumerator(checkingMap, checkingGrid, worldPosI);
             while (query.MoveNext(out var uid))

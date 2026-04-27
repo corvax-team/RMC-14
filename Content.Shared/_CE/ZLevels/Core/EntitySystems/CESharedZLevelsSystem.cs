@@ -98,6 +98,9 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
         if (!TryComp<CEZLevelMapComponent>(mapUid, out var zLevelMapComponent))
             return false;
 
+        if (zLevelMapComponent.NetworkUid == EntityUid.Invalid)
+            return false;
+
         if (TerminatingOrDeleted(zLevelMapComponent.NetworkUid))
         {
             Log.Error($"Trying access to terminated z-network, map: {mapUid}, outdated network uid: {zLevelMapComponent.NetworkUid}");
@@ -203,8 +206,18 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
             return result;
 
         var dept = mapUid.Comp.Depth;
+        var iterationCount = 0;
+        const int maxIterations = 1000; // Safety limit to prevent infinite loops
+
         foreach (var mapEntry in zLevelsNetworkComponent.SortedZLevels)
         {
+            iterationCount++;
+            if (iterationCount > maxIterations)
+            {
+                Log.Error($"GetAllMapsBelow exceeded max iterations ({maxIterations}) for map {mapUid}. Network data may be corrupted.");
+                break;
+            }
+
             if (_zMapQuery.TryComp(mapEntry, out var zComp) && zComp.Depth < dept)
                 result.Add(mapEntry);
         }
