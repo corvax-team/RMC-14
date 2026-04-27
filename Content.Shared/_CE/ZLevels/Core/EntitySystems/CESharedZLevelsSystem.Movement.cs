@@ -8,9 +8,6 @@
 using System.Numerics;
 using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared.Chasm;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.Throwing;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
@@ -61,12 +58,14 @@ public abstract partial class CESharedZLevelsSystem
         if (!TryComp<MapGridComponent>(args.Entity, out var grid))
             return;
 
-        // For each changed tile compute its world AABB and query all entities intersecting it
+        // Batch process: collect all unique entities from all changed tiles to avoid duplicate queries
+        var entitiesToUpdate = new HashSet<EntityUid>();
+        var half = grid.TileSizeHalfVector;
+
         foreach (var change in args.Changes)
         {
             var mapCoords = _map.GridTileToWorld(args.Entity, grid, change.GridIndices);
 
-            var half = grid.TileSizeHalfVector;
             var min = mapCoords.Position - half;
             var max = mapCoords.Position + half;
             var aabb = new Box2(min, max);
@@ -74,11 +73,16 @@ public abstract partial class CESharedZLevelsSystem
             var entities = _lookup.GetEntitiesIntersecting(mapCoords.MapId, aabb);
             foreach (var uid in entities)
             {
-                if (!ZPhyzQuery.TryComp(uid, out var zComp))
-                    continue;
-
-                RequestCacheMovement((uid, zComp));
+                if (ZPhyzQuery.HasComp(uid))
+                    entitiesToUpdate.Add(uid);
             }
+        }
+
+        // Update cache for all unique entities once
+        foreach (var uid in entitiesToUpdate)
+        {
+            if (ZPhyzQuery.TryComp(uid, out var zComp))
+                RequestCacheMovement((uid, zComp));
         }
     }
 
@@ -131,7 +135,11 @@ public abstract partial class CESharedZLevelsSystem
         var query = EntityQueryEnumerator<CEZPhysicsComponent, CEActiveZPhysicsComponent, TransformComponent, PhysicsComponent>();
         while (query.MoveNext(out var uid, out var zPhysicsComponent, out _, out var xform, out var physics))
         {
-            if (!_zMapQuery.HasComp(xform.MapUid))
+            // Early exit if map is invalid - cheaper check before component query
+            if (xform.MapUid == null || xform.MapUid == EntityUid.Invalid)
+                continue;
+
+            if (!_zMapQuery.HasComp(xform.MapUid.Value))
                 continue;
 
             var oldVelocity = zPhysicsComponent.Velocity;

@@ -72,17 +72,20 @@ public sealed partial class ScalingViewport
         if (!_mapManager.TryFindGridAt(mapUid, mapCoordsBottomLeft.Position, out _, out var grid))
             return true;
 
-        var tileBottomLeft = grid.TileIndicesFor(mapCoordsBottomLeft);
-        var tileTopRight = grid.TileIndicesFor(mapCoordsTopRight);
+        _mapSystem ??= _entityManager.System<SharedMapSystem>();
+        var tileBottomLeft = _mapSystem.CoordinatesToTile(mapUid, grid, mapCoordsBottomLeft);
+        var tileTopRight = _mapSystem.CoordinatesToTile(mapUid, grid, mapCoordsTopRight);
 
         for (var x = tileBottomLeft.X - 1; x <= tileTopRight.X + 1; x++)
         {
             for (var y = tileBottomLeft.Y - 1; y <= tileTopRight.Y + 1; y++)
             {
-                var tile = grid.GetTileRef(new Vector2i(x, y));
-                var tileDef = (ContentTileDefinition)_tile[tile.Tile.TypeId];
-                if (tileDef.Transparent || tile.Tile.IsEmpty)
-                    return true;
+                if (_mapSystem.TryGetTileRef(mapUid, grid, new Vector2i(x, y), out var tile))
+                {
+                    var tileDef = (ContentTileDefinition)_tile[tile.Tile.TypeId];
+                    if (tileDef.Transparent || tile.Tile.IsEmpty)
+                        return true;
+                }
             }
         }
 

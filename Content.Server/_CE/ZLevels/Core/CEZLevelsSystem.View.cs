@@ -40,18 +40,20 @@ public sealed partial class CEZLevelsSystem
         SubscribeLocalEvent<CEZPhysicsComponent, CEZLevelFallMapEvent>(OnZLevelFall);
     }
 
-    private void UpdateView(float frameTime)
+    private void UpdateView(float _)
     {
         if (_timing.CurTime < _nextZLevelViewerUpdate)
             return;
         _nextZLevelViewerUpdate = _timing.CurTime + _zLevelViewerUpdateRate;
 
         var query = EntityQueryEnumerator<CEZLevelViewerComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var viewer, out var xform))
+        while (query.MoveNext(out var _, out var viewer, out var xform))
         {
+            // Cache world position to avoid redundant calculations for each eye
+            var worldPosition = _transform.GetWorldPosition(xform);
             foreach (var eye in viewer.Eyes)
             {
-                _transform.SetWorldPosition(eye, _transform.GetWorldPosition(xform));
+                _transform.SetWorldPosition(eye, worldPosition);
             }
         }
     }

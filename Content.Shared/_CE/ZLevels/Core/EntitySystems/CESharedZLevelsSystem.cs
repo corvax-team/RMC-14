@@ -177,13 +177,16 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
     public List<EntityUid> GetAllMapsAbove(Entity<CEZLevelMapComponent> mapUid)
     {
         if (!_zNetworkQuery.TryComp(mapUid.Comp.NetworkUid, out var networkComp) || mapUid.Comp.Depth >= networkComp.SortedMax)
-            return new List<EntityUid>();
+            return new List<EntityUid>(0);
 
         var startIndex = mapUid.Comp.Depth < networkComp.SortedMin
             ? 0
             : mapUid.Comp.Depth - networkComp.SortedMin + 1;
 
-        var result = new List<EntityUid>();
+        // Pre-allocate capacity based on estimated count to reduce reallocations
+        var estimatedCapacity = networkComp.SortedZLevels.Count - startIndex;
+        var result = new List<EntityUid>(estimatedCapacity);
+
         for (var i = startIndex; i < networkComp.SortedZLevels.Count; i++)
         {
             var entity = networkComp.SortedZLevels[i];
@@ -201,11 +204,14 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
     [PublicAPI]
     public List<EntityUid> GetAllMapsBelow(Entity<CEZLevelMapComponent> mapUid)
     {
-        var result = new List<EntityUid>();
         if (!_zNetworkQuery.TryComp(mapUid.Comp.NetworkUid, out var zLevelsNetworkComponent))
-            return result;
+            return new List<EntityUid>(0);
 
         var dept = mapUid.Comp.Depth;
+        // Pre-allocate capacity based on depth to reduce reallocations
+        var estimatedCapacity = Math.Min(dept, zLevelsNetworkComponent.SortedZLevels.Count);
+        var result = new List<EntityUid>(estimatedCapacity);
+
         var iterationCount = 0;
         const int maxIterations = 1000; // Safety limit to prevent infinite loops
 

@@ -4,11 +4,9 @@
  */
 
 using System.Numerics;
-using Content.Client.Damage.Systems;
 using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared._CE.ZLevels.Core.EntitySystems;
 using Content.Shared.Camera;
-using Content.Shared.Damage.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 
@@ -65,10 +63,17 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
         {
             var localPosition = GetVisualsLocalPosition((uid, zPhys), xform);
 
-            sprite.NoRotation = localPosition != 0 || zPhys.NoRotDefault;
+            // Only update if values actually changed to reduce redundant operations
+            var newNoRotation = localPosition != 0 || zPhys.NoRotDefault;
+            sprite.NoRotation = newNoRotation;
 
-            _sprite.SetOffset((uid, sprite), zPhys.SpriteOffsetDefault + new Vector2(0, localPosition * ZLevelOffset));
-            _sprite.SetDrawDepth((uid, sprite), localPosition > 0 ? (int)Shared.DrawDepth.DrawDepth.OverMobs : zPhys.DrawDepthDefault);
+            var newOffset = zPhys.SpriteOffsetDefault + new Vector2(0, localPosition * ZLevelOffset);
+            if (sprite.Offset != newOffset)
+                _sprite.SetOffset((uid, sprite), newOffset);
+
+            var newDrawDepth = localPosition > 0 ? (int)Shared.DrawDepth.DrawDepth.OverMobs : zPhys.DrawDepthDefault;
+            if (sprite.DrawDepth != newDrawDepth)
+                _sprite.SetDrawDepth((uid, sprite), newDrawDepth);
         }
 
         // Update StartOffset for entities with running fatigue animations
