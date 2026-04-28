@@ -89,12 +89,15 @@ public abstract partial class CESharedZLevelsSystem
     private void RequestCacheMovement(Entity<CEZPhysicsComponent> entity, bool force = true)
     {
         var tile = _transform.GetGridOrMapTilePosition(entity);
+        var xform = Transform(entity);
+        var currentMapUid = xform.MapUid;
 
-        // If we stay at same tile we don't need to recalculate a lot of fucking math
-        if (tile == entity.Comp.CachedTile && !force)
+        // If we stay at same tile and same map, we don't need to recalculate
+        if (tile == entity.Comp.CachedTile && currentMapUid == entity.Comp.CachedMapUid && !force)
             return;
 
-        entity.Comp.CachedTile = _transform.GetGridOrMapTilePosition(entity);
+        entity.Comp.CachedTile = tile;
+        entity.Comp.CachedMapUid = currentMapUid;
         entity.Comp.CachedGroundHeight = ComputeGroundHeightInternal((entity, entity), out var sticky);
         entity.Comp.CachedStickyGround = sticky;
     }
@@ -308,10 +311,13 @@ public abstract partial class CESharedZLevelsSystem
 
             //Check all types of ZHeight entities
             var query = _map.GetAnchoredEntitiesEnumerator(checkingMap, checkingGrid, worldPosI);
+            bool foundHighground = false;
             while (query.MoveNext(out var uid))
             {
                 if (!_highgroundQuery.TryComp(uid, out var heightComp))
                     continue;
+
+                foundHighground = true;
 
                 var dir = _transform.GetWorldRotation(uid.Value).GetCardinalDir();
 
@@ -355,9 +361,12 @@ public abstract partial class CESharedZLevelsSystem
             }
 
             //No ZEntities found, check floor tiles
-            if (_map.TryGetTileRef(checkingMap, checkingGrid, worldPosI, out var tileRef) &&
-                !tileRef.Tile.IsEmpty)
-                return -floor; // tile ground has groundY == 0 -> -floor
+            if (!foundHighground)
+            {
+                if (_map.TryGetTileRef(checkingMap, checkingGrid, worldPosI, out var floorTileRef) &&
+                    !floorTileRef.Tile.IsEmpty)
+                    return -floor; // tile ground has groundY == 0 -> -floor
+            }
         }
 
         return -maxFloors;

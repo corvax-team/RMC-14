@@ -28,4 +28,10 @@ public sealed partial class CEZLevelsNetworkComponent : Component
 
     [ViewVariables, AutoNetworkedField]
     public int SortedMax = 0;
+
+    /// <summary>
+    /// Cache for quick depth lookup without linear search
+    /// </summary>
+    [ViewVariables]
+    public readonly Dictionary<EntityUid, int> DepthCache = new();
 }
