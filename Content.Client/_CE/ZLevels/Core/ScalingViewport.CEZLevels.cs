@@ -3,6 +3,7 @@
  * https://github.com/space-wizards/space-station-14/blob/master/LICENSE.TXT
  */
 
+using System;
 using System.Numerics;
 using Content.Client._CE.ZLevels.Core;
 using Content.Shared._CE.ZLevels.Core.Components;
@@ -28,8 +29,11 @@ public sealed partial class ScalingViewport
 
     private EntityQuery<TransformComponent>? _xformQuery;
     private EntityQuery<MapComponent>? _mapQuery;
+    private readonly Dictionary<EntityUid, EmptyTileCache> _emptyTileCache = new();
 
     private IEye? _fallbackEye;
+
+    private readonly record struct EmptyTileCache(Vector2i Min, Vector2i Max, int Revision, bool HasVisibleOpening);
 
     /// <summary>
     /// We are looking for at least one empty tile on the screen.
@@ -74,6 +78,19 @@ public sealed partial class ScalingViewport
 
         var tileBottomLeft = grid.TileIndicesFor(mapCoordsBottomLeft);
         var tileTopRight = grid.TileIndicesFor(mapCoordsTopRight);
+        var cacheMin = tileBottomLeft - Vector2i.One;
+        var cacheMax = tileTopRight + Vector2i.One;
+        var revision = _zLevels?.GetVisibilityRevision(mapUid) ?? 0;
+
+        if (_emptyTileCache.TryGetValue(mapUid, out var cache) &&
+            cache.Min == cacheMin &&
+            cache.Max == cacheMax &&
+            cache.Revision == revision)
+        {
+            return cache.HasVisibleOpening;
+        }
+
+        var hasVisibleOpening = false;
 
         for (var x = tileBottomLeft.X - 1; x <= tileTopRight.X + 1; x++)
         {
@@ -82,11 +99,18 @@ public sealed partial class ScalingViewport
                 var tile = grid.GetTileRef(new Vector2i(x, y));
                 var tileDef = (ContentTileDefinition)_tile[tile.Tile.TypeId];
                 if (tileDef.Transparent || tile.Tile.IsEmpty)
-                    return true;
+                {
+                    hasVisibleOpening = true;
+                    break;
+                }
             }
+
+            if (hasVisibleOpening)
+                break;
         }
 
-        return false;
+        _emptyTileCache[mapUid] = new EmptyTileCache(cacheMin, cacheMax, revision, hasVisibleOpening);
+        return hasVisibleOpening;
     }
 
     private void RenderZLevels(IClydeViewport viewport)
@@ -116,10 +140,20 @@ public sealed partial class ScalingViewport
         if (playerXform.MapUid is null)
             return;
 
+        if (!_entityManager.HasComponent<CEZLevelMapComponent>(playerXform.MapUid.Value))
+        {
+            viewport.Eye = _fallbackEye;
+            viewport.Render();
+            Eye = _fallbackEye;
+            viewport.Eye = Eye;
+            return;
+        }
+
         var lookUp = zLevelViewer.LookUp ? 1 : 0;
 
         var lowestDepth = 0;
-        for (var i = 0; i >= -CESharedZLevelsSystem.MaxZLevelsBelowRendering; i--)
+        var maxBelowDepth = Math.Max(0, _zLevels.MaxRenderedBelowDepth);
+        for (var i = 0; i >= -maxBelowDepth; i--)
         {
             var checkingMap = playerXform.MapUid.Value;
 

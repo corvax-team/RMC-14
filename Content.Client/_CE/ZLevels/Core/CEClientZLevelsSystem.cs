@@ -7,8 +7,12 @@ using System.Numerics;
 using Content.Client.Damage.Systems;
 using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared._CE.ZLevels.Core.EntitySystems;
+using Content.Shared._MC;
 using Content.Shared.Camera;
 using Content.Shared.Damage.Components;
+using Robust.Shared.Configuration;
+using Robust.Shared.GameStates;
+using Robust.Client.Player;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 
@@ -22,23 +26,40 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
     [Dependency] private readonly IOverlayManager _overlay = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly AnimationPlayerSystem _animation = default!;
 
+    private readonly HashSet<EntityUid> _trackedVisuals = new();
+    private readonly List<EntityUid> _trackedVisualSnapshot = new();
+    private readonly List<EntityUid> _trackedVisualRemovals = new();
+    private readonly Dictionary<EntityUid, int> _visibilityRevision = new();
+    private CEZLevelBlurOverlay? _lowerFxOverlay;
+    private CEZLevelLowerFxMode _lowerFxMode = CEZLevelLowerFxMode.Tint;
+    private int _maxRenderBelowDepth = 1;
+
     public static float ZLevelOffset = 0.7f;
+    public int MaxRenderedBelowDepth => _maxRenderBelowDepth;
 
     public override void Initialize()
     {
         base.Initialize();
-        _overlay.AddOverlay(new CEZLevelBlurOverlay());
+        _lowerFxOverlay = new CEZLevelBlurOverlay();
+        _overlay.AddOverlay(_lowerFxOverlay);
+
+        _config.OnValueChanged(MCConfigVars.ZLevelsRenderMaxBelowDepth, v => _maxRenderBelowDepth = Math.Max(0, v), true);
+        _config.OnValueChanged(MCConfigVars.ZLevelsRenderLowerFx, OnLowerFxChanged, true);
 
         SubscribeLocalEvent<CEZPhysicsComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<CEZPhysicsComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<CEZPhysicsComponent, GetEyeOffsetEvent>(OnEyeOffset);
+        SubscribeLocalEvent<CEZPhysicsComponent, AfterAutoHandleStateEvent>(OnAfterHandleState);
     }
 
     private void OnEyeOffset(Entity<CEZPhysicsComponent> ent, ref GetEyeOffsetEvent args)
     {
         Angle rotation = _eye.CurrentEye.Rotation * -1;
-        var localPosition = GetVisualsLocalPosition((ent, ent), Transform(ent));
+        var localPosition = GetVisualsLocalPosition((ent.Owner, ent.Comp), Transform(ent));
         var offset = rotation.RotateVec(new Vector2(0, localPosition * ZLevelOffset));
         args.Offset += offset;
     }
@@ -54,22 +75,73 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
         ent.Comp.NoRotDefault = sprite.NoRotation;
         ent.Comp.DrawDepthDefault = sprite.DrawDepth;
         ent.Comp.SpriteOffsetDefault = sprite.Offset;
+        RefreshTrackedVisualState(ent, sprite);
+    }
+
+    private void OnShutdown(Entity<CEZPhysicsComponent> ent, ref ComponentShutdown args)
+    {
+        _trackedVisuals.Remove(ent);
+    }
+
+    protected override void OnParentChanged(Entity<CEZPhysicsComponent> ent, ref EntParentChangedMessage args)
+    {
+        base.OnParentChanged(ent, ref args);
+        RefreshTrackedVisualState(ent);
+    }
+
+    private void OnAfterHandleState(Entity<CEZPhysicsComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        RefreshTrackedVisualState(ent);
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        var query = EntityQueryEnumerator<CEZPhysicsComponent, SpriteComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var zPhys, out var sprite, out var xform))
+        if (_player.LocalEntity is not { } localEntity)
+            return;
+
+        var localXform = Transform(localEntity);
+        if (localXform.MapUid is not { } mapUid || !HasComp<CEZLevelMapComponent>(mapUid))
+            return;
+
+        if (TryComp<CEZPhysicsComponent>(localEntity, out var localZPhys))
+            RefreshTrackedVisualState((localEntity, localZPhys));
+
+        _trackedVisualRemovals.Clear();
+        _trackedVisualSnapshot.Clear();
+        _trackedVisualSnapshot.AddRange(_trackedVisuals);
+        foreach (var uid in _trackedVisualSnapshot)
         {
+            if (TerminatingOrDeleted(uid) ||
+                !TryComp<CEZPhysicsComponent>(uid, out var zPhys) ||
+                !TryComp<SpriteComponent>(uid, out var sprite) ||
+                !TryComp<TransformComponent>(uid, out var xform))
+            {
+                _trackedVisualRemovals.Add(uid);
+                continue;
+            }
+
             var localPosition = GetVisualsLocalPosition((uid, zPhys), xform);
 
             sprite.NoRotation = localPosition != 0 || zPhys.NoRotDefault;
 
             _sprite.SetOffset((uid, sprite), zPhys.SpriteOffsetDefault + new Vector2(0, localPosition * ZLevelOffset));
             _sprite.SetDrawDepth((uid, sprite), localPosition > 0 ? (int)Shared.DrawDepth.DrawDepth.OverMobs : zPhys.DrawDepthDefault);
+
+            if (!ShouldTrackVisualState((uid, zPhys), sprite, xform, localPosition))
+            {
+                RestoreVisualDefaults((uid, zPhys), sprite);
+                _trackedVisualRemovals.Add(uid);
+            }
         }
+
+        foreach (var uid in _trackedVisualRemovals)
+        {
+            _trackedVisuals.Remove(uid);
+        }
+
+        _trackedVisualSnapshot.Clear();
 
         // Update StartOffset for entities with running fatigue animations
         // This allows animations to follow dynamic offset changes (e.g., from Z-levels system)
@@ -88,10 +160,8 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
     }
 
 
-    public float GetVisualsLocalPosition(Entity<CEZPhysicsComponent?> ent, TransformComponent? xform = null)
+    public float GetVisualsLocalPosition(Entity<CEZPhysicsComponent> ent, TransformComponent? xform = null)
     {
-        if (!Resolve(ent, ref ent.Comp, false))
-            return 0;
         if (!Resolve(ent, ref xform, false))
             return 0;
 
@@ -103,9 +173,73 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
         return pos;
     }
 
+    public int GetVisibilityRevision(EntityUid mapUid)
+    {
+        return _visibilityRevision.GetValueOrDefault(mapUid, 0);
+    }
+
+    private void RefreshTrackedVisualState(Entity<CEZPhysicsComponent> ent, SpriteComponent? sprite = null, TransformComponent? xform = null)
+    {
+        if (!Resolve(ent, ref sprite, false) ||
+            !Resolve(ent, ref xform, false))
+            return;
+
+        if (sprite.SnapCardinals)
+        {
+            _trackedVisuals.Remove(ent);
+            return;
+        }
+
+        if (ShouldTrackVisualState(ent, sprite, xform))
+        {
+            _trackedVisuals.Add(ent);
+            return;
+        }
+
+        RestoreVisualDefaults(ent, sprite);
+        _trackedVisuals.Remove(ent);
+    }
+
+    private bool ShouldTrackVisualState(
+        Entity<CEZPhysicsComponent> ent,
+        SpriteComponent sprite,
+        TransformComponent xform,
+        float? localPositionOverride = null)
+    {
+        var localPosition = localPositionOverride ?? GetVisualsLocalPosition(ent, xform);
+        return Math.Abs(localPosition) > 0.001f ||
+               sprite.NoRotation != ent.Comp.NoRotDefault ||
+               sprite.DrawDepth != ent.Comp.DrawDepthDefault ||
+               sprite.Offset != ent.Comp.SpriteOffsetDefault;
+    }
+
+    private void RestoreVisualDefaults(Entity<CEZPhysicsComponent> ent, SpriteComponent sprite)
+    {
+        sprite.NoRotation = ent.Comp.NoRotDefault;
+        _sprite.SetOffset((ent.Owner, sprite), ent.Comp.SpriteOffsetDefault);
+        _sprite.SetDrawDepth((ent.Owner, sprite), ent.Comp.DrawDepthDefault);
+    }
+
+    private void OnLowerFxChanged(string value)
+    {
+        if (!Enum.TryParse(value, true, out CEZLevelLowerFxMode mode))
+            mode = CEZLevelLowerFxMode.Tint;
+
+        _lowerFxMode = mode;
+
+        if (_lowerFxOverlay != null)
+            _lowerFxOverlay.Mode = _lowerFxMode;
+    }
+
     public override void Shutdown()
     {
         base.Shutdown();
-        _overlay.RemoveOverlay<CEZLevelBlurOverlay>();
+        if (_lowerFxOverlay != null)
+            _overlay.RemoveOverlay(_lowerFxOverlay);
+
+        _trackedVisuals.Clear();
+        _trackedVisualSnapshot.Clear();
+        _trackedVisualRemovals.Clear();
+        _visibilityRevision.Clear();
     }
 }

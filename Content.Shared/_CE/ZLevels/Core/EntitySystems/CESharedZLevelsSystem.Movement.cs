@@ -34,6 +34,7 @@ public abstract partial class CESharedZLevelsSystem
     private const float ImpactVelocityLimit = 3f;
 
     private EntityQuery<CEZLevelHighGroundComponent> _highgroundQuery;
+    private readonly HashSet<EntityUid> _tileInvalidation = new();
 
     private TimeSpan _accumulatedTime = TimeSpan.Zero;
 
@@ -61,6 +62,8 @@ public abstract partial class CESharedZLevelsSystem
         if (!TryComp<MapGridComponent>(args.Entity, out var grid))
             return;
 
+        _tileInvalidation.Clear();
+
         // For each changed tile compute its world AABB and query all entities intersecting it
         foreach (var change in args.Changes)
         {
@@ -71,14 +74,20 @@ public abstract partial class CESharedZLevelsSystem
             var max = mapCoords.Position + half;
             var aabb = new Box2(min, max);
 
-            var entities = _lookup.GetEntitiesIntersecting(mapCoords.MapId, aabb);
-            foreach (var uid in entities)
-            {
-                if (!ZPhyzQuery.TryComp(uid, out var zComp))
-                    continue;
+            InvalidateTileCaches(mapCoords.MapId, aabb);
 
-                RequestCacheMovement((uid, zComp));
+            Entity<CEZLevelMapComponent?> currentMap = (ent.Owner, ent.Comp);
+            if (TryMapDown(currentMap, out var belowMap) &&
+                _mapQuery.TryComp(belowMap, out var belowMapComp))
+            {
+                InvalidateTileCaches(belowMapComp.MapId, aabb);
             }
+        }
+
+        foreach (var uid in _tileInvalidation)
+        {
+            if (TryComp<CEZLevelViewerComponent>(uid, out var viewer))
+                RefreshViewerVisibilityCache((uid, viewer), true);
         }
     }
 
@@ -90,14 +99,24 @@ public abstract partial class CESharedZLevelsSystem
         if (tile == entity.Comp.CachedTile && !force)
             return;
 
-        entity.Comp.CachedTile = _transform.GetGridOrMapTilePosition(entity);
-        entity.Comp.CachedGroundHeight = ComputeGroundHeightInternal((entity, entity), out var sticky);
+        entity.Comp.CachedTile = tile;
+        Entity<CEZPhysicsComponent?> zEntity = (entity.Owner, entity.Comp);
+        entity.Comp.CachedGroundHeight = ComputeGroundHeightInternal(zEntity, out var sticky);
         entity.Comp.CachedStickyGround = sticky;
+        if (Transform(entity).MapUid is { } mapUid &&
+            _zMapQuery.TryComp(mapUid, out var zMapComp))
+        {
+            entity.Comp.CachedHasTileAbove = HasTileAbove(entity.Comp.CachedTile.Value, (mapUid, zMapComp));
+        }
+        else
+        {
+            entity.Comp.CachedHasTileAbove = false;
+        }
     }
 
     private void OnMoveEvent(Entity<CEZPhysicsComponent> ent, ref MoveEvent args)
     {
-        RequestCacheMovement(ent);
+        RequestCacheMovement(ent, false);
     }
 
     private void OnZLevelMapMove(Entity<CEZPhysicsComponent> ent, ref CEZLevelMapMoveEvent args)
@@ -147,7 +166,7 @@ public abstract partial class CESharedZLevelsSystem
                 // Custom velocity application
                 if (zPhysicsComponent.VelocityRaiseEvent)
                 {
-                    var velocityEvent = new CEGetZVelocityEvent((uid, zPhysicsComponent));
+                    var velocityEvent = new CEGetZVelocityEvent(new Entity<CEZPhysicsComponent>(uid, zPhysicsComponent));
                     RaiseLocalEvent(uid, ref velocityEvent);
 
                     zPhysicsComponent.Velocity += velocityEvent.VelocityDelta * frameTime;
@@ -200,7 +219,7 @@ public abstract partial class CESharedZLevelsSystem
 
             if (zPhysicsComponent.LocalPosition >= 1) //Need teleport to ZLevel up
             {
-                if (HasTileAbove(uid)) //Hit roof
+                if (zPhysicsComponent.CachedHasTileAbove) //Hit roof
                 {
                     if (float.Abs(zPhysicsComponent.Velocity) >= ImpactVelocityLimit)
                     {
@@ -339,6 +358,25 @@ public abstract partial class CESharedZLevelsSystem
         }
 
         return -maxFloors;
+    }
+
+    private void InvalidateTileCaches(MapId mapId, Box2 aabb)
+    {
+        var entities = _lookup.GetEntitiesIntersecting(mapId, aabb);
+        foreach (var uid in entities)
+        {
+            if (TryComp<CEZPhysicsComponent>(uid, out var zComp) &&
+                HasComp<CEActiveZPhysicsComponent>(uid))
+            {
+                if (_tileInvalidation.Add(uid))
+                    RequestCacheMovement((uid, zComp));
+
+                continue;
+            }
+
+            if (HasComp<CEZLevelViewerComponent>(uid))
+                _tileInvalidation.Add(uid);
+        }
     }
 
     /// <summary>

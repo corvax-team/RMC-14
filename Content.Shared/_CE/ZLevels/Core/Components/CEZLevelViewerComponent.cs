@@ -5,6 +5,7 @@
 
 using Content.Shared._CE.ZLevels.Core.EntitySystems;
 using Robust.Shared.GameStates;
+using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._CE.ZLevels.Core.Components;
@@ -15,7 +16,19 @@ namespace Content.Shared._CE.ZLevels.Core.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true), UnsavedComponent, Access(typeof(CESharedZLevelsSystem))]
 public sealed partial class CEZLevelViewerComponent : Component
 {
-    public HashSet<EntityUid> Eyes = new();
+    public List<EntityUid> BelowEyes = new();
+
+    public EntityUid? AboveEye;
+
+    public Vector2i? CachedChunk;
+
+    public Vector2i? CachedTile;
+
+    public Vector2i? CachedOpaqueAboveTile;
+
+    public bool CachedOpaqueAbove;
+
+    public bool CachedOpaqueAboveValid;
 
     /// <summary>
     /// We can look at 1 z-level up.

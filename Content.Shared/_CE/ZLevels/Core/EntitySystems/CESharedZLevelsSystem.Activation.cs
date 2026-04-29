@@ -44,7 +44,7 @@ public abstract partial class CESharedZLevelsSystem
         CheckActivation(ent);
     }
 
-    private void OnParentChanged(Entity<CEZPhysicsComponent> ent, ref EntParentChangedMessage args)
+    protected virtual void OnParentChanged(Entity<CEZPhysicsComponent> ent, ref EntParentChangedMessage args)
     {
         CheckActivation(ent);
 
@@ -58,6 +58,12 @@ public abstract partial class CESharedZLevelsSystem
             return;
 
         var xform = Transform(ent);
+
+        if (xform.MapUid is not { } mapUid || !_zMapQuery.HasComp(mapUid))
+        {
+            SetActiveStatus(ent, false);
+            return;
+        }
 
         if (!HasComp<MapGridComponent>(xform.ParentUid))
         {

@@ -106,5 +106,11 @@ public sealed partial class CEZPhysicsComponent : Component
     [ViewVariables]
     public bool CachedStickyGround;
 
+    /// <summary>
+    /// Cached value of whether there is a solid tile directly above this entity.
+    /// </summary>
+    [ViewVariables]
+    public bool CachedHasTileAbove;
+
     #endregion
 }

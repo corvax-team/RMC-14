@@ -33,4 +33,16 @@ public sealed class MCConfigVars : CVars
 
     public static readonly CVarDef<bool> ZLevelsPhysicsClientSimulation =
         CVarDef.Create("mc.z_levels.physics.client_simulation", true, CVar.ARCHIVE | CVar.CLIENT);
+
+    public static readonly CVarDef<int> ZLevelsViewerMaxPreloadBelowDepth =
+        CVarDef.Create("mc.z_levels.viewer.max_preload_below_depth", 1, CVar.ARCHIVE | CVar.SERVERONLY);
+
+    public static readonly CVarDef<bool> ZLevelsViewerKeepAboveHot =
+        CVarDef.Create("mc.z_levels.viewer.keep_above_hot", false, CVar.ARCHIVE | CVar.SERVERONLY);
+
+    public static readonly CVarDef<int> ZLevelsRenderMaxBelowDepth =
+        CVarDef.Create("mc.z_levels.render.max_below_depth", 2, CVar.ARCHIVE | CVar.CLIENTONLY);
+
+    public static readonly CVarDef<string> ZLevelsRenderLowerFx =
+        CVarDef.Create("mc.z_levels.render.lower_fx", "tint", CVar.ARCHIVE | CVar.CLIENTONLY);
 }

@@ -8,28 +8,41 @@ using Content.Shared._CE.ZLevels.Core.EntitySystems;
 using Content.Shared.Actions;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Popups;
+using Content.Shared._MC;
+using Prometheus;
+using System.Numerics;
 using Robust.Server.GameObjects;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Maths;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Server._CE.ZLevels.Core;
 
 public sealed partial class CEZLevelsSystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private readonly EntProtoId _zEyeProto = "CEZLevelEye";
+    private const float ViewerChunkSize = 8f;
 
-    private readonly TimeSpan _zLevelViewerUpdateRate = TimeSpan.FromSeconds(1f);
-    private TimeSpan _nextZLevelViewerUpdate = TimeSpan.Zero;
+    private int _viewerMaxPreloadBelowDepth = 1;
+    private bool _viewerKeepAboveHot;
+
+    private static readonly Histogram ViewerPreloadUsage = Metrics.CreateHistogram(
+        "content_zlevels_viewer_preload_usage",
+        "Amount of time spent updating z-level preload viewers");
 
     private void InitView()
     {
+        _config.OnValueChanged(MCConfigVars.ZLevelsViewerMaxPreloadBelowDepth, v => _viewerMaxPreloadBelowDepth = Math.Max(0, v), true);
+        _config.OnValueChanged(MCConfigVars.ZLevelsViewerKeepAboveHot, v => _viewerKeepAboveHot = v, true);
+
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
 
@@ -42,41 +55,27 @@ public sealed partial class CEZLevelsSystem
 
     private void UpdateView(float frameTime)
     {
-        if (_timing.CurTime < _nextZLevelViewerUpdate)
-            return;
-        _nextZLevelViewerUpdate = _timing.CurTime + _zLevelViewerUpdateRate;
-
-        var query = EntityQueryEnumerator<CEZLevelViewerComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var viewer, out var xform))
-        {
-            foreach (var eye in viewer.Eyes)
-            {
-                _transform.SetWorldPosition(eye, _transform.GetWorldPosition(xform));
-            }
-        }
     }
 
     private void OnViewerInit(Entity<CEZLevelViewerComponent> ent, ref MapInitEvent args)
     {
         _actions.AddAction(ent, ref ent.Comp.ZLevelActionEntity, ent.Comp.ActionProto);
         _meta.AddFlag(ent, MetaDataFlags.ExtraTransformEvents);
+        RefreshViewerVisibilityCache(ent, true);
+        UpdateViewer(ent, true);
     }
 
     private void OnCompRemove(Entity<CEZLevelViewerComponent> ent, ref ComponentRemove args)
     {
         _actions.RemoveAction(ent.Comp.ZLevelActionEntity);
         _meta.RemoveFlag(ent, MetaDataFlags.ExtraTransformEvents);
-
-        foreach (var eye in ent.Comp.Eyes)
-        {
-            QueueDel(eye);
-        }
+        ClearViewerEyes(ent);
     }
 
     private void OnPlayerAttached(PlayerAttachedEvent ev)
     {
         var viewer = EnsureComp<CEZLevelViewerComponent>(ev.Entity);
-        UpdateViewer((ev.Entity, viewer));
+        UpdateViewer((ev.Entity, viewer), true);
     }
 
     private void OnPlayerDetached(PlayerDetachedEvent ev)
@@ -86,50 +85,77 @@ public sealed partial class CEZLevelsSystem
 
     private void OnViewerMapUidChanged(Entity<CEZLevelViewerComponent> ent, ref MapUidChangedEvent args)
     {
+        RefreshViewerVisibilityCache(ent, true);
+        UpdateViewer(ent, true);
+    }
+
+    protected override void OnViewerMove(Entity<CEZLevelViewerComponent> ent, ref MoveEvent args)
+    {
+        base.OnViewerMove(ent, ref args);
         UpdateViewer(ent);
     }
 
-    private void UpdateViewer(Entity<CEZLevelViewerComponent> ent)
+    protected override void OnToggleLookUp(Entity<CEZLevelViewerComponent> ent, ref CEToggleZLevelLookUpAction args)
     {
-        var eyes = ent.Comp.Eyes;
-        foreach (var eye in ent.Comp.Eyes)
-        {
-            QueueDel(eye);
-        }
-        eyes.Clear();
+        base.OnToggleLookUp(ent, ref args);
+        UpdateViewer(ent, true);
+    }
+
+    private void UpdateViewer(Entity<CEZLevelViewerComponent> ent, bool force = false)
+    {
+        using var _ = ViewerPreloadUsage.NewTimer();
 
         if (!TryComp<ActorComponent>(ent, out var actor))
+        {
+            ClearViewerEyes(ent);
             return;
+        }
 
         var xform = Transform(ent);
-        var map = xform.MapUid;
+        if (xform.MapUid is not { } mapUid ||
+            !TryComp<CEZLevelMapComponent>(mapUid, out var zMapComp))
+        {
+            ClearViewerEyes(ent);
+            return;
+        }
 
-        if (map is null)
+        var map = (mapUid, zMapComp);
+        var tile = _transform.GetGridOrMapTilePosition(ent);
+        var worldPos = _transform.GetWorldPosition(xform);
+        var chunk = (worldPos / ViewerChunkSize).Floored();
+
+        if (!force &&
+            ent.Comp.CachedTile == tile &&
+            ent.Comp.CachedChunk == chunk)
             return;
 
-        var globalPos = _transform.GetWorldPosition(xform);
+        var repositionEyes = force || ent.Comp.CachedChunk != chunk;
+        var belowDepth = GetDesiredBelowPreloadDepth(ent, map, tile);
+        var aboveActive = ShouldPreloadAbove(ent, map, tile);
 
-        for (var i = 1; i <= MaxZLevelsBelowRendering; i++)
+        SyncBelowEyes(ent, actor.PlayerSession, map, worldPos, belowDepth, repositionEyes);
+        SyncAboveEye(ent, actor.PlayerSession, map, worldPos, aboveActive, repositionEyes);
+
+        ent.Comp.CachedTile = tile;
+        ent.Comp.CachedChunk = chunk;
+    }
+
+    private int GetDesiredBelowPreloadDepth(Entity<CEZLevelViewerComponent> ent, Entity<CEZLevelMapComponent> map, Vector2i tile)
+    {
+        if (_viewerMaxPreloadBelowDepth <= 0 ||
+            !ShouldPreloadBelow(ent, map, tile))
+            return 0;
+
+        var maxDepth = 0;
+        for (var depth = 1; depth <= _viewerMaxPreloadBelowDepth; depth++)
         {
-            if (!TryMapOffset(map.Value, -i, out var mapUidBelow))
+            if (!TryMapOffset((map.Owner, map.Comp), -depth, out _))
                 break;
 
-            var newEye = SpawnAtPosition(_zEyeProto, new EntityCoordinates(mapUidBelow, globalPos));
-
-            Transform(newEye).GridTraversal = false;
-            _viewSubscriber.AddViewSubscriber(newEye, actor.PlayerSession);
-            eyes.Add(newEye);
+            maxDepth = depth;
         }
 
-        // We constantly load the upper z-level for the client so that you can quickly look up and climb stairs without PVS lag.
-        if (TryMapUp(map.Value, out var aboveMapUid))
-        {
-            var newEye = SpawnAtPosition(_zEyeProto, new EntityCoordinates(aboveMapUid, globalPos));
-
-            Transform(newEye).GridTraversal = false;
-            _viewSubscriber.AddViewSubscriber(newEye, actor.PlayerSession);
-            eyes.Add(newEye);
-        }
+        return maxDepth;
     }
 
     private void OnZLevelFall(Entity<CEZPhysicsComponent> ent, ref CEZLevelFallMapEvent args)
@@ -137,5 +163,169 @@ public sealed partial class CEZLevelsSystem
         //A dirty trick: we call PredictedPopup on the falling entity on SERVER.
         //This means that the one who is falling does not see the popup itself, but everyone around them does. This is what we need.
         _popup.PopupPredictedCoordinates(Loc.GetString("ce-zlevel-falling-popup", ("name", Identity.Name(ent, EntityManager))), Transform(ent).Coordinates, ent);
+    }
+
+    private bool ShouldPreloadBelow(Entity<CEZLevelViewerComponent> ent, Entity<CEZLevelMapComponent> map, Vector2i tile)
+    {
+        if (!TryMapDown((map.Owner, map.Comp), out _))
+            return false;
+
+        return HasOpenTileToLowerMap((map.Owner, map.Comp), tile) ||
+               HasNearbyHighGround((map.Owner, map.Comp), tile) ||
+               IsTransitioning(ent);
+    }
+
+    private bool ShouldPreloadAbove(Entity<CEZLevelViewerComponent> ent, Entity<CEZLevelMapComponent> map, Vector2i tile)
+    {
+        if (!TryMapUp((map.Owner, map.Comp), out _))
+            return false;
+
+        return _viewerKeepAboveHot ||
+               ent.Comp.LookUp ||
+               HasNearbyHighGround((map.Owner, map.Comp), tile) ||
+               IsAscending(ent);
+    }
+
+    private bool IsTransitioning(EntityUid uid)
+    {
+        return TryComp<CEZPhysicsComponent>(uid, out var zPhys) &&
+               (Math.Abs(zPhys.LocalPosition) > 0.01f || Math.Abs(zPhys.Velocity) > 0.01f);
+    }
+
+    private bool IsAscending(EntityUid uid)
+    {
+        return TryComp<CEZPhysicsComponent>(uid, out var zPhys) &&
+               (zPhys.LocalPosition > 0.01f || zPhys.Velocity > 0.01f);
+    }
+
+    private bool HasNearbyHighGround(Entity<CEZLevelMapComponent> map, Vector2i center)
+    {
+        if (!TryComp<MapGridComponent>(map.Owner, out var grid))
+            return false;
+
+        for (var x = center.X - 1; x <= center.X + 1; x++)
+        {
+            for (var y = center.Y - 1; y <= center.Y + 1; y++)
+            {
+                var query = _map.GetAnchoredEntitiesEnumerator(map.Owner, grid, new Vector2i(x, y));
+                while (query.MoveNext(out var uid))
+                {
+                    if (HasComp<CEZLevelHighGroundComponent>(uid))
+                        return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private bool HasOpenTileToLowerMap(Entity<CEZLevelMapComponent> map, Vector2i center)
+    {
+        if (!TryComp<MapGridComponent>(map.Owner, out var grid))
+            return false;
+
+        for (var x = center.X - 1; x <= center.X + 1; x++)
+        {
+            for (var y = center.Y - 1; y <= center.Y + 1; y++)
+            {
+                if (!_map.TryGetTileRef(map.Owner, grid, new Vector2i(x, y), out var tileRef))
+                    continue;
+
+                if (tileRef.Tile.IsEmpty)
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void SyncBelowEyes(
+        Entity<CEZLevelViewerComponent> ent,
+        ICommonSession session,
+        Entity<CEZLevelMapComponent> map,
+        Vector2 worldPos,
+        int desiredDepth,
+        bool reposition)
+    {
+        while (ent.Comp.BelowEyes.Count > desiredDepth)
+        {
+            var eye = ent.Comp.BelowEyes[^1];
+            ent.Comp.BelowEyes.RemoveAt(ent.Comp.BelowEyes.Count - 1);
+            QueueDel(eye);
+        }
+
+        for (var depth = 1; depth <= desiredDepth; depth++)
+        {
+            if (!TryMapOffset((map.Owner, map.Comp), -depth, out var belowMap))
+                break;
+
+            while (ent.Comp.BelowEyes.Count < depth)
+            {
+                var newEye = SpawnAuxiliaryEye(session, belowMap.Owner, worldPos);
+                ent.Comp.BelowEyes.Add(newEye);
+            }
+
+            if (reposition)
+                MoveAuxiliaryEye(ent.Comp.BelowEyes[depth - 1], belowMap.Owner, worldPos);
+        }
+    }
+
+    private void SyncAboveEye(
+        Entity<CEZLevelViewerComponent> ent,
+        ICommonSession session,
+        Entity<CEZLevelMapComponent> map,
+        Vector2 worldPos,
+        bool active,
+        bool reposition)
+    {
+        if (!active || !TryMapUp((map.Owner, map.Comp), out var aboveMap))
+        {
+            if (ent.Comp.AboveEye is { } aboveEye)
+            {
+                QueueDel(aboveEye);
+                ent.Comp.AboveEye = null;
+            }
+
+            return;
+        }
+
+        if (ent.Comp.AboveEye is not { } eye)
+            ent.Comp.AboveEye = eye = SpawnAuxiliaryEye(session, aboveMap.Owner, worldPos);
+
+        if (reposition)
+            MoveAuxiliaryEye(eye, aboveMap.Owner, worldPos);
+    }
+
+    private EntityUid SpawnAuxiliaryEye(ICommonSession session, EntityUid targetMap, Vector2 worldPos)
+    {
+        var eye = SpawnAtPosition(_zEyeProto, new EntityCoordinates(targetMap, worldPos));
+        Transform(eye).GridTraversal = false;
+        _viewSubscriber.AddViewSubscriber(eye, session);
+        return eye;
+    }
+
+    private void MoveAuxiliaryEye(EntityUid eye, EntityUid targetMap, Vector2 worldPos)
+    {
+        if (!TryComp<MapComponent>(targetMap, out var mapComp))
+            return;
+
+        _transform.SetMapCoordinates(eye, new MapCoordinates(worldPos, mapComp.MapId));
+    }
+
+    private void ClearViewerEyes(Entity<CEZLevelViewerComponent> ent)
+    {
+        foreach (var eye in ent.Comp.BelowEyes)
+        {
+            if (!TerminatingOrDeleted(eye))
+                QueueDel(eye);
+        }
+
+        ent.Comp.BelowEyes.Clear();
+
+        if (ent.Comp.AboveEye is { } aboveEye && !TerminatingOrDeleted(aboveEye))
+            QueueDel(aboveEye);
+
+        ent.Comp.AboveEye = null;
+        ent.Comp.CachedChunk = null;
     }
 }

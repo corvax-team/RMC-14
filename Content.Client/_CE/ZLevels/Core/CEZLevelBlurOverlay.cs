@@ -17,8 +17,9 @@ public sealed class CEZLevelBlurOverlay : Overlay
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IEntityManager _entity = default!;
     private readonly ShaderInstance? _blurShader;
+    public CEZLevelLowerFxMode Mode { get; set; } = CEZLevelLowerFxMode.Tint;
 
-    public override bool RequestScreenTexture => true;
+    public override bool RequestScreenTexture => Mode == CEZLevelLowerFxMode.Blur;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
     private readonly ProtoId<ShaderPrototype> _zBlurShader = "CEZBlur";
@@ -40,26 +41,44 @@ public sealed class CEZLevelBlurOverlay : Overlay
         if (args.MapId == MapId.Nullspace)
             return false;
 
+        if (Mode == CEZLevelLowerFxMode.Off)
+            return false;
+
         return true;
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (ScreenTexture == null || args.Viewport.Eye == null)
-            return;
-
-        var ambientColor = new Vector3(0, 0, 1); //Default blue
+        var ambientColor = Color.Blue.WithAlpha(0.22f);
 
         if (_entity.TryGetComponent<MapLightComponent>(args.MapUid, out var mapLight))
         {
-            ambientColor = new Vector3(
-                mapLight.AmbientLightColor.R,
-                mapLight.AmbientLightColor.G,
-                mapLight.AmbientLightColor.B);
+            ambientColor = mapLight.AmbientLightColor.WithAlpha(0.22f);
+        }
+
+        if (Mode == CEZLevelLowerFxMode.Tint)
+        {
+            args.WorldHandle.DrawRect(args.WorldBounds, ambientColor);
+            return;
+        }
+
+        if (ScreenTexture == null || args.Viewport.Eye == null)
+            return;
+
+        var blurColor = new Vector3(
+            ambientColor.RByte,
+            ambientColor.GByte,
+            ambientColor.BByte);
+        if (_entity.TryGetComponent<MapLightComponent>(args.MapUid, out var mapLight2))
+        {
+            blurColor = new Vector3(
+                mapLight2.AmbientLightColor.R,
+                mapLight2.AmbientLightColor.G,
+                mapLight2.AmbientLightColor.B);
         }
 
         _blurShader?.SetParameter("SCREEN_TEXTURE", ScreenTexture);
-        _blurShader?.SetParameter("BLUR_COLOR", ambientColor);
+        _blurShader?.SetParameter("BLUR_COLOR", blurColor);
 
         var worldHandle = args.WorldHandle;
         worldHandle.UseShader(_blurShader);
