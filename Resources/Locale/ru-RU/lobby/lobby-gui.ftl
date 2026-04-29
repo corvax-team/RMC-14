@@ -34,4 +34,9 @@ ui-lobby-taskbar-donate = Спонсорство
 ui-lobby-taskbar-menu = Меню
 ui-lobby-taskbar-customization = Кастомизация
 ui-lobby-taskbar-achievements = Достижения
+ui-lobby-character-preview-summary = Это { $name }, { $age ->
+        [one] { $age } год
+        [few] { $age } года
+       *[other] { $age } лет
+    }.
 

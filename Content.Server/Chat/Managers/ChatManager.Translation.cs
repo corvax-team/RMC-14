@@ -9,6 +9,7 @@ using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server._MC;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -47,7 +48,7 @@ internal sealed partial class ChatManager
 
     private void DispatchChatMessageToClient(INetChannel client, ChatMessage message)
     {
-        var outgoing = CloneChatMessage(message);
+        var outgoing = ApplyEmojiFormatting(CloneChatMessage(message));
         if (!TryBuildTranslationRequest(client, outgoing, out var request))
         {
             _netManager.ServerSendMessage(new MsgChatMessage { Message = outgoing }, client);
@@ -115,10 +116,10 @@ internal sealed partial class ChatManager
             return false;
         }
 
-        if (ContainsRichMarkup(message.Message))
+        if (ContainsUnsupportedRichMarkup(message.Message))
         {
             Logger.InfoS("chat.translate",
-                $"Skip chat translation for {client}: message contains rich markup tags. Message='{message.Message}'");
+                $"Skip chat translation for {client}: message contains unsupported rich markup tags. Message='{message.Message}'");
             return false;
         }
 
@@ -250,6 +251,24 @@ internal sealed partial class ChatManager
             message.TranslatedMessage);
     }
 
+    private static ChatMessage ApplyEmojiFormatting(ChatMessage message)
+    {
+        return new ChatMessage(
+            message.Channel,
+            message.Message,
+            MCFormatMessage.ApplyEmoji(message.WrappedMessage),
+            message.SenderEntity,
+            message.SenderKey,
+            message.HideChat,
+            message.MessageColorOverride,
+            message.AudioPath,
+            message.AudioVolume,
+            message.HidePopup,
+            message.SpeechStyleClass,
+            message.RepeatCheckSender,
+            message.TranslatedMessage);
+    }
+
     private static ChatMessage ApplyTranslatedMessage(ChatMessage message, string translated)
     {
         return new ChatMessage(
@@ -300,6 +319,21 @@ internal sealed partial class ChatManager
     private static bool ContainsRichMarkup(string text)
     {
         return !string.IsNullOrWhiteSpace(text) && RichTextTagRegex().IsMatch(text);
+    }
+
+    private static bool ContainsUnsupportedRichMarkup(string text)
+    {
+        if (!ContainsRichMarkup(text))
+            return false;
+
+        var matches = RichTextTagRegex().Matches(text);
+        foreach (Match match in matches)
+        {
+            if (!MCFormatMessage.IsKnownBracketEmojiTag(match.Value))
+                return true;
+        }
+
+        return false;
     }
 
     private static bool ShouldSkipAdministrativeSystemTranslation(ChatMessage message)

@@ -386,15 +386,7 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
 
     private StyleNano.UiColorTheme GetTheme()
     {
-        var theme = _config.GetCVar(RMCCVars.RMCUIColorTheme);
-
-        if (theme.Equals("blue", StringComparison.OrdinalIgnoreCase))
-            return StyleNano.UiColorTheme.Blue;
-
-        if (theme.Equals("gray", StringComparison.OrdinalIgnoreCase))
-            return StyleNano.UiColorTheme.Gray;
-
-        return StyleNano.UiColorTheme.Green;
+        return StyleNano.GetConfiguredTheme(_config);
     }
 
     private static Color GetToastAccent(StyleNano.UiColorTheme theme)

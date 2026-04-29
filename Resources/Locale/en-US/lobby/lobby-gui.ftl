@@ -33,3 +33,4 @@ ui-lobby-taskbar-donate = Sponsorship
 ui-lobby-taskbar-menu = Menu
 ui-lobby-taskbar-customization = Customize
 ui-lobby-taskbar-achievements = Achievements
+ui-lobby-character-preview-summary = This is { $name }, { $age } years old.

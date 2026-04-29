@@ -25,7 +25,7 @@ ccm-achievement-general-war-legend-desc = Both marines and the hive know your na
 ccm-achievement-misc-logistician-title = Logistician
 ccm-achievement-misc-logistician-desc = Ammunition does not appear out of thin air. Requirement: order 20 requisition deliveries.
 ccm-achievement-misc-friendly-fire-title = Friendly Fire
-ccm-achievement-misc-friendly-fire-desc = Sometimes mistakes happen in the heat of battle. Requirement: deal 500 damage to allies.
+ccm-achievement-misc-friendly-fire-desc = Any damage to allies and killing your comrades is punishable. Requirement: deal 300 damage to allies.
 ccm-achievement-misc-queen-slayer-title = Queen's Nightmare
 ccm-achievement-misc-queen-slayer-desc = The queen knows your name. And hates it. Requirement: participate in killing the xeno queen.
 

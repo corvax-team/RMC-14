@@ -457,12 +457,12 @@ internal sealed partial class ChatManager : IChatManager
 
         string WrapOocForCurrentCulture() => Loc.GetString("chat-manager-send-ooc-wrap-message",
             ("playerName", FormattedMessage.EscapeText(displayName)),
-            ("message", FormattedMessage.EscapeText(message)));
+            ("message", formattedMessage));
 
         string WrapPatronForCurrentCulture(string color) => Loc.GetString("chat-manager-send-ooc-patron-wrap-message",
             ("patronColor", color),
             ("playerName", FormattedMessage.EscapeText(displayName)),
-            ("message", FormattedMessage.EscapeText(message)));
+            ("message", formattedMessage));
 
         var replayWrappedMessage = WrapOocForCurrentCulture();
         if (_adminManager.HasAdminFlag(player, AdminFlags.NameColor))

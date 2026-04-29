@@ -13,6 +13,9 @@ public static class ChatTranslationGlossary
 
     private static readonly Regex WhitespaceRegex = new(@"\s+", RegexOptions.Compiled);
     private static readonly Regex TrailingPunctuationRegex = new(@"(?<punct>[.!?]+)$", RegexOptions.Compiled);
+    private static readonly Regex EmojiTokenRegex = new(
+        @"(?<!\\):[A-Za-z][A-Za-z0-9_]{0,31}:|(?<!\\)\[[A-Za-z][A-Za-z0-9_]{0,31}\]",
+        RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
     private static readonly GlossaryPair[] PhraseGlossary =
     [
@@ -313,6 +316,7 @@ public static class ChatTranslationGlossary
 
         var prepared = text;
         var protectedTerms = new List<ProtectedTerm>();
+        prepared = ProtectEmojiTokens(prepared, protectedTerms);
 
         foreach (var entry in ProtectedGlossary.OrderByDescending(e => e.En.Length))
         {
@@ -331,6 +335,16 @@ public static class ChatTranslationGlossary
         }
 
         return new PreparedTranslation(prepared, protectedTerms);
+    }
+
+    private static string ProtectEmojiTokens(string text, List<ProtectedTerm> protectedTerms)
+    {
+        return EmojiTokenRegex.Replace(text, match =>
+        {
+            var token = $"{TokenPrefix}{protectedTerms.Count}{TokenSuffix}";
+            protectedTerms.Add(new ProtectedTerm(token, match.Value));
+            return token;
+        });
     }
 
     public static string ApplyPostProcessing(string originalText, string translated, string target, PreparedTranslation prepared)

@@ -36,6 +36,9 @@ public sealed partial class MiscTab : Control
     private string? _pendingLanguageCode;
     private string? _pendingPreviousLanguageCode;
     private ISawmill _sawmill = default!;
+    private const int LobbyBackgroundPresetConsoleId = 0;
+    private const int LobbyBackgroundPresetCommunityId = 1;
+    private const int LobbyBackgroundPresetRmcaId = 2;
 
     public MiscTab()
     {
@@ -129,6 +132,45 @@ public sealed partial class MiscTab : Control
         Control.AddOptionDropDown(RMCCVars.RMCXenoDefaultNightVision, RMCXenoNightVisionDefault, xenoNightVisionEntries);
 
         Control.Initialize();
+        _cfg.OnValueChanged(RMCCVars.RMCLobbyUiStyle, RefreshLobbyBackgroundPresetOptions, true);
+    }
+
+    private void RefreshLobbyBackgroundPresetOptions(string style)
+    {
+        var oldStyle = string.Equals(style, "old", StringComparison.OrdinalIgnoreCase);
+        var currentPreset = _cfg.GetCVar(RMCCVars.RMCLobbyBackgroundPreset) ?? "console";
+        if (oldStyle && string.Equals(currentPreset, "console", StringComparison.OrdinalIgnoreCase))
+        {
+            currentPreset = "rmca";
+            _cfg.SetCVar(RMCCVars.RMCLobbyBackgroundPreset, currentPreset);
+        }
+
+        var button = DropDownLobbyBackgroundPreset.Button;
+        button.Clear();
+
+        if (!oldStyle)
+            AddLobbyBackgroundPresetItem(button, LobbyBackgroundPresetConsoleId, "console", Loc.GetString("ui-options-lobby-background-preset-console"));
+
+        AddLobbyBackgroundPresetItem(button, LobbyBackgroundPresetCommunityId, "community", Loc.GetString("ui-options-lobby-background-preset-community"));
+        AddLobbyBackgroundPresetItem(button, LobbyBackgroundPresetRmcaId, "rmca", Loc.GetString("ui-options-lobby-background-preset-rmca"));
+
+        var selectedId = currentPreset.ToLowerInvariant() switch
+        {
+            "community" => LobbyBackgroundPresetCommunityId,
+            "rmca" => LobbyBackgroundPresetRmcaId,
+            _ => LobbyBackgroundPresetConsoleId,
+        };
+
+        if (!oldStyle || selectedId != LobbyBackgroundPresetConsoleId)
+            button.SelectId(selectedId);
+
+        Control.ValueChanged();
+    }
+
+    private static void AddLobbyBackgroundPresetItem(OptionButton button, int id, string key, string label)
+    {
+        button.AddItem(label, id);
+        button.SetItemMetadata(button.GetIdx(id), key);
     }
 
     private void NormalizeChatTranslationTarget()

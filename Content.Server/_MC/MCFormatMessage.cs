@@ -1,4 +1,4 @@
-﻿using System.Collections.Frozen;
+using System.Collections.Frozen;
 
 namespace Content.Server._MC;
 
@@ -81,9 +81,35 @@ public static class MCFormatMessage
     {
         foreach (var (name, path) in Emoji)
         {
-            text = text.Replace($":{name}:", $"[mcsprite=\"{path}\"]");
+            var replacement = $"[mcsprite=\"{path}\"]";
+            text = text.Replace($":{name}:", replacement, StringComparison.OrdinalIgnoreCase);
+            text = text.Replace($@"\[{name}\]", replacement, StringComparison.OrdinalIgnoreCase);
         }
 
         return text;
+    }
+
+    public static bool IsKnownBracketEmojiTag(string value)
+    {
+        if (value.Length < 3 || value[0] != '[' || value[^1] != ']')
+            return false;
+
+        var inner = value[1..^1];
+        if (inner.Length == 0 ||
+            inner.Contains(' ') ||
+            inner.Contains('=') ||
+            inner.Contains('/') ||
+            inner.Contains('\\'))
+        {
+            return false;
+        }
+
+        foreach (var name in Emoji.Keys)
+        {
+            if (string.Equals(name, inner, StringComparison.OrdinalIgnoreCase))
+                return true;
+        }
+
+        return false;
     }
 }

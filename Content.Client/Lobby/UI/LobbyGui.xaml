@@ -242,6 +242,7 @@
                 </BoxContainer>
             </PanelContainer>
         </BoxContainer>
+        <Control Name="OldLayoutHost" Visible="False" VerticalExpand="True" HorizontalExpand="True" />
         <!-- Character setup state -->
         <!-- This is injected on startup. Funky! -->
         <LayoutContainer Access="Public" Visible="False" Name="CharacterSetupState" VerticalExpand="True" HorizontalExpand="True" />

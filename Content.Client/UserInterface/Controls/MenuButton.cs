@@ -15,13 +15,15 @@ public sealed class MenuButton : ContainerButton
     public const string StyleClassLabelTopButton = "topButtonLabel";
     public const string StyleClassRedTopButton = "topButtonLabel";
 
-    private static readonly Color ColorNormal = Color.FromHex("#7b7e9e");
+    private static readonly Color ColorNormal = Color.FromHex("#8E95BD");
     private static readonly Color ColorRedNormal = Color.FromHex("#FEFEFE");
-    private static readonly Color ColorHovered = Color.FromHex("#9699bb");
+    private static readonly Color ColorHovered = Color.FromHex("#AEB7E6");
     private static readonly Color ColorRedHovered = Color.FromHex("#FFFFFF");
-    private static readonly Color ColorPressed = Color.FromHex("#789B8C");
+    private static readonly Color ColorPressed = Color.FromHex("#8FA0D1");
+    private static readonly Color ColorContentNormal = Color.FromHex("#27324A");
+    private static readonly Color ColorContentDisabled = Color.FromHex("#46516A");
 
-    private const float VertPad = 8f;
+    private const float VertPad = 5f;
     private Color NormalColor => HasStyleClass(StyleClassRedTopButton) ? ColorRedNormal : ColorNormal;
     private Color HoveredColor => HasStyleClass(StyleClassRedTopButton) ? ColorRedHovered : ColorHovered;
 
@@ -54,31 +56,31 @@ public sealed class MenuButton : ContainerButton
         IoCManager.InjectDependencies(this);
         _styleNormal = new StyleBoxFlat
         {
-            BackgroundColor = Color.FromHex("#8B8FAE").WithAlpha(0.92f),
-            BorderColor = Color.FromHex("#8B8FAE").WithAlpha(0.96f),
+            BackgroundColor = Color.FromHex("#90A9DB").WithAlpha(0.94f),
+            BorderColor = Color.FromHex("#90A9DB").WithAlpha(0.98f),
             BorderThickness = new Thickness(1),
         };
         _styleHover = new StyleBoxFlat
         {
             BackgroundColor = Color.Transparent,
-            BorderColor = Color.FromHex("#8B8FAE").WithAlpha(0.96f),
+            BorderColor = Color.FromHex("#90A9DB").WithAlpha(0.98f),
             BorderThickness = new Thickness(1),
         };
         _stylePressed = new StyleBoxFlat
         {
-            BackgroundColor = Color.FromHex("#707494").WithAlpha(0.28f),
-            BorderColor = Color.FromHex("#707494").WithAlpha(0.96f),
+            BackgroundColor = Color.FromHex("#7088B8").WithAlpha(0.30f),
+            BorderColor = Color.FromHex("#7088B8").WithAlpha(0.96f),
             BorderThickness = new Thickness(1),
         };
         _styleDisabled = new StyleBoxFlat
         {
-            BackgroundColor = Color.FromHex("#5D6075").WithAlpha(0.82f),
-            BorderColor = Color.FromHex("#5D6075").WithAlpha(0.90f),
+            BackgroundColor = Color.FromHex("#56617A").WithAlpha(0.84f),
+            BorderColor = Color.FromHex("#56617A").WithAlpha(0.92f),
             BorderThickness = new Thickness(1),
         };
         _buttonIcon = new TextureRect()
         {
-            TextureScale = new Vector2(0.5f, 0.5f),
+            TextureScale = new Vector2(0.46f, 0.46f),
             HorizontalAlignment = HAlignment.Center,
             VerticalAlignment = VAlignment.Center,
             VerticalExpand = true,
@@ -146,8 +148,8 @@ public sealed class MenuButton : ContainerButton
         {
             case DrawModeEnum.Normal:
                 StyleBoxOverride = _styleNormal;
-                _buttonIcon.ModulateSelfOverride = Color.Black;
-                _buttonLabel.ModulateSelfOverride = Color.Black;
+                _buttonIcon.ModulateSelfOverride = ColorContentNormal;
+                _buttonLabel.ModulateSelfOverride = ColorContentNormal;
                 break;
 
             case DrawModeEnum.Pressed:
@@ -164,8 +166,8 @@ public sealed class MenuButton : ContainerButton
 
             case DrawModeEnum.Disabled:
                 StyleBoxOverride = _styleDisabled;
-                _buttonIcon.ModulateSelfOverride = Color.Black.WithAlpha(0.68f);
-                _buttonLabel.ModulateSelfOverride = Color.Black.WithAlpha(0.68f);
+                _buttonIcon.ModulateSelfOverride = ColorContentDisabled.WithAlpha(0.82f);
+                _buttonLabel.ModulateSelfOverride = ColorContentDisabled.WithAlpha(0.82f);
                 break;
         }
     }

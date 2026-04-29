@@ -20,18 +20,21 @@ namespace Content.Client.Stylesheets
 
         public void Initialize()
         {
-            _configManager.OnValueChanged(RMCCVars.RMCUIColorTheme, ApplyColorTheme, true);
+            _configManager.OnValueChanged(RMCCVars.RMCUIColorTheme, _ => RefreshSheets(), true);
+            _configManager.OnValueChanged(RMCCVars.RMCLobbyUiStyle, _ => RefreshSheets(), false);
         }
 
-        private void ApplyColorTheme(string theme)
+        private void RefreshSheets()
         {
+            var theme = _configManager.GetCVar(RMCCVars.RMCUIColorTheme) ?? "blue";
+            var oldStyle = StyleNano.IsOldLobbyStyle(_configManager);
             var oldNano = SheetNano;
             var oldSpace = SheetSpace;
             if (ReferenceEquals(SheetNanoNeutral, null))
                 SheetNanoNeutral = new StyleNano(_resourceCache, theme, useNeutralPalette: true).Stylesheet;
 
-            SheetNano = new StyleNano(_resourceCache, theme).Stylesheet;
-            SheetSpace = new StyleSpace(_resourceCache, theme).Stylesheet;
+            SheetNano = new StyleNano(_resourceCache, theme, useNeutralPalette: oldStyle).Stylesheet;
+            SheetSpace = new StyleSpace(_resourceCache, theme, useNeutralPalette: oldStyle).Stylesheet;
             _userInterfaceManager.Stylesheet = SheetNanoNeutral;
 
             foreach (var root in _userInterfaceManager.AllRoots)

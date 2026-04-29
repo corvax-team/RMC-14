@@ -25,7 +25,7 @@ ccm-achievement-general-war-legend-desc = Твоё имя знают и люди
 ccm-achievement-misc-logistician-title = Логист
 ccm-achievement-misc-logistician-desc = Патроны не появляются из воздуха. Требование: заказать 20 поставок через реквизицию.
 ccm-achievement-misc-friendly-fire-title = Огонь по своим
-ccm-achievement-misc-friendly-fire-desc = Иногда в пылу боя случаются ошибки. Требование: нанести 500 урона союзникам.
+ccm-achievement-misc-friendly-fire-desc = Любой урон по своим и убийство товарищей наказуемы. Требование: нанести 300 урона союзникам.
 ccm-achievement-misc-queen-slayer-title = Кошмар королевы
 ccm-achievement-misc-queen-slayer-desc = Королева знает твоё имя. И ненавидит его. Требование: поучаствовать в убийстве королевы ксеноморфов.
 

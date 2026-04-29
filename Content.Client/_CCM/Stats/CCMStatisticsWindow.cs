@@ -8,12 +8,14 @@ using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Resources;
 using Content.Client.Stylesheets;
 using Content.Shared._CCM.Stats;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.Localizations;
 using Content.Shared.Roles;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Configuration;
 using Robust.Shared.IoC;
 using Robust.Shared.Input;
 using Robust.Shared.Prototypes;
@@ -22,6 +24,7 @@ namespace Content.Client._CCM.Stats;
 
 public sealed partial class CCMStatisticsWindow : DefaultCMWindow
 {
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly JobRequirementsManager _jobRequirementsManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -166,10 +169,20 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
         {
             _statsSystem.PlayerStatsReceived -= OnPlayerStatsReceived;
             _jobRequirementsManager.Updated -= OnJobRequirementsUpdated;
+            _config.UnsubValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged);
+            _config.UnsubValueChanged(RMCCVars.RMCLobbyUiStyle, OnThemeChanged);
             OnKeyBindDown -= StartDrag;
             OnKeyBindUp -= StopDrag;
         };
 
+        _config.OnValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged, false);
+        _config.OnValueChanged(RMCCVars.RMCLobbyUiStyle, OnThemeChanged, false);
+        Rebuild();
+    }
+
+    private void OnThemeChanged(string _)
+    {
+        ApplyWindowTheme();
         Rebuild();
     }
 
@@ -731,7 +744,8 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
 
     private void ApplyWindowTheme()
     {
-        var bodyColor = StyleNano.CurrentTheme switch
+        var theme = StyleNano.GetConfiguredTheme(_config);
+        var bodyColor = theme switch
         {
             StyleNano.UiColorTheme.Blue => Color.FromHex("#102A56").WithAlpha(0.94f),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#1A2028").WithAlpha(0.94f),

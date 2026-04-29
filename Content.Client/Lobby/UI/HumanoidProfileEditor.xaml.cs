@@ -146,6 +146,7 @@ namespace Content.Client.Lobby.UI
         private bool _isDirty;
         private bool _syncingPreferenceUnavailable;
         private StyleNano.UiColorTheme _appliedTheme;
+        private bool _useOldLobbyStyle;
         private readonly HashSet<Button> _styledCustomizationButtons = new();
         private readonly Font _compactCustomizationButtonFont;
 
@@ -676,50 +677,63 @@ namespace Content.Client.Lobby.UI
         protected override void FrameUpdate(FrameEventArgs args)
         {
             base.FrameUpdate(args);
+            _useOldLobbyStyle = string.Equals(_cfgManager.GetCVar(RMCCVars.RMCLobbyUiStyle), "old", StringComparison.OrdinalIgnoreCase);
             ApplyThemeColors();
             EnsureCustomizationButtonsStyled();
         }
 
         private void ApplyThemeColors(bool force = false, bool refreshJobs = true)
         {
-            var theme = StyleNano.CurrentTheme;
+            var theme = _useOldLobbyStyle ? StyleNano.UiColorTheme.Gray : StyleNano.CurrentTheme;
             if (!force && theme == _appliedTheme)
                 return;
 
             _appliedTheme = theme;
 
-            var sectionBackground = theme switch
+            var sectionBackground = _useOldLobbyStyle
+                ? Color.FromHex("#25252A").WithAlpha(0.96f)
+                : theme switch
             {
                 StyleNano.UiColorTheme.Blue => Color.FromHex("#0E2950").WithAlpha(0.93f),
                 StyleNano.UiColorTheme.Gray => Color.FromHex("#1B222B").WithAlpha(0.92f),
                 _ => Color.FromHex("#0A2C18").WithAlpha(0.9f),
             };
-            var sectionBorder = theme switch
+            var sectionBorder = _useOldLobbyStyle
+                ? StyleNano.OldLobbyGold.WithAlpha(0.86f)
+                : theme switch
             {
                 StyleNano.UiColorTheme.Blue => Color.FromHex("#165197").WithAlpha(0.95f),
                 StyleNano.UiColorTheme.Gray => Color.FromHex("#667487").WithAlpha(0.95f),
                 _ => Color.FromHex("#2B7E45").WithAlpha(0.95f),
             };
             var dividerColor = sectionBorder;
-            var tabsPanelBackground = theme switch
+            var tabsPanelBackground = _useOldLobbyStyle
+                ? Color.FromHex("#1C1E23").WithAlpha(0.97f)
+                : theme switch
             {
                 StyleNano.UiColorTheme.Blue => Color.FromHex("#0D2242").WithAlpha(0.95f),
                 StyleNano.UiColorTheme.Gray => Color.FromHex("#171E27").WithAlpha(0.95f),
                 _ => Color.FromHex("#142B1C").WithAlpha(0.94f),
             };
-            var tabsPanelBorder = theme switch
+            var tabsPanelBorder = _useOldLobbyStyle
+                ? StyleNano.OldLobbyGold.WithAlpha(0.82f)
+                : theme switch
             {
                 StyleNano.UiColorTheme.Blue => Color.FromHex("#1B5CA7").WithAlpha(0.92f),
                 StyleNano.UiColorTheme.Gray => Color.FromHex("#6B788A").WithAlpha(0.92f),
                 _ => Color.FromHex("#2F8A51").WithAlpha(0.9f),
             };
-            var backgroundInfoPanelColor = theme switch
+            var backgroundInfoPanelColor = _useOldLobbyStyle
+                ? Color.FromHex("#30343B").WithAlpha(0.98f)
+                : theme switch
             {
                 StyleNano.UiColorTheme.Blue => Color.FromHex("#17365F").WithAlpha(0.98f),
                 StyleNano.UiColorTheme.Gray => Color.FromHex("#29333F").WithAlpha(0.97f),
                 _ => Color.FromHex("#17442A").WithAlpha(0.97f),
             };
-            var backgroundInfoBorderColor = theme switch
+            var backgroundInfoBorderColor = _useOldLobbyStyle
+                ? StyleNano.OldLobbyGold.WithAlpha(0.84f)
+                : theme switch
             {
                 StyleNano.UiColorTheme.Blue => Color.FromHex("#2F72C7").WithAlpha(0.98f),
                 StyleNano.UiColorTheme.Gray => Color.FromHex("#8B97A6").WithAlpha(0.97f),
@@ -760,6 +774,7 @@ namespace Content.Client.Lobby.UI
             };
 
             ApplyCompactCustomizationDropdownStyle();
+            ApplyOldLobbyDropdownPalette();
             EnsureCustomizationButtonsStyled();
 
             TabContainer.PanelStyleBoxOverride = new StyleBoxFlat
@@ -771,6 +786,17 @@ namespace Content.Client.Lobby.UI
 
             if (refreshJobs)
                 RefreshJobs();
+        }
+
+        private void ApplyOldLobbyDropdownPalette()
+        {
+            var neutral = _useOldLobbyStyle;
+            SpeciesButton.UseNeutralPalette = neutral;
+            SexButton.UseNeutralPalette = neutral;
+            PronounsButton.UseNeutralPalette = neutral;
+            ReligionButton.UseNeutralPalette = neutral;
+            SquadPreferenceButton.UseNeutralPalette = neutral;
+            BarkVoiceButton.UseNeutralPalette = neutral;
         }
         // CCM rework lobby - end
 
@@ -1188,31 +1214,31 @@ namespace Content.Client.Lobby.UI
             var xenoNextLightStripe = true;
 
             // CCM rework lobby - start
-            var rowLightColor = StyleNano.CurrentTheme switch
+            var rowLightColor = _useOldLobbyStyle ? Color.FromHex("#30343B").WithAlpha(0.78f) : StyleNano.CurrentTheme switch
             {
                 StyleNano.UiColorTheme.Blue => Color.FromHex("#14355F").WithAlpha(0.74f),
                 StyleNano.UiColorTheme.Gray => Color.FromHex("#2D3641").WithAlpha(0.74f),
                 _ => Color.FromHex("#134F27").WithAlpha(0.74f),
             };
-            var rowDarkColor = StyleNano.CurrentTheme switch
+            var rowDarkColor = _useOldLobbyStyle ? Color.FromHex("#272B31").WithAlpha(0.78f) : StyleNano.CurrentTheme switch
             {
                 StyleNano.UiColorTheme.Blue => Color.FromHex("#0D2340").WithAlpha(0.74f),
                 StyleNano.UiColorTheme.Gray => Color.FromHex("#20272F").WithAlpha(0.74f),
                 _ => Color.FromHex("#0D351A").WithAlpha(0.74f),
             };
-            var headerLightColor = StyleNano.CurrentTheme switch
+            var headerLightColor = _useOldLobbyStyle ? Color.FromHex("#383D46").WithAlpha(0.82f) : StyleNano.CurrentTheme switch
             {
                 StyleNano.UiColorTheme.Blue => Color.FromHex("#184472").WithAlpha(0.80f),
                 StyleNano.UiColorTheme.Gray => Color.FromHex("#37424F").WithAlpha(0.80f),
                 _ => Color.FromHex("#1A6432").WithAlpha(0.80f),
             };
-            var headerDarkColor = StyleNano.CurrentTheme switch
+            var headerDarkColor = _useOldLobbyStyle ? Color.FromHex("#2E333B").WithAlpha(0.82f) : StyleNano.CurrentTheme switch
             {
                 StyleNano.UiColorTheme.Blue => Color.FromHex("#113257").WithAlpha(0.80f),
                 StyleNano.UiColorTheme.Gray => Color.FromHex("#2A333F").WithAlpha(0.80f),
                 _ => Color.FromHex("#124926").WithAlpha(0.80f),
             };
-            var stripeBorderColor = StyleNano.NanoGold.WithAlpha(0.75f);
+            var stripeBorderColor = (_useOldLobbyStyle ? StyleNano.OldLobbyGold : StyleNano.NanoGold).WithAlpha(0.75f);
 
             bool ConsumeStripeLight(bool isXenoDepartment)
             {
@@ -2431,12 +2457,16 @@ namespace Content.Client.Lobby.UI
         private void ApplyCustomizationButtonStyle(Button button, bool hovered = false, bool pressed = false)
         {
             var selected = button.Pressed;
-            var selectedText = StyleNano.CurrentTheme switch
+            var selectedText = _useOldLobbyStyle ? Color.FromHex("#E7E0D0") : StyleNano.CurrentTheme switch
             {
                 StyleNano.UiColorTheme.Blue => Color.FromHex("#86BBF2"),
                 StyleNano.UiColorTheme.Gray => Color.FromHex("#D5DDE7"),
                 _ => Color.FromHex("#9DFFB2"),
             };
+            var normalBackground = _useOldLobbyStyle ? Color.FromHex("#434850") : StyleNano.ButtonColorContext;
+            var hoverBackground = _useOldLobbyStyle ? Color.FromHex("#585E68") : StyleNano.ButtonColorContextHover;
+            var pressedBackground = _useOldLobbyStyle ? Color.FromHex("#5B664D") : StyleNano.ButtonColorContextPressed;
+            var borderColor = _useOldLobbyStyle ? StyleNano.OldLobbyGold.WithAlpha(0.86f) : StyleNano.UiButtonBorder;
 
             if (button.MinSize.Y <= 0f || button.MinSize.Y > 30f)
                 button.MinSize = new Vector2(button.MinSize.X, 30f);
@@ -2444,17 +2474,17 @@ namespace Content.Client.Lobby.UI
             button.StyleBoxOverride = new StyleBoxFlat
             {
                 BackgroundColor = selected
-                    ? StyleNano.ButtonColorContextPressed
+                    ? pressedBackground
                     : pressed
-                        ? StyleNano.ButtonColorContextPressed
+                        ? pressedBackground
                         : hovered
-                            ? StyleNano.ButtonColorContextHover
-                            : StyleNano.ButtonColorContext,
+                            ? hoverBackground
+                            : normalBackground,
                 BorderColor = selected || pressed
-                    ? StyleNano.UiButtonBorder
+                    ? borderColor
                     : hovered
-                        ? StyleNano.UiButtonBorder
-                        : StyleNano.UiButtonBorder,
+                        ? borderColor
+                        : borderColor,
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 5,
                 ContentMarginTopOverride = 3,

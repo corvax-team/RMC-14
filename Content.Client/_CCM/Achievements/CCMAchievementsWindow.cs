@@ -163,6 +163,7 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
             OnKeyBindDown -= StartDrag;
             OnKeyBindUp -= StopDrag;
             _config.UnsubValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged);
+            _config.UnsubValueChanged(RMCCVars.RMCLobbyUiStyle, OnThemeChanged);
         };
 
         ApplyWindowTheme();
@@ -170,6 +171,7 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
         _summaryLabel.FontColorOverride = GetWindowAccent();
         Rebuild();
         _config.OnValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged, false);
+        _config.OnValueChanged(RMCCVars.RMCLobbyUiStyle, OnThemeChanged, false);
     }
 
     private void OnThemeChanged(string _)
@@ -494,15 +496,7 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
 
     private StyleNano.UiColorTheme GetTheme()
     {
-        var theme = _config.GetCVar(RMCCVars.RMCUIColorTheme);
-
-        if (theme.Equals("blue", StringComparison.OrdinalIgnoreCase))
-            return StyleNano.UiColorTheme.Blue;
-
-        if (theme.Equals("gray", StringComparison.OrdinalIgnoreCase))
-            return StyleNano.UiColorTheme.Gray;
-
-        return StyleNano.UiColorTheme.Green;
+        return StyleNano.GetConfiguredTheme(_config);
     }
 
     private Color GetWindowAccent()

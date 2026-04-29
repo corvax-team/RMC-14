@@ -345,6 +345,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
         _savedSnapshot = BuildSnapshot();
         UpdateSaveState();
         _config.OnValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged, false);
+        _config.OnValueChanged(RMCCVars.RMCLobbyUiStyle, OnThemeChanged, false);
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
@@ -359,6 +360,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
 
         if (disposing)
             _config.UnsubValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged);
+            _config.UnsubValueChanged(RMCCVars.RMCLobbyUiStyle, OnThemeChanged);
     }
 
     private void OnThemeChanged(string _)
@@ -1948,22 +1950,25 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
 
     private void ApplyWindowTheme()
     {
-        var theme = _config.GetCVar(RMCCVars.RMCUIColorTheme);
-        var headerColor = theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
-            ? Color.FromHex("#06142F").WithAlpha(0.995f)
-            : theme.Equals("gray", StringComparison.OrdinalIgnoreCase)
-                ? Color.FromHex("#171D24").WithAlpha(0.995f)
-                : Color.FromHex("#041105").WithAlpha(0.995f);
-        var bodyColor = theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
-            ? Color.FromHex("#081B3F").WithAlpha(0.995f)
-            : theme.Equals("gray", StringComparison.OrdinalIgnoreCase)
-                ? Color.FromHex("#1C232C").WithAlpha(0.995f)
-                : Color.FromHex("#061507").WithAlpha(0.995f);
-        var borderColor = theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
-            ? Color.FromHex("#2F78FF").WithAlpha(0.88f)
-            : theme.Equals("gray", StringComparison.OrdinalIgnoreCase)
-                ? Color.FromHex("#7B8898").WithAlpha(0.86f)
-                : StyleNano.LobbyMenuButtonBase.WithAlpha(0.82f);
+        var theme = StyleNano.GetConfiguredTheme(_config);
+        var headerColor = theme switch
+        {
+            StyleNano.UiColorTheme.Blue => Color.FromHex("#06142F").WithAlpha(0.995f),
+            StyleNano.UiColorTheme.Gray => Color.FromHex("#171D24").WithAlpha(0.995f),
+            _ => Color.FromHex("#041105").WithAlpha(0.995f),
+        };
+        var bodyColor = theme switch
+        {
+            StyleNano.UiColorTheme.Blue => Color.FromHex("#081B3F").WithAlpha(0.995f),
+            StyleNano.UiColorTheme.Gray => Color.FromHex("#1C232C").WithAlpha(0.995f),
+            _ => Color.FromHex("#061507").WithAlpha(0.995f),
+        };
+        var borderColor = theme switch
+        {
+            StyleNano.UiColorTheme.Blue => Color.FromHex("#2F78FF").WithAlpha(0.88f),
+            StyleNano.UiColorTheme.Gray => Color.FromHex("#7B8898").WithAlpha(0.86f),
+            _ => StyleNano.LobbyMenuButtonBase.WithAlpha(0.82f),
+        };
 
         HeaderPanel.PanelOverride = new StyleBoxFlat
         {

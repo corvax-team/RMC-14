@@ -13,10 +13,13 @@
 
             </BoxContainer>
             <controls:VSpacer/>
-            <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
+            <BoxContainer Name="ActionButtons" Orientation="Vertical" HorizontalAlignment="Center" SeparationOverride="4">
                 <Button Name="CharacterSetup" Text="{Loc 'lobby-character-preview-panel-character-setup-button'}"
                         HorizontalAlignment="Center"
-                        Margin="0 5 0 0" StyleClasses="LobbyMenuButton" MinHeight="34" />
+                        Margin="0 5 0 0" MinHeight="34" />
+                <Button Name="Customization" Access="Public" Text="{Loc 'ui-lobby-taskbar-customization'}"
+                        HorizontalAlignment="Center"
+                        Margin="0 1 0 0" MinHeight="34" Visible="False" />
                 <Button Name="PatronPerks" Access="Public" Text="{Loc 'rmc-ui-patron-perks'}"
                         Margin="0 5 0 0" Visible="False" />
             </BoxContainer>

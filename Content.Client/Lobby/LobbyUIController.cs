@@ -75,6 +75,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     private HumanoidProfileEditor? _profileEditor;
     private CharacterSetupGuiSavePanel? _savePanel;
     private EntityUid? _lobbyHeaderPreviewDummy;
+    private EntityUid? _oldLobbyPreviewDummy;
     private readonly Dictionary<int, Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo>> _jobPriorityChancesBySlot = new();
     private CCMCustomizationSystem? _ccmCustomizationSystem;
     private bool _ccmCustomizationSubscribed;
@@ -106,6 +107,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
         _linkAccount.Updated += RefreshProfileEditor;
         _configurationManager.OnValueChanged(RMCCVars.RMCLobbyXenoName, _ => UpdateLobbyHeader());
+        _configurationManager.OnValueChanged(RMCCVars.RMCLobbyUiStyle, _ => OnLobbyUiStyleChanged());
         // CCM rework lobby - start
         _contentLoc.CultureChanged += OnCultureChanged;
         // CCM rework lobby - end
@@ -220,6 +222,27 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         UpdateLobbyHeader();
     }
 
+    private void OnLobbyUiStyleChanged()
+    {
+        if (_stateManager.CurrentState is not LobbyState lobby || lobby.Lobby == null || _characterSetup == null)
+            return;
+
+        var targetHost = lobby.Lobby.ActiveCharacterSetupState;
+        if (_characterSetup.Parent != targetHost)
+        {
+            if (_characterSetupHost != null)
+                _characterSetupHost.OnResized -= UpdateCharacterSetupLayout;
+
+            _characterSetup.Orphan();
+            targetHost.AddChild(_characterSetup);
+            targetHost.OnResized += UpdateCharacterSetupLayout;
+            _characterSetupHost = targetHost;
+            _characterSetupLayoutHooked = true;
+        }
+
+        UpdateCharacterSetupLayout();
+    }
+
     // CCM rework lobby - start
     private void OnCultureChanged(string _)
     {
@@ -256,7 +279,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         if (prefs != null && prefs.Characters.Count > 0)
         {
             selectedIndex = prefs.SelectedCharacterIndex;
-            if (!prefs.Characters.TryGetValue(selectedIndex.Value, out var profile))
+            if (selectedIndex == null || !prefs.Characters.TryGetValue(selectedIndex.Value, out var profile))
             {
                 var fallbackSlot = prefs.Characters.Keys.First();
                 _preferencesManager.SelectCharacter(fallbackSlot);
@@ -395,7 +418,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         _characterSetup.Visible = false;
         LayoutContainer.SetAnchorPreset(_characterSetup, LayoutContainer.LayoutPreset.Center);
 
-        _characterSetup.CloseButtonControl.OnPressed += _ =>
+        _characterSetup.CloseRequested += () =>
         {
             // Open the save panel if we have unsaved changes.
             if (_profileEditor.Profile != null && _profileEditor.IsDirty)
@@ -437,11 +460,11 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         {
             if (lobby.Lobby != null)
             {
-                lobby.Lobby.CharacterSetupState.AddChild(_characterSetup);
+                lobby.Lobby.ActiveCharacterSetupState.AddChild(_characterSetup);
                 if (!_characterSetupLayoutHooked)
                 {
-                    lobby.Lobby.CharacterSetupState.OnResized += UpdateCharacterSetupLayout;
-                    _characterSetupHost = lobby.Lobby.CharacterSetupState;
+                    lobby.Lobby.ActiveCharacterSetupState.OnResized += UpdateCharacterSetupLayout;
+                    _characterSetupHost = lobby.Lobby.ActiveCharacterSetupState;
                     _characterSetupLayoutHooked = true;
                 }
             }
@@ -455,6 +478,11 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     private const float CharacterSetupDefaultMaxWidth = 1960f;
     private const float CharacterSetupDefaultMinOpenHeight = 840f;
     private const float CharacterSetupSmallScreenDefaultHeightFactor = 0.8f;
+    private const float OldCharacterSetupMinWidth = 1600f;
+    private const float OldCharacterSetupMinHeight = 860f;
+    private const float OldCharacterSetupDefaultMinOpenHeight = 980f;
+    private const float OldCharacterSetupSmallScreenDefaultHeightFactor = 0.9f;
+    private const float OldCharacterSetupDefaultMaxWidth = 2200f;
     private static readonly Vector2 CharacterSetupViewportMargin = new(8f, 8f);
 
     private void UpdateCharacterSetupLayout()
@@ -465,29 +493,38 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         var parent = _characterSetup.Parent;
         var baseSize = Vector2.Zero;
         if (_stateManager.CurrentState is LobbyState lobby && lobby.Lobby != null)
-            baseSize = lobby.Lobby.CharacterSetupState.Size;
+            baseSize = lobby.Lobby.ActiveCharacterSetupState.Size;
         if (baseSize.X <= 1f || baseSize.Y <= 1f)
             baseSize = parent?.Size ?? Vector2.Zero;
         if (baseSize.X <= 1f || baseSize.Y <= 1f)
             return;
 
+        var oldLobbyStyle = string.Equals(
+            _configurationManager.GetCVar(RMCCVars.RMCLobbyUiStyle),
+            "old",
+            StringComparison.OrdinalIgnoreCase);
         var availableSize = new Vector2(
             MathF.Max(1f, baseSize.X - CharacterSetupViewportMargin.X * 2f),
             MathF.Max(1f, baseSize.Y - CharacterSetupViewportMargin.Y * 2f));
-        var minWidth = MathF.Min(CharacterSetupMinWidth, availableSize.X);
-        var minHeight = MathF.Min(CharacterSetupMinHeight, availableSize.Y);
+        var baseMinWidth = oldLobbyStyle ? OldCharacterSetupMinWidth : CharacterSetupMinWidth;
+        var baseMinHeight = oldLobbyStyle ? OldCharacterSetupMinHeight : CharacterSetupMinHeight;
+        var defaultMinOpenHeight = oldLobbyStyle ? OldCharacterSetupDefaultMinOpenHeight : CharacterSetupDefaultMinOpenHeight;
+        var smallScreenHeightFactor = oldLobbyStyle ? OldCharacterSetupSmallScreenDefaultHeightFactor : CharacterSetupSmallScreenDefaultHeightFactor;
+        var minWidth = MathF.Min(baseMinWidth, availableSize.X);
+        var minHeight = MathF.Min(baseMinHeight, availableSize.Y);
         var preferredSize = _characterSetup.MeasurePreferredSize(availableSize);
+        var defaultMaxWidth = oldLobbyStyle ? OldCharacterSetupDefaultMaxWidth : CharacterSetupDefaultMaxWidth;
         preferredSize = new Vector2(
-            Math.Clamp(preferredSize.X, minWidth, MathF.Min(availableSize.X, CharacterSetupDefaultMaxWidth)),
+            Math.Clamp(preferredSize.X, minWidth, MathF.Min(availableSize.X, defaultMaxWidth)),
             Math.Clamp(preferredSize.Y, minHeight, availableSize.Y));
         preferredSize.Y = Math.Clamp(
-            MathF.Max(preferredSize.Y, MathF.Min(availableSize.Y, CharacterSetupDefaultMinOpenHeight)),
+            MathF.Max(preferredSize.Y, MathF.Min(availableSize.Y, defaultMinOpenHeight)),
             minHeight,
             availableSize.Y);
         if (baseSize.Y <= 900f)
         {
             preferredSize.Y = Math.Clamp(
-                MathF.Max(preferredSize.Y, availableSize.Y * CharacterSetupSmallScreenDefaultHeightFactor),
+                MathF.Max(preferredSize.Y, availableSize.Y * smallScreenHeightFactor),
                 minHeight,
                 availableSize.Y);
         }
@@ -548,8 +585,28 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         if (_lobbyHeaderPreviewDummy != null && EntityManager.EntityExists(_lobbyHeaderPreviewDummy.Value))
             EntityManager.DeleteEntity(_lobbyHeaderPreviewDummy.Value);
 
+        if (_oldLobbyPreviewDummy != null && EntityManager.EntityExists(_oldLobbyPreviewDummy.Value))
+            EntityManager.DeleteEntity(_oldLobbyPreviewDummy.Value);
+
         _lobbyHeaderPreviewDummy = LoadProfileEntity(profile, null, true);
+        _oldLobbyPreviewDummy = LoadProfileEntity(profile, null, true);
         lobby.Lobby?.CenterCharacterSprite.SetEntity(_lobbyHeaderPreviewDummy);
+
+        if (lobby.Lobby == null)
+            return;
+
+        var preview = lobby.Lobby.OldCharacterPreview;
+        if (profile == null || _oldLobbyPreviewDummy == null)
+        {
+            preview.SetLoaded(false);
+            preview.SetSummaryText(string.Empty);
+            preview.ClearPreview();
+            return;
+        }
+
+        preview.SetLoaded(true);
+        preview.SetSummaryText(BuildOldLobbyPreviewSummary(profile));
+        preview.SetSprite(_oldLobbyPreviewDummy.Value);
     }
 
     private void ClearLobbyHeaderPreview()
@@ -557,10 +614,30 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         if (_lobbyHeaderPreviewDummy != null && EntityManager.EntityExists(_lobbyHeaderPreviewDummy.Value))
             EntityManager.DeleteEntity(_lobbyHeaderPreviewDummy.Value);
 
+        if (_oldLobbyPreviewDummy != null && EntityManager.EntityExists(_oldLobbyPreviewDummy.Value))
+            EntityManager.DeleteEntity(_oldLobbyPreviewDummy.Value);
+
         _lobbyHeaderPreviewDummy = null;
+        _oldLobbyPreviewDummy = null;
 
         if (_stateManager.CurrentState is LobbyState lobby && lobby.Lobby != null)
+        {
             lobby.Lobby.CenterCharacterSprite.SetEntity(null);
+            lobby.Lobby.OldCharacterPreview.SetLoaded(false);
+            lobby.Lobby.OldCharacterPreview.SetSummaryText(string.Empty);
+            lobby.Lobby.OldCharacterPreview.ClearPreview();
+        }
+    }
+
+    private string BuildOldLobbyPreviewSummary(HumanoidCharacterProfile profile)
+    {
+        var name = string.IsNullOrWhiteSpace(profile.Name)
+            ? Loc.GetString("identity-unknown-name")
+            : profile.Name;
+
+        return Loc.GetString("ui-lobby-character-preview-summary",
+            ("name", name),
+            ("age", profile.Age));
     }
 
     private void UpdateLobbyNameFont(Label label, string? name)

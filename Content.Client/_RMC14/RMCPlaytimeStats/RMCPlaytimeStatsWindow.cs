@@ -80,6 +80,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
         _jobRequirementsManager.Updated += OnRequirementsUpdated;
         _jobRequirementsManager.RequestSponsorshipStatus();
         _config.OnValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged, false);
+        _config.OnValueChanged(RMCCVars.RMCLobbyUiStyle, OnThemeChanged, false);
         OnClose += () =>
         {
             _jobRequirementsManager.Updated -= OnRequirementsUpdated;
@@ -568,6 +569,7 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
     {
         if (disposing)
             _config.UnsubValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged);
+            _config.UnsubValueChanged(RMCCVars.RMCLobbyUiStyle, OnThemeChanged);
 
         base.Dispose(disposing);
     }

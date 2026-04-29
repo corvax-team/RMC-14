@@ -601,23 +601,33 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
 
     private void ApplyTheme()
     {
-        var accent = StyleNano.LobbyMenuButtonBase;
+        var oldStyle = string.Equals(_config.GetCVar(RMCCVars.RMCLobbyUiStyle), "old", StringComparison.OrdinalIgnoreCase);
+        var effectiveTheme = StyleNano.GetConfiguredTheme(_config);
+        var accent = oldStyle
+            ? StyleNano.OldLobbyGold
+            : StyleNano.LobbyMenuButtonBase;
         var bodyText = "#D7E1EB";
         var secondaryText = "#B4C2D2";
         var welcomeBodyText = "#E2EAF3";
-        var body = (StyleNano.CurrentTheme switch
+        var body = oldStyle
+            ? StyleNano.OldLobbyPanel.WithAlpha(0.97f)
+            : (effectiveTheme switch
         {
             StyleNano.UiColorTheme.Blue => Color.FromHex("#081A36"),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#171D24"),
             _ => Color.FromHex("#06170B"),
         }).WithAlpha(0.97f);
-        var panel = (StyleNano.CurrentTheme switch
+        var panel = oldStyle
+            ? StyleNano.OldLobbyPanelSoft.WithAlpha(0.97f)
+            : (effectiveTheme switch
         {
             StyleNano.UiColorTheme.Blue => Color.FromHex("#0B2144"),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#1D252E"),
             _ => Color.FromHex("#0A1B0C"),
         }).WithAlpha(0.97f);
-        var subpanel = (StyleNano.CurrentTheme switch
+        var subpanel = oldStyle
+            ? Color.FromHex("#30343B").WithAlpha(0.97f)
+            : (effectiveTheme switch
         {
             StyleNano.UiColorTheme.Blue => Color.FromHex("#10284F"),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#232D38"),
@@ -649,6 +659,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         _titleLabel.FontColorOverride = accent;
         _languageHeader.FontColorOverride = accent;
         _themeHeader.FontColorOverride = accent;
+        _lobbyStyleHeader.FontColorOverride = accent;
 
         var themeClass = _config.GetCVar(RMCCVars.RMCLobbyCrtEnabled)
             ? StyleNano.StyleClassLobbyThemeCrt

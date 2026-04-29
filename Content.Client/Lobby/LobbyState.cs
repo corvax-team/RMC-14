@@ -13,6 +13,7 @@ using Robust.Client.State;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
+using Robust.Shared.IoC;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System;
@@ -128,13 +129,14 @@ namespace Content.Client.Lobby
 
             chatController.SetMainChat(true);
 
-            _voteManager.SetPopupContainer(Lobby.VoteContainer);
+            _voteManager.SetPopupContainer(Lobby.ActiveVoteContainer);
             LayoutContainer.SetAnchorPreset(Lobby, LayoutContainer.LayoutPreset.Wide);
             UpdateRightPanelLayout();
 
             UpdateLobbyUi();
             _cfg.OnValueChanged(RMCCVars.RMCLobbyBackgroundPreset, OnLobbyBackgroundPresetChanged, true);
             _cfg.OnValueChanged(RMCCVars.RMCUIColorTheme, OnUiColorThemeChanged, false);
+            _cfg.OnValueChanged(RMCCVars.RMCLobbyUiStyle, OnLobbyUiStyleChanged, false);
 
             _gameTicker.InfoBlobUpdated += UpdateLobbyUi;
             _gameTicker.LobbyStatusUpdated += LobbyStatusUpdated;
@@ -152,6 +154,7 @@ namespace Content.Client.Lobby
             _audioSystem.LobbySoundtrackChanged -= UpdateLobbySoundtrackInfo;
             _cfg.UnsubValueChanged(RMCCVars.RMCLobbyBackgroundPreset, OnLobbyBackgroundPresetChanged);
             _cfg.UnsubValueChanged(RMCCVars.RMCUIColorTheme, OnUiColorThemeChanged);
+            _cfg.UnsubValueChanged(RMCCVars.RMCLobbyUiStyle, OnLobbyUiStyleChanged);
 
             _voteManager.ClearPopupContainer();
 
@@ -172,11 +175,14 @@ namespace Content.Client.Lobby
             if (_gameTicker.IsGameStarted)
             {
                 var roundTime = _gameTiming.CurTime.Subtract(_gameTicker.RoundStartTimeSpan);
-                Lobby!.StationTime.Text = Loc.GetString("lobby-state-player-status-round-time", ("hours", roundTime.Hours), ("minutes", roundTime.Minutes));
+                var roundText = Loc.GetString("lobby-state-player-status-round-time", ("hours", roundTime.Hours), ("minutes", roundTime.Minutes));
+                Lobby!.ActiveStationTime.Text = roundText;
+                Lobby.OldStartTimeLabel.Text = string.Empty;
                 return;
             }
 
-            Lobby!.StationTime.Text = Loc.GetString("lobby-state-player-status-round-not-started");
+            var notStarted = Loc.GetString("lobby-state-player-status-round-not-started");
+            Lobby!.ActiveStationTime.Text = notStarted;
         }
 
         private void UpdateRightPanelLayout()
@@ -188,7 +194,7 @@ namespace Content.Client.Lobby
             if (hostWidth <= 1f)
                 return;
 
-            var uiScale = Lobby.RightSide.UIScale;
+            var uiScale = Lobby.ActiveRightSide.UIScale;
             if (uiScale <= 0f)
                 uiScale = 1f;
 
@@ -203,7 +209,7 @@ namespace Content.Client.Lobby
             if (MathF.Abs(_lastRightPanelWidth - desiredWidth) < 0.5f)
                 return;
 
-            Lobby.RightSide.SetWidth = desiredWidth;
+            Lobby.ActiveRightSide.SetWidth = desiredWidth;
             _lastRightPanelWidth = desiredWidth;
         }
 
@@ -214,8 +220,10 @@ namespace Content.Client.Lobby
 
             if (_gameTicker.IsGameStarted || _gameTicker.StartTime <= TimeSpan.Zero)
             {
-                Lobby.RoundStartTimer.Visible = false;
-                Lobby.RoundStartTimer.Text = string.Empty;
+                Lobby.ActiveRoundStartTimer.Visible = false;
+                Lobby.ActiveRoundStartTimer.Text = string.Empty;
+                Lobby.OldStartTimeLabel.Text = string.Empty;
+                Lobby.SetOldRoundCountdownVisible(false);
                 return;
             }
 
@@ -224,10 +232,12 @@ namespace Content.Client.Lobby
                 timeLeft = TimeSpan.Zero;
 
             var timeText = TextScreenSystem.TimeToString(timeLeft, getMilliseconds: false);
-            Lobby.RoundStartTimer.Text = _gameTicker.Paused
+            Lobby.ActiveRoundStartTimer.Text = _gameTicker.Paused
                 ? Loc.GetString("ui-lobby-round-start-paused")
                 : Loc.GetString("ui-lobby-round-start-timer", ("time", timeText));
-            Lobby.RoundStartTimer.Visible = true;
+            Lobby.ActiveRoundStartTimer.Visible = true;
+            Lobby.OldStartTimeLabel.Text = Lobby.ActiveRoundStartTimer.Text;
+            Lobby.SetOldRoundCountdownVisible(true);
         }
 
         private void LobbyStatusUpdated()
@@ -246,13 +256,29 @@ namespace Content.Client.Lobby
             UpdateLobbyBackground(true);
         }
 
+        private void OnLobbyUiStyleChanged(string _style)
+        {
+            if (Lobby == null)
+                return;
+
+            NormalizeLobbyBackgroundPresetForStyle();
+            _voteManager.SetPopupContainer(Lobby.ActiveVoteContainer);
+            _lastRightPanelWidth = -1f;
+            UpdateRightPanelLayout();
+            UpdateLobbyBackground(true);
+            UpdateLobbyUi();
+        }
+
         private void UpdateLobbyUi()
         {
             if (_gameTicker.ServerInfoBlob != null)
             {
-                Lobby!.ServerInfo.SetInfoBlob(_gameTicker.ServerInfoBlob);
+                Lobby!.ActiveServerInfo.SetInfoBlob(_gameTicker.ServerInfoBlob);
             }
 
+            Lobby!.OldServerNameLabel.Text = Loc.GetString(
+                "ui-lobby-title",
+                ("serverName", _cfg.GetCVar(Robust.Shared.CVars.GameHostName)));
             Lobby!.SetReadyState(_gameTicker.AreWeReady);
             Lobby!.SetRoundState(_gameTicker.IsGameStarted);
         }
@@ -264,7 +290,7 @@ namespace Content.Client.Lobby
 
             if (ev.SoundtrackFilename == null)
             {
-                Lobby.LobbyMusicText.Text = Loc.GetString("ui-lobby-music-none");
+                Lobby.ActiveLobbyMusicText.Text = Loc.GetString("ui-lobby-music-none");
                 return;
             }
 
@@ -272,11 +298,11 @@ namespace Content.Client.Lobby
             {
                 var title = GetTrackTitleFromFilename(ev.SoundtrackFilename);
                 var author = Loc.GetString("ui-lobby-music-unknown");
-                Lobby.LobbyMusicText.Text = FormatLobbyMusicLine(title, author);
+                Lobby.ActiveLobbyMusicText.Text = FormatLobbyMusicLine(title, author);
                 return;
             }
 
-            Lobby.LobbyMusicText.Text = FormatLobbyMusicLine(track.Title, track.Author);
+            Lobby.ActiveLobbyMusicText.Text = FormatLobbyMusicLine(track.Title, track.Author);
         }
 
         private static bool TryGetLobbyTrackInfo(string filename, out LobbyTrackInfo info)
@@ -315,6 +341,7 @@ namespace Content.Client.Lobby
             if (Lobby == null)
                 return;
 
+            NormalizeLobbyBackgroundPresetForStyle();
             var preset = _cfg.GetCVar(RMCCVars.RMCLobbyBackgroundPreset);
             var normalizedPreset = preset.ToLowerInvariant();
             if (!string.Equals(_activeLobbyBackgroundPreset, normalizedPreset, StringComparison.Ordinal))
@@ -376,12 +403,12 @@ namespace Content.Client.Lobby
 
             if (string.IsNullOrWhiteSpace(path))
             {
-                Lobby.Background.Texture = null;
+                Lobby.ActiveBackground.Texture = null;
                 _currentLobbyBackgroundPath = null;
                 return;
             }
 
-            Lobby.Background.Texture = _resourceCache.GetResource<TextureResource>(path);
+            Lobby.ActiveBackground.Texture = _resourceCache.GetResource<TextureResource>(path);
             _currentLobbyBackgroundPath = path;
         }
 
@@ -405,7 +432,13 @@ namespace Content.Client.Lobby
 
         private static string[] GetConsoleBackgroundsForTheme()
         {
-            return StyleNano.CurrentTheme switch
+            return IoCManager.Resolve<IConfigurationManager>().GetCVar(RMCCVars.RMCLobbyUiStyle).Equals("old", StringComparison.OrdinalIgnoreCase)
+                ? new[]
+                {
+                    "/Textures/_CCM14/Lobby/lobbytgmc_green.png",
+                    "/Textures/_CCM14/Lobby/lobbyweyland_green.png",
+                }
+                : StyleNano.CurrentTheme switch
             {
                 StyleNano.UiColorTheme.Blue or StyleNano.UiColorTheme.Gray => new[]
                 {
@@ -418,6 +451,15 @@ namespace Content.Client.Lobby
                     "/Textures/_CCM14/Lobby/lobbyweyland_green.png",
                 },
             };
+        }
+
+        private void NormalizeLobbyBackgroundPresetForStyle()
+        {
+            if (!_cfg.GetCVar(RMCCVars.RMCLobbyUiStyle).Equals("old", StringComparison.OrdinalIgnoreCase))
+                return;
+
+            if (_cfg.GetCVar(RMCCVars.RMCLobbyBackgroundPreset).Equals("console", StringComparison.OrdinalIgnoreCase))
+                _cfg.SetCVar(RMCCVars.RMCLobbyBackgroundPreset, "rmca");
         }
 
     }

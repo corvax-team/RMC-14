@@ -246,11 +246,13 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
             OnKeyBindDown -= StartDrag;
             OnKeyBindUp -= StopDrag;
             _config.UnsubValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged);
+            _config.UnsubValueChanged(RMCCVars.RMCLobbyUiStyle, OnThemeChanged);
         };
 
         AttachInteractionState();
         ApplyWindowTheme();
         _config.OnValueChanged(RMCCVars.RMCUIColorTheme, OnThemeChanged, false);
+        _config.OnValueChanged(RMCCVars.RMCLobbyUiStyle, OnThemeChanged, false);
     }
 
     private void OnThemeChanged(string _)

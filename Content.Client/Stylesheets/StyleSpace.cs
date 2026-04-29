@@ -25,16 +25,21 @@ namespace Content.Client.Stylesheets
 
         public override Stylesheet Stylesheet { get; }
 
-        public StyleSpace(IResourceCache resCache, string theme = "blue") : base(resCache)
+        public StyleSpace(IResourceCache resCache, string theme = "blue", bool useNeutralPalette = false) : base(resCache)
         {
-            var colorTheme = theme.Equals("gray", StringComparison.OrdinalIgnoreCase)
+            var colorTheme = useNeutralPalette
                 ? StyleNano.UiColorTheme.Gray
-                : theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
-                    ? StyleNano.UiColorTheme.Blue
-                    : StyleNano.UiColorTheme.Green;
+                : theme.Equals("gray", StringComparison.OrdinalIgnoreCase)
+                    ? StyleNano.UiColorTheme.Gray
+                    : theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
+                        ? StyleNano.UiColorTheme.Blue
+                        : StyleNano.UiColorTheme.Green;
 
             Color ThemeColor(Color blue, Color gray, Color green)
             {
+                if (useNeutralPalette)
+                    return gray;
+
                 return colorTheme switch
                 {
                     StyleNano.UiColorTheme.Blue => blue,
@@ -44,38 +49,41 @@ namespace Content.Client.Stylesheets
             }
 
             var launcherFrameBackground = ThemeColor(
-                Color.FromHex("#070E1B"),
-                Color.FromHex("#12171D"),
-                Color.FromHex("#0B150D")).WithAlpha(0.96f);
+                Color.FromHex("#121D2B"),
+                useNeutralPalette ? StyleNano.OldLobbyPanel.WithAlpha(0.965f) : Color.FromHex("#181D23"),
+                Color.FromHex("#152019")).WithAlpha(0.965f);
             var launcherFrameBorder = ThemeColor(
-                Color.FromHex("#1C5CA8"),
-                Color.FromHex("#667485"),
-                Color.FromHex("#2B7E45")).WithAlpha(0.98f);
-            var launcherDivider = Color.FromHex("#545A66");
+                Color.FromHex("#76BCEC"),
+                useNeutralPalette ? StyleNano.OldLobbyGold.WithAlpha(0.92f) : Color.FromHex("#7F8B9A"),
+                Color.FromHex("#72B181")).WithAlpha(0.95f);
+            var launcherDivider = ThemeColor(
+                Color.FromHex("#5A81AB"),
+                useNeutralPalette ? StyleNano.OldLobbyGold.WithAlpha(0.72f) : Color.FromHex("#586472"),
+                Color.FromHex("#4F7059")).WithAlpha(0.88f);
             var launcherTitleColor = ThemeColor(
-                Color.FromHex("#58A6FF"),
-                Color.FromHex("#D5DCE5"),
-                Color.FromHex("#95E7B1"));
+                Color.FromHex("#ECF6FF"),
+                useNeutralPalette ? StyleNano.OldLobbyText : Color.FromHex("#E7EDF3"),
+                Color.FromHex("#E8F3EA"));
             var launcherStateColor = ThemeColor(
-                Color.FromHex("#C4DAF8"),
-                Color.FromHex("#DEE4EB"),
-                Color.FromHex("#D1EBDD"));
+                Color.FromHex("#D8EAFB"),
+                useNeutralPalette ? StyleNano.OldLobbyText : Color.FromHex("#D5DDE5"),
+                Color.FromHex("#D4E7D8"));
             var launcherButtonNormal = ThemeColor(
-                Color.FromHex("#1B2F56"),
-                Color.FromHex("#36404C"),
-                Color.FromHex("#2B4433"));
+                Color.FromHex("#6E9CCC"),
+                useNeutralPalette ? StyleNano.OldLobbyButton : Color.FromHex("#66778A"),
+                Color.FromHex("#6FA27A"));
             var launcherButtonHover = ThemeColor(
-                Color.FromHex("#23406F"),
-                Color.FromHex("#45515F"),
-                Color.FromHex("#365B43"));
+                Color.FromHex("#83B2E2"),
+                useNeutralPalette ? StyleNano.OldLobbyButtonHover : Color.FromHex("#7A8C9F"),
+                Color.FromHex("#82B48C"));
             var launcherButtonPressed = ThemeColor(
-                Color.FromHex("#152544"),
-                Color.FromHex("#2B3440"),
-                Color.FromHex("#1F3528"));
+                Color.FromHex("#5A84B1"),
+                useNeutralPalette ? StyleNano.OldLobbyButtonPressed : Color.FromHex("#556474"),
+                Color.FromHex("#5C8766"));
             var launcherButtonText = ThemeColor(
-                Color.FromHex("#D5E4F9"),
-                Color.FromHex("#EDF1F5"),
-                Color.FromHex("#D8F0E2"));
+                Color.FromHex("#10233B"),
+                useNeutralPalette ? StyleNano.OldLobbyText : Color.FromHex("#14191F"),
+                Color.FromHex("#122015"));
 
             var notoSans10 = resCache.GetFont
             (
