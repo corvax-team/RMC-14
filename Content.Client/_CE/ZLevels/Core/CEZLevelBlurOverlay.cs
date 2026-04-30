@@ -12,12 +12,12 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Client._CE.ZLevels.Core;
 
-public sealed class CEZLevelBlurOverlay : Overlay
+public sealed class CEZLevelBlurOverlay : Overlay, IDisposable
 {
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IEntityManager _entity = default!;
-    private readonly ShaderInstance? _blurShader;
     public CEZLevelLowerFxMode Mode { get; set; } = CEZLevelLowerFxMode.Tint;
+    private ShaderInstance? _blurShader;
 
     public override bool RequestScreenTexture => Mode == CEZLevelLowerFxMode.Blur;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
@@ -28,6 +28,12 @@ public sealed class CEZLevelBlurOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
         _blurShader = _proto.Index(_zBlurShader).InstanceUnique();
+    }
+
+    public new void Dispose()
+    {
+        _blurShader?.Dispose();
+        _blurShader = null;
     }
 
     protected override bool BeforeDraw(in OverlayDrawArgs args)

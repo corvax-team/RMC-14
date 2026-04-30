@@ -40,6 +40,12 @@ public sealed partial class CEZPhysicsComponent : Component
     [DataField, AutoNetworkedField]
     public int CurrentZLevel;
 
+    /// <summary>
+    /// Cached tile position for optimization - not networked as it's client/server specific
+    /// </summary>
+    [ViewVariables]
+    public Vector2i? CachedTile;
+
     // Physics
 
     [DataField, AutoNetworkedField]
@@ -91,9 +97,6 @@ public sealed partial class CEZPhysicsComponent : Component
 
     #region Cache
 
-    [ViewVariables]
-    public Vector2i? CachedTile;
-
     /// <summary>
     /// Cached value of the current distance to the ground in the current z-level. Updates only on MoveEvent and when tiles below change.
     /// </summary>
@@ -111,6 +114,12 @@ public sealed partial class CEZPhysicsComponent : Component
     /// </summary>
     [ViewVariables]
     public bool CachedHasTileAbove;
+
+    /// <summary>
+    /// Cached map UID for ground height calculation validation
+    /// </summary>
+    [ViewVariables]
+    public EntityUid? CachedMapUid;
 
     #endregion
 }

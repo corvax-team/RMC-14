@@ -98,6 +98,9 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
         if (!TryComp<CEZLevelMapComponent>(mapUid, out var zLevelMapComponent))
             return false;
 
+        if (zLevelMapComponent.NetworkUid == EntityUid.Invalid)
+            return false;
+
         if (TerminatingOrDeleted(zLevelMapComponent.NetworkUid))
         {
             Log.Error($"Trying access to terminated z-network, map: {mapUid}, outdated network uid: {zLevelMapComponent.NetworkUid}");
@@ -111,6 +114,28 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
         }
 
         zLevel = new Entity<CEZLevelsNetworkComponent>(zLevelMapComponent.NetworkUid, zNetworkComponent);
+        return true;
+    }
+
+    [PublicAPI]
+    public bool TryGetDepth(EntityUid mapUid, out int depth)
+    {
+        depth = 0;
+        if (!TryComp<CEZLevelMapComponent>(mapUid, out var zLevelMapComponent))
+            return false;
+
+        if (zLevelMapComponent.NetworkUid == EntityUid.Invalid)
+            return false;
+
+        if (!TryComp<CEZLevelsNetworkComponent>(zLevelMapComponent.NetworkUid, out var zNetworkComponent))
+            return false;
+
+        // Use depth cache for O(1) lookup instead of linear search
+        if (zNetworkComponent.DepthCache.TryGetValue(mapUid, out depth))
+            return true;
+
+        // Fallback to component depth if cache miss
+        depth = zLevelMapComponent.Depth;
         return true;
     }
 
@@ -174,20 +199,21 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
     public List<EntityUid> GetAllMapsAbove(Entity<CEZLevelMapComponent> mapUid)
     {
         if (!_zNetworkQuery.TryComp(mapUid.Comp.NetworkUid, out var networkComp) || mapUid.Comp.Depth >= networkComp.SortedMax)
-            return new List<EntityUid>();
+            return new List<EntityUid>(0);
 
-        var startIndex = mapUid.Comp.Depth < networkComp.SortedMin
-            ? 0
-            : mapUid.Comp.Depth - networkComp.SortedMin + 1;
+        var depth = mapUid.Comp.Depth;
+        // Pre-allocate capacity based on estimated count to reduce reallocations
+        var estimatedCapacity = networkComp.SortedZLevels.Count - (depth - networkComp.SortedMin);
+        var result = new List<EntityUid>(estimatedCapacity);
 
-        var result = new List<EntityUid>();
-        for (var i = startIndex; i < networkComp.SortedZLevels.Count; i++)
+        // Use DepthCache for O(1) lookups instead of iterating through SortedZLevels
+        foreach (var (entityUid, entityDepth) in networkComp.DepthCache)
         {
-            var entity = networkComp.SortedZLevels[i];
-
-            if (entity != EntityUid.Invalid && _zMapQuery.HasComp(entity))
-                result.Add(entity);
+            if (entityDepth > depth && _zMapQuery.TryComp(entityUid, out _))
+                result.Add(entityUid);
         }
+        // Sort by depth ascending (closest first)
+        result.Sort((a, b) => networkComp.DepthCache[a].CompareTo(networkComp.DepthCache[b]));
 
         return result;
     }
@@ -198,16 +224,23 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
     [PublicAPI]
     public List<EntityUid> GetAllMapsBelow(Entity<CEZLevelMapComponent> mapUid)
     {
-        var result = new List<EntityUid>();
         if (!_zNetworkQuery.TryComp(mapUid.Comp.NetworkUid, out var zLevelsNetworkComponent))
-            return result;
+            return new List<EntityUid>(0);
 
-        var dept = mapUid.Comp.Depth;
-        foreach (var mapEntry in zLevelsNetworkComponent.SortedZLevels)
+        var depth = mapUid.Comp.Depth;
+        // Pre-allocate capacity based on depth to reduce reallocations
+        var estimatedCapacity = Math.Min(depth, zLevelsNetworkComponent.SortedZLevels.Count);
+        var result = new List<EntityUid>(estimatedCapacity);
+
+        // Use DepthCache for O(1) lookups instead of iterating through SortedZLevels
+        foreach (var (entityUid, entityDepth) in zLevelsNetworkComponent.DepthCache)
         {
-            if (_zMapQuery.TryComp(mapEntry, out var zComp) && zComp.Depth < dept)
-                result.Add(mapEntry);
+            if (entityDepth < depth && _zMapQuery.TryComp(entityUid, out _))
+                result.Add(entityUid);
         }
+
+        // Sort by depth descending (closest first)
+        result.Sort((a, b) => zLevelsNetworkComponent.DepthCache[b].CompareTo(zLevelsNetworkComponent.DepthCache[a]));
 
         return result;
     }

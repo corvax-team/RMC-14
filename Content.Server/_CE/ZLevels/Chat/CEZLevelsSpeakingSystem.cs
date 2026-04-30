@@ -83,13 +83,16 @@ public sealed partial class CEZLevelsSpeakingSystem : EntitySystem
         Timer.Spawn(MessageDelayMilliseconds,
             () =>
             {
-                _chat.TrySendInGameICMessage(
-                    transmit,
-                    message,
-                    InGameICChatType.Whisper,
-                    false,
-                    nameOverride: nameOverride,
-                    ignoreActionBlocker: true);
+                if (!TerminatingOrDeleted(transmit))
+                {
+                    _chat.TrySendInGameICMessage(
+                        transmit,
+                        message,
+                        InGameICChatType.Whisper,
+                        false,
+                        nameOverride: nameOverride,
+                        ignoreActionBlocker: true);
+                }
             });
     }
 }

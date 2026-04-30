@@ -51,7 +51,7 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_shroud
-    useDelay: 30
+    useDelay: 50
   - type: InstantAction
     event: !type:MCXenoMelterShroudActionEvent
       plasmaCost: 50
@@ -105,14 +105,14 @@
     affectsInfectedNested: false
     armorPiercingDamage:
       types:
-        Heat: 20
-        Asphyxiation: 3
+        Heat: 15
+        Asphyxiation: 2
     damage:
       types:
-        Heat: 35
+        Heat: 20
     barricadeDamage:
       types:
-        Heat: 8.5
+        Heat: 5.5
     whitelist:
       components:
       - Marine

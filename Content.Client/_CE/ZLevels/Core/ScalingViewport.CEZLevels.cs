@@ -76,8 +76,9 @@ public sealed partial class ScalingViewport
         if (!_mapManager.TryFindGridAt(mapUid, mapCoordsBottomLeft.Position, out _, out var grid))
             return true;
 
-        var tileBottomLeft = grid.TileIndicesFor(mapCoordsBottomLeft);
-        var tileTopRight = grid.TileIndicesFor(mapCoordsTopRight);
+        _mapSystem ??= _entityManager.System<SharedMapSystem>();
+        var tileBottomLeft = _mapSystem.CoordinatesToTile(mapUid, grid, mapCoordsBottomLeft);
+        var tileTopRight = _mapSystem.CoordinatesToTile(mapUid, grid, mapCoordsTopRight);
         var cacheMin = tileBottomLeft - Vector2i.One;
         var cacheMax = tileTopRight + Vector2i.One;
         var revision = _zLevels?.GetVisibilityRevision(mapUid) ?? 0;
@@ -96,12 +97,14 @@ public sealed partial class ScalingViewport
         {
             for (var y = tileBottomLeft.Y - 1; y <= tileTopRight.Y + 1; y++)
             {
-                var tile = grid.GetTileRef(new Vector2i(x, y));
-                var tileDef = (ContentTileDefinition)_tile[tile.Tile.TypeId];
-                if (tileDef.Transparent || tile.Tile.IsEmpty)
+                if (_mapSystem.TryGetTileRef(mapUid, grid, new Vector2i(x, y), out var tile))
                 {
-                    hasVisibleOpening = true;
-                    break;
+                    var tileDef = (ContentTileDefinition)_tile[tile.Tile.TypeId];
+                    if (tileDef.Transparent || tile.Tile.IsEmpty)
+                    {
+                        hasVisibleOpening = true;
+                        break;
+                    }
                 }
             }
 

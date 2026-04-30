@@ -53,7 +53,7 @@ public sealed partial class CEZLevelsSystem
         SubscribeLocalEvent<CEZPhysicsComponent, CEZLevelFallMapEvent>(OnZLevelFall);
     }
 
-    private void UpdateView(float frameTime)
+    private void UpdateView(float _)
     {
     }
 

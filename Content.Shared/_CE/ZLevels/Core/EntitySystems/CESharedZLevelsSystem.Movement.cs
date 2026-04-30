@@ -8,9 +8,6 @@
 using System.Numerics;
 using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared.Chasm;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.Throwing;
 using JetBrains.Annotations;
 using Robust.Shared.Audio;
@@ -63,13 +60,11 @@ public abstract partial class CESharedZLevelsSystem
             return;
 
         _tileInvalidation.Clear();
-
-        // For each changed tile compute its world AABB and query all entities intersecting it
+        var half = grid.TileSizeHalfVector;
         foreach (var change in args.Changes)
         {
             var mapCoords = _map.GridTileToWorld(args.Entity, grid, change.GridIndices);
 
-            var half = grid.TileSizeHalfVector;
             var min = mapCoords.Position - half;
             var max = mapCoords.Position + half;
             var aabb = new Box2(min, max);
@@ -94,12 +89,15 @@ public abstract partial class CESharedZLevelsSystem
     private void RequestCacheMovement(Entity<CEZPhysicsComponent> entity, bool force = true)
     {
         var tile = _transform.GetGridOrMapTilePosition(entity);
+        var xform = Transform(entity);
+        var currentMapUid = xform.MapUid;
 
-        // If we stay at same tile we don't need to recalculate a lot of fucking math
-        if (tile == entity.Comp.CachedTile && !force)
+        // If we stay at same tile and same map, we don't need to recalculate
+        if (tile == entity.Comp.CachedTile && currentMapUid == entity.Comp.CachedMapUid && !force)
             return;
 
         entity.Comp.CachedTile = tile;
+        entity.Comp.CachedMapUid = currentMapUid;
         Entity<CEZPhysicsComponent?> zEntity = (entity.Owner, entity.Comp);
         entity.Comp.CachedGroundHeight = ComputeGroundHeightInternal(zEntity, out var sticky);
         entity.Comp.CachedStickyGround = sticky;
@@ -150,7 +148,11 @@ public abstract partial class CESharedZLevelsSystem
         var query = EntityQueryEnumerator<CEZPhysicsComponent, CEActiveZPhysicsComponent, TransformComponent, PhysicsComponent>();
         while (query.MoveNext(out var uid, out var zPhysicsComponent, out _, out var xform, out var physics))
         {
-            if (!_zMapQuery.HasComp(xform.MapUid))
+            // Early exit if map is invalid - cheaper check before component query
+            if (xform.MapUid == null || xform.MapUid == EntityUid.Invalid)
+                continue;
+
+            if (!_zMapQuery.HasComp(xform.MapUid.Value))
                 continue;
 
             var oldVelocity = zPhysicsComponent.Velocity;
@@ -178,12 +180,16 @@ public abstract partial class CESharedZLevelsSystem
 
             var distanceToGround = zPhysicsComponent.LocalPosition - zPhysicsComponent.CachedGroundHeight;
 
-            // AutoStep: lift entity up if floor is higher
+            // AutoStep: lift entity up if floor is higher, but prevent getting stuck on ceilings
             if (zPhysicsComponent.AutoStep && distanceToGround < 0)
-                zPhysicsComponent.LocalPosition -= distanceToGround; //Lift up
+            {
+                // Only lift up if we're not too close to the ceiling (0.95f threshold)
+                if (zPhysicsComponent.LocalPosition < 0.95f)
+                    zPhysicsComponent.LocalPosition -= distanceToGround; //Lift up
+            }
 
             // Sticky ground: only pull down when slowly falling on sticky surfaces (ladders)
-            if (zPhysicsComponent.CachedStickyGround)
+            if (zPhysicsComponent.CachedStickyGround && zPhysicsComponent.Velocity < 0 && zPhysicsComponent.Velocity > -2f)
                 zPhysicsComponent.LocalPosition -= distanceToGround; //Sticky move down
 
             if (zPhysicsComponent is { Velocity: < 0, Fallable: true }) //Falling down
@@ -200,6 +206,9 @@ public abstract partial class CESharedZLevelsSystem
                     }
 
                     zPhysicsComponent.Velocity = -zPhysicsComponent.Velocity * zPhysicsComponent.Bounciness;
+                    // Clamp velocity after bounce to prevent exceeding ZVelocityLimit
+                    if (float.Abs(zPhysicsComponent.Velocity) > ZVelocityLimit)
+                        zPhysicsComponent.Velocity = float.Sign(zPhysicsComponent.Velocity) * ZVelocityLimit;
                 }
             }
 
@@ -232,6 +241,9 @@ public abstract partial class CESharedZLevelsSystem
 
                     zPhysicsComponent.LocalPosition = 1;
                     zPhysicsComponent.Velocity = -zPhysicsComponent.Velocity * zPhysicsComponent.Bounciness;
+                    // Clamp velocity after bounce to prevent exceeding ZVelocityLimit
+                    if (float.Abs(zPhysicsComponent.Velocity) > ZVelocityLimit)
+                        zPhysicsComponent.Velocity = float.Sign(zPhysicsComponent.Velocity) * ZVelocityLimit;
                 }
                 else
                 {
@@ -303,12 +315,19 @@ public abstract partial class CESharedZLevelsSystem
                 checkingGrid = tempCheckingGrid;
             }
 
+            // Validate map and grid before using enumerator
+            if (checkingMap.Owner == EntityUid.Invalid || checkingGrid == null)
+                continue;
+
             //Check all types of ZHeight entities
             var query = _map.GetAnchoredEntitiesEnumerator(checkingMap, checkingGrid, worldPosI);
+            bool foundHighground = false;
             while (query.MoveNext(out var uid))
             {
                 if (!_highgroundQuery.TryComp(uid, out var heightComp))
                     continue;
+
+                foundHighground = true;
 
                 var dir = _transform.GetWorldRotation(uid.Value).GetCardinalDir();
 
@@ -352,9 +371,12 @@ public abstract partial class CESharedZLevelsSystem
             }
 
             //No ZEntities found, check floor tiles
-            if (_map.TryGetTileRef(checkingMap, checkingGrid, worldPosI, out var tileRef) &&
-                !tileRef.Tile.IsEmpty)
-                return -floor; // tile ground has groundY == 0 -> -floor
+            if (!foundHighground)
+            {
+                if (_map.TryGetTileRef(checkingMap, checkingGrid, worldPosI, out var floorTileRef) &&
+                    !floorTileRef.Tile.IsEmpty)
+                    return -floor; // tile ground has groundY == 0 -> -floor
+            }
         }
 
         return -maxFloors;

@@ -29,7 +29,7 @@ public sealed class MCConfigVars : CVars
      */
 
     public static readonly CVarDef<int> ZLevelsPhysicsTickRate =
-        CVarDef.Create("mc.z_levels.physics.tick_rate", 60, CVar.ARCHIVE);
+        CVarDef.Create("mc.z_levels.physics.tick_rate", 30, CVar.ARCHIVE);
 
     public static readonly CVarDef<bool> ZLevelsPhysicsClientSimulation =
         CVarDef.Create("mc.z_levels.physics.client_simulation", true, CVar.ARCHIVE | CVar.CLIENT);
@@ -44,5 +44,5 @@ public sealed class MCConfigVars : CVars
         CVarDef.Create("mc.z_levels.render.max_below_depth", 2, CVar.ARCHIVE | CVar.CLIENTONLY);
 
     public static readonly CVarDef<string> ZLevelsRenderLowerFx =
-        CVarDef.Create("mc.z_levels.render.lower_fx", "tint", CVar.ARCHIVE | CVar.CLIENTONLY);
+        CVarDef.Create("mc.z_levels.render.lower_fx", "blur", CVar.ARCHIVE | CVar.CLIENTONLY);
 }
