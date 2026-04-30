@@ -34,10 +34,6 @@ public abstract class SharedCMUTourniquetSystem : EntitySystem
     [Dependency] protected readonly SharedCMUWoundsSystem Wounds = default!;
     [Dependency] protected readonly SharedHandsSystem Hands = default!;
     [Dependency] protected readonly RMCUnrevivableSystem Unrevivable = default!;
-    [Dependency] private readonly ILogManager _logMan = default!;
-
-    private ISawmill _sawmill = default!;
-
     private const float TourniquetScanInterval = 0.5f;
     private float _tourniquetScanAccumulator;
 
@@ -49,8 +45,6 @@ public abstract class SharedCMUTourniquetSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        _sawmill = _logMan.GetSawmill("tourniquet");
-        _sawmill.Level = LogLevel.Debug;
         SubscribeLocalEvent<CMUTourniquetItemComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<CMUTourniquetItemComponent, CMUTourniquetApplyDoAfterEvent>(OnApplyDoAfter);
         SubscribeLocalEvent<CMUHumanMedicalComponent, GetVerbsEvent<AlternativeVerb>>(OnPatientGetAltVerbs);
@@ -69,25 +63,19 @@ public abstract class SharedCMUTourniquetSystem : EntitySystem
 
     private void OnAfterInteract(Entity<CMUTourniquetItemComponent> ent, ref AfterInteractEvent args)
     {
-        _sawmill.Debug($"OnAfterInteract fire user={ToPrettyString(args.User)} target={(args.Target is { } t ? ToPrettyString(t) : "null")} handled={args.Handled} canReach={args.CanReach}");
-
         if (args.Handled || !args.CanReach || args.Target is not { } target)
         {
-            _sawmill.Debug($"early-return: handled={args.Handled} canReach={args.CanReach} hasTarget={(args.Target is not null)}");
             return;
         }
         if (!HasComp<CMUHumanMedicalComponent>(target))
         {
-            _sawmill.Debug($"target {ToPrettyString(target)} lacks CMUHumanMedicalComponent — abort");
             return;
         }
 
         if (!TryFindTourniquetTargetPart(args.User, target, out var part, out var alreadyOn))
         {
-            _sawmill.Debug($"TryFindTourniquetTargetPart returned false on user={ToPrettyString(args.User)} target={ToPrettyString(target)} — aborting silently");
             return;
         }
-        _sawmill.Debug($"picker resolved part={ToPrettyString(part)} alreadyOn={alreadyOn}");
 
         if (alreadyOn)
         {
@@ -103,7 +91,6 @@ public abstract class SharedCMUTourniquetSystem : EntitySystem
             BlockDuplicate = true,
         };
         var applyStarted = DoAfter.TryStartDoAfter(applyDo);
-        _sawmill.Debug($"start APPLY DoAfter on part={ToPrettyString(part)} started={applyStarted} delay={ent.Comp.ApplyDelay}");
         if (applyStarted)
             Popup.PopupPredicted(Loc.GetString("cmu-medical-tourniquet-applying"), target, args.User);
         args.Handled = true;
@@ -111,24 +98,20 @@ public abstract class SharedCMUTourniquetSystem : EntitySystem
 
     private void OnApplyDoAfter(Entity<CMUTourniquetItemComponent> ent, ref CMUTourniquetApplyDoAfterEvent args)
     {
-        _sawmill.Debug($"OnApplyDoAfter cancelled={args.Cancelled} target={(args.Target is { } tgt ? ToPrettyString(tgt) : "null")} preSelected={args.PreSelectedPart}");
         if (args.Cancelled || args.Target is not { } target)
             return;
         if (!IsLayerEnabled())
         {
-            _sawmill.Debug("OnApplyDoAfter abort: layer disabled");
             return;
         }
 
         if (!ResolvePart(target, args.PreSelectedPart, out var part))
         {
-            _sawmill.Debug($"OnApplyDoAfter abort: ResolvePart failed for {args.PreSelectedPart}");
             return;
         }
 
         var freshApply = !HasComp<CMUTourniquetComponent>(part);
         var ok = ApplyTourniquetToPart(ent, part);
-        _sawmill.Debug($"OnApplyDoAfter ApplyTourniquetToPart returned {ok} on part={ToPrettyString(part)} freshApply={freshApply}");
         if (ok && freshApply)
             Popup.PopupPredicted(Loc.GetString("cmu-medical-tourniquet-applied"), target, args.User);
     }
@@ -162,14 +145,12 @@ public abstract class SharedCMUTourniquetSystem : EntitySystem
             BlockDuplicate = true,
         };
         var started = DoAfter.TryStartDoAfter(removeDo);
-        _sawmill.Debug($"start VERB-REMOVE DoAfter on part={ToPrettyString(part)} started={started}");
         if (started)
             Popup.PopupPredicted(Loc.GetString("cmu-medical-tourniquet-removing"), patient, user);
     }
 
     private void OnVerbRemoveDoAfter(Entity<CMUHumanMedicalComponent> patient, ref CMUTourniquetVerbRemoveDoAfterEvent args)
     {
-        _sawmill.Debug($"OnVerbRemoveDoAfter cancelled={args.Cancelled} preSelected={args.PreSelectedPart}");
         if (args.Cancelled)
             return;
         if (!IsLayerEnabled())
@@ -235,40 +216,23 @@ public abstract class SharedCMUTourniquetSystem : EntitySystem
         part = default;
         alreadyOn = false;
 
-        var hasAimComp = TryComp<BodyZoneTargetingComponent>(user, out var aim);
-        string lastAtStr = "n/a", selStr = "n/a";
-        if (aim is not null)
-        {
-            var lastAt = aim.LastSelectedAt;
-            var sel = aim.Selected;
-            lastAtStr = lastAt.TotalSeconds.ToString("0.00") + "s";
-            selStr = ((int)sel).ToString();
-        }
-        _sawmill.Debug($"picker: user={ToPrettyString(user)} patient={ToPrettyString(patient)} hasAimComp={hasAimComp} lastSelectedAt={lastAtStr} selectedZone={selStr}");
-
-        if (hasAimComp && aim!.LastSelectedAt > TimeSpan.Zero)
+        if (TryComp<BodyZoneTargetingComponent>(user, out var aim) && aim.LastSelectedAt > TimeSpan.Zero)
         {
             var (partType, symmetry) = SharedBodyZoneTargetingSystem.ToBodyPart(aim.Selected);
-            _sawmill.Debug($"picker: Tier 1 — looking for partType={partType} symmetry={symmetry}");
             EntityUid? firstMatch = null;
-            var seen = 0;
             foreach (var (id, partComp) in Body.GetBodyChildren(patient))
             {
-                seen++;
                 if (partComp.PartType != partType)
                     continue;
                 if (symmetry is { } s && partComp.Symmetry != s)
                 {
-                    _sawmill.Debug($"picker:  - {ToPrettyString(id)} matches type but Symmetry={partComp.Symmetry} != wanted {s}");
                     continue;
                 }
                 if (!IsTourniquetable(partComp.PartType))
                 {
-                    _sawmill.Debug($"picker:  - {ToPrettyString(id)} is {partComp.PartType} — not tourniquetable");
                     continue;
                 }
 
-                _sawmill.Debug($"picker:  - candidate {ToPrettyString(id)} type={partComp.PartType} sym={partComp.Symmetry} alreadyTQ={HasComp<CMUTourniquetComponent>(id)}");
                 if (HasComp<CMUTourniquetComponent>(id))
                 {
                     part = id;
@@ -277,7 +241,6 @@ public abstract class SharedCMUTourniquetSystem : EntitySystem
                 }
                 firstMatch ??= id;
             }
-            _sawmill.Debug($"picker: Tier 1 scanned {seen} body children, firstMatch={(firstMatch is { } fm ? ToPrettyString(fm) : "null")}");
             if (firstMatch is { } found)
             {
                 part = found;
