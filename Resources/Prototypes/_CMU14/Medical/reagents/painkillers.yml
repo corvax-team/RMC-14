@@ -1,0 +1,63 @@
+- type: reagent
+  parent: CMReagentMedicine
+  id: CMUParacetamol
+  name: paracetamol
+  desc: A mild pain reliever. Suppresses pain accumulation by 25%.
+  flavor: bitter
+  physicalDesc: reagent-physical-desc-fizzy
+  color: "#ffffff"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:CMUApplyPainSuppressionEffect
+        suppressionPercent: 0.25
+        durationPerUnit: 30
+
+- type: reagent
+  parent: CMReagentMedicine
+  id: CMUTramadol
+  name: tramadol
+  desc: A moderate opioid pain reliever. Suppresses pain accumulation by 50%.
+  flavor: chemical
+  physicalDesc: reagent-physical-desc-acrid
+  color: "#e0c0a0"
+  overdose: 30
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:CMUApplyPainSuppressionEffect
+        suppressionPercent: 0.5
+        durationPerUnit: 60
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          types:
+            Poison: 1
+
+- type: reagent
+  parent: CMReagentMedicine
+  id: CMUOxycodone
+  name: oxycodone
+  desc: A heavy opioid for severe pain. Suppresses pain accumulation by 75%.
+  flavor: chemical
+  physicalDesc: reagent-physical-desc-oily
+  color: "#d09060"
+  overdose: 20
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:CMUApplyPainSuppressionEffect
+        suppressionPercent: 0.75
+        durationPerUnit: 90
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 20
+        damage:
+          types:
+            Poison: 2

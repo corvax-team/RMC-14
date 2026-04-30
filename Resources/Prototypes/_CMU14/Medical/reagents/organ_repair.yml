@@ -1,0 +1,121 @@
+- type: reagent
+  parent: CMReagentMedicine
+  id: CMUHepatocytin
+  name: hepatocytin
+  desc: A regenerative compound for liver tissue repair.
+  flavor: bitter
+  physicalDesc: reagent-physical-desc-thick-and-grainy
+  color: "#a87830"
+  overdose: 25
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:HealOrganEffect
+        organComponent: Liver
+        amount: 5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        damage:
+          types:
+            Poison: 2
+
+- type: reagent
+  parent: CMReagentMedicine
+  id: CMUPulmovine
+  name: pulmovine
+  desc: An aerosolized agent for lung tissue repair.
+  flavor: chemical
+  physicalDesc: reagent-physical-desc-fizzy
+  color: "#80c0ff"
+  overdose: 25
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:HealOrganEffect
+        organComponent: Lungs
+        amount: 5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        damage:
+          types:
+            Poison: 2
+
+- type: reagent
+  parent: CMReagentMedicine
+  id: CMUNephronate
+  name: nephronate
+  desc: A renal-targeting compound for kidney tissue repair.
+  flavor: chemical
+  physicalDesc: reagent-physical-desc-tangy
+  color: "#a0e070"
+  overdose: 25
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:HealOrganEffect
+        organComponent: Kidneys
+        amount: 5
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        damage:
+          types:
+            Poison: 2
+
+- type: reagent
+  parent: CMReagentMedicine
+  id: CMUCardiocaine
+  name: cardiocaine
+  desc: A cardiac-targeting compound; attempts to restart a stopped heart.
+  flavor: metallic
+  physicalDesc: reagent-physical-desc-acrid
+  color: "#c02020"
+  overdose: 25
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:HealOrganEffect
+        organComponent: Heart
+        amount: 5
+      - !type:CMURestartHeartEffect
+        chancePerTick: 0.05
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        damage:
+          types:
+            Poison: 3
+
+- type: reagent
+  parent: CMReagentMedicine
+  id: CMUOsteoCalc
+  name: osteocalc
+  desc: A calcium-rich slurry that accelerates bone integrity regeneration.
+  flavor: chalk
+  physicalDesc: reagent-physical-desc-crystalline
+  color: "#e0e0c0"
+  overdose: 25
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:CMUBoneRegenBoostEffect
+        multiplier: 1.5
+        durationSeconds: 15
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 25
+        damage:
+          types:
+            Blunt: 1

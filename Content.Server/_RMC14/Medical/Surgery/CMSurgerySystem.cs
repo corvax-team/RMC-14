@@ -1,4 +1,5 @@
-﻿using Content.Server._RMC14.Medical.Wounds;
+using Content.Server._CMU14.Medical.Surgery;
+using Content.Server._RMC14.Medical.Wounds;
 using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
@@ -32,6 +33,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly WoundsSystem _wounds = default!;
+    [Dependency] private readonly CMUSurgeryDispatchSystem _cmuDispatch = default!;
 
     private readonly List<EntProtoId> _surgeries = new();
 
@@ -99,6 +101,12 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         if (user == args.Target)
         {
             _popup.PopupEntity("You can't perform surgery on yourself!", user, user);
+            return;
+        }
+
+        if (_cmuDispatch.TryDispatch(user, args.Target.Value))
+        {
+            args.Handled = true;
             return;
         }
 
