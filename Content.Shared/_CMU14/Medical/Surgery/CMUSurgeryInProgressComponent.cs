@@ -9,7 +9,7 @@ namespace Content.Shared._CMU14.Medical.Surgery;
 ///     on.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedCMUSurgeryV2System))]
+[Access(typeof(SharedCMUSurgeryFlowSystem))]
 public sealed partial class CMUSurgeryInProgressComponent : Component
 {
     [DataField, AutoNetworkedField]

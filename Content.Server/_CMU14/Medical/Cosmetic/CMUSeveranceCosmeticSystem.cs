@@ -157,6 +157,9 @@ public sealed class CMUSeveranceCosmeticSystem : EntitySystem
 
     private void TagDroppedPartWithClothing(EntityUid wearer, EntityUid droppedPart)
     {
+        if (TerminatingOrDeleted(wearer) || TerminatingOrDeleted(droppedPart))
+            return;
+
         var marker = EnsureComp<CMUSeveredPartClothingComponent>(droppedPart);
 
         if (!_inventory.TryGetSlotEntity(wearer, "outerClothing", out var clothing))

@@ -376,7 +376,6 @@
     minStage: Bruised
   - type: CMUSurgeryStepRepairOrganEffect
     organSlot: liver
-    healAmount: 25
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
@@ -395,7 +394,6 @@
     minStage: Bruised
   - type: CMUSurgeryStepRepairOrganEffect
     organSlot: lungs
-    healAmount: 25
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
@@ -414,7 +412,6 @@
     minStage: Bruised
   - type: CMUSurgeryStepRepairOrganEffect
     organSlot: kidneys
-    healAmount: 25
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
@@ -433,7 +430,6 @@
     minStage: Bruised
   - type: CMUSurgeryStepRepairOrganEffect
     organSlot: heart
-    healAmount: 25
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
@@ -520,7 +516,6 @@
     minStage: Bruised
   - type: CMUSurgeryStepRepairOrganEffect
     organSlot: brain
-    healAmount: 20
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
@@ -539,7 +534,6 @@
     minStage: Bruised
   - type: CMUSurgeryStepRepairOrganEffect
     organSlot: eyes
-    healAmount: 20
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
@@ -558,7 +552,6 @@
     minStage: Bruised
   - type: CMUSurgeryStepRepairOrganEffect
     organSlot: ears
-    healAmount: 20
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat

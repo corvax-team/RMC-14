@@ -18,7 +18,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._CMU14.Medical.Surgery;
 
-public abstract class SharedCMUSurgeryV2System : EntitySystem
+public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
 {
     [Dependency] protected readonly IConfigurationManager Cfg = default!;
     [Dependency] protected readonly INetManager Net = default!;
@@ -139,6 +139,15 @@ public abstract class SharedCMUSurgeryV2System : EntitySystem
         {
             if (lockComp.Part != targetPart || lockComp.LeafSurgeryId != surgeryId)
                 return null;
+        }
+
+        if (TryComp<CMUSurgeryArmedStepComponent>(patient, out var existing)
+            && existing.LeafSurgeryId == surgeryId)
+        {
+            existing.Surgeon = surgeon;
+            existing.ArmedAt = Timing.CurTime;
+            Dirty(patient, existing);
+            return existing;
         }
 
         // Resolve via the requirement chain so prereqs (open-incision,
@@ -388,6 +397,45 @@ public abstract class SharedCMUSurgeryV2System : EntitySystem
             // Gating prereq id only when the leaf surgery isn't the one
             // being armed — lets the BUI flag "(via Open Incision)".
             resolvedSurgeryProtoId == surgeryId ? null : resolvedSurgeryProtoId);
+        return true;
+    }
+
+    public bool TryResolveStepAt(string surgeryId, int stepIndex, out CMUResolvedStep resolved)
+    {
+        resolved = default!;
+        if (RmcSurgery.GetSingleton(surgeryId) is not { } surgeryEnt)
+            return false;
+        if (!TryComp<CMSurgeryComponent>(surgeryEnt, out var surgeryComp))
+            return false;
+        if (stepIndex < 0 || stepIndex >= surgeryComp.Steps.Count)
+            return false;
+
+        var stepLabel = string.Empty;
+        string? toolCategory = null;
+
+        if (TryGetMetadata(surgeryId, out var metadata) && stepIndex < metadata.Steps.Count)
+        {
+            var stepMeta = metadata.Steps[stepIndex];
+            stepLabel = stepMeta.Label;
+            toolCategory = stepMeta.ToolCategory;
+        }
+        else
+        {
+            var stepProtoId = surgeryComp.Steps[stepIndex];
+            if (RmcSurgery.GetSingleton(stepProtoId) is { } stepEnt)
+            {
+                stepLabel = MetaData(stepEnt).EntityName;
+                toolCategory = ResolveLegacyStepToolCategory(stepEnt);
+            }
+        }
+
+        resolved = new CMUResolvedStep(
+            surgeryId,
+            stepIndex,
+            stepLabel,
+            toolCategory,
+            surgeryComp.Steps.Count,
+            null);
         return true;
     }
 

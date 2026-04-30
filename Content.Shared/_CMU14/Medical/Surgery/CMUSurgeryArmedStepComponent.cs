@@ -4,7 +4,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._CMU14.Medical.Surgery;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedCMUSurgeryV2System))]
+[Access(typeof(SharedCMUSurgeryFlowSystem))]
 public sealed partial class CMUSurgeryArmedStepComponent : Component
 {
     [DataField, AutoNetworkedField]

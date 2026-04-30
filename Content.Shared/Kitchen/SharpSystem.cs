@@ -51,6 +51,9 @@ public sealed class SharpSystem : EntitySystem
         if (args.Handled || args.Target is null || !args.CanReach)
             return;
 
+        if (HasComp<CMSurgeryToolComponent>(uid) && HasComp<CMSurgeryTargetComponent>(args.Target.Value))
+            return;
+
         if (TryStartButcherDoafter(uid, args.Target.Value, args.User))
             args.Handled = true;
     }

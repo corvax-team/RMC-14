@@ -2,7 +2,7 @@
 # - Window header / hint
 # - Armed-step status line
 # - Wrong-tool / wrong-part / no-tool popups
-# - Tool category names (resolver categories from SharedCMUSurgeryV2System)
+# - Tool category names (resolver categories from SharedCMUSurgeryFlowSystem)
 # - Per-step labels for all 19 V1 CMU surgeries
 
 # ---- Window chrome ---------------------------------------------------

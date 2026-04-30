@@ -11,7 +11,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._CMU14.Medical.Surgery;
 
-public sealed class CMUSurgeryV2System : SharedCMUSurgeryV2System
+public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
 {
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
@@ -91,22 +91,31 @@ public sealed class CMUSurgeryV2System : SharedCMUSurgeryV2System
         var leafDisplay = ResolveLeafDisplayName(leafId);
         EnsureSurgeryInFlight(patient, stepPart, surgeon, leafId, leafDisplay);
 
-        // Don't re-resolve when the leaf's last step has landed: the
-        // leaf's close-up tail removes markers (CMIncisionOpen /
-        // CMRibcageOpen / etc.) that earlier steps added, which would make
-        // GetNextStep walk back to step 0 and loop the medic through
-        // OpenIncision/Clamp/Retract again.
         if (RmcSurgery.GetSingleton(leafId) is { } leafEnt
             && TryComp<CMSurgeryComponent>(leafEnt, out var leafComp)
-            && armed.SurgeryId == leafId
-            && armed.StepIndex >= leafComp.Steps.Count - 1)
+            && armed.SurgeryId == leafId)
         {
-            var completeEvLast = new CMSurgeryCompleteEvent(patient, surgeon, leafId);
-            RaiseLocalEvent(patient, ref completeEvLast);
-            RemComp<CMUSurgeryArmedStepComponent>(patient);
-            ClearSurgeryInFlight(patient);
-            _dispatch.RefreshUiForPatient(patient);
-            return;
+            if (armed.StepIndex >= leafComp.Steps.Count - 1)
+            {
+                var completeEvLast = new CMSurgeryCompleteEvent(patient, surgeon, leafId);
+                RaiseLocalEvent(patient, ref completeEvLast);
+                RemComp<CMUSurgeryArmedStepComponent>(patient);
+                ClearSurgeryInFlight(patient);
+                _dispatch.RefreshUiForPatient(patient);
+                return;
+            }
+
+            if (TryResolveStepAt(leafId, armed.StepIndex + 1, out var nextLinear))
+            {
+                armed.SurgeryId = nextLinear.ResolvedSurgeryId;
+                armed.StepIndex = nextLinear.StepIndex;
+                armed.RequiredToolCategory = nextLinear.ToolCategory;
+                armed.StepLabel = nextLinear.StepLabel;
+                armed.ArmedAt = Timing.CurTime;
+                Dirty(patient, armed);
+                _dispatch.RefreshUiForPatient(patient);
+                return;
+            }
         }
 
         if (TryResolveNextStep(patient, stepPart, leafId, out var next))

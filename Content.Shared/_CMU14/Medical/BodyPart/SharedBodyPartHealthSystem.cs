@@ -65,8 +65,9 @@ public abstract class SharedBodyPartHealthSystem : EntitySystem
             return;
 
         var positive = DamageSpecifier.GetPositive(delta);
-        if (!positive.Empty)
-            ApplyPartDamage(ent, positive);
+        var localizable = ExtractLocalizableDamage(positive);
+        if (!localizable.Empty)
+            ApplyPartDamage(ent, localizable);
 
         var healing = GetHealingInGroup(delta, BruteGroup) + GetHealingInGroup(delta, BurnGroup);
         if (healing > FixedPoint2.Zero)
@@ -107,6 +108,26 @@ public abstract class SharedBodyPartHealthSystem : EntitySystem
         {
             var severed = new BodyPartSeveredEvent(ent.Owner, partUid, partType);
             RaiseLocalEvent(partUid, ref severed);
+        }
+    }
+
+    private DamageSpecifier ExtractLocalizableDamage(DamageSpecifier damage)
+    {
+        var result = new DamageSpecifier();
+        AddPositiveGroupDamage(result, damage, BruteGroup);
+        AddPositiveGroupDamage(result, damage, BurnGroup);
+        return result;
+    }
+
+    private void AddPositiveGroupDamage(DamageSpecifier dest, DamageSpecifier src, ProtoId<DamageGroupPrototype> groupId)
+    {
+        if (!_prototypes.TryIndex(groupId, out var group))
+            return;
+
+        foreach (var type in group.DamageTypes)
+        {
+            if (src.DamageDict.TryGetValue(type, out var amount) && amount > FixedPoint2.Zero)
+                dest.DamageDict[type] = amount;
         }
     }
 

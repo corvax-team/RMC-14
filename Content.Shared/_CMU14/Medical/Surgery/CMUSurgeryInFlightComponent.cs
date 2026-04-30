@@ -7,7 +7,7 @@ namespace Content.Shared._CMU14.Medical.Surgery;
 ///     on the patient body — set/cleared in lockstep.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedCMUSurgeryV2System))]
+[Access(typeof(SharedCMUSurgeryFlowSystem))]
 public sealed partial class CMUSurgeryInFlightComponent : Component
 {
     /// <summary>

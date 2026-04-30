@@ -7,6 +7,7 @@ using Content.Shared._CMU14.Medical.Surgery.Effects;
 using Content.Shared._CMU14.Medical.Wounds;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Conditions;
+using Content.Shared._RMC14.Medical.Surgery.Steps;
 using Content.Shared.Body.Organ;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
@@ -43,6 +44,7 @@ public abstract class SharedCMUSurgerySystem : EntitySystem
 
         SubscribeLocalEvent<CMUFracturedSurgeryConditionComponent, CMSurgeryValidEvent>(OnFracturedValid);
         SubscribeLocalEvent<CMUOrganDamagedSurgeryConditionComponent, CMSurgeryValidEvent>(OnOrganDamagedValid);
+        SubscribeLocalEvent<CMUOrganDamagedSurgeryConditionComponent, CMSurgeryStepCompleteCheckEvent>(OnOrganDamagedCompleteCheck);
         SubscribeLocalEvent<CMUInternalBleedingSurgeryConditionComponent, CMSurgeryValidEvent>(OnInternalBleedingValid);
         SubscribeLocalEvent<CMUEscharSurgeryConditionComponent, CMSurgeryValidEvent>(OnEscharValid);
 
@@ -87,6 +89,24 @@ public abstract class SharedCMUSurgerySystem : EntitySystem
         }
 
         if (!TryComp<OrganHealthComponent>(organ, out var oh) || !oh.Stage.IsAtLeast(ent.Comp.MinStage))
+            args.Cancelled = true;
+    }
+
+    // Without this, repair-organ steps look "complete" to GetNextStep
+    // because they have no Add/Remove markers — the framework's default
+    // OnToolCheck cancels nothing, the step is silently skipped, and the
+    // next walk regresses to PriseOpenBones once CloseBones removes
+    // CMRibcageOpen. Symptom: BUI cycles between steps 5–7 (1-indexed)
+    // and the organ never heals.
+    private void OnOrganDamagedCompleteCheck(Entity<CMUOrganDamagedSurgeryConditionComponent> ent, ref CMSurgeryStepCompleteCheckEvent args)
+    {
+        if (args.Cancelled)
+            return;
+        if (!TryGetOrganInSlot(args.Part, ent.Comp.OrganSlot, out var organ))
+            return;
+        if (!TryComp<OrganHealthComponent>(organ, out var oh))
+            return;
+        if (oh.Stage.IsAtLeast(ent.Comp.MinStage))
             args.Cancelled = true;
     }
 
@@ -155,8 +175,10 @@ public abstract class SharedCMUSurgerySystem : EntitySystem
             return;
         if (!TryGetOrganInSlot(args.Part, ent.Comp.OrganSlot, out var organ))
             return;
+        if (!TryComp<OrganHealthComponent>(organ, out var oh))
+            return;
 
-        OrganHealth.HealOrgan((organ, null), args.Body, ent.Comp.HealAmount);
+        OrganHealth.HealOrgan((organ, oh), args.Body, oh.Max - oh.Current);
         Wounds.RecomputeInternalBleed(args.Part);
     }
 

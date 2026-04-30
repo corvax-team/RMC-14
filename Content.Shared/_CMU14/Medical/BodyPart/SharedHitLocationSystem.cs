@@ -4,8 +4,11 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Shared._CMU14.Medical.BodyPart;
@@ -26,6 +29,10 @@ public abstract class SharedHitLocationSystem : EntitySystem
     [Dependency] protected readonly SharedBodyZoneTargetingSystem ZoneTargeting = default!;
     [Dependency] protected readonly SharedTransformSystem Transform = default!;
     [Dependency] protected readonly SkillsSystem Skills = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+
+    private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
+    private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
 
     private readonly Dictionary<EntityUid, HitLocationResolveEvent> _pendingHits = new();
 
@@ -83,6 +90,9 @@ public abstract class SharedHitLocationSystem : EntitySystem
             return;
 
         if (args.Damage.GetTotal() <= 0)
+            return;
+
+        if (!HasLocalizableDamage(args.Damage))
             return;
 
         var (forced, forcedSymmetry) = ResolveForcedSource(ent, args.Origin);
@@ -178,6 +188,22 @@ public abstract class SharedHitLocationSystem : EntitySystem
             return uid;
         }
         return null;
+    }
+
+    private bool HasLocalizableDamage(DamageSpecifier damage)
+        => HasPositiveInGroup(damage, BruteGroup) || HasPositiveInGroup(damage, BurnGroup);
+
+    private bool HasPositiveInGroup(DamageSpecifier damage, ProtoId<DamageGroupPrototype> groupId)
+    {
+        if (!_prototypes.TryIndex(groupId, out var group))
+            return false;
+
+        foreach (var type in group.DamageTypes)
+        {
+            if (damage.DamageDict.TryGetValue(type, out var amount) && amount > FixedPoint2.Zero)
+                return true;
+        }
+        return false;
     }
 
     private PartWeights ReadWeights() => new(
