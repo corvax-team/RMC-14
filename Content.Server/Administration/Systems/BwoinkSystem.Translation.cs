@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared.Administration;
+using Content.Shared.Chat;
 using Robust.Shared.Asynchronous;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
@@ -98,10 +99,17 @@ public sealed partial class BwoinkSystem
 
     private async Task<string?> GetTranslatedMessageAsync(TranslationRequest request)
     {
-        var task = _translationCache.GetOrAdd((request.Api, request.Source, request.Target, request.Text), key =>
+        if (ChatTranslationGlossary.TryTranslateDirect(request.Text, request.Target, out var directTranslation))
+            return directTranslation;
+
+        var prepared = ChatTranslationGlossary.PrepareForTranslation(request.Text, request.Target);
+        var task = _translationCache.GetOrAdd((request.Api, request.Source, request.Target, prepared.Text), key =>
             TranslateAsync(key.Api, key.Source, key.Target, key.Text));
 
-        return await task;
+        var translated = await task;
+        return translated == null
+            ? null
+            : ChatTranslationGlossary.ApplyPostProcessing(request.Text, translated, request.Target, prepared);
     }
 
     private async Task<string?> TranslateAsync(string api, string source, string target, string text)

@@ -481,14 +481,17 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
         {
             CCMSponsorshipTier.SponsorIII =>
             [
-                "ccm-sponsorship-perk-role-weight-3",
+                "ccm-sponsorship-perk-chat-color",
+                "ccm-sponsorship-perk-endgame-credits",
                 "ccm-sponsorship-extended-perk-customization",
                 "ccm-sponsorship-perk-role-timers",
+                "ccm-sponsorship-perk-custom-sprite-skin",
                 "ccm-sponsorship-perk-thanks"
             ],
             CCMSponsorshipTier.SponsorII =>
             [
-                "ccm-sponsorship-perk-role-weight-2",
+                "ccm-sponsorship-perk-chat-color",
+                "ccm-sponsorship-perk-endgame-credits",
                 "ccm-sponsorship-perk-customization",
                 "ccm-sponsorship-perk-role-timers",
                 "ccm-sponsorship-perk-thanks"

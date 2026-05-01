@@ -14,6 +14,7 @@ ccm-lobby-welcome-page1-command = You can reopen this window at any time using t
 
 ccm-lobby-welcome-language-title = Language
 ccm-lobby-welcome-language-text = Choose your preferred language for the UI, rules, and player communication.
+ccm-lobby-welcome-language-chat-translate = Translate chat messages automatically
 ccm-lobby-welcome-language-russian = Russian
 ccm-lobby-welcome-language-english = English
 

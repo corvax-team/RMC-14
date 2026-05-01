@@ -207,12 +207,7 @@ public sealed class CCMSponsorshipManager : IPostInjectInit
 
     private static float GetRoleWeightBonus(CCMSponsorshipTier tier)
     {
-        return tier switch
-        {
-            CCMSponsorshipTier.SponsorII => 0.5f,
-            CCMSponsorshipTier.SponsorIII => 1f,
-            _ => 0f,
-        };
+        return 0f;
     }
 
     private static string GetDefaultColor(CCMSponsorshipTier tier, bool looc)

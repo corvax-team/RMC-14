@@ -16,6 +16,9 @@ public static class ChatTranslationGlossary
     private static readonly Regex EmojiTokenRegex = new(
         @"(?<!\\):[A-Za-z][A-Za-z0-9_]{0,31}:|(?<!\\)\[[A-Za-z][A-Za-z0-9_]{0,31}\]",
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
+    private static readonly Regex RichMarkupTagRegex = new(
+        @"\[(\/)?[a-z]+(?:[ =][^\]]+)?\]",
+        RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 
     private static readonly GlossaryPair[] PhraseGlossary =
     [
@@ -36,16 +39,35 @@ public static class ChatTranslationGlossary
         new("fall back", "отступаем"),
         new("retreat", "отступаем"),
         new("push up", "продвигаемся"),
+        new("push", "давим"),
         new("move out", "выдвигаемся"),
         new("run away", "беги отсюда"),
         new("stop", "стой"),
         new("wait", "подожди"),
         new("wait here", "жди здесь"),
+        new("one sec", "секунду"),
+        new("give me a sec", "дай секунду"),
+        new("hold on", "подожди"),
+        new("hold up", "стой"),
         new("cover me", "прикрой меня"),
         new("get down", "пригнись"),
         new("spread out", "рассредоточиться"),
         new("regroup", "собраться"),
         new("rally up", "собраться"),
+        new("fall in", "стройся"),
+        new("stack up", "стекаемся"),
+        new("breach", "ломаемся внутрь"),
+        new("breach it", "врываемся"),
+        new("open fire", "огонь"),
+        new("cease fire", "прекратить огонь"),
+        new("hold fire", "не стрелять"),
+        new("suppressing", "подавляю"),
+        new("flank left", "обход слева"),
+        new("flank right", "обход справа"),
+        new("watch left", "смотри влево"),
+        new("watch right", "смотри вправо"),
+        new("on me", "ко мне"),
+        new("with me", "за мной"),
         new("clear", "чисто"),
         new("danger close", "опасно близко"),
         new("contact", "контакт"),
@@ -69,29 +91,66 @@ public static class ChatTranslationGlossary
         new("need medic", "нужен медик"),
         new("need a medic", "нужен медик"),
         new("need doctor", "нужен врач"),
+        new("need surgery", "нужна операция"),
+        new("need evac", "нужна эвакуация"),
+        new("need medevac", "нужен медэвак"),
         new("heal me", "полечи меня"),
         new("i need healing", "мне нужна помощь медика"),
         new("need ammo", "нужны патроны"),
         new("need mags", "нужны магазины"),
         new("need supplies", "нужны припасы"),
         new("need materials", "нужны материалы"),
+        new("need cades", "нужны баррикады"),
+        new("need welding fuel", "нужно сварочное топливо"),
         new("reload", "перезарядка"),
         new("out of ammo", "нет патронов"),
         new("low ammo", "мало патронов"),
         new("drag me", "тащи меня"),
         new("revive me", "подними меня"),
         new("defib me", "дефибни меня"),
+        new("i am dead", "я мертв"),
+        new("i am crit", "я в крите"),
+        new("i am down", "я лежу"),
+        new("i am unconscious", "я без сознания"),
+        new("ssd", "ссд"),
 
         // Short chat slang.
         new("omw", "иду"),
         new("brb", "сейчас вернусь"),
         new("afk", "афк"),
+        new("idk", "не знаю"),
+        new("imo", "по-моему"),
+        new("imho", "по-моему"),
+        new("nvm", "забей"),
+        new("np", "не за что"),
+        new("no problem", "без проблем"),
+        new("thx", "спасибо"),
+        new("ty", "спасибо"),
+        new("pls", "пожалуйста"),
+        new("pls help", "помогите пожалуйста"),
+        new("plz", "пожалуйста"),
+        new("bro", "бро"),
+        new("bruh", "брух"),
+        new("fr", "серьезно"),
+        new("for real", "серьезно"),
+        new("wtb", "нужно"),
+        new("lfg", "ищу группу"),
+        new("cya", "увидимся"),
+        new("gn", "спокойной ночи"),
         new("lol", "лол"),
         new("lmao", "лмао"),
         new("wtf", "какого хрена"),
         new("ffs", "да блин"),
         new("gg", "гг"),
         new("good game", "хорошая игра"),
+        new("gj", "хорошая работа"),
+        new("good job", "хорошая работа"),
+        new("nice", "неплохо"),
+        new("lets go", "погнали"),
+        new("go go go", "вперед вперед вперед"),
+        new("roger", "принял"),
+        new("copy", "принял"),
+        new("wilco", "выполняю"),
         new("thanks", "спасибо"),
         new("thank you", "спасибо"),
         new("sorry", "извини"),
@@ -118,6 +177,8 @@ public static class ChatTranslationGlossary
         new("bitch", "сука"),
         new("bastard", "ублюдок"),
         new("piece of shit", "кусок дерьма"),
+        new("holy shit", "нихуя себе"),
+        new("bullshit", "хуйня"),
         new("you suck", "ты отстой"),
         new("stupid", "тупой"),
     ];
@@ -137,6 +198,17 @@ public static class ChatTranslationGlossary
         new("need a medic", "нужен медик"),
         new("need ammo", "нужны патроны"),
         new("out of ammo", "нет патронов"),
+        new("low ammo", "мало патронов"),
+        new("need surgery", "нужна операция"),
+        new("need evac", "нужна эвакуация"),
+        new("need medevac", "нужен медэвак"),
+        new("drag me", "тащи меня"),
+        new("revive me", "подними меня"),
+        new("defib me", "дефибни меня"),
+        new("i am dead", "я мертв"),
+        new("i am crit", "я в крите"),
+        new("i am down", "я лежу"),
+        new("i am unconscious", "я без сознания"),
         new("fuck off", "отвали"),
         new("piss off", "отвали"),
         new("shut up", "заткнись"),
@@ -145,6 +217,8 @@ public static class ChatTranslationGlossary
         new("fuck you", "пошел нахуй"),
         new("what the fuck", "какого хуя"),
         new("piece of shit", "кусок дерьма"),
+        new("holy shit", "нихуя себе"),
+        new("bullshit", "хуйня"),
 
         // TGMC/RMC locations and command terms.
         new("Almayer", "Альмайер"),
@@ -163,6 +237,7 @@ public static class ChatTranslationGlossary
         new("briefing", "брифинг"),
         new("requisitions", "реква"),
         new("req", "реква"),
+        new("req line", "линия реквы"),
         new("hydroponics", "гидропоника"),
         new("hydro", "гидра"),
         new("dropship", "дропшип"),
@@ -199,6 +274,7 @@ public static class ChatTranslationGlossary
         new("engineer", "инженер"),
         new("combat technician", "техник"),
         new("corpsman", "медик"),
+        new("medic", "медик"),
         new("doctor", "врач"),
         new("researcher", "исследователь"),
         new("synthetic", "синтет"),
@@ -230,6 +306,7 @@ public static class ChatTranslationGlossary
         new("aliens", "чужие"),
         new("hive", "улей"),
         new("queen", "королева"),
+        new("queen dead", "королева мертва"),
         new("larva", "личинка"),
         new("drone", "дрон"),
         new("hivelord", "хайвлорд"),
@@ -247,6 +324,16 @@ public static class ChatTranslationGlossary
         new("sentinel", "сентинель"),
         new("widow", "видова"),
         new("screech", "скрич"),
+        new("boiler gas", "газ бойлера"),
+        new("egg", "яйцо"),
+        new("eggs", "яйца"),
+        new("tunnel", "тоннель"),
+        new("weeds", "сорняки"),
+        new("weeds up", "сорняки стоят"),
+        new("weeds down", "сорняки снесены"),
+        new("resin", "смола"),
+        new("resin door", "смоляная дверь"),
+        new("resin wall", "смоляная стена"),
 
         // Weapons, meds, supplies.
         new("defib", "дефиб"),
@@ -267,12 +354,36 @@ public static class ChatTranslationGlossary
         new("claymore", "клеймор"),
         new("motion detector", "датчик движения"),
         new("welder", "сварка"),
+        new("barricade", "баррикада"),
+        new("barricades", "баррикады"),
+        new("cade", "баррикада"),
+        new("cades", "баррикады"),
         new("sentry", "турель"),
         new("APC", "APC"),
         new("AP", "AP"),
         new("HE", "HE"),
         new("HEFA", "HEFA"),
         new("NVG", "NVG"),
+
+        // Common combat chat chunks.
+        new("hold here", "держим тут"),
+        new("hold this", "держим это место"),
+        new("hold north", "держим север"),
+        new("hold south", "держим юг"),
+        new("hold east", "держим восток"),
+        new("hold west", "держим запад"),
+        new("push north", "давим на север"),
+        new("push south", "давим на юг"),
+        new("push east", "давим на восток"),
+        new("push west", "давим на запад"),
+        new("fall back to fob", "отходим к FOB"),
+        new("back to fob", "назад к FOB"),
+        new("left flank", "левый фланг"),
+        new("right flank", "правый фланг"),
+        new("frontline", "передовая"),
+        new("backline", "тыл"),
+        new("choke point", "узкий проход"),
+        new("main hall", "главный коридор"),
 
         // Single generic insults that are useful to preserve in mixed chat lines.
         new("idiot", "идиот"),
@@ -317,6 +428,7 @@ public static class ChatTranslationGlossary
         var prepared = text;
         var protectedTerms = new List<ProtectedTerm>();
         prepared = ProtectEmojiTokens(prepared, protectedTerms);
+        prepared = ProtectMarkupTokens(prepared, protectedTerms);
 
         foreach (var entry in ProtectedGlossary.OrderByDescending(e => e.En.Length))
         {
@@ -340,6 +452,16 @@ public static class ChatTranslationGlossary
     private static string ProtectEmojiTokens(string text, List<ProtectedTerm> protectedTerms)
     {
         return EmojiTokenRegex.Replace(text, match =>
+        {
+            var token = $"{TokenPrefix}{protectedTerms.Count}{TokenSuffix}";
+            protectedTerms.Add(new ProtectedTerm(token, match.Value));
+            return token;
+        });
+    }
+
+    private static string ProtectMarkupTokens(string text, List<ProtectedTerm> protectedTerms)
+    {
+        return RichMarkupTagRegex.Replace(text, match =>
         {
             var token = $"{TokenPrefix}{protectedTerms.Count}{TokenSuffix}";
             protectedTerms.Add(new ProtectedTerm(token, match.Value));

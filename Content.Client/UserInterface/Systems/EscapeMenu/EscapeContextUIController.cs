@@ -1,4 +1,5 @@
-﻿using Content.Client.UserInterface.Systems.Info;
+using Content.Client.Lobby;
+using Content.Client.UserInterface.Systems.Info;
 using Content.Shared.Input;
 using JetBrains.Annotations;
 using Robust.Client.Input;
@@ -16,6 +17,7 @@ public sealed class EscapeContextUIController : UIController
 
     [Dependency] private readonly CloseRecentWindowUIController _closeRecentWindowUIController = default!;
     [Dependency] private readonly EscapeUIController _escapeUIController = default!;
+    [Dependency] private readonly LobbyUIController _lobbyUIController = default!;
 
     public override void Initialize()
     {
@@ -25,6 +27,9 @@ public sealed class EscapeContextUIController : UIController
 
     private void CloseWindowOrOpenGameMenu()
     {
+        if (_lobbyUIController.TryCloseCharacterSetupFromEscape())
+            return;
+
         if (_closeRecentWindowUIController.HasClosableWindow())
         {
             _closeRecentWindowUIController.CloseMostRecentWindow();

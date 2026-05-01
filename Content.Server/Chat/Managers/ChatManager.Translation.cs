@@ -24,6 +24,11 @@ internal sealed partial class ChatManager
     [GeneratedRegex(@"\[(\/)?[a-z]+(?:[ =][^\]]+)?\]", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
     private static partial Regex RichTextTagRegex();
 
+    [GeneratedRegex(
+        @"^(?:Admin (?:login|logout):|Админ (?:заш[её]л|вышел):|SERVER:\s+.+\s+has\s+(?:disconnected|reconnected(?:\s+to\s+the\s+server)?|connected)\.?)$",
+        RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
+    private static partial Regex NonTranslatableSystemStatusRegex();
+
     [Dependency] private readonly IHttpClientHolder _http = default!;
     [Dependency] private readonly ITaskManager _taskManager = default!;
 
@@ -116,10 +121,10 @@ internal sealed partial class ChatManager
             return false;
         }
 
-        if (ContainsUnsupportedRichMarkup(message.Message))
+        if (ShouldSkipSystemStatusTranslation(message))
         {
             Logger.InfoS("chat.translate",
-                $"Skip chat translation for {client}: message contains unsupported rich markup tags. Message='{message.Message}'");
+                $"Skip chat translation for {client}: connection/admin status system message should not be translated. Channel={message.Channel}, Message='{message.Message}'");
             return false;
         }
 
@@ -341,6 +346,19 @@ internal sealed partial class ChatManager
         return (message.Channel & ChatChannel.AdminRelated) != 0 &&
                message.SenderEntity == NetEntity.Invalid &&
                message.SenderKey == null;
+    }
+
+    private static bool ShouldSkipSystemStatusTranslation(ChatMessage message)
+    {
+        if (message.SenderEntity != NetEntity.Invalid || message.SenderKey != null)
+            return false;
+
+        var isSystemChannel = (message.Channel & (ChatChannel.Server | ChatChannel.Admin | ChatChannel.AdminAlert | ChatChannel.AdminChat | ChatChannel.AdminRelated)) != 0;
+        if (!isSystemChannel)
+            return false;
+
+        return !string.IsNullOrWhiteSpace(message.Message) &&
+               NonTranslatableSystemStatusRegex().IsMatch(message.Message.Trim());
     }
 
     private static string? NormalizeLanguageCode(string raw, bool allowAuto)

@@ -325,7 +325,7 @@ namespace Content.Client.Lobby.UI
             };
 
             RgbSkinColorContainer.AddChild(_rgbSkinColorSelector = new ColorSelectorSliders());
-            _rgbSkinColorSelector.SelectorType = ColorSelectorSliders.ColorSelectorType.Hsv; // defaults color selector to HSV
+            _rgbSkinColorSelector.SelectorType = ColorSelectorSliders.ColorSelectorType.Rgb; // defaults color selector to RGB
             _rgbSkinColorSelector.OnColorChanged += _ =>
             {
                 OnSkinColorOnValueChanged();
@@ -2000,7 +2000,6 @@ namespace Content.Client.Lobby.UI
             var recentPenalty = MathF.Round(MathF.Abs(info.RecentPenalty), 2);
             var sessionBonus = MathF.Round(info.SessionBonus, 2);
             var sessionHours = MathF.Round(info.SessionHours, 1);
-            var externalBonus = MathF.Round(info.ExternalBonus, 2);
             var weight = MathF.Round(info.Weight, 2);
             var totalWeight = MathF.Round(info.TotalWeight, 2);
             var chance = MathF.Round(info.ChancePercent, 2);
@@ -2016,7 +2015,6 @@ namespace Content.Client.Lobby.UI
                 ("missed", missedWeight.ToString("0.00", CultureInfo.CurrentCulture)),
                 ("recent", recentPenalty.ToString("0.00", CultureInfo.CurrentCulture)),
                 ("session", sessionBonus.ToString("0.00", CultureInfo.CurrentCulture)),
-                ("external", externalBonus.ToString("0.00", CultureInfo.CurrentCulture)),
                 ("result", weight.ToString("0.00", CultureInfo.CurrentCulture))));
             message.PushNewline();
             message.PushNewline();
@@ -2041,10 +2039,6 @@ namespace Content.Client.Lobby.UI
                 ("steps", info.SessionBonusSteps),
                 ("sessionHours", sessionHours.ToString("0.0", CultureInfo.CurrentCulture)),
                 ("sessionBonus", sessionBonus.ToString("0.00", CultureInfo.CurrentCulture))));
-            message.PushNewline();
-            message.AddMarkupPermissive(Loc.GetString(
-                "humanoid-profile-editor-job-chance-tooltip-external",
-                ("external", externalBonus.ToString("0.00", CultureInfo.CurrentCulture))));
             message.PushNewline();
             message.PushNewline();
 

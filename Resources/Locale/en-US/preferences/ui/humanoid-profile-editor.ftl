@@ -60,13 +60,12 @@ humanoid-profile-editor-job-priority-second-button = Lowest
 humanoid-profile-editor-job-priority-never-button = Never
 humanoid-profile-editor-job-chance = Chance: [u] { $chance }%[/u]
 humanoid-profile-editor-job-chance-tooltip-title = [bold]Role weight formula[/bold]
-humanoid-profile-editor-job-chance-tooltip-formula = [bold]Weight:[/bold] {$base} + {$missed} - {$recent} + {$session} + {$external} = [bold]{$result}[/bold]
+humanoid-profile-editor-job-chance-tooltip-formula = [bold]Weight:[/bold] {$base} + {$missed} - {$recent} + {$session} = [bold]{$result}[/bold]
 humanoid-profile-editor-job-chance-tooltip-breakdown-title = [bold]Breakdown[/bold]
 humanoid-profile-editor-job-chance-tooltip-base = Base weight: [color=#a4885c]+{$base}[/color]
 humanoid-profile-editor-job-chance-tooltip-missed = Missed rounds on this role: {$missedRounds} ([color=#a4885c]+{$missedWeight}[/color])
 humanoid-profile-editor-job-chance-tooltip-recent = Same role last round: [color=#EB2D3A]-{$recent}[/color]
 humanoid-profile-editor-job-chance-tooltip-session = Current session: {$sessionHours} h, {$steps} bonus steps ([color=#a4885c]+{$sessionBonus}[/color])
-humanoid-profile-editor-job-chance-tooltip-external = External bonus: [color=#a4885c]+{$external}[/color]
 humanoid-profile-editor-job-chance-tooltip-result = [bold]Chance:[/bold] {$weight} / {$total} × 100 × {$slots} slot(s) = [bold]{$chance}%[/bold]
 humanoid-profile-editor-job-chance-tooltip-guaranteed = [bold]Displayed chance:[/bold] [bold]{$chance}%[/bold] for the baseline role on this side.
 humanoid-profile-editor-job-chance-tooltip-guidebook-hint = [italic][color=#9AA7B6]Click the chance to open the guidebook article.[/color][/italic]

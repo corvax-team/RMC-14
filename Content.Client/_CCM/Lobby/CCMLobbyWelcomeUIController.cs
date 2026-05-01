@@ -16,6 +16,8 @@ namespace Content.Client._CCM.Lobby;
 [UsedImplicitly]
 public sealed class CCMLobbyWelcomeUIController : UIController, IOnStateEntered<LobbyState>, IOnStateExited<LobbyState>, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
+    private const int CurrentWelcomeVersion = 1;
+
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IConsoleHost _console = default!;
     [Dependency] private readonly ContentLocalizationManager _loc = default!;
@@ -36,11 +38,12 @@ public sealed class CCMLobbyWelcomeUIController : UIController, IOnStateEntered<
     {
         EnsureWindow();
 
-        var count = _config.GetCVar(RMCCVars.CCMLobbyWelcomeSeenCount);
-        if (count >= 2)
+        var seenVersion = _config.GetCVar(RMCCVars.CCMLobbyWelcomeSeenVersion);
+        if (seenVersion >= CurrentWelcomeVersion)
             return;
 
-        _config.SetCVar(RMCCVars.CCMLobbyWelcomeSeenCount, count + 1);
+        _config.SetCVar(RMCCVars.CCMLobbyWelcomeSeenVersion, CurrentWelcomeVersion);
+        _config.SetCVar(RMCCVars.CCMLobbyWelcomeSeenCount, 1);
         OpenWindow();
     }
 

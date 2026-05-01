@@ -804,9 +804,6 @@ namespace Content.Client.RoundEnd
                 FontOverride = _mvpSubtitleFont,
             });
 
-            if (winningSide != CCMStatsSide.None)
-                titleRow.AddChild(BuildWinnerBadge(winningSide));
-
             root.AddChild(titleRow);
 
             root.AddChild(new PanelContainer

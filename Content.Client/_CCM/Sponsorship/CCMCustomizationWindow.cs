@@ -963,7 +963,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
             BuildCardHeader(Loc.GetString("ccm-customization-slot-ghost"), Loc.GetString("ccm-customization-badge-misc"), accentProvider),
             BuildGhostPreview(),
             selector);
-        return WrapWithAvailabilityOverlay(card, () => !(_status?.CustomizationUnlocked ?? false));
+        return WrapWithAvailabilityOverlay(card, () => (_status?.Tier ?? CCMSponsorshipTier.None) < CCMSponsorshipTier.SponsorII);
     }
 
     private Control BuildTagCard()
@@ -1617,7 +1617,7 @@ public sealed partial class CCMCustomizationWindow : DefaultCMWindow
     {
         var tier = _status?.Tier ?? CCMSponsorshipTier.None;
         var selectedTagId = OocTagOptions[Math.Clamp(_oocTagSelector.SelectedId, 0, OocTagOptions.Length - 1)].Id;
-        var canUsePresetTag = tier >= CCMSponsorshipTier.SponsorII;
+        var canUsePresetTag = tier >= CCMSponsorshipTier.SponsorI;
         var canUseCustomTag = tier >= CCMSponsorshipTier.SponsorIII;
 
         if (!canUsePresetTag && selectedTagId != CCMOocTags.None)

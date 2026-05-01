@@ -739,10 +739,17 @@ namespace Content.Client.Lobby.UI
                 return;
 
             _dragMode = GetDragModeFor(args.RelativePosition);
+            var global = args.PointerLocation.Position / UIScale;
+            if (_oldLobbyStyle && _dragMode == DragMode.None)
+            {
+                var hitControl = UserInterfaceManager.MouseGetControl(args.PointerLocation);
+                if (CanStartOldLayoutFreeDrag(hitControl))
+                    _dragMode = DragMode.Move;
+            }
+
             if (_dragMode == DragMode.None)
                 return;
 
-            var global = args.PointerLocation.Position / UIScale;
             if (_dragMode == DragMode.Move && IsPointOverCloseButton(global))
             {
                 _dragMode = DragMode.None;
@@ -755,6 +762,32 @@ namespace Content.Client.Lobby.UI
 
             args.Handle();
             // CCM rework lobby - end
+        }
+
+        private bool CanStartOldLayoutFreeDrag(Control? hitControl)
+        {
+            for (var control = hitControl; control != null && control != this; control = control.Parent)
+            {
+                if (IsInteractiveDragBlocker(control))
+                    return false;
+            }
+
+            return true;
+        }
+
+        private static bool IsInteractiveDragBlocker(Control control)
+        {
+            return control is BaseButton or
+                   CheckBox or
+                   LineEdit or
+                   OptionButton or
+                   ScrollBar or
+                   Slider or
+                   SplitContainer or
+                   TabContainer or
+                   TextEdit or
+                   ItemList or
+                   Tree;
         }
 
         private void StopInteraction(GUIBoundKeyEventArgs args)

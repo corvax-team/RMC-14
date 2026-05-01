@@ -33,7 +33,7 @@ namespace Content.Client.Stylesheets
             if (ReferenceEquals(SheetNanoNeutral, null))
                 SheetNanoNeutral = new StyleNano(_resourceCache, theme, useNeutralPalette: true).Stylesheet;
 
-            SheetNano = new StyleNano(_resourceCache, theme, useNeutralPalette: oldStyle).Stylesheet;
+            SheetNano = new StyleNano(_resourceCache, theme, useNeutralPalette: oldStyle, useOldLobbyPalette: oldStyle).Stylesheet;
             SheetSpace = new StyleSpace(_resourceCache, theme, useNeutralPalette: oldStyle).Stylesheet;
             _userInterfaceManager.Stylesheet = SheetNanoNeutral;
 

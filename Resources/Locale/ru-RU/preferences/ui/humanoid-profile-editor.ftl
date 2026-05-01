@@ -57,13 +57,12 @@ humanoid-profile-editor-job-priority-second-button = Низший
 humanoid-profile-editor-job-priority-never-button = Никогда
 humanoid-profile-editor-job-chance = Шанс: [u]{ $chance }%[/u]
 humanoid-profile-editor-job-chance-tooltip-title = [bold]Формула веса роли[/bold]
-humanoid-profile-editor-job-chance-tooltip-formula = [bold]Вес:[/bold] {$base} + {$missed} - {$recent} + {$session} + {$external} = [bold]{$result}[/bold]
+humanoid-profile-editor-job-chance-tooltip-formula = [bold]Вес:[/bold] {$base} + {$missed} - {$recent} + {$session} = [bold]{$result}[/bold]
 humanoid-profile-editor-job-chance-tooltip-breakdown-title = [bold]Из чего он складывается[/bold]
 humanoid-profile-editor-job-chance-tooltip-base = Базовый вес: [color=#a4885c]+{$base}[/color]
 humanoid-profile-editor-job-chance-tooltip-missed = Пропущено раундов на этой роли: {$missedRounds} ([color=#a4885c]+{$missedWeight}[/color])
 humanoid-profile-editor-job-chance-tooltip-recent = Эта же роль в прошлом раунде: [color=#EB2D3A]-{$recent}[/color]
 humanoid-profile-editor-job-chance-tooltip-session = Текущая сессия: {$sessionHours} ч., {$steps} шаг(ов) бонуса ([color=#a4885c]+{$sessionBonus}[/color])
-humanoid-profile-editor-job-chance-tooltip-external = Внешний бонус: [color=#a4885c]+{$external}[/color]
 humanoid-profile-editor-job-chance-tooltip-result = [bold]Шанс:[/bold] {$weight} / {$total} × 100 × {$slots} слот(а/ов) = [bold]{$chance}%[/bold]
 humanoid-profile-editor-job-chance-tooltip-guaranteed = [bold]Отображаемый шанс:[/bold] [bold]{$chance}%[/bold] для базовой роли этой стороны.
 humanoid-profile-editor-job-chance-tooltip-guidebook-hint = [italic][color=#9AA7B6]Нажмите на шанс, чтобы открыть статью в гайдбуке.[/color][/italic]

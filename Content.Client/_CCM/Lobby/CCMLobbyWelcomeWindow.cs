@@ -53,6 +53,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
     private Label _languageHeader = default!;
     private Label _themeHeader = default!;
     private Label _lobbyStyleHeader = default!;
+    private CheckBox _chatTranslateCheckBox = default!;
     private RichTextLabel _languageHint = default!;
     private RichTextLabel _themeHint = default!;
     private RichTextLabel _lobbyStyleHint = default!;
@@ -75,8 +76,8 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
 
     private const int LanguageRussian = 0;
     private const int LanguageEnglish = 1;
-    private const float WelcomeMinWidth = 760f;
-    private const float WelcomeMinHeight = 620f;
+    private const float WelcomeMinWidth = 680f;
+    private const float WelcomeMinHeight = 560f;
     private const string LobbyUiStyleNewClass = "LobbyUiStyleNew";
     private const string LobbyUiStyleOldClass = "LobbyUiStyleOld";
     public event Action? OnFinished;
@@ -88,7 +89,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         _sawmill = _logManager.GetSawmill("language-restart");
 
         Title = string.Empty;
-        SetSize = new Vector2(900, 720);
+        SetSize = new Vector2(840, 660);
         MinSize = new Vector2(WelcomeMinWidth, WelcomeMinHeight);
 
         _titleFont = _cache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 28);
@@ -246,13 +247,13 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         if (viewport.X <= 1f || viewport.Y <= 1f)
             return;
 
-        var maxWidth = viewport.X * 0.88f;
-        var maxHeight = viewport.Y * 0.90f;
+        var maxWidth = viewport.X * 0.82f;
+        var maxHeight = viewport.Y * 0.86f;
         var minWidth = MathF.Min(WelcomeMinWidth, maxWidth);
         var minHeight = MathF.Min(WelcomeMinHeight, maxHeight);
         var targetSize = new Vector2(
-            Math.Clamp(viewport.X * 0.80f, minWidth, maxWidth),
-            Math.Clamp(viewport.Y * 0.84f, minHeight, maxHeight));
+            Math.Clamp(viewport.X * 0.72f, minWidth, maxWidth),
+            Math.Clamp(viewport.Y * 0.78f, minHeight, maxHeight));
 
         if (Vector2.DistanceSquared(SetSize, targetSize) > 1f)
             SetSize = targetSize;
@@ -264,7 +265,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         _root.Margin = new Thickness(outerMargin);
         _root.SeparationOverride = rootGap;
 
-        var heroHeight = lowHeight ? 132f : compact ? 148f : 170f;
+        var heroHeight = lowHeight ? 122f : compact ? 136f : 154f;
         _heroPanel.MinSize = new Vector2(0f, heroHeight);
         _heroPanel.SetHeight = heroHeight;
 
@@ -278,9 +279,9 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
 
         var innerWidth = MathF.Max(0f, targetSize.X - outerMargin * 2f);
         var gap = lowHeight ? 8f : 12f;
-        var minRightWidth = lowHeight ? 240f : 280f;
-        var minLeftWidth = lowHeight ? 280f : 320f;
-        var rightWidth = Math.Clamp(innerWidth * 0.34f, minRightWidth, 360f);
+        var minRightWidth = lowHeight ? 220f : 250f;
+        var minLeftWidth = lowHeight ? 250f : 290f;
+        var rightWidth = Math.Clamp(innerWidth * 0.32f, minRightWidth, 340f);
         var leftWidth = innerWidth - rightWidth - gap;
         if (leftWidth < minLeftWidth)
         {
@@ -309,6 +310,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
 
         _languageHeader.Text = Loc.GetString("ccm-lobby-welcome-language-title");
         _themeHeader.Text = Loc.GetString("ccm-lobby-welcome-theme-title");
+        _chatTranslateCheckBox.Text = Loc.GetString("ccm-lobby-welcome-language-chat-translate");
         _languageHint.SetMessage(FormattedMessage.FromMarkupOrThrow(
             $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=12][color=#D7E1EB]{Loc.GetString("ccm-lobby-welcome-language-text") }[/color][/font]"));
         _themeHint.SetMessage(FormattedMessage.FromMarkupOrThrow(
@@ -334,8 +336,8 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         _welcomeInfoCard = BuildCard();
         _welcomeInfoCard.HorizontalExpand = false;
         _welcomeInfoCard.VerticalExpand = true;
-        _welcomeInfoCard.MinSize = new Vector2(470, 0);
-        _welcomeInfoCard.MaxSize = new Vector2(470, float.MaxValue);
+        _welcomeInfoCard.MinSize = new Vector2(430, 0);
+        _welcomeInfoCard.MaxSize = new Vector2(430, float.MaxValue);
 
         var leftContent = new BoxContainer
         {
@@ -358,11 +360,12 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
             SeparationOverride = 12,
             HorizontalExpand = false,
             SizeFlagsStretchRatio = 1f,
-            MinSize = new Vector2(360, 0),
+            MinSize = new Vector2(320, 0),
         };
 
         _languageCard = BuildCard();
         var languageContent = BuildSettingsCardContent(_languageCard, out _languageHeader, out _languageHint, out _languageSelector);
+        languageContent.AddChild(BuildChatTranslateCheckBox());
 
         _themeCard = BuildCard();
         var themeContent = BuildSettingsCardContent(_themeCard, out _themeHeader, out _themeHint);
@@ -454,6 +457,25 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         content.AddChild(title);
         content.AddChild(hint);
         return content;
+    }
+
+    private CheckBox BuildChatTranslateCheckBox()
+    {
+        _chatTranslateCheckBox = new CheckBox
+        {
+            HorizontalExpand = true,
+            ToggleMode = true,
+            Pressed = _config.GetCVar(RMCCVars.RMCChatTranslateEnabled),
+            Margin = new Thickness(0, 2, 0, 0),
+        };
+
+        _chatTranslateCheckBox.Label.FontOverride = _smallFont;
+        _chatTranslateCheckBox.OnToggled += args =>
+        {
+            _config.SetCVar(RMCCVars.RMCChatTranslateEnabled, args.Pressed);
+        };
+
+        return _chatTranslateCheckBox;
     }
 
     private Control BuildThemeButtons()
@@ -573,6 +595,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         var currentLobbyStyle = _config.GetCVar(RMCCVars.RMCLobbyUiStyle) ?? "new";
 
         _languageSelector.Clear();
+        _chatTranslateCheckBox.Pressed = _config.GetCVar(RMCCVars.RMCChatTranslateEnabled);
         _languageSelector.AddItem(Loc.GetString("ccm-lobby-welcome-language-russian"), LanguageRussian);
         _languageSelector.AddItem(Loc.GetString("ccm-lobby-welcome-language-english"), LanguageEnglish);
         _languageSelector.SetItemTextColor(LanguageRussian, Color.FromHex("#F3F6FA"));
@@ -660,6 +683,8 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         _languageHeader.FontColorOverride = accent;
         _themeHeader.FontColorOverride = accent;
         _lobbyStyleHeader.FontColorOverride = accent;
+        _chatTranslateCheckBox.Label.FontColorOverride = Color.FromHex(bodyText);
+        _chatTranslateCheckBox.Label.FontColorShadowOverride = null;
 
         var themeClass = _config.GetCVar(RMCCVars.RMCLobbyCrtEnabled)
             ? StyleNano.StyleClassLobbyThemeCrt

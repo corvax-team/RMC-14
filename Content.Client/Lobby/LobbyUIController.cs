@@ -357,6 +357,21 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         }
     }
 
+    public bool TryCloseCharacterSetupFromEscape()
+    {
+        if (_characterSetup == null || _profileEditor == null || !_characterSetup.Visible || !_profileEditor.Visible)
+            return false;
+
+        if (_profileEditor.Profile != null && _profileEditor.IsDirty)
+        {
+            OpenSavePanel();
+            return true;
+        }
+
+        CloseProfileEditor();
+        return true;
+    }
+
     public void UpdateJobPriorityChances(int characterSlot, Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo> chances)
     {
         _jobPriorityChancesBySlot[characterSlot] = new Dictionary<ProtoId<JobPrototype>, JobPriorityChanceInfo>(chances);

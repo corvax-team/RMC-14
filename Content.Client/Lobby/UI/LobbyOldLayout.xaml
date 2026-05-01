@@ -16,32 +16,41 @@
                 <Control Name="DefaultState" Access="Public" VerticalExpand="True">
                     <BoxContainer Name="TopLeft" Orientation="Vertical" HorizontalExpand="True">
                         <PanelContainer StyleClasses="OldLobbyAngleRect" HorizontalAlignment="Left"
-                                        MinWidth="780"
-                                        MaxWidth="860"
+                                        MinWidth="760"
+                                        MaxWidth="840"
                                         HorizontalExpand="True"
                                         VerticalAlignment="Top">
                             <BoxContainer Orientation="Horizontal" SeparationOverride="6" Margin="6 6 6 6"
-                                          HorizontalExpand="True" MaxWidth="860">
+                                          HorizontalExpand="True" MaxWidth="840">
                                 <Button Name="DiscordInfoButton" Access="Public"
                                         Text="{Loc 'server-info-discord-button'}"
-                                        StyleClasses="OldLobbyButton" />
+                                        StyleClasses="OldLobbyButton"
+                                        HorizontalExpand="True" />
                                 <Button Name="WikiButton" Access="Public"
                                         Text="{Loc 'server-info-wiki-button'}"
-                                        StyleClasses="OldLobbyButton" />
+                                        StyleClasses="OldLobbyButton"
+                                        HorizontalExpand="True" />
                                 <Button Name="GuidesButton" Access="Public"
                                         Text="{Loc 'ui-lobby-guides-button'}"
-                                        StyleClasses="OldLobbyButton" />
+                                        StyleClasses="OldLobbyButton"
+                                        HorizontalExpand="True" />
                                 <Button Name="UpdatesButton" Access="Public"
                                         Text="{Loc 'ui-lobby-updates-button'}"
-                                        StyleClasses="OldLobbyButtonRed" />
+                                        StyleClasses="OldLobbyButtonRed"
+                                        HorizontalExpand="True" />
                                 <Button Name="AchievementsButton" Access="Public"
                                         Text="{Loc 'ui-lobby-taskbar-achievements'}"
-                                        StyleClasses="OldLobbyButton" />
+                                        StyleClasses="OldLobbyButton"
+                                        HorizontalExpand="True" />
+                                <Button Name="StatsButton" Access="Public"
+                                        Text="{Loc 'ui-lobby-taskbar-rating'}"
+                                        StyleClasses="OldLobbyButton"
+                                        HorizontalExpand="True" />
                             </BoxContainer>
                         </PanelContainer>
                         <PanelContainer StyleClasses="OldLobbyAngleRect" HorizontalAlignment="Left" Name="LeftSideTop"
-                                        MinWidth="780"
-                                        MaxWidth="860"
+                                        MinWidth="760"
+                                        MaxWidth="840"
                                         HorizontalExpand="True"
                                         VerticalAlignment="Top">
                             <controls:StripeBack StyleClasses="OldLobbyStripeBack"
@@ -49,31 +58,45 @@
                                                  HasBottomEdge="False"
                                                  HasMargins="False"
                                                  HorizontalExpand="True">
-                                <BoxContainer Orientation="Vertical" HorizontalAlignment="Center" MaxWidth="860"
+                                <BoxContainer Orientation="Vertical" HorizontalAlignment="Center" MaxWidth="840"
                                               HorizontalExpand="True">
-                                    <BoxContainer Orientation="Horizontal" SeparationOverride="6" Margin="6 8 6 8"
-                                                  MinHeight="42">
-                                        <Button Name="ObserveButton" Access="Public"
-                                                Text="{Loc 'ui-lobby-observe-button'}"
-                                                StyleClasses="OldLobbyButton"
-                                                MinHeight="34" />
-                                        <Control HorizontalExpand="True" />
-                                        <Label Name="StartTimeLabel" Access="Public"
-                                               StyleClasses="LabelBig OldLobbyHeading"
-                                               MinWidth="260"
-                                               MinHeight="34"
-                                               VAlign="Center" />
-                                        <Button Name="JoinHiveButton" Access="Public"
-                                                Text="{Loc 'ui-lobby-join-hive-button'}"
-                                                StyleClasses="OldLobbyButton" Visible="False" MinWidth="190"
-                                                MinHeight="34" />
-                                        <Button Name="JoinUsmcButton" Access="Public"
-                                                Text="{Loc 'ui-lobby-join-uscm-button'}"
-                                                StyleClasses="OldLobbyButton" MinWidth="190" MinHeight="34"
-                                                Visible="False" />
-                                        <Button Name="ReadyButton" Access="Public" ToggleMode="True"
-                                                Text="{Loc 'ui-lobby-ready-up-button'}"
-                                                StyleClasses="OldLobbyButton" MinWidth="190" MinHeight="34" />
+                                    <BoxContainer Orientation="Horizontal" SeparationOverride="6" Margin="6 5 6 5"
+                                                  MinHeight="38" HorizontalExpand="True">
+                                        <BoxContainer Orientation="Horizontal" HorizontalExpand="True"
+                                                      HorizontalAlignment="Left">
+                                            <Button Name="ObserveButton" Access="Public"
+                                                    Text="{Loc 'ui-lobby-observe-button'}"
+                                                    StyleClasses="OldLobbyButton"
+                                                    MinHeight="30"
+                                                    HorizontalAlignment="Left" />
+                                        </BoxContainer>
+                                        <BoxContainer Orientation="Horizontal" HorizontalExpand="True"
+                                                      HorizontalAlignment="Center">
+                                            <Label Name="StartTimeLabel" Access="Public"
+                                                   StyleClasses="LabelBig OldLobbyHeading"
+                                                   MinWidth="320"
+                                                   MinHeight="30"
+                                                   HorizontalExpand="True"
+                                                   HorizontalAlignment="Center"
+                                                   VAlign="Center" />
+                                        </BoxContainer>
+                                        <BoxContainer Orientation="Horizontal" HorizontalExpand="True"
+                                                      HorizontalAlignment="Right" SeparationOverride="6">
+                                            <Button Name="JoinHiveButton" Access="Public"
+                                                    Text="{Loc 'ui-lobby-join-hive-button'}"
+                                                    StyleClasses="OldLobbyButton" Visible="False" MinWidth="190"
+                                                    MinHeight="30"
+                                                    HorizontalAlignment="Right" />
+                                            <Button Name="JoinUsmcButton" Access="Public"
+                                                    Text="{Loc 'ui-lobby-join-uscm-button'}"
+                                                    StyleClasses="OldLobbyButton" MinWidth="190" MinHeight="30"
+                                                    HorizontalAlignment="Right"
+                                                    Visible="False" />
+                                            <Button Name="ReadyButton" Access="Public" ToggleMode="True"
+                                                    Text="{Loc 'ui-lobby-ready-up-button'}"
+                                                    StyleClasses="OldLobbyButton" MinWidth="170" MinHeight="30"
+                                                    HorizontalAlignment="Right" />
+                                        </BoxContainer>
                                     </BoxContainer>
                                 </BoxContainer>
                             </controls:StripeBack>
@@ -121,9 +144,6 @@
                         <Button Name="OptionsButton" Access="Public" Text="{Loc 'ui-lobby-options-button'}"
                                 StyleClasses="OldLobbyButton" />
                         <Button Name="LeaveButton" Access="Public" Text="{Loc 'ui-lobby-leave-button'}"
-                                StyleClasses="OldLobbyButton" />
-                        <Button Name="StatsButton" Access="Public"
-                                Text="{Loc 'ui-lobby-taskbar-rating'}"
                                 StyleClasses="OldLobbyButton" />
                         <Button Name="SponsorshipButton" Access="Public"
                                 Text="{Loc 'ui-lobby-taskbar-donate'}"

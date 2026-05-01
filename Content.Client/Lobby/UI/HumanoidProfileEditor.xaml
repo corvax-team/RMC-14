@@ -166,7 +166,7 @@
                                             MinWidth="156"
                                             HorizontalAlignment="Right" />
                                 </BoxContainer>
-                                <BoxContainer HorizontalExpand="True">
+                                <BoxContainer HorizontalExpand="True" Visible="False">
                                     <Label Text="{Loc 'humanoid-profile-editor-religion-label'}" />
                                     <Control HorizontalExpand="True"/>
                                     <ccm:CCMOptionButton Name="ReligionButton" HorizontalAlignment="Right" MinWidth="156" />

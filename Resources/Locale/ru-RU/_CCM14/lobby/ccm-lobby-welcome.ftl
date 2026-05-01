@@ -14,6 +14,7 @@ ccm-lobby-welcome-page1-command = Вы всегда сможете открыт�
 
 ccm-lobby-welcome-language-title = Language / Язык
 ccm-lobby-welcome-language-text = Выберите язык интерфейса и правил. Это также поможет другим игрокам понять, на каком языке вам удобнее общаться.
+ccm-lobby-welcome-language-chat-translate = Переводить сообщения в чате автоматически
 ccm-lobby-welcome-language-russian = Русский
 ccm-lobby-welcome-language-english = English
 
