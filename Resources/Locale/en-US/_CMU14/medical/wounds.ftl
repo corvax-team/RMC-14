@@ -21,4 +21,3 @@ cmu-medical-tourniquet-already-on = That limb already has a tourniquet.
 cmu-medical-tourniquet-no-target = There is no limb to tourniquet.
 cmu-medical-tourniquet-verb-remove = Remove tourniquet
 cmu-medical-tourniquet-necrosis = The limb has gone necrotic.
-cmu-medical-tourniquet-severance-imminent = The necrotic limb is failing.

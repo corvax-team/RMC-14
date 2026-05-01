@@ -130,7 +130,4 @@ public sealed partial class CMUMedicalCCVars : CVars
 
     public static readonly CVarDef<float> TourniquetNecrosisMinutes =
         CVarDef.Create("cmu.medical.tourniquet.necrosis_minutes", 5f, CVar.REPLICATED | CVar.SERVER);
-
-    public static readonly CVarDef<float> TourniquetSeveranceMinutes =
-        CVarDef.Create("cmu.medical.tourniquet.severance_minutes", 10f, CVar.REPLICATED | CVar.SERVER);
 }

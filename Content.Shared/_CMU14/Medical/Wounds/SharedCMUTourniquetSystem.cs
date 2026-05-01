@@ -1,7 +1,6 @@
 using System;
 using Content.Shared._CMU14.Medical;
 using Content.Shared._CMU14.Medical.BodyPart;
-using Content.Shared._CMU14.Medical.BodyPart.Events;
 using Content.Shared._CMU14.Medical.Wounds;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Unrevivable;
@@ -40,7 +39,6 @@ public abstract class SharedCMUTourniquetSystem : EntitySystem
     private bool _medicalEnabled;
     private bool _woundsEnabled;
     private float _necrosisMinutes;
-    private float _severanceMinutes;
 
     public override void Initialize()
     {
@@ -53,7 +51,6 @@ public abstract class SharedCMUTourniquetSystem : EntitySystem
         Cfg.OnValueChanged(CMUMedicalCCVars.Enabled, v => _medicalEnabled = v, true);
         Cfg.OnValueChanged(CMUMedicalCCVars.WoundsEnabled, v => _woundsEnabled = v, true);
         Cfg.OnValueChanged(CMUMedicalCCVars.TourniquetNecrosisMinutes, v => _necrosisMinutes = v, true);
-        Cfg.OnValueChanged(CMUMedicalCCVars.TourniquetSeveranceMinutes, v => _severanceMinutes = v, true);
     }
 
     public bool IsLayerEnabled()
@@ -185,12 +182,10 @@ public abstract class SharedCMUTourniquetSystem : EntitySystem
 
         var now = Timing.CurTime;
         var necrosisOffset = TimeSpan.FromMinutes(_necrosisMinutes);
-        var severanceOffset = TimeSpan.FromMinutes(_severanceMinutes);
 
         var tq = EnsureComp<CMUTourniquetComponent>(part);
         tq.AppliedAt = now;
         tq.NecrosisAt = now + necrosisOffset;
-        tq.SeveranceAt = tq.NecrosisAt + severanceOffset;
         tq.RefundOnRemove = ent.Comp.RefundOnRemove;
         Dirty(part, tq);
 
@@ -353,18 +348,6 @@ public abstract class SharedCMUTourniquetSystem : EntitySystem
                 var nec = AddComp<CMUNecroticComponent>(partUid);
                 nec.AppliedAt = now;
                 Dirty(partUid, nec);
-            }
-
-            if (now >= tq.SeveranceAt && Net.IsServer)
-            {
-                // Strip the tourniquet first so its presence doesn't keep
-                // skipping the bleed tick on a part that's about to drop.
-                RemComp<CMUTourniquetComponent>(partUid);
-                if (HasComp<CMUNecroticComponent>(partUid))
-                    RemComp<CMUNecroticComponent>(partUid);
-
-                var ev = new BodyPartSeveredEvent(body, partUid, part.PartType);
-                RaiseLocalEvent(partUid, ref ev);
             }
         }
     }
