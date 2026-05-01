@@ -12,7 +12,6 @@
   - type: Physics
     bodyType: Static
     fixedRotation: true
-    damageContainer: Inorganic
   - type: InteractionOutline
   - type: RequireProjectileTarget
   - type: Corrodible
