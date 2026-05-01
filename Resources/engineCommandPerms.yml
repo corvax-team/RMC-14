@@ -17,7 +17,6 @@
   - inrangeunoccluded
   - lsgrid
   - lsmap
-  - listplayers
   - loc
   - mem
   - netaudit
@@ -40,6 +39,9 @@
   - hwid
   - showaudio
   - showpos
+  - showvel
+  - showrot
+  - showangvel
   - showray
   - showchunkbb
   - showgridnodes
@@ -60,14 +62,15 @@
   - watch
   - sendgarbage
   - setinputcontext
+  - showplayervelocity
   - showvelocities
   - tilelookup
   - net_entityreport
+  - scene
   - replay_recording_stats
   - print_pvs_ack
   - pvs_override_info
   - merge_grids
-
 
 - Flags: MAPPING
   Commands:
@@ -79,6 +82,8 @@
   - rmgrid
   - rmmap
   - mapinit
+  - savegrid
+  - savemap
   - setambientlight
   - tpgrid
   - gridtc
@@ -99,7 +104,10 @@
 - Flags: SERVER
   Commands:
   - delete
+  - pausemap
   - unpausemap
+  - restart
+  - shutdown
 
 - Flags: SPAWN
   Commands:
@@ -128,12 +136,6 @@
   - fuck
   - replay_recording_start
   - replay_recording_stop
-  - restart
-  - shutdown
-  - pausemap
-  # RMC 14
-  - savemap
-  - savegrid
 
 - Flags: QUERY
   Commands:
@@ -144,4 +146,3 @@
 - Commands:
   - "|"
   - oldhelp
-  - scene

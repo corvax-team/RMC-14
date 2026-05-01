@@ -1,4 +1,6 @@
+using System;
 using System.Numerics;
+using Robust.Shared.Maths;
 
 namespace Content.Shared.Vehicle;
 

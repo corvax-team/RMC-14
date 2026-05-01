@@ -1,4 +1,4 @@
-﻿namespace Content.Shared.Administration
+namespace Content.Shared.Administration
 {
     /// <summary>
     ///     Permissions that admins can have.
@@ -150,5 +150,12 @@
         ///     Admin Ghost
         /// </summary>
         AdminGhost = 1ul << 33,
+
+        // CCM14 Permissions
+
+        /// <summary>
+        ///     Lets you manage job whitelists
+        /// </summary>
+        Whitelist = 1ul << 34,
     }
 }

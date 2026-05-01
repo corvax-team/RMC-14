@@ -1,20 +1,23 @@
+using System;
 using System.Numerics;
-using Content.Shared._RMC14.Power;
-using Content.Shared._RMC14.Stun;
-using Content.Shared._RMC14.Vehicle;
-using Content.Shared._RMC14.Xenonids;
+using System.Collections.Generic;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Destructible;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Physics;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Vehicle.Components;
+using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Power;
+using Content.Shared._RMC14.Vehicle;
+using Content.Shared._RMC14.Xenonids;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Maths;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -23,6 +26,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Shared.Physics;
 
 namespace Content.Shared.Vehicle;
 
@@ -261,6 +265,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         if (args.OtherEntity == ent.Owner)
             return;
+
+        if (TryComp(args.OtherEntity, out VehicleRideSurfaceRiderComponent? rider) && rider.Vehicle == ent.Owner)
+        {
+            args.Cancelled = true;
+            return;
+        }
 
         if (args.OtherBody.BodyType != BodyType.Static)
             return;

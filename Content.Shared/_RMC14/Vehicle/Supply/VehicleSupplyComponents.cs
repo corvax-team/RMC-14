@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -16,10 +18,7 @@ public sealed partial class VehicleSupplyEntry
 
     [DataField]
     public string? Unlock;
-    // CCM14-start
-    [DataField]
-    public string? Locked;
-    // CCM14-end
+
     [DataField]
     public List<EntProtoId> Hardpoints = new();
 }
@@ -46,7 +45,6 @@ public sealed partial class VehicleSupplyTechComponent : Component
     [DataField, AutoNetworkedField]
     public List<string> Unlocked = new();
 }
-#if false // CCM14-start
 [RegisterComponent]
 public sealed partial class VehicleHardpointVendorComponent : Component
 {
@@ -59,4 +57,3 @@ public sealed partial class VehicleHardpointVendorComponent : Component
     [NonSerialized]
     public readonly Dictionary<string, int> RemainingGroupAmounts = new();
 }
-#endif // CCM14-end
