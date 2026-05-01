@@ -4,12 +4,14 @@ using Content.Shared._CMU14.Medical.Items;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
 using Content.Shared._RMC14.Medical.Surgery.Tools;
+using Content.Shared._RMC14.Repairable;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Item.ItemToggle;
 using Content.Shared.Popups;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
@@ -27,6 +29,7 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
     [Dependency] protected readonly SharedBodySystem Body = default!;
     [Dependency] protected readonly SharedDoAfterSystem DoAfter = default!;
     [Dependency] protected readonly SharedHandsSystem Hands = default!;
+    [Dependency] protected readonly ItemToggleSystem ItemToggle = default!;
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
     [Dependency] protected readonly SharedUserInterfaceSystem UserInterface = default!;
     [Dependency] protected readonly SharedCMSurgerySystem RmcSurgery = default!;
@@ -84,6 +87,9 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         // check (right leg slot ↔ right leg part) lives in
         // OnArmedInteractUsing's reattach-surgery branch.
         _toolCategories["severed_limb"] = new[] { typeof(BodyPartComponent) };
+        // Synth surgery tools.
+        _toolCategories["blowtorch"] = new[] { typeof(BlowtorchComponent) };
+        _toolCategories["cable_coil"] = new[] { typeof(RMCCableCoilComponent) };
     }
 
     public override void Update(float frameTime)
@@ -253,6 +259,13 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
                 return;
             }
 
+            if (HasComp<BlowtorchComponent>(args.Used) && !ItemToggle.IsActivated(args.Used))
+            {
+                Popup.PopupEntity(Loc.GetString("cmu-medical-surgery-welder-not-lit"), patient, args.User, PopupType.SmallCaution);
+                args.Handled = true;
+                return;
+            }
+
             if (Net.IsServer)
                 StartStepDoAfter(patient, armed, args.User, args.Used);
             args.Handled = true;
@@ -266,7 +279,8 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
 
     private bool IsReattachOnPatientBody(EntityUid patient, EntityUid? clickTarget, CMUSurgeryArmedStepComponent armed)
     {
-        if (armed.LeafSurgeryId != "CMUSurgeryReattachLimb")
+        if (armed.LeafSurgeryId != "CMUSurgeryReattachLimb"
+            && armed.LeafSurgeryId != "RMCSynthSurgeryReattachLimb")
             return false;
         return clickTarget == patient;
     }

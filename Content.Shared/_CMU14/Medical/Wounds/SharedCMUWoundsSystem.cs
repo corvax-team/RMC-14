@@ -10,6 +10,7 @@ using Content.Shared._CMU14.Medical.Organs.Events;
 using Content.Shared._CMU14.Medical.Wounds.Events;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Medical.Wounds;
+using Content.Shared._RMC14.Synth;
 using Content.Shared.Body.Organ;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
@@ -100,6 +101,10 @@ public abstract class SharedCMUWoundsSystem : EntitySystem
         if (!HasComp<CMUHumanMedicalComponent>(args.Body))
             return;
 
+        // Synths repair via welder/cable, not bandages or surgical line.
+        if (HasComp<SynthComponent>(args.Body))
+            return;
+
         var brute = GroupSum(args.Delta, BruteGroup);
         var burn = GroupSum(args.Delta, BurnGroup);
         var bruteOrBurn = brute + burn;
@@ -165,6 +170,13 @@ public abstract class SharedCMUWoundsSystem : EntitySystem
     /// </summary>
     public void RecomputeInternalBleed(EntityUid part)
     {
+        if (IsSynthOwned(part))
+        {
+            if (HasComp<InternalBleedingComponent>(part))
+                RemComp<InternalBleedingComponent>(part);
+            return;
+        }
+
         var maxRate = 0f;
         var source = string.Empty;
 
@@ -223,6 +235,9 @@ public abstract class SharedCMUWoundsSystem : EntitySystem
 
     public void SeedInternalBleed(EntityUid part, string source, float rate)
     {
+        if (IsSynthOwned(part))
+            return;
+
         if (TryComp<InternalBleedingComponent>(part, out var existing) && existing.BloodlossPerSecond >= rate)
             return;
 
@@ -465,6 +480,13 @@ public abstract class SharedCMUWoundsSystem : EntitySystem
         if (TryComp<BodyPartComponent>(part, out var partComp) && partComp.Body is { } body)
             return body;
         return null;
+    }
+
+    private bool IsSynthOwned(EntityUid part)
+    {
+        if (HasComp<SynthComponent>(part))
+            return true;
+        return TryGetBodyOwner(part) is { } body && HasComp<SynthComponent>(body);
     }
 
     public EntityUid? TryGetContainingPart(EntityUid organ)

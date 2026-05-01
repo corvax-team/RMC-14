@@ -10,11 +10,13 @@ using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Conditions;
 using Content.Shared._RMC14.Medical.Surgery.Steps.Parts;
 using Content.Shared._RMC14.Medical.Surgery.Tools;
+using Content.Shared._RMC14.Synth;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Prototypes;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
@@ -236,7 +238,8 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
 
             // Reattach has no part — markers ride on the patient body.
             var resolveTarget = targetPart;
-            if (resolveTarget is null && metadata.Surgery == "CMUSurgeryReattachLimb")
+            if (resolveTarget is null
+                && (metadata.Surgery == "CMUSurgeryReattachLimb" || metadata.Surgery == "RMCSynthSurgeryReattachLimb"))
                 resolveTarget = patient;
 
             CMUResolvedStep resolved;
@@ -298,11 +301,15 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
 
     private bool IsSurgeryEligible(EntityUid patient, EntityUid? targetPart, EntityPrototype surgeryProto, BodyPartType partType, EntityUid surgeon)
     {
+        // Synth-only / non-synth-only filter: a marked surgery is shown only on synth bodies, and vice versa.
+        if (HasComp<SynthComponent>(patient) != surgeryProto.HasComponent<RMCSynthSurgeryComponent>())
+            return false;
+
         // Reattach surfaces ONLY on the synthesized missing-slot entries
         // (targetPart is null). Held-limb match enforcement lives in
         // click-target validation, so dispatch can surface reattach
         // unconditionally on the missing slot.
-        if (surgeryProto.ID == "CMUSurgeryReattachLimb")
+        if (surgeryProto.ID == "CMUSurgeryReattachLimb" || surgeryProto.ID == "RMCSynthSurgeryReattachLimb")
         {
             if (targetPart is not null)
                 return false;

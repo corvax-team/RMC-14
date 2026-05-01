@@ -10,6 +10,8 @@ using Content.Shared._RMC14.Medical.Surgery.Conditions;
 using Content.Shared._RMC14.Medical.Surgery.Effects.Step;
 using Content.Shared._RMC14.Medical.Surgery.Tools;
 using Content.Shared._RMC14.Medical.Wounds;
+using Content.Shared._RMC14.Repairable;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Xenonids.Organs;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Interaction;
@@ -42,6 +44,8 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         base.Initialize();
 
         SubscribeLocalEvent<CMSurgeryToolComponent, AfterInteractEvent>(OnToolAfterInteract);
+        SubscribeLocalEvent<BlowtorchComponent, AfterInteractEvent>(OnSynthToolAfterInteract);
+        SubscribeLocalEvent<RMCCableCoilComponent, AfterInteractEvent>(OnSynthToolAfterInteract);
 
         SubscribeLocalEvent<CMSurgeryStepBleedEffectComponent, CMSurgeryStepEvent>(OnStepBleedComplete);
         SubscribeLocalEvent<CMSurgeryClampBleedEffectComponent, CMSurgeryStepEvent>(OnStepClampBleedComplete);
@@ -60,10 +64,14 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         if (!HasComp<CMSurgeryTargetComponent>(body))
             return;
 
+        var isSynth = HasComp<SynthComponent>(body);
         var surgeries = new Dictionary<NetEntity, List<EntProtoId>>();
         foreach (var surgery in _surgeries)
         {
             if (GetSingleton(surgery) is not { } surgeryEnt)
+                continue;
+
+            if (isSynth != HasComp<RMCSynthSurgeryComponent>(surgeryEnt))
                 continue;
 
             foreach (var part in _body.GetBodyChildren(body))
@@ -79,6 +87,33 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         }
 
         _ui.SetUiState(body, CMSurgeryUIKey.Key, new CMSurgeryBuiState(surgeries));
+    }
+
+    private void OnSynthToolAfterInteract(EntityUid ent, ref AfterInteractEvent args)
+    {
+        if (args.Handled || !args.CanReach || args.Target is not { } target)
+            return;
+
+        if (!HasComp<SynthComponent>(target) || !HasComp<CMSurgeryTargetComponent>(target))
+            return;
+
+        if (args.User == target)
+            return;
+
+        if (!_cmuDispatch.TryDispatch(args.User, target))
+            return;
+
+        args.Handled = true;
+    }
+
+    private void OnSynthToolAfterInteract(Entity<BlowtorchComponent> ent, ref AfterInteractEvent args)
+    {
+        OnSynthToolAfterInteract(ent.Owner, ref args);
+    }
+
+    private void OnSynthToolAfterInteract(Entity<RMCCableCoilComponent> ent, ref AfterInteractEvent args)
+    {
+        OnSynthToolAfterInteract(ent.Owner, ref args);
     }
 
     private void OnToolAfterInteract(Entity<CMSurgeryToolComponent> ent, ref AfterInteractEvent args)
