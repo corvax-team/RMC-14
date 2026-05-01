@@ -61,7 +61,7 @@
 - type: startingGear
   id: RMCGearRoyalMajor
   equipment:
-    head: RMCHeadRoyalBeretLead
+    head: CCMHeadMirtanVenok #CCM14
     eyes: RMCGlassesMedicalHUDGlasses
     ears: RMCHeadsetRoyalMarineOfficer
     jumpsuit: RMCJumpsuitMarineRoyalTeamlead
@@ -71,7 +71,8 @@
     suitstorage: RMCWeaponRifleL24
     id: RMCIDRoyalMarines
     belt: RMCMatebaBeltLuxuriousFilled
-    back: RMCBackpackRCMSmallPVPMajor
+    # back: RMCBackpackRCMSmallPVPMajor CCM14
+    neck: CCMMirtanOficcerCloakLarge #CCM14
     pocket1: RMCPouchToolsFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 

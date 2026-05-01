@@ -87,6 +87,7 @@
     id: RMCIDRoyalMarinesMarksman
     belt: RMCBeltRCML24
     back: RMCBackpackRCMSmallPVPMarksman
+    neck: CCMMirtanSpecialistCloak #CCM14
     pocket1: RMCPouchGeneralLargeFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 

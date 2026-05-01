@@ -3,9 +3,9 @@ meta:
   category: Map
   engineVersion: 264.0.2-fix-physics
   forkId: colonialmarines
-  forkVersion: 47eb549f4077e45c36f173b47b5f9eca24cafb39
-  time: 04/22/2026 08:54:09
-  entityCount: 11475
+  forkVersion: fcc8f6f1c339c88e08b6220c04d47bb67b2b130d
+  time: 04/25/2026 03:48:24
+  entityCount: 11515
 maps:
 - 1
 grids:
@@ -20687,7 +20687,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 618.0327152
     - type: Door
-      secondsUntilStateChange: -38976.492
+      secondsUntilStateChange: -39525.4
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -20701,7 +20701,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 618.0327152
     - type: Door
-      secondsUntilStateChange: -38976.492
+      secondsUntilStateChange: -39525.4
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -21392,12 +21392,12 @@ entities:
   - uid: 1460
     components:
     - type: Transform
-      pos: 16.342155,-9.616597
+      pos: 15.445244,-8.399895
       parent: 1
   - uid: 1461
     components:
     - type: Transform
-      pos: 16.623405,-9.522847
+      pos: 15.625801,-8.261005
       parent: 1
 - proto: CMHeadCapSurgBlue
   entities:
@@ -25455,6 +25455,13 @@ entities:
     - type: Transform
       pos: -35.84093,10.572845
       parent: 1
+- proto: CMStampCMP
+  entities:
+  - uid: 7939
+    components:
+    - type: Transform
+      pos: 29.570024,102.772156
+      parent: 1
 - proto: CMStampCO
   entities:
   - uid: 2571
@@ -25510,6 +25517,20 @@ entities:
     components:
     - type: Transform
       pos: 0.28580755,103.9322
+      parent: 1
+- proto: CMStampLiaison
+  entities:
+  - uid: 7931
+    components:
+    - type: Transform
+      pos: 12.603294,110.574814
+      parent: 1
+- proto: CMStampXO
+  entities:
+  - uid: 7930
+    components:
+    - type: Transform
+      pos: -5.5629272,95.0282
       parent: 1
 - proto: CMSurgicalDrill
   entities:
@@ -26302,6 +26323,11 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -25.5,-19.5
+      parent: 1
+  - uid: 7925
+    components:
+    - type: Transform
+      pos: 36.5,81.5
       parent: 1
   - uid: 9593
     components:
@@ -53809,6 +53835,178 @@ entities:
       parent: 1
     - type: ApcPowerReceiver
       needsPower: False
+- proto: LandingZoneLightStanding
+  entities:
+  - uid: 5735
+    components:
+    - type: Transform
+      pos: -5.5,2.5
+      parent: 1
+  - uid: 6466
+    components:
+    - type: Transform
+      pos: -5.5,-1.5
+      parent: 1
+  - uid: 6470
+    components:
+    - type: Transform
+      pos: 6.5,2.5
+      parent: 1
+  - uid: 6471
+    components:
+    - type: Transform
+      pos: 6.5,-1.5
+      parent: 1
+  - uid: 6472
+    components:
+    - type: Transform
+      pos: 6.5,11.5
+      parent: 1
+  - uid: 6484
+    components:
+    - type: Transform
+      pos: -5.5,11.5
+      parent: 1
+  - uid: 6488
+    components:
+    - type: Transform
+      pos: 4.5,12.5
+      parent: 1
+  - uid: 6491
+    components:
+    - type: Transform
+      pos: -3.5,12.5
+      parent: 1
+  - uid: 6492
+    components:
+    - type: Transform
+      pos: 0.5,-11.5
+      parent: 1
+  - uid: 6494
+    components:
+    - type: Transform
+      pos: 0.5,12.5
+      parent: 1
+  - uid: 6497
+    components:
+    - type: Transform
+      pos: -5.5,-10.5
+      parent: 1
+  - uid: 6499
+    components:
+    - type: Transform
+      pos: -3.5,-11.5
+      parent: 1
+  - uid: 6500
+    components:
+    - type: Transform
+      pos: 4.5,-11.5
+      parent: 1
+  - uid: 6507
+    components:
+    - type: Transform
+      pos: 6.5,-10.5
+      parent: 1
+  - uid: 6511
+    components:
+    - type: Transform
+      pos: -5.5,-6.5
+      parent: 1
+  - uid: 6519
+    components:
+    - type: Transform
+      pos: 6.5,-6.5
+      parent: 1
+  - uid: 6521
+    components:
+    - type: Transform
+      pos: 6.5,8.5
+      parent: 1
+  - uid: 6522
+    components:
+    - type: Transform
+      pos: -5.5,8.5
+      parent: 1
+  - uid: 6523
+    components:
+    - type: Transform
+      pos: 50.5,80.5
+      parent: 1
+  - uid: 7829
+    components:
+    - type: Transform
+      pos: 50.5,78.5
+      parent: 1
+  - uid: 7889
+    components:
+    - type: Transform
+      pos: 38.5,80.5
+      parent: 1
+  - uid: 7890
+    components:
+    - type: Transform
+      pos: 38.5,78.5
+      parent: 1
+  - uid: 7894
+    components:
+    - type: Transform
+      pos: 38.5,85.5
+      parent: 1
+  - uid: 7897
+    components:
+    - type: Transform
+      pos: 50.5,85.5
+      parent: 1
+  - uid: 7898
+    components:
+    - type: Transform
+      pos: 39.5,90.5
+      parent: 1
+  - uid: 7899
+    components:
+    - type: Transform
+      pos: 38.5,89.5
+      parent: 1
+  - uid: 7904
+    components:
+    - type: Transform
+      pos: 49.5,90.5
+      parent: 1
+  - uid: 7905
+    components:
+    - type: Transform
+      pos: 50.5,89.5
+      parent: 1
+  - uid: 7906
+    components:
+    - type: Transform
+      pos: 50.5,69.5
+      parent: 1
+  - uid: 7908
+    components:
+    - type: Transform
+      pos: 49.5,68.5
+      parent: 1
+  - uid: 7909
+    components:
+    - type: Transform
+      pos: 38.5,69.5
+      parent: 1
+  - uid: 7911
+    components:
+    - type: Transform
+      pos: 50.5,73.5
+      parent: 1
+  - uid: 7923
+    components:
+    - type: Transform
+      pos: 38.5,73.5
+      parent: 1
+  - uid: 7924
+    components:
+    - type: Transform
+      pos: 39.5,68.5
+      parent: 1
 - proto: MedkitRadiationFilled
   entities:
   - uid: 188
@@ -63798,7 +63996,7 @@ entities:
   - uid: 9545
     components:
     - type: Transform
-      pos: 16.51403,-8.767708
+      pos: 16.528578,-8.33045
       parent: 1
   - uid: 9546
     components:
@@ -63838,6 +64036,19 @@ entities:
     components:
     - type: Transform
       pos: 68.5,114.5
+      parent: 1
+- proto: RMCComputerDropshipNavigationSmall
+  entities:
+  - uid: 7910
+    components:
+    - type: Transform
+      pos: 36.5,81.5
+      parent: 1
+  - uid: 7929
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 16.5,-9.5
       parent: 1
 - proto: RMCComputerIntel
   entities:
@@ -73883,7 +74094,7 @@ entities:
   - uid: 10637
     components:
     - type: Transform
-      pos: 16.623405,-9.080208
+      pos: 15.598022,-8.372116
       parent: 1
 - proto: RMCMatebaCustomizationCase
   entities:
@@ -77208,12 +77419,12 @@ entities:
   - uid: 11055
     components:
     - type: Transform
-      pos: 15.842155,-8.564466
+      pos: 15.625801,-8.469339
       parent: 1
   - uid: 11056
     components:
     - type: Transform
-      pos: 15.935905,-8.298841
+      pos: 15.875801,-8.302672
       parent: 1
 - proto: RMCSupplyDropConsole
   entities:
@@ -78494,56 +78705,6 @@ entities:
       parent: 1
     - type: RMCTeleporterViewer
       id: David_lestnic_1
-- proto: VehicleAPCSupplyVendor
-  entities:
-  - uid: 354
-    components:
-    - type: Transform
-      pos: 20.5,3.5
-      parent: 1
-- proto: VehicleHardpointVendor
-  entities:
-  - uid: 2304
-    components:
-    - type: Transform
-      pos: 14.5,10.5
-      parent: 1
-- proto: VehicleInteriorSupplyVendorOff
-  entities:
-  - uid: 356
-    components:
-    - type: Transform
-      pos: 23.5,3.5
-      parent: 1
-  - uid: 357
-    components:
-    - type: Transform
-      pos: 21.5,3.5
-      parent: 1
-  - uid: 359
-    components:
-    - type: Transform
-      pos: 21.5,8.5
-      parent: 1
-  - uid: 2815
-    components:
-    - type: Transform
-      pos: 23.5,8.5
-      parent: 1
-- proto: VehicleLift
-  entities:
-  - uid: 2303
-    components:
-    - type: Transform
-      pos: 20.5,13.5
-      parent: 1
-- proto: VehicleSupplyConsole
-  entities:
-  - uid: 5471
-    components:
-    - type: Transform
-      pos: 16.5,16.5
-      parent: 1
 - proto: RMCVendorLifeboatMedical
   entities:
   - uid: 94
@@ -85032,6 +85193,56 @@ entities:
           - Reverse
         - - Middle
           - Off
+- proto: VehicleAPCSupplyVendor
+  entities:
+  - uid: 354
+    components:
+    - type: Transform
+      pos: 20.5,3.5
+      parent: 1
+- proto: VehicleHardpointVendor
+  entities:
+  - uid: 2304
+    components:
+    - type: Transform
+      pos: 14.5,10.5
+      parent: 1
+- proto: VehicleInteriorSupplyVendorOff
+  entities:
+  - uid: 356
+    components:
+    - type: Transform
+      pos: 23.5,3.5
+      parent: 1
+  - uid: 357
+    components:
+    - type: Transform
+      pos: 21.5,3.5
+      parent: 1
+  - uid: 359
+    components:
+    - type: Transform
+      pos: 21.5,8.5
+      parent: 1
+  - uid: 2815
+    components:
+    - type: Transform
+      pos: 23.5,8.5
+      parent: 1
+- proto: VehicleLift
+  entities:
+  - uid: 2303
+    components:
+    - type: Transform
+      pos: 20.5,13.5
+      parent: 1
+- proto: VehicleSupplyConsole
+  entities:
+  - uid: 5471
+    components:
+    - type: Transform
+      pos: 16.5,16.5
+      parent: 1
 - proto: WarpPoint
   entities:
   - uid: 11479
