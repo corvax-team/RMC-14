@@ -24,6 +24,8 @@ public abstract partial class CESharedZLevelsSystem
     private const float ZGravityForce = 9.8f;
     private const float ZVelocityLimit = 20.0f;
     private const int MaxStepsPerFrame = 10;
+    private const float SleepVelocityThreshold = 0.01f;
+    private const float SleepHeightThreshold = 0.01f;
 
     /// <summary>
     /// The minimum speed required to trigger LandEvent events.
@@ -51,6 +53,7 @@ public abstract partial class CESharedZLevelsSystem
         if (!ZPhyzQuery.TryComp(ent, out var zComp))
             return;
 
+        zComp.Sleeping = false;
         RequestCacheMovement((ent, zComp));
     }
 
@@ -110,17 +113,27 @@ public abstract partial class CESharedZLevelsSystem
         {
             entity.Comp.CachedHasTileAbove = false;
         }
+
+        if (Math.Abs(entity.Comp.LocalPosition - entity.Comp.CachedGroundHeight) > SleepHeightThreshold ||
+            Math.Abs(entity.Comp.Velocity) > SleepVelocityThreshold)
+        {
+            entity.Comp.Sleeping = false;
+        }
     }
 
     private void OnMoveEvent(Entity<CEZPhysicsComponent> ent, ref MoveEvent args)
     {
         RequestCacheMovement(ent, false);
+
+        if (Math.Abs(ent.Comp.LocalPosition - ent.Comp.CachedGroundHeight) > SleepHeightThreshold)
+            ent.Comp.Sleeping = false;
     }
 
     private void OnZLevelMapMove(Entity<CEZPhysicsComponent> ent, ref CEZLevelMapMoveEvent args)
     {
         ent.Comp.CurrentZLevel = args.CurrentZLevel;
         DirtyField(ent, ent.Comp, nameof(CEZPhysicsComponent.CurrentZLevel));
+        ent.Comp.Sleeping = false;
         // Update cached ground height when entity moves between Z-level maps
         RequestCacheMovement(ent);
     }
@@ -131,6 +144,13 @@ public abstract partial class CESharedZLevelsSystem
 
         if (_net.IsClient && !_clientSimulation)
             return;
+
+        if (_zMapCount == 0 || _activeZPhysicsCount == 0)
+        {
+            _accumulatedTime = TimeSpan.Zero;
+            return;
+        }
+
         _accumulatedTime += TimeSpan.FromSeconds(frameTime);
 
         var steps = 0;
@@ -154,6 +174,14 @@ public abstract partial class CESharedZLevelsSystem
 
             if (!_zMapQuery.HasComp(xform.MapUid.Value))
                 continue;
+
+            if (zPhysicsComponent.Sleeping &&
+                CanStaySleeping((uid, zPhysicsComponent), physics))
+            {
+                continue;
+            }
+
+            zPhysicsComponent.Sleeping = false;
 
             var oldVelocity = zPhysicsComponent.Velocity;
             var oldHeight = zPhysicsComponent.LocalPosition;
@@ -260,7 +288,42 @@ public abstract partial class CESharedZLevelsSystem
 
             if (float.Abs(oldHeight - zPhysicsComponent.LocalPosition) > 0.01f)
                 DirtyField(uid, zPhysicsComponent, nameof(CEZPhysicsComponent.LocalPosition));
+
+            if (CanSleep((uid, zPhysicsComponent), physics))
+            {
+                zPhysicsComponent.Sleeping = true;
+                zPhysicsComponent.Velocity = 0f;
+
+                if (Math.Abs(zPhysicsComponent.LocalPosition - zPhysicsComponent.CachedGroundHeight) > SleepHeightThreshold)
+                {
+                    zPhysicsComponent.LocalPosition = zPhysicsComponent.CachedGroundHeight;
+                    DirtyField(uid, zPhysicsComponent, nameof(CEZPhysicsComponent.LocalPosition));
+                }
+
+                if (Math.Abs(oldVelocity) > SleepVelocityThreshold || Math.Abs(zPhysicsComponent.Velocity) > SleepVelocityThreshold)
+                    DirtyField(uid, zPhysicsComponent, nameof(CEZPhysicsComponent.Velocity));
+            }
         }
+    }
+
+    private bool CanStaySleeping(Entity<CEZPhysicsComponent> ent, PhysicsComponent physics)
+    {
+        return physics.BodyStatus == BodyStatus.OnGround &&
+               !ent.Comp.VelocityRaiseEvent &&
+               Math.Abs(ent.Comp.Velocity) <= SleepVelocityThreshold &&
+               Math.Abs(ent.Comp.LocalPosition - ent.Comp.CachedGroundHeight) <= SleepHeightThreshold &&
+               ent.Comp.CachedGroundHeight >= 0f &&
+               ent.Comp.CachedGroundHeight < 1f;
+    }
+
+    private bool CanSleep(Entity<CEZPhysicsComponent> ent, PhysicsComponent physics)
+    {
+        return physics.BodyStatus == BodyStatus.OnGround &&
+               !ent.Comp.VelocityRaiseEvent &&
+               Math.Abs(ent.Comp.Velocity) <= SleepVelocityThreshold &&
+               Math.Abs(ent.Comp.LocalPosition - ent.Comp.CachedGroundHeight) <= SleepHeightThreshold &&
+               ent.Comp.CachedGroundHeight >= 0f &&
+               ent.Comp.CachedGroundHeight < 1f;
     }
 
     /// <summary>
@@ -391,7 +454,10 @@ public abstract partial class CESharedZLevelsSystem
                 HasComp<CEActiveZPhysicsComponent>(uid))
             {
                 if (_tileInvalidation.Add(uid))
+                {
+                    zComp.Sleeping = false;
                     RequestCacheMovement((uid, zComp));
+                }
 
                 continue;
             }
@@ -455,6 +521,7 @@ public abstract partial class CESharedZLevelsSystem
         if (!Resolve(ent.Owner, ref ent.Comp))
             return;
 
+        ent.Comp.Sleeping = false;
         ent.Comp.LocalPosition = newPosition;
         DirtyField(ent, ent.Comp, nameof(CEZPhysicsComponent.LocalPosition));
     }
@@ -476,6 +543,7 @@ public abstract partial class CESharedZLevelsSystem
         if (!Resolve(ent.Owner, ref ent.Comp))
             return;
 
+        ent.Comp.Sleeping = false;
         ent.Comp.GravityMultiplier = newGravityMultiplier;
         DirtyField(ent, ent.Comp, nameof(CEZPhysicsComponent.GravityMultiplier));
     }
@@ -489,6 +557,7 @@ public abstract partial class CESharedZLevelsSystem
         if (!Resolve(ent.Owner, ref ent.Comp))
             return;
 
+        ent.Comp.Sleeping = false;
         ent.Comp.Velocity = newVelocity;
         DirtyField(ent, ent.Comp, nameof(CEZPhysicsComponent.Velocity));
     }
@@ -502,6 +571,7 @@ public abstract partial class CESharedZLevelsSystem
         if (!Resolve(ent.Owner, ref ent.Comp, false))
             return;
 
+        ent.Comp.Sleeping = false;
         ent.Comp.Velocity += newVelocity;
         DirtyField(ent, ent.Comp, nameof(CEZPhysicsComponent.Velocity));
     }

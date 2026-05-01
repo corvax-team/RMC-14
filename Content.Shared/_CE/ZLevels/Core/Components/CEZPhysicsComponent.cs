@@ -121,5 +121,12 @@ public sealed partial class CEZPhysicsComponent : Component
     [ViewVariables]
     public EntityUid? CachedMapUid;
 
+    /// <summary>
+    /// Runtime-only optimization flag. Sleeping entities skip expensive z-physics integration
+    /// until movement, cache invalidation or explicit velocity changes wake them up.
+    /// </summary>
+    [ViewVariables]
+    public bool Sleeping;
+
     #endregion
 }

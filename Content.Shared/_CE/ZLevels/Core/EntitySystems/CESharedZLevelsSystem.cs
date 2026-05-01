@@ -42,6 +42,8 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
 
     private bool _clientSimulation;
     private TimeSpan _fixedTimestep;
+    private int _zMapCount;
+    private int _activeZPhysicsCount;
 
     public override void Initialize()
     {
@@ -58,10 +60,35 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
 
         ZPhyzQuery = GetEntityQuery<CEZPhysicsComponent>();
 
+        SubscribeLocalEvent<CEZLevelMapComponent, ComponentStartup>(OnZMapStartup);
+        SubscribeLocalEvent<CEZLevelMapComponent, ComponentShutdown>(OnZMapShutdown);
+        SubscribeLocalEvent<CEActiveZPhysicsComponent, ComponentStartup>(OnActiveZPhysicsStartup);
+        SubscribeLocalEvent<CEActiveZPhysicsComponent, ComponentShutdown>(OnActiveZPhysicsShutdown);
+
         InitializeActivation();
         InitializeCacheHooks();
         InitializeMovement();
         InitializeView();
+    }
+
+    private void OnZMapStartup(Entity<CEZLevelMapComponent> ent, ref ComponentStartup args)
+    {
+        _zMapCount++;
+    }
+
+    private void OnZMapShutdown(Entity<CEZLevelMapComponent> ent, ref ComponentShutdown args)
+    {
+        _zMapCount = Math.Max(0, _zMapCount - 1);
+    }
+
+    private void OnActiveZPhysicsStartup(Entity<CEActiveZPhysicsComponent> ent, ref ComponentStartup args)
+    {
+        _activeZPhysicsCount++;
+    }
+
+    private void OnActiveZPhysicsShutdown(Entity<CEActiveZPhysicsComponent> ent, ref ComponentShutdown args)
+    {
+        _activeZPhysicsCount = Math.Max(0, _activeZPhysicsCount - 1);
     }
 
     public bool IsVoidAtCoordinates(EntityCoordinates coords, out Entity<CEZLevelMapComponent> belowMap)
