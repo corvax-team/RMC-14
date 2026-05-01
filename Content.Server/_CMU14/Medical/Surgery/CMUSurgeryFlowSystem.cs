@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using Content.Shared._CMU14.Medical;
 using Content.Shared._CMU14.Medical.Surgery;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Repairable;
+using Content.Shared.Body.Part;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
@@ -20,8 +22,11 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly CMUSurgeryDispatchSystem _dispatch = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
 
     private const float StepDoAfterSeconds = 2f;
+    private static readonly EntProtoId<SkillDefinitionComponent> SurgerySkill = "RMCSkillSurgery";
+    private static readonly float[] SurgeryStepDelayMultipliers = { 1.25f, 1f, 0.75f, 0.55f, 0.4f };
 
     private static readonly SoundSpecifier WelderStepSound = new SoundCollectionSpecifier("Welder");
 
@@ -36,14 +41,21 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
         ["organ_clamp"] = new SoundCollectionSpecifier("RMCSurgeryOrgan"),
     };
 
-    protected override void StartStepDoAfter(EntityUid patient, CMUSurgeryArmedStepComponent armed, EntityUid surgeon, EntityUid tool)
+    protected override void StartStepDoAfter(EntityUid patient, CMUSurgeryArmedStepComponent armed, EntityUid surgeon, EntityUid tool, EntityUid targetPart)
     {
-        var ev = new CMUSurgeryStepDoAfterEvent(armed.SurgeryId, armed.StepIndex);
-        var doAfter = new DoAfterArgs(EntityManager, surgeon, StepDoAfterSeconds, ev, patient, patient, tool)
+        var delay = ResolveStepDoAfterDelay(surgeon);
+        var ev = new CMUSurgeryStepDoAfterEvent(
+            armed.SurgeryId,
+            armed.LeafSurgeryId,
+            armed.StepIndex,
+            armed.TargetPartType,
+            armed.TargetSymmetry);
+        var doAfter = new DoAfterArgs(EntityManager, surgeon, delay, ev, patient, targetPart, tool)
         {
             BreakOnMove = true,
             MovementThreshold = 0.5f,
             NeedHand = true,
+            CancelDuplicate = false,
         };
         if (!DoAfter.TryStartDoAfter(doAfter))
             return;
@@ -59,6 +71,12 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
         {
             _audio.PlayPvs(sound, patient);
         }
+    }
+
+    private TimeSpan ResolveStepDoAfterDelay(EntityUid surgeon)
+    {
+        var multiplier = _skills.GetSkillDelayMultiplier(surgeon, SurgerySkill, SurgeryStepDelayMultipliers);
+        return TimeSpan.FromSeconds(StepDoAfterSeconds * multiplier);
     }
 
     protected override void ApplyWrongToolDamage(EntityUid surgeon, EntityUid patient, EntityUid tool, string damageType, float amount)
@@ -83,7 +101,7 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
             PopupType.MediumCaution);
     }
 
-    protected override void RunStepEffect(EntityUid patient, CMUSurgeryArmedStepComponent armed, EntityUid surgeon)
+    protected override void RunStepEffect(EntityUid patient, CMUSurgeryArmedStepComponent armed, EntityUid surgeon, EntityUid? tool, EntityUid? targetPart)
     {
         // Resolve the step proto id from the CURRENTLY RESOLVED surgery
         // (which may be a prereq like CMSurgeryOpenIncision, not the leaf
@@ -103,12 +121,27 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
         }
 
         EntityUid stepPart = patient;
-        if (TryFindClickedPart(patient, null, armed.TargetPartType, armed.TargetSymmetry, out var foundPart))
+        if (targetPart is { } part
+            && TryComp<BodyPartComponent>(part, out var targetPartComp)
+            && targetPartComp.PartType == armed.TargetPartType
+            && targetPartComp.Symmetry == armed.TargetSymmetry)
+        {
+            stepPart = part;
+        }
+        else if (TryFindClickedPart(patient, null, armed.TargetPartType, armed.TargetSymmetry, out var foundPart))
+        {
             stepPart = foundPart;
+        }
 
         var tools = new List<EntityUid>();
+        if (tool is { } usedTool && Exists(usedTool))
+            tools.Add(usedTool);
+
         foreach (var held in Hands.EnumerateHeld(surgeon))
-            tools.Add(held);
+        {
+            if (!tools.Contains(held))
+                tools.Add(held);
+        }
 
         var stepEvent = new CMSurgeryStepEvent(surgeon, patient, stepPart, tools);
         RaiseLocalEvent(stepEnt, ref stepEvent);

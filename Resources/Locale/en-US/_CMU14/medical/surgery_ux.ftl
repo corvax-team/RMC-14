@@ -82,6 +82,7 @@ cmu-medical-surgery-wrong-part = That isn't the part you armed the surgery on.
 cmu-medical-surgery-wrong-tool = That isn't the right tool for this step.
 cmu-medical-surgery-wrong-tool-damage = You slip with the { $tool }!
 cmu-medical-surgery-no-tool = You need a surgical tool to perform this step.
+cmu-medical-surgery-missing-skills = You don't know how to perform this step.
 cmu-medical-surgery-wrong-limb = That limb doesn't match any empty slot on the patient.
 cmu-medical-surgery-welder-not-lit = Light the welder first.
 

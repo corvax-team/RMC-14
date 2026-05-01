@@ -265,7 +265,9 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
 
             CMUResolvedStep resolved;
             if (TryComp<CMUSurgeryArmedStepComponent>(patient, out var armedComp)
-                && armedComp.LeafSurgeryId == metadata.Surgery)
+                && armedComp.LeafSurgeryId == metadata.Surgery
+                && armedComp.TargetPartType == partType
+                && armedComp.TargetSymmetry == symmetry)
             {
                 if (!_flowSurgery.TryResolveStepAt(armedComp.SurgeryId, armedComp.StepIndex, out resolved))
                     continue;

@@ -155,7 +155,9 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         }
 
         if (TryComp<CMUSurgeryArmedStepComponent>(patient, out var existing)
-            && existing.LeafSurgeryId == surgeryId)
+            && existing.LeafSurgeryId == surgeryId
+            && existing.TargetPartType == armedType
+            && existing.TargetSymmetry == armedSymmetry)
         {
             existing.Surgeon = surgeon;
             existing.ArmedAt = Timing.CurTime;
@@ -250,16 +252,41 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         if (!isRightTool && !hasWrongDamage)
             return;
 
-        if (!TryFindClickedPart(patient, args.Target, armed.TargetPartType, armed.TargetSymmetry, out _)
-            && !IsReattachOnPatientBody(patient, args.Target, armed))
+        var hasTargetPart = TryFindClickedPart(patient, args.Target, armed.TargetPartType, armed.TargetSymmetry, out var targetPart);
+        if (!hasTargetPart && !IsReattachOnPatientBody(patient, args.Target, armed))
         {
             Popup.PopupEntity(Loc.GetString("cmu-medical-surgery-wrong-part"), patient, args.User, PopupType.SmallCaution);
             args.Handled = true;
             return;
         }
 
+        if (!hasTargetPart)
+            targetPart = patient;
+
         if (isRightTool)
         {
+            if (!TryResolveArmedStepEntity(armed, out var stepEnt))
+            {
+                ClearArmed(patient, armed);
+                args.Handled = true;
+                return;
+            }
+
+            if (!RmcSurgery.CanPerformStep(args.User, patient, armed.TargetPartType, stepEnt, true, args.Used, out _, out var reason, out _))
+            {
+                if (reason == StepInvalidReason.MissingSkills)
+                {
+                    Popup.PopupEntity(
+                        Loc.GetString("cmu-medical-surgery-missing-skills"),
+                        patient,
+                        args.User,
+                        PopupType.SmallCaution);
+                }
+
+                args.Handled = true;
+                return;
+            }
+
             if (armed.RequiredToolCategory == "severed_limb"
                 && !LimbMatchesAnyMissingSlot(patient, args.Used))
             {
@@ -276,7 +303,7 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
             }
 
             if (Net.IsServer)
-                StartStepDoAfter(patient, armed, args.User, args.Used);
+                StartStepDoAfter(patient, armed, args.User, args.Used, targetPart);
             args.Handled = true;
             return;
         }
@@ -284,6 +311,23 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         ApplyWrongToolDamage(args.User, patient, args.Used, damageType, amount);
         ClearArmed(patient, armed);
         args.Handled = true;
+    }
+
+    private bool TryResolveArmedStepEntity(CMUSurgeryArmedStepComponent armed, out EntityUid stepEnt)
+    {
+        stepEnt = default;
+
+        if (RmcSurgery.GetSingleton(armed.SurgeryId) is not { } surgeryEnt)
+            return false;
+        if (!TryComp<CMSurgeryComponent>(surgeryEnt, out var surgeryComp))
+            return false;
+        if (armed.StepIndex < 0 || armed.StepIndex >= surgeryComp.Steps.Count)
+            return false;
+        if (RmcSurgery.GetSingleton(surgeryComp.Steps[armed.StepIndex]) is not { } resolvedStepEnt)
+            return false;
+
+        stepEnt = resolvedStepEnt;
+        return true;
     }
 
     private bool IsReattachOnPatientBody(EntityUid patient, EntityUid? clickTarget, CMUSurgeryArmedStepComponent armed)
@@ -317,7 +361,7 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
     ///     Override in the sealed server class so prediction rollback can't
     ///     re-raise the step event on the client.
     /// </summary>
-    protected virtual void StartStepDoAfter(EntityUid patient, CMUSurgeryArmedStepComponent armed, EntityUid surgeon, EntityUid tool)
+    protected virtual void StartStepDoAfter(EntityUid patient, CMUSurgeryArmedStepComponent armed, EntityUid surgeon, EntityUid tool, EntityUid targetPart)
     {
     }
 
@@ -330,7 +374,7 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
     ///     or raises <c>CMSurgeryCompleteEvent</c>. Shared no-ops so
     ///     prediction rollback can't double-apply state mutations.
     /// </summary>
-    protected virtual void RunStepEffect(EntityUid patient, CMUSurgeryArmedStepComponent armed, EntityUid surgeon)
+    protected virtual void RunStepEffect(EntityUid patient, CMUSurgeryArmedStepComponent armed, EntityUid surgeon, EntityUid? tool, EntityUid? targetPart)
     {
     }
 
@@ -338,9 +382,13 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
     {
         var (patient, armed) = ent;
 
+        if (!ArmedMatchesDoAfter(armed, args))
+            return;
+
         if (args.Cancelled)
         {
-            ClearArmed(patient, armed);
+            if (args.User == armed.Surgeon)
+                ClearArmed(patient, armed);
             return;
         }
 
@@ -348,16 +396,17 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
             return;
         args.Handled = true;
 
-        // Surgeon may have switched targets via a re-arm before the DoAfter
-        // resolved.
-        if (armed.Surgeon != args.User)
-            return;
-
-        if (armed.SurgeryId != args.SurgeryId || armed.StepIndex != args.StepIndex)
-            return;
-
         if (Net.IsServer)
-            RunStepEffect(patient, armed, args.User);
+            RunStepEffect(patient, armed, args.User, args.Used, args.Target);
+    }
+
+    private static bool ArmedMatchesDoAfter(CMUSurgeryArmedStepComponent armed, CMUSurgeryStepDoAfterEvent args)
+    {
+        return armed.SurgeryId == args.SurgeryId
+            && armed.LeafSurgeryId == args.LeafSurgeryId
+            && armed.StepIndex == args.StepIndex
+            && armed.TargetPartType == args.TargetPartType
+            && armed.TargetSymmetry == args.TargetSymmetry;
     }
 
     public bool TryGetMetadata(string surgeryId, out CMUSurgeryStepMetadataPrototype metadata)
