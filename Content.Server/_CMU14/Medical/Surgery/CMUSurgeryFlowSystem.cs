@@ -2,10 +2,13 @@ using System.Collections.Generic;
 using Content.Shared._CMU14.Medical;
 using Content.Shared._CMU14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery;
+using Content.Shared._RMC14.Repairable;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 
@@ -16,8 +19,22 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly CMUSurgeryDispatchSystem _dispatch = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     private const float StepDoAfterSeconds = 2f;
+
+    private static readonly SoundSpecifier WelderStepSound = new SoundCollectionSpecifier("Welder");
+
+    private static readonly Dictionary<string, SoundSpecifier> ToolCategorySounds = new()
+    {
+        ["scalpel"] = new SoundCollectionSpecifier("RMCSurgeryScalpel"),
+        ["hemostat"] = new SoundCollectionSpecifier("RMCSurgeryHemostat"),
+        ["retractor"] = new SoundCollectionSpecifier("RMCSurgeryRetractor"),
+        ["cautery"] = new SoundCollectionSpecifier("RMCSurgeryCautery"),
+        ["bone_saw"] = new SoundCollectionSpecifier("RMCSurgerySaw"),
+        ["bone_setter"] = new SoundCollectionSpecifier("RMCSurgerySplint"),
+        ["organ_clamp"] = new SoundCollectionSpecifier("RMCSurgeryOrgan"),
+    };
 
     protected override void StartStepDoAfter(EntityUid patient, CMUSurgeryArmedStepComponent armed, EntityUid surgeon, EntityUid tool)
     {
@@ -28,7 +45,20 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
             MovementThreshold = 0.5f,
             NeedHand = true,
         };
-        DoAfter.TryStartDoAfter(doAfter);
+        if (!DoAfter.TryStartDoAfter(doAfter))
+            return;
+
+        if (HasComp<BlowtorchComponent>(tool))
+        {
+            _audio.PlayPvs(WelderStepSound, tool);
+            return;
+        }
+
+        if (armed.RequiredToolCategory is { } category
+            && ToolCategorySounds.TryGetValue(category, out var sound))
+        {
+            _audio.PlayPvs(sound, patient);
+        }
     }
 
     protected override void ApplyWrongToolDamage(EntityUid surgeon, EntityUid patient, EntityUid tool, string damageType, float amount)
@@ -89,7 +119,7 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
         // new operator.
         var leafId = string.IsNullOrEmpty(armed.LeafSurgeryId) ? armed.SurgeryId : armed.LeafSurgeryId;
         var leafDisplay = ResolveLeafDisplayName(leafId);
-        EnsureSurgeryInFlight(patient, stepPart, surgeon, leafId, leafDisplay);
+        EnsureSurgeryInFlight(patient, stepPart, surgeon, leafId, leafDisplay, armed.TargetPartType, armed.TargetSymmetry);
 
         if (RmcSurgery.GetSingleton(leafId) is { } leafEnt
             && TryComp<CMSurgeryComponent>(leafEnt, out var leafComp)

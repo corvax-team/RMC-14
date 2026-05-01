@@ -7,6 +7,8 @@
     skill: 2
     tool:
     - type: CMScalpel
+    remove:
+    - type: CMUEschar
   - type: CMUEscharSurgeryCondition
   - type: CMUSurgeryStepDebrideEscharEffect
   - type: Sprite

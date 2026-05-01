@@ -145,7 +145,15 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
                 var displayName = SharedCMUSurgeryFlowSystem.FormatPartName(slot.Type, symmetry);
                 var conditionSummary = Loc.GetString("cmu-medical-surgery-condition-missing");
                 var eligible = BuildEligibleSurgeries(patient, slot.Type, symmetry, surgeon, null);
-                var lockedByOtherPart = lockComp is not null;
+                // Reattach pins lockComp.Part to the patient body but stores
+                // the targeted slot in (TargetPartType, TargetSymmetry) — so
+                // only the matching synthesized slot is "in flight here";
+                // the other missing slot (if any) is locked.
+                var isInFlightHere = lockComp is not null
+                    && SharedCMUSurgeryFlowSystem.IsReattachSurgeryId(lockComp.LeafSurgeryId)
+                    && lockComp.TargetPartType == slot.Type
+                    && lockComp.TargetSymmetry == symmetry;
+                var lockedByOtherPart = lockComp is not null && !isInFlightHere;
 
                 parts.Add(new CMUSurgeryPartEntry(
                     patientNetEntity,
@@ -153,7 +161,7 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
                     symmetry,
                     displayName,
                     conditionSummary,
-                    false,
+                    isInFlightHere,
                     lockedByOtherPart,
                     eligible));
             }
@@ -229,8 +237,21 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
 
             if (lockComp is not null)
             {
-                if (lockComp.Part != targetPart || lockComp.LeafSurgeryId != metadata.Surgery)
+                if (lockComp.LeafSurgeryId != metadata.Surgery)
                     continue;
+                // Reattach uses patient body as anchor — match by stored
+                // target slot type/symmetry instead of part-equality so the
+                // synthesized missing-slot entry surfaces the in-flight
+                // reattach's next step.
+                if (SharedCMUSurgeryFlowSystem.IsReattachSurgeryId(metadata.Surgery))
+                {
+                    if (lockComp.TargetPartType != partType || lockComp.TargetSymmetry != symmetry)
+                        continue;
+                }
+                else if (lockComp.Part != targetPart)
+                {
+                    continue;
+                }
             }
 
             if (!IsSurgeryEligible(patient, targetPart, surgeryProto, partType, surgeon))
@@ -301,8 +322,11 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
 
     private bool IsSurgeryEligible(EntityUid patient, EntityUid? targetPart, EntityPrototype surgeryProto, BodyPartType partType, EntityUid surgeon)
     {
-        // Synth-only / non-synth-only filter: a marked surgery is shown only on synth bodies, and vice versa.
-        if (HasComp<SynthComponent>(patient) != surgeryProto.HasComponent<RMCSynthSurgeryComponent>())
+        // Hide synth-marked surgeries on non-synth bodies. Synth bodies still
+        // see human surgeries — the per-surgery condition events (eschar,
+        // fracture, larva, etc.) are the source of truth for what's actually
+        // applicable, not a blanket body-type gate.
+        if (!HasComp<SynthComponent>(patient) && surgeryProto.HasComponent<RMCSynthSurgeryComponent>())
             return false;
 
         // Reattach surfaces ONLY on the synthesized missing-slot entries

@@ -165,3 +165,25 @@
   displayName: Reattach Limb
   validParts: [Arm, Leg]
   category: reattach
+
+# ---- Larva extraction (torso only) ----------------------------------
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaAlienEmbryoRemoval
+  surgery: CMSurgeryAlienEmbryoRemoval
+  displayName: Remove Larva
+  validParts: [Torso]
+  category: parasite
+
+# ---- Eschar debridement ---------------------------------------------
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaDebrideEschar
+  surgery: CMUSurgeryDebrideEschar
+  displayName: Debride Eschar
+  validParts: [Head, Torso, Arm, Leg]
+  category: bleed
+  steps:
+  - stepId: CMUSurgeryStepDebrideEschar
+    label: Debride Eschar
+    toolCategory: scalpel

@@ -145,6 +145,13 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         {
             if (lockComp.Part != targetPart || lockComp.LeafSurgeryId != surgeryId)
                 return null;
+            // Reattach has Part=patient for every slot, so part-equality
+            // alone would let the medic silently switch the in-flight
+            // reattach to a different missing slot. Pin it to the slot the
+            // surgery was started on.
+            if (IsReattachSurgeryId(surgeryId)
+                && (lockComp.TargetPartType != armedType || lockComp.TargetSymmetry != armedSymmetry))
+                return null;
         }
 
         if (TryComp<CMUSurgeryArmedStepComponent>(patient, out var existing)
@@ -178,12 +185,14 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         return armed;
     }
 
-    public void EnsureSurgeryInFlight(EntityUid patient, EntityUid part, EntityUid surgeon, string leafSurgeryId, string leafDisplayName)
+    public void EnsureSurgeryInFlight(EntityUid patient, EntityUid part, EntityUid surgeon, string leafSurgeryId, string leafDisplayName, BodyPartType targetType = default, BodyPartSymmetry targetSymmetry = default)
     {
         var lockComp = EnsureComp<CMUSurgeryInProgressComponent>(patient);
         var alreadyInFlight = lockComp.LeafSurgeryId == leafSurgeryId && lockComp.Part == part;
         lockComp.Part = part;
         lockComp.LeafSurgeryId = leafSurgeryId;
+        lockComp.TargetPartType = targetType;
+        lockComp.TargetSymmetry = targetSymmetry;
         Dirty(patient, lockComp);
 
         var inFlight = EnsureComp<CMUSurgeryInFlightComponent>(part);
@@ -279,10 +288,14 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
 
     private bool IsReattachOnPatientBody(EntityUid patient, EntityUid? clickTarget, CMUSurgeryArmedStepComponent armed)
     {
-        if (armed.LeafSurgeryId != "CMUSurgeryReattachLimb"
-            && armed.LeafSurgeryId != "RMCSynthSurgeryReattachLimb")
+        if (!IsReattachSurgeryId(armed.LeafSurgeryId))
             return false;
         return clickTarget == patient;
+    }
+
+    public static bool IsReattachSurgeryId(string surgeryId)
+    {
+        return surgeryId == "CMUSurgeryReattachLimb" || surgeryId == "RMCSynthSurgeryReattachLimb";
     }
 
     private void OnArmedInteractHand(Entity<CMUSurgeryArmedStepComponent> ent, ref InteractHandEvent args)
@@ -585,6 +598,8 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
             var partDisplay = string.Empty;
             if (TryComp<BodyPartComponent>(lockComp.Part, out var partComp))
                 partDisplay = FormatPartName(partComp.PartType, partComp.Symmetry);
+            else if (lockComp.TargetPartType != default)
+                partDisplay = FormatPartName(lockComp.TargetPartType, lockComp.TargetSymmetry);
             inFlight = new CMUSurgeryInFlightInfo(
                 GetNetEntity(lockComp.Part),
                 partDisplay,

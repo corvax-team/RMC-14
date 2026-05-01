@@ -53,6 +53,7 @@ cmu-medical-surgery-category-transplant = Transplant Organ
 cmu-medical-surgery-category-suture = Suture Organ
 cmu-medical-surgery-category-head_organ = Head Surgery
 cmu-medical-surgery-category-reattach = Reattach Limb
+cmu-medical-surgery-category-parasite = Parasite Removal
 cmu-medical-surgery-category-close_up = Close Up
 cmu-medical-surgery-category-general = Other
 
@@ -82,6 +83,7 @@ cmu-medical-surgery-wrong-tool = That isn't the right tool for this step.
 cmu-medical-surgery-wrong-tool-damage = You slip with the { $tool }!
 cmu-medical-surgery-no-tool = You need a surgical tool to perform this step.
 cmu-medical-surgery-wrong-limb = That limb doesn't match any empty slot on the patient.
+cmu-medical-surgery-welder-not-lit = Light the welder first.
 
 # ---- Tool category names (used in the BUI button + armed line) -------
 

@@ -1,6 +1,10 @@
-﻿using Content.Shared._RMC14.Medical.Unrevivable;
+using System.Text;
+using Content.Shared._CMU14.Medical.Wounds;
+using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Part;
+using Content.Shared.Body.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Verbs;
@@ -14,6 +18,7 @@ public sealed class RMCMedicalExamineSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivable = default!;
+    [Dependency] private readonly SharedBodySystem _body = default!;
 
     public override void Initialize()
     {
@@ -43,7 +48,11 @@ public sealed class RMCMedicalExamineSystem : EntitySystem
 
         if (TryComp<BloodstreamComponent>(ent, out var bloodstream) && bloodstream.BleedAmount > 0)
         {
-            msg.AddMarkupOrThrow(Loc.GetString(ent.Comp.BleedText, ("victim", ent.Owner)));
+            var partsText = GetBleedingPartsText(ent);
+            if (partsText != null)
+                msg.AddMarkupOrThrow(Loc.GetString(ent.Comp.BleedFromText, ("victim", ent.Owner), ("parts", partsText)));
+            else
+                msg.AddMarkupOrThrow(Loc.GetString(ent.Comp.BleedText, ("victim", ent.Owner)));
             msg.PushNewline();
         }
 
@@ -58,5 +67,62 @@ public sealed class RMCMedicalExamineSystem : EntitySystem
             msg.AddMarkupOrThrow(Loc.GetString(stateText, ("victim", ent.Owner)));
 
         return msg;
+    }
+
+    private string? GetBleedingPartsText(EntityUid body)
+    {
+        var seen = new HashSet<(BodyPartType, BodyPartSymmetry)>();
+        StringBuilder? sb = null;
+
+        foreach (var (partUid, partComp) in _body.GetBodyChildren(body))
+        {
+            if (!TryComp<BodyPartWoundComponent>(partUid, out var pw))
+                continue;
+
+            var bleeding = false;
+            foreach (var wound in pw.Wounds)
+            {
+                if (wound.Treated)
+                    continue;
+                if (wound.Bloodloss <= 0f)
+                    continue;
+                bleeding = true;
+                break;
+            }
+
+            if (!bleeding)
+                continue;
+
+            if (!seen.Add((partComp.PartType, partComp.Symmetry)))
+                continue;
+
+            sb ??= new StringBuilder();
+            if (sb.Length > 0)
+                sb.Append(", ");
+            sb.Append(FormatPart(partComp.PartType, partComp.Symmetry));
+        }
+
+        return sb?.ToString();
+    }
+
+    private static string FormatPart(BodyPartType type, BodyPartSymmetry symmetry)
+    {
+        var typeText = type switch
+        {
+            BodyPartType.Head => "head",
+            BodyPartType.Torso => "torso",
+            BodyPartType.Arm => "arm",
+            BodyPartType.Hand => "hand",
+            BodyPartType.Leg => "leg",
+            BodyPartType.Foot => "foot",
+            BodyPartType.Tail => "tail",
+            _ => type.ToString().ToLowerInvariant(),
+        };
+        return symmetry switch
+        {
+            BodyPartSymmetry.Left => $"left {typeText}",
+            BodyPartSymmetry.Right => $"right {typeText}",
+            _ => typeText,
+        };
     }
 }

@@ -10,6 +10,8 @@
   - type: CMUSplintItem
     applyDelay: 3
     maxSuppressed: Simple
+    applySound:
+      path: /Audio/_RMC14/Medical/splint.ogg
   - type: Sprite
     sprite: _CMU14/Objects/Medical/splint.rsi
     state: icon

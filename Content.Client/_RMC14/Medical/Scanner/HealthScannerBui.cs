@@ -909,13 +909,19 @@ public sealed class HealthScannerBui(EntityUid owner, Enum uiKey) : BoundUserInt
         }
 
         //Surgery related
-        if (_entities.TryGetComponent(target, out HolocardStateComponent? holocardComponent) &&
-            holocardComponent.HolocardStatus == HolocardStatus.Xeno)
+        var infected = _entities.GetComponentOrNull<VictimInfectedComponent>(target);
+        if (_entities.HasComponent<VictimBurstComponent>(target))
+        {
+            AddAdvice(Loc.GetString("rmc-health-analyzer-advice-larva-bursted"), window);
+        }
+        else if (infected != null ||
+                 (_entities.TryGetComponent(target, out HolocardStateComponent? holocardComponent) &&
+                  holocardComponent.HolocardStatus == HolocardStatus.Xeno))
         {
             string larvaSurgery = Loc.GetString("rmc-health-analyzer-advice-larva-surgery");
             if (!_skills.HasAllSkills(viewer, LarvaSurgerySkill))
                 larvaSurgery = $"[color=#858585]{larvaSurgery}[/color]";
-            AddAdvice(Loc.GetString("rmc-health-analyzer-advice-larva-surgery"), window);
+            AddAdvice(larvaSurgery, window);
         }
 
         //TODO RMC14 more surgery advice

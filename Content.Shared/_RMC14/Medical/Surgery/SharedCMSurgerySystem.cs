@@ -143,8 +143,11 @@ public abstract partial class SharedCMSurgerySystem : EntitySystem
             return false;
         }
 
-        // Synth bodies see only synth-marked surgeries; non-synth bodies see only the rest.
-        if (HasComp<SynthComponent>(body) != HasComp<RMCSynthSurgeryComponent>(surgeryEntId))
+        // Block synth-marked surgeries on non-synth bodies. Synth bodies can
+        // still execute human surgery steps when their conditions are met —
+        // matches the dispatch-side filter so step validation doesn't reject
+        // what dispatch surfaced.
+        if (!HasComp<SynthComponent>(body) && HasComp<RMCSynthSurgeryComponent>(surgeryEntId))
             return false;
 
         var ev = new CMSurgeryValidEvent(body, targetPart);

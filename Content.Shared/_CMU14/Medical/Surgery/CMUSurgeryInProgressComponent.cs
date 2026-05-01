@@ -1,3 +1,4 @@
+using Content.Shared.Body.Part;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._CMU14.Medical.Surgery;
@@ -17,4 +18,15 @@ public sealed partial class CMUSurgeryInProgressComponent : Component
 
     [DataField, AutoNetworkedField]
     public string LeafSurgeryId = string.Empty;
+
+    /// <summary>
+    ///     For reattach surgeries, <see cref="Part"/> is the patient body
+    ///     (no <see cref="BodyPartComponent"/>) — these fields disambiguate
+    ///     which severed slot the in-flight surgery is targeting.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public BodyPartType TargetPartType;
+
+    [DataField, AutoNetworkedField]
+    public BodyPartSymmetry TargetSymmetry;
 }
