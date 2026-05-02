@@ -5,6 +5,8 @@
   surgery: CMUSurgerySetSimpleFracture
   displayName: cmu-medical-surgery-name-set-fracture
   validParts: [Head, Torso, Arm, Leg]
+  allowSelfSurgery: true
+  selfSurgeryValidParts: [Arm, Leg]
   category: fracture
 
 - type: cmuSurgeryStepMetadata
@@ -12,6 +14,8 @@
   surgery: CMUSurgerySetCompoundFracture
   displayName: cmu-medical-surgery-name-set-fracture
   validParts: [Head, Torso, Arm, Leg]
+  allowSelfSurgery: true
+  selfSurgeryValidParts: [Arm, Leg]
   category: fracture
 
 - type: cmuSurgeryStepMetadata
@@ -19,6 +23,8 @@
   surgery: CMUSurgerySetComminutedFracture
   displayName: cmu-medical-surgery-name-set-fracture
   validParts: [Head, Torso, Arm, Leg]
+  allowSelfSurgery: true
+  selfSurgeryValidParts: [Arm, Leg]
   category: fracture
 
 # ---- Internal-bleed clamp + close -----------------------------------
@@ -28,6 +34,8 @@
   surgery: CMUSurgeryCauterizeInternalBleeding
   displayName: cmu-medical-surgery-name-stop-internal-bleeding
   validParts: [Head, Torso, Arm, Leg]
+  allowSelfSurgery: true
+  selfSurgeryValidParts: [Arm, Leg]
   category: bleed
 
 # ---- Organ removal (torso only) -------------------------------------
@@ -182,8 +190,10 @@
   surgery: CMUSurgeryDebrideEschar
   displayName: Debride Eschar
   validParts: [Head, Torso, Arm, Leg]
+  allowSelfSurgery: true
+  selfSurgeryValidParts: [Arm, Leg]
   category: bleed
   steps:
   - stepId: CMUSurgeryStepDebrideEschar
     label: Debride Eschar
-    toolCategory: scalpel
+    toolCategory: burn_debridement

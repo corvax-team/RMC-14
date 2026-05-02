@@ -4,6 +4,7 @@ using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._CMU14.Medical.StatusEffects;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Conditions;
@@ -38,6 +39,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly WoundsSystem _wounds = default!;
     [Dependency] private readonly CMUSurgeryDispatchSystem _cmuDispatch = default!;
+    [Dependency] private readonly SharedPainShockSystem _cmuPain = default!;
 
     private readonly List<EntProtoId> _surgeries = new();
 
@@ -143,7 +145,14 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
 
         if (user == args.Target)
         {
-            _popup.PopupEntity("You can't perform surgery on yourself!", user, user);
+            if (_cmuDispatch.TryDispatch(user, args.Target.Value))
+            {
+                args.Handled = true;
+                return;
+            }
+
+            _popup.PopupEntity(Loc.GetString("cmu-medical-surgery-self-not-allowed"), user, user);
+            args.Handled = true;
             return;
         }
 
@@ -171,10 +180,14 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
 
     private void OnStepScreamComplete(Entity<CMSurgeryStepEmoteEffectComponent> ent, ref CMSurgeryStepEvent args)
     {
-        if (!HasComp<RMCUnconsciousComponent>(args.Body))
+        if (TryComp<PainShockComponent>(args.Body, out var pain)
+            && _cmuPain.GetSuppressionMultiplier(args.Body) < 1f
+            && _cmuPain.GetEffectiveTier(args.Body, pain) <= PainTier.None)
         {
-            _chat.TryEmoteWithChat(args.Body, ent.Comp.Emote);
+            return;
         }
+
+        _chat.TryEmoteWithChat(args.Body, ent.Comp.Emote);
     }
 
     private void OnStepSpawnComplete(Entity<RMCSurgeryStepSpawnEffectComponent> ent, ref CMSurgeryStepEvent args)

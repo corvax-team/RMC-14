@@ -1,3 +1,4 @@
+using Content.Shared.Body.Part;
 using Content.Shared.DoAfter;
 using Content.Shared.Body.Part;
 using Robust.Shared.Serialization;

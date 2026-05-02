@@ -38,8 +38,7 @@ public abstract class SharedCMUMedicalSpeedSystem : EntitySystem
         SubscribeLocalEvent<CMUHumanMedicalComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovement);
 
         SubscribeLocalEvent<BoneFracturedEvent>(OnBoneFractured);
-        SubscribeLocalEvent<CMUSplintedComponent, ComponentStartup>(OnSplintStartup);
-        SubscribeLocalEvent<CMUSplintedComponent, ComponentRemove>(OnSplintRemove);
+        SubscribeLocalEvent<CMUSplintChangedEvent>(OnSplintChanged);
         SubscribeLocalEvent<CMUCastComponent, ComponentStartup>(OnCastStartup);
         SubscribeLocalEvent<CMUCastComponent, ComponentRemove>(OnCastRemove);
         SubscribeLocalEvent<PainShockComponent, ComponentStartup>(OnPainStartup);
@@ -65,18 +64,11 @@ public abstract class SharedCMUMedicalSpeedSystem : EntitySystem
     // results (CMUAimAccuracyComponent, MovementSpeedModifierComponent) are networked,
     // so recomputing on state-replay is pure burn — and bursts hard when several injured
     // mobs come back into view at once. Skip the recompute during state apply.
-    private void OnSplintStartup(Entity<CMUSplintedComponent> ent, ref ComponentStartup _)
+    private void OnSplintChanged(CMUSplintChangedEvent args)
     {
         if (Timing.ApplyingState)
             return;
-        RefreshForPart(ent.Owner);
-    }
-
-    private void OnSplintRemove(Entity<CMUSplintedComponent> ent, ref ComponentRemove _)
-    {
-        if (Timing.ApplyingState)
-            return;
-        RefreshForPart(ent.Owner);
+        RefreshForPart(args.Part);
     }
 
     private void OnCastStartup(Entity<CMUCastComponent> ent, ref ComponentStartup _)

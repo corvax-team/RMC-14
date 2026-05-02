@@ -53,6 +53,7 @@ public abstract class SharedPainShockSystem : EntitySystem
         SubscribeLocalEvent<OrganStageChangedEvent>(OnOrganStageChanged);
         SubscribeLocalEvent<BodyPartHealedEvent>(OnBodyPartHealed);
         SubscribeLocalEvent<WoundTreatedEvent>(OnWoundTreated);
+        SubscribeLocalEvent<PainSuppressionComponent, StatusEffectRemovedEvent>(OnPainSuppressionRemoved);
 
         Cfg.OnValueChanged(CMUMedicalCCVars.Enabled, v => _medicalEnabled = v, true);
         Cfg.OnValueChanged(CMUMedicalCCVars.StatusEffectsEnabled, v => _statusEffectsEnabled = v, true);
@@ -99,6 +100,17 @@ public abstract class SharedPainShockSystem : EntitySystem
     private void OnWoundTreated(WoundTreatedEvent args)
         => OnRecomputeTrigger(args.Body);
 
+    private void OnPainSuppressionRemoved(Entity<PainSuppressionComponent> ent, ref StatusEffectRemovedEvent args)
+    {
+        if (Net.IsClient)
+            return;
+        if (!TryComp<PainShockComponent>(args.Target, out var pain))
+            return;
+
+        pain.NextUpdate = TimeSpan.Zero;
+        Dirty(args.Target, pain);
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -125,7 +137,8 @@ public abstract class SharedPainShockSystem : EntitySystem
             if (pain.AccumulationRateDirty)
                 RefreshAccumulationRate(uid, pain);
 
-            if (pain.Tier == PainTier.None
+            if (pain.RawTier == PainTier.None
+                && pain.Tier == PainTier.None
                 && pain.CachedAccumulationRate <= 0
                 && pain.Pain <= 0)
                 continue;
@@ -174,19 +187,35 @@ public abstract class SharedPainShockSystem : EntitySystem
         UpdateTier(uid, pain, newPain != oldPain);
     }
 
+    public void RefreshTier(EntityUid body)
+    {
+        if (Net.IsClient)
+            return;
+        if (!TryComp<PainShockComponent>(body, out var pain))
+            return;
+
+        UpdateTier(body, pain, false);
+    }
+
     private void UpdateTier(EntityUid body, PainShockComponent pain, bool painChanged)
     {
         var oldTier = pain.Tier;
-        var newTier = PainTierThresholds.Get(oldTier, pain.Pain, _painTierHysteresis);
+        var oldRawTier = pain.RawTier;
+        var rawTier = PainTierThresholds.Get(oldRawTier, pain.Pain, _painTierHysteresis);
+        var newTier = ApplySuppressionToTier(body, rawTier);
         if (newTier == oldTier)
         {
+            if (rawTier != oldRawTier)
+                pain.RawTier = rawTier;
+
             // Pain may have moved without crossing a tier — still flush so
             // the client overlay's Pain ratio stays in sync.
-            if (painChanged)
+            if (painChanged || rawTier != oldRawTier)
                 Dirty(body, pain);
             return;
         }
 
+        pain.RawTier = rawTier;
         pain.Tier = newTier;
         pain.InShock = newTier == PainTier.Shock;
 
@@ -194,6 +223,9 @@ public abstract class SharedPainShockSystem : EntitySystem
 
         var ev = new PainTierChangedEvent(body, oldTier, newTier);
         RaiseLocalEvent(body, ref ev);
+
+        if (newTier == PainTier.Shock && oldTier != PainTier.Shock)
+            ApplyShockEntryEffect(body);
 
         Dirty(body, pain);
     }
@@ -221,17 +253,20 @@ public abstract class SharedPainShockSystem : EntitySystem
     };
 
     /// <summary>
-    ///     Tier seen by downstream readers. Re-derives from
-    ///     <see cref="PainShockComponent.Pain"/> via
-    ///     <see cref="PainTierThresholds.Get"/> (so a stale persisted Tier
-    ///     can't lie to readers when Pain has been written directly), then
-    ///     subtracts painkiller-suppression levels per
+    ///     Tier seen by downstream readers. Re-derives the raw tier from
+    ///     <see cref="PainShockComponent.Pain"/> and <see cref="PainShockComponent.RawTier"/>
+    ///     so a stale persisted effective tier can't lie to readers, then subtracts
+    ///     painkiller-suppression levels per
     ///     <c>cmu.medical.pain.suppression_levels_per_step</c>.
     /// </summary>
     public PainTier GetEffectiveTier(EntityUid body, PainShockComponent pain)
     {
-        var rawTier = PainTierThresholds.Get(pain.Tier, pain.Pain, _painTierHysteresis);
+        var rawTier = PainTierThresholds.Get(pain.RawTier, pain.Pain, _painTierHysteresis);
+        return ApplySuppressionToTier(body, rawTier);
+    }
 
+    private PainTier ApplySuppressionToTier(EntityUid body, PainTier rawTier)
+    {
         var supMult = GetSuppressionMultiplier(body);
         var quarterSteps = (int)Math.Round((1f - supMult) / 0.25f);
         if (quarterSteps <= 0)

@@ -39,6 +39,8 @@ cmu-medical-surgery-part-condition-no-eligible = No surgeries available
 
 cmu-medical-surgery-condition-incision-open = Open incision
 cmu-medical-surgery-condition-ribcage-open = Open ribcage
+cmu-medical-surgery-condition-skull-open = Open skull
+cmu-medical-surgery-condition-bones-open = Open bones
 cmu-medical-surgery-condition-fracture = { $severity } fracture
 cmu-medical-surgery-condition-internal-bleed = Internal bleeding
 cmu-medical-surgery-condition-in-progress = Surgery in progress
@@ -67,6 +69,8 @@ cmu-medical-surgery-examine-part-abandoned = [color=#888888]Open wound — no su
 
 cmu-medical-surgery-step-close-incision-label = Close Incision
 cmu-medical-surgery-step-mend-ribcage-label = Mend Ribcage
+cmu-medical-surgery-step-mend-skull-label = Mend Skull
+cmu-medical-surgery-step-mend-bones-label = Mend Bones
 cmu-medical-surgery-step-close-bones-label = Close Bones
 
 # ---- Armed-step status -----------------------------------------------
@@ -81,10 +85,19 @@ cmu-medical-surgery-armed-expired = The surgery pick timed out.
 cmu-medical-surgery-wrong-part = That isn't the part you armed the surgery on.
 cmu-medical-surgery-wrong-tool = That isn't the right tool for this step.
 cmu-medical-surgery-wrong-tool-damage = You slip with the { $tool }!
+cmu-medical-surgery-improvised-mishap = The improvised { $tool } slips and causes extra trauma.
+cmu-medical-surgery-step-failed = The operation slips and causes trauma.
+cmu-medical-surgery-step-failed-with-tool = The { $tool } slips and causes surgical trauma.
 cmu-medical-surgery-no-tool = You need a surgical tool to perform this step.
 cmu-medical-surgery-missing-skills = You don't know how to perform this step.
 cmu-medical-surgery-wrong-limb = That limb doesn't match any empty slot on the patient.
-cmu-medical-surgery-welder-not-lit = Light the welder first.
+cmu-medical-surgery-welder-not-lit = Light the tool first.
+cmu-medical-surgery-patient-not-lying = The patient must be lying down or strapped to a surgery table.
+cmu-medical-surgery-patient-not-controlled = The patient needs anesthesia, strong painkillers, or restraints before surgery.
+cmu-medical-surgery-self-pain-control = Self-surgery requires strong painkillers first.
+cmu-medical-surgery-self-not-secured = Buckle yourself to a chair, bed, or roller before attempting self-surgery.
+cmu-medical-surgery-self-not-allowed = You can't perform that surgery on yourself.
+cmu-medical-surgery-step-pain-interrupted = The patient's pain interrupts the surgical step.
 
 # ---- Tool category names (used in the BUI button + armed line) -------
 

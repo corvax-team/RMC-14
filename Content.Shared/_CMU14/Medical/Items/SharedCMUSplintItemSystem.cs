@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._CMU14.Medical;
 using Content.Shared._CMU14.Medical.Bones;
 using Content.Shared._CMU14.Medical.BodyPart;
+using Content.Shared._CMU14.Medical.BodyPart.Events;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared.DoAfter;
@@ -38,6 +39,7 @@ public abstract class SharedCMUSplintItemSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<CMUSplintItemComponent, AfterInteractEvent>(OnSplintInteract);
         SubscribeLocalEvent<CMUSplintItemComponent, CMUSplintApplyDoAfterEvent>(OnSplintDoAfter);
+        SubscribeLocalEvent<CMUSplintedComponent, BodyPartDamagedEvent>(OnSplintedPartDamaged);
         SubscribeLocalEvent<CMUCastItemComponent, AfterInteractEvent>(OnCastInteract);
         SubscribeLocalEvent<CMUCastItemComponent, CMUCastApplyDoAfterEvent>(OnCastDoAfter);
 
@@ -48,6 +50,18 @@ public abstract class SharedCMUSplintItemSystem : EntitySystem
     public bool IsLayerEnabled()
     {
         return _medicalEnabled && _boneEnabled;
+    }
+
+    private void OnSplintedPartDamaged(Entity<CMUSplintedComponent> ent, ref BodyPartDamagedEvent args)
+    {
+        if (Net.IsClient || !IsLayerEnabled())
+            return;
+        if (!ent.Comp.BreakOnDamage)
+            return;
+        if (args.Delta.GetTotal() <= ent.Comp.BreakDamageThreshold)
+            return;
+
+        RemCompDeferred<CMUSplintedComponent>(ent);
     }
 
     private void OnSplintInteract(Entity<CMUSplintItemComponent> ent, ref AfterInteractEvent args)
@@ -110,7 +124,10 @@ public abstract class SharedCMUSplintItemSystem : EntitySystem
         var splinted = EnsureComp<CMUSplintedComponent>(part);
         if ((byte)ent.Comp.MaxSuppressed > (byte)splinted.MaxSuppressed)
             splinted.MaxSuppressed = ent.Comp.MaxSuppressed;
+        splinted.BreakOnDamage = ent.Comp.BreakOnDamage;
+        splinted.BreakDamageThreshold = ent.Comp.BreakDamageThreshold;
         Dirty(part, splinted);
+        RaiseLocalEvent(new CMUSplintChangedEvent(part, false));
 
         if (ent.Comp.ApplySound is not null)
             Audio.PlayPredicted(ent.Comp.ApplySound, part, null);

@@ -55,7 +55,13 @@
     noWoundsOnTargetPopup: cm-burns-already-treated-target-popup
   - type: MedicallyUnskilledDoAfter
     min: 2
-    doAfter: 1
+    doAfter: 5
+  - type: CMUBurnDebridementTool
+  - type: CMUImprovisedSurgeryTool
+    delayMultiplier: 2.2
+    mishapChance: 0.10
+    mishapDamageType: Heat
+    mishapDamageAmount: 2
   - type: Stack
     stackType: CMOintment
     count: 10
@@ -129,6 +135,12 @@
     count: 10
   - type: StackPrice
     price: 10
+  - type: CMHemostat
+  - type: CMUImprovisedSurgeryTool
+    delayMultiplier: 2.4
+    mishapChance: 0.12
+    mishapDamageType: Blunt
+    mishapDamageAmount: 2
 
 - type: stack
   id: CMGauze
@@ -196,6 +208,14 @@
     doAfter: 3
   - type: StackPrice
     price: 10
+  - type: CMHemostat
+  - type: CMUOrganClamp
+  - type: CMCautery
+  - type: CMUImprovisedSurgeryTool
+    delayMultiplier: 1.6
+    mishapChance: 0.08
+    mishapDamageType: Blunt
+    mishapDamageAmount: 2
 
 - type: entity
   parent: CMBaseHealingItem
@@ -283,8 +303,14 @@
     noWoundsOnUserPopup: cm-burns-already-treated-self-popup
     noWoundsOnTargetPopup: cm-burns-already-treated-target-popup
   - type: MedicallyUnskilledDoAfter
-    min: 2
-    doAfter: 3
+    min: 1
+    doAfter: 2
+  - type: CMUBurnDebridementTool
+  - type: CMUImprovisedSurgeryTool
+    delayMultiplier: 1.6
+    mishapChance: 0.04
+    mishapDamageType: Heat
+    mishapDamageAmount: 1
 
 - type: entity
   id: CMBurnKit1
@@ -351,8 +377,9 @@
     noWoundsOnUserPopup: cm-wounds-already-treated-self-popup
     noWoundsOnTargetPopup: cm-wounds-already-treated-target-popup
   - type: MedicallyUnskilledDoAfter
-    min: 2
-    doAfter: 3
+    min: 1
+    doAfter: 2
+  - type: CMHemostat
 
 - type: entity
   id: CMTraumaKit1

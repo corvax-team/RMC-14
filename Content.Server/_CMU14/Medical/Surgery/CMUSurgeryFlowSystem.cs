@@ -3,8 +3,10 @@ using Content.Shared._CMU14.Medical;
 using Content.Shared._CMU14.Medical.Surgery;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Surgery;
+using Content.Shared._RMC14.Medical.Surgery.Steps.Parts;
 using Content.Shared._RMC14.Repairable;
 using Content.Shared.Body.Part;
+using Content.Shared.Buckle.Components;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
@@ -13,6 +15,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Server._CMU14.Medical.Surgery;
 
@@ -22,13 +25,29 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly CMUSurgeryDispatchSystem _dispatch = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
 
     private const float StepDoAfterSeconds = 2f;
+    private const string OpenIncisionScalpelStep = "CMSurgeryStepOpenIncisionScalpel";
     private static readonly EntProtoId<SkillDefinitionComponent> SurgerySkill = "RMCSkillSurgery";
     private static readonly float[] SurgeryStepDelayMultipliers = { 1.25f, 1f, 0.75f, 0.55f, 0.4f };
 
     private static readonly SoundSpecifier WelderStepSound = new SoundCollectionSpecifier("Welder");
+
+    private static readonly HashSet<string> SurfaceExemptStepIds = new()
+    {
+        // Pre-op and close-up access steps are allowed to be rougher; the
+        // actual repair/extraction/transplant work is where the surface matters.
+        "CMSurgeryStepOpenIncisionScalpel",
+        "CMSurgeryStepClampBleeders",
+        "CMSurgeryStepRetractSkin",
+        "CMSurgeryStepSawBones",
+        "CMSurgeryStepPriseOpenBones",
+        "CMSurgeryStepCloseIncision",
+        "CMSurgeryStepCloseBones",
+        "CMSurgeryStepMendRibcage",
+    };
 
     private static readonly Dictionary<string, SoundSpecifier> ToolCategorySounds = new()
     {
@@ -39,11 +58,15 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
         ["bone_saw"] = new SoundCollectionSpecifier("RMCSurgerySaw"),
         ["bone_setter"] = new SoundCollectionSpecifier("RMCSurgerySplint"),
         ["organ_clamp"] = new SoundCollectionSpecifier("RMCSurgeryOrgan"),
+        ["burn_debridement"] = new SoundCollectionSpecifier("RMCSurgeryScalpel"),
     };
 
     protected override void StartStepDoAfter(EntityUid patient, CMUSurgeryArmedStepComponent armed, EntityUid surgeon, EntityUid tool, EntityUid targetPart)
     {
         var delay = ResolveStepDoAfterDelay(surgeon);
+        if (TryComp<CMUImprovisedSurgeryToolComponent>(tool, out var improvised))
+            delay = TimeSpan.FromSeconds(delay.TotalSeconds * MathF.Max(1f, improvised.DelayMultiplier));
+
         var ev = new CMUSurgeryStepDoAfterEvent(
             armed.SurgeryId,
             armed.LeafSurgeryId,
@@ -52,6 +75,8 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
             armed.TargetSymmetry);
         var doAfter = new DoAfterArgs(EntityManager, surgeon, delay, ev, patient, targetPart, tool)
         {
+            AttemptFrequency = AttemptFrequency.EveryTick,
+            BreakOnDamage = true,
             BreakOnMove = true,
             MovementThreshold = 0.5f,
             NeedHand = true,
@@ -133,6 +158,13 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
             stepPart = foundPart;
         }
 
+        if (TryFailSurgeryStep(patient, stepProtoId, armed.RequiredToolCategory, surgeon, tool))
+        {
+            RemComp<CMUSurgeryArmedStepComponent>(patient);
+            _dispatch.RefreshUiForPatient(patient);
+            return;
+        }
+
         var tools = new List<EntityUid>();
         if (tool is { } usedTool && Exists(usedTool))
             tools.Add(usedTool);
@@ -143,8 +175,11 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
                 tools.Add(held);
         }
 
-        var stepEvent = new CMSurgeryStepEvent(surgeon, patient, stepPart, tools);
-        RaiseLocalEvent(stepEnt, ref stepEvent);
+        if (!TryApplyIncisionManagementSystemOpening(stepProtoId, stepPart, tool))
+        {
+            var stepEvent = new CMSurgeryStepEvent(surgeon, patient, stepPart, tools);
+            RaiseLocalEvent(stepEnt, ref stepEvent);
+        }
 
         // Idempotent on subsequent steps, but EnsureSurgeryInFlight
         // refreshes the surgeon snapshot each time so a fresh surgeon
@@ -168,7 +203,7 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
                 return;
             }
 
-            if (TryResolveStepAt(leafId, armed.StepIndex + 1, out var nextLinear))
+            if (TryResolveStepAt(leafId, armed.StepIndex + 1, out var nextLinear, stepPart))
             {
                 armed.SurgeryId = nextLinear.ResolvedSurgeryId;
                 armed.StepIndex = nextLinear.StepIndex;
@@ -207,6 +242,140 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
         if (Prototypes.TryIndex<EntityPrototype>(leafId, out var proto))
             return proto.Name;
         return leafId;
+    }
+
+    private bool TryFailSurgeryStep(EntityUid patient, string stepProtoId, string? toolCategory, EntityUid surgeon, EntityUid? tool)
+    {
+        var chance = GetSurgeryFailureChance(patient, stepProtoId, toolCategory, surgeon, tool);
+        if (chance <= 0f || !_random.Prob(chance))
+            return false;
+
+        ApplySurgeryFailure(patient, surgeon, tool);
+        return true;
+    }
+
+    private float GetSurgeryFailureChance(EntityUid patient, string stepProtoId, string? toolCategory, EntityUid surgeon, EntityUid? tool)
+    {
+        var penalties = GetToolFailurePenalty(tool, toolCategory);
+        if (!SurfaceExemptStepIds.Contains(stepProtoId))
+            penalties += GetSurfaceFailurePenalty(patient, surgeon);
+
+        if (patient == surgeon)
+            penalties += 1;
+
+        penalties += GetSkillFailureCompensation(surgeon);
+
+        return penalties switch
+        {
+            <= 0 => 0f,
+            1 => 0.05f,
+            2 => 0.25f,
+            _ => 0.5f,
+        };
+    }
+
+    private int GetToolFailurePenalty(EntityUid? tool, string? toolCategory)
+    {
+        if (tool is not { } toolUid
+            || !TryComp<CMUImprovisedSurgeryToolComponent>(toolUid, out var improvised))
+        {
+            return 0;
+        }
+
+        return Math.Clamp(improvised.GetFailurePenalty(toolCategory), 0, 2);
+    }
+
+    private int GetSurfaceFailurePenalty(EntityUid patient, EntityUid surgeon)
+    {
+        if (!TryComp<BuckleComponent>(patient, out var buckle)
+            || buckle.BuckledTo is not { } surface)
+        {
+            return 2;
+        }
+
+        if (HasComp<CMOperatingTableComponent>(surface))
+            return 0;
+
+        if (IsUnsuitedSurgerySurface(surface))
+            return 1;
+
+        if (!TryComp<StrapComponent>(surface, out var strap))
+            return 2;
+
+        if (strap.Position == StrapPosition.Down)
+            return 0;
+
+        // Self-surgery is allowed while strapped into a chair/seat so the
+        // surgeon can still use their hands. It is still rough field surgery,
+        // matching roller/stretcher style surface penalty.
+        return patient == surgeon ? 1 : 2;
+    }
+
+    private bool IsUnsuitedSurgerySurface(EntityUid surface)
+    {
+        var protoId = MetaData(surface).EntityPrototype?.ID;
+        if (ContainsSurfaceKeyword(protoId))
+            return true;
+
+        return ContainsSurfaceKeyword(Name(surface));
+    }
+
+    private static bool ContainsSurfaceKeyword(string? value)
+    {
+        return value?.Contains("Roller", StringComparison.OrdinalIgnoreCase) == true
+            || value?.Contains("Stretcher", StringComparison.OrdinalIgnoreCase) == true
+            || value?.Contains("Bedroll", StringComparison.OrdinalIgnoreCase) == true;
+    }
+
+    private int GetSkillFailureCompensation(EntityUid surgeon)
+    {
+        if (HasComp<BypassSkillChecksComponent>(surgeon))
+            return -3;
+
+        var skill = _skills.GetSkill(surgeon, SurgerySkill);
+        return skill switch
+        {
+            >= 3 => -3,
+            >= 2 => -1,
+            _ => 0,
+        };
+    }
+
+    private void ApplySurgeryFailure(EntityUid patient, EntityUid surgeon, EntityUid? tool)
+    {
+        if (tool is not { } toolUid
+            || !TryComp<CMUImprovisedSurgeryToolComponent>(toolUid, out var improvised))
+        {
+            var defaultSpec = CMUWrongToolDamageTable.MakeSpec("Slash", 3f);
+            _damage.TryChangeDamage(patient, defaultSpec, ignoreResistances: false, origin: surgeon);
+            Popup.PopupEntity(Loc.GetString("cmu-medical-surgery-step-failed"), patient, surgeon, PopupType.MediumCaution);
+            return;
+        }
+
+        var damageAmount = MathF.Max(1f, improvised.MishapDamageAmount);
+        var spec = CMUWrongToolDamageTable.MakeSpec(improvised.MishapDamageType, damageAmount);
+        _damage.TryChangeDamage(patient, spec, ignoreResistances: false, origin: surgeon);
+
+        Popup.PopupEntity(
+            Loc.GetString("cmu-medical-surgery-step-failed-with-tool", ("tool", Name(toolUid))),
+            patient,
+            surgeon,
+            PopupType.MediumCaution);
+    }
+
+    private bool TryApplyIncisionManagementSystemOpening(string stepProtoId, EntityUid stepPart, EntityUid? tool)
+    {
+        if (stepProtoId != OpenIncisionScalpelStep
+            || tool is not { } toolUid
+            || !HasComp<CMUIncisionManagementSystemComponent>(toolUid))
+        {
+            return false;
+        }
+
+        EnsureComp<CMIncisionOpenComponent>(stepPart);
+        EnsureComp<CMBleedersClampedComponent>(stepPart);
+        EnsureComp<CMSkinRetractedComponent>(stepPart);
+        return true;
     }
 
     private string? ResolveStepPrototypeId(string surgeryId, int stepIndex)

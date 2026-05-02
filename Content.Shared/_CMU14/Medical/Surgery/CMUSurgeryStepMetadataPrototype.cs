@@ -38,6 +38,21 @@ public sealed partial class CMUSurgeryStepMetadataPrototype : IPrototype
     public string Category = "general";
 
     /// <summary>
+    ///     Whether this surgery can be performed by the patient on themselves.
+    ///     Self-surgery is intentionally opt-in so organ/head/torso work stays
+    ///     blocked unless explicitly allowed.
+    /// </summary>
+    [DataField]
+    public bool AllowSelfSurgery;
+
+    /// <summary>
+    ///     Optional narrower part set for self-surgery. Empty means use
+    ///     <see cref="ValidParts"/>.
+    /// </summary>
+    [DataField]
+    public List<BodyPartType> SelfSurgeryValidParts = new();
+
+    /// <summary>
     ///     Order MUST match the surgery prototype's <c>steps:</c> list. The
     ///     V2 system reads this by index — entries beyond the list length
     ///     fall back to "no specific tool required" / unlabelled.

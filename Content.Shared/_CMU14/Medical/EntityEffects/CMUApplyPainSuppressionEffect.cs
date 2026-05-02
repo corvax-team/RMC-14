@@ -38,6 +38,8 @@ public sealed partial class CMUApplyPainSuppressionEffect : EntityEffect
             sup.Percent = SuppressionPercent;
             entMan.Dirty(effect.Value, sup);
         }
+
+        entMan.System<SharedPainShockSystem>().RefreshTier(reagent.TargetEntity);
     }
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)

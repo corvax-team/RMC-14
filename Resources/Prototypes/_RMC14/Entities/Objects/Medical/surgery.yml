@@ -196,6 +196,7 @@
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: CMScalpel
+  - type: CMUBurnDebridementTool
   - type: Tag
     tags:
     - RMCScalpel
@@ -231,6 +232,7 @@
   - type: ItemToggle
     predictable: false
   - type: ItemToggleHot
+  - type: CMCautery
   - type: UseDelay
   - type: ItemToggleMeleeWeapon
     activatedDamage:
@@ -289,6 +291,7 @@
   components:
   - type: Sprite
     state: pict_system
+  - type: CMCautery
 
 # - Manager
 - type: entity
@@ -299,6 +302,7 @@
   components:
   - type: Sprite
     state: scalpel_manager
+  - type: CMUIncisionManagementSystem
 
 
 

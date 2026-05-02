@@ -6,7 +6,7 @@
   - type: CMSurgeryStep
     skill: 2
     tool:
-    - type: CMScalpel
+    - type: CMUBurnDebridementTool
     remove:
     - type: CMUEschar
   - type: CMUEscharSurgeryCondition

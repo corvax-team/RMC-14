@@ -22,7 +22,14 @@ public sealed partial class PainShockComponent : Component
     public TimeSpan NextUnconsciousRefresh;
 
     /// <summary>
-    ///     Discrete tier derived from <see cref="Pain"/> with hysteresis.
+    ///     Discrete tier derived from <see cref="Pain"/> before painkiller suppression.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public PainTier RawTier = PainTier.None;
+
+    /// <summary>
+    ///     Discrete tier after painkiller suppression. Player-facing pain
+    ///     effects should use this or <see cref="SharedPainShockSystem.GetEffectiveTier"/>.
     /// </summary>
     [DataField, AutoNetworkedField]
     public PainTier Tier = PainTier.None;

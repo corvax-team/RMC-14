@@ -73,6 +73,9 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
         if (!HasComp<CMUHumanMedicalComponent>(patient))
             return false;
 
+        if (!_flowSurgery.CanOperateOnPatient(patient, surgeon, popup: true))
+            return true;
+
         var parts = BuildPartEntries(patient, surgeon);
         if (parts.Count == 0)
             return false;
@@ -96,6 +99,9 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
     public List<CMUSurgeryPartEntry> BuildPartEntries(EntityUid patient, EntityUid surgeon)
     {
         var parts = new List<CMUSurgeryPartEntry>();
+        if (!_flowSurgery.CanOperateOnPatient(patient, surgeon))
+            return parts;
+
         TryComp<CMUSurgeryInProgressComponent>(patient, out var lockComp);
         var attachedSlots = new HashSet<(BodyPartType, BodyPartSymmetry)>();
 
@@ -109,7 +115,7 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
             var eligible = BuildEligibleSurgeries(patient, childComp.PartType, childComp.Symmetry, surgeon, childId);
 
             var displayName = SharedCMUSurgeryFlowSystem.FormatPartName(childComp.PartType, childComp.Symmetry);
-            var conditionSummary = BuildConditionSummary(childId);
+            var conditionSummary = BuildConditionSummary(childId, childComp.PartType);
             var isInFlightHere = lockComp is not null && lockComp.Part == childId;
             var lockedByOtherPart = lockComp is not null && lockComp.Part != childId;
 
@@ -173,13 +179,13 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
     private static bool IsSurgicallySupportedPart(BodyPartType type) =>
         type is BodyPartType.Head or BodyPartType.Torso or BodyPartType.Arm or BodyPartType.Leg;
 
-    private string BuildConditionSummary(EntityUid part)
+    private string BuildConditionSummary(EntityUid part, BodyPartType partType)
     {
         var bits = new List<string>();
         if (HasComp<CMIncisionOpenComponent>(part))
             bits.Add(Loc.GetString("cmu-medical-surgery-condition-incision-open"));
         if (HasComp<CMRibcageOpenComponent>(part))
-            bits.Add(Loc.GetString("cmu-medical-surgery-condition-ribcage-open"));
+            bits.Add(Loc.GetString(GetOpenBoneConditionKey(partType)));
         if (TryComp<FractureComponent>(part, out var frac))
         {
             var severity = frac.Severity;
@@ -199,6 +205,16 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
         if (HasComp<InternalBleedingComponent>(part))
             bits.Add(Loc.GetString("cmu-medical-surgery-condition-internal-bleed"));
         return string.Join(" · ", bits);
+    }
+
+    private static string GetOpenBoneConditionKey(BodyPartType partType)
+    {
+        return partType switch
+        {
+            BodyPartType.Head => "cmu-medical-surgery-condition-skull-open",
+            BodyPartType.Torso => "cmu-medical-surgery-condition-ribcage-open",
+            _ => "cmu-medical-surgery-condition-bones-open",
+        };
     }
 
     public bool IsLayerEnabled()
@@ -235,6 +251,9 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
             if (!metadata.ValidParts.Contains(partType))
                 continue;
 
+            if (patient == surgeon && !_flowSurgery.CanSelfOperateSurgery(metadata.Surgery, partType))
+                continue;
+
             if (lockComp is not null)
             {
                 if (lockComp.LeafSurgeryId != metadata.Surgery)
@@ -269,7 +288,7 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
                 && armedComp.TargetPartType == partType
                 && armedComp.TargetSymmetry == symmetry)
             {
-                if (!_flowSurgery.TryResolveStepAt(armedComp.SurgeryId, armedComp.StepIndex, out resolved))
+                if (!_flowSurgery.TryResolveStepAt(armedComp.SurgeryId, armedComp.StepIndex, out resolved, targetPart))
                     continue;
             }
             else if (!_flowSurgery.TryResolveNextStep(patient, resolveTarget, metadata.Surgery, out resolved))
@@ -304,6 +323,9 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
 
     private void TryAddCloseUpEntry(EntityUid patient, EntityUid part, BodyPartType partType, string surgeryId, List<CMUSurgeryEntry> entries, EntityUid surgeon)
     {
+        if (patient == surgeon && !_flowSurgery.CanSelfOperateSurgery(surgeryId, partType))
+            return;
+
         if (!_prototypes.TryIndex<EntityPrototype>(surgeryId, out var proto))
             return;
         if (!IsSurgeryEligible(patient, part, proto, partType, surgeon))
