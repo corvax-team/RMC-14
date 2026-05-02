@@ -326,6 +326,24 @@
     - CMSurgeryStepMendRibcage
     - CMSurgeryStepCloseIncision
 
+- type: entity
+  parent: CMSurgeryBase
+  id: CMUSurgeryRepairStomach
+  name: Suture Stomach
+  components:
+  - type: CMSurgery
+    priority: 6
+    steps:
+    - CMSurgeryStepOpenIncisionScalpel
+    - CMSurgeryStepClampBleeders
+    - CMSurgeryStepRetractSkin
+    - CMSurgeryStepSawBones
+    - CMSurgeryStepPriseOpenBones
+    - CMUSurgeryStepSutureStomach
+    - CMSurgeryStepCloseBones
+    - CMSurgeryStepMendRibcage
+    - CMSurgeryStepCloseIncision
+
 # ---- Brain / eye / ear repair (head, full skull-flow) ----------------
 
 - type: entity

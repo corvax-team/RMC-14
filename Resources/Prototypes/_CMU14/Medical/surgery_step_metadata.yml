@@ -142,6 +142,13 @@
   validParts: [Torso]
   category: suture
 
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaRepairStomach
+  surgery: CMUSurgeryRepairStomach
+  displayName: Suture Stomach
+  validParts: [Torso]
+  category: suture
+
 # ---- Brain / eye / ear repair (head only) ---------------------------
 
 - type: cmuSurgeryStepMetadata
@@ -192,7 +199,7 @@
   validParts: [Head, Torso, Arm, Leg]
   allowSelfSurgery: true
   selfSurgeryValidParts: [Arm, Leg]
-  category: bleed
+  category: burn
   steps:
   - stepId: CMUSurgeryStepDebrideEschar
     label: Debride Eschar

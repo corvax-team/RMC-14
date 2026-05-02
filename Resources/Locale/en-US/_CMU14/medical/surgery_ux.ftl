@@ -43,6 +43,7 @@ cmu-medical-surgery-condition-skull-open = Open skull
 cmu-medical-surgery-condition-bones-open = Open bones
 cmu-medical-surgery-condition-fracture = { $severity } fracture
 cmu-medical-surgery-condition-internal-bleed = Internal bleeding
+cmu-medical-surgery-condition-eschar = Eschar
 cmu-medical-surgery-condition-in-progress = Surgery in progress
 cmu-medical-surgery-condition-missing = Severed
 
@@ -50,6 +51,7 @@ cmu-medical-surgery-condition-missing = Severed
 
 cmu-medical-surgery-category-fracture = Fracture
 cmu-medical-surgery-category-bleed = Internal Bleeding
+cmu-medical-surgery-category-burn = Burns
 cmu-medical-surgery-category-remove_organ = Remove Organ
 cmu-medical-surgery-category-transplant = Transplant Organ
 cmu-medical-surgery-category-suture = Suture Organ
@@ -110,6 +112,7 @@ cmu-medical-surgery-tool-category-bone_setter = Bone Setter
 cmu-medical-surgery-tool-category-bone_gel = Bone Gel
 cmu-medical-surgery-tool-category-bone_graft = Bone Graft
 cmu-medical-surgery-tool-category-organ_clamp = Organ Clamp
+cmu-medical-surgery-tool-category-burn_debridement = Burn Debridement Tool
 
 # ---- Per-step labels -------------------------------------------------
 
@@ -139,6 +142,7 @@ cmu-medical-surgery-step-suture-liver-label = Suture Liver
 cmu-medical-surgery-step-suture-lungs-label = Suture Lungs
 cmu-medical-surgery-step-suture-kidneys-label = Suture Kidneys
 cmu-medical-surgery-step-suture-heart-label = Suture Heart
+cmu-medical-surgery-step-suture-stomach-label = Suture Stomach
 cmu-medical-surgery-step-reattach-limb-label = Reattach Severed Limb
 
 # ---- Surgery names --------------------------------------------------

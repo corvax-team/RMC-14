@@ -46,6 +46,7 @@ public sealed class CMUMedicalExamineSystem : EntitySystem
     private void AddWoundLines(EntityUid body, ExaminedEvent args, EntityUid target)
     {
         var now = _timing.CurTime;
+        var partSummaries = new List<string>();
 
         foreach (var (partUid, part) in _body.GetBodyChildren(body))
         {
@@ -66,16 +67,22 @@ public sealed class CMUMedicalExamineSystem : EntitySystem
             if (descriptions.Count == 0)
                 continue;
 
-            args.PushMarkup(Loc.GetString(
-                "cmu-medical-examine-wound-line",
-                ("target", target),
-                ("wounds", ToSentence(descriptions)),
-                ("part", FormatPartName(part.PartType, part.Symmetry))));
+            partSummaries.Add($"{FormatPartName(part.PartType, part.Symmetry)}: {ToSentence(descriptions)}");
         }
+
+        if (partSummaries.Count == 0)
+            return;
+
+        args.PushMarkup(Loc.GetString(
+            "cmu-medical-examine-wounds-line",
+            ("target", target),
+            ("parts", ToSemicolonList(partSummaries))));
     }
 
     private void AddFractureLines(EntityUid body, ExaminedEvent args, EntityUid target)
     {
+        var partSummaries = new List<string>();
+
         foreach (var (partUid, part) in _body.GetBodyChildren(body))
         {
             if (!TryComp<FractureComponent>(partUid, out var fracture)
@@ -85,12 +92,16 @@ public sealed class CMUMedicalExamineSystem : EntitySystem
             }
 
             var stabilized = HasComp<CMUSplintedComponent>(partUid) || HasComp<CMUCastComponent>(partUid);
-            args.PushMarkup(Loc.GetString(
-                "cmu-medical-examine-fracture-line",
-                ("target", target),
-                ("fracture", DescribeFracture(fracture.Severity, stabilized)),
-                ("part", FormatPartName(part.PartType, part.Symmetry))));
+            partSummaries.Add($"{FormatPartName(part.PartType, part.Symmetry)}: {DescribeFracture(fracture.Severity, stabilized)}");
         }
+
+        if (partSummaries.Count == 0)
+            return;
+
+        args.PushMarkup(Loc.GetString(
+            "cmu-medical-examine-fractures-line",
+            ("target", target),
+            ("parts", ToSemicolonList(partSummaries))));
     }
 
     private static string DescribeWound(Wound wound, WoundSize size, TimeSpan now)
@@ -154,5 +165,10 @@ public sealed class CMUMedicalExamineSystem : EntitySystem
             2 => $"{parts[0]} and {parts[1]}",
             _ => $"{string.Join(", ", parts.GetRange(0, parts.Count - 1))}, and {parts[^1]}",
         };
+    }
+
+    private static string ToSemicolonList(List<string> parts)
+    {
+        return string.Join("; ", parts);
     }
 }

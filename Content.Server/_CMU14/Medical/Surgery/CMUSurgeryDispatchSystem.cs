@@ -204,6 +204,8 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
         }
         if (HasComp<InternalBleedingComponent>(part))
             bits.Add(Loc.GetString("cmu-medical-surgery-condition-internal-bleed"));
+        if (HasComp<CMUEscharComponent>(part))
+            bits.Add(Loc.GetString("cmu-medical-surgery-condition-eschar"));
         return string.Join(" · ", bits);
     }
 

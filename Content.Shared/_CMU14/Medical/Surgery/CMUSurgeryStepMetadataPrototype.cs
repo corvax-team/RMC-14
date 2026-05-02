@@ -9,7 +9,7 @@ namespace Content.Shared._CMU14.Medical.Surgery;
 ///     Tool categories are resolved at click time. Allowed values include:
 ///     <c>scalpel</c>, <c>hemostat</c>, <c>retractor</c>, <c>cautery</c>,
 ///     <c>bone_saw</c>, <c>bone_setter</c>, <c>bone_gel</c>,
-///     <c>bone_graft</c>, <c>organ_clamp</c>.
+///     <c>bone_graft</c>, <c>organ_clamp</c>, <c>burn_debridement</c>.
 /// </summary>
 [Prototype("cmuSurgeryStepMetadata")]
 public sealed partial class CMUSurgeryStepMetadataPrototype : IPrototype
