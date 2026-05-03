@@ -3,28 +3,49 @@
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaSetSimpleFracture
   surgery: CMUSurgerySetSimpleFracture
-  displayName: cmu-medical-surgery-name-set-fracture
-  validParts: [Head, Torso, Arm, Leg]
+  displayName: Set Fracture
+  validParts: [Arm, Leg]
   allowSelfSurgery: true
   selfSurgeryValidParts: [Arm, Leg]
+  category: fracture
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaSetSimpleFractureCavity
+  surgery: CMUSurgerySetSimpleFractureCavity
+  displayName: Set Fracture
+  validParts: [Head, Torso]
   category: fracture
 
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaSetCompoundFracture
   surgery: CMUSurgerySetCompoundFracture
-  displayName: cmu-medical-surgery-name-set-fracture
-  validParts: [Head, Torso, Arm, Leg]
+  displayName: Set Fracture
+  validParts: [Arm, Leg]
   allowSelfSurgery: true
   selfSurgeryValidParts: [Arm, Leg]
   category: fracture
 
 - type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaSetCompoundFractureCavity
+  surgery: CMUSurgerySetCompoundFractureCavity
+  displayName: Set Fracture
+  validParts: [Head, Torso]
+  category: fracture
+
+- type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaSetComminutedFracture
   surgery: CMUSurgerySetComminutedFracture
-  displayName: cmu-medical-surgery-name-set-fracture
-  validParts: [Head, Torso, Arm, Leg]
+  displayName: Set Fracture
+  validParts: [Arm, Leg]
   allowSelfSurgery: true
   selfSurgeryValidParts: [Arm, Leg]
+  category: fracture
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaSetComminutedFractureCavity
+  surgery: CMUSurgerySetComminutedFractureCavity
+  displayName: Set Fracture
+  validParts: [Head, Torso]
   category: fracture
 
 # ---- Internal-bleed clamp + close -----------------------------------
@@ -32,10 +53,17 @@
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaCauterizeInternalBleeding
   surgery: CMUSurgeryCauterizeInternalBleeding
-  displayName: cmu-medical-surgery-name-stop-internal-bleeding
-  validParts: [Head, Torso, Arm, Leg]
+  displayName: Stop Internal Bleeding
+  validParts: [Arm, Leg]
   allowSelfSurgery: true
   selfSurgeryValidParts: [Arm, Leg]
+  category: bleed
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaCauterizeInternalBleedingCavity
+  surgery: CMUSurgeryCauterizeInternalBleedingCavity
+  displayName: Stop Internal Bleeding
+  validParts: [Head, Torso]
   category: bleed
 
 # ---- Organ removal (torso only) -------------------------------------
@@ -200,6 +228,18 @@
 # ---- Limb reattachment ----------------------------------------------
 
 - type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaRemoveLimb
+  surgery: CMUSurgeryRemoveLimb
+  displayName: Remove Limb
+  validParts: [Arm, Leg]
+  category: amputation
+  minSkill: 2
+  steps:
+  - stepId: CMUSurgeryStepAmputateLimb
+    label: Amputate Limb
+    toolCategory: bone_saw
+
+- type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaReattachLimb
   surgery: CMUSurgeryReattachLimb
   displayName: cmu-medical-surgery-name-reattach-limb
@@ -210,7 +250,7 @@
 
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaAlienEmbryoRemoval
-  surgery: CMSurgeryAlienEmbryoRemoval
+  surgery: CMUSurgeryAlienEmbryoRemoval
   displayName: Remove Larva
   validParts: [Torso]
   category: parasite
@@ -229,4 +269,4 @@
   steps:
   - stepId: CMUSurgeryStepDebrideEschar
     label: Debride Eschar
-    toolCategory: burn_debridement
+    toolCategory: scalpel_or_burn_kit

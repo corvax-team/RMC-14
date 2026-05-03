@@ -9,14 +9,10 @@
     skill: 1
     tool:
     - type: CMBoneSetter
-    remove:
-    - type: Fracture
+    add:
+    - type: CMUBoneAlignedMarker
   - type: CMUFracturedSurgeryCondition
     requireSeverity: Simple
-  - type: CMUSurgeryStepSetBoneEffect
-    downgradeFrom: Simple
-    downgradeTo: None
-    integrityRestore: 70
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/bonesetter.rsi
     state: bonesetter
@@ -30,6 +26,8 @@
     skill: 1
     tool:
     - type: CMBoneSetter
+    add:
+    - type: CMUBoneAlignedMarker
   - type: CMUFracturedSurgeryCondition
     requireSeverity: Compound
   - type: CMUSurgeryStepSetBoneEffect
@@ -50,7 +48,7 @@
     tool:
     - type: CMBoneGel
     remove:
-    - type: Fracture
+    - type: CMUBoneAlignedMarker
   - type: CMUFracturedSurgeryCondition
     requireAtLeast: Simple
   - type: CMUSurgeryStepSetBoneEffect
@@ -70,6 +68,8 @@
     skill: 1
     tool:
     - type: CMBoneSetter
+    add:
+    - type: CMUComminutedBoneRealignedMarker
   - type: CMUFracturedSurgeryCondition
     requireSeverity: Comminuted
   - type: CMUSurgeryStepSetBoneEffect
@@ -82,6 +82,25 @@
 
 - type: entity
   parent: CMSurgeryStepBase
+  id: CMUSurgeryStepApplyComminutedBoneGel
+  name: Apply bone gel
+  components:
+  - type: CMSurgeryStep
+    skill: 1
+    tool:
+    - type: CMBoneGel
+    add:
+    - type: CMUComminutedBoneGelAppliedMarker
+    remove:
+    - type: CMUComminutedBoneRealignedMarker
+  - type: CMUFracturedSurgeryCondition
+    requireSeverity: Compound
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/bone_gel.rsi
+    state: bone-gel
+
+- type: entity
+  parent: CMSurgeryStepBase
   id: CMUSurgeryStepInsertBoneGraft
   name: Insert bone graft
   components:
@@ -89,6 +108,10 @@
     skill: 1
     tool:
     - type: CMUBoneGraft
+    add:
+    - type: CMUBoneAlignedMarker
+    remove:
+    - type: CMUComminutedBoneGelAppliedMarker
   - type: CMUFracturedSurgeryCondition
     requireSeverity: Compound
   - type: CMUSurgeryStepSetBoneEffect
@@ -98,6 +121,27 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/bone_gel.rsi
     state: bone-gel
+
+- type: entity
+  parent: CMSurgeryStepBase
+  id: CMUSurgeryStepFinalizeGraftedBone
+  name: Final set grafted bone
+  components:
+  - type: CMSurgeryStep
+    skill: 1
+    tool:
+    - type: CMBoneSetter
+    remove:
+    - type: CMUBoneAlignedMarker
+  - type: CMUFracturedSurgeryCondition
+    requireSeverity: Simple
+  - type: CMUSurgeryStepSetBoneEffect
+    downgradeFrom: Simple
+    downgradeTo: None
+    integrityRestore: 70
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/bonesetter.rsi
+    state: bonesetter
 
 # ---- Internal-bleed clamp step ---------------------------------------
 
@@ -118,6 +162,33 @@
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
 
+# ---- CMU close-up step -----------------------------------------------
+
+- type: entity
+  parent: CMSurgeryStepBase
+  id: CMUSurgeryStepCloseIncision
+  name: Close incision
+  components:
+  - type: CMSurgeryStep
+    tool:
+    - type: CMCautery
+    remove:
+    - type: CMSkinRetracted
+    - type: CMBleedersClamped
+    - type: CMIncisionOpen
+    - type: CMUBoneAlignedMarker
+    - type: CMUComminutedBoneRealignedMarker
+    - type: CMUComminutedBoneGelAppliedMarker
+    - type: CMULiverVesselsClampedMarker
+    - type: CMULungsVesselsClampedMarker
+    - type: CMUKidneysVesselsClampedMarker
+    - type: CMUHeartVesselsClampedMarker
+    - type: CMUStomachVesselsClampedMarker
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/cautery.rsi
+    state: cautery
+  - type: CMSurgeryStepEmoteEffect
+
 # ---- Organ removal: clamp / sever / extract per slot -----------------
 
 - type: entity
@@ -129,6 +200,8 @@
     skill: 2
     tool:
     - type: CMUOrganClamp
+    add:
+    - type: CMULiverVesselsClampedMarker
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
@@ -144,6 +217,8 @@
     - type: CMHemostat
     add:
     - type: CMULiverRemovedMarker
+    remove:
+    - type: CMULiverVesselsClampedMarker
   - type: CMUOrganDamagedSurgeryCondition
     organSlot: liver
     minStage: Healthy   # extraction is valid even on healthy organs (donor harvesting)
@@ -162,6 +237,7 @@
     skill: 2
     remove:
     - type: CMULiverRemovedMarker
+    - type: CMULiverVesselsClampedMarker
   - type: CMUSurgeryStepReinsertOrganEffect
     organSlot: liver
   - type: Sprite
@@ -177,6 +253,8 @@
     skill: 2
     tool:
     - type: CMUOrganClamp
+    add:
+    - type: CMULungsVesselsClampedMarker
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
@@ -192,6 +270,8 @@
     - type: CMHemostat
     add:
     - type: CMULungsRemovedMarker
+    remove:
+    - type: CMULungsVesselsClampedMarker
   - type: CMUOrganDamagedSurgeryCondition
     organSlot: lungs
     minStage: Healthy
@@ -210,6 +290,7 @@
     skill: 2
     remove:
     - type: CMULungsRemovedMarker
+    - type: CMULungsVesselsClampedMarker
   - type: CMUSurgeryStepReinsertOrganEffect
     organSlot: lungs
   - type: Sprite
@@ -225,6 +306,8 @@
     skill: 2
     tool:
     - type: CMUOrganClamp
+    add:
+    - type: CMUKidneysVesselsClampedMarker
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
@@ -240,6 +323,8 @@
     - type: CMHemostat
     add:
     - type: CMUKidneysRemovedMarker
+    remove:
+    - type: CMUKidneysVesselsClampedMarker
   - type: CMUOrganDamagedSurgeryCondition
     organSlot: kidneys
     minStage: Healthy
@@ -258,6 +343,7 @@
     skill: 2
     remove:
     - type: CMUKidneysRemovedMarker
+    - type: CMUKidneysVesselsClampedMarker
   - type: CMUSurgeryStepReinsertOrganEffect
     organSlot: kidneys
   - type: Sprite
@@ -273,6 +359,8 @@
     skill: 2
     tool:
     - type: CMUOrganClamp
+    add:
+    - type: CMUHeartVesselsClampedMarker
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
@@ -288,6 +376,8 @@
     - type: CMHemostat
     add:
     - type: CMUHeartRemovedMarker
+    remove:
+    - type: CMUHeartVesselsClampedMarker
   - type: CMUOrganDamagedSurgeryCondition
     organSlot: heart
     minStage: Healthy
@@ -306,6 +396,7 @@
     skill: 2
     remove:
     - type: CMUHeartRemovedMarker
+    - type: CMUHeartVesselsClampedMarker
   - type: CMUSurgeryStepReinsertOrganEffect
     organSlot: heart
   - type: Sprite
@@ -321,6 +412,8 @@
     skill: 2
     tool:
     - type: CMUOrganClamp
+    add:
+    - type: CMUStomachVesselsClampedMarker
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat
@@ -336,6 +429,8 @@
     - type: CMHemostat
     add:
     - type: CMUStomachRemovedMarker
+    remove:
+    - type: CMUStomachVesselsClampedMarker
   - type: CMUOrganDamagedSurgeryCondition
     organSlot: stomach
     minStage: Healthy
@@ -354,6 +449,7 @@
     skill: 2
     remove:
     - type: CMUStomachRemovedMarker
+    - type: CMUStomachVesselsClampedMarker
   - type: CMUSurgeryStepReinsertOrganEffect
     organSlot: stomach
   - type: Sprite
@@ -371,6 +467,8 @@
     skill: 2
     tool:
     - type: CMHemostat
+    remove:
+    - type: CMULiverVesselsClampedMarker
   - type: CMUOrganDamagedSurgeryCondition
     organSlot: liver
     minStage: Bruised
@@ -389,6 +487,8 @@
     skill: 2
     tool:
     - type: CMHemostat
+    remove:
+    - type: CMULungsVesselsClampedMarker
   - type: CMUOrganDamagedSurgeryCondition
     organSlot: lungs
     minStage: Bruised
@@ -407,6 +507,8 @@
     skill: 2
     tool:
     - type: CMHemostat
+    remove:
+    - type: CMUKidneysVesselsClampedMarker
   - type: CMUOrganDamagedSurgeryCondition
     organSlot: kidneys
     minStage: Bruised
@@ -425,6 +527,8 @@
     skill: 2
     tool:
     - type: CMHemostat
+    remove:
+    - type: CMUHeartVesselsClampedMarker
   - type: CMUOrganDamagedSurgeryCondition
     organSlot: heart
     minStage: Bruised
@@ -443,6 +547,8 @@
     skill: 2
     tool:
     - type: CMHemostat
+    remove:
+    - type: CMUStomachVesselsClampedMarker
   - type: CMUOrganDamagedSurgeryCondition
     organSlot: stomach
     minStage: Bruised
@@ -453,6 +559,25 @@
     state: hemostat
 
 # ---- Limb reattachment -----------------------------------------------
+
+- type: entity
+  parent: CMSurgeryStepBase
+  id: CMUSurgeryStepAmputateLimb
+  name: Amputate limb
+  components:
+  - type: CMSurgeryStep
+    skill: 2
+    tool:
+    - type: CMBoneSaw
+    remove:
+    - type: CMSkinRetracted
+    - type: CMBleedersClamped
+    - type: CMIncisionOpen
+  - type: CMUSurgeryStepRemoveLimbEffect
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/Surgery/saw.rsi
+    state: saw
+  - type: CMSurgeryStepEmoteEffect
 
 - type: entity
   parent: CMSurgeryStepBase

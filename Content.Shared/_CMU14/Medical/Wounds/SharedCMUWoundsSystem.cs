@@ -23,6 +23,7 @@ using Content.Shared.Mobs.Components;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -41,6 +42,7 @@ public abstract class SharedCMUWoundsSystem : EntitySystem
     [Dependency] protected readonly SharedBodySystem Body = default!;
     [Dependency] protected readonly DamageableSystem Damageable = default!;
     [Dependency] protected readonly SharedContainerSystem Containers = default!;
+    [Dependency] protected readonly INetManager Net = default!;
     [Dependency] protected readonly RMCUnrevivableSystem Unrevivable = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
@@ -206,8 +208,52 @@ public abstract class SharedCMUWoundsSystem : EntitySystem
             return;
         }
 
-        var maxRate = 0f;
-        var source = string.Empty;
+        ComputeInternalBleedSource(part, ignoreSplint, out var maxRate, out var source);
+
+        if (maxRate <= 0f)
+        {
+            if (HasComp<InternalBleedingComponent>(part))
+            {
+                RemComp<InternalBleedingComponent>(part);
+                RaiseInternalBleedingChanged(part, true);
+            }
+            RemComp<CMUInternalBleedingSuppressedComponent>(part);
+            return;
+        }
+
+        // Surgical clamping suppresses the source it treated. A worse rate or
+        // a different source means the patient has developed a new active IB.
+        if (TryComp<CMUInternalBleedingSuppressedComponent>(part, out var suppressed))
+        {
+            if (IsSuppressedBleedSourceMatch(suppressed.Source, source)
+                && maxRate <= suppressed.BloodlossPerSecond + 0.001f)
+            {
+                if (HasComp<InternalBleedingComponent>(part))
+                {
+                    RemComp<InternalBleedingComponent>(part);
+                    RaiseInternalBleedingChanged(part, true);
+                }
+                return;
+            }
+
+            RemComp<CMUInternalBleedingSuppressedComponent>(part);
+        }
+
+        var changed = !TryComp<InternalBleedingComponent>(part, out var before)
+            || MathF.Abs(before.BloodlossPerSecond - maxRate) > 0.001f
+            || before.Source != source;
+        var ib = EnsureComp<InternalBleedingComponent>(part);
+        ib.BloodlossPerSecond = maxRate;
+        ib.Source = source;
+        Dirty(part, ib);
+        if (changed)
+            RaiseInternalBleedingChanged(part, false);
+    }
+
+    private void ComputeInternalBleedSource(EntityUid part, bool ignoreSplint, out float maxRate, out string source)
+    {
+        maxRate = 0f;
+        source = string.Empty;
 
         if (TryComp<FractureComponent>(part, out var f))
         {
@@ -246,28 +292,20 @@ public abstract class SharedCMUWoundsSystem : EntitySystem
         if (TryComp<InternalBleedingComponent>(part, out var existing) && existing.Source == "blunt")
         {
             if (existing.BloodlossPerSecond > maxRate)
-                return;
-        }
-
-        if (maxRate <= 0f)
-        {
-            if (HasComp<InternalBleedingComponent>(part))
             {
-                RemComp<InternalBleedingComponent>(part);
-                RaiseInternalBleedingChanged(part, true);
+                maxRate = existing.BloodlossPerSecond;
+                source = existing.Source;
             }
-            return;
         }
+    }
 
-        var changed = !TryComp<InternalBleedingComponent>(part, out var before)
-            || MathF.Abs(before.BloodlossPerSecond - maxRate) > 0.001f
-            || before.Source != source;
-        var ib = EnsureComp<InternalBleedingComponent>(part);
-        ib.BloodlossPerSecond = maxRate;
-        ib.Source = source;
-        Dirty(part, ib);
-        if (changed)
-            RaiseInternalBleedingChanged(part, false);
+    private static bool IsSuppressedBleedSourceMatch(string suppressed, string current)
+    {
+        if (suppressed == current)
+            return true;
+
+        return suppressed.StartsWith("fracture:", StringComparison.Ordinal)
+            && current.StartsWith("fracture:", StringComparison.Ordinal);
     }
 
     private float GetSplintAdjustedFractureBleedRate(
@@ -289,6 +327,8 @@ public abstract class SharedCMUWoundsSystem : EntitySystem
         if (IsSynthOwned(part))
             return;
 
+        RemComp<CMUInternalBleedingSuppressedComponent>(part);
+
         if (TryComp<InternalBleedingComponent>(part, out var existing) && existing.BloodlossPerSecond >= rate)
             return;
 
@@ -305,6 +345,36 @@ public abstract class SharedCMUWoundsSystem : EntitySystem
 
     public void ClearInternalBleed(EntityUid part)
     {
+        ClearInternalBleed(part, false);
+    }
+
+    public void SuppressInternalBleed(EntityUid part)
+    {
+        ClearInternalBleed(part, true);
+    }
+
+    private void ClearInternalBleed(EntityUid part, bool suppressCurrentSource)
+    {
+        if (suppressCurrentSource && !IsSynthOwned(part))
+        {
+            if (TryComp<InternalBleedingComponent>(part, out var existing))
+            {
+                var suppressed = EnsureComp<CMUInternalBleedingSuppressedComponent>(part);
+                suppressed.Source = existing.Source;
+                suppressed.BloodlossPerSecond = existing.BloodlossPerSecond;
+            }
+            else
+            {
+                ComputeInternalBleedSource(part, false, out var rate, out var source);
+                if (rate > 0f)
+                {
+                    var suppressed = EnsureComp<CMUInternalBleedingSuppressedComponent>(part);
+                    suppressed.Source = source;
+                    suppressed.BloodlossPerSecond = rate;
+                }
+            }
+        }
+
         if (HasComp<InternalBleedingComponent>(part))
         {
             RemComp<InternalBleedingComponent>(part);
@@ -433,6 +503,9 @@ public abstract class SharedCMUWoundsSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        if (Net.IsClient)
+            return;
 
         if (!IsEnabled())
             return;

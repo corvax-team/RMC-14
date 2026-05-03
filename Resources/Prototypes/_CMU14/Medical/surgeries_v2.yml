@@ -4,7 +4,7 @@
   name: Debride eschar
   components:
   - type: CMSurgeryStep
-    skill: 2
+    skill: 1
     tool:
     - type: CMUBurnDebridementTool
     remove:

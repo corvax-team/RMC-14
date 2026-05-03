@@ -30,6 +30,9 @@ public sealed partial class CMUMedicalCCVars : CVars
     public static readonly CVarDef<bool> DiagnosticsEnabled =
         CVarDef.Create("cmu.medical.diagnostics.enabled", true, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<bool> HideAttachedInternals =
+        CVarDef.Create("cmu.medical.hide_attached_internals", true, CVar.SERVER);
+
     public static readonly CVarDef<bool> StatusEffectsEnabled =
         CVarDef.Create("cmu.medical.status_effects.enabled", true, CVar.REPLICATED | CVar.SERVER);
 

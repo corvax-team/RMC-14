@@ -502,6 +502,35 @@ public abstract class SharedPainShockSystem : EntitySystem
         int tierSuppression,
         float decayBonus,
         TimeSpan duration)
+        => AddPainSuppressionProfile(
+            body,
+            accumulationSuppression,
+            tierSuppression,
+            decayBonus,
+            duration,
+            additive: false);
+
+    public void AddAdditivePainSuppressionProfile(
+        EntityUid body,
+        float accumulationSuppression,
+        int tierSuppression,
+        float decayBonus,
+        TimeSpan duration)
+        => AddPainSuppressionProfile(
+            body,
+            accumulationSuppression,
+            tierSuppression,
+            decayBonus,
+            duration,
+            additive: true);
+
+    private void AddPainSuppressionProfile(
+        EntityUid body,
+        float accumulationSuppression,
+        int tierSuppression,
+        float decayBonus,
+        TimeSpan duration,
+        bool additive)
     {
         if (Net.IsClient || duration <= TimeSpan.Zero)
             return;
@@ -523,6 +552,7 @@ public abstract class SharedPainShockSystem : EntitySystem
             AccumulationSuppression = Math.Clamp(accumulationSuppression, 0f, 1f),
             TierSuppression = Math.Max(0, tierSuppression),
             DecayBonus = Math.Max(0f, decayBonus),
+            Additive = additive,
             ExpiresAt = Timing.CurTime + duration,
         });
 
@@ -592,8 +622,19 @@ public abstract class SharedPainShockSystem : EntitySystem
         var bestAccumulation = 0f;
         var bestTier = 0;
         var bestDecay = 0f;
+        var additiveAccumulation = 0f;
+        var additiveTier = 0;
+        var additiveDecay = 0f;
         foreach (var entry in ent.Comp.ActiveProfiles)
         {
+            if (entry.Additive)
+            {
+                additiveAccumulation += entry.AccumulationSuppression;
+                additiveTier += entry.TierSuppression;
+                additiveDecay += entry.DecayBonus;
+                continue;
+            }
+
             if (IsProfileStronger(entry, bestAccumulation, bestTier, bestDecay))
             {
                 bestAccumulation = entry.AccumulationSuppression;
@@ -601,6 +642,10 @@ public abstract class SharedPainShockSystem : EntitySystem
                 bestDecay = entry.DecayBonus;
             }
         }
+
+        bestAccumulation = Math.Clamp(bestAccumulation + additiveAccumulation, 0f, 1f);
+        bestTier = Math.Max(0, bestTier + additiveTier);
+        bestDecay = Math.Max(0f, bestDecay + additiveDecay);
 
         var changed = removed
             || MathF.Abs(ent.Comp.AccumulationSuppression - bestAccumulation) > 0.001f

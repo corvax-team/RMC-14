@@ -58,6 +58,10 @@ cmu-medical-scanner-card-body              = Body
 cmu-medical-scanner-card-organs            = Organs
 cmu-medical-scanner-card-reagents          = Reagents in bloodstream
 cmu-medical-scanner-card-recommended       = Recommended
+cmu-medical-scanner-card-patient           = Patient
+cmu-medical-scanner-card-damage            = Damage profile
+cmu-medical-scanner-loading                = Receiving scan telemetry
+cmu-medical-scanner-loading-subtext        = resolving server state
 
 cmu-medical-scanner-stat-health            = HEALTH
 cmu-medical-scanner-stat-pulse             = PULSE BPM

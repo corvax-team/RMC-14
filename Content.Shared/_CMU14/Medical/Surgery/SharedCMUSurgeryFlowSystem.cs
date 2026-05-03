@@ -101,7 +101,7 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         _toolCategories["bone_gel"] = new[] { typeof(CMBoneGelComponent) };
         _toolCategories["bone_graft"] = new[] { typeof(CMUBoneGraftComponent) };
         _toolCategories["organ_clamp"] = new[] { typeof(CMUOrganClampComponent) };
-        _toolCategories["burn_debridement"] = new[] { typeof(CMUBurnDebridementToolComponent) };
+        _toolCategories["scalpel_or_burn_kit"] = new[] { typeof(CMUBurnDebridementToolComponent) };
         // Resolver only checks "is this a BodyPart" — the matching-symmetry
         // check (right leg slot ↔ right leg part) lives in
         // OnArmedInteractUsing's reattach-surgery branch.
@@ -655,7 +655,10 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         if (!IsSelfSurgeryPart(partType))
             return false;
 
-        return surgeryId is "CMSurgeryCloseIncision" or "CMSurgeryCloseRibcage";
+        return surgeryId is "CMUSurgeryCloseIncision"
+            or "CMUSurgeryCloseBoneCavity"
+            or "CMSurgeryCloseIncision"
+            or "CMSurgeryCloseRibcage";
     }
 
     private static bool IsSelfSurgeryPart(BodyPartType partType)
@@ -919,6 +922,7 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
             inFlight = new CMUSurgeryInFlightInfo(
                 GetNetEntity(lockComp.Part),
                 partDisplay,
+                flight.LeafSurgeryId,
                 flight.LeafSurgeryDisplayName,
                 flight.SurgeonName,
                 flight.StartedAt);

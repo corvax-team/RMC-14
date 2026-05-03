@@ -15,6 +15,7 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._CMU14.Medical.Penalties;
@@ -27,6 +28,7 @@ public abstract class SharedCMUMedicalSpeedSystem : EntitySystem
     [Dependency] protected readonly SharedFractureSystem Fracture = default!;
     [Dependency] protected readonly MovementSpeedModifierSystem Movement = default!;
     [Dependency] protected readonly SharedPainShockSystem Pain = default!;
+    [Dependency] protected readonly INetManager Net = default!;
 
     private bool _medicalEnabled;
     private bool _statusEffectsEnabled;
@@ -102,6 +104,8 @@ public abstract class SharedCMUMedicalSpeedSystem : EntitySystem
 
     private void OnRefreshMovement(Entity<CMUHumanMedicalComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
+        if (Net.IsClient)
+            return;
         if (!IsLayerEnabled())
             return;
         var mult = ComputeMovementMultiplier(ent.Owner);
@@ -110,6 +114,8 @@ public abstract class SharedCMUMedicalSpeedSystem : EntitySystem
 
     public virtual void RefreshAggregatedPenalties(EntityUid body)
     {
+        if (Net.IsClient)
+            return;
         if (!HasComp<CMUHumanMedicalComponent>(body))
             return;
 

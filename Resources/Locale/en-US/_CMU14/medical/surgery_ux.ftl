@@ -10,9 +10,15 @@
 cmu-medical-surgery-window-title = Surgical Procedure
 cmu-medical-surgery-window-hint = Pick a body part, pick a surgery, then click the patient with the required tool.
 cmu-medical-surgery-no-eligible = No surgeries available here.
+cmu-medical-surgery-section-patient = Patient
+cmu-medical-surgery-section-workflow = Workflow
+cmu-medical-surgery-workflow-ready = No active procedure selected.
+cmu-medical-surgery-workflow-active = { $surgery } active on { $part }.
 cmu-medical-surgery-section-parts = Body Parts
 cmu-medical-surgery-section-surgeries = Surgeries
 cmu-medical-surgery-section-surgeries-on = Surgeries on { $part }
+cmu-medical-surgery-no-part-selected = Select a body part.
+cmu-medical-surgery-procedure-detail = { $step } / { $tool }
 cmu-medical-surgery-arm-button = Begin Surgery
 cmu-medical-surgery-cancel-armed = Cancel Surgery
 cmu-medical-surgery-step-hint = Step { $step }/{ $total } — { $label } ({ $tool })
@@ -27,8 +33,13 @@ cmu-medical-surgery-in-progress-credit = Started by { $surgeon } · { $elapsed }
 cmu-medical-surgery-step-now = Step { $step }: { $label }
 cmu-medical-surgery-action-hint = Click { $part } with a { $tool }.
 cmu-medical-surgery-action-hint-no-tool = Click { $part } to continue.
+cmu-medical-surgery-choose-next-heading = Choose next surgery
+cmu-medical-surgery-choose-next-hint = Continue another repair on this open part, or close them up.
+cmu-medical-surgery-continue-with-button = Continue with { $surgery }
+cmu-medical-surgery-close-up-button = Close Up
 cmu-medical-surgery-continue-button = Continue Surgery
 cmu-medical-surgery-abandon-button = Abandon Surgery
+cmu-medical-surgery-actions-heading = Actions
 
 # ---- Per-part section labels -----------------------------------------
 
@@ -56,6 +67,7 @@ cmu-medical-surgery-category-remove_organ = Remove Organ
 cmu-medical-surgery-category-transplant = Transplant Organ
 cmu-medical-surgery-category-suture = Suture Organ
 cmu-medical-surgery-category-head_organ = Head Surgery
+cmu-medical-surgery-category-amputation = Remove Limb
 cmu-medical-surgery-category-reattach = Reattach Limb
 cmu-medical-surgery-category-parasite = Parasite Removal
 cmu-medical-surgery-category-close_up = Close Up
@@ -107,6 +119,7 @@ cmu-medical-surgery-self-pain-control = Self-surgery requires strong painkillers
 cmu-medical-surgery-self-not-secured = Buckle yourself to a chair, bed, or roller before attempting self-surgery.
 cmu-medical-surgery-self-not-allowed = You can't perform that surgery on yourself.
 cmu-medical-surgery-step-pain-interrupted = The patient's pain interrupts the surgical step.
+cmu-medical-amputation-success = The limb is removed.
 
 # ---- Tool category names (used in the BUI button + armed line) -------
 
@@ -119,7 +132,7 @@ cmu-medical-surgery-tool-category-bone_setter = Bone Setter
 cmu-medical-surgery-tool-category-bone_gel = Bone Gel
 cmu-medical-surgery-tool-category-bone_graft = Bone Graft
 cmu-medical-surgery-tool-category-organ_clamp = Organ Clamp
-cmu-medical-surgery-tool-category-burn_debridement = Burn Debridement Tool
+cmu-medical-surgery-tool-category-scalpel_or_burn_kit = Scalpel or burn kit
 
 # ---- Per-step labels -------------------------------------------------
 
@@ -150,6 +163,7 @@ cmu-medical-surgery-step-suture-lungs-label = Suture Lungs
 cmu-medical-surgery-step-suture-kidneys-label = Suture Kidneys
 cmu-medical-surgery-step-suture-heart-label = Suture Heart
 cmu-medical-surgery-step-suture-stomach-label = Suture Stomach
+cmu-medical-surgery-step-amputate-limb-label = Amputate Limb
 cmu-medical-surgery-step-reattach-limb-label = Reattach Severed Limb
 
 # ---- Surgery names --------------------------------------------------
