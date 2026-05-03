@@ -97,7 +97,6 @@ public sealed class CMUSurgeryBui : BoundUserInterface
             _window.InProgressStepLabel.Text = Loc.GetString(
                 "cmu-medical-surgery-step-now",
                 ("step", armed.StepIndex + 1),
-                ("total", "?"),
                 ("label", stepLabel));
 
             var tool = FormatToolCategory(armed.ToolCategory);

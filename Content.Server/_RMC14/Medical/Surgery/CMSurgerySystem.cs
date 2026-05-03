@@ -108,7 +108,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
             return;
         }
 
-        if (!_cmuDispatch.TryDispatch(args.User, target))
+        if (!_cmuDispatch.TryDispatch(args.User, target, ent))
             return;
 
         args.Handled = true;
@@ -143,11 +143,18 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
 
         if (user == args.Target)
         {
-            _popup.PopupEntity("You can't perform surgery on yourself!", user, user);
+            if (_cmuDispatch.TryDispatch(user, args.Target.Value, ent.Owner))
+            {
+                args.Handled = true;
+                return;
+            }
+
+            _popup.PopupEntity(Loc.GetString("cmu-medical-surgery-self-not-allowed"), user, user);
+            args.Handled = true;
             return;
         }
 
-        if (_cmuDispatch.TryDispatch(user, args.Target.Value))
+        if (_cmuDispatch.TryDispatch(user, args.Target.Value, ent.Owner))
         {
             args.Handled = true;
             return;
