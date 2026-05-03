@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Content.Shared._CMU14.Medical.Bones;
 using Content.Shared._CMU14.Medical.Organs;
-using Content.Shared._CMU14.Medical.StatusEffects;
 using Content.Shared._CMU14.Medical.Wounds;
 using Content.Shared.Body.Part;
 using Content.Shared.Chemistry.Components;
@@ -45,8 +44,10 @@ public sealed class HealthScannerBuiState(HealthScanState scanState) : BoundUser
     public List<CMUInternalBleedReadout>? CMUInternalBleeds;
     public int? CMUHeartBpm;
     public bool? CMUHeartStopped;
-    public PainTier? CMUPainTier;
+    public CMUPainShockRisk? CMUPainShockRisk;
+    public bool CMUPainShockSuppressed;
     public bool CMUExternalBleeding;
+    public bool CMUSyntheticPhysiology;
 }
 
 [Serializable, NetSerializable]
@@ -83,6 +84,16 @@ public readonly record struct CMUInternalBleedReadout(
     BodyPartSymmetry Symmetry,
     bool ExactLocationKnown,
     float BloodlossPerSecond);
+
+[Serializable, NetSerializable]
+public enum CMUPainShockRisk : byte
+{
+    Low,
+    Elevated,
+    High,
+    Imminent,
+    Active,
+}
 
 [Serializable, NetSerializable]
 public enum HealthScannerUIKey

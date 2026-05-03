@@ -172,6 +172,9 @@ public abstract class SharedBoneSystem : EntitySystem
         var query = EntityQueryEnumerator<FractureComponent, BoneComponent, BodyPartComponent>();
         while (query.MoveNext(out var partUid, out var fracture, out var bone, out var part))
         {
+            if (HasComp<CMUMalunionComponent>(partUid))
+                continue;
+
             if (bone.NextIntegrityTick > now)
                 continue;
             bone.NextIntegrityTick = now + TimeSpan.FromSeconds(10);

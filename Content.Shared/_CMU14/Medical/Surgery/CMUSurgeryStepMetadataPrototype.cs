@@ -38,6 +38,13 @@ public sealed partial class CMUSurgeryStepMetadataPrototype : IPrototype
     public string Category = "general";
 
     /// <summary>
+    ///     Minimum RMCSkillSurgery level required to surface and arm this
+    ///     surgery from the CMU surgery window.
+    /// </summary>
+    [DataField]
+    public int MinSkill = 1;
+
+    /// <summary>
     ///     Whether this surgery can be performed by the patient on themselves.
     ///     Self-surgery is intentionally opt-in so organ/head/torso work stays
     ///     blocked unless explicitly allowed.

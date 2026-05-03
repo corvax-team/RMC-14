@@ -199,7 +199,10 @@ public abstract class SharedCMUWoundsSystem : EntitySystem
         if (IsSynthOwned(part))
         {
             if (HasComp<InternalBleedingComponent>(part))
+            {
                 RemComp<InternalBleedingComponent>(part);
+                RaiseInternalBleedingChanged(part, true);
+            }
             return;
         }
 
@@ -249,14 +252,22 @@ public abstract class SharedCMUWoundsSystem : EntitySystem
         if (maxRate <= 0f)
         {
             if (HasComp<InternalBleedingComponent>(part))
+            {
                 RemComp<InternalBleedingComponent>(part);
+                RaiseInternalBleedingChanged(part, true);
+            }
             return;
         }
 
+        var changed = !TryComp<InternalBleedingComponent>(part, out var before)
+            || MathF.Abs(before.BloodlossPerSecond - maxRate) > 0.001f
+            || before.Source != source;
         var ib = EnsureComp<InternalBleedingComponent>(part);
         ib.BloodlossPerSecond = maxRate;
         ib.Source = source;
         Dirty(part, ib);
+        if (changed)
+            RaiseInternalBleedingChanged(part, false);
     }
 
     private float GetSplintAdjustedFractureBleedRate(
@@ -281,16 +292,31 @@ public abstract class SharedCMUWoundsSystem : EntitySystem
         if (TryComp<InternalBleedingComponent>(part, out var existing) && existing.BloodlossPerSecond >= rate)
             return;
 
+        var changed = !TryComp<InternalBleedingComponent>(part, out var before)
+            || MathF.Abs(before.BloodlossPerSecond - rate) > 0.001f
+            || before.Source != source;
         var ib = EnsureComp<InternalBleedingComponent>(part);
         ib.BloodlossPerSecond = rate;
         ib.Source = source;
         Dirty(part, ib);
+        if (changed)
+            RaiseInternalBleedingChanged(part, false);
     }
 
     public void ClearInternalBleed(EntityUid part)
     {
         if (HasComp<InternalBleedingComponent>(part))
+        {
             RemComp<InternalBleedingComponent>(part);
+            RaiseInternalBleedingChanged(part, true);
+        }
+    }
+
+    private void RaiseInternalBleedingChanged(EntityUid part, bool removed)
+    {
+        if (TryGetBodyOwner(part) is not { } body)
+            return;
+        RaiseLocalEvent(new InternalBleedingChangedEvent(body, part, removed));
     }
 
     public void ClearAllWounds(Entity<BodyPartWoundComponent?> part)
@@ -303,6 +329,9 @@ public abstract class SharedCMUWoundsSystem : EntitySystem
         part.Comp.Sizes.Clear();
         part.Comp.Bandages.Clear();
         Dirty(part.Owner, part.Comp);
+
+        if (TryGetBodyOwner(part.Owner) is { } body)
+            RaiseLocalEvent(new WoundTreatedEvent(body, part.Owner));
     }
 
     /// <summary>

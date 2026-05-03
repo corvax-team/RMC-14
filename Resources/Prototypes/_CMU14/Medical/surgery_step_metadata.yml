@@ -46,6 +46,7 @@
   displayName: cmu-medical-surgery-name-remove-liver
   validParts: [Torso]
   category: remove_organ
+  minSkill: 2
 
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaRemoveLung
@@ -53,6 +54,7 @@
   displayName: cmu-medical-surgery-name-remove-lungs
   validParts: [Torso]
   category: remove_organ
+  minSkill: 2
 
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaRemoveKidney
@@ -60,6 +62,7 @@
   displayName: cmu-medical-surgery-name-remove-kidneys
   validParts: [Torso]
   category: remove_organ
+  minSkill: 2
 
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaRemoveHeart
@@ -67,6 +70,7 @@
   displayName: cmu-medical-surgery-name-remove-heart
   validParts: [Torso]
   category: remove_organ
+  minSkill: 2
 
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaRemoveStomach
@@ -74,6 +78,7 @@
   displayName: cmu-medical-surgery-name-remove-stomach
   validParts: [Torso]
   category: remove_organ
+  minSkill: 2
 
 # ---- Organ replacement (transplant) ---------------------------------
 
@@ -83,6 +88,7 @@
   displayName: cmu-medical-surgery-name-replace-liver
   validParts: [Torso]
   category: transplant
+  minSkill: 2
 
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaReplaceLung
@@ -90,6 +96,7 @@
   displayName: cmu-medical-surgery-name-replace-lungs
   validParts: [Torso]
   category: transplant
+  minSkill: 2
 
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaReplaceKidney
@@ -97,6 +104,7 @@
   displayName: cmu-medical-surgery-name-replace-kidneys
   validParts: [Torso]
   category: transplant
+  minSkill: 2
 
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaTransplantHeart
@@ -104,6 +112,7 @@
   displayName: cmu-medical-surgery-name-transplant-heart
   validParts: [Torso]
   category: transplant
+  minSkill: 2
 
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaReplaceStomach
@@ -111,6 +120,7 @@
   displayName: cmu-medical-surgery-name-replace-stomach
   validParts: [Torso]
   category: transplant
+  minSkill: 2
 
 # ---- Suture organ (per-slot) ----------------------------------------
 
@@ -120,6 +130,7 @@
   displayName: cmu-medical-surgery-name-suture-liver
   validParts: [Torso]
   category: suture
+  minSkill: 2
 
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaRepairLungs
@@ -127,6 +138,7 @@
   displayName: cmu-medical-surgery-name-suture-lungs
   validParts: [Torso]
   category: suture
+  minSkill: 2
 
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaRepairKidneys
@@ -134,13 +146,23 @@
   displayName: cmu-medical-surgery-name-suture-kidneys
   validParts: [Torso]
   category: suture
+  minSkill: 2
 
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaRepairHeart
   surgery: CMUSurgeryRepairHeart
-  displayName: cmu-medical-surgery-name-suture-heart
+  displayName: Suture Heart
   validParts: [Torso]
   category: suture
+  minSkill: 2
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaRepairStomach
+  surgery: CMUSurgeryRepairStomach
+  displayName: Suture Stomach
+  validParts: [Torso]
+  category: suture
+  minSkill: 2
 
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaRepairStomach
@@ -157,6 +179,7 @@
   displayName: cmu-medical-surgery-name-repair-brain
   validParts: [Head]
   category: head_organ
+  minSkill: 2
 
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaRepairEyes
@@ -164,6 +187,7 @@
   displayName: cmu-medical-surgery-name-repair-eyes
   validParts: [Head]
   category: head_organ
+  minSkill: 2
 
 - type: cmuSurgeryStepMetadata
   id: CMUSurgeryStepMetaRepairEars
@@ -171,6 +195,7 @@
   displayName: cmu-medical-surgery-name-repair-ears
   validParts: [Head]
   category: head_organ
+  minSkill: 2
 
 # ---- Limb reattachment ----------------------------------------------
 
@@ -189,6 +214,7 @@
   displayName: Remove Larva
   validParts: [Torso]
   category: parasite
+  minSkill: 2
 
 # ---- Eschar debridement ---------------------------------------------
 

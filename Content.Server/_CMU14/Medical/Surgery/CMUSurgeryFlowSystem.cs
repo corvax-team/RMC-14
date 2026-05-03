@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Content.Shared._CMU14.Medical;
+using Content.Shared._CMU14.Medical.Bones;
+using Content.Shared._CMU14.Medical.Items;
 using Content.Shared._CMU14.Medical.Surgery;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Surgery;
@@ -29,9 +31,19 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
     [Dependency] private readonly SkillsSystem _skills = default!;
 
     private const float StepDoAfterSeconds = 2f;
+    private const float PostOpCastWindowMinutes = 5f;
+    private const float PostOpMalunionChance = 0.3f;
     private const string OpenIncisionScalpelStep = "CMSurgeryStepOpenIncisionScalpel";
     private static readonly EntProtoId<SkillDefinitionComponent> SurgerySkill = "RMCSkillSurgery";
     private static readonly float[] SurgeryStepDelayMultipliers = { 1.25f, 1f, 0.75f, 0.55f, 0.4f };
+
+    private static readonly HashSet<string> ClosureStepIds = new()
+    {
+        "CMSurgeryStepCloseBones",
+        "CMSurgeryStepMendRibcage",
+        "CMSurgeryStepCloseIncision",
+        "CMUSurgeryStepCloseReattach",
+    };
 
     private static readonly SoundSpecifier WelderStepSound = new SoundCollectionSpecifier("Welder");
 
@@ -61,7 +73,7 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
         ["burn_debridement"] = new SoundCollectionSpecifier("RMCSurgeryScalpel"),
     };
 
-    protected override void StartStepDoAfter(EntityUid patient, CMUSurgeryArmedStepComponent armed, EntityUid surgeon, EntityUid tool, EntityUid targetPart)
+    protected override bool StartStepDoAfter(EntityUid patient, CMUSurgeryArmedStepComponent armed, EntityUid surgeon, EntityUid tool, EntityUid targetPart)
     {
         var delay = ResolveStepDoAfterDelay(surgeon);
         if (TryComp<CMUImprovisedSurgeryToolComponent>(tool, out var improvised))
@@ -83,12 +95,12 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
             CancelDuplicate = false,
         };
         if (!DoAfter.TryStartDoAfter(doAfter))
-            return;
+            return false;
 
         if (HasComp<BlowtorchComponent>(tool))
         {
             _audio.PlayPvs(WelderStepSound, tool);
-            return;
+            return true;
         }
 
         if (armed.RequiredToolCategory is { } category
@@ -96,6 +108,8 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
         {
             _audio.PlayPvs(sound, patient);
         }
+
+        return true;
     }
 
     private TimeSpan ResolveStepDoAfterDelay(EntityUid surgeon)
@@ -195,6 +209,7 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
         {
             if (armed.StepIndex >= leafComp.Steps.Count - 1)
             {
+                MarkFracturePostOpIfNeeded(patient, stepPart, surgeon, leafId);
                 var completeEvLast = new CMSurgeryCompleteEvent(patient, surgeon, leafId);
                 RaiseLocalEvent(patient, ref completeEvLast);
                 RemComp<CMUSurgeryArmedStepComponent>(patient);
@@ -205,6 +220,29 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
 
             if (TryResolveStepAt(leafId, armed.StepIndex + 1, out var nextLinear, stepPart))
             {
+                if (IsClosureStep(nextLinear.ResolvedSurgeryId, nextLinear.StepIndex))
+                {
+                    MarkFracturePostOpIfNeeded(patient, stepPart, surgeon, leafId);
+                    var completeEvFunctional = new CMSurgeryCompleteEvent(patient, surgeon, leafId);
+                    RaiseLocalEvent(patient, ref completeEvFunctional);
+
+                    if (ShouldOfferRepairOrClose(patient, surgeon, stepPart, leafId))
+                    {
+                        RemComp<CMUSurgeryArmedStepComponent>(patient);
+                        SetAwaitingClosureChoice(patient, stepPart);
+                        Popup.PopupEntity(
+                            Loc.GetString("cmu-medical-surgery-choose-repair-or-close"),
+                            patient,
+                            surgeon,
+                            PopupType.Medium);
+                        _dispatch.RefreshUiForPatient(patient);
+                        return;
+                    }
+
+                    if (TryArmSamePartContinuation(patient, armed, surgeon, stepPart, leafId))
+                        return;
+                }
+
                 armed.SurgeryId = nextLinear.ResolvedSurgeryId;
                 armed.StepIndex = nextLinear.StepIndex;
                 armed.RequiredToolCategory = nextLinear.ToolCategory;
@@ -229,10 +267,160 @@ public sealed class CMUSurgeryFlowSystem : SharedCMUSurgeryFlowSystem
         }
 
         var completeEv = new CMSurgeryCompleteEvent(patient, surgeon, leafId);
+        MarkFracturePostOpIfNeeded(patient, stepPart, surgeon, leafId);
         RaiseLocalEvent(patient, ref completeEv);
         RemComp<CMUSurgeryArmedStepComponent>(patient);
         ClearSurgeryInFlight(patient);
         _dispatch.RefreshUiForPatient(patient);
+    }
+
+    private void MarkFracturePostOpIfNeeded(EntityUid patient, EntityUid part, EntityUid surgeon, string leafId)
+    {
+        if (!IsFractureSurgeryId(leafId))
+            return;
+        if (!TryComp<BodyPartComponent>(part, out var partComp))
+            return;
+        if (partComp.PartType is not (BodyPartType.Arm or BodyPartType.Leg))
+            return;
+        if (HasComp<FractureComponent>(part) || HasComp<CMUCastComponent>(part))
+            return;
+
+        var postOp = EnsureComp<CMUPostOpBoneSetComponent>(part);
+        postOp.MalunionCheckAt = Timing.CurTime + TimeSpan.FromMinutes(PostOpCastWindowMinutes);
+        postOp.MalunionChance = PostOpMalunionChance;
+        Dirty(part, postOp);
+
+        Popup.PopupEntity(
+            Loc.GetString("cmu-medical-cast-needed"),
+            patient,
+            surgeon,
+            PopupType.SmallCaution);
+    }
+
+    private static bool IsFractureSurgeryId(string surgeryId)
+    {
+        return surgeryId is "CMUSurgerySetSimpleFracture"
+            or "CMUSurgerySetCompoundFracture"
+            or "CMUSurgerySetComminutedFracture";
+    }
+
+    private bool ShouldOfferRepairOrClose(EntityUid patient, EntityUid surgeon, EntityUid stepPart, string currentLeafId)
+    {
+        if (!TryComp<BodyPartComponent>(stepPart, out var partComp))
+            return false;
+
+        var entries = _dispatch.BuildEligibleSurgeries(
+            patient,
+            partComp.PartType,
+            partComp.Symmetry,
+            surgeon,
+            stepPart,
+            ignoreInProgressLock: true);
+
+        foreach (var entry in entries)
+        {
+            if (entry.SurgeryId == currentLeafId)
+                continue;
+            if (!IsOrganRepairChoiceCategory(entry.Category))
+                continue;
+            if (IsClosureStep(entry.SurgeryId, entry.NextStepIndex))
+                continue;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool TryArmSamePartContinuation(
+        EntityUid patient,
+        CMUSurgeryArmedStepComponent armed,
+        EntityUid surgeon,
+        EntityUid stepPart,
+        string currentLeafId)
+    {
+        if (!TryComp<BodyPartComponent>(stepPart, out var partComp))
+            return false;
+
+        var entries = _dispatch.BuildEligibleSurgeries(
+            patient,
+            partComp.PartType,
+            partComp.Symmetry,
+            surgeon,
+            stepPart,
+            ignoreInProgressLock: true);
+
+        var candidates = new List<CMUSurgeryEntry>();
+        foreach (var entry in entries)
+        {
+            if (entry.SurgeryId == currentLeafId)
+                continue;
+            if (!CanAutoContinueCategory(entry.Category))
+                continue;
+            if (IsClosureStep(entry.SurgeryId, entry.NextStepIndex))
+                continue;
+
+            candidates.Add(entry);
+        }
+
+        if (candidates.Count == 0)
+            return false;
+
+        candidates.Sort((a, b) => AutoContinuationPriority(b.Category).CompareTo(AutoContinuationPriority(a.Category)));
+        var best = candidates[0];
+        if (candidates.Count > 1
+            && AutoContinuationPriority(candidates[1].Category) == AutoContinuationPriority(best.Category))
+        {
+            return false;
+        }
+
+        var next = TryArmStep(
+            surgeon,
+            patient,
+            stepPart,
+            best.SurgeryId,
+            best.NextStepIndex,
+            partComp.PartType,
+            partComp.Symmetry,
+            allowSamePartInFlightSwitch: true);
+
+        if (next is null)
+            return false;
+
+        var display = ResolveLeafDisplayName(best.SurgeryId);
+        EnsureSurgeryInFlight(patient, stepPart, surgeon, best.SurgeryId, display, armed.TargetPartType, armed.TargetSymmetry);
+        Popup.PopupEntity(
+            Loc.GetString("cmu-medical-surgery-auto-continue", ("surgery", display)),
+            patient,
+            surgeon,
+            PopupType.Medium);
+        _dispatch.RefreshUiForPatient(patient);
+        return true;
+    }
+
+    private bool IsClosureStep(string surgeryId, int stepIndex)
+    {
+        var stepId = ResolveStepPrototypeId(surgeryId, stepIndex);
+        return stepId is not null && ClosureStepIds.Contains(stepId);
+    }
+
+    private static bool CanAutoContinueCategory(string category)
+    {
+        return category is "bleed" or "fracture" or "burn" or "parasite";
+    }
+
+    private static int AutoContinuationPriority(string category) => category switch
+    {
+        "bleed" => 90,
+        "fracture" => 80,
+        "burn" => 70,
+        "parasite" => 50,
+        _ => 0,
+    };
+
+    private static bool IsOrganRepairChoiceCategory(string category)
+    {
+        return category is "suture" or "head_organ";
     }
 
     private string ResolveLeafDisplayName(string leafId)

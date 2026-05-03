@@ -3,7 +3,6 @@ using System.Numerics;
 using Content.Client._RMC14.Medical.HUD;
 using Content.Client.Atmos.Rotting;
 using Content.Client.Message;
-using Content.Shared._CMU14.Medical.StatusEffects;
 using Content.Shared._CMU14.Medical.Wounds;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Marines.Skills;
@@ -346,6 +345,11 @@ public sealed class HealthScannerBui : BoundUserInterface
             _window.CMUBigTempValue.Text = "--";
             _window.CMUBigTempValue.FontColorOverride = Color.FromHex("#5B88B0");
         }
+
+        _window.CMUBigShockRiskValue.Text = FormatPainShockRiskValue(
+            uiState.CMUPainShockRisk,
+            uiState.CMUPainShockSuppressed);
+        _window.CMUBigShockRiskValue.FontColorOverride = PainShockRiskColor(uiState.CMUPainShockRisk);
     }
 
     private void UpdateCMUBodyMap(HealthScannerBuiState uiState)
@@ -667,6 +671,14 @@ public sealed class HealthScannerBui : BoundUserInterface
                 "cmu-medical-scanner-skill-hint-organs"));
             return;
         }
+
+        if (uiState.CMUSyntheticPhysiology)
+        {
+            _window!.CMUOrgansContainer.AddChild(BuildSkillHint(
+                "cmu-medical-scanner-synthetic-physiology"));
+            return;
+        }
+
         if (uiState.CMUOrgans is not { Count: > 0 } organs)
             return;
 
@@ -825,39 +837,36 @@ public sealed class HealthScannerBui : BoundUserInterface
         _ => idOrSlot.StartsWith("CMUOrganHuman") ? idOrSlot.Substring("CMUOrganHuman".Length) : idOrSlot,
     };
 
-    private static Color PainTierColor(PainTier? tier) => tier switch
+    private static Color PainShockRiskColor(CMUPainShockRisk? risk) => risk switch
     {
-        PainTier.Mild => Color.FromHex("#9CCC42"),
-        PainTier.Moderate => Color.FromHex("#FFAA00"),
-        PainTier.Severe => Color.FromHex("#FF6060"),
-        PainTier.Shock => Color.FromHex("#FF3030"),
+        CMUPainShockRisk.Elevated => Color.FromHex("#CFE070"),
+        CMUPainShockRisk.High => Color.FromHex("#FFAA00"),
+        CMUPainShockRisk.Imminent => Color.FromHex("#FF6060"),
+        CMUPainShockRisk.Active => Color.FromHex("#FF3030"),
+        CMUPainShockRisk.Low => Color.White,
         _ => Color.FromHex("#5B88B0"),
     };
 
-    private static string FormatPainTier(PainTier? tier) => tier switch
+    private static string FormatPainShockRiskValue(CMUPainShockRisk? risk, bool suppressed)
     {
-        null => Loc.GetString("cmu-medical-scanner-pain-unknown"),
-        PainTier.None => Loc.GetString("cmu-medical-scanner-pain-none"),
-        PainTier.Mild => Loc.GetString("cmu-medical-scanner-pain-mild"),
-        PainTier.Moderate => Loc.GetString("cmu-medical-scanner-pain-moderate"),
-        PainTier.Severe => Loc.GetString("cmu-medical-scanner-pain-severe"),
-        PainTier.Shock => Loc.GetString("cmu-medical-scanner-pain-shock"),
-        _ => Loc.GetString("cmu-medical-scanner-pain-unknown"),
-    };
+        if (risk is null)
+            return "--";
 
-    // Vitals stat-block variant: returns just the tier word so "Pain"
-    // can be the row label and the tier word the value (avoiding the
-    // "Pain    Pain: Severe" double-up).
-    private static string FormatPainTierValue(PainTier? tier) => tier switch
-    {
-        null => "?",
-        PainTier.None => "None",
-        PainTier.Mild => "Mild",
-        PainTier.Moderate => "Moderate",
-        PainTier.Severe => "Severe",
-        PainTier.Shock => "Shock",
-        _ => "?",
-    };
+        var key = risk.Value switch
+        {
+            CMUPainShockRisk.Low => "cmu-medical-scanner-pain-risk-low",
+            CMUPainShockRisk.Elevated => "cmu-medical-scanner-pain-risk-elevated",
+            CMUPainShockRisk.High => "cmu-medical-scanner-pain-risk-high",
+            CMUPainShockRisk.Imminent => "cmu-medical-scanner-pain-risk-imminent",
+            CMUPainShockRisk.Active => "cmu-medical-scanner-pain-risk-active",
+            _ => "cmu-medical-scanner-pain-risk-unknown",
+        };
+
+        var value = Loc.GetString(key);
+        if (suppressed)
+            value += Loc.GetString("cmu-medical-scanner-pain-risk-suppressed-suffix");
+        return value;
+    }
 
     private void OpenChangeHolocardUI(BaseButton.ButtonEventArgs obj)
     {

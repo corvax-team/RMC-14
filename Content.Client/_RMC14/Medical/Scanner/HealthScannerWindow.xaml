@@ -37,7 +37,7 @@
                 </BoxContainer>
             </PanelContainer>
 
-            <!-- Big-number stat card: HEALTH / PULSE / BLOOD / TEMP. Each
+            <!-- Big-number stat card: HEALTH / PULSE / BLOOD / TEMP / SHOCK. Each
                  value is a large RichTextLabel; a small uppercase label
                  underneath tags it. Health gets a thin progress bar. -->
             <PanelContainer Margin="0 0 0 4">
@@ -68,6 +68,12 @@
                             <Label Name="CMUBigTempValue" Access="Public"
                                    Text="--" StyleClasses="LabelHeading" />
                             <Label Text="{Loc cmu-medical-scanner-stat-temp}"
+                                   Modulate="#5B88B0" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                            <Label Name="CMUBigShockRiskValue" Access="Public"
+                                   Text="--" StyleClasses="LabelHeading" />
+                            <Label Text="{Loc cmu-medical-scanner-stat-shock-risk}"
                                    Modulate="#5B88B0" />
                         </BoxContainer>
                     </BoxContainer>

@@ -166,6 +166,10 @@ public abstract class SharedCMUSurgerySystem : EntitySystem
 
         Bone.RestoreIntegrity((args.Part, null), ent.Comp.IntegrityRestore);
         Fracture.SetSeverity((args.Part, frac), ent.Comp.DowngradeTo, forceUpgrade: false);
+        if (ent.Comp.DowngradeTo == FractureSeverity.None && HasComp<CMUMalunionComponent>(args.Part))
+            RemComp<CMUMalunionComponent>(args.Part);
+        if (ent.Comp.DowngradeTo == FractureSeverity.None && HasComp<CMUPostOpBoneSetComponent>(args.Part))
+            RemComp<CMUPostOpBoneSetComponent>(args.Part);
         Wounds.RecomputeInternalBleed(args.Part);
     }
 

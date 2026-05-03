@@ -264,7 +264,8 @@ public abstract class SharedBodyPartHealthSystem : EntitySystem
         }
     }
 
-    private const float ThresholdFraction = 0.10f;
+    private const float HealedThresholdFraction = 0.10f;
+    private static readonly float[] PainThresholdFractions = { 0.10f, 0.25f };
 
     private void RaiseHealedThresholdEvent(
         EntityUid? body,
@@ -274,19 +275,40 @@ public abstract class SharedBodyPartHealthSystem : EntitySystem
         FixedPoint2 prev,
         FixedPoint2 next)
     {
-        // Raise BodyPartHealedEvent on the upward edge through 10% of Max so
-        // semi-permanent injury triggers don't spam at every regen step.
         if (body is not { } bodyUid || health.Max <= FixedPoint2.Zero)
             return;
 
         var maxFloat = health.Max.Float();
         var prevFraction = prev.Float() / maxFloat;
         var nextFraction = next.Float() / maxFloat;
-        if (prevFraction >= ThresholdFraction || nextFraction < ThresholdFraction)
+        RaisePainThresholdEvents(bodyUid, part, type, prevFraction, nextFraction);
+
+        // Raise BodyPartHealedEvent on the upward edge through 10% of Max so
+        // semi-permanent injury triggers don't spam at every regen step.
+        if (prevFraction >= HealedThresholdFraction || nextFraction < HealedThresholdFraction)
             return;
 
-        var healed = new BodyPartHealedEvent(bodyUid, part, type, prevFraction, nextFraction, ThresholdFraction);
+        var healed = new BodyPartHealedEvent(bodyUid, part, type, prevFraction, nextFraction, HealedThresholdFraction);
         RaiseLocalEvent(part, ref healed);
+    }
+
+    private void RaisePainThresholdEvents(
+        EntityUid body,
+        EntityUid part,
+        BodyPartType type,
+        float prevFraction,
+        float nextFraction)
+    {
+        foreach (var threshold in PainThresholdFractions)
+        {
+            var wasBelow = prevFraction < threshold;
+            var isBelow = nextFraction < threshold;
+            if (wasBelow == isBelow)
+                continue;
+
+            var ev = new BodyPartPainThresholdCrossedEvent(body, part, type, prevFraction, nextFraction, threshold);
+            RaiseLocalEvent(part, ref ev);
+        }
     }
 
     /// <summary>
@@ -342,7 +364,17 @@ public abstract class SharedBodyPartHealthSystem : EntitySystem
             return;
         if (newCurrent > part.Comp.Max)
             newCurrent = part.Comp.Max;
+        var prev = part.Comp.Current;
         part.Comp.Current = newCurrent;
         Dirty(part.Owner, part.Comp);
+
+        if (part.Comp.Max <= FixedPoint2.Zero)
+            return;
+        if (!TryComp<BodyPartComponent>(part.Owner, out var partBody) || partBody.Body is not { } body)
+            return;
+
+        var prevFraction = prev.Float() / part.Comp.Max.Float();
+        var nextFraction = newCurrent.Float() / part.Comp.Max.Float();
+        RaisePainThresholdEvents(body, part.Owner, partBody.PartType, prevFraction, nextFraction);
     }
 }

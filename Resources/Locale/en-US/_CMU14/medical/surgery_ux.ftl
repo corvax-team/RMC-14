@@ -24,7 +24,7 @@ cmu-medical-surgery-armed-heading = ARMED
 cmu-medical-surgery-in-progress-heading = IN PROGRESS
 cmu-medical-surgery-in-progress-subtitle = { $surgery } · { $part }
 cmu-medical-surgery-in-progress-credit = Started by { $surgeon } · { $elapsed } ago
-cmu-medical-surgery-step-now = Step { $step } of { $total }: { $label }
+cmu-medical-surgery-step-now = Step { $step }: { $label }
 cmu-medical-surgery-action-hint = Click { $part } with a { $tool }.
 cmu-medical-surgery-action-hint-no-tool = Click { $part } to continue.
 cmu-medical-surgery-continue-button = Continue Surgery
@@ -81,6 +81,9 @@ cmu-medical-surgery-armed-none = (no surgery armed)
 cmu-medical-surgery-armed-step = Armed: { $surgery } — Step { $step } ({ $tool })
 cmu-medical-surgery-armed-cancelled = Surgery cancelled.
 cmu-medical-surgery-armed-expired = The surgery pick timed out.
+cmu-medical-surgery-auto-armed = Selected { $surgery }.
+cmu-medical-surgery-auto-continue = Continuing with { $surgery }.
+cmu-medical-surgery-choose-repair-or-close = Choose an organ repair or close them up.
 
 # ---- Click-target popups ---------------------------------------------
 
@@ -92,6 +95,10 @@ cmu-medical-surgery-step-failed = The operation slips and causes trauma.
 cmu-medical-surgery-step-failed-with-tool = The { $tool } slips and causes surgical trauma.
 cmu-medical-surgery-no-tool = You need a surgical tool to perform this step.
 cmu-medical-surgery-missing-skills = You don't know how to perform this step.
+cmu-medical-surgery-cannot-start = That surgery is no longer available.
+cmu-medical-surgery-needs-operating-table = Move them to an operating table first.
+cmu-medical-surgery-remove-helmet = Remove their helmet first.
+cmu-medical-surgery-remove-armor = Remove the obstructing armor first.
 cmu-medical-surgery-wrong-limb = That limb doesn't match any empty slot on the patient.
 cmu-medical-surgery-welder-not-lit = Light the tool first.
 cmu-medical-surgery-patient-not-lying = The patient must be lying down or strapped to a surgery table.

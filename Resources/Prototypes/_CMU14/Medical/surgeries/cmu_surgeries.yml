@@ -267,6 +267,7 @@
     - CMSurgeryStepRetractSkin
     - CMSurgeryStepSawBones
     - CMSurgeryStepPriseOpenBones
+    - CMUSurgeryStepClampLiverVessels
     - CMUSurgeryStepSutureLiver
     - CMSurgeryStepCloseBones
     - CMSurgeryStepMendRibcage
@@ -285,6 +286,7 @@
     - CMSurgeryStepRetractSkin
     - CMSurgeryStepSawBones
     - CMSurgeryStepPriseOpenBones
+    - CMUSurgeryStepClampLungVessels
     - CMUSurgeryStepSutureLungs
     - CMSurgeryStepCloseBones
     - CMSurgeryStepMendRibcage
@@ -303,6 +305,7 @@
     - CMSurgeryStepRetractSkin
     - CMSurgeryStepSawBones
     - CMSurgeryStepPriseOpenBones
+    - CMUSurgeryStepClampKidneyVessels
     - CMUSurgeryStepSutureKidneys
     - CMSurgeryStepCloseBones
     - CMSurgeryStepMendRibcage
@@ -321,6 +324,7 @@
     - CMSurgeryStepRetractSkin
     - CMSurgeryStepSawBones
     - CMSurgeryStepPriseOpenBones
+    - CMUSurgeryStepClampHeartVessels
     - CMUSurgeryStepSutureHeart
     - CMSurgeryStepCloseBones
     - CMSurgeryStepMendRibcage
@@ -339,6 +343,7 @@
     - CMSurgeryStepRetractSkin
     - CMSurgeryStepSawBones
     - CMSurgeryStepPriseOpenBones
+    - CMUSurgeryStepClampStomachVessels
     - CMUSurgeryStepSutureStomach
     - CMSurgeryStepCloseBones
     - CMSurgeryStepMendRibcage

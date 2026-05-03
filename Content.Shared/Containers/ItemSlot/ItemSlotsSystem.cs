@@ -875,6 +875,32 @@ namespace Content.Shared.Containers.ItemSlots
         }
 
         /// <summary>
+        ///     Toggle whether a slot contributes a context-menu eject verb.
+        /// </summary>
+        public void SetDisableEject(EntityUid uid, string id, bool disabled, ItemSlotsComponent? itemSlots = null)
+        {
+            if (!Resolve(uid, ref itemSlots))
+                return;
+
+            if (!itemSlots.Slots.TryGetValue(id, out var slot))
+                return;
+
+            SetDisableEject(uid, slot, disabled, itemSlots);
+        }
+
+        /// <summary>
+        ///     Toggle whether a slot contributes a context-menu eject verb.
+        /// </summary>
+        public void SetDisableEject(EntityUid uid, ItemSlot slot, bool disabled, ItemSlotsComponent? itemSlots = null)
+        {
+            if (!Resolve(uid, ref itemSlots))
+                return;
+
+            slot.DisableEject = disabled;
+            Dirty(uid, itemSlots);
+        }
+
+        /// <summary>
         ///     Update the locked state of the managed item slots.
         /// </summary>
         /// <remarks>

@@ -52,7 +52,7 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
 
     private const float ArmedStepScanInterval = 0.5f;
     private const float SurgeryPainSuppressionMinimum = 0.5f;
-    private const string SurgeryPainSuppressionStatus = "StatusEffectCMUPainSuppression";
+    private const int SurgeryPainSuppressionTierMinimum = 2;
     private const string SurgeryUnconsciousStatus = "StatusEffectCMUUnconscious";
     private const string SurgeryForcedSleepingStatus = "StatusEffectForcedSleeping";
     private static readonly EntProtoId MendRibcageStep = "CMSurgeryStepMendRibcage";
@@ -136,7 +136,15 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         }
     }
 
-    public CMUSurgeryArmedStepComponent? TryArmStep(EntityUid surgeon, EntityUid patient, EntityUid targetPart, string surgeryId, int stepIndex, BodyPartType? fallbackType = null, BodyPartSymmetry? fallbackSymmetry = null)
+    public CMUSurgeryArmedStepComponent? TryArmStep(
+        EntityUid surgeon,
+        EntityUid patient,
+        EntityUid targetPart,
+        string surgeryId,
+        int stepIndex,
+        BodyPartType? fallbackType = null,
+        BodyPartSymmetry? fallbackSymmetry = null,
+        bool allowSamePartInFlightSwitch = false)
     {
         // Reattach targets the patient body — no BodyPartComponent there,
         // so dispatch supplies the slot type/symmetry as a fallback.
@@ -171,7 +179,11 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         // instead of silently switching surgeries.
         if (TryComp<CMUSurgeryInProgressComponent>(patient, out var lockComp))
         {
-            if (lockComp.Part != targetPart || lockComp.LeafSurgeryId != surgeryId)
+            if (lockComp.Part != targetPart)
+                return null;
+            if (!allowSamePartInFlightSwitch
+                && !lockComp.AwaitingClosureChoice
+                && lockComp.LeafSurgeryId != surgeryId)
                 return null;
             // Reattach has Part=patient for every slot, so part-equality
             // alone would let the medic silently switch the in-flight
@@ -223,6 +235,7 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         lockComp.LeafSurgeryId = leafSurgeryId;
         lockComp.TargetPartType = targetType;
         lockComp.TargetSymmetry = targetSymmetry;
+        lockComp.AwaitingClosureChoice = false;
         Dirty(patient, lockComp);
 
         var inFlight = EnsureComp<CMUSurgeryInFlightComponent>(part);
@@ -233,6 +246,18 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         if (!alreadyInFlight)
             inFlight.StartedAt = Timing.CurTime;
         Dirty(part, inFlight);
+    }
+
+    public bool SetAwaitingClosureChoice(EntityUid patient, EntityUid part)
+    {
+        if (!TryComp<CMUSurgeryInProgressComponent>(patient, out var lockComp))
+            return false;
+        if (lockComp.Part != part)
+            return false;
+
+        lockComp.AwaitingClosureChoice = true;
+        Dirty(patient, lockComp);
+        return true;
     }
 
     public void ClearSurgeryInFlight(EntityUid patient)
@@ -311,14 +336,8 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
 
     private bool HasPainSuppressionForSurgery(EntityUid patient)
     {
-        if (!Status.TryGetStatusEffect(patient, SurgeryPainSuppressionStatus, out var painSuppression)
-            || painSuppression is not { } painSuppressionUid
-            || !TryComp<PainSuppressionComponent>(painSuppressionUid, out var suppression))
-        {
-            return false;
-        }
-
-        return suppression.Percent >= SurgeryPainSuppressionMinimum;
+        return Pain.GetAccumulationSuppression(patient) >= SurgeryPainSuppressionMinimum
+            || Pain.GetTierSuppression(patient) >= SurgeryPainSuppressionTierMinimum;
     }
 
     private bool ShouldInterruptSurgeryStep(EntityUid patient)
@@ -327,7 +346,7 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
             return false;
 
         return TryComp<PainShockComponent>(patient, out var pain)
-            && Pain.GetEffectiveTier(patient, pain) > PainTier.None;
+            && Pain.GetEffectiveTier(patient, pain) >= PainTier.Severe;
     }
 
     private bool IsHorizontallyRestrained(EntityUid patient)
@@ -357,30 +376,48 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
 
         var (patient, armed) = ent;
 
-        if (args.User != armed.Surgeon)
+        if (!TryHandleArmedToolUse(patient, armed, args.User, args.Used, args.Target, out var handled, out _))
             return;
 
-        var isRightTool = ToolMatchesCategory(args.Used, armed.RequiredToolCategory);
-        var hasWrongDamage = TryGetWrongToolDamage(args.Used, out var damageType, out var amount);
+        args.Handled = handled;
+    }
+
+    public bool TryHandleArmedToolUse(
+        EntityUid patient,
+        CMUSurgeryArmedStepComponent armed,
+        EntityUid user,
+        EntityUid used,
+        EntityUid? clickTarget,
+        out bool handled,
+        out bool started)
+    {
+        handled = false;
+        started = false;
+
+        if (user != armed.Surgeon)
+            return false;
+
+        var isRightTool = ToolMatchesCategory(used, armed.RequiredToolCategory);
+        var hasWrongDamage = TryGetWrongToolDamage(used, out var damageType, out var amount);
 
         // Non-surgery items (analyzer, bandage, meds, etc.) pass through
         // so the medic can still treat the patient between steps.
         if (!isRightTool && !hasWrongDamage)
-            return;
+            return false;
 
-        if (!CanOperateOnPatient(patient, args.User, popup: true))
+        handled = true;
+
+        if (!CanOperateOnPatient(patient, user, popup: true))
         {
             ClearArmed(patient, armed);
-            args.Handled = true;
-            return;
+            return true;
         }
 
-        var hasTargetPart = TryFindClickedPart(patient, args.Target, armed.TargetPartType, armed.TargetSymmetry, out var targetPart);
-        if (!hasTargetPart && !IsReattachOnPatientBody(patient, args.Target, armed))
+        var hasTargetPart = TryFindClickedPart(patient, clickTarget, armed.TargetPartType, armed.TargetSymmetry, out var targetPart);
+        if (!hasTargetPart && !IsReattachOnPatientBody(patient, clickTarget, armed))
         {
-            Popup.PopupEntity(Loc.GetString("cmu-medical-surgery-wrong-part"), patient, args.User, PopupType.SmallCaution);
-            args.Handled = true;
-            return;
+            Popup.PopupEntity(Loc.GetString("cmu-medical-surgery-wrong-part"), patient, user, PopupType.SmallCaution);
+            return true;
         }
 
         if (!hasTargetPart)
@@ -391,49 +428,61 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
             if (!TryResolveArmedStepEntity(armed, out var stepEnt))
             {
                 ClearArmed(patient, armed);
-                args.Handled = true;
-                return;
+                return true;
             }
 
-            if (!RmcSurgery.CanPerformStep(args.User, patient, armed.TargetPartType, stepEnt, true, args.Used, out _, out var reason, out _))
+            if (!RmcSurgery.CanPerformStep(user, patient, armed.TargetPartType, stepEnt, true, used, out var popup, out var reason, out _))
             {
-                if (reason == StepInvalidReason.MissingSkills)
-                {
-                    Popup.PopupEntity(
-                        Loc.GetString("cmu-medical-surgery-missing-skills"),
-                        patient,
-                        args.User,
-                        PopupType.SmallCaution);
-                }
+                ShowStepInvalidPopup(patient, user, armed.TargetPartType, reason, popup);
 
-                args.Handled = true;
-                return;
+                return true;
             }
 
             if (armed.RequiredToolCategory == "severed_limb"
-                && !LimbMatchesAnyMissingSlot(patient, args.Used))
+                && !LimbMatchesAnyMissingSlot(patient, used))
             {
-                Popup.PopupEntity(Loc.GetString("cmu-medical-surgery-wrong-limb"), patient, args.User, PopupType.SmallCaution);
-                args.Handled = true;
-                return;
+                Popup.PopupEntity(Loc.GetString("cmu-medical-surgery-wrong-limb"), patient, user, PopupType.SmallCaution);
+                return true;
             }
 
-            if (RequiresActivatedCautery(args.Used, armed.RequiredToolCategory))
+            if (RequiresActivatedCautery(used, armed.RequiredToolCategory))
             {
-                Popup.PopupEntity(Loc.GetString("cmu-medical-surgery-welder-not-lit"), patient, args.User, PopupType.SmallCaution);
-                args.Handled = true;
-                return;
+                Popup.PopupEntity(Loc.GetString("cmu-medical-surgery-welder-not-lit"), patient, user, PopupType.SmallCaution);
+                return true;
             }
 
             if (Net.IsServer)
-                StartStepDoAfter(patient, armed, args.User, args.Used, targetPart);
-            args.Handled = true;
-            return;
+            {
+                started = StartStepDoAfter(patient, armed, user, used, targetPart);
+            }
+            return true;
         }
 
-        ApplyWrongToolDamage(args.User, patient, args.Used, damageType, amount);
+        ApplyWrongToolDamage(user, patient, used, damageType, amount);
         ClearArmed(patient, armed);
-        args.Handled = true;
+        return true;
+    }
+
+    private void ShowStepInvalidPopup(EntityUid patient, EntityUid user, BodyPartType partType, StepInvalidReason reason, string? existingPopup)
+    {
+        if (existingPopup is not null)
+            return;
+
+        var locKey = reason switch
+        {
+            StepInvalidReason.MissingSkills => "cmu-medical-surgery-missing-skills",
+            StepInvalidReason.NeedsOperatingTable => "cmu-medical-surgery-needs-operating-table",
+            StepInvalidReason.Armor => partType == BodyPartType.Head
+                ? "cmu-medical-surgery-remove-helmet"
+                : "cmu-medical-surgery-remove-armor",
+            StepInvalidReason.MissingTool => "cmu-medical-surgery-wrong-tool",
+            _ => null,
+        };
+
+        if (locKey is null)
+            return;
+
+        Popup.PopupEntity(Loc.GetString(locKey), patient, user, PopupType.SmallCaution);
     }
 
     private bool TryResolveArmedStepEntity(CMUSurgeryArmedStepComponent armed, out EntityUid stepEnt)
@@ -497,8 +546,9 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
     ///     Override in the sealed server class so prediction rollback can't
     ///     re-raise the step event on the client.
     /// </summary>
-    protected virtual void StartStepDoAfter(EntityUid patient, CMUSurgeryArmedStepComponent armed, EntityUid surgeon, EntityUid tool, EntityUid targetPart)
+    protected virtual bool StartStepDoAfter(EntityUid patient, CMUSurgeryArmedStepComponent armed, EntityUid surgeon, EntityUid tool, EntityUid targetPart)
     {
+        return false;
     }
 
     protected virtual void ApplyWrongToolDamage(EntityUid surgeon, EntityUid patient, EntityUid tool, string damageType, float amount)
