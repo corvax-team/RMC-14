@@ -35,6 +35,7 @@ public sealed class HealthScannerBui : BoundUserInterface
     [ViewVariables]
     private HealthScannerWindow? _window;
     private NetEntity _lastTarget;
+    private bool _hasLastTarget;
 
     private readonly ShowHolocardIconsSystem _holocardIcons;
     private readonly SkillsSystem _skills;
@@ -73,12 +74,15 @@ public sealed class HealthScannerBui : BoundUserInterface
     private void UpdateState(HealthScannerBuiState uiState)
     {
         _window = EnsureWindow();
-        _window.ShowServerLoadingPulse();
 
         if (_entities.GetEntity(uiState.Target) is not { Valid: true } target)
             return;
 
+        if (_hasLastTarget && _lastTarget != uiState.Target)
+            _window.ShowServerLoadingPulse();
+
         _lastTarget = uiState.Target;
+        _hasLastTarget = true;
 
         _window.PatientLabel.Text = Loc.GetString("rmc-health-analyzer-patient", ("name", Identity.Name(target, _entities, _player.LocalEntity)));
 
