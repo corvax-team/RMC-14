@@ -294,12 +294,17 @@ public sealed class VehicleSupplySystem : EntitySystem
         SendConsoleStateAll();
         UpdateVendorSectionsAll();
     }
-
+    // CCM14-start
     private void OnConsoleBeforeUiOpen(Entity<VehicleSupplyConsoleComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
+        if (TryGetLift(ent.Owner, ent.Comp, out var lift))
+        {
+            SeedStoredFromConsoles(lift);
+        }
+    
         SendConsoleState(ent.Owner, ent.Comp);
     }
-    // CCM14-start
+
     private void OnConsoleMapInit(Entity<VehicleSupplyConsoleComponent> ent, ref MapInitEvent args)
     {
         var mapId = _transform.GetMapId(ent.Owner);
@@ -349,6 +354,7 @@ public sealed class VehicleSupplySystem : EntitySystem
                 AddStored(lift.Comp, key);
             }
         }
+        Dirty(lift); // CCM14
     }
 
     private void OnVendorBeforeUiOpen(Entity<VehicleHardpointVendorComponent> ent, ref BeforeActivatableUIOpenEvent args)
