@@ -1,5 +1,14 @@
 ent-WallXenoResin = смоляная стена
     .desc = Странная слизь затвердела, превратившись в стену.
+ent-WallXenoResinImpenetrable = непробиваемая смоляная стена
+    .suffix = Неуязвимая, 30 минут
+    .desc = { ent-WallXenoResinThick.desc }
+ent-DoorXenoResinImpenetrable = непробиваемая смоляная дверь
+    .suffix = Неуязвимая, 30 минут
+    .desc = { ent-DoorXenoResinThick.desc }
+ent-RMCBlockerMarine = блокировщик морпехов
+    .suffix = НЕ МАППИТЬ
+    .desc = { "" }
 ent-WallXenoResinThick = толстая смоляная стена
     .desc = Странная слизь затвердела, превратившись в толстую стену.
 ent-BaseMembraneXeno = смоляная мембрана

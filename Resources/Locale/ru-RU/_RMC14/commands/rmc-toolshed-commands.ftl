@@ -65,3 +65,5 @@ command-description-stairwell = Устанавливает смещение те
 command-description-stairwellprojector = Устанавливает ID проекции для выбранных сущностей TeleporterView.
 command-description-getusername = Выводит имя пользователя (CKey), привязанное к сущности.
 command-description-mobstate = Фильтрует сущности по их состоянию здоровья (Alive, Critical, Dead).
+command-description-vehiclesupply-addstorage = Добавляет прототип техники в хранилище ближайшего лифта снабжения техники.
+command-description-vehiclesupply-addstoragelift = Добавляет прототип техники в хранилище конкретного лифта снабжения техники.

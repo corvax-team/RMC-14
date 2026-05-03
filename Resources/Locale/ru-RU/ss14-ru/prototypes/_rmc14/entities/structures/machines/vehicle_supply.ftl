@@ -3,7 +3,6 @@ ent-VehicleSupplyConsole = консоль снабжения техники
 ent-VehicleLift = подъёмник техники
     .suffix = Опущен, Снабжение техники
     .desc = { "" }
-
 # CCM14-start: UI localization
 rmc-vehicle-supply-lift-none = Нет лифта
 rmc-vehicle-supply-vehicle-none = нет
@@ -12,7 +11,7 @@ rmc-vehicle-supply-status-idle = простаивает
 rmc-vehicle-supply-status = Лифт: { $mode } | Статус: { $status } | Активен: { $active }
 rmc-vehicle-supply-copies-expanded = Копии v
 rmc-vehicle-supply-copies-collapsed = Копии >
-rmc-vehicle-supply-copy-number =     #{ $number }
+rmc-vehicle-supply-copy-number = #{ $number }
 rmc-vehicle-supply-available = Доступная техника
 rmc-vehicle-supply-transport = Транспорт
 rmc-vehicle-supply-raise = Поднять
@@ -37,4 +36,6 @@ rmc-vehicle-lift-mode-raised = Поднят
 rmc-vehicle-lift-mode-lowering = Опускается
 rmc-vehicle-lift-mode-raising = Поднимается
 rmc-vehicle-lift-mode-preparing = Подготовка
+
 # CCM14-end
+

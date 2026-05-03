@@ -1,7 +1,7 @@
 ent-VehicleSPPTankInteriorBase = элемент интерьера танка СССП
     .desc = Декоративный элемент интерьера танка СССП.
-ent-VehicleSPPTankChassisBase = секция шасси танка СССП
-    .desc = Секция шасси для внутреннего отсека танка СССП.
+ent-VehicleSPPTankChassisBase = шасси интерьера танка СССП
+    .desc = Сегмент шасси для интерьера танка СССП.
 ent-VehicleSPPTankChassis = { ent-VehicleSPPTankChassisBase }
     .desc = { ent-VehicleSPPTankChassisBase.desc }
 ent-VehicleSPPTankChassisAlt = { ent-VehicleSPPTankChassisBase }

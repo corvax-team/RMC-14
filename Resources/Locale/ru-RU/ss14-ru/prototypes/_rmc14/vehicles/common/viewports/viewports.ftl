@@ -1,9 +1,9 @@
-ent-VehicleViewport = смотровой лючок
-    .desc = Небольшой смотровой лючок для наблюдения снаружи.
-ent-VehicleViewportUnanchored = смотровой лючок (незакрепленный)
-    .desc = Небольшой смотровой лючок для наблюдения снаружи.
-ent-VehicleViewportSimple = смотровой лючок (простой)
-    .desc = Небольшой смотровой лючок для наблюдения снаружи.
+ent-VehicleViewport = смотровое окно техники
+    .desc = Небольшое окно для наблюдения за внешним пространством.
+ent-VehicleViewportUnanchored = смотровое окно техники (не закреплено)
+    .desc = Небольшое окно для наблюдения за внешним пространством.
+ent-VehicleViewportSimple = смотровое окно техники (простое)
+    .desc = Небольшое окно для наблюдения за внешним пространством.
 ent-VehicleHumveeViewportBase = { ent-VehicleHumveeInteriorBase }
     .desc = { ent-VehicleHumveeInteriorBase.desc }
 ent-VehicleHumveeViewportLarge = { ent-VehicleHumveeViewportBase }

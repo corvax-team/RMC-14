@@ -1,2 +1,2 @@
-ent-VehicleTurretVisual = визуальный элемент турели
+ent-VehicleTurretVisual = визуал башни техники
     .desc = { "" }

@@ -1,2 +1,2 @@
-ent-VehicleAPCSupplyVendor = стойка снаряжения экипажа БТР ColMarTech
-    .desc = Автоматизированная стойка снабжения для экипажей БТР.
+ent-VehicleAPCSupplyVendor = автоматический вендор припасов ColMarTech
+    .desc = Автоматизированная стойка с припасами для экипажей БТР.
