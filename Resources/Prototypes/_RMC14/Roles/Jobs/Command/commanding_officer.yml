@@ -41,7 +41,7 @@
     department: CMCommand
     time: 10800 # 3 hours
   - !type:RoleTimeRequirement
-    role: CMStaffOfficer
+    role: CMJobStaffOfficer
     time: 36000 # 10 hours
   - !type:RoleTimeRequirement
     role: CMJobExecutiveOfficer
