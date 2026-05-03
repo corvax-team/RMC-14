@@ -39764,60 +39764,6 @@ entities:
     - type: Transform
       pos: 96.355484,117.549484
       parent: 2
-- proto: ActionToggleLight
-  entities:
-  - uid: 5
-    components:
-    - type: Transform
-      parent: 4
-  - uid: 7
-    components:
-    - type: Transform
-      parent: 6
-  - uid: 9
-    components:
-    - type: Transform
-      parent: 8
-  - uid: 11
-    components:
-    - type: Transform
-      parent: 10
-  - uid: 13
-    components:
-    - type: Transform
-      parent: 12
-  - uid: 15
-    components:
-    - type: Transform
-      parent: 14
-  - uid: 17
-    components:
-    - type: Transform
-      parent: 16
-  - uid: 19
-    components:
-    - type: Transform
-      parent: 18
-  - uid: 22
-    components:
-    - type: Transform
-      parent: 21
-  - uid: 25
-    components:
-    - type: Transform
-      parent: 24
-  - uid: 27
-    components:
-    - type: Transform
-      parent: 26
-  - uid: 19746
-    components:
-    - type: Transform
-      parent: 13969
-  - uid: 19747
-    components:
-    - type: Transform
-      parent: 13975
 - proto: AloeSeeds
   entities:
   - uid: 7232
@@ -42138,15 +42084,6 @@ entities:
     - type: Transform
       pos: 73.50757,116.66861
       parent: 2
-- proto: CMActionToggleAttachable
-  entities:
-  - uid: 23
-    components:
-    - type: MetaData
-      desc: Can be toggled on and off. A better light source than standard M3 pattern armor lights.
-      name: Activate Laser-Light Module
-    - type: Transform
-      parent: 21
 - proto: CMAdvFirstAidKit
   entities:
   - uid: 1017
@@ -114228,19 +114165,9 @@ entities:
     - type: Transform
       parent: 20
     - type: AttachableToggleable
-      attached: True
-      action: 23
     - type: HandheldLight
-      toggleActionEntity: 22
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 22
-          - 23
 - proto: RMCBarrelBlue
   entities:
   - uid: 5345
@@ -116875,14 +116802,9 @@ entities:
       pos: 94.68956,128.35358
       parent: 2
     - type: HandheldLight
-      toggleActionEntity: 5
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 5
-    - type: ActionsContainer
 - proto: RMCFloodlightBroken
   entities:
   - uid: 326
@@ -119110,70 +119032,45 @@ entities:
       pos: 62.491035,131.42688
       parent: 2
     - type: HandheldLight
-      toggleActionEntity: 7
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 7
-    - type: ActionsContainer
   - uid: 12
     components:
     - type: Transform
       pos: 41.417572,52.536137
       parent: 2
     - type: HandheldLight
-      toggleActionEntity: 13
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 13
-    - type: ActionsContainer
   - uid: 18
     components:
     - type: Transform
       pos: 224.56856,5.7143173
       parent: 2
     - type: HandheldLight
-      toggleActionEntity: 19
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 19
-    - type: ActionsContainer
   - uid: 24
     components:
     - type: Transform
       pos: 77.73263,99.75874
       parent: 2
     - type: HandheldLight
-      toggleActionEntity: 25
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 25
-    - type: ActionsContainer
   - uid: 26
     components:
     - type: Transform
       pos: 81.478424,97.46087
       parent: 2
     - type: HandheldLight
-      toggleActionEntity: 27
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 27
-    - type: ActionsContainer
   - uid: 378
     components:
     - type: Transform
@@ -119268,28 +119165,18 @@ entities:
       pos: 92.51094,6.872856
       parent: 2
     - type: HandheldLight
-      toggleActionEntity: 15
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 15
-    - type: ActionsContainer
   - uid: 16
     components:
     - type: Transform
       pos: 103.50759,11.769306
       parent: 2
     - type: HandheldLight
-      toggleActionEntity: 17
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 17
-    - type: ActionsContainer
   - uid: 13954
     components:
     - type: Transform
@@ -119308,28 +119195,18 @@ entities:
       pos: 53.46031,125.6678
       parent: 2
     - type: HandheldLight
-      toggleActionEntity: 9
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 9
-    - type: ActionsContainer
   - uid: 10
     components:
     - type: Transform
       pos: 35.099068,54.735054
       parent: 2
     - type: HandheldLight
-      toggleActionEntity: 11
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 11
-    - type: ActionsContainer
   - uid: 13956
     components:
     - type: Transform
@@ -119401,14 +119278,9 @@ entities:
       pos: 232.61038,12.676262
       parent: 2
     - type: HandheldLight
-      toggleActionEntity: 19746
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 19746
-    - type: ActionsContainer
   - uid: 13970
     components:
     - type: Transform
@@ -119447,14 +119319,9 @@ entities:
       pos: 227.61403,12.581207
       parent: 2
     - type: HandheldLight
-      toggleActionEntity: 19747
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot {}
-        actions: !type:Container
-          ents:
-          - 19747
-    - type: ActionsContainer
   - uid: 20249
     components:
     - type: Transform
