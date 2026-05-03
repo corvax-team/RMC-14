@@ -188,10 +188,11 @@ public sealed class HealthScannerSystem : EntitySystem
         EntityUid? examiner = null;
         if (_rmcHands.TryGetHolder(scanner, out var holder))
             examiner = holder;
-        var buildEv = new HealthScannerBuildStateEvent(scanner.Owner, target, examiner, state);
+        var uiState = new HealthScannerBuiState(state);
+        var buildEv = new HealthScannerBuildStateEvent(scanner.Owner, target, examiner, uiState);
         RaiseLocalEvent(scanner.Owner, ref buildEv);
 
-        _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, state);
+        _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, uiState);
     }
 
     public override void Update(float frameTime)

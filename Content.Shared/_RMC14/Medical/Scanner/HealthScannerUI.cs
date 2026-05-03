@@ -31,12 +31,14 @@ public readonly record struct HealthScanState(
 [Serializable, NetSerializable]
 public sealed class HealthScannerBuiState(HealthScanState scanState) : BoundUserInterfaceState
 {
-    public readonly NetEntity Target = target;
-    public readonly FixedPoint2 Blood = blood;
-    public readonly FixedPoint2 MaxBlood = maxBlood;
-    public readonly float? Temperature = temperature;
-    public readonly Solution? Chemicals = chemicals;
-    public readonly bool Bleeding = bleeding;
+    public readonly NetEntity Target = scanState.Target;
+    public readonly FixedPoint2 Blood = scanState.Blood;
+    public readonly FixedPoint2 MaxBlood = scanState.MaxBlood;
+    public readonly float? Temperature = scanState.Temperature;
+    public readonly string Pulse = scanState.Pulse;
+    public readonly Solution? Chemicals = scanState.Chemicals;
+    public readonly bool Bleeding = scanState.Bleeding;
+    public readonly HealthScanDetailLevel DetailLevel = scanState.DetailLevel;
     public Dictionary<BodyPartType, CMUBodyPartReadout>? CMUParts;
     public List<CMUOrganReadout>? CMUOrgans;
     public List<CMUFractureReadout>? CMUFractures;

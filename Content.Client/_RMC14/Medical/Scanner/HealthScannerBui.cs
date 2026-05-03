@@ -23,6 +23,8 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Temperature;
 using JetBrains.Annotations;
+using Robust.Client.Graphics;
+using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
@@ -32,17 +34,40 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 namespace Content.Client._RMC14.Medical.Scanner;
 
 [UsedImplicitly]
-public sealed class HealthScannerBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed class HealthScannerBui : BoundUserInterface
 {
+    [Dependency] private readonly IEntityManager _entities = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+
     [ViewVariables]
     private HealthScannerWindow? _window;
-    private HealthScannerUiData? _scanUiData;
+    private NetEntity _lastTarget;
+
+    private readonly ShowHolocardIconsSystem _holocardIcons;
+    private readonly SkillsSystem _skills;
+    private readonly SharedWoundsSystem _wounds;
+    private readonly RMCUnrevivableSystem _unrevivable;
+    private readonly MobStateSystem _mob;
+    private readonly RottingSystem _rot;
+
+    private Dictionary<EntProtoId<SkillDefinitionComponent>, int> BloodPackSkill = new() { ["RMCSkillSurgery"] = 1 };
+    private Dictionary<EntProtoId<SkillDefinitionComponent>, int> DefibSkill = new() { ["RMCSkillMedical"] = 2 };
+    private Dictionary<EntProtoId<SkillDefinitionComponent>, int> LarvaSurgerySkill = new() { ["RMCSkillSurgery"] = 2 };
+
+    public HealthScannerBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    {
+        _holocardIcons = _entities.System<ShowHolocardIconsSystem>();
+        _skills = _entities.System<SkillsSystem>();
+        _wounds = _entities.System<SharedWoundsSystem>();
+        _unrevivable = _entities.System<RMCUnrevivableSystem>();
+        _mob = _entities.System<MobStateSystem>();
+        _rot = _entities.System<RottingSystem>();
+    }
 
     protected override void Open()
     {
         base.Open();
-        _scanUiData ??= new HealthScannerUiData();
-
         if (State is HealthScannerBuiState state)
             UpdateState(state);
     }
@@ -55,8 +80,6 @@ public sealed class HealthScannerBui(EntityUid owner, Enum uiKey) : BoundUserInt
 
     private void UpdateState(HealthScannerBuiState uiState)
     {
-        _scanUiData ??= new HealthScannerUiData();
-
         if (_window == null)
         {
             _window = this.CreateWindow<HealthScannerWindow>();
@@ -838,8 +861,8 @@ public sealed class HealthScannerBui(EntityUid owner, Enum uiKey) : BoundUserInt
 
     private void OpenChangeHolocardUI(BaseButton.ButtonEventArgs obj)
     {
-        if (_player.LocalEntity is { } viewer)
-            SendMessage(new OpenChangeHolocardUIEvent(_entities.GetNetEntity(viewer), _lastTarget));
+        if (_player.LocalEntity is not null && _entities.GetEntity(_lastTarget) is { Valid: true })
+            _entities.EntityNetManager.SendSystemNetworkMessage(new OpenHolocardFromScanEvent(_lastTarget));
     }
 
     private void AddGroup(Entity<DamageableComponent> damageable, RichTextLabel label, Color color, ProtoId<DamageGroupPrototype> group, string labelStr)
