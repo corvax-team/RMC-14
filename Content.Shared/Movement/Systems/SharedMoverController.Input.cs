@@ -303,9 +303,6 @@ namespace Content.Shared.Movement.Systems
             // Relayed movement just uses the same keybinds given we're moving the relayed entity
             // the same as us.
 
-            if (!MoverQuery.Resolve(entity, ref entity.Comp, false)) // CCM-Add
-                return;
-
             // TODO: Should move this into HandleMobMovement itself.
             if (hasMover && entity.Comp != null && entity.Comp.CanMove && RelayQuery.TryComp(entity, out var relayMover))
             {

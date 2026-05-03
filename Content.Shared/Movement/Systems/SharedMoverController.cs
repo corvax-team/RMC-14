@@ -3,7 +3,6 @@ using System.Numerics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.CCVar;
 using Content.Shared.Friction;
-using Content.Shared.Ghost;
 using Content.Shared.Gravity;
 using Content.Shared.Inventory;
 using Content.Shared.Maps;
@@ -60,7 +59,6 @@ public abstract partial class SharedMoverController : VirtualController
     protected EntityQuery<RelayInputMoverComponent> RelayQuery;
     protected EntityQuery<PullableComponent> PullableQuery;
     protected EntityQuery<TransformComponent> XformQuery;
-    protected EntityQuery<GhostComponent> GhostQuery; // CCM14
 
     private static readonly ProtoId<TagPrototype> FootstepSoundTag = "FootstepSound";
 
@@ -92,7 +90,6 @@ public abstract partial class SharedMoverController : VirtualController
         FootstepModifierQuery = GetEntityQuery<FootstepModifierComponent>();
         MapGridQuery = GetEntityQuery<MapGridComponent>();
         MapQuery = GetEntityQuery<MapComponent>();
-        GhostQuery = GetEntityQuery<GhostComponent>(); // CCM14
 
         SubscribeLocalEvent<MovementSpeedModifierComponent, TileFrictionEvent>(OnTileFriction);
 
@@ -265,8 +262,6 @@ public abstract partial class SharedMoverController : VirtualController
             var sprintSpeed = moveSpeedComponent?.CurrentSprintSpeed ?? MovementSpeedModifierComponent.DefaultBaseSprintSpeed;
 
             // RMC14
-        if (!GhostQuery.HasComp(uid))
-        {
             var baseWalkSpeed = moveSpeedComponent?.BaseWalkSpeed ?? MovementSpeedModifierComponent.DefaultBaseWalkSpeed;
             // Keep the walk speed unchanged if the modified sprint speed is higher than the base walk speed.
             if (baseWalkSpeed < sprintSpeed)
@@ -274,7 +269,6 @@ public abstract partial class SharedMoverController : VirtualController
             // If the sprint speed drops below the walk speed, lower the walk speed to match the sprint speed.
             else
                 walkSpeed = sprintSpeed;
-        }
 
             wishDir = AssertValidWish(mover, walkSpeed, sprintSpeed);
 

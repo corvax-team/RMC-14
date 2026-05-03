@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
-using Content.Shared._CCM.Weapons.Ranged;
 using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Emplacements;
@@ -302,8 +301,11 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     public List<EntityUid>? AttemptShoot(EntityUid user, EntityUid gunUid, GunComponent gun, List<int>? predictedProjectiles = null, ICommonSession? userSession = null)
     {
-        if (gun.FireRateModified <= 0f || !_actionBlockerSystem.CanAttack(user))
+        if (gun.FireRateModified <= 0f ||
+            !_actionBlockerSystem.CanAttack(user))
+        {
             return null;
+        }
 
         var toCoordinates = gun.ShootCoordinates;
 
@@ -313,7 +315,11 @@ public abstract partial class SharedGunSystem : EntitySystem
         var curTime = Timing.CurTime;
 
         // check if anything wants to prevent shooting
-        var prevention = new ShotAttemptedEvent { User = user, Used = (gunUid, gun) };
+        var prevention = new ShotAttemptedEvent
+        {
+            User = user,
+            Used = (gunUid, gun)
+        };
         RaiseLocalEvent(gunUid, ref prevention);
         if (prevention.Cancelled)
             return null;
@@ -479,30 +485,10 @@ public abstract partial class SharedGunSystem : EntitySystem
         var shotEv = new GunShotEvent(user, ev.Ammo, fromCoordinates, toCoordinates.Value);
         RaiseLocalEvent(gunUid, ref shotEv);
 
-        // if (userImpulse && TryComp<PhysicsComponent>(user, out var userPhysics))
-        // {
-        //     if (_gravity.IsWeightless(user, userPhysics))
-        //         CauseImpulse(fromCoordinates, toCoordinates.Value, user, userPhysics);
-        // }
-        if (userImpulse)
+        if (userImpulse && TryComp<PhysicsComponent>(user, out var userPhysics))
         {
-            EntityUid? effectiveShooterForImpulse = user;
-
-            if (user is { } u)
-            {
-                var shootEvtTmp = new GetShootingEntityEvent(null, false);
-                RaiseLocalEvent(u, ref shootEvtTmp);
-
-                if (shootEvtTmp.Handled && shootEvtTmp.ShootingEntity is { } impulseOverrideShooter)
-                    effectiveShooterForImpulse = impulseOverrideShooter;
-            }
-
-            if (effectiveShooterForImpulse is { } eff &&
-                TryComp<PhysicsComponent>(eff, out var userPhysics))
-            {
-                if (_gravity.IsWeightless(eff, userPhysics))
-                    CauseImpulse(fromCoordinates, toCoordinates.Value, eff, userPhysics);
-            }
+            if (_gravity.IsWeightless(user, userPhysics))
+                CauseImpulse(fromCoordinates, toCoordinates.Value, user, userPhysics);
         }
 
         DirtyField(gunUid, gun, nameof(GunComponent.BurstActivated));
@@ -1026,26 +1012,9 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         var projectile = EnsureComp<ProjectileComponent>(uid);
         projectile.Weapon = gunUid;
-
-        EntityUid? effectiveShooter = null;
-
-        if (user is { } u)
-        {
-            var shootEvt = new GetShootingEntityEvent(null, false);
-            RaiseLocalEvent(u, ref shootEvt);
-
-            if (shootEvt.Handled && shootEvt.ShootingEntity is { } overrideShooter)
-                effectiveShooter = overrideShooter;
-            else
-                effectiveShooter = u;
-        }
-        else
-        {
-            effectiveShooter = gunUid;
-        }
-
-        if (effectiveShooter is { } eff)
-            Projectiles.SetShooter(uid, projectile, eff);
+        var shooter = user ?? gunUid;
+        if (shooter != null)
+            Projectiles.SetShooter(uid, projectile, shooter.Value);
 
         TransformSystem.SetWorldRotationNoLerp(uid, direction.ToWorldAngle() + projectile.Angle);
     }
@@ -1247,10 +1216,7 @@ public abstract partial class SharedGunSystem : EntitySystem
 /// <param name="Cancelled">Set this to true if the shot should be cancelled.</param>
 /// <param name="ThrowItems">Set this to true if the ammo shouldn't actually be fired, just thrown.</param>
 [ByRefEvent]
-public record struct AttemptShootEvent(EntityUid User, string? Message, EntityCoordinates FromCoordinates, EntityCoordinates? ToCoordinates, bool ThrowItems = false, bool ResetCooldown = false) // Cancelled удален
-{
-    public bool Cancelled { get; set; } = false;
-}
+public record struct AttemptShootEvent(EntityUid User, string? Message, EntityCoordinates FromCoordinates, EntityCoordinates? ToCoordinates, bool Cancelled = false, bool ThrowItems = false, bool ResetCooldown = false); // RMC14
 
 /// <summary>
 ///     Raised directed on the gun after firing.
