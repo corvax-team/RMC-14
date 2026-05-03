@@ -1,12 +1,3 @@
-ent-RMCMechPropBase = { ent-BaseStructureDynamic }
-    .suffix = Проп
-    .desc = { ent-BaseStructureDynamic.desc }
-ent-RMCMechPropDrill = бур
-    .desc = Это тот самый бур, который пронзит небеса!
-ent-RMCMechPropClamp = гидравлический зажим
-    .desc = { ent-RMCMechPropBase.desc }
-ent-RMCMechPropArmorBooster = модуль усиления брони (оружие ближнего боя)
-    .desc = Усиливает броню экзоскелета против вооружённых атак ближнего боя. Требует энергию для работы.
 ent-RMCMechMAXChassis = шасси MAX
     .desc = { ent-RMCMechPropBase.desc }
 ent-RMCMechMAXTorso = торс MAX

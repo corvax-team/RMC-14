@@ -38,4 +38,3 @@ rmc-vehicle-lift-mode-raising = Поднимается
 rmc-vehicle-lift-mode-preparing = Подготовка
 
 # CCM14-end
-

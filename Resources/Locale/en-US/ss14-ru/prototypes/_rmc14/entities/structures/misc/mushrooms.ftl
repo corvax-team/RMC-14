@@ -1,5 +1,3 @@
-ent-RMCGlowshroom = glowshroom
-    .desc = { "" }
 ent-RMCGlowshroom1 = { ent-RMCGlowshroom }
     .desc = { ent-RMCGlowshroom.desc }
 ent-RMCGlowshroom0 = { ent-RMCGlowshroom }
