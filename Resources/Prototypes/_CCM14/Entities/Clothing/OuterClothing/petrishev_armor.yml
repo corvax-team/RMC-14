@@ -42,8 +42,7 @@
       - CMGauze
   - type: StorageFill
     contents:
-    - id: CMGauze
-      amount: 10
+    - id: CMGauze10
 
 - type: entity
   parent: CCMArmorREV
