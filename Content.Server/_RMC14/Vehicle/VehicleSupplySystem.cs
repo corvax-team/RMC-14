@@ -63,6 +63,7 @@ public sealed class VehicleSupplySystem : EntitySystem
     {
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<VehicleSupplyConsoleComponent, BeforeActivatableUIOpenEvent>(OnConsoleBeforeUiOpen);
+        SubscribeLocalEvent<VehicleSupplyConsoleComponent, MapInitEvent>(OnConsoleMapInit); // CCM14
         SubscribeLocalEvent<VehicleHardpointVendorComponent, MapInitEvent>(OnVendorMapInit);
         SubscribeLocalEvent<VehicleHardpointVendorComponent, BeforeActivatableUIOpenEvent>(OnVendorBeforeUiOpen);
         SubscribeLocalEvent<VehicleSupplyLiftComponent, MapInitEvent>(OnLiftMapInit);
@@ -298,7 +299,23 @@ public sealed class VehicleSupplySystem : EntitySystem
     {
         SendConsoleState(ent.Owner, ent.Comp);
     }
+    // CCM14-start
+    private void OnConsoleMapInit(Entity<VehicleSupplyConsoleComponent> ent, ref MapInitEvent args)
+    {
+        var mapId = _transform.GetMapId(ent.Owner);
+        var liftQuery = EntityQueryEnumerator<VehicleSupplyLiftComponent, TransformComponent>();
+        while (liftQuery.MoveNext(out var uid, out var lift, out var xform))
+        {
+            if (xform.MapID != mapId)
+                continue;
 
+            SeedStoredFromConsoles((uid, lift));
+            Dirty(uid, lift);
+        }
+
+        SendConsoleStateAll();
+    }
+    // CCM14-end
     private void OnLiftMapInit(Entity<VehicleSupplyLiftComponent> ent, ref MapInitEvent args)
     {
         SeedStoredFromConsoles(ent);
