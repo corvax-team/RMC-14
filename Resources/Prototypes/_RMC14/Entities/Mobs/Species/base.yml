@@ -80,6 +80,9 @@
     interactSuccessString: rmc-patting-success-generic
     messagePerceivedByOthers: rmc-patting-success-generic-others
   - type: Blindable
+    maxDamage: 30
+  - type: CMUBlurDelay
+    threshold: 12
   - type: Tag
     tags:
     - CanPilot

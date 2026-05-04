@@ -168,7 +168,7 @@
     heldPrefix: line_brute
   - type: WoundTreater
     wound: Brute
-    treats: false
+    treats: true
     group: Brute
     consumable: false
     scalingDoAfter: 0.25

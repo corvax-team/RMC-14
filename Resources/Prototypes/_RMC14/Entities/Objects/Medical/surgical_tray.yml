@@ -56,3 +56,6 @@
 #   - Nanopaste
     - id: CMSurgicalLine
     - id: CMSynthGraft
+    - id: CMUOrganClampItem
+    - id: CMUBoneGraftItem
+    - id: CMUCastItem

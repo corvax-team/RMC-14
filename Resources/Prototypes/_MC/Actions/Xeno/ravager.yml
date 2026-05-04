@@ -15,7 +15,6 @@
       plasmaCost: 200
   - type: XenoActionPlasma
     cost: 200
-  - type: ActionBlockIfResting
 
 - type: entity
   parent: ActionXenoBase
@@ -37,4 +36,3 @@
       plasmaCost: 250
   - type: XenoActionPlasma
     cost: 250
-  - type: ActionBlockIfResting

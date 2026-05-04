@@ -31,7 +31,7 @@ public sealed partial class MCXenoHeadbuttChargeActionEvent : InstantActionEvent
     public float DamageMultiplier;
 
     [DataField]
-    public float SpeedMultiplier = 1.75f;
+    public float SpeedMultiplier = 1.45f;
 
     [DataField]
     public EntProtoId? TurfSpawnEntityId;

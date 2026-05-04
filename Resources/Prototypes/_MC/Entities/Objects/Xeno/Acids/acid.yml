@@ -3,15 +3,15 @@
   id: MCXenoAcidSprayBull
   components:
   - type: TimedDespawn
-    lifetime: 5
+    lifetime: 3
   - type: DamageOnCollide
-    paralyze: 2
+    paralyze: 1
     damage:
       types:
-        Heat: 18
+        Heat: 9
     chainDamage:
       types:
-        Heat: 15
+        Heat: 7.5
     whitelist:
       components:
       - Marine

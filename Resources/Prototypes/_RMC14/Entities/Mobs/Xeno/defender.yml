@@ -44,6 +44,7 @@
     max: 200
     evolvesTo:
     - CMXenoWarrior
+    - MCXenoBull
     evolvesToWithoutPoints:
     - CMXenoQueen
   - type: XenoPlasma

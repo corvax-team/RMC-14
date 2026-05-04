@@ -1,0 +1,189 @@
+# ---- Bone setting ---------------------------------------------------
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaSetSimpleFracture
+  surgery: CMUSurgerySetSimpleFracture
+  displayName: cmu-medical-surgery-name-set-fracture
+  validParts: [Head, Torso, Arm, Leg]
+  category: fracture
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaSetCompoundFracture
+  surgery: CMUSurgerySetCompoundFracture
+  displayName: cmu-medical-surgery-name-set-fracture
+  validParts: [Head, Torso, Arm, Leg]
+  category: fracture
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaSetComminutedFracture
+  surgery: CMUSurgerySetComminutedFracture
+  displayName: cmu-medical-surgery-name-set-fracture
+  validParts: [Head, Torso, Arm, Leg]
+  category: fracture
+
+# ---- Internal-bleed clamp + close -----------------------------------
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaCauterizeInternalBleeding
+  surgery: CMUSurgeryCauterizeInternalBleeding
+  displayName: cmu-medical-surgery-name-stop-internal-bleeding
+  validParts: [Head, Torso, Arm, Leg]
+  category: bleed
+
+# ---- Organ removal (torso only) -------------------------------------
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaRemoveLiver
+  surgery: CMUSurgeryRemoveLiver
+  displayName: cmu-medical-surgery-name-remove-liver
+  validParts: [Torso]
+  category: remove_organ
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaRemoveLung
+  surgery: CMUSurgeryRemoveLung
+  displayName: cmu-medical-surgery-name-remove-lungs
+  validParts: [Torso]
+  category: remove_organ
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaRemoveKidney
+  surgery: CMUSurgeryRemoveKidney
+  displayName: cmu-medical-surgery-name-remove-kidneys
+  validParts: [Torso]
+  category: remove_organ
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaRemoveHeart
+  surgery: CMUSurgeryRemoveHeart
+  displayName: cmu-medical-surgery-name-remove-heart
+  validParts: [Torso]
+  category: remove_organ
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaRemoveStomach
+  surgery: CMUSurgeryRemoveStomach
+  displayName: cmu-medical-surgery-name-remove-stomach
+  validParts: [Torso]
+  category: remove_organ
+
+# ---- Organ replacement (transplant) ---------------------------------
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaReplaceLiver
+  surgery: CMUSurgeryReplaceLiver
+  displayName: cmu-medical-surgery-name-replace-liver
+  validParts: [Torso]
+  category: transplant
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaReplaceLung
+  surgery: CMUSurgeryReplaceLung
+  displayName: cmu-medical-surgery-name-replace-lungs
+  validParts: [Torso]
+  category: transplant
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaReplaceKidney
+  surgery: CMUSurgeryReplaceKidney
+  displayName: cmu-medical-surgery-name-replace-kidneys
+  validParts: [Torso]
+  category: transplant
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaTransplantHeart
+  surgery: CMUSurgeryTransplantHeart
+  displayName: cmu-medical-surgery-name-transplant-heart
+  validParts: [Torso]
+  category: transplant
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaReplaceStomach
+  surgery: CMUSurgeryReplaceStomach
+  displayName: cmu-medical-surgery-name-replace-stomach
+  validParts: [Torso]
+  category: transplant
+
+# ---- Suture organ (per-slot) ----------------------------------------
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaRepairLiver
+  surgery: CMUSurgeryRepairLiver
+  displayName: cmu-medical-surgery-name-suture-liver
+  validParts: [Torso]
+  category: suture
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaRepairLungs
+  surgery: CMUSurgeryRepairLungs
+  displayName: cmu-medical-surgery-name-suture-lungs
+  validParts: [Torso]
+  category: suture
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaRepairKidneys
+  surgery: CMUSurgeryRepairKidneys
+  displayName: cmu-medical-surgery-name-suture-kidneys
+  validParts: [Torso]
+  category: suture
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaRepairHeart
+  surgery: CMUSurgeryRepairHeart
+  displayName: cmu-medical-surgery-name-suture-heart
+  validParts: [Torso]
+  category: suture
+
+# ---- Brain / eye / ear repair (head only) ---------------------------
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaRepairBrain
+  surgery: CMUSurgeryRepairBrain
+  displayName: cmu-medical-surgery-name-repair-brain
+  validParts: [Head]
+  category: head_organ
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaRepairEyes
+  surgery: CMUSurgeryRepairEyes
+  displayName: cmu-medical-surgery-name-repair-eyes
+  validParts: [Head]
+  category: head_organ
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaRepairEars
+  surgery: CMUSurgeryRepairEars
+  displayName: cmu-medical-surgery-name-repair-ears
+  validParts: [Head]
+  category: head_organ
+
+# ---- Limb reattachment ----------------------------------------------
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaReattachLimb
+  surgery: CMUSurgeryReattachLimb
+  displayName: cmu-medical-surgery-name-reattach-limb
+  validParts: [Arm, Leg]
+  category: reattach
+
+# ---- Larva extraction (torso only) ----------------------------------
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaAlienEmbryoRemoval
+  surgery: CMSurgeryAlienEmbryoRemoval
+  displayName: Remove Larva
+  validParts: [Torso]
+  category: parasite
+
+# ---- Eschar debridement ---------------------------------------------
+
+- type: cmuSurgeryStepMetadata
+  id: CMUSurgeryStepMetaDebrideEschar
+  surgery: CMUSurgeryDebrideEschar
+  displayName: Debride Eschar
+  validParts: [Head, Torso, Arm, Leg]
+  category: bleed
+  steps:
+  - stepId: CMUSurgeryStepDebrideEschar
+    label: Debride Eschar
+    toolCategory: scalpel
