@@ -459,7 +459,6 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         }
 
         ApplyWrongToolDamage(user, patient, used, damageType, amount);
-        ClearArmed(patient, armed);
         return true;
     }
 
