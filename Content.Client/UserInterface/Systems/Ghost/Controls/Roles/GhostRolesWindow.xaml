@@ -10,9 +10,46 @@
         <ScrollContainer VerticalExpand="True"
                          HScrollEnabled="False">
             <BoxContainer Orientation="Vertical"
-                          Name="EntryContainer"
-                          VerticalExpand="True">
-                <!-- Ghost role entries are added here by code -->
+                          HorizontalExpand="True"
+                          VerticalExpand="True"
+                          SeparationOverride="8">
+                <BoxContainer Orientation="Horizontal"
+                              HorizontalExpand="True"
+                              MinHeight="34"
+                              SeparationOverride="8">
+                    <LineEdit Name="SearchBar"
+                              PlaceHolder="{Loc 'ghost-roles-window-search-placeholder'}"
+                              HorizontalExpand="True"
+                              MinHeight="34"
+                              SetHeight="34" />
+                    <Label Name="CountLabel"
+                           Text=""
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           ModulateSelfOverride="#7D95A7"
+                           MinWidth="96" />
+                </BoxContainer>
+                <PanelContainer Name="ContentPanel" HorizontalExpand="True" VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BackgroundColor="#0B131A" BorderColor="#1E3341" BorderThickness="1" />
+                    </PanelContainer.PanelOverride>
+                    <ScrollContainer VerticalExpand="True"
+                                     HorizontalExpand="True"
+                                     HScrollEnabled="False">
+                        <BoxContainer Orientation="Vertical"
+                                      Name="EntryContainer"
+                                      SeparationOverride="8"
+                                      Margin="8"
+                                      VerticalExpand="True">
+                            <!-- Ghost role entries are added here by code -->
+                        </BoxContainer>
+                    </ScrollContainer>
+                </PanelContainer>
+                <Label Name="NoRolesMessage"
+                       Text="{Loc 'ghost-roles-window-no-roles-available-label'}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Visible="False" />
             </BoxContainer>
         </ScrollContainer>
     </BoxContainer>
