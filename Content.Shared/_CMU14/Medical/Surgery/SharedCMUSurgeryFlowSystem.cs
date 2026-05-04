@@ -248,7 +248,12 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         // Non-surgery items (analyzer, bandage, meds, etc.) pass through
         // so the medic can still treat the patient between steps.
         if (!isRightTool && !hasWrongDamage)
-            return;
+            return false;
+        // A wrong-tool scalpel click is also the normal way to reopen the
+        // surgery menu. Let the surgery dispatch path handle that click
+        // instead of cutting the patient.
+        if (!isRightTool && HasComp<CMScalpelComponent>(used))
+            return false;
 
         if (!TryFindClickedPart(patient, args.Target, armed.TargetPartType, armed.TargetSymmetry, out _)
             && !IsReattachOnPatientBody(patient, args.Target, armed))
@@ -261,7 +266,7 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         if (isRightTool)
         {
             if (armed.RequiredToolCategory == "severed_limb"
-                && !LimbMatchesAnyMissingSlot(patient, args.Used))
+                && !LimbMatchesMissingSlot(patient, used, armed.TargetPartType, armed.TargetSymmetry))
             {
                 Popup.PopupEntity(Loc.GetString("cmu-medical-surgery-wrong-limb"), patient, args.User, PopupType.SmallCaution);
                 args.Handled = true;
@@ -564,11 +569,13 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         return false;
     }
 
-    public bool LimbMatchesAnyMissingSlot(EntityUid patient, EntityUid heldLimb)
+    public bool LimbMatchesMissingSlot(EntityUid patient, EntityUid heldLimb, BodyPartType targetType, BodyPartSymmetry targetSymmetry)
     {
         if (!TryComp<BodyPartComponent>(heldLimb, out var heldBp))
             return false;
-        if (heldBp.PartType is not (BodyPartType.Arm or BodyPartType.Leg))
+        if (heldBp.PartType != targetType || heldBp.Symmetry != targetSymmetry)
+            return false;
+        if (targetType is not (BodyPartType.Arm or BodyPartType.Leg))
             return false;
 
         if (!TryComp<BodyComponent>(patient, out var bodyComp))
@@ -576,21 +583,21 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         if (Body.GetRootPartOrNull(patient, bodyComp) is not { } root)
             return false;
 
-        var heldSide = heldBp.Symmetry switch
+        var targetSide = targetSymmetry switch
         {
             BodyPartSymmetry.Left => "left",
             BodyPartSymmetry.Right => "right",
             _ => null,
         };
-        if (heldSide is null)
+        if (targetSide is null)
             return false;
 
         foreach (var (slotId, slot) in root.BodyPart.Children)
         {
-            if (slot.Type != heldBp.PartType)
+            if (slot.Type != targetType)
                 continue;
             // Slot id encodes side — left_arm / right_leg / etc.
-            if (!slotId.Contains(heldSide, System.StringComparison.Ordinal))
+            if (!slotId.Contains(targetSide, System.StringComparison.Ordinal))
                 continue;
             // Accept the matching slot — if it's filled, the attach call
             // no-ops with a "slot occupied" popup, which is the right UX.
@@ -630,10 +637,15 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         return false;
     }
 
-    public CMUSurgeryBuiState BuildBuiState(EntityUid patient, string patientName, List<CMUSurgeryPartEntry> parts, CMUSurgeryArmedStepComponent? armed)
+    public CMUSurgeryBuiState BuildBuiState(
+        EntityUid patient,
+        string patientName,
+        List<CMUSurgeryPartEntry> parts,
+        CMUSurgeryArmedStepComponent? armed,
+        EntityUid? viewer = null)
     {
         CMUArmedStepInfo? armedInfo = null;
-        if (armed is not null)
+        if (armed is not null && (viewer is null || armed.Surgeon == viewer.Value))
         {
             // Surface the leaf the medic picked — SurgeryId may differ when
             // a prereq is currently being run.
@@ -656,7 +668,8 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
                 partDisplay,
                 flight.LeafSurgeryDisplayName,
                 flight.SurgeonName,
-                flight.StartedAt);
+                flight.StartedAt,
+                viewer is null || flight.Surgeon == viewer.Value);
         }
 
         return new CMUSurgeryBuiState(GetNetEntity(patient), patientName, parts, armedInfo, inFlight);

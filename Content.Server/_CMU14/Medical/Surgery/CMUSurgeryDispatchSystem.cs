@@ -60,7 +60,7 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
                 continue;
             var parts = BuildPartEntries(patient, medic);
             var armed = CompOrNull<CMUSurgeryArmedStepComponent>(patient);
-            var state = _flowSurgery.BuildBuiState(patient, Name(patient), parts, armed);
+            var state = _flowSurgery.BuildBuiState(patient, Name(patient), parts, armed, medic);
             _ui.SetUiState(medic, CMUSurgeryUIKey.Key, state);
         }
     }
@@ -85,13 +85,159 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
         marker.TargetSymmetry = parts[0].Symmetry;
         Dirty(surgeon, marker);
 
-        var armed = CompOrNull<CMUSurgeryArmedStepComponent>(patient);
-        var state = _flowSurgery.BuildBuiState(patient, Name(patient), parts, armed);
+        var state = _flowSurgery.BuildBuiState(patient, Name(patient), parts, armed, surgeon);
 
         _ui.SetUiState(surgeon, CMUSurgeryUIKey.Key, state);
         _ui.OpenUi(surgeon, CMUSurgeryUIKey.Key, surgeon);
         return true;
     }
+
+    private bool CanAutoHandleToolIntent(EntityUid surgeon, EntityUid patient)
+    {
+        if (!TryComp<CMUSurgeryInProgressComponent>(patient, out var lockComp))
+            return false;
+
+        return TryComp<CMUSurgeryInFlightComponent>(lockComp.Part, out var inFlight)
+            && inFlight.Surgeon == surgeon;
+    }
+
+    private bool TryArmByToolIntent(EntityUid surgeon, EntityUid patient, EntityUid tool, List<CMUSurgeryPartEntry> parts)
+    {
+        var candidates = new List<ToolIntentCandidate>();
+        var hasSelectedPart = TryGetSelectedPart(surgeon, out var selectedType, out var selectedSymmetry);
+
+        foreach (var part in parts)
+        {
+            if (part.LockedByOtherPart)
+                continue;
+            if (hasSelectedPart && (part.Type != selectedType || part.Symmetry != selectedSymmetry))
+                continue;
+
+            foreach (var entry in part.EligibleSurgeries)
+            {
+                if (!_flowSurgery.ToolMatchesCategory(tool, entry.NextStepToolCategory))
+                    continue;
+
+                var score = ScoreToolIntentCandidate(part, entry, hasSelectedPart);
+                candidates.Add(new ToolIntentCandidate(part, entry, score));
+            }
+        }
+
+        if (candidates.Count == 0)
+            return false;
+
+        if (!hasSelectedPart)
+        {
+            var openCandidates = candidates
+                .Where(candidate => candidate.Part.IsInFlightHere || IsOpenPart(candidate.Part.Part))
+                .ToList();
+
+            if (openCandidates.Count > 0)
+            {
+                var openParts = openCandidates
+                    .Select(candidate => (candidate.Part.Part, candidate.Part.Type, candidate.Part.Symmetry))
+                    .Distinct()
+                    .Count();
+                if (openParts != 1)
+                    return false;
+
+                candidates = openCandidates;
+            }
+            else if (candidates.Count != 1)
+            {
+                return false;
+            }
+        }
+
+        candidates.Sort((a, b) => b.Score.CompareTo(a.Score));
+        var best = candidates[0];
+        if (candidates.Count > 1 && candidates[1].Score == best.Score)
+            return false;
+
+        var targetPart = GetEntity(best.Part.Part);
+        if (!HasComp<BodyPartComponent>(targetPart))
+            targetPart = patient;
+
+        var armed = _flowSurgery.TryArmStep(
+            surgeon,
+            patient,
+            targetPart,
+            best.Entry.SurgeryId,
+            best.Entry.NextStepIndex,
+            best.Part.Type,
+            best.Part.Symmetry);
+
+        if (armed is null)
+            return false;
+
+        if (!_flowSurgery.TryHandleArmedToolUse(patient, armed, surgeon, tool, targetPart, out var handled, out var started) || !handled)
+            return false;
+
+        if (started)
+        {
+            _popup.PopupEntity(
+                Loc.GetString("cmu-medical-surgery-auto-armed", ("surgery", best.Entry.DisplayName)),
+                patient,
+                surgeon);
+        }
+
+        RefreshUiForPatient(patient);
+        return true;
+    }
+
+    private int ScoreToolIntentCandidate(CMUSurgeryPartEntry part, CMUSurgeryEntry entry, bool hasSelectedPart)
+    {
+        var score = 0;
+        if (hasSelectedPart)
+            score += 1000;
+        if (part.IsInFlightHere)
+            score += 200;
+        if (IsOpenPart(part.Part))
+            score += 100;
+        if (entry.Category != "close_up")
+            score += 25;
+        score += CategoryPriority(entry.Category);
+        return score;
+    }
+
+    private bool TryGetSelectedPart(EntityUid surgeon, out BodyPartType type, out BodyPartSymmetry symmetry)
+    {
+        type = default;
+        symmetry = default;
+
+        if (!TryComp<BodyZoneTargetingComponent>(surgeon, out var aim)
+            || aim.LastSelectedAt == TimeSpan.Zero)
+        {
+            return false;
+        }
+
+        (type, symmetry) = SharedBodyZoneTargetingSystem.ToBodyPart(aim.Selected);
+        return true;
+    }
+
+    private bool IsOpenPart(NetEntity part)
+    {
+        var uid = GetEntity(part);
+        return HasComp<CMIncisionOpenComponent>(uid)
+            || HasComp<CMSkinRetractedComponent>(uid)
+            || HasComp<CMRibcageOpenComponent>(uid);
+    }
+
+    private static int CategoryPriority(string category) => category switch
+    {
+        "bleed" => 90,
+        "fracture" => 80,
+        "burn" => 70,
+        "suture" => 60,
+        "head_organ" => 60,
+        "parasite" => 50,
+        "remove_organ" => 30,
+        "amputation" => 20,
+        "close_up" => -50,
+        _ => 0,
+    };
+
+    private readonly record struct ToolIntentCandidate(CMUSurgeryPartEntry Part, CMUSurgeryEntry Entry, int Score);
 
     public List<CMUSurgeryPartEntry> BuildPartEntries(EntityUid patient, EntityUid surgeon)
     {
@@ -293,11 +439,212 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
         // step prototypes.
         if (lockComp is null && targetPart is { } closePart)
         {
-            TryAddCloseUpEntry(patient, closePart, partType, "CMSurgeryCloseRibcage", entries, surgeon);
-            TryAddCloseUpEntry(patient, closePart, partType, "CMSurgeryCloseIncision", entries, surgeon);
+            if (lockComp is { AwaitingClosureChoice: true }
+                && lockComp.Part == closePart
+                && SharedCMUSurgeryFlowSystem.IsReattachSurgeryId(lockComp.LeafSurgeryId))
+            {
+                TryAddReattachCloseUpEntry(patient, closePart, partType, lockComp.LeafSurgeryId, entries, surgeon);
+            }
+            else if (closeUpLockedHere && lockComp is not null)
+            {
+                TryAddCloseUpEntry(patient, closePart, partType, lockComp.LeafSurgeryId, entries, surgeon);
+            }
+            else if (NeedsBoneCavityClosure(closePart))
+            {
+                TryAddCloseUpEntry(patient, closePart, partType, "CMUSurgeryCloseBoneCavity", entries, surgeon);
+            }
+            else if (NeedsSoftTissueClosure(closePart))
+            {
+                TryAddCloseUpEntry(patient, closePart, partType, "CMUSurgeryCloseIncision", entries, surgeon);
+            }
         }
 
         return entries;
+    }
+
+    private void TryAddReattachCloseUpEntry(EntityUid patient, EntityUid part, BodyPartType partType, string surgeryId, List<CMUSurgeryEntry> entries, EntityUid surgeon)
+    {
+        if (patient == surgeon && !_flowSurgery.CanSelfOperateSurgery(surgeryId, partType))
+            return;
+        if (_flowSurgery.TryGetMetadata(surgeryId, out var metadata) && !HasRequiredSurgerySkill(surgeon, metadata.MinSkill))
+            return;
+        if (!_prototypes.TryIndex<EntityPrototype>(surgeryId, out var proto))
+            return;
+        if (!_flowSurgery.TryResolveNextStep(patient, part, surgeryId, out var resolved))
+            return;
+        if (resolved.ResolvedSurgeryId != surgeryId)
+            return;
+
+        entries.Add(new CMUSurgeryEntry(
+            surgeryId,
+            proto.Name,
+            resolved.StepLabel,
+            resolved.ToolCategory,
+            resolved.AbsoluteStepIndex,
+            resolved.TotalSteps,
+            resolved.GatingSurgeryId,
+            "close_up"));
+    }
+
+    private bool NeedsBoneCavityClosure(EntityUid part)
+    {
+        return HasComp<CMRibcageOpenComponent>(part)
+            || HasComp<CMRibcageSawedComponent>(part);
+    }
+
+    private bool NeedsSoftTissueClosure(EntityUid part)
+    {
+        return HasComp<CMIncisionOpenComponent>(part)
+            || HasComp<CMBleedersClampedComponent>(part)
+            || HasComp<CMSkinRetractedComponent>(part);
+    }
+
+    private static bool IsCloseUpSurgeryId(string surgeryId)
+    {
+        return surgeryId is "CMUSurgeryCloseIncision"
+            or "CMUSurgeryCloseBoneCavity"
+            or "CMSurgeryCloseIncision"
+            or "CMSurgeryCloseRibcage";
+    }
+
+    private bool IsNeededSurgeryForPart(
+        EntityUid patient,
+        EntityUid? targetPart,
+        string surgeryId,
+        string category,
+        BodyPartType partType)
+    {
+        if (targetPart is not { } part)
+            return category == "reattach";
+
+        return category switch
+        {
+            "fracture" => TryComp<FractureComponent>(part, out var fracture)
+                && fracture.Severity != FractureSeverity.None,
+            "bleed" => HasComp<InternalBleedingComponent>(part),
+            "burn" => HasComp<CMUEscharComponent>(part),
+            "parasite" => partType == BodyPartType.Torso,
+            "suture" or "head_organ" => HasDamagedOrganForSurgery(part, surgeryId),
+            "remove_organ" => HasOrganForSurgery(part, surgeryId),
+            "transplant" => IsOrganReplacementNeededForSurgery(part, surgeryId),
+            "amputation" => partType is BodyPartType.Arm or BodyPartType.Leg,
+            _ => true,
+        };
+    }
+
+    private bool HasDamagedOrganForSurgery(EntityUid part, string surgeryId)
+    {
+        if (!TryGetOrganConditionForSurgery(surgeryId, out var slot, out var minStage))
+            return false;
+
+        return HasOrganInSlotAtLeast(part, slot, minStage);
+    }
+
+    private bool HasDeadOrganForSurgery(EntityUid part, string surgeryId)
+    {
+        if (!TryGetOrganConditionForSurgery(surgeryId, out var slot, out _))
+            return false;
+
+        return HasOrganInSlotAtLeast(part, slot, OrganDamageStage.Dead);
+    }
+
+    private bool HasOrganForSurgery(EntityUid part, string surgeryId)
+    {
+        if (!TryGetOrganConditionForSurgery(surgeryId, out var slot, out _))
+            return false;
+
+        return TryGetOrganInSlot(part, slot, out _);
+    }
+
+    private bool IsOrganReplacementNeededForSurgery(EntityUid part, string surgeryId)
+    {
+        if (!TryGetReinsertOrganSlotForSurgery(surgeryId, out var slot))
+            return false;
+
+        return !TryGetOrganInSlot(part, slot, out _);
+    }
+
+    private bool HasOrganInSlotAtLeast(EntityUid part, string slot, OrganDamageStage stage)
+    {
+        return TryGetOrganInSlot(part, slot, out var organ)
+            && TryComp<OrganHealthComponent>(organ, out var health)
+            && health.Stage.IsAtLeast(stage);
+    }
+
+    private bool TryGetOrganInSlot(EntityUid part, string slotId, out EntityUid organ)
+    {
+        organ = default;
+        var containerId = SharedBodySystem.GetOrganContainerId(slotId);
+        if (!_containers.TryGetContainer(part, containerId, out var container))
+            return false;
+
+        foreach (var contained in container.ContainedEntities)
+        {
+            if (!HasComp<OrganComponent>(contained))
+                continue;
+
+            organ = contained;
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool TryGetOrganConditionForSurgery(string surgeryId, out string slot, out OrganDamageStage minStage)
+    {
+        slot = string.Empty;
+        minStage = OrganDamageStage.Bruised;
+
+        if (_rmcSurgery.GetSingleton(new EntProtoId(surgeryId)) is not { } surgeryEnt
+            || !TryComp<CMSurgeryComponent>(surgeryEnt, out var surgery))
+        {
+            return false;
+        }
+
+        foreach (var stepId in surgery.Steps)
+        {
+            if (_rmcSurgery.GetSingleton(stepId) is not { } stepEnt
+                || !TryComp<CMUOrganDamagedSurgeryConditionComponent>(stepEnt, out var condition))
+            {
+                continue;
+            }
+
+            slot = condition.OrganSlot;
+            minStage = condition.MinStage;
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool TryGetReinsertOrganSlotForSurgery(string surgeryId, out string slot)
+    {
+        slot = string.Empty;
+
+        if (_rmcSurgery.GetSingleton(new EntProtoId(surgeryId)) is not { } surgeryEnt
+            || !TryComp<CMSurgeryComponent>(surgeryEnt, out var surgery))
+        {
+            return false;
+        }
+
+        foreach (var stepId in surgery.Steps)
+        {
+            if (_rmcSurgery.GetSingleton(stepId) is not { } stepEnt
+                || !TryComp<CMUSurgeryStepReinsertOrganEffectComponent>(stepEnt, out var reinsert))
+            {
+                continue;
+            }
+
+            slot = reinsert.OrganSlot;
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool HasRequiredSurgerySkill(EntityUid surgeon, int minSkill)
+    {
+        return minSkill <= 0 || _skills.HasSkill(surgeon, SurgerySkill, minSkill);
     }
 
     private void TryAddCloseUpEntry(EntityUid patient, EntityUid part, BodyPartType partType, string surgeryId, List<CMUSurgeryEntry> entries, EntityUid surgeon)
@@ -458,7 +805,7 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
         // eligible surgeries (e.g. an open-incision step now removes the
         // prerequisite gate from a fracture-set).
         var parts = BuildPartEntries(marker.Patient, medic);
-        var state = _flowSurgery.BuildBuiState(marker.Patient, Name(marker.Patient), parts, armed);
+        var state = _flowSurgery.BuildBuiState(marker.Patient, Name(marker.Patient), parts, armed, medic);
         _ui.SetUiState(medic, CMUSurgeryUIKey.Key, state);
     }
 
@@ -467,16 +814,25 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
         var marker = ent.Comp;
         if (!marker.Patient.IsValid())
             return;
-        // BUI cancel = explicit abandon: lift the in-flight lock so a
-        // different surgery can be started. V1 physical-state markers stay
-        // — a fresh surgeon sees CMSurgeryCloseIncision /
-        // CMSurgeryCloseRibcage as cleanup options.
-        _flowSurgery.ClearArmed(marker.Patient);
-        _flowSurgery.ClearSurgeryInFlight(marker.Patient);
+        // BUI cancel only abandons the viewer's own armed/in-flight step.
+        // Another surgeon can keep a menu open without clearing someone
+        // else's active work.
+        var medic = ent.Owner;
+        var canClearArmed = TryComp<CMUSurgeryArmedStepComponent>(marker.Patient, out var armed)
+            && armed.Surgeon == medic;
+        var canClearInFlight = TryComp<CMUSurgeryInProgressComponent>(marker.Patient, out var lockComp)
+            && TryComp<CMUSurgeryInFlightComponent>(lockComp.Part, out var inFlight)
+            && inFlight.Surgeon == medic;
 
-        var parts = BuildPartEntries(marker.Patient, ent.Owner);
-        var state = _flowSurgery.BuildBuiState(marker.Patient, Name(marker.Patient), parts, null);
-        _ui.SetUiState(ent.Owner, CMUSurgeryUIKey.Key, state);
+        if (canClearArmed)
+            _flowSurgery.ClearArmed(marker.Patient, armed);
+        if (canClearInFlight)
+            _flowSurgery.ClearSurgeryInFlight(marker.Patient);
+
+        var parts = BuildPartEntries(marker.Patient, medic);
+        var refreshedArmed = CompOrNull<CMUSurgeryArmedStepComponent>(marker.Patient);
+        var state = _flowSurgery.BuildBuiState(marker.Patient, Name(marker.Patient), parts, refreshedArmed, medic);
+        _ui.SetUiState(medic, CMUSurgeryUIKey.Key, state);
     }
 
     private void OnUiClosed(Entity<CMUSurgeryWindowOpenComponent> ent, ref BoundUIClosedEvent args)
