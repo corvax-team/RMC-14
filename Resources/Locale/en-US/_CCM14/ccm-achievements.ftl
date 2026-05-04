@@ -21,6 +21,10 @@ ccm-achievement-general-campaign-veteran-title = Campaign Veteran
 ccm-achievement-general-campaign-veteran-desc = You have fought through many battles. Requirement: win 50 rounds overall.
 ccm-achievement-general-war-legend-title = War Legend
 ccm-achievement-general-war-legend-desc = Both marines and the hive know your name. Requirement: win 200 rounds overall.
+ccm-achievement-general-beta-tester-title = Beta Tester
+ccm-achievement-general-beta-tester-desc = You were there when the build still broke, glitched, and survived only on willpower. Awarded manually to beta test participants.
+ccm-achievement-general-founding-member-title = Founding Member
+ccm-achievement-general-founding-member-desc = One of the old guard who was here before everything settled into place. Awarded manually by administration.
 
 ccm-achievement-misc-logistician-title = Logistician
 ccm-achievement-misc-logistician-desc = Ammunition does not appear out of thin air. Requirement: order 20 requisition deliveries.
@@ -28,6 +32,8 @@ ccm-achievement-misc-friendly-fire-title = Friendly Fire
 ccm-achievement-misc-friendly-fire-desc = Any damage to allies and killing your comrades is punishable. Requirement: deal 300 damage to allies.
 ccm-achievement-misc-queen-slayer-title = Queen's Nightmare
 ccm-achievement-misc-queen-slayer-desc = The queen knows your name. And hates it. Requirement: participate in killing the xeno queen.
+ccm-achievement-misc-quality-assurance-title = Quality Assurance
+ccm-achievement-misc-quality-assurance-desc = Some people play the game. You helped keep it from falling apart. Awarded manually for major testing and bug reports.
 
 ccm-achievement-marine-field-medic-title = Field Medic
 ccm-achievement-marine-field-medic-desc = A few bandages never hurt anyone. Requirement: heal 5,000 damage on allies.

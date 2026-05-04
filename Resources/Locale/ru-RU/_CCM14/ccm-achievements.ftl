@@ -21,6 +21,10 @@ ccm-achievement-general-campaign-veteran-title = Ветеран кампаний
 ccm-achievement-general-campaign-veteran-desc = Ты прошёл множество битв. Требование: выиграть 50 раундов за всё время.
 ccm-achievement-general-war-legend-title = Легенда войны
 ccm-achievement-general-war-legend-desc = Твоё имя знают и люди, и улей. Требование: выиграть 200 раундов за всё время.
+ccm-achievement-general-beta-tester-title = Бета-тестер
+ccm-achievement-general-beta-tester-desc = Ты был здесь, когда сборки ломались, вещи исчезали, а баланс держался на честном слове. Выдаётся вручную участникам бета-теста.
+ccm-achievement-general-founding-member-title = У истоков
+ccm-achievement-general-founding-member-desc = Один из старой гвардии, который был здесь ещё до того, как всё устаканилось. Выдаётся вручную администрацией.
 
 ccm-achievement-misc-logistician-title = Логист
 ccm-achievement-misc-logistician-desc = Патроны не появляются из воздуха. Требование: заказать 20 поставок через реквизицию.
@@ -28,6 +32,8 @@ ccm-achievement-misc-friendly-fire-title = Огонь по своим
 ccm-achievement-misc-friendly-fire-desc = Любой урон по своим и убийство товарищей наказуемы. Требование: нанести 300 урона союзникам.
 ccm-achievement-misc-queen-slayer-title = Кошмар королевы
 ccm-achievement-misc-queen-slayer-desc = Королева знает твоё имя. И ненавидит его. Требование: поучаствовать в убийстве королевы ксеноморфов.
+ccm-achievement-misc-quality-assurance-title = Контроль качества
+ccm-achievement-misc-quality-assurance-desc = Одни просто играют. Ты помогал игре не развалиться. Выдаётся вручную за серьёзное тестирование и важные репорты багов.
 
 ccm-achievement-marine-field-medic-title = Полевой врач
 ccm-achievement-marine-field-medic-desc = Немного бинтов ещё никому не вредило. Требование: вылечить 5 000 урона союзникам.

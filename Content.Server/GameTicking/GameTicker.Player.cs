@@ -180,7 +180,12 @@ namespace Content.Server.GameTicking
 
         public HumanoidCharacterProfile GetPlayerProfile(ICommonSession p)
         {
-            var profile = (HumanoidCharacterProfile) _prefsManager.GetPreferences(p.UserId).SelectedCharacter;
+            var prefs = _prefsManager.GetPreferences(p.UserId);
+            var profile = prefs.TryGetSelectedCharacter(out var selectedCharacter)
+                ? selectedCharacter as HumanoidCharacterProfile
+                : null;
+
+            profile ??= HumanoidCharacterProfile.Random();
 
             if (!profile.AlwaysRandomName && !profile.AlwaysRandomAppearance)
                 return profile;

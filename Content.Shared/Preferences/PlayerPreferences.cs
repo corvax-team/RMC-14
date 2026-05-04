@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared.Construction.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -18,7 +19,8 @@ namespace Content.Shared.Preferences
         public PlayerPreferences(IEnumerable<KeyValuePair<int, ICharacterProfile>> characters, int selectedCharacterIndex, Color adminOOCColor, List<ProtoId<ConstructionPrototype>> constructionFavorites)
         {
             _characters = new Dictionary<int, ICharacterProfile>(characters);
-            SelectedCharacterIndex = selectedCharacterIndex;
+            EnsureAtLeastOneCharacter();
+            SelectedCharacterIndex = ResolveSelectedCharacterIndex(selectedCharacterIndex);
             AdminOOCColor = adminOOCColor;
             ConstructionFavorites = constructionFavorites;
         }
@@ -30,7 +32,9 @@ namespace Content.Shared.Preferences
 
         public ICharacterProfile GetProfile(int index)
         {
-            return _characters[index];
+            return TryGetProfile(index, out var profile) && profile != null
+                ? profile
+                : ResolveSelectedCharacter();
         }
 
         public bool TryGetProfile(int index, out ICharacterProfile? profile)
@@ -46,11 +50,50 @@ namespace Content.Shared.Preferences
         /// <summary>
         ///     The currently selected character.
         /// </summary>
-        public ICharacterProfile SelectedCharacter => Characters[SelectedCharacterIndex];
+        public ICharacterProfile SelectedCharacter => ResolveSelectedCharacter();
 
         public bool TryGetSelectedCharacter(out ICharacterProfile? profile)
         {
             return TryGetProfile(SelectedCharacterIndex, out profile);
+        }
+
+        private ICharacterProfile ResolveSelectedCharacter()
+        {
+            if (TryGetSelectedCharacter(out var profile) &&
+                profile != null)
+            {
+                return profile;
+            }
+
+            EnsureAtLeastOneCharacter();
+
+            foreach (var pair in _characters.OrderBy(pair => pair.Key))
+            {
+                return pair.Value;
+            }
+
+            return new HumanoidCharacterProfile();
+        }
+
+        private int ResolveSelectedCharacterIndex(int selectedCharacterIndex)
+        {
+            if (_characters.ContainsKey(selectedCharacterIndex))
+                return selectedCharacterIndex;
+
+            foreach (var pair in _characters.OrderBy(pair => pair.Key))
+            {
+                return pair.Key;
+            }
+
+            return 0;
+        }
+
+        private void EnsureAtLeastOneCharacter()
+        {
+            if (_characters.Count > 0)
+                return;
+
+            _characters[0] = new HumanoidCharacterProfile();
         }
 
         public Color AdminOOCColor { get; set; }

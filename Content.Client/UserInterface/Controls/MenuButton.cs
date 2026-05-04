@@ -29,16 +29,24 @@ public sealed class MenuButton : ContainerButton
     private Color HoveredColor => HasStyleClass(StyleClassRedTopButton) ? ColorRedHovered : ColorHovered;
 
     private BoundKeyFunction _function;
-    private readonly BoxContainer _root;
-    private readonly TextureRect? _buttonIcon;
-    private readonly Label? _buttonLabel;
-    private readonly StyleBoxFlat _styleNormal;
-    private readonly StyleBoxFlat _styleHover;
-    private readonly StyleBoxFlat _stylePressed;
-    private readonly StyleBoxFlat _styleDisabled;
+    private BoxContainer? _root;
+    private TextureRect? _buttonIcon;
+    private Label? _buttonLabel;
+    private StyleBoxFlat? _styleNormal;
+    private StyleBoxFlat? _styleHover;
+    private StyleBoxFlat? _stylePressed;
+    private StyleBoxFlat? _styleDisabled;
 
     public string AppendStyleClass { set => AddStyleClass(value); }
-    public Texture? Icon { get => _buttonIcon!.Texture; set => _buttonIcon!.Texture = value; }
+    public Texture? Icon
+    {
+        get => _buttonIcon?.Texture;
+        set
+        {
+            if (_buttonIcon != null)
+                _buttonIcon.Texture = value;
+        }
+    }
 
     public BoundKeyFunction BoundKey
     {
@@ -46,11 +54,12 @@ public sealed class MenuButton : ContainerButton
         set
         {
             _function = value;
-            _buttonLabel!.Text = BoundKeyHelper.ShortKeyName(value);
+            if (_buttonLabel != null)
+                _buttonLabel.Text = BoundKeyHelper.ShortKeyName(value);
         }
     }
 
-    public BoxContainer ButtonRoot => _root;
+    public BoxContainer? ButtonRoot => _root;
 
     public MenuButton()
     {
@@ -120,12 +129,14 @@ public sealed class MenuButton : ContainerButton
 
     private void OnKeyBindingChanged(IKeyBinding obj)
     {
-        _buttonLabel!.Text = BoundKeyHelper.ShortKeyName(_function);
+        if (_buttonLabel != null)
+            _buttonLabel.Text = BoundKeyHelper.ShortKeyName(_function);
     }
 
     private void OnKeyBindingChanged()
     {
-        _buttonLabel!.Text = BoundKeyHelper.ShortKeyName(_function);
+        if (_buttonLabel != null)
+            _buttonLabel.Text = BoundKeyHelper.ShortKeyName(_function);
     }
 
     protected override void StylePropertiesChanged()
@@ -137,9 +148,17 @@ public sealed class MenuButton : ContainerButton
 
     private void UpdateChildColors()
     {
-        UpdateThemePalette();
+        if (_styleNormal == null ||
+            _styleHover == null ||
+            _stylePressed == null ||
+            _styleDisabled == null ||
+            _buttonIcon == null ||
+            _buttonLabel == null)
+        {
+            return;
+        }
 
-        if (_buttonIcon == null || _buttonLabel == null) return;
+        UpdateThemePalette();
         switch (DrawMode)
         {
             case DrawModeEnum.Normal:
@@ -177,13 +196,30 @@ public sealed class MenuButton : ContainerButton
 
     private void UpdateThemePalette()
     {
-        var baseColor = Blend(StyleNano.ButtonColorDefault, Color.White, 0.16f).WithAlpha(0.96f);
-        var hoverColor = Blend(StyleNano.ButtonColorHovered, Color.White, 0.12f).WithAlpha(0.98f);
-        var pressedColor = Blend(StyleNano.ButtonColorPressed, Color.White, 0.08f).WithAlpha(0.96f);
-        var disabledColor = Blend(StyleNano.ButtonColorDisabled, Color.White, 0.04f).WithAlpha(0.86f);
-        var borderColor = Blend(StyleNano.UiButtonBorder, Color.White, 0.16f).WithAlpha(0.98f);
-        var pressedBorderColor = Blend(StyleNano.UiButtonBorder, Color.White, 0.26f).WithAlpha(0.98f);
-        var disabledBorderColor = Blend(StyleNano.UiButtonBorder, Color.White, 0.08f).WithAlpha(0.92f);
+        if (_styleNormal == null ||
+            _styleHover == null ||
+            _stylePressed == null ||
+            _styleDisabled == null)
+        {
+            return;
+        }
+
+        var isGreenTheme = StyleNano.CurrentTheme == StyleNano.UiColorTheme.Green;
+        var baseBlend = isGreenTheme ? 0.24f : 0.16f;
+        var hoverBlend = isGreenTheme ? 0.18f : 0.12f;
+        var pressedBlend = isGreenTheme ? 0.12f : 0.08f;
+        var disabledBlend = isGreenTheme ? 0.08f : 0.04f;
+        var borderBlend = isGreenTheme ? 0.24f : 0.16f;
+        var pressedBorderBlend = isGreenTheme ? 0.34f : 0.26f;
+        var disabledBorderBlend = isGreenTheme ? 0.14f : 0.08f;
+
+        var baseColor = Blend(StyleNano.ButtonColorDefault, Color.White, baseBlend).WithAlpha(0.96f);
+        var hoverColor = Blend(StyleNano.ButtonColorHovered, Color.White, hoverBlend).WithAlpha(0.98f);
+        var pressedColor = Blend(StyleNano.ButtonColorPressed, Color.White, pressedBlend).WithAlpha(0.96f);
+        var disabledColor = Blend(StyleNano.ButtonColorDisabled, Color.White, disabledBlend).WithAlpha(0.86f);
+        var borderColor = Blend(StyleNano.UiButtonBorder, Color.White, borderBlend).WithAlpha(0.98f);
+        var pressedBorderColor = Blend(StyleNano.UiButtonBorder, Color.White, pressedBorderBlend).WithAlpha(0.98f);
+        var disabledBorderColor = Blend(StyleNano.UiButtonBorder, Color.White, disabledBorderBlend).WithAlpha(0.92f);
 
         _styleNormal.BackgroundColor = baseColor;
         _styleNormal.BorderColor = borderColor;

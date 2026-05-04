@@ -54,10 +54,13 @@ public sealed class CCMAchievementSystem : EntitySystem
         new("general_living_legend", CCMAchievementCategory.General, "ccm-achievement-general-living-legend-title", "ccm-achievement-general-living-legend-desc", 200, ctx => ctx.RoundsPlayed),
         new("general_campaign_veteran", CCMAchievementCategory.General, "ccm-achievement-general-campaign-veteran-title", "ccm-achievement-general-campaign-veteran-desc", 50, ctx => ctx.RoundsWon),
         new("general_war_legend", CCMAchievementCategory.General, "ccm-achievement-general-war-legend-title", "ccm-achievement-general-war-legend-desc", 200, ctx => ctx.RoundsWon),
+        new("general_beta_tester", CCMAchievementCategory.General, "ccm-achievement-general-beta-tester-title", "ccm-achievement-general-beta-tester-desc", 1, _ => 0, true),
+        new("general_founding_member", CCMAchievementCategory.General, "ccm-achievement-general-founding-member-title", "ccm-achievement-general-founding-member-desc", 1, _ => 0, true),
 
         new("misc_logistician", CCMAchievementCategory.Misc, "ccm-achievement-misc-logistician-title", "ccm-achievement-misc-logistician-desc", 20, ctx => ctx.Special.RequisitionOrders),
         new("misc_queen_slayer", CCMAchievementCategory.Misc, "ccm-achievement-misc-queen-slayer-title", "ccm-achievement-misc-queen-slayer-desc", 1, ctx => ctx.Special.QueenKillParticipations),
         new("misc_friendly_fire", CCMAchievementCategory.Misc, "ccm-achievement-misc-friendly-fire-title", "ccm-achievement-misc-friendly-fire-desc", 300, ctx => ctx.Special.FriendlyFireDamage),
+        new("misc_quality_assurance", CCMAchievementCategory.Misc, "ccm-achievement-misc-quality-assurance-title", "ccm-achievement-misc-quality-assurance-desc", 1, _ => 0, true),
 
         new("marine_field_medic", CCMAchievementCategory.Marines, "ccm-achievement-marine-field-medic-title", "ccm-achievement-marine-field-medic-desc", 5000, ctx => ctx.MarineHealingDone),
         new("marine_combat_surgeon", CCMAchievementCategory.Marines, "ccm-achievement-marine-combat-surgeon-title", "ccm-achievement-marine-combat-surgeon-desc", 25000, ctx => ctx.MarineHealingDone),
@@ -542,6 +545,9 @@ public sealed class CCMAchievementSystem : EntitySystem
 
         foreach (var def in Definitions)
         {
+            if (def.ManualOnly)
+                continue;
+
             var progress = Math.Clamp(def.GetProgress(context), 0, def.Goal);
             if (progress < def.Goal || !state.UnlockedIds.Add(def.Id))
                 continue;
@@ -634,7 +640,8 @@ public sealed class CCMAchievementSystem : EntitySystem
         CCMAchievementProgressContext context,
         HashSet<string> unlockedIds)
     {
-        return unlockedIds.Contains(definition.Id) || definition.GetProgress(context) >= definition.Goal;
+        return unlockedIds.Contains(definition.Id) ||
+               (!definition.ManualOnly && definition.GetProgress(context) >= definition.Goal);
     }
 
     private static int GetDisplayProgress(
@@ -909,7 +916,8 @@ public sealed class CCMAchievementSystem : EntitySystem
         string TitleKey,
         string DescriptionKey,
         int Goal,
-        Func<CCMAchievementProgressContext, int> GetProgress)
+        Func<CCMAchievementProgressContext, int> GetProgress,
+        bool ManualOnly = false)
     {
         public CCMAchievementProgressData ToProgress(int progress, bool completed)
         {

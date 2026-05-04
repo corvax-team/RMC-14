@@ -1038,7 +1038,10 @@ namespace Content.Client.Lobby.UI
             CarouselPreviewRow.Margin = compact ? new Thickness(8) : new Thickness(12);
             CarouselLeftShade.MinWidth = compact ? 96f : 140f;
             CarouselRightShade.MinWidth = compact ? 96f : 140f;
-            ActionButtonRow.SeparationOverride = compact ? 6 : 10;
+            PrimaryActionButtonGroup.SeparationOverride = compact ? 6 : 10;
+            TransferActionButtonGroup.SeparationOverride = compact ? 6 : 10;
+            OldPrimaryActionButtonGroup.SeparationOverride = compact ? 3 : 4;
+            OldTransferActionButtonGroup.SeparationOverride = compact ? 3 : 4;
 
             var actionButtonHeight = compact ? 32f : 36f;
             NewCharacterButton.MinSize = new Vector2(NewCharacterButton.MinSize.X, actionButtonHeight);

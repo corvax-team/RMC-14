@@ -49,8 +49,8 @@ namespace Content.Client.Lobby
         private ContentAudioSystem _audioSystem = default!;
         private float _lastRightPanelWidth = -1f;
 
-        private const float LobbyRightPanelWideMinRatio = 0.18f;
-        private const float LobbyRightPanelWideMaxRatio = 0.28f;
+        private const float LobbyRightPanelWideMinRatio = 0.20f;
+        private const float LobbyRightPanelWideMaxRatio = 0.32f;
         private const float LobbyRightPanelDefaultMinRatio = 0.22f;
         private const float LobbyRightPanelDefaultMaxRatio = 0.34f;
         private const float LobbyRightPanelCompactMinRatio = 0.28f;
@@ -229,15 +229,15 @@ namespace Content.Client.Lobby
             if (hostWidth >= 2200f)
             {
                 return oldLobbyStyle
-                    ? (LobbyRightPanelWideMinRatio, 0.30f, 460f, 640f)
-                    : (LobbyRightPanelWideMinRatio, LobbyRightPanelWideMaxRatio, 420f, 560f);
+                    ? (LobbyRightPanelWideMinRatio, 0.34f, 520f, 760f)
+                    : (LobbyRightPanelWideMinRatio, LobbyRightPanelWideMaxRatio, 500f, 700f);
             }
 
             if (hostWidth >= 1700f)
             {
                 return oldLobbyStyle
-                    ? (0.20f, 0.33f, 500f, 700f)
-                    : (0.20f, 0.31f, 440f, 600f);
+                    ? (0.22f, 0.35f, 540f, 760f)
+                    : (0.22f, 0.33f, 500f, 680f);
             }
 
             if (hostWidth >= 1450f)
