@@ -49,6 +49,14 @@
       0: Alive
       325: Critical
       425: Dead
+  - type: XenoDevolve
+    devolvesTo:
+    - CMXenoDefender
+  - type: XenoEvolution
+    max: 500
+    evolvesTo:
+    - RMCXenoCrusher
+    - CMXenoPraetorian
   - type: XenoPlasma
     plasma: 270
     maxPlasma: 270

@@ -82,10 +82,10 @@ cmu-medical-surgery-wrong-limb = Эта конечность не подходи
 
 cmu-medical-surgery-tool-category-scalpel = Скальпель
 cmu-medical-surgery-tool-category-hemostat = Гемостат
-cmu-medical-surgery-tool-category-retractor = Ретрактор
+cmu-medical-surgery-tool-category-retractor = Ранорасширитель
 cmu-medical-surgery-tool-category-cautery = Прижигатель
 cmu-medical-surgery-tool-category-bone_saw = Костная пила
-cmu-medical-surgery-tool-category-bone_setter = Костный фиксатор
+cmu-medical-surgery-tool-category-bone_setter = Костоправ
 cmu-medical-surgery-tool-category-bone_gel = Костный гель
 cmu-medical-surgery-tool-category-bone_graft = Костный трансплантат
 cmu-medical-surgery-tool-category-organ_clamp = Зажим для органов

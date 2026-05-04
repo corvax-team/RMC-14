@@ -19,7 +19,9 @@
     color: "#ffbf58"
   - type: MCTimedDespawnDisappearanceVisuals
     maxAlpha: 0.36
-
+  - type: MCEdgeSpreader
+    range: 5
+    
 - type: entity
   parent: MCSmoke
   id: MCSmokeXenoTransvitox
