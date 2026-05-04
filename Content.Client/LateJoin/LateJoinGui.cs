@@ -3,6 +3,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Client.GameTicking.Managers;
 using Content.Client.Lobby;
+using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Controls;
 using Content.Client.Players.PlayTimeTracking;
 using Content.Client.UserInterface.Controls;
@@ -13,6 +14,7 @@ using Content.Shared.Roles;
 using Content.Shared.StatusIcon;
 using Robust.Client.Console;
 using Robust.Client.GameObjects;
+using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
@@ -23,6 +25,24 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client.LateJoin
 {
+    public readonly record struct LateJoinPalette(
+        Color HeaderBackground,
+        Color HeaderBorder,
+        Color HeaderText,
+        Color HeaderSubText,
+        Color CardBackground,
+        Color CardBorder,
+        Color InnerBackground,
+        Color InnerBorder,
+        Color SectionBackground,
+        Color SectionBorder,
+        Color SectionText,
+        Color BadgeBackground,
+        Color BadgeBorder,
+        Color BadgeText,
+        Color IconTint,
+        Color EmptyText);
+
     public sealed class LateJoinGui : DefaultCMWindow
     {
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -41,18 +61,19 @@ namespace Content.Client.LateJoin
 
         private readonly Dictionary<NetEntity, Dictionary<string, List<JobButton>>> _jobButtons = new();
         private readonly Dictionary<NetEntity, Dictionary<string, BoxContainer>> _jobCategories = new();
-        private readonly List<ScrollContainer> _jobLists = new();
+        private readonly List<Control> _stationSections = new();
 
         private readonly Control _base;
+        private LateJoinPalette _palette;
 
         public LateJoinGui()
         {
-            // CCM latejoin layout tweak: widen the window for expanded role rows.
-            MinSize = SetSize = new Vector2(540, 620);
+            MinSize = SetSize = new Vector2(700, 780);
             IoCManager.InjectDependencies(this);
             _sprites = _entitySystem.GetEntitySystem<SpriteSystem>();
             _gameTicker = _entitySystem.GetEntitySystem<ClientGameTicker>();
             _sawmill = _logManager.GetSawmill("latejoin.panel");
+            _palette = GetPalette();
 
             Title = Loc.GetString("late-join-gui-title");
 
@@ -60,6 +81,8 @@ namespace Content.Client.LateJoin
             {
                 Orientation = LayoutOrientation.Vertical,
                 VerticalExpand = true,
+                SeparationOverride = 8,
+                Margin = new Thickness(8),
             };
 
             Contents.AddChild(_base);
@@ -81,79 +104,98 @@ namespace Content.Client.LateJoin
         private void RebuildUI()
         {
             _base.RemoveAllChildren();
-            _jobLists.Clear();
+            _stationSections.Clear();
             _jobButtons.Clear();
             _jobCategories.Clear();
+            _palette = GetPalette();
 
             if (!_gameTicker.DisallowedLateJoin && _gameTicker.StationNames.Count == 0)
                 _sawmill.Warning("No stations exist, nothing to display in late-join GUI");
 
+            _base.AddChild(BuildWindowHeader());
+
+            var showStationTabs = _gameTicker.StationNames.Count > 1;
+            BoxContainer? stationTabs = null;
+            if (showStationTabs)
+            {
+                stationTabs = new BoxContainer
+                {
+                    Orientation = LayoutOrientation.Horizontal,
+                    SeparationOverride = 6,
+                    HorizontalExpand = true,
+                };
+                _base.AddChild(stationTabs);
+            }
+
+            var firstStation = true;
             foreach (var (id, name) in _gameTicker.StationNames)
             {
                 var jobList = new BoxContainer
                 {
                     Orientation = LayoutOrientation.Vertical,
-                    Margin = new Thickness(0, 0, 5f, 0),
+                    SeparationOverride = 6,
+                    HorizontalExpand = true,
                 };
+                _jobCategories[id] = new Dictionary<string, BoxContainer>();
 
-                var collapseButton = new ContainerButton()
-                {
-                    HorizontalAlignment = HAlignment.Right,
-                    ToggleMode = true,
-                    Children =
-                    {
-                        new TextureRect
-                        {
-                            StyleClasses = { OptionButton.StyleClassOptionTriangle },
-                            Margin = new Thickness(8, 0),
-                            HorizontalAlignment = HAlignment.Center,
-                            VerticalAlignment = VAlignment.Center,
-                        }
-                    }
-                };
-
-                _base.AddChild(new StripeBack()
-                {
-                    Children =
-                    {
-                        new PanelContainer()
-                        {
-                            Children =
-                            {
-                                new Label()
-                                {
-                                    StyleClasses = { "LabelBig" },
-                                    Text = name,
-                                    Align = Label.AlignMode.Center,
-                                },
-                                collapseButton
-                            }
-                        }
-                    }
-                });
-
-                var jobListScroll = new ScrollContainer()
+                var stationBody = new PanelContainer
                 {
                     VerticalExpand = true,
-                    Children = { jobList },
-                    Visible = false,
-                };
-
-                if (_jobLists.Count == 0)
-                    jobListScroll.Visible = true;
-
-                _jobLists.Add(jobListScroll);
-
-                _base.AddChild(jobListScroll);
-
-                collapseButton.OnToggled += _ =>
-                {
-                    foreach (var section in _jobLists)
+                    Visible = firstStation,
+                    PanelOverride = new StyleBoxFlat
                     {
-                        section.Visible = false;
-                    }
-                    jobListScroll.Visible = true;
+                        BackgroundColor = _palette.CardBackground,
+                        BorderColor = _palette.CardBorder,
+                        BorderThickness = new Thickness(1),
+                    },
                 };
+
+                var stationStack = new BoxContainer
+                {
+                    Orientation = LayoutOrientation.Vertical,
+                    SeparationOverride = 8,
+                    VerticalExpand = true,
+                    Margin = new Thickness(8),
+                };
+                stationBody.AddChild(stationStack);
+                stationStack.AddChild(BuildStationHeader(name));
+
+                var listShell = new PanelContainer
+                {
+                    VerticalExpand = true,
+                    PanelOverride = new StyleBoxFlat
+                    {
+                        BackgroundColor = _palette.InnerBackground,
+                        BorderColor = _palette.InnerBorder,
+                        BorderThickness = new Thickness(1),
+                    },
+                };
+                var jobListScroll = new ScrollContainer
+                {
+                    VerticalExpand = true,
+                    HScrollEnabled = false,
+                    Margin = new Thickness(6),
+                    Children = { jobList },
+                };
+                listShell.AddChild(jobListScroll);
+                stationStack.AddChild(listShell);
+
+                _stationSections.Add(stationBody);
+                _base.AddChild(stationBody);
+
+                if (stationTabs != null)
+                {
+                    var tabButton = new Button
+                    {
+                        Text = name,
+                        ToggleMode = true,
+                        Pressed = firstStation,
+                        HorizontalExpand = true,
+                        MinHeight = 34,
+                    };
+                    tabButton.OnPressed += _ => ShowStationSection(stationBody, tabButton, stationTabs);
+                    stationTabs.AddChild(tabButton);
+                }
 
                 var firstCategory = true;
                 var departments = _prototypeManager.EnumerateCM<DepartmentPrototype>().ToArray();
@@ -172,7 +214,6 @@ namespace Content.Client.LateJoin
                 foreach (var department in departments)
                 {
                     var departmentName = Loc.GetString(department.Name);
-                    _jobCategories[id] = new Dictionary<string, BoxContainer>();
                     var stationAvailable = _gameTicker.JobsAvailable[id];
                     var jobsAvailable = new List<JobPrototype>();
 
@@ -195,29 +236,35 @@ namespace Content.Client.LateJoin
                         Orientation = LayoutOrientation.Vertical,
                         Name = department.ID,
                         ToolTip = Loc.GetString("late-join-gui-jobs-amount-in-department-tooltip",
-                            ("departmentName", departmentName))
+                            ("departmentName", departmentName)),
+                        SeparationOverride = 4,
                     };
 
-                    if (firstCategory)
-                    {
-                        firstCategory = false;
-                    }
-                    else
+                    if (!firstCategory)
                     {
                         category.AddChild(new Control
                         {
-                            MinSize = new Vector2(0, 23),
+                            MinSize = new Vector2(0, 6),
                         });
                     }
+                    firstCategory = false;
 
                     category.AddChild(new PanelContainer
                     {
+                        PanelOverride = new StyleBoxFlat
+                        {
+                            BackgroundColor = _palette.SectionBackground,
+                            BorderColor = _palette.SectionBorder,
+                            BorderThickness = new Thickness(1),
+                        },
                         Children =
                         {
                             new Label
                             {
                                 StyleClasses = { "LabelBig" },
-                                Text = Loc.GetString("late-join-gui-department-jobs-label", ("departmentName", departmentName))
+                                Text = Loc.GetString("late-join-gui-department-jobs-label", ("departmentName", departmentName)),
+                                Margin = new Thickness(8, 4),
+                                FontColorOverride = _palette.SectionText,
                             }
                         }
                     });
@@ -229,42 +276,21 @@ namespace Content.Client.LateJoin
                     {
                         var value = stationAvailable[prototype.ID];
 
-                        var jobLabel = new Label
-                        {
-                            Margin = new Thickness(5f, 0, 0, 0)
-                        };
-
-                        var jobButton = new JobButton(jobLabel, prototype.ID, prototype.LocalizedName, value);
-                        // CCM latejoin layout tweak start
+                        var jobIcon = _prototypeManager.Index(prototype.Icon);
+                        var jobButton = new JobButton(_sprites.Frame0(jobIcon.Icon), prototype.ID, prototype.LocalizedName, value, _palette);
                         jobButton.MinSize = new Vector2(0, 32);
                         jobButton.HorizontalExpand = true;
-                        // CCM latejoin layout tweak end
-
-                        var jobSelector = new BoxContainer
-                        {
-                            Orientation = LayoutOrientation.Horizontal,
-                            HorizontalExpand = true
-                        };
-
-                        var icon = new TextureRect
-                        {
-                            TextureScale = new Vector2(2, 2),
-                            VerticalAlignment = VAlignment.Center,
-                            // CCM latejoin layout tweak: keep icon/text spacing stable in wider rows.
-                            Margin = new Thickness(2, 0, 6, 0),
-                        };
-
-                        var jobIcon = _prototypeManager.Index(prototype.Icon);
-                        icon.Texture = _sprites.Frame0(jobIcon.Icon);
-                        jobSelector.AddChild(icon);
-
-                        jobSelector.AddChild(jobLabel);
-                        jobButton.AddChild(jobSelector);
+                        jobButton.Margin = new Thickness(0, 0, 0, 2);
                         category.AddChild(jobButton);
 
                         jobButton.OnPressed += _ => SelectedId.Invoke((id, jobButton.JobId));
 
-                        if (!_jobRequirements.IsAllowed(prototype, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
+                        var selectedProfile = _preferencesManager.Preferences is { } prefs &&
+                            prefs.TryGetSelectedCharacter(out var selectedCharacter)
+                            ? selectedCharacter as HumanoidCharacterProfile
+                            : null;
+
+                        if (!_jobRequirements.IsAllowed(prototype, selectedProfile, out var reason))
                         {
                             jobButton.Disabled = true;
 
@@ -274,15 +300,7 @@ namespace Content.Client.LateJoin
                                 tooltip.SetMessage(reason);
                                 jobButton.TooltipSupplier = _ => tooltip;
                             }
-
-                            jobSelector.AddChild(new TextureRect
-                            {
-                                TextureScale = new Vector2(0.4f, 0.4f),
-                                Stretch = TextureRect.StretchMode.KeepCentered,
-                                Texture = _sprites.Frame0(new SpriteSpecifier.Texture(new ("/Textures/Interface/Nano/lock.svg.192dpi.png"))),
-                                HorizontalExpand = true,
-                                HorizontalAlignment = HAlignment.Right,
-                            });
+                            jobButton.SetLocked(_sprites.Frame0(new SpriteSpecifier.Texture(new("/Textures/Interface/Nano/lock.svg.192dpi.png"))));
                         }
                         else if (value == 0)
                         {
@@ -297,7 +315,152 @@ namespace Content.Client.LateJoin
                         _jobButtons[id][prototype.ID].Add(jobButton);
                     }
                 }
+
+                firstStation = false;
             }
+        }
+
+        private void ShowStationSection(Control visibleSection, Button pressedButton, BoxContainer stationTabs)
+        {
+            foreach (var section in _stationSections)
+            {
+                section.Visible = section == visibleSection;
+            }
+
+            foreach (var child in stationTabs.Children)
+            {
+                if (child is Button button)
+                    button.Pressed = button == pressedButton;
+            }
+        }
+
+        private Control BuildWindowHeader()
+        {
+            var header = new PanelContainer
+            {
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = _palette.HeaderBackground,
+                    BorderColor = _palette.HeaderBorder,
+                    BorderThickness = new Thickness(1),
+                },
+            };
+
+            header.AddChild(new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                Margin = new Thickness(10, 8),
+                SeparationOverride = 2,
+                Children =
+                {
+                    new Label
+                    {
+                        Text = Title,
+                        StyleClasses = { "LabelHeading" },
+                        FontColorOverride = _palette.HeaderText,
+                    },
+                    new Label
+                    {
+                        Text = Loc.GetString("late-join-gui-title"),
+                        FontColorOverride = _palette.HeaderSubText,
+                    },
+                },
+            });
+
+            return header;
+        }
+
+        private Control BuildStationHeader(string stationName)
+        {
+            var panel = new PanelContainer
+            {
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = _palette.SectionBackground.WithAlpha(0.82f),
+                    BorderColor = _palette.SectionBorder,
+                    BorderThickness = new Thickness(1),
+                },
+            };
+
+            panel.AddChild(new BoxContainer
+            {
+                Orientation = LayoutOrientation.Vertical,
+                Margin = new Thickness(8, 6),
+                Children =
+                {
+                    new Label
+                    {
+                        Text = stationName,
+                        StyleClasses = { "LabelBig" },
+                        FontColorOverride = _palette.HeaderText,
+                    },
+                    new Label
+                    {
+                        Text = Loc.GetString("late-join-gui-jobs-amount-in-department-tooltip", ("departmentName", stationName)),
+                        FontColorOverride = _palette.HeaderSubText,
+                    },
+                },
+            });
+
+            return panel;
+        }
+
+        private static LateJoinPalette GetPalette()
+        {
+            return StyleNano.CurrentTheme switch
+            {
+                StyleNano.UiColorTheme.Blue => new LateJoinPalette(
+                    Color.FromHex("#1A335D").WithAlpha(0.96f),
+                    Color.FromHex("#4D78B6").WithAlpha(0.95f),
+                    Color.FromHex("#EEF5FF"),
+                    Color.FromHex("#B8CAE5"),
+                    Color.FromHex("#0E1A2B").WithAlpha(0.96f),
+                    Color.FromHex("#30507F").WithAlpha(0.95f),
+                    Color.FromHex("#12233A").WithAlpha(0.92f),
+                    Color.FromHex("#426189").WithAlpha(0.90f),
+                    Color.FromHex("#203A61").WithAlpha(0.94f),
+                    Color.FromHex("#5C82B8").WithAlpha(0.95f),
+                    Color.FromHex("#EAF2FF"),
+                    Color.FromHex("#355C92").WithAlpha(0.98f),
+                    Color.FromHex("#93B7EC").WithAlpha(0.98f),
+                    Color.White,
+                    Color.FromHex("#D6E8FF"),
+                    Color.FromHex("#A6BCD9")),
+                StyleNano.UiColorTheme.Gray => new LateJoinPalette(
+                    Color.FromHex("#323B47").WithAlpha(0.96f),
+                    Color.FromHex("#738396").WithAlpha(0.95f),
+                    Color.FromHex("#F2F6FA"),
+                    Color.FromHex("#C7D0DA"),
+                    Color.FromHex("#181D24").WithAlpha(0.96f),
+                    Color.FromHex("#4C5A6B").WithAlpha(0.95f),
+                    Color.FromHex("#1F252D").WithAlpha(0.92f),
+                    Color.FromHex("#637184").WithAlpha(0.90f),
+                    Color.FromHex("#36414D").WithAlpha(0.94f),
+                    Color.FromHex("#8191A3").WithAlpha(0.95f),
+                    Color.FromHex("#F2F5F8"),
+                    Color.FromHex("#566374").WithAlpha(0.98f),
+                    Color.FromHex("#AEB9C7").WithAlpha(0.98f),
+                    Color.White,
+                    Color.FromHex("#E4EAF1"),
+                    Color.FromHex("#B6C0CB")),
+                _ => new LateJoinPalette(
+                    Color.FromHex("#13371C").WithAlpha(0.96f),
+                    Color.FromHex("#3E8050").WithAlpha(0.95f),
+                    Color.FromHex("#EFFEF2"),
+                    Color.FromHex("#C5E1CB"),
+                    Color.FromHex("#08140B").WithAlpha(0.96f),
+                    Color.FromHex("#2A5D36").WithAlpha(0.95f),
+                    Color.FromHex("#0E1F12").WithAlpha(0.92f),
+                    Color.FromHex("#356B42").WithAlpha(0.90f),
+                    Color.FromHex("#184726").WithAlpha(0.94f),
+                    Color.FromHex("#4D9962").WithAlpha(0.95f),
+                    Color.FromHex("#F0FFF3"),
+                    Color.FromHex("#2E7B42").WithAlpha(0.98f),
+                    Color.FromHex("#8FE0A5").WithAlpha(0.98f),
+                    Color.White,
+                    Color.FromHex("#DDFBE4"),
+                    Color.FromHex("#A3CFAC")),
+            };
         }
 
         private void JobsAvailableUpdated(IReadOnlyDictionary<NetEntity, Dictionary<ProtoId<JobPrototype>, int?>> updatedJobs)
@@ -348,20 +511,106 @@ namespace Content.Client.LateJoin
         public string JobId { get; }
         public string JobLocalisedName { get; }
         public int? Amount { get; private set; }
+        private readonly Label _amountLabel;
+        private readonly PanelContainer _amountBadge;
+        private readonly TextureRect _statusTexture;
+        private readonly LateJoinPalette _palette;
         private bool _initialised = false;
 
-        public JobButton(Label jobLabel, ProtoId<JobPrototype> jobId, string jobLocalisedName, int? amount)
+        public JobButton(Texture? iconTexture, ProtoId<JobPrototype> jobId, string jobLocalisedName, int? amount, LateJoinPalette palette)
         {
-            // CCM latejoin layout tweak start
-            JobLabel = jobLabel;
+            _palette = palette;
+            JobLabel = new Label
+            {
+                HorizontalExpand = true,
+                ClipText = true,
+                FontColorOverride = Color.White,
+            };
             JobId = jobId;
             JobLocalisedName = jobLocalisedName;
-            JobLabel.HorizontalExpand = true;
-            JobLabel.ClipText = true;
-            // CCM latejoin layout tweak end
+            _amountLabel = new Label
+            {
+                HorizontalAlignment = HAlignment.Center,
+                VerticalAlignment = VAlignment.Center,
+                FontColorOverride = palette.BadgeText,
+            };
+            _amountBadge = new PanelContainer
+            {
+                MinWidth = 34,
+                HorizontalAlignment = HAlignment.Right,
+                VerticalAlignment = VAlignment.Center,
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = palette.BadgeBackground,
+                    BorderColor = palette.BadgeBorder,
+                    BorderThickness = new Thickness(1),
+                },
+                Children =
+                {
+                    new BoxContainer
+                    {
+                        Orientation = LayoutOrientation.Vertical,
+                        Margin = new Thickness(8, 2),
+                        Children = { _amountLabel },
+                    },
+                },
+            };
+            _statusTexture = new TextureRect
+            {
+                Visible = false,
+                HorizontalAlignment = HAlignment.Right,
+                VerticalAlignment = VAlignment.Center,
+                TextureScale = new Vector2(0.45f, 0.45f),
+                Stretch = TextureRect.StretchMode.KeepCentered,
+            };
+
+            var icon = new TextureRect
+            {
+                Texture = iconTexture,
+                TextureScale = new Vector2(2f, 2f),
+                VerticalAlignment = VAlignment.Center,
+                HorizontalAlignment = HAlignment.Center,
+                ModulateSelfOverride = palette.IconTint,
+            };
+
+            var iconPanel = new PanelContainer
+            {
+                MinSize = new Vector2(28, 28),
+                VerticalAlignment = VAlignment.Center,
+                Margin = new Thickness(0, 0, 8, 0),
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = palette.SectionBackground.WithAlpha(0.72f),
+                    BorderColor = palette.SectionBorder.WithAlpha(0.92f),
+                    BorderThickness = new Thickness(1),
+                },
+                Children = { icon },
+            };
+
+            AddChild(new BoxContainer
+            {
+                Orientation = LayoutOrientation.Horizontal,
+                HorizontalExpand = true,
+                Margin = new Thickness(6, 4),
+                Children =
+                {
+                    iconPanel,
+                    JobLabel,
+                    _amountBadge,
+                    _statusTexture,
+                },
+            });
+
             RefreshLabel(amount);
             AddStyleClass(StyleClassButton);
             _initialised = true;
+        }
+
+        public void SetLocked(Texture? texture)
+        {
+            _statusTexture.Texture = texture;
+            _statusTexture.Visible = texture != null;
+            _amountBadge.Visible = texture == null;
         }
 
         public void RefreshLabel(int? amount)
@@ -370,11 +619,22 @@ namespace Content.Client.LateJoin
             {
                 return;
             }
-            Amount = amount;
 
-            JobLabel.Text = Amount != null ?
-                Loc.GetString("late-join-gui-job-slot-capped", ("jobName", JobLocalisedName), ("amount", Amount)) :
-                Loc.GetString("late-join-gui-job-slot-uncapped", ("jobName", JobLocalisedName));
+            Amount = amount;
+            JobLabel.Text = JobLocalisedName;
+            JobLabel.FontColorOverride = amount == 0 ? _palette.EmptyText : Color.White;
+            _amountLabel.Text = amount == null ? "∞" : amount.Value.ToString();
+            _amountLabel.FontColorOverride = amount == 0 ? _palette.EmptyText : _palette.BadgeText;
+            _amountBadge.PanelOverride = new StyleBoxFlat
+            {
+                BackgroundColor = amount == 0
+                    ? _palette.BadgeBackground.WithAlpha(0.55f)
+                    : _palette.BadgeBackground,
+                BorderColor = amount == 0
+                    ? _palette.BadgeBorder.WithAlpha(0.65f)
+                    : _palette.BadgeBorder,
+                BorderThickness = new Thickness(1),
+            };
         }
     }
 }

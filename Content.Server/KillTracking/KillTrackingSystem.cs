@@ -1,9 +1,13 @@
 using Content.Server.NPC.HTN;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
+using Content.Shared.Vehicle.Components;
 using Robust.Shared.Player;
 
 namespace Content.Server.KillTracking;
@@ -128,6 +132,31 @@ public sealed class KillTrackingSystem : EntitySystem
             if (TryComp<ActorComponent>(current, out var actor))
             {
                 source = new KillPlayerSource(actor.PlayerSession.UserId);
+                return true;
+            }
+
+            if (TryComp(current, out MindContainerComponent? mindContainer) &&
+                mindContainer.Mind is { } mindId &&
+                TryComp(mindId, out MindComponent? mind) &&
+                mind.UserId is { } mindUserId)
+            {
+                source = new KillPlayerSource(mindUserId);
+                return true;
+            }
+
+            if (TryComp(current, out VehicleWeaponsComponent? vehicleWeapons) &&
+                vehicleWeapons.Operator is { } weaponOperator &&
+                weaponOperator != current &&
+                TryResolveKillSource(weaponOperator, visited, out source))
+            {
+                return true;
+            }
+
+            if (TryComp(current, out VehicleComponent? vehicle) &&
+                vehicle.Operator is { } vehicleOperator &&
+                vehicleOperator != current &&
+                TryResolveKillSource(vehicleOperator, visited, out source))
+            {
                 return true;
             }
 

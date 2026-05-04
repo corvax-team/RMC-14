@@ -46,12 +46,12 @@ public sealed class RMCLobbyUIController : UIController
         if (larva == 0)
         {
             _joinXenoWindow.Label.Text = Loc.GetString("rmc-lobby-no-burrowed-larva");
-            _joinXenoWindow.Buttons.Visible = false;
+            _joinXenoWindow.SetAvailability(false);
         }
         else
         {
             _joinXenoWindow.Label.Text = Loc.GetString("rmc-lobby-burrowed-larva-available");
-            _joinXenoWindow.Buttons.Visible = true;
+            _joinXenoWindow.SetAvailability(true);
         }
 
         system.RequestBurrowedLarvaStatus();

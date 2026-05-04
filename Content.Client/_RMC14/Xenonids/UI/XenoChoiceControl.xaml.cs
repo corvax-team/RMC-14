@@ -10,20 +10,32 @@ namespace Content.Client._RMC14.Xenonids.UI;
 [Virtual]
 public partial class XenoChoiceControl : Control
 {
+    private FormattedMessage? _message;
+
     public XenoChoiceControl()
     {
         RobustXamlLoader.Load(this);
     }
 
-    public void Set(string name, Texture? texture)
+    public void Set(string name, Texture? texture, Color? textColor = null)
     {
-        NameLabel.SetMessage(name);
+        var msg = new FormattedMessage();
+        msg.AddText(name);
+        Set(msg, texture, textColor);
+    }
+
+    public void Set(FormattedMessage msg, Texture? texture, Color? textColor = null)
+    {
+        _message = new FormattedMessage(msg);
+        NameLabel.SetMessage(_message, defaultColor: textColor);
         Texture.Texture = texture;
     }
 
-    public void Set(FormattedMessage msg, Texture? texture)
+    public void SetTextColor(Color? textColor)
     {
-        NameLabel.SetMessage(msg);
-        Texture.Texture = texture;
+        if (_message == null)
+            return;
+
+        NameLabel.SetMessage(_message, defaultColor: textColor);
     }
 }

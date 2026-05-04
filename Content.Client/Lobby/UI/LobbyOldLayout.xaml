@@ -60,41 +60,54 @@
                                                  HorizontalExpand="True">
                                 <BoxContainer Orientation="Vertical" HorizontalAlignment="Center" MaxWidth="840"
                                               HorizontalExpand="True">
-                                    <BoxContainer Orientation="Horizontal" SeparationOverride="6" Margin="6 5 6 5"
+                                    <BoxContainer Orientation="Horizontal" SeparationOverride="10" Margin="6 5 6 5"
                                                   MinHeight="38" HorizontalExpand="True">
-                                        <BoxContainer Orientation="Horizontal" HorizontalExpand="True"
-                                                      HorizontalAlignment="Left">
+                                        <BoxContainer Orientation="Horizontal"
+                                                      MinWidth="210"
+                                                      MaxWidth="210"
+                                                      HorizontalAlignment="Left"
+                                                      VerticalAlignment="Center">
                                             <Button Name="ObserveButton" Access="Public"
                                                     Text="{Loc 'ui-lobby-observe-button'}"
                                                     StyleClasses="OldLobbyButton"
+                                                    MinWidth="170"
                                                     MinHeight="30"
-                                                    HorizontalAlignment="Left" />
+                                                    HorizontalAlignment="Left"
+                                                    TextAlign="Center" />
                                         </BoxContainer>
-                                        <BoxContainer Orientation="Horizontal" HorizontalExpand="True"
-                                                      HorizontalAlignment="Center">
+                                        <BoxContainer Orientation="Horizontal"
+                                                      HorizontalExpand="True"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center">
                                             <Label Name="StartTimeLabel" Access="Public"
-                                                   StyleClasses="LabelBig OldLobbyHeading"
+                                                   StyleClasses="LabelHeadingBigger OldLobbyHeading OldLobbyCenteredText"
                                                    MinWidth="320"
                                                    MinHeight="30"
                                                    HorizontalExpand="True"
                                                    HorizontalAlignment="Center"
                                                    VAlign="Center" />
                                         </BoxContainer>
-                                        <BoxContainer Orientation="Horizontal" HorizontalExpand="True"
-                                                      HorizontalAlignment="Right" SeparationOverride="6">
+                                        <BoxContainer Orientation="Horizontal"
+                                                      MinWidth="210"
+                                                      HorizontalAlignment="Right"
+                                                      VerticalAlignment="Center"
+                                                      SeparationOverride="6">
                                             <Button Name="JoinHiveButton" Access="Public"
                                                     Text="{Loc 'ui-lobby-join-hive-button'}"
                                                     StyleClasses="OldLobbyButton" Visible="False" MinWidth="190"
                                                     MinHeight="30"
+                                                    TextAlign="Center"
                                                     HorizontalAlignment="Right" />
                                             <Button Name="JoinUsmcButton" Access="Public"
                                                     Text="{Loc 'ui-lobby-join-uscm-button'}"
                                                     StyleClasses="OldLobbyButton" MinWidth="190" MinHeight="30"
+                                                    TextAlign="Center"
                                                     HorizontalAlignment="Right"
                                                     Visible="False" />
                                             <Button Name="ReadyButton" Access="Public" ToggleMode="True"
                                                     Text="{Loc 'ui-lobby-ready-up-button'}"
                                                     StyleClasses="OldLobbyButton" MinWidth="170" MinHeight="30"
+                                                    TextAlign="Center"
                                                     HorizontalAlignment="Right" />
                                         </BoxContainer>
                                     </BoxContainer>
@@ -136,18 +149,28 @@
                     </BoxContainer>
                     <controls:HLine Color="{x:Static style:StyleNano.OldLobbyGold}" Thickness="2" />
                     <BoxContainer Orientation="Horizontal" MinSize="0 40" Name="TopButtonBar"
-                                  SeparationOverride="4" HorizontalExpand="True" HorizontalAlignment="Right">
+                                  SeparationOverride="4" HorizontalExpand="True" HorizontalAlignment="Stretch">
                         <Button Name="AHelpButton" Access="Public" Text="{Loc 'ui-lobby-ahelp-button'}"
-                                StyleClasses="OldLobbyButton" />
+                                StyleClasses="OldLobbyButton"
+                                HorizontalExpand="True"
+                                SizeFlagsStretchRatio="0.84" />
                         <Button Name="PollsButton" Access="Public" Text="{Loc 'ui-lobby-polls-button'}"
-                                StyleClasses="OldLobbyButton" />
+                                StyleClasses="OldLobbyButton"
+                                HorizontalExpand="True"
+                                SizeFlagsStretchRatio="1.18" />
                         <Button Name="OptionsButton" Access="Public" Text="{Loc 'ui-lobby-options-button'}"
-                                StyleClasses="OldLobbyButton" />
+                                StyleClasses="OldLobbyButton"
+                                HorizontalExpand="True"
+                                SizeFlagsStretchRatio="1.06" />
                         <Button Name="LeaveButton" Access="Public" Text="{Loc 'ui-lobby-leave-button'}"
-                                StyleClasses="OldLobbyButton" />
+                                StyleClasses="OldLobbyButton"
+                                HorizontalExpand="True"
+                                SizeFlagsStretchRatio="0.84" />
                         <Button Name="SponsorshipButton" Access="Public"
                                 Text="{Loc 'ui-lobby-taskbar-donate'}"
-                                StyleClasses="OldLobbyButton" />
+                                StyleClasses="OldLobbyButton"
+                                HorizontalExpand="True"
+                                SizeFlagsStretchRatio="1.22" />
                     </BoxContainer>
                     <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                         <Button Name="LinkDiscordButton" Access="Public"

@@ -87,7 +87,10 @@ namespace Content.Client.Lobby
 
             var l = lowest.Value;
             characters.Add(l, profile);
-            Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor, Preferences.ConstructionFavorites);
+            var selectedIndex = characters.ContainsKey(Preferences.SelectedCharacterIndex)
+                ? Preferences.SelectedCharacterIndex
+                : l;
+            Preferences = new PlayerPreferences(characters, selectedIndex, Preferences.AdminOOCColor, Preferences.ConstructionFavorites);
 
             UpdateCharacter(profile, l);
         }
@@ -99,8 +102,17 @@ namespace Content.Client.Lobby
 
         public void DeleteCharacter(int slot)
         {
-            var characters = Preferences.Characters.Where(p => p.Key != slot);
-            Preferences = new PlayerPreferences(characters, Preferences.SelectedCharacterIndex, Preferences.AdminOOCColor, Preferences.ConstructionFavorites);
+            if (!Preferences.Characters.ContainsKey(slot) || Preferences.Characters.Count <= 1)
+                return;
+
+            var characters = new Dictionary<int, ICharacterProfile>(Preferences.Characters);
+            characters.Remove(slot);
+
+            var selectedIndex = Preferences.SelectedCharacterIndex;
+            if (!characters.ContainsKey(selectedIndex))
+                selectedIndex = characters.Keys.First();
+
+            Preferences = new PlayerPreferences(characters, selectedIndex, Preferences.AdminOOCColor, Preferences.ConstructionFavorites);
             var msg = new MsgDeleteCharacter
             {
                 Slot = slot

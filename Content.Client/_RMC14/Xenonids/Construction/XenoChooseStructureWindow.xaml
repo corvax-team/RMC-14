@@ -2,11 +2,22 @@
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.Construction"
     Title="{Loc cm-xeno-choose-resin-structure}"
-    MinSize="300 300">
+    MinSize="420 460"
+    SetSize="440 500">
     <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
-        <BoxContainer Orientation="Vertical">
-            <Label Name="NodeCountLabel" Access="Public" Text="" Visible="False" />
-            <BoxContainer Orientation="Vertical" Name="StructureContainer" Access="Public" />
+        <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6">
+            <PanelContainer Name="HeaderPanel" Access="Public" HorizontalExpand="True">
+                <BoxContainer Orientation="Vertical" Margin="8 7 8 8" SeparationOverride="3">
+                    <Label Name="WindowTitleLabel" Access="Public"
+                           Text="{Loc cm-xeno-choose-resin-structure}"
+                           StyleClasses="LabelBig" HorizontalExpand="True" />
+                    <Label Name="NodeCountLabel" Access="Public" Text="" Visible="False" />
+                </BoxContainer>
+            </PanelContainer>
+            <PanelContainer Name="StructureListPanel" Access="Public" HorizontalExpand="True" VerticalExpand="True">
+                <BoxContainer Orientation="Vertical" Margin="6" SeparationOverride="4"
+                              Name="StructureContainer" Access="Public" />
+            </PanelContainer>
         </BoxContainer>
     </ScrollContainer>
 </cc:XenoChooseStructureWindow>

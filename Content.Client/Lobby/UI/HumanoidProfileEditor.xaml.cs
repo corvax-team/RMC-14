@@ -106,6 +106,7 @@ namespace Content.Client.Lobby.UI
         public event Action? Save;
         public event Action<HumanoidCharacterProfile?>? ProfileChanged;
         public event Action<bool>? ShowClothesChanged;
+        public event Action? ImportExportStateChanged;
 
         /// <summary>
         /// Entity used for the profile editor preview
@@ -157,6 +158,24 @@ namespace Content.Client.Lobby.UI
         public event Action<List<ProtoId<GuideEntryPrototype>>>? OnOpenGuidebook;
 
         private ISawmill _sawmill;
+
+        private HumanoidCharacterProfile? GetSelectedPreferenceProfile()
+        {
+            if (_preferencesManager.Preferences is not { } prefs ||
+                !prefs.TryGetSelectedCharacter(out var profile))
+            {
+                return null;
+            }
+
+            return profile as HumanoidCharacterProfile;
+        }
+
+        private int? GetSelectedPreferenceSlot()
+        {
+            return _preferencesManager.Preferences is { } prefs && prefs.TryGetSelectedCharacter(out _)
+                ? prefs.SelectedCharacterIndex
+                : null;
+        }
 
         public HumanoidProfileEditor(
             IClientPreferencesManager preferencesManager,
@@ -210,7 +229,7 @@ namespace Content.Client.Lobby.UI
 
             ResetButton.OnPressed += args =>
             {
-                SetProfile((HumanoidCharacterProfile?) _preferencesManager.Preferences?.SelectedCharacter, _preferencesManager.Preferences?.SelectedCharacterIndex);
+                SetProfile(GetSelectedPreferenceProfile(), GetSelectedPreferenceSlot());
             };
 
             SaveButton.OnPressed += args =>
@@ -990,7 +1009,7 @@ namespace Content.Client.Lobby.UI
                 selector.Select(Profile?.AntagPreferences.Contains(antag.ID) == true ? 0 : 1);
 
                 var requirements = _entManager.System<SharedRoleSystem>().GetAntagRequirement(antag);
-                if (!_requirements.CheckRoleRequirements(requirements, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
+                if (!_requirements.CheckRoleRequirements(requirements, GetSelectedPreferenceProfile(), out var reason))
                 {
                     selector.LockRequirements(reason);
                     Profile = Profile?.WithAntagPreference(antag.ID, false);
@@ -1027,7 +1046,7 @@ namespace Content.Client.Lobby.UI
             ProfileChanged?.Invoke(Profile);
             // CCM rework lobby - end
             // If it equals default then reset the button.
-            if (Profile == null || _preferencesManager.Preferences?.SelectedCharacter.MemberwiseEquals(Profile) == true)
+            if (Profile == null || GetSelectedPreferenceProfile()?.MemberwiseEquals(Profile) == true)
             {
                 IsDirty = false;
                 return;
@@ -1076,9 +1095,7 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         public void ResetToDefault()
         {
-            SetProfile(
-                (HumanoidCharacterProfile?) _preferencesManager.Preferences?.SelectedCharacter,
-                _preferencesManager.Preferences?.SelectedCharacterIndex);
+            SetProfile(GetSelectedPreferenceProfile(), GetSelectedPreferenceSlot());
         }
 
         public void RequestSave()
@@ -1086,11 +1103,22 @@ namespace Content.Client.Lobby.UI
             Save?.Invoke();
         }
 
+        public void RequestImport()
+        {
+            ImportProfile();
+        }
+
+        public void RequestExport()
+        {
+            ExportProfile();
+        }
+
+        public bool CanImportProfile => CharacterSlot != null && Profile != null && !_exporting;
+        public bool CanExportProfile => Profile != null && !_exporting;
+
         public void RequestReset()
         {
-            SetProfile(
-                (HumanoidCharacterProfile?) _preferencesManager.Preferences?.SelectedCharacter,
-                _preferencesManager.Preferences?.SelectedCharacterIndex);
+            SetProfile(GetSelectedPreferenceProfile(), GetSelectedPreferenceSlot());
         }
 
         /// <summary>
@@ -1125,6 +1153,7 @@ namespace Content.Client.Lobby.UI
             UpdateBarkSettings();
             UpdateOriginButton();
             UpdateReligionButton();
+            ImportExportStateChanged?.Invoke();
             BackgroundInfoButton.Disabled = false;
             SetBackgroundInfoExpanded(false);
 
@@ -1398,7 +1427,7 @@ namespace Content.Client.Lobby.UI
                     icon.Texture = _sprite.Frame0(jobIcon.Icon);
                     selector.Setup(items, job.LocalizedName, 280, job.LocalizedDescription, icon, job.Guides);
 
-                    if (!_requirements.IsAllowed(job, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
+                    if (!_requirements.IsAllowed(job, GetSelectedPreferenceProfile(), out var reason))
                     {
                         selector.LockRequirements(reason);
                     }
@@ -2864,6 +2893,7 @@ namespace Content.Client.Lobby.UI
             _exporting = true;
             ImportButton.Disabled = true;
             ExportButton.Disabled = true;
+            ImportExportStateChanged?.Invoke();
         }
 
         private void EndExport()
@@ -2871,6 +2901,7 @@ namespace Content.Client.Lobby.UI
             _exporting = false;
             ImportButton.Disabled = false;
             ExportButton.Disabled = false;
+            ImportExportStateChanged?.Invoke();
         }
     }
 }

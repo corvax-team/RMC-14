@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Client.Stylesheets;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.UserInterface.Controls;
@@ -56,26 +57,18 @@ public sealed class MenuButton : ContainerButton
         IoCManager.InjectDependencies(this);
         _styleNormal = new StyleBoxFlat
         {
-            BackgroundColor = Color.FromHex("#90A9DB").WithAlpha(0.94f),
-            BorderColor = Color.FromHex("#90A9DB").WithAlpha(0.98f),
             BorderThickness = new Thickness(1),
         };
         _styleHover = new StyleBoxFlat
         {
-            BackgroundColor = Color.Transparent,
-            BorderColor = Color.FromHex("#90A9DB").WithAlpha(0.98f),
             BorderThickness = new Thickness(1),
         };
         _stylePressed = new StyleBoxFlat
         {
-            BackgroundColor = Color.FromHex("#7088B8").WithAlpha(0.30f),
-            BorderColor = Color.FromHex("#7088B8").WithAlpha(0.96f),
             BorderThickness = new Thickness(1),
         };
         _styleDisabled = new StyleBoxFlat
         {
-            BackgroundColor = Color.FromHex("#56617A").WithAlpha(0.84f),
-            BorderColor = Color.FromHex("#56617A").WithAlpha(0.92f),
             BorderThickness = new Thickness(1),
         };
         _buttonIcon = new TextureRect()
@@ -106,6 +99,7 @@ public sealed class MenuButton : ContainerButton
         };
         AddChild(_root);
         ToggleMode = true;
+        UpdateThemePalette();
         StyleBoxOverride = _styleNormal;
     }
 
@@ -143,6 +137,8 @@ public sealed class MenuButton : ContainerButton
 
     private void UpdateChildColors()
     {
+        UpdateThemePalette();
+
         if (_buttonIcon == null || _buttonLabel == null) return;
         switch (DrawMode)
         {
@@ -177,5 +173,38 @@ public sealed class MenuButton : ContainerButton
     {
         base.DrawModeChanged();
         UpdateChildColors();
+    }
+
+    private void UpdateThemePalette()
+    {
+        var baseColor = Blend(StyleNano.ButtonColorDefault, Color.White, 0.16f).WithAlpha(0.96f);
+        var hoverColor = Blend(StyleNano.ButtonColorHovered, Color.White, 0.12f).WithAlpha(0.98f);
+        var pressedColor = Blend(StyleNano.ButtonColorPressed, Color.White, 0.08f).WithAlpha(0.96f);
+        var disabledColor = Blend(StyleNano.ButtonColorDisabled, Color.White, 0.04f).WithAlpha(0.86f);
+        var borderColor = Blend(StyleNano.UiButtonBorder, Color.White, 0.16f).WithAlpha(0.98f);
+        var pressedBorderColor = Blend(StyleNano.UiButtonBorder, Color.White, 0.26f).WithAlpha(0.98f);
+        var disabledBorderColor = Blend(StyleNano.UiButtonBorder, Color.White, 0.08f).WithAlpha(0.92f);
+
+        _styleNormal.BackgroundColor = baseColor;
+        _styleNormal.BorderColor = borderColor;
+
+        _styleHover.BackgroundColor = hoverColor;
+        _styleHover.BorderColor = borderColor;
+
+        _stylePressed.BackgroundColor = pressedColor;
+        _stylePressed.BorderColor = pressedBorderColor;
+
+        _styleDisabled.BackgroundColor = disabledColor;
+        _styleDisabled.BorderColor = disabledBorderColor;
+    }
+
+    private static Color Blend(Color source, Color target, float factor)
+    {
+        factor = Math.Clamp(factor, 0f, 1f);
+        return new Color(
+            source.R + (target.R - source.R) * factor,
+            source.G + (target.G - source.G) * factor,
+            source.B + (target.B - source.B) * factor,
+            source.A + (target.A - source.A) * factor);
     }
 }

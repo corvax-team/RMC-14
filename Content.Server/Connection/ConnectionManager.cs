@@ -50,6 +50,8 @@ namespace Content.Server.Connection
     /// </summary>
     public sealed partial class ConnectionManager : IConnectionManager
     {
+        internal const string HiddenBanDisconnectReason = "Failed to establish connection - no response from remote host";
+
         [Dependency] private readonly IPlayerManager _plyMgr = default!;
         [Dependency] private readonly IServerNetManager _netMgr = default!;
         [Dependency] private readonly IServerDbManager _db = default!;
@@ -214,6 +216,10 @@ namespace Content.Server.Connection
             var addr = e.IP.Address;
             var userId = e.UserId;
             ImmutableArray<byte>? hwId = e.UserData.HWId;
+
+            if (await _db.GetHiddenBanStatusAsync(userId))
+                return (ConnectionDenyReason.HiddenBan, HiddenBanDisconnectReason, null);
+
             if (hwId.Value.Length == 0 || !_cfg.GetCVar(CCVars.BanHardwareIds))
             {
                 // HWId not available for user's platform, don't look it up.

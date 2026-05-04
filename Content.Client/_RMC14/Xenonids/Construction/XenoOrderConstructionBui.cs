@@ -30,7 +30,7 @@ public sealed class XenoOrderConstructionBui : BoundUserInterface
         base.Open();
 
         _window = this.CreateWindow<XenoChooseStructureWindow>();
-        _window.Title = Loc.GetString("cm-xeno-order-construction");
+        _window.SetDisplayTitle(Loc.GetString("cm-xeno-order-construction"));
         _buttons.Clear();
 
         if (EntMan.TryGetComponent(Owner, out XenoConstructionComponent? xeno))
@@ -44,6 +44,7 @@ public sealed class XenoOrderConstructionBui : BoundUserInterface
                 control.Button.ToggleMode = false;
 
                 control.Set(structure.Name, _sprite.Frame0(structure));
+                _window.StyleChoiceControl(control, false);
 
                 control.Button.OnPressed += _ =>
                 {

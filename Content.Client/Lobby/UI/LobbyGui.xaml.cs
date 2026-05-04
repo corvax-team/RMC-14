@@ -177,6 +177,13 @@ namespace Content.Client.Lobby.UI
         public LobbyCharacterPreviewPanel OldCharacterPreview => _oldLayout.CharacterPreview;
         private bool IsOldLayoutActive => string.Equals(_cfg.GetCVar(RMCCVars.RMCLobbyUiStyle), "old", StringComparison.OrdinalIgnoreCase);
 
+        public void SetLobbyChatMain(bool setting)
+        {
+            Chat.Main = false;
+            _oldLayout.Chat.Main = false;
+            (IsOldLayoutActive ? _oldLayout.Chat : Chat).Main = setting;
+        }
+
         public void SetOldRoundCountdownVisible(bool visible)
         {
             _oldLayout.StartTimeLabel.Visible = visible;
@@ -506,6 +513,7 @@ namespace Content.Client.Lobby.UI
             _oldLayout.RightSide.Visible = _oldRightPanelVisible;
             _oldLayout.ExpandPanel.Visible = !_oldRightPanelVisible;
             _oldLayout.Chat.SetLobbyTheme(false, false);
+            SetLobbyChatMain(true);
             ApplyLobbyColumnLayout();
             _voteLastSize = Vector2.Zero;
 

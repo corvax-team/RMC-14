@@ -189,7 +189,7 @@ public sealed class CCMStatsSystem : EntitySystem
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
-        if (_ticker.RunLevel != GameRunLevel.InRound)
+        if (!IsRoundStatsTrackingActive())
             return;
 
         if (HasComp<MarineComponent>(ev.Mob))
@@ -202,7 +202,7 @@ public sealed class CCMStatsSystem : EntitySystem
 
     private void OnPlayerAttached(PlayerAttachedEvent ev)
     {
-        if (_ticker.RunLevel != GameRunLevel.InRound)
+        if (!IsRoundStatsTrackingActive())
             return;
 
         var side = GetSide(ev.Entity);
@@ -214,7 +214,7 @@ public sealed class CCMStatsSystem : EntitySystem
 
     private void OnPlayerDetached(PlayerDetachedEvent ev)
     {
-        if (_ticker.RunLevel != GameRunLevel.InRound)
+        if (!IsRoundStatsTrackingActive())
             return;
 
         var stats = GetOrCreateRoundStats(ev.Player.UserId);
@@ -302,13 +302,13 @@ public sealed class CCMStatsSystem : EntitySystem
     {
         if (HasComp<XenoComponent>(args.Entity))
         {
-            if (TryComp(args.Entity, out ActorComponent? actor))
-                GetOrCreateRoundStats(actor.PlayerSession.UserId).XenoDeaths += 1;
+            if (TryResolvePlayerAndSide(args.Entity, out var victimUserId, out _))
+                GetOrCreateRoundStats(victimUserId).XenoDeaths += 1;
         }
         else if (HasComp<MarineComponent>(args.Entity))
         {
-            if (TryComp(args.Entity, out ActorComponent? actor))
-                GetOrCreateRoundStats(actor.PlayerSession.UserId).MarineDeaths += 1;
+            if (TryResolvePlayerAndSide(args.Entity, out var victimUserId, out _))
+                GetOrCreateRoundStats(victimUserId).MarineDeaths += 1;
         }
 
         if (args.Primary is not KillPlayerSource player || args.Suicide)
@@ -845,6 +845,11 @@ public sealed class CCMStatsSystem : EntitySystem
             stats.XenoRoundStart |= roundStart;
             stats.XenoLateJoin |= !roundStart;
         }
+    }
+
+    private bool IsRoundStatsTrackingActive()
+    {
+        return !_roundFinalized && _ticker.RunLevel != GameRunLevel.PostRound;
     }
 
     private void StartActiveParticipation(NetUserId player, EntityUid entity)

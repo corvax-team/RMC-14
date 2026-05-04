@@ -390,7 +390,7 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
 
     private PanelContainer BuildRow(string rank, string player, string score, bool highlight)
     {
-        var accent = highlight ? GetWindowAccent() : Color.White;
+        var accent = highlight ? GetViewerTextColor() : Color.White;
         var panel = new PanelContainer
         {
             PanelOverride = MakeRowPanel(false, highlight),
@@ -419,12 +419,12 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
             BackgroundColor = header
                 ? Color.Black.WithAlpha(0.22f)
                 : highlight
-                    ? StyleNano.ButtonColorContextHover.WithAlpha(0.55f)
+                    ? GetWindowAccent().WithAlpha(0.18f)
                     : Color.Black.WithAlpha(0.24f),
             BorderColor = header
                 ? GetWindowAccent().WithAlpha(0.75f)
                 : highlight
-                    ? GetWindowAccent().WithAlpha(0.8f)
+                    ? GetWindowAccent().WithAlpha(0.46f)
                     : GetWindowAccent().WithAlpha(0.22f),
             BorderThickness = new Thickness(1),
             ContentMarginLeftOverride = 8,
@@ -671,6 +671,16 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
     private Color GetWindowAccent()
     {
         return StyleNano.LobbyMenuButtonBase;
+    }
+
+    private Color GetViewerTextColor()
+    {
+        return StyleNano.CurrentTheme switch
+        {
+            StyleNano.UiColorTheme.Blue => Color.FromHex("#DCEBFF"),
+            StyleNano.UiColorTheme.Gray => Color.FromHex("#EEF2F6"),
+            _ => Color.FromHex("#D7F0DE"),
+        };
     }
 
     private static string GetCategoryLocKey(CCMLeaderboardCategory category)

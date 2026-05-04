@@ -32,6 +32,7 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
         base.Open();
 
         _window = this.CreateWindow<XenoChooseStructureWindow>();
+        _window.SetDisplayTitle(Loc.GetString("cm-xeno-choose-resin-structure"));
         _buttons.Clear();
 
         if (EntMan.TryGetComponent(Owner, out XenoConstructionComponent? xeno))
@@ -66,6 +67,7 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
                 }
 
                 control.Set(displayName, _sprite.Frame0(_prototype.Index(displayId)));
+                _window.StyleChoiceControl(control, false);
                 control.Button.OnPressed += _ =>
                 {
                     SendPredictedMessage(new XenoChooseStructureBuiMsg(structureId));
@@ -93,23 +95,35 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
 
     private void UpdateButtonStates(EntProtoId selectedId)
     {
+        if (_window == null)
+            return;
+
         foreach (var (structureId, control) in _buttons)
         {
-            control.Button.Pressed = (structureId == selectedId);
+            var selected = structureId == selectedId;
+            control.Button.Pressed = selected;
+            _window.StyleChoiceControl(control, selected);
         }
     }
 
     public void Refresh()
     {
+        if (_window == null)
+            return;
+
+        _window.ApplyTheme();
+
         foreach (var (_, control) in _buttons)
         {
             control.Button.Pressed = false;
+            _window.StyleChoiceControl(control, false);
         }
 
         if (EntMan.GetComponentOrNull<XenoConstructionComponent>(Owner)?.BuildChoice is { } choice &&
             _buttons.TryGetValue(choice, out var button))
         {
             button.Button.Pressed = true;
+            _window.StyleChoiceControl(button, true);
         }
     }
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -118,6 +132,8 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
 
         if (_window == null)
             return;
+
+        _window.ApplyTheme();
 
         if (state is XenoChooseStructureBuiState s && s.ShowNodeCount)
         {

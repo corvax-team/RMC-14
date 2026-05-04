@@ -281,6 +281,16 @@ namespace Content.Server.Database
 
         #endregion
 
+        #region Hidden Ban
+
+        Task<bool> GetHiddenBanStatusAsync(NetUserId player);
+
+        Task AddHiddenBanAsync(NetUserId player);
+
+        Task RemoveHiddenBanAsync(NetUserId player);
+
+        #endregion
+
         #region Uploaded Resources Logs
 
         Task AddUploadedResourceLogAsync(NetUserId user, DateTimeOffset date, string path, byte[] data);
@@ -999,6 +1009,24 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.RemoveFromBlacklistAsync(player));
+        }
+
+        public Task<bool> GetHiddenBanStatusAsync(NetUserId player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetHiddenBanStatusAsync(player));
+        }
+
+        public Task AddHiddenBanAsync(NetUserId player)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddHiddenBanAsync(player));
+        }
+
+        public Task RemoveHiddenBanAsync(NetUserId player)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.RemoveHiddenBanAsync(player));
         }
 
         public Task AddUploadedResourceLogAsync(NetUserId user, DateTimeOffset date, string path, byte[] data)

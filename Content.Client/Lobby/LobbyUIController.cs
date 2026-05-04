@@ -272,7 +272,8 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     /// </summary>
     public void ReloadCharacterSetup()
     {
-        // CCM rework lobby - start
+        EnsureFallbackCharacter();
+
         HumanoidCharacterProfile? selectedProfile = null;
         int? selectedIndex = null;
         var prefs = _preferencesManager.Preferences;
@@ -289,7 +290,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
             selectedProfile = profile as HumanoidCharacterProfile;
         }
-        // CCM rework lobby - end
+
         var (characterGui, profileEditor) = EnsureGui();
         characterGui.Visible = false;
         profileEditor.Visible = false;
@@ -300,6 +301,18 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         UpdateCharacterSetupLayout();
         _pendingShowCharacterSetup = true;
         UpdateLobbyHeader();
+    }
+
+    private void EnsureFallbackCharacter()
+    {
+        if (!_preferencesManager.ServerDataLoaded ||
+            _preferencesManager.Preferences is not { Characters.Count: 0 } ||
+            (_preferencesManager.Settings?.MaxCharacterSlots ?? 0) <= 0)
+        {
+            return;
+        }
+
+        _preferencesManager.CreateCharacter(HumanoidCharacterProfile.Random());
     }
 
     public override void FrameUpdate(FrameEventArgs args)
@@ -584,7 +597,9 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         if (_stateManager.CurrentState is not LobbyState lobby || lobby.Lobby == null)
             return;
 
-        var profile = _preferencesManager.Preferences?.SelectedCharacter as HumanoidCharacterProfile;
+        HumanoidCharacterProfile? profile = null;
+        if (_preferencesManager.Preferences is { } prefs && prefs.TryGetSelectedCharacter(out var selectedCharacter))
+            profile = selectedCharacter as HumanoidCharacterProfile;
         var characterName = string.IsNullOrWhiteSpace(profile?.Name)
             ? Loc.GetString("identity-unknown-name")
             : profile.Name;

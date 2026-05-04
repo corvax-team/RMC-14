@@ -161,12 +161,15 @@ namespace Content.Client.RoundEnd
                 var hBox = new BoxContainer
                 {
                     Orientation = LayoutOrientation.Horizontal,
+                    SeparationOverride = 8,
+                    HorizontalExpand = true,
                 };
 
                 var playerInfoText = new RichTextLabel
                 {
                     VerticalAlignment = VAlignment.Center,
                     VerticalExpand = true,
+                    HorizontalExpand = true,
                 };
 
                 if (playerInfo.PlayerNetEntity != null)
@@ -185,25 +188,42 @@ namespace Content.Client.RoundEnd
                     if (playerInfo.Observer)
                     {
                         playerInfoText.SetMarkup(
-                            Loc.GetString("round-end-summary-window-player-info-if-observer-text",
-                                          ("playerOOCName", playerInfo.PlayerOOCName),
-                                          ("playerICName", playerInfo.PlayerICName)));
+                            NormalizeEndRoundMarkup(Loc.GetString("round-end-summary-window-player-info-if-observer-text",
+                                ("playerOOCName", playerInfo.PlayerOOCName),
+                                ("playerICName", playerInfo.PlayerICName))));
                     }
                     else
                     {
                         //TODO: On Hover display a popup detailing more play info.
                         //For example: their antag goals and if they completed them sucessfully.
-                        var icNameColor = playerInfo.Antag ? "red" : "white";
+                        var icNameColor = playerInfo.Antag
+                            ? GetMarkupColorHex(GetAntagTextColor())
+                            : GetMarkupColorHex(GetPrimaryBodyTextColor());
                         playerInfoText.SetMarkup(
-                            Loc.GetString("round-end-summary-window-player-info-if-not-observer-text",
+                            NormalizeEndRoundMarkup(Loc.GetString("round-end-summary-window-player-info-if-not-observer-text",
                                 ("playerOOCName", playerInfo.PlayerOOCName),
                                 ("icNameColor", icNameColor),
                                 ("playerICName", playerInfo.PlayerICName),
-                                ("playerRole", Loc.GetString(playerInfo.Role))));
+                                ("playerRole", Loc.GetString(playerInfo.Role)))));
                     }
                 }
                 hBox.AddChild(playerInfoText);
-                playerInfoContainer.AddChild(hBox);
+
+                playerInfoContainer.AddChild(new PanelContainer
+                {
+                    Margin = new Thickness(0, 0, 0, 6),
+                    PanelOverride = new StyleBoxFlat
+                    {
+                        BackgroundColor = GetSummaryInsetBackground(IsOldLobbyPalette() ? 0.72f : 0.18f),
+                        BorderColor = GetPrimaryAccentColor().WithAlpha(IsOldLobbyPalette() ? 0.62f : 0.26f),
+                        BorderThickness = new Thickness(1),
+                        ContentMarginLeftOverride = 8,
+                        ContentMarginTopOverride = 6,
+                        ContentMarginRightOverride = 8,
+                        ContentMarginBottomOverride = 6,
+                    },
+                    Children = { hBox },
+                });
             }
 
             playerInfoContainerScrollbox.AddChild(playerInfoContainer);
@@ -219,7 +239,7 @@ namespace Content.Client.RoundEnd
             int roundId,
             CCMStatsSide winningSide)
         {
-            var accent = StyleNano.LobbyMenuButtonBase;
+            var accent = GetPrimaryAccentColor();
             var winnerAccent = winningSide == CCMStatsSide.None
                 ? accent
                 : GetMvpAccentColor(winningSide);
@@ -302,15 +322,15 @@ namespace Content.Client.RoundEnd
             };
 
             var roundIdLabel = new RichTextLabel();
-            roundIdLabel.SetMarkup(Loc.GetString("round-end-summary-window-round-id-label", ("roundId", roundId)));
+            roundIdLabel.SetMarkup(NormalizeEndRoundMarkup(Loc.GetString("round-end-summary-window-round-id-label", ("roundId", roundId))));
             metaRow.AddChild(BuildRoundMetaChip(roundIdLabel, accent));
 
             var roundTimeLabel = new RichTextLabel();
-            roundTimeLabel.SetMarkup(Loc.GetString(
+            roundTimeLabel.SetMarkup(NormalizeEndRoundMarkup(Loc.GetString(
                 "round-end-summary-window-duration-label",
                 ("hours", roundDuration.Hours),
                 ("minutes", roundDuration.Minutes),
-                ("seconds", roundDuration.Seconds)));
+                ("seconds", roundDuration.Seconds))));
             metaRow.AddChild(BuildRoundMetaChip(roundTimeLabel, winnerAccent));
 
             root.AddChild(metaRow);
@@ -344,7 +364,9 @@ namespace Content.Client.RoundEnd
             panel.AddChild(new Label
             {
                 Text = Loc.GetString(key),
-                FontColorOverride = accent,
+                FontColorOverride = IsOldLobbyPalette() && winningSide == CCMStatsSide.Marines
+                    ? GetPrimaryBodyTextColor()
+                    : accent,
             });
 
             return panel;
@@ -407,7 +429,7 @@ namespace Content.Client.RoundEnd
             {
                 HorizontalExpand = true,
             };
-            summary.SetMarkup(summaryMarkup);
+            summary.SetMarkup(NormalizeEndRoundMarkup(summaryMarkup));
             row.AddChild(summary);
 
             panel.AddChild(row);
@@ -420,7 +442,7 @@ namespace Content.Client.RoundEnd
             {
                 HorizontalExpand = true,
             };
-            details.SetMarkup(detailsMarkup);
+            details.SetMarkup(NormalizeEndRoundMarkup(detailsMarkup));
             return details;
         }
 
@@ -469,7 +491,7 @@ namespace Content.Client.RoundEnd
             row.AddChild(new Label
             {
                 Text = value,
-                FontColorOverride = Color.White,
+                FontColorOverride = GetPrimaryBodyTextColor(),
                 HorizontalExpand = true,
                 ClipText = true,
             });
@@ -485,8 +507,8 @@ namespace Content.Client.RoundEnd
                 Margin = new Thickness(0, 4, 0, 0),
                 PanelOverride = new StyleBoxFlat
                 {
-                    BackgroundColor = StyleNano.ButtonColorContext.WithAlpha(0.12f),
-                    BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.6f),
+                    BackgroundColor = GetSectionHeaderBackground(),
+                    BorderColor = GetPrimaryAccentColor().WithAlpha(IsOldLobbyPalette() ? 0.78f : 0.6f),
                     BorderThickness = new Thickness(1),
                     ContentMarginLeftOverride = 10,
                     ContentMarginTopOverride = 7,
@@ -498,7 +520,7 @@ namespace Content.Client.RoundEnd
             panel.AddChild(new Label
             {
                 Text = Loc.GetString(locKey),
-                FontColorOverride = StyleNano.LobbyMenuButtonBase,
+                FontColorOverride = GetPrimaryAccentColor(),
                 HorizontalAlignment = HAlignment.Center,
                 HorizontalExpand = true,
             });
@@ -512,8 +534,8 @@ namespace Content.Client.RoundEnd
             {
                 PanelOverride = new StyleBoxFlat
                 {
-                    BackgroundColor = StyleNano.ButtonColorContext.WithAlpha(0.15f),
-                    BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.7f),
+                    BackgroundColor = GetInfoChipBackground(),
+                    BorderColor = GetPrimaryAccentColor().WithAlpha(IsOldLobbyPalette() ? 0.82f : 0.7f),
                     BorderThickness = new Thickness(1),
                     ContentMarginLeftOverride = 10,
                     ContentMarginTopOverride = 8,
@@ -526,7 +548,7 @@ namespace Content.Client.RoundEnd
             {
                 HorizontalExpand = true,
             };
-            label.SetMarkup(Loc.GetString("ccm-round-end-personal-score", ("score", score)));
+            label.SetMarkup(NormalizeEndRoundMarkup(Loc.GetString("ccm-round-end-personal-score", ("score", score))));
             panel.AddChild(label);
             return panel;
         }
@@ -577,7 +599,7 @@ namespace Content.Client.RoundEnd
             var subtitle = new Label
             {
                 Text = Loc.GetString("ccm-round-end-mvp-subtitle"),
-                FontColorOverride = Color.White.WithAlpha(0.75f),
+                FontColorOverride = GetMutedTextColor().WithAlpha(0.82f),
                 HorizontalExpand = true,
                 HorizontalAlignment = HAlignment.Right,
                 FontOverride = _mvpSubtitleFont,
@@ -639,13 +661,13 @@ namespace Content.Client.RoundEnd
             details.AddChild(new Label
             {
                 Text = data.Name,
-                FontColorOverride = Color.White,
+                FontColorOverride = GetPrimaryBodyTextColor(),
                 ClipText = true,
             });
             details.AddChild(new Label
             {
                 Text = data.Ckey,
-                FontColorOverride = Color.White.WithAlpha(0.7f),
+                FontColorOverride = GetMutedTextColor().WithAlpha(0.8f),
                 ClipText = true,
                 Margin = new Thickness(0, 0, 0, 4),
             });
@@ -669,7 +691,7 @@ namespace Content.Client.RoundEnd
 
         private Control BuildPersonalStatsBlock(CCMRoundPersonalStatsData data)
         {
-            var accent = StyleNano.LobbyMenuButtonBase;
+            var accent = GetPrimaryAccentColor();
             var background = GetSummaryPanelBackground();
 
             var panel = new PanelContainer
@@ -762,9 +784,9 @@ namespace Content.Client.RoundEnd
 
         private Control BuildCampaignScoreBlock(int marineWins, int xenoWins, CCMStatsSide winningSide)
         {
-            var marineAccent = StyleNano.LobbyMenuButtonBase;
+            var marineAccent = GetPrimaryAccentColor();
             var xenoAccent = GetXenoAccentColor();
-            var neutral = Color.FromHex("#D9DDE3");
+            var neutral = GetPrimaryBodyTextColor();
 
             var panel = new PanelContainer
             {
@@ -849,7 +871,7 @@ namespace Content.Client.RoundEnd
                 PanelOverride = new StyleBoxFlat
                 {
                     BackgroundColor = GetSponsorPanelBackground(),
-                    BorderColor = StyleNano.LobbyMenuButtonBase.WithAlpha(0.75f),
+                    BorderColor = GetPrimaryAccentColor().WithAlpha(0.75f),
                     BorderThickness = new Thickness(1),
                     ContentMarginLeftOverride = 10,
                     ContentMarginTopOverride = 10,
@@ -1043,7 +1065,7 @@ namespace Content.Client.RoundEnd
                 Text = score,
                 HorizontalAlignment = HAlignment.Center,
                 HorizontalExpand = true,
-                FontColorOverride = Color.White,
+                FontColorOverride = GetPrimaryBodyTextColor(),
                 FontOverride = _mvpTitleFont,
             });
 
@@ -1064,7 +1086,7 @@ namespace Content.Client.RoundEnd
             {
                 Text = Loc.GetString(locKey),
                 HorizontalExpand = true,
-                FontColorOverride = Color.White.WithAlpha(0.78f),
+                FontColorOverride = GetMutedTextColor().WithAlpha(0.88f),
             });
 
             row.AddChild(new Label
@@ -1098,7 +1120,7 @@ namespace Content.Client.RoundEnd
             container.AddChild(new Label
             {
                 Text = title,
-                FontColorOverride = accent.WithAlpha(0.9f),
+                FontColorOverride = accent.WithAlpha(IsOldLobbyPalette() ? 0.98f : 0.9f),
             });
 
             container.AddChild(BuildMvpMetricRow("ccm-round-end-personal-victory-points", victoryPoints.ToString(), accent, Color.White));
@@ -1117,13 +1139,15 @@ namespace Content.Client.RoundEnd
         private static Color GetMvpAccentColor(CCMStatsSide side)
         {
             return side == CCMStatsSide.Marines
-                ? StyleNano.LobbyMenuButtonBase
+                ? GetPrimaryAccentColor()
                 : GetXenoAccentColor();
         }
 
         private static Color GetXenoAccentColor()
         {
-            return Color.FromHex("#D96CFF");
+            return IsOldLobbyPalette()
+                ? Color.FromHex("#C994E8")
+                : Color.FromHex("#D96CFF");
         }
 
         private static Color GetMvpBackgroundColor(CCMStatsSide side)
@@ -1135,6 +1159,9 @@ namespace Content.Client.RoundEnd
 
         private static Color GetSummaryPanelBackground()
         {
+            if (IsOldLobbyPalette())
+                return StyleNano.OldLobbyPanel.WithAlpha(0.98f);
+
             return StyleNano.CurrentTheme switch
             {
                 StyleNano.UiColorTheme.Blue => Color.FromHex("#0E2950").WithAlpha(0.97f),
@@ -1145,6 +1172,9 @@ namespace Content.Client.RoundEnd
 
         private static Color GetSponsorPanelBackground()
         {
+            if (IsOldLobbyPalette())
+                return StyleNano.OldLobbyPanelSoft.WithAlpha(0.98f);
+
             return StyleNano.CurrentTheme switch
             {
                 StyleNano.UiColorTheme.Blue => Color.FromHex("#102A52").WithAlpha(0.96f),
@@ -1155,6 +1185,9 @@ namespace Content.Client.RoundEnd
 
         private static Color GetSummaryInsetBackground(float alpha = 0.18f)
         {
+            if (IsOldLobbyPalette())
+                return StyleNano.OldLobbyButton.WithAlpha(MathF.Min(0.98f, alpha + 0.52f));
+
             return StyleNano.CurrentTheme switch
             {
                 StyleNano.UiColorTheme.Blue => Color.FromHex("#081936").WithAlpha(alpha),
@@ -1165,12 +1198,84 @@ namespace Content.Client.RoundEnd
 
         private static Color GetMarineMvpBackground()
         {
+            if (IsOldLobbyPalette())
+                return StyleNano.OldLobbyPanelSoft.WithAlpha(0.95f);
+
             return StyleNano.CurrentTheme switch
             {
                 StyleNano.UiColorTheme.Blue => Color.FromHex("#0C2344").WithAlpha(0.92f),
                 StyleNano.UiColorTheme.Gray => Color.FromHex("#171D24").WithAlpha(0.92f),
                 _ => Color.FromHex("#07150A").WithAlpha(0.92f),
             };
+        }
+
+        private static bool IsOldLobbyPalette()
+        {
+            return StyleNano.LobbyMenuButtonBase == StyleNano.OldLobbyButton;
+        }
+
+        private static Color GetPrimaryAccentColor()
+        {
+            return IsOldLobbyPalette()
+                ? StyleNano.OldLobbyGold
+                : StyleNano.LobbyMenuButtonBase;
+        }
+
+        private static Color GetPrimaryBodyTextColor()
+        {
+            return IsOldLobbyPalette()
+                ? StyleNano.OldLobbyText
+                : Color.White;
+        }
+
+        private static Color GetMutedTextColor()
+        {
+            return IsOldLobbyPalette()
+                ? StyleNano.OldLobbyMuted
+                : Color.White.WithAlpha(0.78f);
+        }
+
+        private static Color GetAntagTextColor()
+        {
+            return IsOldLobbyPalette()
+                ? Color.FromHex("#D88A8A")
+                : Color.Red;
+        }
+
+        private static Color GetSectionHeaderBackground()
+        {
+            return IsOldLobbyPalette()
+                ? StyleNano.OldLobbyButtonHover.WithAlpha(0.82f)
+                : StyleNano.ButtonColorContext.WithAlpha(0.12f);
+        }
+
+        private static Color GetInfoChipBackground()
+        {
+            return IsOldLobbyPalette()
+                ? StyleNano.OldLobbyButton.WithAlpha(0.88f)
+                : StyleNano.ButtonColorContext.WithAlpha(0.15f);
+        }
+
+        private static string NormalizeEndRoundMarkup(string markup)
+        {
+            if (!IsOldLobbyPalette() || string.IsNullOrWhiteSpace(markup))
+                return markup;
+
+            return markup
+                .Replace("[color=white]", $"[color={GetMarkupColorHex(GetPrimaryBodyTextColor())}]")
+                .Replace("[color=gray]", $"[color={GetMarkupColorHex(GetMutedTextColor())}]")
+                .Replace("[color=yellow]", $"[color={GetMarkupColorHex(Color.FromHex("#E7D178"))}]")
+                .Replace("[color=orange]", $"[color={GetMarkupColorHex(Color.FromHex("#D9B172"))}]")
+                .Replace("[color=lightblue]", $"[color={GetMarkupColorHex(Color.FromHex("#AFC8E4"))}]")
+                .Replace("[color=red]", $"[color={GetMarkupColorHex(GetAntagTextColor())}]");
+        }
+
+        private static string GetMarkupColorHex(Color color)
+        {
+            var r = (int) Math.Clamp(color.RByte, (byte) 0, (byte) 255);
+            var g = (int) Math.Clamp(color.GByte, (byte) 0, (byte) 255);
+            var b = (int) Math.Clamp(color.BByte, (byte) 0, (byte) 255);
+            return $"#{r:X2}{g:X2}{b:X2}";
         }
     }
 

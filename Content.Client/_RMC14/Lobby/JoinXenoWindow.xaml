@@ -2,11 +2,28 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Lobby"
     Title="{Loc rmc-lobby-join-xeno}"
-    MinSize="400 125">
-    <BoxContainer Orientation="Vertical" Margin="5">
-        <Label Name="Label" Access="Public" />
-        <BoxContainer Name="Buttons" Access="Public" Orientation="Horizontal" Margin="0 10 0 0">
-            <Button Name="LarvaButton" Access="Public" Text="{Loc rmc-lobby-join-as-larva}" StyleClasses="OpenBoth" HorizontalExpand="True" MinHeight="35" />
-        </BoxContainer>
+    MinSize="440 220">
+    <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="8">
+        <PanelContainer Name="JoinHeaderPanel" Access="Public">
+            <BoxContainer Orientation="Vertical" Margin="10 8" SeparationOverride="2">
+                <Label Name="WindowTitleLabel"
+                       Access="Public"
+                       Text="{Loc rmc-lobby-join-xeno}"
+                       StyleClasses="LabelHeading" />
+                <Label Name="WindowSubtitleLabel"
+                       Access="Public"
+                       Text="{Loc rmc-lobby-join-as-larva}" />
+            </BoxContainer>
+        </PanelContainer>
+        <PanelContainer Name="StatusPanel" Access="Public">
+            <BoxContainer Orientation="Vertical" Margin="10 10 10 10">
+                <Label Name="Label" Access="Public" ClipText="False" />
+            </BoxContainer>
+        </PanelContainer>
+        <PanelContainer Name="ButtonsPanel" Access="Public">
+            <BoxContainer Name="Buttons" Access="Public" Orientation="Horizontal" Margin="10 10 10 10" SeparationOverride="8">
+                <Button Name="LarvaButton" Access="Public" Text="{Loc rmc-lobby-join-as-larva}" HorizontalExpand="True" MinHeight="38" />
+            </BoxContainer>
+        </PanelContainer>
     </BoxContainer>
 </controls:JoinXenoWindow>

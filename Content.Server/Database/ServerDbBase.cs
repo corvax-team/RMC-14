@@ -1318,6 +1318,93 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
         }
 
+        public async Task<bool> GetHiddenBanStatusAsync(NetUserId player)
+        {
+            await using var db = await GetDb();
+            await EnsureHiddenBanStorage(db.DbContext);
+
+            var connection = db.DbContext.Database.GetDbConnection();
+            var shouldClose = connection.State != System.Data.ConnectionState.Open;
+            if (shouldClose)
+                await connection.OpenAsync();
+
+            try
+            {
+                await using var command = connection.CreateCommand();
+                command.CommandText = "SELECT 1 FROM hidden_ban WHERE user_id = @userId LIMIT 1";
+
+                var parameter = command.CreateParameter();
+                parameter.ParameterName = "@userId";
+                parameter.Value = player.UserId.ToString();
+                command.Parameters.Add(parameter);
+
+                return await command.ExecuteScalarAsync() != null;
+            }
+            finally
+            {
+                if (shouldClose)
+                    await connection.CloseAsync();
+            }
+        }
+
+        public async Task AddHiddenBanAsync(NetUserId player)
+        {
+            await using var db = await GetDb();
+            await EnsureHiddenBanStorage(db.DbContext);
+
+            var connection = db.DbContext.Database.GetDbConnection();
+            var shouldClose = connection.State != System.Data.ConnectionState.Open;
+            if (shouldClose)
+                await connection.OpenAsync();
+
+            try
+            {
+                await using var command = connection.CreateCommand();
+                command.CommandText = "INSERT INTO hidden_ban (user_id) VALUES (@userId)";
+
+                var parameter = command.CreateParameter();
+                parameter.ParameterName = "@userId";
+                parameter.Value = player.UserId.ToString();
+                command.Parameters.Add(parameter);
+
+                await command.ExecuteNonQueryAsync();
+            }
+            finally
+            {
+                if (shouldClose)
+                    await connection.CloseAsync();
+            }
+        }
+
+        public async Task RemoveHiddenBanAsync(NetUserId player)
+        {
+            await using var db = await GetDb();
+            await EnsureHiddenBanStorage(db.DbContext);
+
+            var connection = db.DbContext.Database.GetDbConnection();
+            var shouldClose = connection.State != System.Data.ConnectionState.Open;
+            if (shouldClose)
+                await connection.OpenAsync();
+
+            try
+            {
+                await using var command = connection.CreateCommand();
+                command.CommandText = "DELETE FROM hidden_ban WHERE user_id = @userId";
+
+                var parameter = command.CreateParameter();
+                parameter.ParameterName = "@userId";
+                parameter.Value = player.UserId.ToString();
+                command.Parameters.Add(parameter);
+
+                await command.ExecuteNonQueryAsync();
+            }
+            finally
+            {
+                if (shouldClose)
+                    await connection.CloseAsync();
+            }
+        }
+
         #endregion
 
         #region Uploaded Resources Logs
@@ -2704,6 +2791,24 @@ CREATE TABLE IF NOT EXISTS ccm_player_sponsorship (
     player_id TEXT PRIMARY KEY,
     tier INTEGER NOT NULL,
     expiration_unix_seconds BIGINT NOT NULL
+)";
+
+            try
+            {
+                await dbContext.Database.ExecuteSqlRawAsync(createTable);
+            }
+            catch (SqliteException e) when (e.Message.Contains("database is locked", StringComparison.OrdinalIgnoreCase))
+            {
+                await Task.Delay(200);
+                await dbContext.Database.ExecuteSqlRawAsync(createTable);
+            }
+        }
+
+        private static async Task EnsureHiddenBanStorage(DbContext dbContext)
+        {
+            const string createTable = @"
+CREATE TABLE IF NOT EXISTS hidden_ban (
+    user_id TEXT PRIMARY KEY
 )";
 
             try

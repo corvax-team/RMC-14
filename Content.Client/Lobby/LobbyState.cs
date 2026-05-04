@@ -49,8 +49,12 @@ namespace Content.Client.Lobby
         private ContentAudioSystem _audioSystem = default!;
         private float _lastRightPanelWidth = -1f;
 
-        private const float LobbyRightPanelMinRatio = 0.20f;
-        private const float LobbyRightPanelMaxRatio = 0.30f;
+        private const float LobbyRightPanelWideMinRatio = 0.18f;
+        private const float LobbyRightPanelWideMaxRatio = 0.28f;
+        private const float LobbyRightPanelDefaultMinRatio = 0.22f;
+        private const float LobbyRightPanelDefaultMaxRatio = 0.34f;
+        private const float LobbyRightPanelCompactMinRatio = 0.28f;
+        private const float LobbyRightPanelCompactMaxRatio = 0.44f;
 
         protected override Type? LinkedScreenType { get; } = typeof(LobbyGui);
         public LobbyGui? Lobby;
@@ -199,11 +203,16 @@ namespace Content.Client.Lobby
                 uiScale = 1f;
 
             var basePanelWidth = _cfg.GetCVar(CCVars.ServerLobbyRightPanelWidth);
-            var desiredWidth = (basePanelWidth / uiScale) * 0.88f;
-            desiredWidth = Math.Clamp(
-                desiredWidth,
-                hostWidth * LobbyRightPanelMinRatio,
-                hostWidth * LobbyRightPanelMaxRatio);
+            var desiredWidth = basePanelWidth / uiScale;
+            var oldLobbyStyle = _cfg.GetCVar(RMCCVars.RMCLobbyUiStyle).Equals("old", StringComparison.OrdinalIgnoreCase);
+            var (minRatio, maxRatio, minWidth, maxWidth) = GetRightPanelBounds(hostWidth, oldLobbyStyle);
+            var minClamp = Math.Max(hostWidth * minRatio, minWidth);
+            var maxClamp = Math.Min(hostWidth * maxRatio, maxWidth);
+
+            if (maxClamp < minClamp)
+                maxClamp = minClamp;
+
+            desiredWidth = Math.Clamp(desiredWidth, minClamp, maxClamp);
             desiredWidth = MathF.Round(desiredWidth);
 
             if (MathF.Abs(_lastRightPanelWidth - desiredWidth) < 0.5f)
@@ -211,6 +220,36 @@ namespace Content.Client.Lobby
 
             Lobby.ActiveRightSide.SetWidth = desiredWidth;
             _lastRightPanelWidth = desiredWidth;
+        }
+
+        private static (float MinRatio, float MaxRatio, float MinWidth, float MaxWidth) GetRightPanelBounds(
+            float hostWidth,
+            bool oldLobbyStyle)
+        {
+            if (hostWidth >= 2200f)
+            {
+                return oldLobbyStyle
+                    ? (LobbyRightPanelWideMinRatio, 0.30f, 460f, 640f)
+                    : (LobbyRightPanelWideMinRatio, LobbyRightPanelWideMaxRatio, 420f, 560f);
+            }
+
+            if (hostWidth >= 1700f)
+            {
+                return oldLobbyStyle
+                    ? (0.20f, 0.33f, 500f, 700f)
+                    : (0.20f, 0.31f, 440f, 600f);
+            }
+
+            if (hostWidth >= 1450f)
+            {
+                return oldLobbyStyle
+                    ? (LobbyRightPanelDefaultMinRatio, 0.38f, 540f, 760f)
+                    : (LobbyRightPanelDefaultMinRatio, LobbyRightPanelDefaultMaxRatio, 470f, 640f);
+            }
+
+            return oldLobbyStyle
+                ? (LobbyRightPanelCompactMinRatio, LobbyRightPanelCompactMaxRatio, 580f, 820f)
+                : (LobbyRightPanelCompactMinRatio, 0.42f, 510f, 700f);
         }
 
         private void UpdateRoundCountdown()

@@ -11,6 +11,7 @@ using Content.Client.Chat.UI;
 using Content.Client.Examine;
 using Content.Client.Gameplay;
 using Content.Client.Ghost;
+using Content.Client.Lobby.UI;
 using Content.Client.Mind;
 using Content.Client.Roles;
 using Content.Client.Stylesheets;
@@ -370,6 +371,9 @@ public sealed partial class ChatUIController : UIController
                 chatSizeRaw = _config.GetCVar(CCVars.SeparatedScreenChatSize);
                 SetChatSizing(chatSizeRaw, separatedScreen, setting);
                 break;
+            case LobbyGui lobbyScreen:
+                lobbyScreen.SetLobbyChatMain(setting);
+                return;
             default:
                 // this could be better?
                 var maybeChat = UIManager.ActiveScreen.GetWidget<ChatBox>();

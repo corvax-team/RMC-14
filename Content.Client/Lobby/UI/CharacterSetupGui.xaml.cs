@@ -124,10 +124,14 @@ namespace Content.Client.Lobby.UI
             NewCharacterButton.OnPressed += _ => CreateCharacter();
             SaveCharacterButton.OnPressed += _ => _profileEditor.RequestSave();
             ResetCharacterButton.OnPressed += _ => _profileEditor.RequestReset();
+            ImportCharacterButton.OnPressed += _ => _profileEditor.RequestImport();
+            ExportCharacterButton.OnPressed += _ => _profileEditor.RequestExport();
             DeleteCharacterButton.OnPressed += _ => HandleDeletePressed();
             OldNewCharacterButton.OnPressed += _ => CreateCharacter();
             OldSaveCharacterButton.OnPressed += _ => _profileEditor.RequestSave();
             OldResetCharacterButton.OnPressed += _ => _profileEditor.RequestReset();
+            OldImportCharacterButton.OnPressed += _ => _profileEditor.RequestImport();
+            OldExportCharacterButton.OnPressed += _ => _profileEditor.RequestExport();
             OldDeleteCharacterButton.OnPressed += _ => HandleDeletePressed();
             CloseButton.OnPressed += _ => CloseRequested?.Invoke();
             OldCloseButton.OnPressed += _ => CloseRequested?.Invoke();
@@ -159,8 +163,18 @@ namespace Content.Client.Lobby.UI
             HookPreviewRotation(RightFarPreviewContainer, RightFarPreview);
             _profileEditor.ProfileChanged += _ => RefreshCenterPreviewFromEditor();
             _profileEditor.ShowClothesChanged += UpdateShowClothes;
+            _profileEditor.ImportExportStateChanged += UpdateImportExportButtons;
             ApplyLobbyUiStyle(force: true);
+            UpdateImportExportButtons();
             // CCM rework lobby - end
+        }
+
+        private void UpdateImportExportButtons()
+        {
+            ImportCharacterButton.Disabled = !_profileEditor.CanImportProfile;
+            ExportCharacterButton.Disabled = !_profileEditor.CanExportProfile;
+            OldImportCharacterButton.Disabled = !_profileEditor.CanImportProfile;
+            OldExportCharacterButton.Disabled = !_profileEditor.CanExportProfile;
         }
 
         protected override void FrameUpdate(FrameEventArgs args)
@@ -334,8 +348,11 @@ namespace Content.Client.Lobby.UI
 
             var maxSlots = _preferencesManager.Settings?.MaxCharacterSlots ?? 0;
             var fullSlots = _carouselProfiles.Count;
+            var canDeleteCharacter = fullSlots > 1;
             NewCharacterButton.Disabled = fullSlots >= maxSlots;
             OldNewCharacterButton.Disabled = numberOfFullSlots >= maxSlots;
+            DeleteCharacterButton.Disabled = !canDeleteCharacter;
+            OldDeleteCharacterButton.Disabled = !canDeleteCharacter;
             // CCM rework lobby - end
         }
 
@@ -395,10 +412,18 @@ namespace Content.Client.Lobby.UI
 
         private void CreateCharacter()
         {
-            // CCM rework lobby - start
+            var hadSelectedCharacter = _preferencesManager.Preferences?.TryGetSelectedCharacter(out _) == true;
             _preferencesManager.CreateCharacter(HumanoidCharacterProfile.Random());
+
+            if (!hadSelectedCharacter &&
+                _preferencesManager.Preferences is { } prefs &&
+                prefs.TryGetSelectedCharacter(out _))
+            {
+                SelectCharacter?.Invoke(prefs.SelectedCharacterIndex);
+                return;
+            }
+
             ReloadCharacterPickers();
-            // CCM rework lobby - end
         }
 
         private void StepCarousel(int direction)
@@ -1019,10 +1044,14 @@ namespace Content.Client.Lobby.UI
             NewCharacterButton.MinSize = new Vector2(NewCharacterButton.MinSize.X, actionButtonHeight);
             SaveCharacterButton.MinSize = new Vector2(SaveCharacterButton.MinSize.X, actionButtonHeight);
             ResetCharacterButton.MinSize = new Vector2(ResetCharacterButton.MinSize.X, actionButtonHeight);
+            ImportCharacterButton.MinSize = new Vector2(ImportCharacterButton.MinSize.X, actionButtonHeight);
+            ExportCharacterButton.MinSize = new Vector2(ExportCharacterButton.MinSize.X, actionButtonHeight);
             DeleteCharacterButton.MinSize = new Vector2(DeleteCharacterButton.MinSize.X, actionButtonHeight);
             OldNewCharacterButton.MinSize = new Vector2(OldNewCharacterButton.MinSize.X, actionButtonHeight);
             OldSaveCharacterButton.MinSize = new Vector2(OldSaveCharacterButton.MinSize.X, actionButtonHeight);
             OldResetCharacterButton.MinSize = new Vector2(OldResetCharacterButton.MinSize.X, actionButtonHeight);
+            OldImportCharacterButton.MinSize = new Vector2(OldImportCharacterButton.MinSize.X, actionButtonHeight);
+            OldExportCharacterButton.MinSize = new Vector2(OldExportCharacterButton.MinSize.X, actionButtonHeight);
             OldDeleteCharacterButton.MinSize = new Vector2(OldDeleteCharacterButton.MinSize.X, actionButtonHeight);
 
             if (_oldLobbyStyle)
@@ -1035,6 +1064,8 @@ namespace Content.Client.Lobby.UI
                 OldNewCharacterButton.MinSize = new Vector2(MathF.Max(OldNewCharacterButton.MinSize.X, compact ? 116f : 128f), actionButtonHeight);
                 OldSaveCharacterButton.MinSize = new Vector2(MathF.Max(OldSaveCharacterButton.MinSize.X, compact ? 116f : 128f), actionButtonHeight);
                 OldResetCharacterButton.MinSize = new Vector2(MathF.Max(OldResetCharacterButton.MinSize.X, compact ? 116f : 128f), actionButtonHeight);
+                OldImportCharacterButton.MinSize = new Vector2(MathF.Max(OldImportCharacterButton.MinSize.X, compact ? 116f : 128f), actionButtonHeight);
+                OldExportCharacterButton.MinSize = new Vector2(MathF.Max(OldExportCharacterButton.MinSize.X, compact ? 116f : 128f), actionButtonHeight);
                 OldDeleteCharacterButton.MinSize = new Vector2(MathF.Max(OldDeleteCharacterButton.MinSize.X, compact ? 128f : 144f), actionButtonHeight);
                 OldCloseButton.MinSize = new Vector2(MathF.Max(OldCloseButton.MinSize.X, compact ? 96f : 112f), actionButtonHeight);
             }

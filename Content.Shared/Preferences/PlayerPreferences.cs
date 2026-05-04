@@ -33,6 +33,11 @@ namespace Content.Shared.Preferences
             return _characters[index];
         }
 
+        public bool TryGetProfile(int index, out ICharacterProfile? profile)
+        {
+            return _characters.TryGetValue(index, out profile);
+        }
+
         /// <summary>
         ///     Index of the currently selected character.
         /// </summary>
@@ -42,6 +47,11 @@ namespace Content.Shared.Preferences
         ///     The currently selected character.
         /// </summary>
         public ICharacterProfile SelectedCharacter => Characters[SelectedCharacterIndex];
+
+        public bool TryGetSelectedCharacter(out ICharacterProfile? profile)
+        {
+            return TryGetProfile(SelectedCharacterIndex, out profile);
+        }
 
         public Color AdminOOCColor { get; set; }
 
