@@ -97,6 +97,7 @@ rmc-vehicle-enter-passenger-full = Внутри нет свободных мес
 rmc-vehicle-hull-destroyed = Корпус транспорта разрушен.
 rmc-vehicle-exit-busy = Этот выход уже кем-то занят.
 rmc-vehicle-exit-blocked = Выход заблокирован.
+rmc-vehicle-look-inside = Заглянуть внутрь
 rmc-vehicle-lock-not-driver = Вы должны быть на месте водителя, чтобы управлять замками.
 rmc-vehicle-lock-broken = Замок транспорта сломан.
 rmc-vehicle-lock-broken-attempt = Транспорт нельзя запереть, пока сломанный замок не будет отремонтирован.
@@ -104,5 +105,18 @@ rmc-vehicle-lock-set-locked = Двери заблокированы.
 rmc-vehicle-lock-set-unlocked = Двери разблокированы.
 rmc-vehicle-lock-broken-success = Вы сломали замок транспорта.
 rmc-vehicle-lock-repaired = Вы починили замок транспорта.
+rmc-vehicle-key-name = ключ от транспорта
+rmc-vehicle-key-name-copy = дубликат ключа от транспорта
+rmc-vehicle-key-name-specific = ключ от { $vehicle }
+rmc-vehicle-key-name-copy-specific = дубликат ключа от { $vehicle }
+rmc-vehicle-key-bind-success = Вы привязали ключ к транспорту.
+rmc-vehicle-key-copy-success = Вы скопировали ключ от транспорта.
+rmc-vehicle-key-copy-invalid = Этот ключ нельзя скопировать.
+rmc-vehicle-key-copy-requires-source = Сначала вам нужно скопировать существующий ключ от транспорта.
+rmc-vehicle-key-unbound = Ключ не привязан ни к одному транспорту.
+rmc-vehicle-key-invalid = Ключ не подходит к этому транспорту.
+rmc-vehicle-key-examine-blank = [color=lightblue]Эту заготовку можно привязать к транспорту, использовав её на нём.[/color]
+rmc-vehicle-key-examine-duplicator = [color=lightblue]Эта заготовка может скопировать существующий ключ, если использовать её на оригинале.[/color]
+rmc-vehicle-key-examine-bound = [color=lightblue]Этот ключ привязан к замку транспорта.[/color]
 rmc-hardpoint-remove-blocked = Оборудование заклинило, его не получается снять.
 rmc-vehicle-cannot-place-inside = Вы не можете разместить { $object } внутри транспорта.
