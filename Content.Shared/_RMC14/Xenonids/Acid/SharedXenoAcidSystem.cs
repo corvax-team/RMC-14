@@ -10,6 +10,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Coordinates;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Body.Part;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
@@ -176,7 +177,9 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Target is not { } target)
             return;
 
-        if (!TryComp(target, out CorrodibleComponent? corrodible) || !corrodible.IsCorrodible)
+        if (HasComp<BodyPartComponent>(target) ||
+            !TryComp(target, out CorrodibleComponent? corrodible) ||
+            !corrodible.IsCorrodible)
             return;
 
         if (!xeno.Comp.CanMeltStructures && corrodible.Structure)
@@ -300,7 +303,9 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             return false;
         }
 
-        if (_acidHole.HasActiveHole(target))
+        if (HasComp<BodyPartComponent>(target) ||
+            !TryComp(target, out CorrodibleComponent? corrodible) ||
+            !corrodible.IsCorrodible)
         {
             _popup.PopupClient(Loc.GetString("rmc-acid-hole-already-weakened"), xeno, xeno, PopupType.SmallCaution);
             return false;
@@ -338,6 +343,9 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     public void ApplyAcid(EntProtoId acidId, XenoAcidStrength strength, EntityUid target, float dps, float lightDps, TimeSpan time, bool inherit = false)
     {
         if (_net.IsClient)
+            return;
+
+        if (HasComp<BodyPartComponent>(target))
             return;
 
         EntityUid acid;
