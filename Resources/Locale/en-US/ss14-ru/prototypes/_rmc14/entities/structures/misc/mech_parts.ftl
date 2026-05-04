@@ -1,3 +1,12 @@
+ent-RMCMechPropBase = { ent-BaseStructureDynamic }
+    .suffix = Prop
+    .desc = { ent-BaseStructureDynamic.desc }
+ent-RMCMechPropDrill = drill
+    .desc = This is the drill that'll pierce the heavens!
+ent-RMCMechPropClamp = Hydraulic Clamp
+    .desc = { ent-RMCMechPropBase.desc }
+ent-RMCMechPropArmorBooster = Armor Booster Module (Close Combat Weaponry)
+    .desc = Boosts exosuit armor against armed melee attacks. Requires energy to operate.
 ent-RMCMechMAXChassis = MAX chassis
     .desc = { ent-RMCMechPropBase.desc }
 ent-RMCMechMAXTorso = MAX torso

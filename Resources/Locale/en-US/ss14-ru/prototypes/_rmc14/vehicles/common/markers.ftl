@@ -1,2 +1,4 @@
 ent-VehicleExitArea = vehicle exit marker
     .desc = A clickable marker used for vehicle exits.
+ent-VehiclePeekAnchor = { "" }
+    .desc = { "" }
