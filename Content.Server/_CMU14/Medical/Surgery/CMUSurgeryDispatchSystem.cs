@@ -94,6 +94,7 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
         var armed = CompOrNull<CMUSurgeryArmedStepComponent>(patient);
         if (tool is { } usedTool
             && armed is null
+            && CanAutoHandleToolIntent(surgeon, patient)
             && TryArmByToolIntent(surgeon, patient, usedTool, parts))
         {
             return true;
@@ -112,6 +113,15 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
         _ui.SetUiState(surgeon, CMUSurgeryUIKey.Key, state);
         _ui.OpenUi(surgeon, CMUSurgeryUIKey.Key, surgeon);
         return true;
+    }
+
+    private bool CanAutoHandleToolIntent(EntityUid surgeon, EntityUid patient)
+    {
+        if (!TryComp<CMUSurgeryInProgressComponent>(patient, out var lockComp))
+            return true;
+
+        return TryComp<CMUSurgeryInFlightComponent>(lockComp.Part, out var inFlight)
+            && inFlight.Surgeon == surgeon;
     }
 
     private bool TryArmByToolIntent(EntityUid surgeon, EntityUid patient, EntityUid tool, List<CMUSurgeryPartEntry> parts)
