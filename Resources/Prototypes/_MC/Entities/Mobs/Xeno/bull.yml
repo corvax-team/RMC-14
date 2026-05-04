@@ -61,6 +61,20 @@
     plasma: 270
     maxPlasma: 270
     plasmaRegenOnWeeds: 20
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.4525
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.5025
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.3625
+      whitelist:
+        components:
+        - XenoHeavy
   # - type: MCArmor
   #   soft:
   #     melee: 40
@@ -74,7 +88,7 @@
   - type: MeleeWeapon
     damage:
       groups:
-        Brute: 25
+        Brute: 20
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.125
     baseSprintSpeed: 4.545

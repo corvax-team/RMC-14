@@ -29,7 +29,7 @@
     event: !type:MCXenoHeadbuttChargeActionEvent
       damage:
         types:
-          Blunt: 25
+          Blunt: 20
       duration: 2
       damageMultiplier: 2.6
       plasmaCost: 40
@@ -55,11 +55,11 @@
     useDelay: 15
   - type: InstantAction
     event: !type:MCXenoHeadbuttChargeActionEvent
-      knockback: 6
+      knockback: 5
       knockbackSpeed: 15
       paralyze: 1
       duration: 3
-      speedMultiplier: 1.75
+      speedMultiplier: 1.45 
       plasmaCost: 40
       activationEmote: XenoRoar
       hitSound:
@@ -86,7 +86,7 @@
       duration: 2
       plasmaCost: 40
       turfSpawnEntityId: MCXenoAcidSprayBull
-      speedMultiplier: 1.75
+      speedMultiplier: 1.45
       activationEmote: Hiss
       footstepSound:
         path: /Audio/_RMC14/Xeno/alien_footstep_charge1.ogg

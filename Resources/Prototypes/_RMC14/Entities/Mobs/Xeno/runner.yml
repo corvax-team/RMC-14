@@ -228,6 +228,7 @@
     - ActionXenoAcidAcider
     - ActionXenoForTheHive
     - ActionXenoDevolve
+    - MCActionXenoMelterShroud # CCM Change
   - type: XenoStrain
     name: rmc-xeno-acider-name
     description: rmc-xeno-acider-description
@@ -299,6 +300,8 @@
     ventCrawlIcon: runner
   - type: RMCActionOrder
     id: RMCXenoRunnerAcider
+  - type: MCXenoMelterShroud # CCM Change
+    shroudId: MCSmokeXenoAcidMelter # CCM Change
 
 - type: entity
   id: MCXenoComponentFixtureRunner

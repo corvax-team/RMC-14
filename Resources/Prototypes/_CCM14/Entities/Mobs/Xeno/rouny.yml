@@ -32,8 +32,8 @@
     id: CCMXenoRouny
     max: 1
   - type: MovementSpeedModifier
-    baseWalkSpeed: 8
-    baseSprintSpeed: 15
+    baseWalkSpeed: 6.25
+    baseSprintSpeed: 12.25
   - type: XenoMaturing
     critThreshold: 650
     deadThreshold: 750
@@ -45,7 +45,7 @@
     delay: 0.2
     maxDistance: 13
     strength: 45
-    zigZag: true
+    zigZag: false
     zigZagAmplitude: 3.5
     zigZagFrequency: 10
     stopOnHit: true
@@ -60,8 +60,10 @@
   - type: CCMXenoChargeLine
     damage:
       types:
-        Blunt: 40
-    speedMultiplier: 2.5
+        Blunt: 20
+    healPerHit: 20
+    speedMultiplier: 1.5
+    maxDistance: 8
     maxTiles: 10
     hitSound:
       path: /Audio/_MC/Effects/alien_tail_attack.ogg
@@ -73,5 +75,8 @@
   - type: XenoPlasma
     plasma: 250
     maxPlasma: 250
+    plasmaRegenOnWeeds: 11
   - type: XenoLeap
     moveDelayTime: 1.5
+  - type: XenoRegen
+    restHealMultiplier:  1.40
