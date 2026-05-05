@@ -132,3 +132,22 @@ public enum HealthScannerUIKey
 {
     Key
 }
+
+[Serializable, NetSerializable]
+public enum HealthScanDetailLevel : byte
+{
+    HealthAnalyzer = 0,
+    BodyScan = 1,
+    Full = 2,
+}
+
+[DataRecord, Serializable, NetSerializable]
+public readonly record struct HealthScanState(
+    NetEntity Target,
+    FixedPoint2 Blood,
+    FixedPoint2 MaxBlood,
+    float? Temperature,
+    string Pulse,
+    Solution? Chemicals,
+    bool Bleeding,
+    HealthScanDetailLevel DetailLevel);

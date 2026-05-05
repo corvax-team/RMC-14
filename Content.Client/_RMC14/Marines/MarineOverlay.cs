@@ -1,4 +1,3 @@
-using System.Linq;
 using System;
 using System.Numerics;
 using Content.Shared._RMC14.CrashLand;
@@ -82,6 +81,17 @@ public sealed class MarineOverlay : Overlay
     {
         if (!_marineIconsQuery.TryComp(_players.LocalEntity, out var marineHudComp))
             return;
+
+        var localEnt = _players.LocalEntity;
+        var isSpectator = false;
+        if (localEnt != null && _entity.TryGetComponent(localEnt.Value, out MetaDataComponent? localMeta))
+        {
+            var protoId = localMeta.EntityPrototype?.ID;
+            if (!string.IsNullOrEmpty(protoId) && (string.Equals(protoId, "MobObserver", StringComparison.InvariantCultureIgnoreCase) || string.Equals(protoId, "RMCAdminObserver", StringComparison.InvariantCultureIgnoreCase)))
+            {
+                isSpectator = true;
+            }
+        }
 
         var handle = args.WorldHandle;
 
