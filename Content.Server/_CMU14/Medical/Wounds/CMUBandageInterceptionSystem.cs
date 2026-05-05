@@ -3,14 +3,11 @@ using System.Linq;
 using Content.Server._CMU14.Medical.Wounds;
 using Content.Shared._CMU14.Medical;
 using Content.Shared._CMU14.Medical.BodyPart;
-using Content.Shared._CMU14.Medical.Surgery;
 using Content.Shared._CMU14.Medical.Wounds;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
@@ -20,7 +17,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server._CMU14.Medical.Wounds;
 
@@ -33,10 +29,8 @@ public sealed class CMUBandageInterceptionSystem : EntitySystem
     [Dependency] private readonly SharedBodyZoneTargetingSystem _zoneTargeting = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStackSystem _stacks = default!;
-    [Dependency] private readonly SharedCMUSurgeryFlowSystem _surgery = default!;
     [Dependency] private readonly CMUWoundsSystem _wounds = default!;
 
     private static readonly TimeSpan TreatDelay = TimeSpan.FromSeconds(1);
@@ -65,19 +59,11 @@ public sealed class CMUBandageInterceptionSystem : EntitySystem
         if (!HasComp<CMUHumanMedicalComponent>(patient))
             return;
 
-        if (ShouldYieldToArmedSurgeryTool(args.User, patient, used))
-            return;
-
         if (PickBandageTarget(args.User, patient) is not { } targetPart)
         {
-            if (PickDamageOnlyTarget(args.User, patient, treater) is not { } damageTarget)
-            {
-                _popup.PopupEntity(Loc.GetString("cmu-medical-bandage-no-wounds"), patient, args.User, PopupType.SmallCaution);
-                args.Handled = true;
-                return;
-            }
-
-            targetPart = damageTarget;
+            _popup.PopupEntity(Loc.GetString("cmu-medical-bandage-no-wounds"), patient, args.User, PopupType.SmallCaution);
+            args.Handled = true;
+            return;
         }
 
         var delay = ResolveBandageDelay(args.User, patient, targetPart, used, treater, out var fumblingDelay);
@@ -134,56 +120,6 @@ public sealed class CMUBandageInterceptionSystem : EntitySystem
         if (!TryComp<BodyPartWoundComponent>(part, out var pw))
             return false;
         return pw.Wounds.Any(w => !w.Treated);
-    }
-
-    private bool ShouldYieldToArmedSurgeryTool(EntityUid medic, EntityUid patient, EntityUid used)
-    {
-        if (!TryComp<CMUSurgeryArmedStepComponent>(patient, out var armed))
-            return false;
-
-        return armed.Surgeon == medic
-            && armed.RequiredToolCategory is { } category
-            && _surgery.ToolMatchesCategory(used, category);
-    }
-
-    private EntityUid? PickDamageOnlyTarget(EntityUid medic, EntityUid patient, WoundTreaterComponent treater)
-    {
-        if (!HasTreatableDamage(medic, patient, treater))
-            return null;
-
-        var aimed = _zoneTargeting.TryGetFreshSelection(medic);
-        if (aimed is { } zone && PartForZone(patient, zone) is { } aimedPart)
-            return aimedPart;
-
-        EntityUid? fallback = null;
-        foreach (var (partUid, _) in _body.GetBodyChildren(patient))
-        {
-            fallback ??= partUid;
-            if (TryComp<BodyPartHealthComponent>(partUid, out var health) && health.Current < health.Max)
-                return partUid;
-        }
-
-        return fallback;
-    }
-
-    private bool HasTreatableDamage(EntityUid user, EntityUid patient, WoundTreaterComponent treater)
-    {
-        if (ResolveTreaterDamage(user, treater) >= FixedPoint2.Zero)
-            return false;
-
-        if (!TryComp<DamageableComponent>(patient, out var damageable))
-            return false;
-
-        if (!_prototypes.TryIndex<DamageGroupPrototype>(treater.Group, out var group))
-            return false;
-
-        foreach (var type in group.DamageTypes)
-        {
-            if (damageable.Damage.DamageDict.TryGetValue(type, out var amount) && amount > FixedPoint2.Zero)
-                return true;
-        }
-
-        return false;
     }
 
     private EntityUid? PartForZone(EntityUid patient, TargetBodyZone zone)
@@ -268,35 +204,20 @@ public sealed class CMUBandageInterceptionSystem : EntitySystem
 
         var part = GetEntity(args.Part);
         var treated = false;
-        var damageOnly = false;
         if (HasComp<BodyPartComponent>(part))
             treated = _wounds.TryTreatWound(part, out _);
 
         if (!treated || !TryComp<WoundTreaterComponent>(treaterUid, out var treater))
         {
-            if (!TryComp<WoundTreaterComponent>(treaterUid, out treater)
-                || !HasTreatableDamage(medic, patient, treater))
-            {
-                RemComp<CMUBandagePendingComponent>(ent);
-                return;
-            }
-
-            treated = true;
-            damageOnly = true;
-        }
-
-        var treaterDamage = ResolveTreaterDamage(medic, treater);
-        var appliedTreaterDamage = _wounds.TryApplyTreaterDamage(patient, medic, treaterUid, treater.Group, treaterDamage);
-        if (damageOnly && !appliedTreaterDamage)
-        {
             RemComp<CMUBandagePendingComponent>(ent);
             return;
         }
 
+        _wounds.TryApplyTreaterDamage(patient, medic, treaterUid, treater.Group, ResolveTreaterDamage(medic, treater));
         _audio.PlayPvs(treater.TreatEndSound, medic);
 
         var hasTreater = ConsumeTreater(treaterUid, treater);
-        var repeatPart = GetRepeatPart(medic, patient, part, treater);
+        var repeatPart = GetRepeatPart(medic, patient, part);
         args.Repeat = hasTreater && repeatPart != null;
         if (args.Repeat && repeatPart is { } nextPart)
         {
@@ -325,13 +246,12 @@ public sealed class CMUBandageInterceptionSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString(targetPopup, ("user", medic)), patient, patient);
     }
 
-    private EntityUid? GetRepeatPart(EntityUid medic, EntityUid patient, EntityUid currentPart, WoundTreaterComponent treater)
+    private EntityUid? GetRepeatPart(EntityUid medic, EntityUid patient, EntityUid currentPart)
     {
         if (PartHasUntreatedWound(currentPart))
             return currentPart;
 
-        return PickBandageTarget(medic, patient)
-            ?? PickDamageOnlyTarget(medic, patient, treater);
+        return PickBandageTarget(medic, patient);
     }
 
     private FixedPoint2 ResolveTreaterDamage(EntityUid user, WoundTreaterComponent treater)

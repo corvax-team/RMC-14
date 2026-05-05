@@ -104,9 +104,6 @@ public sealed partial class HardpointSlot
     public float RemoveDelay { get; set; } = -1f;
 
     [DataField]
-    public bool DisableEject { get; set; }
-
-    [DataField]
     public EntityWhitelist? Whitelist { get; set; }
 }
 

@@ -8,7 +8,7 @@
     size: Small
   - type: CMUBoneGraft
   - type: CMSurgeryTool
-    skill: 1
+    skill: 4
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/bone_gel.rsi
     state: bone-gel

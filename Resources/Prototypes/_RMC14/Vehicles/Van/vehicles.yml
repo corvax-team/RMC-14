@@ -106,7 +106,6 @@
     vehicleFamily: Van
     slots:
     - id: wheel-1
-      disableEject: true
       hardpointType: Wheel
       slotType: Wheel
       insertDelay: 1.5
@@ -285,7 +284,6 @@
     vehicleFamily: Van
     slots:
     - id: wheel-1
-      disableEject: true
       hardpointType: Wheel
       slotType: Wheel
       insertDelay: 1.5
@@ -391,7 +389,6 @@
     vehicleFamily: Van
     slots:
     - id: wheel-1
-      disableEject: true
       hardpointType: Wheel
       slotType: Wheel
       compatibilityId: SPPVan
@@ -420,7 +417,6 @@
     slots:
       secondary:
         startingItem: VehicleSPPVanTurret
-        disableEject: true
         whitelist:
           components:
           - HardpointItem
@@ -428,7 +424,6 @@
     vehicleFamily: Van
     slots:
     - id: secondary
-      disableEject: true
       hardpointType: Secondary
       slotType: Launcher
       compatibilityId: SPPVan
@@ -436,7 +431,6 @@
       insertDelay: 2.0
       required: false
     - id: wheel-1
-      disableEject: true
       hardpointType: Wheel
       slotType: Wheel
       compatibilityId: SPPVan
@@ -558,7 +552,6 @@
     vehicleFamily: Van
     slots:
     - id: wheel-1
-      disableEject: true
       hardpointType: Wheel
       slotType: Wheel
       compatibilityId: SPPVan

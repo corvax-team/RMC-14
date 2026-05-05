@@ -1,6 +1,4 @@
 using Content.Shared._CMU14.Medical.Items;
-using Content.Shared._CMU14.Medical.Bones.Events;
-using Content.Shared.Body.Part;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Timing;
 
@@ -25,7 +23,6 @@ public abstract class SharedFractureSystem : EntitySystem
 
         if (newSev == FractureSeverity.None)
         {
-            RaiseSeverityChanged(ent.Owner, current, FractureSeverity.None);
             RemComp<FractureComponent>(ent);
             return;
         }
@@ -37,18 +34,6 @@ public abstract class SharedFractureSystem : EntitySystem
         ent.Comp.AppearedAt = Timing.CurTime;
         ent.Comp.IsBleeding = FractureProfile.Get(newSev).BloodlossPerSecond > 0;
         Dirty(ent);
-        RaiseSeverityChanged(ent.Owner, current, newSev);
-    }
-
-    private void RaiseSeverityChanged(EntityUid part, FractureSeverity old, FractureSeverity @new)
-    {
-        if (old == @new)
-            return;
-        if (!TryComp<BodyPartComponent>(part, out var partComp) || partComp.Body is not { } body)
-            return;
-
-        var ev = new FractureSeverityChangedEvent(body, part, old, @new);
-        RaiseLocalEvent(part, ref ev);
     }
 
     /// <summary>
@@ -66,8 +51,7 @@ public abstract class SharedFractureSystem : EntitySystem
         FractureSeverity? suppressorMax = null;
         if (TryComp<CMUCastComponent>(part.Owner, out var cast))
             suppressorMax = cast.MaxSuppressed;
-        else if (!HasComp<CMUMalunionComponent>(part.Owner)
-                 && TryComp<CMUSplintedComponent>(part.Owner, out var splint))
+        else if (TryComp<CMUSplintedComponent>(part.Owner, out var splint))
             suppressorMax = splint.MaxSuppressed;
 
         if (suppressorMax is { } max && (byte)sev <= (byte)max)

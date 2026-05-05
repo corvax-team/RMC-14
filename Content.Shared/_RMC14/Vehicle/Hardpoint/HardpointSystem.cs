@@ -407,13 +407,8 @@ public sealed partial class HardpointSystem : EntitySystem
             if (string.IsNullOrWhiteSpace(slot.Id))
                 continue;
 
-            if (_itemSlots.TryGetSlot(uid, slot.Id, out var existingSlot, itemSlots))
-            {
-                if (slot.DisableEject && !existingSlot.DisableEject)
-                    _itemSlots.SetDisableEject(uid, existingSlot, true, itemSlots);
-
+            if (_itemSlots.TryGetSlot(uid, slot.Id, out _, itemSlots))
                 continue;
-            }
 
             var whitelist = slot.Whitelist;
             if (whitelist == null)
@@ -441,9 +436,6 @@ public sealed partial class HardpointSystem : EntitySystem
             };
 
             _itemSlots.AddItemSlot(uid, slot.Id, itemSlot, itemSlots);
-
-            if (slot.DisableEject)
-                _itemSlots.SetDisableEject(uid, itemSlot, true, itemSlots);
         }
     }
 

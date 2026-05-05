@@ -8,7 +8,7 @@
     size: Small
   - type: CMUOrganClamp
   - type: CMSurgeryTool
-    skill: 2
+    skill: 3
   - type: Sprite
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
     state: hemostat

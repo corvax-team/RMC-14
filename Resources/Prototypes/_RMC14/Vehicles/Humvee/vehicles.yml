@@ -116,7 +116,6 @@
     slots:
       wheel-1:
         startingItem: VehicleHumveeWheel
-        disableEject: true
         whitelist:
           components:
           - VehicleWheelItem
@@ -124,28 +123,24 @@
     vehicleFamily: Humvee
     slots:
     - id: turret
-      disableEject: true
       hardpointType: Turret
       slotType: Turret
       visualLayer: primary
       insertDelay: 2.0
       required: false
     - id: roof
-      disableEject: true
       hardpointType: RoofAttachment
       slotType: RoofAttachment
       visualLayer: support
       insertDelay: 1.5
       required: false
     - id: front
-      disableEject: true
       hardpointType: FrontAttachment
       slotType: FrontAttachment
       visualLayer: support-2
       insertDelay: 1.5
       required: false
     - id: wheel-1
-      disableEject: true
       hardpointType: Wheel
       slotType: Wheel
       insertDelay: 1.5
@@ -180,7 +175,6 @@
     slots:
       turret:
         startingItem: VehicleHumveeTurretArmed
-        disableEject: true
         whitelist:
           components:
           - HardpointItem
@@ -225,21 +219,18 @@
     vehicleFamily: Humvee
     slots:
     - id: roof
-      disableEject: true
       hardpointType: RoofAttachment
       slotType: RoofAttachment
       visualLayer: support
       insertDelay: 1.5
       required: false
     - id: front
-      disableEject: true
       hardpointType: FrontAttachment
       slotType: FrontAttachment
       visualLayer: support-2
       insertDelay: 1.5
       required: false
     - id: wheel-1
-      disableEject: true
       hardpointType: Wheel
       slotType: Wheel
       insertDelay: 1.5
@@ -296,21 +287,18 @@
     vehicleFamily: Humvee
     slots:
     - id: roof
-      disableEject: true
       hardpointType: RoofAttachment
       slotType: RoofAttachment
       visualLayer: support
       insertDelay: 1.5
       required: false
     - id: front
-      disableEject: true
       hardpointType: FrontAttachment
       slotType: FrontAttachment
       visualLayer: support-2
       insertDelay: 1.5
       required: false
     - id: wheel-1
-      disableEject: true
       hardpointType: Wheel
       slotType: Wheel
       insertDelay: 1.5
@@ -344,7 +332,6 @@
     slots:
       turret:
         startingItem: VehicleHumveeARCTurret
-        disableEject: true
         whitelist:
           components:
           - HardpointItem

@@ -223,56 +223,6 @@ public abstract class SharedCMUSplintItemSystem : EntitySystem
         return true;
     }
 
-    public void AddCastRemoveVerb(Entity<CMUHumanMedicalComponent> patient, ref GetVerbsEvent<AlternativeVerb> args)
-    {
-        if (!IsLayerEnabled())
-            return;
-        if (!args.CanInteract || !args.CanAccess)
-            return;
-        if (args.User != patient.Owner)
-            return;
-        if (!FindRemovableCast(patient.Owner, out var part))
-            return;
-
-        var user = args.User;
-        var patientUid = patient.Owner;
-        var verb = new AlternativeVerb
-        {
-            Text = Loc.GetString("cmu-medical-cast-verb-remove"),
-            Act = () => StartCastRemoveDoAfter(user, patientUid, part),
-            Priority = 1,
-        };
-        args.Verbs.Add(verb);
-    }
-
-    private void StartCastRemoveDoAfter(EntityUid user, EntityUid patient, EntityUid part)
-    {
-        var removeEv = new CMUCastVerbRemoveDoAfterEvent { PreSelectedPart = GetNetEntity(part) };
-        var removeDo = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(CastRemoveDoAfterSeconds),
-            removeEv, patient, target: patient)
-        {
-            BlockDuplicate = true,
-        };
-        if (DoAfter.TryStartDoAfter(removeDo))
-            Popup.PopupPredicted(Loc.GetString("cmu-medical-cast-removing"), patient, user);
-    }
-
-    private void OnCastVerbRemoveDoAfter(Entity<CMUHumanMedicalComponent> patient, ref CMUCastVerbRemoveDoAfterEvent args)
-    {
-        if (args.Cancelled)
-            return;
-        if (!IsLayerEnabled())
-            return;
-        if (!ResolvePart(patient.Owner, args.PreSelectedPart, out var part))
-            return;
-        if (!TryComp<CMUCastComponent>(part, out var cast) || !cast.ReadyToRemove)
-            return;
-
-        RemComp<CMUCastComponent>(part);
-        RaiseLocalEvent(new CMUCastChangedEvent(part, true));
-        Popup.PopupPredicted(Loc.GetString("cmu-medical-cast-removed"), patient.Owner, args.User);
-    }
-
     /// <summary>
     ///     Picks which fractured part to splint/cast.
     ///     Tier 1: medic's body-zone aim-picker selection (persistent — once
