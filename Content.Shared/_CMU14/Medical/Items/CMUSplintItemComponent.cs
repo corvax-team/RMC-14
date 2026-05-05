@@ -23,7 +23,4 @@ public sealed partial class CMUSplintItemComponent : Component
 
     [DataField]
     public bool ConsumedOnApply = true;
-
-    [DataField]
-    public int Uses = 1;
 }

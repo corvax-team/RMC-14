@@ -21,12 +21,6 @@ public sealed partial class CMUCastItemComponent : Component
     public bool ConsumedOnApply = true;
 
     [DataField]
-    public int Uses = 1;
-
-    [DataField]
-    public float PostOpHealMinutes = 5f;
-
-    [DataField]
     public Dictionary<FractureSeverity, float> HealMinutesPerSeverity = new()
     {
         { FractureSeverity.Hairline, 5f },

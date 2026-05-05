@@ -140,7 +140,8 @@ public abstract class SharedCMUSplintItemSystem : EntitySystem
         if (ent.Comp.ApplySound is not null)
             Audio.PlayPredicted(ent.Comp.ApplySound, part, null);
 
-        ConsumeSplintUse(ent);
+        if (ent.Comp.ConsumedOnApply && Net.IsServer)
+            QueueDel(ent.Owner);
 
         return true;
     }
@@ -216,79 +217,10 @@ public abstract class SharedCMUSplintItemSystem : EntitySystem
         if (ent.Comp.ApplySound is not null)
             Audio.PlayPredicted(ent.Comp.ApplySound, part, null);
 
-        ConsumeCastUse(ent);
+        if (ent.Comp.ConsumedOnApply && Net.IsServer)
+            QueueDel(ent.Owner);
 
         return true;
-    }
-
-    private void ConsumeSplintUse(Entity<CMUSplintItemComponent> ent)
-    {
-        if (!ent.Comp.ConsumedOnApply || !Net.IsServer)
-            return;
-
-        ent.Comp.Uses--;
-        if (ent.Comp.Uses <= 0)
-            QueueDel(ent.Owner);
-    }
-
-    private void ConsumeCastUse(Entity<CMUCastItemComponent> ent)
-    {
-        if (!ent.Comp.ConsumedOnApply || !Net.IsServer)
-            return;
-
-        ent.Comp.Uses--;
-        if (ent.Comp.Uses <= 0)
-            QueueDel(ent.Owner);
-    }
-
-    public void AddCastRemoveVerb(Entity<CMUHumanMedicalComponent> patient, ref GetVerbsEvent<AlternativeVerb> args)
-    {
-        if (!IsLayerEnabled())
-            return;
-        if (!args.CanInteract || !args.CanAccess)
-            return;
-        if (args.User != patient.Owner)
-            return;
-        if (!FindRemovableCast(patient.Owner, out var part))
-            return;
-
-        var user = args.User;
-        var patientUid = patient.Owner;
-        var verb = new AlternativeVerb
-        {
-            Text = Loc.GetString("cmu-medical-cast-verb-remove"),
-            Act = () => StartCastRemoveDoAfter(user, patientUid, part),
-            Priority = 1,
-        };
-        args.Verbs.Add(verb);
-    }
-
-    private void StartCastRemoveDoAfter(EntityUid user, EntityUid patient, EntityUid part)
-    {
-        var removeEv = new CMUCastVerbRemoveDoAfterEvent { PreSelectedPart = GetNetEntity(part) };
-        var removeDo = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(CastRemoveDoAfterSeconds),
-            removeEv, patient, target: patient)
-        {
-            BlockDuplicate = true,
-        };
-        if (DoAfter.TryStartDoAfter(removeDo))
-            Popup.PopupPredicted(Loc.GetString("cmu-medical-cast-removing"), patient, user);
-    }
-
-    private void OnCastVerbRemoveDoAfter(Entity<CMUHumanMedicalComponent> patient, ref CMUCastVerbRemoveDoAfterEvent args)
-    {
-        if (args.Cancelled)
-            return;
-        if (!IsLayerEnabled())
-            return;
-        if (!ResolvePart(patient.Owner, args.PreSelectedPart, out var part))
-            return;
-        if (!TryComp<CMUCastComponent>(part, out var cast) || !cast.ReadyToRemove)
-            return;
-
-        RemComp<CMUCastComponent>(part);
-        RaiseLocalEvent(new CMUCastChangedEvent(part, true));
-        Popup.PopupPredicted(Loc.GetString("cmu-medical-cast-removed"), patient.Owner, args.User);
     }
 
     /// <summary>

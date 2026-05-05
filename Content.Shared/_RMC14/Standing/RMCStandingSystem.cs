@@ -140,24 +140,13 @@ public sealed class RMCStandingSystem : EntitySystem
         if (args.Cancelled)
             return false;
 
-        if (!ShouldBlockDownedActions(drop))
-            return false;
-
-        args.Cancel();
-        return true;
-    }
-
-    private bool ShouldBlockDownedActions(Entity<DropItemsOnRestComponent> drop)
-    {
-        if (!_standing.IsDown(drop))
-            return false;
-
-        if (TryComp<RMCRestComponent>(drop, out var rest) && rest.Resting)
+        if (_standing.IsDown(drop))
+        {
+            args.Cancel();
             return true;
+        }
 
-        return HasComp<KnockedDownComponent>(drop) ||
-               HasComp<StunnedComponent>(drop) ||
-               _mob.IsIncapacitated(drop);
+        return false;
     }
 
     private void OnEnterDown(Entity<DownOnEnterComponent> mob, ref EntInsertedIntoContainerMessage args)

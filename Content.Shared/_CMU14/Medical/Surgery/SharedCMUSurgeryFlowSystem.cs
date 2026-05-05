@@ -286,60 +286,9 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
             return;
         }
 
-        ApplyWrongToolDamage(user, patient, used, damageType, amount);
-        return true;
-    }
-
-    private void ShowStepInvalidPopup(EntityUid patient, EntityUid user, BodyPartType partType, StepInvalidReason reason, string? existingPopup)
-    {
-        if (existingPopup is not null)
-            return;
-
-        var locKey = reason switch
-        {
-            StepInvalidReason.MissingSkills => "cmu-medical-surgery-missing-skills",
-            StepInvalidReason.NeedsOperatingTable => "cmu-medical-surgery-needs-operating-table",
-            StepInvalidReason.Armor => partType == BodyPartType.Head
-                ? "cmu-medical-surgery-remove-helmet"
-                : "cmu-medical-surgery-remove-armor",
-            StepInvalidReason.MissingTool => "cmu-medical-surgery-wrong-tool",
-            _ => null,
-        };
-
-        if (locKey is null)
-            return;
-
-        Popup.PopupEntity(Loc.GetString(locKey), patient, user, PopupType.SmallCaution);
-    }
-
-    private bool TryResolveArmedStepEntity(CMUSurgeryArmedStepComponent armed, out EntityUid stepEnt)
-    {
-        stepEnt = default;
-
-        if (RmcSurgery.GetSingleton(armed.SurgeryId) is not { } surgeryEnt)
-            return false;
-        if (!TryComp<CMSurgeryComponent>(surgeryEnt, out var surgeryComp))
-            return false;
-        if (armed.StepIndex < 0 || armed.StepIndex >= surgeryComp.Steps.Count)
-            return false;
-        if (RmcSurgery.GetSingleton(surgeryComp.Steps[armed.StepIndex]) is not { } resolvedStepEnt)
-            return false;
-
-        stepEnt = resolvedStepEnt;
-        return true;
-    }
-
-    private bool RequiresActivatedCautery(EntityUid tool, string? requiredToolCategory)
-    {
-        if (requiredToolCategory != "cautery")
-            return false;
-
-        if (TryComp<SmokableComponent>(tool, out var smokable))
-            return smokable.State != SmokableState.Lit;
-
-        return HasComp<BlowtorchComponent>(tool) || HasComp<ItemToggleHotComponent>(tool)
-            ? !ItemToggle.IsActivated(tool)
-            : false;
+        ApplyWrongToolDamage(args.User, patient, args.Used, damageType, amount);
+        ClearArmed(patient, armed);
+        args.Handled = true;
     }
 
     private bool IsReattachOnPatientBody(EntityUid patient, EntityUid? clickTarget, CMUSurgeryArmedStepComponent armed)
