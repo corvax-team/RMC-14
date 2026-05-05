@@ -41,8 +41,7 @@ public sealed record CMUSurgeryInFlightInfo(
     string PartDisplayName,
     string LeafSurgeryDisplayName,
     string SurgeonName,
-    TimeSpan StartedAt,
-    bool OwnedByViewer);
+    TimeSpan StartedAt);
 
 [Serializable, NetSerializable]
 public sealed record CMUSurgeryPartEntry(
