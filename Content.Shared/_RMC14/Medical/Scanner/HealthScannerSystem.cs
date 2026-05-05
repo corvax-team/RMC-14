@@ -2,7 +2,6 @@ using Content.Shared.Atmos.Rotting;
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Medical.Defibrillator;
 using Content.Shared._RMC14.Medical.HUD;
 using Content.Shared._RMC14.Medical.HUD.Components;
@@ -36,7 +35,6 @@ public sealed class HealthScannerSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
     [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
-    [Dependency] private readonly RMCPulseSystem _rmcPulse = default!;
     [Dependency] private readonly SharedRMCTemperatureSystem _rmcTemperature = default!;
     [Dependency] private readonly RMCUnrevivableSystem _rmcUnrevivable = default!;
     [Dependency] private readonly SharedRottingSystem _rotting = default!;
@@ -195,7 +193,6 @@ public sealed class HealthScannerSystem : EntitySystem
         _rmcBloodstream.TryGetChemicalSolution(target, out _, out var chemicals);
         _rmcTemperature.TryGetCurrentTemperature(target, out var temperature);
 
-        var pulse = _rmcPulse.TryGetPulseReading(target, true, out _);
         var bleeding = _rmcBloodstream.IsBleeding(target);
         var state = new HealthScannerBuiState(GetNetEntity(target), blood, maxBlood, temperature, chemicals, bleeding);
         FillBaseMedicalReadout(target, state);
@@ -203,11 +200,10 @@ public sealed class HealthScannerSystem : EntitySystem
         EntityUid? examiner = null;
         if (_rmcHands.TryGetHolder(scanner, out var holder))
             examiner = holder;
-        var uiState = new HealthScannerBuiState(state);
-        var buildEv = new HealthScannerBuildStateEvent(scanner.Owner, target, examiner, uiState);
+        var buildEv = new HealthScannerBuildStateEvent(scanner.Owner, target, examiner, state);
         RaiseLocalEvent(scanner.Owner, ref buildEv);
 
-        _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, uiState);
+        _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, state);
     }
 
     private void FillBaseMedicalReadout(EntityUid target, HealthScannerBuiState state)
