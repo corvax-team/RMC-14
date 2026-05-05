@@ -65,7 +65,7 @@
   - type: XenoPlasma
     plasma: 300
     maxPlasma: 300
-    plasmaRegenOnWeeds: 5
+    plasmaRegenOnWeeds: 8 #ccm
   - type: CMArmor
     xenoArmor: 25
     explosionArmor: 80

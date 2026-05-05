@@ -1,7 +1,7 @@
 - type: entity
   parent: ActionXenoBase
   id: MCActionXenoRavage
-  name: Ravage (200)
+  name: Ravage (100)
   description: Attacks and knockbacks enemies in the direction your facing.
   components:
   - type: Action
@@ -12,14 +12,14 @@
     useDelay: 6
   - type: InstantAction
     event: !type:MCXenoRavageActionEvent
-      plasmaCost: 200
+      plasmaCost: 100
   - type: XenoActionPlasma
-    cost: 200
+    cost: 100
 
 - type: entity
   parent: ActionXenoBase
   id: MCActionXenoCharge
-  name: Charge (250)
+  name: Charge (150)
   description: Charge up to 4 tiles and viciously attack your target
   components:
   - type: Action
@@ -33,6 +33,6 @@
     checkCanAccess: false
   - type: WorldTargetAction
     event: !type:MCXenoPounceActionEvent
-      plasmaCost: 250
+      plasmaCost: 150
   - type: XenoActionPlasma
-    cost: 250
+    cost: 150

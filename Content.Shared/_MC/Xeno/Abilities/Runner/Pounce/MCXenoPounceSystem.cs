@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
@@ -37,6 +38,7 @@ public sealed class MCXenoPounceSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _rmcXenoHive = null!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = null!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = null!;
+    [Dependency] private readonly EntityLookupSystem _lookup = null!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -206,7 +208,9 @@ public sealed class MCXenoPounceSystem : EntitySystem
     {
         if (!HasComp<Shared.Mobs.Components.MobStateComponent>(target))
         {
-            Stop(entity);
+            if (!IsOnWeeds(entity))
+                Stop(entity);
+
             return;
         }
 
@@ -215,14 +219,16 @@ public sealed class MCXenoPounceSystem : EntitySystem
 
         if (_rmcXenoHive.FromSameHive(entity.Owner, target))
         {
-            Stop(entity);
+            if (!IsOnWeeds(entity))
+                Stop(entity);
+
             return;
         }
 
         if (!TryComp<MCXenoPounceComponent>(entity, out var config))
             return;
 
-        if (config.StopOnHit)
+        if (config.StopOnHit && !IsOnWeeds(entity))
         {
             Stop(entity);
             return;
@@ -250,5 +256,20 @@ public sealed class MCXenoPounceSystem : EntitySystem
             comp.Hit.Clear();
 
         RemCompDeferred<MCXenoPouncingComponent>(entityUid);
+    }
+
+    private bool IsOnWeeds(EntityUid uid)
+    {
+        var coords = Transform(uid).Coordinates;
+
+        var entities = _lookup.GetEntitiesIntersecting(coords);
+
+        foreach (var ent in entities)
+        {
+            if (HasComp<XenoWeedsComponent>(ent))
+                return true;
+        }
+
+        return false;
     }
 }
