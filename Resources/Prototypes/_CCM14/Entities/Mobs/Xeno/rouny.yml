@@ -80,3 +80,17 @@
     moveDelayTime: 1.5
   - type: XenoRegen
     restHealMultiplier:  1.40
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.3825
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.425
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.2475
+      whitelist:
+        components:
+        - XenoHeavy

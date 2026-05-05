@@ -259,7 +259,7 @@
     delay: 0.05
     range: 5
   - type: MCSmokePlasma
-    multiplier: 0.2
+    multiplier: 0.4
   - type: TimedDespawn
     lifetime: 9
   - type: MCTimedDespawnDisappearanceVisuals
