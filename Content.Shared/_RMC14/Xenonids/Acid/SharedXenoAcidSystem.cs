@@ -296,17 +296,21 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     {
         time = TimeSpan.Zero;
         mult = 1;
-        if (!TryComp(target, out CorrodibleComponent? corrodible) ||
-            !corrodible.IsCorrodible)
+        if (!TryComp(target, out CorrodibleComponent? targetCorrodible) || !targetCorrodible.Structure)
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-acid-not-corrodible", ("target", target)), xeno, xeno, PopupType.SmallCaution);
             return false;
         }
 
         if (_acidHole.HasActiveHole(target))
-        
-        if (HasComp<BodyPartComponent>(target) ||
-            !TryComp(target, out CorrodibleComponent? corrodible) ||
+
+            if (HasComp<BodyPartComponent>(target))
+            {
+                _popup.PopupClient(Loc.GetString("rmc-acid-hole-already-weakened"), xeno, xeno, PopupType.SmallCaution);
+                return false;
+            }
+
+        if (!TryComp(target, out CorrodibleComponent? corrodible) ||
             !corrodible.IsCorrodible)
         {
             _popup.PopupClient(Loc.GetString("rmc-acid-hole-already-weakened"), xeno, xeno, PopupType.SmallCaution);
