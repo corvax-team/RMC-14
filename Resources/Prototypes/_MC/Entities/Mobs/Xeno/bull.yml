@@ -47,8 +47,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      325: Critical
-      425: Dead
+      500: Critical
+      600: Dead
   - type: XenoDevolve
     devolvesTo:
     - CMXenoDefender
@@ -75,6 +75,9 @@
       whitelist:
         components:
         - XenoHeavy
+  - type: CMArmor
+    xenoArmor: 20
+    explosionArmor: 40
   # - type: MCArmor
   #   soft:
   #     melee: 40
