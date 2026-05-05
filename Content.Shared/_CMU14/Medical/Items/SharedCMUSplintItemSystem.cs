@@ -1,20 +1,16 @@
 using System.Linq;
 using Content.Shared._CMU14.Medical;
 using Content.Shared._CMU14.Medical.Bones;
-using Content.Shared._CMU14.Medical.Bones.Events;
 using Content.Shared._CMU14.Medical.BodyPart;
-using Content.Shared._CMU14.Medical.BodyPart.Events;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Network;
-using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
@@ -30,11 +26,8 @@ public abstract class SharedCMUSplintItemSystem : EntitySystem
     [Dependency] protected readonly SharedDoAfterSystem DoAfter = default!;
     [Dependency] protected readonly SharedFractureSystem Fracture = default!;
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
-    [Dependency] protected readonly IRobustRandom Random = default!;
 
     private const float CastScanInterval = 1f;
-    private const float CastRemovePromptSeconds = 30f;
-    private const float CastRemoveDoAfterSeconds = 1f;
     private float _castScanAccumulator;
 
     private bool _medicalEnabled;
@@ -45,11 +38,8 @@ public abstract class SharedCMUSplintItemSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<CMUSplintItemComponent, AfterInteractEvent>(OnSplintInteract);
         SubscribeLocalEvent<CMUSplintItemComponent, CMUSplintApplyDoAfterEvent>(OnSplintDoAfter);
-        SubscribeLocalEvent<CMUSplintedComponent, BodyPartDamagedEvent>(OnSplintedPartDamaged);
         SubscribeLocalEvent<CMUCastItemComponent, AfterInteractEvent>(OnCastInteract);
         SubscribeLocalEvent<CMUCastItemComponent, CMUCastApplyDoAfterEvent>(OnCastDoAfter);
-        SubscribeLocalEvent<CMUCastComponent, BoneFracturedEvent>(OnCastPartFractured);
-        SubscribeLocalEvent<CMUHumanMedicalComponent, CMUCastVerbRemoveDoAfterEvent>(OnCastVerbRemoveDoAfter);
 
         Cfg.OnValueChanged(CMUMedicalCCVars.Enabled, v => _medicalEnabled = v, true);
         Cfg.OnValueChanged(CMUMedicalCCVars.BoneEnabled, v => _boneEnabled = v, true);
@@ -58,18 +48,6 @@ public abstract class SharedCMUSplintItemSystem : EntitySystem
     public bool IsLayerEnabled()
     {
         return _medicalEnabled && _boneEnabled;
-    }
-
-    private void OnSplintedPartDamaged(Entity<CMUSplintedComponent> ent, ref BodyPartDamagedEvent args)
-    {
-        if (Net.IsClient || !IsLayerEnabled())
-            return;
-        if (!ent.Comp.BreakOnDamage)
-            return;
-        if (args.Delta.GetTotal() <= ent.Comp.BreakDamageThreshold)
-            return;
-
-        RemCompDeferred<CMUSplintedComponent>(ent);
     }
 
     private void OnSplintInteract(Entity<CMUSplintItemComponent> ent, ref AfterInteractEvent args)
@@ -132,10 +110,7 @@ public abstract class SharedCMUSplintItemSystem : EntitySystem
         var splinted = EnsureComp<CMUSplintedComponent>(part);
         if ((byte)ent.Comp.MaxSuppressed > (byte)splinted.MaxSuppressed)
             splinted.MaxSuppressed = ent.Comp.MaxSuppressed;
-        splinted.BreakOnDamage = ent.Comp.BreakOnDamage;
-        splinted.BreakDamageThreshold = ent.Comp.BreakDamageThreshold;
         Dirty(part, splinted);
-        RaiseLocalEvent(new CMUSplintChangedEvent(part, false));
 
         if (ent.Comp.ApplySound is not null)
             Audio.PlayPredicted(ent.Comp.ApplySound, part, null);
@@ -152,7 +127,7 @@ public abstract class SharedCMUSplintItemSystem : EntitySystem
             return;
         if (!HasComp<CMUHumanMedicalComponent>(target))
             return;
-        if (!TryFindCastTargetPart(target, out var part, args.User))
+        if (!TryFindFracturedPart(target, out var part, args.User))
             return;
 
         var ev = new CMUCastApplyDoAfterEvent { PreSelectedPart = GetNetEntity(part) };
@@ -176,11 +151,11 @@ public abstract class SharedCMUSplintItemSystem : EntitySystem
 
         EntityUid part;
         if (args.PreSelectedPart is { } netPart && TryGetEntity(netPart, out var stored)
-            && IsCastTarget(stored.Value))
+            && HasComp<FractureComponent>(stored.Value))
         {
             part = stored.Value;
         }
-        else if (!TryFindCastTargetPart(target, out part, args.User))
+        else if (!TryFindFracturedPart(target, out part, args.User))
         {
             return;
         }
@@ -189,14 +164,9 @@ public abstract class SharedCMUSplintItemSystem : EntitySystem
 
     public bool ApplyCastToPart(Entity<CMUCastItemComponent> ent, EntityUid part)
     {
-        var hasFracture = TryComp<FractureComponent>(part, out var frac);
-        var hasPostOp = HasComp<CMUPostOpBoneSetComponent>(part);
-        if (!hasFracture && !hasPostOp)
+        if (!TryComp<FractureComponent>(part, out var frac))
             return false;
-        var minutes = ent.Comp.PostOpHealMinutes;
-        if (hasFracture
-            && !HasComp<CMUMalunionComponent>(part)
-            && !ent.Comp.HealMinutesPerSeverity.TryGetValue(frac!.Severity, out minutes))
+        if (!ent.Comp.HealMinutesPerSeverity.TryGetValue(frac.Severity, out var minutes))
         {
             // Cast can't help this severity (Compound+ — surgery only).
             return false;
@@ -205,14 +175,9 @@ public abstract class SharedCMUSplintItemSystem : EntitySystem
         var cast = EnsureComp<CMUCastComponent>(part);
         cast.AppliedAt = Timing.CurTime;
         cast.HealCompletesAt = Timing.CurTime + TimeSpan.FromMinutes(minutes);
-        cast.ReadyToRemove = false;
-        cast.NextRemovePrompt = TimeSpan.Zero;
         if ((byte)ent.Comp.MaxSuppressed > (byte)cast.MaxSuppressed)
             cast.MaxSuppressed = ent.Comp.MaxSuppressed;
         Dirty(part, cast);
-        RaiseLocalEvent(new CMUCastChangedEvent(part, false));
-        if (HasComp<CMUSplintedComponent>(part))
-            RemComp<CMUSplintedComponent>(part);
 
         if (ent.Comp.ApplySound is not null)
             Audio.PlayPredicted(ent.Comp.ApplySound, part, null);
@@ -277,96 +242,6 @@ public abstract class SharedCMUSplintItemSystem : EntitySystem
         return false;
     }
 
-    public bool TryFindCastTargetPart(EntityUid body, out EntityUid part, EntityUid? user = null)
-    {
-        part = default;
-
-        if (user is { } u
-            && TryComp<BodyZoneTargetingComponent>(u, out var aim)
-            && aim.LastSelectedAt > TimeSpan.Zero)
-        {
-            var (partType, symmetry) = SharedBodyZoneTargetingSystem.ToBodyPart(aim.Selected);
-            foreach (var (id, partComp) in Body.GetBodyChildren(body))
-            {
-                if (partComp.PartType != partType)
-                    continue;
-                if (symmetry is { } s && partComp.Symmetry != s)
-                    continue;
-                if (IsCastTarget(id))
-                {
-                    part = id;
-                    return true;
-                }
-            }
-        }
-
-        foreach (var (id, _) in Body.GetBodyChildren(body))
-        {
-            if (IsCastTarget(id) && !HasComp<CMUCastComponent>(id))
-            {
-                part = id;
-                return true;
-            }
-        }
-
-        foreach (var (id, _) in Body.GetBodyChildren(body))
-        {
-            if (IsCastTarget(id))
-            {
-                part = id;
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private bool IsCastTarget(EntityUid part)
-    {
-        return HasComp<BodyPartComponent>(part)
-               && (HasComp<FractureComponent>(part) || HasComp<CMUPostOpBoneSetComponent>(part));
-    }
-
-    private bool FindRemovableCast(EntityUid body, out EntityUid part)
-    {
-        part = default;
-        foreach (var (id, _) in Body.GetBodyChildren(body))
-        {
-            if (TryComp<CMUCastComponent>(id, out var cast) && cast.ReadyToRemove)
-            {
-                part = id;
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private bool ResolvePart(EntityUid body, NetEntity? selected, out EntityUid part)
-    {
-        part = default;
-        if (selected is { } netPart && TryGetEntity(netPart, out var stored) && HasComp<BodyPartComponent>(stored.Value))
-        {
-            part = stored.Value;
-            return true;
-        }
-
-        return FindRemovableCast(body, out part);
-    }
-
-    private void OnCastPartFractured(Entity<CMUCastComponent> ent, ref BoneFracturedEvent args)
-    {
-        if (Net.IsClient || !IsLayerEnabled())
-            return;
-        if (!ent.Comp.ReadyToRemove)
-            Popup.PopupEntity(Loc.GetString("cmu-medical-cast-broke"), args.Body, args.Body, PopupType.MediumCaution);
-
-        RemComp<CMUCastComponent>(ent.Owner);
-        if (HasComp<CMUPostOpBoneSetComponent>(ent.Owner))
-            RemComp<CMUPostOpBoneSetComponent>(ent.Owner);
-        RaiseLocalEvent(new CMUCastChangedEvent(ent.Owner, true));
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -383,55 +258,13 @@ public abstract class SharedCMUSplintItemSystem : EntitySystem
         _castScanAccumulator = 0f;
 
         var now = Timing.CurTime;
-        var castQuery = EntityQueryEnumerator<CMUCastComponent, BodyPartComponent>();
-        while (castQuery.MoveNext(out var partUid, out var cast, out var part))
+        var query = EntityQueryEnumerator<CMUCastComponent, FractureComponent>();
+        while (query.MoveNext(out var partUid, out var cast, out var frac))
         {
-            if (cast.ReadyToRemove)
-            {
-                if (cast.NextRemovePrompt <= now && part.Body is { } body)
-                {
-                    Popup.PopupEntity(Loc.GetString("cmu-medical-cast-ready-remove"), body, body, PopupType.Medium);
-                    cast.NextRemovePrompt = now + TimeSpan.FromSeconds(CastRemovePromptSeconds);
-                    Dirty(partUid, cast);
-                }
-                continue;
-            }
-
             if (cast.HealCompletesAt > now)
                 continue;
-
-            if (TryComp<FractureComponent>(partUid, out var frac))
-                Fracture.SetSeverity((partUid, frac), FractureSeverity.None, forceUpgrade: false);
-            if (HasComp<CMUMalunionComponent>(partUid))
-                RemComp<CMUMalunionComponent>(partUid);
-            if (HasComp<CMUPostOpBoneSetComponent>(partUid))
-                RemComp<CMUPostOpBoneSetComponent>(partUid);
-
-            cast.ReadyToRemove = true;
-            cast.NextRemovePrompt = now;
-            Dirty(partUid, cast);
-            RaiseLocalEvent(new CMUCastChangedEvent(partUid, false));
-        }
-
-        var postOpQuery = EntityQueryEnumerator<CMUPostOpBoneSetComponent, BodyPartComponent>();
-        while (postOpQuery.MoveNext(out var partUid, out var postOp, out var part))
-        {
-            if (HasComp<CMUCastComponent>(partUid) || postOp.MalunionCheckAt > now)
-                continue;
-
-            if (Random.Prob(postOp.MalunionChance))
-            {
-                var frac = EnsureComp<FractureComponent>(partUid);
-                Fracture.SetSeverity((partUid, frac), FractureSeverity.Simple);
-                var malunion = EnsureComp<CMUMalunionComponent>(partUid);
-                malunion.AppearedAt = now;
-                Dirty(partUid, malunion);
-
-                if (part.Body is { } body)
-                    Popup.PopupEntity(Loc.GetString("cmu-medical-cast-malunion"), body, body, PopupType.MediumCaution);
-            }
-
-            RemComp<CMUPostOpBoneSetComponent>(partUid);
+            Fracture.SetSeverity((partUid, frac), FractureSeverity.None, forceUpgrade: false);
+            RemComp<CMUCastComponent>(partUid);
         }
     }
 }
@@ -445,13 +278,6 @@ public sealed partial class CMUSplintApplyDoAfterEvent : SimpleDoAfterEvent
 
 [Serializable, NetSerializable]
 public sealed partial class CMUCastApplyDoAfterEvent : SimpleDoAfterEvent
-{
-    [DataField]
-    public NetEntity? PreSelectedPart;
-}
-
-[Serializable, NetSerializable]
-public sealed partial class CMUCastVerbRemoveDoAfterEvent : SimpleDoAfterEvent
 {
     [DataField]
     public NetEntity? PreSelectedPart;
