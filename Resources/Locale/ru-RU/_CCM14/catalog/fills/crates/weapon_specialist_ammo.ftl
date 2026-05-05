@@ -1,0 +1,1 @@
+ent-CCMCrateM5DemoSpecTanglefoot = ящик химических ракет Tanglefoot M5-ATL x3

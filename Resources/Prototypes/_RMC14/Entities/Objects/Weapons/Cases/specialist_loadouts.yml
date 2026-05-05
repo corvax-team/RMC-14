@@ -106,6 +106,8 @@
     - id: RMCSatchelDemoSpec
     - id: RMCWeaponLauncherM5ATL
     - id: RMCRocket84mm
+      amount: 1
+    - id: MCRocketShellTanglefoot
       amount: 2
     - id: RMCRocket84mmAntiArmor
       amount: 2
@@ -113,7 +115,7 @@
       amount: 1
     - id: RMCMK80
     - id: CMMagazinePistolMK80
-      amount: 2
+      amount: 1
     - id: RMCExplosivePlastic
       amount: 2
     - id: RMCBinoculars

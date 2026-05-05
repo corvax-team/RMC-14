@@ -388,6 +388,8 @@
       - cost: 3000
         crate: RMCCrateM5DemoSpecHighExplosive
       - cost: 3000
+        crate: CCMCrateM5DemoSpecTanglefoot
+      - cost: 3000
         crate: RMCCrateM5DemoSpecAntiArmor
       - cost: 3000
         crate: RMCCrateM5DemoSpecWhitePhosphorus
