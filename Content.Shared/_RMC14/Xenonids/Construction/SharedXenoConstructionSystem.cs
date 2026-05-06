@@ -1,7 +1,6 @@
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.CCVar;
@@ -41,7 +40,6 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Prototypes;
 using Content.Shared.Tag;
-using Content.Shared.Vehicle.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -108,7 +106,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private const string XenoStructuresAnimation = "RMCEffect";
     private const string XenoHiveCoreNodeId = "HiveCoreXenoConstructionNode";
-    private const float VehicleConstructionBlockRange = 3f;
 
     private float _densityThreshold;
     private TimeSpan _newResinPreventCollideTime;
@@ -296,8 +293,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        var tile = _mapSystem.CoordinatesToTile(gridUid, gridComp, coordinates);
-        if (!_xenoWeeds.CanSpreadWeedsPopup(grid, tile, xeno, args.UseOnSemiWeedable, true))
+        if (!_xenoWeeds.CanSpreadWeedsPopup(grid, coordinates.Position, xeno, null, args.UseOnSemiWeedable, true))
             return;
 
         if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, grid, coordinates, args.LimitDistance))
@@ -340,16 +336,25 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        Entity<XenoWeedsComponent> adjacent = default;
+        List <Entity<XenoWeedsComponent>> adjacentNodes = new ();
         if (existing == null)
         {
+            var canSpread = false;
             foreach (var direction in _rmcMap.CardinalDirections)
             {
-                if (_rmcMap.HasAnchoredEntityEnumerator(coordinates, out adjacent, direction))
-                    break;
+                if (!_rmcMap.HasAnchoredEntityEnumerator(coordinates, out Entity<XenoWeedsComponent> adjacent, direction))
+                    continue;
+
+                adjacentNodes.Add(adjacent);
+
+                if (!_xenoWeeds.CanSpreadWeedsPopup(grid, coordinates.Position, xeno, adjacent, false, true))
+                    continue;
+
+                canSpread = true;
+                break;
             }
 
-            if (adjacent == default)
+            if (adjacentNodes.Count == 0)
             {
                 _popup.PopupClient("You can only plant weeds if there is a nearby node.",
                     args.Target,
@@ -358,13 +363,20 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
                 return;
             }
+
+            if (!canSpread)
+            {
+                _popup.PopupClient("An obstacle is preventing the weeds from spreading",
+                    args.Target,
+                    xeno,
+                    PopupType.MediumCaution);
+
+                return;
+            }
         }
 
-        var toSpawn = existing == null ? args.Expand : args.Source;
-        var tile = _mapSystem.CoordinatesToTile(gridUid, gridComp, coordinates);
-        if (!_xenoWeeds.CanSpreadWeedsPopup(grid, tile, xeno, false, true))
-            return;
-
+        var spawnSource = existing != null;
+        var toSpawn = !spawnSource ? args.Expand : args.Source;
         if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, grid, coordinates, false))
             return;
 
@@ -373,6 +385,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
 
         args.Handled = true;
+
+        if (spawnSource)
+            _actions.SetUseDelay(args.Action.Owner, args.NodePlaceCooldown);
+
         if (_net.IsServer)
         {
             var newWeeds = Spawn(toSpawn, coordinates);
@@ -380,7 +396,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             _hive.SetSameHive(xeno.Owner, newWeeds);
 
             if (existing == null)
-                _xenoWeeds.AssignSource(newWeeds, adjacent.Comp?.Source ?? adjacent);
+                _xenoWeeds.AssignSource(newWeeds, adjacentNodes.Last().Comp.Source ?? adjacentNodes.Last());
         }
 
         _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno);
@@ -436,7 +452,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         };
     }
 
-    private EntProtoId GetResinUpgradeTarget(EntProtoId originalId)
+    private EntProtoId GetQueenAnimationVariant(EntProtoId originalId)
     {
         return originalId.Id switch
         {
@@ -480,7 +496,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             if (_net.IsClient)
                 return;
 
-            Del(upgradeable);
+            QueueDel(upgradeable);
             var spawn = Spawn(to, snapped);
             _hive.SetSameHive(xeno.Owner, spawn);
             args.Handled = true;
@@ -511,7 +527,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (attempt.Cancelled)
             return;
 
-        var animationChoice = hasBoost ? GetResinUpgradeTarget(choice) : choice;
+        var animationChoice = hasBoost ? GetQueenAnimationVariant(choice) : choice;
         var effectId = XenoStructuresAnimation + animationChoice;
         var coordinates = GetNetCoordinates(args.Target);
         var entityCoords = GetCoordinates(coordinates);
@@ -1332,8 +1348,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         target = target.SnapToGrid(EntityManager, _map);
         var hasBoost = _queenBoostQuery.HasComp(xeno.Owner);
 
-        if (IsNearVehiclePopup(xeno, target))
-            return false;
         if (checkStructureSelected &&
             buildChoice is { } nodeChoice &&
             _prototype.TryIndex(nodeChoice, out var nodeChoiceProto) &&
@@ -1714,12 +1728,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return false;
         }
 
-        if (IsNearVehicle(_transform.ToMapCoordinates(coords)))
-        {
-            popupType = "rmc-xeno-construction-blocked";
-            return false;
-        }
-
         var tile = _mapSystem.TileIndicesFor(gridId, grid, coords);
         var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
         var hasWeeds = false;
@@ -1766,25 +1774,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         return true;
-    }
-
-    private bool IsNearVehiclePopup(Entity<XenoConstructionComponent> xeno, EntityCoordinates target)
-    {
-        if (!IsNearVehicle(_transform.ToMapCoordinates(target)))
-            return false;
-
-        _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
-        return true;
-    }
-
-    private bool IsNearVehicle(MapCoordinates mapCoords)
-    {
-        if (mapCoords.MapId == MapId.Nullspace)
-            return false;
-
-        var size = new Vector2(VehicleConstructionBlockRange * 2f, VehicleConstructionBlockRange * 2f);
-        var aabb = Box2.CenteredAround(mapCoords.Position, size);
-        return _entityLookup.AnyComponentsIntersecting(typeof(GridVehicleMoverComponent), mapCoords.MapId, aabb);
     }
 
     public void GiveQueenBoost(EntityUid queen, float speedMultiplier, float remoteRange)
