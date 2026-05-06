@@ -5,6 +5,20 @@
   id: BaseMobDiona
   abstract: true
   components:
+  - type: CMUHumanMedical
+  - type: HitLocation
+  - type: PainShock
+  - type: BodyZoneTargeting
+  - type: UserInterface
+    interfaces:
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      enum.CMSurgeryUIKey.Key:
+        type: CMSurgeryBui
+      enum.CMUSurgeryUIKey.Key:
+        type: CMUSurgeryBui
   - type: HumanoidAppearance
     species: Diona
   - type: Hunger
