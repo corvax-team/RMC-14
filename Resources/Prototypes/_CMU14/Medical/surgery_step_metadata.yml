@@ -192,13 +192,6 @@
   category: suture
   minSkill: 2
 
-- type: cmuSurgeryStepMetadata
-  id: CMUSurgeryStepMetaRepairStomach
-  surgery: CMUSurgeryRepairStomach
-  displayName: Suture Stomach
-  validParts: [Torso]
-  category: suture
-
 # ---- Brain / eye / ear repair (head only) ---------------------------
 
 - type: cmuSurgeryStepMetadata
