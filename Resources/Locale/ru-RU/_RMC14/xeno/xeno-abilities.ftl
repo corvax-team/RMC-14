@@ -358,6 +358,6 @@ rmc-doomed-fail = Это не работает...
 rmc-destroy-cant-reach = У нас нет прямого пути к этой точке!
 rmc-destroy-cant-area = Мы не можем прыгнуть в эту область!
 # Queen Eye
-rmc-xeno-queen-eye-no-weeds = We can't move our eye there, there are no weeds!
-rmc-xeno-queen-eye-expand-weeds-name = Expand Weeds (50)
-rmc-xeno-queen-eye-expand-weeds-desc = Expand existing weeds or turn a weed tile into a node.
+rmc-xeno-queen-eye-no-weeds = Мы не можем переместить взгляд туда, там нет сорняков!
+rmc-xeno-queen-eye-expand-weeds-name = Расширить сорняки (50)
+rmc-xeno-queen-eye-expand-weeds-desc = Расширить существующие сорняки или превратить тайл с сорняками в узел.
