@@ -367,7 +367,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var existing = _xenoWeeds.GetWeedsOnFloor(grid, coordinates);
         if (existing is { Comp.IsSource: true })
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-weeds-source-already-here"), args.Target, xeno.Owner);
+            _popup.PopupCoordinates(Loc.GetString("cm-xeno-weeds-source-already-here"), args.Target, xeno.Owner);
             return;
         }
 
@@ -393,7 +393,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             if (adjacentNodes.Count == 0)
             {
-                _popup.PopupClient("You can only plant weeds if there is a nearby node.",
+                _popup.PopupCoordinates("You can only plant weeds if there is a nearby node.",
                     args.Target,
                     xeno,
                     PopupType.MediumCaution);
