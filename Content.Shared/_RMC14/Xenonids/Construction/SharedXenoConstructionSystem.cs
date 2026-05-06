@@ -331,6 +331,38 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
+        DirectionFlag barricadeFrontDirs = DirectionFlag.None;
+        if (_queenEye.IsInQueenEye(xeno.Owner))
+        {
+            var barricadeEnum = _rmcMap.GetAnchoredEntitiesEnumerator<BarricadeComponent>(coordinates);
+            while (barricadeEnum.MoveNext(out var barricadeUid))
+            {
+                // Open folding barricades won't block expand weed
+                if (TryComp(barricadeUid, out DoorComponent? door) && door.State == DoorState.Open)
+                    continue;
+                barricadeFrontDirs |= _transform.GetWorldRotation(barricadeUid).GetCardinalDir().AsFlag();
+            }
+            if (barricadeFrontDirs != DirectionFlag.None)
+            {
+                var hasValidAdjacentWeed = false;
+                foreach (var direction in _rmcMap.CardinalDirections)
+                {
+                    if ((direction.AsFlag() & barricadeFrontDirs) != 0)
+                        continue;
+                    if (_rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(coordinates, direction))
+                    {
+                        hasValidAdjacentWeed = true;
+                        break;
+                    }
+                }
+                if (!hasValidAdjacentWeed)
+                {
+                    _popup.PopupCoordinates(Loc.GetString("rmc-xeno-weeds-blocked"), coordinates, xeno.Owner);
+                    return;
+                }
+            }
+        }
+
         var grid = new Entity<MapGridComponent>(gridUid, gridComp);
         var existing = _xenoWeeds.GetWeedsOnFloor(grid, coordinates);
         if (existing is { Comp.IsSource: true })
@@ -345,6 +377,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             var canSpread = false;
             foreach (var direction in _rmcMap.CardinalDirections)
             {
+                if ((direction.AsFlag() & barricadeFrontDirs) != 0)
+                    continue;
                 if (!_rmcMap.HasAnchoredEntityEnumerator(coordinates, out Entity<XenoWeedsComponent> adjacent, direction))
                     continue;
 
@@ -385,12 +419,16 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         var plasmaCost = existing == null ? args.PlasmaCost : args.SourcePlasmaCost;
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, plasmaCost, popupOn: args.Target))
+        {
+            if (_queenEye.IsInQueenEye(xeno.Owner))
+                _popup.PopupCoordinates(Loc.GetString("cm-xeno-not-enough-plasma"), coordinates, xeno.Owner, PopupType.MediumCaution);
             return;
+        }
 
-        args.Handled = true;
-
-        if (spawnSource)
-            _actions.SetUseDelay(args.Action.Owner, args.NodePlaceCooldown);
+        if (existing != null)
+            _actions.SetCooldown(args.Action.AsNullable(), args.SourceCooldown);
+        else
+            args.Handled = true;
 
         if (_net.IsServer)
         {
@@ -402,7 +440,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 _xenoWeeds.AssignSource(newWeeds, adjacentNodes.Last().Comp.Source ?? adjacentNodes.Last());
         }
 
-        _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno);
+        // passes null so weedplant sound still plays for queen
+        var audioUser = _queenEye.IsInQueenEye(xeno.Owner) ? null : (EntityUid?) xeno.Owner;
+        _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, audioUser);
     }
 
     private void OnXenoChooseStructureAction(Entity<XenoConstructionComponent> xeno, ref XenoChooseStructureActionEvent args)
