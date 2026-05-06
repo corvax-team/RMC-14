@@ -36,10 +36,6 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
-      enum.HumanoidMarkingModifierKey.Key:
-        type: HumanoidMarkingModifierBoundUserInterface
-      enum.StrippingUiKey.Key:
-        type: StrippableBoundUserInterface
       enum.CMSurgeryUIKey.Key:
         type: CMSurgeryBui
       enum.CMUSurgeryUIKey.Key:
