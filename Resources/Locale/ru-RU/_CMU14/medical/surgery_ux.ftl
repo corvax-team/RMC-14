@@ -5,6 +5,7 @@
 cmu-medical-surgery-window-title = Хирургическая операция
 cmu-medical-surgery-window-hint = Выберите часть тела, выберите операцию, затем нажмите на пациента нужным инструментом.
 cmu-medical-surgery-no-eligible = Здесь нет доступных операций.
+cmu-medical-surgery-layer-disabled = Хирургия CMU отключена на сервере (проверьте `cmu.medical.enabled` и `cmu.medical.surgery.enabled`).
 cmu-medical-surgery-section-parts = Части тела
 cmu-medical-surgery-section-surgeries = Операции
 cmu-medical-surgery-section-surgeries-on = Операции на: { $part }

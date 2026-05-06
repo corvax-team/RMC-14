@@ -167,6 +167,10 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
 
         if (HasComp<CMUHumanMedicalComponent>(args.Target.Value))
         {
+            if (!_cmuDispatch.IsLayerEnabled())
+            {
+                _popup.PopupEntity(Loc.GetString("cmu-medical-surgery-layer-disabled"), user, user);
+            }
             args.Handled = true;
             return;
         }

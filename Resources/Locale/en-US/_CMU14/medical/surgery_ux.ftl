@@ -114,6 +114,7 @@ cmu-medical-surgery-remove-armor = Remove the obstructing armor first.
 cmu-medical-surgery-wrong-limb = That limb doesn't match any empty slot on the patient.
 cmu-medical-surgery-welder-not-lit = Light the tool first.
 cmu-medical-surgery-patient-not-lying = The patient must be lying down or strapped to a surgery table.
+cmu-medical-surgery-layer-disabled = CMU surgery is disabled on this server (check `cmu.medical.enabled` and `cmu.medical.surgery.enabled`).
 cmu-medical-surgery-patient-not-controlled = The patient needs anesthesia, strong painkillers, or restraints before surgery.
 cmu-medical-surgery-self-pain-control = Self-surgery requires strong painkillers first.
 cmu-medical-surgery-self-not-secured = Buckle yourself to a chair, bed, or roller before attempting self-surgery.
