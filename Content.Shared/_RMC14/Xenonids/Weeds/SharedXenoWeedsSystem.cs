@@ -42,7 +42,7 @@ namespace Content.Shared._RMC14.Xenonids.Weeds;
 
 public abstract class SharedXenoWeedsSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedDirectionalAttackBlockSystem DirectionBlocker = default!;
+    [Dependency] protected readonly SharedDirectionalAttackBlockSystem DirectionBlocker = default!; // CCM14
 
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -510,7 +510,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         Dirty(ent);
     }
 
-    public bool CanSpreadWeedsPopup(Entity<MapGridComponent> grid, Vector2 tile, EntityUid? user, EntityUid? spreadFrom, bool semiWeedable = false, bool source = false)
+    public bool CanSpreadWeedsPopup(Entity<MapGridComponent> grid, Vector2 tile, EntityUid? user, EntityUid? spreadFrom, bool semiWeedable = false, bool source = false) // CCM14
     {
         if (!_mapSystem.TryGetTileRef(grid, grid, tile, out var tileRef) ||
             !_tile.TryGetDefinition(tileRef.Tile.TypeId, out var tileDef) ||
@@ -522,7 +522,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             GenericPopup();
             return false;
         }
-
+        // CCM14-start
         if (!_area.CanResinPopup((grid, grid, null), (Vector2i) tile, user))
             return false;
 
@@ -537,6 +537,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         }
 
         var targetTileAnchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, (Vector2i) tile);
+        // CCM14-end
         while (targetTileAnchored.MoveNext(out var uid))
         {
             if (_blockWeedsQuery.HasComp(uid))
@@ -594,8 +595,10 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         {
             foreach (var entity in entities)
             {
+                // CCM14-start
                 if (!HasComp<ClimbableComponent>(entity) && !HasComp<RMCReactorPoweredLightComponent>(entity) ||
                     HasComp<BarricadeComponent>(entity))
+                // CCM14-end
                     continue;
 
                 _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-blocked"), xeno, xeno, PopupType.SmallCaution);

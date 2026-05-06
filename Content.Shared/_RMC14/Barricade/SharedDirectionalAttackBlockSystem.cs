@@ -131,7 +131,7 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         // For example, if the blocker is facing North, the leap will be blocked if it originates from a position to the South-West, South, or South-East of the blocker.
         return relativeDiff is 3 or 4 or 5; // Opposite directions
     }
-
+    // CCM14-start
     public bool IsDirectionBlocked(EntityUid origin, AtmosDirection cardinal, float checkRange = 0.6f, CollisionGroup collisionGroup = CollisionGroup.BarricadeImpassable | CollisionGroup.BulletImpassable)
     {
         return IsDirectionBlocked(origin, cardinal.CardinalToIntVec(), checkRange, collisionGroup);
@@ -159,4 +159,5 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
 
         return results.Count > 0;
     }
+    // CCM14-end
 }

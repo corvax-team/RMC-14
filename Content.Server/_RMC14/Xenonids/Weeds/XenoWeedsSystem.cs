@@ -116,7 +116,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                     }
                 }
 
-                if (DirectionBlocker.IsDirectionBlocked(uid, cardinal, collisionGroup: CollisionGroup.BarricadeImpassable))
+                if (DirectionBlocker.IsDirectionBlocked(uid, cardinal, collisionGroup: CollisionGroup.BarricadeImpassable)) // CCM14
                     blocked = true;
 
                 if (blocked)
@@ -149,7 +149,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                     break;
                 }
 
-                if (!CanSpreadWeedsPopup(grid, neighbor, null, uid, weeds.SpreadsOnSemiWeedable))
+                if (!CanSpreadWeedsPopup(grid, neighbor, null, uid, weeds.SpreadsOnSemiWeedable)) // CCM14
                     continue;
 
                 if (weedsToReplace != null)

@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Egg;
@@ -26,7 +26,7 @@ public sealed class QueenEyeSystem : EntitySystem
     [Dependency] private readonly SharedMoverController _mover = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IParallelManager _parallel = default!;
-    [Dependency] private readonly SwappableActionSystem _swappableAction = default!;
+    [Dependency] private readonly SwappableActionSystem _swappableAction = default!; // CCM14
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
@@ -37,12 +37,12 @@ public sealed class QueenEyeSystem : EntitySystem
     private readonly HashSet<Entity<QueenEyeVisionComponent>> _seeds = new();
 
     private readonly HashSet<Vector2i> _singleTiles = new();
-
+    // CCM14-start
     private readonly HashSet<Entity<XenoWeedsComponent>> _nearbyWeeds = new();
     private readonly HashSet<Entity<XenoWeedsComponent>> _anchorWeeds = new();
 
     private bool _isRevertingMove;
-
+    // CCM14-end
     public override void Initialize()
     {
         base.Initialize();
@@ -70,7 +70,7 @@ public sealed class QueenEyeSystem : EntitySystem
         SubscribeLocalEvent<QueenEyeActionComponent, XenoOvipositorChangedEvent>(OnQueenEyeOvipositorChanged);
 
         SubscribeLocalEvent<QueenEyeComponent, XenoUnwatchEvent>(OnQueenEyeUnwatch);
-        SubscribeLocalEvent<QueenEyeComponent, MoveEvent>(OnQueenEyeMove);
+        SubscribeLocalEvent<QueenEyeComponent, MoveEvent>(OnQueenEyeMove); // CCM14
     }
 
     private void OnQueenEyeActionMapInit(Entity<QueenEyeActionComponent> ent, ref MapInitEvent args)
@@ -110,10 +110,11 @@ public sealed class QueenEyeSystem : EntitySystem
         _eye.SetTarget(ent, ent.Comp.Eye, eye);
         _eye.SetDrawFov(ent, false);
         _mover.SetRelay(ent, ent.Comp.Eye.Value);
-
+        // CCM14-start
         // When queen eye is activated, swap plant weeds to world-target expand weeds
         if (HasComp<XenoAttachedOvipositorComponent>(ent.Owner))
             SwapPlantWeedsToWorldTarget(ent);
+        // CCM14-end
     }
 
     private void OnQueenEyeActionGetVisMask(Entity<QueenEyeActionComponent> ent, ref GetVisMaskEvent args)
@@ -124,7 +125,7 @@ public sealed class QueenEyeSystem : EntitySystem
             return;
         }
 
-        args.VisibilityMask |= (int)ent.Comp.Visibility;
+        args.VisibilityMask |= (int)ent.Comp.Visibility; // CCM14
     }
 
     private void OnQueenEyeActionWatch(Entity<QueenEyeActionComponent> ent, ref XenoWatchEvent args)
@@ -161,7 +162,7 @@ public sealed class QueenEyeSystem : EntitySystem
 
         _eye.SetTarget(queen, ent);
     }
-
+    // CCM14-start
     private void OnQueenEyeMove(Entity<QueenEyeComponent> ent, ref MoveEvent args)
     {
         if (_isRevertingMove)
@@ -225,7 +226,7 @@ public sealed class QueenEyeSystem : EntitySystem
             _isRevertingMove = false;
         }
     }
-
+    // CCM14-end
     /// <param name="expansionSize">How much to expand the bounds before to find vision intersecting it. Makes this the largest vision size + 1 tile.</param>
     public void GetView(Entity<BroadphaseComponent, MapGridComponent> grid, Box2Rotated worldBounds, HashSet<Vector2i> visibleTiles, float expansionSize = 29)
     {
@@ -297,15 +298,17 @@ public sealed class QueenEyeSystem : EntitySystem
 
         RemComp<RelayInputMoverComponent>(ent);
 
+        // CCM14-start
         // Swap plant weeds action back to instant mode
         SwapPlantWeedsToInstant(ent);
-
+        // CCM14-end
         var ev = new QueenEyeActionUpdated(ent);
         RaiseLocalEvent(ent, ref ev);
 
         return true;
     }
 
+    // CCM14-start
     private void SwapPlantWeedsToWorldTarget(Entity<QueenEyeActionComponent> queen)
     {
         _swappableAction.SwapInstantToWorldTarget<XenoPlantWeedsActionEvent>(
@@ -319,7 +322,7 @@ public sealed class QueenEyeSystem : EntitySystem
     {
         _swappableAction.SwapAllToInstant(queen.Owner, new XenoPlantWeedsActionEvent());
     }
-
+    // CCM14-end
     public bool IsInQueenEye(Entity<QueenEyeActionComponent?> queen)
     {
         return Resolve(queen, ref queen.Comp, false) && queen.Comp.Eye != null;
