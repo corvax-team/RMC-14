@@ -8,16 +8,6 @@
   - type: HitLocation
   - type: PainShock
   - type: BodyZoneTargeting
-  - type: UserInterface
-    interfaces:
-      enum.HumanoidMarkingModifierKey.Key:
-        type: HumanoidMarkingModifierBoundUserInterface
-      enum.StrippingUiKey.Key:
-        type: StrippableBoundUserInterface
-      enum.CMSurgeryUIKey.Key:
-        type: CMSurgeryBui
-      enum.CMUSurgeryUIKey.Key:
-        type: CMUSurgeryBui
   - type: Hunger
   - type: Thirst
   - type: Icon
@@ -46,6 +36,14 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
+              enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      enum.CMSurgeryUIKey.Key:
+        type: CMSurgeryBui
+      enum.CMUSurgeryUIKey.Key:
+        type: CMUSurgeryBui
   # to prevent bag open/honk spam
   - type: UseDelay
     delay: 0.5
