@@ -121,3 +121,20 @@ cmu-medical-stethoscope-pain-mild          = Пациент выглядит и�
 cmu-medical-stethoscope-pain-moderate      = Пациент испытывает заметную боль.
 cmu-medical-stethoscope-pain-severe        = Пациент испытывает сильную боль.
 cmu-medical-stethoscope-pain-shock         = Пациент находится в шоке.
+
+# ---- Missing stat / cards / loading ---------------------------------
+
+cmu-medical-scanner-card-patient           = Пациент
+cmu-medical-scanner-card-damage            = Профиль повреждений
+cmu-medical-scanner-loading                = Получение данных сканирования
+cmu-medical-scanner-loading-subtext        = обработка состояния сервера
+
+cmu-medical-scanner-stat-shock-risk        = РИСК ШОКА
+
+# ---- Missing pulse qualitative --------------------------------------
+
+cmu-medical-scanner-pulse-qualitative      = Пульс { $description }.
+
+# ---- Missing skill / physiology -------------------------------------
+
+cmu-medical-scanner-synthetic-physiology   = Обнаружена синтетическая физиология

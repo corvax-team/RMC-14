@@ -24,6 +24,8 @@ cmu-medical-surgery-action-hint = Нажмите на { $part }, держа в �
 cmu-medical-surgery-action-hint-no-tool = Нажмите на { $part }, чтобы продолжить.
 cmu-medical-surgery-continue-button = Продолжить операцию
 cmu-medical-surgery-abandon-button = Бросить операцию
+cmu-medical-surgery-choose-next-heading = Выбор следующей операции
+cmu-medical-surgery-choose-next-hint = Продолжите другое восстановление на этой части тела или закройте рану.
 
 # ---- Статусы частей тела --------------------------------------------
 
@@ -61,6 +63,8 @@ cmu-medical-surgery-examine-part-abandoned = [color=#888888]Открытая р�
 
 cmu-medical-surgery-step-close-incision-label = Закрыть разрез
 cmu-medical-surgery-step-mend-ribcage-label = Восстановить грудную клетку
+cmu-medical-surgery-step-mend-skull-label = Восстановить череп
+cmu-medical-surgery-step-mend-bones-label = Восстановить кости
 cmu-medical-surgery-step-close-bones-label = Закрыть кости
 
 # ---- Вооружённый шаг ------------------------------------------------
@@ -142,3 +146,54 @@ cmu-medical-surgery-name-repair-brain = Восстановление мозга
 cmu-medical-surgery-name-repair-eyes = Восстановление глаз
 cmu-medical-surgery-name-repair-ears = Восстановление ушей
 cmu-medical-surgery-name-reattach-limb = Пришивание конечности
+
+# ---- Missing UI sections --------------------------------------------
+
+cmu-medical-surgery-section-patient = Пациент
+cmu-medical-surgery-section-workflow = Рабочий процесс
+cmu-medical-surgery-workflow-ready = Операция не выбрана
+cmu-medical-surgery-workflow-active = { $surgery } выполняется на { $part }.
+
+cmu-medical-surgery-no-part-selected = Выберите часть тела.
+cmu-medical-surgery-procedure-detail = { $step } / { $tool }
+
+cmu-medical-surgery-close-up-button = Завершить
+cmu-medical-surgery-continue-with-button = Продолжить с { $surgery }
+cmu-medical-surgery-actions-heading = Действия
+
+# ---- Missing conditions ----------------------------------------------
+
+cmu-medical-surgery-condition-skull-open = Череп вскрыт
+cmu-medical-surgery-condition-bones-open = Кости вскрыты
+cmu-medical-surgery-condition-eschar = Струп
+
+# ---- Armed system extras --------------------------------------------
+
+cmu-medical-surgery-auto-armed = Выбрано { $surgery }.
+cmu-medical-surgery-auto-continue = Продолжается { $surgery }.
+cmu-medical-surgery-choose-repair-or-close = Выберите восстановление органа или закройте рану.
+
+# ---- Failure / interaction popups -----------------------------------
+
+cmu-medical-surgery-improvised-mishap = Самодельный { $tool } соскальзывает и наносит дополнительную травму.
+cmu-medical-surgery-step-failed = Операция срывается и вызывает травму.
+cmu-medical-surgery-step-failed-with-tool = { $tool } соскальзывает и вызывает хирургическую травму.
+
+cmu-medical-surgery-missing-skills = Вы не умеете выполнять этот шаг.
+cmu-medical-surgery-cannot-start = Эта операция больше недоступна.
+
+cmu-medical-surgery-needs-operating-table = Перенесите пациента на операционный стол.
+cmu-medical-surgery-remove-helmet = Снимите шлем.
+cmu-medical-surgery-remove-armor = Снимите броню.
+
+cmu-medical-surgery-patient-not-lying = Пациент должен лежать или быть зафиксирован.
+cmu-medical-surgery-patient-not-controlled = Пациенту нужна анестезия, сильные обезболивающие или фиксация.
+
+cmu-medical-surgery-self-pain-control = Самооперация требует сильных обезболивающих.
+cmu-medical-surgery-self-not-secured = Пристегните себя к креслу, кровати или каталке.
+cmu-medical-surgery-self-not-allowed = Вы не можете выполнить эту операцию на себе.
+
+cmu-medical-surgery-step-pain-interrupted = Боль пациента прерывает хирургический шаг.
+cmu-medical-surgery-welder-not-lit = Сначала зажгите инструмент.
+
+cmu-medical-amputation-success = Конечность удалена.

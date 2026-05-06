@@ -97,9 +97,6 @@
   description: Uh oh.
   categories: [ HideSpawnMenu ]
   components:
-  - type: Tag
-    tags:
-    - MCDamageBomb
   - type: Projectile
     impactEffect: BulletImpactEffect
     damage:

@@ -42,3 +42,40 @@ cmu-medical-alert-transplant-rejection-name = Отторжение органа
 cmu-medical-alert-transplant-rejection-desc = Ваш организм отторгает пересаженный орган.
 cmu-medical-alert-bone-regen-boost-name     = Регенерация костей
 cmu-medical-alert-bone-regen-boost-desc     = OsteoCalc ускоряет заживление костей.
+
+
+# ---- Status effect entity names (prototype ids) ----
+
+ent-StatusEffectCMUTachycardia = тахикардия
+ent-StatusEffectCMUArrhythmia = аритмия
+ent-StatusEffectCMUCardiacArrest = остановка сердца
+ent-StatusEffectCMUPulmonaryEdema = отёк лёгких
+ent-StatusEffectCMUHepaticFailure = печёночная недостаточность
+ent-StatusEffectCMURenalFailure = почечная недостаточность
+ent-StatusEffectCMUNausea = тошнота
+ent-StatusEffectCMUTinnitus = звон в ушах
+ent-StatusEffectCMUDeafened = оглушение
+ent-StatusEffectCMUConcussed = сотрясение
+ent-StatusEffectCMUTraumaticBrainInjury = черепно-мозговая травма
+ent-StatusEffectCMUWhiplash = хлыстовая травма
+ent-StatusEffectCMURecoveringSurgery = восстановление после операции
+ent-StatusEffectCMUTransplantRejection = отторжение органа
+ent-StatusEffectCMUNerveDamageArm = повреждение нервов (рука)
+ent-StatusEffectCMUNerveDamageHand = повреждение нервов (кисть)
+ent-StatusEffectCMUNerveDamageLeg = повреждение нервов (нога)
+ent-StatusEffectCMUNerveDamageFoot = повреждение нервов (стопа)
+ent-StatusEffectCMUPainShock = болевой шок
+ent-StatusEffectCMUPainSuppression = обезболивание
+ent-StatusEffectCMUBoneRegenBoost = регенерация костей
+ent-StatusEffectCMUPainMild = слабая боль
+ent-StatusEffectCMUPainModerate = умеренная боль
+ent-StatusEffectCMUPainSevere = сильная боль
+ent-StatusEffectCMUUnconscious = без сознания
+ent-StatusEffectCMUMissingArmLeft = отсутствует левая рука
+ent-StatusEffectCMUMissingArmRight = отсутствует правая рука
+ent-StatusEffectCMUMissingHandLeft = отсутствует левая кисть
+ent-StatusEffectCMUMissingHandRight = отсутствует правая кисть
+ent-StatusEffectCMUMissingLegLeft = отсутствует левая нога
+ent-StatusEffectCMUMissingLegRight = отсутствует правая нога
+ent-StatusEffectCMUMissingFootLeft = отсутствует левая стопа
+ent-StatusEffectCMUMissingFootRight = отсутствует правая стопа

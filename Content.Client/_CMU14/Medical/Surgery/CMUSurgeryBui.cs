@@ -96,9 +96,9 @@ public sealed class CMUSurgeryBui : BoundUserInterface
 
         var subtitle = inFlight is not null
             ? Loc.GetString("cmu-medical-surgery-in-progress-subtitle",
-                ("surgery", inFlight.LeafSurgeryDisplayName),
-                ("part", inFlight.PartDisplayName))
-            : armed?.SurgeryDisplayName ?? string.Empty;
+                ("surgery", ResolveLabel(inFlight.LeafSurgeryDisplayName)),
+                ("part", ResolveLabel(inFlight.PartDisplayName)))
+            : ResolveLabel(armed?.SurgeryDisplayName);
         _window.InProgressSubtitleLabel.Text = subtitle;
 
         if (inFlight is not null)
@@ -582,7 +582,7 @@ public sealed class CMUSurgeryBui : BoundUserInterface
         };
         labels.AddChild(new Label
         {
-            Text = entry.DisplayName,
+            Text = ResolveLabel(entry.DisplayName),
             FontColorOverride = TextPrimary,
             ClipText = true,
         });

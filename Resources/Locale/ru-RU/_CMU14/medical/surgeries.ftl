@@ -108,3 +108,52 @@ ent-CMUSurgeryStepCloseReattach = закрыть разрез
 ent-CMUSurgeryStepRepairBrain = восстановить мозг
 ent-CMUSurgeryStepRepairEyes = восстановить глаза
 ent-CMUSurgeryStepRepairEars = восстановить уши
+
+
+# ---- V2 / cavity / extra surgeries ----
+
+ent-CMUSurgeryDebrideEschar = очищение струпа
+    .desc = Процедура по очищению струпа.
+
+ent-CMUSurgeryOpenSoftTissue = вскрытие мягких тканей
+    .desc = Операция по вскрытию мягких тканей для доступа к повреждениям.
+
+ent-CMUSurgeryCloseIncision = закрытие разреза
+    .desc = Закрытие открытого разреза.
+
+ent-CMUSurgeryOpenBoneCavity = вскрытие костной полости
+    .desc = Операция по вскрытию костной полости.
+
+ent-CMUSurgeryCloseBoneCavity = закрытие костной полости
+    .desc = Закрытие костной полости после операции.
+
+ent-CMUSurgerySetSimpleFractureCavity = вправление простого перелома
+    .desc = Хирургическая процедура для лечения простого перелома.
+
+ent-CMUSurgerySetCompoundFractureCavity = вправление открытого перелома
+    .desc = Операция по восстановлению открытого перелома кости.
+
+ent-CMUSurgerySetComminutedFractureCavity = вправление оскольчатого перелома
+    .desc = Сложная операция по лечению тяжёлого оскольчатого перелома.
+
+ent-CMUSurgeryCauterizeInternalBleedingCavity = остановка внутреннего кровотечения
+    .desc = Процедура для устранения внутреннего кровотечения.
+
+ent-CMUSurgeryRepairStomach = ушивание желудка
+    .desc = Восстановление повреждений желудка хирургическим путём.
+
+ent-CMUSurgeryRemoveLimb = ампутация конечности
+    .desc = Операция по удалению конечности.
+
+ent-CMUSurgeryAlienEmbryoRemoval = удаление инородного тела
+    .desc = Операция по извлечению инородного тела из пациента.
+
+
+# ---- V2 / extra surgery steps ----
+
+ent-CMUSurgeryStepDebrideEschar = очистить струп
+ent-CMUSurgeryStepApplyComminutedBoneGel = нанести костный гель (второй слой)
+ent-CMUSurgeryStepFinalizeGraftedBone = завершить фиксацию трансплантата
+ent-CMUSurgeryStepSutureStomach = ушить желудок
+ent-CMUSurgeryStepCloseIncision = закрыть разрез
+ent-CMUSurgeryStepAmputateLimb = ампутировать конечность
