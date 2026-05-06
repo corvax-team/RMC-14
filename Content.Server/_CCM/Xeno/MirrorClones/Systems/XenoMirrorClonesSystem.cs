@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Server._CCM.Xeno.MirrorClones.Components;
+using Content.Shared._CCM.Xeno.MirrorClones.Components;
 using Content.Shared._CCM.Actions.Events;
 using Content.Shared._CCM.Xenonids.MirrorClones;
 using Content.Shared._RMC14.Actions;

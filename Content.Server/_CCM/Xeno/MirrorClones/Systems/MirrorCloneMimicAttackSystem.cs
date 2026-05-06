@@ -1,4 +1,6 @@
+using System.Linq;
 using Content.Server._CCM.Xeno.MirrorClones.Components;
+using Content.Shared._CCM.Xeno.MirrorClones.Components;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared._RMC14.Xenonids;
@@ -39,15 +41,7 @@ public sealed class MirrorCloneMimicAttackSystem : EntitySystem
         if (args.DamageDelta == null || args.DamageDelta.Empty)
             return;
 
-        var hasPositive = false;
-        foreach (var v in args.DamageDelta.DamageDict.Values)
-        {
-            if (v > FixedPoint2.Zero)
-            {
-                hasPositive = true;
-                break;
-            }
-        }
+        var hasPositive = args.DamageDelta.DamageDict.Values.Any(v => v > FixedPoint2.Zero);
         if (!hasPositive)
             return;
 
@@ -102,11 +96,9 @@ public sealed class MirrorCloneMimicAttackSystem : EntitySystem
 
         foreach (var (ent, time) in _recentExtra)
         {
-            if (now - time > TimeSpan.FromSeconds(2))
-            {
-                list ??= new List<EntityUid>();
-                list.Add(ent);
-            }
+            if (now - time <= TimeSpan.FromSeconds(2)) continue;
+            list ??= new List<EntityUid>();
+            list.Add(ent);
         }
 
         if (list != null)

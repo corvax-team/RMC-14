@@ -1,4 +1,4 @@
-using Content.Server._CCM.Xeno.MirrorClones.Components;
+using Content.Shared._CCM.Xeno.MirrorClones.Components;
 
 namespace Content.Server._CCM.Xeno.MirrorClones.Systems;
 
