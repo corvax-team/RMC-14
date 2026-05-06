@@ -16,7 +16,7 @@ jobs:
   build:
     name: Build and Test
     if: github.actor != 'RounyBot' && github.event.pull_request.draft == false
-    runs-on: ccm-hosted
+    runs-on: ubuntu-latest
     env:
       PUBLISHTRIMMED: "false"
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
@@ -64,7 +64,7 @@ jobs:
   ci-success:
     name: Build & Test Debug
     needs: build
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - name: CI succeeded
       run: exit 0
