@@ -36,7 +36,7 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
-              enum.HumanoidMarkingModifierKey.Key:
+      enum.HumanoidMarkingModifierKey.Key:
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
