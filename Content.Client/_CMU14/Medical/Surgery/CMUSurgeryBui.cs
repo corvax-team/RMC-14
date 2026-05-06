@@ -596,6 +596,7 @@ public sealed class CMUSurgeryBui : BoundUserInterface
             ClipText = true,
         });
 
+        root.AddChild(accent);
         root.AddChild(labels);
 
         var beginButton = CreateActionButton(
