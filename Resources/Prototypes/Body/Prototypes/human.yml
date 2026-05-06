@@ -8,8 +8,8 @@
       connections:
       - torso
       organs:
-        brain: CMUOrganHumanBrain
-        eyes: CMUOrganHumanEyes
+        brain: OrganHumanBrain
+        eyes: OrganHumanEyes
     torso:
       part: TorsoHuman
       connections:
@@ -18,11 +18,11 @@
       - right_leg
       - left_leg
       organs:
-        heart: CMUOrganHumanHeart
-        lungs: CMUOrganHumanLungs
-        stomach: CMUOrganHumanStomach
-        liver: CMUOrganHumanLiver
-        kidneys: CMUOrganHumanKidneys
+        heart: OrganHumanHeart
+        lungs: OrganHumanLungs
+        stomach: OrganHumanStomach
+        liver: OrganHumanLiver
+        kidneys: OrganHumanKidneys
     right_arm:
       part: RightArmHuman
       connections:
