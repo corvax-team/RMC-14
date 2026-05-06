@@ -5,6 +5,20 @@
   name: Urist McHands
   abstract: true
   components:
+  - type: CMUHumanMedical
+  - type: HitLocation
+  - type: PainShock
+  - type: BodyZoneTargeting
+  - type: UserInterface
+    interfaces:
+      enum.HumanoidMarkingModifierKey.Key:
+        type: HumanoidMarkingModifierBoundUserInterface
+      enum.StrippingUiKey.Key:
+        type: StrippableBoundUserInterface
+      enum.CMSurgeryUIKey.Key:
+        type: CMSurgeryBui
+      enum.CMUSurgeryUIKey.Key:
+        type: CMUSurgeryBui
   - type: Hunger
   - type: Icon # It will not have an icon in the adminspawn menu without this. Body parts seem fine for whatever reason.
     sprite: Mobs/Species/Human/parts.rsi
