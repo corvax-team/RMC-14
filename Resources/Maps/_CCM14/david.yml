@@ -3,8 +3,8 @@ meta:
   category: Map
   engineVersion: 264.0.2-fix-physics
   forkId: colonialmarines
-  forkVersion: fcc8f6f1c339c88e08b6220c04d47bb67b2b130d
-  time: 04/25/2026 03:48:24
+  forkVersion: 6550c17b4d464a671a55b9a3eacb83f9874d6eb7
+  time: 05/06/2026 14:19:04
   entityCount: 11515
 maps:
 - 1
@@ -20212,6 +20212,19 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: CMComputerDropshipNavigationPlanetside
+  entities:
+  - uid: 2304
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 16.5,-9.5
+      parent: 1
+  - uid: 7910
+    components:
+    - type: Transform
+      pos: 36.5,81.5
+      parent: 1
 - proto: CMCrateSecureSurgery
   entities:
   - uid: 1288
@@ -20687,7 +20700,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 618.0327152
     - type: Door
-      secondsUntilStateChange: -39525.4
+      secondsUntilStateChange: -39978.625
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -20701,7 +20714,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 618.0327152
     - type: Door
-      secondsUntilStateChange: -39525.4
+      secondsUntilStateChange: -39978.625
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -64037,19 +64050,6 @@ entities:
     - type: Transform
       pos: 68.5,114.5
       parent: 1
-- proto: RMCComputerDropshipNavigationSmall
-  entities:
-  - uid: 7910
-    components:
-    - type: Transform
-      pos: 36.5,81.5
-      parent: 1
-  - uid: 7929
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 16.5,-9.5
-      parent: 1
 - proto: RMCComputerIntel
   entities:
   - uid: 9553
@@ -85200,12 +85200,12 @@ entities:
     - type: Transform
       pos: 20.5,3.5
       parent: 1
-- proto: VehicleHardpointVendor
+- proto: VehicleHardpointFabricator
   entities:
-  - uid: 2304
+  - uid: 7929
     components:
     - type: Transform
-      pos: 14.5,10.5
+      pos: 15.5,10.5
       parent: 1
 - proto: VehicleInteriorSupplyVendorOff
   entities:
