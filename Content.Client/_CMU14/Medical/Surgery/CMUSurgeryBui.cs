@@ -568,11 +568,11 @@ public sealed class CMUSurgeryBui : BoundUserInterface
         };
         panel.AddChild(root);
 
-        root.AddChild(new PanelContainer
+        var accent = new PanelContainer
         {
             MinSize = new Vector2(7, 44),
             PanelOverride = CreatePanelStyle(categoryColor, categoryColor, 0f),
-        });
+        };
 
         var labels = new BoxContainer
         {
