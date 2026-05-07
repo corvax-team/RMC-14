@@ -42,7 +42,7 @@
     tier: 0
     bypassTierCount: true
     countedInSlots: false
-    unlockAt: 3600 #CCM14 ADD - BASE = 0
+    unlockAt: 5400 #CCM14 ADD - BASE = 0
     hudOffset: -0.1,0
   - type: XenoHeavy
   - type: XenoDevour
