@@ -42,7 +42,7 @@
     tier: 0
     bypassTierCount: true
     countedInSlots: false
-    unlockAt: 0
+    unlockAt: 3600 #CCM14 ADD - BASE = 0
     hudOffset: -0.1,0
   - type: XenoHeavy
   - type: XenoDevour
@@ -198,3 +198,8 @@
   - type: XenoToggleChargingKnockback
     enabled: false
   - type: XenoToggleChargingStop
+# CCM14 ADD 
+  - type: XenoEvolutionCapped
+    id: RMCXenoKing
+    max: 1
+# CCM14 END
