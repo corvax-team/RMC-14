@@ -96,6 +96,7 @@
     - CMXenoHivelord
     evolvesToWithoutPoints:
     - CMXenoQueen
+    - RMCXenoKing
   - type: Evasion
     evasion: 20
   - type: XenoInhands
