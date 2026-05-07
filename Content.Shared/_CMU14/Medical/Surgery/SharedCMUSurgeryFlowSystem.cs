@@ -823,6 +823,13 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         if (surgeryId != "CMUSurgeryReattachLimb" || targetPart != patient)
             return false;
 
+        if (HasComp<CMUReattachCompleteComponent>(patient))
+            return TryResolveStepAt(surgeryId, 3, out resolved, patient);
+        if (HasComp<CMUReattachPreppedComponent>(patient))
+            return TryResolveStepAt(surgeryId, 2, out resolved, patient);
+        if (HasComp<CMUStumpRemovedComponent>(patient))
+            return TryResolveStepAt(surgeryId, 1, out resolved, patient);
+
         if (!HasComp<CMIncisionOpenComponent>(patient))
             return TryResolveGatedStep("CMUSurgeryOpenSoftTissue", 0, patient, out resolved);
         if (!HasComp<CMBleedersClampedComponent>(patient))
@@ -830,14 +837,7 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         if (!HasComp<CMSkinRetractedComponent>(patient))
             return TryResolveGatedStep("CMUSurgeryOpenSoftTissue", 2, patient, out resolved);
 
-        if (!HasComp<CMUStumpRemovedComponent>(patient))
-            return TryResolveStepAt(surgeryId, 0, out resolved, patient);
-        if (!HasComp<CMUReattachPreppedComponent>(patient))
-            return TryResolveStepAt(surgeryId, 1, out resolved, patient);
-        if (!HasComp<CMUReattachCompleteComponent>(patient))
-            return TryResolveStepAt(surgeryId, 2, out resolved, patient);
-
-        return TryResolveStepAt(surgeryId, 3, out resolved, patient);
+        return TryResolveStepAt(surgeryId, 0, out resolved, patient);
     }
 
     private bool TryResolveGatedStep(string surgeryId, int stepIndex, EntityUid targetPart, out CMUResolvedStep resolved)
