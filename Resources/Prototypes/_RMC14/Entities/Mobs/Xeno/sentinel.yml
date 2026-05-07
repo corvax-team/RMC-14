@@ -66,6 +66,7 @@
     - CMXenoSpitter
     evolvesToWithoutPoints:
     - CMXenoQueen
+    - RMCXenoKing # CCM14 ADD
     strains: #CCM Change
     - CCMXenoMeleeSentinel #CCM Change
     - CCMXenoRangerSentinel #CCM Change
