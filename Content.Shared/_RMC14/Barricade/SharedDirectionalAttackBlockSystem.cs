@@ -147,7 +147,7 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
     /// <returns>
     ///     True if at least one valid blocking entity is detected within range, otherwise false.
     /// </returns>
-    public bool IsDirectionBlocked(EntityUid origin, Vector2 direction, float checkRange = 0.6f, CollisionGroup collisionGroup = CollisionGroup.BarricadeImpassable | CollisionGroup.BulletImpassable)
+    public bool IsDirectionBlocked(EntityUid origin, Vector2 direction, float checkRange = 0.6f, CollisionGroup collisionGroup = CollisionGroup.LowImpassable)
     {
         if (direction == Vector2.Zero)
             return false;
