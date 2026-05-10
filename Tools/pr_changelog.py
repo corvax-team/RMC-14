@@ -17,6 +17,8 @@ SECTION_LABELS = {
     "удалено": "Remove",
     "изменено": "Tweak",
     "исправлено": "Fix",
+    "админ": "Admin",
+    "код": "Code",
     "add": "Add",
     "remove": "Remove",
     "removed": "Remove",
@@ -25,6 +27,8 @@ SECTION_LABELS = {
     "change": "Tweak",
     "fix": "Fix",
     "fixed": "Fix",
+    "admin": "Admin",
+    "code": "Code",
 }
 
 SECTION_TITLES = {
@@ -32,9 +36,11 @@ SECTION_TITLES = {
     "Remove": "❌ Удалено",
     "Tweak": "🛠️ Изменено",
     "Fix": "🐛 Исправлено",
+    "Admin": "🛡️ Админ",
+    "Code": "💻 Код",
 }
 
-SECTION_ORDER = ("Add", "Remove", "Tweak", "Fix")
+SECTION_ORDER = ("Add", "Remove", "Tweak", "Fix", "Admin", "Code")
 DISCORD_FIELD_LIMIT = 1024
 
 
