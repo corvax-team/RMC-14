@@ -388,6 +388,9 @@
 #        - : -1
 #        CMSurvivorScientist:
 #        - : -1
+  - type: MCPlanetMapPrototype
+    mapsAbove:
+    - /Maps/_CCM14/Planets/Z-level/Trijent/trijent1.yml
 
 - type: entity
   id: RMCPlanetVaradero
