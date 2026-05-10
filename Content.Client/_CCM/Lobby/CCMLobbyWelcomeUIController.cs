@@ -36,6 +36,7 @@ public sealed class CCMLobbyWelcomeUIController : UIController, IOnStateEntered<
 
     public void OnStateEntered(LobbyState state)
     {
+        EnsureDefaultLobbyPresentation();
         EnsureWindow();
 
         var seenVersion = _config.GetCVar(RMCCVars.CCMLobbyWelcomeSeenVersion);
@@ -93,6 +94,26 @@ public sealed class CCMLobbyWelcomeUIController : UIController, IOnStateEntered<
 
     private void OnFinished()
     {
+    }
+
+    private void EnsureDefaultLobbyPresentation()
+    {
+        var lobbyStyle = _config.GetCVar(RMCCVars.RMCLobbyUiStyle);
+        if (string.IsNullOrWhiteSpace(lobbyStyle) ||
+            (!lobbyStyle.Equals("new", StringComparison.OrdinalIgnoreCase) &&
+             !lobbyStyle.Equals("old", StringComparison.OrdinalIgnoreCase)))
+        {
+            _config.SetCVar(RMCCVars.RMCLobbyUiStyle, "new");
+        }
+
+        var theme = _config.GetCVar(RMCCVars.RMCUIColorTheme);
+        if (string.IsNullOrWhiteSpace(theme) ||
+            (!theme.Equals("gray", StringComparison.OrdinalIgnoreCase) &&
+             !theme.Equals("green", StringComparison.OrdinalIgnoreCase) &&
+             !theme.Equals("blue", StringComparison.OrdinalIgnoreCase)))
+        {
+            _config.SetCVar(RMCCVars.RMCUIColorTheme, "gray");
+        }
     }
 
     private void OnCultureChanged(string _)

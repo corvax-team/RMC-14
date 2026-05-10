@@ -6,6 +6,7 @@
            xmlns:xe="clr-namespace:Content.Client.UserInterface.XamlExtensions"
            xmlns:ui="clr-namespace:Content.Client.UserInterface.Controls"
            xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.MenuBar.Widgets"
+           x:Class="Content.Client.UserInterface.Systems.MenuBar.Widgets.GameTopMenuBar"
            Name = "MenuButtons"
            VerticalExpand="False"
            Orientation="Horizontal"

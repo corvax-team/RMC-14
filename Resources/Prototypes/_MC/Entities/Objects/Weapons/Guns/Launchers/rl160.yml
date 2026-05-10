@@ -97,6 +97,8 @@
   description: Uh oh.
   categories: [ HideSpawnMenu ]
   components:
+  - type: CEZPhysics # mc-changes [z-levels]
+    bounciness: 0
   - type: Projectile
     impactEffect: BulletImpactEffect
     damage:

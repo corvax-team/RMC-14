@@ -1164,7 +1164,6 @@ namespace Content.Client.RoundEnd
 
             return StyleNano.CurrentTheme switch
             {
-                StyleNano.UiColorTheme.Blue => Color.FromHex("#0E2950").WithAlpha(0.97f),
                 StyleNano.UiColorTheme.Gray => Color.FromHex("#1A2028").WithAlpha(0.97f),
                 _ => Color.FromHex("#08150D").WithAlpha(0.97f),
             };
@@ -1177,7 +1176,6 @@ namespace Content.Client.RoundEnd
 
             return StyleNano.CurrentTheme switch
             {
-                StyleNano.UiColorTheme.Blue => Color.FromHex("#102A52").WithAlpha(0.96f),
                 StyleNano.UiColorTheme.Gray => Color.FromHex("#202730").WithAlpha(0.96f),
                 _ => Color.FromHex("#091A11").WithAlpha(0.96f),
             };
@@ -1190,7 +1188,6 @@ namespace Content.Client.RoundEnd
 
             return StyleNano.CurrentTheme switch
             {
-                StyleNano.UiColorTheme.Blue => Color.FromHex("#081936").WithAlpha(alpha),
                 StyleNano.UiColorTheme.Gray => Color.FromHex("#0F1318").WithAlpha(MathF.Min(0.98f, alpha + 0.16f)),
                 _ => Color.Black.WithAlpha(alpha),
             };
@@ -1203,7 +1200,6 @@ namespace Content.Client.RoundEnd
 
             return StyleNano.CurrentTheme switch
             {
-                StyleNano.UiColorTheme.Blue => Color.FromHex("#0C2344").WithAlpha(0.92f),
                 StyleNano.UiColorTheme.Gray => Color.FromHex("#171D24").WithAlpha(0.92f),
                 _ => Color.FromHex("#07150A").WithAlpha(0.92f),
             };

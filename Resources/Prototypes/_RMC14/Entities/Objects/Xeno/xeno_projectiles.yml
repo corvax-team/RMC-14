@@ -3,6 +3,8 @@
   id: XenoBaseProjectile
   name: projectile
   components:
+  - type: CEZPhysics # mc-changes [z-levels]
+    bounciness: 0
   - type: Clickable
   - type: Sprite
     noRot: false

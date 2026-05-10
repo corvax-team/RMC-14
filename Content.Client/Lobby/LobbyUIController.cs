@@ -325,9 +325,13 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         if (_stateManager.CurrentState is not LobbyState)
             return;
 
-        UpdateCharacterSetupLayout();
         _characterSetup.Visible = true;
         _profileEditor.Visible = true;
+        _characterSetup.InvalidateMeasure();
+        _characterSetup.InvalidateArrange();
+        _profileEditor.InvalidateMeasure();
+        _profileEditor.InvalidateArrange();
+        UpdateCharacterSetupLayout();
         _pendingShowCharacterSetup = false;
     }
 

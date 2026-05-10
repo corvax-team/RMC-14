@@ -10,7 +10,7 @@ using Robust.Shared.Map.Components;
 namespace Content.Shared._CE.ZLevels.Weather;
 
 /// <summary>
-/// A subsystem that connects WeatherSystem with ZLevelSystem. Allows you to control the weather for the entire z-network at once.
+/// A subsystem that connects WeatherSystem with ZLevelSystem.
 /// </summary>
 public sealed class CEWeatherSystem : EntitySystem
 {
@@ -21,12 +21,19 @@ public sealed class CEWeatherSystem : EntitySystem
         if (!Resolve(network, ref network.Comp))
             return;
 
-        foreach (var (_, map) in network.Comp.ZLevels)
+        EntityUid? mainMap = null;
+        foreach (var (depth, map) in network.Comp.ZLevels)
         {
-            if (!TryComp<MapComponent>(map, out var mapComp))
+            if (depth != 0 || map == null)
                 continue;
 
-            _weather.SetWeather(mapComp.MapId, proto, endTime);
+            mainMap = map.Value;
+            break;
         }
+
+        if (mainMap == null || !TryComp<MapComponent>(mainMap.Value, out var mapComp))
+            return;
+
+        _weather.SetWeather(mapComp.MapId, proto, endTime);
     }
 }

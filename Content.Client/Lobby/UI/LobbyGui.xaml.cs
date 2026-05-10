@@ -258,6 +258,22 @@ namespace Content.Client.Lobby.UI
             _oldLayout.ExpandPanel.Visible = !value;
         }
 
+        private void UpdateOldHeaderWidths()
+        {
+            var availableWidth = _oldLayout.LeftSide.Size.X;
+            if (availableWidth <= 1f)
+                return;
+
+            var targetWidth = Math.Clamp(availableWidth, 760f, 840f);
+
+            _oldLayout.LeftSideHeader.SetWidth = targetWidth;
+            _oldLayout.LeftSideTop.SetWidth = targetWidth;
+            _oldLayout.LeftSideHeader.MinSize = new Vector2(targetWidth, _oldLayout.LeftSideHeader.MinSize.Y);
+            _oldLayout.LeftSideTop.MinSize = new Vector2(targetWidth, _oldLayout.LeftSideTop.MinSize.Y);
+            _oldLayout.LeftSideHeader.MaxSize = new Vector2(targetWidth, float.PositiveInfinity);
+            _oldLayout.LeftSideTop.MaxSize = new Vector2(targetWidth, float.PositiveInfinity);
+        }
+
 
         public enum LobbyGuiState : byte
         {
@@ -653,6 +669,7 @@ namespace Content.Client.Lobby.UI
             {
                 if (_oldLayout.VoteContainer.Size.X > 1f && _oldLayout.VoteContainer.Size.Y > 1f)
                     _voteLastSize = _oldLayout.VoteContainer.Size;
+                UpdateOldHeaderWidths();
                 return;
             }
 

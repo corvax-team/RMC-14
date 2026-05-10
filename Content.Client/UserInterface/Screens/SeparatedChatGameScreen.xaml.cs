@@ -16,8 +16,6 @@ namespace Content.Client.UserInterface.Screens;
 
 public sealed partial class SeparatedChatGameScreen : InGameScreen
 {
-    private const float VoteMenuLeftOffset = 148f;
-
     protected SplitContainer ScreenContainer = default!;
     protected LayoutContainer ViewportContainer = default!;
     protected MainViewport MainViewport = default!;
@@ -52,8 +50,7 @@ public sealed partial class SeparatedChatGameScreen : InGameScreen
         SetAnchorAndMarginPreset(Inventory, LayoutPreset.BottomLeft, margin: 5);
         SetAnchorAndMarginPreset(TopLeftContainer, LayoutPreset.TopLeft, margin: 10);
         SetAnchorAndMarginPreset(VoteMenu, LayoutPreset.CenterTop, margin: 10);
-        SetMarginLeft(VoteMenu, VoteMenu.GetValue<float>(LayoutContainer.MarginLeftProperty) - VoteMenuLeftOffset);
-        SetMarginRight(VoteMenu, VoteMenu.GetValue<float>(LayoutContainer.MarginRightProperty) - VoteMenuLeftOffset);
+        SetPosition(VoteMenu, new Vector2(-180, 10));
         SetAnchorAndMarginPreset(Ghost, LayoutPreset.BottomWide, margin: 80);
         SetAnchorAndMarginPreset(Hotbar, LayoutPreset.BottomWide, margin: 5);
         SetAnchorAndMarginPreset(Alerts, LayoutPreset.CenterRight, margin: 10);
@@ -139,15 +136,8 @@ public sealed partial class SeparatedChatGameScreen : InGameScreen
         {
             Name = "Actions",
         };
-        VoteMenu = new BoxContainer
-        {
-            Name = "VoteMenu",
-            Margin = new Thickness(0, 10, 0, 0),
-            Orientation = BoxContainer.LayoutOrientation.Vertical,
-        };
         TopLeftContainer.AddChild(Actions);
         ViewportContainer.AddChild(TopLeftContainer);
-        ViewportContainer.AddChild(VoteMenu);
 
         Alerts = new AlertsUI
         {
@@ -193,6 +183,14 @@ public sealed partial class SeparatedChatGameScreen : InGameScreen
         ScreenContainer.AddChild(ViewportContainer);
         ScreenContainer.AddChild(SeparatedChatPanel);
         root.AddChild(ScreenContainer);
+
+        VoteMenu = new BoxContainer
+        {
+            Name = "VoteMenu",
+            Margin = new Thickness(0, 10, 0, 0),
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+        };
+        root.AddChild(VoteMenu);
     }
 
     private void ResizeActionContainer()

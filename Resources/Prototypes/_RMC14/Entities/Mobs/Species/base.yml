@@ -11,7 +11,12 @@
   # - type: Physics
   #   bodyType: Dynamic
   # mc-changes-start
-  # - type: CEZPhysics #A [z-levels]
+  - type: CEZPhysics #A [z-levels]
+  - type: MCZLevelFallStun # [z-levels]
+  - type: MCZLevelFallDamage
+    damage:
+      types:
+        Blunt: 5
   # mc-changes-end
   - type: Fixtures
     fixtures:
@@ -116,6 +121,7 @@
     damageModifierSet: null
     healthBarThreshold: 5
   - type: Vocal
+    screamAction: null
     sounds:
       Male: MaleHuman
       Female: FemaleHuman

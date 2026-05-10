@@ -32,6 +32,9 @@ public sealed class MCPlanetMapSystem : EntitySystem
 
     public void Load(Entity<MapComponent> entity, MCPlanetMapPrototypeComponent prototypeComponent)
     {
+        if (!_zLevel.IsZLevelsEnabled)
+            return;
+
         if (prototypeComponent.MapsAbove.Count == 0 && prototypeComponent.MapsBelow.Count == 0)
             return;
 

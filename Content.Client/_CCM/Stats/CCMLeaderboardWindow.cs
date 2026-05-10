@@ -623,7 +623,6 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
     {
         var bodyColor = StyleNano.CurrentTheme switch
         {
-            StyleNano.UiColorTheme.Blue => Color.FromHex("#102A56").WithAlpha(0.94f),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#1A2028").WithAlpha(0.94f),
             _ => Color.FromHex("#05180A").WithAlpha(0.94f),
         };
@@ -677,7 +676,6 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
     {
         return StyleNano.CurrentTheme switch
         {
-            StyleNano.UiColorTheme.Blue => Color.FromHex("#DCEBFF"),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#EEF2F6"),
             _ => Color.FromHex("#D7F0DE"),
         };

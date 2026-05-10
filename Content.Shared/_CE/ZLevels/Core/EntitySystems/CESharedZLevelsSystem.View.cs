@@ -9,6 +9,7 @@ using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared.Actions;
 using Content.Shared.Maps;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
 
 namespace Content.Shared._CE.ZLevels.Core.EntitySystems;
@@ -25,6 +26,9 @@ public abstract partial class CESharedZLevelsSystem
 
     protected virtual void OnViewerMove(Entity<CEZLevelViewerComponent> ent, ref MoveEvent args)
     {
+        if (!ZLevelsEnabled)
+            return;
+
         RefreshViewerVisibilityCache(ent);
 
         if (!ent.Comp.LookUp)
@@ -44,6 +48,9 @@ public abstract partial class CESharedZLevelsSystem
 
         args.Handled = true;
 
+        if (!ZLevelsEnabled)
+            return;
+
         RefreshViewerVisibilityCache(ent, true);
 
         if (ent.Comp.CachedOpaqueAbove)
@@ -58,17 +65,28 @@ public abstract partial class CESharedZLevelsSystem
 
     public bool HasOpaqueAbove(EntityUid ent, Entity<CEZLevelMapComponent?>? currentMapUid = null)
     {
+        if (!ZLevelsEnabled)
+            return false;
+
         currentMapUid ??= Transform(ent).MapUid;
 
         if (currentMapUid is null)
             return false;
 
-        var indices = _transform.GetGridOrMapTilePosition(ent);
+        var indices = GetViewerTilePosition(ent);
         return HasOpaqueAbove(indices, currentMapUid.Value);
     }
 
     public void RefreshViewerVisibilityCache(Entity<CEZLevelViewerComponent> ent, bool force = false)
     {
+        if (!ZLevelsEnabled)
+        {
+            ent.Comp.CachedOpaqueAbove = false;
+            ent.Comp.CachedOpaqueAboveValid = false;
+            ent.Comp.CachedOpaqueAboveTile = null;
+            return;
+        }
+
         var xform = Transform(ent);
         if (xform.MapUid is not { } mapUid)
         {
@@ -86,7 +104,7 @@ public abstract partial class CESharedZLevelsSystem
             return;
         }
 
-        var indices = _transform.GetGridOrMapTilePosition(ent);
+        var indices = GetViewerTilePosition(ent);
         if (!force && ent.Comp.CachedOpaqueAboveValid && ent.Comp.CachedOpaqueAboveTile == indices)
             return;
 
@@ -100,14 +118,61 @@ public abstract partial class CESharedZLevelsSystem
         if (!TryMapUp(currentMapUid, out var mapAboveUid))
             return false;
 
+        if (HasHighGroundAt(currentMapUid, indices))
+            return false;
+
         if (!_gridQuery.TryComp(mapAboveUid, out var mapAboveGrid))
             return false;
 
         if (!_map.TryGetTileRef(mapAboveUid, mapAboveGrid, indices, out var tileRef))
             return false;
 
+        var anchored = _map.GetAnchoredEntitiesEnumerator(mapAboveUid, mapAboveGrid, indices);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (_highgroundQuery.HasComp(uid))
+                return false;
+        }
+
         var tileDef = (ContentTileDefinition)TilDefMan[tileRef.Tile.TypeId];
         return !tileDef.Transparent;
+    }
+
+    private bool HasHighGroundAt(Entity<CEZLevelMapComponent?> map, Vector2i indices)
+    {
+        if (!Resolve(map, ref map.Comp, false))
+            return false;
+
+        if (!_gridQuery.TryComp(map.Owner, out var grid))
+            return false;
+
+        var anchored = _map.GetAnchoredEntitiesEnumerator(map.Owner, grid, indices);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (_highgroundQuery.HasComp(uid))
+                return true;
+        }
+
+        return false;
+    }
+
+    private Vector2i GetViewerTilePosition(EntityUid ent)
+    {
+        var xform = Transform(ent);
+        var worldPos = _transform.GetWorldPosition(xform);
+        if (xform.GridUid is not { } gridUid)
+            return worldPos.Floored();
+
+        if (!TryComp<MapGridComponent>(gridUid, out var grid))
+            return worldPos.Floored();
+
+        if (Transform(gridUid).MapID != xform.MapID)
+            return worldPos.Floored();
+
+        var local = _map.WorldToLocal(gridUid, grid, worldPos);
+        return new Vector2i(
+            (int) Math.Floor(local.X / grid.TileSize),
+            (int) Math.Floor(local.Y / grid.TileSize));
     }
 }
 

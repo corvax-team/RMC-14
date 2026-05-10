@@ -206,7 +206,9 @@ namespace Content.Client.ContextMenu.UI
             // open pop-up adjacent to the parent element. We want the sub-menu elements to align with this element
             // which depends on the panel container style margins.
             var altPos = element.GlobalPosition;
-            var pos = altPos + new Vector2(element.Width + 2 * ContextMenuElement.ElementMargin, -2 * ContextMenuElement.ElementMargin);
+            var pos = altPos + new Vector2(
+                element.Width + 2 * ContextMenuElement.ElementMarginHorizontal,
+                -2 * ContextMenuElement.ElementMarginTop);
             element.SubMenu.Open(UIBox2.FromDimensions(pos, new Vector2(1, 1)), altPos);
 
             // draw on top of other menus

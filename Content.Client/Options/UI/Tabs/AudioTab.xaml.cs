@@ -78,6 +78,7 @@ public sealed partial class AudioTab : Control
         Control.AddOptionCheckBox(CCVars.LobbyMusicEnabled, LobbyMusicCheckBox);
         Control.AddOptionCheckBox(CCVars.RestartSoundsEnabled, RestartSoundsCheckBox);
         Control.AddOptionCheckBox(CCVars.EventMusicEnabled, EventMusicCheckBox);
+        Control.AddOptionCheckBox(CCVars.AdminSoundsEnabled, AdminSoundsCheckBox);
         Control.Initialize();
     }
 

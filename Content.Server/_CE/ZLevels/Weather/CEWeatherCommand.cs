@@ -23,7 +23,7 @@ public sealed class CEWeatherCommand : LocalizedCommands
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override string Command => "znetwork-weather";
-    public override string Description => "Sets weather for all maps in zNetwork";
+    public override string Description => "Sets weather for the main map in zNetwork";
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {

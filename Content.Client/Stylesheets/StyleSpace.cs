@@ -25,15 +25,13 @@ namespace Content.Client.Stylesheets
 
         public override Stylesheet Stylesheet { get; }
 
-        public StyleSpace(IResourceCache resCache, string theme = "blue", bool useNeutralPalette = false) : base(resCache)
+        public StyleSpace(IResourceCache resCache, string theme = "gray", bool useNeutralPalette = false) : base(resCache)
         {
             var colorTheme = useNeutralPalette
                 ? StyleNano.UiColorTheme.Gray
                 : theme.Equals("gray", StringComparison.OrdinalIgnoreCase)
                     ? StyleNano.UiColorTheme.Gray
-                    : theme.Equals("blue", StringComparison.OrdinalIgnoreCase)
-                        ? StyleNano.UiColorTheme.Blue
-                        : StyleNano.UiColorTheme.Green;
+                    : StyleNano.UiColorTheme.Green;
 
             Color ThemeColor(Color blue, Color gray, Color green)
             {
@@ -42,7 +40,6 @@ namespace Content.Client.Stylesheets
 
                 return colorTheme switch
                 {
-                    StyleNano.UiColorTheme.Blue => blue,
                     StyleNano.UiColorTheme.Gray => gray,
                     _ => green,
                 };

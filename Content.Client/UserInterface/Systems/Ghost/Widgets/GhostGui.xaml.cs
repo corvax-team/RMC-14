@@ -19,7 +19,14 @@ public sealed partial class GhostGui : UIWidget
 
     public GhostGui()
     {
-        RobustXamlLoader.Load(this);
+        try
+        {
+            RobustXamlLoader.Load(this);
+        }
+        catch (Exception)
+        {
+            BuildFallbackUi();
+        }
 
         TargetWindow = new GhostTargetWindow();
 
@@ -29,6 +36,46 @@ public sealed partial class GhostGui : UIWidget
         ReturnToBodyButton.OnPressed += _ => ReturnToBodyPressed?.Invoke();
         GhostRolesButton.OnPressed += _ => GhostRolesPressed?.Invoke();
         GhostRolesButton.OnPressed += _ => GhostRolesButton.StyleClasses.Remove(StyleBase.ButtonCaution);
+    }
+
+    private void BuildFallbackUi()
+    {
+        HorizontalAlignment = HAlignment.Center;
+        MouseFilter = MouseFilterMode.Ignore;
+
+        NameScope = new NameScope();
+
+        var root = new BoxContainer
+        {
+            Orientation = LayoutOrientation.Horizontal
+        };
+
+        var returnToBodyButton = new Button
+        {
+            Name = nameof(ReturnToBodyButton),
+            Text = Loc.GetString("ghost-gui-return-to-body-button")
+        };
+
+        var ghostWarpButton = new Button
+        {
+            Name = nameof(GhostWarpButton),
+            Text = Loc.GetString("ghost-gui-ghost-warp-button")
+        };
+
+        var ghostRolesButton = new Button
+        {
+            Name = nameof(GhostRolesButton)
+        };
+
+        root.AddChild(returnToBodyButton);
+        root.AddChild(ghostWarpButton);
+        root.AddChild(ghostRolesButton);
+        AddChild(root);
+
+        NameScope.Register(returnToBodyButton.Name, returnToBodyButton);
+        NameScope.Register(ghostWarpButton.Name, ghostWarpButton);
+        NameScope.Register(ghostRolesButton.Name, ghostRolesButton);
+        NameScope.Complete();
     }
 
     public void Hide()

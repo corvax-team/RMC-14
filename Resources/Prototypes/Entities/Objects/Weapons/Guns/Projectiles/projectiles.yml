@@ -72,6 +72,8 @@
   description: If you can see this you're probably dead!
   abstract: true
   components:
+  - type: CEZPhysics # mc-changes [z-levels]
+    bounciness: 0
   - type: Reflective
   - type: Clickable
   - type: Sprite

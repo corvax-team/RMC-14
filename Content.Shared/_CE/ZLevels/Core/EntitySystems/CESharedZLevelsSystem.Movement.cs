@@ -50,6 +50,9 @@ public abstract partial class CESharedZLevelsSystem
 
     private void OnActiveInit(Entity<CEActiveZPhysicsComponent> ent, ref ComponentInit args)
     {
+        if (!ZLevelsEnabled)
+            return;
+
         if (!ZPhyzQuery.TryComp(ent, out var zComp))
             return;
 
@@ -59,6 +62,9 @@ public abstract partial class CESharedZLevelsSystem
 
     private void OnTileChanged(Entity<CEZLevelMapComponent> ent, ref TileChangedEvent args)
     {
+        if (!ZLevelsEnabled)
+            return;
+
         if (!TryComp<MapGridComponent>(args.Entity, out var grid))
             return;
 
@@ -123,6 +129,9 @@ public abstract partial class CESharedZLevelsSystem
 
     private void OnMoveEvent(Entity<CEZPhysicsComponent> ent, ref MoveEvent args)
     {
+        if (!ZLevelsEnabled)
+            return;
+
         RequestCacheMovement(ent, false);
 
         if (Math.Abs(ent.Comp.LocalPosition - ent.Comp.CachedGroundHeight) > SleepHeightThreshold)
@@ -131,6 +140,9 @@ public abstract partial class CESharedZLevelsSystem
 
     private void OnZLevelMapMove(Entity<CEZPhysicsComponent> ent, ref CEZLevelMapMoveEvent args)
     {
+        if (!ZLevelsEnabled)
+            return;
+
         ent.Comp.CurrentZLevel = args.CurrentZLevel;
         DirtyField(ent, ent.Comp, nameof(CEZPhysicsComponent.CurrentZLevel));
         ent.Comp.Sleeping = false;
@@ -141,6 +153,12 @@ public abstract partial class CESharedZLevelsSystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        if (!ZLevelsEnabled)
+        {
+            _accumulatedTime = TimeSpan.Zero;
+            return;
+        }
 
         if (_net.IsClient && !_clientSimulation)
             return;
@@ -186,7 +204,7 @@ public abstract partial class CESharedZLevelsSystem
             var oldVelocity = zPhysicsComponent.Velocity;
             var oldHeight = zPhysicsComponent.LocalPosition;
 
-            if (physics.BodyStatus == BodyStatus.OnGround)
+            if (ShouldApplyZGravity((uid, zPhysicsComponent), physics))
             {
                 if (zPhysicsComponent.VelocityGravity)
                 {
@@ -314,6 +332,20 @@ public abstract partial class CESharedZLevelsSystem
                Math.Abs(ent.Comp.LocalPosition - ent.Comp.CachedGroundHeight) <= SleepHeightThreshold &&
                ent.Comp.CachedGroundHeight >= 0f &&
                ent.Comp.CachedGroundHeight < 1f;
+    }
+
+    private bool ShouldApplyZGravity(Entity<CEZPhysicsComponent> ent, PhysicsComponent physics)
+    {
+        if (physics.BodyStatus == BodyStatus.OnGround)
+            return true;
+
+        if (!ent.Comp.Fallable)
+            return false;
+
+        if (ent.Comp.LocalPosition - ent.Comp.CachedGroundHeight > SleepHeightThreshold)
+            return true;
+
+        return ent.Comp.CachedGroundHeight < -SleepHeightThreshold;
     }
 
     private bool CanSleep(Entity<CEZPhysicsComponent> ent, PhysicsComponent physics)
@@ -579,6 +611,9 @@ public abstract partial class CESharedZLevelsSystem
     [PublicAPI]
     public bool TryMove(EntityUid ent, int offset, Entity<CEZLevelMapComponent?>? map = null)
     {
+        if (!ZLevelsEnabled)
+            return false;
+
         map ??= Transform(ent).MapUid;
 
         if (map is null)

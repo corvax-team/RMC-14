@@ -187,7 +187,6 @@ namespace Content.Client.Launcher
 
             Color ThemeColor(Color blue, Color gray, Color green) => effectiveTheme switch
             {
-                StyleNano.UiColorTheme.Blue => blue,
                 StyleNano.UiColorTheme.Gray => gray,
                 _ => green,
             };

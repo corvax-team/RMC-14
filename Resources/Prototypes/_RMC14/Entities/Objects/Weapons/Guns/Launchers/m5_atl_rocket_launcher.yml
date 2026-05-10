@@ -126,6 +126,8 @@
   categories: [ HideSpawnMenu ]
   description: Uh oh.
   components:
+  - type: CEZPhysics # mc-changes [z-levels]
+    bounciness: 0
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false

@@ -18,7 +18,9 @@ namespace Content.Client.ContextMenu.UI
         public const string StyleClassContextMenuExpansionTexture = "contextMenuExpansionTexture";
         public const string StyleClassEntityMenuIconLabel = "contextMenuIconLabel";
 
-        public const float ElementMargin = 2;
+        public const float ElementMarginHorizontal = 2;
+        public const float ElementMarginTop = 2;
+        public const float ElementMarginBottom = 1;
         public const float ElementHeight = 32;
 
         /// <summary>
@@ -49,7 +51,11 @@ namespace Content.Client.ContextMenu.UI
         public ContextMenuElement(string? text = null)
         {
             RobustXamlLoader.Load(this);
-            Margin = new Thickness(ElementMargin, ElementMargin, ElementMargin, ElementMargin);
+            Margin = new Thickness(
+                ElementMarginHorizontal,
+                ElementMarginTop,
+                ElementMarginHorizontal,
+                ElementMarginBottom);
             SetOnlyStyleClass(StyleClassContextMenuButton);
 
             if (text != null)

@@ -2,6 +2,7 @@
 using System.Text;
 using Content.Server._RMC14.MapInsert;
 using Content.Server.Voting;
+using Content.Shared._MC.Map;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Light;
@@ -36,6 +37,9 @@ public sealed partial class CMDistressSignalRuleSystem
         var map = mapNullable.Value;
         EnsureComp<RMCPlanetComponent>(map);
         EnsureComp<TacticalMapComponent>(map);
+
+        if (planet.Proto.TryGetComponent(out MCPlanetMapPrototypeComponent? zLevelsProto, _compFactory))
+            _mcPlanetMap.Load((map, map.Comp), zLevelsProto);
 
         if (grids.Count == 0)
             return false;

@@ -48,7 +48,11 @@ namespace Content.Client.ContextMenu.UI
             MenuPanel.ForceRunStyleUpdate();
             MenuPanel.TryGetStyleProperty<StyleBox>(PanelContainer.StylePropertyPanel, out var box);
             var styleSize = (box?.MinimumSize ?? Vector2.Zero) / UIScale;
-            MenuPanel.MaxHeight = MaxItemsBeforeScroll * (ContextMenuElement.ElementHeight + 2 * ContextMenuElement.ElementMargin) + styleSize.Y;
+            MenuPanel.MaxHeight = MaxItemsBeforeScroll *
+                (ContextMenuElement.ElementHeight +
+                 ContextMenuElement.ElementMarginTop +
+                 ContextMenuElement.ElementMarginBottom) +
+                styleSize.Y;
 
             UserInterfaceManager.ModalRoot.AddChild(this);
             MenuBody.OnChildRemoved += ctrl => _uiController.OnRemoveElement(this, ctrl);

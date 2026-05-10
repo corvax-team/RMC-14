@@ -479,7 +479,7 @@ namespace Content.Client.Lobby
                 }
                 : StyleNano.CurrentTheme switch
             {
-                StyleNano.UiColorTheme.Blue or StyleNano.UiColorTheme.Gray => new[]
+                StyleNano.UiColorTheme.Gray => new[]
                 {
                     "/Textures/_CCM14/Lobby/lobbytgmc_blue.png",
                     "/Textures/_CCM14/Lobby/lobbyweyland_blue.png",

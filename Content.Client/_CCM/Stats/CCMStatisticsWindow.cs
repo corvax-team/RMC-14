@@ -306,7 +306,7 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
             ContentMarginRightOverride = 6,
             ContentMarginBottomOverride = 4,
         };
-        button.Label.FontColorOverride = selected || pressed ? Color.Black : StyleNano.LobbyMenuButtonBase;
+        button.Label.FontColorOverride = Color.White;
         button.Label.FontOverride = IoCManager.Resolve<IResourceCache>().GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 13);
     }
 
@@ -747,7 +747,6 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
         var theme = StyleNano.GetConfiguredTheme(_config);
         var bodyColor = theme switch
         {
-            StyleNano.UiColorTheme.Blue => Color.FromHex("#102A56").WithAlpha(0.94f),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#1A2028").WithAlpha(0.94f),
             _ => Color.FromHex("#05180A").WithAlpha(0.94f),
         };

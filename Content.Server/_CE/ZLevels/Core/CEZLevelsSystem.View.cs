@@ -6,11 +6,14 @@
 using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared._CE.ZLevels.Core.EntitySystems;
 using Content.Shared.Actions;
+using Content.Shared.Ghost;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared._MC;
 using Prometheus;
 using System.Numerics;
+using Robust.Shared;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -33,6 +36,9 @@ public sealed partial class CEZLevelsSystem
 
     private int _viewerMaxPreloadBelowDepth = 1;
     private bool _viewerKeepAboveHot;
+    private float _viewerPvsRange = CVars.NetMaxUpdateRange.DefaultValue;
+    private float _viewerPvsPriorityRange = CVars.NetPvsPriorityRange.DefaultValue;
+    private int _viewerPreloadTileRadius = 18;
 
     private static readonly Histogram ViewerPreloadUsage = Metrics.CreateHistogram(
         "content_zlevels_viewer_preload_usage",
@@ -42,6 +48,16 @@ public sealed partial class CEZLevelsSystem
     {
         _config.OnValueChanged(MCConfigVars.ZLevelsViewerMaxPreloadBelowDepth, v => _viewerMaxPreloadBelowDepth = Math.Max(0, v), true);
         _config.OnValueChanged(MCConfigVars.ZLevelsViewerKeepAboveHot, v => _viewerKeepAboveHot = v, true);
+        _config.OnValueChanged(CVars.NetMaxUpdateRange, v =>
+        {
+            _viewerPvsRange = v;
+            RefreshViewerPreloadTileRadius();
+        }, true);
+        _config.OnValueChanged(CVars.NetPvsPriorityRange, v =>
+        {
+            _viewerPvsPriorityRange = v;
+            RefreshViewerPreloadTileRadius();
+        }, true);
 
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
@@ -57,8 +73,17 @@ public sealed partial class CEZLevelsSystem
     {
     }
 
+    private void RefreshViewerPreloadTileRadius()
+    {
+        var viewSize = Math.Max(_viewerPvsRange, _viewerPvsPriorityRange);
+        _viewerPreloadTileRadius = Math.Max(1, (int)Math.Ceiling(viewSize / 2f) + 1);
+    }
+
     private void OnViewerInit(Entity<CEZLevelViewerComponent> ent, ref MapInitEvent args)
     {
+        if (!ZLevelsEnabled)
+            return;
+
         _actions.AddAction(ent, ref ent.Comp.ZLevelActionEntity, ent.Comp.ActionProto);
         _meta.AddFlag(ent, MetaDataFlags.ExtraTransformEvents);
         RefreshViewerVisibilityCache(ent, true);
@@ -74,6 +99,9 @@ public sealed partial class CEZLevelsSystem
 
     private void OnPlayerAttached(PlayerAttachedEvent ev)
     {
+        if (!ZLevelsEnabled)
+            return;
+
         var viewer = EnsureComp<CEZLevelViewerComponent>(ev.Entity);
         UpdateViewer((ev.Entity, viewer), true);
     }
@@ -91,18 +119,33 @@ public sealed partial class CEZLevelsSystem
 
     protected override void OnViewerMove(Entity<CEZLevelViewerComponent> ent, ref MoveEvent args)
     {
+        if (!ZLevelsEnabled)
+            return;
+
         base.OnViewerMove(ent, ref args);
         UpdateViewer(ent);
     }
 
     protected override void OnToggleLookUp(Entity<CEZLevelViewerComponent> ent, ref CEToggleZLevelLookUpAction args)
     {
+        if (!ZLevelsEnabled)
+        {
+            args.Handled = true;
+            return;
+        }
+
         base.OnToggleLookUp(ent, ref args);
         UpdateViewer(ent, true);
     }
 
     private void UpdateViewer(Entity<CEZLevelViewerComponent> ent, bool force = false)
     {
+        if (!ZLevelsEnabled)
+        {
+            ClearViewerEyes(ent);
+            return;
+        }
+
         using var _ = ViewerPreloadUsage.NewTimer();
 
         if (!TryComp<ActorComponent>(ent, out var actor))
@@ -160,6 +203,9 @@ public sealed partial class CEZLevelsSystem
 
     private void OnZLevelFall(Entity<CEZPhysicsComponent> ent, ref CEZLevelFallMapEvent args)
     {
+        if (!ZLevelsEnabled)
+            return;
+
         //A dirty trick: we call PredictedPopup on the falling entity on SERVER.
         //This means that the one who is falling does not see the popup itself, but everyone around them does. This is what we need.
         _popup.PopupPredictedCoordinates(Loc.GetString("ce-zlevel-falling-popup", ("name", Identity.Name(ent, EntityManager))), Transform(ent).Coordinates, ent);
@@ -170,7 +216,12 @@ public sealed partial class CEZLevelsSystem
         if (!TryMapDown((map.Owner, map.Comp), out _))
             return false;
 
-        return HasOpenTileToLowerMap((map.Owner, map.Comp), tile) ||
+        // Ghosts can freely inspect z-levels. Keep the lower PVS hot so client-side
+        // z-rendering does not draw an empty/dark floor before lower entities arrive.
+        if (HasComp<GhostComponent>(ent))
+            return true;
+
+        return HasVisibleOpeningToLowerMap((map.Owner, map.Comp), tile) ||
                HasNearbyHighGround((map.Owner, map.Comp), tile) ||
                IsTransitioning(ent);
     }
@@ -219,19 +270,24 @@ public sealed partial class CEZLevelsSystem
         return false;
     }
 
-    private bool HasOpenTileToLowerMap(Entity<CEZLevelMapComponent> map, Vector2i center)
+    private bool HasVisibleOpeningToLowerMap(Entity<CEZLevelMapComponent> map, Vector2i center)
     {
         if (!TryComp<MapGridComponent>(map.Owner, out var grid))
-            return false;
+            return true;
 
-        for (var x = center.X - 1; x <= center.X + 1; x++)
+        var radius = _viewerPreloadTileRadius;
+        for (var x = center.X - radius; x <= center.X + radius; x++)
         {
-            for (var y = center.Y - 1; y <= center.Y + 1; y++)
+            for (var y = center.Y - radius; y <= center.Y + radius; y++)
             {
                 if (!_map.TryGetTileRef(map.Owner, grid, new Vector2i(x, y), out var tileRef))
-                    continue;
+                    return true;
 
                 if (tileRef.Tile.IsEmpty)
+                    return true;
+
+                var tileDef = (ContentTileDefinition)TilDefMan[tileRef.Tile.TypeId];
+                if (tileDef.Transparent)
                     return true;
             }
         }

@@ -127,6 +127,12 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
             return;
 
         label.FontColorOverride = StyleNano.OldLobbyGold;
+        PreviewCard.PanelOverride = new StyleBoxFlat
+        {
+            BackgroundColor = StyleNano.OldLobbyPanelSoft.WithAlpha(0.92f),
+            BorderColor = StyleNano.OldLobbyButtonBorderHover.WithAlpha(0.82f),
+            BorderThickness = new Thickness(1f)
+        };
     }
 
     private void ClearOldHeaderStyle()
@@ -140,5 +146,6 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
             return;
 
         label.FontColorOverride = null;
+        PreviewCard.PanelOverride = null;
     }
 }

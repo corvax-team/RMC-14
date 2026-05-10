@@ -505,18 +505,6 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
 
         switch (theme)
         {
-            case StyleNano.UiColorTheme.Blue:
-                _defaultColor = Color.FromHex("#163764").WithAlpha(0.92f);
-                _altColor = Color.FromHex("#1B4074").WithAlpha(0.92f);
-                _headerColor = Color.FromHex("#214B86").WithAlpha(0.96f);
-                _panelColor = Color.FromHex("#102A56").WithAlpha(0.84f);
-                _textColor = Color.FromHex("#E3EEFF");
-                _mutedTextColor = Color.FromHex("#B5D1F3");
-                _separatorColor = Color.FromHex("#2D5F9E").WithAlpha(0.95f);
-                _buttonNormalColor = Color.FromHex("#1A4A8C");
-                _buttonSelectedColor = Color.FromHex("#1F58A5");
-                BackgroundImage.ModulateSelfOverride = Color.FromHex("#5D84BA").WithAlpha(0.22f);
-                break;
             case StyleNano.UiColorTheme.Gray:
                 _defaultColor = Color.FromHex("#26303B").WithAlpha(0.92f);
                 _altColor = Color.FromHex("#2D3743").WithAlpha(0.92f);

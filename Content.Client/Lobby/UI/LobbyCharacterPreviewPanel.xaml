@@ -6,24 +6,28 @@
         <controls:NanoHeading Name="Header" Text="{Loc 'lobby-character-preview-panel-header'}">
 
         </controls:NanoHeading>
-        <BoxContainer Name="Loaded" Orientation="Vertical"
-                      Visible="False">
-            <Label Name="Summary" HorizontalAlignment="Center" Margin="3 3"/>
-            <BoxContainer Name="ViewBox" Orientation="Horizontal" HorizontalAlignment="Center">
+        <PanelContainer Name="PreviewCard" Margin="0 4 0 0">
+            <BoxContainer Name="PreviewCardContent" Orientation="Vertical" Margin="6 6 6 6">
+                <BoxContainer Name="Loaded" Orientation="Vertical"
+                              Visible="False">
+                    <Label Name="Summary" HorizontalAlignment="Center" Margin="3 3"/>
+                    <BoxContainer Name="ViewBox" Orientation="Horizontal" HorizontalAlignment="Center">
 
+                    </BoxContainer>
+                    <controls:VSpacer/>
+                    <BoxContainer Name="ActionButtons" Orientation="Vertical" HorizontalAlignment="Center" SeparationOverride="4">
+                        <Button Name="CharacterSetup" Text="{Loc 'lobby-character-preview-panel-character-setup-button'}"
+                                HorizontalAlignment="Center"
+                                Margin="0 5 0 0" MinHeight="34" />
+                        <Button Name="Customization" Access="Public" Text="{Loc 'ui-lobby-taskbar-customization'}"
+                                HorizontalAlignment="Center"
+                                Margin="0 1 0 0" MinHeight="34" Visible="False" />
+                        <Button Name="PatronPerks" Access="Public" Text="{Loc 'rmc-ui-patron-perks'}"
+                                Margin="0 5 0 0" Visible="False" />
+                    </BoxContainer>
+                </BoxContainer>
+                <Label Name="Unloaded" Text="{Loc 'lobby-character-preview-panel-unloaded-preferences-label'}"/>
             </BoxContainer>
-            <controls:VSpacer/>
-            <BoxContainer Name="ActionButtons" Orientation="Vertical" HorizontalAlignment="Center" SeparationOverride="4">
-                <Button Name="CharacterSetup" Text="{Loc 'lobby-character-preview-panel-character-setup-button'}"
-                        HorizontalAlignment="Center"
-                        Margin="0 5 0 0" MinHeight="34" />
-                <Button Name="Customization" Access="Public" Text="{Loc 'ui-lobby-taskbar-customization'}"
-                        HorizontalAlignment="Center"
-                        Margin="0 1 0 0" MinHeight="34" Visible="False" />
-                <Button Name="PatronPerks" Access="Public" Text="{Loc 'rmc-ui-patron-perks'}"
-                        Margin="0 5 0 0" Visible="False" />
-            </BoxContainer>
-        </BoxContainer>
-        <Label Name="Unloaded" Text="{Loc 'lobby-character-preview-panel-unloaded-preferences-label'}"/>
+        </PanelContainer>
     </BoxContainer>
 </Control>

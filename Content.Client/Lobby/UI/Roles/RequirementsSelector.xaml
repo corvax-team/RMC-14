@@ -17,7 +17,7 @@
         </BoxContainer>
         <PanelContainer Name="SubtitleUnderline" Visible="False" MinSize="0 1" HorizontalExpand="True">
             <PanelContainer.PanelOverride>
-                <gfx:StyleBoxFlat BackgroundColor="#3A6B47" />
+                <gfx:StyleBoxFlat BackgroundColor="#8A7959" />
             </PanelContainer.PanelOverride>
         </PanelContainer>
     </BoxContainer>

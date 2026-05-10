@@ -13,7 +13,6 @@ using Content.Client.UserInterface.Systems.Actions.Widgets;
 using Content.Client.UserInterface.Systems.Actions.Windows;
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Shared._RMC14.Actions;
-using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Charges.Systems;
@@ -236,17 +235,15 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
 
     private void TriggerAction(int index)
     {
-        var activeActions = GetActiveHotbarActions();
-        if (index < 0 || index >= activeActions.Count)
+        if (!_actions.TryGetValue(index, out var actionId) ||
+            _actionsSystem?.GetAction(actionId) is not {} action)
+        {
             return;
-
-        if (activeActions[index] is not { } actionId ||
-            _actionsSystem?.GetAction(actionId) is not { } action)
-            return;
+        }
 
         // TODO: probably should have a clientside event raised for flexibility
-        if (EntityManager.TryGetComponent<TargetActionComponent>(actionId, out var target))
-            ToggleTargeting((actionId, action.Comp, target));
+        if (EntityManager.TryGetComponent<TargetActionComponent>(action, out var target))
+            ToggleTargeting((action, action, target));
         else
             _actionsSystem?.TriggerAction(action);
     }
@@ -261,40 +258,29 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
         if (action.Comp.Toggled && EntityManager.TryGetComponent<TargetActionComponent>(actionId, out var target))
             StartTargeting((action, action, target));
 
-        if (EntityManager.HasComponent<VehicleHardpointActionComponent>(actionId))
-        {
-            RefreshVehicleHotbarOverride(forceUpdate: true);
-            return;
-        }
-
         if (_actions.Contains(action))
             return;
 
         _actions.Add(action);
-        RefreshVehicleHotbarOverride(forceUpdate: true);
     }
 
     private void OnActionRemoved(EntityUid actionId)
     {
+        if (_container == null)
+            return;
+
         if (actionId == SelectingTargetFor)
             StopTargeting();
 
-        if (EntityManager.HasComponent<VehicleHardpointActionComponent>(actionId) ||
-            _vehicleActions.Contains(actionId))
-        {
-            _vehicleActions.RemoveAll(x => x == actionId);
-            RefreshVehicleHotbarOverride();
-            return;
-        }
-
         _actions.RemoveAll(x => x == actionId);
-        RefreshVehicleHotbarOverride(forceUpdate: true);
     }
 
     private void OnActionsUpdated()
     {
         QueueWindowUpdate();
-        RefreshVehicleHotbarOverride(forceUpdate: true);
+
+        if (_actionsSystem != null)
+            _container?.SetActionData(_actionsSystem, _actions.ToArray());
     }
 
     private void ActionButtonPressed(ButtonEventArgs args)
@@ -442,19 +428,11 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
         PopulateActions(actions);
     }
 
-    private void SetAction(
-        ActionButton button,
-        EntityUid? actionId,
-        bool updateSlots = true,
-        bool allowOverrideClear = false)
+    private void SetAction(ActionButton button, EntityUid? actionId, bool updateSlots = true)
     {
         if (_actionsSystem == null)
             return;
 
-        if (_vehicleHotbarOverride && actionId == null && !allowOverrideClear)
-            return;
-
-        var actionList = GetEditableHotbarActions();
         int position;
 
         if (actionId == null)
@@ -462,29 +440,28 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
             button.ClearData();
             if (_container?.TryGetButtonIndex(button, out position) ?? false)
             {
-                if (actionList.Count > position && position >= 0)
-                    actionList.RemoveAt(position);
+                if (_actions.Count > position && position >= 0)
+                    _actions.RemoveAt(position);
             }
         }
         else if (button.TryReplaceWith(actionId.Value, _actionsSystem) &&
             _container != null &&
             _container.TryGetButtonIndex(button, out position))
         {
-            if (position >= actionList.Count)
+            if (position >= _actions.Count)
             {
-                actionList.Add(actionId);
+                _actions.Add(actionId);
             }
             else
             {
-                actionList[position] = actionId;
+                _actions[position] = actionId;
             }
         }
 
         if (updateSlots)
-            _container?.SetActionData(_actionsSystem, GetActiveHotbarActions().ToArray());
+            _container?.SetActionData(_actionsSystem, _actions.ToArray());
 
-        if (!_vehicleHotbarOverride)
-            EntityManager.SystemOrNull<RMCActionsSystem>()?.ActionsChanged(_actions);
+        EntityManager.SystemOrNull<RMCActionsSystem>()?.ActionsChanged(_actions);
     }
 
     private void DragAction()
@@ -504,10 +481,10 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
         }
 
         if (dragged.Parent is ActionButtonContainer)
-            SetAction(dragged, swapAction, false, allowOverrideClear: true);
+            SetAction(dragged, swapAction, false);
 
         if (_actionsSystem != null)
-            _container?.SetActionData(_actionsSystem, GetActiveHotbarActions().ToArray());
+            _container?.SetActionData(_actionsSystem, _actions.ToArray());
 
         _menuDragHelper.EndDrag();
     }
@@ -559,12 +536,6 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
     {
         if (args.Function == EngineKeyFunctions.UIRightClick)
         {
-            if (_vehicleHotbarOverride)
-            {
-                args.Handle();
-                return;
-            }
-
             SetAction(button, null);
             args.Handle();
             return;
@@ -727,9 +698,6 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
 
     private void ClearActions()
     {
-        _actions.Clear();
-        _vehicleActions.Clear();
-        _vehicleHotbarOverride = false;
         _container?.ClearActionData();
     }
 
@@ -741,13 +709,10 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
         _actions.Clear();
         foreach (var assign in assignments)
         {
-            if (EntityManager.HasComponent<VehicleHardpointActionComponent>(assign.ActionId))
-                continue;
-
             _actions.Add(assign.ActionId);
         }
 
-        RefreshVehicleHotbarOverride(forceUpdate: true);
+        _container?.SetActionData(_actionsSystem, _actions.ToArray());
     }
 
     public void RemoveActionContainer()
@@ -774,7 +739,6 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
     public override void FrameUpdate(FrameEventArgs args)
     {
         _menuDragHelper.Update(args.DeltaSeconds);
-        RefreshVehicleHotbarOverride();
         if (_window is {UpdateNeeded: true})
             SearchAndDisplay();
     }
@@ -785,14 +749,12 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
             return;
 
         LoadDefaultActions();
-        RefreshVehicleHotbarOverride(forceUpdate: true);
+        _container?.SetActionData(_actionsSystem, _actions.ToArray());
         QueueWindowUpdate();
     }
 
     private void OnComponentUnlinked()
     {
-        _vehicleHotbarOverride = false;
-        _vehicleActions.Clear();
         _container?.ClearActionData();
         QueueWindowUpdate();
         StopTargeting();
@@ -809,9 +771,6 @@ public sealed partial class ActionUIController : UIController, IOnStateChanged<G
         _actions.Clear();
         foreach (var (action, _) in actions)
         {
-            if (EntityManager.HasComponent<VehicleHardpointActionComponent>(action))
-                continue;
-
             if (!_actions.Contains(action))
                 _actions.Add(action);
         }

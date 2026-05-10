@@ -37,13 +37,13 @@ public sealed partial class AccessLevelControl : GridContainer
                 continue;
             }
 
-            var newButton = new MonotoneCheckBox
+            var newButton = new TextAccessCheckBox
             {
-                Text = accessLevel.GetAccessLevelName(),
                 ToggleMode = true,
                 HorizontalExpand = true,
                 ClipText = false,
             };
+            newButton.AccessText = accessLevel.GetAccessLevelName();
             newButton.Label.HorizontalAlignment = HAlignment.Left;
             AddChild(newButton);
             ButtonsList.Add(accessLevel.ID, newButton);
@@ -58,6 +58,43 @@ public sealed partial class AccessLevelControl : GridContainer
         {
             button.Pressed = pressedList.Contains(accessName);
             button.Disabled = !(enabledList?.Contains(accessName) ?? true);
+        }
+    }
+
+    private sealed class TextAccessCheckBox : CheckBox
+    {
+        private string _accessText = string.Empty;
+
+        public string AccessText
+        {
+            get => _accessText;
+            set
+            {
+                _accessText = value;
+                UpdateDisplayText();
+            }
+        }
+
+        public TextAccessCheckBox()
+        {
+            TextureRect.AddStyleClass(MonotoneCheckBox.StyleClassMonotoneCheckBox);
+            TextureRect.Visible = false;
+            LeftAlign = true;
+            Label.HorizontalAlignment = HAlignment.Left;
+            Label.HorizontalExpand = true;
+            UpdateDisplayText();
+        }
+
+        protected override void DrawModeChanged()
+        {
+            base.DrawModeChanged();
+            Modulate = Disabled ? Color.Gray : Color.White;
+            UpdateDisplayText();
+        }
+
+        private void UpdateDisplayText()
+        {
+            Text = $"{(Pressed ? "[x]" : "[ ]")} {_accessText}";
         }
     }
 }

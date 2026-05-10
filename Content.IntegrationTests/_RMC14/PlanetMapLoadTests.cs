@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Linq;
 using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Presets;
+using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.CCVar;
@@ -68,6 +70,18 @@ public sealed class PlanetMapLoadTests
                 Assert.That(ticker.RunLevel, Is.Not.EqualTo(GameRunLevel.PreRoundLobby));
                 Assert.That(server.EntMan.Count<TacticalMapComponent>(), Is.EqualTo(1));
                 Assert.That(server.EntMan.Count<RMCPlanetComponent>(), Is.EqualTo(1));
+            });
+
+            await server.WaitPost(() =>
+            {
+                if (planet.Proto.ID != "RMCPlanetTrijent")
+                    return;
+
+                Assert.That(server.EntMan.Count<CEZLevelMapComponent>(), Is.GreaterThanOrEqualTo(2));
+
+                var planetMap = server.EntMan.AllEntities<RMCPlanetComponent>().Single();
+                Assert.That(server.EntMan.TryGetComponent<CEZLevelMapComponent>(planetMap, out var zMap), Is.True);
+                Assert.That(zMap!.MapAbove, Is.Not.Null);
             });
 
             await pair.WaitCommand("golobby");

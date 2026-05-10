@@ -33,6 +33,9 @@ public sealed partial class CEZLevelsSystem
     /// </summary>
     private bool TryAddMapIntoZNetwork(Entity<CEZLevelsNetworkComponent> network, EntityUid mapUid, int depth)
     {
+        if (!ZLevelsEnabled)
+            return false;
+
         if (TryGetZNetwork(mapUid, out var otherNetwork))
         {
             Log.Error($"Failed attempt to add map {mapUid} to ZLevelNetwork {network}: This map is already in another network {otherNetwork}.");
@@ -62,13 +65,30 @@ public sealed partial class CEZLevelsSystem
         levelMapComponent.Depth = depth;
         levelMapComponent.NetworkUid = network;
 
-        if (network.Comp.ZLevels.TryGetValue(depth + 1, out var aboveMapUid))
-            levelMapComponent.MapAbove = aboveMapUid;
+        if (network.Comp.ZLevels.TryGetValue(depth + 1, out var aboveMapUid) &&
+            aboveMapUid is { } aboveUid)
+        {
+            levelMapComponent.MapAbove = aboveUid;
+            if (TryComp<CEZLevelMapComponent>(aboveUid, out var aboveMapComponent))
+            {
+                aboveMapComponent.MapBelow = mapUid;
+                Dirty(aboveUid, aboveMapComponent);
+            }
+        }
 
-        if (network.Comp.ZLevels.TryGetValue(depth - 1, out var belowMapUid))
-            levelMapComponent.MapBelow = belowMapUid;
+        if (network.Comp.ZLevels.TryGetValue(depth - 1, out var belowMapUid) &&
+            belowMapUid is { } belowUid)
+        {
+            levelMapComponent.MapBelow = belowUid;
+            if (TryComp<CEZLevelMapComponent>(belowUid, out var belowMapComponent))
+            {
+                belowMapComponent.MapAbove = mapUid;
+                Dirty(belowUid, belowMapComponent);
+            }
+        }
 
         Dirty(mapUid, levelMapComponent);
+        RefreshZPhysicsOnMap((mapUid, levelMapComponent));
 
         return true;
     }
@@ -83,6 +103,7 @@ public sealed partial class CEZLevelsSystem
         }
 
         RaiseLocalEvent(network, new CEZLevelNetworkUpdatedEvent());
+        SyncNetworkLighting(network);
 
         return success;
     }

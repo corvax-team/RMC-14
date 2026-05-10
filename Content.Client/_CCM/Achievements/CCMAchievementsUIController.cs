@@ -393,7 +393,6 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
     {
         return theme switch
         {
-            StyleNano.UiColorTheme.Blue => Color.FromHex("#4A8FFF"),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#A7B3C0"),
             _ => Color.FromHex("#6CFF6C"),
         };
@@ -403,7 +402,6 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
     {
         return theme switch
         {
-            StyleNano.UiColorTheme.Blue => Color.FromHex("#0D2344").WithAlpha(0.985f),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#1A2028").WithAlpha(0.985f),
             _ => Color.FromHex("#082110").WithAlpha(0.985f),
         };
@@ -413,7 +411,6 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
     {
         return theme switch
         {
-            StyleNano.UiColorTheme.Blue => Color.FromHex("#14335E").WithAlpha(0.95f),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#252E39").WithAlpha(0.95f),
             _ => Color.FromHex("#12371C").WithAlpha(0.95f),
         };
@@ -423,7 +420,6 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
     {
         return theme switch
         {
-            StyleNano.UiColorTheme.Blue => Color.FromHex("#D8E9FF"),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#F0F3F6"),
             _ => Color.FromHex("#E7FFE8"),
         };
@@ -433,7 +429,6 @@ public sealed class CCMAchievementsUIController : UIController, IOnStateEntered<
     {
         return theme switch
         {
-            StyleNano.UiColorTheme.Blue => Color.FromHex("#D1E1F5"),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#D5DCE4"),
             _ => Color.FromHex("#D3EAD7"),
         };

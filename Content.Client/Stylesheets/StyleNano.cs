@@ -51,11 +51,10 @@ namespace Content.Client.Stylesheets
         public enum UiColorTheme
         {
             Green,
-            Blue,
             Gray
         }
 
-        public static UiColorTheme CurrentTheme { get; private set; } = UiColorTheme.Blue;
+        public static UiColorTheme CurrentTheme { get; private set; } = UiColorTheme.Gray;
         public const string StyleClassBorderedWindowPanel = "BorderedWindowPanel";
         public const string StyleClassInventorySlotBackground = "InventorySlotBackground";
         public const string StyleClassHandSlotHighlight = "HandSlotHighlight";
@@ -261,20 +260,20 @@ namespace Content.Client.Stylesheets
 
         public static Color ChatBackgroundColor = Color.FromHex("#0A120B");
         public static readonly Color OldLobbyGold = Color.FromHex("#B69A68");
-        public static readonly Color OldLobbyPanel = Color.FromHex("#171A27");
-        public static readonly Color OldLobbyPanelSoft = Color.FromHex("#202435");
-        public static readonly Color OldLobbyButton = Color.FromHex("#2D3550");
-        public static readonly Color OldLobbyButtonHover = Color.FromHex("#394462");
-        public static readonly Color OldLobbyButtonPressed = Color.FromHex("#252D45");
-        public static readonly Color OldLobbyButtonDisabled = Color.FromHex("#2A2E3C");
-        public static readonly Color OldLobbyButtonBorder = Color.FromHex("#465272");
-        public static readonly Color OldLobbyButtonBorderHover = Color.FromHex("#586684");
-        public static readonly Color OldLobbyButtonBorderPressed = Color.FromHex("#3C4764");
-        public static readonly Color OldLobbyButtonBorderDisabled = Color.FromHex("#3C4256");
-        public static readonly Color OldLobbyButtonRed = Color.FromHex("#9D4444");
-        public static readonly Color OldLobbyButtonRedHover = Color.FromHex("#B65353");
-        public static readonly Color OldLobbyButtonRedBorder = Color.FromHex("#B46262");
-        public static readonly Color OldLobbyButtonRedBorderHover = Color.FromHex("#CA7575");
+        public static readonly Color OldLobbyPanel = Color.FromHex("#293147");
+        public static readonly Color OldLobbyPanelSoft = Color.FromHex("#36415D");
+        public static readonly Color OldLobbyButton = Color.FromHex("#52637F");
+        public static readonly Color OldLobbyButtonHover = Color.FromHex("#667A9C");
+        public static readonly Color OldLobbyButtonPressed = Color.FromHex("#485A76");
+        public static readonly Color OldLobbyButtonDisabled = Color.FromHex("#404B63");
+        public static readonly Color OldLobbyButtonBorder = Color.FromHex("#7B91BA");
+        public static readonly Color OldLobbyButtonBorderHover = Color.FromHex("#95ACD5");
+        public static readonly Color OldLobbyButtonBorderPressed = Color.FromHex("#6C81A8");
+        public static readonly Color OldLobbyButtonBorderDisabled = Color.FromHex("#5C6D8C");
+        public static readonly Color OldLobbyButtonRed = Color.FromHex("#A55252");
+        public static readonly Color OldLobbyButtonRedHover = Color.FromHex("#BE6464");
+        public static readonly Color OldLobbyButtonRedBorder = Color.FromHex("#C27575");
+        public static readonly Color OldLobbyButtonRedBorderHover = Color.FromHex("#D68989");
         public static readonly Color OldLobbyText = Color.FromHex("#ECE4D4");
         public static readonly Color OldLobbyMuted = Color.FromHex("#C0B59F");
 
@@ -285,7 +284,7 @@ namespace Content.Client.Stylesheets
         private static UiColorTheme ParseTheme(string theme)
         {
             if (theme.Equals("blue", StringComparison.OrdinalIgnoreCase))
-                return UiColorTheme.Blue;
+                return UiColorTheme.Gray;
 
             if (theme.Equals("gray", StringComparison.OrdinalIgnoreCase))
                 return UiColorTheme.Gray;
@@ -293,7 +292,7 @@ namespace Content.Client.Stylesheets
             if (theme.Equals("green", StringComparison.OrdinalIgnoreCase))
                 return UiColorTheme.Green;
 
-            return UiColorTheme.Blue;
+            return UiColorTheme.Gray;
         }
 
         public static bool IsOldLobbyStyle(IConfigurationManager config)
@@ -309,15 +308,14 @@ namespace Content.Client.Stylesheets
             if (IsOldLobbyStyle(config))
                 return UiColorTheme.Gray;
 
-            var theme = config.GetCVar(RMCCVars.RMCUIColorTheme) ?? "blue";
+            var theme = config.GetCVar(RMCCVars.RMCUIColorTheme) ?? "gray";
             return ParseTheme(theme);
         }
 
-        private static T ThemeValue<T>(T blue, T gray, T green)
+        private static T ThemeValue<T>(T removedBlue, T gray, T green)
         {
             return CurrentTheme switch
             {
-                UiColorTheme.Blue => blue,
                 UiColorTheme.Gray => gray,
                 _ => green,
             };
@@ -326,129 +324,67 @@ namespace Content.Client.Stylesheets
         private static void ApplyPalette(UiColorTheme theme)
         {
             CurrentTheme = theme;
-            if (theme == UiColorTheme.Blue)
+            if (theme == UiColorTheme.Gray)
             {
-                PanelDark = Color.FromHex("#0B1320");
-                NanoGold = Color.FromHex("#D8E6F7");
-                GoodGreenFore = Color.FromHex("#C5D8F0");
-                ConcerningOrangeFore = Color.FromHex("#DFEBFA");
-                DangerousRedFore = Color.FromHex("#B8CDEA");
-                DisabledFore = Color.FromHex("#677484");
+                PanelDark = Color.FromHex("#15171B");
+                NanoGold = Color.FromHex("#D9DCE1");
+                GoodGreenFore = Color.FromHex("#CDD1D6");
+                ConcerningOrangeFore = Color.FromHex("#E0E2E5");
+                DangerousRedFore = Color.FromHex("#C3C7CD");
+                DisabledFore = Color.FromHex("#737780");
 
-                ButtonColorDefault = Color.FromHex("#3868D4");
-                ButtonColorDefaultRed = Color.FromHex("#3868D4");
-                ButtonColorHovered = Color.FromHex("#477BEA");
-                ButtonColorHoveredRed = Color.FromHex("#477BEA");
-                ButtonColorPressed = Color.FromHex("#2C53AC");
-                ButtonColorDisabled = Color.FromHex("#263344");
+                ButtonColorDefault = Color.FromHex("#686F80");
+                ButtonColorDefaultRed = Color.FromHex("#686F80");
+                ButtonColorHovered = Color.FromHex("#788194");
+                ButtonColorHoveredRed = Color.FromHex("#788194");
+                ButtonColorPressed = Color.FromHex("#565D6C");
+                ButtonColorDisabled = Color.FromHex("#454B57");
 
-                ButtonColorCautionDefault = Color.FromHex("#3868D4");
-                ButtonColorCautionHovered = Color.FromHex("#477BEA");
-                ButtonColorCautionPressed = Color.FromHex("#2C53AC");
-                ButtonColorCautionDisabled = Color.FromHex("#263344");
+                ButtonColorCautionDefault = Color.FromHex("#686F80");
+                ButtonColorCautionHovered = Color.FromHex("#788194");
+                ButtonColorCautionPressed = Color.FromHex("#565D6C");
+                ButtonColorCautionDisabled = Color.FromHex("#454B57");
 
-                ButtonColorGoodDefault = Color.FromHex("#3868D4");
-                ButtonColorGoodHovered = Color.FromHex("#477BEA");
-                ButtonColorGoodDisabled = Color.FromHex("#263344");
+                ButtonColorGoodDefault = Color.FromHex("#686F80");
+                ButtonColorGoodHovered = Color.FromHex("#788194");
+                ButtonColorGoodDisabled = Color.FromHex("#454B57");
 
-                LobbyCrtAccent = Color.FromHex("#4D91FF");
-                LobbyCrtText = Color.FromHex("#4D91FF");
-                LobbyCrtMutedText = Color.FromHex("#C2D5F3");
-                LobbyCleanAccent = Color.FromHex("#3F79DE");
-                LobbyCleanText = Color.FromHex("#EFF5FC");
-                LobbyCleanMutedText = Color.FromHex("#CCD9EE");
-                LobbyCrtGlow = Color.FromHex("#4D91FF88");
-                LobbyMenuButtonBase = Color.FromHex("#4A82F0");
-                LobbyMenuButtonPressed = Color.FromHex("#3863C6");
-                LobbyMenuButtonReadyPressed = Color.FromHex("#3863C6");
-                LobbyMenuButtonDisabledCrt = Color.FromHex("#35547E");
-                LobbyMenuButtonDisabledClean = Color.FromHex("#30486A");
-                UiButtonBorder = Color.FromHex("#2C3C52");
+                LobbyCrtAccent = Color.FromHex("#BFC3C8");
+                LobbyCrtText = Color.FromHex("#BFC3C8");
+                LobbyCrtMutedText = Color.FromHex("#AAADB2");
+                LobbyCleanAccent = Color.FromHex("#747C8D");
+                LobbyCleanText = Color.FromHex("#F0F1F3");
+                LobbyCleanMutedText = Color.FromHex("#C7CACF");
+                LobbyCrtGlow = Color.FromHex("#BFC3C888");
+                LobbyMenuButtonBase = Color.FromHex("#686F80");
+                LobbyMenuButtonPressed = Color.FromHex("#565D6C");
+                LobbyMenuButtonReadyPressed = Color.FromHex("#565D6C");
+                LobbyMenuButtonDisabledCrt = Color.FromHex("#454B57");
+                LobbyMenuButtonDisabledClean = Color.FromHex("#454B57");
+                UiButtonBorder = Color.FromHex("#565E6F");
 
-                PointRed = Color.FromHex("#4B6A97");
-                PointGreen = Color.FromHex("#4A82F0");
-                PointMagenta = Color.FromHex("#86B2FF");
+                PointRed = Color.FromHex("#686F80");
+                PointGreen = Color.FromHex("#9AA1AD");
+                PointMagenta = Color.FromHex("#C5C8CE");
 
-                ButtonColorContext = Color.FromHex("#4E92FF");
-                ButtonColorContextHover = Color.FromHex("#66ABFF");
-                ButtonColorContextPressed = Color.FromHex("#3D7AE6");
-                ButtonColorContextDisabled = Color.FromHex("#39597A");
-                DropdownButtonColorContext = Color.FromHex("#4E92FF");
-                DropdownButtonColorContextHover = Color.FromHex("#66ABFF");
-                DropdownButtonColorContextPressed = Color.FromHex("#3D7AE6");
-                DropdownButtonColorContextDisabled = Color.FromHex("#39597A");
+                ButtonColorContext = Color.FromHex("#686F80");
+                ButtonColorContextHover = Color.FromHex("#788194");
+                ButtonColorContextPressed = Color.FromHex("#565D6C");
+                ButtonColorContextDisabled = Color.FromHex("#454B57");
+                DropdownButtonColorContext = Color.FromHex("#686F80");
+                DropdownButtonColorContextHover = Color.FromHex("#788194");
+                DropdownButtonColorContextPressed = Color.FromHex("#565D6C");
+                DropdownButtonColorContextDisabled = Color.FromHex("#454B57");
 
-                ExamineButtonColorContext = Color.FromHex("#4E92FF");
-                ExamineButtonColorContextHover = Color.FromHex("#66ABFF");
-                ExamineButtonColorContextPressed = Color.FromHex("#3D7AE6");
-                ExamineButtonColorContextDisabled = Color.FromHex("#39597A");
+                ExamineButtonColorContext = Color.FromHex("#686F80");
+                ExamineButtonColorContextHover = Color.FromHex("#788194");
+                ExamineButtonColorContextPressed = Color.FromHex("#565D6C");
+                ExamineButtonColorContextDisabled = Color.FromHex("#454B57");
 
-                FancyTreeEvenRowColor = Color.FromHex("#111925");
-                FancyTreeSelectedRowColor = Color.FromHex("#162437");
-                ItemStatusNotHeldColor = Color.FromHex("#34465E");
-                ChatBackgroundColor = Color.FromHex("#0A1018");
-            }
-            else if (theme == UiColorTheme.Gray)
-            {
-                PanelDark = Color.FromHex("#11161C");
-                NanoGold = Color.FromHex("#D5DCE4");
-                GoodGreenFore = Color.FromHex("#C7D0D9");
-                ConcerningOrangeFore = Color.FromHex("#D9E0E8");
-                DangerousRedFore = Color.FromHex("#B9C3CF");
-                DisabledFore = Color.FromHex("#69727D");
-
-                ButtonColorDefault = Color.FromHex("#4C5B6D");
-                ButtonColorDefaultRed = Color.FromHex("#4C5B6D");
-                ButtonColorHovered = Color.FromHex("#607286");
-                ButtonColorHoveredRed = Color.FromHex("#607286");
-                ButtonColorPressed = Color.FromHex("#404D5D");
-                ButtonColorDisabled = Color.FromHex("#2A3440");
-
-                ButtonColorCautionDefault = Color.FromHex("#4C5B6D");
-                ButtonColorCautionHovered = Color.FromHex("#607286");
-                ButtonColorCautionPressed = Color.FromHex("#404D5D");
-                ButtonColorCautionDisabled = Color.FromHex("#2A3440");
-
-                ButtonColorGoodDefault = Color.FromHex("#4C5B6D");
-                ButtonColorGoodHovered = Color.FromHex("#607286");
-                ButtonColorGoodDisabled = Color.FromHex("#2A3440");
-
-                LobbyCrtAccent = Color.FromHex("#B6C0CB");
-                LobbyCrtText = Color.FromHex("#B6C0CB");
-                LobbyCrtMutedText = Color.FromHex("#A4ADB7");
-                LobbyCleanAccent = Color.FromHex("#6C7784");
-                LobbyCleanText = Color.FromHex("#EDF2F7");
-                LobbyCleanMutedText = Color.FromHex("#C2CAD4");
-                LobbyCrtGlow = Color.FromHex("#B6C0CB88");
-                LobbyMenuButtonBase = Color.FromHex("#5C6E84");
-                LobbyMenuButtonPressed = Color.FromHex("#4A5A6D");
-                LobbyMenuButtonReadyPressed = Color.FromHex("#4A5A6D");
-                LobbyMenuButtonDisabledCrt = Color.FromHex("#3B4755");
-                LobbyMenuButtonDisabledClean = Color.FromHex("#33404D");
-                UiButtonBorder = Color.FromHex("#2E3947");
-
-                PointRed = Color.FromHex("#5B6671");
-                PointGreen = Color.FromHex("#8A96A5");
-                PointMagenta = Color.FromHex("#C1CBD7");
-
-                ButtonColorContext = Color.FromHex("#566880");
-                ButtonColorContextHover = Color.FromHex("#6A7E98");
-                ButtonColorContextPressed = Color.FromHex("#46566A");
-                ButtonColorContextDisabled = Color.FromHex("#303945");
-                DropdownButtonColorContext = Color.FromHex("#566880");
-                DropdownButtonColorContextHover = Color.FromHex("#6A7E98");
-                DropdownButtonColorContextPressed = Color.FromHex("#46566A");
-                DropdownButtonColorContextDisabled = Color.FromHex("#303945");
-
-                ExamineButtonColorContext = Color.FromHex("#566880");
-                ExamineButtonColorContextHover = Color.FromHex("#6A7E98");
-                ExamineButtonColorContextPressed = Color.FromHex("#46566A");
-                ExamineButtonColorContextDisabled = Color.FromHex("#303945");
-
-                FancyTreeEvenRowColor = Color.FromHex("#141A21");
-                FancyTreeSelectedRowColor = Color.FromHex("#1A232E");
-                ItemStatusNotHeldColor = Color.FromHex("#39434E");
-                ChatBackgroundColor = Color.FromHex("#0D1218");
+                FancyTreeEvenRowColor = Color.FromHex("#181A1E");
+                FancyTreeSelectedRowColor = Color.FromHex("#22252B");
+                ItemStatusNotHeldColor = Color.FromHex("#4A505C");
+                ChatBackgroundColor = Color.FromHex("#101114");
             }
             else
             {
@@ -603,80 +539,80 @@ namespace Content.Client.Stylesheets
             var optionsButtonBase = useOldLobbyPalette
                 ? OldLobbyButton
                 : ThemeValue(
-                    Color.FromHex("#1D4F9E"),
-                    Color.FromHex("#536273"),
+                    ButtonColorDefault,
+                    ButtonColorDefault,
                     ButtonColorContext);
             var optionsButtonHover = useOldLobbyPalette
                 ? OldLobbyButtonHover
                 : ThemeValue(
-                    BlendTowards(optionsButtonBase, Color.White, 0.10f),
-                    Color.FromHex("#647688"),
+                    ButtonColorHovered,
+                    ButtonColorHovered,
                     ButtonColorContextHover);
             var optionsButtonPressed = useOldLobbyPalette
                 ? OldLobbyButtonPressed
                 : ThemeValue(
-                    BlendTowards(optionsButtonBase, Color.Black, 0.16f),
-                    Color.FromHex("#444F5E"),
+                    ButtonColorPressed,
+                    ButtonColorPressed,
                     ButtonColorContextPressed);
             var optionsButtonDisabled = useOldLobbyPalette
                 ? OldLobbyButtonDisabled
                 : ThemeValue(
-                    BlendTowards(optionsButtonBase, Color.Black, 0.30f),
-                    Color.FromHex("#2F3843"),
+                    ButtonColorDisabled,
+                    ButtonColorDisabled,
                     ButtonColorContextDisabled);
             var optionsButtonText = useOldLobbyPalette ? OldLobbyText : Color.FromHex("#EEF4FB");
             var optionsButtonTextDisabled = optionsButtonText.WithAlpha(0.72f);
             var optionsOptionsBackground = useOldLobbyPalette
                 ? OldLobbyPanelSoft.WithAlpha(0.96f)
                 : ThemeValue(
-                    BlendTowards(optionsButtonBase, Color.Black, 0.72f).WithAlpha(0.94f),
-                    Color.FromHex("#1B222B").WithAlpha(0.95f),
+                    Color.FromHex("#1C1E22").WithAlpha(0.95f),
+                    Color.FromHex("#1C1E22").WithAlpha(0.95f),
                     optionsButtonBase.WithAlpha(0.96f));
             var optionsOptionsBorder = useOldLobbyPalette
                 ? OldLobbyGold.WithAlpha(0.88f)
                 : ThemeValue(
-                    BlendTowards(optionsButtonBase, Color.White, 0.08f).WithAlpha(0.82f),
-                    Color.FromHex("#677586").WithAlpha(0.88f),
+                    Color.FromHex("#686D76").WithAlpha(0.88f),
+                    Color.FromHex("#686D76").WithAlpha(0.88f),
                     UiButtonBorder.WithAlpha(0.96f));
             var themedPanel = ThemeValue(
-                Color.FromHex("#091E3C").WithAlpha(0.94f),
-                Color.FromHex("#181E25").WithAlpha(0.94f),
+                Color.FromHex("#1A1C20").WithAlpha(0.94f),
+                Color.FromHex("#1A1C20").WithAlpha(0.94f),
                 Color.FromHex("#07170B").WithAlpha(0.94f));
             var themedPanelAlt = ThemeValue(
-                Color.FromHex("#102A52").WithAlpha(0.92f),
-                Color.FromHex("#202831").WithAlpha(0.92f),
+                Color.FromHex("#24272D").WithAlpha(0.92f),
+                Color.FromHex("#24272D").WithAlpha(0.92f),
                 Color.FromHex("#0D2513").WithAlpha(0.92f));
             var themedPanelRaised = ThemeValue(
-                Color.FromHex("#2B6FDC").WithAlpha(0.90f),
-                Color.FromHex("#5F728A").WithAlpha(0.92f),
+                Color.FromHex("#686F80").WithAlpha(0.92f),
+                Color.FromHex("#686F80").WithAlpha(0.92f),
                 ButtonColorContext.WithAlpha(0.92f));
             var themedBorder = ThemeValue(
-                Color.FromHex("#2A67B8").WithAlpha(0.95f),
-                Color.FromHex("#667487").WithAlpha(0.95f),
+                Color.FromHex("#686D76").WithAlpha(0.95f),
+                Color.FromHex("#686D76").WithAlpha(0.95f),
                 UiButtonBorder.WithAlpha(0.95f));
             var themedBorderSoft = ThemeValue(
-                Color.FromHex("#194A86").WithAlpha(0.88f),
-                Color.FromHex("#4E5B6C").WithAlpha(0.88f),
+                Color.FromHex("#535861").WithAlpha(0.88f),
+                Color.FromHex("#535861").WithAlpha(0.88f),
                 UiButtonBorder.WithAlpha(0.88f));
             var themedText = ThemeValue(
-                Color.FromHex("#E7F2FF"),
+                Color.FromHex("#EAF2FB"),
                 Color.FromHex("#EEF2F6"),
                 Color.FromHex("#E4F4E8"));
             var themedTextMuted = ThemeValue(
-                Color.FromHex("#BCD4F5"),
+                Color.FromHex("#C1D2E5"),
                 Color.FromHex("#C7CFD8"),
                 Color.FromHex("#C7E6CC"));
             var loadoutButtonBase = ThemeValue(
-                Color.FromHex("#2B6FDC"),
-                Color.FromHex("#5C6E84"),
+                ButtonColorDefault,
+                ButtonColorDefault,
                 ButtonColorContext);
             var loadoutButtonAlt = ThemeValue(
-                Color.FromHex("#255FCA"),
-                Color.FromHex("#4E5E73"),
+                BlendTowards(ButtonColorDefault, PanelDark, 0.16f),
+                BlendTowards(ButtonColorDefault, PanelDark, 0.16f),
                 ButtonColorContext);
             var loadoutButtonHover = ThemeValue(
-                Color.FromHex("#3C84F0"),
-                Color.FromHex("#72859D"),
+                ButtonColorHovered,
+                ButtonColorHovered,
                 ButtonColorContextHover);
             var loadoutButtonPressed = ThemeValue(
                 BlendTowards(loadoutButtonBase, Color.White, 0.20f),
@@ -695,36 +631,52 @@ namespace Content.Client.Stylesheets
                 Color.FromHex("#FAFCFF"),
                 Color.FromHex("#F2FFF4"));
             var voteButtonBase = ThemeValue(
-                Color.FromHex("#2B6FDC"),
-                Color.FromHex("#5C6E84"),
+                ButtonColorDefault,
+                ButtonColorDefault,
                 ButtonColorContext);
             var voteButtonHover = ThemeValue(
-                Color.FromHex("#3C84F0"),
-                Color.FromHex("#73869F"),
+                ButtonColorHovered,
+                ButtonColorHovered,
                 ButtonColorContextHover);
             var voteButtonPressed = ThemeValue(
-                Color.FromHex("#205AB8"),
-                Color.FromHex("#455464"),
+                ButtonColorPressed,
+                ButtonColorPressed,
                 ButtonColorContextPressed);
             var voteProgressBackground = ThemeValue(
-                Color.FromHex("#08162B").WithAlpha(0.95f),
+                Color.FromHex("#121821").WithAlpha(0.95f),
                 Color.FromHex("#121821").WithAlpha(0.95f),
                 Color.FromHex("#051008").WithAlpha(0.95f));
             var voteProgressForeground = ThemeValue(
-                Color.FromHex("#3178D7").WithAlpha(0.95f),
-                Color.FromHex("#7C8EA4").WithAlpha(0.95f),
+                Color.FromHex("#858A92").WithAlpha(0.95f),
+                Color.FromHex("#858A92").WithAlpha(0.95f),
                 Color.FromHex("#30B53C").WithAlpha(0.95f));
             var contextMenuText = useNeutralPalette
                 ? Color.FromHex("#E7EEE8")
                 : ThemeValue(
-                    Color.FromHex("#E8F2FF"),
+                    Color.FromHex("#EAF2FB"),
                     Color.FromHex("#EEF2F6"),
                     Color.FromHex("#E6F3E9"));
             var dropdownButtonText = useOldLobbyPalette ? OldLobbyText : Color.FromHex("#C5CED8");
             var dropdownButtonTextDisabled = dropdownButtonText.WithAlpha(0.72f);
+            var optionsDropdownNormal = ThemeValue(
+                DropdownButtonColorContext,
+                DropdownButtonColorContext,
+                DropdownButtonColorContext);
+            var optionsDropdownHover = ThemeValue(
+                DropdownButtonColorContextHover,
+                DropdownButtonColorContextHover,
+                DropdownButtonColorContextHover);
+            var optionsDropdownPressed = ThemeValue(
+                DropdownButtonColorContextPressed,
+                DropdownButtonColorContextPressed,
+                DropdownButtonColorContextPressed);
+            var optionsDropdownDisabled = ThemeValue(
+                DropdownButtonColorContextDisabled,
+                DropdownButtonColorContextDisabled,
+                DropdownButtonColorContextDisabled);
             var dropdownButtonNormal = new StyleBoxFlat
             {
-                BackgroundColor = useOldLobbyPalette ? OldLobbyButton : DropdownButtonColorContext,
+                BackgroundColor = useOldLobbyPalette ? OldLobbyButton : optionsDropdownNormal,
                 BorderColor = useOldLobbyPalette ? OldLobbyButtonBorder : UiButtonBorder,
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 6,
@@ -734,7 +686,7 @@ namespace Content.Client.Stylesheets
             };
             var dropdownButtonHover = new StyleBoxFlat
             {
-                BackgroundColor = useOldLobbyPalette ? OldLobbyButtonHover : DropdownButtonColorContextHover,
+                BackgroundColor = useOldLobbyPalette ? OldLobbyButtonHover : optionsDropdownHover,
                 BorderColor = useOldLobbyPalette ? OldLobbyButtonBorderHover : UiButtonBorder,
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 6,
@@ -744,7 +696,7 @@ namespace Content.Client.Stylesheets
             };
             var dropdownButtonPressed = new StyleBoxFlat
             {
-                BackgroundColor = useOldLobbyPalette ? OldLobbyButtonPressed : DropdownButtonColorContextPressed,
+                BackgroundColor = useOldLobbyPalette ? OldLobbyButtonPressed : optionsDropdownPressed,
                 BorderColor = useOldLobbyPalette ? OldLobbyButtonBorderPressed : UiButtonBorder,
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 6,
@@ -754,7 +706,7 @@ namespace Content.Client.Stylesheets
             };
             var dropdownButtonDisabled = new StyleBoxFlat
             {
-                BackgroundColor = useOldLobbyPalette ? OldLobbyButtonDisabled : DropdownButtonColorContextDisabled,
+                BackgroundColor = useOldLobbyPalette ? OldLobbyButtonDisabled : optionsDropdownDisabled,
                 BorderColor = useOldLobbyPalette ? OldLobbyButtonBorderDisabled : UiButtonBorder,
                 BorderThickness = new Thickness(1),
                 ContentMarginLeftOverride = 6,
@@ -764,7 +716,7 @@ namespace Content.Client.Stylesheets
             };
             var dropdownOptionsBackground = new StyleBoxFlat
             {
-                BackgroundColor = useOldLobbyPalette ? OldLobbyPanelSoft : DropdownButtonColorContext,
+                BackgroundColor = useOldLobbyPalette ? OldLobbyPanelSoft : optionsDropdownNormal,
                 BorderThickness = new Thickness(1),
                 BorderColor = useOldLobbyPalette ? OldLobbyButtonBorder : UiButtonBorder,
                 ContentMarginLeftOverride = 0,
@@ -775,43 +727,43 @@ namespace Content.Client.Stylesheets
             var optionsCategoryListBackground = useOldLobbyPalette
                 ? OldLobbyPanel.WithAlpha(0.92f)
                 : ThemeValue(
-                    Color.FromHex("#051B38").WithAlpha(0.92f),
-                    Color.FromHex("#141A22").WithAlpha(0.92f),
+                    Color.FromHex("#17191D").WithAlpha(0.92f),
+                    Color.FromHex("#17191D").WithAlpha(0.92f),
                     PanelDark.WithAlpha(0.75f));
             var optionsCategoryListBorder = useOldLobbyPalette
                 ? OldLobbyButtonBorderHover
                 : ThemeValue(
-                    Color.FromHex("#0E4AAE").WithAlpha(0.95f),
-                    Color.FromHex("#657285").WithAlpha(0.95f),
+                    Color.FromHex("#686D76").WithAlpha(0.95f),
+                    Color.FromHex("#686D76").WithAlpha(0.95f),
                     UiButtonBorder.WithAlpha(0.95f));
             var optionsCategoryButtonBorder = useOldLobbyPalette
                 ? OldLobbyButtonBorder
                 : ThemeValue(
-                    Color.FromHex("#102A56"),
-                    Color.FromHex("#4B5767"),
+                    Color.FromHex("#50555E"),
+                    Color.FromHex("#50555E"),
                     UiButtonBorder.WithAlpha(0.95f));
             var optionsCategoryButtonNormal = useOldLobbyPalette
                 ? OldLobbyButton.WithAlpha(0.96f)
                 : ThemeValue(
-                    Color.FromHex("#5A9DFF").WithAlpha(0.97f),
-                    Color.FromHex("#677A91").WithAlpha(0.95f),
+                    ButtonColorDefault.WithAlpha(0.95f),
+                    ButtonColorDefault.WithAlpha(0.95f),
                     Color.FromHex("#033D09"));
             var optionsCategoryButtonHover = useOldLobbyPalette
                 ? OldLobbyButtonHover.WithAlpha(0.94f)
                 : ThemeValue(
-                    Color.FromHex("#6CB4FF").WithAlpha(0.92f),
-                    Color.FromHex("#768AA2").WithAlpha(0.92f),
+                    ButtonColorHovered.WithAlpha(0.92f),
+                    ButtonColorHovered.WithAlpha(0.92f),
                     Color.FromHex("#04480B"));
             var optionsCategoryButtonPressed = useOldLobbyPalette
                 ? OldLobbyButtonPressed.WithAlpha(0.92f)
                 : ThemeValue(
-                    Color.FromHex("#4588F4").WithAlpha(0.90f),
-                    Color.FromHex("#526274").WithAlpha(0.90f),
+                    ButtonColorPressed.WithAlpha(0.90f),
+                    ButtonColorPressed.WithAlpha(0.90f),
                     Color.FromHex("#03340A"));
             var optionsCategoryButtonText = useOldLobbyPalette
                 ? OldLobbyGold
                 : ThemeValue(
-                    Color.FromHex("#86BBF2"),
+                    Color.FromHex("#EAF3FC"),
                     Color.FromHex("#D5DDE7"),
                     Color.FromHex("#9DFFB2"));
             var genericButtonNormalFlat = new StyleBoxFlat
@@ -892,7 +844,7 @@ namespace Content.Client.Stylesheets
             var windowHeader = new StyleBoxFlat
             {
                 BackgroundColor = ThemeValue(
-                    Color.FromHex("#1A3678"),
+                    Color.FromHex("#17304D"),
                     Color.FromHex("#262D37"),
                     Color.FromHex("#0E2A16")).WithAlpha(0.16f),
                 ContentMarginBottomOverride = 0
@@ -900,13 +852,13 @@ namespace Content.Client.Stylesheets
             var windowHeaderAlert = new StyleBoxFlat
             {
                 BackgroundColor = ThemeValue(
-                    Color.FromHex("#1A3678"),
+                    Color.FromHex("#17304D"),
                     Color.FromHex("#262D37"),
                     Color.FromHex("#0E2A16")).WithAlpha(0.16f),
                 ContentMarginBottomOverride = 0
             };
             var uiWindowBackgroundTint = ThemeValue(
-                Color.FromHex("#18316E"),
+                Color.FromHex("#0F2034"),
                 Color.FromHex("#171D25"),
                 Color.FromHex("#051A0B"));
             var windowBackground = new StyleBoxFlat
@@ -917,7 +869,10 @@ namespace Content.Client.Stylesheets
             var optionsWindowBackground = new StyleBoxTexture
             {
                 Texture = resCache.GetTexture("/Textures/_CCM14/Lobby/rightside_chat_bg.png"),
-                Modulate = Color.White.WithAlpha(1f),
+                Modulate = ThemeValue(
+                    Color.FromHex("#0F2034").WithAlpha(0.96f),
+                    Color.White.WithAlpha(1f),
+                    Color.White.WithAlpha(1f)),
             };
             optionsWindowBackground.SetPatchMargin(StyleBox.Margin.All, 2);
 
@@ -984,35 +939,35 @@ namespace Content.Client.Stylesheets
 
             var contextMenuButtonBase = ThemeValue(
                 Color.FromHex("#2C4F93"),
-                ButtonColorContext,
+                BlendTowards(ButtonColorContext, Color.Black, 0.12f),
                 ButtonColorContext);
             var contextMenuButtonHover = ThemeValue(
                 Color.FromHex("#3763B5"),
-                ButtonColorContextHover,
+                BlendTowards(ButtonColorContextHover, Color.Black, 0.10f),
                 ButtonColorContextHover);
             var contextMenuButtonPressed = ThemeValue(
                 Color.FromHex("#223F78"),
-                ButtonColorContextPressed,
+                BlendTowards(ButtonColorContextPressed, Color.Black, 0.08f),
                 ButtonColorContextPressed);
             var contextMenuButtonDisabled = ThemeValue(
                 Color.FromHex("#26364E"),
-                ButtonColorContextDisabled,
+                BlendTowards(ButtonColorContextDisabled, Color.Black, 0.06f),
                 ButtonColorContextDisabled);
             var contextMenuExamineButtonBase = ThemeValue(
                 Color.FromHex("#31579F"),
-                ExamineButtonColorContext,
+                BlendTowards(ExamineButtonColorContext, Color.Black, 0.12f),
                 ExamineButtonColorContext);
             var contextMenuExamineButtonHover = ThemeValue(
                 Color.FromHex("#3D6CC6"),
-                ExamineButtonColorContextHover,
+                BlendTowards(ExamineButtonColorContextHover, Color.Black, 0.10f),
                 ExamineButtonColorContextHover);
             var contextMenuExamineButtonPressed = ThemeValue(
                 Color.FromHex("#274785"),
-                ExamineButtonColorContextPressed,
+                BlendTowards(ExamineButtonColorContextPressed, Color.Black, 0.08f),
                 ExamineButtonColorContextPressed);
             var contextMenuExamineButtonDisabled = ThemeValue(
                 Color.FromHex("#293B57"),
-                ExamineButtonColorContextDisabled,
+                BlendTowards(ExamineButtonColorContextDisabled, Color.Black, 0.06f),
                 ExamineButtonColorContextDisabled);
 
             var buttonRectTex = resCache.GetTexture("/Textures/Interface/Nano/light_panel_background_bordered.png");
@@ -1210,7 +1165,7 @@ namespace Content.Client.Stylesheets
                     Color.FromHex("#071A0D").WithAlpha(0.96f)),
                 BorderColor = ThemeValue(
                     Color.FromHex("#1F5CAB").WithAlpha(0.96f),
-                    Color.FromHex("#687688").WithAlpha(0.96f),
+                    Color.FromHex("#686D76").WithAlpha(0.96f),
                     Color.FromHex("#2B7E45").WithAlpha(0.96f)),
                 BorderThickness = new Thickness(1)
             };
@@ -1489,6 +1444,35 @@ namespace Content.Client.Stylesheets
             };
             lobbyMenuButtonCleanDisabled.SetContentMarginOverride(StyleBox.Margin.All, 4);
 
+            var mainMenuButtonNormal = new StyleBoxFlat
+            {
+                BackgroundColor = ButtonColorDefault,
+                BorderColor = BlendTowards(ButtonColorDefault, Color.White, 0.22f),
+                BorderThickness = new Thickness(1)
+            };
+            mainMenuButtonNormal.SetContentMarginOverride(StyleBox.Margin.Left, 8);
+            mainMenuButtonNormal.SetContentMarginOverride(StyleBox.Margin.Top, 4);
+            mainMenuButtonNormal.SetContentMarginOverride(StyleBox.Margin.Right, 8);
+            mainMenuButtonNormal.SetContentMarginOverride(StyleBox.Margin.Bottom, 4);
+
+            var mainMenuButtonHover = new StyleBoxFlat(mainMenuButtonNormal)
+            {
+                BackgroundColor = ButtonColorHovered,
+                BorderColor = BlendTowards(ButtonColorHovered, Color.White, 0.24f),
+            };
+
+            var mainMenuButtonPressed = new StyleBoxFlat(mainMenuButtonNormal)
+            {
+                BackgroundColor = ButtonColorPressed,
+                BorderColor = BlendTowards(ButtonColorPressed, Color.White, 0.18f),
+            };
+
+            var mainMenuButtonDisabled = new StyleBoxFlat(mainMenuButtonNormal)
+            {
+                BackgroundColor = ButtonColorDisabled,
+                BorderColor = BlendTowards(ButtonColorDisabled, Color.White, 0.16f),
+            };
+
             var lobbyChatPanelCrt = new StyleBoxFlat
             {
                 BackgroundColor = Color.FromHex("#0C1011").WithAlpha(0.68f),
@@ -1525,7 +1509,7 @@ namespace Content.Client.Stylesheets
                     Color.FromHex("#0B2F15").WithAlpha(0.96f)),
                 BorderColor = ThemeValue(
                     Color.FromHex("#1F5CAB").WithAlpha(0.98f),
-                    Color.FromHex("#657387").WithAlpha(0.98f),
+                    Color.FromHex("#686D76").WithAlpha(0.98f),
                     Color.FromHex("#2B7E45").WithAlpha(0.98f)),
                 BorderThickness = new Thickness(1)
             };
@@ -1808,30 +1792,30 @@ namespace Content.Client.Stylesheets
             };
             var tacticalMapSliderBack = new StyleBoxFlat
             {
-                BackgroundColor = Color.FromHex("#2A3341").WithAlpha(0.96f),
+                BackgroundColor = Color.FromHex("#2A2D34").WithAlpha(0.96f),
                 BorderThickness = new Thickness(1),
-                BorderColor = Color.FromHex("#4A5A73").WithAlpha(0.95f),
+                BorderColor = Color.FromHex("#50555E").WithAlpha(0.95f),
             };
             tacticalMapSliderBack.SetContentMarginOverride(StyleBox.Margin.Vertical, 4);
             var tacticalMapSliderFore = new StyleBoxFlat
             {
-                BackgroundColor = Color.FromHex("#141C28").WithAlpha(0.98f),
+                BackgroundColor = Color.FromHex("#181A1E").WithAlpha(0.98f),
                 BorderThickness = new Thickness(1),
-                BorderColor = Color.FromHex("#5E7597").WithAlpha(0.90f),
+                BorderColor = Color.FromHex("#686D76").WithAlpha(0.90f),
             };
             tacticalMapSliderFore.SetContentMarginOverride(StyleBox.Margin.Vertical, 4);
             var tacticalMapSliderFill = new StyleBoxFlat
             {
-                BackgroundColor = Color.FromHex("#5D7396").WithAlpha(0.98f),
+                BackgroundColor = Color.FromHex("#686F80").WithAlpha(0.98f),
                 BorderThickness = new Thickness(1),
-                BorderColor = Color.FromHex("#7F97BC").WithAlpha(0.95f),
+                BorderColor = Color.FromHex("#858A92").WithAlpha(0.95f),
             };
             tacticalMapSliderFill.SetContentMarginOverride(StyleBox.Margin.Vertical, 4);
             var tacticalMapSliderGrab = new StyleBoxFlat
             {
-                BackgroundColor = Color.FromHex("#D9DFE8").WithAlpha(0.98f),
+                BackgroundColor = Color.FromHex("#DADDE1").WithAlpha(0.98f),
                 BorderThickness = new Thickness(1),
-                BorderColor = Color.FromHex("#90A6C7").WithAlpha(0.98f),
+                BorderColor = Color.FromHex("#969AA1").WithAlpha(0.98f),
             };
             tacticalMapSliderGrab.SetContentMarginOverride(StyleBox.Margin.Horizontal, 8);
             tacticalMapSliderGrab.SetContentMarginOverride(StyleBox.Margin.Vertical, 8);
@@ -1896,23 +1880,30 @@ namespace Content.Client.Stylesheets
                         new StyleProperty(PanelContainer.StylePropertyPanel, optionsWindowBackground),
                     }),
                 Element<PanelContainer>().Class("OptionsGeneralBackground")
-                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxTexture
+                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
                     {
-                        Texture = resCache.GetTexture("/Textures/_CCM14/Lobby/rightside_chat_bg.png"),
-                        Modulate = PanelDark.WithAlpha(1f),
+                        BackgroundColor = ThemeValue(
+                            Color.FromHex("#0F2034").WithAlpha(0.96f),
+                            PanelDark.WithAlpha(0.96f),
+                            PanelDark.WithAlpha(0.96f)),
+                        BorderColor = ThemeValue(
+                            Color.FromHex("#25476C").WithAlpha(0.85f),
+                            UiButtonBorder.WithAlpha(0.85f),
+                            UiButtonBorder.WithAlpha(0.85f)),
+                        BorderThickness = new Thickness(1),
                     }),
 
                 Element<PanelContainer>().Class(StyleClassOptionsFooterPanel)
                     .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
                     {
                         BackgroundColor = ThemeValue(
-                            Color.FromHex("#091630").WithAlpha(0.88f),
+                            Color.FromHex("#0B1626").WithAlpha(0.92f),
                             Color.FromHex("#171D24").WithAlpha(0.88f),
                             PanelDark.WithAlpha(0.80f)),
                         BorderThickness = new Thickness(0, 1, 0, 0),
                         BorderColor = ThemeValue(
-                            Color.FromHex("#1D4D96").WithAlpha(0.85f),
-                            Color.FromHex("#5B6878").WithAlpha(0.85f),
+                            Color.FromHex("#25476C").WithAlpha(0.85f),
+                            Color.FromHex("#555A63").WithAlpha(0.85f),
                             LobbyMenuButtonBase.WithAlpha(0.70f)),
                     }),
                 // CCM rework ui - start
@@ -2007,44 +1998,44 @@ namespace Content.Client.Stylesheets
                 // Colors for the buttons.
                 Element<ContainerButton>().Class(ContainerButton.StyleClassButton)
                     .Pseudo(ContainerButton.StylePseudoClassNormal)
-                    .Prop(Control.StylePropertyModulateSelf, useOldLobbyPalette ? Color.White : CurrentTheme == UiColorTheme.Blue ? ButtonColorDefault : Color.White)
-                    .Prop(ContainerButton.StylePropertyStyleBox, useOldLobbyPalette ? oldLobbyButtonFlat : CurrentTheme == UiColorTheme.Blue ? BaseButton : genericButtonNormalFlat),
+                    .Prop(Control.StylePropertyModulateSelf, Color.White)
+                    .Prop(ContainerButton.StylePropertyStyleBox, useOldLobbyPalette ? oldLobbyButtonFlat : genericButtonNormalFlat),
 
                 Element<ContainerButton>().Class(ContainerButton.StyleClassButton)
                     .Pseudo(ContainerButton.StylePseudoClassHover)
-                    .Prop(Control.StylePropertyModulateSelf, useOldLobbyPalette ? Color.White : CurrentTheme == UiColorTheme.Blue ? ButtonColorHovered : Color.White)
-                    .Prop(ContainerButton.StylePropertyStyleBox, useOldLobbyPalette ? genericButtonHoverFlat : CurrentTheme == UiColorTheme.Blue ? BaseButton : genericButtonHoverFlat),
+                    .Prop(Control.StylePropertyModulateSelf, Color.White)
+                    .Prop(ContainerButton.StylePropertyStyleBox, genericButtonHoverFlat),
 
                 Element<ContainerButton>().Class(ContainerButton.StyleClassButton)
                     .Pseudo(ContainerButton.StylePseudoClassPressed)
-                    .Prop(Control.StylePropertyModulateSelf, useOldLobbyPalette ? Color.White : CurrentTheme == UiColorTheme.Blue ? ButtonColorPressed : Color.White)
-                    .Prop(ContainerButton.StylePropertyStyleBox, useOldLobbyPalette ? genericButtonPressedFlat : CurrentTheme == UiColorTheme.Blue ? BaseButton : genericButtonPressedFlat),
+                    .Prop(Control.StylePropertyModulateSelf, Color.White)
+                    .Prop(ContainerButton.StylePropertyStyleBox, genericButtonPressedFlat),
 
                 Element<ContainerButton>().Class(ContainerButton.StyleClassButton)
                     .Pseudo(ContainerButton.StylePseudoClassDisabled)
-                    .Prop(Control.StylePropertyModulateSelf, useOldLobbyPalette ? Color.White : CurrentTheme == UiColorTheme.Blue ? ButtonColorDisabled : Color.White)
-                    .Prop(ContainerButton.StylePropertyStyleBox, useOldLobbyPalette ? genericButtonDisabledFlat : CurrentTheme == UiColorTheme.Blue ? BaseButton : genericButtonDisabledFlat),
+                    .Prop(Control.StylePropertyModulateSelf, Color.White)
+                    .Prop(ContainerButton.StylePropertyStyleBox, genericButtonDisabledFlat),
 
                 // Colors for the caution buttons.
                 Element<ContainerButton>().Class(ContainerButton.StyleClassButton).Class(ButtonCaution)
                     .Pseudo(ContainerButton.StylePseudoClassNormal)
-                    .Prop(Control.StylePropertyModulateSelf, useOldLobbyPalette ? Color.White : CurrentTheme == UiColorTheme.Blue ? ButtonColorCautionDefault : Color.White)
-                    .Prop(ContainerButton.StylePropertyStyleBox, useOldLobbyPalette ? cautionButtonNormalFlat : CurrentTheme == UiColorTheme.Blue ? BaseButton : cautionButtonNormalFlat),
+                    .Prop(Control.StylePropertyModulateSelf, Color.White)
+                    .Prop(ContainerButton.StylePropertyStyleBox, cautionButtonNormalFlat),
 
                 Element<ContainerButton>().Class(ContainerButton.StyleClassButton).Class(ButtonCaution)
                     .Pseudo(ContainerButton.StylePseudoClassHover)
-                    .Prop(Control.StylePropertyModulateSelf, useOldLobbyPalette ? Color.White : CurrentTheme == UiColorTheme.Blue ? ButtonColorCautionHovered : Color.White)
-                    .Prop(ContainerButton.StylePropertyStyleBox, useOldLobbyPalette ? cautionButtonHoverFlat : CurrentTheme == UiColorTheme.Blue ? BaseButton : cautionButtonHoverFlat),
+                    .Prop(Control.StylePropertyModulateSelf, Color.White)
+                    .Prop(ContainerButton.StylePropertyStyleBox, cautionButtonHoverFlat),
 
                 Element<ContainerButton>().Class(ContainerButton.StyleClassButton).Class(ButtonCaution)
                     .Pseudo(ContainerButton.StylePseudoClassPressed)
-                    .Prop(Control.StylePropertyModulateSelf, useOldLobbyPalette ? Color.White : CurrentTheme == UiColorTheme.Blue ? ButtonColorCautionPressed : Color.White)
-                    .Prop(ContainerButton.StylePropertyStyleBox, useOldLobbyPalette ? cautionButtonPressedFlat : CurrentTheme == UiColorTheme.Blue ? BaseButton : cautionButtonPressedFlat),
+                    .Prop(Control.StylePropertyModulateSelf, Color.White)
+                    .Prop(ContainerButton.StylePropertyStyleBox, cautionButtonPressedFlat),
 
                 Element<ContainerButton>().Class(ContainerButton.StyleClassButton).Class(ButtonCaution)
                     .Pseudo(ContainerButton.StylePseudoClassDisabled)
-                    .Prop(Control.StylePropertyModulateSelf, useOldLobbyPalette ? Color.White : CurrentTheme == UiColorTheme.Blue ? ButtonColorCautionDisabled : Color.White)
-                    .Prop(ContainerButton.StylePropertyStyleBox, useOldLobbyPalette ? cautionButtonDisabledFlat : CurrentTheme == UiColorTheme.Blue ? BaseButton : cautionButtonDisabledFlat),
+                    .Prop(Control.StylePropertyModulateSelf, Color.White)
+                    .Prop(ContainerButton.StylePropertyStyleBox, cautionButtonDisabledFlat),
 
                 // Colors for confirm buttons confirm states.
                 Element<ConfirmButton>()
@@ -2226,6 +2217,42 @@ namespace Content.Client.Stylesheets
                     new[]
                     {
                         new StyleProperty("font", notoSansBold16),
+                        new StyleProperty(Label.StylePropertyFontColor, Color.White),
+                    }),
+
+                new StyleRule(new SelectorElement(typeof(Button), null, "mainMenu", null),
+                    new[]
+                    {
+                        new StyleProperty(Button.StylePropertyStyleBox, mainMenuButtonNormal),
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
+                    }),
+
+                new StyleRule(new SelectorElement(typeof(Button), null, "mainMenu", new[] {ContainerButton.StylePseudoClassNormal}),
+                    new[]
+                    {
+                        new StyleProperty(Button.StylePropertyStyleBox, mainMenuButtonNormal),
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
+                    }),
+
+                new StyleRule(new SelectorElement(typeof(Button), null, "mainMenu", new[] {ContainerButton.StylePseudoClassHover}),
+                    new[]
+                    {
+                        new StyleProperty(Button.StylePropertyStyleBox, mainMenuButtonHover),
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
+                    }),
+
+                new StyleRule(new SelectorElement(typeof(Button), null, "mainMenu", new[] {ContainerButton.StylePseudoClassPressed}),
+                    new[]
+                    {
+                        new StyleProperty(Button.StylePropertyStyleBox, mainMenuButtonPressed),
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
+                    }),
+
+                new StyleRule(new SelectorElement(typeof(Button), null, "mainMenu", new[] {ContainerButton.StylePseudoClassDisabled}),
+                    new[]
+                    {
+                        new StyleProperty(Button.StylePropertyStyleBox, mainMenuButtonDisabled),
+                        new StyleProperty(Control.StylePropertyModulateSelf, Color.White),
                     }),
 
                 // Main menu: also make those buttons slightly more separated.
@@ -3548,12 +3575,12 @@ namespace Content.Client.Stylesheets
                     new StyleProperty(OutputPanel.StylePropertyStyleBox, new StyleBoxFlat
                     {
                         BackgroundColor = ThemeValue(
-                            Color.FromHex("#0C1730").WithAlpha(0.9f),
+                            Color.FromHex("#0E1C2B").WithAlpha(0.9f),
                             Color.FromHex("#171D24").WithAlpha(0.9f),
                             Color.FromHex("#0A160E").WithAlpha(0.9f)),
                         BorderColor = ThemeValue(
-                            Color.FromHex("#285A9A").WithAlpha(0.75f),
-                            Color.FromHex("#657387").WithAlpha(0.75f),
+                            Color.FromHex("#416A90").WithAlpha(0.75f),
+                            Color.FromHex("#686D76").WithAlpha(0.75f),
                             Color.FromHex("#2B7E45").WithAlpha(0.75f)),
                         BorderThickness = new Thickness(1),
                         ContentMarginLeftOverride = 3,
@@ -3568,12 +3595,12 @@ namespace Content.Client.Stylesheets
                     new StyleProperty(LineEdit.StylePropertyStyleBox, new StyleBoxFlat
                     {
                         BackgroundColor = ThemeValue(
-                            Color.FromHex("#0A1326").WithAlpha(0.96f),
+                            Color.FromHex("#0B1724").WithAlpha(0.96f),
                             Color.FromHex("#151B22").WithAlpha(0.96f),
                             Color.FromHex("#09110B").WithAlpha(0.96f)),
                         BorderColor = ThemeValue(
-                            Color.FromHex("#285A9A").WithAlpha(0.82f),
-                            Color.FromHex("#657387").WithAlpha(0.82f),
+                            Color.FromHex("#416A90").WithAlpha(0.82f),
+                            Color.FromHex("#686D76").WithAlpha(0.82f),
                             Color.FromHex("#2B7E45").WithAlpha(0.82f)),
                         BorderThickness = new Thickness(1)
                     })
@@ -3613,7 +3640,29 @@ namespace Content.Client.Stylesheets
                     new SelectorElement(typeof(Label), null, null, null)),
                     new[]
                     {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(0)),
                         new StyleProperty(Label.StylePropertyFont, notoSans16),
+                        new StyleProperty(Label.StylePropertyFontColor, OldLobbyText),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassOldLobbyButton}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(0)),
+                        new StyleProperty(Label.StylePropertyFontColor, OldLobbyText),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassOldLobbyButton}, null, new[] {ContainerButton.StylePseudoClassPressed}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(0)),
                         new StyleProperty(Label.StylePropertyFontColor, OldLobbyText),
                     }),
 
@@ -3642,7 +3691,29 @@ namespace Content.Client.Stylesheets
                     new SelectorElement(typeof(Label), null, null, null)),
                     new[]
                     {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(0)),
                         new StyleProperty(Label.StylePropertyFont, notoSans16),
+                        new StyleProperty(Label.StylePropertyFontColor, OldLobbyText),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(ContainerButton), new[] {StyleClassOldLobbyButton}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(0)),
+                        new StyleProperty(Label.StylePropertyFontColor, OldLobbyText),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(ContainerButton), new[] {StyleClassOldLobbyButton}, null, new[] {ContainerButton.StylePseudoClassPressed}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(0)),
                         new StyleProperty(Label.StylePropertyFontColor, OldLobbyText),
                     }),
 
@@ -3671,7 +3742,29 @@ namespace Content.Client.Stylesheets
                     new SelectorElement(typeof(Label), null, null, null)),
                     new[]
                     {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(0)),
                         new StyleProperty(Label.StylePropertyFont, notoSans16),
+                        new StyleProperty(Label.StylePropertyFontColor, OldLobbyText),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassOldLobbyButtonRed}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(0)),
+                        new StyleProperty(Label.StylePropertyFontColor, OldLobbyText),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(Button), new[] {StyleClassOldLobbyButtonRed}, null, new[] {ContainerButton.StylePseudoClassPressed}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(0)),
                         new StyleProperty(Label.StylePropertyFontColor, OldLobbyText),
                     }),
 
@@ -3700,7 +3793,29 @@ namespace Content.Client.Stylesheets
                     new SelectorElement(typeof(Label), null, null, null)),
                     new[]
                     {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(0)),
                         new StyleProperty(Label.StylePropertyFont, notoSans16),
+                        new StyleProperty(Label.StylePropertyFontColor, OldLobbyText),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(ContainerButton), new[] {StyleClassOldLobbyButtonRed}, null, new[] {ContainerButton.StylePseudoClassHover}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(0)),
+                        new StyleProperty(Label.StylePropertyFontColor, OldLobbyText),
+                    }),
+
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(ContainerButton), new[] {StyleClassOldLobbyButtonRed}, null, new[] {ContainerButton.StylePseudoClassPressed}),
+                    new SelectorElement(typeof(Label), null, null, null)),
+                    new[]
+                    {
+                        new StyleProperty(Label.StylePropertyAlignMode, Label.AlignMode.Center),
+                        new StyleProperty(nameof(Control.Margin), new Thickness(0)),
                         new StyleProperty(Label.StylePropertyFontColor, OldLobbyText),
                     }),
 
@@ -4388,29 +4503,29 @@ namespace Content.Client.Stylesheets
                         BackgroundColor = Color.FromHex("#111317").WithAlpha(0.96f),
                         BorderThickness = new Thickness(1),
                         BorderColor = ThemeValue(
-                            Color.FromHex("#1B5FB0").WithAlpha(0.95f),
-                            Color.FromHex("#6C798A").WithAlpha(0.95f),
+                            Color.FromHex("#4A789F").WithAlpha(0.95f),
+                            Color.FromHex("#686D76").WithAlpha(0.95f),
                             Color.FromHex("#2B7E45").WithAlpha(0.95f)),
                     }),
 
                 Element<Label>().Class("LauncherConnectingTitle")
                     .Prop(Label.StylePropertyFont, resCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 22))
                     .Prop(Label.StylePropertyFontColor, ThemeValue(
-                        Color.FromHex("#8FC4F6"),
+                        Color.FromHex("#9DC4E5"),
                         Color.FromHex("#D6DDE5"),
                         Color.FromHex("#AFFFBD"))),
 
                 Element<Label>().Class("LauncherConnectingStateLabel")
                     .Prop(Label.StylePropertyFont, resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 13))
                     .Prop(Label.StylePropertyFontColor, ThemeValue(
-                        Color.FromHex("#A8CCF2"),
+                        Color.FromHex("#B5CEE5"),
                         Color.FromHex("#C9D1D9"),
                         Color.FromHex("#BCEFC7"))),
 
                 Element<Label>().Class("LauncherConnectingReasonSmallLabel")
                     .Prop(Label.StylePropertyFont, resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", 13))
                     .Prop(Label.StylePropertyFontColor, ThemeValue(
-                        Color.FromHex("#CAD9F7"),
+                        Color.FromHex("#D5E3F1"),
                         Color.FromHex("#E1E6EC"),
                         Color.FromHex("#D7F0D8"))),
 
@@ -4419,26 +4534,26 @@ namespace Content.Client.Stylesheets
 
                 Element<Button>().Class("LauncherConnectingButton")
                     .Prop(Control.StylePropertyModulateSelf, ThemeValue(
-                        Color.FromHex("#164383"),
-                        Color.FromHex("#56677C"),
+                        ButtonColorDefault,
+                        ButtonColorDefault,
                         Color.FromHex("#146A2C"))),
 
                 Element<Button>().Class("LauncherConnectingButton").Pseudo(ContainerButton.StylePseudoClassNormal)
                     .Prop(Control.StylePropertyModulateSelf, ThemeValue(
-                        Color.FromHex("#164383"),
-                        Color.FromHex("#56677C"),
+                        ButtonColorDefault,
+                        ButtonColorDefault,
                         Color.FromHex("#146A2C"))),
 
                 Element<Button>().Class("LauncherConnectingButton").Pseudo(ContainerButton.StylePseudoClassHover)
                     .Prop(Control.StylePropertyModulateSelf, ThemeValue(
-                        Color.FromHex("#1D4AA1"),
-                        Color.FromHex("#677B92"),
+                        ButtonColorHovered,
+                        ButtonColorHovered,
                         Color.FromHex("#1A7D35"))),
 
                 Element<Button>().Class("LauncherConnectingButton").Pseudo(ContainerButton.StylePseudoClassPressed)
                     .Prop(Control.StylePropertyModulateSelf, ThemeValue(
-                        Color.FromHex("#0F325F"),
-                        Color.FromHex("#475669"),
+                        ButtonColorPressed,
+                        ButtonColorPressed,
                         Color.FromHex("#0E4F22"))),
 
                 new StyleRule(new SelectorChild(
@@ -4474,13 +4589,13 @@ namespace Content.Client.Stylesheets
                     .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
                     {
                         BackgroundColor = ThemeValue(
-                            Color.FromHex("#0A1A33").WithAlpha(0.9f),
+                            Color.FromHex("#0B1626").WithAlpha(0.9f),
                             Color.FromHex("#171E26").WithAlpha(0.9f),
                             Color.FromHex("#06130B").WithAlpha(0.9f)),
                         BorderThickness = new Thickness(1),
                         BorderColor = ThemeValue(
-                            Color.FromHex("#123D72").WithAlpha(0.9f),
-                            Color.FromHex("#5B6878").WithAlpha(0.9f),
+                            Color.FromHex("#25476C").WithAlpha(0.9f),
+                            Color.FromHex("#555A63").WithAlpha(0.9f),
                             Color.FromHex("#1E3A28").WithAlpha(0.9f)),
                     }),
 
@@ -4488,7 +4603,7 @@ namespace Content.Client.Stylesheets
                     .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
                     {
                         BackgroundColor = ThemeValue(
-                            Color.FromHex("#0B1E3A").WithAlpha(0.85f),
+                            Color.FromHex("#10233A").WithAlpha(0.85f),
                             Color.FromHex("#141A21").WithAlpha(0.85f),
                             Color.FromHex("#001304").WithAlpha(0.85f)),
                     }),
@@ -4516,7 +4631,7 @@ namespace Content.Client.Stylesheets
                 Element<Label>().Class("FancyWindowTitle")
                     .Prop("font", boxFont13)
                     .Prop("font-color", ThemeValue(
-                        Color.FromHex("#D4E4FF"),
+                        Color.FromHex("#EAF2FB"),
                         Color.FromHex("#E7ECF2"),
                         Color.FromHex("#DCEFE0"))),
 
@@ -4524,7 +4639,7 @@ namespace Content.Client.Stylesheets
                     .Prop("panel", new StyleBoxFlat
                     {
                         BackgroundColor = ThemeValue(
-                            Color.FromHex("#1A3678"),
+                            Color.FromHex("#17304D"),
                             Color.FromHex("#262E39"),
                             Color.FromHex("#0F2A17")).WithAlpha(0.96f),
                     }),
@@ -4533,7 +4648,7 @@ namespace Content.Client.Stylesheets
                     .Prop("panel", new StyleBoxFlat
                     {
                         BackgroundColor = ThemeValue(
-                            Color.FromHex("#21458F"),
+                            Color.FromHex("#1D3D5E"),
                             Color.FromHex("#303947"),
                             Color.FromHex("#163820")).WithAlpha(0.84f),
                     }),
@@ -4703,15 +4818,15 @@ namespace Content.Client.Stylesheets
                     .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
                     {
                         BackgroundColor = ThemeValue(
-                            Color.FromHex("#0F2A52").WithAlpha(0.92f),
-                            Color.FromHex("#222A33").WithAlpha(0.92f),
-                            Color.FromHex("#0A2C18").WithAlpha(0.90f)),
+                            Color.FromHex("#17304A").WithAlpha(0.86f),
+                            Color.FromHex("#1C1E22").WithAlpha(0.86f),
+                            Color.FromHex("#0A2C18").WithAlpha(0.82f)),
                         BorderColor = Color.Transparent,
                         BorderThickness = new Thickness(0f),
-                        ContentMarginLeftOverride = 12f,
-                        ContentMarginRightOverride = 12f,
-                        ContentMarginTopOverride = 4f,
-                        ContentMarginBottomOverride = 4f
+                        ContentMarginLeftOverride = 16f,
+                        ContentMarginRightOverride = 16f,
+                        ContentMarginTopOverride = 3f,
+                        ContentMarginBottomOverride = 3f
                     })
                     .Prop(Control.StylePropertyModulateSelf, Color.White),
 
@@ -4719,15 +4834,15 @@ namespace Content.Client.Stylesheets
                     .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
                     {
                         BackgroundColor = ThemeValue(
-                            Color.FromHex("#0F2A52").WithAlpha(0.92f),
-                            Color.FromHex("#222A33").WithAlpha(0.92f),
-                            Color.FromHex("#0A2C18").WithAlpha(0.90f)),
+                            Color.FromHex("#17304A").WithAlpha(0.86f),
+                            Color.FromHex("#1C1E22").WithAlpha(0.86f),
+                            Color.FromHex("#0A2C18").WithAlpha(0.82f)),
                         BorderColor = Color.Transparent,
                         BorderThickness = new Thickness(0f),
-                        ContentMarginLeftOverride = 12f,
-                        ContentMarginRightOverride = 12f,
-                        ContentMarginTopOverride = 4f,
-                        ContentMarginBottomOverride = 4f
+                        ContentMarginLeftOverride = 16f,
+                        ContentMarginRightOverride = 16f,
+                        ContentMarginTopOverride = 3f,
+                        ContentMarginBottomOverride = 3f
                     })
                     .Prop(Control.StylePropertyModulateSelf, Color.White),
 
@@ -4735,15 +4850,15 @@ namespace Content.Client.Stylesheets
                     .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
                     {
                         BackgroundColor = ThemeValue(
-                            Color.FromHex("#1A3A69").WithAlpha(0.94f),
-                            Color.FromHex("#313C49").WithAlpha(0.94f),
-                            Color.FromHex("#134726").WithAlpha(0.92f)),
+                            Color.FromHex("#264D72").WithAlpha(0.89f),
+                            Color.FromHex("#232B35").WithAlpha(0.89f),
+                            Color.FromHex("#0A2C18").WithAlpha(0.86f)),
                         BorderColor = Color.Transparent,
                         BorderThickness = new Thickness(0f),
-                        ContentMarginLeftOverride = 12f,
-                        ContentMarginRightOverride = 12f,
-                        ContentMarginTopOverride = 4f,
-                        ContentMarginBottomOverride = 4f
+                        ContentMarginLeftOverride = 16f,
+                        ContentMarginRightOverride = 16f,
+                        ContentMarginTopOverride = 3f,
+                        ContentMarginBottomOverride = 3f
                     })
                     .Prop(Control.StylePropertyModulateSelf, Color.White),
 
@@ -4751,15 +4866,15 @@ namespace Content.Client.Stylesheets
                     .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
                     {
                         BackgroundColor = ThemeValue(
-                            Color.FromHex("#0E2548").WithAlpha(0.86f),
-                            Color.FromHex("#1B222B").WithAlpha(0.86f),
-                            Color.FromHex("#0A2C18").WithAlpha(0.82f)),
+                            Color.FromHex("#1D3D5E").WithAlpha(0.92f),
+                            Color.FromHex("#202730").WithAlpha(0.92f),
+                            Color.FromHex("#0A2C18").WithAlpha(0.90f)),
                         BorderColor = Color.Transparent,
                         BorderThickness = new Thickness(0f),
-                        ContentMarginLeftOverride = 12f,
-                        ContentMarginRightOverride = 12f,
-                        ContentMarginTopOverride = 4f,
-                        ContentMarginBottomOverride = 4f
+                        ContentMarginLeftOverride = 16f,
+                        ContentMarginRightOverride = 16f,
+                        ContentMarginTopOverride = 3f,
+                        ContentMarginBottomOverride = 3f
                     })
                     .Prop(Control.StylePropertyModulateSelf, Color.White),
 
@@ -4767,15 +4882,15 @@ namespace Content.Client.Stylesheets
                     .Prop(Button.StylePropertyStyleBox, new StyleBoxFlat
                     {
                         BackgroundColor = ThemeValue(
-                            Color.FromHex("#10233F").WithAlpha(0.72f),
-                            Color.FromHex("#1C232C").WithAlpha(0.72f),
+                            Color.FromHex("#17304A").WithAlpha(0.56f),
+                            Color.FromHex("#202329").WithAlpha(0.72f),
                             Color.FromHex("#0A2C18").WithAlpha(0.68f)),
                         BorderColor = Color.Transparent,
                         BorderThickness = new Thickness(0f),
-                        ContentMarginLeftOverride = 12f,
-                        ContentMarginRightOverride = 12f,
-                        ContentMarginTopOverride = 4f,
-                        ContentMarginBottomOverride = 4f
+                        ContentMarginLeftOverride = 16f,
+                        ContentMarginRightOverride = 16f,
+                        ContentMarginTopOverride = 3f,
+                        ContentMarginBottomOverride = 3f
                     })
                     .Prop(Control.StylePropertyModulateSelf, Color.White),
 
@@ -4786,9 +4901,9 @@ namespace Content.Client.Stylesheets
                     {
                         new StyleProperty(Label.StylePropertyFont, notoSansBold12),
                         new StyleProperty(Label.StylePropertyFontColor, ThemeValue(
-                            Color.FromHex("#86BBF2"),
-                            Color.FromHex("#D6DEE7"),
-                            Color.FromHex("#9DFFB2"))),
+                            Color.FromHex("#D5E5F4"),
+                            Color.FromHex("#D2DAE4"),
+                            Color.FromHex("#B7FFC8"))),
                     }),
 
                 Element<Label>().Class("CharacterCarouselName")
@@ -4797,14 +4912,14 @@ namespace Content.Client.Stylesheets
                 Element<Label>().Class("CharacterCarouselNameSelected")
                     .Prop(Label.StylePropertyFont, notoSansBold14)
                     .Prop(Label.StylePropertyFontColor, ThemeValue(
-                        Color.FromHex("#9FC8F2"),
+                        Color.FromHex("#A8CAE8"),
                         Color.FromHex("#E2E8EF"),
                         Color.FromHex("#BFFFD0"))),
 
                 Element<Label>().Class("CharacterEditorSectionTitle")
                     .Prop(Label.StylePropertyFont, notoSansBold14)
                     .Prop(Label.StylePropertyFontColor, ThemeValue(
-                        Color.FromHex("#89B8E8"),
+                        Color.FromHex("#93BFE3"),
                         Color.FromHex("#D0D8E1"),
                         Color.FromHex("#AFFFBD"))),
 
@@ -4878,8 +4993,8 @@ namespace Content.Client.Stylesheets
                         BackgroundColor = useOldLobbyPalette
                             ? OldLobbyPanel.WithAlpha(0.92f)
                             : ThemeValue(
-                                Color.FromHex("#08264F").WithAlpha(0.85f),
-                                Color.FromHex("#1C232C").WithAlpha(0.85f),
+                                Color.FromHex("#10233A").WithAlpha(0.85f),
+                                Color.FromHex("#202329").WithAlpha(0.85f),
                                 PanelDark.WithAlpha(0.75f)),
                         BorderThickness = new Thickness(2, 0, 0, 0),
                         BorderColor = useOldLobbyPalette
@@ -4899,8 +5014,8 @@ namespace Content.Client.Stylesheets
                         BackgroundColor = useOldLobbyPalette
                             ? OldLobbyButton.WithAlpha(0.96f)
                             : ThemeValue(
-                                Color.FromHex("#123D72").WithAlpha(0.9f),
-                                Color.FromHex("#36414F").WithAlpha(0.9f),
+                                BlendTowards(ButtonColorDefault, PanelDark, 0.34f).WithAlpha(0.9f),
+                                BlendTowards(ButtonColorDefault, PanelDark, 0.34f).WithAlpha(0.9f),
                                 PanelDark.WithAlpha(0.9f)),
                         BorderThickness = new Thickness(1),
                         BorderColor = useOldLobbyPalette
@@ -4915,15 +5030,15 @@ namespace Content.Client.Stylesheets
                         BackgroundColor = useOldLobbyPalette
                             ? OldLobbyButtonHover.WithAlpha(0.94f)
                             : ThemeValue(
-                                Color.FromHex("#1D4AA1").WithAlpha(0.8f),
-                                Color.FromHex("#536476").WithAlpha(0.8f),
+                                ButtonColorHovered.WithAlpha(0.8f),
+                                ButtonColorHovered.WithAlpha(0.8f),
                                 LobbyMenuButtonBase.WithAlpha(0.7f)),
                         BorderThickness = new Thickness(1),
                         BorderColor = useOldLobbyPalette
                             ? OldLobbyButtonBorderHover
                             : ThemeValue(
-                                Color.FromHex("#1D4AA1").WithAlpha(0.9f),
-                                Color.FromHex("#5C6E84").WithAlpha(0.9f),
+                                BlendTowards(ButtonColorHovered, Color.White, 0.18f).WithAlpha(0.9f),
+                                BlendTowards(ButtonColorHovered, Color.White, 0.18f).WithAlpha(0.9f),
                                 LobbyMenuButtonBase.WithAlpha(0.8f)),
                     }),
 
@@ -5072,13 +5187,13 @@ namespace Content.Client.Stylesheets
                         new StyleProperty(TabContainer.stylePropertyTabFontColor, useOldLobbyPalette
                             ? OldLobbyGold
                             : ThemeValue(
-                                Color.FromHex("#8FC4F6"),
+                                Color.FromHex("#D5E5F4"),
                                 Color.FromHex("#D2DAE4"),
                                 Color.FromHex("#B7FFC8"))),
                         new StyleProperty(TabContainer.StylePropertyTabFontColorInactive, useOldLobbyPalette
                             ? OldLobbyText
                             : ThemeValue(
-                                Color.FromHex("#679CCB"),
+                                Color.FromHex("#AFC5DA"),
                                 Color.FromHex("#A4AFBC"),
                                 Color.FromHex("#94D5A3"))),
                         new StyleProperty(TabContainer.StylePropertyTabStyleBox, new StyleBoxFlat
@@ -5086,7 +5201,7 @@ namespace Content.Client.Stylesheets
                             BackgroundColor = useOldLobbyPalette
                                 ? OldLobbyButtonPressed.WithAlpha(0.96f)
                                 : ThemeValue(
-                                    Color.FromHex("#0F2A52").WithAlpha(0.92f),
+                                    Color.FromHex("#1D3D5E").WithAlpha(0.92f),
                                     Color.FromHex("#202730").WithAlpha(0.92f),
                                     Color.FromHex("#0A2C18").WithAlpha(0.9f)),
                             BorderColor = useOldLobbyPalette ? OldLobbyButtonBorderPressed : Color.Transparent,
@@ -5101,8 +5216,8 @@ namespace Content.Client.Stylesheets
                             BackgroundColor = useOldLobbyPalette
                                 ? OldLobbyButton.WithAlpha(0.9f)
                                 : ThemeValue(
-                                    Color.FromHex("#0E2548").WithAlpha(0.86f),
-                                    Color.FromHex("#1B222B").WithAlpha(0.86f),
+                                    Color.FromHex("#17304A").WithAlpha(0.86f),
+                                    Color.FromHex("#1C1E22").WithAlpha(0.86f),
                                     Color.FromHex("#0A2C18").WithAlpha(0.82f)),
                             BorderColor = useOldLobbyPalette ? OldLobbyButtonBorder : Color.Transparent,
                             BorderThickness = useOldLobbyPalette ? new Thickness(1f) : new Thickness(0f),
@@ -5116,7 +5231,7 @@ namespace Content.Client.Stylesheets
                             BackgroundColor = useOldLobbyPalette
                                 ? OldLobbyButtonHover.WithAlpha(0.94f)
                                 : ThemeValue(
-                                    Color.FromHex("#0F2A52").WithAlpha(0.89f),
+                                    Color.FromHex("#264D72").WithAlpha(0.89f),
                                     Color.FromHex("#232B35").WithAlpha(0.89f),
                                     Color.FromHex("#0A2C18").WithAlpha(0.86f)),
                             BorderColor = useOldLobbyPalette ? OldLobbyButtonBorderHover : Color.Transparent,
@@ -5129,7 +5244,7 @@ namespace Content.Client.Stylesheets
                         new StyleProperty(Content.Client._CCM.UserInterface.Controls.CenteredTabContainer.StylePropertyTabFontColorHover, useOldLobbyPalette
                             ? OldLobbyGold
                             : ThemeValue(
-                                Color.FromHex("#78B1E1"),
+                                Color.FromHex("#EAF2FB"),
                                 Color.FromHex("#E2E8EF"),
                                 Color.FromHex("#A7EDB5"))),
                     }),

@@ -73,16 +73,6 @@ public sealed partial class JoinXenoWindow : DefaultCMWindow
     {
         return theme switch
         {
-            StyleNano.UiColorTheme.Blue => new XenoJoinPalette(
-                Color.FromHex("#1A335D").WithAlpha(0.96f),
-                Color.FromHex("#4D78B6").WithAlpha(0.95f),
-                Color.FromHex("#0F1C30").WithAlpha(0.96f),
-                Color.FromHex("#32557E").WithAlpha(0.94f),
-                Color.FromHex("#132540").WithAlpha(0.94f),
-                Color.FromHex("#486E9D").WithAlpha(0.95f),
-                Color.FromHex("#EEF5FF"),
-                Color.FromHex("#B8CAE5"),
-                Color.FromHex("#DCEBFF")),
             StyleNano.UiColorTheme.Gray => new XenoJoinPalette(
                 Color.FromHex("#323B47").WithAlpha(0.96f),
                 Color.FromHex("#738396").WithAlpha(0.95f),

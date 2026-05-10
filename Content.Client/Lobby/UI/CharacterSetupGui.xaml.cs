@@ -164,6 +164,8 @@ namespace Content.Client.Lobby.UI
             _profileEditor.ProfileChanged += _ => RefreshCenterPreviewFromEditor();
             _profileEditor.ShowClothesChanged += UpdateShowClothes;
             _profileEditor.ImportExportStateChanged += UpdateImportExportButtons;
+            ActionButtonRow.OnResized += UpdateActionButtonLayout;
+            TransferActionButtonGroup.OnResized += UpdateActionButtonLayout;
             ApplyLobbyUiStyle(force: true);
             UpdateImportExportButtons();
             // CCM rework lobby - end
@@ -182,11 +184,9 @@ namespace Content.Client.Lobby.UI
             base.FrameUpdate(args);
             ApplyLobbyUiStyle();
             ApplyThemeColors();
+            UpdateCompactLayout();
             if (!_oldLobbyStyle)
-            {
-                UpdateCompactLayout();
                 UpdateCarouselLayoutIfNeeded();
-            }
             UpdateRotation(args.DeltaSeconds);
             UpdateDeleteCountdown(args.DeltaSeconds);
         }
@@ -205,16 +205,14 @@ namespace Content.Client.Lobby.UI
                 ? StyleNano.OldLobbyPanelSoft
                 : theme switch
             {
-                StyleNano.UiColorTheme.Blue => Color.FromHex("#0B3578"),
-                StyleNano.UiColorTheme.Gray => Color.FromHex("#384553"),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#343942"),
                 _ => Color.FromHex("#16301F"),
             };
             var carouselBackgroundColor = _oldLobbyStyle
                 ? Color.FromHex("#1F1F23").WithAlpha(0.96f)
                 : theme switch
             {
-                StyleNano.UiColorTheme.Blue => Color.FromHex("#0E2950").WithAlpha(0.93f),
-                StyleNano.UiColorTheme.Gray => Color.FromHex("#1C232C").WithAlpha(0.92f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#1B1D22").WithAlpha(0.92f),
                 _ => Color.FromHex("#0A2C18").WithAlpha(0.90f),
             };
             var carouselSideShadeColor = Color.Transparent;
@@ -222,8 +220,7 @@ namespace Content.Client.Lobby.UI
                 ? StyleNano.OldLobbyGold.WithAlpha(0.88f)
                 : theme switch
             {
-                StyleNano.UiColorTheme.Blue => Color.FromHex("#165197").WithAlpha(0.95f),
-                StyleNano.UiColorTheme.Gray => Color.FromHex("#667487").WithAlpha(0.95f),
+                StyleNano.UiColorTheme.Gray => Color.FromHex("#686D76").WithAlpha(0.95f),
                 _ => Color.FromHex("#2B7E45").WithAlpha(0.95f),
             };
 
@@ -1044,6 +1041,10 @@ namespace Content.Client.Lobby.UI
             OldTransferActionButtonGroup.SeparationOverride = compact ? 3 : 4;
 
             var actionButtonHeight = compact ? 32f : 36f;
+            ActionButtonRow.MinSize = new Vector2(ActionButtonRow.MinSize.X, actionButtonHeight + 6f);
+            ActionButtonRow.Margin = compact
+                ? new Thickness(6f, 1f, 6f, 1f)
+                : new Thickness(6f, 2f, 6f, 2f);
             NewCharacterButton.MinSize = new Vector2(NewCharacterButton.MinSize.X, actionButtonHeight);
             SaveCharacterButton.MinSize = new Vector2(SaveCharacterButton.MinSize.X, actionButtonHeight);
             ResetCharacterButton.MinSize = new Vector2(ResetCharacterButton.MinSize.X, actionButtonHeight);
@@ -1074,6 +1075,16 @@ namespace Content.Client.Lobby.UI
             }
 
             _lastCarouselWidth = -1f;
+            UpdateActionButtonLayout();
+        }
+
+        private void UpdateActionButtonLayout()
+        {
+            if (_oldLobbyStyle)
+                return;
+
+            var transferWidth = MathF.Max(TransferActionButtonGroup.Size.X, TransferActionButtonGroup.DesiredSize.X);
+            TransferActionButtonSpacer.MinWidth = transferWidth;
         }
 
         private CarouselLayoutMode ResolveCarouselLayoutMode(float width)

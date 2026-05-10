@@ -99,4 +99,19 @@ public abstract partial class CESharedZLevelsSystem
         else
             RemComp<CEActiveZPhysicsComponent>(ent);
     }
+
+    protected void RefreshZPhysicsOnMap(Entity<CEZLevelMapComponent> map)
+    {
+        var query = EntityQueryEnumerator<CEZPhysicsComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var zPhysics, out var xform))
+        {
+            if (xform.MapUid != map.Owner)
+                continue;
+
+            zPhysics.CurrentZLevel = map.Comp.Depth;
+            DirtyField(uid, zPhysics, nameof(CEZPhysicsComponent.CurrentZLevel));
+            CheckActivation((uid, zPhysics));
+            RequestCacheMovement((uid, zPhysics));
+        }
+    }
 }

@@ -26,6 +26,9 @@ public sealed class CCMOptionButton : OptionButton
     private Label? _selectedLabel;
     private TextureRect? _triangleRect;
     private float _widestItemWidth;
+    private Popup? _dropdownPopup;
+    private bool _popupOpen;
+    private Vector2 _popupAnchorPosition;
     private static readonly Color NeutralBackground = Color.FromHex("#464966");
     private static readonly Color NeutralHoverBackground = Color.FromHex("#575B7F");
     private static readonly Color NeutralPressedBackground = Color.FromHex("#3E6C45");
@@ -50,6 +53,7 @@ public sealed class CCMOptionButton : OptionButton
 
         ApplyCollapsedStyle();
 
+        OnPressed += _ => CapturePopup();
         OnMouseEntered += _ => ApplyCollapsedStyle(hovered: true);
         OnMouseExited += _ => ApplyCollapsedStyle();
         OnKeyBindDown += args =>
@@ -72,13 +76,18 @@ public sealed class CCMOptionButton : OptionButton
     protected override void FrameUpdate(FrameEventArgs args)
     {
         base.FrameUpdate(args);
+        RefreshPopupState();
 
         if (_appliedTheme == StyleNano.CurrentTheme && _appliedNeutralPalette == UseNeutralPalette)
+        {
+            ClosePopupIfAnchorMoved();
             return;
+        }
 
         _appliedTheme = StyleNano.CurrentTheme;
         _appliedNeutralPalette = UseNeutralPalette;
         RefreshVisualStyle();
+        ClosePopupIfAnchorMoved();
     }
 
     public override void ButtonOverride(Button button)
@@ -137,6 +146,14 @@ public sealed class CCMOptionButton : OptionButton
             ApplyButtonColor(button, color);
 
         ApplyCollapsedStyle();
+    }
+
+    protected override void MouseWheel(GUIMouseWheelEventArgs args)
+    {
+        if (_popupOpen)
+            CloseTrackedPopup();
+
+        base.MouseWheel(args);
     }
 
     private void ApplyButtonColor(Button button, Color? itemColor, bool hovered = false, bool pressed = false)
@@ -267,6 +284,84 @@ public sealed class CCMOptionButton : OptionButton
     private Color GetBorderColor()
     {
         return UseNeutralPalette ? NeutralBorder : StyleNano.UiButtonBorder;
+    }
+
+    private void CapturePopup()
+    {
+        _dropdownPopup = FindPopup();
+        _popupOpen = _dropdownPopup != null;
+        _popupAnchorPosition = GlobalPosition;
+    }
+
+    private void RefreshPopupState()
+    {
+        var popup = FindPopup();
+        if (popup == null)
+        {
+            _dropdownPopup = null;
+            _popupOpen = false;
+            return;
+        }
+
+        if (!_popupOpen || _dropdownPopup != popup)
+        {
+            _dropdownPopup = popup;
+            _popupOpen = true;
+            _popupAnchorPosition = GlobalPosition;
+        }
+    }
+
+    private void ClosePopupIfAnchorMoved()
+    {
+        if (!_popupOpen || _dropdownPopup == null)
+            return;
+
+        if (Vector2.DistanceSquared(GlobalPosition, _popupAnchorPosition) < 0.25f)
+            return;
+
+        CloseTrackedPopup();
+    }
+
+    private void CloseTrackedPopup()
+    {
+        if (_dropdownPopup != null)
+            _dropdownPopup.Close();
+
+        _dropdownPopup = null;
+        _popupOpen = false;
+    }
+
+    private Popup? FindPopup()
+    {
+        if (UserInterfaceManager.ModalRoot.ChildCount == 0)
+            return null;
+
+        var expectedOrigin = GlobalPosition;
+        expectedOrigin.Y += Size.Y + 1;
+        expectedOrigin.Y -= Margin.SumVertical;
+
+        Popup? bestPopup = null;
+        var bestDistance = float.MaxValue;
+
+        foreach (var child in UserInterfaceManager.ModalRoot.Children)
+        {
+            if (child is not Popup popup ||
+                !popup.Visible ||
+                !popup.StyleClasses.Contains(OptionButton.StyleClassPopup))
+            {
+                continue;
+            }
+
+            var origin = PopupContainer.GetPopupOrigin(popup);
+            var distance = Vector2.DistanceSquared(origin, expectedOrigin);
+            if (distance >= bestDistance)
+                continue;
+
+            bestDistance = distance;
+            bestPopup = popup;
+        }
+
+        return bestDistance <= 4f ? bestPopup : null;
     }
 
     private static T? FindChild<T>(Robust.Client.UserInterface.Control root, Predicate<T> predicate)

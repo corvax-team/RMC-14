@@ -80,19 +80,6 @@ public sealed partial class XenoChooseStructureWindow : DefaultWindow
     {
         return theme switch
         {
-            StyleNano.UiColorTheme.Blue => new ThemePalette(
-                Color.FromHex("#1B3968").WithAlpha(0.96f),
-                Color.FromHex("#4C77AF").WithAlpha(0.95f),
-                Color.FromHex("#101E39").WithAlpha(0.92f),
-                Color.FromHex("#2F4E7A").WithAlpha(0.95f),
-                Color.FromHex("#E7F1FF"),
-                Color.FromHex("#B8CDED"),
-                Color.FromHex("#E5EEFA"),
-                Color.White,
-                Color.White.WithAlpha(0.92f),
-                Color.FromHex("#CAE0FF"),
-                Color.FromHex("#264E8F").WithAlpha(0.96f),
-                Color.FromHex("#7EAEF5").WithAlpha(0.98f)),
             StyleNano.UiColorTheme.Gray => new ThemePalette(
                 Color.FromHex("#2A333E").WithAlpha(0.96f),
                 Color.FromHex("#75869A").WithAlpha(0.95f),

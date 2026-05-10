@@ -457,7 +457,6 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
     {
         var bodyColor = GetTheme() switch
         {
-            StyleNano.UiColorTheme.Blue => Color.FromHex("#102A56").WithAlpha(0.94f),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#1A2028").WithAlpha(0.94f),
             _ => Color.FromHex("#05180A").WithAlpha(0.94f),
         };
@@ -508,7 +507,6 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
     {
         return GetTheme() switch
         {
-            StyleNano.UiColorTheme.Blue => Color.FromHex("#0B2247"),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#202730"),
             _ => Color.FromHex("#0A1C0D"),
         };
@@ -604,9 +602,7 @@ public sealed class CCMAchievementsWindow : DefaultCMWindow
             ContentMarginBottomOverride = 4,
         };
         button.Label.FontOverride = _sectionFont;
-        button.Label.FontColorOverride = selected || pressed
-            ? Color.FromHex("#F0FFF4")
-            : GetWindowAccent();
+        button.Label.FontColorOverride = Color.White;
     }
 
     protected override void MouseMove(GUIMouseMoveEventArgs args)

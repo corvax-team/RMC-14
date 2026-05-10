@@ -12,10 +12,10 @@
     <BoxContainer Name="MainContainer" VerticalExpand="True" HorizontalExpand="True" Orientation="Horizontal"
                   Margin="10 10 10 10" SeparationOverride="2">
         <SplitContainer State="Auto" ResizeMode="NotResizable" HorizontalExpand="True">
-            <BoxContainer Name="LeftSide" Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+            <BoxContainer Name="LeftSide" Access="Public" Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
                 <Control Name="DefaultState" Access="Public" VerticalExpand="True">
                     <BoxContainer Name="TopLeft" Orientation="Vertical" HorizontalExpand="True">
-                        <PanelContainer StyleClasses="OldLobbyAngleRect" HorizontalAlignment="Left"
+                        <PanelContainer Name="LeftSideHeader" Access="Public" StyleClasses="OldLobbyAngleRect" HorizontalAlignment="Left"
                                         MinWidth="760"
                                         MaxWidth="840"
                                         HorizontalExpand="True"
@@ -48,7 +48,7 @@
                                         HorizontalExpand="True" />
                             </BoxContainer>
                         </PanelContainer>
-                        <PanelContainer StyleClasses="OldLobbyAngleRect" HorizontalAlignment="Left" Name="LeftSideTop"
+                        <PanelContainer StyleClasses="OldLobbyAngleRect" HorizontalAlignment="Left" Name="LeftSideTop" Access="Public"
                                         MinWidth="760"
                                         MaxWidth="840"
                                         HorizontalExpand="True"

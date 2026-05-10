@@ -3,6 +3,8 @@
   name: spike shard
   description: A sharp spike shard.
   components:
+  - type: CEZPhysics # mc-changes [z-levels]
+    bounciness: 0
   - type: Sprite
     sprite: _RMC14/Objects/Materials/shards.rsi
     layers:

@@ -69,7 +69,6 @@ public sealed partial class MiscTab : Control
         var colorThemeEntries = new List<OptionDropDownCVar<string>.ValueOption>
         {
             new("green", Loc.GetString("ui-options-ui-color-theme-green")),
-            new("blue", Loc.GetString("ui-options-ui-color-theme-blue")),
             new("gray", Loc.GetString("ui-options-ui-color-theme-gray")),
         };
 
@@ -138,7 +137,7 @@ public sealed partial class MiscTab : Control
     private void RefreshLobbyBackgroundPresetOptions(string style)
     {
         var oldStyle = string.Equals(style, "old", StringComparison.OrdinalIgnoreCase);
-        var currentPreset = _cfg.GetCVar(RMCCVars.RMCLobbyBackgroundPreset) ?? "console";
+        var currentPreset = _cfg.GetCVar(RMCCVars.RMCLobbyBackgroundPreset) ?? "community";
         if (oldStyle && string.Equals(currentPreset, "console", StringComparison.OrdinalIgnoreCase))
         {
             currentPreset = "rmca";

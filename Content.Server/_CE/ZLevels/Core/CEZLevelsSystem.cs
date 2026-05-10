@@ -25,6 +25,7 @@ public sealed partial class CEZLevelsSystem : CESharedZLevelsSystem
     {
         base.Initialize();
         InitView();
+        InitLightSync();
 
         SubscribeLocalEvent<PostGameMapLoad>(OnGameMapLoad);
     }
@@ -33,11 +34,18 @@ public sealed partial class CEZLevelsSystem : CESharedZLevelsSystem
     {
         base.Update(frameTime);
 
+        if (!ZLevelsEnabled)
+            return;
+
         UpdateView(frameTime);
+        UpdateLightSync(frameTime);
     }
 
     private void OnGameMapLoad(PostGameMapLoad ev)
     {
+        if (!ZLevelsEnabled)
+            return;
+
         if (ev.GameMap.MapsAbove.Count == 0 && ev.GameMap.MapsBelow.Count == 0)
             return;
 

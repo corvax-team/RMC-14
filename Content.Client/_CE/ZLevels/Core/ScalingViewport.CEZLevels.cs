@@ -29,9 +29,11 @@ public sealed partial class ScalingViewport
 
     private EntityQuery<TransformComponent>? _xformQuery;
     private EntityQuery<MapComponent>? _mapQuery;
+    private EntityQuery<CEZLevelHighGroundComponent>? _highGroundQuery;
     private readonly Dictionary<EntityUid, EmptyTileCache> _emptyTileCache = new();
 
     private IEye? _fallbackEye;
+    private readonly ZEye _zEye = new();
 
     private readonly record struct EmptyTileCache(Vector2i Min, Vector2i Max, int Revision, bool HasVisibleOpening);
 
@@ -47,28 +49,15 @@ public sealed partial class ScalingViewport
         var drawBox = GetDrawBox();
         var mapId = xform.MapID;
 
-        var corners = new[]
-        {
-            _eyeManager.ScreenToMap(drawBox.BottomLeft).Position,
-            _eyeManager.ScreenToMap(drawBox.BottomRight).Position,
-            _eyeManager.ScreenToMap(drawBox.TopLeft).Position,
-            _eyeManager.ScreenToMap(drawBox.TopRight).Position
-        };
+        var bottomLeft = _eyeManager.ScreenToMap(drawBox.BottomLeft).Position;
+        var bottomRight = _eyeManager.ScreenToMap(drawBox.BottomRight).Position;
+        var topLeft = _eyeManager.ScreenToMap(drawBox.TopLeft).Position;
+        var topRight = _eyeManager.ScreenToMap(drawBox.TopRight).Position;
 
-        float minX = float.MaxValue, minY = float.MaxValue;
-        float maxX = float.MinValue, maxY = float.MinValue;
-
-        foreach (var c in corners)
-        {
-            if (c.X < minX)
-                minX = c.X;
-            if (c.Y < minY)
-                minY = c.Y;
-            if (c.X > maxX)
-                maxX = c.X;
-            if (c.Y > maxY)
-                maxY = c.Y;
-        }
+        var minX = Math.Min(Math.Min(bottomLeft.X, bottomRight.X), Math.Min(topLeft.X, topRight.X));
+        var minY = Math.Min(Math.Min(bottomLeft.Y, bottomRight.Y), Math.Min(topLeft.Y, topRight.Y));
+        var maxX = Math.Max(Math.Max(bottomLeft.X, bottomRight.X), Math.Max(topLeft.X, topRight.X));
+        var maxY = Math.Max(Math.Max(bottomLeft.Y, bottomRight.Y), Math.Max(topLeft.Y, topRight.Y));
 
         var mapCoordsBottomLeft = new MapCoordinates(new Vector2(minX, minY), mapId);
         var mapCoordsTopRight = new MapCoordinates(new Vector2(maxX, maxY), mapId);
@@ -97,14 +86,17 @@ public sealed partial class ScalingViewport
         {
             for (var y = tileBottomLeft.Y - 1; y <= tileTopRight.Y + 1; y++)
             {
-                if (_mapSystem.TryGetTileRef(mapUid, grid, new Vector2i(x, y), out var tile))
+                if (!_mapSystem.TryGetTileRef(mapUid, grid, new Vector2i(x, y), out var tile))
                 {
-                    var tileDef = (ContentTileDefinition)_tile[tile.Tile.TypeId];
-                    if (tileDef.Transparent || tile.Tile.IsEmpty)
-                    {
-                        hasVisibleOpening = true;
-                        break;
-                    }
+                    hasVisibleOpening = true;
+                    break;
+                }
+
+                var tileDef = (ContentTileDefinition)_tile[tile.Tile.TypeId];
+                if (tileDef.Transparent || tile.Tile.IsEmpty || HasHighGroundAt(mapUid, grid, new Vector2i(x, y)))
+                {
+                    hasVisibleOpening = true;
+                    break;
                 }
             }
 
@@ -116,10 +108,27 @@ public sealed partial class ScalingViewport
         return hasVisibleOpening;
     }
 
-    private void RenderZLevels(IClydeViewport viewport)
+    private bool HasHighGroundAt(EntityUid mapUid, MapGridComponent grid, Vector2i tile)
+    {
+        if (_mapSystem is null)
+            return false;
+
+        _highGroundQuery ??= _entityManager.GetEntityQuery<CEZLevelHighGroundComponent>();
+
+        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(mapUid, grid, tile);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (_highGroundQuery.Value.HasComp(uid))
+                return true;
+        }
+
+        return false;
+    }
+
+    private bool RenderZLevels(IClydeViewport viewport)
     {
         if (_eye is null)
-            return;
+            return false;
 
         _fallbackEye = _eye;
 
@@ -131,48 +140,49 @@ public sealed partial class ScalingViewport
         _zLevels ??= _entityManager.System<CEClientZLevelsSystem>();
         _mapSystem ??= _entityManager.System<SharedMapSystem>();
 
+        if (!_zLevels.IsZLevelsEnabled)
+            return false;
+
         if (_player.LocalEntity is null)
-            return;
+            return false;
 
         if (!_entityManager.TryGetComponent<CEZLevelViewerComponent>(_player.LocalEntity.Value, out var zLevelViewer))
-            return;
+            return false;
 
         if (!_xformQuery.Value.TryComp(_player.LocalEntity, out var playerXform))
-            return;
+            return false;
 
         if (playerXform.MapUid is null)
-            return;
+            return false;
 
         if (!_entityManager.HasComponent<CEZLevelMapComponent>(playerXform.MapUid.Value))
         {
-            viewport.Eye = _fallbackEye;
-            viewport.Render();
-            Eye = _fallbackEye;
-            viewport.Eye = Eye;
-            return;
+            return false;
         }
 
         var lookUp = zLevelViewer.LookUp ? 1 : 0;
 
         var lowestDepth = 0;
+        var currentMap = playerXform.MapUid.Value;
         var maxBelowDepth = Math.Max(0, _zLevels.MaxRenderedBelowDepth);
-        for (var i = 0; i >= -maxBelowDepth; i--)
+        var checkingMap = currentMap;
+        for (var depth = 1; depth <= maxBelowDepth; depth++)
         {
-            var checkingMap = playerXform.MapUid.Value;
-
-            if (i != 0)
-            {
-                if (!_zLevels.TryMapOffset(playerXform.MapUid.Value, i, out var mapUidBelow))
-                    continue;
-
-                checkingMap = mapUidBelow;
-            }
-
-            lowestDepth = i;
-
             if (!TryFindEmptyTiles(checkingMap))
                 break;
+
+            if (!_zLevels.TryMapOffset(currentMap, -depth, out var mapUidBelow))
+                break;
+
+            lowestDepth = -depth;
+            checkingMap = mapUidBelow;
         }
+
+        if (lowestDepth == 0 && lookUp == 0)
+            return false;
+
+        Angle rotation = _fallbackEye.Rotation * -1;
+        var zOffset = rotation.ToWorldVec() * CEClientZLevelsSystem.ZLevelOffset;
 
         //From the lowest depth to the highest, render each level
         for (var depth = lowestDepth; depth <= lookUp; depth++)
@@ -181,24 +191,22 @@ public sealed partial class ScalingViewport
                 viewport.Eye = _fallbackEye;
             else
             {
-                if (!_zLevels.TryMapOffset(playerXform.MapUid.Value, depth, out var mapUidBelow))
+                if (!_zLevels.TryMapOffset(currentMap, depth, out var mapUidBelow))
                     continue;
 
                 if (!_mapQuery.Value.TryComp(mapUidBelow, out var mapComp))
                     continue;
 
-                Angle rotation = _fallbackEye.Rotation * -1;
-                var offset = rotation.ToWorldVec() * CEClientZLevelsSystem.ZLevelOffset * depth;
-
-                viewport.Eye = new ZEye(lowestDepth, depth, lookUp)
-                {
-                    Position = new MapCoordinates(_fallbackEye.Position.Position, mapComp.MapId),
-                    DrawFov = _fallbackEye.DrawFov && depth >= 0,
-                    DrawLight = _fallbackEye.DrawLight,
-                    Offset = _fallbackEye.Offset + offset,
-                    Rotation = _fallbackEye.Rotation,
-                    Scale = _fallbackEye.Scale,
-                };
+                _zEye.LowestDepth = lowestDepth;
+                _zEye.Depth = depth;
+                _zEye.HighestDepth = lookUp;
+                _zEye.Position = new MapCoordinates(_fallbackEye.Position.Position, mapComp.MapId);
+                _zEye.DrawFov = _fallbackEye.DrawFov && depth >= 0;
+                _zEye.DrawLight = _fallbackEye.DrawLight;
+                _zEye.Offset = _fallbackEye.Offset + zOffset * depth;
+                _zEye.Rotation = _fallbackEye.Rotation;
+                _zEye.Scale = _fallbackEye.Scale;
+                viewport.Eye = _zEye;
             }
 
             viewport.ClearColor = depth == lowestDepth ? Color.Black : null;
@@ -208,12 +216,13 @@ public sealed partial class ScalingViewport
         // Restore the Eye
         Eye = _fallbackEye;
         viewport.Eye = Eye;
+        return true;
     }
 
-    public sealed class ZEye(int lowest, int depth, int high) : Robust.Shared.Graphics.Eye
+    public sealed class ZEye : Robust.Shared.Graphics.Eye
     {
-        public int LowestDepth = lowest;
-        public int Depth = depth;
-        public int HighestDepth = high;
+        public int LowestDepth;
+        public int Depth;
+        public int HighestDepth;
     }
 }

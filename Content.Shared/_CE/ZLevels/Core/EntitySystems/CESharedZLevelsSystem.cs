@@ -45,10 +45,14 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
     private int _zMapCount;
     private int _activeZPhysicsCount;
 
+    protected bool ZLevelsEnabled { get; private set; }
+    public bool IsZLevelsEnabled => ZLevelsEnabled;
+
     public override void Initialize()
     {
         base.Initialize();
 
+        _config.OnValueChanged(MCConfigVars.ZLevelsEnabled, OnZLevelsEnabledChanged, true);
         _config.OnValueChanged(MCConfigVars.ZLevelsPhysicsClientSimulation, i => _clientSimulation = i, true);
         _config.OnValueChanged(MCConfigVars.ZLevelsPhysicsTickRate, i => _fixedTimestep = TimeSpan.FromSeconds(1d / i), true);
 
@@ -69,6 +73,14 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
         InitializeCacheHooks();
         InitializeMovement();
         InitializeView();
+    }
+
+    protected virtual void OnZLevelsEnabledChanged(bool enabled)
+    {
+        ZLevelsEnabled = enabled;
+
+        if (!enabled)
+            _accumulatedTime = TimeSpan.Zero;
     }
 
     private void OnZMapStartup(Entity<CEZLevelMapComponent> ent, ref ComponentStartup args)

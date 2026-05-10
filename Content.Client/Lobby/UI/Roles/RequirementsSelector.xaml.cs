@@ -74,7 +74,6 @@ public sealed partial class RequirementsSelector : BoxContainer
             {
                 BackgroundColor = (StyleNano.CurrentTheme switch
                 {
-                    StyleNano.UiColorTheme.Blue => Color.FromHex("#0A1E34"),
                     StyleNano.UiColorTheme.Gray => Color.FromHex("#1B222A"),
                     _ => Color.FromHex("#07210E"),
                 }).WithAlpha(0.82f),

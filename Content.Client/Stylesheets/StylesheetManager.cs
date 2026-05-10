@@ -26,7 +26,7 @@ namespace Content.Client.Stylesheets
 
         private void RefreshSheets()
         {
-            var theme = _configManager.GetCVar(RMCCVars.RMCUIColorTheme) ?? "blue";
+            var theme = _configManager.GetCVar(RMCCVars.RMCUIColorTheme) ?? "gray";
             var oldStyle = StyleNano.IsOldLobbyStyle(_configManager);
             var oldNano = SheetNano;
             var oldSpace = SheetSpace;

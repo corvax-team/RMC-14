@@ -59,7 +59,6 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
     private RichTextLabel _lobbyStyleHint = default!;
     private CCMOptionButton _languageSelector = default!;
     private Button _greenThemeButton = default!;
-    private Button _blueThemeButton = default!;
     private Button _grayThemeButton = default!;
     private Button _newLobbyStyleButton = default!;
     private Button _oldLobbyStyleButton = default!;
@@ -489,13 +488,10 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
 
         _greenThemeButton = CreateThemeButton();
         _greenThemeButton.OnPressed += _ => SetTheme("green");
-        _blueThemeButton = CreateThemeButton();
-        _blueThemeButton.OnPressed += _ => SetTheme("blue");
         _grayThemeButton = CreateThemeButton();
         _grayThemeButton.OnPressed += _ => SetTheme("gray");
 
         buttonRow.AddChild(_greenThemeButton);
-        buttonRow.AddChild(_blueThemeButton);
         buttonRow.AddChild(_grayThemeButton);
         return buttonRow;
     }
@@ -591,7 +587,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
     private void PopulateSelectors()
     {
         var currentLocale = _config.GetCVar(CCVars.ClientLocale) ?? "ru-RU";
-        var currentTheme = _config.GetCVar(RMCCVars.RMCUIColorTheme) ?? "blue";
+        var currentTheme = _config.GetCVar(RMCCVars.RMCUIColorTheme) ?? "gray";
         var currentLobbyStyle = _config.GetCVar(RMCCVars.RMCLobbyUiStyle) ?? "new";
 
         _languageSelector.Clear();
@@ -603,7 +599,6 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         _languageSelector.SelectId(currentLocale.Equals("en-US", StringComparison.OrdinalIgnoreCase) ? LanguageEnglish : LanguageRussian);
 
         _greenThemeButton.Text = Loc.GetString("ccm-lobby-welcome-theme-green");
-        _blueThemeButton.Text = Loc.GetString("ccm-lobby-welcome-theme-blue");
         _grayThemeButton.Text = Loc.GetString("ccm-lobby-welcome-theme-gray");
         _newLobbyStyleButton.Text = Loc.GetString("ccm-lobby-welcome-lobby-style-new");
         _oldLobbyStyleButton.Text = Loc.GetString("ccm-lobby-welcome-lobby-style-old");
@@ -636,7 +631,6 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
             ? StyleNano.OldLobbyPanel.WithAlpha(0.97f)
             : (effectiveTheme switch
         {
-            StyleNano.UiColorTheme.Blue => Color.FromHex("#081A36"),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#171D24"),
             _ => Color.FromHex("#06170B"),
         }).WithAlpha(0.97f);
@@ -644,7 +638,6 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
             ? StyleNano.OldLobbyPanelSoft.WithAlpha(0.97f)
             : (effectiveTheme switch
         {
-            StyleNano.UiColorTheme.Blue => Color.FromHex("#0B2144"),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#1D252E"),
             _ => Color.FromHex("#0A1B0C"),
         }).WithAlpha(0.97f);
@@ -652,7 +645,6 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
             ? Color.FromHex("#30343B").WithAlpha(0.97f)
             : (effectiveTheme switch
         {
-            StyleNano.UiColorTheme.Blue => Color.FromHex("#10284F"),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#232D38"),
             _ => Color.FromHex("#0D220F"),
         }).WithAlpha(0.97f);
@@ -716,7 +708,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
             $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=13][color={bodyText}]{Loc.GetString("ccm-lobby-welcome-page1-project-body")}[/color][/font]\n" +
             $"[font=\"/Fonts/Exo2/Exo2-Regular.ttf\" size=12][color={secondaryText}]{Loc.GetString("ccm-lobby-welcome-page1-command", ("command", "welcome"))}[/color][/font]"));
 
-        ApplyThemeSwatchSelection(_config.GetCVar(RMCCVars.RMCUIColorTheme) ?? "blue");
+        ApplyThemeSwatchSelection(_config.GetCVar(RMCCVars.RMCUIColorTheme) ?? "gray");
     }
 
     private void OnThemeChanged(string _)
@@ -872,7 +864,6 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
     private void ApplyThemeSwatchSelection(string theme)
     {
         _greenThemeButton.Pressed = theme.Equals("green", StringComparison.OrdinalIgnoreCase);
-        _blueThemeButton.Pressed = theme.Equals("blue", StringComparison.OrdinalIgnoreCase);
         _grayThemeButton.Pressed = theme.Equals("gray", StringComparison.OrdinalIgnoreCase);
     }
 

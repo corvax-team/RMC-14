@@ -37,14 +37,15 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
     private CEZLevelLowerFxMode _lowerFxMode = CEZLevelLowerFxMode.Tint;
     private int _maxRenderBelowDepth = 1;
 
-    public static float ZLevelOffset = 0.7f;
+    public static float ZLevelOffset = 0.35f;
     public int MaxRenderedBelowDepth => _maxRenderBelowDepth;
 
     public override void Initialize()
     {
         base.Initialize();
         _lowerFxOverlay = new CEZLevelBlurOverlay();
-        _overlay.AddOverlay(_lowerFxOverlay);
+        if (ZLevelsEnabled)
+            _overlay.AddOverlay(_lowerFxOverlay);
 
         _config.OnValueChanged(MCConfigVars.ZLevelsRenderMaxBelowDepth, v => _maxRenderBelowDepth = Math.Max(0, v), true);
         _config.OnValueChanged(MCConfigVars.ZLevelsRenderLowerFx, OnLowerFxChanged, true);
@@ -57,6 +58,9 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
 
     private void OnEyeOffset(Entity<CEZPhysicsComponent> ent, ref GetEyeOffsetEvent args)
     {
+        if (!ZLevelsEnabled)
+            return;
+
         Angle rotation = _eye.CurrentEye.Rotation * -1;
         var localPosition = GetVisualsLocalPosition((ent.Owner, ent.Comp), Transform(ent));
         var offset = rotation.RotateVec(new Vector2(0, localPosition * ZLevelOffset));
@@ -65,6 +69,9 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
 
     private void OnStartup(Entity<CEZPhysicsComponent> ent, ref ComponentStartup args)
     {
+        if (!ZLevelsEnabled)
+            return;
+
         if (!TryComp<SpriteComponent>(ent, out var sprite))
             return;
 
@@ -85,17 +92,26 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
     protected override void OnParentChanged(Entity<CEZPhysicsComponent> ent, ref EntParentChangedMessage args)
     {
         base.OnParentChanged(ent, ref args);
+        if (!ZLevelsEnabled)
+            return;
+
         RefreshTrackedVisualState(ent);
     }
 
     private void OnAfterHandleState(Entity<CEZPhysicsComponent> ent, ref AfterAutoHandleStateEvent args)
     {
+        if (!ZLevelsEnabled)
+            return;
+
         RefreshTrackedVisualState(ent);
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        if (!ZLevelsEnabled)
+            return;
 
         if (_player.LocalEntity is not { } localEntity)
             return;
@@ -168,6 +184,9 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
 
     public float GetVisualsLocalPosition(Entity<CEZPhysicsComponent> ent, TransformComponent? xform = null)
     {
+        if (!ZLevelsEnabled)
+            return 0;
+
         if (!Resolve(ent, ref xform, false))
             return 0;
 
@@ -181,7 +200,31 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
 
     public int GetVisibilityRevision(EntityUid mapUid)
     {
+        if (!ZLevelsEnabled)
+            return 0;
+
         return _visibilityRevision.GetValueOrDefault(mapUid, 0);
+    }
+
+    protected override void OnZLevelsEnabledChanged(bool enabled)
+    {
+        base.OnZLevelsEnabledChanged(enabled);
+
+        if (_lowerFxOverlay == null)
+            return;
+
+        if (enabled)
+        {
+            if (!_overlay.HasOverlay<CEZLevelBlurOverlay>())
+                _overlay.AddOverlay(_lowerFxOverlay);
+
+            return;
+        }
+
+        if (_overlay.HasOverlay<CEZLevelBlurOverlay>())
+            _overlay.RemoveOverlay(_lowerFxOverlay);
+
+        RestoreAllTrackedVisuals();
     }
 
     private void RefreshTrackedVisualState(Entity<CEZPhysicsComponent> ent, SpriteComponent? sprite = null, TransformComponent? xform = null)
@@ -224,6 +267,26 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
         sprite.NoRotation = ent.Comp.NoRotDefault;
         _sprite.SetOffset((ent.Owner, sprite), ent.Comp.SpriteOffsetDefault);
         _sprite.SetDrawDepth((ent.Owner, sprite), ent.Comp.DrawDepthDefault);
+    }
+
+    private void RestoreAllTrackedVisuals()
+    {
+        _trackedVisualSnapshot.Clear();
+        _trackedVisualSnapshot.AddRange(_trackedVisuals);
+
+        foreach (var uid in _trackedVisualSnapshot)
+        {
+            if (TryComp<CEZPhysicsComponent>(uid, out var zPhys) &&
+                TryComp<SpriteComponent>(uid, out var sprite))
+            {
+                RestoreVisualDefaults((uid, zPhys), sprite);
+            }
+        }
+
+        _trackedVisuals.Clear();
+        _trackedVisualSnapshot.Clear();
+        _trackedVisualRemovals.Clear();
+        _visibilityRevision.Clear();
     }
 
     private void OnLowerFxChanged(string value)

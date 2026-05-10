@@ -3,6 +3,7 @@ using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Power;
 using Content.Server._RMC14.Stations;
+using Content.Server._MC.Map;
 using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -94,6 +95,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedDestructibleSystem _destruction = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
+    [Dependency] private readonly MCPlanetMapSystem _mcPlanetMap = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;

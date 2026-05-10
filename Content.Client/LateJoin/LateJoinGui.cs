@@ -112,8 +112,6 @@ namespace Content.Client.LateJoin
             if (!_gameTicker.DisallowedLateJoin && _gameTicker.StationNames.Count == 0)
                 _sawmill.Warning("No stations exist, nothing to display in late-join GUI");
 
-            _base.AddChild(BuildWindowHeader());
-
             var showStationTabs = _gameTicker.StationNames.Count > 1;
             BoxContainer? stationTabs = null;
             if (showStationTabs)
@@ -334,42 +332,6 @@ namespace Content.Client.LateJoin
             }
         }
 
-        private Control BuildWindowHeader()
-        {
-            var header = new PanelContainer
-            {
-                PanelOverride = new StyleBoxFlat
-                {
-                    BackgroundColor = _palette.HeaderBackground,
-                    BorderColor = _palette.HeaderBorder,
-                    BorderThickness = new Thickness(1),
-                },
-            };
-
-            header.AddChild(new BoxContainer
-            {
-                Orientation = LayoutOrientation.Vertical,
-                Margin = new Thickness(10, 8),
-                SeparationOverride = 2,
-                Children =
-                {
-                    new Label
-                    {
-                        Text = Title,
-                        StyleClasses = { "LabelHeading" },
-                        FontColorOverride = _palette.HeaderText,
-                    },
-                    new Label
-                    {
-                        Text = Loc.GetString("late-join-gui-title"),
-                        FontColorOverride = _palette.HeaderSubText,
-                    },
-                },
-            });
-
-            return header;
-        }
-
         private Control BuildStationHeader(string stationName)
         {
             var panel = new PanelContainer
@@ -409,23 +371,6 @@ namespace Content.Client.LateJoin
         {
             return StyleNano.CurrentTheme switch
             {
-                StyleNano.UiColorTheme.Blue => new LateJoinPalette(
-                    Color.FromHex("#1A335D").WithAlpha(0.96f),
-                    Color.FromHex("#4D78B6").WithAlpha(0.95f),
-                    Color.FromHex("#EEF5FF"),
-                    Color.FromHex("#B8CAE5"),
-                    Color.FromHex("#0E1A2B").WithAlpha(0.96f),
-                    Color.FromHex("#30507F").WithAlpha(0.95f),
-                    Color.FromHex("#12233A").WithAlpha(0.92f),
-                    Color.FromHex("#426189").WithAlpha(0.90f),
-                    Color.FromHex("#203A61").WithAlpha(0.94f),
-                    Color.FromHex("#5C82B8").WithAlpha(0.95f),
-                    Color.FromHex("#EAF2FF"),
-                    Color.FromHex("#355C92").WithAlpha(0.98f),
-                    Color.FromHex("#93B7EC").WithAlpha(0.98f),
-                    Color.White,
-                    Color.FromHex("#D6E8FF"),
-                    Color.FromHex("#A6BCD9")),
                 StyleNano.UiColorTheme.Gray => new LateJoinPalette(
                     Color.FromHex("#323B47").WithAlpha(0.96f),
                     Color.FromHex("#738396").WithAlpha(0.95f),
@@ -577,7 +522,7 @@ namespace Content.Client.LateJoin
             {
                 MinSize = new Vector2(28, 28),
                 VerticalAlignment = VAlignment.Center,
-                Margin = new Thickness(0, 0, 8, 0),
+                Margin = new Thickness(0, 0, 6, 0),
                 PanelOverride = new StyleBoxFlat
                 {
                     BackgroundColor = palette.SectionBackground.WithAlpha(0.72f),
@@ -591,7 +536,7 @@ namespace Content.Client.LateJoin
             {
                 Orientation = LayoutOrientation.Horizontal,
                 HorizontalExpand = true,
-                Margin = new Thickness(6, 4),
+                Margin = new Thickness(4, 4, 6, 4),
                 Children =
                 {
                     iconPanel,

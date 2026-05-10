@@ -627,19 +627,16 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
         var windowAccent = GetWindowAccent();
         var headerColor = theme switch
         {
-            StyleNano.UiColorTheme.Blue => Color.FromHex("#06142F").WithAlpha(0.995f),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#171D24").WithAlpha(0.995f),
             _ => Color.FromHex("#041105").WithAlpha(0.995f),
         };
         var bodyColor = theme switch
         {
-            StyleNano.UiColorTheme.Blue => Color.FromHex("#081B3F").WithAlpha(0.995f),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#1C232C").WithAlpha(0.995f),
             _ => Color.FromHex("#061507").WithAlpha(0.995f),
         };
         var borderColor = theme switch
         {
-            StyleNano.UiColorTheme.Blue => Color.FromHex("#2F78FF").WithAlpha(0.88f),
             StyleNano.UiColorTheme.Gray => Color.FromHex("#7B8898").WithAlpha(0.86f),
             _ => StyleNano.LobbyMenuButtonBase.WithAlpha(0.82f),
         };

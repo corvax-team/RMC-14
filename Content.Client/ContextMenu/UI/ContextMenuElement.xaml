@@ -7,7 +7,8 @@
     <BoxContainer
         Orientation="Horizontal"
         HorizontalExpand="True"
-        VerticalExpand="True">
+        VerticalExpand="True"
+        Margin="4 0 4 0">
         <SpriteView
             Name="Icon"
             SetWidth="{x:Static ui:ContextMenuElement.ElementHeight}"

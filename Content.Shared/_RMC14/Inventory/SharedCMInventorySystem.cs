@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Collections.Generic;
 using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Xenonids.Devour;
@@ -33,6 +34,8 @@ namespace Content.Shared._RMC14.Inventory;
 
 public abstract class SharedCMInventorySystem : EntitySystem
 {
+    private const int MaxTrackedDroppedItems = 48;
+
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -352,8 +355,25 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
     protected void HandleDroppedItem(Entity<RMCItemPickupComponent> item, EntityUid user)
     {
-        if (_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems))
+        if (!_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems) || TerminatingOrDeleted(item))
+            return;
+
+        var changed = pickupDroppedItems.DroppedItems.RemoveAll(uid => !Exists(uid) || TerminatingOrDeleted(uid)) > 0;
+
+        if (!pickupDroppedItems.DroppedItems.Contains(item.Owner))
+        {
             pickupDroppedItems.DroppedItems.Add(item.Owner);
+            changed = true;
+        }
+
+        if (pickupDroppedItems.DroppedItems.Count > MaxTrackedDroppedItems)
+        {
+            pickupDroppedItems.DroppedItems.RemoveRange(0, pickupDroppedItems.DroppedItems.Count - MaxTrackedDroppedItems);
+            changed = true;
+        }
+
+        if (changed)
+            Dirty(user, pickupDroppedItems);
     }
 
     protected void TryPickupDroppedItems(EntityUid user)
@@ -361,19 +381,51 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (!_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems) || HasComp<DevouredComponent>(user))
             return;
 
+        if (pickupDroppedItems.DroppedItems.Count == 0)
+            return;
+
+        var validItems = new List<EntityUid>(pickupDroppedItems.DroppedItems.Count);
+        var seenItems = new HashSet<EntityUid>();
+        var changed = false;
+
+        foreach (var item in pickupDroppedItems.DroppedItems)
+        {
+            if (!seenItems.Add(item) ||
+                !Exists(item) ||
+                TerminatingOrDeleted(item) ||
+                _container.IsEntityInContainer(item))
+            {
+                changed = true;
+                continue;
+            }
+
+            validItems.Add(item);
+        }
+
+        if (changed)
+        {
+            pickupDroppedItems.DroppedItems.Clear();
+            pickupDroppedItems.DroppedItems.AddRange(validItems);
+            Dirty(user, pickupDroppedItems);
+        }
+
+        if (validItems.Count == 0)
+            return;
+
         // Sort items by importance
-        var sortedItems = pickupDroppedItems.DroppedItems
+        var sortedItems = validItems
             .OrderByDescending(item => HasComp<GunComponent>(item))
             .ThenByDescending(item => HasComp<MeleeWeaponComponent>(item))
             .ToList();
 
-        foreach (var item in sortedItems.Distinct())
+        foreach (var item in sortedItems)
         {
-            if (!_container.IsEntityInContainer(item) && _interaction.InRangeUnobstructed(user, item))
+            if (_interaction.InRangeUnobstructed(user, item))
             {
                 if (_hands.TryPickupAnyHand(user, item))
                 {
                     pickupDroppedItems.DroppedItems.Remove(item);
+                    Dirty(user, pickupDroppedItems);
                     break;
                 }
             }
