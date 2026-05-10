@@ -1,11 +1,10 @@
 name: Build & Test Debug
 
 on:
-  push:
-    branches: [ master, staging, stable ]
-  merge_group:
   pull_request:
-    types: [ opened, reopened, synchronize, ready_for_review ]
+    types: [ opened, reopened, synchronize, ready_for_review, labeled ]
+    branches: [ master, staging, stable ]
+  push:
     branches: [ master, staging, stable ]
 
 concurrency:
@@ -15,7 +14,12 @@ concurrency:
 jobs:
   build:
     name: Build and Test
-    if: github.actor != 'RounyBot' && github.event.pull_request.draft == false
+    if: |
+      github.actor != 'RounyBot' && 
+      (
+        github.event_name == 'push' || 
+        (github.event.pull_request.draft == false && contains(github.event.pull_request.labels.*.name, 'Ok-To-Test'))
+      )
     runs-on: ubuntu-latest
     env:
       PUBLISHTRIMMED: "false"
