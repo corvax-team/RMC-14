@@ -108,7 +108,7 @@ public sealed class RMCWeatherSystem : EntitySystem
             // Process whether to start a weather event
             if(cycle.LastEventCooldown <= TimeSpan.Zero)
             {
-                var weatherPick = _random.Pick(cycle.WeatherEvents);
+                var weatherPick = PickWeatherEvent(cycle.WeatherEvents);
                 _proto.TryIndex(weatherPick.WeatherType, out var weatherProto);
                 var endTime = _timing.CurTime + weatherPick.Duration;
 
@@ -138,5 +138,31 @@ public sealed class RMCWeatherSystem : EntitySystem
                 }
             }
         }
+    }
+
+    private RMCWeatherEvent PickWeatherEvent(List<RMCWeatherEvent> events)
+    {
+        var totalWeight = 0f;
+        foreach (var weatherEvent in events)
+        {
+            if (weatherEvent.Weight > 0f)
+                totalWeight += weatherEvent.Weight;
+        }
+
+        if (totalWeight <= 0f)
+            return _random.Pick(events);
+
+        var pick = _random.NextFloat(totalWeight);
+        foreach (var weatherEvent in events)
+        {
+            if (weatherEvent.Weight <= 0f)
+                continue;
+
+            pick -= weatherEvent.Weight;
+            if (pick <= 0f)
+                return weatherEvent;
+        }
+
+        return events[^1];
     }
 }

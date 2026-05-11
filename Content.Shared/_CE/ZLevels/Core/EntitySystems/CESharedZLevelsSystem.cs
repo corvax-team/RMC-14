@@ -5,9 +5,11 @@
  * SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0 AND MIT
  */
 
+using System.Numerics;
 using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared._MC;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Maps;
 using Content.Shared.Popups;
 using JetBrains.Annotations;
 using Robust.Shared.Audio.Systems;
@@ -30,6 +32,7 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
     [Dependency] private readonly ActionBlockerSystem _blocker = null!;
     [Dependency] private readonly EntityLookupSystem _lookup = null!;
     [Dependency] private readonly SharedMapSystem _map = null!;
+    [Dependency] private readonly IMapManager _mapManager = null!;
     [Dependency] private readonly SharedPopupSystem _popup = null!;
 
     private EntityQuery<MapComponent> _mapQuery;
@@ -118,13 +121,14 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
         if (!TryMapDown((mapEntity, zMapComp), out belowMap))
             return false;
 
-        if (!TryComp<MapGridComponent>(mapEntity, out var mapGridComponent))
+        if (!TryGetZMapGrid(mapEntity, coords.ToMap(EntityManager, _transform).Position, out var gridUid, out var mapGridComponent))
             return true;
 
-        var tileIndices = _map.LocalToTile(mapEntity, mapGridComponent, coords);
-        var tile = _map.GetTileRef(mapEntity, mapGridComponent, tileIndices);
+        var tileIndices = _map.LocalToTile(gridUid, mapGridComponent, coords);
+        if (!_map.TryGetTileRef(gridUid, mapGridComponent, tileIndices, out var tile))
+            return true;
 
-        return tile.Tile.IsEmpty;
+        return !IsZSupportTile(tile.Tile);
     }
 
     /// <summary>
@@ -229,6 +233,47 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
     public bool TryMapDown(Entity<CEZLevelMapComponent?> inputMapUid, out Entity<CEZLevelMapComponent> belowMapUid)
     {
         return TryMapOffset(inputMapUid, -1, out belowMapUid);
+    }
+
+    private bool IsZFloorTile(Tile tile)
+    {
+        if (tile.IsEmpty)
+            return false;
+
+        var tileDef = (ContentTileDefinition) TilDefMan[tile.TypeId];
+        return !tileDef.IsSubFloor && !tileDef.MapAtmosphere;
+    }
+
+    private static bool IsZSupportTile(Tile tile)
+    {
+        return !tile.IsEmpty;
+    }
+
+    private bool TryGetZMapGrid(
+        EntityUid mapUid,
+        Vector2 worldPos,
+        out EntityUid gridUid,
+        out MapGridComponent grid)
+    {
+        if (_gridQuery.TryComp(mapUid, out var mapGrid))
+        {
+            gridUid = mapUid;
+            grid = mapGrid;
+            return true;
+        }
+
+        gridUid = EntityUid.Invalid;
+        grid = default!;
+
+        if (!_mapQuery.TryComp(mapUid, out var map))
+            return false;
+
+        if (!_mapManager.TryFindGridAt(new MapCoordinates(worldPos, map.MapId), out var foundGridUid, out var foundGrid))
+            return false;
+
+        gridUid = foundGridUid;
+        grid = foundGrid;
+        return true;
     }
 
     /// <summary>

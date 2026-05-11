@@ -43,6 +43,27 @@ public partial class AtmosphereSystem
         RefreshAllGridMapAtmospheres(uid);
     }
 
+    public bool TryGetMapAtmosphere(EntityUid uid, out bool space, out GasMixture mixture)
+    {
+        if (TryComp<MapAtmosphereComponent>(uid, out var component))
+        {
+            space = component.Space;
+            mixture = component.Mixture;
+            return true;
+        }
+
+        space = true;
+        mixture = GasMixture.SpaceGas;
+        return false;
+    }
+
+    public bool MapAtmosphereMatches(EntityUid uid, bool space, GasMixture mixture)
+    {
+        return TryComp<MapAtmosphereComponent>(uid, out var component) &&
+               component.Space == space &&
+               component.Mixture.Equals(mixture);
+    }
+
     public void SetMapGasMixture(EntityUid uid, GasMixture mixture, MapAtmosphereComponent? component = null, bool updateTiles = true)
     {
         if (!Resolve(uid, ref component))

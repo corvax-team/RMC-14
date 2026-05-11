@@ -37,7 +37,7 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
     private CEZLevelLowerFxMode _lowerFxMode = CEZLevelLowerFxMode.Tint;
     private int _maxRenderBelowDepth = 1;
 
-    public static float ZLevelOffset = 0.35f;
+    public static float ZLevelOffset = 0.5f;
     public int MaxRenderedBelowDepth => _maxRenderBelowDepth;
 
     public override void Initialize()
@@ -194,6 +194,9 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
 
         if (xform.ParentUid != xform.MapUid && ZPhyzQuery.TryComp(xform.ParentUid, out var parentZPhys))
             pos = parentZPhys.LocalPosition;
+
+        if (ent.Comp.CachedStickyGround)
+            return 0;
 
         return pos;
     }

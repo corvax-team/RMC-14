@@ -34,6 +34,9 @@ public sealed partial class RMCWeatherEvent
     public string Name = "rmcWeatherEvent";
 
     [DataField]
+    public float Weight = 1f;
+
+    [DataField]
     public TimeSpan Duration;
 
     [DataField]

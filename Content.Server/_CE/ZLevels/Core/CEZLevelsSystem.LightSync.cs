@@ -6,9 +6,12 @@
  */
 
 using System.Linq;
+using Content.Server.Atmos.Components;
+using Content.Server.Atmos.EntitySystems;
 using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared._RMC14.Light;
 using Content.Shared._RMC14.Weather;
+using Content.Shared.Gravity;
 using Content.Shared.Light.Components;
 using Content.Shared.Weather;
 using Robust.Shared.Map.Components;
@@ -24,6 +27,8 @@ public sealed partial class CEZLevelsSystem
     private EntityQuery<RMCAmbientLightEffectsComponent> _rmcAmbientLightEffectsQuery;
     private EntityQuery<RMCWeatherCycleComponent> _rmcWeatherCycleQuery;
     private EntityQuery<WeatherComponent> _weatherQuery;
+    private EntityQuery<GravityComponent> _gravityQuery;
+    private AtmosphereSystem? _atmosphere;
 
     private void InitLightSync()
     {
@@ -34,6 +39,7 @@ public sealed partial class CEZLevelsSystem
         _rmcAmbientLightEffectsQuery = GetEntityQuery<RMCAmbientLightEffectsComponent>();
         _rmcWeatherCycleQuery = GetEntityQuery<RMCWeatherCycleComponent>();
         _weatherQuery = GetEntityQuery<WeatherComponent>();
+        _gravityQuery = GetEntityQuery<GravityComponent>();
     }
 
     private void UpdateLightSync(float frameTime)
@@ -87,7 +93,76 @@ public sealed partial class CEZLevelsSystem
         SyncSunShadowCycle(source, target);
         SyncRmcAmbientLight(source, target);
         SyncRmcAmbientLightEffects(source, target);
+        SyncMapAtmosphere(source, target);
+        SyncMapGravity(source, target);
         DisableSecondaryWeather(target);
+    }
+
+    private void SyncMapAtmosphere(EntityUid source, EntityUid target)
+    {
+        _atmosphere ??= EntityManager.System<AtmosphereSystem>();
+
+        if (!_atmosphere.TryGetMapAtmosphere(source, out var sourceSpace, out var sourceMixture))
+        {
+            if (HasComp<MapAtmosphereComponent>(target))
+                RemComp<MapAtmosphereComponent>(target);
+
+            return;
+        }
+
+        if (_atmosphere.MapAtmosphereMatches(target, sourceSpace, sourceMixture))
+            return;
+
+        _atmosphere.SetMapAtmosphere(target, sourceSpace, sourceMixture);
+    }
+
+    private void SyncMapGravity(EntityUid source, EntityUid target)
+    {
+        if (!TryGetMapGravitySettings(source, out var sourceEnabled, out var sourceInherent))
+            return;
+
+        var query = EntityQueryEnumerator<MapGridComponent, TransformComponent>();
+        while (query.MoveNext(out var gridUid, out _, out var xform))
+        {
+            if (xform.MapUid != target)
+                continue;
+
+            var gravity = EnsureComp<GravityComponent>(gridUid);
+            if (gravity.Enabled == sourceEnabled && gravity.Inherent == sourceInherent)
+                continue;
+
+            gravity.Enabled = sourceEnabled;
+            gravity.Inherent = sourceInherent;
+
+            var ev = new GravityChangedEvent(gridUid, sourceEnabled);
+            RaiseLocalEvent(gridUid, ref ev, true);
+            Dirty(gridUid, gravity);
+        }
+    }
+
+    private bool TryGetMapGravitySettings(EntityUid source, out bool enabled, out bool inherent)
+    {
+        var query = EntityQueryEnumerator<MapGridComponent, TransformComponent, GravityComponent>();
+        while (query.MoveNext(out _, out _, out var xform, out var gravity))
+        {
+            if (xform.MapUid != source)
+                continue;
+
+            enabled = gravity.Enabled;
+            inherent = gravity.Inherent;
+            return true;
+        }
+
+        if (_gravityQuery.TryComp(source, out var mapGravity))
+        {
+            enabled = mapGravity.Enabled;
+            inherent = mapGravity.Inherent;
+            return true;
+        }
+
+        enabled = false;
+        inherent = false;
+        return false;
     }
 
     private void SyncMapLight(EntityUid source, EntityUid target)

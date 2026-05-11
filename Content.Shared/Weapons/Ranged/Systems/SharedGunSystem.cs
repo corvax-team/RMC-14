@@ -10,6 +10,8 @@ using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared._RMC14.Vehicle;
+using Content.Shared._CE.ZLevels.Core.Components;
+using Content.Shared._CE.ZLevels.Core.EntitySystems;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -98,6 +100,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
     [Dependency] private readonly VehicleWeaponsSystem _rmcVehicleWeapons = default!;
     [Dependency] private readonly RMCSharedWeaponControllerSystem _rmcSharedWeaponController = default!;
+    [Dependency] private readonly CESharedZLevelsSystem _zLevels = default!;
 
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;
@@ -607,7 +610,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             if (throwItems && ent != null)
             {
                 Recoil(user, mapDirection, gun.CameraRecoilScalarModified);
-                ShootOrThrow(ent.Value, mapDirection, gunVelocity, gun, gunUid, user);
+                ShootOrThrow(ent.Value, mapDirection, gunVelocity, gun, gunUid, user, GetProjectileZVelocity(user, fromCoordinates, toCoordinates, gun.ProjectileSpeedModified));
                 continue;
             }
 
@@ -816,20 +819,20 @@ public abstract partial class SharedGunSystem : EntitySystem
                 var angles = LinearSpread(mapAngle - spreadEvent.Spread / 2,
                     mapAngle + spreadEvent.Spread / 2, ammoSpreadComp.Count);
 
-                ShootOrThrow(ammoEnt, angles[0].ToVec(), gunVelocity, gun, gunUid, user);
+                ShootOrThrow(ammoEnt, angles[0].ToVec(), gunVelocity, gun, gunUid, user, GetProjectileZVelocity(user, fromCoordinates, toCoordinates, gun.ProjectileSpeedModified));
                 shotProjectiles.Add(ammoEnt);
 
                 for (var i = 1; i < ammoSpreadComp.Count; i++)
                 {
                     var newuid = Spawn(ammoSpreadComp.Proto, fromEnt);
-                    ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user);
+                    ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, gunUid, user, GetProjectileZVelocity(user, fromCoordinates, toCoordinates, gun.ProjectileSpeedModified));
                     shotProjectiles.Add(newuid);
                     MarkPredicted(newuid, i);
                 }
             }
             else
             {
-                ShootOrThrow(ammoEnt, mapDirection, gunVelocity, gun, gunUid, user);
+                ShootOrThrow(ammoEnt, mapDirection, gunVelocity, gun, gunUid, user, GetProjectileZVelocity(user, fromCoordinates, toCoordinates, gun.ProjectileSpeedModified));
                 shotProjectiles.Add(ammoEnt);
             }
 
@@ -859,7 +862,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         return angle;
     }
 
-    private void ShootOrThrow(EntityUid uid, Vector2 mapDirection, Vector2 gunVelocity, GunComponent gun, EntityUid gunUid, EntityUid? user)
+    private void ShootOrThrow(EntityUid uid, Vector2 mapDirection, Vector2 gunVelocity, GunComponent gun, EntityUid gunUid, EntityUid? user, float zVelocity = 0f)
     {
         if (gun.Target is { } target && !TerminatingOrDeleted(target))
         {
@@ -877,6 +880,54 @@ public abstract partial class SharedGunSystem : EntitySystem
             return;
         }
         ShootProjectile(uid, mapDirection, gunVelocity, gunUid, user, gun.ProjectileSpeedModified);
+
+        if (Math.Abs(zVelocity) > 0.01f && TryComp<CEZPhysicsComponent>(uid, out var zPhysics))
+            _zLevels.SetZVelocity((uid, zPhysics), zVelocity);
+    }
+
+    private float GetProjectileZVelocity(EntityUid? user, EntityCoordinates fromCoordinates, EntityCoordinates toCoordinates, float speed)
+    {
+        if (!_zLevels.IsZLevelsEnabled)
+            return 0f;
+
+        var fromMap = fromCoordinates.ToMap(EntityManager, TransformSystem);
+        var toMap = toCoordinates.ToMap(EntityManager, TransformSystem);
+        var fromMapUid = MapManager.GetMapEntityId(fromMap.MapId);
+        var toMapUid = MapManager.GetMapEntityId(toMap.MapId);
+
+        if (fromMap.MapId == toMap.MapId)
+        {
+            if (user is { } userUid &&
+                TryComp<CEZLevelViewerComponent>(userUid, out var viewer) &&
+                viewer.LookUp &&
+                _zLevels.TryMapUp((fromMapUid, null), out _))
+            {
+                return GetProjectileZVelocityForDepthDelta(1, fromMap.Position, toMap.Position, speed);
+            }
+
+            if (_zLevels.IsVoidAtCoordinates(toCoordinates, out _))
+                return GetProjectileZVelocityForDepthDelta(-1, fromMap.Position, toMap.Position, speed);
+
+            return 0f;
+        }
+
+        if (!_zLevels.TryGetDepth(fromMapUid, out var fromDepth) ||
+            !_zLevels.TryGetDepth(toMapUid, out var toDepth))
+        {
+            return 0f;
+        }
+
+        return GetProjectileZVelocityForDepthDelta(toDepth - fromDepth, fromMap.Position, toMap.Position, speed);
+    }
+
+    private static float GetProjectileZVelocityForDepthDelta(int depthDelta, Vector2 from, Vector2 to, float speed)
+    {
+        if (depthDelta == 0)
+            return 0f;
+
+        var horizontal = Math.Max((to - from).Length(), 0.1f);
+        var vertical = Math.Abs(depthDelta);
+        return speed * depthDelta / MathF.Sqrt(horizontal * horizontal + vertical * vertical);
     }
 
     #region Hitscan effects

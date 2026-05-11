@@ -128,5 +128,18 @@ public sealed partial class CEZPhysicsComponent : Component
     [ViewVariables]
     public bool Sleeping;
 
+    /// <summary>
+    /// Prevents sticky stairs from immediately reversing a Z transition on the same tile.
+    /// Cleared as soon as the entity leaves that tile or map.
+    /// </summary>
+    [ViewVariables]
+    public Vector2i? SuppressedStairTransitionTile;
+
+    [ViewVariables]
+    public EntityUid? SuppressedStairTransitionMap;
+
+    [ViewVariables]
+    public int SuppressedStairTransitionOffset;
+
     #endregion
 }

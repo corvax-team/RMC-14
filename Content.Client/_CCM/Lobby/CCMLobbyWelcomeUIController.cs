@@ -98,6 +98,14 @@ public sealed class CCMLobbyWelcomeUIController : UIController, IOnStateEntered<
 
     private void EnsureDefaultLobbyPresentation()
     {
+        if (!_config.GetCVar(RMCCVars.RMCLobbyPresentationDefaultsMigrated))
+        {
+            _config.SetCVar(RMCCVars.RMCLobbyUiStyle, "new");
+            _config.SetCVar(RMCCVars.RMCUIColorTheme, "gray");
+            _config.SetCVar(RMCCVars.RMCLobbyPresentationDefaultsMigrated, true);
+            return;
+        }
+
         var lobbyStyle = _config.GetCVar(RMCCVars.RMCLobbyUiStyle);
         if (string.IsNullOrWhiteSpace(lobbyStyle) ||
             (!lobbyStyle.Equals("new", StringComparison.OrdinalIgnoreCase) &&

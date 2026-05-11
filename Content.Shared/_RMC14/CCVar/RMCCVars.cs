@@ -31,6 +31,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<string> RMCLobbyUiStyle =
         CVarDef.Create("rmc.lobby_ui_style", "new", CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    public static readonly CVarDef<bool> RMCLobbyPresentationDefaultsMigrated =
+        CVarDef.Create("rmc.lobby_presentation_defaults_migrated", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     public static readonly CVarDef<bool> RMCLobbyCrtEnabled =
         CVarDef.Create("rmc.lobby_crt_enabled", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 

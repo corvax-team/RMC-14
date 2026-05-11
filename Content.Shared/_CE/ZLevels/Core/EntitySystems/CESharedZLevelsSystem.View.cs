@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0 AND MIT
  */
 
+using System.Numerics;
 using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared.Actions;
 using Content.Shared.Maps;
@@ -118,24 +119,21 @@ public abstract partial class CESharedZLevelsSystem
         if (!TryMapUp(currentMapUid, out var mapAboveUid))
             return false;
 
-        if (HasHighGroundAt(currentMapUid, indices))
+        var worldPos = new Vector2(indices.X + 0.5f, indices.Y + 0.5f);
+        if (!TryGetZMapGrid(mapAboveUid, worldPos, out var mapAboveGridUid, out var mapAboveGrid))
             return false;
 
-        if (!_gridQuery.TryComp(mapAboveUid, out var mapAboveGrid))
+        if (!_map.TryGetTileRef(mapAboveGridUid, mapAboveGrid, indices, out var tileRef))
             return false;
 
-        if (!_map.TryGetTileRef(mapAboveUid, mapAboveGrid, indices, out var tileRef))
-            return false;
-
-        var anchored = _map.GetAnchoredEntitiesEnumerator(mapAboveUid, mapAboveGrid, indices);
+        var anchored = _map.GetAnchoredEntitiesEnumerator(mapAboveGridUid, mapAboveGrid, indices);
         while (anchored.MoveNext(out var uid))
         {
             if (_highgroundQuery.HasComp(uid))
                 return false;
         }
 
-        var tileDef = (ContentTileDefinition)TilDefMan[tileRef.Tile.TypeId];
-        return !tileDef.Transparent;
+        return IsZFloorTile(tileRef.Tile);
     }
 
     private bool HasHighGroundAt(Entity<CEZLevelMapComponent?> map, Vector2i indices)
@@ -143,10 +141,11 @@ public abstract partial class CESharedZLevelsSystem
         if (!Resolve(map, ref map.Comp, false))
             return false;
 
-        if (!_gridQuery.TryComp(map.Owner, out var grid))
+        var worldPos = new Vector2(indices.X + 0.5f, indices.Y + 0.5f);
+        if (!TryGetZMapGrid(map.Owner, worldPos, out var gridUid, out var grid))
             return false;
 
-        var anchored = _map.GetAnchoredEntitiesEnumerator(map.Owner, grid, indices);
+        var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, indices);
         while (anchored.MoveNext(out var uid))
         {
             if (_highgroundQuery.HasComp(uid))

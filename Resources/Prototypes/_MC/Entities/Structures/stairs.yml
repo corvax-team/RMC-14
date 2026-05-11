@@ -1,6 +1,7 @@
 - type: entity
   parent: RMCStairs
   id: MCStairs
+  suffix: Up
   components:
   - type: Sprite
     state: rampbottom
@@ -12,3 +13,19 @@
     - 1.05
     - 1.05
     - 0.1
+
+- type: entity
+  parent: MCStairs
+  id: MCStairsDown
+  suffix: Down
+  components:
+  - type: Sprite
+    state: ramptop
+    color: "#a6aeab"
+    drawdepth: Mobs
+  - type: CEZLevelHighGround
+    stick: true
+    heightCurve:
+    - 0.05
+    - 0.05
+    - -0.9

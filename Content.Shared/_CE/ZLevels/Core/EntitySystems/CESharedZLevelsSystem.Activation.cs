@@ -6,7 +6,6 @@
  */
 
 using Content.Shared._CE.ZLevels.Core.Components;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
@@ -59,13 +58,7 @@ public abstract partial class CESharedZLevelsSystem
 
         var xform = Transform(ent);
 
-        if (xform.MapUid is not { } mapUid || !_zMapQuery.HasComp(mapUid))
-        {
-            SetActiveStatus(ent, false);
-            return;
-        }
-
-        if (!HasComp<MapGridComponent>(xform.ParentUid))
+        if (xform.ParentUid != xform.MapUid)
         {
             SetActiveStatus(ent, false);
             return;
