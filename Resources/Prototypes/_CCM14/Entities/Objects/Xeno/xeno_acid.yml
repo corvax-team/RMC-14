@@ -22,7 +22,7 @@
     extinguishAmount: 13
 
 - type: entity
-  id: CCRXenoBurrowerImpalerSpike #technically, this shi is acid
+  id: CCMXenoBurrowerImpalerSpike #technically, this shi is acid
   name: spike
   description: My leg!
   components:
@@ -38,7 +38,7 @@
     emote: null
     damage:
       types:
-        Piercing: 20
+        Piercing: 25
     whitelist:
       components:
       - Marine
