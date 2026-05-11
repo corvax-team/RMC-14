@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites by @aleksh and @.sigma_draconis.",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "alive_burrowed",
+      "directions": 4
+    },
+    {
+      "name": "acid2-weak",
+      "delays": [
+        [
+          0.05,
+          0.05,
+          0.05,
+          0.4,
+          0.2,
+          0.15,
+          0.5
+        ]
+      ]
+    }
+  ]
+}
