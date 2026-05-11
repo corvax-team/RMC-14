@@ -42,11 +42,12 @@
     animation: CCMWeaponArcXenoPunch
     damage:
       groups:
-        Brute: 28
+        Brute: 25
   - type: Tackle
     max: 6
     min: 3
   - type: XenoRage
+    rageDecayTime: 8
     maxRage: 10
     armorPerRage: 0
     speedBuffPerRage: 0
@@ -54,8 +55,8 @@
     healAmount: 0
   - type: XenoEviscerate
     stunTime: 0.25
-    lifeStealPerMarine: 175
-    maxLifeSteal: 175
+    lifeStealPerMarine: 250
+    maxLifeSteal: 500
     rageHitSound: 
       collection: CCMBoxingBell
     damageAtRageLevels:
@@ -159,7 +160,6 @@
     removeOnHit: true
     preventTackle: true
     resetMeleeCooldown: true
-    auraColor: "#9ACD32FF"
     damageMult: 1
     speed: 1.2
   - type: CMArmor
@@ -174,6 +174,10 @@
     - CMXenoQueen
     strains: []
   - type: XenoHidden
+  - type: XenoRegen
+    critHealMultiplier: 0.5  # 5% increased regeneration
+    standHealingMultiplier: 0.8
+    restHealMultiplier: 1.777
 
 - type: entity
   parent: CMXenoSentinel
@@ -231,7 +235,7 @@
   suffix: CCM-Sniper
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Sentinel/ranger.rsi
+    sprite: _CCM14/Mobs/Xenonids/Spitter/sniper.rsi
   - type: XenoStrain
     name: ccm-xeno-sniper-name
     description: ccm-xeno-sniper-description
@@ -282,9 +286,9 @@
     unlockAt: 540 # 9 minutes
   - type: XenoToggleSpit
     neuroCost: 84
-    neuroProto: CCRXenoSpitProjectileSniperPain
+    neuroProto: CCMXenoSpitProjectileSniperPain
     acidCost: 70
-    acidProto: CCRXenoSpitProjectileSniper
+    acidProto: CCMXenoSpitProjectileSniper
   - type: XenoSprayAcid
     barricadeDamage:
       types:
@@ -294,7 +298,7 @@
     plasmaCost: 105
     maxDeviation: 12
     maxProjectiles: 3
-    projectileId: CCRXenoSpitProjectileSniperStructural
+    projectileId: CCMXenoSpitProjectileSniperStructural
   - type: XenoZoom
     zoom: 0.8, 0.8
     offsetLength: 3
@@ -311,7 +315,7 @@
   suffix: CCM-Impaler
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Sentinel/ranger.rsi
+    sprite: _CCM14/Mobs/Xenonids/Burrower/impaler.rsi
   - type: XenoStrain
     name: ccm-xeno-impaler-name
     description: ccm-xeno-impaler-description
@@ -348,12 +352,13 @@
     unburrowStunLength: 2
     minimumTunnelTime: 0.3
   - type: XenoSprayAcid
-    acid: CCRXenoBurrowerImpalerSpike
-    doAfter: 1.111
+    acid: CCMXenoBurrowerImpalerSpike
+    doAfter: 0.8
     barricadeDuration: 0
     barricadeDamage:
       types:
         Heat: 0
+
 # Burrower Jaunt
 - type: entity
   name: Burrower
@@ -365,9 +370,8 @@
   suffix: CCM-Impaler-Burrowed
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Burrower/burrower.rsi
-    state: alive
-    overrideContainerOcclusion: true
+    sprite: _CCM14/Objects/Xeno/xeno.rsi
+    state: alive_burrowed
   - type: MovementSpeedModifier
     baseSprintSpeed: 5
     baseWalkSpeed: 2.5
