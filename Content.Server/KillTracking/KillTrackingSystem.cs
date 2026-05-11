@@ -25,6 +25,12 @@ public sealed class KillTrackingSystem : EntitySystem
         SubscribeLocalEvent<KillTrackerComponent, MobStateChangedEvent>(OnMobStateChanged);
     }
 
+    public void EnsureKillTracker(EntityUid uid, MobState killState)
+    {
+        var tracker = EnsureComp<KillTrackerComponent>(uid);
+        tracker.KillState = killState;
+    }
+
     private void OnDamageChanged(EntityUid uid, KillTrackerComponent component, DamageChangedEvent args)
     {
         if (args.DamageDelta == null)

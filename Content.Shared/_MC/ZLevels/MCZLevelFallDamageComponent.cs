@@ -6,6 +6,9 @@ namespace Content.Shared._MC.ZLevels;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class MCZLevelFallDamageComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public bool Enabled = true;
+
     [DataField(required: true), AutoNetworkedField]
     public DamageSpecifier Damage = new();
 }

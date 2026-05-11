@@ -43,6 +43,10 @@
     unlockAt: 0
     emoteSounds: Larva
     muteOnSpawn: true
+  - type: MCZLevelFallDamage
+    enabled: false
+    damage:
+      types: {}
   - type: XenoPlasma
     plasma: 0
     maxPlasma: 0

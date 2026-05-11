@@ -114,6 +114,13 @@ internal sealed partial class ChatManager
             return false;
         }
 
+        if (!string.IsNullOrWhiteSpace(message.TranslatedMessage))
+        {
+            Logger.InfoS("chat.translate",
+                $"Skip chat translation for {client}: message is already localized/translated. Message='{message.Message}'");
+            return false;
+        }
+
         if (ShouldSkipAdministrativeSystemTranslation(message))
         {
             Logger.InfoS("chat.translate",

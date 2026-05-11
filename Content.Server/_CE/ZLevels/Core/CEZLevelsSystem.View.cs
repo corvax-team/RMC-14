@@ -167,6 +167,14 @@ public sealed partial class CEZLevelsSystem
         var worldPos = _transform.GetWorldPosition(xform);
         var chunk = (worldPos / ViewerChunkSize).Floored();
 
+        RefreshViewerVisibilityCache(ent, force);
+        if (ent.Comp.LookUp && ent.Comp.CachedOpaqueAbove)
+        {
+            ent.Comp.LookUp = false;
+            DirtyField(ent, ent.Comp, nameof(CEZLevelViewerComponent.LookUp));
+            force = true;
+        }
+
         if (!force &&
             ent.Comp.CachedTile == tile &&
             ent.Comp.CachedChunk == chunk)

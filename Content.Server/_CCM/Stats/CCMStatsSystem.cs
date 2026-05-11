@@ -51,6 +51,7 @@ public sealed class CCMStatsSystem : EntitySystem
     [Dependency] private readonly CCMRoundWinTrackerSystem _campaignScore = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly KillTrackingSystem _killTracking = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
     [Dependency] private readonly GameTicker _ticker = default!;
 
@@ -193,9 +194,15 @@ public sealed class CCMStatsSystem : EntitySystem
             return;
 
         if (HasComp<MarineComponent>(ev.Mob))
+        {
+            EnsureStatsKillTracker(ev.Mob);
             MarkParticipation(ev.Player.UserId, CCMStatsSide.Marines, !ev.LateJoin);
+        }
         else if (HasComp<XenoComponent>(ev.Mob))
+        {
+            EnsureStatsKillTracker(ev.Mob);
             MarkParticipation(ev.Player.UserId, CCMStatsSide.Xenos, !ev.LateJoin);
+        }
 
         StartActiveParticipation(ev.Player.UserId, ev.Mob);
     }
@@ -207,7 +214,10 @@ public sealed class CCMStatsSystem : EntitySystem
 
         var side = GetSide(ev.Entity);
         if (side != CCMStatsSide.None)
+        {
+            EnsureStatsKillTracker(ev.Entity);
             MarkParticipation(ev.Player.UserId, side, roundStart: false);
+        }
 
         StartActiveParticipation(ev.Player.UserId, ev.Entity);
     }
@@ -314,15 +324,27 @@ public sealed class CCMStatsSystem : EntitySystem
         if (args.Primary is not KillPlayerSource player || args.Suicide)
             return;
 
-        var stats = GetOrCreateRoundStats(player.PlayerId);
+        var killerSide = GetPlayerCurrentSide(player.PlayerId);
+        if (killerSide == CCMStatsSide.None)
+            return;
 
         if (HasComp<XenoComponent>(args.Entity))
         {
+            if (killerSide != CCMStatsSide.Marines)
+                return;
+
+            var stats = GetOrCreateRoundStats(player.PlayerId);
+            MarkParticipation(player.PlayerId, killerSide, roundStart: false);
             stats.MarineKills += 1;
             stats.MarineImpact += KillImpactPoints;
         }
         else if (HasComp<MarineComponent>(args.Entity))
         {
+            if (killerSide != CCMStatsSide.Xenos)
+                return;
+
+            var stats = GetOrCreateRoundStats(player.PlayerId);
+            MarkParticipation(player.PlayerId, killerSide, roundStart: false);
             stats.XenoKills += 1;
             stats.XenoImpact += KillImpactPoints;
         }
@@ -884,6 +906,27 @@ public sealed class CCMStatsSystem : EntitySystem
             return CCMStatsSide.Marines;
         if (HasComp<XenoComponent>(uid))
             return CCMStatsSide.Xenos;
+        return CCMStatsSide.None;
+    }
+
+    private void EnsureStatsKillTracker(EntityUid uid)
+    {
+        _killTracking.EnsureKillTracker(uid, MobState.Dead);
+    }
+
+    private CCMStatsSide GetPlayerCurrentSide(NetUserId player)
+    {
+        if (_players.TryGetSessionById(player, out var session) &&
+            session.AttachedEntity is { } attached)
+        {
+            var side = GetSide(attached);
+            if (side != CCMStatsSide.None)
+                return side;
+        }
+
+        if (_roundStats.TryGetValue(player, out var stats))
+            return stats.ActiveSide;
+
         return CCMStatsSide.None;
     }
 

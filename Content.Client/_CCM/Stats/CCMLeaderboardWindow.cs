@@ -49,6 +49,16 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
     private int _page = 1;
     private int _totalPages = 1;
 
+    private static readonly CCMLeaderboardCategory[] LeaderboardCategories =
+    [
+        CCMLeaderboardCategory.OverallVictoryPoints,
+        CCMLeaderboardCategory.OverallKills,
+        CCMLeaderboardCategory.MarineVictoryPoints,
+        CCMLeaderboardCategory.MarineImpact,
+        CCMLeaderboardCategory.XenoVictoryPoints,
+        CCMLeaderboardCategory.XenoImpact,
+    ];
+
     public CCMLeaderboardWindow()
     {
         IoCManager.InjectDependencies(this);
@@ -97,9 +107,9 @@ public sealed partial class CCMLeaderboardWindow : DefaultCMWindow
             MinSize = new Vector2(0, 34),
         };
 
-        foreach (var category in Enum.GetValues<CCMLeaderboardCategory>())
+        foreach (var category in LeaderboardCategories)
         {
-            _categoryButton.AddItem(Loc.GetString(GetCategoryLocKey(category)));
+            _categoryButton.AddItem(Loc.GetString(GetCategoryLocKey(category)), (int) category);
         }
 
         _categoryButton.SelectId((int) _category);

@@ -3,11 +3,13 @@ using Content.Server.GameTicking;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Dataset;
+using Content.Shared.Localizations;
 using Content.Shared.Tips;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -28,6 +30,8 @@ public sealed class TipsSystem : EntitySystem
     [Dependency] private readonly GameTicker _ticker = default!;
     [Dependency] private readonly IConsoleHost _conHost = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
+    [Dependency] private readonly ContentLocalizationManager _contentLoc = default!;
 
     private bool _tipsEnabled;
     private float _tipTimeOutOfRound;
@@ -207,17 +211,66 @@ public sealed class TipsSystem : EntitySystem
             return;
 
         var tip = _random.Pick(tips.Values);
-        var msg = Loc.GetString("tips-system-chat-message-wrap", ("tip", Loc.GetString(tip)));
 
         if (_random.Prob(_tipTippyChance))
         {
-            var ev = new TippyEvent(msg);
-            ev.SpeakTime = GetSpeechTime(msg);
-            RaiseNetworkEvent(ev);
+            foreach (var session in _playerManager.Sessions)
+            {
+                var msg = GetLocalizedTipMessage(session.Channel, tip);
+                var ev = new TippyEvent(msg)
+                {
+                    SpeakTime = GetSpeechTime(msg),
+                };
+
+                RaiseNetworkEvent(ev, session);
+            }
         } else
         {
-            _chat.ChatMessageToManyFiltered(Filter.Broadcast(), ChatChannel.OOC, tip, msg,
-            EntityUid.Invalid, false, false, Color.MediumPurple);
+            foreach (var session in _playerManager.Sessions)
+            {
+                var msg = GetLocalizedTipMessage(session.Channel, tip);
+                _chat.ChatMessageToOne(
+                    new ChatMessage(
+                        ChatChannel.OOC,
+                        msg,
+                        msg,
+                        NetEntity.Invalid,
+                        null,
+                        false,
+                        Color.MediumPurple,
+                        translatedMessage: msg),
+                    session.Channel);
+            }
+        }
+    }
+
+    private string GetLocalizedTipMessage(INetChannel channel, string tip)
+    {
+        return WithChannelCulture(channel, () =>
+            Loc.GetString("tips-system-chat-message-wrap", ("tip", Loc.GetString(tip))));
+    }
+
+    private string GetClientLocaleCode(INetChannel channel)
+    {
+        var locale = _netConfigManager.GetClientCVar(channel, CCVars.ClientLocale);
+        return string.IsNullOrWhiteSpace(locale) ? "ru-RU" : locale;
+    }
+
+    private T WithChannelCulture<T>(INetChannel channel, Func<T> action)
+    {
+        var locale = GetClientLocaleCode(channel);
+        var oldCulture = _contentLoc.CurrentCultureCode;
+        if (oldCulture.Equals(locale, StringComparison.OrdinalIgnoreCase))
+            return action();
+
+        _contentLoc.SetCulture(locale);
+        try
+        {
+            return action();
+        }
+        finally
+        {
+            _contentLoc.SetCulture(oldCulture);
         }
     }
 

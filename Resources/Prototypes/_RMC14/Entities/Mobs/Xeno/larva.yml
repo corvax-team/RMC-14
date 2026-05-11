@@ -33,6 +33,10 @@
     tier: 0
     unlockAt: 0
     emoteSounds: Larva
+  - type: MCZLevelFallDamage
+    enabled: false
+    damage:
+      types: {}
   - type: XenoRegen
     healOffWeeds: true
   - type: XenoLight

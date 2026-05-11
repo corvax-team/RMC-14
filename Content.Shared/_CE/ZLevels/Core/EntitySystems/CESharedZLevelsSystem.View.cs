@@ -74,8 +74,8 @@ public abstract partial class CESharedZLevelsSystem
         if (currentMapUid is null)
             return false;
 
-        var indices = GetViewerTilePosition(ent);
-        return HasOpaqueAbove(indices, currentMapUid.Value);
+        var worldPos = _transform.GetWorldPosition(ent);
+        return HasOpaqueAbove(worldPos, currentMapUid.Value);
     }
 
     public void RefreshViewerVisibilityCache(Entity<CEZLevelViewerComponent> ent, bool force = false)
@@ -109,31 +109,24 @@ public abstract partial class CESharedZLevelsSystem
         if (!force && ent.Comp.CachedOpaqueAboveValid && ent.Comp.CachedOpaqueAboveTile == indices)
             return;
 
+        var worldPos = _transform.GetWorldPosition(xform);
         ent.Comp.CachedOpaqueAboveTile = indices;
-        ent.Comp.CachedOpaqueAbove = HasOpaqueAbove(indices, (mapUid, zMapComp));
+        ent.Comp.CachedOpaqueAbove = HasOpaqueAbove(worldPos, (mapUid, zMapComp));
         ent.Comp.CachedOpaqueAboveValid = true;
     }
 
-    private bool HasOpaqueAbove(Vector2i indices, Entity<CEZLevelMapComponent?> currentMapUid)
+    private bool HasOpaqueAbove(Vector2 worldPos, Entity<CEZLevelMapComponent?> currentMapUid)
     {
         if (!TryMapUp(currentMapUid, out var mapAboveUid))
             return false;
 
-        var worldPos = new Vector2(indices.X + 0.5f, indices.Y + 0.5f);
         if (!TryGetZMapGrid(mapAboveUid, worldPos, out var mapAboveGridUid, out var mapAboveGrid))
             return false;
 
-        if (!_map.TryGetTileRef(mapAboveGridUid, mapAboveGrid, indices, out var tileRef))
+        if (!_map.TryGetTileRef(mapAboveGridUid, mapAboveGrid, worldPos, out var tileRef))
             return false;
 
-        var anchored = _map.GetAnchoredEntitiesEnumerator(mapAboveGridUid, mapAboveGrid, indices);
-        while (anchored.MoveNext(out var uid))
-        {
-            if (_highgroundQuery.HasComp(uid))
-                return false;
-        }
-
-        return IsZFloorTile(tileRef.Tile);
+        return IsZSupportTile(tileRef.Tile);
     }
 
     private bool HasHighGroundAt(Entity<CEZLevelMapComponent?> map, Vector2i indices)

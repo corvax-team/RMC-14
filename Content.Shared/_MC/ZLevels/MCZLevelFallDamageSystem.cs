@@ -19,6 +19,9 @@ public sealed class MCZLevelFallDamageSystem : EntitySystem
 
     private void OnHit(Entity<MCZLevelFallDamageComponent> entity, ref CEZLevelHitEvent args)
     {
+        if (!entity.Comp.Enabled)
+            return;
+
         var damage = entity.Comp.Damage * args.ImpactPower * args.ImpactPower;
 
         // _mcArmor.TryGetArmor(entity.Owner, out var soft, out var hard);
