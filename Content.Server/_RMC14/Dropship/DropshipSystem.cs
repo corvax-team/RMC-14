@@ -507,70 +507,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 _xenoAnnounce.AnnounceSameHive(user.Value, xenoText);
                 Audio.PlayPvs(dropship.LocalHijackSound, dropshipId.Value);
 
-                // Set Crashed on server-side for xeno hijack so OnFTLCompleted and
-                // the Update crash-effects loop can reliably detect it.
-                // (The shared code in OnHijackerDestinationChosenMsg also sets this,
-                // but setting it here ensures the server-side component is correct.)
-                if (!isHumanHijacker)
-                    dropship.Crashed = true;
-
-                // Store hijack info on the dropship for use when FTL completes
-                dropship.IsHumanHijack = isHumanHijacker;
-                if (isHumanHijacker && TryComp<MarineComponent>(user.Value, out var hijackerMarine) && !string.IsNullOrEmpty(hijackerMarine.Faction))
-                    dropship.HijackerFaction = hijackerMarine.Faction;
-                else if (!isHumanHijacker)
-                    dropship.HijackerFaction = null; // xeno hijack
-
-                // Determine the victim faction (the faction that owns this dropship)
-                string? victimFaction = null;
-                var navComputers = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
-                while (navComputers.MoveNext(out var navUid, out _, out var navXform))
-                {
-                    if (navXform.GridUid == dropshipId.Value &&
-                        TryComp<WhitelistedShuttleComponent>(navUid, out var ws) &&
-                        !string.IsNullOrEmpty(ws.Faction))
-                    {
-                        victimFaction = ws.Faction;
-                        break;
-                    }
-                }
-
-                // Fallback: try to determine faction from the hijack destination's map
-                // (for xeno hijack, the destination is ON the victim's ship)
-                if (string.IsNullOrEmpty(victimFaction))
-                {
-                    var destXform = Transform(destination);
-                    victimFaction = TryGetFactionFromMap(destXform.MapUid);
-                }
-
-                // Fallback: try from the departure location's map
-                // (for human hijack, the dropship may have departed from the victim's ship)
-                if (string.IsNullOrEmpty(victimFaction) && dropship.DepartureLocation is { } depLoc)
-                {
-                    var depXform = Transform(depLoc);
-                    victimFaction = TryGetFactionFromMap(depXform.MapUid);
-                }
-
-                dropship.VictimFaction = victimFaction;
-
-                if (isHumanHijacker)
-                {
-                    // Human faction hijack announcements
-                    var marineText = Loc.GetString("rmc-announcement-dropship-hijack-human");
-                    _marineAnnounce.AnnounceARESStaging(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"), victimFaction);
-                    _marineAnnounce.AnnounceAlertLevel(RMCAlertLevels.Red, marineText);
-                }
-                else
-                {
-                    // Xeno hijack announcements
-                    var xenoText = Loc.GetString("rmc-announcement-dropship-hijack-hive");
-                    _xenoAnnounce.AnnounceSameHive(user.Value, xenoText);
-                    Audio.PlayPvs(dropship.LocalHijackSound, dropshipId.Value);
-
-                    var marineText = Loc.GetString("rmc-announcement-dropship-hijack");
-                    _marineAnnounce.AnnounceARESStaging(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"), victimFaction);
-                    _marineAnnounce.AnnounceAlertLevel(RMCAlertLevels.Red, marineText);
-                }
+                var marineText = Loc.GetString("rmc-announcement-dropship-hijack");
+                _marineAnnounce.AnnounceARESStaging(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
+                _marineAnnounce.AnnounceAlertLevel(RMCAlertLevels.Red, marineText);
 
                 var generalQuartersText = Loc.GetString("rmc-announcement-general-quarters");
                 Timer.Spawn(TimeSpan.FromSeconds(10), () =>
@@ -886,22 +825,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 dropship.AnnouncedCrash = true;
                 Dirty(uid, dropship);
 
-                // Determine victim faction for scoped announcement
-                string? crashFaction = null;
-                var navQ = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
-                while (navQ.MoveNext(out var navUid, out _, out var navXform))
-                {
-                    if (navXform.GridUid == uid &&
-                        TryComp<WhitelistedShuttleComponent>(navUid, out var ws) &&
-                        !string.IsNullOrEmpty(ws.Faction))
-                    {
-                        crashFaction = ws.Faction;
-                        break;
-                    }
-                }
-
                 var crashAnnouncement = Loc.GetString("rmc-announcement-emergency-dropship-crash");
-                _marineAnnounce.AnnounceToMarines(crashAnnouncement, dropship.CrashWarningSound, faction: crashFaction);
+                _marineAnnounce.AnnounceToMarines(crashAnnouncement, dropship.CrashWarningSound);
                 _marineAnnounce.AnnounceAlertLevel(RMCAlertLevels.Delta, crashAnnouncement);
                 continue;
             }

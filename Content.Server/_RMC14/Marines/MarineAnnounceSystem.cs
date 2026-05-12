@@ -1,8 +1,8 @@
-﻿using Content.Server._RMC14.Rules;
-using Content.Server._RMC14.Announce;
+using Content.Server._RMC14.Rules.DistressSignal;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Radio.EntitySystems;
+using Content.Server._RMC14.Announce;
 using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.Dropship;
@@ -17,9 +17,9 @@ using Content.Shared.Ghost;
 using Content.Shared.Radio;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
-using Robust.Shared.Maths;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Maths;
 
 namespace Content.Server._RMC14.Marines;
 
@@ -81,9 +81,6 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             return;
         }
 
-        if (!string.IsNullOrWhiteSpace(computer.Comp.Faction))
-            _dropship.SetFactionController(lz.Value, computer.Comp.Faction!.ToLowerInvariant());
-
         _dropship.TryDesignatePrimaryLZ(user, lz.Value);
     }
 
@@ -95,13 +92,6 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 
         foreach (var (id, metaData) in _dropship.GetPrimaryLZCandidates())
         {
-            if (!string.IsNullOrWhiteSpace(computer.Comp.Faction) &&
-                EntityManager.TryGetComponent<DropshipDestinationComponent>(id, out var dest) &&
-                !string.IsNullOrWhiteSpace(dest.FactionController))
-            {
-                continue;
-            }
-
             landingZones.Add(new LandingZone(GetNetEntity(id), metaData.EntityName));
         }
 
@@ -115,20 +105,14 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         string message,
         SoundSpecifier? sound = null,
         Filter? filter = null,
-        bool excludeSurvivors = true)
+        bool excludeSurvivors = true,
+        string? faction = null)
     {
-        if (filter == null)
-        {
-            var targetFaction = string.IsNullOrWhiteSpace(faction) ? "govfor" : faction.ToLowerInvariant();
-            filter = Filter.Empty().AddWhereAttachedEntity(e =>
-            {
-                if (TryComp<MarineComponent>(e, out var marine))
-                    return !string.IsNullOrWhiteSpace(marine.Faction) &&
-                           string.Equals(marine.Faction, targetFaction, StringComparison.OrdinalIgnoreCase);
-
-                return HasComp<GhostComponent>(e);
-            });
-        }
+        filter ??= Filter.Empty()
+            .AddWhereAttachedEntity(e =>
+                HasComp<MarineComponent>(e) ||
+                HasComp<GhostComponent>(e)
+            );
 
         // TODO RMC14
         if (excludeSurvivors)
@@ -168,11 +152,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 
         message = FormatARESStaging(announcement, message);
 
-        var filter = string.IsNullOrWhiteSpace(faction)
-            ? BuildAllMarineAnnouncementFilter()
-            : BuildMarineAnnouncementFilter(faction);
-
-        AnnounceToMarines(message, sound, filter);
+        AnnounceToMarines(message, sound);
         _adminLogs.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(source):player} ARES announced message: {message}");
     }
 
@@ -205,8 +185,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 
         _audio.PlayEntity(sound, receiver, receiver, AudioParams.Default.WithVolume(-2f));
     }
-
-    protected override void AnnounceSignedUi(
+        protected override void AnnounceSignedUi(
         EntityUid sender,
         string message,
         string author,
@@ -227,33 +206,13 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         };
 
         var uiFilter = filter == null
-            ? BuildMarineAnnouncementFilter(faction)
+            ? Filter.Empty().AddWhereAttachedEntity(e => HasComp<MarineComponent>(e) || HasComp<GhostComponent>(e))
             : Filter.Empty().AddPlayers(filter.Recipients);
 
         if (excludeSurvivors)
             uiFilter.RemoveWhereAttachedEntity(HasComp<RMCSurvivorComponent>);
 
         _generalAnnounce.AnnounceAdvanced(request, uiFilter);
-    }
-
-    private Filter BuildMarineAnnouncementFilter(string? faction)
-    {
-        var targetFaction = string.IsNullOrWhiteSpace(faction) ? "govfor" : faction.ToLowerInvariant();
-        return Filter.Empty().AddWhereAttachedEntity(e =>
-        {
-            if (TryComp<MarineComponent>(e, out var marine))
-                return !string.IsNullOrWhiteSpace(marine.Faction) &&
-                       string.Equals(marine.Faction, targetFaction, StringComparison.OrdinalIgnoreCase);
-
-            return HasComp<GhostComponent>(e);
-        });
-    }
-
-    private Filter BuildAllMarineAnnouncementFilter()
-    {
-        return Filter.Empty().AddWhereAttachedEntity(e =>
-            HasComp<MarineComponent>(e) ||
-            HasComp<GhostComponent>(e));
     }
 
     public override void AnnounceOverwatchSquad(

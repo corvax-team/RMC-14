@@ -232,7 +232,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         string message,
         SoundSpecifier? sound = null,
         Filter? filter = null,
-        bool excludeSurvivors = true)
+        bool excludeSurvivors = true,
+        string? faction = null)
     {
     }
 
@@ -266,7 +267,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         string? name = null,
         SoundSpecifier? sound = null,
         Filter? filter = null,
-        bool excludeSurvivors = true)
+        bool excludeSurvivors = true,
+        string? faction = null)
     {
         if (_net.IsClient)
             return;
