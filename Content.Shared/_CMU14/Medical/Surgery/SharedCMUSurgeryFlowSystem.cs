@@ -820,7 +820,7 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
     private bool TryResolveReattachNextStep(EntityUid patient, EntityUid targetPart, string surgeryId, out CMUResolvedStep resolved)
     {
         resolved = default!;
-        if (surgeryId != "CMUSurgeryReattachLimb" || targetPart != patient)
+        if (surgeryId != "CMUSurgeryReattachLimb" || targetPart == default)
             return false;
 
         if (HasComp<CMUReattachCompleteComponent>(patient))
