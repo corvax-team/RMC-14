@@ -366,12 +366,13 @@
   parent: 
   - BaseMob
   - RMCXenoMobCollision
+  - CMXenoBurrower
   id: CCMBurrowerBurrowedJaunt
   suffix: CCM-Impaler-Burrowed
   components:
   - type: Sprite
-    sprite: _CCM14/Objects/Xeno/xeno.rsi
-    state: alive_burrowed
+    sprite: _CCM14/Objects/Xeno/xeno_64x64.rsi
+    state: alive
   - type: MovementSpeedModifier
     baseSprintSpeed: 5
     baseWalkSpeed: 2.5
@@ -386,6 +387,8 @@
       components:
       - Marine
   - type: InputMover
+  - type: XenoHidden
+  - type: AutoAssignHive
   - type: Fixtures
     fixtures:
       fix1:
@@ -399,4 +402,29 @@
         - BarbedBarricade
         layer:
         - Opaque
+  - type: Xeno
+    role: CMXenoBurrower
+    actionIds:
+    - CCRActionXenoBurrowerImpale
+    tier: 2
+    hudOffset: -0.15,0.56
+    unlockAt: 420 # 7 minutes
+  - type: XenoSprayAcid
+    sound: /Audio/_RMC14/Xeno/burrowing_b.ogg
+    acid: CCMXenoBurrowerImpalerSpike
+    doAfter: 0.2
+    barricadeDuration: 0
+    barricadeDamage:
+      types:
+        Heat: 0
+  - type: MeleeWeapon
+    range: 0
+    damage:
+      groups:
+        Brute: 0
+  - type: MobThresholds #Do not be killed
+    thresholds:
+      0: Alive
+      9999: Critical
+      10000: Dead
 # // CCM Xeno Strain - Burrower Impaler
