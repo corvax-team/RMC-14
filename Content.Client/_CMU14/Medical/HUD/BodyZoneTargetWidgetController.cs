@@ -91,14 +91,13 @@ public sealed class BodyZoneTargetWidgetController :
         var parent = viewport?.Parent ?? (Control?)screen ?? UIManager.RootControl;
         parent.AddChild(widget);
 
-        const float margin = 8f;
-        const float rightMargin = margin * 2f;
+        const float margin = 48f;
         var width = widget.MinSize.X;
         var height = widget.MinSize.Y;
 
         LayoutContainer.SetAnchorPreset(widget, LayoutContainer.LayoutPreset.BottomRight);
-        LayoutContainer.SetMarginLeft(widget, -(rightMargin + width));
-        LayoutContainer.SetMarginRight(widget, -rightMargin);
+        LayoutContainer.SetMarginLeft(widget, -(margin + width));
+        LayoutContainer.SetMarginRight(widget, -margin);
         LayoutContainer.SetMarginTop(widget, -(margin + height));
         LayoutContainer.SetMarginBottom(widget, -margin);
     }
