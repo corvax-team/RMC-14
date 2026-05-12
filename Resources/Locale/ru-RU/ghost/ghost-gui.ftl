@@ -35,3 +35,17 @@ ghost-roles-window-rules-footer = Кнопка станет доступна ч�
 ghost-return-to-body-title = Вернуться в тело
 ghost-return-to-body-text = Вас воскрешают! Вернуться в своё тело?
 ghost-roles-window-xeno-join-hint = [bold]Используйте «Войти за ксеноморфа» или найдите действия паразита слева сверху, если хотите зайти за ксенонида![/bold]
+
+ghost-target-window-search-placeholder = Поиск имени, роли, фракции
+ghost-target-window-empty = НЕТ АКТИВНЫХ ТОЧЕК ТЕЛЕПОРТАЦИИ
+ghost-target-window-no-results = НИЧЕГО НЕ НАЙДЕНО
+ghost-target-window-location-role = Точка навигации
+ghost-target-window-tracked-count = Отслеживается: { $count }
+
+ghost-roles-window-join-raffle-button-timer = Участвовать в лотерее ({ $time }сек.)
+ghost-roles-window-leave-raffle-button-timer = Покинуть лотерею ({ $time }сек.)
+ghost-roles-window-leave-raffle-button-confirm = Покинуть лотерею
+
+ghost-roles-window-no-results-label = Нет подходящих ролей призраков.
+ghost-roles-window-search-placeholder = Поиск ролей призраков
+ghost-roles-window-available-count = ДОСТУПНО: { $count }

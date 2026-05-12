@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.AlertLevel;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
@@ -18,6 +19,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Robust.Shared.Maths;
 
 namespace Content.Shared._RMC14.Marines.Announce;
 
@@ -205,6 +207,20 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
     {
     }
 
+    public virtual void AnnounceOverwatchSquad(
+        EntityUid sender,
+        string message,
+        EntityUid squad,
+        Color squadColor,
+        string squadName,
+        SoundSpecifier? sound = null)
+    {
+    }
+
+    public virtual void AnnounceAlertLevel(RMCAlertLevels level, string message, Filter? filter = null)
+    {
+    }
+
     /// <summary>
     ///     Dispatches already wrapped announcement to Marines.
     /// </summary>
@@ -216,7 +232,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         string message,
         SoundSpecifier? sound = null,
         Filter? filter = null,
-        bool excludeSurvivors = true)
+        bool excludeSurvivors = true,
+        string? faction = null)
     {
     }
 
@@ -250,7 +267,8 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         string? name = null,
         SoundSpecifier? sound = null,
         Filter? filter = null,
-        bool excludeSurvivors = true)
+        bool excludeSurvivors = true,
+        string? faction = null)
     {
         if (_net.IsClient)
             return;
@@ -259,8 +277,21 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         name ??= _rankSystem.GetSpeakerFullRankName(sender) ?? Name(sender);
         var wrappedMessage = Loc.GetString("rmc-announcement-message-signed", ("author", author), ("message", message), ("name", name));
 
-        AnnounceToMarines(wrappedMessage, sound, filter, excludeSurvivors);
+        AnnounceToMarines(wrappedMessage, sound, filter, excludeSurvivors, faction);
+        AnnounceSignedUi(sender, message, author, name, sound, filter, excludeSurvivors, faction);
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(sender):source} marine announced message: {message}");
+    }
+
+    protected virtual void AnnounceSignedUi(
+        EntityUid sender,
+        string message,
+        string author,
+        string name,
+        SoundSpecifier? sound,
+        Filter? filter,
+        bool excludeSurvivors,
+        string? faction)
+    {
     }
 
     public string FormatHighCommand(string? author, string message)
