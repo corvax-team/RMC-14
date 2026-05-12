@@ -371,11 +371,12 @@
   suffix: CCM-Impaler-Burrowed
   components:
   - type: Sprite
+    offset: 0,0.5
     sprite: _CCM14/Objects/Xeno/xeno_64x64.rsi
     state: alive
   - type: MovementSpeedModifier
-    baseSprintSpeed: 5
-    baseWalkSpeed: 2.5
+    baseSprintSpeed: 3.7
+    baseWalkSpeed: 1.9
   - type: DamageOnCollide
     paralyze: 2
     canRehit: false
@@ -383,9 +384,11 @@
     damage:
       types:
         Blunt: 30
+        Structural: 100
     whitelist:
       components:
       - Marine
+      - Vehicle
   - type: InputMover
   - type: XenoHidden
   - type: AutoAssignHive
@@ -394,7 +397,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.35
+          radius: 0.5
         density: 10
         mask:
         - MobMask
@@ -407,7 +410,7 @@
     actionIds:
     - CCRActionXenoBurrowerImpale
     tier: 2
-    hudOffset: -0.15,0.56
+    hudOffset: -0,0.2
     unlockAt: 420 # 7 minutes
   - type: XenoSprayAcid
     sound: /Audio/_RMC14/Xeno/burrowing_b.ogg
@@ -422,9 +425,25 @@
     damage:
       groups:
         Brute: 0
-  - type: MobThresholds #Do not be killed
-    thresholds:
-      0: Alive
-      9999: Critical
-      10000: Dead
+  - type: RemoveComponents
+    components:
+    - type: RMCXenoDamageVisuals
+      prefix: burrower
+    - type: XenoEvolution
+      strains: # CCM Change
+      - CCRXenoBurrowerImpaler
+# Polymorph
+- type: polymorph
+  id: CCMJauntBurrow
+  configuration:
+    entity: CCMBurrowerBurrowedJaunt
+    transferName: true
+    inventory: None
+    forced: true
+    revertOnDeath: true
+    revertOnCrit: true
+    allowRepeatedMorphs: false
+    polymorphSound: /Audio/_RMC14/Xeno/burrowing_b.ogg
+    exitPolymorphSound: /Audio/_RMC14/Xeno/burrowoff.ogg
+    duration: 5
 # // CCM Xeno Strain - Burrower Impaler
