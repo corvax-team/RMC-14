@@ -1,14 +1,17 @@
-<ccm:DefaultCMWindow xmlns:ccm="clr-namespace:Content.Client._CCM.UserInterface.Controls" xmlns="https://spacestation14.io"
-            Title="{Loc 'ghost-roles-window-title'}"
-            MinSize="490 400"
-            SetSize="490 500">
-    <BoxContainer Orientation="Vertical">
-        <RichTextLabel Text="{Loc 'ghost-roles-window-xeno-join-hint'}" />
-        <Label Name="NoRolesMessage"
-               Text="{Loc 'ghost-roles-window-no-roles-available-label'}"
-               VerticalAlignment="Top" />
-        <ScrollContainer VerticalExpand="True"
-                         HScrollEnabled="False">
+<DefaultWindow xmlns="https://spacestation14.io"
+               xmlns:ghost="clr-namespace:Content.Client.UserInterface.Systems.Ghost.Controls"
+               xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+               Title="{Loc 'ghost-roles-window-title'}"
+               MinSize="620 520"
+               SetSize="620 520">
+    <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#080D12" BorderColor="#1F3442" BorderThickness="1" />
+        </PanelContainer.PanelOverride>
+        <ghost:AspectRatioContainer Ratio="1.1923077"
+                                    HorizontalExpand="True"
+                                    VerticalExpand="True"
+                                    Margin="8">
             <BoxContainer Orientation="Vertical"
                           HorizontalExpand="True"
                           VerticalExpand="True"
@@ -33,7 +36,8 @@
                     <PanelContainer.PanelOverride>
                         <graphics:StyleBoxFlat BackgroundColor="#0B131A" BorderColor="#1E3341" BorderThickness="1" />
                     </PanelContainer.PanelOverride>
-                    <ScrollContainer VerticalExpand="True"
+                    <ScrollContainer Name="RoleScroll"
+                                     VerticalExpand="True"
                                      HorizontalExpand="True"
                                      HScrollEnabled="False">
                         <BoxContainer Orientation="Vertical"
@@ -51,7 +55,6 @@
                        VerticalAlignment="Center"
                        Visible="False" />
             </BoxContainer>
-        </ScrollContainer>
-    </BoxContainer>
-</ccm:DefaultCMWindow>
-
+        </ghost:AspectRatioContainer>
+    </PanelContainer>
+</DefaultWindow>
