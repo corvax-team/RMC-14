@@ -19,6 +19,8 @@
         type: CMSurgeryBui
       enum.CMUSurgeryUIKey.Key:
         type: CMUSurgeryBui
+      enum.TacticalMapUserUi.Key:
+        type: TacticalMapUserBui
   - type: HumanoidAppearance
     species: Felinid
     hideLayersOnEquip:

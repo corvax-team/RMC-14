@@ -148,7 +148,7 @@ public abstract partial class CESharedZLevelsSystem
         return false;
     }
 
-    private Vector2i GetViewerTilePosition(EntityUid ent)
+    protected Vector2i GetViewerTilePosition(EntityUid ent)
     {
         var xform = Transform(ent);
         var worldPos = _transform.GetWorldPosition(xform);

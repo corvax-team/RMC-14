@@ -41,3 +41,5 @@
         type: BodyPartPickerBui
       enum.CMUSurgeryUIKey.Key:
         type: CMUSurgeryBui
+      enum.TacticalMapUserUi.Key:
+        type: TacticalMapUserBui

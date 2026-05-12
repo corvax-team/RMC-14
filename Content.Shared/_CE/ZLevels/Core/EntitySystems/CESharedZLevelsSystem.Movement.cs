@@ -25,7 +25,7 @@ public abstract partial class CESharedZLevelsSystem
     private const float ZVelocityLimit = 20.0f;
     private const int MaxStepsPerFrame = 10;
     private const float HighGroundTransitionEdge = 0.6f;
-    private const int HighGroundFallImpactSafeTileRadius = 1;
+    private const int HighGroundFallImpactSafeTileRadius = 2;
     /// <summary>
     /// The minimum speed required to trigger LandEvent events.
     /// </summary>

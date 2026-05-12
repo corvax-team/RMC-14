@@ -147,7 +147,7 @@ namespace Content.Client.Verbs.UI
 
             foreach (var cat in ExtraCategories)
             {
-                extras.Add(cat.Text);
+                extras.Add(GetCategoryKey(cat));
             }
 
             foreach (var verb in CurrentVerbs)
@@ -158,13 +158,13 @@ namespace Content.Client.Verbs.UI
                     _context.AddElement(popup, element);
                 }
                 // Add the category if it's not an extra (this is to avoid shuffling if we're filling from server verbs response).
-                else if (!extras.Contains(verb.Category.Text) && listedCategories.Add(verb.Category.Text))
+                else if (!extras.Contains(GetCategoryKey(verb.Category)) && listedCategories.Add(GetCategoryKey(verb.Category)))
                     AddVerbCategory(verb.Category, popup);
             }
 
             foreach (var category in ExtraCategories)
             {
-                if (listedCategories.Add(category.Text))
+                if (listedCategories.Add(GetCategoryKey(category)))
                     AddVerbCategory(category, popup);
             }
 
@@ -181,7 +181,7 @@ namespace Content.Client.Verbs.UI
             var drawIcons = false;
             foreach (var verb in CurrentVerbs)
             {
-                if (verb.Category?.Text == category.Text)
+                if (verb.Category != null && GetCategoryKey(verb.Category) == GetCategoryKey(category))
                 {
                     verbsInCategory.Add(verb);
                     drawIcons = drawIcons || verb.Icon != null || verb.IconEntity != null;
@@ -245,7 +245,7 @@ namespace Content.Client.Verbs.UI
                     _verbDisplayMessage[serverVerb] = localVerb.Message ?? localVerb.Text;
 
                     if (serverVerb.Category != null && localVerb.Category != null)
-                        _categoryDisplayText[serverVerb.Category.Text] = localVerb.Category.Text;
+                        _categoryDisplayText[GetCategoryKey(serverVerb.Category)] = GetCategoryDisplayText(localVerb.Category);
                 }
 
                 merged.Add(serverVerb);
@@ -365,9 +365,14 @@ namespace Content.Client.Verbs.UI
 
         private string GetCategoryDisplayText(VerbCategory category)
         {
-            return _categoryDisplayText.TryGetValue(category.Text, out var text)
+            return _categoryDisplayText.TryGetValue(GetCategoryKey(category), out var text)
                 ? text
-                : category.Text;
+                : Loc.GetString(category.TextKey);
+        }
+
+        private static string GetCategoryKey(VerbCategory category)
+        {
+            return category.TextKey;
         }
 
         private static string GetVerbMatchKey(Verb verb)

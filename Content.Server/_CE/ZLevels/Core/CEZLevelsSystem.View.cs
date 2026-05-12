@@ -163,7 +163,7 @@ public sealed partial class CEZLevelsSystem
         }
 
         var map = (mapUid, zMapComp);
-        var tile = _transform.GetGridOrMapTilePosition(ent);
+        var tile = GetViewerTilePosition(ent);
         var worldPos = _transform.GetWorldPosition(xform);
         var chunk = (worldPos / ViewerChunkSize).Floored();
 

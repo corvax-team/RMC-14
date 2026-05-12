@@ -125,11 +125,11 @@ namespace Content.Client.RoundEnd
                     roundEndSummaryContainer.AddChild(BuildMvpBlock(roundStats.XenoMvp));
             }
 
-            if (sponsorCredits.Count > 0)
-                roundEndSummaryContainer.AddChild(BuildSponsorCreditsBlock(sponsorCredits));
-
             roundEndSummaryContainerScrollbox.AddChild(roundEndSummaryContainer);
             roundEndSummaryTab.AddChild(roundEndSummaryContainerScrollbox);
+
+            if (sponsorCredits.Count > 0)
+                roundEndSummaryTab.AddChild(BuildSponsorCreditsBlock(sponsorCredits));
 
             return roundEndSummaryTab;
         }
@@ -866,7 +866,7 @@ namespace Content.Client.RoundEnd
         {
             var panel = new PanelContainer
             {
-                Margin = new Thickness(0, 12, 0, 0),
+                Margin = new Thickness(10, 0, 10, 10),
                 HorizontalExpand = true,
                 PanelOverride = new StyleBoxFlat
                 {
@@ -886,6 +886,26 @@ namespace Content.Client.RoundEnd
                 SeparationOverride = 8,
                 HorizontalExpand = true,
             };
+
+            var headerAccent = GetPrimaryAccentColor();
+            root.AddChild(new Label
+            {
+                Text = Loc.GetString("ccm-sponsorship-endgame-header"),
+                FontColorOverride = headerAccent,
+                FontOverride = _mvpTitleFont,
+                HorizontalExpand = true,
+            });
+
+            root.AddChild(new PanelContainer
+            {
+                MinSize = new Vector2(0, 1),
+                MaxSize = new Vector2(float.MaxValue, 1),
+                HorizontalExpand = true,
+                PanelOverride = new StyleBoxFlat
+                {
+                    BackgroundColor = headerAccent.WithAlpha(0.45f),
+                },
+            });
 
             AddSponsorTierSection(root, sponsors, CCMSponsorshipTier.SponsorIII);
             AddSponsorTierSection(root, sponsors, CCMSponsorshipTier.SponsorII);
@@ -939,8 +959,8 @@ namespace Content.Client.RoundEnd
             var tierOneTitle = Loc.GetString("ccm-sponsorship-tier-1-title");
             var tierTwoTitle = Loc.GetString("ccm-sponsorship-tier-2-title");
             var tierThreeTitle = Loc.GetString("ccm-sponsorship-tier-3-title");
-            var sponsorRegex = new Regex(@"\[color=[^\]]+\](?<ckey>[^\[]+)\[/color\]\s+\[color=[^\]]+\]\((?<tier>[^)]+)\)\[/color\]",
-                RegexOptions.Compiled);
+            var sponsorLineRegex = new Regex(@"^(?<ckey>.+?)\s+\((?<tier>[^)]+)\)$",
+                RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
             var lines = roundEnd.Split('\n').ToList();
             var cleanedLines = new List<string>();
@@ -949,8 +969,9 @@ namespace Content.Client.RoundEnd
             foreach (var rawLine in lines)
             {
                 var line = rawLine.TrimEnd();
+                var plainLine = StripMarkup(line).Trim();
 
-                if (line.Contains(sponsorHeader))
+                if (plainLine.Equals(sponsorHeader, StringComparison.CurrentCultureIgnoreCase))
                 {
                     inSponsorBlock = true;
                     continue;
@@ -958,7 +979,7 @@ namespace Content.Client.RoundEnd
 
                 if (inSponsorBlock)
                 {
-                    var match = sponsorRegex.Match(line);
+                    var match = sponsorLineRegex.Match(plainLine);
                     if (match.Success)
                     {
                         var ckey = match.Groups["ckey"].Value.Trim();
@@ -982,6 +1003,11 @@ namespace Content.Client.RoundEnd
 
             cleanedRoundEnd = string.Join('\n', cleanedLines.Where(line => !string.IsNullOrWhiteSpace(line)));
             return result;
+        }
+
+        private static string StripMarkup(string markup)
+        {
+            return Regex.Replace(markup, @"\[[^\]]+\]", string.Empty);
         }
 
         private Font GetSponsorTierFont(CCMSponsorshipTier tier)

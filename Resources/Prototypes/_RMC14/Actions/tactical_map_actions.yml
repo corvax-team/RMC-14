@@ -13,6 +13,7 @@
   id: RMCActionOpenTacticalMapMarine
   components:
   - type: Action
+    checkCanInteract: false
     icon:
       sprite: _RMC14/Structures/Machines/map_table.rsi
       state: maptable
