@@ -93,13 +93,13 @@
   description: Dig in ground and them rush your enemies with your back spikes
   components:
   - type: Action
-    useDelay: 30
+    useDelay: 25
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: tunnel
   - type: InstantAction
     event: !type:PolymorphActionEvent
-      protoId: CCMBurrowerBurrowedJaunt
+      protoId: CCMJauntBurrow
 
 - type: entity
   parent: ActionXenoSprayAcid
