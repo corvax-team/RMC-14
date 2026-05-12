@@ -28,9 +28,7 @@
   components:
   - type: Sprite
     sprite: _CCM14/Objects/Xeno/xeno.rsi
-    drawdepth: Effects
-    layers:
-    - state: acid2-weak #Shitcode my beloved
+    state: acid2-weak #Shitcode my beloved
   - type: DamageOnCollide
     paralyze: 0
     canRehit: false
