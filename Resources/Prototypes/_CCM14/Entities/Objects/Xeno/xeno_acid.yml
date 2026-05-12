@@ -32,15 +32,15 @@
   - type: DamageOnCollide
     paralyze: 0
     canRehit: false
-    armorPenetration: 10
-    emote: null
+    armorPenetration: 20
     damage:
       types:
-        Piercing: 25
+        Piercing: 30
     whitelist:
       components:
       - Marine
       - Barricade
+      - Vehicle
   - type: TimedDespawn
     lifetime: 1.4
   - type: Transform
