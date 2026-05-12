@@ -84,11 +84,8 @@
           radius: 0.2
         density: 185
         mask:
-        - MobMask
         - BarricadeImpassable
         - BarbedBarricade
-        layer:
-        - MobLayer
   - type: TimedDespawn
     lifetime: 3
 
@@ -156,10 +153,7 @@
           radius: 0.20
         density: 185
         mask:
-        - MobMask
         - BarricadeImpassable
         - BarbedBarricade
-        layer:
-        - MobLayer
   - type: TimedDespawn
     lifetime: 3
