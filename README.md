@@ -35,7 +35,9 @@ We have a [list of issues](https://github.com/corvax-team/RMC-14/issues) that ne
 ## License
 
 The vast majority of code implemented before February 1, 2026 is licensed under [MIT](https://github.com/corvax-team/RMC-14/blob/master/MIT.TXT).
+
 All code implemented after February 1, 2026 is distributed under the [GNU AGPL 3.0](https://github.com/corvax-team/RMC-14/blob/master/LICENSE) license, unless otherwise specified.
+
 Most assets are licensed under [CC-BY-SA-3.0](https://creativecommons.org/licenses/by-sa/3.0/) unless stated otherwise. Assets have their license and the copyright in the metadata file. [Example](https://github.com/space-wizards/space-station-14/blob/master/Resources/Textures/Objects/Tools/crowbar.rsi/meta.json).
 
 Note that some assets are licensed under the non-commercial [CC-BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) or similar non-commercial licenses and will need to be removed if you wish to use this project commercially.
