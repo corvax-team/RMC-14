@@ -47,24 +47,28 @@ public sealed partial class GhostGui : UIWidget
 
         var root = new BoxContainer
         {
-            Orientation = LayoutOrientation.Horizontal
+            Orientation = LayoutOrientation.Horizontal,
+            SeparationOverride = 4
         };
 
         var returnToBodyButton = new Button
         {
             Name = nameof(ReturnToBodyButton),
-            Text = Loc.GetString("ghost-gui-return-to-body-button")
+            Text = Loc.GetString("ghost-gui-return-to-body-button"),
+            StyleClasses = { StyleBase.ButtonOpenBoth }
         };
 
         var ghostWarpButton = new Button
         {
             Name = nameof(GhostWarpButton),
-            Text = Loc.GetString("ghost-gui-ghost-warp-button")
+            Text = Loc.GetString("ghost-gui-ghost-warp-button"),
+            StyleClasses = { StyleBase.ButtonOpenBoth }
         };
 
         var ghostRolesButton = new Button
         {
-            Name = nameof(GhostRolesButton)
+            Name = nameof(GhostRolesButton),
+            StyleClasses = { StyleBase.ButtonOpenBoth }
         };
 
         root.AddChild(returnToBodyButton);

@@ -102,6 +102,7 @@ public sealed class CCMLobbyWelcomeUIController : UIController, IOnStateEntered<
         {
             _config.SetCVar(RMCCVars.RMCLobbyUiStyle, "new");
             _config.SetCVar(RMCCVars.RMCUIColorTheme, "gray");
+            _config.SetCVar(RMCCVars.RMCChatTranslateEnabled, false);
             _config.SetCVar(RMCCVars.RMCLobbyPresentationDefaultsMigrated, true);
             return;
         }

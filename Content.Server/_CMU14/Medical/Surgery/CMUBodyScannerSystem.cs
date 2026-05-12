@@ -728,7 +728,7 @@ public sealed class CMUBodyScannerSystem : EntitySystem
             }
 
             if (TryComp<FractureComponent>(part, out var fracture) && fracture.Severity != FractureSeverity.None)
-                details.Add(Loc.GetString("cmu-body-scanner-part-fracture", ("severity", fracture.Severity)));
+                details.Add(Loc.GetString("cmu-body-scanner-part-fracture", ("severity", GetFractureSeverityName(fracture.Severity))));
 
             if (TryComp<InternalBleedingComponent>(part, out var bleed))
                 details.Add(Loc.GetString("cmu-body-scanner-part-bleed", ("rate", bleed.BloodlossPerSecond)));
@@ -862,6 +862,20 @@ public sealed class CMUBodyScannerSystem : EntitySystem
         return CapitalizeFirst(stage.ToString());
     }
 
+    private string GetFractureSeverityName(FractureSeverity severity)
+    {
+        var key = severity switch
+        {
+            FractureSeverity.Hairline => "cmu-medical-fracture-severity-hairline",
+            FractureSeverity.Simple => "cmu-medical-fracture-severity-simple",
+            FractureSeverity.Compound => "cmu-medical-fracture-severity-compound",
+            FractureSeverity.Comminuted => "cmu-medical-fracture-severity-comminuted",
+            _ => "cmu-medical-fracture-severity-simple",
+        };
+
+        return Loc.GetString(key);
+    }
+
     private string? OrganDisplayName(string idOrSlot)
     {
         return idOrSlot switch
@@ -949,7 +963,7 @@ public sealed class CMUBodyScannerSystem : EntitySystem
                 AddPuzzleSignal(
                     signals,
                     $"fracture:{part}",
-                    Loc.GetString("cmu-body-scanner-signal-fracture", ("part", partName), ("severity", fracture.Severity)),
+                    Loc.GetString("cmu-body-scanner-signal-fracture", ("part", partName), ("severity", GetFractureSeverityName(fracture.Severity))),
                     Loc.GetString("cmu-body-scanner-slice-detail-fracture"),
                     SliceSkeleton,
                     3);

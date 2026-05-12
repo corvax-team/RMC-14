@@ -64,8 +64,8 @@ public sealed class CMUSurgeryBui : BoundUserInterface
         _window.WorkflowStatusLabel.Text = state.InFlight is { } inFlight
             ? Loc.GetString(
                 "cmu-medical-surgery-workflow-active",
-                ("surgery", inFlight.LeafSurgeryDisplayName),
-                ("part", inFlight.PartDisplayName))
+                ("surgery", ResolveLabel(inFlight.LeafSurgeryDisplayName)),
+                ("part", ResolveLabel(inFlight.PartDisplayName)))
             : Loc.GetString("cmu-medical-surgery-workflow-ready");
 
         RefreshInProgressPanel(state);
@@ -124,7 +124,7 @@ public sealed class CMUSurgeryBui : BoundUserInterface
                 ("label", stepLabel));
 
             var tool = FormatToolCategory(armed.ToolCategory);
-            var partName = inFlight?.PartDisplayName ?? string.Empty;
+            var partName = ResolveLabel(inFlight?.PartDisplayName);
             _window.InProgressActionLabel.Text = string.IsNullOrEmpty(armed.ToolCategory)
                 ? Loc.GetString("cmu-medical-surgery-action-hint-no-tool", ("part", partName))
                 : Loc.GetString("cmu-medical-surgery-action-hint", ("part", partName), ("tool", tool));
@@ -140,9 +140,10 @@ public sealed class CMUSurgeryBui : BoundUserInterface
                 ("label", stepLabel));
 
             var tool = FormatToolCategory(next.NextStepToolCategory);
+            var partName = ResolveLabel(inFlight.PartDisplayName);
             _window.InProgressActionLabel.Text = string.IsNullOrEmpty(next.NextStepToolCategory)
-                ? Loc.GetString("cmu-medical-surgery-action-hint-no-tool", ("part", inFlight.PartDisplayName))
-                : Loc.GetString("cmu-medical-surgery-action-hint", ("part", inFlight.PartDisplayName), ("tool", tool));
+                ? Loc.GetString("cmu-medical-surgery-action-hint-no-tool", ("part", partName))
+                : Loc.GetString("cmu-medical-surgery-action-hint", ("part", partName), ("tool", tool));
             _window.InProgressStepLabel.Visible = true;
             _window.InProgressActionLabel.Visible = true;
         }
@@ -191,7 +192,7 @@ public sealed class CMUSurgeryBui : BoundUserInterface
                 AddChoiceButton(
                     part,
                     entry,
-                    Loc.GetString("cmu-medical-surgery-continue-with-button", ("surgery", entry.DisplayName)),
+                    Loc.GetString("cmu-medical-surgery-continue-with-button", ("surgery", ResolveLabel(entry.DisplayName))),
                     false);
                 continuationCount++;
             }
@@ -462,7 +463,7 @@ public sealed class CMUSurgeryBui : BoundUserInterface
         };
         labels.AddChild(new Label
         {
-            Text = part.DisplayName,
+            Text = ResolveLabel(part.DisplayName),
             FontColorOverride = selected ? TextPrimary : Color.FromHex("#D7D0C5"),
             ClipText = true,
         });
@@ -483,15 +484,16 @@ public sealed class CMUSurgeryBui : BoundUserInterface
             return;
 
         var status = ResolveStatusText(part);
-        _window.SelectedPartLabel.Text = part.DisplayName;
+        var partName = ResolveLabel(part.DisplayName);
+        _window.SelectedPartLabel.Text = partName;
         _window.SelectedPartStatusLabel.Text = status.Text;
         _window.SelectedPartStatusLabel.FontColorOverride = status.Color;
-        _window.ProcedureHeaderLabel.Text = Loc.GetString("cmu-medical-surgery-section-surgeries-on", ("part", part.DisplayName));
+        _window.ProcedureHeaderLabel.Text = Loc.GetString("cmu-medical-surgery-section-surgeries-on", ("part", partName));
 
         if (part.LockedByOtherPart)
         {
             _window.ProcedureListContainer.AddChild(CreateEmptyLabel(
-                Loc.GetString("cmu-medical-surgery-part-condition-locked", ("other", part.DisplayName))));
+                Loc.GetString("cmu-medical-surgery-part-condition-locked", ("other", partName))));
             return;
         }
 
@@ -736,7 +738,53 @@ public sealed class CMUSurgeryBui : BoundUserInterface
             return "-";
         if (Loc.TryGetString(maybeKey, out var resolved))
             return resolved;
+        if (TryResolveLegacyMedicalLabel(maybeKey, out resolved))
+            return resolved;
         return maybeKey;
+    }
+
+    private static bool TryResolveLegacyMedicalLabel(string label, out string resolved)
+    {
+        var key = label switch
+        {
+            "Set Fracture" => "cmu-medical-surgery-name-set-fracture",
+            "Stop Internal Bleeding" => "cmu-medical-surgery-name-stop-internal-bleeding",
+            "Suture Heart" => "cmu-medical-surgery-name-suture-heart",
+            "Suture Stomach" => "cmu-medical-surgery-name-suture-stomach",
+            "Remove Limb" => "cmu-medical-surgery-name-remove-limb",
+            "Remove Larva" => "cmu-medical-surgery-name-remove-larva",
+            "Debride Eschar" => "cmu-medical-surgery-name-debride-eschar",
+            "Amputate Limb" => "cmu-medical-surgery-step-amputate-limb-label",
+            "Trim Necrotic Stump" => "cmu-medical-surgery-step-trim-necrotic-stump-label",
+            "Prep Reattachment Socket" => "cmu-medical-surgery-step-prep-reattachment-socket-label",
+            "Reattach Limb" => "cmu-medical-surgery-name-reattach-limb",
+            "Close Incision" => "cmu-medical-surgery-step-close-incision-label",
+            "Head" => "cmu-medical-body-part-head",
+            "Torso" => "cmu-medical-body-part-torso",
+            "Arm" => "cmu-medical-body-part-arm",
+            "Left Arm" => "cmu-medical-body-part-left-arm",
+            "Right Arm" => "cmu-medical-body-part-right-arm",
+            "Leg" => "cmu-medical-body-part-leg",
+            "Left Leg" => "cmu-medical-body-part-left-leg",
+            "Right Leg" => "cmu-medical-body-part-right-leg",
+            "Hand" => "cmu-medical-body-part-hand",
+            "Left Hand" => "cmu-medical-body-part-left-hand",
+            "Right Hand" => "cmu-medical-body-part-right-hand",
+            "Foot" => "cmu-medical-body-part-foot",
+            "Left Foot" => "cmu-medical-body-part-left-foot",
+            "Right Foot" => "cmu-medical-body-part-right-foot",
+            "Tail" => "cmu-medical-body-part-tail",
+            _ => null,
+        };
+
+        if (key is not null && Loc.TryGetString(key, out var localized) && localized is not null)
+        {
+            resolved = localized;
+            return true;
+        }
+
+        resolved = label;
+        return false;
     }
 
     private static string FormatToolCategory(string? category)

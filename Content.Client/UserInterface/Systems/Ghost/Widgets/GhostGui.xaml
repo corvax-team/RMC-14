@@ -4,9 +4,9 @@
                   xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Ghost.Widgets"
                   x:Class="Content.Client.UserInterface.Systems.Ghost.Widgets.GhostGui"
                   HorizontalAlignment="Center">
-    <BoxContainer Orientation="Horizontal">
-        <Button Name="ReturnToBodyButton" Text="{Loc ghost-gui-return-to-body-button}" />
-        <Button Name="GhostWarpButton" Text="{Loc ghost-gui-ghost-warp-button}" />
-        <Button Name="GhostRolesButton" />
+    <BoxContainer Orientation="Horizontal" SeparationOverride="4">
+        <Button Name="ReturnToBodyButton" Text="{Loc ghost-gui-return-to-body-button}" StyleClasses="OpenBoth" />
+        <Button Name="GhostWarpButton" Text="{Loc ghost-gui-ghost-warp-button}" StyleClasses="OpenBoth" />
+        <Button Name="GhostRolesButton" StyleClasses="OpenBoth" />
     </BoxContainer>
 </widgets:GhostGui>

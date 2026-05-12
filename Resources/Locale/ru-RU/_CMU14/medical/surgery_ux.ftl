@@ -122,7 +122,12 @@ cmu-medical-surgery-step-suture-liver-label = Ушить печень
 cmu-medical-surgery-step-suture-lungs-label = Ушить лёгкие
 cmu-medical-surgery-step-suture-kidneys-label = Ушить почки
 cmu-medical-surgery-step-suture-heart-label = Ушить сердце
+cmu-medical-surgery-step-suture-stomach-label = Ушить желудок
+cmu-medical-surgery-step-amputate-limb-label = Ампутировать конечность
+cmu-medical-surgery-step-trim-necrotic-stump-label = Иссечь некротическую культю
+cmu-medical-surgery-step-prep-reattachment-socket-label = Подготовить место для пришивания
 cmu-medical-surgery-step-reattach-limb-label = Пришить отсечённую конечность
+cmu-medical-surgery-step-debride-eschar-label = Очистить струп
 
 # ---- Названия операций ----------------------------------------------
 
@@ -142,10 +147,32 @@ cmu-medical-surgery-name-suture-liver = Ушивание печени
 cmu-medical-surgery-name-suture-lungs = Ушивание лёгких
 cmu-medical-surgery-name-suture-kidneys = Ушивание почек
 cmu-medical-surgery-name-suture-heart = Ушивание сердца
+cmu-medical-surgery-name-suture-stomach = Ушивание желудка
 cmu-medical-surgery-name-repair-brain = Восстановление мозга
 cmu-medical-surgery-name-repair-eyes = Восстановление глаз
 cmu-medical-surgery-name-repair-ears = Восстановление ушей
+cmu-medical-surgery-name-remove-limb = Ампутация конечности
 cmu-medical-surgery-name-reattach-limb = Пришивание конечности
+cmu-medical-surgery-name-remove-larva = Извлечение личинки
+cmu-medical-surgery-name-debride-eschar = Очистка струпа
+
+# ---- Части тела ------------------------------------------------------
+
+cmu-medical-body-part-head = Голова
+cmu-medical-body-part-torso = Торс
+cmu-medical-body-part-arm = Рука
+cmu-medical-body-part-left-arm = Левая рука
+cmu-medical-body-part-right-arm = Правая рука
+cmu-medical-body-part-leg = Нога
+cmu-medical-body-part-left-leg = Левая нога
+cmu-medical-body-part-right-leg = Правая нога
+cmu-medical-body-part-hand = Кисть
+cmu-medical-body-part-left-hand = Левая кисть
+cmu-medical-body-part-right-hand = Правая кисть
+cmu-medical-body-part-foot = Стопа
+cmu-medical-body-part-left-foot = Левая стопа
+cmu-medical-body-part-right-foot = Правая стопа
+cmu-medical-body-part-tail = Хвост
 
 # ---- Missing UI sections --------------------------------------------
 
@@ -166,6 +193,13 @@ cmu-medical-surgery-actions-heading = Действия
 cmu-medical-surgery-condition-skull-open = Череп вскрыт
 cmu-medical-surgery-condition-bones-open = Кости вскрыты
 cmu-medical-surgery-condition-eschar = Струп
+
+cmu-medical-fracture-severity-hairline = волосяной
+cmu-medical-fracture-severity-simple = простой
+cmu-medical-fracture-severity-compound = открытый
+cmu-medical-fracture-severity-comminuted = оскольчатый
+cmu-medical-fracture-stabilized-prefix = стабилизированный 
+cmu-medical-examine-fracture-description = { $stabilized }{ $severity } перелом
 
 # ---- Armed system extras --------------------------------------------
 

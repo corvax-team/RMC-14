@@ -117,7 +117,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                 MinWidth = 56,
                 MinHeight = 28,
                 TextAlign = Label.AlignMode.Center,
-                ToolTip = $"{tabName} ({warps.Count})",
+                ToolTip = $"{GetDisplayTabName(tabName)} ({warps.Count})",
             };
             tabButton.Label.FontOverride = _tabFont;
 
@@ -173,7 +173,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
             headerBox.AddChild(new Label
             {
-                Text = tabName.ToUpperInvariant(),
+                Text = GetDisplayTabName(tabName).ToUpperInvariant(),
                 StyleClasses = { "LabelHeading" },
                 HorizontalExpand = true,
             });
@@ -240,7 +240,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
             box.AddChild(new Label
             {
-                Text = sectionName.ToUpperInvariant(),
+                Text = GetDisplaySectionName(sectionName).ToUpperInvariant(),
                 StyleClasses = { "LabelBig" },
                 HorizontalExpand = true,
             });
@@ -707,24 +707,68 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
         {
             var role = GetRoleName(warp);
             var section = GetSectionName(warp);
+            var displaySection = GetDisplaySectionName(section);
 
             if (warp.IsWarpPoint || role == section)
                 return role;
 
-            return $"{role} - {section}";
+            return $"{role} - {displaySection}";
         }
 
         private static string GetSearchText(GhostWarp warp)
         {
-            return $"{warp.DisplayName} {GetRoleName(warp)} {GetTabName(warp)} {GetSectionName(warp)}";
+            var tab = GetTabName(warp);
+            var section = GetSectionName(warp);
+            return $"{warp.DisplayName} {GetRoleName(warp)} {tab} {GetDisplayTabName(tab)} {section} {GetDisplaySectionName(section)}";
         }
 
         private static string GetTabTitle(string tab, int visible, int total)
         {
-            var label = tab.ToUpperInvariant();
+            var label = GetDisplayTabName(tab).ToUpperInvariant();
             return visible == total
                 ? $"{label} {total}"
                 : $"{label} {visible}/{total}";
+        }
+
+        private static string GetDisplayTabName(string tab)
+        {
+            return tab switch
+            {
+                "Marines" => Loc.GetString("ghost-target-window-tab-marines"),
+                "Xenos" => Loc.GetString("ghost-target-window-tab-xenos"),
+                "Survivors" => Loc.GetString("ghost-target-window-tab-survivors"),
+                "WeYa/PMC" => Loc.GetString("ghost-target-window-tab-weya-pmc"),
+                "CLF" => Loc.GetString("ghost-target-window-tab-clf"),
+                "SPP" => Loc.GetString("ghost-target-window-tab-spp"),
+                "TSE/Royal" => Loc.GetString("ghost-target-window-tab-tse-royal"),
+                "CMB/Provost" => Loc.GetString("ghost-target-window-tab-cmb-provost"),
+                "Locations" => Loc.GetString("ghost-target-window-tab-locations"),
+                "Other" => Loc.GetString("ghost-target-window-tab-other"),
+                _ => tab,
+            };
+        }
+
+        private static string GetDisplaySectionName(string section)
+        {
+            if (section.StartsWith("Tier ", StringComparison.OrdinalIgnoreCase) &&
+                int.TryParse(section["Tier ".Length..], out var tier))
+            {
+                return Loc.GetString("ghost-target-window-section-tier", ("tier", tier));
+            }
+
+            return section switch
+            {
+                "Queen" => Loc.GetString("ghost-target-window-section-queen"),
+                "Unknown Tier" => Loc.GetString("ghost-target-window-section-unknown-tier"),
+                "High Command" => Loc.GetString("ghost-target-window-section-high-command"),
+                "Command" => Loc.GetString("ghost-target-window-section-command"),
+                "Specialists" => Loc.GetString("ghost-target-window-section-specialists"),
+                "Line Personnel" => Loc.GetString("ghost-target-window-section-line-personnel"),
+                "Personnel" => Loc.GetString("ghost-target-window-section-personnel"),
+                "Warp Points" => Loc.GetString("ghost-target-window-section-warp-points"),
+                "Survivors" => Loc.GetString("ghost-target-window-tab-survivors"),
+                _ => section,
+            };
         }
 
         private string GetCountText(int visible, int total)

@@ -14,6 +14,12 @@ namespace Content.Client._RMC14.TacticalMap.UI;
 public sealed partial class TacticalMapWindow : RMCPopOutWindow
 {
     private static readonly ISawmill _logger = Logger.GetSawmill("tactical_map_settings");
+    private static readonly Vector2i DefaultWindowSize = new(600, 600);
+    private const float MinimumWindowWidth = 320f;
+    private const float MinimumWindowHeight = 240f;
+    private const float MinimumVisibleWidth = 80f;
+    private const float MinimumVisibleHeight = 80f;
+
     protected override Control Control => Wrapper;
     
     private TacticalMapSettingsManager? _settingsManager;
@@ -24,7 +30,7 @@ public sealed partial class TacticalMapWindow : RMCPopOutWindow
     {
         InitializeSettings();
 
-        Vector2i targetSize = new(600, 600);
+        Vector2i targetSize = DefaultWindowSize;
         Vector2 targetPosition = new(-1, -1);
 
         if (_settingsLoaded && _settingsManager != null)
@@ -33,18 +39,10 @@ public sealed partial class TacticalMapWindow : RMCPopOutWindow
             {
                 var settings = _settingsManager.LoadSettings(_currentMapId);
 
-                if (settings.WindowSize.X > 0 && settings.WindowSize.Y > 0)
-                {
-                    targetSize = new Vector2i((int)settings.WindowSize.X, (int)settings.WindowSize.Y);
-                }
+                targetSize = SanitizeWindowSize(settings.WindowSize);
 
                 if (settings.WindowPosition.X != -1.0f || settings.WindowPosition.Y != -1.0f)
-                {
-                    targetPosition = new Vector2(
-                        Math.Max(0, settings.WindowPosition.X),
-                        Math.Max(0, settings.WindowPosition.Y)
-                    );
-                }
+                    targetPosition = settings.WindowPosition;
             }
             catch (Exception ex)
             {
@@ -64,7 +62,7 @@ public sealed partial class TacticalMapWindow : RMCPopOutWindow
 
         if (targetPosition.X != -1.0f && targetPosition.Y != -1.0f)
         {
-            LayoutContainer.SetPosition(this, targetPosition);
+            LayoutContainer.SetPosition(this, ClampWindowPosition(targetPosition));
         }
 
         OnPopout += () => Wrapper.PopoutButton.Visible = false;
@@ -81,7 +79,7 @@ public sealed partial class TacticalMapWindow : RMCPopOutWindow
         if (_settingsLoaded && _settingsManager != null)
         {
             LoadWindowSettings();
-    }
+        }
     }
 
     private void InitializeSettings()
@@ -107,18 +105,12 @@ public sealed partial class TacticalMapWindow : RMCPopOutWindow
         {
             var settings = _settingsManager.LoadSettings(_currentMapId);
 
-            if (settings.WindowSize.X > 0 && settings.WindowSize.Y > 0)
-            {
-                var size = new Vector2i((int)settings.WindowSize.X, (int)settings.WindowSize.Y);
-                SetSize = size;
-            }
+            var size = SanitizeWindowSize(settings.WindowSize);
+            SetSize = size;
 
             if (settings.WindowPosition.X != -1.0f || settings.WindowPosition.Y != -1.0f)
             {
-                var position = new Vector2(
-                    Math.Max(0, settings.WindowPosition.X),
-                    Math.Max(0, settings.WindowPosition.Y)
-                );
+                var position = ClampWindowPosition(settings.WindowPosition);
                 LayoutContainer.SetPosition(this, position);
             }
         }
@@ -128,4 +120,43 @@ public sealed partial class TacticalMapWindow : RMCPopOutWindow
         }
     }
 
+    private Vector2i SanitizeWindowSize(Vector2 savedSize)
+    {
+        if (savedSize.X <= 0 || savedSize.Y <= 0)
+            return DefaultWindowSize;
+
+        var rootSize = GetWindowRootSize();
+        var maxWidth = rootSize.X > 0 ? MathF.Max(MinimumWindowWidth, rootSize.X) : savedSize.X;
+        var maxHeight = rootSize.Y > 0 ? MathF.Max(MinimumWindowHeight, rootSize.Y) : savedSize.Y;
+
+        return new Vector2i(
+            (int)Math.Clamp(savedSize.X, MinimumWindowWidth, maxWidth),
+            (int)Math.Clamp(savedSize.Y, MinimumWindowHeight, maxHeight));
+    }
+
+    private Vector2 ClampWindowPosition(Vector2 savedPosition)
+    {
+        var rootSize = GetWindowRootSize();
+        if (rootSize.X <= 0 || rootSize.Y <= 0)
+            return new Vector2(Math.Max(0, savedPosition.X), Math.Max(0, savedPosition.Y));
+
+        var windowSize = new Vector2(
+            MathF.Max(MinimumVisibleWidth, SetSize.X),
+            MathF.Max(MinimumVisibleHeight, SetSize.Y));
+
+        var maxX = MathF.Max(0, rootSize.X - MathF.Min(windowSize.X, rootSize.X));
+        var maxY = MathF.Max(0, rootSize.Y - MathF.Min(windowSize.Y, rootSize.Y));
+
+        return new Vector2(
+            Math.Clamp(savedPosition.X, 0, maxX),
+            Math.Clamp(savedPosition.Y, 0, maxY));
+    }
+
+    private Vector2 GetWindowRootSize()
+    {
+        if (Parent != null)
+            return Parent.Size;
+
+        return UserInterfaceManager.WindowRoot.Size;
+    }
 }

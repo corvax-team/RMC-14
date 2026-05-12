@@ -68,6 +68,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
     private readonly Button _finishButton;
     private LanguageRestartConfirmWindow? _languageRestartWindow;
     private bool _ignoreLanguageSelection;
+    private bool _centerAfterLayout;
     private string? _pendingLanguageCode;
     private string? _pendingPreviousLanguageCode;
 
@@ -75,8 +76,8 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
 
     private const int LanguageRussian = 0;
     private const int LanguageEnglish = 1;
-    private const float WelcomeMinWidth = 680f;
-    private const float WelcomeMinHeight = 560f;
+    private const float WelcomeMinWidth = 560f;
+    private const float WelcomeMinHeight = 480f;
     private const string LobbyUiStyleNewClass = "LobbyUiStyleNew";
     private const string LobbyUiStyleOldClass = "LobbyUiStyleOld";
     public event Action? OnFinished;
@@ -88,7 +89,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         _sawmill = _logManager.GetSawmill("language-restart");
 
         Title = string.Empty;
-        SetSize = new Vector2(840, 660);
+        SetSize = new Vector2(700, 540);
         MinSize = new Vector2(WelcomeMinWidth, WelcomeMinHeight);
 
         _titleFont = _cache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 28);
@@ -140,6 +141,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         {
             HorizontalExpand = true,
             VerticalExpand = false,
+            MinSize = new Vector2(0f, 32f),
         };
         heroContent.AddChild(_subtitleLabel);
 
@@ -147,6 +149,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         {
             HorizontalExpand = true,
             VerticalExpand = false,
+            MinSize = new Vector2(0f, 24f),
         };
         heroContent.AddChild(_supportLabel);
 
@@ -240,22 +243,31 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         base.FrameUpdate(args);
     }
 
+    public new void OpenCenteredAnimated()
+    {
+        _centerAfterLayout = true;
+        base.OpenCenteredAnimated();
+    }
+
     private void UpdateResponsiveLayout()
     {
         var viewport = Parent?.Size ?? Vector2.Zero;
         if (viewport.X <= 1f || viewport.Y <= 1f)
             return;
 
-        var maxWidth = viewport.X * 0.82f;
-        var maxHeight = viewport.Y * 0.86f;
+        var maxWidth = viewport.X * 0.58f;
+        var maxHeight = viewport.Y * 0.78f;
         var minWidth = MathF.Min(WelcomeMinWidth, maxWidth);
         var minHeight = MathF.Min(WelcomeMinHeight, maxHeight);
         var targetSize = new Vector2(
-            Math.Clamp(viewport.X * 0.72f, minWidth, maxWidth),
-            Math.Clamp(viewport.Y * 0.78f, minHeight, maxHeight));
+            Math.Clamp(viewport.X * 0.48f, minWidth, maxWidth),
+            Math.Clamp(viewport.Y * 0.68f, minHeight, maxHeight));
 
         if (Vector2.DistanceSquared(SetSize, targetSize) > 1f)
+        {
             SetSize = targetSize;
+            _centerAfterLayout = true;
+        }
 
         var lowHeight = viewport.Y <= 800f;
         var compact = viewport.Y <= 900f;
@@ -264,7 +276,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         _root.Margin = new Thickness(outerMargin);
         _root.SeparationOverride = rootGap;
 
-        var heroHeight = lowHeight ? 122f : compact ? 136f : 154f;
+        var heroHeight = lowHeight ? 126f : compact ? 136f : 146f;
         _heroPanel.MinSize = new Vector2(0f, heroHeight);
         _heroPanel.SetHeight = heroHeight;
 
@@ -278,9 +290,9 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
 
         var innerWidth = MathF.Max(0f, targetSize.X - outerMargin * 2f);
         var gap = lowHeight ? 8f : 12f;
-        var minRightWidth = lowHeight ? 220f : 250f;
-        var minLeftWidth = lowHeight ? 250f : 290f;
-        var rightWidth = Math.Clamp(innerWidth * 0.32f, minRightWidth, 340f);
+        var minRightWidth = lowHeight ? 260f : 300f;
+        var minLeftWidth = lowHeight ? 220f : 250f;
+        var rightWidth = Math.Clamp(innerWidth * 0.44f, minRightWidth, 390f);
         var leftWidth = innerWidth - rightWidth - gap;
         if (leftWidth < minLeftWidth)
         {
@@ -297,6 +309,12 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         _welcomeRightColumn.SetWidth = rightWidth;
         _welcomeRightColumn.MinSize = new Vector2(rightWidth, 0f);
         _welcomeRightColumn.MaxSize = new Vector2(rightWidth, float.MaxValue);
+
+        if (!_centerAfterLayout)
+            return;
+
+        LayoutContainer.SetPosition(this, Vector2.Max(Vector2.Zero, (viewport - targetSize) / 2f));
+        _centerAfterLayout = false;
     }
 
     public void RefreshLocalization()

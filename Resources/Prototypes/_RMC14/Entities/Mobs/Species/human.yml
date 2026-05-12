@@ -36,6 +36,7 @@
         requireInputValidation: false
       enum.CMMobStateActionsUI.Key:
         type: CMGhostActionBui
+        requireInputValidation: false
       enum.BodyPartPickerUIKey.Key:
         type: BodyPartPickerBui
       enum.CMUSurgeryUIKey.Key:

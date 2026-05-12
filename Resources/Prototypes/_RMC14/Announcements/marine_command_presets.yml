@@ -52,11 +52,11 @@
     text:
       primaryColor: "#a8d6ff"
       font: "Cozette"
-      fontSize: 18
-      lineHeight: 42
+      fontSize: 24
+      lineHeight: 48
       showSpeakerName: true
       speakerNameColor: "#ffffff"
-      speakerNameFontSize: 12
+      speakerNameFontSize: 14
     sprite:
       showSpriteBox: true
       spriteBoxColor: "#0a1a2d"
@@ -139,11 +139,11 @@
     text:
       primaryColor: "#a8d6ff"
       font: "Cozette"
-      fontSize: 18
-      lineHeight: 42
+      fontSize: 24
+      lineHeight: 48
       showSpeakerName: true
       speakerNameColor: "#ffffff"
-      speakerNameFontSize: 12
+      speakerNameFontSize: 14
     sprite:
       showSpriteBox: true
       spriteBoxColor: "#0a1a2d"
@@ -207,11 +207,11 @@
     text:
       primaryColor: "#a8d6ff"
       font: "Cozette"
-      fontSize: 18
-      lineHeight: 42
+      fontSize: 24
+      lineHeight: 48
       showSpeakerName: true
       speakerNameColor: "#ffffff"
-      speakerNameFontSize: 12
+      speakerNameFontSize: 14
     sprite:
       showSpriteBox: true
       spriteBoxColor: "#0a1a2d"
@@ -269,8 +269,8 @@
     text:
       primaryColor: "#a8d6ff"
       font: "Cozette"
-      fontSize: 18
-      lineHeight: 42
+      fontSize: 24
+      lineHeight: 48
       showSpeakerName: false
     sprite:
       showSpriteBox: false

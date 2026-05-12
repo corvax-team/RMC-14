@@ -611,7 +611,7 @@ public sealed class HealthScannerBui : BoundUserInterface
         {
             if (frac.Part != part.Type || frac.Symmetry != part.Symmetry)
                 continue;
-            var label = frac.ExactSeverity ? frac.Severity.ToString()
+            var label = frac.ExactSeverity ? FractureSeverityName(frac.Severity)
                 : Loc.GetString("cmu-medical-scanner-chip-fracture-vague");
             if (frac.Suppressed)
                 label += Loc.GetString("cmu-medical-scanner-chip-suppressed-suffix");
@@ -879,6 +879,20 @@ public sealed class HealthScannerBui : BoundUserInterface
             Content.Shared._CMU14.Medical.Bones.FractureSeverity.Comminuted => PartSeverity.Critical,
             _ => PartSeverity.Bruised,
         };
+
+    private static string FractureSeverityName(Content.Shared._CMU14.Medical.Bones.FractureSeverity severity)
+    {
+        var key = severity switch
+        {
+            Content.Shared._CMU14.Medical.Bones.FractureSeverity.Hairline => "cmu-medical-fracture-severity-hairline",
+            Content.Shared._CMU14.Medical.Bones.FractureSeverity.Simple => "cmu-medical-fracture-severity-simple",
+            Content.Shared._CMU14.Medical.Bones.FractureSeverity.Compound => "cmu-medical-fracture-severity-compound",
+            Content.Shared._CMU14.Medical.Bones.FractureSeverity.Comminuted => "cmu-medical-fracture-severity-comminuted",
+            _ => "cmu-medical-fracture-severity-simple",
+        };
+
+        return Loc.GetString(key);
+    }
 
     private static PartSeverity SeverityFromOrganStage(Content.Shared._CMU14.Medical.Organs.OrganDamageStage stage)
         => stage switch

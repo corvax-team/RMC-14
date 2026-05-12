@@ -58,6 +58,13 @@ cmu-medical-surgery-condition-eschar = Eschar
 cmu-medical-surgery-condition-in-progress = Surgery in progress
 cmu-medical-surgery-condition-missing = Severed
 
+cmu-medical-fracture-severity-hairline = hairline
+cmu-medical-fracture-severity-simple = simple
+cmu-medical-fracture-severity-compound = compound
+cmu-medical-fracture-severity-comminuted = comminuted
+cmu-medical-fracture-stabilized-prefix = stabilized 
+cmu-medical-examine-fracture-description = a { $stabilized }{ $severity } fracture
+
 # ---- BUI category headers ---------------------------------------------
 
 cmu-medical-surgery-category-fracture = Fracture
@@ -167,7 +174,10 @@ cmu-medical-surgery-step-suture-kidneys-label = Suture Kidneys
 cmu-medical-surgery-step-suture-heart-label = Suture Heart
 cmu-medical-surgery-step-suture-stomach-label = Suture Stomach
 cmu-medical-surgery-step-amputate-limb-label = Amputate Limb
+cmu-medical-surgery-step-trim-necrotic-stump-label = Trim Necrotic Stump
+cmu-medical-surgery-step-prep-reattachment-socket-label = Prep Reattachment Socket
 cmu-medical-surgery-step-reattach-limb-label = Reattach Severed Limb
+cmu-medical-surgery-step-debride-eschar-label = Debride Eschar
 
 # ---- Surgery names --------------------------------------------------
 
@@ -187,10 +197,33 @@ cmu-medical-surgery-name-suture-liver = Suture Liver
 cmu-medical-surgery-name-suture-lungs = Suture Lungs
 cmu-medical-surgery-name-suture-kidneys = Suture Kidneys
 cmu-medical-surgery-name-suture-heart = Suture Heart
+cmu-medical-surgery-name-suture-stomach = Suture Stomach
 cmu-medical-surgery-name-repair-brain = Repair Brain
 cmu-medical-surgery-name-repair-eyes = Repair Eyes
 cmu-medical-surgery-name-repair-ears = Repair Ears
+cmu-medical-surgery-name-remove-limb = Remove Limb
 cmu-medical-surgery-name-reattach-limb = Reattach Limb
+cmu-medical-surgery-name-remove-larva = Remove Larva
+cmu-medical-surgery-name-debride-eschar = Debride Eschar
+
+# ---- Body parts -----------------------------------------------------
+
+cmu-medical-body-part-head = Head
+cmu-medical-body-part-torso = Torso
+cmu-medical-body-part-arm = Arm
+cmu-medical-body-part-left-arm = Left Arm
+cmu-medical-body-part-right-arm = Right Arm
+cmu-medical-body-part-leg = Leg
+cmu-medical-body-part-left-leg = Left Leg
+cmu-medical-body-part-right-leg = Right Leg
+cmu-medical-body-part-hand = Hand
+cmu-medical-body-part-left-hand = Left Hand
+cmu-medical-body-part-right-hand = Right Hand
+cmu-medical-body-part-foot = Foot
+cmu-medical-body-part-left-foot = Left Foot
+cmu-medical-body-part-right-foot = Right Foot
+cmu-medical-body-part-tail = Tail
+
 # ---- Autodoc ---------------------------------------------------------
 
 cmu-autodoc-window-title = Autodoc

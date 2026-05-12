@@ -407,13 +407,13 @@ public sealed partial class AnnouncementWidget
     private static Vector2 CalculatePosition(Vector2 screenSize, Vector2 widgetSize, AnnouncementStyle style)
     {
         const float padding = 50f;
-        const float topPadding = 100f;
+        const float topHudPadding = 120f;
 
         return style.LayoutConfig.Position switch
         {
-            AnnouncementPosition.TopLeft => new Vector2(padding, topPadding),
-            AnnouncementPosition.TopCenter => new Vector2((screenSize.X - widgetSize.X) / 2, padding),
-            AnnouncementPosition.TopRight => new Vector2(screenSize.X - widgetSize.X - padding, topPadding),
+            AnnouncementPosition.TopLeft => new Vector2(padding, topHudPadding),
+            AnnouncementPosition.TopCenter => new Vector2((screenSize.X - widgetSize.X) / 2, topHudPadding),
+            AnnouncementPosition.TopRight => new Vector2(screenSize.X - widgetSize.X - padding, topHudPadding),
             AnnouncementPosition.MiddleLeft => new Vector2(padding, (screenSize.Y - widgetSize.Y) / 2),
             AnnouncementPosition.MiddleCenter => new Vector2((screenSize.X - widgetSize.X) / 2, (screenSize.Y - widgetSize.Y) / 2),
             AnnouncementPosition.MiddleRight => new Vector2(screenSize.X - widgetSize.X - padding, (screenSize.Y - widgetSize.Y) / 2),

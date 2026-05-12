@@ -25,7 +25,7 @@ public abstract partial class CESharedZLevelsSystem
     private const float ZVelocityLimit = 20.0f;
     private const int MaxStepsPerFrame = 10;
     private const float HighGroundTransitionEdge = 0.6f;
-    private const float HighGroundFallImpactSafeRadius = 1f;
+    private const int HighGroundFallImpactSafeTileRadius = 1;
     /// <summary>
     /// The minimum speed required to trigger LandEvent events.
     /// </summary>
@@ -199,8 +199,9 @@ public abstract partial class CESharedZLevelsSystem
             {
                 if (distanceToGround <= 0.05f) //There`s a ground
                 {
+                    var nearHighGround = HasNearbyHighGroundForFallImpact(uid);
                     if (float.Abs(zPhysicsComponent.Velocity) >= ImpactVelocityLimit &&
-                        !ShouldSuppressFallImpactNearHighGround(uid))
+                        !nearHighGround)
                     {
                         var hitEv = new CEZLevelHitEvent(-zPhysicsComponent.Velocity);
                         RaiseLocalEvent(uid, ref hitEv);
@@ -231,7 +232,8 @@ public abstract partial class CESharedZLevelsSystem
                         SuppressReverseStairTransition((uid, zPhysicsComponent), 1);
                     }
 
-                    if (zPhysicsComponent is { CachedStickyGround: false, Fallable: true })
+                    if (zPhysicsComponent is { CachedStickyGround: false, Fallable: true } &&
+                        !HasNearbyHighGroundForFallImpact(uid))
                     {
                         var fallEv = new CEZLevelFallMapEvent();
                         RaiseLocalEvent(uid, ref fallEv);
@@ -244,7 +246,7 @@ public abstract partial class CESharedZLevelsSystem
                 if (HasTileAbove(uid)) //Hit roof
                 {
                     if (float.Abs(zPhysicsComponent.Velocity) >= ImpactVelocityLimit &&
-                        !ShouldSuppressFallImpactNearHighGround(uid))
+                        !HasNearbyHighGroundForFallImpact(uid))
                     {
                         var hitEv = new CEZLevelHitEvent(zPhysicsComponent.Velocity);
                         RaiseLocalEvent(uid, ref hitEv);
@@ -457,7 +459,7 @@ public abstract partial class CESharedZLevelsSystem
         };
     }
 
-    private bool ShouldSuppressFallImpactNearHighGround(EntityUid uid)
+    private bool HasNearbyHighGroundForFallImpact(EntityUid uid)
     {
         var xform = Transform(uid);
         if (xform.MapUid is not { } mapUid)
@@ -468,17 +470,12 @@ public abstract partial class CESharedZLevelsSystem
             return false;
 
         var center = _transform.GetGridOrMapTilePosition(uid);
-        var radius = (int) Math.Ceiling(HighGroundFallImpactSafeRadius);
-        var safeRadiusSq = HighGroundFallImpactSafeRadius * HighGroundFallImpactSafeRadius;
+        var radius = HighGroundFallImpactSafeTileRadius;
 
         for (var x = center.X - radius; x <= center.X + radius; x++)
         {
             for (var y = center.Y - radius; y <= center.Y + radius; y++)
             {
-                var highGroundTileCenter = new Vector2(x + 0.5f, y + 0.5f);
-                if ((worldPos - highGroundTileCenter).LengthSquared() > safeRadiusSq)
-                    continue;
-
                 var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, new Vector2i(x, y));
                 while (anchored.MoveNext(out var ent))
                 {

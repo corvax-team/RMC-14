@@ -355,7 +355,7 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
         return parts;
     }
 
-    private static bool IsSurgicallySupportedPart(BodyPartType type) =>
+    private bool IsSurgicallySupportedPart(BodyPartType type) =>
         type is BodyPartType.Head or BodyPartType.Torso or BodyPartType.Arm or BodyPartType.Leg;
 
     private string BuildConditionSummary(EntityUid part, BodyPartType partType)
@@ -370,16 +370,8 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
             var severity = frac.Severity;
             if (severity != FractureSeverity.None)
             {
-                var severityKey = severity switch
-                {
-                    FractureSeverity.Hairline => "hairline",
-                    FractureSeverity.Simple => "simple",
-                    FractureSeverity.Compound => "compound",
-                    FractureSeverity.Comminuted => "comminuted",
-                    _ => "fracture",
-                };
                 bits.Add(Loc.GetString("cmu-medical-surgery-condition-fracture",
-                    ("severity", severityKey)));
+                    ("severity", GetFractureSeverityName(severity))));
             }
         }
         if (HasComp<InternalBleedingComponent>(part))
@@ -387,6 +379,20 @@ public sealed class CMUSurgeryDispatchSystem : EntitySystem
         if (HasComp<CMUEscharComponent>(part))
             bits.Add(Loc.GetString("cmu-medical-surgery-condition-eschar"));
         return string.Join(" · ", bits);
+    }
+
+    private string GetFractureSeverityName(FractureSeverity severity)
+    {
+        var key = severity switch
+        {
+            FractureSeverity.Hairline => "cmu-medical-fracture-severity-hairline",
+            FractureSeverity.Simple => "cmu-medical-fracture-severity-simple",
+            FractureSeverity.Compound => "cmu-medical-fracture-severity-compound",
+            FractureSeverity.Comminuted => "cmu-medical-fracture-severity-comminuted",
+            _ => "cmu-medical-fracture-severity-simple",
+        };
+
+        return Loc.GetString(key);
     }
 
     private static string GetOpenBoneConditionKey(BodyPartType partType)

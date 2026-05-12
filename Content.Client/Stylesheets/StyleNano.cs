@@ -956,19 +956,19 @@ namespace Content.Client.Stylesheets
             var contextMenuExamineButtonBase = ThemeValue(
                 Color.FromHex("#31579F"),
                 BlendTowards(ExamineButtonColorContext, Color.Black, 0.12f),
-                ExamineButtonColorContext);
+                ExamineButtonColorContext).WithAlpha(0.62f);
             var contextMenuExamineButtonHover = ThemeValue(
                 Color.FromHex("#3D6CC6"),
                 BlendTowards(ExamineButtonColorContextHover, Color.Black, 0.10f),
-                ExamineButtonColorContextHover);
+                ExamineButtonColorContextHover).WithAlpha(0.78f);
             var contextMenuExamineButtonPressed = ThemeValue(
                 Color.FromHex("#274785"),
                 BlendTowards(ExamineButtonColorContextPressed, Color.Black, 0.08f),
-                ExamineButtonColorContextPressed);
+                ExamineButtonColorContextPressed).WithAlpha(0.7f);
             var contextMenuExamineButtonDisabled = ThemeValue(
                 Color.FromHex("#293B57"),
                 BlendTowards(ExamineButtonColorContextDisabled, Color.Black, 0.06f),
-                ExamineButtonColorContextDisabled);
+                ExamineButtonColorContextDisabled).WithAlpha(0.45f);
 
             var buttonRectTex = resCache.GetTexture("/Textures/Interface/Nano/light_panel_background_bordered.png");
             var buttonRect = new StyleBoxTexture(BaseButton)

@@ -137,17 +137,26 @@ public sealed class CMUMedicalExamineSystem : EntitySystem
         return $"a {treated}{sizeText} {kind}{bleeding}";
     }
 
-    private static string DescribeFracture(FractureSeverity severity, bool stabilized)
+    private string DescribeFracture(FractureSeverity severity, bool stabilized)
     {
-        var prefix = stabilized ? "stabilized " : string.Empty;
-        return severity switch
+        return Loc.GetString(
+            "cmu-medical-examine-fracture-description",
+            ("severity", GetFractureSeverityName(severity)),
+            ("stabilized", stabilized ? Loc.GetString("cmu-medical-fracture-stabilized-prefix") : string.Empty));
+    }
+
+    private string GetFractureSeverityName(FractureSeverity severity)
+    {
+        var key = severity switch
         {
-            FractureSeverity.Hairline => $"a {prefix}hairline fracture",
-            FractureSeverity.Simple => $"a {prefix}broken bone",
-            FractureSeverity.Compound => $"a {prefix}compound fracture",
-            FractureSeverity.Comminuted => $"a {prefix}shattered bone",
-            _ => "a broken bone",
+            FractureSeverity.Hairline => "cmu-medical-fracture-severity-hairline",
+            FractureSeverity.Simple => "cmu-medical-fracture-severity-simple",
+            FractureSeverity.Compound => "cmu-medical-fracture-severity-compound",
+            FractureSeverity.Comminuted => "cmu-medical-fracture-severity-comminuted",
+            _ => "cmu-medical-fracture-severity-simple",
         };
+
+        return Loc.GetString(key);
     }
 
     private static string FormatPartName(BodyPartType type, BodyPartSymmetry symmetry)

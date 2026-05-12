@@ -507,6 +507,8 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
             if (button.AccessButton.Text == null)
                 return;
 
+            button.AccessButton.ModulateSelfOverride = null;
+
             foreach (var tag in access.Tags)
             {
                 if (!_prototype.TryIndex(tag, out var accessPrototype) || accessPrototype.Name == null)
@@ -549,15 +551,20 @@ public sealed class IdModificationConsoleBui : BoundUserInterface, IRefreshableB
                         counterCompete++;
                 }
 
-                if (counterCompete >= counter)
-                    obj.AccessButton.Text = $"[ ◆ ] {text}";
+                obj.AccessButton.Text = text;
+
+                if (counter > 0 && counterCompete >= counter)
+                    obj.SetAccessState(AccessGroupState.Full);
                 else if (counterCompete > 0)
-                    obj.AccessButton.Text = $"[ ◈ ] {text}";
+                    obj.SetAccessState(AccessGroupState.Partial);
                 else
-                    obj.AccessButton.Text = $"[ ◇ ] {text}";
+                    obj.SetAccessState(AccessGroupState.None);
             }
             else
+            {
                 obj.AccessButton.Text = obj.Tag;
+                obj.SetAccessState(AccessGroupState.None);
+            }
 
             if (obj.Tag == _currentAccessGroup)
                 continue;

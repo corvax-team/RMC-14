@@ -155,7 +155,7 @@ public sealed class CMUAutodocBui : BoundUserInterface
 
         text.AddChild(new Label
         {
-            Text = $"{entry.SurgeryDisplayName} - {entry.PartDisplayName}",
+            Text = $"{ResolveLabel(entry.SurgeryDisplayName)} - {ResolveLabel(entry.PartDisplayName)}",
             ClipText = true,
             HorizontalExpand = true,
             FontColorOverride = CMUMedicalMachineStyle.Text,
@@ -224,7 +224,7 @@ public sealed class CMUAutodocBui : BoundUserInterface
             return;
         }
 
-        _window.SelectedPartLabel.Text = selectedPart.DisplayName;
+        _window.SelectedPartLabel.Text = ResolveLabel(selectedPart.DisplayName);
         _window.SelectedPartStatusLabel.Text = selectedPart.EligibleSurgeries.Count == 0
             ? Loc.GetString("cmu-autodoc-no-surgeries")
             : Loc.GetString("cmu-autodoc-available-procedures", ("count", selectedPart.EligibleSurgeries.Count));
@@ -282,7 +282,7 @@ public sealed class CMUAutodocBui : BoundUserInterface
 
         text.AddChild(new Label
         {
-            Text = part.DisplayName,
+            Text = ResolveLabel(part.DisplayName),
             ClipText = true,
             HorizontalExpand = true,
             FontColorOverride = CMUMedicalMachineStyle.Text,
@@ -330,7 +330,7 @@ public sealed class CMUAutodocBui : BoundUserInterface
 
         text.AddChild(new Label
         {
-            Text = surgery.DisplayName,
+            Text = ResolveLabel(surgery.DisplayName),
             ClipText = true,
             HorizontalExpand = true,
             FontColorOverride = CMUMedicalMachineStyle.Text,
@@ -470,7 +470,55 @@ public sealed class CMUAutodocBui : BoundUserInterface
         if (string.IsNullOrEmpty(text))
             return "-";
 
-        return Loc.TryGetString(text, out var localized) ? localized : text;
+        if (Loc.TryGetString(text, out var localized))
+            return localized;
+        if (TryResolveLegacyMedicalLabel(text, out localized))
+            return localized;
+        return text;
+    }
+
+    private static bool TryResolveLegacyMedicalLabel(string label, out string resolved)
+    {
+        var key = label switch
+        {
+            "Set Fracture" => "cmu-medical-surgery-name-set-fracture",
+            "Stop Internal Bleeding" => "cmu-medical-surgery-name-stop-internal-bleeding",
+            "Suture Heart" => "cmu-medical-surgery-name-suture-heart",
+            "Suture Stomach" => "cmu-medical-surgery-name-suture-stomach",
+            "Remove Limb" => "cmu-medical-surgery-name-remove-limb",
+            "Remove Larva" => "cmu-medical-surgery-name-remove-larva",
+            "Debride Eschar" => "cmu-medical-surgery-name-debride-eschar",
+            "Amputate Limb" => "cmu-medical-surgery-step-amputate-limb-label",
+            "Trim Necrotic Stump" => "cmu-medical-surgery-step-trim-necrotic-stump-label",
+            "Prep Reattachment Socket" => "cmu-medical-surgery-step-prep-reattachment-socket-label",
+            "Reattach Limb" => "cmu-medical-surgery-name-reattach-limb",
+            "Close Incision" => "cmu-medical-surgery-step-close-incision-label",
+            "Head" => "cmu-medical-body-part-head",
+            "Torso" => "cmu-medical-body-part-torso",
+            "Arm" => "cmu-medical-body-part-arm",
+            "Left Arm" => "cmu-medical-body-part-left-arm",
+            "Right Arm" => "cmu-medical-body-part-right-arm",
+            "Leg" => "cmu-medical-body-part-leg",
+            "Left Leg" => "cmu-medical-body-part-left-leg",
+            "Right Leg" => "cmu-medical-body-part-right-leg",
+            "Hand" => "cmu-medical-body-part-hand",
+            "Left Hand" => "cmu-medical-body-part-left-hand",
+            "Right Hand" => "cmu-medical-body-part-right-hand",
+            "Foot" => "cmu-medical-body-part-foot",
+            "Left Foot" => "cmu-medical-body-part-left-foot",
+            "Right Foot" => "cmu-medical-body-part-right-foot",
+            "Tail" => "cmu-medical-body-part-tail",
+            _ => null,
+        };
+
+        if (key is not null && Loc.TryGetString(key, out var localized) && localized is not null)
+        {
+            resolved = localized;
+            return true;
+        }
+
+        resolved = label;
+        return false;
     }
 }
 
