@@ -766,6 +766,10 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         resolved = default!;
         if (targetPart is null)
             return false;
+
+        if (TryResolveReattachNextStep(patient, targetPart.Value, surgeryId, out resolved))
+            return true;
+
         if (RmcSurgery.GetSingleton(surgeryId) is not { } surgeryEnt)
             return false;
 
@@ -810,6 +814,47 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
             // Gating prereq id only when the leaf surgery isn't the one
             // being armed — lets the BUI flag "(via Open Incision)".
             resolvedSurgeryProtoId == surgeryId ? null : resolvedSurgeryProtoId);
+        return true;
+    }
+
+    private bool TryResolveReattachNextStep(EntityUid patient, EntityUid targetPart, string surgeryId, out CMUResolvedStep resolved)
+    {
+        resolved = default!;
+        if (surgeryId != "CMUSurgeryReattachLimb" || targetPart != patient)
+            return false;
+
+        if (!HasComp<CMIncisionOpenComponent>(patient))
+            return TryResolveGatedStep("CMUSurgeryOpenSoftTissue", 0, patient, out resolved);
+        if (!HasComp<CMBleedersClampedComponent>(patient))
+            return TryResolveGatedStep("CMUSurgeryOpenSoftTissue", 1, patient, out resolved);
+        if (!HasComp<CMSkinRetractedComponent>(patient))
+            return TryResolveGatedStep("CMUSurgeryOpenSoftTissue", 2, patient, out resolved);
+
+        if (!HasComp<CMUStumpRemovedComponent>(patient))
+            return TryResolveStepAt(surgeryId, 0, out resolved, patient);
+        if (!HasComp<CMUReattachPreppedComponent>(patient))
+            return TryResolveStepAt(surgeryId, 1, out resolved, patient);
+        if (!HasComp<CMUReattachCompleteComponent>(patient))
+            return TryResolveStepAt(surgeryId, 2, out resolved, patient);
+
+        return TryResolveStepAt(surgeryId, 3, out resolved, patient);
+    }
+
+    private bool TryResolveGatedStep(string surgeryId, int stepIndex, EntityUid targetPart, out CMUResolvedStep resolved)
+    {
+        if (!TryResolveStepAt(surgeryId, stepIndex, out var step, targetPart))
+        {
+            resolved = default!;
+            return false;
+        }
+
+        resolved = new CMUResolvedStep(
+            step.ResolvedSurgeryId,
+            step.StepIndex,
+            step.StepLabel,
+            step.ToolCategory,
+            step.TotalSteps,
+            step.ResolvedSurgeryId);
         return true;
     }
 
