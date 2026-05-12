@@ -29,7 +29,7 @@
     - HideContextMenu
   - type: Appearance
   - type: MCEdgeSpreader # CCM14
-    delay: 0.1
+    delay: 0.7
     range: 3
     id: RMCSmokeAcid
   - type: MCTimedDespawnDisappearanceVisuals

@@ -105,6 +105,8 @@
         amount: 3
       - id: CMBottleKelotane
         amount: 3
+      - id: CMULimbPrinterMatrixBeaker
+        amount: 3
 #      - id: CMBottleOxycodone # TODO RMC14
 #        amount: 3
 #      - id: CMBottlePeridaxon # TODO RMC14
@@ -151,6 +153,8 @@
         amount: 3
       - id: CMSyringe
         amount: 7
+      - id: CMUSplintItem
+        amount: 5
 
 - type: entity
   parent: CMVendorMedicalAllAccess
