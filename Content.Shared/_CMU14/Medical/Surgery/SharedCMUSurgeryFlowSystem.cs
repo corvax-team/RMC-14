@@ -823,21 +823,21 @@ public abstract class SharedCMUSurgeryFlowSystem : EntitySystem
         if (surgeryId != "CMUSurgeryReattachLimb" || targetPart == default)
             return false;
 
-        if (HasComp<CMUReattachCompleteComponent>(patient))
-            return TryResolveStepAt(surgeryId, 3, out resolved, patient);
-        if (HasComp<CMUReattachPreppedComponent>(patient))
-            return TryResolveStepAt(surgeryId, 2, out resolved, patient);
-        if (HasComp<CMUStumpRemovedComponent>(patient))
-            return TryResolveStepAt(surgeryId, 1, out resolved, patient);
+        if (HasComp<CMUReattachCompleteComponent>(targetPart))
+            return TryResolveStepAt(surgeryId, 3, out resolved, targetPart);
+        if (HasComp<CMUReattachPreppedComponent>(targetPart))
+            return TryResolveStepAt(surgeryId, 2, out resolved, targetPart);
+        if (HasComp<CMUStumpRemovedComponent>(targetPart))
+            return TryResolveStepAt(surgeryId, 1, out resolved, targetPart);
 
-        if (!HasComp<CMIncisionOpenComponent>(patient))
-            return TryResolveGatedStep("CMUSurgeryOpenSoftTissue", 0, patient, out resolved);
-        if (!HasComp<CMBleedersClampedComponent>(patient))
-            return TryResolveGatedStep("CMUSurgeryOpenSoftTissue", 1, patient, out resolved);
-        if (!HasComp<CMSkinRetractedComponent>(patient))
-            return TryResolveGatedStep("CMUSurgeryOpenSoftTissue", 2, patient, out resolved);
+        if (!HasComp<CMIncisionOpenComponent>(targetPart))
+            return TryResolveGatedStep("CMUSurgeryOpenSoftTissue", 0, targetPart, out resolved);
+        if (!HasComp<CMBleedersClampedComponent>(targetPart))
+            return TryResolveGatedStep("CMUSurgeryOpenSoftTissue", 1, targetPart, out resolved);
+        if (!HasComp<CMSkinRetractedComponent>(targetPart))
+            return TryResolveGatedStep("CMUSurgeryOpenSoftTissue", 2, targetPart, out resolved);
 
-        return TryResolveStepAt(surgeryId, 0, out resolved, patient);
+        return TryResolveStepAt(surgeryId, 0, out resolved, targetPart);
     }
 
     private bool TryResolveGatedStep(string surgeryId, int stepIndex, EntityUid targetPart, out CMUResolvedStep resolved)
