@@ -1475,14 +1475,14 @@ namespace Content.Client.Stylesheets
 
             var lobbyChatPanelCrt = new StyleBoxFlat
             {
-                BackgroundColor = Color.FromHex("#0C1011").WithAlpha(0.68f),
+                BackgroundColor = Color.FromHex("#0C1011").WithAlpha(0.88f),
                 BorderColor = LobbyCrtAccent,
                 BorderThickness = new Thickness(1)
             };
 
             var lobbyChatPanelClean = new StyleBoxFlat
             {
-                BackgroundColor = Color.FromHex("#0D1813").WithAlpha(0.72f),
+                BackgroundColor = Color.FromHex("#0D1813").WithAlpha(0.90f),
                 BorderColor = LobbyCleanAccent,
                 BorderThickness = new Thickness(1)
             };
@@ -2541,7 +2541,6 @@ namespace Content.Client.Stylesheets
                     .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCrtReadyPressed),
 
 
-
                 Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeCrt)
                     .Pseudo(ContainerButton.StylePseudoClassDisabled)
                     .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCrtDisabled),
@@ -2576,7 +2575,6 @@ namespace Content.Client.Stylesheets
                 Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyReadyButton).Class(StyleClassLobbyThemeClean)
                     .Pseudo(ContainerButton.StylePseudoClassPressed)
                     .Prop(Button.StylePropertyStyleBox, lobbyMenuButtonCleanReadyPressed),
-
 
 
                 Element<Button>().Class(StyleClassLobbyMenuButton).Class(StyleClassLobbyThemeClean)

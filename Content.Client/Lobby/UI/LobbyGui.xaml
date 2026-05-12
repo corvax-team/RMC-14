@@ -6,15 +6,19 @@
     xmlns:info="clr-namespace:Content.Client.Info"
     xmlns:widgets="clr-namespace:Content.Client.UserInterface.Systems.Chat.Widgets">
     <LayoutContainer Name="RootContainer" VerticalExpand="True" HorizontalExpand="True">
+        <LayoutContainer Name="BackgroundViewportArea" HorizontalExpand="True" VerticalExpand="True"
+                         RectClipContent="True">
+            <TextureRect Access="Public" VerticalExpand="True" HorizontalExpand="True" Name="Background"
+                         Stretch="KeepAspectCentered" CanShrink="True" MouseFilter="Ignore" />
+        </LayoutContainer>
         <BoxContainer Name="MainContainer" VerticalExpand="True" HorizontalExpand="True" Orientation="Horizontal"
                       SeparationOverride="8">
             <!-- Left column -->
             <LayoutContainer Name="LeftColumn" HorizontalExpand="True" VerticalExpand="True" SizeFlagsStretchRatio="3.3">
                 <Control Name="DefaultState" VerticalExpand="True" HorizontalExpand="True">
-                    <LayoutContainer Name="BackgroundViewportArea" HorizontalExpand="True" VerticalExpand="True"
-                                     RectClipContent="True">
-                        <TextureRect Access="Public" VerticalExpand="True" HorizontalExpand="True" Name="Background"
-                                     Stretch="KeepAspectCentered" CanShrink="True" />
+                    <LayoutContainer Name="LeftContentArea" HorizontalExpand="True" VerticalExpand="True">
+                        <TextureRect Access="Public" VerticalExpand="True" HorizontalExpand="True" Name="ConsoleBackground"
+                                     Stretch="KeepAspectCentered" CanShrink="True" MouseFilter="Ignore" />
                         <PanelContainer Name="CenterMenuGlow" StyleClasses="LobbyCenterGlow"
                                         HorizontalAlignment="Center" VerticalAlignment="Center"
                                         Margin="0 0 0 0">

@@ -78,7 +78,6 @@ namespace Content.Client.Lobby
                 "community",
                 new[]
                 {
-                    "/Textures/_CCM14/Lobby/CCM_logo_lobby.png",
                     "/Textures/_CCM14/Lobby/Letni_CCM.png",
                     "/Textures/_CCM14/Lobby/CCM_New.png",
                     "/Textures/_CCM14/Lobby/LobbyArt1.png",
@@ -442,13 +441,21 @@ namespace Content.Client.Lobby
 
             if (string.IsNullOrWhiteSpace(path))
             {
-                Lobby.ActiveBackground.Texture = null;
+                Lobby.SetLobbyBackground(null, false);
                 _currentLobbyBackgroundPath = null;
                 return;
             }
 
-            Lobby.ActiveBackground.Texture = _resourceCache.GetResource<TextureResource>(path);
+            Lobby.SetLobbyBackground(_resourceCache.GetResource<TextureResource>(path), ShouldUseFullScreenLobbyBackground());
             _currentLobbyBackgroundPath = path;
+        }
+
+        private bool ShouldUseFullScreenLobbyBackground()
+        {
+            if (_cfg.GetCVar(RMCCVars.RMCLobbyUiStyle).Equals("old", StringComparison.OrdinalIgnoreCase))
+                return false;
+
+            return !string.Equals(_activeLobbyBackgroundPreset, "console", StringComparison.OrdinalIgnoreCase);
         }
 
         private static bool TryGetPresetBackgrounds(string preset, out string[] backgrounds)
@@ -481,8 +488,8 @@ namespace Content.Client.Lobby
             {
                 StyleNano.UiColorTheme.Gray => new[]
                 {
-                    "/Textures/_CCM14/Lobby/lobbytgmc_blue.png",
-                    "/Textures/_CCM14/Lobby/lobbyweyland_blue.png",
+                    "/Textures/_CCM14/Lobby/lobbytgmc_black.png",
+                    "/Textures/_CCM14/Lobby/lobbyweyland_black.png",
                 },
                 _ => new[]
                 {

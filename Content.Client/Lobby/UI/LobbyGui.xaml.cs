@@ -72,8 +72,8 @@ namespace Content.Client.Lobby.UI
         private const string LeftMenuHideAnimationKey = "lobby-left-menu-hide";
         private const string LeftMenuShowAnimationKey = "lobby-left-menu-show";
         private const float LeftMenuCenterYOffsetPercent = 0.06f;
-        private const float LobbyCenterWidthMin = 400f;
-        private const float LobbyCenterWidthMax = 440f;
+        private const float LobbyCenterWidthMin = 420f;
+        private const float LobbyCenterWidthMax = 460f;
         private const float LobbyTaskbarWidthMin = 500f;
         private const float LobbyTaskbarWidthMax = 760f;
         private const float LobbyTaskbarHeightDefault = 84f;
@@ -99,6 +99,8 @@ namespace Content.Client.Lobby.UI
             LayoutContainer.SetAnchorPreset(_oldLayout.CharacterSetupState, LayoutPreset.Wide);
             LayoutContainer.SetAnchorPreset(BackgroundViewportArea, LayoutPreset.Wide);
             LayoutContainer.SetAnchorPreset(Background, LayoutPreset.Wide);
+            LayoutContainer.SetAnchorPreset(LeftContentArea, LayoutPreset.Wide);
+            LayoutContainer.SetAnchorPreset(ConsoleBackground, LayoutPreset.Wide);
             LayoutContainer.SetAnchorAndMarginPreset(CenterMenuGlow, LayoutPreset.Center);
             LayoutContainer.SetAnchorPreset(VoteContainer, LayoutPreset.TopLeft); // # CCM priority rework
             LayoutContainer.SetAnchorAndMarginPreset(LobbyMusicPanel, LayoutPreset.TopRight, margin: 6);
@@ -177,6 +179,26 @@ namespace Content.Client.Lobby.UI
         public LobbyCharacterPreviewPanel OldCharacterPreview => _oldLayout.CharacterPreview;
         private bool IsOldLayoutActive => string.Equals(_cfg.GetCVar(RMCCVars.RMCLobbyUiStyle), "old", StringComparison.OrdinalIgnoreCase);
 
+        public void SetLobbyBackground(Texture? texture, bool fullScreen)
+        {
+            if (IsOldLayoutActive)
+            {
+                _oldLayout.Background.Texture = texture;
+                Background.Texture = null;
+                ConsoleBackground.Texture = null;
+                Background.Visible = false;
+                ConsoleBackground.Visible = false;
+                RightSideBackground.Visible = true;
+                return;
+            }
+
+            Background.Texture = fullScreen ? texture : null;
+            ConsoleBackground.Texture = fullScreen ? null : texture;
+            Background.Visible = fullScreen && texture != null;
+            ConsoleBackground.Visible = !fullScreen && texture != null;
+            RightSideBackground.Visible = !fullScreen;
+        }
+
         public void SetLobbyChatMain(bool setting)
         {
             Chat.Main = false;
@@ -234,7 +256,8 @@ namespace Content.Client.Lobby.UI
                 return;
             }
 
-            MainContainer.SetPositionFirst();
+            BackgroundViewportArea.SetPositionFirst();
+            MainContainer.SetPositionLast();
             CharacterSetupState.SetPositionLast();
         }
 

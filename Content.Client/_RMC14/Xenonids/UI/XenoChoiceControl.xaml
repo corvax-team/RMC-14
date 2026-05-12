@@ -1,16 +1,20 @@
 ﻿<ui:XenoChoiceControl
     xmlns="https://spacestation14.io"
     xmlns:ui="clr-namespace:Content.Client._RMC14.Xenonids.UI">
-    <BoxContainer Orientation="Horizontal">
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
         <Button Name="Button" Access="Public"
                 HorizontalExpand="True" VerticalExpand="False"
                 StyleClasses="ButtonSquare" Margin="0 0 0 4" MinHeight="42">
-            <BoxContainer Orientation="Horizontal" Margin="4 2">
+            <BoxContainer Orientation="Horizontal" Margin="4 2" HorizontalExpand="True">
                 <TextureRect Name="Texture" Access="Public"
                              HorizontalExpand="False" VerticalExpand="False"
                              Margin="3" MinSize="28 28"/>
                 <Control MinWidth="8"/>
-                <RichTextLabel Name="NameLabel" Access="Public" VerticalAlignment="Center"/>
+                <RichTextLabel
+                    Name="NameLabel"
+                    Access="Public"
+                    HorizontalExpand="True"
+                    VerticalAlignment="Center"/>
             </BoxContainer>
         </Button>
     </BoxContainer>

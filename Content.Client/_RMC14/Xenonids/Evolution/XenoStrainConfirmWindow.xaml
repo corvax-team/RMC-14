@@ -2,27 +2,49 @@
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.Evolution"
     xmlns:controls="clr-namespace:Robust.Client.UserInterface.Controls;assembly=Robust.Client"
+    xmlns:userInterface="clr-namespace:Content.Client._RMC14.UserInterface"
     Title="Информация о штамме"
-    MinSize="320 420"
-    SetSize="340 450">
-    <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="8" Access="Public" >
-        <controls:Label
-            Name="NameLabel"
-            HorizontalAlignment="Center"
-            StyleClasses="LabelBig" Access="Public" />
-        <controls:TextureRect
-            Name="Sprite"
-            HorizontalAlignment="Center"
-            Stretch="KeepAspectCentered"
-            MinSize="128,128" Access="Public" />
-        <controls:RichTextLabel
-            Name="DescriptionLabel"
-            VerticalAlignment="Top"
-            Margin="0,8,0,0" Access="Public" />
-        <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" SeparationOverride="16" Access="Public" >
+    MinSize="390 500"
+    SetSize="420 560">
+    <BoxContainer Orientation="Vertical" Margin="10" SeparationOverride="8" Access="Public">
+        <PanelContainer StyleClasses="PanelBackgroundBaseDark" HorizontalExpand="True">
+            <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6">
+                <controls:Label
+                    Name="NameLabel"
+                    HorizontalExpand="True"
+                    HorizontalAlignment="Center"
+                    StyleClasses="LabelBig" Access="Public" />
+                <controls:TextureRect
+                    Name="Sprite"
+                    HorizontalAlignment="Center"
+                    Stretch="KeepAspectCentered"
+                    MinSize="112 112" Access="Public" />
+            </BoxContainer>
+        </PanelContainer>
+
+        <userInterface:BlueHorizontalSeparator />
+
+        <controls:ScrollContainer
+            HScrollEnabled="False"
+            HorizontalExpand="True"
+            VerticalExpand="True"
+            MinSize="0 250">
+            <PanelContainer StyleClasses="PanelBackgroundBaseDark" HorizontalExpand="True" VerticalExpand="True">
+                <controls:RichTextLabel
+                    Name="DescriptionLabel"
+                    HorizontalExpand="True"
+                    VerticalExpand="True"
+                    Margin="8"
+                    Access="Public" />
+            </PanelContainer>
+        </controls:ScrollContainer>
+
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Access="Public">
             <controls:Button
                 Name="ConfirmButton"
-                MinWidth="120"
+                HorizontalExpand="True"
+                MinHeight="36"
+                StyleClasses="ButtonSquare ButtonColorGreen"
                 Text="{Loc rmc-ui-xeno-strain-confirm}" Access="Public" />
         </BoxContainer>
     </BoxContainer>

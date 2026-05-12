@@ -3,8 +3,8 @@
     xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.Evolution"
     xmlns:userInterface="clr-namespace:Content.Client._RMC14.UserInterface"
     Title="{Loc cm-xeno-available-evolutions}"
-    MinSize="330 430"
-    SetSize="340 470">
+    MinSize="360 430"
+    SetSize="390 470">
     <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
         <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6">
             <Label Name="PointsLabel" Access="Public" Text="Очки эволюции:" 
