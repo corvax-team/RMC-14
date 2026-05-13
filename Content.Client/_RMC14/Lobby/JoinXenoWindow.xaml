@@ -2,19 +2,8 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Lobby"
     Title="{Loc rmc-lobby-join-xeno}"
-    MinSize="440 220">
+    MinSize="440 150">
     <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="8">
-        <PanelContainer Name="JoinHeaderPanel" Access="Public">
-            <BoxContainer Orientation="Vertical" Margin="10 8" SeparationOverride="2">
-                <Label Name="WindowTitleLabel"
-                       Access="Public"
-                       Text="{Loc rmc-lobby-join-xeno}"
-                       StyleClasses="LabelHeading" />
-                <Label Name="WindowSubtitleLabel"
-                       Access="Public"
-                       Text="{Loc rmc-lobby-join-as-larva}" />
-            </BoxContainer>
-        </PanelContainer>
         <PanelContainer Name="StatusPanel" Access="Public">
             <BoxContainer Orientation="Vertical" Margin="10 10 10 10">
                 <Label Name="Label" Access="Public" ClipText="False" />

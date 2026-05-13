@@ -42,13 +42,6 @@ public sealed partial class JoinXenoWindow : DefaultCMWindow
         _appliedTheme = theme;
         var palette = GetPalette(theme);
 
-        JoinHeaderPanel.PanelOverride = new StyleBoxFlat
-        {
-            BackgroundColor = palette.HeaderBackground,
-            BorderColor = palette.HeaderBorder,
-            BorderThickness = new Thickness(1),
-        };
-
         StatusPanel.PanelOverride = new StyleBoxFlat
         {
             BackgroundColor = palette.CardBackground,
@@ -63,8 +56,6 @@ public sealed partial class JoinXenoWindow : DefaultCMWindow
             BorderThickness = new Thickness(1),
         };
 
-        WindowTitleLabel.FontColorOverride = palette.TitleText;
-        WindowSubtitleLabel.FontColorOverride = palette.MutedText;
         if (Label.FontColorOverride == default)
             Label.FontColorOverride = palette.BodyText;
     }
@@ -74,36 +65,27 @@ public sealed partial class JoinXenoWindow : DefaultCMWindow
         return theme switch
         {
             StyleNano.UiColorTheme.Gray => new XenoJoinPalette(
-                Color.FromHex("#323B47").WithAlpha(0.96f),
-                Color.FromHex("#738396").WithAlpha(0.95f),
                 Color.FromHex("#191E26").WithAlpha(0.96f),
                 Color.FromHex("#495869").WithAlpha(0.94f),
                 Color.FromHex("#212730").WithAlpha(0.94f),
                 Color.FromHex("#68788B").WithAlpha(0.95f),
-                Color.FromHex("#F2F6FA"),
                 Color.FromHex("#C7D0DA"),
                 Color.FromHex("#E4EAF1")),
             _ => new XenoJoinPalette(
-                Color.FromHex("#123A1C").WithAlpha(0.96f),
-                Color.FromHex("#3D8451").WithAlpha(0.95f),
                 Color.FromHex("#09150C").WithAlpha(0.96f),
                 Color.FromHex("#2D633B").WithAlpha(0.94f),
                 Color.FromHex("#0E2012").WithAlpha(0.94f),
                 Color.FromHex("#3A7A4C").WithAlpha(0.95f),
-                Color.FromHex("#ECFFF0"),
                 Color.FromHex("#C6E5CD"),
                 Color.FromHex("#DFF8E5")),
         };
     }
 
     private readonly record struct XenoJoinPalette(
-        Color HeaderBackground,
-        Color HeaderBorder,
         Color CardBackground,
         Color CardBorder,
         Color ActionBackground,
         Color ActionBorder,
-        Color TitleText,
         Color MutedText,
         Color BodyText);
 }

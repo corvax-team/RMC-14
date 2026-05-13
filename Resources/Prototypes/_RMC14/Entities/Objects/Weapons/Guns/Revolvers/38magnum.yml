@@ -90,6 +90,7 @@
     containers:
       ballistic-ammo: !type:Container
         ents: []
+  - type: Corrodible
 
 - type: entity
   parent: RMCBaseSpeedLoader38

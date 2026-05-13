@@ -24,6 +24,7 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
     private EntityQuery<ActorComponent> _actorQuery;
 
     private readonly Dictionary<NetUserId, GameTick> _lastRealTicks = new();
+    private GameTick _lastSentRealTick;
 
     public override void Initialize()
     {
@@ -107,7 +108,12 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         if (_net.IsServer)
             return;
 
-        RaiseNetworkEvent(new RMCSetLastRealTickEvent(GetLastRealTick(null)));
+        var tick = GetLastRealTick(null);
+        if (tick == _lastSentRealTick)
+            return;
+
+        _lastSentRealTick = tick;
+        RaiseNetworkEvent(new RMCSetLastRealTickEvent(tick));
     }
 
     public bool Collides(Entity<FixturesComponent?> target, Entity<PhysicsComponent?> projectile, MapCoordinates targetCoordinates)

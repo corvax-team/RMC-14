@@ -2853,7 +2853,10 @@ namespace Content.Client.Lobby.UI
             }
             catch (Exception exc)
             {
-                _sawmill.Error($"Error when importing profile\n{exc.StackTrace}");
+                _sawmill.Error($"Error when importing profile\n{exc}");
+                UserInterfaceManager.Popup(
+                    Loc.GetString("humanoid-profile-editor-import-failed-message"),
+                    Loc.GetString("humanoid-profile-editor-import-failed-title"));
             }
             finally
             {

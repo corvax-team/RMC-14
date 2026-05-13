@@ -16,6 +16,7 @@
     additionalKeys:
     - windows
     base: stone
+  - type: Corrodible
 
 - type: entity
   parent: RMCWallSandstone

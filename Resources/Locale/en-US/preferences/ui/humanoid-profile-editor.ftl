@@ -128,5 +128,7 @@ humanoid-profile-editor-background-info-title = Background info
 trait-category-disabilities = Disabilities
 trait-category-speech = Speech traits
 trait-category-quirks = Quirks
+humanoid-profile-editor-import-failed-title = Import failed
+humanoid-profile-editor-import-failed-message = Failed to import this character profile. The file contains unsupported or invalid data for this build.
 
 # CCM priority rework

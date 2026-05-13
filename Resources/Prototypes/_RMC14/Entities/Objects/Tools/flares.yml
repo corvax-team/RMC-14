@@ -104,6 +104,7 @@
     proto: RMCFlareBullet
   - type: RMCAirProjectile
     prototype: RMCAirFlare
+  - type: Corrodible
 
 - type: entity
   parent: CMFlare
@@ -399,6 +400,7 @@
           Medium: { visible: false }
           High: { visible: false }
           Full: { visible: false }
+  - type: Corrodible
 
 - type: entity
   parent: CMPackFlareBase

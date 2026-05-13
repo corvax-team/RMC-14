@@ -117,6 +117,7 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Corrodible
 
 - type: entity
   abstract: true

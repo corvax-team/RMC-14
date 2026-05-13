@@ -2,8 +2,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
-using Content.Server.Speech.EntitySystems;
-using Content.Server.Speech.Prototypes;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids;
@@ -15,7 +13,6 @@ using Content.Shared.Radio;
 using Content.Shared.Speech;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -28,13 +25,8 @@ public sealed class CMChatSystem : SharedCMChatSystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
 
-    private static readonly ProtoId<ReplacementAccentPrototype> ChatSanitize = "CMChatSanitize";
-    private static readonly ProtoId<ReplacementAccentPrototype> MarineChatSanitize = "CMChatSanitizeMarine";
-    private static readonly ProtoId<ReplacementAccentPrototype> XenoChatSanitize = "CMChatSanitizeXeno";
     private static readonly Regex PrefixesRegex = new(@"^:(\w)+");
 
     private readonly List<ICommonSession> _toRemove = new();
@@ -86,11 +78,6 @@ public sealed class CMChatSystem : SharedCMChatSystem
 
     public override string SanitizeMessageReplaceWords(EntityUid source, string msg)
     {
-        msg = _wordreplacement.ApplyReplacements(msg, ChatSanitize);
-
-        var factionSanitize = HasComp<XenoComponent>(source) ? XenoChatSanitize : MarineChatSanitize;
-        msg = _wordreplacement.ApplyReplacements(msg, factionSanitize);
-
         return msg;
     }
 

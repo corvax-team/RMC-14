@@ -151,6 +151,9 @@
     whitelist:
       components:
       - Marine
+      - Vehicle
       - Xeno
+  - type: VehicleDamageMultiplier
+    multiplier: 2
   - type: XenoConstructionBuildSpeed
     buildTimeMult: 1

@@ -1023,7 +1023,7 @@ public abstract class SharedActionsSystem : EntitySystem
 
     public void SetEntityIcon(Entity<ActionComponent?> ent, EntityUid? icon)
     {
-        if (!_actionQuery.Resolve(ent, ref ent.Comp) || ent.Comp.EntityIcon == icon)
+        if (!_actionQuery.Resolve(ent, ref ent.Comp, false) || ent.Comp.EntityIcon == icon)
             return;
 
         ent.Comp.EntityIcon = icon;
@@ -1032,7 +1032,7 @@ public abstract class SharedActionsSystem : EntitySystem
 
     public void SetIcon(Entity<ActionComponent?> ent, SpriteSpecifier? icon)
     {
-        if (!_actionQuery.Resolve(ent, ref ent.Comp) || ent.Comp.Icon == icon)
+        if (!_actionQuery.Resolve(ent, ref ent.Comp, false) || ent.Comp.Icon == icon)
             return;
 
         ent.Comp.Icon = icon;
@@ -1041,7 +1041,7 @@ public abstract class SharedActionsSystem : EntitySystem
 
     public void SetIconOn(Entity<ActionComponent?> ent, SpriteSpecifier? iconOn)
     {
-        if (!_actionQuery.Resolve(ent, ref ent.Comp) || ent.Comp.IconOn == iconOn)
+        if (!_actionQuery.Resolve(ent, ref ent.Comp, false) || ent.Comp.IconOn == iconOn)
             return;
 
         ent.Comp.IconOn = iconOn;
@@ -1050,7 +1050,7 @@ public abstract class SharedActionsSystem : EntitySystem
 
     public void SetIconColor(Entity<ActionComponent?> ent, Color color)
     {
-        if (!_actionQuery.Resolve(ent, ref ent.Comp) || ent.Comp.IconColor == color)
+        if (!_actionQuery.Resolve(ent, ref ent.Comp, false) || ent.Comp.IconColor == color)
             return;
 
         ent.Comp.IconColor = color;

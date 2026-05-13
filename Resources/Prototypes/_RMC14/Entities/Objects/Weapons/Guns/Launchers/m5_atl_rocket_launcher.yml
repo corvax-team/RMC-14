@@ -119,6 +119,7 @@
     suffix: false
   - type: IgnorePredictionHide
   - type: AssistedReloadAmmo
+  - type: Corrodible
 
 - type: entity
   id: RMCBaseProjectileRocket84mm

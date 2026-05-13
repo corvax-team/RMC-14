@@ -137,3 +137,5 @@ bark-voice-marine-male = ������ (���.)
 bark-voice-marine-female = ������ (���.)
 bark-voice-marine-robot = ��������
 bark-voice-marine-alien = �����
+humanoid-profile-editor-import-failed-title = Ошибка импорта
+humanoid-profile-editor-import-failed-message = Не удалось импортировать профиль персонажа. Файл содержит неподдерживаемые или некорректные данные для этого билда.
