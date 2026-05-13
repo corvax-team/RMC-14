@@ -3,6 +3,7 @@ using Content.Shared.Research.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Lathe
 {
@@ -99,6 +100,19 @@ namespace Content.Shared.Lathe
             GetUnavailable = forced;
         }
     }
+
+    //Corvax
+    [Serializable]
+    public sealed partial class LatheGetResultEvent : EntityEventArgs
+    {
+        public readonly EntityUid ResultItem;
+
+        public LatheGetResultEvent(EntityUid result)
+        {
+            ResultItem = result;
+        }
+    }
+    //Corvax
 
     /// <summary>
     /// Event raised on a lathe when it starts producing a recipe.

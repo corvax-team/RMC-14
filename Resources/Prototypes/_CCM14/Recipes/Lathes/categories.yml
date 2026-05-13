@@ -1,0 +1,19 @@
+- type: latheCategory
+  id: CommandDocuments
+  name: lathe-category-command-documents
+
+- type: latheCategory
+  id: MilitaryBailiffsDocuments
+  name: lathe-category-military-bailiffs-documents
+
+- type: latheCategory
+  id: MedicalDocuments
+  name: lathe-category-medical-documents
+
+- type: latheCategory
+  id: EngineeringDocuments
+  name: lathe-category-engineering-documents
+
+- type: latheCategory
+  id: CorporateDocuments
+  name: lathe-category-corporate-documents

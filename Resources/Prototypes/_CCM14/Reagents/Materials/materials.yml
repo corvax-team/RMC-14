@@ -1,0 +1,7 @@
+- type: material
+  id: PrinterPaper
+  stackEntity: Paper
+  name: materials-paper
+  icon: { sprite: _RMC14/Objects/Misc/paper.rsi, state: paper }
+  color: "#b9af9d"
+  price: 0.05

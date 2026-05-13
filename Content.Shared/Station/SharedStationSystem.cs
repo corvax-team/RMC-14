@@ -81,6 +81,15 @@ public abstract partial class SharedStationSystem : EntitySystem
         SetStation(ent, stationMember.Station);
     }
 
+    [PublicAPI]
+    public EntityUid? GetOwningStation(EntityUid? entity, TransformComponent? xform = null)
+    {
+        if (entity == null)
+            return null;
+
+        return GetOwningStation(entity.Value, xform);
+    }
+
     /// <summary>
     /// Sets the station for a StationTrackerComponent.
     /// </summary>

@@ -1,0 +1,95 @@
+- type: entity
+  parent: CMPaper
+  id: PrintedDocument
+  abstract: true
+  description: Bureaucratic unit. A document printed on a printer.
+  components:
+    - type: Paper
+
+- type: entity
+  parent: PrintedDocument
+  id: PrintedDocumentNotificationStartOperation
+  name: Notification of operation start
+  components:
+    - type: Paper
+      content: doc-text-printer-notification-start-operation
+
+- type: entity
+  parent: PrintedDocument
+  id: PrintedDocumentTransactionReport
+  name: Operation report
+  components:
+    - type: Paper
+      content: doc-text-printer-transaction-report
+
+- type: entity
+  parent: PrintedDocument
+  id: PrintedDocumentNotificationLosses
+  name: Combat losses notification
+  components:
+    - type: Paper
+      content: doc-text-printer-notification-losses
+
+- type: entity
+  parent: PrintedDocument
+  id: PrintedDocumentDisciplinaryActionReport
+  name: Disciplinary action report
+  components:
+    - type: Paper
+      content: doc-text-printer-disciplinary-action-report
+
+- type: entity
+  parent: PrintedDocument
+  id: PrintedDocumentMBRequest
+  name: Military Bailiffs request
+  components:
+    - type: Paper
+      content: doc-text-printer-mb-request
+
+- type: entity
+  parent: PrintedDocument
+  id: PrintedDocumentSpecialChemicalOrder
+  name: Special chemical order
+  components:
+    - type: Paper
+      content: doc-text-printer-special-chemical-order
+
+- type: entity
+  parent: PrintedDocument
+  id: PrintedDocumentDeathCertificate
+  name: Death certificate
+  components:
+    - type: Paper
+      content: doc-text-printer-death-certificate
+
+- type: entity
+  parent: PrintedDocument
+  id: PrintedDocumentConstructionRequest
+  name: Construction request
+  components:
+    - type: Paper
+      content: doc-text-printer-construction-request
+
+- type: entity
+  parent: PrintedDocument
+  id: PrintedDocumentEngineeringReport
+  name: Engineering report
+  components:
+    - type: Paper
+      content: doc-text-printer-engineering-report
+
+- type: entity
+  parent: PrintedDocument
+  id: PrintedDocumentColonyIncidentReport
+  name: Colony incident report
+  components:
+    - type: Paper
+      content: doc-text-printer-colony-incident-report
+
+- type: entity
+  parent: PrintedDocument
+  id: PrintedDocumentNDA
+  name: Non-disclosure agreement
+  components:
+    - type: Paper
+      content: doc-text-printer-nda

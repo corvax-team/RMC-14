@@ -1,0 +1,14 @@
+- type: latheRecipePack
+  id: CCMDocumentsPack
+  recipes:
+    - PrintedDocumentNotificationStartOperationRecipe
+    - PrintedDocumentTransactionReportRecipe
+    - PrintedDocumentNotificationLossesRecipe
+    - PrintedDocumentDisciplinaryActionReportRecipe
+    - PrintedDocumentMBRequestRecipe
+    - PrintedDocumentSpecialChemicalOrderRecipe
+    - PrintedDocumentDeathCertificateRecipe
+    - PrintedDocumentConstructionRequestRecipe
+    - PrintedDocumentEngineeringReportRecipe
+    - PrintedDocumentColonyIncidentReportRecipe
+    - PrintedDocumentNDARecipe

@@ -1,0 +1,109 @@
+- type: latheRecipe
+  id: PrintedDocumentNotificationStartOperationRecipe
+  result: PrintedDocumentNotificationStartOperation
+  categories:
+    - CommandDocuments
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    PrinterPaper: 100
+
+- type: latheRecipe
+  id: PrintedDocumentTransactionReportRecipe
+  result: PrintedDocumentTransactionReport
+  categories:
+    - CommandDocuments
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    PrinterPaper: 100
+
+- type: latheRecipe
+  id: PrintedDocumentNotificationLossesRecipe
+  result: PrintedDocumentNotificationLosses
+  categories:
+    - CommandDocuments
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    PrinterPaper: 100
+
+- type: latheRecipe
+  id: PrintedDocumentDisciplinaryActionReportRecipe
+  result: PrintedDocumentDisciplinaryActionReport
+  categories:
+    - MilitaryBailiffsDocuments
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    PrinterPaper: 100
+
+- type: latheRecipe
+  id: PrintedDocumentMBRequestRecipe
+  result: PrintedDocumentMBRequest
+  categories:
+    - MilitaryBailiffsDocuments
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    PrinterPaper: 100
+
+- type: latheRecipe
+  id: PrintedDocumentSpecialChemicalOrderRecipe
+  result: PrintedDocumentSpecialChemicalOrder
+  categories:
+    - MedicalDocuments
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    PrinterPaper: 100
+
+- type: latheRecipe
+  id: PrintedDocumentDeathCertificateRecipe
+  result: PrintedDocumentDeathCertificate
+  categories:
+    - MedicalDocuments
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    PrinterPaper: 100
+
+- type: latheRecipe
+  id: PrintedDocumentConstructionRequestRecipe
+  result: PrintedDocumentConstructionRequest
+  categories:
+    - EngineeringDocuments
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    PrinterPaper: 100
+
+- type: latheRecipe
+  id: PrintedDocumentEngineeringReportRecipe
+  result: PrintedDocumentEngineeringReport
+  categories:
+    - EngineeringDocuments
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    PrinterPaper: 100
+
+- type: latheRecipe
+  id: PrintedDocumentColonyIncidentReportRecipe
+  result: PrintedDocumentColonyIncidentReport
+  categories:
+    - CorporateDocuments
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    PrinterPaper: 100
+
+- type: latheRecipe
+  id: PrintedDocumentNDARecipe
+  result: PrintedDocumentNDA
+  categories:
+    - CorporateDocuments
+  completetime: 2
+  applyMaterialDiscount: false
+  materials:
+    PrinterPaper: 100
