@@ -154,6 +154,6 @@
       - Vehicle
       - Xeno
   - type: VehicleDamageMultiplier
-    multiplier: 2
+    multiplier: 2.5
   - type: XenoConstructionBuildSpeed
-    buildTimeMult: 1
+    buildTimeMult: 2

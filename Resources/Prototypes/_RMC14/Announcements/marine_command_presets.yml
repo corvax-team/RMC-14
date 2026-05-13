@@ -3,7 +3,6 @@
   name: "Marine Command"
   description: "Official announcements from Marine Command"
   target: Marines
-  showSprite: false
   defaultVariant: MarineCommandDefault
   simplifiedVariant: MarineCommandSimplified
   style:
@@ -91,7 +90,6 @@
   name: "Marine Overwatch"
   description: "Overwatch squad announcements"
   target: Marines
-  showSprite: false
   defaultVariant: MarineCommandDefault
   simplifiedVariant: MarineCommandSimplified
   style:
@@ -179,7 +177,6 @@
   name: "Marine Command (Default)"
   description: "Standard marine announcements"
   target: Marines
-  showSprite: false
   style:
     animation:
       animation: Typewriter
