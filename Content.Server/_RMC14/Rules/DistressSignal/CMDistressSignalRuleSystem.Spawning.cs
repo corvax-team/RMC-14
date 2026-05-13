@@ -125,10 +125,7 @@ public sealed partial class CMDistressSignalRuleSystem
 
     private void ApplyJobSlotScaling(CMDistressSignalRuleComponent comp, RulePlayerSpawningEvent ev)
     {
-        var totalXenos = (int) Math.Round(Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno));
-        // TODO RMC14 dont count survivors
-        var totalSurvivors = (int) Math.Clamp((int)Math.Round(ev.PlayerPool.Count / _marinesPerSurvivor), _minimumSurvivors, _maximumSurvivors);
-        var marines = ev.PlayerPool.Count - totalXenos - totalSurvivors;
+        var (_, _, marines) = CalculateRoundStartFactionCounts(ev.PlayerPool.Count);
 
         // TODO RMC14: Move to component
         if (!comp.DoJobSlotScaling || marines <= 0 || !_config.GetCVar(RMCCVars.RMCJobSlotScaling))
@@ -214,7 +211,7 @@ public sealed partial class CMDistressSignalRuleSystem
             return playerId;
         }
 
-        var totalXenos = (int) Math.Round(Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno));
+        var (totalXenos, _, _) = CalculateRoundStartFactionCounts(ev.PlayerPool.Count);
         var priorities = Enum.GetValues<JobPriority>().Length;
         var xenoCandidates = new List<NetUserId>[priorities];
         for (var i = 0; i < priorities; i++)
@@ -271,6 +268,28 @@ public sealed partial class CMDistressSignalRuleSystem
             comp.XenosSpawned += burrowedLarva;
         }
         // CCM14-end
+    }
+
+    private (int Xenos, int Survivors, int Marines) CalculateRoundStartFactionCounts(int totalPlayers)
+    {
+        if (totalPlayers <= 0)
+            return (0, 0, 0);
+
+        var totalSurvivors = _marinesPerSurvivor <= 0
+            ? 0
+            : (int) Math.Clamp(
+                (int) Math.Round(totalPlayers / _marinesPerSurvivor),
+                _minimumSurvivors,
+                _maximumSurvivors);
+
+        var marineAndXenoPool = Math.Max(1, totalPlayers - totalSurvivors);
+        var totalXenos = _marinesPerXeno <= 0
+            ? marineAndXenoPool
+            : (int) Math.Round(Math.Max(1f, marineAndXenoPool / (_marinesPerXeno + 1f)));
+
+        totalXenos = Math.Clamp(totalXenos, 1, marineAndXenoPool);
+        var marines = Math.Max(0, totalPlayers - totalSurvivors - totalXenos);
+        return (totalXenos, totalSurvivors, marines);
     }
 
     private EntityUid SpawnXenoEnt(EntProtoId ent, ICommonSession player, bool doBurst,

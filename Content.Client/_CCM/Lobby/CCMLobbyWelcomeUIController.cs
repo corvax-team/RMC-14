@@ -45,6 +45,7 @@ public sealed class CCMLobbyWelcomeUIController : UIController, IOnStateEntered<
 
         _config.SetCVar(RMCCVars.CCMLobbyWelcomeSeenVersion, CurrentWelcomeVersion);
         _config.SetCVar(RMCCVars.CCMLobbyWelcomeSeenCount, 1);
+        _config.SaveToFile();
         OpenWindow();
     }
 
@@ -94,6 +95,7 @@ public sealed class CCMLobbyWelcomeUIController : UIController, IOnStateEntered<
 
     private void OnFinished()
     {
+        _config.SaveToFile();
     }
 
     private void EnsureDefaultLobbyPresentation()
@@ -104,6 +106,7 @@ public sealed class CCMLobbyWelcomeUIController : UIController, IOnStateEntered<
             _config.SetCVar(RMCCVars.RMCUIColorTheme, "gray");
             _config.SetCVar(RMCCVars.RMCChatTranslateEnabled, false);
             _config.SetCVar(RMCCVars.RMCLobbyPresentationDefaultsMigrated, true);
+            _config.SaveToFile();
             return;
         }
 

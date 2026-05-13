@@ -99,6 +99,9 @@ public sealed class RMCWeatherSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        // Temporary global weather disable: keep the weather cycle dormant on all maps.
+        return;
+
         var weatherQuery = EntityQueryEnumerator<RMCWeatherCycleComponent>();
 
         while (weatherQuery.MoveNext(out var uid, out var cycle))

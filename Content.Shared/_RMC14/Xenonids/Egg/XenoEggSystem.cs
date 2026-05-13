@@ -1062,6 +1062,9 @@ public sealed class XenoEggSystem : EntitySystem
     // CCM royal egg start
     private void SpawnQueenEggs()
     {
+        // Temporary disable for royal facehuggers: do not spawn royal eggs.
+        return;
+
         var query = EntityQueryEnumerator<XenoOvipositorCapableComponent, XenoAttachedOvipositorComponent, TransformComponent>();
 
         while (query.MoveNext(out var uid, out var capable, out var attached, out var xform))

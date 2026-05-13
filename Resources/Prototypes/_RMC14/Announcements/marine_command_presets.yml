@@ -3,6 +3,7 @@
   name: "Marine Command"
   description: "Official announcements from Marine Command"
   target: Marines
+  showSprite: false
   defaultVariant: MarineCommandDefault
   simplifiedVariant: MarineCommandSimplified
   style:
@@ -19,7 +20,7 @@
         zoomDuration: 1.0
         bounceCount: 3
         bounceHeight: 15
-        enableCRT: true
+        enableCRT: false
         cRTSettings:
           # enabled: true
           # showScanlines: true
@@ -90,6 +91,7 @@
   name: "Marine Overwatch"
   description: "Overwatch squad announcements"
   target: Marines
+  showSprite: false
   defaultVariant: MarineCommandDefault
   simplifiedVariant: MarineCommandSimplified
   style:
@@ -106,7 +108,7 @@
         zoomDuration: 1.0
         bounceCount: 3
         bounceHeight: 15
-        enableCRT: true
+        enableCRT: false
         cRTSettings:
           # enabled: true
           # showScanlines: true
@@ -177,6 +179,7 @@
   name: "Marine Command (Default)"
   description: "Standard marine announcements"
   target: Marines
+  showSprite: false
   style:
     animation:
       animation: Typewriter

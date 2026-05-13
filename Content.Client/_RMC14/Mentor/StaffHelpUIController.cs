@@ -471,8 +471,8 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         if (_aHelp.GameAHelpButton != null)
             _aHelp.GameAHelpButton.Pressed = pressed;
 
-        if (_aHelp.GameAHelpButton != null)
-            _aHelp.GameAHelpButton.Pressed = pressed;
+        if (_aHelp.LobbyAHelpButton != null)
+            _aHelp.LobbyAHelpButton.Pressed = pressed;
     }
 
     private void UpdateTypingIndicator()

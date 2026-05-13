@@ -490,6 +490,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
         _chatTranslateCheckBox.OnToggled += args =>
         {
             _config.SetCVar(RMCCVars.RMCChatTranslateEnabled, args.Pressed);
+            _config.SaveToFile();
         };
 
         return _chatTranslateCheckBox;
@@ -745,6 +746,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
             return;
 
         _config.SetCVar(RMCCVars.RMCUIColorTheme, theme);
+        _config.SaveToFile();
     }
 
     private void SetLobbyUiStyle(string style)
@@ -754,6 +756,7 @@ public sealed class CCMLobbyWelcomeWindow : DefaultCMWindow
             return;
 
         _config.SetCVar(RMCCVars.RMCLobbyUiStyle, style);
+        _config.SaveToFile();
     }
 
     private void OpenLanguageRestartConfirm()

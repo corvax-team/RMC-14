@@ -93,13 +93,13 @@ can_create_vacuum = false
 preload = false
 
 [rmc]
-late_joins_per_burrowed_larva = 3.5
-late_joins_per_burrowed_larva_early = 3.5
-late_joins_per_burrowed_larva_early_threshold_minutes = 5
-marines_per_xeno = 3.5
-auto_balance_step = 0.5
-auto_balance_min = 2.5
-auto_balance_max = 4.5
+late_joins_per_burrowed_larva = 7
+late_joins_per_burrowed_larva_early = 7.5
+late_joins_per_burrowed_larva_early_threshold_minutes = 15
+marines_per_xeno = 6
+auto_balance_step = 0.25
+auto_balance_min = 5
+auto_balance_max = 6.5
 distress_xenos_minimum = 1
 discord_oauth_base_url = "http://127.0.0.1:2424"
 discord_oauth_state_secret = "replace-me"
@@ -123,3 +123,6 @@ engine_version = "264.0.2-fix-physics"
 
 [movement]
 mob_pushing = true
+
+[mc.z_levels]
+enabled = false

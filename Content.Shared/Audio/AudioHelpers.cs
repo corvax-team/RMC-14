@@ -55,6 +55,46 @@ namespace Content.Shared.Audio
                 : SharedAudioSystem.VolumeToGain(sanitizedVolume);
         }
 
+        public static AudioParams SanitizeAudioParams(AudioParams audioParams, AudioParams? fallback = null)
+        {
+            var safeFallback = fallback ?? AudioParams.Default;
+
+            audioParams = audioParams
+                .WithVolume(SanitizeVolume(audioParams.Volume, safeFallback.Volume))
+                .WithPitchScale(SanitizeNonNegative(audioParams.Pitch, safeFallback.Pitch))
+                .WithMaxDistance(SanitizeNonNegative(audioParams.MaxDistance, safeFallback.MaxDistance))
+                .WithRolloffFactor(SanitizeNonNegative(audioParams.RolloffFactor, safeFallback.RolloffFactor))
+                .WithReferenceDistance(SanitizeNonNegative(audioParams.ReferenceDistance, safeFallback.ReferenceDistance))
+                .WithPlayOffset(SanitizeNonNegative(audioParams.PlayOffsetSeconds, safeFallback.PlayOffsetSeconds))
+                .WithVariation(SanitizeVariation(audioParams.Variation, safeFallback.Variation));
+
+            return audioParams;
+        }
+
+        private static float SanitizeNonNegative(float value, float fallback)
+        {
+            if (!float.IsFinite(value) || value < 0f)
+                value = fallback;
+
+            if (!float.IsFinite(value) || value < 0f)
+                return 0f;
+
+            return value;
+        }
+
+        private static float? SanitizeVariation(float? value, float? fallback)
+        {
+            if (value is null)
+                return null;
+
+            if (!float.IsFinite(value.Value) || value.Value < 0f)
+                return fallback is { } fallbackValue && float.IsFinite(fallbackValue) && fallbackValue >= 0f
+                    ? fallbackValue
+                    : null;
+
+            return value.Value;
+        }
+
         /// <summary>
         ///     Returns a random pitch.
         /// </summary>

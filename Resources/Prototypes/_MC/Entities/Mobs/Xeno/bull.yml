@@ -27,8 +27,8 @@
     offset: 0, 0.35
   - type: TacticalMapIcon
     icon:
-      sprite: /Textures/_MC/Interface/MapIcons/Xeno/xeno.rsi
-      state: bull
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: defender
   # Abilities
   - type: Xeno
     role: MCXenoBull

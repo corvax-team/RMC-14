@@ -287,7 +287,7 @@
   name: Trijent Dam
   components:
   - type: RMCPlanetMapPrototype
-    map: Maps/_CCM14/Planets/Z-level/Trijent/devtrijent/devtrijent0.yml
+    map: Maps/_RMC14/trijent.yml
     camouflage: Desert
     announcement: "Пехота! Была потеряна связь с корпоративной колонией на планете Райджин. Видимо, туда наш путь теперь и проложен. Хех, удачи!
             Для общего понимания,
@@ -388,9 +388,9 @@
 #        - : -1
 #        CMSurvivorScientist:
 #        - : -1
-  - type: MCPlanetMapPrototype
-    mapsAbove:
-    - Maps/_CCM14/Planets/Z-level/Trijent/devtrijent/devtrijent1.yml
+#  - type: MCPlanetMapPrototype
+#    mapsAbove:
+#    - Maps/_CCM14/Planets/Z-level/Trijent/devtrijent/devtrijent1.yml
 
 - type: entity
   id: RMCPlanetVaradero

@@ -9,6 +9,7 @@ namespace Content.Server._MC.Spreader;
 
 public sealed class MCEdgeSpreaderSystem : EntitySystem
 {
+    private const long SpreadDelayMultiplier = 2;
     private static readonly Vector2i[] Directions = [Vector2i.Up, Vector2i.Right, Vector2i.Down, Vector2i.Left];
 
     [Dependency] private readonly IGameTiming _timing = null!;
@@ -32,6 +33,12 @@ public sealed class MCEdgeSpreaderSystem : EntitySystem
         var query = EntityQueryEnumerator<MCEdgeSpreaderComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var component, out var xform))
         {
+            if (component.NextUpdate == TimeSpan.Zero)
+            {
+                component.NextUpdate = currentTime + GetSpreadDelay(component);
+                continue;
+            }
+
             if (component.NextUpdate > currentTime)
                 continue;
 
@@ -48,7 +55,7 @@ public sealed class MCEdgeSpreaderSystem : EntitySystem
                 continue;
             }
 
-            _spawnDeferredEntries.Add(new SpawnDeferredEntry(uid, xform.GridUid.Value, component.Range - 1, currentTime + component.Delay, freeTiles));
+            _spawnDeferredEntries.Add(new SpawnDeferredEntry(uid, xform.GridUid.Value, component.Range - 1, currentTime + GetSpreadDelay(component), freeTiles));
             RemCompDeferred<MCEdgeSpreaderComponent>(uid);
         }
 
@@ -111,6 +118,11 @@ public sealed class MCEdgeSpreaderSystem : EntitySystem
         }
 
         return false;
+    }
+
+    private static TimeSpan GetSpreadDelay(MCEdgeSpreaderComponent component)
+    {
+        return TimeSpan.FromTicks(component.Delay.Ticks * SpreadDelayMultiplier);
     }
 
     private readonly record struct SpawnDeferredEntry(EntityUid Uid, EntityUid GridUid, int Range, TimeSpan NextUpdate, ValueList<Vector2i> FreeTiles);
