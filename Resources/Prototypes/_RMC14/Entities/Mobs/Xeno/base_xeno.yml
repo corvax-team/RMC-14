@@ -48,6 +48,7 @@
     simple: true
     deadText: rmc-medical-examine-dead-xeno
   - type: RMCBlockMedicalExamine
+  - type: YautjaTrophySource
   - type: MobState
     allowedStates:
     - Alive
@@ -284,6 +285,7 @@
       - Xeno
       - Infectable
       - Synth
+      - Yautja
   - type: BlockPullingDead
   - type: XenoFriendly
   - type: Undisposable

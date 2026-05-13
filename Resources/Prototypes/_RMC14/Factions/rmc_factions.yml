@@ -16,6 +16,25 @@
   - CLF
   - TSE
   - HEFA
+  - AUColonist
+  - CMUAPE
+  - CMUYautja
+
+- type: npcFaction
+  id: CMUAPE
+  hostile:
+  - UNMC
+  - NanoTrasen
+  - SPP
+  - GOVFOR
+  - OPFOR
+  - Halcyon
+  - WeYa
+  - Civilian
+  - CLF
+  - TSE
+  - AUColonist
+
 
 - type: npcFaction
   id: RMCDumb

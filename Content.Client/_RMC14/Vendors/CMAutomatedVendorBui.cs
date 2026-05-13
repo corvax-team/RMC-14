@@ -100,9 +100,9 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                         .Select(o => o.Default)
                         .ToList();
                     if (entity.TryGetComponent<SpriteComponent>("Sprite", out var entitySprites) &&
-                        entitySprites.AllLayers.Any())
+                        entitySprites.AllLayers.FirstOrDefault() is { } firstLayer)
                     {
-                        uiEntry.Texture.Modulate = entitySprites.AllLayers.First().Color;
+                        uiEntry.Texture.Modulate = firstLayer.Color;
                     }
 
                     uiEntry.Panel.Button.Label.Text = entry.Name?.Replace("\\n", "\n") ?? entity.Name;
