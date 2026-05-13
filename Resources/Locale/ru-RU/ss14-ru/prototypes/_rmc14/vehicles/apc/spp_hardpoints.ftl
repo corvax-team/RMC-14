@@ -1,0 +1,14 @@
+ent-VehicleSPPAPCHardpointBase = { ent-BaseItem }
+    .desc = { ent-BaseItem.desc }
+ent-VehicleSPPAPCWheel = колесо БТР СССП
+    .desc = Усиленное колесо БТР, произведённое для техники СССП.
+ent-VehicleSPPAPCTurret = башня БТР СССП
+    .desc = Вращающаяся башня для БТР СССП.
+ent-VehicleSPPAPCMinigun = миниган БТР СССП
+    .desc = Миниган, установленный на башне БТР СССП.
+ent-VehicleSPPAPCAutocannon = автопушка БТР СССП
+    .desc = Лобовая автопушка для установки на БТР СССП.
+ent-VehicleSPPAPCHJ35Launcher = пусковая установка HJ35 БТР
+    .desc = Пусковая установка ракет на дополнительном креплении БТР СССП.
+ent-VehicleSPPAPCFlareLauncher = пусковая установка фальшфейеров БТР СССП
+    .desc = Пусковая установка для слотов поддержки БТР СССП.

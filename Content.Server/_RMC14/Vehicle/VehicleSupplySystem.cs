@@ -63,6 +63,7 @@ public sealed class VehicleSupplySystem : EntitySystem
     {
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<VehicleSupplyConsoleComponent, BeforeActivatableUIOpenEvent>(OnConsoleBeforeUiOpen);
+        SubscribeLocalEvent<VehicleSupplyConsoleComponent, MapInitEvent>(OnConsoleMapInit); // CCM14
         SubscribeLocalEvent<VehicleHardpointVendorComponent, MapInitEvent>(OnVendorMapInit);
         SubscribeLocalEvent<VehicleHardpointVendorComponent, BeforeActivatableUIOpenEvent>(OnVendorBeforeUiOpen);
         SubscribeLocalEvent<VehicleSupplyLiftComponent, MapInitEvent>(OnLiftMapInit);
@@ -293,12 +294,33 @@ public sealed class VehicleSupplySystem : EntitySystem
         SendConsoleStateAll();
         UpdateVendorSectionsAll();
     }
-
+    // CCM14-start
     private void OnConsoleBeforeUiOpen(Entity<VehicleSupplyConsoleComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
+        if (TryGetLift(ent.Owner, ent.Comp, out var lift))
+        {
+            SeedStoredFromConsoles(lift);
+        }
+    
         SendConsoleState(ent.Owner, ent.Comp);
     }
 
+    private void OnConsoleMapInit(Entity<VehicleSupplyConsoleComponent> ent, ref MapInitEvent args)
+    {
+        var mapId = _transform.GetMapId(ent.Owner);
+        var liftQuery = EntityQueryEnumerator<VehicleSupplyLiftComponent, TransformComponent>();
+        while (liftQuery.MoveNext(out var uid, out var lift, out var xform))
+        {
+            if (xform.MapID != mapId)
+                continue;
+
+            SeedStoredFromConsoles((uid, lift));
+            Dirty(uid, lift);
+        }
+
+        SendConsoleStateAll();
+    }
+    // CCM14-end
     private void OnLiftMapInit(Entity<VehicleSupplyLiftComponent> ent, ref MapInitEvent args)
     {
         SeedStoredFromConsoles(ent);
@@ -332,6 +354,7 @@ public sealed class VehicleSupplySystem : EntitySystem
                 AddStored(lift.Comp, key);
             }
         }
+        Dirty(lift); // CCM14
     }
 
     private void OnVendorBeforeUiOpen(Entity<VehicleHardpointVendorComponent> ent, ref BeforeActivatableUIOpenEvent args)
@@ -807,8 +830,8 @@ public sealed class VehicleSupplySystem : EntitySystem
             {
                 var key = Normalize(entry.Vehicle.Id);
                 var count = GetStoredCount(lift.Comp, key);
-                // if (count <= 0)
-                //     continue;
+                if (count <= 0)
+                    continue;
 
                 available.Add(new VehicleSupplyEntryState(entry.Vehicle.Id, GetEntryName(entry), count));
                 continue;
@@ -1529,7 +1552,9 @@ public sealed class VehicleSupplySystem : EntitySystem
     private HashSet<string> BuildUnlockedSet()
     {
         var unlocked = new HashSet<string>();
-        var tech = EnsureSupplyTech();
+        if (!TryGetSupplyTech(out var tech))
+            return unlocked;
+
         foreach (var id in tech.Comp.Unlocked)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -1539,6 +1564,19 @@ public sealed class VehicleSupplySystem : EntitySystem
         }
 
         return unlocked;
+    }
+
+    private bool TryGetSupplyTech(out Entity<VehicleSupplyTechComponent> tech)
+    {
+        var query = EntityQueryEnumerator<VehicleSupplyTechComponent>();
+        if (query.MoveNext(out var uid, out var comp))
+        {
+            tech = (uid, comp);
+            return true;
+        }
+
+        tech = default;
+        return false;
     }
 
     private static bool IsEntryUnlocked(VehicleSupplyEntry entry, HashSet<string> unlocked)

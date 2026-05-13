@@ -1,3 +1,3 @@
-ent-RMCRandomHumanoidRoyalMarinesCommando = стрелок Королевской морской пехоты роль призрака
+ent-RMCRandomHumanoidRoyalMarinesCommando = стрелок Империи Миртана роль призрака
     .suffix = Спавнер, Игрок, Дружелюбный
     .desc = { "" }

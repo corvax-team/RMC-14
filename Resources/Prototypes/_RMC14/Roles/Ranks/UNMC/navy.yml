@@ -62,7 +62,7 @@
   id: RMCRankNavyCommandMasterChiefPettyOfficer
   name: Командующий Корабельный Старшина
   prefix: ККС.
-  paygrade: E9
+  paygrade: E10
 
 # Commissioned Officers
 - type: rank

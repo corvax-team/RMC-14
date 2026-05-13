@@ -40,5 +40,3 @@ ent-SquadUnassigned = Без принадлежности
     .desc = { ent-SquadBase.desc }
 ent-SquadSunRiders = Всадники Солнца
     .desc = { ent-SquadBase.desc }
-ent-SquadREV = Петрищевцы
-    .desc = { ent-SquadBase.desc }

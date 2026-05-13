@@ -1,0 +1,21 @@
+﻿- type: emote
+  id: Warcry
+  name: ccm-emote-name-warcry
+  category: Vocal
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  icon: _CCM14/Interface/Emotes/warcry.png
+  chatMessages: ["ccm-chat-emote-msg-warcry"]
+  chatTriggers:
+   - shouts an inspiring cry
+   - shouts an inspiring cry!
+   - издаёт воодушевляющий клич
+   - издаёт воодушевляющий клич!
+   - издаёт клич
+   - издаёт клич!
+   - издаёт боевой клич
+   - издаёт боевой клич!

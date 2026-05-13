@@ -85,7 +85,7 @@
         state: wheels_1
   - type: PointLight
     enabled: false
-    radius: 12
+    radius: 6
     energy: 2.5
     softness: 2
     autoRot: true
@@ -102,6 +102,12 @@
   - type: VehicleWeapons
   - type: InputMover
   - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      wheel-1: !type:ContainerSlot
+        showEnts: false
+        occludes: true
+        ent: null
   - type: HardpointSlots
     vehicleFamily: Van
     slots:
@@ -115,10 +121,14 @@
         - VehicleWheelItem
   - type: VehicleWheelSlots
     slotCount: 1
+    slots:
+    - wheel-1
   - type: HardpointIntegrity
     maxIntegrity: 250 # CCM14
+    integrity: 250 # CCM14
     repairFuelCost: 10
     bypassEntryOnZero: true
+  - type: HardpointState
   - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml
@@ -264,7 +274,7 @@
         state: wheels_1
   - type: PointLight
     enabled: false
-    radius: 12
+    radius: 6
     energy: 2.5
     softness: 2
     autoRot: true
@@ -281,6 +291,12 @@
   - type: VehicleWeapons
   - type: InputMover
   - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      wheel-1: !type:ContainerSlot
+        showEnts: false
+        occludes: true
+        ent: null
   - type: HardpointSlots
     vehicleFamily: Van
     slots:
@@ -294,10 +310,14 @@
         - VehicleWheelItem
   - type: VehicleWheelSlots
     slotCount: 1
+    slots:
+    - wheel-1
   - type: HardpointIntegrity
     maxIntegrity: 250 # CCM14
+    integrity: 250 # CCM14
     repairFuelCost: 10
     bypassEntryOnZero: true
+  - type: HardpointState
   - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/box_van_interior.yml

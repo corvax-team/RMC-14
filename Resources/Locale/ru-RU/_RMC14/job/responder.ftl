@@ -24,7 +24,7 @@ rmc-job-description-provost-responder = "Вы действуете от имен
 rmc-job-name-free-press-responder = Свободная Пресса
 rmc-job-description-free-press-responder = "Вы - региональный редактор, член свободной прессы."
 #CLF fax responder
-rmc-job-name-clf-responder = Информационный Информатор КФО
+rmc-job-name-clf-responder = Радиоинформатор КФО
 rmc-job-description-clf-responder = "Вы член подпольной региональной ячейки КФО. Информируйте и получайте информацию от местных ячеек."
 rmc-job-prefix-clf-responder = ИНФО
 #SPP fax responder

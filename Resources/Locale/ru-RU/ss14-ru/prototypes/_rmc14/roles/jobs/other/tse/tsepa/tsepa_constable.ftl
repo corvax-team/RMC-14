@@ -1,2 +1,2 @@
-ent-RMCSpawnPointTSEPAConstable = точка появления полисмен ПСОПЗ
+ent-RMCSpawnPointTSEPAConstable = точка появления полисмен МВД
     .desc = { ent-CMSpawnPointJobBase.desc }

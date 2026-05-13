@@ -1,5 +1,6 @@
 ent-CMPottedPlantRandom = спавнер случайное комнатное растение
     .desc = { ent-PottedPlantRandom.desc }
+    .suffix = RMC
 ent-CMPottedPlantBase = комнатное растение
     .desc = { ent-PottedPlantBase.desc }
     .suffix = RMC

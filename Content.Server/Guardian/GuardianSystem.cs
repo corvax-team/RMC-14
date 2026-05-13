@@ -10,7 +10,6 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
-// using Content.Shared._CCM.Mech.EntitySystems;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;

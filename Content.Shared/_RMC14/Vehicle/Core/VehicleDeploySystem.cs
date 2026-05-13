@@ -44,7 +44,7 @@ public sealed class VehicleDeploySystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!; // CCM14
 
     public override void Initialize()
     {

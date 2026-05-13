@@ -87,6 +87,7 @@
     id: RMCIDRoyalMarinesMedic
     belt: RMCMedicalL75RCMFilled
     back: RMCBackpackRCMMedicPVPFilled
+    neck: CCMMirtanSpecialistCloak #CCM14
     pocket1: RMCPouchReagentCanisterTricordrazineRevival
     pocket2: RMCPouchMedkitFillRoyalMedic
 

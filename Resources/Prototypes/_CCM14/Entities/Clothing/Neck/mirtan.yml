@@ -1,0 +1,29 @@
+# офицерский плащ
+- type: entity
+  parent: ClothingNeckBase
+  id: CCMMirtanOficcerCloak
+  name: imperial officer cloak
+  description: A dark red cloak of the ones who have proven their absolute loyalty to the Emperor. Mostly being given to the officers and inquisitors.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Mirtan/officer.rsi
+
+# длинный офицерский плащ
+- type: entity
+  parent: ClothingNeckBase
+  id: CCMMirtanOficcerCloakLarge
+  name: imperial officer cloak
+  description: A dark red cloak of the ones who have proven their absolute loyalty to the Emperor. This one is an enlonged version.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Mirtan/officerlarge.rsi
+
+# плащ специалиста
+- type: entity
+  parent: ClothingNeckBase
+  id: CCMMirtanSpecialistCloak
+  name: imperial specialist cloak
+  description: A blue cloak of the ones who have proven their absolute loyalty to the Emperor. This is a short version, used to identify specialists.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Mirtan/spec.rsi

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/vehicles/aircraft_prop.dmi, slightly modified by glebcenturion and superman1223",
+  "size": {
+    "x": 256,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "aircraft1"
+    },
+    {
+      "name": "aircraft2"
+    },
+    {
+      "name": "aircraft3"
+    },
+    {
+      "name": "aircraft4"
+    }
+  ]
+}
