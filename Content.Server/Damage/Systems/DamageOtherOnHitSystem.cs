@@ -1,5 +1,6 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Weapons.Ranged.Systems;
+using Content.Shared._CMU14.Yautja;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Camera;
@@ -13,6 +14,7 @@ using Content.Shared.Database;
 using Content.Shared.Effects;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Throwing;
+using Content.Shared.Humanoid;
 using Content.Shared.Wires;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
@@ -44,7 +46,8 @@ namespace Content.Server.Damage.Systems
             if (TerminatingOrDeleted(args.Target))
                 return;
 
-            var dmg = _damageable.TryChangeDamage(args.Target, component.Damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances, origin: args.Component.Thrower);
+            var damage = GetThrownHitDamage(uid, args.Target, component.Damage);
+            var dmg = _damageable.TryChangeDamage(args.Target, damage * _damageable.UniversalThrownDamageModifier, component.IgnoreResistances, origin: args.Component.Thrower, tool: uid);
 
             // Log damage only for mobs. Useful for when people throw spears at each other, but also avoids log-spam when explosions send glass shards flying.
             if (dmg != null && HasComp<MobStateComponent>(args.Target))
@@ -65,7 +68,11 @@ namespace Content.Server.Damage.Systems
 
         private void OnDamageExamine(EntityUid uid, DamageOtherOnHitComponent component, ref DamageExamineEvent args)
         {
-            _damageExamine.AddDamageExamine(args.Message, _damageable.ApplyUniversalAllModifiers(component.Damage * _damageable.UniversalThrownDamageModifier), Loc.GetString("damage-throw"));
+            var damage = component.Damage;
+            if (TryComp(uid, out YautjaTechItemComponent? tech))
+                damage *= tech.DamageMultiplier;
+
+            _damageExamine.AddDamageExamine(args.Message, _damageable.ApplyUniversalAllModifiers(damage * _damageable.UniversalThrownDamageModifier), Loc.GetString("damage-throw"));
         }
 
         /// <summary>
@@ -74,6 +81,18 @@ namespace Content.Server.Damage.Systems
         private void OnAttemptPacifiedThrow(Entity<DamageOtherOnHitComponent> ent, ref AttemptPacifiedThrowEvent args)
         {
             args.Cancel("pacified-cannot-throw");
+        }
+
+        private DamageSpecifier GetThrownHitDamage(EntityUid uid, EntityUid target, DamageSpecifier damage)
+        {
+            if (TryComp(uid, out YautjaSmartDiscComponent? disc) &&
+                HasComp<HumanoidAppearanceComponent>(target) &&
+                !HasComp<YautjaComponent>(target))
+            {
+                return damage * disc.HumanDamageMultiplier;
+            }
+
+            return damage;
         }
 
         private Color GetDamageEffectColor(EntityUid target)

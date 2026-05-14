@@ -18,7 +18,10 @@
       params:
         volume: 5
   - type: RMCStaminaDamageOnCollide
-    damage: 60
+    damage: 100
+  - type: Tag
+    tags:
+    - Taser
   - type: Projectile
     damage:
       types:

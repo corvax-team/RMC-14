@@ -141,6 +141,12 @@
   abstract: true
   categories: [ HideSpawnMenu ]
   components:
+  - type: YautjaTechItem
+    blockPickup: false
+    blockUse: false
+    blockMelee: false
+    blockThrow: false
+    blockShoot: false
   - type: Reflective
     reflective:
     - Energy
@@ -249,7 +255,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: StaminaDamageOnCollide
-    damage: 70
+    damage: 105
   - type: StunOnCollide
     stunAmount: 3
     knockdownAmount: 3
@@ -270,7 +276,7 @@
     - state: bluespace
       shader: unshaded
   - type: StaminaDamageOnCollide
-    damage: 95
+    damage: 142.5
   - type: StunOnCollide
     stunAmount: 4
     knockdownAmount: 4

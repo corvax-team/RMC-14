@@ -610,6 +610,12 @@
   name: alloy spike
   categories: [ HideSpawnMenu ]
   components:
+  - type: YautjaTechItem
+    blockPickup: false
+    blockUse: false
+    blockMelee: false
+    blockThrow: false
+    blockShoot: false
   - type: Sprite
     sprite: _CMU14/Yautja/weapons.rsi
     layers:

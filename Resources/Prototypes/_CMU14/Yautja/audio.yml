@@ -8,6 +8,11 @@
   - /Audio/_CMU14/Yautja/pred_click5.wav
 
 - type: soundCollection
+  id: CMUYautjaTranslator
+  files:
+  - /Audio/_CMU14/Yautja/pred_translator.ogg
+
+- type: soundCollection
   id: CMUYautjaRoars
   files:
   - /Audio/_CMU14/Yautja/pred_roar1.wav

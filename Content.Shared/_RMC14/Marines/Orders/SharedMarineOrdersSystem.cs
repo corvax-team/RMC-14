@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._CMU14.Medical.StatusEffects;
+using Content.Shared._CMU14.Yautja;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
@@ -177,6 +178,9 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         foreach (var receiver in _receivers)
         {
             if (_mobState.IsDead(receiver))
+                continue;
+
+            if (HasComp<YautjaComponent>(receiver.Owner))
                 continue;
 
             AddOrder<T>(receiver, level, duration);

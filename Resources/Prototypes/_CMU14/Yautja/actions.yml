@@ -58,6 +58,22 @@
 
 - type: entity
   parent: CMUYautjaActionBase
+  id: CMUActionYautjaOpenBracerMenu
+  name: cmu-yautja-action-bracer-menu
+  description: cmu-yautja-action-bracer-menu-desc
+  components:
+  - type: Action
+    icon:
+      sprite: _CMU14/Yautja/bracer.rsi
+      state: icon
+    useDelay: 0.5
+  - type: InstantAction
+    event: !type:Content.Shared._CMU14.Yautja.YautjaOpenBracerMenuActionEvent
+  - type: YautjaPowerAction
+    cost: 0
+
+- type: entity
+  parent: CMUYautjaActionBase
   id: CMUActionYautjaToggleBracerLock
   name: cmu-yautja-action-toggle-bracer-lock
   description: cmu-yautja-action-toggle-bracer-lock-desc
@@ -85,6 +101,22 @@
     useDelay: 0.5
   - type: InstantAction
     event: !type:Content.Shared._CMU14.Yautja.YautjaToggleBracerIdChipActionEvent
+  - type: YautjaPowerAction
+    cost: 0
+
+- type: entity
+  parent: CMUYautjaActionBase
+  id: CMUActionYautjaTranslator
+  name: cmu-yautja-action-translator
+  description: cmu-yautja-action-translator-desc
+  components:
+  - type: Action
+    icon:
+      sprite: _CMU14/Yautja/bracer.rsi
+      state: icon
+    useDelay: 1
+  - type: InstantAction
+    event: !type:Content.Shared._CMU14.Yautja.YautjaTranslatorActionEvent
   - type: YautjaPowerAction
     cost: 0
 
@@ -182,6 +214,23 @@
     useDelay: 0.5
   - type: InstantAction
     event: !type:Content.Shared._CMU14.Yautja.YautjaTransmitThrallMessageActionEvent
+  - type: YautjaPowerAction
+    cost: 0
+    requireBracer: false
+
+- type: entity
+  parent: CMUYautjaActionBase
+  id: CMUActionYautjaToggleThrallBracerLock
+  name: cmu-yautja-action-toggle-thrall-bracer-lock
+  description: cmu-yautja-action-toggle-thrall-bracer-lock-desc
+  components:
+  - type: Action
+    icon:
+      sprite: _CMU14/Yautja/bracer.rsi
+      state: icon
+    useDelay: 1
+  - type: InstantAction
+    event: !type:Content.Shared._CMU14.Yautja.YautjaToggleThrallBracerLockActionEvent
   - type: YautjaPowerAction
     cost: 0
     requireBracer: false
