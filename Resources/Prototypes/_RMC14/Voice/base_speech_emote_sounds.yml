@@ -28,10 +28,10 @@
       collection: MaleGasp
     DefaultDeathgasp:
       collection: MaleDeathGasp
-    Warcry: 
-      collection: AU14MaleWarcry
-    Corpsman: 
+    Corpsman:
       collection: AU14MaleCorpsman
+    Warcry:
+      collection: MaleWarcry # CCM14
 
 - type: emoteSounds
   parent: RMCBaseHumanoidSounds
@@ -52,7 +52,7 @@
       collection: FemaleGasp
     DefaultDeathgasp:
       collection: FemaleDeathGasp
-    Warcry: 
-      collection: AU14FemaleWarcry
-    Corpsman: 
+    Corpsman:
       collection: AU14FemaleCorpsman
+    Warcry:
+      collection: FemaleWarcry # CCM14

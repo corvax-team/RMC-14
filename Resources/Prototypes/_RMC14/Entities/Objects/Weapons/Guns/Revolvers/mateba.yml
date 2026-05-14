@@ -200,6 +200,7 @@
     containers:
       ballistic-ammo: !type:Container
         ents: []
+  - type: Corrodible
 
 - type: entity
   parent: RMCBaseSpeedLoaderMateba #Normal Loader
@@ -401,7 +402,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 45
+        Piercing: 50
   - type: CMArmorPiercing
     amount: 50
 

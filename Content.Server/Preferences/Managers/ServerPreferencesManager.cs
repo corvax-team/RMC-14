@@ -278,6 +278,11 @@ namespace Content.Server.Preferences.Managers
                 MaxCharacterSlots = MaxCharacterSlots
             };
             _netManager.ServerSendMessage(msg, session.Channel);
+
+            // Some lobby systems query preferences during PlayerJoinLobby(), which can run
+            // before async user DB loading finishes. Re-fire the existing update signal once
+            // preferences are actually ready so those systems can push their initial state.
+            PreferencesUpdated?.Invoke(session.UserId);
         }
 
         public void OnClientDisconnected(ICommonSession session)

@@ -233,6 +233,7 @@
     malus: 0.225
   - type: Tag
     tags:
+    - Knife
     - ThrowingKnife
   - type: DeleteOnExplosion
 

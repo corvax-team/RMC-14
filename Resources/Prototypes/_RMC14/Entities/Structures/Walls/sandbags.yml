@@ -79,6 +79,7 @@
   - type: Stack
     stackType: CMSandbagEmpty
     count: 1
+  - type: Corrodible
 
 - type: entity
   parent: CMSandbagEmpty
@@ -134,6 +135,7 @@
     blacklist:
       components:
       - Xeno
+  - type: Corrodible
 
 - type: entity
   parent: CMSandbagFull

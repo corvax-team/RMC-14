@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System;
 using System.Threading;
-using Content.Server._MC;
 using Content.Server._RMC14.Admin;
 using Content.Server._CCM.Sponsorship;
 using Content.Server._RMC14.Discord;
@@ -448,9 +447,7 @@ internal sealed partial class ChatManager : IChatManager
             return;
         }
 
-        // MC Changes:
-        var formattedMessage = MCFormatMessage.ApplyEmoji(FormattedMessage.EscapeText(message));
-        // MC Changes
+        var formattedMessage = FormattedMessage.EscapeText(message);
 
         Color? colorOverride = null;
         var displayName = BuildOocDisplayName(player);

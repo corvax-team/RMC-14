@@ -49,7 +49,11 @@ public sealed class WeatherSystem : SharedWeatherSystem
         if (!Timing.IsFirstTimePredicted || weatherProto.Sound == null)
             return;
 
-        weather.Stream ??= _audio.PlayGlobal(weatherProto.Sound, Filter.Local(), true)?.Entity;
+        weather.Stream ??= _audio.PlayGlobal(
+            weatherProto.Sound,
+            Filter.Local(),
+            true,
+            AudioHelpers.SanitizeAudioParams(weatherProto.Sound.Params))?.Entity;
 
         if (!TryComp(weather.Stream, out AudioComponent? comp))
             return;
@@ -141,11 +145,18 @@ public sealed class WeatherSystem : SharedWeatherSystem
             weather.Stream = _audio.Stop(weather.Stream);
             return true;
         }
+
+        if (weatherProto.Sound == null)
+            return true;
         //
 
         // TODO: Fades (properly)
         weather.Stream = _audio.Stop(weather.Stream);
-        weather.Stream = _audio.PlayGlobal(weatherProto.Sound, Filter.Local(), true)?.Entity;
+        weather.Stream = _audio.PlayGlobal(
+            weatherProto.Sound,
+            Filter.Local(),
+            true,
+            AudioHelpers.SanitizeAudioParams(weatherProto.Sound.Params))?.Entity;
         return true;
     }
 

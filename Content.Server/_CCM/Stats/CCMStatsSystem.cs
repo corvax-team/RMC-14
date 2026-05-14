@@ -9,6 +9,7 @@ using Content.Server.GameTicking;
 using Content.Server.KillTracking;
 using Content.Shared._CCM.Stats;
 using Content.Shared._RMC14.Construction;
+using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Rules;
@@ -47,6 +48,7 @@ public sealed class CCMStatsSystem : EntitySystem
     private const int KillImpactPoints = 5;
     private const int ReviveImpactPoints = 3;
     private const float StructureImpactPoints = 0.5f;
+    private const int SurgeryHealingCredit = 20;
 
     [Dependency] private readonly CCMRoundWinTrackerSystem _campaignScore = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
@@ -133,10 +135,11 @@ public sealed class CCMStatsSystem : EntitySystem
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
         SubscribeLocalEvent<DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<KillReportedEvent>(OnKillReported);
         SubscribeLocalEvent<GunShotEvent>(OnGunShot);
         SubscribeLocalEvent<ProjectileComponent, ProjectileShotEvent>(OnProjectileShot);
-        SubscribeLocalEvent<TargetDefibrillatedEvent>(OnTargetDefibrillated);
+        SubscribeLocalEvent<CMSurgeryCompleteEvent>(OnSurgeryComplete);
         SubscribeLocalEvent<RMCConstructionBuildDoAfterEvent>(OnMarineConstructionBuilt,
             after: [typeof(Content.Shared._RMC14.Construction.RMCConstructionSystem)]);
         SubscribeLocalEvent<XenoSecreteStructureDoAfterEvent>(OnXenoStructureSecreted,
@@ -362,13 +365,29 @@ public sealed class CCMStatsSystem : EntitySystem
         stats.XenoShotsFired += 1;
     }
 
-    private void OnTargetDefibrillated(ref TargetDefibrillatedEvent ev)
+    private void OnMobStateChanged(MobStateChangedEvent args)
     {
-        if (!TryGetEntityStats(ev.User, CCMStatsSide.Marines, out var stats))
+        if (args.OldMobState != MobState.Dead ||
+            args.NewMobState is not (MobState.Critical or MobState.Alive) ||
+            !HasComp<MarineComponent>(args.Target))
+        {
+            return;
+        }
+
+        if (!TryGetSourceStats(args.Origin, null, CCMStatsSide.Marines, out var stats))
             return;
 
         stats.MarineRevives += 1;
         stats.MarineImpact += ReviveImpactPoints;
+    }
+
+    private void OnSurgeryComplete(ref CMSurgeryCompleteEvent ev)
+    {
+        if (!TryGetEntityStats(ev.Surgeon, CCMStatsSide.Marines, out var stats))
+            return;
+
+        stats.MarineHealingDone += SurgeryHealingCredit;
+        stats.MarineImpact += SurgeryHealingCredit * HealingImpactFactor;
     }
 
     private void OnMarineConstructionBuilt(RMCConstructionBuildDoAfterEvent args)

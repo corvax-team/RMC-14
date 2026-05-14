@@ -12,15 +12,13 @@ public sealed partial class MCSettingsMenu : DefaultWindow
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        Tabs.SetTabTitle(0, Loc.GetString("mc-ui-options-tab-chat"));
-        Tabs.SetTabTitle(1, Loc.GetString("mc-ui-options-tab-zlevels"));
+        Tabs.SetTabTitle(0, Loc.GetString("mc-ui-options-tab-zlevels"));
 
         UpdateTabs();
     }
 
     public void UpdateTabs()
     {
-        MCChat.Control.ReloadValues();
         MCZLevels.Control.ReloadValues();
     }
 }

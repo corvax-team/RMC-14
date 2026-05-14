@@ -45,6 +45,7 @@ public sealed partial class VehicleSupplyTechComponent : Component
     [DataField, AutoNetworkedField]
     public List<string> Unlocked = new();
 }
+
 [RegisterComponent]
 public sealed partial class VehicleHardpointVendorComponent : Component
 {

@@ -363,7 +363,7 @@ public sealed class CMUAutodocSystem : EntitySystem
             return false;
 
         if (queued.SurgeryId == AutodocWoundRepairId)
-            return TryApplyAutodocWoundRepair(patient, targetPart);
+            return TryApplyAutodocWoundRepair(patient, targetPart, operatorUid);
 
         if (!IsAutodocAllowedCategory(queued.Category))
             return false;
@@ -409,7 +409,7 @@ public sealed class CMUAutodocSystem : EntitySystem
         return EntityUid.Invalid;
     }
 
-    private bool TryApplyAutodocWoundRepair(EntityUid patient, EntityUid part)
+    private bool TryApplyAutodocWoundRepair(EntityUid patient, EntityUid part, EntityUid operatorUid)
     {
         var changed = false;
         var bruteHeal = FixedPoint2.Zero;
@@ -458,8 +458,8 @@ public sealed class CMUAutodocSystem : EntitySystem
             changed = true;
         }
 
-        HealDamageGroup(patient, part, BruteGroup, bruteHeal);
-        HealDamageGroup(patient, part, BurnGroup, burnHeal);
+        HealDamageGroup(patient, operatorUid, BruteGroup, bruteHeal);
+        HealDamageGroup(patient, operatorUid, BurnGroup, burnHeal);
         return changed || !NeedsAutodocWoundRepair(part);
     }
 

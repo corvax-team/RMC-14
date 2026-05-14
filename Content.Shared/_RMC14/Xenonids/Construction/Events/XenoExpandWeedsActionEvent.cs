@@ -1,4 +1,4 @@
-﻿using Content.Shared.Actions;
+using Content.Shared.Actions;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 
@@ -17,4 +17,8 @@ public sealed partial class XenoExpandWeedsActionEvent : WorldTargetActionEvent
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 SourcePlasmaCost = 260;
+    // CCM14-start
+    [DataField, AutoNetworkedField]
+    public TimeSpan SourceCooldown = TimeSpan.FromSeconds(7);
+    // CCM14-end
 }

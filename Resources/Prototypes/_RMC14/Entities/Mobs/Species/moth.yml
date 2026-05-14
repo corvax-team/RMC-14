@@ -5,10 +5,6 @@
   name: Urist C.M McFluff
   suffix: RMC14
   components:
-  - type: CMUHumanMedical
-  - type: HitLocation
-  - type: PainShock
-  - type: BodyZoneTargeting
   - type: UserInterface
     interfaces:
       enum.HumanoidMarkingModifierKey.Key:

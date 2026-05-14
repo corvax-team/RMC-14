@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 264.0.2
-  forkId: ""
-  forkVersion: ""
-  time: 03/06/2026 16:45:57
-  entityCount: 33702
+  engineVersion: 264.0.2-fix-physics
+  forkId: colonialmarines
+  forkVersion: 5543453af8cee2ee487f65485f2f90d14d1a9d57
+  time: 04/27/2026 12:32:55
+  entityCount: 33724
 maps:
 - 1
 grids:
@@ -1091,8 +1091,13 @@ entities:
     - type: Fixtures
       fixtures: {}
     - type: Physics
+      bodyStatus: InAir
+      fixedRotation: False
+      canCollide: False
+      bodyType: Dynamic
     - type: SpreaderGrid
     - type: Shuttle
+      dampingModifier: 0.25
     - type: GridPathfinding
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
@@ -2389,6 +2394,8 @@ entities:
             7875: 38,-14
             7880: 32,-18
             7891: 86,-81
+            7900: 63,-123
+            7912: 82,-27
         - node:
             color: '#FFFFFFFF'
             id: RMCDecalBloodFloor3
@@ -2421,6 +2428,7 @@ entities:
             7895: 85.50573,-81.24799
             7896: 85.47821,-81.08288
             7897: 86.111145,-80.5325
+            7904: 54,-20
         - node:
             color: '#FFFFFFFF'
             id: RMCDecalBloodFloor6
@@ -2482,6 +2490,7 @@ entities:
             7815: 103,-97
             7816: 106,-92
             7817: 103,-93
+            7913: 81,-28
         - node:
             color: '#FFFFFFFF'
             id: RMCDecalBloodSplatter5
@@ -2512,6 +2521,20 @@ entities:
             7892: 85,-81
         - node:
             color: '#FFFFFFFF'
+            id: RMCDecalBloodTrail2
+          decals:
+            7905: 54,-21
+            7906: 54,-22
+            7907: 54,-23
+            7908: 54,-24
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalBloodTrail6
+          decals:
+            7909: 54,-25
+            7910: 70,-26
+        - node:
+            color: '#FFFFFFFF'
             id: RMCDecalBloodXenonidFloor1
           decals:
             7726: 68,-24
@@ -2531,6 +2554,8 @@ entities:
             id: RMCDecalBloodXenonidFloor4
           decals:
             7824: 105,-93
+            7902: 63,-126
+            7911: 77,-31
         - node:
             color: '#FFFFFFFF'
             id: RMCDecalBloodXenonidFloor5
@@ -2544,9 +2569,19 @@ entities:
             7825: 103,-91
         - node:
             color: '#FFFFFFFF'
+            id: RMCDecalBloodXenonidFloor6
+          decals:
+            7901: 61,-128
+        - node:
+            color: '#FFFFFFFF'
             id: RMCDecalBloodXenonidFloor7
           decals:
             7781: 31,-142
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalBloodXenonidSplatter1
+          decals:
+            7903: 63,-130
         - node:
             color: '#FFFFFFFF'
             id: RMCDecalBloodXenonidSplatter4
@@ -2653,21 +2688,6 @@ entities:
             7833: 140,-192
             7834: 142,-192
             7835: 141,-192
-        - node:
-            color: '#FFFFFFFF'
-            id: RMCDecalWeYaTile1
-          decals:
-            7827: 24,-123
-        - node:
-            color: '#FFFFFFFF'
-            id: RMCDecalWeYaTile2
-          decals:
-            7826: 25,-123
-        - node:
-            color: '#FFFFFFFF'
-            id: RMCDecalWeYaTile3
-          decals:
-            7828: 26,-123
         - node:
             color: '#FFFFFFFF'
             id: RailsRail
@@ -50634,30 +50654,40 @@ entities:
       rot: 3.141592653589793 rad
       pos: 108.13476,-97.445786
       parent: 1
+    - type: HideLayerClothing
+      slots: null
   - uid: 22
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 104.604454,-101.5973
       parent: 1
+    - type: HideLayerClothing
+      slots: null
   - uid: 23
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 103.48324,-88.533775
       parent: 1
+    - type: HideLayerClothing
+      slots: null
   - uid: 24
     components:
     - type: Transform
       rot: 2.320074541577898 rad
       pos: 89.47592,-182.36116
       parent: 1
+    - type: HideLayerClothing
+      slots: null
 - proto: ArmorHelmetPMCCorporate
   entities:
   - uid: 31185
     components:
     - type: Transform
       parent: 31182
+    - type: HideLayerClothing
+      slots: null
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -51319,18 +51349,6 @@ entities:
       parent: 1
     - type: SpriteSetRenderOrder
       offset: 0.7,-1.45
-- proto: CMArmorM4PMC
-  entities:
-  - uid: 29929
-    components:
-    - type: Transform
-      pos: 30.464676,-8.540172
-      parent: 1
-  - uid: 29930
-    components:
-    - type: Transform
-      pos: 28.495926,-9.547984
-      parent: 1
 - proto: CMArmorM4PMCCorporate
   entities:
   - uid: 31186
@@ -53466,6 +53484,11 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 57.5,-22.5
+      parent: 1
+  - uid: 32155
+    components:
+    - type: Transform
+      pos: 61.5,-129.5
       parent: 1
   - uid: 34080
     components:
@@ -56433,6 +56456,12 @@ entities:
       parent: 1
 - proto: CMCrowbar
   entities:
+  - uid: 5
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 74.51144,-118.70016
+      parent: 1
   - uid: 1094
     components:
     - type: Transform
@@ -61898,6 +61927,26 @@ entities:
       rot: 3.141592653589793 rad
       pos: 69.5,-20.5
       parent: 1
+- proto: CMMagazineRifleM54CMK1
+  entities:
+  - uid: 72
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 81.82415,-26.230503
+      parent: 1
+  - uid: 29969
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 82.32415,-26.839878
+      parent: 1
+  - uid: 32197
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 81.82415,-26.636753
+      parent: 1
 - proto: CMMagazineSMGMP5
   entities:
   - uid: 30
@@ -61949,20 +61998,6 @@ entities:
       parent: 1
 - proto: CMPaper
   entities:
-  - uid: 72
-    components:
-    - type: Transform
-      pos: 115.78399,-187.44806
-      parent: 1
-    - type: Paper
-      stampState: paper_stamp-we_ya
-      stampedBy:
-      - stampedColor: '#996600FF'
-        stampedName: stamp-component-stamped-name-cm-we-ya
-      content: >-
-        Внимание всем! Данная колония принадлежит Вестон-Ямадо! И тут ксеноморфы...
-
-        А я сьёбываю отсюда...
   - uid: 549
     components:
     - type: Transform
@@ -62052,13 +62087,6 @@ entities:
     - type: Transform
       pos: 61.497078,-47.682312
       parent: 1
-  - uid: 14739
-    components:
-    - type: Transform
-      pos: 31.52362,-14.9634495
-      parent: 1
-    - type: Paper
-      content: Вестон-Ямато, колония пала...
 - proto: CMPaperBin10
   entities:
   - uid: 2474
@@ -62959,6 +62987,56 @@ entities:
     - type: Transform
       pos: 84.40757,-29.06501
       parent: 1
+  - uid: 32156
+    components:
+    - type: Transform
+      pos: 63.743202,-129.53726
+      parent: 1
+  - uid: 32157
+    components:
+    - type: Transform
+      pos: 63.133827,-129.56851
+      parent: 1
+  - uid: 32158
+    components:
+    - type: Transform
+      pos: 63.368202,-128.89664
+      parent: 1
+  - uid: 32161
+    components:
+    - type: Transform
+      pos: 71.25288,-122.41936
+      parent: 1
+  - uid: 32162
+    components:
+    - type: Transform
+      pos: 70.73725,-122.09123
+      parent: 1
+  - uid: 32163
+    components:
+    - type: Transform
+      pos: 70.78413,-121.73186
+      parent: 1
+  - uid: 32166
+    components:
+    - type: Transform
+      pos: 71.22163,-121.54436
+      parent: 1
+  - uid: 32167
+    components:
+    - type: Transform
+      pos: 71.59663,-122.01311
+      parent: 1
+  - uid: 32168
+    components:
+    - type: Transform
+      pos: 70.54975,-121.98186
+      parent: 1
+  - uid: 32179
+    components:
+    - type: Transform
+      pos: 70.706,-122.34123
+      parent: 1
 - proto: CMSheetMetal10
   entities:
   - uid: 2210
@@ -62987,6 +63065,20 @@ entities:
     components:
     - type: Transform
       pos: 46.6846,-85.450134
+      parent: 1
+- proto: CMSheetMetal20
+  entities:
+  - uid: 32160
+    components:
+    - type: Transform
+      pos: 71.23725,-122.13811
+      parent: 1
+- proto: CMSheetMetal30
+  entities:
+  - uid: 32159
+    components:
+    - type: Transform
+      pos: 72.69392,-141.44312
       parent: 1
 - proto: CMSheetMetal40
   entities:
@@ -63065,6 +63157,28 @@ entities:
     components:
     - type: Transform
       pos: 96.761116,-33.397213
+      parent: 1
+- proto: CMShellShotgunBuckshot
+  entities:
+  - uid: 31112
+    components:
+    - type: Transform
+      pos: 62.16777,-120.14483
+      parent: 1
+  - uid: 32152
+    components:
+    - type: Transform
+      pos: 63.01152,-121.17608
+      parent: 1
+  - uid: 32153
+    components:
+    - type: Transform
+      pos: 64.152145,-120.53545
+      parent: 1
+  - uid: 32154
+    components:
+    - type: Transform
+      pos: 62.04277,-121.0667
       parent: 1
 - proto: CMShellShotgunSlugs
   entities:
@@ -63288,6 +63402,16 @@ entities:
     components:
     - type: Transform
       pos: 50.5,-8.5
+      parent: 1
+  - uid: 14739
+    components:
+    - type: Transform
+      pos: 66.5,-136.5
+      parent: 1
+  - uid: 29201
+    components:
+    - type: Transform
+      pos: 71.5,-133.5
       parent: 1
   - uid: 30840
     components:
@@ -136141,12 +136265,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 80.5,-30.5
       parent: 1
-  - uid: 31112
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 81.5,-26.5
-      parent: 1
   - uid: 31113
     components:
     - type: Transform
@@ -137815,20 +137933,6 @@ entities:
     - type: Transform
       pos: 160.49626,-117.12306
       parent: 1
-- proto: RMCAlienTankBroken
-  entities:
-  - uid: 29968
-    components:
-    - type: Transform
-      pos: 114.5,-169.5
-      parent: 1
-- proto: RMCAlienTankLarva
-  entities:
-  - uid: 29969
-    components:
-    - type: Transform
-      pos: 112.5,-168.5
-      parent: 1
 - proto: RMCArmorHelmetMercenaryMiner
   entities:
   - uid: 30106
@@ -137836,6 +137940,8 @@ entities:
     - type: Transform
       pos: 28.5,-10.5
       parent: 1
+    - type: HideLayerClothing
+      slots: null
 - proto: RMCArmorSecurity
   entities:
   - uid: 33119
@@ -138059,6 +138165,12 @@ entities:
       parent: 1
 - proto: RMCBarricadeWood
   entities:
+  - uid: 18
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 75.5,-118.5
+      parent: 1
   - uid: 27254
     components:
     - type: Transform
@@ -138156,6 +138268,11 @@ entities:
     components:
     - type: Transform
       pos: 28.5,-142.5
+      parent: 1
+  - uid: 32194
+    components:
+    - type: Transform
+      pos: 55.07732,-19.349619
       parent: 1
 - proto: RMCBasePropCasing6
   entities:
@@ -140875,41 +140992,6 @@ entities:
     - type: Transform
       pos: 107.5,-82.5
       parent: 1
-  - uid: 30651
-    components:
-    - type: Transform
-      pos: 114.5,-186.5
-      parent: 1
-  - uid: 30652
-    components:
-    - type: Transform
-      pos: 113.5,-187.5
-      parent: 1
-  - uid: 30653
-    components:
-    - type: Transform
-      pos: 114.5,-185.5
-      parent: 1
-  - uid: 30654
-    components:
-    - type: Transform
-      pos: 113.5,-185.5
-      parent: 1
-  - uid: 30655
-    components:
-    - type: Transform
-      pos: 115.5,-187.5
-      parent: 1
-  - uid: 30656
-    components:
-    - type: Transform
-      pos: 116.5,-186.5
-      parent: 1
-  - uid: 30657
-    components:
-    - type: Transform
-      pos: 115.5,-185.5
-      parent: 1
 - proto: RMCDiamondOre1
   entities:
   - uid: 28859
@@ -143600,11 +143682,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 82.5,-25.5
       parent: 1
-  - uid: 31108
-    components:
-    - type: Transform
-      pos: 82.5,-27.5
-      parent: 1
   - uid: 31109
     components:
     - type: Transform
@@ -144227,6 +144304,8 @@ entities:
     components:
     - type: Transform
       parent: 16
+    - type: Physics
+      canCollide: False
     - type: InsideEntityStorage
   - uid: 1844
     components:
@@ -144669,6 +144748,8 @@ entities:
     components:
     - type: Transform
       parent: 529
+    - type: Physics
+      canCollide: False
     - type: InsideEntityStorage
 - proto: RMCLightFixture
   entities:
@@ -145859,6 +145940,12 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+  - uid: 32195
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 78.36844,-30.357271
+      parent: 1
 - proto: RMCMachinePropBig1
   entities:
   - uid: 28855
@@ -146387,6 +146474,36 @@ entities:
       parent: 1
 - proto: RMCPlankWood1
   entities:
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 74.16769,-118.8775
+      parent: 1
+  - uid: 531
+    components:
+    - type: Transform
+      pos: 73.79269,-118.69
+      parent: 1
+  - uid: 1837
+    components:
+    - type: Transform
+      pos: 73.69894,-119.20563
+      parent: 1
+  - uid: 29929
+    components:
+    - type: Transform
+      pos: 74.13644,-118.2525
+      parent: 1
+  - uid: 29930
+    components:
+    - type: Transform
+      pos: 73.40206,-118.315
+      parent: 1
+  - uid: 30650
+    components:
+    - type: Transform
+      pos: 73.54269,-118.84625
+      parent: 1
   - uid: 31675
     components:
     - type: Transform
@@ -147850,6 +147967,11 @@ entities:
     - type: Transform
       pos: 160.5,-145.5
       parent: 1
+  - uid: 32196
+    components:
+    - type: Transform
+      pos: 82.5,-26.5
+      parent: 1
   - uid: 33615
     components:
     - type: Transform
@@ -148003,11 +148125,6 @@ entities:
     - type: Transform
       pos: 32.5,-17.5
       parent: 1
-  - uid: 30650
-    components:
-    - type: Transform
-      pos: 114.5,-186.5
-      parent: 1
   - uid: 31055
     components:
     - type: Transform
@@ -148019,20 +148136,6 @@ entities:
     components:
     - type: Transform
       pos: 122.5,-130.5
-      parent: 1
-- proto: RMCSpawnerCorpseWeYaPMC
-  entities:
-  - uid: 22639
-    components:
-    - type: Transform
-      pos: 134.5,-21.5
-      parent: 1
-- proto: RMCSpawnerCorpseWeYaPMCStandardBurst
-  entities:
-  - uid: 22637
-    components:
-    - type: Transform
-      pos: 125.5,-25.5
       parent: 1
 - proto: RMCSpawnerIntelClose
   entities:
@@ -148407,6 +148510,37 @@ entities:
     - type: Transform
       pos: 107.5,-80.5
       parent: 1
+- proto: RMCSpawnerRandomGunPistolMed
+  entities:
+  - uid: 7
+    components:
+    - type: Transform
+      pos: 69.5,-125.5
+      parent: 1
+  - uid: 30654
+    components:
+    - type: Transform
+      pos: 77.5,-132.5
+      parent: 1
+  - uid: 30655
+    components:
+    - type: Transform
+      pos: 67.5,-136.5
+      parent: 1
+- proto: RMCSpawnerRandomGunSMGLow
+  entities:
+  - uid: 30657
+    components:
+    - type: Transform
+      pos: 77.5,-135.5
+      parent: 1
+- proto: RMCSpawnerRandomGunSMGMed
+  entities:
+  - uid: 30656
+    components:
+    - type: Transform
+      pos: 71.5,-136.5
+      parent: 1
 - proto: RMCSpawnerRandomToolbox
   entities:
   - uid: 1956
@@ -148457,6 +148591,42 @@ entities:
     components:
     - type: Transform
       pos: 30.5,-15.5
+      parent: 1
+- proto: RMCSpawnPointSurvivorDoctor
+  entities:
+  - uid: 30652
+    components:
+    - type: Transform
+      pos: 77.5,-10.5
+      parent: 1
+  - uid: 30653
+    components:
+    - type: Transform
+      pos: 68.5,-141.5
+      parent: 1
+- proto: RMCSpawnPointSurvivorEngineer
+  entities:
+  - uid: 22637
+    components:
+    - type: Transform
+      pos: 74.5,-140.5
+      parent: 1
+- proto: RMCSpawnPointSurvivorSecurity
+  entities:
+  - uid: 22639
+    components:
+    - type: Transform
+      pos: 70.5,-123.5
+      parent: 1
+  - uid: 29968
+    components:
+    - type: Transform
+      pos: 74.5,-122.5
+      parent: 1
+  - uid: 30651
+    components:
+    - type: Transform
+      pos: 35.5,-13.5
       parent: 1
 - proto: RMCStairs
   entities:
@@ -216520,6 +216690,47 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 105.5005,-88.925865
       parent: 1
+- proto: RMCWeaponRifleM54CMK1Unloaded
+  entities:
+  - uid: 32180
+    components:
+    - type: Transform
+      pos: 54.343838,-18.859081
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        gun_magazine: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        gun_chamber: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        rmc-aslot-barrel: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: null
+        rmc-aslot-rail: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: null
+        rmc-aslot-stock: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: null
+        rmc-aslot-underbarrel: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: null
+    - type: RMCWeaponAccuracy
+      modifiedAccuracyMultiplier: 0.5
+    - type: UseDelay
+      delays:
+        RMCWieldDelay:
+          endTime: 4116.4000517
+          startTime: 4139.52
+          length: 0.4
 - proto: RMCWeaponShotgunHG3712
   entities:
   - uid: 22276
@@ -216531,6 +216742,11 @@ entities:
     components:
     - type: Transform
       pos: 30.5,-16.5
+      parent: 1
+  - uid: 31108
+    components:
+    - type: Transform
+      pos: 63.159317,-120.7713
       parent: 1
 - proto: RMCWeldingGoggles
   entities:
@@ -216570,13 +216786,6 @@ entities:
     components:
     - type: Transform
       pos: 75.5,-9.5
-      parent: 1
-- proto: RMCXenoEmbryo
-  entities:
-  - uid: 1837
-    components:
-    - type: Transform
-      pos: 76.5,-10.5
       parent: 1
 - proto: ShardCrystalCyan
   entities:

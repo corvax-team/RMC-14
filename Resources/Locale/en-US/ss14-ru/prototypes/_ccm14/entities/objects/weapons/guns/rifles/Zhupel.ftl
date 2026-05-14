@@ -1,0 +1,9 @@
+ent-CCMWeaponRifleZhupel = Zhupel of revolution
+    .desc = A heavy rifle used by the veterans of Petrishev Revolutionaries. Only takes Wall Piercing rounds.
+ent-CCMMagazineRifleZhupel = Zhupel WP magazine (8x68mmR)
+    .suffix = WP
+    .desc = { ent-CMMagazineRifleBase.desc }
+ent-CCMCartridgeRifleZhupel = cartridge (8.68mmR)
+    .desc = A 8.68mmR cartridge
+ent-CCMBulletRifle8x68mmWP = { ent-RMCBaseBullet }
+    .desc = { ent-RMCBaseBullet.desc }

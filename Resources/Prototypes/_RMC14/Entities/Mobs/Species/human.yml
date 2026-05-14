@@ -13,13 +13,6 @@
       Female: RMCFemaleHuman
   - type: FixedIdentity
     name: cm-chatsan-replacement-human
-  - type: CMUHumanMedical
-  - type: HitLocation
-  - type: PainShock
-  - type: BodyZoneTargeting
-  - type: Body
-    prototype: CMUHumanBody
-    requiredLegs: 2
   - type: UserInterface
     interfaces:
       enum.VoiceMaskUIKey.Key:

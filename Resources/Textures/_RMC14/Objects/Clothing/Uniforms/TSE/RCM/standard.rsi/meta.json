@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a1079f4912a96473dae51cceaa1d74eafb3939e2/icons/mob/humans/onmob/suit_1.dmi, https://github.com/cmss13-devs/cmss13/blob/a1079f4912a96473dae51cceaa1d74eafb3939e2/icons/obj/items/clothing/cm_suits.dmi. jacket-equipped sprite modified from equipped sprite by @TadJohnson00 (GitHub).",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a1079f4912a96473dae51cceaa1d74eafb3939e2/icons/mob/humans/onmob/suit_1.dmi, https://github.com/cmss13-devs/cmss13/blob/a1079f4912a96473dae51cceaa1d74eafb3939e2/icons/obj/items/clothing/cm_suits.dmi. jacket-equipped sprite modified from equipped sprite by @TadJohnson00 (GitHub), recolored and slightly modified by superman1223",
   "size": {
     "x": 32,
     "y": 32

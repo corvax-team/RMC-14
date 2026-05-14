@@ -1,4 +1,4 @@
-ent-CMIDCardASO = ID-карта офицера вспомогательной поддержки
+ent-CMIDCardASO = ID-карта офицера флота
     .desc = { ent-CMIDCardSilver.desc }
 ent-CMIDCardPilotDropship = ID-карта пилота транспортного корабля
     .desc = { ent-CMIDCardBase.desc }

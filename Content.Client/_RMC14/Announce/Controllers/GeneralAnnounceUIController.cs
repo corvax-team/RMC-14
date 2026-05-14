@@ -1,4 +1,5 @@
 using Content.Client.Gameplay;
+using Content.Shared.Audio;
 using Content.Shared._RMC14.Announce;
 using Robust.Client.Audio;
 using Robust.Client.UserInterface;
@@ -176,7 +177,7 @@ public sealed class GeneralAnnounceUIController : UIController, IOnStateEntered<
             announcement.Sound,
             Filter.Local(),
             false,
-            AudioParams.Default.WithVolume(announcement.SoundVolume));
+            AudioParams.Default.WithVolume(AudioHelpers.SanitizeVolume(announcement.SoundVolume, 0f)));
     }
 
     private readonly record struct QueuedAnnouncement(AnnouncementNetData Data, long Order);

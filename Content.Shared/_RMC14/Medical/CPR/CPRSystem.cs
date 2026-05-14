@@ -111,7 +111,7 @@ public sealed class CPRSystem : EntitySystem
         var heal = -FixedPoint2.Min(damage, HealAmount);
         var healSpecifier = new DamageSpecifier();
         healSpecifier.DamageDict.Add(HealType, heal);
-        _damageable.TryChangeDamage(target, healSpecifier, true);
+        _damageable.TryChangeDamage(target, healSpecifier, true, origin: performer);
 
         var received = EnsureComp<CPRReceivedComponent>(target);
         received.Last = _timing.CurTime;

@@ -53,7 +53,7 @@ internal sealed partial class ChatManager
 
     private void DispatchChatMessageToClient(INetChannel client, ChatMessage message)
     {
-        var outgoing = ApplyEmojiFormatting(CloneChatMessage(message));
+        var outgoing = CloneChatMessage(message);
         if (!TryBuildTranslationRequest(client, outgoing, out var request))
         {
             _netManager.ServerSendMessage(new MsgChatMessage { Message = outgoing }, client);
@@ -132,6 +132,13 @@ internal sealed partial class ChatManager
         {
             Logger.InfoS("chat.translate",
                 $"Skip chat translation for {client}: connection/admin status system message should not be translated. Channel={message.Channel}, Message='{message.Message}'");
+            return false;
+        }
+
+        if (ShouldSkipAresTranslation(message))
+        {
+            Logger.InfoS("chat.translate",
+                $"Skip chat translation for {client}: ARES announcement should not be translated. Channel={message.Channel}, Message='{message.Message}'");
             return false;
         }
 
@@ -263,24 +270,6 @@ internal sealed partial class ChatManager
             message.TranslatedMessage);
     }
 
-    private static ChatMessage ApplyEmojiFormatting(ChatMessage message)
-    {
-        return new ChatMessage(
-            message.Channel,
-            message.Message,
-            MCFormatMessage.ApplyEmoji(message.WrappedMessage),
-            message.SenderEntity,
-            message.SenderKey,
-            message.HideChat,
-            message.MessageColorOverride,
-            message.AudioPath,
-            message.AudioVolume,
-            message.HidePopup,
-            message.SpeechStyleClass,
-            message.RepeatCheckSender,
-            message.TranslatedMessage);
-    }
-
     private static ChatMessage ApplyTranslatedMessage(ChatMessage message, string translated)
     {
         return new ChatMessage(
@@ -366,6 +355,22 @@ internal sealed partial class ChatManager
 
         return !string.IsNullOrWhiteSpace(message.Message) &&
                NonTranslatableSystemStatusRegex().IsMatch(message.Message.Trim());
+    }
+
+    private static bool ShouldSkipAresTranslation(ChatMessage message)
+    {
+        if (message.SenderEntity != NetEntity.Invalid || message.SenderKey != null)
+            return false;
+
+        if ((message.Channel & ChatChannel.Radio) == 0)
+            return false;
+
+        if (!ContainsUnsupportedRichMarkup(message.Message))
+            return false;
+
+        var plain = RichTextTagRegex().Replace(message.Message, string.Empty);
+        return plain.Contains("ARES", StringComparison.OrdinalIgnoreCase) ||
+               plain.Contains("АРЕС", StringComparison.OrdinalIgnoreCase);
     }
 
     private static string? NormalizeLanguageCode(string raw, bool allowAuto)

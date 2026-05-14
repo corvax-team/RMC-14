@@ -1,0 +1,10 @@
+ent-CCMWeaponRifleZhupel = «Жупел революции»
+    .desc = Тяжёлая винтовка, используемая ветеранами Революционеров-Петрищевцев. Принимает только патроны с пробитием стен.
+ent-CCMMagazineRifleZhupel = магазин Жупеля WP (8x68mmR)
+    .suffix = ПС
+    .desc = { ent-CMMagazineRifleBase.desc }
+ent-CCMCartridgeRifleZhupel = патрон (8.68mmR)
+    .desc = Патрон 8.68mmR
+ent-CCMBulletRifle8x68mmWP = { ent-RMCBaseBullet }
+    .suffix = ПС
+    .desc = { ent-RMCBaseBullet.desc }

@@ -12,3 +12,7 @@ ent-RMCFenceHybrisaElectric = { ent-CMFence }
 ent-RMCFenceHybrisaElectricBroken = { ent-RMCFenceBroken }
     .suffix = Под напряжением
     .desc = { ent-RMCFenceBroken.desc }
+ent-RMCFenceOvergrown = заросшее ограждение
+    .desc = Большая металлическая сетка, натянутая между двумя столбами, переплетённая лианами и вьющимися растениями. Всё ещё разделяет территории, но природа отвоёвывает её.
+ent-RMCFenceOvergrownBroken = сломанное заросшее ограждение
+    .desc = Хаос из сломанной проволоки и сорняков, натянутых между двумя столбами, поглощённый годами неконтролируемого роста.

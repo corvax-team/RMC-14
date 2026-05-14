@@ -19,7 +19,7 @@
         zoomDuration: 1.0
         bounceCount: 3
         bounceHeight: 15
-        enableCRT: true
+        enableCRT: false
         cRTSettings:
           # enabled: true
           # showScanlines: true
@@ -106,7 +106,7 @@
         zoomDuration: 1.0
         bounceCount: 3
         bounceHeight: 15
-        enableCRT: true
+        enableCRT: false
         cRTSettings:
           # enabled: true
           # showScanlines: true

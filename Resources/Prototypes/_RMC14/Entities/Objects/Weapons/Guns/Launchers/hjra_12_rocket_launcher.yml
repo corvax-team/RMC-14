@@ -97,6 +97,7 @@
     state: hjra_tank
     suffix: false
   - type: IgnorePredictionHide
+  - type: Corrodible
 
 - type: entity
   id: RMCRocketHJRA12HE
@@ -122,6 +123,7 @@
     state: hjra_explosive
     suffix: false
   - type: IgnorePredictionHide
+  - type: Corrodible
 
 - type: entity
   id: RMCRocketHJRA12Incen
@@ -147,6 +149,7 @@
     state: hjra_incen
     suffix: false
   - type: IgnorePredictionHide
+  - type: Corrodible
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-hjra-12-extreme-intensity-incendiary-rocket
 

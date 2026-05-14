@@ -229,3 +229,6 @@ ent-RMCBeltRoyalMortarFilledMortarShells = { ent-RMCBeltRoyalMortar }
 ent-RMCBeltHolsterPistolRCMFilled = { ent-RMCBeltHolsterPistolRCM }
     .suffix = PVE, RCM, Filled
     .desc = { ent-RMCBeltHolsterPistolRCM.desc }
+ent-RMCMkXBeltFilled = { ent-RMCMkXBelt }
+    .suffix = PVE, CO, Filled
+    .desc = { ent-RMCMkXBelt.desc }

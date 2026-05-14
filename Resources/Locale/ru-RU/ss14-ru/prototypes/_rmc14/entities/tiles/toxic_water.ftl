@@ -1,0 +1,17 @@
+ent-RMCToxicWaterShallow = вода
+    .desc = Что-то в этой воде выглядит неправильно. Лучше держаться подальше.
+    .suffix = Токсичная
+ent-RMCToxicWaterDeep = вода
+    .desc = Что-то в этой воде выглядит неправильно. Лучше держаться подальше.
+ent-RMCNonToxicToxicWaterShallow = { ent-CMFloorShallowWaterEntity }
+    .desc = Что-то в этой воде выглядит неправильно. Лучше держаться подальше.
+    .suffix = Нетоксичная
+ent-RMCNonToxicToxicWaterDeep = { ent-CMFloorDeepWaterEntity }
+    .desc = Что-то в этой воде выглядит неправильно. Лучше держаться подальше.
+    .suffix = Нетоксичная
+ent-RMCEntityDesertWaterShallowCornerToxic = { ent-RMCToxicWaterShallow }
+    .desc = { ent-RMCToxicWaterShallow.desc }
+ent-RMCEntityDesertWaterShallowCornerEdgeToxic = { ent-RMCToxicWaterShallow }
+    .desc = { ent-RMCToxicWaterShallow.desc }
+ent-RMCEntityDesertWaterShallowEdgeToxic = { ent-RMCToxicWaterShallow }
+    .desc = { ent-RMCToxicWaterShallow.desc }

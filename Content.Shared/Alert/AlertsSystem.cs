@@ -1,6 +1,5 @@
 using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
-using Content.Shared._CCM.Alert;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -121,7 +120,7 @@ public abstract class AlertsSystem : EntitySystem
 
             AfterShowAlert((euid, alertsComponent));
 
-            OnAlertsDirty(euid, alertsComponent);
+            Dirty(euid, alertsComponent);
         }
         else
         {
@@ -147,7 +146,7 @@ public abstract class AlertsSystem : EntitySystem
 
         AfterClearAlert((euid, alertsComponent));
 
-        OnAlertsDirty(euid, alertsComponent);
+        Dirty(euid, alertsComponent);
     }
 
     /// <summary>
@@ -170,7 +169,7 @@ public abstract class AlertsSystem : EntitySystem
 
             AfterClearAlert((euid, alertsComponent));
 
-            OnAlertsDirty(euid, alertsComponent);
+            Dirty(euid, alertsComponent);
         }
         else
         {
@@ -233,7 +232,7 @@ public abstract class AlertsSystem : EntitySystem
         }
 
         if (dirty)
-            OnAlertsDirty(uid, alertComp);
+            Dirty(uid, comp);
     }
 
     public override void Update(float frameTime)
@@ -268,7 +267,7 @@ public abstract class AlertsSystem : EntitySystem
             }
 
             if (dirtyComp)
-                OnAlertsDirty(uid, alertComp);
+                Dirty(uid, alertComp);
         }
     }
 
@@ -318,23 +317,11 @@ public abstract class AlertsSystem : EntitySystem
         if (player is null || !HasComp<AlertsComponent>(player))
             return false;
 
-        // CCM-change-start
-        // Relay: if this entity is displaying alerts for another source via relay.
-        var target = player.Value;
-        if (TryComp<CCMAlertsDisplayRelayComponent>(player.Value, out var relay) && relay.Source is { } src)
-        {
-            if (relay.InteractAsSource)
-                target = src;
-            else
-                target = player.Value;
-        }
-        // CCM-change-end
-
-        if (!IsShowingAlert(target, alertType)) // CCM-change: target<player.Value
+        if (!IsShowingAlert(player.Value, alertType))
         {
             Log.Debug("User {0} attempted to" +
                                    " click alert {1} which is not currently showing for them",
-                Comp<MetaDataComponent>(target).EntityName, alertType); // CCM-change: target<player.Value
+                Comp<MetaDataComponent>(player.Value).EntityName, alertType);
             return false;
         }
 
@@ -402,24 +389,6 @@ public abstract class AlertsSystem : EntitySystem
 
     private void OnPlayerAttached(EntityUid uid, AlertsComponent component, PlayerAttachedEvent args)
     {
-        OnAlertsDirty(uid, component);
-    }
-
-    // CCM-change-start
-    private void OnAlertsDirty(EntityUid uid, AlertsComponent component)
-    {
         Dirty(uid, component);
-
-        // Relay: dirty for all connected relays.
-        var relayQuery = EntityQueryEnumerator<CCMAlertsDisplayRelayComponent>();
-        while (relayQuery.MoveNext(out var relayUid, out var relayComp))
-        {
-            if (relayComp.Source == uid)
-            {
-                if (TryComp<AlertsComponent>(relayUid, out var relayAlertsComp))
-                    Dirty(relayUid, relayAlertsComp);
-            }
-        }
     }
-    // CCM-change-end
 }

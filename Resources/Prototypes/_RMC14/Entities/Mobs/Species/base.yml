@@ -113,8 +113,12 @@
       Dead: 0
   - type: Thirst
     baseDecayRate: 0.01666666666
+  - type: CMUHumanMedical
+  - type: HitLocation
+  - type: PainShock
+  - type: BodyZoneTargeting
   - type: Body
-    prototype: Human
+    prototype: CMUHumanBody
     requiredLegs: 2
   - type: Damageable
     damageContainer: Biological

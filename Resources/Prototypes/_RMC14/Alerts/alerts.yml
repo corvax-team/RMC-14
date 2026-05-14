@@ -299,7 +299,7 @@
 
 - type: alert
   parent: SquadTracker
-  id: SquadTrackerCBRN
+  id: SquadTrackerРХБЗ # CCM14 | РМС-14 жестко насрали и снова забыли про форки. Русский в названии прото не гуд, но как есть.
   category: SquadTracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi

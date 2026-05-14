@@ -4,6 +4,7 @@ using Content.Client._RMC14.Chat;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Chat.Controls;
 using Content.Shared._MC;
+using Content.Shared.Audio;
 using Content.Shared.Chat;
 using Content.Shared.Input;
 using Robust.Client.Audio;
@@ -96,7 +97,11 @@ public partial class ChatBox : UIWidget
             return;
 
         if (msg is { Read: false, AudioPath: { } })
-            _entManager.System<AudioSystem>().PlayGlobal(msg.AudioPath, Filter.Local(), false, AudioParams.Default.WithVolume(msg.AudioVolume));
+            _entManager.System<AudioSystem>().PlayGlobal(
+                msg.AudioPath,
+                Filter.Local(),
+                false,
+                AudioParams.Default.WithVolume(AudioHelpers.SanitizeVolume(msg.AudioVolume, 0f)));
 
         msg.Read = true;
 

@@ -2,10 +2,10 @@
 
 namespace Content.Shared._RMC14.Vendors;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, UnsavedComponent]
+[RegisterComponent, UnsavedComponent]
 [Access(typeof(SharedCMAutomatedVendorSystem))]
 public sealed partial class RMCRecentlyVendedComponent : Component
 {
-    [DataField, AutoNetworkedField]
+    [DataField]
     public HashSet<EntityUid> PreventCollide = new();
 }

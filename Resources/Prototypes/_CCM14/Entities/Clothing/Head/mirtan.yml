@@ -1,0 +1,46 @@
+# Венок
+- type: entity
+  parent: CMHeadBeret
+  id: CCMHeadMirtanVenok
+  name: imperial wreath
+  description: An old.. REALLY OLD head accessory, utilized by Mirtan's Empire officers.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Hats/imperial_venok.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Hats/imperial_venok.rsi
+
+# Шлем лидера отряда 
+- type: entity
+  parent: RMCHelmetBase
+  id: CCMHeadMirtanSLHelmet
+  name: imperial leader helmet
+  description: A fine helmet with a huge red erok, utilized by the Mirtan's Empire field troop leaders.
+  components:
+    - type: Sprite
+      sprite: _CCM14/Objects/Clothing/Head/Helmets/Mirtan/leader.rsi
+    - type: Clothing
+      sprite: _CCM14/Objects/Clothing/Head/Helmets/Mirtan/leader.rsi
+    - type: ItemCamouflage
+      camouflageVariations: {}
+    - type: CMArmor
+      bio: 10
+      explosionArmor: 20
+      bullet: 10
+
+# Шлем Декана
+- type: entity
+  parent: RMCHelmetBase
+  id: CCMHeadMirtanDecan
+  name: imperial auxilary helmet
+  description: An imperial helmet with an integrated headset and a golden eagle on a forehead, utilized by the officers of Mirtan's Empire.
+  components:
+    - type: Sprite
+      sprite: _CCM14/Objects/Clothing/Head/Helmets/Mirtan/decan.rsi
+    - type: Clothing
+      sprite: _CCM14/Objects/Clothing/Head/Helmets/Mirtan/decan.rsi
+    - type: ItemCamouflage
+      camouflageVariations: {}
+    - type: CMArmor
+      bio: 10
+      explosionArmor: 20

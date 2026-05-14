@@ -12,3 +12,7 @@ ent-RMCFenceHybrisaElectric = { ent-CMFence }
 ent-RMCFenceHybrisaElectricBroken = { ent-RMCFenceBroken }
     .suffix = electric
     .desc = { ent-RMCFenceBroken.desc }
+ent-RMCFenceOvergrown = overgrown fence
+    .desc = A large metal mesh strewn between two poles, tangled with vines and creeping growth. Still separates areas, but nature is reclaiming it.
+ent-RMCFenceOvergrownBroken = broken overgrown fence
+    .desc = A mess of broken wire and creeping weeds strung between two posts, swallowed by years of unchecked growth.

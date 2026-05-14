@@ -10,8 +10,8 @@ using Robust.Client.Console;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
-using Robust.Shared.Network;
 using Robust.Shared.Configuration;
+using Robust.Shared.Network;
 using Robust.Shared.Utility;
 
 namespace Content.Client.Administration.UI.Bwoink
@@ -61,27 +61,27 @@ namespace Content.Client.Administration.UI.Bwoink
                 var sb = new StringBuilder();
 
                 if (info.Connected)
-                    sb.Append(info.ActiveThisRound ? '⚫' : '◐');
+                    sb.Append(info.ActiveThisRound ? '\u26AB' : '\u25D0');
                 else
-                    sb.Append(info.ActiveThisRound ? '⭘' : '·');
+                    sb.Append(info.ActiveThisRound ? '\u2B58' : '\u25CB');
 
                 sb.Append(' ');
                 if (AHelpHelper.TryGetChannel(info.SessionId, out var panel) && panel.Unread > 0)
                 {
                     if (panel.Unread < 11)
-                        sb.Append(new Rune('➀' + (panel.Unread-1)));
+                        sb.Append(new Rune(0x2780 + (panel.Unread - 1)));
                     else
-                        sb.Append(new Rune(0x2639)); // ☹
+                        sb.Append(new Rune(0x2639));
                     sb.Append(' ');
                 }
 
                 // Mark antagonists with symbol
                 if (info.Antag && info.ActiveThisRound)
-                    sb.Append(new Rune(0x1F5E1)); // 🗡
+                    sb.Append(new Rune(0x1F5E1));
 
                 // Mark new players with symbol
                 if (IsNewPlayer(info))
-                    sb.Append(new Rune(0x23F2)); // ⏲
+                    sb.Append(new Rune(0x23F2));
 
                 sb.AppendFormat("\"{0}\"", text);
 
@@ -251,22 +251,22 @@ namespace Content.Client.Administration.UI.Bwoink
         {
             pl ??= (PlayerInfo) li.Metadata!;
             var sb = new StringBuilder();
-            sb.Append(pl.Connected ? '●' : '○');
+            sb.Append(pl.Connected ? '\u25CF' : '\u25CB');
             sb.Append(' ');
             if (AHelpHelper.TryGetChannel(pl.SessionId, out var panel) && panel.Unread > 0)
             {
                 if (panel.Unread < 11)
-                    sb.Append(new Rune('➀' + (panel.Unread-1)));
+                    sb.Append(new Rune(0x2780 + (panel.Unread - 1)));
                 else
-                    sb.Append(new Rune(0x2639)); // ☹
+                    sb.Append(new Rune(0x2639));
                 sb.Append(' ');
             }
 
             if (pl.Antag)
-                sb.Append(new Rune(0x1F5E1)); // 🗡
+                sb.Append(new Rune(0x1F5E1));
 
             if (pl.OverallPlaytime <= TimeSpan.FromMinutes(_cfg.GetCVar(CCVars.NewPlayerThreshold)))
-                sb.Append(new Rune(0x23F2)); // ⏲
+                sb.Append(new Rune(0x23F2));
 
             sb.AppendFormat("\"{0}\"", pl.CharacterName);
 

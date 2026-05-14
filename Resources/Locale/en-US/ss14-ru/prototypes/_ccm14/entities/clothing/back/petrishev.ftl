@@ -1,0 +1,11 @@
+ent-CCMSatchelRev = Petrishev Revolutionary satchel
+    .desc = A suprisingly well made leather satchel. In use of Petrishev Revolutionary combatants.
+ent-CCMSatchelREVSanitarFilled = { ent-CCMSatchelRev }
+    .suffix = Filled, Medic
+    .desc = { ent-CCMSatchelRev.desc }
+ent-CCMSatchelREVSoldatFilled = { ent-CCMSatchelRev }
+    .suffix = Filled, Rifleman
+    .desc = { ent-CCMSatchelRev.desc }
+ent-CCMSatchelREVLeaderFilled = { ent-CCMSatchelRev }
+    .suffix = Filled, Leader
+    .desc = { ent-CCMSatchelRev.desc }

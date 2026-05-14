@@ -167,6 +167,11 @@ public abstract class SharedWeatherSystem : EntitySystem
 
         var weatherComp = EnsureComp<WeatherComponent>(mapUid.Value);
 
+        // Temporary global weather disable: allow shutdown of active weather,
+        // but block starting any new weather on any map.
+        if (proto != null)
+            proto = null;
+
         foreach (var (eProto, weather) in weatherComp.Weather)
         {
             // if we turn off the weather, we don't want endTime = null
