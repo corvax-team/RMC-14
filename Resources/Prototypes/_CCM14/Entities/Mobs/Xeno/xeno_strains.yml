@@ -376,8 +376,8 @@
     sprite: _CCM14/Objects/Xeno/xeno_64x64.rsi
     state: alive
   - type: MovementSpeedModifier
-    baseSprintSpeed: 3.7
-    baseWalkSpeed: 1.9
+    baseSprintSpeed: 6
+    baseWalkSpeed: 3
   - type: DamageOnCollide
     paralyze: 2
     canRehit: false
@@ -446,5 +446,5 @@
     allowRepeatedMorphs: false
     polymorphSound: /Audio/_RMC14/Xeno/burrowing_b.ogg
     exitPolymorphSound: /Audio/_RMC14/Xeno/burrowoff.ogg
-    duration: 5
+    duration: 3
 # // CCM Xeno Strain - Burrower Impaler
