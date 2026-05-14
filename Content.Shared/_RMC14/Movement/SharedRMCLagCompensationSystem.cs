@@ -13,6 +13,8 @@ namespace Content.Shared._RMC14.Movement;
 
 public abstract class SharedRMCLagCompensationSystem : EntitySystem
 {
+    private const int MaxStoredTickAge = 2;
+
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -23,7 +25,7 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
 
     private EntityQuery<ActorComponent> _actorQuery;
 
-    private readonly Dictionary<NetUserId, GameTick> _lastRealTicks = new();
+    private readonly Dictionary<NetUserId, LastRealTickData> _lastRealTicks = new();
     private GameTick _lastSentRealTick;
 
     public override void Initialize()
@@ -92,7 +94,17 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
 
     public virtual GameTick GetLastRealTick(NetUserId? session)
     {
-        return session == null ? _timing.CurTick : _lastRealTicks.GetValueOrDefault(session.Value, _timing.CurTick);
+        if (session == null)
+            return _timing.CurTick;
+
+        if (!_lastRealTicks.TryGetValue(session.Value, out var data))
+            return _timing.CurTick;
+
+        if (_timing.CurTick > data.ReceivedAt &&
+            _timing.CurTick.Value - data.ReceivedAt.Value > MaxStoredTickAge)
+            return _timing.CurTick;
+
+        return data.Reported;
     }
 
     public void SetLastRealTick(NetUserId session, GameTick tick)
@@ -100,7 +112,7 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        _lastRealTicks[session] = tick;
+        _lastRealTicks[session] = new LastRealTickData(tick, _timing.CurTick);
     }
 
     public void SendLastRealTick()
@@ -161,4 +173,6 @@ public abstract class SharedRMCLagCompensationSystem : EntitySystem
         var coordinates = _transform.ToMapCoordinates(GetCoordinates(target, session));
         return Collides(target, projectile, coordinates);
     }
+
+    private readonly record struct LastRealTickData(GameTick Reported, GameTick ReceivedAt);
 }

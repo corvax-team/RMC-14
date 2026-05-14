@@ -5,8 +5,8 @@ uniform highp float intensity;
 
 void fragment()
 {
-    vec2 uv = UV;
-    vec2 center = uv - 0.5;
+    highp vec2 uv = UV;
+    highp vec2 center = uv - 0.5;
 
     highp float shake = 0.003 * intensity;
 
@@ -22,9 +22,9 @@ void fragment()
     vignette = mix(1.0, vignette, intensity * 5.5);
     vignette = vignette * vignette * vignette;
 
-    vec3 col = texture(SCREEN_TEXTURE, uv).rgb;
+    highp vec3 col = texture(SCREEN_TEXTURE, uv).rgb;
 
-    vec3 blueTint = vec3(0.02, 0.04, 0.12);
+    highp vec3 blueTint = vec3(0.02, 0.04, 0.12);
     col = mix(col, col * blueTint, 1.0 * intensity);
 
     col *= vignette;

@@ -116,12 +116,7 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
         if (Header.Children.FirstOrDefault() is not PanelContainer panel)
             return;
 
-        panel.PanelOverride = new StyleBoxFlat
-        {
-            BackgroundColor = StyleNano.OldLobbyGold.WithAlpha(0.16f),
-            BorderColor = StyleNano.OldLobbyGold.WithAlpha(0.75f),
-            BorderThickness = new Thickness(1f)
-        };
+        panel.PanelOverride = null;
 
         if (panel.Children.FirstOrDefault() is not Label label)
             return;

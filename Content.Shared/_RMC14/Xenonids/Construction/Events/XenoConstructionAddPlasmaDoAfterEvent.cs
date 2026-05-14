@@ -7,6 +7,8 @@ namespace Content.Shared._RMC14.Xenonids.Construction.Events;
 [Serializable, NetSerializable]
 public sealed partial class XenoConstructionAddPlasmaDoAfterEvent : DoAfterEvent
 {
+    public bool Completed;
+
     public override DoAfterEvent Clone()
     {
         return this;

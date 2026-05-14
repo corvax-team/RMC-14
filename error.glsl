@@ -1,8 +1,6 @@
-#version 140
-#define HAS_MOD
+#version 300 es
 #define HAS_DFDX
 #define HAS_FLOAT_TEXTURES
-#define HAS_SRGB
 #define HAS_UNIFORM_BUFFERS
 #define FRAGMENT_SHADER
 
@@ -232,9 +230,9 @@ varying highp vec4 VtxModulate;
 // TODO CLYDE consistent shader variable naming
 uniform sampler2D lightMap;
 
-uniform ARRAY_HIGHP float intensity;
-uniform ARRAY_HIGHP float transitionProgress;
 uniform sampler2D SCREEN_TEXTURE;
+uniform ARRAY_HIGHP float time;
+uniform ARRAY_HIGHP float intensity;
 
 
 
@@ -271,20 +269,23 @@ void main()
     // Requires breaking changes.
     lowp vec3 lightSample = LIGHT.xyz;
 
-     highp vec2 center = vec2 ( 0.5 , 0.5 ) ;
- highp vec2 uv = UV ;
- highp float dist = distance ( uv , center ) ;
- highp float baseVignette = 1.0 - dist * 1.8 ;
- baseVignette = pow ( baseVignette , 2.0 ) ;
- highp float animVignette = 1.0 - dist * 3.0 ;
- animVignette = pow ( animVignette , 3.0 ) ;
- highp float permanentAlpha = ( 1.0 - baseVignette ) * intensity * 0.5 ;
- highp float animatedAlpha = ( 1.0 - animVignette ) * intensity * 1.0 ;
- animatedAlpha *= ( 1.0 - transitionProgress ) ;
- highp float finalAlpha = permanentAlpha + animatedAlpha ;
- finalAlpha = clamp ( finalAlpha , 0.0 , 1.0 ) ;
- highp vec4 screenColor = texture ( SCREEN_TEXTURE , UV ) ;
- COLOR = mix ( screenColor , highp vec4 ( 0.0 , 0.0 , 0.0 , 1.0 ) , finalAlpha ) ;
+     vec2 uv = UV ;
+ vec2 center = uv - 0.5 ;
+ highp float shake = 0.003 * intensity ;
+ uv . x += sin ( time * 60.0 ) * shake ;
+ uv . y += cos ( time * 52.0 ) * shake ;
+ uv . x += sin ( time * 120.0 ) * shake * 0.5 ;
+ uv . y += cos ( time * 110.0 ) * shake * 0.5 ;
+ highp float dist = length ( center ) ;
+ highp float vignette = smoothstep ( 0.6 , 0.0 , dist ) ;
+ vignette = mix ( 1.0 , vignette , intensity * 5.5 ) ;
+ vignette = vignette * vignette * vignette ;
+ vec3 col = texture ( SCREEN_TEXTURE , uv ) . rgb ;
+ vec3 blueTint = vec3 ( 0.02 , 0.04 , 0.12 ) ;
+ col = mix ( col , col * blueTint , 1.0 * intensity ) ;
+ col *= vignette ;
+ col *= ( 1.0 - 0.6 * intensity ) ;
+ COLOR = vec4 ( col , 1.0 ) ;
 
 
     LIGHT.xyz = lightSample;

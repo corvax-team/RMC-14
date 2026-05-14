@@ -3,6 +3,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.ActionBlocker;
@@ -75,6 +76,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
     // RMC14
     [Dependency] private readonly IConfigurationManager _configuration = default!;
+    [Dependency] private readonly SharedRMCLagCompensationSystem _rmcLagCompensation = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly RMCReagentSystem _reagent = default!;
 
@@ -223,6 +225,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
     private void OnLightAttack(LightAttackEvent msg, EntitySessionEventArgs args)
     {
+        _rmcLagCompensation.SetLastRealTick(args.SenderSession.UserId, msg.LastRealTick);
         if (args.SenderSession.AttachedEntity is not {} user)
             return;
 
@@ -237,6 +240,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
     private void OnHeavyAttack(HeavyAttackEvent msg, EntitySessionEventArgs args)
     {
+        _rmcLagCompensation.SetLastRealTick(args.SenderSession.UserId, msg.LastRealTick);
         if (args.SenderSession.AttachedEntity is not {} user)
             return;
 
@@ -251,6 +255,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
     private void OnDisarmAttack(DisarmAttackEvent msg, EntitySessionEventArgs args)
     {
+        _rmcLagCompensation.SetLastRealTick(args.SenderSession.UserId, msg.LastRealTick);
         if (args.SenderSession.AttachedEntity is not {} user)
             return;
 

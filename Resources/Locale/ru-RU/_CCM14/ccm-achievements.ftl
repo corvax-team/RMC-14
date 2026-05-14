@@ -52,11 +52,11 @@ ccm-achievement-marine-savior-title = Спаситель
 ccm-achievement-marine-savior-desc = Ты вытащил из ада больше людей, чем любой другой. Требование: возродить 300 морпехов.
 
 ccm-achievement-marine-mechanic-title = Механик
-ccm-achievement-marine-mechanic-desc = Без укреплений мы бы уже проиграли. Требование: построить 50 укреплений.
+ccm-achievement-marine-mechanic-desc = Без укреплений мы бы уже проиграли. Требование: построить 50 построек за морпехов или ксеноморфов.
 ccm-achievement-marine-fortifier-title = Фортификатор
-ccm-achievement-marine-fortifier-desc = Теперь это крепость. Требование: построить 500 укреплений.
+ccm-achievement-marine-fortifier-desc = Теперь это крепость. Требование: построить 500 построек за морпехов или ксеноморфов.
 ccm-achievement-marine-defense-architect-title = Архитектор обороны
-ccm-achievement-marine-defense-architect-desc = Ни один жук не пройдёт. Требование: построить 2 000 укреплений.
+ccm-achievement-marine-defense-architect-desc = Ни один враг не пройдёт. Требование: построить 2 000 построек за морпехов или ксеноморфов.
 
 ccm-achievement-marine-victory-title = Победа десанта
 ccm-achievement-marine-victory-desc = Планета очищена. Требование: выиграть 10 раундов за морпехов.

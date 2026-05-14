@@ -52,11 +52,11 @@ ccm-achievement-marine-savior-title = Savior
 ccm-achievement-marine-savior-desc = You pulled more people out of hell than anyone else. Requirement: revive 300 marines.
 
 ccm-achievement-marine-mechanic-title = Mechanic
-ccm-achievement-marine-mechanic-desc = Without fortifications, the line would already be gone. Requirement: build 50 fortifications.
+ccm-achievement-marine-mechanic-desc = Without fortifications, the line would already be gone. Requirement: build 50 structures as marines or xenomorphs.
 ccm-achievement-marine-fortifier-title = Fortifier
-ccm-achievement-marine-fortifier-desc = Now this is a fortress. Requirement: build 500 fortifications.
+ccm-achievement-marine-fortifier-desc = Now this is a fortress. Requirement: build 500 structures as marines or xenomorphs.
 ccm-achievement-marine-defense-architect-title = Defense Architect
-ccm-achievement-marine-defense-architect-desc = No bug is getting through. Requirement: build 2,000 fortifications.
+ccm-achievement-marine-defense-architect-desc = No bug is getting through. Requirement: build 2,000 structures as marines or xenomorphs.
 
 ccm-achievement-marine-victory-title = Marine Victory
 ccm-achievement-marine-victory-desc = The planet has been purged. Requirement: win 10 rounds as marines.

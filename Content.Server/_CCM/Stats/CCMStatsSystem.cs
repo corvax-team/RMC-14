@@ -402,7 +402,7 @@ public sealed class CCMStatsSystem : EntitySystem
 
     private void OnXenoStructureSecreted(XenoSecreteStructureDoAfterEvent args)
     {
-        if (args.Cancelled || !TryGetEntityStats(args.User, CCMStatsSide.Xenos, out var stats))
+        if (args.Cancelled || !args.Handled || !TryGetEntityStats(args.User, CCMStatsSide.Xenos, out var stats))
             return;
 
         stats.XenoStructuresBuilt += 1;
@@ -411,7 +411,7 @@ public sealed class CCMStatsSystem : EntitySystem
 
     private void OnXenoConstructionCompleted(XenoConstructionAddPlasmaDoAfterEvent args)
     {
-        if (args.Cancelled || !TryGetEntityStats(args.User, CCMStatsSide.Xenos, out var stats))
+        if (args.Cancelled || !args.Completed || !TryGetEntityStats(args.User, CCMStatsSide.Xenos, out var stats))
             return;
 
         stats.XenoStructuresBuilt += 1;

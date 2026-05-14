@@ -72,7 +72,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
     private void OnInteractHand(Entity<IdModificationConsoleComponent> ent, ref InteractUsingEvent args)
     {
-        args.Handled = ContainerInHandler(ent, args.User);
+        args.Handled = ContainerInHandler(ent, args.User, args.Used);
     }
 
     private void OnJobChangeMsg(Entity<IdModificationConsoleComponent> ent,
@@ -396,33 +396,57 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
     private bool ContainerInHandler(Entity<IdModificationConsoleComponent> ent, EntityUid user)
     {
-        if (!_hands.TryGetActiveItem(user, out var handItem) ||
-            !TryComp(handItem, out IdCardComponent? idCardComponent) ||
-            !TryComp(handItem, out AccessComponent? accessComponent))
+        if (!_hands.TryGetActiveItem(user, out var handItem))
+            return false;
+
+        return ContainerInHandler(ent, user, handItem.Value);
+    }
+
+    private bool ContainerInHandler(Entity<IdModificationConsoleComponent> ent, EntityUid user, EntityUid item)
+    {
+        if (!TryComp(item, out IdCardComponent? idCardComponent) ||
+            !TryComp(item, out AccessComponent? accessComponent))
             return false;
 
         if (accessComponent.Tags.Contains(ent.Comp.Access))
-            return ContainerInHandler(ent, user, ent.Comp.PrivilegedIdSlot);
+            return ContainerInHandler(ent, user, item, ent.Comp.PrivilegedIdSlot);
 
-        return ContainerInHandler(ent, user, ent.Comp.TargetIdSlot);
+        return ContainerInHandler(ent, user, item, ent.Comp.TargetIdSlot);
     }
 
     private bool ContainerInHandler(Entity<IdModificationConsoleComponent> ent, EntityUid user, string containerType)
     {
-        if (!_hands.TryGetActiveItem(user, out var handItem) ||
-            !TryComp(handItem, out IdCardComponent? idCardComponent) ||
-            !TryComp(handItem, out AccessComponent? accessComponent))
+        if (!_hands.TryGetActiveItem(user, out var handItem))
             return false;
+
+        return ContainerInHandler(ent, user, handItem.Value, containerType);
+    }
+
+    private bool ContainerInHandler(Entity<IdModificationConsoleComponent> ent, EntityUid user, EntityUid item, string containerType)
+    {
+        if (!TryComp(item, out IdCardComponent? idCardComponent) ||
+            !TryComp(item, out AccessComponent? accessComponent))
+            return false;
+
+        var container = _container.EnsureContainer<ContainerSlot>(ent, containerType);
+        if (container.ContainedEntity != null)
+            return false;
+
+        if (!_hands.TryDrop(user, item))
+            return false;
+
+        if (!_container.Insert(item, container))
+        {
+            _hands.PickupOrDrop(user, item);
+            return false;
+        }
 
         if (accessComponent.Tags.Contains(ent.Comp.Access) && containerType == ent.Comp.PrivilegedIdSlot)
             ent.Comp.Authenticated = true;
 
         ent.Comp.HasIFF = false;
-        if (TryComp(handItem, out ItemIFFComponent? iff) && containerType == ent.Comp.TargetIdSlot)
+        if (TryComp(item, out ItemIFFComponent? iff) && containerType == ent.Comp.TargetIdSlot)
             ent.Comp.HasIFF = iff.Factions.Contains(ent.Comp.Faction);
-
-        var container = _container.EnsureContainer<ContainerSlot>(ent, containerType);
-        _container.Insert(handItem.Value, container);
 
         var query = EntityQueryEnumerator<SquadTeamComponent>();
         ent.Comp.Squads = [];

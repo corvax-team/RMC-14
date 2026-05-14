@@ -162,15 +162,15 @@
                                 StyleClasses="OldLobbyButton"
                                 HorizontalExpand="True"
                                 SizeFlagsStretchRatio="1.06" />
-                        <Button Name="LeaveButton" Access="Public" Text="{Loc 'ui-lobby-leave-button'}"
-                                StyleClasses="OldLobbyButton"
-                                HorizontalExpand="True"
-                                SizeFlagsStretchRatio="0.84" />
                         <Button Name="SponsorshipButton" Access="Public"
                                 Text="{Loc 'ui-lobby-taskbar-donate'}"
                                 StyleClasses="OldLobbyButton"
                                 HorizontalExpand="True"
                                 SizeFlagsStretchRatio="1.22" />
+                        <Button Name="LeaveButton" Access="Public" Text="{Loc 'ui-lobby-leave-button'}"
+                                StyleClasses="OldLobbyButton"
+                                HorizontalExpand="True"
+                                SizeFlagsStretchRatio="0.84" />
                     </BoxContainer>
                     <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                         <Button Name="LinkDiscordButton" Access="Public"

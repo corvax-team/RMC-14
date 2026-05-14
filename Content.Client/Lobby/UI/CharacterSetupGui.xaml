@@ -132,7 +132,7 @@
                             <Button Name="OldNewCharacterButton" Text="{Loc 'character-setup-gui-new-character'}" StyleClasses="OldLobbyButton" />
                             <Button Name="OldSaveCharacterButton" Text="{Loc 'character-setup-gui-save-character'}" StyleClasses="OldLobbyButton" />
                             <Button Name="OldResetCharacterButton" Text="{Loc 'character-setup-gui-reset-character'}" StyleClasses="OldLobbyButton" />
-                            <Button Name="OldDeleteCharacterButton" Text="{Loc 'character-setup-gui-delete-character'}" StyleClasses="OldLobbyButton" />
+                            <Button Name="OldDeleteCharacterButton" Text="{Loc 'character-setup-gui-character-setup-stats-button'}" StyleClasses="OldLobbyButton" />
                         </BoxContainer>
                         <Button Name="OldCloseButton"
                                 Access="Public"

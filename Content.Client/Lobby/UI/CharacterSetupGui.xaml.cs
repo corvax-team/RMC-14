@@ -97,6 +97,7 @@ namespace Content.Client.Lobby.UI
 
         public event Action<int>? SelectCharacter;
         public event Action<int>? DeleteCharacter;
+        public event Action? StatsRequested;
         public event Action? CloseRequested;
         public BaseButton CloseButtonControl => _oldLobbyStyle ? OldCloseButton : CloseButton;
         public bool HasManualPosition => _hasManualPosition;
@@ -132,7 +133,7 @@ namespace Content.Client.Lobby.UI
             OldResetCharacterButton.OnPressed += _ => _profileEditor.RequestReset();
             OldImportCharacterButton.OnPressed += _ => _profileEditor.RequestImport();
             OldExportCharacterButton.OnPressed += _ => _profileEditor.RequestExport();
-            OldDeleteCharacterButton.OnPressed += _ => HandleDeletePressed();
+            OldDeleteCharacterButton.OnPressed += _ => StatsRequested?.Invoke();
             CloseButton.OnPressed += _ => CloseRequested?.Invoke();
             OldCloseButton.OnPressed += _ => CloseRequested?.Invoke();
 
@@ -349,7 +350,7 @@ namespace Content.Client.Lobby.UI
             NewCharacterButton.Disabled = fullSlots >= maxSlots;
             OldNewCharacterButton.Disabled = numberOfFullSlots >= maxSlots;
             DeleteCharacterButton.Disabled = !canDeleteCharacter;
-            OldDeleteCharacterButton.Disabled = !canDeleteCharacter;
+            OldDeleteCharacterButton.Disabled = false;
             // CCM rework lobby - end
         }
 
@@ -701,7 +702,6 @@ namespace Content.Client.Lobby.UI
             _deleteReady = false;
             var warning = new Color(1f, 0.7f, 0.7f, 1f);
             DeleteCharacterButton.Modulate = warning;
-            OldDeleteCharacterButton.Modulate = warning;
             UpdateDeleteText();
             // CCM rework lobby - end
         }
@@ -721,8 +721,6 @@ namespace Content.Client.Lobby.UI
                 var text = Loc.GetString("character-setup-gui-delete-confirm");
                 DeleteCharacterButton.Modulate = confirm;
                 DeleteCharacterButton.Text = text;
-                OldDeleteCharacterButton.Modulate = confirm;
-                OldDeleteCharacterButton.Text = text;
                 return;
             }
 
@@ -736,7 +734,6 @@ namespace Content.Client.Lobby.UI
             var seconds = Math.Max(1, (int) MathF.Ceiling(_deleteCountdown));
             var text = Loc.GetString("character-setup-gui-delete-confirm-countdown", ("seconds", seconds));
             DeleteCharacterButton.Text = text;
-            OldDeleteCharacterButton.Text = text;
             // CCM rework lobby - end
         }
 
@@ -748,9 +745,8 @@ namespace Content.Client.Lobby.UI
             _deleteCountdown = 0f;
             DeleteCharacterButton.Modulate = Color.White;
             OldDeleteCharacterButton.Modulate = Color.White;
-            var text = Loc.GetString("character-setup-gui-delete-character");
-            DeleteCharacterButton.Text = text;
-            OldDeleteCharacterButton.Text = text;
+            DeleteCharacterButton.Text = Loc.GetString("character-setup-gui-delete-character");
+            OldDeleteCharacterButton.Text = Loc.GetString("character-setup-gui-character-setup-stats-button");
             // CCM rework lobby - end
         }
 

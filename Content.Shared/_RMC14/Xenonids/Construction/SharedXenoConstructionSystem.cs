@@ -951,6 +951,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         QueueDel(target);
         QueueDel(floorWeeds);
+        args.Completed = true;
 
         _adminLogs.Add(LogType.RMCXenoOrderConstructionComplete, $"Xeno {ToPrettyString(xeno):xeno} completed construction of {ToPrettyString(target):xeno} which turned into {ToPrettyString(spawn):spawn} at {transform.Coordinates}");
     }

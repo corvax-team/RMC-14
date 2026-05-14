@@ -16,6 +16,7 @@ namespace Content.Client.Stylesheets
 
         public Stylesheet SheetNano { get; private set; } = default!;
         public Stylesheet SheetNanoNeutral { get; private set; } = default!;
+        public Stylesheet SheetRMC { get; private set; } = default!;
         public Stylesheet SheetSpace { get; private set; } = default!;
 
         public void Initialize()
@@ -32,6 +33,8 @@ namespace Content.Client.Stylesheets
             var oldSpace = SheetSpace;
             if (ReferenceEquals(SheetNanoNeutral, null))
                 SheetNanoNeutral = new StyleNano(_resourceCache, theme, useNeutralPalette: true).Stylesheet;
+            if (ReferenceEquals(SheetRMC, null))
+                SheetRMC = new StyleNano(_resourceCache, "gray", useNeutralPalette: true).Stylesheet;
 
             SheetNano = new StyleNano(_resourceCache, theme, useNeutralPalette: oldStyle, useOldLobbyPalette: oldStyle).Stylesheet;
             SheetSpace = new StyleSpace(_resourceCache, theme, useNeutralPalette: oldStyle).Stylesheet;

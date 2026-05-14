@@ -1029,7 +1029,7 @@ namespace Content.Client.Lobby.UI
             return trimmed;
         }
 
-        private void OpenStats()
+        public void OpenStats()
         {
             if (_statsWindow == null || _statsWindow.Disposed)
             {

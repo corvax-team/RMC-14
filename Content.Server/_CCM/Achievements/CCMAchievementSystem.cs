@@ -71,9 +71,9 @@ public sealed class CCMAchievementSystem : EntitySystem
         new("marine_paramedic", CCMAchievementCategory.Marines, "ccm-achievement-marine-paramedic-title", "ccm-achievement-marine-paramedic-desc", 100, ctx => ctx.MarineRevives),
         new("marine_savior", CCMAchievementCategory.Marines, "ccm-achievement-marine-savior-title", "ccm-achievement-marine-savior-desc", 300, ctx => ctx.MarineRevives),
 
-        new("marine_mechanic", CCMAchievementCategory.Marines, "ccm-achievement-marine-mechanic-title", "ccm-achievement-marine-mechanic-desc", 50, ctx => ctx.MarineStructuresBuilt),
-        new("marine_fortifier", CCMAchievementCategory.Marines, "ccm-achievement-marine-fortifier-title", "ccm-achievement-marine-fortifier-desc", 500, ctx => ctx.MarineStructuresBuilt),
-        new("marine_defense_architect", CCMAchievementCategory.Marines, "ccm-achievement-marine-defense-architect-title", "ccm-achievement-marine-defense-architect-desc", 2000, ctx => ctx.MarineStructuresBuilt),
+        new("marine_mechanic", CCMAchievementCategory.Marines, "ccm-achievement-marine-mechanic-title", "ccm-achievement-marine-mechanic-desc", 50, ctx => ctx.StructuresBuilt),
+        new("marine_fortifier", CCMAchievementCategory.Marines, "ccm-achievement-marine-fortifier-title", "ccm-achievement-marine-fortifier-desc", 500, ctx => ctx.StructuresBuilt),
+        new("marine_defense_architect", CCMAchievementCategory.Marines, "ccm-achievement-marine-defense-architect-title", "ccm-achievement-marine-defense-architect-desc", 2000, ctx => ctx.StructuresBuilt),
 
         new("marine_victory", CCMAchievementCategory.Marines, "ccm-achievement-marine-victory-title", "ccm-achievement-marine-victory-desc", 10, ctx => ctx.MarineRoundsWon),
         new("marine_campaigns_veteran", CCMAchievementCategory.Marines, "ccm-achievement-marine-campaigns-veteran-title", "ccm-achievement-marine-campaigns-veteran-desc", 50, ctx => ctx.MarineRoundsWon),
@@ -200,11 +200,11 @@ public sealed class CCMAchievementSystem : EntitySystem
         SubscribeLocalEvent<KillReportedEvent>(OnKillReported);
         SubscribeLocalEvent<TargetDefibrillatedEvent>(OnTargetDefibrillated);
         SubscribeLocalEvent<RMCConstructionBuildDoAfterEvent>(OnMarineConstructionBuilt,
-            after: [typeof(Content.Shared._RMC14.Construction.RMCConstructionSystem)]);
+            after: [typeof(Content.Shared._RMC14.Construction.RMCConstructionSystem), typeof(CCMStatsSystem)]);
         SubscribeLocalEvent<XenoSecreteStructureDoAfterEvent>(OnXenoStructureSecreted,
-            after: [typeof(Content.Shared._RMC14.Xenonids.Construction.SharedXenoConstructionSystem)]);
+            after: [typeof(Content.Shared._RMC14.Xenonids.Construction.SharedXenoConstructionSystem), typeof(CCMStatsSystem)]);
         SubscribeLocalEvent<XenoConstructionAddPlasmaDoAfterEvent>(OnXenoConstructionCompleted,
-            after: [typeof(Content.Shared._RMC14.Xenonids.Construction.SharedXenoConstructionSystem)]);
+            after: [typeof(Content.Shared._RMC14.Xenonids.Construction.SharedXenoConstructionSystem), typeof(CCMStatsSystem)]);
         SubscribeLocalEvent<NewXenoEvolvedEvent>(OnNewXenoEvolved);
         SubscribeLocalEvent<CCMRequisitionOrderedEvent>(OnRequisitionOrdered);
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndTextAppend,
@@ -342,13 +342,13 @@ public sealed class CCMAchievementSystem : EntitySystem
 
     private void OnXenoStructureSecreted(XenoSecreteStructureDoAfterEvent args)
     {
-        if (!args.Cancelled && TryComp(args.User, out ActorComponent? actor))
+        if (!args.Cancelled && args.Handled && TryComp(args.User, out ActorComponent? actor))
             _ = EvaluatePlayerAsync(actor.PlayerSession.UserId, notify: true);
     }
 
     private void OnXenoConstructionCompleted(XenoConstructionAddPlasmaDoAfterEvent args)
     {
-        if (!args.Cancelled && TryComp(args.User, out ActorComponent? actor))
+        if (!args.Cancelled && args.Completed && TryComp(args.User, out ActorComponent? actor))
             _ = EvaluatePlayerAsync(actor.PlayerSession.UserId, notify: true);
     }
 
@@ -944,6 +944,7 @@ public sealed class CCMAchievementSystem : EntitySystem
         public int XenoRoundsWon => BaseStats.XenoRoundsWon + (RoundFinalized && WinningSide == CCMStatsSide.Xenos && XenoParticipated ? 1 : 0);
         public int MarineHealingDone => BaseStats.MarineHealingDone + LiveStats.MarineHealingDone;
         public int MarineRevives => BaseStats.MarineRevives + LiveStats.MarineRevives;
+        public int StructuresBuilt => BaseStats.StructuresBuilt + LiveStats.TotalStructuresBuilt;
         public int MarineStructuresBuilt => BaseStats.MarineStructuresBuilt + LiveStats.MarineStructuresBuilt;
         public int MarineKills => BaseStats.MarineKills + LiveStats.MarineKills;
         public int XenoKills => BaseStats.XenoKills + LiveStats.XenoKills;

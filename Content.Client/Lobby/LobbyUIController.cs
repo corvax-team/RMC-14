@@ -488,6 +488,12 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
             }
         };
 
+        _characterSetup.StatsRequested += () =>
+        {
+            if (_stateManager.CurrentState is LobbyState { Lobby: { } lobbyGui })
+                lobbyGui.OpenStats();
+        };
+
         if (_stateManager.CurrentState is LobbyState lobby)
         {
             if (lobby.Lobby != null)
