@@ -1105,6 +1105,8 @@ public sealed partial class ChatSystem : SharedChatSystem
         return message;
     }
 
+    public static readonly ProtoId<ReplacementAccentPrototype> ChatSanitize_Accent = "chatsanitize";
+
     public string SanitizeMessageReplaceWords(EntityUid source, string message)
     {
         return string.IsNullOrEmpty(message)

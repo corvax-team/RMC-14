@@ -425,30 +425,30 @@
   - cheeping
   - cheeped
 
-- type: emote
-  id: Warcry
-  name: au14-emote-name-warcry
-  category: Vocal
-  whitelist:
-    components:
-    - Vocal
-  blacklist:
-    components:
-    - BorgChassis
-  icon: _AU14/Interface/Emotes/warcry.png
-  chatMessages: ["au14-chat-emote-msg-warcry"]
-  chatTriggers:
-   - shouts an inspiring cry
-   - shouts an inspiring cry!
-   - warcry
-   - warcry.
-   - warcry!
-   - warcries
-   - warcries!
-   - warcries.
-   - war cry
-   - war cry.
-   - war cry!
+# - type: emote
+#   id: Warcry
+#   name: au14-emote-name-warcry
+#   category: Vocal
+#   whitelist:
+#     components:
+#     - Vocal
+#   blacklist:
+#     components:
+#     - BorgChassis
+#   icon: _AU14/Interface/Emotes/warcry.png
+#   chatMessages: ["au14-chat-emote-msg-warcry"]
+#   chatTriggers:
+#    - shouts an inspiring cry
+#    - shouts an inspiring cry!
+#    - warcry
+#    - warcry.
+#    - warcry!
+#    - warcries
+#    - warcries!
+#    - warcries.
+#    - war cry
+#    - war cry.
+#    - war cry!
 
 - type: emote
   id: Corpsman

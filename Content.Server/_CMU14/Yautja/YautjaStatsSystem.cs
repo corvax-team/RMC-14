@@ -31,6 +31,7 @@ public sealed class YautjaStatsSystem : EntitySystem
     [Dependency] private readonly NamingSystem _naming = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly SharedMarineSystem _marine = default!;
 
     private const string YautjaSpecies = "Yautja";
     private const string DreadlocksMarking = "CMUYautjaDreadlocksStandard";
@@ -149,11 +150,10 @@ public sealed class YautjaStatsSystem : EntitySystem
 
     private void ClearMarineHudIcon(Entity<YautjaComponent> ent)
     {
-        if (!TryComp<MarineComponent>(ent, out var marine) || marine.Icon == null)
+        if (!TryComp<MarineComponent>(ent.Owner, out var marine) || marine.Icon == null)
             return;
 
-        marine.Icon = null;
-        Dirty(ent.Owner, marine);
+        _marine.ClearMarineIcon(ent.Owner);
     }
 
     private void NormalizeAppearance(Entity<YautjaComponent> ent)

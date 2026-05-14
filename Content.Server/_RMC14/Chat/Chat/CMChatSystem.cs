@@ -18,6 +18,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Chat.Chat;
 
@@ -29,6 +30,11 @@ public sealed class CMChatSystem : SharedCMChatSystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly ReplacementAccentSystem _wordreplacement = default!;
+
+    private static readonly ProtoId<ReplacementAccentPrototype> ChatSanitize = "CMChatSanitize";
+    private static readonly ProtoId<ReplacementAccentPrototype> MarineChatSanitize = "CMChatSanitizeMarine";
+    private static readonly ProtoId<ReplacementAccentPrototype> XenoChatSanitize = "CMChatSanitizeXeno";
 
     private static readonly Regex PrefixesRegex = new(@"^:(\w)+");
 

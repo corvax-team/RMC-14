@@ -144,7 +144,7 @@ public abstract class SharedChatSystem : EntitySystem
         if (input.StartsWith(RadioCommonPrefix))
         {
             output = SanitizeMessageCapital(input[1..].TrimStart());
-            channel = ((HasComp<XenoComponent>(source) && !IsHivebrokenXeno(source)) || HasComp<CultistComponent>(source))
+            channel = ((HasComp<XenoComponent>(source) && !IsHivebrokenXeno(source)))
                 ? _prototypeManager.Index<RadioChannelPrototype>(HivemindChannel)
                 : _prototypeManager.Index<RadioChannelPrototype>(CommonChannel);
 
