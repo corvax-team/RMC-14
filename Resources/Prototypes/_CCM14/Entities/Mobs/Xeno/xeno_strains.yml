@@ -277,7 +277,7 @@
     - ActionXenoAcidNormal
     - ActionXenoSprayAcid
     - CCMActionXenoScatteredSpitSniper
-    - CCMActionXenoSpitSniper
+    - CCMActionXenoSpitSniperMulti
     - CCMActionXenoToggleSpitTypeSniper
     - ActionXenoZoom
     - ActionXenoDevolve
@@ -358,7 +358,8 @@
     barricadeDamage:
       types:
         Heat: 0
-
+  - type: XenoEvolution
+    strains: []
 # Burrower Jaunt
 - type: entity
   name: Burrower
@@ -408,7 +409,7 @@
   - type: Xeno
     role: CMXenoBurrower
     actionIds:
-    - CCRActionXenoBurrowerImpale
+    - CCMActionXenoBurrowerImpale
     tier: 2
     hudOffset: -0,0.2
     unlockAt: 420 # 7 minutes
@@ -431,7 +432,7 @@
       prefix: burrower
     - type: XenoEvolution
       strains: # CCM Change
-      - CCRXenoBurrowerImpaler
+      - CCMXenoBurrowerImpaler
 # Polymorph
 - type: polymorph
   id: CCMJauntBurrow
