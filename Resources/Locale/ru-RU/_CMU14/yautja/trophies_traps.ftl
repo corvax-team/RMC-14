@@ -1,80 +1,140 @@
 ﻿# Russian localization for Resources/Prototypes/_CMU14/Yautja/trophies_traps.yml
-ent-CMUYautjaHumanSkullTrophy = Р§РµР»РѕРІРµС‡РµСЃРєРёР№ С‡РµСЂРµРї (С‚СЂРѕС„РµР№)
-    .desc = РћС‡РёС‰РµРЅРЅС‹Р№ С‡РµР»РѕРІРµС‡РµСЃРєРёР№ С‡РµСЂРµРї, РІР·СЏС‚С‹Р№ РІ РєР°С‡РµСЃС‚РІРµ С‚СЂРѕС„РµСЏ СЏСѓС‚Р¶Р°.
-ent-CMUYautjaHumanLeftArmBoneTrophy = Р›РµРІР°СЏ СЂСѓРєР° (РєРѕСЃС‚СЊ, С‚СЂРѕС„РµР№)
-    .desc = РћС‡РёС‰РµРЅРЅР°СЏ РєРѕСЃС‚СЊ Р»РµРІРѕР№ СЂСѓРєРё, РІР·СЏС‚Р°СЏ РІ РєР°С‡РµСЃС‚РІРµ С‚СЂРѕС„РµСЏ.
-ent-CMUYautjaHumanRightArmBoneTrophy = РџСЂР°РІР°СЏ СЂСѓРєР° (РєРѕСЃС‚СЊ, С‚СЂРѕС„РµР№)
-    .desc = РћС‡РёС‰РµРЅРЅР°СЏ РєРѕСЃС‚СЊ РїСЂР°РІРѕР№ СЂСѓРєРё, РІР·СЏС‚Р°СЏ РІ РєР°С‡РµСЃС‚РІРµ С‚СЂРѕС„РµСЏ.
-ent-CMUYautjaHumanLeftHandBoneTrophy = Р›РµРІР°СЏ РєРёСЃС‚СЊ (РєРѕСЃС‚СЊ, С‚СЂРѕС„РµР№)
-    .desc = РћС‡РёС‰РµРЅРЅР°СЏ РєРѕСЃС‚СЊ Р»РµРІРѕР№ РєРёСЃС‚Рё, РІР·СЏС‚Р°СЏ РІ РєР°С‡РµСЃС‚РІРµ С‚СЂРѕС„РµСЏ.
-ent-CMUYautjaHumanRightHandBoneTrophy = РџСЂР°РІР°СЏ РєРёСЃС‚СЊ (РєРѕСЃС‚СЊ, С‚СЂРѕС„РµР№)
-    .desc = РћС‡РёС‰РµРЅРЅР°СЏ РєРѕСЃС‚СЊ РїСЂР°РІРѕР№ РєРёСЃС‚Рё, РІР·СЏС‚Р°СЏ РІ РєР°С‡РµСЃС‚РІРµ С‚СЂРѕС„РµСЏ.
-ent-CMUYautjaHumanLeftLegBoneTrophy = Р›РµРІР°СЏ РЅРѕРіР° (РєРѕСЃС‚СЊ, С‚СЂРѕС„РµР№)
-    .desc = РћС‡РёС‰РµРЅРЅР°СЏ РєРѕСЃС‚СЊ Р»РµРІРѕР№ РЅРѕРіРё, РІР·СЏС‚Р°СЏ РІ РєР°С‡РµСЃС‚РІРµ С‚СЂРѕС„РµСЏ.
-ent-CMUYautjaHumanRightLegBoneTrophy = РџСЂР°РІР°СЏ РЅРѕРіР° (РєРѕСЃС‚СЊ, С‚СЂРѕС„РµР№)
-    .desc = РћС‡РёС‰РµРЅРЅР°СЏ РєРѕСЃС‚СЊ РїСЂР°РІРѕР№ РЅРѕРіРё, РІР·СЏС‚Р°СЏ РІ РєР°С‡РµСЃС‚РІРµ С‚СЂРѕС„РµСЏ.
-ent-CMUYautjaHumanLeftFootBoneTrophy = Р›РµРІР°СЏ СЃС‚РѕРїР° (РєРѕСЃС‚СЊ, С‚СЂРѕС„РµР№)
-    .desc = РћС‡РёС‰РµРЅРЅР°СЏ РєРѕСЃС‚СЊ Р»РµРІРѕР№ СЃС‚РѕРїС‹, РІР·СЏС‚Р°СЏ РІ РєР°С‡РµСЃС‚РІРµ С‚СЂРѕС„РµСЏ.
-ent-CMUYautjaHumanRightFootBoneTrophy = РџСЂР°РІР°СЏ СЃС‚РѕРїР° (РєРѕСЃС‚СЊ, С‚СЂРѕС„РµР№)
-    .desc = РћС‡РёС‰РµРЅРЅР°СЏ РєРѕСЃС‚СЊ РїСЂР°РІРѕР№ СЃС‚РѕРїС‹, РІР·СЏС‚Р°СЏ РІ РєР°С‡РµСЃС‚РІРµ С‚СЂРѕС„РµСЏ.
-ent-CMUYautjaHumanRibcageTrophy = Р“СЂСѓРґРЅР°СЏ РєР»РµС‚РєР° (С‚СЂРѕС„РµР№)
-    .desc = РћС‡РёС‰РµРЅРЅР°СЏ РіСЂСѓРґРЅР°СЏ РєР»РµС‚РєР°, СЃР»СѓР¶Р°С‰Р°СЏ С‚СЂРѕС„РµРµРј РѕС…РѕС‚С‹ СЏСѓС‚Р¶Рё.
-ent-CMUYautjaXenoSkullTrophy = Р§РµСЂРµРї РєСЃРµРЅРѕРјРѕСЂС„Р° (С‚СЂРѕС„РµР№)
-    .desc = Р§РµСЂРµРї С‡СѓР¶РµСЂРѕРґРЅРѕРіРѕ СЃСѓС‰РµСЃС‚РІР° СЃРѕ СЃРјРѕР»РёСЃС‚С‹РјРё СЃР»РµРґР°РјРё, РІР·СЏС‚С‹Р№ РєР°Рє С‚СЂРѕС„РµР№.
-ent-CMUYautjaXenoPeltTrophy = РЁРєСѓСЂР° РєСЃРµРЅРѕРјРѕСЂС„Р° (С‚СЂРѕС„РµР№)
-    .desc = РџРѕР»РѕСЃР° С€РєСѓСЂС‹ РёРЅРѕРїР»Р°РЅРµС‚РЅРѕРіРѕ СЃСѓС‰РµСЃС‚РІР°, РІС‹СЃСѓС€РµРЅРЅР°СЏ Рё СЃРѕС…СЂР°РЅС‘РЅРЅР°СЏ РєР°Рє С‚СЂРѕС„РµР№.
-ent-CMUYautjaQueenSkullTrophy = Р§РµСЂРµРї РјР°С‚РєРё (С‚СЂРѕС„РµР№)
-ent-CMUYautjaKingSkullTrophy = Р§РµСЂРµРї РєРѕСЂРѕР»СЏ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaCrusherSkullTrophy = Р§РµСЂРµРї РґСЂРѕР±РёС‚РµР»СЏ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaPraetorianSkullTrophy = Р§РµСЂРµРї РїСЂРµС‚РѕСЂРёР°РЅР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaCorroderSkullTrophy = Р§РµСЂРµРї РєРѕСЂСЂРѕРґРµСЂР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaDespoilerSkullTrophy = Р§РµСЂРµРї СЂР°Р·РѕСЂРёС‚РµР»СЏ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaDeaconSkullTrophy = Р§РµСЂРµРї РґРёР°РєРѕРЅР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaRavagerSkullTrophy = Р§РµСЂРµРї РѕРїСѓСЃС‚РѕС€РёС‚РµР»СЏ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaBoilerSkullTrophy = Р§РµСЂРµРї Р±РѕР№Р»РµСЂР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaDefenderSkullTrophy = Р§РµСЂРµРї Р·Р°С‰РёС‚РЅРёРєР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaWarriorSkullTrophy = Р§РµСЂРµРї РІРѕРёРЅР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaCarrierSkullTrophy = Р§РµСЂРµРї РЅРѕСЃРёС‚РµР»СЏ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaHivelordSkullTrophy = Р§РµСЂРµРї РїРѕРІРµР»РёС‚РµР»СЏ СѓР»СЊСЏ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaBurrowerSkullTrophy = Р§РµСЂРµРї СЂРѕСЋС‰РµРіРѕ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaHunterSkullTrophy = Р§РµСЂРµРї РѕС…РѕС‚РЅРёРєР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaLurkerSkullTrophy = Р§РµСЂРµРї СЃРєСЂС‹С‚РЅСЏ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaSentinelSkullTrophy = Р§РµСЂРµРї СЃС‚СЂР°Р¶Р° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaSpitterSkullTrophy = Р§РµСЂРµРї РїР»РµРІР°Р»СЊС‰РёРєР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaRunnerSkullTrophy = Р§РµСЂРµРї Р±РµРіСѓРЅР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaDroneSkullTrophy = Р§РµСЂРµРї СЂР°Р±РѕС‡РµРіРѕ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaQueenPeltTrophy = РЁРєСѓСЂР° РјР°С‚РєРё (С‚СЂРѕС„РµР№)
-ent-CMUYautjaKingPeltTrophy = РЁРєСѓСЂР° РєРѕСЂРѕР»СЏ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaCrusherPeltTrophy = РЁРєСѓСЂР° РґСЂРѕР±РёС‚РµР»СЏ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaPraetorianPeltTrophy = РЁРєСѓСЂР° РїСЂРµС‚РѕСЂРёР°РЅР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaCorroderPeltTrophy = РЁРєСѓСЂР° РєРѕСЂСЂРѕРґРµСЂР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaDespoilerPeltTrophy = РЁРєСѓСЂР° СЂР°Р·РѕСЂРёС‚РµР»СЏ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaDeaconPeltTrophy = РЁРєСѓСЂР° РґРёР°РєРѕРЅР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaRavagerPeltTrophy = РЁРєСѓСЂР° РѕРїСѓСЃС‚РѕС€РёС‚РµР»СЏ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaBoilerPeltTrophy = РЁРєСѓСЂР° Р±РѕР№Р»РµСЂР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaDefenderPeltTrophy = РЁРєСѓСЂР° Р·Р°С‰РёС‚РЅРёРєР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaWarriorPeltTrophy = РЁРєСѓСЂР° РІРѕРёРЅР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaCarrierPeltTrophy = РЁРєСѓСЂР° РЅРѕСЃРёС‚РµР»СЏ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaHivelordPeltTrophy = РЁРєСѓСЂР° РїРѕРІРµР»РёС‚РµР»СЏ СѓР»СЊСЏ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaBurrowerPeltTrophy = РЁРєСѓСЂР° СЂРѕСЋС‰РµРіРѕ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaHunterPeltTrophy = РЁРєСѓСЂР° РѕС…РѕС‚РЅРёРєР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaLurkerPeltTrophy = РЁРєСѓСЂР° СЃРєСЂС‹С‚РЅСЏ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaSentinelPeltTrophy = РЁРєСѓСЂР° СЃС‚СЂР°Р¶Р° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaSpitterPeltTrophy = РЁРєСѓСЂР° РїР»РµРІР°Р»СЊС‰РёРєР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaRunnerPeltTrophy = РЁРєСѓСЂР° Р±РµРіСѓРЅР° (С‚СЂРѕС„РµР№)
-ent-CMUYautjaDronePeltTrophy = РЁРєСѓСЂР° СЂР°Р±РѕС‡РµРіРѕ (С‚СЂРѕС„РµР№)
-ent-CMUYautjaLarvaPeltTrophy = РЁРєСѓСЂР° Р»РёС‡РёРЅРєРё (С‚СЂРѕС„РµР№)
-ent-CMUYautjaHumanHide = РЎРґРёСЂР°РЅР°СЏ РєРѕР¶Р°
-    .desc = Р›РѕСЃРєСѓС‚ РєРѕР¶Рё, СЃРЅСЏС‚С‹Р№ РїСЂРё СЂРёС‚СѓР°Р»СЊРЅРѕР№ РѕР±СЂР°Р±РѕС‚РєРµ С‚СЂРѕС„РµРµРІ СЏСѓС‚Р¶РµР№.
-ent-CMUYautjaHumanSpine = РџРѕР·РІРѕРЅРѕС‡РЅРёРє
-    .desc = РћС‡РёС‰РµРЅРЅС‹Р№ РїРѕР·РІРѕРЅРѕС‡РЅРёРє, СЃРЅСЏС‚С‹Р№ СЃ С‚СѓС€РєРё.
-ent-CMUYautjaHumanButcheredRemains = РњСЏСЃРЅС‹Рµ РѕСЃС‚Р°РЅРєРё
-    .desc = РљСѓС‡Р° РѕСЃС‚Р°РЅРєРѕРІ, РѕСЃС‚Р°РІС€Р°СЏСЃСЏ РїРѕСЃР»Рµ СЂРёС‚СѓР°Р»СЊРЅРѕР№ СЂР°Р·РґРµР»РєРё.
-ent-CMUYautjaXenoButcheredRemains = РћСЃС‚Р°РЅРєРё РєСЃРµРЅРѕРјРѕСЂС„Р°
-    .desc = РљСѓС‡Р° РєРёСЃР»РѕС‚РЅРѕ-РѕР±РѕР¶Р¶С‘РЅРЅС‹С… РѕСЃС‚Р°РЅРєРѕРІ РїРѕСЃР»Рµ С‚СЂРѕС„РµР№РЅРѕР№ СЂР°Р·РґРµР»РєРё.
-ent-CMUYautjaTrophyBelt = РџРѕСЏСЃ С‚СЂРѕС„РµРµРІ
-    .desc = Р¦РµСЂРµРјРѕРЅРёР°Р»СЊРЅС‹Р№ РїРѕСЏСЃ СЏСѓС‚Р¶РµР№ РґР»СЏ РґРµРјРѕРЅСЃС‚СЂР°С†РёРё РґРѕР±С‹С‡Рё Рё РїРѕР±РµРґ РІ СЂРёС‚СѓР°Р»Р°С….
-ent-CMUYautjaPolishingRag = РўСЂСЏРїРєР° РґР»СЏ РїРѕР»РёСЂРѕРІРєРё
-    .desc = РўРѕРЅРєР°СЏ С‚РєР°РЅСЊ, РёСЃРїРѕР»СЊР·СѓРµРјР°СЏ РґР»СЏ С‡РёСЃС‚РєРё Рё РїРѕР»РёСЂРѕРІРєРё РєРѕСЃС‚СЏРЅС‹С… С‚СЂРѕС„РµРµРІ.
-ent-CMUYautjaHuntingTrap = РћС…РѕС‚РЅРёС‡СЊСЏ Р»РѕРІСѓС€РєР°
-    .desc = РљРѕРјРїР°РєС‚РЅР°СЏ РёРЅРѕРїР»Р°РЅРµС‚РЅР°СЏ Р·Р°РїР°РґРЅСЏ, Р·Р°С…РІР°С‚С‹РІР°СЋС‰Р°СЏ Р¶РёРІСѓСЋ РґРѕР±С‹С‡Сѓ РїСЂРё СЃСЂР°Р±Р°С‚С‹РІР°РЅРёРё.
+
+ent-CMUYautjaHumanSkullTrophy = Череп человека (трофей)
+    .desc = Очищенный человеческий череп, взятый в качестве трофея яутжа.
+
+ent-CMUYautjaHumanLeftArmBoneTrophy = Кость левой руки (трофей)
+    .desc = Очищенная кость левой руки, взятая в качестве трофея.
+
+ent-CMUYautjaHumanRightArmBoneTrophy = Кость правой руки (трофей)
+    .desc = Очищенная кость правой руки, взятая в качестве трофея.
+
+ent-CMUYautjaHumanLeftHandBoneTrophy = Кость левой кисти (трофей)
+    .desc = Очищенная кость левой кисти, взятая в качестве трофея.
+
+ent-CMUYautjaHumanRightHandBoneTrophy = Кость правой кисти (трофей)
+    .desc = Очищенная кость правой кисти, взятая в качестве трофея.
+
+ent-CMUYautjaHumanLeftLegBoneTrophy = Кость левой ноги (трофей)
+    .desc = Очищенная кость левой ноги, взятая в качестве трофея.
+
+ent-CMUYautjaHumanRightLegBoneTrophy = Кость правой ноги (трофей)
+    .desc = Очищенная кость правой ноги, взятая в качестве трофея.
+
+ent-CMUYautjaHumanLeftFootBoneTrophy = Кость левой стопы (трофей)
+    .desc = Очищенная кость левой стопы, взятая в качестве трофея.
+
+ent-CMUYautjaHumanRightFootBoneTrophy = Кость правой стопы (трофей)
+    .desc = Очищенная кость правой стопы, взятая в качестве трофея.
+
+ent-CMUYautjaHumanRibcageTrophy = Грудная клетка (трофей)
+    .desc = Очищенная грудная клетка, служащая трофеем охоты яутжи.
+
+ent-CMUYautjaXenoSkullTrophy = Череп ксеноморфа (трофей)
+    .desc = Череп чужеродного существа со смолистыми следами, взятый как трофей.
+
+ent-CMUYautjaXenoPeltTrophy = Шкура ксеноморфа (трофей)
+    .desc = Полоса шкуры инопланетного существа, высушенная и сохранённая как трофей.
+
+ent-CMUYautjaQueenSkullTrophy = Череп матки (трофей)
+
+ent-CMUYautjaKingSkullTrophy = Череп королевы (трофей)
+
+ent-CMUYautjaCrusherSkullTrophy = Череп дробителя (трофей)
+
+ent-CMUYautjaPraetorianSkullTrophy = Череп преторианца (трофей)
+
+ent-CMUYautjaCorroderSkullTrophy = Череп корродера (трофей)
+
+ent-CMUYautjaDespoilerSkullTrophy = Череп разорителя (трофей)
+
+ent-CMUYautjaDeaconSkullTrophy = Череп диакона (трофей)
+
+ent-CMUYautjaRavagerSkullTrophy = Череп опустошителя (трофей)
+
+ent-CMUYautjaBoilerSkullTrophy = Череп бойлера (трофей)
+
+ent-CMUYautjaDefenderSkullTrophy = Череп защитника (трофей)
+
+ent-CMUYautjaWarriorSkullTrophy = Череп воина (трофей)
+
+ent-CMUYautjaCarrierSkullTrophy = Череп носителя (трофей)
+
+ent-CMUYautjaHivelordSkullTrophy = Череп повелителя улья (трофей)
+
+ent-CMUYautjaBurrowerSkullTrophy = Череп тоннельщика (трофей)
+
+ent-CMUYautjaHunterSkullTrophy = Череп охотника (трофей)
+
+ent-CMUYautjaLurkerSkullTrophy = Череп скрытня (трофей)
+
+ent-CMUYautjaSentinelSkullTrophy = Череп стража (трофей)
+
+ent-CMUYautjaSpitterSkullTrophy = Череп плевальщика (трофей)
+
+ent-CMUYautjaRunnerSkullTrophy = Череп бегуна (трофей)
+
+ent-CMUYautjaDroneSkullTrophy = Череп трутня (трофей)
+
+ent-CMUYautjaQueenPeltTrophy = Шкура матки (трофей)
+
+ent-CMUYautjaKingPeltTrophy = Шкура королевы (трофей)
+
+ent-CMUYautjaCrusherPeltTrophy = Шкура дробителя (трофей)
+
+ent-CMUYautjaPraetorianPeltTrophy = Шкура преторианца (трофей)
+
+ent-CMUYautjaCorroderPeltTrophy = Шкура корродера (трофей)
+
+ent-CMUYautjaDespoilerPeltTrophy = Шкура разорителя (трофей)
+
+ent-CMUYautjaDeaconPeltTrophy = Шкура диакона (трофей)
+
+ent-CMUYautjaRavagerPeltTrophy = Шкура опустошителя (трофей)
+
+ent-CMUYautjaBoilerPeltTrophy = Шкура бойлера (трофей)
+
+ent-CMUYautjaDefenderPeltTrophy = Шкура защитника (трофей)
+
+ent-CMUYautjaWarriorPeltTrophy = Шкура воина (трофей)
+
+ent-CMUYautjaCarrierPeltTrophy = Шкура носителя (трофей)
+
+ent-CMUYautjaHivelordPeltTrophy = Шкура повелителя улья (трофей)
+
+ent-CMUYautjaBurrowerPeltTrophy = Шкура тоннельщика (трофей)
+
+ent-CMUYautjaHunterPeltTrophy = Шкура охотника (трофей)
+
+ent-CMUYautjaLurkerPeltTrophy = Шкура охотника (трофей)
+
+ent-CMUYautjaSentinelPeltTrophy = Шкура стража (трофей)
+
+ent-CMUYautjaSpitterPeltTrophy = Шкура плевальщика (трофей)
+
+ent-CMUYautjaRunnerPeltTrophy = Шкура бегуна (трофей)
+
+ent-CMUYautjaDronePeltTrophy = Шкура трутня (трофей)
+
+ent-CMUYautjaLarvaPeltTrophy = Шкура личинки (трофей)
+
+ent-CMUYautjaHumanHide = Содранная кожа
+    .desc = Лоскут кожи, снятый при ритуальной обработке трофеев яутжей.
+
+ent-CMUYautjaHumanSpine = Позвоночник
+    .desc = Очищенный позвоночник, снятый с тушки.
+
+ent-CMUYautjaHumanButcheredRemains = Мясные останки
+    .desc = Куча останков, оставшаяся после ритуальной разделки.
+
+ent-CMUYautjaXenoButcheredRemains = Останки ксеноморфа
+    .desc = Куча кислотно-обожжённых останков после трофейной разделки.
+
+ent-CMUYautjaTrophyBelt = Пояс трофеев
+    .desc = Церемониальный пояс яутжей для демонстрации добычи и побед в ритуалах.
+
+ent-CMUYautjaPolishingRag = Тряпка для полировки
+    .desc = Тонкая ткань, используемая для чистки и полировки костяных трофеев.
+
+ent-CMUYautjaHuntingTrap = Охотничья ловушка
+    .desc = Компактная инопланетная западня, захватывающая живую добычу при срабатывании.
