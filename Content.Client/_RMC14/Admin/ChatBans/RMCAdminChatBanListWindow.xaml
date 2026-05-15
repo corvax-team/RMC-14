@@ -3,7 +3,7 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Admin.ChatBans"
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     Title="{Loc rmc-chat-bans-list}"
-    MinSize="930 300">
+    MinSize="1040 300">
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Horizontal">
             <Label Text="{Loc rmc-chat-bans-list-type}" MinWidth="150" />
@@ -13,7 +13,7 @@
             <Label MinWidth="100" />
         </BoxContainer>
         <ui:BlueHorizontalSeparator />
-        <ScrollContainer VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True">
+        <ScrollContainer VScrollEnabled="True" HScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Name="Container" Access="Public" Orientation="Vertical" />
         </ScrollContainer>
     </BoxContainer>
