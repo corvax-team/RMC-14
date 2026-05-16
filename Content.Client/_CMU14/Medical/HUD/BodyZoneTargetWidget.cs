@@ -19,7 +19,7 @@ public sealed class BodyZoneTargetWidget : Control
     public Func<TargetBodyZone?>? GetSelectedZone;
 
     private const int DollSize = 32;
-    private const int DollScale = 2;
+    private const float DollScale = 2.5f;
 
     private static readonly ResPath RsiPath =
         new("/Textures/_CMU14/Medical/HUD/targetdoll.rsi");

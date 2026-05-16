@@ -56,6 +56,12 @@ public sealed class AudioUIController : UIController
         if (!string.IsNullOrEmpty(value))
         {
             var resource = GetSoundOrFallback(value, CCVars.UIClickSound.DefaultValue);
+            if (resource == null)
+            {
+                _clickSource = null;
+                UIManager.SetClickSound(null);
+                return;
+            }
             var source =
                 _audioManager.CreateAudioSource(resource);
 
@@ -70,6 +76,7 @@ public sealed class AudioUIController : UIController
         }
         else
         {
+            _clickSource = null;
             UIManager.SetClickSound(null);
         }
     }
@@ -79,6 +86,12 @@ public sealed class AudioUIController : UIController
         if (!string.IsNullOrEmpty(value))
         {
             var hoverResource = GetSoundOrFallback(value, CCVars.UIHoverSound.DefaultValue);
+            if (hoverResource == null)
+            {
+                _hoverSource = null;
+                UIManager.SetHoverSound(null);
+                return;
+            }
             var hoverSource =
                 _audioManager.CreateAudioSource(hoverResource);
 
@@ -93,15 +106,18 @@ public sealed class AudioUIController : UIController
         }
         else
         {
+            _hoverSource = null;
             UIManager.SetHoverSound(null);
         }
     }
 
-    private AudioResource GetSoundOrFallback(string path, string fallback)
+    private AudioResource? GetSoundOrFallback(string path, string fallback)
     {
-        if (!_cache.TryGetResource(path, out AudioResource? resource))
-            return _cache.GetResource<AudioResource>(fallback);
+        if (_cache.TryGetResource(path, out AudioResource? resource))
+            return resource;
 
-        return resource;
+        return _cache.TryGetResource(fallback, out AudioResource? fallbackResource)
+            ? fallbackResource
+            : null;
     }
 }

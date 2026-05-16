@@ -248,6 +248,8 @@ public sealed class CCMRoundPersonalStatsData
     public int Revives { get; }
     public int StructuresBuilt { get; }
     public int RoundSecondsPlayed { get; }
+    public bool MarineParticipated { get; }
+    public bool XenoParticipated { get; }
 
     public int MarineVictoryPoints { get; }
     public int MarineImpactPoints { get; }
@@ -274,6 +276,8 @@ public sealed class CCMRoundPersonalStatsData
         int revives,
         int structuresBuilt,
         int roundSecondsPlayed,
+        bool marineParticipated,
+        bool xenoParticipated,
         int marineVictoryPoints,
         int marineImpactPoints,
         int marineDamageDone,
@@ -297,6 +301,8 @@ public sealed class CCMRoundPersonalStatsData
         Revives = revives;
         StructuresBuilt = structuresBuilt;
         RoundSecondsPlayed = roundSecondsPlayed;
+        MarineParticipated = marineParticipated;
+        XenoParticipated = xenoParticipated;
         MarineVictoryPoints = marineVictoryPoints;
         MarineImpactPoints = marineImpactPoints;
         MarineDamageDone = marineDamageDone;
@@ -356,6 +362,7 @@ public sealed class CCMLeaderboardResponseEvent : EntityEventArgs
 [Serializable, NetSerializable]
 public sealed class CCMRoundEndStatsEvent : EntityEventArgs
 {
+    public int RoundId { get; }
     public int PersonalScore { get; }
     public int MarineCampaignWins { get; }
     public int XenoCampaignWins { get; }
@@ -365,6 +372,7 @@ public sealed class CCMRoundEndStatsEvent : EntityEventArgs
     public CCMRoundMvpData? XenoMvp { get; }
 
     public CCMRoundEndStatsEvent(
+        int roundId,
         int personalScore,
         int marineCampaignWins,
         int xenoCampaignWins,
@@ -373,6 +381,7 @@ public sealed class CCMRoundEndStatsEvent : EntityEventArgs
         CCMRoundMvpData? marineMvp,
         CCMRoundMvpData? xenoMvp)
     {
+        RoundId = roundId;
         PersonalScore = personalScore;
         MarineCampaignWins = marineCampaignWins;
         XenoCampaignWins = xenoCampaignWins;

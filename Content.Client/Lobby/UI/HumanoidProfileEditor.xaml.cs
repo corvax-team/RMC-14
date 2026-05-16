@@ -7,6 +7,7 @@ using System.Threading;
 using System.Collections.Generic;
 using Content.Client.Resources;
 using Content.Client._CCM.UserInterface.Controls;
+using Content.Client._RMC14.Commendations;
 using Content.Client._RMC14.NamedItems;
 using Content.Client.Humanoid;
 using Content.Client.Lobby.UI.Loadouts;
@@ -326,6 +327,7 @@ namespace Content.Client.Lobby.UI
             };
 
             BackgroundInfoButton.OnPressed += _ => OpenBackgroundInfoWindow();
+            BackgroundCommendationsButton.OnPressed += _ => OpenCommendationsWindow();
             // CCM rework lobby - end
 
             RefreshSpecies();
@@ -1859,6 +1861,11 @@ namespace Content.Client.Lobby.UI
                 EnsureBackgroundInfoInline();
 
             SetBackgroundInfoExpanded(expanded);
+        }
+
+        private void OpenCommendationsWindow()
+        {
+            IoCManager.Resolve<CommendationsManager>().OpenReceivedWindow();
         }
 
         private void EnsureBackgroundInfoInline()

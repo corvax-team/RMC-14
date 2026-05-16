@@ -48,6 +48,7 @@ public sealed class XenoAcidSystem : SharedXenoAcidSystem
     {
         AddComp(target, new DamageableCorrodingComponent
         {
+            Source = args.Source,
             Acid = args.Acid,
             Dps = args.Dps,
             Damage = new(PrototypeManager.Index<DamageTypePrototype>(CorrosiveAcidDamageTypeStr), args.Dps * CorrosiveAcidTickDelaySeconds),

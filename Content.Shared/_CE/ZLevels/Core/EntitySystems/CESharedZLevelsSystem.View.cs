@@ -141,7 +141,7 @@ public abstract partial class CESharedZLevelsSystem
         var anchored = _map.GetAnchoredEntitiesEnumerator(gridUid, grid, indices);
         while (anchored.MoveNext(out var uid))
         {
-            if (_highgroundQuery.HasComp(uid))
+            if (_zHighGroundQuery.HasComp(uid))
                 return true;
         }
 

@@ -34,7 +34,7 @@ namespace Content.Shared._RMC14.Inventory;
 
 public abstract class SharedCMInventorySystem : EntitySystem
 {
-    private const int MaxTrackedDroppedItems = 48;
+    private const int MaxTrackedDroppedItems = 24;
 
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;

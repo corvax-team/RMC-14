@@ -14,10 +14,14 @@ ccm-achievements-empty = Nothing to show in this category yet.
 ccm-achievements-toast-header = Achievement complete
 
 ccm-achievement-general-veteran-title = Veteran
+ccm-achievement-general-first-steps-title = First Tour
+ccm-achievement-general-first-steps-desc = You are no longer fresh off the shuttle. Requirement: play 10 rounds.
 ccm-achievement-general-veteran-desc = You have seen a lot. And survived even more. Requirement: play 50 rounds.
 ccm-achievement-general-living-legend-title = Living Legend
 ccm-achievement-general-living-legend-desc = They tell stories about you in the barracks. Requirement: play 200 rounds.
 ccm-achievement-general-campaign-veteran-title = Campaign Veteran
+ccm-achievement-general-first-victory-title = First Triumph
+ccm-achievement-general-first-victory-desc = Your first real streak of success is behind you. Requirement: win 10 rounds overall.
 ccm-achievement-general-campaign-veteran-desc = You have fought through many battles. Requirement: win 50 rounds overall.
 ccm-achievement-general-war-legend-title = War Legend
 ccm-achievement-general-war-legend-desc = Both marines and the hive know your name. Requirement: win 200 rounds overall.
@@ -52,11 +56,11 @@ ccm-achievement-marine-savior-title = Savior
 ccm-achievement-marine-savior-desc = You pulled more people out of hell than anyone else. Requirement: revive 300 marines.
 
 ccm-achievement-marine-mechanic-title = Mechanic
-ccm-achievement-marine-mechanic-desc = Without fortifications, the line would already be gone. Requirement: build 50 structures as marines or xenomorphs.
+ccm-achievement-marine-mechanic-desc = Without fortifications, the line would already be gone. Requirement: build 50 structures as marines.
 ccm-achievement-marine-fortifier-title = Fortifier
-ccm-achievement-marine-fortifier-desc = Now this is a fortress. Requirement: build 500 structures as marines or xenomorphs.
+ccm-achievement-marine-fortifier-desc = Now this is a fortress. Requirement: build 500 structures as marines.
 ccm-achievement-marine-defense-architect-title = Defense Architect
-ccm-achievement-marine-defense-architect-desc = No bug is getting through. Requirement: build 2,000 structures as marines or xenomorphs.
+ccm-achievement-marine-defense-architect-desc = No bug is getting through. Requirement: build 2,000 structures as marines.
 
 ccm-achievement-marine-victory-title = Marine Victory
 ccm-achievement-marine-victory-desc = The planet has been purged. Requirement: win 10 rounds as marines.
@@ -87,6 +91,12 @@ ccm-achievement-xeno-hive-empire-desc = The planet belongs to the xenomorphs. Re
 
 ccm-achievement-xeno-hive-birth-title = Birth of the Hive
 ccm-achievement-xeno-hive-birth-desc = The hive starts to grow. Requirement: evolve into a new caste.
+ccm-achievement-xeno-resin-worker-title = Resin Worker
+ccm-achievement-xeno-resin-worker-desc = Every hive starts with its first wall. Requirement: build 50 structures as xenomorphs.
+ccm-achievement-xeno-hive-fortifier-title = Hive Fortifier
+ccm-achievement-xeno-hive-fortifier-desc = Resin flows, the hive hardens. Requirement: build 500 structures as xenomorphs.
+ccm-achievement-xeno-hive-architect-title = Hive Architect
+ccm-achievement-xeno-hive-architect-desc = You reshape the battlefield for the hive. Requirement: build 2,000 structures as xenomorphs.
 ccm-achievement-xeno-young-hunter-title = Young Hunter
 ccm-achievement-xeno-young-hunter-desc = Humans make excellent prey. Requirement: kill 50 marines.
 ccm-achievement-xeno-predator-title = Predator

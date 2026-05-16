@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Chat;
 using Content.Shared.Coordinates;
@@ -105,6 +106,8 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
             neuro.LastStumbleTime = time;
         }
 
+        neuro.Source = ResolveNeurotoxinSource(ent.Owner, args.Shooter);
+
         _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(args.Target, "Blinded", neuro.BlurTime * 6, true);
         _daze.TryDaze(ent, ent.Comp.DazeTime, true, stutter: true);
         neuro.NeurotoxinAmount += ent.Comp.NeuroPerSecond;
@@ -159,6 +162,8 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
 
                 if (time < builtNeurotoxin.NextGasInjectionAt)
                     continue;
+
+                builtNeurotoxin.Source = ResolveNeurotoxinSource(uid);
 
                 _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(marine, "Blinded", builtNeurotoxin.BlurTime * 12, true);
                 _daze.TryDaze(marine, neuroGas.DazeTime, true, stutter: true);
@@ -220,7 +225,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
             if (_random.Prob(coughChance))
             {
                 _slow.TrySlowdown(uid, neuro.BloodCoughDuration);
-                _damage.TryChangeDamage(uid, neuro.CoughDamage); // TODO RMC-14 specifically chest damage
+                _damage.TryChangeDamage(uid, neuro.CoughDamage, origin: neuro.Source, tool: neuro.Source); // TODO RMC-14 specifically chest damage
                 _popup.PopupEntity(Loc.GetString("rmc-bloodcough"), uid, uid, PopupType.MediumCaution);
                 var ev = new NeurotoxinEmoteEvent() { Emote = neuro.CoughId };
                 RaiseLocalEvent(uid, ev);
@@ -364,15 +369,35 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
         if (neurotoxin.NeurotoxinAmount >= 27)
         {
             _daze.TryDaze(victim, neurotoxin.DazeLength, true, stutter: true);
-            _damage.TryChangeDamage(victim, neurotoxin.ToxinDamage);
+            _damage.TryChangeDamage(victim, neurotoxin.ToxinDamage, origin: neurotoxin.Source, tool: neurotoxin.Source);
             _deafness.TryDeafen(victim, neurotoxin.DeafenTime, true, ignoreProtection: true);
         }
 
         if (neurotoxin.NeurotoxinAmount >= 50)
         {
             // TODO RMC14 also gives liver damage
-            _damage.TryChangeDamage(victim, neurotoxin.OxygenDamage);
+            _damage.TryChangeDamage(victim, neurotoxin.OxygenDamage, origin: neurotoxin.Source, tool: neurotoxin.Source);
         }
+    }
+
+    private EntityUid? ResolveNeurotoxinSource(EntityUid source, EntityUid? shooter = null)
+    {
+        if (shooter != null)
+            return shooter;
+
+        if (TryComp<ProjectileComponent>(source, out var projectile) &&
+            projectile.Shooter is { } projectileShooter)
+        {
+            return projectileShooter;
+        }
+
+        if (TryComp<XenoProjectileShotComponent>(source, out var shot) &&
+            shot.ShooterEnt is { } shooterEnt)
+        {
+            return shooterEnt;
+        }
+
+        return null;
     }
 
     private void DoNeuroHallucination(EntityUid victim, NeurotoxinComponent neurotoxin)

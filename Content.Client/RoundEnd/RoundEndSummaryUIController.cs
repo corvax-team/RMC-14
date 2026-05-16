@@ -39,6 +39,16 @@ public sealed class RoundEndSummaryUIController : UIController,
         if (_window?.RoundId == message.RoundId)
             return;
 
+        if (_window != null)
+        {
+            _window.Close();
+            _window.Dispose();
+        }
+
+        var statsSystem = EntityManager.System<Content.Client._CCM.Stats.CCMStatsSystem>();
+        if (statsSystem.LatestRoundEndStats?.RoundId != message.RoundId)
+            statsSystem.ClearLatestRoundEndStats();
+
         _window = new RoundEndSummaryWindow(message.GamemodeTitle, message.RoundEndText,
             message.RoundDuration, message.RoundId, message.AllPlayersEndInfo, EntityManager);
     }

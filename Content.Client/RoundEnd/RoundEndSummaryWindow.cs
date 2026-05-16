@@ -27,6 +27,11 @@ namespace Content.Client.RoundEnd
     {
         private readonly IEntityManager _entityManager;
         private readonly CCMStatsSystem _ccmStatsSystem;
+        private readonly string _gamemode;
+        private readonly TimeSpan _roundDuration;
+        private readonly string _roundEndWithoutSponsors;
+        private readonly List<SponsorCreditEntry> _sponsorCredits;
+        private readonly BoxContainer _roundEndSummaryTab;
         private readonly Font _mvpTitleFont;
         private readonly Font _mvpSubtitleFont;
         private readonly Font _sponsorTierThreeFont;
@@ -42,6 +47,8 @@ namespace Content.Client.RoundEnd
         {
             _entityManager = entityManager;
             _ccmStatsSystem = _entityManager.System<CCMStatsSystem>();
+            _gamemode = gm;
+            _roundDuration = roundTimeSpan;
             Stylesheet = IoCManager.Resolve<IStylesheetManager>().SheetNano;
             var resourceCache = IoCManager.Resolve<IResourceCache>();
             _mvpTitleFont = resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", 14);
@@ -65,23 +72,54 @@ namespace Content.Client.RoundEnd
             // Also good for serious info.
 
             RoundId = roundId;
+            _sponsorCredits = ExtractSponsorCredits(roundEnd, out _roundEndWithoutSponsors);
             var roundEndTabs = new TabContainer();
-            roundEndTabs.AddChild(MakeRoundEndSummaryTab(gm, roundEnd, roundTimeSpan, roundId));
+            _roundEndSummaryTab = MakeRoundEndSummaryTab();
+            roundEndTabs.AddChild(_roundEndSummaryTab);
             roundEndTabs.AddChild(MakePlayerManifestTab(info));
 
             Contents.AddChild(roundEndTabs);
+            _ccmStatsSystem.RoundEndStatsReceived += OnRoundEndStatsReceived;
+            OnClose += () => _ccmStatsSystem.RoundEndStatsReceived -= OnRoundEndStatsReceived;
 
             OpenCenteredRight();
             MoveToFront();
         }
 
-        private BoxContainer MakeRoundEndSummaryTab(string gamemode, string roundEnd, TimeSpan roundDuration, int roundId)
+        private void OnRoundEndStatsReceived(CCMRoundEndStatsEvent ev)
+        {
+            if (ev.RoundId != RoundId)
+                return;
+
+            RebuildRoundEndSummaryTab();
+        }
+
+        private CCMRoundEndStatsEvent? GetRoundStats()
+        {
+            var roundStats = _ccmStatsSystem.LatestRoundEndStats;
+            return roundStats?.RoundId == RoundId ? roundStats : null;
+        }
+
+        private BoxContainer MakeRoundEndSummaryTab()
         {
             var roundEndSummaryTab = new BoxContainer
             {
                 Orientation = LayoutOrientation.Vertical,
                 Name = Loc.GetString("round-end-summary-window-round-end-summary-tab-title")
             };
+
+            RebuildRoundEndSummaryTab(roundEndSummaryTab);
+            return roundEndSummaryTab;
+        }
+
+        private void RebuildRoundEndSummaryTab()
+        {
+            RebuildRoundEndSummaryTab(_roundEndSummaryTab);
+        }
+
+        private void RebuildRoundEndSummaryTab(BoxContainer roundEndSummaryTab)
+        {
+            roundEndSummaryTab.DisposeAllChildren();
 
             var roundEndSummaryContainerScrollbox = new ScrollContainer
             {
@@ -95,15 +133,14 @@ namespace Content.Client.RoundEnd
                 SeparationOverride = 10,
             };
 
-            var sponsorCredits = ExtractSponsorCredits(roundEnd, out var roundEndWithoutSponsors);
-            var roundStats = _ccmStatsSystem.LatestRoundEndStats;
+            var roundStats = GetRoundStats();
             var winningSide = roundStats?.WinningSide ?? CCMStatsSide.None;
 
             roundEndSummaryContainer.AddChild(BuildRoundInfoBlock(
-                gamemode,
-                roundEndWithoutSponsors,
-                roundDuration,
-                roundId,
+                _gamemode,
+                _roundEndWithoutSponsors,
+                _roundDuration,
+                RoundId,
                 winningSide));
 
             if (roundStats != null)
@@ -128,10 +165,8 @@ namespace Content.Client.RoundEnd
             roundEndSummaryContainerScrollbox.AddChild(roundEndSummaryContainer);
             roundEndSummaryTab.AddChild(roundEndSummaryContainerScrollbox);
 
-            if (sponsorCredits.Count > 0)
-                roundEndSummaryTab.AddChild(BuildSponsorCreditsBlock(sponsorCredits));
-
-            return roundEndSummaryTab;
+            if (_sponsorCredits.Count > 0)
+                roundEndSummaryTab.AddChild(BuildSponsorCreditsBlock(_sponsorCredits));
         }
 
         private BoxContainer MakePlayerManifestTab(RoundEndMessageEvent.RoundEndPlayerInfo[] playersInfo)
@@ -677,9 +712,6 @@ namespace Content.Client.RoundEnd
             details.AddChild(BuildMvpMetricRow("ccm-round-end-mvp-kills", data.Kills.ToString(), accent, Color.White));
             details.AddChild(BuildMvpMetricRow("ccm-round-end-mvp-healing", data.HealingDone.ToString(), accent, Color.White));
 
-            if (data.Side == CCMStatsSide.Marines)
-                details.AddChild(BuildMvpMetricRow("ccm-round-end-mvp-revives", data.Revives.ToString(), accent, Color.White));
-
             details.AddChild(BuildMvpMetricRow("ccm-round-end-mvp-structures", data.StructuresBuilt.ToString(), accent, Color.White));
 
             row.AddChild(details);
@@ -736,16 +768,11 @@ namespace Content.Client.RoundEnd
             root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-damage", data.DamageDone.ToString(), accent, Color.White));
             root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-kills", data.Kills.ToString(), accent, Color.White));
             root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-healing", data.HealingDone.ToString(), accent, Color.White));
-            root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-revives", data.Revives.ToString(), accent, Color.White));
             root.AddChild(BuildMvpMetricRow("ccm-round-end-personal-structures", data.StructuresBuilt.ToString(), accent, Color.White));
 
-            if (data.MarineVictoryPoints > 0 ||
-                data.MarineImpactPoints > 0 ||
-                data.MarineDamageDone > 0 ||
-                data.MarineKills > 0 ||
-                data.MarineHealingDone > 0 ||
-                data.MarineRevives > 0 ||
-                data.MarineStructuresBuilt > 0)
+            var showSideBreakdown = data.MarineParticipated && data.XenoParticipated;
+
+            if (showSideBreakdown)
             {
                 root.AddChild(BuildSideSummary(
                     Loc.GetString("ccm-round-end-personal-marines"),
@@ -755,16 +782,10 @@ namespace Content.Client.RoundEnd
                     data.MarineDamageDone,
                     data.MarineKills,
                     data.MarineHealingDone,
-                    data.MarineRevives,
                     data.MarineStructuresBuilt));
             }
 
-            if (data.XenoVictoryPoints > 0 ||
-                data.XenoImpactPoints > 0 ||
-                data.XenoDamageDone > 0 ||
-                data.XenoKills > 0 ||
-                data.XenoHealingDone > 0 ||
-                data.XenoStructuresBuilt > 0)
+            if (showSideBreakdown)
             {
                 root.AddChild(BuildSideSummary(
                     Loc.GetString("ccm-round-end-personal-xenos"),
@@ -774,7 +795,6 @@ namespace Content.Client.RoundEnd
                     data.XenoDamageDone,
                     data.XenoKills,
                     data.XenoHealingDone,
-                    0,
                     data.XenoStructuresBuilt));
             }
 
@@ -1133,7 +1153,6 @@ namespace Content.Client.RoundEnd
             int damage,
             int kills,
             int healing,
-            int revives,
             int structures)
         {
             var container = new BoxContainer
@@ -1154,10 +1173,6 @@ namespace Content.Client.RoundEnd
             container.AddChild(BuildMvpMetricRow("ccm-round-end-personal-damage", damage.ToString(), accent, Color.White));
             container.AddChild(BuildMvpMetricRow("ccm-round-end-personal-kills", kills.ToString(), accent, Color.White));
             container.AddChild(BuildMvpMetricRow("ccm-round-end-personal-healing", healing.ToString(), accent, Color.White));
-
-            if (revives > 0)
-                container.AddChild(BuildMvpMetricRow("ccm-round-end-personal-revives", revives.ToString(), accent, Color.White));
-
             container.AddChild(BuildMvpMetricRow("ccm-round-end-personal-structures", structures.ToString(), accent, Color.White));
             return container;
         }

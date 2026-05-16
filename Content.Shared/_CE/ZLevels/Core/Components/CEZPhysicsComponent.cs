@@ -129,6 +129,24 @@ public sealed partial class CEZPhysicsComponent : Component
     public bool Sleeping;
 
     /// <summary>
+    /// How long the body has stayed nearly motionless on the ground.
+    /// </summary>
+    [DataField]
+    public float SleepTimer;
+
+    /// <summary>
+    /// Velocity threshold below which the body may start falling asleep.
+    /// </summary>
+    [DataField]
+    public float SleepThreshold = 0.3f;
+
+    /// <summary>
+    /// Time in seconds a nearly motionless body must remain idle before sleeping.
+    /// </summary>
+    [DataField]
+    public float TimeToSleep = 2f;
+
+    /// <summary>
     /// Prevents sticky stairs from immediately reversing a Z transition on the same tile.
     /// Cleared as soon as the entity leaves that tile or map.
     /// </summary>

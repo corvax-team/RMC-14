@@ -8,6 +8,9 @@ namespace Content.Shared._RMC14.Xenonids.Acid;
 [Access(typeof(SharedXenoAcidSystem))]
 public sealed partial class DamageableCorrodingComponent : Component
 {
+    [DataField]
+    public EntityUid? Source;
+
     [DataField, AutoNetworkedField]
     public EntityUid Acid;
 

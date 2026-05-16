@@ -1,4 +1,5 @@
-﻿using Content.Shared._MC.Smoke.Components;
+using Content.Shared._MC.Smoke.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
 
@@ -7,6 +8,7 @@ namespace Content.Shared._MC.Smoke.Systems;
 public sealed class MCSmokeSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = null!;
+    [Dependency] private readonly INetManager _net = null!;
 
     [ViewVariables] private readonly Dictionary<EntityUid, TimeSpan> _immunity = new();
     [ViewVariables] private readonly List<EntityUid> _immunityToRemove = new();
@@ -17,39 +19,38 @@ public sealed class MCSmokeSystem : EntitySystem
     {
         base.Initialize();
 
+        if (_net.IsClient)
+            return;
+
         SubscribeLocalEvent<MCSmokeComponent, StartCollideEvent>(OnCollideStart);
         SubscribeLocalEvent<MCSmokeComponent, EndCollideEvent>(OnCollideEnd);
     }
 
     private void OnCollideStart(Entity<MCSmokeComponent> entity, ref StartCollideEvent args)
     {
-        if (entity.Comp.AffectedEntities.Contains(args.OtherEntity))
-            return;
-
         entity.Comp.AffectedEntities.Add(args.OtherEntity);
-        DirtyField(entity, entity.Comp, nameof(MCSmokeComponent.AffectedEntities));
     }
 
     private void OnCollideEnd(Entity<MCSmokeComponent> entity, ref EndCollideEvent args)
     {
         entity.Comp.AffectedEntities.Remove(args.OtherEntity);
-        DirtyField(entity, entity.Comp, nameof(MCSmokeComponent.AffectedEntities));
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
+        if (_net.IsClient)
+            return;
+
         var query = EntityQueryEnumerator<MCSmokeComponent>();
-        while (query.MoveNext(out var uid, out var component))
+        while (query.MoveNext(out _, out var component))
         {
             if (component.EffectNext > _timing.CurTime)
                 continue;
 
             component.EffectNext = _timing.CurTime + component.EffectDelay;
-            DirtyField(uid, component, nameof(MCSmokeComponent.EffectNext));
-
-            Process((uid, component));
+            Process((component.Owner, component));
         }
 
         _immunityToRemove.Clear();

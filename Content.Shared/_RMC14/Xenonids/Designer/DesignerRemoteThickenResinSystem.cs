@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Designer.Events;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -67,6 +68,7 @@ public sealed class DesignerRemoteThickenResinSystem : EntitySystem
         var thickened = Spawn(upgradeable.To.Value, coords);
         _transform.SetLocalRotation(thickened, rotation);
         _hive.SetSameHive(ent.Owner, thickened);
+        RaiseLocalEvent(new XenoStructureUpgradedEvent(ent.Owner, thickened));
 
         _popup.PopupClient(Loc.GetString("rmc-xeno-designer-thicken-success"), ent.Owner, ent.Owner);
     }

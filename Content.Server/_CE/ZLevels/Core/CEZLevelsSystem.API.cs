@@ -55,7 +55,7 @@ public sealed partial class CEZLevelsSystem
         }
 
         network.Comp.ZLevels.Add(depth, mapUid);
-        network.Comp.DepthCache[mapUid] = depth;
+        network.Comp.ZLevelByEntity[mapUid] = depth;
         Dirty(network);
 
         // Welcome to fast api code
@@ -135,7 +135,7 @@ public sealed partial class CEZLevelsSystem
             return false;
         }
 
-        network.Comp.DepthCache.Remove(mapUid);
+        network.Comp.ZLevelByEntity.Remove(mapUid);
         Dirty(network);
 
         // Update cache

@@ -6,6 +6,7 @@
 using System.Numerics;
 using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared._CE.ZLevels.Core.EntitySystems;
+using Content.Shared.GameTicking;
 using Content.Shared._MC;
 using Content.Shared.Camera;
 using Content.Shared.Damage.Components;
@@ -14,6 +15,8 @@ using Robust.Shared.GameStates;
 using Robust.Client.Player;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Player;
 
 namespace Content.Client._CE.ZLevels.Core;
 
@@ -51,9 +54,11 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
         _config.OnValueChanged(MCConfigVars.ZLevelsRenderLowerFx, OnLowerFxChanged, true);
 
         SubscribeLocalEvent<CEZPhysicsComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<CEZPhysicsComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<CEZPhysicsComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<CEZPhysicsComponent, GetEyeOffsetEvent>(OnEyeOffset);
         SubscribeLocalEvent<CEZPhysicsComponent, AfterAutoHandleStateEvent>(OnAfterHandleState);
+        SubscribeLocalEvent<LocalPlayerDetachedEvent>(OnLocalPlayerDetached);
+        SubscribeNetworkEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
     }
 
     private void OnEyeOffset(Entity<CEZPhysicsComponent> ent, ref GetEyeOffsetEvent args)
@@ -84,8 +89,11 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
         RefreshTrackedVisualState(ent, sprite);
     }
 
-    private void OnShutdown(Entity<CEZPhysicsComponent> ent, ref ComponentShutdown args)
+    private void OnRemove(Entity<CEZPhysicsComponent> ent, ref ComponentRemove args)
     {
+        if (TryComp<SpriteComponent>(ent, out var sprite))
+            RestoreVisualDefaults(ent, sprite);
+
         _trackedVisuals.Remove(ent);
     }
 
@@ -114,11 +122,19 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
             return;
 
         if (_player.LocalEntity is not { } localEntity)
+        {
+            if (_trackedVisuals.Count > 0)
+                RestoreAllTrackedVisuals();
             return;
+        }
 
         var localXform = Transform(localEntity);
         if (localXform.MapUid is not { } mapUid || !HasComp<CEZLevelMapComponent>(mapUid))
+        {
+            if (_trackedVisuals.Count > 0)
+                RestoreAllTrackedVisuals();
             return;
+        }
 
         if (TryComp<CEZPhysicsComponent>(localEntity, out var localZPhys))
             RefreshTrackedVisualState((localEntity, localZPhys));
@@ -192,7 +208,7 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
 
         var pos = ent.Comp.LocalPosition;
 
-        if (xform.ParentUid != xform.MapUid && ZPhyzQuery.TryComp(xform.ParentUid, out var parentZPhys))
+        if (xform.ParentUid != xform.MapUid && ZPhysicsQuery.TryComp(xform.ParentUid, out var parentZPhys))
             pos = parentZPhys.LocalPosition;
 
         if (ent.Comp.CachedStickyGround)
@@ -207,6 +223,32 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
             return 0;
 
         return _visibilityRevision.GetValueOrDefault(mapUid, 0);
+    }
+
+    protected override void OnTileChanged(Entity<CEZLevelMapComponent> ent, ref TileChangedEvent args)
+    {
+        base.OnTileChanged(ent, ref args);
+
+        if (!ZLevelsEnabled)
+            return;
+
+        _visibilityRevision[ent.Owner] = _visibilityRevision.GetValueOrDefault(ent.Owner) + 1;
+    }
+
+    protected override void OnZMapShutdown(Entity<CEZLevelMapComponent> ent, ref ComponentShutdown args)
+    {
+        base.OnZMapShutdown(ent, ref args);
+        _visibilityRevision.Remove(ent.Owner);
+    }
+
+    private void OnLocalPlayerDetached(LocalPlayerDetachedEvent args)
+    {
+        ClearClientRuntimeState();
+    }
+
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    {
+        ClearClientRuntimeState();
     }
 
     protected override void OnZLevelsEnabledChanged(bool enabled)
@@ -227,7 +269,7 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
         if (_overlay.HasOverlay<CEZLevelBlurOverlay>())
             _overlay.RemoveOverlay(_lowerFxOverlay);
 
-        RestoreAllTrackedVisuals();
+        ClearClientRuntimeState();
     }
 
     private void RefreshTrackedVisualState(Entity<CEZPhysicsComponent> ent, SpriteComponent? sprite = null, TransformComponent? xform = null)
@@ -292,6 +334,14 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
         _visibilityRevision.Clear();
     }
 
+    private void ClearClientRuntimeState()
+    {
+        if (_trackedVisuals.Count > 0)
+            RestoreAllTrackedVisuals();
+        else
+            _visibilityRevision.Clear();
+    }
+
     private void OnLowerFxChanged(string value)
     {
         if (!Enum.TryParse(value, true, out CEZLevelLowerFxMode mode))
@@ -306,6 +356,7 @@ public sealed partial class CEClientZLevelsSystem : CESharedZLevelsSystem
     public override void Shutdown()
     {
         base.Shutdown();
+        ClearClientRuntimeState();
         if (_lowerFxOverlay != null)
             _overlay.RemoveOverlay(_lowerFxOverlay);
 

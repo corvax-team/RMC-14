@@ -31,11 +31,18 @@ public sealed partial class ScalingViewport
     private EntityQuery<MapComponent>? _mapQuery;
     private EntityQuery<CEZLevelHighGroundComponent>? _highGroundQuery;
     private readonly Dictionary<EntityUid, EmptyTileCache> _emptyTileCache = new();
+    private EntityUid? _zCacheRootMap;
 
     private IEye? _fallbackEye;
     private readonly ZEye _zEye = new();
 
     private readonly record struct EmptyTileCache(Vector2i Min, Vector2i Max, int Revision, bool HasVisibleOpening);
+
+    private void ClearZLevelCache()
+    {
+        _emptyTileCache.Clear();
+        _zCacheRootMap = null;
+    }
 
     /// <summary>
     /// We are looking for at least one empty tile on the screen.
@@ -141,23 +148,45 @@ public sealed partial class ScalingViewport
         _mapSystem ??= _entityManager.System<SharedMapSystem>();
 
         if (!_zLevels.IsZLevelsEnabled)
+        {
+            ClearZLevelCache();
             return false;
+        }
 
         if (_player.LocalEntity is null)
+        {
+            ClearZLevelCache();
             return false;
+        }
 
         if (!_entityManager.TryGetComponent<CEZLevelViewerComponent>(_player.LocalEntity.Value, out var zLevelViewer))
+        {
+            ClearZLevelCache();
             return false;
+        }
 
         if (!_xformQuery.Value.TryComp(_player.LocalEntity, out var playerXform))
+        {
+            ClearZLevelCache();
             return false;
+        }
 
         if (playerXform.MapUid is null)
+        {
+            ClearZLevelCache();
             return false;
+        }
 
         if (!_entityManager.HasComponent<CEZLevelMapComponent>(playerXform.MapUid.Value))
         {
+            ClearZLevelCache();
             return false;
+        }
+
+        if (_zCacheRootMap != playerXform.MapUid.Value)
+        {
+            _emptyTileCache.Clear();
+            _zCacheRootMap = playerXform.MapUid.Value;
         }
 
         var lookUp = zLevelViewer.LookUp ? 1 : 0;

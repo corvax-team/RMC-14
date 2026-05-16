@@ -7,6 +7,7 @@ using Content.Shared._RMC14.GhostColor;
 using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared.Ghost;
 using Content.Shared.Hands;
 using Content.Shared.Inventory;
@@ -142,6 +143,12 @@ public sealed class CCMCustomizationApplySystem : EntitySystem
 
     private void ApplyXenoCustomization(Entity<XenoComponent> xeno, CCMCustomizationSnapshot snapshot)
     {
+        if (HasComp<XenoStrainComponent>(xeno))
+        {
+            RemCompDeferred<CCMXenoSkinComponent>(xeno);
+            return;
+        }
+
         var slotId = xeno.Comp.Role.Id switch
         {
             "CMXenoDefender" => "xeno_defender",

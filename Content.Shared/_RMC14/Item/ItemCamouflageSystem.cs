@@ -85,6 +85,9 @@ public sealed class ItemCamouflageSystem : EntitySystem
 
         while (_items.TryDequeue(out var ent))
         {
+            if (!Exists(ent) || TerminatingOrDeleted(ent))
+                continue;
+
             if (TryComp(ent, out AppearanceComponent? appearance) &&
                 _appearance.TryGetData(ent, ItemCamouflageVisuals.Camo, out CamouflageType _, appearance))
             {
@@ -92,8 +95,6 @@ public sealed class ItemCamouflageSystem : EntitySystem
             }
 
             EnsureComp<AppearanceComponent>(ent);
-            if (TerminatingOrDeleted(ent))
-                continue;
 
             _appearance.SetData(ent, ItemCamouflageVisuals.Camo, CurrentMapCamouflage);
 

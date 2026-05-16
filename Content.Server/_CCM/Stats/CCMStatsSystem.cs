@@ -7,14 +7,20 @@ using Content.Server._CCM.RoundEnd;
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.KillTracking;
+using Content.Shared.Body.Organ;
+using Content.Shared.Body.Part;
+using Content.Shared.Actions.Components;
 using Content.Shared._CCM.Stats;
 using Content.Shared._RMC14.Construction;
-using Content.Shared._RMC14.Medical.Surgery;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Synth;
+using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
+using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared.Damage;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
@@ -25,9 +31,11 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Vehicle.Components;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Vehicle;
+using Content.Server._RMC14.Xenonids.Construction.ResinHole;
 using Robust.Shared.Network;
 using Robust.Shared.Log;
 using Robust.Server.Player;
@@ -43,12 +51,11 @@ public sealed class CCMStatsSystem : EntitySystem
     private const int LateJoinWinPoints = 10;
     private const int GhostWinPoints = 5;
     private const float LiveProgressFlushIntervalSeconds = 10f;
-    private const float DamageImpactFactor = 0.02f;
+    private const float DamageImpactFactor = 0.01f;
     private const float HealingImpactFactor = 0.03f;
     private const int KillImpactPoints = 5;
-    private const int ReviveImpactPoints = 3;
     private const float StructureImpactPoints = 0.5f;
-    private const int SurgeryHealingCredit = 20;
+    private const int DamageDiagnosticsHistoryLimit = 25;
 
     [Dependency] private readonly CCMRoundWinTrackerSystem _campaignScore = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
@@ -61,6 +68,16 @@ public sealed class CCMStatsSystem : EntitySystem
     private bool _roundFinalized;
     private bool _flushingLiveProgress;
     private float _liveProgressFlushAccumulator;
+    private readonly HashSet<EntityUid> _countedDefibRevives = new();
+    private readonly Queue<DamageDiagnosticEntry> _recentDamageDiagnostics = new();
+    private float _unattributedDamageToMarines;
+    private float _unattributedDamageToXenos;
+    private int _unattributedHitsToMarines;
+    private int _unattributedHitsToXenos;
+    private float _fallbackMarineDamage;
+    private float _fallbackXenoDamage;
+    private int _fallbackMarineHits;
+    private int _fallbackXenoHits;
 
     public bool TryGetLiveAchievementMetrics(NetUserId player, out CCMLiveAchievementMetrics metrics)
     {
@@ -134,18 +151,22 @@ public sealed class CCMStatsSystem : EntitySystem
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<PlayerDetachedEvent>(OnPlayerDetached);
-        SubscribeLocalEvent<DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<MarineComponent, DamageChangedEvent>((uid, _, args) => OnDamageChanged(uid, args));
+        SubscribeLocalEvent<RMCSurvivorComponent, DamageChangedEvent>((uid, _, args) => OnDamageChanged(uid, args));
+        SubscribeLocalEvent<SynthComponent, DamageChangedEvent>((uid, _, args) => OnDamageChanged(uid, args));
+        SubscribeLocalEvent<XenoComponent, DamageChangedEvent>((uid, _, args) => OnDamageChanged(uid, args));
+        SubscribeLocalEvent<BodyPartComponent, DamageChangedEvent>((uid, _, args) => OnDamageChanged(uid, args));
+        SubscribeLocalEvent<OrganComponent, DamageChangedEvent>((uid, _, args) => OnDamageChanged(uid, args));
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<KillReportedEvent>(OnKillReported);
-        SubscribeLocalEvent<GunShotEvent>(OnGunShot);
+        SubscribeLocalEvent<TargetDefibrillatedEvent>(OnTargetDefibrillated);
+        SubscribeLocalEvent<GunComponent, TakeAmmoEvent>(OnGunTakeAmmo);
         SubscribeLocalEvent<ProjectileComponent, ProjectileShotEvent>(OnProjectileShot);
-        SubscribeLocalEvent<CMSurgeryCompleteEvent>(OnSurgeryComplete);
-        SubscribeLocalEvent<RMCConstructionBuildDoAfterEvent>(OnMarineConstructionBuilt,
-            after: [typeof(Content.Shared._RMC14.Construction.RMCConstructionSystem)]);
-        SubscribeLocalEvent<XenoSecreteStructureDoAfterEvent>(OnXenoStructureSecreted,
-            after: [typeof(Content.Shared._RMC14.Xenonids.Construction.SharedXenoConstructionSystem)]);
-        SubscribeLocalEvent<XenoConstructionAddPlasmaDoAfterEvent>(OnXenoConstructionCompleted,
-            after: [typeof(Content.Shared._RMC14.Xenonids.Construction.SharedXenoConstructionSystem)]);
+        SubscribeLocalEvent<RMCStructureBuiltEvent>(OnMarineStructureBuilt);
+        SubscribeLocalEvent<XenoStructureBuiltEvent>(OnXenoStructureBuilt);
+        SubscribeLocalEvent<XenoStructureUpgradedEvent>(OnXenoStructureUpgraded);
+        SubscribeLocalEvent<XenoResinHolePlacedEvent>(OnXenoResinHolePlaced);
+        SubscribeLocalEvent<XenoTunnelPlacedEvent>(OnXenoTunnelPlaced);
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndTextAppend,
             after: [typeof(Content.Server._RMC14.Rules.DistressSignal.CMDistressSignalRuleSystem), typeof(CCMRoundWinTrackerSystem)]);
     }
@@ -168,14 +189,27 @@ public sealed class CCMStatsSystem : EntitySystem
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _roundStats.Clear();
+        _countedDefibRevives.Clear();
+        _recentDamageDiagnostics.Clear();
         _roundFinalized = false;
         _flushingLiveProgress = false;
         _liveProgressFlushAccumulator = 0f;
+        _unattributedDamageToMarines = 0f;
+        _unattributedDamageToXenos = 0f;
+        _unattributedHitsToMarines = 0;
+        _unattributedHitsToXenos = 0;
+        _fallbackMarineDamage = 0f;
+        _fallbackXenoDamage = 0f;
+        _fallbackMarineHits = 0;
+        _fallbackXenoHits = 0;
     }
 
     private async void OnRequestPlayerStats(RequestCCMPlayerStatsEvent msg, EntitySessionEventArgs args)
     {
         var snapshot = await _db.GetCCMPlayerStats(args.SenderSession.UserId.UserId);
+        if (_roundStats.TryGetValue(args.SenderSession.UserId, out var liveStats))
+            snapshot = MergeLiveSnapshot(snapshot, liveStats);
+
         RaiseNetworkEvent(new CCMPlayerStatsResponseEvent(snapshot), args.SenderSession.Channel);
     }
 
@@ -196,15 +230,16 @@ public sealed class CCMStatsSystem : EntitySystem
         if (!IsRoundStatsTrackingActive())
             return;
 
-        if (HasComp<MarineComponent>(ev.Mob))
+        var side = GetSide(ev.Mob);
+        if (side == CCMStatsSide.Marines)
         {
             EnsureStatsKillTracker(ev.Mob);
-            MarkParticipation(ev.Player.UserId, CCMStatsSide.Marines, !ev.LateJoin);
+            MarkParticipation(ev.Player.UserId, side, !ev.LateJoin);
         }
-        else if (HasComp<XenoComponent>(ev.Mob))
+        else if (side == CCMStatsSide.Xenos)
         {
             EnsureStatsKillTracker(ev.Mob);
-            MarkParticipation(ev.Player.UserId, CCMStatsSide.Xenos, !ev.LateJoin);
+            MarkParticipation(ev.Player.UserId, side, !ev.LateJoin);
         }
 
         StartActiveParticipation(ev.Player.UserId, ev.Mob);
@@ -230,29 +265,34 @@ public sealed class CCMStatsSystem : EntitySystem
         if (!IsRoundStatsTrackingActive())
             return;
 
+        UpdateLastKnownIdentity(ev.Player.UserId, ev.Entity);
         var stats = GetOrCreateRoundStats(ev.Player.UserId);
         StopActiveParticipation(stats);
     }
 
-    private void OnDamageChanged(DamageChangedEvent args)
+    private void OnDamageChanged(EntityUid uid, DamageChangedEvent args)
     {
-        var target = args.Damageable.Owner;
-
-        if (HasComp<XenoComponent>(target))
-        {
-            OnXenoDamaged(target, args);
+        var damage = GetPositiveDamage(args);
+        var healing = GetPositiveHealing(args);
+        if (damage <= 0 && healing <= 0)
             return;
-        }
 
-        if (HasComp<MarineComponent>(target))
-            OnMarineDamaged(target, args);
+        var target = ResolveStatsTarget(uid);
+        var side = GetSide(target);
+        if (healing > 0)
+            HandleHealingChanged(target, side, args, healing);
+
+        if (damage > 0)
+            HandleDamageChanged(target, side, args, damage);
     }
 
-    private void OnGunShot(ref GunShotEvent args)
+    private void OnGunTakeAmmo(Entity<GunComponent> gun, ref TakeAmmoEvent args)
     {
-        var side = GetSide(args.User);
-        if (side == CCMStatsSide.None || !TryGetEntityStats(args.User, side, out var stats))
+        if (!TryGetSourceStats(args.User, out var side, out var stats) &&
+            !TryGetSourceStats(gun.Owner, out side, out stats))
+        {
             return;
+        }
 
         var fired = Math.Max(1, args.Ammo.Count);
         if (side == CCMStatsSide.Marines)
@@ -261,50 +301,89 @@ public sealed class CCMStatsSystem : EntitySystem
             stats.XenoShotsFired += fired;
     }
 
-    private void OnXenoDamaged(EntityUid target, DamageChangedEvent args)
+    private void HandleHealingChanged(EntityUid target, CCMStatsSide targetSide, DamageChangedEvent args, int healing)
     {
-        if (TryGetSourceStats(args.Origin, args.Tool, CCMStatsSide.Xenos, out var healerStats) &&
-            args.Origin != target)
+        if (!TryGetSourceStats(args.Origin, args.Tool, out var sourceSide, out var stats))
+            return;
+
+        if (args.Origin == target)
+            return;
+
+        if (sourceSide == CCMStatsSide.Marines)
         {
-            var healing = GetPositiveHealing(args);
-            if (healing > 0)
-            {
-                healerStats.XenoHealingDone += healing;
-                healerStats.XenoImpact += healing * HealingImpactFactor;
-                return;
-            }
+            stats.MarineHealingDone += healing;
+            stats.MarineImpact += healing * HealingImpactFactor;
+            return;
         }
 
-        if (!TryGetSourceStats(args.Origin, args.Tool, CCMStatsSide.Marines, out var stats))
+        if (sourceSide != CCMStatsSide.Xenos)
             return;
 
-        var damage = GetPositiveDamage(args);
-        if (damage <= 0)
-            return;
-
-        stats.MarineDamage += damage;
-        stats.MarineImpact += damage * DamageImpactFactor;
+        stats.XenoHealingDone += healing;
+        stats.XenoImpact += healing * HealingImpactFactor;
     }
 
-    private void OnMarineDamaged(EntityUid target, DamageChangedEvent args)
+    private void HandleDamageChanged(EntityUid target, CCMStatsSide targetSide, DamageChangedEvent args, float damage)
     {
-        if (TryGetSourceStats(args.Origin, args.Tool, CCMStatsSide.Marines, out var healerStats) &&
-            args.Origin != target)
+        if (!TryGetSourceStats(args.Origin, args.Tool, out var sourceSide, out var stats))
         {
-            var healing = GetPositiveHealing(args);
-            if (healing > 0)
-            {
-                healerStats.MarineHealingDone += healing;
-                healerStats.MarineImpact += healing * HealingImpactFactor;
-                return;
-            }
+            if (targetSide != CCMStatsSide.None)
+                LogUnattributedCombatDamage(target, args, targetSide);
+            else
+                EnqueueDamageDiagnostic(
+                    damage,
+                    CCMStatsSide.None,
+                    "unknown-target-unresolved-source",
+                    ToPrettyString(target),
+                    ToPrettyString(args.Origin),
+                    ToPrettyString(args.Tool));
+            return;
         }
 
-        if (!TryGetSourceStats(args.Origin, args.Tool, CCMStatsSide.Xenos, out var stats))
+        if (args.Origin == target)
             return;
 
-        var damage = GetPositiveDamage(args);
-        if (damage <= 0)
+        if (targetSide != CCMStatsSide.None)
+        {
+            var damageEvent = new CCMCombatDamageRecordedEvent(
+                stats.Player,
+                sourceSide,
+                targetSide,
+                damage,
+                sourceSide == targetSide);
+            RaiseLocalEvent(damageEvent);
+        }
+
+        if (targetSide == CCMStatsSide.None)
+        {
+            if (sourceSide == CCMStatsSide.Marines)
+            {
+                _fallbackMarineDamage += damage;
+                _fallbackMarineHits += 1;
+            }
+            else if (sourceSide == CCMStatsSide.Xenos)
+            {
+                _fallbackXenoDamage += damage;
+                _fallbackXenoHits += 1;
+            }
+
+            EnqueueDamageDiagnostic(
+                damage,
+                sourceSide,
+                "unknown-target-attributed-source",
+                ToPrettyString(target),
+                ToPrettyString(args.Origin),
+                ToPrettyString(args.Tool));
+        }
+
+        if (sourceSide == CCMStatsSide.Marines)
+        {
+            stats.MarineDamage += damage;
+            stats.MarineImpact += damage * DamageImpactFactor;
+            return;
+        }
+
+        if (sourceSide != CCMStatsSide.Xenos)
             return;
 
         stats.XenoDamage += damage;
@@ -313,12 +392,13 @@ public sealed class CCMStatsSystem : EntitySystem
 
     private void OnKillReported(ref KillReportedEvent args)
     {
-        if (HasComp<XenoComponent>(args.Entity))
+        var victimSide = GetSide(args.Entity);
+        if (victimSide == CCMStatsSide.Xenos)
         {
             if (TryResolvePlayerAndSide(args.Entity, out var victimUserId, out _))
                 GetOrCreateRoundStats(victimUserId).XenoDeaths += 1;
         }
-        else if (HasComp<MarineComponent>(args.Entity))
+        else if (victimSide == CCMStatsSide.Marines)
         {
             if (TryResolvePlayerAndSide(args.Entity, out var victimUserId, out _))
                 GetOrCreateRoundStats(victimUserId).MarineDeaths += 1;
@@ -327,27 +407,27 @@ public sealed class CCMStatsSystem : EntitySystem
         if (args.Primary is not KillPlayerSource player || args.Suicide)
             return;
 
-        var killerSide = GetPlayerCurrentSide(player.PlayerId);
+        var killerSide = player.Side != CCMStatsSide.None
+            ? player.Side
+            : GetPlayerCurrentSide(player.PlayerId);
         if (killerSide == CCMStatsSide.None)
             return;
 
-        if (HasComp<XenoComponent>(args.Entity))
+        if (victimSide == CCMStatsSide.Xenos)
         {
             if (killerSide != CCMStatsSide.Marines)
                 return;
 
             var stats = GetOrCreateRoundStats(player.PlayerId);
-            MarkParticipation(player.PlayerId, killerSide, roundStart: false);
             stats.MarineKills += 1;
             stats.MarineImpact += KillImpactPoints;
         }
-        else if (HasComp<MarineComponent>(args.Entity))
+        else if (victimSide == CCMStatsSide.Marines)
         {
             if (killerSide != CCMStatsSide.Xenos)
                 return;
 
             var stats = GetOrCreateRoundStats(player.PlayerId);
-            MarkParticipation(player.PlayerId, killerSide, roundStart: false);
             stats.XenoKills += 1;
             stats.XenoImpact += KillImpactPoints;
         }
@@ -355,6 +435,9 @@ public sealed class CCMStatsSystem : EntitySystem
 
     private void OnProjectileShot(Entity<ProjectileComponent> ent, ref ProjectileShotEvent args)
     {
+        if (args.Shooter is { } shotOwner)
+            TryStampProjectileSource(ent.Owner, shotOwner);
+
         if (args.Shooter is not { } shooter)
             return;
 
@@ -367,55 +450,72 @@ public sealed class CCMStatsSystem : EntitySystem
 
     private void OnMobStateChanged(MobStateChangedEvent args)
     {
-        if (args.OldMobState != MobState.Dead ||
-            args.NewMobState is not (MobState.Critical or MobState.Alive) ||
-            !HasComp<MarineComponent>(args.Target))
+        if (args.OldMobState != MobState.Critical ||
+            args.NewMobState != MobState.Alive ||
+            GetSide(args.Target) != CCMStatsSide.Marines)
         {
             return;
         }
+
+        if (_countedDefibRevives.Remove(args.Target))
+            return;
 
         if (!TryGetSourceStats(args.Origin, null, CCMStatsSide.Marines, out var stats))
             return;
 
         stats.MarineRevives += 1;
-        stats.MarineImpact += ReviveImpactPoints;
     }
 
-    private void OnSurgeryComplete(ref CMSurgeryCompleteEvent ev)
+    private void OnTargetDefibrillated(ref TargetDefibrillatedEvent args)
     {
-        if (!TryGetEntityStats(ev.Surgeon, CCMStatsSide.Marines, out var stats))
+        if (!args.RevivedFromDeath || GetSide(args.Target) != CCMStatsSide.Marines)
             return;
 
-        stats.MarineHealingDone += SurgeryHealingCredit;
-        stats.MarineImpact += SurgeryHealingCredit * HealingImpactFactor;
+        if (!TryGetEntityStats(args.User, CCMStatsSide.Marines, out var stats))
+            return;
+
+        stats.MarineRevives += 1;
+        _countedDefibRevives.Add(args.Target);
     }
 
-    private void OnMarineConstructionBuilt(RMCConstructionBuildDoAfterEvent args)
+    private void OnMarineStructureBuilt(RMCStructureBuiltEvent args)
     {
-        if (args.Cancelled || !TryGetEntityStats(args.User, CCMStatsSide.Marines, out var stats))
+        if (!TryGetEntityStats(args.User, CCMStatsSide.Marines, out var stats))
             return;
 
-        var count = Math.Max(1, args.Amount);
-        stats.MarineStructuresBuilt += count;
-        stats.MarineImpact += StructureImpactPoints * count;
+        AwardMarineStructures(stats, Math.Max(1, args.Count));
     }
 
-    private void OnXenoStructureSecreted(XenoSecreteStructureDoAfterEvent args)
+    private void OnXenoStructureBuilt(XenoStructureBuiltEvent args)
     {
-        if (args.Cancelled || !args.Handled || !TryGetEntityStats(args.User, CCMStatsSide.Xenos, out var stats))
+        if (!TryGetEntityStats(args.User, CCMStatsSide.Xenos, out var stats))
             return;
 
-        stats.XenoStructuresBuilt += 1;
-        stats.XenoImpact += StructureImpactPoints;
+        AwardXenoStructures(stats, 1);
     }
 
-    private void OnXenoConstructionCompleted(XenoConstructionAddPlasmaDoAfterEvent args)
+    private void OnXenoStructureUpgraded(XenoStructureUpgradedEvent args)
     {
-        if (args.Cancelled || !args.Completed || !TryGetEntityStats(args.User, CCMStatsSide.Xenos, out var stats))
+        if (!TryGetEntityStats(args.User, CCMStatsSide.Xenos, out var stats))
             return;
 
-        stats.XenoStructuresBuilt += 1;
-        stats.XenoImpact += StructureImpactPoints;
+        AwardXenoStructures(stats, 1);
+    }
+
+    private void OnXenoResinHolePlaced(XenoResinHolePlacedEvent args)
+    {
+        if (!TryGetEntityStats(args.User, CCMStatsSide.Xenos, out var stats))
+            return;
+
+        AwardXenoStructures(stats, 1);
+    }
+
+    private void OnXenoTunnelPlaced(XenoTunnelPlacedEvent args)
+    {
+        if (!TryGetEntityStats(args.User, CCMStatsSide.Xenos, out var stats))
+            return;
+
+        AwardXenoStructures(stats, 1);
     }
 
     private async void OnRoundEndTextAppend(RoundEndTextAppendEvent ev)
@@ -689,6 +789,7 @@ public sealed class CCMStatsSystem : EntitySystem
             var score = personalStats?.RoundScore ?? 0;
             RaiseNetworkEvent(
                 new CCMRoundEndStatsEvent(
+                    _ticker.RoundId,
                     score,
                     _campaignScore.MarineWins,
                     _campaignScore.XenoWins,
@@ -716,10 +817,10 @@ public sealed class CCMStatsSystem : EntitySystem
 
         var ckey = TryGetCurrentCkey(best.Key, out var resolvedCkey)
             ? resolvedCkey
-            : best.Key.ToString();
+            : best.Value.LastKnownCkey ?? best.Key.ToString();
         var name = TryGetCurrentName(best.Key, out var netEntity, out var resolvedName)
             ? resolvedName
-            : ckey;
+            : best.Value.LastKnownName ?? ckey;
 
         var stats = best.Value;
         var damage = side == CCMStatsSide.Marines ? (int) MathF.Round(stats.MarineDamage) : (int) MathF.Round(stats.XenoDamage);
@@ -766,6 +867,26 @@ public sealed class CCMStatsSystem : EntitySystem
 
         ckey = session.Name;
         return true;
+    }
+
+    private void UpdateLastKnownIdentity(NetUserId userId, EntityUid? entity = null)
+    {
+        var stats = GetOrCreateRoundStats(userId);
+
+        if (_players.TryGetSessionById(userId, out var session))
+        {
+            if (!string.IsNullOrWhiteSpace(session.Name))
+                stats.LastKnownCkey = session.Name;
+
+            entity ??= session.AttachedEntity;
+        }
+
+        if (entity is not { } resolvedEntity)
+            return;
+
+        var entityName = MetaData(resolvedEntity).EntityName;
+        if (!string.IsNullOrWhiteSpace(entityName))
+            stats.LastKnownName = entityName;
     }
 
     private void ComputeRoundOutcome(RoundPlayerStats stats, CCMStatsSide winningSide)
@@ -874,6 +995,10 @@ public sealed class CCMStatsSystem : EntitySystem
     private void MarkParticipation(NetUserId player, CCMStatsSide side, bool roundStart)
     {
         var stats = GetOrCreateRoundStats(player);
+        UpdateLastKnownIdentity(player);
+        if (side != CCMStatsSide.None)
+            stats.LastKnownSide = side;
+
         if (side == CCMStatsSide.Marines)
         {
             stats.MarineParticipated = true;
@@ -895,6 +1020,7 @@ public sealed class CCMStatsSystem : EntitySystem
 
     private void StartActiveParticipation(NetUserId player, EntityUid entity)
     {
+        UpdateLastKnownIdentity(player, entity);
         var stats = GetOrCreateRoundStats(player);
         StopActiveParticipation(stats);
 
@@ -902,6 +1028,7 @@ public sealed class CCMStatsSystem : EntitySystem
         if (side == CCMStatsSide.None)
             return;
 
+        stats.LastKnownSide = side;
         stats.ActiveSide = side;
         stats.ActiveSince = _timing.CurTime;
     }
@@ -919,9 +1046,50 @@ public sealed class CCMStatsSystem : EntitySystem
         stats.ActiveSince = null;
     }
 
+    private EntityUid ResolveStatsTarget(EntityUid target)
+    {
+        var current = target;
+        var visited = new HashSet<EntityUid>();
+
+        for (var depth = 0; depth < 8 && visited.Add(current); depth++)
+        {
+            if (GetSide(current) != CCMStatsSide.None)
+                return current;
+
+            if (TryComp(current, out BodyPartComponent? bodyPart) &&
+                bodyPart.Body is { } body)
+            {
+                current = body;
+                continue;
+            }
+
+            if (TryComp(current, out OrganComponent? organ) &&
+                organ.Body is { } organBody)
+            {
+                current = organBody;
+                continue;
+            }
+
+            if (!TryComp(current, out TransformComponent? xform) ||
+                xform.ParentUid == EntityUid.Invalid ||
+                xform.ParentUid == current)
+            {
+                break;
+            }
+
+            current = xform.ParentUid;
+        }
+
+        return current;
+    }
+
     private CCMStatsSide GetSide(EntityUid uid)
     {
         if (HasComp<MarineComponent>(uid))
+            return CCMStatsSide.Marines;
+        if (HasComp<RMCSurvivorComponent>(uid))
+            return CCMStatsSide.Marines;
+        if (HasComp<SynthComponent>(uid))
             return CCMStatsSide.Marines;
         if (HasComp<XenoComponent>(uid))
             return CCMStatsSide.Xenos;
@@ -944,33 +1112,51 @@ public sealed class CCMStatsSystem : EntitySystem
         }
 
         if (_roundStats.TryGetValue(player, out var stats))
-            return stats.ActiveSide;
+        {
+            if (stats.ActiveSide != CCMStatsSide.None)
+                return stats.ActiveSide;
+
+            return stats.LastKnownSide;
+        }
 
         return CCMStatsSide.None;
     }
 
     private CCMRoundPersonalStatsData BuildPersonalStats(RoundPlayerStats stats)
     {
+        var marineDamage = (int) MathF.Round(stats.MarineDamage);
+        var xenoDamage = (int) MathF.Round(stats.XenoDamage);
+        var marineImpact = (int) MathF.Round(stats.MarineImpact);
+        var xenoImpact = (int) MathF.Round(stats.XenoImpact);
+        var totalKills = stats.MarineKills + stats.XenoKills;
+        var totalHealing = stats.MarineHealingDone + stats.XenoHealingDone;
+        var totalStructures = stats.MarineStructuresBuilt + stats.XenoStructuresBuilt;
+        var totalDamage = marineDamage + xenoDamage;
+        var totalImpact = marineImpact + xenoImpact;
+        var victoryPoints = stats.MarineVictoryPointsEarned + stats.XenoVictoryPointsEarned;
+
         return new CCMRoundPersonalStatsData(
-            stats.RoundScoreEarned,
-            stats.VictoryPointsEarned,
-            stats.TotalImpactPoints,
-            (int) MathF.Round(stats.TotalDamage),
-            stats.TotalKills,
-            stats.TotalHealingDone,
-            stats.TotalRevives,
-            stats.TotalStructuresBuilt,
+            victoryPoints + totalKills,
+            victoryPoints,
+            totalImpact,
+            totalDamage,
+            totalKills,
+            totalHealing,
+            stats.MarineRevives,
+            totalStructures,
             (int) Math.Round(stats.RoundSecondsPlayed),
+            stats.MarineParticipated,
+            stats.XenoParticipated,
             stats.MarineVictoryPointsEarned,
-            stats.MarineImpactPoints,
-            (int) MathF.Round(stats.MarineDamage),
+            marineImpact,
+            marineDamage,
             stats.MarineKills,
             stats.MarineHealingDone,
             stats.MarineRevives,
             stats.MarineStructuresBuilt,
             stats.XenoVictoryPointsEarned,
-            stats.XenoImpactPoints,
-            (int) MathF.Round(stats.XenoDamage),
+            xenoImpact,
+            xenoDamage,
             stats.XenoKills,
             stats.XenoHealingDone,
             stats.XenoStructuresBuilt);
@@ -978,10 +1164,37 @@ public sealed class CCMStatsSystem : EntitySystem
 
     private bool TryGetSourceStats(EntityUid? origin, EntityUid? tool, CCMStatsSide expectedSide, out RoundPlayerStats stats)
     {
-        if (TryGetEntityStats(origin, expectedSide, out stats))
+        if (TryGetSourceStats(origin, out var side, out stats) && side == expectedSide)
             return true;
 
-        return TryGetEntityStats(tool, expectedSide, out stats);
+        if (TryGetSourceStats(tool, out side, out stats) && side == expectedSide)
+            return true;
+
+        stats = default!;
+        return false;
+    }
+
+    private bool TryGetSourceStats(EntityUid? origin, EntityUid? tool, out CCMStatsSide side, out RoundPlayerStats stats)
+    {
+        if (TryGetSourceStats(origin, out side, out stats))
+            return true;
+
+        return TryGetSourceStats(tool, out side, out stats);
+    }
+
+    private bool TryGetSourceStats(EntityUid? source, out CCMStatsSide side, out RoundPlayerStats stats)
+    {
+        side = CCMStatsSide.None;
+        stats = default!;
+
+        if (source == null || !TryResolvePlayerAndSide(source.Value, out var userId, out side))
+            return false;
+
+        if (side == CCMStatsSide.None)
+            return false;
+
+        stats = GetOrCreateRoundStats(userId);
+        return true;
     }
 
     private bool TryGetEntityStats(EntityUid? entity, CCMStatsSide expectedSide, out RoundPlayerStats stats)
@@ -991,13 +1204,21 @@ public sealed class CCMStatsSystem : EntitySystem
         if (entity == null)
             return false;
 
+        if (TryComp(entity.Value, out CCMStatsProjectileSourceComponent? projectileSource))
+        {
+            if (projectileSource.Side != expectedSide)
+                return false;
+
+            stats = GetOrCreateRoundStats(projectileSource.UserId);
+            return true;
+        }
+
         if (!TryResolvePlayerAndSide(entity.Value, out var userId, out var side))
             return false;
 
         if (side != expectedSide)
             return false;
 
-        MarkParticipation(userId, expectedSide, roundStart: false);
         stats = GetOrCreateRoundStats(userId);
         return true;
     }
@@ -1057,6 +1278,23 @@ public sealed class CCMStatsSystem : EntitySystem
                 return true;
             }
 
+            if (TryComp(current, out ActionComponent? action))
+            {
+                if (action.AttachedEntity is { } attached &&
+                    attached != current &&
+                    TryResolvePlayerAndSide(attached, visited, ref userId, ref side))
+                {
+                    return true;
+                }
+
+                if (action.Container is { } container &&
+                    container != current &&
+                    TryResolvePlayerAndSide(container, visited, ref userId, ref side))
+                {
+                    return true;
+                }
+            }
+
             if (userId != default && side != CCMStatsSide.None)
                 return true;
 
@@ -1087,7 +1325,23 @@ public sealed class CCMStatsSystem : EntitySystem
             }
         }
 
+        if (userId != default && side == CCMStatsSide.None)
+            side = GetPlayerCurrentSide(userId);
+
         return userId != default && side != CCMStatsSide.None;
+    }
+
+    private void TryStampProjectileSource(EntityUid projectile, EntityUid shooter)
+    {
+        if (!TryResolvePlayerAndSide(shooter, out var userId, out var side) ||
+            side == CCMStatsSide.None)
+        {
+            return;
+        }
+
+        var source = EnsureComp<CCMStatsProjectileSourceComponent>(projectile);
+        source.UserId = userId;
+        source.Side = side;
     }
 
     private static float GetPositiveDamage(DamageChangedEvent args)
@@ -1105,10 +1359,227 @@ public sealed class CCMStatsSystem : EntitySystem
             return 0;
 
         var total = args.DamageDelta.GetTotal().Float();
-        if (total >= 0)
-            return 0;
+        return total < 0 ? (int) MathF.Round(-total) : 0;
+    }
 
-        return (int) MathF.Round(-total);
+    private void LogUnattributedCombatDamage(EntityUid target, DamageChangedEvent args, CCMStatsSide targetSide)
+    {
+        var damage = GetPositiveDamage(args);
+        if (damage <= 0)
+            return;
+
+        switch (targetSide)
+        {
+            case CCMStatsSide.Marines:
+                _unattributedDamageToMarines += damage;
+                _unattributedHitsToMarines += 1;
+                break;
+            case CCMStatsSide.Xenos:
+                _unattributedDamageToXenos += damage;
+                _unattributedHitsToXenos += 1;
+                break;
+        }
+
+        EnqueueDamageDiagnostic(
+            damage,
+            targetSide,
+            "unattributed-source",
+            ToPrettyString(target),
+            ToPrettyString(args.Origin),
+            ToPrettyString(args.Tool));
+
+        Log.Debug(
+            $"CCM stats could not attribute {damage:0.##} damage to {targetSide} target {ToPrettyString(target)}. " +
+            $"origin={ToPrettyString(args.Origin)} tool={ToPrettyString(args.Tool)}");
+    }
+
+    private void HandleUnknownTargetDamage(EntityUid target, DamageChangedEvent args, float damage)
+    {
+        if (!TryGetSourceStats(args.Origin, args.Tool, out var sourceSide, out var stats) ||
+            sourceSide == CCMStatsSide.None ||
+            args.Origin == target)
+        {
+            EnqueueDamageDiagnostic(
+                damage,
+                CCMStatsSide.None,
+                "unknown-target-unresolved-source",
+                ToPrettyString(target),
+                ToPrettyString(args.Origin),
+                ToPrettyString(args.Tool));
+            return;
+        }
+
+        // If the victim chain no longer resolves to a marine/xeno body, still preserve
+        // the dealt-damage counter so round-end doesn't silently drop the hit.
+        if (sourceSide == CCMStatsSide.Marines)
+        {
+            stats.MarineDamage += damage;
+            _fallbackMarineDamage += damage;
+            _fallbackMarineHits += 1;
+        }
+        else if (sourceSide == CCMStatsSide.Xenos)
+        {
+            stats.XenoDamage += damage;
+            _fallbackXenoDamage += damage;
+            _fallbackXenoHits += 1;
+        }
+
+        EnqueueDamageDiagnostic(
+            damage,
+            sourceSide,
+            "fallback-unknown-target",
+            ToPrettyString(target),
+            ToPrettyString(args.Origin),
+            ToPrettyString(args.Tool));
+
+        Log.Debug(
+            $"CCM stats fallback-attributed {damage:0.##} damage for {sourceSide} source against unresolved target {ToPrettyString(target)}. " +
+            $"origin={ToPrettyString(args.Origin)} tool={ToPrettyString(args.Tool)}");
+    }
+
+    private void EnqueueDamageDiagnostic(
+        float damage,
+        CCMStatsSide side,
+        string reason,
+        string? target,
+        string? origin,
+        string? tool)
+    {
+        if (_recentDamageDiagnostics.Count >= DamageDiagnosticsHistoryLimit)
+            _recentDamageDiagnostics.Dequeue();
+
+        _recentDamageDiagnostics.Enqueue(
+            new DamageDiagnosticEntry(
+                _timing.CurTime,
+                damage,
+                side,
+                reason,
+                target ?? "<null>",
+                origin ?? "<null>",
+                tool ?? "<null>"));
+    }
+
+    public CCMRoundDamageDebugSnapshot GetDamageDebugSnapshot(int maxPlayers = 25)
+    {
+        if (maxPlayers < 1)
+            maxPlayers = 1;
+
+        var players = _roundStats.Values
+            .Where(stats => stats.MarineDamage > 0 || stats.XenoDamage > 0 || stats.MarineKills > 0 || stats.XenoKills > 0)
+            .OrderByDescending(stats => stats.MarineDamage + stats.XenoDamage)
+            .ThenBy(stats => stats.LastKnownCkey ?? stats.Player.ToString())
+            .Take(maxPlayers)
+            .Select(stats => new CCMRoundDamagePlayerDebugSnapshot(
+                stats.Player.ToString(),
+                stats.LastKnownCkey ?? stats.Player.ToString(),
+                stats.LastKnownName ?? stats.LastKnownCkey ?? stats.Player.ToString(),
+                stats.LastKnownSide,
+                (int) MathF.Round(stats.MarineDamage),
+                stats.MarineHealingDone,
+                (int) MathF.Round(stats.XenoDamage),
+                stats.XenoHealingDone,
+                stats.MarineKills,
+                stats.XenoKills,
+                stats.MarineParticipated,
+                stats.XenoParticipated))
+            .ToArray();
+
+        return new CCMRoundDamageDebugSnapshot(
+            players,
+            _recentDamageDiagnostics.ToArray(),
+            (int) MathF.Round(_roundStats.Values.Sum(stats => stats.MarineDamage)),
+            _roundStats.Values.Sum(stats => stats.MarineHealingDone),
+            (int) MathF.Round(_roundStats.Values.Sum(stats => stats.XenoDamage)),
+            _roundStats.Values.Sum(stats => stats.XenoHealingDone),
+            (int) MathF.Round(_unattributedDamageToMarines),
+            (int) MathF.Round(_unattributedDamageToXenos),
+            _unattributedHitsToMarines,
+            _unattributedHitsToXenos,
+            (int) MathF.Round(_fallbackMarineDamage),
+            (int) MathF.Round(_fallbackXenoDamage),
+            _fallbackMarineHits,
+            _fallbackXenoHits);
+    }
+
+    private void AwardMarineStructures(RoundPlayerStats stats, int count)
+    {
+        if (count <= 0)
+            return;
+
+        stats.MarineStructuresBuilt += count;
+        stats.MarineImpact += StructureImpactPoints * count;
+    }
+
+    private void AwardXenoStructures(RoundPlayerStats stats, int count)
+    {
+        if (count <= 0)
+            return;
+
+        stats.XenoStructuresBuilt += count;
+        stats.XenoImpact += StructureImpactPoints * count;
+    }
+
+    private CCMPlayerStatsSnapshot MergeLiveSnapshot(CCMPlayerStatsSnapshot snapshot, RoundPlayerStats live)
+    {
+        var includeActiveRound = !_roundFinalized && live.HadAnyParticipation;
+        var activeSeconds = live.ActiveSide != CCMStatsSide.None && live.ActiveSince != null
+            ? Math.Max(0, (_timing.CurTime - live.ActiveSince.Value).TotalSeconds)
+            : 0;
+        var roundSeconds = (int) Math.Round(live.RoundSecondsPlayed + activeSeconds);
+
+        var marineDamage = Math.Max(0, (int) MathF.Round(live.MarineDamage) - live.PersistedMarineDamage);
+        var xenoDamage = Math.Max(0, (int) MathF.Round(live.XenoDamage) - live.PersistedXenoDamage);
+        var marineKills = Math.Max(0, live.MarineKills - live.PersistedMarineKills);
+        var xenoKills = Math.Max(0, live.XenoKills - live.PersistedXenoKills);
+        var marineRevives = Math.Max(0, live.MarineRevives - live.PersistedMarineRevives);
+        var marineHealingDone = Math.Max(0, live.MarineHealingDone - live.PersistedMarineHealingDone);
+        var xenoHealingDone = Math.Max(0, live.XenoHealingDone - live.PersistedXenoHealingDone);
+        var marineStructuresBuilt = Math.Max(0, live.MarineStructuresBuilt - live.PersistedMarineStructuresBuilt);
+        var xenoStructuresBuilt = Math.Max(0, live.XenoStructuresBuilt - live.PersistedXenoStructuresBuilt);
+        var marineDeaths = Math.Max(0, live.MarineDeaths - live.PersistedMarineDeaths);
+        var xenoDeaths = Math.Max(0, live.XenoDeaths - live.PersistedXenoDeaths);
+        var marineShotsFired = Math.Max(0, live.MarineShotsFired - live.PersistedMarineShotsFired);
+        var xenoShotsFired = Math.Max(0, live.XenoShotsFired - live.PersistedXenoShotsFired);
+        var marineImpactPoints = Math.Max(0, (int) MathF.Round(live.MarineImpact) - live.PersistedMarineImpactPoints);
+        var xenoImpactPoints = Math.Max(0, (int) MathF.Round(live.XenoImpact) - live.PersistedXenoImpactPoints);
+
+        return new CCMPlayerStatsSnapshot(
+            snapshot.RoundsPlayed + (includeActiveRound ? 1 : 0),
+            snapshot.RoundsWon,
+            snapshot.RoundsLost,
+            snapshot.RoundSecondsPlayed + roundSeconds,
+            snapshot.TotalDamageDealt + marineDamage + xenoDamage,
+            snapshot.TotalKills + marineKills + xenoKills,
+            snapshot.VictoryPoints,
+            snapshot.ImpactPoints + marineImpactPoints + xenoImpactPoints,
+            snapshot.Revives + marineRevives,
+            snapshot.HealingDone + marineHealingDone + xenoHealingDone,
+            snapshot.StructuresBuilt + marineStructuresBuilt + xenoStructuresBuilt,
+            snapshot.Deaths + marineDeaths + xenoDeaths,
+            snapshot.ShotsFired + marineShotsFired + xenoShotsFired,
+            snapshot.MarineRoundsPlayed + (includeActiveRound && live.MarineParticipated ? 1 : 0),
+            snapshot.MarineRoundsWon,
+            snapshot.MarineRoundsLost,
+            snapshot.MarineDamageDealt + marineDamage,
+            snapshot.MarineKills + marineKills,
+            snapshot.MarineVictoryPoints,
+            snapshot.MarineImpactPoints + marineImpactPoints,
+            snapshot.MarineRevives + marineRevives,
+            snapshot.MarineHealingDone + marineHealingDone,
+            snapshot.MarineStructuresBuilt + marineStructuresBuilt,
+            snapshot.MarineDeaths + marineDeaths,
+            snapshot.MarineShotsFired + marineShotsFired,
+            snapshot.XenoRoundsPlayed + (includeActiveRound && live.XenoParticipated ? 1 : 0),
+            snapshot.XenoRoundsWon,
+            snapshot.XenoRoundsLost,
+            snapshot.XenoDamageDealt + xenoDamage,
+            snapshot.XenoKills + xenoKills,
+            snapshot.XenoVictoryPoints,
+            snapshot.XenoImpactPoints + xenoImpactPoints,
+            snapshot.XenoHealingDone + xenoHealingDone,
+            snapshot.XenoStructuresBuilt + xenoStructuresBuilt,
+            snapshot.XenoDeaths + xenoDeaths,
+            snapshot.XenoShotsFired + xenoShotsFired);
     }
 
     private RoundPlayerStats GetOrCreateRoundStats(NetUserId player)
@@ -1124,6 +1595,9 @@ public sealed class CCMStatsSystem : EntitySystem
     private sealed class RoundPlayerStats
     {
         public NetUserId Player { get; }
+        public string? LastKnownName;
+        public string? LastKnownCkey;
+        public CCMStatsSide LastKnownSide = CCMStatsSide.None;
 
         public CCMStatsSide ActiveSide = CCMStatsSide.None;
         public TimeSpan? ActiveSince;
@@ -1199,6 +1673,52 @@ public sealed class CCMStatsSystem : EntitySystem
             Player = player;
         }
     }
+
+    public readonly record struct CCMRoundDamagePlayerDebugSnapshot(
+        string UserId,
+        string Ckey,
+        string Name,
+        CCMStatsSide LastKnownSide,
+        int MarineDamage,
+        int MarineHealingDone,
+        int XenoDamage,
+        int XenoHealingDone,
+        int MarineKills,
+        int XenoKills,
+        bool MarineParticipated,
+        bool XenoParticipated);
+
+    public readonly record struct DamageDiagnosticEntry(
+        TimeSpan Time,
+        float Damage,
+        CCMStatsSide Side,
+        string Reason,
+        string Target,
+        string Origin,
+        string Tool);
+
+    public readonly record struct CCMRoundDamageDebugSnapshot(
+        CCMRoundDamagePlayerDebugSnapshot[] Players,
+        DamageDiagnosticEntry[] RecentDiagnostics,
+        int TotalMarineDamage,
+        int TotalMarineHealing,
+        int TotalXenoDamage,
+        int TotalXenoHealing,
+        int UnattributedDamageToMarines,
+        int UnattributedDamageToXenos,
+        int UnattributedHitsToMarines,
+        int UnattributedHitsToXenos,
+        int FallbackMarineDamage,
+        int FallbackXenoDamage,
+        int FallbackMarineHits,
+        int FallbackXenoHits);
+
+    public readonly record struct CCMCombatDamageRecordedEvent(
+        NetUserId UserId,
+        CCMStatsSide SourceSide,
+        CCMStatsSide TargetSide,
+        float Damage,
+        bool FriendlyFire);
 }
 
 public readonly record struct CCMLiveAchievementMetrics(

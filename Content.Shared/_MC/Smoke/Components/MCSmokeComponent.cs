@@ -1,16 +1,14 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._MC.Smoke.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class MCSmokeComponent : Component
 {
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan EffectDelay = TimeSpan.FromSeconds(1);
 
-    [AutoNetworkedField]
     public TimeSpan EffectNext;
 
-    [AutoNetworkedField]
-    public List<EntityUid> AffectedEntities = new();
+    public HashSet<EntityUid> AffectedEntities = [];
 }

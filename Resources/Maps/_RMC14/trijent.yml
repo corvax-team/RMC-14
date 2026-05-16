@@ -68113,12 +68113,12 @@ entities:
     - type: Transform
       pos: 212.58446,-15.415833
       parent: 1
-  - uid: 174
+  - uid: 38545
     components:
     - type: Transform
       pos: 167.96051,-50.57716
       parent: 1
-  - uid: 175
+  - uid: 38546
     components:
     - type: Transform
       pos: 168.70125,-49.748455
@@ -68128,13 +68128,13 @@ entities:
     - type: Transform
       pos: 168.43736,-49.96142
       parent: 1
-  - uid: 177
+  - uid: 38547
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 168.20589,-50.118828
       parent: 1
-  - uid: 178
+  - uid: 38548
     components:
     - type: Transform
       pos: 168.66422,-50.044754
@@ -79138,7 +79138,7 @@ entities:
       parent: 1
 - proto: CMGauze10
   entities:
-  - uid: 1583
+  - uid: 38549
     components:
     - type: Transform
       pos: 83.5,-102.5
@@ -80435,12 +80435,12 @@ entities:
     - type: Transform
       pos: 173.83597,-49.05636
       parent: 1
-  - uid: 1780
+  - uid: 38550
     components:
     - type: Transform
       pos: 85.5,-74.5
       parent: 1
-  - uid: 1781
+  - uid: 38551
     components:
     - type: Transform
       pos: 173.46097,-48.071983
@@ -81220,7 +81220,7 @@ entities:
       parent: 1
 - proto: CMPlatform
   entities:
-  - uid: 1864
+  - uid: 38552
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -86484,7 +86484,7 @@ entities:
     - type: Transform
       pos: 123.5,-90.5
       parent: 1
-  - uid: 3209
+  - uid: 38553
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -88181,17 +88181,17 @@ entities:
     - type: Transform
       pos: 46.5,-65.5
       parent: 1
-  - uid: 3530
+  - uid: 38557
     components:
     - type: Transform
       pos: 19.5,-63.5
       parent: 1
-  - uid: 3531
+  - uid: 38558
     components:
     - type: Transform
       pos: 27.5,-87.5
       parent: 1
-  - uid: 3532
+  - uid: 38559
     components:
     - type: Transform
       pos: 28.5,-87.5
@@ -89891,7 +89891,7 @@ entities:
       parent: 1
 - proto: CMSyringe
   entities:
-  - uid: 3250
+  - uid: 38554
     components:
     - type: Transform
       pos: 161.47777,-152.2332
@@ -90304,13 +90304,13 @@ entities:
       rot: 3.141592653589793 rad
       pos: 66.5,-107.5
       parent: 1
-  - uid: 3323
+  - uid: 38555
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 83.5,-102.5
       parent: 1
-  - uid: 3324
+  - uid: 38556
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -92491,7 +92491,7 @@ entities:
       parent: 1
 - proto: CMTableReinforced
   entities:
-  - uid: 3660
+  - uid: 38560
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -92737,19 +92737,19 @@ entities:
       rot: 3.141592653589793 rad
       pos: 75.5,-85.5
       parent: 1
-  - uid: 3704
+  - uid: 38561
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 97.5,-83.5
       parent: 1
-  - uid: 3705
+  - uid: 38562
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 83.5,-99.5
       parent: 1
-  - uid: 3706
+  - uid: 38563
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -95800,7 +95800,7 @@ entities:
       parent: 1
 - proto: CMWallMetal
   entities:
-  - uid: 4187
+  - uid: 38564
     components:
     - type: Transform
       pos: 42.5,-7.5
@@ -118033,13 +118033,13 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 164.5,-126.5
       parent: 1
-  - uid: 8930
+  - uid: 38565
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 165.5,-126.5
       parent: 1
-  - uid: 8931
+  - uid: 38566
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -159941,42 +159941,42 @@ entities:
       parent: 1
     - type: AtmosPipeColor
       color: '#00FF00FF'
-  - uid: 15730
+  - uid: 38567
     components:
     - type: Transform
       pos: 226.5,-169.5
       parent: 1
     - type: AtmosPipeColor
       color: '#00FF00FF'
-  - uid: 15731
+  - uid: 38568
     components:
     - type: Transform
       pos: 226.5,-170.5
       parent: 1
     - type: AtmosPipeColor
       color: '#00FF00FF'
-  - uid: 15732
+  - uid: 38569
     components:
     - type: Transform
       pos: 226.5,-171.5
       parent: 1
     - type: AtmosPipeColor
       color: '#00FF00FF'
-  - uid: 15733
+  - uid: 38570
     components:
     - type: Transform
       pos: 226.5,-172.5
       parent: 1
     - type: AtmosPipeColor
       color: '#00FF00FF'
-  - uid: 15734
+  - uid: 38571
     components:
     - type: Transform
       pos: 226.5,-173.5
       parent: 1
     - type: AtmosPipeColor
       color: '#00FF00FF'
-  - uid: 15735
+  - uid: 38572
     components:
     - type: Transform
       pos: 226.5,-174.5
@@ -170369,7 +170369,7 @@ entities:
       parent: 1
 - proto: RMCItemPoolBuckshot
   entities:
-  - uid: 15739
+  - uid: 38573
     components:
     - type: Transform
       pos: 105.5,-177.5
@@ -170519,12 +170519,12 @@ entities:
     - type: Transform
       pos: 89.5,-84.5
       parent: 1
-  - uid: 15773
+  - uid: 38574
     components:
     - type: Transform
       pos: 83.5,-102.5
       parent: 1
-  - uid: 15774
+  - uid: 38575
     components:
     - type: Transform
       pos: 84.5,-102.5
@@ -171281,7 +171281,7 @@ entities:
       parent: 1
 - proto: RMCLightFixtureOffset
   entities:
-  - uid: 15862
+  - uid: 38576
     components:
     - type: Transform
       pos: 149.5,-145.5
@@ -173131,17 +173131,17 @@ entities:
     - type: Transform
       pos: 124.5,-82.5
       parent: 1
-  - uid: 16185
+  - uid: 38577
     components:
     - type: Transform
       pos: 120.5,-82.5
       parent: 1
-  - uid: 16186
+  - uid: 38578
     components:
     - type: Transform
       pos: 118.5,-82.5
       parent: 1
-  - uid: 16187
+  - uid: 38579
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -173153,19 +173153,19 @@ entities:
       rot: 3.141592653589793 rad
       pos: 120.5,-70.5
       parent: 1
-  - uid: 16189
+  - uid: 38580
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 124.5,-70.5
       parent: 1
-  - uid: 16190
+  - uid: 38581
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 126.5,-70.5
       parent: 1
-  - uid: 16191
+  - uid: 38582
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
@@ -181735,12 +181735,12 @@ entities:
       parent: 1
 - proto: RMCSpawnerCorpseDeputy
   entities:
-  - uid: 17096
+  - uid: 38583
     components:
     - type: Transform
       pos: 87.5,-74.5
       parent: 1
-  - uid: 17097
+  - uid: 38584
     components:
     - type: Transform
       pos: 85.5,-74.5
@@ -181985,12 +181985,12 @@ entities:
       rot: 3.141592653589793 rad
       pos: 96.5,-84.5
       parent: 1
-  - uid: 17132
+  - uid: 38585
     components:
     - type: Transform
       pos: 83.5,-102.5
       parent: 1
-  - uid: 17133
+  - uid: 38586
     components:
     - type: Transform
       pos: 64.5,-15.5
@@ -182143,12 +182143,12 @@ entities:
     - type: Transform
       pos: 107.5,-158.5
       parent: 1
-  - uid: 17168
+  - uid: 38587
     components:
     - type: Transform
       pos: 184.5,-121.5
       parent: 1
-  - uid: 17169
+  - uid: 38588
     components:
     - type: Transform
       pos: 188.5,-121.5
@@ -183394,7 +183394,7 @@ entities:
       parent: 1
 - proto: RMCSpawnerRandomTools
   entities:
-  - uid: 17382
+  - uid: 38589
     components:
     - type: Transform
       pos: 133.5,-71.5
@@ -185240,7 +185240,7 @@ entities:
     - type: InsideEntityStorage
 - proto: RMCTankReagentFuel
   entities:
-  - uid: 17674
+  - uid: 38590
     components:
     - type: Transform
       pos: 229.5,-206.5
@@ -185305,17 +185305,17 @@ entities:
     - type: Transform
       pos: 93.5,-75.5
       parent: 1
-  - uid: 17688
+  - uid: 38591
     components:
     - type: Transform
       pos: 85.5,-75.5
       parent: 1
-  - uid: 17689
+  - uid: 38592
     components:
     - type: Transform
       pos: 84.5,-84.5
       parent: 1
-  - uid: 17690
+  - uid: 38593
     components:
     - type: Transform
       pos: 84.5,-85.5
@@ -189009,7 +189009,7 @@ entities:
       parent: 1
 - proto: RMCWallBunker
   entities:
-  - uid: 17797
+  - uid: 38594
     components:
     - type: Transform
       rot: 3.141592653589793 rad
@@ -194860,7 +194860,7 @@ entities:
       parent: 1
 - proto: RMCWallHangar
   entities:
-  - uid: 18910
+  - uid: 38595
     components:
     - type: Transform
       pos: 107.5,-5.5
@@ -279080,12 +279080,12 @@ entities:
           ent: null
 - proto: WeaponShotgunM890
   entities:
-  - uid: 35381
+  - uid: 38596
     components:
     - type: Transform
       pos: 202.5,-87.5
       parent: 1
-  - uid: 35382
+  - uid: 38597
     components:
     - type: Transform
       pos: 85.5,-73.5

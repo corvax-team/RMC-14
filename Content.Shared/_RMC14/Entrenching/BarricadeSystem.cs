@@ -273,6 +273,7 @@ public sealed class BarricadeSystem : EntitySystem
         _transform.SetLocalRotation(built, args.Direction.ToAngle());
 
         args.Handled = true;
+        RaiseLocalEvent(new RMCStructureBuiltEvent(args.User));
     }
 
     private void OnAnchorAttempt(Entity<BarricadeComponent> ent, ref AnchorAttemptEvent args)

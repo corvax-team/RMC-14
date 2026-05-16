@@ -254,6 +254,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         if (args.Amount > 1)
         {
             SpawnMultiple(entry.Prototype, args.Amount, coordinates);
+            RaiseLocalEvent(new RMCStructureBuiltEvent(args.User, args.Amount));
         }
         else
         {
@@ -266,6 +267,8 @@ public sealed class RMCConstructionSystem : EntitySystem
             // Removes collision with the construction until you leave
             if (!HasComp<BarricadeComponent>(built))
                 MakeConstructionImmuneToCollision(built, args.User);
+
+            RaiseLocalEvent(new RMCStructureBuiltEvent(args.User));
         }
     }
 

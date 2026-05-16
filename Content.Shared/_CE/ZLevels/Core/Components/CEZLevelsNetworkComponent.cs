@@ -29,9 +29,9 @@ public sealed partial class CEZLevelsNetworkComponent : Component
     [ViewVariables, AutoNetworkedField]
     public int SortedMax = 0;
 
-    /// <summary>
-    /// Cache for quick depth lookup without linear search
-    /// </summary>
-    [ViewVariables]
-    public readonly Dictionary<EntityUid, int> DepthCache = new();
+    /// <remarks>
+    /// Reverse lookup for quick map -> depth resolution without scanning <see cref="ZLevels"/>.
+    /// </remarks>
+    [ViewVariables, AutoNetworkedField]
+    public readonly Dictionary<EntityUid, int> ZLevelByEntity = new();
 }

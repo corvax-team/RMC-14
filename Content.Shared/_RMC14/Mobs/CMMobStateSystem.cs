@@ -69,15 +69,12 @@ public sealed class CMMobStateSystem : EntitySystem
         if (!_mobState.IsIncapacitated(ent))
             return;
 
-        if (!TryGetEntity(args.Entity, out var entity) ||
-            entity != args.Actor)
-        {
+        if (args.Actor == default || args.Actor != ent.Owner)
             return;
-        }
 
         _ui.CloseUi(ent.Owner, CMMobStateActionsUI.Key);
 
-        if (_net.IsServer && TryComp(args.Actor, out ActorComponent? actor))
+        if (_net.IsServer && TryComp(ent, out ActorComponent? actor))
             _host.ExecuteCommand(actor.PlayerSession, "ghost");
     }
 }

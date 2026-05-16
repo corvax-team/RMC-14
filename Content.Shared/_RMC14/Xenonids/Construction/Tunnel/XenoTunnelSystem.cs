@@ -354,6 +354,7 @@ public sealed class XenoTunnelSystem : EntitySystem
 
         NextTempTunnelId++;
         _ui.OpenUi(newTunnelEnt.Value, NameTunnelUI.Key, xenoBuilder.Owner);
+        RaiseLocalEvent(new XenoTunnelPlacedEvent(xenoBuilder.Owner, newTunnelEnt.Value));
 
         args.Handled = true;
     }

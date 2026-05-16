@@ -1,6 +1,7 @@
 using Content.Shared.FixedPoint;
 using JetBrains.Annotations;
 using Robust.Shared.GameStates;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -23,6 +24,9 @@ public sealed partial class XenoHealStack
 {
     [DataField]
     public FixedPoint2 HealAmount;
+
+    [DataField]
+    public NetEntity? Source;
 
     [DataField]
     public int Charges;

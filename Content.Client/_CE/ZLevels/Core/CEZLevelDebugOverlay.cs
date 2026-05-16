@@ -30,9 +30,12 @@ public sealed class CEZLevelDebugOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        var query = _entityManager.EntityQueryEnumerator<CEZPhysicsComponent, CEActiveZPhysicsComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var zPhys, out _, out var xform))
+        foreach (var uid in _zLevels.ActiveBodies)
         {
+            if (!_entityManager.TryGetComponent<CEZPhysicsComponent>(uid, out var zPhys) ||
+                !_entityManager.TryGetComponent<TransformComponent>(uid, out var xform))
+                continue;
+
             if (xform.MapUid != xform.ParentUid)
                 continue;
 
@@ -44,7 +47,7 @@ public sealed class CEZLevelDebugOverlay : Overlay
             var velocity = MathF.Round(zPhys.Velocity, 2);
             var sticky = zPhys.CachedStickyGround;
 
-            var depthText = $"ZLocalHeight: {localPos}\nDistance to ground: {groundDis}\nVelocity: {velocity}\nSticky: {sticky}";
+            var depthText = $"Z: {localPos}\nG: {groundDis}\nV: {velocity}\nS: {sticky}";
 
             args.ScreenHandle.DrawString(_font, screenPos, depthText, Color.White);
         }
@@ -54,7 +57,7 @@ public sealed class CEZLevelDebugOverlay : Overlay
 public sealed class CEShowZLevelDebugCommand : LocalizedCommands
 {
     [Dependency] private readonly IOverlayManager _overlayManager = default!;
-    public override string Command => "showzleveldebug";
+    public override string Command => "mc_show_zlevel_debug";
 
     public override void Execute(IConsoleShell shell, string argStr, string[] args)
     {

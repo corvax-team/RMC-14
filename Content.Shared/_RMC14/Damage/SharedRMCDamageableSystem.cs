@@ -274,6 +274,9 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
     private void OnDamageOnPulledMobState(Entity<DamageOnPulledWhileCritComponent> ent, ref MobStateChangedEvent args)
     {
+        if (_net.IsClient)
+            return;
+
         if (args.NewMobState != MobState.Critical)
             return;
 
@@ -315,6 +318,9 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
     private void OnActiveDamageOnPulledMobState(Entity<ActiveDamageOnPulledWhileCritComponent> ent, ref MobStateChangedEvent args)
     {
+        if (_net.IsClient)
+            return;
+
         if (args.NewMobState != MobState.Critical)
             RemCompDeferred<ActiveDamageOnPulledWhileCritComponent>(ent);
     }
