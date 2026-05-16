@@ -146,8 +146,8 @@ public sealed class RadioSystem : EntitySystem
         var chatMsg = new MsgChatMessage { Message = chat };
         var ev = new RadioReceiveEvent(message, messageSource, channel, radioSource, chatMsg);
         var verb = Loc.GetString(_random.Pick(speech.SpeechVerbStrings));
-        var chatMsg = CreateRadioChatMessage(messageSource, message, channel, radioSource, speech, radioFontSize, verb, name, content);
-        var chat = chatMsg.Message;
+        // var chatMsg = CreateRadioChatMessage(messageSource, message, channel, radioSource, speech, radioFontSize, verb, name, content);
+        // var chat = chatMsg.Message;
 
         var sendAttemptEv = new RadioSendAttemptEvent(channel, radioSource);
         RaiseLocalEvent(ref sendAttemptEv);
@@ -185,7 +185,7 @@ public sealed class RadioSystem : EntitySystem
 
             // send the message
             var receiverChatMsg = GetRadioChatMessageForReceiver(receiver, messageSource, message, channel, radioSource, speech, radioFontSize, verb, name, content, chatMsg);
-            var ev = new RadioReceiveEvent(message, messageSource, channel, radioSource, receiverChatMsg);
+            // var ev = new RadioReceiveEvent(message, messageSource, channel, radioSource, receiverChatMsg);
             RaiseLocalEvent(receiver, ref ev);
         }
 
@@ -312,14 +312,14 @@ public sealed class RadioSystem : EntitySystem
             wrappedMessage,
             GetNetEntity(messageSource),
             _chatManager.EnsurePlayer(CompOrNull<ActorComponent>(messageSource)?.PlayerSession.UserId)?.Key,
-            repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(radioSource),
-            display: new ChatDisplayMetadata(
-                ChatDisplayKind.Radio,
-                senderName: name,
-                verb: verb,
-                channelLabel: channel.LocalizedName,
-                quoteBody: true,
-                accentColor: channel.Color));
+            repeatCheckSender: !HasComp<ChatRepeatIgnoreSenderComponent>(radioSource));
+            // display: new ChatDisplayMetadata(
+            //     ChatDisplayKind.Radio,
+            //     senderName: name,
+            //     verb: verb,
+            //     channelLabel: channel.LocalizedName,
+            //     quoteBody: true,
+            //     accentColor: channel.Color));
 
         return new MsgChatMessage { Message = chat };
     }

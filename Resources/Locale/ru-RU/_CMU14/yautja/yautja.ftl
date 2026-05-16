@@ -303,3 +303,137 @@ cmu-yautja-abomination-action-frenzy = Яростная Ярость
 cmu-yautja-abomination-action-frenzy-desc = Избивайте цель или атакуйте группу, если режим массовый.
 cmu-yautja-abomination-action-toggle-frenzy = Переключить режим ярости
 cmu-yautja-abomination-action-toggle-frenzy-desc = Переключить режим между одиночными и массовыми ударами.
+
+cmu-yautja-translator-prompt = Переводчик браслета ожидает ваше сообщение.
+cmu-yautja-translator-window-title = Переводчик
+cmu-yautja-translator-placeholder = Введите переведённую передачу...
+cmu-yautja-translator-send = Передать
+cmu-yautja-translator-send-detail = Издать через ближайшие динамики переводчика.
+cmu-yautja-translator-power = Энергия {$charge} / {$max} - Стоимость {$cost}
+cmu-yautja-translator-limit = {$count} / {$max}
+cmu-yautja-translator-speaker = переводчик
+cmu-yautja-translator-verb = передаёт
+cmu-yautja-translator-popup = Переводчик передаёт: "{$message}"
+cmu-yautja-translator-chat = [color=#ff4d4d]Переводчик передаёт:[/color] "{$message}"
+
+cmu-yautja-bracer-menu-command-unavailable = Эта функция браслета недоступна.
+cmu-yautja-bracer-menu-command-cooldown = Эта функция браслета всё ещё перезаряжается.
+
+cmu-yautja-action-bracer-menu = Меню браслета
+cmu-yautja-action-bracer-menu-desc = Открыть интерфейс команд охотничьего браслета.
+
+cmu-yautja-action-translator = Переводчик
+cmu-yautja-action-translator-desc = Передать переведённое сообщение браслета ближайшим существам.
+
+cmu-yautja-action-toggle-thrall-bracer-lock = Переключить блокировку браслета раба
+cmu-yautja-action-toggle-thrall-bracer-lock-desc = Заблокировать или разблокировать связанный браслет раба.
+
+cmu-yautja-mark-window-subtitle = Ближайшая добыча и обозначения чести в радиусе браслета.
+cmu-yautja-mark-section-command = Команды меток
+cmu-yautja-mark-section-targets = Доступные цели
+cmu-yautja-mark-refresh-detail = Сканировать ближайшие цели.
+cmu-yautja-mark-apply = Применить
+cmu-yautja-mark-apply-detail = Пометить выбранную цель.
+cmu-yautja-mark-remove = Удалить
+cmu-yautja-mark-remove-detail = Удалить выбранную метку.
+cmu-yautja-mark-no-targets = Нет подходящих целей в радиусе браслета.
+cmu-yautja-mark-target-summary = Целей в радиусе: {$count}.
+cmu-yautja-mark-target-detail = {$type} / {$marks}
+cmu-yautja-mark-selection = Выбрано: {$target}
+cmu-yautja-mark-selection-none = Цель не выбрана.
+
+cmu-yautja-thrall-bracer-locked-now = Вы блокируете браслет раба.
+cmu-yautja-thrall-bracer-unlocked-now = Вы разблокируете браслет раба.
+
+cmu-yautja-bracer-menu-title = Охотничий браслет
+cmu-yautja-bracer-menu-header = // ОХОТНИЧИЙ БРАСЛЕТ //
+cmu-yautja-bracer-menu-subheader = Системы охотника, полевой фабрикатор и телеметрия утраченных технологий.
+
+cmu-yautja-bracer-menu-section-status = Состояние ядра
+cmu-yautja-bracer-menu-section-functions = Функции браслета
+cmu-yautja-bracer-menu-section-fabricator = Полевой фабрикатор
+cmu-yautja-bracer-menu-hunt-controls = Управление охотой
+
+cmu-yautja-bracer-menu-power = ЭНЕРГИЯ
+cmu-yautja-bracer-menu-lock = БЛОКИРОВКА
+cmu-yautja-bracer-menu-id = ID
+cmu-yautja-bracer-menu-destruct = САМОУНИЧТОЖЕНИЕ
+cmu-yautja-bracer-menu-thrall = РАБ
+cmu-yautja-bracer-menu-thrall-lock = БЛОКИРОВКА РАБА
+
+cmu-yautja-bracer-menu-power-value = {$charge} / {$max}
+
+cmu-yautja-bracer-menu-state-locked = ЗАБЛОКИРОВАН
+cmu-yautja-bracer-menu-state-open = ОТКРЫТ
+cmu-yautja-bracer-menu-state-deployed = РАЗВЁРНУТ
+cmu-yautja-bracer-menu-state-stowed = СЛОЖЕН
+cmu-yautja-bracer-menu-state-armed = АКТИВИРОВАН
+cmu-yautja-bracer-menu-state-standby = ОЖИДАНИЕ
+cmu-yautja-bracer-menu-state-no-signal = НЕТ СИГНАЛА
+cmu-yautja-bracer-menu-state-linked = СВЯЗАН
+cmu-yautja-bracer-menu-state-unlinked = НЕ СВЯЗАН
+cmu-yautja-bracer-menu-state-ready = ГОТОВ
+
+cmu-yautja-bracer-menu-thrall-none = НЕТ
+cmu-yautja-bracer-menu-thrall-linked = {$name} / СВЯЗАН
+cmu-yautja-bracer-menu-thrall-unlinked = {$name} / НЕ СВЯЗАН
+
+cmu-yautja-bracer-menu-marks = Метки
+cmu-yautja-bracer-menu-marks-detail = Установить охотничьи метки.
+
+cmu-yautja-bracer-menu-translator = Переводчик
+cmu-yautja-bracer-menu-translator-detail = Открыть ввод переведённой передачи.
+
+cmu-yautja-bracer-menu-refresh = Обновить
+cmu-yautja-bracer-menu-refresh-detail = Принудительно обновить сканирование.
+
+cmu-yautja-bracer-menu-toggle-lock = Заблокировать
+cmu-yautja-bracer-menu-unlock = Разблокировать
+
+cmu-yautja-bracer-menu-toggle-id = ID-чип
+
+cmu-yautja-bracer-menu-toggle-destruct = Активировать самоуничтожение
+cmu-yautja-bracer-menu-cancel-destruct = Отменить самоуничтожение
+
+cmu-yautja-bracer-menu-crystal = Кристалл
+cmu-yautja-bracer-menu-crystal-detail = Вырастить инопланетный стабилизирующий кристалл.
+
+cmu-yautja-bracer-menu-human-crystal = Человеческий кристалл
+cmu-yautja-bracer-menu-human-crystal-detail = Вырастить стабилизатор для человека и раба.
+
+cmu-yautja-bracer-menu-capsule = Капсула
+cmu-yautja-bracer-menu-capsule-detail = Напечатать экстренное лекарство.
+
+cmu-yautja-bracer-menu-link-thrall = Связать раба
+cmu-yautja-bracer-menu-link-thrall-detail = Привязать браслет.
+
+cmu-yautja-bracer-menu-thrall-message = Передача
+cmu-yautja-bracer-menu-thrall-message-detail = Отправить связь.
+
+cmu-yautja-bracer-menu-stun-thrall = Оглушить раба
+cmu-yautja-bracer-menu-stun-thrall-detail = Дистанционный разряд.
+
+cmu-yautja-bracer-menu-toggle-thrall-lock = Блокировка раба
+cmu-yautja-bracer-menu-toggle-thrall-lock-detail = Заблокировать браслет.
+
+cmu-yautja-bracer-menu-thrall-destruct = Самоуничтожение раба
+cmu-yautja-bracer-menu-thrall-destruct-detail = Связанный браслет.
+
+cmu-yautja-bracer-menu-cancel-thrall-destruct = Отменить самоуничтожение
+
+cmu-yautja-bracer-menu-tracker = УТРАЧЕННЫЕ ТЕХНОЛОГИИ
+cmu-yautja-bracer-menu-tracker-core = ЯДРО
+
+cmu-yautja-bracer-menu-tracker-summary = Отслеживается {$count} незаявленных сигналов. Автообновление.
+cmu-yautja-bracer-menu-tracker-summary-grouped = {$count} незаявленных сигналов в {$locations} локациях. Автообновление.
+
+cmu-yautja-bracer-menu-tracker-empty = На этой карте не обнаружено незаявленных технологий Яутжа.
+
+cmu-yautja-bracer-menu-tracker-entry = {$direction} {$distance}м {$bearing}° :: {$name}
+cmu-yautja-bracer-menu-tracker-entry-detail = {$distance}м / азимут {$bearing}°
+
+cmu-yautja-bracer-menu-tracker-group = {$count} сигналов
+cmu-yautja-bracer-menu-tracker-group-detail = {$distance}м / азимут {$bearing}° / {$signals}
+
+cmu-yautja-self-destruct-dead = Браслет не отвечает мёртвому охотнику.
+cmu-yautja-hivebroken-xeno-cant-evolve = Песнь улья больше не отвечает нам.

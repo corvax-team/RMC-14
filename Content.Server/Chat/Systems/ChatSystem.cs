@@ -699,10 +699,6 @@ public sealed partial class ChatSystem : SharedChatSystem
                     false,
                     session.Channel);
             }
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, message, GetYautjaVisibleWrappedMessage(wrappedMessage, source, session), source, false, session.Channel);
-            //If listener is too far, they only hear fragments of the message
-            else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange))
-                _chatManager.ChatMessageToOne(ChatChannel.Whisper, obfuscatedMessage, GetYautjaVisibleWrappedMessage(wrappedobfuscatedMessage, source, session), source, false, session.Channel);
             //If listener is too far and has no line of sight, they can't identify the whisperer's identity
             else
             {
