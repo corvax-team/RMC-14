@@ -162,11 +162,11 @@ namespace Content.Client.RoundEnd
                     roundEndSummaryContainer.AddChild(BuildMvpBlock(roundStats.XenoMvp));
             }
 
+            if (_sponsorCredits.Count > 0)
+                roundEndSummaryContainer.AddChild(BuildSponsorCreditsBlock(_sponsorCredits));
+
             roundEndSummaryContainerScrollbox.AddChild(roundEndSummaryContainer);
             roundEndSummaryTab.AddChild(roundEndSummaryContainerScrollbox);
-
-            if (_sponsorCredits.Count > 0)
-                roundEndSummaryTab.AddChild(BuildSponsorCreditsBlock(_sponsorCredits));
         }
 
         private BoxContainer MakePlayerManifestTab(RoundEndMessageEvent.RoundEndPlayerInfo[] playersInfo)

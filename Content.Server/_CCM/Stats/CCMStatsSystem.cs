@@ -53,8 +53,10 @@ public sealed class CCMStatsSystem : EntitySystem
     private const float LiveProgressFlushIntervalSeconds = 10f;
     private const float DamageImpactFactor = 0.01f;
     private const float HealingImpactFactor = 0.03f;
-    private const int KillImpactPoints = 5;
-    private const float StructureImpactPoints = 0.5f;
+    private const int MarineKillImpactPoints = 5;
+    private const int XenoKillImpactPoints = 3;
+    private const float MarineStructureImpactPoints = 0.2f;
+    private const float XenoStructureImpactPoints = 0.025f;
     private const int DamageDiagnosticsHistoryLimit = 25;
 
     [Dependency] private readonly CCMRoundWinTrackerSystem _campaignScore = default!;
@@ -420,7 +422,7 @@ public sealed class CCMStatsSystem : EntitySystem
 
             var stats = GetOrCreateRoundStats(player.PlayerId);
             stats.MarineKills += 1;
-            stats.MarineImpact += KillImpactPoints;
+            stats.MarineImpact += MarineKillImpactPoints;
         }
         else if (victimSide == CCMStatsSide.Marines)
         {
@@ -429,7 +431,7 @@ public sealed class CCMStatsSystem : EntitySystem
 
             var stats = GetOrCreateRoundStats(player.PlayerId);
             stats.XenoKills += 1;
-            stats.XenoImpact += KillImpactPoints;
+            stats.XenoImpact += XenoKillImpactPoints;
         }
     }
 
@@ -1507,7 +1509,7 @@ public sealed class CCMStatsSystem : EntitySystem
             return;
 
         stats.MarineStructuresBuilt += count;
-        stats.MarineImpact += StructureImpactPoints * count;
+        stats.MarineImpact += MarineStructureImpactPoints * count;
     }
 
     private void AwardXenoStructures(RoundPlayerStats stats, int count)
@@ -1516,7 +1518,7 @@ public sealed class CCMStatsSystem : EntitySystem
             return;
 
         stats.XenoStructuresBuilt += count;
-        stats.XenoImpact += StructureImpactPoints * count;
+        stats.XenoImpact += XenoStructureImpactPoints * count;
     }
 
     private CCMPlayerStatsSnapshot MergeLiveSnapshot(CCMPlayerStatsSnapshot snapshot, RoundPlayerStats live)

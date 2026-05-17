@@ -27,7 +27,7 @@ namespace Content.Client.Paper.UI
         [Dependency] private readonly IInputManager _inputManager = default!;
         [Dependency] private readonly IResourceCache _resCache = default!;
 
-        public Color DefaultTextColor = new(25, 25, 25);
+        public Color DefaultTextColor = new(11, 20, 14);
 
         // Size of resize handles around the paper
         private const int DRAG_MARGIN_SIZE = 16;

@@ -283,9 +283,13 @@ namespace Content.Server.Database
 
         #region Hidden Ban
 
-        Task<bool> GetHiddenBanStatusAsync(NetUserId player);
+        Task<bool> GetHiddenBanStatusAsync(
+            NetUserId? player,
+            IPAddress? address = null,
+            ImmutableArray<byte>? hwId = null,
+            ImmutableArray<ImmutableArray<byte>>? modernHWIds = null);
 
-        Task AddHiddenBanAsync(NetUserId player);
+        Task AddHiddenBanAsync(NetUserId player, IPAddress? address = null, ImmutableTypedHwid? hwId = null);
 
         Task RemoveHiddenBanAsync(NetUserId player);
 
@@ -491,6 +495,10 @@ namespace Content.Server.Database
             CCMLeaderboardTimeframe timeframe,
             int page,
             int pageSize);
+
+        Task<int> ResetCCMLeaderboard(
+            CCMLeaderboardCategory category,
+            CCMLeaderboardTimeframe timeframe);
 
         Task<(int MarineWins, int XenoWins)> GetCCMRoundWinStats();
 
@@ -1011,16 +1019,20 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.RemoveFromBlacklistAsync(player));
         }
 
-        public Task<bool> GetHiddenBanStatusAsync(NetUserId player)
+        public Task<bool> GetHiddenBanStatusAsync(
+            NetUserId? player,
+            IPAddress? address = null,
+            ImmutableArray<byte>? hwId = null,
+            ImmutableArray<ImmutableArray<byte>>? modernHWIds = null)
         {
             DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetHiddenBanStatusAsync(player));
+            return RunDbCommand(() => _db.GetHiddenBanStatusAsync(player, address, hwId, modernHWIds));
         }
 
-        public Task AddHiddenBanAsync(NetUserId player)
+        public Task AddHiddenBanAsync(NetUserId player, IPAddress? address = null, ImmutableTypedHwid? hwId = null)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.AddHiddenBanAsync(player));
+            return RunDbCommand(() => _db.AddHiddenBanAsync(player, address, hwId));
         }
 
         public Task RemoveHiddenBanAsync(NetUserId player)
@@ -1597,6 +1609,14 @@ namespace Content.Server.Database
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetCCMLeaderboard(viewer, category, timeframe, page, pageSize));
+        }
+
+        public Task<int> ResetCCMLeaderboard(
+            CCMLeaderboardCategory category,
+            CCMLeaderboardTimeframe timeframe)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.ResetCCMLeaderboard(category, timeframe));
         }
 
         public Task<(int MarineWins, int XenoWins)> GetCCMRoundWinStats()

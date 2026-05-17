@@ -217,7 +217,7 @@ namespace Content.Server.Connection
             var userId = e.UserId;
             ImmutableArray<byte>? hwId = e.UserData.HWId;
 
-            if (await _db.GetHiddenBanStatusAsync(userId))
+            if (await _db.GetHiddenBanStatusAsync(userId, addr, hwId, e.UserData.ModernHWIds))
                 return (ConnectionDenyReason.HiddenBan, HiddenBanDisconnectReason, null);
 
             if (hwId.Value.Length == 0 || !_cfg.GetCVar(CCVars.BanHardwareIds))

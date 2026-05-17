@@ -4772,8 +4772,7 @@ namespace Content.Client.Stylesheets
                 Element<PanelContainer>().Class("PaperDefaultBorder")
                     .Prop(PanelContainer.StylePropertyPanel, paperBackground),
                 Element<RichTextLabel>().Class("PaperWrittenText")
-                    .Prop(Label.StylePropertyFont, paperDocumentFont12)
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#0B140E")),
+                    .Prop(Label.StylePropertyFont, paperDocumentFont12),
 
                 Element<RichTextLabel>().Class("LabelSubText")
                     .Prop(Label.StylePropertyFont, notoSans10)
