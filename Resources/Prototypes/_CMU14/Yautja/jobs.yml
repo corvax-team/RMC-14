@@ -9,6 +9,7 @@
   icon: CMUYautjaJobIcon
   joinNotifyCrew: false
   hidden: false
+  whitelisted: true
   special:
   - !type:AddComponentSpecial
     components:
