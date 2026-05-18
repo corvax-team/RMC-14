@@ -214,6 +214,9 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public bool RecalculatedPower;
+
+    [DataField]
+    public List<string> RoundStartGameMaps = new();
     // CCM14-start
     [DataField]
     public int MarinesSpawned;

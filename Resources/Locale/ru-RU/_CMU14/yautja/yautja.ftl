@@ -108,8 +108,6 @@ cmu-yautja-action-voice-death-laugh-desc = Издать финальный жу�
 
 cmu-yautja-mark-window-title = Метки охоты
 cmu-yautja-mark-refresh = Обновить
-cmu-yautja-mark-apply = Наложить метку
-cmu-yautja-mark-remove = Удалить метку
 cmu-yautja-mark-reason-placeholder = Необязательная причина
 cmu-yautja-mark-none = без метки
 cmu-yautja-target-xeno = ксеноморф

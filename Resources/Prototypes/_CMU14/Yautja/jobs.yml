@@ -127,8 +127,8 @@
   parent: CMJobIconBase
   id: CMUYautjaJobIcon
   icon:
-    sprite: _CMU14/Yautja/mask.rsi
-    state: icon
+    sprite: _CMU14/Yautja/icon.rsi
+    state: icons
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Content.Server.GameTicking;
+using Content.Server.Maps;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared._RMC14.Bioscan;
@@ -49,6 +50,8 @@ public sealed partial class CMDistressSignalRuleSystem
         // CCM14-end
         OperationName ??= GetRandomOperationName();
 
+        LoadRoundStartGameMaps(rule.Value);
+
         if (!InitializeXenoMap(rule.Value, comp))
             return;
 
@@ -63,6 +66,21 @@ public sealed partial class CMDistressSignalRuleSystem
 
         _spawnedDropships = true;
         InitializeDropships(comp);
+    }
+
+    private void LoadRoundStartGameMaps(Entity<CMDistressSignalRuleComponent> rule)
+    {
+        foreach (var mapId in rule.Comp.RoundStartGameMaps)
+        {
+            if (!_prototypes.TryIndex<GameMapPrototype>(mapId, out var gameMap))
+            {
+                Log.Error($"Failed to load round-start map '{mapId}' for {ToPrettyString(rule.Owner)}: missing gameMap prototype.");
+                continue;
+            }
+
+            GameTicker.LoadGameMap(gameMap, out var mapUid);
+            _mapSystem.InitializeMap(mapUid);
+        }
     }
 
     private bool InitializeXenoMap(Entity<CMDistressSignalRuleComponent> rule, CMDistressSignalRuleComponent comp)

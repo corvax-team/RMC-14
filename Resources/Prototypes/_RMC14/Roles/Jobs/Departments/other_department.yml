@@ -7,10 +7,10 @@
   roles:
 #  - CMSilicon # TODO RMC14
 #  - CMAndroid # TODO RMC14
-  - RMCJobSynthetic
-  - CMUYautjaHunter
   - CMLiaison
   - CMCorrespondent
   - CMMessTech
+  - RMCJobSynthetic
+  - CMUYautjaHunter
   departmentRadio: null
   headOfDepartment: null
