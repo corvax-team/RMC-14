@@ -227,6 +227,12 @@
                     <BoxContainer Name="JobListXeno" Orientation="Vertical" />
                 </ScrollContainer>
             </BoxContainer>
+            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                <OptionButton Name="PreferenceUnavailableButtonOther" />
+                <ScrollContainer VerticalExpand="True">
+                    <BoxContainer Name="JobListOther" Orientation="Vertical" />
+                </ScrollContainer>
+            </BoxContainer>
         </ccm:CenteredTabContainer>
         <BoxContainer Name="OtherTabHiddenContainer" Visible="False">
             <BoxContainer Name="MiscTabContainer" Orientation="Vertical" />

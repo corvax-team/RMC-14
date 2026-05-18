@@ -1,0 +1,17 @@
+- type: gameMap
+  id: CCMYautja
+  mapName: Yautja
+  mapPath: /Maps/_CCM14/yautja.yml
+  minPlayers: 0
+  maxRandomOffset: 0
+  randomRotation: false
+  fallback: true
+  stations:
+    Yautja:
+      stationProto: StandardUNMCWarship
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'Yautja'
+        - type: StationJobs
+          availableJobs:
+            CMUYautjaHunter: [1, 1]

@@ -7,6 +7,8 @@ using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
+using Content.Server._CCM.Teleporter;
+using Content.Shared._CCM.Teleporter;
 
 namespace Content.Server._CMU14.Yautja;
 
@@ -29,6 +31,7 @@ public sealed class YautjaBracerMenuSystem : EntitySystem
     [Dependency] private readonly YautjaSelfDestructSystem _selfDestruct = default!;
     [Dependency] private readonly YautjaThrallSystem _thralls = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly CCMPlanetTeleporterSystem _teleporter = default!;
 
     private TimeSpan _nextTrackerRefresh;
 
@@ -94,6 +97,9 @@ public sealed class YautjaBracerMenuSystem : EntitySystem
         {
             case YautjaBracerPanelCommand.OpenMarks:
                 _marks.TryOpenMarkPanel(ent, args.Actor);
+                break;
+            case YautjaBracerPanelCommand.OpenTeleporter:
+                _teleporter.TryOpenTeleporter((ent.Owner, CompOrNull<CCMPlanetTeleporterComponent>(ent.Owner)), args.Actor);
                 break;
             case YautjaBracerPanelCommand.LinkThrallBracer:
                 _thralls.TryLinkThrallBracer(ent, args.Actor);

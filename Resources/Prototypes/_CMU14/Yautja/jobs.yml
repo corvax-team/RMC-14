@@ -4,9 +4,11 @@
   name: cmu-yautja-job-name-hunter
   description: cmu-yautja-job-description-hunter
   playTimeTracker: CMUYautjaHunter
-  icon: CMJobIconEmpty
+  startingGear: CMUYautjaHunterGear
+  spawnMenuRoleName: Yautja Hunter
+  icon: CMUYautjaJobIcon
   joinNotifyCrew: false
-  hidden: true
+  hidden: false
   special:
   - !type:AddComponentSpecial
     components:
@@ -118,6 +120,7 @@
 
 - type: playTimeTracker
   id: CMUYautjaHunter
+  isHumanoid: true
 
 - type: jobIcon
   parent: CMJobIconBase
@@ -125,3 +128,15 @@
   icon:
     sprite: _CMU14/Yautja/mask.rsi
     state: icon
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMUSpawnPointYautjaHunter
+  name: yautja hunter spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMUYautjaHunter
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv

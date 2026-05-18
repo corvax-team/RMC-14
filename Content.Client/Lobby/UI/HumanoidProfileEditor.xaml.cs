@@ -575,6 +575,7 @@ namespace Content.Client.Lobby.UI
 
             TabContainer.SetTabTitle(1, Loc.GetString("humanoid-profile-editor-marines-tab"));
             TabContainer.SetTabTitle(2, Loc.GetString("humanoid-profile-editor-xeno-tab"));
+            TabContainer.SetTabTitle(3, Loc.GetString("humanoid-profile-editor-other-tab"));
 
             PreferenceUnavailableButtonMarines.AddItem(
                 Loc.GetString("humanoid-profile-editor-preference-unavailable-stay-in-lobby-button"),
@@ -592,6 +593,14 @@ namespace Content.Client.Lobby.UI
                     ("overflowJob", Loc.GetString(SharedGameTicker.FallbackOverflowJobName))),
                 (int) PreferenceUnavailableMode.SpawnAsOverflow);
 
+            PreferenceUnavailableButtonOther.AddItem(
+                Loc.GetString("humanoid-profile-editor-preference-unavailable-stay-in-lobby-button"),
+                (int) PreferenceUnavailableMode.StayInLobby);
+            PreferenceUnavailableButtonOther.AddItem(
+                Loc.GetString("humanoid-profile-editor-preference-unavailable-spawn-as-overflow-button",
+                    ("overflowJob", Loc.GetString(SharedGameTicker.FallbackOverflowJobName))),
+                (int) PreferenceUnavailableMode.SpawnAsOverflow);
+
             PreferenceUnavailableButtonMarines.OnItemSelected += args =>
             {
                 if (_syncingPreferenceUnavailable)
@@ -600,6 +609,7 @@ namespace Content.Client.Lobby.UI
                 _syncingPreferenceUnavailable = true;
                 PreferenceUnavailableButtonMarines.SelectId(args.Id);
                 PreferenceUnavailableButtonXeno.SelectId(args.Id);
+                PreferenceUnavailableButtonOther.SelectId(args.Id);
                 Profile = Profile?.WithPreferenceUnavailable((PreferenceUnavailableMode) args.Id);
                 SetDirty();
                 _syncingPreferenceUnavailable = false;
@@ -613,6 +623,21 @@ namespace Content.Client.Lobby.UI
                 _syncingPreferenceUnavailable = true;
                 PreferenceUnavailableButtonXeno.SelectId(args.Id);
                 PreferenceUnavailableButtonMarines.SelectId(args.Id);
+                PreferenceUnavailableButtonOther.SelectId(args.Id);
+                Profile = Profile?.WithPreferenceUnavailable((PreferenceUnavailableMode) args.Id);
+                SetDirty();
+                _syncingPreferenceUnavailable = false;
+            };
+
+            PreferenceUnavailableButtonOther.OnItemSelected += args =>
+            {
+                if (_syncingPreferenceUnavailable)
+                    return;
+
+                _syncingPreferenceUnavailable = true;
+                PreferenceUnavailableButtonOther.SelectId(args.Id);
+                PreferenceUnavailableButtonMarines.SelectId(args.Id);
+                PreferenceUnavailableButtonXeno.SelectId(args.Id);
                 Profile = Profile?.WithPreferenceUnavailable((PreferenceUnavailableMode) args.Id);
                 SetDirty();
                 _syncingPreferenceUnavailable = false;
@@ -1231,14 +1256,17 @@ namespace Content.Client.Lobby.UI
         {
             JobListMarines.DisposeAllChildren();
             JobListXeno.DisposeAllChildren();
+            JobListOther.DisposeAllChildren();
             _jobCategories.Clear();
             _jobPriorities.Clear();
             _jobChanceLabels.Clear();
             _jobChanceUnderlines.Clear();
             var firstMarinesCategory = true;
             var firstXenoCategory = true;
+            var firstOtherCategory = true;
             var marinesNextLightStripe = true;
             var xenoNextLightStripe = true;
+            var otherNextLightStripe = true;
 
             // CCM rework lobby - start
             var rowLightColor = _useOldLobbyStyle ? Color.FromHex("#3A4256").WithAlpha(0.86f) : StyleNano.CurrentTheme switch
@@ -1263,12 +1291,19 @@ namespace Content.Client.Lobby.UI
             };
             var stripeBorderColor = (_useOldLobbyStyle ? StyleNano.OldLobbyButtonBorderHover : StyleNano.NanoGold).WithAlpha(0.82f);
 
-            bool ConsumeStripeLight(bool isXenoDepartment)
+            bool ConsumeStripeLight(int tab)
             {
-                if (isXenoDepartment)
+                if (tab == 1)
                 {
                     var light = xenoNextLightStripe;
                     xenoNextLightStripe = !xenoNextLightStripe;
+                    return light;
+                }
+
+                if (tab == 2)
+                {
+                    var light = otherNextLightStripe;
+                    otherNextLightStripe = !otherNextLightStripe;
                     return light;
                 }
 
@@ -1277,15 +1312,15 @@ namespace Content.Client.Lobby.UI
                 return marinesLight;
             }
 
-            Color NextCategoryStripeColor(bool isXenoDepartment)
+            Color NextCategoryStripeColor(int tab)
             {
-                var light = ConsumeStripeLight(isXenoDepartment);
+                var light = ConsumeStripeLight(tab);
                 return light ? headerLightColor : headerDarkColor;
             }
 
-            Color NextRoleStripeColor(bool isXenoDepartment)
+            Color NextRoleStripeColor(int tab)
             {
-                var light = ConsumeStripeLight(isXenoDepartment);
+                var light = ConsumeStripeLight(tab);
                 return light ? rowLightColor : rowDarkColor;
             }
             // CCM rework lobby - end
@@ -1331,7 +1366,14 @@ namespace Content.Client.Lobby.UI
             {
                 var departmentName = Loc.GetString(department.Name);
                 var isXenoDepartment = IsXenoDepartment(department);
-                var targetList = isXenoDepartment ? JobListXeno : JobListMarines;
+                var isOtherDepartment = department.ID == "CMOther";
+                var tab = isXenoDepartment ? 1 : isOtherDepartment ? 2 : 0;
+                var targetList = tab switch
+                {
+                    1 => JobListXeno,
+                    2 => JobListOther,
+                    _ => JobListMarines,
+                };
 
                 if (!_jobCategories.TryGetValue(department.ID, out var category))
                 {
@@ -1349,6 +1391,10 @@ namespace Content.Client.Lobby.UI
                     {
                         firstXenoCategory = false;
                     }
+                    else if (isOtherDepartment && firstOtherCategory && category.Visible)
+                    {
+                        firstOtherCategory = false;
+                    }
                     else if (!isXenoDepartment && firstMarinesCategory && category.Visible)
                     {
                         firstMarinesCategory = false;
@@ -1365,7 +1411,7 @@ namespace Content.Client.Lobby.UI
                     {
                         PanelOverride = new StyleBoxFlat
                         {
-                            BackgroundColor = NextCategoryStripeColor(isXenoDepartment),
+                            BackgroundColor = NextCategoryStripeColor(tab),
                             BorderColor = stripeBorderColor,
                             BorderThickness = new Thickness(1f),
                         },
@@ -1532,7 +1578,7 @@ namespace Content.Client.Lobby.UI
                     {
                         PanelOverride = new StyleBoxFlat
                         {
-                            BackgroundColor = NextRoleStripeColor(isXenoDepartment),
+                            BackgroundColor = NextRoleStripeColor(tab),
                             BorderColor = stripeBorderColor,
                             BorderThickness = new Thickness(1f),
                         },

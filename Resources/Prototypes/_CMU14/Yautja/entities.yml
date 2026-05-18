@@ -19,10 +19,13 @@
     stabilisingCrystalCooldown: 60
     healingCapsuleCooldown: 90
   - type: YautjaGearContainer
+  - type: CCMPlanetTeleporter
   - type: UserInterface
     interfaces:
       enum.YautjaBracerUIKey.Key:
         type: YautjaBracerBui
+      enum.CCMPlanetTeleporterUiKey.Key:
+        type: CCMPlanetTeleporterBui
       enum.YautjaMarkUIKey.Key:
         type: YautjaMarkBui
       enum.YautjaThrallMessageUIKey.Key:

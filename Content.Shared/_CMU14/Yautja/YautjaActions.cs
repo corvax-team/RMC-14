@@ -105,6 +105,7 @@ public enum YautjaBracerUIKey : byte
 public enum YautjaBracerPanelCommand : byte
 {
     OpenMarks,
+    OpenTeleporter,
     LinkThrallBracer,
     OpenThrallTransmission,
     StunThrall,

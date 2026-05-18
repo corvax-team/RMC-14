@@ -41,6 +41,7 @@ public sealed class YautjaBracerWindow : DefaultWindow
 
     public Button MarksButton = default!;
     public Button TranslatorButton = default!;
+    public Button TeleporterButton = default!;
     public Button LockButton = default!;
     public Button IdChipButton = default!;
     public Button SelfDestructButton = default!;
@@ -112,6 +113,7 @@ public sealed class YautjaBracerWindow : DefaultWindow
 
         Bind(MarksButton, YautjaBracerPanelCommand.OpenMarks);
         Bind(TranslatorButton, YautjaBracerPanelCommand.OpenTranslator);
+        Bind(TeleporterButton, YautjaBracerPanelCommand.OpenTeleporter);
         Bind(LockButton, YautjaBracerPanelCommand.ToggleBracerLock);
         Bind(IdChipButton, YautjaBracerPanelCommand.ToggleBracerIdChip);
         Bind(SelfDestructButton, YautjaBracerPanelCommand.ToggleSelfDestruct);
@@ -254,6 +256,14 @@ public sealed class YautjaBracerWindow : DefaultWindow
             out _,
             out _);
         body.AddChild(TranslatorButton);
+
+        TeleporterButton = YautjaBracerUiStyle.ActionButton(
+            Loc.GetString("ccm-planet-teleporter-button"),
+            Loc.GetString("ccm-planet-teleporter-button-detail"),
+            YautjaBracerUiStyle.Green,
+            out _,
+            out _);
+        body.AddChild(TeleporterButton);
 
         LockButton = YautjaBracerUiStyle.ActionButton(
             Loc.GetString("cmu-yautja-bracer-menu-toggle-lock"),
