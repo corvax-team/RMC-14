@@ -840,6 +840,13 @@ namespace Content.Client.Stylesheets
             var robotoMonoBold11 = resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", size: 11);
             var robotoMonoBold12 = resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", size: 12);
             var robotoMonoBold14 = resCache.GetFont("/Fonts/Exo2/Exo2-Regular.ttf", size: 14);
+            var paperDocumentFont12 = resCache.GetFont(new[]
+            {
+                "/Fonts/NotoSans/NotoSans-Regular.ttf",
+                "/Fonts/NotoSans/NotoSansSymbols-Regular.ttf",
+                "/Fonts/NotoSans/NotoSansSymbols2-Regular.ttf",
+                "/Fonts/NotoEmoji.ttf"
+            }, 12);
 
             var windowHeader = new StyleBoxFlat
             {
@@ -4765,15 +4772,18 @@ namespace Content.Client.Stylesheets
                 Element<PanelContainer>().Class("PaperDefaultBorder")
                     .Prop(PanelContainer.StylePropertyPanel, paperBackground),
                 Element<RichTextLabel>().Class("PaperWrittenText")
-                    .Prop(Label.StylePropertyFont, notoSans12)
-                    .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#0B140E")),
+                    .Prop(Label.StylePropertyFont, paperDocumentFont12),
 
                 Element<RichTextLabel>().Class("LabelSubText")
                     .Prop(Label.StylePropertyFont, notoSans10)
                     .Prop(Label.StylePropertyFontColor, Color.FromHex("#3A6B47")),
 
                 Element<LineEdit>().Class("PaperLineEdit")
-                    .Prop(LineEdit.StylePropertyStyleBox, new StyleBoxEmpty()),
+                    .Prop(LineEdit.StylePropertyStyleBox, new StyleBoxEmpty())
+                    .Prop(Label.StylePropertyFont, paperDocumentFont12),
+                Element<TextEdit>().Class("PaperLineEdit")
+                    .Prop("font", paperDocumentFont12)
+                    .Prop("font-color", Color.FromHex("#0B140E")),
 
                 // Red Button ---
                 Element<Button>().Class("ButtonColorRed")

@@ -114,6 +114,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
             var heal = EnsureComp<XenoBeingHealedComponent>(xeno);
             var healStack = new XenoHealStack()
             {
+                Source = GetNetEntity(ent.Owner),
                 HealAmount = threshold.Value * ent.Comp.Percentage /
                              (ent.Comp.Duration.TotalSeconds * 10) *
                              (ent.Comp.TimeBetweenHeals.TotalSeconds * 10),
@@ -202,6 +203,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
         var heal = EnsureComp<XenoBeingHealedComponent>(target);
         var healStack = new XenoHealStack()
         {
+            Source = GetNetEntity(ent.Owner),
             Charges = (int) (args.TotalHealDuration.TotalSeconds / args.TimeBetweenHeals.TotalSeconds),
             TimeBetweenHeals = args.TimeBetweenHeals,
         };
@@ -312,14 +314,14 @@ public abstract class SharedXenoHealSystem : EntitySystem
         var diffToThreshold = targetTotalDamage - targetCriticalThreshold.Value;
 
         if (diffToThreshold > 0)
-            Heal(target, diffToThreshold);
+            Heal(target, diffToThreshold, ent.Owner);
 
         // Use up user's health to heal target
         var userTotalDamage = userDamageComp.TotalDamage;
         var remainingHealth = userDeathThreshold.Value - userTotalDamage;
         var healAmount = remainingHealth * args.TransferProportion;
 
-        Heal(target, healAmount);
+        Heal(target, healAmount, ent.Owner);
 
 
         foreach (var status in args.AilmentsRemove)
@@ -354,17 +356,17 @@ public abstract class SharedXenoHealSystem : EntitySystem
         }
     }
 
-    public void Heal(EntityUid target, FixedPoint2 amount)
+    public void Heal(EntityUid target, FixedPoint2 amount, EntityUid? source = null)
     {
         var damage = _rmcDamageable.DistributeDamageCached(target, BruteGroup, amount);
         var totalHeal = damage.GetTotal();
         var leftover = amount - totalHeal;
         if (leftover > FixedPoint2.Zero)
             damage = _rmcDamageable.DistributeDamageCached(target, BurnGroup, leftover, damage);
-        _damageable.TryChangeDamage(target, -damage, true);
+        _damageable.TryChangeDamage(target, -damage, true, origin: source);
     }
 
-    public void CreateHealStacks(EntityUid target, FixedPoint2 healAmount, TimeSpan timeBetweenHeals, int charges, TimeSpan nextHealAt, bool ignoreFire = false)
+    public void CreateHealStacks(EntityUid target, FixedPoint2 healAmount, TimeSpan timeBetweenHeals, int charges, TimeSpan nextHealAt, bool ignoreFire = false, EntityUid? source = null)
     {
         if (!ignoreFire && _flammable.IsOnFire(target))
             return;
@@ -372,6 +374,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
         var heal = EnsureComp<XenoBeingHealedComponent>(target);
         var healStack = new XenoHealStack()
         {
+            Source = GetNetEntity(source ?? target),
             Charges = charges,
             TimeBetweenHeals = timeBetweenHeals,
         };
@@ -440,7 +443,8 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
                 Dirty(uid, heal);
 
-                Heal(uid, healStack.HealAmount);
+                EntityUid? source = healStack.Source is { } netSource ? GetEntity(netSource) : null;
+                Heal(uid, healStack.HealAmount, source);
 
                 healStack.NextHealAt = time + healStack.TimeBetweenHeals;
                 healStack.Charges = healStack.Charges - 1;

@@ -18,38 +18,41 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Map;
+using Robust.Shared.Physics.Components;
 
 namespace Content.Shared._CE.ZLevels.Core.EntitySystems;
 
 public abstract partial class CESharedZLevelsSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _net = null!;
-    [Dependency] private readonly IGameTiming _timing = null!;
     [Dependency] private readonly IConfigurationManager _config = null!;
 
     [Dependency] private readonly SharedTransformSystem _transform = null!;
-    [Dependency] private readonly SharedAudioSystem _audio = null!;
     [Dependency] private readonly ActionBlockerSystem _blocker = null!;
     [Dependency] private readonly EntityLookupSystem _lookup = null!;
     [Dependency] private readonly SharedMapSystem _map = null!;
     [Dependency] private readonly IMapManager _mapManager = null!;
     [Dependency] private readonly SharedPopupSystem _popup = null!;
+    [Dependency] private readonly IGameTiming _timing = null!;
 
     private EntityQuery<MapComponent> _mapQuery;
     private EntityQuery<MapGridComponent> _gridQuery;
 
     private EntityQuery<CEZLevelMapComponent> _zMapQuery;
     private EntityQuery<CEZLevelsNetworkComponent> _zNetworkQuery;
+    private EntityQuery<PhysicsComponent> _physicsQuery;
+    private EntityQuery<TransformComponent> _transformQuery;
 
-    protected EntityQuery<CEZPhysicsComponent> ZPhyzQuery;
+    protected EntityQuery<CEZPhysicsComponent> ZPhysicsQuery;
 
     private bool _clientSimulation;
     private TimeSpan _fixedTimestep;
     private int _zMapCount;
-    private int _activeZPhysicsCount;
+    private TimeSpan _nextClientBodyTrackingRecovery;
 
     protected bool ZLevelsEnabled { get; private set; }
     public bool IsZLevelsEnabled => ZLevelsEnabled;
+    protected bool ShouldTrackClientPhysics => !_net.IsClient || _clientSimulation;
 
     public override void Initialize()
     {
@@ -64,13 +67,13 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
 
         _zMapQuery = GetEntityQuery<CEZLevelMapComponent>();
         _zNetworkQuery = GetEntityQuery<CEZLevelsNetworkComponent>();
+        _physicsQuery = GetEntityQuery<PhysicsComponent>();
+        _transformQuery = GetEntityQuery<TransformComponent>();
 
-        ZPhyzQuery = GetEntityQuery<CEZPhysicsComponent>();
+        ZPhysicsQuery = GetEntityQuery<CEZPhysicsComponent>();
 
         SubscribeLocalEvent<CEZLevelMapComponent, ComponentStartup>(OnZMapStartup);
         SubscribeLocalEvent<CEZLevelMapComponent, ComponentShutdown>(OnZMapShutdown);
-        SubscribeLocalEvent<CEActiveZPhysicsComponent, ComponentStartup>(OnActiveZPhysicsStartup);
-        SubscribeLocalEvent<CEActiveZPhysicsComponent, ComponentShutdown>(OnActiveZPhysicsShutdown);
 
         InitializeActivation();
         InitializeCacheHooks();
@@ -83,7 +86,14 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
         ZLevelsEnabled = enabled;
 
         if (!enabled)
+        {
             _accumulatedTime = TimeSpan.Zero;
+            ClearActiveBodies();
+            ClearDirtyMovement();
+            return;
+        }
+
+        RebuildBodyTracking();
     }
 
     private void OnZMapStartup(Entity<CEZLevelMapComponent> ent, ref ComponentStartup args)
@@ -91,19 +101,9 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
         _zMapCount++;
     }
 
-    private void OnZMapShutdown(Entity<CEZLevelMapComponent> ent, ref ComponentShutdown args)
+    protected virtual void OnZMapShutdown(Entity<CEZLevelMapComponent> ent, ref ComponentShutdown args)
     {
         _zMapCount = Math.Max(0, _zMapCount - 1);
-    }
-
-    private void OnActiveZPhysicsStartup(Entity<CEActiveZPhysicsComponent> ent, ref ComponentStartup args)
-    {
-        _activeZPhysicsCount++;
-    }
-
-    private void OnActiveZPhysicsShutdown(Entity<CEActiveZPhysicsComponent> ent, ref ComponentShutdown args)
-    {
-        _activeZPhysicsCount = Math.Max(0, _activeZPhysicsCount - 1);
     }
 
     public bool IsVoidAtCoordinates(EntityCoordinates coords, out Entity<CEZLevelMapComponent> belowMap)
@@ -174,7 +174,7 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
             return false;
 
         // Use depth cache for O(1) lookup instead of linear search
-        if (zNetworkComponent.DepthCache.TryGetValue(mapUid, out depth))
+        if (zNetworkComponent.ZLevelByEntity.TryGetValue(mapUid, out depth))
             return true;
 
         // Fallback to component depth if cache miss
@@ -290,14 +290,14 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
         var estimatedCapacity = networkComp.SortedZLevels.Count - (depth - networkComp.SortedMin);
         var result = new List<EntityUid>(estimatedCapacity);
 
-        // Use DepthCache for O(1) lookups instead of iterating through SortedZLevels
-        foreach (var (entityUid, entityDepth) in networkComp.DepthCache)
+        // Use reverse depth lookup for O(1) checks instead of iterating through SortedZLevels
+        foreach (var (entityUid, entityDepth) in networkComp.ZLevelByEntity)
         {
             if (entityDepth > depth && _zMapQuery.TryComp(entityUid, out _))
                 result.Add(entityUid);
         }
         // Sort by depth ascending (closest first)
-        result.Sort((a, b) => networkComp.DepthCache[a].CompareTo(networkComp.DepthCache[b]));
+        result.Sort((a, b) => networkComp.ZLevelByEntity[a].CompareTo(networkComp.ZLevelByEntity[b]));
 
         return result;
     }
@@ -316,15 +316,15 @@ public abstract partial class CESharedZLevelsSystem : EntitySystem
         var estimatedCapacity = Math.Min(depth, zLevelsNetworkComponent.SortedZLevels.Count);
         var result = new List<EntityUid>(estimatedCapacity);
 
-        // Use DepthCache for O(1) lookups instead of iterating through SortedZLevels
-        foreach (var (entityUid, entityDepth) in zLevelsNetworkComponent.DepthCache)
+        // Use reverse depth lookup for O(1) checks instead of iterating through SortedZLevels
+        foreach (var (entityUid, entityDepth) in zLevelsNetworkComponent.ZLevelByEntity)
         {
             if (entityDepth < depth && _zMapQuery.TryComp(entityUid, out _))
                 result.Add(entityUid);
         }
 
         // Sort by depth descending (closest first)
-        result.Sort((a, b) => zLevelsNetworkComponent.DepthCache[b].CompareTo(zLevelsNetworkComponent.DepthCache[a]));
+        result.Sort((a, b) => zLevelsNetworkComponent.ZLevelByEntity[b].CompareTo(zLevelsNetworkComponent.ZLevelByEntity[a]));
 
         return result;
     }

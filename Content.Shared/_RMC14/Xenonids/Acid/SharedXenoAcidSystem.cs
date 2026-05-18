@@ -211,7 +211,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             return;
 
         _acidHole.TryStoreAcidDirection(target, xeno.Owner);
-        ApplyAcid(args.AcidId, args.Strength, target, args.Dps, args.ExpendableLightDps, args.Time * mult);
+        ApplyAcid(args.AcidId, args.Strength, target, args.Dps, args.ExpendableLightDps, args.Time * mult, source: xeno.Owner);
     }
 
     /// <summary>
@@ -224,7 +224,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
         foreach (var projectile in args.FiredProjectiles)
         {
-            ApplyAcid(corroding.AcidPrototype, corroding.Strength, projectile, corroding.LightDps, corroding.Dps, corroding.CorrodesAt, true);
+            ApplyAcid(corroding.AcidPrototype, corroding.Strength, projectile, corroding.LightDps, corroding.Dps, corroding.CorrodesAt, corroding.Source, true);
         }
     }
 
@@ -235,7 +235,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     {
         if (TryComp(args.Source, out TimedCorrodingComponent? corroding))
         {
-            ApplyAcid(corroding.AcidPrototype, corroding.Strength, ent, corroding.Dps, corroding.LightDps, corroding.CorrodesAt, true);
+            ApplyAcid(corroding.AcidPrototype, corroding.Strength, ent, corroding.Dps, corroding.LightDps, corroding.CorrodesAt, corroding.Source, true);
         }
     }
 
@@ -338,7 +338,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         return true;
     }
 
-    public void ApplyAcid(EntProtoId acidId, XenoAcidStrength strength, EntityUid target, float dps, float lightDps, TimeSpan time, bool inherit = false)
+    public void ApplyAcid(EntProtoId acidId, XenoAcidStrength strength, EntityUid target, float dps, float lightDps, TimeSpan time, EntityUid? source = null, bool inherit = false)
     {
         if (_net.IsClient)
             return;
@@ -360,7 +360,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (!inherit)
             time += _timing.CurTime;
 
-        var ev = new CorrodingEvent(acid, dps, lightDps, strength);
+        var ev = new CorrodingEvent(acid, dps, lightDps, strength, source);
         RaiseLocalEvent(target, ref ev);
         if (ev.Cancelled)
             return;
@@ -373,6 +373,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             CorrodesAt = time,
             Dps = dps,
             LightDps = lightDps,
+            Source = source,
         });
 
         EnsureAcidVaporFixture(target);
@@ -391,7 +392,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         {
             if (time >= damageableCorrodingComponent.NextDamageAt)
             {
-                _damageable.TryChangeDamage(uid, damageableCorrodingComponent.Damage);
+                _damageable.TryChangeDamage(uid, damageableCorrodingComponent.Damage, origin: damageableCorrodingComponent.Source, tool: damageableCorrodingComponent.Acid);
                 damageableCorrodingComponent.NextDamageAt = time.Add(TimeSpan.FromSeconds(CorrosiveAcidTickDelaySeconds));
             }
 
@@ -400,7 +401,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
                 // Apply damage if the component is removed right before it would've applied a damage tick.
                 var timeUntilDamageAfterExpire = damageableCorrodingComponent.NextDamageAt - damageableCorrodingComponent.AcidExpiresAt;
                 if (timeUntilDamageAfterExpire >= TimeSpan.Zero && timeUntilDamageAfterExpire < TimeSpan.FromSeconds(ExpirationGracePeriodSeconds))
-                    _damageable.TryChangeDamage(uid, damageableCorrodingComponent.Damage);
+                    _damageable.TryChangeDamage(uid, damageableCorrodingComponent.Damage, origin: damageableCorrodingComponent.Source, tool: damageableCorrodingComponent.Acid);
 
                 var ev = new BeforeMeltedEvent();
                 RaiseLocalEvent(uid, ref ev);

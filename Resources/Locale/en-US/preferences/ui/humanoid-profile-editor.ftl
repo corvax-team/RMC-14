@@ -132,3 +132,4 @@ humanoid-profile-editor-import-failed-title = Import failed
 humanoid-profile-editor-import-failed-message = Failed to import this character profile. The file contains unsupported or invalid data for this build.
 
 # CCM priority rework
+humanoid-profile-editor-background-commendations-label = Your medals and commendations:

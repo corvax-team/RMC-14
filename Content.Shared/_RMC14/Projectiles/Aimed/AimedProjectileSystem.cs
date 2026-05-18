@@ -65,7 +65,7 @@ public sealed class AimedProjectileSystem : EntitySystem
         if (TryComp(ent, out CMArmorPiercingComponent? armorPiercing))
             apValue = armorPiercing.Amount;
 
-        _damageable.TryChangeDamage(target, damage, tool: ent.Comp.Source, armorPiercing: apValue);
+        _damageable.TryChangeDamage(target, damage, origin: args.Shooter ?? ent.Comp.Source, tool: ent.Comp.Source, armorPiercing: apValue);
 
         // Apply slows
         _slow.TrySlowdown(target, aimedEffect.SlowDuration);

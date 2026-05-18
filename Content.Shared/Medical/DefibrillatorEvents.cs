@@ -3,7 +3,11 @@ using Content.Shared.Inventory;
 namespace Content.Shared.Medical;
 
 [ByRefEvent]
-public readonly record struct TargetDefibrillatedEvent(EntityUid User, Entity<DefibrillatorComponent> Defibrillator);
+public readonly record struct TargetDefibrillatedEvent(
+    EntityUid User,
+    EntityUid Target,
+    Entity<DefibrillatorComponent> Defibrillator,
+    bool RevivedFromDeath);
 
 public abstract class BeforeDefibrillatorZapsEvent : CancellableEntityEventArgs, IInventoryRelayEvent
 {

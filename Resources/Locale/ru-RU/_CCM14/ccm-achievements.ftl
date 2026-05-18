@@ -14,10 +14,14 @@ ccm-achievements-empty = В этой категории пока ничего н
 ccm-achievements-toast-header = Достижение выполнено
 
 ccm-achievement-general-veteran-title = Ветеран
+ccm-achievement-general-first-steps-title = Первый контракт
+ccm-achievement-general-first-steps-desc = Ты уже не новичок с шаттла. Требование: сыграть 10 раундов.
 ccm-achievement-general-veteran-desc = Ты видел многое. И пережил ещё больше. Требование: сыграть 50 раундов.
 ccm-achievement-general-living-legend-title = Живая легенда
 ccm-achievement-general-living-legend-desc = В бараках о тебе рассказывают истории. Требование: сыграть 200 раундов.
 ccm-achievement-general-campaign-veteran-title = Ветеран кампаний
+ccm-achievement-general-first-victory-title = Первый триумф
+ccm-achievement-general-first-victory-desc = Первая настоящая победа уже за спиной. Требование: выиграть 10 раундов за всё время.
 ccm-achievement-general-campaign-veteran-desc = Ты прошёл множество битв. Требование: выиграть 50 раундов за всё время.
 ccm-achievement-general-war-legend-title = Легенда войны
 ccm-achievement-general-war-legend-desc = Твоё имя знают и люди, и улей. Требование: выиграть 200 раундов за всё время.
@@ -52,11 +56,11 @@ ccm-achievement-marine-savior-title = Спаситель
 ccm-achievement-marine-savior-desc = Ты вытащил из ада больше людей, чем любой другой. Требование: возродить 300 морпехов.
 
 ccm-achievement-marine-mechanic-title = Механик
-ccm-achievement-marine-mechanic-desc = Без укреплений мы бы уже проиграли. Требование: построить 50 построек за морпехов или ксеноморфов.
+ccm-achievement-marine-mechanic-desc = Без укреплений мы бы уже проиграли. Требование: построить 50 построек за морпехов.
 ccm-achievement-marine-fortifier-title = Фортификатор
-ccm-achievement-marine-fortifier-desc = Теперь это крепость. Требование: построить 500 построек за морпехов или ксеноморфов.
+ccm-achievement-marine-fortifier-desc = Теперь это крепость. Требование: построить 500 построек за морпехов.
 ccm-achievement-marine-defense-architect-title = Архитектор обороны
-ccm-achievement-marine-defense-architect-desc = Ни один враг не пройдёт. Требование: построить 2 000 построек за морпехов или ксеноморфов.
+ccm-achievement-marine-defense-architect-desc = Ни один враг не пройдёт. Требование: построить 2 000 построек за морпехов.
 
 ccm-achievement-marine-victory-title = Победа десанта
 ccm-achievement-marine-victory-desc = Планета очищена. Требование: выиграть 10 раундов за морпехов.
@@ -87,6 +91,12 @@ ccm-achievement-xeno-hive-empire-desc = Планета принадлежит к
 
 ccm-achievement-xeno-hive-birth-title = Рождение улья
 ccm-achievement-xeno-hive-birth-desc = Улей начинает расти. Требование: эволюционировать в новую касту.
+ccm-achievement-xeno-resin-worker-title = Смоляной рабочий
+ccm-achievement-xeno-resin-worker-desc = Каждый улей начинается с первой стены. Требование: построить 50 построек за ксеноморфов.
+ccm-achievement-xeno-hive-fortifier-title = Укрепитель улья
+ccm-achievement-xeno-hive-fortifier-desc = Смола течёт, улей крепнет. Требование: построить 500 построек за ксеноморфов.
+ccm-achievement-xeno-hive-architect-title = Архитектор улья
+ccm-achievement-xeno-hive-architect-desc = Ты меняешь карту под нужды улья. Требование: построить 2 000 построек за ксеноморфов.
 ccm-achievement-xeno-young-hunter-title = Молодой охотник
 ccm-achievement-xeno-young-hunter-desc = Люди - отличная добыча. Требование: убить 50 морпехов.
 ccm-achievement-xeno-predator-title = Хищник

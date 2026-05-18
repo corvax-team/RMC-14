@@ -26,14 +26,14 @@ public abstract partial class CESharedZFlightSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
 
-    protected EntityQuery<CEZPhysicsComponent> ZPhyzQuery;
+    protected EntityQuery<CEZPhysicsComponent> ZPhysicsQuery;
 
     public override void Initialize()
     {
         base.Initialize();
         InitializeControllable();
 
-        ZPhyzQuery = GetEntityQuery<CEZPhysicsComponent>();
+        ZPhysicsQuery = GetEntityQuery<CEZPhysicsComponent>();
 
         SubscribeLocalEvent<CEZPhysicsComponent, CEFlightStartedEvent>(OnStartFlight);
         SubscribeLocalEvent<CEZPhysicsComponent, CEFlightStoppedEvent>(OnStopFlight);

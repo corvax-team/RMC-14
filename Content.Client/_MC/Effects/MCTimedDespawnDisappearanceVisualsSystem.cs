@@ -6,11 +6,21 @@ namespace Content.Client._MC.Effects;
 
 public sealed class MCTimedDespawnDisappearanceVisualsSystem : EntitySystem
 {
+    private const float UpdateInterval = 0.05f;
+
     [Dependency] private readonly SpriteSystem _spriteSystem = null!;
+
+    private float _accumulator;
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        _accumulator += frameTime;
+        if (_accumulator < UpdateInterval)
+            return;
+
+        _accumulator = 0f;
 
         var query = EntityQueryEnumerator<SpriteComponent, TimedDespawnComponent, MCTimedDespawnDisappearanceVisualsComponent>();
         while (query.MoveNext(out var uid, out var spriteComponent, out var despawnComponent, out var visualsComponent))

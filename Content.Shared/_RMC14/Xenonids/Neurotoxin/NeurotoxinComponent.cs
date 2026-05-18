@@ -11,6 +11,9 @@ namespace Content.Shared._RMC14.Xenonids.Neurotoxin;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class NeurotoxinComponent : Component
 {
+    [DataField]
+    public EntityUid? Source;
+
     [DataField, AutoNetworkedField]
     public float NeurotoxinAmount = 0;
 

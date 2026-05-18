@@ -465,6 +465,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
         var resinHoleComp = EnsureComp<XenoResinHoleComponent>(resinHole);
         _audio.PlayPvs(resinHoleComp.BuildSound, resinHole);
+        RaiseLocalEvent(new XenoResinHolePlacedEvent(xeno.Owner, resinHolePrototype));
     }
 
     private bool ActivateTrap(Entity<XenoResinHoleComponent> resinHole, bool destroyed = false)

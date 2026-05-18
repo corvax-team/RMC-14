@@ -1,5 +1,6 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
+using Content.Shared._CCM.Stats;
 using Robust.Shared.Network;
 
 namespace Content.Server.KillTracking;
@@ -34,9 +35,13 @@ public sealed partial record KillPlayerSource : KillSource
     [DataField("playerId")]
     public NetUserId PlayerId;
 
-    public KillPlayerSource(NetUserId playerId)
+    [DataField("side")]
+    public CCMStatsSide Side;
+
+    public KillPlayerSource(NetUserId playerId, CCMStatsSide side = CCMStatsSide.None)
     {
         PlayerId = playerId;
+        Side = side;
     }
 }
 

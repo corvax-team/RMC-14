@@ -542,6 +542,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             QueueDel(upgradeable);
             var spawn = Spawn(to, snapped);
             _hive.SetSameHive(xeno.Owner, spawn);
+            RaiseLocalEvent(new XenoStructureUpgradedEvent(xeno.Owner, spawn));
             args.Handled = true;
             return;
         }
@@ -676,6 +677,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             var structure = Spawn(structureToSpawn, coordinates);
             _hive.SetSameHive(xeno.Owner, structure);
+            RaiseLocalEvent(new XenoStructureBuiltEvent(xeno.Owner, structure));
             if (TryComp(structure, out DesignNodeComponent? nodeComp))
             {
                 nodeComp.BoundXeno = xeno.Owner;
@@ -948,6 +950,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         var hive = _hive.GetHive(target);
         _hive.SetHive(spawn, hive);
+        RaiseLocalEvent(new XenoStructureBuiltEvent(args.User, spawn));
 
         QueueDel(target);
         QueueDel(floorWeeds);

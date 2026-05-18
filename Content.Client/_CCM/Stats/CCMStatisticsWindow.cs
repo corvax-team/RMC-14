@@ -19,11 +19,14 @@ using Robust.Shared.Configuration;
 using Robust.Shared.IoC;
 using Robust.Shared.Input;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Client._CCM.Stats;
 
 public sealed partial class CCMStatisticsWindow : DefaultCMWindow
 {
+    private const float LiveRefreshIntervalSeconds = 2.5f;
+
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly JobRequirementsManager _jobRequirementsManager = default!;
@@ -62,6 +65,7 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
 
     private bool _dragging;
     private Vector2 _dragOffset;
+    private float _refreshTimer;
 
     private CCMPlayerStatsSnapshot _stats = new(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     private StatsTab _tab = StatsTab.General;
@@ -190,6 +194,21 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
     {
         _jobRequirementsManager.RequestSponsorshipStatus();
         _statsSystem.RequestPlayerStats();
+        _refreshTimer = LiveRefreshIntervalSeconds;
+    }
+
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        base.FrameUpdate(args);
+
+        if (!IsOpen)
+            return;
+
+        _refreshTimer -= args.DeltaSeconds;
+        if (_refreshTimer > 0f)
+            return;
+
+        RefreshData();
     }
 
     private void OnPlayerStatsReceived(CCMPlayerStatsSnapshot stats)
@@ -374,7 +393,6 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
             {
                 (Loc.GetString("ccm-stats-victory-points"), _stats.VictoryPoints.ToString()),
                 (Loc.GetString("ccm-stats-impact-points"), _stats.ImpactPoints.ToString()),
-                (Loc.GetString("ccm-stats-revives"), _stats.Revives.ToString()),
                 (Loc.GetString("ccm-stats-healing-done"), _stats.HealingDone.ToString()),
                 (Loc.GetString("ccm-stats-structures-built"), _stats.StructuresBuilt.ToString()),
                 (Loc.GetString("ccm-stats-score-per-round"), FormatAverage(_stats.VictoryPoints + _stats.TotalKills, _stats.RoundsPlayed)),
@@ -415,7 +433,6 @@ public sealed partial class CCMStatisticsWindow : DefaultCMWindow
             {
                 (Loc.GetString("ccm-stats-victory-points"), _stats.MarineVictoryPoints.ToString()),
                 (Loc.GetString("ccm-stats-impact-points"), _stats.MarineImpactPoints.ToString()),
-                (Loc.GetString("ccm-stats-revives"), _stats.MarineRevives.ToString()),
                 (Loc.GetString("ccm-stats-marine-healing"), _stats.MarineHealingDone.ToString()),
                 (Loc.GetString("ccm-stats-marine-structures"), _stats.MarineStructuresBuilt.ToString()),
                 (Loc.GetString("ccm-stats-score-per-round"), FormatAverage(_stats.MarineVictoryPoints + _stats.MarineKills, _stats.MarineRoundsPlayed)),

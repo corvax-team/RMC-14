@@ -8,6 +8,7 @@ public sealed class CCMStatsSystem : EntitySystem
 {
     public event Action<CCMPlayerStatsSnapshot>? PlayerStatsReceived;
     public event Action<CCMLeaderboardPage>? LeaderboardReceived;
+    public event Action<CCMRoundEndStatsEvent>? RoundEndStatsReceived;
 
     public CCMRoundEndStatsEvent? LatestRoundEndStats { get; private set; }
 
@@ -28,6 +29,11 @@ public sealed class CCMStatsSystem : EntitySystem
         RaiseNetworkEvent(new RequestCCMLeaderboardEvent(category, timeframe, page));
     }
 
+    public void ClearLatestRoundEndStats()
+    {
+        LatestRoundEndStats = null;
+    }
+
     private void OnPlayerStatsResponse(CCMPlayerStatsResponseEvent ev)
     {
         PlayerStatsReceived?.Invoke(ev.Stats);
@@ -41,5 +47,6 @@ public sealed class CCMStatsSystem : EntitySystem
     private void OnRoundEndStats(CCMRoundEndStatsEvent ev)
     {
         LatestRoundEndStats = ev;
+        RoundEndStatsReceived?.Invoke(ev);
     }
 }

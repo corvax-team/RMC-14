@@ -5,7 +5,6 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 using Content.Server._CCM.Database;
 using Content.Server._RMC14.LinkAccount;
@@ -1318,7 +1317,11 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
         }
 
-        public async Task<bool> GetHiddenBanStatusAsync(NetUserId player)
+        public async Task<bool> GetHiddenBanStatusAsync(
+            NetUserId? player,
+            IPAddress? address = null,
+            ImmutableArray<byte>? hwId = null,
+            ImmutableArray<ImmutableArray<byte>>? modernHWIds = null)
         {
             await using var db = await GetDb();
             await EnsureHiddenBanStorage(db.DbContext);
@@ -1330,14 +1333,49 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
             try
             {
+                var conditions = new List<string>();
                 await using var command = connection.CreateCommand();
-                command.CommandText = "SELECT 1 FROM hidden_ban WHERE user_id = @userId LIMIT 1";
 
-                var parameter = command.CreateParameter();
-                parameter.ParameterName = "@userId";
-                parameter.Value = player.UserId.ToString();
-                command.Parameters.Add(parameter);
+                if (player is { } userId)
+                {
+                    conditions.Add("user_id = @userId");
+                    AddCommandParameter(command, "@userId", userId.UserId.ToString());
+                }
 
+                var normalizedAddress = NormalizeHiddenBanAddress(address);
+                if (normalizedAddress != null)
+                {
+                    conditions.Add("address = @address");
+                    AddCommandParameter(command, "@address", normalizedAddress.ToString());
+                }
+
+                var hwids = new HashSet<string>();
+                if (hwId is { Length: > 0 } legacyHwid)
+                    hwids.Add(new ImmutableTypedHwid(legacyHwid, HwidType.Legacy).ToString());
+
+                if (modernHWIds != null)
+                {
+                    foreach (var modernHwid in modernHWIds)
+                    {
+                        if (modernHwid.Length == 0)
+                            continue;
+
+                        hwids.Add(new ImmutableTypedHwid(modernHwid, HwidType.Modern).ToString());
+                    }
+                }
+
+                var i = 0;
+                foreach (var hwidText in hwids)
+                {
+                    var parameterName = $"@hwid{i++}";
+                    conditions.Add($"hwid = {parameterName}");
+                    AddCommandParameter(command, parameterName, hwidText);
+                }
+
+                if (conditions.Count == 0)
+                    return false;
+
+                command.CommandText = $"SELECT 1 FROM hidden_ban WHERE {string.Join(" OR ", conditions)} LIMIT 1";
                 return await command.ExecuteScalarAsync() != null;
             }
             finally
@@ -1347,7 +1385,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             }
         }
 
-        public async Task AddHiddenBanAsync(NetUserId player)
+        public async Task AddHiddenBanAsync(NetUserId player, IPAddress? address = null, ImmutableTypedHwid? hwId = null)
         {
             await using var db = await GetDb();
             await EnsureHiddenBanStorage(db.DbContext);
@@ -1360,12 +1398,17 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             try
             {
                 await using var command = connection.CreateCommand();
-                command.CommandText = "INSERT INTO hidden_ban (user_id) VALUES (@userId)";
+                command.CommandText = """
+                    INSERT INTO hidden_ban (user_id, address, hwid)
+                    VALUES (@userId, @address, @hwid)
+                    ON CONFLICT(user_id) DO UPDATE SET
+                        address = excluded.address,
+                        hwid = excluded.hwid
+                    """;
 
-                var parameter = command.CreateParameter();
-                parameter.ParameterName = "@userId";
-                parameter.Value = player.UserId.ToString();
-                command.Parameters.Add(parameter);
+                AddCommandParameter(command, "@userId", player.UserId.ToString());
+                AddCommandParameter(command, "@address", NormalizeHiddenBanAddress(address)?.ToString());
+                AddCommandParameter(command, "@hwid", hwId?.ToString());
 
                 await command.ExecuteNonQueryAsync();
             }
@@ -2804,11 +2847,17 @@ CREATE TABLE IF NOT EXISTS ccm_player_sponsorship (
             }
         }
 
-        private static async Task EnsureHiddenBanStorage(DbContext dbContext)
+        private static async Task EnsureCCMLeaderboardResetStorage(DbContext dbContext)
         {
             const string createTable = @"
-CREATE TABLE IF NOT EXISTS hidden_ban (
-    user_id TEXT PRIMARY KEY
+CREATE TABLE IF NOT EXISTS ccm_leaderboard_reset (
+    category INTEGER NOT NULL,
+    timeframe INTEGER NOT NULL,
+    period_year INTEGER NOT NULL,
+    period_month INTEGER NOT NULL,
+    player_id TEXT NOT NULL,
+    baseline_score INTEGER NOT NULL,
+    PRIMARY KEY (category, timeframe, period_year, period_month, player_id)
 )";
 
             try
@@ -2820,6 +2869,69 @@ CREATE TABLE IF NOT EXISTS hidden_ban (
                 await Task.Delay(200);
                 await dbContext.Database.ExecuteSqlRawAsync(createTable);
             }
+        }
+
+        private static async Task EnsureHiddenBanStorage(DbContext dbContext)
+        {
+            const string createTable = @"
+CREATE TABLE IF NOT EXISTS hidden_ban (
+    user_id TEXT PRIMARY KEY,
+    address TEXT NULL,
+    hwid TEXT NULL
+)";
+
+            try
+            {
+                await dbContext.Database.ExecuteSqlRawAsync(createTable);
+            }
+            catch (SqliteException e) when (e.Message.Contains("database is locked", StringComparison.OrdinalIgnoreCase))
+            {
+                await Task.Delay(200);
+                await dbContext.Database.ExecuteSqlRawAsync(createTable);
+            }
+
+            var connection = dbContext.Database.GetDbConnection();
+            await EnsureTableColumn(dbContext, connection, "hidden_ban", "address", "TEXT");
+            await EnsureTableColumn(dbContext, connection, "hidden_ban", "hwid", "TEXT");
+        }
+
+        private static async Task EnsureTableColumn(
+            DbContext dbContext,
+            DbConnection connection,
+            string tableName,
+            string columnName,
+            string columnType)
+        {
+            if (await HasTableColumn(connection, tableName, columnName))
+                return;
+
+            var alterTable = $"ALTER TABLE {tableName} ADD COLUMN {columnName} {columnType}";
+
+            try
+            {
+                await dbContext.Database.ExecuteSqlRawAsync(alterTable);
+            }
+            catch (SqliteException e) when (e.Message.Contains("database is locked", StringComparison.OrdinalIgnoreCase))
+            {
+                await Task.Delay(200);
+                await dbContext.Database.ExecuteSqlRawAsync(alterTable);
+            }
+        }
+
+        private static void AddCommandParameter(DbCommand command, string name, object? value)
+        {
+            var parameter = command.CreateParameter();
+            parameter.ParameterName = name;
+            parameter.Value = value ?? DBNull.Value;
+            command.Parameters.Add(parameter);
+        }
+
+        private static IPAddress? NormalizeHiddenBanAddress(IPAddress? address)
+        {
+            if (address == null)
+                return null;
+
+            return address.IsIPv4MappedToIPv6 ? address.MapToIPv4() : address;
         }
 
         private static async Task<bool> HasTableColumn(DbConnection connection, string tableName, string columnName)
@@ -3012,27 +3124,37 @@ CREATE TABLE IF NOT EXISTS hidden_ban (
 
             page = Math.Max(1, page);
             pageSize = Math.Max(1, pageSize);
-            var now = DateTime.UtcNow;
+            var (periodYear, periodMonth) = GetCCMLeaderboardPeriod(timeframe);
 
-            IQueryable<LeaderboardRow> query = timeframe == CCMLeaderboardTimeframe.CurrentMonth
-                ? GetMonthlyLeaderboardQuery(db, now.Year, now.Month, category)
+            IQueryable<LeaderboardRow> rawQuery = timeframe == CCMLeaderboardTimeframe.CurrentMonth
+                ? GetMonthlyLeaderboardQuery(db, periodYear, periodMonth, category)
                 : GetAllTimeLeaderboardQuery(db, category);
 
-            query = query
-                .Where(r => r.Score > 0)
-                .OrderByDescending(r => r.Score)
-                .ThenBy(r => r.Ckey);
+            var rawRows = await rawQuery.ToListAsync();
+            var baselines = await GetCCMLeaderboardResetBaselines(db.DbContext, category, timeframe, periodYear, periodMonth);
 
-            var totalEntries = await query.CountAsync();
+            var rows = rawRows
+                .Select(row => new LeaderboardRow
+                {
+                    PlayerId = row.PlayerId,
+                    Ckey = row.Ckey,
+                    Score = Math.Max(0, row.Score - baselines.GetValueOrDefault(row.PlayerId)),
+                })
+                .Where(row => row.Score > 0)
+                .OrderByDescending(row => row.Score)
+                .ThenBy(row => row.Ckey, StringComparer.Ordinal)
+                .ToList();
+
+            var totalEntries = rows.Count;
             var totalPages = Math.Max(1, (int) Math.Ceiling(totalEntries / (float) pageSize));
             page = Math.Min(page, totalPages);
 
-            var rows = await query
+            var pageRows = rows
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
-                .ToListAsync();
+                .ToList();
 
-            var entries = rows
+            var entries = pageRows
                 .Select((row, index) => new CCMLeaderboardEntry(
                     (page - 1) * pageSize + index + 1,
                     row.Ckey,
@@ -3041,10 +3163,10 @@ CREATE TABLE IF NOT EXISTS hidden_ban (
                 .ToArray();
 
             CCMLeaderboardEntry? viewerEntry = null;
-            var viewerRow = await query.FirstOrDefaultAsync(r => r.PlayerId == viewer);
+            var viewerRow = rows.FirstOrDefault(r => r.PlayerId == viewer);
             if (viewerRow != null)
             {
-                var higherCount = await query.CountAsync(r => r.Score > viewerRow.Score);
+                var higherCount = rows.Count(r => r.Score > viewerRow.Score);
                 var viewerRank = higherCount + 1;
                 var pageStart = (page - 1) * pageSize + 1;
                 var pageEnd = pageStart + pageSize - 1;
@@ -3053,6 +3175,78 @@ CREATE TABLE IF NOT EXISTS hidden_ban (
             }
 
             return new CCMLeaderboardPage(category, timeframe, page, totalPages, entries, viewerEntry);
+        }
+
+        public async Task<int> ResetCCMLeaderboard(
+            CCMLeaderboardCategory category,
+            CCMLeaderboardTimeframe timeframe)
+        {
+            await using var db = await GetDb();
+            await EnsureCCMLeaderboardResetStorage(db.DbContext);
+
+            var (periodYear, periodMonth) = GetCCMLeaderboardPeriod(timeframe);
+
+            IQueryable<LeaderboardRow> rawQuery = timeframe == CCMLeaderboardTimeframe.CurrentMonth
+                ? GetMonthlyLeaderboardQuery(db, periodYear, periodMonth, category)
+                : GetAllTimeLeaderboardQuery(db, category);
+
+            var rows = await rawQuery
+                .Where(row => row.Score > 0)
+                .ToListAsync();
+
+            var connection = db.DbContext.Database.GetDbConnection();
+            var shouldClose = connection.State != System.Data.ConnectionState.Open;
+            if (shouldClose)
+                await connection.OpenAsync();
+
+            try
+            {
+                await using var transaction = await connection.BeginTransactionAsync();
+
+                await using (var deleteCommand = connection.CreateCommand())
+                {
+                    deleteCommand.Transaction = transaction;
+                    deleteCommand.CommandText = """
+                        DELETE FROM ccm_leaderboard_reset
+                        WHERE category = @category
+                          AND timeframe = @timeframe
+                          AND period_year = @periodYear
+                          AND period_month = @periodMonth
+                        """;
+                    AddCommandParameter(deleteCommand, "@category", (int) category);
+                    AddCommandParameter(deleteCommand, "@timeframe", (int) timeframe);
+                    AddCommandParameter(deleteCommand, "@periodYear", periodYear);
+                    AddCommandParameter(deleteCommand, "@periodMonth", periodMonth);
+                    await deleteCommand.ExecuteNonQueryAsync();
+                }
+
+                foreach (var row in rows)
+                {
+                    await using var insertCommand = connection.CreateCommand();
+                    insertCommand.Transaction = transaction;
+                    insertCommand.CommandText = """
+                        INSERT INTO ccm_leaderboard_reset
+                            (category, timeframe, period_year, period_month, player_id, baseline_score)
+                        VALUES
+                            (@category, @timeframe, @periodYear, @periodMonth, @playerId, @baselineScore)
+                        """;
+                    AddCommandParameter(insertCommand, "@category", (int) category);
+                    AddCommandParameter(insertCommand, "@timeframe", (int) timeframe);
+                    AddCommandParameter(insertCommand, "@periodYear", periodYear);
+                    AddCommandParameter(insertCommand, "@periodMonth", periodMonth);
+                    AddCommandParameter(insertCommand, "@playerId", row.PlayerId.ToString());
+                    AddCommandParameter(insertCommand, "@baselineScore", row.Score);
+                    await insertCommand.ExecuteNonQueryAsync();
+                }
+
+                await transaction.CommitAsync();
+                return rows.Count;
+            }
+            finally
+            {
+                if (shouldClose)
+                    await connection.CloseAsync();
+            }
         }
 
         private static IQueryable<LeaderboardRow> GetAllTimeLeaderboardQuery(DbGuard db, CCMLeaderboardCategory category)
@@ -3211,6 +3405,70 @@ CREATE TABLE IF NOT EXISTS hidden_ban (
                     Ckey = player.LastSeenUserName,
                     Score = stats.Score,
                 });
+        }
+
+        private static async Task<Dictionary<Guid, int>> GetCCMLeaderboardResetBaselines(
+            DbContext dbContext,
+            CCMLeaderboardCategory category,
+            CCMLeaderboardTimeframe timeframe,
+            int periodYear,
+            int periodMonth)
+        {
+            await EnsureCCMLeaderboardResetStorage(dbContext);
+
+            var connection = dbContext.Database.GetDbConnection();
+            var shouldClose = connection.State != System.Data.ConnectionState.Open;
+            if (shouldClose)
+                await connection.OpenAsync();
+
+            try
+            {
+                await using var command = connection.CreateCommand();
+                command.CommandText = """
+                    SELECT player_id, baseline_score
+                    FROM ccm_leaderboard_reset
+                    WHERE category = @category
+                      AND timeframe = @timeframe
+                      AND period_year = @periodYear
+                      AND period_month = @periodMonth
+                    """;
+                AddCommandParameter(command, "@category", (int) category);
+                AddCommandParameter(command, "@timeframe", (int) timeframe);
+                AddCommandParameter(command, "@periodYear", periodYear);
+                AddCommandParameter(command, "@periodMonth", periodMonth);
+
+                var baselines = new Dictionary<Guid, int>();
+                await using var reader = await command.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                {
+                    if (reader.IsDBNull(0) || reader.IsDBNull(1))
+                        continue;
+
+                    var playerText = reader.GetString(0);
+                    if (!Guid.TryParse(playerText, out var playerId))
+                        continue;
+
+                    baselines[playerId] = reader.GetInt32(1);
+                }
+
+                return baselines;
+            }
+            finally
+            {
+                if (shouldClose)
+                    await connection.CloseAsync();
+            }
+        }
+
+        private static (int Year, int Month) GetCCMLeaderboardPeriod(CCMLeaderboardTimeframe timeframe)
+        {
+            if (timeframe == CCMLeaderboardTimeframe.CurrentMonth)
+            {
+                var now = DateTime.UtcNow;
+                return (now.Year, now.Month);
+            }
+
+            return (0, 0);
         }
 
         private static CCMPlayerStatsSnapshot ToCCMStatsSnapshot(CCMPlayerStats? stats)

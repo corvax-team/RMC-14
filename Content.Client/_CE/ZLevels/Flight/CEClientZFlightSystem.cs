@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Client._CE.ZLevels.Core;
 using Content.Shared._CE.ZLevels.Core.Components;
+using Content.Shared._CE.ZLevels.Core.EntitySystems;
 using Content.Shared._CE.ZLevels.Flight;
 using Content.Shared._CE.ZLevels.Flight.Components;
 using Robust.Client.GameObjects;
@@ -12,10 +13,14 @@ public sealed class CEClientZFlightSystem : CESharedZFlightSystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly CESharedZLevelsSystem _zLevels = default!;
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        if (!_zLevels.IsZLevelsEnabled)
+            return;
 
         var query = EntityQueryEnumerator<CEZFlyerComponent, CEZPhysicsComponent, TransformComponent, SpriteComponent>();
         while (query.MoveNext(out var uid, out var flyer, out var zPhys, out var xform, out var sprite))

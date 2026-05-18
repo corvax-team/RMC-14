@@ -14,83 +14,55 @@ namespace Content.Shared._CE.ZLevels.Core.EntitySystems;
 
 public abstract partial class CESharedZLevelsSystem
 {
+    private readonly List<EntityUid> _activeBodies = new();
+    private readonly Dictionary<EntityUid, int> _activeBodyIndices = new();
+    public IReadOnlyList<EntityUid> ActiveBodies => _activeBodies;
+
     private void InitializeActivation()
     {
         SubscribeLocalEvent<CEZPhysicsComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<CEZPhysicsComponent, AnchorStateChangedEvent>(OnAnchorStateChange);
-        SubscribeLocalEvent<CEZPhysicsComponent, PhysicsBodyTypeChangedEvent>(OnPhysicsBodyTypeChange);
+        SubscribeLocalEvent<CEZPhysicsComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<CEZPhysicsComponent, AnchorStateChangedEvent>(OnAnchorStateChanged);
+        SubscribeLocalEvent<CEZPhysicsComponent, PhysicsBodyTypeChangedEvent>(OnPhysicsBodyTypeChanged);
         SubscribeLocalEvent<CEZPhysicsComponent, EntParentChangedMessage>(OnParentChanged);
     }
 
-    private void OnAnchorStateChange(Entity<CEZPhysicsComponent> ent, ref AnchorStateChangedEvent args)
+    private void OnMapInit(Entity<CEZPhysicsComponent> entity, ref MapInitEvent args)
     {
-        CheckActivation(ent);
-    }
+        RefreshBody(entity);
 
-    private void OnMapInit(Entity<CEZPhysicsComponent> ent, ref MapInitEvent args)
-    {
-        CheckActivation(ent);
-
-        if (!TryComp<CEZLevelMapComponent>(Transform(ent).MapUid, out var zLevelMap))
+        var mapUid = Transform(entity).MapUid;
+        if (!_zMapQuery.TryComp(mapUid, out var zLevel))
             return;
 
-        ent.Comp.CurrentZLevel = zLevelMap.Depth;
-        DirtyField(ent, ent.Comp, nameof(CEZPhysicsComponent.CurrentZLevel));
-    }
-
-    private void OnPhysicsBodyTypeChange(Entity<CEZPhysicsComponent> ent, ref PhysicsBodyTypeChangedEvent args)
-    {
-        CheckActivation(ent);
-    }
-
-    protected virtual void OnParentChanged(Entity<CEZPhysicsComponent> ent, ref EntParentChangedMessage args)
-    {
-        CheckActivation(ent);
-
-        if (ZPhyzQuery.TryComp(args.OldParent, out var oldParentZPhys))
-            SetZPosition((ent, ent), oldParentZPhys.LocalPosition);
-    }
-
-    private void CheckActivation(Entity<CEZPhysicsComponent> ent)
-    {
-        if (TerminatingOrDeleted(ent))
+        if (entity.Comp.CurrentZLevel == zLevel.Depth)
             return;
 
-        var xform = Transform(ent);
-
-        if (xform.ParentUid != xform.MapUid)
-        {
-            SetActiveStatus(ent, false);
-            return;
-        }
-
-        if (xform.Anchored)
-        {
-            SetActiveStatus(ent, false);
-            return;
-        }
-
-        if (TryComp<PhysicsComponent>(ent, out var physics))
-        {
-            if (physics.BodyType == BodyType.Static)
-            {
-                SetActiveStatus(ent, false);
-                return;
-            }
-        }
-
-        SetActiveStatus(ent, true);
+        entity.Comp.CurrentZLevel = zLevel.Depth;
+        DirtyField(entity.Owner, entity.Comp, nameof(CEZPhysicsComponent.CurrentZLevel));
     }
 
-    private void SetActiveStatus(EntityUid ent, bool active)
+    private void OnShutdown(Entity<CEZPhysicsComponent> entity, ref ComponentShutdown args)
     {
-        if (!_timing.IsFirstTimePredicted)
-            return;
+        SleepBody((entity.Owner, entity.Comp));
+    }
 
-        if (active)
-            EnsureComp<CEActiveZPhysicsComponent>(ent);
-        else
-            RemComp<CEActiveZPhysicsComponent>(ent);
+    private void OnAnchorStateChanged(Entity<CEZPhysicsComponent> entity, ref AnchorStateChangedEvent args)
+    {
+        RefreshBody(entity);
+    }
+
+    private void OnPhysicsBodyTypeChanged(Entity<CEZPhysicsComponent> entity, ref PhysicsBodyTypeChangedEvent args)
+    {
+        RefreshBody(entity);
+    }
+
+    protected virtual void OnParentChanged(Entity<CEZPhysicsComponent> entity, ref EntParentChangedMessage args)
+    {
+        RefreshBody(entity);
+
+        if (ZPhysicsQuery.TryComp(args.OldParent, out var oldParentZPhys))
+            SetZPosition((entity.Owner, entity.Comp), oldParentZPhys.LocalPosition);
     }
 
     protected void RefreshZPhysicsOnMap(Entity<CEZLevelMapComponent> map)
@@ -103,8 +75,8 @@ public abstract partial class CESharedZLevelsSystem
 
             zPhysics.CurrentZLevel = map.Comp.Depth;
             DirtyField(uid, zPhysics, nameof(CEZPhysicsComponent.CurrentZLevel));
-            CheckActivation((uid, zPhysics));
-            RequestCacheMovement((uid, zPhysics));
+            DirtyMovement((uid, zPhysics));
+            RefreshBody((uid, zPhysics));
         }
     }
 }

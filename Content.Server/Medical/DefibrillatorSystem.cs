@@ -257,14 +257,14 @@ public sealed class DefibrillatorSystem : EntitySystem
                 var rmcEv = new RMCDefibrillatorDamageModifyEvent(target, heal);
                 RaiseLocalEvent(uid, ref rmcEv);
 
-                _damageable.TryChangeDamage(target, rmcEv.Heal, true, origin: uid);
+                _damageable.TryChangeDamage(target, rmcEv.Heal, true, origin: user, tool: uid);
             }
 
             if (_mobThreshold.TryGetThresholdForState(target, MobState.Dead, out var threshold) &&
                 TryComp<DamageableComponent>(target, out var damageableComponent) &&
                 damageableComponent.TotalDamage < threshold)
             {
-                _mobState.ChangeMobState(target, MobState.Critical, mob, uid);
+                _mobState.ChangeMobState(target, MobState.Critical, mob, user);
                 dead = false;
             }
 
@@ -296,7 +296,7 @@ public sealed class DefibrillatorSystem : EntitySystem
             _toggle.TryDeactivate(uid);
 
         // TODO clean up this clown show above
-        var ev = new TargetDefibrillatedEvent(user, (uid, component));
+        var ev = new TargetDefibrillatedEvent(user, target, (uid, component), !dead);
         RaiseLocalEvent(target, ref ev);
     }
 }

@@ -1,16 +1,15 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._MC.Spreader;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class MCEdgeSpreaderComponent : Component
 {
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan Delay = TimeSpan.FromSeconds(0.1f);
 
-    [DataField, AutoNetworkedField]
     public TimeSpan NextUpdate;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public int Range = 5;
 }

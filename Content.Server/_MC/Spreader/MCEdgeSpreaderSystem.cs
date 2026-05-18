@@ -10,13 +10,14 @@ namespace Content.Server._MC.Spreader;
 public sealed class MCEdgeSpreaderSystem : EntitySystem
 {
     private const long SpreadDelayMultiplier = 2;
+    private const string SmokeTag = "MCSmoke";
     private static readonly Vector2i[] Directions = [Vector2i.Up, Vector2i.Right, Vector2i.Down, Vector2i.Left];
 
     [Dependency] private readonly IGameTiming _timing = null!;
     [Dependency] private readonly TagSystem _tag = null!;
     [Dependency] private readonly SharedMapSystem _map = null!;
 
-    private readonly List<SpawnDeferredEntry> _spawnDeferredEntries = [];
+    private readonly Dictionary<(string PrototypeId, EntityUid GridUid, Vector2i Tile), SpawnDeferredEntry> _spawnDeferredEntries = [];
 
     private EntityQuery<AirtightComponent> _airtightQuery;
 
@@ -55,32 +56,50 @@ public sealed class MCEdgeSpreaderSystem : EntitySystem
                 continue;
             }
 
-            _spawnDeferredEntries.Add(new SpawnDeferredEntry(uid, xform.GridUid.Value, component.Range - 1, currentTime + GetSpreadDelay(component), freeTiles));
+            if (MetaData(uid).EntityPrototype?.ID is not { } prototypeId)
+            {
+                RemCompDeferred<MCEdgeSpreaderComponent>(uid);
+                continue;
+            }
+
+            var nextUpdate = currentTime + GetSpreadDelay(component);
+            foreach (var freeTile in freeTiles)
+            {
+                QueueSpawn(prototypeId, xform.GridUid.Value, freeTile, component.Range - 1, nextUpdate);
+            }
+
             RemCompDeferred<MCEdgeSpreaderComponent>(uid);
         }
 
-        foreach (var entry in _spawnDeferredEntries)
+        foreach (var entry in _spawnDeferredEntries.Values)
         {
-            foreach (var tile in entry.FreeTiles)
-            {
-                var uid = SpawnSame(entry.Uid, entry.GridUid, tile);
+            if (!TryComp<MapGridComponent>(entry.GridUid, out var grid))
+                continue;
 
-                var spreader = EnsureComp<MCEdgeSpreaderComponent>(uid);
+            var uid = Spawn(entry.PrototypeId, _map.GridTileToLocal(entry.GridUid, grid, entry.Tile));
+            var spreader = EnsureComp<MCEdgeSpreaderComponent>(uid);
 
-                spreader.Range = entry.Range;
-                spreader.NextUpdate = entry.NextUpdate;
-
-                DirtyFields(uid, spreader, null, nameof(MCEdgeSpreaderComponent.Range), nameof(MCEdgeSpreaderComponent.Delay));
-            }
+            spreader.Range = entry.Range;
+            spreader.NextUpdate = entry.NextUpdate;
         }
 
         _spawnDeferredEntries.Clear();
     }
 
-    private EntityUid SpawnSame(EntityUid uid, EntityUid gridUid, Vector2i tile)
+    private void QueueSpawn(string prototypeId, EntityUid gridUid, Vector2i tile, int range, TimeSpan nextUpdate)
     {
-        var prototypeId = MetaData(uid).EntityPrototype?.ID;
-        return Spawn(prototypeId, _map.GridTileToLocal(gridUid, Comp<MapGridComponent>(gridUid), tile));
+        var key = (prototypeId, gridUid, tile);
+        if (_spawnDeferredEntries.TryGetValue(key, out var existing))
+        {
+            existing.Range = Math.Max(existing.Range, range);
+            if (nextUpdate < existing.NextUpdate)
+                existing.NextUpdate = nextUpdate;
+
+            _spawnDeferredEntries[key] = existing;
+            return;
+        }
+
+        _spawnDeferredEntries[key] = new SpawnDeferredEntry(prototypeId, gridUid, tile, range, nextUpdate);
     }
 
     private void GetFreeTiles(EntityUid uid, TransformComponent transformComponent, out ValueList<Vector2i> freeTiles)
@@ -110,7 +129,7 @@ public sealed class MCEdgeSpreaderSystem : EntitySystem
         var entities = _map.GetAnchoredEntitiesEnumerator(grid, grid, pos);
         while (entities.MoveNext(out var ent))
         {
-            if (_tag.HasTag(ent.Value, $"MCSmoke"))
+            if (_tag.HasTag(ent.Value, SmokeTag))
                 return true;
 
             if (_airtightQuery.TryGetComponent(ent, out var airtight) && airtight.AirBlocked)
@@ -125,5 +144,12 @@ public sealed class MCEdgeSpreaderSystem : EntitySystem
         return TimeSpan.FromTicks(component.Delay.Ticks * SpreadDelayMultiplier);
     }
 
-    private readonly record struct SpawnDeferredEntry(EntityUid Uid, EntityUid GridUid, int Range, TimeSpan NextUpdate, ValueList<Vector2i> FreeTiles);
+    private struct SpawnDeferredEntry(string prototypeId, EntityUid gridUid, Vector2i tile, int range, TimeSpan nextUpdate)
+    {
+        public string PrototypeId = prototypeId;
+        public EntityUid GridUid = gridUid;
+        public Vector2i Tile = tile;
+        public int Range = range;
+        public TimeSpan NextUpdate = nextUpdate;
+    }
 }

@@ -9,6 +9,7 @@ using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Climbing.Systems;
+using Content.Shared.CombatMode;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Database;
@@ -42,6 +43,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly ClimbSystem _climb = default!;
+    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -605,6 +607,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private EntityUid TransferXeno(EntityUid xeno, EntProtoId proto)
     {
         var coordinates = _transform.GetMoverCoordinates(xeno);
+        var wasInCombatMode = TryComp(xeno, out CombatModeComponent? combatMode) && combatMode.IsInCombatMode;
         var newXeno = Spawn(proto, coordinates);
         _xenoHive.SetSameHive(xeno, newXeno);
 
@@ -613,6 +616,9 @@ public sealed class XenoEvolutionSystem : EntitySystem
             _mind.TransferTo(mindId, newXeno);
             _mind.UnVisit(mindId);
         }
+
+        if (wasInCombatMode)
+            _combatMode.SetInCombatMode(newXeno, true);
 
         foreach (var held in _hands.EnumerateHeld(xeno))
         {

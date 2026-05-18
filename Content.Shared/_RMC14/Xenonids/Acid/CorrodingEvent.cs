@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.Xenonids.Acid;
 /// Cancel this if you want to have special corrosion logic, e.g. <see cref="DamageableCorrodingComponent"/>.
 /// </summary>
 [ByRefEvent]
-public record struct CorrodingEvent(EntityUid Acid, float Dps, float ExpendableLightDps, XenoAcidStrength AcidStrength, bool Cancelled = false);
+public record struct CorrodingEvent(EntityUid Acid, float Dps, float ExpendableLightDps, XenoAcidStrength AcidStrength, EntityUid? Source = null, bool Cancelled = false);
 
 [ByRefEvent]
 public record struct BeforeMeltedEvent();

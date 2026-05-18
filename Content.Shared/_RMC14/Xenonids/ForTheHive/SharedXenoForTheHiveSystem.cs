@@ -207,7 +207,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                             _acid.RemoveAcid(cade);
                         }
 
-                        _acid.ApplyAcid(active.Acid, active.AcidStrength, cade, active.AcidDps, 0, active.AcidTime);
+                        _acid.ApplyAcid(active.Acid, active.AcidStrength, cade, active.AcidDps, 0, active.AcidTime, xeno);
                     }
 
 

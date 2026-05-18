@@ -29,13 +29,13 @@ public sealed class MCConfigVars : CVars
      */
 
     public static readonly CVarDef<bool> ZLevelsEnabled =
-        CVarDef.Create("mc.z_levels.enabled", true, CVar.ARCHIVE | CVar.SERVER);
+        CVarDef.Create("mc.z_levels.enabled", false, CVar.ARCHIVE | CVar.SERVER | CVar.REPLICATED);
 
     public static readonly CVarDef<int> ZLevelsPhysicsTickRate =
-        CVarDef.Create("mc.z_levels.physics.tick_rate", 30, CVar.ARCHIVE);
+        CVarDef.Create("mc.z_levels.physics.tick_rate", 20, CVar.ARCHIVE);
 
     public static readonly CVarDef<bool> ZLevelsPhysicsClientSimulation =
-        CVarDef.Create("mc.z_levels.physics.client_simulation", true, CVar.ARCHIVE | CVar.CLIENT);
+        CVarDef.Create("mc.z_levels.physics.client_simulation", false, CVar.ARCHIVE | CVar.CLIENT);
 
     public static readonly CVarDef<int> ZLevelsViewerMaxPreloadBelowDepth =
         CVarDef.Create("mc.z_levels.viewer.max_preload_below_depth", 1, CVar.ARCHIVE | CVar.SERVERONLY);

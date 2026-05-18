@@ -60,10 +60,7 @@ namespace Content.Client.Administration.UI.Bwoink
             {
                 var sb = new StringBuilder();
 
-                if (info.Connected)
-                    sb.Append(info.ActiveThisRound ? '\u26AB' : '\u25D0');
-                else
-                    sb.Append(info.ActiveThisRound ? '\u2B58' : '\u25CB');
+                sb.Append(GetConnectionIndicator(info));
 
                 sb.Append(' ');
                 if (AHelpHelper.TryGetChannel(info.SessionId, out var panel) && panel.Unread > 0)
@@ -251,7 +248,7 @@ namespace Content.Client.Administration.UI.Bwoink
         {
             pl ??= (PlayerInfo) li.Metadata!;
             var sb = new StringBuilder();
-            sb.Append(pl.Connected ? '\u25CF' : '\u25CB');
+            sb.Append(GetConnectionIndicator(pl));
             sb.Append(' ');
             if (AHelpHelper.TryGetChannel(pl.SessionId, out var panel) && panel.Unread > 0)
             {
@@ -276,6 +273,11 @@ namespace Content.Client.Administration.UI.Bwoink
             sb.Append(' ').Append(pl.Username);
 
             return sb.ToString();
+        }
+
+        private static char GetConnectionIndicator(PlayerInfo info)
+        {
+            return info.Connected ? '\u25CF' : '\u25CB';
         }
 
         private void SwitchToChannel(NetUserId? ch)

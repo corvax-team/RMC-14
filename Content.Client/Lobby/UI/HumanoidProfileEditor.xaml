@@ -184,6 +184,14 @@
                                             MinWidth="156"
                                             HorizontalAlignment="Right" />
                                 </BoxContainer>
+                                <BoxContainer HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-background-commendations-label'}" />
+                                    <Control HorizontalExpand="True"/>
+                                    <Button Name="BackgroundCommendationsButton"
+                                            Text="{Loc 'humanoid-profile-editor-background-info-open'}"
+                                            MinWidth="156"
+                                            HorizontalAlignment="Right" />
+                                </BoxContainer>
                                 <PanelContainer Name="BackgroundInfoInlineContainer" Visible="False" HorizontalExpand="True" MinHeight="220" Margin="0 6 0 0" />
                             </BoxContainer>
                         </ui:HighlightedContainer>

@@ -38,6 +38,9 @@ public abstract class SharedDeafnessSystem : EntitySystem
 
     private void OnDeafenWhileCritMobState(Entity<DeafenWhileCritComponent> ent, ref MobStateChangedEvent args)
     {
+        if (_net.IsClient)
+            return;
+
         if (args.NewMobState != MobState.Critical)
             return;
 
@@ -46,6 +49,9 @@ public abstract class SharedDeafnessSystem : EntitySystem
 
     private void OnActiveDeafenWhileCritMobState(Entity<ActiveDeafenWhileCritComponent> ent, ref MobStateChangedEvent args)
     {
+        if (_net.IsClient)
+            return;
+
         if (args.NewMobState != MobState.Critical)
             RemCompDeferred<ActiveDeafenWhileCritComponent>(ent);
     }

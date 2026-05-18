@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Content.Shared.Body.Organ;
+using Content.Shared.Body.Part;
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.KillTracking;
@@ -10,11 +12,14 @@ using Content.Server._CCM.Stats;
 using Content.Shared._CCM.Achievements;
 using Content.Shared._CCM.Stats;
 using Content.Shared._RMC14.Construction;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
+using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Server._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared.Damage;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
@@ -50,8 +55,10 @@ public sealed class CCMAchievementSystem : EntitySystem
 
     private static readonly List<CCMAchievementDefinition> Definitions =
     [
+        new("general_first_steps", CCMAchievementCategory.General, "ccm-achievement-general-first-steps-title", "ccm-achievement-general-first-steps-desc", 10, ctx => ctx.RoundsPlayed),
         new("general_veteran", CCMAchievementCategory.General, "ccm-achievement-general-veteran-title", "ccm-achievement-general-veteran-desc", 50, ctx => ctx.RoundsPlayed),
         new("general_living_legend", CCMAchievementCategory.General, "ccm-achievement-general-living-legend-title", "ccm-achievement-general-living-legend-desc", 200, ctx => ctx.RoundsPlayed),
+        new("general_first_victory", CCMAchievementCategory.General, "ccm-achievement-general-first-victory-title", "ccm-achievement-general-first-victory-desc", 10, ctx => ctx.RoundsWon),
         new("general_campaign_veteran", CCMAchievementCategory.General, "ccm-achievement-general-campaign-veteran-title", "ccm-achievement-general-campaign-veteran-desc", 50, ctx => ctx.RoundsWon),
         new("general_war_legend", CCMAchievementCategory.General, "ccm-achievement-general-war-legend-title", "ccm-achievement-general-war-legend-desc", 200, ctx => ctx.RoundsWon),
         new("general_beta_tester", CCMAchievementCategory.General, "ccm-achievement-general-beta-tester-title", "ccm-achievement-general-beta-tester-desc", 1, _ => 0, true),
@@ -71,9 +78,9 @@ public sealed class CCMAchievementSystem : EntitySystem
         new("marine_paramedic", CCMAchievementCategory.Marines, "ccm-achievement-marine-paramedic-title", "ccm-achievement-marine-paramedic-desc", 100, ctx => ctx.MarineRevives),
         new("marine_savior", CCMAchievementCategory.Marines, "ccm-achievement-marine-savior-title", "ccm-achievement-marine-savior-desc", 300, ctx => ctx.MarineRevives),
 
-        new("marine_mechanic", CCMAchievementCategory.Marines, "ccm-achievement-marine-mechanic-title", "ccm-achievement-marine-mechanic-desc", 50, ctx => ctx.StructuresBuilt),
-        new("marine_fortifier", CCMAchievementCategory.Marines, "ccm-achievement-marine-fortifier-title", "ccm-achievement-marine-fortifier-desc", 500, ctx => ctx.StructuresBuilt),
-        new("marine_defense_architect", CCMAchievementCategory.Marines, "ccm-achievement-marine-defense-architect-title", "ccm-achievement-marine-defense-architect-desc", 2000, ctx => ctx.StructuresBuilt),
+        new("marine_mechanic", CCMAchievementCategory.Marines, "ccm-achievement-marine-mechanic-title", "ccm-achievement-marine-mechanic-desc", 50, ctx => ctx.MarineStructuresBuilt),
+        new("marine_fortifier", CCMAchievementCategory.Marines, "ccm-achievement-marine-fortifier-title", "ccm-achievement-marine-fortifier-desc", 500, ctx => ctx.MarineStructuresBuilt),
+        new("marine_defense_architect", CCMAchievementCategory.Marines, "ccm-achievement-marine-defense-architect-title", "ccm-achievement-marine-defense-architect-desc", 2000, ctx => ctx.MarineStructuresBuilt),
 
         new("marine_victory", CCMAchievementCategory.Marines, "ccm-achievement-marine-victory-title", "ccm-achievement-marine-victory-desc", 10, ctx => ctx.MarineRoundsWon),
         new("marine_campaigns_veteran", CCMAchievementCategory.Marines, "ccm-achievement-marine-campaigns-veteran-title", "ccm-achievement-marine-campaigns-veteran-desc", 50, ctx => ctx.MarineRoundsWon),
@@ -91,6 +98,9 @@ public sealed class CCMAchievementSystem : EntitySystem
         new("xeno_hive_empire", CCMAchievementCategory.Xenos, "ccm-achievement-xeno-hive-empire-title", "ccm-achievement-xeno-hive-empire-desc", 150, ctx => ctx.XenoRoundsWon),
 
         new("xeno_hive_birth", CCMAchievementCategory.Xenos, "ccm-achievement-xeno-hive-birth-title", "ccm-achievement-xeno-hive-birth-desc", 1, ctx => ctx.Special.XenoEvolutions),
+        new("xeno_resin_worker", CCMAchievementCategory.Xenos, "ccm-achievement-xeno-resin-worker-title", "ccm-achievement-xeno-resin-worker-desc", 50, ctx => ctx.XenoStructuresBuilt),
+        new("xeno_hive_fortifier", CCMAchievementCategory.Xenos, "ccm-achievement-xeno-hive-fortifier-title", "ccm-achievement-xeno-hive-fortifier-desc", 500, ctx => ctx.XenoStructuresBuilt),
+        new("xeno_hive_architect", CCMAchievementCategory.Xenos, "ccm-achievement-xeno-hive-architect-title", "ccm-achievement-xeno-hive-architect-desc", 2000, ctx => ctx.XenoStructuresBuilt),
         new("xeno_young_hunter", CCMAchievementCategory.Xenos, "ccm-achievement-xeno-young-hunter-title", "ccm-achievement-xeno-young-hunter-desc", 50, ctx => ctx.XenoKills),
         new("xeno_predator", CCMAchievementCategory.Xenos, "ccm-achievement-xeno-predator-title", "ccm-achievement-xeno-predator-desc", 250, ctx => ctx.XenoKills),
         new("xeno_drop_horror", CCMAchievementCategory.Xenos, "ccm-achievement-xeno-drop-horror-title", "ccm-achievement-xeno-drop-horror-desc", 500, ctx => ctx.XenoKills),
@@ -196,15 +206,14 @@ public sealed class CCMAchievementSystem : EntitySystem
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<CCMStatsSystem.CCMCombatDamageRecordedEvent>(OnCombatDamageRecorded);
         SubscribeLocalEvent<KillReportedEvent>(OnKillReported);
         SubscribeLocalEvent<TargetDefibrillatedEvent>(OnTargetDefibrillated);
-        SubscribeLocalEvent<RMCConstructionBuildDoAfterEvent>(OnMarineConstructionBuilt,
-            after: [typeof(Content.Shared._RMC14.Construction.RMCConstructionSystem), typeof(CCMStatsSystem)]);
-        SubscribeLocalEvent<XenoSecreteStructureDoAfterEvent>(OnXenoStructureSecreted,
-            after: [typeof(Content.Shared._RMC14.Xenonids.Construction.SharedXenoConstructionSystem), typeof(CCMStatsSystem)]);
-        SubscribeLocalEvent<XenoConstructionAddPlasmaDoAfterEvent>(OnXenoConstructionCompleted,
-            after: [typeof(Content.Shared._RMC14.Xenonids.Construction.SharedXenoConstructionSystem), typeof(CCMStatsSystem)]);
+        SubscribeLocalEvent<RMCStructureBuiltEvent>(OnMarineStructureBuilt, after: [typeof(CCMStatsSystem)]);
+        SubscribeLocalEvent<XenoStructureBuiltEvent>(OnXenoStructureBuilt, after: [typeof(CCMStatsSystem)]);
+        SubscribeLocalEvent<XenoStructureUpgradedEvent>(OnXenoStructureUpgraded, after: [typeof(CCMStatsSystem)]);
+        SubscribeLocalEvent<XenoResinHolePlacedEvent>(OnXenoResinHolePlaced, after: [typeof(CCMStatsSystem)]);
+        SubscribeLocalEvent<XenoTunnelPlacedEvent>(OnXenoTunnelPlaced, after: [typeof(CCMStatsSystem)]);
         SubscribeLocalEvent<NewXenoEvolvedEvent>(OnNewXenoEvolved);
         SubscribeLocalEvent<CCMRequisitionOrderedEvent>(OnRequisitionOrdered);
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndTextAppend,
@@ -274,25 +283,13 @@ public sealed class CCMAchievementSystem : EntitySystem
         _ = EnsureStateLoadedAsync(ev.Player.UserId);
     }
 
-    private void OnDamageChanged(DamageChangedEvent args)
+    private void OnCombatDamageRecorded(CCMStatsSystem.CCMCombatDamageRecordedEvent ev)
     {
-        var damage = GetPositiveDamage(args);
-        var healing = GetPositiveHealing(args);
-        if (damage <= 0 && healing <= 0)
+        if (!ev.FriendlyFire || ev.Damage <= 0)
             return;
 
-        if (!TryGetSourcePlayerAndSide(args.Origin, args.Tool, out var userId, out var sourceSide))
-            return;
-
-        if (sourceSide == CCMStatsSide.None)
-            return;
-
-        if (damage > 0 && GetSide(args.Damageable.Owner) == sourceSide && args.Origin != args.Damageable.Owner)
-        {
-            GetOrCreateRoundState(userId).FriendlyFireDamage += damage;
-        }
-
-        _ = EvaluatePlayerAsync(userId, notify: true);
+        GetOrCreateRoundState(ev.UserId).FriendlyFireDamage += (int) MathF.Round(ev.Damage);
+        _ = EvaluatePlayerAsync(ev.UserId, notify: true);
     }
 
     private void OnKillReported(ref KillReportedEvent args)
@@ -322,7 +319,7 @@ public sealed class CCMAchievementSystem : EntitySystem
 
         foreach (var participant in participants)
         {
-            _ = EvaluatePlayerAsync(participant, notify: true);
+            _ = EvaluatePlayerAsync(participant, notify: true, pushSnapshot: true);
         }
     }
 
@@ -331,25 +328,37 @@ public sealed class CCMAchievementSystem : EntitySystem
         if (!TryComp(ev.User, out ActorComponent? actor))
             return;
 
-        _ = EvaluatePlayerAsync(actor.PlayerSession.UserId, notify: true);
+        _ = EvaluatePlayerAsync(actor.PlayerSession.UserId, notify: true, pushSnapshot: true);
     }
 
-    private void OnMarineConstructionBuilt(RMCConstructionBuildDoAfterEvent args)
+    private void OnMarineStructureBuilt(RMCStructureBuiltEvent args)
     {
-        if (!args.Cancelled && TryComp(args.User, out ActorComponent? actor))
-            _ = EvaluatePlayerAsync(actor.PlayerSession.UserId, notify: true);
+        if (TryComp(args.User, out ActorComponent? actor))
+            _ = EvaluatePlayerAsync(actor.PlayerSession.UserId, notify: true, pushSnapshot: true);
     }
 
-    private void OnXenoStructureSecreted(XenoSecreteStructureDoAfterEvent args)
+    private void OnXenoStructureBuilt(XenoStructureBuiltEvent args)
     {
-        if (!args.Cancelled && args.Handled && TryComp(args.User, out ActorComponent? actor))
-            _ = EvaluatePlayerAsync(actor.PlayerSession.UserId, notify: true);
+        if (TryComp(args.User, out ActorComponent? actor))
+            _ = EvaluatePlayerAsync(actor.PlayerSession.UserId, notify: true, pushSnapshot: true);
     }
 
-    private void OnXenoConstructionCompleted(XenoConstructionAddPlasmaDoAfterEvent args)
+    private void OnXenoStructureUpgraded(XenoStructureUpgradedEvent args)
     {
-        if (!args.Cancelled && args.Completed && TryComp(args.User, out ActorComponent? actor))
-            _ = EvaluatePlayerAsync(actor.PlayerSession.UserId, notify: true);
+        if (TryComp(args.User, out ActorComponent? actor))
+            _ = EvaluatePlayerAsync(actor.PlayerSession.UserId, notify: true, pushSnapshot: true);
+    }
+
+    private void OnXenoResinHolePlaced(XenoResinHolePlacedEvent args)
+    {
+        if (TryComp(args.User, out ActorComponent? actor))
+            _ = EvaluatePlayerAsync(actor.PlayerSession.UserId, notify: true, pushSnapshot: true);
+    }
+
+    private void OnXenoTunnelPlaced(XenoTunnelPlacedEvent args)
+    {
+        if (TryComp(args.User, out ActorComponent? actor))
+            _ = EvaluatePlayerAsync(actor.PlayerSession.UserId, notify: true, pushSnapshot: true);
     }
 
     private void OnNewXenoEvolved(ref NewXenoEvolvedEvent args)
@@ -362,13 +371,13 @@ public sealed class CCMAchievementSystem : EntitySystem
         round.XenoParticipated = true;
         round.QueenParticipated |= HasComp<XenoEvolutionGranterComponent>(args.NewXeno);
 
-        _ = EvaluatePlayerAsync(actor.PlayerSession.UserId, notify: true);
+        _ = EvaluatePlayerAsync(actor.PlayerSession.UserId, notify: true, pushSnapshot: true);
     }
 
     private void OnRequisitionOrdered(CCMRequisitionOrderedEvent ev)
     {
         GetOrCreateRoundState(ev.UserId).RequisitionOrders += 1;
-        _ = EvaluatePlayerAsync(ev.UserId, notify: true);
+        _ = EvaluatePlayerAsync(ev.UserId, notify: true, pushSnapshot: true);
     }
 
     private async void OnRoundEndTextAppend(RoundEndTextAppendEvent ev)
@@ -417,7 +426,7 @@ public sealed class CCMAchievementSystem : EntitySystem
 
             foreach (var userId in evaluationUsers)
             {
-                _ = EvaluatePlayerAsync(userId, notify: true);
+                _ = EvaluatePlayerAsync(userId, notify: true, pushSnapshot: true);
             }
         }
         catch (Exception e)
@@ -522,7 +531,7 @@ public sealed class CCMAchievementSystem : EntitySystem
         }
     }
 
-    private async Task EvaluatePlayerAsync(NetUserId userId, bool notify)
+    private async Task EvaluatePlayerAsync(NetUserId userId, bool notify, bool pushSnapshot = false)
     {
         try
         {
@@ -531,6 +540,9 @@ public sealed class CCMAchievementSystem : EntitySystem
                 return;
 
             await SyncUnlocksAsync(userId, state, notify);
+
+            if (pushSnapshot)
+                await PushSnapshotAsync(userId, state);
         }
         catch (Exception e)
         {
@@ -856,7 +868,47 @@ public sealed class CCMAchievementSystem : EntitySystem
             }
         }
 
+        if (userId != default && side == CCMStatsSide.None)
+            side = GetPlayerCurrentSide(userId);
+
         return userId != default && side != CCMStatsSide.None;
+    }
+
+    private EntityUid ResolveStatsTarget(EntityUid target)
+    {
+        var current = target;
+        var visited = new HashSet<EntityUid>();
+
+        for (var depth = 0; depth < 8 && visited.Add(current); depth++)
+        {
+            if (GetSide(current) != CCMStatsSide.None)
+                return current;
+
+            if (TryComp(current, out BodyPartComponent? bodyPart) &&
+                bodyPart.Body is { } body)
+            {
+                current = body;
+                continue;
+            }
+
+            if (TryComp(current, out OrganComponent? organ) &&
+                organ.Body is { } organBody)
+            {
+                current = organBody;
+                continue;
+            }
+
+            if (!TryComp(current, out TransformComponent? xform) ||
+                xform.ParentUid == EntityUid.Invalid ||
+                xform.ParentUid == current)
+            {
+                break;
+            }
+
+            current = xform.ParentUid;
+        }
+
+        return current;
     }
 
     private CCMStatsSide GetSide(EntityUid uid)
@@ -867,6 +919,27 @@ public sealed class CCMAchievementSystem : EntitySystem
             return CCMStatsSide.Xenos;
         if (HasComp<GhostComponent>(uid))
             return CCMStatsSide.None;
+        return CCMStatsSide.None;
+    }
+
+    private CCMStatsSide GetPlayerCurrentSide(NetUserId player)
+    {
+        if (_players.TryGetSessionById(player, out var session) &&
+            session.AttachedEntity is { } attached)
+        {
+            var side = GetSide(attached);
+            if (side != CCMStatsSide.None)
+                return side;
+        }
+
+        if (_round.TryGetValue(player, out var round))
+        {
+            if (round.MarineParticipated)
+                return CCMStatsSide.Marines;
+            if (round.XenoParticipated)
+                return CCMStatsSide.Xenos;
+        }
+
         return CCMStatsSide.None;
     }
 
@@ -946,6 +1019,7 @@ public sealed class CCMAchievementSystem : EntitySystem
         public int MarineRevives => BaseStats.MarineRevives + LiveStats.MarineRevives;
         public int StructuresBuilt => BaseStats.StructuresBuilt + LiveStats.TotalStructuresBuilt;
         public int MarineStructuresBuilt => BaseStats.MarineStructuresBuilt + LiveStats.MarineStructuresBuilt;
+        public int XenoStructuresBuilt => BaseStats.XenoStructuresBuilt + LiveStats.XenoStructuresBuilt;
         public int MarineKills => BaseStats.MarineKills + LiveStats.MarineKills;
         public int XenoKills => BaseStats.XenoKills + LiveStats.XenoKills;
     }
