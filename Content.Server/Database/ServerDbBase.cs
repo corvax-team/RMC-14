@@ -2942,23 +2942,41 @@ CREATE TABLE IF NOT EXISTS hidden_ban (
 
             try
             {
+                var connectionType = connection.GetType().FullName ?? string.Empty;
+                var isNpgsql = connectionType.Contains("Npgsql", StringComparison.OrdinalIgnoreCase) ||
+                               connectionType.Contains("Postgre", StringComparison.OrdinalIgnoreCase);
+
+                if (isNpgsql)
+                {
+                    await using var postgresCommand = connection.CreateCommand();
+                    postgresCommand.CommandText = @"
+                        SELECT EXISTS (
+                            SELECT 1
+                            FROM information_schema.columns
+                            WHERE table_schema = 'public'
+                              AND table_name = @table
+                              AND column_name = @column
+                        )";
+
+                    AddCommandParameter(postgresCommand, "@table", tableName);
+                    AddCommandParameter(postgresCommand, "@column", columnName);
+                    return await postgresCommand.ExecuteScalarAsync() is true;
+                }
+
                 await using (var existsCommand = connection.CreateCommand())
                 {
                     existsCommand.CommandText =
-                        "SELECT 1 FROM sqlite_master WHERE type='table' AND name=$table LIMIT 1";
-                    var parameter = existsCommand.CreateParameter();
-                    parameter.ParameterName = "$table";
-                    parameter.Value = tableName;
-                    existsCommand.Parameters.Add(parameter);
+                        "SELECT 1 FROM sqlite_master WHERE type='table' AND name=@table LIMIT 1";
+                    AddCommandParameter(existsCommand, "@table", tableName);
 
                     var exists = await existsCommand.ExecuteScalarAsync();
                     if (exists == null)
                         return false;
                 }
 
-                await using var command = connection.CreateCommand();
-                command.CommandText = $"PRAGMA table_info('{tableName}')";
-                await using var reader = await command.ExecuteReaderAsync();
+                await using var pragmaCommand = connection.CreateCommand();
+                pragmaCommand.CommandText = $"PRAGMA table_info('{tableName}')";
+                await using var reader = await pragmaCommand.ExecuteReaderAsync();
                 while (await reader.ReadAsync())
                 {
                     if (string.Equals(reader["name"]?.ToString(), columnName, StringComparison.OrdinalIgnoreCase))
