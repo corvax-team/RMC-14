@@ -1326,6 +1326,9 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await using var db = await GetDb();
             await EnsureHiddenBanStorage(db.DbContext);
 
+            if (player is not { } userId)
+                return false;
+
             var connection = db.DbContext.Database.GetDbConnection();
             var shouldClose = connection.State != System.Data.ConnectionState.Open;
             if (shouldClose)
@@ -1333,49 +1336,9 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
             try
             {
-                var conditions = new List<string>();
                 await using var command = connection.CreateCommand();
-
-                if (player is { } userId)
-                {
-                    conditions.Add("user_id = @userId");
-                    AddCommandParameter(command, "@userId", userId.UserId.ToString());
-                }
-
-                var normalizedAddress = NormalizeHiddenBanAddress(address);
-                if (normalizedAddress != null)
-                {
-                    conditions.Add("address = @address");
-                    AddCommandParameter(command, "@address", normalizedAddress.ToString());
-                }
-
-                var hwids = new HashSet<string>();
-                if (hwId is { Length: > 0 } legacyHwid)
-                    hwids.Add(new ImmutableTypedHwid(legacyHwid, HwidType.Legacy).ToString());
-
-                if (modernHWIds != null)
-                {
-                    foreach (var modernHwid in modernHWIds)
-                    {
-                        if (modernHwid.Length == 0)
-                            continue;
-
-                        hwids.Add(new ImmutableTypedHwid(modernHwid, HwidType.Modern).ToString());
-                    }
-                }
-
-                var i = 0;
-                foreach (var hwidText in hwids)
-                {
-                    var parameterName = $"@hwid{i++}";
-                    conditions.Add($"hwid = {parameterName}");
-                    AddCommandParameter(command, parameterName, hwidText);
-                }
-
-                if (conditions.Count == 0)
-                    return false;
-
-                command.CommandText = $"SELECT 1 FROM hidden_ban WHERE {string.Join(" OR ", conditions)} LIMIT 1";
+                command.CommandText = "SELECT 1 FROM hidden_ban WHERE user_id = @userId LIMIT 1";
+                AddCommandParameter(command, "@userId", userId.UserId.ToString());
                 return await command.ExecuteScalarAsync() != null;
             }
             finally
@@ -1399,16 +1362,12 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             {
                 await using var command = connection.CreateCommand();
                 command.CommandText = """
-                    INSERT INTO hidden_ban (user_id, address, hwid)
-                    VALUES (@userId, @address, @hwid)
-                    ON CONFLICT(user_id) DO UPDATE SET
-                        address = excluded.address,
-                        hwid = excluded.hwid
+                    INSERT INTO hidden_ban (user_id)
+                    VALUES (@userId)
+                    ON CONFLICT(user_id) DO NOTHING
                     """;
 
                 AddCommandParameter(command, "@userId", player.UserId.ToString());
-                AddCommandParameter(command, "@address", NormalizeHiddenBanAddress(address)?.ToString());
-                AddCommandParameter(command, "@hwid", hwId?.ToString());
 
                 await command.ExecuteNonQueryAsync();
             }
@@ -2875,9 +2834,7 @@ CREATE TABLE IF NOT EXISTS ccm_leaderboard_reset (
         {
             const string createTable = @"
 CREATE TABLE IF NOT EXISTS hidden_ban (
-    user_id TEXT PRIMARY KEY,
-    address TEXT NULL,
-    hwid TEXT NULL
+    user_id TEXT PRIMARY KEY
 )";
 
             try
@@ -2890,9 +2847,6 @@ CREATE TABLE IF NOT EXISTS hidden_ban (
                 await dbContext.Database.ExecuteSqlRawAsync(createTable);
             }
 
-            var connection = dbContext.Database.GetDbConnection();
-            await EnsureTableColumn(dbContext, connection, "hidden_ban", "address", "TEXT");
-            await EnsureTableColumn(dbContext, connection, "hidden_ban", "hwid", "TEXT");
         }
 
         private static async Task EnsureTableColumn(
