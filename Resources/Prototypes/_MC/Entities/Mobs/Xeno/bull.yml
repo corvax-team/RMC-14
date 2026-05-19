@@ -43,6 +43,7 @@
     - MCActionXenoAcidCharge
     tier: 2
     hudOffset: -0.15, 0.25
+    unlockAt: 540 # 9 minutes
   # Statistics
   - type: MobThresholds
     thresholds:

@@ -118,12 +118,12 @@ public sealed class MCXenoEvasionSystem : EntitySystem
 
         args.Cancelled = true;
 
-        var damage = GetDamage(args.OtherEntity);
-        entity.Comp.Stacks = Math.Max(0, entity.Comp.Stacks + damage);
-        Dirty(entity);
+        // var damage = GetDamage(args.OtherEntity);
+        // entity.Comp.Stacks = Math.Max(0, entity.Comp.Stacks + damage);
+        // Dirty(entity);
 
-        if (entity.Comp.Stacks >= evasionComponent.RefreshThreshold)
-            RefreshAction(entity);
+        // if (entity.Comp.Stacks >= evasionComponent.RefreshThreshold)
+        //     RefreshAction(entity);
 
         if (evasionComponent.EvadeSound is not null)
             _audio.PlayPredicted(evasionComponent.EvadeSound, entity, entity);
@@ -131,17 +131,17 @@ public sealed class MCXenoEvasionSystem : EntitySystem
         _jittering.DoJitter(entity, TimeSpan.FromSeconds(0.5), true, frequency: 6);
     }
 
-    private void RefreshAction(EntityUid uid)
-    {
-        foreach (var action in _rmcActions.GetActionsWithEvent<MCXenoEvasionActionEvent>(uid))
-        {
-            _actions.ClearCooldown((action, action));
-        }
-    }
+    // private void RefreshAction(EntityUid uid)
+    // {
+    //     foreach (var action in _rmcActions.GetActionsWithEvent<MCXenoEvasionActionEvent>(uid))
+    //     {
+    //         _actions.ClearCooldown((action, action));
+    //     }
+    // }
 
-    private float GetDamage(EntityUid uid)
-    {
-        var damage = _projectileQuery.CompOrNull(uid)?.Damage.GetTotal().Float() ?? 0;
-        return _igniteProjectileQuery.HasComp(uid) ? -damage : damage;
-    }
+    // private float GetDamage(EntityUid uid)
+    // {
+    //     var damage = _projectileQuery.CompOrNull(uid)?.Damage.GetTotal().Float() ?? 0;
+    //     return _igniteProjectileQuery.HasComp(uid) ? -damage : damage;
+    // }
 }
