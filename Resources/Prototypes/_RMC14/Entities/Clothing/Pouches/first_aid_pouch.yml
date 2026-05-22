@@ -7,6 +7,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/firstaid.rsi
   - type: Storage
+    maxItemSize: Large
     grid:
     - 0,0,7,1 #4 slots
     whitelist:
@@ -32,7 +33,7 @@
     contents:
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
-    #- id: CMTramadolAutoInjector # TODO RMC14
+    - id: CCMTramadolAutoInjector # CMU-CCM ADD
     - id: CMEmergencyAutoInjector
 
 - type: entity
@@ -43,7 +44,7 @@
   - type: StorageFill
     contents:
     - id: CMTricordrazineAutoInjector
-    #    - id: CMSplints5
+    - id: CMUSplintItem #CMU ADD
     - id: CMOintment10
     - id: CMGauze10
 
@@ -56,9 +57,7 @@
     contents:
     - id: CMPacketPillsBicaridine
     - id: CMPacketPillsKelotane
-#    - id: CMPacketPillsTramadol # TODO RMC14
-#    - id: CMPacketPillsTramadol # TODO RMC14
-
+    - id: CCMPacketPillsTramadol # CMU-CCM ADD
 
 # First Aid ERT
 - type: entity
@@ -81,7 +80,7 @@
     contents:
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
-    #- id: CMTramadolAutoInjector
+    - id: CCMTramadolAutoInjector # CMU-CCM ADD
     - id: CMEmergencyAutoInjector
     - id: CMGauze10
 
@@ -103,7 +102,7 @@
     contents:
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
-    #- id: CMTramadolAutoInjector
+    - id: CCMTramadolAutoInjector # CMU-CCM ADD
     - id: CMEmergencyAutoInjector
 
 - type: entity
@@ -116,5 +115,5 @@
     contents:
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
-    #- id: CMTramadolAutoInjector
+    - id: CCMTramadolAutoInjector # CMU-CCM ADD
     - id: CMEmergencyAutoInjector
