@@ -65,7 +65,7 @@
     max: 500
     evolvesTo:
     - CMXenoRavager
-#    - CCMXenoRouny // CCM Change > CCM Changed CCM change
+    - CCMXenoRouny # CCM
   - type: XenoMeleeSlow
     requiresKnockDown: true
     higherOnXenos: true
