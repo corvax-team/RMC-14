@@ -214,7 +214,7 @@
 - type: entity
   parent: CCMPillCanisterOrgansMixNoSkill
   id: CCMPillCanisterOrgansMix
-  suffix: CCM, Tramadol, 16
+  suffix: CCM, Organ Mix, 16
   components:
   - type: StorageSkillRequired
     skills:
