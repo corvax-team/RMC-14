@@ -16,3 +16,91 @@
       CCMDoxarubixadone: 5
   - type: IconLabel
     labelTextLocId: ccm-doxarubixadone-container-label-text
+
+- type: entity
+  parent: CMAutoInjector
+  id: CCMTramadolAutoInjector
+  name: Tramadol autoinjector
+  description: An autoinjector loaded with 3 uses of Tramadol, a medicine for moderate pain.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 45
+        reagents:
+        - ReagentId: CMUTramadol
+          Quantity: 45
+  - type: CMRefillableSolution
+    reagents:
+      CMUTramadol: 45
+  - type: IconLabel
+    labelTextLocId: ccm-tramadol-container-label-text
+
+- type: entity
+  parent: CMAutoInjector
+  id: CCMParacetamolAutoInjector
+  name: Paracetamol autoinjector
+  description: An autoinjector loaded with 3 uses of Paracetamol, a medicine for light pain.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 75
+        reagents:
+        - ReagentId: CMUParacetamol
+          Quantity: 75
+  - type: CMRefillableSolution
+    reagents:
+      CMUParacetamol: 75
+  - type: IconLabel
+    labelTextLocId: ccm-paracetamol-container-label-text
+
+- type: entity
+  parent: CMAutoInjector
+  id: CCMOxycodoneAutoInjector
+  name: Oxycodone autoinjector
+  description: An autoinjector loaded with 3 uses of Oxycodone, a medicine for heavy pain.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 30
+        reagents:
+        - ReagentId: CMUOxycodone
+          Quantity: 30
+  - type: CMRefillableSolution
+    reagents:
+      CMUOxycodone: 30
+  - type: IconLabel
+    labelTextLocId: ccm-oxycodone-container-label-text
+
+- type: entity
+  parent: CMAutoInjector
+  id: CCMOrganMixAutoInjector
+  name: OrganMix autoinjector
+  description: An autoinjector loaded with 3 uses of Organ Mix (H.P.N.C.O.), a medicine for treating organs & bone damage.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 75
+        reagents:
+        - ReagentId: CMUHepatocytin
+          Quantity: 15
+        - ReagentId: CMUPulmovine
+          Quantity: 15
+        - ReagentId: CMUNephronate
+          Quantity: 15
+        - ReagentId: CMUCardiocaine
+          Quantity: 15
+        - ReagentId: CMUOsteoCalc
+          Quantity: 15
+  - type: CMRefillableSolution
+    reagents:
+      CMUHepatocytin: 15
+      CMUPulmovine: 15
+      CMUNephronate: 15
+      CMUCardiocaine: 15
+      CMUOsteoCalc: 15
+  - type: IconLabel
+    labelTextLocId: ccm-organmix-container-label-text
