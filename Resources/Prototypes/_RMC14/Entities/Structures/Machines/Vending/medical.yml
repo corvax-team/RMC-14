@@ -43,9 +43,16 @@
     - CMTricordrazine
     - CMEpinephrine
     - CMInaprovaline
-#    - CMOxycodone # TODO RMC14
-#    - CMTramadol # TODO RMC14
-#    - CMPeridaxon # TODO RMC14
+# CMU ADD
+    - CMUTramadol
+    - CMUParacetamol
+    - CMUOxycodone
+    - CMUHepatocytin
+    - CMUPulmovine
+    - CMUNephronate
+    - CMUCardiocaine
+    - CMUOsteoCalc
+# CMU END
     whitelist:
       components:
       - Hypospray
@@ -67,8 +74,10 @@
         amount: 10
       - id: CMGauze10
         amount: 10
-#      - id: CMSplints10 # TODO RMC14
-#        amount: 10
+# CMU ADD
+      - id: CMUSplintItem
+        amount: 5
+# CMU END
     - name: Автоинъекторы # CCM14
       entries:
       - id: CMBicaridineAutoInjector
@@ -83,14 +92,18 @@
         amount: 5
       - id: CMKelotaneAutoInjector
         amount: 3
+# CMU-CCM ADD
       - id: CCMDoxarubixadoneAutoInjector # CCM-14
         amount: 5
-#      - id: CMOxycodoneAutoinjector # TODO RMC14
-#        amount: 5
-#      - id: CMPeridaxonAutoinjector # TODO RMC14
-#        amount: 5
-#      - id: CMTramadolAutoinjector # TODO RMC14
-#        amount: 5
+      - id: CCMTramadolAutoInjector
+        amount: 5
+      - id: CCMParacetamolAutoInjector
+        amount: 5
+      - id: CCMOxycodoneAutoInjector
+        amount: 3
+      - id: CCMOrganMixAutoInjector
+        amount: 5
+# CMU-CCM END
       - id: CMTricordrazineAutoInjector
         amount: 5
     - name: Растворы # CCM14
@@ -105,14 +118,18 @@
         amount: 3
       - id: CMBottleKelotane
         amount: 3
+# CMU-CCM ADD
       - id: CMULimbPrinterMatrixBeaker
         amount: 3
-#      - id: CMBottleOxycodone # TODO RMC14
-#        amount: 3
-#      - id: CMBottlePeridaxon # TODO RMC14
-#        amount: 3
-#      - id: CMBottleTramadol # TODO RMC14
-#        amount: 3
+      - id: CCMBottleTramadol
+        amount: 3
+      - id: CCMBottleParacetamol
+        amount: 3
+      - id: CCMBottleOxycodone
+        amount: 2
+      - id: CCMBottleOrganMix
+        amount: 2
+# CMU-CCM END
     - name: Таблетки # CCM14
       entries:
       - id: CMPillCanisterBicaridine
@@ -125,12 +142,16 @@
         amount: 4
       - id: CMPillCanisterKelotane
         amount: 4
-#      - id: CMPillCanisterOxycodone # TODO RMC14
-#        amount: 3
-#      - id: CMPillCanisterPeridaxon # TODO RMC14
-#        amount: 3
-#      - id: CMPillCanisterTramadol # TODO RMC14
-#        amount: 4
+# CMU-CCM ADD
+      - id: CCMPillCanisterTramadol
+        amount: 3
+      - id: CCMPillCanisterOxycodone
+        amount: 2
+      - id: CCMPillCanisterParacetamolNoSkill
+        amount: 2
+      - id: CCMPillCanisterOrgansMix
+        amount: 3
+# CMU-CCM EMD
     - name: Мединструменты # CCM14
       entries:
       - id: CMDefibrillator
@@ -153,8 +174,14 @@
         amount: 3
       - id: CMSyringe
         amount: 7
-      - id: CMUSplintItem
-        amount: 5
+# CMU ADD
+      - id: CMUBoneGraftItem
+        amount: 3
+      - id: CMUCastItem
+        amount: 3
+      - id: CMUOrganClampItem
+        amount: 3
+# CMU END
 
 - type: entity
   parent: CMVendorMedicalAllAccess
@@ -181,8 +208,10 @@
         amount: 10
       - id: CMGauze10
         amount: 10
-#      - id: CMSplints10 # TODO RMC14
-#        amount: 10
+# CMU ADD
+      - id: CMUSplintItem
+        amount: 5
+# CMU END
     - name: Автоинъекторы # CCM14
       entries:
       - id: CMBicaridineAutoInjector
@@ -196,13 +225,19 @@
       - id: CMInaprovalineAutoInjector
         amount: 5
       - id: CMKelotaneAutoInjector
+        amount: 3
+# CMU-CCM ADD
+      - id: CCMDoxarubixadoneAutoInjector # CCM-14
         amount: 5
-#      - id: CMOxycodoneAutoinjector # TODO RMC14
-#        amount: 5
-#      - id: CMPeridaxonAutoinjector # TODO RMC14
-#        amount: 5
-#      - id: CMTramadolAutoinjector # TODO RMC14
-#        amount: 5
+      - id: CCMTramadolAutoInjector
+        amount: 5
+      - id: CCMParacetamolAutoInjector
+        amount: 5
+      - id: CCMOxycodoneAutoInjector
+        amount: 3
+      - id: CCMOrganMixAutoInjector
+        amount: 5
+# CMU-CCM END
       - id: CMTricordrazineAutoInjector
         amount: 5
     - name: Растворы # CCM14
@@ -217,20 +252,20 @@
         amount: 3
       - id: CMBottleKelotane
         amount: 3
-#      - id: CMBottleOxycodone # TODO RMC14
-#        amount: 3
-#      - id: CMBottlePeridaxon # TODO RMC14
-#        amount: 3
-#      - id: CMBottleTramadol # TODO RMC14
-#        amount: 3
+# CMU-CCM ADD
+      - id: CMULimbPrinterMatrixBeaker
+        amount: 3
+      - id: CCMBottleTramadol
+        amount: 3
+      - id: CCMBottleParacetamol
+        amount: 3
+      - id: CCMBottleOxycodone
+        amount: 2
+      - id: CCMBottleOrganMix
+        amount: 2
+# CMU-CCM END
     - name: Таблетки # CCM14
       entries:
-      - id: RMCPillCanisterMeralyneBicaridine
-        amount: 4
-      - id: CMPillCanisterKelotaneDermaline
-        amount: 4
-      - id: CMPillCanisterTricordrazine
-        amount: 4
       - id: CMPillCanisterBicaridine
         amount: 4
       - id: CMPillCanisterDexalin
@@ -241,19 +276,27 @@
         amount: 4
       - id: CMPillCanisterKelotane
         amount: 4
-#      - id: CMPillCanisterOxycodone # TODO RMC14
-#        amount: 3
-#      - id: CMPillCanisterPeridaxon # TODO RMC14
-#        amount: 3
-#      - id: CMPillCanisterTramadol # TODO RMC14
-#        amount: 4
+# CMU-CCM ADD
+      - id: CCMPillCanisterTramadol
+        amount: 3
+      - id: CCMPillCanisterOxycodone
+        amount: 2
+      - id: CCMPillCanisterParacetamolNoSkill
+        amount: 2
+      - id: CCMPillCanisterOrgansMix
+        amount: 3
+# CMU-CCM EMD
     - name: Мединструменты # CCM14
       entries:
+      - id: CMDefibrillator
+        amount: 3
       - id: CMSurgicalLine
         amount: 2
       - id: CMSynthGraft
         amount: 2
-      - id: CMHyposprayFilledTricord
+      - id: CMHyposprayWithVial
+        amount: 3
+      - id: RMCVialTricordrazine
         amount: 3
       - id: CMHealthAnalyzer
         amount: 5
@@ -265,6 +308,14 @@
         amount: 3
       - id: CMSyringe
         amount: 7
+# CMU ADD
+      - id: CMUBoneGraftItem
+        amount: 3
+      - id: CMUCastItem
+        amount: 3
+      - id: CMUOrganClampItem
+        amount: 3
+# CMU END
 
 - type: entity
   parent: CMVendorMedical
@@ -299,12 +350,16 @@
         amount: 6
       - id: CMBottleKelotane
         amount: 6
-#      - id: CMBottleOxycodone # TODO RMC14
-#        amount: 6
-#      - id: CMBottlePeridaxon # TODO RMC14
-#        amount: 6
-#      - id: CMBottleTramadol # TODO RMC14
-#        amount: 6
+# CMU-CCM ADD
+      - id: CCMBottleTramadol
+        amount: 5
+      - id: CCMBottleParacetamol
+        amount: 3
+      - id: CCMBottleOxycodone
+        amount: 2
+      - id: CCMBottleOrganMix
+        amount: 4
+# CMU-CCM END
     - name: Разное # CCM14
       entries:
       - id: CMBeaker
@@ -319,7 +374,6 @@
         amount: 3
       - id: CMSyringe
         amount: 7
-
 
 - type: entity
   parent: ColMarTechBaseAnchorable
@@ -352,7 +406,10 @@
     rechargeCooldown: 4
     reagents:
     - CMTricordrazine
-#    - CMTramadol # TODO RMC14
+# CMU ADD
+    - CMUTramadol
+    - CMUParacetamol
+# CMU END
     whitelist:
       components:
       - Hypospray
@@ -362,8 +419,8 @@
       entries:
       - id: CMTricordrazineAutoInjectorNoSkill
         amount: 5
-#      - id: CMPainStopAutoinjector
-#        amount: 5
+      - id: CCMTramadolAutoInjector #CMU-CCM ADD
+        amount: 5
     - name: Мединструменты # CCM14
       entries:
       - id: CMHealthAnalyzer
@@ -376,8 +433,10 @@
         amount: 8
       - id: CMGauze10
         amount: 8
-#      - id: CMMedicalSplints5
-#        amount: 8
+# CMU ADD
+      - id: CMUSplintItem
+        amount: 5
+# CMU END
 
 - type: entity
   parent: ColMarTechMarineMedical
@@ -420,8 +479,10 @@
     recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
     rechargeCooldown: 4
     reagents:
-    - CMTricordrazine
-#    - CMTramadol # TODO RMC14
+# CMU ADD
+    - CMUTramadol
+    - CMUParacetamol
+# CMU END
     whitelist:
       components:
       - Hypospray
@@ -432,14 +493,16 @@
       entries:
       - id: CMTricordrazineAutoInjectorNoSkill
         amount: 2
-#      - id: CMPainStopAutoinjector
-#        amount: 2
+      - id: CCMTramadolAutoInjector #CMU-CCM ADD
+        amount: 2
       - id: CMGauze10
         amount: 4
       - id: CMOintment10
         amount: 4
-#      - id: CMMedicalSplints5
-#        amount: 4
+# CMU ADD
+      - id: CMUSplintItem
+        amount: 2
+# CMU END
     - name: Утилиты # CCM14
       entries:
       - id: CMHealthAnalyzer
@@ -458,7 +521,10 @@
     rechargeCooldown: 4
     reagents:
     - CMTricordrazine
-    #- CMTramadol TODO RMC14
+# CMU ADD
+    - CMUTramadol
+    - CMUParacetamol
+# CMU END
     whitelist:
       components:
       - Hypospray
@@ -480,18 +546,18 @@
       - id: CMTricordrazineAutoInjectorNoSkill
         name: автоинъектор первой помощи # CCM14
         amount: 2
-#      - id: CMPainStopAutoinjector
-#        name: Pain-Stop Autoinjector
-#        amount: 2
+      - id: CCMTramadolAutoInjector #CMU-CCM ADD
+        amount: 2
       - id: CMGauze10
         name: рулон бинта # CCM14
         amount: 4
       - id: CMOintment10
         name: мазь # CCM14
         amount: 4
-      #- id: CMMedicalSplints5
-      #  name: Medical Splints
-      #  amount: 4
+# CMU ADD
+      - id: CMUSplintItem
+        amount: 3
+# CMU END
     - name: Утилиты # CCM14
       entries:
       - id: CMHealthAnalyzer
