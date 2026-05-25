@@ -1,11 +1,14 @@
+using System;
 using System.Numerics;
 using Content.Shared._RMC14.Stun;
 using Robust.Shared.GameStates;
+using Robust.Shared.Map;
+using Robust.Shared.Maths;
 
 namespace Content.Shared.Vehicle.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(GridVehicleMoverSystem), Other = AccessPermissions.ReadWrite)]
+[Access(typeof(Content.Shared.Vehicle.GridVehicleMoverSystem), Other = AccessPermissions.ReadWrite)]
 public sealed partial class GridVehicleMoverComponent : Component
 {
     /// <summary>

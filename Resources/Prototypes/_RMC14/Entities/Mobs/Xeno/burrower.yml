@@ -133,3 +133,8 @@
     ventCrawlIcon: burrower
   - type: RMCActionOrder
     id: CMXenoBurrower
+    # CCM14-start
+  - type: XenoEvolution
+    strains: 
+    - CCMXenoBurrowerImpaler
+    # CCM14-end

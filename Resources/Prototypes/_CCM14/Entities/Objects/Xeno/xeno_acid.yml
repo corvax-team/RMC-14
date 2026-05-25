@@ -1,0 +1,60 @@
+- type: entity
+  parent: XenoAcidSprayWeak
+  id: CCMXenoAcidSprayRanger
+  name: weak splatter
+  description: It burns! It burns, but not as much!
+  components:
+  - type: Sprite
+    scale: 0.7, 0.7
+    layers:
+    - state: acid2-weak
+  - type: DamageOnCollide
+    paralyze: 0
+    damage:
+      types:
+        Heat: 15.5
+    chainDamage:
+      types:
+        Heat: 10
+  - type: TimedDespawn
+    lifetime: 0.6
+  - type: SprayExtinguishTileFire
+    extinguishAmount: 13
+
+- type: entity
+  id: CCMXenoBurrowerImpalerSpike #technically, this shi is acid
+  name: spike
+  description: My leg!
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Xeno/xeno.rsi
+    state: acid2-weak #Shitcode my beloved
+  - type: DamageOnCollide
+    paralyze: 0
+    canRehit: false
+    armorPenetration: 20
+    damage:
+      types:
+        Piercing: 30
+    whitelist:
+      components:
+      - Marine
+      - Barricade
+      - Vehicle
+  - type: TimedDespawn
+    lifetime: 1.4
+  - type: Transform
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.35,0.35,0.35"
+        mask:
+        - FullTileLayer
+        layer:
+        - FullTileLayer
+  - type: IgnorePredictionHit

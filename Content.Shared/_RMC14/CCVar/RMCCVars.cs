@@ -165,13 +165,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCDropshipFabricatorGainEverySeconds =
         CVarDef.Create("rmc.dropship_fabricator_gain_every_seconds", 3.33333f, CVar.REPLICATED | CVar.SERVER);
-    // CCM14-start
-    public static readonly CVarDef<int> VehicleFabricatorStartingPoints =
-        CVarDef.Create("rmc.vehicle_fabricator_starting_points", 5000, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<float> VehicleFabricatorGainEverySeconds =
-        CVarDef.Create("rmc.vehicle_fabricator_gain_every_seconds", 5f, CVar.REPLICATED | CVar.SERVER);
-    // CCM14-end
     public static readonly CVarDef<bool> RMCDropshipCASDebug =
         CVarDef.Create("rmc.dropship_cas_debug", false, CVar.REPLICATED | CVar.SERVER);
 
@@ -556,7 +550,7 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<float> RMCNewToJobPopupTime =
         CVarDef.Create("game.new_to_job_popup_time", 15f, CVar.SERVER | CVar.REPLICATED);
     public static readonly CVarDef<bool> RMCGhostCanBoo =
-        CVarDef.Create("rmc.ghosts_can_boo", true, CVar.SERVER | CVar.SERVERONLY);
+        CVarDef.Create("rmc.ghosts_can_boo", false, CVar.SERVER | CVar.SERVERONLY);
 
     public static readonly CVarDef<int> RMCRoyalResinEveryMinutes =
         CVarDef.Create("rmc.royal_resin_every_minutes", 5, CVar.REPLICATED | CVar.SERVER);

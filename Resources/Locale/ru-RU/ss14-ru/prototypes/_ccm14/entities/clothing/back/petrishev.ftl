@@ -1,0 +1,11 @@
+ent-CCMSatchelRev = рюкзак Революционеров-Петрищевцев
+    .desc = На удивление хорошо сделанный кожаный рюкзак, который носят боевики Революционеров-Петрищевцев.
+ent-CCMSatchelREVSanitarFilled = { ent-CCMSatchelRev }
+    .suffix = Заполненный, Медик
+    .desc = { ent-CCMSatchelRev.desc }
+ent-CCMSatchelREVSoldatFilled = { ent-CCMSatchelRev }
+    .suffix = Заполненный, Стрелок
+    .desc = { ent-CCMSatchelRev.desc }
+ent-CCMSatchelREVLeaderFilled = { ent-CCMSatchelRev }
+    .suffix = Заполненный, Лидер
+    .desc = { ent-CCMSatchelRev.desc }

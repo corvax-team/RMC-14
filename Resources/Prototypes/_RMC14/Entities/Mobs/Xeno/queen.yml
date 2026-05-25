@@ -105,6 +105,8 @@
     explosionArmor: 100
   - type: XenoWordQueen
   - type: XenoResinMark
+  - type: VehicleDamageMultiplier
+    multiplier: 2
   - type: InnateCommandSpeech
   - type: RMCInnateRadioTextIncrease
     radioTextIncrease: 3
@@ -278,10 +280,6 @@
   - type: RemoveComponents
     components:
     - type: Gibbable
-  #   # Corvax-Vehicle-Content-Start
-  # - type: VehicleDamageMultiplier
-  #   mult: 2
-  #   # Corvax-Vehicle-Content-End
 
 - type: entity
   parent: RMCXenoQueenBase

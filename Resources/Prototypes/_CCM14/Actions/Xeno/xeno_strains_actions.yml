@@ -31,34 +31,48 @@
     useDelay: 60
 
 - type: entity
-  parent: ActionXenoSpit
-  id: CCMActionXenoSniperSnipe
-  name: Snipe (300)
-  description: After a short delay fire a strong spit that deal a lot of damage
+  id: CCMActionXenoScatteredSpitSniper
+  parent: ActionXenoScatteredSpit
+  name: Structure scattered spit (105) # TODO RMC14 proper plasma costs
+  description: Spit scattered anti-structure and anti-barricade spit
   components:
   - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: bombard
-    useDelay: 8
-  - type: ActionSharedCooldown
-    id: CCMActionXenoSniperSnipe
-    ids:
-    - CCMActionXenoSniperWalker
-    cooldown: 8
+      state: acid_shotgun
+    useDelay: 7
 
 - type: entity
-  id: CCMActionXenoSniperWalker
-  parent: ActionXenoResinWalker
-  name: Walk Recover (150) # TODO RMC14 proper plasma costs
-  description: Recover to your normal speed. [color=cyan]Consumes 30 plasma per second.[/color]
+  id: CCMActionXenoSpitSniperMulti
+  parent: ActionXenoSpit
+  name: Sniper spits (84/70)
+  description: Spit pain or acid spit
   components:
-  - type: ActionSharedCooldown
-    id: CCMActionXenoSniperWalker
-    ids:
-    - CCMActionXenoSniperSnipe
-    cooldown: 8
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: acid_lance
+    useDelay: 3
+
+- type: entity
+  parent: ActionXenoToggleSpitType
+  id: CCMActionXenoToggleSpitTypeSniper
+  name: Change spit type
+  description: Change from pain spit, that cause slow and pain. To acid spit that deals great burns with AP
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: shift_spit_neurotoxin
+    iconOn:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: shift_spit_xeno_acid
+  - type: InstantAction
+    event: !type:XenoSpitToggleActionEvent
 
 - type: entity
   id: CCMActionXenoGreaterParalyzingSlash
@@ -71,3 +85,31 @@
   id: CCMActionXenoLightNeuroEmpower
   name: Light Neuro Empower
   description: Increases your movement speed and applies a slow on the next target you slash.
+
+- type: entity
+  parent: BaseActionPolymorph
+  id: CCMActionJauntBurrow
+  name: Burrowing spike rush
+  description: Dig in ground and them rush your enemies with your back spikes
+  components:
+  - type: Action
+    useDelay: 25
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tunnel
+  - type: InstantAction
+    event: !type:PolymorphActionEvent
+      protoId: CCMJauntBurrow
+
+- type: entity
+  parent: ActionXenoSprayAcid
+  id: CCMActionXenoBurrowerImpale
+  name: Burrowed spikes (40)
+  description: Strike with your spiked tail in ground 
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_impale
+    useDelay: 13

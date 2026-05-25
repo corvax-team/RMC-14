@@ -87,8 +87,9 @@
 - type: startingGear
   id: RMCGearRoyalTeamlead
   equipment:
-    head: RMCHeadRoyalBeretLead
+    head: CCMHeadMirtanSLHelmet #CCM14
     ears: RMCHeadsetRoyalMarineLeader
+    neck: CCMMirtanOficcerCloak #CCM14
     jumpsuit: RMCJumpsuitMarineRoyalTeamlead
     outerClothing: RMCArmorRoyalPaddedFilled
     gloves: RMCHandsVeteranRoyalMarine

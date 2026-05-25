@@ -6,7 +6,7 @@ This is the primary repo for CCM-14.
 
 ## Links
 
-[CCM-14 Community Wiki](https://station14.ru/wiki/Портал:Colonial_Marines) | [Discord](https://discord.gg/VWJZFUWgRc) | [SS14 Steam Launcher](https://store.steampowered.com/app/1255460/Space_Station_14/) | [Standalone Launcher Download](https://spacestation14.io/about/nightlies/)
+[CCM-14 Community Wiki](https://station14.ru/wiki/Портал:Colonial_Marines) | [Discord](https://discord.gg/VWJZFUWgRc) | [SS14 Steam Launcher](https://store.steampowered.com/app/1255460/Space_Station_14/) | [Our Website](https://cm14.ru/)
 
 ## Contributing
 
@@ -34,7 +34,9 @@ We have a [list of issues](https://github.com/corvax-team/RMC-14/issues) that ne
 
 ## License
 
-Everything related to licensing is described here: [Legal.md](https://github.com/corvax-team/RMC-14/blob/master/Legal.md)
+The vast majority of code implemented before February 1, 2026 is licensed under [MIT](https://github.com/corvax-team/RMC-14/blob/master/MIT.TXT).
+
+All code implemented after February 1, 2026 is distributed under the [GNU AGPL 3.0](https://github.com/corvax-team/RMC-14/blob/master/LICENSE) license, unless otherwise specified.
 
 Most assets are licensed under [CC-BY-SA-3.0](https://creativecommons.org/licenses/by-sa/3.0/) unless stated otherwise. Assets have their license and the copyright in the metadata file. [Example](https://github.com/space-wizards/space-station-14/blob/master/Resources/Textures/Objects/Tools/crowbar.rsi/meta.json).
 

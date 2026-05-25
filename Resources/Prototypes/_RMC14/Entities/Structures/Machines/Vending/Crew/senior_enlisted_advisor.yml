@@ -20,6 +20,7 @@
       - id: CMBootsBlackFilled
       - id: CMMRE
       - id: RMCStampSEA
+      - id: RMCCPRDummy # CCM14
     - name: Перчатки # CCM14
       choices: { CMGloves: 1 }
       entries:

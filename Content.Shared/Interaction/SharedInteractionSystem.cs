@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.CombatMode;
+using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.ActionBlocker;
@@ -434,44 +435,31 @@ namespace Content.Shared.Interaction
                 return;
             }
 
-            if (checkCanInteract && !_actionBlockerSystem.CanInteract(user, target))
+            var ignoreGhostInteractionLimits =
+                target != null &&
+                HasComp<GhostComponent>(user) &&
+                HasComp<RMCIgnoreGhostInteractionLimitsComponent>(target.Value);
+
+            if (checkCanInteract && !ignoreGhostInteractionLimits && !_actionBlockerSystem.CanInteract(user, target))
                 return;
 
             // Check if interacted entity is in the same container, the direct child, or direct parent of the user.
             // Also checks if the item is accessible via some storage UI (e.g., open backpack)
-            if (checkAccess && target != null && !IsAccessible(user, target.Value))
+            if (checkAccess && target != null && !ignoreGhostInteractionLimits && !IsAccessible(user, target.Value))
                 return;
 
             var inRangeUnobstructed = target == null
                 ? !checkAccess || InRangeUnobstructed(user, coordinates)
-                : !checkAccess || InRangeUnobstructed(user, target.Value); // permits interactions with wall mounted entities
-
-            // CCM: Allow systems to bypass the CanUseHeldEntity check for specific interactions via a by-ref event.
-            var bypassEv = new UseHeldBypassAttemptEvent(user, target);
-            if (target != null)
-                RaiseLocalEvent(target.Value, ref bypassEv);
-
-            var shouldCheckUse = checkCanUse && !bypassEv.Bypass;
+                : !checkAccess || ignoreGhostInteractionLimits || InRangeUnobstructed(user, target.Value); // permits interactions with wall mounted entities
 
             // empty-hand interactions
             // combat mode hand interactions will always be true here -- since
             // they check this earlier before returning in
-            if (!TryGetUsedEntity(user, out var used, shouldCheckUse))
+            if (!TryGetUsedEntity(user, out var used, checkCanUse))
             {
                 if (inRangeUnobstructed && target != null)
-                // CCM-change-start
-                {
-                    if (bypassEv.Bypass)
-                    {
-                        if (used.HasValue)
-                        {
-                            InteractDoAfter(user, used.Value, target.Value, coordinates, canReach: true, checkDeletion: false);
-                        }
-                        return;
-                    }
-                // CCM-change-end
                     InteractHand(user, target.Value);
-                }
+
                 return;
             }
 
@@ -1210,15 +1198,19 @@ namespace Content.Shared.Interaction
             if (checkUseDelay && delayComponent != null && _useDelay.IsDelayed((used, delayComponent)))
                 return false;
 
-            if (checkCanInteract && !_actionBlockerSystem.CanInteract(user, used))
+            var ignoreGhostInteractionLimits =
+                HasComp<GhostComponent>(user) &&
+                HasComp<RMCIgnoreGhostInteractionLimitsComponent>(used);
+
+            if (checkCanInteract && !ignoreGhostInteractionLimits && !_actionBlockerSystem.CanInteract(user, used))
                 return false;
 
-            if (checkAccess && !InRangeUnobstructed(user, used))
+            if (checkAccess && !ignoreGhostInteractionLimits && !InRangeUnobstructed(user, used))
                 return false;
 
             // Check if interacted entity is in the same container, the direct child, or direct parent of the user.
             // This is bypassed IF the interaction happened through an item slot (e.g., backpack UI)
-            if (checkAccess && !IsAccessible(user, used))
+            if (checkAccess && !ignoreGhostInteractionLimits && !IsAccessible(user, used))
                 return false;
 
             complexInteractions ??= _actionBlockerSystem.CanComplexInteract(user);
@@ -1501,7 +1493,7 @@ namespace Content.Shared.Interaction
         /// In most cases, this refers to the entity in the character's active hand.
         /// </summary>
         /// <returns>If there is an entity being used.</returns>
-        public bool TryGetUsedEntity(EntityUid user, [NotNullWhen(true)] out EntityUid? used, bool checkCanUse = true, EntityUid? intendedTarget = null) // CCM: +EntityUid? intendedTarget = null
+        public bool TryGetUsedEntity(EntityUid user, [NotNullWhen(true)] out EntityUid? used, bool checkCanUse = true)
         {
             var ev = new GetUsedEntityEvent(user);
             RaiseLocalEvent(user, ref ev);
@@ -1561,17 +1553,6 @@ namespace Content.Shared.Interaction
 
         public bool Handled => Used != null;
     };
-
-    /// <summary>
-    /// CCM:    Raised by-ref on the interaction target to allow bypassing held-entity use checks for specific interactions.
-    /// </summary>
-    /// <param name="User">The user performing the interaction.</param>
-    /// <param name="Target">The interaction target.</param>
-    [ByRefEvent]
-    public record struct UseHeldBypassAttemptEvent(EntityUid User, EntityUid? Target)
-    {
-        public bool Bypass;
-    }
 
     /// <summary>
     ///     Raised directed by-ref on an item to determine if hand interactions should go through.

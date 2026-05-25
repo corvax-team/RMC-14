@@ -1,8 +1,12 @@
 using System.Numerics;
 using Content.Client._RMC14.Vehicle.Ui;
 using Content.Shared._RMC14.Vehicle.Supply;
+using Robust.Client.Graphics;
+using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Maths;
 
 namespace Content.Client._RMC14.Vehicle.Supply;
 
@@ -66,7 +70,7 @@ public sealed class VehicleSupplyBui : BoundUserInterface
             VehicleSupplyLiftMode.Preparing => Loc.GetString("rmc-vehicle-lift-mode-preparing"),
             _ => Loc.GetString("rmc-vehicle-supply-lift-none")
         };
-        var activeText = string.IsNullOrWhiteSpace(state.ActiveVehicleId) ? Loc.GetString("rmc-vehicle-supply-vehicle-none") : state.ActiveVehicleId;
+        var activeText = string.IsNullOrWhiteSpace(state.ActiveVehicleName) ? Loc.GetString("rmc-vehicle-supply-vehicle-none") : state.ActiveVehicleName; // CCM14
         var busyText = state.Busy ? Loc.GetString("rmc-vehicle-supply-status-busy") : Loc.GetString("rmc-vehicle-supply-status-idle");
 
         _window.StatusLabel.Text = Loc.GetString("rmc-vehicle-supply-status", ("mode", modeText), ("status", busyText), ("active", activeText));

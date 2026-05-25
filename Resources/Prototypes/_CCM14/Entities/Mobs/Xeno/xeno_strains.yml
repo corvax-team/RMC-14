@@ -42,11 +42,12 @@
     animation: CCMWeaponArcXenoPunch
     damage:
       groups:
-        Brute: 28
+        Brute: 25
   - type: Tackle
     max: 6
     min: 3
   - type: XenoRage
+    rageDecayTime: 8
     maxRage: 10
     armorPerRage: 0
     speedBuffPerRage: 0
@@ -54,8 +55,8 @@
     healAmount: 0
   - type: XenoEviscerate
     stunTime: 0.25
-    lifeStealPerMarine: 175
-    maxLifeSteal: 175
+    lifeStealPerMarine: 250
+    maxLifeSteal: 500
     rageHitSound: 
       collection: CCMBoxingBell
     damageAtRageLevels:
@@ -159,7 +160,6 @@
     removeOnHit: true
     preventTackle: true
     resetMeleeCooldown: true
-    auraColor: "#9ACD32FF"
     damageMult: 1
     speed: 1.2
   - type: CMArmor
@@ -174,6 +174,10 @@
     - CMXenoQueen
     strains: []
   - type: XenoHidden
+  - type: XenoRegen
+    critHealMultiplier: 0.5  # 5% increased regeneration
+    standHealingMultiplier: 0.8
+    restHealMultiplier: 1.777
 
 - type: entity
   parent: CMXenoSentinel
@@ -231,53 +235,216 @@
   suffix: CCM-Sniper
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Spitter/sniper.rsi
+    sprite: _CCM14/Mobs/Xenonids/Spitter/sniper.rsi
   - type: XenoStrain
     name: ccm-xeno-sniper-name
     description: ccm-xeno-sniper-description
     popup: ccm-xeno-sniper-popup
-  - type: Xeno
-    actionIds:
-    - ActionXenoRest
-    - ActionXenoRegurgitate
-    - ActionXenoWatch
-    - ActionXenoTailStabCorrosive
-    - ActionXenoAcidNormal
-    - CCMActionXenoSniperSnipe
-    - ActionXenoZoom
-    - ActionXenoSprayAcid
-    - CCMActionXenoSniperWalker
-    - ActionXenoDevolve
-  - type: XenoSpit
-    plasmaCost: 300
-    projectileId: CCMXenoSniperSpitProjectile
-    speed: 33
-  - type: XenoResinWalker
-    plasmaCost: 100
-    speedMultiplier: 5
-  - type: XenoSprayAcid
-    acid: CCMXenoAcidSpraySniper
-    barricadeDamage:
-      types:
-        Heat: 5
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      350: Critical
+      450: Dead
+  - type: XenoPlasma
+    plasma: 840
+    maxPlasma: 840
+    plasmaRegenOnWeeds: 4
+  - type: CMArmor
+    xenoArmor: 10
+    explosionArmor: 20
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1
-    baseSprintSpeed: 1.4
-  - type: XenoZoom
-    zoom: 2, 2
-    offsetLength: 3
-    speed: 0.8
-    doAfter: 0.5
+    baseWalkSpeed: 1.3
+    baseSprintSpeed: 2.6
+  - type: MeleeWeapon
+    attackRate: 0.75
+    damage:
+      groups:
+        Brute: 25
+  - type: XenoHidden
   - type: XenoEvolution
     max: 500
     evolvesTo:
     - CMXenoBoiler
     - CMXenoPraetorian
     strains: []
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      350: Critical
-      450: Dead
-  - type: XenoHidden
+  - type: Xeno
+    role: CMXenoSpitter
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStabCorrosive
+    - ActionXenoAcidNormal
+    - ActionXenoSprayAcid
+    - CCMActionXenoScatteredSpitSniper
+    - CCMActionXenoSpitSniperMulti
+    - CCMActionXenoToggleSpitTypeSniper
+    - ActionXenoZoom
+    - ActionXenoDevolve
+    tier: 2
+    hudOffset: -0.15,0.025
+    unlockAt: 540 # 9 minutes
+  - type: XenoToggleSpit
+    neuroCost: 84
+    neuroProto: CCMXenoSpitProjectileSniperPain
+    acidCost: 70
+    acidProto: CCMXenoSpitProjectileSniper
+  - type: XenoSprayAcid
+    barricadeDamage:
+      types:
+        Heat: 10
+    range: 9
+  - type: XenoScatteredSpit
+    plasmaCost: 105
+    maxDeviation: 12
+    maxProjectiles: 3
+    projectileId: CCMXenoSpitProjectileSniperStructural
+  - type: XenoZoom
+    zoom: 0.8, 0.8
+    offsetLength: 3
+    speed: 0.8
+    doAfter: 0.5
 # // CCM Xeno Strain - Sniper Spitter
+
+# // CCM Xeno Strain - Burrower Impaler
+- type: entity
+  parent: CMXenoBurrower
+  id: CCMXenoBurrowerImpaler
+  name: Burrower
+  description: A beefy alien with sharp claws.
+  suffix: CCM-Impaler
+  components:
+  - type: Sprite
+    sprite: _CCM14/Mobs/Xenonids/Burrower/impaler.rsi
+  - type: XenoStrain
+    name: ccm-xeno-impaler-name
+    description: ccm-xeno-impaler-description
+    popup: ccm-xeno-impaler-popup
+  - type: XenoHidden
+  - type: XenoConstruction
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
+    - HiveRecoveryNodeXenoConstructionNode
+    - HivePlasmaTreeXenoConstructionNode
+  - type: Polymorphable
+  - type: Xeno
+    role: CMXenoBurrower
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoAcidNormal
+    - ActionXenoOrderConstruction
+    - ActionXenoBurrow
+    - ActionXenoDigTunnel
+    - CCMActionJauntBurrow
+    - CCMActionXenoBurrowerImpale
+    - ActionXenoDevolve
+    tier: 2
+    hudOffset: -0.15,0.56
+    unlockAt: 420 # 7 minutes
+  - type: XenoBurrow
+    maxTunnelingDistance: 20
+    burrowMaxDuration: 13
+    unburrowStunRange: 0.75
+    unburrowStunLength: 2
+    minimumTunnelTime: 0.3
+  - type: XenoSprayAcid
+    acid: CCMXenoBurrowerImpalerSpike
+    doAfter: 0.8
+    barricadeDuration: 0
+    barricadeDamage:
+      types:
+        Heat: 0
+  - type: XenoEvolution
+    strains: []
+# Burrower Jaunt
+- type: entity
+  name: Burrower
+  description: Burrowed Burrower, dont step on spikes!
+  parent: 
+  - BaseMob
+  - RMCXenoMobCollision
+  - CMXenoBurrower
+  id: CCMBurrowerBurrowedJaunt
+  suffix: CCM-Impaler-Burrowed
+  components:
+  - type: Sprite
+    offset: 0,0.5
+    sprite: _CCM14/Objects/Xeno/xeno_64x64.rsi
+    state: alive
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 6
+    baseWalkSpeed: 3
+  - type: DamageOnCollide
+    paralyze: 2
+    canRehit: false
+    armorPenetration: 20
+    damage:
+      types:
+        Blunt: 30
+        Structural: 100
+    whitelist:
+      components:
+      - Marine
+      - Vehicle
+  - type: InputMover
+  - type: XenoHidden
+  - type: AutoAssignHive
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.5
+        density: 10
+        mask:
+        - MobMask
+        - BarricadeImpassable
+        - BarbedBarricade
+        layer:
+        - Opaque
+  - type: Xeno
+    role: CMXenoBurrower
+    actionIds:
+    - CCMActionXenoBurrowerImpale
+    tier: 2
+    hudOffset: -0,0.2
+    unlockAt: 420 # 7 minutes
+  - type: XenoSprayAcid
+    sound: /Audio/_RMC14/Xeno/burrowing_b.ogg
+    acid: CCMXenoBurrowerImpalerSpike
+    doAfter: 0.2
+    barricadeDuration: 0
+    barricadeDamage:
+      types:
+        Heat: 0
+  - type: MeleeWeapon
+    range: 0
+    damage:
+      groups:
+        Brute: 0
+  - type: RemoveComponents
+    components:
+    - type: RMCXenoDamageVisuals
+      prefix: burrower
+    - type: XenoEvolution
+      strains: # CCM Change
+      - CCMXenoBurrowerImpaler
+# Polymorph
+- type: polymorph
+  id: CCMJauntBurrow
+  configuration:
+    entity: CCMBurrowerBurrowedJaunt
+    transferName: true
+    inventory: None
+    forced: true
+    revertOnDeath: true
+    revertOnCrit: true
+    allowRepeatedMorphs: false
+    polymorphSound: /Audio/_RMC14/Xeno/burrowing_b.ogg
+    exitPolymorphSound: /Audio/_RMC14/Xeno/burrowoff.ogg
+    duration: 3
+# // CCM Xeno Strain - Burrower Impaler

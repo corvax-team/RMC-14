@@ -140,4 +140,3 @@ ent-RMCPodDoorButtonSPP = { ent-RMCPodDoorButton }
 ent-RMCPodDoorButtonHybrisaCavesLockdown = кнопка изоляции пещер
     .suffix = Гибриса
     .desc = { ent-RMCPodDoorButton.desc }
-

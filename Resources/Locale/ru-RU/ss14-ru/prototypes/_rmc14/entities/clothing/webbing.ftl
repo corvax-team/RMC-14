@@ -7,5 +7,5 @@ ent-RMCToolWebbingSmallERTFilled = { ent-RMCToolWebbingSmallERT }
     .suffix = Заполненный
     .desc = { ent-RMCToolWebbingSmallERT.desc }
 ent-CMWebbingPouchRoyal = { ent-CMWebbingPouch }
-    .suffix = Заполненный, Королевский
+    .suffix = Заполненный, Империя
     .desc = { ent-CMWebbingPouch.desc }

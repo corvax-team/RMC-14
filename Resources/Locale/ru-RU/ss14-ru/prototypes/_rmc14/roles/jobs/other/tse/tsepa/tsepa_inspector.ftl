@@ -1,2 +1,2 @@
-ent-RMCSpawnPointTSEPAInspector = точка появления инспектор ПСОПЗ
+ent-RMCSpawnPointTSEPAInspector = точка появления инспектор МВД
     .desc = { ent-CMSpawnPointJobBase.desc }

@@ -407,8 +407,8 @@
     components:
     - MobState
   chatMessages: ["chat-emote-msg-deathgasp"]
-  chatTriggers:
-  - deathgasp
+  #chatTriggers:
+  #- deathgasp
 
 - type: emote
   id: MonkeyDeathgasp

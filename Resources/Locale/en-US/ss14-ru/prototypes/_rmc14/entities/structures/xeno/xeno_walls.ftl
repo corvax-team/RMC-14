@@ -1,5 +1,14 @@
 ent-WallXenoResin = resin wall
     .desc = Weird slime solidified into a wall.
+ent-WallXenoResinImpenetrable = impenetrable resin wall
+    .suffix = Invincible, 30 minutes
+    .desc = { ent-WallXenoResinThick.desc }
+ent-DoorXenoResinImpenetrable = impenetrable resin door
+    .suffix = Invincible, 30 minutes
+    .desc = { ent-DoorXenoResinThick.desc }
+ent-RMCBlockerMarine = marine blocker
+    .suffix = DO NOT MAP
+    .desc = { "" }
 ent-WallXenoResinThick = thick resin wall
     .desc = Weird slime solidified into a thick wall.
 ent-BaseMembraneXeno = resin membrane

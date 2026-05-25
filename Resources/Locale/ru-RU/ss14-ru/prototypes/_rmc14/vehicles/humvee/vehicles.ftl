@@ -1,0 +1,10 @@
+ent-VehicleHumveeBase = хамви
+    .desc = Быстрый бронированный автомобиль, оборудованный для патрулирования и поддержки.
+ent-VehicleHumvee = { ent-VehicleHumveeBase }
+    .desc = { ent-VehicleHumveeBase.desc }
+ent-VehicleHumveeMedical = хамви (медицинский)
+    .desc = Медицинский хамви, оборудованный для полевой сортировки раненых.
+ent-VehicleHumveeTransport = хамви (транспортный)
+    .desc = Транспортный хамви, сконфигурированный для перевозки пассажиров.
+ent-VehicleHumveeARC = хамви (ARC)
+    .desc = Хамви, сконфигурированный для интерьера ARC.

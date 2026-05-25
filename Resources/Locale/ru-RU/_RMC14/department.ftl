@@ -17,8 +17,8 @@ cm-department-Engineering-description = Ваша работа заключает
 department-CMMedbay = Медотсек
 cm-department-Medical-description = Лечите всех пациентов, поступающих в медотсек. Переносите раненых морпехов из ангара в медотсек.
 # auxiliary support
-department-CMAuxiliarySupport = Вспомогательная поддержка
-cm-department-AuxiliarySupport-description = Перед персоналом вспомогательной поддержки стоит задача по оказанию содействия морским пехотинцам посредством огневой поддержки или иных средств.
+department-CMAuxiliarySupport = Военно-Космический Флот
+cm-department-AuxiliarySupport-description = Перед персоналом флота стоит задача по оказанию содействия морским пехотинцам посредством огневой поддержки или иных средств.
 # other
 department-CMOther = Прочее
 cm-department-Other-description = ""

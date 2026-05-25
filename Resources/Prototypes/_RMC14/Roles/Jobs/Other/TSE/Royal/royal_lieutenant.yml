@@ -65,9 +65,10 @@
 - type: startingGear # There's also a staff officer role with equivalent skills n shit but noncombatant gear that I don't feel like porting
   id: RMCGearRoyalLieutenant
   equipment:
-    head: RMCHeadRoyalBeretLead
+    head: CCMHeadMirtanDecan #CCM14
     eyes: RMCGlassesMedicalHUDGlasses
     ears: RMCHeadsetRoyalMarineOfficer
+    neck: CCMMirtanOficcerCloak #CCM14
     jumpsuit: RMCJumpsuitMarineRoyalTeamlead
     outerClothing: RMCArmorRoyalPaddedFilled
     gloves: RMCHandsVeteranRoyalMarine

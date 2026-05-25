@@ -9,6 +9,7 @@
   startingGear: RMCGearCorporateSynthetic
   icon: "RMCJobIconSynth"
   joinNotifyCrew: false
+  whitelistParent: RMCJobSynthetic # CCM14
   accessGroups:
   - RMCWeYaExec
   special:

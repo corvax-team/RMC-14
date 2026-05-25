@@ -25,18 +25,24 @@ public sealed class VehicleGunnerViewSystem : EntitySystem
 
     private void OnHandleState(Entity<VehicleGunnerViewUserComponent> ent, ref AfterAutoHandleStateEvent args)
     {
-        _eye.UpdatePvsScale(ent.Owner);
+        RefreshPvsScale(ent.Owner);
     }
 
     private void OnStartup(Entity<VehicleGunnerViewUserComponent> ent, ref ComponentStartup args)
     {
-        if (HasComp<ContentEyeComponent>(ent)) // CCM14
-            _eye.UpdatePvsScale(ent.Owner);
+        RefreshPvsScale(ent.Owner);
     }
 
     private void OnShutdown(Entity<VehicleGunnerViewUserComponent> ent, ref ComponentShutdown args)
     {
-        if (HasComp<ContentEyeComponent>(ent)) // CCM14
-            _eye.UpdatePvsScale(ent.Owner);
+        RefreshPvsScale(ent.Owner);
+    }
+
+    private void RefreshPvsScale(EntityUid uid)
+    {
+        if (!HasComp<EyeComponent>(uid) || !HasComp<ContentEyeComponent>(uid))
+            return;
+
+        _eye.UpdatePvsScale(uid);
     }
 }

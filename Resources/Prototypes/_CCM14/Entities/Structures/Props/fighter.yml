@@ -1,0 +1,42 @@
+- type: entity
+  parent: RMCPropBase
+  id: CCMPropAeroSpaceFighter1
+  name: ASMF-921 AseroSpace Fighter
+  description: ASMF, or Aero Space Multipurpose Fighter is the most mass produced space craft of United Earth Government. Originaly made in 2921 and still serves today, because there is still thousands of them, but there is more a few effective and perspective models, but only special ops and guard gets those. A veteran agent of terror, destruction and death.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Props/aerospacefighter.rsi
+    state: aircraft1
+  - type: Transform
+    noRot: true
+  - type: Physics
+    bodyType: Static
+    fixedRotation: true
+  - type: InteractionOutline
+  - type: RequireProjectileTarget
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: CCMPropAeroSpaceFighter1
+  id: CCMPropAeroSpaceFighter2
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Props/aerospacefighter.rsi
+    state: aircraft2
+
+- type: entity
+  parent: CCMPropAeroSpaceFighter1
+  id: CCMPropAeroSpaceFighter3
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Props/aerospacefighter.rsi
+    state: aircraft3
+
+- type: entity
+  parent: CCMPropAeroSpaceFighter1
+  id: CCMPropAeroSpaceFighter4
+  components:
+  - type: Sprite
+    sprite: _CCM14/Structures/Props/aerospacefighter.rsi
+    state: aircraft4

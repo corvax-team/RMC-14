@@ -2241,31 +2241,31 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "0.625,0.0,1.0,0.625" # CCM14
+          bounds: "-0.25,-0.45,0.25,0.45"
         mask:
         - MachineMask
         layer:
         - MachineLayer
         density: 200
-  # CCM14-start
   - type: ActivatableUI
-    key: enum.VehicleFabricatorUi.Key
-  - type: ActivatableUIRequiresAccess
-  - type: AccessReader
-    access: [["CMAccessCrewman"]]
+    key: enum.CMAutomatedVendorUI.Key
   - type: UserInterface
     interfaces:
-      enum.VehicleFabricatorUi.Key:
-        type: VehicleFabricatorBui
-  - type: VehicleFabricator
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.VehicleFabricatorVisuals.State:
-        rmc_flick_animation:
-          enum.VehicleFabricatorState.Idle: { state: vehicle_gear }
-          enum.VehicleFabricatorState.Fabricating: { state: vehicle_gear_vend }
-  # CCM14-end
+      enum.CMAutomatedVendorUI.Key:
+        type: CMAutomatedVendorBui
+  - type: CMAutomatedVendor
+    sound:
+      path: /Audio/_RMC14/Machines/vending_drop.ogg
+      params:
+        maxDistance: 2
+        volume: -4
+    baseSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/vending_64x32.rsi
+      state: vehicle_gear
+    animationSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/vending_64x32.rsi
+      state: vehicle_gear_vend
+    sections: []
+  - type: VehicleHardpointVendor
   - type: InteractionOutline
   - type: RequireProjectileTarget
-

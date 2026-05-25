@@ -1,92 +1,4 @@
 - type: entity
-  parent: XenoSpitProjectile
-  id: CCMXenoSniperSpitProjectile
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
-    scale: 1.3, 3.3
-    layers:
-    - state: xeno_acid_strong
-      shader: unshaded
-  - type: Projectile
-    impactEffect: XenoProjectileImpactEffect
-    damage:
-      types:
-        Heat: 40 # TODO RMC14 damage fall-off and higher at close range
-  - type: ModifyTargetOnHit
-    add:
-    - type: UserAcided
-      armorPiercing: 40
-      damage:
-        types:
-          Heat: 1
-      duration: 3
-    whitelist:
-      components:
-      - Marine
-  - type: ProjectileMaxRange
-    max: 18
-  - type: RMCProjectileDamageFalloff
-    thresholds:
-    - range: 20
-      falloff: 9999
-      ignoreModifiers: true
-  - type: SpawnOnTerminate
-    spawn: CCMXenoAcidSprayProjectileSniper
-  - type: CMArmorPiercing
-    amount: 10
-  - type: RMCProjectileAccuracy
-    accuracy: 200
-  - type: TimedDespawn
-    lifetime: 6
-
-- type: entity
-  parent: XenoAcidSprayWeak
-  id: CCMXenoAcidSprayProjectileSniper
-  name: weak splatter
-  description: It burns! It burns, but not as much!
-  components:
-  - type: Sprite
-    scale: 0.8, 0.8
-    layers:
-    - state: acid2-weak
-  - type: DamageOnCollide
-    paralyze: 2
-    damage:
-      types:
-        Heat: 0
-    chainDamage:
-      types:
-        Heat: 0
-  - type: TimedDespawn
-    lifetime: 0.6
-  - type: SprayExtinguishTileFire
-    extinguishAmount: 13
-
-- type: entity
-  parent: XenoAcidSprayWeak
-  id: CCMXenoAcidSpraySniper
-  name: weak splatter
-  description: It burns! It burns, but not as much!
-  components:
-  - type: Sprite
-    layers:
-    - state: acid2-weak
-  - type: DamageOnCollide
-    paralyze: 1
-    damage:
-      types:
-        Heat: 28.8
-    chainDamage:
-      types:
-        Heat: 8.8
-  - type: TimedDespawn
-    lifetime: 0.6
-  - type: SprayExtinguishTileFire
-    extinguishAmount: 13
-
-- type: entity
   id: CCMXenoGreatSlowingSpitProjectile
   parent: XenoBaseProjectile
   name: greater slowing spit
@@ -140,24 +52,108 @@
     amount: 5
 
 - type: entity
-  parent: XenoAcidSprayWeak
-  id: CCMXenoAcidSprayRanger
-  name: weak splatter
-  description: It burns! It burns, but not as much!
+  parent: [ XenoSpitImpactSounds, XenoBaseProjectile ]
+  id: CCMXenoSpitProjectileSniper
+  name: spit
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    scale: 0.7, 0.7
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    scale: 0.8,2
     layers:
-    - state: acid2-weak
-  - type: DamageOnCollide
-    paralyze: 0
+    - state: xeno_acid_weak
+      shader: unshaded
+  - type: Projectile
+    impactEffect: null
     damage:
       types:
-        Heat: 15.5
-    chainDamage:
-      types:
-        Heat: 10
+        Heat: 15
+  - type: CMArmorPiercing
+    amount: 25
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+  - type: RMCProjectileAccuracy
+    accuracy: 999
+  - type: ProjectileMaxRange
+    max: 12
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 185
+        mask:
+        - BarricadeImpassable
+        - BarbedBarricade
   - type: TimedDespawn
-    lifetime: 0.6
-  - type: SprayExtinguishTileFire
-    extinguishAmount: 13
+    lifetime: 3
+
+- type: entity
+  id: CCMXenoSpitProjectileSniperPain
+  parent: [ XenoSpitImpactSounds, XenoBaseProjectile ]
+  name: neurotoxic spit
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: neurotoxin
+      shader: unshaded
+  - type: DrainOnHit
+  - type: XenoSlowingSpitProjectile
+    armorResistsKnockdown: false
+    slow: 4
+    paralyze: 0
+  - type: Projectile
+    impactEffect: null
+    damage:
+      types:
+        Blunt: 10
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+  - type: ProjectileMaxRange
+    max: 6.666
+  - type: RMCProjectileAccuracy
+    accuracy: 999
+  - type: TimedDespawn
+    lifetime: 3
+
+- type: entity
+  parent: [ XenoSpitImpactSounds, XenoBaseProjectile ]
+  id: CCMXenoSpitProjectileSniperStructural
+  name: spit
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    color: "#A52A2AFF"
+    layers:
+    - state: xeno_acid_weak
+      shader: unshaded
+  - type: Projectile
+    impactEffect: null
+    damage:
+      types:
+        Blunt: 10
+        Structural: 60
+  - type: CMArmorPiercing
+    amount: 10
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+  - type: RMCProjectileAccuracy
+    accuracy: 999
+  - type: ProjectileMaxRange
+    max: 4.444
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.20
+        density: 185
+        mask:
+        - BarricadeImpassable
+        - BarbedBarricade
+  - type: TimedDespawn
+    lifetime: 3

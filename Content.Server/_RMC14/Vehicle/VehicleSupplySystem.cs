@@ -51,7 +51,6 @@ public sealed class VehicleSupplySystem : EntitySystem
         Vector2 East,
         Vector2 South,
         Vector2 West);
-#if false // CCM14-start
     private readonly record struct VendorHardpointEntry(
         string Id,
         string SharedKey,
@@ -59,16 +58,14 @@ public sealed class VehicleSupplySystem : EntitySystem
         string DisplayName,
         string SectionName,
         int SectionOrder);
-#endif // CCM14-end
 
     public override void Initialize()
     {
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<VehicleSupplyConsoleComponent, BeforeActivatableUIOpenEvent>(OnConsoleBeforeUiOpen);
-#if false // CCM14-start
+        SubscribeLocalEvent<VehicleSupplyConsoleComponent, MapInitEvent>(OnConsoleMapInit); // CCM14
         SubscribeLocalEvent<VehicleHardpointVendorComponent, MapInitEvent>(OnVendorMapInit);
         SubscribeLocalEvent<VehicleHardpointVendorComponent, BeforeActivatableUIOpenEvent>(OnVendorBeforeUiOpen);
-#endif // CCM14-end
         SubscribeLocalEvent<VehicleSupplyLiftComponent, MapInitEvent>(OnLiftMapInit);
         SubscribeLocalEvent<ActorComponent, RMCAutomatedVendedUserEvent>(OnAutomatedVendorVended);
 
@@ -92,7 +89,7 @@ public sealed class VehicleSupplySystem : EntitySystem
     {
         return lift.Stored.TryGetValue(key, out var count) ? count : 0;
     }
-#if false // CCM14-start
+
     private static int GetVendorAvailableVehicleCount(VehicleSupplyLiftComponent lift, string key)
     {
         var count = GetStoredCount(lift, key);
@@ -108,7 +105,7 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         return count;
     }
-#endif // CCM14-end
+
     private static void AddStored(VehicleSupplyLiftComponent lift, string key, int amount = 1)
     {
         if (amount <= 0)
@@ -295,14 +292,35 @@ public sealed class VehicleSupplySystem : EntitySystem
         }
 
         SendConsoleStateAll();
-        // UpdateVendorSectionsAll(); // CCM14
+        UpdateVendorSectionsAll();
     }
-
+    // CCM14-start
     private void OnConsoleBeforeUiOpen(Entity<VehicleSupplyConsoleComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
+        if (TryGetLift(ent.Owner, ent.Comp, out var lift))
+        {
+            SeedStoredFromConsoles(lift);
+        }
+    
         SendConsoleState(ent.Owner, ent.Comp);
     }
 
+    private void OnConsoleMapInit(Entity<VehicleSupplyConsoleComponent> ent, ref MapInitEvent args)
+    {
+        var mapId = _transform.GetMapId(ent.Owner);
+        var liftQuery = EntityQueryEnumerator<VehicleSupplyLiftComponent, TransformComponent>();
+        while (liftQuery.MoveNext(out var uid, out var lift, out var xform))
+        {
+            if (xform.MapID != mapId)
+                continue;
+
+            SeedStoredFromConsoles((uid, lift));
+            Dirty(uid, lift);
+        }
+
+        SendConsoleStateAll();
+    }
+    // CCM14-end
     private void OnLiftMapInit(Entity<VehicleSupplyLiftComponent> ent, ref MapInitEvent args)
     {
         SeedStoredFromConsoles(ent);
@@ -336,8 +354,9 @@ public sealed class VehicleSupplySystem : EntitySystem
                 AddStored(lift.Comp, key);
             }
         }
+        Dirty(lift); // CCM14
     }
-#if false // CCM14-start
+
     private void OnVendorBeforeUiOpen(Entity<VehicleHardpointVendorComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
         UpdateVendorSections(ent.Owner, ent.Comp);
@@ -347,7 +366,6 @@ public sealed class VehicleSupplySystem : EntitySystem
     {
         UpdateVendorSections(ent.Owner, ent.Comp);
     }
-#endif // CCM14-end
 
     private void OnAutomatedVendorVended(Entity<ActorComponent> ent, ref RMCAutomatedVendedUserEvent args)
     {
@@ -355,7 +373,7 @@ public sealed class VehicleSupplySystem : EntitySystem
             return;
 
         TrySpawnVendedHardpointAmmo(ent.Owner, args.Item);
-        // UpdateVendorSectionsAll(); // CCM14
+        UpdateVendorSectionsAll();
     }
 
     private void TrySpawnVendedHardpointAmmo(EntityUid user, EntityUid hardpointItem)
@@ -495,7 +513,7 @@ public sealed class VehicleSupplySystem : EntitySystem
                 comp.PendingVehicleEntity = null;
             }
 
-            // UpdateVendorSectionsAll(); // CCM14
+            UpdateVendorSectionsAll();
         }
         else
         {
@@ -700,7 +718,7 @@ public sealed class VehicleSupplySystem : EntitySystem
         {
             AddStored(comp, key);
             comp.PendingVehicle = string.Empty;
-            // UpdateVendorSectionsAll(); // CCM14
+            UpdateVendorSectionsAll();
             return;
         }
 
@@ -734,7 +752,7 @@ public sealed class VehicleSupplySystem : EntitySystem
         _transform.SetParent(active, EntityUid.Invalid);
         comp.ActiveVehicle = null;
         comp.ActiveVehicleId = string.Empty;
-        // UpdateVendorSectionsAll(); // CCM14
+        UpdateVendorSectionsAll();
     }
 
     private bool IsOnLift(Entity<VehicleSupplyLiftComponent> lift, EntityUid entity)
@@ -774,6 +792,7 @@ public sealed class VehicleSupplySystem : EntitySystem
         VehicleSupplyLiftMode? mode = null;
         var busy = false;
         string? activeId = null;
+        string? activeName = null; // CCM14
         string? selectedId = string.IsNullOrWhiteSpace(console.SelectedVehicle) ? null : console.SelectedVehicle;
         var selectedCopyIndex = console.SelectedVehicleCopyIndex;
         VehicleSupplyPreviewState? preview = null;
@@ -784,6 +803,7 @@ public sealed class VehicleSupplySystem : EntitySystem
             mode = lift.Comp.Mode;
             busy = lift.Comp.Busy;
             activeId = string.IsNullOrWhiteSpace(lift.Comp.ActiveVehicleId) ? null : lift.Comp.ActiveVehicleId;
+            activeName = string.IsNullOrWhiteSpace(activeId) ? null : GetVehicleName(activeId); // CCM14
 
             if (!string.IsNullOrWhiteSpace(selectedId))
             {
@@ -796,7 +816,8 @@ public sealed class VehicleSupplySystem : EntitySystem
                     overlays = BuildPreviewOverlays(stored);
                 }
 
-                preview = new VehicleSupplyPreviewState(selectedId, selectedCopyIndex, layers, overlays);
+                var selectedName = GetVehicleName(selectedId); // CCM14
+                preview = new VehicleSupplyPreviewState(selectedId, selectedName, selectedCopyIndex, layers, overlays); // CCM14
             }
         }
 
@@ -809,8 +830,8 @@ public sealed class VehicleSupplySystem : EntitySystem
             {
                 var key = Normalize(entry.Vehicle.Id);
                 var count = GetStoredCount(lift.Comp, key);
-                // if (count <= 0)
-                //     continue;
+                if (count <= 0)
+                    continue;
 
                 available.Add(new VehicleSupplyEntryState(entry.Vehicle.Id, GetEntryName(entry), count));
                 continue;
@@ -819,11 +840,10 @@ public sealed class VehicleSupplySystem : EntitySystem
             available.Add(new VehicleSupplyEntryState(entry.Vehicle.Id, GetEntryName(entry), 1));
         }
 
-        var state = new VehicleSupplyBuiState(mode, busy, activeId, selectedId, selectedCopyIndex, preview, available);
+        var state = new VehicleSupplyBuiState(mode, busy, activeId, activeName, selectedId, selectedCopyIndex, preview, available); // CCM14
         _ui.SetUiState(uid, VehicleSupplyUIKey.Key, state);
     }
 
-#if false // CCM14-start
     private void UpdateVendorSectionsAll()
     {
         var query = EntityQueryEnumerator<VehicleHardpointVendorComponent>();
@@ -1023,11 +1043,11 @@ public sealed class VehicleSupplySystem : EntitySystem
         categoryLabel = string.Empty;
         categoryOrder = int.MaxValue;
 
-        if (!string.Equals(Normalize(vehicleId), "Vehicletank", StringComparison.Ordinal))
+        if (!string.Equals(Normalize(vehicleId), "rmcvehicletank", StringComparison.Ordinal))
             return false;
 
         var hardpointKey = Normalize(hardpointId);
-        if (hardpointKey == "Vehicletanksnowplow")
+        if (hardpointKey == "rmcvehicletanksnowplow")
         {
             categoryKey = "tank-general";
             categoryLabel = "General";
@@ -1122,7 +1142,6 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         return found;
     }
-#endif // CCM14-end
 
     public bool TryGetAnyLift(out Entity<VehicleSupplyLiftComponent> lift)
     {
@@ -1175,7 +1194,7 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         Dirty(liftUid, lift);
         SendConsoleStateAll();
-        // UpdateVendorSectionsAll(); // CCM14
+        UpdateVendorSectionsAll();
         return true;
     }
 
@@ -1204,7 +1223,7 @@ public sealed class VehicleSupplySystem : EntitySystem
             SendConsoleState(uid, console);
         }
 
-        // UpdateVendorSectionsAll(); // CCM14
+        UpdateVendorSectionsAll();
     }
 
     private bool TryGetLift(EntityUid consoleUid, VehicleSupplyConsoleComponent console, out Entity<VehicleSupplyLiftComponent> lift)
@@ -1237,7 +1256,7 @@ public sealed class VehicleSupplySystem : EntitySystem
         return found;
     }
 
-#if false // CCM14-start
+
     private List<VehicleSupplyEntry> BuildVendorCatalog(EntityUid vendorUid, VehicleHardpointVendorComponent vendor)
     {
         var vendorCoords = _transform.GetMapCoordinates(vendorUid);
@@ -1276,7 +1295,6 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         return list;
     }
-#endif // CCM14-end
 
     private bool TryGetEntry(VehicleSupplyConsoleComponent console, string vehicleId, out VehicleSupplyEntry entry)
     {
@@ -1294,10 +1312,18 @@ public sealed class VehicleSupplySystem : EntitySystem
         return false;
     }
 
-    // CCM14-start: Always use localized name from prototype
+    // CCM14-start
     private string GetEntryName(VehicleSupplyEntry entry)
     {
+        // if (!string.IsNullOrWhiteSpace(entry.Name))
+        //     return entry.Name;
+
         return GetPrototypeName(entry.Vehicle.Id);
+    }
+
+    private string GetVehicleName(string vehicleId)
+    {
+        return GetPrototypeName(vehicleId);
     }
     // CCM14-end
 
@@ -1526,7 +1552,9 @@ public sealed class VehicleSupplySystem : EntitySystem
     private HashSet<string> BuildUnlockedSet()
     {
         var unlocked = new HashSet<string>();
-        var tech = EnsureSupplyTech();
+        if (!TryGetSupplyTech(out var tech))
+            return unlocked;
+
         foreach (var id in tech.Comp.Unlocked)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -1537,19 +1565,28 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         return unlocked;
     }
-    // CCM14-start
+
+    private bool TryGetSupplyTech(out Entity<VehicleSupplyTechComponent> tech)
+    {
+        var query = EntityQueryEnumerator<VehicleSupplyTechComponent>();
+        if (query.MoveNext(out var uid, out var comp))
+        {
+            tech = (uid, comp);
+            return true;
+        }
+
+        tech = default;
+        return false;
+    }
+
     private static bool IsEntryUnlocked(VehicleSupplyEntry entry, HashSet<string> unlocked)
     {
-        if (!string.IsNullOrWhiteSpace(entry.Unlock))
+        if (string.IsNullOrWhiteSpace(entry.Unlock))
             return true;
 
-        if (!string.IsNullOrWhiteSpace(entry.Locked))
-            return unlocked.Contains(Normalize(entry.Locked));
-
-        return true;
+        return unlocked.Contains(Normalize(entry.Unlock));
     }
-    // CCM14-end
-#if false // CCM14-start
+
     private IReadOnlyList<string> GetHardpointsForVehicle(string vehicleId, IReadOnlyList<VehicleSupplyEntry> entries)
     {
         var key = Normalize(vehicleId);
@@ -1636,5 +1673,4 @@ public sealed class VehicleSupplySystem : EntitySystem
 
         return null;
     }
-#endif // CCM14-end
 }

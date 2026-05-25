@@ -47,7 +47,7 @@
     id: RMCIDRoyalParamarinesCommander
     jumpsuit: RMCJumpsuitMarineParaService
     shoes: RMCBootsRoyalFilled
-    head: RMCHeadCapPeakedPara
+    head: CCMHeadMirtanVenok #CCM14
     ears: RMCHeadsetParaOfficer
     eyes: RMCGlassesAviators
     outerClothing: RMCJacketParaCOJacketFilled

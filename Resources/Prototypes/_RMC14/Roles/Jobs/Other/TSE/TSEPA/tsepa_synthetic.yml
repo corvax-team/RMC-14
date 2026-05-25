@@ -10,6 +10,7 @@
   startingGear: RMCGearTSEPASynthetic
   icon: "RMCJobIconTSEPASynth"
   joinNotifyCrew: false
+  whitelistParent: RMCJobSynthetic # CCM14
   accessGroups:
   - ColonistTSEPAInspector
   - Synth
