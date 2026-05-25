@@ -16,6 +16,3 @@
   - type: Sprite
     sprite: _CMU14/Objects/Medical/splint.rsi
     state: icon
-  - type: Tag
-    tags:
-    - Brutepack
