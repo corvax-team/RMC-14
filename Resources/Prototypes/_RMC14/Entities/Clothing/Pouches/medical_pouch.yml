@@ -44,7 +44,7 @@
   - type: StorageFill
     contents:
     - id: CMHealthAnalyzer
-      # splint
+    - id: CMUSplintItem # CMU ADD
     - id: CMBurnKit10
     - id: CMTraumaKit10
 
@@ -55,7 +55,7 @@
   components:
   - type: StorageFill
     contents:
-    # TODO RMC14 pill bottle tramadol
+    - id: CCMPillCanisterTramadol #CMU-CCM ADD
     - id: CMPillCanisterBicaridine
     - id: CMPillCanisterKelotane
     - id: CMPillCanisterDexalin

@@ -1,0 +1,83 @@
+- type: entity
+  parent: CMBottleFilled
+  id: CCMBottleTramadol
+  suffix: CCM
+  name: tramadol bottle
+  description: A small bottle. Contains Tramadol - Used to treat pain.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: CMUTramadol
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      CMUTramadol: 60
+
+- type: entity
+  parent: CMBottleFilled
+  id: CCMBottleParacetamol
+  suffix: CCM
+  name: paracetamol bottle
+  description: A small bottle. Contains Paracetamol - Used to treat light pain.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: CMUParacetamol
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      CMUParacetamol: 60
+
+- type: entity
+  parent: CMBottleFilled
+  id: CCMBottleOxycodone
+  suffix: CCM
+  name: oxycodone bottle
+  description: A small bottle. Contains Oxycodone - Used to treat heavy pain.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: CMUOxycodone
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      CMUOxycodone: 60
+
+- type: entity
+  parent: CMBottleFilled
+  id: CCMBottleOrganMix
+  suffix: CCM
+  name: organ mix bottle
+  description: A small bottle. Contains H.P.N.C.O. - Used to treat damaged bones & organs.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: CMUHepatocytin
+          Quantity: 10
+        - ReagentId: CMUPulmovine
+          Quantity: 10
+        - ReagentId: CMUNephronate
+          Quantity: 10
+        - ReagentId: CMUCardiocaine
+          Quantity: 10
+        - ReagentId: CMUOsteoCalc
+          Quantity: 20
+  - type: CMRefillableSolution
+    reagents:
+      CMUHepatocytin: 10
+      CMUPulmovine: 10
+      CMUNephronate: 10
+      CMUCardiocaine: 10
+      CMUOsteoCalc: 20

@@ -1,0 +1,221 @@
+- type: entity
+  parent: CMPill
+  id: CCMPillTramadol
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: CMUTramadol
+          Quantity: 15
+  - type: Sprite
+    layers:
+    - state: pill18
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: Tr
+
+- type: entity
+  parent: CMPill
+  id: CCMPillParacetamol
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: CMUParacetamol
+          Quantity: 25
+  - type: Sprite
+    layers:
+    - state: pill9
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: Pa
+
+- type: entity
+  parent: CMPill
+  id: CCMPillOxycodone
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: CMUOxycodone
+          Quantity: 10
+  - type: Sprite
+    layers:
+    - state: pill19
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: Oxy
+
+- type: entity
+  parent: CMPill
+  id: CCMPillOrgansMix
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: CMUHepatocytin
+          Quantity: 5
+        - ReagentId: CMUPulmovine
+          Quantity: 5
+        - ReagentId: CMUNephronate
+          Quantity: 5
+        - ReagentId: CMUCardiocaine
+          Quantity: 5
+        - ReagentId: CMUOsteoCalc
+          Quantity: 5
+  - type: Sprite
+    layers:
+    - state: pill2
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: OM
+
+# Pill Packets
+
+- type: entity
+  parent: CMPacketPills
+  id: CCMPacketPillsTramadol
+  name: tramadol pill packet
+  description: This packet contains tramadol pills. Moderate supresses pain. Once you take them out, they don't go back in. Don't take more than 2 pills in a short period.
+  components:
+  - type: Sprite
+    state: tramadol_packet
+  - type: StorageFill
+    contents:
+    - id: CCMPillTramadol
+      amount: 4
+  - type: IconLabel
+    labelTextLocId: Tr
+
+# Pill Canisters
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: CCMPillCanisterTramadolNoSkill
+  name: tramadol pill bottle
+  description: It's an airtight container for storing medication. It's labeled "Tramadol(15u, 2 pill OD) An anti-pain medicine. It supress moderate pain."
+  suffix: CCM, Tramadol, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 5
+  - type: Sprite
+    layers:
+    - state: pill_canister5
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CCMPillTramadol
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: Tr
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: CCMPillCanisterParacetamolNoSkill
+  name: paracetamol pill bottle
+  description: It's an airtight container for storing medication. It's labeled "Paracetamol(25u) An anti-pain medicine. It supress light pain."
+  suffix: CCM, Paracetamol, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 7
+  - type: Sprite
+    layers:
+    - state: pill_canister7
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CCMPillParacetamol
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: Pr
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: CCMPillCanisterOxycodoneNoSkill
+  name: oxycodone pill bottle
+  description: It's an airtight container for storing medication. It's labeled "Oxycodone(10u, 2 pill OD) An anti-pain medicine. It supress heavy pain."
+  suffix: CCM, Oxycodone, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 4
+  - type: Sprite
+    layers:
+    - state: pill_canister4
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CCMPillOxycodone
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: Oxy
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: CCMPillCanisterOrgansMixNoSkill
+  name: organ mix pill bottle
+  description: It's an airtight container for storing medication. It's labeled "H.P.N.C.O.(25u, 3 pill OD) An organ & bone medicine. It heals all bones and organs (But brain doesn't)"
+  suffix: CCM, Organ Mix, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 9
+  - type: Sprite
+    layers:
+    - state: pill_canister9
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: CCMPillOrgansMix
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: OM
+# 2 medicine skill
+- type: entity
+  parent: CCMPillCanisterTramadolNoSkill
+  id: CCMPillCanisterTramadol
+  suffix: CCM, Tramadol, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: CCMPillCanisterOxycodoneNoSkill
+  id: CCMPillCanisterOxycodone
+  suffix: CCM, Oxycodone, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: CCMPillCanisterOrgansMixNoSkill
+  id: CCMPillCanisterOrgansMix
+  suffix: CCM, Organ Mix, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
