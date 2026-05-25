@@ -190,8 +190,10 @@
         crate: RMCCrateFlashlights
       - cost: 1000
         crate: RMCCrateHighCapacityPowerCell
+      # CCM14-start
       - cost: 2000
         crate: RMCOrbitalCannonFuel
+      # CCM14-end
     - name: Explosives
       entries:
       - cost: 3000
