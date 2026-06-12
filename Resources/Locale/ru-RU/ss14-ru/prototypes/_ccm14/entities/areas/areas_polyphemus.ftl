@@ -53,3 +53,7 @@ ent-CCMAreaPolyphemusNortheasternCavesOpen = Северо-восточные п�
     .desc = { ent-CCMAreaPolyphemus.desc }
 ent-CCMAreaPolyphemusLZ = Зона высадки (LZ)
     .desc = { ent-CCMAreaPolyphemus.desc }
+ent-CCMAreaPolyphemusEastLab = Лабаратория Вей
+    .desc = { ent-CCMAreaPolyphemus.desc }
+ent-CCMAreaPolyphemusEastminersCamp = Лагерь шахтёров
+    .desc = { ent-CCMAreaPolyphemus.desc }

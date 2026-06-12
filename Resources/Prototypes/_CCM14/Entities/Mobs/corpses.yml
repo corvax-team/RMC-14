@@ -1,0 +1,49 @@
+# Polyphemus
+
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: CCMCorpseRiflemanPolyphemus
+  components:
+  - type: Loadout
+    prototypes: [CCMGearCorpseRiflemanPolyphemus]
+  - type: Rank
+    rank: RMCRankPrivate
+
+- type: startingGear
+  id: CCMGearCorpseRiflemanPolyphemus
+  equipment:
+    jumpsuit: JumpsuitMarine
+    back: CMSatchelMarineLogistics
+    shoes: CMBootsBrownFilled
+    gloves: RMCHandsBrownMarine
+    outerClothing: CMArmorM3Medium
+    id: CMDogtagRifleman
+    ears: RMCHeadsetMarine
+    head: CMArmorHelmetM12
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: CCMCorpseRTOPolyphemus
+  components:
+  - type: Loadout
+    prototypes: [CCMGearCorpseRTOPolyphemus]
+  - type: Rank
+    rank: RMCRankPrivate
+
+- type: startingGear
+  id: CCMGearCorpseRTOPolyphemus
+  equipment:
+    jumpsuit: CMJumpsuitMarineRTO
+    back: RMCBackpackRTO
+    shoes: CMBootsBrownFilled
+    gloves: RMCHandsBrownMarine
+    outerClothing: CMArmorM4
+    id: CMDogtagFireteamLeader
+    ears: RMCHeadsetMarine
+    head: CMArmorHelmetM12
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff

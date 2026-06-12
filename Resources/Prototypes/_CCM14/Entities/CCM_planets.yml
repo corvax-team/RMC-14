@@ -4,22 +4,33 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_CCM14/Planets/polyphemus.yml
-    camouflage: Classic
+    camouflage: Urban
+    selectRandomSurvivorVariant: false
     survivorJobs:
-    - CMSurvivor: 3
-    - CMSurvivorCorporate: 1
-    - CMSurvivorDoctor: 2
-    - CMSurvivorEngineer: 2
-    - CMSurvivorSecurity: 2
-    - CMSurvivorScientist: 1
-    announcement: "Пехота! Была потеряна связь с отрядом морпехов на аванпосте High Rock Company. После бомбардировки шахт они отправились туда добивать остатки жуков. Видимо, не добили. Теперь наша очередь.
-      Для общего понимания,
-      Обозначение колонии - аванпост ХРК, под карантином.
-      Температура на поверхности составляет 23 °C.
-      Заведующий колонии - представитель ХРК Сайли Хильсон.
-      Биосканирование Выдаёт ошибку.
+    - RMCSurvivorCommandingOfficer: 1
+    - RMCSurvivorForeconSupportTech: 1
+    - RMCSurvivorForeconBase: 6 # todo 7 when eight survs
+    survivorJobVariants:
+      RMCSurvivorCommandingOfficer:
+      - RMCSurvivorForeconCommander: 1
+      RMCSurvivorForeconBase:
+      - RMCSurvivorForeconSquadLeader: 1
+      - RMCSurvivorForeconSniper: 1
+      - RMCSurvivorForeconSmartgunOperator: 1
+      - RMCSurvivorForeconMarksman: 1
+      - RMCSurvivorForeconRifleman: 3
+    survivorJobOverrides:
+      CMSurvivor: RMCSurvivorForeconBase
+      CMSurvivorCorporate: RMCSurvivorForeconBase
+      CMSurvivorDoctor: RMCSurvivorForeconSupportTech
+      CMSurvivorEngineer: RMCSurvivorForeconSupportTech
+      CMSurvivorSecurity: RMCSurvivorForeconBase
+      CMSurvivorScientist: RMCSurvivorForeconBase
+    announcement: Получен сигнал бедствия с близлежайщей колонии ОПЗ LV-783 Polyphemus. На планете обнаружены разгромленные ККМП Силы Обороны и Сдерживания
+    Температура за бортом: 20°C
+    Командир колонии: Едуард Мектиков
+    Биосканирование: ERROR
 
-      Авторизовано: капитан Леон Гранц"
 - type: entity
   id: RMCPlanetChancesNova
   name: Nova Outpost

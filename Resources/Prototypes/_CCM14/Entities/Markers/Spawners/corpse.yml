@@ -1,0 +1,15 @@
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: CCMSpawnerCorpseRiflemanPolyphemus
+  name: Corpse Spawner - UNMC rifleman [Polyphemus]
+  components:
+  - type: CorpseSpawner
+    spawn: CCMCorpseRiflemanPolyphemus
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: CCMSpawnerCorpseRTOPolyphemus
+  name: Corpse Spawner - UNMC RTO [Polyphemus]
+  components:
+  - type: CorpseSpawner
+    spawn: CCMCorpseRTOPolyphemus

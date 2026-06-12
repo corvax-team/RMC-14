@@ -132,6 +132,7 @@
     lasing: true
     medevac: true
     OB: true
+    linkedLz: dropship_lz1
     supplyDrop: true
     paradropping: true
     weatherEnabled: true
@@ -154,6 +155,7 @@
     lasing: true
     medevac: false
     OB: true
+    linkedLz: dropship_lz1
     supplyDrop: false
     paradropping: true
     weatherEnabled: true
@@ -177,6 +179,7 @@
     medevac: false
     OB: true
     supplyDrop: false
+    linkedLz: dropship_lz1
     paradropping: true
     weatherEnabled: false
 
@@ -569,3 +572,51 @@
     linkedLz: dropship_lz1
     paradropping: false
     weatherEnabled: true
+
+# Лабаратория
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusEastLab
+  name: East - Labaratory
+  components:
+  - type: Sprite
+    state: construction
+  - type: Area
+    minimapColor: '#7e6e28d7'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+# Добывающий лагерь
+
+- type: entity
+  parent:
+  - CCMAreaPolyphemus
+  - CCMAreaPolyphemusZeroProtection
+  id: CCMAreaPolyphemusEastminersCamp
+  name: East - Miners camp
+  components:
+  - type: Sprite
+    state: construction
+  - type: Area
+    minimapColor: '#7e6e28d7'
+    CAS: false
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: true
+    medevac: false
+    OB: false
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
