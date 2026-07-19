@@ -29,6 +29,7 @@
     accuracyMultiplier: 1.20
     accuracyMultiplierUnwielded: 0.95
   - type: RMCMagneticItem
+  - type: GunIDLock # CCM14
   - type: GunDamageModifier
     multiplier: 1
   - type: BallisticAmmoProvider

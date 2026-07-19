@@ -6,7 +6,10 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
+using Content.Server.Administration.Commands; // Forge-Change
+using Content.Server.Administration.Managers; // Forge-Change
 using Content.Server.Administration.Systems;
+using Content.Server.Database; // Forge-Change
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Presets;
 using Content.Server.GameTicking.Rules.Components;
@@ -14,8 +17,11 @@ using Content.Server.Maps;
 using Content.Server.RoundEnd;
 using Content.Shared.Administration.Managers;
 using Content.Shared.CCVar;
+using Content.Shared.Database; // Forge-Change
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Players.PlayTimeTracking; // Forge-Change
 using Content.Shared.Prototypes;
+using Content.Shared.Roles; // Forge-Change
 using Robust.Server.ServerStatus;
 using Robust.Shared.Asynchronous;
 using Robust.Shared.Configuration;
@@ -58,6 +64,11 @@ public sealed partial class ServerApi : IPostInjectInit
     [Dependency] private readonly ILogManager _logManager = default!;
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
     [Dependency] private readonly ILocalizationManager _loc = default!;
+    // Forge-Change-Start
+    [Dependency] private readonly IBanManager _bans = default!;
+    [Dependency] private readonly IPlayerLocator _locator = default!;
+    [Dependency] private readonly IServerDbManager _db = default!;
+    // Forge-Change-End
 
     private string _token = string.Empty;
     private ISawmill _sawmill = default!;
@@ -70,12 +81,18 @@ public sealed partial class ServerApi : IPostInjectInit
         RegisterActorHandler(HttpMethod.Get, "/admin/info", InfoHandler);
         RegisterHandler(HttpMethod.Get, "/admin/game_rules", GetGameRules);
         RegisterHandler(HttpMethod.Get, "/admin/presets", GetPresets);
+        RegisterHandler(HttpMethod.Get, "/admin/playtime_trackers", GetPlayTimeTrackers); // Forge-Change
+        RegisterHandler(HttpMethod.Get, "/admin/jobs", GetJobs); // Forge-Change
 
         // Post
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/round/start", ActionRoundStart);
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/round/end", ActionRoundEnd);
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/round/restartnow", ActionRoundRestartNow);
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/kick", ActionKick);
+        RegisterActorHandler(HttpMethod.Post, "/admin/actions/ban", ActionBan); // Forge-Change
+        RegisterActorHandler(HttpMethod.Post, "/admin/actions/role_ban", ActionRoleBan); // Forge-Change
+        RegisterActorHandler(HttpMethod.Post, "/admin/actions/pardon", ActionPardon); // Forge-Change
+        RegisterActorHandler(HttpMethod.Post, "/admin/actions/add_time", ActionAddTime); // Forge-Change
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/add_game_rule", ActionAddGameRule);
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/end_game_rule", ActionEndGameRule);
         RegisterActorHandler(HttpMethod.Post, "/admin/actions/force_preset", ActionForcePreset);
@@ -338,6 +355,247 @@ public sealed partial class ServerApi : IPostInjectInit
         });
     }
 
+    // Forge-Change-Start
+    private async Task ActionBan(IStatusHandlerContext context, Actor actor)
+    {
+        var body = await ReadJson<BanActionBody>(context);
+        if (body == null)
+            return;
+
+        await RunOnMainThread(async () =>
+        {
+            var data = await _locator.LookupIdByNameOrIdAsync($"{body.TargetUsername}");
+            if (data == null)
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Player not found", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            var admin = await _locator.LookupIdByNameOrIdAsync($"{actor.Guid}");
+            if (admin == null)
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Admin not found", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            var adminData = await _db.GetAdminDataForAsync(admin.UserId);
+            if (adminData == null)
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Is not admin", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            var targetHWid = data.LastHWId;
+            var targetId = data.UserId;
+            var targetUsername = data.Username;
+            var reason = body.Reason ?? "No reason supplied";
+            reason += " (banned by admin)";
+
+            _bans.CreateServerBan(targetId, targetUsername, admin.UserId, null, targetHWid, (uint)body.Minutes, (NoteSeverity)body.Severity, body.Reason ?? "No reason");
+
+            await RespondOk(context);
+
+            _sawmill.Info($"Banned player {data.Username} ({data.UserId}) for {reason} by {FormatLogActor(actor)} to {body.Minutes}");
+        });
+    }
+
+    private async Task ActionRoleBan(IStatusHandlerContext context, Actor actor)
+    {
+        var body = await ReadJson<RoleBanActionBody>(context);
+        if (body == null)
+            return;
+
+        await RunOnMainThread(async () =>
+        {
+            var data = await _locator.LookupIdByNameOrIdAsync($"{body.TargetUsername}");
+            if (data == null)
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Player not found", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            var admin = await _locator.LookupIdByNameOrIdAsync($"{actor.Guid}");
+            if (admin == null)
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Admin not found", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            var adminData = await _db.GetAdminDataForAsync(admin.UserId);
+            if (adminData == null)
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Is not admin", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            if (!_prototypeManager.HasIndex<JobPrototype>(body.Role))
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Role not found", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            var targetHWid = data.LastHWId;
+            var targetId = data.UserId;
+            var targetUsername = data.Username;
+            var reason = body.Reason ?? "No reason supplied";
+            reason += " (role banned by admin)";
+
+            _bans.CreateRoleBan(targetId, targetUsername, admin.UserId, null, targetHWid, body.Role, (uint)body.Minutes, (NoteSeverity)body.Severity, body.Reason ?? "No reason", DateTimeOffset.UtcNow);
+
+            await RespondOk(context);
+
+            _sawmill.Info($"Role banned player {data.Username} ({data.UserId}) from {body.Role} for {reason} by {FormatLogActor(actor)} to {body.Minutes}");
+        });
+    }
+
+    private async Task ActionPardon(IStatusHandlerContext context, Actor actor)
+    {
+        var body = await ReadJson<PardonActionBody>(context);
+        if (body == null)
+        {
+            await context.RespondErrorAsync(HttpStatusCode.BadRequest);
+            return;
+        }
+
+        await RunOnMainThread(async () =>
+        {
+            var admin = await _locator.LookupIdByNameOrIdAsync($"{actor.Guid}");
+            if (admin == null)
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Admin not found", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            var adminData = await _db.GetAdminDataForAsync(admin.UserId);
+            if (adminData == null)
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Is not admin", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            var banId = body.BanId;
+
+            var ban = await _db.GetServerBanAsync(banId);
+
+            if (ban == null)
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Ban not found", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            if (ban.Unban != null)
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Ban already pardoned", },
+                    HttpStatusCode.Conflict);
+                return;
+            }
+
+            await _db.AddServerUnbanAsync(new ServerUnbanDef(banId, admin.UserId, DateTimeOffset.Now));
+
+            await context.RespondJsonAsync(
+                new { Message = "Ban successfully pardoned", });
+
+            _sawmill.Info($"Ban {banId} pardoned by {admin}");
+        });
+    }
+
+    private async Task ActionAddTime(IStatusHandlerContext context, Actor actor)
+    {
+        var body = await ReadJson<TimeTransferActionBody>(context);
+        if (body == null)
+        {
+            await context.RespondErrorAsync(HttpStatusCode.BadRequest);
+            return;
+        }
+
+        await RunOnMainThread(async () =>
+        {
+            var data = await _locator.LookupIdByNameOrIdAsync($"{body.TargetUsername}");
+            if (data == null)
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Player not found", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            var admin = await _locator.LookupIdByNameOrIdAsync($"{actor.Guid}");
+            if (admin == null)
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Admin not found", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            var adminData = await _db.GetAdminDataForAsync(admin.UserId);
+            if (adminData == null)
+            {
+                await context.RespondJsonAsync(
+                    new { Error = "Is not admin", },
+                    HttpStatusCode.NotFound);
+                return;
+            }
+
+            try
+            {
+                var currentPlayTimes = await _db.GetPlayTimes(data.UserId);
+                var playTimeDict = currentPlayTimes.ToDictionary(p => p.Tracker, p => p.TimeSpent);
+
+                var updateList = new List<PlayTimeUpdate>();
+
+                foreach (var timeData in body.TimeData)
+                {
+                    var timeToAdd = TimeSpan.FromMinutes(PlayTimeCommandUtilities.CountMinutes(timeData.TimeString));
+                    TimeSpan newTime;
+
+                    if (playTimeDict.TryGetValue(timeData.PlaytimeTracker, out var currentTime))
+                        newTime = currentTime + timeToAdd;
+                    else
+                        newTime = timeToAdd;
+
+                    updateList.Add(new PlayTimeUpdate(data.UserId, timeData.PlaytimeTracker, newTime));
+                }
+
+                await _db.UpdatePlayTimes(updateList);
+
+                await context.RespondJsonAsync(
+                    new { Message = "Время успешно выдано", });
+
+                _sawmill.Info($"{admin.Username} выдал время игроку {data.Username}");
+            }
+            catch (Exception ex)
+            {
+                _sawmill.Error($"Ошибка при выдаче времени: {ex}");
+                await context.RespondJsonAsync(
+                    new { Error = "Internal server error", },
+                    HttpStatusCode.InternalServerError);
+            }
+        });
+    }
+    // Forge-Change-End
+
     private async Task ActionRoundStart(IStatusHandlerContext context, Actor actor)
     {
         await RunOnMainThread(async () =>
@@ -447,6 +705,88 @@ public sealed partial class ServerApi : IPostInjectInit
             GameRules = gameRules
         });
     }
+
+    // Forge-Change-Start
+    /// <summary>
+    ///     Returns all play-time trackers with a human-readable display name composed of the localized
+    ///     names of every <see cref="JobPrototype"/> that references the tracker. Used by the Discord
+    ///     bot's playtime-grant flow so the role list doesn't have to be hand-mirrored in two places.
+    /// </summary>
+    private async Task GetPlayTimeTrackers(IStatusHandlerContext context)
+    {
+        var trackers = await RunOnMainThread(() =>
+        {
+            var jobsByTracker = new Dictionary<string, List<JobPrototype>>();
+            foreach (var job in _prototypeManager.EnumeratePrototypes<JobPrototype>())
+            {
+                if (string.IsNullOrEmpty(job.PlayTimeTracker))
+                    continue;
+                if (!jobsByTracker.TryGetValue(job.PlayTimeTracker, out var list))
+                {
+                    list = new List<JobPrototype>();
+                    jobsByTracker[job.PlayTimeTracker] = list;
+                }
+                list.Add(job);
+            }
+
+            var result = new List<PlayTimeTrackerResponse.Tracker>();
+            foreach (var trackerProto in _prototypeManager.EnumeratePrototypes<PlayTimeTrackerPrototype>())
+            {
+                if (trackerProto.ID == PlayTimeTrackingShared.TrackerAdmin)
+                    continue;
+
+                string name;
+                if (trackerProto.ID == PlayTimeTrackingShared.TrackerOverall)
+                {
+                    name = "Общее игровое время";
+                }
+                else if (jobsByTracker.TryGetValue(trackerProto.ID, out var jobs) && jobs.Count > 0)
+                {
+                    name = string.Join(" / ", jobs
+                        .Select(j => j.LocalizedName)
+                        .Where(n => !string.IsNullOrWhiteSpace(n))
+                        .Distinct());
+                    if (string.IsNullOrWhiteSpace(name))
+                        name = trackerProto.ID;
+                }
+                else
+                {
+                    name = trackerProto.ID;
+                }
+
+                result.Add(new PlayTimeTrackerResponse.Tracker { Id = trackerProto.ID, Name = name });
+            }
+
+            return result.OrderBy(t => t.Name, StringComparer.CurrentCultureIgnoreCase).ToList();
+        });
+
+        await context.RespondJsonAsync(new PlayTimeTrackerResponse { Trackers = trackers });
+    }
+
+    /// <summary>
+    ///     Returns every <see cref="JobPrototype"/> with its localized display name. Used by the Discord
+    ///     bot's punishment-request flow: role bans key off job prototype IDs, not play-time tracker IDs,
+    ///     so the bot needs the real job list rather than the tracker list.
+    /// </summary>
+    private async Task GetJobs(IStatusHandlerContext context)
+    {
+        var jobs = await RunOnMainThread(() =>
+        {
+            var result = new List<JobResponse.Job>();
+            foreach (var job in _prototypeManager.EnumeratePrototypes<JobPrototype>())
+            {
+                var name = job.LocalizedName;
+                if (string.IsNullOrWhiteSpace(name))
+                    name = job.ID;
+                result.Add(new JobResponse.Job { Id = job.ID, Name = name });
+            }
+
+            return result.OrderBy(j => j.Name, StringComparer.CurrentCultureIgnoreCase).ToList();
+        });
+
+        await context.RespondJsonAsync(new JobResponse { Jobs = jobs });
+    }
+    // Forge-Change-End
 
 
     /// <summary>
@@ -616,6 +956,42 @@ public sealed partial class ServerApi : IPostInjectInit
         public string? Reason { get; init; }
     }
 
+    // Forge-Change-Start
+    private sealed class BanActionBody
+    {
+        public int Minutes { get; init; }
+        public int Severity { get; init; }
+        public string? TargetUsername { get; init; }
+        public string? Reason { get; init; }
+    }
+
+    private sealed class RoleBanActionBody
+    {
+        public int Minutes { get; init; }
+        public int Severity { get; init; }
+        public string? TargetUsername { get; init; }
+        public required string Role { get; init; }
+        public string? Reason { get; init; }
+    }
+
+    private sealed class PardonActionBody
+    {
+        public int BanId { get; init; }
+    }
+
+    private sealed class TimeTransferActionBody
+    {
+        public string? TargetUsername { get; init; }
+        public required List<TimeTransferData> TimeData { get; init; }
+    }
+
+    private sealed class TimeTransferData
+    {
+        public required string PlaytimeTracker { get; init; }
+        public required string TimeString { get; init; }
+    }
+    // Forge-Change-End
+
     private sealed class GameRuleActionBody
     {
         public required string GameRuleId { get; init; }
@@ -707,6 +1083,30 @@ public sealed partial class ServerApi : IPostInjectInit
     {
         public required List<string> GameRules { get; init; }
     }
+
+    // Forge-Change-Start
+    private sealed class PlayTimeTrackerResponse
+    {
+        public required List<Tracker> Trackers { get; init; }
+
+        public sealed class Tracker
+        {
+            public required string Id { get; init; }
+            public required string Name { get; init; }
+        }
+    }
+
+    private sealed class JobResponse
+    {
+        public required List<Job> Jobs { get; init; }
+
+        public sealed class Job
+        {
+            public required string Id { get; init; }
+            public required string Name { get; init; }
+        }
+    }
+    // Forge-Change-End
 
     #endregion
 }

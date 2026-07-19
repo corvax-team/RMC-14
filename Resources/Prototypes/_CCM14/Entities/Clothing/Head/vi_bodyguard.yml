@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingHeadBase
+  id: CCMHeadVIBodyguardBeret
+  name: Vitezstvi bodyguard beret
+  description: A nice grey beret with a blue metal insert for.. self defence i guess...
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Hats/vi_bodyguard_beret.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Hats/vi_bodyguard_beret.rsi

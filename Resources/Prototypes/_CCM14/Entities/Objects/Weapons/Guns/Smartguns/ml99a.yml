@@ -1,0 +1,400 @@
+- type: entity
+  parent: RMCSmartGunNoCamo
+  id: CCMSmartGunHeavyML99A
+  name: ML99A smart auto gun
+  description: Heavy and slower version of ML66A SmartGun. Have installed attachement - ML109A Smart Attachement gun.
+  suffix: PMC
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Guns/Smartguns/ml99a.rsi
+    layers:
+    - state: base
+      sprite: _CCM14/Objects/Weapons/Guns/Smartguns/ml99a.rsi
+    - state: mag-0
+      sprite: _CCM14/Objects/Weapons/Guns/Smartguns/ml99a.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _CCM14/Objects/Weapons/Guns/Smartguns/ml99a.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CCMMagazineSmartGunML99A
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CCMMagazineSmartGunHeavy
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: RMCPowerCellSmartgun
+        whitelist:
+          components:
+          - SmartGunBattery
+  - type: GunToggleableAmmo
+    settings:
+    - damage:
+        types:
+          Piercing: 65
+      armorPiercing: 5
+      name: rmc-toggleable-ammo-highly-precise
+      icon:
+        sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+        state: ammo_swap_normal
+    - damage:
+        types:
+          Piercing: 45
+      armorPiercing: 45
+      name: rmc-toggleable-ammo-armor-shredding
+      icon:
+        sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+        state: ammo_swap_ap
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - FullAuto
+    recoilWielded: 3
+    scatterWielded: 10
+    baseFireRate: 2
+    burstScatterMult: 4
+    modifiers:
+      FullAuto:
+        maxScatterModifier: 4
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 80
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: CCMAttachmentML109AUnderbarrel
+        whitelist:
+          tags:
+          - CCMAttachmentML109AUnderbarrel
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_CCM14/Weapons/Guns/Gunshots/ml99a.ogg
+      params:
+        volume: -2
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+  - type: HeldSpeedModifier
+  - type: WieldableSpeedModifiers
+    base: 0.3
+    light: 0.49
+    medium: 0.59
+    heavy: 0.608
+
+- type: entity
+  parent: RMCMagazineSmartGun
+  id: CCMMagazineSmartGunML99A
+  name: "ML99A drum magazine heavy (17.5x30mm)"
+  components:
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CCMCartridgeSmartGunML99A
+    proto: CCMCartridgeSmartGunML99A
+    capacity: 200
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Ammunition/Smartgun/ml99a_magazine.rsi
+  - type: Tag
+    tags:
+    - CCMMagazineSmartGunHeavy
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: CCMCartridgeSmartGunML99A
+  name: cartridge (17.5x30mm)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: CartridgeAmmo
+    proto: CCMBulletSmartGunML99A
+  - type: Tag
+    tags:
+    - CCMCartridgeSmartGunML99A
+
+- type: entity
+  parent: CMBulletSmartGun10x30mm
+  id: CCMBulletSmartGunML99A
+  name: bullet (17.5x30mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 60
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 15
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 8
+      falloff: 5
+
+- type: Tag
+  id: CCMMagazineSmartGunHeavy
+
+- type: Tag
+  id: CCMCartridgeSmartGunML99A
+
+- type: Tag
+  id: CCMAttachmentML109AUnderbarrel
+
+- type: Tag
+  id: CCMMagazineSmartGunML109AFlak
+
+- type: Tag
+  id: CCMMagazineSmartGunML109AAS
+
+- type: Tag
+  id: CCMCartridgeSmartGunML109AFlak
+
+- type: Tag
+  id: CCMCartridgeSmartGunML109AAS
+
+# Attachement
+
+- type: entity
+  parent: 
+  - RMCUnderAttachmentBase
+  - RMCAttachableToggleableBase
+  id: CCMAttachmentML109AUnderbarrel
+  name: ML109A Smart attachement
+  description: Who even read this
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    state: masterkey
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - CCMAttachmentML109AUnderbarrel
+  - type: Item
+    size: Normal
+  - type: Gun
+    fireRate: 3.33
+    minAngle: 0
+    maxAngle: 0
+    angleIncrease: 0
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_CCM14/Weapons/Guns/Gunshots/ml109a.ogg
+      params:
+        volume: -2
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: RMCAmmoEject
+    containerID: ballistic-ammo
+    ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CCMMagazineSmartGunML109AFlak
+          - CCMMagazineSmartGunML109AAS
+  - type: GunPointBlank
+  - type: AttachableToggleable
+    userOnly: true
+    attachedOnly: true
+    supercedeHolder: true
+    wieldedUseOnly: true
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
+    activateSound:
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
+      params:
+        volume: -2
+    actionName: Switch to the ML109 Underbarrel smart attachement
+    actionDesc: Switch to using the underbarrel smart gun
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: flamer_nozzle 
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: flamer_nozzle-on
+  - type: AttachableVisuals
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
+      state: all
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 999
+    accuracyMultiplierUnwielded: 999
+  - type: MagazineAmmoProvider
+    autoEject: true
+  - type: AmmoCounter
+  - type: GunIFF
+    enabled: true
+
+#
+
+- type: entity
+  parent: RMCMagazineSmartGun
+  id: CCMMagazineSmartGunML109AFlak
+  name: "ML109A magazine Flak (10x30mm)"
+  components:
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CCMCartridgeSmartGunML109AFlak
+    proto: CCMCartridgeSmartGunML109AFlak
+    capacity: 30
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Ammunition/Smartgun/ml109a_magazine_flak.rsi
+  - type: Tag
+    tags:
+    - CCMMagazineSmartGunML109AFlak
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: CCMCartridgeSmartGunML109AFlak
+  name: cartridge Flak (10x30mm)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: CartridgeAmmo
+    proto: CCMBulletSmartGunML109AFlak
+  - type: Tag
+    tags:
+    - CCMCartridgeSmartGunML109AFlak
+
+- type: entity
+  parent: CMBulletSmartGun10x30mm
+  id: CCMBulletSmartGunML109AFlak
+  name: bullet flak (10x30mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 20
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 10
+      falloff: 9999
+      ignoreModifiers: true
+  - type: ProjectileMaxRange
+    max: 10
+  - type: RMCAreaDamage
+    damageArea: 2
+    falloffDistance: 1
+    xenoDamageMultiplier: 3.33
+
+#
+
+- type: entity
+  parent: RMCMagazineSmartGun
+  id: CCMMagazineSmartGunML109AAS
+  name: "ML109A magazine Anti-Structural (10x30mm)"
+  components:
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CCMCartridgeSmartGunML109AAS
+    proto: CCMCartridgeSmartGunML109AAS
+    capacity: 80
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Ammunition/Smartgun/ml109a_magazine_as.rsi
+  - type: Tag
+    tags:
+    - CCMMagazineSmartGunML109AAS
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: CCMCartridgeSmartGunML109AAS
+  name: cartridge (10x30mm)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: CartridgeAmmo
+    proto: CCMBulletSmartGunML109AAS
+  - type: Tag
+    tags:
+    - CCMCartridgeSmartGunML109AAS
+
+- type: entity
+  parent: CMBulletSmartGun10x30mm
+  id: CCMBulletSmartGunML109AAS
+  name: bullet (10x30mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 10
+        Structural: 200
+  - type: ProjectileMaxRange
+    max: 7
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 7
+      falloff: 9999
+      ignoreModifiers: true
+
+#
+
+- type: entity
+  parent: CMSmartGunOperatorEquipmentCase
+  id: CCMSmartGunOperatorML99ACase
+  components:
+  - type: Storage
+    grid:
+    - 0,0,13,1
+  - type: StorageFill
+    contents:
+    - id: RMCGlassesSmartGunSight
+    - id: CCMSmartGunHeavyML99A
+    - id: RMCPowerCellSmartgun
+    - id: CMArmorSmartGunCombatHarness
+    - id: CCMMagazineSmartGunML99A
+      amount: 3
+    - id: CCMMagazineSmartGunML109AFlak
+      amount: 2
+    - id: CCMMagazineSmartGunML109AAS
+      amount: 2
+
+#
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: CCMCrateMagazineSmartGunML99A
+  name: ML99A & ML109A smart gun ammo crate (3x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMMagazineSmartGunML99A
+      amount: 3
+    - id: CCMMagazineSmartGunML109AFlak
+      amount: 2
+    - id: CCMMagazineSmartGunML109AAS
+      amount: 2

@@ -1,0 +1,100 @@
+- type: entity
+  parent: CMBaseMask
+  id: CCMClothingGasMaskFull
+  name: marine gas mask full
+  description: Special mask maded special for uhhh Marine Corp?
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Mask/gas_mask_full.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Mask/gas_mask_full.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - GasMask
+
+- type: entity
+  parent: CMBaseMask
+  id: CCMClothingMercenaryMask
+  name: mercenary gas mask
+  description: Made by some mercenary by far far away from here.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Mask/mercenary_mask.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Mask/mercenary_mask.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - GasMask
+
+- type: entity
+  parent: CMBaseMask
+  id: CCMClothingGasMask
+  name: marine gas mask
+  description: Special mask maded special for uhhh Marine Corp? This gas mask don't have coif.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Mask/gas_mask.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Mask/gas_mask.rsi
+  - type: HideLayerClothing
+    slots:
+    - Snout
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - GasMask
+
+- type: entity
+  parent: CMBaseMask
+  id: CCMClothingGlassGasMask
+  name: marine glass gas mask
+  description: Very, very leadership glassed window gas mask. Belongs to Field Commander by far far away from here.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Mask/glass_mask.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Mask/glass_mask.rsi
+  - type: HideLayerClothing
+    slots:
+    - Snout
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - GasMask
+
+- type: entity
+  parent: CMBaseMask
+  id: CCMClothingSpecialGasMask
+  name: special gas mask
+  description: Gas mask for very very special force that very very specialising target/
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Mask/special_mask.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Mask/special_mask.rsi
+  - type: HideLayerClothing
+    slots:
+    - Snout
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - GasMask

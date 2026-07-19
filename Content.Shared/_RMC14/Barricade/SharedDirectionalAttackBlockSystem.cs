@@ -131,33 +131,20 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
         // For example, if the blocker is facing North, the leap will be blocked if it originates from a position to the South-West, South, or South-East of the blocker.
         return relativeDiff is 3 or 4 or 5; // Opposite directions
     }
-    // CCM14-start
+
     public bool IsDirectionBlocked(EntityUid origin, AtmosDirection cardinal, float checkRange = 0.6f, CollisionGroup collisionGroup = CollisionGroup.BarricadeImpassable | CollisionGroup.BulletImpassable)
     {
-        return IsDirectionBlocked(origin, cardinal.CardinalToIntVec(), checkRange, collisionGroup);
+        return IsDirectionBlocked(origin, (Vector2)cardinal.CardinalToIntVec(), checkRange, collisionGroup);
     }
 
-    /// <summary>
-    ///     Uses a raycast to determine if a direction from the origin is obstructed.
-    /// </summary>
-    /// <param name="origin">The entity from which the ray is cast.</param>
-    /// <param name="direction">The direction to check.</param>
-    /// <param name="checkRange">The maximum distance to check for a blocking entity.</param>
-    /// <param name="collisionGroup">The collision group used to filter blocking entities.</param>
-    /// <returns>
-    ///     True if at least one valid blocking entity is detected within range, otherwise false.
-    /// </returns>
-    public bool IsDirectionBlocked(EntityUid origin, Vector2 direction, float checkRange = 0.6f, CollisionGroup collisionGroup = CollisionGroup.LowImpassable)
+    public bool IsDirectionBlocked(EntityUid origin, Vector2 direction, float checkRange = 0.6f, CollisionGroup collisionGroup = CollisionGroup.BarricadeImpassable | CollisionGroup.BulletImpassable)
     {
         if (direction == Vector2.Zero)
             return false;
 
         var originPosition = _transform.GetMoverCoordinates(origin).Position;
-        var ray = new CollisionRay(originPosition, direction, (int) collisionGroup);
+        var ray = new CollisionRay(originPosition, direction, (int)collisionGroup);
         var intersect = _physics.IntersectRayWithPredicate(Transform(origin).MapID, ray, checkRange, e => !Transform(e).Anchored);
-        var results = intersect.Select(r => r.HitEntity).ToHashSet();
-
-        return results.Count > 0;
+        return intersect.Any();
     }
-    // CCM14-end
 }

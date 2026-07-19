@@ -13,8 +13,6 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleWarrior
-  - type: GhostRole
-    name: cm-job-name-xeno-warrior
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Warrior/warrior.rsi
   - type: MobState
@@ -63,8 +61,11 @@
     evolvesTo:
     - RMCXenoCrusher
     - CMXenoPraetorian
-    strains: # CCM Change
-    - CCMXenoWarriorBoxer # CCM Change
+# CCM14 Add
+    strains:
+    - CCMXenoWarriorBoxer
+    - CCMXenoWarriorBasher 
+# CCM14 End
   - type: CMArmor
     xenoArmor: 20
     explosionArmor: 40

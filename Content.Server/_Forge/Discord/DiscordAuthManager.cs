@@ -52,6 +52,7 @@ public sealed partial class DiscordAuthManager : IPostInjectInit
         _netMgr.RegisterNetMessage<MsgSyncSponsorData>();
         _netMgr.RegisterNetMessage<MsgDiscordAuthCheck>(OnAuthCheck);
         _netMgr.RegisterNetMessage<MsgDiscordAuthSkip>(OnAuthSkip);
+        _netMgr.RegisterNetMessage<MsgDiscordAuthRequest>(OnAuthRequest);
         _netMgr.Disconnect += OnDisconnect;
 
         _playerMgr.PlayerStatusChanged += OnPlayerStatusChanged;
@@ -79,6 +80,18 @@ public sealed partial class DiscordAuthManager : IPostInjectInit
 
         var session = _playerMgr.GetSessionById(msg.MsgChannel.UserId);
         PlayerVerified?.Invoke(this, session);
+    }
+
+    private async void OnAuthRequest(MsgDiscordAuthRequest msg)
+    {
+        var link = await GenerateLink(msg.MsgChannel.UserId);
+        var qrCode = await GenerateQrCode(link ?? "");
+        var message = new MsgDiscordAuthRequired
+        {
+            Link = link ?? "",
+            QrCodeBytes = qrCode,
+        };
+        msg.MsgChannel.SendMessage(message);
     }
 
     private async void OnPlayerStatusChanged(object? sender, SessionStatusEventArgs args)

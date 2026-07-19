@@ -17,13 +17,7 @@
     - type: TacticalMapLayerTracked
       layers: [FactionSurvivor]
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
+      preset: RMCSkillPresetSurvivorDoctor
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -40,7 +34,7 @@
   id: RMCGearSurvivorFiorinaDoctor
   equipment:
     jumpsuit: RMCScrubsLightBlue
-    head: ArmorHelmetPMC # TODO RMC14: W-Y armored cap resprite?
+    head: ArmorHelmetPMC # TODO RMC14: WEYA armored cap resprite?
     ears: RMCHeadsetDistressWeYa
 
 - type: entity

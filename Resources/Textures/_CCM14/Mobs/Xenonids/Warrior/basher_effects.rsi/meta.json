@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e9ea97c1887d8b144e3e66d959a428c79f58c196/icons/mob/xenos/warrior.dmi",
+  "size": {
+    "x": 12,
+    "y": 12
+  },
+  "states": [
+    {
+      "name": "stars_in_eyes"
+    },
+    {
+      "name": "broken_bones"
+    },
+    {
+      "name": "broken_legs"
+    }
+  ]
+}

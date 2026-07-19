@@ -233,6 +233,8 @@
         amount: 1
       - id: CMRollerBedSpawnFolded
         amount: 2
+      - id: CMSparePDTLBattleBuddyKit
+        amount: 3
       - id: RMCScabbardMacheteFilled #todo spp machete scabbard
         name: ножны H5 для мачете M2132 (Заполненные) # CCM14
         amount: 5

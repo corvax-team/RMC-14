@@ -1,0 +1,8 @@
+- type: entity
+  parent: CMSatchel
+  id: CCMSatchelLightpackSerene
+  name: SerSol. combat pack
+  description: A small, lightweight pack for expeditions, short-range operations and for containing anything you need, designed for Halcyon Dynamics' Serene Solutions fast response teams.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Back/Backpacks/serene.rsi

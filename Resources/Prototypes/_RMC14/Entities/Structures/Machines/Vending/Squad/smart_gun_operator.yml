@@ -16,9 +16,11 @@
     - CMSmartGunOperator
     sections:
     - name: Smart Gun Set (Mandatory)
-      takeAll: CMSmartGunSet
+#      takeAll: CMSmartGunSet CCM14 Delete
+      choices: { CMGunAttachments: 1 } #CCM14 Add
       entries:
       - id: CMSmartGunOperatorEquipmentCase
+      - id: CCMSmartGunOperatorML99ACase #CCM14 Add
     - name: Gun Attachments
       choices: { CMGunAttachments: 1 }
       entries:
@@ -108,6 +110,8 @@
         points: 15
       - id: CMPamphletEngineer
         points: 15
+      - id: CMPamphletMedical # CCM-14
+        points: 15 # CCM-14
     - name: Ключи шифрования # CCM14
       entries:
       - id: CMEncryptionKeyEngineer
@@ -185,9 +189,27 @@
       - id: RMCWebbingDropPouchBlack
       - id: CMWebbingHolster
       - id: RMCWebbingHolsterBlack
+# CCM14 Add
+    - name: Вспомог. одежда - Шея
+      choices: { CCMDripNeck: 1 }
+      entries:
+      - id: CCMCapeCaseBase
+      - id: CCMCapeCaseFull
+      - id: CCMCapeCaseHalf
+      - id: CCMCapeCaseRapier
+      - id: CCMCapeCaseShredded
+      - id: CCMCapeCaseScarf
+# CCM14 End
     - name: Маски # CCM14
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
       - id: RMCMaskRebreather
+# CCM14 Add
+      - id: CCMClothingGasMaskFull
+      - id: CCMClothingMercenaryMask
+      - id: CCMClothingGasMask
+      - id: CCMClothingGlassGasMask
+      - id: CCMClothingSpecialGasMask
+# CCM14 End

@@ -12,6 +12,8 @@
                     <ui:OptionSlider Name="SliderVolumeCassettes" Title="{Loc 'rmc-ui-options-cassettes-volume'}" />
                     <ui:OptionSlider Name="SliderVolumeHijackSong" Title="{Loc 'rmc-ui-options-hijack-song-volume'}" />
                     <ui:OptionSlider Name="SliderVolumeBarks" Title="{Loc 'ccm-ui-options-barks-volume'}" />
+                    <!-- Forge TTS -->
+                    <ui:OptionSlider Name="SliderVolumeTts" Title="{Loc 'ui-options-tts-volume'}" />
                     <ui:OptionSlider Name="SliderVolumeMaster" Title="{Loc 'ui-options-master-volume'}"
                                      Margin="0 0 0 8" />
                     <ui:OptionSlider Name="SliderVolumeMidi" Title="{Loc 'ui-options-midi-volume'}" />

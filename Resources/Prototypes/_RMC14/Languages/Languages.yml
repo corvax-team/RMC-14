@@ -1,0 +1,265 @@
+- type: language
+  id: English
+  name: "Общегалактический"
+  description: "Транслит, на котором говорят все!"
+  isVisibleLanguage: true
+  typefaceId: Default
+  textSize: null
+  showLanguageName: false
+  showLanguageIcon: false
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: GB
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 150
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["Koyl", "ro", "endur", "mili", "dica", "holi", "san", "just", "got", "vonj"]
+    minSyllables: 1
+    maxSyllables: 3
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: Xeno
+  name: "Язык Ксеноморфов"
+  description: "Инопланетный язык ксеноморфов."
+  isVisibleLanguage: true
+  typefaceId: null
+  textSize: null
+  languageIcon:
+    sprite: /Textures/_RMC14/Actions/xeno_actions.rsi
+    state: queen_word
+  canUseRadio: true
+  needsSpeech: true
+  showLanguageIcon: false
+  showLanguageName: false
+  randomizeObfuscation: true
+  firstContactMeaning: language-Xeno-first-contact
+  expectedVocabularySize: 120
+  minimumRequiredLearnedWords: 20
+  learningRateMultiplier: 0.45
+  obfuscationMethod:
+    !type:XenoObfuscation
+    xenoSounds: ["hss", "sss", "tss", "chk", "krr", "hrr", "skr", "tsk", "rrk", "hsk", "ssk"]
+    garbleChars: ['~', '?', '*', '#', '¿', '§']
+    intensityMultiplier: 1.0
+  speechOverride:
+    speechSoundsOverride: Xenonid
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: French
+  name: "Транслит Ноократии Эранта"
+  description: "Транслит научной и художественной элиты общества."
+  isVisibleLanguage: true
+  typefaceId: DefaultItalic
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: FR
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 120
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["cava", "sac", "pi", "aves", "ave", "ket", "pret", "solo", "epas", "enst", "rest"]
+    minSyllables: 1
+    maxSyllables: 3
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: Spanish
+  name: "Транслит Великой Империи Нотда"
+  description: "Язык многих аристократических родов ВИН, локально распространён среди беженцев из ВИН."
+  isVisibleLanguage: true
+  typefaceId: DefaultItalic
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: ES
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 120
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["Koyl", "ro", "endur", "mili", "dica", "holi", "san", "just", "got", "vonj"]
+    minSyllables: 1
+    maxSyllables: 3
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: Japanese
+  name: "Транслит Империи Миртана"
+  description: "То, на чём говорят сыны и дочери Императора Миртана."
+  isVisibleLanguage: true
+  typefaceId: NotoSansDisplay
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: JP
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 140
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["santa", "holai", "caes", "yro", "kali", "milit", "knif", "yrob", "kor", "asus"]
+    minSyllables: 2
+    maxSyllables: 5
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: Chinese
+  name: "Советский разговорный"
+  description: "На этом диалекте говорит весь народ СССП."
+  isVisibleLanguage: true
+  typefaceId: NotoSansDisplay
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: CN
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 140
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["leni", "troa", "vso", "grup", "gayp", "kty", "fay", "gui", "ki"]
+    minSyllables: 1
+    maxSyllables: 4
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: Russian
+  name: "Советский официальный"
+  description: "На этом диалекте говорит вся номенклатура и гос.органы."
+  isVisibleLanguage: true
+  typefaceId: DefaultBold
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: RU
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 130
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["leni", "troa", "vso", "grup", "gayp", "kty", "fay", "gui", "ki"]
+    minSyllables: 1
+    maxSyllables: 4
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: German
+  name: "Транслит Умпорской Федерации"
+  description: "Транслит, на котором говорят верные труженники Федерации."
+  isVisibleLanguage: true
+  typefaceId: DefaultBold
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: DE
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 125
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["leni", "troa", "vso", "grup", "gayp", "kty", "fay", "gui", "ki"]
+    minSyllables: 1
+    maxSyllables: 3
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: Scandinavian
+  name: "Фронтирский диалект"
+  description: "Это диалект, свойственный жителям корпоративной зоны Большой Пятёрки и других областей Фронтира. Является диалектом общегалактического."
+  isVisibleLanguage: true
+  typefaceId: DefaultBold
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/_RMC14/Interface/flags.rsi
+    state: SE
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 140
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["Koyl", "ro", "endur", "mili", "dica", "holi", "san", "just", "got", "vonj"]
+    minSyllables: 2
+    maxSyllables: 4
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}
+
+- type: language
+  id: SignLanguage
+  name: "Язык жестов"
+  description: "Язык состоящий из движений руками и телом."
+  isVisibleLanguage: true
+  typefaceId: DefaultItalic
+  textSize: null
+  showLanguageName: true
+  languageIcon: "/Textures/Interface/Default/Slots/hand_m.png"
+  canUseRadio: false
+  needsSpeech: false
+  needsLOS: true
+  expectedVocabularySize: 100
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["*машет рукой*", "*жестикулирует*", "*указывает*", "*кивает*", "*качает головой*", "*хлопает*"]
+    minSyllables: 1
+    maxSyllables: 1
+
+- type: language
+  id: Primitive
+  name: "Примитивный язык"
+  description: "Примитивный язык животных, состоящий из различных звуков."
+  isVisibleLanguage: true
+  typefaceId: DefaultItalic
+  textSize: null
+  showLanguageName: true
+  languageIcon:
+    sprite: /Textures/Mobs/Animals/monkey.rsi
+    state: monkey
+  canUseRadio: true
+  needsSpeech: true
+  expectedVocabularySize: 40
+  obfuscationMethod:
+    !type:SyllableObfuscation
+    replacement: ["уук", "еек", "аа", "хуу", "уука", "кии", "рах", "ик", "ах"]
+    minSyllables: 1
+    maxSyllables: 3
+  speechOverride:
+    chatTypeOverride: null
+    speechVerbOverrides: null
+    messageWrapOverrides: {}

@@ -2,6 +2,9 @@
 cm-job-name-correspondent = Корреспондент
 cm-job-description-correspondent = Сообщайте обо всём, что посчитаете заслуживающим быть опубликованным в новостях.
 cm-job-prefix-correspondent = ПРЕССА
+cm-job-name-combat-correspondent = Боевой корреспондент
+cm-job-description-combat-correspondent = Ваш долг - делать репортажи и показывать публике кадры из горячих точек ОПЗ.
+cm-job-prefix-combat-correspondent = ПРЕССА
 CMJobCorrespondent = Корреспондент
 cm-job-name-liaison = Корпоративный связной
 rmc-job-name-synth = ККМП Синтетик

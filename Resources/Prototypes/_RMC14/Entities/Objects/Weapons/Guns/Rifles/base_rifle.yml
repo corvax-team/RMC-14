@@ -118,17 +118,21 @@
     containers:
       ballistic-ammo: !type:Container
   - type: Sprite
-  - type: Corrodible
     sprite: Objects/Weapons/Guns/Ammunition/Magazine/Rifle/rifle_mag.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+  - type: Corrodible
   - type: Appearance
   - type: Clothing
     slots:
     - suitStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: BaseCartridgeRifle

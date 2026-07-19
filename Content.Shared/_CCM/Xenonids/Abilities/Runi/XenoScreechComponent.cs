@@ -3,7 +3,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._CCM14.Xenonids.Screech;
+namespace Content.Shared._CCM.Xenonids.Screech;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(XenoRounyScreechSystem))]

@@ -1,0 +1,40 @@
+- type: job
+  parent: RMCSurvivorMilitary
+  id: CCMSurvivorSPPWesternForestBase
+  name: ccm-job-name-spp
+  description: ccm-job-description-spp
+  playTimeTracker: RMCJobSurvivorMilitary
+  startingGear: CCMGearSPPBase
+  ranks:
+    RMCRankSPPRyadovoy: []
+  supervisors: ccm-job-name-spp-commander
+  accessGroups:
+  - ColonistEngi
+  joinNotifyCrew: false
+  hasIcon: true
+  icon: "RMCJobIconSPPRifleman"
+  greeting: ccm-job-greeting-spp
+  spawnMenuRoleName: SPP Survivor Western Forest (Base)
+  hidden: true
+  camouflageStartingGear:
+    Snow: CCMGearSSPSurvivorSnowGear
+
+- type: startingGear
+  id: CCMGearSPPBase
+  equipment:
+    head: ArmorHelmetSPP
+    outerClothing: RMCArmorSPP
+    ears: RMCHeadsetSPP
+    jumpsuit: CMJumpsuitSPP
+    gloves: RMCHandsVeteranSPP
+    shoes: RMCBootsSPPFilled
+    id: RMCIDSPP
+    belt: RMCType71BeltFilled
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+    suitstorage: RMCFlashlight
+
+- type: startingGear
+  id: CCMGearSSPSurvivorSnowGear
+  equipment:
+    mask: CMMaskCoif

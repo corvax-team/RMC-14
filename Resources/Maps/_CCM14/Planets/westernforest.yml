@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 264.0.2-fix-physics
-  forkId: colonialmarines
-  forkVersion: fcc8f6f1c339c88e08b6220c04d47bb67b2b130d
-  time: 04/26/2026 05:20:02
-  entityCount: 15355
+  engineVersion: 264.0.2
+  forkId: tgmc14-local-ccm-fixmsg
+  forkVersion: dev-2026-02-26-launcher-fix-2
+  time: 07/13/2026 09:51:07
+  entityCount: 15364
 maps:
 - 1
 grids:
@@ -37790,6 +37790,63 @@ entities:
     - type: Transform
       pos: 34.5,7.5
       parent: 1
+- proto: CCMSpawnPointSPPRifleman
+  entities:
+  - uid: 6078
+    components:
+    - type: Transform
+      pos: 164.5,95.5
+      parent: 1
+  - uid: 6671
+    components:
+    - type: Transform
+      pos: 164.5,96.5
+      parent: 1
+  - uid: 6672
+    components:
+    - type: Transform
+      pos: 162.5,96.5
+      parent: 1
+  - uid: 6775
+    components:
+    - type: Transform
+      pos: 162.5,95.5
+      parent: 1
+- proto: CCMSpawnPointSurvivorSPPWesternForestCommander
+  entities:
+  - uid: 11171
+    components:
+    - type: Transform
+      pos: 163.5,98.5
+      parent: 1
+- proto: CCMSpawnPointSPPMedic
+  entities:
+  - uid: 7047
+    components:
+    - type: Transform
+      pos: 162.5,97.5
+      parent: 1
+- proto: CCMSpawnPointSPPSpecialist
+  entities:
+  - uid: 8357
+    components:
+    - type: Transform
+      pos: 163.5,99.5
+      parent: 1
+- proto: CCMSpawnPointSPPSquadLeader
+  entities:
+  - uid: 11169
+    components:
+    - type: Transform
+      pos: 162.5,98.5
+      parent: 1
+- proto: CCMSpawnPointSPPSupportTech
+  entities:
+  - uid: 7131
+    components:
+    - type: Transform
+      pos: 164.5,97.5
+      parent: 1
 - proto: CCMTurretPlanet
   entities:
   - uid: 265
@@ -50907,43 +50964,6 @@ entities:
     components:
     - type: Transform
       pos: 30.5,36.5
-      parent: 1
-- proto: CMSpawnPointSurvivor
-  entities:
-  - uid: 213
-    components:
-    - type: Transform
-      pos: 170.5,88.5
-      parent: 1
-  - uid: 214
-    components:
-    - type: Transform
-      pos: 176.5,94.5
-      parent: 1
-  - uid: 352
-    components:
-    - type: Transform
-      pos: 189.5,98.5
-      parent: 1
-  - uid: 1835
-    components:
-    - type: Transform
-      pos: 193.5,99.5
-      parent: 1
-  - uid: 1888
-    components:
-    - type: Transform
-      pos: 181.5,95.5
-      parent: 1
-  - uid: 3368
-    components:
-    - type: Transform
-      pos: 163.5,97.5
-      parent: 1
-  - uid: 6077
-    components:
-    - type: Transform
-      pos: 192.5,95.5
       parent: 1
 - proto: CMSpawnPointXeno
   entities:
@@ -75969,39 +75989,6 @@ entities:
     - type: Transform
       pos: 167.0233,127.33828
       parent: 1
-- proto: RMCMagazineRifleAK4047
-  entities:
-  - uid: 413
-    components:
-    - type: Transform
-      pos: 225.23383,30.030077
-      parent: 1
-  - uid: 871
-    components:
-    - type: Transform
-      pos: 110.65251,90.78497
-      parent: 1
-  - uid: 1034
-    components:
-    - type: Transform
-      pos: 225.56715,30.168966
-      parent: 1
-  - uid: 3378
-    components:
-    - type: Transform
-      pos: 137.56236,17.576103
-      parent: 1
-  - uid: 6079
-    components:
-    - type: Transform
-      pos: 137.6318,17.270548
-      parent: 1
-  - uid: 8372
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 109.93029,92.59053
-      parent: 1
 - proto: RMCMagazineRifleMAR40
   entities:
   - uid: 1005
@@ -76070,6 +76057,39 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: RMCMagazineRifleType77
+  entities:
+  - uid: 413
+    components:
+    - type: Transform
+      pos: 225.23383,30.030077
+      parent: 1
+  - uid: 871
+    components:
+    - type: Transform
+      pos: 110.65251,90.78497
+      parent: 1
+  - uid: 1034
+    components:
+    - type: Transform
+      pos: 225.56715,30.168966
+      parent: 1
+  - uid: 3378
+    components:
+    - type: Transform
+      pos: 137.56236,17.576103
+      parent: 1
+  - uid: 6079
+    components:
+    - type: Transform
+      pos: 137.6318,17.270548
+      parent: 1
+  - uid: 8372
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 109.93029,92.59053
+      parent: 1
 - proto: RMCMagazineSMGType64
   entities:
   - uid: 3832
@@ -77925,34 +77945,6 @@ entities:
     components:
     - type: Transform
       pos: 116.5,65.5
-      parent: 1
-- proto: RMCSpawnPointSurvivorArmyReservist
-  entities:
-  - uid: 215
-    components:
-    - type: Transform
-      pos: 105.5,92.5
-      parent: 1
-- proto: RMCSpawnPointSurvivorDoctor
-  entities:
-  - uid: 1830
-    components:
-    - type: Transform
-      pos: 162.5,98.5
-      parent: 1
-- proto: RMCSpawnPointSurvivorEngineer
-  entities:
-  - uid: 6075
-    components:
-    - type: Transform
-      pos: 194.5,94.5
-      parent: 1
-- proto: RMCSpawnPointSurvivorSecurity
-  entities:
-  - uid: 1824
-    components:
-    - type: Transform
-      pos: 168.5,100.5
       parent: 1
 - proto: RMCSpeedLoaderM44
   entities:
@@ -111640,23 +111632,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCWeaponRifleAK4047
-  entities:
-  - uid: 44
-    components:
-    - type: Transform
-      pos: 225.40079,30.543623
-      parent: 1
-  - uid: 1284
-    components:
-    - type: Transform
-      pos: 137.74292,17.020548
-      parent: 1
-  - uid: 6084
-    components:
-    - type: Transform
-      pos: 110.55529,91.81275
-      parent: 1
 - proto: RMCWeaponRifleMAR30
   entities:
   - uid: 6144
@@ -111678,6 +111653,23 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: RMCWeaponRifleType77
+  entities:
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 225.40079,30.543623
+      parent: 1
+  - uid: 1284
+    components:
+    - type: Transform
+      pos: 137.74292,17.020548
+      parent: 1
+  - uid: 6084
+    components:
+    - type: Transform
+      pos: 110.55529,91.81275
+      parent: 1
 - proto: RMCWeaponSMGType64
   entities:
   - uid: 6157
@@ -112295,7 +112287,7 @@ entities:
       pos: 110.5,86.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -42637.883
+      secondsUntilStateChange: -43406.49
       state: Opening
   - uid: 8493
     components:
@@ -119144,7 +119136,7 @@ entities:
       pos: 123.5,55.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -148396.73
+      secondsUntilStateChange: -149165.34
       state: Opening
   - uid: 13774
     components:
@@ -119157,7 +119149,7 @@ entities:
       pos: 120.5,41.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -141570.64
+      secondsUntilStateChange: -142339.25
       state: Opening
   - uid: 13776
     components:

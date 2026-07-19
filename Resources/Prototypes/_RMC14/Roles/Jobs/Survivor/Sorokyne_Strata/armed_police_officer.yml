@@ -21,11 +21,15 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: TacticalMapUser
-      actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
-    - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
+    - type: Language
+      spokenLanguages:
+      - Russian
+      - Chinese
+      understoodLanguages:
+      - Russian
+      - Chinese
+      currentLanguage: Russian
+      defaultLanguage: Russian
     - type: Skills
       preset: RMCSkillPresetSurvivorMarshal
     - type: EquipSurvivorPreset

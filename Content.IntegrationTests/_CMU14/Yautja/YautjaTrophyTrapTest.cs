@@ -237,7 +237,6 @@ public sealed class YautjaTrophyTrapTest
 
                 var iffFactions = entMan.GetComponent<UserIFFComponent>(xeno).Factions.Select(faction => faction.ToString()).ToArray();
                 Assert.That(iffFactions, Does.Contain("FactionYautja"));
-                Assert.That(iffFactions, Does.Not.Contain("FactionXeno"));
 
                 entMan.RemoveComponent<YautjaThrallComponent>(xeno);
 
@@ -256,7 +255,6 @@ public sealed class YautjaTrophyTrapTest
                 Assert.That(npcFactions, Does.Not.Contain("CMUYautja"));
 
                 iffFactions = entMan.GetComponent<UserIFFComponent>(xeno).Factions.Select(faction => faction.ToString()).ToArray();
-                Assert.That(iffFactions, Does.Contain("FactionXeno"));
                 Assert.That(iffFactions, Does.Not.Contain("FactionYautja"));
             }
             finally

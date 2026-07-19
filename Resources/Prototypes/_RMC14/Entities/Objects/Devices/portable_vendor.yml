@@ -31,7 +31,7 @@
     jobs:
     - CMLiaison
     sections:
-    - name: Incentives
+    - name: Быт # CCM14
       entries:
       #- id: /obj/item/handheld_distress_beacon/bodyguard
       #  points: 50
@@ -47,11 +47,11 @@
       #- id: /obj/item/trash/ceramic_plate
       #  points: 10
       - id: RMCSpaceCash1000 # TODO RMC14 counterfiet
-        name: $1000 UND, unmarked bills
+        name: 1000 Динар, немаркированные # CCM14
         points: 5
       - id: CMEncryptionKeyWEYA
         points: 5
-    - name: Smokables
+    - name: Сигареты # CCM14
       entries:
       - id: RMCCigarCase
         points: 5
@@ -63,7 +63,7 @@
         points: 5
       - id: RMCZippoGold
         points: 5
-    - name: Drinkables
+    - name: Напитки # CCM14
       entries:
       - id: RMCDrinkAlcoholSake
         points: 5
@@ -73,33 +73,33 @@
         points: 5
       - id: CMDrinkCanBeerLite
         points: 5
-      - id: DrinkGlass
+      - id: RMCDrinkGlass
         points: 1
       - id: RMCWestonYamadaCup
         points: 1
-    - name: Stationary
+    - name: Канцелярия # CCM14
       entries:
       - id: CMPenClicky
         points: 1
       - id: CMPaper
         points: 1
       - id: RMCPaperWeYaLiaison
-        name: We-Ya paper
+        name: Форменная бумага Vi # CCM14
         points: 1
       #- id: Carbon paper
       #  points: 1
       - id: CMClipboard
         points: 1
-    - name: Misc
+    - name: Прочее # CCM14
       entries:
       - id: RMCHollowCane
-        name: hollow cane
+        name: Полая трость # CCM14
         points: 15
     - name: Ammo
       entries:
       - id: RMCMagazinePistolPK7
         points: 10
-    - name: Radio keys
+    - name: Ключи шифрования # CCM14
       entries:
       - id: CMEncryptionKeyAlpha
         points: 15
@@ -115,3 +115,6 @@
         points: 15
       - id: CMEncryptionKeyColony
         points: 20
+  - type: GuideHelp
+    guides:
+    - RMCGuideCorporateLiaison

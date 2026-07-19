@@ -6,7 +6,7 @@
     speechVerb: Robotic
   - type: RequisitionsComputer
     categories:
-    - name: Ammo
+    - name: Аммуниция #CCM14
       entries:
       - cost: 2000
         crate: RMCCrateBoxBulletsSMG
@@ -58,6 +58,10 @@
         crate: RMCCrateBatterySmartGun
       - cost: 3000
         crate: RMCCrateMagazineSmartGun
+#CCM14 ADD
+      - cost: 7000
+        crate: CCMCrateMagazineSmartGunML99A
+#CCM14 END
       - cost: 4000
         crate: RMCCrateBoxMagazineSmartPistol
       - cost: 2000
@@ -88,7 +92,9 @@
         crate: RMCCrateMagazineML66DDrum
       - cost: 2500
         crate: RMCCrateMagazineM2C
-    - name: Attachments
+      - cost: 6000
+        crate: RMCCrateMagazineAmmoSurplus
+    - name: Приспособления #CCM14
       entries:
       - cost: 3000
         crate: RMCCrateAttachmentSmartScope
@@ -132,7 +138,7 @@
         crate: RMCCrateAttachmentShotgunStock
       - cost: 3000
         crate: RMCCrateAttachmentSmgStock
-    - name: Clothing
+    - name: Одежда #CCM14
       entries:
       - cost: 2000
         crate: RMCCrateClothingLargePouches
@@ -156,7 +162,7 @@
         crate: RMCCrateClothingDropPouchBlack
       - cost: 3000
         crate: RMCCrateClothingOfficerOutfit
-    - name: Engineering
+    - name: Инженерия #CCM14
       entries:
       - cost: 2000
         crate: RMCCrateEmptySandbags
@@ -170,8 +176,8 @@
         crate: RMCCrateGlassSheets
       - cost: 2000
         crate: RMCCrateWoodenPlanks
-#      - cost: 2000
-#        crate: RMCCrateFoldingBarricades
+      - cost: 2000
+        crate: RMCCrateFoldingBarricades
 #      - cost: 3000
 #        crate: RMCCrateSuperconductingMagneticCoil
       - cost: 2000
@@ -194,7 +200,7 @@
       - cost: 2000
         crate: RMCOrbitalCannonFuel
       # CCM14-end
-    - name: Explosives
+    - name: Взрывчатка #CCM14
       entries:
       - cost: 3000
         crate: RMCCrateGrenadesHighExplosive
@@ -239,7 +245,7 @@
         crate: RMCCrateExplosiveClaymoreMine
       - cost: 4000
         crate: RMCCrateExplosivesSurplus
-    - name: Food
+    - name: Еда #CCM14
       entries:
       - cost: 1000
         crate: RMCCrateFoodDonuts
@@ -249,7 +255,7 @@
         crate: RMCCrateFoodPizza
       - cost: 1000
         crate: RMCCrateFoodIngredients
-    - name: Gear
+    - name: Инструменты #CCM14
       entries:
       - cost: 2000
         crate: RMCCrateGearBinoculars
@@ -263,7 +269,7 @@
         crate: RMCCrateGearFulton
       - cost: 4000
         crate: RMCCrateGearParachute
-    - name: Medical
+    - name: Медицина #CCM14
       entries:
       - cost: 2500
         crate: RMCCrateMedicalSurgery
@@ -281,7 +287,7 @@
         crate: RMCCrateMedicalFilled
       - cost: 1500
         crate: RMCCrateMedicalPill
-    - name: Mortar
+    - name: Мортира #CCM14
       entries:
       - cost: 6000
         crate: RMCCrateMortarKit
@@ -293,17 +299,17 @@
         crate: RMCCrateMortarShellFlare
 #    - name: Operations
 #      entries: []
-    - name: Reagent tanks
+    - name: Ёмкости для реагентов #CCM14
       entries:
       - cost: 2000
         crate: RMCTankReagentFuel
-    - name: Research
+    - name: Исследования #CCM14
       entries:
       - cost: 3000
         crate: RMCCrateResearchPhoron
       - cost: 2000
         crate: RMCCrateResearchPlastic
-    - name: Restricted Equipment
+    - name: Ограниченное снаряжение #CCM14
       entries:
       - cost: 2000
         crate: RMCCrateRestrictedEquipmentArmorM4
@@ -311,7 +317,7 @@
         crate: RMCCrateRestrictedEquipmentArmorB12
       - cost: 2000
         crate: RMCCrateRestrictedEquipmentIntelSupportKit
-    - name: Supplies
+    - name: Припасы #CCM14
       entries:
       - cost: 2000
         crate: RMCCrateSupplyInternals
@@ -323,7 +329,7 @@
         crate: RMCCrateSupplyJanitor
       - cost: 2000
         crate: RMCCrateSuppliesCrayons
-    - name: Vehicle Ammo
+    - name: Аммуниция для техники #CCM14
       entries:
       - cost: 3000
         crate: RMCCrateVehicleAmmoLTBCannon
@@ -351,7 +357,7 @@
         crate: RMCCrateVehicleAmmoFlareLauncher
       - cost: 2000
         crate: RMCCrateVehicleAmmoRotaryCannon
-    - name: Weapons
+    - name: Оружие #CCM14
       entries:
       - cost: 4000
         crate: RMCCrateM54CE2
@@ -375,7 +381,7 @@
         crate: RMCCrateML66D
       - cost: 6000
         crate: RMCCrateM2C
-    - name: Weapons Specialist Ammo
+    - name: Специализированная аммуниция #CCM14
       entries:
       - cost: 4000
         crate: RMCCrateMagazineM96SMixed

@@ -1,0 +1,111 @@
+- type: job
+  parent: CMJobBase
+  id: CCMSereneEngineer
+  name: ccm-job-name-serene-engineer
+  description: ccm-ghost-role-information-serene-description
+  playTimeTracker: CCMJobSereneEngineer
+  ranks:
+    CCMRankSereneMlSerzhant: []
+  greeting: ccm-job-greeting-serene
+  startingGear: CCMJobSereneEngineer
+  icon: CCMJobIconSereneEngineer
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - HospitalCorpsman
+  supervisors: cm-job-supervisors-sl
+  spawnMenuRoleName: Serene Solutions Engineer
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Serene
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 3
+        RMCSkillEngineer: 4
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 3
+        RMCSkillJtac: 2
+        RMCSkillCqc: 1
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 2
+    - type: JobPrefix
+      prefix: ccm-job-prefix-serene
+  hidden: true
+
+- type: entity
+  id: CCMRandomHumanoidSereneEngineer
+  name: serene ghost role engineer
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Objects/CMIDs/halcyon.rsi
+      state: halcyon
+  - type: RandomHumanoidSpawner
+    settings: CCMSereneEngineer
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: CCMSereneEngineer
+  components:
+  - type: GhostRole
+    name: ccm-ghost-name-serene-engineer
+    description: ccm-ghost-role-information-serene-description
+    rules: ccm-ghost-role-information-serene-rules
+    reregister: false
+    job: CCMSereneEngineer
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadSerene
+
+- type: startingGear
+  id: CCMJobSereneEngineer
+  equipment:
+    id: RMCIDCardHalcyon
+    head: CCMHelmetSereneEngineer
+    mask: RMCMaskCoifPMC
+    ears: CCMHeadsetSerene
+    jumpsuit: CCMJumpsuitSereneEngineer
+    outerClothing: CCMArmorSereneVestEngineer
+    belt: CCMBeltUtilitySereneEngineerFilled
+    gloves: CMHandsBlackInsulated
+    shoes: RMCBootsSPPFilled
+    suitstorage: CCMWeaponSMGType31A2
+    back: CCMSatchelLightpackSerene
+    pocket1: RMCPouchToolsSocFill
+    pocket2: RMCPouchConstructionFillFull
+  storage:
+    back:
+    - CMPackFlare
+    - RMCMRESPP
+    - BarbedWire15
+    - CMSheetMetal50
+    - RMCExplosivePlastic
+    outerClothing:
+    - RMCExplosiveBreachingCharge
+    - RMCGrenadeCustomMetalFoam
+    pocket1:
+    - CMWelder
+    - CMEntrenchingTool
+    - RMCLightReplacer
+
+- type: playTimeTracker
+  id: CCMJobSereneEngineer
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CCMJobIconSereneEngineer
+  icon:
+    sprite: _CCM14/Interface/cm_job_icons.rsi
+    state: serene_engineer

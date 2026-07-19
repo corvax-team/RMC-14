@@ -14,6 +14,7 @@
   - type: CMAutomatedVendor
     jobs:
     - CMCorrespondent
+    - CMCombatCorrespondent
     sections:
     - name: Стандартное снаряжение # CCM14
       takeAll: CMStandard
@@ -25,12 +26,61 @@
       - id: RMCCameraBroadcasting
         name: вещательная камера # CCM14
         recommended: true
-    #- name: Civilian Equipment TODO - Some way to ensure only the civilian correspondent can buy this
-    #  takeAll: CMStandard
-    #  entries:
-    #  - id: PortableFaxMachine
-    #    name: Portable Press Fax Machine
-    #    recommended: true
+    - name: Гражданское снаряжение # CCM14
+      jobs:
+      - CMCorrespondent
+      takeAll: CMCivilian
+      entries:
+      - id: RMCPortablePressFax
+        name: Портативный факс # CCM14
+        recommended: true
+      - id: RMCTentUNMCExtendedCorrespondentFolded
+        name: Переносная палатка # CCM14
+    - name: Сумка # CCM14
+      jobs:
+      - CMCorrespondent
+      choices: { CMSatchel: 1 }
+      entries:
+      - id: CMSatchel
+        name: Кожаная сумка # CCM14
+      - id: RMCBackpackRTOBagPhone
+        name: Телефонный ранец # CCM14
+    - name: Тактическая сумка # CCM14
+      jobs:
+      - CMCombatCorrespondent
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMBackpackMarine
+        replaceSlot: back
+        name: Лёгкий рюкзак IMP # CCM14
+      - id: CMSatchelMarine
+        replaceSlot: back
+        name: Ранец ККМП # CCM14
+        recommended: true
+    - name: Combat Sidearm
+      jobs:
+      - CMCombatCorrespondent
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCM1984BeltFilled
+        name: M1984 Pistol Holster Rig
+        recommended: true
+    - name: Combat Webbing
+      jobs:
+      - CMCombatCorrespondent
+      choices: { CMWebbing: 1 }
+      entries:
+      - id: CMWebbingBrown
+        name: Brown Webbing
+        recommended: true
+    - name: Combat Pouches
+      jobs:
+      - CMCombatCorrespondent
+      choices: { RMCPouch: 2 }
+      entries:
+      - id: RMCPouchGeneralMedium
+        name: Medium General Pouch
+        recommended: true
     - name: Униформа # CCM14
       choices: { CMUniform: 1 }
       entries:
@@ -54,6 +104,16 @@
         name: чёрная куртка военного корреспондента # CCM14
       - id: RMCCoatCorrespondentGreen
         name: зелёная куртка военного корреспондента # CCM14
+      - id: RMCCoatCorrespondent
+        name: коричневая куртка военного корреспондента # CCM14
+      - id: RMCCoatCorrespondentGreenJacket
+        name: зелёная куртка военного корреспондента # CCM14
+      - id: RMCCoatCorrespondentBlueJacket
+        name: синяя куртка военного корреспондента # CCM14
+      - id: RMCCoatCorrespondentTan
+        name: жёлтая куртка военного корреспондента # CCM14
+      - id: RMCCoatCorrespondentBrownJacket
+        name: коричневая куртка военного корреспондента # CCM14
     - name: Шлемы # CCM14
       choices: { CMHelmet: 1 }
       entries:
@@ -75,24 +135,9 @@
       #- id: /obj/item/device/toner
       #  name: Toner
       # points: 5
-      #- id: /obj/item/storage/box/tapes
-      #  name: Regulation Tapes
-      #  points: 15
+      - id: RMCBoxRegulationTapes
+        name: Regulation Tapes
+        points: 15
       - id: CMPaperBin30
         name: корзина для бумаг # CCM14
         points: 10
-
-- type: entity
-  parent: CMVendorBundleRiflemanApparel
-  id: RMCVendorBundleCrewCombatCorrespondent
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
-    state: flashlight
-  - type: CMVendorBundle
-    bundle:
-    - RMCFlashlight
-    - CMPen
-    - RMCBinoculars
-    - CMClipboard # notepad
-    #- taperecorder

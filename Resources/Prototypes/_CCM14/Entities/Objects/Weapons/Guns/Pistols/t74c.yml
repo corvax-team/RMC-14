@@ -1,0 +1,49 @@
+- type: entity
+  parent: CMWeaponPistolBase
+  id: CCMWeaponPistolType74C
+  name: Type 74C pistol
+  description: The Type 74 is the designation for a specially modified Type 73 with an integrated laser sight system, multiple lightning cuts to reduce weight in order to allow a higher pressure round to be used with the same recoil sping, and a more comfortable grip. Due to the adoption of the NP92, the Type 74 was produced in limited numbers, because of this it is typically only issued on request to high-ranking officers
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - CCMWeaponPistolType74C
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Guns/Pistols/type74c.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Weapons/Guns/Pistols/type74c.rsi
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.3
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 8
+  - type: Gun
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m1911.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    scatterWielded: 3
+    scatterUnwielded: 3
+    baseFireRate: 2.5
+    burstScatterMult: 5
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolT73
+          - RMCMagazinePistolT74Impact
+        startingItem: RMCMagazinePistolT73
+  - type: GunDamageModifier
+    multiplier: 1.35
+
+- type: Tag
+  id: CCMWeaponPistolType74C

@@ -1,0 +1,161 @@
+- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  name: Type-XS13 gravity rifle
+  id: CCMWeaponRifleTypexs13
+  description: A rifle that utilizes gravity controling technologies to change the weight of a projectile and launching it. Uses a specialized tungsteing balls.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Guns/Rifles/TypeXS13/typexs13_inhand.rsi
+    layers:
+    - state: base
+      sprite: _CCM14/Objects/Weapons/Guns/Rifles/TypeXS13/typexs13_icon.rsi
+    - state: bolt-open
+      sprite: _CCM14/Objects/Weapons/Guns/Rifles/TypeXS13/typexs13_icon.rsi
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      sprite: _CCM14/Objects/Weapons/Guns/Rifles/TypeXS13/typexs13_icon.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _CCM14/Objects/Weapons/Guns/Rifles/TypeXS13/typexs13_inhand.rsi
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - FullAuto
+    soundGunshot:
+      collection: RMCSilencedShootAlt
+  - type: GunRequiresSkills
+    skills:
+      RMCSkillSpecialistWeapons: 1
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - FullAuto
+    - SemiAuto
+    recoilUnwielded: 0
+    scatterWielded: 0
+    scatterUnwielded: 0
+    baseFireRate: 5
+    burstScatterMult: 0
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+    accuracyMultiplierUnwielded: 0.65
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CCMMagazineRifleTypexs13
+        startingItem: CCMMagazineRifleTypexs13
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: Tag
+    tags:
+    - CCMWeaponRifleTypexs13
+  - type: Wieldable
+  - type: GunRequiresWield
+
+- type: Tag
+  id: CCMWeaponRifleTypexs13
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: CCMMagazineRifleTypexs13
+  name: "Type-XS13 magazine (tungstein ball)"
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Ammunition/Magazines/typexs13_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CCMMagazineRifleTypexs13
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+      - CCMCartridgeRifleTypexs13
+    proto: CCMCartridgeRifleTypexs13
+    capacity: 45
+  - type: Appearance
+
+- type: Tag
+  id: CCMMagazineRifleTypexs13
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: CCMCartridgeRifleTypexs13
+  name: tungstein ball
+  description: a ball. of tungstein. gives quite a punch.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Ammunition/Casings/tungstein.rsi
+  - type: Tag
+    tags:
+    - Cartridge
+    - CCMCartridgeRifleTypexs13
+  - type: CartridgeAmmo
+    proto: CCMBulletRifleTungsteinBall
+    muzzleFlash: MuzzleFlashEffectgravigun
+
+- type: Tag
+  id: CCMCartridgeRifleTypexs13
+
+- type: entity
+  parent: RMCBaseBullet
+  id: CCMBulletRifleTungsteinBall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Ammunition/Projectiles/tungsteing_ball.rsi
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 20
+        Piercing: 20
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 30
+      falloff: 20
+      ignoreModifiers: false
+  - type: RMCProjectileAccuracy
+    accuracy: 95
+    thresholds:
+    - range: 20
+      falloff: 10
+  - type: CMArmorPiercing
+    amount: 10
+  - type: RMCPenetratingProjectile
+
+- type: entity
+  id: MuzzleFlashEffectgravigun
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1.0
+  - type: Sprite
+    drawdepth: BelowMobs
+    offset: 0.33, 0
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: _CCM14/Objects/Weapons/Guns/Projectiles/projectiles.rsi
+      state: gravity
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+      - HideContextMenu
+  - type: AnimationPlayer

@@ -16,7 +16,6 @@
   - CLF
   - TSE
   - HEFA
-  - AUColonist
   - CMUAPE
   - CMUYautja
 
@@ -26,14 +25,11 @@
   - UNMC
   - NanoTrasen
   - SPP
-  - GOVFOR
-  - OPFOR
   - Halcyon
   - WeYa
   - Civilian
   - CLF
   - TSE
-  - AUColonist
 
 
 - type: npcFaction

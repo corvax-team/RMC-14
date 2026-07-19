@@ -1,5 +1,5 @@
-ent-VehicleTankBase = tank
-    .desc = A heavy armored tank built for battlefield dominance.
+ent-VehicleTankBase = танк
+    .desc = Тяжелый бронированный танк, созданный для доминирования на поле боя.
 ent-VehicleTank = { ent-VehicleTankBase }
     .desc = { ent-VehicleTankBase.desc }
 ent-VehicleSPPTank = танк СССП

@@ -1,0 +1,4 @@
+- type: accessLevel
+  id: CCMAccessBaillif
+  parent: RMCBaseMPAccess
+  name: ccm-id-card-access-level-baillif

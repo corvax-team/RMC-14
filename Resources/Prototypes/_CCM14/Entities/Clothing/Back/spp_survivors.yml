@@ -1,0 +1,63 @@
+# This file is specifically for filled satchels for SPP survivors from Western Forest
+
+- type: entity
+  parent: RMCSatchelSPPWelderEngineer
+  id: CCMSatchelSPPWelderEngineerSurvivor
+  suffix: Filled, Engineer
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: RMCMRESPP
+    - id: RMCMotionDetector # TODO RMC14: hacked MD
+    - id: RMCSentryMiniSPP
+
+- type: entity
+  parent: RMCSatchelSPP
+  id: CCMSatchelSPPWesternForestSurvivor
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: RMCPackFlareR44
+    - id: RMCPackFlareR44
+
+- type: entity
+  parent: RMCSatchelSPP
+  id: CCMSatchelSPPSquadLeaderSurvivor
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: CMFireExtinguisherPortable
+    - id: RMCPackFlareR44
+    - id: RMCPackFlareR44
+    - id: RMCMagazineRifleType71AP
+    - id: RMCMagazineRifleType71AP
+
+- type: entity
+  parent: RMCSatchelSPPMedic
+  id: CCMSatchelSPPMedicSurvivor
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: CMFireExtinguisherPortable
+    - id: RMCPackFlareR44
+    - id: RMCPackFlareR44
+    - id: CMAdvFirstAidKitFilled
+
+- type: entity
+  parent: RMCBackpackRTOSPP
+  id: CCMRTOSPPCommanderSurvivor
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: CMFireExtinguisherPortable
+    - id: RMCPackFlareR44
+    - id: RMCMagazineRifleType71HEAP

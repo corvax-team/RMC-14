@@ -206,6 +206,10 @@
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 150
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: [Crowbar, RMCBaseMeleeWeapon]
@@ -262,44 +266,6 @@
   - type: Item
     heldPrefix: red
     storedSprite: null
-
-- type: entity
-  parent: BaseItem
-  id: MaintenanceJack
-  name: vehicle maintenance jack
-  description: A heavy-duty hardpoint jack for servicing armored vehicles. Works where a crowbar can't.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tools/maintenance_jack.rsi
-    state: icon
-  - type: Item
-    size: Normal
-    sprite: _RMC14/Objects/Tools/maintenance_jack.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Tools/maintenance_jack.rsi
-    slots:
-    - Suitstorage
-    - Belt
-  - type: Tool
-    qualities:
-    - VehicleServicing
-    speedModifier: 1.0
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 200
-  - type: MeleeWeapon
-    damage:
-      types:
-        Blunt: 12
-  - type: CMSurgeryTool
-  - type: CMRetractor
-  - type: CMBoneSetter
-  - type: CMUImprovisedSurgeryTool
-    delayMultiplier: 1.8
-    mishapChance: 0.14
-    mishapDamageType: Blunt
-    mishapDamageAmount: 5
-    failurePenalty: 1
 
 - type: entity
   parent: CMCrowbar

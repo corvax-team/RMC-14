@@ -7,9 +7,11 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/spptank.rsi
   - type: Item
     size: Large
+  - type: VehicleFabricatorPrintable # CCM14
+    enabled: false
 
 - type: entity
-  parent: VehicleTankTurret
+  parent: [VehicleSPPTankHardpointBase, VehicleTankTurret] # CCM14 +VehicleSPPTankHardpointBase
   id: VehicleSPPTankTurret
   name: SPP tank turret
   description: A tank turret configured for SPP armor.
@@ -18,7 +20,7 @@
     sprite: _RMC14/Structures/Vehicles/spptank.rsi
     state: tank_turret_0
   - type: HardpointItem
-    compatibilityId: SPPTank
+    compatibilityId: HardpointCompatibilitySPPTank
     repairRate: 0.01
   - type: VehicleTurret
     rotateToCursor: true
@@ -27,6 +29,7 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: tank_turret_0
+    overlayDamagedState: tank_turret_1
     useDirectionalOffsets: false
     pixelOffsetNorth: "0,6"
     pixelOffsetEast: "-5,0"
@@ -47,23 +50,23 @@
           components:
           - HardpointItem
   - type: HardpointSlots
-    vehicleFamily: Tank
+    vehicleFamily: HardpointVehicleFamilyTank
     slots:
     - id: turret-cannon
-      hardpointType: Cannon
-      slotType: Cannon
-      compatibilityId: SPPTank
+      hardpointType: HardpointTypeCannon
+      slotType: HardpointSlotTypeCannon
+      compatibilityId: HardpointCompatibilitySPPTank
       required: false
       insertDelay: 2.0
     - id: turret-launcher
-      hardpointType: Launcher
-      slotType: Launcher
-      compatibilityId: SPPTank
+      hardpointType: HardpointTypeLauncher
+      slotType: HardpointSlotTypeLauncher
+      compatibilityId: HardpointCompatibilitySPPTank
       required: false
       insertDelay: 2.0
 
 - type: entity
-  parent: VehicleTankLTAAAPMinigun
+  parent: [VehicleSPPTankHardpointBase, VehicleTankLTAAAPMinigun] # CCM14 +VehicleSPPTankHardpointBase
   id: VehicleSPPTankP17702
   name: P-17702 rotary cannon
   description: An SPP rotary cannon tank hardpoint.
@@ -84,10 +87,12 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: p17702_0
+    overlayDamagedState: p17702_1
   - type: HardpointItem
-    compatibilityId: SPPTank
+    compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: p17702_0
+    damagedVehicleState: p17702_1
   - type: GunMuzzleOffset
     offset: "0,0"
     applyToMuzzleFlash: true
@@ -101,7 +106,7 @@
     useContainerOwner: false
 
 - type: entity
-  parent: VehicleTankLTBCannon
+  parent: [VehicleSPPTankHardpointBase, VehicleTankLTBCannon] # CCM14 +VehicleSPPTankHardpointBase
   id: VehicleSPPTankRailgun
   name: SPP railgun
   description: A railgun hardpoint for SPP tank turrets.
@@ -110,6 +115,8 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/spptank.rsi
     state: railgun
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,20"
@@ -119,10 +126,12 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: railgun_0
+    overlayDamagedState: railgun_1
   - type: HardpointItem
-    compatibilityId: SPPTank
+    compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: railgun_0
+    damagedVehicleState: railgun_1
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
@@ -135,7 +144,7 @@
     useContainerOwner: false
 
 - type: entity
-  parent: VehicleTankTowLauncher
+  parent: [VehicleSPPTankHardpointBase, VehicleTankTowLauncher] # CCM14 +VehicleSPPTankHardpointBase
   id: VehicleSPPTankHJ35TLauncher
   name: HJ35T launcher
   description: An SPP anti-armor launcher for tank turrets.
@@ -144,6 +153,8 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/spptank.rsi
     state: hj35tlauncher
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,-10"
@@ -153,10 +164,12 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: hj35t_0
+    overlayDamagedState: hj35t_1
   - type: HardpointItem
-    compatibilityId: SPPTank
+    compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: hj35t_0
+    damagedVehicleState: hj35t_1
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
@@ -170,7 +183,7 @@
     useContainerOwner: false
 
 - type: entity
-  parent: VehicleTankM56Cupola
+  parent: [VehicleSPPTankHardpointBase, VehicleTankM56Cupola] # CCM14 +VehicleSPPTankHardpointBase
   id: VehicleSPPTankCupola
   name: T60P3M cupola
   description: A cupola-mounted weapon fitted to SPP armor.
@@ -182,8 +195,10 @@
     factions:
     - FactionSPP
   - type: HardpointItem
-    compatibilityId: SPPTank
+    compatibilityId: HardpointCompatibilitySPPTank
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 180
+    useBarrelDirectionForShots: true
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,-10"
@@ -193,8 +208,10 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: t60p3m_0
+    overlayDamagedState: t60p3m_1
   - type: HardpointVisual
     vehicleState: t60p3m_0
+    damagedVehicleState: t60p3m_1
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
@@ -208,7 +225,7 @@
     useContainerOwner: false
 
 - type: entity
-  parent: VehicleTankArmorBallistic
+  parent: [VehicleSPPTankHardpointBase, VehicleTankArmorBallistic] # CCM14 +VehicleSPPTankHardpointBase
   id: VehicleSPPTankReactiveArmor
   name: reactive armor plating
   description: Reactive armor plating for an SPP tank.
@@ -217,12 +234,13 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/spptank.rsi
     state: reactive_armor
   - type: HardpointItem
-    compatibilityId: SPPTank
+    compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: reactive_armor_0
+    damagedVehicleState: reactive_armor_1
 
 - type: entity
-  parent: VehicleTankRocketLauncher
+  parent: [VehicleSPPTankHardpointBase, VehicleTankRocketLauncher] # CCM14 +VehicleSPPTankHardpointBase
   id: VehicleSPPTankRocketLauncher
   name: SPP smoke launcher
   description: A smoke launcher support attachment for an SPP tank.
@@ -231,12 +249,13 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/spptank.rsi
     state: turret_slauncher
   - type: HardpointItem
-    compatibilityId: SPPTank
+    compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: slauncher_0
+    damagedVehicleState: slauncher_1
 
 - type: entity
-  parent: VehicleTankFlareModule
+  parent: [VehicleSPPTankHardpointBase, VehicleTankFlareModule] # CCM14 +VehicleSPPTankHardpointBase
   id: VehicleSPPTankFlareModule
   name: SPP flare module
   description: A flare launcher support attachment for an SPP tank.
@@ -245,12 +264,13 @@
     sprite: _RMC14/Structures/Vehicles/hardpoints/spptank.rsi
     state: turret_slauncher_e
   - type: HardpointItem
-    compatibilityId: SPPTank
+    compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: slauncher_1
+    damagedVehicleState: slauncher_2
 
 - type: entity
-  parent: VehicleTankWarningArray
+  parent: [VehicleSPPTankHardpointBase, VehicleTankWarningArray] # CCM14 +VehicleSPPTankHardpointBase
   id: VehicleSPPTankWarningArray
   name: SPP warning array
   description: An integrated weapons sensor array for SPP tank support slots.
@@ -259,12 +279,13 @@
     sprite: _RMC14/Structures/Vehicles/spptank.rsi
     state: warray_0
   - type: HardpointItem
-    compatibilityId: SPPTank
+    compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: warray_0
+    damagedVehicleState: warray_1
 
 - type: entity
-  parent: VehicleTankOverdriveEnhancer
+  parent: [VehicleSPPTankHardpointBase, VehicleTankOverdriveEnhancer] # CCM14 +VehicleSPPTankHardpointBase
   id: VehicleSPPTankOverdriveEnhancer
   name: SPP overdrive enhancer
   description: An overdrive enhancer support attachment for an SPP tank.
@@ -273,12 +294,13 @@
     sprite: _RMC14/Structures/Vehicles/spptank.rsi
     state: odrive_enhancer_0
   - type: HardpointItem
-    compatibilityId: SPPTank
+    compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: odrive_enhancer_0
+    damagedVehicleState: odrive_enhancer_1
 
 - type: entity
-  parent: VehicleTankArtilleryModule
+  parent: [VehicleSPPTankHardpointBase, VehicleTankArtilleryModule] # CCM14 +VehicleSPPTankHardpointBase
   id: VehicleSPPTankArtilleryModule
   name: SPP artillery module
   description: An artillery support module for an SPP tank.
@@ -287,7 +309,8 @@
     sprite: _RMC14/Structures/Vehicles/spptank.rsi
     state: artillerymod_0
   - type: HardpointItem
-    compatibilityId: SPPTank
+    compatibilityId: HardpointCompatibilitySPPTank
   - type: HardpointVisual
     vehicleState: artillerymod_0
+    damagedVehicleState: artillerymod_1
 

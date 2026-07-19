@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._CCM14.Xenonids.Screech;
+namespace Content.Shared._CCM.Xenonids.Screech;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ScreechDizzyComponent : Component

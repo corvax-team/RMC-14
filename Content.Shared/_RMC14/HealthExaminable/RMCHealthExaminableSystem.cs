@@ -22,7 +22,7 @@ public sealed class RMCHealthExaminableSystem : EntitySystem
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
 
-    private readonly ImmutableArray<FixedPoint2> _thresholds = ImmutableArray.Create<FixedPoint2>(25, 50, 75);
+    private readonly ImmutableArray<FixedPoint2> _thresholds = ImmutableArray.Create<FixedPoint2>(25, 50, 75, 100, 200, 300);
 
     public override void Initialize()
     {
@@ -31,6 +31,9 @@ public sealed class RMCHealthExaminableSystem : EntitySystem
 
     private void OnExamined(Entity<RMCHealthExaminableComponent> ent, ref ExaminedEvent args)
     {
+        if (ent.Comp.SpeciesType == null)
+            return;
+
         if (!TryComp(ent, out DamageableComponent? damageable))
             return;
 
@@ -42,7 +45,7 @@ public sealed class RMCHealthExaminableSystem : EntitySystem
 
             foreach (var group in ent.Comp.Groups)
             {
-                if ((group == BruteGroup && suppress.Brute) || (group == BurnGroup && suppress.Burn))
+                if (group == BruteGroup && suppress.Brute || group == BurnGroup && suppress.Burn)
                     continue;
 
                 if (!damageable.DamagePerGroup.TryGetValue(group, out var groupDamage))
@@ -54,7 +57,7 @@ public sealed class RMCHealthExaminableSystem : EntitySystem
                     if (groupDamage < threshold)
                         continue;
 
-                    var id = $"rmc-health-examinable-{group}-{threshold.Int()}";
+                    var id = $"rmc-health-examinable-{ent.Comp.SpeciesType}-{group}-{threshold.Int()}";
                     if (!Loc.TryGetString(id, out var msg, ("target", Identity.Entity(ent, EntityManager, args.Examiner))))
                         continue;
 

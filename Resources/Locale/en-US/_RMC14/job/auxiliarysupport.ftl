@@ -27,4 +27,4 @@ CMJobIntelOfficer = Intelligence Officer
 cm-job-name-vc = Vehicle Crewman
 cm-job-description-vc = Operate and maintain the ship's armored vehicles. Represent the armored presence during the operation, maintain and repair your vehicles.
 cm-job-prefix-vc = CRMN
-CMJobVehicleCrewman = Vehicle Crew
+CMJobVehicleCrewman = Vehicle Crewman

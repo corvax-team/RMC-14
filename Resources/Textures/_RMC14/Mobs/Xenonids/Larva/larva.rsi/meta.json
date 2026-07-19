@@ -8,6 +8,9 @@
   },
   "states": [
     {
+      "name": "larva"
+    },
+    {
       "name": "alive",
       "directions": 4
     },

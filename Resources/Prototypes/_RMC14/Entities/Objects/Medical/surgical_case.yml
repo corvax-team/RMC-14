@@ -31,7 +31,6 @@
       - CMBoneGel
       - CMUOrganClamp
       - CMUBoneGraft
-      - CMRollerBed
 # CCM14 END
       - CMScalpel
       - CMHemostat
@@ -39,6 +38,9 @@
       tags:
       - CMSurgicalLine
       - CMSynthGraft
+      - CMRollerBed # CCM-14
+      - CMBurnKit # CCM-14
+      - PillCanister # CCM-14
       #TODO FixoVein
   - type: FixedItemSizeStorage
   - type: Tag

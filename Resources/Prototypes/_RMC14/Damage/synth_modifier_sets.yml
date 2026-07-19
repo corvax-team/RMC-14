@@ -10,3 +10,23 @@
     Cellular: 0 # // CCM Changed
     Poison: 0 # // CCM Changed
     Radiation: 0 # // CCM Changed
+
+- type: damageModifierSet
+  id: RMCSynthGenOne
+  coefficients:
+    Blunt: 0.5
+    Slash: 0.5
+    Piercing: 0.5
+    Heat: 0.8
+    Shock: 0.8
+    Cold: 0.8
+
+- type: damageModifierSet
+  id: RMCSynthGenTwo
+  coefficients:
+    Blunt: 0.5
+    Slash: 0.5
+    Piercing: 0.5
+    Heat: 0.8
+    Shock: 0.8
+    Cold: 0.8

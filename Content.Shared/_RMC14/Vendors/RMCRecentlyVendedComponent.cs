@@ -2,7 +2,7 @@
 
 namespace Content.Shared._RMC14.Vendors;
 
-[RegisterComponent, UnsavedComponent]
+[RegisterComponent, UnsavedComponent, NetworkedComponent]
 [Access(typeof(SharedCMAutomatedVendorSystem))]
 public sealed partial class RMCRecentlyVendedComponent : Component
 {

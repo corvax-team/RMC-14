@@ -1,0 +1,299 @@
+- type: entity
+  abstract: true
+  parent: Clothing
+  id: CCMClothingNeckCapeBase
+  components:
+  - type: Item
+    size: Huge
+  - type: Clothing
+    quickEquip: true
+    slots:
+    - neck
+  - type: Sprite
+    state: icon
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: EmitSoundOnPickup
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
+  - type: EmitSoundOnLand
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
+  - type: Tag
+    tags:
+    - CCMClothingCape
+
+- type: Tag
+  id: CCMClothingCape
+
+- type: entity
+  abstract: true
+  parent: CCMClothingNeckCapeBase
+  id: CCMClothingNeckCapeBaseHeadBlocker
+  components:
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - Snout
+    - HeadTop
+    - HeadSide
+
+# Capes
+# Back
+- type: entity
+  parent: CCMClothingNeckCapeBase
+  id: CCMClothingNeckBackCape
+  name: back cape
+  description: Green like, cape for heroes or dummies.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Capes/back.rsi
+
+# Full
+- type: entity
+  parent: CCMClothingNeckCapeBase
+  id: CCMClothingNeckFullCape
+  name: full cape
+  description: Green like, cape for heroes or dummies.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Capes/full.rsi
+
+- type: entity
+  parent: CCMClothingNeckCapeBaseHeadBlocker
+  id: CCMClothingNeckFullCapeHood
+  name: full cape with hood
+  description: Green like, cape for strangers or killers.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Capes/full_h.rsi
+
+# Geist
+- type: entity
+  parent: CCMClothingNeckCapeBase
+  id: CCMClothingNeckGeistCape
+  name: geist cape
+  description: DIG DIG A GRAVE!! GRAVE FOR DIGGERS!!
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Capes/geist.rsi
+
+- type: entity
+  parent: CCMClothingNeckCapeBaseHeadBlocker
+  id: CCMClothingNeckGeistCapeHood
+  name: geist cape with hood
+  description: Green like, cape for strangers or killers.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Capes/geist_h.rsi
+
+# Ghille
+- type: entity
+  parent: CCMClothingNeckCapeBase
+  id: CCMClothingNeckGhilleCape
+  name: ghille cape
+  description: "JONE!! THEY ON TREES"
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Capes/ghille.rsi
+
+- type: entity
+  parent: CCMClothingNeckCapeBase
+  id: CCMClothingNeckGhilleLeftCape
+  name: ghille left shoulder cape
+  description: Green like, cape for heroes or dummies.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Capes/ghille_left.rsi
+
+- type: entity
+  parent: CCMClothingNeckCapeBase
+  id: CCMClothingNeckGhilleRightCape
+  name: ghille right shoulder cape
+  description: Green like, cape for heroes or dummies.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Capes/ghille_right.rsi
+
+# Half
+- type: entity
+  parent: CCMClothingNeckCapeBase
+  id: CCMClothingNeckHalfCape
+  name: half cape
+  description: Green like, cape for heroes or dummies.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Capes/half.rsi
+
+- type: entity
+  parent: CCMClothingNeckCapeBaseHeadBlocker
+  id: CCMClothingNeckHalfCapeHood
+  name: half cape with hood
+  description: Green like, cape for strangers or killers.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Capes/half_h.rsi
+
+# Rapier
+- type: entity
+  parent: CCMClothingNeckCapeBase
+  id: CCMClothingNeckRapierLeftCape
+  name: rapier left shoulder cape
+  description: Green like, cape for heroes or dummies.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Capes/rapier_left.rsi
+
+- type: entity
+  parent: CCMClothingNeckCapeBase
+  id: CCMClothingNeckRapierRightCape
+  name: rapier right shoulder cape
+  description: Green like, cape for heroes or dummies.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Capes/rapier_right.rsi
+
+# Scarf
+- type: entity
+  parent: CCMClothingNeckCapeBase
+  id: CCMClothingNeckScarfCape
+  name: scarf cape
+  description: Green like, cape for heroes or dummies.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Capes/scarf.rsi
+
+- type: entity
+  parent: CCMClothingNeckCapeBaseHeadBlocker
+  id: CCMClothingNeckScarfCapeHood
+  name: scarf cape with hood
+  description: Green like, cape for strangers or killers.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Capes/scarf_h.rsi
+
+# Shredded
+- type: entity
+  parent: CCMClothingNeckCapeBase
+  id: CCMClothingNeckShreddedCape
+  name: shredded cape
+  description: Oh my god, it like cheesee.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Capes/shredded.rsi
+
+- type: entity
+  parent: CCMClothingNeckCapeBaseHeadBlocker
+  id: CCMClothingNeckShreddedCapeHood
+  name: shredded cape with hood
+  description: Oh my mama mia, it like cheesee but with hood.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/Capes/shredded_h.rsi
+
+# Cases
+- type: entity
+  parent: RMCGunCaseBase
+  id: CCMCapeCaseBase
+  name: Marine cape |Back|
+  description: A case with cape. Marine cape. For Style. For UltraStyle. It contains Back Cape
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,5,1
+    whitelist:
+      tags:
+      - CCMClothingCape
+  - type: StorageFill
+    contents:
+    - id: CCMClothingNeckBackCape
+
+- type: entity
+  parent: CCMCapeCaseBase
+  id: CCMCapeCaseFull
+  name: Marine cape |Full|
+  description: A case with cape. Marine cape. For Style. For UltraStyle. It contains Full Capes
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMClothingNeckFullCape
+    - id: CCMClothingNeckFullCapeHood
+
+- type: entity
+  parent: CCMCapeCaseBase
+  id: CCMCapeCaseGeist
+  name: Marine cape |Geist|
+  description: A case with cape. Marine cape. For Style. For UltraStyle. It contains Geists Capes
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMClothingNeckGeistCape
+    - id: CCMClothingNeckGeistCapeHood
+
+- type: entity
+  parent: CCMCapeCaseBase
+  id: CCMCapeCaseGhille
+  name: Marine cape |Ghille|
+  description: A case with cape. Marine cape. For Style. For UltraStyle. It contains Ghille Capes
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMClothingNeckGhilleCape
+    - id: CCMClothingNeckGhilleLeftCape
+    - id: CCMClothingNeckGhilleRightCape
+
+- type: entity
+  parent: CCMCapeCaseBase
+  id: CCMCapeCaseHalf
+  name: Marine cape |Half|
+  description: A case with cape. Marine cape. For Style. For UltraStyle. It contains Halfed Capes
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMClothingNeckHalfCape
+    - id: CCMClothingNeckHalfCapeHood
+
+- type: entity
+  parent: CCMCapeCaseBase
+  id: CCMCapeCaseRapier
+  name: Marine cape |Rapier|
+  description: A case with cape. Marine cape. For Style. For UltraStyle. It contains Rapier Capes
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMClothingNeckRapierLeftCape
+    - id: CCMClothingNeckRapierRightCape
+
+- type: entity
+  parent: CCMCapeCaseBase
+  id: CCMCapeCaseScarf
+  name: Marine cape |Scarf|
+  description: A case with cape. Marine cape. For Style. For UltraStyle. It contains Scarfs
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMClothingNeckScarfCape
+    - id: CCMClothingNeckScarfCapeHood
+
+- type: entity
+  parent: CCMCapeCaseBase
+  id: CCMCapeCaseShredded
+  name: Marine cape |Shredded|
+  description: A case with cape. Marine cape. For Style. For UltraStyle. It contains Shredded Capes
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMClothingNeckShreddedCape
+    - id: CCMClothingNeckShreddedCapeHood

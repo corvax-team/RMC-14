@@ -36,7 +36,7 @@
     - type: MotionDetectorTracked
     - type: NpcFactionMember
       factions:
-      - TSE
+      - Bureau
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
@@ -52,7 +52,7 @@
     shoes: RMCShoesLaceup
     id: RMCIDCardTSEPASurvivor
     back: RMCSatchelBlackFillSurvivorConstable
-    ears: RMCHeadsetTSEPA
+    ears: RMCHeadsetDistressBureauDamaged
 
 - type: entity
   parent: RMCSurvivorPresetSecurity
@@ -65,7 +65,7 @@
     randomOutfits:
     - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPA, RMCPouchMagazineFilledMP5, WeaponSMGMP5 ]
     - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPAFormal, RMCPouchMagazineFilledMP5, WeaponSMGMP5 ]
-    - [ RMCHeadCapTSEPAPeaked, RMCArmorVestTSEPA, RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712, RMCExplosiveBreachingChargeRubberTSEPA ]
+    - [ RMCHeadCapTSEPAPeaked, RMCArmorVestTSEPA, RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12, RMCExplosiveBreachingChargeRubberTSEPA ]
     - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPAHighVis, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCHandsCombat ]
-    - [ RMCHeadCapTSEPAPeakedGoldSilver, RMCCoatTSEPAHighVisVest, RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712, RMCHandsCombat ]
+    - [ RMCHeadCapTSEPAPeakedGoldSilver, RMCCoatTSEPAHighVisVest, RMCPouchShotgunFilledPolicing, RMCWeaponShotgunM12, RMCHandsCombat ]
     - [ RMCHeadCapTSEPAPeakedGold, RMCCoatTSEPAFormal, RMCPouchShotgunFilledPolicing, RMCHandsCombat ]

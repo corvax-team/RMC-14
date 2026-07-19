@@ -981,8 +981,8 @@ namespace Content.Client.RoundEnd
             var sponsorHeader = Loc.GetString("ccm-sponsorship-endgame-header");
             // Имя роли (из SponsorData.SponsorNames) -> уровень, для обратного разбора строки кредитов.
             var nameToLevel = SponsorData.SponsorNames
-                .GroupBy(pair => pair.Value, StringComparer.CurrentCultureIgnoreCase)
-                .ToDictionary(group => group.Key, group => group.First().Key, StringComparer.CurrentCultureIgnoreCase);
+                .GroupBy(pair => pair.Value)
+                .ToDictionary(group => group.Key, group => group.First().Key);
             var sponsorLineRegex = new Regex(@"^(?<ckey>.+?)\s+\((?<tier>[^)]+)\)$",
                 RegexOptions.Compiled | RegexOptions.CultureInvariant);
 

@@ -1,4 +1,4 @@
-using Content.Shared._CCM14.Xenonids.Screech;
+using Content.Shared._CCM.Xenonids.Screech;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
@@ -7,7 +7,7 @@ using Robust.Shared.Enums;
 using Robust.Shared.IoC;
 using Robust.Shared.Log;
 
-namespace Content.Client._CCM14.Xenonids.Screech;
+namespace Content.Client._CCM.Xenonids.Screech;
 
 public sealed class ScreechDizzyOverlaySystem : EntitySystem
 {

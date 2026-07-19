@@ -1,0 +1,39 @@
+- type: radioChannel
+  id: SereneSolutions
+  name: chat-radio-sersol
+  keycode: "%"
+  frequency: 3632
+  color: "#f46d29"
+  longRange: true
+  tower: true
+
+- type: entity
+  parent: RMCEncryptionKeySPP
+  id: CCMEncryptionKeySerene
+  name: SerSol. radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - SereneSolutions
+    defaultChannel: SereneSolutions
+
+- type: entity
+  abstract: true
+  parent: CCMHeadsetIconsSerene
+  id: CCMHeadsetSereneAbstract
+  components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: LeaderSerene
+    trackerModes:
+    - LeaderSerene
+  - type: GrantTacMapAlert
+
+- type: entity
+  parent: CCMHeadsetSereneAbstract
+  id: CCMHeadsetSerene
+  name: Serene Solutions headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CCMEncryptionKeySerene

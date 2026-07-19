@@ -39,6 +39,8 @@
         points: 10
     - name: Вторичные боеприпасы # CCM14
       entries:
+      - id: RMCMagazinePistolM13Ext
+        points: 10
       - id: RMCSpeedLoader44Marksman
         points: 10 # TODO RMC14 heavy speed revolver
       - id: RMCMagazinePistolM1984AP
@@ -178,6 +180,7 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterM13
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
         name: пояс для инструментов M276 (Заполненный) # CCM14
@@ -224,6 +227,21 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+# CCM14 Add
+      - id: CCMClothingGasMaskFull
+      - id: CCMClothingMercenaryMask
+      - id: CCMClothingGasMask
+      - id: CCMClothingGlassGasMask
+      - id: CCMClothingSpecialGasMask
+    - name: Вспомог. одежда - Шея
+      choices: { CCMDripNeck: 1 }
+      entries:
+      - id: CCMCapeCaseBase
+      - id: CCMCapeCaseFull
+      - id: CCMCapeCaseHalf
+      - id: CCMCapeCaseRapier
+      - id: CCMCapeCaseScarf
+# CCM14 End
 
 - type: entity
   parent: ColMarTechBase
@@ -237,6 +255,11 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
+    canManualRestock: true
+    ignoreBulkRestockById:
+    - RMCBoxShotgunBuckshot
+    - RMCBoxShotgunFlechette
+    - RMCBoxShotgunSlugs
     jobs:
     - CMIntelOfficer
     sections:
@@ -272,8 +295,14 @@
         amount: 4
       - id: CMWeaponPistolM1984Empty
         amount: 4
+      - id: RMCWeaponPistolM13Empty
+        amount: 4
     - name: Вторичные боеприпасы # CCM14
       entries:
+      - id: RMCMagazinePistolM13
+        amount: 20
+      - id: RMCMagazinePistolM13Ext
+        amount: 8
       - id: CMMagazinePistolM77AP
         amount: 20
       - id: RMCSpeedLoaderM44

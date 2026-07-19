@@ -16,72 +16,30 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    - ActionXenoPunch
-    - CCMActionXenoBoxerAdvance
-    - CCMActionXenoBoxerKnockout
     - ActionXenoDevolve
-  - type: XenoLeap
-    delay: 0
-    range: 2
-    moveDelayTime: 0
-    knockdownTime: 0
-    leapSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
-    hitEffect: CMEffectPunch
-    targetJitterTime: 0
-    targetCameraShakeStrength: 1
-    damage:
-      groups:
-        Brute: 25
-  - type: XenoPunch
-    damage:
-      types:
-        Blunt: 35
+    - CCMActionXenoBoxerComeToMe
+    - CCMActionXenoBoxerStand
+  - type: YautjaAbomination
+    announceDelay: 99999999999
+    maxKills: 4
+    damagePerKill: 3
   - type: MeleeWeapon
     soundHit:
       collection: Punch
     animation: CCMWeaponArcXenoPunch
     damage:
       groups:
-        Brute: 25
+        Brute: 23
   - type: Tackle
     max: 6
     min: 3
   - type: XenoRage
-    rageDecayTime: 8
-    maxRage: 10
+    rageDecayTime: 4
+    maxRage: 999
     armorPerRage: 0
-    speedBuffPerRage: 0
-    attackSpeedPerRage: 0.05
+    speedBuffPerRage: 0.05
+    attackSpeedPerRage: 0.165
     healAmount: 0
-  - type: XenoEviscerate
-    stunTime: 0.25
-    lifeStealPerMarine: 250
-    maxLifeSteal: 500
-    rageHitSound: 
-      collection: CCMBoxingBell
-    damageAtRageLevels:
-    - groups:
-        Brute: 16
-    - groups:
-        Brute: 32
-    - groups:
-        Brute: 48
-    - groups:
-        Brute: 64
-    - groups:
-        Brute: 80
-    - groups:
-        Brute: 96
-    - groups:
-        Brute: 112
-    - groups:
-        Brute: 128
-    - groups:
-        Brute: 144
-    - groups:
-        Brute: 160
-    rangeAtRageLevels: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0,]
-    windupReductionAtRageLevels: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.9, 1]
   - type: XenoEvolution
     max: 500
     evolvesTo:
@@ -89,10 +47,19 @@
     - CMXenoPraetorian
     strains: []
   - type: XenoHidden
+  - type: RMCSize
+    size: Big
+  - type: XenoCleave
+    flingDistance: -4
+    rootTime: 3
   - type: XenoLifesteal
-    maxHeal: 60
-    minHeal: 40
-
+    basePercentage: 0.01
+    maxPercentage: 0.02
+    maxEffect: CCMBoxerEffectHealing
+    maxHeal: 0
+    minHeal: 0
+  - type: RMCActionOrder
+    id: CCMXenoWarriorBoxer
 # // CCM Xeno Punch Attack Effect
 - type: entity
   parent: [WeaponArcClaw, RMCBaseEffect]
@@ -106,13 +73,356 @@
     state: punch
     noRot: true
 # // CCM Xeno Punch Attack Effect
-# // CCM Boxing bell sound collection
-- type: soundCollection
-  id: CCMBoxingBell
-  files:
-  - /Audio/Weapons/boxingbell.ogg # Need that because eviscarate need collection
-# // CCM Boxing bell sound collection
+# // CCM Xeno Heal Effect
+- type: entity
+  parent: RMCEffectHeal
+  id: CCMBoxerEffectHealing
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 5
+  - type: Sprite
+    scale: 0.7, 0.7
+    color: "#FFFFFF"
+    state: busy_medical
+  - type: DamageOverTime
+    affectsDead: false
+    affectsInfectedNested: false
+    armorPiercingDamage:
+      types:
+        Heat: -1
+      groups:
+        Brute: -1
+    damage:
+      types:
+        Heat: -1
+      groups:
+        Brute: -1
+    barricadeDamage:
+      types:
+        Heat: 0
+    whitelist:
+      components:
+      - YautjaAbomination # Im lazy as shi
+  - type: Transform
+  - type: IgnorePredictionHit
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        mask:
+        - FullTileLayer
+        layer:
+        - FullTileLayer
+# // CCM Xeno Heal Effect
 # // CCM Xeno Strain - Boxer Warrior
+
+# // CCM Xeno Strain - Basher Warrior
+- type: entity
+  parent: CMXenoWarrior
+  id: CCMXenoWarriorBasher
+  suffix: CCM-Basher
+  components:
+  - type: Sprite
+    sprite: _CCM14/Mobs/Xenonids/Warrior/basher.rsi
+  - type: XenoStrain
+    name: ccm-xeno-basher-name
+    description: ccm-xeno-basher-description
+    popup: ccm-xeno-basher-popup
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoDevolve
+    - CCMActionXenoBasherLegsOff
+    - CCMActionXenoBasherHighFlyHead
+    - CCMActionXenoBasherCrushingDaBones
+  - type: XenoEvolution
+    max: 500
+    evolvesTo:
+    - RMCXenoCrusher
+    - CMXenoPraetorian
+    strains: []
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      600: Critical
+      700: Dead
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 40
+  - type: XenoHidden
+  - type: XenoPunch
+    effect: CCMEffectStarsInEyes
+    range: 4
+    damage:
+      types:
+        Blunt: 75
+  - type: XenoFling
+    effect: CCMEffectBrokenBones
+    range: 8
+    paralyzeTime: 1
+    slowTime: 3
+    dazeTime: 3
+    throwSpeed: 12
+    damage:
+      groups:
+        Brute: 45
+  - type: XenoTailJab
+    slowdownTime: 6
+    throwRange: 6
+    attackEffect: CCMEffectBrokenLegs
+    sound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
+    damage:
+      groups:
+        Brute: 55
+  - type: RMCActionOrder
+    id: CCMXenoWarriorBasher
+# // CCM Xeno Strain - Effects
+- type: entity
+  parent: RMCBaseEffect
+  id: CCMEffectStarsInEyes
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 8
+  - type: Sprite
+    sprite: _CCM14/Mobs/Xenonids/Warrior/basher_effects.rsi
+    state: stars_in_eyes
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Transform
+  - type: IgnorePredictionHit
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        mask:
+        - FullTileLayer
+        layer:
+        - FullTileLayer
+  - type: DamageOverTime
+    affectsDead: false
+    affectsInfectedNested: false
+    armorPiercingDamage:
+      types:
+        Asphyxiation: 2
+    whitelist:
+      components:
+      - Marine
+  - type: Timer
+  - type: TimedSpawner
+    prototypes:
+      - CCMEffectStunBasher
+    chance: 1
+    intervalSeconds: 3
+    minimumEntitiesSpawned: 1
+    maximumEntitiesSpawned: 1
+
+- type: entity
+  parent: RMCBaseEffect
+  id: CCMEffectBrokenLegs
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 6
+  - type: Sprite
+    sprite: _CCM14/Mobs/Xenonids/Warrior/basher_effects.rsi
+    state: broken_legs
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Transform
+  - type: IgnorePredictionHit
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        mask:
+        - FullTileLayer
+        layer:
+        - FullTileLayer
+  - type: Timer
+  - type: TimedSpawner
+    prototypes:
+      - CCMEffectStunBasher
+    chance: 1
+    intervalSeconds: 1.2
+    minimumEntitiesSpawned: 1
+    maximumEntitiesSpawned: 1
+
+- type: entity
+  parent: RMCBaseEffect
+  id: CCMEffectBrokenBones
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 10
+  - type: Sprite
+    sprite: _CCM14/Mobs/Xenonids/Warrior/basher_effects.rsi
+    state: broken_bones
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Transform
+  - type: IgnorePredictionHit
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        mask:
+        - FullTileLayer
+        layer:
+        - FullTileLayer
+  - type: DamageOverTime
+    affectsDead: false
+    affectsInfectedNested: false
+    armorPiercingDamage:
+      groups:
+        Brute: 4
+    whitelist:
+      components:
+      - Marine
+# // CCM Xeno Strain - Effects
+# After After Effect
+- type: entity
+  parent: RMCBaseEffect
+  id: CCMEffectStunBasher
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.1
+  - type: Sprite
+    sprite: _RMC14/Effects/attacks.rsi
+    state: punch # Im lazy
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Transform
+  - type: IgnorePredictionHit
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        mask:
+        - FullTileLayer
+        layer:
+        - FullTileLayer
+  - type: DamageOnCollide
+    paralyze: 0.5
+    damage:
+      types:
+        Heat: 0
+    chainDamage:
+      types:
+        Heat: 0
+    whitelist:
+      components:
+      - Marine
+# After After Effect
+# // CCM Xeno Strain - Basher Warrior
+
+# // CCM Xeno Strain - Bodyguard Defender
+- type: entity
+  parent: CMXenoDefenderBase
+  id: CCMXenoDefenderBodyguard
+  suffix: CCM-Bodyguard
+  components:
+  - type: Sprite
+    sprite: _CCM14/Mobs/Xenonids/Defender/bodyguard.rsi
+  - type: XenoStrain
+    name: ccm-xeno-bodyguarddef-name
+    description: ccm-xeno-bodyguarddef-description
+    popup: ccm-xeno-bodyguarddef-popup
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailSlam
+    - ActionXenoToggleCrest
+    - CCMActionXenoBoyGuardSave
+    - CCMActionXenoBodyGuardGuard
+    - CCMActionXenoBodyGuardProtect
+    - ActionXenoDevolve
+  - type: XenoHidden
+  - type: CriticalGraceTime
+    graceDuration: 3
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      600: Critical
+      750: Dead
+  - type: XenoPlasma
+    plasma: 300
+    maxPlasma: 300
+    plasmaRegenOnWeeds: 1.5
+  - type: CMArmor
+    xenoArmor: 20
+    explosionArmor: 35
+  - type: XenoTantrum
+    furyCost: 60
+    selfArmorBoost: 0
+    selfArmorDuration: 0
+    otherSpeedDuration: 0
+    otherArmorDuration: 6
+    enrageColor: "#66443B"
+  - type: XenoCrest
+    armor: 25
+    speedMultiplier: 0.5
+  - type: XenoTailLash
+    stunTime: 2
+    effect: RMCEffectXenoTelegraphRedEmpower
+    effectEdge: RMCEffectXenoTelegraphInvisible
+    windup: 0.75
+    width: 2
+    cost: 100
+  - type: XenoEnergy
+    max: 100
+    gain: 2 #CCM Change | Base = 1
+    gainAttack: -5
+    gainAttackDowned: -5
+    ignoreLateInfected: true
+  - type: RMCActionOrder
+    id: CCMXenoDefenderBodyguard
+# // CCM Xeno Strain - Bodyguard Defender
 
 # // CCM Xeno Strain - Melee & Ranger Sentinels
 - type: entity
@@ -140,16 +450,16 @@
   - type: MeleeWeapon
     damage:
       groups:
-        Brute: 27.5
+        Brute: 30
   - type: XenoTailStab
     tailDamage:
       groups:
-        Brute: 35
+        Brute: 45
   - type: XenoPunch
     range: 3
     damage:
       types:
-        Blunt: 27.5
+        Blunt: 30
   - type: XenoParalyzingSlash
     stunDelay: 1
     stunDuration: 2
@@ -178,6 +488,8 @@
     critHealMultiplier: 0.5  # 5% increased regeneration
     standHealingMultiplier: 0.8
     restHealMultiplier: 1.777
+  - type: RMCActionOrder
+    id: CCMXenoMeleeSentinel
 
 - type: entity
   parent: CMXenoSentinel
@@ -226,7 +538,174 @@
       380: Critical
       480: Dead
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: CCMXenoRangerSentinel
 # // CCM Xeno Strain - Melee & Ranger Sentinels
+
+# // CCM Xeno Strain - Scattershot Spitter
+- type: entity
+  parent: CMXenoSpitter
+  id: CCMXenoScatterShotSpitter
+  suffix: CCM-ScatterShot
+  components:
+  - type: XenoHidden
+  - type: Sprite
+    sprite: _CCM14/Mobs/Xenonids/Spitter/scattershot.rsi
+  - type: XenoStrain
+    name: ccm-xeno-scattershotspitter-name
+    description: ccm-xeno-scattershotspitter-description
+    popup: ccm-xeno-scattershotspitter-popup
+  - type: CMArmor
+    xenoArmor: 25
+    explosionArmor: 50
+  - type: Xeno
+    role: CMXenoSpitter
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailStabCorrosive
+    - ActionXenoAcidNormal
+    - ActionXenoSprayAcid
+    - CCMActionXenoScatteredSpitAcidicScatterShot
+    - CCMActionXenoScatterShotComeToMe
+    - ActionXenoDevolve
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      575: Critical
+      675: Dead
+  - type: XenoScatteredSpit
+    maxDeviation: 45
+    maxProjectiles: 7
+    projectileId: CCMXenoSpitterScatterShotSpit
+  - type: XenoChargeSpit
+    effect: CCMEffectChargeAcidScatterShot
+  - type: XenoSprayAcid
+    range: 3
+    delay: 0.1
+    acid: CCMXenoAcidSprayScatterShotSpitter
+    barricadeDamage:
+      types:
+        Heat: 10
+  - type: XenoEvolution
+    max: 500
+    evolvesTo:
+    - CMXenoBoiler
+    - CMXenoPraetorian
+    strains: []
+  - type: RMCActionOrder
+    id: CCMXenoScatterShotSpitter
+# // CCM Charge Spit - Scattershot Effect
+- type: entity
+  parent: RMCBaseEffect
+  id: CCMEffectChargeAcidScatterShot
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1.25
+  - type: Sprite
+    sprite: _RMC14/Effects/xeno_empower.rsi
+    noRot: true
+    state: empower
+    drawdepth: Effects
+    color: "#00FF73"
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: SpawnOnTerminate
+    spawn: CCMEffectChargeAcidScatterShotBoom
+  - type: DamageOnCollide
+    damage:
+      types:
+        Heat: -100
+      groups:
+        Brute: -100
+    chainDamage:
+      types:
+        Heat: 0
+    whitelist:
+      components:
+      - XenoChargeSpit
+  - type: Transform
+  - type: IgnorePredictionHit
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        mask:
+        - FullTileLayer
+        layer:
+        - FullTileLayer
+
+- type: entity
+  parent: RMCBaseEffect
+  id: CCMEffectChargeAcidScatterShotBoom
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.1
+  - type: Sprite
+    sprite: _RMC14/Effects/xeno_empower.rsi
+    noRot: true
+    state: empower
+    drawdepth: Effects
+    color: "#00FF73"
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: ClusterLimitHits
+    limit: 8
+  - type: RequireProjectileTarget
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: RMC
+    totalIntensity: 1
+    intensitySlope: 5
+    maxIntensity: 1
+    canCreateVacuum: false
+  - type: ProjectileGrenade
+    evenSpread: true
+    minVelocity: 0.5
+    maxVelocity: 1.5
+    fillPrototype: CCMXenoSpitterScatterShotShrapnel
+    capacity: 24
+    spreadAngle: 360
+  - type: TriggerOnSpawn
+  - type: DamageOnCollide
+    damage:
+      types:
+        Heat: 375
+    chainDamage:
+      types:
+        Heat: 0
+    whitelist:
+      components:
+      - XenoChargeSpit
+  - type: Transform
+  - type: IgnorePredictionHit
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        mask:
+        - FullTileLayer
+        layer:
+        - FullTileLayer
+# // CCM Charge Spit - Scattershot Effect
+# // CCM Xeno Strain - Scattershot Spitter
 
 # // CCM Xeno Strain - Sniper Spitter
 - type: entity
@@ -281,9 +760,6 @@
     - CCMActionXenoToggleSpitTypeSniper
     - ActionXenoZoom
     - ActionXenoDevolve
-    tier: 2
-    hudOffset: -0.15,0.025
-    unlockAt: 540 # 9 minutes
   - type: XenoToggleSpit
     neuroCost: 84
     neuroProto: CCMXenoSpitProjectileSniperPain
@@ -300,10 +776,12 @@
     maxProjectiles: 3
     projectileId: CCMXenoSpitProjectileSniperStructural
   - type: XenoZoom
-    zoom: 0.8, 0.8
+    zoom: 1.5, 1.5
     offsetLength: 3
     speed: 0.8
     doAfter: 0.5
+  - type: RMCActionOrder
+    id: CCMXenoSniperSpitter
 # // CCM Xeno Strain - Sniper Spitter
 
 # // CCM Xeno Strain - Burrower Impaler
@@ -341,6 +819,7 @@
     - ActionXenoDigTunnel
     - CCMActionJauntBurrow
     - CCMActionXenoBurrowerImpale
+    - CCMActionXenoBurrowerDeepImpale
     - ActionXenoDevolve
     tier: 2
     hudOffset: -0.15,0.56
@@ -351,8 +830,17 @@
     unburrowStunRange: 0.75
     unburrowStunLength: 2
     minimumTunnelTime: 0.3
+  - type: XenoAcidMine
+    range: 6
+    plasmaCost: 70
+    blastProto: RMCEffectXenoBurrowerDeepImpaleTelegraph
+    empoweredBlastProto: RMCEffectXenoBurrowerDeepImpaleTelegraph
+    actionIconEmpowered:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_eviscerate
   - type: XenoSprayAcid
     acid: CCMXenoBurrowerImpalerSpike
+    sound: /Audio/_RMC14/Xeno/burrowing_b.ogg
     doAfter: 0.8
     barricadeDuration: 0
     barricadeDamage:
@@ -360,7 +848,18 @@
         Heat: 0
   - type: XenoEvolution
     strains: []
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      375: Critical
+      475: Dead
+  - type: RMCActionOrder
+    id: CCMXenoBurrowerImpaler
+  - type: RemoveComponents
+    components:
+    - type: CanBeLarvaQueued
 # Burrower Jaunt
+
 - type: entity
   name: Burrower
   description: Burrowed Burrower, dont step on spikes!
@@ -376,8 +875,8 @@
     sprite: _CCM14/Objects/Xeno/xeno_64x64.rsi
     state: alive
   - type: MovementSpeedModifier
-    baseSprintSpeed: 6
-    baseWalkSpeed: 3
+    baseSprintSpeed: 4
+    baseWalkSpeed: 2
   - type: DamageOnCollide
     paralyze: 2
     canRehit: false
@@ -398,7 +897,7 @@
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.5
+          radius: 0.3
         density: 10
         mask:
         - MobMask
@@ -433,6 +932,7 @@
     - type: XenoEvolution
       strains: # CCM Change
       - CCMXenoBurrowerImpaler
+    - type: CanBeLarvaQueued 
 # Polymorph
 - type: polymorph
   id: CCMJauntBurrow
@@ -446,5 +946,5 @@
     allowRepeatedMorphs: false
     polymorphSound: /Audio/_RMC14/Xeno/burrowing_b.ogg
     exitPolymorphSound: /Audio/_RMC14/Xeno/burrowoff.ogg
-    duration: 3
+    duration: 5
 # // CCM Xeno Strain - Burrower Impaler

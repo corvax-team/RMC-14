@@ -1,0 +1,7 @@
+- type: entity
+  parent: CMAirlockSecurity
+  id: CCMAirlockBaillif
+  suffix: Locked
+  components:
+  - type: AccessReader
+    access: [["CCMAccessBaillif"]]

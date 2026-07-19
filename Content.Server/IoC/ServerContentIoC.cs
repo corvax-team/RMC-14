@@ -103,11 +103,12 @@ namespace Content.Server.IoC
             IoCManager.Register<RMCActionsManager>();
             IoCManager.Register<RMCChatBansManager>();
 
-            // Forge (Sponsor / Discord auth / Join queue)
+            // Forge (Sponsor / Discord auth / Join queue / TTS)
             IoCManager.Register<SponsorManager>();
             IoCManager.Register<ISharedSponsorManager, SponsorManager>();
             IoCManager.Register<DiscordAuthManager>();
             IoCManager.Register<JoinQueueManager>();
+            IoCManager.Register<Content.Server._Forge.TTS.TTSManager>();
 
             // CCM
             IoCManager.Register<CCMCustomizationManager>();

@@ -1,0 +1,111 @@
+- type: job
+  parent: CMJobBase
+  id: CCMSereneMedic
+  name: ccm-job-name-serene-medic
+  description: ccm-ghost-role-information-serene-description
+  playTimeTracker: CCMJobSereneMedic
+  ranks:
+    CCMRankSereneMlCorporal: []
+  greeting: ccm-job-greeting-serene
+  startingGear: CCMJobSereneMedic
+  icon: CCMJobIconSereneMedic
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - HospitalCorpsman
+  supervisors: cm-job-supervisors-sl
+  spawnMenuRoleName: Serene Solutions Medic
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Serene
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 1
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
+        RMCSkillEndurance: 3
+    - type: JobPrefix
+      prefix: ccm-job-prefix-serene
+  hidden: true
+
+- type: entity
+  id: CCMRandomHumanoidSereneMedic
+  name: serene ghost role medical specialist
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Objects/CMIDs/halcyon.rsi
+      state: halcyon
+  - type: RandomHumanoidSpawner
+    settings: CCMSereneMedic
+    
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: CCMSereneMedic
+  components:
+  - type: GhostRole
+    name: ccm-ghost-name-serene-medic
+    description: ccm-ghost-role-information-serene-description
+    rules: ccm-ghost-role-information-serene-rules
+    reregister: false
+    job: CCMSereneMedic
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadSerene
+
+- type: startingGear
+  id: CCMJobSereneMedic
+  equipment:
+    id: RMCIDCardHalcyon
+    ears: CCMHeadsetSerene
+    jumpsuit: CCMJumpsuitSereneMedic
+    outerClothing: CCMArmorSereneVestMedic
+    gloves: CMHandsLatex
+    head: CCMHelmetSereneMedic
+    shoes: RMCBootsSPPFilled
+    mask: CMMaskSterile
+    eyes: RMCGlassesMedicalHUDGlasses
+    back: CCMSatchelLightpackSerene
+    belt: CCMBeltUtilitySereneMedicFilled
+    suitstorage: CCMWeaponSMGType31A2
+    pocket1: RMCPouchMedkitFillAdvanced
+    pocket2: RMCPouchMagazineLarge
+  storage:
+    back:
+    - CMRollerBedSpawnFolded
+    - CMSurgicalCaseFilled
+    - CMBloodPackFull
+    - CMBloodPackFull
+    - RMCMRESPP
+    outerClothing:
+    - RMCMagazineSMGType19
+    - RMCMagazineSMGType19
+    pocket2:
+    - RMCMagazineSMGType19
+    - RMCMagazineSMGType19
+    - RMCMagazineSMGType19
+    - RMCMagazineSMGType19
+
+- type: playTimeTracker
+  id: CCMJobSereneMedic
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CCMJobIconSereneMedic
+  icon:
+    sprite: _CCM14/Interface/cm_job_icons.rsi
+    state: serene_medic

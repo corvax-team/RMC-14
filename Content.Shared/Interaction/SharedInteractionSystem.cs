@@ -432,6 +432,7 @@ namespace Content.Shared.Interaction
                 return;
             }
 
+            // RMC14
             var ignoreGhostInteractionLimits =
                 target != null &&
                 HasComp<GhostComponent>(user) &&
@@ -448,6 +449,7 @@ namespace Content.Shared.Interaction
             var inRangeUnobstructed = target == null
                 ? !checkAccess || InRangeUnobstructed(user, coordinates)
                 : !checkAccess || ignoreGhostInteractionLimits || InRangeUnobstructed(user, target.Value); // permits interactions with wall mounted entities
+            // RMC14
 
             // empty-hand interactions
             // combat mode hand interactions will always be true here -- since
@@ -772,8 +774,12 @@ namespace Content.Shared.Interaction
             bool popup = false,
             bool overlapCheck = true)
         {
-            if (_net.IsServer)
+            if (_net.IsServer &&
+                Resolve(other, ref other.Comp, false) &&
+                !_transform.InRange(otherCoordinates, other.Comp.Coordinates, 0.01f))
+            {
                 range += _rmcLagCompensation.MarginTiles;
+            }
 
             if (origin.Owner == other.Owner && Resolve(other, ref other.Comp, false))
             {
@@ -1194,6 +1200,7 @@ namespace Content.Shared.Interaction
             if (checkUseDelay && delayComponent != null && _useDelay.IsDelayed((used, delayComponent)))
                 return false;
 
+            // RMC14
             var ignoreGhostInteractionLimits =
                 HasComp<GhostComponent>(user) &&
                 HasComp<RMCIgnoreGhostInteractionLimitsComponent>(used);
@@ -1208,6 +1215,7 @@ namespace Content.Shared.Interaction
             // This is bypassed IF the interaction happened through an item slot (e.g., backpack UI)
             if (checkAccess && !ignoreGhostInteractionLimits && !IsAccessible(user, used))
                 return false;
+            // RMC14
 
             complexInteractions ??= _actionBlockerSystem.CanComplexInteract(user);
             var activateMsg = new ActivateInWorldEvent(user, used, complexInteractions.Value);

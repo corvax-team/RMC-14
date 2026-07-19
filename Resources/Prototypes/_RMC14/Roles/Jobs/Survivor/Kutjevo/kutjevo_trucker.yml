@@ -14,13 +14,7 @@
     - type: TacticalMapLayerTracked
       layers: [FactionSurvivor]
     - type: Skills
-      skills:
-        RMCSkillFireman: 1
-        RMCSkillEngineer: 1
-        RMCSkillConstruction: 2
-        RMCSkillVehicles: 3
-        RMCSkillEndurance: 2
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivorTrucker
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember

@@ -1,6 +1,6 @@
-ent-RMCGeneratorFusionFake = безвозвратно уничтоженный термоядерный реактор S-52
+ent-RMCGeneratorFusionFake = безвозвратно уничтоженный антиматериальный реактор S-52
     .desc = { "" }
-ent-RMCGeneratorFusion = термоядерный реактор S-52
+ent-RMCGeneratorFusion = антиматериальный реактор S-52
     .desc = { "" }
 ent-RMCGeneratorFusionColony = геотермальный генератор G-11
     .desc = Термоэлектрический генератор, расположенный поверх заполненной плазмой скважины.

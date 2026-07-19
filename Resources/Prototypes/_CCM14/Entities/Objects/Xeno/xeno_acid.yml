@@ -22,6 +22,28 @@
     extinguishAmount: 13
 
 - type: entity
+  parent: XenoAcidSprayWeak
+  id: CCMXenoAcidSprayScatterShotSpitter
+  name: splatter
+  description: It burns! It burns!
+  components:
+  - type: Sprite
+    layers:
+    - state: acid2
+  - type: DamageOnCollide
+    paralyze: 0
+    damage:
+      types:
+        Heat: 37.65
+    chainDamage:
+      types:
+        Heat: 20.45
+  - type: TimedDespawn
+    lifetime: 1.1
+  - type: SprayExtinguishTileFire
+    extinguishAmount: 45
+
+- type: entity
   id: CCMXenoBurrowerImpalerSpike #technically, this shi is acid
   name: spike
   description: My leg!
@@ -29,18 +51,33 @@
   - type: Sprite
     sprite: _CCM14/Objects/Xeno/xeno.rsi
     state: acid2-weak #Shitcode my beloved
+  - type: DamageOverTime
+    affectsDead: false
+    affectsInfectedNested: false
+    armorPiercingDamage:
+      types:
+        Heat: 50
+    damage:
+      types:
+        Heat: 50
+    barricadeDamage:
+      types:
+        Heat: 20
+    whitelist:
+      components:
+      - Barricade
+      - Vehicle
   - type: DamageOnCollide
     paralyze: 0
     canRehit: false
-    armorPenetration: 20
+    armorPenetration: 25
     damage:
       types:
-        Piercing: 30
+        Piercing: 40
+        Structural: 100
     whitelist:
       components:
       - Marine
-      - Barricade
-      - Vehicle
   - type: TimedDespawn
     lifetime: 1.4
   - type: Transform
@@ -58,3 +95,48 @@
         layer:
         - FullTileLayer
   - type: IgnorePredictionHit
+  - type: AutoAssignHive
+
+- type: entity
+  id: CCMXenoBurrowerImpalerSpikeDeep #technically, this shi is acid
+  parent: CCMXenoBurrowerImpalerSpike
+  components:
+  - type: DamageOnCollide
+    paralyze: 0
+    canRehit: false
+    armorPenetration: 25
+    damage:
+      types:
+        Piercing: 25
+        Structural: 100
+    whitelist:
+      components:
+      - Marine
+  - type: DamageOverTime
+    affectsDead: false
+    affectsInfectedNested: false
+    armorPiercingDamage:
+      types:
+        Heat: 30
+    damage:
+      types:
+        Heat: 30
+    barricadeDamage:
+      types:
+        Heat: 10
+    whitelist:
+      components:
+      - Barricade
+      - Vehicle
+      
+- type: entity
+  parent: RMCEffectXenoTelegraphGreen
+  id: RMCEffectXenoBurrowerDeepImpaleTelegraph
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1.25
+  - type: Sprite
+    color: "#A50824"
+  - type: SpawnOnTerminate
+    spawn: CCMXenoBurrowerImpalerSpikeDeep

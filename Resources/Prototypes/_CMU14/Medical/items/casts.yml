@@ -4,6 +4,7 @@
   name: medical cast
   description: A rigid cast that immobilises and slowly heals fractures up to Simple severity.
   components:
+  - type: CMSurgeryTool
   - type: Item
     size: Small
   - type: CMUCastItem
@@ -11,5 +12,5 @@
     uses: 4
     maxSuppressed: Simple
   - type: Sprite
-    sprite: _RMC14/Objects/Medical/Surgery/bone_gel.rsi
-    state: bone-gel
+    sprite: _CCM14/Objects/Medical/Surgery/medical_cast.rsi # Forge-Change : resprite
+    state: medical-cast # Forge-Change : resprite

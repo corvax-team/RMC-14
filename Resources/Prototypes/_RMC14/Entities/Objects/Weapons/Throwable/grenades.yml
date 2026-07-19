@@ -70,6 +70,9 @@
   - type: RequiresSkill
     skills:
       RMCSkillPolice: 2
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMilitaryPolice
 
 - type: entity
   parent:

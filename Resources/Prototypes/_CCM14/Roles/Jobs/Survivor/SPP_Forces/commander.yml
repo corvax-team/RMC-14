@@ -1,0 +1,73 @@
+- type: job
+  parent: CCMSurvivorSPPWesternForestBase
+  id: CCMSurvivorSPPWesternForestCommander
+  name: ccm-job-name-spp-commander
+  description: ccm-job-description-spp-commanding-officer
+  playTimeTracker: RMCJobSurvivorCO
+  ranks:
+    RMCRankSPPKapitan: []
+  accessGroups:
+  - ColonistEngi
+  startingGear: CCMGearSPPCommander
+  spawnMenuRoleName: SPP Commander (Survivor)
+  supervisors: ccm-job-supervisors-spp-high-command
+  roleWeight: 0.5
+  icon: "RMCJobIconForeconCommander"
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: RMCAllowSuitStorage
+    - type: Skills
+      preset: RMCSkillPresetCommander
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-xo
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: co
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_command
+    - type: IntelRescueSurvivorObjective
+    - type: SpotterWhitelist
+  hidden: true
+
+- type: startingGear
+  parent: CCMGearSPPBase
+  id: CCMGearSPPCommander
+  equipment:
+    head: CMHeadCapSPPBeret
+    ears: RMCHeadsetSPPCommand
+    jumpsuit: CCMJumpsuitSPPSurvivorOfficerAmmoFilled
+    outerClothing: RMCCoatSPPSeniorFilled
+    suitstorage: RMCWeaponRifleType71
+    id: RMCIDSPPCard
+    belt: RMCBeltHolsterPistolSPPT73
+    back: CCMRTOSPPCommanderSurvivor
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchGeneralLargeFilledSPPCommand
+  storage:
+    back:
+    - RMCMegaphone
+    - RMCMotionDetector
+    - CMFireExtinguisher
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CCMSpawnPointSurvivorSPPWesternForestCommander
+  name: SPP Commander spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CCMSurvivorSPPWesternForestCommander
+  - type: Sprite
+    state: co_spawn

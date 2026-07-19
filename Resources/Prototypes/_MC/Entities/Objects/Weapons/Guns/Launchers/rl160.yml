@@ -115,7 +115,7 @@
   - type: CMExplosionEffect
   - type: ExplodeOnTrigger
   - type: Explosive
-    explosionType: MC
+    explosionType: RMC
     maxIntensity: 200
     intensitySlope: 70
     totalIntensity: 200
@@ -195,7 +195,6 @@
     amount: 0
   - type: SpawnOnTerminate
     spawn: MCSmokeRL160Smoke
-    projectileAdjust: false
 
 - type: entity
   parent: MCProjectileRocketShellSmoke

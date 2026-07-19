@@ -1,0 +1,58 @@
+- type: job
+  parent: CCMSurvivorSPPWesternForestBase
+  id: CCMSurvivorSPPWesternForestSupportTech
+  name: ccm-job-name-spp-support-tech
+  startingGear: CCMGearSPPSupportTech
+  icon: "RMCJobIconSPPEngineer"
+  ranks:
+    RMCRankSPPMladshiySerzhant: []
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 36000 # 10 hours
+  spawnMenuRoleName: SPP Support Technician (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: RMCAllowSuitStorage
+    - type: Skills
+      preset: CCMSkillPresetSPPSupportTechnician
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi # mb change this?
+        state: spt
+    - type: IntelRescueSurvivorObjective
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-engineer
+    - type: SpotterWhitelist
+  hidden: true
+
+- type: startingGear
+  parent: CCMGearSPPBase
+  id: CCMGearSPPSupportTech
+  equipment:
+    head: ArmorHelmetSPP
+    outerClothing: RMCArmorSPP
+    jumpsuit: CCMJumpsuitSPPToolWebbing
+    eyes: RMCWeldingGoggles
+    back: CCMSatchelSPPWelderEngineerSurvivor
+    gloves: RMCHandsVeteranInsulated
+    belt: RMCType71BeltFilled
+    suitstorage: RMCWeaponRifleType71
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CCMSpawnPointSPPSupportTech
+  name: spp support tech spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CCMSurvivorSPPWesternForestSupportTech
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_spp

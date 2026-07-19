@@ -33,9 +33,9 @@ rmc-announcement-dropship-message = [color=#CECECE][font size=16][bold]Опов�
     { $message }[/bold][/font][/color]
 rmc-announcement-emergency-dropship-crash = [font size=14][bold][color=#CECECE]ЧРЕЗВЫЧАЙНАЯ СИТУАЦИЯ[/color][/bold][/font][font size=16][color=red]
     ДЕСАНТНЫЙ КОРАБЛЬ НА ТРАЕКТОРИИ СТОЛКНОВЕНИЯ. АВАРИЯ НЕИЗБЕЖНА.[/color][/font]
-rmc-announcement-delta = [color=#CECECE][font size=16][bold]АКТИВИРОВАНЫ СИСТЕМЫ САМОУНИЧТОЖЕНИЯ[/bold][/font][/color][color=red][font size=16][bold]
+rmc-announcement-delta = [color=#CECECE][font size=16][bold]АВАРИЙНАЯ АВТОРИЗАЦИЯ САМОУНИЧТОЖЕНИЯ[/bold][/font][/color][color=red][font size=16][bold]
     
-    ВНИМАНИЕ! АКТИВИРОВАНА СИСТЕМА АВАРИЙНОГО САМОУНИЧТОЖЕНИЯ. ПРОЙДИТЕ В КАМЕРУ УПРАВЛЕНИЯ ДЛЯ УСТАНОВКИ КЛЮЧЕВОГО СТЕРЖНЯ.[/bold][/font][/color]
+    ОПАСНОСТЬ! ARES v3.1 авторизовал аварийное уничтожение путём перегрузки реактора инженерного отсека. Квалифицированные инженеры могут настроить активные термоядерные реакторы с помощью мультитула.[/bold][/font][/color]
 rmc-announcement-general-quarters = ВНИМАНИЕ! ПО БОЕВЫМ МЕСТАМ. ВСЕМУ ЭКИПАЖУ ЗАНЯТЬ СВОИ ПОСТЫ.
 rmc-announcement-dropship-hijack = Обнаружен незапланированный вылет десантного корабля из зоны операций. Вероятен захват. Автопилот отключен.
 rmc-announcement-dropship-hijack-hive = Королева приказала металлической птице лететь в небесный металлический улей! Возрадуемся!

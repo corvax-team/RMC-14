@@ -10,5 +10,5 @@
   - type: CMSurgeryTool
     skill: 2
   - type: Sprite
-    sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
-    state: hemostat
+    sprite: _RMC14/Objects/Medical/Surgery/wound_clamp.rsi # Forge-Change : resprite
+    state: wound_clamp # Forge-Change : resprite

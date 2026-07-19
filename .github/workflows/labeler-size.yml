@@ -1,7 +1,14 @@
 name: "Labels: Size"
 on: pull_request_target
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   size-label:
+    permissions: 
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - name: size-label
@@ -10,7 +17,7 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
           # Custom size configuration
-          размер: >
+          sizes: >
             {
               "0": "XS",
               "10": "S",

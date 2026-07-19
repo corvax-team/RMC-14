@@ -1,0 +1,10 @@
+ent-RMCPoncho = пончо ККМП
+    .desc = Стандартное пончо ККМП имеет вариации для любого климата. Оно сшито по индивидуальному заказу и может надеваться поверх униформы, оно удобно, согревает или охлаждает по мере необходимости и хорошо сидит по фигуре. О большем морской пехотинец и мечтать не может.
+ent-RMCPonchoUrban = городское пончо ККМП
+    .desc = { ent-RMCPoncho.desc }
+ent-RMCPonchoJungle = джунглеевое пончо ККМП
+    .desc = { ent-RMCPoncho.desc }
+ent-RMCPonchoDesert = пустынное пончо ККМП
+    .desc = { ent-RMCPoncho.desc }
+ent-RMCPonchoSnow = снежное пончо ККМП
+    .desc = { ent-RMCPoncho.desc }

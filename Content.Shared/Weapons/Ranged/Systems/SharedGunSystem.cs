@@ -8,9 +8,11 @@ using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
-using Content.Shared._RMC14.Vehicle;
 using Content.Shared._CE.ZLevels.Core.Components;
 using Content.Shared._CE.ZLevels.Core.EntitySystems;
+// RMC14
+using Content.Shared._RMC14.Vehicle;
+// RMC14
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -187,6 +189,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         return true;
     }
 
+    // RMC14
     /// <summary>
     /// Sets the current gun target, returning the previous value.
     /// </summary>
@@ -196,9 +199,11 @@ public abstract partial class SharedGunSystem : EntitySystem
         gun.Comp.Target = target;
         return previous;
     }
+    // RMC14
 
     public bool TryGetGun(EntityUid entity, out EntityUid gunEntity, [NotNullWhen(true)] out GunComponent? gunComp)
     {
+        // RMC14
         if (TryComp(entity, out VehiclePortGunOperatorComponent? portGunOperator) &&
             portGunOperator.Gun is { } portGun &&
             TryComp(portGun, out VehiclePortGunComponent? portGunComp) &&
@@ -219,6 +224,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             gunComp = selectedGun;
             return true;
         }
+        // RMC14
 
         if(_attachableHolder.TryGetInhandSupercedingGun(entity, out gunEntity, out gunComp))
             return true;
@@ -265,6 +271,15 @@ public abstract partial class SharedGunSystem : EntitySystem
         DirtyField(uid, gun, nameof(GunComponent.ShotCounter));
     }
 
+    public void ResetShotCounter(EntityUid uid, GunComponent gun)
+    {
+        if (gun.ShotCounter == 0)
+            return;
+
+        gun.ShotCounter = 0;
+        DirtyField(uid, gun, nameof(GunComponent.ShotCounter));
+    }
+
     // RMC14 Needed to check if the attempted shot actually shot any projectiles.
     /// <summary>
     ///     Attempts to shoot at the target coordinates. Resets the shot counter after every shot.
@@ -302,7 +317,12 @@ public abstract partial class SharedGunSystem : EntitySystem
         gun.ShotCounter = 0;
     }
 
-    public List<EntityUid>? AttemptShoot(EntityUid user, EntityUid gunUid, GunComponent gun, List<int>? predictedProjectiles = null, ICommonSession? userSession = null)
+    public List<EntityUid>? AttemptShoot(
+        EntityUid user,
+        EntityUid gunUid,
+        GunComponent gun,
+        List<int>? predictedProjectiles = null,
+        ICommonSession? userSession = null)
     {
         if (gun.FireRateModified <= 0f ||
             !_actionBlockerSystem.CanAttack(user))
@@ -381,8 +401,10 @@ public abstract partial class SharedGunSystem : EntitySystem
             shots = Math.Min(shots, gun.ShotsPerBurstModified - gun.ShotCounter);
         }
 
+        // RMC14
         var originEntity = HasComp<GunUseGunOriginComponent>(gunUid) ? gunUid : user;
         var fromCoordinates = Transform(originEntity).Coordinates;
+        // RMC14
 
         //RMC14
         var shotOriginEv = new BeforeAttemptShootEvent(fromCoordinates, gun.ShootOriginOffset);
@@ -408,10 +430,12 @@ public abstract partial class SharedGunSystem : EntitySystem
             return null;
         }
 
+        // RMC14
         fromCoordinates = attemptEv.FromCoordinates;
         toCoordinates = attemptEv.ToCoordinates;
         if (toCoordinates == null)
             return null;
+        // RMC14
 
         // Remove ammo
         var ev = new TakeAmmoEvent(shots, new List<(EntityUid? Entity, IShootable Shootable)>(), fromCoordinates, user);

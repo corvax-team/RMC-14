@@ -5,18 +5,6 @@
   name: Urist C.M McRaptor
   suffix: RMC14
   components:
-  - type: UserInterface
-    interfaces:
-      enum.HumanoidMarkingModifierKey.Key:
-        type: HumanoidMarkingModifierBoundUserInterface
-      enum.StrippingUiKey.Key:
-        type: StrippableBoundUserInterface
-      enum.CMSurgeryUIKey.Key:
-        type: CMSurgeryBui
-      enum.CMUSurgeryUIKey.Key:
-        type: CMUSurgeryBui
-      enum.TacticalMapUserUi.Key:
-        type: TacticalMapUserBui
   - type: HumanoidAppearance
     species: Avali
     hideLayersOnEquip:

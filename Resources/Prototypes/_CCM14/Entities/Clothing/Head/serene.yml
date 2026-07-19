@@ -1,0 +1,95 @@
+- type: entity
+  parent: RMCHelmetBase
+  id: CCMHelmetSerene
+  name: SR-2 ballistic helmet
+  description: A robust protective helmet with a ballistic mask attched to it. Utilized by Halcyon Dynamics' Serene Solutions.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Serene/standart.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Serene/standart.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 25
+    bio: 15
+    explosionArmor: 20
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: CCMHelmetSerene
+  id: CCMHelmetSereneMedic
+  name: SR-2 ballistic helmet
+  description: A robust protective helmet with a red stripes on it. Utilized by Halcyon Dynamics' Serene Solutions.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Serene/medic.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Serene/medic.rsi
+
+- type: entity
+  parent: CCMHelmetSerene
+  id: CCMHelmetSereneBreacher
+  name: SR-2C ballistic helmet
+  description: A robust protective helmet with a red visor and reinforced ballistic mask. Utilized by Halcyon Dynamics' Serene Solutions.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Serene/breacher.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Serene/breacher.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 30
+    bio: 15
+    explosionArmor: 25
+
+- type: entity
+  parent: CCMHelmetSerene
+  id: CCMHelmetSereneOfficer
+  name: SR-2-V officer helmet
+  description: A robust protective helmet with a red visor and a headset. Utilized by Halcyon Dynamics' Serene Solutions.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Serene/officer.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Serene/officer.rsi
+
+- type: entity
+  parent: RMCMarineHelmetWithLightBase
+  id: CCMHelmetSereneEngineer
+  name: SR-2H engineer helmet
+  description: A robust protective helmet with an integrated wielding visor and a reinforced ballistic mask alongside with orange stripes. Utilized by Halcyon Dynamics' Serene Solutions.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Serene/engineer.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Serene/engineer.rsi
+  - type: CMArmor
+    melee: 25
+    bullet: 20
+    bio: 20
+    explosionArmor: 30
+  - type: PointLight
+    color: "#FFFFFF"
+  - type: IntegratedVisors
+    visorsToAdd:
+    - CCMVisorSereneWelding
+
+- type: entity
+  parent: RMCMarineHelmetBase
+  id: CCMHelmetSereneHeavy
+  name: SR-2SC ballistic helmet
+  description: A robust protective helmet with a red visor and reinforced ballistic mask. Utilized by Halcyon Dynamics' Serene Solutions.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Serene/heavy.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Serene/heavy.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 30
+    bio: 15
+    explosionArmor: 25
+  - type: IntegratedVisors
+    visorsToAdd:
+    - CCMVisorSereneNVG

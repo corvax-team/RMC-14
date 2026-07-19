@@ -88,6 +88,20 @@
       - id: CMMaskGas
       - id: CMMaskCoif
       - id: RMCMaskRebreather
+# CCM14 Add
+      - id: CCMClothingGasMaskFull
+      - id: CCMClothingMercenaryMask
+      - id: CCMClothingGasMask
+      - id: CCMClothingGlassGasMask
+      - id: CCMClothingSpecialGasMask
+    - name: Вспомог. одежда - Шея
+      choices: { CCMDripNeck: 1 }
+      entries:
+      - id: CCMCapeCaseBase
+      - id: CCMCapeCaseFull
+      - id: CCMCapeCaseHalf
+      - id: CCMCapeCaseRapier
+# CCM14 End
     - name: Инженерное снаряжение # CCM14
       entries:
       - id: CMEntrenchingTool
@@ -133,10 +147,6 @@
         points: 10
       - id: CMMagazineRifleM4SPRExt
         points: 10
-      - id: RMCMagazinePistolM13AP
-        points: 6
-      - id: RMCMagazinePistolM13ExtAP
-        points: 8
       - id: CMMagazineSMGM63AP
         points: 10
       - id: CMMagazineSMGM63Ext
@@ -240,6 +250,8 @@
         points: 15
       - id: CMPamphletEngineer
         points: 15
+      - id: CMPamphletMedical # CCM-14
+        points: 15 # CCM-14
       - id: RMCPamphletAdminFireman1 # // CCM Changed
         points: 15 # // CCM Changed
     - name: Ключи шифрования # CCM14

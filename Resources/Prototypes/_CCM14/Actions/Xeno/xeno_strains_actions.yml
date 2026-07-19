@@ -1,34 +1,145 @@
 - type: entity
-  id: CCMActionXenoBoxerAdvance
   parent: ActionXenoBase
-  name: Advance
-  description: Do a small jump/dash toward enemy and deal small amount of damage.
+  id: CCMActionXenoBoxerStand
+  name: Face to face
+  description: Root an enemy for 3 seconds.
   components:
   - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: tumble
-    useDelay: 1.5
+      state: agility_off
+    useDelay: 30
   - type: TargetAction
-    range: 15
-    checkCanAccess: false
-  - type: WorldTargetAction
-    event: !type:XenoLeapActionEvent
-  - type: RMCDazeableAction
+    range: 1.5
+    deselectOnMiss: false
+  - type: EntityTargetAction
+    event: !type:XenoCleaveActionEvent
+  - type: ActionBlockIfResting
 
 - type: entity
-  parent: ActionXenoEviscerate
-  id: CCMActionXenoBoxerKnockout
-  name: Knockout!
-  description: Use your stack of boxing, and deal massive damage and little stun
+  parent: ActionXenoBase
+  id: CCMActionXenoBoxerComeToMe
+  name: Come to ME!
+  description: Hook enemy to you up for 4 tiles, for 2.5 range.
   components:
   - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: rav_clothesline
-    useDelay: 60
+      state: abduct
+    useDelay: 20
+  - type: TargetAction
+    range: 2.5
+    deselectOnMiss: false
+  - type: EntityTargetAction
+    event: !type:XenoCleaveActionEvent
+      flings: true
+  - type: ActionBlockIfResting
+
+- type: entity
+  id: CCMActionXenoBasherLegsOff
+  parent: ActionXenoFling
+  name: Legs off
+  description: Fling in legs an enemy, dealing a medium damage with medium knockback. Add "Breaked bones" effect, that slows and stuns every 2 seconds.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: mark_attack
+    useDelay: 30
+  - type: ActionSharedCooldown
+    id: CCMActionXenoBasherLegsOff
+    ids:
+    - CCMActionXenoBasherCrushingDaBones
+    - CCMActionXenoBasherHighFlyHead
+    cooldown: 30
+
+- type: entity
+  id: CCMActionXenoBasherHighFlyHead
+  parent: ActionXenoPunch
+  name: High fly head
+  description: Punch an enemy in head, dealing a high damage with slight knockback. Add "Stars in eyes" effect, that deals asphyxiation damage and stuns every 4 seconds.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_crush
+    useDelay: 30
+  - type: ActionSharedCooldown
+    id: CCMActionXenoBasherHighFlyHead
+    ids:
+    - CCMActionXenoBasherLegsOff
+    - CCMActionXenoBasherCrushingDaBones
+    cooldown: 30
+
+- type: entity
+  id: CCMActionXenoBasherCrushingDaBones
+  parent: ActionXenoTailJab
+  name: Crushing Da' Bones
+  description: Punch enemy in chest, delaing low damage with high knockback & stun. Add "Breaked bones" effect, that deals high brute damage.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_pierce
+    useDelay: 30
+  - type: ActionSharedCooldown
+    id: CCMActionXenoBasherCrushingDaBones
+    ids:
+    - CCMActionXenoBasherLegsOff
+    - CCMActionXenoBasherHighFlyHead
+    cooldown: 30
+
+- type: entity
+  parent: ActionXenoApplySalve
+  id: CCMActionXenoBoyGuardSave
+  name: SAVE (-150)
+  description: Apply a heal that heal other xeno for 100 health, but hurts you and give you plasma
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: warden_heal
+    useDelay: 10
+  - type: EntityTargetAction
+    event: !type:XenoApplySalveActionEvent
+      plasmaCostModifier: -1.5
+      timeBetweenHeals: 0.25
+      totalHealDuration: 1.25
+
+- type: entity
+  id: CCMActionXenoBodyGuardGuard
+  parent: ActionXenoTailLash
+  name: GUARD (100)
+  description: Charge a strong tail fling and fling enemy in 2x2 box (maybe bigger sometimes)
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: warden_rejuvenate
+    useDelay: 5
+  - type: XenoActionPlasma
+    cost: 100
+
+- type: entity
+  parent: ActionXenoTantrum
+  id: CCMActionXenoBodyGuardProtect
+  name: PROTECT (100)
+  description: Give an ally 15 armor for 6 second.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: warden_shield
+    useDelay: 4
 
 - type: entity
   id: CCMActionXenoScatteredSpitSniper
@@ -54,7 +165,7 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_lance
-    useDelay: 3
+    useDelay: 10
 
 - type: entity
   parent: ActionXenoToggleSpitType
@@ -87,13 +198,26 @@
   description: Increases your movement speed and applies a slow on the next target you slash.
 
 - type: entity
+  id: CCMActionXenoScatteredSpitAcidicScatterShot
+  parent: ActionXenoScatteredSpit
+  name: Scattered acidic Spit (20) # TODO RMC14 proper plasma costs
+  description: Launches multiple damageless projectiles that will deal serious damage at point blank distance
+
+
+- type: entity
+  id: CCMActionXenoScatterShotComeToMe
+  parent: ActionXenoChargeSpit
+  name: Come To Me (50) # TODO RMC14 proper plasma costs
+  description: Charge your acid to make a shrapnel acid boom, need charge in 1.25 seconds. While charged gain armor and speed bost for 4 seconds.
+
+- type: entity
   parent: BaseActionPolymorph
   id: CCMActionJauntBurrow
   name: Burrowing spike rush
   description: Dig in ground and them rush your enemies with your back spikes
   components:
   - type: Action
-    useDelay: 25
+    useDelay: 27
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: tunnel
@@ -112,4 +236,33 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: prae_impale
-    useDelay: 13
+    useDelay: 11
+
+- type: entity
+  parent: ActionXenoBase
+  id: CCMActionXenoBurrowerDeepImpale
+  name: Burrowed deep spike strike (70)
+  description: Strike with your spikes under ground with long range
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_eviscerate
+    useDelay: 15
+  - type: XenoAcidMine
+    range: 5
+    plasmaCost: 70
+    blastProto: RMCEffectXenoBurrowerDeepImpaleTelegraph
+    empoweredBlastProto: RMCEffectXenoBurrowerDeepImpaleTelegraph
+    actionIconEmpowered:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_eviscerate
+  - type: TargetAction
+    deselectOnMiss: false
+    checkCanAccess: false
+    repeat: true
+    range: 5
+  - type: WorldTargetAction
+    event: !type:XenoAcidMineActionEvent
+  - type: ActionBlockIfResting

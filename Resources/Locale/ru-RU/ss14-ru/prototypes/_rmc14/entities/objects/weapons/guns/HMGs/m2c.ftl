@@ -1,8 +1,8 @@
-ent-RMCMachineGunM2C = M2C heavy machine gun
-    .desc = The top half of a M2C heavy machine gun post. However it ain't much use without a tripod.
-ent-RMCMagazineM2C = M2C Ammunition Box (10x28mm tungsten rounds)
-    .desc = A box of 125, 10x28mm caseless tungsten rounds for the M2C heavy machine gun system.
-ent-RMCCartridgeHMG10x28mmTungsten = cartridge (10x28mm Tungsten)
+ent-RMCMachineGunM2C = тяжёлый пулемёт M2C
+    .desc = Громоздкая машина смерти, созданная лишь для кровожадной войны. Однако, пользоваться им без Трипода практически невозможно.
+ent-RMCMagazineM2C = коробка патрон M2C (10x28mm Вольфрамовые)
+    .desc = Коробка для 125-ти 10x28mm безгильзовых вольфрамовых патронов для пулемёта M2C.
+ent-RMCCartridgeHMG10x28mmTungsten = патрон (10x28mm Вольфрамовые)
     .desc = { ent-CMBaseCartridgeRifle.desc }
-ent-RMCBulletHMG10x28mmTungsten = bullet (10x28mm Tungsten)
+ent-RMCBulletHMG10x28mmTungsten = Пуля (10x28mm Вольфрамовые)
     .desc = { ent-CMBulletBase.desc }

@@ -1,3 +1,3 @@
-ent-RMCRandomHumanoidREVLeaderHostile = rev ghost role leader
-    .suffix = Spawner, Player, Hostile
+ent-RMCRandomHumanoidREVLeaderHostile = гост-роль лидера петрищевцев
+    .suffix = Спавнер, Игрок, Враждебный
     .desc = { "" }

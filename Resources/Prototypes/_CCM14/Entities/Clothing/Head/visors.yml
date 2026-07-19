@@ -1,0 +1,65 @@
+- type: entity
+  parent: RMCVisorBase
+  id: CCMVisorPMCWelding
+  name: welding visor
+  description: An insertable visor HUD into a standard UNMC helmet. This type protects the eyes from welders.
+  components:
+  - type: Sprite
+    state: sight_empty
+  - type: Visor
+    toggledSprite:
+      sprite: _CCM14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: pmc_engi_weld
+    onIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: blank_hud_sight_down
+  - type: ComponentToggler
+    components:
+    - type: EyeProtection
+
+- type: entity
+  parent: RMCVisorBase
+  id: CCMVisorSereneWelding
+  name: welding visor
+  description: An insertable visor HUD into a standard UNMC helmet. This type protects the eyes from welders.
+  components:
+  - type: Sprite
+    state: sight_empty
+  - type: Visor
+    toggledSprite:
+      sprite: _CCM14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: serene_engi_weld
+    onIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: blank_hud_sight_down
+  - type: ComponentToggler
+    components:
+    - type: EyeProtection
+
+- type: entity
+  parent: RMCVisorBase
+  id: CCMVisorSereneNVG
+  name: serene NVG visor
+  description: An insertable visor HUD into a standard UNMC helmet. This type protects the eyes from welders.
+  components:
+  - type: Sprite
+    state: sight_empty
+  - type: Visor
+    toggledSprite:
+      sprite: _CCM14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: serene_heavy_nvg_unshaded
+      map: [ "light" ]
+      shader: unshaded
+    onIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: blank_hud_sight_down
+  - type: NightVisionVisor
+  - type: ToggleVisor
+    ignoreRedundancy: true
+  - type: ComponentToggler
+    components:
+    - type: PointLight
+      enabled: true
+      radius: 1.1
+      softness: 1
+      color: "#ff4242"

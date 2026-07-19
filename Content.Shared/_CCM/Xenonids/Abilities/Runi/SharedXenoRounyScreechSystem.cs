@@ -15,7 +15,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._CCM14.Xenonids.Screech;
+namespace Content.Shared._CCM.Xenonids.Screech;
 
 public sealed class XenoRounyScreechSystem : EntitySystem
 {

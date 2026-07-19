@@ -1,0 +1,22 @@
+# This file is specifically for filled uniforms to SPP survivors from Western Forest
+
+- type: entity
+  parent: CMJumpsuitSPPOfficer
+  id: CCMJumpsuitSPPSurvivorOfficerAmmoFilled
+  components:
+  - type: WebbingClothing
+    startingWebbing: CCMWebbingSPPSurvivorCommandFilled
+
+- type: entity
+  parent: CMJumpsuitSPPOfficer
+  id: CCMJumpsuitSPPToolWebbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCToolWebbingSmallFilled
+
+- type: entity
+  parent: CMJumpsuitSPPOfficer
+  id: CCMJumpsuitSPPRocketAmmoFilled
+  components:
+  - type: WebbingClothing
+    startingWebbing: CCMWebbingPouchRocketsHJRA

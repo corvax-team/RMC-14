@@ -1,0 +1,22 @@
+# This file is specifically for webbings to SPP survivors from Western Forest
+
+- type: entity
+  parent: CMWebbing
+  id: CCMWebbingSPPSurvivorCommandFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleType71
+    - id: RMCMagazineRifleType71
+    - id: RMCMagazineRifleType71
+
+- type: entity
+  parent: RMCWebbingDropPouch
+  id: CCMWebbingPouchRocketsHJRA
+  suffix: Filled, Forecon
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCRocketHJRA12HE
+      - id: RMCRocketHJRA12Incen

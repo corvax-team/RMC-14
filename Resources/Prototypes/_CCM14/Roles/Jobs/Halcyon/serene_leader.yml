@@ -1,0 +1,122 @@
+- type: job
+  parent: CMJobBase
+  id: CCMSereneLeader
+  name: ccm-job-name-serene-leader
+  description: ccm-job-description-serene-leader
+  playTimeTracker: CCMJobSereneLeader
+  ranks:
+    CCMRankSereneStSerzhant: []
+  greeting: ccm-job-greeting-serene
+  startingGear: CCMGearSereneLeader
+  icon: "CCMJobIconSereneLeader"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  - HospitalCorpsman
+  spawnMenuRoleName: Serene Solutions leader
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RMCTrackable
+    - type: NpcFactionMember
+      factions:
+      - Serene
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 5
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 3
+        RMCSkillFireman: 2
+        RMCSkillIntel: 1
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
+        RMCSkillPolice: 2
+    - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: SquadLeader
+      icon:
+        sprite: _CCM14/Interface/cm_job_icons.rsi
+        state: serene_leader
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: ccm-job-prefix-serene
+  hidden: true
+
+- type: entity
+  id: CCMRandomHumanoidSereneLeader
+  name: serene ghost role leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Objects/CMIDs/halcyon.rsi
+      state: halcyon
+  - type: RandomHumanoidSpawner
+    settings: CCMSereneLeader
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: CCMSereneLeader
+  components:
+  - type: GhostRole
+    name: ccm-ghost-name-serene-leader
+    description: ccm-ghost-role-information-serene-description
+    rules: ccm-ghost-role-information-serene-rules
+    reregister: false
+    job: CCMSereneLeader
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 18000 # 5 Hours
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadSerene
+
+- type: startingGear
+  id: CCMGearSereneLeader
+  equipment:
+    head: CCMHelmetSereneOfficer
+    ears: CCMHeadsetSerene
+    ears2: RMCM5CameraGear
+    jumpsuit: CCMJumpsuitSereneOfficer
+    outerClothing: CCMArmorSereneVestOfficer
+    gloves: RMCHandsBlack
+    shoes: RMCBootsSPPFilled
+    neck: RMCMaskScarfBlackDown
+    suitstorage: CCMWeaponRifleType33a
+    id: RMCIDCardHalcyon
+    belt: CCMBeltUtilitySereneLeaderFilled
+    back: CCMSatchelLightpackSerene
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchMagazineLarge
+  storage:
+    back:
+    - RMCBoxZiptie
+    - CMStunbaton
+    - CMPackFlare
+    - CMPackFlare
+    - RMCMRESPP
+    outerClothing:
+    - CMMagazineRifleM4SPR
+    - CMMagazineRifleM4SPR
+    pocket2:
+    - CMMagazineRifleM4SPRExt
+    - CMMagazineRifleM4SPRExt
+    - RMCMagazineRifleM4SPRIncendiary
+    - CMMagazineRifleM4SPRAP
+
+- type: playTimeTracker
+  id: CCMJobSereneLeader
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CCMJobIconSereneLeader
+  icon:
+    sprite: _CCM14/Interface/cm_job_icons.rsi
+    state: serene_leader

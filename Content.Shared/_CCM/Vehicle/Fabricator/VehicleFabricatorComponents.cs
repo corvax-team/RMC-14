@@ -62,3 +62,11 @@ public enum VehicleType : byte
     Humvee,
     Van
 }
+
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[Access(typeof(VehicleFabricatorSystem))]
+public sealed partial class VehicleFabricatorPrintableComponent : Component
+{
+    [DataField, AutoNetworkedField]
+    public bool Enabled = true;
+}

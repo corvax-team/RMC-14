@@ -28,7 +28,7 @@
     key: enum.VehicleSupplyUIKey.Key
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
-    access: [ [ "CMAccessCrewman" ] ] # CCM14
+    access: [ [ "RMCAccessVehicleCrew" ] ]
   - type: UserInterface
     interfaces:
       enum.VehicleSupplyUIKey.Key:
@@ -37,7 +37,6 @@
     vehicles:
     - name: humvee
       vehicle: VehicleHumvee
-      #unlock: VehicleHumvee
       hardpoints:
       - VehicleHumveeTurret
       - VehicleHumveeCannon
@@ -48,7 +47,6 @@
       - VehicleHumveeWheel
     - name: humvee (medical)
       vehicle: VehicleHumveeMedical
-      #unlock: VehicleHumveeMedical
       hardpoints:
       - VehicleHumveeSnowplow
       - VehicleHumveeOverlight
@@ -56,7 +54,6 @@
       - VehicleHumveeWheel
     - name: humvee (transport)
       vehicle: VehicleHumveeTransport
-      #unlock: VehicleHumveeTransport
       hardpoints:
       - VehicleHumveeSnowplow
       - VehicleHumveeOverlight
@@ -64,7 +61,6 @@
       - VehicleHumveeWheel
     - name: apc
       vehicle: VehicleAPC
-      #unlock: VehicleAPC
       hardpoints:
       - RMCAPCDualCannon
       - RMCAPCFrontCannon
@@ -74,7 +70,6 @@
       - RMCAPCWheel
     - name: apc (medical)
       vehicle: VehicleAPCMed
-      #unlock: VehicleAPCMed
       hardpoints:
       - RMCAPCDualCannon
       - RMCAPCFrontCannon
@@ -84,7 +79,6 @@
       - RMCAPCWheel
     - name: apc (command)
       vehicle: VehicleAPCCommand
-      #unlock: VehicleAPCCommand
       hardpoints:
       - RMCAPCDualCannon
       - RMCAPCFrontCannon
@@ -102,20 +96,51 @@
       - VehicleTankArmorPaladin
       - VehicleTankSnowplow
       - VehicleTankLTAAAPMinigun
-      - VehicleTankLTBCannon
+      - VehicleTankLTBCannon # CCM14
       - VehicleTankAceAutocannon
       - VehicleTankDragonFlamer
       - VehicleTankFlamer
       - VehicleTankGrenadeLauncher
-      - VehicleTankRERE700
+      - VehicleTankM56Cupola
       - VehicleTankWarningArray
       - VehicleTankOverdriveEnhancer
       - VehicleTankRocketLauncher
-      - VehicleTankTowLauncher
+      # - VehicleTankTowLauncher
       - VehicleTankFlareModule
       - VehicleTankArtilleryModule
       - VehicleTankReinforcedTreads
       - VehicleTankTreads
+      hardpointCategories:
+      - key: tank-primary
+        label: Primary
+        sortOrder: 0
+        hardpointTypes:
+        - HardpointTypeCannon
+      - key: tank-secondary
+        label: Secondary
+        sortOrder: 1
+        hardpointTypes:
+        - HardpointTypeLauncher
+      - key: tank-armor
+        label: Armor
+        sortOrder: 2
+        hardpointTypes:
+        - HardpointTypeArmor
+      - key: tank-support
+        label: Support
+        sortOrder: 3
+        hardpointTypes:
+        - HardpointTypeSupport
+      - key: tank-treads
+        label: Treads
+        sortOrder: 4
+        hardpointTypes:
+        - HardpointTypeWheel
+      - key: tank-general
+        label: General
+        sortOrder: 5
+        hardpointItems:
+        - VehicleTankSnowplow
     - name: humvee (arc)
       vehicle: VehicleHumveeARC
       unlock: VehicleHumveeARC

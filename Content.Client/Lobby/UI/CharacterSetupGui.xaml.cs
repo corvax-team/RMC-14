@@ -312,7 +312,7 @@ namespace Content.Client.Lobby.UI
             var selectedSlot = _preferencesManager.Preferences?.SelectedCharacterIndex;
             var numberOfFullSlots = 0;
             var characterButtonsGroup = new ButtonGroup();
-            var allowedSpecies = new HashSet<string> { "Human", "Avali", "Arachnid", "Moth", "Felinid", "Dwarf" };
+            var allowedSpecies = new HashSet<string> { "Human", "Avali", "Arachnid", "Moth", "Felinid", "Dwarf", "Yautja" };
             foreach (var (slot, character) in _preferencesManager.Preferences!.Characters)
             {
                 if (character is HumanoidCharacterProfile humanoidProfile &&

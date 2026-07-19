@@ -22,3 +22,24 @@
     leaderIcon:
       sprite: _CCM14/Interface/cm_job_icons.rsi
       state: petrishev_leader
+
+- type: entity
+  parent: SquadBase
+  id: SquadSerene
+  name: Serene Solutions
+  components:
+  - type: SquadTeam
+    color: "#f46d29"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: SereneSolutions
+    group: SereneSolutions
+    leaderIcon:
+      sprite: _CCM14/Interface/cm_job_icons.rsi
+      state: serene_leader

@@ -1,0 +1,41 @@
+- type: entity
+  parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
+  name: Type 12G shotgun
+  id: CCMWeaponShotgunType12G
+  description: An assault modification of Umpor Federation's Type 12 shotgun. Made for Serene Solution mercenaries.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Guns/Shotguns/Type12G/type12g_inhands.rsi
+    layers:
+    - state: icon
+      sprite: _CCM14/Objects/Weapons/Guns/Shotguns/Type12G/type12g_icon.rsi
+    - state: base
+      sprite: _CCM14/Objects/Weapons/Guns/Shotguns/Type12G/type12g_icon.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Weapons/Guns/Shotguns/Type12G/type12g_inhands.rsi
+  - type: Gun
+    shotsPerBurst: 1
+  - type: ShootUseDelay
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 3
+    recoilUnwielded: 3
+    scatterWielded: 15
+    scatterUnwielded: 15
+    baseFireRate: 1.2
+    burstScatterMult: 5
+  - type: BallisticAmmoProvider
+    capacity: 8
+    proto: RMCShellShotgunHeavyBuckshot
+    whitelist:
+      tags:
+      - RMCShellShotgunHeavyBuckshot
+      - RMCShellShotgunHeavySlugs
+      - RMCShellShotgunHeavyFlechette
+      - RMCShellShotgunIncendiaryHeavyBuckshot
+      - RMCShellShotgunHeavyBeanbag
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.15
+    accuracyMultiplierUnwielded: 0.5
+  - type: PumpAction

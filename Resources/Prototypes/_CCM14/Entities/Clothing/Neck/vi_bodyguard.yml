@@ -1,0 +1,12 @@
+- type: entity
+  parent: ClothingNeckBase
+  id: CCMVIBodyguardCloak
+  name: vitezstvi kevlar cloak
+  description: A dark grey cloak made of a thin kevlar cloth for a little defence against cuts and brute damage. Have a blue V on it's back, vitezstvi have a good taste.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Neck/vi_bodyguard.rsi
+  - type: CMArmor
+    melee: 10
+    bullet: 5
+    explosionArmor: 10

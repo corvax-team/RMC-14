@@ -10,5 +10,5 @@
   - type: CMSurgeryTool
     skill: 1
   - type: Sprite
-    sprite: _RMC14/Objects/Medical/Surgery/bone_gel.rsi
-    state: bone-gel
+    sprite: _CCM14/Objects/Medical/Surgery/bone_graft.rsi # Forge-Change : resprite
+    state: bone-graft # Forge-Change : resprite

@@ -34,7 +34,7 @@
     reagents:
       CMUTramadol: 45
   - type: IconLabel
-    labelTextLocId: ccm-tramadol-container-label-text
+    labelTextLocId: pill-tramadol
 
 - type: entity
   parent: CMAutoInjector
@@ -53,7 +53,7 @@
     reagents:
       CMUParacetamol: 75
   - type: IconLabel
-    labelTextLocId: ccm-paracetamol-container-label-text
+    labelTextLocId: pill-paracetamol
 
 - type: entity
   parent: CMAutoInjector
@@ -72,7 +72,7 @@
     reagents:
       CMUOxycodone: 30
   - type: IconLabel
-    labelTextLocId: ccm-oxycodone-container-label-text
+    labelTextLocId: pill-oxycodone
 
 - type: entity
   parent: CMAutoInjector
@@ -103,4 +103,4 @@
       CMUCardiocaine: 15
       CMUOsteoCalc: 15
   - type: IconLabel
-    labelTextLocId: ccm-organmix-container-label-text
+    labelTextLocId: pill-organs-mix

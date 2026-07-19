@@ -28,9 +28,4 @@
     useDelay: 15
   - type: InstantAction
     event: !type:CCMXenoChargeLineActionEvent
-      speedMultiplier: 2.5
-      maxTiles: 10
-      damage:
-        types:
-          Blunt: 40
   # - type: RMCDazeableAction

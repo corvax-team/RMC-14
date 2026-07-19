@@ -406,6 +406,8 @@
       - RMCPenlight
       - Flare
       - RMCMiniTank
+      - RMCSyringeCase
+      - CMSurgicalCase
       #      - # TODO RMC14 reagent analyzer
       #      - # TODO RMC14 plant analyzer
       components:
@@ -472,6 +474,9 @@
       Desert: _RMC14/Objects/Clothing/Belt/mortar/desert.rsi
       Urban: _RMC14/Objects/Clothing/Belt/mortar/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Belt/mortar/jungle-classic.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMortar
 
 - type: entity
   parent: CMBeltMarine
@@ -497,11 +502,21 @@
       - RMCMagazineSmartGun
       - RMCShellShotgun
       - Flare
+# CCM14 ADD
+      - CCMMagazineSmartGunML109AAS
+      - CCMMagazineSmartGunHeavy
+      - CCMMagazineSmartGunML109AFlak
+# CCM14 End
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
     items:
       tags:
       - RMCMagazineSmartGun
+# CCM14 ADD
+      - CCMMagazineSmartGunML109AAS
+      - CCMMagazineSmartGunHeavy
+      - CCMMagazineSmartGunML109AFlak
+# CCM14 End
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Belt/smart_gun_operator/jungle-classic.rsi
@@ -509,6 +524,9 @@
       Desert: _RMC14/Objects/Clothing/Belt/smart_gun_operator/desert.rsi
       Urban: _RMC14/Objects/Clothing/Belt/smart_gun_operator/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Belt/smart_gun_operator/jungle-classic.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
 
 - type: entity
   parent: CMBeltMarine
@@ -544,11 +562,21 @@
       - RMCMagazineRevolver
       - RMCMagazineSmartGun
       - Flare
+# CCM14 ADD
+      - CCMMagazineSmartGunML109AAS
+      - CCMMagazineSmartGunHeavy
+      - CCMMagazineSmartGunML109AFlak
+# CCM14 End
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
     items:
       tags:
       - RMCMagazineSmartGun
+# CCM14 ADD
+      - CCMMagazineSmartGunML109AAS
+      - CCMMagazineSmartGunHeavy
+      - CCMMagazineSmartGunML109AFlak
+# CCM14 End
   - type: LimitedStorage
     limits:
     - popup: rmc-storage-limit-one-gun
@@ -571,6 +599,9 @@
     - RMCSmartGunSidearmHolster
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
 
 - type: entity
   parent: CMBeltMarine
@@ -687,9 +718,6 @@
       state: b92fs
       map: [ "b92fs_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: m13
-      map: [ "m13_fill" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: highpower
       map: [ "mk45_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
@@ -728,6 +756,7 @@
       - CMMagazinePistol
     blacklist:
       tags:
+      - RMCWeaponPistolM13
       - RMCSmartPistol
       - RMCMagazinePistolSU6
       - RMCRevolver
@@ -759,7 +788,6 @@
     - b92fs_fill
     - mk45_fill
     - t73_fill
-    - m13_fill
     - l54_fill
     - handcannon_fill
     - g_handcannon_fill
@@ -790,10 +818,6 @@
         whitelist:
           tags:
           - RMCMK45
-      m13_fill:
-        whitelist:
-          tags:
-          - RMCWeaponPistolM13
       t73_fill:
         whitelist:
           tags:
@@ -826,7 +850,7 @@
   parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolWeYa
   name: WY-TM892 pattern general pistol holster rig
-  description: The WY-TM892 is the standard load-bearing equipment of the W-Y security forces. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
+  description: The WY-TM892 is the standard load-bearing equipment of the WEYA security forces. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_weya.rsi
@@ -1227,7 +1251,7 @@
   parent: CMBeltMarine
   id: RMCBeltHolsterM13
   name: M276 pattern M13 holster rig
-  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and seven spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments.
+  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and three spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
@@ -1251,7 +1275,7 @@
     size: Large
   - type: Storage
     grid:
-    - 0,0,15,1 # 7 slots
+    - 0,0,7,1 # 4 slots
     whitelist:
       tags:
       - RMCMagazinePistolM13
@@ -1268,7 +1292,7 @@
         tags:
         - RMCWeaponPistolM13
     - popup: rmc-storage-limit-max-mags
-      count: 7
+      count: 3
       whitelist:
         tags:
         - RMCMagazinePistolM13
@@ -1486,23 +1510,15 @@
       - CMFireExtinguisherPortable
       - RMCMagazineML66D
       - RMCMagazineM2C
-      - CableCoil
-      - Multitool
       - RMCExplosiveBreachingCharge
-      - RMCNailgunCompact
-      - RMCNailgunTactical
       - RMCExplosiveClaymoreMine
       - RMCSmartGunMounted # Not parity
       components:
       - Welder
-      - EntrenchingTool
-      - BarbedWire
-      - EmptySandbag
       - WeaponMount # Not parity
   - type: IgnoreContentsSize
     items:
       components:
-      - EntrenchingTool
       - MountableWeapon # Not parity
   - type: Tag
     tags:

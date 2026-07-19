@@ -1,0 +1,68 @@
+- type: job
+  parent: CCMSurvivorSPPWesternForestBase
+  id: CCMSurvivorSPPWesternForestSquadLeader
+  name: ccm-job-name-spp-leader
+  ranks:
+    RMCRankSergeant: []
+  icon: "RMCJobIconSPPLeader"
+  roleWeight: 0.25
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
+    time: 18000  # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 3600 # 1 hour
+  spawnMenuRoleName: SPP Squad Leader (Survivor)
+  startingGear: CCMGearSPPSquadLeader
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: RMCAllowSuitStorage
+    - type: Skills
+      preset: CCMSkillPresetSPPSquadLeader
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi # mb change this?
+        state: leader
+    - type: IntelRescueSurvivorObjective
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-leader
+    - type: SpotterWhitelist
+    - type: RMCTrackable
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: upp_sl_a
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CCMSpawnPointSPPSquadLeader
+  name: spp squad leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CCMSurvivorSPPWesternForestSquadLeader
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_spp
+
+- type: startingGear
+  parent: CCMGearSPPBase
+  id: CCMGearSPPSquadLeader
+  equipment:
+    head: CMHeadCapSPPBeret
+    ears: RMCHeadsetSPPCommand
+    outerClothing: RMCArmorSPPRifleman
+    suitstorage: RMCWeaponRifleType71
+    belt: RMCBeltHolsterRevolverZHNK72Fill
+    back: CCMSatchelSPPSquadLeaderSurvivor
+    pocket2: RMCPouchExplosiveFilledC4SPP

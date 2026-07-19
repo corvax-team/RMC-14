@@ -77,10 +77,12 @@ public abstract class SharedCMInventorySystem : EntitySystem
     ];
 
     private EntityQuery<RMCPickupDroppedItemsComponent> _pickupDroppedItemsQuery;
+    private EntityQuery<TransformComponent> _xformQuery;
 
     public override void Initialize()
     {
         _pickupDroppedItemsQuery = GetEntityQuery<RMCPickupDroppedItemsComponent>();
+        _xformQuery = GetEntityQuery<TransformComponent>();
 
         SubscribeLocalEvent<GunComponent, IsUnholsterableEvent>(AllowUnholster);
         SubscribeLocalEvent<MeleeWeaponComponent, IsUnholsterableEvent>(AllowUnholster);
@@ -420,7 +422,13 @@ public abstract class SharedCMInventorySystem : EntitySystem
 
         foreach (var item in sortedItems)
         {
-            if (_interaction.InRangeUnobstructed(user, item))
+            if (TerminatingOrDeleted(item) || !_xformQuery.HasComp(item))
+            {
+                pickupDroppedItems.DroppedItems.Remove(item);
+                continue;
+            }
+
+            if (!_container.IsEntityInContainer(item) && _interaction.InRangeUnobstructed(user, item))
             {
                 if (_hands.TryPickupAnyHand(user, item))
                 {

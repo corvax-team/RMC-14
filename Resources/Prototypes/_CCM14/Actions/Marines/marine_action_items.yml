@@ -1,0 +1,13 @@
+- type: entity
+  parent: ActionMarineBase
+  id: CCMActionToggleMortar
+  name: Toggle Laser
+  description: Toggles your laser on or off
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/marine_sniper_actions.rsi
+      state: prepare_position
+  - type: InstantAction
+    event: !type:GunToggleLaserActionEvent

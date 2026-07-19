@@ -2,7 +2,8 @@
   parent: CMJobBase
   id: CMProvostAdvisor
   name: rmc-job-name-corp-provost-advisor
-  description: rmc-ghost-role-information-provost-description
+  description: rmc-ghost-role-information-provost-advisor-description # CCM14
+  whitelisted: true #CCM14
   playTimeTracker: CMJobProvostAdvisor
   ranks:
     RMCRankProvostAdvisor2:
@@ -17,24 +18,34 @@
   startingGear: RMCGearProvostAdvisor
   icon: RMCJobIconProvostAdvisor
   joinNotifyCrew: false
+  supervisors: ccm-job-supervisors-provost  # CCM14
   accessGroups:
   - ShipMasterAccess
+  - CCMBaillif # CCM14
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
-        RMCSkillCqc: 3
+        RMCSkillCqc: 5 # CCM14
         RMCSkillEndurance: 3
-        RMCSkillFirearms: 1
+        RMCSkillFirearms: 3 # CCM14
         RMCSkillFireman: 2
+        RMCSkillEngineer: 2 # CCM14
         RMCSkillMeleeWeapons: 1
         RMCSkillPolice: 2
+        RMCSkillLeadership: 2 # CCM14
+        RMCSkillMedical: 2 # CCM14
+        RMCSkillOverwatch: 1 # CCM14
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-advisor
     - type: RMCTrackable
-  hidden: true
+    - type: SeeNewPlayers #CCM14
+    - type: MarineOrders #CCM14
+    - type: CommandAccent #CCM14
+    - type: RMCPointing #CCM14
+  hidden: false #CCM14
 
 - type: entity
   id: RMCRandomHumanoidProvostAdvisor
@@ -69,14 +80,24 @@
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvostSenior
     outerClothing: RMCProvostJacketFilled
-    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    gloves: RMCHandsBlackFireResistance
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostAdvisor
-    belt: CMBeltSecurityMPFilled
+    belt: RMCM1984BeltFilled
     back: CMSatchelSecurityFilledProvost
-#    pocket1: # TODO RMC14 tape recorder
+    pocket1: RMCUniversalRecorder
     pocket2: RMCPouchGeneralLarge # TODO RMC14 3 listening devices
-
+# ///CCM14
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CCMSpawnPointProvostAdvisor
+  name: Bailiffs Advisor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMProvostAdvisor
+  - type: Sprite
+    state: x # todo rmc14 need a spawn location sprite
+# //////
 - type: playTimeTracker
   id: CMJobProvostAdvisor
 

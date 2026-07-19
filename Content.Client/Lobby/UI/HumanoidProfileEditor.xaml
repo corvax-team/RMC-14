@@ -1,4 +1,4 @@
-﻿<!-- CM14 rework: non-RMC edit marker. -->
+<!-- CM14 rework: non-RMC edit marker. -->
 <BoxContainer xmlns="https://spacestation14.io"
          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
          xmlns:humanoid="clr-namespace:Content.Client.Humanoid"
@@ -192,6 +192,7 @@
                                             MinWidth="156"
                                             HorizontalAlignment="Right" />
                                 </BoxContainer>
+								<BoxContainer Name="TraitsList" Orientation="Vertical" />
                                 <PanelContainer Name="BackgroundInfoInlineContainer" Visible="False" HorizontalExpand="True" MinHeight="220" Margin="0 6 0 0" />
                             </BoxContainer>
                         </ui:HighlightedContainer>
@@ -237,7 +238,6 @@
         <BoxContainer Name="OtherTabHiddenContainer" Visible="False">
             <BoxContainer Name="MiscTabContainer" Orientation="Vertical" />
             <BoxContainer Name="AntagList" Visible="False" />
-            <BoxContainer Name="TraitsList" Visible="False" />
             <BoxContainer Name="MarkingsTab" Visible="False">
                 <Label Text="{Loc 'humanoid-profile-editor-markings-tab'}" />
             </BoxContainer>

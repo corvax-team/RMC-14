@@ -5,6 +5,7 @@ using Content.Server.GameTicking;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.GhostColor;
 using Content.Shared._RMC14.LinkAccount;
+using Content.Shared._RMC14.Mentor.ImaginaryFriend;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
 using Robust.Server.Player;

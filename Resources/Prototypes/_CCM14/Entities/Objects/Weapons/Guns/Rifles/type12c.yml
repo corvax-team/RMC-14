@@ -1,0 +1,62 @@
+- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  name: Type 12c "Jockey"
+  id: CCMWeaponRifleType12c
+  description: Bassicaly a cannibalized and modified version of UEG's M54, it even shoots the same caliber! Made by Halcyon Dynamics for their Serene Solutions mercenaries.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Guns/Rifles/Type12c/type12_inhands.rsi
+    layers:
+    - state: base
+      sprite: _CCM14/Objects/Weapons/Guns/Rifles/Type12c/type12_icon.rsi
+    - state: bolt-open
+      sprite: _CCM14/Objects/Weapons/Guns/Rifles/Type12c/type12_icon.rsi
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      sprite: _CCM14/Objects/Weapons/Guns/Rifles/Type12c/type12_icon.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _CCM14/Objects/Weapons/Guns/Rifles/Type12c/type12_inhands.rsi
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      collection: CMM54CShoot
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilUnwielded: 2
+    scatterWielded: 2
+    scatterUnwielded: 10
+    baseFireRate: 3.5
+    burstScatterMult: 1
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.45
+    accuracyMultiplierUnwielded: 0.6
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CMMagazineRifleM54C
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54C
+          - CMMagazineRifleM54CAP
+          - CMMagazineRifleM54CExt
+          - RMCMagazineRifleM54CIncendiary
+          - RMCMagazineRifleM54CHEAP
+          - RMCMagazineRifleM54CWP
+  - type: GunDamageModifier
+    multiplier: 1.2

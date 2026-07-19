@@ -31,6 +31,8 @@ humanoid-profile-editor-xeno-prefix-tooltip = 2 буквы, или 3 если в
 humanoid-profile-editor-xeno-postfix = Ксено постфикс:
 humanoid-profile-editor-xeno-postfix-tooltip = 1 буква если вы наиграли 24 часа на ксено ролях. 2 буквы или 1 буква и 1 цифра если вы наиграли 300 часов на ксено ролях.
 
+humanoid-profile-editor-rank-auto = Авто
+
 humanoid-profile-editor-enable = Включить
 humanoid-profile-editor-disabled = Выключить
 humanoid-profile-editor-eyes-label = Цвет глаз:

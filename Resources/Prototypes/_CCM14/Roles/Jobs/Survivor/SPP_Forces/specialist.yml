@@ -1,0 +1,61 @@
+- type: job
+  parent: CCMSurvivorSPPWesternForestBase
+  id: CCMSurvivorSPPWesternForestSpecialist
+  name: ccm-job-name-spp-specialist
+  startingGear: CCMGearSPPSpecialist
+  icon: "RMCJobIconSPPSpecialist"
+  roleWeight: 1
+  ranks:
+    RMCRankSPPSerzhant: []
+  spawnMenuRoleName: SPP Specialist (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: RMCAllowSuitStorage
+    - type: Skills
+      preset: CCMSkillPresetSPPSpecialist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi # mb change this?
+        state: spec_sniper
+    - type: IntelRescueSurvivorObjective
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: QYJWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-specialist
+  hidden: true
+
+- type: startingGear
+  parent: CCMGearSPPBase
+  id: CCMGearSPPSpecialist
+  equipment:
+    head: ArmorHelmetSPPHeavy
+    outerClothing: RMCArmorSPPSupport
+    suitstorage: RMCWeaponSMGType19
+    belt: CCMType19BeltFilled
+    back: CCMSatchelSPPWesternForestSurvivor
+    pocket2: RMCPouchExplosiveFilledC4SPP
+  inhand:
+    - RMCMotionDetector
+    - RMCWeaponLauncherHJRA12
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CCMSpawnPointSPPSpecialist
+  name: spp specialist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CCMSurvivorSPPWesternForestSpecialist
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_spp

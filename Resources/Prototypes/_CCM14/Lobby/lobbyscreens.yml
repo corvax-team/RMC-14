@@ -40,8 +40,8 @@
 
 - type: lobbyBackground
   id: 1CMLogo
-  background: /Textures/_CCM14/Lobby/lobbytgmc.png
+  background: /Textures/_CCM14/Lobby/lobbytgmc_green.png
 
 - type: lobbyBackground
   id: 2CMLogo
-  background: /Textures/_CCM14/Lobby/lobbyweyland.png
+  background: /Textures/_CCM14/Lobby/lobbyweyland_green.png

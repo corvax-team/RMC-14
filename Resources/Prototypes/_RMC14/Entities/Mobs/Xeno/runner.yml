@@ -13,8 +13,6 @@
   name: Runner
   description: A small red alien that looks like it could run fairly quickly...
   components:
-  - type: GhostRole
-    name: cm-job-name-xeno-runner
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Runner/runner.rsi
     layers:
@@ -50,6 +48,11 @@
     - Alive
     - Critical
     - Dead
+  - type: FiremanCarriable
+    canThrow: true
+    carrierWhitelist:
+      components:
+      - Synth
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -195,7 +198,6 @@
   - type: XenoEvolution
     strains:
     - RMCXenoRunnerAcider
-    - MCXenoRunnerMelter
   - type: VentCrawler
     ventCrawlIcon: runner
   - type: RMCActionOrder
@@ -221,8 +223,8 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      345: Critical
-      445: Dead
+      445: Critical #CCM Change | Base = 345
+      545: Dead #CCM Change | Base = 445
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -247,7 +249,7 @@
     canMeltStructures: false
   - type: XenoEnergy
     max: 1000
-    gain: 1
+    gain: 2 #CCM Change | Base = 1
     gainAttack: 14
     gainAttackDowned: 8
     ignoreLateInfected: true

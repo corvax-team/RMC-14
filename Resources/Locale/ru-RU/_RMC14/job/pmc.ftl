@@ -95,5 +95,12 @@ rmc-ghost-name-corp-dep-director = VI Заместитель директора 
 rmc-job-name-corp-dep-director = VI Заместитель директора
 rmc-ghost-name-corp-director = VI Директор Адм. крыла (Нейтральный)
 rmc-job-name-corp-director = VI Директор Адм. крыла
+
+# CL Bodyguard
+rmc-job-name-executive-bodyguard = Телохранитель
+rmc-job-description-executive-bodyguard = Защищайте Связного и его офис. Помните, что не следует изображать из себя головореза и при необходимости сотрудничать с военной полицией.
+rmc-job-prefix-executive-bodyguard = Охр.
+RMCWeYaExecutiveBodyguard = Телохранитель
+
 # Corpses
 rmc-job-name-pmc-operator-corpse = Оператор ЧВК

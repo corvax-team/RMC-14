@@ -9,7 +9,7 @@ rmc-chat-bans-submit = Добавить
 rmc-chat-bans-no-player-found = [color=red]Игрок с ID или именем { $target } не найден[/color]
 rmc-chat-bans-no-type-specified = [color=red]Выберите тип чата для блокировки![/color]
 rmc-chat-bans-added-admin-alert = { $admin } заблокировал чат { $type } для { $target } до { $date }. Причина: { $reason }
-rmc-chat-bans-dead = Dead
+rmc-chat-bans-dead = Мёртвый
 rmc-chat-bans-looc = LOOC
 rmc-chat-bans-ooc = OOC
 rmc-chat-bans-unban = Разбанить

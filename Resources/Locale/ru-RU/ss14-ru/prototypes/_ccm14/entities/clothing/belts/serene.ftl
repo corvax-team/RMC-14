@@ -1,0 +1,16 @@
+ent-CCMBeltUtilitySerene = утилитарный пояс ST-1
+    .desc = Вместительный пояс с кобурой, ячейками для магазинов и подсумком для вспомогательного оборудования. Стандартное обмундирование наёмников Serene Solutions Халькон Динамикс.
+ent-CCMBeltUtilitySereneOperativeFilled = { ent-CCMBeltUtilitySerene }
+    .desc = { ent-CCMBeltUtilitySerene.desc }
+ent-CCMBeltUtilitySereneLeaderFilled = { ent-CCMBeltUtilitySerene }
+    .desc = { ent-CCMBeltUtilitySerene.desc }
+ent-CCMBeltUtilitySereneEngineerFilled = { ent-CCMBeltUtilitySerene }
+    .desc = { ent-CCMBeltUtilitySerene.desc }
+ent-CCMBeltUtilitySereneMedicFilled = { ent-CCMBeltUtilitySerene }
+    .desc = { ent-CCMBeltUtilitySerene.desc }
+ent-CCMBeltUtilitySereneHeavyFilled = { ent-CCMBeltUtilitySerene }
+    .desc = { ent-CCMBeltUtilitySerene.desc }
+ent-CCMBeltUtilitySereneShotgun = тактическая разгрузка ST-1C
+    .desc = Ячейки и сумки под дробовые патроны с кобурой и сумкой для вспомогательного оборудования. Стандартное обмундирование наёмников Serene Solutions Халькон Динамикс.
+ent-CCMBeltUtilitySereneShotgunFilled = { ent-CCMBeltUtilitySereneShotgun }
+    .desc = { ent-CCMBeltUtilitySereneShotgun.desc }

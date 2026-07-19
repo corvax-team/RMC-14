@@ -2,20 +2,24 @@ using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Barricade;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Communications;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.FloorResin;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.ManageHive.Boons;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.Designer;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Coordinates;
+using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.GameTicking;
@@ -42,12 +46,14 @@ namespace Content.Shared._RMC14.Xenonids.Weeds;
 
 public abstract class SharedXenoWeedsSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedDirectionalAttackBlockSystem DirectionBlocker = default!; // CCM14
-
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionBlocker = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
@@ -61,6 +67,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly EntityManager _entities = default!;
+    [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly WeedboundWallSystem _weedboundWall = default!;
     [Dependency] private readonly DesignerNodeBindingSystem _designerBinding = default!;
 
@@ -516,9 +524,10 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         Dirty(ent);
     }
 
-    public bool CanSpreadWeedsPopup(Entity<MapGridComponent> grid, Vector2 tile, EntityUid? user, EntityUid? spreadFrom, bool semiWeedable = false, bool source = false) // CCM14
+    public bool CanSpreadWeedsPopup(Entity<MapGridComponent> grid, Vector2 tile, EntityUid? user, EntityUid? spreadFrom, bool semiWeedable = false, bool source = false)
     {
-        if (!_mapSystem.TryGetTileRef(grid, grid, tile, out var tileRef) ||
+        var tileIndex = (Vector2i)tile;
+        if (!_mapSystem.TryGetTileRef(grid, grid, tileIndex, out var tileRef) ||
             !_tile.TryGetDefinition(tileRef.Tile.TypeId, out var tileDef) ||
             tileDef.ID == ContentTileDefinition.SpaceID ||
             tileDef is ContentTileDefinition { WeedsSpreadable: false } &&
@@ -528,22 +537,19 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             GenericPopup();
             return false;
         }
-        // CCM14-start
-        if (!_area.CanResinPopup((grid, grid, null), (Vector2i) tile, user))
+
+        if (!_area.CanResinPopup((grid, grid, null), tileIndex, user))
             return false;
 
         if (spreadFrom is { } spreadOrigin && !TerminatingOrDeleted(spreadOrigin))
         {
             var originPos = _transform.GetMoverCoordinates(spreadOrigin).Position;
             var direction = (tile - originPos).Normalized();
-
-            // Do a raycast to see if any entities with offset fixtures are blocking the spread
-            if (DirectionBlocker.IsDirectionBlocked(spreadOrigin, direction))
+            if (_directionBlocker.IsDirectionBlocked(spreadOrigin, direction))
                 return false;
         }
 
-        var targetTileAnchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, (Vector2i) tile);
-        // CCM14-end
+        var targetTileAnchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, tileIndex);
         while (targetTileAnchored.MoveNext(out var uid))
         {
             if (_blockWeedsQuery.HasComp(uid))
@@ -568,7 +574,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     public bool CanPlaceWeedsPopup(EntityUid xeno,
         Entity<MapGridComponent> grid,
         EntityCoordinates coordinates,
-        bool limitDistance)
+        bool limitDistance,
+        EntityCoordinates? popupAt = null)
     {
         if (_rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(coordinates, out var oldWeeds))
         {
@@ -591,7 +598,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         if (limitDistance && !HasWeedsNearby(grid, coordinates))
         {
             _popup.PopupClient("We can only plant weed nodes near other weed nodes our hive owns!",
-                xeno,
+                popupAt ?? xeno.ToCoordinates(),
                 xeno,
                 PopupType.SmallCaution);
             return false;
@@ -601,13 +608,11 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         {
             foreach (var entity in entities)
             {
-                // CCM14-start
                 if (!HasComp<ClimbableComponent>(entity) && !HasComp<RMCReactorPoweredLightComponent>(entity) ||
                     HasComp<BarricadeComponent>(entity))
-                // CCM14-end
                     continue;
 
-                _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-blocked"), xeno, xeno, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-blocked"), popupAt ?? xeno.ToCoordinates(), xeno, PopupType.SmallCaution);
                 return false;
             }
         }

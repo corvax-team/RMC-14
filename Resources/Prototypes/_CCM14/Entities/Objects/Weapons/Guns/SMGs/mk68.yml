@@ -1,0 +1,116 @@
+- type: entity
+  parent: WeaponSMGMP5
+  name: Mk68 "skorpion" SMG
+  id: CCMWeaponSMGMk68
+  description: A standart SMG produced by Vitezstvi PMC. Popular among pilots and scouts.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Guns/SMGs/mk68.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _CCM14/Objects/Weapons/Guns/SMGs/mk68.rsi
+  - type: Gun
+    shotsPerBurst: 3
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/smg_light.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 1
+    recoilUnwielded: 1
+    scatterWielded: 3
+    scatterUnwielded: 8
+    baseFireRate: 4
+    burstScatterMult: 3
+    modifiers:
+      Burst:
+        fireDelay: 0.0999
+        maxScatterModifier: 8
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        maxScatterModifier: 3
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: MagazineAmmoProvider
+    autoEject: true
+    soundAutoEject: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: CCMMagazineSMGMk68
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
+        priority: 1
+        whitelist:
+          tags:
+          - CCMMagazineSMGMk68
+  - type: GunDamageModifier
+    multiplier: 1.35
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: CCMMagazineSMGMk68
+  name: "Mk68 magazine (10mm)"
+  description: "A 10mm magazine for the Mk68."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - CCMMagazineSMGMk68
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CCMCartridge10mmSMG
+    proto: CCMCartridge10mmSMG
+    capacity: 25
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Ammunition/Magazines/mk68_mag.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: CMCartridge10x20mm
+  id: CCMCartridge10mmSMG
+  name: cartridge (10mm SMG)
+  description: A 10mm cartridge for the Mk68 submachinegun.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - CCMCartridge10mmSMG
+  - type: CartridgeAmmo
+    proto: CCMBullet10mmSMG 
+
+- type: entity
+  parent: Bullet10x20mm
+  id: CCMBullet10mmSMG 
+  categories: [ HideSpawnMenu ]
+
+- type: Tag
+  id: CCMMagazineSMGMk68
+
+- type: Tag
+  id: CCMCartridge10mmSMG

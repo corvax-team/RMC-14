@@ -44,6 +44,8 @@ humanoid-profile-editor-preference-satchel = Satchel
 humanoid-profile-editor-preference-duffelbag = Duffelbag
 humanoid-profile-editor-guidebook-button-tooltip = Click for more info
 
+humanoid-profile-editor-rank-auto = Auto
+
 # Spawn priority
 humanoid-profile-editor-preference-spawn-priority-none = None
 humanoid-profile-editor-preference-spawn-priority-arrivals = Arrivals

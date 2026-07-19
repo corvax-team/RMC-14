@@ -106,6 +106,12 @@ namespace Content.Server.Database
                 .HasDefaultValue(1f);
             // CCM barks - end
 
+            // Forge TTS - start
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.Voice)
+                .HasDefaultValue("Papich");
+            // Forge TTS - end
+
             // CCM profile background - start
             modelBuilder.Entity<Profile>()
                 .Property(p => p.OriginId)
@@ -657,12 +663,14 @@ namespace Content.Server.Database
         public RMCNamedItems? NamedItems { get; set; }
         public RMCSquadPreference? SquadPreference { get; set; }
         public string ArmorPreference { get; set; } = null!;
+        public List<Rank> Ranks { get; } = new();
         public bool PlaytimePerks { get; set; } = true;
         public string XenoPrefix { get; set; } = string.Empty;
         public string XenoPostfix { get; set; } = string.Empty;
         public string BarkVoice { get; set; } = "BarkMaleVoice01";
         public float BarkPitch { get; set; } = 1f;
         public float BarkSpeed { get; set; } = 1f;
+        public string Voice { get; set; } = "Papich";
         public string OriginId { get; set; } = string.Empty;
         public string ReligionId { get; set; } = "agnostic";
         public string CorporateRelationId { get; set; } = "neutral";
@@ -720,6 +728,17 @@ namespace Content.Server.Database
 
         public string TraitName { get; set; } = null!;
     }
+
+    public class Rank
+    {
+        public int Id { get; set; }
+        public Profile Profile { get; set; } = null!;
+        public int ProfileId { get; set; }
+
+        public string JobName { get; set; } = null!;
+        public string RankName { get; set; } = null!;
+    }
+
 
     #region Loadouts
 

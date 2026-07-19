@@ -1,0 +1,109 @@
+- type: job
+  parent: CMJobBase
+  id: CCMSereneBreacher
+  name: ccm-job-name-serene-breacher
+  description: ccm-ghost-role-information-serene-description
+  playTimeTracker: CCMJobSereneBreacher
+  ranks:
+    CCMRankSereneMlCorporal: [ ]
+  greeting: ccm-job-greeting-serene
+  startingGear: CCMGearSereneBreacher
+  icon: "CCMJobIconSereneBreacher"
+  accessGroups:
+  - Colony
+  - HospitalCorpsman
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-sl
+  spawnMenuRoleName: Serene Solutions Breacher
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Serene
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 3
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 5
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillJtac: 1
+    - type: JobPrefix
+      prefix: ccm-job-prefix-serene
+  hidden: true
+
+- type: entity
+  id: CCMRandomHumanoidSereneBreacher
+  name: serene ghost role breacher
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Objects/CMIDs/halcyon.rsi
+      state: halcyon
+  - type: RandomHumanoidSpawner
+    settings: CCMSereneBreacher
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: CCMSereneBreacher
+  components:
+  - type: GhostRole
+    name: ccm-ghost-name-serene-breacher
+    description: ccm-ghost-role-information-serene-description
+    rules: ccm-ghost-role-information-serene-rules
+    reregister: false
+    job: CCMSereneBreacher
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 18000 # 5 Hours
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadSerene
+
+- type: startingGear
+  id: CCMGearSereneBreacher
+  equipment:
+    head: CCMHelmetSereneBreacher
+    ears: CCMHeadsetSerene
+    jumpsuit: CCMJumpsuitSereneSolutions
+    outerClothing: CCMArmorSereneVestBreacher
+    gloves: RMCHandsVeteran
+    shoes: RMCBootsSPPFilled
+    mask: CMMaskCoif
+    neck: RMCMaskScarfTanDown
+    suitstorage: CCMWeaponShotgunType12G
+    id: RMCIDCardHalcyon
+    belt: CCMBeltUtilitySereneShotgunFilled
+    back: CCMSatchelLightpackSerene
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    pocket2: RMCPouchExplosiveFilledHEFA
+  storage:
+    outerClothing:
+    - RMCExplosiveBreachingCharge
+    - RMCExplosiveBreachingCharge
+    back:
+    - RMCMRESPP
+    - CMPackFlare
+    - RMCExplosivePlastic
+    - RMCExplosivePlastic
+
+- type: playTimeTracker
+  id: CCMJobSereneBreacher
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CCMJobIconSereneBreacher
+  icon:
+    sprite: _CCM14/Interface/cm_job_icons.rsi
+    state: serene_breacher

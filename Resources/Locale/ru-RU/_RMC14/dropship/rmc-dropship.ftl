@@ -11,6 +11,18 @@ rmc-dropship-pre-hijack =
        *[other] минут
     }.
 rmc-dropship-invalid-hijack = Из терминала вырываются вспышки данных, но их суть за пределами вашего понимания.
+
+rmc-dropship-terminal-clueless = Вы растерянно смотрите на {$terminal}.
+rmc-dropship-no-destinations-nearby = Рядом с вами нет пунктов назначения для десантных кораблей!
+rmc-dropship-already-incoming = Сюда уже летит десантный корабль!
+rmc-dropship-already-here = Здесь уже находится десантный корабль!
+rmc-dropship-not-primary-shuttle = Шаттл не отвечает на запросы, похоже, это не основной шаттл.
+rmc-dropship-call-to-location = Вы вызываете один из десантных кораблей в своё местоположение.
+rmc-dropship-none-available = Нет доступных десантных кораблей! Подождите немного.
+rmc-dropship-no-remote-control = Этот десантный корабль не имеет включённого дистанционного управления.
+rmc-dropship-busy = Этот десантный корабль сейчас занят. Пожалуйста, повторите попытку позже.
+rmc-dropship-now-on-its-way = Этот десантный корабль уже в пути.
+
 rmc-dropship-weapons-title = Консоль управления вооружением
 rmc-dropship-weapons-main-screen-text =
     К.К.М.П.

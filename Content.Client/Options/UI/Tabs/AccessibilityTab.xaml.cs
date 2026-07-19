@@ -32,6 +32,7 @@ public sealed partial class AccessibilityTab : Control
         RegisterAnnouncementOptions();
         Control.AddOptionCheckBox(RMCCVars.RMCXenoAbilityPreviews, XenoAbilityPreviewsCheckBox); // RMC14
         Control.AddOptionCheckBox(RMCCVars.RMCShowPings, ShowPingsCheckBox); // RMC14
+        Control.AddOptionCheckBox(RMCCVars.RMCMarineEquipmentPreviews, MarineEquipmentPreviewsCheckBox); // RMC14
 
         Control.AddOptionCheckBox(CCVars.AccessibilityClientCensorNudity, CensorNudityCheckBox);
 

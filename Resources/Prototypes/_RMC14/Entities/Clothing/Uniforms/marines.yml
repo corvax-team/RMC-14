@@ -125,7 +125,6 @@
       Snow: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/snow.rsi
       Classic: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/classic.rsi
       Urban: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/urban.rsi
-
 # CBRN
 
 - type: entity

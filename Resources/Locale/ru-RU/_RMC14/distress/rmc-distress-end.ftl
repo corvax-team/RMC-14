@@ -10,4 +10,5 @@ rmc-discord-round-notifications-minor-marine = победой морпехов
 rmc-discord-round-notifications-major-xeno = крупной победой ксеноморфов
 rmc-discord-round-notifications-minor-xeno = победой ксеноморфов
 rmc-discord-round-notifications-all-died = гибелью всех участников
+rmc-discord-round-notifications-self-destruct = полным уничтожением корабля
 rmc-discord-round-notifications-unknown-result = неизвестным результатом

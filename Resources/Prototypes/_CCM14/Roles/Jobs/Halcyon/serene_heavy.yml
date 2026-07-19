@@ -1,0 +1,108 @@
+- type: job
+  parent: CMJobBase
+  id: CCMSereneHeavy
+  name: ccm-job-name-serene-heavy
+  description: ccm-ghost-role-information-serene-description
+  playTimeTracker: CCMJobSereneHeavy
+  ranks:
+    CCMRankSereneStCorporal: []
+  greeting: ccm-job-greeting-serene
+  startingGear: CCMGearSereneHeavy
+  icon: "CCMJobIconSereneHeavy"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  - HospitalCorpsman
+  supervisors: cm-job-supervisors-sl
+  spawnMenuRoleName:  Serene Solutions Heavy Specialist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Serene
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 5
+        RMCSkillEngineer: 1
+        RMCSkillFirearms: 3
+        RMCSkillFireman: 2
+        RMCSkillJtac: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillSpecialistWeapons: 1
+    - type: JobPrefix
+      prefix: ccm-job-prefix-serene
+  hidden: true
+
+- type: entity
+  id: CCMRandomHumanoidSereneHeavy
+  name: serene ghost role heavy specialist
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Objects/CMIDs/halcyon.rsi
+      state: halcyon
+  - type: RandomHumanoidSpawner
+    settings: CCMSereneHeavy
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: CCMSereneHeavy
+  components:
+  - type: GhostRole
+    name: ccm-ghost-name-serene-heavy
+    description: ccm-ghost-role-information-serene-description
+    rules: ccm-ghost-role-information-serene-rules
+    reregister: false
+    job: CCMSereneHeavy
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadSerene
+
+- type: startingGear
+  id: CCMGearSereneHeavy
+  equipment:
+    head: CCMHelmetSereneHeavy
+    ears: CCMHeadsetSerene
+    jumpsuit: CCMJumpsuitSereneSolutions
+    outerClothing: CCMArmorSereneVestHeavy
+    gloves: RMCHandsVeteran
+    shoes: RMCBootsSPPFilled
+    suitstorage: CCMWeaponRifleTypexs13
+    id: RMCIDCardHalcyon
+    mask: CMMaskCoif
+    belt: CCMBeltUtilitySereneHeavyFilled
+    back: CCMSatchelLightpackSerene
+    pocket1: RMCPouchMagazineLarge
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+  storage:
+    back:
+    - RMCMotionDetector
+    - RMCMRESPP
+    - CMPackFlare
+    pocket1:
+    - CCMMagazineRifleTypexs13
+    - CCMMagazineRifleTypexs13
+    - CCMMagazineRifleTypexs13
+    - CCMMagazineRifleTypexs13
+    outerClothing:
+    - CCMMagazineRifleTypexs13
+    - CCMMagazineRifleTypexs13
+
+- type: playTimeTracker
+  id: CCMJobSereneHeavy
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CCMJobIconSereneHeavy
+  icon:
+    sprite: _CCM14/Interface/cm_job_icons.rsi
+    state: serene_heavy

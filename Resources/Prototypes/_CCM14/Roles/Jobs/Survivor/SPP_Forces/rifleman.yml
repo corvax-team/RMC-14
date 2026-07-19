@@ -1,0 +1,53 @@
+- type: job
+  parent: CCMSurvivorSPPWesternForestBase
+  id: CCMSurvivorSPPWesternForestRifleman
+  name: ccm-job-name-spp-rifleman
+  startingGear: CCMGearSPPRifleman
+  icon: "RMCJobIconSPPRifleman"
+  ranks:
+    RMCRankPrivate: []
+  spawnMenuRoleName: SPP Rifleman (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: RMCAllowSuitStorage
+    - type: Skills
+      preset: CCMSkillPresetSPPRifleman
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi # mb change this?
+        state: private
+    - type: IntelRescueSurvivorObjective
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-rifleman
+    - type: SpotterWhitelist
+  hidden: true
+
+- type: startingGear
+  parent: CCMGearSPPBase
+  id: CCMGearSPPRifleman
+  equipment:
+    head: ArmorHelmetSPP
+    outerClothing: RMCArmorSPP
+    back: CCMSatchelSPPWesternForestSurvivor
+    belt: RMCType71BeltFilled
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+    suitstorage: RMCWeaponRifleType71
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CCMSpawnPointSPPRifleman
+  name: SPP Survivor rifleman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CCMSurvivorSPPWesternForestRifleman
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_spp

@@ -1,0 +1,22 @@
+- type: entity
+  parent: RMCArmorM4PMCNoLight
+  id: CCMArmorVIBodyguardCarapace
+  name: M47 light carapace
+  description: Standart protection gear of Vitezstvi's personal protection officers. Provides protection and doesn't interfere with movement.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/vi_bodyguard/carapace.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 20
+    bio: 15
+  - type: RMCArmorSpeedTier
+    speedTier: medium
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_MEDIUM
+    walkModifier: 0.725
+    sprintModifier: 0.725
+  - type: Storage
+    grid:
+    - 0,0,1,1 # 1 slot
+  - type: ItemCamouflage
+    camouflageVariations: { }

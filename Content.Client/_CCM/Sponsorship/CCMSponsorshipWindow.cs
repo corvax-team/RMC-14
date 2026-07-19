@@ -232,12 +232,22 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
     {
         _statusLabel.Text = Loc.GetString("ccm-sponsorship-current-tier",
             ("tier", GetLevelDisplayName(level)));
-        _expirationLabel.Text = expirationUnixSeconds > 0
-            ? Loc.GetString("ccm-sponsorship-expires",
+
+        // У нас нет источника даты окончания подписки, поэтому строку "Подписка не активна"
+        // не показываем вовсе — метка скрывается, когда даты нет.
+        if (expirationUnixSeconds > 0)
+        {
+            _expirationLabel.Visible = true;
+            _expirationLabel.Text = Loc.GetString("ccm-sponsorship-expires",
                 ("date", DateTimeOffset.FromUnixTimeSeconds(expirationUnixSeconds)
                     .ToLocalTime()
-                    .ToString("dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture)))
-            : Loc.GetString("ccm-sponsorship-expires-none");
+                    .ToString("dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture)));
+        }
+        else
+        {
+            _expirationLabel.Visible = false;
+            _expirationLabel.Text = string.Empty;
+        }
     }
 
     private void BuildTierCards(SponsorLevel currentLevel)
@@ -367,11 +377,15 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
             },
         });
 
+        var titleText = GetLevelDisplayName(level);
+        // Длинные названия (например "Подмастерье Форжа") не помещаются в карточку при базовом
+        // размере шрифта и вылезали за рамку — подбираем максимальный размер, который влезает.
+        var fittedTitleSize = FitFontSize("/Fonts/Exo2/Exo2-Bold.ttf", titleText, titleSize, cardWidth - 28);
         content.AddChild(new Label
         {
-            Text = GetLevelDisplayName(level),
+            Text = titleText,
             HorizontalAlignment = HAlignment.Center,
-            FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", titleSize),
+            FontOverride = _resourceCache.GetFont("/Fonts/Exo2/Exo2-Bold.ttf", fittedTitleSize),
             FontColorOverride = accent,
         });
 
@@ -439,6 +453,29 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
         return panel;
     }
 
+    private int FitFontSize(string fontPath, string text, int maxSize, float maxWidth, int minSize = 14)
+    {
+        for (var size = maxSize; size > minSize; size--)
+        {
+            if (MeasureTextWidth(_resourceCache.GetFont(fontPath, size), text) <= maxWidth)
+                return size;
+        }
+
+        return minSize;
+    }
+
+    private static float MeasureTextWidth(Font font, string text)
+    {
+        var width = 0f;
+        foreach (var rune in text.EnumerateRunes())
+        {
+            if (font.TryGetCharMetrics(rune, 1f, out var metrics))
+                width += metrics.Advance;
+        }
+
+        return width;
+    }
+
     private static Color GetTierAccent(SponsorLevel level)
     {
         return level switch
@@ -490,7 +527,7 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
         // На карточке показываем ТОЛЬКО новые для данного порога перки.
         // О том, что более высокий уровень включает все предыдущие, говорится в info-line-1.
         //   Level1  - приоритетный вход, цвет OOC, ckey в конце раунда
-        //   Level2  - цвет LOOC, готовый OOC-тег, базовая кастомизация
+        //   Level2  - таймеры всех ролей, цвет LOOC, готовый OOC-тег, базовая кастомизация
         //   Level3+ - свой OOC-тег, скин призрака, скины ксеноморфов, расширенная кастомизация
         return level switch
         {
@@ -503,6 +540,7 @@ public sealed class CCMSponsorshipWindow : DefaultCMWindow
             ],
             SponsorLevel.Level2 =>
             [
+                "ccm-sponsorship-perk-role-timers",
                 "ccm-sponsorship-perk-looc-color",
                 "ccm-sponsorship-perk-ooc-tag-preset",
                 "ccm-sponsorship-perk-customization"

@@ -14,14 +14,7 @@
     - type: TacticalMapLayerTracked
       layers: [FactionSurvivor]
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 2
-        RMCSkillFirearms: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
-        RMCSkillVehicles: 1
+      preset: RMCSkillPresetSurvivorParamedic
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHybrisaEMTParamedic
     - type: RMCSurvivor

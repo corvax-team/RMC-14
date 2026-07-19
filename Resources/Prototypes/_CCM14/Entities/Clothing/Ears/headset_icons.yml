@@ -6,3 +6,12 @@
   - type: GrantMarineIcons
     factions:
     - Petrishev
+
+- type: entity
+  abstract: true
+  parent: RMCHeadsetIcons
+  id: CCMHeadsetIconsSerene
+  components:
+  - type: GrantMarineIcons
+    factions:
+    - Serene

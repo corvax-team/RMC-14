@@ -1,0 +1,29 @@
+- type: rank
+  id: CCMRankSereneOperative
+  name: Оперативник
+  prefix: Опер.
+  paygrade: Ser-1
+
+- type: rank
+  id: CCMRankSereneMlCorporal
+  name: Младший Капрал
+  prefix: Мл. Кап.
+  paygrade: Ser-2
+
+- type: rank
+  id: CCMRankSereneStCorporal
+  name: Старший Капрал
+  prefix: Ст. Кап.
+  paygrade: Ser-3
+
+- type: rank
+  id: CCMRankSereneMlSerzhant
+  name: Младший Сержант
+  prefix: Мл. Серж.
+  paygrade: Ser-4
+
+- type: rank
+  id: CCMRankSereneStSerzhant
+  name: Старший Сержант
+  prefix: Ст. Серж.
+  paygrade: Ser-5

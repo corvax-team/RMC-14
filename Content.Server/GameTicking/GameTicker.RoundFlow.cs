@@ -671,6 +671,7 @@ namespace Content.Server.GameTicking
                 DistressSignalRuleResult.MajorXenoVictory => Loc.GetString("rmc-discord-round-notifications-major-xeno"),
                 DistressSignalRuleResult.MinorXenoVictory => Loc.GetString("rmc-discord-round-notifications-minor-xeno"),
                 DistressSignalRuleResult.AllDied => Loc.GetString("rmc-discord-round-notifications-all-died"),
+                DistressSignalRuleResult.SelfDestruct => Loc.GetString("rmc-discord-round-notifications-self-destruct"),
                 _ => Loc.GetString("rmc-discord-round-notifications-unknown-result"),
             };
         }

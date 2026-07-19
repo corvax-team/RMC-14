@@ -44,12 +44,13 @@
   - type: MCXenoPounce
     delay: 0.2
     maxDistance: 13
-    strength: 45
+    stopOnHit: true
+    hitKnockdownTime: 2
+  - type: MCXenoPouncing
     zigZag: false
     zigZagAmplitude: 3.5
     zigZagFrequency: 10
-    stopOnHit: true
-    hitKnockdownTime: 2
+    strength: 45
   - type: XenoRounyScreech
   # - type: MCXenoPounceEmote
   #   emote: XenoRoar
@@ -63,13 +64,11 @@
         Blunt: 20
     healPerHit: 20
     speedMultiplier: 1.5
-    maxDistance: 8
     maxTiles: 10
     hitSound:
       path: /Audio/_MC/Effects/alien_tail_attack.ogg
     attackEffect: RMCEffectExtraSlash
     healEffect: RMCEffectHealFlurry
-    telegraphEffect: RMCEffectXenoTelegraphRed
     emote: XenoRoar
     emoteDelay: 2
   - type: XenoPlasma

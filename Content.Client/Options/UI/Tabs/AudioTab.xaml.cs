@@ -1,5 +1,6 @@
 ﻿// CM14 rework: non-RMC edit marker.
 using Content.Client.Audio;
+using Content.Shared._Forge; // Forge TTS
 using Content.Shared._RMC14.CCVar;
 using Content.Shared.CCVar;
 using Robust.Client.Audio;
@@ -67,6 +68,12 @@ public sealed partial class AudioTab : Control
         Control.AddOptionPercentSlider(
             CCVars.BarksVolume,
             SliderVolumeBarks,
+            scale: 1f);
+
+        // Forge TTS
+        Control.AddOptionPercentSlider(
+            ForgeVars.TTSVolume,
+            SliderVolumeTts,
             scale: 1f);
 
         Control.AddOptionSlider(

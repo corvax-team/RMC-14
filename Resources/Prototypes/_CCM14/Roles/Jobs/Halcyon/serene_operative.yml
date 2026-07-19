@@ -1,0 +1,107 @@
+- type: job
+  parent: CMJobBase
+  id: CCMSereneOperative
+  name: ccm-job-name-serene-operative
+  description: ccm-ghost-role-information-serene-description
+  playTimeTracker: CCMJobSereneOperative
+  ranks:
+    CCMRankSereneOperative: []
+  greeting: ccm-job-greeting-serene
+  startingGear: CCMJobSereneOperative
+  icon: CCMJobIconSereneOperative
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - HospitalCorpsman
+  supervisors: cm-job-supervisors-sl
+  spawnMenuRoleName: Serene Solutions Operative
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Serene
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 3
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 3
+    - type: JobPrefix
+      prefix: ccm-job-prefix-serene
+  hidden: true
+
+- type: entity
+  id: CCMRandomHumanoidSereneOperative
+  name: serene ghost role operative
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Objects/CMIDs/halcyon.rsi
+      state: halcyon
+  - type: RandomHumanoidSpawner
+    settings: CCMSereneOperative
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: CCMSereneOperative
+  components:
+  - type: GhostRole
+    name: ccm-ghost-name-serene-operative
+    description: ccm-ghost-role-information-serene-description
+    rules: ccm-ghost-role-information-serene-rules
+    reregister: false
+    job: CCMSereneOperative
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadSerene
+
+- type: startingGear
+  id: CCMJobSereneOperative
+  equipment:
+    id: RMCIDCardHalcyon
+    jumpsuit: CCMJumpsuitSereneSolutions
+    outerClothing: CCMArmorSereneVest
+    gloves: RMCHandsVeteran
+    head: CCMHelmetSerene
+    shoes: RMCBootsSPPFilled
+    mask: CMMaskCoif
+    neck: RMCMaskScarfTanDown
+    ears: CCMHeadsetSerene
+    back: CCMSatchelLightpackSerene
+    belt: CCMBeltUtilitySereneOperativeFilled
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment
+    pocket2: RMCPouchMagazineLarge
+    suitstorage: CCMWeaponRifleType12c
+  storage:
+    pocket2:
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    back:
+    - CMPackFlare
+    - RMCMRESPP
+    outerClothing:
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+
+
+- type: playTimeTracker
+  id: CCMJobSereneOperative
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CCMJobIconSereneOperative
+  icon:
+    sprite: _CCM14/Interface/cm_job_icons.rsi
+    state: serene_operative

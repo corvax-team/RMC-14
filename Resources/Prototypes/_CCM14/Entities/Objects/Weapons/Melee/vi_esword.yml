@@ -1,0 +1,38 @@
+- type: entity
+  id: CCMMeleeVIEsword
+  parent: BaseMeleeWeaponEnergy
+  name: gorgon pattern energy energy sword
+  description: A standart infantry energy sword utilized by Vitezstvi mercenaries. Made by Nanotrasen.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Melee/vi_esword/vi_esword_icon.rsi
+    layers:
+    - state: e_sword
+    - state: e_sword_blade
+      color: "#000000"
+      visible: false
+      shader: unshaded
+      map: [ "blade" ]
+  - type: Item
+    sprite: _CCM14/Objects/Weapons/Melee/vi_esword/vi_esword_inhands.rsi
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      path: /Audio/Weapons/eblade1.ogg
+      params:
+        variation: 0.250
+    activatedSoundOnHitNoDamage:
+      path: /Audio/Weapons/eblade1.ogg
+      params:
+        variation: 0.250
+        volume: -10
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/eblademiss.ogg
+      params:
+        variation: 0.125
+    activatedDamage:
+      types:
+        Slash: 30
+        Heat: 30
+        Structural: 20
+  - type: StaticPrice
+    price: 2500

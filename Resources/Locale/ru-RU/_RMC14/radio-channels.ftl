@@ -28,4 +28,3 @@ chat-radio-royal-marine = Имперская пехота
 chat-radio-tse = Империя Миртана
 chat-radio-marine-sun-riders = Солнценаездники
 chat-radio-hivemind = Улей
-chat-radio-petrishevtsi = Петрищевцы

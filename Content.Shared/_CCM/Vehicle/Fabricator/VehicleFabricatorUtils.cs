@@ -23,24 +23,29 @@ public static class VehicleFabricatorUtils
         _ => null
     };
 
-    public static VehicleFabricatorCategory GetCategoryFromHardpointType(string? hardpointType)
+    public static VehicleFabricatorCategory GetCategoryFromHardpointType(string? hardpointTypeId)
     {
-        if (string.IsNullOrWhiteSpace(hardpointType))
+        if (string.IsNullOrWhiteSpace(hardpointTypeId))
             return VehicleFabricatorCategory.Support;
 
-        var type = hardpointType.Trim().ToLowerInvariant();
-        
-        return type switch
+        var type = hardpointTypeId.Trim();
+        if (type.StartsWith("HardpointType", StringComparison.OrdinalIgnoreCase))
+            type = type.Substring("HardpointType".Length);
+        else if (type.StartsWith("HardpointSlotType", StringComparison.OrdinalIgnoreCase))
+            type = type.Substring("HardpointSlotType".Length);
+
+        var key = type.ToLowerInvariant();
+        return key switch
         {
-            "wheel" or "chassis" => VehicleFabricatorCategory.Chassis,
-            "turret" or "primary" => VehicleFabricatorCategory.Primary,
+            "wheel" or "treads" or "tires" => VehicleFabricatorCategory.Chassis,
+            "turret" => VehicleFabricatorCategory.Primary,
             "secondary" => VehicleFabricatorCategory.Secondary,
             "cannon" => VehicleFabricatorCategory.Cannon,
             "launcher" => VehicleFabricatorCategory.Launcher,
             "armor" => VehicleFabricatorCategory.Armor,
             "support" or "supportattachment" => VehicleFabricatorCategory.Support,
-            "roof" or "roofattachment" => VehicleFabricatorCategory.RoofAttachment,
-            "front" or "frontattachment" => VehicleFabricatorCategory.FrontAttachment,
+            "roofattachment" => VehicleFabricatorCategory.RoofAttachment,
+            "frontattachment" => VehicleFabricatorCategory.FrontAttachment,
             _ => VehicleFabricatorCategory.Support
         };
     }

@@ -28,3 +28,5 @@ ent-RMCCrateFlashlights = ящик фонариков
     .desc = { ent-RMCCrateConstruction.desc }
 ent-RMCCrateHighCapacityPowerCell = ящик батарей высокой ёмкости
     .desc = { ent-RMCCrateConstruction.desc }
+ent-RMCCrateFoldingBarricades = ящик складных баррикад MB-6
+    .desc = { ent-RMCCrateConstruction.desc }

@@ -1,0 +1,258 @@
+- type: entity
+  parent: CMBeltBaseStorage
+  id: CCMBeltUtilitySerene
+  name: ST-1 utilitarian belt
+  description: An ammo bearing clips with a holster and a little bag, standart equipment among Halcyon Synamics' Serene Solutions mercenaries.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Belt/Serene/standart.rsi
+    layers:
+    - state: icon
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Belt/Serene/standart.rsi
+    slots:
+    - belt
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,19,1 # 10 slots, вроде..
+    whitelist:
+      tags:
+      - CCMWeaponPistolType74C
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazinePistol
+      - DiscreteHealthAnalyzer
+      - CMSurgicalLine
+      - Crowbar
+      - Screwdriver
+      - Wirecutter
+      - Wrench
+      - CableCoil
+      - Multitool
+      - Flashlight
+      - PowerCell
+      - CMFireExtinguisherPortable
+      - RMCExplosiveBreachingCharge
+      - RMCNailgunCompact
+      - RMCNailgunTactical
+      - RMCCircuitboard
+      - RMCSynthResetKey
+      components:
+      - Welder
+      - PowerCell
+      - TrayScanner
+      - GasAnalyzer
+      - LightReplacer
+      - EntrenchingTool
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - EntrenchingTool
+      - LightReplacer
+  - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        tags:
+        - Sidearm
+    - popup: rmc-storage-limit-max-mags
+      count: 8
+      whitelist:
+        tags:
+        - CMMagazinePistol
+        - CMMagazineRifle
+  - type: CMHolster
+    whitelist:
+      tags:
+      - Sidearm
+
+- type: entity
+  parent: CMBeltBaseStorage
+  id: CCMBeltUtilitySereneShotgun
+  name: ST-1C shotgun shells loading webbing
+  description: An ammo bearing clips with a holster and a little bag, standart equipment among Halcyon Synamics' Serene Solutions mercenaries.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Belt/Serene/breacher.rsi
+    layers:
+    - state: icon
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Belt/Serene/breacher.rsi
+    slots:
+    - belt
+  - type: Storage
+    maxItemSize: Large
+    grid:
+    - 0,0,19,3
+    whitelist:
+      tags:
+      - CCMWeaponPistolType74C
+      - RMCShellShotgun
+      - CMMagazinePistol
+      - Crowbar
+      - Screwdriver
+      - Wirecutter
+      - Wrench
+      - CableCoil
+      - Multitool
+      - Flashlight
+      - PowerCell
+      - CMFireExtinguisherPortable
+      - RMCExplosiveBreachingCharge
+      - RMCNailgunCompact
+      - RMCNailgunTactical
+      - RMCCircuitboard
+      - RMCSynthResetKey
+      components:
+      - Welder
+      - PowerCell
+      - TrayScanner
+      - GasAnalyzer
+      - LightReplacer
+      - EntrenchingTool
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - EntrenchingTool
+      - LightReplacer
+  - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: ccm-storage-limit-no-space
+      count: 2
+      whitelist:
+        tags:
+        - Crowbar
+        - Screwdriver
+        - Wirecutter
+        - Wrench
+        - CableCoil
+        - Multitool
+        - Flashlight
+        - PowerCell
+        - CMFireExtinguisherPortable
+        - RMCExplosiveBreachingCharge
+        - RMCNailgunCompact
+        - RMCNailgunTactical
+        - RMCCircuitboard
+        - RMCSynthResetKey
+        components:
+        - Welder
+        - PowerCell
+        - TrayScanner
+        - GasAnalyzer
+        - LightReplacer
+        - EntrenchingTool
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        tags:
+        - Sidearm
+    - popup: rmc-storage-limit-max-mags
+      count: 4
+      whitelist:
+        tags:
+        - CMMagazinePistol
+  - type: CMHolster
+    whitelist:
+      tags:
+      - Sidearm
+
+- type: entity
+  parent: CCMBeltUtilitySerene
+  id: CCMBeltUtilitySereneLeaderFilled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMWeaponPistolType74C
+    - id: RMCMagazinePistolT73
+      amount: 3
+    - id: CMMagazineRifleM4SPR
+      amount: 2
+    - id: CMMagazineRifleM4SPRAP
+      amount: 2
+    - id: RMCMagazineRifleM4SPRIncendiary
+    - id: CMFireExtinguisherPortable
+
+- type: entity
+  parent: CCMBeltUtilitySerene
+  id: CCMBeltUtilitySereneOperativeFilled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMWeaponPistolType74C
+    - id: RMCMagazinePistolT73
+      amount: 3
+    - id: CMMagazineRifleM54C
+      amount: 2
+    - id: CMMagazineRifleM54CAP
+      amount: 2
+    - id: CMMagazineRifleM54CExt
+    - id: RMCExplosiveBreachingCharge
+
+- type: entity
+  parent: CCMBeltUtilitySerene
+  id: CCMBeltUtilitySereneMedicFilled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMWeaponPistolType74C
+    - id: RMCMagazinePistolT73
+      amount: 2
+    - id: RMCMagazineSMGType19
+      amount: 4
+    - id: RMCMagazineSMGType19Drum
+    - id: CMHealthAnalyzer
+    - id: CMSurgicalLine
+
+- type: entity
+  parent: CCMBeltUtilitySereneShotgun
+  id: CCMBeltUtilitySereneShotgunFilled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMWeaponPistolType74C
+    - id: RMCMagazinePistolT73
+      amount: 3
+    - id: RMCShellShotgunHeavyBuckshot
+      amount: 7
+    - id: RMCShellShotgunIncendiaryHeavyBuckshot
+      amount: 2
+    - id: RMCShellShotgunHeavySlugs
+      amount: 4
+
+- type: entity
+  parent: CCMBeltUtilitySerene
+  id: CCMBeltUtilitySereneEngineerFilled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMWeaponPistolType74C
+    - id: RMCMagazinePistolT73
+      amount: 2
+    - id: RMCMagazineSMGType19
+      amount: 4
+    - id: RMCMagazineSMGType19Drum
+      amount: 3
+
+- type: entity
+  parent: CCMBeltUtilitySerene
+  id: CCMBeltUtilitySereneHeavyFilled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMWeaponPistolType74C
+    - id: RMCMagazinePistolT73
+      amount: 3
+    - id: CCMMagazineRifleTypexs13
+      amount: 6
+    - id: RMCExplosiveBreachingCharge

@@ -1,3 +1,3 @@
-ent-CCMRandomHumanoidREVDemoHostile = rev engineer ghost role
-    .suffix = Spawner, Player, Hostile
+ent-CCMRandomHumanoidREVDemoHostile = гост-роль инженера петришевцев
+    .suffix = Спавнер, Игрок, Враждебный
     .desc = { "" }

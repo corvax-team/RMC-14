@@ -11,6 +11,12 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
+    canManualRestock: true
+    ignoreBulkRestockById:
+    - RMCBoxShotgunBuckshot
+    - RMCBoxShotgunFlechette
+    - RMCBoxShotgunSlugs
+    - RMCBoxShotgunBreaching
     access:
     - "CMAccessMarinePrep"
     hackable: true
@@ -151,6 +157,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    canManualRestock: true
     access:
     - "CMAccessMarinePrep"
     hackable: true
@@ -319,6 +326,18 @@
         amount: 10
       - id: RMCMaskRebreather
         amount: 10
+# CCM14 ADD
+      - id: CCMClothingGasMaskFull
+        amount: 10
+      - id: CCMClothingGasMask
+        amount: 10
+      - id: CCMClothingMercenaryMask
+        amount: 3
+      - id: CCMClothingSpecialGasMask
+        amount: 3
+      - id: CCMClothingGlassGasMask
+        amount: 1
+# CCM14 END
     - name: Разное # CCM14
       entries:
       - id: RMCGogglesBallistic
@@ -341,6 +360,9 @@
         amount: 10
       - id: RMCHelmetGarbRainCover
         name: чехол от дождя для шлема M10 # CCM14
+        amount: 10
+      - id: RMCPoncho
+        name: UNMC poncho
         amount: 10
       - id: RMCHelmetGarbGunOil
         name: оружейная смазка # CCM14
@@ -433,27 +455,17 @@
         name: Повязка (Серая) #Band grey
       - id: RMCHeadUNMCHeadset
     - name: Вспомог. одежда - Шея #Neck clothing - scarf & other
-      choices: { CCMDripNeck: 2 }
+      choices: { CCMDripNeck: 1 }
       entries:
 # Neck 
-      - id: ClothingNeckTieDet
-        name: Чёрный галстук #Black tie
-      - id: ClothingNeckTieSci
-        name: Фиолетовый галстук #Puprle tie
-      - id: ClothingNeckTieRed
-      - id: ClothingNeckScarfStripedLesbianLong
-        name: Длинный разноцветный шарф #Bacon like
-      - id: ClothingNeckScarfStripedAroace
-        name: Полосатый сине-жёлтый шарф #Atmos like
-      - id: ClothingNeckScarfStripedGreen
-      - id: ClothingNeckScarfStripedRed
-      - id: ClothingNeckScarfStripedBrown
-      - id: ClothingNeckScarfStripedOrange
-      - id: ClothingNeckScarfStripedPurple
-      - id: ClothingNeckScarfStripedLightBlue
-      - id: ClothingNeckScarfStripedBlue
-      - id: ClothingNeckScarfStripedBlack
-      - id: ClothingNeckStoleChaplain
+      - id: CCMCapeCaseBase
+      - id: CCMCapeCaseFull
+      - id: CCMCapeCaseGeist
+      - id: CCMCapeCaseGhille
+      - id: CCMCapeCaseHalf
+      - id: CCMCapeCaseRapier
+      - id: CCMCapeCaseScarf
+      - id: CCMCapeCaseShredded
     - name: Вспомог. одежда - Внешняя #Outer clothing - Coats, Jackets, Windbreakers
       choices: { CCMDripOuter: 1 }
       entries:
@@ -569,7 +581,7 @@
       - id: RMCGunCasePistolM44Custom
       - id: RMCGunCasePistolHG45Aguila
       - id: RMCGunCasePistolHG45Marina
-      - id: RMCD18Case
+      # - id: RMCD18Case # Forge-Change : CLF Pistol
       - id: RMCSawtoothDaggerB
         name: кинжал Фиорина (Тип Б) #Knife Fiorina B
       - id: RMCSawtoothDaggerA
@@ -607,6 +619,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_ammo.rsi
   - type: CMAutomatedVendor
+    canManualRestock: true
     access:
     - "CMAccessMarinePrep"
     - "CMAccessRequisitions"
@@ -616,10 +629,6 @@
       entries:
       - id: CMMagazineRifleM4SPRAP
         amount: 4
-      - id: RMCMagazinePistolM13AP
-        amount: 4
-      - id: RMCMagazinePistolM13ExtAP
-        amount: 2
       - id: CMMagazineSMGM63AP
         amount: 3
       - id: CMMagazineRifleM54CAP
@@ -638,6 +647,8 @@
       entries:
       - id: RMCMagazineSmartGun
         amount: 1
+      - id: CCMMagazineSmartGunML99A # CCM14 Add
+        amount: 1 #CCM14 Add
       #- id: CMSpeedLoaderM44Heavy
       #  amount: 2
       - id: RMCSpeedLoader44Marksman
@@ -678,6 +689,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
+    canManualRestock: true
     access:
     - "CMAccessMarinePrep"
     - "CMAccessRequisitions"
@@ -734,10 +746,12 @@
         amount: 5
       - id: RMCBinoculars
         amount: 1
+      - id: CMFoldingBarricadesMB6x3
+        amount: 2
       #- id: CMFoldingBarricadesMB6x3
       #  amount: 2
-      #- id: CMSparePDTLBattleBuddyKit
-      #  amount: 3
+      - id: CMSparePDTLBattleBuddyKit
+        amount: 3
       - id: RMCPowerCellCrap
         amount: 2
       - id: RMCMagazineSMGNailgun
@@ -756,6 +770,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
+    canManualRestock: true
     access:
     - "CMAccessMarinePrep"
     - "CMAccessRequisitions"

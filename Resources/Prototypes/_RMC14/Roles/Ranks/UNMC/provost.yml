@@ -5,35 +5,33 @@
   prefix: ПровМарСек.
   paygrade: O9
 
-# Any admin with high law understanding
+# Admin
 - type: rank
   id: RMCRankProvostSeniorMarshal
   name: Старший маршал
   prefix: ПровСтМар.
   paygrade: O8
 
-# Any admin with low law understanding, or wanting a lower rank
+# Admin
 - type: rank
   id: RMCRankProvostMarshal
   name: Маршал
   prefix: ПровМар.
   paygrade: O7
 
-# Any whitelisted CO
+# Admin
 - type: rank
   id: RMCRankProvostDeputyMarshal
   name: Помощник маршала
   prefix: ПровПомМар.
   paygrade: O6
 
-# Any player with high law understanding
 - type: rank
   id: RMCRankProvostChiefInspector
   name: Старший инспектор
   prefix: ПровСтИн.
   paygrade: O5
 
-# Any player with medium-low law understanding
 - type: rank
   id: RMCRankProvostInspector
   name: Инспектор провост

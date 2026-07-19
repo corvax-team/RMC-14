@@ -117,4 +117,3 @@
       - XenoTunnel
   - type: SpawnOnTerminate
     spawn: RMCOrbitalCannonExplosionAegis
-    projectileAdjust: false

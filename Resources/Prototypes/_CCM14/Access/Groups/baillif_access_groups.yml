@@ -1,0 +1,6 @@
+- type: accessGroup
+  id: CCMBaillif
+  parent: RMCBaseMPJob
+  name: Military Baillif
+  tags:
+  - CCMAccessBaillif

@@ -1,0 +1,58 @@
+- type: job
+  parent: CCMSurvivorSPPWesternForestBase
+  id: CCMSurvivorSPPWesternForestMedic
+  name: ccm-job-name-spp-medic
+  startingGear: CCMGearSPPMedic
+  icon: "RMCJobIconSPPMedic"
+  ranks:
+    RMCRankSPPMladshiySerzhant: []
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobHospitalCorpsman
+    time: 36000 # 10 hours
+  spawnMenuRoleName: SPP Medic (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: AssignSquad
+      squad: SquadSPP
+    - type: RMCAllowSuitStorage
+    - type: Skills
+      preset: CCMSkillPresetSPPMedic
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi # mb change this?
+        state: spt
+    - type: IntelRescueSurvivorObjective
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-medic
+    - type: SpotterWhitelist
+  hidden: true
+
+- type: startingGear
+  parent: CCMGearSPPBase
+  id: CCMGearSPPMedic
+  equipment:
+    head: ArmorHelmetSPP
+    outerClothing: RMCArmorSPP
+    eyes: RMCGlassesMedicalHUDGlasses
+    back: CCMSatchelSPPMedicSurvivor
+    belt: RMCBeltMedicalDefibAnalyzerFilledSSPMedicSurvivor
+    suitstorage: RMCWeaponRifleType71
+  inhand:
+    - RMCSurgicalCaseRCMFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CCMSpawnPointSPPMedic
+  name: spp medic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CCMSurvivorSPPWesternForestMedic
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_spp

@@ -33,7 +33,6 @@
     head: RMCHeadCapTruckerBlue
     jumpsuit: RMCJumpsuitLiaisonGreenWorkwear
     outerClothing: RMCCoatBomberGrey
-    # hand: Vehicle Wheels
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -1,0 +1,28 @@
+- type: entity
+  parent: ArmorHelmetM10
+  id: CCMArmorHelmetPMCSniper
+  name: PMC sniper helmet
+  description: A protective helmet with a blue visor and a little aim assist system. Issued for a sniper specialists of Vitezstvi's infantry.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Vitez/sniper.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Vitez/sniper.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: RMCArmorHelmetPMCTactical
+  id: CCMArmorHelmetPMCEngineer
+  name: pmc engineer helmet
+  description: An advanced technician helmet with a black finish, including advanced welding protection and resistance to the potential industrial hazards, but has less kevlar against potential firefights.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Vitez/engineer.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Vitez/engineer.rsi
+  - type: PointLight
+    color: "#73e6f5"
+  - type: IntegratedVisors
+    visorsToAdd:
+    - CCMVisorPMCWelding

@@ -14,11 +14,21 @@
 
       Авторизовано: капитан Леон Гранц."
     minPlayers: 10 # CCM14-mappool
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingLV624
+    #smallHostVariants:
+      #- RMCMobSmallHostFarwa
+      #- CMMobSmallHostMonkey
+      #- CMMobSmallHostKobold
+      #- RMCMobSmallHostNeaera
+      #- RMCMobSmallHostStok
     nightmareScenarios:
-    - scenarioName: fallen_ship
-      scenarioProbability: 0.1
+#   - scenarioName: clf_ship
+#     scenarioProbability: 0.1
     - scenarioName: asset_protection
       scenarioProbability: 0.1
+    - scenarioName: none
+      scenarioProbability: 0.9
     survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
@@ -63,7 +73,6 @@
       asset_protection: # Corporate Dome Goons
         CMSurvivorScientist: CMSurvivorDoctor
 
-
 - type: entity
   id: RMCPlanetSolaris
   name: Solaris Ridge
@@ -79,22 +88,16 @@
       Биосканирование Выдаёт ошибку.
 
       Авторизовано: капитан Леон Гранц."
-    minPlayers: 25 # CCM14-mappool
+    minPlayers: 15 # CCM14-mappool
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingSolaris
+    #smallHostVariants:
+      #RMCMobSmallHostNeaera
     nightmareScenarios:
     - scenarioName: crashlanding_offices
       scenarioProbability: 0.2
-    - scenarioName: solaris_surv_spawn_admin # 80% chance of regular surv. Reduce to 70% (0.14 each) once CLF survs are in.
-      scenarioProbability: 0.16
-    - scenarioName: solaris_surv_spawn_bar
-      scenarioProbability: 0.16
-    - scenarioName: solaris_surv_spawn_office
-      scenarioProbability: 0.16
-    - scenarioName: solaris_surv_spawn_south_marshals
-      scenarioProbability: 0.16
-    - scenarioName: solaris_surv_spawn_storage
-      scenarioProbability: 0.16
+    - scenarioName: none # 80% chance of regular surv. Reduce to 70% once CLF survs are in.
+      scenarioProbability: 0.8
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
     - CMSurvivor: -1
@@ -171,7 +174,6 @@
       crashlanding_offices: # PMC
         CMSurvivorScientist: CMSurvivorDoctor
 
-
 - type: entity
   id: RMCPlanetShiva
   name: Shivas Snowball
@@ -188,11 +190,15 @@
 
       Авторизовано: капитан Леон Гранц."
     minPlayers: 15 # CCM14-mappool
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingShivas
+    #smallHostVariants:
+      #RMCMobSmallHostYiren
     nightmareScenarios:
     - scenarioName: panic_room_hold
-      scenarioProbability: 0.1
-    - scenarioName: none # 90% chance of regular surv. Reduce to 80% (0.8) once CLF survs are in.
-      scenarioProbability: 0.9
+      scenarioProbability: 0.15
+    - scenarioName: none # 85% chance of regular surv. Reduce to 75% (0.75) once CLF survs are in.
+      scenarioProbability: 0.85
     survivorJobVariants: # Civ survivor is default one
       CMSurvivorCorporate:
       - RMCSurvivorShivasCorporateLiaison: -1
@@ -235,7 +241,7 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/prison.yml
     camouflage: Classic
-    minPlayers: 45 # CCM14-mappool
+    minPlayers: 50 # CCM14-mappool
     announcement: "Пехота! Был получен автоматический сигнал бедствия из приграничной тюрьмы строгого режима. Должен сказать, что я крайне удивлён, что такие заведения вообще работают чуть ли не в упор к фронту, но, видимо, они уже за это поплатились.
       Для общего понимания,
       Обозначение - орбитальная тюрьма общего режима.
@@ -245,14 +251,21 @@
 
       Удачной охоты!
       Авторизовано: капитан Леон Гранц."
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingFiorina
+    #smallHostVariants:
+      #RMCMobSmallHostFarwa
     nightmareScenarios:
     - scenarioName: riot_in_progress
       scenarioProbability: 0.15
+    - scenarioName: none
+      scenarioProbability: 0.85
     survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
       - CMSurvivorISR: -1
       - CMSurvivorGangLeader: -1
+      - CMSurvivorPrisoner: -1
       CMSurvivorCorporate:
       - CMSurvivorFiorinaCorporateLiaison: 2
       CMSurvivorDoctor:
@@ -260,20 +273,17 @@
       CMSurvivorEngineer:
       - CMSurvivorFiorinaEngineer: 2
       CMSurvivorSecurity:
-      - CMSurvivorPrisoner: 2
       - CMSurvivorFiorinaPrisonGuard: 2
       - CMSurvivorFiorinaRiotOfficer: 2
       CMSurvivorScientist:
       - CMSurvivorFiorinaResearcher: 2
     survivorJobScenarios:
       riot_in_progress: # Riot In Progress CMB Team. One as the main CMB RCTL, the rest as supporting officers.
-        - CMSurvivorSecurity: 1
         - CMSurvivor: -1
     survivorJobVariantScenarios:
       riot_in_progress: # Riot In Progress Riot Control team
-        CMSurvivorSecurity:
-        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader: 1
         CMSurvivor:
+        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader: 1
         - RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: -1
     survivorJobOverrideScenarios:
       riot_in_progress: # Riot In Progress job overrides.
@@ -281,13 +291,15 @@
         CMSurvivorEngineer: CMSurvivor
         CMSurvivorDoctor: CMSurvivor
         CMSurvivorScientist: CMSurvivor
+        CMSurvivorSecurity: CMSurvivor
 
 - type: entity
   id: RMCPlanetTrijent
   name: Trijent Dam
   components:
   - type: RMCPlanetMapPrototype
-    map: Maps/_CCM14/Planets/Z-level/Trijent/devtrijent/devtrijent0.yml
+    inRotation: false # CCM14
+    map: /Maps/_RMC14/trijent.yml
     camouflage: Desert
     announcement: "Пехота! Была потеряна связь с корпоративной колонией на планете Райджин. Видимо, туда наш путь теперь и проложен. Хех, удачи!
             Для общего понимания,
@@ -297,16 +309,12 @@
       Биосканирование Выдаёт ошибку.
 
       Авторизовано: капитан Леон Гранц."
-    minPlayers: 1 # CCM14-mappool
+    minPlayers: 50 # CCM14-mappool
+    #smallHostVariants:
+      #RMCMobSmallHostStok
     nightmareScenarios:
-    - scenarioName: trijent_surv_spawn_bar # Reduce this once CLF survivors are in
-      scenarioProbability: 0.15
-    - scenarioName: trijent_surv_spawn_hospital
-      scenarioProbability: 0.15
-    - scenarioName: trijent_surv_spawn_dam
-      scenarioProbability: 0.15
-    - scenarioName: trijent_surv_spawn_tunneldorm
-      scenarioProbability: 0.15
+    - scenarioName: none # Reduce this to 0.5 once CLF survivors are in
+      scenarioProbability: 0.6
     - scenarioName: spp_bar
       scenarioProbability: 0.4
     survivorJobVariants:
@@ -407,7 +415,11 @@
       Биосканирование Выдаёт ошибку.
 
       Авторизовано: капитан Леон Гранц."
-    minPlayers: 30 # CCM14-mappool
+    minPlayers: 15 # CCM14-mappool
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingVaradero
+    #smallHostVariants:
+      #CMMobSmallHostKobold
     nightmareScenarios: # 100% chance of regular survivors, reduce to 0.9 once CLF survs are in
     - scenarioName: none
       scenarioProbability: 1
@@ -455,7 +467,10 @@
       Биосканирование Выдаёт ошибку.
 
       Авторизовано: капитан Леон Гранц."
-    minPlayers: 25 # CCM14-mappool
+    minPlayers: 15 # CCM14-mappool
+    #smallHostVariants:
+      #RMCMobSmallHostNeaera
+      #RMCMobSmallHostStok
     nightmareScenarios:
     - scenarioName: none # Reduce this to 0.9 once CLF survivors are in at 0.1
       scenarioProbability: 1
@@ -494,6 +509,11 @@
       Биосканирование Выдаёт ошибку.
 
       Авторизовано: капитан Леон Гранц."
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingChances
+    #smallHostVariants:
+      #RMCSmallHostMobNaera
+      #RMCSmallHostMobStok
     selectRandomSurvivorVariant: false
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
@@ -531,12 +551,16 @@
       Биосканирование Выдаёт ошибку.
 
       Авторизовано: капитан Леон Гранц."
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingHybrisa
+    #smallHostVariants:
+      #CMMobSmallHostMonkey
     nightmareScenarios:
     - scenarioName: tse_airbase
       scenarioProbability: 0.3
     - scenarioName: none
       scenarioProbability: 0.7
-    minPlayers: 55 # CCM14-mappool
+    minPlayers: 50 # CCM14-mappool
     survivorJobVariants:
       CMSurvivor:
       - RMCSurvivorHybrisaCivilian: -1
@@ -599,7 +623,7 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/sorokyne.yml
     camouflage: Jungle
-    minPlayers: 55 # CCM14-mappool
+    minPlayers: 30 # CCM14-mappool
     announcement: "Пехота! Был получен сигнал бедствия с шахтёрской колонии СССП, так ещё гнездится Халькон Динамикс. Вы знаете, они занятые ребята, поэтому попросили помощи у нас — мы ближе всего. Как закончите, прошу прихватить для меня какой-нибудь СССПшный сувенирчик.
           Для общего понимания,
       Обозначение колонии - аванпост добычи.
@@ -608,9 +632,16 @@
       Биосканирование Выдаёт ошибку.
 
       Авторизовано: капитан Леон Гранц."
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingSorokyne
+    #smallHostVariants:
+      #RMCMobSmallHostStok
+      #CMMobSmallHostKobold
     nightmareScenarios:
     - scenarioName: spp_sof
       scenarioProbability: 0.4
+    - scenarioName: none # reduce by 0.1 once clf survs are in
+      scenarioProbability: 0.6
     survivorJobVariants:
       CMSurvivor:
       - CMJobSurvivorSoroCivilian: -1

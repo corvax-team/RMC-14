@@ -1,0 +1,1 @@
+ccm-id-card-access-level-baillif = Военный Приставолитет

@@ -994,9 +994,6 @@ public sealed partial class YautjaHivebreakerComponent : Component
     public ProtoId<NpcFactionPrototype> ThrallNpcFaction = "CMUYautja";
 
     [DataField]
-    public EntProtoId<IFFFactionComponent> XenoIffFaction = "FactionXeno";
-
-    [DataField]
     public EntProtoId<IFFFactionComponent> ThrallIffFaction = "FactionYautja";
 }
 

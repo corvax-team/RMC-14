@@ -26,13 +26,21 @@
 # CCM14 role timers [remove/start]
   - !type:DepartmentTimeRequirement
     department: CMRequisitions
-    time: 10800 # 3 hours. CCM14 role timers. RMC: 36000 # 10 hours
-  ranks: # TODO Selectable Ranks for SEA
+    time: 36000 # 10 hours
+  ranks:
     RMCRankSergeantMajor:
     - !type:RoleTimeRequirement
       role: CMJobSeniorEnlistedAdvisor
       time: 252000 # 70 hours
+    RMCRankMasterGunnerySergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSeniorEnlistedAdvisor
+      time: 252000 # 70 hours
     RMCRankFirstSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSeniorEnlistedAdvisor
+      time: 36000 # 10 hours
+    RMCRankMasterSergeant:
     - !type:RoleTimeRequirement
       role: CMJobSeniorEnlistedAdvisor
       time: 36000 # 10 hours

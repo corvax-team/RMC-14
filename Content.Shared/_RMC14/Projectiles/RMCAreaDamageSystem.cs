@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._CMU14.Medical.BodyPart;
+using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
@@ -13,13 +14,14 @@ namespace Content.Shared._RMC14.Projectiles;
 
 public sealed class RMCAreaDamageSystem : EntitySystem
 {
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedHitLocationSystem _hitLocation = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -52,7 +54,7 @@ public sealed class RMCAreaDamageSystem : EntitySystem
         if (areaDamage.DamageArea == 0 || !TryComp(target, out MobStateComponent? mobState))
             return;
 
-        var nearbyEntities = _entityLookup.GetEntitiesInRange<MobStateComponent>(Transform(target).Coordinates, areaDamage.DamageArea);
+        var nearbyEntities = _entityLookup.GetEntitiesInRange<MobStateComponent>(Transform(target).Coordinates, areaDamage.DamageArea, LookupFlags.Uncontained);
         using var targetingSuppression = shooter is { } origin
             ? _hitLocation.SuppressBodyZoneTargeting(origin)
             : default;
@@ -60,7 +62,7 @@ public sealed class RMCAreaDamageSystem : EntitySystem
         // Apply damage to all eligible entities in range.
         foreach (var entity in nearbyEntities)
         {
-            if(entity.Owner == target || entity == shooter)
+            if (entity.Owner == target || entity == shooter)
                 continue;
 
             var fromCoords = _transform.GetMapCoordinates(target);
@@ -83,11 +85,28 @@ public sealed class RMCAreaDamageSystem : EntitySystem
 
             var damageDealt = _damage.TryChangeDamage(entity, newDamage, origin: shooter, armorPiercing: armorPiercing);
 
-            if (!(damageDealt?.GetTotal() > FixedPoint2.Zero) || !_net.IsClient)
+            if (!(damageDealt?.GetTotal() > FixedPoint2.Zero))
                 continue;
 
-            var filter = Filter.Pvs(entity, entityManager: EntityManager).RemoveWhereAttachedEntity(hit => hit == entity.Owner);
-            _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { entity }, filter);
+            if (HasComp<PredictedProjectileClientComponent>(uid))
+            {
+                if (_player.LocalEntity != shooter)
+                    continue;
+
+                _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { entity }, Filter.Local());
+                continue;
+            }
+
+            if (_net.IsServer)
+            {
+                var filter = Filter.Pvs(entity, entityManager: EntityManager)
+                    .RemoveWhereAttachedEntity(attached => attached == entity.Owner);
+
+                if (HasComp<PredictedProjectileServerComponent>(uid))
+                    filter = filter.RemoveWhereAttachedEntity(attached => attached == shooter);
+
+                _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { entity }, filter);
+            }
         }
     }
 }

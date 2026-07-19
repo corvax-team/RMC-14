@@ -27,6 +27,24 @@
         },
         {
             "name": "petrishev_synth"
+        },
+        {
+            "name": "serene_breacher"
+        },
+        {
+            "name": "serene_engineer"
+        },
+        {
+            "name": "serene_heavy"
+        },
+        {
+            "name": "serene_leader"
+        },
+        {
+            "name": "serene_medic"
+        },
+        {
+            "name": "serene_operative"
         }
     ]
 }

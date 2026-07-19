@@ -105,6 +105,16 @@
       entries:
       - id: CCMGuitarBagFilled
     # CCM14-end
+# CCM14 Add
+    - name: Вспомог. одежда - Шея
+      choices: { CCMDripNeck: 1 }
+      entries:
+      - id: CCMCapeCaseBase
+      - id: CCMCapeCaseFull
+      - id: CCMCapeCaseHalf
+      - id: CCMCapeCaseRapier
+      - id: CCMCapeCaseScarf
+# CCM14 End
 
 # Armoury Vend
 
@@ -202,6 +212,13 @@
       - id: CMMaskGas
       - id: CMMaskCoif
       - id: RMCMaskRebreather
+# CCM14 Add
+      - id: CCMClothingGasMaskFull
+      - id: CCMClothingMercenaryMask
+      - id: CCMClothingGasMask
+      - id: CCMClothingGlassGasMask
+      - id: CCMClothingSpecialGasMask
+# CCM14 End
     - name: Разное # CCM14
       entries:
       - id: RMCVisorWelding
@@ -256,6 +273,8 @@
     - name: Основное вооружение капитана # CCM14
       takeOne: CMPrimary
       entries:
+      - id: RMCM59ACaseAP # CCM14
+        name: кейс прототипа винтовки M59A # CCM14
       - id: RMCM54CMK1CaseAP
         name: кейс штурмовой винтовки M54C MK1 # CCM14
       - id: RMCVendorBundleXOShotgun
@@ -467,7 +486,7 @@
       choices: { CMBag: 1 }
       entries:
       - id: CMBackpackCommand
-      #- id: CMSatchelCommandSecure # TODO RMC14 Secure Satchel (ID LOCK)
+      - id: CMSatchelCommandSecure
       - id: RMCBackpackRTO
       - id: CMSatchelMarineIntel
       - id: RMCSatchelMarineIntelChestrig
@@ -542,6 +561,13 @@
       - id: CMMaskGas
       - id: CMMaskCoif
       - id: RMCMaskRebreather
+# CCM14 Add
+      - id: CCMClothingGasMaskFull
+      - id: CCMClothingMercenaryMask
+      - id: CCMClothingGasMask
+      - id: CCMClothingGlassGasMask
+      - id: CCMClothingSpecialGasMask
+# CCM14 End
     - name: Разное # CCM14
       entries:
       - id: RMCPatchFallingFalcons
@@ -560,6 +586,19 @@
       entries:
       - id: CCMGuitarBagFilled
     # CCM14-end
+# CCM14 Add
+    - name: Вспомог. одежда - Шея
+      choices: { CCMDripNeck: 1 }
+      entries:
+      - id: CCMCapeCaseBase
+      - id: CCMCapeCaseFull
+      - id: CCMCapeCaseHalf
+      - id: CCMCapeCaseRapier
+      - id: CCMCapeCaseGeist
+      - id: CCMCapeCaseGhille
+      - id: CCMCapeCaseShredded
+      - id: CCMCapeCaseScarf
+# CCM14 End
 
 # Weapon Vend
 - type: entity
@@ -580,8 +619,8 @@
     - name: Основное вооружение командира # CCM14
       takeOne: CMProtagGun
       entries:
-      - id: RMCM59ACaseAP
-        name: кейс прототипа винтовки M59A # CCM14
+      # - id: RMCM59ACaseAP
+      #   name: кейс прототипа винтовки M59A # CCM14 не гоже штабному олуху с таким арсеналом ходить
       - id: CMCOSmartGunOperatorEquipmentCaseBelt
         name: смартган командира # CCM14
         recommended: true # TODO RMC14 Make choices: colour the options brown
@@ -898,10 +937,20 @@
       - CMExecutiveOfficer
       choices: { CMHat: 1 }
       entries:
-      - id: RMCHeadBeret # TODO: Port Officer Beret
+      - id: RMCHeadBeretChiefOfficer
       - id: CMHeadCapPeakedService
       - id: RMCHeadCapFlippable # TODO: Port Patrol Cap
       - id: CMHeadCapOfficer
+    - name: Вспомог. одежда - Шея
+      choices: { CCMDripNeck: 1 }
+      entries:
+      - id: CCMCapeCaseBase
+      - id: CCMCapeCaseFull
+      - id: CCMCapeCaseHalf
+      - id: CCMCapeCaseRapier
+      - id: CCMCapeCaseShredded
+      - id: CCMCapeCaseScarf
+# CCM14 End
     # ////////////////////////////////////
     # Chief MP
     # ////////////////////////////////////
@@ -1196,6 +1245,13 @@
       - id: CMMaskGas
       - id: CMMaskCoif
       - id: RMCMaskRebreather
+# CCM14 Add
+      - id: CCMClothingGasMaskFull
+      - id: CCMClothingMercenaryMask
+      - id: CCMClothingGasMask
+      - id: CCMClothingGlassGasMask
+      - id: CCMClothingSpecialGasMask
+# CCM14 End
     - name: Основное вооружение # CCM14
       jobs:
       - CMChiefEngineer
@@ -1343,12 +1399,19 @@
       entries:
       - id: CMJumpsuitCMO
         recommended: true
-      - id: CMScrubsGreen
+      - id: RMCScrubsCMO
+        recommended: true
+      - id: RMCJumpsuitDoctor
       - id: CMScrubsBlue
       - id: RMCScrubsLightBlue
+      - id: CMScrubsGreen
+      - id: RMCScrubsPharm
       - id: CMScrubsPurple
       - id: RMCScrubsOlive
       - id: RMCScrubsGrey
+      - id: RMCScrubsBrown
+      - id: RMCScrubsWhite
+      - id: RMCScrubsBlack
     - name: Спецодежда # CCM14
       jobs:
       - CMCMO
@@ -1357,18 +1420,39 @@
       - id: RMCLabcoatCMO
         recommended: true
       - id: RMCLabcoat
-        recommended: true
+      - id: RMCLabcoatPharm
+      - id: RMCLabcoatShort
+        name: High-Cut Labcoat
+      - id: RMCLabcoatLong
+        name: Low-Cut Labcoat
       - id: RMCMedicalApron
+    - name: Snow gear (Snow use only)
+      jobs:
+      - CMCMO
+      takeAll: CMSnowgear
+      entries:
+      - id: RMCCoatSnow
+      - id: RMCMaskBalaclava
+      - id: RMCMaskTornScarfBlack
+        name: Snow Scarf 
     - name: Головные уборы # CCM14
       jobs:
       - CMCMO
       choices: { CMHelmet: 1 }
       entries:
       - id: CMHeadCapCMO
-      - id: CMHeadCapSurgOrange
+        recommended: true
+      - id: CMHeadCapSurgCMO
+        recommended: true
       - id: CMHeadCapSurgBlue
-      - id: CMHeadCapSurgPurple
       - id: CMHeadCapSurgGreen
+      - id: CMHeadCapSurgPharm
+      - id: CMHeadCapSurgPurple
+      - id: CMHeadCapSurgOlive
+      - id: CMHeadCapSurgGrey
+      - id: CMHeadCapSurgBrown
+      - id: CMHeadCapSurgWhite
+      - id: CMHeadCapSurgBlack
     - name: Рюкзаки # CCM14
       jobs:
       - CMCMO
@@ -1387,8 +1471,10 @@
       entries:
       - id: CMBeltMedicBagFilled
         name: медицинский пояс M276 (Заполненный) # CCM14
+        recommended: true
       - id: CMBeltMedicalFilled
         name: пояс для медэкипировки M276 (Заполненный) # CCM14
+        recommended: true
     - name: Личное оружие # CCM14
       jobs:
       - CMCMO
@@ -1439,7 +1525,9 @@
         name: подсумок первой помощи (таблетки) # CCM14
       - id: RMCPouchFirstResponder
       - id: RMCPouchMedical
+        recommended: true
       - id: RMCPouchMedkit
+        recommended: true
       - id: RMCPouchReagentCanisterBicaridine
         recommended: true
         name: подсумок канистры сжатых реагентов\n(Бикаридин) # CCM14
@@ -1480,7 +1568,7 @@
       - id: CMHeadsetMedical
         amount: 15
       - id: CMHeadsetResearcher
-        amount: 15
+        amount: 30
       - id: RMCCPRDummy
         amount: 5
     # ////////////////////////////////////

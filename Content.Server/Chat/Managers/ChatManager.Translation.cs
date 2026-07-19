@@ -265,9 +265,11 @@ internal sealed partial class ChatManager
             message.AudioPath,
             message.AudioVolume,
             message.HidePopup,
+            message.UseEmoteSpeechBubble,
             message.SpeechStyleClass,
             message.RepeatCheckSender,
-            message.TranslatedMessage);
+            message.TranslatedMessage,
+            message.LanguageIcon);
     }
 
     private static ChatMessage ApplyTranslatedMessage(ChatMessage message, string translated)
@@ -283,9 +285,11 @@ internal sealed partial class ChatManager
             message.AudioPath,
             message.AudioVolume,
             message.HidePopup,
+            message.UseEmoteSpeechBubble,
             message.SpeechStyleClass,
             message.RepeatCheckSender,
-            translatedMessage: translated);
+            translatedMessage: translated,
+            message.LanguageIcon);
     }
 
     private static string? NormalizeTranslateApiEndpoint(string raw)

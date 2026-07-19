@@ -115,7 +115,7 @@ namespace Content.Client.Lobby.UI
             OptionsButton.OnPressed += _ => UserInterfaceManager.GetUIController<OptionsUIController>().ToggleWindow();
             GuidesButton.OnPressed += _ => UserInterfaceManager.GetUIController<GuidebookUIController>().ToggleGuidebook();
             UpdatesButton.OnPressed += _ => UserInterfaceManager.GetUIController<RoadmapUIController>().ToggleRoadmap();
-            LinkDiscordButton.OnPressed += _ => UserInterfaceManager.GetUIController<DiscordOAuthUIController>().OpenLink();
+            LinkDiscordButton.OnPressed += _ => UserInterfaceManager.GetUIController<DiscordOAuthUIController>().OnDiscordAuthRequest();
             TaskbarMenuButton.OnPressed += _ => ToggleLeftMenu(!_leftMenuVisible);
             TaskbarRatingButton.OnPressed += _ => ToggleLeaderboard();
             TaskbarAchievementsButton.OnPressed += _ => UserInterfaceManager.GetUIController<CCMAchievementsUIController>().ToggleWindow();
@@ -137,7 +137,7 @@ namespace Content.Client.Lobby.UI
             _oldLayout.WikiButton.OnPressed += _ => OpenInfoLink(CCVars.InfoLinksWiki);
             _oldLayout.GuidesButton.OnPressed += _ => UserInterfaceManager.GetUIController<GuidebookUIController>().ToggleGuidebook();
             _oldLayout.UpdatesButton.OnPressed += _ => UserInterfaceManager.GetUIController<RoadmapUIController>().ToggleRoadmap();
-            _oldLayout.LinkDiscordButton.OnPressed += _ => UserInterfaceManager.GetUIController<DiscordOAuthUIController>().OpenLink();
+            _oldLayout.LinkDiscordButton.OnPressed += _ => UserInterfaceManager.GetUIController<DiscordOAuthUIController>().OnDiscordAuthRequest();
             _oldLayout.StatsButton.OnPressed += _ => ToggleLeaderboard();
             _oldLayout.PollsButton.OnPressed += _ => OpenPolls();
             _oldLayout.ObserveButton.OnPressed += _ => OpenObserve();
@@ -622,11 +622,12 @@ namespace Content.Client.Lobby.UI
         private void UpdateDiscordLinkState()
         {
             var linked = _linkAccount.Linked;
-            LinkDiscordButton.Visible = !linked;
+            // Кнопка привязки Discord скрыта полностью по требованию — она никогда не показывается.
+            LinkDiscordButton.Visible = false;
             LinkDiscordButton.Text = Loc.GetString(linked
                 ? "ui-lobby-discord-linked-button"
                 : "ui-lobby-link-discord-button");
-            _oldLayout.LinkDiscordButton.Visible = !linked;
+            _oldLayout.LinkDiscordButton.Visible = false;
             _oldLayout.LinkDiscordButton.Text = LinkDiscordButton.Text;
         }
 

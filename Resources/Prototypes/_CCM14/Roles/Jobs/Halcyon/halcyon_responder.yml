@@ -1,0 +1,66 @@
+- type: job
+  parent:  CMJobBase
+  id: CCMJobHalcyonDynamicsLiaison
+  name: ccm-job-name-halcyon-dynamics-liaison
+  description: ccm-job-description-halcyon-liason
+  startingGear: CCMGearHalcyonDynamicsLiaison
+  playTimeTracker: CCMJobHalcyonLiason
+  accessGroups:
+  - ColonistCorporate
+  spawnMenuRoleName: Halcyon Dynamics Liaison
+  icon: "RMCJobIconHalcyonExec"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-staff
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 1
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 2
+    - type: NpcFactionMember
+      factions:
+      - Halcyon
+      - SPP
+      - Civilian
+  hidden: true
+
+- type: startingGear
+  id: CCMGearHalcyonDynamicsLiaison
+  equipment:
+    id: RMCIDCardHalcyon
+    jumpsuit: RMCJumpsuitLiaisonBrownTie
+    back: CMSatchelLiaisonSecure
+    shoes: RMCBootsSPP
+    gloves: RMCHandsVeteran
+    ears: RMCHeadsetDistressHalcyon
+    belt: CMClipboard
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchDocument
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CCMSpawnPointHalcyonDynamicsLiaison
+  name: halcyon dynamics liaison spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CCMJobHalcyonDynamicsLiaison
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Objects/CMIDs/halcyon.rsi
+      state: 
+      
+- type: playTimeTracker
+  id: CCMJobHalcyonLiason
+ 

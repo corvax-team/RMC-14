@@ -1,0 +1,12 @@
+ent-CCMHelmetSerene = баллистический шлем SR-2
+    .desc = Прочный шлем с прикреплённой баллистической маской. Используется наёмниками Serene Solutions.
+ent-CCMHelmetSereneMedic = медицинский шлем SR-2
+    .desc = Прочный шлем с красными полосками на нём. Используется наёмниками Serene Solutions.
+ent-CCMHelmetSereneBreacher = штурмовой шлем SR-2C
+    .desc = Закрытый шлем с красным визором и укреплённой баллистической маской. Используется наёмниками Serene Solutions.
+ent-CCMHelmetSereneOfficer = офицерский шлем SR-2-V
+    .desc = Прочный шлем со встроенной гарнитурой и красным HUD визором. Используется полевыми офицерами Serene Solutions.
+ent-CCMHelmetSereneEngineer = инженерный шлем SR-2H
+    .desc = Прочный шлем с укреплённой баллистической маской, встроенным сварочным визором и фонариком. Используется инженерами Serene Solutions.
+ent-CCMHelmetSereneHeavy = тяжёлый шлем SR-2SC
+    .desc = Укреплённый шлем с трёхглазым визором ночного зрения. Используется наёмниками Serene Solutions.

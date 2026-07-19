@@ -7,18 +7,19 @@
   - type: Sprite
     state: ballistic_armor
   - type: HardpointItem
-    hardpointType: Armor
-    vehicleFamily: Tank
-    slotType: Armor
+    hardpointType: HardpointTypeArmor
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeArmor
     damageMultiplier: 0.5
     repairRate: 0.007
   - type: HardpointIntegrity
-    maxIntegrity: 400 # RMC14
+    maxIntegrity: 1000
   - type: VehicleArmorHardpoint
     modifierSets:
     - VehicleArmorBallistic
   - type: HardpointVisual
     vehicleState: ballistic_armor_0
+    damagedVehicleState: ballistic_armor_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -29,19 +30,20 @@
   - type: Sprite
     state: concussive_armor
   - type: HardpointItem
-    hardpointType: Armor
-    vehicleFamily: Tank
-    slotType: Armor
+    hardpointType: HardpointTypeArmor
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeArmor
     damageMultiplier: 0.5
     repairRate: 0.007
   - type: HardpointIntegrity
-    maxIntegrity: 400 # RMC14
+    maxIntegrity: 1000
   - type: VehicleArmorHardpoint
     modifierSets:
     - VehicleArmorConcussive
     explosionCoefficient: 0.5
   - type: HardpointVisual
     vehicleState: concussive_armor_0
+    damagedVehicleState: concussive_armor_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -52,18 +54,19 @@
   - type: Sprite
     state: caustic_armor
   - type: HardpointItem
-    hardpointType: Armor
-    vehicleFamily: Tank
-    slotType: Armor
+    hardpointType: HardpointTypeArmor
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeArmor
     damageMultiplier: 0.5
     repairRate: 0.007
   - type: HardpointIntegrity
-    maxIntegrity: 400 # RMC14
+    maxIntegrity: 1000
   - type: VehicleArmorHardpoint
     modifierSets:
     - VehicleArmorCaustic
   - type: HardpointVisual
     vehicleState: caustic_armor_0
+    damagedVehicleState: caustic_armor_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -74,19 +77,20 @@
   - type: Sprite
     state: paladin_armor
   - type: HardpointItem
-    hardpointType: Armor
-    vehicleFamily: Tank
-    slotType: Armor
+    hardpointType: HardpointTypeArmor
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeArmor
     damageMultiplier: 0.5
     repairRate: 0.007
   - type: HardpointIntegrity
-    maxIntegrity: 400 # RMC14
+    maxIntegrity: 1000
   - type: VehicleArmorHardpoint
     modifierSets:
     - VehicleArmorPaladin
     explosionCoefficient: 0.5
   - type: HardpointVisual
     vehicleState: paladin_armor_0
+    damagedVehicleState: paladin_armor_1
 
 - type: entity
   parent: VehicleTankHardpointBase
@@ -97,13 +101,14 @@
   - type: Sprite
     state: snowplow
   - type: HardpointItem
-    hardpointType: Armor
-    vehicleFamily: Tank
-    slotType: Armor
+    hardpointType: HardpointTypeArmor
+    vehicleFamily: HardpointVehicleFamilyTank
+    slotType: HardpointSlotTypeArmor
     damageMultiplier: 0.5
     repairRate: 0.007
   - type: HardpointIntegrity
     maxIntegrity: 150
   - type: HardpointVisual
     vehicleState: snowplow_0
+    damagedVehicleState: snowplow_1
 

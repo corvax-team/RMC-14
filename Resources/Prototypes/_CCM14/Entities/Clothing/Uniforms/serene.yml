@@ -1,0 +1,46 @@
+- type: entity
+  id: CCMJumpsuitSerenePatchBase
+  abstract: true
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories: [ CCMPatchSerene ]
+
+- type: entity
+  parent: [CCMJumpsuitSerenePatchBase, RMCAlternateFoldableUniformBase]
+  id: CCMJumpsuitSereneSolutions
+  name: Serene Solutions uniform
+  description: Standart tactical uniform of Serene Solutions mercenaries. Combination of Federations' reliability and quality.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Uniforms/Serene/standart.rsi
+  - type: CMArmor
+    bullet: 10
+    melee: 10
+  - type: Appearance
+
+- type: entity
+  parent: CCMJumpsuitSereneSolutions
+  id: CCMJumpsuitSereneMedic
+  name: SerSol. medical specialist uniform
+  description: Standart tactical uniform of Serene Solutions mercenaries. Combination of Federations' reliability and quality.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Uniforms/Serene/medic.rsi
+
+- type: entity
+  parent: CCMJumpsuitSereneSolutions
+  id: CCMJumpsuitSereneOfficer
+  name: SerSol. field officer uniform
+  description: Standart tactical uniform of Serene Solutions mercenaries. Combination of Federations' reliability and quality.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Uniforms/Serene/officer.rsi
+
+- type: entity
+  parent: CCMJumpsuitSereneSolutions
+  id: CCMJumpsuitSereneEngineer
+  name: SerSol. engineer uniform
+  description: Standart tactical uniform of Serene Solutions mercenaries. Combination of Federations' reliability and quality.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Uniforms/Serene/engineer.rsi

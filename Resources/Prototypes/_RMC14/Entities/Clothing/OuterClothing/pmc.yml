@@ -12,7 +12,7 @@
     damageCoefficient: 0
     worn: false
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/pmc.rsi
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/Vitez/standart.rsi # CCM14
   - type: CMArmor
     melee: 20
     bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
@@ -45,9 +45,9 @@
   description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. Has some armor plating removed for extra mobility.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/sniper.rsi
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/Vitez/sniper.rsi # CCM14
   - type: CMArmor
-    melee: 15
+    melee: 15 # CLOTHING_ARMOR_MEDIUMLOW
     bullet: 20 # CLOTHING_ARMOR_MEDIUM
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 15 # CLOTHING_ARMOR_MEDIUMLOW
@@ -79,7 +79,7 @@
   suffix: ""
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/corporate.rsi
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/Vitez/corporate.rsi # CCM14
   - type: CMArmor
     melee: 15
     bullet: 20 # CLOTHING_ARMOR_MEDIUM
@@ -96,7 +96,7 @@
   suffix: Leader
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/corporate_lead.rsi
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/Vitez/corporate_lead.rsi # CCM14
 
 - type: entity
   parent: CMArmorM4PMC
@@ -105,7 +105,7 @@
   description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. This particular suit looks like it belongs to a high-ranking officer.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/officer.rsi
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/Vitez/officer.rsi # CCM14
 
 - type: entity
   parent: RMCArmorM4PMCNoLight
@@ -114,7 +114,7 @@
   description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. This particular suit looks like it belongs to a high-ranking officer.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/sniper.rsi
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/Vitez/sniper.rsi # CCM14
   - type: CMArmor
     bullet: 25
     explosionArmor: 20
@@ -204,7 +204,7 @@
   parent: CMArmorM4PMC
   id: CMArmorM4PMCCommandoSurvivor
   name: damaged MY7 pattern Commando armor
-  description: A modification of the W-Y PMC armor patterns. Designed for elite corporate mercenaries in mind. This one has a lot of scratches and acid damage.
+  description: A modification of the WEYA PMC armor patterns. Designed for elite corporate mercenaries in mind. This one has a lot of scratches and acid damage.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/commando.rsi
@@ -245,7 +245,7 @@
   description: A modification of the standard M3 armor. Designed for high elemental protection, like shock, fire and fragments, lacks in terms of kevlar for bullet protection.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/engineer.rsi
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/Vitez/engineer.rsi # CCM14
   - type: CMArmor
     bullet: 15 # CLOTHING_ARMOR_MEDIUMLOW
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
@@ -273,3 +273,49 @@
   - type: Storage
     grid:
     - 0,0,5,1 # 3 slots
+
+# Executive Bodyguard
+- type: entity
+  parent: CMArmorM4PMCLight
+  id: RMCArmorM4ExecutiveBodyguard
+  name: M4 pattern executive bodyguard armor
+  description: A modification of the standard AEGIS M3 armor. This variant is worn by Executive Bodyguards protecting Weston-Yamada employees, as denoted by the blue detailing.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/vi_bodyguard/standart.rsi # CCM14
+  - type: CMArmor
+    melee: 20 # CLOTHING_ARMOR_MEDIUM
+    bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bio: 10 # CLOTHING_ARMOR_LOW
+    explosionArmor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+  - type: RemoveComponents
+    components:
+    - type: ClothingRequireEquipped
+      autoUnequip: true
+      denyReason: rmc-armor-not-pmc-jumpsuit
+      whitelist:
+        tags:
+        - RMCUniformPMC
+
+- type: entity
+  parent: CMArmorM4PMCLight
+  id: RMCArmorM1ExecutiveBodyguard
+  name: M1 pattern executive bodyguard armor
+  description: A basic vest with a Weston-Yamada badge on the right breast. This variant is worn by Executive Bodyguards protecting Weston-Yamada employees, as denoted by the blue badge.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/vi_bodyguard/light.rsi # CCM14
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
+    walkModifier: 0.949
+    sprintModifier: 0.949
+  - type: Storage
+    grid:
+    - 0,0,1,1 # 1 slot
+  - type: RemoveComponents
+    components:
+    - type: ClothingRequireEquipped
+      autoUnequip: true
+      denyReason: rmc-armor-not-pmc-jumpsuit
+      whitelist:
+        tags:
+        - RMCUniformPMC

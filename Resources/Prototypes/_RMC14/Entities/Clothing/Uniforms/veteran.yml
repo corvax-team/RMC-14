@@ -77,7 +77,7 @@
   description: A black set of fatigues, designed for private security engineers. The symbol of the Weston-Yamada corporation is emblazed on the suit.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/PMC/engineer.rsi
+    sprite: _CCM14/Objects/Clothing/Uniforms/Vitez/engineer.rsi # CCM14
 
 - type: entity
   parent: RMCJumpsuitVeteranPMCEngineerNoWebbing

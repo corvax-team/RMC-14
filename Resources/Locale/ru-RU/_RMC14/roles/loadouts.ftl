@@ -21,7 +21,8 @@ rmc-loadout-group-pins = Значки
 rmc-loadout-group-civilian = Гражданское (ограничено для морпехов)
 rmc-loadout-group-role-specific-ID = Командующий офицер (ID)
 rmc-loadout-group-role-specific-weapon = Командующий офицер (личное оружие)
-rmc-loadout-group-provost-role-specific-outerwear = Инспектор Провост (верхняя одежда)
+ccm-loadout-group-role-specific = Военно-Космический Флот
+rmc-loadout-group-provost-role-specific-outerwear = Инспектор Приставолитета (верхняя одежда)
 rmc-loadout-group-synthetic-uniform = Униформа синтетика
 rmc-loadout-group-synthetic-accessories = Аксессуары синтетика
 rmc-loadout-group-synthetic-glasses = Очки синтетика
@@ -29,3 +30,4 @@ rmc-loadout-group-synthetic-shoes = Обувь синтетика
 rmc-loadout-group-synthetic-headwear = Гарнитура синтетика
 rmc-loadout-group-synthetic-suits = Верхняя одежда синтетика
 loadout-group-points-insufficient = У вас недостаточно очков!
+

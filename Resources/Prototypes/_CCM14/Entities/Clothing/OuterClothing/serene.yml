@@ -1,0 +1,105 @@
+- type: entity
+  parent: CMArmorM3Light
+  id: CCMArmorSereneVest
+  name: SAR-2 pattern armor vest
+  description: Light and suprisingly durable vest. Made exclusivly for Serene Solutions mercenaries.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/Serene/standart.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 20
+    bio: 15
+    explosionArmor: 10
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier
+    walkModifier: .75
+    sprintModifier: .75
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: CCMArmorSereneVest
+  id: CCMArmorSereneVestMedic
+  name: SAR-2 medical specialist armor vest
+  description: Light and suprisingly durable vest. Made exclusivly for Serene Solutions mercenaries.Light and suprisingly. This one has a red cross on it.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/Serene/medic.rsi
+
+- type: entity
+  parent: CCMArmorSereneVest
+  id: CCMArmorSereneVestBreacher
+  name: SAR-2C pattern assault vest
+  description: A modification of a standart SAR-2 vest. Got an better covering alongside with an additional armor pieces. Made exclusivly for Serene Solutions mercenaries.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/Serene/breacher.rsi
+  - type: CMArmor
+    melee: 25
+    bullet: 25
+    bio: 10
+    explosionArmor: 15
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier
+    walkModifier: .65
+    sprintModifier: .65
+
+- type: entity
+  parent: CCMArmorSereneVest
+  id: CCMArmorSereneVestOfficer
+  name: SAR-2-V pattern personal vest
+  description: A modification of a standart SAR-2 vest. Got an better covering alongside with an additional armor pieces. Made exclusivly for Serene Solutions mercenaries.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/Serene/officer.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 25
+    bio: 15
+    explosionArmor: 15
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier
+    walkModifier: .7
+    sprintModifier: .7
+
+- type: entity
+  parent: RMCArmorM4PMCNoLight
+  id: CCMArmorSereneVestEngineer
+  name: SAR-2H pattern EOD vest
+  description: A modification of a standart SAR-2 vest. Got a better anti-blast covering alongside with an additional armor pieces. Made exclusivly for Serene Solutions mercenaries.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/Serene/engineer.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 20
+    bio: 20
+    explosionArmor: 35
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier
+    walkModifier: .65
+    sprintModifier: .65
+
+- type: entity
+  parent: CCMArmorSereneVest
+  id: CCMArmorSereneVestHeavy
+  name: SAR-2SC pattern bastion vest
+  description: A modification of a standart SAR-2 vest. Got a better anti-blast covering alongside with an additional armor pieces. Made exclusivly for Serene Solutions mercenaries.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/Serene/heavy.rsi
+  - type: CMArmor
+    melee: 30
+    bullet: 35
+    bio: 20
+    explosionArmor: 35
+  - type: RMCArmorSpeedTier
+    speedTier: heavy
+  - type: ClothingSpeedModifier
+    walkModifier: .6
+    sprintModifier: .6
