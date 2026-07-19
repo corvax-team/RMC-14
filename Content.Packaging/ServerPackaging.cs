@@ -49,7 +49,6 @@ public static class ServerPackaging
         "Microsoft",
         "NetCord",
         "Discord.Net",
-        "QRCoder",
     };
 
     private static readonly List<string> ServerNotExtraAssemblies = new()
