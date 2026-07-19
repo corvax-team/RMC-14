@@ -20,8 +20,7 @@ FORK_ID = "cm"
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--fork-id", default=FORK_ID)
-
+    parser.add_argument("--fork-id", default=FORK_ID, help="ID форка для публикации")
     args = parser.parse_args()
     fork_id = args.fork_id
 
@@ -30,7 +29,7 @@ def main():
         "Authorization": f"Bearer {PUBLISH_TOKEN}",
     }
 
-    print(f"Starting publish on Robust.Cdn for version {VERSION}")
+    print(f"Starting publish on Robust.Cdn for fork '{fork_id}' and version {VERSION}")
 
     data = {
         "version": VERSION,
@@ -52,27 +51,20 @@ def main():
                 "Robust-Cdn-Publish-Version": VERSION
             }
             resp = session.post(f"{ROBUST_CDN_URL}fork/{fork_id}/publish/file", data=f, headers=headers)
-
-        resp.raise_for_status()
+            resp.raise_for_status()
 
     print("Successfully pushed files, finishing publish...")
 
-    data = {
-        "version": VERSION
-    }
-    headers = {
-        "Content-Type": "application/json"
-    }
+    data = {"version": VERSION}
+    headers = {"Content-Type": "application/json"}
     resp = session.post(f"{ROBUST_CDN_URL}fork/{fork_id}/publish/finish", json=data, headers=headers)
     resp.raise_for_status()
 
     print("SUCCESS!")
 
-
 def get_files_to_publish() -> Iterable[str]:
     for file in os.listdir(RELEASE_DIR):
         yield os.path.join(RELEASE_DIR, file)
-
 
 def get_engine_version() -> str:
     proc = subprocess.run(
@@ -83,7 +75,6 @@ def get_engine_version() -> str:
     )
 
     return proc.stdout.strip()
-
 
 if __name__ == '__main__':
     main()
