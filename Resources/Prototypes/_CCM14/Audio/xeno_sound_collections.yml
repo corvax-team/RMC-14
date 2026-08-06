@@ -1,0 +1,6 @@
+- type: soundCollection
+  id: CCMXenoFootstepMedium
+  files:
+  - /Audio/_CCM14/Xeno/XenoFootstepMedium/alien_footstep_medium1.ogg
+  - /Audio/_CCM14/Xeno/XenoFootstepMedium/alien_footstep_medium2.ogg
+  - /Audio/_CCM14/Xeno/XenoFootstepMedium/alien_footstep_medium3.ogg
