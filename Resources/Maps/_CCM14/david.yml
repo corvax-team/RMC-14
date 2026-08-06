@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 264.0.2-fix-physics
-  forkId: ""
-  forkVersion: ""
-  time: 07/07/2026 21:14:03
-  entityCount: 12787
+  engineVersion: 264.0.2
+  forkId: tgmc14-local-ccm-fixmsg
+  forkVersion: dev-2026-02-26-launcher-fix-2
+  time: 08/06/2026 07:34:36
+  entityCount: 12785
 maps:
 - 1
 grids:
@@ -23198,7 +23198,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 618.0327152
     - type: Door
-      secondsUntilStateChange: -104893.36
+      secondsUntilStateChange: -105019.18
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -23212,7 +23212,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 618.0327152
     - type: Door
-      secondsUntilStateChange: -104893.36
+      secondsUntilStateChange: -105019.18
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -57450,29 +57450,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 56.5,15.5
       parent: 1
-- proto: DrinkMilkCarton
-  entities:
-  - uid: 2105
-    components:
-    - type: Transform
-      parent: 2104
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 2106
-    components:
-    - type: Transform
-      parent: 2104
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 2107
-    components:
-    - type: Transform
-      parent: 2104
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: DrinkSodaWaterBottleFull
   entities:
   - uid: 7826
@@ -69896,12 +69873,6 @@ entities:
     - type: Transform
       pos: 13.515278,8.660038
       parent: 1
-  - uid: 12304
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 32.30927,119.390594
-      parent: 1
 - proto: RMCDeskFlag
   entities:
   - uid: 97
@@ -70026,6 +69997,29 @@ entities:
       rot: 3.141592653589793 rad
       pos: -50.5,14.5
       parent: 1
+- proto: RMCDrinkMilkCarton
+  entities:
+  - uid: 2105
+    components:
+    - type: Transform
+      parent: 2104
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 2106
+    components:
+    - type: Transform
+      parent: 2104
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 2107
+    components:
+    - type: Transform
+      parent: 2104
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: RMCDropshipFabricator
   entities:
   - uid: 9588
@@ -76275,6 +76269,7 @@ entities:
       - CMCMO
       - IntelOfficer
       - RMCFieldDoctor
+      - CCMBaillif
       - CMCargoTech
       - SmartGunOperator
       - SO
@@ -76301,6 +76296,7 @@ entities:
       - CMAccessSpecPrep
       - CMAccessKitchen
       - RMCAccessDatabase
+      - CCMAccessBaillif
       - CMAccessBrig
       - CMAccessSmartPrep
       - CMAccessOT
@@ -76320,6 +76316,7 @@ entities:
       - CMAccessDelta
       - CMAccessFTLPrep
       - CMAccessCMO
+      - RMCAccessVehicleCrew
       - CMAccessMedical
       - CMAccessAlpha
       - CMAccessMarineRifleman
@@ -76356,6 +76353,7 @@ entities:
       - CMCMO
       - IntelOfficer
       - RMCFieldDoctor
+      - CCMBaillif
       - CMCargoTech
       - SmartGunOperator
       - SO
@@ -76382,6 +76380,7 @@ entities:
       - CMAccessSpecPrep
       - CMAccessKitchen
       - RMCAccessDatabase
+      - CCMAccessBaillif
       - CMAccessBrig
       - CMAccessSmartPrep
       - CMAccessOT
@@ -76401,6 +76400,7 @@ entities:
       - CMAccessDelta
       - CMAccessFTLPrep
       - CMAccessCMO
+      - RMCAccessVehicleCrew
       - CMAccessMedical
       - CMAccessAlpha
       - CMAccessMarineRifleman
@@ -76437,6 +76437,7 @@ entities:
       - CMCMO
       - IntelOfficer
       - RMCFieldDoctor
+      - CCMBaillif
       - CMCargoTech
       - SmartGunOperator
       - SO
@@ -76463,6 +76464,7 @@ entities:
       - CMAccessSpecPrep
       - CMAccessKitchen
       - RMCAccessDatabase
+      - CCMAccessBaillif
       - CMAccessBrig
       - CMAccessSmartPrep
       - CMAccessOT
@@ -76482,6 +76484,7 @@ entities:
       - CMAccessDelta
       - CMAccessFTLPrep
       - CMAccessCMO
+      - RMCAccessVehicleCrew
       - CMAccessMedical
       - CMAccessAlpha
       - CMAccessMarineRifleman
@@ -86545,6 +86548,14 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -50.5,17.5
+      parent: 1
+- proto: RMCSigintTerminal
+  entities:
+  - uid: 3948
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 32.5,119.5
       parent: 1
 - proto: RMCSmallFloodlight
   entities:
