@@ -84,7 +84,7 @@
     restHealMultiplier:  1.40
   - type: SlowOnPull
     slowdowns:
-    - multiplier: 0.3825
+    - multiplier: 0.3425
       whitelist:
         components:
         - Marine
