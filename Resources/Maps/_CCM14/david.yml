@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 264.0.2-fix-physics
-  forkId: ""
-  forkVersion: ""
-  time: 07/07/2026 21:14:03
-  entityCount: 12787
+  engineVersion: 264.0.2
+  forkId: tgmc14-local-ccm-fixmsg
+  forkVersion: dev-2026-02-26-launcher-fix-2
+  time: 08/06/2026 03:00:57
+  entityCount: 12785
 maps:
 - 1
 grids:
@@ -22275,11 +22275,11 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 11623
           - 11628
-          - 11626
-          - 11624
           - 11627
+          - 11624
+          - 11626
+          - 11623
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -23198,7 +23198,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 618.0327152
     - type: Door
-      secondsUntilStateChange: -104893.36
+      secondsUntilStateChange: -105842.766
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -23212,7 +23212,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 618.0327152
     - type: Door
-      secondsUntilStateChange: -104893.36
+      secondsUntilStateChange: -105842.766
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -25008,10 +25008,10 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 2868
           - 1107
-          - 1108
           - 1106
+          - 1108
+          - 2868
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -25192,25 +25192,25 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 3931
           - 3509
-          - 3910
-          - 3911
-          - 3919
-          - 10542
-          - 10541
-          - 10538
-          - 10536
-          - 9783
-          - 10614
-          - 10610
-          - 10655
-          - 10651
-          - 9523
-          - 3920
-          - 3929
-          - 3930
           - 3932
+          - 3930
+          - 3929
+          - 3920
+          - 9523
+          - 10651
+          - 10655
+          - 10610
+          - 10614
+          - 9783
+          - 10536
+          - 10538
+          - 10541
+          - 10542
+          - 3919
+          - 3911
+          - 3910
+          - 3931
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -57450,29 +57450,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 56.5,15.5
       parent: 1
-- proto: DrinkMilkCarton
-  entities:
-  - uid: 2105
-    components:
-    - type: Transform
-      parent: 2104
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 2106
-    components:
-    - type: Transform
-      parent: 2104
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 2107
-    components:
-    - type: Transform
-      parent: 2104
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: DrinkSodaWaterBottleFull
   entities:
   - uid: 7826
@@ -69896,12 +69873,6 @@ entities:
     - type: Transform
       pos: 13.515278,8.660038
       parent: 1
-  - uid: 12304
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 32.30927,119.390594
-      parent: 1
 - proto: RMCDeskFlag
   entities:
   - uid: 97
@@ -70026,6 +69997,29 @@ entities:
       rot: 3.141592653589793 rad
       pos: -50.5,14.5
       parent: 1
+- proto: RMCDrinkMilkCarton
+  entities:
+  - uid: 2105
+    components:
+    - type: Transform
+      parent: 2104
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 2106
+    components:
+    - type: Transform
+      parent: 2104
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 2107
+    components:
+    - type: Transform
+      parent: 2104
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
 - proto: RMCDropshipFabricator
   entities:
   - uid: 9588
@@ -76275,6 +76269,7 @@ entities:
       - CMCMO
       - IntelOfficer
       - RMCFieldDoctor
+      - CCMBaillif
       - CMCargoTech
       - SmartGunOperator
       - SO
@@ -76301,6 +76296,7 @@ entities:
       - CMAccessSpecPrep
       - CMAccessKitchen
       - RMCAccessDatabase
+      - CCMAccessBaillif
       - CMAccessBrig
       - CMAccessSmartPrep
       - CMAccessOT
@@ -76320,6 +76316,7 @@ entities:
       - CMAccessDelta
       - CMAccessFTLPrep
       - CMAccessCMO
+      - RMCAccessVehicleCrew
       - CMAccessMedical
       - CMAccessAlpha
       - CMAccessMarineRifleman
@@ -76356,6 +76353,7 @@ entities:
       - CMCMO
       - IntelOfficer
       - RMCFieldDoctor
+      - CCMBaillif
       - CMCargoTech
       - SmartGunOperator
       - SO
@@ -76382,6 +76380,7 @@ entities:
       - CMAccessSpecPrep
       - CMAccessKitchen
       - RMCAccessDatabase
+      - CCMAccessBaillif
       - CMAccessBrig
       - CMAccessSmartPrep
       - CMAccessOT
@@ -76401,6 +76400,7 @@ entities:
       - CMAccessDelta
       - CMAccessFTLPrep
       - CMAccessCMO
+      - RMCAccessVehicleCrew
       - CMAccessMedical
       - CMAccessAlpha
       - CMAccessMarineRifleman
@@ -76437,6 +76437,7 @@ entities:
       - CMCMO
       - IntelOfficer
       - RMCFieldDoctor
+      - CCMBaillif
       - CMCargoTech
       - SmartGunOperator
       - SO
@@ -76463,6 +76464,7 @@ entities:
       - CMAccessSpecPrep
       - CMAccessKitchen
       - RMCAccessDatabase
+      - CCMAccessBaillif
       - CMAccessBrig
       - CMAccessSmartPrep
       - CMAccessOT
@@ -76482,6 +76484,7 @@ entities:
       - CMAccessDelta
       - CMAccessFTLPrep
       - CMAccessCMO
+      - RMCAccessVehicleCrew
       - CMAccessMedical
       - CMAccessAlpha
       - CMAccessMarineRifleman
@@ -82156,7 +82159,7 @@ entities:
   - uid: 11829
     components:
     - type: Transform
-      pos: 21.615995,116.870255
+      pos: 21.517666,116.431755
       parent: 1
 - proto: RMCPaperworkLocker
   entities:
@@ -86545,6 +86548,14 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -50.5,17.5
+      parent: 1
+- proto: RMCSigintTerminal
+  entities:
+  - uid: 3948
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 32.5,119.5
       parent: 1
 - proto: RMCSmallFloodlight
   entities:
