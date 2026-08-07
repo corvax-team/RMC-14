@@ -682,10 +682,10 @@
     equipDelay: 1
     unequipDelay: 0.5
   - type: CMArmor
-    melee: 0 # CLOTHING_ARMOR_NONE
-    bullet: 0
-    bio: 0
-    explosionArmor: 0
+    melee: 10 # CLOTHING_ARMOR_NONE
+    bullet: 10
+    bio: 10
+    explosionArmor: 10
   - type: RMCArmorSpeedTier
     speedTier: super light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
