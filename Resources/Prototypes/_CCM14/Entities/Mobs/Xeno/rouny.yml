@@ -33,7 +33,10 @@
     max: 1
   - type: MovementSpeedModifier
     baseWalkSpeed: 6.25
-    baseSprintSpeed: 12.25
+    baseSprintSpeed: 11
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: CCMXenoFootstepMedium
   - type: XenoMaturing
     critThreshold: 650
     deadThreshold: 750
@@ -81,7 +84,7 @@
     restHealMultiplier:  1.40
   - type: SlowOnPull
     slowdowns:
-    - multiplier: 0.3825
+    - multiplier: 0.3425
       whitelist:
         components:
         - Marine
