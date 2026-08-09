@@ -1,0 +1,10 @@
+- type: entity
+  parent: CMGlassesM42ScoutSight
+  id: CCMGlassesRaiderVisorNVG
+  name: MX-10 HUD eye visor
+  description: A headset and night vision goggles system used marine raiders. Allows highlighted imaging of surroundings.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Eyes/marsoc.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Eyes/marsoc.rsi

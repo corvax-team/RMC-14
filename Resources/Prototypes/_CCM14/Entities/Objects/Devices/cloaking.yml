@@ -1,0 +1,31 @@
+- type: entity
+  parent: BaseItem
+  id: CCMCloakingDevice
+  name: Mk3 cloaking device
+  description: A device that allows people to go invisible.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Devices/cloak.rsi
+    state: icon
+  - type: ItemToggle
+  - type: ComponentToggler
+    parent: true
+    components:
+    - type: Stealth
+      minVisibility: 0.1
+      lastVisibility: 0.1
+  - type: PowerCellDraw
+    drawRate: 0.3
+  - type: ToggleCellDraw
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellSmallNuclear
+        disableEject: true
+        swap: false

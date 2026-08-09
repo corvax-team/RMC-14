@@ -125,9 +125,9 @@
   description: A black uniform for elite Marine personnel. Designed to be comfortable and help blend into dark environments.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/marsoc.rsi
+    sprite: _CCM14/Objects/Clothing/Uniforms/marsoc.rsi # CCM14
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/marsoc.rsi
+    sprite: _CCM14/Objects/Clothing/Uniforms/marsoc.rsi # CCM14
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold

@@ -1,0 +1,37 @@
+- type: entity
+  parent: RMCArmorM4PMCNoLight
+  id: CCMArmorRaider
+  name: marine raider hardsuit
+  description: A modernized combat hardsuit with a stealth field generator and an exoskeleton connected to it. Used by Marine Raiders.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/marsoc.rsi
+  - type: CMArmor
+    melee: 35
+    bullet: 35
+    bio: 20
+    explosionArmor: 40
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier
+    walkModifier: 1.1
+    sprintModifier: 1.1
+  - type: Storage
+    grid:
+    - 0,0,7,1 # 4 slots
+    maxItemSize: Small
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: TemperatureProtection
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.3
+
+- type: entity
+  parent: CCMArmorRaider
+  id: CCMArmorRaiderXM40
+  suffix: XM40 HEAP, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleXM40HEAP
+      amount: 4
