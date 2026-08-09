@@ -135,6 +135,7 @@
   - type: XenoEvolution
     strains:
     - RMCXenoLurkerVampire
+    - CCMXenoLurkerScorpion
   - type: VentCrawler
     ventCrawlIcon: lurker
   - type: RMCActionOrder

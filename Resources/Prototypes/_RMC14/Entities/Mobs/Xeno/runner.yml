@@ -57,6 +57,7 @@
     tags:
     - DoorBumpOpener
     - RMCSynthGrabbable
+    - FootstepSound
   - type: Xeno
     role: CMXenoRunner
     tier: 1
