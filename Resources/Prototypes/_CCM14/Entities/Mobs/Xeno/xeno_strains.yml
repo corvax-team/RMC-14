@@ -982,12 +982,12 @@
     attackEffect: RMCEffectTailHit
     damage:
       groups:
-        Brute: 60
+        Brute: 30
   - type: MeleeWeapon
     attackRate: 0.75
     damage:
       groups:
-        Brute: 20
+        Brute: 10
   - type: MovementSpeedModifier
     baseWalkSpeed: 3
     baseSprintSpeed: 6
@@ -999,7 +999,7 @@
       RMCMolecularAcid: 2
     tailDamage:
       groups:
-        Brute: 45
+        Brute: 25
   - type: XenoEnergy
     alert: XenoEnergyScorpion
     popupGain: Наш хвост наполяется ядом!
