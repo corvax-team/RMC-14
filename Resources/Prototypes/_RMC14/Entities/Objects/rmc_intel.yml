@@ -277,8 +277,8 @@
     tree:
       options:
       -
-        - name: Разблокировать Уровень 1
-          description: Переход дерева технологий на следующий этап развития.
+        - name: rmc-intel-tech-unlock-tier-1-name
+          description: rmc-intel-tech-unlock-tier-description
           cost: 0
           events:
           - !type:TechUnlockTierEvent
@@ -287,20 +287,20 @@
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
       -
-        - name: Хамви БРК
-          description: Разблокирует БРК конфигурацию бронеавтомобиля Хамви.
+        - name: rmc-intel-tech-requisition-arc-name
+          description: rmc-intel-tech-requisition-arc-description
           cost: 5
           events:
           - !type:TechUnlockVehicleEvent
             unlock: VehicleHumveeARC
           - !type:TechAnnounceEvent
-            author: УПРАВЛЕНИЕ АКТИВАМИ «ДАВИДА»
-            message: Для данной операции санкционировано развёртывание системы БРК.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-arc
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: humvee
-        - name: Увеличение бюджета снабжения
-          description: Выделение дополнительных ресурсов отделу снабжения для закупок.
+        - name: rmc-intel-tech-requisition-budget-name
+          description: rmc-intel-tech-requisition-budget-description
           cost: 7
           increase: 1
           repurchasable: true
@@ -308,13 +308,13 @@
           - !type:TechRequisitionsBudgetEvent
             amount: 5000
           - !type:TechAnnounceEvent
-            author: УПРАВЛЕНИЕ АКТИВАМИ «ДАВИДА»
-            message: Для данной операции санкционирован дополнительный бюджет снабжения.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-requisition-budget
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: budget_req
-        - name: Увеличение бюджета десантного шаттла
-          description: Выделение дополнительных ресурсов для фабрикатора компонентов десантного корабля.
+        - name: rmc-intel-tech-dropship-budget-name
+          description: rmc-intel-tech-dropship-budget-description
           cost: 6
           increase: 1
           repurchasable: true
@@ -322,41 +322,39 @@
           - !type:TechDropshipBudgetEvent
             amount: 2000
           - !type:TechAnnounceEvent
-            author: УПРАВЛЕНИЕ АКТИВАМИ «ДАВИДА»
-            message: Для данной операции санкционированы дополнительные очки фабрикатора компонентов десантного корабля.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-dropship-budget
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: budget_ds
-        - name: Разблокировать Уровень 2
-          description: Переход дерева технологий на следующий этап развития.
+        - name: rmc-intel-tech-unlock-tier-2-name
+          description: rmc-intel-tech-unlock-tier-description
           cost: 5
           events:
           - !type:TechUnlockTierEvent
             tier: 2
           - !type:TechAnnounceEvent
-            author: ПОВЫШЕНА БОЕВАЯ ГОТОВНОСТЬ «ДАВИДА»
-            message: "УРОВЕНЬ ОЦЕНКИ УГРОЗЫ ПОВЫШЕН ДО 2.
-
-              Разрешено использование активов Уровня 2"
+            author: rmc-intel-tech-announcement-defcon-author
+            message: rmc-intel-tech-announcement-tier-2
             sound: /Audio/_RMC14/AI/commandreport.ogg
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
       -
-        - name: Танк
-          description: Разрешает развертывание тяжелого бронированного танка. Главная ударная сила на передовой.
+        - name: ccm-intel-tech-requsition-tank-name
+          description: ccm-intel-tech-requsition-tank-description
           cost: 10
           events:
           - !type:TechUnlockVehicleEvent
             unlock: VehicleTank
           - !type:TechAnnounceEvent
-            author: УПРАВЛЕНИЕ АКТИВАМИ «ДАВИДА»
-            message: Для наземных операций разрешена поддержка тяжелой бронетехникой.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: ccm-intel-tech-announcement-tank
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: tank
-        - name: Доп. снаряды ОБ - Фугасные
-          description: Осколочно-фугасные боеприпасы для орбитальной пушки.
+        - name: rmc-intel-tech-ob-he-name
+          description: rmc-intel-tech-ob-he-description
           cost: 5
           increase: 2
           repurchasable: true
@@ -364,13 +362,13 @@
           - !type:TechLogisticsDeliveryEvent
             object: RMCOrbitalCannonWarheadExplosive
           - !type:TechAnnounceEvent
-            author: УПРАВЛЕНИЕ АКТИВАМИ «ДАВИДА»
-            message: На склад снабжения доставлены дополнительные фугасные боеголовки для орбитальной бомбардировки.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-ob-he
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: ob_he
-        - name: Доп. снаряды ОБ - Зажигательные
-          description: Зажигательные боеприпасы для орбитальной пушки.
+        - name: rmc-intel-tech-ob-incendiary-name
+          description: rmc-intel-tech-ob-incendiary-description
           cost: 5
           increase: 2
           repurchasable: true
@@ -378,13 +376,13 @@
           - !type:TechLogisticsDeliveryEvent
             object: RMCOrbitalCannonWarheadIncendiary
           - !type:TechAnnounceEvent
-            author: УПРАВЛЕНИЕ АКТИВАМИ «ДАВИДА»
-            message: На склад снабжения доставлены дополнительные зажигательные боеголовки для орбитальной бомбардировки.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-ob-incendiary
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: ob_incend
-        - name: Доп. снаряды ОБ - Кассетные
-          description: Кассетные боеприпасы для орбитальной пушки.
+        - name: rmc-intel-tech-ob-cluster-name
+          description: rmc-intel-tech-ob-cluster-description
           cost: 5
           increase: 2
           repurchasable: true
@@ -392,77 +390,73 @@
           - !type:TechLogisticsDeliveryEvent
             object: RMCOrbitalCannonWarheadCluster
           - !type:TechAnnounceEvent
-            author: УПРАВЛЕНИЕ АКТИВАМИ «ДАВИДА»
-            message: На склад снабжения доставлены дополнительные кассетные боеголовки для орбитальной бомбардировки.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-ob-cluster
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: ob_cluster
-        - name: Разблокировать Уровень 3
-          description: Переход дерева технологий на следующий этап развития.
+        - name: rmc-intel-tech-unlock-tier-3-name
+          description: rmc-intel-tech-unlock-tier-description
           cost: 5
           events:
           - !type:TechUnlockTierEvent
             tier: 3
           - !type:TechAnnounceEvent
-            author: ПОВЫШЕНА БОЕВАЯ ГОТОВНОСТЬ «ДАВИДА»
-            message: "УРОВЕНЬ ОЦЕНКИ УГРОЗЫ ПОВЫШЕН ДО 3.
-
-              Разрешено использование активов Уровня 3"
+            author: rmc-intel-tech-announcement-defcon-author
+            message: rmc-intel-tech-announcement-tier-3
             sound: /Audio/_RMC14/AI/commandreport.ogg
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
       -
-        - name: Разбудить дополнительный отряд
-          description: Вывод из криосна дополнительных пехотинцев для усиления операции.
+        - name: rmc-intel-tech-wake-troops-name
+          description: rmc-intel-tech-wake-troops-description
           cost: 6
           increase: 6
           repurchasable: true
           events:
           - !type:TechCryoMarinesEvent
           - !type:TechAnnounceEvent
-            author: УПРАВЛЕНИЕ АКТИВАМИ «ДАВИДА»
-            message: Дополнительный отряд выводится из криосна.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-wake-troops
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: cryotroops
-        - name: Разбудить дополнительного специалиста
-          description: Вывод из криосна ещё одного обученного специалиста.
+        - name: rmc-intel-tech-wake-specialist-name
+          description: rmc-intel-tech-wake-specialist-description
           cost: 8
           events:
           - !type:TechCryoSpecEvent
           - !type:TechAnnounceEvent
-            author: УПРАВЛЕНИЕ АКТИВАМИ «ДАВИДА»
-            message: Дополнительный специалист выводится из криосна.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-wake-specialist
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: overshield
-        - name: Разблокировать Уровень 4
-          description: Переход дерева технологий на следующий этап развития.
+        - name: rmc-intel-tech-unlock-tier-4-name
+          description: rmc-intel-tech-unlock-tier-description
           cost: 5
           events:
           - !type:TechUnlockTierEvent
             tier: 4
           - !type:TechAnnounceEvent
-            author: ПОВЫШЕНА БОЕВАЯ ГОТОВНОСТЬ «ДАВИДА»
-            message: "УРОВЕНЬ ОЦЕНКИ УГРОЗЫ ПОВЫШЕН ДО 4.
-
-              Разрешено использование активов Уровня 4"
+            author: rmc-intel-tech-announcement-defcon-author
+            message: rmc-intel-tech-announcement-tier-4
             sound: /Audio/_RMC14/AI/commandreport.ogg
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
       -
-        - name: Ядерное устройство
-          description: Приобретение тактического ядерного заряда. Доступно только через 80 минут после начала операции. Единственный способ быть во всём уверенным.
+        - name: rmc-intel-tech-nuclear-device-name
+          description: rmc-intel-tech-nuclear-device-description
           cost: 5
           timeLock: 80m
           events:
           - !type:TechLogisticsDeliveryEvent
             object: RMCNuke
           - !type:TechAnnounceEvent
-            author: УПРАВЛЕНИЕ АКТИВАМИ «ДАВИДА»
-            message: Использование ядерного вооружения санкционировано. Заряд будет доставлен на склад снабжения через ASRS.
+            author: rmc-intel-tech-announcement-special-assets-author
+            message: rmc-intel-tech-announcement-nuclear-device
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: nuke

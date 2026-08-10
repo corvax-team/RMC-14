@@ -27,3 +27,6 @@ ent-CCMXenoBurrowerImpaler = Бурильщик
 ent-CCMBurrowerBurrowedJaunt = Бурильщик
     .desc = Закопанный бурильщик выдвинувший свои шипы, осторожно, не наступите
     .suffix = CCM-Impaler-Burrowed
+ent-CCMXenoLurkerScorpion = Охотник
+    .suffix = CCM-Scorpion
+    .desc = Быстрый, мускулистый пришелец с массивным хвостом, увенчанным острым жалом.
