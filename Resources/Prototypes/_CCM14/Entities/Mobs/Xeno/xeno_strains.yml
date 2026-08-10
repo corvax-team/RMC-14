@@ -863,7 +863,7 @@
 - type: entity
   name: Burrower
   description: Burrowed Burrower, dont step on spikes!
-  parent: 
+  parent:
   - BaseMob
   - RMCXenoMobCollision
   - CMXenoBurrower
@@ -932,7 +932,7 @@
     - type: XenoEvolution
       strains: # CCM Change
       - CCMXenoBurrowerImpaler
-    - type: CanBeLarvaQueued 
+    - type: CanBeLarvaQueued
 # Polymorph
 - type: polymorph
   id: CCMJauntBurrow
@@ -948,3 +948,85 @@
     exitPolymorphSound: /Audio/_RMC14/Xeno/burrowoff.ogg
     duration: 5
 # // CCM Xeno Strain - Burrower Impaler
+
+- type: entity
+  parent:
+    - RMCXenoLurkerBase
+    - CMXenoTail
+  id: CCMXenoLurkerScorpion
+  suffix: CCM-Scorpion
+  components:
+  - type: Sprite
+    sprite: _CCM14/Mobs/Xenonids/Lurker/scorpion.rsi
+  - type: XenoStrain
+    name: Скорпион
+    description: ccm-xeno-scorpion-description
+    popup: Пришло время настоящей охоты!
+  - type: Xeno
+    role: CMXenoLurker
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailJab
+    - ActionXenoDevolve
+    - CCMActionXenoParalyzingInjection
+    - CCMActionXenoApprehendScorpion
+    - ActionXenoTailStabCorrosive
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      400: Critical
+      500: Dead
+  - type: XenoTailJab
+    attackEffect: RMCEffectTailHit
+    damage:
+      groups:
+        Brute: 60
+  - type: MeleeWeapon
+    attackRate: 0.75
+    damage:
+      groups:
+        Brute: 20
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 6
+  - type: CMArmor
+    xenoArmor: 10
+    explosionArmor: 20
+  - type: XenoTailStab
+    inject:
+      RMCMolecularAcid: 2
+    tailDamage:
+      groups:
+        Brute: 45
+  - type: XenoEnergy
+    alert: XenoEnergyScorpion
+    popupGain: Наш хвост наполяется ядом!
+    popupNotEnough: У нас недостаточно яда!
+    max: 500
+    gainAttack: 15
+    gainAttackDowned: 15
+  - type: XenoPlasma
+    plasma: 0
+    maxPlasma: 0
+    plasmaRegenOnWeeds: 0
+  - type: XenoCripplingStrike
+    activateText: rmc-xeno-apprehend-activate
+    deactivateText: rmc-xeno-apprehend-deactivate
+    expireText: rmc-xeno-apprehend-expire
+    removeOnHit: true
+    preventTackle: true
+    resetMeleeCooldown: true
+    damageMult: 1
+    speed: 1.2
+    slowDuration: 10
+  - type: XenoParalyzingSlash
+    stunDelay: 5
+    stunDuration: 30
+- type: alert
+  parent: XenoEnergyBase
+  id: XenoEnergyScorpion
+  name: Яд
+  description: Твой яд, используемый для других способностей.
+

@@ -270,6 +270,25 @@
     thresholds:
     - range: 8
       falloff: 10
+  - type: HoloTargeting
+    stacks: 60
+    maxStacks: 300
+    decay: 30
+  - type: RMCStunOnHit
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      knockBackSpeed: 0
+      knockBackPowerMax: 0
+      knockBackPowerMin: 0
+      slowsEffectBigXenos: false
+      forceKnockBack: false
+      maxRange: 22
+      losesEffectWithRange: true
+      stunTime: 0
+      superSlowTime: 0
+      slowTime: 0.95
+      dazeTime: 0.25
 
 # Tags
 
