@@ -619,15 +619,36 @@
   - type: DamageOnCollide
     damage:
       types:
-        Heat: -100
+        Heat: 175
       groups:
-        Brute: -100
+        Brute: 200
     chainDamage:
       types:
         Heat: 0
     whitelist:
       components:
       - XenoChargeSpit
+  - type: DamageOverTime
+    acidic: False
+    damageEvery: 0.25
+    affectsDead: false
+    affectsInfectedNested: false
+    armorPiercingDamage:
+      types:
+        Heat: -15
+      groups:
+        Brute: -15
+    damage:
+      types:
+        Heat: -15
+      groups:
+        Brute: -15
+    barricadeDamage:
+      types:
+        Heat: 0
+    whitelist:
+      components:
+      - XenoChargeSpit # Im lazy as shi
   - type: Transform
   - type: IgnorePredictionHit
   - type: Physics
@@ -679,16 +700,6 @@
     capacity: 24
     spreadAngle: 360
   - type: TriggerOnSpawn
-  - type: DamageOnCollide
-    damage:
-      types:
-        Heat: 375
-    chainDamage:
-      types:
-        Heat: 0
-    whitelist:
-      components:
-      - XenoChargeSpit
   - type: Transform
   - type: IgnorePredictionHit
   - type: Physics
