@@ -72,12 +72,12 @@
   - type: Item
     sprite: null
   - type: Hypospray
-    transferAmount: 58 # TODO RMC14 77
+    transferAmount: 77 # TODO RMC14 77 | CCM 14 Remade, Base is 58
     injectSound: /Audio/_RMC14/Medical/air_release.ogg
   - type: SolutionContainerManager
     solutions:
       pen:
-        maxVol: 58 # TODO RMC14 77
+        maxVol: 77 # TODO RMC14 77 | CCM 14 Remade, Base is 58
         reagents:
         - ReagentId: CMBicaridine
           Quantity: 29
