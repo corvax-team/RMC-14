@@ -52,18 +52,18 @@
     sprite: _CCM14/Objects/Xeno/xeno.rsi
     state: acid2-weak #Shitcode my beloved
   - type: DamageOverTime
-    damageEvery: 1.4
+    damageEvery: 1.5
     affectsDead: false
     affectsInfectedNested: false
     armorPiercingDamage:
       types:
-        Heat: 50
+        Heat: 60
     damage:
       types:
-        Heat: 50
+        Heat: 60
     barricadeDamage:
       types:
-        Heat: 20
+        Heat: 25
     whitelist:
       components:
       - Barricade
@@ -114,18 +114,18 @@
       components:
       - Marine
   - type: DamageOverTime
-    damageEvery: 1.4
+    damageEvery: 1.5
     affectsDead: false
     affectsInfectedNested: false
     armorPiercingDamage:
       types:
-        Heat: 15
+        Heat: 22.5
     damage:
       types:
-        Heat: 15
+        Heat: 22.5
     barricadeDamage:
       types:
-        Heat: 5
+        Heat: 7
     whitelist:
       components:
       - Barricade
