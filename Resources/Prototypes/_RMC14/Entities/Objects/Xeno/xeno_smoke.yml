@@ -29,7 +29,7 @@
     - HideContextMenu
   - type: Appearance
   - type: MCEdgeSpreader # CCM14
-    delay: 0.7
+    delay: 0.4
     range: 3
   - type: MCTimedDespawnDisappearanceVisuals
     lifetime: 12
@@ -51,8 +51,8 @@
         Heat: 8.5
     whitelist:
       components:
-      - Marine
-      - Xeno
+      - Marine 
+#      - Xeno CCM14 hehahaha
       - Vehicle
     multipliers:
     - multiplier: 2
@@ -93,7 +93,7 @@
   - type: Appearance
   - type: ActiveEdgeSpreader
   - type: MCEdgeSpreader # CCM14
-    delay: 0.1
+    delay: 0.3
   - type: MCTimedDespawnDisappearanceVisuals # CCM14
     lifetime: 12
   - type: EvenSmoke
