@@ -52,6 +52,7 @@
     sprite: _CCM14/Objects/Xeno/xeno.rsi
     state: acid2-weak #Shitcode my beloved
   - type: DamageOverTime
+    damageEvery: 1.4
     affectsDead: false
     affectsInfectedNested: false
     armorPiercingDamage:
@@ -113,6 +114,7 @@
       components:
       - Marine
   - type: DamageOverTime
+    damageEvery: 1.4
     affectsDead: false
     affectsInfectedNested: false
     armorPiercingDamage:
