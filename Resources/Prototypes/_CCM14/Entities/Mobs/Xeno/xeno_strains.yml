@@ -556,8 +556,8 @@
     description: ccm-xeno-scattershotspitter-description
     popup: ccm-xeno-scattershotspitter-popup
   - type: CMArmor
-    xenoArmor: 25
-    explosionArmor: 50
+    xenoArmor: 20
+    explosionArmor: 20
   - type: Xeno
     role: CMXenoSpitter
     actionIds:
