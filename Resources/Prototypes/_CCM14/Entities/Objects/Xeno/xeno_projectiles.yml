@@ -20,7 +20,7 @@
     impactEffect: XenoProjectileImpactEffect
     damage:
       types:
-        Heat: 15 # TODO RMC14 damage fall-off and higher at close range
+        Heat: 8 # TODO RMC14 damage fall-off and higher at close range
   - type: CMArmorPiercing
     amount: 10
 
@@ -47,7 +47,7 @@
     impactEffect: XenoProjectileImpactEffect
     damage:
       types:
-        Heat: 7 # TODO RMC14 damage fall-off and higher at close range
+        Heat: 4 # TODO RMC14 damage fall-off and higher at close range
   - type: CMArmorPiercing
     amount: 5
 
@@ -60,7 +60,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
     layers:
-    - state: neurotoxin
+    - state: xeno_acid_weak
       shader: unshaded
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
@@ -83,7 +83,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
     layers:
-    - state: neurotoxin
+    - state: xeno_acid_weak
       shader: unshaded
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
