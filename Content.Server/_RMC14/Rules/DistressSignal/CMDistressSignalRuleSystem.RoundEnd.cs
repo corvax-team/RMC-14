@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Hive; // CCM14
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
@@ -246,6 +247,24 @@ public sealed partial class CMDistressSignalRuleSystem
 
         if (audio != null)
             _audio.PlayGlobal(audio, Filter.Broadcast(), true, AudioParams.Default.WithVolume(-8));
+
+        // CCM14-start
+        _previousRoundQueenIds.Clear();
+
+        var hiveQuery = EntityQueryEnumerator<HiveComponent>();
+        while (hiveQuery.MoveNext(out _, out var hive))
+        {
+            if (hive.CurrentQueen != null &&
+                !Deleted(hive.CurrentQueen.Value) &&
+                TryComp<MobStateComponent>(hive.CurrentQueen.Value, out var mobState) &&
+                !_mobState.IsDead(hive.CurrentQueen.Value, mobState) &&
+                TryComp<ActorComponent>(hive.CurrentQueen.Value, out var actor))
+            {
+                _previousRoundQueenIds.Add(actor.PlayerSession.UserId);
+                break;
+            }
+        }
+        // CCM14-end
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
