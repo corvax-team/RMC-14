@@ -1,0 +1,14 @@
+- type: entity
+  parent: ActionMarineToggleable
+  id: CCMActionToggleFrontline
+  name: Toggle Frontline Mode
+  description: Switch the ammo type fired by this gun. [color=red]You can activate this by pressing the unique gun action keybind, Spacebar by default![/color]
+  components:
+  - type: Action
+    icon:
+      sprite: _CCM14/Actions/marine_smart_gun_actions.rsi
+      state: frontline
+    useDelay: 0.25
+    itemIconStyle: NoItem
+  - type: InstantAction
+    event: !type:GunToggleFrontlineActionEvent
