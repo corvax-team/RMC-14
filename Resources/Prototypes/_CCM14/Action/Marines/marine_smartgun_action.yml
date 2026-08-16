@@ -2,7 +2,7 @@
   parent: ActionMarineToggleable
   id: CCMActionToggleFrontline
   name: Toggle Frontline Mode
-  description: Switch the ammo type fired by this gun. [color=red]You can activate this by pressing the unique gun action keybind, Spacebar by default![/color]
+  description: Prevents firing through allied IFF signatures and modifies damage falloff for suppressive fire.
   components:
   - type: Action
     icon:

@@ -468,7 +468,7 @@
     - range: 12
       falloff: 9999
       ignoreModifiers: true
-    - range: 6 # CCM14
+    - range: 5 # CCM14
       falloff: 4
   - type: RMCProjectileAccuracy
     accuracy: 105
