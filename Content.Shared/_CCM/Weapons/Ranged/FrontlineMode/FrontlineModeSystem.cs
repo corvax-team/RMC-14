@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
@@ -27,6 +26,13 @@ public sealed class SmartGunFrontlineSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private EntityQuery<GunIFFComponent> _iffQuery;
+
+    private readonly List<RayCastResults> _raycastResults = new();
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _shooterFactions = new();
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _targetFactions = new();
+
+    private static readonly Comparison<RayCastResults> RaycastDistanceComparison =
+        static (a, b) => a.Distance.CompareTo(b.Distance);
 
     public override void Initialize()
     {
@@ -65,21 +71,20 @@ public sealed class SmartGunFrontlineSystem : EntitySystem
 
     private void OnAmmoShot(Entity<SmartGunFrontlineComponent> ent, ref AmmoShotEvent args)
     {
-        var useAltFalloff = false;
-        if (TryComp<GunIFFComponent>(ent, out var iff) && !iff.Enabled)
-            useAltFalloff = true;
-        else if (TryComp<SmartGunFrontlineComponent>(ent, out var frontline) && frontline.Enabled)
-            useAltFalloff = true;
+        var useAltFalloff = ent.Comp.Enabled;
 
-        if (useAltFalloff && TryComp<SmartGunFrontlineComponent>(ent, out var frontlineForFalloff))
+        if (!useAltFalloff && _iffQuery.TryComp(ent, out var iff))
+            useAltFalloff = !iff.Enabled;
+
+        if (!useAltFalloff)
+            return;
+
+        foreach (var projectile in args.FiredProjectiles)
         {
-            foreach (var projectile in args.FiredProjectiles)
+            if (TryComp<RMCProjectileDamageFalloffComponent>(projectile, out var falloff))
             {
-                if (TryComp<RMCProjectileDamageFalloffComponent>(projectile, out var falloff))
-                {
-                    falloff.Thresholds = frontlineForFalloff.AltFalloffThresholds;
-                    Dirty(projectile, falloff);
-                }
+                falloff.Thresholds = ent.Comp.AltFalloffThresholds;
+                Dirty(projectile, falloff);
             }
         }
     }
@@ -97,58 +102,41 @@ public sealed class SmartGunFrontlineSystem : EntitySystem
         var gunXform = Transform(ent.Owner);
 
         var gunPos = _transform.GetWorldPosition(gunXform);
-
-        Vector2 targetPos;
-        if (TryComp<GunComponent>(ent, out var gunComp))
-        {
-            if (gunComp.ShootCoordinates is { } shootCoord)
-            {
-                var targetMap = _transform.ToMapCoordinates(shootCoord);
-                targetPos = targetMap.Position;
-            }
-            else if (gunComp.Target is { } targetEnt && targetEnt != EntityUid.Invalid)
-            {
-                var targetXform = Transform(targetEnt);
-                targetPos = _transform.GetWorldPosition(targetXform);
-            }
-            else
-            {
-                var shooterRot = _transform.GetWorldRotation(shooterXform);
-                var aimDir = shooterRot.ToVec();
-                targetPos = gunPos + aimDir * ent.Comp.MaxDistance;
-            }
-        }
-        else
-        {
-            var shooterRot = _transform.GetWorldRotation(shooterXform);
-            var aimDir = shooterRot.ToVec();
-            targetPos = gunPos + aimDir * ent.Comp.MaxDistance;
-        }
+        var targetPos = GetTargetPosition(ent, shooter, shooterXform, gunPos);
+        if (float.IsNaN(targetPos.X) || float.IsNaN(targetPos.Y) ||
+            float.IsInfinity(targetPos.X) || float.IsInfinity(targetPos.Y))
+            return;
 
         var direction = targetPos - gunPos;
         if (direction.LengthSquared() < 0.001f)
             return;
 
-        if (float.IsNaN(direction.X) || float.IsNaN(direction.Y) ||
-            float.IsInfinity(direction.X) || float.IsInfinity(direction.Y))
-            return;
-
         direction = Vector2.Normalize(direction);
 
-        var factions = new HashSet<EntProtoId<IFFFactionComponent>>();
+        _shooterFactions.Clear();
         var shooterUserIFF = CompOrNull<UserIFFComponent>(shooter);
-        if (!_gunIFF.TryGetFactions((shooter, shooterUserIFF), factions, SlotFlags.IDCARD))
+        if (!_gunIFF.TryGetFactions((shooter, shooterUserIFF), _shooterFactions, SlotFlags.IDCARD))
             return;
 
         var ray = new CollisionRay(gunPos, direction, (int)CollisionGroup.AllMask);
-        var results = _physics.IntersectRay(gunXform.MapID, ray, ent.Comp.MaxDistance, shooter, false).ToList();
+        _raycastResults.Clear();
 
-        foreach (var hit in results.OrderBy(r => r.Distance))
+        foreach (var hit in _physics.IntersectRay(gunXform.MapID, ray, ent.Comp.MaxDistance, shooter, false))
+        {
+            _raycastResults.Add(hit);
+        }
+
+        if (_raycastResults.Count == 0)
+            return;
+
+        _raycastResults.Sort(RaycastDistanceComparison);
+
+        foreach (var hit in _raycastResults)
         {
             if (hit.HitEntity == shooter || hit.HitEntity == ent.Owner)
                 continue;
 
-            if (CheckFactions(hit.HitEntity, factions))
+            if (CheckFactions(hit.HitEntity))
             {
                 args.Cancel();
                 ShowBlockedMessage(ent, shooter);
@@ -157,14 +145,43 @@ public sealed class SmartGunFrontlineSystem : EntitySystem
         }
     }
 
-    private bool CheckFactions(EntityUid target, HashSet<EntProtoId<IFFFactionComponent>> shooterFactions)
+    private Vector2 GetTargetPosition(
+        Entity<SmartGunFrontlineComponent> ent,
+        EntityUid shooter,
+        TransformComponent shooterXform,
+        Vector2 gunPos)
     {
-        var targetFactions = new HashSet<EntProtoId<IFFFactionComponent>>();
+        if (TryComp<GunComponent>(ent, out var gunComp))
+        {
+            if (gunComp.ShootCoordinates is { } shootCoord)
+            {
+                var targetMap = _transform.ToMapCoordinates(shootCoord);
+                return targetMap.Position;
+            }
 
+            if (gunComp.Target is { } targetEnt && targetEnt != EntityUid.Invalid)
+            {
+                var targetXform = Transform(targetEnt);
+                return _transform.GetWorldPosition(targetXform);
+            }
+        }
+
+        var shooterRot = _transform.GetWorldRotation(shooterXform);
+        var aimDir = shooterRot.ToVec();
+        return gunPos + aimDir * ent.Comp.MaxDistance;
+    }
+
+    private bool CheckFactions(EntityUid target)
+    {
+        _targetFactions.Clear();
         var targetUserIFF = CompOrNull<UserIFFComponent>(target);
-        bool gotFactions = _gunIFF.TryGetFactions((target, targetUserIFF), targetFactions, SlotFlags.IDCARD);
+        bool gotFactions = _gunIFF.TryGetFactions((target, targetUserIFF), _targetFactions, SlotFlags.IDCARD);
+
         if (!gotFactions)
-            gotFactions = _gunIFF.TryGetFactions((target, targetUserIFF), targetFactions);
+        {
+            _targetFactions.Clear();
+            gotFactions = _gunIFF.TryGetFactions((target, targetUserIFF), _targetFactions);
+        }
 
         if (!gotFactions)
         {
@@ -172,13 +189,19 @@ public sealed class SmartGunFrontlineSystem : EntitySystem
             if (parent != EntityUid.Invalid)
             {
                 var parentUserIFF = CompOrNull<UserIFFComponent>(parent);
-                gotFactions = _gunIFF.TryGetFactions((parent, parentUserIFF), targetFactions, SlotFlags.IDCARD);
+
+                _targetFactions.Clear();
+                gotFactions = _gunIFF.TryGetFactions((parent, parentUserIFF), _targetFactions, SlotFlags.IDCARD);
+
                 if (!gotFactions)
-                    gotFactions = _gunIFF.TryGetFactions((parent, parentUserIFF), targetFactions);
+                {
+                    _targetFactions.Clear();
+                    gotFactions = _gunIFF.TryGetFactions((parent, parentUserIFF), _targetFactions);
+                }
             }
         }
 
-        return gotFactions && shooterFactions.Overlaps(targetFactions);
+        return gotFactions && _shooterFactions.Overlaps(_targetFactions);
     }
 
     private void ShowBlockedMessage(Entity<SmartGunFrontlineComponent> ent, EntityUid shooter)
