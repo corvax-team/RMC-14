@@ -46,6 +46,9 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillOverwatch: 1
         RMCSkillResearch: 1
+# CCM14 ADD
+        RMCSkillVehicles: 1
+# CCM14 ADD
     - type: CMVendorUser
       id: CMIntelOfficer
       points: 45

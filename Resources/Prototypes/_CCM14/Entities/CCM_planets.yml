@@ -49,7 +49,7 @@
   components:
   - type: RMCPlanetMapPrototype
     map: /Maps/_CCM14/Planets/westernforest.yml
-    camouflage: Snow
+    camouflage: Jungle
     announcement: "Пехота! Был получен сигнал бедствия с горнодобывающей колонии СССП неподалеку отсюда. Поможем нашим товарищам избавиться от заразы.
       Для общего понимания,
       Обозначение колонии - островная исследовательская станция и горнодобывающее предприятие.

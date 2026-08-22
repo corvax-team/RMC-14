@@ -1,3 +1,4 @@
+using Content.Shared._CCM.Weapons.Ranged.Frontline; // CCM14
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
@@ -6,7 +7,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Projectiles;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(RMCProjectileSystem))]
+[Access(typeof(RMCProjectileSystem), typeof(SmartGunFrontlineSystem))] // CCM14 +SmartGunFrontlineSystem
 public sealed partial class RMCProjectileDamageFalloffComponent : Component
 {
     /// <summary>

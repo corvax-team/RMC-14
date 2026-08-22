@@ -215,3 +215,26 @@
         - XenoProjectileImpassable
   - type: TimedDespawn
     lifetime: 3
+
+- type: entity
+  id: CCMXenoSwarmerSpitCloseRange
+  parent: XenoSpitProjectile
+  name: acidic close spit
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: xeno_acid_weak
+      shader: unshaded
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+  - type: ProjectileMaxRange
+    max: 3
+  - type: Projectile
+    impactEffect: XenoProjectileImpactEffect
+    damage:
+      types:
+        Heat: 15.7 # TODO RMC14 damage fall-off and higher at close range
+  - type: CMArmorPiercing
+    amount: 10

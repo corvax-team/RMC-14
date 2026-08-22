@@ -193,14 +193,16 @@
         amount: 3
       - id: CMSyringe
         amount: 7
-# CMU ADD
+# CMU-CCM ADD
       - id: CMUBoneGraftItem
         amount: 3
       - id: CMUCastItem
         amount: 3
       - id: CMUOrganClampItem
         amount: 3
-# CMU END
+      - id: CCMMedicalSprayBottle
+        amount: 2
+# CMU-CCM  END
 
 - type: entity
   parent: CMVendorMedicalAllAccess
@@ -327,14 +329,16 @@
         amount: 3
       - id: CMSyringe
         amount: 7
-# CMU ADD
+# CMU-CCM ADD
       - id: CMUBoneGraftItem
         amount: 3
       - id: CMUCastItem
         amount: 3
       - id: CMUOrganClampItem
         amount: 3
-# CMU END
+      - id: CCMMedicalSprayBottle
+        amount: 2
+# CMU-CCM  END
 
 - type: entity
   parent: CMVendorMedical

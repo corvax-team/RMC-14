@@ -34,8 +34,8 @@
     - Burst
     recoilWielded: 1
     recoilUnwielded: 2
-    scatterWielded: 10
-    scatterUnwielded: 10
+    scatterWielded: 5 # CCM Rework | Base 10
+    scatterUnwielded: 8 # CCM Rework | Base 10
     baseFireRate: 10
     burstScatterMult: 5
     modifiers:
@@ -81,7 +81,7 @@
       tags:
       - RMCCartridgePistol45ACP
     proto: RMCCartridgePistol45ACP
-    capacity: 15
+    capacity: 20 # CCM Rework | Base 15
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/su6.rsi
     layers:
@@ -111,7 +111,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 30
+        Piercing: 33 # CCM Rework | Base 30
   - type: CMArmorPiercing
     amount: 20
   - type: RMCProjectileAccuracy

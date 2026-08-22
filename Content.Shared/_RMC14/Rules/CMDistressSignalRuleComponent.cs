@@ -390,12 +390,12 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public List<string> RoundStartGameMaps = new();
     // CCM14-start
     [DataField]
-    public int MarinesSpawned;
+    public int MarinesSpawned { get; set; }
 
     [DataField]
-    public int XenosSpawned;
+    public int XenosSpawned { get; set; }
 
     [DataField]
-    public int SurvivorsSpawned;
+    public int SurvivorsSpawned { get; set; }
     // CCM14-end
 }

@@ -184,7 +184,7 @@
       types:
         Piercing: 72
   - type: CMArmorPiercing
-    amount: 5
+    amount: 10 # CCM Rework | Base 5
   - type: RMCProjectileAccuracy
     accuracy: 90
 
@@ -197,16 +197,16 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 55
+        Piercing: 40 # CCM Rework | Base 55
   - type: RMCProjectileDamageFalloff
     thresholds:
-    - range: 22
+    - range: 38 # CCM Rework | Base 22
       falloff: 9999
       ignoreModifiers: true
   - type: CMArmorPiercing
-    amount: 35
+    amount: 55 # CCM Rework | Base 35
   - type: RMCProjectileAccuracy
-    accuracy: 90
+    accuracy: 120 # CCM Rework | Base 90
     thresholds:
     - range: 12
       falloff: 10

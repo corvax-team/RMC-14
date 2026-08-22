@@ -52,6 +52,11 @@
     - FullAuto
     soundGunshot: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
     cameraRecoilScalar: 0
+# CCM14 Addon
+  - type: GunIFF
+    enabled: true
+    intrinsic: true
+# CCM14 Addon
   - type: BallisticAmmoProvider
     cycleable: false
     proto: VehicleCartridgeAPCFrontalCannon10x50mm
@@ -104,6 +109,11 @@
   - type: VehicleHardpointAmmo
     magazineSize: 40
     maxStoredMagazines: 2
+# CCM14 Addon
+  - type: GunIFF
+    enabled: true
+    intrinsic: true
+# CCM14 Addon
   - type: GunFireArc
     arc: 90
   - type: RefillableByBulletBox
@@ -239,6 +249,11 @@
     - FullAuto
     soundGunshot: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
     cameraRecoilScalar: 0
+# CCM14 Addon
+  - type: GunIFF
+    enabled: true
+    intrinsic: true
+# CCM14 Addon
   - type: MagazineAmmoProvider
     autoEject: true
   - type: RMCGunChamber

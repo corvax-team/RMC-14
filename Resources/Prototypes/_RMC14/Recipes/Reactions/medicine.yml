@@ -183,6 +183,56 @@
     CMUOxycodone: 3
 
 - type: reaction
+  id: CMUFentanylPrecursor
+  reactants:
+    CMUOxycodone:
+      amount: 1
+    RMCCLF3:
+      amount: 1
+  products:
+    CMUFentanylPrecursor: 2
+
+- type: reaction
+  id: CMUFentanyl
+  reactants:
+    CMUFentanylPrecursor:
+      amount: 1
+    CMEpinephrine:
+      amount: 1
+    RMCPhosphorus:
+      amount: 1
+  products:
+    CMUFentanyl: 1
+
+- type: reaction
+  id: CMUSleen
+  reactants:
+    CMUOxycodone:
+      amount: 1
+    CMUTramadol:
+      amount: 1
+    RMCEthanol:
+      amount: 1
+    CMInaprovaline:
+      amount: 1
+  products:
+    CMUSleen: 4
+
+- type: reaction
+  id: CMUSoporific
+  reactants:
+    RMCChloralhydrate:
+      amount: 1
+    RMCChlorine:
+      amount: 1
+    RMCEthanol:
+      amount: 1
+    RMCSugar:
+      amount: 1
+  products:
+    CMUSoporific: 4
+
+- type: reaction
   id: CMUHepatocytin
   reactants:
     CMDylovene:

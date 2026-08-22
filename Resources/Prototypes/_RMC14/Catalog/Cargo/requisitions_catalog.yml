@@ -419,6 +419,10 @@
         crate: RMCCratePyroTankTypeB
       - cost: 4000
         crate: RMCCratePyroTankTypeX
+      - cost: 7000
+        crate: CCMCrateM404KSpecFullAmmo
+      - cost: 3000
+        crate: CCMCrateM404KSpecBlackRocket
 
 
 

@@ -79,6 +79,12 @@
     tags:
     - Sidearm
     - RMCMK80
+# CCM14 Rework
+  - type: GunDualWielding
+    scatterModifier: 75
+    accuracyAddMult: -0.6
+    weaponGroup: Handgun
+# CCM14 Rework
 
 - type: entity
   parent: RMCMK80
@@ -119,7 +125,7 @@
       - CMCartridgePistol9mm
       - RMCCartridgePistol9mmSquashHead #MK80 is specially chambered to take these rounds, regular pistols cannot.
     proto: RMCCartridgePistol9mmSquashHead
-    capacity: 18
+    capacity: 25 # CCM Rework | Base 18
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mk80.rsi
     layers:
@@ -156,13 +162,13 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 45
+        Piercing: 50 # CCM Rework | Base 45
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 22
       falloff: 9999
       ignoreModifiers: true
-    - range: 6
+    - range: 10 # CCM Rework | Base is 6
       falloff: 5
   - type: CMArmorPiercing
     amount: 30

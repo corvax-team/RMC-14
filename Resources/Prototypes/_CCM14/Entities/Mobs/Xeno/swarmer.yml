@@ -48,6 +48,7 @@
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     - ActionXenoTransferPlasma
+    - ActionXenoSpit
     - ActionXenoDevolve
     tier: 3
     hudOffset: -0.15,0.25
@@ -75,6 +76,8 @@
     - HivePlasmaTreeXenoConstructionNode
   - type: XenoRegen
     restHealMultiplier:  1.4 #Вождь баланс
+  - type: XenoSpit
+    projectileId: CCMXenoSwarmerSpitCloseRange
   - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
