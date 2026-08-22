@@ -21,6 +21,13 @@
     - type: NpcFactionMember
       factions:
       - Serene
+    - type: Language
+      spokenLanguages:
+      - German
+      understoodLanguages:
+      - German
+      currentLanguage: German
+      defaultLanguage: German
     - type: Skills
       skills:
         RMCSkillFirearms: 2

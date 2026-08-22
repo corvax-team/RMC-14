@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "hudsquad_pg made by assasin4ik, petrishev made by superman1223, base off the USSP pin by @no_mad#0260",
+  "copyright": "hudsquad_pg made by assasin4ik, petrishev, serene, red patch made by superman1223, base off the USSP pin by @no_mad#0260",
   "size": {
     "x": 16,
     "y": 16
@@ -45,6 +45,12 @@
         },
         {
             "name": "serene_operative"
+        },
+        {
+            "name": "rp_peacekeeper"
+        },
+        {
+            "name": "rp_leader"
         }
     ]
 }

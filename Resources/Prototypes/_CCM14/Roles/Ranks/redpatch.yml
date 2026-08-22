@@ -1,0 +1,11 @@
+- type: rank
+  id: CCMRankRedPatchPeace
+  name: Миротворец
+  prefix: Мир.
+  paygrade: E2
+
+- type: rank
+  id: CCMRankRedPatchStCoor
+  name: Старший Координатор
+  prefix: Ст. Коор.
+  paygrade: E6

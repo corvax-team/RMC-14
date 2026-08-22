@@ -5,3 +5,7 @@
 - type: trackerMode
   id: LeaderSerene
   job: CCMSereneLeader
+
+- type: trackerMode
+  id: LeaderRP
+  job: CCMRPLeader

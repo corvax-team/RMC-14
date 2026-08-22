@@ -1,0 +1,10 @@
+rmc-name-borg-1 = М.А.Й.К.
+rmc-name-borg-2 = С.И.Д.Н.И.
+rmc-name-borg-3 = К.И.Л.О.
+rmc-name-borg-4 = Р.И.Ч.И.
+rmc-name-borg-5 = М.И.Л.Л.Е.Р.
+rmc-name-borg-6 = К.Е.Й.Л.И.
+rmc-name-borg-7 = Б.О.Б.
+rmc-name-borg-8 = С.У.П.Е.Р.Т.Р.О.Н.
+rmc-name-borg-9 = Р.О.Н.Н.И.
+rmc-name-borg-10 = Н.А.Й.Л.З.

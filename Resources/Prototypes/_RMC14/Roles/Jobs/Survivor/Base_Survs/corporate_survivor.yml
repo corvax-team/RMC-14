@@ -42,6 +42,15 @@
       factions:
       - WeYa
       - Civilian
+    - type: Language # CCM14
+      spokenLanguages: # CCM14
+      - English # CCM14
+      - Scandinavian # CCM14
+      understoodLanguages:
+      - English # CCM14
+      - Scandinavian # CCM14
+      currentLanguage: English # CCM14
+      defaultLanguage: English # CCM14
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: TacticalMapIcon

@@ -21,15 +21,15 @@
       - SPP
     - type: Language
       spokenLanguages:
-      - Russian
-      - English
+      # - Russian CCM14
+      # - English CCM14
       - Chinese
       understoodLanguages:
-      - Russian
-      - English
+      # - Russian CCM14
+      # - English CCM14
       - Chinese
-      currentLanguage: Russian
-      defaultLanguage: Russian
+      currentLanguage: Chinese # CCM14
+      defaultLanguage: Chinese # CCM14
     - type: Skills
       skills:
         RMCSkillEndurance: 1

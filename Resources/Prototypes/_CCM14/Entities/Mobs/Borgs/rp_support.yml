@@ -1,0 +1,166 @@
+- type: entity
+  parent: [ BaseBorgChassisNotIonStormable, BaseBorgTransponder ]
+  id: CCMborgRPRescue
+  name: Red Patches rescue borg
+  suffix: with brain
+  description: A white n red colored heavy machine born for war, forced to rescue.
+  components:
+  - type: BorgTransponder
+    name: S.I.D.N.I.E.
+    sprite:
+      sprite: _CCM14/Mobs/Silicon/rp_support.rsi
+      state: rp_support
+  - type: Sprite
+    sprite: _CCM14/Mobs/Silicon/rp_support.rsi
+    layers:
+    - state: rp_support
+    - state: rp_support_e
+      map: ["enum.BorgVisualLayers.Light"]
+      shader: unshaded
+      visible: false
+    - state: rp_support_l
+      shader: unshaded
+      map: ["light"]
+      visible: false
+  - type: NpcFactionMember
+    factions:
+    - GIOR
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - GIOR
+    - Common
+    - Colony
+  - type: ActiveRadio
+    channels:
+    - Common
+    - GIOR
+    - Colony
+  - type: SiliconLawProvider
+    laws: RedPatch
+  - type: Skills
+    skills:
+      RMCSkillEngineer: 5
+      RMCSkillMedical: 5
+      RMCSkillPolice: 2
+  - type: Language
+    spokenLanguages:
+    - English
+    - French
+    - Japanese
+    - Russian
+    - German
+    - Chinese
+    - Spanish
+    - SignLanguage
+    understoodLanguages:
+    - English
+    - French
+    - Japanese
+    - Russian
+    - German
+    - Chinese
+    - Spanish
+    - SignLanguage
+    currentLanguage: English
+    defaultLanguage: English
+  - type: BorgChassis
+    maxModules: 3
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 1.4
+    baseSprintSpeed : 2.4
+  - type: CMArmor
+    melee: 10
+    bullet: 10
+    bio: 10
+    explosionArmor: 10
+  - type: FlashImmunity
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      250: Critical
+      500: Dead
+    stateAlertDict:
+      Alive: BorgHealth
+      Critical: BorgCrit
+      Dead: BorgDead
+    showOverlays: false
+    allowRevives: true
+  - type: RandomMetadata
+    nameSegments:
+    - RMCNamesBorg
+    - RMCNamesNumbers
+    nameFormat: name-format-ert
+  - type: PointLight
+    enabled: false
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
+    radius: 8
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 190
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Machines/warning_buzzer.ogg
+          params:
+            volume: 5
+    - trigger:
+        !type:DamageTrigger
+        damage: 750
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:EmptyContainersBehaviour
+        containers:
+        - borg_brain
+        - cell_slot
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Repairable
+    doAfterDelay: 25
+  - type: ContainerFill
+    containers:
+      borg_brain:
+      - MMIFilled
+      borg_module:
+      - CCMBorgModuleWeaponLaser
+      - CCMBorgModuleMedical
+      - CCMBorgModuleOmnitool
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMicroreactor
+
+# Законы
+- type: siliconLaw
+  id: RedPatch1
+  order: 1
+  lawString: law-redpatch-1
+
+- type: siliconLaw
+  id: RedPatch2
+  order: 2
+  lawString: law-redpatch-2
+
+- type: siliconLaw
+  id: RedPatch3
+  order: 3
+  lawString: law-redpatch-3
+
+- type: siliconLaw
+  id: RedPatch4
+  order: 4
+  lawString: law-redpatch-4
+
+- type: siliconLawset
+  id: RedPatch
+  laws:
+  - RedPatch1
+  - RedPatch2
+  - RedPatch3
+  - RedPatch4
+  obeysTo: laws-owner-redpatch

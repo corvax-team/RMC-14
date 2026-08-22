@@ -1,0 +1,20 @@
+- type: entity
+  parent: CMArmorM3Light
+  id: CCMArmorRedPatch
+  name: PK-12 armor vest
+  description: Light and flexible vest. Used by the GIOR's Red Patches.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/GIOR/rp_vest.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 20
+    bio: 15
+    explosionArmor: 15
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier
+    walkModifier: .725
+    sprintModifier: .725
+  - type: ItemCamouflage
+    camouflageVariations: { }

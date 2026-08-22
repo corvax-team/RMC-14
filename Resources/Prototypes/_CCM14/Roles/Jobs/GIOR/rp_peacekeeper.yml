@@ -1,0 +1,109 @@
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CCMJobIconRPPeacekeeper
+  icon:
+    sprite: _CCM14/Interface/cm_job_icons.rsi
+    state: rp_peacekeeper
+
+- type: playTimeTracker
+  id: CCMJobRPPeacekeeper
+
+- type: job
+  parent: CMJobBase
+  id: CCMRPPeacekeeper
+  name: ccm-job-name-rp-peacekeeper
+  description: ccm-job-description-rp-peacekeeper
+  playTimeTracker: CCMJobRPPeacekeeper
+  startingGear: CCMGearRPPeacekeeper
+  ranks:
+    CCMRankRedPatchPeace: []
+  icon: "CCMJobIconRPPeacekeeper"
+  supervisors: cm-job-supervisors-sl
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  spawnMenuRoleName: RedPatch Peacekeeper
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - GIOR
+    - type: Language
+      spokenLanguages:
+      - Chinese
+      - English
+      - Scandinavian
+      understoodLanguages:
+      - Chinese
+      - English
+      - Scandinavian
+      currentLanguage: English
+      defaultLanguage: English
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 2
+        RMCSkillMedical: 2
+        RMCSkillFireman: 2
+        RMCSkillPolice: 2
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: ccm-job-prefix-gior-peacekeeper
+  hidden: true
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: CCMRPPeacekeeper
+  components:
+  - type: GhostRole
+    name: ccm-ghost-name-rp-neutral-peacekeeper
+    description: ccm-ghost-role-information-rp-description
+    rules: ccm-ghost-role-information-rp-rules
+    reregister: false
+    job: CCMRPPeacekeeper
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadRedPatch
+
+- type: startingGear
+  id: CCMGearRPPeacekeeper
+  equipment:
+    head: CCMHelmetRedPatch
+    mask: CMMaskSterile
+    eyes: RMCGlassesMedicalHUDGlasses
+    ears: CCMHeadsetRedPatch
+    jumpsuit: RMCJumpsuitRiotControl
+    outerClothing: CCMArmorRedPatch
+    gloves: CMHandsLatex
+    shoes: CMBootsBlack
+    suitstorage: CCMWeaponSMGM63RP
+    id: RMCIDCardBureauObserver
+    belt: CCMBeltSecurityRP
+    back: CCMSatchelRedPatch
+    pocket1: RMCPouchMedicalFill
+    pocket2: RMCPouchMagazineLargePMC
+  storage:
+    pocket2:
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    back:
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    - CMBloodPackFull
+    - CMRollerBedSpawnFolded
+    inhand:
+    - CCMPatchRedPatch
+    outerClothing:
+    - CMEmergencyAutoInjector
+    - CMTricordrazineAutoInjector

@@ -15,3 +15,12 @@
   - type: GrantMarineIcons
     factions:
     - Serene
+
+- type: entity
+  abstract: true
+  parent: RMCHeadsetIcons
+  id: CCMHeadsetIconsGIOR
+  components:
+  - type: GrantMarineIcons
+    factions:
+    - GIOR

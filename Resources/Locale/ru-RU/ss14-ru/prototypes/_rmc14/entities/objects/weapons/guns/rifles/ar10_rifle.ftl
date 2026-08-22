@@ -1,9 +1,9 @@
-ent-WeaponRifleAR10 = штурмовая винтовка AR10
-    .desc = Ранняя версия более распространённой винтовки M16. Считается отцом винтовок XX века. Как одна из них оказалась здесь - загадка. Использует патроны калибра 7.62x51 мм.
+ent-WeaponRifleAR10 = винтовка VGR-21 "Зерга"
+    .desc = Старая, но дешёвая и надёжная винтовка, созданная ОКБ Объединённого Правительства Земли с целью снизить уровень смертности колонистов, осваивающих новые планеты.  Использует патроны калибра 9x45 мм.
     .suffix = Заполненный
-ent-RMCMagazineRifleAR10 = магазин AR10 (7.62x51мм)
+ent-RMCMagazineRifleAR10 = магазин VGR-21 (9x45 мм)
     .desc = { ent-CMMagazineRifleBase.desc }
-ent-RMCCartridgeRifleAR10 = патрон (7.62x51мм)
-    .desc = Патрон для винтовки калибра 7.62x51 мм.
+ent-RMCCartridgeRifleAR10 = патрон (9x45 мм)
+    .desc = Патрон для винтовки калибра 9x45 мм.
 ent-BulletRifleAR10 = { ent-RMCBaseBullet }
     .desc = { ent-RMCBaseBullet.desc }

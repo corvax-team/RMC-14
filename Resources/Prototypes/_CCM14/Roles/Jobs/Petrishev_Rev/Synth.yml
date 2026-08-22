@@ -28,6 +28,27 @@
     - type: NpcFactionMember
       factions:
       - Petrishev
+    - type: Language
+      spokenLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - German
+      - Chinese
+      - Spanish
+      - SignLanguage
+      understoodLanguages:
+      - English
+      - French
+      - Japanese
+      - Russian
+      - German
+      - Chinese
+      - Spanish
+      - SignLanguage
+      currentLanguage: Chinese
+      defaultLanguage: Chinese
     - type: Skills
       skills:
         RMCSkillCqc: 5
@@ -64,10 +85,6 @@
           Blunt: 35
     - type: Synth
       canUseGuns: true
-    - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadPMC
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-rev-synth
