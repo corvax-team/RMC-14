@@ -7,14 +7,14 @@
   - type: Sprite
     sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/GIOR/rp_vest.rsi
   - type: CMArmor
-    melee: 15
-    bullet: 20
-    bio: 15
-    explosionArmor: 15
+    melee: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bullet: 25
+    bio: 20
+    explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: RMCArmorSpeedTier
-    speedTier: light
-  - type: ClothingSpeedModifier
-    walkModifier: .725
-    sprintModifier: .725
+    speedTier: very light
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
   - type: ItemCamouflage
     camouflageVariations: { }
