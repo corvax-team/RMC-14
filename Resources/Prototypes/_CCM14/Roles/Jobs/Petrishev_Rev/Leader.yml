@@ -34,6 +34,7 @@
         RMCSkillVehicles: 1
         RMCSkillPolice: 1
         RMCSkillSpecialistWeapons: 1
+    - type: QYJWhitelist
     - type: MarineOrders
     - type: SquadArmorWearer
       leader: true

@@ -104,6 +104,12 @@
     requiredSkills:
       RMCSkillLeadership: 3
   - type: RMCBattleExecute
+# CCM14 Rework
+  - type: GunDualWielding
+    scatterModifier: 75
+    accuracyAddMult: -0.6
+    weaponGroup: Handgun
+# CCM14 Rework
 
 - type: entity
   parent: RMCWeaponRevolverMateba

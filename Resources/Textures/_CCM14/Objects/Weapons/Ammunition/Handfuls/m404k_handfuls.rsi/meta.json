@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3161d3df2825c9e3eaeba5a71b2b17749dba67db/icons/obj/items/weapons/guns/handful.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "shock_1"
+    },
+    {
+      "name": "shock_2"
+    },
+    {
+      "name": "shock_3"
+    },
+    {
+      "name": "shock_4"
+    },
+    {
+      "name": "shock_5"
+    },
+    {
+      "name": "dragon_flame_1"
+    },
+    {
+      "name": "dragon_flame_2"
+    },
+    {
+      "name": "dragon_flame_3"
+    },
+    {
+      "name": "frag_1"
+    },
+    {
+      "name": "frag_2"
+    },
+    {
+      "name": "frag_3"
+    },
+    {
+      "name": "frag_4"
+    },
+    {
+      "name": "dragon_eye_1"
+    },
+    {
+      "name": "dragon_eye_2"
+    },
+    {
+      "name": "dragon_eye_3"
+    },
+    {
+      "name": "dragon_eye_4"
+    },
+    {
+      "name": "dragon_eye_5"
+    },
+    {
+      "name": "dragon_eye_6"
+    },
+    {
+      "name": "dragon_eye_7"
+    },
+    {
+      "name": "dragon_claw_1"
+    },
+    {
+      "name": "dragon_claw_2"
+    },
+    {
+      "name": "dragon_claw_3"
+    },
+    {
+      "name": "dragon_claw_4"
+    },
+    {
+      "name": "black_rocket"
+    }
+  ]
+}

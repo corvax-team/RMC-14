@@ -21,7 +21,7 @@
       params:
         pitch: 0.95
   - type: GunDamageModifier
-    multiplier: 1.25
+    multiplier: 1.3 # CCM Rework | Base 1.25
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1911.rsi
   - type: Clothing

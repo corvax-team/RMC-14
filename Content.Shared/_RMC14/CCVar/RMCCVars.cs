@@ -47,6 +47,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> CCMLobbyWelcomeSeenVersion =
         CVarDef.Create("ccm.lobby_welcome_seen_version", 0, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    public static readonly CVarDef<int> CCMMinPlayersForSurvivors =
+        CVarDef.Create("ccm.min_players_for_survivors", 25, CVar.SERVER | CVar.SERVERONLY);
+
     public static readonly CVarDef<string> RMCLobbyXenoName =
         CVarDef.Create("rmc.lobby_xeno_name", string.Empty, CVar.CLIENTONLY | CVar.ARCHIVE);
     public static readonly CVarDef<bool> RMCShowNewPlayerIcons =

@@ -1,0 +1,27 @@
+- type: entity
+  parent: [ RMCHelmetBase, ShowMedicalIcons ]
+  id: CCMHelmetRaider
+  name: marine raider helmet
+  description: Sunglasses wired up with the best nano-tech the UNMC can muster out on the frontier. Displays information about any person you decree worthy of your gaze.
+  components:
+  - type: ShowMindShieldIcons
+  - type: ShowCriminalRecordIcons
+  - type: FlashImmunity
+  - type: RMCEarProtection
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/marsoc.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/marsoc.rsi
+  - type: CMArmor
+    melee: 25
+    bullet: 30
+    bio: 25
+  - type: Appearance
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout

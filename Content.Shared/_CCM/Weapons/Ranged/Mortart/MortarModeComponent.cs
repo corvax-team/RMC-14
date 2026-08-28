@@ -15,7 +15,7 @@ public sealed partial class MortarModeComponent : Component
     public TimeSpan DoAfterDuration = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? ToggleSound = new SoundPathSpecifier("/Audio/Weapons/click.ogg");
+    public SoundSpecifier? ToggleSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/click.ogg");
 
     [AutoNetworkedField]
     public EntityCoordinates? TargetCoordinates;

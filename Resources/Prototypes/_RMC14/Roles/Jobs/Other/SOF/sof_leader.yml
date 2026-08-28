@@ -84,11 +84,12 @@
 - type: startingGear
   id: RMCGearMarineRaiderLeader
   equipment:
-    head: RMCArmorHelmetMARSOC
-    mask: RMCMaskBalaclavaMARSOC
+    head: CCMHelmetRaider # CCM14
+    mask: CCMMaskBallisticRaiderRespirator # CCM14
     ears: RMCHeadsetMARSOC
+    eyes: CCMGlassesRaiderVisorNVG # CCM14
     jumpsuit: RMCJumpsuitMarsocWebbingBuckshot
-    outerClothing: RMCArmorMARSOCXM40
+    outerClothing: CCMArmorRaiderXM40 # CCM14
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlackFilled
     suitstorage: RMCWeaponRifleXM40
@@ -99,7 +100,14 @@
     pocket2: RMCPouchToolsSocMarineRaiderFill
   storage:
     back:
-    - RMCVisorNightVision # TODO RMC14
+    # - RMCVisorNightVision # TODO RMC14
+    - CCMCloakingDevice # CCM14
+    - CCMDoorRemoteCustom # CCM14
+    - RMCMagazineRifleXM40HEAP # CCM14
+    - CMShellShotgunIncendiaryBuckshot # CCM14
+    - CMShellShotgunIncendiaryBuckshot # CCM14
+    - CMShellShotgunIncendiaryBuckshot # CCM14
+    - CMShellShotgunIncendiaryBuckshot # CCM14
 
 - type: playTimeTracker
   id: CMJobMarineRaiderLeader

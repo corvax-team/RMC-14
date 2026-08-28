@@ -9,7 +9,7 @@ public sealed partial class MCTimedDespawnDisappearanceVisualsComponent : Compon
     public float Lifetime;
 
     [DataField]
-    public float MinAlpha;
+    public float MinAlpha = 0.3f;
 
     [DataField]
     public float MaxAlpha = 1f;

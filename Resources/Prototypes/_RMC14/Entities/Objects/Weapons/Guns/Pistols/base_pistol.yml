@@ -62,8 +62,12 @@
   - type: GunUnskilledPenalty
     angleIncrease: 5
   - type: GunPointBlank
+# CCM14 Rework
   - type: GunDualWielding
+    scatterModifier: -5
+    accuracyAddMult: 1
     weaponGroup: Handgun
+# CCM14 Rework
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:

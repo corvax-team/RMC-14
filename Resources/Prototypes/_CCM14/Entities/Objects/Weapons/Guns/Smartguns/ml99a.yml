@@ -141,8 +141,8 @@
     - range: 15
       falloff: 9999
       ignoreModifiers: true
-    - range: 8
-      falloff: 5
+    - range: 1
+      falloff: 2
 
 - type: Tag
   id: CCMMagazineSmartGunHeavy

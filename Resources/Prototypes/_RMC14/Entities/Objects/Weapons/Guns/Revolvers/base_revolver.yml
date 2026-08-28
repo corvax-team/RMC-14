@@ -51,8 +51,12 @@
     item: Sidearm
   - type: GunUnskilledPenalty
     angleIncrease: 5
+# CCM14 Rework
   - type: GunDualWielding
+    scatterModifier: 0
+    accuracyAddMult: 1
     weaponGroup: Handgun
+# CCM14 Rework
   - type: GunPointBlank
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 0.85

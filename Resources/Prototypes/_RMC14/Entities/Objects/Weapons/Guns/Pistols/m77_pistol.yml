@@ -51,7 +51,7 @@
           - CMMagazinePistolM77AP
         startingItem: CMMagazinePistolM77AP
   - type: GunDamageModifier
-    multiplier: 1.2
+    multiplier: 1.4 # CCM Rework | Base is 1.2
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -114,7 +114,7 @@
       tags:
       - CMCartridgePistol9mmAP
     proto: CMCartridgePistolM77AP
-    capacity: 19
+    capacity: 26 # CCM Rework | Base is 19
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m77.rsi
     layers:
@@ -134,7 +134,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 25
+        Piercing: 32.5 # CCM Rework | Base is 25
   - type: CMArmorPiercing
     amount: 40
 

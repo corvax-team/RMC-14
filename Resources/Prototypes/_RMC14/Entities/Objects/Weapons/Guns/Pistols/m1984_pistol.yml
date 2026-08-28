@@ -12,7 +12,7 @@
   - type: RMCSelectiveFire
     scatterWielded: 10
     scatterUnwielded: 10
-    baseFireRate: 10
+    baseFireRate: 6 # CCM Rework | Base is 10
     burstScatterMult: 5
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1984.rsi
@@ -100,7 +100,7 @@
       tags:
       - CMCartridgePistol9mm
     proto: CMCartridgePistol9mm
-    capacity: 12
+    capacity: 24 # CCM Rework | Base is 12
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m1984.rsi
     layers:
@@ -123,7 +123,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 40
+        Piercing: 45 # CCM Rework | Base is 40
   - type: CMArmorPiercing
     amount: 10
 
@@ -220,7 +220,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 55 # TODO RMC14 30 shrapneltPistol9mmHP
+        Piercing: 60 # TODO RMC14 30 shrapneltPistol9mmHP | CCM Rework | Base is 55
 
 - type: Tag
   id: RMCCartridgePistol9mmHP

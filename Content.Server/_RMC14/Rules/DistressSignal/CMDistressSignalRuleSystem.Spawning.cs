@@ -28,6 +28,10 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+// CCM14-start
+using Content.Shared.Mobs.Components;
+using Content.Shared._RMC14.Xenonids.Hive;
+// CCM14-end
 
 namespace Content.Server._RMC14.Rules.DistressSignal;
 
@@ -36,6 +40,10 @@ public sealed partial class CMDistressSignalRuleSystem
     private static readonly ProtoId<JobPrototype> VehicleCrewmanJob = "CMVehicleCrewman";
     private static readonly EntProtoId VehicleHumveeArcUnlock = "VehicleHumveeARC";
     private static readonly EntProtoId VehicleTankUnlock = "VehicleTank";
+
+    // CCM14-start
+    private HashSet<NetUserId> _previousRoundQueenIds = new();
+    // CCM14-end
 
     /// <summary>
     /// Main handler for player spawning during the distress signal round.
@@ -49,6 +57,12 @@ public sealed partial class CMDistressSignalRuleSystem
             return;
 
         var comp = rule.Value.Comp;
+
+        // CCM14-start
+        comp.MarinesSpawned = 0;
+        comp.XenosSpawned = 0;
+        comp.SurvivorsSpawned = 0;
+        // CCM14-end
 
         OperationName ??= GetRandomOperationName();
 
@@ -126,52 +140,90 @@ public sealed partial class CMDistressSignalRuleSystem
         }
     }
 
+    // CCM14-start
+    private (int Xenos, int Survivors, int Marines) CalculateRoundStartFactionCounts(int totalPlayers)
+    {
+        if (totalPlayers <= 0)
+            return (0, 0, 0);
+
+        var minPlayersForSurvivors = _config.GetCVar(RMCCVars.CCMMinPlayersForSurvivors);
+        var survivorsEnabled = minPlayersForSurvivors <= 0 || totalPlayers >= minPlayersForSurvivors;
+
+        var totalSurvivors = 0;
+        if (survivorsEnabled && _marinesPerSurvivor > 0)
+        {
+            var maxPossibleSurvivors = Math.Max(0, totalPlayers - 1);
+            var minSurvivors = Math.Min(_minimumSurvivors, maxPossibleSurvivors);
+            var maxSurvivors = Math.Min(_maximumSurvivors, maxPossibleSurvivors);
+            if (minSurvivors > maxSurvivors)
+                minSurvivors = maxSurvivors;
+
+            totalSurvivors = (int)Math.Clamp(
+                (int)Math.Round(totalPlayers / _marinesPerSurvivor),
+                minSurvivors,
+                maxSurvivors);
+        }
+
+        var marineAndXenoPool = totalPlayers - totalSurvivors;
+        if (marineAndXenoPool <= 0)
+            return (1, totalPlayers - 1, 0);
+
+        var totalXenos = _marinesPerXeno <= 0
+            ? marineAndXenoPool
+            : Math.Clamp(
+                (int)Math.Ceiling(marineAndXenoPool / (_marinesPerXeno + 1f)),
+                1,
+                Math.Max(1, marineAndXenoPool - 1));
+
+        var marines = marineAndXenoPool - totalXenos;
+        if (totalXenos + totalSurvivors + marines > totalPlayers)
+            marines = Math.Max(0, totalPlayers - totalXenos - totalSurvivors);
+
+        return (totalXenos, totalSurvivors, marines);
+    }
+    // CCM14-end
+
     private void ApplyJobSlotScaling(CMDistressSignalRuleComponent comp, RulePlayerSpawningEvent ev)
     {
-        var totalPlayers = ev.PlayerPool.Count;
-        var totalXenos = (int)Math.Round(Math.Max(1, totalPlayers / _marinesPerXeno));
-        var totalSurvivors = (int)Math.Clamp((int)Math.Round(totalPlayers / _marinesPerSurvivor), _minimumSurvivors, _maximumSurvivors);
-        var marines = totalPlayers - totalXenos - totalSurvivors;
+        // CCM14-start
+        var (_, _, marines) = CalculateRoundStartFactionCounts(ev.PlayerPool.Count);
+        // CCM14-end
 
-        // TODO RMC14: Move to component
-        var doJobSlotScaling = comp.DoJobSlotScaling &&
-                            marines > 0 &&
-                            _config.GetCVar(RMCCVars.RMCJobSlotScaling);
+        if (!comp.DoJobSlotScaling || marines <= 0 || !_config.GetCVar(RMCCVars.RMCJobSlotScaling))
+            return;
 
         var stations = EntityQueryEnumerator<StationJobsComponent, StationSpawningComponent>();
         while (stations.MoveNext(out var stationId, out var stationJobs, out _))
         {
-            if (doJobSlotScaling &&
-                stationJobs.JobSlotScaling is { } scalingProto &&
-                scalingProto.TryGet(out var scalingComp, _prototypes, _compFactory))
+            if (stationJobs.JobSlotScaling is not { } scalingProto || !scalingProto.TryGet(out var scalingComp, _prototypes, _compFactory))
+                continue;
+
+            foreach (var (job, scaling) in scalingComp.Jobs)
             {
-                foreach (var (job, scaling) in scalingComp.Jobs)
+                var minimumPlayers = scaling.MinimumPlayers;
+                var slots = minimumPlayers > 0 && ev.PlayerPool.Count < minimumPlayers
+                    ? 0
+                    : _rmcStationJobs.GetSlots(marines, scaling.Factor, scaling.C, scaling.Min, scaling.Max);
+
+                if (scaling.Squad)
                 {
-                    var minimumPlayers = scaling.MinimumPlayers;
-                    var slots = minimumPlayers > 0 && totalPlayers < minimumPlayers
-                        ? 0
-                        : _rmcStationJobs.GetSlots(marines, scaling.Factor, scaling.C, scaling.Min, scaling.Max);
-
-                    if (scaling.Squad)
+                    foreach (var squadId in comp.SquadIds)
                     {
-                        foreach (var squadId in comp.SquadIds)
-                        {
-                            if (comp.Squads.TryGetValue(squadId, out var squad) && TryComp(squad, out SquadTeamComponent? squadTeam))
-                                _squad.SetSquadMaxRole((squad, squadTeam), job, slots);
-                        }
-                        slots *= 4;
+                        if (comp.Squads.TryGetValue(squadId, out var squad) && TryComp(squad, out SquadTeamComponent? squadTeam))
+                            _squad.SetSquadMaxRole((squad, squadTeam), job, slots);
                     }
-
-                    var jobs = stationJobs.SetupAvailableJobs;
-                    if (jobs.TryGetValue(job, out var available))
-                    {
-                        for (var i = 0; i < available.Length; i++)
-                            available[i] = slots;
-                    }
-
-                    Log.Info($"Setting {job} to {slots} slots.");
-                    _stationJobs.TrySetJobSlot(stationId, job, slots, stationJobs: stationJobs);
+                    slots *= 4;
                 }
+
+                var jobs = stationJobs.SetupAvailableJobs;
+                if (jobs.TryGetValue(job, out var available))
+                {
+                    for (var i = 0; i < available.Length; i++)
+                        available[i] = slots;
+                }
+
+                Log.Info($"Setting {job} to {slots} slots.");
+                _stationJobs.TrySetJobSlot(stationId, job, slots, stationJobs: stationJobs);
             }
         }
     }
@@ -201,6 +253,9 @@ public sealed partial class CMDistressSignalRuleSystem
             xenoLeaderSpawnPoints.Add(spawnUid);
         }
 
+        // CCM14-start
+        EntityUid? spawnedXenoEntity = null;
+
         NetUserId? SpawnXeno(List<NetUserId> list, EntProtoId ent, bool doBurst = false)
         {
             var playerId = _random.PickAndTake(list);
@@ -218,10 +273,15 @@ public sealed partial class CMDistressSignalRuleSystem
                 mind = _mind.CreateMind(playerId);
 
             _mind.TransferTo(mind.Value, xenoEnt);
+
+            comp.XenosSpawned++;
+            spawnedXenoEntity = xenoEnt;
             return playerId;
         }
 
-        var totalXenos = (int) Math.Round(Math.Max(1, ev.PlayerPool.Count / _marinesPerXeno));
+        var (totalXenos, totalSurvivors, totalMarines) = CalculateRoundStartFactionCounts(ev.PlayerPool.Count);
+        // CCM14-end
+
         var priorities = Enum.GetValues<JobPriority>().Length;
         var xenoCandidates = new List<NetUserId>[priorities];
         for (var i = 0; i < priorities; i++)
@@ -261,6 +321,49 @@ public sealed partial class CMDistressSignalRuleSystem
                 xenoCandidates[(int)p].Add(id);
         }
 
+        // CCM14-start
+        if (queenSelected == null)
+        {
+            var larvaCandidates = new List<NetUserId>();
+            for (var i = priorities - 1; i >= 0; i--)
+            {
+                larvaCandidates.AddRange(xenoCandidates[i]);
+            }
+
+            var eligibleCandidates = larvaCandidates
+                .Where(id => !_previousRoundQueenIds.Contains(id))
+                .ToList();
+
+            if (eligibleCandidates.Count > 0)
+            {
+                var randomIndex = _random.Next(eligibleCandidates.Count);
+                var randomUserId = eligibleCandidates[randomIndex];
+                queenSelected = SpawnXeno(new List<NetUserId> { randomUserId }, comp.QueenEnt);
+                if (queenSelected != null)
+                {
+                    totalXenos--;
+                    for (var i = 0; i < priorities; i++)
+                    {
+                        xenoCandidates[i].Remove(randomUserId);
+                    }
+                }
+            }
+            else
+            {
+                var randomSession = _random.Pick(ev.PlayerPool);
+                if (randomSession != null)
+                {
+                    var randomUserId = randomSession.UserId;
+                    queenSelected = SpawnXeno(new List<NetUserId> { randomUserId }, comp.QueenEnt);
+                    if (queenSelected != null)
+                        totalXenos--;
+                }
+            }
+        }
+
+        _previousRoundQueenIds.Clear();
+        // CCM14-end
+
         var selectedXenos = 0;
         for (var i = priorities - 1; i >= 0; i--)
         {
@@ -271,7 +374,11 @@ public sealed partial class CMDistressSignalRuleSystem
         }
 
         if (totalXenos - selectedXenos > 0)
-            _hive.ChangeBurrowedLarva(totalXenos - selectedXenos);
+        {
+            var burrowedLarva = totalXenos - selectedXenos;
+            _hive.ChangeBurrowedLarva(burrowedLarva);
+            comp.XenosSpawned += burrowedLarva;
+        }
     }
 
     private EntityUid SpawnXenoEnt(EntProtoId ent, ICommonSession player, bool doBurst,
@@ -440,6 +547,10 @@ public sealed partial class CMDistressSignalRuleSystem
             if (comp.SetHunger && TryComp(ev.SpawnResult, out HungerComponent? hunger))
                 _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
         }
+
+        // CCM14-start
+        comp.MarinesSpawned++;
+        // CCM14-end
     }
 
     private void SpawnSquads(Entity<CMDistressSignalRuleComponent> rule)

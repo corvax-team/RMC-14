@@ -35,9 +35,9 @@ rmc-shoot-id-lock-unauthorized = Спусковой крючок заблоки�
 rmc-id-lock-unauthorized = Действие запрещено. Неавторизованный пользователь.
 rmc-id-lock-authorization = Вы подняли { $gun }, зарегистрировав себя в качестве владельца.
 rmc-id-lock-authorization-combat = { CAPITALIZE($gun) } регистрирует вас в качестве владельца.
-rmc-id-lock-toggle-lock = Вы { $action } ID-замок на { $gun }.
-rmc-id-lock-color-unauthorized = красный
-rmc-id-lock-color-authorized = жёлто-зелёный
+rmc-id-lock-toggle-lock = Вы {$action} ID-замок на {$gun}.
+rmc-id-lock-color-unauthorized = red
+rmc-id-lock-color-authorized = chartreuse
 rmc-id-lock-toggle-on = заблокировали
 rmc-id-lock-toggle-off = разблокировали
 rmc-iff-toggle = Вы { $action } систему "свой-чужой" на { $gun }.
@@ -55,8 +55,8 @@ rmc-examine-text-shots-to-max-scatter =
     }[/color].
 rmc-examine-text-iff = [color=cyan]Это оружие будет игнорировать и стрелять мимо союзников![/color]
 rmc-examine-text-id-lock-no-user = [color=chartreuse]Оно не зарегистрировано. Поднимите его, чтобы зарегистрировать себя в качестве владельца.[/color]
-rmc-examine-text-id-lock = [color=chartreuse]Оно зарегистрировано на [/color][color={ $colour }]{ $name }[/color][color=chartreuse].[/color]
-rmc-examine-text-id-lock-unlocked = [color=chartreuse]Оно зарегистрировано на [/color][color={ $colour }]{ $name }[/color][color=chartreuse], но ограничения на огонь сняты.[/color]
+rmc-examine-text-id-lock = [color=chartreuse]Оно зарегистрировано на [/color][color={ $color }]{ $name }[/color][color=chartreuse].[/color]
+rmc-examine-text-id-lock-unlocked = [color=chartreuse]Оно зарегистрировано на [/color][color={ $color }]{ $name }[/color][color=chartreuse], но ограничения на огонь сняты.[/color]
 rmc-examine-text-execute = [color=red]Это оружие можно использовать для казни при наличии должного навыка![/color]
 rmc-gun-rack-examine = [bold]Нажмите вашу клавишу [color=cyan]уникального действия[/color] (Пробел по умолчанию) чтобы передёрнуть затвор перед выстрелом.[/bold]
 rmc-gun-rack-first-with = Сначала вам нужно передёрнуть затвор оружия при помощи { $key }!

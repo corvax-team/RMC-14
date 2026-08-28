@@ -1,0 +1,87 @@
+- type: entity
+  name: hemo spray bottle
+  id: CCMMedicalSprayBottle
+  parent: BaseItem
+  suffix: Empty
+  description: A spray bottle with an unscrewable top.
+  components:
+  - type: Drink
+    forceFeedDelay: 0
+    solution: spray
+    ignoreEmpty: true
+    useSound:
+      path: /Audio/Effects/spray3.ogg
+    transferAmount: 10
+  - type: Tag
+    tags:
+    - Spray
+  - type: Sprite
+    sprite: _CCM14/Objects/Medical/hemo_spray.rsi
+    state: icon
+  - type: Item
+    sprite: _CCM14/Objects/Medical/hemo_spray.rsi
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 200
+        reagents:
+        - ReagentId: CCMHemotracliary
+          Quantity: 200
+  - type: RefillableSolution
+    solution: spray
+  - type: DrainableSolution
+    solution: spray
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+  - type: SolutionItemStatus
+    solution: spray
+  - type: Spray
+    transferAmount: 10
+    sprayVelocity: 2
+    spraySound:
+      path: /Audio/Effects/spray2.ogg
+  - type: UseDelay
+  - type: TrashOnSolutionEmpty
+    solution: spray
+  - type: ExaminableSolution
+    solution: spray
+  - type: RequiresSkill
+    skills:
+      RMCSkillMedical: 2
+
+- type: reagent
+  parent: [ CMReagentMedicine, TranexamicAcid ]
+  id: CCMHemotracliary
+  name: reagent-name-ccmhemotracliary
+  desc: reagent-desc-ccmhemotracliary
+  color: "#ba7d7d"
+  overdose: 11
+  criticalOverdose: 21
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+        - !type:HealthChange
+          ignoreResistances: false
+          damage:
+            groups:
+              Brute: -3
+        - !type:ModifyBloodLevel
+          amount: 1
+        - !type:ModifyBleedAmount
+          amount: -2
+  metabolisms:
+    Medicine:
+      metabolismRate: 1
+      effects:
+      - !type:ModifyBloodLevel
+        amount: 3
+      - !type:ModifyBleedAmount
+        amount: -3
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 11
+        damage:
+          types:
+            Bloodloss: 30

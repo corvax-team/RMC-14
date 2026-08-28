@@ -155,6 +155,18 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleSGO
+  # CCM14-start
+  - type: SmartGunFrontline
+    blockedMessage: ccm-smartgun-iff-blocked
+    maxDistance: 14
+    altFalloffThresholds:
+    - range: 14
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 8
+      falloff: 3
+      ignoreModifiers: false
+  # CCM14-end
 
 - type: entity
   parent: RMCSmartGunNoCamo
@@ -456,7 +468,7 @@
     - range: 12
       falloff: 9999
       ignoreModifiers: true
-    - range: 7
+    - range: 5 # CCM14
       falloff: 4
   - type: RMCProjectileAccuracy
     accuracy: 105

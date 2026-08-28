@@ -18,10 +18,10 @@
     - state: lit
       map: ["enum.RMCIgniterVisuals.Ignited"]
   - type: Item
-    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/m34.rsi
+    sprite: _CCM14/Objects/Weapons/Guns/Flamethrower/m34.rsi
     size: Large
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/m34.rsi
+    sprite: _CCM14/Objects/Weapons/Guns/Flamethrower/m34.rsi
     slots:
     - suitStorage
     - Back
