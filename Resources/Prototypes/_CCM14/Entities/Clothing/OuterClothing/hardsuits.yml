@@ -1,0 +1,67 @@
+# РХБЗЗ
+- type: entity
+  parent: RMCBaseArmor
+  id: CCMHardsuitCBRNZ
+  name: CBRN hardsuit Mk. 35-H
+  description: A specialized modification of the CMC's Mk. 35 hardsuit. Used by the CBRN marine detachments. Made more for a battle with a walking dead and giant space insects then hostile gunmen.
+  components:
+  - type: Sprite
+    sprite: _CCM14\Objects\Clothing\OuterClothing\Armor\Hardsuits\cbrnz.rsi
+  - type: Clothing
+    sprite: _CCM14\Objects\Clothing\OuterClothing\Armor\Hardsuits\cbrnz.rsi
+    equipDelay: 2
+    unequipDelay: 2
+  - type: ToggleableClothing
+    clothingPrototype: CCMArmorHelmetHardsuitCBRNZ
+  - type: Tag
+    tags:
+    - Hardsuit
+  - type: CMArmor
+    bio: 75
+    melee: 30
+    bullet: 15
+    explosionArmor: 50
+  - type: ClothingSpeedModifier
+    walkModifier: 0.64
+    sprintModifier: 0.64
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.2
+  - type: CMHardArmor
+  - type: RMCBulkyArmor
+  - type: RMCMagneticArmor
+  - type: RMCArmorSpeedTier
+    speedTier: heavy
+
+- type: entity
+  parent: [ArmorHelmetPMC, RMCMarineHelmetWithLightBase]
+  id: CCMArmorHelmetHardsuitCBRNZ
+  name: CBRNZ Mk. 35-H pressure helmet
+  description: 
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Hardsuits/cbrnz.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/Hardsuits/cbrnz.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+  - type: CMArmor
+    melee: 15
+    bullet: 10
+    explosionArmor: 20
+    bio: 100
+  - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
+    - FacialHair
+  - type: PointLight
+    color: "#68ff79"
+  - type: ClothingGrantComponents
+    components:
+    - type: RMCImmuneToIgnition
+    - type: RMCImmuneToFireTileDamage
+  - type: ZombificationResistance
+    zombificationResistanceCoefficient: 0.2

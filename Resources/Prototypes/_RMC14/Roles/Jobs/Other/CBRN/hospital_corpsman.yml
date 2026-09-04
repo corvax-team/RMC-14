@@ -89,7 +89,7 @@
     ears: CMHeadsetCBRN
     eyes: RMCGlassesMedicalHUDGlasses
     jumpsuit: RMCCBRNSuitMedic
-    outerClothing: RMCArmorCBRN
+    outerClothing: CCMHardsuitCBRNZ # CCM14
     gloves: RMCHandsVeteranCBRN
     shoes: RMCBootsCBRN
     suitstorage: RMCM77BeltFilled
