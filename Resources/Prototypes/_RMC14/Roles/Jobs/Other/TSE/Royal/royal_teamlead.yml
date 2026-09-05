@@ -18,6 +18,15 @@
       factions:
       - RoyalMarines
       - TSE
+    - type: Language # CCM14
+      spokenLanguages: # CCM14
+      - Japanese # CCM14
+      - English # CCM14
+      understoodLanguages: # CCM14
+      - Japanese # CCM14
+      - English # CCM14
+      currentLanguage: Japanese # CCM14
+      defaultLanguage: Japanese # CCM14
     - type: Skills
       preset: RMCSkillPresetRoyalTeamLeader
     - type: MarineOrders
@@ -54,6 +63,20 @@
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCRoyalMarinesTeamlead
+  speciesBlacklist: # CCM14
+    - Diona # CCM14
+    - Arachnid # CCM14
+    - Moth # CCM14
+    - Reptilian # CCM14
+    - SlimePerson # CCM14
+    - Vox # CCM14
+    - Vulpkanin # CCM14
+    - Avali # CCM14
+    - Feroxi # CCM14
+    - Felinid # CCM14
+    - Dwarf # CCM14
+    - Rodentia # CCM14
+    - Skrell # CCM14
   components:
   - type: GhostRole
     name: rmc-ghost-name-rcm-teamlead

@@ -1,0 +1,17 @@
+- type: entity
+  parent: RMCWeaponRifleM16A5
+  name: RK-11M RP assaulr rifle
+  id: CCMWeaponRK11MRP
+  description: Literally just a UEG's RK-11M AR, but with white stripes and GIOR logo engraved on it.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Guns/Rifles/rk11mRP.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _CCM14/Objects/Weapons/Guns/Rifles/rk11mRP.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }

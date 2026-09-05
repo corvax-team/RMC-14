@@ -31,9 +31,9 @@
   parent: RMCGearSurvivorSecurity
   id: RMCGearSurvivorILRCPeacekeeper
   equipment:
-    head: ArmorHelmetPMCRiotShield
+    head: CCMHelmetRedPatch # CCM14
     jumpsuit: RMCJumpsuitRiotControl
-    outerClothing: RMCArmorPMCRiot
+    outerClothing: CCMArmorRedPatch # CCM14
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -23,15 +23,15 @@
       - SPP
     - type: Language
       spokenLanguages:
-      - Russian
+      # - Russian CCM14
       - English
       - Chinese
       understoodLanguages:
-      - Russian
+      # - Russian CCM14
       - English
       - Chinese
-      currentLanguage: Russian
-      defaultLanguage: Russian
+      currentLanguage: Chinese # CCM14
+      defaultLanguage: Chinese # CCM14
   - !type:AddComponentSpecial
     components:
     - type: Skills

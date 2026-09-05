@@ -26,14 +26,14 @@
     - type: Language
       spokenLanguages:
       - English
-      - Russian
-      - Japanese
-      - Chinese
+      # - Russian CCM14
+      # - Japanese CCM14
+      # - Chinese CCM14
       understoodLanguages:
       - English
-      - Russian
-      - Japanese
-      - Chinese
+      # - Russian CCM14
+      # - Japanese CCM14
+      # - Chinese CCM14
       currentLanguage: English
       defaultLanguage: English
     - type: Skills

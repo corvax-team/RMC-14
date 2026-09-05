@@ -1,0 +1,110 @@
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CCMJobIconRPLeader
+  icon:
+    sprite: _CCM14/Interface/cm_job_icons.rsi
+    state: rp_leader
+
+- type: playTimeTracker
+  id: CCMJobRPLeader
+
+- type: job
+  parent: CMJobBase
+  id: CCMRPLeader
+  name: ccm-job-name-rp-leader
+  description: ccm-job-description-rp-leader
+  playTimeTracker: CCMJobRPLeader
+  startingGear: CCMGearRPLeader
+  ranks:
+    CCMRankRedPatchStCoor: []
+  icon: "CCMJobIconRPLeader"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  spawnMenuRoleName: RedPatch Leader
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - GIOR
+    - type: Language
+      spokenLanguages:
+      - Chinese
+      - English
+      - Scandinavian
+      understoodLanguages:
+      - Chinese
+      - English
+      - Scandinavian
+      currentLanguage: English
+      defaultLanguage: English
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 2
+        RMCSkillMedical: 2
+        RMCSkillFireman: 2
+        RMCSkillPolice: 2
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+    - type: SquadArmorWearer
+    - type: SquadLeader
+      icon:
+        sprite: _CCM14/Interface/cm_job_icons.rsi
+        state: rp_leader
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: ccm-job-prefix-gior-peacekeeper
+  hidden: true
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: CCMRPLeader
+  components:
+  - type: GhostRole
+    name: ccm-ghost-name-rp-neutral-leader
+    description: ccm-ghost-role-information-rp-leader-description
+    rules: ccm-ghost-role-information-rp-rules
+    reregister: false
+    job: CCMRPLeader
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadRedPatch
+
+- type: startingGear
+  id: CCMGearRPLeader
+  equipment:
+    head: CCMBeretRedPatch
+    mask: CMMaskSterile
+    ears: CCMHeadsetRedPatch
+    jumpsuit: RMCJumpsuitRiotControl
+    outerClothing: CCMArmorRedPatch
+    gloves: CMHandsLatex
+    shoes: CMBootsBlack
+    suitstorage: CCMWeaponRK11MRP
+    id: RMCIDCardBureauObserver
+    belt: CCMBeltSecurityRP
+    back: CCMSatchelRedPatch
+    pocket1: RMCPouchMedicalFill
+    pocket2: RMCPouchMagazineLargePMC
+  storage:
+    pocket2:
+    - RMCMagazineRifleM16
+    - RMCMagazineRifleM16
+    - RMCMagazineRifleM16
+    - RMCMagazineRifleM16
+    back:
+    - RMCMagazineRifleM16
+    - RMCMagazineRifleM16
+    - RMCMegaphone
+    inhand:
+    - CCMPatchRedPatch
+    outerClothing:
+    - CMEmergencyAutoInjector
+    - CMTricordrazineAutoInjector

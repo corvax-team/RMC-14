@@ -1,0 +1,43 @@
+- type: entity
+  parent: RMCHelmetBase
+  id: CCMHelmetRedPatch
+  name: PK - B ballistic helmet
+  description: A protective helmet with a red visor. Used by GIOR's Red Patches
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/GIOR/rp_helmet.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Helmets/GIOR/rp_helmet.rsi
+  - type: FlashImmunity
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+  - type: HolocardScanner
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological
+  - type: CMArmor
+    melee: 25
+    bullet: 15
+    bio: 15
+    explosionArmor: 15
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: CMHeadCap
+  id: CCMBeretRedPatch
+  name: Red Patch helmet
+  description: A white beret with a headset and a visor, for tactical peacekeeping.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Head/Hats/GIOR/rp_beret.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Clothing/Head/Hats/GIOR/rp_beret.rsi
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+  - type: HolocardScanner
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological

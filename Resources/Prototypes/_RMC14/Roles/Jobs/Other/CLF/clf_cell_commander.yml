@@ -34,13 +34,13 @@
       - CLF
     - type: Language
       spokenLanguages:
-      - Japanese
+      - Chinese # CCM14
       - English
       understoodLanguages:
-      - Japanese
+      - Chinese # CCM14
       - English
-      currentLanguage: Japanese
-      defaultLanguage: Japanese
+      currentLanguage: Chinese # CCM14
+      defaultLanguage: Chinese # CCM14
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-cell-commander
     - type: SquadLeader

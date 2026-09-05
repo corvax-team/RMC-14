@@ -12,25 +12,25 @@
   joinNotifyCrew: false
   accessGroups:
   - Colony
-  - RMCWeYa
-  spawnMenuRoleName: Freelancer Conscript
+  # - RMCWeYa CCM14
+  spawnMenuRoleName: Freelancer Leader
   special:
   - !type:AddComponentSpecial
     components:
     - type: NpcFactionMember
       factions:
-      - WeYa
+      - Civilian # CCM14
     - type: Language
       spokenLanguages:
       - English
-      - Russian
-      - Chinese
-      - Japanese
+      # - Russian CCM14
+      # - Chinese CCM14
+      # - Japanese CCM14
       understoodLanguages:
       - English
-      - Russian
-      - Chinese
-      - Japanese
+      # - Russian CCM14
+      # - Chinese CCM14
+      # - Japanese CCM14
       currentLanguage: English
       defaultLanguage: English
     - type: Skills

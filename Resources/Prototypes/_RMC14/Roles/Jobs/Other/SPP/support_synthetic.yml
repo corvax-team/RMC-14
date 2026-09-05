@@ -39,8 +39,8 @@
       - German
       - French
       - Spanish
-      currentLanguage: Russian
-      defaultLanguage: Russian
+      currentLanguage: Chinese # CCM14
+      defaultLanguage: Chinese # CCM14
     - type: LanguageLearning
       learnableLanguages:
       - Xeno

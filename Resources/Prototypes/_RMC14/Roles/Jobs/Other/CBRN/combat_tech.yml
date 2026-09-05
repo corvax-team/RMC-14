@@ -89,7 +89,7 @@
     ears: CMHeadsetCBRN
     eyes: RMCWeldingGogglesSuperior
     jumpsuit: RMCCBRNSuitTool
-    outerClothing: RMCArmorCBRN
+    outerClothing: CCMHardsuitCBRNZ # CCM14
     gloves: RMCHandsVeteranCBRN
     shoes: RMCBootsCBRN
     suitstorage: RMCWeaponRifleM54CFilled

@@ -13,3 +13,8 @@
   hostile:
   - RMCXeno
   - WeYa
+
+- type: npcFaction
+  id: GIOR
+  hostile:
+  - RMCXeno

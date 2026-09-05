@@ -27,7 +27,28 @@
       baseWordLearningRate: 0.05
     - type: NpcFactionMember
       factions:
-      - TSE
+      - Civilian # CCM14
+    - type: Language # CCM14
+      spokenLanguages: # CCM14
+      - English # CCM14
+      - French # CCM14
+      - Japanese # CCM14
+      - Russian # CCM14
+      - German # CCM14
+      - Chinese # CCM14
+      - Spanish # CCM14
+      - SignLanguage # CCM14
+      understoodLanguages: # CCM14
+      - English # CCM14
+      - French # CCM14
+      - Japanese # CCM14
+      - Russian # CCM14
+      - German # CCM14
+      - Chinese # CCM14
+      - Spanish # CCM14
+      - SignLanguage # CCM14
+      currentLanguage: English # CCM14
+      defaultLanguage: English # CCM14
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

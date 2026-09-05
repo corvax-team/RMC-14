@@ -9,8 +9,8 @@
   - CMPilotDropship
   - CMPilotGunship
   - CMDropshipCrewChief
-  - CMIntelOfficer
-  - CMVehicleCrewman
-  - CMSeniorEnlistedAdvisor
+  # - CMIntelOfficer CCM14
+  # - CMVehicleCrewman CCM14
+  # - CMSeniorEnlistedAdvisor CCM14
   departmentRadio: MarineJTAC
   headOfDepartment: CMAuxiliarySupportOfficer

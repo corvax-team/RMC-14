@@ -30,5 +30,17 @@
       sprite: _CCM14/Objects/Clothing/Accessory/Patches/serene.rsi
       state: patch
 
-
+- type: entity
+  parent: RMCPatchBase
+  id: CCMPatchRedPatch
+  name: Red Patches patch
+  description: A red patch. of the red patches.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Accessory/Patches/gior_rp.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _CCM14/Objects/Clothing/Accessory/Patches/gior_rp.rsi
+      state: patch
 

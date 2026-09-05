@@ -32,7 +32,7 @@
   id: RMCGearSurvivorSolarisILRCPeacekeeper
   equipment:
     jumpsuit: RMCJumpsuitRiotControl
-    outerClothing: RMCArmorVest
+    outerClothing: CCMArmorRedPatch # CCM14
     head: RMCHeadBeretOfficerHos
 
 - type: entity

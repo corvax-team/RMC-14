@@ -1,0 +1,5 @@
+- type: localizedDataset
+  id: RMCNamesBorg
+  values:
+    prefix: rmc-name-borg-
+    count: 10

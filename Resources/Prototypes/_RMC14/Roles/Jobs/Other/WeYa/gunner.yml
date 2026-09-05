@@ -23,10 +23,10 @@
     - type: Language
       spokenLanguages:
       - English
-      - Japanese
+      - Scandinavian # CCM14
       understoodLanguages:
       - English
-      - Japanese
+      - Scandinavian # CCM14
       currentLanguage: English
       defaultLanguage: English
     - type: Skills

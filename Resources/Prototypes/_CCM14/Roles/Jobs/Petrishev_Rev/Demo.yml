@@ -27,6 +27,13 @@
     - type: NpcFactionMember
       factions:
       - Petrishev
+    - type: Language
+      spokenLanguages:
+      - Chinese
+      understoodLanguages:
+      - Chinese
+      currentLanguage: Chinese
+      defaultLanguage: Chinese
     - type: Skills
       skills:
         RMCSkillConstruction: 3
