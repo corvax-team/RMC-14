@@ -1,0 +1,624 @@
+- type: entity
+  parent: RMCAreaBase
+  id: CCMAreaErida
+  suffix: Erida
+  components:
+  - type: Sprite
+    state: unknown
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#6C6767D8'
+
+# 0: Ничего не блокирует
+# 1: Блокирует размещение мортиры, лцу, медэвак, парадроп, дождь
+# 2: Блокирует сигнальные фаеры, поставки, фултоны, огонь мортиры
+# 3: Блокирует кас
+# 4: Блокирует об
+
+- type: entity
+  parent: CCMAreaErida
+  abstract: true
+  id: CCMAreaEridaProtectionZero
+  name: Erida - Protection Zero
+  components:
+  - type: Sprite
+    state: cliff_blocked
+  - type: Area
+    CAS: true
+    fulton: true
+    lasing: true
+    mortarPlacement: true
+    mortarFire: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    paradropping: true
+    weatherEnabled: true
+
+- type: entity
+  parent: CCMAreaErida
+  abstract: true
+  id: CCMAreaEridaProtectionOne
+  name: Erida - Protection One
+  components:
+  - type: Sprite
+    state: cliff_blocked
+  - type: Area
+    CAS: true
+    fulton: true
+    lasing: false
+    mortarPlacement: false
+    mortarFire: true
+    medevac: false
+    OB: true
+    supplyDrop: true
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent: CCMAreaErida
+  abstract: true
+  id: CCMAreaEridaProtectionTwo
+  name: Erida - Protection Two
+  components:
+  - type: Sprite
+    state: cliff_blocked
+  - type: Area
+    CAS: true
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent: CCMAreaErida
+  abstract: true
+  id: CCMAreaEridaProtectionThree
+  name: Erida - Protection Three
+  components:
+  - type: Sprite
+    state: cliff_blocked
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent: CCMAreaErida
+  abstract: true
+  id: CCMAreaEridaProtectionFour
+  name: Erida - Protection Four
+  components:
+  - type: Sprite
+    state: cliff_blocked
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+# Вне Границ
+
+- type: entity
+  parent: CCMAreaErida
+  id: CCMAreaEridaOoB
+  name: Erida - Out Of Bounds
+  components:
+  - type: Sprite
+    state: unknown
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: true
+    weatherEnabled: false
+    excludeFromTacMapBounds: false
+    excludeFromTacMapRender: false
+    alwaysPowered: true
+
+# Зона Посадки Карго Порт
+
+- type: entity
+  parent: CCMAreaEridaProtectionFour
+  id: CCMAreaEridaLandingZone
+  name: Erida - Dropship Alamo Landing Zone
+  components:
+  - type: Sprite
+    state: landing_pad
+  - type: Area
+    linkedLz: dropship_lz1
+    minimapColor: '#EBE5E5E3'
+
+- type: entity
+  parent: CCMAreaEridaProtectionOne
+  id: CCMAreaEridaLandingZoneCargoPort
+  name: Erida - Landing Zone Cargo Port
+  components:
+  - type: Sprite
+    state: landing_pad_ext
+  - type: Area
+    linkedLz: dropship_lz1
+
+# Шахтёрский Склад
+
+- type: entity
+  parent: CCMAreaEridaProtectionTwo
+  id: CCMAreaEridaMiningWarehouse
+  name: Erida - Mining Warehouse
+  components:
+  - type: Sprite
+    state: mining_storage
+  - type: Area
+    minimapColor: '#5A4501E7'
+    linkedLz: dropship_lz1
+
+# Северные Шахты
+
+- type: entity
+  parent: CCMAreaEridaProtectionTwo
+  id: CCMAreaEridaNorthMines
+  name: Erida - North Mines
+  components:
+  - type: Sprite
+    state: north
+  - type: Area
+    linkedLz: dropship_lz1
+    weatherEnabled: false
+
+- type: entity
+  parent: CCMAreaEridaProtectionTwo
+  id: CCMAreaEridaAbandonedMines
+  name: Erida - Abandoned Mines
+  components:
+  - type: Sprite
+    state: north
+  - type: Area
+    linkedLz: dropship_lz1
+    weatherEnabled: false
+
+# Центральные Шахты
+
+- type: entity
+  parent: CCMAreaEridaProtectionTwo
+  id: CCMAreaEridaCentralMines
+  name: Erida - Central Mines
+  components:
+  - type: Sprite
+    state: central
+  - type: Area
+    linkedLz: dropship_lz1
+    weatherEnabled: false
+
+# Южные Шахты
+
+- type: entity
+  parent: CCMAreaEridaProtectionTwo
+  id: CCMAreaEridaSouthMines
+  name: Erida - South Mines
+  components:
+  - type: Sprite
+    state: south
+  - type: Area
+    linkedLz: dropship_lz1
+    weatherEnabled: false
+
+# Вышки Телекоммуникации
+
+- type: entity
+  parent: CCMAreaEridaProtectionOne
+  id: CCMAreaEridaTelecomms1
+  name: Erida - Telecommunication
+  components:
+  - type: Sprite
+    state: server
+  - type: Area
+    linkedLz: dropship_lz1
+    weatherEnabled: false
+
+- type: entity
+  parent: CCMAreaEridaProtectionZero
+  id: CCMAreaEridaTelecomms2
+  name: Erida - Telecommunication
+  components:
+  - type: Sprite
+    state: server
+
+# Дормиторий
+
+- type: entity
+  parent: CCMAreaEridaProtectionOne
+  id: CCMAreaEridaDormitory
+  name: Erida - Dormitory
+  components:
+  - type: Sprite
+    state: maint_dormitory
+  - type: Area
+    minimapColor: '#3DBF75EE'
+
+- type: entity
+  parent: CCMAreaEridaProtectionOne
+  id: CCMAreaEridaDormitoryHallway
+  name: Erida - Dormitory Hallway
+  components:
+  - type: Sprite
+    state: maint_dormitory
+  - type: Area
+    minimapColor: '#3DBF75EE'
+
+- type: entity
+  parent: CCMAreaEridaProtectionOne
+  id: CCMAreaEridaDormitoryLibrary
+  name: Erida - Dormitory Library
+  components:
+  - type: Sprite
+    state: maint_dormitory
+  - type: Area
+    minimapColor: '#3DBF75EE'
+
+- type: entity
+  parent: CCMAreaEridaProtectionOne
+  id: CCMAreaEridaDormitoryKitchen
+  name: Erida - Dormitory Kitchen
+  components:
+  - type: Sprite
+    state: maint_dormitory
+  - type: Area
+    minimapColor: '#3DBF75EE'
+
+- type: entity
+  parent: CCMAreaEridaProtectionOne
+  id: CCMAreaEridaDormitoryMedbay
+  name: Erida - Dormitory Medbay
+  components:
+  - type: Sprite
+    state: maint_dormitory
+  - type: Area
+    minimapColor: '#3DBF75EE'
+
+- type: entity
+  parent: CCMAreaEridaProtectionOne
+  id: CCMAreaEridaDormitoryToilet
+  name: Erida - Dormitory Toilet
+  components:
+  - type: Sprite
+    state: maint_dormitory
+  - type: Area
+    minimapColor: '#3DBF75EE'
+
+# Магазин
+
+- type: entity
+  parent: CCMAreaEridaProtectionOne
+  id: CCMAreaEridaStore
+  name: Erida - Store
+  components:
+  - type: Sprite
+    state: green
+  - type: Area
+    minimapColor: '#3DBF75EE'
+
+- type: entity
+  parent: CCMAreaEridaProtectionOne
+  id: CCMAreaEridaStoreDormitory
+  name: Erida - Store Dormitory
+  components:
+  - type: Sprite
+    state: green
+  - type: Area
+    minimapColor: '#3DBF75EE'
+
+- type: entity
+  parent: CCMAreaEridaProtectionOne
+  id: CCMAreaEridaStoreWarehouse
+  name: Erida - Store Warehouse
+  components:
+  - type: Sprite
+    state: green
+  - type: Area
+    minimapColor: '#3DBF75EE'
+
+# Служба Безопасности
+
+- type: entity
+  parent: CCMAreaEridaProtectionTwo
+  id: CCMAreaEridaSecurity
+  name: Erida - Security
+  components:
+  - type: Sprite
+    state: security
+  - type: Area
+    minimapColor: '#A22D2DEE'
+
+- type: entity
+  parent: CCMAreaEridaProtectionTwo
+  id: CCMAreaEridaSecurityCPP1
+  name: Erida - Security
+  components:
+  - type: Sprite
+    state: security
+  - type: Area
+    minimapColor: '#A22D2DEE'
+
+- type: entity
+  parent: CCMAreaEridaProtectionTwo
+  id: CCMAreaEridaSecurityCPP2
+  name: Erida - Security
+  components:
+  - type: Sprite
+    state: security
+  - type: Area
+    minimapColor: '#A22D2DEE'
+
+- type: entity
+  parent: CCMAreaEridaProtectionTwo
+  id: CCMAreaEridaSecurityCPP3
+  name: Erida - Security
+  components:
+  - type: Sprite
+    state: security
+  - type: Area
+    minimapColor: '#A22D2DEE'
+
+- type: entity
+  parent: CCMAreaEridaProtectionTwo
+  id: CCMAreaEridaSecurityCPP4
+  name: Erida - Security
+  components:
+  - type: Sprite
+    state: security
+  - type: Area
+    minimapColor: '#A22D2DEE'
+
+# Отдел Исследований
+
+- type: entity
+  parent: CCMAreaEridaProtectionTwo
+  id: CCMAreaEridaResearch
+  name: Erida - Research
+  components:
+  - type: Sprite
+    state: research
+  - type: Area
+    minimapColor: '#812DA2EE'
+
+# Инженерный Отдел
+
+- type: entity
+  parent: CCMAreaEridaProtectionTwo
+  id: CCMAreaEridaEngineering
+  name: Erida - Engineering
+  components:
+  - type: Sprite
+    state: maint_engineering
+  - type: Area
+    minimapColor: '#C19504E7'
+
+# Отрытые области Колонии
+
+- type: entity
+  parent: CCMAreaEridaProtectionZero
+  id: CCMAreaEridaWestCavePaths
+  name: Erida - West Cave Paths
+  components:
+  - type: Sprite
+    state: caves_sw
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: CCMAreaEridaProtectionZero
+  id: CCMAreaEridaNorthColonyGrounds
+  name: Erida - North Colony Grounds
+  components:
+  - type: Sprite
+    state: valley_north
+
+- type: entity
+  parent: CCMAreaEridaProtectionZero
+  id: CCMAreaEridaCentralColonyGrounds
+  name: Erida - Central Colony Grounds
+  components:
+  - type: Sprite
+    state: valley
+
+- type: entity
+  parent: CCMAreaEridaProtectionZero
+  id: CCMAreaEridaSouthColonyGrounds
+  name: Erida - South Colony Grounds
+  components:
+  - type: Sprite
+    state: valley_south
+
+# Западная Река
+
+- type: entity
+  parent: CCMAreaEridaProtectionZero
+  id: CCMAreaEridaWestRiverNorth
+  name: Erida - West River North
+  components:
+  - type: Sprite
+    state: north
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: CCMAreaEridaProtectionZero
+  id: CCMAreaEridaWestRiverCentral
+  name: Erida - West River Central
+  components:
+  - type: Sprite
+    state: central
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: CCMAreaEridaProtectionZero
+  id: CCMAreaEridaWestRiverSouth
+  name: Erida - West River South
+  components:
+  - type: Sprite
+    state: south
+  - type: Area
+    linkedLz: dropship_lz1
+
+# Восточная Река
+
+- type: entity
+  parent: CCMAreaEridaProtectionZero
+  id: CCMAreaEridaEastRiverNorth
+  name: Erida - East River North
+  components:
+  - type: Sprite
+    state: north
+
+- type: entity
+  parent: CCMAreaEridaProtectionZero
+  id: CCMAreaEridaEastRiverCentral
+  name: Erida - East River Central
+  components:
+  - type: Sprite
+    state: central
+
+- type: entity
+  parent: CCMAreaEridaProtectionZero
+  id: CCMAreaEridaEastRiverSouth
+  name: Erida - East River South
+  components:
+  - type: Sprite
+    state: south
+
+# Северо-Западный Мост
+
+- type: entity
+  parent: CCMAreaEridaProtectionZero
+  id: CCMAreaEridaNorthWestBridge
+  name: Erida - North West Bridge
+  components:
+  - type: Sprite
+    state: northwest
+  - type: Area
+    linkedLz: dropship_lz1
+
+# Юго-Западный Мост
+
+- type: entity
+  parent: CCMAreaEridaProtectionZero
+  id: CCMAreaEridaSouthWestBridge
+  name: Erida - South West Bridge
+  components:
+  - type: Sprite
+    state: southwest
+  - type: Area
+    linkedLz: dropship_lz1
+
+# Северо-Восточный Мост
+
+- type: entity
+  parent: CCMAreaEridaProtectionZero
+  id: CCMAreaEridaNorthEastBridge
+  name: Erida - North East Bridge
+  components:
+  - type: Sprite
+    state: northeast
+
+# Юго-Восточный Мост
+
+- type: entity
+  parent: CCMAreaEridaProtectionZero
+  id: CCMAreaEridaSouthEastBridge
+  name: Erida - South East Bridge
+  components:
+  - type: Sprite
+    state: southeast
+
+# Исследовательская Шахта
+
+- type: entity
+  parent: CCMAreaEridaProtectionThree
+  id: CCMAreaEridaResearchCaves
+  name: Erida - Research Caves
+  components:
+  - type: Sprite
+    state: caves_research
+  - type: Area
+    minimapColor: '#812DA2EE'
+
+# Исследовательский Комплекс
+
+- type: entity
+  parent: CCMAreaEridaProtectionThree
+  id: CCMAreaEridaResearchComplexCaves
+  name: Erida - Research Complex Caves
+  components:
+  - type: Sprite
+    state: cave
+
+- type: entity
+  parent: CCMAreaEridaProtectionThree
+  id: CCMAreaEridaResearchComplexNorth
+  name: Erida - Research Complex North
+  components:
+  - type: Sprite
+    state: away1
+  - type: Area
+    minimapColor: '#812DA2EE'
+
+- type: entity
+  parent: CCMAreaEridaProtectionThree
+  id: CCMAreaEridaResearchComplexCentral
+  name: Erida - Research Complex Central
+  components:
+  - type: Sprite
+    state: away2
+  - type: Area
+    minimapColor: '#812DA2EE'
+
+- type: entity
+  parent: CCMAreaEridaProtectionThree
+  id: CCMAreaEridaResearchComplexSouth
+  name: Erida - Research Complex South
+  components:
+  - type: Sprite
+    state: away3
+  - type: Area
+    minimapColor: '#812DA2EE'
+
+# Улей
+
+- type: entity
+  parent: CCMAreaEridaProtectionThree
+  id: CCMAreaEridaTheHive
+  name: Erida - The Hive
+  components:
+  - type: Sprite
+    state: eta_xeno
+  - type: Area
+    minimapColor: '#2D1342EE'
