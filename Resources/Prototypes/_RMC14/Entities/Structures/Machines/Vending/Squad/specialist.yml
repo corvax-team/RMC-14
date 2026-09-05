@@ -77,17 +77,6 @@
           state: spec_anti_materiel_sniper
         linkedEntries:
         - CMSniperEquipmentCase
-#      - id: CCMShotgunSpecEquipmentCase
-#        giveSquadRoleName: Тяжёлый дробовик
-#        isAppendSquadRoleName: false
-#        givePrefix: ТЯДР
-#        isAppendPrefix: true
-#        giveIcon:
-#          sprite: _CCM14/Interface/cm_job_icons.rsi
-#          state: spec_heavy_shotgun
-#        giveMapBlip:
-#          sprite: /Textures/_RMC14/Interface/map_blips.rsi
-#          state: clf_spec
     - name: Боеприпасы скаута # CCM14
       entries:
       - id: RMCMagazineRifleM4SPRA19Impact
@@ -113,18 +102,6 @@
       - id: RMCRocket84mm
         points: 40
       - id: RMCRocket84mmWhitePhosphorus
-        points: 40
-    - name: Боеприпасы тяжёлого дробовика # CCM14
-      entries:
-      - id: CCMShellM404KShock
-        points: 40
-      - id: CCMShellM404KFrag
-        points: 40
-      - id: CCMShellM404KDragonFlame
-        points: 40
-      - id: CCMShellM404KDragonEye
-        points: 40
-      - id: CCMShellM404KDragonClaw
         points: 40
     - name: Дополнительные гранаты # CCM14
       entries:

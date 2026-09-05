@@ -96,39 +96,9 @@
   parent: CMStunbaton
   id: RMCTelescopicBaton
   name: telescopic baton
-  suffix: CCM-Changed-SyntOnly
   description: A compact yet rebalanced personal defense weapon. Can be concealed when folded.
   components:
   - type: Item
     size: Small
-# // CCM CHANGES ↓
-  - type: MeleeDamageMultiplier
-    multiplier: 7
-    whitelist:
-      components:
-      - Xeno
-  - type: XenoMeleeSlow
-    higherOnXenos: true
-    slowTime: 3
-  - type: UseDelay
-    delay: 2
-  - type: UseDelayOnMeleeHit
-  - type: MeleeThrowOnHit
-    distance: 5
-    speed: 8
-    stunTime: 0
-  - type: MeleeWeapon
-    attackRate: 0.444
-    wideAnimationRotation: -135
-    damage:
-      types:
-        Blunt: 7
-    bluntStaminaDamageFactor: 2.0
-    angle: 60
-  - type: WhitelistPickupBy
-    whitelist:
-      components:
-        - Synth
-# // CCM CHANGES ↑
 
     

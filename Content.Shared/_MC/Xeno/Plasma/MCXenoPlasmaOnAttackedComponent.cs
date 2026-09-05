@@ -1,11 +1,10 @@
-﻿using Content.Shared.FixedPoint;
-using Robust.Shared.GameStates;
+﻿using Robust.Shared.GameStates;
 
-namespace Content.Shared._MC.Xeno.Plasma;
+namespace Content.Shared._MC.Xeno.Plasma.Components.Conversions;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class MCXenoPlasmaOnAttackedComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public FixedPoint2 Multiplier = 1f;
+    public float Multiplier = 1f;
 }

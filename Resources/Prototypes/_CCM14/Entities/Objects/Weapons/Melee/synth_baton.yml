@@ -1,0 +1,119 @@
+- type: entity
+  parent: BaseItem
+  id: CCMSynthBaton
+  name: energy synth baton
+  suffix: CCM
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Melee/synth_baton.rsi
+    layers:
+    - state: stunbaton_off
+      map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: Clothing
+    quickEquip: false
+    sprite: _CCM14/Objects/Weapons/Melee/synth_baton.rsi
+    slots:
+    - Belt
+    - Suitstorage
+    - Back
+  - type: Stunbaton
+    energyPerUse: 1000000
+  - type: MeleeRequiresSkill
+    skills:
+      RMCSkillPolice: 1
+  - type: Item
+    heldPrefix: off
+    size: Normal
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+     enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: {state: stunbaton_on}
+          False: {state: stunbaton_off}
+  - type: ToggleableVisuals # Add support for multiple layers
+    spriteLayer: blade
+    inhandVisuals:
+      left:
+      - state: on-inhand-left
+        shader: unshaded
+      right:
+      - state: on-inhand-right
+        shader: unshaded
+  - type: ItemToggle
+    predictable: false
+    soundActivate:
+      collection: sparks
+      params:
+        variation: 0.250
+    soundDeactivate:
+      collection: sparks
+      params:
+        variation: 0.250
+    soundFailToActivate:
+      path: /Audio/Machines/button.ogg
+      params:
+        variation: 0.250
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      path: /Audio/Weapons/egloves.ogg
+      params:
+        variation: 0.2
+    activatedSoundOnHitNoDamage:
+      path: /Audio/Weapons/egloves.ogg
+      params:
+        variation: 0.2
+    activatedDamage:
+      types:
+        Heat: 10
+  - type: ItemToggleSize
+    activatedSize: Huge
+  - type: LandAtCursor # it deals stamina damage when thrown
+  - type: Battery
+    maxCharge: 10000000
+    startingCharge: 10000000
+  - type: UseDelay
+  - type: MeleeDamageMultiplier
+    multiplier: 5
+    whitelist:
+      components:
+      - Xeno
+  - type: ItemTogglePointLight
+    toggleableVisualsColorModulatesLights: true
+  - type: WhitelistPickupBy
+    whitelist:
+      components:
+        - Synth
+  - type: MeleeWeapon
+    attackRate: 0.4
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 2
+    bluntStaminaDamageFactor: 2.0
+    angle: 60
+    animation: WeaponArcThrust
+  - type: ComponentToggler
+    components:
+    - type: PointLight
+      netsync: false
+      enabled: true
+      radius: 3.5
+      energy: 2
+      color: orange
+    - type: MCXenoPlasmaDamageOnHit
+      multiplier: 0.5
+      missingMultiplier: 1
+    - type: RMCStaminaDamageOnHit
+      damage: 100
+      jitterDuration: 2
+    - type: RMCStaminaDamageOnCollide
+      damage: 35
+    - type: XenoMeleeSlow
+      slowTime: 10
+      higherOnXenos: True
+    - type: StunOnHit
+      duration: 2
+      whitelist:
+        components:
+        - XenoLight

@@ -329,7 +329,7 @@
         points: 15
       - id: RMCVendorBundleCompactNailgunKit
         points: 15
-#      - id: RMCTelescopicBaton # // CCM Changed - Transfered
+#      - id: RMCTelescopicBaton # // CCM Changed
 #        points: 15
       - id: RMCWebbingSurgicalGreen
         points: 15
@@ -349,12 +349,14 @@
         points: 10
       - id: CCMAdvancedBurnToolHealer
         points: 10
+      - id: CCMAdvancedAutoRepairSynthTool
+        points: 10
     - name: Опасные инструменты # CCM14
       choices: { CCMSynthWeapon: 1 }
       entries:
       - id: RMCSynthBreachingHammer # // CCM Changed - Transfered
         points: 15
-      - id: RMCTelescopicBaton
+      - id: CCMSynthBaton
         points: 15
 # // CCM CHANGES ↑
 

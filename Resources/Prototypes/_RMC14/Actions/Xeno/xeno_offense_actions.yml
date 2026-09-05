@@ -1578,7 +1578,7 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_mine
-    useDelay: 5.5
+    useDelay: 9 # CCM14 Change
   - type: XenoAcidMine
     actionIconEmpowered:
       sprite: _RMC14/Actions/xeno_actions.rsi
