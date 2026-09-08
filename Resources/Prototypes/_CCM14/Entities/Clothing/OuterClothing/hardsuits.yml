@@ -6,9 +6,9 @@
   description: A specialized modification of the CMC's Mk. 35 hardsuit. Used by the CBRN marine detachments. Made more for a battle with a walking dead and giant space insects then hostile gunmen.
   components:
   - type: Sprite
-    sprite: _CCM14\Objects\Clothing\OuterClothing\Armor\Hardsuits\cbrnz.rsi
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/Hardsuits/cbrnz.rsi
   - type: Clothing
-    sprite: _CCM14\Objects\Clothing\OuterClothing\Armor\Hardsuits\cbrnz.rsi
+    sprite: _CCM14/Objects/Clothing/OuterClothing/Armor/Hardsuits/cbrnz.rsi
     equipDelay: 2
     unequipDelay: 2
   - type: ToggleableClothing
