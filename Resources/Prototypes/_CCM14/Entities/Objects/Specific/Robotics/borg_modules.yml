@@ -1,0 +1,68 @@
+- type: entity
+  id: CCMBorgModuleWeaponLaser
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: borg lase module
+  components:
+  - type: Sprite
+    layers:
+    - state: syndicate
+    - state: icon-syndicate
+  - type: ItemBorgModule
+    items:
+    - CCMWeaponLaserModule
+    - CCMWeaponDisabler
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: syndicate-weapon-module }
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: base-icon-inhand-left
+        color: "#FF0000"
+      - state: base-module-inhand-left
+        color: "#891417"
+      - state: base-part-inhand-left
+      - state: base-stripes-inhand-left
+        color: "#7B0F12"
+      right:
+      - state: base-icon-inhand-right
+        color: "#FF0000"
+      - state: base-module-inhand-right
+        color: "#891417"
+      - state: base-part-inhand-right
+      - state: base-stripes-inhand-right
+        color: "#7B0F12"
+
+- type: entity
+  id: CCMBorgModuleMedical
+  parent: [ BaseBorgModuleMedical, BaseProviderBorgModule ]
+  name: medical borg module
+  components:
+  - type: Sprite
+    layers:
+    - state: medical
+    - state: icon-treatment
+  - type: ItemBorgModule
+    items:
+    - CMHealthAnalyzer
+    - CMDefibrillatorInfinite
+    - CMSurgicalLine
+    - CMSynthGraft
+    - CMUpgradedBurnKit10
+    - CMUpgradedTraumaKit10
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: treatment-module }
+
+- type: entity
+  id: CCMBorgModuleOmnitool
+  parent: [ BaseBorgModule, BaseProviderBorgModule ]
+  name: omnitool borg module
+  components:
+  - type: Sprite
+    layers:
+    - state: generic
+    - state: icon-tools
+  - type: ItemBorgModule
+    items:
+    - Omnitool
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: tool-module }

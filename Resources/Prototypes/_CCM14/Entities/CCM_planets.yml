@@ -77,4 +77,25 @@
       CMSurvivorSecurity: CCMSurvivorSPPWesternForestBase
       CMSurvivorScientist: CCMSurvivorSPPWesternForestBase
       RMCSurvivorCommandingOfficer: CCMSurvivorSPPWesternForestCommander
-
+- type: entity
+  id: CCMPlanetErida
+  name: Erida
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_CCM14/Planets/erida.yml
+    camouflage: Classic
+    survivorJobs:
+    - CMSurvivor: 1
+    - CMSurvivorCorporate: 1
+    - CMSurvivorDoctor: 1
+    - CMSurvivorEngineer: 1
+    - CMSurvivorSecurity: 1
+    - CMSurvivorScientist: 1
+    announcement: "Пехота! Была потеряна связь с научно-промышленной колонией «Новая Земля».
+      Для общего понимания,
+      Обозначение колонии - научно-исследовательский и промышленный форпост.
+      Температура на поверхности составляет 23 °C.
+      Заведующий колонии - руководитель Гарет Форстер.
+      Биосканирование Выдаёт ошибку.
+    
+      Авторизовано: капитан Леон Гранц"

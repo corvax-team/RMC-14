@@ -19,7 +19,14 @@
       preset: RMCSkillPresetSurvivorMarshal
     - type: NpcFactionMember
       factions:
-      - TSE
+      - Civilian # CCM14
+    - type: Language # CCM14
+      spokenLanguages: # CCM14
+      - English # CCM14
+      understoodLanguages: # CCM14
+      - English # CCM14
+      currentLanguage: English # CCM14
+      defaultLanguage: English # CCM14
     - type: JobPrefix
       prefix: rmc-job-prefix-tsepa-constable
   hidden: true

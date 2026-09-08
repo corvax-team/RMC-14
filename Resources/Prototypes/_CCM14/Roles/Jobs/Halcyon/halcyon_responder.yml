@@ -34,6 +34,20 @@
       - Halcyon
       - SPP
       - Civilian
+    - type: Language
+      spokenLanguages:
+      - English
+      - German
+      - Russian
+      - Chinese
+      understoodLanguages:
+      - English
+      - German
+      - Russian
+      - Chinese
+      currentLanguage: German
+      defaultLanguage: German
+
   hidden: true
 
 - type: startingGear

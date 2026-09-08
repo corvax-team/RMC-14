@@ -1,0 +1,8 @@
+- type: entity
+  parent: CMSatchel
+  id: CCMSatchelRedPatch
+  name: GIOR Red Patch pack
+  description: A suprisingly well made leather satchel. In use of Petrishev Revolutionary combatants.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Clothing/Back/Backpacks/GIOR/rp_pack.rsi

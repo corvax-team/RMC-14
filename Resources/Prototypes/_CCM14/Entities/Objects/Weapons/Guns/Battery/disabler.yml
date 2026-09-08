@@ -1,0 +1,54 @@
+- type: entity
+  name: disabler
+  parent: WeaponDisabler
+  id: CCMWeaponDisabler
+  description: A self-defense weapon that exhausts organic targets, weakening them until they collapse.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Guns/Battery/disabler.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-unshaded-0
+        map: ["enum.GunVisualLayers.MagUnshaded"]
+        shader: unshaded
+  - type: Clothing
+    sprite: _CCM14/Objects/Weapons/Guns/Battery/disabler.rsi
+  - type: Gun
+    selectedMode: SemiAuto
+    fireRate: 3
+    availableModes:
+      - SemiAuto
+  - type: GunRequiresSkills
+    skills:
+      RMCSkillPolice: 1
+    quickEquip: false
+    slots:
+      - suitStorage
+      - Belt
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 4
+  - type: ProjectileBatteryAmmoProvider
+    proto: CCMBulletDisabler
+    fireCost: 35
+  - type: Tag
+    tags:
+    - Taser
+
+- type: entity
+  name : disabler bolt
+  id: CCMBulletDisabler
+  parent: BulletDisabler
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCStaminaDamageOnCollide
+    damage: 40
+  - type: Projectile
+    impactEffect: BulletImpactEffectDisabler
+    damage:
+      types:
+        Heat: 5
+    soundHit:
+      collection: WeakHit
+    forceSound: true

@@ -78,7 +78,7 @@
   equipment:
     ears: CMHeadsetCBRN
     jumpsuit: RMCCBRNSuit
-    outerClothing: RMCArmorCBRN
+    outerClothing: CCMHardsuitCBRNZ # CCM14
     gloves: RMCHandsVeteranCBRN
     shoes: RMCBootsCBRN
     suitstorage: RMCWeaponRifleM54CFilled

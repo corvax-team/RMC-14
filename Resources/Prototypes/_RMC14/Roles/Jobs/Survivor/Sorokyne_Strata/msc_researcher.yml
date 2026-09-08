@@ -15,17 +15,15 @@
     components:
     - type: Language
       spokenLanguages:
-      - Russian
-      - English
+      # - Russian # CCM14
       - Chinese
-      - German
+      - English
       understoodLanguages:
-      - Russian
-      - English
+      # - Russian # CCM14
       - Chinese
-      - German
-      currentLanguage: Russian
-      defaultLanguage: Russian
+      - English
+      currentLanguage: Chinese # CCM14
+      defaultLanguage: Chinese # CCM14
     - type: Skills
       preset: RMCSkillPresetSurvivorResearcher
     - type: EquipSurvivorPreset

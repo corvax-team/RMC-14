@@ -21,12 +21,14 @@
     - type: Language
       spokenLanguages:
       - English
-      - Spanish
+      - Scandinavian # CCM14
       - Russian
+      - Chinese # CCM14
       understoodLanguages:
       - English
-      - Spanish
+      - Scandinavian # CCM14
       - Russian
+      - Chinese # CCM14
       currentLanguage: English
       defaultLanguage: English
     - type: Skills

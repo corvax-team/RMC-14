@@ -1,0 +1,17 @@
+- type: entity
+  parent: WeaponSMGM63
+  name: M63-RP submachine gun
+  id: CCMWeaponSMGM63RP
+  description: Literally just a UEG's M63 SMG, but with white stripes and GIOR logo engraved on it.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Weapons/Guns/SMGs/m63_rp.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _CCM14/Objects/Weapons/Guns/SMGs/m63_rp.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }

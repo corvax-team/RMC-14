@@ -19,6 +19,15 @@
     - type: NpcFactionMember
       factions:
       - SPP
+    - type: Language # CCM14
+      spokenLanguages: # CCM14
+      - English # CCM14
+      - Chinese # CCM14
+      understoodLanguages: # CCM14
+      - English # CCM14
+      - Chinese # CCM14
+      currentLanguage: Chinese # CCM14
+      defaultLanguage: Chinese # CCM14
     - type: Skills
       skills:
         RMCSkillFirearms: 1
@@ -110,6 +119,15 @@
     - type: NpcFactionMember
       factions:
       - SPP
+    - type: Language # CCM14
+      spokenLanguages: # CCM14
+      - English # CCM14
+      - Chinese # CCM14
+      understoodLanguages: # CCM14
+      - English # CCM14
+      - Chinese # CCM14
+      currentLanguage: Chinese # CCM14
+      defaultLanguage: Chinese # CCM14
     - type: Skills
       skills:
         RMCSkillFirearms: 1
@@ -181,6 +199,15 @@
     - type: NpcFactionMember
       factions:
       - SPP
+    - type: Language # CCM14
+      spokenLanguages: # CCM14
+      - English # CCM14
+      - Chinese # CCM14
+      understoodLanguages: # CCM14
+      - English # CCM14
+      - Chinese # CCM14
+      currentLanguage: Chinese # CCM14
+      defaultLanguage: Chinese # CCM14
     - type: Skills
       skills:
         RMCSkillFirearms: 1
@@ -252,6 +279,15 @@
     - type: NpcFactionMember
       factions:
       - SPP
+    - type: Language # CCM14
+      spokenLanguages: # CCM14
+      - English # CCM14
+      - Chinese # CCM14
+      understoodLanguages: # CCM14
+      - English # CCM14
+      - Chinese # CCM14
+      currentLanguage: Chinese # CCM14
+      defaultLanguage: Chinese # CCM14
     - type: Skills
       skills:
         RMCSkillFirearms: 1
@@ -323,6 +359,15 @@
     - type: NpcFactionMember
       factions:
       - SPP
+    - type: Language # CCM14
+      spokenLanguages: # CCM14
+      - English # CCM14
+      - Chinese # CCM14
+      understoodLanguages: # CCM14
+      - English # CCM14
+      - Chinese # CCM14
+      currentLanguage: Chinese # CCM14
+      defaultLanguage: Chinese # CCM14
     - type: Skills
       skills:
         RMCSkillFirearms: 1
@@ -394,6 +439,15 @@
     - type: NpcFactionMember
       factions:
       - SPP
+    - type: Language # CCM14
+      spokenLanguages: # CCM14
+      - English # CCM14
+      - Chinese # CCM14
+      understoodLanguages: # CCM14
+      - English # CCM14
+      - Chinese # CCM14
+      currentLanguage: Chinese # CCM14
+      defaultLanguage: Chinese # CCM14
     - type: Skills
       skills:
         RMCSkillFirearms: 2

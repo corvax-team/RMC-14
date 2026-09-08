@@ -504,9 +504,9 @@
   description: Overalls made of kevlar cover a snazzy blue dress shirt. Often utilized in riot control situations.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_riot.rsi
+    sprite: _CCM14/Objects/Clothing/Uniforms/GIOR/rp_uniform.rsi # CCM14
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_riot.rsi
+    sprite: _CCM14/Objects/Clothing/Uniforms/GIOR/rp_uniform.rsi # CCM14
   - type: Tag
     tags:
     - RMCUniformMarine

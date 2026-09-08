@@ -14,6 +14,13 @@
     - type: NpcFactionMember
       factions:
       - SPP
+    - type: Language
+      spokenLanguages:
+      - Chinese
+      understoodLanguages:
+      - Chinese
+      currentLanguage: Chinese
+      defaultLanguage: Chinese
     - type: AssignSquad
       squad: SquadSPP
     - type: RMCAllowSuitStorage

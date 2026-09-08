@@ -12,17 +12,17 @@
     components:
     - type: Language
       spokenLanguages:
-      - Russian
+      # - Russian # CCM14
       - English
-      - German
+      # - German # CCM14
       - Chinese
-      understoodLanguages:
-      - Russian
+      understoodLanguages: # CCM14
+      # - Russian # CCM14
       - English
-      - German
+      # - German # CCM14
       - Chinese
-      currentLanguage: Russian
-      defaultLanguage: Russian
+      currentLanguage: Chinese # CCM14
+      defaultLanguage: Chinese # CCM14
     - type: RMCAllowSuitStorage
     - type: RMCSurvivor
     - type: NpcFactionMember

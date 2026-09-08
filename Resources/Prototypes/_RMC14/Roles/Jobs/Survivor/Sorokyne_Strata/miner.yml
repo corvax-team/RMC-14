@@ -11,13 +11,13 @@
     components:
     - type: Language
       spokenLanguages:
-      - Russian
+      # - Russian # CCM14
       - Chinese
       understoodLanguages:
-      - Russian
+      # - Russian # CCM14
       - Chinese
-      currentLanguage: Russian
-      defaultLanguage: Russian
+      currentLanguage: Chinese # CCM14
+      defaultLanguage: Chinese # CCM14
     - type: Skills
       preset: RMCSkillPresetSurvivorMiner
     - type: EquipSurvivorPreset

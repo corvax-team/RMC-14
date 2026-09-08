@@ -19,6 +19,15 @@
     - type: NpcFactionMember
       factions:
       - Petrishev
+    - type: Language
+      spokenLanguages:
+      - English
+      - Chinese
+      understoodLanguages:
+      - English
+      - Chinese
+      currentLanguage: Chinese
+      defaultLanguage: Chinese
     - type: Skills
       skills:
         RMCSkillConstruction: 2
@@ -48,7 +57,7 @@
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidREVLeaderHostile
+  id: CCMRandomHumanoidREVLeaderHostile
   name: rev ghost role leader
   suffix: Spawner, Player, Hostile
   components:

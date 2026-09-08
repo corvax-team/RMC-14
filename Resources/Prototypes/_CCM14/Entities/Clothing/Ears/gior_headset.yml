@@ -1,0 +1,41 @@
+- type: radioChannel
+  id: GIOR
+  name: chat-radio-gior
+  keycode: "-"
+  frequency: 3632
+  color: "#c40639"
+  longRange: true
+  tower: true
+
+- type: entity
+  parent: CMEncryptionKeyCommon
+  id: CCMEncryptionKeyGIOR
+  name: GIOR radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - GIOR
+    - Colony
+    - Common
+    defaultChannel: GIOR
+
+- type: entity
+  abstract: true
+  parent: CCMHeadsetIconsGIOR
+  id: CCMHeadsetRPAbstract
+  components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: LeaderRP
+    trackerModes:
+    - LeaderRP
+  - type: GrantTacMapAlert
+
+- type: entity
+  parent: CCMHeadsetRPAbstract
+  id: CCMHeadsetRedPatch
+  name: Red Patches headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CCMEncryptionKeyGIOR

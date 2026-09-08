@@ -16,10 +16,12 @@
         - type: Language
           spokenLanguages:
           - English
+          - Japanese # CCM14
           understoodLanguages:
           - English
-          currentLanguage: English
-          defaultLanguage: English
+          - Japanese # CCM14
+          currentLanguage: Japanese # CCM14
+          defaultLanguage: Japanese # CCM14
         - type: NpcFactionMember
           factions:
             - RoyalMarines

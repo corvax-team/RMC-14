@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "made by superman1223",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "rp_support",
+      "directions": 4
+    },
+    {
+      "name": "rp_support_e",
+      "directions": 4
+    },
+    {
+      "name": "rp_support_e_r",
+      "directions": 4
+    },
+    {
+      "name": "rp_support_l",
+      "directions": 4
+    }
+  ]
+}

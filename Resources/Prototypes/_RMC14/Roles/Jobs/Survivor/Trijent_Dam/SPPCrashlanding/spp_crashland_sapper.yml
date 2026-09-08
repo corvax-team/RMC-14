@@ -26,15 +26,15 @@
         RMCSkillEndurance: 2
     - type: Language
       spokenLanguages:
-      - Russian
-      - German
+      # - Russian CCM14
+      # - German CCM14
       - Chinese
       understoodLanguages:
-      - Russian
-      - German
+      # - Russian CCM14
+      # - German CCM14
       - Chinese
-      currentLanguage: Russian
-      defaultLanguage: Russian
+      currentLanguage: Chinese # CCM14
+      defaultLanguage: Chinese # CCM14
     - type: IntelRescueSurvivorObjective
     - type: AssignSquad
       squad: SquadSPP

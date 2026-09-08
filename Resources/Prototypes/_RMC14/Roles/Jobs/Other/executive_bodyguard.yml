@@ -41,6 +41,15 @@
       factions:
       - WeYa
       - UNMC
+    - type: Language # CCM14
+      spokenLanguages: # CCM14
+      - English # CCM14
+      - Scandinavian # CCM14
+      understoodLanguages:
+      - English # CCM14
+      - Scandinavian # CCM14
+      currentLanguage: English # CCM14
+      defaultLanguage: English # CCM14
     - type: JobPrefix
       prefix: rmc-job-prefix-executive-bodyguard
     - type: Skills

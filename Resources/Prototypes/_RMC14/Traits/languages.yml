@@ -3,7 +3,7 @@
   name: rmc-trait-spanish-language-name
   description: rmc-trait-spanish-language-desc
   category: SpeechTraits
-  cost: 1
+  cost: 2 # CCM14
   components: []
   language: Spanish
 
@@ -12,25 +12,25 @@
   name: rmc-trait-french-language-name
   description: rmc-trait-french-language-desc
   category: SpeechTraits
-  cost: 1
+  cost: 2 # CCM14
   components: []
   language: French
 
-- type: trait
-  id: JapaneseLanguage
-  name: rmc-trait-japanese-language-name
-  description: rmc-trait-japanese-language-desc
-  category: SpeechTraits
-  cost: 1
-  components: []
-  language: Japanese
+# - type: trait CCM14
+#   id: JapaneseLanguage CCM14
+#   name: rmc-trait-japanese-language-name CCM14
+#   description: rmc-trait-japanese-language-desc CCM14
+#   category: SpeechTraits CCM14
+#   cost: 1 CCM14
+#   components: [] CCM14
+#   language: Japanese CCM14
 
 - type: trait
   id: ChineseLanguage
   name: rmc-trait-chinese-language-name
   description: rmc-trait-chinese-language-desc
   category: SpeechTraits
-  cost: 1
+  cost: 2 # CCM14
   components: []
   language: Chinese
 
@@ -39,7 +39,7 @@
   name: rmc-trait-russian-language-name
   description: rmc-trait-russian-language-desc
   category: SpeechTraits
-  cost: 1
+  cost: 2 # CCM14
   components: []
   language: Russian
 
@@ -48,7 +48,7 @@
   name: rmc-trait-german-language-name
   description: rmc-trait-german-language-desc
   category: SpeechTraits
-  cost: 1
+  cost: 2 # CCM14
   components: []
   language: German
 
@@ -57,6 +57,6 @@
   name: rmc-trait-scandinavian-language-name
   description: rmc-trait-scandinavian-language-desc
   category: SpeechTraits
-  cost: 1
+  cost: 2 # CCM14
   components: []
   language: Scandinavian

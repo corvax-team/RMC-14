@@ -43,3 +43,24 @@
     leaderIcon:
       sprite: _CCM14/Interface/cm_job_icons.rsi
       state: serene_leader
+
+- type: entity
+  parent: SquadBase
+  id: SquadRedPatch
+  name: Red Patch
+  components:
+  - type: SquadTeam
+    color: "#c40639"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: GIOR
+    group: GIOR
+    leaderIcon:
+      sprite: _CCM14/Interface/cm_job_icons.rsi
+      state: rp_leader

@@ -6,14 +6,14 @@
   suffix: Filled
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m16.rsi
+    sprite: _CCM14/Objects/Weapons/Guns/Rifles/rk10.rsi # CCM14
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m16.rsi
+    sprite: _CCM14/Objects/Weapons/Guns/Rifles/rk10.rsi # CCM14
   - type: Gun
     selectedMode: SemiAuto
     availableModes:
@@ -135,14 +135,45 @@
   description: Modernized version of M16 platform rifle, probably originated from bottomless stockpiles of the United Nations when they switched to more modern rifles. It is chambered in 5.56x45mm.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m16a5.rsi
+    sprite: _CCM14\Objects\Weapons\Guns\Rifles\rk11m.rsi # CCM14
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m16a5.rsi
+    sprite: _CCM14\Objects\Weapons\Guns\Rifles\rk11m.rsi # CCM14
+  - type: Gun # CCM14
+    selectedMode: FullAuto # CCM14
+    availableModes: # CCM14
+    - SemiAuto # CCM14
+    - Burst # CCM14
+    - FullAuto # CCM14
+    soundGunshot: # CCM14
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m16.ogg # CCM14
+  - type: RMCSelectiveFire # CCM14
+    baseFireModes: # CCM14
+    - SemiAuto # CCM14
+    - Burst # CCM14
+    - FullAuto # CCM14
+    recoilUnwielded: 3 # CCM14
+    scatterWielded: 7 # CCM14
+    scatterUnwielded: 18 # CCM14
+    baseFireRate: 4.5 # CCM14
+    burstScatterMult: 2 # CCM14
+    modifiers: # CCM14
+      Burst: # CCM14
+        fireDelay: 0.1665 # CCM14
+        maxScatterModifier: 10 # CCM14
+        useBurstScatterMult: true # CCM14
+        unwieldedScatterMultiplier: 2 # CCM14
+        shotsToMaxScatter: 6 # CCM14
+      FullAuto: # CCM14
+        fireDelay: 0 # CCM14
+        maxScatterModifier: 9 # CCM14
+        useBurstScatterMult: true # CCM14
+        unwieldedScatterMultiplier: 2 # CCM14
+        shotsToMaxScatter: 12 # CCM14
   - type: AttachableHolder
     randomAttachmentChance: 0.42
     slots:
@@ -224,9 +255,9 @@
       tags:
       - RMCCartridgeRifleM16
     proto: RMCCartridgeRifleM16
-    capacity: 20
+    capacity: 30 # CCM14
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m16.rsi
+    sprite: _CCM14/Objects/Weapons/Ammunition/Magazines/rk10_mag.rsi # CCM14
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]

@@ -196,7 +196,7 @@ rmc-job-name-survivor-armed-police-officer = Милицейский
 rmc-job-name-survivor-army-reservist = Армейский резервист
 rmc-job-prefix-army-reservist = 202/Армия
 rmc-job-name-survivor-moh-doctor = Доктор министерства здравоохранения
-rmc-job-name-survivor-msc-researcher = Исследователь министерства колонизации
+rmc-job-name-survivor-msc-researcher = Исследователь НСНиИ
 rmc-job-name-survivor-soro-civilian = Гражданин
 rmc-job-name-survivor-fire-protection-specialist = Специалист по пожарной безопасности
 rmc-job-prefix-fire-protection-specialist = СПБ
@@ -211,7 +211,7 @@ rmc-job-greeting-soro-sof =
     
     Вы [bold][color=#51A16C][font size=16]НЕ ВРАЖДЕБНЫ к ККМП![/font][/color][/bold]
 rmc-job-name-soro-sof-base = Выживший спецназа СССП
-rmc-job-description-soro-sof = Вы — застрявший морпех спецназа СССП. Ваша группа была отправлена для расследования сигнала бедствия. Выясните, что случилось с колонией.
+rmc-job-description-soro-sof = Вы — застрявший солдат спецназа СССП. Ваша группа была отправлена для расследования сигнала бедствия. Выясните, что случилось с колонией.
 rmc-job-name-soro-sof-sapper = Сапер спецназа
 rmc-job-prefix-soro-sof-sapper = 14/КАСКАД САП
 rmc-job-name-soro-sof-medic = Медик спецназа
