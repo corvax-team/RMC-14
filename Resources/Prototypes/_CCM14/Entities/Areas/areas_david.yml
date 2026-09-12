@@ -558,7 +558,7 @@
     avoidBioscan: False
     noTunnel: True
     unweedable: False
-    buildSpecial: false
+    buildSpecial: True
     paradropping: false
 
 - type: entity
@@ -582,5 +582,5 @@
     avoidBioscan: False
     noTunnel: True
     unweedable: False
-    buildSpecial: false
+    buildSpecial: True
     paradropping: false
