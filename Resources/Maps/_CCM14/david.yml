@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: tgmc14-local-ccm-fixmsg
   forkVersion: dev-2026-02-26-launcher-fix-2
-  time: 09/12/2026 23:29:09
-  entityCount: 13226
+  time: 09/13/2026 15:11:10
+  entityCount: 13231
 maps:
 - 1
 grids:
@@ -19172,7 +19172,6 @@ entities:
   - uid: 2282
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
       pos: 14.5,5.5
       parent: 1
   - uid: 2542
@@ -27860,6 +27859,36 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -19.5,-13.5
+      parent: 1
+  - uid: 13227
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 17.5,11.5
+      parent: 1
+  - uid: 13228
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 17.5,12.5
+      parent: 1
+  - uid: 13229
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 17.5,13.5
+      parent: 1
+  - uid: 13230
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 17.5,14.5
+      parent: 1
+  - uid: 13231
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 17.5,15.5
       parent: 1
 - proto: CMRetractor
   entities:
