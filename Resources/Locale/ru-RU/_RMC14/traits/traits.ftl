@@ -13,16 +13,16 @@ rmc-trait-scottish-accent-desc = Для тех, кто родом из горн�
 rmc-trait-spanish-language-name = Транслит Великой Империи Нотда
 rmc-trait-spanish-language-desc = Вы можете свободно говорить на этом языке.
 
-rmc-trait-french-language-name = Транслит Ноократии Эрантаe
+rmc-trait-french-language-name = Транслит Ноократии Эранта
 rmc-trait-french-language-desc = Вы можете свободно говорить на этом языке.
 
-rmc-trait-japanese-language-name = Транслит Империи Миртана
+rmc-trait-japanese-language-name = Миртанийский
 rmc-trait-japanese-language-desc = Вы можете свободно говорить на этом языке.
 
-rmc-trait-chinese-language-name = Советский разговорный
+rmc-trait-chinese-language-name = Советский транслит
 rmc-trait-chinese-language-desc = Вы можете свободно говорить на этом языке.
 
-rmc-trait-russian-language-name = Советский официальный
+rmc-trait-russian-language-name = Транслит СНК
 rmc-trait-russian-language-desc = Вы можете свободно говорить на этом языке.
 
 rmc-trait-german-language-name = Транслит Умпорской Федерации
@@ -31,5 +31,5 @@ rmc-trait-german-language-desc = Вы можете свободно говори
 rmc-trait-scandinavian-language-name = Фронтирский диалект
 rmc-trait-scandinavian-language-desc = Вы можете свободно говорить на этом языке.
 
-rmc-trait-group-languages = Languages
-rmc-trait-group-other-speech = Other speech traits
+rmc-trait-group-languages = Языки
+rmc-trait-group-other-speech = Другие разговорные черты
