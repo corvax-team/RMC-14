@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared.Access;
 
 /// <summary>
-///     Contains a list of access tags that are part of this group.
+///     Contains a list of access tags that are part of this groupp.
 ///     Used by <see cref="AccessComponent"/> to avoid boilerplate.
 /// </summary>
 [Prototype]
