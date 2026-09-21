@@ -5,7 +5,7 @@
   description: Ten hundred-dollar bills, minted by the United Nations Treasury. Each are adorned with the face of a long-forgotten diplomat of a once-powerful planet. These bills are more than mere currency, they feel alive, as though they carry the weight of ancient history and the judgments of those who once controlled vast empires. The faces on each bill seem to watch you with silent intensity, as if each one believes it alone should be in your possession..
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Misc/spacecash.rsi
+    sprite: _CCM14/Objects/Misc/spacecash.rsi # CCM14
     layers:
     - state: spacecash
       map: ["base"]
@@ -47,13 +47,13 @@
   name: 1 dollar bill
   unit: materials-unit-bill
   stackEntity: RMCSpaceCash1
-  icon: { sprite: /Textures/_RMC14/Objects/Misc/spacecash.rsi, state: spacecash }
+  icon: { sprite: /Textures/_CCM14/Objects/Misc/spacecash.rsi, state: spacecash } # CCM14
   price: 1
 
 - type: stack
   id: Dollar
   name: 1 dollar bill
-  icon: { sprite: /Textures/_RMC14/Objects/Misc/spacecash.rsi, state: spacecash }
+  icon: { sprite: /Textures/_CCM14/Objects/Misc/spacecash.rsi, state: spacecash } # CCM14
   spawn: RMCSpaceCash1
 
 - type: Tag
