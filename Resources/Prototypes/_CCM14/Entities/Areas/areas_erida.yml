@@ -178,7 +178,6 @@
     state: mining_storage
   - type: Area
     minimapColor: '#5A4501E7'
-    linkedLz: dropship_lz1
 
 # Северные Шахты
 
@@ -190,7 +189,6 @@
   - type: Sprite
     state: north
   - type: Area
-    linkedLz: dropship_lz1
     weatherEnabled: false
 
 - type: entity
@@ -201,7 +199,6 @@
   - type: Sprite
     state: north
   - type: Area
-    linkedLz: dropship_lz1
     weatherEnabled: false
 
 # Центральные Шахты
@@ -214,7 +211,6 @@
   - type: Sprite
     state: central
   - type: Area
-    linkedLz: dropship_lz1
     weatherEnabled: false
 
 # Южные Шахты
