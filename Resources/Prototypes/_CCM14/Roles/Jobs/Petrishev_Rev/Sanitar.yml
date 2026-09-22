@@ -88,7 +88,18 @@
     shoes: CMBootsBlack
     suitstorage: RMCWeaponShotgunType23
     id: RMCIDSPP
-    belt: CCMBeltSPPBrownFill
+    belt: RMCBeltMedicBagSPP
     back: CCMSatchelREVSanitarFilled
     pocket1: RMCPouchMedkitFillSPP
     pocket2: RMCPouchShotgunLargeHeavyBuchshotFilled
+  storage:
+    belt:
+    - CMTraumaKit10
+    - CMBurnKit10
+    - CMEpinephrineAutoInjector
+    - CMDexalinPlusAutoInjector
+    - CMPillCanisterBicaridine
+    - CMPillCanisterKelotane
+    - CMPillCanisterDexalin
+    - CMPillCanisterDylovene
+    - CMPillCanisterInaprovaline
