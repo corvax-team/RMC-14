@@ -90,7 +90,6 @@
     head: CCMHelmetRaider # CCM14
     mask: CCMMaskBallisticRaiderRespirator # CCM14
     ears: RMCHeadsetMARSOC
-    eyes: CCMGlassesRaiderVisorNVG # CCM14
     jumpsuit: RMCJumpsuitMarsocWebbingBuckshot
     outerClothing: CCMArmorRaiderXM40 # CCM14
     gloves: CMHandsBlackMarine
