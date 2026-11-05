@@ -423,6 +423,12 @@
         crate: CCMCrateM404KSpecFullAmmo
       - cost: 3000
         crate: CCMCrateM404KSpecBlackRocket
+#CCM14 Silencer
+      - cost: 3000
+        crate: CCMCrateSilencerAmmo
+      - cost: 3000
+        crate: CCMCrateSilencerGrenades
+#CCM14 Silencer END
 
 
 

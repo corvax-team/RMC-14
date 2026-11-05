@@ -1,0 +1,60 @@
+- type: entity
+  parent: CMGrenadeBase
+  id: CCMGrenadeFalseHive
+  name: '"False Hive" pheromone grenade'
+  description: Releases a cloud of synthesized false-Queen pheromones over a 3x3 area. Xenomorphs caught in the cloud are confused and slowed for as long as it lingers. Detonates 2 seconds after arming.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Silencer/false_hive_grenade.rsi
+  - type: OnUseTimerTrigger
+    delay: 2
+  - type: SpawnOnTrigger
+    proto: CCMFalseHivePheromoneCloud
+  - type: SoundOnTrigger
+    sound: /Audio/Effects/smoke.ogg
+  - type: DeleteOnTrigger
+  - type: TimerTriggerVisuals
+    primingSound:
+      path: /Audio/Effects/Smoke-grenade.ogg
+  - type: Tag
+    tags:
+    - Grenade
+    - CCMGrenadeFalseHive
+  - type: CCMSilencerUseWhitelist
+
+- type: entity
+  id: CCMFalseHivePheromoneCloud
+  name: false hive pheromones
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 15
+  - type: CCMFalseHiveCloud
+    tileRadius: 1
+    speedMultiplier: 0.8
+    linger: 0.75
+    updateInterval: 0.25
+    visualProto: CCMFalseHivePheromoneTile
+
+- type: entity
+  id: CCMFalseHivePheromoneTile
+  name: false hive pheromones
+  description: A sickly-sweet haze of synthetic Queen pheromones.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke2
+    color: "#c47ae888"
+    drawdepth: Effects
+    noRot: true
+  - type: TimedDespawn
+    lifetime: 15
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: Tag
+  id: CCMGrenadeFalseHive

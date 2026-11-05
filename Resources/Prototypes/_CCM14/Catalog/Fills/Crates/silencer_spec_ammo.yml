@@ -1,0 +1,21 @@
+- type: entity
+  parent: RMCCrateAmmo
+  id: CCMCrateSilencerAmmo
+  name: Acoustic Carbine Ammo Crate (magazine x3, Impulse charges x5)
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMMagazineRifleSonic
+      amount: 3
+    - id: CCMSonicPulseCharge
+      amount: 5
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: CCMCrateSilencerGrenades
+  name: '"False Hive" Pheromone Grenade Crate (x6)'
+  components:
+  - type: StorageFill
+    contents:
+    - id: CCMGrenadeFalseHive
+      amount: 6

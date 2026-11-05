@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Client._CCM.Silencer;
 using Content.Client.Examine;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids;
@@ -20,6 +21,7 @@ public sealed class NightVisionOverlay : Overlay
     private readonly ContainerSystem _container;
     private readonly ExamineSystem _examine;
     private readonly TransformSystem _transform;
+    private readonly CCMEchoJammedVisualsSystem _echo; // CCM - Silencer
     private readonly EntityQuery<XenoComponent> _xenoQuery;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
@@ -34,6 +36,7 @@ public sealed class NightVisionOverlay : Overlay
         _container = _entity.System<ContainerSystem>();
         _examine = _entity.System<ExamineSystem>();
         _transform = _entity.System<TransformSystem>();
+        _echo = _entity.System<CCMEchoJammedVisualsSystem>(); // CCM - Silencer
         _xenoQuery = _entity.GetEntityQuery<XenoComponent>();
 
         _shader = _prototype.Index<ShaderPrototype>("RMCNightVision").Instance().Duplicate();
@@ -55,6 +58,10 @@ public sealed class NightVisionOverlay : Overlay
         var entities = _entity.EntityQueryEnumerator<RMCNightVisionVisibleComponent, SpriteComponent, TransformComponent>();
         while (entities.MoveNext(out var uid, out var visible, out var sprite, out var xform))
         {
+            // CCM - Silencer: "Echo" jammer hides marines behind walls from xeno night vision
+            if (_echo.IsHiddenFromNightVision(uid, xform))
+                continue;
+
             _entries.Add(new NightVisionRenderEntry((uid, sprite, xform),
                 eye?.Position.MapId,
                 nightVision.SeeThroughContainers,

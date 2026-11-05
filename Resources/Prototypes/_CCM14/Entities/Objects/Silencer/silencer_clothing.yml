@@ -1,0 +1,39 @@
+- type: entity
+  parent: CMArmorM3Medium
+  id: CCMArmorSilencer
+  name: M3-S "Silencer" armor
+  description: A modified M3 pattern chestplate issued to Silencer specialists, with the bulk of its plating reworked to make room for electronic warfare gear.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Silencer/silencer_armor.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Silencer/silencer_armor.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _CCM14/Objects/Silencer/silencer_armor.rsi
+      Desert: _CCM14/Objects/Silencer/silencer_armor.rsi
+      Snow: _CCM14/Objects/Silencer/silencer_armor.rsi
+      Classic: _CCM14/Objects/Silencer/silencer_armor.rsi
+      Urban: _CCM14/Objects/Silencer/silencer_armor.rsi
+
+- type: entity
+  parent: [ RMCMarineHelmetBase, RMCMarineHelmetWithLightBase ]
+  id: CCMArmorHelmetSilencer
+  name: M10-S "Silencer" helmet
+  description: An M10 pattern helmet fitted with sensor optics and a built-in lamp for Silencer specialists.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Silencer/silencer_helmet.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Silencer/silencer_helmet.rsi
+
+- type: entity
+  parent: CMHandsBlackMarine
+  id: CCMHandsSilencer
+  name: Silencer combat gloves
+  description: Reinforced tactical gloves issued to Silencer specialists.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Silencer/silencer_gloves.rsi
+  - type: Clothing
+    sprite: _CCM14/Objects/Silencer/silencer_gloves.rsi

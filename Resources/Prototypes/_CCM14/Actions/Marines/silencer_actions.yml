@@ -1,0 +1,14 @@
+- type: entity
+  parent: ActionMarineToggleable
+  id: CCMActionToggleEchoJammer
+  name: Toggle "Echo" jammer
+  description: Turn the white-noise jammer on or off. While active, xenomorph night vision cannot see you or nearby marines through walls. Drains the pack's power cell.
+  components:
+  - type: Action
+    icon:
+      sprite: _CCM14/Objects/Silencer/echo_jammer.rsi
+      state: icon
+    useDelay: 1
+    itemIconStyle: NoItem
+  - type: InstantAction
+    event: !type:CCMEchoJammerToggleActionEvent

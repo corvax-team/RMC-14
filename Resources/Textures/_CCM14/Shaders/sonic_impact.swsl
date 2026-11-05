@@ -1,0 +1,91 @@
+// Sonic carbine impact: flash, jagged expanding rings with chromatic split, short radial bars.
+
+uniform sampler2D SCREEN_TEXTURE;
+uniform highp vec2 center;
+uniform highp vec2 unit;
+uniform highp float progress; // 0..1
+uniform highp float seed;
+
+const highp float PI = 3.14159265;
+
+highp float hash(highp float n) {
+    return fract(sin(n * 12.9898 + seed * 78.233) * 43758.5453);
+}
+
+void fragment() {
+    highp vec2 screenSize = vec2(1.0) / SCREEN_PIXEL_SIZE;
+    highp vec2 centerPx = center * screenSize;
+    highp float tilePx = length(unit * screenSize - centerPx);
+    if (tilePx < 0.001) {
+        discard;
+    }
+
+    highp vec2 rel = (FRAGCOORD.xy - centerPx) / tilePx;
+    highp float r = length(rel);
+    if (r > 1.45) {
+        discard;
+    }
+
+    highp float ang = atan(rel.y, rel.x);
+    highp vec2 radial = r > 0.0001 ? rel / r : vec2(0.0);
+
+    highp float rings = 0.0;
+    for (int k = 0; k < 3; k++) {
+        highp float fk = float(k);
+        highp float t = clamp((progress - fk * 0.13) / 0.62, 0.0, 1.0);
+        if (t <= 0.0 || t >= 1.0) {
+            continue;
+        }
+
+        highp float eased = 1.0 - pow(1.0 - t, 3.0);
+        highp float radius = mix(0.05, 1.25 - fk * 0.22, eased);
+
+        highp float jag = sin(ang * (9.0 + fk * 4.0) + seed + TIME * 30.0) * 0.035
+                        + sin(ang * 23.0 - seed * 2.0 + fk) * 0.015;
+        highp float width = mix(0.05, 0.1, eased);
+        highp float d = (r - radius - jag * eased) / width;
+
+        rings += exp(-d * d) * (1.0 - t) * (1.0 - fk * 0.25);
+    }
+    rings = clamp(rings, 0.0, 1.0);
+
+    highp float bars = 0.0;
+    highp float barT = clamp(progress / 0.45, 0.0, 1.0);
+    if (barT < 1.0) {
+        highp float count = 18.0;
+        highp float sector = floor((ang + PI) / (2.0 * PI) * count);
+        highp float local = fract((ang + PI) / (2.0 * PI) * count) - 0.5;
+        highp float len = mix(0.25, 0.85, hash(sector)) * (1.0 - pow(1.0 - barT, 2.0));
+        highp float inner = 0.12 + barT * 0.25;
+        highp float thin = 1.0 - smoothstep(0.06, 0.14, abs(local));
+        bars = thin * step(inner, r) * (1.0 - smoothstep(len * 0.7, len, r)) * (1.0 - barT) * 0.7;
+    }
+
+    highp float flashT = clamp(progress / 0.25, 0.0, 1.0);
+    highp float flash = exp(-r * r / mix(0.03, 0.005, flashT)) * (1.0 - flashT);
+
+    highp float strength = rings + bars * 0.6 + flash;
+    if (strength < 0.01) {
+        discard;
+    }
+
+    highp vec2 shiftPx = radial * rings * tilePx * 0.07;
+    highp vec2 uv = FRAGCOORD.xy * SCREEN_PIXEL_SIZE;
+    highp vec2 shiftUv = shiftPx * SCREEN_PIXEL_SIZE;
+
+    highp float red = zTextureSpec(SCREEN_TEXTURE, uv - shiftUv * 1.4).r;
+    highp float green = zTextureSpec(SCREEN_TEXTURE, uv - shiftUv).g;
+    highp float blue = zTextureSpec(SCREEN_TEXTURE, uv - shiftUv * 0.4).b;
+    highp vec3 col = vec3(red, green, blue);
+
+    highp vec3 cyan = vec3(0.45, 0.88, 1.0);
+    highp vec3 violet = vec3(0.68, 0.42, 1.0);
+    highp vec3 white = vec3(0.95, 0.98, 1.0);
+
+    highp vec3 ringColor = mix(violet, cyan, smoothstep(0.2, 1.0, r));
+    col += ringColor * rings * 0.55;
+    col += cyan * bars * 0.5;
+    col = mix(col, white, clamp(flash, 0.0, 1.0) * 0.9);
+
+    COLOR = vec4(col, 1.0);
+}
