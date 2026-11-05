@@ -1,0 +1,39 @@
+- type: entity
+  parent: RMCBaseEquipmentCase
+  id: CCMSilencerSpecEquipmentCase
+  name: silencer equipment case
+  description: "A large case containing an acoustic carbine with an \"Impulse\" underbarrel emitter, the \"Echo\" jammer pack, \"False Hive\" pheromone grenades, armor, helmet and gloves, ammunition and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: Sprite
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: grenadier
+      map: [ label ]
+      color: "#c08cff"
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,21,3
+  - type: StorageFill
+    contents:
+    - id: CCMArmorSilencer
+    - id: CCMArmorHelmetSilencer
+    - id: CCMHandsSilencer
+    - id: CCMWeaponSonicCarbineFilled
+    - id: CCMAttachmentSonicPulse
+    - id: CCMMagazineRifleSonic
+      amount: 6
+    - id: CCMSonicPulseCharge
+      amount: 3
+    - id: CCMGrenadeFalseHive
+      amount: 3
+    - id: CCMBackpackEchoJammer
+    - id: RMCPowerCell
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+    - id: RMCBinoculars
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: CCMSilencerWhitelist

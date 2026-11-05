@@ -1,0 +1,63 @@
+// Echo jammer: thin violet wavy rays of random length around the pack, seen by xeno night vision.
+
+light_mode unshaded;
+
+uniform highp float max_length;
+uniform highp float seed;
+
+const highp float RAYS = 11.0;
+const highp float PI = 3.14159265;
+const highp float TAU = 6.28318531;
+const highp float THICKNESS = 0.07;
+
+highp float hash(highp float n) {
+    return fract(sin(n * 12.9898 + seed * 78.233) * 43758.5453);
+}
+
+void fragment() {
+    highp vec2 d = (UV - vec2(0.5)) * 2.0 * max_length;
+    highp float r = length(d);
+
+    if (r > max_length || r < 0.05) {
+        discard;
+    }
+
+    highp float a = atan(d.y, d.x) + PI; // 0..TAU
+    highp float sectorWidth = TAU / RAYS;
+    highp float sector = floor(a / sectorWidth);
+
+    highp float intensity = 0.0;
+
+    for (int k = -1; k <= 1; k++) {
+        highp float i = mod(sector + float(k) + RAYS, RAYS);
+
+        highp float speed = 0.3 + hash(i * 3.1) * 0.35;
+        highp float cycle = TIME * speed + hash(i * 7.7);
+        highp float epoch = floor(cycle);
+        highp float t = fract(cycle);
+
+        highp float len = mix(1.0, max_length, hash(i * 13.3 + epoch * 1.37));
+        highp float reach = len * smoothstep(0.0, 0.55, t);
+        highp float life = 1.0 - smoothstep(0.75, 1.0, t);
+
+        highp float dir = (i + 0.5 + (hash(i * 5.3 + epoch * 2.1) - 0.5) * 0.6) * sectorWidth;
+        highp float diff = mod(a - dir + PI, TAU) - PI;
+
+        highp float wave = sin(r * 3.2 - TIME * 5.0 + i * 1.7) * 0.18 * smoothstep(0.0, 1.0, r);
+        highp float perp = diff * r - wave;
+
+        highp float line = 1.0 - smoothstep(THICKNESS * 0.35, THICKNESS, abs(perp));
+        highp float tip = 1.0 - smoothstep(reach * 0.7, reach, r);
+        highp float pulse = 0.65 + 0.35 * sin(r * 4.0 - TIME * 8.0 + i);
+
+        intensity = max(intensity, line * tip * life * pulse);
+    }
+
+    if (intensity <= 0.01) {
+        discard;
+    }
+
+    highp vec3 dark = vec3(0.18, 0.03, 0.28);
+    highp vec3 bright = vec3(0.45, 0.12, 0.65);
+    COLOR = vec4(mix(dark, bright, intensity), intensity * 0.9);
+}

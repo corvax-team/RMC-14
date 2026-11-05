@@ -1,0 +1,24 @@
+- type: shader
+  id: CCMEchoWaves
+  kind: source
+  path: "/Textures/_CCM14/Shaders/echo_waves.swsl"
+
+- type: shader
+  id: CCMSonicPulseWave
+  kind: source
+  path: "/Textures/_CCM14/Shaders/sonic_pulse_wave.swsl"
+
+- type: shader
+  id: CCMSonicBullet
+  kind: source
+  path: "/Textures/_CCM14/Shaders/sonic_bullet.swsl"
+
+- type: shader
+  id: CCMSonicImpact
+  kind: source
+  path: "/Textures/_CCM14/Shaders/sonic_impact.swsl"
+
+- type: shader
+  id: CCMSonicMuzzle
+  kind: source
+  path: "/Textures/_CCM14/Shaders/sonic_muzzle.swsl"

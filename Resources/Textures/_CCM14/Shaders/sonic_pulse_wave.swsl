@@ -1,0 +1,58 @@
+// Impulse underbarrel: expanding cone-shaped sound wave that distorts the screen.
+// Animated by "progress" from the shot time, not by global TIME.
+
+uniform sampler2D SCREEN_TEXTURE;
+uniform highp vec2 center;
+uniform highp vec2 forward;
+uniform highp float range;
+uniform highp float half_cone;
+uniform highp float progress;
+
+void fragment() {
+    highp vec2 screenSize = vec2(1.0) / SCREEN_PIXEL_SIZE;
+    highp vec2 centerPx = center * screenSize;
+    highp vec2 forwardPx = forward * screenSize - centerPx;
+
+    highp float tilePx = length(forwardPx);
+    if (tilePx < 0.001) {
+        discard;
+    }
+
+    highp vec2 dir = forwardPx / tilePx;
+    highp vec2 side = vec2(-dir.y, dir.x);
+
+    highp vec2 p = (FRAGCOORD.xy - centerPx) / tilePx;
+    highp vec2 local = vec2(dot(p, dir), dot(p, side));
+    highp float r = length(local);
+
+    if (r > range + 0.6 || r < 0.05) {
+        discard;
+    }
+
+    highp float ang = abs(atan(local.y, local.x));
+    highp float cone = 1.0 - smoothstep(half_cone - 0.05, half_cone + 0.15, ang);
+
+    highp float t = 1.0 - (1.0 - progress) * (1.0 - progress);
+    highp float front = mix(0.3, range, t);
+    highp float front2 = front - 0.7;
+
+    highp float w = 0.22;
+    highp float d1 = (r - front) / w;
+    highp float d2 = (r - front2) / (w * 1.3);
+    highp float ring = exp(-d1 * d1) + 0.45 * exp(-d2 * d2) * step(0.0, front2);
+
+    highp float fade = pow(1.0 - progress, 1.3) * smoothstep(0.1, 0.6, r);
+    highp float strength = ring * cone * fade;
+
+    if (strength < 0.01) {
+        discard;
+    }
+
+    highp vec2 radial = normalize(FRAGCOORD.xy - centerPx);
+    highp vec2 offsetPx = radial * strength * tilePx * 0.12;
+    highp vec2 uv = (FRAGCOORD.xy - offsetPx) * SCREEN_PIXEL_SIZE;
+
+    highp vec4 col = zTextureSpec(SCREEN_TEXTURE, uv);
+    col.rgb += vec3(0.55, 0.9, 1.0) * strength * 0.35;
+    COLOR = vec4(col.rgb, 1.0);
+}
