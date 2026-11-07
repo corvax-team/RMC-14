@@ -119,18 +119,6 @@
         points: 40
       - id: RMCRocket84mmWhitePhosphorus
         points: 40
-    - name: Боеприпасы тяжёлого дробовика # CCM14
-      entries:
-      - id: CCMShellM404KShock
-        points: 40
-      - id: CCMShellM404KFrag
-        points: 40
-      - id: CCMShellM404KDragonFlame
-        points: 40
-      - id: CCMShellM404KDragonEye
-        points: 40
-      - id: CCMShellM404KDragonClaw
-        points: 40
     - name: Боеприпасы Глушителя # CCM14
       entries:
       - id: CCMMagazineRifleSonic
