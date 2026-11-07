@@ -34,6 +34,7 @@
     - id: CMMagazinePistolMK80
       amount: 2
     - id: RMCBinoculars
+    - id: CMGlassesM42ScoutSight
   - type: CMChangeUserOnVend
     addComponents:
     - type: CCMSilencerWhitelist
