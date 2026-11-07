@@ -82,17 +82,6 @@
           state: spec_anti_materiel_sniper
         linkedEntries:
         - CMSniperEquipmentCase
-#      - id: CCMShotgunSpecEquipmentCase
-#        giveSquadRoleName: Тяжёлый дробовик
-#        isAppendSquadRoleName: false
-#        givePrefix: ТЯДР
-#        isAppendPrefix: true
-#        giveIcon:
-#          sprite: _CCM14/Interface/cm_job_icons.rsi
-#          state: spec_heavy_shotgun
-#        giveMapBlip:
-#          sprite: /Textures/_RMC14/Interface/map_blips.rsi
-#          state: clf_spec
     - name: Боеприпасы скаута # CCM14
       entries:
       - id: RMCMagazineRifleM4SPRA19Impact
