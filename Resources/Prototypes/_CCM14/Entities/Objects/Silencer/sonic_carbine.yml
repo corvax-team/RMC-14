@@ -162,7 +162,7 @@
       types:
         Piercing: 40
   - type: CMArmorPiercing
-    amount: 30
+    amount: 12
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 22
