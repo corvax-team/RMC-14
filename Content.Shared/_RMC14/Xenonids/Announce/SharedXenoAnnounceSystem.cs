@@ -1,3 +1,4 @@
+using Content.Shared._CCM.Silencer;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.Xenonids.Evolution;
@@ -73,7 +74,8 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
         Color? color = null,
         bool needsQueen = false)
     {
-        var filter = Filter.Empty().AddWhereAttachedEntity(e => Hive.IsMember(e, hive));
+        // CCM - Silencer: xenos with a disrupted hive link do not receive hive announcements
+        var filter = Filter.Empty().AddWhereAttachedEntity(e => Hive.IsMember(e, hive) && !HasComp<CCMHiveDisruptedComponent>(e));
         Announce(source, filter, message, WrapHive(message, color), sound, popup, needsQueen);
     }
 

@@ -99,3 +99,25 @@
       Биосканирование Выдаёт ошибку.
     
       Авторизовано: капитан Леон Гранц"
+- type: entity
+  id: CCMPlanetNemezida
+  name: Nemezida
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_CCM14/Planets/nemezida.yml
+    camouflage: Classic
+    survivorJobs:
+    - CMSurvivor: 1
+    - CMSurvivorCorporate: 1
+    - CMSurvivorDoctor: 1
+    - CMSurvivorEngineer: 1
+    - CMSurvivorSecurity: 1
+    - CMSurvivorScientist: 1
+    announcement: "Пехота! Была потеряна связь с научной колонией.
+      Для общего понимания,
+      Обозначение колонии - научно-исследовательский форпост.
+      Температура на поверхности составляет 36 °C.
+      Заведующий колонии - представитель ХРК Джон Рассел.
+      Биосканирование Выдаёт ошибку.
+    
+      Авторизовано: капитан Леон Гранц"

@@ -350,6 +350,9 @@
       key_slots:
       - CMEncryptionKeySOF
   - type: GrantMarineIcons
+    factions: # CCM14
+    - UNMC # CCM14
+    - SpecOps # CCM14
   - type: GrantTacMapAlert
   - type: GrantSquadLeaderTracker
     defaultMode: MARSOCLeader

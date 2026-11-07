@@ -806,6 +806,13 @@
       state: rock_north
     - map: [ "enum.EdgeLayer.West" ]
       state: rock_west
+  # CCM14 rock fixes start
+  - type: XenoConstructionSupport
+  - type: XenoWeedable
+    spawn: XenoWeedsWall
+  - type: MinimapColor
+    color: "#aaa8ac"
+  # CCM14 rock fixes end
 
 # Ore veins
 - type: entity

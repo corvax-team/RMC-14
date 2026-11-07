@@ -1,0 +1,527 @@
+- type: entity
+  parent: RMCAreaBase
+  id: CCMAreaNemezida
+  suffix: Nemezida
+  components:
+  - type: Sprite
+    state: unknown
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#6C6767D8'
+
+# 0: Ничего не блокирует
+# 1: Блокирует размещение мортиры, лцу, медэвак, парадроп, дождь
+# 2: Блокирует сигнальные фаеры, поставки, фултоны, огонь мортиры
+# 3: Блокирует кас
+# 4: Блокирует об
+
+- type: entity
+  parent: CCMAreaNemezida
+  abstract: true
+  id: CCMAreaNemezidaProtectionZero
+  name: Nemezida - Protection Zero
+  components:
+  - type: Sprite
+    state: cliff_blocked
+  - type: Area
+    CAS: true
+    fulton: true
+    lasing: true
+    mortarPlacement: true
+    mortarFire: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    paradropping: true
+    weatherEnabled: true
+
+- type: entity
+  parent: CCMAreaNemezida
+  abstract: true
+  id: CCMAreaNemezidaProtectionOne
+  name: Nemezida - Protection One
+  components:
+  - type: Sprite
+    state: cliff_blocked
+  - type: Area
+    CAS: true
+    fulton: true
+    lasing: false
+    mortarPlacement: false
+    mortarFire: true
+    medevac: false
+    OB: true
+    supplyDrop: true
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent: CCMAreaNemezida
+  abstract: true
+  id: CCMAreaNemezidaProtectionTwo
+  name: Nemezida - Protection Two
+  components:
+  - type: Sprite
+    state: cliff_blocked
+  - type: Area
+    CAS: true
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent: CCMAreaNemezida
+  abstract: true
+  id: CCMAreaNemezidaProtectionThree
+  name: Nemezida - Protection Three
+  components:
+  - type: Sprite
+    state: cliff_blocked
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+- type: entity
+  parent: CCMAreaNemezida
+  abstract: true
+  id: CCMAreaNemezidaProtectionFour
+  name: Nemezida - Protection Four
+  components:
+  - type: Sprite
+    state: cliff_blocked
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    paradropping: false
+    weatherEnabled: false
+
+# Вне Границ
+
+- type: entity
+  parent: CCMAreaNemezida
+  id: CCMAreaNemezidaOoB
+  name: Nemezida - Out Of Bounds
+  components:
+  - type: Sprite
+    state: unknown
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: true
+    weatherEnabled: false
+    excludeFromTacMapBounds: false
+    excludeFromTacMapRender: false
+    alwaysPowered: true
+
+# Лава
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionZero
+  id: CCMAreaNemezidaLava
+  name: Nemezida - Lava
+  suffix: Sky
+  components:
+  - type: Sprite
+    state: red2
+  - type: Area
+    minimapColor: '#FF0000'
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionThree
+  id: CCMAreaNemezidaLavaCave
+  name: Nemezida - Lava
+  suffix: Cave
+  components:
+  - type: Sprite
+    state: red2
+  - type: Area
+    minimapColor: '#FF0000'
+
+# ЗП1 Администрация
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionFour
+  id: CCMAreaNemezidaLandingZoneOne
+  name: Nemezida - Dropship Alamo Landing Zone
+  components:
+  - type: Sprite
+    state: landing_pad
+  - type: Area
+    linkedLz: dropship_lz1
+    minimapColor: '#EBE5E5E3'
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionZero
+  id: CCMAreaNemezidaLandingZoneAdministration
+  name: Nemezida - Landing Zone Administration
+  components:
+  - type: Sprite
+    state: landing_pad_ext
+  - type: Area
+    linkedLz: dropship_lz1
+
+# ЗП2 Инженерка
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionFour
+  id: CCMAreaNemezidaLandingZoneTwo
+  name: Nemezida - Dropship Normandy Landing Zone
+  components:
+  - type: Sprite
+    state: landing_pad
+  - type: Area
+    linkedLz: dropship_lz2
+    minimapColor: '#EBE5E5E3'
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionZero
+  id: CCMAreaNemezidaLandingZoneEngineering
+  name: Nemezida - Landing Zone Engineering
+  components:
+  - type: Sprite
+    state: landing_pad_ext
+  - type: Area
+    linkedLz: dropship_lz2
+
+# Вышки Телекоммуникации
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionZero
+  id: CCMAreaNemezidaTelecomms1
+  name: Nemezida - Telecommunication
+  components:
+  - type: Sprite
+    state: server
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionZero
+  id: CCMAreaNemezidaTelecomms2
+  name: Nemezida - Telecommunication
+  components:
+  - type: Sprite
+    state: server
+  - type: Area
+    linkedLz: dropship_lz2
+
+# Администрация
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionOne
+  id: CCMAreaNemezidaAdministration
+  name: Nemezida - Administration
+  components:
+  - type: Sprite
+    state: bluenew
+  - type: Area
+    linkedLz: dropship_lz1
+
+# Инженерный Отсек
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionOne
+  id: CCMAreaNemezidaEngineering
+  name: Nemezida - Engineering
+  components:
+  - type: Sprite
+    state: substation
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionOne
+  id: CCMAreaNemezidaTurbines
+  name: Nemezida - Turbines
+  components:
+  - type: Sprite
+    state: ass_line
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionOne
+  id: CCMAreaNemezidaEngineeringStorage
+  name: Nemezida - Engineering Storage
+  components:
+  - type: Sprite
+    state: storage
+  - type: Area
+    linkedLz: dropship_lz2
+
+# Жилой Отсек
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionOne
+  id: CCMAreaNemezidaLivingCompartment
+  name: Nemezida - Living Compartment
+  components:
+  - type: Sprite
+    state: maint_dormitory
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionOne
+  id: CCMAreaNemezidaBar
+  name: Nemezida - Bar
+  components:
+  - type: Sprite
+    state: bar
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionOne
+  id: CCMAreaNemezidaHall
+  name: Nemezida - Hall
+  components:
+  - type: Sprite
+    state: halls
+
+# Гидропоника
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionOne
+  id: CCMAreaNemezidaHydroponics
+  name: Nemezida - Hydroponics
+  components:
+  - type: Sprite
+    state: hydro
+
+# Медбей
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionOne
+  id: CCMAreaNemezidaMedbay
+  name: Nemezida - Medbay
+  components:
+  - type: Sprite
+    state: medbay
+
+# Исследовательская
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionOne
+  id: CCMAreaNemezidaResearch
+  name: Nemezida - Research
+  components:
+  - type: Sprite
+    state: research
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionOne
+  id: CCMAreaNemezidaXenoLab
+  name: Nemezida - Xeno Lab
+  components:
+  - type: Sprite
+    state: xeno_lab
+
+# Служба безопасности
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionOne
+  id: CCMAreaNemezidaSecurity
+  name: Nemezida - Security
+  components:
+  - type: Sprite
+    state: security
+
+# Хранилища
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionOne
+  id: CCMAreaNemezidaOutdoorStorage
+  name: Nemezida - Outdoor Storage
+  components:
+  - type: Sprite
+    state: storage
+
+# Центральные Земли
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionZero
+  id: CCMAreaNemezidaMiddleGrounds
+  name: Nemezida - Middle Grounds
+  components:
+  - type: Sprite
+    state: valley
+
+# Северо-Западные Земли
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionZero
+  id: CCMAreaNemezidaNorthWestGrounds
+  name: Nemezida - North West Grounds
+  components:
+  - type: Sprite
+    state: valley_north_west
+
+# Северные Земли
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionZero
+  id: CCMAreaNemezidaNorthGrounds
+  name: Nemezida - North Grounds
+  components:
+  - type: Sprite
+    state: valley_north
+
+# Северо-Восточные Земли
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionZero
+  id: CCMAreaNemezidaNorthEastGrounds
+  name: Nemezida - North East Grounds
+  components:
+  - type: Sprite
+    state: valley_north_east
+
+# Восточные Земли
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionZero
+  id: CCMAreaNemezidaEastGrounds
+  name: Nemezida - East Grounds
+  components:
+  - type: Sprite
+    state: valley_east
+
+# Юго-Восточные Земли
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionZero
+  id: CCMAreaNemezidaSouthEastGrounds
+  name: Nemezida - South East Grounds
+  components:
+  - type: Sprite
+    state: valley_south_excv
+  - type: Area
+    linkedLz: dropship_lz2
+
+# Южные Земли
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionZero
+  id: CCMAreaNemezidaSouthGrounds
+  name: Nemezida - South Grounds
+  components:
+  - type: Sprite
+    state: valley_south
+
+# Юго-Западные Земли
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionZero
+  id: CCMAreaNemezidaSouthWestGrounds
+  name: Nemezida - South West Grounds
+  components:
+  - type: Sprite
+    state: valley_south_west
+  - type: Area
+    linkedLz: dropship_lz1
+
+# Западные Земли
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionZero
+  id: CCMAreaNemezidaWestGrounds
+  name: Nemezida - West Grounds
+  components:
+  - type: Sprite
+    state: valley_west
+
+# Северо-Западные Пещеры
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionThree
+  id: CCMAreaNemezidaNorthWestCaves
+  name: Nemezida - North West Caves
+  components:
+  - type: Sprite
+    state: northwest
+
+# Северо-Центральные Пещеры
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionThree
+  id: CCMAreaNemezidaNorthCentralCaves
+  name: Nemezida - North Central Caves
+  components:
+  - type: Sprite
+    state: north
+
+# Северо-Восточные Пещеры
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionThree
+  id: CCMAreaNemezidaNorthEastCaves
+  name: Nemezida - North East Caves
+  components:
+  - type: Sprite
+    state: northeast
+
+# Восточные Пещеры
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionThree
+  id: CCMAreaNemezidaEastCaves
+  name: Nemezida - East Caves
+  components:
+  - type: Sprite
+    state: east
+
+# Юго-Западные Пещеры
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionThree
+  id: CCMAreaNemezidaSouthWestCaves
+  name: Nemezida - South West Caves
+  components:
+  - type: Sprite
+    state: southwest
+
+# Юго-Центральные Пещеры
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionThree
+  id: CCMAreaNemezidaSouthCaves
+  name: Nemezida - South Caves
+  components:
+  - type: Sprite
+    state: south
+
+# Юго-Восточные Пещеры
+
+- type: entity
+  parent: CCMAreaNemezidaProtectionThree
+  id: CCMAreaNemezidaSouthEastCaves
+  name: Nemezida - South East Caves
+  components:
+  - type: Sprite
+    state: southeast

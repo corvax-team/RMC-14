@@ -1,0 +1,59 @@
+- type: entity
+  parent: [ BaseStorageItem, RMCPowerCellSlot ]
+  id: CCMBackpackEchoJammer
+  name: '"Echo" jammer pack'
+  description: Constantly emits faint background white noise. While active, xenomorph night vision cannot pick out the wearer, nearby marines or even other xenomorphs through walls - only a haze of violet interference around the pack. Runs on a replaceable power cell.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Silencer/echo_jammer.rsi
+    state: icon
+  - type: Clothing
+    sprite: _CCM14/Objects/Silencer/echo_jammer.rsi
+    quickEquip: false
+    slots:
+    - Back
+  - type: Item
+    size: Huge
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,5,1
+    blacklist:
+      components:
+      - Bible
+      tags:
+      - CMFirstAidKit
+      - RMCEngineerKit
+      - RMCBoxStorage
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: []
+      cell_slot: !type:ContainerSlot { }
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: RMCPowerCell
+        whitelist:
+          tags:
+          - PowerCell
+  - type: CCMEchoJammer
+    halfExtent: 2.5
+    waveMaxLength: 5
+    drainRate: 2.0833333
+    jamLinger: 0.75
+    updateInterval: 0.25
+  - type: AmbientSound
+    enabled: false
+    volume: -6
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/emf_buzz.ogg
+  - type: CCMSilencerUseWhitelist
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: StaticPrice
+    price: 300

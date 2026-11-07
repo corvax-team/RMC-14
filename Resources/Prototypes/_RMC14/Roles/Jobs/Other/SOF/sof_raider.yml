@@ -15,6 +15,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember # CCM14
+      factions: # CCM14
+      - SpecOps # CCM14
     - type: Language
       spokenLanguages:
       - English
@@ -80,7 +83,6 @@
     head: CCMHelmetRaider # CCM14
     mask: CCMMaskBallisticRaiderRespirator # CCM14
     ears: RMCHeadsetMARSOC
-    eyes: CCMGlassesRaiderVisorNVG # CCM14
     jumpsuit: RMCJumpsuitMarsocWebbingBuckshot
     outerClothing: CCMArmorRaiderXM40 # CCM14
     gloves: CMHandsBlackMarine

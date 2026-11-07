@@ -209,10 +209,11 @@
     - id: RMCMagazinePistolT73
       amount: 2
     - id: RMCMagazineSMGType19
-      amount: 4
+      amount: 3
     - id: RMCMagazineSMGType19Drum
     - id: CMHealthAnalyzer
     - id: CMSurgicalLine
+    - id: CMSynthGraft
 
 - type: entity
   parent: CCMBeltUtilitySereneShotgun

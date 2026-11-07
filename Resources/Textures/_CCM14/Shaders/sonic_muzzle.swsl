@@ -1,0 +1,77 @@
+// Sonic carbine muzzle flash: short flash and ")))" arcs in a narrow cone instead of fire.
+
+uniform sampler2D SCREEN_TEXTURE;
+uniform highp vec2 center;
+uniform highp vec2 forward;
+uniform highp float progress; // 0..1
+uniform highp float seed;
+
+void fragment() {
+    highp vec2 screenSize = vec2(1.0) / SCREEN_PIXEL_SIZE;
+    highp vec2 centerPx = center * screenSize;
+    highp vec2 forwardPx = forward * screenSize - centerPx;
+
+    highp float tilePx = length(forwardPx);
+    if (tilePx < 0.001) {
+        discard;
+    }
+
+    highp vec2 dir = forwardPx / tilePx;
+    highp vec2 side = vec2(-dir.y, dir.x);
+
+    highp vec2 rel = (FRAGCOORD.xy - centerPx) / tilePx;
+    highp vec2 p = vec2(dot(rel, dir), dot(rel, side));
+    highp float r = length(p);
+    if (r > 1.1) {
+        discard;
+    }
+
+    highp float ang = abs(atan(p.y, p.x));
+
+    highp float arcs = 0.0;
+    for (int k = 0; k < 3; k++) {
+        highp float fk = float(k);
+        highp float t = clamp((progress - fk * 0.12) / 0.7, 0.0, 1.0);
+        if (t <= 0.0 || t >= 1.0) {
+            continue;
+        }
+
+        highp float eased = 1.0 - pow(1.0 - t, 2.0);
+        highp float radius = mix(0.04, 0.85 - fk * 0.12, eased);
+
+        highp float halfCone = 0.55 + fk * 0.12;
+        highp float cone = 1.0 - smoothstep(halfCone * 0.6, halfCone, ang);
+
+        highp float jitter = sin(ang * 40.0 + seed + TIME * 50.0) * 0.008;
+        highp float width = mix(0.02, 0.045, eased);
+        highp float d = (r - radius - jitter) / width;
+
+        arcs += exp(-d * d) * cone * (1.0 - t) * (1.0 - fk * 0.22);
+    }
+    arcs = clamp(arcs, 0.0, 1.0);
+
+    highp float ringT = clamp(progress / 0.5, 0.0, 1.0);
+    highp float ringR = mix(0.03, 0.35, 1.0 - pow(1.0 - ringT, 2.0));
+    highp float rd = (r - ringR) / 0.03;
+    highp float ring = exp(-rd * rd) * (1.0 - ringT) * 0.35;
+
+    highp float flashT = clamp(progress / 0.3, 0.0, 1.0);
+    highp float flash = exp(-(p.x * p.x / 0.012 + p.y * p.y / 0.003)) * (1.0 - flashT) * step(-0.08, p.x);
+
+    highp float strength = arcs + ring + flash;
+    if (strength < 0.01) {
+        discard;
+    }
+
+    highp vec2 radialPx = r > 0.0001 ? (FRAGCOORD.xy - centerPx) / (r * tilePx) : vec2(0.0);
+    highp vec2 offsetPx = radialPx * (arcs + ring) * tilePx * 0.05;
+    highp vec4 col = zTextureSpec(SCREEN_TEXTURE, (FRAGCOORD.xy - offsetPx) * SCREEN_PIXEL_SIZE);
+
+    highp vec3 cyan = vec3(0.45, 0.88, 1.0);
+    highp vec3 white = vec3(0.93, 0.98, 1.0);
+
+    col.rgb += cyan * (arcs * 0.7 + ring * 0.5);
+    col.rgb = mix(col.rgb, white, clamp(flash, 0.0, 1.0) * 0.9);
+
+    COLOR = vec4(col.rgb, 1.0);
+}

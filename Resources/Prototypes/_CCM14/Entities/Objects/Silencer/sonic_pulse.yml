@@ -1,0 +1,130 @@
+- type: entity
+  parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
+  id: CCMAttachmentSonicPulse
+  name: '"Impulse" underbarrel emitter'
+  description: A tactical underbarrel module that releases a directed blast of compressed air and ultrasound in a cone. Knocks down small xenomorphs and staggers larger ones. Holds five charges.
+  components:
+  - type: Sprite
+    sprite: _CCM14/Objects/Silencer/impulse.rsi
+    state: icon
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - CCMAttachmentSonicPulse
+  - type: Item
+    size: Normal
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ugl.ogg
+      params:
+        volume: 2
+        pitch: 1.3
+  - type: RMCSelectiveFire
+    baseFireRate: 0.5
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: RMCAmmoEject
+    containerID: ballistic-ammo
+    ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+  - type: BallisticAmmoProvider
+    cycleable: false
+    whitelist:
+      tags:
+      - CCMSonicPulseCharge
+    capacity: 5
+    proto: CCMSonicPulseCharge
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+  - type: UseDelay
+  - type: RMCWeaponAccuracy
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - CCMSilencerWhitelist
+  - type: CCMSonicPulse
+    range: 3.5
+    coneAngle: 70
+    damage:
+      types:
+        Blunt: 50
+    smallStunTime: 1.4
+    smallSlowTime: 2
+    smallSuperSlowTime: 1
+    knockBackPower: 1
+    knockBackSpeed: 5
+    mediumSlowTime: 3
+    mediumSuperSlowTime: 1.5
+    largeSlowTime: 2
+    largeSuperSlowTime: 0
+    waveDuration: 0.45
+  - type: AttachableToggleable
+    userOnly: true
+    attachedOnly: true
+    supercedeHolder: true
+    wieldedUseOnly: true
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
+    activateSound:
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
+      params:
+        volume: -2
+    actionName: Switch to the "Impulse" emitter
+    actionDesc: Switch to using the underbarrel sonic emitter.
+    icon:
+      sprite: _CCM14/Objects/Silencer/impulse.rsi
+      state: icon
+    iconActive:
+      sprite: _CCM14/Objects/Silencer/impulse.rsi
+      state: icon-on
+  - type: AttachableVisuals
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
+      state: all
+
+# BaseCartridge, not CMBaseCartridgeRifle: SpentAmmoVisuals would show an error sprite.
+- type: entity
+  parent: BaseCartridge
+  id: CCMSonicPulseCharge
+  name: '"Impulse" pressure charge'
+  description: A compressed-air and ultrasound charge for the "Impulse" underbarrel emitter.
+  components:
+  - type: Sprite
+    sprite: Objects/Power/power_cells.rsi
+    layers:
+    - state: microreactor
+    - state: o2
+      shader: unshaded
+  - type: Item
+    size: Tiny
+  - type: Tag
+    tags:
+    - Cartridge
+    - CCMSonicPulseCharge
+  - type: CartridgeAmmo
+    proto: CCMSonicPulseProjectile
+    deleteOnSpawn: true
+
+- type: entity
+  parent: RMCBaseBullet
+  id: CCMSonicPulseProjectile
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    visible: false
+    layers:
+    - state: bullet
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 0
+  - type: TimedDespawn
+    lifetime: 0.1
+
+- type: Tag
+  id: CCMAttachmentSonicPulse
+
+- type: Tag
+  id: CCMSonicPulseCharge

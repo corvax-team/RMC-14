@@ -131,16 +131,14 @@
     shoes: CMBootsBlack
     suitstorage: RMCScabbardMacheteFilled
     id: RMCIDSPP
-    belt: RMCBeltHolsterPistolSPP
+    belt: RMCBeltHolsterM13
     back: RMCSynthBreachingHammer
     pocket1: RMCPouchFirstAidSplintsGauzeOintment
     pocket2: RMCPouchConstructionFillLowGrade
   storage:
     belt:
     - RMCWeaponPistolM13
-    - RMCMagazinePistolM13
-    - RMCMagazinePistolM13
-    - RMCMagazinePistolM13
+    - RMCMagazinePistolM13DrumAP
     - RMCMagazinePistolM13Drum
     - RMCMagazinePistolM13Drum
     outerClothing:

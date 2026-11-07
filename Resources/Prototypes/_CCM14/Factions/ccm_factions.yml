@@ -18,3 +18,10 @@
   id: GIOR
   hostile:
   - RMCXeno
+
+- type: npcFaction
+  id: SpecOps
+  hostile:
+  - RMCXeno
+  - CLF
+  - Petrishev

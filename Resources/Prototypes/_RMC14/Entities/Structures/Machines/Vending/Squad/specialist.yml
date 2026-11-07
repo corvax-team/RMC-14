@@ -45,6 +45,11 @@
         giveMapBlip:
           sprite: /Textures/_RMC14/Interface/map_blips.rsi
           state: spec_pyro
+      - id: CCMSilencerSpecEquipmentCase
+        giveSquadRoleName: ccm-job-name-weapons-specialist-silencer
+        isAppendSquadRoleName: false
+        givePrefix: ccm-job-prefix-weapons-specialist-silencer
+        isAppendPrefix: true
       - id: RMCScoutSpecEquipmentCase
         giveSquadRoleName: rmc-job-name-weapons-specialist-scout
         isAppendSquadRoleName: false
@@ -125,6 +130,12 @@
       - id: CCMShellM404KDragonEye
         points: 40
       - id: CCMShellM404KDragonClaw
+        points: 40
+    - name: Боеприпасы Глушителя # CCM14
+      entries:
+      - id: CCMMagazineRifleSonic
+        points: 40
+      - id: CCMSonicPulseCharge
         points: 40
     - name: Дополнительные гранаты # CCM14
       entries:

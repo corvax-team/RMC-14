@@ -9,6 +9,9 @@
   "states": [
     {
       "name": "serene"
+    },
+    {
+      "name": "specops"
     }
   ]
 }

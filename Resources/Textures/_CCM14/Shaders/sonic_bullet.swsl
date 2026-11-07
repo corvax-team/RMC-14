@@ -1,0 +1,80 @@
+// Sonic carbine bullet: bright core with ")))" sound fronts and a wobbling trail.
+// center/forward are screen UVs (0..1, Y up) of the bullet and of a point 1 tile ahead.
+
+uniform sampler2D SCREEN_TEXTURE;
+uniform highp vec2 center;
+uniform highp vec2 forward;
+uniform highp float seed;
+
+const highp float SPACING = 0.17;
+const highp float TAIL = 0.75;
+const highp float CURVE = 2.4;
+
+void fragment() {
+    highp vec2 screenSize = vec2(1.0) / SCREEN_PIXEL_SIZE;
+    highp vec2 centerPx = center * screenSize;
+    highp vec2 forwardPx = forward * screenSize - centerPx;
+
+    highp float tilePx = length(forwardPx);
+    if (tilePx < 0.001) {
+        discard;
+    }
+
+    highp vec2 dir = forwardPx / tilePx;
+    highp vec2 side = vec2(-dir.y, dir.x);
+
+    highp vec2 rel = (FRAGCOORD.xy - centerPx) / tilePx;
+    highp vec2 p = vec2(dot(rel, dir), dot(rel, side));
+
+    if (p.x > 0.35 || p.x < -1.2 || abs(p.y) > 0.6) {
+        discard;
+    }
+
+    highp float phase = fract(TIME * 7.0 + seed);
+    highp float fronts = 0.0;
+    for (int k = 0; k < 5; k++) {
+        highp float offset = (float(k) + phase) * SPACING;
+        if (offset > TAIL) {
+            continue;
+        }
+
+        highp float age = offset / TAIL;
+        highp float halfWidth = 0.07 + age * 0.32;
+        highp float x0 = 0.08 - offset;
+        highp float curve = CURVE / (1.0 + age * 2.5);
+        highp float arcX = x0 - curve * p.y * p.y;
+
+        highp float ripple = sin(p.y * 60.0 + TIME * 40.0 + float(k) * 1.7) * 0.006;
+        highp float d = abs(p.x - arcX + ripple);
+
+        highp float thickness = mix(0.018, 0.03, age);
+        highp float line = 1.0 - smoothstep(thickness * 0.4, thickness, d);
+        highp float lateral = 1.0 - smoothstep(halfWidth * 0.55, halfWidth, abs(p.y));
+        highp float fade = smoothstep(0.0, 0.08, offset) * (1.0 - age) * (1.0 - age);
+
+        fronts = max(fronts, line * lateral * fade);
+    }
+
+    highp float core = exp(-(p.x * p.x / 0.006 + p.y * p.y / 0.0016));
+
+    highp float wobble = sin(p.x * 55.0 - TIME * 70.0 + seed) * 0.018 * smoothstep(0.0, -0.4, p.x);
+    highp float trailLine = exp(-pow(p.y - wobble, 2.0) / 0.00035);
+    highp float trail = trailLine * smoothstep(-1.1, -0.05, p.x) * step(p.x, 0.0) * 0.55;
+
+    highp float intensity = clamp(fronts + core + trail, 0.0, 1.0);
+    if (intensity < 0.01) {
+        discard;
+    }
+
+    highp vec2 offsetPx = dir * fronts * tilePx * 0.035;
+    highp vec4 col = zTextureSpec(SCREEN_TEXTURE, (FRAGCOORD.xy - offsetPx) * SCREEN_PIXEL_SIZE);
+
+    highp vec3 cyan = vec3(0.45, 0.88, 1.0);
+    highp vec3 white = vec3(0.92, 0.98, 1.0);
+    highp vec3 glow = mix(cyan, white, clamp(core * 1.4, 0.0, 1.0));
+
+    col.rgb = mix(col.rgb, glow, clamp(core * 0.95 + trail * 0.6, 0.0, 1.0));
+    col.rgb += cyan * fronts * 0.75;
+
+    COLOR = vec4(col.rgb, 1.0);
+}

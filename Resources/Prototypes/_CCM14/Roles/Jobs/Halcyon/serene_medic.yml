@@ -93,6 +93,7 @@
     pocket2: RMCPouchMagazineLarge
   storage:
     back:
+    - CMDefibrillator
     - CMRollerBedSpawnFolded
     - CMSurgicalCaseFilled
     - CMBloodPackFull

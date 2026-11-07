@@ -15,3 +15,18 @@
     sprite: _CCM14/Objects/Weapons/Guns/SMGs/m63_rp.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
+        priority: 2
+        startingItem: CMMagazineSMGM63AP
+        whitelist:
+          tags:
+          - CMMagazineSMGM63
+          - CMMagazineSMGM63AP
+          - CMMagazineSMGM63Ext
+          - RMCMagazineSMGM63Rubber
+          - RMCMagazineSMGM63HEAP

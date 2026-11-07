@@ -1,0 +1,119 @@
+- type: entity
+  id: CCMFloorLavaEntity
+  suffix: CCM
+  name: lava
+  description: Don't jump in. It's not worth it, no matter how funny it is.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: TileEmission
+    color: "#FF4500"
+  - type: Transform
+    anchored: true
+  - type: SyncSprite
+  - type: Clickable
+  - type: Sprite
+    sprite: Tiles/Planet/lava.rsi
+    drawdepth: BelowFloor
+    layers:
+      - state: lava
+        shader: unshaded
+  - type: Icon
+    sprite: Tiles/Planet/lava.rsi
+    state: full
+  - type: IconSmooth
+    key: floor
+    base: lava
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.35,0.35,0.35"
+        layer:
+          - SlipLayer
+        mask:
+          - ItemMask
+        density: 1000
+        hard: false
+  - type: Tag
+    tags:
+      - HideContextMenu
+  - type: RMCIgniteOnCollide
+    intensity: 40
+    duration: 45
+    maxStacks: 20
+    tileDamage:
+      types:
+        Heat: 0.5
+    burnColor: "#EE6515"
+  - type: DamageOnCollide
+    damageDead: false
+    fire: true
+    damage:
+      types:
+        Heat: 90
+    ignoreResistances: true
+  - type: TileFire
+    id: CCMFloorLavaEntity
+    extinguishInstantly: false
+    patExtinguishMultiplier: 0
+    sprayExtinguishMultiplier: 0
+    duration: 86400
+  - type: IgnorePredictionHit
+  - type: BlockWeeds
+  - type: SpeedModifierContacts
+    walkSpeedModifier: 0.333
+    sprintSpeedModifier: 0.333
+
+- type: entity
+  id: CCMFloorLavaNoDamageEntity
+  suffix: CCM No Damage
+  name: lava
+  description: Don't jump in. It's not worth it, no matter how funny it is.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: TileEmission
+    color: "#FF4500"
+  - type: Transform
+    anchored: true
+  - type: SyncSprite
+  - type: Clickable
+  - type: Sprite
+    sprite: Tiles/Planet/lava.rsi
+    drawdepth: BelowFloor
+    layers:
+      - state: lava
+        shader: unshaded
+  - type: Icon
+    sprite: Tiles/Planet/lava.rsi
+    state: full
+  - type: IconSmooth
+    key: floor
+    base: lava
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.35,0.35,0.35"
+        layer:
+          - SlipLayer
+        mask:
+          - ItemMask
+        density: 1000
+        hard: false
+  - type: Tag
+    tags:
+      - HideContextMenu
+  - type: IgnorePredictionHit
+  - type: BlockWeeds

@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._CCM.Silencer;
 using Content.Client._RMC14.Medical.HUD;
 using Content.Client._RMC14.NightVision;
 using Content.Shared._RMC14.Mobs;
@@ -50,6 +51,7 @@ public sealed class XenoHudOverlay : Overlay
     private readonly MobThresholdSystem _mobThresholds;
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;
+    private readonly CCMEchoJammedVisualsSystem _echo; // CCM - Silencer
 
     private readonly EntityQuery<DamageableComponent> _damageableQuery;
     private readonly EntityQuery<XenoParasiteComponent> _xenoParasiteQuery;
@@ -84,6 +86,7 @@ public sealed class XenoHudOverlay : Overlay
         _mobThresholds = _entity.System<MobThresholdSystem>();
         _sprite = _entity.System<SpriteSystem>();
         _transform = _entity.System<TransformSystem>();
+        _echo = _entity.System<CCMEchoJammedVisualsSystem>(); // CCM - Silencer
 
         _damageableQuery = _entity.GetEntityQuery<DamageableComponent>();
         _xenoParasiteQuery = _entity.GetEntityQuery<XenoParasiteComponent>();
@@ -165,6 +168,10 @@ public sealed class XenoHudOverlay : Overlay
             if (_container.IsEntityOrParentInContainer(uid, xform: xform))
                 continue;
 
+            // CCM - Silencer: "Echo" jammer hides HUD of entities hidden behind walls
+            if (_echo.IsHiddenFromNightVision(uid, xform))
+                continue;
+
             if (_invisQuery.HasComp(uid))
                 continue;
 
@@ -198,6 +205,10 @@ public sealed class XenoHudOverlay : Overlay
                 continue;
 
             if (_container.IsEntityOrParentInContainer(uid, xform: xform))
+                continue;
+
+            // CCM - Silencer: "Echo" jammer hides HUD of entities hidden behind walls
+            if (_echo.IsHiddenFromNightVision(uid, xform))
                 continue;
 
             var bounds = sprite.Bounds;
@@ -240,6 +251,10 @@ public sealed class XenoHudOverlay : Overlay
             if (_container.IsEntityOrParentInContainer(uid, xform: xform))
                 continue;
 
+            // CCM - Silencer: "Echo" jammer hides HUD of entities hidden behind walls
+            if (_echo.IsHiddenFromNightVision(uid, xform))
+                continue;
+
             if (_xenoParasiteQuery.HasComp(uid))
                 continue;
 
@@ -278,6 +293,10 @@ public sealed class XenoHudOverlay : Overlay
                 continue;
 
             if (_container.IsEntityOrParentInContainer(uid, xform: xform))
+                continue;
+
+            // CCM - Silencer: "Echo" jammer hides HUD of entities hidden behind walls
+            if (_echo.IsHiddenFromNightVision(uid, xform))
                 continue;
 
             if (_invisQuery.HasComp(uid))
@@ -321,6 +340,10 @@ public sealed class XenoHudOverlay : Overlay
             if (_container.IsEntityOrParentInContainer(uid, xform: xform))
                 continue;
 
+            // CCM - Silencer: "Echo" jammer hides HUD of entities hidden behind walls
+            if (_echo.IsHiddenFromNightVision(uid, xform))
+                continue;
+
             if (_invisQuery.HasComp(uid))
                 continue;
 
@@ -360,6 +383,10 @@ public sealed class XenoHudOverlay : Overlay
             if (_container.IsEntityOrParentInContainer(uid, xform: xform))
                 continue;
 
+            // CCM - Silencer: "Echo" jammer hides HUD of entities hidden behind walls
+            if (_echo.IsHiddenFromNightVision(uid, xform))
+                continue;
+
             if (_invisQuery.HasComp(uid))
                 continue;
 
@@ -397,6 +424,10 @@ public sealed class XenoHudOverlay : Overlay
                 continue;
 
             if (_container.IsEntityOrParentInContainer(uid, xform: xform))
+                continue;
+
+            // CCM - Silencer: "Echo" jammer hides HUD of entities hidden behind walls
+            if (_echo.IsHiddenFromNightVision(uid, xform))
                 continue;
 
             if (_invisQuery.HasComp(uid))
@@ -441,6 +472,10 @@ public sealed class XenoHudOverlay : Overlay
             if (_container.IsEntityOrParentInContainer(uid, xform: xform))
                 continue;
 
+            // CCM - Silencer: "Echo" jammer hides HUD of entities hidden behind walls
+            if (_echo.IsHiddenFromNightVision(uid, xform))
+                continue;
+
             if (_invisQuery.HasComp(uid))
                 continue;
 
@@ -481,6 +516,10 @@ public sealed class XenoHudOverlay : Overlay
             if (_container.IsEntityOrParentInContainer(uid, xform: xform))
                 continue;
 
+            // CCM - Silencer: "Echo" jammer hides HUD of entities hidden behind walls
+            if (_echo.IsHiddenFromNightVision(uid, xform))
+                continue;
+
             if (_invisQuery.HasComp(uid))
                 continue;
 
@@ -517,6 +556,10 @@ public sealed class XenoHudOverlay : Overlay
                 continue;
 
             if (_container.IsEntityOrParentInContainer(uid, xform: xform))
+                continue;
+
+            // CCM - Silencer: "Echo" jammer hides HUD of entities hidden behind walls
+            if (_echo.IsHiddenFromNightVision(uid, xform))
                 continue;
 
             if (_invisQuery.HasComp(uid))
