@@ -30,3 +30,6 @@ ent-CCMBurrowerBurrowedJaunt = Бурильщик
 ent-CCMXenoLurkerScorpion = Охотник
     .suffix = CCM-Scorpion
     .desc = Быстрый, мускулистый пришелец с массивным хвостом, увенчанным острым жалом.
+ent-CCMXenoFierceQueen = Королева
+    .suffix = Свирепая
+    .desc = Огромное, грозное инопланетное существо. Самое большое и самое страшное.
