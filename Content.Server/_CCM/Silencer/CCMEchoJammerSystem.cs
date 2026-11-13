@@ -1,13 +1,13 @@
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.PowerCell;
-using Content.Shared._CCM.Silencer;
-using Content.Shared._RMC14.Marines;
 using Content.Shared.Examine;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Whitelist;
+using Content.Shared._CCM.Silencer;
+using Content.Shared._RMC14.Marines;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
@@ -91,10 +91,7 @@ public sealed class CCMEchoJammerSystem : SharedCCMEchoJammerSystem
             if (_powerCell.TryGetBatteryFromSlot(ent, out var battery) && battery.MaxCharge > 0)
             {
                 var fraction = battery.CurrentCharge / battery.MaxCharge;
-                var seconds = ent.Comp.DrainRate > 0
-                    ? (int) Math.Ceiling(battery.CurrentCharge / ent.Comp.DrainRate)
-                    : 0;
-                var time = TimeSpan.FromSeconds(seconds);
+                var time = TimeSpan.FromSeconds(Math.Ceiling(fraction * ent.Comp.RunTime.TotalSeconds));
                 args.PushMarkup(Loc.GetString("ccm-silencer-echo-examine-charge",
                     ("percent", (int) Math.Round(fraction * 100)),
                     ("time", $"{(int) time.TotalMinutes}:{time.Seconds:D2}")));
@@ -148,7 +145,17 @@ public sealed class CCMEchoJammerSystem : SharedCCMEchoJammerSystem
                 continue;
             }
 
-            _battery.UseCharge(batteryEnt.Value, jammer.DrainRate * frameTime, battery);
+            var runSeconds = (float) jammer.RunTime.TotalSeconds;
+            if (runSeconds > 0)
+            {
+                var drain = battery.MaxCharge / runSeconds;
+
+                // Self-recharging cells must not extend the run time.
+                if (TryComp(batteryEnt.Value, out BatterySelfRechargerComponent? recharger) && recharger.AutoRecharge)
+                    drain += recharger.AutoRechargeRate;
+
+                _battery.UseCharge(batteryEnt.Value, drain * frameTime, battery);
+            }
 
             if (battery.CurrentCharge <= 0)
             {

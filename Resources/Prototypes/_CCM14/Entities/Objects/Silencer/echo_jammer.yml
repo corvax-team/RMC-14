@@ -41,7 +41,7 @@
   - type: CCMEchoJammer
     halfExtent: 2.5
     waveMaxLength: 5
-    drainRate: 2.0833333
+    runTime: 480 # seconds on a full cell, regardless of cell capacity
     jamLinger: 0.75
     updateInterval: 0.25
   - type: AmbientSound
