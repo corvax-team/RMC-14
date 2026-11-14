@@ -112,7 +112,7 @@ entities:
     - type: Transform
       pos: 9.101825,6.493896
       parent: 2
-- proto: CMUYautjaChainwhip
+- proto: CCMPredatorChainWhip
   entities:
   - uid: 443
     components:
@@ -126,7 +126,7 @@ entities:
     - type: Transform
       pos: 10.448646,2.5497694
       parent: 2
-- proto: CMUYautjaDuellingBlade
+- proto: CCMPredatorCeremonialDagger
   entities:
   - uid: 428
     components:
@@ -161,18 +161,22 @@ entities:
     - type: Transform
       pos: 13.695711,3.5081034
       parent: 2
-- proto: CMUYautjaLoadoutVendor
+- proto: CCMPredatorFabricatorMelee
   entities:
   - uid: 409
     components:
     - type: Transform
       pos: -7.5,0.5
       parent: 2
+- proto: CCMPredatorFabricatorMisc
+  entities:
   - uid: 437
     components:
     - type: Transform
       pos: -6.5,-3.5
       parent: 2
+- proto: CCMPredatorFabricatorArmor
+  entities:
   - uid: 438
     components:
     - type: Transform
