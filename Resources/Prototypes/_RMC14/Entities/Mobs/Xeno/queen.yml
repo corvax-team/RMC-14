@@ -75,6 +75,7 @@
     - ActionXenoGrowOvipositor
     - ActionXenoManageHive
 #    - ActionXenoRoyalJelly
+#    - ActionXenoMarkResin
     tier: 0
     bypassTierCount: true
     unlockAt: 0
@@ -112,7 +113,7 @@
     explosionArmor: 100
   - type: XenoWordQueen
   - type: VehicleDamageMultiplier
-    multiplier: 2
+    multiplier: 3
   - type: XenoPsychicCommunication
   - type: InnateCommandSpeech
   - type: RMCInnateRadioTextIncrease
@@ -208,16 +209,6 @@
   - type: XenoAnnounceDeath
     message: cm-xeno-death-queen
     color: "#921992"
-  - type: XenoMaturing
-    critThreshold: 1000
-    deadThreshold: 1100
-    addComponents:
-    - type: XenoScreech
-    - type: XenoToggleSpit
-    addActions:
-    - ActionXenoScreech
-    - ActionXenoSpitQueen
-    - ActionXenoToggleSpitType
   - type: RMCSize
     size: Immobile
   - type: RMCXenoDamageVisuals
@@ -230,7 +221,7 @@
     - Stun
     - KnockedDown
   - type: TacticalMapUser
-    layerSets: [TacticalMapSetXeno]
+    xenos: true
     canDraw: true
     liveUpdate: true
   - type: TacticalMapIcon
@@ -250,9 +241,6 @@
   - type: XenoHeal
   - type: StunOnExplosionReceived
     weak: false
-  - type: XenoSpit
-    projectileId: XenoQueenNeuroSpitProjectile
-    plasmaCost: 50
   - type: CommendationGiver
   - type: XenoInhands
     prefix: queen
@@ -299,6 +287,23 @@
     #    strains:
     #    - RMCXenoQueenMaid
     #    - RMCXenoQueenMagical
+# CCM start
+  - type: XenoMaturing
+    critThreshold: 1000
+    deadThreshold: 1100
+    addComponents:
+    - type: XenoScreech
+    - type: XenoToggleSpit
+    - type: XenoEvolution
+    strains:
+    - CCMXenoFierceQueen 
+    addActions:
+    - ActionXenoScreech
+    - ActionXenoSpitQueen
+    - ActionXenoToggleSpitType
+  - type: XenoSpit
+    projectileId: XenoQueenNeuroSpitProjectile
+    plasmaCost: 50 #CCM end
 
 - type: entity
   id: XenoLeaderPheromoneRelay

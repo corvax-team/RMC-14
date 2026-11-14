@@ -33,7 +33,7 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: place_resin
+      state: blank
   - type: InstantAction
     event: !type:XenoChooseStructureActionEvent
   - type: XenoChooseConstructionAction
@@ -45,7 +45,7 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
-      state: place_resin
+      state: blank
 
 - type: entity
   id: ActionXenoSecreteStructure
@@ -163,7 +163,7 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: gardener_plant_pick
+      state: blank
   - type: InstantAction
     event: !type:XenoFruitChooseActionEvent
   - type: XenoFruitChooseAction

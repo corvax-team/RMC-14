@@ -1,12 +1,15 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/cfa259bbd2d627ed94a359fa8c0dec63006f49fa/icons/mob/hud/actions_xeno.dmi, new sprites by Aleksh",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/62c9d9ae19dfbfde100fd62f6caa1dcf24fe1bbe/icons/mob/hud/actions_xeno.dmi",
     "size": {
         "x": 32,
         "y": 32
     },
     "states": [
+        {
+            "name": ""
+        },
         {
             "name": "template"
         },
@@ -14,13 +17,10 @@
             "name": "template_active"
         },
         {
-            "name": "template_active_big"
-        },
-        {
             "name": "template_on"
         },
         {
-            "name": "template_on_big"
+            "name": "reserve_parasite"
         },
         {
             "name": "blank"
@@ -71,9 +71,6 @@
             "name": "transfer_plasma_old"
         },
         {
-            "name": "fast_resin"
-        },
-        {
             "name": "secrete_resin"
         },
         {
@@ -99,9 +96,6 @@
         },
         {
             "name": "screech"
-        },
-        {
-            "name": "resin_door"
         },
         {
             "name": "gut"
@@ -137,28 +131,10 @@
             "name": "spray_acid"
         },
         {
-            "name": "resin_membrane"
-        },
-        {
-            "name": "resin_wall"
-        },
-        {
-            "name": "oldbuild_tunnel"
-        },
-        {
             "name": "breathe_fire"
         },
         {
             "name": "throw_parasite"
-        },
-        {
-            "name": "resin_nest"
-        },
-        {
-            "name": "sticky_resin"
-        },
-        {
-            "name": "shift_spit_xeno_acid"
         },
         {
             "name": "shift_spit_sticky"
@@ -168,9 +144,6 @@
         },
         {
             "name": "build_tunnel"
-        },
-        {
-            "name": "reserve_parasite"
         },
         {
             "name": "ready_charge"
@@ -194,7 +167,7 @@
             "name": "plant_weeds"
         },
         {
-            "name": "resin_node"
+            "name": "autoweed_toggle"
         },
         {
             "name": "tail_attack"
@@ -212,7 +185,7 @@
             "name": "watch_xeno"
         },
         {
-            "name": "toggle_queen_zoom"
+            "name": "xeno_tacmap"
         },
         {
             "name": "xeno_lead"
@@ -246,6 +219,9 @@
         },
         {
             "name": "crest_defense"
+        },
+        {
+            "name": "acid_mine__unused_"
         },
         {
             "name": "burrow"
@@ -341,6 +317,9 @@
             "name": "prae_impale"
         },
         {
+            "name": "prae_abduct__unused_"
+        },
+        {
             "name": "prae_aid"
         },
         {
@@ -407,18 +386,6 @@
             "name": "warden_rejuvenate"
         },
         {
-            "name": "resin_spike"
-        },
-        {
-            "name": "acid_pillar"
-        },
-        {
-            "name": "shield_pillar"
-        },
-        {
-            "name": "reflective_resin_wall"
-        },
-        {
             "name": "reflective_resin_wall_(old)"
         },
         {
@@ -438,27 +405,6 @@
         },
         {
             "name": "queen_exit"
-        },
-        {
-            "name": "thick_resin_membrane"
-        },
-        {
-            "name": "thick_resin_wall"
-        },
-        {
-            "name": "thick_resin_door"
-        },
-        {
-            "name": "acid_grenade"
-        },
-        {
-            "name": "queen_resin_membrane"
-        },
-        {
-            "name": "queen_resin_wall"
-        },
-        {
-            "name": "queen_resin_door"
         },
         {
             "name": "plant_gardener_weeds"
@@ -485,19 +431,10 @@
             "name": "retrieve"
         },
         {
-            "name": "tail_seize"
+            "name": "prae_tail_fountain"
         },
         {
             "name": "apply_salve"
-        },
-        {
-            "name": "christmas_festivizer",
-            "delays": [
-                [
-                    0.4,
-                    0.4
-                ]
-            ]
         },
         {
             "name": "headbite"
@@ -509,34 +446,103 @@
             "name": "soak"
         },
         {
-            "name": "place_resin"
+            "name": "transmute"
         },
         {
-            "name": "tail_attack_acid"
+            "name": "corrosive_slash"
         },
         {
-            "name": "tremor"
+            "name": "decomposing_enzymes"
         },
         {
-            "name": "xeno_tacmap"
+            "name": "rage"
         },
         {
-            "name": "gardener_plant_pick"
+            "name": "rage_screech"
         },
         {
-            "name": "prae_tail_fountain"
+            "name": "powerful_pounce"
         },
         {
-            "name": "rav_empower"
+            "name": "butchering"
         },
         {
-            "name": "dislocate"
+            "name": "shift_spit_xeno_acid_weak"
         },
         {
-            "name": "acid_mine_empowered"
+            "name": "shift_spit_xeno_acid_normal"
         },
         {
-            "name": "gas_mine_empowered"
+            "name": "shift_spit_xeno_acid_strong"
+        },
+        {
+            "name": "release_haul"
+        },
+        {
+            "name": "static_speednode"
+        },
+        {
+            "name": "static_costnode"
+        },
+        {
+            "name": "static_constructnode"
+        },
+        {
+            "name": "greater_resin_surge"
+        },
+        {
+            "name": "upgrade_resin"
+        },
+        {
+            "name": "remove_node"
+        },
+        {
+            "name": "design_mark_1"
+        },
+        {
+            "name": "design_mark_2"
+        },
+        {
+            "name": "open_ui"
+        },
+        {
+            "name": "tail_slam"
+        },
+        {
+            "name": "volley"
+        },
+        {
+            "name": "embrace"
+        },
+        {
+            "name": "oozing_wounds"
+        },
+        {
+            "name": "catalyze"
+        },
+        {
+            "name": "tail_harpoon"
+        },
+        {
+            "name": "encased_plates"
+        },
+        {
+            "name": "plate_bash"
+        },
+        {
+            "name": "tail_swing"
+        },
+        {
+            "name": "reflective_shield"
+        },
+        {
+            "name": "para_slash"
+        },
+        {
+            "name": "neurotoxin_spit"
+        },
+        {
+            "name": "draining_bite"
         }
     ]
 }
