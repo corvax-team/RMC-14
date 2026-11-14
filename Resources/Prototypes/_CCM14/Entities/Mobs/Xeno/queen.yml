@@ -38,6 +38,9 @@
     - ActionXenoAcidNormal
     - ActionXenoPheromones
     - ActionXenoWordQueen
+    - ActionXenoBulwarkOfTheHive
+    - ActionXenoSoak
+    - ActionXenoCharge
     - ActionXenoPsychicWhisper
     - ActionXenoPsychicRadiance
     - ActionXenoGiveOrder
@@ -69,13 +72,19 @@
     damage:
       groups:
         Brute: 20
+  - type: XenoCharge
+    damage:
+      types:
+        Blunt: 60
   - type: VehicleDamageMultiplier
     multiplier: 4
+  - type: XenoBulwarkOfTheHive
   - type: CMArmor
-    xenoArmor: 35
+    xenoArmor: 40
     explosionArmor: 125
   - type: XenoPlasma
     plasma: 1200
     maxPlasma: 1200
     plasmaRegenOnWeeds: 5
     plasmaTransferDelay: 0
+  - type: XenoSoak

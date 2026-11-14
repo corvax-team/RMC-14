@@ -494,7 +494,7 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: rav_empower
+      state: empower
   - type: InstantAction
     event: !type:XenoEmpowerActionEvent
   - type: ActionBlockIfResting
@@ -505,7 +505,7 @@
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
-      state: rav_empower
+      state: empower
 
 - type: entity
   parent: ActionXenoBase
