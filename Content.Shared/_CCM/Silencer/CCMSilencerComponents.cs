@@ -170,9 +170,9 @@ public sealed partial class CCMEchoJammerComponent : Component
     [DataField, AutoNetworkedField]
     public float WaveMaxLength = 5f;
 
-    // 1000-charge RMC power cell lasts 8 minutes.
+    // A full cell of any capacity lasts this long: drain scales with the cell's max charge.
     [DataField, AutoNetworkedField]
-    public float DrainRate = 1000f / 480f;
+    public TimeSpan RunTime = TimeSpan.FromMinutes(8);
 
     [DataField, AutoNetworkedField]
     public TimeSpan JamLinger = TimeSpan.FromSeconds(0.75);
